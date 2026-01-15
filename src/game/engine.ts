@@ -18,7 +18,28 @@ export const useGameEngine = () => {
     const [state, setState] = useState<GameState>(() => {
         // Load from local storage
         const saved = localStorage.getItem('tattoo-tycoon-save');
-        return saved ? JSON.parse(saved) : INITIAL_STATE;
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved);
+                // Migration: Ensure new fields (visuals, etc) exist by merging with INITIAL_STATE
+                // We do a shallow merge of top-lvl and specific merge for nested criticals
+                return {
+                    ...INITIAL_STATE,
+                    ...parsed,
+                    visuals: {
+                        ...INITIAL_STATE.visuals,
+                        ...(parsed.visuals || {})
+                    },
+                    // Ensure stats and resources are also safe (though usually they exist)
+                    stats: { ...INITIAL_STATE.stats, ...(parsed.stats || {}) },
+                    resources: { ...INITIAL_STATE.resources, ...(parsed.resources || {}) }
+                };
+            } catch (e) {
+                console.error('Failed to load save, resetting:', e);
+                return INITIAL_STATE;
+            }
+        }
+        return INITIAL_STATE;
     });
 
     const lastSaveTime = useRef(Date.now());
