@@ -234,6 +234,7 @@ body {
   padding: var(--space-md);
   padding-top: var(--space-sm);
   z-index: 10;
+  position: relative;
 }
 
 .main-content {

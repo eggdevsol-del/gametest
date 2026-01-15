@@ -16,18 +16,15 @@ export const GameScene: React.FC<GameSceneProps> = ({ gameState }) => {
             <div className="relative w-full h-full flex items-center justify-center">
 
                 {/* Scene Container - scaled to fit or fixed size */}
+                {/* Scene Container - Scaled to fit */}
                 <div
-                    className="relative w-[1200px] h-[900px] select-none pointer-events-none"
-                    style={{
-                        transform: 'scale(0.8)', // Slight zoom out to fit typical screens
-                        transformOrigin: 'center center'
-                    }}
+                    className="relative w-full h-full select-none pointer-events-none"
                 >
                     {/* Background Layer */}
                     <img
                         src={garageBg}
                         alt="Garage Studio"
-                        className="absolute inset-0 w-full h-full object-contain"
+                        className="absolute inset-0 w-full h-full object-cover"
                     />
 
                     {/* Character Layer */}

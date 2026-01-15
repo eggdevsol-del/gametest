@@ -10,7 +10,7 @@ function App() {
   const { state, manualSave, resetGame, startTattoo, startResearch, dismissResult, buyItem, resolveEvent, upgradeLocation, hireStaff, fireStaff } = useGameEngine();
 
   return (
-    <Layout gameState={state} onSave={manualSave} onReset={resetGame}>
+    <Layout gameState={state}>
       <div className="app-container relative h-full">
 
         {/* Heads Up Display */}
@@ -20,6 +20,16 @@ function App() {
         {/* We push this down or make it subtle since HUD is top */}
         <div className="absolute top-1/2 left-4 -translate-y-1/2 max-w-md p-8 pointer-events-none">
           <h2 className="text-4xl font-black text-white/10 tracking-widest uppercase mb-4">The Garage</h2>
+        </div>
+
+        {/* System Controls (Top Right) */}
+        <div className="fixed top-4 right-4 z-50 flex gap-2">
+          <button onClick={manualSave} className="glass-button btn-small opacity-50 hover:opacity-100 text-xs">
+            💾 Save
+          </button>
+          <button onClick={resetGame} className="glass-button btn-small btn-danger opacity-50 hover:opacity-100 text-xs">
+            ❌ Reset
+          </button>
         </div>
 
         <ActionMenu
