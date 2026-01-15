@@ -1,7 +1,9 @@
 import React from 'react';
-import garageBg from '../../assets/garage_bg.png';
-import { Character } from './Character';
+import { SpriteCharacter } from './Character';
 import { Bubble } from './Bubble';
+import { GarageRoom } from './rooms/GarageRoom';
+import artistSprite from '../../assets/artist_spritesheet.png';
+// import clientSprite from '../../assets/client_spritesheet.png'; // Ready for clients later
 import type { GameState } from '../../game/types';
 import { SCENE_CONFIG } from '../../game/scene-config';
 
@@ -19,35 +21,34 @@ export const GameScene: React.FC<GameSceneProps> = ({ gameState }) => {
 
                 {/* Scene Container - Scaled to fit */}
                 <div
-                    className="relative w-full h-full select-none pointer-events-none"
+                    className="relative w-full h-full select-none pointer-events-none overflow-hidden"
+                    style={{ backgroundColor: '#e5e5e5' }} // Neutral background
                 >
-                    {/* Background Layer */}
-                    <img
-                        src={garageBg}
-                        alt="Garage Studio"
-                        className="absolute inset-0 w-full h-full object-cover"
-                    />
+                    {/* Background Layer - Isometric Room */}
+                    <GarageRoom />
 
                     {/* Staff Layer */}
                     {gameState.staff.map((employee, index) => {
                         const slot = SCENE_CONFIG.staffSlots[index % SCENE_CONFIG.staffSlots.length];
                         return (
-                            <Character
+                            <SpriteCharacter
                                 key={employee.id}
                                 x={slot.x}
                                 y={slot.y}
                                 facing={slot.facing}
                                 state={'working'} // Staff are always "working" or idle at station
+                                texture={artistSprite}
                             />
                         );
                     })}
 
                     {/* Character Layer (Player) */}
-                    <Character
+                    <SpriteCharacter
                         x={character.x}
                         y={character.y}
                         facing={character.facing}
                         state={character.state}
+                        texture={artistSprite}
                     />
 
                     {/* VFX Layer (Bubbles) */}

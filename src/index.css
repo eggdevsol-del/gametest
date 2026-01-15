@@ -350,3 +350,35 @@ body {
 .animate-float-up {
   animation: float-up 1.5s ease-out forwards;
 }
+
+@keyframes leg-shuffle {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(20deg);
+  }
+}
+
+@keyframes leg-shuffle-r {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-20deg);
+  }
+}
+
+.animate-leg-l {
+  animation: leg-shuffle 0.5s infinite;
+}
+
+.animate-leg-r {
+  animation: leg-shuffle-r 0.5s infinite;
+}

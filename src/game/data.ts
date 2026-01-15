@@ -285,30 +285,40 @@ import type { GameEvent } from './types';
 
 export const GAME_EVENTS: GameEvent[] = [
     {
-        id: 'evt_small_expo',
+        id: 'expo_small',
         name: 'Local Tattoo Expo',
-        description: 'A small convention in town. Good for reputation.',
+        description: 'A small local convention. Good for exposure.',
         type: 'expo',
         duration: 60000,
         cost: 200,
-        rewards: { reputation: 25, xp: 50, money: 0 }
+        minReputation: 150, // Gate early spam
+        rewards: {
+            reputation: 50,
+            xp: 100
+        }
     },
     {
-        id: 'evt_workshop',
-        name: 'Online Seminar',
-        description: 'Teach a class online about hygiene and shading.',
-        type: 'seminar',
+        id: 'guest_spot',
+        name: 'Guest Spot Invite',
+        description: 'A shop in the city wants you for a day.',
+        type: 'viral',
         duration: 30000,
-        cost: 0,
-        rewards: { reputation: 10, money: 100 }
+        minReputation: 300,
+        rewards: {
+            money: 300,
+            reputation: 20
+        }
     },
     {
-        id: 'evt_big_expo',
-        name: 'International Tattoo Fest',
-        description: 'The big leagues. Huge networking opportunity.',
-        type: 'expo',
-        duration: 120000,
-        cost: 1000,
-        rewards: { reputation: 200, xp: 500 }
+        id: 'viral_post',
+        name: 'Viral Social Post',
+        description: 'One of your designs is trending!',
+        type: 'viral',
+        duration: 15000,
+        minReputation: 50,
+        rewards: {
+            reputation: 100,
+            money: 50
+        }
     }
 ];

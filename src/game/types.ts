@@ -109,6 +109,7 @@ export interface GameEvent {
     type: 'expo' | 'seminar' | 'viral';
     duration: number; // How long the offer lasts
     cost?: number;
+    minReputation?: number; // Requirement to see/trigger
     rewards: {
         reputation?: number;
         money?: number;

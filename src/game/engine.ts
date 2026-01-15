@@ -7,7 +7,11 @@ import { type ResearchItem, type ShopItem, LOCATIONS, GAME_EVENTS } from './data
 
 // ... inside useGameEngine ...
 
-const TICK_RATE = 1000; // 1 second per tick for idle/sim nature (can be faster if needed)
+// Game Timing Constants
+const TICK_RATE = 1000;
+const DAY_LENGTH_SECONDS = 300; // 5 Minutes per Game Day
+const EVENT_CHECK_INTERVAL = 60; // Check for events every 60s of game time
+
 const AUTO_SAVE_INTERVAL = 30000; // 30 seconds
 
 export const useGameEngine = () => {
@@ -184,10 +188,9 @@ export const useGameEngine = () => {
                 }
 
                 // ----------------------------------------------------
-                // SALARY UPKEEP (Every 60s)
+                // SALARY UPKEEP (Every Day)
                 // ----------------------------------------------------
-                // We use playedTime to track "Days". Let's say 1 Day = 60s.
-                const dayLength = 60;
+                const dayLength = DAY_LENGTH_SECONDS;
                 const prevDay = Math.floor((newState.stats.playedTime - TICK_RATE / 1000) / dayLength);
                 const currentDay = Math.floor(newState.stats.playedTime / dayLength);
 
@@ -240,17 +243,27 @@ export const useGameEngine = () => {
                     newState.candidates.push(newb);
                 }
 
-                // Event Trigger Logic (Random Chance: 1% per tick if no event active and playtime > 1 min)
-                if (!newState.activeEvent && !newState.currentAction && newState.stats.playedTime > 60) {
-                    // 1% chance per second approx
-                    if (Math.random() < 0.01) {
-                        // Pick random event
-                        const eventIdx = Math.floor(Math.random() * GAME_EVENTS.length);
-                        const evt = GAME_EVENTS[eventIdx];
+                // Event Trigger Logic (Random Chance: 1% per check if no event active)
+                // Check every EVENT_CHECK_INTERVAL seconds of game time (approx)
+                const gameTimeSec = newState.stats.playedTime;
 
-                        // Check if we can afford it? No, event just Offers itself.
-                        // But maybe we filter by 'milestone' logic? For now, random is fun.
-                        newState.activeEvent = evt;
+                if (!newState.activeEvent && !newState.currentAction && gameTimeSec > 60) {
+                    // We only want to check roughly once per interval, not every tick
+                    // Current logic call is 1 sec.
+                    if (gameTimeSec % EVENT_CHECK_INTERVAL === 0) {
+                        // 20% Chance when interval hits
+                        if (Math.random() < 0.2) {
+                            // Pick random event
+                            const eventIdx = Math.floor(Math.random() * GAME_EVENTS.length);
+                            const evt = GAME_EVENTS[eventIdx];
+
+                            // Reputation Check
+                            if ((evt.minReputation || 0) <= newState.resources.reputation) {
+                                // Check if we can afford it? No, event just Offers itself.
+                                // But maybe we filter by 'milestone' logic? For now, random is fun.
+                                newState.activeEvent = evt;
+                            }
+                        }
                     }
                 }
 
@@ -259,7 +272,7 @@ export const useGameEngine = () => {
         }, TICK_RATE);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [state]); // Added state dependency if needed or empty array if refs used
 
     const manualSave = useCallback(() => {
         localStorage.setItem('tattoo-tycoon-save', JSON.stringify(state));
