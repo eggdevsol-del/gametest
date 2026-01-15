@@ -5,6 +5,17 @@ export interface VisualState {
         facing: 'left' | 'right';
         state: 'idle' | 'walking' | 'working';
     };
+    effects: VisualEffect[];
+}
+
+export interface VisualEffect {
+    id: string;
+    x: number;
+    y: number;
+    type: 'money' | 'bug' | 'design' | 'tech';
+    value?: string | number;
+    color: string;
+    createdAt: number;
 }
 
 export interface GameState {
@@ -140,7 +151,8 @@ export const INITIAL_STATE: GameState = {
             y: 60, // Percent
             facing: 'right',
             state: 'idle'
-        }
+        },
+        effects: []
     },
     location: 'loc_garage',
     staff: [],

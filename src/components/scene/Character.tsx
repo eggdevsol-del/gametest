@@ -17,8 +17,8 @@ export const Character: React.FC<CharacterProps> = ({ x, y, facing, state }) => 
                 left: `${x}%`,
                 top: `${y}%`,
                 transform: `translate(-50%, -100%) scale(${facing === 'left' ? -1 : 1}, 1)`, // Flip for facing
-                transitionDuration: `${SCENE_CONFIG.animation.walkSpeed}ms`,
-                zIndex: Math.floor(y), // Dynamic Z-index based on depth (Y position)
+                transition: `all ${SCENE_CONFIG.animation.moveDuration}ms ease-in-out`,
+                zIndex: Math.floor(y), // Dynamic Z-Index for pseudo-3D
             }}
         >
             <div className={`relative ${state === 'working' ? 'animate-bounce' : ''}`}> {/* Simple bounce for working */}

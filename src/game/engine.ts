@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { type GameState, INITIAL_STATE, type TattooDesign, type LogEntry, type TattooStyle, type Employee } from './types';
+import { type GameState, INITIAL_STATE, type TattooDesign, type LogEntry, type TattooStyle, type Employee, type VisualEffect } from './types';
 import { SCENE_CONFIG } from './scene-config';
 import { type ResearchItem, type ShopItem, LOCATIONS, GAME_EVENTS } from './data';
 
@@ -136,25 +136,51 @@ export const useGameEngine = () => {
                 // ----------------------------------------------------
                 // PASSIVE INCOME (Staff Working)
                 // ----------------------------------------------------
+                // Passive Income from Staff (Every 1s approx)
                 if (newState.staff.length > 0) {
-                    // Each staff member generates income every tick based on Speed/Technical stats
-                    // Base rate: 1 Flash Tattoo per 10 seconds per staff?
-                    // Let's do: Every tick, small % chance per staff to complete a "Flash Piece"
+                    if (now % 1000 < 100) { // Throttle
+                        let passiveMoney = 0;
+                        const newEffects: VisualEffect[] = [];
 
-                    newState.staff.forEach(employee => {
-                        // Chance = Speed / 100 per tick (e.g. 50 Speed = 50% chance per second? Too high.)
-                        // Speed 10-100. Let's say Speed 50 = 0.5 tattoos per second? Maybe too OP.
-                        // Let's say Speed 50 = 10% chance per second.
-                        const chance = (employee.stats.speed / 500); // 50 spd = 0.1
+                        newState.staff.forEach((employee, index) => {
+                            const chance = employee.stats.speed * 0.1;
+                            if (Math.random() < chance) {
+                                const qualityRoll = Math.random() * 10 + (employee.stats.technical * 0.5);
+                                const earnings = Math.floor(employee.stats.technical * 5);
 
-                        if (Math.random() < chance) {
-                            // Flash Tattoo Complete!
-                            const revenue = employee.stats.technical * 0.5; // Tech 50 = $25
-                            newState.resources.money += revenue;
-                            // Tiny XP/Rep trickle
-                            newState.resources.experience += 0.5;
+                                let type: VisualEffect['type'] = 'money';
+                                let color = 'orange';
+
+                                if (qualityRoll < 4) {
+                                    type = 'bug';
+                                    color = 'red';
+                                } else if (qualityRoll > 12) {
+                                    type = 'tech';
+                                    color = '#4ade80';
+                                    passiveMoney += earnings * 2;
+                                } else {
+                                    passiveMoney += earnings;
+                                }
+
+                                const slot = SCENE_CONFIG.staffSlots[index % SCENE_CONFIG.staffSlots.length];
+                                newEffects.push({
+                                    id: Date.now() + '-' + index,
+                                    x: slot.x,
+                                    y: slot.y,
+                                    type,
+                                    value: type !== 'bug' ? `+$${earnings}` : 'Oops',
+                                    color,
+                                    createdAt: now
+                                });
+                            }
+                        });
+
+                        if (passiveMoney > 0 || newEffects.length > 0) {
+                            const activeEffects = newState.visuals.effects.filter(e => now - e.createdAt < 2000);
+                            newState.resources.money += passiveMoney;
+                            newState.visuals.effects = [...activeEffects, ...newEffects];
                         }
-                    });
+                    }
                 }
 
                 // ----------------------------------------------------
@@ -265,7 +291,8 @@ export const useGameEngine = () => {
                     y: SCENE_CONFIG.positions.chair.y,
                     facing: SCENE_CONFIG.positions.chair.facing,
                     state: 'working'
-                }
+                },
+                effects: prev.visuals.effects
             }
         }));
         return true;
