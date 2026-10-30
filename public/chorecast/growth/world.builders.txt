@@ -76,3 +76,76 @@ check: mcq | Which is a responsibility? | Respecting others* | Free lunch every 
 home: Name one right and one responsibility you have at home.
 skill: civics
 
+@lesson 2.1 | Layers of government | 🏛️ | townhall
+hook: Schools, rubbish and the army. Who's in charge of each?
+learn: {nz:NZ has a national government, plus regional councils and city or district councils.~au:Australia has three levels of government: federal, state or territory, and local councils.}
+learn: {nz:The national government runs things like schools, hospitals, police and defence.~au:The federal government runs things like defence and Medicare. States run schools, hospitals and police.}
+learn: Local councils look after local things: rubbish, parks, libraries and local roads.
+play: sort | Local council, Bigger government | Rubbish collection=Local council; The defence force=Bigger government; Libraries=Local council; Police=Bigger government; Local parks=Local council; Public hospitals=Bigger government | Who's in charge?
+check: mcq | Who runs the defence force? | {nz:The national government~au:The federal government}* | Your local council | A school board
+check: tf | {nz:NZ has regional councils as well as city and district councils.~au:Australia has three levels of government.} | true
+check: mcq | {nz:Who runs NZ's public schools?~au:Who runs most public schools in Australia?} | {nz:The national government~au:State and territory governments}* | Local councils | Supermarkets
+home: Find one thing each level of government does near you.
+skill: civics
+
+@lesson 2.2 | How rates work | 🧾 | townhall
+hook: Councils run parks, pools and libraries. How do they pay for it all?
+learn: Most council money comes from rates, a kind of property tax paid by property owners.
+learn: Rates are usually based on the value of the property.
+learn: Renters don't pay rates directly, but landlords often build the cost into the rent.
+try: 0.3% of a $600,000 house = $1,800 a year :: gap | 0.4% of a $500,000 house = $_ a year | 2000
+play: slider | A council charges 0.25% of a property's value. A house is worth $800,000. What are its rates for the year? | 0 | 5000 | 2000 | $ | 100 | 100
+check: mcq | Who pays council rates directly? | Property owners* | Children | Only tourists
+check: tf | Renters can pay towards rates through their rent. | true
+check: mcq | What are rates usually based on? | The property's value* | Your height | Your favourite food
+home: Ask a grown-up roughly what their rates or rent costs a year.
+skill: council
+
+@lesson 2.3 | Rubbish and recycling | ♻️ | townhall
+hook: A tin can, a glass jar and a soft plastic bag. Which go in the recycling bin?
+learn: Clean, empty cans, jars and bottles usually go in recycling. Soft plastic bags usually don't.
+learn: Dirty or wrong items can spoil a whole truckload of recycling.
+learn: {nz:NZ councils now share one standard list of what goes in kerbside recycling.~au:Each council has its own recycling rules.} Check your council's website.
+play: sort | Recycling, Rubbish | Clean tin can=Recycling; Soft plastic bag=Rubbish; Rinsed glass jar=Recycling; Used tissue=Rubbish; Flattened cardboard box=Recycling; Nappy=Rubbish | Recycling or rubbish?
+check: mcq | What can spoil a load of recycling? | Dirty or wrong items* | Clean cans | Flat cardboard
+check: tf | Soft plastic bags usually go in the kerbside recycling bin. | false | Most councils don't take them. Check yours.
+check: mcq | Where can you check your recycling rules? | Your council's website* | A cereal box | A random video
+home: Check your council's recycling rules and stick them up near your bins.
+skill: environment
+
+@lesson 2.4 | Mayors and councillors | 🗳️ | townhall
+hook: Who's in charge of your council, and how do they get the job?
+learn: Councils are run by elected people: a mayor and councillors.
+learn: {nz:In NZ, local elections are held every 3 years, mostly by post.~au:In Australia, council elections are usually held every 4 years.}
+learn: Council staff do the day-to-day work. Elected members make the big decisions.
+play: match | Match each role to its job | Mayor=Leads the council; Councillors=Vote on big decisions; Council staff=Do the day-to-day work; Voters=Choose who gets elected
+check: mcq | Who leads a council? | The mayor* | The prime minister | The school principal
+check: tf | Councillors are elected by local voters. | true
+check: mcq | {nz:How often are NZ local elections held?~au:How often are most Australian council elections held?} | {nz:Every 3 years~au:Every 4 years}* | Every 20 years | Never
+home: Find out who your mayor is.
+skill: council
+
+@lesson 2.5 | Having your say | 📝 | townhall
+hook: Your council wants to close a skate park. Can a kid have a say?
+learn: Councils ask the public for ideas and feedback. This is called consultation.
+learn: Anyone can make a submission, including kids. Many councils have youth councils too.
+learn: A good submission is short, clear and polite, with reasons.
+play: build | Build a submission about the skate park | Say who you are: a 12-year-old who uses the park; Say what you want: please keep the skate park open; Give a reason: it's the only safe place for kids to skate; Give an example: 30 kids use it every weekend; Say thank you
+check: mcq | What's a council consultation? | Asking the public for feedback* | A doctor's visit | A secret meeting
+check: tf | Kids can make submissions to their council. | true
+check: mcq | What makes a good submission? | Short, clear, polite and with reasons* | Long and angry | Just one word
+home: Find a current consultation on your council's website.
+skill: civics
+
+@lesson 2.6 | Council budget choices | ⚖️ | townhall
+hook: You're on the council. There's money for one big project: a pool, a library or better roads. Which?
+learn: Councils have limited money, so they have to choose.
+learn: Spending more on one thing means less for something else, or higher rates.
+learn: Good councillors weigh up what people need most, and keep some money aside for emergencies.
+play: budget | You're the council. Plan this year's budget, in millions of dollars. | 100 | Roads and footpaths=30; Water pipes=25; Rubbish and recycling=15; Parks and pools=10; Libraries=5; Emergency fund=0 | Storm damage:10
+check: mcq | Why do councils have to choose? | Money is limited* | They don't like parks | It's fun
+check: tf | Spending more on one thing can mean less for another. | true
+check: mcq | A storm damages roads. Where could the money come from? | An emergency fund* | Nowhere, ever | Printing money
+home: If you ran the council, what would you spend more on? Tell a grown-up why.
+skill: council
+

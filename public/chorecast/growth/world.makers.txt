@@ -76,3 +76,76 @@ check: mcq | Who decides on local crossings? | Usually the local council* | The 
 home: Count cars outside school for 10 minutes for a pretend petition.
 skill: advocacy
 
+@lesson 2.1 | Where the money comes from | 💰 | townhall
+hook: The government spends billions every year. Where does it all come from?
+learn: {nz:NZ's biggest source of tax is income tax from workers, then GST, then company tax.~au:Australia's biggest source of tax is income tax from workers, then company tax, then GST.}
+learn: Other taxes include duties on fuel, alcohol and tobacco.
+learn: {nz:NZ's GST is 15% on almost everything, including food.~au:Australia's GST is 10%, but fresh food, most health care and education are GST-free.}
+play: order | Put the tax sources from biggest to smallest | Income tax from workers; {nz:GST~au:Company tax}; {nz:Company tax~au:GST}; Duties on fuel, alcohol and tobacco
+check: mcq | What's the government's biggest source of tax? | Income tax from workers* | Parking fines | Lotto
+check: tf | {nz:NZ charges GST on food.~au:Fresh food is GST-free in Australia.} | true
+check: mcq | What's the GST rate here? | {nz:15%~au:10%}* | 50% | 1%
+home: Find the GST on a supermarket receipt.
+skill: tax
+
+@lesson 2.2 | The biggest slices | 🥧 | townhall
+hook: Out of every $100 the government spends, how much goes to each area?
+learn: Social security and welfare is the biggest area in both countries. It includes {nz:NZ Super~au:the Age Pension} for older people, plus support for families, people with disabilities and people out of work.
+learn: Health comes next, then areas like education, defence and interest on government debt.
+learn: {nz:NZ Super is the single biggest payment, and it grows as more people retire.~au:The Age Pension is one of the biggest payments, and the NDIS is one of the fastest-growing costs.}
+play: slider | Out of every $100 the government spends, roughly how much goes on social security and welfare? | 0 | 100 | 35 | $ | 8 | 1
+check: mcq | What's the biggest area of government spending in both countries? | Social security and welfare* | Defence | Sport
+check: tf | Payments to older people are a big part of welfare spending. | true
+check: mcq | {nz:Which single payment costs NZ the most?~au:Which fast-growing scheme supports Australians with disability?} | {nz:NZ Super~au:The NDIS}* | Arts grants | Parking meters
+home: Find the spending chart on {nz:budget.govt.nz~au:budget.gov.au}.
+skill: tax
+
+@lesson 2.3 | Progressive tax | 📶 | townhall
+hook: Does someone earning twice as much pay twice as much tax? Or more?
+learn: Income tax is progressive. Higher rates apply only to the part of income above each threshold.
+learn: So people with higher incomes pay a bigger share of their income in tax.
+learn: It's one way governments try to spread the cost fairly.
+try: Imagine 10% on the first $20,000 and 30% on the rest. On $30,000: $2,000 + $3,000 = $5,000 :: gap | Same made-up brackets. Tax on $40,000 = $_ | 8000
+play: slider | Same made-up brackets. What's the total tax on $50,000? | 0 | 20000 | 11000 | $ | 500 | 500
+check: mcq | In a progressive system, a higher rate applies to… | Only the income above each threshold* | All your income | Only the first dollar
+check: tf | Higher earners pay a bigger share of their income in a progressive system. | true
+check: gap | Made-up brackets: on $50,000 you pay $11,000. That's _% of your income | 22
+home: Look up this year's real tax brackets on {nz:ird.govt.nz~au:ato.gov.au}.
+skill: tax
+
+@lesson 2.4 | Is GST fair? | 🛒 | townhall
+hook: A millionaire and a student buy the same loaf of bread and pay the same GST. Fair?
+learn: GST is the same rate for everyone, whatever their income.
+learn: People on low incomes spend more of what they earn, so GST takes a bigger share of their income.
+learn: {nz:NZ keeps GST simple with almost no exemptions, and uses benefits and tax credits to help lower-income families.~au:Australia makes fresh food, most health care and education GST-free, partly to soften this.}
+play: debate | Should fresh food be GST-free? | It helps lower-income families, who spend more of their income on food* | It makes no difference to anyone | Exemptions make GST more complicated and help wealthy shoppers too. Some say direct payments to families help more.
+check: mcq | Why can GST hit lower-income households harder? | They spend a bigger share of their income* | They pay a higher rate | They don't pay it
+check: tf | GST is the same rate for everyone. | true
+check: mcq | {nz:How many GST exemptions does NZ have?~au:Which of these is GST-free in Australia?} | {nz:Very few, so it's simple~au:Fresh fruit and vegetables}* | {nz:Hundreds~au:Lollies} | {nz:It only applies to cars~au:Takeaway food}
+home: Look at a receipt with fresh food and snacks on it. Which items had GST?
+skill: tax
+
+@lesson 2.5 | Surplus, deficit and debt | 📊 | townhall
+hook: A government spends $100 billion but only collects $90 billion. Where does the rest come from?
+learn: When a government spends more than it collects in a year, that's a deficit. When it collects more, that's a surplus.
+learn: Deficits are covered by borrowing, which adds to government debt.
+learn: Debt isn't always bad, like borrowing after a disaster or to build hospitals. But the interest has to be paid every year.
+play: diff | Two years of a government's budget. Tap what changed. | Tax in: $90b; Spending: $85b; Result: $5b surplus; Debt: $50b | Tax in: $90b; Spending: $100b; Result: $10b deficit; Debt: $60b
+check: mcq | Spending $100b and collecting $90b gives a… | $10b deficit* | $10b surplus | $190b surplus
+check: tf | Deficits are usually covered by borrowing. | true
+check: mcq | What's one cost of government debt? | Interest that has to be paid every year* | Nothing at all | Free money
+home: Find out whether the government expects a surplus or a deficit this year.
+skill: economics
+
+@lesson 2.6 | The Budget | 📅 | townhall
+hook: Budget day makes the news every year. What's actually in it?
+learn: Each year the government announces its Budget: its tax and spending plans for the year ahead. It's usually in May in both countries.
+learn: {nz:The Minister of Finance~au:The Treasurer} presents it to Parliament.
+learn: Every Budget is full of trade-offs: more for one thing means less for another, higher taxes or more borrowing.
+play: budget | You're the {nz:Minister of Finance~au:Treasurer}. Plan $100 billion of spending. | 100 | Welfare and pensions=30; Health=20; Education=10; Defence=5; Interest on debt=5; Emergency fund=0 | Earthquake recovery:10
+check: mcq | Who presents the Budget to Parliament? | {nz:The Minister of Finance~au:The Treasurer}* | The mayor | A judge
+check: tf | A Budget sets out plans for tax and spending. | true
+check: mcq | More health spending, with the same taxes, means… | Less elsewhere or more borrowing* | Nothing changes | Free money appears
+home: Read or watch a short news summary of this year's Budget.
+skill: civics
+

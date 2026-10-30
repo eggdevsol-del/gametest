@@ -74,3 +74,75 @@ check: mcq | How should we treat families different from ours? | With respect* |
 home: Draw your family and the people who care for you.
 skill: respect
 
+@lesson 2.1 | Emergency helpers | 🚑 | townhall
+hook: A fire, a crash, or someone badly hurt. Who comes to help?
+learn: Police help keep people safe and stop crime.
+learn: Firefighters put out fires and rescue people.
+learn: Ambulance officers look after people who are badly hurt or very sick. In an emergency, call {nz:111~au:000}.
+play: match | Match each emergency to the helper | A house on fire=Firefighters; Someone badly hurt=Ambulance officers; A burglar in a house=Police; Someone lost in the bush=Search and rescue
+check: mcq | What number do you call in an emergency? | {nz:111~au:000}* | {nz:000~au:111} | 123
+check: tf | Ambulance officers help people who are badly hurt. | true
+check: mcq | Who puts out fires? | Firefighters* | Librarians | Bus drivers
+home: Practise saying your home address out loud, in case you ever need to call for help.
+skill: safety
+
+@lesson 2.2 | When to call | ☎️ | townhall
+hook: Is a lost toy an emergency? What about smoke pouring out of a house?
+learn: An emergency is when someone is in danger or badly hurt, or there's a fire or a crime happening now.
+learn: A lost toy or a scraped knee isn't an emergency. Tell a grown-up instead.
+learn: If you call, stay calm, and say what's happening and where you are.
+play: sort | Call {nz:111~au:000}, Tell a grown-up | Smoke pouring out of a house=Call {nz:111~au:000}; A lost toy=Tell a grown-up; Someone won't wake up=Call {nz:111~au:000}; A small scrape=Tell a grown-up; A car crash with people hurt=Call {nz:111~au:000}; A hole in your sock=Tell a grown-up | Emergency or not?
+check: mcq | Which is an emergency? | Someone won't wake up* | A lost pencil | A boring day
+check: tf | You should call {nz:111~au:000} about a lost toy. | false | Tell a grown-up instead. Emergency lines are for danger.
+check: mcq | When you call for help, what should you say? | What's happening and where you are* | Your favourite colour | Nothing
+home: Talk with a grown-up about what counts as an emergency.
+skill: safety
+
+@lesson 2.3 | Health helpers | 🩺 | townhall
+hook: Sore tooth, sore tummy, need some medicine. Who helps with each?
+learn: Doctors and nurses help when you're sick or hurt.
+learn: Dentists look after your teeth.
+learn: Pharmacists give out medicine and explain how to take it.
+play: tap | Tap the health helpers | 👩‍⚕️:yes:Doctors help when you're sick; 🦷:yes:Dentists look after teeth; 💊:yes:Pharmacists give out medicine; 👨‍🍳:no; 🧑‍🌾:no; 🩺:yes:Nurses care for patients; 🧑‍✈️:no
+check: mcq | Who looks after your teeth? | A dentist* | A baker | A pilot
+check: tf | Pharmacists can help with medicine. | true
+check: mcq | You have a sore tummy that won't go away. Who might help? | A doctor* | A librarian | A bus driver
+home: Ask a grown-up who your family's doctor is.
+skill: health
+
+@lesson 2.4 | Beach helpers | 🏖️ | island
+hook: At the beach you see people in red and yellow caps. Who are they?
+learn: Surf lifesavers watch the water and help swimmers in trouble.
+learn: They put up red and yellow flags. Swim between them.
+learn: If you get stuck in the water, stay calm, float, and raise one arm to signal for help.
+play: order | You're at a patrolled beach. Put the safe steps in order. | Find the red and yellow flags; Ask a lifesaver if you're not sure; Swim between the flags with a grown-up; If you get tired, float on your back; Raise an arm to signal for help
+check: mcq | Where should you swim at the beach? | Between the red and yellow flags* | Far away from the flags | Anywhere you like
+check: tf | If you're in trouble in the water, raise an arm to signal for help. | true
+check: mcq | Who watches the water at a patrolled beach? | Surf lifesavers* | Postal workers | Shop assistants
+home: Next time you visit a beach, find the flags and the lifesavers.
+skill: watersafety
+
+@lesson 2.5 | Everyday helpers | 🚛 | townhall
+hook: Who takes away your rubbish, drives the bus and keeps the library open?
+learn: Lots of helpers keep our town running every day.
+learn: Rubbish collectors, bus drivers, librarians, teachers and cleaners all help.
+learn: Saying thank you shows you notice their work.
+play: match | Match each helper to their job | Rubbish collector=Takes away rubbish and recycling; Bus driver=Gets people where they need to go; Librarian=Helps you find books; Teacher=Helps you learn
+check: mcq | Who takes away rubbish? | Rubbish collectors* | Dentists | Pilots
+check: tf | Saying thank you shows you notice someone's work. | true
+check: mcq | Who helps you find a book? | A librarian* | A plumber | A firefighter
+home: Say thank you to a helper you see this week, like a bus driver.
+skill: community
+
+@lesson 2.6 | Helping the helpers | 💌 | townhall
+hook: Helpers work hard for us. How can we help them back?
+learn: A thank-you card or a wave can make a helper's day.
+learn: Lots of helpers, like many firefighters and surf lifesavers, are volunteers who aren't paid.
+learn: We can help helpers too: put rubbish in the bin, and keep out of the way of emergency vehicles.
+play: chat | You see your bus driver | them: Morning! Hop on. | me: Thanks for driving us!*/Hurry up/Say nothing and push past | them: You're welcome. Have a great day! | me: You too! See you this afternoon*/Whatever/Drive faster
+check: mcq | How can you help a helper? | Put rubbish in the bin* | Leave rubbish everywhere | Get in their way
+check: tf | Many helpers are volunteers. | true
+check: mcq | An ambulance with flashing lights is coming. You… | Stay out of the way* | Run in front of it | Wave it down
+home: Make a thank-you card for a helper in your community.
+skill: community
+

@@ -74,3 +74,75 @@ check: mcq | Gratitude can be for… | Friends, family and small things* | Only 
 home: Tell someone three good things about your day.
 skill: gratitude
 
+@lesson 2.1 | Why we sleep | 😴 | home
+hook: Every night you lie still for hours. What is your body doing?
+learn: While you sleep, your body grows and fixes itself.
+learn: Your brain sorts out what you learned that day.
+learn: Kids your age need about 9 to 12 hours of sleep a night.
+play: slider | You go to bed at 7:30 pm and wake at 6:30 am. How many hours is that? | 6 | 14 | 11 | hours | 0 | 1
+check: mcq | How much sleep do kids your age need? | About 9 to 12 hours* | About 2 hours | About 20 hours
+check: tf | Your body grows and fixes itself while you sleep. | true
+check: mcq | What does your brain do while you sleep? | Sorts out what you learned* | Switches off forever | Watches TV
+home: Work out how many hours you slept last night.
+skill: sleep
+
+@lesson 2.2 | Bedtime routine | 🛁 | home
+hook: Some kids fall asleep fast. Some lie awake for ages. What helps?
+learn: A bedtime routine is doing the same calm things in the same order each night.
+learn: It tells your body that sleep is coming.
+learn: Going to bed at about the same time every night helps too.
+play: order | Build a calm bedtime routine | Have a bath or shower; Put on pyjamas; Brush your teeth; Read a story; Lights out
+check: mcq | What is a bedtime routine? | The same calm steps each night* | Jumping on the bed | A late movie
+check: tf | Going to bed at the same time each night helps you sleep. | true
+check: mcq | Which is a calm bedtime activity? | Reading a book* | Running races | A scary video game
+home: Draw your bedtime routine as a chart and stick it on your wall.
+skill: sleep
+
+@lesson 2.3 | Screens and sleep | 📱 | home
+hook: You watch videos in bed and can't fall asleep. Why?
+learn: Screens keep your brain busy and awake.
+learn: Turning screens off about an hour before bed helps you fall asleep.
+learn: Keep phones and tablets out of the bedroom at night.
+play: sort | Helps sleep, Keeps you awake | Reading a paper book=Helps sleep; Playing a game on a tablet=Keeps you awake; Listening to quiet music=Helps sleep; Watching videos in bed=Keeps you awake; A warm bath=Helps sleep; Messaging friends late=Keeps you awake | Helps sleep or keeps you awake?
+check: mcq | When should screens go off? | About an hour before bed* | Never | When you fall asleep
+check: tf | Screens in bed can make it harder to fall asleep. | true
+check: mcq | Where should tablets sleep at night? | Outside the bedroom* | Under your pillow | In your hand
+home: Find a spot outside your bedroom where screens can "sleep" each night.
+skill: screens
+
+@lesson 2.4 | A sleepy room | 🛏️ | home
+hook: Bright lights, loud music and a hot room. Would you sleep well?
+learn: Bodies sleep best in a room that is dark, quiet and cool.
+learn: Close the curtains and turn off bright lights. A small night light is fine.
+learn: A comfy bed and a tidy room help you relax.
+play: tap | Tap what helps make a sleepy room | 🌑:yes:Darkness tells your body it's time to sleep; 🔇:yes:Quiet helps you relax; 📺:no; 🧸:yes:A cuddly toy can feel comforting; 💡:no; 🛏️:yes:A comfy bed helps; 🔊:no
+check: mcq | What kind of room helps you sleep? | Dark, quiet and cool* | Bright and loud | Hot and noisy
+check: tf | A small night light is OK. | true
+check: mcq | Your room is too bright at night. What could help? | Close the curtains* | Turn on more lights | Open the door to the TV
+home: Check your bedroom at bedtime. Is it dark, quiet and cool?
+skill: sleep
+
+@lesson 2.5 | Bad dreams | 🌙 | home
+hook: You wake up from a scary dream. Your heart is thumping. What can help?
+learn: Bad dreams happen to everyone. They feel real, but they aren't.
+learn: Take slow, deep breaths. Hug your cuddly toy.
+learn: Tell a grown-up. Talking about it can make it feel smaller.
+play: chat | You wake up from a bad dream and find a grown-up | them: Hey, are you OK? | me: I had a scary dream. Can you sit with me for a bit?*/Nothing, go away/I'm never sleeping again | them: Of course. Want to take some slow breaths together? | me: Yes. In... and out*/No, I'll stay scared/I'll watch videos instead
+check: mcq | After a bad dream, what helps? | Slow breaths and telling a grown-up* | Watching a scary show | Staying awake all night
+check: tf | Bad dreams happen to everyone. | true
+check: mcq | Dreams are… | Not real, even when they feel real* | Always true | Messages from aliens
+home: Pick a happy thing to picture if you ever wake up from a bad dream.
+skill: calm
+
+@lesson 2.6 | Tired signs | 🥱 | garden
+hook: You're grumpy, yawning and can't think. What might you need?
+learn: When you're tired, it's harder to listen, learn and be kind.
+learn: Small things can feel big, and you might get upset more easily.
+learn: Good sleep helps you feel happier and do your best.
+play: sort | Tired sign, Not a tired sign | Yawning a lot=Tired sign; Grumpy over small things=Tired sign; Laughing with friends=Not a tired sign; Rubbing your eyes=Tired sign; Full of energy=Not a tired sign; Finding it hard to focus=Tired sign | Is it a sign you're tired?
+check: mcq | What can being tired make harder? | Learning and being kind* | Breathing | Blinking
+check: tf | Good sleep can help you feel happier. | true
+check: mcq | You're yawning and grumpy at school. What might help tonight? | An earlier bedtime* | A later bedtime | More screens
+home: Notice how you feel after a good sleep and after a short one.
+skill: sleep
+

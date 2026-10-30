@@ -75,3 +75,76 @@ check: mcq | What helps skills grow? | Practice and effort* | Luck only | Waitin
 home: Catch yourself saying "I can't" and add "yet".
 skill: growth
 
+@lesson 2.1 | Now or later? | ⏳ | garden
+hook: Every day you choose between "now" and "later". Why is "later" so hard?
+learn: Our brains love rewards right now. Waiting feels hard because the reward feels far away.
+learn: Choosing "later" often gets you something bigger or better.
+learn: Waiting is a skill. The more you practise, the easier it gets.
+play: sort | Reward now, Reward later | Spending pocket money on lollies today=Reward now; Saving for a skateboard=Reward later; Games instead of homework=Reward now; Practising piano to play a whole song=Reward later; Buying the first thing you see=Reward now; Training for the cross-country=Reward later | Now or later?
+check: mcq | Why is waiting hard? | Our brains like rewards right now* | Waiting is impossible | Clocks are slow
+check: tf | Waiting gets easier with practice. | true
+check: mcq | Which is a "later" reward? | Saving for a bike* | Eating lollies now | Buying a toy today
+home: Pick one small thing to wait for this week, like dessert after homework.
+skill: patience
+
+@lesson 2.2 | The marshmallow study | 🍬 | museum
+hook: In the 1960s, researchers offered kids one treat now, or two if they waited. What did they find?
+learn: In studies at Stanford University, kids were left alone with a treat. If they waited about 15 minutes, they got two.
+learn: Some waited and some didn't. Kids who waited often used tricks, like covering their eyes or singing.
+learn: Later research found waiting is easier when kids trust the grown-ups around them and feel secure. It's a skill that can grow.
+play: mystery | Kids were offered one treat now or two later; Researchers left them alone with the treat; It began at Stanford University in the 1960s; It's named after a squishy sweet | The marshmallow study* | The lolly lottery | The cookie contest
+check: mcq | How did some kids manage to wait? | Covering their eyes or singing* | Staring at the treat | Licking it a little
+check: tf | Later research found waiting is easier when kids trust the grown-ups around them. | true
+check: mcq | What does the study teach us? | Waiting is a skill you can practise* | Marshmallows are bad | Everyone waits the same
+home: Try a mini waiting test with a grown-up, using any small treat.
+skill: patience
+
+@lesson 2.3 | Tricks for waiting | 🧠 | garden
+hook: Your phone buzzes while you're doing homework. How do you not grab it?
+learn: Put temptations out of reach. A phone in another room is easier to ignore.
+learn: Make an if-then plan: "If I want my phone, then I'll finish one more question first."
+learn: Think about the treat differently. Picture a marshmallow as a fluffy cloud, not a yummy snack.
+play: match | Match each problem to a waiting trick | Phone keeps buzzing=Put it in another room; Want to spend all your money=Leave your card at home; Lollies in the cupboard=Ask for them to go on a high shelf; Can't stop thinking about a game=Make an if-then plan
+check: mcq | What's an if-then plan? | Deciding ahead what you'll do when tempted* | A maths question | A plan to give up
+check: tf | Putting temptations out of reach makes waiting easier. | true
+check: mcq | You want to save money at the mall. A good trick is… | Only take the money you plan to spend* | Take all your savings | Go every day
+home: Write one if-then plan for something that tempts you.
+skill: selfcontrol
+
+@lesson 2.4 | The 30-day list | 📝 | bank
+hook: You see a cool gadget for $60 and you want it right now. What if you waited 30 days?
+learn: Write each want on a list with the date. If you still want it after 30 days, think about buying it.
+learn: Often the urge fades, and you keep the money.
+learn: If you still want it, you'll know it's worth it, and you've had time to save.
+play: diff | Your want list on day 1 and day 30. Tap what changed. | Gadget $60; Game skin $10; Sneakers $90; Book $15 | Gadget: don't want it now; Game skin: don't want it now; Sneakers $90; Book $15
+check: mcq | What's the 30-day rule? | Wait 30 days before buying a want* | Spend it all within 30 days | Buy 30 things
+check: tf | Many urges to buy fade if you wait. | true
+check: gap | You skip a $60 gadget and a $10 skin. You kept $_ | 70
+home: Start a 30-day want list with today's date.
+skill: spending
+
+@lesson 2.5 | Instant everything | 📦 | online
+hook: Videos autoplay, parcels arrive tomorrow, games hand out instant rewards. Does that make waiting harder?
+learn: Lots of apps and games are designed to give quick little rewards so you keep going.
+learn: Autoplay, streaks and surprise rewards make it hard to stop.
+learn: Noticing the design helps you choose for yourself.
+play: tap | Tap the features designed to keep you hooked | ▶️:yes:Autoplay starts the next video before you choose; 🔥:yes:Streaks make you scared to miss a day; 🎁:yes:Surprise rewards keep you coming back; 🔔:yes:Notifications pull you back in; ⏸️:no; 🕐:no
+check: mcq | Why do apps use autoplay? | To keep you watching* | To help you sleep | To save power
+check: tf | Noticing app tricks can help you stop when you want to. | true
+check: mcq | A helpful way to beat autoplay? | Turn it off in settings* | Watch faster | Turn the sound up
+home: Turn off autoplay on one app with a grown-up.
+skill: screens
+
+@lesson 2.6 | Big goals | 🏔️ | garden
+hook: You want to save $300 for a bike. That's a long way! How do you not give up?
+learn: Break a big goal into small steps, like $20 a week for 15 weeks.
+learn: Track your progress so you can see it grow.
+learn: Celebrate milestones, like reaching halfway, with something small and free.
+try: $300 ÷ $20 a week = 15 weeks :: gap | $200 ÷ $25 a week = _ weeks | 8
+play: build | Build a plan for a $300 bike | Set the goal: a $300 bike; Choose a weekly amount: $20; Put a tracker on the wall; Save every payday; Celebrate at $150; Buy the bike at $300
+check: gap | $240 at $20 a week takes _ weeks | 12
+check: mcq | How do you stop a big goal feeling too big? | Break it into small steps* | Ignore it | Make it bigger
+check: tf | Celebrating milestones can help you keep going. | true
+home: Pick a big goal and work out how many weeks it would take to save for.
+skill: goals
+

@@ -74,3 +74,75 @@ check: mcq | First step when something feels wrong? | Stop and close it* | Keep 
 home: Agree with a grown-up who you'd tell if something online felt wrong.
 skill: safety
 
+@lesson 2.1 | Before you download | ⬇️ | online
+hook: You find a cool new game. Do you download it straight away?
+learn: Always ask a grown-up before you download an app or game.
+learn: Some apps are for older kids. Some have ads or ask for money.
+learn: A grown-up can check if it's right for you.
+play: path | You see a fun-looking game in the app store. | Ask a grown-up to check it with you => good: They checked it suits your age. Now you can play safely! | Download it quickly before anyone sees => bad: It might not be safe, and it could cost money. | Download five games at once => bad: That's five things nobody checked.
+check: mcq | Before downloading a game, you… | Ask a grown-up* | Just do it | Ask a stranger online
+check: tf | Some apps are made for older kids. | true
+check: mcq | Why ask before downloading? | A grown-up can check it's safe* | It's more fun | Games are scary
+home: Look at an app with a grown-up and find its age rating.
+skill: asking
+
+@lesson 2.2 | Before you buy | 🛒 | online
+hook: A game says "Buy 100 gems!" with a big shiny button. Do you tap it?
+learn: Gems, coins and extra lives often cost real money.
+learn: Never buy anything without asking a grown-up first.
+learn: Never use someone's card or password without asking.
+play: tap | Tap the buttons that might cost real money | 💎:yes:Gems often cost real money; 🛒:yes:Shop buttons can charge money; ▶️:no; 🎁:yes:Special offers often cost money; ⚙️:no; 🔓:yes:Unlock buttons can cost money
+check: mcq | A game asks you to buy gems. You… | Ask a grown-up first* | Tap buy | Use a card from the drawer
+check: tf | Gems in games can cost real money. | true
+check: mcq | Can you use a grown-up's password without asking? | No, never* | Yes, if it's quick | Only on weekends
+home: Ask a grown-up to show you how purchases are checked on your device.
+skill: inapp
+
+@lesson 2.3 | Before you share a photo | 📸 | online
+hook: You took a funny photo of your friend. Can you share it?
+learn: Before you share a photo, ask a grown-up.
+learn: Ask the people in it too. They might not want it shared.
+learn: Photos online can be hard to take back.
+play: chat | You want to share a photo of your friend | them: Ha! That photo of me pulling a face is so silly! | me: Is it OK if I send it to Gran?*/I'm posting it everywhere/Too late, I sent it to everyone | them: Hmm, just Gran is fine. Nobody else. | me: OK, just Gran. I'll ask a grown-up to help me send it*/I'll send it to the whole class/Whatever
+check: mcq | Before sharing a photo of a friend, you… | Ask them and a grown-up* | Post it fast | Share it with everyone
+check: tf | Photos online can be hard to take back. | true
+check: mcq | Your friend says no to sharing a photo. You… | Don't share it* | Share it anyway | Laugh at them
+home: Look at some photos with a grown-up and decide which ones are OK to share.
+skill: privacy
+
+@lesson 2.4 | New friend requests | 👋 | online
+hook: Someone you don't know wants to be your friend in a game. Do you say yes?
+learn: Only be online friends with people you know in real life.
+learn: Ask a grown-up before you accept a friend request.
+learn: People online aren't always who they say they are.
+play: sort | Ask a grown-up, Say no | A friend from your class=Ask a grown-up; Someone you've never met=Say no; Your cousin=Ask a grown-up; A player who says they're 9, but you don't know them=Say no; Your neighbour's kid=Ask a grown-up; Someone offering free gems to be friends=Say no | What should you do with each request?
+check: mcq | Who should you be friends with online? | People you know in real life* | Anyone at all | People with cool names
+check: tf | People online are always who they say they are. | false | Some people pretend to be someone else.
+check: mcq | A stranger sends a friend request. You… | Say no and tell a grown-up* | Say yes | Send them your address
+home: Check your friend list in a game with a grown-up.
+skill: safety
+
+@lesson 2.5 | Pop-ups and prizes | 🎁 | online
+hook: A box pops up: "You WON! Tap to claim your prize!" Did you really win?
+learn: Pop-ups that say you won are usually tricks.
+learn: Don't tap. Show a grown-up instead.
+learn: Some close buttons are fake too, so let a grown-up close it.
+play: scam | Trick or OK? | You WON a phone! Tap now!=scam; Your game is saving=real; Claim 1,000 free coins, just type your password=scam; The game says it's time for a break=real; Spin to win a prize!=scam | Prize pop-ups are usually tricks. Show a grown-up.
+check: mcq | A pop-up says you won a prize. You… | Show a grown-up* | Tap claim | Type your password
+check: tf | Some pop-ups have fake close buttons. | true
+check: mcq | Is it OK to type your password into a pop-up? | No* | Yes | Only if it's colourful
+home: Next time a pop-up appears, show a grown-up before doing anything.
+skill: ads
+
+@lesson 2.6 | Uh-oh moments | 🙋 | online
+hook: Oops! You tapped something and now there's a strange page. Will you get in trouble?
+learn: Everyone makes mistakes online, even grown-ups.
+learn: Tell a grown-up straight away. Telling helps fix it faster.
+learn: Grown-ups would rather know than have you worry alone.
+play: order | Uh-oh! Put the steps in order | Stop tapping; Don't type anything; Go and get a grown-up; Show them what happened; Let them help fix it
+check: mcq | You tapped something by mistake. What's best? | Tell a grown-up straight away* | Hide the tablet | Keep tapping
+check: tf | Telling a grown-up helps fix problems faster. | true
+check: mcq | Why tell a grown-up about a mistake? | They can help, and you won't worry alone* | To get in trouble | It doesn't help
+home: Agree with a grown-up what you'll do if something goes wrong online.
+skill: asking
+

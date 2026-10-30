@@ -75,6 +75,78 @@ check: mcq | How should we treat families different from ours? | With respect* |
 home: Draw your family and the people who care for you.
 skill: respect
 
+@lesson 2.1 | Emergency helpers | 🚑 | townhall
+hook: A fire, a crash, or someone badly hurt. Who comes to help?
+learn: Police help keep people safe and stop crime.
+learn: Firefighters put out fires and rescue people.
+learn: Ambulance officers look after people who are badly hurt or very sick. In an emergency, call {nz:111~au:000}.
+play: match | Match each emergency to the helper | A house on fire=Firefighters; Someone badly hurt=Ambulance officers; A burglar in a house=Police; Someone lost in the bush=Search and rescue
+check: mcq | What number do you call in an emergency? | {nz:111~au:000}* | {nz:000~au:111} | 123
+check: tf | Ambulance officers help people who are badly hurt. | true
+check: mcq | Who puts out fires? | Firefighters* | Librarians | Bus drivers
+home: Practise saying your home address out loud, in case you ever need to call for help.
+skill: safety
+
+@lesson 2.2 | When to call | ☎️ | townhall
+hook: Is a lost toy an emergency? What about smoke pouring out of a house?
+learn: An emergency is when someone is in danger or badly hurt, or there's a fire or a crime happening now.
+learn: A lost toy or a scraped knee isn't an emergency. Tell a grown-up instead.
+learn: If you call, stay calm, and say what's happening and where you are.
+play: sort | Call {nz:111~au:000}, Tell a grown-up | Smoke pouring out of a house=Call {nz:111~au:000}; A lost toy=Tell a grown-up; Someone won't wake up=Call {nz:111~au:000}; A small scrape=Tell a grown-up; A car crash with people hurt=Call {nz:111~au:000}; A hole in your sock=Tell a grown-up | Emergency or not?
+check: mcq | Which is an emergency? | Someone won't wake up* | A lost pencil | A boring day
+check: tf | You should call {nz:111~au:000} about a lost toy. | false | Tell a grown-up instead. Emergency lines are for danger.
+check: mcq | When you call for help, what should you say? | What's happening and where you are* | Your favourite colour | Nothing
+home: Talk with a grown-up about what counts as an emergency.
+skill: safety
+
+@lesson 2.3 | Health helpers | 🩺 | townhall
+hook: Sore tooth, sore tummy, need some medicine. Who helps with each?
+learn: Doctors and nurses help when you're sick or hurt.
+learn: Dentists look after your teeth.
+learn: Pharmacists give out medicine and explain how to take it.
+play: tap | Tap the health helpers | 👩‍⚕️:yes:Doctors help when you're sick; 🦷:yes:Dentists look after teeth; 💊:yes:Pharmacists give out medicine; 👨‍🍳:no; 🧑‍🌾:no; 🩺:yes:Nurses care for patients; 🧑‍✈️:no
+check: mcq | Who looks after your teeth? | A dentist* | A baker | A pilot
+check: tf | Pharmacists can help with medicine. | true
+check: mcq | You have a sore tummy that won't go away. Who might help? | A doctor* | A librarian | A bus driver
+home: Ask a grown-up who your family's doctor is.
+skill: health
+
+@lesson 2.4 | Beach helpers | 🏖️ | island
+hook: At the beach you see people in red and yellow caps. Who are they?
+learn: Surf lifesavers watch the water and help swimmers in trouble.
+learn: They put up red and yellow flags. Swim between them.
+learn: If you get stuck in the water, stay calm, float, and raise one arm to signal for help.
+play: order | You're at a patrolled beach. Put the safe steps in order. | Find the red and yellow flags; Ask a lifesaver if you're not sure; Swim between the flags with a grown-up; If you get tired, float on your back; Raise an arm to signal for help
+check: mcq | Where should you swim at the beach? | Between the red and yellow flags* | Far away from the flags | Anywhere you like
+check: tf | If you're in trouble in the water, raise an arm to signal for help. | true
+check: mcq | Who watches the water at a patrolled beach? | Surf lifesavers* | Postal workers | Shop assistants
+home: Next time you visit a beach, find the flags and the lifesavers.
+skill: watersafety
+
+@lesson 2.5 | Everyday helpers | 🚛 | townhall
+hook: Who takes away your rubbish, drives the bus and keeps the library open?
+learn: Lots of helpers keep our town running every day.
+learn: Rubbish collectors, bus drivers, librarians, teachers and cleaners all help.
+learn: Saying thank you shows you notice their work.
+play: match | Match each helper to their job | Rubbish collector=Takes away rubbish and recycling; Bus driver=Gets people where they need to go; Librarian=Helps you find books; Teacher=Helps you learn
+check: mcq | Who takes away rubbish? | Rubbish collectors* | Dentists | Pilots
+check: tf | Saying thank you shows you notice someone's work. | true
+check: mcq | Who helps you find a book? | A librarian* | A plumber | A firefighter
+home: Say thank you to a helper you see this week, like a bus driver.
+skill: community
+
+@lesson 2.6 | Helping the helpers | 💌 | townhall
+hook: Helpers work hard for us. How can we help them back?
+learn: A thank-you card or a wave can make a helper's day.
+learn: Lots of helpers, like many firefighters and surf lifesavers, are volunteers who aren't paid.
+learn: We can help helpers too: put rubbish in the bin, and keep out of the way of emergency vehicles.
+play: chat | You see your bus driver | them: Morning! Hop on. | me: Thanks for driving us!*/Hurry up/Say nothing and push past | them: You're welcome. Have a great day! | me: You too! See you this afternoon*/Whatever/Drive faster
+check: mcq | How can you help a helper? | Put rubbish in the bin* | Leave rubbish everywhere | Get in their way
+check: tf | Many helpers are volunteers. | true
+check: mcq | An ambulance with flashing lights is coming. You… | Stay out of the way* | Run in front of it | Wave it down
+home: Make a thank-you card for a helper in your community.
+skill: community
+
 @band builders
 @unit 1 | Tax and what it pays for | Income tax, GST and public services
 @unit 2 | Local councils | Rates, rubbish and roads
@@ -152,6 +224,79 @@ check: tf | Rights and responsibilities go together. | true
 check: mcq | Which is a responsibility? | Respecting others* | Free lunch every day | Nothing
 home: Name one right and one responsibility you have at home.
 skill: civics
+
+@lesson 2.1 | Layers of government | 🏛️ | townhall
+hook: Schools, rubbish and the army. Who's in charge of each?
+learn: {nz:NZ has a national government, plus regional councils and city or district councils.~au:Australia has three levels of government: federal, state or territory, and local councils.}
+learn: {nz:The national government runs things like schools, hospitals, police and defence.~au:The federal government runs things like defence and Medicare. States run schools, hospitals and police.}
+learn: Local councils look after local things: rubbish, parks, libraries and local roads.
+play: sort | Local council, Bigger government | Rubbish collection=Local council; The defence force=Bigger government; Libraries=Local council; Police=Bigger government; Local parks=Local council; Public hospitals=Bigger government | Who's in charge?
+check: mcq | Who runs the defence force? | {nz:The national government~au:The federal government}* | Your local council | A school board
+check: tf | {nz:NZ has regional councils as well as city and district councils.~au:Australia has three levels of government.} | true
+check: mcq | {nz:Who runs NZ's public schools?~au:Who runs most public schools in Australia?} | {nz:The national government~au:State and territory governments}* | Local councils | Supermarkets
+home: Find one thing each level of government does near you.
+skill: civics
+
+@lesson 2.2 | How rates work | 🧾 | townhall
+hook: Councils run parks, pools and libraries. How do they pay for it all?
+learn: Most council money comes from rates, a kind of property tax paid by property owners.
+learn: Rates are usually based on the value of the property.
+learn: Renters don't pay rates directly, but landlords often build the cost into the rent.
+try: 0.3% of a $600,000 house = $1,800 a year :: gap | 0.4% of a $500,000 house = $_ a year | 2000
+play: slider | A council charges 0.25% of a property's value. A house is worth $800,000. What are its rates for the year? | 0 | 5000 | 2000 | $ | 100 | 100
+check: mcq | Who pays council rates directly? | Property owners* | Children | Only tourists
+check: tf | Renters can pay towards rates through their rent. | true
+check: mcq | What are rates usually based on? | The property's value* | Your height | Your favourite food
+home: Ask a grown-up roughly what their rates or rent costs a year.
+skill: council
+
+@lesson 2.3 | Rubbish and recycling | ♻️ | townhall
+hook: A tin can, a glass jar and a soft plastic bag. Which go in the recycling bin?
+learn: Clean, empty cans, jars and bottles usually go in recycling. Soft plastic bags usually don't.
+learn: Dirty or wrong items can spoil a whole truckload of recycling.
+learn: {nz:NZ councils now share one standard list of what goes in kerbside recycling.~au:Each council has its own recycling rules.} Check your council's website.
+play: sort | Recycling, Rubbish | Clean tin can=Recycling; Soft plastic bag=Rubbish; Rinsed glass jar=Recycling; Used tissue=Rubbish; Flattened cardboard box=Recycling; Nappy=Rubbish | Recycling or rubbish?
+check: mcq | What can spoil a load of recycling? | Dirty or wrong items* | Clean cans | Flat cardboard
+check: tf | Soft plastic bags usually go in the kerbside recycling bin. | false | Most councils don't take them. Check yours.
+check: mcq | Where can you check your recycling rules? | Your council's website* | A cereal box | A random video
+home: Check your council's recycling rules and stick them up near your bins.
+skill: environment
+
+@lesson 2.4 | Mayors and councillors | 🗳️ | townhall
+hook: Who's in charge of your council, and how do they get the job?
+learn: Councils are run by elected people: a mayor and councillors.
+learn: {nz:In NZ, local elections are held every 3 years, mostly by post.~au:In Australia, council elections are usually held every 4 years.}
+learn: Council staff do the day-to-day work. Elected members make the big decisions.
+play: match | Match each role to its job | Mayor=Leads the council; Councillors=Vote on big decisions; Council staff=Do the day-to-day work; Voters=Choose who gets elected
+check: mcq | Who leads a council? | The mayor* | The prime minister | The school principal
+check: tf | Councillors are elected by local voters. | true
+check: mcq | {nz:How often are NZ local elections held?~au:How often are most Australian council elections held?} | {nz:Every 3 years~au:Every 4 years}* | Every 20 years | Never
+home: Find out who your mayor is.
+skill: council
+
+@lesson 2.5 | Having your say | 📝 | townhall
+hook: Your council wants to close a skate park. Can a kid have a say?
+learn: Councils ask the public for ideas and feedback. This is called consultation.
+learn: Anyone can make a submission, including kids. Many councils have youth councils too.
+learn: A good submission is short, clear and polite, with reasons.
+play: build | Build a submission about the skate park | Say who you are: a 12-year-old who uses the park; Say what you want: please keep the skate park open; Give a reason: it's the only safe place for kids to skate; Give an example: 30 kids use it every weekend; Say thank you
+check: mcq | What's a council consultation? | Asking the public for feedback* | A doctor's visit | A secret meeting
+check: tf | Kids can make submissions to their council. | true
+check: mcq | What makes a good submission? | Short, clear, polite and with reasons* | Long and angry | Just one word
+home: Find a current consultation on your council's website.
+skill: civics
+
+@lesson 2.6 | Council budget choices | ⚖️ | townhall
+hook: You're on the council. There's money for one big project: a pool, a library or better roads. Which?
+learn: Councils have limited money, so they have to choose.
+learn: Spending more on one thing means less for something else, or higher rates.
+learn: Good councillors weigh up what people need most, and keep some money aside for emergencies.
+play: budget | You're the council. Plan this year's budget, in millions of dollars. | 100 | Roads and footpaths=30; Water pipes=25; Rubbish and recycling=15; Parks and pools=10; Libraries=5; Emergency fund=0 | Storm damage:10
+check: mcq | Why do councils have to choose? | Money is limited* | They don't like parks | It's fun
+check: tf | Spending more on one thing can mean less for another. | true
+check: mcq | A storm damages roads. Where could the money come from? | An emergency fund* | Nowhere, ever | Printing money
+home: If you ran the council, what would you spend more on? Tell a grown-up why.
+skill: council
 
 @band makers
 @unit 1 | Government and voting | How elections and Parliament work
@@ -231,6 +376,79 @@ check: mcq | Who decides on local crossings? | Usually the local council* | The 
 home: Count cars outside school for 10 minutes for a pretend petition.
 skill: advocacy
 
+@lesson 2.1 | Where the money comes from | 💰 | townhall
+hook: The government spends billions every year. Where does it all come from?
+learn: {nz:NZ's biggest source of tax is income tax from workers, then GST, then company tax.~au:Australia's biggest source of tax is income tax from workers, then company tax, then GST.}
+learn: Other taxes include duties on fuel, alcohol and tobacco.
+learn: {nz:NZ's GST is 15% on almost everything, including food.~au:Australia's GST is 10%, but fresh food, most health care and education are GST-free.}
+play: order | Put the tax sources from biggest to smallest | Income tax from workers; {nz:GST~au:Company tax}; {nz:Company tax~au:GST}; Duties on fuel, alcohol and tobacco
+check: mcq | What's the government's biggest source of tax? | Income tax from workers* | Parking fines | Lotto
+check: tf | {nz:NZ charges GST on food.~au:Fresh food is GST-free in Australia.} | true
+check: mcq | What's the GST rate here? | {nz:15%~au:10%}* | 50% | 1%
+home: Find the GST on a supermarket receipt.
+skill: tax
+
+@lesson 2.2 | The biggest slices | 🥧 | townhall
+hook: Out of every $100 the government spends, how much goes to each area?
+learn: Social security and welfare is the biggest area in both countries. It includes {nz:NZ Super~au:the Age Pension} for older people, plus support for families, people with disabilities and people out of work.
+learn: Health comes next, then areas like education, defence and interest on government debt.
+learn: {nz:NZ Super is the single biggest payment, and it grows as more people retire.~au:The Age Pension is one of the biggest payments, and the NDIS is one of the fastest-growing costs.}
+play: slider | Out of every $100 the government spends, roughly how much goes on social security and welfare? | 0 | 100 | 35 | $ | 8 | 1
+check: mcq | What's the biggest area of government spending in both countries? | Social security and welfare* | Defence | Sport
+check: tf | Payments to older people are a big part of welfare spending. | true
+check: mcq | {nz:Which single payment costs NZ the most?~au:Which fast-growing scheme supports Australians with disability?} | {nz:NZ Super~au:The NDIS}* | Arts grants | Parking meters
+home: Find the spending chart on {nz:budget.govt.nz~au:budget.gov.au}.
+skill: tax
+
+@lesson 2.3 | Progressive tax | 📶 | townhall
+hook: Does someone earning twice as much pay twice as much tax? Or more?
+learn: Income tax is progressive. Higher rates apply only to the part of income above each threshold.
+learn: So people with higher incomes pay a bigger share of their income in tax.
+learn: It's one way governments try to spread the cost fairly.
+try: Imagine 10% on the first $20,000 and 30% on the rest. On $30,000: $2,000 + $3,000 = $5,000 :: gap | Same made-up brackets. Tax on $40,000 = $_ | 8000
+play: slider | Same made-up brackets. What's the total tax on $50,000? | 0 | 20000 | 11000 | $ | 500 | 500
+check: mcq | In a progressive system, a higher rate applies to… | Only the income above each threshold* | All your income | Only the first dollar
+check: tf | Higher earners pay a bigger share of their income in a progressive system. | true
+check: gap | Made-up brackets: on $50,000 you pay $11,000. That's _% of your income | 22
+home: Look up this year's real tax brackets on {nz:ird.govt.nz~au:ato.gov.au}.
+skill: tax
+
+@lesson 2.4 | Is GST fair? | 🛒 | townhall
+hook: A millionaire and a student buy the same loaf of bread and pay the same GST. Fair?
+learn: GST is the same rate for everyone, whatever their income.
+learn: People on low incomes spend more of what they earn, so GST takes a bigger share of their income.
+learn: {nz:NZ keeps GST simple with almost no exemptions, and uses benefits and tax credits to help lower-income families.~au:Australia makes fresh food, most health care and education GST-free, partly to soften this.}
+play: debate | Should fresh food be GST-free? | It helps lower-income families, who spend more of their income on food* | It makes no difference to anyone | Exemptions make GST more complicated and help wealthy shoppers too. Some say direct payments to families help more.
+check: mcq | Why can GST hit lower-income households harder? | They spend a bigger share of their income* | They pay a higher rate | They don't pay it
+check: tf | GST is the same rate for everyone. | true
+check: mcq | {nz:How many GST exemptions does NZ have?~au:Which of these is GST-free in Australia?} | {nz:Very few, so it's simple~au:Fresh fruit and vegetables}* | {nz:Hundreds~au:Lollies} | {nz:It only applies to cars~au:Takeaway food}
+home: Look at a receipt with fresh food and snacks on it. Which items had GST?
+skill: tax
+
+@lesson 2.5 | Surplus, deficit and debt | 📊 | townhall
+hook: A government spends $100 billion but only collects $90 billion. Where does the rest come from?
+learn: When a government spends more than it collects in a year, that's a deficit. When it collects more, that's a surplus.
+learn: Deficits are covered by borrowing, which adds to government debt.
+learn: Debt isn't always bad, like borrowing after a disaster or to build hospitals. But the interest has to be paid every year.
+play: diff | Two years of a government's budget. Tap what changed. | Tax in: $90b; Spending: $85b; Result: $5b surplus; Debt: $50b | Tax in: $90b; Spending: $100b; Result: $10b deficit; Debt: $60b
+check: mcq | Spending $100b and collecting $90b gives a… | $10b deficit* | $10b surplus | $190b surplus
+check: tf | Deficits are usually covered by borrowing. | true
+check: mcq | What's one cost of government debt? | Interest that has to be paid every year* | Nothing at all | Free money
+home: Find out whether the government expects a surplus or a deficit this year.
+skill: economics
+
+@lesson 2.6 | The Budget | 📅 | townhall
+hook: Budget day makes the news every year. What's actually in it?
+learn: Each year the government announces its Budget: its tax and spending plans for the year ahead. It's usually in May in both countries.
+learn: {nz:The Minister of Finance~au:The Treasurer} presents it to Parliament.
+learn: Every Budget is full of trade-offs: more for one thing means less for another, higher taxes or more borrowing.
+play: budget | You're the {nz:Minister of Finance~au:Treasurer}. Plan $100 billion of spending. | 100 | Welfare and pensions=30; Health=20; Education=10; Defence=5; Interest on debt=5; Emergency fund=0 | Earthquake recovery:10
+check: mcq | Who presents the Budget to Parliament? | {nz:The Minister of Finance~au:The Treasurer}* | The mayor | A judge
+check: tf | A Budget sets out plans for tax and spending. | true
+check: mcq | More health spending, with the same taxes, means… | Less elsewhere or more borrowing* | Nothing changes | Free money appears
+home: Read or watch a short news summary of this year's Budget.
+skill: civics
+
 @band launchers
 @unit 1 | Tax systems | {nz:IRD, PAYE and tax returns~au:The ATO, PAYG and tax returns}
 @unit 2 | Law for young adults | Contracts, tenancy and your rights
@@ -307,3 +525,75 @@ check: tf | Systems change often takes years. | true
 check: mcq | What helps systems change? | Research, partners and persistence* | One angry post | Giving up
 home: Pick a problem you care about and name one possible cause.
 skill: advocacy
+
+@lesson 2.1 | Turning 18 | 🎂 | townhall
+hook: You turn 18 tomorrow. What legally changes?
+learn: At 18 you can vote, buy alcohol and be called for jury service.
+learn: Contracts you sign are generally binding, and you're responsible for your own debts.
+learn: {nz:Some ages are different. You must be 20 to enter a casino in NZ.~au:Some rules, like driver licensing, differ by state, so check yours.}
+play: sort | Changes at 18, Not at 18 | Voting in a general election=Changes at 18; Buying alcohol=Changes at 18; Being called for jury service=Changes at 18; {nz:Entering a casino~au:Getting a full, unrestricted driver's licence}=Not at 18; Signing a binding phone contract on your own=Changes at 18; Getting a learner licence=Not at 18 | What changes at 18?
+check: mcq | Which can you do at 18? | Vote in a general election* | Get the pension | Stop paying tax
+check: tf | At 18, you're generally responsible for your own debts. | true
+check: mcq | {nz:How old must you be to enter a casino in NZ?~au:Who sets many age rules, like driver licensing?} | {nz:20~au:Your state or territory}* | {nz:12~au:Your school} | {nz:16~au:Your bank}
+home: List three things you'll be able to do at 18 that you can't do now.
+skill: rights
+
+@lesson 2.2 | Driving and the law | 🚗 | townhall
+hook: You've just got your licence. What rules are different for new drivers?
+learn: {nz:In NZ you can get a learner licence at 16, then a restricted licence, then a full licence.~au:In most states you can get a learner permit at 16, then P plates, then a full licence.}
+learn: {nz:Drivers under 20 must have zero alcohol. Any alcohol can mean a fine and losing your licence.~au:Learner and P-plate drivers must have zero alcohol. Breaking it can mean losing your licence.}
+learn: Using a handheld phone while driving is illegal for everyone.
+play: path | You're 17 with your {nz:restricted licence~au:P plates}. Friends want a lift home from a party where you had one drink. | Don't drive. Get a lift or a taxi => good: Zero alcohol means zero. You kept everyone safe and kept your licence. | Drive carefully, it was only one => bad: For you the limit is zero. You could lose your licence, or far worse. | Let a friend who's been drinking drive instead => bad: That's just as dangerous.
+check: mcq | {nz:What's the alcohol limit for NZ drivers under 20?~au:What's the alcohol limit for learner and P-plate drivers?} | Zero* | Two drinks | Whatever feels OK
+check: tf | Using a handheld phone while driving is illegal. | true
+check: mcq | {nz:At what age can you get a learner licence in NZ?~au:At what age can you get a learner permit in most states?} | 16* | 12 | 21
+home: Read the first section of the {nz:NZ Road Code~au:your state's learner driver handbook} with a grown-up.
+skill: driving
+
+@lesson 2.3 | Consumer rights | 🧾 | stall
+hook: Your new $300 headphones break after a month. The shop says "No refunds." Is that the end?
+learn: {nz:Under the Consumer Guarantees Act, things you buy must be of acceptable quality, fit for purpose and match their description.~au:Under the Australian Consumer Law, things you buy must be of acceptable quality, fit for purpose and match their description.}
+learn: If there's a fault, you can ask for a repair, a replacement or a refund. For a major failure, you can choose a refund or a replacement.
+learn: A "No refunds" sign can't take these rights away. Change of mind is different. That's up to the shop.
+play: chat | Your headphones broke after a month | them: Sorry, we don't do refunds. | me: They stopped working after a month, so they aren't acceptable quality. Could you repair, replace or refund them?*/Fine, I'll just leave/You're scamming me! | them: Let me check with my manager. | me: Thanks. Here's my receipt*/Hurry up/I'll post a bad review
+check: mcq | Your new kettle breaks after a week. What can you ask for? | A repair, replacement or refund* | Nothing | A free fridge
+check: tf | A "No refunds" sign takes away your consumer rights. | false | Your rights under the law still apply.
+check: mcq | You simply changed your mind about a shirt. The shop… | Doesn't have to refund, unless its policy says so* | Must refund you by law | Must give you two shirts
+home: Read the consumer rights page on {nz:consumerprotection.govt.nz~au:accc.gov.au}.
+skill: consumer
+
+@lesson 2.4 | Fines and debts | 🧾 | townhall
+hook: You get a $150 parking fine and forget about it. What happens?
+learn: Unpaid fines don't go away. They usually grow, with extra costs added.
+learn: {nz:In NZ, overdue fines can be taken from your pay or bank account, and you can be stopped at the airport when leaving the country.~au:In Australia, unpaid fines can lead to your licence or car registration being suspended, and money taken from your wages or bank account.}
+learn: If you can't pay, contact them early. Payment plans are usually available.
+play: path | You get a $150 fine you can't pay right now. | Contact them and ask for a payment plan => good: Sorted. Small payments and no extra costs. | Ignore it and hope it goes away => bad: It grows, and you could face bigger problems later. | Throw the letters away => bad: It doesn't disappear. It just gets worse without you knowing.
+check: mcq | What happens to unpaid fines? | They grow and lead to bigger problems* | They vanish | They get cheaper
+check: tf | Payment plans are often available for fines. | true
+check: mcq | {nz:What can happen with overdue fines in NZ?~au:What can happen with unpaid fines in Australia?} | {nz:You can be stopped at the airport~au:Your licence can be suspended}* | Nothing | You win a prize
+home: Find how to check for unpaid fines on {nz:justice.govt.nz~au:your state's fines website}.
+skill: fines
+
+@lesson 2.5 | Free legal help | 🧑‍⚖️ | townhall
+hook: You're in a legal mess, but lawyers cost a lot. Where can you get help?
+learn: {nz:Community Law Centres give free legal help across NZ. Youthlaw Aotearoa helps people under 25.~au:Community legal centres give free legal help. Youth Law Australia helps people under 25, and Legal Aid can help too.}
+learn: {nz:Citizens Advice Bureau can help you work out where to go.~au:Your state's Legal Aid can help you work out where to go.}
+learn: Get help early. Small problems are easier to fix.
+play: match | Match each problem to a good first stop | A bond dispute=A free tenancy advice service; Unpaid wages={nz:Employment New Zealand~au:The Fair Work Ombudsman}; A faulty product from a shop={nz:Consumer Protection~au:Your state's fair trading office}; Not sure where to start={nz:Citizens Advice Bureau~au:Legal Aid}
+check: mcq | Where can you get free legal help? | {nz:A Community Law Centre~au:A community legal centre}* | A gaming forum | Nowhere
+check: tf | Getting legal help early can make problems easier to fix. | true
+check: mcq | {nz:Who does Youthlaw Aotearoa help?~au:Who does Youth Law Australia help?} | People under 25* | Only lawyers | Only businesses
+home: Find your nearest {nz:Community Law Centre~au:community legal centre} online.
+skill: help
+
+@lesson 2.6 | Tribunals | ⚖️ | townhall
+hook: Your old flatmate owes you $600 and won't pay. Do you need a court and a lawyer?
+learn: {nz:The Disputes Tribunal handles smaller money disputes. It's cheaper and quicker than court, and lawyers usually can't represent you there.~au:Each state has a tribunal or small claims court for smaller disputes. It's cheaper and quicker than a full court.}
+learn: Bring evidence: messages, receipts, photos and dates.
+learn: Try to sort it out first. Tribunals expect you to have tried.
+play: build | Get ready for a tribunal hearing | Try to sort it out directly first; Collect texts, receipts and photos; Write a short timeline of what happened; File your claim and pay the small fee; Explain your side calmly at the hearing
+check: mcq | {nz:Can lawyers usually represent you at the Disputes Tribunal?~au:What is a small claims tribunal for?} | {nz:No~au:Smaller disputes, faster and cheaper than court}* | {nz:Yes, you must have one~au:Murder trials} | {nz:Only on Fridays~au:Changing laws}
+check: tf | Good evidence includes messages, receipts and photos. | true
+check: mcq | Before going to a tribunal, you should… | Try to sort it out directly* | Post about it online | Do nothing
+home: Look up how to file a claim on {nz:disputestribunal.govt.nz~au:your state's tribunal website}.
+skill: law

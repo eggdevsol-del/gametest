@@ -75,3 +75,76 @@ check: mcq | {nz:Who can help with online bullying in NZ?~au:Who can help with o
 home: Talk with a grown-up about what you'd do if you saw cyberbullying.
 skill: bullying
 
+@lesson 2.1 | Leftover gems | 💎 | online
+hook: A skin costs 1,200 gems. Packs come in 1,000 or 2,500. What happens?
+learn: Games often sell packs that don't match item prices, so you buy more than you need.
+learn: The leftover gems tempt you to spend again to "use them up".
+learn: Work out the real cost of the item you want, not the pack.
+try: 1,000 gems cost $10, so 1 gem is 1c :: gap | A 1,200-gem skin at 1c a gem costs $_ | 12
+play: price | Which pack is cheapest per gem? | Small pack:5:500:gems; Medium pack:10:1100:gems; Big pack:20:2500:gems
+check: mcq | You need 1,200 gems. Packs are 1,000 or 2,500. What's the trap? | You end up buying more than you need* | There's no trap | The game pays you back
+check: tf | The biggest pack is always the best buy, even if you only need a few gems. | false | Leftover gems are money spent on nothing yet.
+check: mcq | Why do leftover gems matter? | They tempt you to spend again* | They turn back into cash | They're free
+home: Find a game's gem packs and one item's price. How many gems would be left over?
+skill: inapp
+
+@lesson 2.2 | Loot boxes | 🎰 | online
+hook: Pay $3 for a mystery box. You might get a legendary skin... or a boring sticker. Sound familiar?
+learn: Loot boxes are paid mystery rewards. You don't know what you'll get.
+learn: They work a lot like gambling: paying for a chance at something rare.
+learn: {nz:Some countries now have special rules for loot boxes. Talk with a grown-up before buying any.~au:Since September 2024, games in Australia with paid loot boxes are rated at least M, and games with simulated gambling are rated R 18+.}
+play: slider | A rare skin has a 1 in 100 chance from each $3 box. On average, how much would you spend to get it? | 0 | 600 | 300 | $ | 30 | 10
+check: tf | You always know what you'll get from a loot box. | false
+check: mcq | Why are loot boxes like gambling? | You pay for a chance at something rare* | You always win | They're free
+check: mcq | A 1 in 50 chance at $2 a box. On average, how much to get the item? | $100* | $2 | $50
+home: Check whether a game you play has loot boxes, and talk about it with a grown-up.
+skill: inapp
+
+@lesson 2.3 | Limited-time offers | ⏳ | online
+hook: "Only 2 hours left! 50% off the mega bundle!" Do you buy it now?
+learn: Countdown timers and "limited time" offers rush you so you don't stop and think.
+learn: Battle passes and daily rewards make you feel you'll miss out if you stop playing or paying.
+learn: Pause and ask: would I buy this if there was no timer?
+play: path | A countdown says "2 hours left! 50% off!" | Wait and ask a grown-up, even if the deal ends => good: Another deal will come along. You stayed in control. | Buy it fast before the timer runs out => bad: The timer rushed you. You might not even want it tomorrow. | Use a saved card without asking => bad: That's spending money that isn't yours to spend.
+check: mcq | Why do games use countdown timers? | To rush you into buying* | To help you relax | To tell the time
+check: tf | Another "limited" deal usually comes along later. | true
+check: mcq | A good question before buying a deal? | Would I buy this with no timer?* | How fast can I tap? | What's the biggest bundle?
+home: Spot a countdown or "limited time" deal in a game or ad.
+skill: inapp
+
+@lesson 2.4 | Purchase controls | 🔒 | online
+hook: How can a family stop surprise game bills?
+learn: Phones, tablets and consoles have settings that need a grown-up's OK before any purchase.
+learn: On Apple devices it's called Ask to Buy. Google's Family Link has purchase approvals.
+learn: A card saved on a shared device should always be locked behind a password.
+play: order | Set up purchase controls with a grown-up | Open the family settings on the device; Turn on purchase approvals; Set a password only the grown-up knows; Test it by trying to buy a free item; Check the settings every few months
+check: mcq | What does Ask to Buy do? | Needs a grown-up's OK before a purchase* | Buys things faster | Gives free gems
+check: tf | A saved card on a shared device with no password is risky. | true
+check: mcq | Who should know the purchase password? | A grown-up* | Everyone in your class | Your gaming friends
+home: Check the purchase settings on a family device together.
+skill: inapp
+
+@lesson 2.5 | Oops, I bought it | 🧾 | online
+hook: You accidentally bought a $20 bundle. Your stomach drops. What now?
+learn: Tell a grown-up straight away. Hiding it makes it worse.
+learn: App stores and game companies can sometimes refund accidental purchases if you ask quickly.
+learn: Learn from it: turn on purchase controls so it can't happen again.
+play: chat | You tell a grown-up about an accidental purchase | them: You look worried. What's up? | me: I accidentally bought a $20 bundle. I'm sorry*/Nothing/It was my brother | them: Thanks for telling me. Let's ask the app store for a refund. | me: Can we turn on purchase controls too?*/Can I buy another one?/I'll hide the tablet next time
+check: mcq | You made an accidental purchase. First step? | Tell a grown-up straight away* | Hide it | Buy more to cover it
+check: tf | Some accidental purchases can be refunded if you ask quickly. | true
+check: mcq | How do you stop it happening again? | Turn on purchase controls* | Never tell anyone | Use a different card
+home: With a grown-up, find where to ask for a refund in your family's app store.
+skill: inapp
+
+@lesson 2.6 | A game budget | 🎮 | bank
+hook: How much is OK to spend on games? You decide, with a plan.
+learn: Set a monthly game budget from your Spend jar, agreed with a grown-up.
+learn: When it's gone, it's gone until next month.
+learn: Track what you spend. Small buys add up fast.
+play: budget | You have $20 a month for fun. Plan it. | 20 | Game pass=5; Snacks=3; Savings=0; Gift for a friend=0 | Friend's birthday present:5
+check: gap | Four $3 game buys in a month cost $_ | 12
+check: mcq | Your game budget is gone for the month. A deal pops up. You… | Wait until next month* | Raid your savings | Use a parent's card
+check: tf | Tracking small spends shows you where your money goes. | true
+home: Agree a monthly game budget with a grown-up.
+skill: budget
+

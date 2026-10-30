@@ -75,6 +75,78 @@ check: mcq | Gratitude can be for… | Friends, family and small things* | Only 
 home: Tell someone three good things about your day.
 skill: gratitude
 
+@lesson 2.1 | Why we sleep | 😴 | home
+hook: Every night you lie still for hours. What is your body doing?
+learn: While you sleep, your body grows and fixes itself.
+learn: Your brain sorts out what you learned that day.
+learn: Kids your age need about 9 to 12 hours of sleep a night.
+play: slider | You go to bed at 7:30 pm and wake at 6:30 am. How many hours is that? | 6 | 14 | 11 | hours | 0 | 1
+check: mcq | How much sleep do kids your age need? | About 9 to 12 hours* | About 2 hours | About 20 hours
+check: tf | Your body grows and fixes itself while you sleep. | true
+check: mcq | What does your brain do while you sleep? | Sorts out what you learned* | Switches off forever | Watches TV
+home: Work out how many hours you slept last night.
+skill: sleep
+
+@lesson 2.2 | Bedtime routine | 🛁 | home
+hook: Some kids fall asleep fast. Some lie awake for ages. What helps?
+learn: A bedtime routine is doing the same calm things in the same order each night.
+learn: It tells your body that sleep is coming.
+learn: Going to bed at about the same time every night helps too.
+play: order | Build a calm bedtime routine | Have a bath or shower; Put on pyjamas; Brush your teeth; Read a story; Lights out
+check: mcq | What is a bedtime routine? | The same calm steps each night* | Jumping on the bed | A late movie
+check: tf | Going to bed at the same time each night helps you sleep. | true
+check: mcq | Which is a calm bedtime activity? | Reading a book* | Running races | A scary video game
+home: Draw your bedtime routine as a chart and stick it on your wall.
+skill: sleep
+
+@lesson 2.3 | Screens and sleep | 📱 | home
+hook: You watch videos in bed and can't fall asleep. Why?
+learn: Screens keep your brain busy and awake.
+learn: Turning screens off about an hour before bed helps you fall asleep.
+learn: Keep phones and tablets out of the bedroom at night.
+play: sort | Helps sleep, Keeps you awake | Reading a paper book=Helps sleep; Playing a game on a tablet=Keeps you awake; Listening to quiet music=Helps sleep; Watching videos in bed=Keeps you awake; A warm bath=Helps sleep; Messaging friends late=Keeps you awake | Helps sleep or keeps you awake?
+check: mcq | When should screens go off? | About an hour before bed* | Never | When you fall asleep
+check: tf | Screens in bed can make it harder to fall asleep. | true
+check: mcq | Where should tablets sleep at night? | Outside the bedroom* | Under your pillow | In your hand
+home: Find a spot outside your bedroom where screens can "sleep" each night.
+skill: screens
+
+@lesson 2.4 | A sleepy room | 🛏️ | home
+hook: Bright lights, loud music and a hot room. Would you sleep well?
+learn: Bodies sleep best in a room that is dark, quiet and cool.
+learn: Close the curtains and turn off bright lights. A small night light is fine.
+learn: A comfy bed and a tidy room help you relax.
+play: tap | Tap what helps make a sleepy room | 🌑:yes:Darkness tells your body it's time to sleep; 🔇:yes:Quiet helps you relax; 📺:no; 🧸:yes:A cuddly toy can feel comforting; 💡:no; 🛏️:yes:A comfy bed helps; 🔊:no
+check: mcq | What kind of room helps you sleep? | Dark, quiet and cool* | Bright and loud | Hot and noisy
+check: tf | A small night light is OK. | true
+check: mcq | Your room is too bright at night. What could help? | Close the curtains* | Turn on more lights | Open the door to the TV
+home: Check your bedroom at bedtime. Is it dark, quiet and cool?
+skill: sleep
+
+@lesson 2.5 | Bad dreams | 🌙 | home
+hook: You wake up from a scary dream. Your heart is thumping. What can help?
+learn: Bad dreams happen to everyone. They feel real, but they aren't.
+learn: Take slow, deep breaths. Hug your cuddly toy.
+learn: Tell a grown-up. Talking about it can make it feel smaller.
+play: chat | You wake up from a bad dream and find a grown-up | them: Hey, are you OK? | me: I had a scary dream. Can you sit with me for a bit?*/Nothing, go away/I'm never sleeping again | them: Of course. Want to take some slow breaths together? | me: Yes. In... and out*/No, I'll stay scared/I'll watch videos instead
+check: mcq | After a bad dream, what helps? | Slow breaths and telling a grown-up* | Watching a scary show | Staying awake all night
+check: tf | Bad dreams happen to everyone. | true
+check: mcq | Dreams are… | Not real, even when they feel real* | Always true | Messages from aliens
+home: Pick a happy thing to picture if you ever wake up from a bad dream.
+skill: calm
+
+@lesson 2.6 | Tired signs | 🥱 | garden
+hook: You're grumpy, yawning and can't think. What might you need?
+learn: When you're tired, it's harder to listen, learn and be kind.
+learn: Small things can feel big, and you might get upset more easily.
+learn: Good sleep helps you feel happier and do your best.
+play: sort | Tired sign, Not a tired sign | Yawning a lot=Tired sign; Grumpy over small things=Tired sign; Laughing with friends=Not a tired sign; Rubbing your eyes=Tired sign; Full of energy=Not a tired sign; Finding it hard to focus=Tired sign | Is it a sign you're tired?
+check: mcq | What can being tired make harder? | Learning and being kind* | Breathing | Blinking
+check: tf | Good sleep can help you feel happier. | true
+check: mcq | You're yawning and grumpy at school. What might help tonight? | An earlier bedtime* | A later bedtime | More screens
+home: Notice how you feel after a good sleep and after a short one.
+skill: sleep
+
 @band builders
 @unit 1 | Habits | How tiny habits become big changes
 @unit 2 | Delayed gratification | Waiting for something better
@@ -152,6 +224,79 @@ check: mcq | What helps skills grow? | Practice and effort* | Luck only | Waitin
 home: Catch yourself saying "I can't" and add "yet".
 skill: growth
 
+@lesson 2.1 | Now or later? | ⏳ | garden
+hook: Every day you choose between "now" and "later". Why is "later" so hard?
+learn: Our brains love rewards right now. Waiting feels hard because the reward feels far away.
+learn: Choosing "later" often gets you something bigger or better.
+learn: Waiting is a skill. The more you practise, the easier it gets.
+play: sort | Reward now, Reward later | Spending pocket money on lollies today=Reward now; Saving for a skateboard=Reward later; Games instead of homework=Reward now; Practising piano to play a whole song=Reward later; Buying the first thing you see=Reward now; Training for the cross-country=Reward later | Now or later?
+check: mcq | Why is waiting hard? | Our brains like rewards right now* | Waiting is impossible | Clocks are slow
+check: tf | Waiting gets easier with practice. | true
+check: mcq | Which is a "later" reward? | Saving for a bike* | Eating lollies now | Buying a toy today
+home: Pick one small thing to wait for this week, like dessert after homework.
+skill: patience
+
+@lesson 2.2 | The marshmallow study | 🍬 | museum
+hook: In the 1960s, researchers offered kids one treat now, or two if they waited. What did they find?
+learn: In studies at Stanford University, kids were left alone with a treat. If they waited about 15 minutes, they got two.
+learn: Some waited and some didn't. Kids who waited often used tricks, like covering their eyes or singing.
+learn: Later research found waiting is easier when kids trust the grown-ups around them and feel secure. It's a skill that can grow.
+play: mystery | Kids were offered one treat now or two later; Researchers left them alone with the treat; It began at Stanford University in the 1960s; It's named after a squishy sweet | The marshmallow study* | The lolly lottery | The cookie contest
+check: mcq | How did some kids manage to wait? | Covering their eyes or singing* | Staring at the treat | Licking it a little
+check: tf | Later research found waiting is easier when kids trust the grown-ups around them. | true
+check: mcq | What does the study teach us? | Waiting is a skill you can practise* | Marshmallows are bad | Everyone waits the same
+home: Try a mini waiting test with a grown-up, using any small treat.
+skill: patience
+
+@lesson 2.3 | Tricks for waiting | 🧠 | garden
+hook: Your phone buzzes while you're doing homework. How do you not grab it?
+learn: Put temptations out of reach. A phone in another room is easier to ignore.
+learn: Make an if-then plan: "If I want my phone, then I'll finish one more question first."
+learn: Think about the treat differently. Picture a marshmallow as a fluffy cloud, not a yummy snack.
+play: match | Match each problem to a waiting trick | Phone keeps buzzing=Put it in another room; Want to spend all your money=Leave your card at home; Lollies in the cupboard=Ask for them to go on a high shelf; Can't stop thinking about a game=Make an if-then plan
+check: mcq | What's an if-then plan? | Deciding ahead what you'll do when tempted* | A maths question | A plan to give up
+check: tf | Putting temptations out of reach makes waiting easier. | true
+check: mcq | You want to save money at the mall. A good trick is… | Only take the money you plan to spend* | Take all your savings | Go every day
+home: Write one if-then plan for something that tempts you.
+skill: selfcontrol
+
+@lesson 2.4 | The 30-day list | 📝 | bank
+hook: You see a cool gadget for $60 and you want it right now. What if you waited 30 days?
+learn: Write each want on a list with the date. If you still want it after 30 days, think about buying it.
+learn: Often the urge fades, and you keep the money.
+learn: If you still want it, you'll know it's worth it, and you've had time to save.
+play: diff | Your want list on day 1 and day 30. Tap what changed. | Gadget $60; Game skin $10; Sneakers $90; Book $15 | Gadget: don't want it now; Game skin: don't want it now; Sneakers $90; Book $15
+check: mcq | What's the 30-day rule? | Wait 30 days before buying a want* | Spend it all within 30 days | Buy 30 things
+check: tf | Many urges to buy fade if you wait. | true
+check: gap | You skip a $60 gadget and a $10 skin. You kept $_ | 70
+home: Start a 30-day want list with today's date.
+skill: spending
+
+@lesson 2.5 | Instant everything | 📦 | online
+hook: Videos autoplay, parcels arrive tomorrow, games hand out instant rewards. Does that make waiting harder?
+learn: Lots of apps and games are designed to give quick little rewards so you keep going.
+learn: Autoplay, streaks and surprise rewards make it hard to stop.
+learn: Noticing the design helps you choose for yourself.
+play: tap | Tap the features designed to keep you hooked | ▶️:yes:Autoplay starts the next video before you choose; 🔥:yes:Streaks make you scared to miss a day; 🎁:yes:Surprise rewards keep you coming back; 🔔:yes:Notifications pull you back in; ⏸️:no; 🕐:no
+check: mcq | Why do apps use autoplay? | To keep you watching* | To help you sleep | To save power
+check: tf | Noticing app tricks can help you stop when you want to. | true
+check: mcq | A helpful way to beat autoplay? | Turn it off in settings* | Watch faster | Turn the sound up
+home: Turn off autoplay on one app with a grown-up.
+skill: screens
+
+@lesson 2.6 | Big goals | 🏔️ | garden
+hook: You want to save $300 for a bike. That's a long way! How do you not give up?
+learn: Break a big goal into small steps, like $20 a week for 15 weeks.
+learn: Track your progress so you can see it grow.
+learn: Celebrate milestones, like reaching halfway, with something small and free.
+try: $300 ÷ $20 a week = 15 weeks :: gap | $200 ÷ $25 a week = _ weeks | 8
+play: build | Build a plan for a $300 bike | Set the goal: a $300 bike; Choose a weekly amount: $20; Put a tracker on the wall; Save every payday; Celebrate at $150; Buy the bike at $300
+check: gap | $240 at $20 a week takes _ weeks | 12
+check: mcq | How do you stop a big goal feeling too big? | Break it into small steps* | Ignore it | Make it bigger
+check: tf | Celebrating milestones can help you keep going. | true
+home: Pick a big goal and work out how many weeks it would take to save for.
+skill: goals
+
 @band makers
 @unit 1 | Stress | Recognising it and handling it
 @unit 2 | Peer pressure | Saying no and staying you
@@ -228,6 +373,78 @@ check: mcq | {nz:In an emergency in NZ, call…~au:In an emergency in Australia,
 home: Save a helpline number in your phone.
 skill: help
 
+@lesson 2.1 | Kinds of pressure | 🧲 | garden
+hook: Nobody said "do it", but everyone's doing it. Is that still pressure?
+learn: Direct pressure is when someone asks or pushes you to do something.
+learn: Indirect pressure is feeling you should, because everyone else is.
+learn: Inside pressure is your own worry about missing out or not fitting in.
+play: sort | Direct, Indirect, Inside | "Come on, just try it"=Direct; Everyone at the party is vaping=Indirect; "I'll look lame if I don't"=Inside; "Do it or you're out of the group"=Direct; All your friends have the same shoes=Indirect; Worrying you'll miss out=Inside | What kind of pressure is it?
+check: mcq | Feeling you should do something because everyone else is. That's… | Indirect pressure* | Direct pressure | No pressure
+check: tf | Pressure can come from inside your own head. | true
+check: mcq | "Do it or you're out of the group." What kind of pressure is that? | Direct* | Inside | Indirect
+home: Think of a time you felt indirect pressure. What did you do?
+skill: peers
+
+@lesson 2.2 | Exit plans | 🚪 | home
+hook: You're at a party and things feel wrong. How do you leave without a scene?
+learn: Have an exit line ready: "I've got to go, my mum needs me home."
+learn: Agree a code word with your family. Text it, and they'll call or pick you up, no questions on the spot.
+learn: Blaming a parent is fine. It gives you an easy way out.
+play: chat | You're at a party that's getting out of hand | them: Hey, where are you going? It's just getting fun! | me: My dad's picking me up. I've got an early start*/I'm telling everyone's parents/Fine, I'll stay | them: Come on, five more minutes. | me: Can't, he's outside. See you Monday*/OK, whatever you want/You're all idiots
+check: mcq | What's a family code word for? | Getting picked up, no questions on the spot* | A secret handshake | Your wi-fi password
+check: tf | It's OK to blame a parent to get out of a situation. | true
+check: mcq | A good exit line is… | I've got to go, my mum needs me home* | A long argument | Saying nothing and staying
+home: Agree a code word with your family for when you need a pickup.
+skill: peers
+
+@lesson 2.3 | Online pressure | 📲 | online
+hook: The group chat dares everyone to post a mean meme about a classmate. Everyone's doing it. Do you?
+learn: Pressure online can feel stronger, because it's fast and lots of people are watching.
+learn: You can leave a chat, mute it, or simply not reply.
+learn: If a chat asks for pics or turns cruel, screenshot it and tell a trusted adult.
+play: path | The group chat dares everyone to post a mean meme about a classmate. | Don't post, and message the classmate something kind => good: You didn't join in, and you helped someone feel less alone. | Post it so you fit in => bad: Posts spread and stick. It could really hurt them, and come back on you. | Post it, then delete it => bad: Screenshots last forever. Deleting doesn't undo the hurt.
+check: mcq | A group chat turns cruel. What can you do? | Leave or mute it, and tell a trusted adult* | Join in | Share it more widely
+check: tf | Deleting a post means nobody can ever see it again. | false | Screenshots can last forever.
+check: mcq | Someone in a chat pressures you for a photo. You… | Say no, screenshot it and tell a trusted adult* | Send it to keep them happy | Keep it secret
+home: Find how to mute or leave a group chat on an app you use.
+skill: peers
+
+@lesson 2.4 | Good pressure | 🌟 | garden
+hook: Can peer pressure ever be good?
+learn: Yes. Friends can push you to try out for a team, study harder or be kinder.
+learn: Spend time with people who bring out your best.
+learn: You can be that friend too.
+play: sort | Positive pressure, Negative pressure | "Come to training with me!"=Positive pressure; "Let's skip school"=Negative pressure; "Study with us for the test"=Positive pressure; "Just one vape, everyone does"=Negative pressure; "Let's join the beach clean-up"=Positive pressure; "Let's tease the new kid"=Negative pressure | Positive or negative?
+check: mcq | Which is positive peer pressure? | A friend getting you to study for a test* | A friend daring you to shoplift | A friend telling you to lie
+check: tf | Friends can push you to be better. | true
+check: mcq | How can you be a positive influence? | Invite friends to good things* | Pressure them to skip class | Laugh at people
+home: Think of a friend who brings out your best, and tell them.
+skill: friendship
+
+@lesson 2.5 | Speaking up | 📣 | stage
+hook: Your friends are teasing someone. You feel bad but stay quiet. Is staying quiet a choice?
+learn: Bystanders see something happen. Upstanders do something about it.
+learn: You don't need a speech. "Leave it, that's not funny" can be enough.
+learn: You can also check on the person later, or tell a trusted adult.
+play: chat | Your friends are mocking a classmate's shoes | them: Look at his shoes, haha! | me: Leave it, that's not funny*/Haha, yeah/Say nothing and laugh along | them: Relax, it's just a joke. | me: Not to him. Let's talk about something else*/Fine, it is funny/You're right, sorry
+check: mcq | What's an upstander? | Someone who does something to help* | Someone standing on a chair | Someone who joins in
+check: tf | A short line like "That's not funny" can make a difference. | true
+check: mcq | You didn't feel safe speaking up. What else can you do? | Check on them later or tell a trusted adult* | Nothing at all | Join in next time
+home: Think of one short line you could use to stand up for someone.
+skill: upstander
+
+@lesson 2.6 | Spending pressure | 🛍️ | stall
+hook: Your friends all have $200 sneakers. Yours are from the supermarket. Do you need new ones?
+learn: Spending pressure is feeling you have to buy things to fit in.
+learn: Real friends like you for you, not your stuff.
+learn: Suggest cheaper plans, like a picnic instead of a pricey outing, and stick to your budget.
+play: debate | Should you spend your savings to keep up with what friends have? | No. Spend on what matters to you. Real friends won't mind* | Yes. Fitting in is worth any price | Sometimes having the same thing helps you join in, like the right gear for a sport. It's worth it when it really matters to you.
+check: mcq | Your friends plan an expensive day out. You could… | Suggest a cheaper plan* | Borrow money you can't pay back | Lie about where you are
+check: tf | Real friends like you for who you are. | true
+check: mcq | What's spending pressure? | Feeling you must buy things to fit in* | Paying with a card | A sale
+home: List three fun things to do with friends that cost less than $5.
+skill: spending
+
 @band launchers
 @unit 1 | Wellbeing at work | Boundaries, breaks and burnout
 @unit 2 | Money stress | When money worries hit
@@ -302,4 +519,80 @@ check: mcq | When should you build a support network? | Before you need it* | On
 check: tf | Checking in on friends is part of a support network. | true
 check: mcq | Who can help with feeling low for weeks? | A doctor or counsellor* | An advertiser | Nobody
 home: Write down three people you could call for help.
+skill: help
+
+@lesson 2.1 | How money stress feels | 😟 | garden
+hook: Money worries can show up in your body. How?
+learn: Money stress can mean poor sleep, headaches, snapping at people, or avoiding your bank app.
+learn: It's very common, and it doesn't mean you're bad with money.
+learn: Noticing the signs is the first step to doing something about it.
+play: tap | Tap the common signs of money stress | 😴:yes:Trouble sleeping; 🤕:yes:Headaches; 😠:yes:Snapping at people; 📵:yes:Avoiding your bank app or mail; 🎉:no; 😌:no; 🍔:yes:Comfort spending
+check: mcq | Which is a sign of money stress? | Avoiding your bank app* | Sleeping well | Feeling relaxed
+check: tf | Money stress is common. | true
+check: mcq | What's the first step? | Noticing the signs* | Hiding all your bills | Spending more
+home: Ask a grown-up what helps them when money feels tight.
+skill: moneystress
+
+@lesson 2.2 | Talking about money | 🗣️ | home
+hook: Your flatmate keeps paying the power bill late. You're stressed but haven't said anything. Now what?
+learn: Talking about money feels awkward, but silence usually makes it worse.
+learn: Pick a calm time and use "I" statements: "I get stressed when the bill's late."
+learn: Bring a plan, like a shared app or an automatic payment for each person's share.
+play: chat | Talking to a flatmate about late bills | them: Hey, what's up? | me: I get stressed when the power bill's late. Can we sort out a plan?*/You're useless with money/Nothing, forget it | them: Yeah, sorry. I keep forgetting. | me: Could we each set up an automatic payment for our share?*/Just pay it all from now on/Whatever, I'll move out
+check: mcq | A good way to start a money talk? | "I get stressed when…"* | "You always…" | Saying nothing
+check: tf | Staying silent about money problems usually makes them worse. | true
+check: mcq | What helps a money talk go well? | A calm time and a plan* | Shouting | A text at 2am
+home: Talk with a grown-up about how your household shares money jobs.
+skill: communication
+
+@lesson 2.3 | Hardship help | 🤝 | bank
+hook: You lose your job and can't make your loan repayment. Is it too late?
+learn: Banks and lenders have hardship teams. Call as soon as you can, ideally before you miss a payment.
+learn: They may lower repayments, pause them for a while or stretch the loan out.
+learn: {nz:Under NZ lending law, you can apply for a hardship change if illness, job loss, a relationship ending or a similar event means you can't pay.~au:Under Australian credit law, you can ask your lender for a hardship change if you can't meet your repayments.}
+learn: Power, water and phone companies have hardship help too.
+play: order | You've lost your job and a repayment is due. Put the steps in order. | Work out what you can afford to pay; Call the lender's hardship team; Explain what's happened and what you can pay; Agree a new plan in writing; Get free help from a {nz:financial mentor~au:financial counsellor} if you need it
+check: mcq | When should you contact your lender about hardship? | As soon as you know you'll struggle* | After three missed payments | Never
+check: tf | Lenders may lower or pause repayments for a while. | true
+check: mcq | Which events can count as hardship? | Job loss or illness* | Wanting a holiday | A new phone coming out
+home: Find the hardship page on a bank's website.
+skill: hardship
+
+@lesson 2.4 | Debt traps | 🪤 | bank
+hook: You're short $300. An ad says "Instant cash, no credit check!" What's the catch?
+learn: Payday and other high-cost loans are fast, but very expensive.
+learn: {nz:NZ caps high-cost loans, so the total interest and fees can't be more than the amount you borrowed.~au:Australia caps small loans of up to $2,000 at a 20% set-up fee plus 4% a month.}
+learn: Even with caps, they can trap you if you borrow again to repay. Look for cheaper help first.
+learn: {nz:Ask about no-interest loans from community lenders, or Work and Income for urgent costs.~au:Ask about No Interest Loans (NILs) from community lenders, or a Centrelink advance payment.}
+play: price | You need $300. Which costs less in total? | Payday loan, repay $480 over a year:480:1:loan; No-interest community loan, repay $300:300:1:loan
+check: mcq | What's a big risk with payday loans? | Borrowing again to repay, and getting trapped* | They're too cheap | They take years to arrive
+check: tf | No-interest loans may be available from community lenders. | true
+check: mcq | {nz:In NZ, the interest and fees on a high-cost loan can't be more than…~au:In Australia, small loans of up to $2,000 are capped at…} | {nz:The amount you borrowed~au:A 20% set-up fee plus 4% a month}* | {nz:$5~au:Nothing at all} | {nz:Ten times the loan~au:100% a day}
+home: Look up {nz:Good Shepherd NZ's no-interest loans~au:Good Shepherd's No Interest Loans} with a grown-up.
+skill: debt
+
+@lesson 2.5 | Small steps | 🪜 | bank
+hook: Money stress feels huge. What's one small thing you could do this week?
+learn: Start a small emergency fund, even $10 a week. $500 covers lots of surprises.
+learn: Automate it: set a transfer for payday so you don't have to think about it.
+learn: Small wins build confidence and calm.
+try: $10 a week for 50 weeks = $500 :: gap | $20 a week for 25 weeks = $_ | 500
+play: budget | You take home $650 a week. Build in a buffer. | 650 | Rent=250; Food=110; Transport=60; Phone=15; Emergency fund=0; Fun=0 | Car repair:120
+check: gap | $15 a week for 20 weeks = $_ | 300
+check: mcq | Why automate your savings? | It happens without you having to remember* | It costs more | Banks force you to
+check: tf | A small emergency fund can ease money stress. | true
+home: Set up an automatic weekly transfer to savings, even a small one.
+skill: savings
+
+@lesson 2.6 | More than money | ☎️ | garden
+hook: Sometimes money stress turns into feeling hopeless. What then?
+learn: If stress is affecting your sleep, mood or daily life for weeks, talk to someone.
+learn: {nz:Free call or text 1737 any time to talk with a trained counsellor.~au:Call Lifeline on 13 11 14 any time to talk with a trained crisis supporter.}
+learn: If you or someone else is in danger right now, call {nz:111~au:000}.
+learn: A GP can help too. Asking for help is a strong move, not a weak one.
+play: path | A friend says they're so stressed about debt they don't see the point of anything. | Listen, take it seriously, and help them contact {nz:1737~au:Lifeline} or a GP => good: You showed you care and connected them with real help. | Tell them to cheer up, it's only money => bad: That can leave them feeling unheard. Take it seriously. | Keep it secret and do nothing => bad: If you're worried about their safety, get help, even if they ask you not to.
+check: mcq | {nz:What number can you free call or text to talk with a counsellor?~au:What's Lifeline's number?} | {nz:1737~au:13 11 14}* | 123 | 555
+check: tf | Asking for help with stress is a sign of weakness. | false | It's a strong, smart move.
+check: mcq | Someone is in danger right now. You call… | {nz:111~au:000}* | A friend's mum | Nobody
+home: Save {nz:1737~au:Lifeline, 13 11 14,} in your phone.
 skill: help

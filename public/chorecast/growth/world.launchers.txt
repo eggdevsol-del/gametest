@@ -75,3 +75,75 @@ check: mcq | What helps systems change? | Research, partners and persistence* | 
 home: Pick a problem you care about and name one possible cause.
 skill: advocacy
 
+@lesson 2.1 | Turning 18 | 🎂 | townhall
+hook: You turn 18 tomorrow. What legally changes?
+learn: At 18 you can vote, buy alcohol and be called for jury service.
+learn: Contracts you sign are generally binding, and you're responsible for your own debts.
+learn: {nz:Some ages are different. You must be 20 to enter a casino in NZ.~au:Some rules, like driver licensing, differ by state, so check yours.}
+play: sort | Changes at 18, Not at 18 | Voting in a general election=Changes at 18; Buying alcohol=Changes at 18; Being called for jury service=Changes at 18; {nz:Entering a casino~au:Getting a full, unrestricted driver's licence}=Not at 18; Signing a binding phone contract on your own=Changes at 18; Getting a learner licence=Not at 18 | What changes at 18?
+check: mcq | Which can you do at 18? | Vote in a general election* | Get the pension | Stop paying tax
+check: tf | At 18, you're generally responsible for your own debts. | true
+check: mcq | {nz:How old must you be to enter a casino in NZ?~au:Who sets many age rules, like driver licensing?} | {nz:20~au:Your state or territory}* | {nz:12~au:Your school} | {nz:16~au:Your bank}
+home: List three things you'll be able to do at 18 that you can't do now.
+skill: rights
+
+@lesson 2.2 | Driving and the law | 🚗 | townhall
+hook: You've just got your licence. What rules are different for new drivers?
+learn: {nz:In NZ you can get a learner licence at 16, then a restricted licence, then a full licence.~au:In most states you can get a learner permit at 16, then P plates, then a full licence.}
+learn: {nz:Drivers under 20 must have zero alcohol. Any alcohol can mean a fine and losing your licence.~au:Learner and P-plate drivers must have zero alcohol. Breaking it can mean losing your licence.}
+learn: Using a handheld phone while driving is illegal for everyone.
+play: path | You're 17 with your {nz:restricted licence~au:P plates}. Friends want a lift home from a party where you had one drink. | Don't drive. Get a lift or a taxi => good: Zero alcohol means zero. You kept everyone safe and kept your licence. | Drive carefully, it was only one => bad: For you the limit is zero. You could lose your licence, or far worse. | Let a friend who's been drinking drive instead => bad: That's just as dangerous.
+check: mcq | {nz:What's the alcohol limit for NZ drivers under 20?~au:What's the alcohol limit for learner and P-plate drivers?} | Zero* | Two drinks | Whatever feels OK
+check: tf | Using a handheld phone while driving is illegal. | true
+check: mcq | {nz:At what age can you get a learner licence in NZ?~au:At what age can you get a learner permit in most states?} | 16* | 12 | 21
+home: Read the first section of the {nz:NZ Road Code~au:your state's learner driver handbook} with a grown-up.
+skill: driving
+
+@lesson 2.3 | Consumer rights | 🧾 | stall
+hook: Your new $300 headphones break after a month. The shop says "No refunds." Is that the end?
+learn: {nz:Under the Consumer Guarantees Act, things you buy must be of acceptable quality, fit for purpose and match their description.~au:Under the Australian Consumer Law, things you buy must be of acceptable quality, fit for purpose and match their description.}
+learn: If there's a fault, you can ask for a repair, a replacement or a refund. For a major failure, you can choose a refund or a replacement.
+learn: A "No refunds" sign can't take these rights away. Change of mind is different. That's up to the shop.
+play: chat | Your headphones broke after a month | them: Sorry, we don't do refunds. | me: They stopped working after a month, so they aren't acceptable quality. Could you repair, replace or refund them?*/Fine, I'll just leave/You're scamming me! | them: Let me check with my manager. | me: Thanks. Here's my receipt*/Hurry up/I'll post a bad review
+check: mcq | Your new kettle breaks after a week. What can you ask for? | A repair, replacement or refund* | Nothing | A free fridge
+check: tf | A "No refunds" sign takes away your consumer rights. | false | Your rights under the law still apply.
+check: mcq | You simply changed your mind about a shirt. The shop… | Doesn't have to refund, unless its policy says so* | Must refund you by law | Must give you two shirts
+home: Read the consumer rights page on {nz:consumerprotection.govt.nz~au:accc.gov.au}.
+skill: consumer
+
+@lesson 2.4 | Fines and debts | 🧾 | townhall
+hook: You get a $150 parking fine and forget about it. What happens?
+learn: Unpaid fines don't go away. They usually grow, with extra costs added.
+learn: {nz:In NZ, overdue fines can be taken from your pay or bank account, and you can be stopped at the airport when leaving the country.~au:In Australia, unpaid fines can lead to your licence or car registration being suspended, and money taken from your wages or bank account.}
+learn: If you can't pay, contact them early. Payment plans are usually available.
+play: path | You get a $150 fine you can't pay right now. | Contact them and ask for a payment plan => good: Sorted. Small payments and no extra costs. | Ignore it and hope it goes away => bad: It grows, and you could face bigger problems later. | Throw the letters away => bad: It doesn't disappear. It just gets worse without you knowing.
+check: mcq | What happens to unpaid fines? | They grow and lead to bigger problems* | They vanish | They get cheaper
+check: tf | Payment plans are often available for fines. | true
+check: mcq | {nz:What can happen with overdue fines in NZ?~au:What can happen with unpaid fines in Australia?} | {nz:You can be stopped at the airport~au:Your licence can be suspended}* | Nothing | You win a prize
+home: Find how to check for unpaid fines on {nz:justice.govt.nz~au:your state's fines website}.
+skill: fines
+
+@lesson 2.5 | Free legal help | 🧑‍⚖️ | townhall
+hook: You're in a legal mess, but lawyers cost a lot. Where can you get help?
+learn: {nz:Community Law Centres give free legal help across NZ. Youthlaw Aotearoa helps people under 25.~au:Community legal centres give free legal help. Youth Law Australia helps people under 25, and Legal Aid can help too.}
+learn: {nz:Citizens Advice Bureau can help you work out where to go.~au:Your state's Legal Aid can help you work out where to go.}
+learn: Get help early. Small problems are easier to fix.
+play: match | Match each problem to a good first stop | A bond dispute=A free tenancy advice service; Unpaid wages={nz:Employment New Zealand~au:The Fair Work Ombudsman}; A faulty product from a shop={nz:Consumer Protection~au:Your state's fair trading office}; Not sure where to start={nz:Citizens Advice Bureau~au:Legal Aid}
+check: mcq | Where can you get free legal help? | {nz:A Community Law Centre~au:A community legal centre}* | A gaming forum | Nowhere
+check: tf | Getting legal help early can make problems easier to fix. | true
+check: mcq | {nz:Who does Youthlaw Aotearoa help?~au:Who does Youth Law Australia help?} | People under 25* | Only lawyers | Only businesses
+home: Find your nearest {nz:Community Law Centre~au:community legal centre} online.
+skill: help
+
+@lesson 2.6 | Tribunals | ⚖️ | townhall
+hook: Your old flatmate owes you $600 and won't pay. Do you need a court and a lawyer?
+learn: {nz:The Disputes Tribunal handles smaller money disputes. It's cheaper and quicker than court, and lawyers usually can't represent you there.~au:Each state has a tribunal or small claims court for smaller disputes. It's cheaper and quicker than a full court.}
+learn: Bring evidence: messages, receipts, photos and dates.
+learn: Try to sort it out first. Tribunals expect you to have tried.
+play: build | Get ready for a tribunal hearing | Try to sort it out directly first; Collect texts, receipts and photos; Write a short timeline of what happened; File your claim and pay the small fee; Explain your side calmly at the hearing
+check: mcq | {nz:Can lawyers usually represent you at the Disputes Tribunal?~au:What is a small claims tribunal for?} | {nz:No~au:Smaller disputes, faster and cheaper than court}* | {nz:Yes, you must have one~au:Murder trials} | {nz:Only on Fridays~au:Changing laws}
+check: tf | Good evidence includes messages, receipts and photos. | true
+check: mcq | Before going to a tribunal, you should… | Try to sort it out directly* | Post about it online | Do nothing
+home: Look up how to file a claim on {nz:disputestribunal.govt.nz~au:your state's tribunal website}.
+skill: law
+

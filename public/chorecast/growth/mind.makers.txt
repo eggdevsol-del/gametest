@@ -74,3 +74,75 @@ check: mcq | {nz:In an emergency in NZ, call…~au:In an emergency in Australia,
 home: Save a helpline number in your phone.
 skill: help
 
+@lesson 2.1 | Kinds of pressure | 🧲 | garden
+hook: Nobody said "do it", but everyone's doing it. Is that still pressure?
+learn: Direct pressure is when someone asks or pushes you to do something.
+learn: Indirect pressure is feeling you should, because everyone else is.
+learn: Inside pressure is your own worry about missing out or not fitting in.
+play: sort | Direct, Indirect, Inside | "Come on, just try it"=Direct; Everyone at the party is vaping=Indirect; "I'll look lame if I don't"=Inside; "Do it or you're out of the group"=Direct; All your friends have the same shoes=Indirect; Worrying you'll miss out=Inside | What kind of pressure is it?
+check: mcq | Feeling you should do something because everyone else is. That's… | Indirect pressure* | Direct pressure | No pressure
+check: tf | Pressure can come from inside your own head. | true
+check: mcq | "Do it or you're out of the group." What kind of pressure is that? | Direct* | Inside | Indirect
+home: Think of a time you felt indirect pressure. What did you do?
+skill: peers
+
+@lesson 2.2 | Exit plans | 🚪 | home
+hook: You're at a party and things feel wrong. How do you leave without a scene?
+learn: Have an exit line ready: "I've got to go, my mum needs me home."
+learn: Agree a code word with your family. Text it, and they'll call or pick you up, no questions on the spot.
+learn: Blaming a parent is fine. It gives you an easy way out.
+play: chat | You're at a party that's getting out of hand | them: Hey, where are you going? It's just getting fun! | me: My dad's picking me up. I've got an early start*/I'm telling everyone's parents/Fine, I'll stay | them: Come on, five more minutes. | me: Can't, he's outside. See you Monday*/OK, whatever you want/You're all idiots
+check: mcq | What's a family code word for? | Getting picked up, no questions on the spot* | A secret handshake | Your wi-fi password
+check: tf | It's OK to blame a parent to get out of a situation. | true
+check: mcq | A good exit line is… | I've got to go, my mum needs me home* | A long argument | Saying nothing and staying
+home: Agree a code word with your family for when you need a pickup.
+skill: peers
+
+@lesson 2.3 | Online pressure | 📲 | online
+hook: The group chat dares everyone to post a mean meme about a classmate. Everyone's doing it. Do you?
+learn: Pressure online can feel stronger, because it's fast and lots of people are watching.
+learn: You can leave a chat, mute it, or simply not reply.
+learn: If a chat asks for pics or turns cruel, screenshot it and tell a trusted adult.
+play: path | The group chat dares everyone to post a mean meme about a classmate. | Don't post, and message the classmate something kind => good: You didn't join in, and you helped someone feel less alone. | Post it so you fit in => bad: Posts spread and stick. It could really hurt them, and come back on you. | Post it, then delete it => bad: Screenshots last forever. Deleting doesn't undo the hurt.
+check: mcq | A group chat turns cruel. What can you do? | Leave or mute it, and tell a trusted adult* | Join in | Share it more widely
+check: tf | Deleting a post means nobody can ever see it again. | false | Screenshots can last forever.
+check: mcq | Someone in a chat pressures you for a photo. You… | Say no, screenshot it and tell a trusted adult* | Send it to keep them happy | Keep it secret
+home: Find how to mute or leave a group chat on an app you use.
+skill: peers
+
+@lesson 2.4 | Good pressure | 🌟 | garden
+hook: Can peer pressure ever be good?
+learn: Yes. Friends can push you to try out for a team, study harder or be kinder.
+learn: Spend time with people who bring out your best.
+learn: You can be that friend too.
+play: sort | Positive pressure, Negative pressure | "Come to training with me!"=Positive pressure; "Let's skip school"=Negative pressure; "Study with us for the test"=Positive pressure; "Just one vape, everyone does"=Negative pressure; "Let's join the beach clean-up"=Positive pressure; "Let's tease the new kid"=Negative pressure | Positive or negative?
+check: mcq | Which is positive peer pressure? | A friend getting you to study for a test* | A friend daring you to shoplift | A friend telling you to lie
+check: tf | Friends can push you to be better. | true
+check: mcq | How can you be a positive influence? | Invite friends to good things* | Pressure them to skip class | Laugh at people
+home: Think of a friend who brings out your best, and tell them.
+skill: friendship
+
+@lesson 2.5 | Speaking up | 📣 | stage
+hook: Your friends are teasing someone. You feel bad but stay quiet. Is staying quiet a choice?
+learn: Bystanders see something happen. Upstanders do something about it.
+learn: You don't need a speech. "Leave it, that's not funny" can be enough.
+learn: You can also check on the person later, or tell a trusted adult.
+play: chat | Your friends are mocking a classmate's shoes | them: Look at his shoes, haha! | me: Leave it, that's not funny*/Haha, yeah/Say nothing and laugh along | them: Relax, it's just a joke. | me: Not to him. Let's talk about something else*/Fine, it is funny/You're right, sorry
+check: mcq | What's an upstander? | Someone who does something to help* | Someone standing on a chair | Someone who joins in
+check: tf | A short line like "That's not funny" can make a difference. | true
+check: mcq | You didn't feel safe speaking up. What else can you do? | Check on them later or tell a trusted adult* | Nothing at all | Join in next time
+home: Think of one short line you could use to stand up for someone.
+skill: upstander
+
+@lesson 2.6 | Spending pressure | 🛍️ | stall
+hook: Your friends all have $200 sneakers. Yours are from the supermarket. Do you need new ones?
+learn: Spending pressure is feeling you have to buy things to fit in.
+learn: Real friends like you for you, not your stuff.
+learn: Suggest cheaper plans, like a picnic instead of a pricey outing, and stick to your budget.
+play: debate | Should you spend your savings to keep up with what friends have? | No. Spend on what matters to you. Real friends won't mind* | Yes. Fitting in is worth any price | Sometimes having the same thing helps you join in, like the right gear for a sport. It's worth it when it really matters to you.
+check: mcq | Your friends plan an expensive day out. You could… | Suggest a cheaper plan* | Borrow money you can't pay back | Lie about where you are
+check: tf | Real friends like you for who you are. | true
+check: mcq | What's spending pressure? | Feeling you must buy things to fit in* | Paying with a card | A sale
+home: List three fun things to do with friends that cost less than $5.
+skill: spending
+

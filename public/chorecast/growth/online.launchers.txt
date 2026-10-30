@@ -75,3 +75,77 @@ check: mcq | Honest AI use means… | Following the rules and saying when you us
 home: Read your school's rules about using AI.
 skill: ai
 
+@lesson 2.1 | Lock down your banking | 🔐 | bank
+hook: Your banking app holds all your money. How locked is the door?
+learn: Use a strong, unique password or PIN, and turn on fingerprint or face login.
+learn: Turn on alerts for every payment, so you notice anything odd fast.
+learn: Keep your phone updated, and only get your bank's app from the official app store.
+play: sort | Safer, Riskier | A unique password for your bank=Safer; Your birthday as your PIN=Riskier; Payment alerts turned on=Safer; Lending your phone, unlocked, to a stranger=Riskier; Updating your phone=Safer; Downloading a "bank app" from a link in a text=Riskier | Safer or riskier?
+check: mcq | Where should you get your bank's app? | The official app store* | A link in a text | A friend's file
+check: tf | Payment alerts help you spot fraud fast. | true
+check: mcq | Which PIN is weakest? | Your birth year* | Six random digits | A long passphrase
+home: Turn on payment alerts in your banking app.
+skill: security
+
+@lesson 2.2 | Payments are hard to undo | 💸 | bank
+hook: You send $400 to the wrong account by mistyping one digit. Can you just undo it?
+learn: Once a bank transfer goes, it can be very hard to get back.
+learn: Double-check the account number and name before you pay.
+learn: Many banks now check whether the name matches the account. If you get a mismatch warning, stop and check.
+learn: If you make a mistake, call your bank straight away.
+play: diff | The invoice and what you typed. Tap the mistakes. | Name: Aroha Smith; {nz:Account 12-3456-7890123-00~au:BSB 123-456, account 12345678}; Amount: $400; Reference: Rent | Name: Aroha Smith; {nz:Account 12-3456-7890132-00~au:BSB 123-456, account 12345687}; Amount: $4,000; Reference: Rent
+check: mcq | You get a "name doesn't match" warning. You… | Stop and check with the person* | Pay anyway | Try a different name
+check: tf | Bank transfers are always easy to reverse. | false | Once sent, money can be very hard to get back.
+check: mcq | You sent money to the wrong account. First step? | Call your bank straight away* | Wait a month | Send it again
+home: Help a grown-up check a payment's details before they press pay.
+skill: payments
+
+@lesson 2.3 | Marketplace scams | 🛒 | online
+hook: You're selling a bike online. A buyer says they've overpaid and asks you to refund the difference. Hmm.
+learn: Fake overpayment is a classic scam. Their payment never really arrives, but your refund does.
+learn: {nz:Watch for fake payment screenshots, and buyers who send a link so you can "receive" money by entering your card.~au:Watch for fake PayID emails saying you must pay a fee to "upgrade" your account. PayID never charges that.}
+learn: Meet in a safe public place, check the money is really in your account, and never send money to receive money.
+play: scam | Real buyer or scam? | Buyer comes to see the bike, pays, and you check your account before handing it over=real; Buyer "overpaid" and wants the extra back=scam; {nz:Buyer sends a link so you can receive payment by entering your card~au:Email from "PayID" says you must pay $100 to upgrade}=scam; Buyer asks what size the bike frame is=real; Buyer wants you to pay for their courier first=scam | Never send money to receive money.
+check: mcq | A buyer says they overpaid and asks for a refund. That's… | A classic scam* | Very kind | Normal
+check: tf | You should check the money is really in your account before handing over an item. | true
+check: mcq | Safest way to sell a bike to a local buyer? | Meet somewhere public and check the payment has arrived* | Post it before they pay | Pay their courier fee
+home: Read the safety tips on a marketplace your family uses.
+skill: scams
+
+@lesson 2.4 | Remote access scams | 🖥️ | online
+hook: A call: "This is your internet provider. Your computer has a virus. Install this app so we can fix it." What do you do?
+learn: Remote access scams trick you into letting a scammer control your computer or phone.
+learn: Once in, they can watch you log in to your bank and move money.
+learn: Real companies don't cold-call to fix your device. Hang up.
+play: path | A caller says they're from your internet provider and need remote access to fix a virus. | Hang up and call the provider on its official number => good: You checked for yourself. The real provider knows nothing about it. | Install the app they name => bad: They can now see everything, including your banking. | Read out a code they just texted you => bad: Codes let them into your accounts. Never share them.
+check: mcq | Someone asks you to install an app so they can fix your computer. You… | Hang up* | Install it | Give them your passwords
+check: tf | Real companies often cold-call to fix your computer. | false
+check: mcq | Already let them in? First step? | Disconnect the device and call your bank* | Wait and see | Let them finish
+home: Tell an older relative about remote access scams. They're common targets.
+skill: scams
+
+@lesson 2.5 | Money mules | 🐴 | bank
+hook: An ad says: "Earn $500 a week. Just receive money into your account and pass it on." Easy money?
+learn: That's money mule recruiting. You'd be helping criminals move stolen money.
+learn: Being a money mule is a crime, even if you didn't know where the money came from.
+learn: Your account could be closed and you could face charges. Never let anyone use your account.
+play: scam | Real job or money mule trap? | Café job, with wages paid into your account each week=real; Receive transfers and send them on as gift cards=scam; Lend your bank login to a friend's cousin "for a few days"=scam; Tutoring, paid by the student's parents=real; "Payment processing agent", no experience, work from home=scam | Never let anyone move money through your account.
+check: mcq | What's a money mule? | Someone who moves stolen money through their account* | A farm animal | A savings account
+check: tf | You can get in trouble for being a money mule even if you didn't know. | true
+check: mcq | A stranger wants to use your account for "a few transfers". You… | Say no* | Say yes for a fee | Give them your card
+home: Share this warning with a friend who's job hunting.
+skill: scams
+
+@lesson 2.6 | If you've been scammed | 🚨 | bank
+hook: You realise you've just typed your card details into a scam site. The clock is ticking. What first?
+learn: Call your bank straight away. They may be able to stop payments or freeze your card.
+learn: Change your passwords, starting with email and banking, and turn on two-step login.
+learn: {nz:Report it to Netsafe, and to Police on 105 if you lost money. IDCARE can help if your identity was stolen.~au:Report it to ReportCyber and Scamwatch. IDCARE can help if your identity was stolen.}
+learn: Being scammed isn't stupid. Scammers are professionals, and reporting helps stop them.
+play: order | You've been scammed. Put the steps in order. | Call your bank straight away; Change your email and banking passwords; Turn on two-step login; Report the scam; Watch your statements for odd payments
+check: mcq | What's the first thing to do after giving card details to a scammer? | Call your bank* | Delete your emails | Wait a week
+check: tf | Only careless people get scammed. | false | Scammers are professionals. Anyone can be caught.
+check: mcq | {nz:Where can you report scams in NZ?~au:Where can you report scams in Australia?} | {nz:Netsafe and the Police~au:Scamwatch and ReportCyber}* | A comment section | Nowhere
+home: Save your bank's fraud phone number in your contacts.
+skill: scams
+

@@ -75,6 +75,78 @@ check: mcq | First step when something feels wrong? | Stop and close it* | Keep 
 home: Agree with a grown-up who you'd tell if something online felt wrong.
 skill: safety
 
+@lesson 2.1 | Before you download | ⬇️ | online
+hook: You find a cool new game. Do you download it straight away?
+learn: Always ask a grown-up before you download an app or game.
+learn: Some apps are for older kids. Some have ads or ask for money.
+learn: A grown-up can check if it's right for you.
+play: path | You see a fun-looking game in the app store. | Ask a grown-up to check it with you => good: They checked it suits your age. Now you can play safely! | Download it quickly before anyone sees => bad: It might not be safe, and it could cost money. | Download five games at once => bad: That's five things nobody checked.
+check: mcq | Before downloading a game, you… | Ask a grown-up* | Just do it | Ask a stranger online
+check: tf | Some apps are made for older kids. | true
+check: mcq | Why ask before downloading? | A grown-up can check it's safe* | It's more fun | Games are scary
+home: Look at an app with a grown-up and find its age rating.
+skill: asking
+
+@lesson 2.2 | Before you buy | 🛒 | online
+hook: A game says "Buy 100 gems!" with a big shiny button. Do you tap it?
+learn: Gems, coins and extra lives often cost real money.
+learn: Never buy anything without asking a grown-up first.
+learn: Never use someone's card or password without asking.
+play: tap | Tap the buttons that might cost real money | 💎:yes:Gems often cost real money; 🛒:yes:Shop buttons can charge money; ▶️:no; 🎁:yes:Special offers often cost money; ⚙️:no; 🔓:yes:Unlock buttons can cost money
+check: mcq | A game asks you to buy gems. You… | Ask a grown-up first* | Tap buy | Use a card from the drawer
+check: tf | Gems in games can cost real money. | true
+check: mcq | Can you use a grown-up's password without asking? | No, never* | Yes, if it's quick | Only on weekends
+home: Ask a grown-up to show you how purchases are checked on your device.
+skill: inapp
+
+@lesson 2.3 | Before you share a photo | 📸 | online
+hook: You took a funny photo of your friend. Can you share it?
+learn: Before you share a photo, ask a grown-up.
+learn: Ask the people in it too. They might not want it shared.
+learn: Photos online can be hard to take back.
+play: chat | You want to share a photo of your friend | them: Ha! That photo of me pulling a face is so silly! | me: Is it OK if I send it to Gran?*/I'm posting it everywhere/Too late, I sent it to everyone | them: Hmm, just Gran is fine. Nobody else. | me: OK, just Gran. I'll ask a grown-up to help me send it*/I'll send it to the whole class/Whatever
+check: mcq | Before sharing a photo of a friend, you… | Ask them and a grown-up* | Post it fast | Share it with everyone
+check: tf | Photos online can be hard to take back. | true
+check: mcq | Your friend says no to sharing a photo. You… | Don't share it* | Share it anyway | Laugh at them
+home: Look at some photos with a grown-up and decide which ones are OK to share.
+skill: privacy
+
+@lesson 2.4 | New friend requests | 👋 | online
+hook: Someone you don't know wants to be your friend in a game. Do you say yes?
+learn: Only be online friends with people you know in real life.
+learn: Ask a grown-up before you accept a friend request.
+learn: People online aren't always who they say they are.
+play: sort | Ask a grown-up, Say no | A friend from your class=Ask a grown-up; Someone you've never met=Say no; Your cousin=Ask a grown-up; A player who says they're 9, but you don't know them=Say no; Your neighbour's kid=Ask a grown-up; Someone offering free gems to be friends=Say no | What should you do with each request?
+check: mcq | Who should you be friends with online? | People you know in real life* | Anyone at all | People with cool names
+check: tf | People online are always who they say they are. | false | Some people pretend to be someone else.
+check: mcq | A stranger sends a friend request. You… | Say no and tell a grown-up* | Say yes | Send them your address
+home: Check your friend list in a game with a grown-up.
+skill: safety
+
+@lesson 2.5 | Pop-ups and prizes | 🎁 | online
+hook: A box pops up: "You WON! Tap to claim your prize!" Did you really win?
+learn: Pop-ups that say you won are usually tricks.
+learn: Don't tap. Show a grown-up instead.
+learn: Some close buttons are fake too, so let a grown-up close it.
+play: scam | Trick or OK? | You WON a phone! Tap now!=scam; Your game is saving=real; Claim 1,000 free coins, just type your password=scam; The game says it's time for a break=real; Spin to win a prize!=scam | Prize pop-ups are usually tricks. Show a grown-up.
+check: mcq | A pop-up says you won a prize. You… | Show a grown-up* | Tap claim | Type your password
+check: tf | Some pop-ups have fake close buttons. | true
+check: mcq | Is it OK to type your password into a pop-up? | No* | Yes | Only if it's colourful
+home: Next time a pop-up appears, show a grown-up before doing anything.
+skill: ads
+
+@lesson 2.6 | Uh-oh moments | 🙋 | online
+hook: Oops! You tapped something and now there's a strange page. Will you get in trouble?
+learn: Everyone makes mistakes online, even grown-ups.
+learn: Tell a grown-up straight away. Telling helps fix it faster.
+learn: Grown-ups would rather know than have you worry alone.
+play: order | Uh-oh! Put the steps in order | Stop tapping; Don't type anything; Go and get a grown-up; Show them what happened; Let them help fix it
+check: mcq | You tapped something by mistake. What's best? | Tell a grown-up straight away* | Hide the tablet | Keep tapping
+check: tf | Telling a grown-up helps fix problems faster. | true
+check: mcq | Why tell a grown-up about a mistake? | They can help, and you won't worry alone* | To get in trouble | It doesn't help
+home: Agree with a grown-up what you'll do if something goes wrong online.
+skill: asking
+
 @band builders
 @unit 1 | Scams | Spotting tricks for money and info
 @unit 2 | In-app purchases | Gems, coins and real money
@@ -152,6 +224,79 @@ check: mcq | {nz:Who can help with online bullying in NZ?~au:Who can help with o
 home: Talk with a grown-up about what you'd do if you saw cyberbullying.
 skill: bullying
 
+@lesson 2.1 | Leftover gems | 💎 | online
+hook: A skin costs 1,200 gems. Packs come in 1,000 or 2,500. What happens?
+learn: Games often sell packs that don't match item prices, so you buy more than you need.
+learn: The leftover gems tempt you to spend again to "use them up".
+learn: Work out the real cost of the item you want, not the pack.
+try: 1,000 gems cost $10, so 1 gem is 1c :: gap | A 1,200-gem skin at 1c a gem costs $_ | 12
+play: price | Which pack is cheapest per gem? | Small pack:5:500:gems; Medium pack:10:1100:gems; Big pack:20:2500:gems
+check: mcq | You need 1,200 gems. Packs are 1,000 or 2,500. What's the trap? | You end up buying more than you need* | There's no trap | The game pays you back
+check: tf | The biggest pack is always the best buy, even if you only need a few gems. | false | Leftover gems are money spent on nothing yet.
+check: mcq | Why do leftover gems matter? | They tempt you to spend again* | They turn back into cash | They're free
+home: Find a game's gem packs and one item's price. How many gems would be left over?
+skill: inapp
+
+@lesson 2.2 | Loot boxes | 🎰 | online
+hook: Pay $3 for a mystery box. You might get a legendary skin... or a boring sticker. Sound familiar?
+learn: Loot boxes are paid mystery rewards. You don't know what you'll get.
+learn: They work a lot like gambling: paying for a chance at something rare.
+learn: {nz:Some countries now have special rules for loot boxes. Talk with a grown-up before buying any.~au:Since September 2024, games in Australia with paid loot boxes are rated at least M, and games with simulated gambling are rated R 18+.}
+play: slider | A rare skin has a 1 in 100 chance from each $3 box. On average, how much would you spend to get it? | 0 | 600 | 300 | $ | 30 | 10
+check: tf | You always know what you'll get from a loot box. | false
+check: mcq | Why are loot boxes like gambling? | You pay for a chance at something rare* | You always win | They're free
+check: mcq | A 1 in 50 chance at $2 a box. On average, how much to get the item? | $100* | $2 | $50
+home: Check whether a game you play has loot boxes, and talk about it with a grown-up.
+skill: inapp
+
+@lesson 2.3 | Limited-time offers | ⏳ | online
+hook: "Only 2 hours left! 50% off the mega bundle!" Do you buy it now?
+learn: Countdown timers and "limited time" offers rush you so you don't stop and think.
+learn: Battle passes and daily rewards make you feel you'll miss out if you stop playing or paying.
+learn: Pause and ask: would I buy this if there was no timer?
+play: path | A countdown says "2 hours left! 50% off!" | Wait and ask a grown-up, even if the deal ends => good: Another deal will come along. You stayed in control. | Buy it fast before the timer runs out => bad: The timer rushed you. You might not even want it tomorrow. | Use a saved card without asking => bad: That's spending money that isn't yours to spend.
+check: mcq | Why do games use countdown timers? | To rush you into buying* | To help you relax | To tell the time
+check: tf | Another "limited" deal usually comes along later. | true
+check: mcq | A good question before buying a deal? | Would I buy this with no timer?* | How fast can I tap? | What's the biggest bundle?
+home: Spot a countdown or "limited time" deal in a game or ad.
+skill: inapp
+
+@lesson 2.4 | Purchase controls | 🔒 | online
+hook: How can a family stop surprise game bills?
+learn: Phones, tablets and consoles have settings that need a grown-up's OK before any purchase.
+learn: On Apple devices it's called Ask to Buy. Google's Family Link has purchase approvals.
+learn: A card saved on a shared device should always be locked behind a password.
+play: order | Set up purchase controls with a grown-up | Open the family settings on the device; Turn on purchase approvals; Set a password only the grown-up knows; Test it by trying to buy a free item; Check the settings every few months
+check: mcq | What does Ask to Buy do? | Needs a grown-up's OK before a purchase* | Buys things faster | Gives free gems
+check: tf | A saved card on a shared device with no password is risky. | true
+check: mcq | Who should know the purchase password? | A grown-up* | Everyone in your class | Your gaming friends
+home: Check the purchase settings on a family device together.
+skill: inapp
+
+@lesson 2.5 | Oops, I bought it | 🧾 | online
+hook: You accidentally bought a $20 bundle. Your stomach drops. What now?
+learn: Tell a grown-up straight away. Hiding it makes it worse.
+learn: App stores and game companies can sometimes refund accidental purchases if you ask quickly.
+learn: Learn from it: turn on purchase controls so it can't happen again.
+play: chat | You tell a grown-up about an accidental purchase | them: You look worried. What's up? | me: I accidentally bought a $20 bundle. I'm sorry*/Nothing/It was my brother | them: Thanks for telling me. Let's ask the app store for a refund. | me: Can we turn on purchase controls too?*/Can I buy another one?/I'll hide the tablet next time
+check: mcq | You made an accidental purchase. First step? | Tell a grown-up straight away* | Hide it | Buy more to cover it
+check: tf | Some accidental purchases can be refunded if you ask quickly. | true
+check: mcq | How do you stop it happening again? | Turn on purchase controls* | Never tell anyone | Use a different card
+home: With a grown-up, find where to ask for a refund in your family's app store.
+skill: inapp
+
+@lesson 2.6 | A game budget | 🎮 | bank
+hook: How much is OK to spend on games? You decide, with a plan.
+learn: Set a monthly game budget from your Spend jar, agreed with a grown-up.
+learn: When it's gone, it's gone until next month.
+learn: Track what you spend. Small buys add up fast.
+play: budget | You have $20 a month for fun. Plan it. | 20 | Game pass=5; Snacks=3; Savings=0; Gift for a friend=0 | Friend's birthday present:5
+check: gap | Four $3 game buys in a month cost $_ | 12
+check: mcq | Your game budget is gone for the month. A deal pops up. You… | Wait until next month* | Raid your savings | Use a parent's card
+check: tf | Tracking small spends shows you where your money goes. | true
+home: Agree a monthly game budget with a grown-up.
+skill: budget
+
 @band makers
 @unit 1 | Phishing and fraud | Emails, texts and fake websites
 @unit 2 | AI and deepfakes | When you can't trust what you see
@@ -227,6 +372,78 @@ check: tf | It's never the victim's fault. | true
 check: mcq | {nz:Who can help in NZ?~au:Who can help in Australia?} | {nz:Netsafe or the Police~au:eSafety, the police or Kids Helpline}* | Nobody | The person threatening you
 home: Save {nz:Netsafe's~au:eSafety's} contact details in your phone.
 skill: safety
+
+@lesson 2.1 | What AI can fake | 🎭 | online
+hook: A photo of a shark swimming down a flooded street goes viral. Real?
+learn: AI can now make realistic fake photos, videos, voices and writing in seconds.
+learn: Some fakes are jokes. Some are made to trick, scam or hurt people.
+learn: As AI improves, spotting glitches gets harder. Checking the source matters more.
+play: sort | Easy to fake, Harder to fake | A photo of a celebrity=Easy to fake; A voice message from a "friend"=Easy to fake; A story on a trusted news site you opened yourself=Harder to fake; A video of a politician=Easy to fake; Calling someone back on a number you already have=Harder to fake; A screenshot of a chat=Easy to fake | Easy or harder to fake?
+check: mcq | As AI improves, what matters more than spotting glitches? | Checking the source* | Zooming in | Sharing it fast
+check: tf | AI can fake a person's voice. | true
+check: mcq | A shocking photo goes viral. First step? | Check where it came from* | Share it | Comment on it
+home: Look up a well-known viral fake and how people found out it wasn't real.
+skill: ai
+
+@lesson 2.2 | Voice clone scams | 📞 | online
+hook: Your phone rings. It sounds exactly like your brother: "I'm in trouble. Send money now and don't tell anyone!" What do you do?
+learn: Scammers can clone a voice from a short clip, like a video posted online.
+learn: Warning signs: panic, secrecy, and asking for money or codes.
+learn: Hang up and call the person back on the number you already have, or ask for your family's safe word.
+play: chat | A voice that sounds like your brother calls | them: It's me! I'm in trouble. Send $500 now and don't tell anyone! | me: I'm going to hang up and call you back on your number*/OK, sending it now/Which account? | them: No time! My phone's broken. Just send it! | me: Then what's our family safe word?*/Fine, sending it/I'll send double
+check: mcq | A family member calls in a panic asking for money. You… | Hang up and call them back on their usual number* | Send it fast | Give your bank login
+check: tf | Scammers can clone a voice from a short online clip. | true
+check: mcq | Which is a warning sign? | "Don't tell anyone, send it now!"* | Calling to say hi | Asking about your day
+home: Agree a family safe word, if you don't have one already.
+skill: ai
+
+@lesson 2.3 | Check before you share | 🔍 | online
+hook: A video claims a big brand is giving away free phones. 2 million views. How do you check?
+learn: Don't just study the post. Open a new tab and see what trusted sources say about it.
+learn: A reverse image search can show where a picture first appeared.
+learn: If no trusted news or official site reports it, treat it as unconfirmed, and don't share.
+play: build | Check a viral post before you share it | Pause before reacting; See who posted it first; Search the claim in a new tab; Look for trusted news or the official site; Reverse image search any photo; Share only if it checks out
+check: mcq | What's the best way to check a viral claim? | Search what trusted sources say, in a new tab* | Read the comments | Count the likes
+check: tf | Lots of views means a post is true. | false | Fakes go viral too.
+check: mcq | What does a reverse image search show? | Where a picture has appeared before* | Who liked it | The photo's colours
+home: Try a reverse image search on a photo with a grown-up.
+skill: critical
+
+@lesson 2.4 | Fakes of real people | 🚫 | online
+hook: Someone uses an app to make a fake, embarrassing picture of a classmate and shares it. Just a joke?
+learn: Fake images of real people can do serious harm, even when everyone knows they're fake.
+learn: {nz:In NZ, posting things online to seriously harm someone can break the Harmful Digital Communications Act. Netsafe can help.~au:In Australia, sharing sexual deepfakes of a real person without consent is a crime. The eSafety Commissioner can help get harmful images removed.}
+learn: If it happens to you or a friend: don't share it, screenshot the evidence, report it and tell a trusted adult.
+play: path | A fake embarrassing image of a classmate is going round the group chat. | Don't share it, report it and tell a trusted adult => good: You helped stop the spread and got real help. | Forward it with a laughing emoji => bad: You've made the harm bigger, and you could be in serious trouble. | Ignore it and say nothing => ok: You didn't spread it, which matters. Reporting it would help your classmate more.
+check: mcq | A fake image of a friend is being shared. What should you do? | Don't share it, report it and tell a trusted adult* | Share it with a warning | Make another one
+check: tf | Fake images can hurt people even when everyone knows they're fake. | true
+check: mcq | {nz:Who can help with harmful content online in NZ?~au:Who can help remove harmful images in Australia?} | {nz:Netsafe~au:The eSafety Commissioner}* | A random forum | Nobody
+home: Find the reporting page on {nz:netsafe.org.nz~au:esafety.gov.au} with a grown-up.
+skill: ai
+
+@lesson 2.5 | When chatbots get it wrong | 🤖 | online
+hook: You ask an AI chatbot for facts for an assignment. It gives a confident answer with a source. Is it true?
+learn: AI chatbots predict likely-sounding words. They can make up facts, quotes and even sources.
+learn: They sound just as confident when they're wrong, so confidence isn't proof.
+learn: Check important facts in trusted sources before you use them.
+play: debate | Is it OK to use chatbot answers in an assignment without checking them? | No. Check facts in trusted sources, because AI can make things up* | Yes. AI is always right | AI can be a helpful starting point for ideas and explanations. Checking keeps you honest and accurate.
+check: mcq | Why check chatbot answers? | They can make up facts and sources* | They never make mistakes | They're too slow
+check: tf | A chatbot sounding confident proves it's right. | false
+check: mcq | A chatbot gives you a quote from a famous person. You… | Check the quote in a trusted source* | Use it straight away | Make up another one
+home: With a grown-up, ask a chatbot something you already know and see how it does.
+skill: ai
+
+@lesson 2.6 | AI labels | 🏷️ | online
+hook: Some apps now add "Made with AI" labels. Can you rely on them?
+learn: Some platforms label AI content, and some tools add hidden watermarks or content credentials.
+learn: But labels can be missing, removed or wrong.
+learn: A label helps, but your own checking still matters most.
+play: sort | Useful clue, Proves nothing | A "Made with AI" label=Useful clue; No label on a shocking video=Proves nothing; Content credentials showing the camera that took it=Useful clue; Lots of likes=Proves nothing; A verified tick on the account=Proves nothing; Trusted news reporting the same thing=Useful clue | Does it help you judge if something is real?
+check: mcq | A video has no AI label. That means… | Nothing for sure. It could still be fake* | It's definitely real | It's definitely fake
+check: tf | AI labels can be missing or removed. | true
+check: mcq | What matters most when judging if something is real? | Checking the source yourself* | The number of likes | The label alone
+home: Find an AI label on a social app or an image tool.
+skill: ai
 
 @band launchers
 @unit 1 | Identity theft | Protecting your identity documents
@@ -304,3 +521,77 @@ check: tf | Rules on AI use can differ between schools and jobs. | true
 check: mcq | Honest AI use means… | Following the rules and saying when you used it* | Hiding it | Copying everything
 home: Read your school's rules about using AI.
 skill: ai
+
+@lesson 2.1 | Lock down your banking | 🔐 | bank
+hook: Your banking app holds all your money. How locked is the door?
+learn: Use a strong, unique password or PIN, and turn on fingerprint or face login.
+learn: Turn on alerts for every payment, so you notice anything odd fast.
+learn: Keep your phone updated, and only get your bank's app from the official app store.
+play: sort | Safer, Riskier | A unique password for your bank=Safer; Your birthday as your PIN=Riskier; Payment alerts turned on=Safer; Lending your phone, unlocked, to a stranger=Riskier; Updating your phone=Safer; Downloading a "bank app" from a link in a text=Riskier | Safer or riskier?
+check: mcq | Where should you get your bank's app? | The official app store* | A link in a text | A friend's file
+check: tf | Payment alerts help you spot fraud fast. | true
+check: mcq | Which PIN is weakest? | Your birth year* | Six random digits | A long passphrase
+home: Turn on payment alerts in your banking app.
+skill: security
+
+@lesson 2.2 | Payments are hard to undo | 💸 | bank
+hook: You send $400 to the wrong account by mistyping one digit. Can you just undo it?
+learn: Once a bank transfer goes, it can be very hard to get back.
+learn: Double-check the account number and name before you pay.
+learn: Many banks now check whether the name matches the account. If you get a mismatch warning, stop and check.
+learn: If you make a mistake, call your bank straight away.
+play: diff | The invoice and what you typed. Tap the mistakes. | Name: Aroha Smith; {nz:Account 12-3456-7890123-00~au:BSB 123-456, account 12345678}; Amount: $400; Reference: Rent | Name: Aroha Smith; {nz:Account 12-3456-7890132-00~au:BSB 123-456, account 12345687}; Amount: $4,000; Reference: Rent
+check: mcq | You get a "name doesn't match" warning. You… | Stop and check with the person* | Pay anyway | Try a different name
+check: tf | Bank transfers are always easy to reverse. | false | Once sent, money can be very hard to get back.
+check: mcq | You sent money to the wrong account. First step? | Call your bank straight away* | Wait a month | Send it again
+home: Help a grown-up check a payment's details before they press pay.
+skill: payments
+
+@lesson 2.3 | Marketplace scams | 🛒 | online
+hook: You're selling a bike online. A buyer says they've overpaid and asks you to refund the difference. Hmm.
+learn: Fake overpayment is a classic scam. Their payment never really arrives, but your refund does.
+learn: {nz:Watch for fake payment screenshots, and buyers who send a link so you can "receive" money by entering your card.~au:Watch for fake PayID emails saying you must pay a fee to "upgrade" your account. PayID never charges that.}
+learn: Meet in a safe public place, check the money is really in your account, and never send money to receive money.
+play: scam | Real buyer or scam? | Buyer comes to see the bike, pays, and you check your account before handing it over=real; Buyer "overpaid" and wants the extra back=scam; {nz:Buyer sends a link so you can receive payment by entering your card~au:Email from "PayID" says you must pay $100 to upgrade}=scam; Buyer asks what size the bike frame is=real; Buyer wants you to pay for their courier first=scam | Never send money to receive money.
+check: mcq | A buyer says they overpaid and asks for a refund. That's… | A classic scam* | Very kind | Normal
+check: tf | You should check the money is really in your account before handing over an item. | true
+check: mcq | Safest way to sell a bike to a local buyer? | Meet somewhere public and check the payment has arrived* | Post it before they pay | Pay their courier fee
+home: Read the safety tips on a marketplace your family uses.
+skill: scams
+
+@lesson 2.4 | Remote access scams | 🖥️ | online
+hook: A call: "This is your internet provider. Your computer has a virus. Install this app so we can fix it." What do you do?
+learn: Remote access scams trick you into letting a scammer control your computer or phone.
+learn: Once in, they can watch you log in to your bank and move money.
+learn: Real companies don't cold-call to fix your device. Hang up.
+play: path | A caller says they're from your internet provider and need remote access to fix a virus. | Hang up and call the provider on its official number => good: You checked for yourself. The real provider knows nothing about it. | Install the app they name => bad: They can now see everything, including your banking. | Read out a code they just texted you => bad: Codes let them into your accounts. Never share them.
+check: mcq | Someone asks you to install an app so they can fix your computer. You… | Hang up* | Install it | Give them your passwords
+check: tf | Real companies often cold-call to fix your computer. | false
+check: mcq | Already let them in? First step? | Disconnect the device and call your bank* | Wait and see | Let them finish
+home: Tell an older relative about remote access scams. They're common targets.
+skill: scams
+
+@lesson 2.5 | Money mules | 🐴 | bank
+hook: An ad says: "Earn $500 a week. Just receive money into your account and pass it on." Easy money?
+learn: That's money mule recruiting. You'd be helping criminals move stolen money.
+learn: Being a money mule is a crime, even if you didn't know where the money came from.
+learn: Your account could be closed and you could face charges. Never let anyone use your account.
+play: scam | Real job or money mule trap? | Café job, with wages paid into your account each week=real; Receive transfers and send them on as gift cards=scam; Lend your bank login to a friend's cousin "for a few days"=scam; Tutoring, paid by the student's parents=real; "Payment processing agent", no experience, work from home=scam | Never let anyone move money through your account.
+check: mcq | What's a money mule? | Someone who moves stolen money through their account* | A farm animal | A savings account
+check: tf | You can get in trouble for being a money mule even if you didn't know. | true
+check: mcq | A stranger wants to use your account for "a few transfers". You… | Say no* | Say yes for a fee | Give them your card
+home: Share this warning with a friend who's job hunting.
+skill: scams
+
+@lesson 2.6 | If you've been scammed | 🚨 | bank
+hook: You realise you've just typed your card details into a scam site. The clock is ticking. What first?
+learn: Call your bank straight away. They may be able to stop payments or freeze your card.
+learn: Change your passwords, starting with email and banking, and turn on two-step login.
+learn: {nz:Report it to Netsafe, and to Police on 105 if you lost money. IDCARE can help if your identity was stolen.~au:Report it to ReportCyber and Scamwatch. IDCARE can help if your identity was stolen.}
+learn: Being scammed isn't stupid. Scammers are professionals, and reporting helps stop them.
+play: order | You've been scammed. Put the steps in order. | Call your bank straight away; Change your email and banking passwords; Turn on two-step login; Report the scam; Watch your statements for odd payments
+check: mcq | What's the first thing to do after giving card details to a scammer? | Call your bank* | Delete your emails | Wait a week
+check: tf | Only careless people get scammed. | false | Scammers are professionals. Anyone can be caught.
+check: mcq | {nz:Where can you report scams in NZ?~au:Where can you report scams in Australia?} | {nz:Netsafe and the Police~au:Scamwatch and ReportCyber}* | A comment section | Nowhere
+home: Save your bank's fraud phone number in your contacts.
+skill: scams

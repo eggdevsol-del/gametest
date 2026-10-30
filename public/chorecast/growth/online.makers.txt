@@ -74,3 +74,75 @@ check: mcq | {nz:Who can help in NZ?~au:Who can help in Australia?} | {nz:Netsaf
 home: Save {nz:Netsafe's~au:eSafety's} contact details in your phone.
 skill: safety
 
+@lesson 2.1 | What AI can fake | 🎭 | online
+hook: A photo of a shark swimming down a flooded street goes viral. Real?
+learn: AI can now make realistic fake photos, videos, voices and writing in seconds.
+learn: Some fakes are jokes. Some are made to trick, scam or hurt people.
+learn: As AI improves, spotting glitches gets harder. Checking the source matters more.
+play: sort | Easy to fake, Harder to fake | A photo of a celebrity=Easy to fake; A voice message from a "friend"=Easy to fake; A story on a trusted news site you opened yourself=Harder to fake; A video of a politician=Easy to fake; Calling someone back on a number you already have=Harder to fake; A screenshot of a chat=Easy to fake | Easy or harder to fake?
+check: mcq | As AI improves, what matters more than spotting glitches? | Checking the source* | Zooming in | Sharing it fast
+check: tf | AI can fake a person's voice. | true
+check: mcq | A shocking photo goes viral. First step? | Check where it came from* | Share it | Comment on it
+home: Look up a well-known viral fake and how people found out it wasn't real.
+skill: ai
+
+@lesson 2.2 | Voice clone scams | 📞 | online
+hook: Your phone rings. It sounds exactly like your brother: "I'm in trouble. Send money now and don't tell anyone!" What do you do?
+learn: Scammers can clone a voice from a short clip, like a video posted online.
+learn: Warning signs: panic, secrecy, and asking for money or codes.
+learn: Hang up and call the person back on the number you already have, or ask for your family's safe word.
+play: chat | A voice that sounds like your brother calls | them: It's me! I'm in trouble. Send $500 now and don't tell anyone! | me: I'm going to hang up and call you back on your number*/OK, sending it now/Which account? | them: No time! My phone's broken. Just send it! | me: Then what's our family safe word?*/Fine, sending it/I'll send double
+check: mcq | A family member calls in a panic asking for money. You… | Hang up and call them back on their usual number* | Send it fast | Give your bank login
+check: tf | Scammers can clone a voice from a short online clip. | true
+check: mcq | Which is a warning sign? | "Don't tell anyone, send it now!"* | Calling to say hi | Asking about your day
+home: Agree a family safe word, if you don't have one already.
+skill: ai
+
+@lesson 2.3 | Check before you share | 🔍 | online
+hook: A video claims a big brand is giving away free phones. 2 million views. How do you check?
+learn: Don't just study the post. Open a new tab and see what trusted sources say about it.
+learn: A reverse image search can show where a picture first appeared.
+learn: If no trusted news or official site reports it, treat it as unconfirmed, and don't share.
+play: build | Check a viral post before you share it | Pause before reacting; See who posted it first; Search the claim in a new tab; Look for trusted news or the official site; Reverse image search any photo; Share only if it checks out
+check: mcq | What's the best way to check a viral claim? | Search what trusted sources say, in a new tab* | Read the comments | Count the likes
+check: tf | Lots of views means a post is true. | false | Fakes go viral too.
+check: mcq | What does a reverse image search show? | Where a picture has appeared before* | Who liked it | The photo's colours
+home: Try a reverse image search on a photo with a grown-up.
+skill: critical
+
+@lesson 2.4 | Fakes of real people | 🚫 | online
+hook: Someone uses an app to make a fake, embarrassing picture of a classmate and shares it. Just a joke?
+learn: Fake images of real people can do serious harm, even when everyone knows they're fake.
+learn: {nz:In NZ, posting things online to seriously harm someone can break the Harmful Digital Communications Act. Netsafe can help.~au:In Australia, sharing sexual deepfakes of a real person without consent is a crime. The eSafety Commissioner can help get harmful images removed.}
+learn: If it happens to you or a friend: don't share it, screenshot the evidence, report it and tell a trusted adult.
+play: path | A fake embarrassing image of a classmate is going round the group chat. | Don't share it, report it and tell a trusted adult => good: You helped stop the spread and got real help. | Forward it with a laughing emoji => bad: You've made the harm bigger, and you could be in serious trouble. | Ignore it and say nothing => ok: You didn't spread it, which matters. Reporting it would help your classmate more.
+check: mcq | A fake image of a friend is being shared. What should you do? | Don't share it, report it and tell a trusted adult* | Share it with a warning | Make another one
+check: tf | Fake images can hurt people even when everyone knows they're fake. | true
+check: mcq | {nz:Who can help with harmful content online in NZ?~au:Who can help remove harmful images in Australia?} | {nz:Netsafe~au:The eSafety Commissioner}* | A random forum | Nobody
+home: Find the reporting page on {nz:netsafe.org.nz~au:esafety.gov.au} with a grown-up.
+skill: ai
+
+@lesson 2.5 | When chatbots get it wrong | 🤖 | online
+hook: You ask an AI chatbot for facts for an assignment. It gives a confident answer with a source. Is it true?
+learn: AI chatbots predict likely-sounding words. They can make up facts, quotes and even sources.
+learn: They sound just as confident when they're wrong, so confidence isn't proof.
+learn: Check important facts in trusted sources before you use them.
+play: debate | Is it OK to use chatbot answers in an assignment without checking them? | No. Check facts in trusted sources, because AI can make things up* | Yes. AI is always right | AI can be a helpful starting point for ideas and explanations. Checking keeps you honest and accurate.
+check: mcq | Why check chatbot answers? | They can make up facts and sources* | They never make mistakes | They're too slow
+check: tf | A chatbot sounding confident proves it's right. | false
+check: mcq | A chatbot gives you a quote from a famous person. You… | Check the quote in a trusted source* | Use it straight away | Make up another one
+home: With a grown-up, ask a chatbot something you already know and see how it does.
+skill: ai
+
+@lesson 2.6 | AI labels | 🏷️ | online
+hook: Some apps now add "Made with AI" labels. Can you rely on them?
+learn: Some platforms label AI content, and some tools add hidden watermarks or content credentials.
+learn: But labels can be missing, removed or wrong.
+learn: A label helps, but your own checking still matters most.
+play: sort | Useful clue, Proves nothing | A "Made with AI" label=Useful clue; No label on a shocking video=Proves nothing; Content credentials showing the camera that took it=Useful clue; Lots of likes=Proves nothing; A verified tick on the account=Proves nothing; Trusted news reporting the same thing=Useful clue | Does it help you judge if something is real?
+check: mcq | A video has no AI label. That means… | Nothing for sure. It could still be fake* | It's definitely real | It's definitely fake
+check: tf | AI labels can be missing or removed. | true
+check: mcq | What matters most when judging if something is real? | Checking the source yourself* | The number of likes | The label alone
+home: Find an AI label on a social app or an image tool.
+skill: ai
+
