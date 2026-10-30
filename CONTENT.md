@@ -75,7 +75,7 @@ Fields are separated by `|`. Lists inside a field are separated by `;`. Mark rig
 | Put in order | `order \| Question \| first; second; third` (`build` is the same, stacked as blocks) |
 | Match pairs | `match \| Question \| left=right; left=right; left=right` (`route` is the same, drawn as a map) |
 | Estimate on a slider | `slider \| Question \| min \| max \| answer \| unit \| tolerance \| step` |
-| Best value | `price \| Question \| name:cents:qty:unit; name:cents:qty:unit` |
+| Best value | `price \| Question \| name:dollars:qty:unit; name:dollars:qty:unit` (dollars, e.g. `Big bag:4.50:2:kg`) |
 | Spot the scam | `scam \| Question \| message=scam; message=real; message=scam \| why` |
 | Choose a path | `path \| Situation \| choice => good: outcome \| choice => bad: outcome` (grades: good, ok, bad) |
 | Debate | `debate \| Topic \| stronger argument* \| weaker argument \| the other side` |
@@ -126,6 +126,8 @@ The first time a kid meets each kind of game, a hand plays it on a made-up examp
 ## New Zealand and Australia
 
 Wrap anything that differs by country in `{nz:...~au:...}`, for example `{nz:IRD~au:the ATO}` or `{nz:15% GST~au:10% GST}`. A grown-up picks the country in Character Growth settings. Use `~` between the two, because `|` and `;` already split fields.
+
+Questions are split into fields before the country text is swapped in, so keep separators outside the braces: no `|`, `;`, `=`, `*`, `/`, `=>` or (in sort bins) `,` inside `{nz:...~au:...}`. `price` and `tap` items can't use the braces at all, and numbers in `slider` and `budget` items aren't localised, so keep those the same for both countries. A `gap` with answer chips can't localise its answer either; use the number pad instead.
 
 ## Money Moments (`moments.txt`)
 
