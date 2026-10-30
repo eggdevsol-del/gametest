@@ -116,19 +116,24 @@ const COLS = {
   jobs: { table: 'jobs', extra: d => ({ kid_id: d.kidId ?? null, status: d.status ?? null, day: d.date ?? null }) },
   habits: { table: 'habits', extra: d => ({ kid_id: d.kidId ?? null }) },
   growth: { table: 'growth_progress' },
+  guides: { table: 'chore_guides', extra: d => ({ photo_mode: d.photoMode === 'each' || d.photoMode === 'end' ? d.photoMode : null, step_count: Array.isArray(d.steps) ? d.steps.length : null }) },
 };
 
 // Kid devices can do everything a kid does in the app; settings, approvals, pay and deletes need a parent
 // account or a kid device a grown-up has unlocked with the PIN.
 function checkWrite(s, col, body, prev) {
   if (s.elevated) return;
-  if (col === 'family') fail(403, 'A grown-up needs to unlock this first.', 'locked');
+  if (col === 'family' || col === 'guides') fail(403, 'A grown-up needs to unlock this first.', 'locked');
   if (col === 'kids' && !prev) fail(403, 'Only a grown-up can add a kid.', 'locked');
   if (col === 'jobs') {
     if (body.status && body.status !== 'pending' && body.status !== (prev && prev.status)) fail(403, 'Only a grown-up can approve jobs.', 'locked');
     if ('paid' in body || 'reviewedAt' in body) fail(403, 'Only a grown-up can approve jobs.', 'locked');
   }
 }
+
+// Server photo ids in a chore guide. Photos a guide stops using (a retake, a re-recording, a deleted guide) are removed.
+const guidePhotoIds = d => [...((d && d.steps) || []).map(x => x && x.photo), d && d.finish].filter(r => typeof r === 'string' && r.startsWith('s:')).map(r => r.slice(2));
+const dropGuidePhotos = (t, familyId, ids) => (ids.length ? t.q(`delete from photos where family_id = $1 and kind = 'guide' and id = any($2)`, [familyId, ids]) : null);
 
 async function writeDoc(s, col, id, body, merge, clientId) {
   const C = COLS[col]; if (!C) fail(404, 'Unknown collection.', 'bad_path');
@@ -141,6 +146,7 @@ async function writeDoc(s, col, id, body, merge, clientId) {
     checkWrite(s, col, body, prev);
     const data = merge ? deepMerge(prev || {}, body) : { ...body };
     if (!C.single) data.id = id;
+    if (col === 'guides' && prev) { const keep = new Set(guidePhotoIds(data)); await dropGuidePhotos(t, s.family_id, guidePhotoIds(prev).filter(x => !keep.has(x))); }
     const version = (cur ? Number(cur.version) : 0) + 1, who = s.user_id || s.device_id;
     if (C.single) {
       await t.q(`insert into family_settings (family_id, data, version, updated_at, updated_by) values ($1, $2::jsonb, $3, now(), $4)
@@ -164,6 +170,11 @@ async function deleteDoc(s, col, id, clientId) {
   const C = COLS[col]; if (!C || C.single) fail(404, 'Unknown collection.', 'bad_path');
   needElevated(s);
   await db.tx(async t => {
+    if (col === 'guides') {
+      // A deleted guide takes its how-to photos with it (kids' own photos stay with their jobs).
+      const g = (await t.q('select data from chore_guides where family_id = $1 and id = $2', [s.family_id, id])).rows[0];
+      if (g) await dropGuidePhotos(t, s.family_id, guidePhotoIds(asObj(g.data)));
+    }
     await t.q(`delete from ${C.table} where family_id = $1 and id = $2`, [s.family_id, id]);
     await t.q('insert into doc_changes (family_id, collection, doc_id, op, device_id, user_id) values ($1, $2, $3, $4, $5, $6)', [s.family_id, col, id, 'delete', s.device_id, s.user_id || null]);
   });
@@ -179,6 +190,7 @@ async function snapshot(familyId) {
     jobs: await rows('select id, data from jobs where family_id = $1 order by created_at desc limit 800'),
     habits: await rows('select id, data from habits where family_id = $1'),
     growth: await rows('select id, data from growth_progress where family_id = $1'),
+    guides: await rows('select id, data from chore_guides where family_id = $1'),
   };
 }
 
@@ -339,17 +351,19 @@ route('POST', '/api/import', async ({ req, s }) => {
   const has = (await db.query('select count(*)::int as n from kids where family_id = $1', [s.family_id])).rows[0].n;
   if (has && !b.force) fail(409, 'This family already has kids saved.', 'not_empty');
   if (b.settings) await writeDoc(s, 'family', 'settings', b.settings, true);
-  for (const col of ['kids', 'jobs', 'habits', 'growth']) for (const [id, d] of Object.entries(b[col] || {})) await writeDoc(s, col, id, d, true);
+  for (const col of ['kids', 'jobs', 'habits', 'growth', 'guides']) for (const [id, d] of Object.entries(b[col] || {})) await writeDoc(s, col, id, d, true);
   await logEvent(s, 'family.imported', { kids: Object.keys(b.kids || {}).length, jobs: Object.keys(b.jobs || {}).length });
   return { ok: true };
 });
 
-route('POST', '/api/photos', async ({ req, s }) => {
+route('POST', '/api/photos', async ({ req, s, url }) => {
   needSession(s);
-  const mime = String(req.headers['content-type'] || '');
+  const mime = String(req.headers['content-type'] || ''), kind = url.searchParams.get('kind') || 'proof';
   if (!/^image\/(jpeg|png|webp)$/.test(mime)) fail(415, 'Photos must be JPEG, PNG or WebP.', 'bad_type');
+  if (!['proof', 'step', 'guide'].includes(kind)) fail(400, 'Unknown photo kind.', 'bad_kind');
+  if (kind === 'guide' && !s.elevated) fail(403, 'A grown-up needs to unlock this first.', 'locked');
   const buf = await readBody(req, 8 * 1024 * 1024), id = randomUUID();
-  await db.query('insert into photos (id, family_id, mime, bytes, size, created_by) values ($1, $2, $3, $4, $5, $6)', [id, s.family_id, mime, buf, buf.length, s.device_id]);
+  await db.query('insert into photos (id, family_id, mime, bytes, size, created_by, kind) values ($1, $2, $3, $4, $5, $6, $7)', [id, s.family_id, mime, buf, buf.length, s.device_id, kind]);
   return { id };
 });
 

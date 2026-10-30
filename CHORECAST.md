@@ -58,6 +58,7 @@ Tables are created by numbered SQL files in [`server/migrations/`](server/migrat
 | --- | --- |
 | `001_core.sql` | Accounts and sync: `users`, `families`, `family_members`, `devices`, `sessions`, `invites`. App data: `family_settings`, `kids`, `jobs`, `habits`, `photos`. History: `doc_changes` (every write), `events` (everything that happens in the app). |
 | `002_character_growth.sql` | `growth_progress` (one row per kid), `growth_attempts` (every lesson, review, challenge, moment or story), `growth_answers` (every answer, by skill), `content_items` (the content feed and its review queue). |
+| `003_chore_guides.sql` | `chore_guides` (each custom chore's photo guide: the steps, the grown-up's photos and whether kids photograph every step or just the end). Adds a `kind` column to `photos`: `proof`, `step` or `guide`. Guide photos are deleted when a guide is re-recorded or deleted. |
 
 ## Accounts and devices
 
@@ -73,6 +74,10 @@ Tables are created by numbered SQL files in [`server/migrations/`](server/migrat
 - **Fair chore draft:** 112 NZ/AU chores. Each morning, shared household jobs are drafted between kids so no two get the same job, and a job a sibling just did sits out until it's due again. Bedroom jobs are always each kid's own.
 - **Our home:** the first time a grown-up unlocks the dashboard, ten quick questions with follow-ups ask about the house: bedrooms, pets, dishwasher, lawn, bins and so on. Each question shows real chores above it that the answer turns on or off. Chores the home can't have (no cat means no litter tray) never get drafted. Answers can be changed any time under Our home.
 - **Missions:** full-screen chore events with music, a timer, scoring, split-screen crew mode and a photo of the finished job. At the end the points tally up row by row and three 3D stars slam in, Angry Birds style, as the score passes each mark.
+- **Custom chores with photo guides:** under Grown-ups, then Chores, then Add a custom chore, a grown-up picks "Photo guide" and does the chore once, start to finish, taking a photo at each step and adding a few words. A last photo shows the finished job. The timer sets the kids' clock, a little longer than the grown-up took. The photos become the kids' how-to guide on the mission brief, and in the mission each step shows the grown-up's photo, which kids can tap to see full size.
+  - **A photo at every step:** steps go in order, and kids must photograph each one before they can tick it off and move on.
+  - **One photo at the end:** kids tick the steps freely, then photograph the finished job next to the grown-up's finished photo. They can't skip the photo.
+  - **Reviewing:** grown-ups see the kid's photos side by side with their own, step by step. A guide can be re-recorded, switched between the two photo modes or deleted from its chore. Written-step custom chores still work as before.
 - **Money:** pay slips with family tax, a budget split into Spend, Vault, Invest and Give jars, a savings vault with daily interest, a Trust Score, and a pretend stock market.
 - **Island:** a cel-shaded 3D island per kid. It has wind-blown grass, a shop of animals, toys and furniture, and upkeep jobs (mowing, weeding, raking, pond cleaning, pruning, water blasting) that each need their own tool.
 - **Character Growth:** opened from the Grow tab in a kid's bottom bar, or from the Character Growth card on their Today screen. A red dot on Grow means reviews, questions about their week or a grown-up's lesson are waiting. It covers 12 skill trees (Money Sense, Investor School, Work and Careers, Make and Sell, Give and Change, Everyday Maths, Words That Work, Money Through Time, Home and Life, Mind and Body, Smart Online, How the World Works) in 4 age bands.

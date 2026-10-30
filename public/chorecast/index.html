@@ -1090,6 +1090,93 @@ p{margin:0}
 #toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));z-index:160;transform:translate(-50%,-30px);opacity:0;max-width:calc(100% - 32px);padding:12px 20px;border-radius:999px;background:rgba(20,26,50,.92);color:#fff;font:700 15px var(--f-round);box-shadow:0 12px 30px -10px rgba(0,0,0,.5);transition:transform .35s cubic-bezier(.2,1.3,.4,1),opacity .25s;text-align:center}
 #toast.show{transform:translate(-50%,0);opacity:1}
 
+/* Photo guides. Grown-up side: recording a chore step by step, then checking kids' photos against the guide. */
+.rec-time{justify-self:end;display:inline-flex;align-items:center;gap:6px;font:600 16px var(--f-text);color:var(--bad)}
+.rec-time i{width:10px;height:10px;border-radius:50%;background:var(--bad);animation:recBlink 1.2s ease-in-out infinite}
+@keyframes recBlink{50%{opacity:.25}}
+.rstep{display:flex;gap:14px;align-items:flex-start;padding:12px;border-radius:18px;background:var(--fill)}
+.rthumb{position:relative;width:min(36%,180px);aspect-ratio:4/3;flex:none;border-radius:12px;overflow:hidden;background:var(--fill-2)}
+.rthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .2s}
+.rthumb .spin{display:none;position:absolute;inset:0;margin:auto;width:28px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.45);border-top-color:#fff;animation:spin .8s linear infinite}
+.rthumb.busy .spin{display:block}
+.rthumb.busy img{opacity:.55}
+.rs-retry{display:none;position:absolute;left:6px;right:6px;bottom:6px;min-height:36px;border-radius:9px;background:var(--bad);color:#fff;font:600 14px var(--f-text)}
+.rthumb.err .rs-retry{display:block}
+.rstep-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.rstep-main>b{font:600 15px var(--f-text);color:var(--ink-2)}
+.rstep-main input{width:100%;min-height:46px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--cell);color:var(--ink);font:500 17px var(--f-text);outline:none;-webkit-user-select:text;user-select:text}
+.rstep-main input:focus{border-color:var(--p-accent)}
+.rstep-acts{display:flex;gap:18px;flex-wrap:wrap}
+.rstep-acts .plink{min-height:36px;font-size:15px}
+.rstep-acts .ic{width:16px;height:16px}
+.plink.danger{color:var(--bad)}
+.rec-empty{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:30px 16px;border-radius:18px;border:2px dashed var(--line);color:var(--ink-2);font:400 15px/1.4 var(--f-text)}
+.rec-empty .ic{width:40px;height:40px;color:var(--p-accent)}
+.rec-empty b{font:600 17px var(--f-text);color:var(--ink)}
+.rec-foot{display:grid;gap:10px}
+.rec-sum{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--fill);font:400 16px var(--f-text)}
+.rec-sum .ic{width:20px;height:20px;color:var(--p-accent);flex:none}
+.rec-need{color:var(--warn)}
+.rec-need:empty{display:none}
+.btn-big:disabled{opacity:.45;box-shadow:none}
+.rsteps{display:flex;flex-wrap:wrap;align-items:center;gap:6px;text-align:left}
+.rsteps .ph{position:relative;width:56px;height:56px;border-radius:10px;overflow:hidden;background:var(--fill)}
+.rsteps img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rsteps .ph b{position:absolute;left:3px;top:3px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:rgba(0,0,0,.62);color:#fff;font:600 11px/18px var(--f-text);text-align:center}
+.rsteps small,.rbody .plink{display:inline-flex;align-items:center;gap:2px;color:var(--p-accent);font:500 15px var(--f-text);margin-left:4px}
+.rbody .plink{margin-left:0;min-height:36px;align-self:flex-start}
+.rsteps .ic,.rbody .plink .ic{width:16px;height:16px}
+.cmp{display:flex;flex-direction:column;gap:18px;padding:18px 20px 4px}
+.cmp-row h4{display:flex;align-items:center;gap:8px;font:600 16px var(--f-text);margin-bottom:8px}
+.cmp-row h4 b{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--fill-2);font:600 13px var(--f-text)}
+.cmp-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmp-pair figure{margin:0}
+.cmp-pair .ph{display:block;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--fill)}
+.cmp-pair img{width:100%;height:100%;object-fit:cover;display:block}
+.cmp-pair figcaption{font:500 13px var(--f-text);color:var(--ink-2);margin-top:4px}
+/* The guide as cards: a swipeable row on the kid's mission brief, a grid for grown-ups */
+.gcards{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:2px 20px 8px;scroll-padding-inline:20px;-webkit-overflow-scrolling:touch}
+.gcards.wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));overflow:visible;margin:0;padding:0}
+.gcard{flex:0 0 min(72%,250px);scroll-snap-align:start;margin:0;background:var(--fill);border-radius:18px;overflow:hidden}
+.gcard .ph{display:block;aspect-ratio:4/3;background:var(--fill-2);overflow:hidden}
+.gcard img{width:100%;height:100%;object-fit:cover;display:block}
+.gcard figcaption{display:flex;gap:10px;align-items:flex-start;padding:10px 12px 12px;font:700 15px/1.3 var(--f-round);color:var(--ink)}
+.gcard figcaption b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--p-accent);color:#fff;font:800 13px var(--f-round)}
+.gcard figcaption b .ic{width:15px;height:15px;stroke-width:3}
+.gcard.fin figcaption b{background:var(--good)}
+/* Kid side, in the mission: the grown-up's photo, the step, then the kid's own photo */
+.gstep{padding:6px;gap:8px}
+.gstep .gmain{flex:1;min-width:0;align-self:stretch;display:flex;align-items:center;gap:12px;padding:2px 4px;text-align:left;font:inherit;color:inherit;border-radius:16px}
+.gthumb,.gshot{position:relative;width:clamp(48px,10cqh,76px);aspect-ratio:1;flex:none;border-radius:15px;overflow:hidden;display:grid;place-items:center;background:rgba(0,0,0,.18);color:#fff}
+.gthumb img,.gshot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gshot{border:2.5px dashed rgba(255,255,255,.75)}
+.gshot .ic{width:26px;height:26px}
+.gshot:has(img){border:2.5px solid #fff}
+.gshot:disabled{opacity:1}
+.gstep.cur.need .gshot{background:rgba(255,255,255,.3);animation:pulse 1.3s ease-in-out infinite}
+.gstep.locked{opacity:.5}
+.gstep.locked .gshot{border-style:solid;border-color:transparent}
+.gstep.done .gshot{border-color:var(--c2)}
+.gstep.need .step-ck{opacity:.35}
+.step-t small{display:block;font:800 .68em/1.2 var(--f-round);opacity:.85;margin-top:3px}
+.glight{position:absolute;inset:0;z-index:35;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;background:rgba(6,10,30,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);animation:fade .2s ease-out}
+.glight figure{margin:0;width:min(88cqw,68cqh,640px);background:#FFFEFA;color:#1C2340;padding:12px 12px 16px;border-radius:6px;box-shadow:0 24px 50px -18px rgba(0,0,0,.6);animation:drop .45s cubic-bezier(.2,1.3,.4,1);--rot:-1deg}
+.glight .ph{display:block;aspect-ratio:4/3;overflow:hidden;border-radius:3px;background:#E9ECF4}
+.glight img{width:100%;height:100%;object-fit:cover;display:block}
+.glight figcaption{font:800 clamp(16px,3cqmin,22px)/1.3 var(--f-round);margin-top:10px}
+.glight small{font:700 14px var(--f-round);opacity:.8}
+.proof-pair{display:flex;align-items:center;justify-content:center;gap:clamp(10px,2.4cqw,24px);flex-wrap:wrap;width:100%}
+.match{margin:0;width:min(30cqw,30cqh,220px);background:#FFFEFA;color:#1C2340;padding:8px 8px 10px;border-radius:4px;transform:rotate(3deg);box-shadow:0 16px 30px -14px rgba(0,0,0,.55)}
+.match .ph{display:block;aspect-ratio:1;overflow:hidden;border-radius:2px;background:#E9ECF4}
+.match img{width:100%;height:100%;object-fit:cover;display:block}
+.match figcaption{font:800 13px var(--f-round);margin-top:6px;text-align:center}
+.proof-pair:has(.match) .viewfinder{width:min(48cqw,44cqh,340px)}
+.proof-pair:has(.match) .polaroid.big{width:min(44cqw,40cqh,300px)}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(28cqw,150px),1fr));gap:12px;width:100%;max-width:680px}
+.shots .polaroid{padding:6px 6px 8px}
+.shots .pol-cap{font-size:12px;margin-top:6px}
+.proof-note{font:800 clamp(15px,2.8cqmin,19px) var(--f-round)}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   #sky .cloud{animation:none;transform:translateX(var(--x))}
@@ -1386,10 +1473,10 @@ const DEFAULT_SETTINGS = { currency: '$', taxRate: 10, interestWeekly: 2, photoR
 /* =========================================================
    Store: cloud db + assets when available, this device otherwise
    ========================================================= */
-const Store = { mode: 'local', db: null, assets: null, ready: false, ver: 0, settings: null, kids: {}, jobs: {}, habits: {}, growth: {} };
+const Store = { mode: 'local', db: null, assets: null, ready: false, ver: 0, settings: null, kids: {}, jobs: {}, habits: {}, growth: {}, guides: {} };
 const LOCAL_KEY = 'chorecast:v1';
-function loadLocal() { const d = lsGet(LOCAL_KEY, null); if (d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; } }
-function saveLocal() { if (Store.mode === 'local') lsSet(LOCAL_KEY, { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits, growth: Store.growth }); else if (Store.mode === 'server') cacheSoon(); }
+function loadLocal() { const d = lsGet(LOCAL_KEY, null); if (d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; Store.guides = d.guides || {}; } }
+function saveLocal() { if (Store.mode === 'local') lsSet(LOCAL_KEY, { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits, growth: Store.growth, guides: Store.guides }); else if (Store.mode === 'server') cacheSoon(); }
 const queues = {};
 function enqueue(path, fn) { const p = (queues[path] || Promise.resolve()).then(fn, fn); queues[path] = p.catch(() => {}); return p; }
 function applyLocal(col, id, body, merge) {
@@ -1456,12 +1543,12 @@ async function initStore() {
   }
   Store.mode = 'cloud'; Store.db = db;
   await new Promise(resolve => {
-    let left = 5, done = false;
+    let left = 6, done = false;
     const finish = () => { if (!done) { done = true; resolve(); } };
     const first = fn => { let fired = false; return arg => { fn(arg); Store.ver++; scheduleRender(); if (!fired) { fired = true; if (--left === 0) finish(); } }; };
     const onErr = e => { console.warn('sync stopped', e); if (e && e.code !== 'revoked') toast('Live sync paused. Reload to reconnect.'); finish(); };
     db.doc('family/settings').onSnapshot(first(s => { Store.settings = s.exists ? { ...s.data() } : null; }), onErr);
-    for (const col of ['kids', 'jobs', 'habits', 'growth']) {
+    for (const col of ['kids', 'jobs', 'habits', 'growth', 'guides']) {
       let q = db.collection(col);
       if (col === 'jobs') q = q.orderBy('at', 'desc').limit(800);
       q.onSnapshot(first(qs => { const m = {}; qs.docs.forEach(d => { m[d.id] = { ...d.data(), id: d.id }; }); Store[col] = m; }), onErr);
@@ -1494,8 +1581,8 @@ async function probeServer() {
 }
 const cacheKey = () => 'chorecast:server:' + ((Acct.me && Acct.me.family && Acct.me.family.id) || '');
 let cacheT = 0;
-function cacheSoon() { clearTimeout(cacheT); cacheT = setTimeout(() => lsSet(cacheKey(), { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits, growth: Store.growth }), 600); }
-function applySnapshot(d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; }
+function cacheSoon() { clearTimeout(cacheT); cacheT = setTimeout(() => lsSet(cacheKey(), { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits, growth: Store.growth, guides: Store.guides }), 600); }
+function applySnapshot(d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; Store.guides = d.guides || {}; }
 async function startServerMode(me) {
   Acct.me = me; Acct.available = true; lsSet('cc:me', me); Store.mode = 'server';
   const cached = lsGet(cacheKey(), null); if (cached) applySnapshot(cached);
@@ -1564,8 +1651,18 @@ addEventListener('pagehide', () => { if (Events.q.length && navigator.sendBeacon
 function localData() { const d = lsGet(LOCAL_KEY, null); return d && Object.keys(d.kids || {}).length ? d : null; }
 async function importLocal() {
   const d = localData(); if (!d) return;
+  const up = async (ref, kind) => {
+    if (!ref || !ref.startsWith('l:')) return ref;
+    const b = await IDB.get(ref.slice(2)).catch(() => null); if (!b) return ref;
+    try { return 's:' + (await api('POST', '/api/photos?kind=' + kind, undefined, b)).id; } catch (e) { return ref; }
+  };
   for (const j of Object.values(d.jobs || {})) {
-    if (j.photo && j.photo.startsWith('l:')) { const b = await IDB.get(j.photo.slice(2)).catch(() => null); if (b) { try { j.photo = 's:' + (await api('POST', '/api/photos', undefined, b)).id; } catch (e) {} } }
+    j.photo = await up(j.photo, 'proof');
+    if (j.stepPhotos) for (let i = 0; i < j.stepPhotos.length; i++) j.stepPhotos[i] = await up(j.stepPhotos[i], 'step');
+  }
+  for (const g of Object.values(d.guides || {})) {
+    for (const st of g.steps || []) st.photo = await up(st.photo, 'guide');
+    g.finish = await up(g.finish, 'guide');
   }
   await api('POST', '/api/import', d);
   lsSet('cc:imported', true); await resync();
@@ -1579,7 +1676,8 @@ const IDB = {
   async get(id) { const db = await this.open(); return new Promise(res => { const tx = db.transaction('photos'); const r = tx.objectStore('photos').get(id); r.onsuccess = () => res(r.result || null); r.onerror = () => res(null); }); },
 };
 const localUrls = {};
-async function savePhoto(blob) {
+// kind: 'proof' (a finished job), 'step' (a kid's photo of one step) or 'guide' (a grown-up's how-to photo)
+async function savePhoto(blob, kind = 'proof') {
   if (Store.mode === 'cloud' && Store.assets) {
     let r;
     try { r = await Store.assets.upload(blob, { type: 'image/jpeg' }); }
@@ -1587,7 +1685,7 @@ async function savePhoto(blob) {
     return { ref: 'a:' + r.id, url: r.url };
   }
   if (Store.mode === 'server') {
-    try { const r = await api('POST', '/api/photos', undefined, blob); return { ref: 's:' + r.id, url: '/api/photos/' + r.id }; }
+    try { const r = await api('POST', '/api/photos?kind=' + kind, undefined, blob); return { ref: 's:' + r.id, url: '/api/photos/' + r.id }; }
     catch (e) { if (e.status) throw e; } // offline: keep it on this device instead
   }
   const id = uid();
@@ -3345,7 +3443,7 @@ function tile(c, st) {
   const th = THEMES[c.theme] || THEMES.tidy, s = st.state;
   const badge = s === 'approved' ? `<span class="tb ok" aria-label="Paid">${ic('check')}</span>` : s === 'pending' ? `<span class="tb wait" aria-label="Waiting for a grown-up">${ic('clock')}</span>` : s === 'redo' ? '<span class="tb redo">Redo</span>' : '';
   return `<button class="tile st-${s}" data-act="brief" data-key="${c.key}" style="--c1:${th.c1};--c2:${th.c2}">
-    <span class="tile-top">${c.mins} min</span><span class="sticker" aria-hidden="true">${c.icon}</span>
+    <span class="tile-top">${c.mins} min${guideOf(c) ? ' · 📷' : ''}</span><span class="sticker" aria-hidden="true">${c.icon}</span>
     <span class="tile-name">${esc(c.title)}</span><span class="tile-pay num">${payLabel(c)}</span>${badge}</button>`;
 }
 function gigCard(gigs, kid, date) {
@@ -3568,7 +3666,7 @@ function briefSheet() {
   const g = gigBoard(date).find(x => x.key === key); if (g) c = { ...c, surge: g.surge };
   const th = THEMES[c.theme] || THEMES.tidy, st = choreState(kidId, c, date), T = TIERS[c.tier];
   const why = c.tier === 'gig' ? `Up for grabs. The first kid to finish gets paid, then it’s off the board${c.every > 1 ? ` for ${c.every} days` : ' until tomorrow'}.` : ((draftFor(date)[kidId] || {}).why || {})[key];
-  const done = isDone(st.state), q = UI.brief.quote ?? c.quote;
+  const done = isDone(st.state), q = UI.brief.quote ?? c.quote, gd = guideOf(c), gm = gd ? c.photoMode || 'each' : null;
   let payTxt = '', payBig = payLabel(c);
   if (c.payType === 'piece') payTxt = `You earn ${fmt(c.perUnit * (c.surge ? 1.5 : 1))} for every ${c.unit}, up to ${c.maxUnits}. Count them during the mission. More ${c.unit}s, more money.`;
   else if (c.payType === 'hourly') payTxt = `You earn ${fmt(c.rate * (c.surge ? 1.5 : 1))} an hour, paid by the minute for up to ${c.maxMins} minutes. Work steady. Grown-ups can tell when someone is going slow on purpose.`;
@@ -3585,8 +3683,9 @@ function briefSheet() {
       ${done ? `<div class="status-note"><span class="ph">${st.job.photo ? `<img ${photoAttr(st.job.photo)} alt="">` : c.icon}</span><span>${st.state === 'approved' ? 'Done and paid today. Nice work!' : 'Done! A grown-up is checking your photo.'}</span></div>` : ''}
       <div class="paybox"><div class="paybox-h"><span>${PAYTYPE[c.payType]}</span><b class="num">${payBig}</b></div><p>${payTxt} 3 stars adds a 10% quality bonus.</p>
         ${c.payType === 'quote' && !done ? `<div class="quote"><button class="qbtn" data-act="quote" data-d="-50" aria-label="Lower quote">${ic('minus')}</button><b class="num">${fmt(q)}</b><button class="qbtn" data-act="quote" data-d="50" aria-label="Raise quote">${ic('plus')}</button></div>` : ''}</div>
-      <div><div class="sec-l" style="margin-bottom:10px">The mission</div><ol class="steps-prev">${c.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>
-      <p class="hint">Beat the clock for bonus points, tap each step as you finish it, then snap a photo so a grown-up can check.</p>
+      ${gd ? `<div><div class="sec-l" style="margin-bottom:10px">How it’s done${gd.recordedBy ? ` · shown by ${esc(gd.recordedBy)}` : ''}</div><div class="gcards" data-keep="gcards">${guideCards(gd)}</div></div>`
+        : `<div><div class="sec-l" style="margin-bottom:10px">The mission</div><ol class="steps-prev">${c.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>`}
+      <p class="hint">${gm === 'each' ? 'A grown-up did this job first and took a photo at every step. Do each step, snap a photo of it, then tick it off to move on.' : gm === 'end' ? 'A grown-up did this job first and photographed each step. Beat the clock, tick each step as you go, then snap the finished job so it matches theirs.' : 'Beat the clock for bonus points, tap each step as you finish it, then snap a photo so a grown-up can check.'}</p>
     </div>
     ${done ? '' : `<div class="sh-foot" style="display:grid;gap:10px"><button class="btn-big" style="--btn:${th.c2}" data-act="start">${ic('play')} Start mission</button>${kidsList().length > 1 ? `<button class="btn-soft" data-act="teamUp">${ic('crew')} Team up on a split screen</button>` : ''}</div>`}`;
 }
@@ -3696,9 +3795,12 @@ function crewSheet() {
 }
 function photoSheet() {
   const j = Store.jobs[UI.photoId]; if (!j) return '';
-  const kid = Store.kids[j.kidId];
+  const kid = Store.kids[j.kidId], g = j.guide ? Store.guides[j.key] : null;
+  const pairs = j.stepPhotos ? j.stepPhotos.map((r, k) => [r, g && g.steps[k] ? g.steps[k].photo : null, (g && g.steps[k] && g.steps[k].text) || `Step ${k + 1}`, k + 1]).filter(x => x[0])
+    : g && g.finish && j.photo ? [[j.photo, g.finish, 'The finished job', 0]] : [];
   return `<div class="sh-head"><button class="sh-x" data-act="close">Close</button><h2>${esc(j.title)}</h2><span></span></div>
-    ${j.photo ? `<div class="ph"><img class="zoom-img" ${photoAttr(j.photo)} alt="Photo of ${esc(j.title)}"></div>` : ''}
+    ${pairs.length ? `<div class="cmp">${pairs.map(([theirs, mine, t, n]) => `<div class="cmp-row"><h4>${n ? `<b>${n}</b>` : ''}${esc(t)}</h4><div class="cmp-pair"><figure><span class="ph"><img ${photoAttr(theirs)} alt="${esc(kid ? kid.name : 'Kid')}’s photo"></span><figcaption>${esc(kid ? kid.name : 'Kid')}</figcaption></figure>${mine ? `<figure><span class="ph"><img ${photoAttr(mine)} alt="Guide photo"></span><figcaption>Your guide</figcaption></figure>` : ''}</div></div>`).join('')}</div>`
+      : j.photo ? `<div class="ph"><img class="zoom-img" ${photoAttr(j.photo)} alt="Photo of ${esc(j.title)}"></div>` : ''}
     <div class="sh-body"><div class="rstats">${kid ? `<span><span class="ava-s" style="--hue:${kid.hue};width:22px;height:22px;font-size:13px">${kid.avatar}</span>${esc(kid.name)}</span>` : ''}<span>${esc(parseKey(j.date).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' }))}</span><span class="stars-s">${starRow(j.stars)}</span><span>${(j.score || 0).toLocaleString()} pts</span>${j.durSec ? `<span>${ic('clock')} ${mmss(j.durSec)}</span>` : ''}</div>
     ${j.note ? `<div class="redo-note">${esc(j.note)}</div>` : ''}</div>`;
 }
@@ -3949,6 +4051,8 @@ function reviewCard(j) {
       <div class="rkid"><span class="ava-s" style="--hue:${kid.hue}">${kid.avatar}</span><b>${esc(kid.name)}</b><span class="muted">${timeAgo(j.at)}</span></div>
       <h3 class="rtitle">${j.icon} ${esc(j.title)}</h3>
       ${j.tier !== 'bonus' ? `<div class="rstats"><span>${ic('clock')} ${mmss(j.durSec)} <small>/ ${mmss(j.targetSec)}</small></span><span class="stars-s">${starRow(j.stars)}</span><span>${(j.score || 0).toLocaleString()} pts</span><span>${j.stepsDone}/${j.stepsTotal} steps</span>${j.crew ? '<span>Crew mode</span>' : ''}${j.durSec && j.targetSec && j.durSec < j.targetSec * 0.2 ? '<span>⚡ Very fast, worth a closer look</span>' : ''}</div>` : `<p class="muted">${esc(kid.name)} completed their habit goal ${j.title.split('-')[0]} days in a row.</p>`}
+      ${j.stepPhotos && j.stepPhotos.some(Boolean) ? `<button class="rsteps" data-act="photo" data-id="${j.id}">${j.stepPhotos.map((r, k) => (r ? `<span class="ph"><img ${photoAttr(r)} alt="Step ${k + 1}"><b>${k + 1}</b></span>` : '')).join('')}<small>Compare with your guide ${ic('next')}</small></button>`
+        : j.guide && j.photo && Store.guides[j.key] ? `<button class="plink" data-act="photo" data-id="${j.id}">Compare with your guide ${ic('next')}</button>` : ''}
       <dl class="rpay">
         <div><dt>${payTypeLine(j)}</dt><dd>${fmt(base)}</dd></div>
         ${j.surge ? `<div><dt>Surge ×1.5</dt><dd>+${fmt(surged - base)}</dd></div>` : ''}
@@ -3997,16 +4101,17 @@ function pKidDetail(kid) {
 }
 function pChores() {
   const all = allChores();
-  return `<header class="phead row-h"><div><h2>Chores</h2><p>Every morning Chorecast runs a fair chore draft. Each kid gets 3 must-dos and 2 team tasks, and no two kids ever get the same job. Anything in their own bedroom is always each kid’s own. A job a sibling has done sits out until it is due again, the pick order rotates daily, and kids get the jobs they’ve done least lately. The family also shares 4 side hustles (5 at weekends). Kids only see chores that suit their age and your home.</p></div><button class="pbtn" data-act="addChore">${ic('plus')} Add a chore</button></header>
+  return `<header class="phead row-h"><div><h2>Chores</h2><p>Every morning Chorecast runs a fair chore draft. Each kid gets 3 must-dos and 2 team tasks, and no two kids ever get the same job. Anything in their own bedroom is always each kid’s own. A job a sibling has done sits out until it is due again, the pick order rotates daily, and kids get the jobs they’ve done least lately. The family also shares 4 side hustles (5 at weekends). Kids only see chores that suit their age and your home.</p></div><button class="pbtn" data-act="addChore">${ic('plus')} Add a custom chore</button></header>
     ${['must', 'team', 'gig'].map(tier => `<h3 class="pgroup-t">${TIERS[tier].label}<small>${TIERS[tier].pblurb}</small></h3><div class="group">${all.filter(c => c.tier === tier).map(choreRow).join('')}</div>`).join('')}`;
 }
 function choreRow(c) {
   const here = fitsHome(c), on = here && !(S().choreOff || {})[c.key], th = THEMES[c.theme] || THEMES.tidy, val = c[rateField(c)] || 0;
   const suffix = c.payType === 'piece' ? `/${c.unit}` : c.payType === 'hourly' ? '/hr' : '';
   return `<div class="row wrap ${on ? '' : 'off'}"><span class="sticker xs" style="--c1:${th.c1};--c2:${th.c2}" aria-hidden="true">${c.icon}</span>
-    <div class="row-main"><b>${esc(c.title)}</b><small>${c.maxAge ? `Ages ${c.minAge}–${c.maxAge}` : `Age ${c.minAge || 5}+`} · ${c.scope === 'me' ? 'Each kid does their own' : c.every > 1 ? `Due every ${c.every} days` : 'Daily, one kid'} · ${c.payType === 'hourly' ? `up to ${c.maxMins}` : c.mins} min · ${PAYTYPE[c.payType]}${c.custom ? ' · Yours' : ''}${c.custom && c.daily ? ' · Every day' : ''}</small></div>
+    <div class="row-main"><b>${esc(c.title)}</b><small>${c.maxAge ? `Ages ${c.minAge}–${c.maxAge}` : `Age ${c.minAge || 5}+`} · ${c.scope === 'me' ? 'Each kid does their own' : c.every > 1 ? `Due every ${c.every} days` : 'Daily, one kid'} · ${c.payType === 'hourly' ? `up to ${c.maxMins}` : c.mins} min · ${PAYTYPE[c.payType]}${c.custom ? ' · Yours' : ''}${c.custom && c.daily ? ' · Every day' : ''}${c.guide ? ` · 📷 Photo guide, ${c.photoMode === 'end' ? 'one photo at the end' : 'a photo every step'}` : ''}</small></div>
     ${c.payType === 'quote' ? '<span class="muted" style="font-size:14px">Kid quotes</span>' : `<div class="stepper"><button data-act="rate" data-key="${c.key}" data-d="${c.payType === 'hourly' ? -50 : -10}" aria-label="Lower pay">${ic('minus')}</button><b>${fmt(val)}${suffix}</b><button data-act="rate" data-key="${c.key}" data-d="${c.payType === 'hourly' ? 50 : 10}" aria-label="Raise pay">${ic('plus')}</button></div>`}
     ${here ? `<button class="switch ${on ? 'on' : ''}" role="switch" aria-checked="${on}" aria-label="Offer ${esc(c.title)}" data-act="choreToggle" data-key="${c.key}"></button>` : `<button class="not-here" data-act="ptab" data-tab="home" title="${esc(missingText(c, homeF()))}">${ic('home')} Not at your place</button>`}
+    ${c.guide ? `<button class="icon-p" data-act="gaOpen" data-key="${c.key}" aria-label="Photo guide for ${esc(c.title)}">${ic('photo')}</button>` : ''}
     ${c.custom ? `<button class="icon-p" data-act="delChore" data-key="${c.key}" aria-label="Delete ${esc(c.title)}">${ic('trash')}</button>` : ''}</div>`;
 }
 function pBank() {
@@ -4077,33 +4182,140 @@ function moneyFormSheet() {
 }
 const THEME_KEYS = Object.keys(THEMES);
 function choreFormSheet() {
-  const f = UI.choreForm;
-  return `<div class="sh-head"><button class="sh-x" data-act="close">Cancel</button><h2>New chore</h2><button class="sh-ok" id="cf-ok" data-act="saveChore" ${f.title.trim() ? '' : 'disabled'}>Add</button></div>
+  const f = UI.choreForm, photo = f.how === 'photo', each = f.photoMode !== 'end';
+  return `<div class="sh-head"><button class="sh-x" data-act="close">Cancel</button><h2>New custom chore</h2><button class="sh-ok" id="cf-ok" data-act="${photo ? 'cfRecord' : 'saveChore'}" ${f.title.trim() ? '' : 'disabled'}>${photo ? 'Next' : 'Add'}</button></div>
     <div class="sh-body">
       <label class="field"><span>Chore</span><input id="cf-title" type="text" maxlength="34" autocomplete="off" placeholder="Feed the chickens" value="${esc(f.title)}" data-in="cfTitle"></label>
+      <div class="field col"><span>How kids learn it</span><div class="seg"><button class="seg-i ${photo ? 'on' : ''}" data-act="cfHow" data-h="photo">📷 Photo guide</button><button class="seg-i ${photo ? '' : 'on'}" data-act="cfHow" data-h="text">Written steps</button></div>
+        <small class="hint">${photo ? 'You do the chore once, start to finish, and take a photo at each step. Your photos become the kids’ how-to guide.' : 'Type the steps. Kids tick them off as they go.'}</small></div>
+      ${photo ? `<div class="field col"><span>Kids’ photos</span><div class="seg"><button class="seg-i ${each ? 'on' : ''}" data-act="cfMode" data-m="each">A photo at every step</button><button class="seg-i ${each ? '' : 'on'}" data-act="cfMode" data-m="end">One photo at the end</button></div>
+        <small class="hint">${each ? 'Kids must photograph each step before they can tick it off and move to the next one.' : 'Kids tick the steps off as they go, then photograph the finished job to match yours.'}</small></div>` : ''}
       <div class="field col"><span>Icon</span><div class="ava-grid">${['🐔', '🧹', '🪣', '🗑️', '🧺', '🍳', '🌿', '🐈', '🛒', '📬', '🪴', '🧽'].map(a => `<button class="ava-opt ${a === f.icon ? 'on' : ''}" data-act="cfIcon" data-a="${a}">${a}</button>`).join('')}</div></div>
       <div class="field col"><span>Who does it</span><div class="seg"><button class="seg-i ${f.scope !== 'me' ? 'on' : ''}" data-act="cfScope" data-s="home">One kid, shared by the draft</button><button class="seg-i ${f.scope === 'me' ? 'on' : ''}" data-act="cfScope" data-s="me">Every kid does their own</button></div></div>
       <div class="field col"><span>Type</span><div class="seg">${['must', 'team', 'gig'].map(t => `<button class="seg-i ${f.tier === t ? 'on' : ''}" data-act="cfTier" data-t="${t}">${TIERS[t].label}</button>`).join('')}</div></div>
       <div class="field col"><span>Mission look and music</span><div class="hue-grid">${THEME_KEYS.map(k => `<button class="hue-opt ${f.theme === k ? 'on' : ''}" style="background:linear-gradient(145deg,${THEMES[k].c1},${THEMES[k].c2})" data-act="cfTheme" data-k="${k}" aria-label="${THEMES[k].name}"></button>`).join('')}</div><small class="hint">${THEMES[f.theme].name}</small></div>
-      <div class="field"><span>Minutes</span><div class="stepper"><button data-act="cfMins" data-d="-1" aria-label="Fewer minutes">${ic('minus')}</button><b>${f.mins}</b><button data-act="cfMins" data-d="1" aria-label="More minutes">${ic('plus')}</button></div></div>
+      ${photo ? '' : `<div class="field"><span>Minutes</span><div class="stepper"><button data-act="cfMins" data-d="-1" aria-label="Fewer minutes">${ic('minus')}</button><b>${f.mins}</b><button data-act="cfMins" data-d="1" aria-label="More minutes">${ic('plus')}</button></div></div>`}
       <div class="field"><span>Pay</span><div class="stepper"><button data-act="cfPay" data-d="-10" aria-label="Lower pay">${ic('minus')}</button><b>${fmt(f.pay)}</b><button data-act="cfPay" data-d="10" aria-label="Raise pay">${ic('plus')}</button></div></div>
-      <label class="field col"><span>Steps, one per line</span><textarea id="cf-steps" data-in="cfSteps" placeholder="Fill the feeder&#10;Fresh water&#10;Collect the eggs">${esc(f.steps)}</textarea></label>
+      ${photo ? '' : `<label class="field col"><span>Steps, one per line</span><textarea id="cf-steps" data-in="cfSteps" placeholder="Fill the feeder&#10;Fresh water&#10;Collect the eggs">${esc(f.steps)}</textarea></label>`}
       ${f.tier !== 'gig' ? `<div class="field"><span>Show every day</span><button class="switch ${f.daily ? 'on' : ''}" role="switch" aria-checked="${f.daily}" data-act="cfDaily" aria-label="Show every day"></button></div>` : ''}
+    </div>
+    ${photo ? `<div class="sh-foot"><button class="btn-big" id="cf-go" data-act="cfRecord" ${f.title.trim() ? '' : 'disabled'}>${ic('camera')} Start recording</button></div>` : ''}`;
+}
+
+/* ---------- Photo guides: a grown-up does a custom chore once and photographs each step ----------
+   Photos upload as they're taken, so saving is instant. The chore joins the other custom chores in settings, with
+   photoMode 'each' (kids photograph every step before ticking it off) or 'end' (one photo of the finished job).
+   The steps and photos go into the guides collection under the chore's key. */
+const guideOf = c => (c && c.guide && Store.guides[c.key]) || null;
+const parentName = () => (Acct.me && Acct.me.user && Acct.me.user.name) || '';
+const guideCards = g => (g.steps || []).map((s, k) => `<figure class="gcard"><span class="ph"><img ${photoAttr(s.photo)} alt="" loading="lazy"></span><figcaption><b>${k + 1}</b><span>${esc(s.text)}</span></figcaption></figure>`).join('')
+  + (g.finish ? `<figure class="gcard fin"><span class="ph"><img ${photoAttr(g.finish)} alt="" loading="lazy"></span><figcaption><b>${ic('check')}</b><span>Done looks like this</span></figcaption></figure>` : '');
+function startRecording(form) {
+  UI.rec = { form: { ...form }, steps: [], finish: null, phase: 'rec', startAt: Date.now(), durSec: 0, mins: form.mins || 10, askCancel: false };
+  clearInterval(UI.recTick);
+  UI.recTick = setInterval(() => { const el = $('#rec-time'); if (!UI.rec) clearInterval(UI.recTick); else if (el) el.textContent = mmss((Date.now() - UI.rec.startAt) / 1000); }, 1000);
+  requestWake();
+  openSheet(recSheet, { cls: 'wide rec', sticky: true, onClose: endRecording });
+}
+function endRecording() {
+  clearInterval(UI.recTick);
+  if (UI.rec) for (const x of [...UI.rec.steps, UI.rec.finish]) if (x) URL.revokeObjectURL(x.url);
+  UI.rec = null; if (!Stage.active) releaseWake();
+}
+function uploadGuidePhoto(shot) {
+  shot.busy = true; shot.err = false;
+  savePhoto(shot.blob, 'guide').then(x => { shot.ref = x.ref; }, e => { console.warn(e); shot.err = true; }).finally(() => {
+    shot.busy = false;
+    const el = $(`[data-shot="${shot.id}"]`); if (el) { el.classList.remove('busy'); el.classList.toggle('err', shot.err); }
+    recOk();
+  });
+}
+// slot is a step index (a new step when it's one past the end) or 'finish'
+function recPhoto(slot, blob) {
+  const r = UI.rec; if (!r) return;
+  if (!blob) { toast('That photo couldn’t be read. Try again.'); return; }
+  const shot = { id: uid(), blob, url: URL.createObjectURL(blob), ref: null, busy: true, err: false, text: '' };
+  const fresh = slot !== 'finish' && slot >= r.steps.length, toReview = slot === 'finish' && r.phase === 'rec';
+  if (slot === 'finish') {
+    if (r.finish) URL.revokeObjectURL(r.finish.url);
+    r.finish = shot;
+    if (r.phase === 'rec') { r.durSec = Math.round((Date.now() - r.startAt) / 1000); r.mins = clamp(Math.ceil(r.durSec * 1.25 / 60), 2, 90); r.phase = 'review'; }
+  } else if (!fresh) { const old = r.steps[slot]; shot.text = old.text; URL.revokeObjectURL(old.url); r.steps[slot] = shot; }
+  else r.steps.push(shot);
+  Sound.ensure(); Sound.shutter();
+  uploadGuidePhoto(shot);
+  renderSheet(false);
+  const sh = $('#sheets .sheet');
+  if (toReview && sh) sh.scrollTop = 0;
+  if (fresh) { if (sh) sh.scrollTop = sh.scrollHeight; $(`#rec-t-${r.steps.length - 1}`)?.focus(); }
+}
+const recShots = r => [...r.steps, r.finish].filter(Boolean);
+const recReady = r => r.steps.length > 0 && !!r.finish && recShots(r).every(x => x.ref) && r.steps.every(x => x.text.trim());
+function recNeed(r) {
+  if (r.steps.some(x => !x.text.trim())) return 'Add a few words to every step.';
+  if (recShots(r).some(x => x.err)) return 'A photo didn’t upload. Tap Upload again on it.';
+  if (recShots(r).some(x => !x.ref)) return 'Uploading photos…';
+  return '';
+}
+function recOk() {
+  const r = UI.rec; if (!r) return; const ok = recReady(r);
+  for (const id of ['#rec-ok', '#rec-save']) { const b = $(id); if (b) b.disabled = !ok; }
+  const n = $('#rec-need'); if (n) n.textContent = recNeed(r);
+}
+const recThumb = x => `<span class="ph rthumb ${x.busy ? 'busy' : ''} ${x.err ? 'err' : ''}" data-shot="${x.id}"><img src="${x.url}" alt=""><i class="spin" aria-hidden="true"></i><button class="rs-retry" data-act="recRetry" data-id="${x.id}">Upload again</button></span>`;
+function recSheet() {
+  const r = UI.rec; if (!r) return '';
+  const f = r.form, kids = kidsList(), who = kids.length === 1 ? `${kids[0].name}’s` : 'the kids’', each = f.photoMode !== 'end';
+  const card = (x, i) => `<div class="rstep">${recThumb(x)}
+      <div class="rstep-main"><b>Step ${i + 1}</b>
+        <input type="text" id="rec-t-${i}" maxlength="70" autocomplete="off" placeholder="What are you doing? Fill the feeder" value="${esc(x.text)}" data-in="recText" data-i="${i}" aria-label="What happens in step ${i + 1}">
+        <div class="rstep-acts"><button class="plink" data-act="recRetake" data-i="${i}">${ic('camera')} Retake</button><button class="plink danger" data-act="recDel" data-i="${i}">${ic('trash')} Remove</button></div></div></div>`;
+  if (r.phase === 'rec') return `<div class="sh-head"><button class="sh-x" data-act="recCancel">Cancel</button><h2>${f.icon} ${esc(f.title)}</h2><span class="rec-time" aria-label="Recording time"><i></i><b id="rec-time" class="num">${mmss((Date.now() - r.startAt) / 1000)}</b></span></div>
+    <div class="sh-body">
+      <p class="hint">Do the chore now, the way you’d like it done. Take a photo at each step and add a few words. Your photos become ${esc(who)} how-to guide.</p>
+      ${r.steps.map(card).join('') || `<div class="rec-empty">${ic('camera')}<b>Start with step 1</b><span>Take a photo of the first thing you do, like getting the gear out.</span></div>`}
+    </div>
+    <div class="sh-foot rec-foot"><button class="btn-big" data-act="recSnap">${ic('camera')} Photo of step ${r.steps.length + 1}</button>${r.steps.length ? `<button class="btn-soft" data-act="recEnd">${ic('check')} ${r.finish ? 'Done adding steps' : 'I’ve finished: photo of the finished job'}</button>` : ''}</div>`;
+  const ok = recReady(r);
+  return `<div class="sh-head"><button class="sh-x" data-act="recBack">Add steps</button><h2>Check your guide</h2><button class="sh-ok" id="rec-ok" data-act="recSave" ${ok ? '' : 'disabled'}>Save</button></div>
+    <div class="sh-body">
+      <div class="rec-sum">${ic('clock')}<span>You took <b>${mmss(r.durSec)}</b> for ${r.steps.length} step${r.steps.length === 1 ? '' : 's'}.</span></div>
+      ${r.steps.map(card).join('')}
+      <div class="rstep fin">${recThumb(r.finish)}<div class="rstep-main"><b>The finished job</b><span class="hint">Kids see this as what done looks like.</span><div class="rstep-acts"><button class="plink" data-act="recRetake" data-i="finish">${ic('camera')} Retake</button></div></div></div>
+      <div class="field"><span>Minutes on the kids’ clock</span><div class="stepper"><button data-act="recMins" data-d="-1" aria-label="Fewer minutes">${ic('minus')}</button><b>${r.mins}</b><button data-act="recMins" data-d="1" aria-label="More minutes">${ic('plus')}</button></div></div>
+      <p class="hint" style="margin-top:-8px">A little longer than you took, since the job is new to them.</p>
+      <div class="field col"><span>Kids’ photos</span><div class="seg"><button class="seg-i ${each ? 'on' : ''}" data-act="recMode" data-m="each">A photo at every step</button><button class="seg-i ${each ? '' : 'on'}" data-act="recMode" data-m="end">One photo at the end</button></div></div>
+      <p class="hint rec-need" id="rec-need" aria-live="polite">${esc(recNeed(r))}</p>
+    </div>
+    <div class="sh-foot"><button class="btn-big" id="rec-save" data-act="recSave" ${ok ? '' : 'disabled'}>${ic('check')} Save chore</button></div>`;
+}
+function guideAdminSheet() {
+  const c = choreDef(UI.gKey), g = Store.guides[UI.gKey];
+  if (!c) return `<div class="sh-head"><button class="sh-x" data-act="close">Close</button><h2>Photo guide</h2><span></span></div><div class="sh-body"><p class="hint">That chore was deleted.</p></div>`;
+  const each = c.photoMode !== 'end';
+  return `<div class="sh-head"><button class="sh-x" data-act="close">Close</button><h2>${c.icon} ${esc(c.title)}</h2><span></span></div>
+    <div class="sh-body">
+      ${g ? `<p class="hint">Recorded ${g.recordedBy ? `by ${esc(g.recordedBy)} ` : ''}${timeAgo(g.recordedAt)}: ${g.steps.length} step${g.steps.length === 1 ? '' : 's'} in ${mmss(g.durSec)}. Kids get ${c.mins} minutes on the clock.</p>` : '<p class="hint">This guide’s photos haven’t reached this device yet.</p>'}
+      <div class="field col"><span>Kids’ photos</span><div class="seg"><button class="seg-i ${each ? 'on' : ''}" data-act="gaMode" data-m="each">A photo at every step</button><button class="seg-i ${each ? '' : 'on'}" data-act="gaMode" data-m="end">One photo at the end</button></div>
+        <small class="hint">${each ? 'Kids must photograph each step before they can tick it off and move to the next one.' : 'Kids tick the steps off as they go, then photograph the finished job to match yours.'}</small></div>
+      ${g ? `<div class="gcards wrap">${guideCards(g)}</div>` : ''}
+      <div class="pactions"><button class="pbtn" data-act="gaRedo">${ic('camera')} Record it again</button><button class="pbtn danger" data-act="delChore" data-key="${c.key}">${ic('trash')} Delete chore</button></div>
     </div>`;
 }
 
 /* =========================================================
    Mission stage: full-screen event, solo or split crew
    ========================================================= */
-const Stage = { active: false, panes: [], crew: false, paused: true, raf: 0, last: 0, wake: null, dirty: false, camPane: -1 };
+const Stage = { active: false, panes: [], crew: false, paused: true, raf: 0, last: 0, wake: null, dirty: false };
 const CIRC = 2 * Math.PI * 86;
 function startMission(entries) {
   Sound.ensure();
   const date = dkey(), gigs = gigBoard(date);
   Stage.panes = entries.map((e, i) => {
     let c = { ...choreDef(e.key) }; const g = gigs.find(x => x.key === c.key); if (g && g.surge) c.surge = true;
-    const th = THEMES[c.theme] || THEMES.tidy;
-    return { i, kid: Store.kids[e.kidId], c, th, quote: e.quote ?? c.quote, phase: 'play', steps: c.steps.map(() => false), score: 0, combo: 0, lastStepAt: 0, units: 0, elapsed: 0, minutes: 0,
+    const th = THEMES[c.theme] || THEMES.tidy, guide = guideOf(c);
+    // g: the grown-up's photo guide. mode 'each' = a photo of every step before it can be ticked, 'end' = one at the end.
+    return { i, kid: Store.kids[e.kidId], c, th, g: guide, mode: guide ? c.photoMode || 'each' : null, shots: c.steps.map(() => null), quote: e.quote ?? c.quote, phase: 'play', steps: c.steps.map(() => false), score: 0, combo: 0, lastStepAt: 0, units: 0, elapsed: 0, minutes: 0,
       target: (c.payType === 'hourly' ? c.maxMins || 60 : c.mins) * 60, power: null, powerAt: 0, powers: 0, photoBlob: null, photoUrl: null, br: { steps: 0, combo: 0, speed: 0, photo: 0, extra: 0 }, lastSec: -1 };
   });
   Stage.crew = Stage.panes.length > 1; Stage.active = true; Stage.paused = true; Stage.dirty = false;
@@ -4136,23 +4348,31 @@ function renderPane(p) {
         <div class="work">
           ${piece ? `<div class="counter"><button class="count-btn" data-act="sUnit" data-pane="${p.i}" aria-label="Add one ${c.unit}"><span class="count-n num" data-units>${p.units}</span><span class="count-u">${c.unit}s</span></button><div class="count-side"><span>Earned so far</span><b class="num" data-earn>${fmt(c.perUnit * Math.min(p.units, c.maxUnits) * (c.surge ? 1.5 : 1))}</b><small>${fmt(c.perUnit)} each · max ${c.maxUnits}</small><button class="count-undo" data-act="sUnitUndo" data-pane="${p.i}">Undo</button></div></div>` : ''}
           ${hourly ? `<div class="hourly"><span>Earning<br><small>${fmt(c.rate)}/hr, paid by the minute</small></span><b class="num" data-earn>${fmt(0)}</b></div>` : ''}
-          <div class="steps">${c.steps.map((s, k) => `<button class="step ${p.steps[k] ? 'done' : ''}" data-act="sStep" data-pane="${p.i}" data-k="${k}" aria-pressed="${p.steps[k]}"><span class="step-n">${k + 1}</span><span class="step-t">${esc(s)}</span><span class="step-ck">${ic('check')}</span></button>`).join('')}</div>
+          <div class="steps">${stepsHtml(p)}</div>
         </div>
       </div>
       <footer class="pane-foot"><button class="finish ${allDone ? 'ready' : ''}" data-act="sFinish" data-pane="${p.i}">${ic('check')} I'm done</button></footer>
       <div class="hype" data-hype></div>`;
     const w = inner.querySelector('.work'), more = () => w.classList.toggle('more', w.scrollHeight - w.scrollTop - w.clientHeight > 4);
     w.addEventListener('scroll', more, { passive: true }); requestAnimationFrame(more); p.more = more;
+    if (p.g) hydratePhotos(inner);
   } else if (p.phase === 'proof') {
+    const err = p.err ? `<p class="p-err">${esc(p.err)}</p>` : '', send = p.uploading ? 'Sending…' : 'Send to grown-ups';
+    const match = p.mode === 'end' && p.g && p.g.finish ? `<figure class="match"><span class="ph"><img ${photoAttr(p.g.finish)} alt="The grown-up’s photo of the finished job"></span><figcaption>Make it look like this</figcaption></figure>` : '';
+    const n = p.shots.filter(Boolean).length;
     inner.innerHTML = `${paneHead(p)}<div class="proof">
-      ${p.photoUrl ? `<div class="polaroid big" style="--rot:-3deg"><span class="ph"><img src="${p.photoUrl}" alt="Your photo"></span><span class="pol-cap">${esc(c.title)}<small>${esc(p.kid.name)} · today</small></span></div>
-        ${p.err ? `<p class="p-err">${esc(p.err)}</p>` : ''}
-        <div class="proof-row"><button class="finish" data-act="sSnap" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${ic('camera')} Retake</button><button class="finish ready no-pulse" data-act="sSubmit" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${p.uploading ? 'Sending…' : 'Send to grown-ups'}</button></div>`
-      : `<div class="viewfinder"><i></i><i></i><i></i><i></i>${ic('camera')}<p>Snap your finished job</p><small>A grown-up checks the photo before payday. +150 points.</small></div>
-        ${p.err ? `<p class="p-err">${esc(p.err)}</p>` : ''}
+      ${p.mode === 'each' ? `<div class="shots">${p.shots.map((sh, k) => (sh ? `<div class="polaroid" style="--rot:${k % 2 ? 2 : -2}deg"><span class="ph"><img src="${sh.url}" alt="Step ${k + 1}"></span><span class="pol-cap">${k + 1}. ${esc(c.steps[k])}</span></div>` : '')).join('')}</div>
+        <p class="proof-note">${n ? `${n} step photo${n === 1 ? '' : 's'} ready for the grown-ups.` : 'No step photos this time.'}</p>
+        ${err}<button class="finish ready no-pulse" data-act="sSubmit" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${send}</button>`
+      : p.photoUrl ? `<div class="proof-pair">${match}<div class="polaroid big" style="--rot:-3deg"><span class="ph"><img src="${p.photoUrl}" alt="Your photo"></span><span class="pol-cap">${esc(c.title)}<small>${esc(p.kid.name)} · today</small></span></div></div>
+        ${err}
+        <div class="proof-row"><button class="finish" data-act="sSnap" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${ic('camera')} Retake</button><button class="finish ready no-pulse" data-act="sSubmit" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${send}</button></div>`
+      : `<div class="proof-pair">${match}<div class="viewfinder"><i></i><i></i><i></i><i></i>${ic('camera')}<p>Snap your finished job</p><small>${match ? 'Match the grown-up’s photo. +150 points.' : 'A grown-up checks the photo before payday. +150 points.'}</small></div></div>
+        ${err}
         <button class="finish ready" data-act="sSnap" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${ic('camera')} Open camera</button>
-        <button class="link-btn" data-act="sSkipPhoto" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${p.uploading ? 'Sending…' : 'No camera? Send without a photo'}</button>`}
+        ${p.mode ? '' : `<button class="link-btn" data-act="sSkipPhoto" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${p.uploading ? 'Sending…' : 'No camera? Send without a photo'}</button>`}`}
     </div>`;
+    if (p.g) hydratePhotos(inner);
   } else {
     // Angry Birds style: points tally up row by row, and each star slams in as the meter passes its notch.
     // A repaint after the tally has started shows the finished screen straight away.
@@ -4297,9 +4517,50 @@ function showHype(p, txt, ms = 1800) { const h = p.el.querySelector('[data-hype]
 function toastPane(p, txt) { if (Stage.crew) showHype(p, txt); else toast(txt); }
 function floatPts(el, txt) { const r = el.getBoundingClientRect(), f = document.createElement('div'); f.className = 'float-pts'; f.textContent = txt; f.style.left = r.left + r.width / 2 + 'px'; f.style.top = r.top + 'px'; document.body.appendChild(f); setTimeout(() => f.remove(), 950); }
 function bumpScore(p) { const s = p.el.querySelector('[data-score]'); if (s) { s.textContent = p.score.toLocaleString(); s.classList.add('bump'); setTimeout(() => s.classList.remove('bump'), 160); } const t = $('#crewScore'); if (t) t.textContent = Stage.panes.reduce((a, x) => a + x.score, 0).toLocaleString(); }
+// Steps for a chore with a photo guide: the grown-up's photo on the left (tap to see it big), the step, and in
+// 'each' mode the kid's own photo on the right. In 'each' mode steps go in order and each needs a photo first.
+function stepsHtml(p) {
+  const c = p.c;
+  if (!p.g) return c.steps.map((s, k) => `<button class="step ${p.steps[k] ? 'done' : ''}" data-act="sStep" data-pane="${p.i}" data-k="${k}" aria-pressed="${p.steps[k]}"><span class="step-n">${k + 1}</span><span class="step-t">${esc(s)}</span><span class="step-ck">${ic('check')}</span></button>`).join('');
+  const each = p.mode === 'each', cur = p.steps.findIndex(x => !x);
+  return c.steps.map((s, k) => {
+    const done = p.steps[k], gp = p.g.steps[k] && p.g.steps[k].photo, shot = p.shots[k], locked = each && !done && k !== cur, need = each && !done && !shot;
+    return `<div class="step gstep ${done ? 'done' : ''} ${locked ? 'locked' : ''} ${each && k === cur ? 'cur' : ''} ${need ? 'need' : ''}" data-k="${k}">
+      ${gp ? `<button class="gthumb ph" data-act="sGuide" data-pane="${p.i}" data-k="${k}" aria-label="See how step ${k + 1} is done"><img ${photoAttr(gp)} alt=""></button>` : ''}
+      <button class="gmain" data-act="sStep" data-pane="${p.i}" data-k="${k}" aria-pressed="${done}"><span class="step-n">${k + 1}</span><span class="step-t">${esc(s)}${need && !locked ? '<small>Snap a photo to tick it off</small>' : ''}</span><span class="step-ck">${ic('check')}</span></button>
+      ${each ? `<button class="gshot ph" data-act="sShot" data-pane="${p.i}" data-k="${k}" ${done || locked ? 'disabled' : ''} aria-label="${shot ? 'Retake your photo' : 'Take a photo'} of step ${k + 1}">${shot ? `<img src="${shot.url}" alt="">` : ic(locked ? 'lock' : 'camera')}</button>` : ''}
+    </div>`;
+  }).join('');
+}
+function refreshSteps(p) { const box = p.el.querySelector('.steps'); if (!box) return; box.innerHTML = stepsHtml(p); hydratePhotos(box); }
+function uploadShot(sh) { const pr = sh.prom = savePhoto(sh.blob, 'step').then(r => (sh.ref = r.ref)); pr.catch(() => { if (sh.prom === pr) sh.prom = null; }); return pr; }
+function snapStep(p, k) {
+  openCamera(blob => {
+    if (!Stage.active || p.phase !== 'play' || p.steps[k]) return;
+    if (!blob) { showHype(p, 'That photo didn’t work. Try again'); return; }
+    if (p.shots[k]) URL.revokeObjectURL(p.shots[k].url);
+    const sh = p.shots[k] = { blob, url: URL.createObjectURL(blob), ref: null, prom: null }; uploadShot(sh);
+    Sound.ensure(); Sound.shutter(); flashPane(p); refreshSteps(p); showHype(p, 'Nice photo! Now tick the step off');
+  });
+}
+// The grown-up's photo of one step, big, over the pane
+function showLight(p, ref, cap) {
+  p.el.querySelector('.glight')?.remove();
+  const d = document.createElement('div'); d.className = 'glight'; d.dataset.act = 'sLightX';
+  d.innerHTML = `<figure><span class="ph"><img ${photoAttr(ref)} alt=""></span><figcaption>${esc(cap)}</figcaption></figure><small>Tap anywhere to close</small>`;
+  p.el.appendChild(d); hydratePhotos(d);
+}
+function flashPane(p) { const fl = document.createElement('div'); fl.className = 'flash'; p.el.appendChild(fl); setTimeout(() => fl.remove(), 520); }
 function stepTap(p, k, btn) {
   if (Stage.paused || p.phase !== 'play' || p.steps[k]) return;
-  p.steps[k] = true; btn.classList.add('done'); btn.setAttribute('aria-pressed', 'true');
+  if (p.mode === 'each') {
+    const cur = p.steps.findIndex(x => !x);
+    if (k !== cur) { Sound.error(); showHype(p, `Finish step ${cur + 1} first`); return; }
+    if (!p.shots[k]) { snapStep(p, k); return; }
+  }
+  p.steps[k] = true;
+  if (p.g) { refreshSteps(p); btn = p.el.querySelector(`.gstep[data-k="${k}"] .gmain`) || btn; }
+  else { btn.classList.add('done'); btn.setAttribute('aria-pressed', 'true'); }
   const pace = Math.max(20, (p.target / p.c.steps.length) * 1.25);
   const prior = p.steps.filter(Boolean).length - 1;
   p.combo = prior > 0 && p.elapsed - p.lastStepAt < pace ? p.combo + 1 : 0; p.lastStepAt = p.elapsed;
@@ -4352,14 +4613,19 @@ function jobFromPane(p) {
 async function submitPane(p, withPhoto) {
   if (p.uploading || p.phase !== 'proof') return;
   p.uploading = true; p.err = ''; renderPane(p);
-  let ref = null;
-  if (withPhoto && p.photoBlob) {
+  let ref = null, stepPhotos = null;
+  if (p.mode === 'each') {
+    try { stepPhotos = await Promise.all(p.shots.map(sh => (sh ? sh.ref || sh.prom || uploadShot(sh) : null))); }
+    catch (e) { console.warn(e); p.uploading = false; p.err = 'Some photos didn’t upload. Check the Wi-Fi and try again.'; renderPane(p); return; }
+    ref = [...stepPhotos].reverse().find(Boolean) || null;
+    if (ref) { p.br.photo = 150; p.score += 150; bumpScore(p); }
+  } else if (withPhoto && p.photoBlob) {
     try { ref = (await savePhoto(p.photoBlob)).ref; }
     catch (e) { console.warn(e); p.uploading = false; p.err = e && e.code === 'quota_or_state' ? 'Photo storage is full. Send without the photo, and ask a grown-up to tidy up.' : 'The photo didn’t upload. Try again, or send without it.'; renderPane(p); return; }
     p.br.photo = 150; p.score += 150; bumpScore(p);
   }
   p.stars = starsFor(p);
-  setDoc('jobs', uid(), { ...jobFromPane(p), photo: ref, status: 'pending', date: dkey(), at: Date.now(), breakdown: p.br });
+  setDoc('jobs', uid(), { ...jobFromPane(p), photo: ref, ...(p.mode ? { guide: p.mode } : {}), ...(stepPhotos ? { stepPhotos } : {}), status: 'pending', date: dkey(), at: Date.now(), breakdown: p.br });
   p.uploading = false; p.phase = 'result'; renderPane(p);
 }
 function pauseStage(on) {
@@ -4369,23 +4635,28 @@ function pauseStage(on) {
 }
 function exitStage() {
   Stage.active = false; cancelAnimationFrame(Stage.raf); Sound.music.stop(); releaseWake();
-  Stage.panes.forEach(p => { if (p.photoUrl) URL.revokeObjectURL(p.photoUrl); if (p.fx && p.fx.dispose) p.fx.dispose(); });
+  Stage.panes.forEach(p => { if (p.photoUrl) URL.revokeObjectURL(p.photoUrl); p.shots.forEach(sh => sh && URL.revokeObjectURL(sh.url)); if (p.fx && p.fx.dispose) p.fx.dispose(); });
   const st = $('#stage'); st.hidden = true; st.innerHTML = ''; Stage.panes = [];
   render();
 }
 async function requestWake() { try { if (navigator.wakeLock) Stage.wake = await navigator.wakeLock.request('screen'); } catch (e) { Stage.wake = null; } }
 function releaseWake() { try { Stage.wake && Stage.wake.release(); } catch (e) {} Stage.wake = null; }
+// One camera input for the whole app: whoever opens it says what to do with the photo (null if it couldn't be read).
+const Cam = { cb: null };
+function openCamera(cb) { Cam.cb = cb; const cam = $('#cam'); cam.value = ''; cam.click(); }
 $('#cam').addEventListener('change', async e => {
-  const file = e.target.files && e.target.files[0], p = Stage.panes[Stage.camPane]; e.target.value = '';
-  if (!file || !p || p.phase !== 'proof') return;
-  try {
-    const blob = await processPhoto(file); if (!blob) throw new Error('no blob');
-    if (p.photoUrl) URL.revokeObjectURL(p.photoUrl);
-    p.photoBlob = blob; p.photoUrl = URL.createObjectURL(blob); p.err = '';
-    Sound.ensure(); Sound.shutter(); renderPane(p);
-    const fl = document.createElement('div'); fl.className = 'flash'; p.el.appendChild(fl); setTimeout(() => fl.remove(), 520);
-  } catch (err) { p.err = 'That photo couldn’t be read. Try taking it again.'; renderPane(p); }
+  const file = e.target.files && e.target.files[0], cb = Cam.cb; e.target.value = ''; Cam.cb = null;
+  if (!file || !cb) return;
+  let blob = null; try { blob = await processPhoto(file); } catch (err) { console.warn(err); }
+  cb(blob);
 });
+function proofPhoto(p, blob) {
+  if (!Stage.active || p.phase !== 'proof') return;
+  if (!blob) { p.err = 'That photo couldn’t be read. Try taking it again.'; renderPane(p); return; }
+  if (p.photoUrl) URL.revokeObjectURL(p.photoUrl);
+  p.photoBlob = blob; p.photoUrl = URL.createObjectURL(blob); p.err = '';
+  Sound.ensure(); Sound.shutter(); renderPane(p); flashPane(p);
+}
 
 /* =========================================================
    Actions
@@ -4545,7 +4816,10 @@ const ACT = {
   },
   sUnitUndo: a => { const p = Stage.panes[+a.dataset.pane]; if (p.units <= 0 || p.phase !== 'play') return; p.units--; p.score -= 30; bumpScore(p); p.el.querySelector('[data-units]').textContent = p.units; p.el.querySelector('[data-earn]').textContent = fmt(p.c.perUnit * p.units * (p.c.surge ? 1.5 : 1)); },
   sFinish: a => { const p = Stage.panes[+a.dataset.pane]; if (!Stage.paused) finishPane(p, false); },
-  sSnap: a => { Stage.camPane = +a.dataset.pane; const cam = $('#cam'); cam.value = ''; cam.click(); },
+  sSnap: a => { const p = Stage.panes[+a.dataset.pane]; openCamera(b => proofPhoto(p, b)); },
+  sShot: a => { const p = Stage.panes[+a.dataset.pane], k = +a.dataset.k; if (p && p.phase === 'play' && !Stage.paused && !p.steps[k] && k === p.steps.findIndex(x => !x)) snapStep(p, k); },
+  sGuide: a => { const p = Stage.panes[+a.dataset.pane], k = +a.dataset.k, st = p && p.g && p.g.steps[k]; if (st) showLight(p, st.photo, `Step ${k + 1}: ${st.text}`); },
+  sLightX: a => a.remove(),
   sSubmit: a => submitPane(Stage.panes[+a.dataset.pane], true),
   sSkipPhoto: a => submitPane(Stage.panes[+a.dataset.pane], false),
   sExit: () => exitStage(),
@@ -4605,8 +4879,56 @@ const ACT = {
   wxSave: () => { const f = UI.wxForm; saveSettings({ weather: { cond: f.cond, tempC: f.tempC, windKph: f.windKph, place: f.place.trim(), updatedAt: Date.now(), source: 'manual' } }); closeSheet(); toast('Island weather updated'); },
   rate: a => { const c = choreDef(a.dataset.key); const f = rateField(c); const v = clamp((c[f] || 0) + +a.dataset.d, 0, 5000); saveSettings({ payOverride: { [c.key]: v } }, 600); },
   choreToggle: a => { const k = a.dataset.key, off = !!(S().choreOff || {})[k]; saveSettings({ choreOff: { [k]: !off } }); },
-  delChore: a => { saveSettings({ custom: (S().custom || []).filter(c => c.key !== a.dataset.key) }); toast('Chore deleted'); },
-  addChore: () => { UI.choreForm = { title: '', icon: '🧹', tier: 'team', theme: 'tidy', mins: 10, pay: 100, steps: '', daily: false, scope: 'home' }; openSheet(choreFormSheet); },
+  delChore: a => {
+    const k = a.dataset.key; saveSettings({ custom: (S().custom || []).filter(c => c.key !== k) });
+    if (Store.guides[k]) delDoc('guides', k);
+    if (UI.sheet && UI.sheet.fn === guideAdminSheet) closeSheet();
+    toast('Chore deleted');
+  },
+  addChore: () => { UI.choreForm = { title: '', icon: '🧹', tier: 'team', theme: 'tidy', mins: 10, pay: 100, steps: '', daily: false, scope: 'home', how: 'photo', photoMode: 'each' }; openSheet(choreFormSheet); },
+  cfHow: a => { UI.choreForm.how = a.dataset.h; renderSheet(false); },
+  cfMode: a => { UI.choreForm.photoMode = a.dataset.m; renderSheet(false); },
+  cfRecord: () => { if (UI.choreForm.title.trim()) startRecording(UI.choreForm); },
+  recSnap: () => openCamera(b => UI.rec && recPhoto(UI.rec.steps.length, b)),
+  recRetake: a => { const i = a.dataset.i; openCamera(b => recPhoto(i === 'finish' ? 'finish' : +i, b)); },
+  recRetry: a => { const r = UI.rec, x = r && recShots(r).find(y => y.id === a.dataset.id); if (!x) return; const el = $(`[data-shot="${x.id}"]`); if (el) { el.classList.add('busy'); el.classList.remove('err'); } uploadGuidePhoto(x); recOk(); },
+  recDel: a => { const r = UI.rec, [x] = r.steps.splice(+a.dataset.i, 1); if (x) URL.revokeObjectURL(x.url); if (!r.steps.length) r.phase = 'rec'; renderSheet(false); },
+  recEnd: () => {
+    const r = UI.rec; if (!r || !r.steps.length) return;
+    if (!r.finish) { openCamera(b => recPhoto('finish', b)); return; }
+    r.durSec = Math.round((Date.now() - r.startAt) / 1000); r.phase = 'review'; renderSheet(false);
+    const sh = $('#sheets .sheet'); if (sh) sh.scrollTop = 0;
+  },
+  recBack: () => { UI.rec.phase = 'rec'; renderSheet(false); },
+  recMins: a => { UI.rec.mins = clamp(UI.rec.mins + +a.dataset.d, 1, 90); renderSheet(false); },
+  recMode: a => { UI.rec.form.photoMode = a.dataset.m; renderSheet(false); },
+  recCancel: a => {
+    const r = UI.rec; if (!r) return;
+    if (!r.steps.length || r.askCancel) { closeSheet(); return; }
+    r.askCancel = true; a.textContent = 'Tap again to discard';
+    setTimeout(() => { if (UI.rec) UI.rec.askCancel = false; if (a.isConnected) a.textContent = 'Cancel'; }, 3000);
+  },
+  recSave: () => {
+    const r = UI.rec; if (!r || !recReady(r)) return;
+    const f = r.form, key = f.editKey || 'c-' + uid(), steps = r.steps.map(x => ({ text: x.text.trim(), photo: x.ref })), photoMode = f.photoMode === 'end' ? 'end' : 'each';
+    const c = { key, tier: f.tier, title: f.title.trim(), icon: f.icon, theme: f.theme, mins: r.mins, pay: f.pay, minAge: 0, steps: steps.map(x => x.text), payType: 'fixed', scope: f.tier === 'gig' ? 'home' : f.scope, every: 1, daily: f.tier !== 'gig' && f.daily, guide: true, photoMode };
+    setDoc('guides', key, { key, title: c.title, photoMode, steps, finish: r.finish.ref, durSec: r.durSec, recordedAt: Date.now(), recordedBy: parentName() || null });
+    const list = S().custom || [];
+    saveSettings({ custom: list.some(x => x.key === key) ? list.map(x => (x.key === key ? c : x)) : [...list, c] });
+    track('guide.recorded', { key, title: c.title, steps: steps.length, photoMode, durSec: r.durSec, again: !!f.editKey });
+    closeSheet(); toast(`${c.title} added with a ${steps.length}-step photo guide`);
+  },
+  gaOpen: a => { UI.gKey = a.dataset.key; openSheet(guideAdminSheet, { cls: 'wide' }); },
+  gaMode: a => {
+    const k = UI.gKey, m = a.dataset.m;
+    saveSettings({ custom: (S().custom || []).map(x => (x.key === k ? { ...x, photoMode: m } : x)) });
+    if (Store.guides[k]) updDoc('guides', k, { photoMode: m });
+    renderSheet(false);
+  },
+  gaRedo: () => {
+    const c = (S().custom || []).find(x => x.key === UI.gKey); if (!c) return;
+    startRecording({ title: c.title, icon: c.icon, tier: c.tier, theme: c.theme, pay: c.pay, mins: c.mins, daily: !!c.daily, scope: c.scope, how: 'photo', photoMode: c.photoMode || 'each', editKey: c.key });
+  },
   cfIcon: a => { UI.choreForm.icon = a.dataset.a; renderSheet(false); },
   cfTier: a => { UI.choreForm.tier = a.dataset.t; renderSheet(false); },
   cfTheme: a => { UI.choreForm.theme = a.dataset.k; renderSheet(false); },
@@ -4636,7 +4958,8 @@ const IN = {
   },
   kfName: a => { UI.kidForm.name = a.value; $('#kf-ok').disabled = !a.value.trim(); },
   goalName: a => { UI.goalForm.name = a.value; $('#goal-ok').disabled = !a.value.trim(); },
-  cfTitle: a => { UI.choreForm.title = a.value; $('#cf-ok').disabled = !a.value.trim(); },
+  cfTitle: a => { UI.choreForm.title = a.value; const off = !a.value.trim(); $('#cf-ok').disabled = off; const go = $('#cf-go'); if (go) go.disabled = off; },
+  recText: a => { const x = UI.rec && UI.rec.steps[+a.dataset.i]; if (x) { x.text = a.value; recOk(); } },
   cfSteps: a => { UI.choreForm.steps = a.value; },
   wxPlace: a => { UI.wxForm.place = a.value; },
 };
@@ -4665,7 +4988,7 @@ document.addEventListener('click', e => {
   const fn = ACT[a.dataset.act]; if (fn) { fn(a, e); if (TRACKED.has(a.dataset.act)) { const { act, ...rest } = a.dataset; track('app.' + act, rest); } }
 });
 // Actions worth recording in the family's event log (every synced write is also logged on the server).
-const TRACKED = new Set(['openKid', 'start', 'crewGo', 'habit', 'mvGo', 'preset', 'goalSave', 'goalRemove', 'quiz', 'paydayDone', 'trade', 'sFinish', 'sSubmit', 'sSkipPhoto', 'sQuit', 'approve', 'redo', 'payout', 'bonus', 'mGo', 'saveKid', 'removeKidYes', 'choreToggle', 'saveChore', 'delChore', 'tax', 'interest', 'setFlag', 'currency', 'fundReset', 'lesson', 'wizNext', 'wizSkip', 'lock', 'gStart', 'gNode', 'gAssign', 'gMoment', 'gCase']);
+const TRACKED = new Set(['openKid', 'start', 'crewGo', 'habit', 'mvGo', 'preset', 'goalSave', 'goalRemove', 'quiz', 'paydayDone', 'trade', 'sFinish', 'sSubmit', 'sSkipPhoto', 'sQuit', 'approve', 'redo', 'payout', 'bonus', 'mGo', 'saveKid', 'removeKidYes', 'choreToggle', 'saveChore', 'delChore', 'cfRecord', 'gaMode', 'gaRedo', 'sShot', 'tax', 'interest', 'setFlag', 'currency', 'fundReset', 'lesson', 'wizNext', 'wizSkip', 'lock', 'gStart', 'gNode', 'gAssign', 'gMoment', 'gCase']);
 document.addEventListener('submit', e => { const f = e.target.closest('[data-submit]'); if (!f) return; e.preventDefault(); const fn = ACT[f.dataset.submit]; if (fn) fn(f, e); });
 document.addEventListener('input', e => { const a = e.target.closest('[data-in]'); if (a && IN[a.dataset.in]) IN[a.dataset.in](a, e); });
 document.addEventListener('keydown', e => {
