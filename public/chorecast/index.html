@@ -1043,6 +1043,17 @@ p{margin:0}
 .shop-item b{font:800 13px/1.2 var(--f-round);min-height:2.4em;display:flex;align-items:center}
 .shop-item small{font:700 11px/1.3 var(--f-round);color:#6a7190}
 .shop-item.locked img{filter:grayscale(1);opacity:.5}
+.shop-item.is-prize{background:linear-gradient(#fff8dc,#fff 60%);box-shadow:inset 0 0 0 2px #ffc93c}
+.shop-item small.prize{color:#8a5a00}
+.mk{display:grid;gap:8px}
+.mk-part{display:flex;align-items:center;gap:12px;padding:5px 12px;border-radius:18px;background:rgba(255,255,255,.92);color:#0D1530}
+.mk-part>b{flex:0 0 86px;font:800 13px/1.2 var(--f-round)}
+.mk-sw{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:4px}
+.mk-sw::-webkit-scrollbar{display:none}
+.mk-dot{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:var(--c);box-shadow:inset 0 -3px 0 rgba(0,0,0,.12),0 0 0 2px rgba(13,21,48,.12);display:grid;place-items:center;font-size:18px}
+.mk-dot.lock{filter:saturate(.75);opacity:.85}
+.mk-dot.on{box-shadow:inset 0 -3px 0 rgba(0,0,0,.12),0 0 0 3px #fff,0 0 0 6px #0D1530}
+.mk-dot.pick{box-shadow:inset 0 -3px 0 rgba(0,0,0,.12),0 0 0 3px #fff,0 0 0 6px #FF6A3D}
 .shop-buy{display:flex;flex-direction:column;gap:4px;width:100%}
 .shop-buy button{min-height:32px;border-radius:10px;background:#0D1530;color:#fff;font:800 13px var(--f-round);display:inline-flex;align-items:center;justify-content:center;gap:4px}
 .shop-buy button+button{background:#FF6A3D}
@@ -2026,7 +2037,7 @@ function islandParams(kid) {
   const j = kid.jars || {}, p = kidProgress(kid, dkey());
   return { seed: hash(kid.id), hue: kid.hue, avatar: kid.avatar, level: levelOf(kid), trees: Math.min(8, jobsList().filter(x => x.kidId === kid.id && x.status === 'approved' && x.tier !== 'bonus').length),
     skills: (() => { const g = (Store.growth || {})[kid.id] || {}; return Math.min(24, Object.values(g.done || {}).filter(d => d.best >= 0.8).length); })(), marks: Object.keys(((Store.growth || {})[kid.id] || {}).mile || {}).sort(),
-    pond: Math.round(clamp((j.save || 0) / 5000, 0, 1) * 10) / 10, mill: holdingsValue(kid) > 0, coins: Math.min(6, Math.ceil((j.spend || 0) / 300)), rainbow: p.total > 0 && p.done >= p.total, night: phaseNow() === 'night', wx: wxNow().key, care: Object.fromEntries(Object.entries(careOf(kid)).map(([q, v]) => [q, Math.round(v * 10) / 10])), items: ((kid.island || {}).items || []).map(i => ({ id: i.id, t: i.t, x: i.x, z: i.z, r: i.r })) };
+    pond: Math.round(clamp((j.save || 0) / 5000, 0, 1) * 10) / 10, mill: holdingsValue(kid) > 0, coins: Math.min(6, Math.ceil((j.spend || 0) / 300)), rainbow: p.total > 0 && p.done >= p.total, night: phaseNow() === 'night', wx: wxNow().key, care: Object.fromEntries(Object.entries(careOf(kid)).map(([q, v]) => [q, Math.round(v * 10) / 10])), farm: !!(kid.island || {}).farm, look: lookOf(kid), items: ((kid.island || {}).items || []).map(i => ({ id: i.id, t: i.t, x: i.x, z: i.z, r: i.r })) };
 }
 const islandSig = kid => { const p = islandParams(kid); delete p.seed; return hash(JSON.stringify(p)).toString(36); };
 function islandCaption(kid) { const i = levelOf(kid), next = LEVELS[i + 1]; return { name: LEVELS[i].name, lvl: i + 1, next: next ? `${fmt(next.at - netWorth(kid))} more builds a ${next.name.toLowerCase()}` : 'You built the castle!' }; }
@@ -2250,7 +2261,59 @@ SHOP.push(
   { t: 'rake', name: 'Leaf rake', cat: 'tools', xp: 250, cash: 200 }, { t: 'net', name: 'Pond net', cat: 'tools', xp: 250, cash: 200 },
   { t: 'loppers', name: 'Loppers', cat: 'tools', xp: 350, cash: 300 }, { t: 'blaster', name: 'Water blaster', cat: 'tools', xp: 800, cash: 700 },
 );
-const SHOP_CATS = [['jobs', 'Island jobs'], ['tools', 'Tools'], ['animals', 'Animals'], ['play', 'Play'], ['garden', 'Garden'], ['home', 'Outdoor living']];
+// The farm: the paddock makes the island bigger, farm animals live inside its fence, and each one eats a scoop of feed a day.
+SHOP.push(
+  { t: 'paddock', name: 'Farm paddock', cat: 'farm', xp: 1500, cash: 1200, lvl: 1, land: true },
+  { t: 'feed', name: 'Bag of feed', cat: 'farm', xp: 100, cash: 80, feed: 10, needs: 'farm' },
+  { t: 'hen', name: 'Hen', cat: 'farm', xp: 250, cash: 200, farm: true }, { t: 'goat', name: 'Goat', cat: 'farm', xp: 450, cash: 380, farm: true },
+  { t: 'cow', name: 'Cow', cat: 'farm', xp: 650, cash: 550, farm: true }, { t: 'alpaca', name: 'Alpaca', cat: 'farm', xp: 700, cash: 600, farm: true },
+  { t: 'pony', name: 'Pony', cat: 'farm', xp: 900, cash: 750, farm: true, lvl: 2 },
+  { t: 'bucket', name: 'Feed bucket', cat: 'tools', xp: 150, cash: 120, needs: 'farm' },
+  // Prizes: never sold. Character Growth hands one out every few lessons (see PRIZES).
+  { t: 'redpanda', name: 'Red panda', cat: 'animals', prize: true }, { t: 'dragon', name: 'Baby dragon', cat: 'animals', prize: true },
+  { t: 'unicorn', name: 'Unicorn foal', cat: 'animals', prize: true }, { t: 'treehouse', name: 'Treehouse', cat: 'play', prize: true },
+  { t: 'balloon', name: 'Hot-air balloon', cat: 'play', prize: true }, { t: 'lighthouse', name: 'Lighthouse', cat: 'home', prize: true },
+);
+const SHOP_CATS = [['jobs', 'Island jobs'], ['tools', 'Tools'], ['look', 'Makeover'], ['animals', 'Animals'], ['farm', 'Farm'], ['play', 'Play'], ['garden', 'Garden'], ['home', 'Outdoor living']];
+// Makeovers: paint for the walls, roof and front door, and a leaf colour for every tree on the island. A colour is
+// bought once and can be switched to and from for free. Ones marked prize only come from Character Growth.
+const LOOKS = [
+  { k: 'wall', name: 'Wall paint', opts: [{ k: 'sky', name: 'Sky blue walls', c: 0xa9d8ff, xp: 200, cash: 150 }, { k: 'mint', name: 'Mint walls', c: 0xb8efcf, xp: 200, cash: 150 }, { k: 'lemon', name: 'Lemon walls', c: 0xffeb99, xp: 200, cash: 150 }, { k: 'coral', name: 'Coral walls', c: 0xffb2a1, xp: 250, cash: 200 }, { k: 'lavender', name: 'Lavender walls', c: 0xd8c9ff, prize: true }, { k: 'peach', name: 'Peach walls', c: 0xffcfa3, prize: true }] },
+  { k: 'roof', name: 'Roof', opts: [{ k: 'red', name: 'Barn-red roof', c: 0xd9483b, xp: 250, cash: 200 }, { k: 'teal', name: 'Teal roof', c: 0x1fa59a, xp: 250, cash: 200 }, { k: 'slate', name: 'Slate roof', c: 0x5b6b82, xp: 250, cash: 200 }, { k: 'plum', name: 'Plum roof', c: 0x8e4fb5, prize: true }, { k: 'sunshine', name: 'Sunshine roof', c: 0xffb020, prize: true }] },
+  { k: 'door', name: 'Front door', opts: [{ k: 'red', name: 'Red door', c: 0xe03131, xp: 120, cash: 100 }, { k: 'blue', name: 'Blue door', c: 0x3b82f6, xp: 120, cash: 100 }, { k: 'yellow', name: 'Yellow door', c: 0xffc93c, xp: 120, cash: 100 }, { k: 'green', name: 'Green door', c: 0x2f9e44, xp: 120, cash: 100 }] },
+  { k: 'leaf', name: 'Trees', opts: [{ k: 'autumn', name: 'Autumn trees', c: [0xd9622b, 0xf2a33a], xp: 300, cash: 250 }, { k: 'blossom', name: 'Blossom trees', c: [0xf47fb4, 0xffc2dc], prize: true }, { k: 'jacaranda', name: 'Jacaranda trees', c: [0x8f6fe0, 0xc2b1ff], prize: true }, { k: 'golden', name: 'Golden trees', c: [0xe8b628, 0xffe27a], prize: true }, { k: 'frost', name: 'Frosty trees', c: [0x9fd0e6, 0xe6f6ff], prize: true }] },
+];
+const lookOpt = (part, k) => ((LOOKS.find(p => p.k === part) || { opts: [] }).opts.find(o => o.k === k)) || null;
+// The colours a kid has picked, ready for the 3D house and trees.
+function lookOf(kid) { const l = (kid.island || {}).look || {}, out = {}; for (const p of LOOKS) { const o = l[p.k] && lookOpt(p.k, l[p.k]); if (o) out[p.k] = o.c; } return out; }
+/* Character Growth prizes, won in this order. Small prizes are makeover colours; every second prize is a big one,
+   an animal or a special thing the shop doesn't sell. Anything the kid already has is skipped, and once a list runs
+   out the prize is a chest of bonus XP. growth.js decides when each one is won. */
+const PRIZES = {
+  small: ['leaf:blossom', 'wall:lavender', 'roof:sunshine', 'leaf:jacaranda', 'wall:peach', 'roof:plum', 'leaf:golden', 'leaf:frost', 'wall:mint', 'roof:teal', 'wall:sky', 'leaf:autumn'],
+  big: ['item:redpanda', 'item:treehouse', 'item:balloon', 'item:dragon', 'item:lighthouse', 'item:unicorn'],
+  chest: { small: 100, big: 250 },
+};
+function prizeInfo(id) {
+  const [kind, a] = String(id).split(':');
+  if (kind === 'chest') return { id, kind, big: a === 'big', name: a === 'big' ? 'Big treasure chest' : 'Treasure chest', xp: PRIZES.chest[a] || 100, icon: '🧰' };
+  if (kind === 'item') { const d = SHOP.find(s => s.t === a); return d ? { id, kind, big: true, t: a, name: d.name, icon: '🎁' } : null; }
+  const o = lookOpt(kind, a); return o ? { id, kind: 'look', part: kind, k: a, big: false, name: o.name, c: o.c, icon: kind === 'leaf' ? '🌳' : '🎨' } : null;
+}
+function hasPrize(kid, id) {
+  const isl = kid.island || {}, [kind, a] = String(id).split(':');
+  if (kind === 'item') return !!((isl.won || {})[a] || (isl.items || []).some(i => i.t === a));
+  return kind !== 'chest' && !!(isl.owned || {})[id];
+}
+// Puts a won prize on the kid's island: a colour for Makeover, or a thing to place for free.
+function grantPrize(kid, id) {
+  const p = prizeInfo(id); if (!p || p.kind === 'chest') return;
+  const isl = { items: [], ...(kid.island || {}) };
+  if (p.kind === 'item') isl.won = { ...(isl.won || {}), [p.t]: ((isl.won || {})[p.t] || 0) + 1 };
+  else isl.owned = { ...(isl.owned || {}), [id]: 'won' };
+  updDoc('kids', kid.id, { island: isl });
+}
+const farmAnimals = kid => ((kid.island || {}).items || []).filter(i => (SHOP.find(s => s.t === i.t) || {}).farm);
 /* Island upkeep: things you own need looking after. Each job builds up over a few days and needs its own tool. */
 const CARE = [
   { k: 'lawn', name: 'Lawn', icon: '🌱', days: 3, tool: 'mower', verb: 'Mow the lawn', bad: 'The grass is getting long', good: 'Freshly mowed' },
@@ -2259,6 +2322,7 @@ const CARE = [
   { k: 'pond', name: 'Pond', icon: '💧', days: 4, tool: 'net', verb: 'Clean the pond', bad: 'The pond is going green', good: 'Crystal clear' },
   { k: 'trees', name: 'Trees', icon: '🌳', days: 6, tool: 'loppers', verb: 'Prune the trees', bad: 'The trees are overgrown', good: 'Neatly pruned' },
   { k: 'house', name: 'House', icon: '🏠', days: 7, tool: 'blaster', verb: 'Water blast the house', bad: 'The house is grubby', good: 'Gleaming' },
+  { k: 'feed', name: 'Farm animals', icon: '🌾', days: 1, tool: 'bucket', verb: 'Feed the animals', bad: 'The animals are hungry', good: 'Full and happy' },
 ];
 /* Weather: what the islands and sky show. Inside Claude the app can't read location or the internet, so the family
    weather is set by a grown-up, or written into the app's data by a live weather feed. */
@@ -2280,6 +2344,7 @@ function careOf(kid) {
   const c = (kid.island || {}).care || {}, base = kid.createdAt || Date.now(), now = Date.now(), out = {};
   for (const n of CARE) out[n.k] = clamp((now - (c[n.k] || base)) / 864e5 / n.days, 0, 1.5);
   if (!((kid.jars || {}).save > 0)) out.pond = 0;
+  if (!farmAnimals(kid).length) out.feed = 0;
   return out;
 }
 const LEVELS = [{ at: 0, name: 'Camp tent' }, { at: 500, name: 'Little hut' }, { at: 2000, name: 'Cottage' }, { at: 5000, name: 'Big house' }, { at: 10000, name: 'Castle' }];
@@ -2444,14 +2509,14 @@ void main() {
   }
   const FOOT = [[0.54, 0.54], [0.5, 0.46], [0.64, 0.52], [0.74, 0.56], [0.78, 0.72]];
   function grassField(g, seed, n, grow, night, ex) {
-    const m = new T.InstancedMesh(BLADE, grassMat(grow, night), n), d = new T.Object3D(), r = mulberry(seed + 300), col = new T.Color(), [fw, fd] = ex.foot, pd = ex.pd;
+    const m = new T.InstancedMesh(BLADE, grassMat(grow, night), n), d = new T.Object3D(), r = mulberry(seed + 300), col = new T.Color(), [fw, fd] = ex.foot || [0, 0], pd = ex.pd, cx = ex.cx || 0, cz = ex.cz || 0, R0 = ex.rad || 1.09, y0 = ex.y ?? 0.2;
     let i = 0, tries = 0;
     while (i < n && tries < n * 4) {
-      tries++; const a = r() * 6.283, rad = Math.sqrt(r()) * 1.09, x = Math.cos(a) * rad, z = Math.sin(a) * rad;
+      tries++; const a = r() * 6.283, rad = Math.sqrt(r()) * R0, x = cx + Math.cos(a) * rad, z = cz + Math.sin(a) * rad;
       if (Math.abs(x - 0.05) < fw / 2 && Math.abs(z + 0.22) < fd / 2) continue;
       if (pd && Math.hypot(x - pd.x, z - pd.z) < pd.r + 0.03) continue;
       if (ex.clear && ex.clear.some(([cx, cz, cr]) => Math.hypot(x - cx, z - cz) < cr)) continue;
-      d.position.set(x, 0.2 + surfH(x, z, pd), z); d.rotation.set((r() - 0.5) * 0.3, r() * 6.28, (r() - 0.5) * 0.3); d.scale.set(0.8 + r() * 0.5, 0.65 + r() * 0.7, 1); d.updateMatrix(); m.setMatrixAt(i, d.matrix);
+      d.position.set(x, y0 + surfH(x, z, pd), z); d.rotation.set((r() - 0.5) * 0.3, r() * 6.28, (r() - 0.5) * 0.3); d.scale.set(0.8 + r() * 0.5, 0.65 + r() * 0.7, 1); d.updateMatrix(); m.setMatrixAt(i, d.matrix);
       const v = 0.82 + r() * 0.3; col.setRGB(v * (0.96 + r() * 0.08), v, v * (0.9 + r() * 0.1)); m.setColorAt(i, col); i++;
     }
     m.count = i; m.instanceMatrix.needsUpdate = true; m.frustumCulled = false; m.userData.ownMat = true; g.add(m); return m;
@@ -2521,8 +2586,9 @@ void main() {
   }
   let islandCloudMats = null;
   const smallCloud = seed => cloudCluster(seed, islandCloudMats || (islandCloudMats = cloudMats(0xffffff, 0xa9b6d3, true)), 0.75, 0.32, 14);
-  function tree(g, x, y, z, seed, grow = 1) {
+  function tree(g, x, y, z, seed, grow = 1, leaf = null) {
     const r = mulberry(seed), t = new T.Group(), base = 0.75 + r() * 0.5, pal = [[0x4caf50, 0x8bd45a], [0x3d9b4f, 0x7ccf63], [0x5bbf4a, 0xa6e06a], [0x2e8b57, 0x6cc070]][Math.floor(r() * 4)];
+    if (leaf) pal.splice(0, 2, ...leaf);
     t.position.set(x, y, z); t.scale.setScalar(base * grow); t.userData.base = base; t.userData.sway = r() * 6;
     add(t, new T.CylinderGeometry(0.028, 0.045, 0.26, 10), mat(0x8a5a3c), 0, 0.13, 0);
     const dark = mat(pal[0]), light = mat(pal[1]), blob = (rad, bx, by, bz, m) => add(t, rough(new T.SphereGeometry(rad, 24, 18), rad * 0.08, seed + Math.round(bx * 100)), m, bx, by, bz);
@@ -2535,13 +2601,15 @@ void main() {
     g.add(t); return t;
   }
   // Storybook houses: trimmed corners, framed windows with flower boxes, stepping stones to the door.
-  // Walls get grubby over time (grime 0..1) until they're water-blasted.
-  function house(level, hue, night, grime = 0) {
-    const g = new T.Group(), walls = [], roofM = mat(hex(hue)), trim = mat(0xffffff), stone = mat(0xbdb3a4, { flat: true }), doorM = mat(0x8a5a3c);
+  // Walls get grubby over time (grime 0..1) until they're water-blasted. `look` holds makeover colours for the
+  // walls, roof and door (the tent only takes the roof colour, for its canvas).
+  function house(level, hue, night, grime = 0, look = {}) {
+    const g = new T.Group(), walls = [], roofM = mat(hex(look.roof ?? hue)), trim = mat(0xffffff), stone = mat(0xbdb3a4, { flat: true }), doorM = mat(look.door ?? 0x8a5a3c);
+    const tower = look.wall != null ? new T.Color(look.wall).lerp(new T.Color(0x8a7f9a), 0.14).getHex() : 0xdcd6ec;
     const glass = night ? mat(0xffd36b, { e: 0xffa020 }) : mat(0x8fd3ff, { std: true, smooth: true, r: 0.08, m: 0.1 });
     const wallM = c => mat(new T.Color(c).lerp(new T.Color(0x7d6e55), Math.round(grime * 10) / 10 * 0.55).getHex());
     const box = (w, h, d, m, x, y, z) => add(g, new T.BoxGeometry(w, h, d), m, x, y, z);
-    const wall = (w, h, d, c, x, y, z) => { const o = box(w, h, d, wallM(c), x, y, z); o.userData.clean = c; walls.push(o); [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => box(0.032, h, 0.032, trim, x + sx * w / 2, y, z + sz * d / 2)); box(w + 0.02, 0.025, d + 0.02, trim, x, y - h / 2 + 0.012, z); return o; };
+    const wall = (w, h, d, c0, x, y, z) => { const c = look.wall ?? c0, o = box(w, h, d, wallM(c), x, y, z); o.userData.clean = c; walls.push(o); [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => box(0.032, h, 0.032, trim, x + sx * w / 2, y, z + sz * d / 2)); box(w + 0.02, 0.025, d + 0.02, trim, x, y - h / 2 + 0.012, z); return o; };
     const roof = (side, h, x, y, z) => { const o = add(g, new T.ConeGeometry(side * 0.82, h, 4), roofM, x, y, z); o.rotation.y = Math.PI / 4; return o; };
     const win = (x, y, z, flowers) => { box(0.14, 0.14, 0.014, trim, x, y, z); box(0.105, 0.105, 0.02, glass, x, y, z + 0.004); box(0.012, 0.105, 0.024, trim, x, y, z + 0.006); if (flowers) { box(0.13, 0.03, 0.045, mat(0x8a5a3c), x, y - 0.085, z + 0.02); [-0.04, 0, 0.04].forEach((fx, i) => add(g, new T.SphereGeometry(0.02, 10, 8), mat([0xff6b9d, 0xffd43b, 0xc084fc][i]), x + fx, y - 0.062, z + 0.024)); } };
     const door = (x, y, z) => { box(0.16, 0.26, 0.014, trim, x, y + 0.006, z); box(0.125, 0.235, 0.02, doorM, x, y, z + 0.004); add(g, new T.SphereGeometry(0.009, 8, 6), mat(0xffd43b, { std: true, m: 0.8, r: 0.3, smooth: true }), x + 0.04, y, z + 0.016); [0.06, 0.16, 0.26].forEach((dz, i) => add(g, new T.CylinderGeometry(0.045 - i * 0.004, 0.05 - i * 0.004, 0.02, 9), stone, x + (i % 2 ? 0.02 : -0.01), 0.008, z + dz)); };
@@ -2576,8 +2644,8 @@ void main() {
     else if (level === 2) { wall(0.6, 0.42, 0.48, 0xfff3df, 0, 0.21, 0); roof(0.6, 0.38, 0, 0.61, 0); chimney(0.16, 0.74, -0.06); door(-0.12, 0.13, 0.248); win(0.14, 0.25, 0.248, true); }
     else if (level === 3) { wall(0.7, 0.4, 0.52, 0xfff3df, 0, 0.2, 0); wall(0.56, 0.34, 0.46, 0xfff3df, -0.04, 0.57, 0); roof(0.56, 0.34, -0.04, 0.91, 0); chimney(0.14, 1.0, -0.08); door(0, 0.13, 0.268); [-0.2, 0.2].forEach(x => win(x, 0.24, 0.268, true)); [-0.16, 0.1].forEach(x => win(x, 0.58, 0.238, false)); }
     else {
-      wall(0.56, 0.5, 0.5, 0xece6f7, 0, 0.25, 0); for (let i = 0; i < 4; i++) [[-0.2 + i * 0.13, 0.27], [-0.2 + i * 0.13, -0.27]].forEach(([bxx, bz]) => box(0.06, 0.07, 0.06, mat(0xdcd6ec), bxx, 0.53, bz));
-      [[-0.3, -0.27], [0.3, -0.27], [-0.3, 0.27], [0.3, 0.27]].forEach(([x, z]) => { add(g, new T.CylinderGeometry(0.11, 0.12, 0.72, 16), mat(0xdcd6ec), x, 0.36, z); add(g, new T.ConeGeometry(0.15, 0.28, 16), roofM, x, 0.86, z); });
+      wall(0.56, 0.5, 0.5, 0xece6f7, 0, 0.25, 0); for (let i = 0; i < 4; i++) [[-0.2 + i * 0.13, 0.27], [-0.2 + i * 0.13, -0.27]].forEach(([bxx, bz]) => box(0.06, 0.07, 0.06, mat(tower), bxx, 0.53, bz));
+      [[-0.3, -0.27], [0.3, -0.27], [-0.3, 0.27], [0.3, 0.27]].forEach(([x, z]) => { add(g, new T.CylinderGeometry(0.11, 0.12, 0.72, 16), mat(tower), x, 0.36, z); add(g, new T.ConeGeometry(0.15, 0.28, 16), roofM, x, 0.86, z); });
       door(0, 0.13, 0.258); win(0, 0.38, 0.258, true); add(g, new T.CylinderGeometry(0.008, 0.008, 0.3, 6), mat(0x777777), 0, 0.68, 0); box(0.14, 0.08, 0.01, roofM, 0.07, 0.79, 0);
     }
     g.userData.walls = walls; return g;
@@ -2609,10 +2677,10 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
       u.pond = add(g, new T.CylinderGeometry(pd.r + 0.045, pd.r + 0.045, 0.012, 48), mat(new T.Color(0x3fb7f5).lerp(new T.Color(0x5f7f2e), Math.round(pm * 10) / 10 * 0.85).getHex(), { smooth: true, r: 0.05, m: 0.15, surf: 'water', ns: 0.5 }), pd.x, top - 0.024, pd.z);
       u.pondLeaves = []; for (let i = 0; i < Math.floor(pm * 6); i++) { const a = i * 2.4, d = pd.r * 0.25 * ((i % 3) + 1); u.pondLeaves.push(add(g, new T.CylinderGeometry(0.025, 0.025, 0.004, 6), mat(0x8a6a2a), pd.x + Math.cos(a) * d, top - 0.015, pd.z + Math.sin(a) * d)); }
     }
-    const h = house(k.level, k.hue, k.night, Math.min(1, cm('house') * 0.85)); h.position.set(0.05, top, -0.22); g.add(h); u.walls = h.userData.walls; u.flame = h.userData.flame;
+    const h = house(k.level, k.hue, k.night, Math.min(1, cm('house') * 0.85), k.look || {}); h.position.set(0.05, top, -0.22); g.add(h); u.walls = h.userData.walls; u.flame = h.userData.flame;
     const okSpot = (x, z) => !pd || Math.hypot(x - pd.x, z - pd.z) > pd.r + 0.1;
     const spots = [[0.72, 0.12], [0.6, -0.55], [-0.72, -0.3], [-0.12, 0.74], [0.78, 0.48], [-0.86, 0.2], [0.28, -0.82], [-0.42, -0.74], [0.2, 0.85], [-0.95, -0.05]].filter(([x, z]) => okSpot(x, z)), tg = 1 + Math.min(1.2, cm('trees')) * 0.28;
-    u.trees = []; for (let i = 0; i < Math.min(k.trees, 8, spots.length); i++) u.trees.push(tree(g, spots[i][0], top, spots[i][1], s + 10 + i, tg));
+    u.trees = []; for (let i = 0; i < Math.min(k.trees, 8, spots.length); i++) u.trees.push(tree(g, spots[i][0], top, spots[i][1], s + 10 + i, tg, (k.look || {}).leaf));
     const rr = mulberry(s + 77), spot = () => { for (let i = 0; i < 14; i++) { const a = rr() * 6.283, d = 0.2 + rr() * 0.75, x = Math.cos(a) * d, z = Math.sin(a) * d; if (!inHouse(x, z) && (!pd || Math.hypot(x - pd.x, z - pd.z) > pd.r + 0.08)) return [x, z]; } return [0.7, 0.4]; };
     u.weeds = []; for (let i = 0; i < Math.floor(cm('weeds') * 6); i++) { const [x, z] = spot(), w = new T.Group(); w.position.set(x, top, z); for (let j = 0; j < 5; j++) add(w, new T.ConeGeometry(0.013, 0.1, 4), mat(0x3d6b21), (j - 2) * 0.012, 0.05, (j % 2) * 0.012).rotation.z = (j - 2) * 0.28; add(w, new T.SphereGeometry(0.014, 8, 6), mat(0xffd43b), 0, 0.1, 0); g.add(w); u.weeds.push(w); }
     u.leaves = []; for (let i = 0; i < Math.floor(cm('leaves') * 10); i++) { const [x, z] = spot(), l = add(g, new T.CylinderGeometry(0.028, 0.028, 0.004, 5), mat([0xd9822b, 0xb5541c, 0xe8b04a][i % 3]), x, top + 0.006, z); l.rotation.set(0, rr() * 6, (rr() - 0.5) * 0.3); u.leaves.push(l); }
@@ -2628,6 +2696,8 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     if (k.rainbow && !wx.rain && !wx.snow) [0xff6b6b, 0xffa94d, 0xffe066, 0x69db7c, 0x4dabf7, 0x9775fa].forEach((c, i) => add(g, new T.TorusGeometry(1.25 - i * 0.07, 0.035, 8, 48, Math.PI), mat(c, { smooth: true }), 0, 0.15, -0.75));
     const clouds = new T.Group(); [0, 1].forEach(i => { const c = smallCloud(s + 50 + i); c.position.set(i ? -1.25 : 1.2, i ? 0.45 : 0.75, i ? -0.3 : 0.2); clouds.add(c); }); g.add(clouds); u.clouds = clouds;
     u.precip = precip(g, wx, k.flat);
+    u.hungry = !!k.farm && cm('feed') >= 1;
+    if (k.farm) farmLand(g, k, top, lawnC);
     u.items = []; (k.items || []).forEach(it => placeItem(g, it));
     outline(g);
     if (!k.flat) g.rotation.x = 0.42; return g;
@@ -2659,6 +2729,27 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
   const cn = (g, r, h, c, x, y, z, seg = 10) => add(g, new T.ConeGeometry(r, h, seg), mat(c), x, y, z);
   const eyes = (g, y, z, sep, r = 0.009) => [-1, 1].forEach(s => sph(g, r, 0x1b1b2a, s * sep, y, z));
   const WOOD = 0xc98d5a, DARK = 0x6b4a3a;
+  // Ponies and unicorns share a body: brown or white, with a mane, a tail and (for the unicorn) a gold horn.
+  function horse(g, body, mane, horn) {
+    sph(g, 0.075, body, 0, 0.14, 0, 0.85, 0.8, 1.35);
+    [[-0.035, 0.06], [0.035, 0.06], [-0.035, -0.06], [0.035, -0.06]].forEach(([x, z]) => { cyl(g, 0.011, 0.01, 0.1, body, x, 0.05, z, 6); cyl(g, 0.012, 0.012, 0.015, horn ? 0xffd43b : 0x3b2a1e, x, 0.006, z, 6); });
+    cyl(g, 0.028, 0.035, 0.12, body, 0, 0.21, 0.09, 8).rotation.x = 0.55; sph(g, 0.034, body, 0, 0.26, 0.13, 0.9, 0.9, 1.4); sph(g, 0.02, horn ? 0xffd6e8 : 0xc89a6a, 0, 0.25, 0.175);
+    [-1, 1].forEach(s => cn(g, 0.009, 0.03, body, s * 0.018, 0.295, 0.115, 5)); bx(g, 0.014, 0.035, 0.11, mane, 0, 0.255, 0.08).rotation.x = 0.55;
+    cn(g, 0.02, 0.1, mane, 0, 0.12, -0.13, 6).rotation.x = -2.4; eyes(g, 0.27, 0.16, 0.022, 0.007);
+    if (horn) cn(g, 0.008, 0.06, 0xffd43b, 0, 0.32, 0.15, 6).rotation.x = 0.5;
+  }
+  // A little red barn with a white-trimmed door, facing +z.
+  function barn(g, x, z) {
+    const b = new T.Group(), red = 0xc8443a; b.position.set(x, 0, z); g.add(b);
+    bx(b, 0.3, 0.2, 0.22, red, 0, 0.1, 0);
+    [0.1, -0.11].forEach(zz => { const sh = new T.Shape(); sh.moveTo(-0.15, 0); sh.lineTo(0.15, 0); sh.lineTo(0, 0.12); sh.closePath(); add(b, new T.ExtrudeGeometry(sh, { depth: 0.01, bevelEnabled: false }), mat(red), 0, 0.2, zz); });
+    const sl = Math.atan2(0.12, 0.15), len = Math.hypot(0.15, 0.12) + 0.03;
+    [-1, 1].forEach(s => { bx(b, len, 0.016, 0.26, 0x5b5f6e, s * 0.075, 0.262, 0).rotation.z = -s * sl; });
+    bx(b, 0.11, 0.14, 0.006, 0x9e3128, 0, 0.07, 0.112); [-1, 1].forEach(s => { bx(b, 0.17, 0.009, 0.004, 0xffffff, 0, 0.07, 0.117).rotation.z = s * 0.9; }); bx(b, 0.12, 0.01, 0.004, 0xffffff, 0, 0.143, 0.117);
+    bx(b, 0.055, 0.045, 0.006, 0xffffff, 0, 0.25, 0.112); bx(b, 0.04, 0.03, 0.008, 0x3a2a24, 0, 0.25, 0.114);
+    [-1, 1].forEach(sx => [-1, 1].forEach(sz => bx(b, 0.014, 0.2, 0.014, 0xffffff, sx * 0.15, 0.1, sz * 0.11)));
+    return b;
+  }
   const ITEM = {
     kiwi: g => { sph(g, 0.09, 0x8b5a2b, 0, 0.08, 0, 1, 0.85, 1.2); sph(g, 0.045, 0x7a4e25, 0, 0.12, 0.09); cyl(g, 0.006, 0.011, 0.13, 0xe8d9a8, 0, 0.085, 0.17, 6).rotation.x = 1.95; [-0.03, 0.03].forEach(x => cyl(g, 0.008, 0.008, 0.05, 0xd8b98a, x, 0.02, 0, 5)); eyes(g, 0.135, 0.125, 0.022, 0.008); },
     koala: g => { sph(g, 0.085, 0x9aa0a8, 0, 0.085, 0, 1, 1.05, 0.9); sph(g, 0.07, 0xa7adb5, 0, 0.2, 0.02); [-1, 1].forEach(s => { sph(g, 0.035, 0xc7ccd2, s * 0.065, 0.25, 0.01); sph(g, 0.02, 0xf1d5dc, s * 0.065, 0.25, 0.028); }); sph(g, 0.022, 0x3b3b46, 0, 0.19, 0.085, 1, 1.3, 0.8); eyes(g, 0.218, 0.075, 0.03); },
@@ -2695,15 +2786,72 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     blaster: g => { bx(g, 0.15, 0.11, 0.11, 0xffd43b, 0, 0.065, 0); [-0.06, 0.06].forEach(x => { cyl(g, 0.026, 0.026, 0.015, 0x222222, x, 0.026, 0.06, 12).rotation.x = Math.PI / 2; }); add(g, new T.TorusGeometry(0.05, 0.009, 6, 20), mat(0x222222), 0, 0.15, -0.06); cyl(g, 0.011, 0.011, 0.24, 0x343a40, 0.11, 0.19, 0.05, 6).rotation.z = -0.9; },
     trowel: g => { bx(g, 0.05, 0.005, 0.09, 0xced4da, 0, 0.012, 0.05); cyl(g, 0.012, 0.012, 0.08, 0x2f9e44, 0, 0.014, -0.03, 6).rotation.x = Math.PI / 2; [-0.07, 0.07].forEach(x => sph(g, 0.03, 0xff922b, x, 0.02, 0, 1, 0.5, 1.4)); },
     rake: g => { cyl(g, 0.006, 0.006, 0.5, 0x8b5a3c, 0, 0.28, 0, 6); bx(g, 0.15, 0.012, 0.012, 0x868e96, 0, 0.04, 0); for (let i = 0; i < 7; i++) cyl(g, 0.003, 0.003, 0.05, 0x868e96, -0.06 + i * 0.02, 0.018, 0, 4); },
+    // The farm
+    paddock: g => { barn(g, 0, -0.04); [-0.2, -0.07, 0.07, 0.2].forEach(x => bx(g, 0.022, 0.1, 0.022, 0xb07a4a, x, 0.05, 0.16)); [0.04, 0.08].forEach(y => bx(g, 0.42, 0.014, 0.01, 0xf7f3ea, 0, y, 0.16)); [-1, 1].forEach(s => cyl(g, 0.045, 0.045, 0.07, 0xe9c46a, s * 0.22, 0.045, 0.02, 12).rotation.x = Math.PI / 2); },
+    feed: g => { sph(g, 0.07, 0xd9c08a, 0, 0.07, 0, 1, 1.15, 0.8); cyl(g, 0.03, 0.045, 0.04, 0xd9c08a, 0, 0.15, 0, 8); cyl(g, 0.033, 0.033, 0.012, 0xb07a4a, 0, 0.138, 0, 8); bx(g, 0.06, 0.045, 0.005, 0x2f9e44, 0, 0.08, 0.056); [[-0.02, 0.17], [0.015, 0.175], [0.03, 0.165]].forEach(([x, y]) => sph(g, 0.01, 0xffd43b, x, y, 0)); },
+    bucket: g => { cyl(g, 0.055, 0.045, 0.09, 0x9aa7b5, 0, 0.045, 0, 14); cyl(g, 0.05, 0.05, 0.01, 0xe9c46a, 0, 0.085, 0, 14); add(g, new T.TorusGeometry(0.055, 0.004, 6, 20, Math.PI), mat(0x495057), 0, 0.09, 0); },
+    hen: g => { sph(g, 0.06, 0xb5652b, 0, 0.075, 0, 1, 0.9, 1.2); sph(g, 0.034, 0xb5652b, 0, 0.13, 0.05); sph(g, 0.014, 0xe03131, 0, 0.165, 0.05, 0.6, 1, 1.4); cn(g, 0.01, 0.025, 0xffa94d, 0, 0.128, 0.088, 6).rotation.x = Math.PI / 2; sph(g, 0.009, 0xe03131, 0, 0.11, 0.076); cn(g, 0.04, 0.07, 0x7a3a16, 0, 0.11, -0.07, 6).rotation.x = -0.6; [-0.02, 0.02].forEach(x => cyl(g, 0.005, 0.005, 0.04, 0xffc93c, x, 0.02, 0, 5)); eyes(g, 0.138, 0.078, 0.018, 0.006); },
+    goat: g => { sph(g, 0.065, 0xf1ece4, 0, 0.12, 0, 0.85, 0.8, 1.3); [[-0.035, 0.05], [0.035, 0.05], [-0.035, -0.05], [0.035, -0.05]].forEach(([x, z]) => cyl(g, 0.009, 0.008, 0.08, 0x5c4a3d, x, 0.04, z, 6)); sph(g, 0.04, 0xf1ece4, 0, 0.18, 0.08, 0.9, 1, 1.2); [-1, 1].forEach(s => { cn(g, 0.008, 0.05, 0x8f8a80, s * 0.018, 0.225, 0.065, 5).rotation.x = -0.5; sph(g, 0.012, 0xe6dccf, s * 0.04, 0.19, 0.075, 1.6, 0.6, 0.8); }); cn(g, 0.01, 0.03, 0xd8cfc2, 0, 0.145, 0.12, 5).rotation.x = Math.PI; eyes(g, 0.19, 0.115, 0.02, 0.007); },
+    cow: g => { sph(g, 0.085, 0xffffff, 0, 0.13, 0, 0.9, 0.8, 1.35); [[0.05, 0.16, 0.03, 0.035], [-0.055, 0.12, -0.04, 0.04], [0.02, 0.17, -0.07, 0.03]].forEach(([x, y, z, r]) => sph(g, r, 0x2b2b35, x, y, z, 1, 0.6, 1)); [[-0.045, 0.07], [0.045, 0.07], [-0.045, -0.07], [0.045, -0.07]].forEach(([x, z]) => cyl(g, 0.012, 0.011, 0.09, 0xffffff, x, 0.045, z, 6)); sph(g, 0.045, 0xffffff, 0, 0.17, 0.11); sph(g, 0.03, 0xffb3c7, 0, 0.15, 0.145, 1.2, 0.8, 0.8); [-1, 1].forEach(s => { cn(g, 0.007, 0.03, 0xf3e3b5, s * 0.03, 0.215, 0.105, 5); sph(g, 0.013, 0x2b2b35, s * 0.05, 0.19, 0.1, 1.5, 0.6, 0.8); }); cyl(g, 0.004, 0.004, 0.09, 0x2b2b35, 0, 0.12, -0.12, 4).rotation.x = 0.3; eyes(g, 0.185, 0.145, 0.022, 0.007); },
+    alpaca: g => { sph(g, 0.065, 0xf3e1c4, 0, 0.13, 0, 0.9, 0.85, 1.25); [[-0.03, 0.045], [0.03, 0.045], [-0.03, -0.045], [0.03, -0.045]].forEach(([x, z]) => cyl(g, 0.01, 0.009, 0.08, 0xd8c3a0, x, 0.04, z, 6)); cyl(g, 0.025, 0.03, 0.13, 0xf3e1c4, 0, 0.22, 0.06, 8).rotation.x = 0.15; sph(g, 0.035, 0xf3e1c4, 0, 0.3, 0.075, 1, 1.05, 1.15); sph(g, 0.018, 0xe8cfa6, 0, 0.29, 0.11); [-1, 1].forEach(s => cn(g, 0.01, 0.035, 0xe8cfa6, s * 0.02, 0.34, 0.07, 5)); eyes(g, 0.31, 0.105, 0.018, 0.007); sph(g, 0.022, 0xfff3df, 0, 0.17, -0.08); },
+    pony: g => horse(g, 0x9c6b3c, 0x3b2a1e, false),
+    // Prizes from Character Growth
+    unicorn: g => horse(g, 0xfdfbff, 0xff8fc7, true),
+    redpanda: g => { sph(g, 0.07, 0xc8501e, 0, 0.08, 0, 0.95, 0.85, 1.25); [[-0.035, 0.05], [0.035, 0.05], [-0.035, -0.05], [0.035, -0.05]].forEach(([x, z]) => cyl(g, 0.012, 0.011, 0.05, 0x2b1d18, x, 0.022, z, 6)); sph(g, 0.05, 0xc8501e, 0, 0.15, 0.07); sph(g, 0.022, 0xfff3df, 0, 0.14, 0.11, 1.4, 0.8, 0.7); sph(g, 0.009, 0x222222, 0, 0.145, 0.125); [-1, 1].forEach(s => { sph(g, 0.018, 0xc8501e, s * 0.038, 0.195, 0.06); sph(g, 0.01, 0xfff3df, s * 0.038, 0.198, 0.072); sph(g, 0.012, 0xfff3df, s * 0.025, 0.165, 0.105); }); for (let i = 0; i < 5; i++) sph(g, 0.03 - i * 0.002, i % 2 ? 0xf2d2b0 : 0xb5441a, 0, 0.09 + i * 0.012, -0.08 - i * 0.03); eyes(g, 0.16, 0.112, 0.02, 0.007); },
+    dragon: g => {
+      sph(g, 0.07, 0x3fbf7f, 0, 0.09, 0, 0.9, 0.85, 1.2); sph(g, 0.05, 0xffe08a, 0, 0.08, 0.035, 0.85, 0.85, 0.7); sph(g, 0.05, 0x3fbf7f, 0, 0.17, 0.07); sph(g, 0.028, 0x5fd99a, 0, 0.155, 0.11, 1.1, 0.8, 1);
+      [-1, 1].forEach(s => { cn(g, 0.01, 0.04, 0xffe08a, s * 0.025, 0.225, 0.055, 5).rotation.x = -0.4; sph(g, 0.006, 0x1b1b2a, s * 0.012, 0.16, 0.136); });
+      [[-0.035, 0.04], [0.035, 0.04], [-0.035, -0.04], [0.035, -0.04]].forEach(([x, z]) => cyl(g, 0.012, 0.012, 0.04, 0x2f9e64, x, 0.02, z, 6));
+      for (let i = 0; i < 4; i++) cn(g, 0.012, 0.03, 0xff8c42, 0, 0.155 - i * 0.012, 0.01 - i * 0.04, 4);
+      cn(g, 0.03, 0.14, 0x3fbf7f, 0, 0.07, -0.12, 8).rotation.x = -1.9;
+      const wings = [-1, 1].map(s => { const w = new T.Group(), sh = new T.Shape(); w.position.set(s * 0.05, 0.13, -0.01); sh.moveTo(0, 0); sh.lineTo(s * 0.12, 0.06); sh.lineTo(s * 0.1, -0.02); sh.lineTo(s * 0.05, -0.03); sh.closePath(); const m = add(w, new T.ShapeGeometry(sh), mat(0x9b7be8, { ds: true })); m.rotation.x = -Math.PI / 2 + 0.3; m.userData.noInk = true; g.add(w); return w; });
+      eyes(g, 0.185, 0.105, 0.022, 0.009); g.userData.tick = t => wings.forEach((w, i) => { w.rotation.z = (i ? -1 : 1) * (0.25 + Math.sin(t * 9) * 0.35); });
+    },
+    treehouse: g => { cyl(g, 0.04, 0.06, 0.6, DARK, 0, 0.3, -0.04, 8); [[0, 0.64, -0.08, 0.16], [0.12, 0.6, -0.04, 0.11], [-0.12, 0.61, -0.1, 0.12]].forEach(([x, y, z, r], i) => add(g, rough(new T.IcosahedronGeometry(r, 1), 0.03, 90 + i), mat(0x3d9b4f), x, y, z)); bx(g, 0.3, 0.02, 0.26, WOOD, 0, 0.3, 0.02); bx(g, 0.16, 0.12, 0.14, 0xe9c08a, 0.01, 0.37, 0.04); cn(g, 0.13, 0.09, 0xe5533d, 0.01, 0.475, 0.04, 4).rotation.y = Math.PI / 4; bx(g, 0.04, 0.07, 0.006, 0x6b4a3a, 0.01, 0.345, 0.112); [-0.03, 0.03].forEach(x => cyl(g, 0.005, 0.005, 0.3, WOOD, 0.14 + x, 0.15, 0.15, 4)); for (let i = 0; i < 5; i++) bx(g, 0.07, 0.008, 0.008, WOOD, 0.14, 0.04 + i * 0.06, 0.15); },
+    balloon: g => { cyl(g, 0.012, 0.016, 0.03, DARK, 0, 0.015, 0, 6); cyl(g, 0.003, 0.003, 0.2, 0xeadfc4, 0, 0.12, 0, 4); const b = new T.Group(); b.position.y = 0.5; g.add(b); const env = new T.Group(); env.scale.set(1, 1.15, 1); b.add(env); [0xff6b6b, 0xffd43b, 0x4dabf7, 0xff6b6b, 0xffd43b, 0x4dabf7].forEach((c, i) => add(env, new T.SphereGeometry(0.14, 12, 12, i * Math.PI / 3, Math.PI / 3), SM(c))); cyl(b, 0.04, 0.05, 0.04, 0xffd43b, 0, -0.17, 0, 12); [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => cyl(b, 0.002, 0.002, 0.07, 0x6b4a3a, sx * 0.03, -0.215, sz * 0.03, 3)); bx(b, 0.07, 0.05, 0.07, 0xb07a4a, 0, -0.26, 0); g.userData.tick = t => { b.position.y = 0.5 + Math.sin(t * 1.2) * 0.02; b.rotation.y = t * 0.3; }; },
+    lighthouse: g => { cyl(g, 0.12, 0.13, 0.04, 0x9aa0a8, 0, 0.02, 0, 12); for (let i = 0; i < 4; i++) cyl(g, 0.085 - i * 0.012, 0.095 - i * 0.012, 0.09, i % 2 ? 0xe03131 : 0xffffff, 0, 0.085 + i * 0.09, 0, 14); cyl(g, 0.07, 0.07, 0.015, 0x343a40, 0, 0.45, 0, 14); add(g, new T.CylinderGeometry(0.045, 0.045, 0.07, 12), mat(0xfff3bf, { e: 0xffc94d }), 0, 0.49, 0); cn(g, 0.06, 0.06, 0xe03131, 0, 0.555, 0, 12); const beam = new T.Group(); beam.position.y = 0.49; add(beam, new T.ConeGeometry(0.05, 0.4, 10, 1, true), mat(0xfff6c4, { op: 0.35, ds: true }), 0.22, 0, 0).rotation.z = Math.PI / 2; g.add(beam); g.userData.tick = t => { beam.rotation.y = t * 1.4; }; },
   };
+  // The farm paddock: a second slab of land joined to the island's west side, fenced, with a barn, hay bales and a
+  // feed trough. Farm animals stay inside the fence and graze the grass short. FARM is its centre and radius.
+  const FARM = { x: -1.5, z: 0.1, r: 0.62 };
+  const inPaddock = (x, z) => Math.hypot(x - FARM.x, z - FARM.z) < FARM.r - 0.14;
+  const inBarn = (x, z) => x > FARM.x - 0.3 && x < FARM.x + 0.12 && z > FARM.z - 0.5 && z < FARM.z - 0.13;
+  function farmLand(g, k, top, lawnC) {
+    const u = g.userData, { x: fx, z: fz, r } = FARM, post = mat(0xb07a4a), rail = mat(0xf7f3ea);
+    add(g, strata(rough(new T.ConeGeometry(r * 0.92, 1.0, 10, 5).rotateX(Math.PI), 0.12, k.seed + 5), k.seed + 5), mat(0xffffff, { vc: true, flat: true }), fx, -0.62, fz);
+    add(g, new T.CylinderGeometry(r + 0.02, r * 0.95, 0.24, 28), mat(0x8a5f3c), fx, -0.04, fz);
+    add(g, new T.CylinderGeometry(r + 0.06, r + 0.02, 0.14, 36, 1, true), mat(lawnC), fx, 0.13, fz).userData.noInk = true;
+    u.paddock = add(g, new T.CircleGeometry(r + 0.06, 40).rotateX(-Math.PI / 2), mat(lawnC), fx, top - 0.003, fz); u.paddock.userData.noInk = true;
+    u.paddockGrass = grassField(g, k.seed + 9, k.flat ? 12800 : 2200, MOWN + 0.3, k.night, { cx: fx, cz: fz, rad: r + 0.04, y: top - 0.003, clear: [[fx - 0.09, fz - 0.31, 0.24], [fx + 0.14, fz + 0.36, 0.1]] });
+    // Posts and two rails round the edge, with the gate gap on the side facing the house.
+    const N = 22, at = a => [fx + Math.cos(a) * (r - 0.05), fz + Math.sin(a) * (r - 0.05)];
+    for (let i = 0; i < N; i++) {
+      const a0 = i / N * Math.PI * 2, a1 = (i + 1) / N * Math.PI * 2, [px, pz] = at(a0), [qx, qz] = at(a1);
+      add(g, new T.BoxGeometry(0.03, 0.12, 0.03), post, px, top + 0.06, pz);
+      if (Math.cos(a0) > 0.93 || Math.cos(a1) > 0.93) continue;
+      const len = Math.hypot(qx - px, qz - pz), ry = -Math.atan2(qz - pz, qx - px);
+      [0.05, 0.095].forEach(h => { add(g, new T.BoxGeometry(len, 0.016, 0.012), rail, (px + qx) / 2, top + h, (pz + qz) / 2).rotation.y = ry; });
+    }
+    barn(g, fx - 0.09, fz - 0.31).position.y = top;
+    [[fx + 0.2, fz - 0.3], [fx + 0.3, fz - 0.2]].forEach(([x, z], i) => { const h = cyl(g, 0.05, 0.05, 0.085, 0xe9c46a, x, top + 0.05, z, 14); h.rotation.set(Math.PI / 2, 0, i * 0.7); });
+    const tr = new T.Group(); tr.position.set(fx + 0.14, top, fz + 0.36); tr.rotation.y = -0.5; g.add(tr);
+    bx(tr, 0.2, 0.05, 0.07, 0xb07a4a, 0, 0.035, 0); [-0.08, 0.08].forEach(x => bx(tr, 0.02, 0.03, 0.07, 0x8a5a3c, x, 0.012, 0));
+    if (!u.hungry) bx(tr, 0.18, 0.012, 0.055, 0xe9c46a, 0, 0.058, 0);
+  }
   const inHouse = (x, z) => x > -0.42 && x < 0.5 && z > -0.62 && z < 0.12;
   function buildItem(t) { const f = ITEM[t]; if (!f) return null; const g = new T.Group(); f(g); return outline(g, 0.006); }
-  function walker(m, g) {
-    const st = { tx: m.position.x, tz: m.position.z, wait: Math.random() * 2, hop: 0 };
+  // Animals wander the lawn; farm animals wander inside the paddock fence, and sit and wait while they're hungry.
+  function walker(m, g, farm) {
+    const st = { tx: m.position.x, tz: m.position.z, wait: Math.random() * 2, hop: 0 }, own = m.userData.tick, bub = m.userData.bub;
+    const pickSpot = () => { for (let i = 0; i < 10; i++) { const a = Math.random() * 6.283; if (farm) { const r = Math.sqrt(Math.random()) * (FARM.r - 0.16), x = FARM.x + Math.cos(a) * r, z = FARM.z + Math.sin(a) * r; if (!inBarn(x, z)) return [x, z]; continue; } const r = Math.random() * 0.85, x = Math.cos(a) * r, z = Math.sin(a) * r, pi = g.userData.pondInfo; if (!inHouse(x, z) && !(pi && Math.hypot(x - pi.x, z - pi.z) < pi.r + 0.08)) return [x, z]; } return null; };
     m.userData.tick = (t, dt) => {
+      if (own) own(t, dt);
+      const hungry = farm && g.userData.hungry && !m.userData.fedNow;
+      if (bub) { bub.visible = hungry; bub.position.y = 0.34 + Math.sin(t * 2.2 + m.position.x * 9) * 0.015; }
+      if (hungry) { m.position.y = 0.2; return; }
       if (st.wait > 0) { st.wait -= dt; m.position.y = 0.2; return; }
       const dx = st.tx - m.position.x, dz = st.tz - m.position.z, d = Math.hypot(dx, dz);
-      if (d < 0.02) { st.wait = 1.5 + Math.random() * 3; for (let i = 0; i < 10; i++) { const a = Math.random() * 6.283, r = Math.random() * 0.85, x = Math.cos(a) * r, z = Math.sin(a) * r; const pi = g.userData.pondInfo; if (!inHouse(x, z) && !(pi && Math.hypot(x - pi.x, z - pi.z) < pi.r + 0.08)) { st.tx = x; st.tz = z; break; } } return; }
+      if (d < 0.02) { st.wait = 1.5 + Math.random() * 3; const p = pickSpot(); if (p) { st.tx = p[0]; st.tz = p[1]; } return; }
       const sp = Math.min(d, 0.12 * dt); m.position.x += dx / d * sp; m.position.z += dz / d * sp; m.rotation.y = Math.atan2(dx, dz);
       st.hop += dt * 14; m.position.y = 0.2 + Math.abs(Math.sin(st.hop)) * 0.022;
     };
@@ -2711,7 +2859,9 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
   function placeItem(g, it) {
     const m = buildItem(it.t); if (!m) return null;
     m.position.set(it.x, 0.2, it.z); m.rotation.y = it.r || 0; m.userData.itemId = it.id; m.userData.born = performance.now();
-    if ((SHOP.find(s => s.t === it.t) || {}).cat === 'animals') walker(m, g);
+    const def = SHOP.find(s => s.t === it.t) || {}; m.userData.farm = !!def.farm;
+    if (def.farm) { const b = sprite(emojiTex('🌾'), 0.11); b.position.y = 0.34; b.visible = false; m.add(b); m.userData.bub = b; }
+    if (def.cat === 'animals' || def.farm) walker(m, g, !!def.farm);
     g.add(m); (g.userData.items || (g.userData.items = [])).push(m); return m;
   }
   function tickIsland(g, t, dt, ph = 0, hopAt = 0) {
@@ -2722,6 +2872,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     FLAG_T.value = t; u.flag.rotation.y = Math.sin(t * 0.5 + ph) * 0.15; u.clouds.rotation.y = t * 0.15;
     if (u.precip) stepPrecip(u.precip, dt, t);
     if (u.grassMesh) u.grassMesh.material.userData.U.uTime.value = t + ph;
+    if (u.paddockGrass) u.paddockGrass.material.userData.U.uTime.value = t + ph;
     (u.trees || []).forEach(tr => { tr.rotation.z = Math.sin(t * 1.3 + tr.userData.sway) * 0.035; tr.rotation.x = Math.cos(t * 0.9 + tr.userData.sway) * 0.02; });
     if (u.pond) { const nm = u.pond.material.normalMap; if (nm) nm.offset.set(t * 0.02, t * 0.013); }
     const e = t - hopAt, hop = hopAt && e < 0.7 ? Math.sin(e / 0.7 * Math.PI) * 0.38 : 0;
@@ -2732,8 +2883,23 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
       if (m.userData.hopAt) { const k = t - m.userData.hopAt; m.position.y = 0.2 + (k < 0.5 ? Math.sin(k / 0.5 * Math.PI) * 0.12 : 0); if (k >= 0.5) m.userData.hopAt = 0; }
     }
   }
+  // How a Character Growth prize looks on its lesson island: the thing itself, a little cottage in the prize paint,
+  // a pair of trees in the prize leaf colour, or a treasure chest.
+  function prizeModel(id) {
+    const p = prizeInfo(id); if (!p) return null;
+    if (p.kind === 'item') return buildItem(p.t);
+    const g = new T.Group();
+    if (p.kind === 'chest') {
+      bx(g, 0.24, 0.12, 0.16, 0x9c6b3c, 0, 0.06, 0); add(g, new T.CylinderGeometry(0.08, 0.08, 0.24, 14, 1, false, 0, Math.PI), mat(0xb07a4a), 0, 0.12, 0).rotation.set(0, 0, Math.PI / 2);
+      [-0.08, 0.08].forEach(x => bx(g, 0.02, 0.13, 0.17, 0xffc93c, x, 0.065, 0)); bx(g, 0.04, 0.05, 0.01, 0xffc93c, 0, 0.11, 0.083);
+      for (let i = 0; i < 5; i++) add(g, new T.CylinderGeometry(0.03, 0.03, 0.01, 14), GOLD(), -0.06 + i * 0.03, 0.205 + (i % 2) * 0.01, (i % 3 - 1) * 0.03).rotation.x = 0.3;
+    } else if (p.part === 'leaf') { tree(g, -0.13, 0, 0, 11, 1, p.c); tree(g, 0.15, 0, 0.05, 23, 0.8, p.c); }
+    else { const h = house(2, '#e5533d', false, 0, { [p.part]: p.c }); h.scale.setScalar(0.55); g.add(h); }
+    return outline(g);
+  }
   const BUILD = {
-    island: ([id]) => { const k = Store.kids[id]; return k ? { obj: islandModel(islandParams(k)), unit: 3.1, cy: 0.54 } : null; },
+    // A farm paddock widens the island to the west, so the card shifts it right and allows for the extra width.
+    island: ([id]) => { const k = Store.kids[id]; if (!k) return null; const p = islandParams(k); return { obj: islandModel(p), unit: 3.1, uw: p.farm ? 3.75 : 0, dx: p.farm ? 0.5 : 0, cy: 0.54 }; },
     jar: ([id, jar]) => { const k = Store.kids[id], j = JARS.find(x => x.k === jar); return k && j ? { obj: jarModel(j.color, (k.jars || {})[jar] || 0, hash(id + jar)), unit: 2.15, cy: 0.5 } : null; },
     fund: ([id]) => ({ obj: outline(fundModel(id), 0.035), unit: 2.3, cy: 0.5 }),
   };
@@ -2800,8 +2966,8 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
       if (o.cv.width !== cw || o.cv.height !== ch) { o.cv.width = cw; o.cv.height = ch; }
       const k = Math.min(1, (now - o.t0) / 700), pop = k < 1 ? 1 + 2.70158 * Math.pow(k - 1, 3) + 1.70158 * Math.pow(k - 1, 2) : 1;
       o.obj.visible = true;
-      o.obj.scale.setScalar(Math.max(0.001, Math.min(r.height / o.unit, r.width / (o.unit * 0.85)) * pop));
-      o.obj.position.set(mx + r.width * (+el.dataset.cx || 0.5), -(my + r.height * o.cy), 0);
+      const sc = Math.max(0.001, Math.min(r.height / o.unit, r.width / (o.uw || o.unit * 0.85)) * pop); o.obj.scale.setScalar(sc);
+      o.obj.position.set(mx + r.width * (+el.dataset.cx || 0.5) + (o.dx || 0) * sc, -(my + r.height * o.cy), 0);
       animate(o, t, dt);
       Object.assign(cam, { left: 0, right: w, top: 0, bottom: -h }); cam.updateProjectionMatrix();
       R.setViewport(0, 0, w, h); R.clear(); inkFor(R); INK.uniforms.uRes.value.set(cw, ch);
@@ -2815,7 +2981,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     if (drops.length) { rainM.visible = true; inkFor(R); R.render(scene, cam); }
     if (any || drops.length) kick();
   }
-  Object.assign(api, { GRAD, rimPatch, outline, inkFor, weather: w => { WIND.value = clamp(0.5 + (w.windKph ?? 12) / 22, 0.5, 2.6); SNOW.value = w.snow ? 0.75 : 0; }, island: (kid, o = {}) => islandModel({ ...islandParams(kid), ...o }), item: buildItem, placeItem, tickIsland, inHouse, puff, envFor, cloudMats, tintClouds, cloudCluster });
+  Object.assign(api, { GRAD, rimPatch, outline, inkFor, weather: w => { WIND.value = clamp(0.5 + (w.windKph ?? 12) / 22, 0.5, 2.6); SNOW.value = w.snow ? 0.75 : 0; }, island: (kid, o = {}) => islandModel({ ...islandParams(kid), ...o }), item: buildItem, prize: prizeModel, placeItem, tickIsland, inHouse, inPaddock, inBarn, FARM, emoji: (e, s) => sprite(emojiTex(e), s), puff, envFor, cloudMats, tintClouds, cloudCluster });
   size(); addEventListener('resize', size); addEventListener('scroll', kick, { passive: true });
   return api;
 })();
@@ -2969,7 +3135,7 @@ const Studio = (() => {
     scene = new T.Scene(); cam = new T.PerspectiveCamera(38, 1, 0.1, 100);
     scene.environment = G3.envFor(R); scene.add(new T.HemisphereLight(0xd8ecff, 0x8a7a5a, 0.62));
     const sun = new T.DirectionalLight(0xfff1d6, 1.0); sun.position.set(-3, 6, 4); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
-    Object.assign(sun.shadow.camera, { left: -1.6, right: 1.6, top: 1.6, bottom: -1.6, near: 1, far: 15 }); sun.shadow.bias = -0.002; scene.add(sun);
+    Object.assign(sun.shadow.camera, { left: -2.3, right: 2.3, top: 2.3, bottom: -2.3, near: 1, far: 15 }); sun.shadow.bias = -0.002; scene.add(sun);
     const cms = G3.cloudMats(0xffffff, 0xa3b1d1, true); clouds = new T.Group(); for (let i = 0; i < 7; i++) { const c = G3.cloudCluster(900 + i, cms, 3.4, 1.15), a = i / 7 * Math.PI * 2; c.position.set(Math.cos(a) * 3.9, -1.6 + (i % 3) * 0.55, Math.sin(a) * 3.9); clouds.add(c); } scene.add(clouds);
     const cv = R.domElement;
     cv.addEventListener('pointerdown', down); cv.addEventListener('pointermove', move); cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
@@ -2979,7 +3145,7 @@ const Studio = (() => {
   }
   function size() { R.setSize(innerWidth, innerHeight); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); }
   const shadows = o => o.traverse(m => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; } });
-  function build() { if (island) { scene.remove(island); island.traverse(m => { if (m.geometry) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); } island = G3.island(kid(), { flat: true }); shadows(island); scene.add(island); scene.fog = wxNow().fog ? new T.Fog(new T.Color(0xdde3ea).convertSRGBToLinear(), 4.5, 10) : null; }
+  function build() { if (island) { scene.remove(island); island.traverse(m => { if (m.geometry) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); } island = G3.island(kid(), { flat: true, ...(S0.preview ? { look: S0.preview } : {}) }); target.x = (kid().island || {}).farm ? -0.5 : 0; shadows(island); scene.add(island); scene.fog = wxNow().fog ? new T.Fog(new T.Color(0xdde3ea).convertSRGBToLinear(), 4.5, 10) : null; }
   function thumbs() {
     if (THUMBS.done) return; THUMBS.done = true;
     let r; try { r = new T.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true }); } catch (e) { return; }
@@ -2999,8 +3165,9 @@ const Studio = (() => {
     if (S0.job) return;
     const r = R.domElement.getBoundingClientRect(); ray.setFromCamera({ x: (x - r.left) / r.width * 2 - 1, y: -((y - r.top) / r.height) * 2 + 1 }, cam);
     if (S0.place) {
-      const hit = ray.intersectObject(island.userData.grass, false)[0], p = hit && island.worldToLocal(hit.point.clone());
-      const pi = island.userData.pondInfo; if (!p || Math.hypot(p.x, p.z) > 0.98 || G3.inHouse(p.x, p.z) || (pi && Math.hypot(p.x - pi.x, p.z - pi.z) < pi.r + 0.06)) { S0.msg = 'Tap a grassy spot away from the house.'; Sound.error(); return ui(); }
+      const u = island.userData, hit = ray.intersectObjects([u.grass, u.paddock].filter(Boolean), false)[0], p = hit && island.worldToLocal(hit.point.clone());
+      const pi = u.pondInfo, ok = !p ? false : S0.placeFarm ? G3.inPaddock(p.x, p.z) && !G3.inBarn(p.x, p.z) : Math.hypot(p.x, p.z) <= 0.98 && !G3.inHouse(p.x, p.z) && !(pi && Math.hypot(p.x - pi.x, p.z - pi.z) < pi.r + 0.06);
+      if (!ok) { S0.msg = S0.placeFarm ? 'Farm animals live in the paddock. Tap the grass inside the fence.' : 'Tap a grassy spot away from the house.'; Sound.error(); return ui(); }
       const fn = S0.place; S0.place = null; return fn(p.x, p.z, x, y);
     }
     const hits = ray.intersectObjects(island.userData.items || [], true);
@@ -3012,7 +3179,7 @@ const Studio = (() => {
     raf = 0; if (!S0.open) return;
     const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
     idle += dt; if (idle > 5 && !S0.place) theta += dt * 0.1;
-    cam.position.set(rad * Math.sin(phi) * Math.cos(theta), target.y + rad * Math.cos(phi), rad * Math.sin(phi) * Math.sin(theta)); cam.lookAt(target);
+    cam.position.set(target.x + rad * Math.sin(phi) * Math.cos(theta), target.y + rad * Math.cos(phi), rad * Math.sin(phi) * Math.sin(theta)); cam.lookAt(target);
     island.position.y = Math.sin(t * 0.8) * 0.03; clouds.rotation.y = t * 0.03;
     if (S0.job) stepJob(now, dt);
     G3.tickIsland(island, t, dt, 0, island.userData.hopAt || 0);
@@ -3020,25 +3187,87 @@ const Studio = (() => {
   }
   // ---- Island jobs: each one plays out on the island with its tool, then the island is rebuilt clean
   function jobsRow(k) {
-    const care = careOf(k), tools = (k.island || {}).tools || {}, hasPond = ((k.jars || {}).save || 0) > 0;
+    const isl = k.island || {}, care = careOf(k), tools = isl.tools || {}, hasPond = ((k.jars || {}).save || 0) > 0, herd = farmAnimals(k).length, scoops = isl.feed || 0;
     return `<div class="care-row">${CARE.map(c => {
-      const v = care[c.k], need = v >= 0.66, tool = SHOP.find(s => s.t === c.tool), noPond = c.k === 'pond' && !hasPond;
-      const state = noPond ? 'Save in your vault to dig a pond' : need ? c.bad : v >= 0.33 ? 'Starting to need it' : c.good;
-      const btn = noPond ? '' : !tools[c.tool] ? `<button class="ghost" data-act="stCat" data-c="tools">Get the ${tool.name.toLowerCase()}</button>` : `<button data-act="stCare" data-k="${c.k}" ${v < 0.33 || S0.job ? 'disabled' : ''}>${c.verb}${need ? ' · +15 XP' : ''}</button>`;
+      if (c.k === 'feed' && !isl.farm) return '';
+      const v = care[c.k], need = v >= 0.66, tool = SHOP.find(s => s.t === c.tool), noPond = c.k === 'pond' && !hasPond, feed = c.k === 'feed';
+      let state = noPond ? 'Save in your vault to dig a pond' : need ? c.bad : v >= 0.33 ? 'Starting to need it' : c.good;
+      if (feed) state = herd ? `${state}. Feed bin: ${scoops} scoop${scoops === 1 ? '' : 's'}, ${Math.floor(scoops / herd)} day${Math.floor(scoops / herd) === 1 ? '' : 's'} for ${herd} animal${herd === 1 ? '' : 's'}` : 'Your paddock is empty';
+      const btn = noPond ? '' : feed && !herd ? `<button class="ghost" data-act="stCat" data-c="farm">Get a farm animal</button>` : feed && scoops < herd ? `<button class="ghost" data-act="stCat" data-c="farm">Buy feed</button>` : !tools[c.tool] ? `<button class="ghost" data-act="stCat" data-c="tools">Get the ${tool.name.toLowerCase()}</button>` : `<button data-act="stCare" data-k="${c.k}" ${v < 0.33 || S0.job ? 'disabled' : ''}>${c.verb}${need ? ` · +${feed ? herd * 5 : 15} XP` : ''}</button>`;
       return `<div class="care-card ${need ? 'need' : ''}"><span class="care-ic" aria-hidden="true">${c.icon}</span><b>${c.name}</b><small>${state}</small><div class="care-bar" aria-hidden="true"><i style="width:${Math.round(Math.min(1, v) * 100)}%"></i></div>${btn}</div>`;
     }).join('')}</div>`;
   }
+  // Takes the price in XP or from the Spend jar, writing into `isl` and `patch`. Returns false, with a message, if
+  // there isn't enough. `rec` (a placed item) remembers what was paid, so selling it back can refund half.
+  function charge(k, d, pay, isl, patch, rec) {
+    if (pay === 'won') return true;
+    if (pay === 'xp') { if (xpOf(k).left < d.xp) { S0.msg = 'Not enough XP yet. Finish a mission or a Character Growth lesson to earn more.'; ui(); return false; } isl.xpSpent = (isl.xpSpent || 0) + d.xp; if (rec) rec.xp = d.xp; }
+    else { const jars = { ...(k.jars || {}) }; if ((jars.spend || 0) < d.cash) { S0.msg = 'Not enough in your Spend jar.'; ui(); return false; } jars.spend -= d.cash; patch.jars = jars; patch.ledger = pushLedger(k, { kind: 'spend', amt: -d.cash, memo: `Island shop: ${d.name}` }); if (rec) rec.cash = d.cash; if (window.Growth) Growth.onEvent(k, 'buyCash', { name: d.name, cost: d.cash }); }
+    track('island.buy', { item: d.t || d.id, name: d.name, cat: d.cat || 'look', pay, price: pay === 'xp' ? d.xp : d.cash }, k.id);
+    return true;
+  }
+  const done = (msg, x = innerWidth / 2, y = innerHeight * 0.6) => { S0.confirm = null; S0.msg = msg; Sound.cash(); FX.burst(x, y, CONF, 26); ui(); };
   function buyTool(d, pay) {
     const k = kid(), isl = { items: [], xpSpent: 0, ...(k.island || {}) }, patch = {};
-    if (pay === 'xp') { if (xpOf(k).left < d.xp) { S0.msg = 'Not enough XP yet. Finish a mission or a Character Growth lesson to earn more.'; return ui(); } isl.xpSpent = (isl.xpSpent || 0) + d.xp; }
-    else { const jars = { ...(k.jars || {}) }; if ((jars.spend || 0) < d.cash) { S0.msg = 'Not enough in your Spend jar.'; return ui(); } jars.spend -= d.cash; patch.jars = jars; patch.ledger = pushLedger(k, { kind: 'spend', amt: -d.cash, memo: `Island shop: ${d.name}` }); if (window.Growth) Growth.onEvent(k, 'buyCash', { name: d.name, cost: d.cash }); }
+    if (!charge(k, d, pay, isl, patch)) return;
     isl.tools = { ...(isl.tools || {}), [d.t]: true }; patch.island = isl; updDoc('kids', k.id, patch);
-    S0.confirm = null; S0.cat = 'jobs'; S0.msg = `The ${d.name.toLowerCase()} is in your shed. Time to get to work!`; Sound.cash(); FX.burst(innerWidth / 2, innerHeight * 0.6, CONF, 24); ui();
+    S0.cat = 'jobs'; done(`The ${d.name.toLowerCase()} is in your shed. Time to get to work!`);
   }
+  // The paddock grows the island and comes with a feed bucket and a first bag of feed.
+  function buyLand(d, pay) {
+    const k = kid(), isl = { items: [], xpSpent: 0, ...(k.island || {}) }, patch = {};
+    if (!charge(k, d, pay, isl, patch)) return;
+    Object.assign(isl, { farm: 1, feed: (isl.feed || 0) + 10, tools: { ...(isl.tools || {}), bucket: true } }); patch.island = isl; updDoc('kids', k.id, patch);
+    track('island.expand', { what: 'paddock' }, k.id); build(); Sound.fanfare();
+    done('Your island grew! The paddock comes with a feed bucket and a bag of feed. Now pick some farm animals.');
+  }
+  function buyFeed(d, pay) {
+    const k = kid(), isl = { items: [], xpSpent: 0, ...(k.island || {}) }, patch = {};
+    if (!charge(k, d, pay, isl, patch)) return;
+    isl.feed = (isl.feed || 0) + d.feed; patch.island = isl; updDoc('kids', k.id, patch);
+    const herd = farmAnimals(k).length; done(`+${d.feed} scoops in the feed bin${herd ? `, enough for ${Math.floor(isl.feed / herd)} days` : ''}.`);
+  }
+  // Makeover colours: bought once, then free to switch to and from.
+  const lookDef = id => { const [part, key] = id.split(':'), o = lookOpt(part, key); return o && { id, part, key, name: o.name, xp: o.xp, cash: o.cash, prize: o.prize, cat: 'look' }; };
+  function useLook(part, key, msg) {
+    const k = kid(), isl = { items: [], ...(k.island || {}) }; isl.look = { ...(isl.look || {}), [part]: key || null };
+    updDoc('kids', k.id, { island: isl }); track('island.look', { part, key: key || 'original' }, k.id);
+    S0.lk = null; S0.preview = null; build(); done(msg || 'New look!', innerWidth / 2, innerHeight * 0.4);
+  }
+  function buyLook(id, pay) {
+    const k = kid(), d = lookDef(id), isl = { items: [], xpSpent: 0, ...(k.island || {}) }, patch = {}; if (!d || d.prize) return;
+    if (!charge(k, d, pay, isl, patch)) return;
+    isl.owned = { ...(isl.owned || {}), [id]: 'bought' }; patch.island = isl; updDoc('kids', k.id, patch);
+    useLook(d.part, d.key, `${d.name}! Yours to switch back to any time.`);
+  }
+  const swatch = (part, o) => !o.k ? (part === 'leaf' ? 'linear-gradient(135deg,#3d9b4f 50%,#8bd45a 50%)' : part === 'roof' ? 'var(--kid-hue,#e5533d)' : part === 'door' ? '#8a5a3c' : '#fff3df') : Array.isArray(o.c) ? `linear-gradient(135deg,#${o.c[0].toString(16).padStart(6, '0')} 50%,#${o.c[1].toString(16).padStart(6, '0')} 50%)` : '#' + o.c.toString(16).padStart(6, '0');
+  function lookRow(k) {
+    const isl = k.island || {}, cur = isl.look || {}, own = isl.owned || {}, sel = S0.lk;
+    return `<div class="mk" style="--kid-hue:${esc(k.hue)}">${LOOKS.map(p => `<div class="mk-part"><b>${p.name}</b><div class="mk-sw">${[{ k: '', name: 'Original' }, ...p.opts].map(o => {
+      const mine = !o.k || own[`${p.k}:${o.k}`], on = (cur[p.k] || '') === o.k, pick = sel && sel.part === p.k && sel.k === o.k;
+      return `<button class="mk-dot ${on ? 'on' : ''} ${pick ? 'pick' : ''} ${mine ? '' : 'lock'}" style="--c:${swatch(p.k, o)}" data-act="stLook" data-p="${p.k}" data-k="${o.k}" aria-label="${esc(o.name)}${on ? ', in use' : mine ? '' : o.prize ? ', a Character Growth prize' : ''}">${o.prize && !mine ? '🎁' : ''}</button>`;
+    }).join('')}</div></div>`).join('')}</div>`;
+  }
+  // One card in the shop row. Prizes can't be bought; farm animals need the paddock; tools and the paddock are one-offs.
+  function itemCard(it, k, xp, cash, allowCash, lvl, owned) {
+    const isl = k.island || {}, n = owned(it.t), G = window.Growth || null;
+    const locked = (it.lvl || 0) > lvl && !(G && G.mastered(k) >= it.lvl * 4), noFarm = (it.farm || it.needs === 'farm') && !isl.farm;
+    let foot;
+    if (it.prize) { const left = ((isl.won || {})[it.t] || 0) - items(k).filter(i => i.t === it.t && i.won).length; foot = left > 0 ? `<div class="shop-buy"><button data-act="stPlaceWon" data-t="${it.t}">Place it · free</button></div>` : n ? '<small class="owned">On your island</small>' : `<small class="prize">🎁 ${esc(G && G.prizeHint ? G.prizeHint(k, 'item:' + it.t) : 'A Character Growth prize')}</small>`; }
+    else if (locked) foot = `<small>Unlocks with a ${LEVELS[it.lvl].name.toLowerCase()}${G ? `, or master ${it.lvl * 4 - G.mastered(k)} more skills` : ''}</small>`;
+    else if (noFarm) foot = '<small>Needs the farm paddock first</small>';
+    else if (it.land && isl.farm) foot = '<small class="owned">Your farm is open</small>';
+    else if (it.cat === 'tools' && (isl.tools || {})[it.t]) foot = '<small class="owned">In your shed</small>';
+    else foot = `${it.feed ? `<small>${it.feed} scoops · ${isl.feed || 0} in the bin</small>` : ''}<div class="shop-buy"><button data-act="stBuyXp" data-t="${it.t}" ${xp.left < it.xp ? 'disabled' : ''}>${ic('sparkle')} ${it.xp} XP</button>${xp.left < it.xp && G ? `<button class="cg-earn" data-act="gEarn" data-id="${k.id}" data-need="${it.xp - xp.left}">Earn it: lesson</button>` : ''}${allowCash ? `<button data-act="stBuyCash" data-t="${it.t}" ${cash < it.cash ? 'disabled' : ''}>${fmt(it.cash)}</button>` : ''}</div>`;
+    return `<div class="shop-item ${locked || noFarm ? 'locked' : ''} ${it.prize ? 'is-prize' : ''}">${n ? `<span class="shop-n">×${n}</span>` : ''}<img src="${THUMBS[it.t] || ''}" alt="" width="84" height="84"><b>${esc(it.name)}</b>${foot}</div>`;
+  }
+  const items = k => (k.island || {}).items || [];
   const sprayGeo = T ? new T.SphereGeometry(0.012, 6, 4) : null, sprayMat = T ? new T.MeshBasicMaterial({ color: 0xcdeeff, transparent: true, opacity: 0.85 }) : null, V3 = T ? new T.Vector3() : null;
   function startJob(q) {
     const k = kid(), c = CARE.find(x => x.k === q); if (!k || !c || S0.job) return;
-    const tool = G3.item(c.tool), u = island.userData, j = { q, c, tool, t0: performance.now(), dur: q === 'lawn' ? 4600 : 3300, was: careOf(k)[q], spray: [], walls: [], last: -1 };
+    const u = island.userData, animals = (u.items || []).filter(m => m.userData.farm);
+    if (q === 'feed' && ((k.island || {}).feed || 0) < animals.length) { S0.cat = 'farm'; S0.msg = 'The feed bin is nearly empty. Buy a bag of feed first.'; return ui(); }
+    const tool = G3.item(c.tool), j = { q, c, tool, animals, t0: performance.now(), dur: q === 'lawn' ? 4600 : q === 'feed' ? Math.max(2600, animals.length * 1100) : 3300, was: careOf(k)[q], spray: [], walls: [], last: -1 };
     tool.scale.setScalar(1.6); shadows(tool); island.add(tool);
     if (q === 'pond' && u.pond) { const m = u.pond.material.clone(); m.userData.ownMat = true; u.pond.material = m; j.from = m.color.clone(); j.to = new T.Color(0x3fb7f5).convertSRGBToLinear(); }
     if (q === 'house') (u.walls || []).forEach(w => { const m = w.material.clone(); m.onBeforeCompile = w.material.onBeforeCompile; m.customProgramCacheKey = w.material.customProgramCacheKey; m.userData.ownMat = true; w.material = m; j.walls.push({ m, from: m.color.clone(), to: new T.Color(w.userData.clean).convertSRGBToLinear() }); });
@@ -3048,6 +3277,14 @@ const Studio = (() => {
     const j = S0.job, p = clamp((now - j.t0) / j.dur, 0, 1), u = island.userData, tl = j.tool, top = 0.2;
     if (j.q === 'lawn') { const r = 1.0 - p * 0.97, a = p * Math.PI * 8; tl.position.set(Math.cos(a) * r, top, Math.sin(a) * r); tl.rotation.y = -a; const U = u.grassMesh.material.userData.U; U.uMowing.value = 1; U.uMowR.value = r; }
     else if (j.q === 'pond') { const a = p * Math.PI * 4; tl.position.set(-0.5 + Math.cos(a) * 0.14, top + 0.06, 0.32 + Math.sin(a) * 0.14); tl.rotation.y = -a; const L = u.pondLeaves || []; L.forEach((l, i) => { if (l.visible && p > (i + 1) / (L.length + 1)) { l.visible = false; Sound.pop(); } }); if (j.from && u.pond) u.pond.material.color.copy(j.from).lerp(j.to, p); }
+    else if (j.q === 'feed') {
+      const L = j.animals, n = L.length;
+      if (n) {
+        const f = p * n, i = Math.min(n - 1, Math.floor(f)), tg = L[i];
+        V3.set(tg.position.x + 0.08, top + 0.04, tg.position.z + 0.08); tl.position.lerp(V3, Math.min(1, dt * 9)); tl.rotation.y += dt * 2;
+        for (let q = 0; q <= i; q++) if (!L[q].userData.fedNow && (q < i || f - i > 0.5)) { const m = L[q]; m.userData.fedNow = true; m.userData.hopAt = now / 1000; Sound.pop(); const h = G3.emoji('❤️', 0.09); h.position.set(m.position.x, top + 0.3, m.position.z); h.userData.v = new T.Vector3(0, 0.22, 0); h.userData.life = 0.9; island.add(h); j.spray.push(h); }
+      }
+    }
     else if (j.q === 'house') { const a = p * Math.PI * 2.5; tl.position.set(0.05 + Math.cos(a) * 0.64, top, -0.22 + Math.sin(a) * 0.64); tl.rotation.y = -a + Math.PI; j.walls.forEach(w => w.m.color.copy(w.from).lerp(w.to, p)); if (Math.random() < 0.7) { const m = new T.Mesh(sprayGeo, sprayMat); m.position.copy(tl.position); m.position.y += 0.2; m.userData.v = V3.set(0.05 - tl.position.x, 0.25, -0.22 - tl.position.z).normalize().multiplyScalar(1.3).clone(); m.userData.life = 0.45; island.add(m); j.spray.push(m); } }
     else {
       const L = j.q === 'weeds' ? u.weeds : j.q === 'leaves' ? u.leaves : u.trees, n = (L || []).length;
@@ -3058,13 +3295,14 @@ const Studio = (() => {
         for (let q = 0; q < n; q++) { if (q > i || (q === i && f - i < 0.6)) continue; if (j.q === 'trees') L[q].scale.setScalar(T.MathUtils.lerp(L[q].scale.x, L[q].userData.base, Math.min(1, dt * 6))); else if (L[q].visible) { L[q].visible = false; Sound.pop(); } }
       } else tl.position.set(Math.cos(p * 6) * 0.5, top, Math.sin(p * 6) * 0.5);
     }
-    j.spray = j.spray.filter(m => { m.userData.life -= dt; m.position.addScaledVector(m.userData.v, dt); if (m.userData.life > 0) return true; island.remove(m); return false; });
+    j.spray = j.spray.filter(m => { m.userData.life -= dt; m.position.addScaledVector(m.userData.v, dt); if (m.userData.life > 0) return true; island.remove(m); if (m.isSprite) m.material.dispose(); return false; });
     if (p >= 1) finishJob();
   }
   function finishJob() {
     const j = S0.job, k = kid(); S0.job = null; island.remove(j.tool); j.spray.forEach(m => island.remove(m));
-    const isl = { items: [], ...(k.island || {}) }, reward = j.was >= 0.66 ? 15 : 0;
+    const isl = { items: [], ...(k.island || {}) }, herd = j.animals.length, reward = j.was >= 0.66 ? (j.q === 'feed' ? herd * 5 : 15) : 0;
     isl.care = { ...(isl.care || {}), [j.q]: Date.now() }; if (reward) isl.careXp = (isl.careXp || 0) + reward;
+    if (j.q === 'feed') { isl.feed = Math.max(0, (isl.feed || 0) - herd); track('island.feed', { animals: herd, scoops: herd, hungry: j.was >= 0.66, left: isl.feed, xp: reward }, k.id); }
     updDoc('kids', k.id, { island: isl }); build();
     S0.msg = `${j.c.name} done!${reward ? ` +${reward} XP` : ''}`; Sound.fanfare(); FX.burst(innerWidth / 2, innerHeight * 0.4, ['#7CFFB2', '#FFE066', '#FFFFFF', '#9BF6FF'], 34); ui();
     setTimeout(() => { if (S0.open && / done!/.test(S0.msg)) { S0.msg = ''; ui(); } }, 2600);
@@ -3076,13 +3314,20 @@ const Studio = (() => {
     const sel = S0.sel && items.find(i => i.id === S0.sel), selDef = sel && SHOP.find(s => s.t === sel.t);
     let panel = '';
     if (S0.confirm) {
-      const d = SHOP.find(s => s.t === S0.confirm.t);
-      panel = `<div class="st-panel"><h3>Spend ${fmt(d.cash)} on a ${esc(d.name.toLowerCase())}?</h3><p>That is ${Math.round(d.cash / Math.max(1, cash) * 100)}% of your ${fmt(cash)} Spend money. Saved in the vault for 12 weeks instead, it would grow to ${fmt(futureValue(d.cash, vaultRate(k), 12))}.</p>
-        <div class="st-actions"><button class="st-btn primary" data-act="stPayCash">Buy it for ${fmt(d.cash)}</button>${xp.left >= d.xp ? `<button class="st-btn" data-act="stPayXp" data-t="${d.t}">Use ${d.xp} XP instead</button>` : ''}<button class="st-btn ghost" data-act="stCancel">Keep saving</button></div></div>`;
+      const d = S0.confirm.look ? lookDef(S0.confirm.look) : SHOP.find(s => s.t === S0.confirm.t), herd = farmAnimals(k).length;
+      const extra = d.farm ? ` It eats a scoop of feed every day, and a bag of 10 scoops costs ${fmt(SHOP.find(s => s.t === 'feed').cash)}.` : d.land ? ' The paddock is a one-off, but every farm animal you put in it needs feeding each day.' : d.feed && herd ? ` Your ${herd} animal${herd === 1 ? '' : 's'} eat${herd === 1 ? 's' : ''} ${herd} scoop${herd === 1 ? '' : 's'} a day, so a bag lasts ${Math.floor(d.feed / herd)} day${Math.floor(d.feed / herd) === 1 ? '' : 's'}.` : '';
+      panel = `<div class="st-panel"><h3>Spend ${fmt(d.cash)} on ${d.cat === 'look' ? esc(d.name.toLowerCase()) : `a ${esc(d.name.toLowerCase())}`}?</h3><p>That is ${Math.round(d.cash / Math.max(1, cash) * 100)}% of your ${fmt(cash)} Spend money. Saved in the vault for 12 weeks instead, it would grow to ${fmt(futureValue(d.cash, vaultRate(k), 12))}.${extra}</p>
+        <div class="st-actions"><button class="st-btn primary" data-act="stPayCash">Buy it for ${fmt(d.cash)}</button>${xp.left >= d.xp ? (d.cat === 'look' ? `<button class="st-btn" data-act="stLookXp">Use ${d.xp} XP instead</button>` : `<button class="st-btn" data-act="stPayXp" data-t="${d.t}">Use ${d.xp} XP instead</button>`) : ''}<button class="st-btn ghost" data-act="stCancel">Keep saving</button></div></div>`;
     } else if (sel && selDef) {
       const back = sel.cash ? fmt(Math.floor(sel.cash / 2)) : `${Math.floor((sel.xp || 0) / 2)} XP`;
-      panel = `<div class="st-panel"><h3>${esc(selDef.name)}</h3><p>${selDef.cat === 'animals' ? 'Your island buddy wanders about and hops when you tap it.' : 'Move it somewhere new or give it a turn.'} Things lose value once you’ve bought them, so selling back gets you half.</p>
-        <div class="st-actions"><button class="st-btn" data-act="stMove">Move</button><button class="st-btn" data-act="stTurn">Turn</button><button class="st-btn" data-act="stSell">Sell back for ${back}</button><button class="st-btn ghost" data-act="stDone">Done</button></div></div>`;
+      const about = selDef.prize ? 'A prize from Character Growth. Put it away and you can place it again from the shop any time.' : `${selDef.farm ? 'It lives in the paddock and needs a scoop of feed every day.' : selDef.cat === 'animals' ? 'Your island buddy wanders about and hops when you tap it.' : 'Move it somewhere new or give it a turn.'} Things lose value once you’ve bought them, so selling back gets you half.`;
+      panel = `<div class="st-panel"><h3>${esc(selDef.name)}</h3><p>${about}</p>
+        <div class="st-actions"><button class="st-btn" data-act="stMove">Move</button><button class="st-btn" data-act="stTurn">Turn</button><button class="st-btn" data-act="stSell">${sel.won ? 'Put it away' : `Sell back for ${back}`}</button><button class="st-btn ghost" data-act="stDone">Done</button></div></div>`;
+    } else if (S0.lk) {
+      const { part, k: key } = S0.lk, o = key ? lookOpt(part, key) : null, id = `${part}:${key}`, mine = !key || ((k.island || {}).owned || {})[id], inUse = (((k.island || {}).look || {})[part] || '') === key, G = window.Growth || null;
+      const name = o ? o.name : `Original ${LOOKS.find(p => p.k === part).name.toLowerCase()}`, tentNote = !lvl && (part === 'wall' || part === 'door') ? ' Your tent has no walls or door yet, so this shows once you build a little hut.' : '';
+      const acts = inUse ? '<button class="st-btn ghost" data-act="stLookOff">Done</button>' : mine ? `<button class="st-btn primary" data-act="stLookUse">Use it</button><button class="st-btn ghost" data-act="stLookOff">Cancel</button>` : o.prize ? '<button class="st-btn ghost" data-act="stLookOff">Cancel</button>' : `<button class="st-btn primary" data-act="stLookXp" ${xp.left < o.xp ? 'disabled' : ''}>${ic('sparkle')} ${o.xp} XP</button>${allowCash ? `<button class="st-btn" data-act="stLookCash" ${cash < o.cash ? 'disabled' : ''}>${fmt(o.cash)}</button>` : ''}<button class="st-btn ghost" data-act="stLookOff">Cancel</button>`;
+      panel = `<div class="st-panel"><h3>${esc(name)}</h3><p>${inUse ? 'This is what your island uses now.' : mine ? 'Have a look, then tap Use it to keep it.' : o.prize ? `🎁 A Character Growth prize. ${esc(G && G.prizeHint ? G.prizeHint(k, id) : '')}` : 'Here’s how it would look. Buy it once, and you can switch back to it whenever you like.'}${tentNote}</p><div class="st-actions">${acts}</div></div>`;
     }
     const root = $('#studio .studio-ui'), keepX = ($('.shop-row', root) || {}).scrollLeft || 0;
     root.innerHTML = `
@@ -3093,37 +3338,48 @@ const Studio = (() => {
       ${panel}
       <section class="shop" aria-label="Island shop">
         <div class="shop-tabs">${SHOP_CATS.map(([c, l]) => `<button class="chip ${S0.cat === c ? 'on' : ''}" data-act="stCat" data-c="${c}">${l}</button>`).join('')}</div>
-        ${S0.cat === 'jobs' ? jobsRow(k) : `<div class="shop-row">${SHOP.filter(s => s.cat === S0.cat).map(it => { const locked = (it.lvl || 0) > lvl && !((window.Growth || null) && Growth.mastered(k) >= it.lvl * 4), n = owned(it.t), shed = it.cat === 'tools' && ((k.island || {}).tools || {})[it.t]; return `<div class="shop-item ${locked ? 'locked' : ''}">${n ? `<span class="shop-n">×${n}</span>` : ''}<img src="${THUMBS[it.t] || ''}" alt="" width="84" height="84"><b>${esc(it.name)}</b>${locked ? `<small>Unlocks with a ${LEVELS[it.lvl].name.toLowerCase()}${(window.Growth || null) ? `, or master ${it.lvl * 4 - Growth.mastered(k)} more skills` : ''}</small>` : shed ? '<small class="owned">In your shed</small>' : `<div class="shop-buy"><button data-act="stBuyXp" data-t="${it.t}" ${xp.left < it.xp ? 'disabled' : ''}>${ic('sparkle')} ${it.xp} XP</button>${xp.left < it.xp && (window.Growth || null) ? `<button class="cg-earn" data-act="gEarn" data-id="${k.id}" data-need="${it.xp - xp.left}">Earn it: lesson</button>` : ''}${allowCash ? `<button data-act="stBuyCash" data-t="${it.t}" ${cash < it.cash ? 'disabled' : ''}>${fmt(it.cash)}</button>` : ''}</div>`}</div>`; }).join('')}</div>`}
-        <p class="shop-foot">${S0.cat === 'jobs' ? 'Everything you own needs looking after. Island jobs pop up every few days and earn XP.' : `Earn XP from approved missions, habits, lessons and island jobs.${allowCash ? ' Spend-jar money works too, but once it’s spent it’s gone.' : ''}`}</p>
+        ${S0.cat === 'jobs' ? jobsRow(k) : S0.cat === 'look' ? lookRow(k) : `<div class="shop-row">${SHOP.filter(s => s.cat === S0.cat).map(it => itemCard(it, k, xp, cash, allowCash, lvl, owned)).join('')}</div>`}
+        <p class="shop-foot">${S0.cat === 'jobs' ? 'Everything you own needs looking after. Island jobs pop up every few days and earn XP.' : S0.cat === 'look' ? 'Tap a colour to see it on your island. Buy one once and switch back any time. 🎁 colours are prizes from Character Growth.' : S0.cat === 'farm' ? 'Every farm animal eats a scoop of feed a day. Feed them from Island jobs, and keep the feed bin topped up.' : `Earn XP from approved missions, habits, lessons and island jobs.${allowCash ? ' Spend-jar money works too, but once it’s spent it’s gone.' : ''}`}</p>
       </section>`;
     const row = $('.shop-row', root); if (row) row.scrollLeft = keepX;
   }
   function startPlace(t, pay) {
-    const d = SHOP.find(s => s.t === t); S0.confirm = null; S0.sel = null; S0.msg = `Tap the grass where your ${d.name.toLowerCase()} should go.`;
+    const d = SHOP.find(s => s.t === t); S0.confirm = null; S0.sel = null; S0.placeFarm = !!d.farm; S0.msg = d.farm ? `Tap the paddock where your ${d.name.toLowerCase()} should go.` : `Tap the grass where your ${d.name.toLowerCase()} should go.`;
     S0.place = (x, z, sx, sy) => {
       const k = kid(), isl = { items: [], xpSpent: 0, ...(k.island || {}) }, it = { id: uid(), t, x: +x.toFixed(3), z: +z.toFixed(3), r: +(Math.random() * 6.28).toFixed(2) }, patch = {};
-      if (pay === 'xp') { if (xpOf(k).left < d.xp) { S0.msg = 'Not enough XP yet. Finish a mission or a Character Growth lesson to earn more.'; return ui(); } it.xp = d.xp; isl.xpSpent = (isl.xpSpent || 0) + d.xp; }
-      else { const jars = { ...(k.jars || {}) }; if ((jars.spend || 0) < d.cash) { S0.msg = 'Not enough in your Spend jar.'; return ui(); } it.cash = d.cash; jars.spend -= d.cash; patch.jars = jars; patch.ledger = pushLedger(k, { kind: 'spend', amt: -d.cash, memo: `Island shop: ${d.name}` }); if (window.Growth) Growth.onEvent(k, 'buyCash', { name: d.name, cost: d.cash }); }
+      if (!charge(k, d, pay, isl, patch, it)) return;
+      if (pay === 'won') it.won = 1;
+      if (d.farm && !farmAnimals(k).length) isl.care = { ...(isl.care || {}), feed: Date.now() };
       isl.items = [...(isl.items || []), it]; patch.island = isl;
       updDoc('kids', k.id, patch);
       const m = G3.placeItem(island, it); if (m) shadows(m);
-      S0.msg = `${d.name} added to your island!`; Sound.cash(); FX.burst(sx, sy, CONF, 26); ui();
+      S0.msg = d.farm ? `${d.name} added to your farm! It eats a scoop of feed a day.` : `${d.name} added to your island!`; Sound.cash(); FX.burst(sx, sy, CONF, 26); ui();
       setTimeout(() => { if (S0.open && S0.msg.endsWith('island!')) { S0.msg = ''; ui(); } }, 2600);
     };
     ui();
   }
+  function buy(d, pay) { return d.land ? buyLand(d, pay) : d.feed ? buyFeed(d, pay) : d.cat === 'tools' ? buyTool(d, pay) : startPlace(d.t, pay); }
   function act(n, a) {
     const k = kid(); if (!k) return;
     const d = a && a.dataset.t ? SHOP.find(s => s.t === a.dataset.t) : null, isl = k.island || { items: [] };
-    if (n === 'cat') S0.cat = a.dataset.c;
-    else if (n === 'buyXp' || n === 'payXp') return d.cat === 'tools' ? buyTool(d, 'xp') : startPlace(d.t, 'xp');
+    if (n === 'cat') { S0.cat = a.dataset.c; if (S0.preview) { S0.lk = null; S0.preview = null; build(); } }
+    else if (n === 'buyXp' || n === 'payXp') return buy(d, 'xp');
     else if (n === 'care') return startJob(a.dataset.k);
     else if (n === 'buyCash') { S0.confirm = { t: d.t }; S0.sel = null; }
-    else if (n === 'payCash') { const dd = SHOP.find(x => x.t === S0.confirm.t); return dd.cat === 'tools' ? buyTool(dd, 'cash') : startPlace(dd.t, 'cash'); }
+    else if (n === 'payCash') { if (S0.confirm.look) return buyLook(S0.confirm.look, 'cash'); return buy(SHOP.find(x => x.t === S0.confirm.t), 'cash'); }
+    else if (n === 'placeWon') return startPlace(d.t, 'won');
+    else if (n === 'look') {
+      const part = a.dataset.p, key = a.dataset.k, o = key ? lookOpt(part, key) : null; S0.sel = null; S0.confirm = null;
+      S0.lk = { part, k: key }; S0.preview = { ...lookOf(k) }; if (o) S0.preview[part] = o.c; else delete S0.preview[part]; build();
+    }
+    else if (n === 'lookUse') return useLook(S0.lk.part, S0.lk.k);
+    else if (n === 'lookXp') return buyLook(S0.confirm && S0.confirm.look ? S0.confirm.look : `${S0.lk.part}:${S0.lk.k}`, 'xp');
+    else if (n === 'lookCash') { S0.confirm = { look: `${S0.lk.part}:${S0.lk.k}` }; }
+    else if (n === 'lookOff') { S0.lk = null; S0.preview = null; build(); }
     else if (n === 'cancel') { S0.confirm = null; S0.place = null; S0.msg = ''; }
     else if (n === 'done') S0.sel = null;
     else if (n === 'move') {
-      const id = S0.sel; S0.sel = null; S0.msg = 'Tap the grass where it should go.';
+      const id = S0.sel, cur0 = isl.items.find(i => i.id === id); S0.sel = null; S0.placeFarm = !!(SHOP.find(s => s.t === (cur0 || {}).t) || {}).farm; S0.msg = S0.placeFarm ? 'Tap the paddock where it should go.' : 'Tap the grass where it should go.';
       S0.place = (x, z) => { const cur = kid().island; updDoc('kids', k.id, { island: { ...cur, items: cur.items.map(i => (i.id === id ? { ...i, x: +x.toFixed(3), z: +z.toFixed(3) } : i)) } }); const m = findMesh(id); if (m) { m.position.x = x; m.position.z = z; m.userData.hopAt = performance.now() / 1000; } S0.msg = ''; Sound.pop(); ui(); };
     } else if (n === 'turn') {
       const id = S0.sel, it = isl.items.find(i => i.id === id); if (!it) return; const r = +((it.r || 0) + Math.PI / 4).toFixed(2);
@@ -3132,16 +3388,17 @@ const Studio = (() => {
       const id = S0.sel, it = isl.items.find(i => i.id === id); if (!it) return;
       const patch = { island: { ...isl, items: isl.items.filter(i => i.id !== id) } }, name = (SHOP.find(s => s.t === it.t) || {}).name || 'item';
       if (it.cash && window.Growth) Growth.onEvent(k, 'sell', { name, cost: it.cash, back: Math.floor(it.cash / 2) });
-      if (it.cash) { const back = Math.floor(it.cash / 2); patch.jars = { ...(k.jars || {}), spend: ((k.jars || {}).spend || 0) + back }; patch.ledger = pushLedger(k, { kind: 'sell', amt: back, memo: `Sold island ${name.toLowerCase()}` }); }
+      if (it.won) {}
+      else if (it.cash) { const back = Math.floor(it.cash / 2); patch.jars = { ...(k.jars || {}), spend: ((k.jars || {}).spend || 0) + back }; patch.ledger = pushLedger(k, { kind: 'sell', amt: back, memo: `Sold island ${name.toLowerCase()}` }); }
       else patch.island.xpSpent = Math.max(0, (isl.xpSpent || 0) - Math.floor((it.xp || 0) / 2));
       updDoc('kids', k.id, patch); const m = findMesh(id); if (m) { island.remove(m); island.userData.items = island.userData.items.filter(x => x !== m); }
-      S0.sel = null; Sound.coin(); toast(`Sold the ${name.toLowerCase()} for half what you paid`);
+      S0.sel = null; Sound.coin(); toast(it.won ? `The ${name.toLowerCase()} is put away. Place it again from the shop any time.` : `Sold the ${name.toLowerCase()} for half what you paid`);
     }
     ui();
   }
   function open(id) {
     if (!ensure()) { toast('The island needs 3D, which this device can’t show.'); return; }
-    kidId = id; Object.assign(S0, { open: true, msg: '', sel: null, confirm: null, place: null, job: null, cat: CARE.some(c => careOf(kid())[c.k] >= 0.66) ? 'jobs' : 'animals' }); idle = 0; rad = clamp(5.5 / Math.min(1, (innerWidth / innerHeight) * 1.4), 5.5, 10);
+    kidId = id; Object.assign(S0, { open: true, msg: '', sel: null, confirm: null, place: null, job: null, lk: null, preview: null, cat: CARE.some(c => careOf(kid())[c.k] >= 0.66) ? 'jobs' : 'animals' }); idle = 0; rad = clamp(5.5 / Math.min(1, (innerWidth / innerHeight) * 1.4), 5.5, 10) * ((kid().island || {}).farm ? 1.25 : 1);
     const root = $('#studio'); if (!R.domElement.isConnected) root.prepend(R.domElement);
     thumbs(); build(); size(); root.hidden = false; ui(); last = performance.now(); if (!raf) raf = requestAnimationFrame(frame); Sound.ensure(); Sound.whoosh();
   }
@@ -4825,7 +5082,7 @@ const ACT = {
   },
   photo: a => { UI.photoId = a.dataset.id; openSheet(photoSheet, { cls: 'wide' }); },
   studio: a => { Studio.show(a.dataset.id); },
-  stClose: () => Studio.close(), stCat: a => Studio.act('cat', a), stBuyXp: a => Studio.act('buyXp', a), stBuyCash: a => Studio.act('buyCash', a), stPayCash: a => Studio.act('payCash', a), stPayXp: a => Studio.act('payXp', a), stCancel: a => Studio.act('cancel', a), stDone: a => Studio.act('done', a), stMove: a => Studio.act('move', a), stTurn: a => Studio.act('turn', a), stSell: a => Studio.act('sell', a), stCare: a => Studio.act('care', a),
+  stClose: () => Studio.close(), stCat: a => Studio.act('cat', a), stLook: a => Studio.act('look', a), stLookUse: a => Studio.act('lookUse', a), stLookXp: a => Studio.act('lookXp', a), stLookCash: a => Studio.act('lookCash', a), stLookOff: a => Studio.act('lookOff', a), stPlaceWon: a => Studio.act('placeWon', a), stBuyXp: a => Studio.act('buyXp', a), stBuyCash: a => Studio.act('buyCash', a), stPayCash: a => Studio.act('payCash', a), stPayXp: a => Studio.act('payXp', a), stCancel: a => Studio.act('cancel', a), stDone: a => Studio.act('done', a), stMove: a => Studio.act('move', a), stTurn: a => Studio.act('turn', a), stSell: a => Studio.act('sell', a), stCare: a => Studio.act('care', a),
   poke: a => { G3.poke(a.dataset.id); Sound.ensure(); Sound.pop(); const r = a.getBoundingClientRect(); FX.burst(r.left + r.width / 2, r.top + r.height * 0.4, CONF, 16); },
 
   sPause: () => { if (Stage.panes.every(p => p.phase !== 'play')) return; pauseStage(true); },
@@ -5033,7 +5290,7 @@ let lastDay = dkey();
 setInterval(() => { if (!Store.ready) return; const d = dkey(); const t = Market.last; buildMarket(); if (d !== lastDay) { lastDay = d; applyInterest(); scheduleRender(); } else if (t !== Market.last && UI.screen === 'kid' && UI.tab === 'market') scheduleRender(); }, 60000);
 
 /* Character Growth lives in growth.js and reaches the app through this bridge. */
-window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet };
+window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, PRIZES, LOOKS, prizeInfo, hasPrize, grantPrize, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet };
 
 /* =========================================================
    Boot

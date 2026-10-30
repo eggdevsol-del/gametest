@@ -2,10 +2,13 @@
 /* ---------- How to play: a hand demonstrates each kind of game before the kid's first go ----------
    The demo plays the real game on a made-up example (fruit and veggies, a dollar coin, a lemonade stall), so it
    teaches the moves without giving away the lesson's answers. It runs the first time a kid meets each kind of
-   game, and the "?" on any question replays it. */
+   game, and the "?" on any question replays it. It plays at an easy pace and loops, with a short rest between
+   goes, until the kid taps "My turn!". */
 const HowTo = (() => {
   const STOP = Symbol('stop');
-  let tok = 0, hand = null;
+  // PACE stretches every move and pause so a 7-year-old can follow; REST is the gap before the demo plays again.
+  const PACE = 1.35, REST = 1800;
+  let tok = 0, hand = null, mess = [];
   const SAMPLE = {
     mcq: { type: 'mcq', q: 'Which one is money?', keep: true, opts: [{ t: '🪙 A dollar coin', ok: true }, { t: '🍌 A banana', ok: false }, { t: '🧦 A sock', ok: false }] },
     tf: { type: 'tf', q: 'Fish live in water.', a: true, why: '' },
@@ -36,8 +39,8 @@ const HowTo = (() => {
   const kindOf = it => (it.type === 'gap' && it.opts ? 'gapOpts' : KIND[it.type] || it.type);
 
   const chk = my => { if (my !== tok) throw STOP; };
-  const anim = (my, ms, fn) => new Promise((res, rej) => { const t0 = performance.now(), d = ms * (reduced ? 0.4 : 1); const step = now => { if (my !== tok) return rej(STOP); const k = Math.min(1, (now - t0) / d); fn(k * k * (3 - 2 * k)); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
-  const pause = (my, ms) => new Promise((res, rej) => setTimeout(() => (my === tok ? res() : rej(STOP)), ms * (reduced ? 0.4 : 1)));
+  const anim = (my, ms, fn) => new Promise((res, rej) => { const t0 = performance.now(), d = ms * (reduced ? 0.4 : PACE); const step = now => { if (my !== tok) return rej(STOP); const k = Math.min(1, (now - t0) / d); fn(k * k * (3 - 2 * k)); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const pause = (my, ms) => new Promise((res, rej) => setTimeout(() => (my === tok ? res() : rej(STOP)), ms * (reduced ? 0.4 : PACE)));
   function mountHand() {
     if (hand) return hand;
     const el = document.createElement('div'); el.className = 'gw-hand'; el.hidden = true;
@@ -113,29 +116,36 @@ const HowTo = (() => {
     note: async (my, h, cap) => { cap('Read it, then tap OK.'); await tapOn(my, h.querySelector('[data-ok]')); await pause(my, 600); },
   };
 
-  // Runs the demo for `item` inside `card`, hiding the real game until the kid says "My turn".
+  // Runs the demo for `item` inside `card`, hiding the real game until the kid taps "My turn!". Each go starts from a
+  // fresh copy of the example; between goes the hand steps aside and the caption says it's about to play again.
   async function run(card, item, kid, opts = {}) {
     const kind = kindOf(item), sample = SAMPLE[kind], script = SCRIPT[kind]; if (!sample || !script) return;
     stop(); const my = ++tok; mountHand();
     const host = card.querySelector('.gw-host'), fb = card.querySelector('.gw-fb'); if (host) host.hidden = true; if (fb) fb.hidden = true;
     let box = card.querySelector('.gw-how'); if (!box) { box = document.createElement('div'); box.className = 'gw-how'; card.prepend(box); }
-    box.innerHTML = `<div class="gwh-top"><span class="gwh-k">How to play</span><button class="gwh-skip" data-g="howSkip">Skip</button></div><p class="gwh-cap"></p><div class="gwh-demo"><div class="gwh-host"></div></div>`;
+    box.innerHTML = `<div class="gwh-top"><span class="gwh-k">How to play</span><span class="gwh-loop" hidden>Playing again…</span></div><p class="gwh-cap"></p><div class="gwh-demo"><div class="gwh-host"></div></div><button class="g-go gwh-mine" data-g="howDone">My turn!</button>`;
     const cap = t => { if (my === tok) box.querySelector('.gwh-cap').textContent = t; };
-    const demo = box.querySelector('.gwh-host');
-    renderItem(sample, demo, { kid, mode: 'demo', cleanup: Grow.cleanup }, () => {});
+    const demo = box.querySelector('.gwh-host'), loop = box.querySelector('.gwh-loop');
+    const fresh = () => { clean(); demo.innerHTML = ''; renderItem(sample, demo, { kid, mode: 'demo', cleanup: mess }, () => {}); };
+    const park = () => { const r = card.getBoundingClientRect(); H.set(r.left + r.width * 0.75, Math.min(innerHeight + 30, r.bottom + 40)); };
     if (!opts.again) save(kid, { how: { [kind]: 1 } });
     C.track('growth.howto', { kind, again: !!opts.again }, kid.id);
     try {
-      await pause(my, 400); const r = card.getBoundingClientRect(); H.set(r.left + r.width * 0.75, Math.min(innerHeight + 30, r.bottom + 40)); hand.el.hidden = false;
-      await script(my, demo, cap);
+      for (let go = 0; ; go++) {
+        if (!card.isConnected) throw STOP;
+        fresh(); loop.hidden = true;
+        await pause(my, go ? 500 : 400); park(); hand.el.hidden = false;
+        await script(my, demo, cap); chk(my);
+        hand.el.hidden = true; loop.hidden = false;
+        cap('Here it comes again. Tap My turn! whenever you’re ready.');
+        await pause(my, REST);
+      }
     } catch (e) { if (e !== STOP) console.warn('how to play', kind, e); }
-    if (my !== tok) return;
-    hand.el.hidden = true;
-    box.innerHTML = `<div class="gwh-top"><span class="gwh-k">How to play</span></div><p class="gwh-cap">${esc(box.querySelector('.gwh-cap') ? box.querySelector('.gwh-cap').textContent : '')}</p><div class="gwh-btns"><button class="g-go ghost" data-g="howAgain">Watch again</button><button class="g-go" data-g="howDone">My turn!</button></div>`;
-    box.scrollIntoView({ block: 'nearest', behavior: reduced ? 'auto' : 'smooth' });
+    if (my === tok) stop();
   }
+  const clean = () => mess.splice(0).forEach(f => { try { f(); } catch (e) {} });
   function finish(card) { stop(); if (!card) return; const box = card.querySelector('.gw-how'); if (box) box.remove(); const host = card.querySelector('.gw-host'), fb = card.querySelector('.gw-fb'); if (host) host.hidden = false; if (fb) fb.hidden = false; }
-  function stop() { tok++; if (hand) { hand.el.hidden = true; hand.el.classList.remove('press'); } }
+  function stop() { tok++; clean(); if (hand) { hand.el.hidden = true; hand.el.classList.remove('press'); } }
   const seen = (kid, item) => !!((prog(kid).how || {})[kindOf(item)]);
   return { run, finish, stop, seen, has: item => !!SAMPLE[kindOf(item)] };
 })();
@@ -148,8 +158,9 @@ const HOW_CSS = `
 .gwh-cap{font:800 16px/1.35 var(--f-round);margin:0}
 .gwh-demo{position:relative;padding:10px;border-radius:16px;background:#fff;pointer-events:none}
 .gwh-demo::after{content:"Example";position:absolute;top:8px;right:8px;padding:2px 8px;border-radius:999px;background:#FFC93C;color:#5A3A00;font:900 10px var(--f-round);letter-spacing:.08em;text-transform:uppercase}
-.gwh-btns{display:flex;gap:10px}
-.gwh-btns .g-go{flex:1;margin:0}
+.gwh-loop{margin-left:auto;font:800 13px var(--f-round);color:#7A4E00;animation:gwhBlink 1.2s ease-in-out infinite}
+@keyframes gwhBlink{50%{opacity:.45}}
+.gwh-mine{margin:0;width:100%}
 .gw-howbtn{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;background:#F2F4FA;color:#0D1530;font:900 18px var(--f-round);z-index:2}
 .gw-card.has-how{padding-top:24px}
 .gw-card:has(.gw-how) .gw-howbtn{display:none}

@@ -392,6 +392,19 @@ route('POST', '/api/events', async ({ req, s }) => {
         await db.query('insert into growth_answers (family_id, kid_id, item_id, question_id, skill, correct, answer) values ($1, $2, $3, $4, $5, $6, $7::jsonb)', [s.family_id, kid, String(pl.id || '?'), String(a.q || '?'), a.skill || null, !!a.ok, JSON.stringify(a.a ?? null)]);
       }
     }
+    const when = at || new Date(), txt = (v, n = 80) => (v == null ? null : String(v).slice(0, n)), int = v => (Number.isFinite(+v) ? Math.round(+v) : null);
+    if (type === 'growth.prize' && kid) {
+      await db.query('insert into island_prizes (family_id, kid_id, prize_id, name, kind, big, prize_no, lessons_at, gap, pace, next_gap, won_at) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
+        [s.family_id, kid, txt(pl.id) || '?', txt(pl.name), ['look', 'item', 'chest'].includes(pl.kind) ? pl.kind : null, !!pl.big, int(pl.n), int(pl.lessons), int(pl.gap), int(pl.pace), int(pl.next), when]);
+    }
+    if (type === 'island.buy' && kid) {
+      await db.query('insert into island_purchases (family_id, kid_id, item, name, category, paid_with, price, bought_at) values ($1, $2, $3, $4, $5, $6, $7, $8)',
+        [s.family_id, kid, txt(pl.item) || '?', txt(pl.name), txt(pl.cat, 40), pl.pay === 'xp' || pl.pay === 'cash' ? pl.pay : null, int(pl.price), when]);
+    }
+    if (type === 'island.feed' && kid) {
+      await db.query('insert into farm_feedings (family_id, kid_id, animals, scoops, were_hungry, scoops_left, xp, fed_at) values ($1, $2, $3, $4, $5, $6, $7, $8)',
+        [s.family_id, kid, int(pl.animals) || 0, int(pl.scoops) || 0, !!pl.hungry, int(pl.left), int(pl.xp), when]);
+    }
   }
   return { ok: true, saved: list.length };
 });

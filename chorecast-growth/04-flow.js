@@ -51,12 +51,13 @@ function finish() {
   const itemId = l ? l.id : R.mode === 'challenge' ? R.unit.id : R.mode === 'case' ? R.cs.id : R.mode === 'moment' ? R.moment.id : R.mode;
   patch.log = [...(g.log || []).slice(-59), { id: itemId, kind: R.mode, c: right, t: total, xp: given, at: Date.now(), ms }];
   award(kid, xp, patch);
+  if (out.first) out.prize = Prize.onPass(kid);
   Object.assign(out, { xp: given, capped: given < xp, lvlUp: charLevel(kid) > lvl0 ? charLevel(kid) : 0, newTitle: titles(kid).length > titles0 ? titles(kid).slice(-1)[0] : '' });
   const [tree, band, unit] = String(itemId).split('.');
   C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: right, total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
   Grow.last = out; Grow.view = 'done'; Grow.cleanup.splice(0).forEach(f => f());
   if (out.first && l) Grow.celebrate = l.id;
-  if ((out.pass && (out.stars === 3 || out.unitDone)) || out.lvlUp) { Sound.fanfare(); FX.rain(['#FFE066', '#fff', '#7CF5B5', '#9BD8FF', '#FF9FC6']); if (Grow.stage) Grow.stage.react('cheer'); }
+  if ((out.pass && (out.stars === 3 || out.unitDone)) || out.lvlUp || out.prize) { Sound.fanfare(); FX.rain(['#FFE066', '#fff', '#7CF5B5', '#9BD8FF', '#FF9FC6']); if (Grow.stage) Grow.stage.react('cheer'); }
   else if (out.pass || !('pass' in out)) { Sound.coin(); if (Grow.stage) Grow.stage.react('cheer'); }
   render();
 }
@@ -72,6 +73,7 @@ function viewDone(kid) {
   ui.innerHTML = `<div class="gw-pad gw-done">${starRow}<h1 class="gw-h1">${head}</h1><p class="gw-p">${sub}</p>
     <div class="gw-xpwin ${o.xp ? '' : 'none'}">${ic('sparkle')} <b class="num">+${o.xp} XP</b>${o.capped ? '<small>You reached today’s XP limit. Learning still counts!</small>' : ''}</div>
     ${o.lvlUp ? `<div class="gw-banner lvl">⬆️ Level ${o.lvlUp}!</div>` : ''}
+    ${prizeBanner(o, kid)}
     ${o.unitDone ? `<div class="gw-banner unit">🏅 Unit complete! A crystal appears on your island, and the unit challenge is open.</div>` : ''}
     ${o.newTitle ? `<div class="gw-banner title">🎖️ New title: ${esc(o.newTitle)}</div>` : ''}
     ${o.home && o.pass ? `<div class="gw-homecard"><b>Take it home</b><p>${esc(local(o.home))}</p><button class="g-go ghost" data-g="homeDone">I’ll try it</button></div>` : ''}

@@ -817,6 +817,7 @@ function viewGuide(kid) {
 }
 
 function viewHub(kid) {
+  Prize.tick(kid);
   const g = prog(kid), lvl = charLevel(kid), m = mastered(kid), sug = suggestions(kid, 3), due = dueCards(kid).length, echo = (g.echo || []).length;
   const mom = momentFor(kid), momDone = g.mom && g.mom.d === today() && g.mom.done, story = marketStory(kid), storyDone = g.story === weekKey();
   const t = titles(kid), needN = Grow.need ? Math.ceil(Grow.need / XP.lesson) : 0;
@@ -825,6 +826,7 @@ function viewHub(kid) {
   ui.innerHTML = `${topbar(kid, 'Character Growth', `${esc(kid.name)} · ${BANDS[BAND_IX[bandOf(kid)]].name}, ages ${BANDS[BAND_IX[bandOf(kid)]].ages}`)}
     <div class="gw-pad">
       <section class="gw-me"><div class="gw-lvl"><b class="num">${lvl}</b><small>Level</small></div><div class="gw-me-t"><b>${m} skill${m === 1 ? '' : 's'} mastered</b><small>${t.length ? t.map(esc).join(' · ') : 'Master 4 lessons in a tree to earn its title'}</small>${minutesToday(kid) ? `<small>${minutesToday(kid)} minute${minutesToday(kid) === 1 ? '' : 's'} of learning today</small>` : ''}</div></section>
+      ${prizeStrip(kid)}
       ${Grow.need ? `<div class="gw-need">${ic('sparkle')} Each lesson you pass pays ${XP.lesson} XP, up to ${XP.dayCap} XP a day.</div>` : ''}
       ${sug.length ? `<h2 class="gw-h2">Pick your next lesson</h2><div class="gw-pick">${sug.map((l, i) => { const tr = TREE[l.tree], as = (g.assigned || []).find(a => a.id === l.id); return `<button class="gw-lcard ${i === 0 ? 'main' : ''}" style="--th:${tr.hue}" data-g="lesson" data-id="${l.id}"><span class="lc-ic">${esc(l.icon)}</span><span class="lc-t"><small>${esc(tr.name)} · Unit ${l.unit}</small><b>${esc(local(l.title))}</b>${as ? `<em>From a grown-up${as.bonus ? ` · +${as.bonus} XP bonus` : ''}</em>` : ''}</span><span class="lc-go">${ic('play')}</span></button>`; }).join('')}</div>` : ''}
       <div class="gw-tiles">
@@ -1077,12 +1079,13 @@ function finish() {
   const itemId = l ? l.id : R.mode === 'challenge' ? R.unit.id : R.mode === 'case' ? R.cs.id : R.mode === 'moment' ? R.moment.id : R.mode;
   patch.log = [...(g.log || []).slice(-59), { id: itemId, kind: R.mode, c: right, t: total, xp: given, at: Date.now(), ms }];
   award(kid, xp, patch);
+  if (out.first) out.prize = Prize.onPass(kid);
   Object.assign(out, { xp: given, capped: given < xp, lvlUp: charLevel(kid) > lvl0 ? charLevel(kid) : 0, newTitle: titles(kid).length > titles0 ? titles(kid).slice(-1)[0] : '' });
   const [tree, band, unit] = String(itemId).split('.');
   C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: right, total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
   Grow.last = out; Grow.view = 'done'; Grow.cleanup.splice(0).forEach(f => f());
   if (out.first && l) Grow.celebrate = l.id;
-  if ((out.pass && (out.stars === 3 || out.unitDone)) || out.lvlUp) { Sound.fanfare(); FX.rain(['#FFE066', '#fff', '#7CF5B5', '#9BD8FF', '#FF9FC6']); if (Grow.stage) Grow.stage.react('cheer'); }
+  if ((out.pass && (out.stars === 3 || out.unitDone)) || out.lvlUp || out.prize) { Sound.fanfare(); FX.rain(['#FFE066', '#fff', '#7CF5B5', '#9BD8FF', '#FF9FC6']); if (Grow.stage) Grow.stage.react('cheer'); }
   else if (out.pass || !('pass' in out)) { Sound.coin(); if (Grow.stage) Grow.stage.react('cheer'); }
   render();
 }
@@ -1098,6 +1101,7 @@ function viewDone(kid) {
   ui.innerHTML = `<div class="gw-pad gw-done">${starRow}<h1 class="gw-h1">${head}</h1><p class="gw-p">${sub}</p>
     <div class="gw-xpwin ${o.xp ? '' : 'none'}">${ic('sparkle')} <b class="num">+${o.xp} XP</b>${o.capped ? '<small>You reached today’s XP limit. Learning still counts!</small>' : ''}</div>
     ${o.lvlUp ? `<div class="gw-banner lvl">⬆️ Level ${o.lvlUp}!</div>` : ''}
+    ${prizeBanner(o, kid)}
     ${o.unitDone ? `<div class="gw-banner unit">🏅 Unit complete! A crystal appears on your island, and the unit challenge is open.</div>` : ''}
     ${o.newTitle ? `<div class="gw-banner title">🎖️ New title: ${esc(o.newTitle)}</div>` : ''}
     ${o.home && o.pass ? `<div class="gw-homecard"><b>Take it home</b><p>${esc(local(o.home))}</p><button class="g-go ghost" data-g="homeDone">I’ll try it</button></div>` : ''}
@@ -1707,6 +1711,8 @@ function parentView() {
       <div class="pg-stat"><b class="num">${wkT ? Math.round(wkC / wkT * 100) + '%' : '–'}</b><span>Accuracy this week</span></div>
       <div class="pg-stat"><b class="num">${wkXp}</b><span>XP from learning this week</span></div>
     </div>
+    ${(() => { const ps = Prize.stats(kid); if (!ps) return ''; const nx = ps.next; return `<h3 class="pgroup-t">Island prizes<small>Every few lessons wins a makeover colour, and every second prize an animal or special thing. The gap follows ${esc(kid.name)}’s pace, so prizes keep coming whether they learn a little or a lot.</small></h3>
+    <div class="group"><div class="row"><div class="row-main"><b>${ps.won} prize${ps.won === 1 ? '' : 's'} won${nx ? ` · next: ${esc(nx.info.name)} in ${nx.left} lesson${nx.left === 1 ? '' : 's'}` : ''}</b><small>${ps.week} lesson${ps.week === 1 ? '' : 's'} passed this week, so after this one a prize every ${ps.gap} lessons${ps.got.length ? ` · won so far: ${ps.got.map(id => esc((C.prizeInfo(id) || { name: id }).name)).join(', ')}` : ''}</small></div></div></div>`; })()}
     <h3 class="pgroup-t">Skill map<small>${BANDS[BAND_IX[band]].name}, ages ${BANDS[BAND_IX[band]].ages} · 🥉 mastered · 🥈 strong · 🥇 still remembered after 35 days</small></h3>
     <div class="group pg-map">${TREES.map(t => { const pack = packFor(t.id, band), st = treeStats(kid, t.id), off = (set.off || {})[t.id]; return `<div class="row ${off ? 'off' : ''}"><span class="pg-ti" style="--th:${t.hue}">${t.icon}</span><div class="row-main"><b>${esc(t.name)}</b><small>${st.done} of ${st.total} lessons${off ? ' · switched off' : ''}</small></div><div class="pg-units">${(pack ? pack.units : []).map(u => `<span class="pg-u ${u.lessons.length ? '' : 'soon'}" title="Unit ${u.n}: ${esc(local(u.title))}">${u.lessons.length ? u.lessons.map(cell).join('') : '<i class="pg-dot soon"></i>'}</span>`).join('')}</div></div>`; }).join('')}</div>
     <div class="pg-two">
@@ -2216,7 +2222,7 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
 
   /* State */
   let R = null, scene, cam, el, cv, tagsEl, cardEl, guide = null, ring, selRing, planks, kidId = '', treeId = '', key = '';
-  let isles = [], bridges = [], POS = [], L = [], tagEls = [], unitEls = [], clouds, cloudData = [];
+  let isles = [], bridges = [], POS = [], L = [], tagEls = [], unitEls = [], clouds, cloudData = [], prizeGs = [], prizeAt = {};
   let s = 0, vel = 0, sel = 0, cur = -1, busy = false, intro = false, travel = false, running = false, raf = 0, last = 0;
   const ray = new T.Raycaster(), ndc = new T.Vector2(), tmp = V();
   const GAME_NAME = { sort: 'Sort', order: 'Put in order', build: 'Build it', match: 'Match', route: 'Route', slider: 'Slider', price: 'Best price', scam: 'Scam spotter', path: 'Choose a path', debate: 'Debate', tap: 'Find them', budget: 'Budget planner', market: 'Market time-lapse', compound: 'Snowball', shop: 'Run a stall', timing: 'Timing', diff: 'Spot the difference', chat: 'Chat', mystery: 'Mystery box', island: 'Your island', gen: 'Quick maths', mcq: 'Quiz', tf: 'True or false', gap: 'Fill the gap' };
@@ -2255,7 +2261,7 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
   function build(kid, tree) {
     // Free the last tree's island meshes; shared shapes, cached materials and emoji textures stay.
     if (scene) { const keepG = new Set(Object.values(GEO)), keepM = new Set(Object.values(MC)); scene.traverse(o => { if (o.isSprite) { o.material.dispose(); return; } if (o.geometry && !keepG.has(o.geometry)) o.geometry.dispose(); if (o.material && o.material !== INKM && !keepM.has(o.material)) o.material.dispose(); }); }
-    scene = new T.Scene(); const hue = new T.Color(tree.hue), fog = hue.clone().lerp(new T.Color(0x7fd3ff), 0.45);
+    scene = new T.Scene(); prizeGs = []; prizeAt = {}; const hue = new T.Color(tree.hue), fog = hue.clone().lerp(new T.Color(0x7fd3ff), 0.45);
     scene.fog = new T.Fog(fog, 17, 44); U.uFogCol.value.copy(fog);
     scene.add(new T.HemisphereLight(0xffffff, 0xafc2e6, 0.55)); const d = new T.DirectionalLight(0xfff3dc, 0.7); d.position.set(-4, 8, 6); scene.add(d);
     L = plan(kid, tree); const N = L.length;
@@ -2308,12 +2314,38 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
   function plankM(b, k, show) { const B = bridges[b], t = (k + 0.5) / B.n, p = V().lerpVectors(B.p0, B.p1, t); p.y += -0.22 * Math.sin(Math.PI * t); const m = new T.Matrix4().makeRotationY(B.yaw + Math.sin(k * 12.9) * 0.06); m.setPosition(p); if (show < 1) m.scale(V(Math.max(0.001, show), Math.max(0.001, show), Math.max(0.001, show))); planks.setMatrixAt(B.first + k, m); }
   function setBridge(b, show) { const B = bridges[b]; for (let k = 0; k < B.n; k++) plankM(b, k, show ? 1 : 0); B.g.visible = show; B.puffs.visible = !show; planks.instanceMatrix.needsUpdate = true; }
 
+  // Island prizes: the next prize, and the one planned after it, stand on gold plinths on the lessons that will win
+  // them, counting this tree's unpassed lessons in path order (prizes count lessons passed in any tree).
+  function adopt(g) {
+    const old = []; g.traverse(o => { if (o.userData.ink) old.push(o); }); old.forEach(o => o.parent.remove(o));
+    g.traverse(o => {
+      if (!o.isMesh || !o.material) return; const m0 = o.material; o.material = m0.clone();
+      if (m0.isMeshToonMaterial) { G3.rimPatch(o.material); if (!m0.transparent && !o.userData.noInk) { prepInk(o.geometry); const k = new T.Mesh(o.geometry, INKM); k.raycast = () => {}; k.userData.ink = 1; o.add(k); } }
+    });
+    return g;
+  }
+  function placePrizes(kid) {
+    for (const p of prizeGs) { p.host.remove(p.g); p.g.traverse(o => { if (o.userData.ink) return; if (o.geometry && !Object.values(GEO).includes(o.geometry)) o.geometry.dispose(); if (o.material && !Object.values(MC).includes(o.material)) o.material.dispose(); }); }
+    prizeGs = []; prizeAt = {};
+    const ups = Prize.upcoming(kid); if (!ups.length || !G3.prize) return;
+    let n = 0;
+    L.forEach((d, i) => {
+      if (d.kind !== 'lesson' || passed(kid, d.l.id)) return; n++;
+      const u = ups.find(x => x.left === n); if (!u) return; prizeAt[i] = u;
+      const m = G3.prize(u.id); if (!m) return; adopt(m);
+      const b = new T.Box3().setFromObject(m), h = Math.max(0.05, b.max.y - b.min.y), s = clamp(0.7 / h, 1.4, 3.2), g = new T.Group();
+      g.add(at(sc(M(GEO.cyl, 0xfff3d6), 0.3, 0.07, 0.3), 0, 0.035, 0)); const rim = M(GEO.tor, 0xffc93c); rim.rotation.x = Math.PI / 2; g.add(at(sc(rim, 0.31), 0, 0.07, 0));
+      m.scale.setScalar(s); m.position.y = 0.07; g.add(m); const tag = emoji(u.info.big ? '🎁' : '✨', 0.32); tag.position.set(0.28, 0.18 + h * s, 0); g.add(tag);
+      g.position.set(-0.52, 0, 0.32); g.userData.spin = m; g.userData.y0 = 0.07; isles[i].g.add(g); prizeGs.push({ host: isles[i].g, g, m, tag, ty: tag.position.y, i });
+    });
+  }
   let states = [];
   function refresh(kid, skip) {
     states = L.map(d => stateOf(kid, d, skip));
     cur = states.findIndex(x => x === 'open'); if (cur < 0) cur = -1;
     L.forEach((d, i) => { const st = states[i]; setLook(i, st === 'locked' || st === 'soon' ? 0.82 : 0); isles[i].star.visible = st === 'done'; paintTag(kid, i); });
     bridges.forEach((B, b) => setBridge(b, states[b + 1] !== 'locked' && states[b + 1] !== 'soon'));
+    if (!skip) { placePrizes(kid); L.forEach((d, i) => paintTag(kid, i)); }
   }
   function medalOf(kid, d) { if (d.kind === 'boss') return '👑'; const m = medal(kid, d.l); return m === 'gold' ? '🥇' : m === 'silver' ? '🥈' : '🥉'; }
   function num(d) { return d.kind === 'boss' ? '🏆' : `${d.l.unit}.${d.l.n}`; }
@@ -2324,9 +2356,9 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
     if (st === 'start') b.innerHTML = `<span class="n">🌱</span>Start`;
     else if (st === 'soon') b.innerHTML = `<span class="n">☁️</span>Unit ${d.unit.n}`;
     else if (st === 'done') b.innerHTML = `<span class="n">${medalOf(kid, d)}</span>${esc(title)}`;
-    else if (isCur) b.innerHTML = `<span class="n">${num(d)}</span><span><small>Up next</small>${esc(title)}</span>`;
-    else if (st === 'open') b.innerHTML = `<span class="n">${num(d)}</span>${esc(title)}`;
-    else b.innerHTML = `<span class="n">🔒</span>${num(d)}`;
+    else if (isCur) b.innerHTML = `<span class="n">${num(d)}</span><span><small>Up next${prizeAt[i] ? ' · wins a prize' : ''}</small>${esc(title)}</span>${prizeAt[i] ? `<span class="pz">${prizeAt[i].info.icon}</span>` : ''}`;
+    else if (st === 'open') b.innerHTML = `<span class="n">${num(d)}</span>${esc(title)}${prizeAt[i] ? `<span class="pz">${prizeAt[i].info.icon}</span>` : ''}`;
+    else b.innerHTML = `<span class="n">🔒</span>${num(d)}${prizeAt[i] ? `<span class="pz">${prizeAt[i].info.icon}</span>` : ''}`;
   }
   function card(kid, i) {
     const d = L[i], st = states[i], tree = TREE[treeId]; let h;
@@ -2335,9 +2367,9 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
     else if (d.kind === 'boss') { const all = st !== 'locked'; h = `<div class="gpc-ic">🏆</div><div class="gpc-eb">Unit ${d.unit.n} · Challenge island</div><div class="gpc-t">${esc(local(d.unit.title))} challenge</div><p class="gpc-p">Mixed questions from the whole unit, with no hints. Get 80% to win the crown.</p><div class="gpc-chips"><span>❓ Up to 8 questions</span><span>✨ +${XP.challenge} XP</span></div><div class="gpc-act">${all ? `<button class="g-go" data-g="challenge" data-id="${d.unit.id}">${st === 'done' ? 'Play again' : '▶ Start the challenge'}</button>` : `<button class="g-go ghost" data-g="locked">🔒 Finish every lesson in Unit ${d.unit.n} first</button>`}</div>`; }
     else {
       const l = d.l, game = l.play ? GAME_NAME[l.play.type] || 'Game' : null, prev = i > 0 && L[i - 1].kind === 'lesson' ? L[i - 1].l : null;
-      const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `✅ ${l.checks.length} questions` : '', `✨ +${XP.lesson} XP`].filter(Boolean);
+      const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `✅ ${l.checks.length} questions` : '', `✨ +${XP.lesson} XP`].filter(Boolean), pz = prizeAt[i];
       const act = st === 'locked' ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Finish “${esc(local(prev.title))}” first` : 'Finish the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${st === 'done' ? 'Play again' : '▶ Start lesson'}</button>`;
-      h = `<div class="gpc-ic">${esc(l.icon)}</div><div class="gpc-eb">Unit ${l.unit} · Lesson ${l.n}${st === 'done' ? ` · ${medalOf(kid, d)}` : ''}</div><div class="gpc-t">${esc(local(l.title))}</div><p class="gpc-p">${esc(local(l.hook))}</p><div class="gpc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div><div class="gpc-act">${act}</div>`;
+      h = `<div class="gpc-ic">${esc(l.icon)}</div><div class="gpc-eb">Unit ${l.unit} · Lesson ${l.n}${st === 'done' ? ` · ${medalOf(kid, d)}` : ''}</div><div class="gpc-t">${esc(local(l.title))}</div><p class="gpc-p">${esc(local(l.hook))}</p><div class="gpc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>${pz ? `<div class="gpc-prize ${pz.info.big ? 'big' : ''}"><span>${pz.info.icon}</span><span><small>${pz.planned ? 'Planned island prize' : 'Island prize'}</small><b>${pz.planned ? 'Should win' : 'Pass this to win'} ${esc(pz.info.name)}</b></span></div>` : ''}<div class="gpc-act">${act}</div>`;
     }
     cardEl.innerHTML = h; cardEl.classList.remove('in'); void cardEl.offsetWidth; cardEl.classList.add('in');
   }
@@ -2391,6 +2423,7 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
     const m = new T.Matrix4(), q = new T.Quaternion(), p = V(), sv = V(); cloudData.forEach((d, i) => { p.set(d.x + Math.sin(t * d.v + d.ph) * 1.2, d.y + Math.sin(t * 0.4 + d.ph) * 0.08, d.z); sv.set(d.s, d.s * 0.72, d.s * 0.85); m.compose(p, q, sv); clouds.setMatrixAt(i, m); }); clouds.instanceMatrix.needsUpdate = true;
     ring.visible = cur >= 0; if (cur >= 0) { const P = POS[cur]; ring.position.set(P.x, P.y + 0.03, P.z); ring.scale.setScalar(isles[cur].r * (1.05 + Math.sin(t * 3) * 0.025)); }
     selRing.visible = sel !== cur && sel > 0; if (selRing.visible) { const P = POS[sel]; selRing.position.set(P.x, P.y + 0.04, P.z); selRing.scale.setScalar(isles[sel].r * 1.1); }
+    for (const p of prizeGs) { p.m.rotation.y = t * 0.6 + p.i; p.tag.position.y = p.ty + Math.sin(t * 2.4 + p.i) * 0.04; if (p.m.userData.tick) p.m.userData.tick(t, dt); }
     isles.forEach((I, i) => { if (I.star.visible) { I.star.rotation.y = t * 1.6; I.star.position.y = 1.0 + Math.sin(t * 2 + i) * 0.05; } if (I.badge) I.badge.position.y = (L[i].kind === 'start' ? 1.55 : 1.2) + Math.sin(t * 1.8 + i) * 0.05; });
     if (guide) { const P = guide.P; guide.g.rotation.y += (((guide.face - guide.g.rotation.y + Math.PI * 3) % (Math.PI * 2)) - Math.PI) * Math.min(1, dt * 8); P.head.rotation.z = Math.sin(t * 0.8) * 0.1; const w = 0.06 + guide.flap * (0.6 + Math.sin(t * 30) * 0.45); P.wingL.rotation.z = w; P.wingR.rotation.z = -w; if (!travel) guide.g.children[0].position.y = Math.abs(Math.sin(t * 2.4)) * 0.04; }
     R.render(scene, cam);
@@ -2403,7 +2436,7 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
     ok: true,
     // Shows a tree's path for a kid. `celebrateId` is a lesson just passed for the first time.
     show(host, kid, tree, celebrateId) {
-      mount(); host.appendChild(el);
+      mount(); host.appendChild(el); Prize.tick(kid);
       const k = `${kid.id}|${tree.id}|${bandOf(kid)}|${(packFor(tree.id, bandOf(kid)) || { units: [] }).units.map(u => u.lessons.length).join(',')}|${prog(kid).guide || 'kea'}`;
       const fresh = k !== key; if (fresh) { kill('path'); build(kid, tree); key = k; kidId = kid.id; treeId = tree.id; }
       resize();
@@ -2450,6 +2483,12 @@ const PATH_CSS = `
 .gpc-chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .gpc-chips span{padding:5px 10px;border-radius:999px;background:#EEF3FA;font:800 13px var(--f-round)}
 .gpc-act{grid-column:1/-1;display:flex;margin-top:12px}
+.gpc-prize{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin-top:10px;padding:8px 12px;border-radius:16px;background:#FFF6D6;box-shadow:inset 0 0 0 2px #FFC93C}
+.gpc-prize.big{background:#FFE8D6;box-shadow:inset 0 0 0 2px #FF9F43}
+.gpc-prize>span:first-child{font-size:26px}
+.gpc-prize small{display:block;font:900 10px var(--f-round);letter-spacing:.1em;text-transform:uppercase;color:#8A5A00}
+.gpc-prize b{font:900 15px/1.25 var(--f-round)}
+.gp-tag .pz{margin-left:2px;font-size:15px}
 .gpc-act .g-go{flex:1;margin:0}
 @media (max-width:560px){ .gpc-p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden} .gpc-t{font-size:19px} }
 @media (prefers-reduced-motion:reduce){ .gp-card.in{animation:none} }
@@ -2460,10 +2499,13 @@ const PATH_CSS = `
 /* ---------- How to play: a hand demonstrates each kind of game before the kid's first go ----------
    The demo plays the real game on a made-up example (fruit and veggies, a dollar coin, a lemonade stall), so it
    teaches the moves without giving away the lesson's answers. It runs the first time a kid meets each kind of
-   game, and the "?" on any question replays it. */
+   game, and the "?" on any question replays it. It plays at an easy pace and loops, with a short rest between
+   goes, until the kid taps "My turn!". */
 const HowTo = (() => {
   const STOP = Symbol('stop');
-  let tok = 0, hand = null;
+  // PACE stretches every move and pause so a 7-year-old can follow; REST is the gap before the demo plays again.
+  const PACE = 1.35, REST = 1800;
+  let tok = 0, hand = null, mess = [];
   const SAMPLE = {
     mcq: { type: 'mcq', q: 'Which one is money?', keep: true, opts: [{ t: '🪙 A dollar coin', ok: true }, { t: '🍌 A banana', ok: false }, { t: '🧦 A sock', ok: false }] },
     tf: { type: 'tf', q: 'Fish live in water.', a: true, why: '' },
@@ -2494,8 +2536,8 @@ const HowTo = (() => {
   const kindOf = it => (it.type === 'gap' && it.opts ? 'gapOpts' : KIND[it.type] || it.type);
 
   const chk = my => { if (my !== tok) throw STOP; };
-  const anim = (my, ms, fn) => new Promise((res, rej) => { const t0 = performance.now(), d = ms * (reduced ? 0.4 : 1); const step = now => { if (my !== tok) return rej(STOP); const k = Math.min(1, (now - t0) / d); fn(k * k * (3 - 2 * k)); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
-  const pause = (my, ms) => new Promise((res, rej) => setTimeout(() => (my === tok ? res() : rej(STOP)), ms * (reduced ? 0.4 : 1)));
+  const anim = (my, ms, fn) => new Promise((res, rej) => { const t0 = performance.now(), d = ms * (reduced ? 0.4 : PACE); const step = now => { if (my !== tok) return rej(STOP); const k = Math.min(1, (now - t0) / d); fn(k * k * (3 - 2 * k)); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const pause = (my, ms) => new Promise((res, rej) => setTimeout(() => (my === tok ? res() : rej(STOP)), ms * (reduced ? 0.4 : PACE)));
   function mountHand() {
     if (hand) return hand;
     const el = document.createElement('div'); el.className = 'gw-hand'; el.hidden = true;
@@ -2571,29 +2613,36 @@ const HowTo = (() => {
     note: async (my, h, cap) => { cap('Read it, then tap OK.'); await tapOn(my, h.querySelector('[data-ok]')); await pause(my, 600); },
   };
 
-  // Runs the demo for `item` inside `card`, hiding the real game until the kid says "My turn".
+  // Runs the demo for `item` inside `card`, hiding the real game until the kid taps "My turn!". Each go starts from a
+  // fresh copy of the example; between goes the hand steps aside and the caption says it's about to play again.
   async function run(card, item, kid, opts = {}) {
     const kind = kindOf(item), sample = SAMPLE[kind], script = SCRIPT[kind]; if (!sample || !script) return;
     stop(); const my = ++tok; mountHand();
     const host = card.querySelector('.gw-host'), fb = card.querySelector('.gw-fb'); if (host) host.hidden = true; if (fb) fb.hidden = true;
     let box = card.querySelector('.gw-how'); if (!box) { box = document.createElement('div'); box.className = 'gw-how'; card.prepend(box); }
-    box.innerHTML = `<div class="gwh-top"><span class="gwh-k">How to play</span><button class="gwh-skip" data-g="howSkip">Skip</button></div><p class="gwh-cap"></p><div class="gwh-demo"><div class="gwh-host"></div></div>`;
+    box.innerHTML = `<div class="gwh-top"><span class="gwh-k">How to play</span><span class="gwh-loop" hidden>Playing again…</span></div><p class="gwh-cap"></p><div class="gwh-demo"><div class="gwh-host"></div></div><button class="g-go gwh-mine" data-g="howDone">My turn!</button>`;
     const cap = t => { if (my === tok) box.querySelector('.gwh-cap').textContent = t; };
-    const demo = box.querySelector('.gwh-host');
-    renderItem(sample, demo, { kid, mode: 'demo', cleanup: Grow.cleanup }, () => {});
+    const demo = box.querySelector('.gwh-host'), loop = box.querySelector('.gwh-loop');
+    const fresh = () => { clean(); demo.innerHTML = ''; renderItem(sample, demo, { kid, mode: 'demo', cleanup: mess }, () => {}); };
+    const park = () => { const r = card.getBoundingClientRect(); H.set(r.left + r.width * 0.75, Math.min(innerHeight + 30, r.bottom + 40)); };
     if (!opts.again) save(kid, { how: { [kind]: 1 } });
     C.track('growth.howto', { kind, again: !!opts.again }, kid.id);
     try {
-      await pause(my, 400); const r = card.getBoundingClientRect(); H.set(r.left + r.width * 0.75, Math.min(innerHeight + 30, r.bottom + 40)); hand.el.hidden = false;
-      await script(my, demo, cap);
+      for (let go = 0; ; go++) {
+        if (!card.isConnected) throw STOP;
+        fresh(); loop.hidden = true;
+        await pause(my, go ? 500 : 400); park(); hand.el.hidden = false;
+        await script(my, demo, cap); chk(my);
+        hand.el.hidden = true; loop.hidden = false;
+        cap('Here it comes again. Tap My turn! whenever you’re ready.');
+        await pause(my, REST);
+      }
     } catch (e) { if (e !== STOP) console.warn('how to play', kind, e); }
-    if (my !== tok) return;
-    hand.el.hidden = true;
-    box.innerHTML = `<div class="gwh-top"><span class="gwh-k">How to play</span></div><p class="gwh-cap">${esc(box.querySelector('.gwh-cap') ? box.querySelector('.gwh-cap').textContent : '')}</p><div class="gwh-btns"><button class="g-go ghost" data-g="howAgain">Watch again</button><button class="g-go" data-g="howDone">My turn!</button></div>`;
-    box.scrollIntoView({ block: 'nearest', behavior: reduced ? 'auto' : 'smooth' });
+    if (my === tok) stop();
   }
+  const clean = () => mess.splice(0).forEach(f => { try { f(); } catch (e) {} });
   function finish(card) { stop(); if (!card) return; const box = card.querySelector('.gw-how'); if (box) box.remove(); const host = card.querySelector('.gw-host'), fb = card.querySelector('.gw-fb'); if (host) host.hidden = false; if (fb) fb.hidden = false; }
-  function stop() { tok++; if (hand) { hand.el.hidden = true; hand.el.classList.remove('press'); } }
+  function stop() { tok++; clean(); if (hand) { hand.el.hidden = true; hand.el.classList.remove('press'); } }
   const seen = (kid, item) => !!((prog(kid).how || {})[kindOf(item)]);
   return { run, finish, stop, seen, has: item => !!SAMPLE[kindOf(item)] };
 })();
@@ -2606,8 +2655,9 @@ const HOW_CSS = `
 .gwh-cap{font:800 16px/1.35 var(--f-round);margin:0}
 .gwh-demo{position:relative;padding:10px;border-radius:16px;background:#fff;pointer-events:none}
 .gwh-demo::after{content:"Example";position:absolute;top:8px;right:8px;padding:2px 8px;border-radius:999px;background:#FFC93C;color:#5A3A00;font:900 10px var(--f-round);letter-spacing:.08em;text-transform:uppercase}
-.gwh-btns{display:flex;gap:10px}
-.gwh-btns .g-go{flex:1;margin:0}
+.gwh-loop{margin-left:auto;font:800 13px var(--f-round);color:#7A4E00;animation:gwhBlink 1.2s ease-in-out infinite}
+@keyframes gwhBlink{50%{opacity:.45}}
+.gwh-mine{margin:0;width:100%}
 .gw-howbtn{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;background:#F2F4FA;color:#0D1530;font:900 18px var(--f-round);z-index:2}
 .gw-card.has-how{padding-top:24px}
 .gw-card:has(.gw-how) .gw-howbtn{display:none}
@@ -2621,6 +2671,97 @@ const HOW_CSS = `
 .g-cards .g-card::before{counter-increment:opt;content:counter(opt,upper-alpha);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--gh) 18%,#fff);color:color-mix(in srgb,var(--gh) 70%,#0D1530);font:900 14px var(--f-round)}
 `;
 { const st = document.createElement('style'); st.id = 'growth-how-css'; st.textContent = HOW_CSS; document.head.appendChild(st); }
+
+/* ---------- Island prizes: passing lessons wins things for the kid's island ----------
+   Every few lessons a kid passes, in any tree, wins a prize: a makeover colour (paint or a tree colour), and every
+   second prize something big, like an animal or a treehouse (the list is C.PRIZES in the app). The next prizes
+   stand on the real islands that will win them in every skill tree's path, so a kid can see which lesson to aim for.
+   How many lessons a prize takes follows the kid's pace, counted as lessons passed in the last 7 days:
+     0 to 2 → 3 lessons, 3 to 6 → 4, 7 to 12 → 5, 13 to 18 → 6, 19 to 24 → 7, more → 8.
+   A kid who learns now and then still wins something about once a week. A kid racing ahead gets prizes a little
+   further apart, so there is always one coming up and the list lasts. Each gap is set when a prize is won, so a
+   prize a kid can see never moves further away; after a quiet week the next one moves closer to welcome them back. */
+const Prize = (() => {
+  const P = C.PRIZES;
+  if (!P) return { upcoming: () => [], onPass: () => null, tick() {}, hint: () => '', stats: () => null };
+  const WEEK = 7 * 864e5;
+  const gapFor = n => (n <= 2 ? 3 : n <= 6 ? 4 : n <= 12 ? 5 : n <= 18 ? 6 : n <= 24 ? 7 : 8);
+  const pace = h => (h || []).filter(t => t > Date.now() - WEEK).length;
+  const pick = (kid, k, got) => (k % 2 ? P.big : P.small).find(id => !(got || {})[id] && !C.hasPrize(kid, id)) || (k % 2 ? 'chest:big' : 'chest:small');
+  // `before` counts the lesson just passed as not passed yet, for a kid's very first prize schedule.
+  function state(kid, before = 0) {
+    const p = prog(kid).prize; if (p && p.id) return p;
+    return { k: 0, at: mastered(kid) - before + 3, gap: 3, id: pick(kid, 0, {}), got: {}, h: [] };
+  }
+  // A planned prize the kid has since got some other way is swapped for the next one on the list.
+  const cur = (kid, p) => (!p.id.startsWith('chest') && C.hasPrize(kid, p.id) ? pick(kid, p.k, p.got) : p.id);
+  // After a lesson is passed for the first time: wins the prize if this lesson reached it, then plans the next one.
+  function onPass(kid) {
+    const p = { ...state(kid, 1) }, m = mastered(kid); p.h = [...(p.h || []), Date.now()].slice(-40); p.id = cur(kid, p);
+    let won = null;
+    if (m >= p.at) {
+      won = C.prizeInfo(p.id) || C.prizeInfo('chest:small');
+      if (won.kind === 'chest') save(kid, { xp: (prog(kid).xp || 0) + won.xp }); else C.grantPrize(kid, p.id);
+      const n = pace(p.h);
+      C.track('growth.prize', { id: p.id, name: won.name, kind: won.kind, big: !!won.big, n: p.k + 1, lessons: m, gap: p.gap, pace: n, next: gapFor(n) }, kid.id);
+      p.got = { ...(p.got || {}), [p.id]: today() }; p.k += 1; p.gap = gapFor(n); p.at = m + p.gap; p.id = pick(kid, p.k, p.got); p.closer = null;
+    }
+    save(kid, { prize: p }); return won;
+  }
+  // Saves a first schedule, and after a quiet spell pulls the next prize closer (never further away).
+  function tick(kid) {
+    const p = prog(kid).prize;
+    if (!p || !p.id) { save(kid, { prize: state(kid) }); return; }
+    const m = mastered(kid), g = gapFor(pace(p.h)); if (m + g < p.at) save(kid, { prize: { at: m + g, gap: g, closer: today() } });
+  }
+  // The next prize, and a planned one after it (its gap is only fixed once the first is won).
+  function upcoming(kid) {
+    const p = state(kid), m = mastered(kid), left = Math.max(1, p.at - m), id1 = cur(kid, p), a = C.prizeInfo(id1);
+    const id2 = pick(kid, p.k + 1, { ...(p.got || {}), [id1]: 1 }), b = C.prizeInfo(id2);
+    return [a && { id: id1, info: a, left, of: p.gap || left }, b && { id: id2, info: b, left: left + gapFor(pace(p.h)), planned: true }].filter(Boolean);
+  }
+  function hint(kid, id) {
+    const u = upcoming(kid).find(x => x.id === id); if (!u) return 'Win it in Character Growth';
+    return u.planned ? `Win it in about ${u.left} lessons` : u.left === 1 ? 'Win it with your next lesson!' : `Win it in ${u.left} more lessons`;
+  }
+  // For the grown-ups' report.
+  function stats(kid) { const p = state(kid), n = pace(p.h); return { won: p.k || 0, got: Object.keys(p.got || {}), week: n, gap: gapFor(n), next: upcoming(kid)[0] || null }; }
+  return { upcoming, onPass, tick, hint, stats };
+})();
+
+// The strip on the Character Growth home screen: what the next lesson or two will win.
+function prizeStrip(kid) {
+  const [a, b] = Prize.upcoming(kid); if (!a) return '';
+  const done = clamp(1 - a.left / Math.max(a.left, a.of), 0, 1), closer = (prog(kid).prize || {}).closer === today();
+  return `<section class="gw-prize ${a.info.big ? 'big' : ''}"><span class="gwp-ic">${a.info.icon}</span><div class="gwp-t"><small>Next island prize${closer ? ' · it moved closer!' : ''}</small><b>${esc(a.info.name)}</b>
+    <span>${a.left === 1 ? 'Pass your next lesson to win it!' : `Pass ${a.left} more lessons to win it`}${b ? ` · then ${esc(b.info.name)}` : ''}</span>
+    <i class="gwp-bar" aria-hidden="true"><i style="width:${Math.round(done * 100)}%"></i></i></div></section>`;
+}
+// On the lesson-done screen: the prize just won, or how close the next one is.
+function prizeBanner(o, kid) {
+  if (!o.prize) { const a = o.first && Prize.upcoming(kid)[0]; return a ? `<div class="gw-banner">${a.info.icon} ${a.left === 1 ? 'One more lesson' : `${a.left} more lessons`} to win ${esc(a.info.name)}</div>` : ''; }
+  const p = o.prize, how = p.kind === 'chest' ? `+${p.xp} bonus XP for your island shop.` : p.kind === 'look' ? `Try it on your ${p.part === 'leaf' ? 'trees' : 'house'} in the island shop’s Makeover tab.` : 'Place it on your island from the island shop, for free.';
+  return `<div class="gw-banner prize">${p.icon} You won ${p.kind === 'chest' ? 'a ' : ''}${esc(p.name)}! <small>${how}</small></div>`;
+}
+
+Object.assign(window.Growth, { prizeHint: (kid, id) => Prize.hint(kid, id), prizes: kid => Prize.upcoming(kid) });
+
+const PRIZE_CSS = `
+.gw-prize{display:flex;align-items:center;gap:12px;margin-top:12px;padding:12px 14px;border-radius:20px;background:linear-gradient(135deg,rgba(255,201,60,.32),rgba(255,255,255,.14));box-shadow:inset 0 0 0 2px rgba(255,201,60,.55)}
+.gw-prize.big{background:linear-gradient(135deg,rgba(255,106,61,.34),rgba(255,201,60,.24));box-shadow:inset 0 0 0 2px rgba(255,160,60,.7)}
+.gwp-ic{flex:0 0 52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:30px;background:rgba(255,255,255,.9);animation:gwpBob 2.4s ease-in-out infinite}
+@keyframes gwpBob{50%{transform:translateY(-3px) rotate(-4deg)}}
+.gwp-t{flex:1;min-width:0;display:grid;gap:2px}
+.gwp-t small{font:900 11px var(--f-round);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.gwp-t b{font:900 18px/1.2 var(--f-round)}
+.gwp-t span{font:700 14px/1.35 var(--f-round);opacity:.9}
+.gwp-bar{display:block;height:8px;margin-top:6px;border-radius:99px;background:rgba(255,255,255,.3);overflow:hidden}
+.gwp-bar i{display:block;height:100%;border-radius:99px;background:#FFC93C}
+.gw-banner.prize{background:linear-gradient(135deg,#FFC93C,#FF9F43);color:#3A2400;display:grid;gap:2px}
+.gw-banner.prize small{font:800 13px/1.35 var(--f-round)}
+@media (prefers-reduced-motion:reduce){ .gwp-ic{animation:none} }
+`;
+{ const st = document.createElement('style'); st.id = 'growth-prize-css'; st.textContent = PRIZE_CSS; document.head.appendChild(st); }
 
 
 // If the app finished starting before this file loaded, redraw so the Character Growth card appears.

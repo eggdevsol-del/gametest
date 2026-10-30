@@ -85,7 +85,7 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
 
   /* State */
   let R = null, scene, cam, el, cv, tagsEl, cardEl, guide = null, ring, selRing, planks, kidId = '', treeId = '', key = '';
-  let isles = [], bridges = [], POS = [], L = [], tagEls = [], unitEls = [], clouds, cloudData = [];
+  let isles = [], bridges = [], POS = [], L = [], tagEls = [], unitEls = [], clouds, cloudData = [], prizeGs = [], prizeAt = {};
   let s = 0, vel = 0, sel = 0, cur = -1, busy = false, intro = false, travel = false, running = false, raf = 0, last = 0;
   const ray = new T.Raycaster(), ndc = new T.Vector2(), tmp = V();
   const GAME_NAME = { sort: 'Sort', order: 'Put in order', build: 'Build it', match: 'Match', route: 'Route', slider: 'Slider', price: 'Best price', scam: 'Scam spotter', path: 'Choose a path', debate: 'Debate', tap: 'Find them', budget: 'Budget planner', market: 'Market time-lapse', compound: 'Snowball', shop: 'Run a stall', timing: 'Timing', diff: 'Spot the difference', chat: 'Chat', mystery: 'Mystery box', island: 'Your island', gen: 'Quick maths', mcq: 'Quiz', tf: 'True or false', gap: 'Fill the gap' };
@@ -124,7 +124,7 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
   function build(kid, tree) {
     // Free the last tree's island meshes; shared shapes, cached materials and emoji textures stay.
     if (scene) { const keepG = new Set(Object.values(GEO)), keepM = new Set(Object.values(MC)); scene.traverse(o => { if (o.isSprite) { o.material.dispose(); return; } if (o.geometry && !keepG.has(o.geometry)) o.geometry.dispose(); if (o.material && o.material !== INKM && !keepM.has(o.material)) o.material.dispose(); }); }
-    scene = new T.Scene(); const hue = new T.Color(tree.hue), fog = hue.clone().lerp(new T.Color(0x7fd3ff), 0.45);
+    scene = new T.Scene(); prizeGs = []; prizeAt = {}; const hue = new T.Color(tree.hue), fog = hue.clone().lerp(new T.Color(0x7fd3ff), 0.45);
     scene.fog = new T.Fog(fog, 17, 44); U.uFogCol.value.copy(fog);
     scene.add(new T.HemisphereLight(0xffffff, 0xafc2e6, 0.55)); const d = new T.DirectionalLight(0xfff3dc, 0.7); d.position.set(-4, 8, 6); scene.add(d);
     L = plan(kid, tree); const N = L.length;
@@ -177,12 +177,38 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
   function plankM(b, k, show) { const B = bridges[b], t = (k + 0.5) / B.n, p = V().lerpVectors(B.p0, B.p1, t); p.y += -0.22 * Math.sin(Math.PI * t); const m = new T.Matrix4().makeRotationY(B.yaw + Math.sin(k * 12.9) * 0.06); m.setPosition(p); if (show < 1) m.scale(V(Math.max(0.001, show), Math.max(0.001, show), Math.max(0.001, show))); planks.setMatrixAt(B.first + k, m); }
   function setBridge(b, show) { const B = bridges[b]; for (let k = 0; k < B.n; k++) plankM(b, k, show ? 1 : 0); B.g.visible = show; B.puffs.visible = !show; planks.instanceMatrix.needsUpdate = true; }
 
+  // Island prizes: the next prize, and the one planned after it, stand on gold plinths on the lessons that will win
+  // them, counting this tree's unpassed lessons in path order (prizes count lessons passed in any tree).
+  function adopt(g) {
+    const old = []; g.traverse(o => { if (o.userData.ink) old.push(o); }); old.forEach(o => o.parent.remove(o));
+    g.traverse(o => {
+      if (!o.isMesh || !o.material) return; const m0 = o.material; o.material = m0.clone();
+      if (m0.isMeshToonMaterial) { G3.rimPatch(o.material); if (!m0.transparent && !o.userData.noInk) { prepInk(o.geometry); const k = new T.Mesh(o.geometry, INKM); k.raycast = () => {}; k.userData.ink = 1; o.add(k); } }
+    });
+    return g;
+  }
+  function placePrizes(kid) {
+    for (const p of prizeGs) { p.host.remove(p.g); p.g.traverse(o => { if (o.userData.ink) return; if (o.geometry && !Object.values(GEO).includes(o.geometry)) o.geometry.dispose(); if (o.material && !Object.values(MC).includes(o.material)) o.material.dispose(); }); }
+    prizeGs = []; prizeAt = {};
+    const ups = Prize.upcoming(kid); if (!ups.length || !G3.prize) return;
+    let n = 0;
+    L.forEach((d, i) => {
+      if (d.kind !== 'lesson' || passed(kid, d.l.id)) return; n++;
+      const u = ups.find(x => x.left === n); if (!u) return; prizeAt[i] = u;
+      const m = G3.prize(u.id); if (!m) return; adopt(m);
+      const b = new T.Box3().setFromObject(m), h = Math.max(0.05, b.max.y - b.min.y), s = clamp(0.7 / h, 1.4, 3.2), g = new T.Group();
+      g.add(at(sc(M(GEO.cyl, 0xfff3d6), 0.3, 0.07, 0.3), 0, 0.035, 0)); const rim = M(GEO.tor, 0xffc93c); rim.rotation.x = Math.PI / 2; g.add(at(sc(rim, 0.31), 0, 0.07, 0));
+      m.scale.setScalar(s); m.position.y = 0.07; g.add(m); const tag = emoji(u.info.big ? '🎁' : '✨', 0.32); tag.position.set(0.28, 0.18 + h * s, 0); g.add(tag);
+      g.position.set(-0.52, 0, 0.32); g.userData.spin = m; g.userData.y0 = 0.07; isles[i].g.add(g); prizeGs.push({ host: isles[i].g, g, m, tag, ty: tag.position.y, i });
+    });
+  }
   let states = [];
   function refresh(kid, skip) {
     states = L.map(d => stateOf(kid, d, skip));
     cur = states.findIndex(x => x === 'open'); if (cur < 0) cur = -1;
     L.forEach((d, i) => { const st = states[i]; setLook(i, st === 'locked' || st === 'soon' ? 0.82 : 0); isles[i].star.visible = st === 'done'; paintTag(kid, i); });
     bridges.forEach((B, b) => setBridge(b, states[b + 1] !== 'locked' && states[b + 1] !== 'soon'));
+    if (!skip) { placePrizes(kid); L.forEach((d, i) => paintTag(kid, i)); }
   }
   function medalOf(kid, d) { if (d.kind === 'boss') return '👑'; const m = medal(kid, d.l); return m === 'gold' ? '🥇' : m === 'silver' ? '🥈' : '🥉'; }
   function num(d) { return d.kind === 'boss' ? '🏆' : `${d.l.unit}.${d.l.n}`; }
@@ -193,9 +219,9 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
     if (st === 'start') b.innerHTML = `<span class="n">🌱</span>Start`;
     else if (st === 'soon') b.innerHTML = `<span class="n">☁️</span>Unit ${d.unit.n}`;
     else if (st === 'done') b.innerHTML = `<span class="n">${medalOf(kid, d)}</span>${esc(title)}`;
-    else if (isCur) b.innerHTML = `<span class="n">${num(d)}</span><span><small>Up next</small>${esc(title)}</span>`;
-    else if (st === 'open') b.innerHTML = `<span class="n">${num(d)}</span>${esc(title)}`;
-    else b.innerHTML = `<span class="n">🔒</span>${num(d)}`;
+    else if (isCur) b.innerHTML = `<span class="n">${num(d)}</span><span><small>Up next${prizeAt[i] ? ' · wins a prize' : ''}</small>${esc(title)}</span>${prizeAt[i] ? `<span class="pz">${prizeAt[i].info.icon}</span>` : ''}`;
+    else if (st === 'open') b.innerHTML = `<span class="n">${num(d)}</span>${esc(title)}${prizeAt[i] ? `<span class="pz">${prizeAt[i].info.icon}</span>` : ''}`;
+    else b.innerHTML = `<span class="n">🔒</span>${num(d)}${prizeAt[i] ? `<span class="pz">${prizeAt[i].info.icon}</span>` : ''}`;
   }
   function card(kid, i) {
     const d = L[i], st = states[i], tree = TREE[treeId]; let h;
@@ -204,9 +230,9 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
     else if (d.kind === 'boss') { const all = st !== 'locked'; h = `<div class="gpc-ic">🏆</div><div class="gpc-eb">Unit ${d.unit.n} · Challenge island</div><div class="gpc-t">${esc(local(d.unit.title))} challenge</div><p class="gpc-p">Mixed questions from the whole unit, with no hints. Get 80% to win the crown.</p><div class="gpc-chips"><span>❓ Up to 8 questions</span><span>✨ +${XP.challenge} XP</span></div><div class="gpc-act">${all ? `<button class="g-go" data-g="challenge" data-id="${d.unit.id}">${st === 'done' ? 'Play again' : '▶ Start the challenge'}</button>` : `<button class="g-go ghost" data-g="locked">🔒 Finish every lesson in Unit ${d.unit.n} first</button>`}</div>`; }
     else {
       const l = d.l, game = l.play ? GAME_NAME[l.play.type] || 'Game' : null, prev = i > 0 && L[i - 1].kind === 'lesson' ? L[i - 1].l : null;
-      const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `✅ ${l.checks.length} questions` : '', `✨ +${XP.lesson} XP`].filter(Boolean);
+      const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `✅ ${l.checks.length} questions` : '', `✨ +${XP.lesson} XP`].filter(Boolean), pz = prizeAt[i];
       const act = st === 'locked' ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Finish “${esc(local(prev.title))}” first` : 'Finish the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${st === 'done' ? 'Play again' : '▶ Start lesson'}</button>`;
-      h = `<div class="gpc-ic">${esc(l.icon)}</div><div class="gpc-eb">Unit ${l.unit} · Lesson ${l.n}${st === 'done' ? ` · ${medalOf(kid, d)}` : ''}</div><div class="gpc-t">${esc(local(l.title))}</div><p class="gpc-p">${esc(local(l.hook))}</p><div class="gpc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div><div class="gpc-act">${act}</div>`;
+      h = `<div class="gpc-ic">${esc(l.icon)}</div><div class="gpc-eb">Unit ${l.unit} · Lesson ${l.n}${st === 'done' ? ` · ${medalOf(kid, d)}` : ''}</div><div class="gpc-t">${esc(local(l.title))}</div><p class="gpc-p">${esc(local(l.hook))}</p><div class="gpc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>${pz ? `<div class="gpc-prize ${pz.info.big ? 'big' : ''}"><span>${pz.info.icon}</span><span><small>${pz.planned ? 'Planned island prize' : 'Island prize'}</small><b>${pz.planned ? 'Should win' : 'Pass this to win'} ${esc(pz.info.name)}</b></span></div>` : ''}<div class="gpc-act">${act}</div>`;
     }
     cardEl.innerHTML = h; cardEl.classList.remove('in'); void cardEl.offsetWidth; cardEl.classList.add('in');
   }
@@ -260,6 +286,7 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
     const m = new T.Matrix4(), q = new T.Quaternion(), p = V(), sv = V(); cloudData.forEach((d, i) => { p.set(d.x + Math.sin(t * d.v + d.ph) * 1.2, d.y + Math.sin(t * 0.4 + d.ph) * 0.08, d.z); sv.set(d.s, d.s * 0.72, d.s * 0.85); m.compose(p, q, sv); clouds.setMatrixAt(i, m); }); clouds.instanceMatrix.needsUpdate = true;
     ring.visible = cur >= 0; if (cur >= 0) { const P = POS[cur]; ring.position.set(P.x, P.y + 0.03, P.z); ring.scale.setScalar(isles[cur].r * (1.05 + Math.sin(t * 3) * 0.025)); }
     selRing.visible = sel !== cur && sel > 0; if (selRing.visible) { const P = POS[sel]; selRing.position.set(P.x, P.y + 0.04, P.z); selRing.scale.setScalar(isles[sel].r * 1.1); }
+    for (const p of prizeGs) { p.m.rotation.y = t * 0.6 + p.i; p.tag.position.y = p.ty + Math.sin(t * 2.4 + p.i) * 0.04; if (p.m.userData.tick) p.m.userData.tick(t, dt); }
     isles.forEach((I, i) => { if (I.star.visible) { I.star.rotation.y = t * 1.6; I.star.position.y = 1.0 + Math.sin(t * 2 + i) * 0.05; } if (I.badge) I.badge.position.y = (L[i].kind === 'start' ? 1.55 : 1.2) + Math.sin(t * 1.8 + i) * 0.05; });
     if (guide) { const P = guide.P; guide.g.rotation.y += (((guide.face - guide.g.rotation.y + Math.PI * 3) % (Math.PI * 2)) - Math.PI) * Math.min(1, dt * 8); P.head.rotation.z = Math.sin(t * 0.8) * 0.1; const w = 0.06 + guide.flap * (0.6 + Math.sin(t * 30) * 0.45); P.wingL.rotation.z = w; P.wingR.rotation.z = -w; if (!travel) guide.g.children[0].position.y = Math.abs(Math.sin(t * 2.4)) * 0.04; }
     R.render(scene, cam);
@@ -272,7 +299,7 @@ void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
     ok: true,
     // Shows a tree's path for a kid. `celebrateId` is a lesson just passed for the first time.
     show(host, kid, tree, celebrateId) {
-      mount(); host.appendChild(el);
+      mount(); host.appendChild(el); Prize.tick(kid);
       const k = `${kid.id}|${tree.id}|${bandOf(kid)}|${(packFor(tree.id, bandOf(kid)) || { units: [] }).units.map(u => u.lessons.length).join(',')}|${prog(kid).guide || 'kea'}`;
       const fresh = k !== key; if (fresh) { kill('path'); build(kid, tree); key = k; kidId = kid.id; treeId = tree.id; }
       resize();
@@ -319,6 +346,12 @@ const PATH_CSS = `
 .gpc-chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .gpc-chips span{padding:5px 10px;border-radius:999px;background:#EEF3FA;font:800 13px var(--f-round)}
 .gpc-act{grid-column:1/-1;display:flex;margin-top:12px}
+.gpc-prize{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin-top:10px;padding:8px 12px;border-radius:16px;background:#FFF6D6;box-shadow:inset 0 0 0 2px #FFC93C}
+.gpc-prize.big{background:#FFE8D6;box-shadow:inset 0 0 0 2px #FF9F43}
+.gpc-prize>span:first-child{font-size:26px}
+.gpc-prize small{display:block;font:900 10px var(--f-round);letter-spacing:.1em;text-transform:uppercase;color:#8A5A00}
+.gpc-prize b{font:900 15px/1.25 var(--f-round)}
+.gp-tag .pz{margin-left:2px;font-size:15px}
 .gpc-act .g-go{flex:1;margin:0}
 @media (max-width:560px){ .gpc-p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden} .gpc-t{font-size:19px} }
 @media (prefers-reduced-motion:reduce){ .gp-card.in{animation:none} }
