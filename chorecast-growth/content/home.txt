@@ -75,6 +75,78 @@ check: mcq | Why get down low? | Smoke rises, so the air is clearer down low* | 
 home: Agree a family meeting spot outside your house.
 skill: safety
 
+@lesson 2.1 | Hot, hot, hot | 🔥 | kitchen
+hook: The pot is bubbling on the stove. How do you stay safe?
+learn: Stoves, ovens, kettles and toasters get very hot.
+learn: Turn pot handles in, away from the edge, so nobody knocks them.
+learn: Use oven mitts, and stay back unless a grown-up is helping.
+play: sort | Safe, Not safe | Turning the pot handle in=Safe; Reaching over a hot pot=Not safe; Using oven mitts=Safe; Touching the top of the toaster=Not safe; Asking a grown-up to lift hot things=Safe; Running in the kitchen=Not safe | Safe or not safe?
+check: mcq | Which way should pot handles point? | In, away from the edge* | Out, over the edge | Towards you
+check: tf | Steam from a kettle can burn you. | true
+check: mcq | What do you use to hold a hot tray? | Oven mitts* | Your bare hands | A paper towel
+home: Show a grown-up where the oven mitts live in your kitchen.
+skill: safety
+
+@lesson 2.2 | Sharp things | 🔪 | kitchen
+hook: Knives make cooking easier, but they can cut you. What are the knife rules?
+learn: Only use a knife when a grown-up says it's OK and is watching.
+learn: Carry a knife with the point down, by your side.
+learn: Never drop a knife into a sink full of bubbles. Someone might reach in without seeing it.
+play: order | Pass a knife to a grown-up safely | Ask if they're ready; Hold it by the handle; Keep the point down; Put it on the bench in front of them; Let them pick it up
+check: mcq | How should you carry a knife? | Point down, by your side* | Point up, waving it | While running
+check: tf | It's safe to drop a knife into a sink full of bubbles. | false | Someone could reach in and get cut.
+check: mcq | When can you use a knife? | When a grown-up says OK and is watching* | Whenever you like | When nobody is home
+home: Ask a grown-up to show you how they store knives safely.
+skill: safety
+
+@lesson 2.3 | Clean hands | 🧼 | kitchen
+hook: Germs are too small to see. How do we keep them out of our food?
+learn: Wash your hands with soap and water before you cook or eat.
+learn: Scrub for about 20 seconds. That's singing "Happy Birthday" twice.
+learn: Then dry your hands well on a clean towel.
+play: build | Wash your hands the right way | Wet your hands; Add soap; Scrub for 20 seconds; Rinse off the bubbles; Dry with a clean towel
+check: mcq | How long should you scrub your hands? | About 20 seconds* | 1 second | 10 minutes
+check: tf | You should wash your hands before cooking. | true
+check: mcq | When should you wash your hands? | Before cooking and after the toilet* | Only on birthdays | Never
+home: Sing "Happy Birthday" twice while you wash your hands today.
+skill: hygiene
+
+@lesson 2.4 | Spills and slips | 💦 | kitchen
+hook: Splash! Juice all over the floor. What do you do?
+learn: Wet floors are slippery. Wipe up spills straight away.
+learn: If something glass breaks, step back and tell a grown-up. Don't pick it up.
+learn: Keep the floor clear of toys and bags so nobody trips.
+play: path | You spill your juice on the kitchen floor. | Wipe it up straight away with a cloth => good: Great! Now nobody will slip. | Leave it for later => bad: Someone could slip and get hurt. | Put a toy on top to hide it => bad: Now there's a spill and something to trip over.
+check: mcq | A glass breaks on the floor. What do you do? | Step back and tell a grown-up* | Pick it up fast | Walk on it
+check: tf | Wet floors can be slippery. | true
+check: mcq | Why keep toys off the kitchen floor? | So nobody trips* | So they stay warm | They like it there
+home: Help wipe up a spill or keep the kitchen floor clear this week.
+skill: safety
+
+@lesson 2.5 | Raw and ready | 🍗 | kitchen
+hook: Raw chicken and a salad are on the bench. Why should they stay apart?
+learn: Raw meat, chicken and fish can carry germs that make you sick.
+learn: Keep them away from food you eat without cooking, like salad and fruit.
+learn: Wash your hands, boards and knives after touching raw meat.
+play: tap | Tap the things to wash after touching raw chicken | 🖐️:yes:Hands can carry germs; 🔪:yes:The knife touched the chicken; 🪵:yes:The chopping board touched it too; 🍎:no; 🧸:no; 🍽️:yes:The plate it sat on needs washing
+check: mcq | Should raw chicken touch your salad? | No, keep them apart* | Yes, it adds flavour | Only on weekends
+check: tf | Raw meat can carry germs that make you sick. | true
+check: mcq | After touching raw meat you should… | Wash your hands* | Lick your fingers | Touch the fruit
+home: Help a grown-up use one board for raw meat and another for vegetables.
+skill: hygiene
+
+@lesson 2.6 | If you get burnt | 🚿 | kitchen
+hook: Ouch! You touched a hot pan. What should you do?
+learn: Put the burn under cool running water for 20 minutes.
+learn: Tell a grown-up straight away.
+learn: Don't put butter, ice or toothpaste on a burn. Cool water is best.
+play: order | Put the burn first aid steps in order | Move away from the hot thing; Tell a grown-up; Put the burn under cool running water; Keep it there for 20 minutes; Let a grown-up check if you need a doctor
+check: mcq | What's the best first aid for a small burn? | Cool running water for 20 minutes* | Butter | Ice
+check: tf | You should tell a grown-up if you get burnt. | true
+check: mcq | How long should a burn stay under cool water? | 20 minutes* | 2 seconds | All day
+home: Show a grown-up what you would do for a small burn.
+skill: firstaid
+
 @band builders
 @unit 1 | Cooking basics | Simple meals and kitchen skills
 @unit 2 | Laundry | Washing, drying and stains
@@ -151,6 +223,78 @@ check: mcq | At a road, you should… | Stop, look and listen* | Ride straight a
 home: Check your bike's brakes and helmet with a grown-up.
 skill: safety
 
+@lesson 2.1 | Care labels | 🏷️ | home
+hook: Inside your T-shirt is a tiny label covered in odd symbols. What do they mean?
+learn: Care labels tell you how to wash, dry and iron clothes.
+learn: A tub means washing. Dots show how warm. A hand in the tub means hand wash only.
+learn: A square is for drying, an iron is for ironing, and a cross through any symbol means don't.
+play: match | Match each symbol to its meaning | Tub with one dot=Wash at 30°C or cooler; Hand in a tub=Hand wash only; Square with a circle inside=Tumble dryer OK; Iron with a cross=Don't iron; Triangle with a cross=Don't use bleach
+check: mcq | A cross through a symbol means… | Don't do it* | Do it twice | It's extra clean
+check: tf | A tub with a hand in it means hand wash only. | true
+check: mcq | Where do you find care instructions? | On the label inside the clothes* | On the washing machine lid | In the fridge
+home: Find three care labels in your clothes and read the symbols.
+skill: laundry
+
+@lesson 2.2 | Load the washer | 🌀 | home
+hook: You stuff the whole basket into the machine and pour in heaps of powder. What could go wrong?
+learn: Empty every pocket first. Tissues, coins and pens can wreck a wash.
+learn: Don't overfill. Clothes need room to move to get clean.
+learn: Use the amount of detergent on the pack. More isn't cleaner, just harder to rinse out.
+play: build | Load the washing machine | Empty all the pockets; Do up the zips; Put clothes in loosely; Add detergent as the pack says; Pick the right setting; Press start
+check: mcq | What can a tissue left in a pocket do? | Leave fluff all over the wash* | Make clothes smell nice | Nothing
+check: tf | More detergent always means cleaner clothes. | false | Use the amount on the pack.
+check: mcq | Why not overfill the machine? | Clothes need room to move* | It gets lonely | It washes faster
+home: Load the washing machine with a grown-up watching.
+skill: laundry
+
+@lesson 2.3 | Stains | 🍅 | home
+hook: Tomato sauce on your white shirt! Quick, what do you do?
+learn: Act fast. Fresh stains come out much more easily.
+learn: Blot with a cloth. Don't rub, or the stain spreads.
+learn: Use cold water for blood and most food stains. Hot water can set some stains.
+play: path | You drip tomato sauce on your shirt. | Blot it, rinse with cold water and treat it before washing => good: Most of it lifts out. | Rub it hard with a hot cloth => bad: Rubbing spreads it, and heat can set the stain. | Leave it in the basket for a week => bad: Old stains are much harder to shift.
+check: mcq | What water is best for a blood stain? | Cold* | Boiling | No water at all
+check: tf | You should rub a stain hard. | false | Blot it so it doesn't spread.
+check: mcq | When is a stain easiest to remove? | Straight away* | After a month | Never
+home: Help a grown-up treat a stain this week.
+skill: laundry
+
+@lesson 2.4 | Hot or cold wash? | 🌡️ | home
+hook: Does a hot wash get clothes cleaner? And what does it cost?
+learn: Most of the power a washing machine uses goes into heating the water.
+learn: Cold washes clean everyday clothes well, and save power and money.
+learn: Hot washes are useful for very dirty things, like sheets after someone has been sick.
+play: sort | Cold wash, Hot wash | Everyday T-shirts=Cold wash; Sheets after a tummy bug=Hot wash; School uniform=Cold wash; Very greasy tea towels=Hot wash; Jeans=Cold wash; A wool jumper=Cold wash | Which wash?
+check: mcq | What uses most of the power in a warm wash? | Heating the water* | The lid | The lights
+check: tf | Cold washes save power. | true
+check: mcq | When might a hot wash be worth it? | Sheets after someone's been sick* | One clean T-shirt | A wool jumper
+home: Check which temperature your family's washing machine usually uses.
+skill: laundry
+
+@lesson 2.5 | Line or dryer? | ☀️ | home
+hook: It's sunny. Do you hang the washing on the line or use the dryer?
+learn: Line drying uses free sun and wind, and is gentle on clothes.
+learn: Dryers are handy on wet days, but use lots of power.
+learn: Clean the dryer's lint filter every time. Built-up lint can catch fire.
+play: chat | Your grandad is doing the washing | them: It's sunny! Should we use the dryer or the line? | me: The line. It's free, and the sun helps freshen clothes*/The dryer, always/Leave it in the machine | them: Good idea. It might rain later, though. | me: Let's check the forecast and bring it in if it clouds over*/Rain doesn't matter/Leave it out all week
+check: mcq | Why clean the dryer's lint filter? | Built-up lint can catch fire* | It makes clothes smell | It's decoration
+check: tf | Line drying is cheaper than using a dryer. | true
+check: mcq | When is a dryer most useful? | On wet days* | On sunny, windy days | Never
+home: Hang out a load of washing with a grown-up.
+skill: laundry
+
+@lesson 2.6 | Fold and put away | 👕 | home
+hook: Clean clothes in a crumpled pile, or folded in a drawer. Which would you rather?
+learn: Fold or hang clothes soon after drying, so they don't crease.
+learn: Match socks into pairs. Hang shirts and dresses.
+learn: Put things back in the same place every time, so you can find them.
+play: diff | Before and after putting away. Tap what changed. | T-shirts in a pile; Socks all mixed up; School shirt crumpled; Shoes by the door | T-shirts folded in the drawer; Socks in matching pairs; School shirt on a hanger; Shoes by the door
+check: mcq | What should you do with clean socks? | Match them into pairs* | Throw them in loose | Hide them
+check: tf | Folding soon after drying helps stop creases. | true
+check: mcq | Where should shirts often go? | On a hanger* | Under the bed | In the bin
+home: Fold and put away your own clean clothes this week.
+skill: chores
+
 @band makers
 @unit 1 | Shopping on a budget | Meal planning and saving at the supermarket
 @unit 2 | Cooking for the family | Planning, prepping and timing
@@ -226,6 +370,78 @@ check: tf | A family emergency plan should include a meeting place. | true
 check: mcq | {nz:Where can you find emergency advice in NZ?~au:Where can you find emergency advice in Australia?} | {nz:getready.govt.nz~au:Your state emergency service}* | A random forum | Nowhere
 home: Check your family's emergency kit and plan together.
 skill: emergency
+
+@lesson 2.1 | Plan the meal | 🗒️ | kitchen
+hook: You're cooking dinner for five. Where do you start?
+learn: Plan before you shop: who's eating, what they like, and how much time you have.
+learn: A balanced plate is about half vegetables, a quarter protein and a quarter carbs like rice or pasta.
+learn: Choose a meal that fits your skills and the time you have.
+play: sort | Vegetables, Protein, Carbs | Broccoli=Vegetables; Chicken=Protein; Rice=Carbs; Carrots=Vegetables; Lentils=Protein; Pasta=Carbs; Spinach=Vegetables; Eggs=Protein | Sort the plate
+check: mcq | About how much of a balanced plate is vegetables? | Half* | None | A tiny corner
+check: tf | It helps to plan a meal before you shop. | true
+check: mcq | You have 30 minutes. Which meal fits best? | A stir-fry* | A roast that takes 2 hours | A three-day stew
+home: Plan one family dinner with a grown-up: who's eating, what, and how long it will take.
+skill: mealplan
+
+@lesson 2.2 | Everything in its place | 🔪 | kitchen
+hook: Halfway through the recipe you realise you haven't chopped the onions, and the pan is smoking. Now what?
+learn: Chefs read the whole recipe first, then prepare everything before they start cooking.
+learn: Chop, measure and lay it all out. Chefs call this mise en place, French for "everything in its place".
+learn: Clean as you go, so the bench stays clear and safe.
+play: build | Get set up like a chef | Read the whole recipe; Get out all the ingredients; Wash and chop the vegetables; Measure the spices and sauces; Get out the pans and tools; Start cooking
+check: mcq | What does mise en place mean? | Everything in its place* | Cook it fast | Eat it now
+check: tf | Reading the whole recipe first helps avoid surprises. | true
+check: mcq | Why clean as you go? | The bench stays clear and safe* | It takes longer | Dishes like being dirty
+home: Before you next cook, lay out every ingredient first.
+skill: cooking
+
+@lesson 2.3 | Work backwards | ⏲️ | kitchen
+hook: Rice takes 15 minutes, chicken 20 and veggies 5. How do you finish them all at once?
+learn: Work backwards from when you want to eat.
+learn: Start the longest thing first and the shortest thing last.
+learn: Dinner at 6:30? Chicken on at 6:10, rice at 6:15, veggies at 6:25.
+play: route | Match each dish to its start time for a 6:30 dinner | Chicken, 20 minutes=6:10; Rice, 15 minutes=6:15; Garlic bread, 10 minutes=6:20; Veggies, 5 minutes=6:25
+check: gap | Dinner is at 7:00. Potatoes take 40 minutes. Start them at _ | 6:20 | 6:20; 6:40; 7:40
+check: tf | Start the longest-cooking dish first. | true
+check: mcq | Why work backwards from mealtime? | So everything is ready together* | To make it harder | To eat at different times
+home: Plan the start time for each part of tonight's dinner.
+skill: timing
+
+@lesson 2.4 | Safe temperatures | 🌡️ | kitchen
+hook: How do you know chicken is cooked? Guessing isn't good enough.
+learn: Cook chicken until the thickest part reaches 75°C, or until the juices run clear.
+learn: Keep your fridge at {nz:2°C to 4°C~au:5°C or below}. Germs grow fastest between 5°C and 60°C.
+learn: Don't leave cooked food out for more than 2 hours.
+play: slider | What temperature should the thickest part of cooked chicken reach? | 40 | 100 | 75 | °C | 2 | 1
+check: mcq | Germs grow fastest between… | 5°C and 60°C* | -20°C and 0°C | 100°C and 200°C
+check: tf | Cooked food is fine sitting on the bench all day. | false | Get it into the fridge within 2 hours.
+check: mcq | What temperature should your fridge be? | {nz:2°C to 4°C~au:5°C or below}* | 15°C | 25°C
+home: Check your fridge's temperature with a grown-up.
+skill: foodsafety
+
+@lesson 2.5 | Feeding everyone | 🥜 | kitchen
+hook: Your cousin has a nut allergy and your friend is vegetarian. Can you make one dinner for everyone?
+learn: Ask about allergies and food needs before you plan.
+learn: For allergies, keep foods apart, use clean tools and check every label. Some allergies can be life-threatening.
+learn: It's often easiest to cook one base meal and add extras on the side.
+play: tap | Check the labels. Tap foods that might not be safe for someone with a nut allergy | 🥜:yes:Peanuts are a common allergy; 🌰:yes:Tree nuts like cashews are too; 🍫:yes:Some chocolate contains nuts or traces of them; 🥕:no; 🍚:no; 🥣:yes:Some muesli has nuts; 🍎:no
+check: mcq | When should you ask about allergies? | Before you plan the meal* | After serving | Never
+check: tf | Some food allergies can be life-threatening. | true
+check: mcq | A smart way to cater for different needs? | One base meal with extras on the side* | Five separate dinners | Ignore the needs
+home: Ask everyone in your family if there are foods they can't or won't eat.
+skill: allergies
+
+@lesson 2.6 | Leftovers | 🥡 | kitchen
+hook: There's half a pot of curry left. How do you keep it safe for tomorrow?
+learn: Cool leftovers quickly and get them into the fridge within 2 hours.
+learn: Split big amounts into shallow containers so they cool faster.
+learn: Eat them within about 2 days, and reheat until steaming hot all the way through.
+play: order | Save the leftover curry safely | Let it stop steaming; Split it into shallow containers; Put the lids on and label them; Get them into the fridge within 2 hours; Reheat until steaming hot tomorrow
+check: mcq | Why use shallow containers? | Food cools faster* | They look nicer | They hold more
+check: tf | Leftovers should be reheated until steaming hot. | true
+check: mcq | How long can most leftovers stay in the fridge? | About 2 days* | A month | Forever
+home: Help pack and label tonight's leftovers.
+skill: foodsafety
 
 @band launchers
 @unit 1 | Renting your first place | Searching, applying and moving in
@@ -306,3 +522,76 @@ check: tf | Writing things down can prevent arguments. | true
 check: mcq | A fair way to share chores? | A written roster* | Whoever cares most | Nobody does them
 home: Draft a mini agreement with a sibling about shared chores.
 skill: flatting
+
+@lesson 2.1 | Reading a power bill | 🔌 | home
+hook: Your first power bill is $210. Is that a lot? Where does it come from?
+learn: Most power bills have two parts: a daily fixed charge, and a price for each unit you use.
+learn: A unit is a kilowatt-hour (kWh): 1,000 watts used for one hour.
+learn: Bill = days × daily charge + kWh used × price per kWh, plus or minus any discounts.
+try: 500 kWh × 30c = $150 :: gap | 400 kWh × 30c = $_ | 120
+play: slider | 30 days at $1.50 a day, plus 450 kWh at 30c. What's the bill? | 100 | 300 | 180 | $ | 5 | 5
+check: mcq | What's a kWh? | 1,000 watts used for one hour* | A kind of wire | A power company
+check: gap | 30 days × a $2 daily charge = $_ | 60
+check: tf | You pay the daily charge even if you use very little power. | true
+home: Find the daily charge and the price per kWh on a real power bill.
+skill: bills
+
+@lesson 2.2 | Comparing power plans | 🔍 | online
+hook: Two power companies, two very different bills for the same house. How do you choose?
+learn: Compare plans using your own usage, not just the price per kWh.
+learn: {nz:Powerswitch, run by Consumer NZ, compares plans for your address.~au:Energy Made Easy compares plans in most states. In Victoria, use Victorian Energy Compare.}
+learn: Watch out for conditional discounts, like "pay on time", that vanish if you're late.
+play: price | Which plan costs less over 30 days at 400 kWh? | Plan A, $1 a day and 34c per kWh:166:30:days; Plan B, $2 a day and 28c per kWh:172:30:days
+check: mcq | What's the best way to compare power plans? | Use your own usage on a comparison site* | Only look at the price per kWh | Pick the nicest logo
+check: tf | A "pay on time" discount disappears if you pay late. | true
+check: mcq | {nz:Which free site compares NZ power plans?~au:Which free site compares power plans in most states?} | {nz:Powerswitch~au:Energy Made Easy}* | A gaming forum | The phone book
+home: Put a real power bill into {nz:Powerswitch~au:Energy Made Easy or Victorian Energy Compare} with a grown-up.
+skill: bills
+
+@lesson 2.3 | Using less power | 💡 | home
+hook: Where does most of a home's power go?
+learn: Heating and hot water are usually the biggest power users in a home.
+learn: Shorter showers, cold washes, LED bulbs and heating only the rooms you use all help.
+learn: {nz:Heat pumps~au:Reverse-cycle air conditioners} heat rooms far more efficiently than plug-in heaters.
+play: sort | Big saving, Small saving | A 4-minute shower instead of 10=Big saving; Unplugging a phone charger=Small saving; Washing clothes in cold water=Big saving; Heating only the room you're in=Big saving; Switching off one LED light=Small saving; {nz:A heat pump~au:A reverse-cycle air conditioner} instead of a plug-in heater=Big saving | Big or small saving?
+check: mcq | What's usually one of the biggest power users at home? | Hot water* | A phone charger | One LED bulb
+check: tf | Shorter showers can cut your power bill. | true
+check: mcq | Which heater is usually cheapest to run? | {nz:A heat pump~au:A reverse-cycle air conditioner}* | A plug-in fan heater | An open oven door
+home: Time your showers for a week and aim to cut a minute.
+skill: energy
+
+@lesson 2.4 | Internet plans | 📶 | online
+hook: "Unlimited fibre, $70 a month." What else do you need to check?
+learn: Look at speed, data limits, contract length, and setup or modem fees.
+learn: Leaving a contract early can mean an exit fee.
+learn: Check what's available at your address. Not everywhere has fibre.
+play: diff | The ad and the full plan details. Tap what the ad didn't say. | Unlimited data; $70 a month; Fast fibre | Unlimited data; $70 a month for 6 months, then $85; Fast fibre; 12-month contract; $150 exit fee
+check: mcq | What might you pay if you leave a contract early? | An exit fee* | Nothing, ever | A bonus
+check: tf | The price after a sign-up special can be higher. | true
+check: mcq | Before choosing an internet plan, check… | What's available at your address* | Your horoscope | The router's colour
+home: Find your household's internet plan and when its contract ends.
+skill: bills
+
+@lesson 2.5 | Water bills | 🚰 | home
+hook: You move into a flat. Who pays for the water?
+learn: {nz:In NZ, landlords usually pay the fixed water charges. Tenants pay for the water they use if it's metered and billed separately.~au:In many states, tenants can be charged for the water they use if the home is separately metered and meets water-efficiency rules. Landlords usually pay the fixed charges.}
+learn: Check your tenancy agreement so you know which bills are yours.
+learn: Saving water saves money: report dripping taps and take shorter showers.
+play: path | A tap in your flat drips all day. | Report it to the landlord in writing => good: Fixing it is the landlord's job, and it saves you money if you pay for water use. | Ignore it => bad: It wastes water, and you might be paying for it. | Whack it with a hammer => bad: You could damage it and end up paying for the repair.
+check: mcq | Who usually pays the fixed water charges in a rental? | The landlord* | The tenant | The neighbours
+check: tf | Your tenancy agreement can tell you which bills you pay. | true
+check: mcq | How can tenants save on water bills? | Shorter showers and reporting leaks* | Leaving taps running | Washing the car every day
+home: Find your home's water meter with a grown-up, if it has one.
+skill: bills
+
+@lesson 2.6 | When you can't pay | 🆘 | bank
+hook: You can't pay this month's power bill. What do you do?
+learn: Call the company early, before the due date. Don't ignore it.
+learn: Power companies have to help customers who are struggling, for example with a payment plan.
+learn: {nz:If you can't sort a problem with a power or water company, Utilities Disputes is free. MoneyTalks (0800 345 123) gives free budgeting help.~au:If you can't sort a problem, your state's energy and water ombudsman is free. The National Debt Helpline (1800 007 007) gives free help.}
+play: chat | You're calling your power company | them: Hi, how can I help today? | me: I can't pay my whole bill by Friday. Could we set up a payment plan?*/I'm not paying, sue me/Never mind | them: Sure. Could you manage $40 a week? | me: Yes, that works. Can you email me the plan?*/No, I want it free/I'll think about it next year
+check: mcq | You can't pay a bill. When should you contact the company? | Before the due date* | After you're cut off | Never
+check: tf | Power companies must help customers who are struggling to pay. | true
+check: mcq | {nz:Which free service helps sort NZ power and water complaints?~au:Who can help with an energy complaint you can't sort out?} | {nz:Utilities Disputes~au:Your state's energy and water ombudsman}* | A debt collector | A social media group
+home: Save {nz:MoneyTalks (0800 345 123)~au:the National Debt Helpline (1800 007 007)} in your phone.
+skill: bills

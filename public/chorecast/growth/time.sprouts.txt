@@ -74,3 +74,75 @@ check: mcq | What does the bank check? | That you have enough money* | Your favo
 home: Watch a grown-up pay by card and say what happens.
 skill: banking
 
+@lesson 2.1 | Cowrie shells | 🐚 | museum
+hook: A tiny, shiny shell was once used as money by millions of people. Which shell?
+learn: Cowrie shells are small, smooth and shiny.
+learn: People in parts of Africa, India and China used them as money for hundreds of years.
+learn: In old Chinese writing, the picture-word for money looked like a shell.
+play: mystery | It's small, smooth and shiny; It comes from the sea; It was used as money in Africa, India and China; Its name starts with C | A cowrie shell* | A gold coin | A pebble
+check: mcq | Where were cowrie shells used as money? | Africa, India and China* | Only in the Arctic | Nowhere
+check: tf | Cowrie shells were used as money for hundreds of years. | true
+check: mcq | Why were cowries good money? | Small, tough and hard to fake* | They were tasty | They grew on trees
+home: Look at pictures of cowrie shells with a grown-up.
+skill: history
+
+@lesson 2.2 | Stone money | 🪨 | island
+hook: Imagine money so big you can't lift it. On the island of Yap, that was real!
+learn: Yap is an island in the Pacific Ocean.
+learn: People there used big round stones with a hole in the middle. Some were taller than a person!
+learn: The stones were too heavy to move, so everyone just remembered who owned each one.
+play: order | Put the stone money story in order | People sailed to another island; They carved big round stones; They brought the stones home by canoe and raft; They stood the stones up in the village; Everyone remembered who owned each one
+check: mcq | Where was giant stone money used? | The island of Yap* | The Moon | A shopping mall
+check: tf | Some Yap stones were taller than a person. | true
+check: mcq | How did people know who owned a stone? | Everyone remembered* | It was written on the stone | They carried it home
+home: Draw what a giant stone coin might look like in your town.
+skill: history
+
+@lesson 2.3 | What makes good money? | 🧐 | museum
+hook: Could ice cream be money? Why not?
+learn: Good money lasts a long time. Ice cream melts!
+learn: Good money is easy to carry and hard to fake.
+learn: And everyone has to agree to use it.
+play: sort | Good money, Bad money | Shells that last=Good money; Ice cream=Bad money; Small metal coins=Good money; Fresh fish=Bad money; Notes that are hard to copy=Good money; Leaves anyone can pick=Bad money | Would it make good money?
+check: mcq | Why is ice cream bad money? | It melts* | It's too cold | It's too yummy
+check: tf | Good money needs to be hard to fake. | true
+check: mcq | Leaves would be bad money because… | Anyone can pick them* | They're green | They're light
+home: Think of a silly thing to use as money. Tell a grown-up why it wouldn't work.
+skill: money
+
+@lesson 2.4 | Beads and feathers | 📿 | museum
+hook: Beads and feathers as money? Yes, really!
+learn: Some Native American peoples made beads from shells, called wampum. It was used in trade and agreements, and later settlers used it as money too.
+learn: On the Santa Cruz Islands, in the Solomon Islands, people made long coils of tiny red feathers to use as money.
+learn: Rare, beautiful things were often used as money.
+play: match | Match the money to where it was used | Wampum shell beads=North America; Red feather coils=The Solomon Islands; Cowrie shells=Africa and Asia; Giant stone discs=Yap
+check: mcq | What was wampum made from? | Shells* | Chocolate | Plastic
+check: tf | Feathers were once used as money in the Solomon Islands. | true
+check: mcq | Why were rare, beautiful things used as money? | They were special and hard to get* | They were boring | Everyone had lots
+home: Find something small and special at home. Could it be money? Why or why not?
+skill: history
+
+@lesson 2.5 | Treasured and traded | 💚 | museum
+hook: Long ago in {nz:Aotearoa~au:Australia}, what did people treasure and trade?
+learn: {nz:Māori treasured pounamu, a green stone found mainly in Te Waipounamu, the South Island.~au:Aboriginal and Torres Strait Islander peoples traded goods over long distances for thousands of years.}
+learn: {nz:Pounamu was made into tools and taonga, and traded or given as gifts between iwi.~au:They traded ochre, stone axes, shells and more along routes that crossed the land.}
+learn: Gifts and trade built friendships between groups.
+play: mcq | {nz:What is pounamu?~au:How far did some trade routes go?} | {nz:A treasured green stone~au:Right across the land}* | {nz:A kind of bird~au:Only to the next tree} | {nz:A kind of coin~au:Nowhere at all}
+check: tf | Gifts and trade helped build friendships between groups. | true
+check: mcq | {nz:Where is most pounamu found?~au:What was traded along the routes?} | {nz:Te Waipounamu, the South Island~au:Ochre, stone axes and shells}* | {nz:In shops~au:Phones} | {nz:In the sky~au:Cars}
+check: mcq | What is a gift? | Something given freely to someone* | Something taken | A bill
+home: With a grown-up, look at a museum website for {nz:pounamu taonga~au:traded objects like stone axes}.
+skill: history
+
+@lesson 2.6 | Cows and grain | 🐄 | museum
+hook: Long ago, a rich farmer might count their wealth in... cows!
+learn: In many places, people measured wealth in cattle, sheep or grain.
+learn: The Latin word for money, pecunia, comes from pecus, a word for farm animals.
+learn: But cows are hard to carry, and you can't cut one in half! That's one reason coins took over.
+play: tap | Tap the things people once counted their wealth in | 🐄:yes:Cattle were a sign of wealth; 🐑:yes:Sheep were too; 🌾:yes:Grain could be stored and traded; 🎮:no; 🚗:no; 🐐:yes:Goats were counted as wealth in many places; 📱:no
+check: mcq | Why are cows tricky to use as money? | They're hard to carry and can't be split* | They're too small | They're invisible
+check: tf | People once measured wealth in cattle. | true
+check: mcq | What made coins easier than cows? | Small, easy to carry and easy to count* | They moo | They eat grass
+home: Ask a grown-up what they think would be the hardest thing to use as money.
+skill: history
+

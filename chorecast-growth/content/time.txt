@@ -75,6 +75,78 @@ check: mcq | What does the bank check? | That you have enough money* | Your favo
 home: Watch a grown-up pay by card and say what happens.
 skill: banking
 
+@lesson 2.1 | Cowrie shells | 🐚 | museum
+hook: A tiny, shiny shell was once used as money by millions of people. Which shell?
+learn: Cowrie shells are small, smooth and shiny.
+learn: People in parts of Africa, India and China used them as money for hundreds of years.
+learn: In old Chinese writing, the picture-word for money looked like a shell.
+play: mystery | It's small, smooth and shiny; It comes from the sea; It was used as money in Africa, India and China; Its name starts with C | A cowrie shell* | A gold coin | A pebble
+check: mcq | Where were cowrie shells used as money? | Africa, India and China* | Only in the Arctic | Nowhere
+check: tf | Cowrie shells were used as money for hundreds of years. | true
+check: mcq | Why were cowries good money? | Small, tough and hard to fake* | They were tasty | They grew on trees
+home: Look at pictures of cowrie shells with a grown-up.
+skill: history
+
+@lesson 2.2 | Stone money | 🪨 | island
+hook: Imagine money so big you can't lift it. On the island of Yap, that was real!
+learn: Yap is an island in the Pacific Ocean.
+learn: People there used big round stones with a hole in the middle. Some were taller than a person!
+learn: The stones were too heavy to move, so everyone just remembered who owned each one.
+play: order | Put the stone money story in order | People sailed to another island; They carved big round stones; They brought the stones home by canoe and raft; They stood the stones up in the village; Everyone remembered who owned each one
+check: mcq | Where was giant stone money used? | The island of Yap* | The Moon | A shopping mall
+check: tf | Some Yap stones were taller than a person. | true
+check: mcq | How did people know who owned a stone? | Everyone remembered* | It was written on the stone | They carried it home
+home: Draw what a giant stone coin might look like in your town.
+skill: history
+
+@lesson 2.3 | What makes good money? | 🧐 | museum
+hook: Could ice cream be money? Why not?
+learn: Good money lasts a long time. Ice cream melts!
+learn: Good money is easy to carry and hard to fake.
+learn: And everyone has to agree to use it.
+play: sort | Good money, Bad money | Shells that last=Good money; Ice cream=Bad money; Small metal coins=Good money; Fresh fish=Bad money; Notes that are hard to copy=Good money; Leaves anyone can pick=Bad money | Would it make good money?
+check: mcq | Why is ice cream bad money? | It melts* | It's too cold | It's too yummy
+check: tf | Good money needs to be hard to fake. | true
+check: mcq | Leaves would be bad money because… | Anyone can pick them* | They're green | They're light
+home: Think of a silly thing to use as money. Tell a grown-up why it wouldn't work.
+skill: money
+
+@lesson 2.4 | Beads and feathers | 📿 | museum
+hook: Beads and feathers as money? Yes, really!
+learn: Some Native American peoples made beads from shells, called wampum. It was used in trade and agreements, and later settlers used it as money too.
+learn: On the Santa Cruz Islands, in the Solomon Islands, people made long coils of tiny red feathers to use as money.
+learn: Rare, beautiful things were often used as money.
+play: match | Match the money to where it was used | Wampum shell beads=North America; Red feather coils=The Solomon Islands; Cowrie shells=Africa and Asia; Giant stone discs=Yap
+check: mcq | What was wampum made from? | Shells* | Chocolate | Plastic
+check: tf | Feathers were once used as money in the Solomon Islands. | true
+check: mcq | Why were rare, beautiful things used as money? | They were special and hard to get* | They were boring | Everyone had lots
+home: Find something small and special at home. Could it be money? Why or why not?
+skill: history
+
+@lesson 2.5 | Treasured and traded | 💚 | museum
+hook: Long ago in {nz:Aotearoa~au:Australia}, what did people treasure and trade?
+learn: {nz:Māori treasured pounamu, a green stone found mainly in Te Waipounamu, the South Island.~au:Aboriginal and Torres Strait Islander peoples traded goods over long distances for thousands of years.}
+learn: {nz:Pounamu was made into tools and taonga, and traded or given as gifts between iwi.~au:They traded ochre, stone axes, shells and more along routes that crossed the land.}
+learn: Gifts and trade built friendships between groups.
+play: mcq | {nz:What is pounamu?~au:How far did some trade routes go?} | {nz:A treasured green stone~au:Right across the land}* | {nz:A kind of bird~au:Only to the next tree} | {nz:A kind of coin~au:Nowhere at all}
+check: tf | Gifts and trade helped build friendships between groups. | true
+check: mcq | {nz:Where is most pounamu found?~au:What was traded along the routes?} | {nz:Te Waipounamu, the South Island~au:Ochre, stone axes and shells}* | {nz:In shops~au:Phones} | {nz:In the sky~au:Cars}
+check: mcq | What is a gift? | Something given freely to someone* | Something taken | A bill
+home: With a grown-up, look at a museum website for {nz:pounamu taonga~au:traded objects like stone axes}.
+skill: history
+
+@lesson 2.6 | Cows and grain | 🐄 | museum
+hook: Long ago, a rich farmer might count their wealth in... cows!
+learn: In many places, people measured wealth in cattle, sheep or grain.
+learn: The Latin word for money, pecunia, comes from pecus, a word for farm animals.
+learn: But cows are hard to carry, and you can't cut one in half! That's one reason coins took over.
+play: tap | Tap the things people once counted their wealth in | 🐄:yes:Cattle were a sign of wealth; 🐑:yes:Sheep were too; 🌾:yes:Grain could be stored and traded; 🎮:no; 🚗:no; 🐐:yes:Goats were counted as wealth in many places; 📱:no
+check: mcq | Why are cows tricky to use as money? | They're hard to carry and can't be split* | They're too small | They're invisible
+check: tf | People once measured wealth in cattle. | true
+check: mcq | What made coins easier than cows? | Small, easy to carry and easy to count* | They moo | They eat grass
+home: Ask a grown-up what they think would be the hardest thing to use as money.
+skill: history
+
 @band builders
 @unit 1 | How money began | Barter, commodity money and coins
 @unit 2 | Trade routes | Silk, spices and sailors
@@ -153,6 +225,79 @@ check: tf | Trust matters for money to work. | true
 check: mcq | Too much money chasing the same goods causes… | Inflation* | Free lunches | Interest
 home: Find a price that has gone up over the years.
 skill: inflation
+
+@lesson 2.1 | The spice trade | 🌶️ | museum
+hook: In Europe 600 years ago, pepper and nutmeg were so pricey that mostly the rich could afford them. Why?
+learn: Nutmeg and cloves grew only on a few small islands in what is now Indonesia, often called the Spice Islands.
+learn: Spices travelled thousands of kilometres by ship and camel, passing through many traders.
+learn: Each trader added to the price, so spices were very expensive by the time they reached Europe.
+play: route | Match each spice to where it came from | Nutmeg=The Banda Islands; Cloves=The northern Maluku Islands; Black pepper=Southern India; Cinnamon=Sri Lanka
+check: mcq | Why were spices so expensive in Europe? | They came a long way through many traders* | They were made of gold | Nobody wanted them
+check: tf | Nutmeg once grew only on a few small islands. | true
+check: mcq | What happened to the price each time spices were sold on? | It went up* | It went down | It stayed the same
+home: Find nutmeg, cloves or pepper in your kitchen, then find where it grows on a map.
+skill: trade
+
+@lesson 2.2 | Monsoon winds | 🌬️ | museum
+hook: Sailors crossed the Indian Ocean long before engines. How did they know when to go?
+learn: Monsoon winds blow one way for part of the year, then turn around.
+learn: Traders sailed out with one wind and came home months later when it changed.
+learn: Reading the winds let Arab, Indian, African and Chinese traders link up across the ocean.
+play: order | Put a monsoon trading trip in order | Load the ship with cloth in India; Wait for the wind to blow towards Africa; Sail across the ocean; Trade the cloth for gold and ivory; Wait for the wind to turn; Sail home with the new goods
+check: mcq | What helped sailors cross the Indian Ocean? | Seasonal monsoon winds* | Engines | Rowing machines
+check: tf | Monsoon winds change direction during the year. | true
+check: mcq | Why did traders wait months before sailing home? | For the wind to change* | For the shops to open | For a birthday
+home: Find India, Arabia and East Africa on a map of the Indian Ocean.
+skill: trade
+
+@lesson 2.3 | Pacific navigators | 🛶 | island
+hook: Long before maps and GPS, people sailed thousands of kilometres across the Pacific and found tiny islands. How?
+learn: Polynesian navigators read the stars, ocean swells, clouds and birds.
+learn: They sailed big double-hulled canoes across the open ocean.
+learn: Their descendants reached Aotearoa New Zealand around 700 to 800 years ago. It was one of the last large land masses people settled.
+play: tap | Tap the clues navigators used to find their way | ⭐:yes:Stars rise and set in the same places; 🌊:yes:Ocean swells keep a steady pattern; 🐦:yes:Some seabirds fly out to sea and back to land each day; ☁️:yes:Clouds can gather over islands; 📱:no; 🧭:no; 🗺️:no
+check: mcq | What did Polynesian navigators use to find their way? | Stars, swells, clouds and birds* | GPS | Paper maps
+check: tf | People first reached Aotearoa around 700 to 800 years ago. | true
+check: mcq | What kind of boats did they sail? | Double-hulled canoes* | Steamships | Jet skis
+home: On a clear night, find a bright star with a grown-up and watch where it moves.
+skill: history
+
+@lesson 2.4 | Middlemen | 🔗 | stall
+hook: Silk left China fairly cheap and reached Rome very expensive. Who took the money in between?
+learn: Long trade routes had many middlemen: traders who bought from one person and sold to the next.
+learn: Each one added a markup to pay for their journey and make a profit.
+learn: Today, wholesalers and shops are middlemen too.
+try: $10, plus a $5 markup, plus another $5 markup = $20 :: gap | $10, then +$10, +$10 and +$10 = $_ | 40
+play: build | Follow the silk from China to Rome | A farmer in China makes silk; A Chinese merchant buys it; Central Asian traders carry it by camel; Traders in Persia sell it on; A Roman merchant buys it; A rich Roman pays a high price
+check: mcq | What's a middleman? | Someone who buys from one person and sells to the next* | The person in the middle of a queue | A farmer
+check: tf | Each middleman added to the price. | true
+check: mcq | Which is a modern middleman? | A supermarket* | A farmer growing apples | A cow
+home: Pick something in your home and guess how many people handled it before you.
+skill: trade
+
+@lesson 2.5 | Ideas travel too | 💡 | museum
+hook: Trade routes carried silk and spices. What else travelled with the traders?
+learn: Ideas travelled too. Paper-making spread from China to the Middle East, then to Europe.
+learn: The digits we use, 0 to 9, began in India and reached Europe through Arab scholars and traders.
+learn: Sadly, diseases travelled too, like the plague called the Black Death in the 1300s.
+play: sort | Things, Ideas | Silk=Things; Paper-making=Ideas; Pepper=Things; The digits 0 to 9=Ideas; Horses=Things; New religions=Ideas | Things or ideas?
+check: mcq | Where did the digits 0 to 9 first come from? | India* | Antarctica | Rome
+check: tf | Paper-making spread from China along trade routes. | true
+check: mcq | What else spread along trade routes? | Diseases, sadly* | Wi-fi | Plastic
+home: Find something in your home that came from another country.
+skill: history
+
+@lesson 2.6 | The sea route to India | ⛵ | museum
+hook: What if you could skip all the middlemen and sail straight to the spices?
+learn: In 1498, the Portuguese sailor Vasco da Gama reached India by sailing around the southern tip of Africa.
+learn: European ships could now buy spices straight from Asia, cutting out many middlemen.
+learn: It also led to European empires taking control of other people's lands, causing great harm to the people living there.
+play: mystery | He was a Portuguese sailor; He sailed around the southern tip of Africa; He reached India in 1498; His ships came home with pepper and spices | Vasco da Gama* | Marco Polo | Abel Tasman
+check: mcq | How did Vasco da Gama reach India? | By sailing around Africa* | By flying | By camel through Antarctica
+check: tf | The sea route to India let Europeans cut out many middlemen. | true
+check: mcq | What was one harmful result of these voyages? | European empires took over other people's lands* | Spices disappeared | The ocean dried up
+home: Trace Vasco da Gama's route on a map with a grown-up.
+skill: trade
 
 @band makers
 @unit 1 | Booms and busts | Bubbles, crashes and recoveries
@@ -234,6 +379,80 @@ check: mcq | A benefit of global trade? | More choice in shops* | Higher prices 
 home: Check a label at home: how far did it travel?
 skill: trade
 
+@lesson 2.1 | The crash of 1929 | 📉 | museum
+hook: In the 1920s, US share prices kept climbing, and many people borrowed to buy more. What could go wrong?
+learn: In the late 1920s, many Americans bought shares with borrowed money. This was called buying on margin.
+learn: When prices started falling in October 1929, lenders demanded their money back, so people had to sell.
+learn: Selling pushed prices lower still. On 29 October 1929, "Black Tuesday", the market crashed.
+play: order | Put the 1929 crash in order | Share prices rise for years; People borrow to buy more shares; Prices start to fall; Lenders demand their money back; People rush to sell; The market crashes on Black Tuesday
+check: mcq | What is buying on margin? | Buying shares with borrowed money* | Buying at the edge of town | Buying only on sale
+check: tf | Borrowing to buy shares made the crash worse. | true
+check: mcq | When was Black Tuesday? | 29 October 1929* | 1 January 2000 | 25 December 1850
+home: Ask a grown-up why borrowing to invest can be risky.
+skill: history
+
+@lesson 2.2 | Bank runs | 🏦 | bank
+hook: You hear your bank might fail, and everyone rushes to take their money out. What happens to the bank?
+learn: Banks lend out most of what people deposit, and keep only a small part as cash.
+learn: In a bank run, too many people want their money at once. The bank can run out of cash, even if it was healthy.
+learn: Around 9,000 US banks failed between 1930 and 1933. Many families lost their savings.
+learn: Today, {nz:NZ's Depositor Compensation Scheme~au:Australia's Financial Claims Scheme} protects bank deposits up to a limit.
+play: sort | Makes a run worse, Helps stop a run | Rumours spreading=Makes a run worse; Deposit protection=Helps stop a run; Everyone rushing to withdraw=Makes a run worse; The central bank lending to the bank=Helps stop a run; People staying calm=Helps stop a run; Panicky headlines=Makes a run worse | What makes a bank run worse, and what helps?
+check: mcq | What is a bank run? | Lots of people taking their money out at once* | A race between banks | A bank opening late
+check: tf | A healthy bank can fail in a bank run. | true
+check: mcq | What protects bank deposits today if a bank fails? | {nz:The Depositor Compensation Scheme, up to a limit~au:The Financial Claims Scheme, up to a limit}* | Nothing at all | Burying cash in the garden
+home: Ask a grown-up whether their savings are covered by {nz:the Depositor Compensation Scheme~au:the Financial Claims Scheme}.
+skill: banking
+
+@lesson 2.3 | Hard times at home | 🧺 | museum
+hook: The crash happened in New York. Why did it hurt families in {nz:Aotearoa~au:Australia}?
+learn: {nz:NZ earned most of its money selling wool, meat and butter overseas. When the world slumped, export prices crashed.~au:Australia earned much of its money selling wool and wheat overseas. When the world slumped, export prices crashed.}
+learn: {nz:Many people lost their jobs. Unemployed men were sent to relief work camps, and in 1932 there were riots in Dunedin, Auckland and Wellington.~au:Unemployment reached about 30% in 1932. Many families relied on the "susso", basic sustenance help from the government.}
+learn: Families got by with vegetable gardens, sharing, mending clothes and making do.
+play: sort | Making do, Hard to find | Growing vegetables at home=Making do; Mending old clothes=Making do; A new car on credit=Hard to find; Sharing meals with neighbours=Making do; A steady job=Hard to find; Swapping goods instead of paying=Making do | How did families get by?
+check: mcq | Why did a crash in New York hurt {nz:New Zealand~au:Australia}? | Prices for our exports crashed* | The crash happened here first | People stopped liking wool
+check: tf | Many families grew food and mended clothes to get by. | true
+check: mcq | {nz:What happened in Dunedin, Auckland and Wellington in 1932?~au:About what share of Australian workers were unemployed in 1932?} | {nz:Riots by unemployed workers~au:About 30%}* | {nz:A big festival~au:About 1%} | {nz:Nothing~au:None}
+home: Ask an older relative if their family told stories about the Depression.
+skill: history
+
+@lesson 2.4 | The deflation spiral | 🌀 | museum
+hook: Prices falling sounds great. Why was it a disaster in the 1930s?
+learn: In the Depression, prices fell year after year. That's called deflation.
+learn: If prices will be lower next month, people wait to buy. Businesses sell less, so they cut jobs and wages.
+learn: Then people have even less to spend, and prices fall again. It's a spiral.
+learn: Debts feel heavier too, because the dollars you owe are worth more.
+play: build | Build the deflation spiral | Prices start falling; People wait to buy; Businesses sell less; Businesses cut jobs and wages; People have less to spend; Prices fall even further
+check: mcq | What is deflation? | Prices falling over time* | Prices rising over time | Letting air out of a tyre
+check: tf | Deflation can make debts harder to repay. | true
+check: mcq | Why do people put off buying during deflation? | They expect lower prices later* | Shops are closed | Money disappears
+home: Explain the deflation spiral to someone at home in your own words.
+skill: economics
+
+@lesson 2.5 | Trade walls | 🧱 | museum
+hook: In 1930, the US put big taxes on imports to protect its own farms and factories. Did it work?
+learn: A tariff is a tax on goods coming into a country.
+learn: The US raised tariffs in 1930, and other countries hit back with tariffs of their own.
+learn: World trade shrank sharply, which made the Depression worse for export countries like ours.
+play: debate | Do big tariffs protect a country's economy? | Often not. Other countries hit back, and trade shrinks for everyone* | Yes. Tariffs always protect jobs | Tariffs can shield some local industries for a while, which is why governments still use them. Economists argue about when they help.
+check: mcq | What's a tariff? | A tax on imported goods* | A kind of ship | A bank loan
+check: tf | After the US raised tariffs in 1930, other countries hit back. | true
+check: mcq | Why did shrinking world trade hurt {nz:NZ~au:Australia} so much? | We relied on selling exports overseas* | We didn't trade at all | We only sold to ourselves
+home: Find a news story about tariffs today. Who do they help, and who do they hurt?
+skill: trade
+
+@lesson 2.6 | What changed after | 🛟 | townhall
+hook: The Depression was terrible. What did countries change so it wouldn't happen again?
+learn: {nz:NZ's first Labour government, elected in 1935, built state houses and passed the Social Security Act in 1938.~au:Australia later brought in national unemployment benefits, first paid in 1945.}
+learn: {nz:The Reserve Bank of New Zealand opened in 1934 to steady the money system.~au:The Commonwealth Bank took on more central bank work, and the Reserve Bank of Australia took over that job in 1960.}
+learn: Unemployment support, central banks, deposit protection and bank rules all grew from lessons learned.
+play: match | Match each change to the problem it tackles | Unemployment benefits=No income after losing work; Deposit protection=Bank runs wiping out savings; Central banks=An unsteady money system; State housing=Families with nowhere affordable to live
+check: mcq | {nz:When was the Social Security Act passed in NZ?~au:When were national unemployment benefits first paid in Australia?} | {nz:1938~au:1945}* | {nz:1838~au:1845} | 2008
+check: tf | Many of today's safety nets were shaped by the Depression. | true
+check: mcq | What does deposit protection help prevent? | Savers losing everything when a bank fails* | Rain | All price rises
+home: Ask a grown-up which government support they think matters most, and why.
+skill: history
+
 @band launchers
 @unit 1 | Modern money | Fiat money, banks and how money is created
 @unit 2 | Inflation and policy | Why central banks target inflation
@@ -313,3 +532,75 @@ check: tf | Indigenous economies existed long before colonisation. | true
 check: mcq | Who should help tell these stories? | The communities they belong to* | Nobody | Only tourists
 home: Visit a museum website and find one object linked to early trade.
 skill: history
+
+@lesson 2.1 | Measuring inflation | 🧺 | townhall
+hook: How does anyone know prices rose 3% last year? Who checks?
+learn: {nz:Stats NZ~au:The Australian Bureau of Statistics} tracks the prices of a "basket" of things households buy, like food, rent, petrol and power.
+learn: This is the {nz:Consumers Price Index~au:Consumer Price Index} (CPI). Its change over a year is the inflation rate.
+learn: Your own inflation can differ. A renter who drives a lot feels rent and petrol rises more.
+play: slider | A basket cost $200 last year and $206 this year. What's the inflation rate, in %? | 0 | 10 | 3 | % | 0 | 0.5
+check: gap | A basket rises from $500 to $520. Inflation = _% | 4
+check: mcq | What does the CPI track? | The prices of a basket of household goods and services* | Share prices | Only petrol
+check: tf | Your personal inflation rate can differ from the official one. | true
+home: Note the prices of five things your household buys often. Check them again in three months.
+skill: inflation
+
+@lesson 2.2 | Inflation targets | 🎯 | bank
+hook: Why don't central banks aim for 0% inflation?
+learn: {nz:In 1989, New Zealand became the first country to give its central bank an inflation target in law.~au:The Reserve Bank of Australia began targeting inflation in the early 1990s.}
+learn: {nz:The Reserve Bank of New Zealand aims to keep inflation between 1% and 3%, near 2%.~au:The Reserve Bank of Australia aims to keep inflation between 2% and 3%, near 2.5%.}
+learn: A little inflation is seen as healthy. It guards against deflation spirals and leaves room to cut rates.
+play: debate | Should central banks aim for 0% inflation? | No. A small positive target is safer, because it's a buffer against deflation* | Yes. Any inflation is bad | Some economists argue lower targets protect savers better. Most central banks still aim for about 2%.
+check: mcq | {nz:What's the RBNZ's inflation target range?~au:What's the RBA's inflation target range?} | {nz:1% to 3%~au:2% to 3%}* | 10% to 20% | Exactly 0%
+check: tf | {nz:New Zealand was the first country to give its central bank a formal inflation target.~au:The RBA began targeting inflation in the early 1990s.} | true
+check: mcq | Why aim a little above zero? | To keep a buffer against deflation* | To make prices double | It's random
+home: Find the latest inflation rate on {nz:rbnz.govt.nz or stats.govt.nz~au:rba.gov.au or abs.gov.au}.
+skill: centralbank
+
+@lesson 2.3 | The cash rate | 🏦 | bank
+hook: The central bank raises interest rates. Why would that slow price rises?
+learn: {nz:The Reserve Bank sets the Official Cash Rate (OCR).~au:The Reserve Bank sets the cash rate.} It flows through to the rates banks charge and pay.
+learn: Higher rates make borrowing dearer and saving more attractive, so people and businesses spend less, and price rises ease.
+learn: Lower rates do the opposite when the economy is weak. Changes take a year or two to fully work.
+play: sort | Raise rates, Cut rates | Inflation is well above target=Raise rates; The economy is slumping and inflation is low=Cut rates; Everyone is borrowing and prices are racing up=Raise rates; Jobs are disappearing and prices are flat=Cut rates | What would the central bank likely do?
+check: mcq | How do higher interest rates slow inflation? | People and businesses borrow and spend less* | Shops are banned from raising prices | More money is printed
+check: tf | Interest rate changes take time to work through the economy. | true
+check: mcq | Inflation is well below target and the economy is weak. The central bank would likely… | Cut rates* | Raise rates a lot | Close the banks
+home: Find the current {nz:OCR~au:cash rate} and the date of the next decision.
+skill: centralbank
+
+@lesson 2.4 | Hyperinflation | 💸 | museum
+hook: In Germany in 1923, some workers were paid twice a day and rushed to spend before prices rose again. How did it get so bad?
+learn: Hyperinflation is when prices rise extremely fast, sometimes doubling within days.
+learn: Germany in 1923 and Zimbabwe around 2008 printed huge amounts of money to pay their bills.
+learn: Savings became worthless. People turned to foreign money or swapping goods instead.
+play: mystery | Prices rose so fast that banknotes were burned for heat; Some workers were paid twice a day; It came a few years after a world war; It peaked in 1923 | Germany's hyperinflation* | The Great Depression in the US | The 2008 crisis
+check: mcq | What usually causes hyperinflation? | A government printing huge amounts of money* | A good harvest | Low taxes
+check: tf | In hyperinflation, savings can become almost worthless. | true
+check: mcq | Zimbabwe's hyperinflation peaked around… | 2008* | 1066 | 1950
+home: Look up a picture of Zimbabwe's 100 trillion dollar note.
+skill: inflation
+
+@lesson 2.5 | The 1970s and 80s | 📺 | museum
+hook: Your grandparents may remember home loan rates near 20%. How did that happen?
+learn: In the 1970s, oil prices jumped and inflation took off around the world.
+learn: In both New Zealand and Australia, inflation was often above 10% through the 1970s and into the 1980s.
+learn: To beat it, interest rates went very high. {nz:NZ mortgage rates hit about 20% in the late 1980s.~au:Australian home loan rates hit about 17% in 1989.}
+play: path | It's the late 1980s. Inflation is high and your home loan rate is near 20%. | Cut spending and pay down your loan where you can => good: Tough, but wise. Rates came down over the next few years as inflation fell. | Borrow more to buy a second house => bad: At these rates, the repayments could crush you. | Stop paying the mortgage => bad: You'd risk losing your home.
+check: mcq | What helped spark high inflation in the 1970s? | Oil price shocks* | Too little money | Cheap petrol
+check: tf | Very high interest rates were used to bring inflation down. | true
+check: mcq | {nz:NZ mortgage rates in the late 1980s reached about…~au:Australian home loan rates in 1989 reached about…} | {nz:20%~au:17%}* | 2% | 0%
+home: Ask an older relative what interest rates were like when they first borrowed for a home or car.
+skill: inflation
+
+@lesson 2.6 | The 2022 spike | 📈 | museum
+hook: Prices jumped in 2022 and interest rates rose fast. What happened, and did it work?
+learn: After the pandemic, supply chains jammed, energy prices spiked and spending bounced back.
+learn: Inflation peaked at {nz:7.3% in NZ in mid-2022~au:7.8% in Australia at the end of 2022}.
+learn: Central banks raised rates quickly. By late 2024, inflation was back inside both targets, though many families felt the squeeze of higher prices and mortgages.
+play: diff | Early 2021 and mid-2023. Tap what changed. | Inflation under 2%; Interest rates very low; Mortgage repayments low; Supply chains jammed; Inflation target unchanged | Inflation about 6%; Interest rates much higher; Mortgage repayments much higher; Supply chains mostly recovered; Inflation target unchanged
+check: mcq | What helped cause the 2022 inflation spike? | Supply problems and an energy price shock* | Prices set to zero | Everyone saving more
+check: tf | Raising interest rates helped bring inflation back down. | true
+check: mcq | {nz:NZ inflation peaked in 2022 at about…~au:Australian inflation peaked in late 2022 at about…} | {nz:7.3%~au:7.8%}* | 30% | 0.5%
+home: Ask a grown-up how rising prices or interest rates affected your household in 2022 and 2023.
+skill: inflation

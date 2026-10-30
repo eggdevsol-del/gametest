@@ -77,3 +77,76 @@ check: mcq | Too much money chasing the same goods causes… | Inflation* | Free
 home: Find a price that has gone up over the years.
 skill: inflation
 
+@lesson 2.1 | The spice trade | 🌶️ | museum
+hook: In Europe 600 years ago, pepper and nutmeg were so pricey that mostly the rich could afford them. Why?
+learn: Nutmeg and cloves grew only on a few small islands in what is now Indonesia, often called the Spice Islands.
+learn: Spices travelled thousands of kilometres by ship and camel, passing through many traders.
+learn: Each trader added to the price, so spices were very expensive by the time they reached Europe.
+play: route | Match each spice to where it came from | Nutmeg=The Banda Islands; Cloves=The northern Maluku Islands; Black pepper=Southern India; Cinnamon=Sri Lanka
+check: mcq | Why were spices so expensive in Europe? | They came a long way through many traders* | They were made of gold | Nobody wanted them
+check: tf | Nutmeg once grew only on a few small islands. | true
+check: mcq | What happened to the price each time spices were sold on? | It went up* | It went down | It stayed the same
+home: Find nutmeg, cloves or pepper in your kitchen, then find where it grows on a map.
+skill: trade
+
+@lesson 2.2 | Monsoon winds | 🌬️ | museum
+hook: Sailors crossed the Indian Ocean long before engines. How did they know when to go?
+learn: Monsoon winds blow one way for part of the year, then turn around.
+learn: Traders sailed out with one wind and came home months later when it changed.
+learn: Reading the winds let Arab, Indian, African and Chinese traders link up across the ocean.
+play: order | Put a monsoon trading trip in order | Load the ship with cloth in India; Wait for the wind to blow towards Africa; Sail across the ocean; Trade the cloth for gold and ivory; Wait for the wind to turn; Sail home with the new goods
+check: mcq | What helped sailors cross the Indian Ocean? | Seasonal monsoon winds* | Engines | Rowing machines
+check: tf | Monsoon winds change direction during the year. | true
+check: mcq | Why did traders wait months before sailing home? | For the wind to change* | For the shops to open | For a birthday
+home: Find India, Arabia and East Africa on a map of the Indian Ocean.
+skill: trade
+
+@lesson 2.3 | Pacific navigators | 🛶 | island
+hook: Long before maps and GPS, people sailed thousands of kilometres across the Pacific and found tiny islands. How?
+learn: Polynesian navigators read the stars, ocean swells, clouds and birds.
+learn: They sailed big double-hulled canoes across the open ocean.
+learn: Their descendants reached Aotearoa New Zealand around 700 to 800 years ago. It was one of the last large land masses people settled.
+play: tap | Tap the clues navigators used to find their way | ⭐:yes:Stars rise and set in the same places; 🌊:yes:Ocean swells keep a steady pattern; 🐦:yes:Some seabirds fly out to sea and back to land each day; ☁️:yes:Clouds can gather over islands; 📱:no; 🧭:no; 🗺️:no
+check: mcq | What did Polynesian navigators use to find their way? | Stars, swells, clouds and birds* | GPS | Paper maps
+check: tf | People first reached Aotearoa around 700 to 800 years ago. | true
+check: mcq | What kind of boats did they sail? | Double-hulled canoes* | Steamships | Jet skis
+home: On a clear night, find a bright star with a grown-up and watch where it moves.
+skill: history
+
+@lesson 2.4 | Middlemen | 🔗 | stall
+hook: Silk left China fairly cheap and reached Rome very expensive. Who took the money in between?
+learn: Long trade routes had many middlemen: traders who bought from one person and sold to the next.
+learn: Each one added a markup to pay for their journey and make a profit.
+learn: Today, wholesalers and shops are middlemen too.
+try: $10, plus a $5 markup, plus another $5 markup = $20 :: gap | $10, then +$10, +$10 and +$10 = $_ | 40
+play: build | Follow the silk from China to Rome | A farmer in China makes silk; A Chinese merchant buys it; Central Asian traders carry it by camel; Traders in Persia sell it on; A Roman merchant buys it; A rich Roman pays a high price
+check: mcq | What's a middleman? | Someone who buys from one person and sells to the next* | The person in the middle of a queue | A farmer
+check: tf | Each middleman added to the price. | true
+check: mcq | Which is a modern middleman? | A supermarket* | A farmer growing apples | A cow
+home: Pick something in your home and guess how many people handled it before you.
+skill: trade
+
+@lesson 2.5 | Ideas travel too | 💡 | museum
+hook: Trade routes carried silk and spices. What else travelled with the traders?
+learn: Ideas travelled too. Paper-making spread from China to the Middle East, then to Europe.
+learn: The digits we use, 0 to 9, began in India and reached Europe through Arab scholars and traders.
+learn: Sadly, diseases travelled too, like the plague called the Black Death in the 1300s.
+play: sort | Things, Ideas | Silk=Things; Paper-making=Ideas; Pepper=Things; The digits 0 to 9=Ideas; Horses=Things; New religions=Ideas | Things or ideas?
+check: mcq | Where did the digits 0 to 9 first come from? | India* | Antarctica | Rome
+check: tf | Paper-making spread from China along trade routes. | true
+check: mcq | What else spread along trade routes? | Diseases, sadly* | Wi-fi | Plastic
+home: Find something in your home that came from another country.
+skill: history
+
+@lesson 2.6 | The sea route to India | ⛵ | museum
+hook: What if you could skip all the middlemen and sail straight to the spices?
+learn: In 1498, the Portuguese sailor Vasco da Gama reached India by sailing around the southern tip of Africa.
+learn: European ships could now buy spices straight from Asia, cutting out many middlemen.
+learn: It also led to European empires taking control of other people's lands, causing great harm to the people living there.
+play: mystery | He was a Portuguese sailor; He sailed around the southern tip of Africa; He reached India in 1498; His ships came home with pepper and spices | Vasco da Gama* | Marco Polo | Abel Tasman
+check: mcq | How did Vasco da Gama reach India? | By sailing around Africa* | By flying | By camel through Antarctica
+check: tf | The sea route to India let Europeans cut out many middlemen. | true
+check: mcq | What was one harmful result of these voyages? | European empires took over other people's lands* | Spices disappeared | The ocean dried up
+home: Trace Vasco da Gama's route on a map with a grown-up.
+skill: trade
+

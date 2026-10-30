@@ -73,3 +73,75 @@ check: mcq | Which instruction is clearest? | Push the lever down* | Do the toas
 home: Write instructions for a simple job and have someone follow them exactly.
 skill: instructions
 
+@lesson 2.1 | Know your audience | 👥 | stage
+hook: You want a later bedtime. Would you ask a parent the same way you'd ask a friend?
+learn: Your audience is the person you're trying to persuade.
+learn: Think about what they care about. A parent cares about sleep and school. A friend cares about fun.
+learn: Choose reasons that matter to them, not just to you.
+play: match | Match each audience to the reason most likely to work | A parent=I'll still get 9 hours of sleep; A teacher=It will help the class learn; A coach=It will make the team stronger; A little brother=It'll be fun for you too
+check: mcq | You want a pet. Which reason might persuade a parent most? | I'll feed it and walk it every day* | My friend has one | I just want it
+check: tf | The same reason works on everyone. | false | Different people care about different things.
+check: mcq | Who is your audience? | The person you're persuading* | A crowd at a concert | Your own feelings
+home: Think of something you want. Write one reason that matters to the person you'd ask.
+skill: persuasion
+
+@lesson 2.2 | Claim, reason, example | 🧱 | stage
+hook: "Can we have a class pet? Please, please, please!" Why might that not work?
+learn: Start with what you want. That's your claim.
+learn: Give a reason why, then back it up with an example or a fact.
+learn: "We should have a class pet. It teaches responsibility. Room 6 has a fish, and they take turns feeding it."
+play: build | Build a persuasive case for a longer lunch break | Claim: We should have a longer lunch break; Reason: Kids need time to eat and play; Example: Lots of kids leave food because they rush off to play; Ending: A longer lunch means better eating and better focus
+check: mcq | Which is an example that backs up a reason? | Room 6 has a fish, and they take turns feeding it* | Please, please, please! | Because I said so
+check: tf | Saying please lots of times is a strong reason. | false | Reasons and examples work better.
+check: mcq | What comes first? | The claim, saying what you want* | The example | Saying goodbye
+home: Write a claim, a reason and an example for something you'd like to change at home.
+skill: persuasion
+
+@lesson 2.3 | Good timing | ⏰ | home
+hook: You want to ask for a sleepover. Your parent just burnt dinner and the baby is crying. Good time?
+learn: Timing matters. People listen better when they're calm and not rushed.
+learn: Pick a quiet moment, like after dinner, not in the middle of chaos.
+learn: Giving someone time to think often gets a better answer than demanding one now.
+play: timing | Wait for the calm moment, then tap to ask | Ask now | Calm
+check: mcq | When's the best time to ask for something big? | When the person is calm and has time* | In the middle of a rush | When they're upset
+check: tf | Giving someone time to think can get you a better answer. | true
+check: mcq | Your parent is stressed and busy. You could… | Wait for a better moment* | Ask louder | Ask ten times
+home: Notice a good moment to ask someone something this week.
+skill: timing
+
+@lesson 2.4 | Facts and feelings | ❤️ | stage
+hook: What persuades you more: a fact, or a story that makes you feel something?
+learn: Facts and numbers show something is true.
+learn: Stories and feelings make people care.
+learn: The best persuasion uses both, and stays honest.
+play: sort | Fact, Feeling | Our school throws out 500 plastic bottles a week=Fact; Imagine a turtle tangled in plastic=Feeling; Refill stations cost less than bottled water=Fact; It makes me sad to see rubbish on the beach=Feeling; Our class survey says 20 out of 25 kids want a refill station=Fact; Picture a clean, sparkling beach=Feeling | Fact or feeling?
+check: mcq | What does a feeling-based argument do? | Makes people care* | Proves a number | Nothing
+check: tf | Strong persuasion often uses both facts and feelings. | true
+check: mcq | Which is a fact? | Our school throws out 500 bottles a week* | Imagine a sad turtle | I love the beach
+home: Find one ad that uses a feeling and one that uses a fact.
+skill: persuasion
+
+@lesson 2.5 | Answering "but…" | 🔁 | stage
+hook: You ask for a dog. "But who will walk it?" What do you say?
+learn: People often have worries about your idea. These are called objections.
+learn: Listen to the worry. Don't get cross.
+learn: Answer it with a plan: "I'll walk it every day after school. You can check my chart."
+play: chat | You're asking to walk to school on your own | them: I'm not sure. What about the busy road? | me: I'll cross with {nz:the school patrol~au:the crossing supervisor}, and walk with Sam*/You worry too much/Ugh, never mind | them: And what if it pours with rain? | me: I'll take my raincoat, and if it storms you could drive me*/Rain doesn't matter/I'll just stay home then
+check: mcq | What's an objection? | A worry someone has about your idea* | A type of pencil | A yes
+check: tf | Getting cross is a good way to answer an objection. | false | Listen, then answer with a plan.
+check: mcq | "Who will feed the cat?" A great answer is… | I will, every morning. I'll set a reminder* | Someone | Not me
+home: Think of a worry a grown-up might have about your idea, and plan your answer.
+skill: persuasion
+
+@lesson 2.6 | Fair or sneaky? | ⚖️ | online
+hook: Is it OK to nag, guilt-trip or fib to get a yes?
+learn: Fair persuasion uses honest reasons and respects the other person's choice.
+learn: Sneaky tricks include nagging, lying, guilt trips and "everyone else is allowed".
+learn: If they still say no, accept it. You can ask again another time with new reasons.
+play: scam | Fair persuasion or a sneaky trick? | Here are three reasons, and I've made a plan=real; If you loved me, you'd say yes=scam; Everyone else is allowed!=scam; Could we try it for one week and see?=real; Asking 50 times until they give in=scam | Guilt trips, nagging and "everyone else" are tricks, not reasons.
+check: mcq | Which is fair persuasion? | Offering to try it for a week* | If you loved me, you'd say yes | Asking 50 times
+check: tf | It's OK to fib if it gets you a yes. | false
+check: mcq | They say no after you asked fairly. What now? | Accept it, and maybe ask again later with new reasons* | Sulk for a week | Nag until they give in
+home: Spot a sneaky persuasion trick in an ad or a show this week.
+skill: persuasion
+

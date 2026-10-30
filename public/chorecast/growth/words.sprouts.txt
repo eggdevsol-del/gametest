@@ -72,3 +72,75 @@ check: mcq | 😟 means… | Worried* | Happy | Sleepy
 home: Use "I feel… because…" once today.
 skill: feelings
 
+@lesson 2.1 | It's brave to ask | 🦁 | stage
+hook: You're stuck on a puzzle. Asking for help feels a bit scary. Why?
+learn: Everyone needs help sometimes, even grown-ups.
+learn: Asking for help is brave. It's how we learn.
+learn: Most people like helping.
+play: sort | Asking for help, Not asking | Can you show me how?=Asking for help; Hiding your work=Not asking; I'm stuck. Can you help?=Asking for help; Giving up straight away=Not asking; Can you explain that again?=Asking for help; Pretending you understand=Not asking | Is it asking for help?
+check: tf | Grown-ups need help sometimes too. | true
+check: mcq | Asking for help is… | Brave and smart* | Silly | Only for babies
+check: mcq | You don't understand the rules of a game. What do you do? | Ask someone to explain* | Pretend you know | Quit
+home: Ask someone in your family for help with something today. Notice how it feels.
+skill: asking
+
+@lesson 2.2 | Who can help? | 🧑‍🏫 | townhall
+hook: Your shoelace snaps, you're lost in a shop, and your tummy hurts. Who could help with each?
+learn: Different helpers help with different problems.
+learn: A teacher helps with schoolwork. A doctor or nurse helps when you're sick.
+learn: If you're lost in a shop, ask someone working at the counter.
+play: match | Match each problem to a good helper | Stuck on maths=Your teacher; Lost in a shop=A worker at the counter; Feeling sick=A doctor or nurse; Can't find a book=The librarian
+check: mcq | You're lost at the shops. Who is a good person to ask? | A worker at the shop counter* | A stranger in a car | Nobody
+check: tf | Different helpers are good at different problems. | true
+check: mcq | Who helps when you're stuck on schoolwork? | Your teacher* | The bus driver | A lifeguard
+home: Make a list of helpers you know and what each one helps with.
+skill: asking
+
+@lesson 2.3 | Say what you need | 🗣️ | stage
+hook: "Help!" Your friend runs over. But what do you need?
+learn: Say what the problem is.
+learn: Say what you've tried.
+learn: Then ask. "I can't open this lid. I tried twisting it. Can you help?"
+play: build | Build a clear ask | Excuse me; I can't reach the paint; I tried standing on my toes; Could you please pass it to me?
+check: mcq | Which ask is clearest? | I can't find my hat. I looked in my bag. Can you help me look?* | Hat! | Ugh, help!
+check: tf | Saying what you've tried helps people help you. | true
+check: mcq | What comes first in a clear ask? | Saying what the problem is* | Saying goodbye | Shouting
+home: Practise asking for help clearly with a grown-up.
+skill: asking
+
+@lesson 2.4 | Asking in class | ✋ | stage
+hook: The teacher explained it, but you still don't get it. Everyone is quiet. Do you ask?
+learn: If you don't understand, other kids probably don't either.
+learn: Put your hand up and wait your turn.
+learn: Say which part you didn't get: "Can you show the second step again?"
+play: chat | You're stuck in class | them: Does anyone have a question? | me: Yes. Can you show the second step again, please?*/No, even though you're stuck/This is too hard, I'm not doing it | them: Of course. Watch this part. | me: Thank you, I get it now!*/Whatever/I still won't try
+check: mcq | You don't understand in class. A good thing to do? | Put your hand up and ask* | Copy a friend | Stay quiet and guess
+check: tf | If you don't understand, other kids might not either. | true
+check: mcq | Which question helps the most? | Can you show the second step again?* | I don't get anything | Huh?
+home: Tell a grown-up about a question you asked at school this week.
+skill: asking
+
+@lesson 2.5 | If you're lost | 🗺️ | townhall
+hook: You turn around at the shops and your grown-up is gone. What do you do?
+learn: Stop and stay where you are. Your grown-up will look for you.
+learn: If they don't come, ask a shop worker or a parent with kids for help.
+learn: Know your grown-up's phone number. In an emergency, call {nz:111~au:000}.
+play: order | Lost at the shops? Put the steps in order. | Stop and stay where you are; Look around for your grown-up; Ask a shop worker for help; Tell them your name and your grown-up's name; Wait with them until your grown-up comes
+check: mcq | You're lost. What should you do first? | Stop and stay where you are* | Run around looking | Leave the shop
+check: tf | A shop worker is a good person to ask when you're lost. | true
+check: mcq | What's the emergency number? | {nz:111~au:000}* | {nz:000~au:111} | 123
+home: Learn a grown-up's phone number off by heart.
+skill: safety
+
+@lesson 2.6 | Thanks for helping | 💌 | stage
+hook: Someone helped you. What do you say?
+learn: Always say thank you when someone helps.
+learn: Say what helped: "Thanks for showing me. Now I can do it!"
+learn: One day, you can help someone else too.
+play: path | Your neighbour helps you fix your bike chain. | Say thank you and show them it works now => good: They feel great, and they'll be happy to help again. | Ride off without a word => bad: They might feel you didn't care. | Say thanks, but moan that it took ages => bad: That spoils the thank-you.
+check: mcq | What's a great thank-you? | Thanks for helping. Now I can do it!* | Took you long enough | Nothing at all
+check: tf | Saying what helped makes a thank-you even better. | true
+check: mcq | After someone helps you, you could… | Help someone else one day* | Forget about it | Hide
+home: Thank someone who helped you this week, and tell them what helped.
+skill: manners
+

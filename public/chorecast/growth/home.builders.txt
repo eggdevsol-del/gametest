@@ -74,3 +74,75 @@ check: mcq | At a road, you should… | Stop, look and listen* | Ride straight a
 home: Check your bike's brakes and helmet with a grown-up.
 skill: safety
 
+@lesson 2.1 | Care labels | 🏷️ | home
+hook: Inside your T-shirt is a tiny label covered in odd symbols. What do they mean?
+learn: Care labels tell you how to wash, dry and iron clothes.
+learn: A tub means washing. Dots show how warm. A hand in the tub means hand wash only.
+learn: A square is for drying, an iron is for ironing, and a cross through any symbol means don't.
+play: match | Match each symbol to its meaning | Tub with one dot=Wash at 30°C or cooler; Hand in a tub=Hand wash only; Square with a circle inside=Tumble dryer OK; Iron with a cross=Don't iron; Triangle with a cross=Don't use bleach
+check: mcq | A cross through a symbol means… | Don't do it* | Do it twice | It's extra clean
+check: tf | A tub with a hand in it means hand wash only. | true
+check: mcq | Where do you find care instructions? | On the label inside the clothes* | On the washing machine lid | In the fridge
+home: Find three care labels in your clothes and read the symbols.
+skill: laundry
+
+@lesson 2.2 | Load the washer | 🌀 | home
+hook: You stuff the whole basket into the machine and pour in heaps of powder. What could go wrong?
+learn: Empty every pocket first. Tissues, coins and pens can wreck a wash.
+learn: Don't overfill. Clothes need room to move to get clean.
+learn: Use the amount of detergent on the pack. More isn't cleaner, just harder to rinse out.
+play: build | Load the washing machine | Empty all the pockets; Do up the zips; Put clothes in loosely; Add detergent as the pack says; Pick the right setting; Press start
+check: mcq | What can a tissue left in a pocket do? | Leave fluff all over the wash* | Make clothes smell nice | Nothing
+check: tf | More detergent always means cleaner clothes. | false | Use the amount on the pack.
+check: mcq | Why not overfill the machine? | Clothes need room to move* | It gets lonely | It washes faster
+home: Load the washing machine with a grown-up watching.
+skill: laundry
+
+@lesson 2.3 | Stains | 🍅 | home
+hook: Tomato sauce on your white shirt! Quick, what do you do?
+learn: Act fast. Fresh stains come out much more easily.
+learn: Blot with a cloth. Don't rub, or the stain spreads.
+learn: Use cold water for blood and most food stains. Hot water can set some stains.
+play: path | You drip tomato sauce on your shirt. | Blot it, rinse with cold water and treat it before washing => good: Most of it lifts out. | Rub it hard with a hot cloth => bad: Rubbing spreads it, and heat can set the stain. | Leave it in the basket for a week => bad: Old stains are much harder to shift.
+check: mcq | What water is best for a blood stain? | Cold* | Boiling | No water at all
+check: tf | You should rub a stain hard. | false | Blot it so it doesn't spread.
+check: mcq | When is a stain easiest to remove? | Straight away* | After a month | Never
+home: Help a grown-up treat a stain this week.
+skill: laundry
+
+@lesson 2.4 | Hot or cold wash? | 🌡️ | home
+hook: Does a hot wash get clothes cleaner? And what does it cost?
+learn: Most of the power a washing machine uses goes into heating the water.
+learn: Cold washes clean everyday clothes well, and save power and money.
+learn: Hot washes are useful for very dirty things, like sheets after someone has been sick.
+play: sort | Cold wash, Hot wash | Everyday T-shirts=Cold wash; Sheets after a tummy bug=Hot wash; School uniform=Cold wash; Very greasy tea towels=Hot wash; Jeans=Cold wash; A wool jumper=Cold wash | Which wash?
+check: mcq | What uses most of the power in a warm wash? | Heating the water* | The lid | The lights
+check: tf | Cold washes save power. | true
+check: mcq | When might a hot wash be worth it? | Sheets after someone's been sick* | One clean T-shirt | A wool jumper
+home: Check which temperature your family's washing machine usually uses.
+skill: laundry
+
+@lesson 2.5 | Line or dryer? | ☀️ | home
+hook: It's sunny. Do you hang the washing on the line or use the dryer?
+learn: Line drying uses free sun and wind, and is gentle on clothes.
+learn: Dryers are handy on wet days, but use lots of power.
+learn: Clean the dryer's lint filter every time. Built-up lint can catch fire.
+play: chat | Your grandad is doing the washing | them: It's sunny! Should we use the dryer or the line? | me: The line. It's free, and the sun helps freshen clothes*/The dryer, always/Leave it in the machine | them: Good idea. It might rain later, though. | me: Let's check the forecast and bring it in if it clouds over*/Rain doesn't matter/Leave it out all week
+check: mcq | Why clean the dryer's lint filter? | Built-up lint can catch fire* | It makes clothes smell | It's decoration
+check: tf | Line drying is cheaper than using a dryer. | true
+check: mcq | When is a dryer most useful? | On wet days* | On sunny, windy days | Never
+home: Hang out a load of washing with a grown-up.
+skill: laundry
+
+@lesson 2.6 | Fold and put away | 👕 | home
+hook: Clean clothes in a crumpled pile, or folded in a drawer. Which would you rather?
+learn: Fold or hang clothes soon after drying, so they don't crease.
+learn: Match socks into pairs. Hang shirts and dresses.
+learn: Put things back in the same place every time, so you can find them.
+play: diff | Before and after putting away. Tap what changed. | T-shirts in a pile; Socks all mixed up; School shirt crumpled; Shoes by the door | T-shirts folded in the drawer; Socks in matching pairs; School shirt on a hanger; Shoes by the door
+check: mcq | What should you do with clean socks? | Match them into pairs* | Throw them in loose | Hide them
+check: tf | Folding soon after drying helps stop creases. | true
+check: mcq | Where should shirts often go? | On a hanger* | Under the bed | In the bin
+home: Fold and put away your own clean clothes this week.
+skill: chores
+

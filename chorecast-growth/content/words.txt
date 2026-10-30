@@ -73,6 +73,78 @@ check: mcq | 😟 means… | Worried* | Happy | Sleepy
 home: Use "I feel… because…" once today.
 skill: feelings
 
+@lesson 2.1 | It's brave to ask | 🦁 | stage
+hook: You're stuck on a puzzle. Asking for help feels a bit scary. Why?
+learn: Everyone needs help sometimes, even grown-ups.
+learn: Asking for help is brave. It's how we learn.
+learn: Most people like helping.
+play: sort | Asking for help, Not asking | Can you show me how?=Asking for help; Hiding your work=Not asking; I'm stuck. Can you help?=Asking for help; Giving up straight away=Not asking; Can you explain that again?=Asking for help; Pretending you understand=Not asking | Is it asking for help?
+check: tf | Grown-ups need help sometimes too. | true
+check: mcq | Asking for help is… | Brave and smart* | Silly | Only for babies
+check: mcq | You don't understand the rules of a game. What do you do? | Ask someone to explain* | Pretend you know | Quit
+home: Ask someone in your family for help with something today. Notice how it feels.
+skill: asking
+
+@lesson 2.2 | Who can help? | 🧑‍🏫 | townhall
+hook: Your shoelace snaps, you're lost in a shop, and your tummy hurts. Who could help with each?
+learn: Different helpers help with different problems.
+learn: A teacher helps with schoolwork. A doctor or nurse helps when you're sick.
+learn: If you're lost in a shop, ask someone working at the counter.
+play: match | Match each problem to a good helper | Stuck on maths=Your teacher; Lost in a shop=A worker at the counter; Feeling sick=A doctor or nurse; Can't find a book=The librarian
+check: mcq | You're lost at the shops. Who is a good person to ask? | A worker at the shop counter* | A stranger in a car | Nobody
+check: tf | Different helpers are good at different problems. | true
+check: mcq | Who helps when you're stuck on schoolwork? | Your teacher* | The bus driver | A lifeguard
+home: Make a list of helpers you know and what each one helps with.
+skill: asking
+
+@lesson 2.3 | Say what you need | 🗣️ | stage
+hook: "Help!" Your friend runs over. But what do you need?
+learn: Say what the problem is.
+learn: Say what you've tried.
+learn: Then ask. "I can't open this lid. I tried twisting it. Can you help?"
+play: build | Build a clear ask | Excuse me; I can't reach the paint; I tried standing on my toes; Could you please pass it to me?
+check: mcq | Which ask is clearest? | I can't find my hat. I looked in my bag. Can you help me look?* | Hat! | Ugh, help!
+check: tf | Saying what you've tried helps people help you. | true
+check: mcq | What comes first in a clear ask? | Saying what the problem is* | Saying goodbye | Shouting
+home: Practise asking for help clearly with a grown-up.
+skill: asking
+
+@lesson 2.4 | Asking in class | ✋ | stage
+hook: The teacher explained it, but you still don't get it. Everyone is quiet. Do you ask?
+learn: If you don't understand, other kids probably don't either.
+learn: Put your hand up and wait your turn.
+learn: Say which part you didn't get: "Can you show the second step again?"
+play: chat | You're stuck in class | them: Does anyone have a question? | me: Yes. Can you show the second step again, please?*/No, even though you're stuck/This is too hard, I'm not doing it | them: Of course. Watch this part. | me: Thank you, I get it now!*/Whatever/I still won't try
+check: mcq | You don't understand in class. A good thing to do? | Put your hand up and ask* | Copy a friend | Stay quiet and guess
+check: tf | If you don't understand, other kids might not either. | true
+check: mcq | Which question helps the most? | Can you show the second step again?* | I don't get anything | Huh?
+home: Tell a grown-up about a question you asked at school this week.
+skill: asking
+
+@lesson 2.5 | If you're lost | 🗺️ | townhall
+hook: You turn around at the shops and your grown-up is gone. What do you do?
+learn: Stop and stay where you are. Your grown-up will look for you.
+learn: If they don't come, ask a shop worker or a parent with kids for help.
+learn: Know your grown-up's phone number. In an emergency, call {nz:111~au:000}.
+play: order | Lost at the shops? Put the steps in order. | Stop and stay where you are; Look around for your grown-up; Ask a shop worker for help; Tell them your name and your grown-up's name; Wait with them until your grown-up comes
+check: mcq | You're lost. What should you do first? | Stop and stay where you are* | Run around looking | Leave the shop
+check: tf | A shop worker is a good person to ask when you're lost. | true
+check: mcq | What's the emergency number? | {nz:111~au:000}* | {nz:000~au:111} | 123
+home: Learn a grown-up's phone number off by heart.
+skill: safety
+
+@lesson 2.6 | Thanks for helping | 💌 | stage
+hook: Someone helped you. What do you say?
+learn: Always say thank you when someone helps.
+learn: Say what helped: "Thanks for showing me. Now I can do it!"
+learn: One day, you can help someone else too.
+play: path | Your neighbour helps you fix your bike chain. | Say thank you and show them it works now => good: They feel great, and they'll be happy to help again. | Ride off without a word => bad: They might feel you didn't care. | Say thanks, but moan that it took ages => bad: That spoils the thank-you.
+check: mcq | What's a great thank-you? | Thanks for helping. Now I can do it!* | Took you long enough | Nothing at all
+check: tf | Saying what helped makes a thank-you even better. | true
+check: mcq | After someone helps you, you could… | Help someone else one day* | Forget about it | Hide
+home: Thank someone who helped you this week, and tell them what helped.
+skill: manners
+
 @band builders
 @unit 1 | Clear requests | Asking so people say yes
 @unit 2 | Persuasion | Reasons, examples and good timing
@@ -147,6 +219,78 @@ check: tf | Each step should be one action. | true
 check: mcq | Which instruction is clearest? | Push the lever down* | Do the toaster thing | Make it work
 home: Write instructions for a simple job and have someone follow them exactly.
 skill: instructions
+
+@lesson 2.1 | Know your audience | 👥 | stage
+hook: You want a later bedtime. Would you ask a parent the same way you'd ask a friend?
+learn: Your audience is the person you're trying to persuade.
+learn: Think about what they care about. A parent cares about sleep and school. A friend cares about fun.
+learn: Choose reasons that matter to them, not just to you.
+play: match | Match each audience to the reason most likely to work | A parent=I'll still get 9 hours of sleep; A teacher=It will help the class learn; A coach=It will make the team stronger; A little brother=It'll be fun for you too
+check: mcq | You want a pet. Which reason might persuade a parent most? | I'll feed it and walk it every day* | My friend has one | I just want it
+check: tf | The same reason works on everyone. | false | Different people care about different things.
+check: mcq | Who is your audience? | The person you're persuading* | A crowd at a concert | Your own feelings
+home: Think of something you want. Write one reason that matters to the person you'd ask.
+skill: persuasion
+
+@lesson 2.2 | Claim, reason, example | 🧱 | stage
+hook: "Can we have a class pet? Please, please, please!" Why might that not work?
+learn: Start with what you want. That's your claim.
+learn: Give a reason why, then back it up with an example or a fact.
+learn: "We should have a class pet. It teaches responsibility. Room 6 has a fish, and they take turns feeding it."
+play: build | Build a persuasive case for a longer lunch break | Claim: We should have a longer lunch break; Reason: Kids need time to eat and play; Example: Lots of kids leave food because they rush off to play; Ending: A longer lunch means better eating and better focus
+check: mcq | Which is an example that backs up a reason? | Room 6 has a fish, and they take turns feeding it* | Please, please, please! | Because I said so
+check: tf | Saying please lots of times is a strong reason. | false | Reasons and examples work better.
+check: mcq | What comes first? | The claim, saying what you want* | The example | Saying goodbye
+home: Write a claim, a reason and an example for something you'd like to change at home.
+skill: persuasion
+
+@lesson 2.3 | Good timing | ⏰ | home
+hook: You want to ask for a sleepover. Your parent just burnt dinner and the baby is crying. Good time?
+learn: Timing matters. People listen better when they're calm and not rushed.
+learn: Pick a quiet moment, like after dinner, not in the middle of chaos.
+learn: Giving someone time to think often gets a better answer than demanding one now.
+play: timing | Wait for the calm moment, then tap to ask | Ask now | Calm
+check: mcq | When's the best time to ask for something big? | When the person is calm and has time* | In the middle of a rush | When they're upset
+check: tf | Giving someone time to think can get you a better answer. | true
+check: mcq | Your parent is stressed and busy. You could… | Wait for a better moment* | Ask louder | Ask ten times
+home: Notice a good moment to ask someone something this week.
+skill: timing
+
+@lesson 2.4 | Facts and feelings | ❤️ | stage
+hook: What persuades you more: a fact, or a story that makes you feel something?
+learn: Facts and numbers show something is true.
+learn: Stories and feelings make people care.
+learn: The best persuasion uses both, and stays honest.
+play: sort | Fact, Feeling | Our school throws out 500 plastic bottles a week=Fact; Imagine a turtle tangled in plastic=Feeling; Refill stations cost less than bottled water=Fact; It makes me sad to see rubbish on the beach=Feeling; Our class survey says 20 out of 25 kids want a refill station=Fact; Picture a clean, sparkling beach=Feeling | Fact or feeling?
+check: mcq | What does a feeling-based argument do? | Makes people care* | Proves a number | Nothing
+check: tf | Strong persuasion often uses both facts and feelings. | true
+check: mcq | Which is a fact? | Our school throws out 500 bottles a week* | Imagine a sad turtle | I love the beach
+home: Find one ad that uses a feeling and one that uses a fact.
+skill: persuasion
+
+@lesson 2.5 | Answering "but…" | 🔁 | stage
+hook: You ask for a dog. "But who will walk it?" What do you say?
+learn: People often have worries about your idea. These are called objections.
+learn: Listen to the worry. Don't get cross.
+learn: Answer it with a plan: "I'll walk it every day after school. You can check my chart."
+play: chat | You're asking to walk to school on your own | them: I'm not sure. What about the busy road? | me: I'll cross with {nz:the school patrol~au:the crossing supervisor}, and walk with Sam*/You worry too much/Ugh, never mind | them: And what if it pours with rain? | me: I'll take my raincoat, and if it storms you could drive me*/Rain doesn't matter/I'll just stay home then
+check: mcq | What's an objection? | A worry someone has about your idea* | A type of pencil | A yes
+check: tf | Getting cross is a good way to answer an objection. | false | Listen, then answer with a plan.
+check: mcq | "Who will feed the cat?" A great answer is… | I will, every morning. I'll set a reminder* | Someone | Not me
+home: Think of a worry a grown-up might have about your idea, and plan your answer.
+skill: persuasion
+
+@lesson 2.6 | Fair or sneaky? | ⚖️ | online
+hook: Is it OK to nag, guilt-trip or fib to get a yes?
+learn: Fair persuasion uses honest reasons and respects the other person's choice.
+learn: Sneaky tricks include nagging, lying, guilt trips and "everyone else is allowed".
+learn: If they still say no, accept it. You can ask again another time with new reasons.
+play: scam | Fair persuasion or a sneaky trick? | Here are three reasons, and I've made a plan=real; If you loved me, you'd say yes=scam; Everyone else is allowed!=scam; Could we try it for one week and see?=real; Asking 50 times until they give in=scam | Guilt trips, nagging and "everyone else" are tricks, not reasons.
+check: mcq | Which is fair persuasion? | Offering to try it for a week* | If you loved me, you'd say yes | Asking 50 times
+check: tf | It's OK to fib if it gets you a yes. | false
+check: mcq | They say no after you asked fairly. What now? | Accept it, and maybe ask again later with new reasons* | Sulk for a week | Nag until they give in
+home: Spot a sneaky persuasion trick in an ad or a show this week.
+skill: persuasion
 
 @band makers
 @unit 1 | Professional emails | Subject lines, tone and sign-offs
@@ -224,6 +368,78 @@ check: mcq | A friend's private message should be… | Kept private* | Posted fo
 home: Check the privacy settings on one account with a grown-up.
 skill: reputation
 
+@lesson 2.1 | Interests, not positions | 🍊 | stage
+hook: Two siblings fight over one orange, so they cut it in half. One eats the fruit and bins the peel. The other only wanted the peel for baking. What went wrong?
+learn: A position is what someone says they want. An interest is why they want it.
+learn: When you ask "why?", you often find a deal where both sides get more.
+learn: Here, one could have had all the fruit and the other all the peel.
+play: match | Match each position to the interest behind it | I want the car on Saturday=I need to get to my netball game; I want a later curfew=I don't want to be first to leave the party; I want $30 for this job=It takes me two hours; I want the front seat=I get carsick in the back
+check: mcq | What's an interest? | The reason behind what someone wants* | A bank's interest rate | A hobby
+check: tf | Asking "why?" can uncover a better deal. | true
+check: mcq | In the orange story, what was the best deal? | One takes the fruit, the other takes the peel* | Cut it in half | Throw it away
+home: Next time you disagree with someone, ask, "Why does that matter to you?"
+skill: negotiate
+
+@lesson 2.2 | Your plan B | 🅱️ | stage
+hook: Someone offers $150 for your old bike. Should you take it? It depends on your plan B.
+learn: Your plan B is what you'll do if this deal doesn't happen. Negotiators call it your BATNA: your best alternative to a negotiated agreement.
+learn: A strong plan B gives you the confidence to say no.
+learn: If another buyer has offered $180, you know $150 is too low.
+play: path | You're selling your bike. A buyer offers $150. Another buyer said they'd pay $180 next week. | Politely say you have a higher offer and ask if they can match it => good: Your plan B gave you the confidence to ask. They might match it. | Accept $150 straight away => bad: You left $30 on the table. | Call $150 an insult and storm off => bad: You might lose a buyer for nothing. Calm and clear works better.
+check: mcq | What's a BATNA? | Your best plan B if the deal falls through* | A kind of bat | A bank account
+check: tf | A strong plan B makes it easier to say no to a bad deal. | true
+check: mcq | You have no other buyers, so your plan B is weak. What could help? | Find more options before you negotiate* | Pretend you have one | Give up
+home: Before your next negotiation, write down your plan B.
+skill: negotiate
+
+@lesson 2.3 | The first offer | 🎯 | stall
+hook: You're selling a second-hand game. Should you name a price first, or wait for them?
+learn: The first number said often sets the range for the whole talk. This is called anchoring.
+learn: If you know what it's worth, a confident first offer can help. Research first.
+learn: Aim a little high but stay reasonable, so there's room to meet in the middle.
+play: slider | Similar used games sell for $40 to $50. What's a sensible opening price for yours? | 10 | 100 | 50 | $ | 5 | 5
+check: mcq | What's anchoring? | The first number setting the range* | Parking a boat | Refusing to move
+check: tf | It's smart to research what something is worth before you name a price. | true
+check: mcq | Similar items sell for $40. Which opening price is most sensible? | $45* | $150 | $5
+home: Look up the second-hand price of something you own on a selling site.
+skill: negotiate
+
+@lesson 2.4 | Trade, don't cave | 🔄 | stall
+hook: The buyer says "Can you do it cheaper?" Do you just drop your price?
+learn: When you give something, ask for something back.
+learn: Use "if… then": "If you pick it up today, then I can do $70."
+learn: Small trades keep the deal fair for both sides.
+play: chat | Someone wants your old keyboard | them: Would you take $60 instead of $80? | me: If you can pick it up today, I could do $70*/OK, $60 is fine/No way, $80 or nothing | them: Hmm. How about $65, and I'll come right now? | me: Deal. See you soon*/Make it $90/Actually, never mind
+check: mcq | Which is a good trade? | If you pick it up today, I can do $70* | Fine, whatever you want | I'll pay you to take it
+check: tf | When you give something in a deal, it's fair to ask for something back. | true
+check: mcq | What does "if… then" help you do? | Trade instead of just giving in* | Make threats | Confuse people
+home: Practise one "if… then" offer with a family member.
+skill: negotiate
+
+@lesson 2.5 | Listen to negotiate | 👂 | stage
+hook: The best negotiators often talk less. Why?
+learn: Ask open questions, like "What matters most to you?"
+learn: Sum up what you heard: "So the main thing is getting it by Friday?"
+learn: Listening helps you find the deal, and makes people more willing to say yes.
+play: sort | Helps the deal, Hurts the deal | What matters most to you?=Helps the deal; Interrupting=Hurts the deal; So you need it by Friday?=Helps the deal; Rolling your eyes=Hurts the deal; Tell me more about that=Helps the deal; Checking your phone=Hurts the deal | Does it help or hurt?
+check: mcq | Which is an open question? | What matters most to you?* | Is it yes or no? | Are you done?
+check: tf | Summing up what someone said shows you listened. | true
+check: mcq | Why do good negotiators listen? | It helps find a deal both sides like* | It wastes time | So they can interrupt later
+home: In your next conversation, sum up what the other person said before you reply.
+skill: listening
+
+@lesson 2.6 | Negotiating at home | 🏠 | home
+hook: You want a later curfew. Your parents say no. Is it a fight or a negotiation?
+learn: At home, it's a negotiation when both sides can get something they want.
+learn: Find out their worries, like safety and sleep. Offer a plan that answers them.
+learn: Suggest a trial: "Let's try 10:30 for a month. If I'm late once, it goes back to 10."
+play: debate | Is offering a trial period a good way to negotiate a later curfew? | Yes. It answers their worries and lets you prove you're trustworthy* | No. You should just demand it | Some parents have firm rules for good reasons, and a trial may not change their mind. It's still a respectful way to ask.
+check: mcq | A strong way to ask for a later curfew? | Offer a plan and a trial period* | Slam the door | Stay out late anyway
+check: tf | Understanding your parents' worries helps you negotiate. | true
+check: mcq | Your trial worked and the new curfew stuck. What helped most? | Keeping your side of the deal* | Luck | Nagging
+home: Pick something to negotiate at home. Write down their worries and your plan.
+skill: negotiate
+
 @band launchers
 @unit 1 | Cover letters | Matching your story to the job
 @unit 2 | Reading contracts | Terms, conditions and red flags
@@ -299,3 +515,75 @@ check: tf | Headlines can exaggerate what a study found. | true
 check: mcq | Which is usually more reliable? | An official statistics agency* | An anonymous meme | A comment section
 home: Fact-check one viral claim with a grown-up.
 skill: critical
+
+@lesson 2.1 | Contract words | 📖 | bank
+hook: "Either party may terminate on 4 weeks' notice. The tenant is liable for any breach." Clear?
+learn: Contracts use special words. Look them up before you sign.
+learn: Terminate means end. A breach is breaking one of the terms. Liable means legally responsible.
+learn: A notice period is how much warning you must give before ending the contract.
+play: match | Match each contract word to its meaning | Terminate=End the contract; Breach=Breaking one of the terms; Liable=Legally responsible; Notice period=Warning you must give before ending it; Clause=One numbered part of the contract
+check: mcq | What does "breach" mean? | Breaking a term of the contract* | A kind of beach | Signing twice
+check: tf | It's fine to sign a contract with words you don't understand. | false | Look them up or ask first.
+check: mcq | A notice period of 4 weeks means… | You must give 4 weeks' warning before ending it* | It only lasts 4 weeks | You get 4 free weeks
+home: Find three of these words in a real contract or set of terms and conditions.
+skill: contracts
+
+@lesson 2.2 | Cooling-off periods | ❄️ | townhall
+hook: A salesperson knocks on your door and signs you up for a $3,000 water filter. Next day you regret it. Too late?
+learn: {nz:In NZ, if a seller comes to your door uninvited or calls you, you usually have 5 working days to cancel under the Fair Trading Act.~au:In Australia, if a seller comes to your door uninvited or calls you, you usually have 10 business days to cancel under the Australian Consumer Law.}
+learn: Most other buys, like in a shop, have no cooling-off period. Changing your mind isn't a legal right.
+learn: Some contracts include their own cooling-off terms, so read them.
+play: sort | Cooling-off applies, Usually no cooling-off | A door-to-door seller signs you up=Cooling-off applies; You buy shoes in a shop and change your mind=Usually no cooling-off; A cold caller sells you a phone plan=Cooling-off applies; You order a pizza online=Usually no cooling-off; A seller knocks to sell a vacuum cleaner=Cooling-off applies; You buy a jacket and later dislike the colour=Usually no cooling-off | Does a cooling-off period apply?
+check: mcq | {nz:How long do you usually have to cancel an uninvited door-to-door sale in NZ?~au:How long do you usually have to cancel an unsolicited door-to-door sale in Australia?} | {nz:5 working days~au:10 business days}* | 1 hour | 1 year
+check: tf | You can always return something to a shop just because you changed your mind. | false | Change-of-mind returns depend on the shop's own policy.
+check: mcq | Who do the door-to-door sales rules cover? | A seller who turns up uninvited* | A shop you walk into | A friend selling raffle tickets
+home: Look up the uninvited sales rules on {nz:consumerprotection.govt.nz~au:accc.gov.au}.
+skill: consumer
+
+@lesson 2.3 | Auto-renewals | 🔁 | online
+hook: Your free trial ends tonight. Tomorrow it charges $19.99 a month. Did you agree to that?
+learn: Many sign-ups renew automatically unless you cancel in time.
+learn: Check the renewal date, the price after any trial, and how to cancel.
+learn: Set a reminder a few days before a trial ends.
+play: diff | The sign-up page and the full terms. Tap what the sign-up page left out. | Free 7-day trial; Cancel anytime; Full access | Free 7-day trial; Cancel anytime; Full access; Then $19.99 a month; Renews automatically; Price may rise with 30 days' notice
+check: mcq | What's the best way to avoid an unwanted renewal? | Set a reminder before the trial ends* | Hope you remember | Delete the app
+check: tf | Deleting an app always cancels its subscription. | false | You usually have to cancel the subscription itself.
+check: mcq | What should you check before starting a free trial? | The price after the trial and how to cancel* | The logo colour | Nothing
+home: List the subscriptions you or your family pay for, and when each one renews.
+skill: subscriptions
+
+@lesson 2.4 | Jointly and severally | 🏠 | home
+hook: You sign a flat lease with two friends. One moves out and stops paying. Who covers their rent?
+learn: "Jointly and severally liable" means each of you can be held responsible for the whole amount, not just your share.
+learn: If one flatmate stops paying, the landlord can ask the others for all of it.
+learn: A guarantor promises to pay if someone else doesn't. Only agree if you could afford to.
+play: path | A friend asks you to be guarantor on their car loan. | Say no kindly, or ask for time to think through the risk => good: Smart. If they can't pay, you could owe the whole loan. | Sign straight away to be nice => bad: If they stop paying, the lender can chase you for the lot. | Sign without reading it => bad: You've promised to pay a debt you haven't even read.
+check: mcq | What does "jointly and severally liable" mean? | Each person can owe the whole amount* | Everyone only ever pays their share | Nobody owes anything
+check: tf | A guarantor may have to pay someone else's debt. | true
+check: mcq | Before becoming a guarantor, ask yourself… | Could I afford to pay all of it?* | Will they like me more? | Is the pen nice?
+home: Read the liability section of a sample tenancy agreement.
+skill: contracts
+
+@lesson 2.5 | Unfair terms | ⚖️ | townhall
+hook: A contract says the company can change the price whenever it likes, but you can never cancel. Allowed?
+learn: {nz:Under the Fair Trading Act, courts can strike out unfair terms in standard form contracts.~au:Under the Australian Consumer Law, unfair terms in standard form contracts are void, and businesses can be fined for using them.}
+learn: A standard form contract is a take-it-or-leave-it one, like a phone plan or a gym membership.
+learn: One-sided terms, like only the business being able to cancel or change the deal, can be unfair.
+play: scam | Fair term or red flag? | You can cancel with 30 days' notice=real; We can change the price at any time, and you can't cancel=scam; We'll give 30 days' notice of price rises, and you can leave without a fee=real; You must keep paying even if we never provide the service=scam; All fees are listed on page 1=real | One-sided terms can be unfair and may not hold up.
+check: mcq | What's a standard form contract? | A take-it-or-leave-it contract written by the business* | One you write yourself | A handshake deal
+check: tf | You're always bound by every term a business puts in its contract. | false | Unfair terms in standard form contracts can be struck out.
+check: mcq | Which term might be unfair? | Only the business can cancel or change the deal* | You can cancel with notice | Prices are shown clearly
+home: Read a phone plan's terms and find what they say about price changes.
+skill: contracts
+
+@lesson 2.6 | Before you sign | ✍️ | workshop
+hook: The salesperson says, "Just sign here. It's standard." What do you do?
+learn: Take your time. Pressure to sign fast is a warning sign.
+learn: Read it all, ask about anything unclear, and get promises written in.
+learn: Never sign a blank or half-filled form, and keep a copy of what you sign.
+play: build | Build your before-you-sign checklist | Take your time, or take it home; Read every page; Look up words you don't know; Ask questions and get the answers in writing; Check the total cost and how to cancel; Sign only when you're happy, and keep a copy
+check: mcq | "It's standard, just sign." What should you do? | Read it anyway* | Sign fast | Sign a blank copy
+check: tf | Spoken promises are as easy to prove as written ones. | false | Get important promises in writing.
+check: mcq | After you sign, you should… | Keep a copy* | Throw it away | Post it online
+home: Make a "before I sign" checklist in your phone's notes.
+skill: contracts

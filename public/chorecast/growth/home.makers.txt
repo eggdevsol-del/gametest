@@ -74,3 +74,75 @@ check: mcq | {nz:Where can you find emergency advice in NZ?~au:Where can you fin
 home: Check your family's emergency kit and plan together.
 skill: emergency
 
+@lesson 2.1 | Plan the meal | 🗒️ | kitchen
+hook: You're cooking dinner for five. Where do you start?
+learn: Plan before you shop: who's eating, what they like, and how much time you have.
+learn: A balanced plate is about half vegetables, a quarter protein and a quarter carbs like rice or pasta.
+learn: Choose a meal that fits your skills and the time you have.
+play: sort | Vegetables, Protein, Carbs | Broccoli=Vegetables; Chicken=Protein; Rice=Carbs; Carrots=Vegetables; Lentils=Protein; Pasta=Carbs; Spinach=Vegetables; Eggs=Protein | Sort the plate
+check: mcq | About how much of a balanced plate is vegetables? | Half* | None | A tiny corner
+check: tf | It helps to plan a meal before you shop. | true
+check: mcq | You have 30 minutes. Which meal fits best? | A stir-fry* | A roast that takes 2 hours | A three-day stew
+home: Plan one family dinner with a grown-up: who's eating, what, and how long it will take.
+skill: mealplan
+
+@lesson 2.2 | Everything in its place | 🔪 | kitchen
+hook: Halfway through the recipe you realise you haven't chopped the onions, and the pan is smoking. Now what?
+learn: Chefs read the whole recipe first, then prepare everything before they start cooking.
+learn: Chop, measure and lay it all out. Chefs call this mise en place, French for "everything in its place".
+learn: Clean as you go, so the bench stays clear and safe.
+play: build | Get set up like a chef | Read the whole recipe; Get out all the ingredients; Wash and chop the vegetables; Measure the spices and sauces; Get out the pans and tools; Start cooking
+check: mcq | What does mise en place mean? | Everything in its place* | Cook it fast | Eat it now
+check: tf | Reading the whole recipe first helps avoid surprises. | true
+check: mcq | Why clean as you go? | The bench stays clear and safe* | It takes longer | Dishes like being dirty
+home: Before you next cook, lay out every ingredient first.
+skill: cooking
+
+@lesson 2.3 | Work backwards | ⏲️ | kitchen
+hook: Rice takes 15 minutes, chicken 20 and veggies 5. How do you finish them all at once?
+learn: Work backwards from when you want to eat.
+learn: Start the longest thing first and the shortest thing last.
+learn: Dinner at 6:30? Chicken on at 6:10, rice at 6:15, veggies at 6:25.
+play: route | Match each dish to its start time for a 6:30 dinner | Chicken, 20 minutes=6:10; Rice, 15 minutes=6:15; Garlic bread, 10 minutes=6:20; Veggies, 5 minutes=6:25
+check: gap | Dinner is at 7:00. Potatoes take 40 minutes. Start them at _ | 6:20 | 6:20; 6:40; 7:40
+check: tf | Start the longest-cooking dish first. | true
+check: mcq | Why work backwards from mealtime? | So everything is ready together* | To make it harder | To eat at different times
+home: Plan the start time for each part of tonight's dinner.
+skill: timing
+
+@lesson 2.4 | Safe temperatures | 🌡️ | kitchen
+hook: How do you know chicken is cooked? Guessing isn't good enough.
+learn: Cook chicken until the thickest part reaches 75°C, or until the juices run clear.
+learn: Keep your fridge at {nz:2°C to 4°C~au:5°C or below}. Germs grow fastest between 5°C and 60°C.
+learn: Don't leave cooked food out for more than 2 hours.
+play: slider | What temperature should the thickest part of cooked chicken reach? | 40 | 100 | 75 | °C | 2 | 1
+check: mcq | Germs grow fastest between… | 5°C and 60°C* | -20°C and 0°C | 100°C and 200°C
+check: tf | Cooked food is fine sitting on the bench all day. | false | Get it into the fridge within 2 hours.
+check: mcq | What temperature should your fridge be? | {nz:2°C to 4°C~au:5°C or below}* | 15°C | 25°C
+home: Check your fridge's temperature with a grown-up.
+skill: foodsafety
+
+@lesson 2.5 | Feeding everyone | 🥜 | kitchen
+hook: Your cousin has a nut allergy and your friend is vegetarian. Can you make one dinner for everyone?
+learn: Ask about allergies and food needs before you plan.
+learn: For allergies, keep foods apart, use clean tools and check every label. Some allergies can be life-threatening.
+learn: It's often easiest to cook one base meal and add extras on the side.
+play: tap | Check the labels. Tap foods that might not be safe for someone with a nut allergy | 🥜:yes:Peanuts are a common allergy; 🌰:yes:Tree nuts like cashews are too; 🍫:yes:Some chocolate contains nuts or traces of them; 🥕:no; 🍚:no; 🥣:yes:Some muesli has nuts; 🍎:no
+check: mcq | When should you ask about allergies? | Before you plan the meal* | After serving | Never
+check: tf | Some food allergies can be life-threatening. | true
+check: mcq | A smart way to cater for different needs? | One base meal with extras on the side* | Five separate dinners | Ignore the needs
+home: Ask everyone in your family if there are foods they can't or won't eat.
+skill: allergies
+
+@lesson 2.6 | Leftovers | 🥡 | kitchen
+hook: There's half a pot of curry left. How do you keep it safe for tomorrow?
+learn: Cool leftovers quickly and get them into the fridge within 2 hours.
+learn: Split big amounts into shallow containers so they cool faster.
+learn: Eat them within about 2 days, and reheat until steaming hot all the way through.
+play: order | Save the leftover curry safely | Let it stop steaming; Split it into shallow containers; Put the lids on and label them; Get them into the fridge within 2 hours; Reheat until steaming hot tomorrow
+check: mcq | Why use shallow containers? | Food cools faster* | They look nicer | They hold more
+check: tf | Leftovers should be reheated until steaming hot. | true
+check: mcq | How long can most leftovers stay in the fridge? | About 2 days* | A month | Forever
+home: Help pack and label tonight's leftovers.
+skill: foodsafety
+

@@ -74,3 +74,75 @@ check: mcq | Why get down low? | Smoke rises, so the air is clearer down low* | 
 home: Agree a family meeting spot outside your house.
 skill: safety
 
+@lesson 2.1 | Hot, hot, hot | 🔥 | kitchen
+hook: The pot is bubbling on the stove. How do you stay safe?
+learn: Stoves, ovens, kettles and toasters get very hot.
+learn: Turn pot handles in, away from the edge, so nobody knocks them.
+learn: Use oven mitts, and stay back unless a grown-up is helping.
+play: sort | Safe, Not safe | Turning the pot handle in=Safe; Reaching over a hot pot=Not safe; Using oven mitts=Safe; Touching the top of the toaster=Not safe; Asking a grown-up to lift hot things=Safe; Running in the kitchen=Not safe | Safe or not safe?
+check: mcq | Which way should pot handles point? | In, away from the edge* | Out, over the edge | Towards you
+check: tf | Steam from a kettle can burn you. | true
+check: mcq | What do you use to hold a hot tray? | Oven mitts* | Your bare hands | A paper towel
+home: Show a grown-up where the oven mitts live in your kitchen.
+skill: safety
+
+@lesson 2.2 | Sharp things | 🔪 | kitchen
+hook: Knives make cooking easier, but they can cut you. What are the knife rules?
+learn: Only use a knife when a grown-up says it's OK and is watching.
+learn: Carry a knife with the point down, by your side.
+learn: Never drop a knife into a sink full of bubbles. Someone might reach in without seeing it.
+play: order | Pass a knife to a grown-up safely | Ask if they're ready; Hold it by the handle; Keep the point down; Put it on the bench in front of them; Let them pick it up
+check: mcq | How should you carry a knife? | Point down, by your side* | Point up, waving it | While running
+check: tf | It's safe to drop a knife into a sink full of bubbles. | false | Someone could reach in and get cut.
+check: mcq | When can you use a knife? | When a grown-up says OK and is watching* | Whenever you like | When nobody is home
+home: Ask a grown-up to show you how they store knives safely.
+skill: safety
+
+@lesson 2.3 | Clean hands | 🧼 | kitchen
+hook: Germs are too small to see. How do we keep them out of our food?
+learn: Wash your hands with soap and water before you cook or eat.
+learn: Scrub for about 20 seconds. That's singing "Happy Birthday" twice.
+learn: Then dry your hands well on a clean towel.
+play: build | Wash your hands the right way | Wet your hands; Add soap; Scrub for 20 seconds; Rinse off the bubbles; Dry with a clean towel
+check: mcq | How long should you scrub your hands? | About 20 seconds* | 1 second | 10 minutes
+check: tf | You should wash your hands before cooking. | true
+check: mcq | When should you wash your hands? | Before cooking and after the toilet* | Only on birthdays | Never
+home: Sing "Happy Birthday" twice while you wash your hands today.
+skill: hygiene
+
+@lesson 2.4 | Spills and slips | 💦 | kitchen
+hook: Splash! Juice all over the floor. What do you do?
+learn: Wet floors are slippery. Wipe up spills straight away.
+learn: If something glass breaks, step back and tell a grown-up. Don't pick it up.
+learn: Keep the floor clear of toys and bags so nobody trips.
+play: path | You spill your juice on the kitchen floor. | Wipe it up straight away with a cloth => good: Great! Now nobody will slip. | Leave it for later => bad: Someone could slip and get hurt. | Put a toy on top to hide it => bad: Now there's a spill and something to trip over.
+check: mcq | A glass breaks on the floor. What do you do? | Step back and tell a grown-up* | Pick it up fast | Walk on it
+check: tf | Wet floors can be slippery. | true
+check: mcq | Why keep toys off the kitchen floor? | So nobody trips* | So they stay warm | They like it there
+home: Help wipe up a spill or keep the kitchen floor clear this week.
+skill: safety
+
+@lesson 2.5 | Raw and ready | 🍗 | kitchen
+hook: Raw chicken and a salad are on the bench. Why should they stay apart?
+learn: Raw meat, chicken and fish can carry germs that make you sick.
+learn: Keep them away from food you eat without cooking, like salad and fruit.
+learn: Wash your hands, boards and knives after touching raw meat.
+play: tap | Tap the things to wash after touching raw chicken | 🖐️:yes:Hands can carry germs; 🔪:yes:The knife touched the chicken; 🪵:yes:The chopping board touched it too; 🍎:no; 🧸:no; 🍽️:yes:The plate it sat on needs washing
+check: mcq | Should raw chicken touch your salad? | No, keep them apart* | Yes, it adds flavour | Only on weekends
+check: tf | Raw meat can carry germs that make you sick. | true
+check: mcq | After touching raw meat you should… | Wash your hands* | Lick your fingers | Touch the fruit
+home: Help a grown-up use one board for raw meat and another for vegetables.
+skill: hygiene
+
+@lesson 2.6 | If you get burnt | 🚿 | kitchen
+hook: Ouch! You touched a hot pan. What should you do?
+learn: Put the burn under cool running water for 20 minutes.
+learn: Tell a grown-up straight away.
+learn: Don't put butter, ice or toothpaste on a burn. Cool water is best.
+play: order | Put the burn first aid steps in order | Move away from the hot thing; Tell a grown-up; Put the burn under cool running water; Keep it there for 20 minutes; Let a grown-up check if you need a doctor
+check: mcq | What's the best first aid for a small burn? | Cool running water for 20 minutes* | Butter | Ice
+check: tf | You should tell a grown-up if you get burnt. | true
+check: mcq | How long should a burn stay under cool water? | 20 minutes* | 2 seconds | All day
+home: Show a grown-up what you would do for a small burn.
+skill: firstaid
+

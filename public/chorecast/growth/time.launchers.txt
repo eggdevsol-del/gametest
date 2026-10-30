@@ -78,3 +78,75 @@ check: mcq | Who should help tell these stories? | The communities they belong t
 home: Visit a museum website and find one object linked to early trade.
 skill: history
 
+@lesson 2.1 | Measuring inflation | 🧺 | townhall
+hook: How does anyone know prices rose 3% last year? Who checks?
+learn: {nz:Stats NZ~au:The Australian Bureau of Statistics} tracks the prices of a "basket" of things households buy, like food, rent, petrol and power.
+learn: This is the {nz:Consumers Price Index~au:Consumer Price Index} (CPI). Its change over a year is the inflation rate.
+learn: Your own inflation can differ. A renter who drives a lot feels rent and petrol rises more.
+play: slider | A basket cost $200 last year and $206 this year. What's the inflation rate, in %? | 0 | 10 | 3 | % | 0 | 0.5
+check: gap | A basket rises from $500 to $520. Inflation = _% | 4
+check: mcq | What does the CPI track? | The prices of a basket of household goods and services* | Share prices | Only petrol
+check: tf | Your personal inflation rate can differ from the official one. | true
+home: Note the prices of five things your household buys often. Check them again in three months.
+skill: inflation
+
+@lesson 2.2 | Inflation targets | 🎯 | bank
+hook: Why don't central banks aim for 0% inflation?
+learn: {nz:In 1989, New Zealand became the first country to give its central bank an inflation target in law.~au:The Reserve Bank of Australia began targeting inflation in the early 1990s.}
+learn: {nz:The Reserve Bank of New Zealand aims to keep inflation between 1% and 3%, near 2%.~au:The Reserve Bank of Australia aims to keep inflation between 2% and 3%, near 2.5%.}
+learn: A little inflation is seen as healthy. It guards against deflation spirals and leaves room to cut rates.
+play: debate | Should central banks aim for 0% inflation? | No. A small positive target is safer, because it's a buffer against deflation* | Yes. Any inflation is bad | Some economists argue lower targets protect savers better. Most central banks still aim for about 2%.
+check: mcq | {nz:What's the RBNZ's inflation target range?~au:What's the RBA's inflation target range?} | {nz:1% to 3%~au:2% to 3%}* | 10% to 20% | Exactly 0%
+check: tf | {nz:New Zealand was the first country to give its central bank a formal inflation target.~au:The RBA began targeting inflation in the early 1990s.} | true
+check: mcq | Why aim a little above zero? | To keep a buffer against deflation* | To make prices double | It's random
+home: Find the latest inflation rate on {nz:rbnz.govt.nz or stats.govt.nz~au:rba.gov.au or abs.gov.au}.
+skill: centralbank
+
+@lesson 2.3 | The cash rate | 🏦 | bank
+hook: The central bank raises interest rates. Why would that slow price rises?
+learn: {nz:The Reserve Bank sets the Official Cash Rate (OCR).~au:The Reserve Bank sets the cash rate.} It flows through to the rates banks charge and pay.
+learn: Higher rates make borrowing dearer and saving more attractive, so people and businesses spend less, and price rises ease.
+learn: Lower rates do the opposite when the economy is weak. Changes take a year or two to fully work.
+play: sort | Raise rates, Cut rates | Inflation is well above target=Raise rates; The economy is slumping and inflation is low=Cut rates; Everyone is borrowing and prices are racing up=Raise rates; Jobs are disappearing and prices are flat=Cut rates | What would the central bank likely do?
+check: mcq | How do higher interest rates slow inflation? | People and businesses borrow and spend less* | Shops are banned from raising prices | More money is printed
+check: tf | Interest rate changes take time to work through the economy. | true
+check: mcq | Inflation is well below target and the economy is weak. The central bank would likely… | Cut rates* | Raise rates a lot | Close the banks
+home: Find the current {nz:OCR~au:cash rate} and the date of the next decision.
+skill: centralbank
+
+@lesson 2.4 | Hyperinflation | 💸 | museum
+hook: In Germany in 1923, some workers were paid twice a day and rushed to spend before prices rose again. How did it get so bad?
+learn: Hyperinflation is when prices rise extremely fast, sometimes doubling within days.
+learn: Germany in 1923 and Zimbabwe around 2008 printed huge amounts of money to pay their bills.
+learn: Savings became worthless. People turned to foreign money or swapping goods instead.
+play: mystery | Prices rose so fast that banknotes were burned for heat; Some workers were paid twice a day; It came a few years after a world war; It peaked in 1923 | Germany's hyperinflation* | The Great Depression in the US | The 2008 crisis
+check: mcq | What usually causes hyperinflation? | A government printing huge amounts of money* | A good harvest | Low taxes
+check: tf | In hyperinflation, savings can become almost worthless. | true
+check: mcq | Zimbabwe's hyperinflation peaked around… | 2008* | 1066 | 1950
+home: Look up a picture of Zimbabwe's 100 trillion dollar note.
+skill: inflation
+
+@lesson 2.5 | The 1970s and 80s | 📺 | museum
+hook: Your grandparents may remember home loan rates near 20%. How did that happen?
+learn: In the 1970s, oil prices jumped and inflation took off around the world.
+learn: In both New Zealand and Australia, inflation was often above 10% through the 1970s and into the 1980s.
+learn: To beat it, interest rates went very high. {nz:NZ mortgage rates hit about 20% in the late 1980s.~au:Australian home loan rates hit about 17% in 1989.}
+play: path | It's the late 1980s. Inflation is high and your home loan rate is near 20%. | Cut spending and pay down your loan where you can => good: Tough, but wise. Rates came down over the next few years as inflation fell. | Borrow more to buy a second house => bad: At these rates, the repayments could crush you. | Stop paying the mortgage => bad: You'd risk losing your home.
+check: mcq | What helped spark high inflation in the 1970s? | Oil price shocks* | Too little money | Cheap petrol
+check: tf | Very high interest rates were used to bring inflation down. | true
+check: mcq | {nz:NZ mortgage rates in the late 1980s reached about…~au:Australian home loan rates in 1989 reached about…} | {nz:20%~au:17%}* | 2% | 0%
+home: Ask an older relative what interest rates were like when they first borrowed for a home or car.
+skill: inflation
+
+@lesson 2.6 | The 2022 spike | 📈 | museum
+hook: Prices jumped in 2022 and interest rates rose fast. What happened, and did it work?
+learn: After the pandemic, supply chains jammed, energy prices spiked and spending bounced back.
+learn: Inflation peaked at {nz:7.3% in NZ in mid-2022~au:7.8% in Australia at the end of 2022}.
+learn: Central banks raised rates quickly. By late 2024, inflation was back inside both targets, though many families felt the squeeze of higher prices and mortgages.
+play: diff | Early 2021 and mid-2023. Tap what changed. | Inflation under 2%; Interest rates very low; Mortgage repayments low; Supply chains jammed; Inflation target unchanged | Inflation about 6%; Interest rates much higher; Mortgage repayments much higher; Supply chains mostly recovered; Inflation target unchanged
+check: mcq | What helped cause the 2022 inflation spike? | Supply problems and an energy price shock* | Prices set to zero | Everyone saving more
+check: tf | Raising interest rates helped bring inflation back down. | true
+check: mcq | {nz:NZ inflation peaked in 2022 at about…~au:Australian inflation peaked in late 2022 at about…} | {nz:7.3%~au:7.8%}* | 30% | 0.5%
+home: Ask a grown-up how rising prices or interest rates affected your household in 2022 and 2023.
+skill: inflation
+

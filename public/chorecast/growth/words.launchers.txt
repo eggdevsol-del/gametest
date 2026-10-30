@@ -74,3 +74,75 @@ check: mcq | Which is usually more reliable? | An official statistics agency* | 
 home: Fact-check one viral claim with a grown-up.
 skill: critical
 
+@lesson 2.1 | Contract words | 📖 | bank
+hook: "Either party may terminate on 4 weeks' notice. The tenant is liable for any breach." Clear?
+learn: Contracts use special words. Look them up before you sign.
+learn: Terminate means end. A breach is breaking one of the terms. Liable means legally responsible.
+learn: A notice period is how much warning you must give before ending the contract.
+play: match | Match each contract word to its meaning | Terminate=End the contract; Breach=Breaking one of the terms; Liable=Legally responsible; Notice period=Warning you must give before ending it; Clause=One numbered part of the contract
+check: mcq | What does "breach" mean? | Breaking a term of the contract* | A kind of beach | Signing twice
+check: tf | It's fine to sign a contract with words you don't understand. | false | Look them up or ask first.
+check: mcq | A notice period of 4 weeks means… | You must give 4 weeks' warning before ending it* | It only lasts 4 weeks | You get 4 free weeks
+home: Find three of these words in a real contract or set of terms and conditions.
+skill: contracts
+
+@lesson 2.2 | Cooling-off periods | ❄️ | townhall
+hook: A salesperson knocks on your door and signs you up for a $3,000 water filter. Next day you regret it. Too late?
+learn: {nz:In NZ, if a seller comes to your door uninvited or calls you, you usually have 5 working days to cancel under the Fair Trading Act.~au:In Australia, if a seller comes to your door uninvited or calls you, you usually have 10 business days to cancel under the Australian Consumer Law.}
+learn: Most other buys, like in a shop, have no cooling-off period. Changing your mind isn't a legal right.
+learn: Some contracts include their own cooling-off terms, so read them.
+play: sort | Cooling-off applies, Usually no cooling-off | A door-to-door seller signs you up=Cooling-off applies; You buy shoes in a shop and change your mind=Usually no cooling-off; A cold caller sells you a phone plan=Cooling-off applies; You order a pizza online=Usually no cooling-off; A seller knocks to sell a vacuum cleaner=Cooling-off applies; You buy a jacket and later dislike the colour=Usually no cooling-off | Does a cooling-off period apply?
+check: mcq | {nz:How long do you usually have to cancel an uninvited door-to-door sale in NZ?~au:How long do you usually have to cancel an unsolicited door-to-door sale in Australia?} | {nz:5 working days~au:10 business days}* | 1 hour | 1 year
+check: tf | You can always return something to a shop just because you changed your mind. | false | Change-of-mind returns depend on the shop's own policy.
+check: mcq | Who do the door-to-door sales rules cover? | A seller who turns up uninvited* | A shop you walk into | A friend selling raffle tickets
+home: Look up the uninvited sales rules on {nz:consumerprotection.govt.nz~au:accc.gov.au}.
+skill: consumer
+
+@lesson 2.3 | Auto-renewals | 🔁 | online
+hook: Your free trial ends tonight. Tomorrow it charges $19.99 a month. Did you agree to that?
+learn: Many sign-ups renew automatically unless you cancel in time.
+learn: Check the renewal date, the price after any trial, and how to cancel.
+learn: Set a reminder a few days before a trial ends.
+play: diff | The sign-up page and the full terms. Tap what the sign-up page left out. | Free 7-day trial; Cancel anytime; Full access | Free 7-day trial; Cancel anytime; Full access; Then $19.99 a month; Renews automatically; Price may rise with 30 days' notice
+check: mcq | What's the best way to avoid an unwanted renewal? | Set a reminder before the trial ends* | Hope you remember | Delete the app
+check: tf | Deleting an app always cancels its subscription. | false | You usually have to cancel the subscription itself.
+check: mcq | What should you check before starting a free trial? | The price after the trial and how to cancel* | The logo colour | Nothing
+home: List the subscriptions you or your family pay for, and when each one renews.
+skill: subscriptions
+
+@lesson 2.4 | Jointly and severally | 🏠 | home
+hook: You sign a flat lease with two friends. One moves out and stops paying. Who covers their rent?
+learn: "Jointly and severally liable" means each of you can be held responsible for the whole amount, not just your share.
+learn: If one flatmate stops paying, the landlord can ask the others for all of it.
+learn: A guarantor promises to pay if someone else doesn't. Only agree if you could afford to.
+play: path | A friend asks you to be guarantor on their car loan. | Say no kindly, or ask for time to think through the risk => good: Smart. If they can't pay, you could owe the whole loan. | Sign straight away to be nice => bad: If they stop paying, the lender can chase you for the lot. | Sign without reading it => bad: You've promised to pay a debt you haven't even read.
+check: mcq | What does "jointly and severally liable" mean? | Each person can owe the whole amount* | Everyone only ever pays their share | Nobody owes anything
+check: tf | A guarantor may have to pay someone else's debt. | true
+check: mcq | Before becoming a guarantor, ask yourself… | Could I afford to pay all of it?* | Will they like me more? | Is the pen nice?
+home: Read the liability section of a sample tenancy agreement.
+skill: contracts
+
+@lesson 2.5 | Unfair terms | ⚖️ | townhall
+hook: A contract says the company can change the price whenever it likes, but you can never cancel. Allowed?
+learn: {nz:Under the Fair Trading Act, courts can strike out unfair terms in standard form contracts.~au:Under the Australian Consumer Law, unfair terms in standard form contracts are void, and businesses can be fined for using them.}
+learn: A standard form contract is a take-it-or-leave-it one, like a phone plan or a gym membership.
+learn: One-sided terms, like only the business being able to cancel or change the deal, can be unfair.
+play: scam | Fair term or red flag? | You can cancel with 30 days' notice=real; We can change the price at any time, and you can't cancel=scam; We'll give 30 days' notice of price rises, and you can leave without a fee=real; You must keep paying even if we never provide the service=scam; All fees are listed on page 1=real | One-sided terms can be unfair and may not hold up.
+check: mcq | What's a standard form contract? | A take-it-or-leave-it contract written by the business* | One you write yourself | A handshake deal
+check: tf | You're always bound by every term a business puts in its contract. | false | Unfair terms in standard form contracts can be struck out.
+check: mcq | Which term might be unfair? | Only the business can cancel or change the deal* | You can cancel with notice | Prices are shown clearly
+home: Read a phone plan's terms and find what they say about price changes.
+skill: contracts
+
+@lesson 2.6 | Before you sign | ✍️ | workshop
+hook: The salesperson says, "Just sign here. It's standard." What do you do?
+learn: Take your time. Pressure to sign fast is a warning sign.
+learn: Read it all, ask about anything unclear, and get promises written in.
+learn: Never sign a blank or half-filled form, and keep a copy of what you sign.
+play: build | Build your before-you-sign checklist | Take your time, or take it home; Read every page; Look up words you don't know; Ask questions and get the answers in writing; Check the total cost and how to cancel; Sign only when you're happy, and keep a copy
+check: mcq | "It's standard, just sign." What should you do? | Read it anyway* | Sign fast | Sign a blank copy
+check: tf | Spoken promises are as easy to prove as written ones. | false | Get important promises in writing.
+check: mcq | After you sign, you should… | Keep a copy* | Throw it away | Post it online
+home: Make a "before I sign" checklist in your phone's notes.
+skill: contracts
+
