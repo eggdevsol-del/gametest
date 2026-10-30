@@ -222,10 +222,11 @@ p{margin:0}
 
 /* ---------- Tab bar ---------- */
 .tabbar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20;display:flex;gap:2px;padding:6px;border-radius:999px;max-width:calc(100% - 24px)}
-.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:78px;min-height:54px;padding:6px 12px;border-radius:999px;color:var(--on-sky-2);font:800 11px var(--f-round);transition:background .25s,color .25s}
+.tab{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:78px;min-height:54px;padding:6px 12px;border-radius:999px;color:var(--on-sky-2);font:800 11px var(--f-round);transition:background .25s,color .25s}
 .tab .ic{width:24px;height:24px}
 .tab.on{background:rgba(255,255,255,.94);color:#0D1530}
-@media (max-width:420px){ .tab{min-width:0;flex:1;padding:6px 8px} .tabbar{left:12px;right:12px;transform:none;justify-content:space-between} }
+.tab-dot{position:absolute;top:7px;left:calc(50% + 8px);width:10px;height:10px;border-radius:50%;background:#FF5A5F;box-shadow:0 0 0 2px rgba(255,255,255,.9)}
+@media (max-width:480px){ .tab{min-width:0;flex:1;padding:6px 8px} .tabbar{left:12px;right:12px;transform:none;justify-content:space-between} }
 
 /* ---------- Money tab ---------- */
 .tab-head{padding:8px 4px 20px;container-type:inline-size}
@@ -1171,6 +1172,7 @@ const ICONS = {
   up: '<path d="M7 17L17 7M9 7h8v8"/>',
   down: '<path d="M7 7l10 10M17 9v8H9"/>',
   heart: '<path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/>',
+  sprout: '<path d="M12 21v-8.5"/><path d="M12 12.5C12 8.4 9.4 6 5 6c0 4.2 2.7 6.5 7 6.5z"/><path d="M12 15c0-3.7 2.5-6.2 6.8-6.2 0 3.9-2.7 6.2-6.8 6.2z"/>',
   sparkle: '<path d="M12 3l1.9 5.4L19.3 10l-5.4 1.7L12 17.1l-1.9-5.4L4.7 10l5.4-1.6z" fill="currentColor" stroke="none"/><path d="M18.5 15.4l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z" fill="currentColor" stroke="none"/>',
   bank: '<path d="M3.5 9.5L12 4l8.5 5.5"/><path d="M5.5 10.5v7M9.8 10.5v7M14.2 10.5v7M18.5 10.5v7M3.5 20h17"/>',
   list: '<rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="M8 9l1.5 1.5L12.5 7.5M8 15l1.5 1.5 3-3M15 9h1.5M15 15h1.5"/>',
@@ -3288,7 +3290,14 @@ function viewKid() {
     </header>
     ${body}
   </div>
-  <nav class="tabbar glass" aria-label="Sections">${[['today', 'sun', 'Today'], ['money', 'jar', 'Money'], ['market', 'chart', 'Market'], ['proof', 'photo', 'Proof wall']].map(([k, i, l]) => `<button class="tab ${t === k ? 'on' : ''}" data-act="tab" data-tab="${k}" ${t === k ? 'aria-current="page"' : ''}>${ic(i)}<span>${l}</span></button>`).join('')}</nav>`;
+  <nav class="tabbar glass" aria-label="Sections">${[['today', 'sun', 'Today'], ['grow', 'sprout', 'Grow'], ['money', 'jar', 'Money'], ['market', 'chart', 'Market'], ['proof', 'photo', 'Proof wall']].map(([k, i, l]) => k === 'grow' ? growTab(kid, i, l) : `<button class="tab ${t === k ? 'on' : ''}" data-act="tab" data-tab="${k}" ${t === k ? 'aria-current="page"' : ''}>${ic(i)}<span>${l}</span></button>`).join('')}</nav>`;
+}
+// Grow opens Character Growth on top of whichever tab the kid is on. A dot shows when reviews, questions
+// about their week or a grown-up's lesson are waiting.
+function growTab(kid, i, l) {
+  if (!window.Growth) return '';
+  const n = Growth.waiting ? Growth.waiting(kid) : 0;
+  return `<button class="tab" data-act="gOpen" data-id="${kid.id}" data-from="tab" aria-label="${l}: Character Growth${n ? `, ${n} waiting` : ''}">${ic(i)}${n ? '<i class="tab-dot" aria-hidden="true"></i>' : ''}<span>${l}</span></button>`;
 }
 function todayMoney(kid) {
   const d = dkey(); let earned = 0, pending = 0;
@@ -4394,7 +4403,7 @@ function checkPayday() {
   if (fresh.some(j => j.status === 'approved')) { setTimeout(() => { Sound.cash(); FX.rain(); G3.coins(60); }, 250); }
 }
 const ACT = {
-  gOpen: a => window.Growth && Growth.open(a.dataset.id || UI.kidId, { tree: a.dataset.tree }),
+  gOpen: a => window.Growth && Growth.open(a.dataset.id || UI.kidId, { tree: a.dataset.tree, from: a.dataset.from }),
   gEarn: a => window.Growth && Growth.open(a.dataset.id, { need: +a.dataset.need }),
   gFromResult: a => { exitStage(); if (window.Growth) Growth.open(a.dataset.id, {}); },
   authMode: a => { const keep = UI.auth || {}; UI.auth = { mode: a.dataset.m, email: keep.email }; render(); },

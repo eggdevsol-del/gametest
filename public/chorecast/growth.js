@@ -728,6 +728,7 @@ function mount() {
   root.addEventListener('click', onClick);
   document.addEventListener('keydown', e => { if (Grow.open && e.key === 'Escape') { e.stopPropagation(); back(); } }, true);
 }
+const stop = s => /[.?!…]$/.test(s) ? s : s + '.';
 function say(text) { const b = root && root.querySelector('.gw-say'); if (!b) return; b.textContent = local(text || ''); b.classList.toggle('on', !!text); }
 
 async function open(kidId, opts = {}) {
@@ -743,7 +744,7 @@ async function open(kidId, opts = {}) {
   if (!prog(kid).guide) Grow.view = 'guide';
   else if (Grow.tree) Grow.view = 'tree';
   render();
-  C.track('growth.open', { from: opts.need ? 'shop' : opts.tree ? 'tree' : 'card' }, kidId);
+  C.track('growth.open', { from: opts.from || (opts.need ? 'shop' : opts.tree ? 'tree' : 'card') }, kidId);
 }
 function close() {
   if (!root) return; Grow.cleanup.splice(0).forEach(f => f()); try { speechSynthesis.cancel(); } catch (e) {}
@@ -845,7 +846,7 @@ function casesFor(kid) {
 function viewTree(kid, tree) {
   const band = bandOf(kid), pack = packFor(tree.id, band), st = treeStats(kid, tree.id), g = prog(kid);
   const nx = nextIn(kid, tree.id);
-  say(nx ? `Next up in ${tree.name}: ${local(nx.title)}.` : st.total ? `You’ve done every ${tree.name} lesson for now!` : 'Lessons for this tree are on their way.');
+  say(nx ? `Next up in ${tree.name}: ${stop(local(nx.title))}` : st.total ? `You’ve done every ${tree.name} lesson for now!` : 'Lessons for this tree are on their way.');
   const units = pack ? pack.units : [];
   const node = (l, idx) => {
     const done = passed(kid, l.id), open = !done && available(kid, l), md = medal(kid, l), side = idx % 4 === 1 ? 'r' : idx % 4 === 3 ? 'l' : 'c';
@@ -881,7 +882,7 @@ function startLesson(kid, l, mode = 'lesson') {
 function startChallenge(kid, unitId) {
   const [tree, band, un] = unitId.split('.'), u = packFor(tree, band).units.find(x => x.n === +un);
   const pool = shuffle(u.lessons.flatMap(l => l.checks.map((item, i) => ({ item, qid: `${l.id}#${i}`, skill: l.skill }))), Math.random).slice(0, 8);
-  Grow.run = { mode: 'challenge', unit: u, tree, scene: TREE[tree].scene, steps: [{ kind: 'intro', text: `Unit challenge: ${local(u.title)}. ${pool.length} mixed questions, no hints. Get 80% to win the crown.` }, ...pool.map((p, i) => ({ kind: 'check', item: p.item, i, qid: p.qid, skill: p.skill }))], k: 0, res: [], t0: Date.now() };
+  Grow.run = { mode: 'challenge', unit: u, tree, scene: TREE[tree].scene, steps: [{ kind: 'intro', text: `Unit challenge: ${stop(local(u.title))} ${pool.length} mixed questions, no hints. Get 80% to win the crown.` }, ...pool.map((p, i) => ({ kind: 'check', item: p.item, i, qid: p.qid, skill: p.skill }))], k: 0, res: [], t0: Date.now() };
   Grow.view = 'challenge'; Sound.go(); render();
 }
 function startReview(kid) {
@@ -1122,6 +1123,11 @@ function card(kid) {
     ${due || echo ? `<div class="cg-chips">${due ? `<button data-act="gOpen" data-id="${kid.id}">🔁 ${due} review${due === 1 ? '' : 's'} due</button>` : ''}${echo ? `<button data-act="gOpen" data-id="${kid.id}">💡 ${echo} question${echo === 1 ? '' : 's'} about your week</button>` : ''}</div>` : ''}
   </section>`;
 }
+// How many things are waiting for the kid: reviews due, questions about their week and lessons a grown-up set.
+function waiting(kid) {
+  if (!ensureLoaded(kid)) return 0; const g = prog(kid);
+  return dueCards(kid).length + (g.echo || []).length + (g.assigned || []).filter(a => !passed(kid, a.id)).length;
+}
 let echoScanAt = {};
 function scanEchoesSoon(kid) { const t = Date.now(); if (t - (echoScanAt[kid.id] || 0) < 60000) return; echoScanAt[kid.id] = t; setTimeout(() => scanEchoes(kid), 0); }
 function momentCard(kid) {
@@ -1136,7 +1142,7 @@ function treeDoor(kid, treeId) {
 C.ACT.gMoment = a => { open(a.dataset.id, {}).then(() => { const k = Store.kids[a.dataset.id]; if (k && momentFor(k)) startMoment(k); }); };
 
 window.Growth = {
-  card, momentCard, treeDoor, hasLesson, onEvent, open, close,
+  card, momentCard, treeDoor, hasLesson, onEvent, open, close, waiting,
   investorRank: kid => `<span class="card-r">Rank: ${investorRank(kid)}</span>`,
   mastered: kid => mastered(kid),
   parentView: () => parentView(), resetParent: () => { if (Grow.parent) Grow.parent.msg = ''; },

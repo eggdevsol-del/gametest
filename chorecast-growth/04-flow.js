@@ -156,6 +156,11 @@ function card(kid) {
     ${due || echo ? `<div class="cg-chips">${due ? `<button data-act="gOpen" data-id="${kid.id}">🔁 ${due} review${due === 1 ? '' : 's'} due</button>` : ''}${echo ? `<button data-act="gOpen" data-id="${kid.id}">💡 ${echo} question${echo === 1 ? '' : 's'} about your week</button>` : ''}</div>` : ''}
   </section>`;
 }
+// How many things are waiting for the kid: reviews due, questions about their week and lessons a grown-up set.
+function waiting(kid) {
+  if (!ensureLoaded(kid)) return 0; const g = prog(kid);
+  return dueCards(kid).length + (g.echo || []).length + (g.assigned || []).filter(a => !passed(kid, a.id)).length;
+}
 let echoScanAt = {};
 function scanEchoesSoon(kid) { const t = Date.now(); if (t - (echoScanAt[kid.id] || 0) < 60000) return; echoScanAt[kid.id] = t; setTimeout(() => scanEchoes(kid), 0); }
 function momentCard(kid) {
@@ -170,7 +175,7 @@ function treeDoor(kid, treeId) {
 C.ACT.gMoment = a => { open(a.dataset.id, {}).then(() => { const k = Store.kids[a.dataset.id]; if (k && momentFor(k)) startMoment(k); }); };
 
 window.Growth = {
-  card, momentCard, treeDoor, hasLesson, onEvent, open, close,
+  card, momentCard, treeDoor, hasLesson, onEvent, open, close, waiting,
   investorRank: kid => `<span class="card-r">Rank: ${investorRank(kid)}</span>`,
   mastered: kid => mastered(kid),
   parentView: () => parentView(), resetParent: () => { if (Grow.parent) Grow.parent.msg = ''; },
