@@ -288,3 +288,291 @@ check: tf | A headline can make a small change sound big. | true
 home: Find an economic headline with a grown-up and check the real numbers in the story.
 skill: media literacy
 
+@lesson 5.1 | Criminal and civil law | ⚖️ | townhall
+hook: Stealing a bike and arguing over an unpaid rent bond. Are they the same kind of law?
+learn: Criminal law deals with crimes, like theft and assault. The state brings the case and can punish.
+learn: Civil law deals with disputes between people or businesses, like contracts, debts and bonds.
+learn: In criminal cases, guilt must be proved beyond reasonable doubt. Civil cases are decided on what's more likely.
+play: sort | Criminal law, Civil law | Stealing a bike=Criminal law; A landlord keeping your bond unfairly=Civil law; Assault=Criminal law; A builder not finishing a job you paid for=Civil law; Drink driving=Criminal law; A friend not paying back a loan=Civil law | Criminal or civil?
+check: mcq | Who brings a criminal case? | The state, through police or prosecutors* | The victim's friends | A shop
+check: tf | Criminal guilt must be proved beyond reasonable doubt. | true
+check: mcq | A dispute over an unpaid debt is usually… | Civil law* | Criminal law | Not law at all
+home: Find a news story about a court case and decide whether it's criminal or civil.
+skill: law
+
+@lesson 5.2 | Innocent until proven guilty | 🧑‍⚖️ | townhall
+hook: Someone is arrested and everyone online says they did it. Is that the same as guilty?
+learn: Everyone is presumed innocent until proven guilty in court.
+learn: The accused has the right to a lawyer, to hear the evidence against them, and to a fair trial.
+learn: Online pile-ups can harm people who turn out to be innocent, and can even affect a trial.
+play: debate | Should social media decide whether someone is guilty? | No. Courts test the evidence fairly, and everyone deserves a fair trial* | Yes. If lots of people think so, it must be true | People share concerns online because they want justice, and public pressure has sometimes helped get cases investigated.
+check: mcq | Until proven guilty, an accused person is… | Presumed innocent* | Presumed guilty | Already punished
+check: tf | Accused people have the right to a lawyer. | true
+check: mcq | What can online pile-ups do? | Harm people who turn out to be innocent* | Always find the truth | Speed up trials fairly
+home: Talk with a grown-up about why fair trials matter, even for people accused of terrible things.
+skill: law
+
+@lesson 5.3 | The court ladder | 🪜 | townhall
+hook: Someone loses their case but thinks the judge got it wrong. Can they go higher?
+learn: Courts are arranged like a ladder. Most cases start on the bottom rungs.
+learn: If someone thinks the law was applied wrongly, they may be able to appeal to a higher court.
+learn: {nz:The Supreme Court in Wellington is NZ's highest court.~au:The High Court of Australia in Canberra is the highest court in the country.}
+play: order | Put the courts in order, from where most cases start to the highest | {nz:District Court~au:Local or Magistrates Court}; {nz:High Court~au:District or County Court}; {nz:Court of Appeal~au:State Supreme Court}; {nz:Supreme Court~au:High Court of Australia}
+check: mcq | {nz:What's NZ's highest court?~au:What's Australia's highest court?} | {nz:The Supreme Court~au:The High Court of Australia}* | {nz:The District Court~au:The Local Court} | The council
+check: tf | You can sometimes appeal to a higher court. | true
+check: mcq | Where do most cases start? | In the lower courts* | In the highest court | In Parliament
+home: Look up a case your country's highest court decided recently.
+skill: law
+
+@lesson 5.4 | Juries | 👥 | townhall
+hook: In a serious criminal trial, who decides guilty or not guilty? It might be ordinary people like your neighbours.
+learn: A jury is usually 12 ordinary adults chosen from the electoral roll.
+learn: The jury listens to the evidence and decides guilty or not guilty. The judge runs the trial and decides the sentence.
+learn: Once you're 18 and enrolled to vote, you could be called for jury service.
+play: match | Match each person to their job in a trial | Judge=Runs the trial and decides the sentence; Jury=Decides guilty or not guilty; Prosecutor=Presents the case against the accused; Defence lawyer=Speaks up for the accused; Witness=Tells the court what they saw or know
+check: mcq | Who decides guilty or not guilty in a jury trial? | The jury* | The police | The witness
+check: tf | Jurors are ordinary adults. | true
+check: mcq | How many people usually sit on a jury? | 12* | 2 | 100
+home: Ask a grown-up if they've ever been called for jury service.
+skill: law
+
+@lesson 5.5 | Youth justice | 🧒 | townhall
+hook: A 15-year-old gets caught tagging a bus shelter. Do they go to the same court as adults?
+learn: Young people usually go to a {nz:Youth Court~au:Children's or Youth Court}, which focuses on fixing harm and keeping them out of crime.
+learn: {nz:NZ uses family group conferences, where the young person, their family and the victim agree a plan to put things right.~au:Many states use youth justice conferences, where the young person meets the victim and agrees how to put things right.}
+learn: {nz:Under-14s usually can't be charged with a crime, except for very serious ones.~au:The age a child can be charged with a crime differs between states and territories, and it's hotly debated.}
+play: path | A 15-year-old is caught tagging a bus shelter on camera. | Own up and agree a plan to clean it and pay back the damage => good: They put things right and are much less likely to end up in court again. | Deny it, even though there's video => bad: The evidence is clear, and denying it makes things harder. | Do it again because "nothing happened" => bad: Repeat offending can lead to much more serious consequences.
+check: mcq | What does youth justice focus on? | Fixing harm and keeping young people out of crime* | Long prison sentences | Nothing
+check: tf | Victims can take part in youth justice conferences. | true
+check: mcq | {nz:What's an NZ family group conference?~au:What happens at a youth justice conference?} | {nz:A meeting to agree a plan to put things right~au:The young person meets the victim and agrees how to put things right}* | {nz:A family holiday~au:A sports carnival} | {nz:A school assembly~au:A court trial with a jury}
+home: Talk with a grown-up about why second chances matter for young people.
+skill: law
+
+@lesson 5.6 | Reporting a crime | 📞 | townhall
+hook: Someone stole your bike from outside the shops yesterday. Is that a {nz:111~au:000} call?
+learn: Call {nz:111~au:000} when someone is in danger or a crime is happening right now.
+learn: For things that have already happened, call {nz:105 or report online~au:the Police Assistance Line on 131 444 or report online}.
+learn: {nz:To give information without saying who you are, call Crimestoppers on 0800 555 111.~au:To give information without saying who you are, call Crime Stoppers on 1800 333 000.}
+play: sort | Call {nz:111~au:000}, Call {nz:105~au:131 444} | Someone is breaking into a house right now=Call {nz:111~au:000}; Your bike was stolen yesterday=Call {nz:105~au:131 444}; A fight with weapons is happening=Call {nz:111~au:000}; Your phone was taken from your bag last week=Call {nz:105~au:131 444}; A car crash with people hurt=Call {nz:111~au:000}; Graffiti appeared on your fence overnight=Call {nz:105~au:131 444} | Emergency or not?
+check: mcq | Your bike was stolen yesterday. You call… | {nz:105~au:131 444}* | {nz:111~au:000} | A radio station
+check: tf | You can give information to {nz:Crimestoppers~au:Crime Stoppers} without saying who you are. | true
+check: mcq | When should you call {nz:111~au:000}? | Someone is in danger or a crime is happening now* | You lost your pencil | Your bike went missing last month
+home: Save {nz:105~au:131 444} in your phone, and talk with a grown-up about when to use it.
+skill: law
+
+@lesson 6.1 | {nz:He Whakaputanga~au:Federation} | 📜 | museum
+hook: {nz:Five years before Te Tiriti, northern rangatira signed a different document. What did it say?~au:Before 1901, Australia was six separate British colonies. How did they become one country?}
+learn: {nz:He Whakaputanga, the Declaration of Independence, was signed in 1835 by rangatira in the north.~au:Through the 1890s, leaders met at conventions to write a constitution for a united country.}
+learn: {nz:It said that all sovereign power and authority in the land belonged to the rangatira.~au:Voters in the colonies approved it in referendums, and the British Parliament passed it in 1900.}
+learn: {nz:Britain acknowledged it. Many Māori see it as the foundation for Te Tiriti.~au:On 1 January 1901, the colonies federated as the Commonwealth of Australia.}
+play: mcq | {nz:When was He Whakaputanga signed?~au:When did the colonies federate?} | {nz:1835~au:1 January 1901}* | {nz:1935~au:1 January 1801} | {nz:1735~au:1 January 2001}
+check: tf | {nz:He Whakaputanga said sovereign power belonged to the rangatira.~au:Voters in the colonies approved the Constitution in referendums.} | true
+check: mcq | {nz:What is He Whakaputanga in English?~au:How many colonies federated?} | {nz:The Declaration of Independence~au:Six}* | {nz:The Bill of Rights~au:Two} | {nz:The Road Code~au:Twenty}
+check: mcq | Why learn about founding documents? | They still shape how the country works today* | They don't matter | Only for tests
+home: {nz:Look up the 1835 He Whakaputanga on the National Library's He Tohu website.~au:Find out what your state was called and how it voted in the 1890s referendums.}
+skill: history
+
+@lesson 6.2 | {nz:Signing Te Tiriti~au:What the Constitution sets up} | ✍️ | museum
+hook: {nz:Te Tiriti was first signed at Waitangi. How did it end up with about 540 signatures?~au:The Constitution is the rulebook for the country. What does it actually set up?}
+learn: {nz:On 6 February 1840, rangatira and the British Crown's representative, William Hobson, signed at Waitangi.~au:It sets up Parliament, with the House of Representatives and the Senate, to make laws.}
+learn: {nz:Copies were then taken around the country. About 540 rangatira signed, including some women.~au:It sets up the executive, led in name by the Governor-General, and the High Court.}
+learn: {nz:Most signed the Māori text. Some rangatira chose not to sign at all.~au:It lists what the federal Parliament can make laws about. Other areas are left to the states.}
+play: match | {nz:Match each fact about the signing~au:Match each part of the Constitution to its job} | {nz:6 February 1840~au:Parliament}={nz:The first signing at Waitangi~au:Makes federal laws}; {nz:About 540~au:The High Court}={nz:Rangatira who signed~au:Decides what the Constitution means}; {nz:Nine~au:The states}={nz:Sheets of the Treaty~au:Keep powers not given to the Commonwealth}; {nz:William Hobson~au:The Governor-General}={nz:The Crown's representative~au:Represents the King}
+check: mcq | {nz:Where was Te Tiriti first signed?~au:Which two houses make up federal Parliament?} | {nz:Waitangi~au:The House of Representatives and the Senate}* | {nz:Auckland~au:The Lords and the Commons} | {nz:Sydney~au:The Council and the Club}
+check: tf | {nz:Some rangatira chose not to sign Te Tiriti.~au:The Constitution divides powers between the Commonwealth and the states.} | true
+check: mcq | {nz:Most rangatira signed which text?~au:Who decides what the Constitution means?} | {nz:The Māori text~au:The High Court}* | {nz:The English text~au:The police} | {nz:No text~au:The newspapers}
+home: {nz:Look at photos of the nine Treaty sheets on the Archives NZ website.~au:Find a copy of the Constitution online and count how many sections it has.}
+skill: history
+
+@lesson 6.3 | {nz:Two texts, two meanings~au:Changing the Constitution} | 🔍 | museum
+hook: {nz:The Māori and English texts say different things. Why does that matter so much?~au:Australians have voted on changing the Constitution more than 40 times. How often has it worked?}
+learn: {nz:In the English text, chiefs gave the Queen "sovereignty". In the Māori text, they gave "kāwanatanga", or governance.~au:The Constitution can only be changed by a referendum.}
+learn: {nz:The Māori text promised rangatira "tino rangatiratanga", full authority over their lands, homes and taonga.~au:A change needs a double majority: most voters across the country, and most voters in at least four of the six states.}
+learn: {nz:Most rangatira signed the Māori text, so many people say it should carry the most weight.~au:Only 8 proposals have passed. Most have failed.}
+play: sort | {nz:English text~au:Needed for a change}, {nz:Māori text~au:Not needed} | {nz:Sovereignty given to the Queen~au:A majority of voters nationally}={nz:English text~au:Needed for a change}; {nz:Kāwanatanga, or governance, given to the Crown~au:The Prime Minister's signature alone}={nz:Māori text~au:Not needed}; {nz:Full, exclusive and undisturbed possession of lands~au:A majority of voters in at least four states}={nz:English text~au:Needed for a change}; {nz:Tino rangatiratanga for rangatira~au:Every single voter saying yes}={nz:Māori text~au:Not needed}; {nz:Signed by 39 rangatira~au:A referendum}={nz:English text~au:Needed for a change}; {nz:Signed by most rangatira~au:A majority in every single state}={nz:Māori text~au:Not needed} | {nz:Which text is it about?~au:Is it needed to change the Constitution?}
+check: mcq | {nz:What does "kāwanatanga" mean?~au:What's needed to change the Constitution?} | {nz:Governance~au:A referendum with a double majority}* | {nz:Sovereignty~au:A tweet} | {nz:A canoe~au:The Prime Minister's OK only}
+check: tf | {nz:The Māori and English texts of Te Tiriti differ.~au:Most proposals to change the Constitution have failed.} | true
+check: mcq | {nz:Which text did most rangatira sign?~au:How many proposals to change the Constitution have passed?} | {nz:The Māori text~au:8}* | {nz:The English text~au:40} | {nz:Neither~au:None}
+home: {nz:Read the short English translation of the Māori text on the NZ History website.~au:Read the section of the Constitution that explains how it can be changed.}
+skill: history
+
+@lesson 6.4 | {nz:Land and the New Zealand Wars~au:The 1967 referendum} | ⚔️ | museum
+hook: {nz:Te Tiriti promised protection of Māori land. What happened next?~au:In 1967, over 90% of voters said yes. What were they voting for?}
+learn: {nz:As settlers arrived, pressure grew to buy and take Māori land.~au:The 1967 referendum changed the Constitution so Aboriginal and Torres Strait Islander people would be counted in the census.}
+learn: {nz:From the 1840s to the 1870s, wars were fought between the Crown and some iwi.~au:It also let the federal Parliament make laws for Aboriginal and Torres Strait Islander people.}
+learn: {nz:The Crown confiscated large areas of land, and a new land court made it easier to buy the rest. Many iwi lost most of their land.~au:It didn't give citizenship or the vote. Those are common myths.}
+play: path | {nz:You're researching the New Zealand Wars for a project.~au:A friend says the 1967 referendum gave Aboriginal people the vote.} | {nz:Read sources from iwi, historians and the Crown, and compare them~au:Check the facts and explain what it really changed} => good: {nz:You see many sides and build a fair picture.~au:You helped your friend learn the real story.} | {nz:Use just one website and copy it~au:Agree with them to avoid an argument} => bad: {nz:You'd only get one view, and might miss a lot.~au:The myth keeps spreading.} | {nz:Skip it because it's uncomfortable~au:Say history doesn't matter} => bad: {nz:Hard history still shapes life today.~au:It still shapes life today.}
+check: mcq | {nz:When were the New Zealand Wars fought?~au:What did the 1967 referendum change?} | {nz:From the 1840s to the 1870s~au:It let Aboriginal and Torres Strait Islander people be counted in the census}* | {nz:In the 1990s~au:It gave everyone a free car} | {nz:Never~au:It moved the capital}
+check: tf | {nz:The Crown confiscated large areas of Māori land.~au:Over 90% of voters said yes in 1967.} | true
+check: tf | {nz:Land loss had no lasting effect.~au:The 1967 referendum gave Aboriginal people the vote.} | false | {nz:It still affects many iwi today.~au:That's a myth. It changed the census and who could make laws.}
+home: {nz:Find out whether there's a memorial to the New Zealand Wars near you.~au:Look up the 1967 referendum on the National Museum of Australia website.}
+skill: history
+
+@lesson 6.5 | {nz:The Waitangi Tribunal~au:The Stolen Generations} | 🏛️ | museum
+hook: {nz:How do you put right promises that were broken over a century ago?~au:Why did a Prime Minister say sorry to the nation in 2008?}
+learn: {nz:The Waitangi Tribunal was set up in 1975 to hear claims that the Crown broke Treaty promises.~au:For decades, governments took many Aboriginal and Torres Strait Islander children from their families.}
+learn: {nz:Since 1985 it has been able to look at claims going back to 1840.~au:These children are known as the Stolen Generations. A 1997 report, Bringing Them Home, told their stories.}
+learn: {nz:Settlements are agreed between iwi and the Crown. Many include an apology, land and money.~au:On 13 February 2008, Prime Minister Kevin Rudd made a National Apology in Parliament.}
+play: order | {nz:Put the steps of a Treaty claim in order~au:Put these events in order} | {nz:Iwi make a claim to the Tribunal~au:Children are taken from their families over many decades}; {nz:The Tribunal hears evidence~au:The Bringing Them Home report is published in 1997}; {nz:The Tribunal reports on what went wrong~au:Communities keep calling for an apology}; {nz:Iwi and the Crown negotiate a settlement~au:The National Apology is made on 13 February 2008}
+check: mcq | {nz:When was the Waitangi Tribunal set up?~au:Who made the National Apology in 2008?} | {nz:1975~au:Prime Minister Kevin Rudd}* | {nz:1840~au:The King} | {nz:2020~au:A sports star}
+check: tf | {nz:Many Treaty settlements include an apology.~au:The 1997 report was called Bringing Them Home.} | true
+check: mcq | {nz:Since 1985, how far back can the Tribunal look?~au:Who are the Stolen Generations?} | {nz:To 1840~au:Children taken from their families by governments}* | {nz:Only last year~au:A sports team} | {nz:To 1985 only~au:A rock band}
+home: {nz:Find out whether iwi in your area have a Treaty settlement.~au:Watch or read the 2008 National Apology with a grown-up.}
+skill: history
+
+@lesson 6.6 | {nz:What's in a constitution?~au:What's not in the Constitution?} | 📖 | museum
+hook: {nz:Many countries have one written constitution. Does NZ?~au:The Constitution sets up how Australia is governed. Does it mention the Prime Minister?}
+learn: {nz:NZ has no single written constitution. Its rules are spread across laws, court decisions and conventions.~au:No! The Prime Minister and Cabinet aren't mentioned. They work by tradition, called conventions.}
+learn: {nz:Te Tiriti is seen as a founding document, and its principles appear in many laws.~au:Since 1967, the Constitution doesn't mention Aboriginal and Torres Strait Islander peoples at all.}
+learn: {nz:Because there's no single document, Parliament can change most constitutional rules with an ordinary law.~au:That's one reason some people want First Nations peoples recognised in it.}
+play: mcq | {nz:Does NZ have one single written constitution?~au:Is the Prime Minister mentioned in the Constitution?} | No* | {nz:Yes, a very long one~au:Yes, on every page} | {nz:Yes, written in 2020~au:Only in the title}
+check: tf | {nz:Te Tiriti is seen as a founding document of NZ.~au:Conventions are traditions about how government works.} | true
+check: mcq | {nz:Where are NZ's constitutional rules found?~au:Since 1967, does the Constitution mention First Nations peoples?} | {nz:Across laws, court decisions and conventions~au:No}* | {nz:On one stone tablet~au:Yes, on the first page} | {nz:Nowhere~au:Only in the index}
+check: mcq | Why read founding documents yourself? | So you can form your own view* | So you can skip history | It doesn't help
+home: {nz:Find the Constitution Act 1986 online and read its first few sections.~au:Read the opening words of the Constitution online.}
+skill: history
+
+@lesson 7.1 | Climate change | 🌡️ | garden
+hook: Floods, fires and heatwaves seem to be in the news more often. What's going on?
+learn: Burning coal, oil and gas releases greenhouse gases, which trap heat and warm the planet.
+learn: {nz:In NZ, about half of emissions come from farming, mostly methane from cows and sheep.~au:In Australia, the biggest share of emissions comes from burning coal and gas for electricity.}
+learn: A warmer world means more extreme weather, rising seas and changes to farming and nature.
+play: match | Match each cause to an effect of a warming world | Hotter, drier summers=More bushfire risk; Warmer oceans=Stronger storms and coral bleaching; Melting ice=Rising sea levels; Heavier downpours=More flooding
+check: mcq | What do greenhouse gases do? | Trap heat and warm the planet* | Cool the planet | Nothing
+check: tf | Rising sea levels are one effect of a warming world. | true
+check: mcq | {nz:Where does about half of NZ's emissions come from?~au:What's the biggest source of Australia's emissions?} | {nz:Farming~au:Burning coal and gas for electricity}* | {nz:Bicycles~au:Bicycles} | {nz:Libraries~au:Libraries}
+home: Find out one way your family could cut its emissions, like walking more.
+skill: environment
+
+@lesson 7.2 | Climate promises | 🤝 | townhall
+hook: Almost every country signed an agreement in Paris in 2015. What did they promise?
+learn: The Paris Agreement aims to keep global warming well below 2°C, and to try for 1.5°C.
+learn: Each country sets its own targets for cutting emissions, and updates them every five years.
+learn: {nz:NZ's law aims for net zero emissions of most greenhouse gases by 2050.~au:Australia's law aims for net zero emissions by 2050.}
+play: debate | Should rich countries cut emissions faster than poorer ones? | Many argue yes, because they've emitted more for longer and can afford it* | No country should do anything at all | Others say every big emitter needs to cut fast, wherever it is, because the planet only feels the total.
+check: mcq | What does the Paris Agreement aim for? | Keeping warming well below 2°C* | Making summers hotter | Nothing
+check: tf | Countries set their own emissions targets under the Paris Agreement. | true
+check: mcq | What year do both our countries aim to reach net zero by? | 2050* | 2500 | 2026
+home: Look up one thing your local council is doing about climate change.
+skill: environment
+
+@lesson 7.3 | Trade and tariffs | 🚢 | townhall
+hook: A $100 jacket from overseas suddenly costs $115. Why?
+learn: A tariff is a tax on imported goods. It usually pushes prices up for buyers.
+learn: Free trade agreements cut tariffs between countries, so goods can be traded more cheaply.
+learn: In 2025, the United States put new tariffs on goods from many countries, including ours.
+play: slider | A jacket costs $100 to import. A 15% tariff is added. What does it cost now? | 100 | 150 | 115 | $ | 0 | 1
+check: mcq | What is a tariff? | A tax on imported goods* | A free gift | A type of ship
+check: tf | Free trade agreements usually cut tariffs. | true
+check: gap | A $200 import with a 10% tariff costs $_ | 220
+home: Find a product at home that was imported, and work out what a 10% tariff would add.
+skill: economy
+
+@lesson 7.4 | Supply chains | 🔗 | stall
+hook: Your T-shirt might have travelled through four countries before it reached you. How?
+learn: A supply chain is all the steps it takes to make something and get it to you.
+learn: When one step breaks, like a blocked canal or a factory closing, things can run short everywhere.
+learn: Supply chains can hide problems, like unsafe factories or child labour, so some shoppers check where things come from.
+play: build | Follow a T-shirt's supply chain | Cotton is grown in India; It's spun into thread in China; The shirt is sewn in Bangladesh; It's shipped across the ocean; It's sold in a shop near you
+check: mcq | What is a supply chain? | All the steps to make something and get it to you* | A metal chain in a shop | A type of bike lock
+check: tf | When one step in a supply chain breaks, things can run short. | true
+check: mcq | Why do some shoppers check where things come from? | To avoid unsafe factories or child labour* | To make shopping slower | No reason
+home: Check the labels on three pieces of clothing. Where were they made?
+skill: economy
+
+@lesson 7.5 | Aid | 🤲 | townhall
+hook: A cyclone flattens homes on a Pacific island. Who helps, and how?
+learn: Humanitarian aid is fast help after a disaster, like food, water, shelter and medical care.
+learn: Development aid is longer-term help, like schools, clean water and training.
+learn: {nz:Most of NZ's aid goes to Pacific countries.~au:Most of Australia's aid goes to countries in the Pacific and South-East Asia.}
+play: sort | Humanitarian aid, Development aid | Emergency water after a cyclone=Humanitarian aid; Building a new school=Development aid; Tents for families who lost their homes=Humanitarian aid; Training nurses over five years=Development aid; Medical teams after an earthquake=Humanitarian aid; Helping farmers grow more food=Development aid | Which kind of aid is it?
+check: mcq | What's humanitarian aid? | Fast help after a disaster* | A ten-year plan | A type of trade
+check: tf | Development aid is longer-term help. | true
+check: mcq | {nz:Where does most of NZ's aid go?~au:Where does most of Australia's aid go?} | {nz:Pacific countries~au:The Pacific and South-East Asia}* | {nz:Antarctica~au:Antarctica} | Nowhere
+home: Look up a recent disaster and find out how our country helped.
+skill: global
+
+@lesson 7.6 | Refugees | 🏕️ | townhall
+hook: Imagine having to leave your home with only a bag. Why would anyone do that?
+learn: Refugees are people forced to flee their country because of war or because they're in danger.
+learn: Around the world, more than 100 million people have been forced from their homes.
+learn: {nz:NZ resettles 1,500 refugees a year through its refugee quota.~au:Australia's Humanitarian Program has 20,000 places a year.}
+play: chat | A new student has just arrived as a refugee | them: Hi. I'm new. My English is still getting better. | me: Hi! Welcome. Want to sit with us at lunch?*/Why are you here?/Whatever | them: Thank you. I don't know where anything is yet. | me: I'll show you around. The library's my favourite spot*/Figure it out yourself/Ask someone else
+check: mcq | What is a refugee? | Someone forced to flee war or danger* | A tourist | A student on holiday
+check: tf | More than 100 million people have been forced from their homes. | true
+check: mcq | {nz:How many refugees does NZ resettle each year through its quota?~au:How many places are in Australia's Humanitarian Program each year?} | {nz:1,500~au:20,000}* | {nz:15~au:20} | {nz:15 million~au:20 million}
+home: Find out about a group in your area that helps new refugee families.
+skill: global
+
+@lesson 8.1 | Petitions to Parliament | 📜 | townhall
+hook: You want Parliament to change a law. Can a teenager start a petition?
+learn: {nz:Anyone can start a petition to Parliament on its website. An MP presents it, and a select committee looks at it.~au:Anyone can start an e-petition to the House of Representatives on Parliament's website. It stays open for signatures for four weeks.}
+learn: A strong petition has one clear ask and a short reason why.
+learn: Facts and real stories matter more than just the number of signatures.
+play: build | Build a strong petition | A clear title; Who it's to: the House of Representatives; One clear ask; A short reason why, with a fact; Share it to collect signatures; Follow up with your MP
+check: mcq | What makes a petition strong? | One clear ask with good reasons* | Lots of different asks | Insults
+check: tf | Young people can start petitions to Parliament. | true
+check: mcq | {nz:Who presents a petition to the NZ Parliament?~au:How long is an Australian House e-petition open for signatures?} | {nz:An MP~au:Four weeks}* | {nz:A celebrity~au:Ten years} | {nz:Nobody~au:One hour}
+home: Look at the petitions open on your Parliament's website right now.
+skill: advocacy
+
+@lesson 8.2 | Writing to your MP | ✉️ | townhall
+hook: Your bus keeps getting cancelled. Would your MP actually read your email?
+learn: MPs represent you, and they do read messages from people in their area, including young people.
+learn: Keep it short: who you are, what the problem is, how it affects you and one clear ask.
+learn: Be polite and personal. Your own story is more powerful than a copied template.
+play: diff | A weak email and a strong one. Tap what changed. | Dear MP; Fix the buses; Bye | Dear Ms Smith; I'm a Year 9 student in your area, and my bus is cancelled twice a week; Could you raise this with the council and the bus company?; Thank you for your time
+check: mcq | What makes an email to your MP strong? | Your own story and one clear ask* | Lots of capital letters | A copied template
+check: tf | MPs read messages from young people. | true
+check: mcq | Which is a clear ask? | Could you raise this with the council?* | Fix everything | Do stuff
+home: Find out who your MP is and draft a short email about something you care about.
+skill: advocacy
+
+@lesson 8.3 | Protest rights and safety | ✊ | townhall
+hook: You want to join a school climate strike. What are your rights, and how do you stay safe?
+learn: {nz:The NZ Bill of Rights Act protects the right to peaceful assembly.~au:Australia has no national bill of rights, but the High Court says the Constitution protects talking about politics. State laws set rules for protests.}
+learn: Protest must stay peaceful. Blocking emergency vehicles or damaging property can break the law.
+learn: Go with friends, tell a parent where you'll be, know the plan and follow police directions.
+play: path | You're going to a school climate strike in the city. | Go with friends, tell a parent and stay peaceful => good: You had your say, safely and within the law. | Help block an ambulance to get attention => bad: That puts lives at risk and can break the law. | Go alone without telling anyone => ok: You can still have your say, but going with others and telling someone is much safer.
+check: mcq | Which protest action can break the law? | Blocking emergency vehicles* | Holding a sign | Chanting peacefully
+check: tf | Telling a parent where you'll be helps keep you safe. | true
+check: mcq | {nz:Which law protects peaceful assembly in NZ?~au:Who sets many protest rules in Australia?} | {nz:The Bill of Rights Act~au:State laws}* | {nz:The Road Code~au:Sports clubs} | {nz:No law~au:Nobody}
+home: Talk with a grown-up about a protest they've seen or joined, and how it went.
+skill: advocacy
+
+@lesson 8.4 | Using the media | 📰 | townhall
+hook: Your campaign needs more people to know about it. How do you get the word out?
+learn: You can write to local newspapers, contact local radio, or share your campaign online.
+learn: Journalists look for clear facts, real people's stories and good photos.
+learn: Check every fact. One wrong claim can make people stop trusting your whole campaign.
+play: sort | Strengthens your campaign, Weakens it | A short, clear letter to the local paper=Strengthens your campaign; Sharing a rumour you didn't check=Weakens it; A real story from someone affected=Strengthens your campaign; Insulting people who disagree=Weakens it; A photo of the problem, like a broken footpath=Strengthens your campaign; Exaggerating the numbers=Weakens it | Strengthens or weakens?
+check: mcq | What do journalists look for? | Clear facts and real stories* | Rumours | Insults
+check: tf | One wrong claim can hurt trust in your whole campaign. | true
+check: mcq | Which helps a campaign? | A real story from someone affected* | Exaggerated numbers | Insults
+home: Find a letter to the editor in a local paper or news site and see how it makes its case.
+skill: advocacy
+
+@lesson 8.5 | Young people who spoke up | 🧒 | townhall
+hook: Can young people really change things before they can even vote?
+learn: In 2019, tens of thousands of students in both countries joined School Strike 4 Climate.
+learn: {nz:The Make It 16 campaign went to court. In 2022, the Supreme Court said a voting age of 18 was inconsistent with the Bill of Rights Act.~au:In 2021, eight teenagers took the environment minister to court over a coal mine. They lost on appeal, but the case drew national attention.}
+learn: {nz:Parliament still decides the voting age, and it's still 18, but the case started a national debate.~au:Court cases, strikes and petitions can all push leaders to act, even when they don't win straight away.}
+play: match | Match each kind of youth action to what it is | {nz:Make It 16~au:The teens' climate court case}={nz:A campaign to lower the voting age to 16~au:Teenagers taking a minister to court}; School Strike 4 Climate=Students walking out of class for climate action; Youth parliament=Young people debating like MPs; A petition=Collecting signatures to ask for a change
+check: mcq | What was School Strike 4 Climate? | Students walking out of class for climate action* | A sports carnival | A school holiday
+check: tf | Young people can push for change before they can vote. | true
+check: mcq | {nz:What did the Supreme Court say in 2022?~au:What happened in the teens' climate case?} | {nz:A voting age of 18 was inconsistent with the Bill of Rights Act~au:They lost on appeal, but the case drew national attention}* | {nz:Kids can vote at 10~au:They won a new car} | {nz:Nothing~au:It was never heard}
+home: Find out about a young person in your country who has campaigned for change.
+skill: advocacy
+
+@lesson 8.6 | Plan a campaign | 🗺️ | townhall
+hook: You want a safe crossing outside school. Where do you start?
+learn: Start with one clear goal, and work out who can actually make the decision.
+learn: Gather evidence, find allies, and choose tactics like a petition, a meeting or media.
+learn: Set a timeline, and celebrate small wins along the way.
+play: order | Plan a campaign. Put the steps in order. | Choose one clear goal; Work out who makes the decision; Gather evidence and real stories; Find allies who care too; Choose your tactics; Set a timeline and celebrate small wins
+check: mcq | What's the first step in a campaign? | Choose one clear goal* | Start shouting | Make a logo
+check: tf | Knowing who makes the decision helps your campaign. | true
+check: mcq | Who might decide on a school crossing? | Usually the local council* | The Prime Minister personally | A sports team
+home: Pick an issue at school or in your area and plan the first three steps of a campaign.
+skill: advocacy
+

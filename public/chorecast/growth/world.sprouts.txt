@@ -285,3 +285,292 @@ check: tf | You can help at community events with a grown-up. | true
 home: Find a community event near you with a grown-up.
 skill: community
 
+@lesson 5.1 | Secret votes | 🤫 | townhall
+hook: Your best friend is watching when you put your hand up to vote. Is it easy to choose what you really want?
+learn: In a secret vote, nobody sees what you choose. You write it on paper and put it in a box.
+learn: Secret votes help people choose what they really think, without feeling pushed.
+learn: When grown-ups vote for the government, they vote in secret behind a little screen.
+play: sort | Hands-up vote is fine, Secret vote is better | Choosing a game at lunch=Hands-up vote is fine; Choosing a class captain=Secret vote is better; Grown-ups choosing the government=Secret vote is better; Pizza or pasta for family dinner=Hands-up vote is fine; Picking a team name with friends=Hands-up vote is fine; Choosing who gets a school prize=Secret vote is better | Which kind of vote suits each choice?
+check: mcq | Why do we sometimes vote in secret? | So people can choose without feeling pushed* | So nobody votes | To make it take longer
+check: tf | When grown-ups vote for the government, it's a secret vote. | true
+check: mcq | Where do secret votes go? | Into a ballot box* | On a big poster | Into the bin
+home: Hold a secret family vote with paper slips and a box.
+skill: voting
+
+@lesson 5.2 | Winning and losing | 🤝 | townhall
+hook: Your idea lost the class vote. You feel cross. What now?
+learn: It's OK to feel sad or cross when your choice loses.
+learn: Being a good loser means accepting the result and joining in anyway.
+learn: Being a good winner means not bragging, and being kind to people who voted differently.
+play: chat | Your friend's idea lost the vote | them: My idea lost. That's so unfair! | me: It's OK to feel sad. Maybe we can do your idea another time*/Ha ha, my idea won!/Let's not play at all then | them: I guess. Will you play the winning game with me? | me: Yes! Come on, it'll be fun*/No, go away/Only if you say my idea was best
+check: mcq | Your choice lost a vote. What's a good thing to do? | Accept it and join in* | Sulk and refuse to play | Shout at the winners
+check: tf | Good winners don't brag. | true
+check: mcq | How can you be a good winner? | Be kind to people who voted differently* | Laugh at them | Make them go last
+home: Play a game with your family and practise being a good winner and a good loser.
+skill: voting
+
+@lesson 5.3 | Voting for a person | 🧑‍🏫 | townhall
+hook: Your class is choosing a class captain. Who should you vote for?
+learn: When we vote for a person, we're choosing someone to lead or speak for us.
+learn: Think about who would be fair, listen to everyone and help the class.
+learn: Being your best friend or the most popular isn't the same as being a good leader.
+play: sort | Good reason to vote for them, Not a good reason | They listen to everyone=Good reason to vote for them; They're my best friend=Not a good reason; They have great ideas for the class=Good reason to vote for them; They have the coolest shoes=Not a good reason; They're fair and kind=Good reason to vote for them; They promised me lollies=Not a good reason | Good reason or not?
+check: mcq | What makes a good class captain? | Being fair and listening to everyone* | Having the coolest shoes | Giving out lollies for votes
+check: tf | The most popular person is always the best leader. | false | A good leader is fair, listens and helps.
+check: mcq | When you vote for a person, you're choosing… | Someone to lead or speak for you* | A new best friend | A prize
+home: Talk with a grown-up about what makes a good leader.
+skill: voting
+
+@lesson 5.4 | Counting votes | 🔢 | townhall
+hook: The votes are in. How do you count them fairly?
+learn: Count every vote carefully. It helps to have two people count.
+learn: The choice with the most votes wins. You can work out how many more votes it got.
+learn: If the counts don't match, count again together.
+try: Pizza 7, pasta 5. Pizza wins by 2 :: gap | Beach 9, pool 6. Beach wins by _ | 3
+play: path | Two kids count the votes and get different totals. | Count them again together, slowly => good: Now everyone agrees on the result, and it's fair. | Just pick the total you like best => bad: That isn't fair to the people who voted. | Throw the votes away and start a new game => bad: Everyone's votes would be wasted.
+check: gap | Red team 12, blue team 8. Red wins by _ | 4
+check: mcq | Two counts don't match. What should you do? | Count again together* | Pick your favourite | Stop counting
+check: tf | It helps to have two people count votes. | true
+home: Run a family vote and have two people count the results.
+skill: voting
+
+@lesson 5.5 | Who gets to vote? | 🗳️ | townhall
+hook: Can kids vote for the government?
+learn: In {nz:New Zealand~au:Australia}, grown-ups aged 18 and over can vote to choose the government.
+learn: Kids can't vote for the government yet, but you can vote at school and in your family.
+learn: Your ideas still matter. You can tell grown-ups what you think about things that affect you.
+play: tap | Tap the people who can vote for the government | 👵:yes:Grandma is a grown-up; 👨:yes:Dad is a grown-up; 👶:no; 🧒:no; 🐶:no; 🧑:yes:Your 18-year-old cousin
+check: mcq | How old do you need to be to vote for the government? | 18* | 8 | 80
+check: tf | Kids can share their ideas even before they can vote. | true
+check: mcq | Where can kids vote now? | At school and in their family* | For the government | Nowhere
+home: Ask a grown-up what it's like to vote for the government.
+skill: voting
+
+@lesson 5.6 | Voting at home | 🏠 | home
+hook: Should your family vote on everything, even bedtime?
+learn: Family votes can help choose things like a movie, a meal or a weekend outing.
+learn: Listen to everyone's reasons before you vote.
+learn: Some things aren't for voting, like safety rules and health. Grown-ups decide those.
+play: debate | Should kids get a vote on bedtime? | Kids can share their ideas, but grown-ups decide health things like sleep* | Yes, and the kids' vote should always win | Some families let kids help choose some things, like a weekend outing, so everyone feels heard.
+check: mcq | What's good to do before a family vote? | Listen to everyone's reasons* | Shout your choice | Vote twice
+check: tf | Safety rules are decided by grown-ups, not votes. | true
+check: mcq | Which is a good thing for a family vote? | Choosing a movie for Friday night* | Whether to wear a seatbelt | Whether to brush your teeth
+home: Hold a family vote about a fun weekend activity.
+skill: voting
+
+@lesson 6.1 | Beach care | 🏖️ | island
+hook: Sand, shells, rock pools and waves. How can you leave the beach as lovely as you found it?
+learn: Take all your rubbish home, even tiny bits like lolly wrappers and bottle caps.
+learn: Look at rock pool creatures gently, then leave them where you found them.
+learn: Stay off sand dunes. The plants on them hold the sand in place.
+play: sort | Helps the beach, Hurts the beach | Taking your rubbish home=Helps the beach; Leaving a chip packet on the sand=Hurts the beach; Putting a crab back where you found it=Helps the beach; Sliding down the sand dunes=Hurts the beach; Picking up a plastic bottle you see=Helps the beach; Taking rock pool creatures home in a bucket=Hurts the beach | Helps or hurts?
+check: mcq | You found a crab in a rock pool. What should you do after looking? | Put it back where you found it* | Take it home | Keep it in a bucket
+check: tf | The plants on sand dunes help hold the sand in place. | true
+check: mcq | What should you do with rubbish at the beach? | Take it home or put it in a bin* | Bury it in the sand | Leave it for the waves
+home: Next time you visit a beach, pick up three pieces of rubbish with a grown-up.
+skill: environment
+
+@lesson 6.2 | Only rain down the drain | 🌧️ | townhall
+hook: Where does the water go when it runs into the drain on your street?
+learn: Most street drains carry rainwater straight to streams, rivers and the sea.
+learn: Anything else that goes down them, like litter, paint or soapy water, ends up there too.
+learn: Only rain should go down a street drain.
+play: order | Where litter in a drain goes. Put it in order. | A wrapper is dropped on the street; Rain washes it into the drain; The drain pipe carries it to a stream; The stream carries it to the sea; Fish and birds can get hurt by it
+check: mcq | Where do most street drains go? | To streams, rivers and the sea* | To a big rubbish bin | Nowhere
+check: tf | Only rain should go down a street drain. | true
+check: mcq | Which should never go down a street drain? | Paint* | Rain | Nothing, it's all fine
+home: Find the drains on your street with a grown-up and check they're clear of rubbish.
+skill: environment
+
+@lesson 6.3 | Doggy do's | 🐕 | townhall
+hook: Your dog does a poo on the footpath. Whose job is it to clean up?
+learn: Dog owners pick up their dog's poo in a bag and put it in a bin.
+learn: Poo left behind can make people sick, and rain can wash it into streams.
+learn: Keep dogs on a lead where signs say so. It keeps people, wildlife and dogs safe.
+play: path | Your dog does a poo on the footpath. | Pick it up with a bag and put it in a bin => good: The footpath stays clean and safe for everyone. | Leave it there => bad: Someone could step in it, and it can make people sick. | Kick it into the drain => bad: It washes into streams and the sea.
+check: mcq | What should you do when your dog poos on a walk? | Pick it up in a bag and bin it* | Leave it | Kick it into a drain
+check: tf | Dogs should be on a lead where signs say so. | true
+check: mcq | Why pick up dog poo? | It can make people sick* | It's fun | It's not needed
+home: Next time you walk a dog, take poo bags with you.
+skill: community
+
+@lesson 6.4 | Wildlife friends | 🐦 | garden
+hook: A {nz:tūī~au:kookaburra} is sitting on the fence. How can you be a good neighbour to wild animals?
+learn: Watch wild animals quietly from a distance. Don't chase or grab them.
+learn: Don't feed them bread or snacks. It can make them sick.
+learn: Keep rubbish in bins, and dogs on a lead near birds and nests.
+play: tap | Tap the things that help wildlife | 👀:yes:Watching quietly from a distance; 🚯:yes:Keeping rubbish in bins; 🐕:yes:Keeping dogs on a lead near birds; 🌳:yes:Planting trees and flowers for birds and bees; 🍞:no; 🏃:no
+check: mcq | How should you watch wild animals? | Quietly, from a distance* | By chasing them | By picking them up
+check: tf | Feeding bread to wild birds is good for them. | false | It can make them sick.
+check: mcq | Which helps birds and bees? | Planting trees and flowers* | Leaving rubbish out | Chasing them
+home: Spot three kinds of birds near your home with a grown-up.
+skill: environment
+
+@lesson 6.5 | Streets we share | 🏘️ | townhall
+hook: Footpaths, bus stops and fences. Who looks after them?
+learn: Streets belong to everyone, so we all help keep them nice.
+learn: Keep footpaths clear, put bins back after collection day, and pop litter in a bin.
+learn: If something's broken, like a streetlight or a footpath, a grown-up can tell the council.
+play: sort | Looks after our street, Makes it worse | Painting a mural with the council's OK=Looks after our street; Scribbling on a fence=Makes it worse; Putting bins back after collection=Looks after our street; Leaving a scooter across the footpath=Makes it worse; Telling a grown-up about a broken streetlight=Looks after our street; Dropping a lolly wrapper=Makes it worse | Looks after or makes it worse?
+check: mcq | A streetlight is broken. What can you do? | Tell a grown-up, who can tell the council* | Throw a stone at it | Nothing
+check: tf | Keeping footpaths clear helps everyone. | true
+check: mcq | Which looks after the street? | Putting bins back after collection* | Leaving a scooter on the footpath | Scribbling on fences
+home: Walk your street with a grown-up and look for one thing you could help fix or tidy.
+skill: community
+
+@lesson 6.6 | Clean-up crew | 🧤 | garden
+hook: Your family wants to clean up the local park. How do you do it safely?
+learn: Plan it with a grown-up. Bring gloves and bags.
+learn: Never touch sharp things like broken glass or needles. Tell a grown-up instead.
+learn: Put rubbish in one bag and recycling in another, then count what you found.
+play: build | Plan a family clean-up | Choose a place with a grown-up; Bring gloves, bags and a grabber; Agree to leave sharp things for a grown-up; Put rubbish in one bag; Put recycling in another bag; Count what you found and put it in the right bins
+check: mcq | You find broken glass. What should you do? | Leave it and tell a grown-up* | Pick it up with bare hands | Throw it in a bush
+check: tf | Gloves help keep you safe during a clean-up. | true
+check: mcq | Why count what you find? | To see how much rubbish you saved from the park* | To make it take longer | No reason
+home: Do a 10-minute clean-up near your home with a grown-up.
+skill: environment
+
+@lesson 7.1 | Family traditions | 🎉 | home
+hook: Does your family have special things you always do, like a birthday breakfast or a holiday meal?
+learn: Traditions are special things a family does again and again, like songs, foods or celebrations.
+learn: Different families celebrate different days, like Christmas, Diwali, Eid, Lunar New Year or {nz:Matariki~au:NAIDOC Week}.
+learn: Learning about other families' traditions is interesting and kind.
+play: match | Match each celebration to something people often do | Diwali=Light lamps and share sweets; Lunar New Year=Give red envelopes; Christmas=Share presents and a big meal; Eid=Wear new clothes and visit family; {nz:Matariki~au:NAIDOC Week}={nz:Look for the stars and share kai~au:Celebrate First Nations cultures}
+check: mcq | What is a family tradition? | Something special a family does again and again* | A rule at school | A type of car
+check: tf | Different families celebrate different days. | true
+check: mcq | A friend tells you about a celebration you don't know. You… | Ask them about it kindly* | Say it's weird | Ignore them
+home: Ask a grown-up about a tradition in your family and where it came from.
+skill: respect
+
+@lesson 7.2 | Many languages | 🗣️ | home
+hook: Kia ora, talofa, ni hao, namaste. How many ways can you say hello?
+learn: Lots of families speak more than one language at home.
+learn: Some families speak the language of the country their family came from.
+learn: Learning a few words in someone's language is a friendly thing to do.
+play: match | Match each hello to its language | Kia ora=Te reo Māori; Talofa=Samoan; Ni hao=Mandarin; Namaste=Hindi; Hola=Spanish
+check: mcq | Which language says "Kia ora"? | Te reo Māori* | Spanish | French
+check: tf | Lots of families speak more than one language. | true
+check: mcq | Learning a few words of a friend's language is… | A friendly thing to do* | Rude | Impossible
+home: Learn to say hello in a new language and use it this week.
+skill: respect
+
+@lesson 7.3 | Two homes | 🏡 | home
+hook: Your friend spends one week at Mum's and the next at Dad's. Are both their home?
+learn: Some kids live in two homes, like when their parents live apart.
+learn: Both places can be home, with people who love them.
+learn: Moving between homes can feel tricky sometimes. Being a kind friend helps.
+play: chat | Your friend tells you about their two homes | them: I'm at my dad's this week and my mum's next week. | me: Cool! Do you have a room at both?*/That's weird/Why can't you just pick one? | them: Yeah! Sometimes I forget my stuff at the other house though. | me: That sounds tricky. Want to make a checklist for swap day?*/Ha ha, silly/That's your problem
+check: mcq | A friend lives in two homes. Are both places home? | Yes, both can be home* | No, only one | Neither
+check: tf | Moving between homes can feel tricky sometimes. | true
+check: mcq | How can you be a kind friend? | Listen and be helpful* | Make fun of them | Ask lots of rude questions
+home: Talk with a grown-up about the different ways families can live.
+skill: respect
+
+@lesson 7.4 | Big families | 👵 | home
+hook: Grandparents, aunties, uncles, cousins. Who's in your family?
+learn: Families can be small or big. Some count grandparents, aunties, uncles and cousins as close family.
+learn: {nz:In te reo Māori, whānau means family, including your wider family.~au:In many families, aunties, uncles and cousins help raise the kids.}
+learn: Some families also include close family friends who feel like family.
+play: tap | Tap the people who could be in a big family | 👵:yes:Grandma; 🧔:yes:An uncle; 👧:yes:A cousin; 👩:yes:An aunty; 🏪:no; 🐟:no
+check: mcq | Which people can be part of a big family? | Grandparents, aunties and cousins* | Shopkeepers you don't know | Fish in the sea
+check: tf | Some families include close friends who feel like family. | true
+check: mcq | {nz:What does whānau mean?~au:Who might help raise kids in a big family?} | {nz:Family, including wider family~au:Aunties, uncles and grandparents}* | {nz:A type of bird~au:Strangers} | {nz:A boat~au:Nobody}
+home: Draw a family tree with a grown-up.
+skill: respect
+
+@lesson 7.5 | Jobs at home | 🧺 | home
+hook: Who does the jobs at your place? Does everyone help?
+learn: Every family shares home jobs in its own way.
+learn: Kids can help with jobs like setting the table, feeding pets and folding washing.
+learn: Some jobs are for grown-ups, like driving, cooking on the stove alone and paying bills.
+play: sort | A job I could help with, A grown-up job | Setting the table=A job I could help with; Driving the car=A grown-up job; Feeding the pet=A job I could help with; Paying the power bill=A grown-up job; Folding washing=A job I could help with; Using the stove alone=A grown-up job | Who does it?
+check: mcq | Which job can kids help with? | Setting the table* | Driving the car | Paying bills
+check: tf | Every family shares home jobs in its own way. | true
+check: mcq | Why do families share jobs? | So everyone helps the home run* | Because jobs are boring | They don't
+home: Choose one new job to help with at home this week.
+skill: responsibility
+
+@lesson 7.6 | Different is OK | 🤝 | home
+hook: At your friend's house, everyone takes their shoes off and says a blessing before dinner. Your family doesn't. Who's right?
+learn: Every family has its own ways, like food, rules, religion and bedtimes.
+learn: Different doesn't mean wrong. It just means different.
+learn: When you visit, follow their ways politely, and ask kind questions if you're curious.
+play: path | At a friend's house, everyone takes their shoes off and says a blessing before dinner. | Take your shoes off too, and later ask your friend about it kindly => good: You were polite, and you learned something new. | Say "That's weird, we don't do that" => bad: That could hurt their feelings. Different isn't wrong. | Keep your shoes on and look grumpy => bad: Following their ways for a visit is the polite thing to do.
+check: mcq | A family does things differently from yours. That means… | They're just different, not wrong* | They're wrong | You're wrong
+check: tf | It's polite to follow a family's ways when you visit. | true
+check: mcq | You're curious about another family's way. You… | Ask a kind question* | Laugh at it | Tell everyone it's weird
+home: Talk with a grown-up about one way your family is different from a friend's.
+skill: respect
+
+@lesson 8.1 | On the map | 🗺️ | island
+hook: If you could fly high above {nz:Aotearoa New Zealand~au:Australia}, what would it look like?
+learn: {nz:Aotearoa New Zealand is in the Pacific Ocean. It has two big islands and lots of smaller ones.~au:Australia is a country and a whole continent, with oceans all around it.}
+learn: {nz:The North Island is Te Ika-a-Māui, and the South Island is Te Waipounamu.~au:It has six states and two big territories.}
+learn: {nz:It has mountains, beaches, volcanoes, forests and lakes.~au:It has deserts, rainforests, beaches, reefs and mountains.}
+play: match | {nz:Match each island to its te reo Māori name~au:Match each state to its capital city} | {nz:North Island~au:New South Wales}={nz:Te Ika-a-Māui~au:Sydney}; {nz:South Island~au:Victoria}={nz:Te Waipounamu~au:Melbourne}; {nz:Stewart Island~au:Queensland}={nz:Rakiura~au:Brisbane}
+check: mcq | {nz:What ocean is Aotearoa New Zealand in?~au:How many states does Australia have?} | {nz:The Pacific Ocean~au:Six}* | {nz:The Arctic Ocean~au:Fifty} | {nz:No ocean~au:One}
+check: tf | {nz:Aotearoa has two big islands.~au:Australia is a whole continent.} | true
+check: mcq | {nz:What's the te reo Māori name for the South Island?~au:What's the capital of New South Wales?} | {nz:Te Waipounamu~au:Sydney}* | {nz:Te Ika-a-Māui~au:Perth} | {nz:London~au:London}
+home: Find your home on a map of {nz:Aotearoa~au:Australia} with a grown-up.
+skill: country
+
+@lesson 8.2 | Our capital | 🏛️ | townhall
+hook: Every country has a capital city, where the government works. Where's ours?
+learn: The capital is where Parliament meets and where many laws are made.
+learn: {nz:Our capital is Wellington, at the bottom of the North Island.~au:Our capital is Canberra. It was built as a planned city between Sydney and Melbourne.}
+learn: {nz:Our biggest city is Auckland.~au:Our biggest cities are Sydney and Melbourne.}
+play: mystery | It's where Parliament meets.; {nz:It's at the bottom of the North Island.~au:It was built as a planned city.}; {nz:It's known for being very windy.~au:It has a big lake in the middle called Lake Burley Griffin.}; It's our capital. | {nz:Wellington~au:Canberra}* | {nz:Auckland~au:Sydney} | {nz:Queenstown~au:Darwin}
+check: mcq | What's the capital city? | {nz:Wellington~au:Canberra}* | {nz:Auckland~au:Sydney} | {nz:Christchurch~au:Melbourne}
+check: tf | Parliament meets in the capital city. | true
+check: mcq | What happens in the capital? | Parliament meets and laws are made* | Nothing | Only shopping
+home: Find the capital city on a map, and work out how far it is from your home.
+skill: country
+
+@lesson 8.3 | First peoples | 🌿 | museum
+hook: Who were the very first people to live here?
+learn: {nz:Māori are tangata whenua, the first people of Aotearoa.~au:Aboriginal and Torres Strait Islander peoples are the first peoples of Australia.}
+learn: {nz:Te reo Māori is an official language. You might hear it at school and on TV.~au:There are many different First Nations, each with their own Country, languages and stories.}
+learn: {nz:A marae is a special meeting place for Māori communities.~au:Elders are respected older people who share knowledge.}
+play: match | Match each word to its meaning | {nz:Tangata whenua~au:Country}={nz:People of the land~au:The land, water and sky a group belongs to}; {nz:Marae~au:Elders}={nz:A meeting place~au:Respected older people who share knowledge}; {nz:Kia ora~au:Acknowledgement of Country}={nz:Hello~au:Words that show respect for the Traditional Owners}
+check: mcq | {nz:Who are tangata whenua?~au:Who are the first peoples of Australia?} | {nz:Māori, the first people of Aotearoa~au:Aboriginal and Torres Strait Islander peoples}* | Tourists | Nobody
+check: tf | {nz:Te reo Māori is an official language.~au:There are many different First Nations in Australia.} | true
+check: mcq | {nz:What is a marae?~au:Who are Elders?} | {nz:A meeting place~au:Respected older people who share knowledge}* | {nz:A type of fish~au:Very tall trees} | {nz:A car~au:Babies}
+home: {nz:Learn three words in te reo Māori with a grown-up.~au:Find out whose Country your home is on, with a grown-up.}
+skill: country
+
+@lesson 8.4 | Our flags | 🏳️ | townhall
+hook: {nz:New Zealand's flag has stars on it. How many?~au:Australia has three official flags. Can you picture them?}
+learn: {nz:The New Zealand flag has four red stars. They show the Southern Cross, stars you can see in our night sky.~au:The Australian flag has the Southern Cross and a big seven-pointed star.}
+learn: {nz:The Tino Rangatiratanga flag, in red, black and white, is the national Māori flag.~au:The Aboriginal flag is black, red and yellow. The Torres Strait Islander flag is green, blue, black and white.}
+learn: Flags are symbols. They help people feel they belong.
+play: match | Match each flag to what's on it | {nz:The New Zealand flag~au:The Aboriginal flag}={nz:Four red stars~au:Black, red and yellow}; {nz:The Tino Rangatiratanga flag~au:The Torres Strait Islander flag}={nz:Red, black and white~au:Green, blue, black and white}; The Southern Cross=Stars you can see in our night sky
+check: mcq | {nz:How many stars are on the New Zealand flag?~au:What colours are on the Aboriginal flag?} | {nz:Four~au:Black, red and yellow}* | {nz:Fifty~au:Pink and purple} | {nz:None~au:Only green}
+check: tf | The Southern Cross is a group of stars in our night sky. | true
+check: mcq | Why do countries have flags? | They're symbols that help people feel they belong* | To keep the rain off | For no reason
+home: Look for the Southern Cross in the night sky with a grown-up.
+skill: country
+
+@lesson 8.5 | Special animals | 🥝 | garden
+hook: Some animals live here and nowhere else in the world. Can you name one?
+learn: {nz:The kiwi is a bird that can't fly. It comes out at night to find food.~au:The platypus is a mammal that lays eggs. It's very rare to find one of those!}
+learn: {nz:The kākāpō is a big, heavy parrot that can't fly either.~au:Wombats do cube-shaped poo. Yes, really!}
+learn: {nz:Lots of our special animals need help to stay safe from rats, stoats and cats.~au:Lots of our special animals need help to stay safe, like koalas when their trees are cut down.}
+play: match | Match each animal to a fact | {nz:Kiwi~au:Platypus}={nz:A bird that can't fly~au:A mammal that lays eggs}; {nz:Kākāpō~au:Wombat}={nz:A heavy parrot that can't fly~au:Does cube-shaped poo}; {nz:Tuatara~au:Kangaroo}={nz:A reptile whose relatives lived with the dinosaurs~au:Hops and carries its baby in a pouch}; {nz:Tūī~au:Kookaburra}={nz:A bird with a white tuft at its throat~au:A bird with a laughing call}
+check: mcq | {nz:Which bird can't fly?~au:Which mammal lays eggs?} | {nz:The kiwi~au:The platypus}* | {nz:The seagull~au:The kangaroo} | {nz:The pigeon~au:The dog}
+check: tf | Some of our animals live nowhere else in the world. | true
+check: mcq | How can we help special animals? | Protect their homes and keep pets safely inside at night* | Chase them | Feed them chips
+home: Find out about one special animal near you and how people are helping it.
+skill: country
+
+@lesson 8.6 | Special days | 🎆 | townhall
+hook: Some days are special for the whole country. Which ones do you know?
+learn: {nz:Waitangi Day, on 6 February, marks the first signing of Te Tiriti o Waitangi in 1840.~au:Australia Day is on 26 January. Many First Nations people feel sad on this day, because it marks when their land started to be taken.}
+learn: {nz:Matariki, the Māori New Year, is a public holiday in winter, when the Matariki stars appear.~au:NAIDOC Week, in July, celebrates First Nations history and cultures.}
+learn: Anzac Day, on 25 April, remembers people who served in wars.
+play: match | Match each special day to when it is | {nz:Waitangi Day~au:Australia Day}={nz:6 February~au:26 January}; {nz:Matariki~au:NAIDOC Week}={nz:In winter, when the stars appear~au:A week in July}; Anzac Day=25 April; Christmas Day=25 December
+check: mcq | When is Anzac Day? | 25 April* | 25 December | 1 January
+check: tf | {nz:Matariki is the Māori New Year.~au:NAIDOC Week celebrates First Nations history and cultures.} | true
+check: mcq | {nz:What does Waitangi Day mark?~au:Why do many First Nations people feel sad on 26 January?} | {nz:The first signing of Te Tiriti o Waitangi~au:It marks when their land started to be taken}* | {nz:The first day of summer~au:It's the hottest day} | {nz:A rugby game~au:It's a Monday}
+home: Talk with a grown-up about how your family marks one special day.
+skill: country
+

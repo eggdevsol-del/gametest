@@ -288,3 +288,291 @@ check: tf | Buying fake reviews can break the law. | true
 home: Read how a business replied to a bad review online, with a grown-up. Was it good?
 skill: reputation
 
+@lesson 5.1 | What crypto really is | 🪙 | shares
+hook: Your mate made $500 on crypto last month. Is it like a savings account?
+learn: Crypto is digital tokens recorded on a blockchain. Prices can rise or fall by half in weeks.
+learn: Bank deposits are protected up to a limit by {nz:the Depositor Compensation Scheme~au:the government's Financial Claims Scheme}. Crypto isn't.
+learn: Crypto payments are very hard to reverse, which is why scammers love them.
+play: sort | Bank savings, Crypto | Protected by a government scheme up to a limit=Bank savings; The price can halve in a week=Crypto; Payments are very hard to reverse=Crypto; Pays interest you can count on=Bank savings; Held with a regulated deposit taker=Bank savings; Often used by scammers=Crypto | Bank savings or crypto?
+check: mcq | Is crypto covered by a government deposit scheme? | No* | Yes, fully | Only on weekends
+check: tf | Crypto payments are easy to reverse. | false | They're very hard to get back, which scammers love.
+check: mcq | Why do scammers like crypto? | Payments are hard to reverse* | It's always worth more tomorrow | Banks check every payment
+home: Look up how much bank deposits are protected for in your country, with a grown-up.
+skill: crypto
+
+@lesson 5.2 | Fake celebrity ads | 🎭 | online
+hook: A news-style article shows a famous TV host saying they got rich on a new trading app. Real?
+learn: Scammers use fake news pages and deepfake videos of celebrities and politicians to promote investment platforms.
+learn: The famous person never said it. Their face and voice were copied.
+learn: Real investments don't come from pop-up ads with celebrity "secrets". Search the claim on trusted news sites.
+play: scam | Real or a fake celebrity investment ad? | A trusted news site reporting that a celebrity is suing over fake ads=real; A video of the Prime Minister promising 10x returns on an app=scam; A news-style page saying a TV host "revealed her secret" trading bot=scam; A celebrity's verified post warning followers about fake ads=real; A sponsored ad with a famous chef selling crypto=scam | Celebrities and leaders don't promote secret trading apps. Those ads are fakes.
+check: mcq | A video of a famous person promotes a trading app. Most likely it's… | A deepfake scam* | A real tip | A government scheme
+check: tf | Scammers make fake news pages to look trustworthy. | true
+check: mcq | How can you check a celebrity investment claim? | Search trusted news sites yourself* | Click the ad | Ask in the comments
+home: Show an older family member how fake celebrity investment ads work.
+skill: scams
+
+@lesson 5.3 | Investment chat groups | 💬 | online
+hook: You're added to a group chat called "VIP Wealth Club". Members post huge profits every day. Join in?
+learn: Scam "investment clubs" in chat apps use a friendly "mentor" and fake members who post screenshots of profits.
+learn: They start with small wins, then push you to put in more on their platform.
+learn: Red flags: secret signals, pressure, screenshots as proof, and platforms you can't find on official registers.
+play: chat | You're added to an investment group chat | them: Welcome to VIP Wealth! Our mentor's signals made members 30% this week. | me: Which regulator licenses you? I'll check the register first*/Wow, how do I join?/Here's $1,000 to start | them: No need, just look at all these profit screenshots! | me: Screenshots are easy to fake. I'm leaving the group*/OK, sending money now/I'll bring my friends too
+check: mcq | What's a red flag in an investment chat group? | Profit screenshots as proof* | A licence you can check | Clear, published fees
+check: tf | Members in scam groups can be fake. | true
+check: mcq | You're added to an investment chat by a stranger. You… | Leave and report it* | Invest a little to test it | Share it with friends
+home: Learn how to leave and report a group chat in an app you use.
+skill: scams
+
+@lesson 5.4 | Ponzi schemes | 🔄 | shares
+hook: An investment pays 2% every month, rain or shine. Where's the money really coming from?
+learn: A Ponzi scheme pays old investors with new investors' money, not real profits.
+learn: It needs a constant flow of new money. When that slows, it collapses and most people lose.
+learn: Bernie Madoff ran one of the biggest ever. It collapsed in 2008 after decades.
+play: mystery | Returns are always 2% a month, no matter what markets do.; You're encouraged to bring in friends.; Withdrawals start getting delayed.; Nobody will explain what the money is invested in. | It's likely a Ponzi scheme* | It's a normal savings account | It's a government bond
+check: mcq | How does a Ponzi scheme pay investors? | With new investors' money* | With real profits | With government grants
+check: tf | Ponzi schemes collapse when new money slows down. | true
+check: mcq | Which is a warning sign? | Steady high returns no matter what* | Prices that go up and down | Clear reports on what you own
+home: Read a short summary of the Madoff case with a grown-up and list the warning signs.
+skill: scams
+
+@lesson 5.5 | Recovery scams | 🪝 | online
+hook: You lost $2,000 to a fake platform. Now a "recovery firm" says it can get it back for a $500 fee. Relief?
+learn: Recovery scams target people who've already been scammed. They pose as lawyers, police or recovery experts.
+learn: They ask for upfront fees, ID or remote access to your computer.
+learn: Real agencies don't charge you to report a scam. Go to your bank and {nz:Netsafe and the Police~au:Scamwatch and ReportCyber} directly.
+play: path | After a scam, a "recovery firm" offers to get your $2,000 back for a $500 fee. | Ignore it, call your bank and report it to {nz:Netsafe and the Police~au:Scamwatch and ReportCyber} => good: You avoided being scammed twice, and got real help. | Pay the $500 fee => bad: The "recovery firm" is the same kind of scam. Now you've lost $2,500. | Send them your ID so they can "investigate" => bad: Now they can steal your identity too.
+check: mcq | A firm offers to recover scam losses for an upfront fee. That's… | Very likely another scam* | A great deal | Required by law
+check: tf | Recovery scams target people who've already been scammed. | true
+check: mcq | {nz:Where can you report a scam in NZ?~au:Where can you report a scam in Australia?} | {nz:Netsafe and the Police~au:Scamwatch and ReportCyber}* | A recovery firm on social media | Nowhere
+home: Save your bank's fraud number and your country's scam reporting site in your phone.
+skill: scams
+
+@lesson 5.6 | Check before you invest | ✅ | shares
+hook: You've found an investment app that looks great. How do you know it's real?
+learn: Check the company is licensed: {nz:search the Financial Service Providers Register and the FMA's warnings list.~au:search ASIC's professional registers and Moneysmart's investor alert list.}
+learn: Search the company name with words like "scam" and "reviews" on sites you trust.
+learn: If anything feels rushed, secret or too good, walk away. A real opportunity will still be there tomorrow.
+play: order | Check an investment before you put money in | Search the company name plus "scam"; Check the official register; Check the regulator's warning list; Talk it through with someone you trust; Only invest money you can afford to lose
+check: mcq | {nz:Where can you check if an NZ provider is registered?~au:Where can you check investment warnings in Australia?} | {nz:The Financial Service Providers Register~au:Moneysmart's investor alert list}* | A chat group | The company's own ads
+check: tf | A real opportunity will still be there tomorrow. | true
+check: mcq | An app pressures you to invest today. You… | Walk away and check it first* | Invest straight away | Borrow money to invest more
+home: Look up {nz:the FMA's warnings list~au:Moneysmart's investor alert list} with a grown-up.
+skill: investing
+
+@lesson 6.1 | First impressions online | 🔎 | online
+hook: You've applied for a job. Before calling you, the manager searches your name. What will they find?
+learn: Many employers look up applicants online before an interview.
+learn: Check your public profiles, photos and old posts. Make private anything you wouldn't show at work.
+learn: Use a simple, professional email address for applications, like your first and last name.
+play: sort | Professional, Not professional | aroha.ngata@ email address=Professional; xXslayerXx69@ email address=Not professional; A clear, friendly profile photo=Professional; A party photo as your main picture=Not professional; Public posts about your volunteering=Professional; Public rants about your old boss=Not professional | Professional or not?
+check: mcq | Which email is best for job applications? | Your first and last name* | A joke username | Your old gaming handle
+check: tf | Many employers look applicants up online. | true
+check: mcq | Before applying, you should… | Check and clean up your public profiles* | Post about how bored you are | Make everything public
+home: Search your own name with a grown-up and see what an employer might find.
+skill: reputation
+
+@lesson 6.2 | A LinkedIn profile | 💼 | online
+hook: You're 16 and have only worked at a café. Is it worth making a LinkedIn profile?
+learn: You can join LinkedIn from 16. It's like an online CV that people in your field can find.
+learn: Add a clear photo, a short headline, an "About" section, and your jobs, volunteering and skills.
+learn: Part-time jobs, sport, school leadership and volunteering all count. Be honest about all of it.
+play: build | Build a strong first LinkedIn profile | A clear, friendly photo; A headline like "Final-year student keen on engineering"; A short About section in your own words; Your café job and what you did; Volunteering and school leadership roles; Skills you can actually show
+check: mcq | How old do you need to be to join LinkedIn? | 16* | 10 | 21
+check: tf | Part-time jobs and volunteering are worth adding. | true
+check: mcq | What's a good LinkedIn headline? | Final-year student keen on engineering* | Bored | Party legend
+home: Write a short headline and About section for your future profile, with a grown-up.
+skill: career
+
+@lesson 6.3 | A portfolio that shows | 🎨 | online
+hook: Anyone can say "I'm good at design." How do you prove it?
+learn: A portfolio shows your work: designs, code, writing, videos or photos.
+learn: Pick your best few pieces, and say what the brief was and what you did.
+learn: School projects count. Ask permission before you show work you did for a client.
+play: path | You're applying for a junior design job. | Show your five best projects, each with a short note on your role => good: Clear and easy to judge. The employer sees what you can do. | Upload 50 unsorted pictures => bad: They won't have time to find your best work. | Include a friend's design as yours => bad: That's dishonest, and it can lose you the job or worse.
+check: mcq | What makes a good portfolio? | A few of your best pieces, with notes on your role* | Everything you've ever made | Other people's work
+check: tf | School projects can go in a portfolio. | true
+check: mcq | Before showing work you did for a client, you should… | Ask their permission* | Change their logo | Do nothing
+home: Choose three pieces of work you're proud of and write a one-line note for each.
+skill: career
+
+@lesson 6.4 | Reaching out | ✉️ | online
+hook: You'd love to work in engineering. Could you message an engineer you've never met?
+learn: Short, polite messages can open doors. Ask for advice, not a job.
+learn: Say who you are, why you're contacting them, and ask one or two clear questions.
+learn: Thank them, whether or not they reply, and keep in touch if they help.
+play: chat | You message an engineer on LinkedIn | them: Hi! Thanks for connecting. How can I help? | me: I'm in my last year of school and keen on civil engineering. Could I ask you two quick questions about your job?*/Can you give me a job?/hey | them: Sure, happy to help. | me: Thanks so much! What do you wish you'd known when you started?*/How much do you earn?/OK bye
+check: mcq | What should a first message ask for? | Advice, not a job* | A job straight away | Money
+check: tf | Thanking people for their time helps build good connections. | true
+check: mcq | A good first message is… | Short, polite and specific* | Long and pushy | Just "hey"
+home: Draft a polite message to someone in a job you're curious about. You don't have to send it.
+skill: career
+
+@lesson 6.5 | Honest and impressive | 🤝 | online
+hook: Everyone else's profile sounds amazing. Should you stretch the truth a little?
+learn: Be honest. Employers check, and fake qualifications or jobs can get you fired, even years later.
+learn: You can describe real things well: "Trained three new staff" sounds strong because it's true.
+learn: Always ask before you list someone as a referee.
+play: sort | Honest and strong, Overselling | Trained three new staff at the café=Honest and strong; Listing a degree you haven't finished as done=Overselling; Volunteered at the food bank every Saturday=Honest and strong; Calling yourself "CEO" of a hobby page with 12 followers=Overselling; Led the school's environment group=Honest and strong; Claiming fluent Spanish after one app course=Overselling | Honest or overselling?
+check: mcq | Why be honest on your profile? | Employers check, and lies can get you fired* | Nobody ever checks | Honesty sounds boring
+check: tf | You should ask before listing someone as a referee. | true
+check: mcq | Which sounds strong and honest? | Trained three new staff* | Best employee in the world | CEO of everything
+home: Write three honest, strong lines about things you've done.
+skill: career
+
+@lesson 6.6 | Job scams | 🎣 | online
+hook: A "recruiter" offers you a remote job paying $60 an hour. You just need to send your ID and pay for a training kit. Lucky?
+learn: Fake recruiters use LinkedIn, texts and chat apps to steal money and identities.
+learn: Red flags: high pay for little work, chat-only interviews, paying upfront, and asking for ID or bank details too early.
+learn: Check the company's real website and contact it yourself before sharing anything.
+play: scam | Real recruiter or job scam? | A recruiter from a real company asks to book a video interview=real; "Pay $90 for your training kit before you start"=scam; "Send a photo of your passport to secure the job"=scam; A job ad on the company's own careers page=real; "Earn $500 a day liking videos. Message me on a chat app"=scam | Real jobs pay you. They don't charge fees or ask for ID before an offer.
+check: mcq | A recruiter asks you to pay for a training kit. That's… | A red flag for a scam* | Normal | Required by law
+check: tf | Job scammers can steal your identity. | true
+check: mcq | How can you check a recruiter is real? | Contact the company yourself through its real website* | Trust their profile picture | Send your ID first
+home: Look up the job scam warnings on {nz:Netsafe~au:Scamwatch} with a grown-up.
+skill: scams
+
+@lesson 7.1 | Privacy law basics | ⚖️ | townhall
+hook: A gym asks for your fingerprint, your address and your employer. Do they need it all?
+learn: {nz:The Privacy Act 2020 has 13 Information Privacy Principles that most organisations must follow.~au:The Privacy Act 1988 has 13 Australian Privacy Principles. They cover government agencies and many businesses.}
+learn: They say organisations should only collect what they need, tell you why, keep it safe and let you see it.
+learn: {nz:The Privacy Commissioner can investigate if an organisation breaks the rules.~au:The Office of the Australian Information Commissioner (OAIC) can investigate if an organisation breaks the rules.}
+play: match | Match each privacy rule to what it means | Collection=Only collect what's needed; Notice=Tell you why it's being collected; Security=Keep it safe from misuse; Access=Let you see what they hold about you; Correction=Fix it if it's wrong
+check: mcq | What should organisations collect? | Only what they need* | Everything they can | Your passwords
+check: tf | You have a right to see the personal information an organisation holds about you. | true
+check: mcq | {nz:Who can investigate privacy complaints in NZ?~au:Who can investigate privacy complaints in Australia?} | {nz:The Privacy Commissioner~au:The OAIC}* | The police only | Nobody
+home: Read the privacy policy of one app you use, and find what it collects.
+skill: privacy
+
+@lesson 7.2 | When data leaks | 🔓 | online
+hook: In 2023, a lender's data breach exposed about 14 million records across Australia and New Zealand, including millions of licence numbers. What would you do if yours was in it?
+learn: In both countries, organisations must tell you and the regulator about serious data breaches.
+learn: After a breach, change passwords, turn on two-step login and watch for scam messages that use your details.
+learn: If ID documents were taken, you may need to replace them. IDCARE gives free help in both countries.
+play: order | Your details were in a data breach. Put the steps in order. | Read the organisation's notice carefully; Change your password, and any you reused; Turn on two-step login; Replace ID documents if they were taken; Watch for scam messages using your details
+check: mcq | Must organisations tell you about serious data breaches? | Yes, in both countries* | No, never | Only if you ask
+check: tf | Scammers may use leaked details to make messages look real. | true
+check: mcq | Who gives free help with identity theft in both countries? | IDCARE* | A dating app | Nobody
+home: Check a breach-checking site for your email with a grown-up.
+skill: privacy
+
+@lesson 7.3 | Your credit report | 📄 | bank
+hook: You've never borrowed money. Could there still be a loan in your name?
+learn: Credit reporting agencies keep records of loans, credit cards, phone plans and missed payments.
+learn: You can ask for a free copy of your credit report. Check it for anything you don't recognise.
+learn: If your identity is stolen, you can ask the agencies to freeze your file so no one can get credit in your name.
+play: sort | Could show on a credit report, Wouldn't show | A phone plan in your name=Could show on a credit report; A missed loan payment=Could show on a credit report; Your favourite movies=Wouldn't show; A credit card application=Could show on a credit report; Your school marks=Wouldn't show; A buy now, pay later account=Could show on a credit report | On a credit report or not?
+check: mcq | Can you get a free copy of your credit report? | Yes* | No | Only if you pay $500
+check: tf | Checking your credit report can help you spot identity theft. | true
+check: mcq | Your identity was stolen. What can you ask credit agencies to do? | Freeze your file* | Delete the internet | Nothing
+home: Find out which credit reporting agencies operate in your country, with a grown-up.
+skill: credit
+
+@lesson 7.4 | Age checks online | 🚫 | online
+hook: {nz:Australia now bans under-16s from big social media apps. Should NZ do the same?~au:Since December 2025, under-16s can't have accounts on big social media apps. How do apps know your age?}
+learn: {nz:Since December 2025, Australian platforms must take reasonable steps to stop under-16s having accounts. NZ is debating a similar law.~au:Platforms must take reasonable steps to stop under-16s having accounts, or face big fines.}
+learn: Age checks can use face scans, ID documents or data the app already has about you.
+learn: That raises privacy questions: who keeps the data, for how long, and could it leak?
+play: debate | Are social media age checks worth the privacy trade-offs? | It depends on how they're done. Checks that keep little data can protect kids without big privacy risks* | Age checks have no privacy downsides at all | Some argue any age check means more data collected about everyone, and that teaching safe use works better than bans.
+check: mcq | {nz:Which country banned under-16s from big social media apps in December 2025?~au:From what age can people have accounts on the big social media apps?} | {nz:Australia~au:16}* | {nz:New Zealand~au:10} | {nz:Nowhere~au:21}
+check: tf | Age checks can raise privacy questions. | true
+check: mcq | Which is a privacy question about age checks? | Who keeps the data, and for how long?* | What colour is the app? | How many likes do I get?
+home: Talk with a younger family member about why age limits on apps exist.
+skill: privacy
+
+@lesson 7.5 | Watched at work and in shops | 📹 | workshop
+hook: Your boss can see your work emails. A shop scans your face. Is that allowed?
+learn: Employers can often monitor work devices and accounts, but they should tell you what they monitor and why.
+learn: Facial recognition collects sensitive information about your face, so privacy rules are strict.
+learn: {nz:A new Biometric Processing Privacy Code sets extra rules for using things like facial recognition.~au:The OAIC found that Bunnings in 2024 and Kmart in 2025 broke privacy law with their facial recognition.}
+play: sort | Usually OK if you're told, Raises big privacy concerns | Monitoring emails on a work laptop=Usually OK if you're told; Secretly reading your personal phone=Raises big privacy concerns; CCTV in a shop with clear signs=Usually OK if you're told; Scanning every shopper's face without telling them=Raises big privacy concerns; Logging which work files you open=Usually OK if you're told; Tracking your location on weekends=Raises big privacy concerns | Usually OK or a big concern?
+check: mcq | What should an employer tell you about monitoring? | What they monitor and why* | Nothing | Only your pay rate
+check: tf | Facial recognition collects sensitive information. | true
+check: mcq | {nz:What does NZ's Biometric Processing Privacy Code cover?~au:Which stores did the OAIC find broke privacy law with facial recognition?} | {nz:Using things like facial recognition~au:Bunnings and Kmart}* | {nz:Football rules~au:None} | {nz:Bus timetables~au:Every shop}
+home: Look for CCTV or facial recognition signs next time you go shopping.
+skill: privacy
+
+@lesson 7.6 | Using your rights | 📨 | townhall
+hook: You think a company has wrong information about you. How do you get it fixed?
+learn: You can ask an organisation for the personal information it holds about you. They must usually reply within a set time.
+learn: If it's wrong, ask them to correct it. If they won't, you can complain to {nz:the Privacy Commissioner~au:the OAIC}.
+learn: {nz:If a privacy breach causes you harm, the Privacy Commissioner can investigate, and the Human Rights Review Tribunal can award damages.~au:Since June 2025, you can also take someone to court for a serious invasion of your privacy.}
+play: build | Build a request for your personal information | Say who you are and how they know you; Ask for all the personal information they hold about you; Ask who they've shared it with; Ask them to correct anything wrong; Give your contact details; Keep a copy and note the date
+check: mcq | A company won't fix wrong information about you. You can complain to… | {nz:The Privacy Commissioner~au:The OAIC}* | A radio show | Nobody
+check: tf | You can ask organisations who they've shared your information with. | true
+check: mcq | Why keep a copy of your request? | To show when you asked* | It's not needed | To post online
+home: Write a short request for your information to a company you use. You don't have to send it.
+skill: privacy
+
+@lesson 8.1 | What AI is good at | 🤖 | online
+hook: AI can write an essay in seconds. Can it also check if the essay is true?
+learn: AI tools are good at drafting, summarising, brainstorming, explaining and helping with code.
+learn: They can get facts, recent events, maths and sources wrong, while sounding very confident.
+learn: Use AI like a fast assistant, not an expert. You're still responsible for the result.
+play: sort | Good use of AI, Risky use | Brainstorming ideas for a project=Good use of AI; Copying its answer to a test question=Risky use; Getting a hard topic explained simply=Good use of AI; Trusting its legal advice without checking=Risky use; Getting feedback on your draft's structure=Good use of AI; Using its made-up statistics in a report=Risky use | Good or risky use?
+check: mcq | What are AI tools often good at? | Drafting and brainstorming* | Always getting facts right | Knowing today's news perfectly
+check: tf | AI can sound confident when it's wrong. | true
+check: mcq | Who is responsible for work you hand in with AI help? | You* | The AI | Nobody
+home: Ask an AI tool something you know well, and check what it gets right and wrong.
+skill: ai
+
+@lesson 8.2 | Prompting well | ✍️ | online
+hook: "Write about volcanoes." Why does that give you a bland answer?
+learn: Good prompts give context: who it's for, what you want, and the format.
+learn: Add limits, like length, reading level or what to avoid.
+learn: Treat it as a conversation. Ask follow-up questions and ask it to explain its reasoning.
+play: diff | A vague prompt and a clear prompt. Tap what changed. | Write about volcanoes; Make it good | Explain how volcanoes form for a Year 10 science class; Use three short paragraphs and one real example
+check: mcq | What makes a prompt clearer? | Saying who it's for and what format you want* | Using fewer words always | Typing in capitals
+check: tf | Follow-up questions can improve an AI's answer. | true
+check: mcq | Which prompt is clearer? | Summarise this article in 5 dot points for a Year 12 student* | Do this | Write stuff
+home: Rewrite a vague prompt into a clear one, and compare the answers.
+skill: ai
+
+@lesson 8.3 | Check the output | ✅ | online
+hook: An AI gives you three sources for your essay. One doesn't exist. How would you know?
+learn: AI can make up facts, quotes and even sources that sound real.
+learn: Check every fact and source that matters. Open the source and make sure it says what the AI claims.
+learn: Re-do any maths, and rewrite in your own words, so you understand it.
+play: order | Check AI output before you use it. Put it in order. | Read it all carefully; Check key facts against trusted sources; Open every source and check it's real; Re-do any maths yourself; Rewrite it in your own words
+check: mcq | An AI gives you a source. You… | Open it and check it says what the AI claims* | Copy it straight in | Trust it because it sounds real
+check: tf | AI can make up sources that don't exist. | true
+check: mcq | Why rewrite AI help in your own words? | So you understand it and it's your work* | To make it longer | No reason
+home: Check three facts from an AI answer against trusted sources.
+skill: ai
+
+@lesson 8.4 | Keep it confidential | 🔒 | online
+hook: You're at work and want AI to tidy up a customer email. Can you paste it in?
+learn: What you type into a public AI tool may be stored, and sometimes used to train it.
+learn: Don't paste in personal details, passwords or confidential work information.
+learn: Follow your workplace's AI rules, and use the tools they've approved.
+play: sort | OK for a public AI tool, Keep it out | A general grammar question=OK for a public AI tool; A customer's name and address=Keep it out; Your company's unreleased plans=Keep it out; A public news article to summarise=OK for a public AI tool; A friend's medical details=Keep it out; A practice essay question=OK for a public AI tool | OK to paste in, or keep it out?
+check: mcq | What should you keep out of public AI tools? | Personal and confidential information* | General questions | Public articles
+check: tf | What you type into a public AI tool may be stored. | true
+check: mcq | At work, which AI tools should you use? | The ones your workplace has approved* | Any you find | None, ever
+home: Read the privacy settings of an AI tool you use, and see whether it trains on your chats.
+skill: ai
+
+@lesson 8.5 | Say when you used AI | 📎 | townhall
+hook: You used AI to brainstorm and check grammar on an assignment. Do you need to mention it?
+learn: Schools, universities and workplaces have different rules about AI. Read them for each course or job.
+learn: Many ask you to say how you used AI, and some ask you to reference it like a source.
+learn: Handing in AI work as your own, where it's not allowed, can count as cheating.
+play: path | You used AI to brainstorm and check grammar on an assignment. | Check the rules and note how you used AI => good: You were honest and followed the rules. Your work is still yours. | Hide it and hope nobody asks => bad: If AI use had to be declared, hiding it can count as dishonesty. | Hand in an AI-written essay as your own => bad: Where that's not allowed, it's cheating, and the penalties can be serious.
+check: mcq | What should you do before using AI on an assignment? | Read the rules for that course* | Nothing | Ask a friend to guess
+check: tf | Some courses ask you to reference AI like a source. | true
+check: mcq | Handing in AI work as your own, where it's not allowed, is… | Cheating* | Fine | Smart
+home: Find the AI rules for one subject or course you're doing.
+skill: ai
+
+@lesson 8.6 | AI and your future job | 💼 | workshop
+hook: Will AI take your future job?
+learn: AI is more likely to change tasks within jobs than to replace whole jobs straight away.
+learn: People who use AI well, and check it carefully, are often in demand.
+learn: Skills like judgement, communication, creativity and working with people matter even more.
+play: debate | Will AI take most jobs? | It's more likely to change tasks within jobs, so people who learn to use it well will do best* | AI will never change any job | Some argue certain jobs will shrink fast, so workers will need real support to retrain.
+check: mcq | Which skills matter more as AI grows? | Judgement, communication and creativity* | None | Only typing speed
+check: tf | People who use AI well, and check it carefully, are often in demand. | true
+check: mcq | How is AI most likely to affect jobs at first? | By changing tasks within jobs* | By replacing every job overnight | Not at all
+home: Ask a grown-up how AI has changed their work, or might change it.
+skill: ai
+

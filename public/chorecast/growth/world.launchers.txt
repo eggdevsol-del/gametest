@@ -286,3 +286,291 @@ check: tf | The Budget includes forecasts for the next few years. | true
 home: Read a news story about the latest Budget with a grown-up and find one change that affects your family.
 skill: government
 
+@lesson 5.1 | What support exists | 🤝 | townhall
+hook: You're 18, studying, and money's tight. What help is out there?
+learn: {nz:Work and Income helps with things like Jobseeker Support, Youth Payment for 16 and 17-year-olds who can't live at home, and help with urgent costs.~au:Centrelink helps with Youth Allowance for students, apprentices and job seekers under 22, JobSeeker Payment from 22, and Austudy for students 25 and over.}
+learn: {nz:StudyLink handles the Student Allowance, which you don't pay back, and the Student Loan, which you do.~au:Rent Assistance can help with rent if you're getting one of these payments.}
+learn: Every payment has rules about age, income and what you're doing. Check what fits you.
+play: match | Match each situation to where to start | Studying full time and short on money={nz:StudyLink~au:Youth Allowance for students}; 23 and looking for work={nz:Jobseeker Support~au:JobSeeker Payment}; 16 and can't live at home={nz:Youth Payment~au:Youth Allowance}; Getting a payment and need help with rent={nz:Accommodation Supplement~au:Rent Assistance}
+check: mcq | {nz:Who handles the Student Allowance in NZ?~au:Which payment is for students aged 18 to 24?} | {nz:StudyLink~au:Youth Allowance}* | A bank | Your landlord
+check: tf | Support payments have rules about age and income. | true
+check: mcq | {nz:Which StudyLink support doesn't need paying back?~au:Which payment is for job seekers aged 22 and over?} | {nz:The Student Allowance~au:JobSeeker Payment}* | {nz:The Student Loan~au:Austudy} | A credit card
+home: Find the payments page on {nz:workandincome.govt.nz or studylink.govt.nz~au:servicesaustralia.gov.au} with a grown-up.
+skill: support
+
+@lesson 5.2 | Applying | 📝 | townhall
+hook: You've worked out which payment fits. How do you actually apply?
+learn: Set up an online account: {nz:MyMSD for Work and Income, or MyStudyLink~au:myGov, linked to Centrelink}.
+learn: Get your documents ready: ID, bank details, your {nz:IRD number~au:tax file number}, rent details and income.
+learn: Apply as early as you can. Payments usually start from when you apply, not from when you first needed help.
+play: build | Build your application checklist | Check which payment fits you; Set up your online account; Gather ID and bank details; Add your {nz:IRD number~au:tax file number}; Include rent and income details; Submit and save the confirmation
+check: mcq | Why apply early? | Payments usually start from when you apply* | It's slower | There's no reason
+check: tf | You'll need your bank details to apply. | true
+check: mcq | {nz:Which online account do you use for Work and Income?~au:Which online account links to Centrelink?} | {nz:MyMSD~au:myGov}* | A gaming account | Your email only
+home: Make a list of the documents you'd need, and where they're kept at home.
+skill: support
+
+@lesson 5.3 | Your obligations | 📋 | townhall
+hook: You're getting a payment and pick up some weekend shifts. Do you need to tell anyone?
+learn: Most payments come with obligations, like looking for work, going to appointments or keeping up your study.
+learn: You must report your income and any changes on time, like moving house or changing your study load.
+learn: If you're paid too much, you'll usually have to pay it back. Reporting on time avoids nasty debts.
+play: path | You start a part-time job while getting a payment. | Report your income on time, as required => good: Your payment adjusts and you don't end up with a debt. | Don't tell them, it's only a few shifts => bad: You could build up a debt you have to repay, and possibly face a penalty. | Quit the job to keep the full payment => ok: That's your choice, but work experience and extra income can leave you better off.
+check: mcq | You start earning while on a payment. You… | Report your income on time* | Keep quiet | Close your bank account
+check: tf | If you're overpaid, you'll usually have to pay it back. | true
+check: mcq | Which is an obligation that can come with a payment? | Looking for work or keeping up study* | Buying a new phone | Nothing at all
+home: Ask a grown-up how they keep track of important deadlines.
+skill: support
+
+@lesson 5.4 | Paying for study | 🎓 | townhall
+hook: Uni fees can cost thousands. Do you have to pay it all upfront?
+learn: {nz:A Student Loan can cover fees, course costs and living costs. It's interest-free while you live in NZ.~au:A HELP loan, like HECS-HELP, can cover your uni fees, so you don't pay upfront.}
+learn: {nz:You repay it through your pay once you earn over a set amount.~au:You repay it through the tax system once you earn over a set amount. The balance is adjusted each year.}
+learn: Payments like {nz:the Student Allowance~au:Youth Allowance} and scholarships usually don't need paying back.
+play: sort | A loan you repay, Money you don't repay | {nz:A Student Loan~au:A HECS-HELP loan}=A loan you repay; {nz:The Student Allowance~au:Youth Allowance}=Money you don't repay; A bank loan for a laptop=A loan you repay; A scholarship=Money you don't repay; A credit card for textbooks=A loan you repay | Repay it or not?
+check: mcq | {nz:When is the NZ Student Loan interest-free?~au:How do you repay a HELP loan?} | {nz:While you live in NZ~au:Through the tax system once you earn enough}* | {nz:Never~au:All at once on graduation day} | {nz:Only on Mondays~au:In cash at the uni}
+check: tf | Scholarships usually don't need paying back. | true
+check: mcq | Which is a loan you repay? | {nz:A Student Loan~au:A HECS-HELP loan}* | A scholarship | A birthday gift
+home: Look up one scholarship you could apply for, with a grown-up.
+skill: study
+
+@lesson 5.5 | Help in a crisis | 🆘 | townhall
+hook: Your power bill is overdue and you can't pay it. Is there anything you can do this week?
+learn: {nz:Work and Income can sometimes help with urgent costs, like power, food or a bond, even if you're not on a benefit.~au:Centrelink offers an Advance payment on some payments, and a Crisis Payment in some very hard situations.}
+learn: {nz:A Community Services Card can make doctor visits and prescriptions cheaper.~au:A Health Care Card can make medicines and some health services cheaper.}
+learn: Call as soon as you know you'll struggle. Power and phone companies have hardship help too.
+play: chat | You call for help with an overdue bill | them: Hi, how can I help today? | me: My power bill is overdue and I can't pay it. Is there any urgent help I could apply for?*/Just give me money/Never mind | them: There might be. Can you tell me about your income and the bill? | me: Sure. I earn about $300 a week, and the bill is $240*/That's private/I'll call back next year
+check: mcq | When should you ask for help with a bill? | As soon as you know you'll struggle* | After it's three months late | Never
+check: tf | Power and phone companies can have hardship help. | true
+check: mcq | {nz:What can a Community Services Card help with?~au:What can a Health Care Card help with?} | {nz:Cheaper doctor visits and prescriptions~au:Cheaper medicines}* | {nz:Free cars~au:Free holidays} | {nz:Nothing~au:Nothing}
+home: Find the hardship page on your family's power company website.
+skill: hardship
+
+@lesson 5.6 | When you disagree | 🧭 | townhall
+hook: Your payment is cut, and you think it's a mistake. Can you challenge it?
+learn: You can ask for the reasons for a decision, and for it to be reviewed.
+learn: {nz:If you still disagree, you may be able to go to the Social Security Appeal Authority.~au:If you still disagree, you can go to the Administrative Review Tribunal.}
+learn: {nz:Free help is available from beneficiary advocates and Citizens Advice.~au:Free help is available from welfare rights centres.}
+play: order | Challenge a decision you think is wrong. Put the steps in order. | Ask for the reasons in writing; Ask for a review of the decision; Get free advice from an advocate; Gather your evidence; Go to the {nz:Social Security Appeal Authority~au:Administrative Review Tribunal} if needed
+check: mcq | You think a decision is wrong. First step? | Ask for the reasons and a review* | Give up | Post angrily online
+check: tf | You can get free help to challenge a decision. | true
+check: mcq | {nz:Who can give free help with a benefit problem in NZ?~au:Who can give free help with a Centrelink problem?} | {nz:Beneficiary advocates and Citizens Advice~au:A welfare rights centre}* | A debt collector | Nobody
+home: Find a free advocacy service near you, with a grown-up.
+skill: support
+
+@lesson 6.1 | {nz:Treaty principles~au:National Reconciliation Week} | 🤝 | townhall
+hook: {nz:Courts and laws talk about "the principles of the Treaty". What are they?~au:Every year, from 27 May to 3 June, Australia marks National Reconciliation Week. Why those dates?}
+learn: {nz:Courts and the Waitangi Tribunal have described principles like partnership, good faith and active protection.~au:27 May marks the 1967 referendum. 3 June marks the 1992 Mabo decision.}
+learn: {nz:In 2024, a bill tried to set its own definition of the principles. Hundreds of thousands made submissions, and there was a huge hīkoi to Parliament.~au:Reconciliation Australia leads the week and supports workplaces and schools to make plans.}
+learn: {nz:Parliament voted the bill down in April 2025, 112 votes to 11.~au:Many organisations have a Reconciliation Action Plan, setting out what they'll do.}
+play: match | {nz:Match each word to its meaning~au:Match each date to what it marks} | {nz:Partnership~au:27 May}={nz:The Crown and Māori working together in good faith~au:The 1967 referendum}; {nz:Active protection~au:3 June}={nz:The Crown actively protecting Māori interests~au:The 1992 Mabo decision}; {nz:Hīkoi~au:13 February}={nz:A march, like the one to Parliament in 2024~au:The 2008 National Apology}; {nz:Submission~au:26 May}={nz:Telling Parliament your view on a bill~au:National Sorry Day}
+check: mcq | {nz:What happened to the Treaty Principles Bill in 2025?~au:What does 3 June mark?} | {nz:It was voted down~au:The 1992 Mabo decision}* | {nz:It became law~au:Christmas} | {nz:It was never debated~au:A sports final}
+check: tf | {nz:Partnership is one of the Treaty principles described by the courts.~au:Many organisations have a Reconciliation Action Plan.} | true
+check: mcq | {nz:What was the vote on the bill in April 2025?~au:When is National Reconciliation Week?} | {nz:112 to 11 against~au:27 May to 3 June}* | {nz:Everyone for it~au:Christmas week} | {nz:A tie~au:Every Monday}
+home: {nz:Ask a grown-up what they remember about the 2024 hīkoi and the Treaty Principles Bill.~au:Find out if your school or a local business has a Reconciliation Action Plan.}
+skill: civics
+
+@lesson 6.2 | {nz:Treaty settlements~au:Closing the Gap} | 📊 | townhall
+hook: {nz:A settlement can include an apology, money and even a river with its own legal rights. How does that work?~au:Governments have promised to close the gaps in health, education and jobs. How's it going?}
+learn: {nz:Settlements are negotiated between iwi and the Crown, often after a Waitangi Tribunal report.~au:In 2020, governments and Aboriginal and Torres Strait Islander community groups signed a National Agreement on Closing the Gap.}
+learn: {nz:They usually include a Crown apology, cultural redress and financial redress.~au:It sets targets in areas like health, education, jobs, justice and housing.}
+learn: {nz:Some settlements recognise nature as a legal person, like the Whanganui River, Te Awa Tupua, in 2017.~au:Progress reports show some targets are improving, but many aren't on track.}
+play: sort | {nz:Part of a settlement~au:A Closing the Gap area}, {nz:Not part of a settlement~au:Not a Closing the Gap area} | {nz:A Crown apology~au:Health and life expectancy}={nz:Part of a settlement~au:A Closing the Gap area}; {nz:Return of culturally important sites~au:Children finishing school}={nz:Part of a settlement~au:A Closing the Gap area}; {nz:Money to rebuild an iwi economy~au:Jobs and income}={nz:Part of a settlement~au:A Closing the Gap area}; {nz:Free cars for every voter~au:Professional sports results}={nz:Not part of a settlement~au:Not a Closing the Gap area}; {nz:Cancelling all future elections~au:Celebrity news}={nz:Not part of a settlement~au:Not a Closing the Gap area}; {nz:Place names restored in te reo~au:Housing}={nz:Part of a settlement~au:A Closing the Gap area} | {nz:Part of a settlement?~au:Is it a Closing the Gap area?}
+check: mcq | {nz:Which river was recognised as a legal person in 2017?~au:When was the National Agreement on Closing the Gap signed?} | {nz:The Whanganui River~au:2020}* | {nz:The Thames~au:1901} | {nz:The Nile~au:1788}
+check: tf | {nz:Settlements usually include a Crown apology.~au:Many Closing the Gap targets aren't on track.} | true
+check: mcq | {nz:Who negotiates a Treaty settlement?~au:Who signed the National Agreement?} | {nz:Iwi and the Crown~au:Governments and Aboriginal and Torres Strait Islander community groups}* | {nz:Supermarkets~au:Sports clubs} | {nz:Tourists~au:Banks}
+home: {nz:Look up a Treaty settlement in your region and what it included.~au:Look up the latest Closing the Gap report and find one target that's improving.}
+skill: civics
+
+@lesson 6.3 | {nz:Te reo and tikanga at work~au:Welcome and Acknowledgement of Country} | 🌿 | townhall
+hook: {nz:Your first day at a new job starts with a karakia and a mihi. Ready?~au:A meeting starts with an Acknowledgement of Country. Could you give one?}
+learn: {nz:Many workplaces now use te reo Māori and tikanga, like karakia to open meetings and mihi to welcome people.~au:A Welcome to Country is given by Traditional Owners of the land, to welcome visitors.}
+learn: {nz:A pepeha is a way of introducing yourself through your connections to places and people.~au:An Acknowledgement of Country can be given by anyone, to show respect for the Traditional Owners.}
+learn: {nz:Matariki has been a public holiday since 2022, and Te Wiki o te Reo Māori is held each September.~au:Find out whose Country you're on, and use their name when you give one.}
+play: chat | {nz:A new workmate asks about the morning karakia~au:Your manager asks you to open a meeting} | them: {nz:I've never done a karakia before. What do I do?~au:Could you do the Acknowledgement of Country this morning?} | me: {nz:You can just listen respectfully the first time. I'll share the words afterwards if you like~au:Sure. I'll check whose Country we're on first}*/{nz:It's silly, ignore it~au:No, that's not my job}/{nz:Just look at your phone~au:I'll make something up} | them: {nz:Thanks. Is it OK if I don't know the words yet?~au:Great. Keep it short and sincere.} | me: {nz:Of course. Everyone starts somewhere~au:Will do. I'll thank the Traditional Owners by name}*/{nz:No, you have to know them already~au:I'll read a joke instead}/{nz:Don't bother learning~au:Can someone else do it?}
+check: mcq | {nz:What is a pepeha?~au:Who gives a Welcome to Country?} | {nz:An introduction through your connections to places and people~au:Traditional Owners of the land}* | {nz:A type of food~au:Anyone at all} | {nz:A sports team~au:Tourists}
+check: tf | {nz:Matariki is a public holiday in NZ.~au:Anyone can give an Acknowledgement of Country.} | true
+check: mcq | {nz:When is Te Wiki o te Reo Māori held?~au:What's a good first step before an Acknowledgement of Country?} | {nz:Each September~au:Find out whose Country you're on}* | {nz:Every Monday~au:Write a long speech} | {nz:Never~au:Skip it}
+home: {nz:Write your own pepeha, or a short mihi, with a grown-up.~au:Find out whose Country your home and school are on.}
+skill: culture
+
+@lesson 6.4 | {nz:Māori seats and wards~au:Treaties in the states} | 🗳️ | townhall
+hook: {nz:Some voters choose between the general roll and the Māori roll. Why are there Māori seats?~au:The Voice referendum didn't pass in 2023. Did that end treaty talks?}
+learn: {nz:Māori seats in Parliament began in 1867. Today there are seven Māori electorates.~au:No. States and territories can make their own treaties with First Peoples.}
+learn: {nz:Voters of Māori descent can choose whether to enrol on the Māori roll or the general roll.~au:In 2025, Victoria passed Australia's first statewide treaty law, creating an elected First Peoples' body called Gellung Warl.}
+learn: {nz:Councils can have Māori wards. In 2025, many councils held public votes on whether to keep them.~au:Other states have started, paused or stopped their own processes. Views differ, and debate continues.}
+play: mcq | {nz:How many Māori electorates are there?~au:Which state passed Australia's first statewide treaty law?} | {nz:Seven~au:Victoria}* | {nz:One~au:Tasmania} | {nz:Seventy~au:None}
+check: tf | {nz:Voters of Māori descent can choose the Māori roll or the general roll.~au:States can make their own treaties with First Peoples.} | true
+check: mcq | {nz:When did Māori seats in Parliament begin?~au:What is Gellung Warl?} | {nz:1867~au:An elected First Peoples' body in Victoria}* | {nz:2017~au:A national park} | {nz:1999~au:A football team}
+check: mcq | A good way to understand a debate like this is… | Read views from the people most affected and from all sides* | Read one meme | Ignore it
+home: {nz:Find out which electorate and which Māori electorate your home is in.~au:Find out whether your state has a treaty or truth-telling process.}
+skill: civics
+
+@lesson 6.5 | {nz:The Māori economy~au:Caring for Country} | 🌱 | townhall
+hook: {nz:Iwi businesses run farms, fisheries and tourism. How big is the Māori economy?~au:Rangers are caring for huge areas of land and sea. Who are they?}
+learn: {nz:The Māori economy, including iwi, businesses and workers, has assets worth more than $100 billion.~au:Aboriginal and Torres Strait Islander peoples hold rights to a large share of Australia's land, through native title and land rights.}
+learn: {nz:Many iwi invest settlement money for future generations, thinking in terms of a hundred years, not just a year.~au:Indigenous ranger groups use traditional knowledge to care for Country, like cultural burning to reduce bushfire risk.}
+learn: {nz:Māori businesses are big in farming, fishing, forestry and tourism.~au:First Nations businesses are a fast-growing part of the economy.}
+play: debate | {nz:Should businesses plan for the next 100 years, not just the next year?~au:Should traditional land knowledge play a bigger part in managing bushfires?} | {nz:Yes. Thinking long-term protects land and people for future generations~au:Yes. Cultural burning has lowered fire risk for thousands of years}* | {nz:No. Only this year's profit matters~au:No. Old knowledge can't teach us anything} | {nz:Some argue long-term plans can be slow to adapt, and that short-term results matter for workers too.~au:Some say it works best alongside modern fire science, and that conditions now differ from the past.}
+check: mcq | {nz:Roughly what are Māori economy assets worth?~au:What is cultural burning used for?} | {nz:More than $100 billion~au:Reducing bushfire risk}* | {nz:About $100~au:Making smoke signals} | {nz:Nothing~au:Cooking only}
+check: tf | {nz:Many iwi invest for future generations.~au:Indigenous rangers care for land and sea.} | true
+check: mcq | {nz:Which is a big area for Māori businesses?~au:How do First Nations peoples hold rights to land?} | {nz:Farming, fishing and forestry~au:Through native title and land rights}* | {nz:Space travel~au:They don't} | {nz:None~au:Only by renting}
+home: {nz:Find an iwi-owned business near you and see what it does.~au:Look up an Indigenous ranger program near you.}
+skill: economy
+
+@lesson 6.6 | Forming your own view | 💭 | townhall
+hook: Family dinner turns into an argument about {nz:the Treaty~au:the Voice}. How do you join in well?
+learn: Learn the history first, from many voices, especially the people most affected.
+learn: Go to the source. Read the documents and proposals, not just headlines and posts.
+learn: You can disagree with someone and still respect them. Ask questions and listen to understand.
+play: chat | An uncle says something you disagree with at dinner | them: {nz:I reckon the Treaty is ancient history. Why does it matter now?~au:Why do we still talk about reconciliation? It's all in the past.} | me: I see it differently. Can I share why, and hear more about what you think?*/That's stupid/I'm leaving | them: Go on then. | me: {nz:It's still referred to in many laws, and settlements are still happening. What makes you feel it's in the past?~au:Lots of gaps are still there today, and treaty talks are still going. What makes you feel it's in the past?}*/You're just wrong/Forget it
+check: mcq | What's a good way to form your own view? | Learn from many voices and the original sources* | Read one post | Copy your friends
+check: tf | You can disagree with someone and still respect them. | true
+check: mcq | In a heated talk, it helps to… | Ask questions and listen to understand* | Shout louder | Walk off straight away
+home: Pick one question about {nz:Te Tiriti~au:reconciliation} and read two different views on it.
+skill: civics
+
+@lesson 7.1 | Exchange rates | 💱 | bank
+hook: You're saving for a trip to the US. Why does the price keep changing when nothing has?
+learn: An exchange rate is how much of another country's money your dollar can buy.
+learn: When our dollar is strong, overseas trips and imports are cheaper. When it's weak, they cost more.
+learn: A weak dollar helps exporters, because our goods are cheaper for overseas buyers.
+play: slider | If $1 of your money buys 0.60 US dollars, how many US dollars do you get for $500? | 0 | 600 | 300 | US$ | 0 | 10
+check: mcq | Our dollar gets stronger. Overseas trips get… | Cheaper* | More expensive | No different
+check: tf | A weak dollar can help exporters. | true
+check: gap | If $1 buys 0.50 US dollars, $200 buys US$_ | 100
+home: Look up today's exchange rate for the US dollar and one other currency.
+skill: economy
+
+@lesson 7.2 | Exports and imports | 📊 | townhall
+hook: An overseas student pays uni fees here. Is that an export? It doesn't even leave the country.
+learn: Exports are goods and services sold to people overseas. Imports are what we buy from overseas.
+learn: Services count. Overseas tourists and students spending money here count as exports.
+learn: {nz:NZ often buys more from the world than it sells, so it often runs a trade deficit.~au:Thanks largely to mining, Australia has often sold more to the world than it buys, a trade surplus.}
+play: sort | Counts as an export, Counts as an import | An overseas tourist's spending here=Counts as an export; Buying a car made in Japan=Counts as an import; An overseas student's uni fees here=Counts as an export; A streaming subscription from an overseas company=Counts as an import; Selling {nz:milk powder~au:iron ore} to China=Counts as an export; Your holiday spending overseas=Counts as an import | Export or import?
+check: mcq | Is an overseas tourist's spending here an export? | Yes, it's a service export* | No, it's an import | It doesn't count
+check: tf | Services can be exports. | true
+check: mcq | {nz:NZ often buys more than it sells to the world. That's a…~au:Australia has often sold more to the world than it buys. That's a…} | {nz:Trade deficit~au:Trade surplus}* | {nz:Trade surplus~au:Trade deficit} | Tax refund
+home: Look up your country's biggest trading partner.
+skill: economy
+
+@lesson 7.3 | Trade deals | 🧾 | townhall
+hook: Why would two countries agree to cut taxes on each other's goods?
+learn: Free trade agreements cut tariffs and other barriers, so businesses can sell overseas more easily.
+learn: {nz:NZ was the first developed country to sign a free trade deal with China, in 2008.~au:Australia signed a free trade deal with China in 2015.}
+learn: Trade deals create winners and losers. Exporters may gain, while some local businesses face tougher competition.
+play: debate | Are free trade agreements good for ordinary people? | Usually, on balance. Cheaper imports and bigger export markets help many, but some workers need support* | Never. Trade only helps big companies | Critics say local jobs can be lost to cheaper imports, and that deals can limit what governments can do.
+check: mcq | What do free trade agreements usually do? | Cut tariffs and barriers* | Raise tariffs | Ban all trade
+check: tf | Trade deals can create winners and losers. | true
+check: mcq | {nz:Which country did NZ sign a free trade deal with in 2008?~au:Which country did Australia sign a free trade deal with in 2015?} | China* | Mars | Atlantis
+home: Pick a product from overseas and find out if a trade deal covers it.
+skill: economy
+
+@lesson 7.4 | Sanctions | 🚫 | townhall
+hook: After Russia invaded Ukraine in 2022, many countries froze Russian assets. What's the point?
+learn: Sanctions are penalties countries use to pressure a government to change what it's doing.
+learn: They include freezing money, travel bans on leaders, and bans on trading certain goods.
+learn: {nz:In 2022, NZ passed its first law letting it set sanctions on its own, aimed at Russia.~au:Australia can set its own sanctions, as well as those agreed by the United Nations.}
+play: match | Match each sanction to what it does | Asset freeze=Locks up money held overseas; Travel ban=Stops leaders entering the country; Trade ban=Stops certain goods being bought or sold; Arms embargo=Stops weapons being sent
+check: mcq | What are sanctions for? | Pressuring a government to change* | Rewarding a government | Holidays
+check: tf | Sanctions can include travel bans on leaders. | true
+check: mcq | What does an asset freeze do? | Locks up money held overseas* | Makes ice | Gives money away
+home: Read a news story about sanctions and work out who they're aimed at.
+skill: global
+
+@lesson 7.5 | The debate about aid | 🤲 | townhall
+hook: Rich countries give billions in aid. Does it actually work?
+learn: Good aid can save lives, like vaccines, clean water and disaster help.
+learn: Critics worry about waste, debt from loans, and aid used to win influence.
+learn: Aid tends to work better when local communities lead, and results are measured.
+play: debate | Should aid go mainly to countries close to us, like the Pacific? | It makes sense to focus where we know the region well and can help quickly, while still helping in big global crises* | Aid should never go anywhere | Others argue aid should go wherever the need is greatest, even if it's far away.
+check: mcq | When does aid tend to work best? | When local communities lead and results are measured* | When nobody checks | When it's kept secret
+check: tf | Aid can be given as loans, which can create debt. | true
+check: mcq | Which is an example of aid that saves lives? | Vaccines and clean water* | Luxury cars | Billboards
+home: Find one aid project your country funds, and what it's trying to achieve.
+skill: global
+
+@lesson 7.6 | Global shocks | 🌪️ | bank
+hook: A war on the other side of the world pushes up petrol prices here. How?
+learn: Small, open economies like ours are tightly linked to the rest of the world.
+learn: A shock, like a war, a pandemic or a financial crisis, can ripple through prices, jobs and interest rates.
+learn: Savings, steady skills and not over-borrowing help households ride out shocks.
+play: order | How an overseas shock can reach your wallet. Put it in order. | A war disrupts oil supply; Global oil prices jump; Petrol and shipping cost more here; Prices of many goods rise; The central bank may raise interest rates
+check: mcq | How can an overseas war affect prices here? | By pushing up oil and shipping costs* | It can't | By making petrol free
+check: tf | Savings can help households ride out a shock. | true
+check: mcq | Which was a global shock? | The COVID-19 pandemic* | A local school fair | A sunny weekend
+home: Ask a grown-up how the COVID-19 years affected your family's money.
+skill: economy
+
+@lesson 8.1 | Income and wealth | 📏 | townhall
+hook: Two people earn the same salary. One owns a house and shares. Are they equally well off?
+learn: Income is money coming in, like wages. Wealth is what you own, like savings, a house and investments, minus debts.
+learn: Wealth is usually spread much less evenly than income. In both countries, the richest 10% hold a big share of all wealth.
+learn: Wealth often passes between generations, which can widen gaps over time.
+play: sort | Income, Wealth | Weekly wages=Income; A house you own=Wealth; Rent from a tenant=Income; Shares in a company=Wealth; A benefit payment=Income; Money saved in the bank=Wealth | Income or wealth?
+check: mcq | What's wealth? | What you own, minus debts* | Your weekly wage | Your phone plan
+check: tf | Wealth is usually spread less evenly than income. | true
+check: mcq | How can wealth gaps grow over time? | Wealth often passes between generations* | They can't | Everyone inherits the same
+home: Talk with a grown-up about the difference between income and wealth.
+skill: fairness
+
+@lesson 8.2 | Ask why five times | 🌱 | workshop
+hook: Some kids arrive at school hungry. Free breakfast helps today. But why does it keep happening?
+learn: Systems change starts with understanding root causes, not just symptoms.
+learn: The "five whys" method keeps asking why until you reach a deeper cause.
+learn: Root causes often involve rules, prices, wages or how services are designed.
+play: build | Ask why five times | Kids arrive at school hungry; Why? Their families can't afford enough food; Why? Rent and food prices rose faster than wages; Why? There aren't enough affordable homes; Why? Not enough homes have been built for years
+check: mcq | What does the five whys method find? | Deeper causes of a problem* | Five quick fixes | Who to blame
+check: tf | Root causes can involve rules, prices or wages. | true
+check: mcq | Free breakfast helps hungry kids today. That treats… | A symptom, while the causes still need work* | The root cause completely | Nothing
+home: Pick a problem you care about and ask why five times.
+skill: systems
+
+@lesson 8.3 | Power mapping | 🗺️ | townhall
+hook: You want your city to build safer bike lanes. Who actually has the power to make it happen?
+learn: A power map shows who decides, who influences them, and who's affected.
+learn: Decision-makers might be councillors, ministers or a company board. Influencers include media, businesses and community groups.
+learn: Allies are people who want the same change. Together, you're harder to ignore.
+play: match | Match each person to their role on a power map | City councillors=Decision-makers; Local newspaper=Influencer; Cycling club=Ally; People who ride to work=Affected; Business owners on the street=Influencer
+check: mcq | What does a power map show? | Who decides, who influences and who's affected* | A street map | A map of power lines
+check: tf | Allies make a campaign harder to ignore. | true
+check: mcq | For a council bike lane, who decides? | City councillors* | The cycling club | A newspaper
+home: Draw a power map for a local issue you care about.
+skill: systems
+
+@lesson 8.4 | Rights at work | 👷 | workshop
+hook: Your boss says you have to come in an hour early for "training", unpaid. Is that OK?
+learn: Workers have rights, like at least the minimum wage, breaks, safe workplaces and paid leave.
+learn: Time your boss requires you to work, including training, usually has to be paid.
+learn: You have the right to join a union. Unions bargain together for better pay and conditions, and your employer can't punish you for joining.
+play: chat | Your manager asks you to come in early | them: Can you come in an hour early tomorrow for unpaid training? | me: Happy to do the training. Will that hour be paid, since it's required?*/Sure, no problem/No way, I quit | them: Hmm, I'll check with head office. | me: Thanks. I'll also check the rules on {nz:employment.govt.nz~au:fairwork.gov.au}*/Never mind, I'll do it free/Forget it
+check: mcq | Required training time at work usually… | Has to be paid* | Is always free | Doesn't count
+check: tf | Your employer can't punish you for joining a union. | true
+check: mcq | {nz:Where can NZ workers check their rights?~au:Where can Australian workers check their rights?} | {nz:employment.govt.nz~au:fairwork.gov.au}* | A gaming site | Nowhere
+home: Look up the minimum wage and your rights to breaks on {nz:employment.govt.nz~au:fairwork.gov.au}.
+skill: work
+
+@lesson 8.5 | How big changes happened | 📚 | museum
+hook: Women voting, marriage equality, native title. None of them happened by accident. How did they happen?
+learn: Big changes usually take years of campaigning, evidence and people refusing to give up.
+learn: They happen in different ways: new laws, court cases, referendums and changes in public opinion.
+learn: Most started with a small group of people who cared a lot.
+play: match | Match each change to how it happened | {nz:Women's vote in 1893~au:The 1967 referendum}={nz:Years of petitions and campaigning~au:A national vote after years of campaigning}; {nz:Marriage equality in 2013~au:Marriage equality in 2017}={nz:A member's bill passed by Parliament~au:A national postal survey, then a new law}; {nz:Nuclear-free NZ in 1987~au:Native title in 1992}={nz:Years of protest, then a new law~au:A High Court case brought by Eddie Mabo and others}
+check: mcq | How do big changes usually happen? | Years of campaigning and persistence* | Overnight, by luck | Never
+check: tf | Some big changes came through court cases. | true
+check: mcq | Most big changes started with… | A small group who cared a lot* | Nobody | One tweet
+home: Ask a grown-up about a big change they remember happening.
+skill: systems
+
+@lesson 8.6 | Your role | 🧭 | home
+hook: You care about a fairer world. Do you have to do everything?
+learn: There are many roles: voting, volunteering, giving, your career, everyday choices and speaking up.
+learn: Pick one or two that fit your skills and life right now. You don't have to do it all.
+learn: Change takes a long time. Look after yourself, so you can keep going.
+play: build | Build your plan for change | Pick an issue you care about; Choose one or two roles that suit you; Find a group already working on it; Set one small goal for the next month; Check in after a month and adjust; Make time to rest
+check: mcq | Do you have to do everything to make a difference? | No, pick one or two roles that fit* | Yes, all of it | Nothing helps
+check: tf | Looking after yourself helps you keep going. | true
+check: mcq | A good first step is to… | Find a group already working on the issue* | Start ten groups at once | Wait until you're older
+home: Write your own plan for change and share it with someone you trust.
+skill: systems
+

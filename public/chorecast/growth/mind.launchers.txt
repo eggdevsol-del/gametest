@@ -289,3 +289,291 @@ check: tf | Support lines can help you even if you're calling about a friend. | 
 home: Save a support line number in your phone.
 skill: help seeking
 
+@lesson 5.1 | Alcohol and the law | 🍺 | townhall
+hook: You're 17. A mate's older brother offers to buy you drinks. What does the law say?
+learn: In both countries, you must be 18 to buy alcohol, and shops and bars must check ID.
+learn: {nz:It's against the law to give alcohol to under-18s unless you're their parent or have their parent's OK, and it must be done responsibly.~au:Most states also make it illegal to give alcohol to under-18s at private homes without their parent's OK.}
+learn: Using a fake ID, or lending yours to someone, is illegal and can mean a fine.
+play: sort | Legal, Not legal | An 18-year-old buying a drink with real ID=Legal; A 17-year-old using a fake ID=Not legal; Lending your licence to a younger friend=Not legal; An adult buying drinks for strangers' 16-year-olds=Not legal; An 18-year-old choosing not to drink=Legal; Being the sober driver for your friends=Legal | Legal or not?
+check: mcq | How old must you be to buy alcohol? | 18* | 16 | 21
+check: tf | Lending your ID to a younger friend is fine. | false | It's illegal, and you can be fined.
+check: mcq | Can an adult give alcohol to someone else's 16-year-old at a party without asking? | No, they need the parent's OK* | Yes, always | Only on weekends
+home: Talk with a grown-up about your family's rules on alcohol at parties.
+skill: alcohol
+
+@lesson 5.2 | Standard drinks | 🥃 | kitchen
+hook: One can, one glass, one shot. Are they the same amount of alcohol?
+learn: A standard drink in both countries has 10 grams of pure alcohol.
+learn: Many drinks hold more than one standard drink. A bottle of wine can be 7 or more, and some cans of premix are 2 or more.
+learn: Your body clears about one standard drink an hour. Coffee, cold showers and food don't speed that up.
+play: slider | Your body clears about one standard drink an hour. Someone finishes 6 standard drinks at midnight. Roughly what time is the alcohol gone? | 0 | 12 | 6 | am | 1 | 1
+check: mcq | How much pure alcohol is in a standard drink? | 10 grams* | 100 grams | 1 gram
+check: tf | Coffee sobers you up faster. | false | Only time clears alcohol from your body.
+check: mcq | One drink can hold… | More than one standard drink* | Exactly one standard drink, always | No alcohol
+home: Read the standard drinks label on a bottle or can with a grown-up.
+skill: alcohol
+
+@lesson 5.3 | Alcohol and your brain | 🧠 | garden
+hook: Your brain keeps developing until your mid-20s. What does alcohol do to it?
+learn: Alcohol slows your brain. Judgement, memory, balance and reactions all get worse.
+learn: Teen brains are still developing, which makes them more sensitive to alcohol's effects.
+learn: Health experts in both countries say the safest choice for under-18s is not to drink at all.
+play: match | Match each part of you to what alcohol can do | Judgement=Risky choices start to feel OK; Memory=Gaps or blackouts; Balance=Falls and injuries; Mood=Swings from happy to angry or sad
+check: mcq | What do health experts say is safest for under-18s? | Not drinking at all* | Drinking only on weekends | Drinking with energy drinks
+check: tf | Teen brains are still developing. | true
+check: mcq | Alcohol can make risky choices… | Feel OK when they're not* | Easier to spot | Impossible
+home: Ask a grown-up what they wish they'd known about alcohol at your age.
+skill: alcohol
+
+@lesson 5.4 | Drug facts, not myths | 💊 | townhall
+hook: "It's natural, so it's safe." "Everyone vapes." Are these true?
+learn: Cannabis is illegal in {nz:New Zealand~au:most of Australia}, and having other illegal drugs can lead to serious charges.
+learn: Pills and powders can contain dangerous surprise drugs. You can't tell what's in them by looking.
+learn: Nicotine in vapes is very addictive. {nz:It's illegal to sell vapes to under-18s.~au:Vapes can only be sold in pharmacies, and under-18s need a prescription.}
+play: sort | Fact, Myth | Natural means safe=Myth; You can't tell what's in a pill by looking=Fact; Most teens vape=Myth; Nicotine is very addictive=Fact; Mixing drugs with alcohol raises the risks=Fact; One try can't hurt you=Myth | Fact or myth?
+check: mcq | Why are pills and powders risky? | They can contain dangerous surprise drugs* | They're always pure | They're legal
+check: tf | Nicotine in vapes is addictive. | true
+check: mcq | {nz:Can shops sell vapes to under-18s in NZ?~au:Where can vapes be sold in Australia?} | {nz:No, it's illegal~au:Only in pharmacies}* | {nz:Yes, any shop~au:Any corner shop} | {nz:Only online~au:Vending machines}
+home: Talk with a grown-up about where to find reliable facts on drugs.
+skill: drugs
+
+@lesson 5.5 | Looking after a mate | 🫂 | home
+hook: Your friend has had too much and won't wake up properly. What do you do?
+learn: Danger signs include not waking up, vomiting while passed out, slow or odd breathing, and cold, pale or blue skin.
+learn: Call {nz:111~au:000} straight away. Ambulance officers are there to help, not to get anyone in trouble.
+learn: Put them on their side in the recovery position, and stay with them. Never let them "sleep it off" alone.
+play: order | A friend won't wake up properly. Put the steps in order. | Check if they respond to your voice; Call {nz:111~au:000} if they won't wake or breathe oddly; Roll them onto their side; Stay with them and keep watching their breathing; Tell the ambulance officers what they had
+check: mcq | A friend is passed out and vomiting. You… | Call {nz:111~au:000} and put them on their side* | Let them sleep it off alone | Give them coffee
+check: tf | Ambulance officers are there to help. | true
+check: mcq | Why use the recovery position? | So they don't choke if they vomit* | So they sleep better | It's a party trick
+home: Learn the recovery position with a grown-up or in a first aid course.
+skill: safety
+
+@lesson 5.6 | Plans and help | 🗺️ | home
+hook: Friday night is sorted. What about getting home safely?
+learn: Plan ahead: who you're going with, how you're getting home, and who you'll call if plans change.
+learn: Stick with your friends, watch your drink, and never get in a car with a driver who's been drinking.
+learn: {nz:The Alcohol Drug Helpline is free on 0800 787 797, or text 8681, any time.~au:The National Alcohol and Other Drug Hotline is free on 1800 250 015, any time.}
+play: chat | A friend offers you a lift home from a party | them: Jump in, I'm fine to drive. I've only had a few. | me: No thanks. I'll get my mum to pick us both up*/Sure, let's go/I'll drive, I've only had two | them: Come on, it's only five minutes. | me: Not worth it. Mum's on her way, come with us*/Fine, I'll come/Drive slowly then
+check: mcq | A driver has been drinking. You… | Find another way home* | Get in and hope | Sit in the back
+check: tf | Planning how you'll get home before you go out is smart. | true
+check: mcq | {nz:What's the free Alcohol Drug Helpline number?~au:What's the free National Alcohol and Other Drug Hotline number?} | {nz:0800 787 797~au:1800 250 015}* | 123 | 555 555
+home: Agree a "call me any time, no questions on the spot" plan with a grown-up.
+skill: safety
+
+@lesson 6.1 | How odds work | 🎲 | stage
+hook: The jackpot is huge this week. What are your real chances of winning?
+learn: Odds tell you how likely something is. A 1 in 6 chance means you'd expect to win about once every 6 tries.
+learn: {nz:The odds of winning Powerball First Division in NZ are about 1 in 38 million per line.~au:The odds of winning Powerball Division 1 in Australia are about 1 in 134 million.}
+learn: Buying a few more tickets barely changes your chances. A bigger jackpot doesn't change the odds at all.
+play: slider | A game gives you a 1 in 6 chance of winning. If you play 60 times, about how many wins would you expect? | 0 | 30 | 10 | wins | 1 | 1
+check: mcq | A bigger jackpot means… | The same odds, just a bigger prize* | Better odds | Guaranteed wins
+check: tf | Buying a few more tickets barely changes your chances. | true
+check: mcq | {nz:Roughly what are the odds of winning NZ Powerball First Division?~au:Roughly what are the odds of winning Australia's Powerball Division 1?} | {nz:1 in 38 million~au:1 in 134 million}* | 1 in 100 | 1 in 10
+home: Look up the odds printed on a lotto ticket or website with a grown-up.
+skill: gambling
+
+@lesson 6.2 | "I'm due for a win" | 🪙 | stage
+hook: You've lost 10 bets in a row. Surely the next one has to win?
+learn: The gambler's fallacy is believing a win is "due" after losses. Each spin or bet is separate. The odds don't change.
+learn: Near misses, like two cherries and a lemon, feel close but are still losses. Machines are designed to show them often.
+learn: Trying to win back losses is called chasing, and it usually means losing more.
+play: match | Match each gambling thought to the truth | I've lost 10 in a row, so I'm due a win=Each bet is separate and the odds don't change; I almost won=A near miss is still a loss; I've got a system=The odds stay the same whatever you do; I'll just win back what I lost=Chasing losses usually means losing more
+check: mcq | After 10 losses, the chance of winning the next bet is… | The same as before* | Much higher | Guaranteed
+check: tf | Near misses are still losses. | true
+check: mcq | What's chasing losses? | Betting more to win back what you lost* | Running after a horse | Saving money
+home: Flip a coin 10 times with a grown-up and talk about whether a result was ever "due".
+skill: gambling
+
+@lesson 6.3 | Sports betting | 🏉 | stage
+hook: Betting ads are all over the footy. "Bonus bets!" "Same-game multis!" What are they really selling?
+learn: Betting companies make money because, over time, most people lose more than they win.
+learn: Multis link several bets together. Every extra leg makes it much less likely you'll win.
+learn: Bonus bets often come with fine print, like having to bet much more before you can withdraw winnings.
+play: diff | The betting ad and the fine print. Tap what the fine print adds. | Bonus bet: $50; Multis: big payouts; Betting: fun with your mates | Bonus bet: $50, but only after you bet $500; Multis: big payouts, but most multis lose; Betting: fun with your mates
+check: mcq | What happens when you add more legs to a multi? | It gets much less likely to win* | It gets more likely to win | Nothing
+check: tf | Bonus bets often have fine print. | true
+check: mcq | Over time, who usually comes out ahead in sports betting? | The betting company* | Most punters | Everyone
+home: Count the betting ads during one sports game with a grown-up.
+skill: gambling
+
+@lesson 6.4 | Gambling in disguise | 🎮 | online
+hook: A free casino app. A site where you bet game skins. Is it really gambling?
+learn: Social casino apps feel free, but they push you to buy more coins with real money.
+learn: Skin betting sites let people bet game items that can be worth real money, and many aren't legal or regulated.
+learn: Crypto casinos and offshore betting sites have few protections if things go wrong.
+play: sort | Gambling-like, Not gambling | Betting game skins on match results=Gambling-like; A social casino app selling coin packs=Gambling-like; Buying a skin at a set price=Not gambling; A free daily spin that unlocks paid spins=Gambling-like; Paying once for a puzzle game=Not gambling; An offshore crypto casino=Gambling-like | Gambling-like or not?
+check: mcq | Why are social casino apps risky? | They push you to buy more coins with real money* | They're always free | They pay you
+check: tf | Offshore betting sites have strong protections. | false | They often have few protections if things go wrong.
+check: mcq | Betting game skins on match results is… | Gambling-like* | Just shopping | Saving
+home: Check a game or app you use for gambling-like features, and talk about them with a grown-up.
+skill: gambling
+
+@lesson 6.5 | Signs of harm | 🚩 | stage
+hook: Your mate keeps borrowing money and says, "I'll win it back this weekend." Should you be worried?
+learn: Gambling harm can include betting more than planned, chasing losses, hiding it and borrowing to bet.
+learn: It can also show up as mood swings, money stress, and missing work, study or time with people.
+learn: Harm affects families and friends too. You can get support even if it's someone else's gambling.
+play: tap | Tap the signs gambling could be causing harm | 💸:yes:Betting more than they planned; 🔁:yes:Chasing losses; 🤫:yes:Hiding how much they bet; 🏦:yes:Borrowing money to bet; 😠:yes:Getting angry when they lose; 🎳:no; 🛌:no
+check: mcq | Which is a sign of gambling harm? | Borrowing money to bet* | Playing a board game | Saving money
+check: tf | Friends and family can get support for someone else's gambling. | true
+check: mcq | Your mate says they'll "win it back". That's… | Chasing losses* | A smart plan | Saving
+home: Talk with a grown-up about how to start a caring conversation with a friend who's struggling.
+skill: gambling
+
+@lesson 6.6 | Taking back control | 🛑 | stage
+hook: You want to stop betting, but the apps keep calling you back. What can actually help?
+learn: {nz:The Gambling Helpline is free on 0800 654 655, or text 8006, for anyone worried about their own or someone else's gambling.~au:Gambling Help Online is free on 1800 858 858, any time.}
+learn: {nz:You can ask gambling venues to exclude you, and many banks let you block gambling payments.~au:BetStop lets you ban yourself from all licensed online and phone betting, from 3 months to life. Many banks let you block gambling payments too.}
+learn: Delete betting apps, unsubscribe from offers, and tell someone you trust so you're not doing it alone.
+play: order | Take back control from gambling. Put the steps in order. | Admit to yourself it's a problem; Tell someone you trust; Call {nz:the Gambling Helpline~au:Gambling Help Online}; Block gambling payments with your bank; {nz:Ask venues to exclude you~au:Sign up to BetStop}; Delete betting apps and offers
+check: mcq | {nz:What's the free NZ Gambling Helpline number?~au:What lets you ban yourself from licensed online betting in Australia?} | {nz:0800 654 655~au:BetStop}* | {nz:0800 PRIZES~au:A bonus bet} | {nz:123~au:A new app}
+check: tf | Many banks let you block gambling payments. | true
+check: mcq | A helpful step to cut back on betting is… | Deleting betting apps* | Downloading more apps | Chasing losses
+home: Find out how to block gambling payments in a banking app, with a grown-up.
+skill: gambling
+
+@lesson 7.1 | What do you value? | 💎 | garden
+hook: Two people get the same job offer. One says yes straight away. One says no. Who's right?
+learn: Values are what matter most to you, like family, creativity, fairness, adventure or security.
+learn: When choices match your values, they usually feel right, even when they're hard.
+learn: Your values can shift as you grow, so it's worth checking in on them.
+play: build | Find your top values | List 10 values that matter to you; Cross out the ones that matter least; Keep your top 5; Rank them from 1 to 5; Write one way each shows up in your life
+check: mcq | What are values? | What matters most to you* | Prices in a shop | Your marks
+check: tf | Choices that match your values usually feel right. | true
+check: mcq | Can your values change over time? | Yes* | No, never | Only once
+home: Write your top 3 values and ask a grown-up what theirs are.
+skill: purpose
+
+@lesson 7.2 | Your strengths | 💪 | workshop
+hook: What do people ask you for help with? That might be a clue.
+learn: Strengths are things you do well and that give you energy, not just things you can do.
+learn: Ask friends, family or teachers what they think you're good at. They often notice things you don't.
+learn: Using your strengths often makes work and study feel more meaningful.
+play: match | Match each strength to a job where it shines | Explaining things clearly=Teaching or training; Staying calm under pressure=Paramedic or air traffic control; Fixing and building things=A trade like electrician or builder; Spotting tiny details=Accounting or editing; Making people feel welcome=Hospitality or nursing
+check: mcq | What's a strength? | Something you do well that gives you energy* | Something you hate doing | A muscle only
+check: tf | Other people can notice strengths you don't see. | true
+check: mcq | A good way to find your strengths is… | Ask people what they think you're good at* | Guess once and never check | Copy a friend's
+home: Ask three people what they think your strengths are, and compare their answers.
+skill: purpose
+
+@lesson 7.3 | Purpose grows | 🧩 | garden
+hook: Everyone keeps asking what you want to do with your life. What if you don't know yet?
+learn: Most people don't find their purpose in one big moment. It grows from trying things.
+learn: Purpose can come from many places: work, family, friends, community, faith, sport or creativity.
+learn: It can change across your life. Not knowing at 17 is completely normal.
+play: debate | Do you need to know your life's purpose by 18? | No. Purpose usually grows from trying things, and it can change* | Yes. If you don't know by 18, you've failed | Having a direction early can help some people focus, like when choosing what to study.
+check: mcq | How does purpose usually grow? | From trying things over time* | In one big moment for everyone | It never does
+check: tf | Purpose can come from many places, not just work. | true
+check: mcq | You don't know your purpose at 17. That's… | Completely normal* | A disaster | Something to hide
+home: List three things you'd like to try in the next year to learn more about what you enjoy.
+skill: purpose
+
+@lesson 7.4 | Four circles | 🗺️ | workshop
+hook: What you love, what you're good at, what the world needs and what you can be paid for. Where do they meet?
+learn: A popular planning tool draws four overlapping circles. Where they overlap can point to work that feels meaningful.
+learn: It's often called ikigai, though in Japan ikigai simply means a reason for living, which can be small everyday joys.
+learn: Use it as a thinking tool, not a test with one right answer.
+play: match | Match each circle to a question that helps you fill it in | What you love=What could you do for hours without noticing?; What you're good at=What do people ask you for help with?; What the world needs=What problems do you care about fixing?; What you can be paid for=What would someone pay you to do?
+check: mcq | In Japan, what does ikigai mean? | A reason for living* | A type of job | A salary
+check: tf | The four circles are a thinking tool, not a test with one right answer. | true
+check: mcq | Which question helps with "what the world needs"? | What problems do I care about fixing?* | What's my favourite snack? | What's trending?
+home: Draw your own four circles and fill in two ideas for each.
+skill: purpose
+
+@lesson 7.5 | Money and meaning | 💰 | bank
+hook: Job A pays $10,000 more. Job B teaches you more and you'd love it. Which do you take?
+learn: Money matters. Enough income to cover your needs and save makes life less stressful.
+learn: Research suggests more money helps wellbeing, but relationships, health, freedom and meaning matter a lot too.
+learn: There's no one right answer. Weigh up pay, learning, time and values for your situation.
+play: path | You get two job offers: one pays $10,000 more, the other teaches you more and fits your values. | Weigh pay, learning, time and values, then choose => good: You made a thoughtful choice that fits your life right now. | Always take the highest pay without thinking => ok: Pay matters, but you might miss things that matter to you too. | Take whichever your friends think is cooler => bad: It's your life and your values, not theirs.
+check: mcq | What's a smart way to compare job offers? | Weigh pay, learning, time and values* | Pick whatever sounds coolest | Flip a coin only
+check: tf | Research suggests things like relationships and meaning matter a lot for wellbeing. | true
+check: mcq | Is there one right answer between more pay and more meaning? | No, it depends on your situation* | Always more pay | Always more meaning
+home: Ask a grown-up how they've balanced money and meaning in their work.
+skill: purpose
+
+@lesson 7.6 | A purpose sentence | 🌅 | garden
+hook: Can you sum up what you want to do with your strengths in one sentence?
+learn: A purpose sentence links a strength, who you want to help, and the difference you want to make.
+learn: It doesn't need to be grand. "Help my little cousins feel confident at maths" counts.
+learn: Small steps, like tutoring, volunteering or a club, turn the sentence into action.
+play: build | Build your purpose sentence | Start with a strength: I'm good at explaining things; Add who you want to help: younger kids; Add the difference: so they feel confident at maths; Put it together in one sentence; Pick one small step: tutor a cousin this month
+check: mcq | What goes in a purpose sentence? | A strength, who you help and the difference you make* | Your bank balance | Your favourite colour
+check: tf | A purpose sentence can be about small, everyday things. | true
+check: mcq | What turns a purpose sentence into action? | Small steps like tutoring or volunteering* | Waiting for the perfect moment | Keeping it secret
+home: Write your own purpose sentence and one small step to take this month.
+skill: purpose
+
+@lesson 8.1 | Kinds of support | 🧩 | garden
+hook: The friend who's great to talk to isn't always the one who can help you move flat. Why does that matter?
+learn: Support comes in different kinds: emotional support, practical help and advice.
+learn: Different people are good at different kinds. Nobody can be everything for you.
+learn: A strong network has a mix, so you're not relying on just one person.
+play: sort | Emotional support, Practical help, Advice | Someone who listens after a break-up=Emotional support; A friend who helps you move flat=Practical help; A mentor who reviews your CV=Advice; A sibling who sits with you at the hospital=Emotional support; A neighbour who feeds your cat while you're away=Practical help; A financial mentor who explains your options=Advice | What kind of support is it?
+check: mcq | Why have a mix of people in your network? | Different people help in different ways* | So you have more followers | It doesn't matter
+check: tf | Nobody can be everything for you. | true
+check: mcq | Helping you move flat is… | Practical help* | Advice | Emotional support
+home: List who you'd go to for each kind of support.
+skill: support
+
+@lesson 8.2 | Starting over somewhere new | 📦 | home
+hook: You've moved to a new city for study or work. Your old friends are far away. How do you build a new team?
+learn: Moving often thins out your support network for a while. That's normal.
+learn: Join things that meet regularly, like a club, team, class or volunteer group. Say yes to invitations, even small ones.
+learn: Keep your old connections going with calls and visits, while you build new ones.
+play: path | It's your first month in a new city and you feel lonely. | Join a club and say yes to a few invitations => good: It feels awkward at first, but regular contact turns people into friends. | Stay in your room scrolling every night => bad: It's easy to slip into, but it usually makes loneliness worse. | Call home every night, but don't meet anyone new => ok: Keeping in touch helps, but you need people nearby too.
+check: mcq | What helps build a network in a new place? | Joining things that meet regularly* | Staying home every night | Waiting for people to find you
+check: tf | Moving can thin out your support network for a while. | true
+check: mcq | Someone invites you for a coffee. You… | Say yes, even if it feels awkward* | Always say no | Ignore it
+home: Find one club or group near you that meets regularly.
+skill: support
+
+@lesson 8.3 | Loneliness | 🌙 | garden
+hook: Hundreds of followers, but nobody to call on a Friday night. Is that loneliness?
+learn: Loneliness is feeling you don't have the connection you need. You can feel it even with lots of people around.
+learn: It's very common, especially during big changes like leaving school or moving out.
+learn: Small, regular contact helps most: the same class, team or café each week.
+play: sort | Helps with loneliness, Can make it worse | Joining a weekly group activity=Helps with loneliness; Volunteering=Helps with loneliness; Scrolling other people's highlights for hours=Can make it worse; Saying yes to a coffee invite=Helps with loneliness; Turning down every invitation=Can make it worse; Texting an old friend=Helps with loneliness | Helps or makes it worse?
+check: mcq | What is loneliness? | Feeling you don't have the connection you need* | Being by yourself for an hour | Having no phone
+check: tf | You can feel lonely even with lots of people around. | true
+check: mcq | What helps most with loneliness? | Small, regular contact with people* | More scrolling | Waiting it out alone
+home: Text someone you haven't spoken to in a while.
+skill: support
+
+@lesson 8.4 | Mentors | 🧑‍🏫 | workshop
+hook: Someone a few years ahead of you has done what you want to do. Could they help?
+learn: A mentor is someone with more experience who gives you advice and encouragement.
+learn: Mentors can come from work, uni mentoring schemes, sports clubs, community groups or your family's friends.
+learn: Be a good mentee: come with questions, respect their time, and tell them how their advice helped.
+play: order | Find and keep a mentor. Put the steps in order. | Work out what you'd like help with; Look for someone a few steps ahead; Ask for a short chat first; Come with specific questions; Thank them and share how you used their advice; Keep in touch every few months
+check: mcq | What's a mentor? | Someone with more experience who gives advice* | Your boss's boss | A celebrity you follow
+check: tf | Telling a mentor how their advice helped is a good habit. | true
+check: mcq | A good first ask is… | A short chat* | To be their best friend | A job straight away
+home: Think of one person who could mentor you, and what you'd ask them.
+skill: support
+
+@lesson 8.5 | Professional support | 🩺 | townhall
+hook: Friends are great, but sometimes you need someone trained. Where do you start, and what does it cost?
+learn: A GP is often the best first step. They can check your mental and physical health and refer you on.
+learn: {nz:Many GP practices have free mental health support on site, and 1737 is free any time. Student health services are free or cheap.~au:A GP can make a mental health treatment plan, giving Medicare rebates for up to 10 sessions a year with a psychologist.}
+learn: {nz:Youth services, like Youthline and youth health centres, also offer free counselling.~au:headspace centres are free or low cost for 12 to 25-year-olds.}
+play: match | Match each need to a good starting point | Feeling low for weeks=A GP; Needing to talk to someone tonight={nz:1737~au:Lifeline on 13 11 14}; Free support as a uni student=Student health services; Ongoing counselling={nz:A counsellor through your GP or a youth service~au:A psychologist through a mental health treatment plan}
+check: mcq | What's often the best first step for professional support? | A GP* | A social media post | Waiting a year
+check: tf | {nz:1737 is free to call or text any time.~au:A mental health treatment plan can lower the cost of seeing a psychologist.} | true
+check: mcq | {nz:Which free number can you call or text any time in NZ?~au:How many Medicare-rebated psychology sessions can a plan cover each year?} | {nz:1737~au:Up to 10}* | {nz:0800 PIZZA~au:Up to 1} | {nz:123~au:Unlimited}
+home: Find out how to book a GP near you, and whether there's a student or youth health service.
+skill: help
+
+@lesson 8.6 | On someone else's team | 🤝 | home
+hook: Your friend says "I'm fine," but they don't seem fine. What do you do?
+learn: Being part of someone's support network means checking in, listening and showing up.
+learn: Ask, and ask again: "You've seemed a bit flat lately. I'm here if you want to talk."
+learn: Know your limits. Help them connect with other support, and look after yourself too.
+play: chat | You check in on a friend | them: Yeah, I'm fine. | me: You've seemed a bit flat lately. I'm here if you want to talk*/OK cool/You don't look fine | them: Honestly, work's been really hard. | me: That sounds tough. Want to grab a coffee this week and talk it through?*/Everyone's work is hard/Just quit then
+check: mcq | A friend says "I'm fine" but seems down. You… | Gently check in again* | Drop it forever | Tell everyone
+check: tf | Looking after yourself matters when you support others. | true
+check: mcq | What's part of being on someone's team? | Checking in and listening* | Fixing everything for them | Judging them
+home: Check in on one friend this week, and really listen.
+skill: support
+

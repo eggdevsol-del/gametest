@@ -285,6 +285,294 @@ check: tf | It's OK to ask a grown-up about every pop-up. | true
 home: Practise "stop, look, ask" with a grown-up on a game you play.
 skill: online safety
 
+@lesson 5.1 | A password is a key | 🔑 | online
+hook: Your front door has a key. What's the key to your game or tablet?
+learn: A password is like a key. It unlocks your account so only you can get in.
+learn: Anyone who knows your password can open your account, just like anyone with your key could open your door.
+learn: That's why passwords stay secret.
+play: match | Match each thing to the key that unlocks it | Your front door=A door key; Your bike lock=A lock code; Your game account=A password; Your tablet=A screen PIN
+check: mcq | What does a password do? | Unlocks your account* | Makes your game faster | Changes the colours
+check: tf | Anyone who knows your password can get into your account. | true
+check: mcq | Why do passwords stay secret? | So only you can get in* | Because they're boring | So you forget them
+home: Count how many things at home use a key, a code or a password.
+skill: passwords
+
+@lesson 5.2 | Who can know? | 🤫 | online
+hook: Your best friend asks for your game password. They promise they won't tell. Do you share it?
+learn: Only you and your grown-up should know your passwords.
+learn: Even best friends shouldn't know. Friends can fall out, or tell someone by accident.
+learn: Real game helpers will never ask for your password.
+play: sort | Can know my password, Shouldn't know it | My mum, dad or carer=Can know my password; My best friend=Shouldn't know it; Someone in a game chat=Shouldn't know it; A message saying it's from the game company=Shouldn't know it; My classmate=Shouldn't know it; The grown-up who looks after me=Can know my password | Who can know your password?
+check: mcq | Who can know your password? | You and your grown-up* | Your best friend | Anyone who asks nicely
+check: tf | Real game helpers will ask for your password. | false | Real helpers never ask for it.
+check: mcq | Your friend promises not to tell. Do you share your password? | No, keep it for you and your grown-up* | Yes | Only if they share theirs
+home: Check with your grown-up that they know the passwords for your games.
+skill: passwords
+
+@lesson 5.3 | Typing it safely | 🙈 | online
+hook: You're typing your password and someone leans in to watch. What now?
+learn: People can learn your password just by watching you type it.
+learn: Cover the screen or turn away when you type it.
+learn: Never say your password out loud, even as a joke.
+play: path | You're typing your password and your friend leans over to look. | Ask them to look away for a second => good: Easy! Your password stays secret. | Keep typing anyway => bad: They might see it and remember it. | Say it out loud so they can type it for you => bad: Now they know it. Tell a grown-up and change it.
+check: mcq | Someone is watching you type your password. You… | Ask them to look away* | Type slower so they can see | Say it out loud
+check: tf | People can learn your password by watching you type. | true
+check: mcq | Is it OK to say your password out loud? | No* | Yes | Only in class
+home: Practise covering the screen when you type a password, with a grown-up watching the room.
+skill: passwords
+
+@lesson 5.4 | Where not to keep it | 📝 | online
+hook: You stick your password on a note on your tablet so you won't forget. Good idea?
+learn: Notes on screens, in pencil cases or on the fridge can be read by anyone.
+learn: Ask your grown-up to keep your passwords somewhere safe for you.
+learn: Many grown-ups use a password app that keeps passwords locked away.
+play: tap | Tap the unsafe places to keep a password | 📝:yes:A sticky note on your tablet; 🧃:yes:Written on your lunch box; 💬:yes:Sent in a chat message; ✏️:yes:Written on your pencil case; 🔐:no; 🧠:no
+check: mcq | Where's a safe place for your password? | With your grown-up, kept safe* | On a sticky note on your tablet | In a chat message
+check: tf | A note stuck on your screen can be read by anyone. | true
+home: Ask your grown-up how they keep their passwords safe.
+skill: passwords
+
+@lesson 5.5 | Uh-oh, someone knows | 😟 | online
+hook: Oops! You told a friend your password. Is it too late?
+learn: It's OK. Mistakes happen, and it can be fixed.
+learn: Tell your grown-up straight away. They can help you change it.
+learn: Make a brand-new password, and keep the new one secret.
+play: order | Someone knows your password. Put the steps in order. | Tell your grown-up; Log in together; Change the password; Make up a new silly-sentence password; Keep the new one secret
+check: mcq | Someone found out your password. First step? | Tell your grown-up* | Keep it a secret | Give it to more people
+check: tf | A password can be changed if someone finds it out. | true
+check: mcq | After changing it, you… | Keep the new one secret* | Tell your friend again | Write it on the wall
+home: Practise changing a password on a pretend account with your grown-up.
+skill: passwords
+
+@lesson 5.6 | Lock your screen | 📱 | online
+hook: You leave your tablet on the couch, unlocked. Your little brother picks it up. What could happen?
+learn: A screen lock, like a PIN or face unlock, stops other people using your device.
+learn: Lock it when you walk away, and keep your PIN secret too.
+learn: Easy PINs like 1234 or 0000 are easy to guess.
+play: chat | Your little brother wants your tablet | them: What's your tablet PIN? I want to play. | me: I can't tell you, but I'll unlock it and play with you*/It's 1234/Guess it! | them: Pleeease? Mum won't know. | me: Let's ask Mum together*/OK, it's my birthday/Fine, here
+check: mcq | What stops other people using your tablet? | A screen lock* | A bright case | Stickers
+check: tf | 1234 is a hard PIN to guess. | false | It's one of the first PINs people try.
+check: mcq | You walk away from your tablet. You… | Lock it* | Leave it open | Give it to a stranger
+home: Check your tablet has a screen lock, and that your grown-up knows the PIN.
+skill: passwords
+
+@lesson 6.1 | Bored? Try this! | 🌳 | garden
+hook: It's a rainy Saturday and the tablet is flat. Is there anything fun to do?
+learn: There are lots of fun things to do away from screens.
+learn: You can build, draw, read, dance, play a board game or make up a story.
+learn: Being bored for a bit is OK. It's often when your best ideas pop up.
+play: path | It's a rainy afternoon and the tablet is flat. | Build a blanket fort and read inside it => good: A cosy fort and a good book. That's a great afternoon! | Moan all afternoon => bad: The time goes slowly, and nobody has fun. | Ask a grown-up to play a board game => good: Games together are fun, and nobody needs a screen.
+check: mcq | Which is fun without a screen? | Building a blanket fort* | Staring at a flat tablet | Nothing
+check: tf | Being bored for a bit can help you think of new ideas. | true
+check: mcq | What could you do on a rainy day? | Play a board game* | Moan all day | Hide under the bed forever
+home: Make a list of five fun things you can do without a screen and stick it on the fridge.
+skill: screens
+
+@lesson 6.2 | How much is enough? | ⏱️ | home
+hook: You watched videos in the morning, after school and after dinner. Was that a lot?
+learn: Health guidelines say kids should have no more than 2 hours of fun screen time a day.
+learn: Screen time adds up fast. Little bits during the day can make a big total.
+learn: A timer can help you keep track.
+try: 30 minutes + 30 minutes = 60 minutes :: gap | 20 minutes + 40 minutes = _ minutes | 60
+play: slider | You watched 30 minutes before school, 45 after school and 30 after dinner. How many minutes is that? | 0 | 180 | 105 | minutes | 0 | 5
+check: mcq | How much fun screen time a day do health guidelines say is enough? | No more than 2 hours* | 10 hours | All day
+check: tf | Little bits of screen time can add up to a lot. | true
+check: mcq | What can help you keep track of screen time? | A timer* | A sandwich | Closing your eyes
+home: Keep a screen-time chart with a grown-up for three days.
+skill: screens
+
+@lesson 6.3 | Time to stop | 🛑 | home
+hook: Your grown-up says "Screens off!" but you're in the middle of a game. What do you do?
+learn: Stopping is hard, because games and videos are made to keep you going.
+learn: It helps to get a warning, like "5 more minutes", and to stop at the end of a level or episode.
+learn: Plan what you'll do next, so stopping feels easier.
+play: chat | Your grown-up says screen time is nearly over | them: Screens off in 5 minutes, please. | me: OK, I'll finish this level and then stop*/No! Never!/Just one more hour | them: Time's up. What would you like to do now? | me: Can we go to the park?*/Give it back!/I'm going to cry until I get it
+check: mcq | What makes stopping easier? | A 5-minute warning and a plan for what's next* | Shouting | Hiding the tablet
+check: tf | Games and videos are made to keep you going. | true
+check: mcq | A good time to stop is… | At the end of a level or episode* | In the middle of a race | Never
+home: Agree with a grown-up on a 5-minute warning for screen time.
+skill: screens
+
+@lesson 6.4 | How do I feel? | 😵 | home
+hook: After a long time on screens, do you ever feel grumpy or tired?
+learn: Too much screen time can leave you with sore eyes, a headache or a grumpy mood.
+learn: Notice how your body and mood feel when you stop.
+learn: Take breaks to stretch, look far away and move your body.
+play: tap | Tap the signs you need a screen break | 😠:yes:Feeling grumpy; 👀:yes:Sore or tired eyes; 🤕:yes:A headache; 🥱:yes:Yawning a lot; 😊:no; 🏃:no
+check: mcq | You have sore eyes after screens. What helps? | A break to look far away and move* | More screens | Rubbing them hard
+check: tf | Too much screen time can make you feel grumpy. | true
+check: mcq | What's a good screen break? | Stretching and moving* | Switching to another screen | Staring at the screen harder
+home: After your next screen time, tell a grown-up how your body and mood feel.
+skill: screens
+
+@lesson 6.5 | Screen-free spots | 🍽️ | home
+hook: Should screens be at the dinner table?
+learn: Some places and times work best with no screens, like meal times and bedtime.
+learn: Without screens, it's easier to talk, laugh and listen to each other.
+learn: Families can choose their own screen-free spots together.
+play: sort | Screen-free, Screens can be OK | The dinner table=Screen-free; In bed at night=Screen-free; A family movie night=Screens can be OK; A video call with Nana=Screens can be OK; Brushing your teeth=Screen-free; Looking up a recipe with a grown-up=Screens can be OK | Screen-free or OK?
+check: mcq | Which is a good screen-free time? | Dinner time* | A video call with Nana | Family movie night
+check: tf | Without screens, it's easier to talk and listen at dinner. | true
+check: mcq | Who can choose screen-free spots? | Your family, together* | Only the tablet | Nobody
+home: Choose one screen-free spot or time with your family and try it for a week.
+skill: screens
+
+@lesson 6.6 | Good screen time | 🎨 | online
+hook: Drawing a picture on a tablet and watching video after video. Are they the same?
+learn: Some screen time helps you make, learn or talk to people you love.
+learn: Watching video after video, with autoplay on, is easy to keep doing without thinking.
+learn: Try to pick screen time where you make something, learn something or connect with someone.
+play: sort | Making or connecting, Just watching and watching | Drawing in an art app=Making or connecting; Video calling Grandad=Making or connecting; Autoplay cartoons for hours=Just watching and watching; Learning to code a simple game=Making or connecting; Scrolling short videos one after another=Just watching and watching; Reading an e-book=Making or connecting | Which kind of screen time is it?
+check: mcq | Which is screen time where you make something? | Drawing in an art app* | Autoplay videos | Scrolling for hours
+check: tf | Video calling someone you love is a good use of a screen. | true
+check: mcq | What helps you stop watching video after video? | Turning off autoplay* | Turning up the volume | Watching faster
+home: Make something on a screen with a grown-up, like a drawing or a card for someone.
+skill: screens
+
+@lesson 7.1 | Pretend in videos | 🎬 | online
+hook: You watch a video of a dragon flying over a city. Is it real?
+learn: Lots of videos are pretend. People use costumes, special effects and clever editing.
+learn: Cartoons and animations are made up, even when they look real.
+learn: If something seems amazing or impossible, it might be pretend.
+play: sort | Could be real, Pretend | A dragon flying over a city=Pretend; A dog catching a ball=Could be real; A talking sandwich=Pretend; A kid riding a bike=Could be real; A person flying with no wings=Pretend; Rain falling on a window=Could be real | Could it be real, or is it pretend?
+check: mcq | A video shows a person flying with no wings. It's probably… | Pretend* | Real | A bird
+check: tf | Special effects can make pretend things look real. | true
+check: mcq | What can make a video pretend? | Costumes, special effects and editing* | Nothing ever | Watching it twice
+home: Watch a short video with a grown-up and talk about which parts might be pretend.
+skill: realorfake
+
+@lesson 7.2 | Changed pictures | 🖼️ | online
+hook: A photo shows a bright blue sky, but it was a grey day. How?
+learn: Photos can be changed with apps. People can add things, take things away or change colours.
+learn: Filters can make faces smoother or add puppy ears.
+learn: A photo doesn't always show what really happened.
+play: diff | The real photo and the changed photo. Tap what changed. | Sky: grey and cloudy; Dog: brown; Hat: none; Grass: green | Sky: bright blue; Dog: brown; Hat: a party hat; Grass: green
+check: mcq | Can photos be changed with apps? | Yes* | No, never | Only on Tuesdays
+check: tf | A photo always shows exactly what really happened. | false | Photos can be changed with apps.
+check: mcq | What can a filter do? | Add puppy ears or change colours* | Make you taller in real life | Nothing
+home: Try a fun filter with a grown-up, then compare it with the real photo.
+skill: realorfake
+
+@lesson 7.3 | Computer-made pictures | 🤖 | online
+hook: A picture shows a cat riding a skateboard on the moon. Who made it?
+learn: Computers can now make pictures, videos and voices of things that never happened. This is called AI.
+learn: Sometimes there are clues, like strange hands or messy writing.
+learn: But it can be hard to tell. If you're not sure, ask a grown-up.
+play: tap | Tap the clues a picture might be made by a computer | 🖐️:yes:Hands with too many fingers; 👀:yes:Eyes that look a bit odd; 🔤:yes:Writing that's jumbled up; 🌀:yes:Things melting into each other; 🙂:no; 🌳:no
+check: mcq | What can AI do? | Make pictures of things that never happened* | Nothing | Only add numbers
+check: tf | It can be hard to tell if a picture was made by a computer. | true
+check: mcq | You're not sure if a picture is real. You… | Ask a grown-up* | Share it with everyone | Believe it
+home: Look at some AI-made pictures with a grown-up and hunt for clues.
+skill: realorfake
+
+@lesson 7.4 | Ads make things shiny | 📺 | online
+hook: In the ad, the toy car zooms, flips and glows. Will it do that at home?
+learn: Ads try to make things look as exciting as possible.
+learn: They use music, close-ups, happy actors and clever filming.
+learn: The real toy might look smaller or do less than in the ad.
+play: path | An ad shows a toy car that zooms, flips and glows in the dark. | Ask a grown-up to find out what it really does => good: Now you know what it can really do before you decide. | Beg for it straight away => bad: Ads make toys look better than they are. You might be disappointed. | Believe it can fly, like in the ad => bad: Ads use clever filming. The real toy might not do that.
+check: mcq | Why do toys look amazing in ads? | Ads use music, close-ups and clever filming* | The toys are magic | Ads always show exactly what you'll get
+check: tf | A toy might look smaller at home than in the ad. | true
+check: mcq | Before asking for a toy from an ad, you could… | Find out what it really does with a grown-up* | Beg loudly | Buy two
+home: Watch an ad with a grown-up and spot one trick that makes the toy look better.
+skill: ads
+
+@lesson 7.5 | Pranks and challenges | 🃏 | online
+hook: A video shows kids doing a scary jumping challenge. Should you try it?
+learn: Some videos are pranks or jokes. Some are set up and not what they seem.
+learn: Online challenges can be dangerous. People can get badly hurt copying them.
+learn: If a challenge looks risky, don't try it. Tell a grown-up.
+play: chat | Your friend wants to try a challenge | them: Let's try that jumping challenge from the video! | me: That looks dangerous. Let's ask a grown-up first*/OK, you go first/Let's make it even higher | them: But everyone online is doing it! | me: People get hurt copying those. Let's play tag instead*/Fine, let's do it/I'll film you
+check: mcq | A video challenge looks risky. You… | Don't try it, and tell a grown-up* | Try it straight away | Do it higher
+check: tf | Some videos are set up and not what they seem. | true
+check: mcq | Why are some online challenges a bad idea? | People can get badly hurt* | They're too easy | They're boring
+home: Talk with a grown-up about a challenge or prank you've heard about.
+skill: safety
+
+@lesson 7.6 | Is it real? | ❓ | online
+hook: You see something online that seems amazing. What three questions can you ask?
+learn: Ask: who made this?
+learn: Ask: does it seem too wild or too good to be true?
+learn: Ask a grown-up: is this real? It's always OK to check.
+play: order | When you see something amazing online | Stop and don't share it yet; Ask: who made this?; Ask: does it seem too wild?; Ask a grown-up: is this real?; Share only if it's real and kind
+check: mcq | What's a good question to ask about something online? | Who made this?* | How many likes? | What colour is it?
+check: tf | It's always OK to ask a grown-up if something is real. | true
+check: mcq | Something seems too wild to be true. It might be… | Pretend* | Definitely real | A prize
+home: Practise the three questions with a grown-up on something you see online.
+skill: realorfake
+
+@lesson 8.1 | My trusted grown-ups | ✋ | home
+hook: You have five fingers on one hand. Can you name a trusted grown-up for each one?
+learn: A trusted grown-up is someone who keeps you safe and listens to you.
+learn: It could be a parent, carer, grandparent, teacher or coach.
+learn: Knowing who they are before anything happens makes telling easier.
+play: tap | Tap the people who could be trusted grown-ups | 👩:yes:Your mum, dad or carer; 🧑‍🏫:yes:Your teacher; 👵:yes:A grandparent; ⚽:yes:Your coach; 🧑‍💻:no; 🕵️:no
+check: mcq | Who could be a trusted grown-up? | A teacher or grandparent* | A stranger online | Someone you just met in a game
+check: tf | It helps to know your trusted grown-ups before anything happens. | true
+check: mcq | A trusted grown-up is someone who… | Keeps you safe and listens to you* | Gives you lollies | You met online
+home: Trace your hand and write a trusted grown-up on each finger.
+skill: telling
+
+@lesson 8.2 | Surprises and secrets | 🎁 | home
+hook: A surprise party for Nana, and someone online saying "Don't tell your mum." Are they the same?
+learn: A surprise is fun and ends soon, like a present or a party. Everyone finds out.
+learn: A bad secret makes you feel worried, scared or yucky, and someone wants you to keep it forever.
+learn: You should always tell a trusted grown-up about a bad secret.
+play: sort | Fun surprise, Secret to tell | A present for Dad's birthday=Fun surprise; Someone online says keep your chats from Mum=Secret to tell; A surprise party for Nana=Fun surprise; Someone sends a yucky picture and says don't tell=Secret to tell; Hiding Easter eggs for your cousins=Fun surprise; Someone online asks for a photo of you=Secret to tell | Fun surprise or secret to tell?
+check: mcq | Someone online says "Don't tell your mum." You… | Tell a trusted grown-up* | Keep the secret | Send them a photo
+check: tf | A surprise party is a fun surprise, not a bad secret. | true
+check: mcq | A bad secret makes you feel… | Worried, scared or yucky* | Happy and excited | Hungry
+home: Talk with a grown-up about the difference between surprises and secrets.
+skill: telling
+
+@lesson 8.3 | Yucky or scary things | 😨 | online
+hook: You see a picture online that makes you feel yucky or scared. What do you do?
+learn: Sometimes you might see something online that isn't meant for kids. It's not your fault.
+learn: Turn the screen over or close it, and don't share it.
+learn: Tell a trusted grown-up what you saw. Talking about it helps.
+play: order | You see something yucky online. Put the steps in order. | Turn the screen over or close it; Don't share it with anyone; Go and find a trusted grown-up; Tell them what you saw; Talk about how it made you feel
+check: mcq | You see something scary online. First step? | Turn the screen over or close it* | Show your friends | Keep watching
+check: tf | It's not your fault if you see something yucky online. | true
+check: mcq | Should you share a yucky picture with friends? | No* | Yes | Only with your best friend
+home: Agree with a grown-up what you'll do if you see something yucky online.
+skill: telling
+
+@lesson 8.4 | What to say | 🗣️ | home
+hook: Something online made you feel weird, but you don't know what to say. How could you start?
+learn: You don't need perfect words. Just start with "Can I talk to you?"
+learn: Say what happened and how it made you feel.
+learn: You can show the grown-up the screen, too.
+play: build | Build what you could say | Can I talk to you?; Something happened online; It made me feel scared; Can you help me?
+check: mcq | What's a good way to start telling? | "Can I talk to you?"* | Saying nothing | Shouting
+check: tf | You can show a grown-up the screen when you tell them. | true
+check: mcq | Do you need perfect words to tell a grown-up? | No* | Yes | Only big words
+home: Practise saying "Can I talk to you?" with a grown-up.
+skill: telling
+
+@lesson 8.5 | Even if I broke a rule | 🙈 | home
+hook: You were playing a game you're not allowed to, and something bad happened. Should you still tell?
+learn: Yes. Being safe is more important than the rule you broke.
+learn: Grown-ups would much rather know, so they can help.
+learn: You might talk about the rule later, but telling is always the right thing to do.
+play: path | You were playing a game you're not allowed to, and someone sent you a mean, scary message. | Tell a grown-up anyway => good: They're glad you told them, and they help you feel safe. | Hide it so you don't get in trouble => bad: Now you're worried and alone, and the person might message again. | Delete the game and say nothing => ok: The game is gone, but you're still carrying a scary feeling. Telling helps.
+check: mcq | You broke a rule and something bad happened online. You… | Tell a grown-up anyway* | Hide it | Never go online again
+check: tf | Being safe is more important than the rule you broke. | true
+check: mcq | Why should you tell, even if you broke a rule? | So a grown-up can help keep you safe* | So you get in trouble | You shouldn't tell
+home: Ask a grown-up to promise they'll listen if you ever need to tell them something.
+skill: telling
+
+@lesson 8.6 | Keep telling | 🔁 | home
+hook: You try to tell a grown-up, but they're busy and say, "Not now." What then?
+learn: If the first grown-up doesn't listen, say "It's important." Or tell another trusted grown-up.
+learn: Keep telling until someone helps you.
+learn: {nz:Kids can also call 0800 What's Up on 0800 942 8787 for free.~au:Kids can also call Kids Helpline on 1800 55 1800 for free, any time.}
+play: chat | Your grown-up is busy cooking | them: Not now, I'm cooking dinner. | me: It's important. Something online scared me*/OK, never mind/I'll never tell anyone | them: Oh, sorry. I'm listening. What happened? | me: Someone in a game asked for my address*/Nothing, forget it/I'm not telling now
+check: mcq | A grown-up is too busy to listen. You… | Say "It's important" or tell another grown-up* | Give up | Keep it secret forever
+check: tf | You should keep telling until someone helps you. | true
+check: mcq | {nz:Which free number can kids call?~au:What's the Kids Helpline number?} | {nz:0800 942 8787~au:1800 55 1800}* | 123 | 555
+home: Name a second trusted grown-up you'd tell if the first one was busy.
+skill: telling
+
 @band builders
 @unit 1 | Scams | Spotting tricks for money and info
 @unit 2 | In-app purchases | Gems, coins and real money
@@ -573,6 +861,294 @@ check: tf | A screen lock helps keep your device safe. | true
 home: Check that your device has a screen lock, with a grown-up.
 skill: security
 
+@lesson 5.1 | Two kinds of footprint | 👣 | online
+hook: You didn't post anything today. Did you still leave a footprint?
+learn: Your active footprint is what you choose to share: posts, comments, photos and videos.
+learn: Your passive footprint is collected as you go: searches, likes, location and what you watch.
+learn: Both kinds can stick around and say a lot about you.
+play: sort | Active footprint, Passive footprint | Posting a photo=Active footprint; Your search history=Passive footprint; Writing a comment=Active footprint; Location saved by an app=Passive footprint; Uploading a video=Active footprint; Videos you watched=Passive footprint | Active or passive?
+check: mcq | Which is a passive footprint? | Your search history* | A post you wrote | A photo you shared
+check: tf | You can leave a footprint without posting anything. | true
+check: mcq | An active footprint is… | Something you choose to share* | Something an app collects | Something invisible
+home: List three things in your active footprint and three in your passive one.
+skill: footprint
+
+@lesson 5.2 | Join the dots | 🔍 | online
+hook: A stranger online knew your name, your school and your sport. How?
+learn: Small details in different posts can be pieced together.
+learn: Usernames with your real name and birth year, uniform photos and team pages all give clues.
+learn: Pick usernames that don't reveal you, and check what each post gives away.
+play: mystery | Your username is MiaJones2014.; Your public profile shows your netball team.; You posted a selfie in your school uniform.; Your team's page lists players' names. | They pieced it together from your posts* | They guessed by luck | They read your mind
+check: mcq | Which username gives away the least? | SkyDiver77* | MiaJones2014 | Mia_Riverside_School
+check: tf | Small details in different posts can be pieced together. | true
+check: mcq | A safer selfie is one… | Without your uniform or street in it* | In front of your house number | In your school uniform
+home: Search your name with a grown-up and see what comes up.
+skill: footprint
+
+@lesson 5.3 | The internet remembers | 🗄️ | online
+hook: You posted a silly video when you were 9. Could someone still find it at 19?
+learn: Posts can be screenshotted, reposted, saved or archived.
+learn: Once something spreads, you can't control where it goes.
+learn: Before posting, ask: would I be OK with this being around in 10 years?
+play: build | How one post spreads | You post a joke photo; A friend screenshots it; They send it to a group chat; Someone reposts it publicly; Strangers share it further; Years later, it can still turn up
+check: mcq | You delete a post. Can it still exist? | Yes, if someone saved or reposted it* | No, never | Only on weekends
+check: tf | Once something spreads, you can't control where it goes. | true
+check: mcq | A good question before you post is… | Would I be OK with this in 10 years?* | Will it go viral? | How many likes will it get?
+home: Ask a grown-up if they have an old post or photo they'd rather people didn't see.
+skill: footprint
+
+@lesson 5.4 | Posting about others | 🙋 | online
+hook: You post a funny photo of your friend. Is that part of your footprint or theirs?
+learn: When you post about other people, you add to their footprint too.
+learn: Ask before you post or tag someone, and respect their answer.
+learn: If someone asks you to take something down, do it.
+play: chat | Your friend sees a photo you posted | them: Can you delete that photo of me? I hate it. | me: Sure, deleting it now. Sorry!*/No way, it's funny/Only if you pay me | them: Thanks. Can you ask me next time? | me: Yep, I'll ask before I post you*/Maybe/You're too sensitive
+check: mcq | Before you post a photo of a friend, you… | Ask them* | Tag them as a surprise | Post it to everyone
+check: tf | Posting about someone adds to their footprint. | true
+check: mcq | A friend asks you to take a post down. You… | Take it down* | Ignore them | Share it more
+home: Ask your family members how they feel about having photos of them posted.
+skill: footprint
+
+@lesson 5.5 | Future you | 🔮 | online
+hook: In a few years you apply for a job or a scholarship. Who might look you up?
+learn: Schools, coaches, employers and scholarship panels sometimes look people up online.
+learn: Mean comments, rude photos and fights can count against you.
+learn: Kind, creative and helpful posts can show who you really are.
+play: sort | Helps future you, Could hurt future you | A video of your science project=Helps future you; A mean comment about a teacher=Could hurt future you; Photos from a beach clean-up=Helps future you; Joining in a pile-on=Could hurt future you; Sharing your art=Helps future you; Swearing at someone in a game chat=Could hurt future you | Helps or hurts future you?
+check: mcq | Who might look you up in the future? | Employers and scholarship panels* | Nobody, ever | Only your friends
+check: tf | Kind and creative posts can help future you. | true
+check: mcq | Which could hurt future you? | A mean comment about a teacher* | A video of your project | Your art
+home: Think of one thing you're proud of that you'd be happy for future you to share.
+skill: footprint
+
+@lesson 5.6 | Clean up and build up | 🌟 | online
+hook: Your profile has some old posts you're not proud of. Can you fix it?
+learn: Delete old posts you don't want, and change usernames that give away private details.
+learn: Keep your accounts private, and check your settings every few months.
+learn: Then build up: share things you make, help others and be kind in comments.
+play: diff | Your profile before and after a clean-up. Tap what changed. | Username: Jake_Smith_2014; Bio: Riverside School, Year 7; Post: Mean meme about a classmate; Post: My robot project | Username: RoboticsFan77; Bio: I love building robots; Post: Deleted; Post: My robot project
+check: mcq | What's a good clean-up step? | Delete posts you're not proud of* | Add your address to your bio | Make everything public
+check: tf | You can build a good footprint by sharing things you make. | true
+check: mcq | Which bio is safer? | I love building robots* | Riverside School, Year 7 | My address is 12 Main Street
+home: Do a clean-up of one account with a grown-up.
+skill: footprint
+
+@lesson 6.1 | Is it cyberbullying? | 🧐 | online
+hook: A mean comment, a joke, a fight in a group chat. Which ones are cyberbullying?
+learn: Cyberbullying is when someone uses phones, games or apps to hurt someone on purpose, usually again and again.
+learn: It can be mean messages, leaving someone out of group chats, sharing embarrassing photos, fake accounts or spreading rumours.
+learn: A one-off argument still matters, but it's different from bullying. Both can be sorted out with help.
+play: sort | Cyberbullying, Not cyberbullying | Sending someone mean messages every day=Cyberbullying; A joke both friends laugh about=Not cyberbullying; Making a fake account to make fun of someone=Cyberbullying; One argument about a game that gets sorted out=Not cyberbullying; Removing someone from every group chat on purpose=Cyberbullying; Sharing an embarrassing photo to laugh at someone=Cyberbullying | Is it cyberbullying?
+check: mcq | What makes something cyberbullying? | Hurting someone on purpose, usually again and again* | Any disagreement | Sending a funny meme to a friend who likes it
+check: tf | Leaving someone out of group chats on purpose can be cyberbullying. | true
+check: mcq | Which is cyberbullying? | A fake account made to mock someone* | A one-off argument that gets sorted | A shared joke
+home: Talk with a grown-up about the difference between a joke, an argument and bullying.
+skill: bullying
+
+@lesson 6.2 | How it feels | 💔 | online
+hook: Bullying at school stops at the gate. Why can cyberbullying feel worse?
+learn: Cyberbullying can follow you home, at any time of the day or night.
+learn: Lots of people can see it, and it can be shared fast.
+learn: Someone being cyberbullied might seem sad, jumpy or quiet. Noticing helps you help them.
+play: tap | Tap the signs a friend might be being cyberbullied | 📱:yes:Jumps when their phone buzzes; 😔:yes:Seems sad after being online; 🚪:yes:Stops coming to things they used to love; 🙈:yes:Hides their screen suddenly; 🎉:no; 🍕:no
+check: mcq | Why can cyberbullying feel so bad? | It can follow you home, any time* | It only happens at school | Nobody can see it
+check: tf | A friend being cyberbullied might seem jumpy or quiet. | true
+check: mcq | You notice a friend seems upset after being online. You… | Check in and ask if they're OK* | Ignore it | Laugh
+home: Talk with a grown-up about how you'd check in with a friend who seems upset.
+skill: bullying
+
+@lesson 6.3 | Save, block, report | 📸 | online
+hook: Someone keeps sending you nasty messages. You want to delete them all. Should you?
+learn: Don't reply. Take screenshots first, showing the messages, the username and the date.
+learn: Then block the person and report them using the app's report button.
+learn: Tell a grown-up. {nz:Netsafe can help get harmful posts taken down, for free.~au:If the app doesn't remove serious cyberbullying within 48 hours, eSafety can step in.}
+play: order | Someone is sending you nasty messages. Put the steps in order. | Don't reply; Screenshot the messages, username and date; Block the person; Report them in the app; Tell a grown-up you trust
+check: mcq | Why screenshot before blocking? | To keep evidence* | To share it with everyone | For fun
+check: tf | Replying with something mean usually makes it worse. | true
+check: mcq | {nz:Who can help get harmful posts taken down in NZ?~au:Who can step in if an app doesn't remove serious cyberbullying?} | {nz:Netsafe~au:eSafety}* | The bully | Nobody
+home: Find the report and block buttons in an app you use, with a grown-up.
+skill: bullying
+
+@lesson 6.4 | If you were the mean one | 🪞 | online
+hook: You shared a meme about a classmate. Everyone laughed, but now they're upset. What now?
+learn: Everyone gets it wrong sometimes. What matters is what you do next.
+learn: Delete it, say sorry to the person, and don't do it again.
+learn: If others are still sharing it, ask them to stop, or tell a grown-up who can help.
+play: path | You shared a meme about a classmate. Now you find out it really hurt them. | Delete it, say sorry privately, and ask others to stop sharing it => good: You owned it and helped fix it. That takes courage. | Say "It was just a joke" => bad: That brushes off how they feel. It was hurtful. | Delete it quietly and say nothing => ok: Deleting helps, but a real sorry would mean a lot to them.
+check: mcq | You hurt someone online. What's the best thing to do? | Delete it and say sorry* | Say it was just a joke | Post another one
+check: tf | Saying sorry can help fix a hurtful post. | true
+check: mcq | Others are still sharing your post. You… | Ask them to stop, or tell a grown-up* | Share it more | Do nothing
+home: Talk with a grown-up about a time you said sorry, and how it felt.
+skill: bullying
+
+@lesson 6.5 | Be an ally | 🤝 | online
+hook: Your friend is being targeted in a group chat. What can you do, besides a kind message?
+learn: Don't like, share or laugh at mean posts. Every view and share makes them spread.
+learn: Report the posts too. More reports can help them get removed faster.
+learn: Stick with your friend, and help them tell a grown-up.
+play: chat | Your friend is upset about a mean post | them: Did you see what they posted about me? | me: Yes, and it's not OK. Are you alright?*/Yeah, it was kind of funny/I don't want to get involved | them: I just want it to stop. | me: Let's screenshot it and show your mum or a teacher together*/Just ignore it forever/Post something mean back
+check: mcq | How can you help a friend being targeted? | Report the posts and help them tell a grown-up* | Like the mean post | Share it to warn others
+check: tf | Sharing a mean post, even to complain about it, can help it spread. | true
+check: mcq | What's an ally? | Someone who sticks up for and supports others* | Someone who joins in | A bystander who laughs
+home: Think of one thing you could do to be an ally online, and tell a grown-up.
+skill: upstander
+
+@lesson 6.6 | Getting help | 🆘 | online
+hook: The bullying won't stop, and you feel awful. Who can help?
+learn: Tell a parent, carer or teacher. Schools have to help when bullying involves students.
+learn: {nz:Netsafe is free. Call 0508 638 723 or text "Netsafe" to 4282.~au:You can report serious cyberbullying at esafety.gov.au.}
+learn: {nz:If you feel really low, call 0800 What's Up (0800 942 8787) or Youthline (0800 376 633). If you're in danger, call 111.~au:If you feel really low, call Kids Helpline on 1800 55 1800. If you're in danger, call 000.}
+play: match | Match each situation to a good place to get help | Bullying from kids at your school=A teacher or principal; A post that won't come down={nz:Netsafe~au:eSafety}; Threats to hurt you={nz:Police on 111~au:Police on 000}; Feeling really low about it={nz:What's Up or Youthline~au:Kids Helpline}
+check: mcq | Who should you tell first about bullying? | A parent, carer or teacher* | Nobody | The bully
+check: tf | Schools can help with cyberbullying between students. | true
+check: mcq | {nz:How can you contact Netsafe by text?~au:Where can you report serious cyberbullying in Australia?} | {nz:Text "Netsafe" to 4282~au:esafety.gov.au}* | {nz:Text the bully~au:A gaming forum} | Nowhere
+home: Save {nz:Netsafe's~au:eSafety's} details in a family phone, with a grown-up.
+skill: help
+
+@lesson 7.1 | Three kinds of false | 🗞️ | online
+hook: A wrong fact, a deliberate lie and a joke headline. Are they all fake news?
+learn: Misinformation is false information shared by people who think it's true.
+learn: Disinformation is false information made on purpose to trick people.
+learn: Satire is made-up news meant as a joke. It's fine when people know it's a joke, but it can fool people when shared without context.
+play: sort | Misinformation, Disinformation, Satire | Your aunt shares a wrong health tip, thinking it's true=Misinformation; Someone makes a fake post to trick voters=Disinformation; A comedy site's made-up headline=Satire; A friend shares an old storm photo, thinking it's from today=Misinformation; A fake account spreading lies about a company=Disinformation; A joke news show's silly story=Satire | Which kind is it?
+check: mcq | False information made on purpose to trick people is… | Disinformation* | Satire | A fact
+check: tf | Misinformation is often shared by people who think it's true. | true
+check: mcq | A comedy site posts a silly made-up headline. That's… | Satire* | Disinformation | A news report
+home: Find an example of satire with a grown-up and talk about how you can tell it's a joke.
+skill: critical
+
+@lesson 7.2 | Clickbait | 🎣 | online
+hook: "You WON'T BELIEVE what happened next!!!" Why do headlines like that exist?
+learn: Clickbait headlines are written to make you click, often by making you curious, shocked or angry.
+learn: Watch for ALL CAPS, lots of exclamation marks and promises of secrets.
+learn: Read past the headline. The story often says much less than the headline promises.
+play: scam | Clickbait or a plain headline? | You WON'T BELIEVE what this kid found!!!=scam; Council votes to build new skate park=real; Doctors HATE this one weird trick=scam; Heavy rain expected in the south this weekend=real; This video will SHOCK you to your core=scam | Clickbait plays on your feelings. Plain headlines tell you what happened.
+check: mcq | Which headline is clickbait? | You won't BELIEVE what happened next!!!* | School holidays start on Friday | Rain expected tomorrow
+check: tf | The story often says less than a clickbait headline promises. | true
+check: mcq | What should you do with a clickbait headline? | Read past the headline before believing it* | Share it straight away | Believe the headline
+home: Find three headlines with a grown-up and decide which are clickbait.
+skill: critical
+
+@lesson 7.3 | Old photo, new story | 📷 | online
+hook: A photo of a flooded street goes viral "today". But something looks off. What?
+learn: Real photos are often shared with a false story, like an old photo from another country.
+learn: A reverse image search shows where and when a photo first appeared.
+learn: Check the details: signs, cars, clothes and weather can give clues.
+play: mystery | A flooded street photo goes viral, said to be from today.; The cars in it look 20 years old.; The street signs are in another language.; A search shows it was first posted in 2011. | It's an old photo shared with a new story* | It's definitely from today | It's a painting
+check: mcq | What can a reverse image search show? | Where and when a photo first appeared* | Who liked it | How to edit it
+check: tf | A real photo can be shared with a false story. | true
+check: mcq | Which detail might show a photo is old? | Old-looking cars* | The colour blue | Nothing ever
+home: Try a reverse image search with a grown-up on a photo from the news.
+skill: critical
+
+@lesson 7.4 | Who made it, and why? | 🕵️ | online
+hook: A video says a new drink makes you smarter. Who made the video?
+learn: Everything online was made by someone, for a reason.
+learn: Some things are made to inform, some to sell, some to persuade and some to entertain.
+learn: Knowing who made it and why helps you decide how much to trust it.
+play: match | Match each thing to the main reason it was made | An ad for a sports drink=To sell; A news report from a trusted outlet=To inform; A comedy sketch=To entertain; A post from a group trying to change your vote=To persuade
+check: mcq | A video praising a drink was made by the drink company. Its main reason is probably… | To sell* | To inform fairly | To entertain only
+check: tf | Knowing who made something helps you decide how much to trust it. | true
+check: mcq | What's a good first question about a post? | Who made this, and why?* | How many emojis? | Is it colourful?
+home: Pick three posts and work out who made each one and why, with a grown-up.
+skill: critical
+
+@lesson 7.5 | Feel it, then check it | 😡 | online
+hook: A post makes you really angry. You want to share it NOW. Should you?
+learn: False posts are often designed to make you angry, scared or excited, so you share fast.
+learn: Strong feelings are a signal to slow down, not speed up.
+learn: Pause, take a breath, and check before you share.
+play: timing | A shocking post makes you angry! Wait for the calm zone, then decide | Pause before sharing | Calm
+check: mcq | A post makes you furious. What's the smart move? | Pause and check before sharing* | Share it straight away | Add an angry comment
+check: tf | False posts are often designed to make you feel strong emotions. | true
+check: mcq | Strong feelings about a post are a signal to… | Slow down* | Share faster | Stop thinking
+home: Next time a post gives you a strong feeling, pause and check it before you react.
+skill: critical
+
+@lesson 7.6 | Kindly correcting | 🤝 | online
+hook: Nana shares a fake photo in the family chat. How do you tell her without being mean?
+learn: If someone shares something false, tell them kindly and privately if you can.
+learn: Share a link to a trusted source that explains it.
+learn: Don't make fun of them. Lots of smart people get fooled.
+play: chat | Nana posts in the family chat | them: Look! Sharks swimming in the mall after the flood! Share with everyone! | me: Wow, that looks scary! I checked though, and it's an old fake photo. Here's an article about it*/Nana, you're so silly/Share it everywhere! | them: Oh no! I'd better delete it. | me: Thanks, Nana. It fools lots of people*/You should've known/Ha, you got tricked
+check: mcq | How should you correct someone who shared something false? | Kindly, with a trusted source* | By laughing at them | By shouting
+check: tf | Lots of smart people get fooled by fake posts. | true
+check: mcq | Where's a good place to correct someone? | Privately, if you can* | In front of everyone, loudly | Nowhere
+home: Practise with a grown-up how you'd kindly tell someone a post is fake.
+skill: critical
+
+@lesson 8.1 | Age ratings | 🔞 | online
+hook: Your friend plays a game rated for older teens. Can you play it too?
+learn: Games have age ratings that tell you what's inside, like violence, scary bits or strong language.
+learn: {nz:In NZ, R ratings like R13, R16 and R18 are legal age limits.~au:In Australia, MA15+ and R18+ ratings are legal age limits.}
+learn: Check the rating and the reasons for it with a grown-up before you play.
+play: match | Match each rating to what it means | G=Suitable for everyone; PG=Parental guidance recommended; M=Recommended for mature audiences; {nz:R18~au:R18+}=Adults only, by law
+check: mcq | What do age ratings tell you? | What's inside a game, and who it suits* | How much it costs | How long it takes
+check: tf | {nz:R16 is a legal age limit in NZ.~au:MA15+ is a legal age limit in Australia.} | true
+check: mcq | Before playing a new game, you should… | Check the rating with a grown-up* | Just play it | Ask a stranger online
+home: Check the ratings of the games you play with a grown-up.
+skill: gaming
+
+@lesson 8.2 | Just one more game | 🕰️ | online
+hook: It's 9 pm on a school night and your friends say, "One more match!" Do you stay?
+learn: Many games have no natural end, so it's easy to keep going.
+learn: Decide when you'll stop before you start, and set a timer.
+learn: Stop at a natural break, like the end of a match, and tell your friends in advance.
+play: path | It's 9 pm on a school night, and your friends want one more match. | Say "That was my last one, see you tomorrow!" => good: You stuck to your plan, and you'll be fresh for school. | Keep playing until midnight => bad: You'll be tired and grumpy tomorrow. | Play one more, then stop => ok: That might work, but "one more" can easily turn into five.
+check: mcq | When is a good time to decide when to stop? | Before you start* | When you're really tired | Never
+check: tf | Many games have no natural end. | true
+check: mcq | A good place to stop is… | At the end of a match* | In the middle of a battle | Never
+home: Agree on a gaming stop time with a grown-up and set a timer.
+skill: gaming
+
+@lesson 8.3 | Tilted | 😤 | online
+hook: You've lost five games in a row and you want to throw the controller. What's going on?
+learn: Getting "tilted" means you're so frustrated that you play worse and feel worse.
+learn: Signs include yelling, blaming teammates and playing "one more" to win it back.
+learn: Take a break, breathe and move. Come back later, or call it a day.
+play: tap | Tap the signs you're getting tilted | 😡:yes:Yelling at the screen; 🎮:yes:Slamming the controller; 🔁:yes:Playing one more to win it back; 😤:yes:Blaming your teammates; 😊:no; 🥤:no
+check: mcq | You're tilted. What helps most? | Taking a break* | Playing ten more games | Yelling louder
+check: tf | When you're tilted, you often play worse. | true
+check: mcq | Which is a sign of tilt? | Blaming your teammates* | Saying "good game" | Having fun
+home: Make a plan with a grown-up for what you'll do when a game makes you angry.
+skill: gaming
+
+@lesson 8.4 | Gaming and your body | 🧘 | home
+hook: Three hours of gaming and your neck, eyes and back are sore. What could help?
+learn: Sit up, with the screen at eye level, and have water nearby.
+learn: Take a stretch break at least every hour, and look at something far away.
+learn: Stop gaming an hour before bed, so your brain can wind down for sleep.
+play: build | Build a healthy gaming session | Set a timer before you start; Sit up with the screen at eye level; Keep water nearby; Take a stretch break every hour; Stop at least an hour before bed
+check: mcq | What helps your body while gaming? | Stretch breaks every hour* | Playing all night | Lying in a twisted position
+check: tf | Stopping an hour before bed helps you sleep. | true
+check: mcq | Where should the screen be? | At about eye level* | On the floor | Behind you
+home: Try a stretch break every hour during your next gaming session.
+skill: gaming
+
+@lesson 8.5 | When it stops being fun | 🚦 | online
+hook: Gaming used to be fun. Now you feel grumpy when you can't play. Is something wrong?
+learn: For most people, gaming is a fun hobby. For some, it starts to take over.
+learn: Warning signs: can't stop when you want to, upset when you're not playing, skipping sleep, homework or friends, or hiding how much you play.
+learn: If you notice these signs, talk to a grown-up. They can help you get the balance back.
+play: sort | Healthy gaming, Warning sign | Playing with friends on the weekend=Healthy gaming; Getting really angry when you have to stop=Warning sign; Stopping when the timer goes=Healthy gaming; Skipping homework to keep playing=Warning sign; Lying about how long you played=Warning sign; Doing other hobbies too=Healthy gaming | Healthy gaming or a warning sign?
+check: mcq | Which is a warning sign? | Skipping homework to keep playing* | Playing with friends on the weekend | Stopping when the timer goes
+check: tf | For most people, gaming is a fun hobby. | true
+check: mcq | You notice warning signs. You… | Talk to a grown-up* | Play more | Hide it
+home: Check in with a grown-up about how gaming fits into your week.
+skill: gaming
+
+@lesson 8.6 | The good side of gaming | 🏆 | online
+hook: Can video games actually be good for you?
+learn: Games can build teamwork, problem-solving and creativity.
+learn: Building games and making mods can even lead to careers in game design and coding.
+learn: The good parts work best when gaming is balanced with sleep, school, moving and friends.
+play: debate | Are video games good for kids? | They can be, when they're balanced with sleep, school, moving and friends* | Yes, the more hours the better | Some people worry games crowd out sleep, exercise and time with people, which is why balance matters.
+check: mcq | Which skill can games build? | Teamwork and problem-solving* | Nothing at all | Only fast thumbs
+check: tf | Games work best when balanced with other things. | true
+check: mcq | Which career can gaming lead to? | Game design or coding* | None | Only professional sleeping
+home: Tell a grown-up about a skill you've learned from a game.
+skill: gaming
+
 @band makers
 @unit 1 | Phishing and fraud | Emails, texts and fake websites
 @unit 2 | AI and deepfakes | When you can't trust what you see
@@ -858,6 +1434,294 @@ check: mcq | You paid by card and the store vanished. Who can help get money bac
 check: tf | Chargebacks have time limits. | true
 home: Find where to report a scam store in your country with a grown-up.
 skill: consumer rights
+
+@lesson 5.1 | How influencers get paid | 💸 | online
+hook: Your favourite creator posts every day. Where does their money come from?
+learn: Many influencers earn from brand deals, free products, affiliate links, ad money and their own merch.
+learn: Brands pay because followers trust the creator, so posts can feel like a friend's advice.
+learn: Knowing how they're paid helps you judge what they say.
+play: match | Match each way of earning to what it means | Sponsored post=A brand pays for the post; Affiliate link=They earn a cut when you buy through their link; Gifted product=They got it free; Ad revenue=The platform shares money from ads on their videos; Merch=They sell their own products
+check: mcq | What's an affiliate link? | A link that pays the creator a cut when you buy* | A free gift | A link to their school
+check: tf | Brands pay influencers because followers trust them. | true
+check: mcq | Why does it help to know how influencers are paid? | It helps you judge what they say* | It makes their videos longer | It doesn't help
+home: Pick a creator you follow and work out three ways they might make money.
+skill: influencers
+
+@lesson 5.2 | Codes and links | 🏷️ | online
+hook: "Use my code for 20% off!" Is that a favour, or a sale?
+learn: Discount codes and affiliate links usually earn the influencer a commission.
+learn: 20% off a high price can still cost more than buying it somewhere else.
+learn: Compare the final price before you use a code, and ask if you'd buy it without the hype.
+play: price | Which hoodie costs less? | With the influencer's 20% code:64:1:hoodie; Same hoodie at another store:59:1:hoodie
+check: mcq | Who usually earns when you use an influencer's code? | The influencer, through commission* | Nobody | Only you
+check: tf | A discount code always gives you the cheapest price. | false | Compare prices. It can still cost more.
+check: mcq | Before using a code, you should… | Compare the final price elsewhere* | Buy fast before it expires | Buy two
+home: Find a discount code online and compare the final price at two other stores.
+skill: influencers
+
+@lesson 5.3 | Finfluencers | 📈 | shares
+hook: A creator says, "Put your savings into this coin. It's going to explode!" Should you?
+learn: Finfluencers are influencers who talk about money and investing.
+learn: {nz:In NZ, recommending specific financial products to people can count as financial advice, which needs a licence.~au:In Australia, giving financial product advice usually needs a licence, and ASIC has warned finfluencers who don't have one.}
+learn: Some are paid by the apps or products they talk about. General tips can be useful, but "trust me" picks are a red flag.
+play: scam | Useful money content or a red flag? | Here's how compound interest works, in general=real; Put your savings in this coin now, trust me=scam; I'm paid by this app, so do your own research=real; My course reveals the stock that can't lose=scam; Check fees and whether a provider is licensed=real | General explanations can help. Hot tips, guarantees and hidden payments are red flags.
+check: mcq | What's a red flag in money content? | "Trust me, this can't lose"* | Explaining how interest works | Saying they're paid by a brand
+check: tf | Some finfluencers are paid by the products they talk about. | true
+check: mcq | {nz:Who regulates financial advice in NZ?~au:Who has warned unlicensed finfluencers in Australia?} | {nz:The FMA~au:ASIC}* | The weather service | A gaming company
+home: Watch a money video with a grown-up and decide whether it's general information or a sales pitch.
+skill: hype
+
+@lesson 5.4 | Pyramid schemes and MLMs | 🔺 | online
+hook: A friend says, "Be your own boss! Just buy the $200 starter kit and sign up your friends." Opportunity?
+learn: In a pyramid scheme, money comes mainly from recruiting people, not selling real products. They're illegal in both countries.
+learn: Multi-level marketing, or MLM, sells products, but people also earn from recruits. Most sellers earn little or lose money.
+learn: Red flags: paying to join, pressure to recruit, buying stock you can't sell, and income claims with no proof.
+play: path | A friend invites you to sell skincare. The starter kit is $200, and you earn more by signing up friends. | Ask what an average seller really earns after costs, and say no thanks => good: You checked the facts and kept your $200. | Buy the kit and message everyone you know => bad: Most people never earn back their costs, and friendships can get awkward. | Join but don't recruit => ok: You might sell a little, but you'll probably still be out of pocket.
+check: mcq | Where does most money in a pyramid scheme come from? | Recruiting new people* | Selling great products | Government grants
+check: tf | Pyramid schemes are illegal in both NZ and Australia. | true
+check: mcq | Which is an MLM red flag? | Paying to join and pressure to recruit* | A normal job with wages | A shop with clear prices
+home: Find an "earn from home" offer online and check it for the red flags with a grown-up.
+skill: hype
+
+@lesson 5.5 | Pump and dump | 🚀 | shares
+hook: A group chat is full of rocket emojis about a new coin. Everyone's buying. Get in now?
+learn: In a pump and dump, organisers buy a cheap coin or share, hype it online, then sell when others pile in.
+learn: The price crashes, and the late buyers lose their money.
+learn: Sudden hype, rocket emojis and "last chance" pressure are warning signs.
+play: order | How a pump and dump works. Put it in order. | Organisers quietly buy a cheap coin; They hype it online with rockets and "to the moon"; New buyers rush in and the price jumps; Organisers sell at the top; The price crashes and late buyers lose
+check: mcq | Who usually loses in a pump and dump? | The late buyers* | The organisers | Nobody
+check: tf | Sudden online hype can be a warning sign. | true
+check: mcq | A chat says "Last chance, buy now!" You… | Step back and don't buy on hype* | Buy with all your savings | Borrow money to buy more
+home: Talk with a grown-up about a time something was hyped and then crashed.
+skill: hype
+
+@lesson 5.6 | Lifestyle or reality? | 🏝️ | online
+hook: Supercars, beach villas and stacks of cash. Does that prove their money tips work?
+learn: Cars, houses and holidays in posts can be rented, borrowed or bought on debt.
+learn: Screenshots of earnings are easy to fake.
+learn: Many creators earn more from followers buying their courses than from the tips they sell.
+play: debate | Do flashy lifestyle posts prove someone's money tips work? | No. Cars and holidays can be rented, borrowed or bought on debt* | Yes. The proof is in the photos | Some creators really are rich. But even then, their money often comes from followers, not from the tips they're selling.
+check: mcq | Why might a flashy post be misleading? | The car or house could be rented or on debt* | Photos never lie | Rich people never post
+check: tf | Screenshots of earnings are easy to fake. | true
+check: mcq | Where does many money creators' income come from? | Followers buying their courses* | The tips they share | Lotto
+home: Find a "rich lifestyle" post and list what might be rented, borrowed or fake.
+skill: hype
+
+@lesson 6.1 | Password managers | 🗝️ | online
+hook: You've got 40 accounts. How are you meant to remember 40 different strong passwords?
+learn: A password manager is an app that stores all your passwords in a locked, encrypted vault.
+learn: It can create long random passwords and fill them in for you, so you only remember one.
+learn: It only fills in passwords on the real website, which helps protect you from fake login pages.
+play: sort | True, Not true | It stores your passwords in an encrypted vault=True; It can create long random passwords=True; It only fills in passwords on the real site=True; It means you can reuse one password everywhere=Not true; You should share your vault with friends=Not true; You never need to remember anything at all=Not true | True or not true of password managers?
+check: mcq | What does a password manager do? | Stores passwords in an encrypted vault* | Posts your passwords online | Makes all passwords the same
+check: tf | Password managers can help protect you from fake login pages. | true
+check: mcq | How many passwords do you need to remember with a password manager? | One strong main one* | All 40 | None at all
+home: Ask a grown-up whether they use a password manager, and how it works for them.
+skill: security
+
+@lesson 6.2 | Your master key | 🔑 | online
+hook: Your password manager's main password unlocks everything. How strong should it be?
+learn: Your main password should be a long passphrase you've never used anywhere else.
+learn: Turn on two-step login for the password manager itself.
+learn: Save its recovery key somewhere safe and offline, so you don't get locked out.
+play: path | You're setting up a password manager. | Use a new six-word passphrase and turn on two-step login => good: Strong, unique and protected. Your vault is well locked. | Use the same password as your gaming account => bad: If that game gets hacked, your whole vault could be opened. | Write it on a sticky note on your laptop => bad: Anyone who sees your laptop can open every account.
+check: mcq | What makes a strong main password? | A long passphrase you've never used before* | Your pet's name | Your gaming password
+check: tf | You should turn on two-step login for your password manager. | true
+check: mcq | Where should you keep the recovery key? | Somewhere safe and offline* | In a group chat | On your phone's lock screen
+home: Make up a pretend six-word passphrase with a grown-up, just for practice.
+skill: security
+
+@lesson 6.3 | Recovery options | 🛟 | online
+hook: You lose your phone, and with it your login codes. Can you still get back into your accounts?
+learn: Recovery options help you get back in if you're locked out: a backup email, a phone number and backup codes.
+learn: Keep them up to date. An old email you can't open won't help you.
+learn: Save backup codes somewhere safe, like in your password manager or printed at home.
+play: order | Set up account recovery. Put the steps in order. | Open the account's security settings; Check your recovery email is one you can open; Check your phone number is current; Save backup codes somewhere safe; Add a trusted recovery contact if the app offers it
+check: mcq | Why keep recovery details up to date? | So you can get back in if you're locked out* | So ads can find you | It doesn't matter
+check: tf | Backup codes can help if you lose your phone. | true
+check: mcq | Where's a good place for backup codes? | In your password manager or printed at home* | Posted online | In a public note
+home: Check the recovery email and phone on your main account, with a grown-up.
+skill: security
+
+@lesson 6.4 | Spot a takeover | 🚨 | online
+hook: Your friends say you sent them weird links. You didn't. What's going on?
+learn: If someone gets into your account, you might see login alerts, password reset emails or messages you didn't send.
+learn: Your profile, email or recovery details might suddenly change.
+learn: Act fast. The sooner you lock it down, the less damage they can do.
+play: tap | Tap the signs your account may have been taken over | 📧:yes:Password reset emails you didn't ask for; 🔔:yes:A login alert from a city you've never been to; 💬:yes:Messages you didn't send; ✏️:yes:Your profile changed without you; 🎂:no; ☀️:no
+check: mcq | Friends get links "from you" that you didn't send. That's a sign… | Your account may have been taken over* | Your phone is too old | Everything's fine
+check: tf | Acting fast can limit the damage from a hacked account. | true
+check: mcq | A login alert comes from a city you've never been to. You… | Secure your account straight away* | Ignore it | Reply to say hi
+home: Find where an app shows the devices logged in to your account.
+skill: security
+
+@lesson 6.5 | Hacked! What now? | 🧯 | online
+hook: You can't log in, and your account is posting spam. What do you do first?
+learn: Go to the app's official help page and use its account recovery steps. Don't trust "helpers" who message you.
+learn: Once you're back in, change your password, log out all other devices and turn on two-step login.
+learn: Check your recovery details, warn your friends, and report it to {nz:Netsafe or the NCSC~au:ReportCyber at cyber.gov.au} if you need help.
+play: order | Your account has been hacked. Put the steps in order. | Use the app's official account recovery page; Change your password; Log out all other devices; Turn on two-step login; Check your recovery email and phone; Warn your friends about any fake messages
+check: mcq | You've been hacked. Where should you go for help getting back in? | The app's official help page* | A stranger who messages you | A random video
+check: tf | After getting back in, you should log out all other devices. | true
+check: mcq | {nz:Who can help NZers with hacked accounts?~au:Where can Australians report a cyber attack?} | {nz:Netsafe or the NCSC~au:ReportCyber}* | A gaming forum | Nobody
+home: Write a simple "if I get hacked" plan and keep it with your backup codes.
+skill: security
+
+@lesson 6.6 | Updates and wi-fi | 📶 | online
+hook: Your phone keeps nagging you to update. Can you just keep tapping "later"?
+learn: Updates fix security holes that hackers use. Turn on automatic updates.
+learn: Free public wi-fi can be risky. Use mobile data for banking or anything private.
+learn: Security questions are easy to guess. Use made-up answers and save them in your password manager.
+play: sort | Safer habit, Riskier habit | Turning on automatic updates=Safer habit; Ignoring update alerts for months=Riskier habit; Using mobile data for banking at a café=Safer habit; Logging into your bank on free airport wi-fi=Riskier habit; Making up security answers and saving them=Safer habit; Using your real first pet's name, which you posted online=Riskier habit | Safer or riskier?
+check: mcq | Why do updates matter? | They fix security holes* | They change your wallpaper | They slow your phone on purpose
+check: tf | Free public wi-fi is always safe for banking. | false | Use mobile data for anything private.
+check: mcq | A safer answer to "What was your first pet's name?" is… | A made-up answer saved in your password manager* | Your real pet's name | "I don't know"
+home: Turn on automatic updates on one device with a grown-up.
+skill: security
+
+@lesson 7.1 | How grooming works | 🎭 | online
+hook: Someone online is really nice to you, sends you game credits and says you're mature for your age. What's going on?
+learn: Grooming is when someone builds trust with a young person so they can take advantage of them.
+learn: Groomers often use lots of attention, compliments, gifts and "you can tell me anything".
+learn: They ask for secrets, move chats to private apps, then push for photos or meeting up.
+play: order | How grooming often builds. Put it in order. | Lots of friendly attention and compliments; Gifts like game credits; Asking you to keep chats secret; Moving to a private app; Asking for photos or to meet
+check: mcq | When should you tell a trusted adult? | As soon as something feels off* | Only after you've met them | Never
+check: tf | Groomers often ask young people to keep chats secret. | true
+check: mcq | Someone you met online gives you gifts and wants your chats kept secret. That's… | A warning sign* | Normal | A great friendship
+home: Agree with a trusted adult who you'd tell if someone online made you uncomfortable.
+skill: safety
+
+@lesson 7.2 | Red flags in chats | 🚩 | online
+hook: A chat feels a bit off, but you're not sure why. What are the red flags?
+learn: Red flags include asking for secrets, wanting to move to another app, and asking for photos.
+learn: Watch for people who ask lots of questions about you but share little that you can check.
+learn: You can stop replying at any time. You don't owe anyone online a reply.
+play: tap | Tap the red flags in an online chat | 🤫:yes:Asks you to keep secrets; 📲:yes:Wants to move to another app; 🎁:yes:Offers gifts or game credits; 📸:yes:Asks for photos; ❓:yes:Asks lots about you but won't video chat; 🎮:no; 😂:no
+check: mcq | Which is a red flag? | Asking you to move to a private app* | Talking about a game you both play | Saying "good game"
+check: tf | You can stop replying to someone online at any time. | true
+check: mcq | Someone won't video chat but asks lots about you. That might mean… | They're not who they say* | They're shy, so it's fine | Nothing at all
+home: Look at the privacy settings on one app and check who can message you.
+skill: safety
+
+@lesson 7.3 | How sextortion scams work | 🪤 | online
+hook: A new account with a great photo adds you. Within an hour, they're asking for a pic. Why so fast?
+learn: Many sextortion scams are run by criminal gangs, often overseas, using fake profiles.
+learn: They flirt fast, push for an intimate image, then threaten to share it unless you pay or send more.
+learn: Lots of victims are teenage boys. Paying doesn't make it stop. They usually ask for more.
+play: mystery | A new account with a very attractive photo adds you.; They're flirty straight away and push for a photo within an hour.; They say they're your age but won't video call.; Their profile was only made last week. | It's likely a sextortion scammer using a fake profile* | It's a real person who really likes you | It's a celebrity
+check: mcq | Does paying a sextortion scammer make them stop? | No, they usually ask for more* | Yes, always | Only if you pay twice
+check: tf | Teenage boys are often targeted by sextortion scams. | true
+check: mcq | Who's often behind sextortion scams? | Criminal gangs using fake profiles* | Your friends | Nobody, they're not real
+home: Talk with a trusted adult about sextortion scams, even if it feels awkward.
+skill: safety
+
+@lesson 7.4 | If it happens to you | 🧭 | online
+hook: Someone is threatening to share a photo of you unless you pay. You feel sick. What now?
+learn: It's not your fault. You're the victim of a crime, and you won't be in trouble for asking for help.
+learn: Stop replying, don't pay, and screenshot the messages and their profile.
+learn: Tell a trusted adult, and report it to the platform and {nz:Netsafe or the Police~au:the ACCCE or eSafety}.
+play: chat | You tell a trusted adult | them: You look really upset. What's going on? | me: Someone online is threatening to share a photo of me unless I pay. I'm scared*/Nothing, I'm fine/I'll sort it myself by paying | them: Thank you for telling me. You're not in trouble. We'll sort this together. | me: Can we report it? I've screenshotted the messages*/Can we just pay them?/Please don't tell anyone ever
+check: mcq | Someone threatens to share your photo unless you pay. You… | Stop replying, don't pay and tell a trusted adult* | Pay them | Send another photo
+check: tf | If this happens to you, it's not your fault. | true
+check: mcq | {nz:Who can you report sextortion to in NZ?~au:Who can you report sextortion to in Australia?} | {nz:Netsafe or the Police~au:The ACCCE or eSafety}* | The scammer | Nobody
+home: Save {nz:Netsafe's number, 0508 638 723,~au:the eSafety website, esafety.gov.au,} where you can find it.
+skill: safety
+
+@lesson 7.5 | Images and the law | 🛡️ | townhall
+hook: Someone sends you a private image of a classmate. What do you do?
+learn: Sharing someone's intimate image without their OK is a crime in both countries.
+learn: Sexual images of anyone under 18 are treated very seriously by the law, even when the people involved are teens.
+learn: If you're sent one, don't share it or save it. Tell a trusted adult. Help is about protecting the person in the image.
+play: sort | Do, Don't | Share the image with friends=Don't; Tell a trusted adult=Do; Report it to the platform=Do; Forward it "as a warning"=Don't; Check in on the person in the image=Do; Save it to show someone later=Don't | Do or don't?
+check: mcq | You're sent a private image of a classmate. You… | Don't share it, and tell a trusted adult* | Forward it | Post it
+check: tf | Sharing someone's intimate image without their OK is a crime. | true
+check: mcq | Why does the law treat images of under-18s so seriously? | To protect young people from harm* | It doesn't | Only adults matter
+home: Talk with a trusted adult about what you'd do if you were sent an image like this.
+skill: safety
+
+@lesson 7.6 | Helping a friend | 🫂 | online
+hook: Your friend tells you someone is threatening them online. "Promise you won't tell anyone." What do you say?
+learn: Listen, believe them and tell them it's not their fault.
+learn: Some secrets are too big to keep. Help them tell a trusted adult, or go with them.
+learn: {nz:They can also call Youthline on 0800 376 633. If they talk about hurting themselves, call 111.~au:They can also call Kids Helpline on 1800 55 1800. If they talk about hurting themselves, call 000.}
+play: path | Your friend says someone is threatening them online, and asks you to promise not to tell. | Say you care, and that you'll help them tell a trusted adult because it's too big to keep secret => good: You kept them safe and showed you care. That's what a real friend does. | Promise and do nothing => bad: Your friend is left alone with something scary. | Tell the group chat => bad: That spreads it and could make things much worse.
+check: mcq | A friend is being threatened online. What's best? | Help them tell a trusted adult* | Keep it a secret forever | Tell everyone
+check: tf | Some secrets are too big to keep. | true
+check: mcq | {nz:Which helpline can young people in NZ call?~au:Which helpline can young people in Australia call?} | {nz:Youthline, 0800 376 633~au:Kids Helpline, 1800 55 1800}* | A pizza shop | Nobody
+home: Talk with a trusted adult about how you'd support a friend going through something scary.
+skill: support
+
+@lesson 8.1 | Your reputation online | 🪞 | online
+hook: Someone who's never met you looks at your online stuff. What would they think you're like?
+learn: Your online reputation is what people think of you based on what they see online.
+learn: It's built over time from posts, comments, photos and how you treat people.
+learn: Ask yourself: what do I want to be known for?
+play: sort | Builds a good reputation, Damages it | Sharing a video of your band playing=Builds a good reputation; Mean comments on someone's photo=Damages it; Congratulating a friend on their win=Builds a good reputation; Joining a pile-on=Damages it; Posting about your volunteering=Builds a good reputation; Sharing a rumour about a classmate=Damages it | Builds or damages?
+check: mcq | What builds your online reputation? | Posts, comments and how you treat people* | Only your profile picture | Nothing
+check: tf | Your online reputation is built over time. | true
+check: mcq | A good question to ask yourself is… | What do I want to be known for?* | How can I go viral? | Who can I roast?
+home: Write down three things you'd like to be known for online.
+skill: reputation
+
+@lesson 8.2 | Group chats aren't private | 💬 | online
+hook: The group chat is roasting a teacher. It's just your friends. What's the harm?
+learn: Anything in a group chat can be screenshotted and shared in seconds.
+learn: "Private" chats have ended up in front of schools, parents and the person being talked about.
+learn: A good rule: only type what you'd be OK with the person seeing.
+play: path | Your group chat starts roasting a teacher. | Don't join in, and change the subject => good: You stayed out of it, and nothing you typed can come back on you. | Add the harshest joke => bad: That's the screenshot that gets shared, with your name on it. | Say nothing, but stay in the chat => ok: You didn't join in, but changing the subject could help more.
+check: mcq | Can a group chat message be shared? | Yes, in seconds* | No, never | Only after a year
+check: tf | Private chats can end up being seen by others. | true
+check: mcq | A good rule for group chats is… | Only type what you'd be OK with the person seeing* | Type whatever you want | Roast everyone
+home: Think about one group chat you're in. Is there anything you'd delete?
+skill: reputation
+
+@lesson 8.3 | Comment sections | 🗯️ | online
+hook: Someone comments "this is trash lol" on your art. How do you reply?
+learn: How you reply in public says a lot about you.
+learn: You can reply calmly, ignore it, or block and report if it's nasty.
+learn: When you disagree with someone, be respectful. Don't join pile-ons.
+play: chat | Someone comments on your art | them: This is trash lol. | me: Thanks for looking. I'm still learning!*/YOUR face is trash/I'm deleting everything | them: I mean the hands look weird. | me: Fair point, hands are hard. I'll work on them*/Mind your own business, loser/I quit art forever
+check: mcq | Someone leaves a rude comment. A good choice is… | Reply calmly, ignore it, or block and report* | Insult them back | Start a pile-on
+check: tf | How you reply in public says a lot about you. | true
+check: mcq | What's a pile-on? | Lots of people ganging up on someone online* | A big pile of laundry | A type of game
+home: Find a respectful disagreement in a comment section, and talk about why it works.
+skill: reputation
+
+@lesson 8.4 | Fake accounts | 🎭 | online
+hook: Someone has made a fake account with your name and photos, and it's posting rude stuff. What now?
+learn: Impersonation is when someone pretends to be you online. It can hurt your reputation.
+learn: Screenshot it, report it to the platform as impersonation, and warn your friends.
+learn: Tell a trusted adult. {nz:Netsafe can help get it removed.~au:eSafety can help if the platform doesn't act.}
+play: order | Someone has made a fake account of you. Put the steps in order. | Screenshot the fake account; Report it to the platform as impersonation; Tell a trusted adult; Warn your friends not to follow it; Contact {nz:Netsafe~au:eSafety} if it's not removed
+check: mcq | Someone makes a fake account of you. First step? | Screenshot it* | Make a fake account of them | Ignore it
+check: tf | You can report impersonation to most platforms. | true
+check: mcq | {nz:Who can help remove a fake account in NZ?~au:Who can help if a platform doesn't act in Australia?} | {nz:Netsafe~au:eSafety}* | The fake account | Nobody
+home: Find the "report impersonation" option on an app you use, with a grown-up.
+skill: reputation
+
+@lesson 8.5 | Show what you're proud of | 🌟 | online
+hook: You built something awesome. How do you share it in a way that's safe and positive?
+learn: Sharing things you make or do, like art, music, sport or volunteering, builds a positive presence.
+learn: Check the post doesn't show private details, like your school, address or location.
+learn: {nz:Choose the right place and audience, like a private account or a family group.~au:In Australia, under-16s can't have accounts on the big social media apps, so share in places like school showcases or a family group.}
+play: build | Plan a post you're proud of | Pick something you made or did; Check it shows no private details; Ask anyone in it if it's OK; Write a short, positive caption; Share it with the right audience
+check: mcq | Before sharing something you're proud of, check… | It doesn't show private details* | It'll go viral | It shows your address
+check: tf | Sharing things you make can build a positive presence. | true
+check: mcq | Someone else is in your photo. You… | Ask if it's OK to share* | Post it anyway | Tag them as a surprise
+home: Choose one thing you're proud of and plan how you'd share it safely.
+skill: reputation
+
+@lesson 8.6 | Saying sorry online | 🧯 | online
+hook: You posted something that hurt people, and now it's spreading. How do you make it right?
+learn: Delete it, then say sorry properly. A real apology owns what you did, with no excuses.
+learn: "Sorry if you were offended" isn't a real apology. "I'm sorry for what I posted. It was hurtful" is.
+learn: Then show you've learned, and get help from a trusted adult if it's spreading.
+play: diff | A fake apology and a real one. Tap what changed. | Sorry if you were offended; It was just a joke; Some people are too sensitive | I'm sorry for what I posted; It was hurtful and not OK; I've deleted it and I'll do better
+check: mcq | Which is a real apology? | I'm sorry for what I posted. It was hurtful* | Sorry if you were offended | It was just a joke
+check: tf | A real apology doesn't make excuses. | true
+check: mcq | Your post is spreading and hurting someone. You… | Delete it, apologise and get help if needed* | Argue in the comments | Post it again
+home: Talk with a grown-up about what makes an apology real.
+skill: reputation
 
 @band launchers
 @unit 1 | Identity theft | Protecting your identity documents
@@ -1148,3 +2012,291 @@ check: mcq | How should you reply to a bad review? | Calmly, with what you'll do
 check: tf | Buying fake reviews can break the law. | true
 home: Read how a business replied to a bad review online, with a grown-up. Was it good?
 skill: reputation
+
+@lesson 5.1 | What crypto really is | 🪙 | shares
+hook: Your mate made $500 on crypto last month. Is it like a savings account?
+learn: Crypto is digital tokens recorded on a blockchain. Prices can rise or fall by half in weeks.
+learn: Bank deposits are protected up to a limit by {nz:the Depositor Compensation Scheme~au:the government's Financial Claims Scheme}. Crypto isn't.
+learn: Crypto payments are very hard to reverse, which is why scammers love them.
+play: sort | Bank savings, Crypto | Protected by a government scheme up to a limit=Bank savings; The price can halve in a week=Crypto; Payments are very hard to reverse=Crypto; Pays interest you can count on=Bank savings; Held with a regulated deposit taker=Bank savings; Often used by scammers=Crypto | Bank savings or crypto?
+check: mcq | Is crypto covered by a government deposit scheme? | No* | Yes, fully | Only on weekends
+check: tf | Crypto payments are easy to reverse. | false | They're very hard to get back, which scammers love.
+check: mcq | Why do scammers like crypto? | Payments are hard to reverse* | It's always worth more tomorrow | Banks check every payment
+home: Look up how much bank deposits are protected for in your country, with a grown-up.
+skill: crypto
+
+@lesson 5.2 | Fake celebrity ads | 🎭 | online
+hook: A news-style article shows a famous TV host saying they got rich on a new trading app. Real?
+learn: Scammers use fake news pages and deepfake videos of celebrities and politicians to promote investment platforms.
+learn: The famous person never said it. Their face and voice were copied.
+learn: Real investments don't come from pop-up ads with celebrity "secrets". Search the claim on trusted news sites.
+play: scam | Real or a fake celebrity investment ad? | A trusted news site reporting that a celebrity is suing over fake ads=real; A video of the Prime Minister promising 10x returns on an app=scam; A news-style page saying a TV host "revealed her secret" trading bot=scam; A celebrity's verified post warning followers about fake ads=real; A sponsored ad with a famous chef selling crypto=scam | Celebrities and leaders don't promote secret trading apps. Those ads are fakes.
+check: mcq | A video of a famous person promotes a trading app. Most likely it's… | A deepfake scam* | A real tip | A government scheme
+check: tf | Scammers make fake news pages to look trustworthy. | true
+check: mcq | How can you check a celebrity investment claim? | Search trusted news sites yourself* | Click the ad | Ask in the comments
+home: Show an older family member how fake celebrity investment ads work.
+skill: scams
+
+@lesson 5.3 | Investment chat groups | 💬 | online
+hook: You're added to a group chat called "VIP Wealth Club". Members post huge profits every day. Join in?
+learn: Scam "investment clubs" in chat apps use a friendly "mentor" and fake members who post screenshots of profits.
+learn: They start with small wins, then push you to put in more on their platform.
+learn: Red flags: secret signals, pressure, screenshots as proof, and platforms you can't find on official registers.
+play: chat | You're added to an investment group chat | them: Welcome to VIP Wealth! Our mentor's signals made members 30% this week. | me: Which regulator licenses you? I'll check the register first*/Wow, how do I join?/Here's $1,000 to start | them: No need, just look at all these profit screenshots! | me: Screenshots are easy to fake. I'm leaving the group*/OK, sending money now/I'll bring my friends too
+check: mcq | What's a red flag in an investment chat group? | Profit screenshots as proof* | A licence you can check | Clear, published fees
+check: tf | Members in scam groups can be fake. | true
+check: mcq | You're added to an investment chat by a stranger. You… | Leave and report it* | Invest a little to test it | Share it with friends
+home: Learn how to leave and report a group chat in an app you use.
+skill: scams
+
+@lesson 5.4 | Ponzi schemes | 🔄 | shares
+hook: An investment pays 2% every month, rain or shine. Where's the money really coming from?
+learn: A Ponzi scheme pays old investors with new investors' money, not real profits.
+learn: It needs a constant flow of new money. When that slows, it collapses and most people lose.
+learn: Bernie Madoff ran one of the biggest ever. It collapsed in 2008 after decades.
+play: mystery | Returns are always 2% a month, no matter what markets do.; You're encouraged to bring in friends.; Withdrawals start getting delayed.; Nobody will explain what the money is invested in. | It's likely a Ponzi scheme* | It's a normal savings account | It's a government bond
+check: mcq | How does a Ponzi scheme pay investors? | With new investors' money* | With real profits | With government grants
+check: tf | Ponzi schemes collapse when new money slows down. | true
+check: mcq | Which is a warning sign? | Steady high returns no matter what* | Prices that go up and down | Clear reports on what you own
+home: Read a short summary of the Madoff case with a grown-up and list the warning signs.
+skill: scams
+
+@lesson 5.5 | Recovery scams | 🪝 | online
+hook: You lost $2,000 to a fake platform. Now a "recovery firm" says it can get it back for a $500 fee. Relief?
+learn: Recovery scams target people who've already been scammed. They pose as lawyers, police or recovery experts.
+learn: They ask for upfront fees, ID or remote access to your computer.
+learn: Real agencies don't charge you to report a scam. Go to your bank and {nz:Netsafe and the Police~au:Scamwatch and ReportCyber} directly.
+play: path | After a scam, a "recovery firm" offers to get your $2,000 back for a $500 fee. | Ignore it, call your bank and report it to {nz:Netsafe and the Police~au:Scamwatch and ReportCyber} => good: You avoided being scammed twice, and got real help. | Pay the $500 fee => bad: The "recovery firm" is the same kind of scam. Now you've lost $2,500. | Send them your ID so they can "investigate" => bad: Now they can steal your identity too.
+check: mcq | A firm offers to recover scam losses for an upfront fee. That's… | Very likely another scam* | A great deal | Required by law
+check: tf | Recovery scams target people who've already been scammed. | true
+check: mcq | {nz:Where can you report a scam in NZ?~au:Where can you report a scam in Australia?} | {nz:Netsafe and the Police~au:Scamwatch and ReportCyber}* | A recovery firm on social media | Nowhere
+home: Save your bank's fraud number and your country's scam reporting site in your phone.
+skill: scams
+
+@lesson 5.6 | Check before you invest | ✅ | shares
+hook: You've found an investment app that looks great. How do you know it's real?
+learn: Check the company is licensed: {nz:search the Financial Service Providers Register and the FMA's warnings list.~au:search ASIC's professional registers and Moneysmart's investor alert list.}
+learn: Search the company name with words like "scam" and "reviews" on sites you trust.
+learn: If anything feels rushed, secret or too good, walk away. A real opportunity will still be there tomorrow.
+play: order | Check an investment before you put money in | Search the company name plus "scam"; Check the official register; Check the regulator's warning list; Talk it through with someone you trust; Only invest money you can afford to lose
+check: mcq | {nz:Where can you check if an NZ provider is registered?~au:Where can you check investment warnings in Australia?} | {nz:The Financial Service Providers Register~au:Moneysmart's investor alert list}* | A chat group | The company's own ads
+check: tf | A real opportunity will still be there tomorrow. | true
+check: mcq | An app pressures you to invest today. You… | Walk away and check it first* | Invest straight away | Borrow money to invest more
+home: Look up {nz:the FMA's warnings list~au:Moneysmart's investor alert list} with a grown-up.
+skill: investing
+
+@lesson 6.1 | First impressions online | 🔎 | online
+hook: You've applied for a job. Before calling you, the manager searches your name. What will they find?
+learn: Many employers look up applicants online before an interview.
+learn: Check your public profiles, photos and old posts. Make private anything you wouldn't show at work.
+learn: Use a simple, professional email address for applications, like your first and last name.
+play: sort | Professional, Not professional | aroha.ngata@ email address=Professional; xXslayerXx69@ email address=Not professional; A clear, friendly profile photo=Professional; A party photo as your main picture=Not professional; Public posts about your volunteering=Professional; Public rants about your old boss=Not professional | Professional or not?
+check: mcq | Which email is best for job applications? | Your first and last name* | A joke username | Your old gaming handle
+check: tf | Many employers look applicants up online. | true
+check: mcq | Before applying, you should… | Check and clean up your public profiles* | Post about how bored you are | Make everything public
+home: Search your own name with a grown-up and see what an employer might find.
+skill: reputation
+
+@lesson 6.2 | A LinkedIn profile | 💼 | online
+hook: You're 16 and have only worked at a café. Is it worth making a LinkedIn profile?
+learn: You can join LinkedIn from 16. It's like an online CV that people in your field can find.
+learn: Add a clear photo, a short headline, an "About" section, and your jobs, volunteering and skills.
+learn: Part-time jobs, sport, school leadership and volunteering all count. Be honest about all of it.
+play: build | Build a strong first LinkedIn profile | A clear, friendly photo; A headline like "Final-year student keen on engineering"; A short About section in your own words; Your café job and what you did; Volunteering and school leadership roles; Skills you can actually show
+check: mcq | How old do you need to be to join LinkedIn? | 16* | 10 | 21
+check: tf | Part-time jobs and volunteering are worth adding. | true
+check: mcq | What's a good LinkedIn headline? | Final-year student keen on engineering* | Bored | Party legend
+home: Write a short headline and About section for your future profile, with a grown-up.
+skill: career
+
+@lesson 6.3 | A portfolio that shows | 🎨 | online
+hook: Anyone can say "I'm good at design." How do you prove it?
+learn: A portfolio shows your work: designs, code, writing, videos or photos.
+learn: Pick your best few pieces, and say what the brief was and what you did.
+learn: School projects count. Ask permission before you show work you did for a client.
+play: path | You're applying for a junior design job. | Show your five best projects, each with a short note on your role => good: Clear and easy to judge. The employer sees what you can do. | Upload 50 unsorted pictures => bad: They won't have time to find your best work. | Include a friend's design as yours => bad: That's dishonest, and it can lose you the job or worse.
+check: mcq | What makes a good portfolio? | A few of your best pieces, with notes on your role* | Everything you've ever made | Other people's work
+check: tf | School projects can go in a portfolio. | true
+check: mcq | Before showing work you did for a client, you should… | Ask their permission* | Change their logo | Do nothing
+home: Choose three pieces of work you're proud of and write a one-line note for each.
+skill: career
+
+@lesson 6.4 | Reaching out | ✉️ | online
+hook: You'd love to work in engineering. Could you message an engineer you've never met?
+learn: Short, polite messages can open doors. Ask for advice, not a job.
+learn: Say who you are, why you're contacting them, and ask one or two clear questions.
+learn: Thank them, whether or not they reply, and keep in touch if they help.
+play: chat | You message an engineer on LinkedIn | them: Hi! Thanks for connecting. How can I help? | me: I'm in my last year of school and keen on civil engineering. Could I ask you two quick questions about your job?*/Can you give me a job?/hey | them: Sure, happy to help. | me: Thanks so much! What do you wish you'd known when you started?*/How much do you earn?/OK bye
+check: mcq | What should a first message ask for? | Advice, not a job* | A job straight away | Money
+check: tf | Thanking people for their time helps build good connections. | true
+check: mcq | A good first message is… | Short, polite and specific* | Long and pushy | Just "hey"
+home: Draft a polite message to someone in a job you're curious about. You don't have to send it.
+skill: career
+
+@lesson 6.5 | Honest and impressive | 🤝 | online
+hook: Everyone else's profile sounds amazing. Should you stretch the truth a little?
+learn: Be honest. Employers check, and fake qualifications or jobs can get you fired, even years later.
+learn: You can describe real things well: "Trained three new staff" sounds strong because it's true.
+learn: Always ask before you list someone as a referee.
+play: sort | Honest and strong, Overselling | Trained three new staff at the café=Honest and strong; Listing a degree you haven't finished as done=Overselling; Volunteered at the food bank every Saturday=Honest and strong; Calling yourself "CEO" of a hobby page with 12 followers=Overselling; Led the school's environment group=Honest and strong; Claiming fluent Spanish after one app course=Overselling | Honest or overselling?
+check: mcq | Why be honest on your profile? | Employers check, and lies can get you fired* | Nobody ever checks | Honesty sounds boring
+check: tf | You should ask before listing someone as a referee. | true
+check: mcq | Which sounds strong and honest? | Trained three new staff* | Best employee in the world | CEO of everything
+home: Write three honest, strong lines about things you've done.
+skill: career
+
+@lesson 6.6 | Job scams | 🎣 | online
+hook: A "recruiter" offers you a remote job paying $60 an hour. You just need to send your ID and pay for a training kit. Lucky?
+learn: Fake recruiters use LinkedIn, texts and chat apps to steal money and identities.
+learn: Red flags: high pay for little work, chat-only interviews, paying upfront, and asking for ID or bank details too early.
+learn: Check the company's real website and contact it yourself before sharing anything.
+play: scam | Real recruiter or job scam? | A recruiter from a real company asks to book a video interview=real; "Pay $90 for your training kit before you start"=scam; "Send a photo of your passport to secure the job"=scam; A job ad on the company's own careers page=real; "Earn $500 a day liking videos. Message me on a chat app"=scam | Real jobs pay you. They don't charge fees or ask for ID before an offer.
+check: mcq | A recruiter asks you to pay for a training kit. That's… | A red flag for a scam* | Normal | Required by law
+check: tf | Job scammers can steal your identity. | true
+check: mcq | How can you check a recruiter is real? | Contact the company yourself through its real website* | Trust their profile picture | Send your ID first
+home: Look up the job scam warnings on {nz:Netsafe~au:Scamwatch} with a grown-up.
+skill: scams
+
+@lesson 7.1 | Privacy law basics | ⚖️ | townhall
+hook: A gym asks for your fingerprint, your address and your employer. Do they need it all?
+learn: {nz:The Privacy Act 2020 has 13 Information Privacy Principles that most organisations must follow.~au:The Privacy Act 1988 has 13 Australian Privacy Principles. They cover government agencies and many businesses.}
+learn: They say organisations should only collect what they need, tell you why, keep it safe and let you see it.
+learn: {nz:The Privacy Commissioner can investigate if an organisation breaks the rules.~au:The Office of the Australian Information Commissioner (OAIC) can investigate if an organisation breaks the rules.}
+play: match | Match each privacy rule to what it means | Collection=Only collect what's needed; Notice=Tell you why it's being collected; Security=Keep it safe from misuse; Access=Let you see what they hold about you; Correction=Fix it if it's wrong
+check: mcq | What should organisations collect? | Only what they need* | Everything they can | Your passwords
+check: tf | You have a right to see the personal information an organisation holds about you. | true
+check: mcq | {nz:Who can investigate privacy complaints in NZ?~au:Who can investigate privacy complaints in Australia?} | {nz:The Privacy Commissioner~au:The OAIC}* | The police only | Nobody
+home: Read the privacy policy of one app you use, and find what it collects.
+skill: privacy
+
+@lesson 7.2 | When data leaks | 🔓 | online
+hook: In 2023, a lender's data breach exposed about 14 million records across Australia and New Zealand, including millions of licence numbers. What would you do if yours was in it?
+learn: In both countries, organisations must tell you and the regulator about serious data breaches.
+learn: After a breach, change passwords, turn on two-step login and watch for scam messages that use your details.
+learn: If ID documents were taken, you may need to replace them. IDCARE gives free help in both countries.
+play: order | Your details were in a data breach. Put the steps in order. | Read the organisation's notice carefully; Change your password, and any you reused; Turn on two-step login; Replace ID documents if they were taken; Watch for scam messages using your details
+check: mcq | Must organisations tell you about serious data breaches? | Yes, in both countries* | No, never | Only if you ask
+check: tf | Scammers may use leaked details to make messages look real. | true
+check: mcq | Who gives free help with identity theft in both countries? | IDCARE* | A dating app | Nobody
+home: Check a breach-checking site for your email with a grown-up.
+skill: privacy
+
+@lesson 7.3 | Your credit report | 📄 | bank
+hook: You've never borrowed money. Could there still be a loan in your name?
+learn: Credit reporting agencies keep records of loans, credit cards, phone plans and missed payments.
+learn: You can ask for a free copy of your credit report. Check it for anything you don't recognise.
+learn: If your identity is stolen, you can ask the agencies to freeze your file so no one can get credit in your name.
+play: sort | Could show on a credit report, Wouldn't show | A phone plan in your name=Could show on a credit report; A missed loan payment=Could show on a credit report; Your favourite movies=Wouldn't show; A credit card application=Could show on a credit report; Your school marks=Wouldn't show; A buy now, pay later account=Could show on a credit report | On a credit report or not?
+check: mcq | Can you get a free copy of your credit report? | Yes* | No | Only if you pay $500
+check: tf | Checking your credit report can help you spot identity theft. | true
+check: mcq | Your identity was stolen. What can you ask credit agencies to do? | Freeze your file* | Delete the internet | Nothing
+home: Find out which credit reporting agencies operate in your country, with a grown-up.
+skill: credit
+
+@lesson 7.4 | Age checks online | 🚫 | online
+hook: {nz:Australia now bans under-16s from big social media apps. Should NZ do the same?~au:Since December 2025, under-16s can't have accounts on big social media apps. How do apps know your age?}
+learn: {nz:Since December 2025, Australian platforms must take reasonable steps to stop under-16s having accounts. NZ is debating a similar law.~au:Platforms must take reasonable steps to stop under-16s having accounts, or face big fines.}
+learn: Age checks can use face scans, ID documents or data the app already has about you.
+learn: That raises privacy questions: who keeps the data, for how long, and could it leak?
+play: debate | Are social media age checks worth the privacy trade-offs? | It depends on how they're done. Checks that keep little data can protect kids without big privacy risks* | Age checks have no privacy downsides at all | Some argue any age check means more data collected about everyone, and that teaching safe use works better than bans.
+check: mcq | {nz:Which country banned under-16s from big social media apps in December 2025?~au:From what age can people have accounts on the big social media apps?} | {nz:Australia~au:16}* | {nz:New Zealand~au:10} | {nz:Nowhere~au:21}
+check: tf | Age checks can raise privacy questions. | true
+check: mcq | Which is a privacy question about age checks? | Who keeps the data, and for how long?* | What colour is the app? | How many likes do I get?
+home: Talk with a younger family member about why age limits on apps exist.
+skill: privacy
+
+@lesson 7.5 | Watched at work and in shops | 📹 | workshop
+hook: Your boss can see your work emails. A shop scans your face. Is that allowed?
+learn: Employers can often monitor work devices and accounts, but they should tell you what they monitor and why.
+learn: Facial recognition collects sensitive information about your face, so privacy rules are strict.
+learn: {nz:A new Biometric Processing Privacy Code sets extra rules for using things like facial recognition.~au:The OAIC found that Bunnings in 2024 and Kmart in 2025 broke privacy law with their facial recognition.}
+play: sort | Usually OK if you're told, Raises big privacy concerns | Monitoring emails on a work laptop=Usually OK if you're told; Secretly reading your personal phone=Raises big privacy concerns; CCTV in a shop with clear signs=Usually OK if you're told; Scanning every shopper's face without telling them=Raises big privacy concerns; Logging which work files you open=Usually OK if you're told; Tracking your location on weekends=Raises big privacy concerns | Usually OK or a big concern?
+check: mcq | What should an employer tell you about monitoring? | What they monitor and why* | Nothing | Only your pay rate
+check: tf | Facial recognition collects sensitive information. | true
+check: mcq | {nz:What does NZ's Biometric Processing Privacy Code cover?~au:Which stores did the OAIC find broke privacy law with facial recognition?} | {nz:Using things like facial recognition~au:Bunnings and Kmart}* | {nz:Football rules~au:None} | {nz:Bus timetables~au:Every shop}
+home: Look for CCTV or facial recognition signs next time you go shopping.
+skill: privacy
+
+@lesson 7.6 | Using your rights | 📨 | townhall
+hook: You think a company has wrong information about you. How do you get it fixed?
+learn: You can ask an organisation for the personal information it holds about you. They must usually reply within a set time.
+learn: If it's wrong, ask them to correct it. If they won't, you can complain to {nz:the Privacy Commissioner~au:the OAIC}.
+learn: {nz:If a privacy breach causes you harm, the Privacy Commissioner can investigate, and the Human Rights Review Tribunal can award damages.~au:Since June 2025, you can also take someone to court for a serious invasion of your privacy.}
+play: build | Build a request for your personal information | Say who you are and how they know you; Ask for all the personal information they hold about you; Ask who they've shared it with; Ask them to correct anything wrong; Give your contact details; Keep a copy and note the date
+check: mcq | A company won't fix wrong information about you. You can complain to… | {nz:The Privacy Commissioner~au:The OAIC}* | A radio show | Nobody
+check: tf | You can ask organisations who they've shared your information with. | true
+check: mcq | Why keep a copy of your request? | To show when you asked* | It's not needed | To post online
+home: Write a short request for your information to a company you use. You don't have to send it.
+skill: privacy
+
+@lesson 8.1 | What AI is good at | 🤖 | online
+hook: AI can write an essay in seconds. Can it also check if the essay is true?
+learn: AI tools are good at drafting, summarising, brainstorming, explaining and helping with code.
+learn: They can get facts, recent events, maths and sources wrong, while sounding very confident.
+learn: Use AI like a fast assistant, not an expert. You're still responsible for the result.
+play: sort | Good use of AI, Risky use | Brainstorming ideas for a project=Good use of AI; Copying its answer to a test question=Risky use; Getting a hard topic explained simply=Good use of AI; Trusting its legal advice without checking=Risky use; Getting feedback on your draft's structure=Good use of AI; Using its made-up statistics in a report=Risky use | Good or risky use?
+check: mcq | What are AI tools often good at? | Drafting and brainstorming* | Always getting facts right | Knowing today's news perfectly
+check: tf | AI can sound confident when it's wrong. | true
+check: mcq | Who is responsible for work you hand in with AI help? | You* | The AI | Nobody
+home: Ask an AI tool something you know well, and check what it gets right and wrong.
+skill: ai
+
+@lesson 8.2 | Prompting well | ✍️ | online
+hook: "Write about volcanoes." Why does that give you a bland answer?
+learn: Good prompts give context: who it's for, what you want, and the format.
+learn: Add limits, like length, reading level or what to avoid.
+learn: Treat it as a conversation. Ask follow-up questions and ask it to explain its reasoning.
+play: diff | A vague prompt and a clear prompt. Tap what changed. | Write about volcanoes; Make it good | Explain how volcanoes form for a Year 10 science class; Use three short paragraphs and one real example
+check: mcq | What makes a prompt clearer? | Saying who it's for and what format you want* | Using fewer words always | Typing in capitals
+check: tf | Follow-up questions can improve an AI's answer. | true
+check: mcq | Which prompt is clearer? | Summarise this article in 5 dot points for a Year 12 student* | Do this | Write stuff
+home: Rewrite a vague prompt into a clear one, and compare the answers.
+skill: ai
+
+@lesson 8.3 | Check the output | ✅ | online
+hook: An AI gives you three sources for your essay. One doesn't exist. How would you know?
+learn: AI can make up facts, quotes and even sources that sound real.
+learn: Check every fact and source that matters. Open the source and make sure it says what the AI claims.
+learn: Re-do any maths, and rewrite in your own words, so you understand it.
+play: order | Check AI output before you use it. Put it in order. | Read it all carefully; Check key facts against trusted sources; Open every source and check it's real; Re-do any maths yourself; Rewrite it in your own words
+check: mcq | An AI gives you a source. You… | Open it and check it says what the AI claims* | Copy it straight in | Trust it because it sounds real
+check: tf | AI can make up sources that don't exist. | true
+check: mcq | Why rewrite AI help in your own words? | So you understand it and it's your work* | To make it longer | No reason
+home: Check three facts from an AI answer against trusted sources.
+skill: ai
+
+@lesson 8.4 | Keep it confidential | 🔒 | online
+hook: You're at work and want AI to tidy up a customer email. Can you paste it in?
+learn: What you type into a public AI tool may be stored, and sometimes used to train it.
+learn: Don't paste in personal details, passwords or confidential work information.
+learn: Follow your workplace's AI rules, and use the tools they've approved.
+play: sort | OK for a public AI tool, Keep it out | A general grammar question=OK for a public AI tool; A customer's name and address=Keep it out; Your company's unreleased plans=Keep it out; A public news article to summarise=OK for a public AI tool; A friend's medical details=Keep it out; A practice essay question=OK for a public AI tool | OK to paste in, or keep it out?
+check: mcq | What should you keep out of public AI tools? | Personal and confidential information* | General questions | Public articles
+check: tf | What you type into a public AI tool may be stored. | true
+check: mcq | At work, which AI tools should you use? | The ones your workplace has approved* | Any you find | None, ever
+home: Read the privacy settings of an AI tool you use, and see whether it trains on your chats.
+skill: ai
+
+@lesson 8.5 | Say when you used AI | 📎 | townhall
+hook: You used AI to brainstorm and check grammar on an assignment. Do you need to mention it?
+learn: Schools, universities and workplaces have different rules about AI. Read them for each course or job.
+learn: Many ask you to say how you used AI, and some ask you to reference it like a source.
+learn: Handing in AI work as your own, where it's not allowed, can count as cheating.
+play: path | You used AI to brainstorm and check grammar on an assignment. | Check the rules and note how you used AI => good: You were honest and followed the rules. Your work is still yours. | Hide it and hope nobody asks => bad: If AI use had to be declared, hiding it can count as dishonesty. | Hand in an AI-written essay as your own => bad: Where that's not allowed, it's cheating, and the penalties can be serious.
+check: mcq | What should you do before using AI on an assignment? | Read the rules for that course* | Nothing | Ask a friend to guess
+check: tf | Some courses ask you to reference AI like a source. | true
+check: mcq | Handing in AI work as your own, where it's not allowed, is… | Cheating* | Fine | Smart
+home: Find the AI rules for one subject or course you're doing.
+skill: ai
+
+@lesson 8.6 | AI and your future job | 💼 | workshop
+hook: Will AI take your future job?
+learn: AI is more likely to change tasks within jobs than to replace whole jobs straight away.
+learn: People who use AI well, and check it carefully, are often in demand.
+learn: Skills like judgement, communication, creativity and working with people matter even more.
+play: debate | Will AI take most jobs? | It's more likely to change tasks within jobs, so people who learn to use it well will do best* | AI will never change any job | Some argue certain jobs will shrink fast, so workers will need real support to retrain.
+check: mcq | Which skills matter more as AI grows? | Judgement, communication and creativity* | None | Only typing speed
+check: tf | People who use AI well, and check it carefully, are often in demand. | true
+check: mcq | How is AI most likely to affect jobs at first? | By changing tasks within jobs* | By replacing every job overnight | Not at all
+home: Ask a grown-up how AI has changed their work, or might change it.
+skill: ai

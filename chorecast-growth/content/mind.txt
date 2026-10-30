@@ -285,6 +285,294 @@ check: tf | Offering to fix things is part of a good sorry. | true
 home: Practise a good sorry with a grown-up using the four steps.
 skill: friendship
 
+@lesson 5.1 | Water power | 💧 | home
+hook: Your body is more than half water. How do you keep it topped up?
+learn: Water helps your body stay cool, think clearly and keep going.
+learn: You lose water when you sweat, breathe and go to the toilet, so you need to drink more every day.
+learn: Keep a water bottle close, and drink more when it's hot or you're running about.
+play: tap | Tap the signs your body needs a drink | 👄:yes:A dry mouth; 🤕:yes:A headache; 🥱:yes:Feeling tired and floppy; 🟡:yes:Dark yellow wee; 😄:no; 🏊:no
+check: mcq | When should you drink extra water? | When it's hot or you're running about* | Only at bedtime | Never
+check: tf | Your body is more than half water. | true
+check: mcq | What's a good way to drink enough water? | Keep a water bottle close* | Wait until you feel dizzy | Only drink fizzy drink
+home: Fill a water bottle in the morning and see if you can finish it by dinner.
+skill: health
+
+@lesson 5.2 | Rainbow plate | 🥕 | kitchen
+hook: Red, orange, yellow, green and purple. Can you eat a rainbow?
+learn: Fruit and vegetables come in lots of colours.
+learn: Each colour helps your body in a different way, so eating lots of colours is a great habit.
+learn: Try to fill half your plate with vegetables and fruit.
+play: match | Match each food to its colour | Carrot=Orange; Broccoli=Green; Tomato=Red; Banana=Yellow; Blueberries=Purple and blue
+check: mcq | Why eat lots of different colours? | Each colour helps your body in a different way* | So your plate looks messy | Colours don't matter
+check: tf | Half your plate can be vegetables and fruit. | true
+check: mcq | Which meal has the most colours? | Rice with peas, carrots and capsicum* | Plain white bread | Plain pasta
+home: Count the colours on your dinner plate tonight. Can you find three?
+skill: food
+
+@lesson 5.3 | Breakfast fuel | 🥣 | kitchen
+hook: A car needs fuel to go. What does your body need in the morning?
+learn: Breakfast gives your body and brain energy for the morning.
+learn: Kids who eat breakfast often find it easier to listen and learn at school.
+learn: Good breakfasts include things like cereal, toast, eggs, yoghurt or fruit.
+play: path | You're running late for school and haven't had breakfast. | Grab a banana and some toast to eat on the way => good: Quick and easy fuel. Your body has energy for the morning. | Skip it and go => bad: By morning tea your tummy is rumbling and it's hard to listen. | Eat a handful of lollies => ok: You get a quick burst, but it fades fast and you feel tired again.
+check: mcq | What does breakfast give you? | Energy for the morning* | Sleepiness | Nothing
+check: tf | Lollies are the best breakfast. | false | They give a quick burst that fades fast.
+check: mcq | Which is a good breakfast? | Toast and fruit* | A bag of chips | Nothing at all
+home: Help make breakfast with a grown-up one morning this week.
+skill: food
+
+@lesson 5.4 | Snack swaps | 🍎 | kitchen
+hook: Feeling snacky after school? What could you swap for something that helps your body more?
+learn: A snack swap means choosing a healthier snack instead of a sometimes food.
+learn: Fruit, yoghurt, cheese, crackers and plain popcorn are good everyday snacks.
+learn: Swaps can still be yummy. Sometimes foods are fine now and then.
+play: match | Match each sometimes snack to a healthier swap | Fizzy drink=Water with a slice of lemon; Chips=Plain popcorn; Lollies=A bowl of grapes; Chocolate biscuits=Crackers and cheese
+check: mcq | What's a healthier swap for fizzy drink? | Water* | An energy drink | Another fizzy drink
+check: tf | Healthy snacks can still be yummy. | true
+check: mcq | Which is a good everyday snack? | An apple* | A big bag of lollies | A slice of cake
+home: Make a list of three snack swaps with a grown-up and try one this week.
+skill: food
+
+@lesson 5.5 | Move every day | 🏃 | garden
+hook: How many minutes do you move your body each day?
+learn: Kids need to move their bodies for at least an hour every day.
+learn: Running, riding, swimming, dancing and climbing all count.
+learn: When you puff a little, your heart and lungs are getting stronger.
+try: 20 minutes + 20 minutes = 40 minutes :: gap | 30 minutes + 30 minutes = _ minutes | 60
+play: slider | You walk to school for 15 minutes, play at lunch for 30 minutes and ride your bike for 20 minutes. How many minutes did you move? | 0 | 120 | 65 | minutes | 0 | 5
+check: mcq | How long should kids move each day? | At least an hour* | 1 minute | Never
+check: tf | Puffing a little when you play means your heart is getting stronger. | true
+home: Keep a moving chart for three days. Did you get an hour each day?
+skill: health
+
+@lesson 5.6 | Sun smart play | ☀️ | island
+hook: The sun is shining and you're off to play. What keeps your skin safe?
+learn: The sun's rays can burn your skin, even on cloudy days.
+learn: Wear a shirt, sunscreen, a hat and sunglasses, and play in the shade when you can.
+learn: Have water with you too, so you don't get too hot.
+play: build | Get ready for sun smart play | Put on a shirt with sleeves; Rub on sunscreen; Put on a hat; Put on sunglasses; Grab your water bottle; Play in the shade when you can
+check: mcq | What helps keep your skin safe in the sun? | A hat, sunscreen and shade* | Taking your shirt off | Staring at the sun
+check: tf | You can get sunburnt on a cloudy day. | true
+check: mcq | Where's the best place to play in the middle of a hot day? | In the shade* | In the hottest sunny spot | Nowhere
+home: Put a hat and sunscreen by the door so they're ready for your next outside play.
+skill: health
+
+@lesson 6.1 | Butterflies in your tummy | 🦋 | garden
+hook: It's your first swimming lesson. Your tummy feels fluttery. What's going on?
+learn: Feeling nervous before something new is normal. Lots of people call it butterflies.
+learn: Your heart might beat fast, your hands might get sweaty and your legs might feel wobbly.
+learn: Those feelings mean your body is getting ready. They usually get smaller once you start.
+play: tap | Tap the signs your body is feeling nervous | 🦋:yes:Fluttery tummy; 💓:yes:A fast heartbeat; 🖐️:yes:Sweaty hands; 🦵:yes:Wobbly legs; 😴:no; 🍦:no
+check: mcq | Is it OK to feel nervous before something new? | Yes, it's normal* | No, never | Only for grown-ups
+check: tf | Nervous feelings usually get smaller once you start. | true
+check: mcq | What might happen in your body when you're nervous? | Your heart beats fast* | You turn purple | You fall asleep
+home: Tell a grown-up about a time you felt butterflies, and what happened next.
+skill: brave
+
+@lesson 6.2 | Brave means trying | 🦁 | garden
+hook: Does being brave mean you're not scared at all?
+learn: Being brave doesn't mean you're not scared. It means trying even when you feel a bit scared.
+learn: You can be brave in small ways, like asking a question or tasting a new food.
+learn: Every brave try makes the next one a little easier.
+play: path | It's your first swimming lesson, and the pool looks big. | Sit on the edge, dip your toes in, then hop in with the teacher => good: That's brave! Small steps got you in the water. | Run and jump in the deep end => bad: Brave isn't the same as unsafe. Start slowly. | Hide in the changing room => ok: It's OK to feel scared, but you'd miss the fun. Try one small step.
+check: mcq | What does being brave mean? | Trying even when you feel a bit scared* | Never feeling scared | Doing dangerous things
+check: tf | You can be brave in small ways. | true
+check: mcq | Which is a small brave thing? | Tasting a new food* | Climbing onto the roof | Running across a road
+home: Do one small brave thing this week and tell your family about it.
+skill: brave
+
+@lesson 6.3 | Brave talk | 💬 | garden
+hook: Your brain says "I can't do it!" What could you say back?
+learn: What you say to yourself can help you feel braver.
+learn: Brave talk sounds like: "I can try." "It's OK to feel nervous." "I've done hard things before."
+learn: Say it quietly in your head, or out loud to a grown-up.
+play: match | Match each scared thought to brave talk | I can't do it=I can try; Everyone will laugh=Most people are busy thinking about themselves; I'm too scared=It's OK to feel scared and still try; It's too hard=I've done hard things before
+check: mcq | Which is brave talk? | I can try* | I'll never do it | I'm useless
+check: tf | What you say to yourself can help you feel braver. | true
+check: mcq | You feel nervous before a school play. What could you say to yourself? | It's OK to be nervous. I've practised* | Everyone will hate it | I should run away
+home: Pick your favourite brave words and write them on a card for your room.
+skill: brave
+
+@lesson 6.4 | Small steps | 🪜 | garden
+hook: A big friendly dog lives next door. You'd like to pat it, but it feels scary. How could you get there?
+learn: A big scary thing can be broken into small steps, like climbing a ladder.
+learn: Start with the easiest step. When it feels OK, try the next one.
+learn: Have a grown-up with you, and go at your own speed.
+play: build | Build the small steps to patting a big friendly dog | Watch the dog from across the yard; Stand a bit closer with a grown-up; Ask the owner if you can pat it; Hold out your hand for the dog to sniff; Gently pat the dog's back
+check: mcq | How can you make a scary thing easier? | Break it into small steps* | Do the hardest part first | Never try
+check: tf | You can go at your own speed. | true
+check: mcq | What's a good first step with a big dog? | Watch it from a distance* | Hug it straight away | Pull its tail
+home: Think of something that feels scary and draw a ladder of small steps to get there.
+skill: brave
+
+@lesson 6.5 | Calm body, brave brain | 🖐️ | garden
+hook: Your heart is racing before a big race. How can your hand help you calm down?
+learn: Five-finger breathing can calm your body down.
+learn: Trace up one finger as you breathe in, and down the other side as you breathe out.
+learn: Do all five fingers. When your body feels calmer, it's easier to be brave.
+play: order | Do five-finger breathing | Hold up one hand and spread your fingers; Trace up your thumb as you breathe in; Trace down the other side as you breathe out; Keep going until you've done all five fingers; Notice how your body feels now
+check: mcq | What do you do when you trace up a finger? | Breathe in* | Breathe out | Hold your breath for ages
+check: tf | A calmer body can help you feel braver. | true
+check: mcq | When could you use five-finger breathing? | Before something new or scary* | Only when you're asleep | Never
+home: Teach someone in your family five-finger breathing.
+skill: calm
+
+@lesson 6.6 | New places, new faces | 🏫 | home
+hook: It's your first day at a new club. You don't know anyone. What can help?
+learn: Feeling shy in a new place is normal. Everyone is new somewhere sometimes.
+learn: Try a smile, say hi, and ask someone's name.
+learn: If you need help, ask a grown-up in charge. That's what they're there for.
+play: chat | Your first day at a new club | them: Hi! Are you new? | me: Yes! I'm a bit nervous. What's your name?*/No/Go away | them: I'm Tama. Do you want to be my partner for the first game? | me: Yes please! Thanks, Tama*/No, I want to go home/Maybe never
+check: mcq | You're in a new place and don't know anyone. What can you try? | Smile and say hi* | Hide all day | Push someone
+check: tf | Everyone is new somewhere sometimes. | true
+check: mcq | Who can you ask for help at a new club? | The grown-up in charge* | Nobody | A stranger on the street
+home: Practise saying "Hi, I'm new. What's your name?" with a grown-up.
+skill: brave
+
+@lesson 7.1 | Saying thank you | 🙏 | home
+hook: Nana gives you a jumper she knitted. It's not your favourite colour. What do you say?
+learn: Saying thank you shows people you notice what they did for you.
+learn: You can say thank you for the effort, even if the present isn't your favourite.
+learn: Look at the person, smile, and say what you're thanking them for.
+play: chat | Nana gives you a present | them: Here's something I made for you! | me: Thank you, Nana! Did you knit it yourself?*/I don't like this colour/Is that all? | them: I did! It took me three weeks. | me: Wow, that's so much work. Thank you for making it for me*/Three weeks? That's slow/Can I have money instead?
+check: mcq | What's a kind thing to say about a present? | Thank you for making it for me* | I don't like it | Is that all?
+check: tf | You can say thank you for someone's effort, even if a present isn't your favourite. | true
+check: mcq | A good thank you includes… | What you're thanking them for* | Nothing at all | A frown
+home: Say a thank you today that tells someone exactly what you're thankful for.
+skill: gratitude
+
+@lesson 7.2 | Thank-you notes | ✉️ | home
+hook: Aunty sent you a book for your birthday. How could you thank her when she lives far away?
+learn: A thank-you note is a card or message that says thanks.
+learn: Say who it's for, what you're thanking them for, and how it made you feel.
+learn: You can write it, draw it, or send a video with a grown-up's help.
+play: build | Build a thank-you note | Dear Aunty Mere,; Thank you for the dinosaur book; I've read it three times already; It made my birthday extra special; Love from Sam
+check: mcq | What goes in a thank-you note? | What you're thankful for and how it made you feel* | A list of other things you want | Nothing
+check: tf | You can draw a thank-you note. | true
+check: mcq | How could you thank someone who lives far away? | Send a card or a video* | Wait until you see them in 10 years | Don't bother
+home: Make a thank-you card for someone who has helped you.
+skill: gratitude
+
+@lesson 7.3 | Notice with your senses | 🌼 | garden
+hook: Can your eyes, ears and nose help you find good things?
+learn: Good things are all around us. Using your senses helps you notice them.
+learn: You might see a rainbow, hear birds singing or smell bread baking.
+learn: Noticing little good things can lift your mood.
+play: match | Match each sense to a little good thing | See=A rainbow after rain; Hear=Birds singing in the morning; Smell=Fresh bread baking; Taste=A juicy orange; Touch=A soft, warm blanket
+check: mcq | Which sense notices birds singing? | Hearing* | Taste | Smell
+check: tf | Noticing little good things can lift your mood. | true
+check: mcq | Which is a little good thing you might smell? | Fresh bread baking* | A smelly bin | Nothing
+home: Go on a senses walk with a grown-up and find one good thing for each sense.
+skill: gratitude
+
+@lesson 7.4 | People who help us | 💛 | home
+hook: Who helped you today, even in a small way?
+learn: Lots of people help us every day: family, teachers, coaches and people in our town.
+learn: Some help is easy to miss, like cooking dinner, washing clothes or driving you to sport.
+learn: Noticing it and saying thanks makes people feel good.
+play: tap | Tap the people who might help you each day | 🧑‍🍳:yes:Whoever cooks your dinner; 🧑‍🏫:yes:Your teacher; 🚌:yes:The bus driver; 🧹:yes:The school cleaner; 🦖:no; 👾:no
+check: mcq | Which help is easy to miss? | Someone washing your clothes* | A dinosaur | A video game
+check: tf | Saying thanks makes people feel good. | true
+check: mcq | How can you show thanks to someone at home? | Say thank you, or help them back* | Ignore them | Complain
+home: Thank someone at home for a job they do that's easy to miss.
+skill: gratitude
+
+@lesson 7.5 | A gratitude jar | 🫙 | home
+hook: What if you could save up good things in a jar?
+learn: A gratitude jar is a jar where you put notes about good things.
+learn: Each day, write or draw one good thing on a slip of paper and pop it in.
+learn: On a grumpy day, pull out some notes and read them.
+play: order | Make a gratitude jar | Find a clean jar; Cut paper into small slips; Each day, write or draw one good thing; Fold it and pop it in the jar; On a grumpy day, read some notes
+check: mcq | What goes in a gratitude jar? | Notes about good things* | Lollies | Rubbish
+check: tf | Reading gratitude notes can help on a grumpy day. | true
+check: mcq | How often can you add a note? | Every day* | Once a year | Never
+home: Make a family gratitude jar and add one note each day this week.
+skill: gratitude
+
+@lesson 7.6 | When things go wrong | 🌧️ | garden
+hook: Your party gets rained out. Is there anything good left?
+learn: It's OK to feel sad or cross when things go wrong.
+learn: After a while, you can look for one good thing, even on a bad day.
+learn: Looking for the good doesn't mean pretending to be happy. It just helps you feel a bit better.
+play: path | It pours with rain on your outdoor birthday party. | Feel sad for a bit, then notice your friends came and play games inside => good: It's a different party, but still fun with your friends. | Say the whole day is ruined and sulk => bad: That makes the day feel even worse. | Pretend you're not sad at all => ok: It's OK to feel sad. Then you can look for one good thing.
+check: mcq | Something goes wrong. What can help after a while? | Looking for one good thing* | Saying everything is ruined | Shouting
+check: tf | It's OK to feel sad when things go wrong. | true
+check: mcq | Looking for the good means… | Finding something nice, even on a bad day* | Pretending to be happy | Ignoring your feelings
+home: At dinner, share one thing that went wrong today and one good thing that happened.
+skill: gratitude
+
+@lesson 8.1 | Everyone makes mistakes | 🙊 | garden
+hook: Do grown-ups make mistakes too?
+learn: Everyone makes mistakes: kids, teachers, parents, even sports stars.
+learn: Mistakes are how we learn. Each one shows us something new.
+learn: When you make a mistake, you're not bad. You're learning.
+play: chat | Your friend spills paint | them: Oh no! I spilled paint everywhere. I'm so silly! | me: Everyone makes mistakes! Let's clean it up together*/Ha ha, you're so messy/I'm telling the teacher | them: Thanks. I'll hold the cup more carefully next time. | me: Good idea! Now let's finish our painting*/You'll probably spill it again/Don't touch anything ever
+check: mcq | Who makes mistakes? | Everyone* | Only kids | Nobody
+check: tf | Mistakes can help you learn. | true
+check: mcq | You make a mistake. That means… | You're learning* | You're bad | You should give up
+home: Ask a grown-up to tell you about a mistake they made and what they learned.
+skill: mistakes
+
+@lesson 8.2 | Oops, fix it | 🧽 | home
+hook: You knocked over your drink at dinner. What now?
+learn: When something goes wrong, stop and take a breath.
+learn: Say "Oops, I made a mistake," then fix what you can.
+learn: If someone was upset, say sorry. Then think about what you'll do next time.
+play: order | Make a fix-it plan. Put the steps in order. | Stop and take a breath; Say "Oops, I made a mistake"; Fix what you can; Say sorry if someone was upset; Think about what you'll do next time
+check: mcq | You spill your drink. What's a good first step? | Stop and take a breath* | Run away | Pretend it didn't happen
+check: tf | Thinking about next time helps you learn from a mistake. | true
+check: mcq | What's part of a fix-it plan? | Fixing what you can* | Blaming someone else | Hiding
+home: Use the fix-it plan the next time something goes oops.
+skill: mistakes
+
+@lesson 8.3 | Owning up | 🙋 | home
+hook: You broke Mum's favourite mug. Nobody saw. Do you tell?
+learn: Owning up means telling the truth about a mistake, even when it's hard.
+learn: Hiding a mistake usually makes things worse, and you might feel bad inside.
+learn: Grown-ups are usually proud of kids who tell the truth.
+play: path | You accidentally break Mum's favourite mug. Nobody saw. | Tell Mum straight away and say sorry => good: Mum is sad about the mug, but proud that you told the truth. | Hide the pieces under the couch => bad: When Mum finds them, she's upset about the mug and the hiding. | Say the cat did it => bad: Blaming someone else isn't fair, and it's not the truth.
+check: mcq | What does owning up mean? | Telling the truth about a mistake* | Hiding it | Blaming the cat
+check: tf | Hiding a mistake usually makes things worse. | true
+check: mcq | You broke something by accident. You… | Tell a grown-up and say sorry* | Hide it | Blame someone else
+home: Talk with a grown-up about why telling the truth matters, even when it's hard.
+skill: honesty
+
+@lesson 8.4 | Happy accidents | 🧫 | museum
+hook: Can a mistake turn into something amazing?
+learn: In 1928, a scientist named Alexander Fleming left some dishes of germs out while he went on holiday.
+learn: When he came back, mould had grown on one dish, and it had killed the germs around it.
+learn: That messy mistake led to penicillin, a medicine that has saved millions of lives.
+play: mystery | A scientist left some dishes out before a holiday.; When he came back, mould had grown on one.; The mould had killed the germs around it.; It became a famous medicine. | Penicillin* | Chocolate | A rocket
+check: mcq | Who discovered penicillin after leaving dishes out? | Alexander Fleming* | A pirate | A chef
+check: tf | Some mistakes have led to amazing discoveries. | true
+check: mcq | What did the mould do? | Killed the germs around it* | Made the dish disappear | Turned into gold
+home: Look up another invention that started as a mistake, with a grown-up.
+skill: mistakes
+
+@lesson 8.5 | Kind to yourself | 💗 | garden
+hook: You got a spelling word wrong. Your brain says, "I'm so dumb." Is that kind?
+learn: How you talk to yourself matters, especially after a mistake.
+learn: Talk to yourself like you'd talk to a friend: "It's OK. I'm learning."
+learn: Being kind to yourself makes it easier to try again.
+play: match | Match each unkind thought to a kind one | I'm so dumb=I'm still learning; I always get it wrong=I got lots right too; I can't do anything=I can try again; Everyone's better than me=Everyone learns at their own speed
+check: mcq | Which is a kind thing to say to yourself? | It's OK, I'm learning* | I'm so dumb | I'll never get it
+check: tf | Being kind to yourself makes it easier to try again. | true
+check: mcq | How should you talk to yourself after a mistake? | Like you'd talk to a friend* | Very meanly | Not at all
+home: Write one kind thing you can say to yourself after a mistake.
+skill: selftalk
+
+@lesson 8.6 | When others make mistakes | 🤗 | home
+hook: Your friend drops the ball in a game and your team loses. What do you say?
+learn: Everyone feels bad when they make a mistake, especially if others are watching.
+learn: Being kind helps: "That's OK!" or "Good try!"
+learn: Laughing at someone's mistake can really hurt their feelings.
+play: sort | Kind, Unkind | Saying "That's OK!"=Kind; Laughing at them=Unkind; Helping them fix it=Kind; Telling everyone what happened=Unkind; Saying "Everyone makes mistakes"=Kind; Calling them names=Unkind | Kind or unkind?
+check: mcq | Your friend makes a mistake. What's kind? | Say "That's OK!"* | Laugh at them | Tell everyone
+check: tf | Laughing at someone's mistake can hurt their feelings. | true
+check: mcq | How can you help a friend after a mistake? | Help them fix it* | Point and laugh | Walk away
+home: Next time someone in your family makes a mistake, say something kind.
+skill: kindness
+
 @band builders
 @unit 1 | Habits | How tiny habits become big changes
 @unit 2 | Delayed gratification | Waiting for something better
@@ -573,6 +861,295 @@ check: tf | Online friends are always who they say they are. | false | People ca
 home: Show a grown-up who you chat with online.
 skill: online safety
 
+@lesson 5.1 | Brain fuel | 🧠 | kitchen
+hook: Your brain is only a small part of you, but it uses about a fifth of your body's energy. What fuels it best?
+learn: Your brain needs steady energy from regular meals to focus and remember.
+learn: Wholegrains, fruit, vegetables, eggs, nuts and dairy give steady energy that lasts.
+learn: Sugary snacks give a quick spike, then a crash that can leave you tired and grumpy.
+play: sort | Steady energy, Quick spike then crash | Wholegrain toast=Steady energy; A can of energy drink=Quick spike then crash; Porridge with fruit=Steady energy; A bag of lollies=Quick spike then crash; An egg sandwich=Steady energy; A sugary iced bun=Quick spike then crash | Steady energy or spike and crash?
+check: mcq | What helps your brain focus all morning? | Regular meals with steady energy* | Lollies every hour | Skipping breakfast
+check: tf | Sugary snacks can lead to a crash that leaves you tired. | true
+check: mcq | Which gives steady energy? | Porridge with fruit* | A sugary drink | A bag of lollies
+home: Plan a brain-fuel lunch box with a grown-up for one school day.
+skill: food
+
+@lesson 5.2 | Sugar in drinks | 🥤 | kitchen
+hook: How many teaspoons of sugar are in a big bottle of fizzy drink?
+learn: About 4 grams of sugar is one teaspoon. Check the label to see the grams.
+learn: A 600 mL bottle of regular cola has around 16 teaspoons of sugar.
+learn: Energy drinks have sugar and lots of caffeine. Their labels say they're not recommended for children.
+try: 40 grams of sugar ÷ 4 = 10 teaspoons :: gap | 24 grams of sugar ÷ 4 = _ teaspoons | 6
+play: slider | A sports drink has 36 grams of sugar. About how many teaspoons is that? | 0 | 20 | 9 | teaspoons | 1 | 1
+check: gap | A juice box has 20 grams of sugar. That's about _ teaspoons | 5
+check: mcq | Are energy drinks a good choice for kids? | No, they have lots of caffeine and sugar* | Yes, every day | Only before bed
+check: tf | Water has no sugar at all. | true
+home: Check the sugar on three drink labels at home and work out the teaspoons.
+skill: food
+
+@lesson 5.3 | Move your mood | 🚴 | garden
+hook: You're grumpy after a long day. Could a run around the block help?
+learn: Moving your body releases chemicals that lift your mood and help you feel calmer.
+learn: Kids should get at least 60 minutes of moving a day, with some huffing and puffing.
+learn: A few times a week, do things that build strong muscles and bones, like climbing, jumping and skipping.
+play: sort | Gets your heart pumping, Builds muscles and bones | Running races=Gets your heart pumping; Swinging on monkey bars=Builds muscles and bones; Swimming laps=Gets your heart pumping; Push-ups=Builds muscles and bones; Riding fast up a hill=Gets your heart pumping; Climbing a rope=Builds muscles and bones | What does each one do best?
+check: mcq | How can moving help your mood? | It releases chemicals that lift your mood* | It makes you grumpier | It doesn't do anything
+check: tf | Climbing and jumping help build strong bones. | true
+check: mcq | How much moving should kids get each day? | At least 60 minutes* | 5 minutes | None on school days
+home: Next time you feel grumpy, try 10 minutes of moving and notice how you feel after.
+skill: movement
+
+@lesson 5.4 | Short on sleep | 🥱 | home
+hook: You stayed up late gaming. Why is today so hard?
+learn: Kids your age need about 9 to 12 hours of sleep.
+learn: Without enough sleep, it's harder to control your feelings and focus in class.
+learn: Tired brains also crave junk food, and tired bodies get hurt more easily in sport.
+play: mystery | You snapped at your friend over nothing.; You read the same page three times.; You wanted chips and lollies all day.; You were gaming until midnight. | You didn't get enough sleep* | You're allergic to school | You need more lollies
+check: mcq | What can happen when you're short on sleep? | It's harder to focus and stay calm* | You get smarter | Nothing at all
+check: tf | Tired brains can crave junk food. | true
+check: mcq | How much sleep do kids aged 10 to 12 need? | About 9 to 12 hours* | About 5 hours | About 15 hours
+home: Work out what time you need to be asleep to get 10 hours before your wake-up time.
+skill: sleep
+
+@lesson 5.5 | Screens and your body | 👀 | home
+hook: Two hours on a screen and your eyes feel tired and your neck aches. What can help?
+learn: Try the 20-20-20 rule: every 20 minutes, look at something about 6 metres away for 20 seconds.
+learn: Sit up, hold the screen at eye level, and get up and move often.
+learn: Health guidelines in both our countries say kids should have no more than 2 hours of fun screen time a day.
+play: timing | You've been on your tablet for 20 minutes. Tap when the look-away zone arrives | Look far away | Look away
+check: mcq | What's the 20-20-20 rule? | Every 20 minutes, look far away for 20 seconds* | 20 hours of screens a day | 20 games in a row
+check: tf | Getting up and moving helps your body after screen time. | true
+check: mcq | How much fun screen time a day do health guidelines suggest? | No more than 2 hours* | At least 6 hours | As much as you like
+home: Set a 20-minute timer next time you use a screen and try the 20-20-20 rule.
+skill: screens
+
+@lesson 5.6 | My balance plan | ⚖️ | home
+hook: Food, water, sleep, moving and screens. How do they all fit in one day?
+learn: A balanced day has room for good food, water, moving, fun, rest and sleep.
+learn: Small changes help, like walking to school or switching screens off earlier.
+learn: Choose one thing to improve at a time. Trying to change everything at once is hard.
+play: build | Build a balanced school day | Wake up and drink a glass of water; Eat breakfast; Walk or ride to school; Play outside at lunch; Have a fruit snack after school; Screens off an hour before bed; Asleep by 8:30 pm
+check: mcq | What's a smart way to make healthy changes? | Change one thing at a time* | Change everything in one day | Never change anything
+check: tf | Walking to school is a small change that adds up. | true
+check: mcq | When should screens go off before bed? | About an hour before* | When you fall asleep | They should stay on
+home: Pick one part of your day to balance better, and try it for a week.
+skill: health
+
+@lesson 6.1 | Your brain's alarm | 🚨 | garden
+hook: Your heart races and your tummy flips before a test. Is something dangerous happening?
+learn: Worry comes from your brain's alarm system. It's trying to keep you safe.
+learn: The alarm makes your body ready to fight, run or freeze, even when there's no real danger.
+learn: Lots of worries are false alarms. Noticing that can help you calm down.
+play: sort | Real danger, False alarm | A car speeding towards you as you cross=Real danger; Worrying your friend is cross because they didn't wave=False alarm; The smoke alarm going off=Real danger; Thinking you'll fail a test you've studied for=False alarm; A dog growling and showing its teeth=Real danger; Worrying everyone will laugh at your haircut=False alarm | Real danger or false alarm?
+check: mcq | What is worry trying to do? | Keep you safe* | Make you sleepy | Nothing at all
+check: tf | Lots of worries are false alarms. | true
+check: mcq | What does the brain's alarm get your body ready to do? | Fight, run or freeze* | Eat lunch | Fall asleep
+home: Next time you feel worried, ask yourself: real danger or false alarm?
+skill: worry
+
+@lesson 6.2 | Thinking traps | 🪤 | garden
+hook: Your friend doesn't reply to your message. Your brain says, "They hate me." Is that true?
+learn: Thinking traps are ways worried brains jump to unhelpful ideas.
+learn: Common traps are expecting the worst, mind-reading, fortune-telling, and all-or-nothing thinking.
+learn: Spotting the trap helps you look for what's more likely.
+play: match | Match each thought to its thinking trap | One mistake means the whole day is ruined=All-or-nothing thinking; They didn't reply, so they must hate me=Mind-reading; I just know I'll fail tomorrow=Fortune-telling; A headache means something terrible is wrong=Expecting the worst
+check: mcq | "They didn't reply, so they hate me." What trap is that? | Mind-reading* | Good thinking | Fortune-telling
+check: tf | Spotting a thinking trap can help you think of what's more likely. | true
+check: mcq | A friend didn't reply. What's a more likely reason? | They're busy or their phone is flat* | They hate you forever | They moved to the moon
+home: Catch one thinking trap this week and think of a more likely idea.
+skill: worry
+
+@lesson 6.3 | Worry time | ⏰ | home
+hook: Your worries keep popping up all day, even in class. Could you give them an appointment?
+learn: Worry time is a set 10 to 15 minutes each day for thinking about worries.
+learn: When a worry pops up, write it down and tell it, "I'll think about you at worry time."
+learn: By worry time, many worries feel smaller, or have already sorted themselves out.
+play: order | Use worry time. Put the steps in order. | Notice a worry popping up; Write it in your worry notebook; Tell it, "I'll think about you later"; Go back to what you were doing; At worry time, read it and decide what to do
+check: mcq | What is worry time? | A set time each day to think about worries* | Worrying all day | Never thinking about worries
+check: tf | Many worries feel smaller by worry time. | true
+check: mcq | A worry pops up in class. You could… | Write it down for worry time* | Stop doing your work all day | Shout it out
+home: Choose a worry time and a worry notebook, and try it for a week.
+skill: worry
+
+@lesson 6.4 | Back to now | 🖐️ | garden
+hook: Your mind is racing with "what ifs". How can your senses bring you back?
+learn: Grounding uses your senses to bring your mind back to right now.
+learn: The 5-4-3-2-1 trick: notice 5 things you see, 4 you can touch, 3 you hear, 2 you smell and 1 you taste.
+learn: It works anywhere, and nobody even needs to know you're doing it.
+play: order | Do the 5-4-3-2-1 trick | Notice 5 things you can see; Notice 4 things you can touch; Notice 3 things you can hear; Notice 2 things you can smell; Notice 1 thing you can taste
+check: mcq | What does grounding use? | Your senses* | Your phone | A timer only
+check: tf | You can use the 5-4-3-2-1 trick anywhere. | true
+check: mcq | In the 5-4-3-2-1 trick, what do you notice 3 of? | Things you can hear* | Things you can taste | Things you can smell
+home: Try the 5-4-3-2-1 trick in the car or on the bus.
+skill: calm
+
+@lesson 6.5 | Worries about the world | 🌏 | online
+hook: You see a scary news story about floods or a war. Now you can't stop thinking about it. What helps?
+learn: It's normal to worry about big things happening in the world.
+learn: Talk to a grown-up about it. They can explain what's really going on.
+learn: Look for the helpers, take a break from the news, and think about small things you can do.
+play: path | You see a scary video about bushfires before bed. | Talk to a grown-up and find out what helpers are doing => good: You learned what's being done, and you don't have to carry the worry alone. | Keep watching scary videos alone in bed => bad: More scary videos usually make worries bigger, and it's harder to sleep. | Say nothing, but keep worrying => ok: The worry might hang around. Sharing it usually helps.
+check: mcq | You're worried about something in the news. What can help? | Talk to a grown-up* | Watch more scary videos alone | Keep it secret
+check: tf | It's normal to worry about big things in the world. | true
+check: mcq | What does "look for the helpers" mean? | Notice the people working to help* | Look for a hidden game | Ignore everything
+home: Talk with a grown-up about a news story, and find the helpers in it.
+skill: worry
+
+@lesson 6.6 | When worry is too big | 🆘 | garden
+hook: Some worries come and go. What if a worry won't go away?
+learn: If worry stops you sleeping, eating, going to school or having fun for weeks, it's time for extra help.
+learn: Tell a parent, teacher or school counsellor. A doctor can help too.
+learn: {nz:You can also free call 0800 What's Up (0800 942 8787) or Youthline (0800 376 633).~au:You can also call Kids Helpline on 1800 55 1800, any time.}
+play: tap | Tap the signs a worry needs extra help | 😴:yes:Can't sleep most nights for weeks; 🏫:yes:Not wanting to go to school because of it; 🤢:yes:Tummy aches most days; 🙅:yes:Stopping doing things you love; 📝:no; 🎈:no
+check: mcq | A worry has stopped you sleeping for weeks. You… | Tell a trusted grown-up* | Keep it secret | Wait for it to go away
+check: tf | Asking for help with worry is a smart thing to do. | true
+check: mcq | {nz:Which free number can kids call to talk to a counsellor?~au:What's the Kids Helpline number?} | {nz:0800 942 8787~au:1800 55 1800}* | 123 | 555
+home: Write down two grown-ups and one helpline you could go to with a big worry.
+skill: help
+
+@lesson 7.1 | Goals that matter to you | 🧭 | garden
+hook: Your friend is learning guitar, so you think you should too. Is that a good reason?
+learn: Goals stick better when they matter to you, not just to impress others.
+learn: Ask yourself: Why do I want this? How will I feel when I get there?
+learn: If the answer is "because everyone else is", think again.
+play: sort | Your own reason, To impress others | I love drawing and want to get better=Your own reason; Everyone else has one=To impress others; I want to swim with my cousins at the beach=Your own reason; So people will think I'm cool=To impress others; I'm curious how robots work=Your own reason; My friend will be jealous=To impress others | Whose reason is it?
+check: mcq | Which goal reason is likely to stick? | I love it and want to get better* | Everyone else is doing it | So people think I'm cool
+check: tf | Goals stick better when they matter to you. | true
+check: mcq | A good question before setting a goal is… | Why do I want this?* | What will my friends say? | How fast can I quit?
+home: Write down one goal and your reason for it. Is it your own reason?
+skill: goals
+
+@lesson 7.2 | Make it clear | 🎯 | garden
+hook: "Get better at swimming" or "Swim 25 metres without stopping by December". Which goal will you reach?
+learn: Clear goals say exactly what you'll do, how you'll know you've done it, and by when.
+learn: Vague goals like "be fitter" are hard to measure, so it's hard to know if you're getting there.
+learn: Pick something that's a stretch, but possible.
+play: diff | Vague goals and clear goals. Tap what changed. | Get better at swimming; Read more; Be fitter | Swim 25 metres without stopping by December; Read two books a month; Run 2 km without stopping by March
+check: mcq | Which goal is clear? | Read two books a month* | Read more | Be a reader
+check: tf | Clear goals say what, how much and by when. | true
+check: mcq | A good goal is… | A stretch, but possible* | Impossible | So easy you've already done it
+home: Turn one vague goal into a clear goal with a what, a how much and a by when.
+skill: goals
+
+@lesson 7.3 | Plan for bumps | 🧱 | garden
+hook: You plan to practise piano every day. Then your favourite show comes on. What happens to your goal?
+learn: Researchers found that goals work better when you plan for what might get in the way.
+learn: One method is called WOOP: Wish, Outcome, Obstacle, Plan.
+learn: Picture the goal, picture the bump, then make a plan: "If that happens, then I'll…"
+play: order | Use WOOP for a goal | Wish: pick your goal; Outcome: picture the best result; Obstacle: think what might get in the way; Plan: "If that happens, then I'll…"
+check: mcq | What does the O for Obstacle mean? | What might get in the way* | Oranges | Only do it once
+check: tf | Planning for bumps can help you reach a goal. | true
+check: mcq | Which is a WOOP plan? | If my show is on, then I'll practise first and watch after* | I'll practise if I feel like it | I'll never watch TV again
+home: Do a WOOP for one of your goals and stick it on your wall.
+skill: goals
+
+@lesson 7.4 | Track it | 📊 | home
+hook: You've ticked off 6 days in a row. Then you miss two. Is it all over?
+learn: A tracker, like a chart with ticks, lets you see your progress.
+learn: Missing a day is normal. What matters is getting back on track.
+learn: A handy rule: try never to miss two days in a row.
+play: path | You miss two days of your reading goal. | Start again tomorrow, and try not to miss two days in a row again => good: You're back on track. One slip doesn't wipe out your progress. | Give up, because the streak is broken => bad: All your progress doesn't disappear just because you missed a day. | Read for three hours to catch up => ok: You might burn out. Getting back to your normal amount works better.
+check: mcq | You miss a day of your goal. What's best? | Get back on track the next day* | Quit | Never try again
+check: tf | Missing a day means all your progress is gone. | false | Your progress is still there. Just start again.
+check: mcq | What's a tracker for? | Seeing your progress* | Hiding your goal | Making you feel bad
+home: Make a simple tracker for one goal and tick it off each day for two weeks.
+skill: goals
+
+@lesson 7.5 | A goal buddy | 🤝 | garden
+hook: Is it easier to stick with a goal on your own, or with someone cheering you on?
+learn: Telling someone about your goal makes it more likely you'll stick with it.
+learn: A goal buddy checks in, cheers you on and helps when you're stuck.
+learn: You can be a goal buddy for them too.
+play: chat | Your goal buddy checks in | them: How's your goal to learn 10 guitar chords going? | me: I've learned four! It's getting harder though*/Don't ask me about it/I gave up on day one | them: Nice work! Want to check in every Friday? | me: Yes! And I'll ask about your running goal too*/No, stop bugging me/Only if you do it for me
+check: mcq | What does a goal buddy do? | Checks in and cheers you on* | Does your goal for you | Laughs when you get stuck
+check: tf | Telling someone your goal can help you stick with it. | true
+check: mcq | How can you be a good goal buddy? | Check in and cheer them on* | Tell them to give up | Ignore them
+home: Pick a goal buddy and agree on a time to check in each week.
+skill: goals
+
+@lesson 7.6 | Changing a goal | 🔄 | garden
+hook: Your goal was to run 5 km by March, but you hurt your ankle. Did you fail?
+learn: Sometimes things change, like an injury, a new school or a new interest.
+learn: You can change a goal to fit, like making it smaller, giving it more time, or picking a new one.
+learn: Changing a goal isn't the same as giving up. It's being smart.
+play: debate | If a goal gets too hard, should you change it? | Sometimes. Adjusting can keep you going, as long as you're not just avoiding effort* | Never change a goal, even if it becomes impossible | Sticking with a hard goal can build grit, and the struggle is often where you learn the most.
+check: mcq | You hurt your ankle before your running goal. You could… | Give the goal more time* | Run on it anyway | Give up on running forever
+check: tf | Changing a goal can be smart, not giving up. | true
+check: mcq | Which is a good reason to change a goal? | Something big changed, like an injury* | You felt a bit tired one day | It needed effort
+home: Look at one of your goals. Does it still fit? Change it if it needs to.
+skill: goals
+
+@lesson 8.1 | Your brain can grow | 🧠 | garden
+hook: Learning a new skill feels slow and hard at first. Then one day it's easy. What changed?
+learn: When you practise, connections between your brain cells get stronger.
+learn: It's like making a path through long grass. The more you walk it, the clearer it gets.
+learn: This is why practice works, and why "I can't do it yet" is true.
+play: build | How a skill path grows in your brain | First try: hard and slow; Some practice: the path gets clearer; More practice: it gets faster; Lots of practice: it feels easy; Now you're ready for the next step
+check: mcq | What happens in your brain when you practise? | Connections get stronger* | Nothing | Your brain shrinks
+check: tf | Practice helps skills get easier over time. | true
+check: mcq | Practising a skill is like… | Making a path through long grass* | Switching off a light | Throwing a ball away
+home: Pick a skill you're learning and practise it for 10 minutes every day this week.
+skill: growth
+
+@lesson 8.2 | Effort plus strategy | 🧩 | workshop
+hook: You've tried the same maths question five times, the same way. Still wrong. Should you just try harder?
+learn: Growth mindset isn't only about effort. Trying the same thing harder doesn't always work.
+learn: Change your strategy: try a new method, break it into steps or look at an example.
+learn: Asking for help is a strategy too. It's what good learners do.
+play: path | You've got the same maths question wrong five times, the same way. | Try a different method, or ask for help => good: A new approach helps it click. That's a growth mindset in action. | Keep doing it exactly the same way, harder => bad: More effort on the same method usually gets the same result. | Give up and say "I'm bad at maths" => bad: You're not bad at maths. You just need a new strategy.
+check: mcq | You're stuck after lots of tries. What helps? | Change your strategy or ask for help* | Keep doing it the same way | Give up
+check: tf | Asking for help is a learning strategy. | true
+check: mcq | Growth mindset is about… | Effort, new strategies and help* | Effort only | Being naturally smart
+home: Next time you're stuck, try one new strategy before asking for help.
+skill: growth
+
+@lesson 8.3 | Feedback is a gift | 🎁 | workshop
+hook: Your teacher writes "needs more detail" on your story. Ouch. Or is it helpful?
+learn: Feedback tells you what's working and what to work on next.
+learn: It's about your work, not about you as a person.
+learn: Listen, ask questions, and use it to make your next try better.
+play: chat | Your teacher gives feedback on your story | them: Your ideas are great. The middle needs more description, though. | me: Thanks! Could you show me an example of good description?*/My story is already perfect/Whatever | them: Sure. See how this paragraph uses the senses? | me: That helps. I'll add some sounds and smells to mine*/I'll just leave it/That's boring
+check: mcq | What's feedback about? | Your work, not you as a person* | How bad you are | Nothing useful
+check: tf | Asking questions about feedback can help you improve. | true
+check: mcq | A good response to feedback is… | Thanks, can you show me an example?* | My work is perfect | Whatever
+home: Ask someone for feedback on something you made, and use one idea from it.
+skill: growth
+
+@lesson 8.4 | The learning pit | 🕳️ | garden
+hook: You're learning something new and suddenly feel totally confused. Are you failing?
+learn: When you learn something new, you often feel stuck and confused first. Some people call this the learning pit.
+learn: Being in the pit is a normal part of learning, not a sign you can't do it.
+learn: You climb out with strategies: try examples, ask questions, take a break and try again.
+play: order | Climb out of the learning pit. Put it in order. | Start a new challenge; Get stuck and feel confused; Try strategies and ask for help; Start to understand; Climb out knowing more than before
+check: mcq | What does feeling stuck when learning mean? | It's a normal part of learning* | You can't do it | You should stop
+check: tf | Taking a break can help you get unstuck. | true
+check: mcq | How do you climb out of the learning pit? | Try strategies and ask questions* | Wait for it to go away | Give up
+home: Draw the learning pit, and mark where you are with something you're learning now.
+skill: growth
+
+@lesson 8.5 | Comfort, stretch, panic | 🧗 | garden
+hook: Easy, a bit hard, or way too hard. Where do you learn the most?
+learn: In your comfort zone, things are easy, but you don't learn much.
+learn: In your stretch zone, things are a bit hard. This is where you learn the most.
+learn: In your panic zone, it's so hard you freeze. Take a smaller step back into the stretch zone.
+play: sort | Comfort zone, Stretch zone, Panic zone | Reading a book you've read five times=Comfort zone; Trying a slightly harder book=Stretch zone; Reading a uni textbook at age 11=Panic zone; Swimming a length you've done lots of times=Comfort zone; Learning a new stroke with a coach=Stretch zone; Jumping off the highest diving board on your first day=Panic zone | Which zone is it?
+check: mcq | Where do you learn the most? | The stretch zone* | The comfort zone | The panic zone
+check: tf | In the panic zone, it can be so hard you freeze. | true
+check: mcq | You're in the panic zone. What helps? | Take a smaller step* | Push harder | Quit forever
+home: Choose one thing to do in your stretch zone this week.
+skill: growth
+
+@lesson 8.6 | Praise the process | 🌟 | home
+hook: "You're so smart!" or "You kept trying different ways!" Which helps you more?
+learn: In a famous study, kids praised for being smart often chose easier puzzles next time.
+learn: Kids praised for their effort and strategies were more likely to take on harder ones.
+learn: Praise for the process helps people keep learning, so try giving it to others too.
+play: sort | Process praise, Talent-only praise | You tried lots of ways to solve it=Process praise; You're a natural=Talent-only praise; Your practice really paid off=Process praise; You're so smart=Talent-only praise; I can see how much effort you put in=Process praise; You were born good at this=Talent-only praise | Which kind of praise is it?
+check: mcq | Which is process praise? | Your practice really paid off* | You're so smart | You're a natural
+check: tf | Praise for effort and strategies can help people take on harder challenges. | true
+check: mcq | In the study, kids praised for being smart often… | Chose easier puzzles next time* | Chose harder puzzles | Stopped doing puzzles forever
+home: Give someone process praise this week, like "Your practice really paid off".
+skill: growth
+
 @band makers
 @unit 1 | Stress | Recognising it and handling it
 @unit 2 | Peer pressure | Saying no and staying you
@@ -859,6 +1436,294 @@ check: mcq | What's a common focus block? | 25 minutes of work, then a 5-minute 
 check: tf | Having your phone nearby can distract you. | true
 home: Try three 25-minute focus blocks with breaks this week.
 skill: focus
+
+@lesson 5.1 | What is body image? | 🪞 | garden
+hook: Two people look in the same mirror. One feels fine, one feels awful. Why?
+learn: Body image is how you think and feel about your body. It isn't the same as how you look.
+learn: It's shaped by family comments, friends, media and what you see online.
+learn: Body image can change from day to day, and there are things you can do to make it kinder.
+play: sort | Helps body image, Hurts body image | Following a mix of real people=Helps body image; Comments about someone's weight=Hurts body image; Wearing clothes that feel comfy=Helps body image; Comparing yourself to edited photos=Hurts body image; Doing sport for fun, not looks=Helps body image; Jokes about people's bodies=Hurts body image | Helps or hurts?
+check: mcq | What is body image? | How you think and feel about your body* | Your height | A photo of your body
+check: tf | Body image can change from day to day. | true
+check: mcq | Which can shape body image? | Comments, friends and what you see online* | Only the weather | Nothing at all
+home: Notice one thing this week that makes you feel better about your body, and one that makes you feel worse.
+skill: bodyimage
+
+@lesson 5.2 | The comparison feed | 📲 | online
+hook: You only meant to scroll for a minute. Now you feel worse about yourself. What happened?
+learn: Feeds show you more of whatever you pause on, so a few looks can turn into a feed full of "perfect" bodies.
+learn: You're comparing your everyday self with other people's best, most edited moments.
+learn: You can train your feed: mute, unfollow, tap "not interested", and follow hobbies and real people.
+play: path | You notice you feel worse every time you scroll fitness and beauty accounts. | Mute or unfollow them, and follow accounts about your hobbies => good: Your feed changes, and scrolling stops making you feel bad. | Keep scrolling to "motivate" yourself => bad: Comparison usually makes people feel worse, not motivated. | Delete every app forever => ok: A break can really help, but training your feed is another option.
+check: mcq | Why do you see more of the same posts? | The feed shows more of what you pause on* | It's random | Your friends choose them
+check: tf | You can train your feed by muting and unfollowing. | true
+check: mcq | Comparing yourself to edited posts usually… | Makes people feel worse* | Makes people feel great | Has no effect
+home: Mute or unfollow three accounts that make you feel worse, and follow three that make you smile.
+skill: bodyimage
+
+@lesson 5.3 | Bodies change | 🌱 | garden
+hook: Some of your friends have shot up. Others haven't changed yet. Is something wrong?
+learn: Bodies grow and change at different times and speeds during puberty. That's normal.
+learn: Putting on weight during puberty is a healthy part of growing.
+learn: Your genes shape a lot of things, like your height and build, that no diet or workout can change.
+play: match | Match each myth to the fact | Everyone should look the same at 14=Bodies grow at different times; Weight gain in puberty means something's wrong=It's a normal part of growing; The right diet can make you taller=Genes shape your height; Only girls worry about their bodies=Lots of boys feel pressure too
+check: mcq | Bodies change during puberty… | At different times and speeds* | All at exactly the same time | Never
+check: tf | Putting on weight during puberty is a normal part of growing. | true
+check: mcq | What shapes your height and build a lot? | Your genes* | Your phone | The weather
+home: Ask a grown-up what they remember about growing up and how their body changed.
+skill: bodyimage
+
+@lesson 5.4 | Body talk | 💬 | home
+hook: "You've lost weight, you look great!" Is that a nice thing to say?
+learn: Comments about weight, even "nice" ones, can make people worry more about their bodies.
+learn: Try compliments that aren't about looks: "You're so funny" or "That goal was amazing."
+learn: When friends put their own bodies down, you can listen and gently change the subject.
+play: chat | Your friend looks at a photo of the group | them: Ugh, I look so fat in this photo. | me: I'm sorry you feel like that. I just see you having fun with us*/Yeah, maybe skip lunch/You do a bit | them: Everyone else looks so much better. | me: Photos are just one moment. Want to go get a smoothie?*/True, they do/Just delete it and never take photos again
+check: mcq | Which compliment isn't about looks? | You're so funny* | You've lost weight | You look skinny
+check: tf | Even "nice" comments about weight can make people worry. | true
+check: mcq | A friend puts their body down. What can help? | Listen, then gently change the subject* | Agree with them | Laugh
+home: Give three people a compliment this week that isn't about how they look.
+skill: bodyimage
+
+@lesson 5.5 | Diet and muscle pressure | 💪 | online
+hook: "Get shredded in 30 days!" "Lose 5 kg with this detox tea!" Why are these ads aimed at teens?
+learn: Online, girls often get pushed to be thin and boys to be big and muscly.
+learn: Detox teas, diet pills and muscle powders are big business. Many aren't safe for growing bodies.
+learn: Teens need regular meals to grow, learn and play sport. A GP or dietitian can give real advice.
+play: scam | Real advice or a body-pressure sell? | Lose 5 kg in a week with this detox tea!=scam; Teens need regular meals to grow and play sport=real; This powder will make you huge in 30 days=scam; Ask a GP or dietitian about sport nutrition=real; Skip dinner to get a six-pack fast=scam | Quick-fix promises sell products. Growing bodies need regular, balanced meals.
+check: mcq | Who can give real nutrition advice? | A GP or dietitian* | An ad for detox tea | A random influencer
+check: tf | Boys can feel pressure about their bodies too. | true
+check: mcq | What do growing teens need? | Regular, balanced meals* | Diet pills | Skipping meals
+home: Find a body-pressure ad online and talk with a grown-up about what it's really selling.
+skill: bodyimage
+
+@lesson 5.6 | Thank your body | 🙏 | garden
+hook: Your body lets you laugh, run, hug and taste. When did you last thank it?
+learn: Focusing on what your body can do, not just how it looks, can make body image kinder.
+learn: Talk to yourself like you'd talk to a good friend.
+learn: If worries about food, weight or exercise start taking over, tell a trusted adult. {nz:Your GP or Youthline (0800 376 633) can help.~au:Your GP or the Butterfly Foundation (1800 33 4673) can help.}
+play: tap | Tap the things your body does for you | 🏃:yes:It runs and plays; 🫁:yes:It breathes all day and night; 😂:yes:It laughs; 🤗:yes:It hugs people you love; 👅:yes:It tastes your favourite food; 📸:no
+check: mcq | What can make body image kinder? | Focusing on what your body can do* | Comparing it to celebrities | Ignoring how you feel
+check: tf | If food or weight worries take over, it's a good idea to tell a trusted adult. | true
+check: mcq | {nz:Who can help with worries about food and your body?~au:Which helpline supports people with eating and body image worries?} | {nz:Your GP or Youthline~au:The Butterfly Foundation}* | A calorie-counting app | Nobody
+home: Write down five things your body did for you today.
+skill: bodyimage
+
+@lesson 6.1 | Spending triggers | 🎯 | stall
+hook: You never seem to shop when you're happy. It's always after a bad day. Why?
+learn: A spending trigger is a feeling or situation that makes you want to buy.
+learn: A handy check is HALT: are you hungry, angry, lonely or tired? Boredom is a big one too.
+learn: When you know your triggers, you can catch the urge before you tap "buy".
+play: match | Match each moment to the trigger | Scrolling shops at midnight=Tired; Buying something after a fight with a friend=Angry; Ordering snacks you don't want after school=Hungry; Shopping online alone on a Saturday night=Lonely; Browsing because there's nothing to do=Bored
+check: mcq | What does HALT stand for? | Hungry, angry, lonely, tired* | Happy, active, lucky, tall | Hats, apps, lollies, toys
+check: tf | Knowing your triggers helps you catch the urge to buy. | true
+check: mcq | You want to shop after a bad day. A HALT question is… | Am I angry or tired right now?* | What's on sale? | How fast can I buy?
+home: For one week, note how you feel each time you want to buy something.
+skill: spending
+
+@lesson 6.2 | The buying buzz | ⚡ | stall
+hook: You were so excited for that parcel. Why did the feeling fade so fast?
+learn: Your brain gets a buzz from wanting and waiting, often more than from having.
+learn: The buzz after buying usually fades within hours or days.
+learn: Then you might start hunting for the next buzz. Noticing this pattern helps you stop.
+play: mystery | You were excited for days waiting for the parcel.; It arrived, and you loved it for an hour.; By the weekend, you'd forgotten about it.; Then you started browsing for the next thing. | The buzz was mostly from wanting, not having* | The parcel was faulty | You need to buy more to feel happy
+check: mcq | When is the buying buzz often strongest? | While you're wanting and waiting* | A year after buying | Never
+check: tf | The good feeling from buying usually fades fast. | true
+check: mcq | What can happen after the buzz fades? | You hunt for the next buzz* | You feel happy forever | You get a refund
+home: Think of something you were excited to buy. How long did the excitement last?
+skill: spending
+
+@lesson 6.3 | Shopping in your feed | 📲 | online
+hook: You open an app to watch videos, and five minutes later you've added three things to your cart. How?
+learn: Haul videos, shoppable posts and ads are designed to make buying quick and easy.
+learn: Ads often reach you late at night or when you're bored, when it's harder to say no.
+learn: Make it harder to buy on impulse: unsubscribe from sale emails, turn off shop notifications and don't save cards.
+play: tap | Tap the things that make impulse buying easier | 💳:yes:A card saved in the app; 📧:yes:Sale emails every day; 🔔:yes:Shopping notifications; 🛍️:yes:Haul videos with buy links; 📵:no; 🗑️:no
+check: mcq | What makes impulse buying harder? | Turning off shop notifications* | Saving your card in every app | Watching more haul videos
+check: tf | Shopping features are designed to make buying quick. | true
+check: mcq | When are you more likely to impulse buy? | When you're bored or tired* | When you've made a plan | Never
+home: Unsubscribe from three sale emails or turn off shopping notifications in one app.
+skill: spending
+
+@lesson 6.4 | Buy now, pay later | 🧾 | bank
+hook: "Get it now, pay in four easy instalments!" Sounds painless. What's the catch?
+learn: Buy now, pay later is a type of borrowing. You get the item now and pay it off in chunks.
+learn: Small payments feel easy, so it's simple to stack up lots of them.
+learn: Miss a payment and you can be charged late fees, and it can hurt your credit record when you're older.
+play: slider | You split a $120 jacket into 4 payments of $30. You miss one and get a $10 late fee. How much did the jacket cost in total? | 100 | 160 | 130 | $ | 0 | 5
+check: mcq | What is buy now, pay later? | A type of borrowing* | Free money | A discount
+check: tf | Missing a buy now, pay later payment can mean late fees. | true
+check: mcq | Why is buy now, pay later easy to overuse? | Small payments feel painless, so they stack up* | It's always free | You never have to pay
+home: Ask a grown-up what they think about buy now, pay later, and why.
+skill: debt
+
+@lesson 6.5 | Money worries and mood | 😟 | home
+hook: You spent your savings on stuff you don't use, and now you feel awful. What helps?
+learn: Money worries can affect your mood, your sleep and how you treat people.
+learn: Hiding money problems usually makes them feel bigger. Talking to a trusted adult helps.
+learn: If your family is worried about money, it's not your fault, and you don't have to fix it.
+play: chat | A parent notices you're quiet | them: You seem down. Everything OK? | me: I spent my savings on stuff I don't even use, and I feel bad*/Nothing, leave me alone/It's all your fault | them: Thanks for telling me. Want to make a plan to build your savings back up? | me: Yes, that would help*/No, I'll just borrow money/I'll buy something else to feel better
+check: mcq | You feel bad about money. What helps most? | Talking to a trusted adult* | Hiding it | Spending more
+check: tf | If your family is worried about money, it's your fault. | false | It's not your fault, and you don't have to fix it.
+check: mcq | Hiding money problems usually… | Makes them feel bigger* | Makes them disappear | Doesn't change anything
+home: Make a simple plan to rebuild your savings, with a grown-up.
+skill: moneystress
+
+@lesson 6.6 | Money that feels good | 😊 | garden
+hook: A new hoodie or a day at the beach with friends. Which makes you happier for longer?
+learn: Research suggests spending on experiences often brings happiness that lasts longer than more stuff.
+learn: Studies have found that spending on other people can make us happier than spending on ourselves.
+learn: Saving towards a goal feels good too. Every deposit is a small win.
+play: sort | Longer-lasting good feeling, Quick buzz | A day out with friends=Longer-lasting good feeling; A gift for your sister=Longer-lasting good feeling; Another hoodie you don't need=Quick buzz; Saving towards a goal=Longer-lasting good feeling; Random late-night online buys=Quick buzz; Tickets to a show with your family=Longer-lasting good feeling | Longer-lasting or quick buzz?
+check: mcq | What does research suggest often brings longer-lasting happiness? | Experiences and spending on others* | More stuff | Late-night shopping
+check: tf | Saving towards a goal can feel good. | true
+check: mcq | Which is likely to feel good for longer? | A day out with friends* | Another phone case | An impulse buy
+home: Plan a free or cheap experience with your family or friends this month.
+skill: spending
+
+@lesson 7.1 | What's a boundary? | 🚧 | home
+hook: You hate being tickled, but your cousin thinks it's funny. Who gets to decide?
+learn: A boundary is a limit about what you're OK with. You get to set your own.
+learn: Boundaries can be about your body, your stuff, your feelings, your time or your phone.
+learn: Everyone's boundaries are a bit different, and they can change.
+play: sort | Body, Online, Feelings | I don't like being tickled=Body; Please don't post photos of me without asking=Online; I'm not ready to talk about that yet=Feelings; I'd rather wave than hug hello=Body; Please don't read my messages=Online; I need some time alone when I'm upset=Feelings | What kind of boundary is it?
+check: mcq | What is a boundary? | A limit about what you're OK with* | A fence around a farm only | A school rule
+check: tf | Everyone's boundaries are a bit different. | true
+check: mcq | Who decides your boundaries? | You* | Your friends | Whoever is loudest
+home: Think of one boundary that matters to you, and talk about it with a trusted adult.
+skill: boundaries
+
+@lesson 7.2 | Saying your boundary | 🗣️ | home
+hook: Your friend keeps grabbing your phone to read your messages. How do you say stop?
+learn: Say it clearly and calmly: "Please don't read my messages."
+learn: You don't need a long explanation. "No thanks" is a full answer.
+learn: If someone keeps pushing after you've said no, that's not OK. You can walk away and get help.
+play: chat | Your friend reaches for your phone | them: Give me your phone, I want to read your chat with Sam. | me: No thanks. My messages are private*/Fine, here you go/Get lost, you idiot | them: Come on, best friends share everything. | me: We're still best friends. I just keep my messages private*/OK, you're right, take it/I hate you
+check: mcq | How should you say a boundary? | Clearly and calmly* | By shouting | Not at all
+check: tf | "No thanks" is a full answer. | true
+check: mcq | Someone keeps pushing after you say no. You… | Walk away and get help if you need it* | Give in | Hit them
+home: Practise saying one boundary out loud with a grown-up.
+skill: boundaries
+
+@lesson 7.3 | Hearing no | 👂 | home
+hook: Your friend says they don't want to be in your video. Do you keep asking?
+learn: Respecting other people's boundaries matters just as much as having your own.
+learn: When someone says no, stop. Don't guilt-trip, pressure or sulk.
+learn: Their no is about their choice, not about you as a person.
+play: path | Your friend says they don't want to be in your dance video. | Say "No worries" and film without them => good: You respected their boundary, and you're still friends. | Film them anyway and post it => bad: That breaks their trust, and they could be really hurt. | Keep asking until they give in => bad: A yes after pressure isn't a real yes.
+check: mcq | Someone says no. What should you do? | Stop and respect it* | Ask ten more times | Sulk until they change their mind
+check: tf | A yes after lots of pressure isn't a real yes. | true
+check: mcq | A friend's no is about… | Their choice* | How bad you are | Nothing
+home: Talk with a grown-up about a time someone respected your no.
+skill: respect
+
+@lesson 7.4 | Consent every day | ✋ | home
+hook: Hugs, photos, borrowing stuff, sharing a secret. What do they have in common?
+learn: Consent means asking and getting a clear, free yes before you do something that involves someone else.
+learn: Silence, "I guess", or a yes after pressure doesn't count. People can change their mind at any time.
+learn: For anything sexual, the law also sets an age of consent: {nz:16 in New Zealand~au:16 or 17, depending on your state}.
+play: sort | Consent, Not consent | A clear, happy "Yes!"=Consent; Silence=Not consent; "I guess, if you really want"=Not consent; Yes after being asked ten times=Not consent; "Sure, let's do it" with a smile=Consent; Yes at first, then "Actually, stop"=Not consent | Is it consent?
+check: mcq | Which is consent? | A clear, free yes* | Silence | A yes after lots of pressure
+check: tf | People can change their mind at any time. | true
+check: mcq | Your friend says "I guess…" quietly. That's… | Not a clear yes, so check in* | Definitely a yes | Nothing to worry about
+home: Notice times this week when people ask before doing something, like before taking a photo.
+skill: consent
+
+@lesson 7.5 | Respect online | 📱 | online
+hook: Your new partner wants your location on all the time and gets upset if you don't reply in five minutes. Normal?
+learn: Respect online looks like respect offline: no pressure, no checking up, no sharing private things.
+learn: Demanding your location, passwords or photos, or getting angry when you don't reply, are red flags.
+learn: Sharing someone's private images without their OK is a crime in both countries. If anyone pressures you for photos, tell a trusted adult.
+play: tap | Tap the red flags in an online relationship | 📍:yes:Demands your location all the time; 📸:yes:Pressures you for photos; 🔐:yes:Wants your passwords; 😡:yes:Gets angry if you don't reply fast; 💬:no; 🎮:no
+check: mcq | Which is a red flag? | Demanding your passwords* | Asking how your day was | Playing a game together
+check: tf | Sharing someone's private images without their OK is a crime. | true
+check: mcq | Someone pressures you for photos. You… | Say no and tell a trusted adult* | Send one to keep them happy | Keep it secret
+home: Talk with a trusted adult about what a respectful online relationship looks like.
+skill: relationships
+
+@lesson 7.6 | Trust your gut | 🚩 | home
+hook: Your friend's new partner seems sweet, but your friend has stopped hanging out with you. Should you worry?
+learn: Unhealthy relationships often start small: jealousy, put-downs, checking phones, or keeping you away from friends.
+learn: If something feels off, trust your gut. You can talk to a trusted adult.
+learn: {nz:You can also call Youthline on 0800 376 633 or free text 234.~au:You can also call Kids Helpline on 1800 55 1800, or 1800RESPECT on 1800 737 732.}
+play: mystery | Your friend has stopped coming to footy.; Their partner reads their messages.; They say, "They only get jealous because they love me."; They seem nervous when their phone buzzes. | The relationship has warning signs* | It's a healthy relationship | Your friend is just busy
+check: mcq | Which is an early warning sign? | Keeping someone away from their friends* | Supporting their hobbies | Respecting their no
+check: tf | Unhealthy relationships often start small. | true
+check: mcq | {nz:Which free service can young people text on 234?~au:What's the 1800RESPECT number?} | {nz:Youthline~au:1800 737 732}* | {nz:A pizza shop~au:1800 PIZZA} | Nobody
+home: Save a support line in your phone, in case you or a friend ever need it.
+skill: relationships
+
+@lesson 8.1 | Time to get help? | 🧭 | garden
+hook: Everyone has bad days. How do you know when it's more than that?
+learn: It's time to get help if you've felt low, worried or flat most days for two weeks or more.
+learn: Other signs: not enjoying things you used to, sleeping or eating a lot more or less, pulling away from people, or school slipping.
+learn: If you have thoughts of hurting yourself, tell someone straight away. You deserve support.
+play: tap | Tap the signs it might be time to get help | 😔:yes:Feeling low most days for two weeks or more; 🎸:yes:Not enjoying things you used to love; 😴:yes:Big changes in sleep; 🚪:yes:Pulling away from friends and family; 📉:yes:School slipping; 🎉:no; 🍕:no
+check: mcq | When is it time to get help? | When you've felt low most days for two weeks or more* | Never | Only after a year
+check: tf | Big changes in sleep can be a sign you need support. | true
+check: mcq | You have thoughts of hurting yourself. You… | Tell someone straight away* | Keep it secret | Wait and see
+home: Talk with a trusted adult about the signs that someone might need extra support.
+skill: help
+
+@lesson 8.2 | Starting the conversation | 💬 | home
+hook: You want to tell someone how you're feeling, but the words won't come. Where do you start?
+learn: Pick someone you trust and a time when you won't be rushed, like in the car or on a walk.
+learn: Start simple: "I've been feeling really down lately and I don't know what to do."
+learn: If saying it is too hard, write it down or send a message first.
+play: build | Build what you could say | Can I talk to you about something?; I've been feeling really down lately; It's been going on for a few weeks; It's affecting my sleep and school; Can you help me work out what to do?
+check: mcq | What's a good time for a hard conversation? | When you won't be rushed* | In the middle of a fight | Never
+check: tf | You can write it down or send a message if saying it is too hard. | true
+check: mcq | A good way to start is… | "I've been feeling down lately"* | Saying nothing | "Never mind"
+home: Write down the name of one person you'd talk to, and one sentence you could start with.
+skill: help
+
+@lesson 8.3 | Who can help | 🧑‍⚕️ | townhall
+hook: You've told a parent. Now what? Who else can help?
+learn: A school counsellor is free, private and trained to help with all kinds of problems.
+learn: A GP, or family doctor, can check how you're doing and connect you with more support.
+learn: {nz:GP visits are free for under-14s at most practices, and many youth health services are free.~au:headspace centres support 12 to 25-year-olds, and from 15 you can get your own Medicare card.}
+play: match | Match each need to a good place to start | Someone to talk to at school=The school counsellor; A check-up on your mood and sleep=A GP; Talking to someone tonight={nz:Youthline or 1737~au:Kids Helpline}; Ongoing support for young people={nz:A youth health service~au:A headspace centre}
+check: mcq | What does a school counsellor offer? | Free, private support* | Detentions | Homework help only
+check: tf | A GP can help with how you're feeling, not just colds. | true
+check: mcq | {nz:Which free number can you call or text in NZ to talk to a counsellor?~au:Which service supports 12 to 25-year-olds in Australia?} | {nz:1737~au:headspace}* | {nz:0800 PIZZA~au:A gaming site} | Nobody
+home: Find out where your school counsellor is and how to book a time.
+skill: help
+
+@lesson 8.4 | What happens when you call | ☎️ | online
+hook: You've thought about calling a helpline, but you're nervous. What actually happens?
+learn: A trained counsellor answers. It's free, and you don't need a "big enough" reason to call.
+learn: You can talk about anything, and you can call, text or use web chat.
+learn: {nz:Call or text 1737, call Youthline on 0800 376 633 or text 234, or call 0800 What's Up on 0800 942 8787.~au:Call Kids Helpline on 1800 55 1800 or use its web chat, any time. Lifeline is on 13 11 14.}
+play: chat | You call a helpline | them: Hi, thanks for calling. What's on your mind today? | me: I've been really stressed and I don't know who to talk to*/Nothing, sorry, wrong number/This is stupid | them: Thanks for reaching out. That sounds really hard. Can you tell me a bit more? | me: School and friends are both tough right now*/Never mind/Can you just fix it?
+check: mcq | Who answers a helpline? | A trained counsellor* | A robot | A teacher from your school
+check: tf | You don't need a "big enough" reason to call a helpline. | true
+check: mcq | {nz:Which number can you text 234 to reach?~au:What's the Kids Helpline number?} | {nz:Youthline~au:1800 55 1800}* | {nz:A pizza shop~au:123} | Nobody
+home: Save one helpline number in your phone, even if you don't need it now.
+skill: help
+
+@lesson 8.5 | When a friend is struggling | 🫂 | home
+hook: Your friend says they feel hopeless, then adds, "Don't tell anyone." What do you do?
+learn: Listen without judging, and tell them you're glad they told you.
+learn: Encourage them to talk to a trusted adult, and offer to go with them.
+learn: If you're worried about their safety, tell a trusted adult, even if they asked you not to. Their safety comes first.
+play: path | Your friend says they feel hopeless and asks you not to tell anyone. | Listen, say you care, and tell a trusted adult because you're worried => good: You took it seriously and got them real support. That's being a true friend. | Promise to keep it secret and do nothing => bad: Your friend stays alone with something big. Safety comes before secrets. | Tell them to just cheer up => bad: That can make them feel unheard. Listen first.
+check: mcq | You're worried about a friend's safety. You… | Tell a trusted adult* | Keep the secret | Post about it
+check: tf | A friend's safety comes before keeping a secret. | true
+check: mcq | What's a helpful first response? | Listen and say you're glad they told you* | Tell them to cheer up | Change the subject
+home: Talk with a trusted adult about how you'd support a friend who's struggling.
+skill: support
+
+@lesson 8.6 | In an emergency | 🚨 | townhall
+hook: Someone is in danger right now. There's no time to wait. What do you do?
+learn: If someone is in immediate danger or badly hurt, call {nz:111~au:000} straight away.
+learn: Stay with them if it's safe, and follow what the call-taker tells you.
+learn: Get a trusted adult to help. You don't have to handle it alone.
+play: order | Someone is in danger right now. Put the steps in order. | Make sure you're safe; Call {nz:111~au:000}; Follow what the call-taker says; Stay with them if it's safe; Get a trusted adult to help
+check: mcq | Someone is in immediate danger. You call… | {nz:111~au:000}* | A friend first | Nobody
+check: tf | You should follow what the emergency call-taker tells you. | true
+check: mcq | What should you check first in an emergency? | That you're safe* | Your messages | The time
+home: Make sure everyone in your family knows the emergency number and your home address.
+skill: safety
 
 @band launchers
 @unit 1 | Wellbeing at work | Boundaries, breaks and burnout
@@ -1150,3 +2015,291 @@ check: mcq | What's the emergency number? | {nz:111~au:000}* | 123 | 999
 check: tf | Support lines can help you even if you're calling about a friend. | true
 home: Save a support line number in your phone.
 skill: help seeking
+
+@lesson 5.1 | Alcohol and the law | 🍺 | townhall
+hook: You're 17. A mate's older brother offers to buy you drinks. What does the law say?
+learn: In both countries, you must be 18 to buy alcohol, and shops and bars must check ID.
+learn: {nz:It's against the law to give alcohol to under-18s unless you're their parent or have their parent's OK, and it must be done responsibly.~au:Most states also make it illegal to give alcohol to under-18s at private homes without their parent's OK.}
+learn: Using a fake ID, or lending yours to someone, is illegal and can mean a fine.
+play: sort | Legal, Not legal | An 18-year-old buying a drink with real ID=Legal; A 17-year-old using a fake ID=Not legal; Lending your licence to a younger friend=Not legal; An adult buying drinks for strangers' 16-year-olds=Not legal; An 18-year-old choosing not to drink=Legal; Being the sober driver for your friends=Legal | Legal or not?
+check: mcq | How old must you be to buy alcohol? | 18* | 16 | 21
+check: tf | Lending your ID to a younger friend is fine. | false | It's illegal, and you can be fined.
+check: mcq | Can an adult give alcohol to someone else's 16-year-old at a party without asking? | No, they need the parent's OK* | Yes, always | Only on weekends
+home: Talk with a grown-up about your family's rules on alcohol at parties.
+skill: alcohol
+
+@lesson 5.2 | Standard drinks | 🥃 | kitchen
+hook: One can, one glass, one shot. Are they the same amount of alcohol?
+learn: A standard drink in both countries has 10 grams of pure alcohol.
+learn: Many drinks hold more than one standard drink. A bottle of wine can be 7 or more, and some cans of premix are 2 or more.
+learn: Your body clears about one standard drink an hour. Coffee, cold showers and food don't speed that up.
+play: slider | Your body clears about one standard drink an hour. Someone finishes 6 standard drinks at midnight. Roughly what time is the alcohol gone? | 0 | 12 | 6 | am | 1 | 1
+check: mcq | How much pure alcohol is in a standard drink? | 10 grams* | 100 grams | 1 gram
+check: tf | Coffee sobers you up faster. | false | Only time clears alcohol from your body.
+check: mcq | One drink can hold… | More than one standard drink* | Exactly one standard drink, always | No alcohol
+home: Read the standard drinks label on a bottle or can with a grown-up.
+skill: alcohol
+
+@lesson 5.3 | Alcohol and your brain | 🧠 | garden
+hook: Your brain keeps developing until your mid-20s. What does alcohol do to it?
+learn: Alcohol slows your brain. Judgement, memory, balance and reactions all get worse.
+learn: Teen brains are still developing, which makes them more sensitive to alcohol's effects.
+learn: Health experts in both countries say the safest choice for under-18s is not to drink at all.
+play: match | Match each part of you to what alcohol can do | Judgement=Risky choices start to feel OK; Memory=Gaps or blackouts; Balance=Falls and injuries; Mood=Swings from happy to angry or sad
+check: mcq | What do health experts say is safest for under-18s? | Not drinking at all* | Drinking only on weekends | Drinking with energy drinks
+check: tf | Teen brains are still developing. | true
+check: mcq | Alcohol can make risky choices… | Feel OK when they're not* | Easier to spot | Impossible
+home: Ask a grown-up what they wish they'd known about alcohol at your age.
+skill: alcohol
+
+@lesson 5.4 | Drug facts, not myths | 💊 | townhall
+hook: "It's natural, so it's safe." "Everyone vapes." Are these true?
+learn: Cannabis is illegal in {nz:New Zealand~au:most of Australia}, and having other illegal drugs can lead to serious charges.
+learn: Pills and powders can contain dangerous surprise drugs. You can't tell what's in them by looking.
+learn: Nicotine in vapes is very addictive. {nz:It's illegal to sell vapes to under-18s.~au:Vapes can only be sold in pharmacies, and under-18s need a prescription.}
+play: sort | Fact, Myth | Natural means safe=Myth; You can't tell what's in a pill by looking=Fact; Most teens vape=Myth; Nicotine is very addictive=Fact; Mixing drugs with alcohol raises the risks=Fact; One try can't hurt you=Myth | Fact or myth?
+check: mcq | Why are pills and powders risky? | They can contain dangerous surprise drugs* | They're always pure | They're legal
+check: tf | Nicotine in vapes is addictive. | true
+check: mcq | {nz:Can shops sell vapes to under-18s in NZ?~au:Where can vapes be sold in Australia?} | {nz:No, it's illegal~au:Only in pharmacies}* | {nz:Yes, any shop~au:Any corner shop} | {nz:Only online~au:Vending machines}
+home: Talk with a grown-up about where to find reliable facts on drugs.
+skill: drugs
+
+@lesson 5.5 | Looking after a mate | 🫂 | home
+hook: Your friend has had too much and won't wake up properly. What do you do?
+learn: Danger signs include not waking up, vomiting while passed out, slow or odd breathing, and cold, pale or blue skin.
+learn: Call {nz:111~au:000} straight away. Ambulance officers are there to help, not to get anyone in trouble.
+learn: Put them on their side in the recovery position, and stay with them. Never let them "sleep it off" alone.
+play: order | A friend won't wake up properly. Put the steps in order. | Check if they respond to your voice; Call {nz:111~au:000} if they won't wake or breathe oddly; Roll them onto their side; Stay with them and keep watching their breathing; Tell the ambulance officers what they had
+check: mcq | A friend is passed out and vomiting. You… | Call {nz:111~au:000} and put them on their side* | Let them sleep it off alone | Give them coffee
+check: tf | Ambulance officers are there to help. | true
+check: mcq | Why use the recovery position? | So they don't choke if they vomit* | So they sleep better | It's a party trick
+home: Learn the recovery position with a grown-up or in a first aid course.
+skill: safety
+
+@lesson 5.6 | Plans and help | 🗺️ | home
+hook: Friday night is sorted. What about getting home safely?
+learn: Plan ahead: who you're going with, how you're getting home, and who you'll call if plans change.
+learn: Stick with your friends, watch your drink, and never get in a car with a driver who's been drinking.
+learn: {nz:The Alcohol Drug Helpline is free on 0800 787 797, or text 8681, any time.~au:The National Alcohol and Other Drug Hotline is free on 1800 250 015, any time.}
+play: chat | A friend offers you a lift home from a party | them: Jump in, I'm fine to drive. I've only had a few. | me: No thanks. I'll get my mum to pick us both up*/Sure, let's go/I'll drive, I've only had two | them: Come on, it's only five minutes. | me: Not worth it. Mum's on her way, come with us*/Fine, I'll come/Drive slowly then
+check: mcq | A driver has been drinking. You… | Find another way home* | Get in and hope | Sit in the back
+check: tf | Planning how you'll get home before you go out is smart. | true
+check: mcq | {nz:What's the free Alcohol Drug Helpline number?~au:What's the free National Alcohol and Other Drug Hotline number?} | {nz:0800 787 797~au:1800 250 015}* | 123 | 555 555
+home: Agree a "call me any time, no questions on the spot" plan with a grown-up.
+skill: safety
+
+@lesson 6.1 | How odds work | 🎲 | stage
+hook: The jackpot is huge this week. What are your real chances of winning?
+learn: Odds tell you how likely something is. A 1 in 6 chance means you'd expect to win about once every 6 tries.
+learn: {nz:The odds of winning Powerball First Division in NZ are about 1 in 38 million per line.~au:The odds of winning Powerball Division 1 in Australia are about 1 in 134 million.}
+learn: Buying a few more tickets barely changes your chances. A bigger jackpot doesn't change the odds at all.
+play: slider | A game gives you a 1 in 6 chance of winning. If you play 60 times, about how many wins would you expect? | 0 | 30 | 10 | wins | 1 | 1
+check: mcq | A bigger jackpot means… | The same odds, just a bigger prize* | Better odds | Guaranteed wins
+check: tf | Buying a few more tickets barely changes your chances. | true
+check: mcq | {nz:Roughly what are the odds of winning NZ Powerball First Division?~au:Roughly what are the odds of winning Australia's Powerball Division 1?} | {nz:1 in 38 million~au:1 in 134 million}* | 1 in 100 | 1 in 10
+home: Look up the odds printed on a lotto ticket or website with a grown-up.
+skill: gambling
+
+@lesson 6.2 | "I'm due for a win" | 🪙 | stage
+hook: You've lost 10 bets in a row. Surely the next one has to win?
+learn: The gambler's fallacy is believing a win is "due" after losses. Each spin or bet is separate. The odds don't change.
+learn: Near misses, like two cherries and a lemon, feel close but are still losses. Machines are designed to show them often.
+learn: Trying to win back losses is called chasing, and it usually means losing more.
+play: match | Match each gambling thought to the truth | I've lost 10 in a row, so I'm due a win=Each bet is separate and the odds don't change; I almost won=A near miss is still a loss; I've got a system=The odds stay the same whatever you do; I'll just win back what I lost=Chasing losses usually means losing more
+check: mcq | After 10 losses, the chance of winning the next bet is… | The same as before* | Much higher | Guaranteed
+check: tf | Near misses are still losses. | true
+check: mcq | What's chasing losses? | Betting more to win back what you lost* | Running after a horse | Saving money
+home: Flip a coin 10 times with a grown-up and talk about whether a result was ever "due".
+skill: gambling
+
+@lesson 6.3 | Sports betting | 🏉 | stage
+hook: Betting ads are all over the footy. "Bonus bets!" "Same-game multis!" What are they really selling?
+learn: Betting companies make money because, over time, most people lose more than they win.
+learn: Multis link several bets together. Every extra leg makes it much less likely you'll win.
+learn: Bonus bets often come with fine print, like having to bet much more before you can withdraw winnings.
+play: diff | The betting ad and the fine print. Tap what the fine print adds. | Bonus bet: $50; Multis: big payouts; Betting: fun with your mates | Bonus bet: $50, but only after you bet $500; Multis: big payouts, but most multis lose; Betting: fun with your mates
+check: mcq | What happens when you add more legs to a multi? | It gets much less likely to win* | It gets more likely to win | Nothing
+check: tf | Bonus bets often have fine print. | true
+check: mcq | Over time, who usually comes out ahead in sports betting? | The betting company* | Most punters | Everyone
+home: Count the betting ads during one sports game with a grown-up.
+skill: gambling
+
+@lesson 6.4 | Gambling in disguise | 🎮 | online
+hook: A free casino app. A site where you bet game skins. Is it really gambling?
+learn: Social casino apps feel free, but they push you to buy more coins with real money.
+learn: Skin betting sites let people bet game items that can be worth real money, and many aren't legal or regulated.
+learn: Crypto casinos and offshore betting sites have few protections if things go wrong.
+play: sort | Gambling-like, Not gambling | Betting game skins on match results=Gambling-like; A social casino app selling coin packs=Gambling-like; Buying a skin at a set price=Not gambling; A free daily spin that unlocks paid spins=Gambling-like; Paying once for a puzzle game=Not gambling; An offshore crypto casino=Gambling-like | Gambling-like or not?
+check: mcq | Why are social casino apps risky? | They push you to buy more coins with real money* | They're always free | They pay you
+check: tf | Offshore betting sites have strong protections. | false | They often have few protections if things go wrong.
+check: mcq | Betting game skins on match results is… | Gambling-like* | Just shopping | Saving
+home: Check a game or app you use for gambling-like features, and talk about them with a grown-up.
+skill: gambling
+
+@lesson 6.5 | Signs of harm | 🚩 | stage
+hook: Your mate keeps borrowing money and says, "I'll win it back this weekend." Should you be worried?
+learn: Gambling harm can include betting more than planned, chasing losses, hiding it and borrowing to bet.
+learn: It can also show up as mood swings, money stress, and missing work, study or time with people.
+learn: Harm affects families and friends too. You can get support even if it's someone else's gambling.
+play: tap | Tap the signs gambling could be causing harm | 💸:yes:Betting more than they planned; 🔁:yes:Chasing losses; 🤫:yes:Hiding how much they bet; 🏦:yes:Borrowing money to bet; 😠:yes:Getting angry when they lose; 🎳:no; 🛌:no
+check: mcq | Which is a sign of gambling harm? | Borrowing money to bet* | Playing a board game | Saving money
+check: tf | Friends and family can get support for someone else's gambling. | true
+check: mcq | Your mate says they'll "win it back". That's… | Chasing losses* | A smart plan | Saving
+home: Talk with a grown-up about how to start a caring conversation with a friend who's struggling.
+skill: gambling
+
+@lesson 6.6 | Taking back control | 🛑 | stage
+hook: You want to stop betting, but the apps keep calling you back. What can actually help?
+learn: {nz:The Gambling Helpline is free on 0800 654 655, or text 8006, for anyone worried about their own or someone else's gambling.~au:Gambling Help Online is free on 1800 858 858, any time.}
+learn: {nz:You can ask gambling venues to exclude you, and many banks let you block gambling payments.~au:BetStop lets you ban yourself from all licensed online and phone betting, from 3 months to life. Many banks let you block gambling payments too.}
+learn: Delete betting apps, unsubscribe from offers, and tell someone you trust so you're not doing it alone.
+play: order | Take back control from gambling. Put the steps in order. | Admit to yourself it's a problem; Tell someone you trust; Call {nz:the Gambling Helpline~au:Gambling Help Online}; Block gambling payments with your bank; {nz:Ask venues to exclude you~au:Sign up to BetStop}; Delete betting apps and offers
+check: mcq | {nz:What's the free NZ Gambling Helpline number?~au:What lets you ban yourself from licensed online betting in Australia?} | {nz:0800 654 655~au:BetStop}* | {nz:0800 PRIZES~au:A bonus bet} | {nz:123~au:A new app}
+check: tf | Many banks let you block gambling payments. | true
+check: mcq | A helpful step to cut back on betting is… | Deleting betting apps* | Downloading more apps | Chasing losses
+home: Find out how to block gambling payments in a banking app, with a grown-up.
+skill: gambling
+
+@lesson 7.1 | What do you value? | 💎 | garden
+hook: Two people get the same job offer. One says yes straight away. One says no. Who's right?
+learn: Values are what matter most to you, like family, creativity, fairness, adventure or security.
+learn: When choices match your values, they usually feel right, even when they're hard.
+learn: Your values can shift as you grow, so it's worth checking in on them.
+play: build | Find your top values | List 10 values that matter to you; Cross out the ones that matter least; Keep your top 5; Rank them from 1 to 5; Write one way each shows up in your life
+check: mcq | What are values? | What matters most to you* | Prices in a shop | Your marks
+check: tf | Choices that match your values usually feel right. | true
+check: mcq | Can your values change over time? | Yes* | No, never | Only once
+home: Write your top 3 values and ask a grown-up what theirs are.
+skill: purpose
+
+@lesson 7.2 | Your strengths | 💪 | workshop
+hook: What do people ask you for help with? That might be a clue.
+learn: Strengths are things you do well and that give you energy, not just things you can do.
+learn: Ask friends, family or teachers what they think you're good at. They often notice things you don't.
+learn: Using your strengths often makes work and study feel more meaningful.
+play: match | Match each strength to a job where it shines | Explaining things clearly=Teaching or training; Staying calm under pressure=Paramedic or air traffic control; Fixing and building things=A trade like electrician or builder; Spotting tiny details=Accounting or editing; Making people feel welcome=Hospitality or nursing
+check: mcq | What's a strength? | Something you do well that gives you energy* | Something you hate doing | A muscle only
+check: tf | Other people can notice strengths you don't see. | true
+check: mcq | A good way to find your strengths is… | Ask people what they think you're good at* | Guess once and never check | Copy a friend's
+home: Ask three people what they think your strengths are, and compare their answers.
+skill: purpose
+
+@lesson 7.3 | Purpose grows | 🧩 | garden
+hook: Everyone keeps asking what you want to do with your life. What if you don't know yet?
+learn: Most people don't find their purpose in one big moment. It grows from trying things.
+learn: Purpose can come from many places: work, family, friends, community, faith, sport or creativity.
+learn: It can change across your life. Not knowing at 17 is completely normal.
+play: debate | Do you need to know your life's purpose by 18? | No. Purpose usually grows from trying things, and it can change* | Yes. If you don't know by 18, you've failed | Having a direction early can help some people focus, like when choosing what to study.
+check: mcq | How does purpose usually grow? | From trying things over time* | In one big moment for everyone | It never does
+check: tf | Purpose can come from many places, not just work. | true
+check: mcq | You don't know your purpose at 17. That's… | Completely normal* | A disaster | Something to hide
+home: List three things you'd like to try in the next year to learn more about what you enjoy.
+skill: purpose
+
+@lesson 7.4 | Four circles | 🗺️ | workshop
+hook: What you love, what you're good at, what the world needs and what you can be paid for. Where do they meet?
+learn: A popular planning tool draws four overlapping circles. Where they overlap can point to work that feels meaningful.
+learn: It's often called ikigai, though in Japan ikigai simply means a reason for living, which can be small everyday joys.
+learn: Use it as a thinking tool, not a test with one right answer.
+play: match | Match each circle to a question that helps you fill it in | What you love=What could you do for hours without noticing?; What you're good at=What do people ask you for help with?; What the world needs=What problems do you care about fixing?; What you can be paid for=What would someone pay you to do?
+check: mcq | In Japan, what does ikigai mean? | A reason for living* | A type of job | A salary
+check: tf | The four circles are a thinking tool, not a test with one right answer. | true
+check: mcq | Which question helps with "what the world needs"? | What problems do I care about fixing?* | What's my favourite snack? | What's trending?
+home: Draw your own four circles and fill in two ideas for each.
+skill: purpose
+
+@lesson 7.5 | Money and meaning | 💰 | bank
+hook: Job A pays $10,000 more. Job B teaches you more and you'd love it. Which do you take?
+learn: Money matters. Enough income to cover your needs and save makes life less stressful.
+learn: Research suggests more money helps wellbeing, but relationships, health, freedom and meaning matter a lot too.
+learn: There's no one right answer. Weigh up pay, learning, time and values for your situation.
+play: path | You get two job offers: one pays $10,000 more, the other teaches you more and fits your values. | Weigh pay, learning, time and values, then choose => good: You made a thoughtful choice that fits your life right now. | Always take the highest pay without thinking => ok: Pay matters, but you might miss things that matter to you too. | Take whichever your friends think is cooler => bad: It's your life and your values, not theirs.
+check: mcq | What's a smart way to compare job offers? | Weigh pay, learning, time and values* | Pick whatever sounds coolest | Flip a coin only
+check: tf | Research suggests things like relationships and meaning matter a lot for wellbeing. | true
+check: mcq | Is there one right answer between more pay and more meaning? | No, it depends on your situation* | Always more pay | Always more meaning
+home: Ask a grown-up how they've balanced money and meaning in their work.
+skill: purpose
+
+@lesson 7.6 | A purpose sentence | 🌅 | garden
+hook: Can you sum up what you want to do with your strengths in one sentence?
+learn: A purpose sentence links a strength, who you want to help, and the difference you want to make.
+learn: It doesn't need to be grand. "Help my little cousins feel confident at maths" counts.
+learn: Small steps, like tutoring, volunteering or a club, turn the sentence into action.
+play: build | Build your purpose sentence | Start with a strength: I'm good at explaining things; Add who you want to help: younger kids; Add the difference: so they feel confident at maths; Put it together in one sentence; Pick one small step: tutor a cousin this month
+check: mcq | What goes in a purpose sentence? | A strength, who you help and the difference you make* | Your bank balance | Your favourite colour
+check: tf | A purpose sentence can be about small, everyday things. | true
+check: mcq | What turns a purpose sentence into action? | Small steps like tutoring or volunteering* | Waiting for the perfect moment | Keeping it secret
+home: Write your own purpose sentence and one small step to take this month.
+skill: purpose
+
+@lesson 8.1 | Kinds of support | 🧩 | garden
+hook: The friend who's great to talk to isn't always the one who can help you move flat. Why does that matter?
+learn: Support comes in different kinds: emotional support, practical help and advice.
+learn: Different people are good at different kinds. Nobody can be everything for you.
+learn: A strong network has a mix, so you're not relying on just one person.
+play: sort | Emotional support, Practical help, Advice | Someone who listens after a break-up=Emotional support; A friend who helps you move flat=Practical help; A mentor who reviews your CV=Advice; A sibling who sits with you at the hospital=Emotional support; A neighbour who feeds your cat while you're away=Practical help; A financial mentor who explains your options=Advice | What kind of support is it?
+check: mcq | Why have a mix of people in your network? | Different people help in different ways* | So you have more followers | It doesn't matter
+check: tf | Nobody can be everything for you. | true
+check: mcq | Helping you move flat is… | Practical help* | Advice | Emotional support
+home: List who you'd go to for each kind of support.
+skill: support
+
+@lesson 8.2 | Starting over somewhere new | 📦 | home
+hook: You've moved to a new city for study or work. Your old friends are far away. How do you build a new team?
+learn: Moving often thins out your support network for a while. That's normal.
+learn: Join things that meet regularly, like a club, team, class or volunteer group. Say yes to invitations, even small ones.
+learn: Keep your old connections going with calls and visits, while you build new ones.
+play: path | It's your first month in a new city and you feel lonely. | Join a club and say yes to a few invitations => good: It feels awkward at first, but regular contact turns people into friends. | Stay in your room scrolling every night => bad: It's easy to slip into, but it usually makes loneliness worse. | Call home every night, but don't meet anyone new => ok: Keeping in touch helps, but you need people nearby too.
+check: mcq | What helps build a network in a new place? | Joining things that meet regularly* | Staying home every night | Waiting for people to find you
+check: tf | Moving can thin out your support network for a while. | true
+check: mcq | Someone invites you for a coffee. You… | Say yes, even if it feels awkward* | Always say no | Ignore it
+home: Find one club or group near you that meets regularly.
+skill: support
+
+@lesson 8.3 | Loneliness | 🌙 | garden
+hook: Hundreds of followers, but nobody to call on a Friday night. Is that loneliness?
+learn: Loneliness is feeling you don't have the connection you need. You can feel it even with lots of people around.
+learn: It's very common, especially during big changes like leaving school or moving out.
+learn: Small, regular contact helps most: the same class, team or café each week.
+play: sort | Helps with loneliness, Can make it worse | Joining a weekly group activity=Helps with loneliness; Volunteering=Helps with loneliness; Scrolling other people's highlights for hours=Can make it worse; Saying yes to a coffee invite=Helps with loneliness; Turning down every invitation=Can make it worse; Texting an old friend=Helps with loneliness | Helps or makes it worse?
+check: mcq | What is loneliness? | Feeling you don't have the connection you need* | Being by yourself for an hour | Having no phone
+check: tf | You can feel lonely even with lots of people around. | true
+check: mcq | What helps most with loneliness? | Small, regular contact with people* | More scrolling | Waiting it out alone
+home: Text someone you haven't spoken to in a while.
+skill: support
+
+@lesson 8.4 | Mentors | 🧑‍🏫 | workshop
+hook: Someone a few years ahead of you has done what you want to do. Could they help?
+learn: A mentor is someone with more experience who gives you advice and encouragement.
+learn: Mentors can come from work, uni mentoring schemes, sports clubs, community groups or your family's friends.
+learn: Be a good mentee: come with questions, respect their time, and tell them how their advice helped.
+play: order | Find and keep a mentor. Put the steps in order. | Work out what you'd like help with; Look for someone a few steps ahead; Ask for a short chat first; Come with specific questions; Thank them and share how you used their advice; Keep in touch every few months
+check: mcq | What's a mentor? | Someone with more experience who gives advice* | Your boss's boss | A celebrity you follow
+check: tf | Telling a mentor how their advice helped is a good habit. | true
+check: mcq | A good first ask is… | A short chat* | To be their best friend | A job straight away
+home: Think of one person who could mentor you, and what you'd ask them.
+skill: support
+
+@lesson 8.5 | Professional support | 🩺 | townhall
+hook: Friends are great, but sometimes you need someone trained. Where do you start, and what does it cost?
+learn: A GP is often the best first step. They can check your mental and physical health and refer you on.
+learn: {nz:Many GP practices have free mental health support on site, and 1737 is free any time. Student health services are free or cheap.~au:A GP can make a mental health treatment plan, giving Medicare rebates for up to 10 sessions a year with a psychologist.}
+learn: {nz:Youth services, like Youthline and youth health centres, also offer free counselling.~au:headspace centres are free or low cost for 12 to 25-year-olds.}
+play: match | Match each need to a good starting point | Feeling low for weeks=A GP; Needing to talk to someone tonight={nz:1737~au:Lifeline on 13 11 14}; Free support as a uni student=Student health services; Ongoing counselling={nz:A counsellor through your GP or a youth service~au:A psychologist through a mental health treatment plan}
+check: mcq | What's often the best first step for professional support? | A GP* | A social media post | Waiting a year
+check: tf | {nz:1737 is free to call or text any time.~au:A mental health treatment plan can lower the cost of seeing a psychologist.} | true
+check: mcq | {nz:Which free number can you call or text any time in NZ?~au:How many Medicare-rebated psychology sessions can a plan cover each year?} | {nz:1737~au:Up to 10}* | {nz:0800 PIZZA~au:Up to 1} | {nz:123~au:Unlimited}
+home: Find out how to book a GP near you, and whether there's a student or youth health service.
+skill: help
+
+@lesson 8.6 | On someone else's team | 🤝 | home
+hook: Your friend says "I'm fine," but they don't seem fine. What do you do?
+learn: Being part of someone's support network means checking in, listening and showing up.
+learn: Ask, and ask again: "You've seemed a bit flat lately. I'm here if you want to talk."
+learn: Know your limits. Help them connect with other support, and look after yourself too.
+play: chat | You check in on a friend | them: Yeah, I'm fine. | me: You've seemed a bit flat lately. I'm here if you want to talk*/OK cool/You don't look fine | them: Honestly, work's been really hard. | me: That sounds tough. Want to grab a coffee this week and talk it through?*/Everyone's work is hard/Just quit then
+check: mcq | A friend says "I'm fine" but seems down. You… | Gently check in again* | Drop it forever | Tell everyone
+check: tf | Looking after yourself matters when you support others. | true
+check: mcq | What's part of being on someone's team? | Checking in and listening* | Fixing everything for them | Judging them
+home: Check in on one friend this week, and really listen.
+skill: support

@@ -286,3 +286,292 @@ check: tf | Online friends are always who they say they are. | false | People ca
 home: Show a grown-up who you chat with online.
 skill: online safety
 
+@lesson 5.1 | Brain fuel | 🧠 | kitchen
+hook: Your brain is only a small part of you, but it uses about a fifth of your body's energy. What fuels it best?
+learn: Your brain needs steady energy from regular meals to focus and remember.
+learn: Wholegrains, fruit, vegetables, eggs, nuts and dairy give steady energy that lasts.
+learn: Sugary snacks give a quick spike, then a crash that can leave you tired and grumpy.
+play: sort | Steady energy, Quick spike then crash | Wholegrain toast=Steady energy; A can of energy drink=Quick spike then crash; Porridge with fruit=Steady energy; A bag of lollies=Quick spike then crash; An egg sandwich=Steady energy; A sugary iced bun=Quick spike then crash | Steady energy or spike and crash?
+check: mcq | What helps your brain focus all morning? | Regular meals with steady energy* | Lollies every hour | Skipping breakfast
+check: tf | Sugary snacks can lead to a crash that leaves you tired. | true
+check: mcq | Which gives steady energy? | Porridge with fruit* | A sugary drink | A bag of lollies
+home: Plan a brain-fuel lunch box with a grown-up for one school day.
+skill: food
+
+@lesson 5.2 | Sugar in drinks | 🥤 | kitchen
+hook: How many teaspoons of sugar are in a big bottle of fizzy drink?
+learn: About 4 grams of sugar is one teaspoon. Check the label to see the grams.
+learn: A 600 mL bottle of regular cola has around 16 teaspoons of sugar.
+learn: Energy drinks have sugar and lots of caffeine. Their labels say they're not recommended for children.
+try: 40 grams of sugar ÷ 4 = 10 teaspoons :: gap | 24 grams of sugar ÷ 4 = _ teaspoons | 6
+play: slider | A sports drink has 36 grams of sugar. About how many teaspoons is that? | 0 | 20 | 9 | teaspoons | 1 | 1
+check: gap | A juice box has 20 grams of sugar. That's about _ teaspoons | 5
+check: mcq | Are energy drinks a good choice for kids? | No, they have lots of caffeine and sugar* | Yes, every day | Only before bed
+check: tf | Water has no sugar at all. | true
+home: Check the sugar on three drink labels at home and work out the teaspoons.
+skill: food
+
+@lesson 5.3 | Move your mood | 🚴 | garden
+hook: You're grumpy after a long day. Could a run around the block help?
+learn: Moving your body releases chemicals that lift your mood and help you feel calmer.
+learn: Kids should get at least 60 minutes of moving a day, with some huffing and puffing.
+learn: A few times a week, do things that build strong muscles and bones, like climbing, jumping and skipping.
+play: sort | Gets your heart pumping, Builds muscles and bones | Running races=Gets your heart pumping; Swinging on monkey bars=Builds muscles and bones; Swimming laps=Gets your heart pumping; Push-ups=Builds muscles and bones; Riding fast up a hill=Gets your heart pumping; Climbing a rope=Builds muscles and bones | What does each one do best?
+check: mcq | How can moving help your mood? | It releases chemicals that lift your mood* | It makes you grumpier | It doesn't do anything
+check: tf | Climbing and jumping help build strong bones. | true
+check: mcq | How much moving should kids get each day? | At least 60 minutes* | 5 minutes | None on school days
+home: Next time you feel grumpy, try 10 minutes of moving and notice how you feel after.
+skill: movement
+
+@lesson 5.4 | Short on sleep | 🥱 | home
+hook: You stayed up late gaming. Why is today so hard?
+learn: Kids your age need about 9 to 12 hours of sleep.
+learn: Without enough sleep, it's harder to control your feelings and focus in class.
+learn: Tired brains also crave junk food, and tired bodies get hurt more easily in sport.
+play: mystery | You snapped at your friend over nothing.; You read the same page three times.; You wanted chips and lollies all day.; You were gaming until midnight. | You didn't get enough sleep* | You're allergic to school | You need more lollies
+check: mcq | What can happen when you're short on sleep? | It's harder to focus and stay calm* | You get smarter | Nothing at all
+check: tf | Tired brains can crave junk food. | true
+check: mcq | How much sleep do kids aged 10 to 12 need? | About 9 to 12 hours* | About 5 hours | About 15 hours
+home: Work out what time you need to be asleep to get 10 hours before your wake-up time.
+skill: sleep
+
+@lesson 5.5 | Screens and your body | 👀 | home
+hook: Two hours on a screen and your eyes feel tired and your neck aches. What can help?
+learn: Try the 20-20-20 rule: every 20 minutes, look at something about 6 metres away for 20 seconds.
+learn: Sit up, hold the screen at eye level, and get up and move often.
+learn: Health guidelines in both our countries say kids should have no more than 2 hours of fun screen time a day.
+play: timing | You've been on your tablet for 20 minutes. Tap when the look-away zone arrives | Look far away | Look away
+check: mcq | What's the 20-20-20 rule? | Every 20 minutes, look far away for 20 seconds* | 20 hours of screens a day | 20 games in a row
+check: tf | Getting up and moving helps your body after screen time. | true
+check: mcq | How much fun screen time a day do health guidelines suggest? | No more than 2 hours* | At least 6 hours | As much as you like
+home: Set a 20-minute timer next time you use a screen and try the 20-20-20 rule.
+skill: screens
+
+@lesson 5.6 | My balance plan | ⚖️ | home
+hook: Food, water, sleep, moving and screens. How do they all fit in one day?
+learn: A balanced day has room for good food, water, moving, fun, rest and sleep.
+learn: Small changes help, like walking to school or switching screens off earlier.
+learn: Choose one thing to improve at a time. Trying to change everything at once is hard.
+play: build | Build a balanced school day | Wake up and drink a glass of water; Eat breakfast; Walk or ride to school; Play outside at lunch; Have a fruit snack after school; Screens off an hour before bed; Asleep by 8:30 pm
+check: mcq | What's a smart way to make healthy changes? | Change one thing at a time* | Change everything in one day | Never change anything
+check: tf | Walking to school is a small change that adds up. | true
+check: mcq | When should screens go off before bed? | About an hour before* | When you fall asleep | They should stay on
+home: Pick one part of your day to balance better, and try it for a week.
+skill: health
+
+@lesson 6.1 | Your brain's alarm | 🚨 | garden
+hook: Your heart races and your tummy flips before a test. Is something dangerous happening?
+learn: Worry comes from your brain's alarm system. It's trying to keep you safe.
+learn: The alarm makes your body ready to fight, run or freeze, even when there's no real danger.
+learn: Lots of worries are false alarms. Noticing that can help you calm down.
+play: sort | Real danger, False alarm | A car speeding towards you as you cross=Real danger; Worrying your friend is cross because they didn't wave=False alarm; The smoke alarm going off=Real danger; Thinking you'll fail a test you've studied for=False alarm; A dog growling and showing its teeth=Real danger; Worrying everyone will laugh at your haircut=False alarm | Real danger or false alarm?
+check: mcq | What is worry trying to do? | Keep you safe* | Make you sleepy | Nothing at all
+check: tf | Lots of worries are false alarms. | true
+check: mcq | What does the brain's alarm get your body ready to do? | Fight, run or freeze* | Eat lunch | Fall asleep
+home: Next time you feel worried, ask yourself: real danger or false alarm?
+skill: worry
+
+@lesson 6.2 | Thinking traps | 🪤 | garden
+hook: Your friend doesn't reply to your message. Your brain says, "They hate me." Is that true?
+learn: Thinking traps are ways worried brains jump to unhelpful ideas.
+learn: Common traps are expecting the worst, mind-reading, fortune-telling, and all-or-nothing thinking.
+learn: Spotting the trap helps you look for what's more likely.
+play: match | Match each thought to its thinking trap | One mistake means the whole day is ruined=All-or-nothing thinking; They didn't reply, so they must hate me=Mind-reading; I just know I'll fail tomorrow=Fortune-telling; A headache means something terrible is wrong=Expecting the worst
+check: mcq | "They didn't reply, so they hate me." What trap is that? | Mind-reading* | Good thinking | Fortune-telling
+check: tf | Spotting a thinking trap can help you think of what's more likely. | true
+check: mcq | A friend didn't reply. What's a more likely reason? | They're busy or their phone is flat* | They hate you forever | They moved to the moon
+home: Catch one thinking trap this week and think of a more likely idea.
+skill: worry
+
+@lesson 6.3 | Worry time | ⏰ | home
+hook: Your worries keep popping up all day, even in class. Could you give them an appointment?
+learn: Worry time is a set 10 to 15 minutes each day for thinking about worries.
+learn: When a worry pops up, write it down and tell it, "I'll think about you at worry time."
+learn: By worry time, many worries feel smaller, or have already sorted themselves out.
+play: order | Use worry time. Put the steps in order. | Notice a worry popping up; Write it in your worry notebook; Tell it, "I'll think about you later"; Go back to what you were doing; At worry time, read it and decide what to do
+check: mcq | What is worry time? | A set time each day to think about worries* | Worrying all day | Never thinking about worries
+check: tf | Many worries feel smaller by worry time. | true
+check: mcq | A worry pops up in class. You could… | Write it down for worry time* | Stop doing your work all day | Shout it out
+home: Choose a worry time and a worry notebook, and try it for a week.
+skill: worry
+
+@lesson 6.4 | Back to now | 🖐️ | garden
+hook: Your mind is racing with "what ifs". How can your senses bring you back?
+learn: Grounding uses your senses to bring your mind back to right now.
+learn: The 5-4-3-2-1 trick: notice 5 things you see, 4 you can touch, 3 you hear, 2 you smell and 1 you taste.
+learn: It works anywhere, and nobody even needs to know you're doing it.
+play: order | Do the 5-4-3-2-1 trick | Notice 5 things you can see; Notice 4 things you can touch; Notice 3 things you can hear; Notice 2 things you can smell; Notice 1 thing you can taste
+check: mcq | What does grounding use? | Your senses* | Your phone | A timer only
+check: tf | You can use the 5-4-3-2-1 trick anywhere. | true
+check: mcq | In the 5-4-3-2-1 trick, what do you notice 3 of? | Things you can hear* | Things you can taste | Things you can smell
+home: Try the 5-4-3-2-1 trick in the car or on the bus.
+skill: calm
+
+@lesson 6.5 | Worries about the world | 🌏 | online
+hook: You see a scary news story about floods or a war. Now you can't stop thinking about it. What helps?
+learn: It's normal to worry about big things happening in the world.
+learn: Talk to a grown-up about it. They can explain what's really going on.
+learn: Look for the helpers, take a break from the news, and think about small things you can do.
+play: path | You see a scary video about bushfires before bed. | Talk to a grown-up and find out what helpers are doing => good: You learned what's being done, and you don't have to carry the worry alone. | Keep watching scary videos alone in bed => bad: More scary videos usually make worries bigger, and it's harder to sleep. | Say nothing, but keep worrying => ok: The worry might hang around. Sharing it usually helps.
+check: mcq | You're worried about something in the news. What can help? | Talk to a grown-up* | Watch more scary videos alone | Keep it secret
+check: tf | It's normal to worry about big things in the world. | true
+check: mcq | What does "look for the helpers" mean? | Notice the people working to help* | Look for a hidden game | Ignore everything
+home: Talk with a grown-up about a news story, and find the helpers in it.
+skill: worry
+
+@lesson 6.6 | When worry is too big | 🆘 | garden
+hook: Some worries come and go. What if a worry won't go away?
+learn: If worry stops you sleeping, eating, going to school or having fun for weeks, it's time for extra help.
+learn: Tell a parent, teacher or school counsellor. A doctor can help too.
+learn: {nz:You can also free call 0800 What's Up (0800 942 8787) or Youthline (0800 376 633).~au:You can also call Kids Helpline on 1800 55 1800, any time.}
+play: tap | Tap the signs a worry needs extra help | 😴:yes:Can't sleep most nights for weeks; 🏫:yes:Not wanting to go to school because of it; 🤢:yes:Tummy aches most days; 🙅:yes:Stopping doing things you love; 📝:no; 🎈:no
+check: mcq | A worry has stopped you sleeping for weeks. You… | Tell a trusted grown-up* | Keep it secret | Wait for it to go away
+check: tf | Asking for help with worry is a smart thing to do. | true
+check: mcq | {nz:Which free number can kids call to talk to a counsellor?~au:What's the Kids Helpline number?} | {nz:0800 942 8787~au:1800 55 1800}* | 123 | 555
+home: Write down two grown-ups and one helpline you could go to with a big worry.
+skill: help
+
+@lesson 7.1 | Goals that matter to you | 🧭 | garden
+hook: Your friend is learning guitar, so you think you should too. Is that a good reason?
+learn: Goals stick better when they matter to you, not just to impress others.
+learn: Ask yourself: Why do I want this? How will I feel when I get there?
+learn: If the answer is "because everyone else is", think again.
+play: sort | Your own reason, To impress others | I love drawing and want to get better=Your own reason; Everyone else has one=To impress others; I want to swim with my cousins at the beach=Your own reason; So people will think I'm cool=To impress others; I'm curious how robots work=Your own reason; My friend will be jealous=To impress others | Whose reason is it?
+check: mcq | Which goal reason is likely to stick? | I love it and want to get better* | Everyone else is doing it | So people think I'm cool
+check: tf | Goals stick better when they matter to you. | true
+check: mcq | A good question before setting a goal is… | Why do I want this?* | What will my friends say? | How fast can I quit?
+home: Write down one goal and your reason for it. Is it your own reason?
+skill: goals
+
+@lesson 7.2 | Make it clear | 🎯 | garden
+hook: "Get better at swimming" or "Swim 25 metres without stopping by December". Which goal will you reach?
+learn: Clear goals say exactly what you'll do, how you'll know you've done it, and by when.
+learn: Vague goals like "be fitter" are hard to measure, so it's hard to know if you're getting there.
+learn: Pick something that's a stretch, but possible.
+play: diff | Vague goals and clear goals. Tap what changed. | Get better at swimming; Read more; Be fitter | Swim 25 metres without stopping by December; Read two books a month; Run 2 km without stopping by March
+check: mcq | Which goal is clear? | Read two books a month* | Read more | Be a reader
+check: tf | Clear goals say what, how much and by when. | true
+check: mcq | A good goal is… | A stretch, but possible* | Impossible | So easy you've already done it
+home: Turn one vague goal into a clear goal with a what, a how much and a by when.
+skill: goals
+
+@lesson 7.3 | Plan for bumps | 🧱 | garden
+hook: You plan to practise piano every day. Then your favourite show comes on. What happens to your goal?
+learn: Researchers found that goals work better when you plan for what might get in the way.
+learn: One method is called WOOP: Wish, Outcome, Obstacle, Plan.
+learn: Picture the goal, picture the bump, then make a plan: "If that happens, then I'll…"
+play: order | Use WOOP for a goal | Wish: pick your goal; Outcome: picture the best result; Obstacle: think what might get in the way; Plan: "If that happens, then I'll…"
+check: mcq | What does the O for Obstacle mean? | What might get in the way* | Oranges | Only do it once
+check: tf | Planning for bumps can help you reach a goal. | true
+check: mcq | Which is a WOOP plan? | If my show is on, then I'll practise first and watch after* | I'll practise if I feel like it | I'll never watch TV again
+home: Do a WOOP for one of your goals and stick it on your wall.
+skill: goals
+
+@lesson 7.4 | Track it | 📊 | home
+hook: You've ticked off 6 days in a row. Then you miss two. Is it all over?
+learn: A tracker, like a chart with ticks, lets you see your progress.
+learn: Missing a day is normal. What matters is getting back on track.
+learn: A handy rule: try never to miss two days in a row.
+play: path | You miss two days of your reading goal. | Start again tomorrow, and try not to miss two days in a row again => good: You're back on track. One slip doesn't wipe out your progress. | Give up, because the streak is broken => bad: All your progress doesn't disappear just because you missed a day. | Read for three hours to catch up => ok: You might burn out. Getting back to your normal amount works better.
+check: mcq | You miss a day of your goal. What's best? | Get back on track the next day* | Quit | Never try again
+check: tf | Missing a day means all your progress is gone. | false | Your progress is still there. Just start again.
+check: mcq | What's a tracker for? | Seeing your progress* | Hiding your goal | Making you feel bad
+home: Make a simple tracker for one goal and tick it off each day for two weeks.
+skill: goals
+
+@lesson 7.5 | A goal buddy | 🤝 | garden
+hook: Is it easier to stick with a goal on your own, or with someone cheering you on?
+learn: Telling someone about your goal makes it more likely you'll stick with it.
+learn: A goal buddy checks in, cheers you on and helps when you're stuck.
+learn: You can be a goal buddy for them too.
+play: chat | Your goal buddy checks in | them: How's your goal to learn 10 guitar chords going? | me: I've learned four! It's getting harder though*/Don't ask me about it/I gave up on day one | them: Nice work! Want to check in every Friday? | me: Yes! And I'll ask about your running goal too*/No, stop bugging me/Only if you do it for me
+check: mcq | What does a goal buddy do? | Checks in and cheers you on* | Does your goal for you | Laughs when you get stuck
+check: tf | Telling someone your goal can help you stick with it. | true
+check: mcq | How can you be a good goal buddy? | Check in and cheer them on* | Tell them to give up | Ignore them
+home: Pick a goal buddy and agree on a time to check in each week.
+skill: goals
+
+@lesson 7.6 | Changing a goal | 🔄 | garden
+hook: Your goal was to run 5 km by March, but you hurt your ankle. Did you fail?
+learn: Sometimes things change, like an injury, a new school or a new interest.
+learn: You can change a goal to fit, like making it smaller, giving it more time, or picking a new one.
+learn: Changing a goal isn't the same as giving up. It's being smart.
+play: debate | If a goal gets too hard, should you change it? | Sometimes. Adjusting can keep you going, as long as you're not just avoiding effort* | Never change a goal, even if it becomes impossible | Sticking with a hard goal can build grit, and the struggle is often where you learn the most.
+check: mcq | You hurt your ankle before your running goal. You could… | Give the goal more time* | Run on it anyway | Give up on running forever
+check: tf | Changing a goal can be smart, not giving up. | true
+check: mcq | Which is a good reason to change a goal? | Something big changed, like an injury* | You felt a bit tired one day | It needed effort
+home: Look at one of your goals. Does it still fit? Change it if it needs to.
+skill: goals
+
+@lesson 8.1 | Your brain can grow | 🧠 | garden
+hook: Learning a new skill feels slow and hard at first. Then one day it's easy. What changed?
+learn: When you practise, connections between your brain cells get stronger.
+learn: It's like making a path through long grass. The more you walk it, the clearer it gets.
+learn: This is why practice works, and why "I can't do it yet" is true.
+play: build | How a skill path grows in your brain | First try: hard and slow; Some practice: the path gets clearer; More practice: it gets faster; Lots of practice: it feels easy; Now you're ready for the next step
+check: mcq | What happens in your brain when you practise? | Connections get stronger* | Nothing | Your brain shrinks
+check: tf | Practice helps skills get easier over time. | true
+check: mcq | Practising a skill is like… | Making a path through long grass* | Switching off a light | Throwing a ball away
+home: Pick a skill you're learning and practise it for 10 minutes every day this week.
+skill: growth
+
+@lesson 8.2 | Effort plus strategy | 🧩 | workshop
+hook: You've tried the same maths question five times, the same way. Still wrong. Should you just try harder?
+learn: Growth mindset isn't only about effort. Trying the same thing harder doesn't always work.
+learn: Change your strategy: try a new method, break it into steps or look at an example.
+learn: Asking for help is a strategy too. It's what good learners do.
+play: path | You've got the same maths question wrong five times, the same way. | Try a different method, or ask for help => good: A new approach helps it click. That's a growth mindset in action. | Keep doing it exactly the same way, harder => bad: More effort on the same method usually gets the same result. | Give up and say "I'm bad at maths" => bad: You're not bad at maths. You just need a new strategy.
+check: mcq | You're stuck after lots of tries. What helps? | Change your strategy or ask for help* | Keep doing it the same way | Give up
+check: tf | Asking for help is a learning strategy. | true
+check: mcq | Growth mindset is about… | Effort, new strategies and help* | Effort only | Being naturally smart
+home: Next time you're stuck, try one new strategy before asking for help.
+skill: growth
+
+@lesson 8.3 | Feedback is a gift | 🎁 | workshop
+hook: Your teacher writes "needs more detail" on your story. Ouch. Or is it helpful?
+learn: Feedback tells you what's working and what to work on next.
+learn: It's about your work, not about you as a person.
+learn: Listen, ask questions, and use it to make your next try better.
+play: chat | Your teacher gives feedback on your story | them: Your ideas are great. The middle needs more description, though. | me: Thanks! Could you show me an example of good description?*/My story is already perfect/Whatever | them: Sure. See how this paragraph uses the senses? | me: That helps. I'll add some sounds and smells to mine*/I'll just leave it/That's boring
+check: mcq | What's feedback about? | Your work, not you as a person* | How bad you are | Nothing useful
+check: tf | Asking questions about feedback can help you improve. | true
+check: mcq | A good response to feedback is… | Thanks, can you show me an example?* | My work is perfect | Whatever
+home: Ask someone for feedback on something you made, and use one idea from it.
+skill: growth
+
+@lesson 8.4 | The learning pit | 🕳️ | garden
+hook: You're learning something new and suddenly feel totally confused. Are you failing?
+learn: When you learn something new, you often feel stuck and confused first. Some people call this the learning pit.
+learn: Being in the pit is a normal part of learning, not a sign you can't do it.
+learn: You climb out with strategies: try examples, ask questions, take a break and try again.
+play: order | Climb out of the learning pit. Put it in order. | Start a new challenge; Get stuck and feel confused; Try strategies and ask for help; Start to understand; Climb out knowing more than before
+check: mcq | What does feeling stuck when learning mean? | It's a normal part of learning* | You can't do it | You should stop
+check: tf | Taking a break can help you get unstuck. | true
+check: mcq | How do you climb out of the learning pit? | Try strategies and ask questions* | Wait for it to go away | Give up
+home: Draw the learning pit, and mark where you are with something you're learning now.
+skill: growth
+
+@lesson 8.5 | Comfort, stretch, panic | 🧗 | garden
+hook: Easy, a bit hard, or way too hard. Where do you learn the most?
+learn: In your comfort zone, things are easy, but you don't learn much.
+learn: In your stretch zone, things are a bit hard. This is where you learn the most.
+learn: In your panic zone, it's so hard you freeze. Take a smaller step back into the stretch zone.
+play: sort | Comfort zone, Stretch zone, Panic zone | Reading a book you've read five times=Comfort zone; Trying a slightly harder book=Stretch zone; Reading a uni textbook at age 11=Panic zone; Swimming a length you've done lots of times=Comfort zone; Learning a new stroke with a coach=Stretch zone; Jumping off the highest diving board on your first day=Panic zone | Which zone is it?
+check: mcq | Where do you learn the most? | The stretch zone* | The comfort zone | The panic zone
+check: tf | In the panic zone, it can be so hard you freeze. | true
+check: mcq | You're in the panic zone. What helps? | Take a smaller step* | Push harder | Quit forever
+home: Choose one thing to do in your stretch zone this week.
+skill: growth
+
+@lesson 8.6 | Praise the process | 🌟 | home
+hook: "You're so smart!" or "You kept trying different ways!" Which helps you more?
+learn: In a famous study, kids praised for being smart often chose easier puzzles next time.
+learn: Kids praised for their effort and strategies were more likely to take on harder ones.
+learn: Praise for the process helps people keep learning, so try giving it to others too.
+play: sort | Process praise, Talent-only praise | You tried lots of ways to solve it=Process praise; You're a natural=Talent-only praise; Your practice really paid off=Process praise; You're so smart=Talent-only praise; I can see how much effort you put in=Process praise; You were born good at this=Talent-only praise | Which kind of praise is it?
+check: mcq | Which is process praise? | Your practice really paid off* | You're so smart | You're a natural
+check: tf | Praise for effort and strategies can help people take on harder challenges. | true
+check: mcq | In the study, kids praised for being smart often… | Chose easier puzzles next time* | Chose harder puzzles | Stopped doing puzzles forever
+home: Give someone process praise this week, like "Your practice really paid off".
+skill: growth
+

@@ -284,3 +284,291 @@ check: tf | It's OK to ask a grown-up about every pop-up. | true
 home: Practise "stop, look, ask" with a grown-up on a game you play.
 skill: online safety
 
+@lesson 5.1 | A password is a key | 🔑 | online
+hook: Your front door has a key. What's the key to your game or tablet?
+learn: A password is like a key. It unlocks your account so only you can get in.
+learn: Anyone who knows your password can open your account, just like anyone with your key could open your door.
+learn: That's why passwords stay secret.
+play: match | Match each thing to the key that unlocks it | Your front door=A door key; Your bike lock=A lock code; Your game account=A password; Your tablet=A screen PIN
+check: mcq | What does a password do? | Unlocks your account* | Makes your game faster | Changes the colours
+check: tf | Anyone who knows your password can get into your account. | true
+check: mcq | Why do passwords stay secret? | So only you can get in* | Because they're boring | So you forget them
+home: Count how many things at home use a key, a code or a password.
+skill: passwords
+
+@lesson 5.2 | Who can know? | 🤫 | online
+hook: Your best friend asks for your game password. They promise they won't tell. Do you share it?
+learn: Only you and your grown-up should know your passwords.
+learn: Even best friends shouldn't know. Friends can fall out, or tell someone by accident.
+learn: Real game helpers will never ask for your password.
+play: sort | Can know my password, Shouldn't know it | My mum, dad or carer=Can know my password; My best friend=Shouldn't know it; Someone in a game chat=Shouldn't know it; A message saying it's from the game company=Shouldn't know it; My classmate=Shouldn't know it; The grown-up who looks after me=Can know my password | Who can know your password?
+check: mcq | Who can know your password? | You and your grown-up* | Your best friend | Anyone who asks nicely
+check: tf | Real game helpers will ask for your password. | false | Real helpers never ask for it.
+check: mcq | Your friend promises not to tell. Do you share your password? | No, keep it for you and your grown-up* | Yes | Only if they share theirs
+home: Check with your grown-up that they know the passwords for your games.
+skill: passwords
+
+@lesson 5.3 | Typing it safely | 🙈 | online
+hook: You're typing your password and someone leans in to watch. What now?
+learn: People can learn your password just by watching you type it.
+learn: Cover the screen or turn away when you type it.
+learn: Never say your password out loud, even as a joke.
+play: path | You're typing your password and your friend leans over to look. | Ask them to look away for a second => good: Easy! Your password stays secret. | Keep typing anyway => bad: They might see it and remember it. | Say it out loud so they can type it for you => bad: Now they know it. Tell a grown-up and change it.
+check: mcq | Someone is watching you type your password. You… | Ask them to look away* | Type slower so they can see | Say it out loud
+check: tf | People can learn your password by watching you type. | true
+check: mcq | Is it OK to say your password out loud? | No* | Yes | Only in class
+home: Practise covering the screen when you type a password, with a grown-up watching the room.
+skill: passwords
+
+@lesson 5.4 | Where not to keep it | 📝 | online
+hook: You stick your password on a note on your tablet so you won't forget. Good idea?
+learn: Notes on screens, in pencil cases or on the fridge can be read by anyone.
+learn: Ask your grown-up to keep your passwords somewhere safe for you.
+learn: Many grown-ups use a password app that keeps passwords locked away.
+play: tap | Tap the unsafe places to keep a password | 📝:yes:A sticky note on your tablet; 🧃:yes:Written on your lunch box; 💬:yes:Sent in a chat message; ✏️:yes:Written on your pencil case; 🔐:no; 🧠:no
+check: mcq | Where's a safe place for your password? | With your grown-up, kept safe* | On a sticky note on your tablet | In a chat message
+check: tf | A note stuck on your screen can be read by anyone. | true
+home: Ask your grown-up how they keep their passwords safe.
+skill: passwords
+
+@lesson 5.5 | Uh-oh, someone knows | 😟 | online
+hook: Oops! You told a friend your password. Is it too late?
+learn: It's OK. Mistakes happen, and it can be fixed.
+learn: Tell your grown-up straight away. They can help you change it.
+learn: Make a brand-new password, and keep the new one secret.
+play: order | Someone knows your password. Put the steps in order. | Tell your grown-up; Log in together; Change the password; Make up a new silly-sentence password; Keep the new one secret
+check: mcq | Someone found out your password. First step? | Tell your grown-up* | Keep it a secret | Give it to more people
+check: tf | A password can be changed if someone finds it out. | true
+check: mcq | After changing it, you… | Keep the new one secret* | Tell your friend again | Write it on the wall
+home: Practise changing a password on a pretend account with your grown-up.
+skill: passwords
+
+@lesson 5.6 | Lock your screen | 📱 | online
+hook: You leave your tablet on the couch, unlocked. Your little brother picks it up. What could happen?
+learn: A screen lock, like a PIN or face unlock, stops other people using your device.
+learn: Lock it when you walk away, and keep your PIN secret too.
+learn: Easy PINs like 1234 or 0000 are easy to guess.
+play: chat | Your little brother wants your tablet | them: What's your tablet PIN? I want to play. | me: I can't tell you, but I'll unlock it and play with you*/It's 1234/Guess it! | them: Pleeease? Mum won't know. | me: Let's ask Mum together*/OK, it's my birthday/Fine, here
+check: mcq | What stops other people using your tablet? | A screen lock* | A bright case | Stickers
+check: tf | 1234 is a hard PIN to guess. | false | It's one of the first PINs people try.
+check: mcq | You walk away from your tablet. You… | Lock it* | Leave it open | Give it to a stranger
+home: Check your tablet has a screen lock, and that your grown-up knows the PIN.
+skill: passwords
+
+@lesson 6.1 | Bored? Try this! | 🌳 | garden
+hook: It's a rainy Saturday and the tablet is flat. Is there anything fun to do?
+learn: There are lots of fun things to do away from screens.
+learn: You can build, draw, read, dance, play a board game or make up a story.
+learn: Being bored for a bit is OK. It's often when your best ideas pop up.
+play: path | It's a rainy afternoon and the tablet is flat. | Build a blanket fort and read inside it => good: A cosy fort and a good book. That's a great afternoon! | Moan all afternoon => bad: The time goes slowly, and nobody has fun. | Ask a grown-up to play a board game => good: Games together are fun, and nobody needs a screen.
+check: mcq | Which is fun without a screen? | Building a blanket fort* | Staring at a flat tablet | Nothing
+check: tf | Being bored for a bit can help you think of new ideas. | true
+check: mcq | What could you do on a rainy day? | Play a board game* | Moan all day | Hide under the bed forever
+home: Make a list of five fun things you can do without a screen and stick it on the fridge.
+skill: screens
+
+@lesson 6.2 | How much is enough? | ⏱️ | home
+hook: You watched videos in the morning, after school and after dinner. Was that a lot?
+learn: Health guidelines say kids should have no more than 2 hours of fun screen time a day.
+learn: Screen time adds up fast. Little bits during the day can make a big total.
+learn: A timer can help you keep track.
+try: 30 minutes + 30 minutes = 60 minutes :: gap | 20 minutes + 40 minutes = _ minutes | 60
+play: slider | You watched 30 minutes before school, 45 after school and 30 after dinner. How many minutes is that? | 0 | 180 | 105 | minutes | 0 | 5
+check: mcq | How much fun screen time a day do health guidelines say is enough? | No more than 2 hours* | 10 hours | All day
+check: tf | Little bits of screen time can add up to a lot. | true
+check: mcq | What can help you keep track of screen time? | A timer* | A sandwich | Closing your eyes
+home: Keep a screen-time chart with a grown-up for three days.
+skill: screens
+
+@lesson 6.3 | Time to stop | 🛑 | home
+hook: Your grown-up says "Screens off!" but you're in the middle of a game. What do you do?
+learn: Stopping is hard, because games and videos are made to keep you going.
+learn: It helps to get a warning, like "5 more minutes", and to stop at the end of a level or episode.
+learn: Plan what you'll do next, so stopping feels easier.
+play: chat | Your grown-up says screen time is nearly over | them: Screens off in 5 minutes, please. | me: OK, I'll finish this level and then stop*/No! Never!/Just one more hour | them: Time's up. What would you like to do now? | me: Can we go to the park?*/Give it back!/I'm going to cry until I get it
+check: mcq | What makes stopping easier? | A 5-minute warning and a plan for what's next* | Shouting | Hiding the tablet
+check: tf | Games and videos are made to keep you going. | true
+check: mcq | A good time to stop is… | At the end of a level or episode* | In the middle of a race | Never
+home: Agree with a grown-up on a 5-minute warning for screen time.
+skill: screens
+
+@lesson 6.4 | How do I feel? | 😵 | home
+hook: After a long time on screens, do you ever feel grumpy or tired?
+learn: Too much screen time can leave you with sore eyes, a headache or a grumpy mood.
+learn: Notice how your body and mood feel when you stop.
+learn: Take breaks to stretch, look far away and move your body.
+play: tap | Tap the signs you need a screen break | 😠:yes:Feeling grumpy; 👀:yes:Sore or tired eyes; 🤕:yes:A headache; 🥱:yes:Yawning a lot; 😊:no; 🏃:no
+check: mcq | You have sore eyes after screens. What helps? | A break to look far away and move* | More screens | Rubbing them hard
+check: tf | Too much screen time can make you feel grumpy. | true
+check: mcq | What's a good screen break? | Stretching and moving* | Switching to another screen | Staring at the screen harder
+home: After your next screen time, tell a grown-up how your body and mood feel.
+skill: screens
+
+@lesson 6.5 | Screen-free spots | 🍽️ | home
+hook: Should screens be at the dinner table?
+learn: Some places and times work best with no screens, like meal times and bedtime.
+learn: Without screens, it's easier to talk, laugh and listen to each other.
+learn: Families can choose their own screen-free spots together.
+play: sort | Screen-free, Screens can be OK | The dinner table=Screen-free; In bed at night=Screen-free; A family movie night=Screens can be OK; A video call with Nana=Screens can be OK; Brushing your teeth=Screen-free; Looking up a recipe with a grown-up=Screens can be OK | Screen-free or OK?
+check: mcq | Which is a good screen-free time? | Dinner time* | A video call with Nana | Family movie night
+check: tf | Without screens, it's easier to talk and listen at dinner. | true
+check: mcq | Who can choose screen-free spots? | Your family, together* | Only the tablet | Nobody
+home: Choose one screen-free spot or time with your family and try it for a week.
+skill: screens
+
+@lesson 6.6 | Good screen time | 🎨 | online
+hook: Drawing a picture on a tablet and watching video after video. Are they the same?
+learn: Some screen time helps you make, learn or talk to people you love.
+learn: Watching video after video, with autoplay on, is easy to keep doing without thinking.
+learn: Try to pick screen time where you make something, learn something or connect with someone.
+play: sort | Making or connecting, Just watching and watching | Drawing in an art app=Making or connecting; Video calling Grandad=Making or connecting; Autoplay cartoons for hours=Just watching and watching; Learning to code a simple game=Making or connecting; Scrolling short videos one after another=Just watching and watching; Reading an e-book=Making or connecting | Which kind of screen time is it?
+check: mcq | Which is screen time where you make something? | Drawing in an art app* | Autoplay videos | Scrolling for hours
+check: tf | Video calling someone you love is a good use of a screen. | true
+check: mcq | What helps you stop watching video after video? | Turning off autoplay* | Turning up the volume | Watching faster
+home: Make something on a screen with a grown-up, like a drawing or a card for someone.
+skill: screens
+
+@lesson 7.1 | Pretend in videos | 🎬 | online
+hook: You watch a video of a dragon flying over a city. Is it real?
+learn: Lots of videos are pretend. People use costumes, special effects and clever editing.
+learn: Cartoons and animations are made up, even when they look real.
+learn: If something seems amazing or impossible, it might be pretend.
+play: sort | Could be real, Pretend | A dragon flying over a city=Pretend; A dog catching a ball=Could be real; A talking sandwich=Pretend; A kid riding a bike=Could be real; A person flying with no wings=Pretend; Rain falling on a window=Could be real | Could it be real, or is it pretend?
+check: mcq | A video shows a person flying with no wings. It's probably… | Pretend* | Real | A bird
+check: tf | Special effects can make pretend things look real. | true
+check: mcq | What can make a video pretend? | Costumes, special effects and editing* | Nothing ever | Watching it twice
+home: Watch a short video with a grown-up and talk about which parts might be pretend.
+skill: realorfake
+
+@lesson 7.2 | Changed pictures | 🖼️ | online
+hook: A photo shows a bright blue sky, but it was a grey day. How?
+learn: Photos can be changed with apps. People can add things, take things away or change colours.
+learn: Filters can make faces smoother or add puppy ears.
+learn: A photo doesn't always show what really happened.
+play: diff | The real photo and the changed photo. Tap what changed. | Sky: grey and cloudy; Dog: brown; Hat: none; Grass: green | Sky: bright blue; Dog: brown; Hat: a party hat; Grass: green
+check: mcq | Can photos be changed with apps? | Yes* | No, never | Only on Tuesdays
+check: tf | A photo always shows exactly what really happened. | false | Photos can be changed with apps.
+check: mcq | What can a filter do? | Add puppy ears or change colours* | Make you taller in real life | Nothing
+home: Try a fun filter with a grown-up, then compare it with the real photo.
+skill: realorfake
+
+@lesson 7.3 | Computer-made pictures | 🤖 | online
+hook: A picture shows a cat riding a skateboard on the moon. Who made it?
+learn: Computers can now make pictures, videos and voices of things that never happened. This is called AI.
+learn: Sometimes there are clues, like strange hands or messy writing.
+learn: But it can be hard to tell. If you're not sure, ask a grown-up.
+play: tap | Tap the clues a picture might be made by a computer | 🖐️:yes:Hands with too many fingers; 👀:yes:Eyes that look a bit odd; 🔤:yes:Writing that's jumbled up; 🌀:yes:Things melting into each other; 🙂:no; 🌳:no
+check: mcq | What can AI do? | Make pictures of things that never happened* | Nothing | Only add numbers
+check: tf | It can be hard to tell if a picture was made by a computer. | true
+check: mcq | You're not sure if a picture is real. You… | Ask a grown-up* | Share it with everyone | Believe it
+home: Look at some AI-made pictures with a grown-up and hunt for clues.
+skill: realorfake
+
+@lesson 7.4 | Ads make things shiny | 📺 | online
+hook: In the ad, the toy car zooms, flips and glows. Will it do that at home?
+learn: Ads try to make things look as exciting as possible.
+learn: They use music, close-ups, happy actors and clever filming.
+learn: The real toy might look smaller or do less than in the ad.
+play: path | An ad shows a toy car that zooms, flips and glows in the dark. | Ask a grown-up to find out what it really does => good: Now you know what it can really do before you decide. | Beg for it straight away => bad: Ads make toys look better than they are. You might be disappointed. | Believe it can fly, like in the ad => bad: Ads use clever filming. The real toy might not do that.
+check: mcq | Why do toys look amazing in ads? | Ads use music, close-ups and clever filming* | The toys are magic | Ads always show exactly what you'll get
+check: tf | A toy might look smaller at home than in the ad. | true
+check: mcq | Before asking for a toy from an ad, you could… | Find out what it really does with a grown-up* | Beg loudly | Buy two
+home: Watch an ad with a grown-up and spot one trick that makes the toy look better.
+skill: ads
+
+@lesson 7.5 | Pranks and challenges | 🃏 | online
+hook: A video shows kids doing a scary jumping challenge. Should you try it?
+learn: Some videos are pranks or jokes. Some are set up and not what they seem.
+learn: Online challenges can be dangerous. People can get badly hurt copying them.
+learn: If a challenge looks risky, don't try it. Tell a grown-up.
+play: chat | Your friend wants to try a challenge | them: Let's try that jumping challenge from the video! | me: That looks dangerous. Let's ask a grown-up first*/OK, you go first/Let's make it even higher | them: But everyone online is doing it! | me: People get hurt copying those. Let's play tag instead*/Fine, let's do it/I'll film you
+check: mcq | A video challenge looks risky. You… | Don't try it, and tell a grown-up* | Try it straight away | Do it higher
+check: tf | Some videos are set up and not what they seem. | true
+check: mcq | Why are some online challenges a bad idea? | People can get badly hurt* | They're too easy | They're boring
+home: Talk with a grown-up about a challenge or prank you've heard about.
+skill: safety
+
+@lesson 7.6 | Is it real? | ❓ | online
+hook: You see something online that seems amazing. What three questions can you ask?
+learn: Ask: who made this?
+learn: Ask: does it seem too wild or too good to be true?
+learn: Ask a grown-up: is this real? It's always OK to check.
+play: order | When you see something amazing online | Stop and don't share it yet; Ask: who made this?; Ask: does it seem too wild?; Ask a grown-up: is this real?; Share only if it's real and kind
+check: mcq | What's a good question to ask about something online? | Who made this?* | How many likes? | What colour is it?
+check: tf | It's always OK to ask a grown-up if something is real. | true
+check: mcq | Something seems too wild to be true. It might be… | Pretend* | Definitely real | A prize
+home: Practise the three questions with a grown-up on something you see online.
+skill: realorfake
+
+@lesson 8.1 | My trusted grown-ups | ✋ | home
+hook: You have five fingers on one hand. Can you name a trusted grown-up for each one?
+learn: A trusted grown-up is someone who keeps you safe and listens to you.
+learn: It could be a parent, carer, grandparent, teacher or coach.
+learn: Knowing who they are before anything happens makes telling easier.
+play: tap | Tap the people who could be trusted grown-ups | 👩:yes:Your mum, dad or carer; 🧑‍🏫:yes:Your teacher; 👵:yes:A grandparent; ⚽:yes:Your coach; 🧑‍💻:no; 🕵️:no
+check: mcq | Who could be a trusted grown-up? | A teacher or grandparent* | A stranger online | Someone you just met in a game
+check: tf | It helps to know your trusted grown-ups before anything happens. | true
+check: mcq | A trusted grown-up is someone who… | Keeps you safe and listens to you* | Gives you lollies | You met online
+home: Trace your hand and write a trusted grown-up on each finger.
+skill: telling
+
+@lesson 8.2 | Surprises and secrets | 🎁 | home
+hook: A surprise party for Nana, and someone online saying "Don't tell your mum." Are they the same?
+learn: A surprise is fun and ends soon, like a present or a party. Everyone finds out.
+learn: A bad secret makes you feel worried, scared or yucky, and someone wants you to keep it forever.
+learn: You should always tell a trusted grown-up about a bad secret.
+play: sort | Fun surprise, Secret to tell | A present for Dad's birthday=Fun surprise; Someone online says keep your chats from Mum=Secret to tell; A surprise party for Nana=Fun surprise; Someone sends a yucky picture and says don't tell=Secret to tell; Hiding Easter eggs for your cousins=Fun surprise; Someone online asks for a photo of you=Secret to tell | Fun surprise or secret to tell?
+check: mcq | Someone online says "Don't tell your mum." You… | Tell a trusted grown-up* | Keep the secret | Send them a photo
+check: tf | A surprise party is a fun surprise, not a bad secret. | true
+check: mcq | A bad secret makes you feel… | Worried, scared or yucky* | Happy and excited | Hungry
+home: Talk with a grown-up about the difference between surprises and secrets.
+skill: telling
+
+@lesson 8.3 | Yucky or scary things | 😨 | online
+hook: You see a picture online that makes you feel yucky or scared. What do you do?
+learn: Sometimes you might see something online that isn't meant for kids. It's not your fault.
+learn: Turn the screen over or close it, and don't share it.
+learn: Tell a trusted grown-up what you saw. Talking about it helps.
+play: order | You see something yucky online. Put the steps in order. | Turn the screen over or close it; Don't share it with anyone; Go and find a trusted grown-up; Tell them what you saw; Talk about how it made you feel
+check: mcq | You see something scary online. First step? | Turn the screen over or close it* | Show your friends | Keep watching
+check: tf | It's not your fault if you see something yucky online. | true
+check: mcq | Should you share a yucky picture with friends? | No* | Yes | Only with your best friend
+home: Agree with a grown-up what you'll do if you see something yucky online.
+skill: telling
+
+@lesson 8.4 | What to say | 🗣️ | home
+hook: Something online made you feel weird, but you don't know what to say. How could you start?
+learn: You don't need perfect words. Just start with "Can I talk to you?"
+learn: Say what happened and how it made you feel.
+learn: You can show the grown-up the screen, too.
+play: build | Build what you could say | Can I talk to you?; Something happened online; It made me feel scared; Can you help me?
+check: mcq | What's a good way to start telling? | "Can I talk to you?"* | Saying nothing | Shouting
+check: tf | You can show a grown-up the screen when you tell them. | true
+check: mcq | Do you need perfect words to tell a grown-up? | No* | Yes | Only big words
+home: Practise saying "Can I talk to you?" with a grown-up.
+skill: telling
+
+@lesson 8.5 | Even if I broke a rule | 🙈 | home
+hook: You were playing a game you're not allowed to, and something bad happened. Should you still tell?
+learn: Yes. Being safe is more important than the rule you broke.
+learn: Grown-ups would much rather know, so they can help.
+learn: You might talk about the rule later, but telling is always the right thing to do.
+play: path | You were playing a game you're not allowed to, and someone sent you a mean, scary message. | Tell a grown-up anyway => good: They're glad you told them, and they help you feel safe. | Hide it so you don't get in trouble => bad: Now you're worried and alone, and the person might message again. | Delete the game and say nothing => ok: The game is gone, but you're still carrying a scary feeling. Telling helps.
+check: mcq | You broke a rule and something bad happened online. You… | Tell a grown-up anyway* | Hide it | Never go online again
+check: tf | Being safe is more important than the rule you broke. | true
+check: mcq | Why should you tell, even if you broke a rule? | So a grown-up can help keep you safe* | So you get in trouble | You shouldn't tell
+home: Ask a grown-up to promise they'll listen if you ever need to tell them something.
+skill: telling
+
+@lesson 8.6 | Keep telling | 🔁 | home
+hook: You try to tell a grown-up, but they're busy and say, "Not now." What then?
+learn: If the first grown-up doesn't listen, say "It's important." Or tell another trusted grown-up.
+learn: Keep telling until someone helps you.
+learn: {nz:Kids can also call 0800 What's Up on 0800 942 8787 for free.~au:Kids can also call Kids Helpline on 1800 55 1800 for free, any time.}
+play: chat | Your grown-up is busy cooking | them: Not now, I'm cooking dinner. | me: It's important. Something online scared me*/OK, never mind/I'll never tell anyone | them: Oh, sorry. I'm listening. What happened? | me: Someone in a game asked for my address*/Nothing, forget it/I'm not telling now
+check: mcq | A grown-up is too busy to listen. You… | Say "It's important" or tell another grown-up* | Give up | Keep it secret forever
+check: tf | You should keep telling until someone helps you. | true
+check: mcq | {nz:Which free number can kids call?~au:What's the Kids Helpline number?} | {nz:0800 942 8787~au:1800 55 1800}* | 123 | 555
+home: Name a second trusted grown-up you'd tell if the first one was busy.
+skill: telling
+
