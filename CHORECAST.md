@@ -13,7 +13,9 @@ npm install
 npm run dev
 ```
 
-Then open `http://localhost:5173/chorecast/` (on an iPad, use your computer's network address instead of `localhost`). `npm run build` copies it into `dist/chorecast/`.
+Then open `http://localhost:5173/` (on an iPad, use your computer's network address instead of `localhost`). On this branch the site root redirects to `/chorecast/`, and `npm run build` copies the page into `dist/chorecast/` unchanged.
+
+The Tattoo Tycoon offline app (vite-plugin-pwa) is set to `selfDestroying` on this branch. Devices that installed the game get a service worker that removes itself and clears its cache, so they stop seeing the game. The game's code in `src/` is unchanged and still on `main`.
 
 It also works from any static host, or by opening the HTML file directly in a browser.
 
