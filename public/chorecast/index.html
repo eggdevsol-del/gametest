@@ -2398,7 +2398,7 @@ void main() {
     for (let i = 0; i < segs; i++) { const a = i * 2; idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
     const geo = new T.BufferGeometry(); geo.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); geo.setIndex(idx); geo.computeBoundingSphere(); return geo;
   })();
-  const WIND = { value: 1 }, SNOW = { value: 0 }, FLAG_T = { value: 0 }, MOWN = 0.28;
+  const WIND = { value: 1 }, SNOW = { value: 0 }, FLAG_T = { value: 0 }, MOWN = 0.1;
   const GRASS_V = `uniform float uTime, uGrow, uCut, uMowR, uMowing, uWind; varying float vH; varying vec3 vTint;
 void main() {
   vec3 p = position; float t = p.y / 0.1;
@@ -2442,7 +2442,7 @@ void main() {
     for (let i = 0; i < p.count; i++) { let x = p.getX(i), z = p.getZ(i); const d = Math.hypot(x, z); if (d > 1.1) { x *= 1.1 / d; z *= 1.1 / d; } p.setXYZ(i, x, surfH(x, z, pd), z); }
     geo.computeVertexNormals(); return geo;
   }
-  const FOOT = [[0.4, 0.4], [0.5, 0.46], [0.64, 0.52], [0.74, 0.56], [0.78, 0.72]];
+  const FOOT = [[0.54, 0.54], [0.5, 0.46], [0.64, 0.52], [0.74, 0.56], [0.78, 0.72]];
   function grassField(g, seed, n, grow, night, ex) {
     const m = new T.InstancedMesh(BLADE, grassMat(grow, night), n), d = new T.Object3D(), r = mulberry(seed + 300), col = new T.Color(), [fw, fd] = ex.foot, pd = ex.pd;
     let i = 0, tries = 0;
@@ -2450,6 +2450,7 @@ void main() {
       tries++; const a = r() * 6.283, rad = Math.sqrt(r()) * 1.09, x = Math.cos(a) * rad, z = Math.sin(a) * rad;
       if (Math.abs(x - 0.05) < fw / 2 && Math.abs(z + 0.22) < fd / 2) continue;
       if (pd && Math.hypot(x - pd.x, z - pd.z) < pd.r + 0.03) continue;
+      if (ex.clear && ex.clear.some(([cx, cz, cr]) => Math.hypot(x - cx, z - cz) < cr)) continue;
       d.position.set(x, 0.2 + surfH(x, z, pd), z); d.rotation.set((r() - 0.5) * 0.3, r() * 6.28, (r() - 0.5) * 0.3); d.scale.set(0.8 + r() * 0.5, 0.65 + r() * 0.7, 1); d.updateMatrix(); m.setMatrixAt(i, d.matrix);
       const v = 0.82 + r() * 0.3; col.setRGB(v * (0.96 + r() * 0.08), v, v * (0.9 + r() * 0.1)); m.setColorAt(i, col); i++;
     }
@@ -2545,7 +2546,32 @@ void main() {
     const win = (x, y, z, flowers) => { box(0.14, 0.14, 0.014, trim, x, y, z); box(0.105, 0.105, 0.02, glass, x, y, z + 0.004); box(0.012, 0.105, 0.024, trim, x, y, z + 0.006); if (flowers) { box(0.13, 0.03, 0.045, mat(0x8a5a3c), x, y - 0.085, z + 0.02); [-0.04, 0, 0.04].forEach((fx, i) => add(g, new T.SphereGeometry(0.02, 10, 8), mat([0xff6b9d, 0xffd43b, 0xc084fc][i]), x + fx, y - 0.062, z + 0.024)); } };
     const door = (x, y, z) => { box(0.16, 0.26, 0.014, trim, x, y + 0.006, z); box(0.125, 0.235, 0.02, doorM, x, y, z + 0.004); add(g, new T.SphereGeometry(0.009, 8, 6), mat(0xffd43b, { std: true, m: 0.8, r: 0.3, smooth: true }), x + 0.04, y, z + 0.016); [0.06, 0.16, 0.26].forEach((dz, i) => add(g, new T.CylinderGeometry(0.045 - i * 0.004, 0.05 - i * 0.004, 0.02, 9), stone, x + (i % 2 ? 0.02 : -0.01), 0.008, z + dz)); };
     const chimney = (x, y, z) => { box(0.08, 0.22, 0.08, stone, x, y, z); box(0.1, 0.025, 0.1, stone, x, y + 0.115, z); };
-    if (level === 0) { add(g, new T.ConeGeometry(0.34, 0.5, 3), roofM, 0, 0.25, 0).rotation.y = 0.5; box(0.12, 0.22, 0.02, doorM, 0.03, 0.11, 0.17); }
+    if (level === 0) {
+      // Camp tent: an A-frame of two sloping canvas panels on a ridge pole, the front flaps tied back from a shady
+      // doorway, guy ropes pegged out at the sides, and a little campfire out front (tickIsland makes it flicker).
+      const W = 0.5, H = 0.38, D = 0.5, slope = Math.atan2(H, W / 2), side = Math.hypot(W / 2, H) + 0.02, c = new T.Color(hex(hue)), V = (x, y, z) => new T.Vector3(x, y, z);
+      const flapM = mat(c.clone().lerp(new T.Color(0xffffff), 0.45).getHex()), shade = mat(c.clone().lerp(new T.Color(0x140c28), 0.8).getHex()), wood = mat(0x8a5a3c), ropeM = mat(0xeadfc4);
+      const tri = (pts, depth, m, z) => { const sh = new T.Shape(); pts.forEach(([x, y], i) => (i ? sh.lineTo(x, y) : sh.moveTo(x, y))); sh.closePath(); return add(g, new T.ExtrudeGeometry(sh, { depth, bevelEnabled: false }), m, 0, 0, z); };
+      const stick = (a, b, r, m) => { const v = V(b.x - a.x, b.y - a.y, b.z - a.z), o = add(g, new T.CylinderGeometry(r, r, v.length(), 6), m, (a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2); o.quaternion.setFromUnitVectors(V(0, 1, 0), v.normalize()); return o; };
+      [-1, 1].forEach(sx => { box(side, 0.018, D, roofM, sx * W / 4, H / 2, 0).rotation.z = -sx * slope; });
+      tri([[-W / 2, 0], [W / 2, 0], [0, H]], 0.014, roofM, -D / 2);
+      tri([[-W / 2 + 0.03, 0], [W / 2 - 0.03, 0], [0, H - 0.03]], 0.01, shade, D / 2 - 0.03);
+      [-1, 1].forEach(sx => {
+        tri([[sx * W / 2, 0], [sx * (W / 2 - 0.15), 0], [0, H]], 0.012, flapM, D / 2 - 0.016);
+        add(g, new T.SphereGeometry(0.014, 10, 8), ropeM, sx * 0.123, H * 0.3, D / 2 + 0.002);
+        [-1, 1].forEach(sz => { const px = sx * (W / 2 + 0.13), pz = sz * D * 0.3; box(0.018, 0.045, 0.018, wood, px, 0.015, pz); stick(V(sx * W * 0.3, H * 0.4, pz), V(px, 0.03, pz), 0.0045, ropeM).userData.noInk = true; });
+      });
+      stick(V(0, H + 0.006, -D / 2 - 0.045), V(0, H + 0.006, D / 2 + 0.045), 0.012, wood);
+      [-1, 1].forEach(sz => stick(V(0, 0, sz * (D / 2 + 0.025)), V(0, H + 0.012, sz * (D / 2 + 0.025)), 0.01, wood));
+      const fx = 0.27, fz = 0.29, fire = new T.Group();
+      add(g, new T.CylinderGeometry(0.09, 0.09, 0.006, 20), mat(0x8a6a48), fx, 0.003, fz);
+      for (let i = 0; i < 7; i++) { const a = i / 7 * Math.PI * 2; add(g, new T.SphereGeometry(0.022, 8, 6), stone, fx + Math.cos(a) * 0.066, 0.012, fz + Math.sin(a) * 0.066).scale.y = 0.6; }
+      [0.6, -0.6].forEach(ry => { const l = add(g, new T.CylinderGeometry(0.012, 0.012, 0.11, 7), wood, fx, 0.018, fz); l.rotation.set(0, ry, Math.PI / 2); });
+      fire.position.set(fx, 0.02, fz); g.add(fire);
+      const flame = (r, h, c1, e, y) => { const o = add(fire, new T.ConeGeometry(r, h, 8), mat(c1, { e }), 0, y + h / 2, 0); o.userData.noInk = true; };
+      flame(0.036, 0.1, 0xff7a1a, 0xff5a00, 0); flame(0.02, 0.06, 0xffd84a, 0xffc000, 0.004);
+      g.userData.flame = fire;
+    }
     else if (level === 1) { wall(0.46, 0.34, 0.42, 0xc98d5a, 0, 0.17, 0); roof(0.46, 0.3, 0, 0.49, 0); door(-0.08, 0.12, 0.218); win(0.13, 0.2, 0.218, false); }
     else if (level === 2) { wall(0.6, 0.42, 0.48, 0xfff3df, 0, 0.21, 0); roof(0.6, 0.38, 0, 0.61, 0); chimney(0.16, 0.74, -0.06); door(-0.12, 0.13, 0.248); win(0.14, 0.25, 0.248, true); }
     else if (level === 3) { wall(0.7, 0.4, 0.52, 0xfff3df, 0, 0.2, 0); wall(0.56, 0.34, 0.46, 0xfff3df, -0.04, 0.57, 0); roof(0.56, 0.34, -0.04, 0.91, 0); chimney(0.14, 1.0, -0.08); door(0, 0.13, 0.268); [-0.2, 0.2].forEach(x => win(x, 0.24, 0.268, true)); [-0.16, 0.1].forEach(x => win(x, 0.58, 0.238, false)); }
@@ -2577,13 +2603,13 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     const lawnC = new T.Color(k.night ? 0x1d4a3a : 0x3f8f35).lerp(new T.Color(0xeef3f8), wx.snow ? 0.75 : 0).getHex();
     add(g, new T.CylinderGeometry(1.1, 1.05, 0.16, 48, 1, true), mat(lawnC), 0, 0.12, 0).userData.noInk = true;
     u.grass = add(g, lawnTop(pd), mat(lawnC), 0, top, 0); u.grass.userData.noInk = true;
-    u.grassMesh = grassField(g, s, k.flat ? 10400 : 1800, MOWN + cm('lawn') * 1.1, k.night, { foot: FOOT[k.level] || FOOT[0], pd });
+    u.grassMesh = grassField(g, s, k.flat ? 41600 : 7200, MOWN + cm('lawn') * 1.28, k.night, { foot: FOOT[k.level] || FOOT[0], pd, clear: k.level === 0 ? [[0.32, 0.07, 0.1]] : null });
     if (pd) {
       const pm = Math.min(1, cm('pond'));
       u.pond = add(g, new T.CylinderGeometry(pd.r + 0.045, pd.r + 0.045, 0.012, 48), mat(new T.Color(0x3fb7f5).lerp(new T.Color(0x5f7f2e), Math.round(pm * 10) / 10 * 0.85).getHex(), { smooth: true, r: 0.05, m: 0.15, surf: 'water', ns: 0.5 }), pd.x, top - 0.024, pd.z);
       u.pondLeaves = []; for (let i = 0; i < Math.floor(pm * 6); i++) { const a = i * 2.4, d = pd.r * 0.25 * ((i % 3) + 1); u.pondLeaves.push(add(g, new T.CylinderGeometry(0.025, 0.025, 0.004, 6), mat(0x8a6a2a), pd.x + Math.cos(a) * d, top - 0.015, pd.z + Math.sin(a) * d)); }
     }
-    const h = house(k.level, k.hue, k.night, Math.min(1, cm('house') * 0.85)); h.position.set(0.05, top, -0.22); g.add(h); u.walls = h.userData.walls;
+    const h = house(k.level, k.hue, k.night, Math.min(1, cm('house') * 0.85)); h.position.set(0.05, top, -0.22); g.add(h); u.walls = h.userData.walls; u.flame = h.userData.flame;
     const okSpot = (x, z) => !pd || Math.hypot(x - pd.x, z - pd.z) > pd.r + 0.1;
     const spots = [[0.72, 0.12], [0.6, -0.55], [-0.72, -0.3], [-0.12, 0.74], [0.78, 0.48], [-0.86, 0.2], [0.28, -0.82], [-0.42, -0.74], [0.2, 0.85], [-0.95, -0.05]].filter(([x, z]) => okSpot(x, z)), tg = 1 + Math.min(1.2, cm('trees')) * 0.28;
     u.trees = []; for (let i = 0; i < Math.min(k.trees, 8, spots.length); i++) u.trees.push(tree(g, spots[i][0], top, spots[i][1], s + 10 + i, tg));
@@ -2691,6 +2717,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
   function tickIsland(g, t, dt, ph = 0, hopAt = 0) {
     const u = g.userData;
     if (u.spin) u.spin.rotation.z += dt * 2.4;
+    if (u.flame) { u.flame.scale.set(1, 1 + Math.sin(t * 13 + ph) * 0.12 + Math.sin(t * 29) * 0.06, 1); u.flame.rotation.y = t * 1.5; }
     if (u.skillOrbs) for (const o of u.skillOrbs) o.position.y = o.userData.y0 + Math.sin(t * 2 + o.userData.ph) * 0.008;
     FLAG_T.value = t; u.flag.rotation.y = Math.sin(t * 0.5 + ph) * 0.15; u.clouds.rotation.y = t * 0.15;
     if (u.precip) stepPrecip(u.precip, dt, t);
