@@ -285,3 +285,267 @@ check: mcq | What saves water when washing up? | Using a sink of water* | Leavin
 home: Help wash up with the tap off between rinses.
 skill: saving water
 
+@lesson 5.1 | Dirty or clean? | 🧺 | home
+hook: You take off your clothes at night. Where should they go?
+learn: Dirty clothes go in the washing basket, not on the floor.
+learn: Clothes that are still clean, like a jumper you wore for an hour, can be folded and put away.
+learn: Smelly, muddy or stained? Into the basket!
+play: sort | Washing basket, Put away | Muddy soccer socks=Washing basket; A jacket worn for an hour=Put away; A t-shirt with tomato sauce on it=Washing basket; A jumper worn on a cool morning=Put away; Undies you wore today=Washing basket; A clean towel that fell off the hook=Put away | Basket or put away?
+check: mcq | Where do muddy clothes go? | In the washing basket* | Under the bed | Back in the drawer
+check: tf | Undies you wore today go in the washing basket. | true
+home: Tonight, put your dirty clothes in the washing basket all by yourself.
+skill: laundry
+
+@lesson 5.2 | Check the pockets | 👖 | home
+hook: Uh-oh! A tissue went through the wash. Now everything is covered in white fluff!
+learn: Before clothes go in the basket, check every pocket.
+learn: Tissues, crayons, lollies and coins can ruin the wash or hurt the machine.
+learn: Give anything you find to a grown-up.
+play: tap | Tap the things that should come out of pockets first | 🧻:yes:Tissues leave fluff on everything; 🖍️:yes:Crayons melt and stain; 🍬:yes:Lollies go sticky; 🪙:yes:Coins can damage the machine; 🧦:no; 👕:no
+check: mcq | When should you check pockets? | Before clothes go in the wash* | After they're dry | Never
+check: tf | A crayon in a pocket can stain the whole wash. | true
+home: Check the pockets of your clothes before they go in the basket this week.
+skill: laundry
+
+@lesson 5.3 | Pegging out | ☀️ | garden
+hook: The washing is clean and wet. How do you hang it on the line?
+learn: Give each piece a good shake, so it dries with fewer wrinkles.
+learn: Peg shirts along the bottom edge, and hang socks by their toes.
+learn: Leave a gap between things so the sun and wind can dry them.
+play: order | Hang out the washing | Carry the basket to the line; Shake out one piece of clothing; Peg it to the line at the edges; Leave a gap before the next piece; Bring it in when it's dry
+check: mcq | Why shake clothes before you hang them? | So they have fewer wrinkles* | To wake them up | To make them wetter
+check: tf | Leaving gaps between clothes helps them dry faster. | true
+home: Help a grown-up peg out the washing, or hang it on a rack inside.
+skill: laundry
+
+@lesson 5.4 | Towels and socks | 🧦 | home
+hook: Towels and socks are easy to fold. Can you do it like a pro?
+learn: Towels: fold in half, then in half again, then once more, and stack them up.
+learn: Socks: find the pairs first. Match the colour, size and pattern.
+learn: Then fold or roll the pair together, so they stay buddies in the drawer.
+play: build | Fold a towel | Lay the towel flat; Fold it in half the long way; Fold it in half again; Fold it in half once more; Stack it on the pile
+check: mcq | How do you know two socks are a pair? | Same colour, size and pattern* | They're both socks | One is bigger
+check: tf | Rolling socks together keeps the pairs together. | true
+home: Pair up all the socks in your family's clean washing.
+skill: chores
+
+@lesson 5.5 | Where does it live? | 🗄️ | home
+hook: The clothes are all folded. Now what?
+learn: Every kind of clothing has a home, like a drawer, a shelf or a hook.
+learn: Put things back in the same place every time, so you can find them fast.
+learn: Carry other people's clothes to their rooms.
+play: match | Match each thing to where it lives | Socks and undies=The top drawer; School shirt=A hanger in the wardrobe; Raincoat=The hook by the door; Clean towels=The linen cupboard; Pyjamas=Under your pillow
+check: mcq | Why put clothes in the same place every time? | So you can find them quickly* | So they get lost | So they get dirty
+check: tf | Putting clothes away is a job kids can do. | true
+home: Put away your own clean clothes this week, every piece in its place.
+skill: tidy
+
+@lesson 5.6 | Rain on the washing! | 🌧️ | garden
+hook: The washing is on the line. Dark clouds roll in. What do you do?
+learn: Rain makes dry washing wet again.
+learn: If it starts to rain, tell a grown-up and help bring the washing in fast.
+learn: Teamwork makes laundry jobs quicker for everyone.
+play: path | Big drops of rain start falling on the washing. | Run and tell a grown-up, then help bring it in => good: Teamwork! The washing stays dry. | Keep playing and hope it stops => bad: Now it's all soaking wet again. | Pull it off the line and drop it on the muddy grass => bad: Now it all needs washing again!
+check: mcq | It starts to rain on the washing. What helps? | Tell a grown-up and help bring it in* | Ignore it | Leave it in the mud
+check: tf | Helping with laundry makes it quicker for the whole family. | true
+home: Ask your family which laundry job you could do every week.
+skill: teamwork
+
+@lesson 6.1 | Eat a rainbow | 🌈 | kitchen
+hook: How many colours are on your plate tonight?
+learn: Fruit and veg come in lots of colours: red, orange, yellow, green and purple.
+learn: Each colour has different good stuff to help you grow.
+learn: Try to eat lots of colours every day. It's called eating a rainbow!
+play: match | Match each colour to a fruit or veg | Red=Tomato; Orange=Carrot; Yellow=Banana; Green=Broccoli; Purple=Plum
+check: mcq | What does "eat a rainbow" mean? | Eat lots of colours of fruit and veg* | Eat rainbow lollies | Eat only red food
+check: tf | Different colours of fruit and veg have different good stuff in them. | true
+home: Count how many colours of fruit and veg your family eats today.
+skill: nutrition
+
+@lesson 6.2 | Everyday and sometimes foods | 🍎 | kitchen
+hook: Is a lolly as good for you as an apple?
+learn: Everyday foods help you grow strong: fruit, veg, bread, rice, milk, eggs, fish and meat.
+learn: Sometimes foods are treats: lollies, chips, cake and fizzy drinks.
+learn: Treats are fine sometimes, but everyday foods should fill most of your plate.
+play: sort | Everyday food, Sometimes food | Apple=Everyday food; Lollies=Sometimes food; Wholemeal bread=Everyday food; Chips=Sometimes food; Yoghurt=Everyday food; Chocolate cake=Sometimes food; Carrot sticks=Everyday food; Fizzy drink=Sometimes food | Everyday or sometimes?
+check: mcq | Which is an everyday food? | Carrot sticks* | Lollies | Fizzy drink
+check: tf | It's fine to have treats sometimes. | true
+home: Help plan tomorrow's lunch with mostly everyday foods.
+skill: nutrition
+
+@lesson 6.3 | Water is best | 💧 | kitchen
+hook: You're thirsty after playing outside. What's the best drink?
+learn: Water is the best drink for your body. It has no sugar.
+learn: A can of fizzy drink can have about 9 teaspoons of sugar in it!
+learn: Milk is great too. Keep fizzy drinks and juice for treats.
+play: slider | About how many teaspoons of sugar are in one can of fizzy drink? | 0 | 20 | 9 | teaspoons | 2 | 1
+check: mcq | What's the best drink when you're thirsty? | Water* | Fizzy drink | Cordial
+check: tf | Water has no sugar in it. | true
+home: Fill a water bottle and take it to school or play every day this week.
+skill: nutrition
+
+@lesson 6.4 | A super lunchbox | 🍱 | kitchen
+hook: What goes in a lunchbox that keeps you going all afternoon?
+learn: A good lunchbox has a main food, like a sandwich or a wrap.
+learn: Add fruit, some veg, a dairy food like cheese or yoghurt, and a water bottle.
+learn: Keep it cool with an ice pack, so the food stays safe.
+play: build | Pack a super lunchbox | A wholemeal sandwich; An apple; Carrot and cucumber sticks; A cheese stick; A water bottle; An ice pack to keep it cool
+check: mcq | What keeps lunchbox food cool and safe? | An ice pack* | A sock | Sunshine
+check: tf | Water is a great drink to pack in your lunchbox. | true
+home: Pack your own lunchbox with a grown-up tomorrow.
+skill: nutrition
+
+@lesson 6.5 | Breakfast fuel | 🥣 | kitchen
+hook: Your tummy rumbles at 10 o'clock. Did you have breakfast?
+learn: Breakfast gives your body and brain fuel for the morning.
+learn: Good breakfasts include porridge, wholegrain cereal, toast, fruit, eggs or yoghurt.
+learn: Even a quick breakfast, like toast and a banana, is better than none.
+play: path | You're running late for school. | Grab toast and a banana to eat on the way => good: Quick fuel! Your brain is ready for maths. | Skip breakfast completely => bad: You'll probably be hungry and tired by morning tea. | Eat a bag of lollies => bad: You'll get a quick buzz, then feel tired soon after.
+check: mcq | Why is breakfast important? | It gives you fuel for the morning* | It makes you sleepy | It isn't
+check: tf | A quick breakfast is better than no breakfast. | true
+home: Help make breakfast for your family one morning this week.
+skill: nutrition
+
+@lesson 6.6 | Listen to your tummy | 🍽️ | kitchen
+hook: How do you know when you've had enough to eat?
+learn: Your tummy tells you when you're hungry and when you're full.
+learn: Eating slowly gives your tummy time to send an "I'm full" message to your brain.
+learn: Stop when you feel comfortably full, not stuffed.
+play: timing | Eat slowly, and tap when your tummy feels comfortably full | I'm full | Comfortably full
+check: mcq | Why eat slowly? | So your tummy can tell your brain when you're full* | So your food goes cold | To win a race
+check: tf | It's good to stop eating when you feel comfortably full. | true
+home: At dinner tonight, put your fork down between bites and notice when you feel full.
+skill: nutrition
+
+@lesson 7.1 | Smoke alarm beeps | 🚨 | home
+hook: BEEP! BEEP! BEEP! The smoke alarm is going off. What do you do?
+learn: A loud, beeping smoke alarm means get out, fast.
+learn: Don't stop for toys and don't hide. Go to your family's meeting place outside.
+learn: A single "chirp" every minute means the battery is low. Tell a grown-up.
+play: path | You're in your room and the smoke alarm starts beeping loudly. | Get out fast and go to the meeting place => good: That's exactly right. Get out and stay out. | Hide under your bed => bad: Firefighters might not find you. Always get out. | Go and find your favourite toy first => bad: Toys can be replaced. You can't. Get out straight away.
+check: mcq | A smoke alarm chirps once a minute. What does it mean? | The battery is low* | There's a party | Nothing
+check: tf | If the smoke alarm beeps loudly, you should hide. | false | Get out fast and go to your meeting place.
+home: Find the smoke alarms in your home with a grown-up. Where is your meeting place?
+skill: safety
+
+@lesson 7.2 | Power points | 🔌 | home
+hook: What's inside a power point that makes it dangerous?
+learn: Power points carry electricity, which can badly hurt you.
+learn: Never poke anything into a power point, and never touch plugs with wet hands.
+learn: Pull out plugs by holding the plug, not the cord. If a cord looks broken, tell a grown-up.
+play: tap | Tap the safe things to do with electricity | 🙌:yes:Drying your hands before touching a plug; 🔌:yes:Pulling the plug, not the cord; 🗣️:yes:Telling a grown-up about a broken cord; 🍴:no; 💧:no; ✂️:no
+check: mcq | Your hands are wet. Can you touch a plug? | No, dry them first* | Yes | Only quickly
+check: tf | You should never poke things into a power point. | true
+home: Walk around your home with a grown-up and find the power points. Are any cords damaged?
+skill: safety
+
+@lesson 7.3 | Grown-up tools | 🔥 | home
+hook: You find a lighter on the bench. Is it a toy?
+learn: Matches and lighters are tools for grown-ups, not toys.
+learn: If you find them, don't touch them. Tell a grown-up straight away.
+learn: Sharp knives and cleaning sprays are grown-up things too.
+play: sort | Grown-up tool, Kid-safe | A lighter=Grown-up tool; Crayons=Kid-safe; Matches=Grown-up tool; A teddy=Kid-safe; A sharp knife=Grown-up tool; A ball=Kid-safe | Grown-up tool or kid-safe?
+check: mcq | You find matches on the floor. What do you do? | Tell a grown-up and don't touch them* | Strike one | Hide them in your room
+check: tf | Lighters are toys. | false | They're grown-up tools that can start fires.
+home: Ask a grown-up where matches and lighters are kept safely in your home.
+skill: safety
+
+@lesson 7.4 | A knock at the door | 🚪 | home
+hook: Knock knock! Someone's at the door, and your grown-up is in the garden. What do you do?
+learn: Don't open the door to someone you don't know.
+learn: Go and get your grown-up first.
+learn: Never tell a stranger you're on your own.
+play: path | Someone knocks. You don't know them. Your grown-up is in the garden. | Leave the door shut and go and get your grown-up => good: Perfect. Your grown-up can decide what to do. | Open the door to see who it is => bad: Never open the door to a stranger without a grown-up. | Shout "I'm home by myself!" => bad: Never tell a stranger you're alone.
+check: mcq | A stranger knocks. What should you do? | Get a grown-up* | Open the door | Let them in
+check: tf | You should tell strangers when you're on your own. | false | Keep that private.
+home: Make a family rule about answering the door.
+skill: safety
+
+@lesson 7.5 | Calling for help | ☎️ | home
+hook: Someone at home is badly hurt. Could you call for help?
+learn: In an emergency, call {nz:111~au:000}. It's free, even on a phone with no credit.
+learn: Say which service you need, then your name, your address, and what happened.
+learn: Stay on the phone and answer their questions. They'll tell you what to do.
+play: build | What to say when you call {nz:111~au:000} | Ambulance, please; My name is Ava; I live at 12 Hill Street; My nana fell down and won't wake up; I'll stay on the line
+check: mcq | What should you say first? | Which service you need* | A joke | Nothing
+check: tf | You should stay on the phone until they say you can hang up. | true
+home: Learn your home address off by heart and practise saying it.
+skill: emergency
+
+@lesson 7.6 | Not lollies! | 💊 | home
+hook: Some medicines look like lollies. How can you tell the difference?
+learn: Medicines, vitamins and cleaning products can look like lollies or drinks. They can make you very sick.
+learn: Only take medicine from a grown-up who looks after you.
+learn: If someone swallows something they shouldn't, tell a grown-up fast. They can call {nz:the National Poisons Centre on 0800 764 766~au:the Poisons Information Centre on 13 11 26}.
+play: sort | Food, Not food | An apple=Food; Coloured tablets in a bottle=Not food; A cracker=Food; Dishwasher tablets=Not food; A sandwich=Food; Blue cleaning spray=Not food | Is it food?
+check: mcq | You find colourful tablets that look like lollies. What do you do? | Don't eat them and tell a grown-up* | Eat one | Share them
+check: tf | Only take medicine from a grown-up who looks after you. | true
+home: With a grown-up, check that medicines and cleaners are kept up high or locked away.
+skill: safety
+
+@lesson 8.1 | Caring for books | 📚 | home
+hook: You're reading a library book. How do you keep it nice for the next kid?
+learn: Use a bookmark instead of folding down the corner of the page.
+learn: Read with clean, dry hands, and keep food and drinks away.
+learn: Turn pages gently, from the corner.
+play: tap | Tap the good ways to care for books | 🔖:yes:Using a bookmark; 🧼:yes:Reading with clean hands; 🤲:yes:Turning pages gently; 🥤:no; ✂️:no; 🐶:no
+check: mcq | What should you use to keep your place? | A bookmark* | A folded corner | A sticky lolly
+check: tf | Keeping food away from books helps keep them nice. | true
+home: Make your own bookmark with a grown-up.
+skill: care
+
+@lesson 8.2 | Toys in their place | 🧩 | home
+hook: Your puzzle had 100 pieces. Now it has 96. Where did they go?
+learn: Pack toys away when you finish, so pieces don't get lost.
+learn: Keep sets together in a box or bag, like puzzles, blocks and games.
+learn: Toys left on the floor can get trodden on and broken.
+play: path | You finish a puzzle, and dinner is ready. | Quickly pack the pieces into the box first => good: All 100 pieces are safe for next time. | Leave it all over the floor => bad: Pieces get lost, and someone might tread on them. | Throw it all in the toy box with everything else => ok: It's off the floor, but the pieces get mixed up with other toys.
+check: mcq | Why pack toys away after playing? | So pieces don't get lost or broken* | So they can sleep | Because toys like the dark
+check: tf | Keeping sets together in a box helps stop pieces getting lost. | true
+home: Find a toy with lots of pieces. Put them all together in one box or bag.
+skill: care
+
+@lesson 8.3 | Small fixes | 🩹 | home
+hook: Your book has a ripped page. Your teddy has a hole. Do you throw them away?
+learn: Lots of things can be fixed instead of thrown away.
+learn: A ripped page can be fixed with clear tape. A loose button can be sewn back on with a grown-up.
+learn: Fixing things saves money and stops waste.
+play: match | Match each problem to its fix | A ripped book page=Clear sticky tape; A loose button=Sew it back on with a grown-up; A flat bike tyre=Pump it up; A teddy with a small hole=Stitch it up with a grown-up
+check: mcq | A page in your book rips. What can you do? | Fix it with clear tape* | Throw the book away | Rip out more pages
+check: tf | Fixing things can save money. | true
+home: Find something at home that needs a small fix, and fix it with a grown-up.
+skill: care
+
+@lesson 8.4 | Inside or outside? | ☔ | garden
+hook: You leave your bike out in the rain all week. What happens?
+learn: Rain can make metal things rusty, like bikes and scooters.
+learn: Sun can fade and crack plastic toys.
+learn: Bring things inside, or put them under cover, when you've finished playing.
+play: sort | Bring it inside, OK outside | Your bike=Bring it inside; A paper book=Bring it inside; The garden hose=OK outside; A teddy=Bring it inside; Flower pots=OK outside; Your scooter=Bring it inside | Bring it inside, or OK outside?
+check: mcq | What can rain do to a bike? | Make it rusty* | Make it faster | Paint it
+check: tf | Sun can fade plastic toys. | true
+home: Do a quick check of the yard with a grown-up. Is anything left out that should come in?
+skill: care
+
+@lesson 8.5 | Pass it on | 🎁 | home
+hook: Your old shoes are too small, but they're still good. What could you do?
+learn: When you grow out of clothes, shoes or toys, they can go to someone else.
+learn: You could pass them on to a cousin, a friend or an op shop.
+learn: Things in good condition are easy to pass on. That's another reason to look after them.
+play: path | Your jacket is too small, but it's still in great condition. | Wash it and give it to your cousin or an op shop => good: Someone else gets a great jacket, and nothing is wasted. | Throw it in the rubbish => bad: A good jacket ends up wasted. | Stuff it at the back of the wardrobe forever => ok: It's not wasted yet, but nobody's using it.
+check: mcq | What's a good thing to do with clothes you've grown out of? | Pass them on to someone* | Throw them away | Cut them up for no reason
+check: tf | Looking after things makes them easier to pass on. | true
+home: Sort through your clothes with a grown-up. Is there anything to pass on?
+skill: care
+
+@lesson 8.6 | Borrowing and lending | 🤝 | home
+hook: Your friend lends you their favourite book. How do you look after it?
+learn: Look after borrowed things even more carefully than your own.
+learn: Give them back on time, in the same condition.
+learn: If something breaks, tell the owner straight away and say sorry.
+play: chat | You accidentally ripped the cover of the book your friend lent you | them: Have you finished my book? | me: Yes, thank you! I'm really sorry, I ripped the cover by accident. I taped it, and I'll ask Mum about getting you a new one.*/What book?/It was already like that | them: Oh no! But thanks for telling me. | me: I'll be extra careful next time.*/Whatever/It's only a book
+check: mcq | You break something you borrowed. What should you do? | Tell the owner and say sorry* | Hide it | Pretend it was already broken
+check: tf | Borrowed things should be given back on time. | true
+home: Think of something you've borrowed. Is it time to give it back?
+skill: honesty
+

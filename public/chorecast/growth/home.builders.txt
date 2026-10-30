@@ -285,3 +285,269 @@ check: mcq | What's the point of a daily reset? | Stopping big messes building u
 home: Try a 10-minute reset in your room tonight.
 skill: tidying
 
+@lesson 5.1 | Check before you list | 🔍 | kitchen
+hook: You buy pasta, then find three packets already in the pantry. Oops! How do you stop that?
+learn: Before you write a list, check the fridge, the freezer and the pantry.
+learn: Look for things that are running low, like milk, bread or rice.
+learn: Use up what you've got first. That saves money and stops waste.
+play: sort | Add to list, Already have | Only one egg left=Add to list; Three packets of pasta in the pantry=Already have; The milk bottle is nearly empty=Add to list; A full bag of frozen peas=Already have; No bread left=Add to list; Two tins of tomatoes=Already have | Add it to the list, or already have it?
+check: mcq | Where should you check before making a list? | The fridge, freezer and pantry* | Only the letterbox | Nowhere
+check: tf | Checking first can save money. | true
+home: Check the fridge and pantry with a grown-up and write down three things running low.
+skill: shopping
+
+@lesson 5.2 | Meals first, then the list | 🗓️ | kitchen
+hook: How do you know what to buy for a whole week?
+learn: Start by planning the meals: what you'll eat each night.
+learn: Then write down the ingredients each meal needs.
+learn: Cross off anything you already have. What's left is your shopping list.
+play: order | Make a weekly shopping list | Plan dinners for each night; Write the ingredients each meal needs; Check what's already at home; Cross off what you have; Add breakfasts, lunches and snacks; Take the list to the shop
+check: mcq | What comes first? | Planning the meals* | Going to the shop | Buying snacks
+check: tf | Planning meals first helps you buy only what you need. | true
+home: Plan three dinners with your family and write down the ingredients you need.
+skill: mealplan
+
+@lesson 5.3 | List by aisle | 🛒 | stall
+hook: You zigzag around the supermarket four times. Is there a faster way?
+learn: Group your list by where things are in the shop.
+learn: Fruit and veg together, dairy together, pantry food together.
+learn: Then you walk through once and don't forget anything.
+play: sort | Fruit and veg, Dairy and eggs, Pantry | Bananas=Fruit and veg; Milk=Dairy and eggs; Rice=Pantry; Carrots=Fruit and veg; Cheese=Dairy and eggs; Tinned tomatoes=Pantry; Yoghurt=Dairy and eggs; Pasta=Pantry | Which part of the list?
+check: mcq | Why group your list by aisle? | You only walk through the shop once* | It looks fancy | The shop makes you
+check: tf | Yoghurt goes in the dairy part of the list. | true
+home: Rewrite your family's next shopping list in groups, aisle by aisle.
+skill: shopping
+
+@lesson 5.4 | The price per kilo | 🏷️ | stall
+hook: A small bag of rice or a big one. Which is cheaper per kilo?
+learn: The unit price shows the cost per kilo, per litre or per 100 grams.
+learn: Look for it in the small print on the shelf label.
+learn: Bigger packs are often cheaper per kilo, but only if you'll use it all before it goes off.
+try: A 2 kg bag for $6 is $3 per kilo :: gap | A 5 kg bag for $10 is $_ per kilo | 2
+play: price | Which rice costs less per kilo? | Small bag:4:1:kg; Big bag:10:5:kg; Medium bag:7:2:kg
+check: mcq | When is a big pack not a good buy? | When you can't use it before it goes off* | When it's cheaper per kilo | Never
+check: tf | The unit price is on the shelf label. | true
+home: At the supermarket, find the unit price on two shelf labels with a grown-up.
+skill: shopping
+
+@lesson 5.5 | Sticking to the list | 💪 | stall
+hook: There's a giant chocolate display by the door. It's not on your list. What do you do?
+learn: Shops are designed to tempt you with things you didn't plan to buy.
+learn: Your list is your plan. If it's not on the list, it can wait.
+learn: Shopping when you're not hungry helps too!
+play: path | You're shopping with $40 and a list. You spot chips on a 3-for-2 deal. They're not on the list. | Stick to the list and maybe add chips next week => good: You got everything you needed and stayed on budget. | Grab three bags because it's a deal => bad: A deal on something you didn't need still costs money, and now you might run short for milk. | Ask your grown-up if there's room in the budget => ok: That's fair. Check the budget first.
+check: mcq | Why shop when you're not hungry? | You're less tempted by snacks* | Food is cheaper | The shop is quieter
+check: tf | A deal on something you don't need still costs you money. | true
+home: Next time you shop, see if your family can buy only what's on the list.
+skill: shopping
+
+@lesson 5.6 | A clear list | 📝 | kitchen
+hook: The list says "meat". You come home with steak. Mum wanted mince. Oops!
+learn: A good list says how much: 2 litres of milk, not just milk.
+learn: It says which kind: mince, not just meat.
+learn: Noting the meal helps too: "mince for Tuesday's spaghetti".
+play: diff | Two shopping lists. Tap what the clearer one changes. | Milk; Bread; Meat; Apples; Snacks | 2 litres of milk; 1 wholemeal loaf; 500 g mince for Tuesday's spaghetti; 6 apples; Crackers for school lunches
+check: mcq | Which list item is clearest? | 500 g mince for spaghetti* | Meat | Stuff for dinner
+check: tf | Writing how much you need makes a list clearer. | true
+home: Write the next shopping list with amounts and kinds. Did the shop go better?
+skill: shopping
+
+@lesson 6.1 | Crossing the road | 🚸 | home
+hook: You're about to cross the road. Which way do you look first?
+learn: Stop at the kerb. Look right, look left, then look right again.
+learn: In {nz:New Zealand~au:Australia}, cars drive on the left, so the nearest traffic comes from your right.
+learn: Listen too, and keep looking as you cross. Use a crossing or the lights when you can.
+play: order | Cross the road safely | Stop at the kerb; Look right; Look left; Look right again; Listen for traffic; Walk straight across, still looking
+check: mcq | Which way do you look first in {nz:New Zealand~au:Australia}? | Right* | Left | Up
+check: tf | You should keep looking as you cross. | true
+home: Practise "right, left, right again" every time you cross with a grown-up this week.
+skill: safety
+
+@lesson 6.2 | Reading a timetable | 🕒 | townhall
+hook: The bus leaves at 3:42. It's 3:30. Do you have time to buy a snack?
+learn: A timetable shows when a bus or train reaches each stop.
+learn: Find your stop, then read across to the time.
+learn: Get to the stop a few minutes early. Buses don't wait!
+play: gap | The bus leaves school at 3:42 and takes 25 minutes to reach your stop. You get there at _ | 4:07 | 4:07; 3:67; 4:17
+check: mcq | The bus leaves at 3:42. When should you be at the stop? | A few minutes before 3:42* | At 3:45 | At 4 o'clock
+check: gap | The bus comes at 3:42. It's 3:30 now. You have _ minutes | 12
+home: Look up a bus or train timetable with a grown-up and find the next one from your nearest stop.
+skill: transport
+
+@lesson 6.3 | On the bus | 🚌 | townhall
+hook: You're getting on a bus by yourself for the first time. What should you know?
+learn: Wait back from the kerb until the bus stops. Tag on with your card, or pay the driver.
+learn: Sit down or hold on tight. Keep your bag off the seat and your voice low.
+learn: Offer your seat to someone who needs it more, like an older person or someone with a pram.
+play: tap | Tap the good bus habits | 🧍:yes:Waiting back from the kerb; 💳:yes:Tagging on with your card; 🤚:yes:Holding on while it moves; 👵:yes:Offering your seat to someone who needs it; 🎒:no; 📢:no
+check: mcq | When should you step towards the bus? | When it has stopped* | While it's still moving | Never
+check: tf | Offering your seat to an older person is good bus manners. | true
+home: Ride a bus with a grown-up and practise tagging on and off.
+skill: transport
+
+@lesson 6.4 | Bike check | 🚲 | garden
+hook: Before you ride, how do you know your bike is safe?
+learn: Do a quick check before every ride.
+learn: Squeeze the tyres to check they're firm. Squeeze the brakes to check they stop the wheels.
+learn: Check the chain isn't loose or rusty, and that your helmet is clipped and fits snugly.
+play: match | Match each check to how you do it | Tyres=Squeeze them to check they're firm; Brakes=Squeeze them and push the bike to see if the wheels stop; Chain=Check it's not loose, dry or rusty; Helmet=Clip it and check it's snug, not wobbly
+check: mcq | How do you check your brakes? | Squeeze them and push the bike* | Ring the bell | Look at the seat
+check: tf | A helmet should be clipped and fit snugly. | true
+home: Do a bike check with a grown-up before your next ride.
+skill: safety
+
+@lesson 6.5 | Sharing the path | 🛴 | garden
+hook: You're scooting on a shared path. People are walking ahead. What do you do?
+learn: Keep left, and slow down near people walking.
+learn: Ring your bell or call "Passing on your right!" before you go by.
+learn: Give lots of space to little kids, dogs and older people.
+play: path | You're riding on a shared path and an older man is walking slowly ahead. | Slow down, ring your bell and pass wide on his right => good: He knows you're coming, and there's plenty of space. | Zoom past without a sound => bad: You could startle him, and he might step into your way. | Yell "Get out of the way!" => bad: That's rude and scary. A bell or a friendly call works better.
+check: mcq | What should you do before passing someone on a shared path? | Ring your bell or call out* | Speed up | Close your eyes
+check: tf | On a shared path, you should keep left. | true
+home: Next time you ride on a shared path, practise ringing your bell before you pass.
+skill: safety
+
+@lesson 6.6 | Missed the bus | 📱 | townhall
+hook: You get to the stop just as the bus pulls away. What now?
+learn: Stay calm. Missing a bus happens to everyone.
+learn: Tell your grown-up straight away, and say where you are.
+learn: Wait somewhere safe and public, like the stop or the school office, for the next bus or a lift.
+play: chat | You've just missed the bus home | them: Hi love, are you on the bus? | me: I just missed it. I'm at the stop outside school. The next one is in 20 minutes.*/Nah/I'll just walk home a different way | them: OK, thanks for telling me. Can you wait there for the next one? | me: Yes, I'll wait here and text you when I'm on.*/I'll go to the park instead/Whatever
+check: mcq | You miss the bus. What should you do first? | Tell your grown-up where you are* | Walk off a new way | Hide
+check: tf | Waiting somewhere safe and public is a good plan. | true
+home: Make a "missed the bus" plan with your family.
+skill: safety
+
+@lesson 7.1 | Power board overload | 🔌 | home
+hook: One power point, a double adaptor and five things plugged in. What could go wrong?
+learn: Plugging too much into one power point can overheat it and start a fire.
+learn: Don't plug double adaptors into double adaptors, or power boards into power boards.
+learn: Heaters and other hot appliances should go straight into the wall.
+play: tap | Tap the electrical dangers | 🔥:yes:A power board that feels hot; 🔌:yes:Double adaptors plugged into each other; 🧵:yes:A frayed cord; 💡:no; 📚:no; ♨️:yes:A heater plugged into a power board
+check: mcq | Where should a heater be plugged in? | Straight into the wall* | Into a power board | Into a double adaptor
+check: tf | A hot power board is a warning sign. | true
+home: Check the power boards at home with a grown-up. Is anything overloaded?
+skill: safety
+
+@lesson 7.2 | The one-metre rule | ♨️ | home
+hook: You hang your wet towel over the heater to dry it. Good idea?
+learn: Keep anything that can burn at least one metre from heaters and fires.
+learn: That includes curtains, clothes, towels, bedding and furniture.
+learn: Turn heaters off when you leave the room or go to bed.
+play: slider | How far should clothes and curtains be kept from a heater? | 0 | 300 | 100 | cm | 0 | 10
+check: mcq | What should you do with a heater at bedtime? | Turn it off* | Put your clothes on it | Turn it up
+check: tf | Drying a towel over a heater is safe. | false | It can catch fire. Keep things a metre away.
+home: Measure one metre from your heater with a tape measure. Is anything too close?
+skill: safety
+
+@lesson 7.3 | Your escape plan | 🗺️ | home
+hook: If there's a fire at night, do you know two ways out of your bedroom?
+learn: Every room should have two ways out, like a door and a window.
+learn: Pick a meeting place outside, like the letterbox.
+learn: Practise your plan with your family, including at night.
+play: build | Make a home fire escape plan | Draw a map of your home; Mark two ways out of every room; Choose a meeting place outside; Check every smoke alarm works; Practise the plan with everyone
+check: mcq | How many ways out should each room have? | Two* | None | Ten
+check: tf | Practising your escape plan helps everyone get out faster. | true
+home: Draw your family's escape plan together, and practise it this week.
+skill: safety
+
+@lesson 7.4 | A pan on fire | 🍳 | kitchen
+hook: Oil in a frying pan bursts into flames. Should you throw water on it?
+learn: Never put water on a fat or oil fire. It makes the fire explode outwards.
+learn: If it's safe, turn off the stove and slide a lid or a fire blanket over the pan.
+learn: If the fire is spreading, get everyone out and call {nz:111~au:000}.
+play: path | A pan of oil catches fire while a grown-up is cooking. | Help them turn off the stove and slide a lid over the pan => good: No air means the fire goes out. | Throw a cup of water on it => bad: Water makes an oil fire explode outwards. Never do this. | Carry the burning pan outside => bad: You could spill burning oil on yourself or the floor.
+check: mcq | What should never go on an oil fire? | Water* | A lid | A fire blanket
+check: tf | Covering a burning pan with a lid can put the fire out. | true
+home: Find out with a grown-up whether your home has a fire blanket, and where the pan lids are.
+skill: safety
+
+@lesson 7.5 | When nature strikes | 🌋 | home
+hook: {nz:The ground starts shaking. What do you do?~au:A bushfire warning comes on the radio. What does your family do?}
+learn: {nz:New Zealand has lots of earthquakes. The rule is Drop, Cover and Hold.~au:Australia has bushfires, floods and storms. Every family should have a plan for each.}
+learn: {nz:Drop to the ground, take cover under a strong table, and hold on until the shaking stops.~au:Know the fire danger rating, follow your bushfire plan, and leave early if you're told to. Never drive or walk through floodwater.}
+learn: {nz:Near the coast, if a quake is long or strong, go to high ground straight away in case of a tsunami.~au:Keep a radio, a torch and spare batteries handy for updates if the power goes out.}
+play: order | {nz:What to do in an earthquake~au:What to do when there's a bushfire warning} | {nz:Drop to the ground~au:Check the fire danger rating}; {nz:Take cover under a strong table~au:Follow your family's bushfire plan}; {nz:Hold on until the shaking stops~au:Pack your emergency kit in the car}; {nz:Check for injuries and hazards~au:Leave early, before the fire is close}; {nz:Listen to the radio for updates~au:Go somewhere safer and listen for updates}
+check: mcq | {nz:What's the earthquake rule?~au:What should you never do in a flood?} | {nz:Drop, Cover and Hold~au:Drive through floodwater}* | {nz:Run outside~au:Listen to the radio} | {nz:Stand in a doorway~au:Go to higher ground}
+check: tf | {nz:If a strong quake hits near the coast, you should go to high ground.~au:Leaving early is the safest choice in a bushfire.} | true
+home: {nz:Practise Drop, Cover and Hold with your family.~au:Make or check your family's bushfire and flood plan.}
+skill: emergency
+
+@lesson 7.6 | Gas and fumes | 💨 | home
+hook: You smell rotten eggs in the kitchen. What's going on?
+learn: Gas for cooking and heating has no smell, so a rotten-egg smell is added to help you notice a leak.
+learn: If you smell gas, don't switch anything on or off. Open the doors and get outside.
+learn: Never use an outdoor barbecue or outdoor gas heater inside. It can make carbon monoxide, an invisible gas that can kill.
+play: tap | Tap the safe things to do if you smell gas | 🚪:yes:Open doors and windows; 🏃:yes:Get everyone outside; 📞:yes:Call for help from outside; 💡:no; 🕯️:no; 🔥:no
+check: mcq | Why is a rotten-egg smell added to gas? | So you notice a leak* | To make food taste nice | To scare off bugs
+check: tf | It's safe to use an outdoor barbecue inside on a rainy day. | false | It can make carbon monoxide, which can kill.
+home: Ask a grown-up whether your home uses gas, and where it's turned off.
+skill: safety
+
+@lesson 8.1 | What plants need | 🌱 | garden
+hook: You plant a seed and wait. And wait. What does it need to grow?
+learn: Plants need sunlight, water, air and good soil.
+learn: Most vegetables need at least six hours of sun a day.
+learn: Too much water can drown roots, so keep the soil damp, not soggy.
+play: tap | Tap what plants need to grow | ☀️:yes:Sunlight; 💧:yes:Water; 🌬️:yes:Fresh air; 🪱:yes:Healthy soil; 🍫:no; 📺:no
+check: mcq | How should the soil feel for most plants? | Damp, not soggy* | Bone dry | Underwater
+check: tf | Most vegetables need lots of sun. | true
+home: Find the sunniest spot in your garden, or on a windowsill.
+skill: gardening
+
+@lesson 8.2 | Planting by season | 🍂 | garden
+hook: Can you plant tomatoes in winter?
+learn: Different plants like different seasons.
+learn: In most of {nz:New Zealand~au:southern Australia}, plant tomatoes, beans and pumpkins in spring, after the frosts.
+learn: Plant broad beans, broccoli and cabbage in autumn. They like cooler weather.
+play: sort | Plant in spring, Plant in autumn | Tomatoes=Plant in spring; Broad beans=Plant in autumn; Pumpkins=Plant in spring; Broccoli=Plant in autumn; Beans=Plant in spring; Cabbage=Plant in autumn | When would you plant it?
+check: mcq | When should you plant tomatoes in most places? | In spring, after the frosts* | In the middle of winter | Never
+check: tf | Broccoli likes cooler weather. | true
+home: Read a seed packet with a grown-up. When does it say to plant?
+skill: gardening
+
+@lesson 8.3 | Water wisely | 🚿 | garden
+hook: A little sprinkle every day, or a big drink twice a week. Which grows stronger plants?
+learn: A deep watering less often helps roots grow down deep, where the soil stays damp.
+learn: Water early in the morning, so less water evaporates in the sun.
+learn: Cover the soil with mulch, like straw or bark, to keep the water in.
+play: path | It's a hot week, and your veggies are wilting in the afternoon. | Water deeply early in the morning, and add mulch => good: The roots get a big drink, and the mulch keeps it in. | Sprinkle a little at midday => bad: Much of it evaporates before it reaches the roots. | Water them five times a day => bad: Too much water can drown the roots.
+check: mcq | What does mulch do? | Keeps water in the soil* | Scares away the sun | Makes plants purple
+check: tf | Watering in the early morning wastes less water. | true
+home: Help water the garden or pot plants early one morning.
+skill: gardening
+
+@lesson 8.4 | Compost | 🪱 | garden
+hook: Banana peels and dead leaves. Rubbish, or food for the garden?
+learn: Compost turns food scraps and garden waste into rich soil.
+learn: Mix "greens", like fruit and veg scraps and grass clippings, with "browns", like dry leaves and cardboard.
+learn: Keep out meat, dairy and oily food. They smell and attract pests.
+play: sort | Into the compost, Keep it out | Banana peel=Into the compost; Chicken bones=Keep it out; Dry leaves=Into the compost; Cheese=Keep it out; Apple core=Into the compost; Plastic wrap=Keep it out; Torn-up cardboard=Into the compost | Compost it, or keep it out?
+check: mcq | What goes in the compost? | Fruit and veg scraps* | Meat | Plastic
+check: tf | Compost turns scraps into rich soil. | true
+home: Start a scrap bucket for compost, or find out what your council does with food scraps.
+skill: gardening
+
+@lesson 8.5 | Seeds or seedlings? | 🏷️ | stall
+hook: A packet of lettuce seeds, or a punnet of baby lettuce plants. Which is cheaper per plant?
+learn: Seeds are very cheap per plant, but they take longer, and some won't sprout.
+learn: Seedlings cost more, but they're already growing and ready to eat sooner.
+learn: Work out the cost per plant to compare.
+try: $6 for 6 seedlings is $1 each :: gap | $5 for 10 seedlings is _c each | 50
+play: price | Which costs less per lettuce plant? | Packet of seeds:4:100:plants; Punnet of seedlings:5:6:plants
+check: mcq | What's a downside of seeds? | They take longer, and some won't sprout* | They cost more per plant | They grow too fast
+check: tf | Seeds usually cost less per plant than seedlings. | true
+home: Compare a seed packet and a punnet of seedlings at a garden shop with a grown-up.
+skill: shopping
+
+@lesson 8.6 | From garden to plate | 🥗 | kitchen
+hook: Your lettuces are ready! How much money did your garden save?
+learn: Pick vegetables when they're ready, and wash them well.
+learn: Home-grown food is fresh, and you know exactly where it came from.
+learn: Even a few pots of herbs and lettuce can save money over a year.
+play: slider | A $5 punnet of 6 lettuce seedlings grows 6 lettuces. A lettuce costs $3 at the shop. How much did you save? | 0 | 30 | 13 | $ | 0 | 1
+check: mcq | What should you do before eating garden veg? | Wash it well* | Nothing | Paint it
+check: tf | Even a few pots can save money. | true
+home: Pick something from the garden, or buy a pot of herbs, and use it in a meal.
+skill: gardening
+

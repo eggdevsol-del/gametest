@@ -286,3 +286,271 @@ check: tf | A weekly review can take just five minutes. | true
 home: Do a five-minute weekly review this Sunday.
 skill: planning
 
+@lesson 5.1 | A starter toolkit | 🧰 | workshop
+hook: A cupboard door is hanging off. Have you got the right tools?
+learn: A basic toolkit fixes lots of small jobs: screwdrivers, a hammer, pliers, a tape measure and a torch.
+learn: An adjustable spanner and a set of Allen keys help with taps and flat-pack furniture.
+learn: Keep it all in one box, and put tools back so you can find them next time.
+play: tap | Tap the tools for a starter toolkit | 🪛:yes:Screwdrivers for loose screws and handles; 🔨:yes:A hammer for nails and picture hooks; 📏:yes:A tape measure before you buy or hang anything; 🔦:yes:A torch for dark cupboards and power cuts; 🎸:no; 🧁:no; 🔧:yes:A spanner for nuts and bolts
+check: mcq | A cupboard handle is loose. Which tool? | A screwdriver* | A tape measure | A torch
+check: tf | Putting tools back in one box saves time later. | true
+home: Find your family's tools. Name each one and what it's for.
+skill: maintenance
+
+@lesson 5.2 | Unblocking a sink | 🚰 | kitchen
+hook: The water won't drain. Do you need a plumber?
+learn: Most slow sinks are blocked by grease, food or hair. A plunger often clears them.
+learn: Scoop out any scraps, cover the overflow hole with a damp cloth, then plunge firmly up and down.
+learn: Prevent blockages: scrape plates into the bin, and never pour fat down the drain.
+play: order | Clear a blocked sink | Scoop food scraps out of the plughole; Cover the overflow hole with a damp cloth; Put the plunger over the drain; Plunge firmly up and down several times; Run hot water to check it drains
+check: mcq | What causes many kitchen blockages? | Fat and grease poured down the drain* | Clean water | Too much soap
+check: tf | Covering the overflow hole helps a plunger work. | true
+home: Find out where your family keeps the plunger, and what goes in the bin instead of the sink.
+skill: maintenance
+
+@lesson 5.3 | Damp and mould | 🍄 | home
+hook: Black spots are spreading across your bedroom ceiling. What causes them, and what helps?
+learn: Mould grows where moisture sits: steam from showers and cooking, washing dried inside, even breathing at night.
+learn: Air rooms for a few minutes each day, use extractor fans, and wipe window condensation in the morning.
+learn: Small patches can be cleaned with white vinegar or a mould remover. Big or returning mould needs the landlord or a pro.
+play: path | Your window drips with water every morning, and black spots are appearing. | Wipe the water off each morning, air the room, and use the fan when you shower => good: Less moisture means mould has less chance to grow. | Paint over the spots => bad: The mould grows back under the paint. | Keep every window shut to stay warm and ignore it => bad: Trapped moisture makes mould worse.
+check: mcq | What helps stop mould? | Airing rooms and using extractor fans* | Drying washing on a heater indoors | Keeping windows shut day and night
+check: tf | Drying washing inside adds moisture to the air. | true
+home: Check your home's windows on a cold morning. Wipe off any condensation.
+skill: maintenance
+
+@lesson 5.4 | Know your shut-offs | 🛑 | home
+hook: A pipe bursts and water sprays everywhere. Do you know how to stop it?
+learn: Every home has a main water shut-off, often by the {nz:water meter or toby near the front boundary~au:water meter near the front fence}.
+learn: The switchboard has a main switch that turns off all the power.
+learn: If you smell gas, don't touch any switches. Get everyone out, then call for help from outside.
+play: match | Match the emergency to the first step | A burst pipe spraying water=Turn off the main water tap; Sparks from a power point=Turn off the main switch, if it's safe; A smell of gas=Get everyone outside, then call for help; A toilet about to overflow=Turn off the tap behind the toilet
+check: mcq | You smell gas. What should you avoid? | Flicking light switches* | Opening a door | Going outside
+check: tf | Knowing where your shut-offs are can save a lot of damage. | true
+home: With a grown-up, find your home's main water shut-off and the switchboard.
+skill: emergency
+
+@lesson 5.5 | Spot the dodgy tradie | 🚩 | townhall
+hook: Someone knocks and says your roof needs urgent repairs, cash today. Red flag?
+learn: Good tradespeople give a written quote, show their licence or registration, and give you an invoice.
+learn: Red flags: door-knocking, pressure to decide now, cash only, or wanting full payment before starting.
+learn: Get two or three quotes for bigger jobs. Check reviews and the {nz:public registers for builders, plumbers and electricians~au:state licence register}.
+play: scam | Good sign or red flag? | A written quote listing labour and materials=real; "Cash only, and I need it all today"=scam; A licence number you can check online=real; A door-knocker saying your roof will cave in unless you pay now=scam; A small deposit, then the rest when the job's done=real; "No need for paperwork, trust me"=scam | "Real" means a good sign. "Scam" means a red flag.
+check: mcq | How many quotes should you get for a big job? | Two or three* | None | Just the first one
+check: tf | Pressure to decide on the spot is a red flag. | true
+home: Ask a grown-up how they found a tradie they trust.
+skill: consumer
+
+@lesson 5.6 | Small drips, big bills | 💧 | home
+hook: A tap dripping once a second. Does it really matter?
+learn: A tap dripping once a second can waste around 20 litres a day.
+learn: A leaking toilet can waste even more, without a sound.
+learn: Many drips are fixed with a cheap new washer. Fixing early stops bigger damage and bills.
+try: 20 litres a day for 7 days is 140 litres :: gap | 20 litres a day for 30 days is _ litres | 600
+play: slider | A dripping tap wastes about 20 litres a day. Roughly how many litres is that in a year? | 0 | 15000 | 7300 | litres | 700 | 100
+check: mcq | How can you check a toilet for leaks? | Add a few drops of food colouring to the cistern and see if it reaches the bowl* | Flush it ten times | Listen to the radio
+check: tf | Small leaks are always too small to matter. | false | They can add up to thousands of litres a year.
+home: Check your taps and toilets for leaks with a grown-up, using the food-colouring test.
+skill: saving water
+
+@lesson 6.1 | Power hogs | 🐷 | home
+hook: Which uses more power: a heater or a phone charger?
+learn: Things that make heat use the most power: heaters, clothes dryers, ovens and hot water.
+learn: Things like phone chargers and LED lights use only a little.
+learn: To cut your power bill, start with the things that heat.
+play: sort | Big power user, Small power user | Electric heater=Big power user; Phone charger=Small power user; Clothes dryer=Big power user; LED light bulb=Small power user; {nz:Electric hot water cylinder~au:Electric hot water system}=Big power user; Wi-fi router=Small power user; Oven=Big power user | Big or small power user?
+check: mcq | Which uses the most power? | A clothes dryer* | A phone charger | An LED light
+check: tf | Things that make heat usually use the most power. | true
+home: Find three big power users in your home with a grown-up.
+skill: energy
+
+@lesson 6.2 | What's a kilowatt-hour? | 🔌 | home
+hook: Power bills charge by the "kWh". What on earth is that?
+learn: A kilowatt-hour (kWh) is using 1,000 watts for one hour.
+learn: A 2,000-watt heater on for 1 hour uses 2 kWh. On for 3 hours, it uses 6 kWh.
+learn: Multiply the kWh by your price per kWh to find the cost.
+try: 2 kWh at 30c a kWh is 60c :: gap | 6 kWh at 30c a kWh is _c | 180
+play: slider | A 2,000-watt heater runs 4 hours a night for 30 nights. Power costs 30c per kWh. About how much does that cost? | 0 | 150 | 72 | $ | 5 | 1
+check: mcq | What does kWh stand for? | Kilowatt-hour* | Kilo water heat | Kind of wet hat
+check: tf | Running a heater for longer uses more kWh. | true
+home: Find the wattage on a heater or kettle at home, and work out how many kWh it uses in an hour.
+skill: energy
+
+@lesson 6.3 | The four-minute shower | 🚿 | home
+hook: Showers heat a lot of water. How long is yours?
+learn: Heating water is one of the biggest power costs in many homes.
+learn: A standard shower can use around 10 to 20 litres a minute. A water-saving shower head uses less.
+learn: Cutting a 10-minute shower to 4 minutes saves water and power, every single day.
+play: timing | Tap to turn off the shower when you reach 4 minutes | Turn off | 4 minutes
+check: mcq | What's a cheap way to save hot water? | Shorter showers* | Longer showers | Two showers a day
+check: gap | A shower uses 10 litres a minute. A 4-minute shower uses _ litres | 40
+home: Time your next shower with a timer or a four-minute song.
+skill: energy
+
+@lesson 6.4 | Standby sneaks | 🔋 | home
+hook: The TV's off, but a little red light still glows. Is it still using power?
+learn: Many devices use a little power on standby: TVs, game consoles, microwaves and chargers left plugged in.
+learn: Each one is small, but together they add to your bill all year.
+learn: Switch off at the wall when you're not using things, or use a power board with a switch.
+play: tap | Tap the things that can use standby power | 📺:yes:A TV on standby; 🎮:yes:A game console in rest mode; 🔌:yes:A charger left plugged in; 🖨️:yes:A printer that's always on; 🪑:no; 📚:no
+check: mcq | How do you stop standby power? | Switch off at the wall* | Turn the volume down | Cover the red light
+check: tf | Lots of small standby loads can add up over a year. | true
+home: Do a standby hunt at home. How many little lights can you find?
+skill: energy
+
+@lesson 6.5 | Stars on the label | ⭐ | stall
+hook: Two fridges. One is $200 cheaper. Is it the better buy?
+learn: The Energy Rating Label shows stars. More stars mean the appliance uses less energy.
+learn: It also shows how many kWh it uses a year, so you can compare running costs.
+learn: A cheaper appliance can cost more overall if it guzzles power for 10 years.
+try: $900 to buy plus $120 a year of power for 10 years is $2,100 :: gap | $1,100 to buy plus $70 a year of power for 10 years is $_ | 1800
+play: price | Which fridge costs less per year over 10 years, counting power? | 3-star fridge:2100:10:years; 5-star fridge:1800:10:years
+check: mcq | What do more stars on the Energy Rating Label mean? | It uses less energy* | It costs more to run | It's bigger
+check: tf | The cheapest appliance to buy is always the cheapest overall. | false | Running costs can make it dearer over time.
+home: Find the Energy Rating Label on an appliance at home or in a shop.
+skill: energy
+
+@lesson 6.6 | Saving water | 💦 | garden
+hook: How can your household use less water, and pay less too?
+learn: {nz:In some places, water is charged by the litre. In others, it's part of the council rates.~au:Most homes pay for water by the litre, plus a fixed charge.}
+learn: Run the dishwasher and washing machine only when they're full.
+learn: Water the garden early in the morning or in the evening, when less water evaporates.
+play: sort | Saves water, Wastes water | Running the dishwasher only when it's full=Saves water; Leaving the tap running while brushing teeth=Wastes water; Watering the garden in the early morning=Saves water; Hosing the driveway clean=Wastes water; Fixing a dripping tap=Saves water; Watering in the hot midday sun=Wastes water | Saves or wastes water?
+check: mcq | When is the best time to water the garden? | Early morning or evening* | Midday in the sun | Whenever you remember
+check: tf | Turning off the tap while you brush your teeth saves water. | true
+home: Find out with a grown-up how your household pays for water.
+skill: saving water
+
+@lesson 7.1 | Your own doctor | 🩺 | townhall
+hook: You're sick. Who do you see, and how much does it cost?
+learn: {nz:Enrol with a general practice so you have a regular GP. Visits cost less when you're enrolled.~au:Your Medicare card covers some or all of the cost of a GP visit. From 15, you can get your own Medicare card.}
+learn: {nz:GP visits for children under 14 are free at most practices.~au:If a clinic bulk bills, the visit costs you nothing.}
+learn: Your GP keeps your records, knows your history, and can refer you to specialists.
+play: match | Match each health word to its meaning | GP=Your family doctor; {nz:Enrolling~au:Medicare card}={nz:Signing up with a practice as your regular one~au:The card that covers some or all of your health costs}; Referral=A letter sending you to a specialist; Pharmacy=Where you get medicines
+check: mcq | Why is having a regular GP useful? | They know your history* | They're always free | They do your homework
+check: tf | {nz:GP visits for children under 14 are free at most practices.~au:From 15, you can have your own Medicare card.} | true
+home: Find out with a grown-up who your GP is and how to book an appointment.
+skill: health
+
+@lesson 7.2 | Booking an appointment | 📞 | online
+hook: You need to see the doctor. What do you say when you call?
+learn: Say your name and date of birth, and briefly why you need to come in.
+learn: Ask about the cost, and whether you need to bring anything.
+learn: Many clinics also take bookings online or through an app.
+play: chat | Calling the clinic to book | them: Good morning, Riverside Medical. How can I help? | me: Hi, I'm Jordan Lee, born 4 June 2011. I've had a sore ear for three days. Could I book an appointment?*/Uh, I need the doctor/Can I just come in now? | them: We've got 3:15 tomorrow with Dr Singh. | me: Great, thanks. Is there a cost, and do I need to bring anything?*/Whatever/That's too late
+check: mcq | What should you say when you book? | Your name, date of birth and why you need to come in* | Just "Hi" | Your favourite food
+check: tf | It's OK to ask about the cost when you book. | true
+home: Practise booking a pretend appointment, with a grown-up playing the receptionist.
+skill: health
+
+@lesson 7.3 | Talking to the doctor | 🗒️ | townhall
+hook: You've got 15 minutes with the doctor. How do you make it count?
+learn: Before you go, write down your symptoms, when they started, and what makes them better or worse.
+learn: Be honest, even about embarrassing things. Doctors have heard it all.
+learn: Ask questions until you understand, and repeat back what you need to do.
+play: build | Get ready for a doctor's visit | Write down what's wrong; Note when it started; Note what makes it better or worse; List any medicines you take; Write your questions; Repeat back the doctor's plan
+check: mcq | Why write your symptoms down first? | So you don't forget anything important* | Doctors can't hear | To make it longer
+check: tf | It's OK to ask the doctor to explain again. | true
+home: Next time someone in your family goes to the doctor, help them write a list first.
+skill: health
+
+@lesson 7.4 | Prescriptions | 💊 | stall
+hook: The doctor gives you a prescription. What happens next?
+learn: A prescription lets a pharmacist give you a medicine that needs a doctor's OK.
+learn: {nz:Most adults pay $5 per item. It's free for children under 14.~au:Since 1 January 2026, a PBS medicine costs at most $25, or $7.70 with a concession card.}
+learn: Read the label: how much, how often and for how long. Finish antibiotics unless the doctor tells you otherwise.
+play: order | From prescription to medicine | The doctor writes a prescription; It goes to the pharmacy; The pharmacist checks it and explains the medicine; You pay and collect it; You follow the label exactly
+check: mcq | What should you check on a medicine label? | How much, how often and for how long* | The colour of the box | Nothing
+check: tf | {nz:Prescription items are free for children under 14.~au:Since 2026, a PBS medicine costs general patients no more than $25.} | true
+home: Read the label on a medicine at home with a grown-up. What does it tell you?
+skill: health
+
+@lesson 7.5 | Looking after your teeth | 🦷 | stall
+hook: Your tooth has been aching for a week. Do you wait for it to go away?
+learn: {nz:Basic dental care is free in New Zealand until your 18th birthday.~au:Many children can get dental care paid for through the Child Dental Benefits Schedule, and states run public dental clinics.}
+learn: Small problems are quick and cheap to fix. Left alone, they can get painful and expensive.
+learn: Brush twice a day with fluoride toothpaste, floss, and cut back on sugary drinks.
+play: path | You've had a sore tooth for a week. | Tell a grown-up and book a dental check => good: Small problems are much easier and cheaper to fix early. | Wait and hope it goes away => bad: Tooth problems usually get worse, and pricier, if you wait. | Chew on the other side forever => bad: That hides the problem. It doesn't fix it.
+check: mcq | Why see the dentist early? | Small problems are cheaper and easier to fix* | Dentists get bored | It's never worth it
+check: tf | {nz:Basic dental care in New Zealand is free until you turn 18.~au:Some children can get dental care paid for through the Child Dental Benefits Schedule.} | true
+home: Find out when your last dental check was, and book the next one with a grown-up.
+skill: health
+
+@lesson 7.6 | Help for your mind | 💬 | garden
+hook: Looking after your mind matters as much as your body. Where can you go for help?
+learn: Everyone has ups and downs. If you feel low, anxious or overwhelmed for a while, talk to someone.
+learn: A GP, a school counsellor or a trusted adult is a good place to start.
+learn: {nz:You can call or text 1737 any time, free, to talk to a trained counsellor. Youthline can help too.~au:You can call Kids Helpline on 1800 55 1800 any time, free. headspace centres support young people aged 12 to 25.}
+play: tap | Tap the good places to get support | 🧑‍⚕️:yes:Your GP; 🏫:yes:A school counsellor; 🧡:yes:A trusted adult; 📞:yes:A free helpline; 🙈:no; 🤐:no
+check: mcq | {nz:What number can you call or text to talk to a counsellor?~au:What's the Kids Helpline number?} | {nz:1737~au:1800 55 1800}* | {nz:0000~au:1234 5678} | Nobody can help
+check: tf | Talking to someone is a good step if you've felt low for a while. | true
+home: Save {nz:1737~au:Kids Helpline (1800 55 1800)} in your phone, just in case.
+skill: wellbeing
+
+@lesson 8.1 | How much water? | 💧 | home
+hook: The water's cut off after a big storm. How much should your household have stored?
+learn: Store at least 3 litres of drinking water per person, per day.
+learn: {nz:Civil Defence says to store enough for at least three days, and a week or more if you can.~au:Emergency services say to store enough for at least three days.}
+learn: Use clean containers, label them with the date, and replace the water regularly.
+try: 3 litres a day for 1 person for 3 days is 9 litres :: gap | 3 litres a day for 4 people for 3 days is _ litres | 36
+play: slider | Your household has 5 people. How much drinking water do you need for 7 days, at 3 litres per person per day? | 0 | 150 | 105 | litres | 0 | 5
+check: mcq | How much drinking water per person per day should you store? | At least 3 litres* | Half a cup | 100 litres
+check: tf | Stored water should be labelled and replaced regularly. | true
+home: Work out how much water your household needs for three days, and check what you have.
+skill: emergency
+
+@lesson 8.2 | A household plan | 📋 | home
+hook: An emergency hits while everyone's at school and work. How will you find each other?
+learn: Agree on a meeting place near home, and another further away in case you can't get home.
+learn: Choose a contact outside your area. They're often easier to reach than local numbers.
+learn: Plan for pets, for anyone who needs extra help, and for where your kit is kept.
+play: build | Make a household emergency plan | Choose a meeting place near home; Choose a second place further away; Pick a contact outside your area; Plan for pets and anyone who needs extra help; Write it down and stick it on the fridge
+check: mcq | Why pick a contact outside your area? | Local phone lines may be busy or down* | They're more fun | They live in a castle
+check: tf | Your plan should include pets. | true
+home: Make or update your household emergency plan together.
+skill: emergency
+
+@lesson 8.3 | Staying calm | 🧘 | garden
+hook: Something scary is happening. Your heart is pounding. How do you think straight?
+learn: Panic makes it hard to think. A simple routine can help.
+learn: Try STOP: Stop, Take a breath, Observe what's around you, then Plan your next step.
+learn: Calm people help others stay calm too.
+play: order | Use STOP in an emergency | Stop what you're doing; Take a slow, deep breath; Observe what's happening around you; Plan your next safe step; Act on the plan
+check: mcq | What does the T in STOP stand for? | Take a breath* | Talk loudly | Turn around
+check: tf | Staying calm can help the people around you stay calm. | true
+home: Practise STOP with your family, and talk about when you'd use it.
+skill: calm
+
+@lesson 8.4 | When the power goes out | 🔦 | home
+hook: The power's been off for hours. Is the food in the fridge still safe?
+learn: Keep the fridge and freezer doors shut. A closed fridge keeps food cold for about 4 hours.
+learn: A full freezer can stay frozen for about 2 days if you keep it shut.
+learn: Use torches, not candles, and unplug appliances so a power surge doesn't damage them when the power comes back.
+play: slider | In a power cut, a closed fridge keeps food cold for about how many hours? | 0 | 24 | 4 | hours | 1 | 1
+check: mcq | What's safest to use for light in a power cut? | A torch* | Lots of candles | A gas cooker
+check: tf | Opening the fridge often makes food warm up faster. | true
+home: Find your household's torches and check the batteries.
+skill: emergency
+
+@lesson 8.5 | Warnings and alerts | 📢 | online
+hook: Your phone screeches with an alarm you've never heard before. What is it?
+learn: {nz:Emergency Mobile Alerts are sent to phones in an area when there's a serious threat to life.~au:Emergency Alert sends warnings by text or phone call to people in an area at risk.}
+learn: {nz:Local Civil Defence groups and MetService share updates, and radio stations broadcast emergency information.~au:State emergency services and apps like VicEmergency or Hazards Near Me share updates, and ABC radio broadcasts emergency information.}
+learn: Follow official instructions, like evacuating, even if things look fine where you are.
+play: match | Match each alert to what you should do | An evacuation order=Leave now, using the route given; A tsunami warning near the coast=Go to high ground or inland; A severe weather warning=Stay inside, away from windows; A boil-water notice=Boil water before drinking it
+check: mcq | You get an official evacuation order. What do you do? | Follow it and leave* | Wait to see if it looks bad | Post about it first
+check: tf | You should follow official instructions even if things look fine where you are. | true
+home: Find out with a grown-up which radio station or app shares emergency updates where you live.
+skill: emergency
+
+@lesson 8.6 | Look out for others | 🏘️ | home
+hook: After a storm, your elderly neighbour's lights are off. Should you check on them?
+learn: In emergencies, neighbours are often the first to help.
+learn: If it's safe, check on older people, people living alone, and families with babies.
+learn: Get to know your neighbours before an emergency, so you know who might need help.
+play: path | After a big storm, the power's out and your older neighbour lives alone. | Go with a grown-up to check on them, if it's safe => good: You might be the only people who check. That matters. | Assume someone else will do it => bad: Everyone might assume that, and then nobody goes. | Ignore it, it's not your problem => bad: In emergencies, neighbours helping neighbours saves lives.
+check: mcq | Who should you check on after an emergency, if it's safe? | Older people and people living alone* | Nobody | Only your best friend
+check: tf | Neighbours are often the first to help in an emergency. | true
+home: With a grown-up, say hello to a neighbour you don't know well.
+skill: community
+

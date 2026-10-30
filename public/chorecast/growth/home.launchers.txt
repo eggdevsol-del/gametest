@@ -292,3 +292,270 @@ check: tf | Your bond should be lodged with an official bond authority. | true
 home: Practise taking clear photos of a room as if you were doing a move-in inspection.
 skill: renting
 
+@lesson 5.1 | Cost per serve | 🍛 | kitchen
+hook: A takeaway curry costs $18. Homemade curry for four costs $14. Which is cheaper per meal?
+learn: Cost per serve is the total cost divided by the number of serves.
+learn: Homemade meals often cost a third or less of a takeaway, per serve.
+learn: Count everything, including rice, oil and spices, so the comparison is fair.
+try: $14 for 4 serves is $3.50 a serve :: gap | $12 for 4 serves is $_ a serve | 3
+play: price | Which costs less per serve? | Takeaway curry:18:1:serve; Homemade curry:14:4:serves; Frozen ready meal:7:1:serve
+check: mcq | How do you work out cost per serve? | Total cost divided by the number of serves* | Total cost times the serves | Guess
+check: tf | Counting rice and spices makes the comparison fairer. | true
+home: Work out the cost per serve of one meal your household cooks this week.
+skill: budgeting
+
+@lesson 5.2 | A pantry that saves you | 🫙 | kitchen
+hook: It's Thursday. You're tired and nearly broke. What can you make from the cupboard?
+learn: Stock cheap staples: rice, pasta, oats, lentils, tinned tomatoes, tinned beans, eggs, frozen veg and stock cubes.
+learn: Add flavour cheaply with garlic, onions, soy sauce, curry powder and dried herbs.
+learn: A stocked pantry means you can skip a $25 takeaway on a tired night.
+play: tap | Tap the budget pantry staples | 🍚:yes:Rice goes with almost anything; 🥫:yes:Tinned tomatoes make sauces and soups; 🫘:yes:Beans and lentils are cheap protein; 🥚:yes:Eggs make a quick meal; 🍾:no; 🦞:no; 🧅:yes:Onions add flavour for cents; 🍫:no
+check: mcq | Which is a cheap protein? | Lentils* | Lobster | Fancy cheese
+check: tf | A stocked pantry can save you from pricey takeaways. | true
+home: Check your household's pantry. Which budget staples are already there?
+skill: cooking
+
+@lesson 5.3 | One chicken, three meals | 🍗 | kitchen
+hook: One whole chicken. How many meals can it make?
+learn: Buying whole ingredients and using every bit stretches your money.
+learn: Roast a chicken on Sunday, use the leftover meat in wraps on Monday, and boil the bones for stock.
+learn: Plan meals that share ingredients, like one bag of spinach across three dishes, so nothing gets thrown out.
+play: build | Stretch one roast chicken across the week | Sunday: roast chicken with veg; Monday: leftover chicken in wraps; Tuesday: boil the bones for stock; Wednesday: chicken and veg soup made with the stock; Freeze any extra soup for later
+check: mcq | Why plan meals that share ingredients? | Less food gets wasted* | Shops like it | It takes longer
+check: tf | Chicken bones can be used to make stock. | true
+home: Plan two meals this week that use the same ingredient.
+skill: mealplan
+
+@lesson 5.4 | Cheaper swaps | 🔄 | stall
+hook: Same meal, half the price. What can you swap?
+learn: Home brands are often similar quality to big brands, for less.
+learn: Frozen veg and fruit are frozen soon after picking, so they keep their nutrients and don't wilt in the fridge.
+learn: Buy fruit and veg in season, and swap some meat for beans or lentils.
+play: sort | Usually cheaper, Usually dearer | Home-brand pasta=Usually cheaper; Big-brand pasta=Usually dearer; Fruit in season=Usually cheaper; Fruit flown in out of season=Usually dearer; A whole pumpkin=Usually cheaper; Pre-cut pumpkin in a tray=Usually dearer; Dried lentils=Usually cheaper; Ready-made meal kits=Usually dearer | Usually cheaper or dearer?
+check: mcq | Why is frozen veg a good budget choice? | It keeps its nutrients and won't go off in the fridge* | It's always organic | It has no vegetables in it
+check: tf | Pre-cut veg usually costs more per kilo than whole veg. | true
+home: At the shop, compare the price of a home brand and a big brand of the same thing.
+skill: shopping
+
+@lesson 5.5 | A week of food for $80 | 🧾 | bank
+hook: You've got $80 for a week's food. Can you eat well?
+learn: Start with dinners, then breakfasts and lunches.
+learn: Leave a buffer for things you run out of.
+learn: Cheap breakfasts like oats and toast free up money for dinners.
+play: budget | Plan a week of food on $80 | 80 | Dinners=35; Breakfasts=8; Lunches=15; Fruit and snacks=10; Buffer=0 | Ran out of milk:4
+check: mcq | Which breakfast is cheapest per serve? | Porridge made with oats* | A café breakfast | A breakfast delivered to your door
+check: gap | $80 a week for food is $_ over 4 weeks | 320
+home: With a grown-up, add up what your household spends on food in a week.
+skill: budgeting
+
+@lesson 5.6 | Money in the bin | 🗑️ | kitchen
+hook: Half a bag of spinach goes slimy every week. What does that cost you in a year?
+learn: Food you throw out is money in the bin.
+learn: Plan meals, store food well, and eat the oldest food in the fridge first.
+learn: "Best before" means it's usually still safe after that date, though the quality drops. "Use by" means don't eat it after that date.
+play: slider | You throw out $4 of spinach every week. About how much is that over a year? | 0 | 400 | 208 | $ | 10 | 2
+check: mcq | What does "use by" mean? | Don't eat it after this date* | It's fine for months after | It's just a suggestion
+check: tf | Food past its "best before" date can still be safe to eat. | true
+home: For one week, write down any food your household throws out, and what it cost.
+skill: foodwaste
+
+@lesson 6.1 | Choosing flatmates | 🧑‍🤝‍🧑 | home
+hook: Your best friend might not be your best flatmate. What should you ask before moving in together?
+learn: Ask about daily life: work hours, tidiness, guests, noise and pets.
+learn: Ask about money: can they pay rent on time, every time?
+learn: Be honest about your own habits too.
+play: sort | Useful to ask, Less useful | How tidy do you like the kitchen?=Useful to ask; What's your star sign?=Less useful; Can you always pay rent on time?=Useful to ask; What's your favourite movie?=Less useful; How often do you have friends over?=Useful to ask; Do you work nights or early mornings?=Useful to ask | Is it useful to ask a possible flatmate?
+check: mcq | What's most important to check with a new flatmate? | That they can pay rent on time* | Their favourite food | Their shoe size
+check: tf | A great friend is always a great flatmate. | false | Habits like tidiness and paying on time matter more than how fun they are.
+home: Ask a grown-up who has flatted or shared a house what they wish they'd asked first.
+skill: flatting
+
+@lesson 6.2 | Splitting rent fairly | 🛏️ | home
+hook: One room is huge with its own bathroom. One is tiny. Should everyone pay the same?
+learn: Splitting rent equally is simple, but not always fair.
+learn: Many flats charge more for a bigger room, a private bathroom or a car park.
+learn: Agree on the split before anyone moves in, and write it down.
+try: $750 rent split 3 ways equally is $250 each :: gap | $750 rent. The big room pays $290 and the other two split the rest equally. Each of them pays $_ | 230
+play: slider | Rent is $900 a week for 4 rooms. The main bedroom pays $60 more than each of the other three, which all pay the same. What does the main bedroom pay? | 150 | 350 | 270 | $ | 0 | 5
+check: mcq | When should you agree on how to split the rent? | Before anyone moves in* | After the first argument | Never
+check: tf | It can be fair for a bigger room to pay more rent. | true
+home: Look at a shared-house listing with a grown-up. How would you split the rent?
+skill: flatting
+
+@lesson 6.3 | A roster that works | 🗓️ | home
+hook: "Everyone just cleans up after themselves." Six weeks later, the bathroom is a swamp. What went wrong?
+learn: Vague plans lead to arguments. A clear roster says who does what, and when.
+learn: Rotate the worst jobs, like the bathroom and the bins, so it's fair.
+learn: Put it where everyone can see it, like on the fridge or in a shared app.
+play: diff | Two flat chore plans. Tap what the clearer one changes. | Everyone keeps things tidy; Someone does the bins; Clean the bathroom sometimes; Sort it out if it gets bad | Everyone washes their own dishes the same night; Bins go out Tuesday night, taking turns weekly; The bathroom gets cleaned every Saturday, taking turns; A flat meeting on the first Sunday of each month
+check: mcq | What makes a chore roster fair? | Rotating the worst jobs* | One person doing everything | Never writing it down
+check: tf | A clear roster says who does what, and when. | true
+home: Make a chore roster for your household for one week.
+skill: flatting
+
+@lesson 6.4 | The flat kitty | 🫙 | bank
+hook: Who bought the last toilet roll? And the one before that? Is there an easier way?
+learn: A kitty is a shared pot of money for things everyone uses, like toilet paper, cleaning products and basics.
+learn: Everyone pays in the same amount each week, often into a shared account.
+learn: Keep receipts, or use a shared expenses app, so it's all clear.
+play: budget | Plan a 4-person flat kitty of $40 a week | 40 | Toilet paper=8; Cleaning products=10; Dish and laundry liquid=8; Milk and bread=10; Spare=0 | A light bulb blew:4
+check: mcq | What's a flat kitty for? | Shared things everyone uses* | One person's takeaways | Only the rent
+check: gap | A $40 kitty split between 4 flatmates is $_ each | 10
+home: Track what your household spends on shared basics, like toilet paper, for a month.
+skill: flatting
+
+@lesson 6.5 | The messy flatmate | 🍝 | home
+hook: Your flatmate's dishes have been in the sink for four days. Things are growing. Now what?
+learn: Raise it early and in person, before you're furious.
+learn: Stick to the facts, say how it affects you, and ask for a specific change.
+learn: Point to the agreement or roster, not their personality.
+play: chat | Talking to a flatmate about the dishes | them: Hey, what's up? | me: Can I mention the dishes? They've been there since Saturday and I can't cook. Could you do them tonight?*/You're disgusting/Nothing, forget it | them: Oh, sorry. I've had exams all week. | me: Fair enough. Could we stick to the roster, and swap jobs when one of us is flat out?*/Excuses, excuses/Whatever, I'll just do it myself forever
+check: mcq | What's the best way to raise a flat problem? | Early, in person, with the facts* | A passive-aggressive note | Posting about it online
+check: tf | Pointing to the roster works better than criticising someone's personality. | true
+home: Practise raising a small household problem calmly with a grown-up.
+skill: communication
+
+@lesson 6.6 | When someone moves out | 📦 | home
+hook: A flatmate is moving out next month. What needs to happen?
+learn: Check your tenancy agreement for how much notice they need to give.
+learn: Find a replacement flatmate the landlord agrees to, so the rent still gets paid.
+learn: Update the bond: {nz:send a change of tenant form to Tenancy Services~au:lodge a change of tenant or bond transfer form with your state's bond authority}. Then split the final bills.
+play: order | A flatmate moves out | They give notice, as the agreement says; The flat finds a replacement; The landlord agrees to the new flatmate; The bond is transferred to the new person; The final bills are split and paid
+check: mcq | Why update the bond when a flatmate leaves? | So the right people get their share back* | It doesn't matter | So the landlord can keep it all
+check: tf | The landlord usually needs to agree to a new flatmate. | true
+home: Ask a grown-up what they'd check before letting someone new move into their home.
+skill: flatting
+
+@lesson 7.1 | Check before you buy | 🔎 | online
+hook: A used car looks perfect, and it's cheap. What could be hiding?
+learn: Search the car on the PPSR register to see if money is still owed on it. If it is, it could be repossessed from you.
+learn: Check the {nz:Warrant of Fitness and vehicle licence (rego)~au:registration and, in some states, a safety or roadworthy certificate}, and whether it's been written off or stolen.
+learn: Get an independent mechanic to inspect it before you pay.
+play: scam | Good sign or red flag? | A service history with receipts=real; "Cash only, and I can't show you the papers"=scam; The seller is happy for a mechanic to inspect it=real; The name on the rego doesn't match the seller=scam; A clear register check, with no money owing=real; Meeting in a car park with a seller in a rush=scam | "Real" means a good sign. "Scam" means a red flag.
+check: mcq | Why search the PPSR register? | To see if money is still owed on the car* | To check the colour | To find the radio station
+check: tf | Money owed on a car you buy could mean it gets repossessed. | true
+home: Look at a used car listing with a grown-up. What would you check first?
+skill: cars
+
+@lesson 7.2 | The test drive | 🚗 | home
+hook: You've got 15 minutes to test drive a car. What should you check?
+learn: Start it from cold, and listen for odd noises or warning lights.
+learn: Test the brakes, steering, gears, lights and indicators.
+learn: Drive on different roads, including a hill and a faster road if you can.
+play: tap | Tap what to check on a test drive | 🛑:yes:Brakes that stop smoothly; 🔦:yes:All the lights and indicators; ⚠️:yes:Warning lights on the dashboard; 🛞:yes:Tyre tread and wear; 🎵:no; 🧸:no; 🌡️:yes:The engine starting from cold
+check: mcq | Why start the car from cold? | Some problems only show when the engine is cold* | It's warmer | It saves fuel
+check: tf | Dashboard warning lights should be checked before you buy. | true
+home: Next time you're in a car, find the dashboard warning lights with a grown-up.
+skill: cars
+
+@lesson 7.3 | The yearly costs | 📅 | bank
+hook: You've bought the car. What do you pay every year just to keep it on the road?
+learn: {nz:You pay a vehicle licence fee, called rego, to keep the car on the road.~au:You pay registration, called rego, each year. You also need compulsory third party (CTP) insurance, often paid with your rego.}
+learn: {nz:Cars need a regular Warrant of Fitness (WoF) safety check. Diesel cars and EVs also pay road user charges (RUC).~au:Some states need a safety or roadworthy inspection when a car is sold or reaches a certain age.}
+learn: Add insurance, servicing, tyres and fuel or charging, and it comes to thousands a year.
+play: match | Match each car cost to what it is | Rego=The fee to keep the car on the road; {nz:WoF~au:CTP}={nz:A regular safety check~au:Insurance for injuries you cause to others}; {nz:RUC~au:Comprehensive insurance}={nz:Road user charges for diesel cars and EVs~au:Insurance that covers damage to your own car too}; Servicing=Regular maintenance to keep the car running well
+check: mcq | {nz:What is a WoF?~au:What does CTP insurance cover?} | {nz:A regular safety check~au:Injuries you cause to other people}* | {nz:A type of fuel~au:Damage to your own car} | {nz:A parking fine~au:Your phone}
+check: tf | A car costs money every year, even if you barely drive it. | true
+home: Ask a grown-up what your household's car costs each year, apart from fuel.
+skill: cars
+
+@lesson 7.4 | The real cost of a car loan | 💸 | bank
+hook: A $15,000 car with "easy weekly payments". What will you really pay?
+learn: A car loan's interest can add thousands to the price.
+learn: $15,000 at 12% interest over 5 years costs about $20,000 in total.
+learn: Check the interest rate and all the fees. Saving up for a cheaper car can cost far less.
+try: Payments of $334 a month for 60 months add up to $20,040 :: gap | Payments of $250 a month for 48 months add up to $_ | 12000
+play: slider | You borrow $10,000 for a car at 12% over 5 years. Repayments are about $222 a month. Roughly how much do you pay in total? | 10000 | 16000 | 13320 | $ | 400 | 20
+check: mcq | What can make a car loan much more expensive? | High interest and fees* | Paying it off early | A cheaper car
+check: tf | A longer loan with smaller payments usually costs more in total. | true
+home: Find a car loan ad with a grown-up. What's the interest rate, and what are the fees?
+skill: debt
+
+@lesson 7.5 | Safety stars | ⭐ | home
+hook: Two used cars, same price. One has 5 safety stars, the other 2. Does it matter?
+learn: ANCAP crash-tests new cars sold in New Zealand and Australia, and gives them a star rating.
+learn: Used cars have safety ratings too, based on real crashes. Check them before you buy.
+learn: Young drivers crash more often, so a safer car matters even more for you.
+play: path | Two cars, both $8,000. One has a 5-star safety rating. The other has 2 stars, but a better sound system. | Choose the 5-star car => good: In a crash, a safer car can be the difference between walking away or not. | Choose the 2-star car for the speakers => bad: You can upgrade speakers. You can't upgrade crash safety. | Buy whichever looks shinier => bad: Looks don't protect you in a crash.
+check: mcq | What do ANCAP stars measure? | How well a car protects people in a crash* | How fast it goes | How shiny it is
+check: tf | Young drivers are more likely to crash than older drivers. | true
+home: Look up the safety rating of your household's car with a grown-up.
+skill: cars
+
+@lesson 7.6 | After a crash | 🚧 | townhall
+hook: Bang! You've had a minor crash. Your heart's racing. What now?
+learn: Stop, turn on your hazard lights, and check if anyone's hurt. If someone is, call {nz:111~au:000}.
+learn: Swap names, phone numbers, addresses, rego numbers and insurance details with the other driver.
+learn: Take photos of the cars and the scene. Don't argue about who's at fault. Let the insurers sort it out.
+play: order | What to do after a minor crash | Stop safely and turn on your hazard lights; Check if anyone is hurt, and call for help if needed; Swap details with the other driver; Take photos of both cars and the scene; Tell your insurer as soon as you can
+check: mcq | What details should you swap after a crash? | Names, contact details, rego and insurance* | Just first names | Nothing
+check: tf | Photos of the scene can help with an insurance claim. | true
+home: Find out with a grown-up what's kept in your car in case of a crash.
+skill: cars
+
+@lesson 8.1 | Documents to guard | 🗂️ | home
+hook: Passport, birth certificate, tax number. Where do you keep them, and who gets to see them?
+learn: Some documents prove who you are. Scammers want them for identity theft.
+learn: Keep the originals somewhere safe, and keep secure digital copies too.
+learn: Only share ID details with organisations you trust, and only when there's a real need.
+play: sort | Guard closely, Fine to share | Passport number=Guard closely; Your first name=Fine to share; {nz:IRD number~au:Tax file number}=Guard closely; Your favourite band=Fine to share; Bank login details=Guard closely; A photo of your driver licence=Guard closely | Guard closely, or fine to share?
+check: mcq | Why do scammers want your ID documents? | To steal your identity* | To send you birthday cards | To check your age for fun
+check: tf | Keeping secure digital copies of important documents is a good idea. | true
+home: Ask a grown-up where your important documents, like your birth certificate, are kept.
+skill: admin
+
+@lesson 8.2 | Your tax number | 🔢 | bank
+hook: You've just got your first job. Your boss asks for your {nz:IRD number~au:tax file number (TFN)}. What is it?
+learn: {nz:Your IRD number is your unique tax number from Inland Revenue. You need it for work, KiwiSaver and student loans.~au:Your TFN is your unique tax number from the ATO. You need it for work, super and tax returns.}
+learn: {nz:Without it, your pay is taxed at the "no-notification" rate of 45%.~au:Without it, your pay can be taxed at the top rate of 47%.}
+learn: Keep it private. Only give it to your employer, your bank, your {nz:KiwiSaver provider~au:super fund} and the tax office.
+play: scam | Real request or scam? | Your new employer asking for it on the official form=real; A text saying "Confirm your tax number to get your refund"=scam; Your bank asking for it when you open an account=real; A stranger online offering you a job if you send it first=scam; A phone call threatening arrest unless you read it out=scam | Tax offices don't text you links or threaten arrest.
+check: mcq | {nz:What happens if you don't give your employer your IRD number?~au:What happens if you don't give your employer your TFN?} | {nz:You're taxed at 45%~au:You can be taxed at 47%}* | You pay no tax | You get a bonus
+check: tf | You should keep your tax number private. | true
+home: {nz:Ask a grown-up whether you have an IRD number yet, and how to apply for one.~au:Ask a grown-up whether you have a TFN yet, and how to apply for one.}
+skill: tax
+
+@lesson 8.3 | A simple filing system | 📁 | online
+hook: Car rego reminder, payslips, bond receipt, phone bill. Where do they all go?
+learn: Set up a few folders, on paper or on your computer: ID, money, home, health, work and car.
+learn: Save important emails and receipts as PDFs, with clear names like "2026-03 bond receipt".
+learn: {nz:Inland Revenue says to keep business and tax records for 7 years.~au:The ATO says to keep tax records for 5 years.}
+play: match | Match each document to its folder | Payslips=Work; Bond receipt=Home; Prescription receipts=Health; Passport copy=ID; Bank statements=Money; Rego reminder=Car
+check: mcq | What's a good file name for a bond receipt? | 2026-03 bond receipt* | Scan001 | Untitled
+check: tf | {nz:Inland Revenue says to keep business and tax records for 7 years.~au:The ATO says to keep tax records for 5 years.} | true
+home: Make six folders on a computer or in a drawer, and sort a few papers into them.
+skill: admin
+
+@lesson 8.4 | Deadlines that bite | ⏰ | home
+hook: Miss a rego renewal or a bill, and the fees start. How do you stay on top of it all?
+learn: Put every deadline in your phone calendar, with a reminder a week before.
+learn: Set up automatic payments for regular bills, and check them each month.
+learn: {nz:If you file your own tax return, it's due by 7 July. Most people who only earn a salary get an automatic assessment instead.~au:If you lodge your own tax return, it's due by 31 October. A registered tax agent can give you longer.}
+play: order | Set up a deadline system | List every regular bill and renewal; Add each one to your calendar; Set a reminder a week before; Set up automatic payments where you can; Check your bank account each month
+check: mcq | {nz:When is a self-filed New Zealand tax return due?~au:When is a self-lodged Australian tax return due?} | {nz:7 July~au:31 October}* | {nz:Christmas Day~au:New Year's Day} | Whenever you like
+check: tf | A reminder a week before a deadline gives you time to act. | true
+home: Help a grown-up add their next three bills or renewals to a calendar.
+skill: admin
+
+@lesson 8.5 | Passwords and logins | 🔑 | online
+hook: Bank, email, uni, phone. Do all your accounts use the same password?
+learn: Use a different strong password for every important account. A password manager can remember them for you.
+learn: Turn on two-factor authentication, so a code or app is needed as well as your password.
+learn: Protect your email most of all. Whoever controls it can reset your other passwords.
+play: tap | Tap the habits that keep your accounts safe | 🔐:yes:A password manager; 📲:yes:Two-factor authentication; 🧩:yes:Long passphrases; 📧:yes:Extra protection on your email; 🔁:no; 📝:no
+check: mcq | Why protect your email most of all? | It can reset your other passwords* | It's your oldest account | It has the most emojis
+check: tf | Using one password for every account is safe if it's strong. | false | If it leaks once, every account is at risk.
+home: Turn on two-factor authentication for one account, with a grown-up.
+skill: safety
+
+@lesson 8.6 | Enrol to vote | 🗳️ | townhall
+hook: You turn 18 soon. Are you enrolled?
+learn: {nz:You can enrol from 17 and vote from 18. Enrolling is compulsory, but voting is your choice.~au:You can enrol from 16 and vote from 18. Enrolling and voting are both compulsory.}
+learn: Elected politicians decide on rent rules, student loans, taxes and climate policy. All of these affect your money.
+learn: {nz:You can enrol online at vote.nz.~au:You can enrol online with the Australian Electoral Commission.}
+play: path | You've just turned 18, and an election is coming up. | Check you're enrolled, read up on the parties, and vote => good: You've had your say on things like rent, tax and student loans. | Skip it, it doesn't affect you => bad: Elections shape rent, tax and study costs, so they really do. | Vote for whoever your friend picks => ok: You took part, but your vote counts for more when you decide for yourself.
+check: mcq | {nz:From what age can you enrol to vote in New Zealand?~au:From what age can you enrol to vote in Australia?} | {nz:17~au:16}* | 21 | 30
+check: tf | {nz:In New Zealand, enrolling is compulsory, but voting is your choice.~au:In Australia, voting is compulsory.} | true
+home: {nz:Check vote.nz with a grown-up to see how to enrol.~au:Check the AEC website with a grown-up to see how to enrol.}
+skill: civics
+

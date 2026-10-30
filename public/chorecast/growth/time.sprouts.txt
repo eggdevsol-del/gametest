@@ -284,3 +284,268 @@ check: tf | You should keep notes flat in a wallet or purse. | true
 home: Check your pockets before the wash with a grown-up.
 skill: money
 
+@lesson 5.1 | Market day | 🧺 | museum
+hook: Long ago there were no supermarkets. Where did people get their food?
+learn: In many towns, people met once a week on market day.
+learn: Farmers brought eggs, cheese and vegetables. Others brought pots, cloth and tools.
+learn: Market day was busy, noisy and fun. People came to buy, sell and catch up with friends.
+play: order | A farmer's market day long ago | Wake up before the sun; Load the cart with eggs and cabbages; Walk to town beside the cart; Set up a spot in the market square; Sell to customers all morning; Buy things for home and walk back
+check: mcq | How often did many towns have market day? | Once a week* | Once every 100 years | Never
+check: tf | Long ago, people sold food and tools at markets. | true
+home: Visit a market or a farmers' market with a grown-up. What is for sale?
+skill: history
+
+@lesson 5.2 | Haggling | 🗣️ | stall
+hook: At old markets, prices often weren't written down. How did people agree on a price?
+learn: The buyer and the seller talked until they agreed on a price. That's called haggling.
+learn: The seller asked for a high price. The buyer offered less. They met in the middle.
+learn: People still haggle at some markets around the world today.
+play: path | A seller wants 10 coins for a basket. You think it's worth 6. | Offer 6 coins, and agree on 8 => good: You met in the middle, and you both feel it's fair. | Grab the basket and run => bad: That's stealing! | Say "That's silly!" and stomp off => ok: You keep your coins, but you didn't get the basket.
+check: mcq | What's haggling? | Talking to agree on a price* | Hiding your money | Throwing coins
+check: gap | The seller asks for 10 coins. You offer 6. You meet in the middle at _ coins | 8
+home: Play market with a grown-up. One sells, one buys, and you haggle over the price.
+skill: trade
+
+@lesson 5.3 | Fair scales | ⚖️ | museum
+hook: You buy a bag of flour at the market. How do you know you got it all?
+learn: Long ago, sellers weighed things on balance scales.
+learn: Flour went on one side and a metal weight on the other. When both sides were level, it was the right amount.
+learn: Some cheats used weights that were too light. Towns checked the weights to keep things fair.
+play: sort | Fair, Not fair | Weights checked by the town=Fair; A weight that's secretly too light=Not fair; Scales that sit level when empty=Fair; A thumb pressing on the scale=Not fair; The same weight used for every customer=Fair; Sand mixed into the flour=Not fair | Fair or not fair?
+check: mcq | How do balance scales show the right amount? | Both sides are level* | One side hits the table | They ring a bell
+check: tf | Towns checked weights to stop cheating. | true
+home: Weigh some flour or fruit on kitchen scales with a grown-up.
+skill: fairness
+
+@lesson 5.4 | Calling out to customers | 📢 | stall
+hook: There were no ads on TV long ago. How did sellers get people to come and buy?
+learn: Sellers called out to shoppers: "Hot pies! Fresh fish!"
+learn: Shops hung picture signs, like a big boot for a shoemaker, because many people couldn't read.
+learn: Today we see ads on screens, signs and phones instead.
+play: sort | Long ago, Today | A seller shouting "Fresh bread!"=Long ago; An ad on a phone=Today; A wooden boot sign over a shoe shop=Long ago; A video ad before a show=Today; A town crier ringing a bell with news=Long ago; A flashing screen in a shop window=Today | Long ago or today?
+check: mcq | Why did old shops hang picture signs? | Many people couldn't read* | Pictures were free | To scare away birds
+check: tf | Long ago, sellers shouted out to tell people what they sold. | true
+home: Look at shop signs with a grown-up. Which ones use a picture?
+skill: history
+
+@lesson 5.5 | The giant covered market | 🕌 | museum
+hook: One market in Türkiye is more than 550 years old and has thousands of shops. Can you guess its name?
+learn: Building began on the Grand Bazaar in Istanbul in the 1450s.
+learn: It has a roof, so shoppers stay dry, and thousands of shops inside.
+learn: People still shop there today for carpets, lamps, spices and gold.
+play: mystery | It's in Istanbul, in Türkiye; Building began in the 1450s; It has a roof over thousands of shops; Its name means a big market | The Grand Bazaar* | A shopping mall built last year | A farm with one shed
+check: mcq | Why does the Grand Bazaar have a roof? | So shoppers stay dry* | To hide the shops | So birds can live there
+check: tf | People still shop at the Grand Bazaar today. | true
+home: Find Istanbul on a map or a globe with a grown-up.
+skill: history
+
+@lesson 5.6 | Shopping then and now | 🛒 | stall
+hook: How is shopping today different from long ago?
+learn: Long ago, you went on market day, haggled, and paid with coins or swaps.
+learn: Today, prices are on labels, shops are open most days, and lots of people pay with a card.
+learn: Some things haven't changed. People still want good food at a fair price.
+play: diff | Shopping long ago and today. Tap what changed. | Shop on market day once a week; Haggle over the price; Pay with coins or swap things; Want good food at a fair price | Shop at the supermarket most days; Read the price on the label; Pay with a card or phone; Want good food at a fair price
+check: mcq | What's the same then and now? | People want good food at a fair price* | Everyone pays with a phone | Nobody buys food
+check: tf | Long ago, most people paid by tapping a card. | false | Cards came much later. People paid with coins or swaps.
+home: Ask an older family member what shopping was like when they were young.
+skill: history
+
+@lesson 6.1 | Swapping money for a trip | ✈️ | bank
+hook: You're going on holiday to Japan. Can you buy a snack with our dollars?
+learn: Most shops in other countries want their own money, not ours.
+learn: Before or during a trip, you swap your dollars for their money. Japan's money is called yen.
+learn: Lots of people pay with a card overseas too, and the bank swaps the money for them.
+play: order | Buying a snack on holiday in Japan | Swap some of your dollars for yen; Fly to Japan; Find a snack you'd like; Read the price in yen; Pay with your yen
+check: mcq | What's Japan's money called? | Yen* | Dollars | Pounds
+check: tf | Most shops in Japan want yen, not our dollars. | true
+home: With a grown-up, find out what money is used in a country you'd like to visit.
+skill: currency
+
+@lesson 6.2 | Lots of dollars | 💵 | museum
+hook: We call our money dollars. Do other countries too?
+learn: Lots of countries call their money the dollar, but each one is different.
+learn: {nz:An Australian dollar~au:A New Zealand dollar} looks different from ours and is worth a different amount.
+learn: The United States, Canada, Fiji and Singapore all have their own dollars too.
+play: tap | Tap the countries whose money is called the dollar | 🇺🇸:yes:The US dollar; 🇨🇦:yes:The Canadian dollar; 🇫🇯:yes:The Fijian dollar; 🇯🇵:no; 🇬🇧:no; 🇸🇬:yes:The Singapore dollar
+check: mcq | Is a US dollar the same as our dollar? | No, it's different money* | Yes, exactly the same | It's made of chocolate
+check: tf | Different countries can use the same name for their money. | true
+home: Find the flags of three countries that use a dollar.
+skill: currency
+
+@lesson 6.3 | One money, many countries | 🇪🇺 | museum
+hook: Can lots of countries share the same money?
+learn: In Europe, 21 countries share one money called the euro.
+learn: France, Germany, Italy and Spain all use it.
+learn: Euro notes show made-up bridges and windows, so they don't belong to just one country.
+play: sort | Uses the euro, Has its own money | France=Uses the euro; Japan=Has its own money; Germany=Uses the euro; United Kingdom=Has its own money; Italy=Uses the euro; United States=Has its own money; Spain=Uses the euro | Does it use the euro?
+check: mcq | What's the euro? | Money shared by many European countries* | A kind of bird | A Japanese coin
+check: tf | Euro notes show made-up bridges and windows. | true
+home: Find France, Germany and Italy on a map. They all use the euro.
+skill: currency
+
+@lesson 6.4 | Plastic or paper? | 🧪 | museum
+hook: Our notes are made of plastic. Are all notes like that?
+learn: Australia made the world's first plastic note in 1988. {nz:New Zealand switched to plastic notes in 1999.~au:Today all Australian notes are plastic.}
+learn: Plastic notes last longer and are harder to fake. They can even survive the washing machine!
+learn: Some countries, like the United States and Japan, still use notes made from special paper.
+play: sort | Plastic notes, Paper notes | New Zealand=Plastic notes; Australia=Plastic notes; Canada=Plastic notes; United Kingdom=Plastic notes; United States=Paper notes; Japan=Paper notes | Plastic or paper notes?
+check: mcq | Which country made the first plastic note? | Australia* | Japan | The United States
+check: tf | Plastic notes are harder to fake than paper ones. | true
+home: Look at a note with a grown-up. Find its see-through window.
+skill: currency
+
+@lesson 6.5 | Big numbers, small prices | 🔢 | stall
+hook: In Japan, a toy costs 1,000 yen. A thousand! Is that super expensive?
+learn: Different money has different-sized numbers.
+learn: 100 yen is worth roughly one of our dollars. So 1,000 yen is about $10.
+learn: A big number doesn't always mean a big price. It depends on the money.
+play: path | In Japan, a toy costs 1,000 yen. Your friend gasps, "A thousand? That's so much!" | Explain that 1,000 yen is only about $10 => good: Right! Different money uses different-sized numbers. | Agree it costs a fortune => bad: Not quite. 1,000 yen is about $10. | Say yen and dollars are the same => bad: They're not. 100 yen is roughly $1.
+check: mcq | About how much is 1,000 yen in our money? | About $10* | About $1,000 | About 10c
+check: gap | 100 yen is about $1, so 500 yen is about $_ | 5
+home: With a grown-up, look up how many yen one of our dollars buys today.
+skill: currency
+
+@lesson 6.6 | Our Pacific neighbours' money | 🌺 | island
+hook: Our neighbours in the Pacific have their own money too. Do you know any?
+learn: Fiji uses the Fijian dollar. Samoa uses the tālā. Tonga uses the paʻanga.
+learn: Papua New Guinea uses the kina. Its one-kina coin has a hole in the middle.
+learn: The Cook Islands use the New Zealand dollar, plus their own coins, including a three-sided $2 coin!
+play: match | Match each Pacific country to its money | Fiji=Fijian dollar; Samoa=Tālā; Tonga=Paʻanga; Papua New Guinea=Kina
+check: mcq | What money does Samoa use? | The tālā* | The yen | The euro
+check: tf | The Cook Islands have a three-sided $2 coin. | true
+home: Find Fiji, Samoa and Tonga on a map with a grown-up.
+skill: currency
+
+@lesson 7.1 | Money you can't touch | 💻 | bank
+hook: Your grown-up has money in the bank. Is it sitting in a big pile in a safe?
+learn: Most money today isn't coins or notes. It's numbers in a bank's computer.
+learn: Coins and notes are money you can touch.
+learn: Money in a bank account, on a card or in a phone is money you can't touch, but it's still real.
+play: sort | Can touch it, Can't touch it | A $2 coin=Can touch it; Money in a bank account=Can't touch it; A $5 note=Can touch it; Paying by tapping a card=Can't touch it; A 50c coin=Can touch it; Paying with a phone=Can't touch it | Can you touch this money?
+check: mcq | Where is most money kept today? | As numbers in bank computers* | Under beds | In big piles of gold
+check: tf | Money in a bank account is still real money. | true
+home: Ask a grown-up how they pay for most things: cash, card or phone?
+skill: banking
+
+@lesson 7.2 | Tapping is real money | 💳 | stall
+hook: Tap, beep, done! It feels like magic. Did any money really leave?
+learn: When you tap a card or phone, real money leaves the bank account.
+learn: It's easy to forget, because you can't see the money go.
+learn: That's why it helps to know how much is in the account first.
+play: path | You have $10 on your card. You tap for a $4 ice block. Your friend says, "Tap again for another! It's free!" | Say no, it's not free. It costs another $4 => good: Right! Every tap takes real money out. | Tap again, it's just a beep => bad: That beep took another $4. Now you have only $2 left. | Tap ten more times for everyone => bad: You can't. You'd run out of money after two more!
+check: mcq | What happens when you tap your card? | Money leaves the account* | Nothing | You get free stuff
+check: gap | You have $10 on your card. You spend $4. You have $_ left | 6
+home: With a grown-up, look at how much is on a card before and after you buy something.
+skill: spending
+
+@lesson 7.3 | Keep your PIN secret | 🔢 | bank
+hook: A PIN is a secret number for a card. Who can you tell?
+learn: A PIN is a secret code that proves the card is yours.
+learn: Never tell your PIN to anyone, not even friends. Only a trusted grown-up who helps with your account should know it.
+learn: Cover the keypad with your hand when you type it.
+play: chat | Your friend asks about your card | them: Cool card! What's your PIN? | me: Sorry, my PIN is a secret. I don't tell anyone.*/It's 1234/I'll whisper it to you | them: Aww, I'd never tell anyone! | me: I know, but it's a rule to keep my money safe.*/OK, it's 1234/Fine, I'll write it down for you
+check: mcq | Who can know your PIN? | Only a trusted grown-up who helps with your account* | Your best friend | Anyone who asks nicely
+check: tf | Covering the keypad helps keep your PIN safe. | true
+home: Watch a grown-up cover the keypad when they type their PIN. Practise doing it too.
+skill: safety
+
+@lesson 7.4 | From coins to phones | 📱 | museum
+hook: How did we go from swapping and coins to paying with a phone?
+learn: For thousands of years, people paid with coins, and later with paper notes.
+learn: Then came cheques, written notes telling a bank to pay someone.
+learn: Plastic cards came next. Now lots of people pay with a phone or a watch!
+play: order | Put the ways to pay in order, from oldest to newest | Swapping things; Coins; Paper notes; Cheques; Plastic cards; Phones and watches
+check: mcq | Which way to pay is the newest? | Phones and watches* | Coins | Swapping things
+check: tf | Coins came before plastic cards. | true
+home: Ask an older family member how they paid for things when they were your age.
+skill: history
+
+@lesson 7.5 | Shopping online | 🛒 | online
+hook: A pop-up says "You won a FREE prize! Type in a card number!" Real, or a trick?
+learn: Only shop online with a grown-up, on websites they trust.
+learn: Never type card numbers into pop-ups or messages.
+learn: If something seems too good to be true, it's probably a trick.
+play: scam | Real or trick? | Your grown-up buying a book from a shop you know=real; "You won a free iPad! Tap here and type a card number!"=scam; A message saying "Send money to claim your prize"=scam; Your grown-up paying for school camp on the school's website=real; A stranger's message asking for your grown-up's password=scam | "Real" means OK. "Scam" means it's a trick, so stop and get a grown-up.
+check: mcq | A pop-up asks for a card number. What do you do? | Close it and tell a grown-up* | Type it in | Tell your friends
+check: tf | If it's too good to be true, it's probably a trick. | true
+home: Look at a trusted shopping website with a grown-up. How do they know it's the real one?
+skill: safety
+
+@lesson 7.6 | Keeping track | 📝 | bank
+hook: You can't see card money go. So how do you know how much is left?
+learn: Keep track every time you spend.
+learn: Your grown-up can check the bank app to see what's left.
+learn: Take away each thing you buy: $20, take away $5, leaves $15.
+try: $20 take away $5 is $15 :: gap | $15 take away $3 is $_ | 12
+play: slider | You have $20 on your card. You spend $3, then $5, then $4. How much is left? | 0 | 20 | 8 | $ | 0 | 1
+check: mcq | How can you know what's left on a card? | Keep track, or check the bank app with a grown-up* | Guess | Shake the card
+check: tf | Card money is easy to forget because you can't see it go. | true
+home: Keep a spending list for a week, taking away each thing you buy.
+skill: spending
+
+@lesson 8.1 | Pictures on our coins | 🥝 | museum
+hook: Flip a coin over. What picture is on the back?
+learn: {nz:Our coins show special things from New Zealand. The $1 coin has a kiwi, and the $2 coin has a kōtuku, a white heron.~au:Our coins show Australian animals. The 10c coin has a lyrebird, and the 20c coin has a platypus.}
+learn: {nz:The 50c coin shows Captain Cook's ship, the Endeavour. The 10c and 20c coins show Māori carvings.~au:The $1 coin has five kangaroos. The $2 coin shows an Aboriginal elder and the stars of the Southern Cross.}
+learn: Each picture tells a little story about our country.
+play: match | Match each coin to its picture | {nz:$1~au:10c}={nz:A kiwi~au:A lyrebird}; {nz:$2~au:20c}={nz:A kōtuku, the white heron~au:A platypus}; {nz:50c~au:$1}={nz:The ship Endeavour~au:Five kangaroos}; {nz:20c~au:5c}={nz:A Māori carving~au:An echidna}
+check: mcq | {nz:Which bird is on our $1 coin?~au:Which animal is on our 20c coin?} | {nz:A kiwi~au:A platypus}* | A penguin | A crocodile
+check: tf | The pictures on our coins tell stories about our country. | true
+home: Find every kind of coin in a purse or money box. What's on the back of each one?
+skill: currency
+
+@lesson 8.2 | Adding up coins | ➕ | bank
+hook: You've got a handful of coins. How much is it all together?
+learn: Start with the biggest coins, then add the smaller ones.
+learn: Two 50c coins make $1. Five 20c coins make $1 too.
+learn: Count slowly, then count again to check.
+play: gen | add | 4
+check: mcq | How many 50c coins make $1? | 2* | 5 | 10
+check: gap | Five 20c coins make $_ | 1
+home: Count the coins in your money box with a grown-up.
+skill: counting
+
+@lesson 8.3 | Rounding at the till | 🧾 | stall
+hook: {nz:We don't have 5c coins any more. So how do you pay $2.97 in cash?~au:We don't have 1c or 2c coins any more. So how do you pay $2.98 in cash?}
+learn: {nz:New Zealand stopped using 5c coins in 2006. When you pay with cash, the total is rounded to the nearest 10c.~au:Australia stopped using 1c and 2c coins in 1992. When you pay with cash, the total is rounded to the nearest 5c.}
+learn: {nz:$2.97 rounds up to $3.00. $2.92 rounds down to $2.90.~au:$2.98 rounds up to $3.00. $2.92 rounds down to $2.90.}
+learn: When you pay by card, you pay the exact amount.
+play: sort | Rounds down, Rounds up | $4.91=Rounds down; $4.98=Rounds up; $1.02=Rounds down; {nz:$1.07~au:$1.04}=Rounds up; $3.01=Rounds down; $3.09=Rounds up | Paying cash, does the total round down or up?
+check: mcq | You pay by card for something that costs $2.97. What do you pay? | Exactly $2.97* | $3.00 | $2.90
+check: tf | {nz:New Zealand doesn't use 5c coins any more.~au:Australia doesn't use 1c or 2c coins any more.} | true
+home: Next time you pay cash at a shop, check how the total was rounded.
+skill: currency
+
+@lesson 8.4 | Where our money is made | 🏭 | museum
+hook: Who makes our coins and notes?
+learn: {nz:The Reserve Bank of New Zealand is in charge of our money.~au:The Reserve Bank of Australia is in charge of our notes, and the Royal Australian Mint in Canberra makes our coins.}
+learn: {nz:New Zealand doesn't have its own mint. Our coins and notes are made overseas, for example in Canada.~au:Our notes are printed by Note Printing Australia, near Melbourne.}
+learn: To make a coin, metal is cut into blank circles, then stamped with a picture on each side.
+play: order | How a coin is made | Metal is rolled into long, flat strips; Round blanks are punched out; Each blank is stamped with pictures; Coins are checked and counted into bags; Banks send them to shops; You get one in your change
+check: mcq | {nz:Who is in charge of New Zealand's money?~au:Where are Australia's coins made?} | {nz:The Reserve Bank of New Zealand~au:The Royal Australian Mint in Canberra}* | A toy shop | Your school
+check: tf | Coins are stamped with a picture on each side. | true
+home: Look closely at a coin with a magnifying glass. Can you see tiny details?
+skill: currency
+
+@lesson 8.5 | Check your change | 🪙 | stall
+hook: You pay with a $5 note for a $3 drink. How much change should you get?
+learn: Change is the money you get back when you pay more than the price.
+learn: Count up from the price: $3, then $4, then $5. That's $2 change.
+learn: Always check your change before you walk away.
+play: path | You pay $5 for a $3 drink. The shopkeeper gives you $1 change. | Politely say, "Excuse me, I think my change should be $2." => good: Everyone makes mistakes. Asking kindly fixes it. | Say nothing and walk away => bad: You just lost $1. | Shout "You're cheating me!" => bad: It was probably a mistake. Asking kindly works better.
+check: mcq | You pay $5 for something that costs $3. Your change is… | $2* | $8 | $3
+check: gap | You pay $10 for a $7 toy. Your change is $_ | 3
+home: Next time you buy something with cash, count your change with a grown-up.
+skill: counting
+
+@lesson 8.6 | Birds on our notes | 🐧 | museum
+hook: Look at the back of a note. Can you spot a bird?
+learn: {nz:Every New Zealand note shows a native bird.~au:Australia's newest notes each show a native bird and a wattle flower.}
+learn: {nz:The $5 note has a hoiho, a yellow-eyed penguin. The $10 note has a whio, a blue duck.~au:The $5 note has an eastern spinebill. The $10 note has a sulphur-crested cockatoo.}
+learn: {nz:Some of these birds are rare, so the notes remind us to look after them.~au:The birds and wattles were chosen to show off Australia's nature.}
+play: match | Match each note to its bird | $5={nz:Hoiho, the yellow-eyed penguin~au:Eastern spinebill}; $10={nz:Whio, the blue duck~au:Sulphur-crested cockatoo}; $20={nz:Kārearea, the New Zealand falcon~au:Laughing kookaburra}; $50={nz:Kōkako~au:Black swan}
+check: mcq | {nz:Which bird is on the $5 note?~au:Which bird is on the $20 note?} | {nz:The hoiho, a yellow-eyed penguin~au:The laughing kookaburra}* | A flamingo | A parrot from Brazil
+check: tf | Our notes show birds from our own country. | true
+home: Find the bird on a note with a grown-up. Look it up to learn where it lives.
+skill: currency
+

@@ -290,3 +290,270 @@ check: tf | Printing too much money can cause hyperinflation. | true
 home: Ask a grown-up what they'd buy if everyone had a million dollars, and what shops might do to prices.
 skill: inflation
 
+@lesson 5.1 | The florin | 🌸 | museum
+hook: In 1252, Florence minted a small gold coin. Soon traders all over Europe wanted it. Why?
+learn: The florin held about 3.5 grams of almost pure gold, and Florence kept it that way for centuries.
+learn: Because its gold content stayed steady, merchants trusted it far from home.
+learn: A trusted coin helped Florence's merchants and bankers become some of the richest in Europe.
+play: sort | Builds trust, Breaks trust | The same gold content year after year=Builds trust; Shaving gold off the edges=Breaks trust; A clear stamp showing who made it=Builds trust; Mixing in cheaper metal=Breaks trust; A city that punishes forgers=Builds trust; Changing the weight whenever the ruler is short of money=Breaks trust | Does it build or break trust in a coin?
+check: mcq | When was the florin first minted? | 1252* | 1952 | 52 BC
+check: tf | A coin whose gold content keeps changing is easy to trust. | false | Traders trust coins that stay the same.
+home: Look at a coin with a grown-up. What on it tells you who made it?
+skill: money
+
+@lesson 5.2 | How a bill of exchange worked | 📜 | museum
+hook: A cloth merchant in Bruges owes money in Florence. Shipping gold over the Alps is dangerous. What else can he do?
+learn: He pays the Medici branch in Bruges in local money.
+learn: The branch writes a bill of exchange, an order for its partners in Florence to pay out.
+learn: A courier carries the paper to Florence, and the seller is paid there in florins. The gold never travels.
+play: build | Follow a bill of exchange | A merchant in Bruges pays the Medici branch in local money; The branch writes a bill of exchange; A courier carries the bill to Florence; The Florence branch pays the seller in florins; The two branches settle up in their books later
+check: mcq | What travelled instead of gold? | A paper bill of exchange* | A ship full of wool | Nothing at all
+check: tf | Bills of exchange made trade safer, because merchants didn't have to carry gold. | true
+home: Talk with a grown-up about how money moves today when you pay someone in another city.
+skill: banking
+
+@lesson 5.3 | The interest ban | ⛪ | museum
+hook: The Church said charging interest on a loan was a sin. So how did bankers make money?
+learn: In medieval Europe, the Church banned usury, which meant charging interest on loans.
+learn: Bankers earned through currency exchange instead. A bill was paid out later, in another city, at a different exchange rate.
+learn: The gap in rates, plus the time the bill took, worked like interest without being called interest.
+play: mystery | The Church banned it in medieval Europe; It meant charging interest on a loan; Bankers got around it with exchange rates on bills; Today the word means charging very high interest | Usury* | Double-entry bookkeeping | The gold standard
+check: mcq | How did bankers earn money despite the ban? | Through differences in exchange rates on bills* | By printing their own gold | They earned nothing
+check: tf | The Medici bank openly charged interest on every loan. | false | They mostly earned through exchange deals instead.
+home: Look up today's exchange rate between your dollar and the euro with a grown-up.
+skill: banking
+
+@lesson 5.4 | Writing it down twice | 📒 | bank
+hook: How do you know your books are right? Italian merchants found a clever trick.
+learn: In double-entry bookkeeping, every amount is written down twice: where it comes from and where it goes.
+learn: Pay 100 florins for wool: cash goes down 100, and wool stock goes up 100. The two sides always balance.
+learn: If they don't balance, there's a mistake to find. Luca Pacioli explained the method in a printed book in 1494.
+try: Pay 100 florins for wool, so cash goes down 100 and wool goes up 100 :: gap | Sell cloth for 250 florins, so cloth goes down 250 and cash goes up _ | 250
+play: match | Match each deal to its two entries | Buy wool for 100 florins=Cash down 100, wool up 100; Sell cloth for 250 florins=Cloth down 250, cash up 250; Borrow 500 florins=Cash up 500, money owed up 500; Pay 20 florins rent=Cash down 20, rent costs up 20
+check: mcq | What does it mean if the two sides don't balance? | There's a mistake somewhere* | You made a profit | Nothing at all
+check: tf | Businesses still use double-entry bookkeeping today. | true
+home: Keep a two-column record of your money for a week: where it came from and where it went.
+skill: bookkeeping
+
+@lesson 5.5 | A web of branches | 🗺️ | museum
+hook: The Medici had branches in Rome, London, Bruges and more. How did they stop one bad branch sinking the whole bank?
+learn: Each branch was its own partnership. The local manager owned a share and took part of the profit.
+learn: Branches served what each city needed: the Pope's money in Rome, wool in London, cloth in Bruges.
+learn: Owning a share made managers care. It also let some take big risks far from Florence.
+play: route | Match each Medici branch to its main business | Rome=Banking for the Pope; London=The English wool trade; Bruges=Cloth and trade in Flanders; Geneva=Its busy trade fairs
+check: mcq | Why set up each branch as its own partnership? | So one branch's losses didn't sink the others* | So they could avoid paying staff | So Florence had no say
+check: tf | Branch managers owned a share of their branch. | true
+home: Find Florence, Rome, London, Bruges and Geneva on a map with a grown-up.
+skill: banking
+
+@lesson 5.6 | Why the Medici bank fell | 📉 | museum
+hook: By 1494, the mighty Medici bank was gone. What went wrong?
+learn: Branches lent huge sums to kings and dukes, who often didn't pay back. Loans to England's King Edward IV ruined the London branch.
+learn: Later Medici leaders, like Lorenzo the Magnificent, cared more about politics and art than about running the bank.
+learn: Distant managers took risks that Florence couldn't see or stop in time.
+play: sort | Helped it grow, Helped it fall | Trusted bills of exchange=Helped it grow; Big loans to kings who didn't repay=Helped it fall; Careful double-entry books=Helped it grow; Leaders focused on politics, not the bank=Helped it fall; Managers who shared in the profits=Helped it grow; Distant managers taking unchecked risks=Helped it fall | Did it help the bank grow or fall?
+check: mcq | What hurt the London branch most? | Loans to the king that weren't repaid* | Too many customers | A shortage of paper
+check: tf | Lending a lot to one powerful borrower can be very risky. | true
+home: Talk with a grown-up: why is it risky to lend lots of money to just one person?
+skill: risk
+
+@lesson 6.1 | The box that changed the world | 📦 | museum
+hook: In 1956, a trucking boss loaded 58 metal boxes onto an old tanker. Why did it matter?
+learn: Malcolm McLean's ship, the Ideal X, sailed from New Jersey to Houston carrying 58 containers.
+learn: Before containers, dockworkers loaded sacks and crates one by one. A ship could sit in port for days or weeks.
+learn: Standard-sized boxes moved from truck to ship to train without being unpacked, and loading costs fell dramatically.
+play: mystery | It started in 1956; Its first ship was called the Ideal X; It's a standard-sized metal box; It goes from ship to truck or train without being unpacked | The shipping container* | The jumbo jet | The steam train
+check: mcq | What made containers so efficient? | Standard sizes moving between ship, truck and train* | Bright paint | They floated by themselves
+check: tf | Before containers, ships were loaded sack by sack and crate by crate. | true
+home: Next time you see a container on a truck or train, look for the shipping company's name. Where might it have come from?
+skill: trade
+
+@lesson 6.2 | Why countries trade | ⚖️ | stall
+hook: We could grow our own rice and build our own cars. So why import them?
+learn: Countries do best by making what they're relatively good at and trading for the rest. Economists call this comparative advantage.
+learn: The idea comes from David Ricardo, in 1817. Even if one country is better at everything, both can gain by specialising.
+learn: {nz:New Zealand's big exports include dairy, meat and wood.~au:Australia's big exports include iron ore, coal and gas.}
+play: match | Match each country to a big export it's known for | New Zealand=Dairy products like milk powder; Australia=Iron ore; Japan=Cars; Chile=Copper; Saudi Arabia=Oil
+check: mcq | What's comparative advantage? | Making what you're relatively best at and trading for the rest* | Making everything yourself | Never trading
+check: tf | Two countries can both gain from trade, even if one is better at everything. | true
+home: Check five things at home. Where were they made?
+skill: trade
+
+@lesson 6.3 | A T-shirt's journey | 👕 | museum
+hook: Your $10 T-shirt might have travelled further than you ever have. Where has it been?
+learn: Cotton might be grown in India or the US, spun into thread in China, and sewn into a shirt in Bangladesh.
+learn: Each country does the step it does most cheaply or best. This chain of steps is called a supply chain.
+learn: Long chains keep prices low but can hide poor conditions. In 2013, the Rana Plaza garment factory in Bangladesh collapsed, killing more than 1,100 workers.
+play: route | Follow one possible journey of a T-shirt | Cotton is grown=India; Cotton is spun into thread=China; Thread is sewn into a T-shirt=Bangladesh; The T-shirt is sold={nz:A shop in New Zealand~au:A shop in Australia}
+check: mcq | What's a supply chain? | All the steps from raw material to shop* | A chain on a ship | A type of bike
+check: tf | Long supply chains can hide poor working conditions. | true
+home: Read the labels in three pieces of your clothing. Which countries made them?
+skill: trade
+
+@lesson 6.4 | Chokepoints | 🚢 | museum
+hook: In March 2021, one ship got stuck sideways and held up world trade for six days. Which one?
+learn: Much of world trade squeezes through a few narrow routes, called chokepoints.
+learn: The Suez Canal links Europe and Asia. The Panama Canal links the Atlantic and Pacific oceans.
+learn: When one is blocked, by an accident, a drought or a conflict, ships wait or take long detours, and prices can rise.
+play: mystery | It's a giant container ship, about 400 metres long; In March 2021, strong winds pushed it sideways; It blocked the Suez Canal for six days; Hundreds of ships queued up behind it | The Ever Given* | The Titanic | The Ideal X
+check: mcq | What is a chokepoint? | A narrow route that lots of trade must pass through* | A type of cargo | A port with no ships
+check: tf | Blocking a canal can delay goods and push up prices around the world. | true
+home: Find the Suez and Panama Canals on a map with a grown-up.
+skill: trade
+
+@lesson 6.5 | Just in time, or just in case? | ⏳ | workshop
+hook: In 2021, car factories around the world slowed down because they couldn't get tiny computer chips. How?
+learn: "Just in time" means keeping only small stocks and ordering parts right before you need them. It's cheap and efficient.
+learn: During the pandemic, factories shut and ships got stuck. With no spare stock, shortages spread fast.
+learn: "Just in case" means keeping more stock or using more suppliers. It's safer but costs more.
+play: debate | Should businesses keep bigger stockpiles after the pandemic? | Some extra stock and more suppliers for vital parts is worth the cost* | No. Spare stock is always a waste of money | Too much stock is costly, ties up cash and can go out of date. The right balance depends on the product.
+check: mcq | What's "just in time"? | Ordering parts right before you need them* | Keeping huge warehouses full | Never ordering anything
+check: tf | Just-in-time systems are efficient but can fail badly in a crisis. | true
+home: Talk with a grown-up: did your family run short of anything during the pandemic?
+skill: trade
+
+@lesson 6.6 | Taxes on trade | 🧾 | townhall
+hook: A government puts a 10% tax on imported cars. Who ends up paying?
+learn: A tariff is a tax on goods coming into a country. It makes imports dearer, which can protect local makers.
+learn: Often buyers pay in the end, through higher prices. Other countries may hit back with tariffs of their own.
+learn: Free trade deals cut tariffs. Since 1983, {nz:New Zealand and Australia~au:Australia and New Zealand} have had one of the world's most open trade deals, called CER.
+try: A 10% tariff on a $1,000 TV adds $100 :: gap | A 10% tariff on a $30,000 car adds $_ | 3000
+play: slider | A $40,000 imported car gets a 15% tariff. Roughly what does it cost now? | 40000 | 50000 | 46000 | $ | 500 | 500
+check: mcq | Who often pays for a tariff in the end? | Buyers, through higher prices* | Nobody | Only the other country's government
+check: tf | Countries sometimes hit back with tariffs of their own. | true
+home: Look up one thing {nz:New Zealand~au:Australia} buys from overseas, and where it comes from.
+skill: trade
+
+@lesson 7.1 | "House prices always go up" | 🏠 | museum
+hook: Before 2008, many Americans believed house prices could only rise. What happens when everyone believes that?
+learn: When people think prices can only rise, they borrow more to buy, which pushes prices up further.
+learn: Lenders relaxed their checks. Some loans needed no proof of income at all.
+learn: US house prices fell by more than a quarter from their 2006 peak, and millions of families lost their homes.
+play: path | It's 2005. A lender offers you a home loan with no income check and tiny repayments for the first two years. | Work out whether you could afford the full repayments later => good: Smart. Many people couldn't when the cheap period ended. | Borrow the most they'll lend, since prices always rise => bad: When prices fell, people like you owed more than their house was worth. | Never borrow for a house, ever => ok: That avoids the risk, but careful borrowing can be fine.
+check: mcq | What helped fuel the US housing bubble? | Easy loans and a belief prices could only rise* | Very strict lending | A falling population
+check: tf | US house prices fell sharply after 2006. | true
+home: Ask a grown-up what checks the bank did before lending to them for a home or a car.
+skill: bubbles
+
+@lesson 7.2 | How 2008 reached us | 🌏 | townhall
+hook: The crisis started in the US. Why did {nz:New Zealand~au:Australia} feel it?
+learn: Banks around the world borrow from each other. When trust froze, borrowing got harder and dearer everywhere.
+learn: {nz:New Zealand was already in recession in 2008. The government guaranteed deposits in banks and finance companies to stop people panicking.~au:Australia avoided a recession. Strong demand from China for iron ore and coal helped, and so did government spending.}
+learn: {nz:The Reserve Bank cut the official cash rate from 8.25% to 2.5% in less than a year.~au:In 2009, many taxpayers got one-off cash payments of up to $900 to keep shops busy.}
+play: match | Match each tool to what it was meant to do | Cutting interest rates=Make borrowing cheaper to keep people spending; Guaranteeing deposits=Stop savers rushing to pull out their money; One-off cash payments=Get people spending in shops; Government building projects=Keep builders and tradies in work
+check: mcq | {nz:What did the NZ government guarantee in 2008?~au:What helped Australia avoid a recession?} | {nz:Deposits in banks and finance companies~au:Demand from China and government spending}* | {nz:Free houses for everyone~au:Closing all the banks} | {nz:Nothing~au:Banning exports}
+check: tf | A crisis in one country can spread through banks around the world. | true
+home: Ask a grown-up what they remember about 2008 and 2009.
+skill: history
+
+@lesson 7.3 | The pandemic shock | 😷 | townhall
+hook: In March 2020, whole countries shut their doors almost overnight. What happened to jobs and money?
+learn: {nz:New Zealand went into a strict lockdown on 26 March 2020. Shops, cafés and offices shut.~au:Australia closed its borders to non-residents on 20 March 2020, and states locked down. Shops, cafés and offices shut.}
+learn: {nz:The government paid a wage subsidy to employers, so they could keep paying their staff.~au:The government's JobKeeper scheme paid employers $1,500 a fortnight per worker, so they could keep paying their staff.}
+learn: Without that help, many more people would have lost their jobs.
+play: order | Put the pandemic's economic story in order | A new virus spreads around the world; Borders close and lockdowns begin; Businesses shut and jobs are at risk; Governments pay wage subsidies; Central banks cut rates to record lows; Spending bounces back as restrictions lift
+check: mcq | {nz:What did the wage subsidy do?~au:What did JobKeeper do?} | Helped employers keep paying staff* | Paid for holidays overseas | Closed businesses
+check: tf | Wage subsidies helped many people keep their jobs in 2020. | true
+home: Ask a grown-up how the 2020 lockdowns affected their work.
+skill: history
+
+@lesson 7.4 | Record-low rates | 📉 | bank
+hook: In 2020, interest rates fell almost to zero. Why, and what did it do?
+learn: {nz:The Reserve Bank cut the official cash rate to 0.25% in March 2020.~au:The Reserve Bank cut the cash rate to 0.25% in March 2020, then to 0.1% in November.}
+learn: Central banks also bought government bonds with newly created money. This is called quantitative easing.
+learn: Cheap money helped businesses survive. It also pushed house prices up fast, as people borrowed more.
+play: debate | Were central banks right to cut rates so hard in 2020? | Acting fast helped stop a collapse, though rates may have stayed low too long* | No. They should have done nothing at all | Critics say cheap money fuelled house prices and the inflation that came later.
+check: mcq | What is quantitative easing? | A central bank buying bonds with newly created money* | Raising taxes | Closing banks
+check: tf | Very low interest rates helped push house prices up. | true
+home: Look up today's {nz:official cash rate~au:cash rate} with a grown-up. How does it compare with 2020?
+skill: interest rates
+
+@lesson 7.5 | Inflation comes back | 🛒 | stall
+hook: In 2022, grocery bills jumped and rents rose. Why did prices climb so fast?
+learn: After lockdowns, people spent again, but factories and ships hadn't caught up. Demand outran supply.
+learn: The war in Ukraine pushed up energy and food prices around the world.
+learn: Central banks raised rates fast to cool spending. It worked, but borrowers felt the squeeze.
+play: sort | Pushed prices up, Helped bring them down | Jammed supply chains=Pushed prices up; Higher interest rates=Helped bring them down; Energy prices spiking after the war in Ukraine began=Pushed prices up; Ships and factories catching up=Helped bring them down; A rush of spending after lockdowns=Pushed prices up; People cutting back on spending=Helped bring them down | Did it push prices up, or help bring them down?
+check: mcq | Why did central banks raise rates in 2022? | To cool spending and slow inflation* | To make borrowing cheaper | To print more money
+check: tf | The war in Ukraine pushed up energy prices around the world. | true
+home: Compare a grocery receipt from now with an old one, if your household has one.
+skill: inflation
+
+@lesson 7.6 | Lessons for households | 🧰 | home
+hook: Three big shocks in under 20 years. What can a household learn?
+learn: An emergency fund of a few months' costs can carry you through a job loss.
+learn: Don't borrow so much that a rate rise would break your budget.
+learn: Keep learning skills, and spread your savings, so one shock can't knock everything over.
+play: tap | Tap the lessons for surviving a money shock | 🛟:yes:An emergency fund; 📉:yes:Borrowing less than the most you're offered; 🧺:yes:Spreading your savings around; 🎓:yes:Keeping your skills up to date; 🎰:no; 💸:no
+check: mcq | What helps most if you suddenly lose your job? | An emergency fund* | A big credit card limit | Hoping it won't happen
+check: tf | Borrowing less than the maximum gives you room if rates rise. | true
+home: Talk with a grown-up about how many weeks of costs an emergency fund should cover.
+skill: resilience
+
+@lesson 8.1 | Profit from making money | 🏭 | museum
+hook: A coin can cost far less to make than it's worth. Who keeps the difference?
+learn: The profit a government makes from issuing money is called seigniorage.
+learn: Long ago, rulers profited by putting less gold or silver in coins. Today it comes from issuing notes and coins worth more than they cost to make.
+learn: It can go the other way. In 2025, the US stopped making 1-cent coins, because each one cost almost 4 cents to make.
+try: A note costs 20c to make and is worth $20, so the profit is $19.80 :: gap | A coin costs 10c to make and is worth $1. The profit is _c | 90
+play: mystery | It's the profit from creating money; Medieval lords earned it from minting coins; Today it flows to central banks and governments; Its name comes from an old French word for a lord | Seigniorage* | Inflation | Interest
+check: mcq | Who gets the profit from issuing notes and coins? | The central bank and the government* | The shop you spend them in | Nobody
+check: tf | Making a coin usually costs less than the coin is worth. | true
+home: Talk with a grown-up: if making money is profitable, why can't governments just make lots more?
+skill: money
+
+@lesson 8.2 | Money as a weapon | 🧊 | townhall
+hook: In 2022, after Russia invaded Ukraine, other countries froze about US$300 billion of Russia's central bank money. How?
+learn: Countries hold reserves: savings kept in other countries' currencies and banks.
+learn: When Russia invaded Ukraine, the US, the EU, the UK, Japan and others froze Russian reserves held in their systems, and cut some Russian banks off from global payments. {nz:New Zealand~au:Australia} brought in sanctions too.
+learn: Sanctions can pressure a government without war. They can also hurt ordinary people, and push countries to build other payment systems.
+play: debate | Are financial sanctions a good response to an invasion? | They put real pressure on a government without sending troops, though they're no quick fix* | No. They never have any effect at all | Critics say sanctions hurt ordinary people more than leaders, and push countries to build rival payment systems.
+check: mcq | What are a country's reserves? | Savings kept in other currencies and banks* | Its army | Its national parks
+check: tf | Sanctions can affect ordinary people, not just leaders. | true
+home: Talk with a grown-up: what's a fair way to respond when one country invades another?
+skill: power
+
+@lesson 8.3 | The mighty US dollar | 💵 | shares
+hook: Lots of trade, even between two countries that aren't the US, is paid in US dollars. Why?
+learn: After World War II, the US dollar became the world's main reserve currency.
+learn: Oil and many other goods are priced in US dollars, and central banks hold more dollars than any other currency.
+learn: This gives the US extra power. It can borrow cheaply, and its sanctions reach further.
+play: sort | Gives the US power, Risk for the US | Countries want to hold US dollars=Gives the US power; Cheaper borrowing for the US government=Gives the US power; US sanctions reach banks worldwide=Gives the US power; Countries building ways to trade without dollars=Risk for the US; Huge US government debt worrying lenders=Risk for the US; Central banks buying more gold instead=Risk for the US | Does it give the US power, or is it a risk?
+check: mcq | What's a reserve currency? | A currency other countries hold as savings and use for trade* | A currency kept in a cupboard | A coin collection
+check: tf | Many goods, like oil, are priced in US dollars. | true
+home: Look up today's exchange rate between {nz:the New Zealand dollar~au:the Australian dollar} and the US dollar.
+skill: currency
+
+@lesson 8.4 | One currency, many countries | 💶 | townhall
+hook: 21 European countries share the euro. What happens when one of them gets into trouble?
+learn: Euro countries share one central bank, the European Central Bank, which sets one interest rate for them all.
+learn: That makes trade and travel easy. But a country can't set its own interest rate, or let its currency fall, in a crisis.
+learn: In Greece's debt crisis from 2010, it couldn't let its currency fall. It made deep cuts instead, and unemployment rose above 25%.
+play: debate | Should countries share one currency? | It can work, but members give up control and need rules to help each other in a crisis* | Yes, always. There are no downsides | Supporters say shared money makes trade easier and ends currency swings between members. Greece chose to stay in the euro.
+check: mcq | What can a euro country not do on its own? | Set its own interest rate* | Have its own flag | Hold elections
+check: tf | All euro countries share one central bank. | true
+home: Talk with a grown-up: would sharing one currency with {nz:Australia~au:New Zealand} be a good idea?
+skill: currency
+
+@lesson 8.5 | Too big to fail | 🏦 | bank
+hook: In 2008, governments spent huge sums rescuing banks. Why save banks, and not other businesses?
+learn: Some banks are so big and connected that their collapse could bring down the whole system. They're called "too big to fail".
+learn: A rescue, called a bailout, can stop a crash, but it uses public money.
+learn: If banks expect to be rescued, they may take bigger risks. Economists call that moral hazard, so regulators make big banks hold extra capital.
+play: match | Match each term to its meaning | Too big to fail=So big its collapse could sink the system; Bailout=A rescue using public money; Moral hazard=Taking more risk because someone else will pay; Capital buffer=Money a bank must hold to absorb losses
+check: mcq | What's moral hazard? | Taking bigger risks because someone else will cover the losses* | Being very careful | A type of insurance
+check: tf | Regulators make big banks hold extra money to absorb losses. | true
+home: Talk with a grown-up: should taxpayers ever rescue a private company?
+skill: power
+
+@lesson 8.6 | Who decides the Budget? | 🏛️ | townhall
+hook: Every year, the government decides how to spend billions of dollars. Could you do it?
+learn: The government collects taxes and decides how to spend them in the yearly Budget.
+learn: Parliament has to approve it, so voters have a say through the people they elect.
+learn: Every choice is a trade-off. More for health might mean less for roads, more borrowing or higher taxes.
+play: budget | You're the Minister of Finance with $100 billion. Cover every area, and keep some aside for emergencies. | 100 | Health=20; Education=15; Welfare and pensions=30; Defence=5; Roads and transport=5; Interest on debt=5; Emergency fund=0 | A big earthquake or flood:10
+check: mcq | Who has to approve the government's Budget? | Parliament* | The Reserve Bank | The biggest company
+check: tf | Spending more in one area means less somewhere else, more borrowing or higher taxes. | true
+home: Look up one thing in this year's government Budget with a grown-up.
+skill: civics
+
