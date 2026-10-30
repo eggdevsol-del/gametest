@@ -854,7 +854,8 @@ p{margin:0}
 .ring-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .ring-time{font:200 clamp(34px,12cqmin,96px)/1 var(--f-round);letter-spacing:-.04em}
 .ring-sub{font:800 clamp(11px,2cqmin,15px) var(--f-round);letter-spacing:.06em;text-transform:uppercase;opacity:.85;margin-top:4px}
-.work{min-height:0;display:flex;flex-direction:column;gap:10px;overflow:auto;-webkit-overflow-scrolling:touch;padding:2px}
+.work{min-height:0;max-height:100%;display:flex;flex-direction:column;gap:10px;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:2px}
+.work.more{-webkit-mask-image:linear-gradient(#000 calc(100% - 36px),transparent);mask-image:linear-gradient(#000 calc(100% - 36px),transparent)}
 .steps{display:flex;flex-direction:column;gap:clamp(6px,1.4cqh,12px)}
 .step{display:flex;align-items:center;gap:14px;min-height:clamp(52px,9cqh,78px);padding:8px 14px;border-radius:22px;background:rgba(255,255,255,.17);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);text-align:left;font:800 clamp(15px,3cqmin,23px)/1.2 var(--f-round);transition:background .25s,color .25s,transform .15s;box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
 .step:active{transform:scale(.97)}
@@ -896,7 +897,8 @@ p{margin:0}
 .pause-veil p{font:600 17px var(--f-round);opacity:.85;max-width:34ch}
 .pause-veil .btn-white{min-width:240px}
 .pv-quit{min-height:44px;padding:0 20px;border-radius:999px;font:800 16px var(--f-round);background:rgba(255,255,255,.14)}
-.proof{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,2.4cqh,22px);text-align:center;overflow:auto;padding:4px}
+.proof{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2.4cqh,22px);text-align:center;overflow:auto;overscroll-behavior:contain;padding:4px}
+.proof::before,.proof::after,.result::before,.result::after{content:"";flex:1 0 0}
 .viewfinder{position:relative;width:min(70cqw,52cqh,380px);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:24px;background:rgba(0,0,0,.16)}
 .viewfinder i{position:absolute;width:34px;height:34px;border:4px solid #fff;animation:vf 1.6s ease-in-out infinite}
 .viewfinder i:nth-child(1){top:12px;left:12px;border-right:0;border-bottom:0;border-radius:12px 0 0 0}
@@ -916,7 +918,7 @@ p{margin:0}
 .flash{position:absolute;inset:0;z-index:40;background:#fff;animation:flash .5s ease-out forwards;pointer-events:none}
 @keyframes flash{from{opacity:.95}to{opacity:0}}
 .p-err{font:700 14px var(--f-round);background:rgba(0,0,0,.25);padding:8px 14px;border-radius:12px}
-.result{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1.6cqh,14px);text-align:center;overflow:auto;padding:4px}
+.result{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.6cqh,14px);text-align:center;overflow:auto;overscroll-behavior:contain;padding:4px}
 .result.shake{animation:resShake .45s cubic-bezier(.36,.07,.19,.97)}
 @keyframes resShake{20%,60%{transform:translateX(-7px) rotate(-.5deg)}40%,80%{transform:translateX(7px) rotate(.5deg)}}
 /* Star slots: empty sockets in an arc, the middle one bigger and higher. With WebGL the pane's 3D layer draws cel-shaded stars into these slots. */
@@ -3895,6 +3897,8 @@ function renderPane(p) {
       </div>
       <footer class="pane-foot"><button class="finish ${allDone ? 'ready' : ''}" data-act="sFinish" data-pane="${p.i}">${ic('check')} I'm done</button></footer>
       <div class="hype" data-hype></div>`;
+    const w = inner.querySelector('.work'), more = () => w.classList.toggle('more', w.scrollHeight - w.scrollTop - w.clientHeight > 4);
+    w.addEventListener('scroll', more, { passive: true }); requestAnimationFrame(more); p.more = more;
   } else if (p.phase === 'proof') {
     inner.innerHTML = `${paneHead(p)}<div class="proof">
       ${p.photoUrl ? `<div class="polaroid big" style="--rot:-3deg"><span class="ph"><img src="${p.photoUrl}" alt="Your photo"></span><span class="pol-cap">${esc(c.title)}<small>${esc(p.kid.name)} · today</small></span></div>
@@ -4060,6 +4064,13 @@ function stepTap(p, k, btn) {
   floatPts(btn, `+${pts + combo}`); const r = btn.getBoundingClientRect(); FX.burst(r.left + r.width - 30, r.top + r.height / 2, [p.th.c3, '#fff', '#FFE066'], 18); if (p.fx && p.fx.burst) p.fx.burst(r.left + r.width - 30, r.top + r.height / 2);
   Sound.step(k); if (p.combo >= 1) { Sound.combo(); showHype(p, `Combo ×${p.combo + 1}! +${combo}`); }
   if (p.steps.every(Boolean)) { p.el.querySelector('.finish')?.classList.add('ready'); showHype(p, 'All steps done! Tap I’m done', 2600); Sound.coin(); }
+  else scrollToStep(p, p.steps.findIndex(x => !x));
+}
+// Scrolls only the steps list (scrollIntoView would also shift the pane, which clips its overflow)
+function scrollToStep(p, k) {
+  const w = p.el.querySelector('.work'), el = p.el.querySelectorAll('.step')[k]; if (!w || !el) return;
+  const wr = w.getBoundingClientRect(), r = el.getBoundingClientRect(), d = r.bottom > wr.bottom - 12 ? r.bottom - wr.bottom + 40 : r.top < wr.top ? r.top - wr.top - 8 : 0;
+  if (d) w.scrollBy({ top: d, behavior: reduced ? 'auto' : 'smooth' });
 }
 function finishPane(p, auto) {
   if (p.phase !== 'play') return;
@@ -4395,7 +4406,7 @@ document.addEventListener('keydown', e => {
   if (UI.screen === 'gate' && e.key === 'Backspace') ACT.pinDel();
 });
 document.addEventListener('pointerdown', () => { if (Stage.active) Sound.ensure(); }, { passive: true });
-addEventListener('resize', () => { Stage.panes.forEach(p => p.fx && p.fx.size()); if (!Stage.active && UI.screen !== 'boot') paintSky(); });
+addEventListener('resize', () => { Stage.panes.forEach(p => { if (p.fx) p.fx.size(); if (p.more) p.more(); }); if (!Stage.active && UI.screen !== 'boot') paintSky(); });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { if (Stage.active && !Stage.paused && Stage.panes.some(p => p.phase === 'play')) pauseStage(true); }
   else { if (Stage.active && Stage.wake == null) requestWake(); if (Store.ready) { buildMarket(); applyInterest(); scheduleRender(); } }
