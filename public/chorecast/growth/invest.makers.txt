@@ -77,3 +77,77 @@ check: mcq | What kind of investing did Bogle encourage? | Long-term and low-cos
 home: Tell someone at home what an index fund is in one sentence.
 skill: index
 
+@lesson 2.1 | Straight line or curve? | 📈 | shares
+hook: Two charts. One is a straight line. One starts flat, then shoots up. Which shows compound growth?
+learn: Adding $1,000 a year with no interest makes a straight line.
+learn: Compound growth makes a curve that gets steeper, because growth earns more growth.
+learn: In the early years the two look almost the same. The gap shows up later.
+play: match | Match each pattern to its chart shape | $10 added every week with no interest=A straight line going up; Money earning 7% a year for 40 years=A curve that gets steeper; Cash under the bed for 10 years=A flat line; Prices falling in a crash=A line that drops sharply
+check: mcq | Which shape shows compound growth? | A curve that gets steeper* | A flat line | A straight line
+check: tf | Compound growth looks most impressive in the later years. | true
+check: mcq | Why does the curve get steeper? | Growth earns more growth* | The bank adds a bonus | Charts are drawn that way for fun
+home: Sketch a straight line and a compound curve, and explain the difference to someone at home.
+skill: compound
+
+@lesson 2.2 | The rule of 72 | ✌️ | shares
+hook: How long does money take to double? There's a shortcut.
+learn: Divide 72 by the yearly growth rate. The answer is roughly how many years it takes to double.
+learn: At 6% a year, money doubles in about 12 years. At 8%, about 9 years.
+learn: It works for debt too. At 24% interest, a debt doubles in about 3 years.
+try: 72 ÷ 6 = 12 years to double :: gap | At 9% a year, money doubles in about _ years | 8
+play: gen | compound | 3
+check: gap | At 4% a year, money doubles in about _ years | 18
+check: mcq | At 12% a year, roughly how long does money take to double? | 6 years* | 12 years | 72 years
+check: tf | The rule of 72 works for debt too. | true
+home: Use the rule of 72 on a savings rate you find online.
+skill: compound
+
+@lesson 2.3 | Start at 15 or 25? | 🕰️ | shares
+hook: Aroha invests $1,000 a year from 15 to 24, then stops. Ben invests $1,000 a year from 25 to 64. Who has more at 65?
+learn: Starting early gives your money more years to compound.
+learn: At 7% a year, Aroha ends with about $221,000 from $10,000 put in. Ben ends with about $214,000 from $40,000 put in.
+learn: Time can matter more than the amount you put in.
+play: compound | One $1,000 invested at 15 and left until 65 | 1000 | 7 | 50
+check: mcq | Aroha puts in $10,000 from 15 to 24. Ben puts in $40,000 from 25 to 64. Both earn 7%. Who has more at 65? | Aroha* | Ben | Exactly the same
+check: tf | Time in the market can matter more than how much you put in. | true
+check: mcq | What's the biggest advantage teenagers have as investors? | Time* | Lots of money | Secret tips
+home: Try an online compound interest calculator with a grown-up. Compare starting at 15 and at 25.
+skill: compound
+
+@lesson 2.4 | Reading growth claims | 📊 | shares
+hook: A fund's chart shows $10,000 growing to about $76,000 over 30 years, with dips along the way. What can you trust?
+learn: The bottom axis is time. The side axis is value.
+learn: Dips are normal. Look at the whole trend, not one bad year.
+learn: Check whether returns are before or after fees, and whether they allow for inflation.
+play: scam | Honest or hype? Spot the misleading growth claims. | Average 7% a year over 30 years after fees. Past returns don't guarantee future ones=real; Our fund only goes up! See our last 12 months=scam; Guaranteed 30% a year, every year=scam; Chart shows growth before fees, with fees listed underneath=real; Turn $500 into $50,000 by Christmas=scam | Short time frames, guarantees and huge promises are warning signs.
+check: mcq | A chart shows one bad year in a 30-year rise. That bad year is… | Normal. Look at the whole trend* | Proof the fund is broken | A reason never to invest
+check: tf | A chart of the last 12 months tells you a lot about the next 30 years. | false | Short periods are mostly noise.
+check: mcq | What should you check on a growth chart? | Whether returns are before or after fees* | The colour of the line | Whether it's in 3D
+home: Find a long-term chart for a share index online with a grown-up. What do the dips line up with?
+skill: charts
+
+@lesson 2.5 | Real growth | 🎈 | shares
+hook: Your money grew 5% this year. Prices rose 3%. How much better off are you really?
+learn: Inflation means prices rise over time, so each dollar buys a bit less.
+learn: Real growth is roughly your return minus inflation.
+learn: Long-term charts can look huge. Allowing for inflation shows what the money can really buy.
+try: 6% return − 2% inflation ≈ 4% real growth :: gap | 7% return − 3% inflation ≈ _% real growth | 4
+play: slider | Your savings earn 2% a year. Inflation is 3%. Roughly what's your real growth, in %? | -5 | 5 | -1 | % | 0 | 1
+check: gap | 8% return − 3% inflation ≈ _% real growth | 5
+check: tf | If inflation is higher than your interest rate, your money buys less over time. | true
+check: mcq | Real growth means… | Growth after taking off inflation* | Growth with bonuses added | Growth before fees
+home: Ask a grown-up what a loaf of bread cost when they were your age.
+skill: inflation
+
+@lesson 2.6 | Deposits and growth | 🧱 | shares
+hook: After 40 years of saving, how much of the pile is money you put in, and how much is growth?
+learn: Many charts stack two parts: what you put in, and the growth on top.
+learn: Early on, most of the pile is your own money.
+learn: At about 7% a year, growth catches up with your deposits after roughly 18 years, then races ahead.
+play: build | Build the pile over 40 years of saving $1,000 a year at 7% | Year 1: almost all your own deposits; Year 10: growth starts to show; Year 20: growth is bigger than your deposits; Year 40: growth is over four times your deposits
+check: mcq | After 40 years of saving at 7%, which part is usually bigger? | The growth* | What you put in | They're always equal
+check: tf | In the first few years, most of your balance is your own deposits. | true
+check: gap | You put in $1,000 a year for 10 years. You've deposited $_ in total | 10000
+home: Use an online savings calculator, like {nz:Sorted's~au:Moneysmart's}, with a grown-up and look at the chart.
+skill: compound
+

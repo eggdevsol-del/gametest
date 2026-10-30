@@ -77,3 +77,77 @@ check: mcq | Who should you tell about a till error? | Your supervisor* | Nobody
 home: Think of a mistake you made and how you'd handle it now.
 skill: problemsolving
 
+@lesson 2.1 | Minimum pay | 💵 | bank
+hook: You and a 25-year-old do the same job at a café. Can you be paid less?
+learn: {nz:NZ has one adult minimum wage. Some 16 to 19 year olds can be paid the starting-out rate, 80% of the adult rate, for example in their first 6 months with an employer.~au:Australia has a national minimum wage, and awards set minimum rates for each kind of job. Workers under 21 can be paid junior rates, a percentage of the adult rate.}
+learn: Minimum rates usually go up each year. Check {nz:employment.govt.nz~au:fairwork.gov.au} for this year's numbers.
+learn: Being paid below the legal minimum is never OK, even if you agreed to it.
+play: mystery | It's set by law; It's the lowest hourly pay most employees can be given; It usually goes up each year; Your employer can't go below it, even if you agree | The minimum wage* | A bonus | A tax refund
+check: tf | If you agree to be paid less than the legal minimum, it becomes legal. | false | You can't sign away minimum pay.
+check: mcq | {nz:What's the starting-out rate?~au:What are junior rates?} | {nz:80% of the adult minimum, for some 16 to 19 year olds~au:A percentage of the adult rate, for workers under 21}* | {nz:A bonus for new workers~au:A bonus for young workers} | {nz:Half the adult rate for everyone under 20~au:The same as the adult rate}
+check: mcq | Where can you check this year's minimum rates? | {nz:employment.govt.nz~au:fairwork.gov.au}* | A friend's guess | Your boss's group chat
+home: Look up this year's minimum rate for your age on {nz:employment.govt.nz~au:fairwork.gov.au} with a grown-up.
+skill: workrights
+
+@lesson 2.2 | Breaks | 🥪 | workshop
+hook: You've worked 4 hours straight with no break. Your manager says breaks are for adults. Right?
+learn: {nz:In NZ, the law gives employees paid 10-minute rest breaks and unpaid 30-minute meal breaks, depending on how long they work.~au:In Australia, your award or agreement sets your breaks. Many give a paid rest break and an unpaid meal break on longer shifts.}
+learn: {nz:For example, a 4 to 6 hour shift comes with one paid 10-minute rest break and one 30-minute meal break.~au:The Fair Work Ombudsman's online pay and conditions tool shows the breaks in your award.}
+learn: Break rules cover young workers too.
+play: path | You're 4 hours into a 6-hour shift with no break. It's busy. | Politely ask your manager when you can take your break => good: Fair and calm. Breaks are a right, and good managers plan for them. | Keep working and say nothing, every shift => bad: You'll get tired and make mistakes, and you miss out on what you're owed. | Storm out mid-shift => bad: Leaving without telling anyone causes real problems. Ask first.
+check: tf | Young workers have no right to breaks. | false
+check: mcq | {nz:In NZ, a 4 to 6 hour shift includes…~au:What sets your breaks in Australia?} | {nz:A paid 10-minute rest break and a 30-minute meal break~au:Your award or agreement}* | {nz:No breaks~au:Your manager's mood} | {nz:A 2-hour lunch~au:Nothing at all}
+check: mcq | Why do breaks matter? | Tired workers make more mistakes and get hurt* | They don't | They're only for adults
+home: Ask a grown-up what breaks they get at work.
+skill: workrights
+
+@lesson 2.3 | Keep your own records | 🧾 | bank
+hook: Your pay is $40 short. Your boss says you worked 10 hours. You think it was 12. Who wins?
+learn: Write down every shift: date, start time, finish time and breaks.
+learn: {nz:NZ employers must keep wage and time records, and give you a copy if you ask.~au:In Australia, employers must give you a payslip within one working day of payday.}
+learn: Check your pay against your own record every payday.
+try: 12 hours × $20 = $240 :: gap | 15 hours × $18 = $_ | 270
+play: diff | Your notes and your payslip. Tap what doesn't match. | Mon 4 hours; Wed 3 hours; Sat 5 hours; Total 12 hours | Mon 4 hours; Wed 3 hours; Sat 3 hours; Total 10 hours
+check: mcq | What should you write down for each shift? | Date, start, finish and breaks* | Only how you felt | Nothing
+check: gap | You worked 6 hours at $22 an hour. You should be paid $_ | 132
+check: tf | Your own record of hours can help fix a pay mistake. | true
+home: Start a simple shift log in a notebook or notes app.
+skill: payslip
+
+@lesson 2.4 | Safe at work | 🦺 | workshop
+hook: Day one at a garden centre. Someone hands you a hedge trimmer with no training. What do you do?
+learn: Employers must keep you safe. That means training, safety gear and fixing hazards.
+learn: Never use a machine you haven't been trained on.
+learn: {nz:If work could seriously hurt you, you can refuse to do it. WorkSafe has more information.~au:If work could seriously hurt you, you can stop and raise it. Your state's work safety regulator can help.}
+play: tap | Tap the hazards in this workplace | 🔌:yes:Frayed cords can shock; 💧:yes:A wet floor can make you slip; 📦:yes:Heavy boxes can hurt your back if you lift them wrong; 🪴:no; 🧤:no; 🔥:yes:Hot surfaces can burn; 🦺:no; 🪜:yes:A wobbly ladder can tip
+check: mcq | You're asked to use a machine you've never been trained on. You… | Say you need training first* | Give it a go | Ask a customer to show you
+check: tf | You can refuse work that could seriously hurt you. | true
+check: mcq | Who must keep workers safe? | The employer, with everyone helping* | Only the customers | Nobody
+home: Spot three hazards at home and talk about how to fix them.
+skill: safety
+
+@lesson 2.5 | Trial shifts | 🚫 | stall
+hook: A café asks you to do a 6-hour unpaid "trial" shift serving customers. Fair?
+learn: {nz:In NZ, if you're doing real work for a business, you should be paid for it, trial shifts included.~au:In Australia, an unpaid trial is only allowed if it's short, supervised and just to show your skills. A whole shift of real work should be paid.}
+learn: Be wary of businesses that keep asking for free "trials" or "work experience" but never hire.
+learn: Volunteering for a charity is different from working for a business.
+play: scam | Fair or a rip-off? | A paid 3-hour trial shift at the proper rate=real; An unpaid 6-hour trial serving customers=scam; A job interview at the café=real; An unpaid "trial week" before a job that might open=scam; Volunteering at a beach clean-up=real | Real work for a business should be paid.
+check: tf | A business can make you work a full shift for free as a "trial". | false
+check: mcq | How is volunteering different? | It's for a charity or community cause, not a business's profit* | It's always paid | There's no difference
+check: mcq | A shop keeps asking for unpaid trials but never hires anyone. What might be going on? | They're getting free work* | They're being generous | It's normal
+home: Find the page about trial shifts on {nz:employment.govt.nz~au:fairwork.gov.au}.
+skill: workrights
+
+@lesson 2.6 | Getting help | ☎️ | townhall
+hook: Something at work doesn't feel right. Who can you talk to?
+learn: Start with someone you trust, like a parent, a teacher or a supervisor.
+learn: {nz:Employment New Zealand has free information. Community Law and Youthlaw Aotearoa give free legal help.~au:The Fair Work Ombudsman gives free advice. Youth Law Australia helps young people for free.}
+learn: A union can also help, if you're a member.
+learn: An employer isn't allowed to punish you for asking about your rights.
+play: order | Something's wrong at work. Put the steps in a sensible order. | Write down what happened and when; Talk to a grown-up you trust; Raise it calmly with your manager; If it isn't fixed, contact {nz:Employment New Zealand~au:the Fair Work Ombudsman}; Get free legal help if you need it
+check: mcq | Who gives free information about work rights? | {nz:Employment New Zealand~au:The Fair Work Ombudsman}* | A gaming forum | Nobody
+check: tf | An employer can punish you for asking about your rights. | false | That's against the law.
+check: mcq | A good first step when something's wrong at work? | Write down what happened and talk to someone you trust* | Post about it online | Quit without telling anyone
+home: Save the {nz:Employment New Zealand~au:Fair Work Ombudsman} website on your phone.
+skill: help
+

@@ -77,3 +77,77 @@ check: mcq | Which lines matter most? | Contributions, fees, returns and fund ty
 home: Find last year's statement for your fund and read the fees line.
 skill: fees
 
+@lesson 2.1 | Spot the fees | 🧾 | bank
+hook: Fund A charges 1.2% a year. Fund B charges 0.25% plus $30 a year. Which is cheaper on $10,000?
+learn: A percentage fee comes out of your balance every year, so it grows as your balance grows.
+learn: A fixed fee, like $30 a year, bites hardest when your balance is small.
+learn: Add them together to get the total yearly cost.
+try: 1% of $10,000 is $100 a year :: gap | 0.5% of $10,000 plus a $30 fixed fee is $_ a year | 80
+play: match | Match each fund to its yearly fees on a $10,000 balance | 1.2% fee=$120; 0.25% plus $30=$55; 0.8% and no fixed fee=$80; 0.5% plus $50=$100
+check: gap | 1.5% of $20,000 is $_ a year | 300
+check: mcq | On a $500 balance, which costs more? | A $50 fixed fee* | A 1% fee | They're the same
+check: tf | Percentage fees grow as your balance grows. | true
+home: Find the fees section in a {nz:KiwiSaver~au:super} fund's documents or website with a grown-up.
+skill: fees
+
+@lesson 2.2 | Returns after fees | 📏 | shares
+hook: Fund A returned 8% before fees and charges 1.2%. Fund B returned 7.5% after fees. Which did better for its members?
+learn: What matters to you is the return after fees and tax.
+learn: Some charts show returns before fees, which makes them look better.
+learn: Always compare like with like: after fees with after fees.
+try: 8% before fees − 1.2% fees = 6.8% after fees :: gap | 9% before fees − 1.5% fees = _% after fees | 7.5
+play: compound | $10,000 for 40 years at 5.7% a year, after high fees | 10000 | 5.7 | 40
+check: mcq | Over 40 years, $10,000 grows to about $134,000 at 6.7% but only about $92,000 at 5.7%. What made the gap? | Just 1% a year more in fees* | Bad luck | A tax change
+check: tf | You should compare funds using returns after fees. | true
+check: mcq | A chart shows returns before fees. Why be careful? | It looks better than what members actually got* | It means there are no fees | It's always a scam
+home: Find a fund's return after fees in its latest fund update or fact sheet.
+skill: fees
+
+@lesson 2.3 | Like with like | 🍎 | shares
+hook: A growth fund returned 9%. A conservative fund returned 4%. Is the growth fund better?
+learn: Different fund types take different risks. Growth funds hold more shares, so they usually return more over time, with bigger drops.
+learn: Compare growth with growth, and conservative with conservative.
+learn: Use the same time period too, ideally 5 or 10 years.
+play: sort | Fair comparison, Unfair comparison | Two growth funds over 10 years=Fair comparison; A growth fund against a cash fund=Unfair comparison; Two balanced funds over the same 5 years=Fair comparison; One fund's best year against another's average=Unfair comparison; Two conservative funds after fees=Fair comparison; A 1-year return against a 10-year average=Unfair comparison | Is it a fair comparison?
+check: mcq | What should you compare a growth fund with? | Other growth funds* | A cash fund | A savings account
+check: tf | A conservative fund that returned less than a growth fund must be a bad fund. | false | It takes less risk, so lower returns are expected.
+check: mcq | Which time period tells you more? | 10 years* | The last 3 months | Last week
+home: Find out which fund type you'd be in, and look up two other funds of that type.
+skill: compare
+
+@lesson 2.4 | Past performance | 🔮 | shares
+hook: Last year's top fund returned 25%. Should everyone pile in?
+learn: Past returns don't guarantee future returns. Last year's winner often isn't next year's.
+learn: Long-term returns, fees and the fund type tell you more than one great year.
+learn: Chasing last year's winner can mean buying after the rise.
+play: debate | Should you switch to whichever fund did best last year? | No. One year says little, and fees and fund type matter more* | Yes. The best fund last year will be best again | Some funds really are better run, and a long track record can show it. That's why ten-year results are worth a look.
+check: tf | Past returns guarantee future returns. | false
+check: mcq | What's more useful than last year's return? | Long-term returns, fees and fund type* | The fund's logo | Social media comments
+check: mcq | Chasing last year's best fund can mean… | Buying after the big rise* | Always winning | Paying no fees
+home: Ask a grown-up if they've ever switched funds, and why.
+skill: performance
+
+@lesson 2.5 | Comparison tools | 🔍 | online
+hook: There are hundreds of funds. How do you compare them without a giant spreadsheet?
+learn: {nz:Sorted Smart Investor is a free tool from the Retirement Commission and the FMA. It compares KiwiSaver and managed funds by fees, returns and type.~au:The ATO's YourSuper comparison tool is free. It compares super products by fees and returns.}
+learn: {nz:Every KiwiSaver fund also publishes regular fund updates with its fees and returns.~au:APRA tests super products every year. A product that fails two years in a row can't take new members.}
+learn: Use the tools, then read the fund's own documents before you switch.
+play: order | Compare funds the smart way. Put it in order. | Work out the fund type that suits your timeline; Open {nz:Sorted Smart Investor~au:the YourSuper comparison tool}; Filter to the same fund type; Compare fees and long-term returns after fees; Read the fund's documents before switching
+check: mcq | {nz:What does Sorted Smart Investor do?~au:What does the YourSuper comparison tool do?} | Compares funds by fees and returns* | Picks shares for you | Gives you free money
+check: tf | It's smart to compare funds of the same type. | true
+check: mcq | Before switching funds, you should… | Read the fund's own documents* | Ask a stranger online | Switch every week
+home: Open {nz:smartinvestor.sorted.org.nz~au:the YourSuper comparison tool on ato.gov.au} with a grown-up and look up their fund.
+skill: compare
+
+@lesson 2.6 | Active or index? | 🧭 | shares
+hook: One fund pays experts to pick shares. Another just buys the whole index. Which usually wins?
+learn: Active funds try to beat the market by picking shares. They usually charge higher fees.
+learn: Index funds buy everything in an index, for low fees.
+learn: Studies keep finding that most active funds trail their index over 10 years or more, mainly because of fees.
+play: path | You're picking a fund for the next 40 years. | A low-fee index fund that suits your timeline => good: Low fees and a broad spread. Hard to beat over decades. | An active fund with a strong 10-year record after fees => ok: It could work. Check it keeps beating its index after fees, and watch those fees. | The fund with the biggest ad and the highest fees => bad: Ads don't grow your money, and high fees eat returns every year.
+check: mcq | Why do most active funds trail their index over the long run? | Higher fees, and picking winners is hard* | They're not allowed to win | Index funds cheat
+check: tf | Index funds usually have lower fees than active funds. | true
+check: mcq | An index fund… | Buys everything in an index* | Picks a few hot shares | Guarantees a return
+home: Find one index fund and one active fund and compare their fees.
+skill: index
+

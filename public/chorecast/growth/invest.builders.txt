@@ -77,3 +77,75 @@ check: mcq | What do good investors do with tips? | Check them carefully and tak
 home: Spot one ad or post that tries to rush you, and tell a grown-up.
 skill: hype
 
+@lesson 2.1 | What is risk? | 🎢 | shares
+hook: Option A: $100 for sure. Option B: maybe $150, maybe $70. Which would you pick?
+learn: Risk means the result could turn out different from what you expect, better or worse.
+learn: Investments that can grow more usually jump around more.
+learn: Safer choices usually grow more slowly.
+play: sort | Lower risk, Higher risk | Savings account=Lower risk; Shares in one new company=Higher risk; Term deposit=Lower risk; A crypto coin=Higher risk; Government bond=Lower risk; Shares in a tiny start-up=Higher risk | Sort by risk
+check: mcq | What does risk mean in investing? | The result could be better or worse than expected* | You always lose | You always win
+check: tf | Investments that can grow more usually jump around more. | true
+check: mcq | Which is usually lower risk? | A savings account* | Shares in one start-up | A new crypto coin
+home: Ask a grown-up what they think is risky with money, and what feels safe.
+skill: risk
+
+@lesson 2.2 | The risk ladder | 🪜 | shares
+hook: Cash, bonds and shares. Which climbs fastest, and which wobbles most?
+learn: Cash in the bank grows slowly and steadily.
+learn: Bonds are loans to governments or companies. They usually pay a set amount of interest.
+learn: Shares wobble the most, but over long periods they have usually grown the most.
+play: order | Put these from least wobbly to most wobbly | Cash in a bank account; Government bonds; A mix of shares and bonds; Shares in many companies; Shares in one small company
+check: mcq | What is a bond? | A loan to a government or company that pays interest* | Part-ownership of a company | A kind of coin
+check: tf | Over long periods, shares have usually grown more than cash. | true | But they can fall a lot along the way.
+check: mcq | Which is usually the most wobbly? | Shares in one small company* | Cash in the bank | Government bonds
+home: Draw a risk ladder with cash at the bottom and shares at the top.
+skill: risk
+
+@lesson 2.3 | Time and risk | ⏰ | shares
+hook: You need money for a bike in 3 months. Should you put it in shares?
+learn: Shares can drop and take years to recover.
+learn: Money you need soon should be kept safe, like in a savings account.
+learn: Money you won't need for many years can take more risk, because it has time to recover.
+play: match | Match each goal to a sensible place for the money | Bike in 3 months=Savings account; A car in 6 years=A balanced mix; Retiring in 50 years=Mostly shares; Lunch money this week=Your everyday account
+check: mcq | You need $200 in two months. Where should it go? | A savings account* | Shares in one company | A crypto coin
+check: tf | Money you need soon should take big risks. | false | It might drop just when you need it.
+check: mcq | Why can long-term money take more risk? | It has time to recover from drops* | It can't drop | Banks protect it
+home: Think of something you're saving for. Is it short-term or long-term?
+skill: timeline
+
+@lesson 2.4 | Investing or gambling? | 🎲 | stage
+hook: Buying shares and buying a lotto ticket both involve risk. Are they the same thing?
+learn: When you buy shares, you own part of real businesses that make things and earn money.
+learn: Gambling games are set up so that, over time, most players lose.
+learn: Investing can lose money too, but spread-out investing has usually grown over long periods.
+play: sort | Investing, Gambling | Buying a share fund=Investing; A scratchie ticket=Gambling; Money in a term deposit=Investing; Betting on a footy game=Gambling; Shares in a company you've researched=Investing; A pokie machine=Gambling | Investing or gambling?
+check: tf | Gambling games are set up so most players lose over time. | true
+check: mcq | What do you own when you buy shares? | Part of real businesses* | A ticket in a prize draw | Nothing at all
+check: mcq | Which is gambling? | Buying a scratchie* | Saving in a bank | Buying a share fund
+home: Talk with a grown-up about how investing and gambling are different.
+skill: risk
+
+@lesson 2.5 | Why take a risk? | 💎 | shares
+hook: If shares can drop, why does anyone buy them?
+learn: People take risk because they hope for more reward.
+learn: Over long periods, the extra growth from shares has usually made up for the drops.
+learn: A small difference each year becomes a big difference after many years.
+play: compound | Watch $1,000 grow at 7% a year for 20 years | 1000 | 7 | 20
+check: mcq | Why do people accept investment risk? | For the chance of more growth* | Because losing is fun | Because it's always safe
+check: tf | A few percent more each year makes a big difference over 20 years. | true
+check: mcq | $1,000 grows at 2% or at 7% a year for 20 years. Which ends with more? | 7%* | 2% | They end the same
+home: Ask a grown-up what interest rate their savings account pays.
+skill: compound
+
+@lesson 2.6 | How do you feel about risk? | 😬 | garden
+hook: Your investment drops from $100 to $80 in a month. How do you feel?
+learn: Everyone feels risk differently. Some people stay calm. Some panic.
+learn: Knowing how you'll feel helps you choose investments you can stick with.
+learn: Only invest money you won't need soon and could cope with seeing drop.
+play: chat | Your friend's investment just dropped | them: My shares fell 20%! Should I sell everything right now? | me: Do you need the money soon? If not, maybe wait and don't panic*/Yes, sell it all now!/Buy a lotto ticket to win it back | them: Not for years. It's for when I'm older. | me: Then it has time to recover. Drops are normal*/It's ruined forever/Borrow money and buy heaps more
+check: mcq | Your long-term investment drops 20%. A calm first step is… | Remember it's long-term and don't panic* | Sell everything straight away | Tell everyone it's a disaster
+check: tf | Everyone feels the same about risk. | false | People feel very differently about ups and downs.
+check: mcq | What money should you invest? | Money you won't need for a long time* | This week's lunch money | Money borrowed from a friend
+home: Ask two family members how they'd feel if their savings dropped 20%. Compare the answers.
+skill: risk
+

@@ -81,3 +81,77 @@ check: mcq | Why are youth accounts popular? | Low or no fees* | They pay double
 home: Pick the account you'd choose and explain why to a grown-up.
 skill: banking
 
+@lesson 2.1 | Debit or credit? | 💳 | bank
+hook: Two cards look almost the same. One spends your money. One spends the bank's. Which is which?
+learn: A debit card spends money that is already in your account.
+learn: A credit card borrows the bank's money. You pay it back later, often with interest.
+learn: You usually have to be 18 to get a credit card.
+play: sort | Debit card, Credit card | Spends your own money=Debit card; Borrows money you pay back=Credit card; Charges interest if you don't pay in full=Credit card; Stops when your account is empty=Debit card; Has a credit limit=Credit card; Often comes with a youth account=Debit card | Which card is it?
+check: mcq | Whose money does a debit card spend? | Yours, from your account* | The bank's | The shop's
+check: tf | Credit card money is free money. | false | It's borrowed. You pay it back, often with interest.
+check: mcq | What is a credit limit? | The most you can borrow on the card* | The least you must spend | Your bank balance
+home: Ask a grown-up whether their card is debit or credit, and how they can tell.
+skill: credit
+
+@lesson 2.2 | Interest on debt | 📈 | bank
+hook: You borrow $1,000. A year later you owe $1,200. Where did the extra $200 come from?
+learn: Interest is the price of borrowing money.
+learn: Credit cards often charge around 20% a year on any amount you haven't paid back.
+learn: On most cards, paying the full balance by the due date each month means no interest on purchases.
+try: 20% of $500 is $100 a year :: gap | 20% of $1,000 is $_ a year | 200
+play: compound | Watch an unpaid $1,000 card debt snowball at 20% a year | 1000 | 20 | 5
+check: gap | You owe $600 at 20% a year. One year's interest is about $_ | 120
+check: tf | Paying a credit card in full each month usually avoids interest on purchases. | true
+check: mcq | What is interest on a loan? | The price you pay to borrow* | A gift from the bank | A type of tax
+home: Find the interest rate on a credit card website with a grown-up.
+skill: interest
+
+@lesson 2.3 | The minimum payment trap | 🪤 | bank
+hook: Your card bill says "Minimum payment $25". You owe $1,000. Pay $25 and you're fine, right?
+learn: The minimum payment keeps you in good standing with the bank, but it barely dents the debt.
+learn: Much of a small payment goes on interest, so the balance shrinks very slowly.
+learn: Pay as much as you can. The full balance is best.
+play: path | You owe $1,000 on a card at 20% a year. The bill shows a $25 minimum. | Pay the full $1,000 => good: No interest, and the debt is gone. | Pay $200 now and keep paying big chunks => ok: You'll pay a bit of interest, but you'll be clear in a few months. | Pay only the $25 minimum each month => bad: About $17 of each payment goes on interest. It would take over five years and cost more than $600 extra.
+check: mcq | Why is paying only the minimum risky? | The debt shrinks slowly and costs lots of interest* | The bank closes your account | It's against the law
+check: tf | The minimum payment is the amount you should aim to pay. | false | It's the least you can pay. Aim for the full balance.
+check: slider | You owe $1,000 at 20% a year. Roughly how much interest is that in one month? | 0 | 50 | 17 | $ | 3 | 1
+home: Look at a credit card statement with a grown-up and find the minimum payment line.
+skill: debt
+
+@lesson 2.4 | Buy now, pay later | ⏳ | online
+hook: "4 easy payments of $25!" Easy, until you miss one?
+learn: Buy now, pay later (BNPL) splits a price into smaller payments.
+learn: It can be interest-free, but late fees add up, and it makes spending feel too easy.
+learn: Several plans at once can stack up to more than you can pay. You must be 18 to sign up.
+learn: In both New Zealand and Australia, BNPL companies now have to follow lending rules and check you can afford it.
+play: budget | You get $60 a week and have three BNPL plans running. Plan your week. | 60 | Plan A payment=12; Plan B payment=12; Plan C payment=12; Food and bus=14; Savings=0 | Late fee:8
+check: mcq | What's a hidden cost of BNPL? | Late fees* | Free delivery | Bonus points
+check: tf | Having several BNPL plans at once can get hard to keep up with. | true
+check: mcq | A $100 jacket is "4 payments of $25". If you miss one, you might… | Pay a late fee* | Get the jacket free | Get a discount
+home: Spot a "pay later" button on a shopping site and talk about it with a grown-up.
+skill: bnpl
+
+@lesson 2.5 | Helpful or harmful debt? | ⚖️ | bank
+hook: Is all borrowing bad?
+learn: Some borrowing can help you, like a student loan or a home loan, if you can repay it.
+learn: Borrowing for things that lose value fast, like clothes or takeaways, is usually a bad idea.
+learn: Ask two questions: will this help me in the long run, and can I afford the repayments?
+play: sort | Usually helpful, Usually harmful | Student loan for a course you'll use=Usually helpful; Credit card for takeaways=Usually harmful; Home loan you can afford=Usually helpful; Payday loan for a new phone=Usually harmful; BNPL for concert merch=Usually harmful; Loan for tools to start a trade=Usually helpful | Sort the borrowing
+check: mcq | Which question matters most before borrowing? | Can I afford the repayments?* | Is the logo nice? | Do my friends borrow?
+check: tf | Borrowing for something that loses value fast is usually a bad idea. | true
+check: mcq | Payday loans usually have… | Very high costs* | No costs | Lower costs than a bank loan
+home: Ask a grown-up about a loan they've had and whether it was worth it.
+skill: debt
+
+@lesson 2.6 | The true cost | 🧮 | bank
+hook: A $1,200 laptop on a payment plan ends up costing $1,500. Still a good deal?
+learn: The true cost is everything you pay: the price, plus interest, plus fees.
+learn: Compare it with saving up and paying cash.
+learn: If borrowing costs a lot more, waiting might be the smarter move.
+play: price | Which way of getting the $1,200 laptop costs less overall? | Save for 6 months and pay cash:1200:1:laptop; 24 payments of $62.50:1500:1:laptop
+check: gap | 12 payments of $110 is $_ in total | 1320
+check: mcq | A $600 phone costs $750 on a plan. How much extra is that? | $150* | $75 | $600
+check: tf | The true cost of borrowing includes fees as well as interest. | true
+home: Find a "pay weekly" price in an ad and work out the total cost.
+skill: debt
+

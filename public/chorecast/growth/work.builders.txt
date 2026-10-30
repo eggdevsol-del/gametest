@@ -74,3 +74,76 @@ check: mcq | What goes first? | Important things that are due soon* | Whatever's
 home: Plan your next weekend on paper before it starts.
 skill: planning
 
+@lesson 2.1 | What reliable means | 🧱 | workshop
+hook: Your neighbour needs someone to feed their cat for a week. Who do they pick?
+learn: Reliable means people can count on you.
+learn: You do what you said, when you said, the way you said.
+learn: Reliable people get trusted with bigger jobs, and often better pay.
+play: sort | Reliable, Unreliable | Turns up when they said=Reliable; Forgets twice a week=Unreliable; Says early if they can't come=Reliable; Does half the job and leaves=Unreliable; Finishes the job properly=Reliable; Says yes to everything, then doesn't do it=Unreliable | Reliable or not?
+check: mcq | What does reliable mean? | People can count on you* | You're the fastest | You're the loudest
+check: tf | Reliable people often get trusted with bigger jobs. | true
+check: mcq | Who would you pick to feed your cat? | Someone who always does what they say* | Someone who forgets a lot | Someone who's scared of cats
+home: Ask a grown-up who they rely on at work, and why.
+skill: reliability
+
+@lesson 2.2 | Be on time | 🕐 | home
+hook: Soccer starts at 9:00. It takes 20 minutes to get there and 10 minutes to get ready. When do you start?
+learn: Work backwards from when you need to be there.
+learn: Add a little spare time for surprises, like traffic or lost shoes.
+learn: Being early feels calm. Being late is stressful for everyone.
+try: Starts 9:00, 20 minutes travel, 10 minutes to get ready, so start at 8:30 :: gap | Starts 4:00, 15 minutes travel, 15 minutes to get ready. Start getting ready at _ | 3:30 | 3:30; 3:45; 4:15
+play: gen | time | 4
+check: gap | Your job starts at 10:00. It's a 25-minute walk. Leave by _ | 9:35 | 9:35; 9:25; 10:25
+check: tf | Adding spare time helps with surprises. | true
+check: mcq | You need to be there at 3:00 and it takes 30 minutes. A smart time to leave is… | 2:20, with some spare time* | 2:59 | 3:00
+home: Work backwards to plan what time you need to leave for something tomorrow.
+skill: punctuality
+
+@lesson 2.3 | Keeping promises | 🤝 | stall
+hook: You said you'd help your aunt at her market stall on Saturday morning. Then a friend invites you to a movie at the same time. What do you do?
+learn: A promise is a promise, even when something more fun comes up.
+learn: Only say yes when you know you can do it.
+learn: If you truly can't, tell the person early and help find another way.
+play: path | You promised to help at your aunt's market stall on Saturday morning. A friend invites you to a movie. | Help at the stall and ask your friend about an afternoon movie => good: You kept your word and still saw your friend. Your aunt will ask you again. | Tell your aunt a few days early and find someone to cover => ok: Not perfect, but honest. She can make a plan. | Go to the movie and don't tell her => bad: She's setting up alone. She won't trust you next time.
+check: mcq | When should you say yes to a job? | When you know you can do it* | Always, to be nice | Never
+check: tf | If you can't keep a promise, telling the person early is better than saying nothing. | true
+check: mcq | What happens when you often break promises? | People stop trusting you* | People pay you more | Nothing
+home: Make one small promise to someone this week and keep it.
+skill: reliability
+
+@lesson 2.4 | Checklists | ✅ | workshop
+hook: Pilots use checklists before every flight. Why would someone who flies every day need a list?
+learn: Checklists stop you forgetting steps, even when you're busy or tired.
+learn: Pilots, nurses and chefs use them to get things right every time.
+learn: Make a checklist for any job with lots of steps.
+play: build | Build a checklist for washing the car | Get a bucket, sponge and car soap; Rinse the car with the hose; Wash from the top down; Rinse off the soap; Dry it with a towel; Put everything away
+check: mcq | Why do pilots use checklists? | So they don't miss a step* | Because they can't remember anything | For fun
+check: tf | Checklists are only for people who forget a lot. | false | Experts use them to get it right every time.
+check: mcq | When is a checklist most useful? | For jobs with lots of steps* | For blinking | For sleeping
+home: Make a checklist for getting ready for school and use it all week.
+skill: planning
+
+@lesson 2.5 | Running late | 📱 | online
+hook: You're going to be 15 minutes late for a pet-sitting job. Do you tell them?
+learn: Things go wrong sometimes. What matters is letting people know early.
+learn: Say sorry, say when you'll arrive, and don't make it a habit.
+learn: A quick message before you're late beats a big excuse after.
+play: chat | You're running late for a pet-sitting job | them: Hi! Are you still coming at 4? | me: Sorry, I'm running about 15 minutes late. I'll be there by 4:15*/Yeah, maybe/I'll come whenever | them: OK, thanks for letting me know. | me: Thanks for waiting. I'll still stay the full hour*/Whatever/I'll leave early to make up for it
+check: mcq | When should you tell someone you'll be late? | As soon as you know* | After you arrive | Never
+check: tf | A clear message with a new arrival time is helpful. | true
+check: mcq | Which message is best? | Sorry, running 10 minutes late. There by 3:40* | Late | Something happened, idk
+home: Practise writing a polite "running late" message with a grown-up.
+skill: communication
+
+@lesson 2.6 | Your reputation | 🏆 | workshop
+hook: Two kids both offer to mow lawns. One has mowed for 10 neighbours and never let anyone down. Who gets the next job?
+learn: Your reputation is what people expect from you, based on what you've done.
+learn: It's built slowly, job by job, and it can be damaged quickly.
+learn: Reliable workers get asked back and recommended to others.
+play: debate | Is being reliable more important than being the fastest? | Yes. People hire someone they can count on* | No. Speed is all that matters | Speed helps too. A fast worker who is also reliable is even better.
+check: mcq | How is a good reputation built? | Job by job, by being reliable* | With one big post online | By being the loudest
+check: tf | A good reputation can be damaged quickly. | true
+check: mcq | What do happy customers often do? | Ask you back and tell others* | Forget you | Ask for a refund
+home: Ask a grown-up who they'd recommend for a job, and why.
+skill: reputation
+

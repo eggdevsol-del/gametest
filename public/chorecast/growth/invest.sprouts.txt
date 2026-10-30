@@ -75,3 +75,77 @@ check: mcq | Your vault in Chorecast grows a little each day. Why? | Interest* |
 home: Check your Chorecast vault and see how much interest it has earned.
 skill: interest
 
+@lesson 2.1 | Plant and wait | 🌱 | garden
+hook: You plant a bean seed. Tomorrow you dig it up to check on it. Good idea?
+learn: Seeds need time. Digging them up stops them growing.
+learn: Saving is a bit like that. Leave it alone, and it adds up.
+learn: Waiting is hard, but it often gets you more.
+play: order | Put the bean plant in order | Plant the seed; Water it each day; A tiny shoot pops up; Leaves grow; Beans grow on the plant
+check: tf | Digging up a seed every day helps it grow. | false | Seeds need to be left alone to grow.
+check: mcq | What do seeds and savings both need? | Time* | Noise | Glitter
+check: mcq | You keep adding to your money box and leave it alone. What happens? | Your savings add up* | It vanishes | It turns into lollies
+home: Plant a seed with a grown-up. Draw how big it is each week.
+skill: patience
+
+@lesson 2.2 | Now or later? | ⏳ | bank
+hook: Gran offers you $5 today, or $8 if you wait one week. Which would you pick?
+learn: Sometimes waiting gets you more.
+learn: $8 is $3 more than $5. That is the reward for waiting.
+learn: It's OK to pick "now" sometimes. Just think first.
+try: $8 later take away $5 now is $3 extra :: gap | $10 later or $6 now. Waiting gets you $_ more. | 4
+play: path | You can have one cookie now, or two cookies after dinner. | Wait for two after dinner => good: Yum, double cookies! Waiting paid off. | Eat one now => ok: That's fine sometimes. But you missed an extra cookie. | Sneak both now => bad: That isn't fair, and it wasn't the deal.
+check: mcq | $5 now or $8 next week. Which gives you more? | $8 next week* | $5 now | They are the same
+check: gap | $4 now or $7 later. Waiting gets you $_ more. | 3
+check: tf | Waiting can get you more. | true
+home: Next time you get a treat, try waiting 10 minutes before you have it.
+skill: patience
+
+@lesson 2.3 | Waiting tricks | 🙈 | garden
+hook: Waiting is hard! What can help?
+learn: Put the treat out of sight. Out of sight helps it stay out of mind.
+learn: Do something fun while you wait, like drawing or playing outside.
+learn: Picture the bigger reward you will get.
+play: sort | Helps me wait, Makes waiting harder | Put the treat away=Helps me wait; Stare at it=Makes waiting harder; Play outside=Helps me wait; Think about it nonstop=Makes waiting harder; Draw the thing you're saving for=Helps me wait; Keep holding it=Makes waiting harder | Which ones help you wait?
+check: mcq | What is a good waiting trick? | Put the treat out of sight* | Stare at it | Hold it in your hand
+check: tf | Doing something fun can make waiting easier. | true
+check: mcq | You are saving for a book. What helps? | A picture of the book on your money box* | Spending on lollies | Forgetting your goal
+home: Draw something you want and stick it on your money box.
+skill: patience
+
+@lesson 2.4 | Saving step by step | 🪜 | bank
+hook: A kite costs $12. You save $3 a week. How long until you can fly it?
+learn: Big goals happen in small steps.
+learn: Saving the same amount each week adds up.
+learn: $3, then $6, then $9, then $12. That's 4 weeks!
+try: $2 a week for 3 weeks is $6 :: gap | $5 a week for 2 weeks is $_ | 10
+play: slider | You save $2 a week. How many weeks until you have $10? | 1 | 10 | 5 | weeks | 0 | 1
+check: gap | $4 a week for 3 weeks is $_ | 12
+check: mcq | You save $5 a week. When do you reach $15? | After 3 weeks* | After 1 week | After 10 weeks
+check: tf | Saving a little every week adds up. | true
+home: Draw a saving ladder. Colour in a step each time you save.
+skill: goals
+
+@lesson 2.5 | The fruit tree | 🍎 | garden
+hook: You plant a tiny apple tree. Next week, no apples. Next year, maybe none. Was it a waste?
+learn: Apple trees can take a few years before they give fruit.
+learn: Then they can give apples year after year.
+learn: Some good things take a long time. Then they keep giving.
+play: debate | Is a fruit tree worth planting if it takes years to fruit? | Yes. You wait a while, then get fruit every year* | No. If it isn't quick, it isn't worth it | Waiting is hard, and you have to look after the tree the whole time. But lots of people think it is worth it.
+check: tf | A fruit tree gives fruit the day you plant it. | false | It can take a few years.
+check: mcq | Once an apple tree starts fruiting, it can… | Give fruit year after year* | Never fruit again | Turn into a bush
+check: mcq | What does the fruit tree teach us? | Some things take time, then keep giving* | Quick is always best | Trees are boring
+home: Find a fruit tree near you, or a picture of one. Ask a grown-up how old it might be.
+skill: patience
+
+@lesson 2.6 | Wait for it | ⏱️ | kitchen
+hook: The cake is in the oven. Open the door too soon and it can sink! Can you wait for the right moment?
+learn: Some things are best when you wait for the right time.
+learn: Rushing can spoil them.
+learn: Good waiting means staying calm and watching.
+play: timing | Wait... then tap when the cake is ready | Take it out | Ready
+check: mcq | Opening the oven too soon can make a cake… | Sink* | Taste better | Grow bigger
+check: tf | Waiting for the right time can make things better. | true
+check: mcq | Which one shows patience? | Waiting your turn on the slide* | Pushing to the front | Grabbing the ball
+home: Bake or cook something with a grown-up and practise waiting for it.
+skill: patience
+

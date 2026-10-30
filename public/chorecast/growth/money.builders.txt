@@ -80,3 +80,78 @@ check: mcq | What helps next week go better? | A plan with some money spare* | S
 home: Think of one change that would make your money last all week.
 skill: budget
 
+@lesson 2.1 | What is a unit price? | ⚖️ | stall
+hook: A small bag of chips is $2. A big bag is $5. Which is the better deal?
+learn: A unit price is what something costs per 100 g, per litre or per item.
+learn: It lets you compare packs of different sizes fairly.
+learn: Big supermarkets in New Zealand and Australia must show unit prices on their shelf labels.
+try: $3 for 300 g is $1 per 100 g :: gap | $4 for 200 g is $_ per 100 g | 2
+play: price | Which bag of chips is better value? | Small bag:2:150:g; Big bag:5:450:g
+check: mcq | What does a unit price help you do? | Compare different-sized packs fairly* | Find the prettiest pack | Pay faster at the till
+check: gap | $6 for 3 litres is $_ per litre | 2
+check: tf | The bigger pack is always the better deal. | false | Often it is, but not always. Check the unit price.
+home: Find the unit price on three shelf labels at the supermarket.
+skill: unitprice
+
+@lesson 2.2 | Specials and multi-buys | 🏷️ | stall
+hook: "3 for $10!" Is that a deal or a trap?
+learn: To check a multi-buy, work out the price of one. $10 for 3 is about $3.33 each.
+learn: Compare that with the normal price of one.
+learn: If you won't use all three, it isn't a deal for you.
+try: 2 for $5 means $2.50 each :: gap | 4 for $10 means $_ each | 2.5
+play: price | Which is the best buy for muesli bars? | Single bar:1.5:1:bar; 3 for $4 deal:4:3:bar; Box of 6:7.2:6:bar
+check: mcq | Bread is $3 a loaf, or 2 for $7. Which is cheaper per loaf? | Buying one at $3* | The 2 for $7 deal | They're the same
+check: tf | A deal is only good if you will actually use it all. | true
+check: gap | 3 for $6 means $_ each | 2
+home: Find a multi-buy at the shop and work out the price of one.
+skill: deals
+
+@lesson 2.3 | Brand or home brand? | 🛒 | stall
+hook: Two tins of beans sit side by side. One has a famous name. One is the shop's own brand. What's the difference?
+learn: Home brands are the shop's own products. They are often cheaper.
+learn: Sometimes they taste just the same. Sometimes not. Try and see.
+learn: Famous brands spend a lot on ads, and that is part of the price.
+play: debate | Should a family always buy the famous brand? | No. Try the cheaper brand, and keep buying it if it's just as good* | Yes. Famous brands are always better | Some people stick with a brand because they really prefer it, or because it suits an allergy. That can be worth paying for.
+check: mcq | Why are famous brands often dearer? | Part of the price pays for ads* | They are made of gold | The government sets it
+check: tf | A home brand can be just as good as a famous brand. | true
+check: price | Which tin of tomatoes is better value? | Famous brand:2.2:400:g; Home brand:1.3:400:g
+home: Do a blind taste test of a famous brand and a home brand with your family.
+skill: brands
+
+@lesson 2.4 | Cost per use | 👟 | stall
+hook: Cheap shoes cost $30 and last 3 months. Good shoes cost $90 and last a year. Which costs less?
+learn: Cost per use is the price divided by how many times you use it.
+learn: Something dearer can be cheaper in the long run if it lasts much longer.
+learn: But only if you really use it.
+try: $30 shoes for 3 months is $10 a month :: gap | $90 shoes for 12 months is $_ a month | 7.5
+play: price | Which shoes cost less per month? | Cheap shoes:30:3:months; Good shoes:90:12:months
+check: mcq | A $20 game you play 100 times, or a $10 game you play twice. Which costs less per play? | The $20 game* | The $10 game | The same
+check: gap | A $40 jacket worn 20 times costs $_ per wear | 2
+check: tf | The lowest price always means the best value. | false | How long it lasts and how much you use it matter too.
+home: Pick something you use a lot and work out its cost per use.
+skill: value
+
+@lesson 2.5 | Shop around | 🗺️ | stall
+hook: The same headphones cost $49 at one shop and $35 at another. Would you check?
+learn: Different shops charge different prices for the same thing.
+learn: Checking two or three shops can save real money, especially on big buys.
+learn: Count the extras too, like delivery or a bus fare to get there.
+play: route | Match each shop to what you would really pay for the $40 game | Online shop, $35 plus $8 delivery=$43; Town shop, $40 and no extras=$40; Mall shop, $38 plus $4 bus fare=$42
+check: mcq | Headphones are $35 online plus $8 delivery, or $40 at a shop nearby. Which costs less? | The shop nearby* | Online | They are the same
+check: tf | Shopping around matters most for big buys. | true
+check: mcq | What else should you count when comparing prices? | Delivery and travel costs* | The colour of the shop | How busy it is
+home: Pick one thing your family wants and check its price at three shops.
+skill: compare
+
+@lesson 2.6 | Value detective | 🕵️ | stall
+hook: Your favourite biscuits cost the same as last year. But are there fewer in the pack?
+learn: Sometimes packs get smaller but the price stays the same. People call it shrinkflation.
+learn: Checking the unit price catches it.
+learn: A "sale" sign doesn't always mean a good price. Compare it with the normal price.
+play: mystery | It's on shelf labels at big supermarkets; It shows the cost per 100 g, per litre or per item; It helps you compare big and small packs; It catches packs that quietly shrink | The unit price* | The barcode | The best-before date
+check: mcq | A biscuit pack shrinks from 250 g to 200 g. The price stays $4. What happened? | You pay more per biscuit* | You got a deal | Nothing changed
+check: tf | A big red "sale" sign always means a good price. | false | Compare with the normal price and with other shops.
+check: price | Which juice is better value? | 1 litre bottle:3.5:1000:ml; 2 litre bottle:6:2000:ml
+home: Be the value detective on your next family shop. Find the best-value pasta.
+skill: unitprice
+

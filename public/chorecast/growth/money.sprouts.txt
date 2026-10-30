@@ -80,3 +80,76 @@ check: mcq | Who should you tell when you get money? | A grown-up you trust* | N
 home: Find a safe place at home for your money with a grown-up.
 skill: safety
 
+@lesson 2.1 | What is a need? | 🏠 | home
+hook: You need some things to live. Other things are just nice. Can you tell which?
+guess: mcq | Which one do you need to stay alive? | Water* | A toy | A balloon
+learn: A need is something you must have to be safe and healthy.
+learn: Food, water, a home, warm clothes and the doctor are needs.
+learn: A want is nice to have. You would be OK without it.
+play: sort | Need, Want | Water=Need; Lollies=Want; Warm coat=Need; Toy robot=Want; Bed=Need; Video game=Want; Healthy food=Need; Sparkly stickers=Want | Need or want?
+check: mcq | Which one is a need? | Healthy food* | A new toy | A sticker
+check: tf | A new video game is a need. | false | You would be OK without it, so it is a want.
+check: mcq | What is a want? | Something nice you can live without* | Something you must have | Something that is free
+home: Find three needs and three wants in your home with a grown-up.
+skill: needswants
+
+@lesson 2.2 | Wants are OK | 🎈 | stall
+hook: Is it bad to want things?
+learn: Wanting things is normal. Everyone has wants.
+learn: The trick is to pay for needs first.
+learn: Then you can pick a want with the money left over.
+try: You have $10. Lunch costs $6. You have $4 left for a want :: gap | You have $8. A need costs $5. You have $_ left. | 3
+play: path | You have $5. You need a drink bottle for school. It costs $4. You also want a toy car for $5. | Buy the drink bottle first => good: Great choice. Your need is sorted, and you have $1 to start saving for the car. | Buy the toy car => bad: Fun for now, but you will be thirsty at school with no bottle. | Ask for both and get cross => bad: Getting cross doesn't make more money. Picking needs first does.
+check: mcq | What should you pay for first? | Needs* | Wants | The shiniest thing
+check: tf | It is normal to want things. | true
+check: gap | You have $10. A need costs $7. You have $_ left. | 3
+home: Tell a grown-up one want you are saving for and what it costs.
+skill: needswants
+
+@lesson 2.3 | Plain or fancy? | 👟 | stall
+hook: Shoes are a need. Are light-up shoes a need too?
+learn: Some needs come in a fancy kind. The fancy kind is a want.
+learn: You need shoes. You want the shoes with lights.
+learn: Ask yourself: would a plain one do the job?
+play: match | Match each need to its fancy want | Plain shoes=Light-up shoes; Water=Fizzy drink; Warm jacket=Jacket with a cartoon on it; Lunchbox=Lunchbox with lots of gadgets
+check: mcq | You need a school bag. Which is the need part? | A bag that holds your books* | A famous cartoon on it | Three bags
+check: tf | A fizzy drink is a need. | false | Water does the job. Fizzy drink is a want.
+check: mcq | A good question before you buy: | Would a plain one do the job?* | Is it the shiniest? | Does my friend have one?
+home: At the shop, find a need and its fancy want version.
+skill: needswants
+
+@lesson 2.4 | What bodies need | 🧥 | home
+hook: This room is full of stuff. What does your body really need?
+learn: Our bodies need food, water, sleep and warmth.
+learn: We also need to feel safe and loved. That doesn't cost money.
+play: tap | Tap all the needs | 🍎:yes:Food keeps you healthy; 💧:yes:Water keeps you alive; 🏠:yes:A home keeps you safe and warm; 🧸:no; 🎮:no; 🧥:yes:A coat keeps you warm; 🍭:no; 🛏️:yes:Sleep helps you grow
+check: tf | Feeling safe and loved is a need. | true | Everyone needs to feel safe and loved.
+check: mcq | What keeps you warm on a cold night? | A blanket* | A lolly | A sticker
+check: mcq | What do all people need? | Food and water* | A phone | A trampoline
+home: Thank someone in your family for helping with one of your needs.
+skill: needswants
+
+@lesson 2.5 | Families choose | 👨‍👩‍👧 | home
+hook: Your family has money for this week. What gets paid first?
+learn: Grown-ups pay for needs first, like food, rent and power.
+learn: Sometimes there isn't money left for wants. That's OK.
+learn: Saying "not today" is part of good money choices.
+play: sort | Pay first, If money is left | Food=Pay first; Rent=Pay first; Power=Pay first; School shoes=Pay first; Takeaways=If money is left; New toys=If money is left; Movie tickets=If money is left; Lollies=If money is left | Help the family plan the week
+check: tf | When a grown-up says "not today", they are being mean. | false | They are looking after needs first.
+check: mcq | What does a family pay for first? | Needs like food and rent* | Toys | Treats
+check: mcq | Your family can't buy a want this week. What is a kind thing to say? | OK, maybe another time* | You never get me anything | I'll be grumpy all day
+home: Ask a grown-up to show you one bill your family pays, like power.
+skill: needswants
+
+@lesson 2.6 | Picking a want | 🎯 | stall
+hook: You want a ball, a book and a slime kit. You have $10. What now?
+learn: You can't have every want. You have to choose.
+learn: Pick the one you will love the longest.
+learn: Put the others on a wish list for later.
+play: chat | Your friend shows you a new toy | them: Look at my slime kit! You should get one! | me: Cool! I'm saving for a ball, so maybe later*/I want one right now/Give me yours | them: But it's so fun! | me: It looks fun. I'll put it on my wish list*/I'll spend all my money today/I don't care about my plan
+check: mcq | The ball is $8 and the slime is $7. You have $10. Can you buy both? | No, that is $15* | Yes | Only on Tuesdays
+check: tf | A wish list helps you remember wants for later. | true
+check: mcq | How do you pick which want to buy? | The one you will love the longest* | The first one you see | The one your friend has
+home: Start a wish list with a grown-up. Put the thing you want most at the top.
+skill: choosing
+

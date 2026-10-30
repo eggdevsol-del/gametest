@@ -74,3 +74,74 @@ check: mcq | After dinner, a good teammate might… | Clear their plate and help
 home: Help someone in your family without being asked today.
 skill: teamwork
 
+@lesson 2.1 | The family team | 🏡 | home
+hook: Who makes dinner, washes clothes and keeps the house tidy? Is it one person's job?
+learn: A home is like a team. Everyone helps in their own way.
+learn: Grown-ups do big jobs. Kids can do kid-sized jobs.
+learn: When everyone helps, jobs get done faster and nobody gets too tired.
+play: match | Match each person to a job they could do | Little brother, aged 3=Put toys in the box; You, aged 8=Set the table; Big sister, aged 14=Help cook dinner; A grown-up=Pay the bills
+check: tf | Only grown-ups should do jobs at home. | false | Everyone can help in their own way.
+check: mcq | Why is a family like a team? | Everyone helps out* | Everyone wears the same shirt | Only one person plays
+check: mcq | What happens when everyone helps? | Jobs get done faster* | Jobs take longer | Nobody gets dinner
+home: Ask your family what jobs they do. Pick one new job you can help with.
+skill: teamwork
+
+@lesson 2.2 | Kid-sized jobs | 🧹 | home
+hook: You're 8. What jobs could you do at home?
+learn: Kids your age can do lots of jobs: make the bed, set the table, feed a pet, sort socks.
+learn: Some jobs are for grown-ups, like using the oven or sharp knives.
+learn: If you're not sure, ask first.
+play: sort | I can do it, Grown-up job | Make my bed=I can do it; Feed the cat=I can do it; Use the oven=Grown-up job; Set the table=I can do it; Mow the lawn=Grown-up job; Sort the socks=I can do it; Use a sharp knife=Grown-up job; Water the plants=I can do it | Who should do each job?
+check: mcq | Which job is good for an 8-year-old? | Setting the table* | Using the oven alone | Driving the car
+check: tf | If you're not sure about a job, ask a grown-up first. | true
+check: mcq | Who should use sharp knives? | A grown-up* | A toddler | The dog
+home: Pick one kid-sized job and do it every day this week.
+skill: chores
+
+@lesson 2.3 | Spot the job | 👀 | home
+hook: Some helpers wait to be asked. Super helpers spot jobs by themselves. How?
+learn: Look around. Is something out of place? Is the bin full? Is the pet's bowl empty?
+learn: Doing a job before someone asks is called using your initiative.
+learn: It helps your family feel looked after.
+play: tap | Spot the jobs that need doing | 🧦:yes:Socks on the floor go in the basket; 🍽️:yes:Dirty plates go to the sink; 🐶:yes:The dog's bowl is empty; 🖼️:no; 🪴:yes:The plant looks dry; 🛋️:no; 🗑️:yes:The bin is full; 📺:no
+check: mcq | What does using your initiative mean? | Doing a job before you're asked* | Waiting to be told | Hiding the job
+check: tf | Super helpers look around for jobs. | true
+check: mcq | The dog's water bowl is empty. What could you do? | Fill it up, or tell a grown-up* | Ignore it | Drink it
+home: Do one job today before anyone asks. See if anyone notices!
+skill: initiative
+
+@lesson 2.4 | Make your bed | 🛏️ | home
+hook: A made bed makes the whole room look tidy. Can you do it in one minute?
+learn: Making your bed is a quick job that makes a big difference.
+learn: Do it in the same order every day. Soon it gets fast.
+play: build | Build a made bed | Pull the sheet up flat; Pull the {nz:duvet~au:doona} up over it; Smooth out the bumps; Fluff the pillow; Put the pillow at the top
+check: mcq | What is the first step? | Pull the sheet up flat* | Fluff the pillow | Jump on it
+check: tf | A job gets faster when you do it the same way each day. | true
+check: mcq | Why make your bed? | It makes the room look tidy* | It's a rule for grown-ups only | It hides your toys
+home: Time yourself making your bed every morning this week.
+skill: chores
+
+@lesson 2.5 | Helping with a smile | 😊 | home
+hook: Two kids do the dishes. One moans the whole time. One sings. Who would you rather help?
+learn: How you help matters too.
+learn: A cheerful helper makes jobs feel easier for everyone.
+learn: You don't have to love every job. Do your best anyway.
+play: chat | A grown-up asks for help | them: Can you help me unpack the shopping, please? | me: Sure! Where does this go?*/Ugh, do I have to?/No, I'm busy | them: Thanks! The cold things go in the fridge. | me: OK, I'll do the cold things first*/I'll leave them on the floor/You do it
+check: mcq | What makes you a great helper? | Helping cheerfully* | Moaning a lot | Going slow on purpose
+check: tf | You have to love a job to do it well. | false | You can do your best even when a job is boring.
+check: mcq | A grown-up asks for help. A good answer is… | Sure, what can I do?* | Not now, not ever | Make my brother do it
+home: Next time someone asks you to help, say "Sure!" first.
+skill: attitude
+
+@lesson 2.6 | Our job chart | 📋 | home
+hook: How does your family remember who does what?
+learn: A job chart shows each person's jobs for the week.
+learn: Tick a job when it's done. It feels great!
+learn: Chorecast is a job chart too. Finished jobs can earn you money and stars.
+play: island | Your island grows as you learn and save. Let's count! | items
+check: mcq | What does a job chart show? | Who does which job* | What's for dinner | The weather
+check: tf | Ticking off a job when it's done can feel great. | true
+check: mcq | You forgot your job yesterday. What now? | Do it today and say sorry* | Hide the chart | Blame the dog
+home: Look at your jobs in Chorecast with a grown-up, or draw a job chart together.
+skill: teamwork
+

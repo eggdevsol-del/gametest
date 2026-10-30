@@ -76,6 +76,80 @@ check: mcq | Your vault in Chorecast grows a little each day. Why? | Interest* |
 home: Check your Chorecast vault and see how much interest it has earned.
 skill: interest
 
+@lesson 2.1 | Plant and wait | 🌱 | garden
+hook: You plant a bean seed. Tomorrow you dig it up to check on it. Good idea?
+learn: Seeds need time. Digging them up stops them growing.
+learn: Saving is a bit like that. Leave it alone, and it adds up.
+learn: Waiting is hard, but it often gets you more.
+play: order | Put the bean plant in order | Plant the seed; Water it each day; A tiny shoot pops up; Leaves grow; Beans grow on the plant
+check: tf | Digging up a seed every day helps it grow. | false | Seeds need to be left alone to grow.
+check: mcq | What do seeds and savings both need? | Time* | Noise | Glitter
+check: mcq | You keep adding to your money box and leave it alone. What happens? | Your savings add up* | It vanishes | It turns into lollies
+home: Plant a seed with a grown-up. Draw how big it is each week.
+skill: patience
+
+@lesson 2.2 | Now or later? | ⏳ | bank
+hook: Gran offers you $5 today, or $8 if you wait one week. Which would you pick?
+learn: Sometimes waiting gets you more.
+learn: $8 is $3 more than $5. That is the reward for waiting.
+learn: It's OK to pick "now" sometimes. Just think first.
+try: $8 later take away $5 now is $3 extra :: gap | $10 later or $6 now. Waiting gets you $_ more. | 4
+play: path | You can have one cookie now, or two cookies after dinner. | Wait for two after dinner => good: Yum, double cookies! Waiting paid off. | Eat one now => ok: That's fine sometimes. But you missed an extra cookie. | Sneak both now => bad: That isn't fair, and it wasn't the deal.
+check: mcq | $5 now or $8 next week. Which gives you more? | $8 next week* | $5 now | They are the same
+check: gap | $4 now or $7 later. Waiting gets you $_ more. | 3
+check: tf | Waiting can get you more. | true
+home: Next time you get a treat, try waiting 10 minutes before you have it.
+skill: patience
+
+@lesson 2.3 | Waiting tricks | 🙈 | garden
+hook: Waiting is hard! What can help?
+learn: Put the treat out of sight. Out of sight helps it stay out of mind.
+learn: Do something fun while you wait, like drawing or playing outside.
+learn: Picture the bigger reward you will get.
+play: sort | Helps me wait, Makes waiting harder | Put the treat away=Helps me wait; Stare at it=Makes waiting harder; Play outside=Helps me wait; Think about it nonstop=Makes waiting harder; Draw the thing you're saving for=Helps me wait; Keep holding it=Makes waiting harder | Which ones help you wait?
+check: mcq | What is a good waiting trick? | Put the treat out of sight* | Stare at it | Hold it in your hand
+check: tf | Doing something fun can make waiting easier. | true
+check: mcq | You are saving for a book. What helps? | A picture of the book on your money box* | Spending on lollies | Forgetting your goal
+home: Draw something you want and stick it on your money box.
+skill: patience
+
+@lesson 2.4 | Saving step by step | 🪜 | bank
+hook: A kite costs $12. You save $3 a week. How long until you can fly it?
+learn: Big goals happen in small steps.
+learn: Saving the same amount each week adds up.
+learn: $3, then $6, then $9, then $12. That's 4 weeks!
+try: $2 a week for 3 weeks is $6 :: gap | $5 a week for 2 weeks is $_ | 10
+play: slider | You save $2 a week. How many weeks until you have $10? | 1 | 10 | 5 | weeks | 0 | 1
+check: gap | $4 a week for 3 weeks is $_ | 12
+check: mcq | You save $5 a week. When do you reach $15? | After 3 weeks* | After 1 week | After 10 weeks
+check: tf | Saving a little every week adds up. | true
+home: Draw a saving ladder. Colour in a step each time you save.
+skill: goals
+
+@lesson 2.5 | The fruit tree | 🍎 | garden
+hook: You plant a tiny apple tree. Next week, no apples. Next year, maybe none. Was it a waste?
+learn: Apple trees can take a few years before they give fruit.
+learn: Then they can give apples year after year.
+learn: Some good things take a long time. Then they keep giving.
+play: debate | Is a fruit tree worth planting if it takes years to fruit? | Yes. You wait a while, then get fruit every year* | No. If it isn't quick, it isn't worth it | Waiting is hard, and you have to look after the tree the whole time. But lots of people think it is worth it.
+check: tf | A fruit tree gives fruit the day you plant it. | false | It can take a few years.
+check: mcq | Once an apple tree starts fruiting, it can… | Give fruit year after year* | Never fruit again | Turn into a bush
+check: mcq | What does the fruit tree teach us? | Some things take time, then keep giving* | Quick is always best | Trees are boring
+home: Find a fruit tree near you, or a picture of one. Ask a grown-up how old it might be.
+skill: patience
+
+@lesson 2.6 | Wait for it | ⏱️ | kitchen
+hook: The cake is in the oven. Open the door too soon and it can sink! Can you wait for the right moment?
+learn: Some things are best when you wait for the right time.
+learn: Rushing can spoil them.
+learn: Good waiting means staying calm and watching.
+play: timing | Wait... then tap when the cake is ready | Take it out | Ready
+check: mcq | Opening the oven too soon can make a cake… | Sink* | Taste better | Grow bigger
+check: tf | Waiting for the right time can make things better. | true
+check: mcq | Which one shows patience? | Waiting your turn on the slide* | Pushing to the front | Grabbing the ball
+home: Bake or cook something with a grown-up and practise waiting for it.
+skill: patience
+
 @band builders
 @unit 1 | Shares and companies | Owning part of a business
 @unit 2 | Risk and reward | Why some investments jump around
@@ -154,6 +228,78 @@ check: tf | Putting all your money in one hot tip is risky. | true
 check: mcq | What do good investors do with tips? | Check them carefully and take their time* | Act straight away | Tell everyone to buy
 home: Spot one ad or post that tries to rush you, and tell a grown-up.
 skill: hype
+
+@lesson 2.1 | What is risk? | 🎢 | shares
+hook: Option A: $100 for sure. Option B: maybe $150, maybe $70. Which would you pick?
+learn: Risk means the result could turn out different from what you expect, better or worse.
+learn: Investments that can grow more usually jump around more.
+learn: Safer choices usually grow more slowly.
+play: sort | Lower risk, Higher risk | Savings account=Lower risk; Shares in one new company=Higher risk; Term deposit=Lower risk; A crypto coin=Higher risk; Government bond=Lower risk; Shares in a tiny start-up=Higher risk | Sort by risk
+check: mcq | What does risk mean in investing? | The result could be better or worse than expected* | You always lose | You always win
+check: tf | Investments that can grow more usually jump around more. | true
+check: mcq | Which is usually lower risk? | A savings account* | Shares in one start-up | A new crypto coin
+home: Ask a grown-up what they think is risky with money, and what feels safe.
+skill: risk
+
+@lesson 2.2 | The risk ladder | 🪜 | shares
+hook: Cash, bonds and shares. Which climbs fastest, and which wobbles most?
+learn: Cash in the bank grows slowly and steadily.
+learn: Bonds are loans to governments or companies. They usually pay a set amount of interest.
+learn: Shares wobble the most, but over long periods they have usually grown the most.
+play: order | Put these from least wobbly to most wobbly | Cash in a bank account; Government bonds; A mix of shares and bonds; Shares in many companies; Shares in one small company
+check: mcq | What is a bond? | A loan to a government or company that pays interest* | Part-ownership of a company | A kind of coin
+check: tf | Over long periods, shares have usually grown more than cash. | true | But they can fall a lot along the way.
+check: mcq | Which is usually the most wobbly? | Shares in one small company* | Cash in the bank | Government bonds
+home: Draw a risk ladder with cash at the bottom and shares at the top.
+skill: risk
+
+@lesson 2.3 | Time and risk | ⏰ | shares
+hook: You need money for a bike in 3 months. Should you put it in shares?
+learn: Shares can drop and take years to recover.
+learn: Money you need soon should be kept safe, like in a savings account.
+learn: Money you won't need for many years can take more risk, because it has time to recover.
+play: match | Match each goal to a sensible place for the money | Bike in 3 months=Savings account; A car in 6 years=A balanced mix; Retiring in 50 years=Mostly shares; Lunch money this week=Your everyday account
+check: mcq | You need $200 in two months. Where should it go? | A savings account* | Shares in one company | A crypto coin
+check: tf | Money you need soon should take big risks. | false | It might drop just when you need it.
+check: mcq | Why can long-term money take more risk? | It has time to recover from drops* | It can't drop | Banks protect it
+home: Think of something you're saving for. Is it short-term or long-term?
+skill: timeline
+
+@lesson 2.4 | Investing or gambling? | 🎲 | stage
+hook: Buying shares and buying a lotto ticket both involve risk. Are they the same thing?
+learn: When you buy shares, you own part of real businesses that make things and earn money.
+learn: Gambling games are set up so that, over time, most players lose.
+learn: Investing can lose money too, but spread-out investing has usually grown over long periods.
+play: sort | Investing, Gambling | Buying a share fund=Investing; A scratchie ticket=Gambling; Money in a term deposit=Investing; Betting on a footy game=Gambling; Shares in a company you've researched=Investing; A pokie machine=Gambling | Investing or gambling?
+check: tf | Gambling games are set up so most players lose over time. | true
+check: mcq | What do you own when you buy shares? | Part of real businesses* | A ticket in a prize draw | Nothing at all
+check: mcq | Which is gambling? | Buying a scratchie* | Saving in a bank | Buying a share fund
+home: Talk with a grown-up about how investing and gambling are different.
+skill: risk
+
+@lesson 2.5 | Why take a risk? | 💎 | shares
+hook: If shares can drop, why does anyone buy them?
+learn: People take risk because they hope for more reward.
+learn: Over long periods, the extra growth from shares has usually made up for the drops.
+learn: A small difference each year becomes a big difference after many years.
+play: compound | Watch $1,000 grow at 7% a year for 20 years | 1000 | 7 | 20
+check: mcq | Why do people accept investment risk? | For the chance of more growth* | Because losing is fun | Because it's always safe
+check: tf | A few percent more each year makes a big difference over 20 years. | true
+check: mcq | $1,000 grows at 2% or at 7% a year for 20 years. Which ends with more? | 7%* | 2% | They end the same
+home: Ask a grown-up what interest rate their savings account pays.
+skill: compound
+
+@lesson 2.6 | How do you feel about risk? | 😬 | garden
+hook: Your investment drops from $100 to $80 in a month. How do you feel?
+learn: Everyone feels risk differently. Some people stay calm. Some panic.
+learn: Knowing how you'll feel helps you choose investments you can stick with.
+learn: Only invest money you won't need soon and could cope with seeing drop.
+play: chat | Your friend's investment just dropped | them: My shares fell 20%! Should I sell everything right now? | me: Do you need the money soon? If not, maybe wait and don't panic*/Yes, sell it all now!/Buy a lotto ticket to win it back | them: Not for years. It's for when I'm older. | me: Then it has time to recover. Drops are normal*/It's ruined forever/Borrow money and buy heaps more
+check: mcq | Your long-term investment drops 20%. A calm first step is… | Remember it's long-term and don't panic* | Sell everything straight away | Tell everyone it's a disaster
+check: tf | Everyone feels the same about risk. | false | People feel very differently about ups and downs.
+check: mcq | What money should you invest? | Money you won't need for a long time* | This week's lunch money | Money borrowed from a friend
+home: Ask two family members how they'd feel if their savings dropped 20%. Compare the answers.
+skill: risk
 
 @band makers
 @unit 1 | Index funds | Owning a slice of everything
@@ -234,6 +380,80 @@ check: mcq | What kind of investing did Bogle encourage? | Long-term and low-cos
 home: Tell someone at home what an index fund is in one sentence.
 skill: index
 
+@lesson 2.1 | Straight line or curve? | 📈 | shares
+hook: Two charts. One is a straight line. One starts flat, then shoots up. Which shows compound growth?
+learn: Adding $1,000 a year with no interest makes a straight line.
+learn: Compound growth makes a curve that gets steeper, because growth earns more growth.
+learn: In the early years the two look almost the same. The gap shows up later.
+play: match | Match each pattern to its chart shape | $10 added every week with no interest=A straight line going up; Money earning 7% a year for 40 years=A curve that gets steeper; Cash under the bed for 10 years=A flat line; Prices falling in a crash=A line that drops sharply
+check: mcq | Which shape shows compound growth? | A curve that gets steeper* | A flat line | A straight line
+check: tf | Compound growth looks most impressive in the later years. | true
+check: mcq | Why does the curve get steeper? | Growth earns more growth* | The bank adds a bonus | Charts are drawn that way for fun
+home: Sketch a straight line and a compound curve, and explain the difference to someone at home.
+skill: compound
+
+@lesson 2.2 | The rule of 72 | ✌️ | shares
+hook: How long does money take to double? There's a shortcut.
+learn: Divide 72 by the yearly growth rate. The answer is roughly how many years it takes to double.
+learn: At 6% a year, money doubles in about 12 years. At 8%, about 9 years.
+learn: It works for debt too. At 24% interest, a debt doubles in about 3 years.
+try: 72 ÷ 6 = 12 years to double :: gap | At 9% a year, money doubles in about _ years | 8
+play: gen | compound | 3
+check: gap | At 4% a year, money doubles in about _ years | 18
+check: mcq | At 12% a year, roughly how long does money take to double? | 6 years* | 12 years | 72 years
+check: tf | The rule of 72 works for debt too. | true
+home: Use the rule of 72 on a savings rate you find online.
+skill: compound
+
+@lesson 2.3 | Start at 15 or 25? | 🕰️ | shares
+hook: Aroha invests $1,000 a year from 15 to 24, then stops. Ben invests $1,000 a year from 25 to 64. Who has more at 65?
+learn: Starting early gives your money more years to compound.
+learn: At 7% a year, Aroha ends with about $221,000 from $10,000 put in. Ben ends with about $214,000 from $40,000 put in.
+learn: Time can matter more than the amount you put in.
+play: compound | One $1,000 invested at 15 and left until 65 | 1000 | 7 | 50
+check: mcq | Aroha puts in $10,000 from 15 to 24. Ben puts in $40,000 from 25 to 64. Both earn 7%. Who has more at 65? | Aroha* | Ben | Exactly the same
+check: tf | Time in the market can matter more than how much you put in. | true
+check: mcq | What's the biggest advantage teenagers have as investors? | Time* | Lots of money | Secret tips
+home: Try an online compound interest calculator with a grown-up. Compare starting at 15 and at 25.
+skill: compound
+
+@lesson 2.4 | Reading growth claims | 📊 | shares
+hook: A fund's chart shows $10,000 growing to about $76,000 over 30 years, with dips along the way. What can you trust?
+learn: The bottom axis is time. The side axis is value.
+learn: Dips are normal. Look at the whole trend, not one bad year.
+learn: Check whether returns are before or after fees, and whether they allow for inflation.
+play: scam | Honest or hype? Spot the misleading growth claims. | Average 7% a year over 30 years after fees. Past returns don't guarantee future ones=real; Our fund only goes up! See our last 12 months=scam; Guaranteed 30% a year, every year=scam; Chart shows growth before fees, with fees listed underneath=real; Turn $500 into $50,000 by Christmas=scam | Short time frames, guarantees and huge promises are warning signs.
+check: mcq | A chart shows one bad year in a 30-year rise. That bad year is… | Normal. Look at the whole trend* | Proof the fund is broken | A reason never to invest
+check: tf | A chart of the last 12 months tells you a lot about the next 30 years. | false | Short periods are mostly noise.
+check: mcq | What should you check on a growth chart? | Whether returns are before or after fees* | The colour of the line | Whether it's in 3D
+home: Find a long-term chart for a share index online with a grown-up. What do the dips line up with?
+skill: charts
+
+@lesson 2.5 | Real growth | 🎈 | shares
+hook: Your money grew 5% this year. Prices rose 3%. How much better off are you really?
+learn: Inflation means prices rise over time, so each dollar buys a bit less.
+learn: Real growth is roughly your return minus inflation.
+learn: Long-term charts can look huge. Allowing for inflation shows what the money can really buy.
+try: 6% return − 2% inflation ≈ 4% real growth :: gap | 7% return − 3% inflation ≈ _% real growth | 4
+play: slider | Your savings earn 2% a year. Inflation is 3%. Roughly what's your real growth, in %? | -5 | 5 | -1 | % | 0 | 1
+check: gap | 8% return − 3% inflation ≈ _% real growth | 5
+check: tf | If inflation is higher than your interest rate, your money buys less over time. | true
+check: mcq | Real growth means… | Growth after taking off inflation* | Growth with bonuses added | Growth before fees
+home: Ask a grown-up what a loaf of bread cost when they were your age.
+skill: inflation
+
+@lesson 2.6 | Deposits and growth | 🧱 | shares
+hook: After 40 years of saving, how much of the pile is money you put in, and how much is growth?
+learn: Many charts stack two parts: what you put in, and the growth on top.
+learn: Early on, most of the pile is your own money.
+learn: At about 7% a year, growth catches up with your deposits after roughly 18 years, then races ahead.
+play: build | Build the pile over 40 years of saving $1,000 a year at 7% | Year 1: almost all your own deposits; Year 10: growth starts to show; Year 20: growth is bigger than your deposits; Year 40: growth is over four times your deposits
+check: mcq | After 40 years of saving at 7%, which part is usually bigger? | The growth* | What you put in | They're always equal
+check: tf | In the first few years, most of your balance is your own deposits. | true
+check: gap | You put in $1,000 a year for 10 years. You've deposited $_ in total | 10000
+home: Use an online savings calculator, like {nz:Sorted's~au:Moneysmart's}, with a grown-up and look at the chart.
+skill: compound
+
 @band launchers
 @unit 1 | {nz:KiwiSaver~au:Superannuation} | Your retirement fund and how to choose it
 @unit 2 | Fees and returns | Comparing funds the right way
@@ -312,3 +532,77 @@ check: tf | Fees on a statement are worth checking every year. | true
 check: mcq | Which lines matter most? | Contributions, fees, returns and fund type* | Only the logo | Only the date
 home: Find last year's statement for your fund and read the fees line.
 skill: fees
+
+@lesson 2.1 | Spot the fees | 🧾 | bank
+hook: Fund A charges 1.2% a year. Fund B charges 0.25% plus $30 a year. Which is cheaper on $10,000?
+learn: A percentage fee comes out of your balance every year, so it grows as your balance grows.
+learn: A fixed fee, like $30 a year, bites hardest when your balance is small.
+learn: Add them together to get the total yearly cost.
+try: 1% of $10,000 is $100 a year :: gap | 0.5% of $10,000 plus a $30 fixed fee is $_ a year | 80
+play: match | Match each fund to its yearly fees on a $10,000 balance | 1.2% fee=$120; 0.25% plus $30=$55; 0.8% and no fixed fee=$80; 0.5% plus $50=$100
+check: gap | 1.5% of $20,000 is $_ a year | 300
+check: mcq | On a $500 balance, which costs more? | A $50 fixed fee* | A 1% fee | They're the same
+check: tf | Percentage fees grow as your balance grows. | true
+home: Find the fees section in a {nz:KiwiSaver~au:super} fund's documents or website with a grown-up.
+skill: fees
+
+@lesson 2.2 | Returns after fees | 📏 | shares
+hook: Fund A returned 8% before fees and charges 1.2%. Fund B returned 7.5% after fees. Which did better for its members?
+learn: What matters to you is the return after fees and tax.
+learn: Some charts show returns before fees, which makes them look better.
+learn: Always compare like with like: after fees with after fees.
+try: 8% before fees − 1.2% fees = 6.8% after fees :: gap | 9% before fees − 1.5% fees = _% after fees | 7.5
+play: compound | $10,000 for 40 years at 5.7% a year, after high fees | 10000 | 5.7 | 40
+check: mcq | Over 40 years, $10,000 grows to about $134,000 at 6.7% but only about $92,000 at 5.7%. What made the gap? | Just 1% a year more in fees* | Bad luck | A tax change
+check: tf | You should compare funds using returns after fees. | true
+check: mcq | A chart shows returns before fees. Why be careful? | It looks better than what members actually got* | It means there are no fees | It's always a scam
+home: Find a fund's return after fees in its latest fund update or fact sheet.
+skill: fees
+
+@lesson 2.3 | Like with like | 🍎 | shares
+hook: A growth fund returned 9%. A conservative fund returned 4%. Is the growth fund better?
+learn: Different fund types take different risks. Growth funds hold more shares, so they usually return more over time, with bigger drops.
+learn: Compare growth with growth, and conservative with conservative.
+learn: Use the same time period too, ideally 5 or 10 years.
+play: sort | Fair comparison, Unfair comparison | Two growth funds over 10 years=Fair comparison; A growth fund against a cash fund=Unfair comparison; Two balanced funds over the same 5 years=Fair comparison; One fund's best year against another's average=Unfair comparison; Two conservative funds after fees=Fair comparison; A 1-year return against a 10-year average=Unfair comparison | Is it a fair comparison?
+check: mcq | What should you compare a growth fund with? | Other growth funds* | A cash fund | A savings account
+check: tf | A conservative fund that returned less than a growth fund must be a bad fund. | false | It takes less risk, so lower returns are expected.
+check: mcq | Which time period tells you more? | 10 years* | The last 3 months | Last week
+home: Find out which fund type you'd be in, and look up two other funds of that type.
+skill: compare
+
+@lesson 2.4 | Past performance | 🔮 | shares
+hook: Last year's top fund returned 25%. Should everyone pile in?
+learn: Past returns don't guarantee future returns. Last year's winner often isn't next year's.
+learn: Long-term returns, fees and the fund type tell you more than one great year.
+learn: Chasing last year's winner can mean buying after the rise.
+play: debate | Should you switch to whichever fund did best last year? | No. One year says little, and fees and fund type matter more* | Yes. The best fund last year will be best again | Some funds really are better run, and a long track record can show it. That's why ten-year results are worth a look.
+check: tf | Past returns guarantee future returns. | false
+check: mcq | What's more useful than last year's return? | Long-term returns, fees and fund type* | The fund's logo | Social media comments
+check: mcq | Chasing last year's best fund can mean… | Buying after the big rise* | Always winning | Paying no fees
+home: Ask a grown-up if they've ever switched funds, and why.
+skill: performance
+
+@lesson 2.5 | Comparison tools | 🔍 | online
+hook: There are hundreds of funds. How do you compare them without a giant spreadsheet?
+learn: {nz:Sorted Smart Investor is a free tool from the Retirement Commission and the FMA. It compares KiwiSaver and managed funds by fees, returns and type.~au:The ATO's YourSuper comparison tool is free. It compares super products by fees and returns.}
+learn: {nz:Every KiwiSaver fund also publishes regular fund updates with its fees and returns.~au:APRA tests super products every year. A product that fails two years in a row can't take new members.}
+learn: Use the tools, then read the fund's own documents before you switch.
+play: order | Compare funds the smart way. Put it in order. | Work out the fund type that suits your timeline; Open {nz:Sorted Smart Investor~au:the YourSuper comparison tool}; Filter to the same fund type; Compare fees and long-term returns after fees; Read the fund's documents before switching
+check: mcq | {nz:What does Sorted Smart Investor do?~au:What does the YourSuper comparison tool do?} | Compares funds by fees and returns* | Picks shares for you | Gives you free money
+check: tf | It's smart to compare funds of the same type. | true
+check: mcq | Before switching funds, you should… | Read the fund's own documents* | Ask a stranger online | Switch every week
+home: Open {nz:smartinvestor.sorted.org.nz~au:the YourSuper comparison tool on ato.gov.au} with a grown-up and look up their fund.
+skill: compare
+
+@lesson 2.6 | Active or index? | 🧭 | shares
+hook: One fund pays experts to pick shares. Another just buys the whole index. Which usually wins?
+learn: Active funds try to beat the market by picking shares. They usually charge higher fees.
+learn: Index funds buy everything in an index, for low fees.
+learn: Studies keep finding that most active funds trail their index over 10 years or more, mainly because of fees.
+play: path | You're picking a fund for the next 40 years. | A low-fee index fund that suits your timeline => good: Low fees and a broad spread. Hard to beat over decades. | An active fund with a strong 10-year record after fees => ok: It could work. Check it keeps beating its index after fees, and watch those fees. | The fund with the biggest ad and the highest fees => bad: Ads don't grow your money, and high fees eat returns every year.
+check: mcq | Why do most active funds trail their index over the long run? | Higher fees, and picking winners is hard* | They're not allowed to win | Index funds cheat
+check: tf | Index funds usually have lower fees than active funds. | true
+check: mcq | An index fund… | Buys everything in an index* | Picks a few hot shares | Guarantees a return
+home: Find one index fund and one active fund and compare their fees.
+skill: index

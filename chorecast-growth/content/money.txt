@@ -81,6 +81,79 @@ check: mcq | Who should you tell when you get money? | A grown-up you trust* | N
 home: Find a safe place at home for your money with a grown-up.
 skill: safety
 
+@lesson 2.1 | What is a need? | 🏠 | home
+hook: You need some things to live. Other things are just nice. Can you tell which?
+guess: mcq | Which one do you need to stay alive? | Water* | A toy | A balloon
+learn: A need is something you must have to be safe and healthy.
+learn: Food, water, a home, warm clothes and the doctor are needs.
+learn: A want is nice to have. You would be OK without it.
+play: sort | Need, Want | Water=Need; Lollies=Want; Warm coat=Need; Toy robot=Want; Bed=Need; Video game=Want; Healthy food=Need; Sparkly stickers=Want | Need or want?
+check: mcq | Which one is a need? | Healthy food* | A new toy | A sticker
+check: tf | A new video game is a need. | false | You would be OK without it, so it is a want.
+check: mcq | What is a want? | Something nice you can live without* | Something you must have | Something that is free
+home: Find three needs and three wants in your home with a grown-up.
+skill: needswants
+
+@lesson 2.2 | Wants are OK | 🎈 | stall
+hook: Is it bad to want things?
+learn: Wanting things is normal. Everyone has wants.
+learn: The trick is to pay for needs first.
+learn: Then you can pick a want with the money left over.
+try: You have $10. Lunch costs $6. You have $4 left for a want :: gap | You have $8. A need costs $5. You have $_ left. | 3
+play: path | You have $5. You need a drink bottle for school. It costs $4. You also want a toy car for $5. | Buy the drink bottle first => good: Great choice. Your need is sorted, and you have $1 to start saving for the car. | Buy the toy car => bad: Fun for now, but you will be thirsty at school with no bottle. | Ask for both and get cross => bad: Getting cross doesn't make more money. Picking needs first does.
+check: mcq | What should you pay for first? | Needs* | Wants | The shiniest thing
+check: tf | It is normal to want things. | true
+check: gap | You have $10. A need costs $7. You have $_ left. | 3
+home: Tell a grown-up one want you are saving for and what it costs.
+skill: needswants
+
+@lesson 2.3 | Plain or fancy? | 👟 | stall
+hook: Shoes are a need. Are light-up shoes a need too?
+learn: Some needs come in a fancy kind. The fancy kind is a want.
+learn: You need shoes. You want the shoes with lights.
+learn: Ask yourself: would a plain one do the job?
+play: match | Match each need to its fancy want | Plain shoes=Light-up shoes; Water=Fizzy drink; Warm jacket=Jacket with a cartoon on it; Lunchbox=Lunchbox with lots of gadgets
+check: mcq | You need a school bag. Which is the need part? | A bag that holds your books* | A famous cartoon on it | Three bags
+check: tf | A fizzy drink is a need. | false | Water does the job. Fizzy drink is a want.
+check: mcq | A good question before you buy: | Would a plain one do the job?* | Is it the shiniest? | Does my friend have one?
+home: At the shop, find a need and its fancy want version.
+skill: needswants
+
+@lesson 2.4 | What bodies need | 🧥 | home
+hook: This room is full of stuff. What does your body really need?
+learn: Our bodies need food, water, sleep and warmth.
+learn: We also need to feel safe and loved. That doesn't cost money.
+play: tap | Tap all the needs | 🍎:yes:Food keeps you healthy; 💧:yes:Water keeps you alive; 🏠:yes:A home keeps you safe and warm; 🧸:no; 🎮:no; 🧥:yes:A coat keeps you warm; 🍭:no; 🛏️:yes:Sleep helps you grow
+check: tf | Feeling safe and loved is a need. | true | Everyone needs to feel safe and loved.
+check: mcq | What keeps you warm on a cold night? | A blanket* | A lolly | A sticker
+check: mcq | What do all people need? | Food and water* | A phone | A trampoline
+home: Thank someone in your family for helping with one of your needs.
+skill: needswants
+
+@lesson 2.5 | Families choose | 👨‍👩‍👧 | home
+hook: Your family has money for this week. What gets paid first?
+learn: Grown-ups pay for needs first, like food, rent and power.
+learn: Sometimes there isn't money left for wants. That's OK.
+learn: Saying "not today" is part of good money choices.
+play: sort | Pay first, If money is left | Food=Pay first; Rent=Pay first; Power=Pay first; School shoes=Pay first; Takeaways=If money is left; New toys=If money is left; Movie tickets=If money is left; Lollies=If money is left | Help the family plan the week
+check: tf | When a grown-up says "not today", they are being mean. | false | They are looking after needs first.
+check: mcq | What does a family pay for first? | Needs like food and rent* | Toys | Treats
+check: mcq | Your family can't buy a want this week. What is a kind thing to say? | OK, maybe another time* | You never get me anything | I'll be grumpy all day
+home: Ask a grown-up to show you one bill your family pays, like power.
+skill: needswants
+
+@lesson 2.6 | Picking a want | 🎯 | stall
+hook: You want a ball, a book and a slime kit. You have $10. What now?
+learn: You can't have every want. You have to choose.
+learn: Pick the one you will love the longest.
+learn: Put the others on a wish list for later.
+play: chat | Your friend shows you a new toy | them: Look at my slime kit! You should get one! | me: Cool! I'm saving for a ball, so maybe later*/I want one right now/Give me yours | them: But it's so fun! | me: It looks fun. I'll put it on my wish list*/I'll spend all my money today/I don't care about my plan
+check: mcq | The ball is $8 and the slime is $7. You have $10. Can you buy both? | No, that is $15* | Yes | Only on Tuesdays
+check: tf | A wish list helps you remember wants for later. | true
+check: mcq | How do you pick which want to buy? | The one you will love the longest* | The first one you see | The one your friend has
+home: Start a wish list with a grown-up. Put the thing you want most at the top.
+skill: choosing
+
 @band builders
 @unit 1 | Budget basics | Plan where money goes before you spend it
 @unit 2 | Best value | Use unit prices to spot the real deal
@@ -162,6 +235,81 @@ check: tf | Saying no to lending money can be the kind thing to do. | true
 check: mcq | What helps next week go better? | A plan with some money spare* | Spending faster | Not looking at your money
 home: Think of one change that would make your money last all week.
 skill: budget
+
+@lesson 2.1 | What is a unit price? | ⚖️ | stall
+hook: A small bag of chips is $2. A big bag is $5. Which is the better deal?
+learn: A unit price is what something costs per 100 g, per litre or per item.
+learn: It lets you compare packs of different sizes fairly.
+learn: Big supermarkets in New Zealand and Australia must show unit prices on their shelf labels.
+try: $3 for 300 g is $1 per 100 g :: gap | $4 for 200 g is $_ per 100 g | 2
+play: price | Which bag of chips is better value? | Small bag:2:150:g; Big bag:5:450:g
+check: mcq | What does a unit price help you do? | Compare different-sized packs fairly* | Find the prettiest pack | Pay faster at the till
+check: gap | $6 for 3 litres is $_ per litre | 2
+check: tf | The bigger pack is always the better deal. | false | Often it is, but not always. Check the unit price.
+home: Find the unit price on three shelf labels at the supermarket.
+skill: unitprice
+
+@lesson 2.2 | Specials and multi-buys | 🏷️ | stall
+hook: "3 for $10!" Is that a deal or a trap?
+learn: To check a multi-buy, work out the price of one. $10 for 3 is about $3.33 each.
+learn: Compare that with the normal price of one.
+learn: If you won't use all three, it isn't a deal for you.
+try: 2 for $5 means $2.50 each :: gap | 4 for $10 means $_ each | 2.5
+play: price | Which is the best buy for muesli bars? | Single bar:1.5:1:bar; 3 for $4 deal:4:3:bar; Box of 6:7.2:6:bar
+check: mcq | Bread is $3 a loaf, or 2 for $7. Which is cheaper per loaf? | Buying one at $3* | The 2 for $7 deal | They're the same
+check: tf | A deal is only good if you will actually use it all. | true
+check: gap | 3 for $6 means $_ each | 2
+home: Find a multi-buy at the shop and work out the price of one.
+skill: deals
+
+@lesson 2.3 | Brand or home brand? | 🛒 | stall
+hook: Two tins of beans sit side by side. One has a famous name. One is the shop's own brand. What's the difference?
+learn: Home brands are the shop's own products. They are often cheaper.
+learn: Sometimes they taste just the same. Sometimes not. Try and see.
+learn: Famous brands spend a lot on ads, and that is part of the price.
+play: debate | Should a family always buy the famous brand? | No. Try the cheaper brand, and keep buying it if it's just as good* | Yes. Famous brands are always better | Some people stick with a brand because they really prefer it, or because it suits an allergy. That can be worth paying for.
+check: mcq | Why are famous brands often dearer? | Part of the price pays for ads* | They are made of gold | The government sets it
+check: tf | A home brand can be just as good as a famous brand. | true
+check: price | Which tin of tomatoes is better value? | Famous brand:2.2:400:g; Home brand:1.3:400:g
+home: Do a blind taste test of a famous brand and a home brand with your family.
+skill: brands
+
+@lesson 2.4 | Cost per use | 👟 | stall
+hook: Cheap shoes cost $30 and last 3 months. Good shoes cost $90 and last a year. Which costs less?
+learn: Cost per use is the price divided by how many times you use it.
+learn: Something dearer can be cheaper in the long run if it lasts much longer.
+learn: But only if you really use it.
+try: $30 shoes for 3 months is $10 a month :: gap | $90 shoes for 12 months is $_ a month | 7.5
+play: price | Which shoes cost less per month? | Cheap shoes:30:3:months; Good shoes:90:12:months
+check: mcq | A $20 game you play 100 times, or a $10 game you play twice. Which costs less per play? | The $20 game* | The $10 game | The same
+check: gap | A $40 jacket worn 20 times costs $_ per wear | 2
+check: tf | The lowest price always means the best value. | false | How long it lasts and how much you use it matter too.
+home: Pick something you use a lot and work out its cost per use.
+skill: value
+
+@lesson 2.5 | Shop around | 🗺️ | stall
+hook: The same headphones cost $49 at one shop and $35 at another. Would you check?
+learn: Different shops charge different prices for the same thing.
+learn: Checking two or three shops can save real money, especially on big buys.
+learn: Count the extras too, like delivery or a bus fare to get there.
+play: route | Match each shop to what you would really pay for the $40 game | Online shop, $35 plus $8 delivery=$43; Town shop, $40 and no extras=$40; Mall shop, $38 plus $4 bus fare=$42
+check: mcq | Headphones are $35 online plus $8 delivery, or $40 at a shop nearby. Which costs less? | The shop nearby* | Online | They are the same
+check: tf | Shopping around matters most for big buys. | true
+check: mcq | What else should you count when comparing prices? | Delivery and travel costs* | The colour of the shop | How busy it is
+home: Pick one thing your family wants and check its price at three shops.
+skill: compare
+
+@lesson 2.6 | Value detective | 🕵️ | stall
+hook: Your favourite biscuits cost the same as last year. But are there fewer in the pack?
+learn: Sometimes packs get smaller but the price stays the same. People call it shrinkflation.
+learn: Checking the unit price catches it.
+learn: A "sale" sign doesn't always mean a good price. Compare it with the normal price.
+play: mystery | It's on shelf labels at big supermarkets; It shows the cost per 100 g, per litre or per item; It helps you compare big and small packs; It catches packs that quietly shrink | The unit price* | The barcode | The best-before date
+check: mcq | A biscuit pack shrinks from 250 g to 200 g. The price stays $4. What happened? | You pay more per biscuit* | You got a deal | Nothing changed
+check: tf | A big red "sale" sign always means a good price. | false | Compare with the normal price and with other shops.
+check: price | Which juice is better value? | 1 litre bottle:3.5:1000:ml; 2 litre bottle:6:2000:ml
+home: Be the value detective on your next family shop. Find the best-value pasta.
+skill: unitprice
 
 @band makers
 @unit 1 | Bank accounts | Everyday, savings and how to choose
@@ -246,6 +394,80 @@ check: mcq | Why are youth accounts popular? | Low or no fees* | They pay double
 home: Pick the account you'd choose and explain why to a grown-up.
 skill: banking
 
+@lesson 2.1 | Debit or credit? | 💳 | bank
+hook: Two cards look almost the same. One spends your money. One spends the bank's. Which is which?
+learn: A debit card spends money that is already in your account.
+learn: A credit card borrows the bank's money. You pay it back later, often with interest.
+learn: You usually have to be 18 to get a credit card.
+play: sort | Debit card, Credit card | Spends your own money=Debit card; Borrows money you pay back=Credit card; Charges interest if you don't pay in full=Credit card; Stops when your account is empty=Debit card; Has a credit limit=Credit card; Often comes with a youth account=Debit card | Which card is it?
+check: mcq | Whose money does a debit card spend? | Yours, from your account* | The bank's | The shop's
+check: tf | Credit card money is free money. | false | It's borrowed. You pay it back, often with interest.
+check: mcq | What is a credit limit? | The most you can borrow on the card* | The least you must spend | Your bank balance
+home: Ask a grown-up whether their card is debit or credit, and how they can tell.
+skill: credit
+
+@lesson 2.2 | Interest on debt | 📈 | bank
+hook: You borrow $1,000. A year later you owe $1,200. Where did the extra $200 come from?
+learn: Interest is the price of borrowing money.
+learn: Credit cards often charge around 20% a year on any amount you haven't paid back.
+learn: On most cards, paying the full balance by the due date each month means no interest on purchases.
+try: 20% of $500 is $100 a year :: gap | 20% of $1,000 is $_ a year | 200
+play: compound | Watch an unpaid $1,000 card debt snowball at 20% a year | 1000 | 20 | 5
+check: gap | You owe $600 at 20% a year. One year's interest is about $_ | 120
+check: tf | Paying a credit card in full each month usually avoids interest on purchases. | true
+check: mcq | What is interest on a loan? | The price you pay to borrow* | A gift from the bank | A type of tax
+home: Find the interest rate on a credit card website with a grown-up.
+skill: interest
+
+@lesson 2.3 | The minimum payment trap | 🪤 | bank
+hook: Your card bill says "Minimum payment $25". You owe $1,000. Pay $25 and you're fine, right?
+learn: The minimum payment keeps you in good standing with the bank, but it barely dents the debt.
+learn: Much of a small payment goes on interest, so the balance shrinks very slowly.
+learn: Pay as much as you can. The full balance is best.
+play: path | You owe $1,000 on a card at 20% a year. The bill shows a $25 minimum. | Pay the full $1,000 => good: No interest, and the debt is gone. | Pay $200 now and keep paying big chunks => ok: You'll pay a bit of interest, but you'll be clear in a few months. | Pay only the $25 minimum each month => bad: About $17 of each payment goes on interest. It would take over five years and cost more than $600 extra.
+check: mcq | Why is paying only the minimum risky? | The debt shrinks slowly and costs lots of interest* | The bank closes your account | It's against the law
+check: tf | The minimum payment is the amount you should aim to pay. | false | It's the least you can pay. Aim for the full balance.
+check: slider | You owe $1,000 at 20% a year. Roughly how much interest is that in one month? | 0 | 50 | 17 | $ | 3 | 1
+home: Look at a credit card statement with a grown-up and find the minimum payment line.
+skill: debt
+
+@lesson 2.4 | Buy now, pay later | ⏳ | online
+hook: "4 easy payments of $25!" Easy, until you miss one?
+learn: Buy now, pay later (BNPL) splits a price into smaller payments.
+learn: It can be interest-free, but late fees add up, and it makes spending feel too easy.
+learn: Several plans at once can stack up to more than you can pay. You must be 18 to sign up.
+learn: In both New Zealand and Australia, BNPL companies now have to follow lending rules and check you can afford it.
+play: budget | You get $60 a week and have three BNPL plans running. Plan your week. | 60 | Plan A payment=12; Plan B payment=12; Plan C payment=12; Food and bus=14; Savings=0 | Late fee:8
+check: mcq | What's a hidden cost of BNPL? | Late fees* | Free delivery | Bonus points
+check: tf | Having several BNPL plans at once can get hard to keep up with. | true
+check: mcq | A $100 jacket is "4 payments of $25". If you miss one, you might… | Pay a late fee* | Get the jacket free | Get a discount
+home: Spot a "pay later" button on a shopping site and talk about it with a grown-up.
+skill: bnpl
+
+@lesson 2.5 | Helpful or harmful debt? | ⚖️ | bank
+hook: Is all borrowing bad?
+learn: Some borrowing can help you, like a student loan or a home loan, if you can repay it.
+learn: Borrowing for things that lose value fast, like clothes or takeaways, is usually a bad idea.
+learn: Ask two questions: will this help me in the long run, and can I afford the repayments?
+play: sort | Usually helpful, Usually harmful | Student loan for a course you'll use=Usually helpful; Credit card for takeaways=Usually harmful; Home loan you can afford=Usually helpful; Payday loan for a new phone=Usually harmful; BNPL for concert merch=Usually harmful; Loan for tools to start a trade=Usually helpful | Sort the borrowing
+check: mcq | Which question matters most before borrowing? | Can I afford the repayments?* | Is the logo nice? | Do my friends borrow?
+check: tf | Borrowing for something that loses value fast is usually a bad idea. | true
+check: mcq | Payday loans usually have… | Very high costs* | No costs | Lower costs than a bank loan
+home: Ask a grown-up about a loan they've had and whether it was worth it.
+skill: debt
+
+@lesson 2.6 | The true cost | 🧮 | bank
+hook: A $1,200 laptop on a payment plan ends up costing $1,500. Still a good deal?
+learn: The true cost is everything you pay: the price, plus interest, plus fees.
+learn: Compare it with saving up and paying cash.
+learn: If borrowing costs a lot more, waiting might be the smarter move.
+play: price | Which way of getting the $1,200 laptop costs less overall? | Save for 6 months and pay cash:1200:1:laptop; 24 payments of $62.50:1500:1:laptop
+check: gap | 12 payments of $110 is $_ in total | 1320
+check: mcq | A $600 phone costs $750 on a plan. How much extra is that? | $150* | $75 | $600
+check: tf | The true cost of borrowing includes fees as well as interest. | true
+home: Find a "pay weekly" price in an ad and work out the total cost.
+skill: debt
+
 @band launchers
 @unit 1 | Payslips and tax | Read every line of a payslip
 @unit 2 | Renting | Bonds, rent and your rights as a tenant
@@ -328,3 +550,77 @@ check: tf | Keeping your own record of hours is a smart idea. | true
 check: mcq | Who can help if a pay problem isn't fixed? | {nz:Employment New Zealand~au:The Fair Work Ombudsman}* | Your bank | Nobody
 home: Start a simple note on your phone to track hours you work.
 skill: workrights
+
+@lesson 2.1 | What rent can you afford? | 🏘️ | home
+hook: You take home $800 a week. A room is $300 a week. Can you afford it?
+learn: A common rule of thumb is to keep rent under about 30% of your take-home pay.
+learn: In big cities that's hard, which is one reason many young people flat to share costs.
+learn: Count the extras too: power, internet, food and transport.
+try: 30% of $800 is $240 :: gap | 30% of $1,000 a week is $_ | 300
+play: budget | You take home $800 a week. Make it work. | 800 | Rent=300; Power and internet=40; Food=120; Transport=60; Savings=0; Fun=0 | Doctor's visit:60
+check: gap | 30% of $700 is $_ | 210
+check: mcq | What is the 30% rule about? | Keeping rent to about 30% of take-home pay* | Saving 30% every week | Rent rising by 30%
+check: tf | Rent is the only cost of living in a flat. | false | Power, internet, food and transport add up fast.
+home: Look at three rental listings near you. Work out the take-home pay each would need under the 30% rule.
+skill: renting
+
+@lesson 2.2 | The bond | 💰 | bank
+hook: The landlord asks for $2,400 bond. Where does that money go?
+learn: Bond is money held in case you damage the place or don't pay rent.
+learn: {nz:In NZ a landlord can ask for up to 4 weeks' rent as bond. They must lodge it with Tenancy Services within 23 working days.~au:In Australia the landlord or agent must lodge your bond with your state or territory's bond authority. In most places the limit is about 4 weeks' rent.}
+learn: You get it back at the end if the place is in good shape, apart from fair wear and tear.
+play: order | Getting your bond back. Put the steps in order. | Do a condition report with photos when you move in; Look after the place while you live there; Clean well before you leave; Do a final check with the landlord; Apply for the bond refund; Get the bond paid back to you
+check: mcq | {nz:Where must a landlord lodge your bond?~au:Who holds your bond while you rent?} | {nz:Tenancy Services~au:A government bond authority}* | {nz:Their own bank account~au:The landlord's bank account} | {nz:Nobody, it's cash~au:Nobody, it's cash}
+check: tf | You can lose part of your bond for normal wear and tear. | false | Fair wear and tear, like slightly faded paint, isn't damage.
+check: gap | Rent is $500 a week. A 4-week bond is $_ | 2000
+home: Find the bond page on {nz:tenancy.govt.nz~au:your state's fair trading or rental bond website} with a grown-up.
+skill: renting
+
+@lesson 2.3 | Your tenancy agreement | 📝 | home
+hook: You're handed a 10-page agreement. Do you sign straight away?
+learn: Get your tenancy agreement in writing and keep a copy. It lists the rent, bond, start date and rules.
+learn: Check if it's fixed-term, with a set end date, or periodic, which rolls on until someone gives notice.
+learn: {nz:In NZ a landlord can't ask for more than 2 weeks' rent in advance.~au:The law limits how much rent in advance you can be asked for, often 2 weeks.}
+learn: Tenancy law still applies even if the agreement says otherwise.
+play: diff | The ad and the agreement. Tap what's different. | Rent $280 a week; Bond 4 weeks; Pets OK; Power not included; Starts 1 March | Rent $300 a week; Bond 4 weeks; No pets; Power not included; Starts 1 March
+check: mcq | What's a fixed-term tenancy? | One with a set end date* | One that can never end | One with no rent
+check: tf | A clause that signs away your legal rights as a tenant doesn't count. | true | The law applies whatever the agreement says.
+check: mcq | Before you sign, you should… | Read it all and ask about anything unclear* | Sign fast before someone else does | Only read the rent
+home: Read a sample tenancy agreement on {nz:tenancy.govt.nz~au:your state's fair trading website} and find the rent increase rules.
+skill: renting
+
+@lesson 2.4 | Rent rises and repairs | 🔧 | home
+hook: Your rent goes up after 4 months. Can they do that?
+learn: {nz:In NZ rent can only go up once every 12 months, with at least 60 days' written notice.~au:In most states rent can only go up once every 12 months, with written notice, often 60 days.}
+learn: Landlords must keep the place in reasonable repair. Report problems in writing and keep a copy.
+learn: {nz:Rentals must meet the Healthy Homes Standards for heating, insulation, ventilation, moisture and draughts.~au:Many states now set minimum standards for rentals, covering things like locks, heating, water and power.}
+play: chat | The heater in your flat broke a week ago | them: Hi, it's your property manager. How's everything going? | me: The heater has stopped working. Could you get it fixed? I'll email photos*/Fix it or I'm not paying rent/It's fine, I'll just be cold | them: Thanks. We'll book someone for next week. | me: Great, thanks. Could you confirm the day by email?*/Whatever/I'll fix it myself and send you a huge bill
+check: tf | Stopping your rent is a legal way to force repairs. | false | Keep paying rent and use the proper steps, like a tribunal.
+check: mcq | Best way to report a repair? | In writing, with photos, keeping a copy* | Shout at the landlord | Say nothing and hope
+check: mcq | {nz:How often can rent go up in NZ?~au:In most states, how often can rent go up?} | Once every 12 months* | Every month | Whenever the landlord likes
+home: Write a short, polite repair request for something in your home, as practice.
+skill: tenantrights
+
+@lesson 2.5 | When it goes wrong | ⚖️ | townhall
+hook: The landlord keeps $800 of your bond for "cleaning". The place was spotless. Now what?
+learn: Talk first. Many problems get sorted with a calm message and good evidence.
+learn: {nz:If not, you can apply to the Tenancy Tribunal. Tenancy Services and Community Law give free advice.~au:If not, you can apply to your state or territory's tribunal. Tenants' advice services can help for free.}
+learn: Your dated photos from moving in and out are your best evidence.
+play: path | Your landlord wants to keep $800 of bond for cleaning. You cleaned well and took photos. | Send a polite message with your photos and ask for the full bond => good: Strong start. With evidence, many landlords back down. If not, the tribunal can decide. | Post an angry review naming the landlord => bad: It might feel good, but it won't get your bond back and could cause new trouble. | Give up and let them keep it => bad: That's $800 gone, even though you had evidence and rights.
+check: mcq | What's your best evidence in a bond dispute? | Dated photos from moving in and out* | Your memory | A friend's opinion
+check: mcq | Who can decide a tenancy dispute you can't sort out? | {nz:The Tenancy Tribunal~au:Your state or territory's tribunal}* | The landlord | Your bank
+check: tf | You have to pay a lawyer to get tenancy advice. | false | Free advice services exist in both countries.
+home: Find the free tenancy advice service for where you live.
+skill: tenantrights
+
+@lesson 2.6 | Moving out right | 📦 | home
+hook: Your tenancy ends next month. What do you need to do?
+learn: Give proper notice in writing. How much notice depends on your agreement and the law.
+learn: Clean, fix small damage and return every key.
+learn: Pay the last rent, take final meter readings, and close or move your power and internet.
+play: build | Build your moving-out plan | Give written notice; Book a clean or plan your own; Fix small damage; Do the final inspection with photos; Return all keys; Apply for your bond refund
+check: mcq | How should you give notice? | In writing, keeping a copy* | A quick chat in the hallway | Just leave
+check: tf | Taking photos when you move out can protect your bond. | true
+check: mcq | What should you do with your power account when you leave? | Close it or move it, with a final reading* | Leave it for the next person | Nothing
+home: Make a moving-out checklist with a grown-up who has moved house.
+skill: renting

@@ -81,3 +81,77 @@ check: mcq | Who can help if a pay problem isn't fixed? | {nz:Employment New Zea
 home: Start a simple note on your phone to track hours you work.
 skill: workrights
 
+@lesson 2.1 | What rent can you afford? | 🏘️ | home
+hook: You take home $800 a week. A room is $300 a week. Can you afford it?
+learn: A common rule of thumb is to keep rent under about 30% of your take-home pay.
+learn: In big cities that's hard, which is one reason many young people flat to share costs.
+learn: Count the extras too: power, internet, food and transport.
+try: 30% of $800 is $240 :: gap | 30% of $1,000 a week is $_ | 300
+play: budget | You take home $800 a week. Make it work. | 800 | Rent=300; Power and internet=40; Food=120; Transport=60; Savings=0; Fun=0 | Doctor's visit:60
+check: gap | 30% of $700 is $_ | 210
+check: mcq | What is the 30% rule about? | Keeping rent to about 30% of take-home pay* | Saving 30% every week | Rent rising by 30%
+check: tf | Rent is the only cost of living in a flat. | false | Power, internet, food and transport add up fast.
+home: Look at three rental listings near you. Work out the take-home pay each would need under the 30% rule.
+skill: renting
+
+@lesson 2.2 | The bond | 💰 | bank
+hook: The landlord asks for $2,400 bond. Where does that money go?
+learn: Bond is money held in case you damage the place or don't pay rent.
+learn: {nz:In NZ a landlord can ask for up to 4 weeks' rent as bond. They must lodge it with Tenancy Services within 23 working days.~au:In Australia the landlord or agent must lodge your bond with your state or territory's bond authority. In most places the limit is about 4 weeks' rent.}
+learn: You get it back at the end if the place is in good shape, apart from fair wear and tear.
+play: order | Getting your bond back. Put the steps in order. | Do a condition report with photos when you move in; Look after the place while you live there; Clean well before you leave; Do a final check with the landlord; Apply for the bond refund; Get the bond paid back to you
+check: mcq | {nz:Where must a landlord lodge your bond?~au:Who holds your bond while you rent?} | {nz:Tenancy Services~au:A government bond authority}* | {nz:Their own bank account~au:The landlord's bank account} | {nz:Nobody, it's cash~au:Nobody, it's cash}
+check: tf | You can lose part of your bond for normal wear and tear. | false | Fair wear and tear, like slightly faded paint, isn't damage.
+check: gap | Rent is $500 a week. A 4-week bond is $_ | 2000
+home: Find the bond page on {nz:tenancy.govt.nz~au:your state's fair trading or rental bond website} with a grown-up.
+skill: renting
+
+@lesson 2.3 | Your tenancy agreement | 📝 | home
+hook: You're handed a 10-page agreement. Do you sign straight away?
+learn: Get your tenancy agreement in writing and keep a copy. It lists the rent, bond, start date and rules.
+learn: Check if it's fixed-term, with a set end date, or periodic, which rolls on until someone gives notice.
+learn: {nz:In NZ a landlord can't ask for more than 2 weeks' rent in advance.~au:The law limits how much rent in advance you can be asked for, often 2 weeks.}
+learn: Tenancy law still applies even if the agreement says otherwise.
+play: diff | The ad and the agreement. Tap what's different. | Rent $280 a week; Bond 4 weeks; Pets OK; Power not included; Starts 1 March | Rent $300 a week; Bond 4 weeks; No pets; Power not included; Starts 1 March
+check: mcq | What's a fixed-term tenancy? | One with a set end date* | One that can never end | One with no rent
+check: tf | A clause that signs away your legal rights as a tenant doesn't count. | true | The law applies whatever the agreement says.
+check: mcq | Before you sign, you should… | Read it all and ask about anything unclear* | Sign fast before someone else does | Only read the rent
+home: Read a sample tenancy agreement on {nz:tenancy.govt.nz~au:your state's fair trading website} and find the rent increase rules.
+skill: renting
+
+@lesson 2.4 | Rent rises and repairs | 🔧 | home
+hook: Your rent goes up after 4 months. Can they do that?
+learn: {nz:In NZ rent can only go up once every 12 months, with at least 60 days' written notice.~au:In most states rent can only go up once every 12 months, with written notice, often 60 days.}
+learn: Landlords must keep the place in reasonable repair. Report problems in writing and keep a copy.
+learn: {nz:Rentals must meet the Healthy Homes Standards for heating, insulation, ventilation, moisture and draughts.~au:Many states now set minimum standards for rentals, covering things like locks, heating, water and power.}
+play: chat | The heater in your flat broke a week ago | them: Hi, it's your property manager. How's everything going? | me: The heater has stopped working. Could you get it fixed? I'll email photos*/Fix it or I'm not paying rent/It's fine, I'll just be cold | them: Thanks. We'll book someone for next week. | me: Great, thanks. Could you confirm the day by email?*/Whatever/I'll fix it myself and send you a huge bill
+check: tf | Stopping your rent is a legal way to force repairs. | false | Keep paying rent and use the proper steps, like a tribunal.
+check: mcq | Best way to report a repair? | In writing, with photos, keeping a copy* | Shout at the landlord | Say nothing and hope
+check: mcq | {nz:How often can rent go up in NZ?~au:In most states, how often can rent go up?} | Once every 12 months* | Every month | Whenever the landlord likes
+home: Write a short, polite repair request for something in your home, as practice.
+skill: tenantrights
+
+@lesson 2.5 | When it goes wrong | ⚖️ | townhall
+hook: The landlord keeps $800 of your bond for "cleaning". The place was spotless. Now what?
+learn: Talk first. Many problems get sorted with a calm message and good evidence.
+learn: {nz:If not, you can apply to the Tenancy Tribunal. Tenancy Services and Community Law give free advice.~au:If not, you can apply to your state or territory's tribunal. Tenants' advice services can help for free.}
+learn: Your dated photos from moving in and out are your best evidence.
+play: path | Your landlord wants to keep $800 of bond for cleaning. You cleaned well and took photos. | Send a polite message with your photos and ask for the full bond => good: Strong start. With evidence, many landlords back down. If not, the tribunal can decide. | Post an angry review naming the landlord => bad: It might feel good, but it won't get your bond back and could cause new trouble. | Give up and let them keep it => bad: That's $800 gone, even though you had evidence and rights.
+check: mcq | What's your best evidence in a bond dispute? | Dated photos from moving in and out* | Your memory | A friend's opinion
+check: mcq | Who can decide a tenancy dispute you can't sort out? | {nz:The Tenancy Tribunal~au:Your state or territory's tribunal}* | The landlord | Your bank
+check: tf | You have to pay a lawyer to get tenancy advice. | false | Free advice services exist in both countries.
+home: Find the free tenancy advice service for where you live.
+skill: tenantrights
+
+@lesson 2.6 | Moving out right | 📦 | home
+hook: Your tenancy ends next month. What do you need to do?
+learn: Give proper notice in writing. How much notice depends on your agreement and the law.
+learn: Clean, fix small damage and return every key.
+learn: Pay the last rent, take final meter readings, and close or move your power and internet.
+play: build | Build your moving-out plan | Give written notice; Book a clean or plan your own; Fix small damage; Do the final inspection with photos; Return all keys; Apply for your bond refund
+check: mcq | How should you give notice? | In writing, keeping a copy* | A quick chat in the hallway | Just leave
+check: tf | Taking photos when you move out can protect your bond. | true
+check: mcq | What should you do with your power account when you leave? | Close it or move it, with a final reading* | Leave it for the next person | Nothing
+home: Make a moving-out checklist with a grown-up who has moved house.
+skill: renting
+
