@@ -296,3 +296,268 @@ check: tf | Keeping records helps make sure your tax is right. | true
 home: Ask a grown-up when they last got a tax refund or bill, and why.
 skill: tax
 
+@lesson 5.1 | Measuring inflation | 🧺 | stall
+hook: Bread went up and petrol went down. So did prices rise overall?
+learn: The {nz:Consumers Price Index~au:Consumer Price Index}, or CPI, tracks the prices of a big basket of things households buy.
+learn: Each item is weighted by how much households spend on it, so rent counts for far more than matches.
+learn: {nz:Stats NZ~au:The ABS} publishes the CPI. The inflation rate is usually the percent change from a year earlier.
+play: order | How the CPI is worked out | Choose a basket of things households buy; Weight each item by how much households spend on it; Check prices across the country; Combine them into one index number; Compare with a year earlier to get the inflation rate
+check: mcq | Why does rent count for more than matches in the CPI? | Households spend much more on rent* | Rent is newer | Matches are free
+check: gap | The CPI goes from 100 to 103 in a year. Inflation is _% | 3
+home: Pick five things your family buys every week. Ask a grown-up how their prices have changed.
+skill: inflation
+
+@lesson 5.2 | Real returns | 📉 | bank
+hook: Your savings earn 4%. Inflation is 3%. Are you really 4% better off?
+learn: The nominal rate is the number the bank shows you.
+learn: The real return is roughly the nominal rate minus inflation. 4% − 3% is about 1%.
+learn: If inflation beats your interest rate, your money buys less each year, even as the balance grows.
+play: match | Match each account to its rough real return | Earns 5%, inflation 2%=About +3%; Earns 3%, inflation 3%=About 0%; Earns 1%, inflation 4%=About −3%; Earns 6%, inflation 2.5%=About +3.5%
+check: gap | Your account pays 4.5% and inflation is 2%. Your real return is about _% | 2.5
+check: mcq | Your balance grew, but prices rose faster. What happened to your buying power? | It fell* | It rose | It stayed the same
+home: Find a savings account's interest rate with a grown-up and work out its real return.
+skill: inflation
+
+@lesson 5.3 | Pay rises and real wages | 💼 | workshop
+hook: Your boss offers a 2% pay rise. Prices rose 4% this year. Is it really a rise?
+learn: Your real wage is what your pay can actually buy.
+learn: If pay rises 2% and prices rise 4%, your real wage falls by about 2%.
+learn: That's why pay talks often mention the cost of living, and why minimum wages are reviewed every year.
+play: path | Inflation was 4% last year. Your boss offers you a 1% pay rise. | Politely ask for a review, pointing to inflation and the new skills you bring => good: You're asking with evidence, and it's a fair conversation. | Accept it and never mention it => ok: That's your choice, but your pay now buys less than last year. | Quit on the spot in anger => bad: You lose your income, and burning bridges can hurt you later.
+check: gap | Pay rises 3% and prices rise 5%. Your real wage falls by about _% | 2
+check: mcq | What's a real wage? | What your pay can actually buy* | Your pay before tax | Your pay in cash only
+home: Ask a grown-up how they would ask for a pay rise, and what evidence they'd use.
+skill: inflation
+
+@lesson 5.4 | Shrinkflation | 🍫 | stall
+hook: Your favourite chocolate is the same price, but the block seems smaller. Is that inflation?
+learn: Shrinkflation is when a pack gets smaller but the price stays the same.
+learn: Check the unit price. $5 for 500 g is $1 per 100 g. $5 for 450 g is about $1.11 per 100 g.
+learn: That's an 11% price rise per gram, even though the sticker didn't change.
+play: slider | A $4 box of cereal shrinks from 500 g to 400 g. By what percent did the price per gram rise? | 0 | 50 | 25 | % | 2 | 1
+check: mcq | What's the best way to spot shrinkflation? | Compare the unit price* | Look at the box colour | Check the advert
+check: tf | Shrinkflation can raise the real price without changing the sticker. | true
+home: Check the weight on a packet at home, then find the same product at the shop. Has it shrunk?
+skill: inflation
+
+@lesson 5.5 | Why prices rise | 🔥 | bank
+hook: Why does the Reserve Bank raise interest rates when prices rise fast?
+learn: Prices rise when people want to buy more than businesses can supply, or when costs like fuel and wages go up.
+learn: {nz:The Reserve Bank sets the Official Cash Rate. It aims to keep inflation between 1% and 3%.~au:The Reserve Bank sets the cash rate. It aims to keep inflation between 2% and 3%.}
+learn: Higher rates make borrowing cost more, so people spend less, which slows price rises.
+play: sort | Pushes inflation up, Pulls inflation down | Fuel prices jump=Pushes inflation up; The Reserve Bank raises interest rates=Pulls inflation down; Everyone rushes to spend at once=Pushes inflation up; People save more and spend less=Pulls inflation down; A drought makes food scarce=Pushes inflation up; Imported goods get cheaper=Pulls inflation down | Up or down?
+check: mcq | What does a higher cash rate usually do? | Slows spending and price rises* | Makes everything cheaper overnight | Nothing
+check: tf | {nz:The Reserve Bank of New Zealand aims for inflation between 1% and 3%.~au:The Reserve Bank of Australia aims for inflation between 2% and 3%.} | true
+home: Find the latest inflation rate on {nz:the Stats NZ~au:the ABS} website with a grown-up.
+skill: inflation
+
+@lesson 5.6 | Protect your savings | 🛡️ | shares
+hook: $10,000 kept under the mattress for 20 years. What happens to it?
+learn: At 3% inflation, after 20 years $10,000 buys only about what $5,500 buys today.
+learn: Long-term money can go into growth investments, like share funds, which have usually beaten inflation over long periods, with ups and downs.
+learn: Money you'll need soon, like an emergency fund, still belongs in cash. Just know inflation nibbles at it.
+play: debate | Should you keep all your savings in cash to be safe? | Keep emergency money in cash, and invest long-term money where it can grow faster than inflation* | Yes, cash is always the safest choice | Cash doesn't drop in a share market crash, which matters for money you need soon. It depends on when you need it.
+check: mcq | What does inflation do to cash under a mattress? | Slowly shrinks what it can buy* | Makes it grow | Nothing at all
+check: gap | $1,000 loses 3% of its buying power. It now buys about what $_ buys today | 970
+home: Ask a grown-up which of their savings are for soon and which are for the long term.
+skill: inflation
+
+@lesson 6.1 | Expected return | 🎯 | shares
+hook: An investment has a 50% chance of gaining 20% and a 50% chance of losing 10%. What do you expect?
+learn: Expected value is each outcome times its chance, all added up.
+learn: 0.5 × 20% + 0.5 × −10% = 10% − 5% = 5%.
+learn: That's the average over many tries. Any single try could land on either outcome.
+try: 0.5 × $100 + 0.5 × $0 = $50 :: gap | 0.5 × $60 + 0.5 × $20 = $_ | 40
+play: slider | A 25% chance of winning $200, and a 75% chance of $0. What's the expected value? | 0 | 200 | 50 | $ | 0 | 5
+check: gap | 0.8 × $10 + 0.2 × $50 = $_ | 18
+check: mcq | What does expected value tell you? | The average result over many tries* | Exactly what will happen next time | The best possible result
+home: Work out the expected value of a simple game, like a coin toss for points, with a grown-up.
+skill: expected value
+
+@lesson 6.2 | Same average, different ride | 🎢 | shares
+hook: Option A always pays $10. Option B pays $0 or $20, 50/50. Same expected value. Same choice?
+learn: Variance measures how spread out the possible results are. Bigger spread means more risk.
+learn: Standard deviation is the square root of variance: roughly the typical distance from the average.
+learn: Two options can have the same expected value but very different risk.
+play: debate | A and B both expect $10. A is certain. B is $0 or $20, 50/50. Which is better? | It depends whether you can afford the bad result. For money you need, choose certainty* | B, because risk is always better | Over many tries, B averages the same, and some people enjoy the chance. One try is very different from many.
+check: mcq | What does a bigger spread of results mean? | More risk* | Less risk | A higher average
+check: tf | Two options can have the same expected value but different risk. | true
+home: Talk with a grown-up about a choice they made between a sure thing and a gamble.
+skill: risk
+
+@lesson 6.3 | No free lunch | 🍽️ | shares
+hook: "Guaranteed 30% a year with no risk!" What's the catch?
+learn: Higher expected returns usually come with more risk. Lower-risk options usually pay less.
+learn: Bank deposits are low risk and low return. Share funds have higher expected returns but bigger swings.
+learn: A promise of high returns with no risk is a classic scam warning sign.
+play: scam | Real investment or scam? | A bank term deposit paying a fixed rate in line with other banks=real; Guaranteed 30% a year, zero risk, limited spots!=scam; A diversified share fund that warns its value can fall=real; Double your money in a month with our crypto robot=scam; A friend of a friend's secret scheme that pays you for signing others up=scam | Higher returns come with higher risk. "Guaranteed" high returns are a red flag.
+check: mcq | What usually comes with higher expected returns? | More risk* | No risk | A guarantee
+check: tf | A promise of high returns with no risk is a warning sign. | true
+home: Read {nz:the FMA's~au:Moneysmart's} scam warnings with a grown-up.
+skill: risk
+
+@lesson 6.4 | Time changes risk | ⏳ | shares
+hook: Shares can fall 30% in a year. So why do retirement funds hold so many of them?
+learn: Over one year, share prices can swing wildly up or down.
+learn: Over 10 to 20 years, the swings have tended to even out, though nothing is guaranteed.
+learn: Money you need within a few years is safer in low-risk options. Long-term money can take more risk.
+play: market | Ride a share fund for 20 years. Watch the swings even out over time | 20
+check: mcq | You need $5,000 for a course in one year. Where's it safest? | A bank deposit* | A single company's shares | A crypto coin
+check: tf | Share prices can swing a lot over one year. | true
+home: Ask a grown-up how their {nz:KiwiSaver~au:super} fund changed over one bad year, and over ten years.
+skill: risk
+
+@lesson 6.5 | Don't put all your eggs in one basket | 🧺 | shares
+hook: All your money in one company, or a little in 500? Which is riskier?
+learn: Diversification means spreading money across many investments.
+learn: If one company fails, it's a small part of your money. That cuts the spread of results.
+learn: Diversifying lowers risk without lowering the expected return much, which is why index funds are popular.
+play: sort | Diversified, Concentrated | A fund holding 500 companies=Diversified; All your savings in one friend's start-up=Concentrated; A mix of shares, bonds and cash=Diversified; Every dollar in one crypto coin=Concentrated; A fund spread across many countries=Diversified; All your money in the company you work for=Concentrated | Diversified or concentrated?
+check: mcq | What does diversification do? | Cuts risk by spreading your money* | Guarantees you'll never lose | Doubles your returns
+check: tf | Index funds spread money across many companies. | true
+home: Look up how many companies are in an index fund with a grown-up.
+skill: diversification
+
+@lesson 6.6 | Insurance maths | ☂️ | home
+hook: Insurance companies make a profit, so on average you pay more than you get back. Why buy it?
+learn: For you, insurance usually has a negative expected value. You pay more in premiums than you claim, on average.
+learn: But it cuts your risk. It swaps a small, certain cost for protection from a huge loss.
+learn: Insure big losses you couldn't afford, like your car or home. Skip insuring small things you could replace.
+play: path | You've bought a $40 phone case and a $1,200 laptop for uni. | Insure the laptop, and skip insurance for the phone case => good: You protect the loss you couldn't afford, and save on the small one. | Insure both, plus your socks => bad: Insuring cheap things costs more than it saves, on average. | Insure nothing, because the expected value is negative => ok: True on average, but losing the laptop could really hurt you.
+check: mcq | What's insurance best for? | Big losses you couldn't afford* | Things you could easily replace | Making a profit
+check: tf | On average, insurance customers pay more in premiums than they get back. | true
+home: Ask a grown-up what insurance your family has, and what big loss each one protects against.
+skill: insurance
+
+@lesson 7.1 | Total cost of ownership | 📱 | home
+hook: A $1,500 phone. Is that what it really costs you?
+learn: Total cost of ownership is the price, plus running costs and extras, minus what you get back when you sell it.
+learn: $1,500 phone + $1,260 plan over 3 years + $80 case − $300 trade-in = $2,540.
+learn: That's about $70 a month. Comparing monthly costs makes choices clearer.
+play: match | Match each cost to its type | $1,500 to buy the phone=Purchase price; $35 a month for 36 months=Running costs; $80 case and screen protector=Extras; $300 trade-in after 3 years=Resale value, taken off
+check: gap | $1,000 phone + $900 plan + $50 case − $200 trade-in = $_ | 1750
+check: mcq | What's total cost of ownership? | Everything it costs, minus what you get back* | Just the sticker price | Only the monthly plan
+home: Work out with a grown-up the total cost of a phone or laptop someone in your family owns.
+skill: big purchases
+
+@lesson 7.2 | Depreciation | 📉 | home
+hook: You buy a new car for $20,000. Two years later, what's it worth?
+learn: Depreciation is how much something loses in value over time.
+learn: Cars often lose a big part of their value in the first few years.
+learn: At 15% a year, a $20,000 car is worth $17,000 after one year, then 15% less again the next year.
+play: slider | A $20,000 car loses 15% of its value each year. About what's it worth after 2 years? | 10000 | 20000 | 14450 | $ | 300 | 50
+check: gap | A $10,000 car loses 20% in a year. It's now worth $_ | 8000
+check: mcq | When do cars usually lose value fastest? | In the first few years* | After 20 years | Never
+home: Look up the price of the same car model, new and 3 years old, with a grown-up.
+skill: depreciation
+
+@lesson 7.3 | Plan or outright? | 📶 | online
+hook: A phone on a $60 plan, or buy it and get a cheap plan. Which costs less?
+learn: Phones on a plan spread the cost of the phone into your monthly bill.
+learn: Compare the total over the same time, like 36 months.
+learn: Buying outright plus a $25 SIM-only plan: $1,200 + $900 = $2,100. A $60 plan with the phone: $2,160.
+play: price | Over 36 months, which way of getting the phone costs least per month? | Phone on a $60 plan:2160:36:months; Buy the $1,200 phone, then a $25 plan:2100:36:months; Phone paid monthly with a $5 fee, plus a $25 plan:2280:36:months
+check: gap | A $50 plan for 24 months costs $_ in total | 1200
+check: mcq | How should you compare phone deals? | Total cost over the same length of time* | Just the monthly price | The colour of the phone
+home: Compare two phone deals with a grown-up over 24 or 36 months.
+skill: big purchases
+
+@lesson 7.4 | "Only $79 a week!" | 🚗 | stall
+hook: A dealer says a $15,000 car is "only $79 a week". What's the catch?
+learn: Weekly prices sound small. Times them by the number of weeks to see the real total.
+learn: $79 a week for 5 years is $79 × 260 weeks = $20,540. That's $5,540 more than the price.
+learn: Some loans have a big "balloon" payment at the end. Read the total amount payable.
+play: path | The dealer says "Only $79 a week for 5 years!" for a $15,000 car. | Work out the total, compare it with a bank loan and saving up first => good: $20,540 is a lot more than $15,000. Now you can compare properly. | Sign today, because $79 sounds cheap => bad: You'll pay $5,540 extra, maybe more with fees. | Ask if there's a balloon payment at the end => good: Smart. Balloon payments can hide thousands of dollars.
+check: gap | $50 a week for 104 weeks is $_ | 5200
+check: mcq | What should you look for in a car loan contract? | The total amount payable* | The colour of the paper | Only the weekly amount
+home: Find a "per week" price in a car ad with a grown-up and work out the total.
+skill: borrowing
+
+@lesson 7.5 | Running costs | ⛽ | home
+hook: You drive 10,000 km a year. How much will fuel cost?
+learn: Fuel use is measured in litres per 100 km. A car using 8 L per 100 km uses 800 L over 10,000 km.
+learn: At $2.50 a litre, that's $2,000 a year. An electric car using 15 kWh per 100 km at 30c a kWh is $450 a year at home rates.
+learn: {nz:In NZ, electric cars pay road user charges per kilometre too, so add those in.~au:Add rego, insurance, tyres and servicing, whatever you drive.}
+play: slider | 12,000 km a year at 6 L per 100 km, with fuel at $2.50 a litre. What's the yearly fuel cost? | 0 | 4000 | 1800 | $ | 100 | 50
+check: gap | A car uses 5 L per 100 km. Over 1,000 km it uses _ litres | 50
+check: mcq | What does "8 L per 100 km" mean? | The car uses 8 litres of fuel every 100 km* | It goes 8 km on 100 litres | It holds 8 litres
+home: Find a car's fuel use with a grown-up and work out its yearly fuel cost.
+skill: big purchases
+
+@lesson 7.6 | Buying a used car | 🔧 | home
+hook: A cheap used car looks great online. How do you avoid buying a lemon?
+learn: Set a budget that includes running costs, not just the price.
+learn: Check the PPSR to see if money is still owed on the car. If it is, it could be taken back.
+learn: Get a mechanic's inspection and a test drive before you pay. Never pay a deposit for a car you haven't seen.
+play: build | Buy a used car the smart way | Set a budget, including running costs; Research reliable models; Check the PPSR for money owed; Get a mechanic's inspection; Take a test drive; Negotiate, then pay safely
+check: mcq | What does a PPSR check show? | Whether money is still owed on the car* | The car's colour | Who the first owner's friends are
+check: tf | You should pay a deposit on a car you haven't seen. | false | Never pay for a car before you've seen and checked it.
+home: Look at a used car ad with a grown-up. What questions would you ask the seller?
+skill: big purchases
+
+@lesson 8.1 | Margin of error | 🗳️ | townhall
+hook: A poll says Party A has 34% and Party B has 32%. Is Party A winning?
+learn: Polls ask a sample, not everyone, so results have a margin of error.
+learn: A poll of about 1,000 people has a margin of error of about plus or minus 3 percentage points.
+learn: 34% could really be anywhere from about 31% to 37%. A 2-point gap is too close to call.
+play: path | A poll shows Party A on 34% and Party B on 32%, with a margin of error of 3 points. The headline says "A surges ahead!" | Say it's too close to call, because the gap is inside the margin of error => good: The real numbers could easily be the other way round. | Believe A is clearly winning => bad: A 2-point gap is smaller than the margin of error. | Ignore all polls for ever => ok: Polls are useful, especially trends across many polls. Just read them carefully.
+check: gap | A party polls 40%, with a margin of error of 3 points. The lowest likely value is _% | 37
+check: mcq | What does a bigger sample usually do? | Shrinks the margin of error* | Makes it bigger | Nothing
+home: Find a recent poll in the news with a grown-up. Does it give a margin of error?
+skill: statistics
+
+@lesson 8.2 | Significant or just luck? | 🎲 | townhall
+hook: A study finds a new study method raises scores by 1%. Is that real or just luck?
+learn: Researchers ask: how likely is a result this big if there was really no effect? That's what a p-value measures.
+learn: A p-value under 0.05 is often called "statistically significant". It means the result would be unlikely if it were just luck.
+learn: Significant doesn't mean important. A huge study can find a tiny effect that's real but doesn't matter much.
+play: match | Match each result to what it tells you | A p-value of 0.01=Unlikely to be just luck; A p-value of 0.40=Could easily be luck; A huge sample and a tiny difference=Real, but may not matter much; A sample of 12 people=Results can swing a lot by chance
+check: mcq | What does "statistically significant" mean? | The result would be unlikely if it were just luck* | The result is important | The study was big
+check: tf | A statistically significant result is always important. | false | A real effect can still be tiny.
+home: Look for the words "statistically significant" in a news story with a grown-up. What was the actual size of the effect?
+skill: statistics
+
+@lesson 8.3 | Strength of evidence | 🔬 | museum
+hook: A friend swears a supplement cured their cold. How strong is that evidence?
+learn: Some kinds of evidence are much stronger than others.
+learn: A randomised controlled trial puts people into groups by chance, so it can show cause and effect.
+learn: A systematic review combines many good studies, so it's stronger still. One person's story is the weakest.
+play: build | Order the evidence from strongest to weakest | A systematic review of many trials; One large randomised controlled trial; A large observational study; A single case report; A friend's story
+check: mcq | Why are randomised trials strong? | People are put into groups by chance, so they can show cause* | They're always small | They use opinions
+check: tf | One person's story is strong scientific evidence. | false | Stories can start questions, but they can't prove cause.
+home: Find a health claim in an ad with a grown-up. What kind of evidence does it give?
+skill: evidence
+
+@lesson 8.4 | Base rates | 🧪 | museum
+hook: A test is 99% accurate. You test positive for a rare disease. How likely is it that you have it?
+learn: The base rate is how common something is to begin with.
+learn: Say 1 in 1,000 people has the disease, and the test wrongly says "positive" for 1% of healthy people.
+learn: Out of 1,000 people, about 1 sick person and about 10 healthy people test positive. So only about 1 in 11 positives is real.
+play: slider | Using the numbers above, about what percent of positive tests are real? | 0 | 100 | 9 | % | 3 | 1
+check: mcq | Why do rare conditions cause many false positives? | Healthy people far outnumber sick people* | Tests never work | Sick people don't get tested
+check: tf | A very accurate test can still give many false positives for something rare. | true
+home: Talk with a grown-up about why doctors often run a second test.
+skill: probability
+
+@lesson 8.5 | Survivorship bias | ✈️ | museum
+hook: Several billionaires dropped out of university. Should you drop out too?
+learn: Survivorship bias is looking only at the winners, and forgetting everyone who didn't make it.
+learn: In World War II, engineers studied bullet holes on planes that came back. The statistician Abraham Wald said to armour the places with no holes. Planes hit there didn't make it home.
+learn: We hear about the dropouts who got rich, not the many who didn't.
+play: debate | Several billionaires dropped out of university. Is dropping out a smart plan? | No. We only hear about the few who succeeded, not the many who didn't* | Yes. It worked for them, so it'll work for you | For a few people with a business that's already growing fast, pausing study can make sense. That's very different from dropping out to get rich.
+check: mcq | What's survivorship bias? | Only looking at the winners* | Surviving a test | Being biased against winners
+check: tf | Abraham Wald suggested armouring the parts of planes that came back without bullet holes. | true
+home: Think of a "success story" ad with a grown-up. Who might be missing from the story?
+skill: statistics
+
+@lesson 8.6 | Headlines and hype | 📰 | online
+hook: "Chocolate cures cancer!" says the headline. What does the study actually say?
+learn: Headlines often hype research. Check the sample size, who was studied and who paid for it.
+learn: Studies on mice or cells don't always work the same way in people.
+learn: Look for the absolute risk. "Doubles your risk" might mean going from 1 in 100,000 to 2 in 100,000.
+play: scam | Solid research or hype? | Chocolate cures cancer, says a study of 8 mice=scam; A review of 50 studies finds regular exercise lowers heart disease risk=real; Miracle pill melts fat, says the company that sells it=scam; A study of 2 million drivers links phone use to more crashes=real; Coffee DOUBLES your risk, from 1 in 100,000 to 2 in 100,000=scam | Hype uses tiny samples, sellers' own claims and scary relative risks. Solid research is large, independent and clear about the real size of the risk.
+check: mcq | What should you check first in a health headline? | Who was studied and how many* | The font | How many people shared it
+check: tf | A study on mice always works the same way in people. | false | Results in animals often don't carry over to people.
+home: Pick a science headline with a grown-up and find the original study. Does it match the headline?
+skill: data literacy
+

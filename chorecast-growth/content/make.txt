@@ -290,6 +290,275 @@ check: tf | You should check your poster from far away. | true
 home: Make a poster for a pretend or real stall, and stick it on the fridge.
 skill: marketing
 
+@lesson 5.1 | The float | 🪙 | stall
+hook: Your first customer pays with a $5 note for a $2 cookie. Do you have change?
+learn: A float is a little bit of money you put in the cash box before you start.
+learn: It's for giving change. $1 and $2 coins are the most useful.
+learn: Write down how much float you started with, so you can take it out later.
+try: Five $1 coins and two $2 coins make $5 + $4 = $9 :: gap | Four $1 coins and three $2 coins make $_ | 10
+play: tap | Tap the things that help you give change | 🪙:yes:$1 and $2 coins; 💵:yes:A few $5 notes; 📝:yes:A note of how much float you started with; 🧸:no; 🍭:no; 🧮:yes:Something to help you add up
+check: mcq | What is a float for? | Giving change* | Buying lollies | Spending at the shop
+check: tf | You should write down how much float you started with. | true
+home: Make a pretend float with a grown-up, using coins from a money box.
+skill: cash
+
+@lesson 5.2 | Counting coins | 🧮 | bank
+hook: Your cash box is full of jumbled coins. What's the fastest way to count them?
+learn: Sort the coins into piles of the same kind first.
+learn: Make piles that add up to $1. Five 20c coins make $1.
+learn: Count the notes, then the piles of coins, then add them together.
+try: Two 50c coins make $1 :: gap | Ten 10c coins make $_ | 1
+play: gen | add | 4
+check: mcq | How many 20c coins make $1? | 5* | 2 | 10
+check: gap | Four $2 coins make $_ | 8
+home: Sort a handful of coins into piles with a grown-up, then count them.
+skill: counting money
+
+@lesson 5.3 | Money in | 📥 | stall
+hook: You sold lots of cupcakes today. How do you know how many?
+learn: Money in is all the money customers give you.
+learn: Make a tally mark each time you sell one. Four lines, then one across makes five.
+learn: At the end, count your tally marks. 6 cupcakes at $1 each is $6.
+try: 5 cupcakes at $1 each is $5 :: gap | 7 cupcakes at $1 each is $_ | 7
+play: order | Keep track of money in at your stall | A customer chooses a cupcake; They pay you; You give any change; You put the money in the cash box; You make a tally mark
+check: mcq | What does a tally mark help you count? | How many you sold* | How many clouds there are | How old you are
+check: gap | You sold 4 cookies at $2 each. Money in is $_ | 8
+home: Use tally marks with a grown-up to count something, like cars going past.
+skill: money in
+
+@lesson 5.4 | Money out | 📤 | stall
+hook: You bought cups and lemons before you opened. Where does that go in your counting?
+learn: Money out is money you spend to run your stall.
+learn: Cups, ingredients and a stall fee are all money out.
+learn: Keep the receipts, so you remember what you spent.
+play: sort | Money in, Money out | A customer buys lemonade=Money in; Buying a bag of lemons=Money out; Paying for paper cups=Money out; A tip in the jar=Money in; Buying a new pen for your sign=Money out; Selling the last cookie=Money in | Is it money in or money out?
+check: mcq | Buying lemons for your stall is… | Money out* | Money in | Free
+check: tf | Keeping receipts helps you remember what you spent. | true
+home: Ask a grown-up for a shopping receipt. Find the total money out.
+skill: money out
+
+@lesson 5.5 | End of the day | 🌇 | stall
+hook: There's $25 in your cash box. Did you make $25?
+learn: First take out the float. That money was in the box before you sold anything.
+learn: What's left is the money from your sales.
+learn: Then take away your money out. What's left is your profit.
+try: $25 in the box take away a $10 float is $15 of sales :: gap | $30 in the box take away a $10 float is $_ of sales | 20
+play: build | Count up at the end of the day | Count all the money in the cash box; Take out the float you started with; What's left is your sales; Take away what you spent; What's left is your profit
+check: gap | $18 in the box take away an $8 float is $_ of sales | 10
+check: mcq | What do you take out first at the end of the day? | The float* | The profit | The lemons
+home: Play stall at home with a float, then count up at the end with a grown-up.
+skill: profit
+
+@lesson 5.6 | Keep it safe | 🔒 | stall
+hook: You need to run inside for a minute. What about the cash box?
+learn: Never leave your cash box alone. Ask a grown-up to watch it.
+learn: Keep it behind the table, not at the front where people can grab it.
+learn: Count the money out of sight, with a grown-up.
+play: path | You're running your stall and need the toilet. | Ask your grown-up to mind the cash box => good: Your money stays safe while you're gone. | Leave the cash box on the table => bad: Someone could take it while you're away. | Put a sign on it saying "Please don't take" => bad: A sign won't stop someone grabbing it.
+check: mcq | Where should the cash box go? | Behind the table, near you* | At the front, by the footpath | On the road
+check: tf | It's a good idea to count your money with a grown-up. | true
+home: Choose a safe spot for a cash box at a pretend stall with a grown-up.
+skill: cash
+
+@lesson 6.1 | Better together | 👫 | stall
+hook: Baking, selling and giving change all at once is hard. What if a friend helps?
+learn: When friends sell together, each person can do a different job.
+learn: One friend can make things, one can talk to customers and one can mind the cash box.
+learn: Working together means you can do more than you could alone.
+play: match | Match each stall job to what that friend does | Maker=Bakes the cookies; Seller=Talks to customers; Cash keeper=Gives the right change; Sign maker=Draws the poster
+check: mcq | Why is selling with friends helpful? | Everyone can do a different job* | Nobody has to do anything | You make less
+check: tf | One friend can mind the cash box while another serves customers. | true
+home: Plan a pretend stall with a friend or family member. Who would do each job?
+skill: teamwork
+
+@lesson 6.2 | Fair jobs | 🔄 | stall
+hook: Your friend always gets to serve customers, and you always clean up. Is that fair?
+learn: Some jobs are fun and some are boring. Fair teams share both.
+learn: You can take turns, like swapping jobs every half hour.
+learn: If something feels unfair, say so kindly and suggest a fix.
+play: path | Your friend wants to be the seller all day, and you have to wash up. | Kindly suggest swapping jobs halfway through => good: You both get a turn at the fun job and the boring job. | Quit and go home => bad: The stall can't run, and your friend is left alone. | Do the washing up badly on purpose => bad: That hurts the stall and doesn't fix the problem.
+check: mcq | What's a fair way to share jobs? | Take turns* | One person does all the boring jobs | Nobody does any jobs
+check: tf | It's OK to kindly say when something feels unfair. | true
+home: Make a job roster for chores at home with your family, so everyone takes turns.
+skill: teamwork
+
+@lesson 6.3 | Splitting the money | 💰 | bank
+hook: You and a friend made $12. How do you share it fairly?
+learn: Splitting equally means everyone gets the same amount.
+learn: $12 shared by 2 friends is $6 each. $12 shared by 3 friends is $4 each.
+learn: Count it out together, one coin or note at a time, so everyone can see.
+try: $10 shared by 2 friends is $5 each :: gap | $8 shared by 2 friends is $_ each | 4
+play: slider | 4 friends made $20 profit. How much does each friend get if they split it equally? | 0 | 20 | 5 | $ | 0 | 1
+check: gap | $9 shared by 3 friends is $_ each | 3
+check: mcq | What does splitting equally mean? | Everyone gets the same* | The oldest gets most | Whoever counts it keeps it
+home: Share 12 counters or buttons equally between 2, then 3, then 4 people.
+skill: sharing
+
+@lesson 6.4 | Paying back costs | 🧾 | stall
+hook: Your friend spent $4 on cups for your stall. Should that come out before you split the money?
+learn: If someone paid for things the stall needed, pay them back first.
+learn: Then split the profit that's left.
+learn: Keep the receipt, so everyone knows what was spent.
+play: order | Share out the money at the end of the stall | Count all the money; Take out the float; Pay back anyone who bought things for the stall; Split what's left; Say thanks to your team
+check: mcq | Your friend bought $4 of cups. What do you do first? | Pay them back $4* | Forget about it | Give them nothing
+check: gap | You made $14. Your friend spent $4 on cups. After paying them back, $_ is left to split | 10
+home: Practise paying back costs and splitting money with play money and a grown-up.
+skill: sharing
+
+@lesson 6.5 | When friends disagree | 🤝 | stall
+hook: You want to sell slime, but your friend wants to sell cookies. Uh-oh.
+learn: Friends don't always agree, and that's OK.
+learn: Take turns to talk, and really listen to each other.
+learn: Look for an answer you both like. If you're stuck, ask a grown-up to help.
+play: chat | Your friend wants to change the stall plan | them: I don't want to sell slime. Cookies are better! | me: OK, tell me why you like cookies.*/No! Slime is best!/Fine, I'm going home. | them: Everyone at school loves cookies, and they're quick to make. | me: Good point. What if we sell cookies and a few slimes, and see what sells best?*/You always get your way./Cookies are boring. | them: Yes! Let's try that.
+check: mcq | What should you do when you and a friend disagree? | Listen and look for an answer you both like* | Shout louder | Stop being friends
+check: tf | You can ask a grown-up to help when you're stuck. | true
+home: Next time you disagree with someone at home, try taking turns to talk and listen.
+skill: teamwork
+
+@lesson 6.6 | Agree before you start | 📝 | stall
+hook: What's the best time to decide how to share the money: before the stall, or after?
+learn: Decide the important things before you start, while everyone is happy.
+learn: Agree who does each job, who pays for what and how you'll split the money.
+learn: Write it down and keep it with your cash box.
+play: tap | Tap the things to agree on before you start | 🧑‍🍳:yes:Who does each job; 💵:yes:How you'll split the money; 🛒:yes:Who buys the things you need; ⏰:yes:When you'll open and close; 🦖:no; 🎂:no
+check: mcq | When should you agree how to split the money? | Before you start* | After you've spent it | Never
+check: tf | Writing your plan down helps everyone remember it. | true
+home: Write a little stall agreement with a friend or family member.
+skill: teamwork
+
+@lesson 7.1 | Rainy day | 🌧️ | stall
+hook: It's stall day, and it starts to rain. Is it all over?
+learn: Things don't always go to plan, so it helps to have a Plan B.
+learn: You could move under cover, use a gazebo or pick another day.
+learn: Keep your food and money dry, and stay safe.
+play: tap | Tap the things that help when it rains on stall day | ☂️:yes:A big umbrella or gazebo; 🏠:yes:Moving under cover; 📅:yes:Choosing another day; 🧥:yes:A raincoat for you; 🏖️:no; 🪁:no
+check: mcq | What's a Plan B? | A backup plan if things go wrong* | The best plan | A plan for bees
+check: tf | You can move your stall to another day if it rains. | true
+home: Make a Plan B with a grown-up for a pretend stall, in case it rains.
+skill: problem solving
+
+@lesson 7.2 | Sold out! | 🎉 | stall
+hook: You sold all your cookies in 20 minutes. More customers are coming. What now?
+learn: Selling out is a good problem. It means people love what you make!
+learn: Put up a "Sold out" sign, so people know.
+learn: Next time, make a few more, or ask people to order ahead.
+play: sort | Good idea, Not a good idea | Put up a "Sold out" sign=Good idea; Pretend you still have cookies=Not a good idea; Write down who wants some next time=Good idea; Sell the crumbs for the full price=Not a good idea; Make more for next time=Good idea; Shout at customers to go away=Not a good idea | Is it a good idea when you sell out?
+check: mcq | You sold out. What could you do next time? | Make a few more* | Make fewer | Stop selling
+check: tf | Selling out means people liked what you made. | true
+home: Talk with a grown-up about how many things to make for a pretend stall.
+skill: problem solving
+
+@lesson 7.3 | Nobody's buying | 😕 | stall
+hook: You've been at your stall for an hour, and nobody has bought anything. Why?
+learn: Look for the reason. Can people see you? Is the price right? Do they know what you sell?
+learn: Try one change at a time, and see if it helps.
+learn: Sometimes the weather matters. Cold drinks sell better on hot days!
+play: match | Match each problem to a fix | People walk past without seeing you=Move to where more people walk; The price is too high=Try a lower price; People don't know what you sell=Make a bigger sign; It's too hot for hot chocolate=Sell cold drinks instead
+check: mcq | Nobody can see your stall. What could help? | Move to where more people walk* | Go home | Make it smaller
+check: tf | Trying one change at a time helps you see what works. | true
+home: Look at a shop with a grown-up. What helps people notice it?
+skill: problem solving
+
+@lesson 7.4 | Fixing a mistake | 🩹 | stall
+hook: A customer says their cookie was burnt on the bottom. What do you say?
+learn: Everyone makes mistakes. What matters is how you fix them.
+learn: Stay calm, say sorry and make it right, like giving a new cookie.
+learn: Then think about how to stop it happening again.
+play: order | Fix a mistake with a customer | Stay calm and listen; Say sorry; Fix it, like giving a new one; Say thanks for telling you; Work out how to stop it happening again
+check: mcq | A customer's cookie was burnt. What do you do? | Say sorry and give a new one* | Argue with them | Hide behind the table
+check: tf | Thinking about how to stop a mistake happening again is a good idea. | true
+home: Talk with a grown-up about a mistake you fixed. How did it feel?
+skill: customer service
+
+@lesson 7.5 | Spills and breaks | 🧃 | stall
+hook: Your jug of lemonade tips over, all over the table. Oops!
+learn: Accidents happen. Stop and tell a grown-up.
+learn: Clean up safely. Glass needs a grown-up to pick it up.
+learn: Put things where they're less likely to fall, like jugs in the middle of the table.
+play: path | Your glass jug falls and smashes on the ground. | Stay back and get a grown-up to clean up the glass => good: Broken glass is sharp. A grown-up can clean it up safely. | Pick up the glass pieces quickly with your hands => bad: You could cut yourself badly. | Leave it and keep selling => bad: Someone could step on the glass and get hurt.
+check: mcq | Something made of glass breaks. What do you do? | Get a grown-up* | Pick it up fast | Kick it away
+check: tf | Putting jugs in the middle of the table helps stop spills. | true
+home: Set up a pretend stall with a grown-up. Where should the drinks go so they don't spill?
+skill: safety
+
+@lesson 7.6 | Better next time | 🌟 | stall
+hook: Your stall day is over. How can the next one be even better?
+learn: After your stall, think about what went well and what didn't.
+learn: Write down one thing to keep doing and one thing to change.
+learn: Every stall teaches you something new.
+play: chat | Talking with your grown-up after stall day | them: How do you think stall day went? | me: We sold lots of cookies, but we ran out of change.*/It was all bad./I don't want to talk about it. | them: What could we do about the change next time? | me: Bring more $1 and $2 coins in our float.*/Not give any change./Ask customers to keep it. | them: Great idea. What should we keep doing? | me: Smiling and saying thank you to everyone.*/Nothing./Shouting at people walking past.
+check: mcq | What should you think about after stall day? | What went well and what to change* | Nothing at all | Only the money
+check: tf | Every stall can teach you something new. | true
+home: After any activity, try saying one thing that went well and one thing to change.
+skill: reflection
+
+@lesson 8.1 | What's an invention? | 💡 | workshop
+hook: Someone had to think up the first bike. What else did people invent?
+learn: An invention is something new that people make to solve a problem.
+learn: Wheels, glasses and telephones are all inventions.
+learn: Trees, rocks and the moon aren't inventions. Nobody made them.
+play: sort | Invention, Not an invention | A bicycle=Invention; A tree=Not an invention; Glasses=Invention; The moon=Not an invention; A telephone=Invention; A rock=Not an invention | Did someone invent it?
+check: mcq | What is an invention? | Something new people make to solve a problem* | Something that grows on trees | A type of rock
+check: tf | Glasses are an invention. | true
+home: Find three inventions in your kitchen with a grown-up. What problem does each one solve?
+skill: inventing
+
+@lesson 8.2 | A teenage inventor | 👆 | museum
+hook: A boy who couldn't see invented a way to read with his fingers. How?
+learn: Louis Braille lost his sight when he was a little boy in France.
+learn: When he was about 15, he invented a way to read using patterns of raised dots.
+learn: It's called braille, and people who are blind all over the world still use it today.
+play: mystery | He lost his sight as a young boy; He grew up in France; At about 15 he invented a way to read with your fingertips; His reading system uses raised dots | Louis Braille* | Thomas Edison | A famous painter
+check: mcq | What does braille use? | Raised dots you can feel* | Bright colours | Loud sounds
+check: tf | Kids and teenagers can invent things that help people. | true
+home: Look for braille on a lift button, sign or medicine box with a grown-up.
+skill: inventing
+
+@lesson 8.3 | Invented near us | 🗺️ | museum
+hook: Some famous inventions came from {nz:New Zealand~au:Australia}. Do you know any?
+learn: {nz:Bill Hamilton invented a jet boat that can zoom over shallow rivers, in the 1950s.~au:David Warren invented the black box flight recorder for planes, in the 1950s.}
+learn: {nz:Colin Murdoch invented a plastic syringe you throw away after one use, so needles stay clean.~au:Graeme Clark led the team that made the bionic ear, which helps deaf people hear.}
+learn: Each one started with someone noticing a problem.
+play: match | Match each invention to the problem it solved | {nz:The jet boat~au:The black box}={nz:Boats couldn't go up shallow rivers~au:Nobody knew why planes crashed}; {nz:The throw-away syringe~au:The bionic ear}={nz:Needles needed to be kept clean and safe~au:Some deaf people couldn't hear at all}; Glasses=People couldn't see clearly; The wheel=Heavy things were hard to move
+check: mcq | How do inventions usually start? | Someone notices a problem* | Someone has a nap | Someone buys a toy
+check: tf | {nz:The jet boat was invented in New Zealand.~au:The black box flight recorder was invented in Australia.} | true
+home: Find out about another invention from {nz:New Zealand~au:Australia} with a grown-up.
+skill: inventing
+
+@lesson 8.4 | Think like an inventor | 🧠 | workshop
+hook: Your school bag strap keeps slipping off your shoulder. Could you invent a fix?
+learn: Inventors notice a problem, then think of lots of ideas, even silly ones.
+learn: They pick the best idea and make a simple model to try it.
+learn: If it doesn't work, they change it and try again.
+play: order | Invent like an inventor | Notice a problem; Think of lots of ideas; Pick the best idea; Make a simple model; Test it and make it better
+check: mcq | What do inventors do if their idea doesn't work? | Change it and try again* | Give up for ever | Hide it
+check: tf | Silly ideas can sometimes lead to great ones. | true
+home: Pick a small problem at home and think of five ideas to fix it with a grown-up.
+skill: inventing
+
+@lesson 8.5 | Inventions that help people | 🦽 | workshop
+hook: Some inventions help people move, see or hear. Can you spot them?
+learn: Lots of inventions help people with disabilities live the way they want to.
+learn: Wheelchairs help people move. Hearing aids help people hear.
+learn: Good inventors ask the people who will use it what they need.
+play: tap | Tap the inventions that help people move, see or hear | 🦽:yes:A wheelchair helps people move; 👓:yes:Glasses help people see; 🦻:yes:A hearing aid helps people hear; 🦯:yes:A white cane helps people who are blind get around; 🎈:no; 🍭:no
+check: mcq | Who should inventors ask about what's needed? | The people who will use it* | Nobody | Only their best friend
+check: tf | Hearing aids help people hear. | true
+home: Look for things in your town that help people get around, like ramps or beeping crossings.
+skill: inventing
+
+@lesson 8.6 | My invention | 🚀 | workshop
+hook: If you could invent anything to help people, what would it be?
+learn: Big ideas start small, with a drawing and a name.
+learn: Think about who it helps, and how.
+learn: Share your idea and ask, "How could it be better?"
+play: chat | Telling your grown-up about your invention | them: What have you invented? | me: A lunchbox that keeps my sandwich cold all day.*/Nothing, inventing is boring./A robot that does all my homework. | them: Who would it help? | me: Kids whose sandwiches go warm and yucky at school.*/Only me./Nobody. | them: Great! How could you test it? | me: Make a cardboard model with an ice pack and check it at lunch.*/Just sell it straight away./I don't need to test it.
+check: mcq | What's a good question to ask about your invention? | "How could it be better?"* | "Is it the best ever?" | "Can I stop now?"
+check: tf | Big ideas can start with a drawing. | true
+home: Draw your invention, give it a name and show a grown-up.
+skill: inventing
+
 @band builders
 @unit 1 | Running a stall | Pricing, stock and selling out
 @unit 2 | Marketing | Telling the right people the right thing
@@ -582,6 +851,272 @@ check: mcq | Which pays more per hour? | $20 in 2 hours* | $20 in 5 hours | $20 
 home: Work out your earnings per hour for a job you've done, with a grown-up.
 skill: profit
 
+@lesson 5.1 | Start with a problem | 🧩 | workshop
+hook: Is the best product the coolest idea, or the one that fixes a problem?
+learn: Great products start with a problem people really have.
+learn: Ask: who has this problem, and how do they deal with it now?
+learn: If nobody has the problem, nobody will buy the fix.
+play: match | Match each problem to a product that could fix it | Earbud cords always get tangled=A clip-on cord wrap; The dog gets bored home alone=A treat puzzle toy; Lunchbox food goes soggy=A box with separate sections; Bike lights get stolen=Lights that click on and off easily
+check: mcq | What should you find before you make a product? | A real problem people have* | The fanciest materials | The highest price
+check: tf | If nobody has the problem, nobody will buy the fix. | true
+home: List three small problems your family has at home. Could a product fix one?
+skill: product design
+
+@lesson 5.2 | Quick and cheap first | ✂️ | workshop
+hook: Should your first version be perfect?
+learn: A prototype is a rough first version you make to test an idea.
+learn: Use cheap things, like cardboard, tape or a small test batch.
+learn: Spend little until you know people like it. Then make it better.
+play: sort | Good first prototype, Too much too soon | A cardboard model of a phone stand=Good first prototype; Ordering 500 printed boxes=Too much too soon; A half batch of a new cookie=Good first prototype; Buying a $300 machine before testing=Too much too soon; A sketch shown to five friends=Good first prototype; A hand-sewn test bag=Good first prototype | Smart start or too much too soon?
+check: mcq | What's a prototype? | A rough first version to test* | The final product | A type of shop
+check: tf | You should spend lots of money before testing your idea. | false | Test cheaply first. Then spend more on what works.
+home: Make a cardboard prototype of something you'd like to invent.
+skill: prototyping
+
+@lesson 5.3 | A fair test | 🔬 | workshop
+hook: Your slime is better this time. Was it the extra glue or the new bowl?
+learn: In a fair test, you change only one thing at a time.
+learn: Keep everything else the same, so you know what made the difference.
+learn: Write down each version and what happened.
+play: diff | Two slime tests. Tap the one thing that changed. | 100 mL glue; 2 tsp contact solution; Mixed for 2 minutes; Same bowl | 100 mL glue; 3 tsp contact solution; Mixed for 2 minutes; Same bowl
+check: mcq | In a fair test, how many things do you change at once? | One* | All of them | None
+check: tf | Writing down each version helps you learn what works. | true
+home: Do a fair test with a grown-up, like paper planes with one change each time.
+skill: testing
+
+@lesson 5.4 | Honest feedback | 💬 | stall
+hook: Your best friend says your product is "awesome". Is that helpful?
+learn: Friends and family are often too nice to tell you what's wrong.
+learn: Ask open questions, like "What would you change?" instead of "Do you like it?"
+learn: Watch people use it. Where do they get stuck?
+play: chat | You're testing a new phone stand with a classmate | them: Yeah, it's cool I guess. | me: What would make it better?*/So you love it, right?/Fine, whatever | them: It tips over with my big phone. | me: Thanks! Can you show me how it tipped?*/No it doesn't/You're holding it wrong | them: See, when I tap the screen it wobbles. | me: That really helps. I'll make the base wider and test again.*/Your phone is the problem/I'll just ignore that
+check: mcq | Which question gets more useful feedback? | "What would you change?"* | "Do you like it?" | "It's great, isn't it?"
+check: tf | Watching people use your product can show problems. | true
+home: Ask a grown-up to test something you made. Ask, "What would you change?"
+skill: feedback
+
+@lesson 5.5 | Try, try again | 🔁 | workshop
+hook: James Dyson built thousands of vacuum cleaner prototypes before one worked well. Why keep going?
+learn: Most products take many versions to get right. Dyson built 5,127 prototypes of his bagless vacuum.
+learn: Each version that doesn't work teaches you something.
+learn: But know when to stop. If testers still don't want it, try a new idea.
+play: path | Your third version of a bird feeder still leaks seed. | Find where it leaks, fix that one part and test again => good: Small fixes, one at a time, make it better. | Give up and throw it all away => ok: You can stop, but you might be close. Try fixing one thing first. | Sell it anyway and hope nobody notices => bad: Unhappy customers won't come back, and they'll tell their friends.
+check: mcq | What does a version that doesn't work give you? | Something to learn* | Nothing at all | A reason to quit straight away
+check: tf | Good products often take many versions. | true
+home: Pick something you made that didn't work. Talk with a grown-up about one change to try.
+skill: improving
+
+@lesson 5.6 | Ready to sell? | ✅ | stall
+hook: Your product works. Is it ready for customers?
+learn: Check it's safe, it works every time and you can make more that are just as good.
+learn: Work out the cost to make one, so your price covers it.
+learn: Ask a grown-up to check it before you sell.
+play: tap | Tap the checks to do before you sell | 🦺:yes:It's safe to use; 🔁:yes:It works every time; 🏷️:yes:You know what each one costs to make; 📦:yes:You can make more just as good; 🎉:no; 🪄:no
+check: mcq | Why work out the cost to make one? | So your price covers it* | So it looks fancy | So you can skip testing
+check: tf | A grown-up should check your product before you sell it. | true
+home: Make a "ready to sell" checklist for something you could make.
+skill: product design
+
+@lesson 6.1 | Selling online, with help | 🧑‍💻 | online
+hook: You've made 20 keyrings. Can you sell them online by yourself?
+learn: Most online marketplaces say sellers must be 18, so kids sell through a grown-up's account, with their help.
+learn: {nz:Many social media apps also have a minimum age, often 13.~au:Since December 2025, under-16s in Australia can't have accounts on most big social media apps.}
+learn: Selling with a grown-up means they can help with payments, posting and tricky buyers.
+play: path | You want to sell your keyrings online. | Ask a grown-up to list them on their account and help you manage it => good: You follow the rules, and someone's there to help. | Make your own account and say you're 18 => bad: That breaks the rules, and your account could be shut down. | Post your phone number in a public group so buyers can text you => bad: That shares your private details with strangers.
+check: mcq | How do most kids sell on online marketplaces? | Through a grown-up's account, with their help* | By pretending to be 18 | By posting their phone number
+check: tf | Most big marketplaces need sellers to be 18. | true
+home: Look at a marketplace's rules about age with a grown-up.
+skill: online selling
+
+@lesson 6.2 | Keep your details private | 🔐 | online
+hook: A buyer asks which school you go to. Should you tell them?
+learn: Online, never share your full name, address, school or phone number with buyers.
+learn: Let your grown-up handle messages, payments and posting.
+learn: If an item is collected, a grown-up should meet the buyer in a busy public place.
+play: sort | OK to share, Keep private | What the item is made of=OK to share; Your home address=Keep private; The item's size=OK to share; Your school=Keep private; The price=OK to share; Your phone number=Keep private | Is it OK to share with a buyer?
+check: mcq | Who should meet a buyer to hand over an item? | A grown-up, in a busy public place* | You, alone | Nobody, leave it on the footpath
+check: tf | It's fine to tell a buyer which school you go to. | false | Keep your school and address private.
+home: Talk with a grown-up about which details you'd never share online.
+skill: online safety
+
+@lesson 6.3 | Postage adds up | 📮 | online
+hook: Your keyring sells for $8. Posting it costs $6. Hmm.
+learn: Posting things costs money, and small items can cost more to post than they're worth.
+learn: Decide who pays for postage. Many sellers add it to the price the buyer pays.
+learn: Selling a bundle of several items, posted together, saves on postage.
+try: $8 keyring + $6 postage = $14 for the buyer :: gap | $12 bracelet + $6 postage = $_ for the buyer | 18
+play: slider | You sell 3 keyrings at $8 each, posted together for $6. How much does the buyer pay altogether? | 0 | 50 | 30 | $ | 0 | 1
+check: gap | Posting 1 item costs $6. Posting 4 items one at a time costs $_ | 24
+check: mcq | How can you save on postage? | Post several items together* | Use a bigger box for every item | Post each one separately
+home: Look up the cost of posting a small parcel with {nz:NZ Post~au:Australia Post}.
+skill: pricing
+
+@lesson 6.4 | Dodgy buyers | 🚩 | online
+hook: A buyer says they'll pay you $50 for a $10 keyring. Lucky you?
+learn: Some "buyers" are scammers. They offer too much, rush you or ask you to click links.
+learn: Real buyers ask normal questions, like the size, colour or when it can be posted.
+learn: Show any strange message to your grown-up before you reply.
+play: scam | Real buyer or scammer? | Is the blue one still available?=real; I'll pay $50 for your $10 keyring if you send it today=scam; Click this link to get your money=scam; Could you post it to me this week?=real; Send me your bank password so I can pay you=scam | Scammers overpay, rush you, send links or ask for passwords. Real buyers ask normal questions.
+check: mcq | What should you do with a strange message from a buyer? | Show your grown-up* | Click the link | Send the item straight away
+check: tf | A real buyer would never need your password. | true
+home: Read some example scam messages with a grown-up and spot the tricks.
+skill: scams
+
+@lesson 6.5 | Reviews | ⭐ | online
+hook: A buyer gives you 2 stars because the parcel was late. What now?
+learn: Buyers often leave reviews. Good reviews help new buyers trust you.
+learn: Post on time, pack well and describe things honestly to earn good reviews.
+learn: If you get a bad review, stay calm, say sorry and try to fix the problem.
+play: chat | A buyer is unhappy, and your grown-up is helping you reply | them: My keyring arrived late and the clasp was bent. | me: I'm really sorry about that. Could we send you a new one?*/That's not my fault./Whatever, you already paid. | them: Oh, that would be great, thanks. | me: No problem. We'll post it tomorrow with tracking.*/Pay for postage first./Maybe next month. | them: Thanks! I'll update my review.
+check: mcq | What should you do after a bad review? | Stay calm, say sorry and try to fix it* | Write a mean reply | Ignore it forever
+check: tf | Good reviews help new buyers trust you. | true
+home: Read some reviews of a shop with a grown-up. What made people happy or unhappy?
+skill: customer service
+
+@lesson 6.6 | Keep your promise | 📦 | online
+hook: You promised to post on Monday. It's Thursday. What happens to your reputation?
+learn: When someone buys from you, they trust you to send what you promised, on time.
+learn: Check the item, pack it well and post it when you said you would.
+learn: Send a message when it's on its way. Buyers love updates.
+play: order | Get an online order to your buyer | Check the item has no faults; Wrap it so it won't get damaged; Write the address clearly, with a grown-up; Post it on the day you promised; Message the buyer to say it's on its way
+check: mcq | Why post on the day you promised? | So buyers trust you* | Because the post office says so | It doesn't matter
+check: tf | Sending a message when the parcel is on its way makes buyers happier. | true
+home: Help a grown-up pack and post a parcel.
+skill: customer service
+
+@lesson 7.1 | Roles that fit | 🧩 | workshop
+hook: Your team has a great artist, a great talker and someone who loves numbers. Who does what?
+learn: Teams work best when people do jobs that match what they're good at.
+learn: Every team needs making, selling and money jobs.
+learn: Swapping jobs sometimes helps people learn new skills too.
+play: match | Match each team member to a job that suits them | Loves drawing and design=Makes the posters and labels; Chatty and friendly=Serves customers; Great with numbers=Keeps the cash book; Careful and patient=Makes the products
+check: mcq | Who should keep the cash book? | Someone who's great with numbers* | Whoever arrives last | Nobody
+check: tf | Swapping jobs sometimes helps people learn new skills. | true
+home: Think of a team you're in. What is each person good at?
+skill: teamwork
+
+@lesson 7.2 | Three ways to split | ➗ | bank
+hook: You put in $30 and your friend put in $10. You made $80. How do you split it?
+learn: Equal split: everyone gets the same. $80 between two is $40 each.
+learn: Split by money put in: you paid 3 parts and your friend paid 1 part, so you get $60 and they get $20.
+learn: Split by work: if you each did different hours, share it by hours. Agree which way before you start.
+try: $60 split equally between 3 is $20 each :: gap | $90 split equally between 3 is $_ each | 30
+play: slider | You put in $20 and your friend put in $20. You made $100. Splitting by money put in, how much do you get? | 0 | 100 | 50 | $ | 0 | 5
+check: gap | You worked 6 hours and your friend worked 2. You made $40. Split by hours, you get $_ | 30
+check: mcq | When should you agree how to split the money? | Before you start* | After you've spent it | Never
+home: Work out three ways to split $60 between two people with a grown-up.
+skill: sharing
+
+@lesson 7.3 | A partner agreement | 📝 | townhall
+hook: You and a friend are starting a car wash business. What should you agree first?
+learn: A partner agreement writes down who does what, who pays for what and how money is shared.
+learn: It also says what happens if someone wants to stop, or if you disagree.
+learn: Both partners sign it, and a grown-up can help you write it.
+play: build | Write a partner agreement | Write both partners' names; List who does each job; Say who pays for supplies; Say how you'll split the profit; Say what happens if someone wants to stop; Both partners sign it
+check: mcq | Why write a partner agreement? | So everyone knows what was agreed* | To make it longer | Because it's homework
+check: tf | A partner agreement should say what happens if someone wants to stop. | true
+home: Write a simple partner agreement for a pretend business with a grown-up.
+skill: agreements
+
+@lesson 7.4 | When a partner slacks off | 😴 | stall
+hook: Your partner hasn't turned up for the last two car washes. What do you do?
+learn: Talk about it early, before you get really annoyed.
+learn: Ask what's going on. There might be a reason you don't know.
+learn: Look at your agreement together, and agree on a fair fix.
+play: chat | Talking to your business partner | them: Hey, sorry I missed the car washes. | me: That's OK. Is everything all right?*/You're so lazy!/I'm keeping all the money. | them: I've had extra swimming training on Saturdays. | me: Could you do Sundays instead, or should we change how we split the money?*/Too bad, figure it out./Whatever, I quit. | them: Sundays work! And I'll do extra next week to make up for it.
+check: mcq | What's a good first step when a partner slacks off? | Ask what's going on* | Yell at them | Take all the money
+check: tf | Looking at your agreement can help you find a fair fix. | true
+home: Talk with a grown-up about how to raise a problem kindly.
+skill: teamwork
+
+@lesson 7.5 | Making decisions together | 🗳️ | stall
+hook: You want to raise the price. Your partner doesn't. Who decides?
+learn: Agree how you'll make big decisions, like prices or spending money.
+learn: Some teams vote. Some need everyone to agree. Some give each person their own area to decide.
+learn: Listen to each other's reasons before you decide.
+play: path | You want to spend $30 of team money on a new sign. Your partner isn't sure. | Explain why, listen to their reasons and decide together => good: You both have a say, and you might find a better idea. | Spend it anyway while they're not looking => bad: That breaks trust. It's team money. | Give up and never mention it again => ok: That avoids a fight, but a good idea might be lost.
+check: mcq | What should you do before making a big team decision? | Listen to everyone's reasons* | Decide alone | Flip a coin without talking
+check: tf | Spending team money without asking breaks trust. | true
+home: Make a family decision together, like what to have for dinner, by listening to everyone first.
+skill: decisions
+
+@lesson 7.6 | Ending a partnership | 👋 | stall
+hook: Your partner is moving to another town. What happens to the business?
+learn: Partnerships can end for lots of reasons, and that's OK.
+learn: Follow your agreement. Share out the money, and decide who keeps the equipment.
+learn: End things kindly. You might want to work together again one day.
+play: debate | Your partner is leaving. You keep the business. What's fair? | Share the money as agreed, and pay them for their half of the equipment* | Keep everything, since you're staying | Some partners agree the leaver just takes their share of the cash. What matters is following what you agreed.
+check: mcq | What should guide how a partnership ends? | Your agreement* | Who shouts loudest | A coin toss
+check: tf | Ending a partnership kindly is a good idea. | true
+home: Talk with a grown-up about how to end something fairly, like a club or a team.
+skill: agreements
+
+@lesson 8.1 | Lego's start | 🧱 | museum
+hook: The world's biggest toy company started with a carpenter making wooden ducks. How?
+learn: In 1932, a carpenter in Denmark called Ole Kirk Christiansen started making wooden toys.
+learn: He named his company Lego, from Danish words meaning "play well".
+learn: Lego started making plastic bricks in 1949, and the bricks we know today in 1958.
+play: order | Put Lego's story in order | A carpenter starts making wooden toys in 1932; He names the company Lego, meaning "play well"; Lego starts making plastic bricks in 1949; The modern clicking brick arrives in 1958; Lego becomes one of the world's biggest toy companies
+check: mcq | What does "Lego" come from? | Danish words meaning "play well"* | The founder's dog | A type of plastic
+check: tf | Lego first made wooden toys. | true
+home: Build something with blocks or Lego and tell a grown-up how it started.
+skill: business history
+
+@lesson 8.2 | A famous food from small beginnings | 🍫 | museum
+hook: A favourite {nz:Kiwi chocolate~au:Aussie spread} started small, over 100 years ago. What is it?
+learn: {nz:In 1896, James Henry Whittaker started making chocolate in Christchurch.~au:In 1922, Cyril Callister made a new spread in Melbourne for Fred Walker's food company, using leftover yeast from beer making.}
+learn: {nz:The business grew slowly, and the Whittaker family still owns it today.~au:A competition chose its name. Sales were slow at first, but it became one of Australia's best-known foods.}
+learn: Big brands often start with one person, one product and lots of patience.
+play: mystery | {nz:It started in Christchurch in 1896~au:It was first made in Melbourne in 1922}; {nz:James Henry Whittaker started it~au:It's made from leftover brewer's yeast}; {nz:The same family still owns it~au:Its name was picked in a competition}; {nz:It's famous for chocolate blocks~au:It's dark brown and spread on toast} | {nz:Whittaker's~au:Vegemite}* | {nz:A fizzy drink~au:A chocolate bar} | {nz:A biscuit factory~au:A cheese}
+check: mcq | What do many big brands start with? | One person, one product and patience* | A huge factory | Millions of dollars
+check: tf | Big brands can start very small. | true
+home: Look at a food packet with a grown-up. Find out when and where that brand started.
+skill: business history
+
+@lesson 8.3 | Garage beginnings | 🏚️ | museum
+hook: Some of the world's biggest companies started in garages. Why there?
+learn: In 1939, Bill Hewlett and David Packard started Hewlett-Packard in a garage in California.
+learn: That garage is now called "the birthplace of Silicon Valley".
+learn: Starting small means low costs while you test your idea.
+play: tap | Tap the things many big companies had at the very start | 💡:yes:A good idea; 🧰:yes:A few simple tools; 💵:yes:Not much money; 🔁:yes:Lots of trying again; 🏢:no; 🛥️:no
+check: mcq | Why start small, like in a garage? | Costs stay low while you test the idea* | Garages are fancy | You must, by law
+check: tf | Hewlett-Packard started in a garage. | true
+home: Talk with a grown-up about where you could start a small business at home.
+skill: business history
+
+@lesson 8.4 | The first product | 📚 | museum
+hook: Amazon sells almost everything now. What did it sell first?
+learn: Many big companies started by selling just one thing.
+learn: Amazon began by selling books online in the 1990s.
+learn: Some first products were very different: Nintendo started with playing cards, and Nokia with paper.
+play: match | Match each company to its first product | Amazon=Books sold online; Nintendo=Playing cards; Nokia=Paper; Lego=Wooden toys; Samsung=Dried fish and groceries
+check: mcq | What did Nintendo first make? | Playing cards* | Video games | Phones
+check: tf | Many big companies started by selling just one thing. | true
+home: Pick a company you know. Find out with a grown-up what it sold first.
+skill: business history
+
+@lesson 8.5 | Failing first | 🐭 | museum
+hook: Walt Disney's first cartoon studio went broke. What happened next?
+learn: In 1923, Walt Disney's first studio, Laugh-O-Gram, went bankrupt.
+learn: He moved, started again and later created Mickey Mouse.
+learn: Lots of founders fail before they succeed. They learn from what went wrong.
+play: path | Your first business, selling slime, didn't make any money. | Work out what went wrong and try a better idea => good: That's what lots of famous founders did. | Decide you're just bad at business => bad: One failure doesn't mean you can't do it. | Blame your customers and quit => bad: Learning from what went wrong helps more than blaming.
+check: mcq | What did Walt Disney do after his first studio failed? | Started again* | Gave up for ever | Became a chef
+check: tf | Lots of founders fail before they succeed. | true
+home: Ask a grown-up about something they failed at first, then got better at.
+skill: resilience
+
+@lesson 8.6 | What they had in common | 🔑 | workshop
+hook: Lego, Amazon, Disney. What did their founders do that you could do too?
+learn: They solved a problem or made something people loved.
+learn: They kept improving, listened to customers and didn't give up after mistakes.
+learn: Luck and timing helped too. Nobody does it all alone.
+play: sort | Helps a business grow, Doesn't help | Listening to customers=Helps a business grow; Giving up after one mistake=Doesn't help; Improving the product again and again=Helps a business grow; Ignoring complaints=Doesn't help; Working with a good team=Helps a business grow; Copying someone else's work=Doesn't help | Does it help?
+check: mcq | What did many famous founders do? | Kept improving and listened to customers* | Never changed anything | Ignored customers
+check: tf | Luck and timing can help a business too. | true
+home: Pick one famous company with a grown-up and find one thing its founder did well.
+skill: business history
+
 @band makers
 @unit 1 | Business plans | From idea to plan on one page
 @unit 2 | Pricing strategy | Margins, markups and discounts
@@ -873,6 +1408,272 @@ check: mcq | How should you check you've been paid? | Log in to your real accoun
 check: tf | Meeting in a busy public place is safer for pickups. | true
 home: Read the marketplace's safety tips with a grown-up.
 skill: scams
+
+@lesson 5.1 | Profit isn't cash | 💸 | bank
+hook: You sold $2,000 of shirts this month, but your bank account is empty. How?
+learn: Profit is what you earn on paper. Cash is the money you can actually spend today.
+learn: If customers pay later, you've made the sale but don't have the cash yet.
+learn: Bills don't wait. You need cash to pay them on time.
+play: sort | Cash now, Cash later | A customer pays by card at your stall=Cash now; A school orders 40 shirts and pays in 30 days=Cash later; A buyer pays a deposit up front=Cash now; An invoice due at the end of next month=Cash later; Cash sales at the market=Cash now; A shop pays you only when your stock sells=Cash later | When does the cash arrive?
+check: mcq | A sale paid in 30 days gives you… | Profit now, but cash later* | Cash now | Nothing ever
+check: tf | A business can make a profit and still run out of cash. | true
+home: Ask a grown-up about a time they had money coming, but not yet in the bank.
+skill: cash flow
+
+@lesson 5.2 | A cash flow forecast | 🗓️ | bank
+hook: Will you have enough cash in March? A forecast can tell you now.
+learn: A cash flow forecast lists the cash you expect in and out, month by month.
+learn: Start with the opening balance. Add cash in and take away cash out to get the closing balance.
+learn: The closing balance becomes next month's opening balance.
+try: $500 + $800 in − $600 out = $700 :: gap | $300 + $900 in − $1,000 out = $_ | 200
+play: slider | Opening balance $400. Cash in $1,200. Cash out $1,450. What's the closing balance? | 0 | 500 | 150 | $ | 0 | 50
+check: gap | Opening $1,000, cash in $500, cash out $700. The closing balance is $_ | 800
+check: mcq | What happens to this month's closing balance? | It becomes next month's opening balance* | It's thrown away | It's your profit for the year
+home: Make a three-month cash forecast for your pocket money with a grown-up.
+skill: cash flow
+
+@lesson 5.3 | Stock eats cash | 📦 | stall
+hook: You buy $1,500 of Christmas stock in October. When does the cash come back?
+learn: Stock you buy is cash stuck on the shelf until it sells.
+learn: Buying too much at once can leave you short for rent, fees or wages.
+learn: Order in smaller batches, and reorder what's actually selling.
+play: path | A supplier offers 20% off if you buy a whole year's stock now. | Buy a few months' worth and check your forecast first => good: You keep enough cash to pay bills, and still have stock. | Buy a whole year's worth with all your cash => bad: The discount is nice, but now you can't pay next month's fees. | Skip ordering and run out in the busy month => bad: No stock means no sales when customers want to buy.
+check: mcq | Why can too much stock be a problem? | Cash is stuck until it sells* | Stock always goes up in price | It's free
+check: tf | Ordering in smaller batches can protect your cash flow. | true
+home: Look in the pantry with a grown-up. Is there food that was bought ages ago and never used? That's cash on a shelf.
+skill: cash flow
+
+@lesson 5.4 | Getting paid faster | ⏩ | bank
+hook: Your client pays in 60 days. Can you speed that up?
+learn: Ask for a deposit up front, especially for big or custom jobs.
+learn: Send invoices straight away with a clear due date, like 7 or 14 days.
+learn: Make paying easy, with bank transfer or card, and send polite reminders.
+play: tap | Tap the ways to get paid faster | 💳:yes:Let customers pay by card; 🧾:yes:Send the invoice the same day; 💰:yes:Ask for a deposit; 🔔:yes:Send a polite reminder; 🐌:no; 🙈:no
+check: mcq | What helps most with a big custom order? | A deposit up front* | Waiting six months to send the invoice | No due date
+check: tf | Sending invoices straight away helps you get paid sooner. | true
+home: Find the due date on a bill at home with a grown-up. How many days did they get to pay?
+skill: invoicing
+
+@lesson 5.5 | Paying your bills | 📅 | bank
+hook: You're short on cash. Should you just pay your supplier late?
+learn: Paying late damages trust. Some suppliers charge late fees or stop supplying you.
+learn: It's better to ask for longer terms before the bill is due, like 30 days instead of 7.
+learn: Keep a list of when every bill is due, so nothing surprises you.
+play: debate | You're short on cash this month. What should you do about a supplier's bill? | Call the supplier early and ask for more time or a payment plan* | Ignore the bill and hope they forget | Some suppliers will say no, so it's still best to plan ahead and keep a cash buffer.
+check: mcq | When should you ask a supplier for more time? | Before the bill is due* | After they've sent three reminders | Never
+check: tf | Paying suppliers late can damage trust. | true
+home: Ask a grown-up how they keep track of when bills are due.
+skill: cash flow
+
+@lesson 5.6 | A cash buffer | 🛟 | bank
+hook: Sales drop in winter. Will your business survive the slow months?
+learn: A cash buffer is money kept aside for slow months and surprises.
+learn: Many small businesses aim for one to three months of costs in reserve.
+learn: Build it a little each month while sales are good.
+play: budget | Plan this month's $1,000 of sales for your candle business | 1000 | Wax and wicks=300; Market fees=150; Packaging=100; Cash buffer=0; Pay yourself=0 | Broken candle mould:120
+check: mcq | What's a cash buffer for? | Slow months and surprises* | Buying stock you don't need | Spending on fun
+check: tf | Building a buffer while sales are good helps in slow months. | true
+home: Work out with a grown-up roughly how much your household spends in a month.
+skill: cash flow
+
+@lesson 6.1 | Ways to grow | 📈 | stall
+hook: Your candles sell out every market day. How could your business grow?
+learn: You can grow by finding more customers, selling new products or selling in new places.
+learn: You can also raise your price, if customers value what you make.
+learn: Each way to grow needs time, money or both. Pick one at a time.
+play: match | Match each idea to the way it grows the business | Selling at a second market each month=New places; Adding candle gift packs=New products; Getting your local café to stock you=New customers; Charging $2 more for your best seller=Higher prices
+check: mcq | Which is growing with a new product? | Adding gift packs to your candle range* | Selling the same candles at the same market | Closing on weekends
+check: tf | Every way to grow needs time, money or both. | true
+home: Pick a small business you know. Talk with a grown-up about how it could grow.
+skill: growth
+
+@lesson 6.2 | Can you make enough? | ⏱️ | workshop
+hook: A shop wants 100 candles a month. Can you make that many?
+learn: Handmade businesses are limited by your hours. Work out how long each one takes.
+learn: Making things in batches is faster than making one at a time.
+learn: To grow past your own hours, you need better tools, help, or someone else to make part of it.
+try: 1 candle takes 30 minutes, so 10 hours makes 20 candles :: gap | 1 candle takes 20 minutes, so 10 hours makes _ candles | 30
+play: slider | Batches cut your time to 15 minutes a candle. How many hours do 100 candles take? | 0 | 50 | 25 | hours | 1 | 1
+check: gap | You have 8 hours a week. Each bracelet takes 30 minutes. You can make _ a week | 16
+check: mcq | What usually makes handmade work faster? | Making things in batches* | Making one at a time | Starting again each time
+home: Time yourself doing a job one at a time, then in a batch, like making sandwiches.
+skill: growth
+
+@lesson 6.3 | Getting help | 🙋 | workshop
+hook: You're great at making candles but terrible at photos. Should you do everything yourself?
+learn: Do the jobs that only you can do, and get help with the rest when you can afford it.
+learn: Help could be a family member, a friend you pay or a freelancer, like a photographer.
+learn: Agree the job, the pay and the deadline in writing, even with friends.
+play: sort | Do it yourself, Get help | Making your special candle recipe=Do it yourself; Product photos when yours are blurry=Get help; Choosing your scents=Do it yourself; Building a website you don't know how to make=Get help; Talking to your regular customers=Do it yourself; Bookkeeping when it's taking all weekend=Get help | Do it yourself or get help?
+check: mcq | What should you agree when someone helps your business? | The job, the pay and the deadline* | Nothing, it's fine | Only the colour of their shirt
+check: tf | It's smart to get help with jobs you're not good at, if you can afford it. | true
+home: List the jobs in a small business you'd like to run. Which would you get help with?
+skill: growth
+
+@lesson 6.4 | Growing too fast | 🚀 | stall
+hook: You said yes to every order. Now the quality has slipped and you're exhausted.
+learn: Growing too fast can mean rushed work, unhappy customers and no time to rest.
+learn: It also needs cash up front for materials, before the money comes in.
+learn: Grow at a pace you can keep up. Say when an order will be ready, honestly.
+play: path | A shop asks for 300 candles in two weeks. You usually make 50. | Offer 100 now and the rest next month, and check your cash first => good: You keep your quality, your cash and your sleep. | Say yes and work every night => bad: Rushed candles, a tired you and maybe a missed deadline. | Say yes, then buy cheap candles and sell them as yours => bad: That's dishonest, and the shop will find out.
+check: mcq | What's a risk of growing too fast? | Quality drops and you run out of cash* | You get too much sleep | Customers get happier
+check: tf | Growing at a pace you can keep up is a good plan. | true
+home: Talk with a grown-up about a time they took on too much. What did they learn?
+skill: growth
+
+@lesson 6.5 | Saying no | ✋ | stage
+hook: A customer wants you to make custom wedding signs. You make candles. Do you say yes?
+learn: Every yes uses time you could spend on something else. That's called opportunity cost.
+learn: Saying no to things that don't fit helps you get great at what you do.
+learn: You can say no politely, and suggest someone else who could help.
+play: debate | Should a small business take every order it's offered? | No. Say yes to what fits your goals and say no politely to the rest* | Yes. Never turn down money | Some extra jobs can lead to new ideas or customers, so think before you say no.
+check: mcq | What's opportunity cost? | What you give up when you choose something else* | The price of a ticket | A sale price
+check: tf | You can say no politely and suggest someone else. | true
+home: Practise a polite way to say no to a request, with a grown-up.
+skill: decisions
+
+@lesson 6.6 | Write it down | 📋 | workshop
+hook: You're sick on market day. Could someone else run your stall?
+learn: A system is a written step-by-step way of doing a job, like a recipe for your business.
+learn: Checklists for making, packing and running the stall mean others can help, and fewer mistakes happen.
+learn: Systems let a business grow without everything depending on you.
+play: build | Write a packing checklist that anyone could follow | Check the order on the order list; Check the candle for marks or cracks; Wrap it in tissue and a box; Add a thank-you card; Write the address and stick on the label; Tick the order off the list
+check: mcq | Why write down your systems? | So others can help, and mistakes happen less* | So nobody else can help | To make it slower
+check: tf | A checklist can help a business grow. | true
+home: Write a checklist for a job at home, like packing a school bag, and test it on someone.
+skill: systems
+
+@lesson 7.1 | The elevator pitch | 🛗 | stage
+hook: You meet a shop owner who could stock your product. You have 30 seconds. What do you say?
+learn: An elevator pitch is a short, clear explanation of your business that takes about 30 seconds.
+learn: Say the problem, your solution, who it's for and why you're the one to do it.
+learn: End with an ask, like "Could I drop off some samples?"
+play: order | Put an elevator pitch in order | Hi, I'm Mia from Wick and Wax.; Lots of people want candles without strong chemical smells.; We make soy candles scented only with essential oils.; We've sold 300 at local markets, and 40% of buyers come back.; Could I drop off some samples for your shop?
+check: mcq | What should an elevator pitch end with? | A clear ask* | A long story | Nothing
+check: tf | An elevator pitch should take about 30 seconds. | true
+home: Write a 30-second pitch for a business idea and say it to a grown-up.
+skill: pitching
+
+@lesson 7.2 | Know your audience | 🎯 | stage
+hook: Do customers and investors want to hear the same pitch?
+learn: Customers want to know what's in it for them, like the benefits.
+learn: Investors want to know how the business will grow and make money.
+learn: Judges of a youth competition might care most about your idea, your learning and your impact.
+play: match | Match each audience to what they care about most | A customer=How it helps them; An investor=How big it could grow and the return; A shop owner=Whether it will sell and the profit for them; A charity grant panel=The good it does
+check: mcq | What does an investor care about most? | How the business will grow and make money* | Your favourite colour | Only the logo
+check: tf | You should change your pitch for different audiences. | true
+home: Pitch the same idea twice to a grown-up, once as a customer and once as an investor.
+skill: pitching
+
+@lesson 7.3 | Tell a story | 📖 | stage
+hook: Two pitches for the same candles. Why does one stick in your head?
+learn: People remember stories more than lists of facts.
+learn: Start with a real moment, like the problem that made you start.
+learn: Then back it up with numbers that prove it works.
+play: diff | Two pitches for the same business. Tap what the stronger one adds. | We make candles; They smell nice; Please buy them | Mum's skin flared up from strong-smelling candles, so we made our own; Ours are scented only with essential oils; We've sold 300, and 40% of buyers come back
+check: mcq | What's a strong way to start a pitch? | A real story about the problem* | A list of prices | "Um, so, yeah"
+check: tf | Numbers that prove it works make a story stronger. | true
+home: Tell a grown-up the story of why you'd start a business.
+skill: storytelling
+
+@lesson 7.4 | Show your proof | 🔎 | stage
+hook: "Everyone will love it!" How do you prove that?
+learn: Proof is evidence that people want what you make.
+learn: Sales, pre-orders and repeat customers are strong proof. "My friends like it" is weak.
+learn: A working prototype is better than a drawing.
+play: sort | Strong proof, Weak proof | 300 sales at markets=Strong proof; "My mum thinks it's great"=Weak proof; 50 pre-orders paid in advance=Strong proof; A drawing of the idea=Weak proof; 40% of buyers came back to buy again=Strong proof; "Everyone will love it"=Weak proof | Strong or weak proof?
+check: mcq | Which is the strongest proof? | Paid pre-orders* | Your friend's opinion | A guess
+check: tf | A working prototype is better proof than a drawing. | true
+home: Think of a product idea. What proof could you collect that people want it?
+skill: pitching
+
+@lesson 7.5 | Tough questions | ❓ | stage
+hook: A judge asks a question you can't answer. Do you make something up?
+learn: Listen to the whole question, and take a breath before you answer.
+learn: Be honest. "I don't know yet, but here's how I'll find out" builds trust.
+learn: Practise answering likely questions, like costs, competitors and what could go wrong.
+play: chat | A judge questions your pitch | them: What stops a big company copying you? | me: Our local customers know us, and we're testing a refill service they can't easily copy.*/Nothing, I hadn't thought about it./They'd never bother. | them: What does each candle cost you to make? | me: $6.40, including the jar and wick. We sell them for $18.*/Not much, I think./Who cares? | them: How many could you make a month? | me: I'm not sure yet, but I'm timing batches this week to find out.*/Millions./Probably about a thousand, I guess.
+check: mcq | You don't know the answer to a question. What do you say? | "I don't know yet, but here's how I'll find out"* | Make up a number | Change the subject
+check: tf | Practising likely questions helps you pitch better. | true
+home: Ask a grown-up to fire three tough questions at your business idea.
+skill: pitching
+
+@lesson 7.6 | Practise and deliver | 🎤 | stage
+hook: Your pitch is written. How do you make it land on the day?
+learn: Practise out loud lots of times, and time yourself.
+learn: Slow down, look at people and stand still. Pause after your key points.
+learn: Use your slides or notes as prompts, not a script to read.
+play: tap | Tap the things that help you deliver a great pitch | 🗣️:yes:Practising out loud; ⏱️:yes:Timing yourself; 👀:yes:Looking at your audience; ⏸️:yes:Pausing after key points; 📜:no; 🏃:no
+check: mcq | How should you use your notes? | As prompts, not a script* | Read every word | Hide them
+check: tf | Practising out loud helps you deliver a pitch. | true
+home: Practise a one-minute talk about something you love, and time it.
+skill: presenting
+
+@lesson 8.1 | Rejection is normal | 🩱 | stage
+hook: She heard "no" again and again. Then her idea became a billion-dollar company. Who was she?
+learn: Sara Blakely sold fax machines door to door, and heard "no" almost every day.
+learn: In 2000, she started Spanx with $5,000 of her savings, after cutting the feet off a pair of tights.
+learn: She said selling door to door taught her not to fear rejection.
+play: mystery | She sold fax machines door to door; She started her company with $5,000 of savings; Her first product came from cutting the feet off tights; Her company is called Spanx | Sara Blakely* | Melanie Perkins | Mikaila Ulmer
+check: mcq | What did selling door to door teach her? | Not to fear rejection* | To stop selling | To avoid customers
+check: tf | Hearing "no" is a normal part of starting a business. | true
+home: Ask a grown-up about a time they heard "no" and kept going.
+skill: resilience
+
+@lesson 8.2 | No fancy start needed | 🚀 | stage
+hook: {nz:A Kiwi with no university degree started a rocket company. How?~au:Two uni graduates started a software giant with a credit card. How?}
+learn: {nz:Peter Beck didn't go to university. He trained as a tool-and-die maker and built rockets in his spare time.~au:In 2002, Mike Cannon-Brookes and Scott Farquhar started Atlassian with about $10,000 on a credit card.}
+learn: {nz:He founded Rocket Lab in 2006. In 2018, it launched a rocket to orbit from the Māhia Peninsula.~au:They started by selling software that helps teams track their work, and grew into a global company.}
+learn: Skills, persistence and solving a real problem can matter more than a fancy start.
+play: path | You want to start a business but have no degree and little money. | Start small, build skills and solve one real problem well => good: That's how many founders began. | Wait until you have a degree and $1 million => bad: Plenty of founders started with much less. | Borrow lots of money on cards to look big => bad: Debt before you've proven anything is very risky.
+check: mcq | {nz:Where did Rocket Lab launch to orbit from in 2018?~au:About how much money did Atlassian start with?} | {nz:The Māhia Peninsula~au:About $10,000 on a credit card}* | {nz:Wellington Airport~au:$10 million} | {nz:The Moon~au:Nothing at all}
+check: tf | You need a university degree to start a successful business. | false | Many founders started without one.
+home: Find out about a founder from {nz:New Zealand~au:Australia} with a grown-up. How did they start?
+skill: founders
+
+@lesson 8.3 | Staying alive | 🥣 | stage
+hook: A start-up had almost no money left. So its founders sold breakfast cereal. Why?
+learn: In 2008, the founders of Airbnb were running out of money.
+learn: They made special election-themed cereal boxes and sold them for $40 each, raising about $30,000.
+learn: That money kept the company going until investors joined. Sometimes survival needs creativity.
+play: order | Put the Airbnb cereal story in order | The founders start renting out air mattresses in their flat; They run out of money; They make election-themed cereal boxes; They sell them for $40 each; The money keeps them going until investors join
+check: mcq | What did the cereal boxes do for Airbnb? | Kept the company alive long enough to find investors* | Made them famous chefs | Nothing
+check: tf | Start-ups sometimes need creative ways to survive. | true
+home: Talk with a grown-up: if a business ran low on money, what creative things could it try?
+skill: founders
+
+@lesson 8.4 | Missing the change | 📼 | stage
+hook: In 2000, a giant video rental company was offered Netflix for $50 million. It said no. What happened?
+learn: Blockbuster had thousands of video rental stores and was hugely successful.
+learn: Netflix's founders offered to sell it to Blockbuster in 2000. Blockbuster turned it down.
+learn: People moved to streaming. Blockbuster went bankrupt in 2010. Netflix grew into a giant.
+play: debate | Why do successful companies miss big changes? | They focus on what works today and don't change fast enough* | They're always run by bad people | Sometimes it's hard to know which new idea will win. Many "next big things" fail.
+check: mcq | What lesson does Blockbuster teach? | Keep watching how customers are changing* | Never change anything | Always buy every company you're offered
+check: tf | Blockbuster turned down the chance to buy Netflix. | true
+home: Ask a grown-up how they watched movies when they were your age.
+skill: founders
+
+@lesson 8.5 | Honesty matters | ⚠️ | townhall
+hook: A founder said her machine could run hundreds of tests from one drop of blood. It couldn't. What happened?
+learn: Elizabeth Holmes founded Theranos, which claimed a tiny blood sample could run many medical tests.
+learn: The technology didn't work as claimed. In 2022, she was found guilty of fraud and later sent to prison.
+learn: Being hopeful about your idea is fine. Lying to customers or investors is fraud.
+play: sort | Healthy optimism, Dishonest | "We hope to reach 1,000 customers next year"=Healthy optimism; Faking test results for investors=Dishonest; "Our prototype works, but it's slow, and we're fixing that"=Healthy optimism; Saying a product works when it doesn't=Dishonest; Sharing real sales numbers, even when they're small=Healthy optimism; Hiding problems that could hurt people=Dishonest | Optimism or dishonesty?
+check: mcq | What's the difference between optimism and fraud? | Fraud means lying about facts* | There's no difference | Fraud is just extra optimism
+check: tf | Lying to investors about your product can be a crime. | true
+home: Talk with a grown-up about why honesty matters in business.
+skill: ethics
+
+@lesson 8.6 | The pivot | ↩️ | stage
+hook: Instagram started as a different app. So did Slack and Twitter. What's a pivot?
+learn: A pivot is when a start-up changes direction, keeping what works and dropping what doesn't.
+learn: Instagram began as Burbn, a check-in app. Users loved one part: sharing photos.
+learn: Slack began as a tool inside a games company. Twitter grew out of a podcast company.
+play: match | Match each company to how it started | Instagram=Burbn, a check-in app; Slack=A chat tool inside a games company; Twitter=A side project at a podcast company; Amazon=An online bookshop
+check: mcq | What's a pivot? | Changing direction, keeping what works* | Giving up | Spinning on one foot
+check: tf | Some big companies started as something quite different. | true
+home: Think of a business idea. What could you pivot to if the first version didn't work?
+skill: founders
 
 @band launchers
 @unit 1 | Starting a business | Structures, names and registration
@@ -1168,3 +1969,269 @@ check: mcq | What should you do first if an invoice isn't paid? | Check your inv
 check: tf | Written records help you win a dispute. | true
 home: Ask a grown-up if they've ever had to chase money they were owed, and what worked.
 skill: law
+
+@lesson 5.1 | Cost to win a customer | 🎯 | online
+hook: You spent $300 on ads and got 12 new customers. Was it worth it?
+learn: Customer acquisition cost, or CAC, is marketing spend ÷ new customers.
+learn: $300 ÷ 12 customers = $25 a customer.
+learn: If each customer only brings $15 of profit, those ads are losing money.
+try: $200 ÷ 10 customers = $20 each :: gap | $450 ÷ 15 customers = $_ each | 30
+play: slider | You spend $600 on ads and win 24 new customers. What's your CAC? | 0 | 100 | 25 | $ | 0 | 5
+check: gap | $1,000 of ads brings 40 customers. The CAC is $_ | 25
+check: mcq | Ads cost $20 per customer, and each customer brings $12 profit. What's happening? | The ads lose money* | The ads make money | It's break-even
+home: Ask a grown-up how they first heard about a business they use often.
+skill: marketing data
+
+@lesson 5.2 | What a customer is worth | 💎 | stall
+hook: A coffee customer spends $5. Is that all they're worth to you?
+learn: Customer lifetime value, or LTV, is the profit a customer brings over all their visits.
+learn: $2 profit a coffee × 3 coffees a week × 50 weeks = $300 a year.
+learn: Compare LTV with CAC. A common rule of thumb is LTV of at least 3 times CAC.
+play: match | Match each customer to their rough yearly value | $2 profit a coffee, 100 coffees a year=$200; $10 profit a haircut, 8 haircuts a year=$80; $5 profit a month on a subscription=$60; $50 profit a car service, 2 services a year=$100
+check: mcq | LTV is $90 and CAC is $30. Is that healthy? | Yes, LTV is 3 times CAC* | No, it loses money | You can't tell
+check: tf | Keeping customers coming back raises their lifetime value. | true
+home: Pick a shop your family uses. Estimate how much you spend there in a year.
+skill: marketing data
+
+@lesson 5.3 | The funnel | 🔻 | online
+hook: 10,000 people saw your ad. Only 50 bought. Where did everyone go?
+learn: A funnel tracks people step by step: they see it, click, add to cart, then buy.
+learn: Conversion rate is the percent who move on. 50 buyers out of 1,000 clicks is 5%.
+learn: Fix the step where the most people drop out first.
+play: build | Build the funnel from the top | 10,000 people see the ad; 400 click through to your shop; 120 add something to their cart; 60 start checkout; 50 buy
+check: gap | 30 buyers from 600 clicks is a _% conversion rate | 5
+check: mcq | 120 people add to cart, but only 20 buy. What should you check first? | The checkout, like shipping costs or a slow page* | The colour of your logo | Nothing, that's normal
+home: Next time you shop online with a grown-up, count the steps from ad to checkout.
+skill: marketing data
+
+@lesson 5.4 | A/B testing | 🆎 | online
+hook: Ad B is winning after 20 views. Time to move your whole budget to B?
+learn: An A/B test shows two versions to similar people, with only one thing different.
+learn: Decide what you're measuring, like sales, before you start.
+learn: Wait for enough results. A tiny test can just be luck.
+play: path | Your A/B test has run for an hour. Ad B has 3 sales and Ad A has 1. | Keep the test running until you have enough results => good: A few sales can be luck. More data gives a clearer answer. | Move your whole budget to Ad B now => ok: B might be better, but 4 sales is too few to be sure. | Next time, change the photo, price and headline all at once => bad: If you change everything, you won't know what worked.
+check: mcq | How many things should differ in an A/B test? | One* | Everything | None
+check: tf | You should choose what you're measuring before the test starts. | true
+home: Show two versions of a poster to people in your family. Which one wins, and why?
+skill: testing
+
+@lesson 5.5 | A marketing budget | 💰 | bank
+hook: Your business makes $2,000 a month in sales. How much should go on marketing?
+learn: Many small businesses spend a set percent of sales on marketing, often around 5% to 10%.
+learn: Spend a little on tests, then put more into what brings customers cheaply.
+learn: Keep some for the customers you already have, like emails and loyalty rewards.
+play: budget | Plan $200 of marketing this month | 200 | Best ad channel so far=80; Testing a new channel=30; Emails to past customers=20; Photos and design=0; Spare=0 | Ad platform price rise:25
+check: gap | 10% of $2,000 of sales is $_ for marketing | 200
+check: mcq | Where should most of your budget go? | Channels that bring customers cheaply* | Whatever's newest | The most expensive option
+home: Look at a flyer from a local business or club. Guess what it cost and how many people it reached.
+skill: budgeting
+
+@lesson 5.6 | Marketing within the rules | 📜 | townhall
+hook: You've found a list of 500 emails online. Can you send them your ads?
+learn: {nz:The Unsolicited Electronic Messages Act~au:The Spam Act} says you need permission before you send marketing emails or texts.
+learn: Every marketing message needs your business name and an easy way to unsubscribe.
+learn: Paid posts must say they're ads, and fake reviews are misleading. {nz:The Commerce Commission~au:The ACCC} can take action.
+play: sort | Allowed, Not allowed | Emailing people who ticked "Send me offers"=Allowed; Texting a list of phone numbers you bought=Not allowed; A post marked as an ad when a brand paid you=Allowed; Paying friends to write 5-star reviews=Not allowed; An unsubscribe link in every email=Allowed; Hiding that a post was paid for=Not allowed | Allowed or not?
+check: mcq | What do you need before sending marketing emails? | Permission* | A big list | A fancy design
+check: tf | Paying for fake 5-star reviews is fine if the product is good. | false | Fake reviews mislead customers, whatever the product.
+home: Find the unsubscribe link in a marketing email with a grown-up.
+skill: marketing law
+
+@lesson 6.1 | Employee or contractor? | 🧑‍🔧 | townhall
+hook: You pay someone to work on Saturdays. Are they an employee or a contractor?
+learn: Employees work when and how the business says, usually with its tools. They get pay, leave and other rights.
+learn: Contractors run their own business. They choose how to do the job, often use their own tools and send invoices.
+learn: Calling someone a contractor doesn't make them one. The real working relationship decides it.
+play: sort | Likely an employee, Likely a contractor | Works set shifts you roster=Likely an employee; Sends you an invoice from their own business=Likely a contractor; Uses your café's coffee machine and uniform=Likely an employee; Brings their own gear and does jobs for many clients=Likely a contractor; You tell them how to do each task=Likely an employee; Chooses their own hours to finish a website=Likely a contractor | Employee or contractor?
+check: mcq | What decides if someone is an employee? | The real working relationship* | What you call them | Whether you like them
+check: tf | Employees get rights like paid leave. | true
+home: Ask a grown-up whether they've worked as an employee, a contractor or both.
+skill: hiring
+
+@lesson 6.2 | Minimum pay | 💵 | bank
+hook: What's the least you can legally pay a worker?
+learn: {nz:From 1 April 2026, the adult minimum wage is $23.95 an hour. The starting-out and training rate is $19.16.~au:From 1 July 2026, the national minimum wage is $26.44 an hour for adults. Many jobs are covered by awards with higher rates.}
+learn: {nz:The starting-out rate can apply to some 16 to 19-year-olds, such as those in their first 6 months with an employer.~au:Junior rates for under-21s are a percentage of the adult rate. Casuals get an extra 25% loading.}
+learn: Minimum wages are reviewed every year, so check the latest rate before you hire.
+play: match | Match each pay term to what it means | Minimum wage=The lowest legal hourly rate; {nz:Starting-out rate~au:Junior rate}={nz:A lower rate for some 16 to 19-year-olds~au:A lower rate for under-21s}; {nz:Training minimum wage~au:Casual loading}={nz:For people doing set training for a qualification~au:An extra 25% for casual workers}; Annual review=When minimum rates usually change
+check: gap | A worker on {nz:$24~au:$26} an hour works 10 hours. Their pay is $_ before tax | {nz:240~au:260}
+check: mcq | How often are minimum wages usually reviewed? | Every year* | Every 20 years | Never
+home: Look up the current minimum wage on {nz:Employment New Zealand's~au:the Fair Work Ombudsman's} website with a grown-up.
+skill: employment law
+
+@lesson 6.3 | The paperwork | 🗂️ | townhall
+hook: Your first employee starts Monday. What do you need to sort out first?
+learn: {nz:Every employee must have a written employment agreement, offered before they start.~au:Give new employees the Fair Work Information Statement, and set out their pay and hours in writing.}
+learn: {nz:They fill in a tax code declaration, the IR330, and you take PAYE tax from their pay.~au:They fill in a tax file number declaration, and you withhold tax from their pay.}
+learn: Keep records of hours, pay and leave, and give a payslip every payday.
+play: build | Get ready for your first employee | Register as an employer with {nz:IRD~au:the ATO}; Agree the job, pay and hours in writing; Collect their {nz:tax code declaration~au:tax file number declaration}; Set up payroll and payslips; Keep records of hours, pay and leave
+check: mcq | What should you keep records of? | Hours, pay and leave* | Their favourite food | Nothing
+check: tf | {nz:Every employee in NZ must have a written employment agreement.~au:New employees in Australia should get the Fair Work Information Statement.} | true
+home: Look at a payslip with a grown-up. Find the pay, the tax and the hours.
+skill: employment law
+
+@lesson 6.4 | More than the wage | ➕ | bank
+hook: You pay someone $25 an hour. Does each hour cost you $25?
+learn: {nz:Employers pay at least 3.5% on top for KiwiSaver, from 1 April 2026, if the employee is a member.~au:Employers pay super on top of wages, at 12% of ordinary earnings.}
+learn: There's also paid leave, {nz:ACC levies~au:workers' compensation insurance}, training, uniforms and payroll software.
+learn: Budget for the full cost of each worker, not just the hourly rate.
+play: tap | Tap the costs on top of the hourly wage | 🏖️:yes:Paid annual leave; 🦺:yes:Safety gear and uniforms; 🧾:yes:Payroll software; 📚:yes:Training time; 🛥️:no; 🎮:no
+check: gap | $1,000 of wages. {nz:KiwiSaver at 3.5%~au:Super at 12%} adds $_ | {nz:35~au:120}
+check: mcq | Why budget for more than the wage? | Leave, {nz:KiwiSaver~au:super} and other costs add up* | Wages are always lower than they look | You don't need to
+home: Ask a grown-up who has had a job what they got on top of their pay, like {nz:KiwiSaver~au:super} or leave.
+skill: hiring
+
+@lesson 6.5 | A safe workplace | 🦺 | workshop
+hook: Your new worker wants to use the fryer on day one. Is that OK?
+learn: {nz:The Health and Safety at Work Act 2015~au:Work health and safety laws} say businesses must keep workers as safe as they reasonably can.
+learn: Spot the hazards, train people before they use equipment and give them safety gear.
+learn: Young workers have extra limits on some dangerous work. Check the rules for your industry.
+play: path | A new 16-year-old worker wants to use the deep fryer on their first shift. | Train them first, supervise them, and give them gloves and an apron => good: Training and supervision keep them safe and keep you within the law. | Let them try it alone so they learn fast => bad: Untrained workers on hot equipment can be badly hurt. | Tell them never to report burns, so you don't get in trouble => bad: Hiding injuries is dangerous and against the law.
+check: mcq | What should happen before someone uses risky equipment? | Training and supervision* | Nothing, they'll figure it out | A pay cut
+check: tf | Businesses must keep workers as safe as they reasonably can. | true
+home: Spot three hazards in your kitchen with a grown-up, and how to make each one safer.
+skill: health and safety
+
+@lesson 6.6 | Being a good boss | 🌟 | workshop
+hook: Your best worker has been late three times this week. What do you say?
+learn: Good bosses set clear expectations, give regular feedback and say thanks for good work.
+learn: Talk about problems early, in private and calmly. Ask what's going on before you judge.
+learn: Treat everyone fairly, follow a fair process and never bully or discriminate.
+play: chat | Talking privately with a worker who's been late | them: You wanted to see me? | me: Thanks for coming. I've noticed you've been late three times this week. Is everything OK?*/You're always late. Fix it or you're gone./I'll just ignore it. | them: Sorry. My bus changed its timetable. | me: Thanks for telling me. Could we move your start to 9:15 for now?*/Not my problem./Get a different bus or quit. | them: That would really help. Thanks.
+check: mcq | How should you raise a problem with a worker? | Early, in private and calmly* | Loudly, in front of customers | Never
+check: tf | Saying thanks for good work is part of being a good boss. | true
+home: Ask a grown-up about the best boss they've had. What made them good?
+skill: leadership
+
+@lesson 7.1 | The pitch deck | 🖥️ | stage
+hook: You have 10 minutes with an investor. What goes on your slides?
+learn: A pitch deck is a short set of slides, often about 10, that tells your business's story.
+learn: It covers the problem, your solution, the market, your traction, how you make money, the competition and your team.
+learn: It ends with the ask: how much you're raising and what you'll use it for.
+play: build | Build a pitch deck in order | The problem; Your solution; The market size; Traction so far; How you make money; The competition; Your team; The ask, and what it's for
+check: mcq | What's "traction"? | Proof of progress, like sales and users* | The grip on your shoes | Your logo
+check: tf | A pitch deck should say how much you're raising and why. | true
+home: Find a famous company's early pitch deck online with a grown-up. What slides does it have?
+skill: pitching
+
+@lesson 7.2 | Pre-money and post-money | 🧮 | shares
+hook: An investor offers $200,000 for 20%. Is your business worth $200,000 or $1 million?
+learn: Post-money valuation is what the business is worth just after the investment. $200,000 ÷ 20% = $1,000,000.
+learn: Pre-money valuation is the value before the money arrives: $1,000,000 − $200,000 = $800,000.
+learn: Founders and investors often argue about the pre-money value. It decides how much of the company you give away.
+try: $100,000 for 10% means a post-money value of $1,000,000 :: gap | $100,000 for 25% means a post-money value of $_ | 400000
+play: slider | An investor puts in $300,000 for 25%. What's the pre-money valuation, in thousands? | 0 | 2000 | 900 | k$ | 0 | 50
+check: gap | Post-money is $2,000,000 and the investment is $500,000. Pre-money is $_ | 1500000
+check: mcq | What's post-money valuation? | The value just after the investment* | The value before you started | The investor's salary
+home: Watch a business pitch show with a grown-up and work out the pre-money value of an offer.
+skill: equity
+
+@lesson 7.3 | Dilution | 💧 | shares
+hook: You own 100%. After two funding rounds you own 60%. Did you lose?
+learn: Dilution is when your share shrinks because new shares are issued to investors.
+learn: Sell 20%, and you own 80%. Then sell 25% of the new total, and you own 80% × 75% = 60%.
+learn: A smaller slice of a much bigger business can be worth more. But give away too much and you lose control.
+play: path | An investor offers $100,000 for 51% of your young business. | Ask for a smaller stake, or raise a smaller amount first => good: You keep control, and can raise more later at a higher value. | Accept it on the spot => bad: You'd no longer control your own company. | Refuse to talk to any investors ever again => ok: You keep control, but you might miss the help you need.
+check: gap | You own 100% and sell 30%. Then you sell 50% of the new total. You now own _% | 35
+check: mcq | What does owning more than 50% usually give you? | Control of big decisions* | A free car | Nothing
+home: Draw a pie chart with a grown-up showing a founder's share after two funding rounds.
+skill: equity
+
+@lesson 7.4 | Sizing the market | 🌐 | shares
+hook: "The pet market is worth $5 billion, so we just need 1%." Will investors buy that?
+learn: Top-down estimates take a huge market number and assume you'll win a slice. Investors are rarely convinced.
+learn: Bottom-up estimates multiply real numbers: customers you can reach × how many buy × the price.
+learn: 20 vet clinics × 30 sales a month × $25 = $15,000 a month. That's a number you can test.
+play: debate | Which market estimate should go in your pitch deck? | A bottom-up estimate from real customer numbers you can test* | "If we get just 1% of a $5 billion market" | Top-down numbers show how big the opportunity could be, so some decks show both.
+check: gap | 50 shops × 20 sales a month × $10 = $_ a month | 10000
+check: mcq | Why do investors like bottom-up estimates? | They're based on real numbers you can test* | They're bigger | They're shorter
+home: Estimate the market for a local business bottom-up with a grown-up: customers × visits × price.
+skill: market research
+
+@lesson 7.5 | Due diligence | 🕵️ | townhall
+hook: An investor wants to see all your contracts and bank statements. Is that rude?
+learn: Due diligence is the checking investors do before they hand over money.
+learn: They check your numbers, contracts, who owns your ideas and designs, and any legal problems.
+learn: You should check them too. What have they invested in before? What do other founders say about them?
+play: sort | The investor checks, You check | Your sales figures and bank statements=The investor checks; What their past founders say about them=You check; Who owns your brand and designs=The investor checks; How involved they want to be=You check; Your contracts with suppliers=The investor checks; Whether they've followed through on past promises=You check | Who checks what?
+check: mcq | What's due diligence? | Careful checking before a deal* | A type of loan | A pitch slide
+check: tf | Founders should check investors too. | true
+home: Ask a grown-up what checks they did before a big decision, like buying a car.
+skill: funding
+
+@lesson 7.6 | Term sheets | 📄 | townhall
+hook: The investor sends a two-page term sheet. What should you look for?
+learn: A term sheet lists the main terms of an investment before the full legal papers are written.
+learn: Key terms include the valuation, the amount, board seats, investor rights and founder vesting.
+learn: Get advice from a lawyer who knows start-ups before you sign anything.
+play: match | Match each term to what it means | Valuation=What the business is worth for the deal; Board seat=The investor gets a vote on the company's board; Liquidation preference=Investors get their money back first if the company is sold; Vesting=Founders earn their shares over time by staying
+check: mcq | What should you do before signing a term sheet? | Get advice from a start-up lawyer* | Sign it straight away | Ignore the details
+check: tf | Vesting means founders earn their shares over time. | true
+home: Talk with a grown-up about why it's important to read something carefully before you sign it.
+skill: equity
+
+@lesson 8.1 | Start with the people | 👂 | townhall
+hook: You want to start a social enterprise to help people experiencing homelessness. Who should you talk to first?
+learn: Many social enterprises fail because the founders guessed what people needed.
+learn: Talk with the people you want to help, and with groups already working on it.
+learn: A common saying is "Nothing about us without us." Include people in the decisions that affect them.
+play: chat | Planning with a support worker at a homelessness service | them: What are you hoping to do? | me: I'd like to learn what the people you work with actually need, before I plan anything.*/I've already decided to give out sleeping bags./I want to start a business and use your clients in the ads. | them: Good start. Many people here say a job matters most. | me: Could we talk to some of them about what would help them get work?*/I'll just guess what jobs they'd like./Jobs aren't my thing. | them: Yes. Some of them would love to be involved in planning it.
+check: mcq | Why talk to the people you want to help first? | So you solve the real problem* | To get them in your ads | It doesn't matter
+check: tf | Social enterprises sometimes fail because founders guess what people need. | true
+home: Think of a problem you'd like to help with. Who would you need to listen to first?
+skill: social enterprise
+
+@lesson 8.2 | Will people pay more for good? | 🏷️ | stall
+hook: Your ethical T-shirt costs $15 more than a regular one. Will customers pay it?
+learn: Some customers will pay more for a product that does good, but many won't.
+learn: The product must still be good value and good quality. Impact doesn't excuse a poor product.
+learn: Test what customers will really pay, not just what they say in a survey.
+play: debate | Can a social enterprise rely on customers paying extra to do good? | Only partly. It needs a great product at a fair price first* | Yes, everyone pays more for good causes | Some loyal customers really do pay more, so the extra can be part of the plan, just not all of it.
+check: mcq | What must a social enterprise's product still be? | Good quality and good value* | Expensive | Plain
+check: tf | People sometimes say they'll pay more in surveys, then don't. | true
+home: Compare an ethical product with a regular one at the shop with a grown-up. What's the price difference?
+skill: pricing
+
+@lesson 8.3 | Proving you do good | ✅ | townhall
+hook: Anyone can say they're a "business for good". How do you prove it?
+learn: B Corp certification checks a company's impact on workers, community, the environment and customers, and how it's run.
+learn: Certified companies must keep meeting the standards and recertify every few years.
+learn: {nz:Groups like Ākina support social enterprises and help big buyers find them.~au:Social Traders certifies social enterprises and connects them with big buyers.}
+play: tap | Tap the things B Corp certification looks at | 👷:yes:How workers are treated; 🌍:yes:The impact on the environment; 🏘️:yes:The impact on the community; 🧑‍⚖️:yes:How the company is run; 🎨:no; 🏎️:no
+check: mcq | What does B Corp certification check? | A company's impact on people and the planet* | Only its profits | Only its logo
+check: tf | B Corps must keep meeting standards to stay certified. | true
+home: Find a certified B Corp in {nz:New Zealand~au:Australia} with a grown-up. What does it make?
+skill: social enterprise
+
+@lesson 8.4 | Owned by members | 🤲 | bank
+hook: What if a business were owned by the people who use it?
+learn: A co-operative, or co-op, is owned by its members, like farmers, workers or customers.
+learn: {nz:Fonterra is owned by dairy farmers, and Foodstuffs, which runs New World and PAK'nSAVE, is owned by its grocers.~au:CBH Group is owned by Western Australian grain growers, and mutual banks are owned by their customers.}
+learn: Profits go back to members or into the business, not to outside shareholders.
+play: sort | Owned by members, Owned by shareholders | A farmers' co-operative=Owned by members; A company listed on the share market=Owned by shareholders; A credit union owned by its customers=Owned by members; A start-up owned by investors=Owned by shareholders; A worker-owned café=Owned by members; A big chain owned by an overseas company=Owned by shareholders | Who owns it?
+check: mcq | Who owns a co-operative? | Its members* | Outside investors | The government
+check: tf | {nz:Fonterra is owned by dairy farmers.~au:Mutual banks are owned by their customers.} | true
+home: Find a co-op or mutual near you with a grown-up. Who are its members?
+skill: ownership
+
+@lesson 8.5 | Growing the impact | 🌳 | stall
+hook: Your training café works. Do you open 20 more, or help others copy it?
+learn: Scaling up means growing your own organisation, like opening more sites.
+learn: Scaling out means sharing your model so others can copy it, like a guidebook or a franchise.
+learn: Scaling deep means changing rules or culture, like convincing the government to fund training.
+play: path | Your training café gets young people into jobs. Other towns want one. | Share your model and train other groups to run their own => good: Scaling out can spread the impact faster than you could alone. | Open 20 cafés next year with a big loan => bad: Growing too fast can sink the original café and its mission. | Keep it secret so nobody copies you => ok: That protects your café, but fewer young people get help.
+check: mcq | What's scaling out? | Sharing your model so others can copy it* | Making the café bigger | Closing down
+check: tf | Changing rules or culture is a way to grow impact. | true
+home: Talk with a grown-up about a good idea that spread from one place to many.
+skill: social enterprise
+
+@lesson 8.6 | People, planet, profit | 📊 | townhall
+hook: Your social enterprise had a great year. How do you show it?
+learn: The triple bottom line measures people, planet and profit, not just profit.
+learn: Pick a few measures for each, like jobs created, waste cut and money in the bank.
+learn: Set targets, track them every quarter and share honest results, even the bad ones.
+play: build | Build a simple impact dashboard | Write your mission in one sentence; Choose 1 or 2 people measures, like jobs created; Choose 1 or 2 planet measures, like waste cut; Choose your profit and cash measures; Set a target for each one; Report every quarter, good and bad
+check: mcq | What does the triple bottom line measure? | People, planet and profit* | Only profit | Only the planet
+check: tf | Sharing honest results, even bad ones, builds trust. | true
+home: Pick a company you know. What would you measure for its people, planet and profit?
+skill: impact

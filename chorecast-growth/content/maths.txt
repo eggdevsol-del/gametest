@@ -294,6 +294,272 @@ check: tf | Everyone's footsteps are the same size. | false
 home: Measure your room in footsteps, then with a tape measure, with a grown-up.
 skill: measuring
 
+@lesson 5.1 | Circles | ⭕ | home
+hook: Look around you. How many round things can you see?
+learn: A circle is round, with no corners and no straight sides.
+learn: Plates, most coins and many clocks are circles.
+learn: Circles roll! That's why wheels are round.
+play: tap | Tap the things that are round like a circle | 🍪:yes:A cookie is round; 🕒:yes:A clock face is round; 🪙:yes:Most coins are round; 📕:no; 📱:no; 🍩:yes:A doughnut is round
+check: mcq | How many corners does a circle have? | 0* | 3 | 4
+check: tf | Wheels are round so they can roll. | true
+home: Find five round things at home with a grown-up.
+skill: shapes
+
+@lesson 5.2 | Triangles | 🔺 | home
+hook: Count the sides on a slice of pizza. What shape is it?
+learn: A triangle has 3 straight sides and 3 corners.
+learn: A slice of pizza, a sandwich cut corner to corner and some roofs look like triangles.
+learn: Triangles are strong, so builders use them in bridges and roofs.
+play: mystery | I have 3 straight sides; I have 3 corners; A slice of pizza can look like me | A triangle* | A circle | A square
+check: mcq | How many sides does a triangle have? | 3* | 4 | 0
+check: tf | Builders use triangles because they're strong. | true
+home: Look for triangles on a walk with a grown-up, like roofs, signs and bridges.
+skill: shapes
+
+@lesson 5.3 | Squares and rectangles | 🟦 | home
+hook: A door and a sticky note both have 4 sides. Are they the same shape?
+learn: A square has 4 sides that are all the same length.
+learn: A rectangle has 4 sides too, with 2 long sides and 2 short sides.
+learn: Both have 4 square corners.
+play: sort | Square, Rectangle | A sticky note=Square; A door=Rectangle; A chessboard=Square; A phone=Rectangle; A $5 note=Rectangle; A slice of cheese=Square | Square or rectangle?
+check: mcq | Which shape has 4 sides all the same length? | A square* | A rectangle like a door | A triangle
+check: tf | A rectangle has 4 corners. | true
+home: Sort some books, boxes and cards at home into squares and rectangles.
+skill: shapes
+
+@lesson 5.4 | Solid shapes | 🎲 | home
+hook: You can hold a ball, but you can't hold a circle drawn on paper. Why?
+learn: Some shapes are flat, like drawings. Some are solid, like things you can hold.
+learn: A ball is a sphere. A dice is a cube. A can is a cylinder. An ice cream cone is a cone.
+learn: Shops stack boxes and cans because their flat sides sit nicely on top of each other.
+play: match | Match each thing to its solid shape | A soccer ball=Sphere; A dice=Cube; A can of beans=Cylinder; An ice cream cone=Cone; A tissue box=Rectangular box
+check: mcq | What shape is a can of beans? | A cylinder* | A sphere | A cube
+check: tf | A soccer ball is a sphere. | true
+home: Find a sphere, a cube and a cylinder in your kitchen with a grown-up.
+skill: shapes
+
+@lesson 5.5 | Matching halves | 🦋 | garden
+hook: Fold a butterfly picture in half. Do the two sides match?
+learn: A shape is symmetrical if both halves match when you fold it.
+learn: Butterflies, hearts and many leaves are symmetrical.
+learn: The fold line is called a line of symmetry.
+play: diff | A butterfly's two wings should match. Left wing first, then right wing. Tap what doesn't match. | 3 spots; Blue; Round tip; Long feeler | 3 spots; Green; Round tip; Short feeler
+check: mcq | What's a line of symmetry? | A fold line where both halves match* | A line of people | A wiggly line
+check: tf | A heart shape is symmetrical. | true
+home: Fold a piece of paper, cut out half a shape, then open it with a grown-up. Is it symmetrical?
+skill: shapes
+
+@lesson 5.6 | Shapes that fit | 🐝 | garden
+hook: Why do bees build honeycomb out of six-sided shapes?
+learn: Some shapes fit together with no gaps, like tiles on a floor.
+learn: Squares, triangles and six-sided hexagons all fit together with no gaps.
+learn: Circles always leave gaps between them.
+play: sort | Fits with no gaps, Leaves gaps | Squares=Fits with no gaps; Circles=Leaves gaps; Hexagons, like honeycomb=Fits with no gaps; Triangles=Fits with no gaps; Stars=Leaves gaps; Hearts=Leaves gaps | Do lots of them fit together with no gaps?
+check: mcq | Which shape leaves gaps when you put lots together? | Circles* | Squares | Hexagons
+check: tf | Floor tiles are often squares because they fit with no gaps. | true
+home: Look at the tiles or bricks at home or school. What shapes fit together?
+skill: shapes
+
+@lesson 6.1 | What comes next? | 🔴 | home
+hook: Red, blue, red, blue, red… What comes next?
+learn: A pattern is something that repeats in the same way, again and again.
+learn: Find the part that repeats. In red, blue, red, blue, the part that repeats is red, blue.
+learn: Patterns can use colours, shapes, sounds or numbers.
+play: mcq | Star, moon, star, moon, star… What comes next? | Moon* | Star | Sun
+check: mcq | Clap, stamp, clap, stamp, clap… What comes next? | Stamp* | Clap | Jump
+check: tf | A pattern repeats in the same way. | true
+home: Make a pattern with spoons and forks, or cups and plates, and ask a grown-up what comes next.
+skill: patterns
+
+@lesson 6.2 | Counting in steps | 🦘 | home
+hook: Can you count to 50 in just 5 jumps?
+learn: Counting in 2s goes 2, 4, 6, 8, 10.
+learn: Counting in 5s goes 5, 10, 15, 20, 25.
+learn: Counting in 10s goes 10, 20, 30, 40, 50. Five jumps gets you to 50!
+play: order | Count in 5s | 5; 10; 15; 20; 25; 30
+check: gap | 2, 4, 6, 8, _ | 10
+check: mcq | Which is counting in 10s? | 10, 20, 30* | 10, 11, 12 | 1, 2, 3
+home: Count your family's shoes in 2s with a grown-up.
+skill: counting
+
+@lesson 6.3 | Number rules | 🔢 | home
+hook: 3, 6, 9, 12… What's the secret rule?
+learn: Number patterns follow a rule, like "add 3 each time".
+learn: To find the rule, look at how much it jumps from one number to the next.
+learn: Some patterns go down, like 20, 18, 16. The rule is "take away 2".
+play: match | Match each pattern to its rule | 2, 4, 6, 8=Add 2; 10, 20, 30, 40=Add 10; 5, 10, 15, 20=Add 5; 20, 18, 16, 14=Take away 2; 3, 6, 9, 12=Add 3
+check: gap | 1, 4, 7, 10, _ | 13
+check: mcq | What's the rule for 30, 25, 20, 15? | Take away 5* | Add 5 | Add 10
+home: Make up a number pattern with a secret rule. Can a grown-up guess it?
+skill: patterns
+
+@lesson 6.4 | Saving patterns | 🐷 | bank
+hook: You save $2 every week. How much will you have after 6 weeks?
+learn: Saving the same amount each week makes a pattern: $2, $4, $6, $8.
+learn: The rule is "add $2 each week".
+learn: Keep following the rule to see how fast your savings grow.
+try: $3 a week: $3, $6, $9 :: gap | $3 a week: $3, $6, $9, $_ | 12
+play: slider | You save $2 every week. How much do you have after 6 weeks? | 0 | 20 | 12 | $ | 0 | 1
+check: gap | You save $5 a week. After 4 weeks you have $_ | 20
+check: mcq | You save $1 a week. What's the pattern? | $1, $2, $3, $4* | $1, $1, $1, $1 | $1, $3, $5, $7
+home: Make a savings chart with a grown-up and add the same amount each week.
+skill: patterns
+
+@lesson 6.5 | Patterns in time | 📅 | home
+hook: Monday, Tuesday, Wednesday… What comes after Sunday?
+learn: The days of the week repeat. After Sunday comes Monday again.
+learn: Some things happen every day, like brushing your teeth.
+learn: Some things happen every week, like sport on Saturday.
+play: sort | Every day, Every week | Brushing your teeth=Every day; Saturday sport=Every week; Eating breakfast=Every day; Library day at school=Every week; Going to bed=Every day; A weekly swimming lesson=Every week | Every day or every week?
+check: mcq | What day comes after Sunday? | Monday* | Saturday | Friday
+check: tf | There are 7 days in a week. | true
+home: Make a chart with a grown-up of things you do every day and every week.
+skill: time
+
+@lesson 6.6 | Spot the mistake | 🔍 | home
+hook: Someone tried to copy a pattern, but got it wrong. Can you find where?
+learn: To check a pattern, say it out loud: red, blue, red, blue.
+learn: When something doesn't fit the rule, that's the mistake.
+learn: Checking carefully is something mathematicians do all the time.
+play: diff | The top row is the pattern. The bottom row is the copy. Tap the mistakes. | Red; Blue; Red; Blue; Red; Blue | Red; Blue; Red; Green; Red; Yellow
+check: mcq | 2, 4, 6, 9, 10. Which number is the mistake? | 9* | 4 | 10
+check: tf | Saying a pattern out loud can help you check it. | true
+home: Make a pattern with one mistake in it. Can a grown-up spot it?
+skill: patterns
+
+@lesson 7.1 | More or less | ⚖️ | home
+hook: 17 and 71 use the same digits. Which one is bigger?
+learn: To compare two numbers, look at the tens first. More tens means a bigger number.
+learn: 71 has 7 tens. 17 has only 1 ten. So 71 is bigger.
+learn: If the tens are the same, look at the ones. 45 is bigger than 42.
+play: gap | Which is bigger, 17 or 71? The bigger one is _ | 71 | 17; 71
+check: mcq | Which is bigger? | 53* | 35 | 33
+check: tf | 42 is bigger than 45. | false | They both have 4 tens, and 5 ones is more than 2 ones.
+home: Pick two number cards or dice with a grown-up. Who has the bigger number?
+skill: comparing
+
+@lesson 7.2 | Tens and ones | 🔟 | home
+hook: How many tens are hiding in the number 34?
+learn: Numbers with two digits have tens and ones.
+learn: 34 is 3 tens and 4 ones. That's 10 + 10 + 10 + 4.
+learn: The digit on the left tells you how many tens.
+play: match | Match each number to its tens and ones | 34=3 tens and 4 ones; 43=4 tens and 3 ones; 50=5 tens and 0 ones; 18=1 ten and 8 ones; 27=2 tens and 7 ones
+check: gap | 6 tens and 2 ones make _ | 62
+check: mcq | How many tens are in 85? | 8* | 5 | 85
+home: Make numbers with bundles of 10 sticks or straws and some single ones, with a grown-up.
+skill: place value
+
+@lesson 7.3 | Smallest to biggest | 📶 | home
+hook: Can you put these numbers in a line from smallest to biggest?
+learn: Putting numbers in order means starting with the smallest.
+learn: Compare the tens first, then the ones.
+learn: A number with three digits, like 100, is bigger than any two-digit number.
+play: order | Put these numbers from smallest to biggest | 9; 15; 27; 51; 100
+check: mcq | Which is the smallest? | 12* | 21 | 102
+check: tf | 100 is bigger than 99. | true
+home: Write five numbers on cards and put them in order with a grown-up.
+skill: comparing
+
+@lesson 7.4 | Which is more money? | 🪙 | bank
+hook: Is a pile of small coins worth more than one big coin?
+learn: Lots of coins isn't always lots of money. Add up what they're worth.
+learn: Three 20c coins make 60c. That's less than $1.
+learn: Two 50c coins and a 20c coin make $1.20. That's more than $1.
+play: sort | More than $1, Less than $1 | Two 50c coins and a 20c coin=More than $1; Three 20c coins=Less than $1; A $2 coin=More than $1; Four 10c coins=Less than $1; One 50c and three 20c coins=More than $1; Five 10c coins=Less than $1 | More or less than $1?
+check: mcq | Which is more money? | One $2 coin* | Five 10c coins | Three 20c coins
+check: tf | More coins always means more money. | false | Add up what they're worth. One $2 coin beats five 10c coins.
+home: Make two piles of coins with a grown-up. Which pile is worth more?
+skill: money
+
+@lesson 7.5 | Double and half | ✌️ | kitchen
+hook: You have 4 cookies. Your friend has double. How many do they have?
+learn: Double means two times as many. Double 4 is 8.
+learn: Half means split into two equal parts. Half of 8 is 4.
+learn: Doubling and halving are opposites.
+play: mystery | I'm double 5; I'm half of 20; I'm what you get when you count one jump in 10s | 10* | 5 | 20
+check: gap | Double 6 is _ | 12
+check: mcq | What's half of 10? | 5* | 20 | 2
+home: Double and halve some snacks with a grown-up, like grapes or crackers.
+skill: doubling
+
+@lesson 7.6 | Number lines | 📏 | home
+hook: A number line is like a road for numbers. Which way do they get bigger?
+learn: On a number line, numbers get bigger as you go right.
+learn: Jumping right means adding. Jumping left means taking away.
+learn: Start at 6 and jump 3 to the right. You land on 9.
+play: slider | Start at 6 on the number line and jump 3 to the right. Where do you land? | 0 | 20 | 9 | | 0 | 1
+check: gap | Start at 10 and jump 4 to the left. You land on _ | 6
+check: mcq | Which way do numbers get bigger on a number line? | To the right* | To the left | Up and down
+home: Draw a number line from 0 to 20 with a grown-up and play jumping games on it.
+skill: number lines
+
+@lesson 8.1 | How many beans? | 🫘 | kitchen
+hook: A big jar is full of beans. How can you guess how many without counting them all?
+learn: Count a small part, then use it to guess the whole thing.
+learn: If one handful has about 10 beans, and the jar holds about 5 handfuls, that's about 50 beans.
+learn: Your guess won't be exact, but it will be close. That's estimating!
+try: 2 handfuls of 10 beans is about 20 beans :: gap | 3 handfuls of 10 beans is about _ beans | 30
+play: slider | One handful has about 10 beans. The jar holds about 5 handfuls. About how many beans are in the jar? | 0 | 100 | 50 | beans | 5 | 1
+check: mcq | What's a smart way to guess how many are in a big jar? | Count a small part first* | Close your eyes and pick a number | Count every single one
+check: tf | An estimate is a smart guess. | true
+home: Estimate how many pegs, pasta shells or blocks are in a container, then count them with a grown-up.
+skill: estimating
+
+@lesson 8.2 | About how long? | 📏 | home
+hook: How long is a door? You don't need a ruler to make a good guess.
+learn: A big step for a grown-up is about 1 metre.
+learn: A door is about 2 metres tall. A car is about 4 metres long.
+learn: Use things you know to guess the size of other things.
+play: match | Match each thing to its rough size | A grown-up's big step=About 1 metre; A door's height=About 2 metres; A car's length=About 4 metres; A paper clip=About 3 cm; A school bus=About 12 metres
+check: mcq | About how tall is a door? | About 2 metres* | About 2 cm | About 200 metres
+check: tf | A car is about 4 metres long. | true
+home: Guess the length of your hallway in big steps, then measure it with a grown-up.
+skill: estimating
+
+@lesson 8.3 | How long does it take? | ⏱️ | home
+hook: Does brushing your teeth take seconds, minutes or hours?
+learn: Some things take seconds, like clapping your hands.
+learn: Some take minutes, like brushing your teeth, which should take about 2 minutes.
+learn: Some take hours, like a night's sleep.
+play: sort | Seconds, Minutes, Hours | Clapping your hands=Seconds; Brushing your teeth=Minutes; A night's sleep=Hours; Blinking=Seconds; Eating lunch=Minutes; A day at school=Hours | Seconds, minutes or hours?
+check: mcq | About how long should you brush your teeth? | About 2 minutes* | About 2 hours | About 2 seconds
+check: tf | A night's sleep takes hours. | true
+home: Guess how long a job takes, like setting the table, then time it with a grown-up.
+skill: estimating
+
+@lesson 8.4 | Is there enough money? | 💵 | stall
+hook: You have $5. A drink is $2.90 and chips are $1.95. Can you buy both?
+learn: Round prices to make them easy. $2.90 is about $3. $1.95 is about $2.
+learn: $3 + $2 = $5. That's close to what you have, so check carefully.
+learn: Exactly, $2.90 + $1.95 is $4.85. That's less than $5, so you have enough!
+play: path | You have $5. A drink is $2.90 and chips are $1.95. | Round to $3 + $2, then check it exactly: $4.85 is enough => good: Rounding gives a quick guess, and checking makes sure. | Say "no" straight away without thinking => bad: You can afford both. A quick estimate would have shown you. | Grab a lolly too, and hope it's enough => bad: That would cost more than $5.
+check: mcq | $1.90 rounded to the nearest dollar is… | $2* | $1 | $19
+check: tf | Rounding prices helps you guess the total quickly. | true
+home: At the shop, round two prices with a grown-up and guess the total.
+skill: estimating
+
+@lesson 8.5 | Sensible guesses | 🤔 | home
+hook: Your friend guesses there are 2,000 kids in your class. Is that sensible?
+learn: A sensible guess makes sense with what you already know.
+learn: Most classes have about 20 to 30 kids, not 2,000.
+learn: If a guess sounds silly, think about what you know, and try again.
+play: mcq | About how many kids are in a class? | About 25* | About 2 | About 2,000
+check: mcq | About how heavy is a pet cat? | About 4 kg* | About 400 kg | About 4 g
+check: tf | A sensible guess makes sense with what you already know. | true
+home: Make some silly and sensible guesses with a grown-up. Can they tell which is which?
+skill: estimating
+
+@lesson 8.6 | Guess, check, get better | 🎯 | home
+hook: How do you get better at guessing? Practise!
+learn: Make a guess, then check it by counting or measuring.
+learn: See how close you were, and think about why.
+learn: Next time, your guess will be even better.
+play: order | Get better at estimating | Make a guess; Count or measure to check; See how close you were; Think about why; Guess again, and get closer
+check: mcq | How do you get better at guessing? | Guess, check and try again* | Never check | Only guess once
+check: tf | Checking your guess helps you guess better next time. | true
+home: Play a guessing game with a grown-up: guess, check, and see who gets closest.
+skill: estimating
+
 @band builders
 @unit 1 | Percentages | Discounts, tax and tips
 @unit 2 | Recipes and scaling | Cooking for more or fewer people
@@ -597,6 +863,276 @@ check: mcq | What else do shorter showers save? | Money for heating the water* |
 home: Time your shower with a grown-up's help and work out roughly how many litres you used.
 skill: rates
 
+@lesson 5.1 | Tens and hundreds | 🔟 | stall
+hook: A bike costs $347. Is that "about $300" or "about $350"?
+learn: To round to the nearest 10, look at the ones digit. 5 or more rounds up.
+learn: To round to the nearest 100, look at the tens digit. $347 is about $300.
+learn: To the nearest 10, $347 is about $350. Choose the rounding that fits the job.
+try: 63 to the nearest 10 is 60 :: gap | 87 to the nearest 10 is _ | 90
+play: match | Match each number to its rounded value | 347 to the nearest 100=300; 347 to the nearest 10=350; 862 to the nearest 100=900; 65 to the nearest 10=70; 1,240 to the nearest 100=1,200
+check: gap | 450 to the nearest 100 is _ | 500
+check: mcq | What's $83 to the nearest $10? | $80* | $90 | $100
+home: Round the prices on a shopping receipt to the nearest $10 with a grown-up.
+skill: rounding
+
+@lesson 5.2 | Always round up | ⬆️ | home
+hook: 26 kids are going on a trip. Each van fits 8. Are 3 vans enough?
+learn: Sometimes you must round up, even if the answer is close to the lower number.
+learn: 26 ÷ 8 = 3 and a bit. 3 vans leave 2 kids behind, so you need 4.
+learn: Round up for vans, packets, tins of paint and anything where running short is a problem.
+play: sort | Round up, Round to the nearest | Buses needed for 70 kids=Round up; Roughly what a $4.30 coffee costs=Round to the nearest; Packs of 6 rolls for 20 people=Round up; Roughly how far 9.8 km is=Round to the nearest; 2-litre bottles for 9 litres of water=Round up; Roughly how heavy 312 g of cheese is=Round to the nearest | Round up, or round to the nearest?
+check: gap | 20 people need 1 roll each. Rolls come in packs of 6. You need _ packs | 4
+check: mcq | 30 kids, 7 seats in each car. How many cars? | 5* | 4 | 3
+home: Plan a party with a grown-up. How many packs of plates do you need?
+skill: rounding
+
+@lesson 5.3 | The trolley total | 🛒 | stall
+hook: You've got $30. Will it cover everything in the trolley?
+learn: Round each price to the nearest dollar, and keep a running total as you shop.
+learn: $3.95 + $6.20 + $2.75 is about $4 + $6 + $3 = $13.
+learn: Rounding up a little on each item gives you a safety margin.
+try: $1.90 + $4.10 is about $2 + $4 = $6 :: gap | $2.95 + $5.05 is about $_ | 8
+play: slider | Estimate the total: $4.95, $2.10, $7.80, $3.20 and $5.90 | 10 | 40 | 24 | $ | 1 | 1
+check: mcq | $9.80 + $4.90 + $3.10 is about… | $18* | $15 | $21
+check: tf | Rounding each price up a little gives you a safety margin. | true
+home: Keep a rounded running total next time you shop with a grown-up. How close were you?
+skill: estimating
+
+@lesson 5.4 | Does that look right? | 🧐 | stall
+hook: The calculator says 4 × $12.50 = $500. Does that sound right?
+learn: Before trusting an answer, estimate it. 4 × $12.50 is about 4 × $12 = $48.
+learn: If the answer is way off your estimate, check what you typed.
+learn: A missed decimal point is a common slip. Typing 125 instead of 12.50 makes the answer 10 times too big.
+play: path | The calculator says 6 movie tickets at $14.50 cost $870. | Estimate 6 × $15, about $90, then check what was typed => good: The real answer is $87. A missed decimal point made it 10 times too big. | Pay $870, because calculators are always right => bad: A calculator only works out what you type. | Guess $50 instead => bad: That's not close to 6 × $15 either.
+check: mcq | 5 × $9.90 should be about… | $50* | $5 | $500
+check: tf | If an answer is far from your estimate, check what you typed. | true
+home: Do a sum on a calculator with a grown-up, but estimate the answer first.
+skill: estimating
+
+@lesson 5.5 | Head maths tricks | 🧠 | stall
+hook: 5 things at $9.99 each. Can you work it out in two seconds?
+learn: Round and fix: 5 × $9.99 is 5 × $10 = $50, take away 5c = $49.95.
+learn: Halve and double: 25 × 16 is the same as 50 × 8, which is 400.
+learn: To times by 10, every digit moves one place to the left. 10 × $3.40 = $34.
+play: match | Match each sum to its answer | 3 × $9.99=$29.97; 10 × $4.50=$45; 25 × 8, done as 50 × 4=200; 4 × $19.99=$79.96; Half of $3.60=$1.80
+check: gap | 2 × $4.99 = $_ | 9.98
+check: mcq | What's 4 × $2.99, using round and fix? | $12 − 4c = $11.96* | $8.96 | $12.40
+home: Challenge a grown-up to a head maths race using prices in a catalogue.
+skill: mental maths
+
+@lesson 5.6 | Big estimates | 🍞 | kitchen
+hook: How many slices of bread does your family eat in a year? Nobody counts, but you can estimate!
+learn: Break a big question into small ones you can guess.
+learn: 4 people × 2 slices a day × 365 days is about 4 × 2 × 360 = 2,880 slices.
+learn: Your answer won't be exact, but it'll be in the right ballpark.
+play: slider | About how many loaves is 2,880 slices, if each loaf has 20 slices? | 50 | 250 | 144 | loaves | 15 | 1
+check: mcq | What's the best first step for a big estimate? | Break it into smaller questions* | Guess a random number | Give up
+check: gap | 3 people × 2 apples a day × 7 days = _ apples | 42
+home: Estimate with a grown-up how many litres of milk your family drinks in a year.
+skill: estimating
+
+@lesson 6.1 | Parts of a chart | 📊 | online
+hook: A chart has bars, but no title and no numbers. What does it tell you?
+learn: Every good chart needs a title that says what it shows.
+learn: The axes need labels, like "Week" along the bottom and "Dollars saved" up the side.
+learn: The scale shows what each line on the chart is worth. A key explains colours.
+play: tap | Tap the things a good chart needs | 🏷️:yes:A title; 📏:yes:Labels on the axes; 🔢:yes:A scale with numbers; 🗝️:yes:A key if colours mean something; 🦄:no; 🎉:no
+check: mcq | What does a chart's title do? | Says what the chart shows* | Makes it colourful | Nothing
+check: tf | A chart with no numbers on the scale is hard to read. | true
+home: Find a chart in a newspaper or online with a grown-up. Does it have a title, labels and a scale?
+skill: charts
+
+@lesson 6.2 | Reading the scale | 📏 | online
+hook: A bar stops halfway between the 20 line and the 30 line. What's its value?
+learn: Not every line on a chart is worth 1. Lines might go up in 2s, 5s or 10s.
+learn: Check the numbers on the scale first.
+learn: A bar halfway between 20 and 30 is about 25.
+play: slider | On a chart going up in 10s, a bar stops halfway between 40 and 50. What's its value? | 0 | 100 | 45 | | 2 | 1
+check: gap | The scale goes up in 5s. A bar stops at the 4th line above zero. Its value is _ | 20
+check: mcq | What should you check first on a bar chart? | The scale* | The colour | The font
+home: Draw a bar chart with a grown-up, with lines that go up in 5s.
+skill: charts
+
+@lesson 6.3 | Line graphs | 📈 | online
+hook: Your savings over a year make a line. What does a flat part mean?
+learn: A line graph shows how something changes over time.
+learn: Going up means it's increasing. Going down means it's decreasing.
+learn: A flat part means no change. A steep part means a fast change.
+play: mystery | It shows how something changes over time; It has points joined by a line; It's great for showing the temperature through a day | A line graph* | A pie chart | A shopping list
+check: mcq | A savings line goes flat for two months. What happened? | Savings didn't change* | Savings grew fast | Savings disappeared
+check: tf | A steep line means a fast change. | true
+home: Record the temperature at the same time each day for a week, and draw a line graph with a grown-up.
+skill: charts
+
+@lesson 6.4 | Pie charts | 🥧 | online
+hook: Half your pie chart is "Savings". What fraction of your money is that?
+learn: A pie chart shows parts of a whole, like how you split your pocket money.
+learn: Half the pie is 50%. A quarter is 25%. The whole pie is 100%.
+learn: If you get $20 and half the pie is "Savings", you save $10.
+try: Half of $20 is $10 :: gap | A quarter of $20 is $_ | 5
+play: match | Match each slice of the pie to its percent | Half the pie=50%; A quarter of the pie=25%; Three quarters of the pie=75%; The whole pie=100%; A tenth of the pie=10%
+check: gap | You get $40. A quarter of the pie is "Give". You give $_ | 10
+check: mcq | What does a pie chart show? | Parts of a whole* | Change over time | Distances
+home: Make a pie chart with a grown-up of how you spend your day: sleep, school and play.
+skill: charts
+
+@lesson 6.5 | Which chart? | 🤔 | online
+hook: You want to show how your savings grew over a year. Bar, line or pie?
+learn: Bar charts are great for comparing things, like sales on different days.
+learn: Line graphs are best for change over time.
+learn: Pie charts show parts of a whole, like how a budget is split.
+play: sort | Bar chart, Line graph, Pie chart | Comparing how many cookies each class sold=Bar chart; Your height every birthday=Line graph; How your $10 is split between jars=Pie chart; Favourite fruits in your class=Bar chart; The temperature across a day=Line graph; How a family budget is shared out=Pie chart | Which chart fits best?
+check: mcq | Which chart is best for change over time? | A line graph* | A pie chart | No chart
+check: tf | Pie charts show parts of a whole. | true
+home: Find a chart with a grown-up. Was it the best kind for its job?
+skill: charts
+
+@lesson 6.6 | Make your own chart | 🖍️ | online
+hook: You asked 20 classmates their favourite snack. How do you show the answers?
+learn: Start with a tally, then turn it into a table of numbers.
+learn: Choose the right chart, and a scale that fits your biggest number.
+learn: Add a title and labels, so anyone can read it.
+play: build | Make a chart from a survey | Ask your question and keep a tally; Count the tally into a table; Choose the best kind of chart; Pick a scale that fits your biggest number; Draw the bars or slices; Add a title and labels
+check: mcq | Your biggest number is 18. Which scale fits best? | Lines going up in 2s to 20* | Lines going up in 100s | Lines going up in 1s to 5
+check: tf | A tally can help you collect survey answers. | true
+home: Survey your family about something, like favourite meals, and make a chart.
+skill: charts
+
+@lesson 7.1 | The mean | ➗ | stage
+hook: You scored 6, 8, 7 and 11 in four games. What's your average?
+learn: The mean is what most people call the average.
+learn: Add up all the numbers, then divide by how many there are.
+learn: 6 + 8 + 7 + 11 = 32. There are 4 games, so 32 ÷ 4 = 8.
+try: (4 + 6) ÷ 2 = 5 :: gap | (3 + 5 + 7) ÷ 3 = _ | 5
+play: slider | You saved $5, $9, $4 and $6 over four weeks. What's the mean each week? | 0 | 10 | 6 | $ | 0 | 1
+check: gap | The mean of 10, 20 and 30 is _ | 20
+check: mcq | How do you find the mean? | Add them up and divide by how many* | Pick the biggest | Pick the first one
+home: Find the mean of your family's ages with a grown-up.
+skill: averages
+
+@lesson 7.2 | The median | 🎯 | stage
+hook: Five friends' heights are all mixed up. Who's in the middle?
+learn: The median is the middle number when you put them in order.
+learn: For 7, 2, 9, 4 and 5, put them in order: 2, 4, 5, 7, 9. The middle one is 5.
+learn: If there's an even number of values, the median is halfway between the middle two.
+play: order | Put these in order to find the median: 7, 2, 9, 4, 5 | 2; 4; 5; 7; 9
+check: gap | The median of 3, 8, 1, 6 and 4 is _ | 4
+check: mcq | The median of 2, 4, 6 and 8 is… | 5* | 4 | 6
+home: Line up some books by height with a grown-up. Which one is the median?
+skill: averages
+
+@lesson 7.3 | The mode | 👟 | stall
+hook: A shoe shop sells sizes 4, 5, 5, 6, 5 and 7. Which size should it stock most of?
+learn: The mode is the value that appears most often.
+learn: In 4, 5, 5, 6, 5, 7, the mode is 5. It appears three times.
+learn: The mode works for things that aren't numbers too, like favourite colours.
+play: match | Match each set to its mode | Shoe sizes 4, 5, 5, 6=5; Pets per family 2, 1, 1, 3, 1=1; Scores 7, 9, 9, 9, 10=9; Favourite colours red, blue, blue, green=Blue
+check: gap | The mode of 3, 3, 4, 8, 3, 8 is _ | 3
+check: mcq | The mode is the value that… | Appears most often* | Is in the middle | Is the biggest
+home: Ask your family their favourite fruit. Which one is the mode?
+skill: averages
+
+@lesson 7.4 | The range | 🏀 | stage
+hook: Two players both average 10 points a game. Are they just as good?
+learn: The range shows how spread out the numbers are: the highest minus the lowest.
+learn: Player A scores 9, 10, 11. The range is 11 − 9 = 2. Player B scores 0, 10, 20. The range is 20.
+learn: The same average can hide very different patterns.
+play: path | Your team needs steady points in the final. Both players average 10. | Pick Player A, who scores 9 to 11 every game => good: A small range means steady scoring. | Pick Player B, who scores 0 or 20 => ok: B might win it big, or score nothing. That's a risk. | Pick whoever has the cooler shoes => bad: Shoes don't score points.
+check: gap | Scores of 4, 9 and 15 have a range of _ | 11
+check: mcq | What does a big range show? | The numbers are very spread out* | The numbers are all the same | The average is big
+home: Write down the temperature for five days. Work out the range with a grown-up.
+skill: averages
+
+@lesson 7.5 | Average per week | 📅 | bank
+hook: You spent $12, $8, $15 and $5 on snacks over four weeks. How much should you plan for each week?
+learn: Averages help you plan, because spending goes up and down.
+learn: $12 + $8 + $15 + $5 = $40. $40 ÷ 4 weeks = $10 a week.
+learn: Plan around the average, and keep a little extra for the dearer weeks.
+play: build | Plan your weekly snack money | Write down each week's spending; Add them all up; Divide by the number of weeks; Plan that amount each week; Check again next month
+check: gap | You spent $6, $10 and $8 over three weeks. That's a mean of $_ a week | 8
+check: mcq | Why plan with an average? | Spending goes up and down each week* | Every week is the same | It's always the most you spent
+home: Work out your average weekly spending over a month with a grown-up.
+skill: budgeting
+
+@lesson 7.6 | Which average? | 🤔 | stage
+hook: Mean, median or mode. Which one should you use?
+learn: Use the mean for everyday averages, like test scores, when there are no extreme numbers.
+learn: Use the median when a few huge or tiny numbers would pull the mean, like house prices.
+learn: Use the mode to find the most popular choice, like sizes or flavours.
+play: sort | Mean, Median, Mode | Which shoe size to stock most of=Mode; Typical house price in a town with a few mansions=Median; Your average test score this term=Mean; The most popular ice cream flavour=Mode; Typical pocket money when one kid gets $100=Median; Average rainfall per month=Mean | Which average fits best?
+check: mcq | Which average is best for the most popular flavour? | Mode* | Mean | Median
+check: tf | The median isn't pulled much by one huge number. | true
+home: Find an average in the news with a grown-up. Is it a mean or a median?
+skill: averages
+
+@lesson 8.1 | Weekly, monthly, yearly | 📆 | home
+hook: Some costs come every week, some every month and some once a year. Which is which?
+learn: Weekly costs come every week, like pocket money or rent in many homes.
+learn: Monthly costs come once a month, like a phone plan or streaming service.
+learn: Yearly costs come once a year, like car registration or insurance. They're easy to forget!
+play: sort | Weekly, Monthly, Yearly | Pocket money=Weekly; A phone plan=Monthly; Car registration=Yearly; Rent in many homes=Weekly; A streaming subscription=Monthly; Home insurance=Yearly | How often does it come?
+check: mcq | Which cost is easy to forget because it only comes once a year? | Car registration* | Pocket money | Weekly groceries
+check: tf | A phone plan is usually paid monthly. | true
+home: Ask a grown-up to name one weekly, one monthly and one yearly cost in your home.
+skill: budgeting
+
+@lesson 8.2 | A month isn't 4 weeks | 📅 | bank
+hook: You get $10 a week. Is that $40 a month?
+learn: There are 52 weeks in a year, but only 12 months. So a month is about 4.3 weeks.
+learn: To change weekly to monthly, times by 52, then divide by 12.
+learn: $10 a week × 52 = $520 a year. $520 ÷ 12 = about $43 a month, not $40.
+try: $5 a week × 52 = $260 a year :: gap | $20 a week × 52 = $_ a year | 1040
+play: slider | You get $10 a week. About how much is that a month? | 30 | 60 | 43 | $ | 2 | 1
+check: gap | $1,200 a year is $_ a month | 100
+check: mcq | How many weeks are in a year? | 52* | 48 | 12
+home: Work out your pocket money per month and per year with a grown-up.
+skill: budgeting
+
+@lesson 8.3 | Monthly or yearly plan? | 🎬 | online
+hook: A streaming service costs $12.99 a month, or $119 a year. Which is cheaper?
+learn: To compare, change both to the same time, like per month or per year.
+learn: $12.99 × 12 = $155.88 a year. The yearly plan is $119, so it saves about $37.
+learn: But a yearly plan only saves money if you'll keep using it all year.
+play: price | Which plan costs less per month? | Monthly plan:12.99:1:month; Yearly plan:119:12:months
+check: gap | $10 a month for 12 months is $_ | 120
+check: mcq | When is a yearly plan a good deal? | When you'll use it all year* | When you'll stop after a month | Never
+home: Find a subscription your family has with a grown-up. Is there a cheaper yearly option?
+skill: budgeting
+
+@lesson 8.4 | Small costs add up | ☕ | stall
+hook: A $3 drink every school day. That's nothing, right?
+learn: Small costs repeated often add up to big amounts.
+learn: $3 a day × 5 school days = $15 a week. Over 40 school weeks, that's $600 a year!
+learn: You don't have to stop treats. Just know what they really cost, and choose.
+play: path | You buy a $3 drink after school every day. | Bring a drink bottle from home, and buy one as a Friday treat => good: You still get a treat, and save about $480 a year. | Keep buying one every day, and plan for it in your budget => ok: That's your choice, as long as you know it's about $600 a year. | Buy two a day, because they're cheap => bad: That's about $1,200 a year.
+check: gap | $2 a day for 5 days is $_ a week | 10
+check: mcq | $15 a week for 40 weeks is… | $600* | $55 | $150
+home: Pick something small your family buys often. Work out what it costs in a year.
+skill: budgeting
+
+@lesson 8.5 | Saving for a goal | 🎯 | bank
+hook: You want a $120 skateboard in 12 weeks. How much do you save each week?
+learn: Divide the goal by the number of weeks. $120 ÷ 12 = $10 a week.
+learn: If you can only save $8 a week, it will take 15 weeks instead.
+learn: Write your weekly target down, and tick off each week.
+play: match | Match each goal to how much to save each week | $120 in 12 weeks=$10 a week; $90 in 6 weeks=$15 a week; $50 in 10 weeks=$5 a week; $200 in 8 weeks=$25 a week; $40 in 20 weeks=$2 a week
+check: gap | A $60 goal in 4 weeks needs $_ a week | 15
+check: mcq | You save $5 a week for a $50 goal. How many weeks? | 10* | 5 | 50
+home: Choose a goal with a grown-up and work out how much to save each week.
+skill: saving
+
+@lesson 8.6 | Split your money | 🫙 | bank
+hook: You earn $40. How much goes to saving, spending and giving?
+learn: Many people split their money by percent, like saving 20% or giving 10%.
+learn: 10% of $40 is $4. 20% of $40 is $8. 50% of $40 is $20.
+learn: Deciding the split before you spend makes saving automatic.
+try: 10% of $20 is $2 :: gap | 10% of $50 is $_ | 5
+play: gen | split | 4
+check: gap | You earn $30 and save 20%. You save $_ | 6
+check: mcq | When should you decide how to split your money? | Before you spend it* | After it's gone | Never
+home: Choose a percent split for your money with a grown-up, and try it next payday.
+skill: budgeting
+
 @band makers
 @unit 1 | Ratios and rates | Speed, pay rates and mixing
 @unit 2 | Probability | Chance, odds and why the house wins
@@ -896,6 +1432,272 @@ check: gap | A rate goes from 5% to 10%. That's a _% rise in the rate | 100
 home: Find a news story with a percentage change and check if it means percent or percentage points.
 skill: percent change
 
+@lesson 5.1 | Area of a room | 📐 | home
+hook: You want new carpet for your 4 m by 3 m bedroom. How much do you buy?
+learn: Area is how much flat surface something covers. We measure it in square metres, or m².
+learn: For a rectangle, area = length × width. 4 m × 3 m = 12 m².
+learn: Carpet, tiles and turf are all priced by area.
+try: 5 m × 2 m = 10 m² :: gap | 6 m × 4 m = _ m² | 24
+play: match | Match each space to its area | A 4 m by 3 m bedroom=12 m²; A 5 m by 5 m deck=25 m²; A 2.5 m by 2 m bathroom=5 m²; A 10 m by 6 m lawn=60 m²; A 3 m by 0.5 m hallway rug=1.5 m²
+check: gap | Carpet costs $40 per m². A 12 m² room costs $_ | 480
+check: mcq | What unit do we use for area? | Square metres* | Metres | Litres
+home: Measure a room at home with a grown-up and work out its area.
+skill: area
+
+@lesson 5.2 | Area or perimeter? | 🧱 | garden
+hook: Fencing a garden and laying turf both need measuring. Do you measure the same thing?
+learn: Perimeter is the distance all the way around the edge. Add up every side.
+learn: A 6 m by 4 m garden has a perimeter of 6 + 4 + 6 + 4 = 20 m, and an area of 24 m².
+learn: Fences, edging and skirting boards use perimeter. Turf, tiles and paint use area.
+play: sort | Area, Perimeter | Laying turf on a lawn=Area; Building a fence around a yard=Perimeter; Painting a wall=Area; Fitting skirting boards=Perimeter; Tiling a bathroom floor=Area; Hanging fairy lights around a window=Perimeter | Do you need the area or the perimeter?
+check: gap | A 5 m by 3 m garden needs _ m of edging to go all the way around | 16
+check: mcq | A deck is 6 m by 4 m. What's its area? | 24 m²* | 20 m | 10 m²
+home: Measure the perimeter of a table at home with a tape measure.
+skill: measurement
+
+@lesson 5.3 | How much paint? | 🎨 | home
+hook: Paint is $90 a tin. Buy too little and you're back at the shop. Buy too much and it's wasted.
+learn: Find the wall area, then take away the doors and windows.
+learn: Times by the number of coats. Most walls need two.
+learn: Divide by how far a litre goes, often about 12 to 16 m², then round up to whole tins.
+play: build | Work out how much paint to buy | Measure the length and height of each wall; Work out the total wall area; Take away doors and windows; Times by the number of coats; Divide by how far a litre goes; Round up to whole tins
+check: gap | 30 m² of wall with 2 coats needs enough paint for _ m² | 60
+check: mcq | You need 7.5 litres of paint. Tins hold 4 litres. How many tins? | 2* | 1 | 3
+home: Look up how far a litre of paint goes on a paint company's website with a grown-up.
+skill: area
+
+@lesson 5.4 | Volume | 🧊 | garden
+hook: A garden bed is 2 m long, 1 m wide and 0.3 m deep. How much soil do you order?
+learn: Volume is how much space something takes up. For a box shape, volume = length × width × height.
+learn: 2 m × 1 m × 0.3 m = 0.6 cubic metres, or 0.6 m³.
+learn: 1 m³ holds 1,000 litres, so 0.6 m³ is 600 litres of soil.
+try: 1 m × 1 m × 0.5 m = 0.5 m³ :: gap | 2 m × 2 m × 0.5 m = _ m³ | 2
+play: slider | A fish tank is 1 m long, 0.4 m wide and 0.5 m tall. How many litres does it hold? | 0 | 500 | 200 | L | 10 | 10
+check: gap | 0.25 m³ is _ litres | 250
+check: mcq | How many litres are in 1 m³? | 1,000* | 100 | 10
+home: Find a box at home and work out its volume in cm³ with a grown-up.
+skill: volume
+
+@lesson 5.5 | Cost per metre | 📏 | garden
+hook: Three shops sell fencing: one by the panel, one by the roll, one by the metre. Which is cheapest?
+learn: To compare, change every price into the same unit, like dollars per metre.
+learn: A 2.4 m panel for $60 is $60 ÷ 2.4 = $25 a metre.
+learn: Don't forget extras, like posts, delivery and offcuts.
+play: price | Which fencing costs least per metre? | Panel:60:2.4:m; Roll:180:10:m; Cut to length:22:1:m
+check: gap | A 5 m roll costs $40. That's $_ a metre | 8
+check: mcq | A 2 m panel costs $50. What's that per metre? | $25* | $100 | $50
+home: Compare two products sold by length on a hardware store's website with a grown-up.
+skill: unit price
+
+@lesson 5.6 | Measure twice, cut once | ✂️ | workshop
+hook: You ordered a shelf 1,200 cm long. It arrives 12 metres long. Oops.
+learn: Mixing up mm, cm and m is a common, costly mistake. 1 m = 100 cm = 1,000 mm.
+learn: Builders usually measure in millimetres. Write the unit next to every number.
+learn: Buy about 10% extra for offcuts and mistakes, and check your measurements twice.
+play: diff | Your measurements on the left, the order form on the right. Tap the mistakes. | Shelf 1,200 mm long; Board 90 mm wide; Screws 40 mm long; 4 brackets | Shelf 1,200 cm long; Board 90 mm wide; Screws 4 mm long; 4 brackets
+check: gap | 1,500 mm is _ m | 1.5
+check: mcq | You need 20 m² of tiles. About how much should you buy, with 10% extra? | 22 m²* | 20 m² | 30 m²
+home: Measure something twice with a grown-up, once in cm and once in mm. Do they match?
+skill: measurement
+
+@lesson 6.1 | Simple interest | 💰 | bank
+hook: You lend your sister $100 at 5% a year for 3 years. How much interest do you earn?
+learn: Simple interest is only worked out on the starting amount, called the principal.
+learn: Interest = principal × rate × time. $100 × 0.05 × 3 = $15.
+learn: Write the rate as a decimal. 5% is 0.05, and 12% is 0.12.
+play: build | Work out simple interest on $1,000 at 5% for 3 years | Write down the principal, $1,000; Write the rate as a decimal, 0.05; Write the time in years, 3; Multiply $1,000 × 0.05 to get $50 a year; Multiply $50 by 3 years to get $150
+check: gap | $500 at 4% simple interest for 2 years earns $_ | 40
+check: mcq | What's 8% as a decimal? | 0.08* | 0.8 | 8.0
+home: Work out with a grown-up how much simple interest $200 would earn at 3% for 4 years.
+skill: interest
+
+@lesson 6.2 | Months, not years | 🗓️ | bank
+hook: You borrow $2,400 at 6% a year, but only for 6 months. How much interest?
+learn: Time in the formula is in years. 6 months is 0.5 years, and 3 months is 0.25 years.
+learn: $2,400 × 0.06 × 0.5 = $72.
+learn: Or find one year's interest, then take the part you need. $144 for a year, so $72 for half a year.
+play: slider | $2,400 at 6% a year for 6 months. How much simple interest? | 0 | 200 | 72 | $ | 0 | 1
+check: gap | $1,200 at 10% a year for 3 months earns $_ | 30
+check: mcq | 9 months is how many years? | 0.75* | 0.9 | 9
+home: Find a savings rate online with a grown-up. Work out 6 months of simple interest on $1,000.
+skill: interest
+
+@lesson 6.3 | Borrowers and savers | ⚖️ | bank
+hook: Interest can be your best friend or your worst enemy. What makes the difference?
+learn: When you save, the bank pays you interest. When you borrow, you pay the lender interest.
+learn: The total to repay on a loan is the amount borrowed plus the interest.
+learn: Borrow $500 at 10% simple interest for 2 years: $100 interest, so you repay $600.
+play: sort | You pay interest, You earn interest | A car loan=You pay interest; A term deposit=You earn interest; A credit card balance you don't pay off=You pay interest; A savings account=You earn interest; A personal loan=You pay interest; Bonus interest for saving every month=You earn interest | Do you pay or earn the interest?
+check: gap | You borrow $800 at 5% simple interest for 2 years. You repay $_ in total | 880
+check: mcq | Who earns interest on a savings account? | You, the saver* | The bank only | Nobody
+home: Ask a grown-up which accounts or loans in your family earn interest and which ones pay it.
+skill: interest
+
+@lesson 6.4 | Comparing rates | 🔍 | bank
+hook: Three loans charge $60, $90 and $40 in interest. Is the $40 one the cheapest?
+learn: You can't compare interest in dollars unless the amount borrowed is the same.
+learn: Find the rate: interest ÷ amount borrowed. $90 on $1,000 for a year is 9%.
+learn: $40 on $250 is 16%. It's the smallest amount of interest, but the most expensive loan.
+play: price | Which one-year loan charges least interest per dollar borrowed? | Loan A:60:500:$ borrowed; Loan B:90:1000:$ borrowed; Loan C:40:250:$ borrowed
+check: gap | You pay $30 interest on $500 for one year. The rate is _% | 6
+check: mcq | Why compare rates, not just dollars of interest? | The amounts borrowed can be different* | Dollars don't matter | Rates are always the same
+home: Compare the interest rates on two loans or savings accounts online with a grown-up.
+skill: interest
+
+@lesson 6.5 | Interest-free? | 🎁 | stall
+hook: "No interest for 12 months!" Is that free money?
+learn: Interest-free deals can be useful if you pay it all off before the free period ends.
+learn: Afterwards, high interest rates or fees can kick in. Some deals have monthly account fees too.
+learn: Buy now, pay later services can charge late fees if you miss a payment.
+play: path | A $1,200 laptop is "interest-free for 12 months", then 25% a year. | Only buy if you can pay $100 a month and clear it in time => good: You get the laptop and pay no interest. | Pay the minimum and hope for the best => bad: Whatever's left after 12 months starts costing 25% a year. | Use it to buy a laptop and a TV you can't afford => bad: More debt, and a bigger risk of high interest later.
+check: gap | $1,200 split over 12 months is $_ a month | 100
+check: mcq | When is an interest-free deal a good idea? | When you can pay it all off in the free period* | When you can't afford the repayments | Always
+home: Find an interest-free offer in an ad with a grown-up. What happens after the free period?
+skill: borrowing
+
+@lesson 6.6 | Term deposits | 🔒 | bank
+hook: Lock away $5,000 for 6 months at 5%. What do you get back?
+learn: A term deposit locks your money away for a set time at a fixed interest rate.
+learn: Interest is often paid at the end, worked out with simple interest.
+learn: Taking the money out early can mean a lower rate or a fee, so only lock away money you won't need.
+play: match | Match each term deposit to the interest it earns | $1,000 at 4% for 1 year=$40; $5,000 at 5% for 6 months=$125; $2,000 at 3% for 2 years=$120; $10,000 at 4% for 3 months=$100
+check: gap | $4,000 at 5% for 1 year earns $_ | 200
+check: mcq | What might happen if you take money out of a term deposit early? | A lower rate or a fee* | A bonus | Nothing
+home: Look up today's term deposit rates at two banks with a grown-up.
+skill: interest
+
+@lesson 7.1 | Cells | 🟩 | workshop
+hook: A spreadsheet is a giant grid. How do you find one box in it?
+learn: Each box is called a cell. Columns have letters, and rows have numbers.
+learn: C4 is the cell in column C, row 4.
+learn: Formulas use cell names, so =B2+B3 adds whatever is in B2 and B3, even when those numbers change.
+play: mystery | I'm where column C meets row 4; I hold one value or one formula; Formulas use my name to find me | C4* | 4C | Row C
+check: mcq | In cell B7, what's the column? | B* | 7 | B7
+check: tf | A formula like =B2+B3 updates when B2 changes. | true
+home: Open a spreadsheet with a grown-up. Type numbers in A1 and A2, then =A1+A2 in A3.
+skill: spreadsheets
+
+@lesson 7.2 | Order of operations | 🧮 | workshop
+hook: Type =10+5*2 into a spreadsheet. Do you get 30 or 20?
+learn: Spreadsheets follow the order of operations: brackets first, then × and ÷, then + and −.
+learn: In formulas, * means times and / means divide.
+learn: =10+5*2 gives 20. =(10+5)*2 gives 30. Brackets change the answer.
+play: slider | What does =4+6*3 give? | 0 | 40 | 22 | | 0 | 1
+check: gap | =(2+3)*4 gives _ | 20
+check: mcq | What does =8-2*3 give? | 2* | 18 | 12
+home: Try =10+5*2 and =(10+5)*2 in a spreadsheet with a grown-up. Explain the difference.
+skill: spreadsheets
+
+@lesson 7.3 | Fill down | ⬇️ | workshop
+hook: You've got 50 rows of prices and quantities. Do you type 50 formulas?
+learn: Write the formula once, like =B2*C2, then drag it down. This is called fill down.
+learn: The cell names change as you go. In row 3 it becomes =B3*C3, in row 4 =B4*C4.
+learn: These are called relative references, because they move with the formula.
+play: diff | The left shows what fill down should give. The right was typed by hand. Tap the mistake. | =B2*C2; =B3*C3; =B4*C4; =B5*C5 | =B2*C2; =B3*C3; =B3*C4; =B5*C5
+check: mcq | You fill down =A2+B2 from row 2. What's in row 5? | =A5+B5* | =A2+B2 | =A5+B2
+check: tf | Fill down saves typing the same formula again and again. | true
+home: Make a shopping list in a spreadsheet with price and quantity columns, and fill down a total.
+skill: spreadsheets
+
+@lesson 7.4 | Locking a cell | 🔒 | workshop
+hook: You fill down a GST formula and every answer after the first one is 0. What went wrong?
+learn: Sometimes one cell should stay fixed, like a GST rate typed into B1.
+learn: Add $ signs to lock it. =A2*$B$1 keeps pointing at B1 when you fill down.
+learn: A locked cell is called an absolute reference.
+play: path | The {nz:GST rate of 15%~au:GST rate of 10%} is in B1. You type =A2*B1 in C2 and fill down. Row 3 shows 0. | Change it to =A2*$B$1, then fill down again => good: The $ signs lock B1, so every row uses the GST rate. | Type the rate into every row by hand => ok: It works, but it's slow, and changing the rate means retyping everything. | Delete the formulas and use a calculator => bad: You lose the power of the spreadsheet.
+check: mcq | What does $B$1 do in a formula? | Locks the cell when you fill down* | Adds dollars | Deletes B1
+check: tf | A relative reference moves when you fill down. | true
+home: Set up a spreadsheet with a tax rate in one cell, and lock it in your formulas.
+skill: spreadsheets
+
+@lesson 7.5 | Handy functions | 🛠️ | workshop
+hook: Which day did you spend the most? A spreadsheet can find it in a second.
+learn: Functions are built-in formulas. You type them after an = sign.
+learn: MAX finds the biggest value, MIN the smallest and COUNT how many cells hold numbers.
+learn: ROUND tidies numbers, like ROUND(B2,0) for a whole number.
+play: match | Match each function to what it does | MAX(B2:B20)=Finds the biggest number; MIN(B2:B20)=Finds the smallest number; COUNT(B2:B20)=Counts the cells with numbers; ROUND(B2,0)=Rounds B2 to a whole number; AVERAGE(B2:B20)=Finds the mean
+check: mcq | Which function finds the smallest value? | MIN* | MAX | COUNT
+check: tf | Functions are typed after an = sign. | true
+home: Use MAX and MIN on a list of temperatures or prices with a grown-up.
+skill: spreadsheets
+
+@lesson 7.6 | Sort and filter | 🔽 | workshop
+hook: Your spending sheet has 80 rows. What were your three biggest costs?
+learn: Sorting puts rows in order, like largest amount to smallest.
+learn: Filtering hides rows you don't need, so you can see one category at a time.
+learn: Select the headings too, so each row stays together.
+play: order | Find your three biggest costs this month | Select your whole table, including the headings; Choose Sort; Sort by Amount, largest to smallest; Read the top three rows; Use a filter to see one category at a time
+check: mcq | What does filtering do? | Shows only the rows you choose* | Deletes rows for ever | Adds new rows
+check: tf | You should select the headings when you sort, so rows stay together. | true
+home: Sort a list of your family's favourite songs or foods in a spreadsheet with a grown-up.
+skill: spreadsheets
+
+@lesson 8.1 | Pictures that lie | 🪙 | online
+hook: Sales doubled, so the newspaper drew a coin twice as tall. Why does it look like much more than double?
+learn: Pictograms use pictures instead of bars. When a picture is made twice as tall and twice as wide, its area grows 4 times.
+learn: Your eyes judge the area, so the change looks bigger than it really is.
+learn: Honest charts change only the length of a bar, or repeat the same-sized picture.
+play: slider | A coin picture is drawn twice as tall and twice as wide. How many times bigger does its area look? | 1 | 10 | 4 | times | 0 | 1
+check: mcq | What's the honest way to show sales doubling? | A bar twice as long* | A picture twice as tall and wide | A 3D picture
+check: tf | Making a picture twice as tall and twice as wide makes its area 4 times bigger. | true
+home: Find a chart with pictures in a newspaper or online. Is the size change fair?
+skill: data literacy
+
+@lesson 8.2 | Per person | 👥 | townhall
+hook: One council spends the most on parks. Does it really spend the most?
+learn: Big places have bigger totals, just because more people live there.
+learn: To compare fairly, divide by the number of people. That's called per person, or per capita.
+learn: A council spending $5 million for 100,000 people spends $50 per person.
+play: price | Which council spends the least on parks per person? | Council A:3000000:50000:people; Council B:1200000:15000:people; Council C:5000000:100000:people
+check: gap | $2,000,000 for 40,000 people is $_ per person | 50
+check: mcq | Why compare per person? | Bigger places have bigger totals anyway* | It makes the numbers bigger | It's more fun
+home: Find a news story comparing countries. Does it use totals or per person numbers?
+skill: data literacy
+
+@lesson 8.3 | Totals that only go up | 📈 | online
+hook: A company's chart shows its sales "always rising". But sales are falling. How?
+learn: A cumulative chart adds each month onto all the months before it.
+learn: A running total can only go up or stay flat, even when each month's sales are shrinking.
+learn: Ask to see each month on its own.
+play: path | An app's chart of "total downloads ever" keeps rising, and the app says it's booming. | Ask to see downloads for each month on their own => good: A running total always rises. The monthly numbers show the real trend. | Believe it's booming, because the line goes up => bad: A cumulative line rises even when downloads are slowing. | Ignore all charts for ever => ok: Charts are useful. You just need to know what they show.
+check: mcq | What's a cumulative chart? | A running total that adds up over time* | A chart of each month on its own | A pie chart
+check: tf | A cumulative chart can rise even when each month is getting worse. | true
+home: Keep a running total of something for a week with a grown-up, then chart each day separately too.
+skill: data literacy
+
+@lesson 8.4 | Two axes | ↔️ | online
+hook: A chart shows ice cream sales and shark sightings moving together. Is it the ice cream?
+learn: Some charts have two different scales, one on each side.
+learn: By stretching each scale, almost any two lines can be made to look like they move together.
+learn: Check both scales, and remember that moving together doesn't prove one causes the other.
+play: mystery | It has a different scale on each side; It can make two lines look linked; You should always check both sides' numbers | A dual-axis chart* | A pie chart | A pictogram
+check: mcq | What should you check on a chart with two scales? | Both scales' numbers* | Only the colours | Only the title
+check: tf | Two lines moving together proves one causes the other. | false | Moving together isn't proof of cause.
+home: Find a chart with two scales online with a grown-up. Do the lines really match?
+skill: data literacy
+
+@lesson 8.5 | Pies that don't add up | 🥧 | online
+hook: A pie chart says 50% chose pizza, 40% chose tacos and 30% chose sushi. What's wrong?
+learn: A pie chart shows parts of one whole, so the slices must add up to 100%.
+learn: If they add up to more, people may have picked more than one answer. Then a pie chart is the wrong chart.
+learn: Small rounding, like 33%, 33% and 33%, is OK. Big gaps are a warning sign.
+play: sort | Adds to 100%, Doesn't add up | 45%, 35% and 20%=Adds to 100%; 50%, 40% and 30%=Doesn't add up; 60%, 25% and 15%=Adds to 100%; 70%, 20% and 20%=Doesn't add up; 25%, 25% and 50%=Adds to 100%; 10%, 80% and 20%=Doesn't add up | Does the pie add up?
+check: gap | A pie has slices of 40% and 35%. The last slice should be _% | 25
+check: mcq | A survey let people pick more than one answer. Which chart fits better? | A bar chart* | A pie chart | No chart at all
+home: Find a pie chart with a grown-up and add up its slices.
+skill: data literacy
+
+@lesson 8.6 | Your chart checklist | ✅ | online
+hook: You see a scary chart shared online. What do you check before you believe it?
+learn: Read the title and the labels, and check where the axis starts.
+learn: Check the units, the time period and whether it's totals or per person.
+learn: Look for the source, and ask what might be missing.
+play: build | Check a chart before you believe it | Read the title and labels; Check where the axis starts; Check the units and if it's per person; Check the time period shown; Find the source; Ask what might be missing
+check: mcq | What should every trustworthy chart have? | A source* | Lots of colours | A 3D effect
+check: tf | Checking the time period can change what a chart means. | true
+home: Use the checklist on a chart in the news with a grown-up.
+skill: data literacy
+
 @band launchers
 @unit 1 | Loan maths | Interest, repayments and total cost
 @unit 2 | Compound growth | The formula behind the snowball
@@ -1193,3 +1995,268 @@ check: mcq | When does the tax year end? | {nz:31 March~au:30 June}* | 31 Decemb
 check: tf | Keeping records helps make sure your tax is right. | true
 home: Ask a grown-up when they last got a tax refund or bill, and why.
 skill: tax
+
+@lesson 5.1 | Measuring inflation | 🧺 | stall
+hook: Bread went up and petrol went down. So did prices rise overall?
+learn: The {nz:Consumers Price Index~au:Consumer Price Index}, or CPI, tracks the prices of a big basket of things households buy.
+learn: Each item is weighted by how much households spend on it, so rent counts for far more than matches.
+learn: {nz:Stats NZ~au:The ABS} publishes the CPI. The inflation rate is usually the percent change from a year earlier.
+play: order | How the CPI is worked out | Choose a basket of things households buy; Weight each item by how much households spend on it; Check prices across the country; Combine them into one index number; Compare with a year earlier to get the inflation rate
+check: mcq | Why does rent count for more than matches in the CPI? | Households spend much more on rent* | Rent is newer | Matches are free
+check: gap | The CPI goes from 100 to 103 in a year. Inflation is _% | 3
+home: Pick five things your family buys every week. Ask a grown-up how their prices have changed.
+skill: inflation
+
+@lesson 5.2 | Real returns | 📉 | bank
+hook: Your savings earn 4%. Inflation is 3%. Are you really 4% better off?
+learn: The nominal rate is the number the bank shows you.
+learn: The real return is roughly the nominal rate minus inflation. 4% − 3% is about 1%.
+learn: If inflation beats your interest rate, your money buys less each year, even as the balance grows.
+play: match | Match each account to its rough real return | Earns 5%, inflation 2%=About +3%; Earns 3%, inflation 3%=About 0%; Earns 1%, inflation 4%=About −3%; Earns 6%, inflation 2.5%=About +3.5%
+check: gap | Your account pays 4.5% and inflation is 2%. Your real return is about _% | 2.5
+check: mcq | Your balance grew, but prices rose faster. What happened to your buying power? | It fell* | It rose | It stayed the same
+home: Find a savings account's interest rate with a grown-up and work out its real return.
+skill: inflation
+
+@lesson 5.3 | Pay rises and real wages | 💼 | workshop
+hook: Your boss offers a 2% pay rise. Prices rose 4% this year. Is it really a rise?
+learn: Your real wage is what your pay can actually buy.
+learn: If pay rises 2% and prices rise 4%, your real wage falls by about 2%.
+learn: That's why pay talks often mention the cost of living, and why minimum wages are reviewed every year.
+play: path | Inflation was 4% last year. Your boss offers you a 1% pay rise. | Politely ask for a review, pointing to inflation and the new skills you bring => good: You're asking with evidence, and it's a fair conversation. | Accept it and never mention it => ok: That's your choice, but your pay now buys less than last year. | Quit on the spot in anger => bad: You lose your income, and burning bridges can hurt you later.
+check: gap | Pay rises 3% and prices rise 5%. Your real wage falls by about _% | 2
+check: mcq | What's a real wage? | What your pay can actually buy* | Your pay before tax | Your pay in cash only
+home: Ask a grown-up how they would ask for a pay rise, and what evidence they'd use.
+skill: inflation
+
+@lesson 5.4 | Shrinkflation | 🍫 | stall
+hook: Your favourite chocolate is the same price, but the block seems smaller. Is that inflation?
+learn: Shrinkflation is when a pack gets smaller but the price stays the same.
+learn: Check the unit price. $5 for 500 g is $1 per 100 g. $5 for 450 g is about $1.11 per 100 g.
+learn: That's an 11% price rise per gram, even though the sticker didn't change.
+play: slider | A $4 box of cereal shrinks from 500 g to 400 g. By what percent did the price per gram rise? | 0 | 50 | 25 | % | 2 | 1
+check: mcq | What's the best way to spot shrinkflation? | Compare the unit price* | Look at the box colour | Check the advert
+check: tf | Shrinkflation can raise the real price without changing the sticker. | true
+home: Check the weight on a packet at home, then find the same product at the shop. Has it shrunk?
+skill: inflation
+
+@lesson 5.5 | Why prices rise | 🔥 | bank
+hook: Why does the Reserve Bank raise interest rates when prices rise fast?
+learn: Prices rise when people want to buy more than businesses can supply, or when costs like fuel and wages go up.
+learn: {nz:The Reserve Bank sets the Official Cash Rate. It aims to keep inflation between 1% and 3%.~au:The Reserve Bank sets the cash rate. It aims to keep inflation between 2% and 3%.}
+learn: Higher rates make borrowing cost more, so people spend less, which slows price rises.
+play: sort | Pushes inflation up, Pulls inflation down | Fuel prices jump=Pushes inflation up; The Reserve Bank raises interest rates=Pulls inflation down; Everyone rushes to spend at once=Pushes inflation up; People save more and spend less=Pulls inflation down; A drought makes food scarce=Pushes inflation up; Imported goods get cheaper=Pulls inflation down | Up or down?
+check: mcq | What does a higher cash rate usually do? | Slows spending and price rises* | Makes everything cheaper overnight | Nothing
+check: tf | {nz:The Reserve Bank of New Zealand aims for inflation between 1% and 3%.~au:The Reserve Bank of Australia aims for inflation between 2% and 3%.} | true
+home: Find the latest inflation rate on {nz:the Stats NZ~au:the ABS} website with a grown-up.
+skill: inflation
+
+@lesson 5.6 | Protect your savings | 🛡️ | shares
+hook: $10,000 kept under the mattress for 20 years. What happens to it?
+learn: At 3% inflation, after 20 years $10,000 buys only about what $5,500 buys today.
+learn: Long-term money can go into growth investments, like share funds, which have usually beaten inflation over long periods, with ups and downs.
+learn: Money you'll need soon, like an emergency fund, still belongs in cash. Just know inflation nibbles at it.
+play: debate | Should you keep all your savings in cash to be safe? | Keep emergency money in cash, and invest long-term money where it can grow faster than inflation* | Yes, cash is always the safest choice | Cash doesn't drop in a share market crash, which matters for money you need soon. It depends on when you need it.
+check: mcq | What does inflation do to cash under a mattress? | Slowly shrinks what it can buy* | Makes it grow | Nothing at all
+check: gap | $1,000 loses 3% of its buying power. It now buys about what $_ buys today | 970
+home: Ask a grown-up which of their savings are for soon and which are for the long term.
+skill: inflation
+
+@lesson 6.1 | Expected return | 🎯 | shares
+hook: An investment has a 50% chance of gaining 20% and a 50% chance of losing 10%. What do you expect?
+learn: Expected value is each outcome times its chance, all added up.
+learn: 0.5 × 20% + 0.5 × −10% = 10% − 5% = 5%.
+learn: That's the average over many tries. Any single try could land on either outcome.
+try: 0.5 × $100 + 0.5 × $0 = $50 :: gap | 0.5 × $60 + 0.5 × $20 = $_ | 40
+play: slider | A 25% chance of winning $200, and a 75% chance of $0. What's the expected value? | 0 | 200 | 50 | $ | 0 | 5
+check: gap | 0.8 × $10 + 0.2 × $50 = $_ | 18
+check: mcq | What does expected value tell you? | The average result over many tries* | Exactly what will happen next time | The best possible result
+home: Work out the expected value of a simple game, like a coin toss for points, with a grown-up.
+skill: expected value
+
+@lesson 6.2 | Same average, different ride | 🎢 | shares
+hook: Option A always pays $10. Option B pays $0 or $20, 50/50. Same expected value. Same choice?
+learn: Variance measures how spread out the possible results are. Bigger spread means more risk.
+learn: Standard deviation is the square root of variance: roughly the typical distance from the average.
+learn: Two options can have the same expected value but very different risk.
+play: debate | A and B both expect $10. A is certain. B is $0 or $20, 50/50. Which is better? | It depends whether you can afford the bad result. For money you need, choose certainty* | B, because risk is always better | Over many tries, B averages the same, and some people enjoy the chance. One try is very different from many.
+check: mcq | What does a bigger spread of results mean? | More risk* | Less risk | A higher average
+check: tf | Two options can have the same expected value but different risk. | true
+home: Talk with a grown-up about a choice they made between a sure thing and a gamble.
+skill: risk
+
+@lesson 6.3 | No free lunch | 🍽️ | shares
+hook: "Guaranteed 30% a year with no risk!" What's the catch?
+learn: Higher expected returns usually come with more risk. Lower-risk options usually pay less.
+learn: Bank deposits are low risk and low return. Share funds have higher expected returns but bigger swings.
+learn: A promise of high returns with no risk is a classic scam warning sign.
+play: scam | Real investment or scam? | A bank term deposit paying a fixed rate in line with other banks=real; Guaranteed 30% a year, zero risk, limited spots!=scam; A diversified share fund that warns its value can fall=real; Double your money in a month with our crypto robot=scam; A friend of a friend's secret scheme that pays you for signing others up=scam | Higher returns come with higher risk. "Guaranteed" high returns are a red flag.
+check: mcq | What usually comes with higher expected returns? | More risk* | No risk | A guarantee
+check: tf | A promise of high returns with no risk is a warning sign. | true
+home: Read {nz:the FMA's~au:Moneysmart's} scam warnings with a grown-up.
+skill: risk
+
+@lesson 6.4 | Time changes risk | ⏳ | shares
+hook: Shares can fall 30% in a year. So why do retirement funds hold so many of them?
+learn: Over one year, share prices can swing wildly up or down.
+learn: Over 10 to 20 years, the swings have tended to even out, though nothing is guaranteed.
+learn: Money you need within a few years is safer in low-risk options. Long-term money can take more risk.
+play: market | Ride a share fund for 20 years. Watch the swings even out over time | 20
+check: mcq | You need $5,000 for a course in one year. Where's it safest? | A bank deposit* | A single company's shares | A crypto coin
+check: tf | Share prices can swing a lot over one year. | true
+home: Ask a grown-up how their {nz:KiwiSaver~au:super} fund changed over one bad year, and over ten years.
+skill: risk
+
+@lesson 6.5 | Don't put all your eggs in one basket | 🧺 | shares
+hook: All your money in one company, or a little in 500? Which is riskier?
+learn: Diversification means spreading money across many investments.
+learn: If one company fails, it's a small part of your money. That cuts the spread of results.
+learn: Diversifying lowers risk without lowering the expected return much, which is why index funds are popular.
+play: sort | Diversified, Concentrated | A fund holding 500 companies=Diversified; All your savings in one friend's start-up=Concentrated; A mix of shares, bonds and cash=Diversified; Every dollar in one crypto coin=Concentrated; A fund spread across many countries=Diversified; All your money in the company you work for=Concentrated | Diversified or concentrated?
+check: mcq | What does diversification do? | Cuts risk by spreading your money* | Guarantees you'll never lose | Doubles your returns
+check: tf | Index funds spread money across many companies. | true
+home: Look up how many companies are in an index fund with a grown-up.
+skill: diversification
+
+@lesson 6.6 | Insurance maths | ☂️ | home
+hook: Insurance companies make a profit, so on average you pay more than you get back. Why buy it?
+learn: For you, insurance usually has a negative expected value. You pay more in premiums than you claim, on average.
+learn: But it cuts your risk. It swaps a small, certain cost for protection from a huge loss.
+learn: Insure big losses you couldn't afford, like your car or home. Skip insuring small things you could replace.
+play: path | You've bought a $40 phone case and a $1,200 laptop for uni. | Insure the laptop, and skip insurance for the phone case => good: You protect the loss you couldn't afford, and save on the small one. | Insure both, plus your socks => bad: Insuring cheap things costs more than it saves, on average. | Insure nothing, because the expected value is negative => ok: True on average, but losing the laptop could really hurt you.
+check: mcq | What's insurance best for? | Big losses you couldn't afford* | Things you could easily replace | Making a profit
+check: tf | On average, insurance customers pay more in premiums than they get back. | true
+home: Ask a grown-up what insurance your family has, and what big loss each one protects against.
+skill: insurance
+
+@lesson 7.1 | Total cost of ownership | 📱 | home
+hook: A $1,500 phone. Is that what it really costs you?
+learn: Total cost of ownership is the price, plus running costs and extras, minus what you get back when you sell it.
+learn: $1,500 phone + $1,260 plan over 3 years + $80 case − $300 trade-in = $2,540.
+learn: That's about $70 a month. Comparing monthly costs makes choices clearer.
+play: match | Match each cost to its type | $1,500 to buy the phone=Purchase price; $35 a month for 36 months=Running costs; $80 case and screen protector=Extras; $300 trade-in after 3 years=Resale value, taken off
+check: gap | $1,000 phone + $900 plan + $50 case − $200 trade-in = $_ | 1750
+check: mcq | What's total cost of ownership? | Everything it costs, minus what you get back* | Just the sticker price | Only the monthly plan
+home: Work out with a grown-up the total cost of a phone or laptop someone in your family owns.
+skill: big purchases
+
+@lesson 7.2 | Depreciation | 📉 | home
+hook: You buy a new car for $20,000. Two years later, what's it worth?
+learn: Depreciation is how much something loses in value over time.
+learn: Cars often lose a big part of their value in the first few years.
+learn: At 15% a year, a $20,000 car is worth $17,000 after one year, then 15% less again the next year.
+play: slider | A $20,000 car loses 15% of its value each year. About what's it worth after 2 years? | 10000 | 20000 | 14450 | $ | 300 | 50
+check: gap | A $10,000 car loses 20% in a year. It's now worth $_ | 8000
+check: mcq | When do cars usually lose value fastest? | In the first few years* | After 20 years | Never
+home: Look up the price of the same car model, new and 3 years old, with a grown-up.
+skill: depreciation
+
+@lesson 7.3 | Plan or outright? | 📶 | online
+hook: A phone on a $60 plan, or buy it and get a cheap plan. Which costs less?
+learn: Phones on a plan spread the cost of the phone into your monthly bill.
+learn: Compare the total over the same time, like 36 months.
+learn: Buying outright plus a $25 SIM-only plan: $1,200 + $900 = $2,100. A $60 plan with the phone: $2,160.
+play: price | Over 36 months, which way of getting the phone costs least per month? | Phone on a $60 plan:2160:36:months; Buy the $1,200 phone, then a $25 plan:2100:36:months; Phone paid monthly with a $5 fee, plus a $25 plan:2280:36:months
+check: gap | A $50 plan for 24 months costs $_ in total | 1200
+check: mcq | How should you compare phone deals? | Total cost over the same length of time* | Just the monthly price | The colour of the phone
+home: Compare two phone deals with a grown-up over 24 or 36 months.
+skill: big purchases
+
+@lesson 7.4 | "Only $79 a week!" | 🚗 | stall
+hook: A dealer says a $15,000 car is "only $79 a week". What's the catch?
+learn: Weekly prices sound small. Times them by the number of weeks to see the real total.
+learn: $79 a week for 5 years is $79 × 260 weeks = $20,540. That's $5,540 more than the price.
+learn: Some loans have a big "balloon" payment at the end. Read the total amount payable.
+play: path | The dealer says "Only $79 a week for 5 years!" for a $15,000 car. | Work out the total, compare it with a bank loan and saving up first => good: $20,540 is a lot more than $15,000. Now you can compare properly. | Sign today, because $79 sounds cheap => bad: You'll pay $5,540 extra, maybe more with fees. | Ask if there's a balloon payment at the end => good: Smart. Balloon payments can hide thousands of dollars.
+check: gap | $50 a week for 104 weeks is $_ | 5200
+check: mcq | What should you look for in a car loan contract? | The total amount payable* | The colour of the paper | Only the weekly amount
+home: Find a "per week" price in a car ad with a grown-up and work out the total.
+skill: borrowing
+
+@lesson 7.5 | Running costs | ⛽ | home
+hook: You drive 10,000 km a year. How much will fuel cost?
+learn: Fuel use is measured in litres per 100 km. A car using 8 L per 100 km uses 800 L over 10,000 km.
+learn: At $2.50 a litre, that's $2,000 a year. An electric car using 15 kWh per 100 km at 30c a kWh is $450 a year at home rates.
+learn: {nz:In NZ, electric cars pay road user charges per kilometre too, so add those in.~au:Add rego, insurance, tyres and servicing, whatever you drive.}
+play: slider | 12,000 km a year at 6 L per 100 km, with fuel at $2.50 a litre. What's the yearly fuel cost? | 0 | 4000 | 1800 | $ | 100 | 50
+check: gap | A car uses 5 L per 100 km. Over 1,000 km it uses _ litres | 50
+check: mcq | What does "8 L per 100 km" mean? | The car uses 8 litres of fuel every 100 km* | It goes 8 km on 100 litres | It holds 8 litres
+home: Find a car's fuel use with a grown-up and work out its yearly fuel cost.
+skill: big purchases
+
+@lesson 7.6 | Buying a used car | 🔧 | home
+hook: A cheap used car looks great online. How do you avoid buying a lemon?
+learn: Set a budget that includes running costs, not just the price.
+learn: Check the PPSR to see if money is still owed on the car. If it is, it could be taken back.
+learn: Get a mechanic's inspection and a test drive before you pay. Never pay a deposit for a car you haven't seen.
+play: build | Buy a used car the smart way | Set a budget, including running costs; Research reliable models; Check the PPSR for money owed; Get a mechanic's inspection; Take a test drive; Negotiate, then pay safely
+check: mcq | What does a PPSR check show? | Whether money is still owed on the car* | The car's colour | Who the first owner's friends are
+check: tf | You should pay a deposit on a car you haven't seen. | false | Never pay for a car before you've seen and checked it.
+home: Look at a used car ad with a grown-up. What questions would you ask the seller?
+skill: big purchases
+
+@lesson 8.1 | Margin of error | 🗳️ | townhall
+hook: A poll says Party A has 34% and Party B has 32%. Is Party A winning?
+learn: Polls ask a sample, not everyone, so results have a margin of error.
+learn: A poll of about 1,000 people has a margin of error of about plus or minus 3 percentage points.
+learn: 34% could really be anywhere from about 31% to 37%. A 2-point gap is too close to call.
+play: path | A poll shows Party A on 34% and Party B on 32%, with a margin of error of 3 points. The headline says "A surges ahead!" | Say it's too close to call, because the gap is inside the margin of error => good: The real numbers could easily be the other way round. | Believe A is clearly winning => bad: A 2-point gap is smaller than the margin of error. | Ignore all polls for ever => ok: Polls are useful, especially trends across many polls. Just read them carefully.
+check: gap | A party polls 40%, with a margin of error of 3 points. The lowest likely value is _% | 37
+check: mcq | What does a bigger sample usually do? | Shrinks the margin of error* | Makes it bigger | Nothing
+home: Find a recent poll in the news with a grown-up. Does it give a margin of error?
+skill: statistics
+
+@lesson 8.2 | Significant or just luck? | 🎲 | townhall
+hook: A study finds a new study method raises scores by 1%. Is that real or just luck?
+learn: Researchers ask: how likely is a result this big if there was really no effect? That's what a p-value measures.
+learn: A p-value under 0.05 is often called "statistically significant". It means the result would be unlikely if it were just luck.
+learn: Significant doesn't mean important. A huge study can find a tiny effect that's real but doesn't matter much.
+play: match | Match each result to what it tells you | A p-value of 0.01=Unlikely to be just luck; A p-value of 0.40=Could easily be luck; A huge sample and a tiny difference=Real, but may not matter much; A sample of 12 people=Results can swing a lot by chance
+check: mcq | What does "statistically significant" mean? | The result would be unlikely if it were just luck* | The result is important | The study was big
+check: tf | A statistically significant result is always important. | false | A real effect can still be tiny.
+home: Look for the words "statistically significant" in a news story with a grown-up. What was the actual size of the effect?
+skill: statistics
+
+@lesson 8.3 | Strength of evidence | 🔬 | museum
+hook: A friend swears a supplement cured their cold. How strong is that evidence?
+learn: Some kinds of evidence are much stronger than others.
+learn: A randomised controlled trial puts people into groups by chance, so it can show cause and effect.
+learn: A systematic review combines many good studies, so it's stronger still. One person's story is the weakest.
+play: build | Order the evidence from strongest to weakest | A systematic review of many trials; One large randomised controlled trial; A large observational study; A single case report; A friend's story
+check: mcq | Why are randomised trials strong? | People are put into groups by chance, so they can show cause* | They're always small | They use opinions
+check: tf | One person's story is strong scientific evidence. | false | Stories can start questions, but they can't prove cause.
+home: Find a health claim in an ad with a grown-up. What kind of evidence does it give?
+skill: evidence
+
+@lesson 8.4 | Base rates | 🧪 | museum
+hook: A test is 99% accurate. You test positive for a rare disease. How likely is it that you have it?
+learn: The base rate is how common something is to begin with.
+learn: Say 1 in 1,000 people has the disease, and the test wrongly says "positive" for 1% of healthy people.
+learn: Out of 1,000 people, about 1 sick person and about 10 healthy people test positive. So only about 1 in 11 positives is real.
+play: slider | Using the numbers above, about what percent of positive tests are real? | 0 | 100 | 9 | % | 3 | 1
+check: mcq | Why do rare conditions cause many false positives? | Healthy people far outnumber sick people* | Tests never work | Sick people don't get tested
+check: tf | A very accurate test can still give many false positives for something rare. | true
+home: Talk with a grown-up about why doctors often run a second test.
+skill: probability
+
+@lesson 8.5 | Survivorship bias | ✈️ | museum
+hook: Several billionaires dropped out of university. Should you drop out too?
+learn: Survivorship bias is looking only at the winners, and forgetting everyone who didn't make it.
+learn: In World War II, engineers studied bullet holes on planes that came back. The statistician Abraham Wald said to armour the places with no holes. Planes hit there didn't make it home.
+learn: We hear about the dropouts who got rich, not the many who didn't.
+play: debate | Several billionaires dropped out of university. Is dropping out a smart plan? | No. We only hear about the few who succeeded, not the many who didn't* | Yes. It worked for them, so it'll work for you | For a few people with a business that's already growing fast, pausing study can make sense. That's very different from dropping out to get rich.
+check: mcq | What's survivorship bias? | Only looking at the winners* | Surviving a test | Being biased against winners
+check: tf | Abraham Wald suggested armouring the parts of planes that came back without bullet holes. | true
+home: Think of a "success story" ad with a grown-up. Who might be missing from the story?
+skill: statistics
+
+@lesson 8.6 | Headlines and hype | 📰 | online
+hook: "Chocolate cures cancer!" says the headline. What does the study actually say?
+learn: Headlines often hype research. Check the sample size, who was studied and who paid for it.
+learn: Studies on mice or cells don't always work the same way in people.
+learn: Look for the absolute risk. "Doubles your risk" might mean going from 1 in 100,000 to 2 in 100,000.
+play: scam | Solid research or hype? | Chocolate cures cancer, says a study of 8 mice=scam; A review of 50 studies finds regular exercise lowers heart disease risk=real; Miracle pill melts fat, says the company that sells it=scam; A study of 2 million drivers links phone use to more crashes=real; Coffee DOUBLES your risk, from 1 in 100,000 to 2 in 100,000=scam | Hype uses tiny samples, sellers' own claims and scary relative risks. Solid research is large, independent and clear about the real size of the risk.
+check: mcq | What should you check first in a health headline? | Who was studied and how many* | The font | How many people shared it
+check: tf | A study on mice always works the same way in people. | false | Results in animals often don't carry over to people.
+home: Pick a science headline with a grown-up and find the original study. Does it match the headline?
+skill: data literacy

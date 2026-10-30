@@ -289,3 +289,272 @@ check: tf | You should check your poster from far away. | true
 home: Make a poster for a pretend or real stall, and stick it on the fridge.
 skill: marketing
 
+@lesson 5.1 | The float | 🪙 | stall
+hook: Your first customer pays with a $5 note for a $2 cookie. Do you have change?
+learn: A float is a little bit of money you put in the cash box before you start.
+learn: It's for giving change. $1 and $2 coins are the most useful.
+learn: Write down how much float you started with, so you can take it out later.
+try: Five $1 coins and two $2 coins make $5 + $4 = $9 :: gap | Four $1 coins and three $2 coins make $_ | 10
+play: tap | Tap the things that help you give change | 🪙:yes:$1 and $2 coins; 💵:yes:A few $5 notes; 📝:yes:A note of how much float you started with; 🧸:no; 🍭:no; 🧮:yes:Something to help you add up
+check: mcq | What is a float for? | Giving change* | Buying lollies | Spending at the shop
+check: tf | You should write down how much float you started with. | true
+home: Make a pretend float with a grown-up, using coins from a money box.
+skill: cash
+
+@lesson 5.2 | Counting coins | 🧮 | bank
+hook: Your cash box is full of jumbled coins. What's the fastest way to count them?
+learn: Sort the coins into piles of the same kind first.
+learn: Make piles that add up to $1. Five 20c coins make $1.
+learn: Count the notes, then the piles of coins, then add them together.
+try: Two 50c coins make $1 :: gap | Ten 10c coins make $_ | 1
+play: gen | add | 4
+check: mcq | How many 20c coins make $1? | 5* | 2 | 10
+check: gap | Four $2 coins make $_ | 8
+home: Sort a handful of coins into piles with a grown-up, then count them.
+skill: counting money
+
+@lesson 5.3 | Money in | 📥 | stall
+hook: You sold lots of cupcakes today. How do you know how many?
+learn: Money in is all the money customers give you.
+learn: Make a tally mark each time you sell one. Four lines, then one across makes five.
+learn: At the end, count your tally marks. 6 cupcakes at $1 each is $6.
+try: 5 cupcakes at $1 each is $5 :: gap | 7 cupcakes at $1 each is $_ | 7
+play: order | Keep track of money in at your stall | A customer chooses a cupcake; They pay you; You give any change; You put the money in the cash box; You make a tally mark
+check: mcq | What does a tally mark help you count? | How many you sold* | How many clouds there are | How old you are
+check: gap | You sold 4 cookies at $2 each. Money in is $_ | 8
+home: Use tally marks with a grown-up to count something, like cars going past.
+skill: money in
+
+@lesson 5.4 | Money out | 📤 | stall
+hook: You bought cups and lemons before you opened. Where does that go in your counting?
+learn: Money out is money you spend to run your stall.
+learn: Cups, ingredients and a stall fee are all money out.
+learn: Keep the receipts, so you remember what you spent.
+play: sort | Money in, Money out | A customer buys lemonade=Money in; Buying a bag of lemons=Money out; Paying for paper cups=Money out; A tip in the jar=Money in; Buying a new pen for your sign=Money out; Selling the last cookie=Money in | Is it money in or money out?
+check: mcq | Buying lemons for your stall is… | Money out* | Money in | Free
+check: tf | Keeping receipts helps you remember what you spent. | true
+home: Ask a grown-up for a shopping receipt. Find the total money out.
+skill: money out
+
+@lesson 5.5 | End of the day | 🌇 | stall
+hook: There's $25 in your cash box. Did you make $25?
+learn: First take out the float. That money was in the box before you sold anything.
+learn: What's left is the money from your sales.
+learn: Then take away your money out. What's left is your profit.
+try: $25 in the box take away a $10 float is $15 of sales :: gap | $30 in the box take away a $10 float is $_ of sales | 20
+play: build | Count up at the end of the day | Count all the money in the cash box; Take out the float you started with; What's left is your sales; Take away what you spent; What's left is your profit
+check: gap | $18 in the box take away an $8 float is $_ of sales | 10
+check: mcq | What do you take out first at the end of the day? | The float* | The profit | The lemons
+home: Play stall at home with a float, then count up at the end with a grown-up.
+skill: profit
+
+@lesson 5.6 | Keep it safe | 🔒 | stall
+hook: You need to run inside for a minute. What about the cash box?
+learn: Never leave your cash box alone. Ask a grown-up to watch it.
+learn: Keep it behind the table, not at the front where people can grab it.
+learn: Count the money out of sight, with a grown-up.
+play: path | You're running your stall and need the toilet. | Ask your grown-up to mind the cash box => good: Your money stays safe while you're gone. | Leave the cash box on the table => bad: Someone could take it while you're away. | Put a sign on it saying "Please don't take" => bad: A sign won't stop someone grabbing it.
+check: mcq | Where should the cash box go? | Behind the table, near you* | At the front, by the footpath | On the road
+check: tf | It's a good idea to count your money with a grown-up. | true
+home: Choose a safe spot for a cash box at a pretend stall with a grown-up.
+skill: cash
+
+@lesson 6.1 | Better together | 👫 | stall
+hook: Baking, selling and giving change all at once is hard. What if a friend helps?
+learn: When friends sell together, each person can do a different job.
+learn: One friend can make things, one can talk to customers and one can mind the cash box.
+learn: Working together means you can do more than you could alone.
+play: match | Match each stall job to what that friend does | Maker=Bakes the cookies; Seller=Talks to customers; Cash keeper=Gives the right change; Sign maker=Draws the poster
+check: mcq | Why is selling with friends helpful? | Everyone can do a different job* | Nobody has to do anything | You make less
+check: tf | One friend can mind the cash box while another serves customers. | true
+home: Plan a pretend stall with a friend or family member. Who would do each job?
+skill: teamwork
+
+@lesson 6.2 | Fair jobs | 🔄 | stall
+hook: Your friend always gets to serve customers, and you always clean up. Is that fair?
+learn: Some jobs are fun and some are boring. Fair teams share both.
+learn: You can take turns, like swapping jobs every half hour.
+learn: If something feels unfair, say so kindly and suggest a fix.
+play: path | Your friend wants to be the seller all day, and you have to wash up. | Kindly suggest swapping jobs halfway through => good: You both get a turn at the fun job and the boring job. | Quit and go home => bad: The stall can't run, and your friend is left alone. | Do the washing up badly on purpose => bad: That hurts the stall and doesn't fix the problem.
+check: mcq | What's a fair way to share jobs? | Take turns* | One person does all the boring jobs | Nobody does any jobs
+check: tf | It's OK to kindly say when something feels unfair. | true
+home: Make a job roster for chores at home with your family, so everyone takes turns.
+skill: teamwork
+
+@lesson 6.3 | Splitting the money | 💰 | bank
+hook: You and a friend made $12. How do you share it fairly?
+learn: Splitting equally means everyone gets the same amount.
+learn: $12 shared by 2 friends is $6 each. $12 shared by 3 friends is $4 each.
+learn: Count it out together, one coin or note at a time, so everyone can see.
+try: $10 shared by 2 friends is $5 each :: gap | $8 shared by 2 friends is $_ each | 4
+play: slider | 4 friends made $20 profit. How much does each friend get if they split it equally? | 0 | 20 | 5 | $ | 0 | 1
+check: gap | $9 shared by 3 friends is $_ each | 3
+check: mcq | What does splitting equally mean? | Everyone gets the same* | The oldest gets most | Whoever counts it keeps it
+home: Share 12 counters or buttons equally between 2, then 3, then 4 people.
+skill: sharing
+
+@lesson 6.4 | Paying back costs | 🧾 | stall
+hook: Your friend spent $4 on cups for your stall. Should that come out before you split the money?
+learn: If someone paid for things the stall needed, pay them back first.
+learn: Then split the profit that's left.
+learn: Keep the receipt, so everyone knows what was spent.
+play: order | Share out the money at the end of the stall | Count all the money; Take out the float; Pay back anyone who bought things for the stall; Split what's left; Say thanks to your team
+check: mcq | Your friend bought $4 of cups. What do you do first? | Pay them back $4* | Forget about it | Give them nothing
+check: gap | You made $14. Your friend spent $4 on cups. After paying them back, $_ is left to split | 10
+home: Practise paying back costs and splitting money with play money and a grown-up.
+skill: sharing
+
+@lesson 6.5 | When friends disagree | 🤝 | stall
+hook: You want to sell slime, but your friend wants to sell cookies. Uh-oh.
+learn: Friends don't always agree, and that's OK.
+learn: Take turns to talk, and really listen to each other.
+learn: Look for an answer you both like. If you're stuck, ask a grown-up to help.
+play: chat | Your friend wants to change the stall plan | them: I don't want to sell slime. Cookies are better! | me: OK, tell me why you like cookies.*/No! Slime is best!/Fine, I'm going home. | them: Everyone at school loves cookies, and they're quick to make. | me: Good point. What if we sell cookies and a few slimes, and see what sells best?*/You always get your way./Cookies are boring. | them: Yes! Let's try that.
+check: mcq | What should you do when you and a friend disagree? | Listen and look for an answer you both like* | Shout louder | Stop being friends
+check: tf | You can ask a grown-up to help when you're stuck. | true
+home: Next time you disagree with someone at home, try taking turns to talk and listen.
+skill: teamwork
+
+@lesson 6.6 | Agree before you start | 📝 | stall
+hook: What's the best time to decide how to share the money: before the stall, or after?
+learn: Decide the important things before you start, while everyone is happy.
+learn: Agree who does each job, who pays for what and how you'll split the money.
+learn: Write it down and keep it with your cash box.
+play: tap | Tap the things to agree on before you start | 🧑‍🍳:yes:Who does each job; 💵:yes:How you'll split the money; 🛒:yes:Who buys the things you need; ⏰:yes:When you'll open and close; 🦖:no; 🎂:no
+check: mcq | When should you agree how to split the money? | Before you start* | After you've spent it | Never
+check: tf | Writing your plan down helps everyone remember it. | true
+home: Write a little stall agreement with a friend or family member.
+skill: teamwork
+
+@lesson 7.1 | Rainy day | 🌧️ | stall
+hook: It's stall day, and it starts to rain. Is it all over?
+learn: Things don't always go to plan, so it helps to have a Plan B.
+learn: You could move under cover, use a gazebo or pick another day.
+learn: Keep your food and money dry, and stay safe.
+play: tap | Tap the things that help when it rains on stall day | ☂️:yes:A big umbrella or gazebo; 🏠:yes:Moving under cover; 📅:yes:Choosing another day; 🧥:yes:A raincoat for you; 🏖️:no; 🪁:no
+check: mcq | What's a Plan B? | A backup plan if things go wrong* | The best plan | A plan for bees
+check: tf | You can move your stall to another day if it rains. | true
+home: Make a Plan B with a grown-up for a pretend stall, in case it rains.
+skill: problem solving
+
+@lesson 7.2 | Sold out! | 🎉 | stall
+hook: You sold all your cookies in 20 minutes. More customers are coming. What now?
+learn: Selling out is a good problem. It means people love what you make!
+learn: Put up a "Sold out" sign, so people know.
+learn: Next time, make a few more, or ask people to order ahead.
+play: sort | Good idea, Not a good idea | Put up a "Sold out" sign=Good idea; Pretend you still have cookies=Not a good idea; Write down who wants some next time=Good idea; Sell the crumbs for the full price=Not a good idea; Make more for next time=Good idea; Shout at customers to go away=Not a good idea | Is it a good idea when you sell out?
+check: mcq | You sold out. What could you do next time? | Make a few more* | Make fewer | Stop selling
+check: tf | Selling out means people liked what you made. | true
+home: Talk with a grown-up about how many things to make for a pretend stall.
+skill: problem solving
+
+@lesson 7.3 | Nobody's buying | 😕 | stall
+hook: You've been at your stall for an hour, and nobody has bought anything. Why?
+learn: Look for the reason. Can people see you? Is the price right? Do they know what you sell?
+learn: Try one change at a time, and see if it helps.
+learn: Sometimes the weather matters. Cold drinks sell better on hot days!
+play: match | Match each problem to a fix | People walk past without seeing you=Move to where more people walk; The price is too high=Try a lower price; People don't know what you sell=Make a bigger sign; It's too hot for hot chocolate=Sell cold drinks instead
+check: mcq | Nobody can see your stall. What could help? | Move to where more people walk* | Go home | Make it smaller
+check: tf | Trying one change at a time helps you see what works. | true
+home: Look at a shop with a grown-up. What helps people notice it?
+skill: problem solving
+
+@lesson 7.4 | Fixing a mistake | 🩹 | stall
+hook: A customer says their cookie was burnt on the bottom. What do you say?
+learn: Everyone makes mistakes. What matters is how you fix them.
+learn: Stay calm, say sorry and make it right, like giving a new cookie.
+learn: Then think about how to stop it happening again.
+play: order | Fix a mistake with a customer | Stay calm and listen; Say sorry; Fix it, like giving a new one; Say thanks for telling you; Work out how to stop it happening again
+check: mcq | A customer's cookie was burnt. What do you do? | Say sorry and give a new one* | Argue with them | Hide behind the table
+check: tf | Thinking about how to stop a mistake happening again is a good idea. | true
+home: Talk with a grown-up about a mistake you fixed. How did it feel?
+skill: customer service
+
+@lesson 7.5 | Spills and breaks | 🧃 | stall
+hook: Your jug of lemonade tips over, all over the table. Oops!
+learn: Accidents happen. Stop and tell a grown-up.
+learn: Clean up safely. Glass needs a grown-up to pick it up.
+learn: Put things where they're less likely to fall, like jugs in the middle of the table.
+play: path | Your glass jug falls and smashes on the ground. | Stay back and get a grown-up to clean up the glass => good: Broken glass is sharp. A grown-up can clean it up safely. | Pick up the glass pieces quickly with your hands => bad: You could cut yourself badly. | Leave it and keep selling => bad: Someone could step on the glass and get hurt.
+check: mcq | Something made of glass breaks. What do you do? | Get a grown-up* | Pick it up fast | Kick it away
+check: tf | Putting jugs in the middle of the table helps stop spills. | true
+home: Set up a pretend stall with a grown-up. Where should the drinks go so they don't spill?
+skill: safety
+
+@lesson 7.6 | Better next time | 🌟 | stall
+hook: Your stall day is over. How can the next one be even better?
+learn: After your stall, think about what went well and what didn't.
+learn: Write down one thing to keep doing and one thing to change.
+learn: Every stall teaches you something new.
+play: chat | Talking with your grown-up after stall day | them: How do you think stall day went? | me: We sold lots of cookies, but we ran out of change.*/It was all bad./I don't want to talk about it. | them: What could we do about the change next time? | me: Bring more $1 and $2 coins in our float.*/Not give any change./Ask customers to keep it. | them: Great idea. What should we keep doing? | me: Smiling and saying thank you to everyone.*/Nothing./Shouting at people walking past.
+check: mcq | What should you think about after stall day? | What went well and what to change* | Nothing at all | Only the money
+check: tf | Every stall can teach you something new. | true
+home: After any activity, try saying one thing that went well and one thing to change.
+skill: reflection
+
+@lesson 8.1 | What's an invention? | 💡 | workshop
+hook: Someone had to think up the first bike. What else did people invent?
+learn: An invention is something new that people make to solve a problem.
+learn: Wheels, glasses and telephones are all inventions.
+learn: Trees, rocks and the moon aren't inventions. Nobody made them.
+play: sort | Invention, Not an invention | A bicycle=Invention; A tree=Not an invention; Glasses=Invention; The moon=Not an invention; A telephone=Invention; A rock=Not an invention | Did someone invent it?
+check: mcq | What is an invention? | Something new people make to solve a problem* | Something that grows on trees | A type of rock
+check: tf | Glasses are an invention. | true
+home: Find three inventions in your kitchen with a grown-up. What problem does each one solve?
+skill: inventing
+
+@lesson 8.2 | A teenage inventor | 👆 | museum
+hook: A boy who couldn't see invented a way to read with his fingers. How?
+learn: Louis Braille lost his sight when he was a little boy in France.
+learn: When he was about 15, he invented a way to read using patterns of raised dots.
+learn: It's called braille, and people who are blind all over the world still use it today.
+play: mystery | He lost his sight as a young boy; He grew up in France; At about 15 he invented a way to read with your fingertips; His reading system uses raised dots | Louis Braille* | Thomas Edison | A famous painter
+check: mcq | What does braille use? | Raised dots you can feel* | Bright colours | Loud sounds
+check: tf | Kids and teenagers can invent things that help people. | true
+home: Look for braille on a lift button, sign or medicine box with a grown-up.
+skill: inventing
+
+@lesson 8.3 | Invented near us | 🗺️ | museum
+hook: Some famous inventions came from {nz:New Zealand~au:Australia}. Do you know any?
+learn: {nz:Bill Hamilton invented a jet boat that can zoom over shallow rivers, in the 1950s.~au:David Warren invented the black box flight recorder for planes, in the 1950s.}
+learn: {nz:Colin Murdoch invented a plastic syringe you throw away after one use, so needles stay clean.~au:Graeme Clark led the team that made the bionic ear, which helps deaf people hear.}
+learn: Each one started with someone noticing a problem.
+play: match | Match each invention to the problem it solved | {nz:The jet boat~au:The black box}={nz:Boats couldn't go up shallow rivers~au:Nobody knew why planes crashed}; {nz:The throw-away syringe~au:The bionic ear}={nz:Needles needed to be kept clean and safe~au:Some deaf people couldn't hear at all}; Glasses=People couldn't see clearly; The wheel=Heavy things were hard to move
+check: mcq | How do inventions usually start? | Someone notices a problem* | Someone has a nap | Someone buys a toy
+check: tf | {nz:The jet boat was invented in New Zealand.~au:The black box flight recorder was invented in Australia.} | true
+home: Find out about another invention from {nz:New Zealand~au:Australia} with a grown-up.
+skill: inventing
+
+@lesson 8.4 | Think like an inventor | 🧠 | workshop
+hook: Your school bag strap keeps slipping off your shoulder. Could you invent a fix?
+learn: Inventors notice a problem, then think of lots of ideas, even silly ones.
+learn: They pick the best idea and make a simple model to try it.
+learn: If it doesn't work, they change it and try again.
+play: order | Invent like an inventor | Notice a problem; Think of lots of ideas; Pick the best idea; Make a simple model; Test it and make it better
+check: mcq | What do inventors do if their idea doesn't work? | Change it and try again* | Give up for ever | Hide it
+check: tf | Silly ideas can sometimes lead to great ones. | true
+home: Pick a small problem at home and think of five ideas to fix it with a grown-up.
+skill: inventing
+
+@lesson 8.5 | Inventions that help people | 🦽 | workshop
+hook: Some inventions help people move, see or hear. Can you spot them?
+learn: Lots of inventions help people with disabilities live the way they want to.
+learn: Wheelchairs help people move. Hearing aids help people hear.
+learn: Good inventors ask the people who will use it what they need.
+play: tap | Tap the inventions that help people move, see or hear | 🦽:yes:A wheelchair helps people move; 👓:yes:Glasses help people see; 🦻:yes:A hearing aid helps people hear; 🦯:yes:A white cane helps people who are blind get around; 🎈:no; 🍭:no
+check: mcq | Who should inventors ask about what's needed? | The people who will use it* | Nobody | Only their best friend
+check: tf | Hearing aids help people hear. | true
+home: Look for things in your town that help people get around, like ramps or beeping crossings.
+skill: inventing
+
+@lesson 8.6 | My invention | 🚀 | workshop
+hook: If you could invent anything to help people, what would it be?
+learn: Big ideas start small, with a drawing and a name.
+learn: Think about who it helps, and how.
+learn: Share your idea and ask, "How could it be better?"
+play: chat | Telling your grown-up about your invention | them: What have you invented? | me: A lunchbox that keeps my sandwich cold all day.*/Nothing, inventing is boring./A robot that does all my homework. | them: Who would it help? | me: Kids whose sandwiches go warm and yucky at school.*/Only me./Nobody. | them: Great! How could you test it? | me: Make a cardboard model with an ice pack and check it at lunch.*/Just sell it straight away./I don't need to test it.
+check: mcq | What's a good question to ask about your invention? | "How could it be better?"* | "Is it the best ever?" | "Can I stop now?"
+check: tf | Big ideas can start with a drawing. | true
+home: Draw your invention, give it a name and show a grown-up.
+skill: inventing
+

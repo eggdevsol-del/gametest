@@ -293,3 +293,269 @@ check: tf | Written records help you win a dispute. | true
 home: Ask a grown-up if they've ever had to chase money they were owed, and what worked.
 skill: law
 
+@lesson 5.1 | Cost to win a customer | 🎯 | online
+hook: You spent $300 on ads and got 12 new customers. Was it worth it?
+learn: Customer acquisition cost, or CAC, is marketing spend ÷ new customers.
+learn: $300 ÷ 12 customers = $25 a customer.
+learn: If each customer only brings $15 of profit, those ads are losing money.
+try: $200 ÷ 10 customers = $20 each :: gap | $450 ÷ 15 customers = $_ each | 30
+play: slider | You spend $600 on ads and win 24 new customers. What's your CAC? | 0 | 100 | 25 | $ | 0 | 5
+check: gap | $1,000 of ads brings 40 customers. The CAC is $_ | 25
+check: mcq | Ads cost $20 per customer, and each customer brings $12 profit. What's happening? | The ads lose money* | The ads make money | It's break-even
+home: Ask a grown-up how they first heard about a business they use often.
+skill: marketing data
+
+@lesson 5.2 | What a customer is worth | 💎 | stall
+hook: A coffee customer spends $5. Is that all they're worth to you?
+learn: Customer lifetime value, or LTV, is the profit a customer brings over all their visits.
+learn: $2 profit a coffee × 3 coffees a week × 50 weeks = $300 a year.
+learn: Compare LTV with CAC. A common rule of thumb is LTV of at least 3 times CAC.
+play: match | Match each customer to their rough yearly value | $2 profit a coffee, 100 coffees a year=$200; $10 profit a haircut, 8 haircuts a year=$80; $5 profit a month on a subscription=$60; $50 profit a car service, 2 services a year=$100
+check: mcq | LTV is $90 and CAC is $30. Is that healthy? | Yes, LTV is 3 times CAC* | No, it loses money | You can't tell
+check: tf | Keeping customers coming back raises their lifetime value. | true
+home: Pick a shop your family uses. Estimate how much you spend there in a year.
+skill: marketing data
+
+@lesson 5.3 | The funnel | 🔻 | online
+hook: 10,000 people saw your ad. Only 50 bought. Where did everyone go?
+learn: A funnel tracks people step by step: they see it, click, add to cart, then buy.
+learn: Conversion rate is the percent who move on. 50 buyers out of 1,000 clicks is 5%.
+learn: Fix the step where the most people drop out first.
+play: build | Build the funnel from the top | 10,000 people see the ad; 400 click through to your shop; 120 add something to their cart; 60 start checkout; 50 buy
+check: gap | 30 buyers from 600 clicks is a _% conversion rate | 5
+check: mcq | 120 people add to cart, but only 20 buy. What should you check first? | The checkout, like shipping costs or a slow page* | The colour of your logo | Nothing, that's normal
+home: Next time you shop online with a grown-up, count the steps from ad to checkout.
+skill: marketing data
+
+@lesson 5.4 | A/B testing | 🆎 | online
+hook: Ad B is winning after 20 views. Time to move your whole budget to B?
+learn: An A/B test shows two versions to similar people, with only one thing different.
+learn: Decide what you're measuring, like sales, before you start.
+learn: Wait for enough results. A tiny test can just be luck.
+play: path | Your A/B test has run for an hour. Ad B has 3 sales and Ad A has 1. | Keep the test running until you have enough results => good: A few sales can be luck. More data gives a clearer answer. | Move your whole budget to Ad B now => ok: B might be better, but 4 sales is too few to be sure. | Next time, change the photo, price and headline all at once => bad: If you change everything, you won't know what worked.
+check: mcq | How many things should differ in an A/B test? | One* | Everything | None
+check: tf | You should choose what you're measuring before the test starts. | true
+home: Show two versions of a poster to people in your family. Which one wins, and why?
+skill: testing
+
+@lesson 5.5 | A marketing budget | 💰 | bank
+hook: Your business makes $2,000 a month in sales. How much should go on marketing?
+learn: Many small businesses spend a set percent of sales on marketing, often around 5% to 10%.
+learn: Spend a little on tests, then put more into what brings customers cheaply.
+learn: Keep some for the customers you already have, like emails and loyalty rewards.
+play: budget | Plan $200 of marketing this month | 200 | Best ad channel so far=80; Testing a new channel=30; Emails to past customers=20; Photos and design=0; Spare=0 | Ad platform price rise:25
+check: gap | 10% of $2,000 of sales is $_ for marketing | 200
+check: mcq | Where should most of your budget go? | Channels that bring customers cheaply* | Whatever's newest | The most expensive option
+home: Look at a flyer from a local business or club. Guess what it cost and how many people it reached.
+skill: budgeting
+
+@lesson 5.6 | Marketing within the rules | 📜 | townhall
+hook: You've found a list of 500 emails online. Can you send them your ads?
+learn: {nz:The Unsolicited Electronic Messages Act~au:The Spam Act} says you need permission before you send marketing emails or texts.
+learn: Every marketing message needs your business name and an easy way to unsubscribe.
+learn: Paid posts must say they're ads, and fake reviews are misleading. {nz:The Commerce Commission~au:The ACCC} can take action.
+play: sort | Allowed, Not allowed | Emailing people who ticked "Send me offers"=Allowed; Texting a list of phone numbers you bought=Not allowed; A post marked as an ad when a brand paid you=Allowed; Paying friends to write 5-star reviews=Not allowed; An unsubscribe link in every email=Allowed; Hiding that a post was paid for=Not allowed | Allowed or not?
+check: mcq | What do you need before sending marketing emails? | Permission* | A big list | A fancy design
+check: tf | Paying for fake 5-star reviews is fine if the product is good. | false | Fake reviews mislead customers, whatever the product.
+home: Find the unsubscribe link in a marketing email with a grown-up.
+skill: marketing law
+
+@lesson 6.1 | Employee or contractor? | 🧑‍🔧 | townhall
+hook: You pay someone to work on Saturdays. Are they an employee or a contractor?
+learn: Employees work when and how the business says, usually with its tools. They get pay, leave and other rights.
+learn: Contractors run their own business. They choose how to do the job, often use their own tools and send invoices.
+learn: Calling someone a contractor doesn't make them one. The real working relationship decides it.
+play: sort | Likely an employee, Likely a contractor | Works set shifts you roster=Likely an employee; Sends you an invoice from their own business=Likely a contractor; Uses your café's coffee machine and uniform=Likely an employee; Brings their own gear and does jobs for many clients=Likely a contractor; You tell them how to do each task=Likely an employee; Chooses their own hours to finish a website=Likely a contractor | Employee or contractor?
+check: mcq | What decides if someone is an employee? | The real working relationship* | What you call them | Whether you like them
+check: tf | Employees get rights like paid leave. | true
+home: Ask a grown-up whether they've worked as an employee, a contractor or both.
+skill: hiring
+
+@lesson 6.2 | Minimum pay | 💵 | bank
+hook: What's the least you can legally pay a worker?
+learn: {nz:From 1 April 2026, the adult minimum wage is $23.95 an hour. The starting-out and training rate is $19.16.~au:From 1 July 2026, the national minimum wage is $26.44 an hour for adults. Many jobs are covered by awards with higher rates.}
+learn: {nz:The starting-out rate can apply to some 16 to 19-year-olds, such as those in their first 6 months with an employer.~au:Junior rates for under-21s are a percentage of the adult rate. Casuals get an extra 25% loading.}
+learn: Minimum wages are reviewed every year, so check the latest rate before you hire.
+play: match | Match each pay term to what it means | Minimum wage=The lowest legal hourly rate; {nz:Starting-out rate~au:Junior rate}={nz:A lower rate for some 16 to 19-year-olds~au:A lower rate for under-21s}; {nz:Training minimum wage~au:Casual loading}={nz:For people doing set training for a qualification~au:An extra 25% for casual workers}; Annual review=When minimum rates usually change
+check: gap | A worker on {nz:$24~au:$26} an hour works 10 hours. Their pay is $_ before tax | {nz:240~au:260}
+check: mcq | How often are minimum wages usually reviewed? | Every year* | Every 20 years | Never
+home: Look up the current minimum wage on {nz:Employment New Zealand's~au:the Fair Work Ombudsman's} website with a grown-up.
+skill: employment law
+
+@lesson 6.3 | The paperwork | 🗂️ | townhall
+hook: Your first employee starts Monday. What do you need to sort out first?
+learn: {nz:Every employee must have a written employment agreement, offered before they start.~au:Give new employees the Fair Work Information Statement, and set out their pay and hours in writing.}
+learn: {nz:They fill in a tax code declaration, the IR330, and you take PAYE tax from their pay.~au:They fill in a tax file number declaration, and you withhold tax from their pay.}
+learn: Keep records of hours, pay and leave, and give a payslip every payday.
+play: build | Get ready for your first employee | Register as an employer with {nz:IRD~au:the ATO}; Agree the job, pay and hours in writing; Collect their {nz:tax code declaration~au:tax file number declaration}; Set up payroll and payslips; Keep records of hours, pay and leave
+check: mcq | What should you keep records of? | Hours, pay and leave* | Their favourite food | Nothing
+check: tf | {nz:Every employee in NZ must have a written employment agreement.~au:New employees in Australia should get the Fair Work Information Statement.} | true
+home: Look at a payslip with a grown-up. Find the pay, the tax and the hours.
+skill: employment law
+
+@lesson 6.4 | More than the wage | ➕ | bank
+hook: You pay someone $25 an hour. Does each hour cost you $25?
+learn: {nz:Employers pay at least 3.5% on top for KiwiSaver, from 1 April 2026, if the employee is a member.~au:Employers pay super on top of wages, at 12% of ordinary earnings.}
+learn: There's also paid leave, {nz:ACC levies~au:workers' compensation insurance}, training, uniforms and payroll software.
+learn: Budget for the full cost of each worker, not just the hourly rate.
+play: tap | Tap the costs on top of the hourly wage | 🏖️:yes:Paid annual leave; 🦺:yes:Safety gear and uniforms; 🧾:yes:Payroll software; 📚:yes:Training time; 🛥️:no; 🎮:no
+check: gap | $1,000 of wages. {nz:KiwiSaver at 3.5%~au:Super at 12%} adds $_ | {nz:35~au:120}
+check: mcq | Why budget for more than the wage? | Leave, {nz:KiwiSaver~au:super} and other costs add up* | Wages are always lower than they look | You don't need to
+home: Ask a grown-up who has had a job what they got on top of their pay, like {nz:KiwiSaver~au:super} or leave.
+skill: hiring
+
+@lesson 6.5 | A safe workplace | 🦺 | workshop
+hook: Your new worker wants to use the fryer on day one. Is that OK?
+learn: {nz:The Health and Safety at Work Act 2015~au:Work health and safety laws} say businesses must keep workers as safe as they reasonably can.
+learn: Spot the hazards, train people before they use equipment and give them safety gear.
+learn: Young workers have extra limits on some dangerous work. Check the rules for your industry.
+play: path | A new 16-year-old worker wants to use the deep fryer on their first shift. | Train them first, supervise them, and give them gloves and an apron => good: Training and supervision keep them safe and keep you within the law. | Let them try it alone so they learn fast => bad: Untrained workers on hot equipment can be badly hurt. | Tell them never to report burns, so you don't get in trouble => bad: Hiding injuries is dangerous and against the law.
+check: mcq | What should happen before someone uses risky equipment? | Training and supervision* | Nothing, they'll figure it out | A pay cut
+check: tf | Businesses must keep workers as safe as they reasonably can. | true
+home: Spot three hazards in your kitchen with a grown-up, and how to make each one safer.
+skill: health and safety
+
+@lesson 6.6 | Being a good boss | 🌟 | workshop
+hook: Your best worker has been late three times this week. What do you say?
+learn: Good bosses set clear expectations, give regular feedback and say thanks for good work.
+learn: Talk about problems early, in private and calmly. Ask what's going on before you judge.
+learn: Treat everyone fairly, follow a fair process and never bully or discriminate.
+play: chat | Talking privately with a worker who's been late | them: You wanted to see me? | me: Thanks for coming. I've noticed you've been late three times this week. Is everything OK?*/You're always late. Fix it or you're gone./I'll just ignore it. | them: Sorry. My bus changed its timetable. | me: Thanks for telling me. Could we move your start to 9:15 for now?*/Not my problem./Get a different bus or quit. | them: That would really help. Thanks.
+check: mcq | How should you raise a problem with a worker? | Early, in private and calmly* | Loudly, in front of customers | Never
+check: tf | Saying thanks for good work is part of being a good boss. | true
+home: Ask a grown-up about the best boss they've had. What made them good?
+skill: leadership
+
+@lesson 7.1 | The pitch deck | 🖥️ | stage
+hook: You have 10 minutes with an investor. What goes on your slides?
+learn: A pitch deck is a short set of slides, often about 10, that tells your business's story.
+learn: It covers the problem, your solution, the market, your traction, how you make money, the competition and your team.
+learn: It ends with the ask: how much you're raising and what you'll use it for.
+play: build | Build a pitch deck in order | The problem; Your solution; The market size; Traction so far; How you make money; The competition; Your team; The ask, and what it's for
+check: mcq | What's "traction"? | Proof of progress, like sales and users* | The grip on your shoes | Your logo
+check: tf | A pitch deck should say how much you're raising and why. | true
+home: Find a famous company's early pitch deck online with a grown-up. What slides does it have?
+skill: pitching
+
+@lesson 7.2 | Pre-money and post-money | 🧮 | shares
+hook: An investor offers $200,000 for 20%. Is your business worth $200,000 or $1 million?
+learn: Post-money valuation is what the business is worth just after the investment. $200,000 ÷ 20% = $1,000,000.
+learn: Pre-money valuation is the value before the money arrives: $1,000,000 − $200,000 = $800,000.
+learn: Founders and investors often argue about the pre-money value. It decides how much of the company you give away.
+try: $100,000 for 10% means a post-money value of $1,000,000 :: gap | $100,000 for 25% means a post-money value of $_ | 400000
+play: slider | An investor puts in $300,000 for 25%. What's the pre-money valuation, in thousands? | 0 | 2000 | 900 | k$ | 0 | 50
+check: gap | Post-money is $2,000,000 and the investment is $500,000. Pre-money is $_ | 1500000
+check: mcq | What's post-money valuation? | The value just after the investment* | The value before you started | The investor's salary
+home: Watch a business pitch show with a grown-up and work out the pre-money value of an offer.
+skill: equity
+
+@lesson 7.3 | Dilution | 💧 | shares
+hook: You own 100%. After two funding rounds you own 60%. Did you lose?
+learn: Dilution is when your share shrinks because new shares are issued to investors.
+learn: Sell 20%, and you own 80%. Then sell 25% of the new total, and you own 80% × 75% = 60%.
+learn: A smaller slice of a much bigger business can be worth more. But give away too much and you lose control.
+play: path | An investor offers $100,000 for 51% of your young business. | Ask for a smaller stake, or raise a smaller amount first => good: You keep control, and can raise more later at a higher value. | Accept it on the spot => bad: You'd no longer control your own company. | Refuse to talk to any investors ever again => ok: You keep control, but you might miss the help you need.
+check: gap | You own 100% and sell 30%. Then you sell 50% of the new total. You now own _% | 35
+check: mcq | What does owning more than 50% usually give you? | Control of big decisions* | A free car | Nothing
+home: Draw a pie chart with a grown-up showing a founder's share after two funding rounds.
+skill: equity
+
+@lesson 7.4 | Sizing the market | 🌐 | shares
+hook: "The pet market is worth $5 billion, so we just need 1%." Will investors buy that?
+learn: Top-down estimates take a huge market number and assume you'll win a slice. Investors are rarely convinced.
+learn: Bottom-up estimates multiply real numbers: customers you can reach × how many buy × the price.
+learn: 20 vet clinics × 30 sales a month × $25 = $15,000 a month. That's a number you can test.
+play: debate | Which market estimate should go in your pitch deck? | A bottom-up estimate from real customer numbers you can test* | "If we get just 1% of a $5 billion market" | Top-down numbers show how big the opportunity could be, so some decks show both.
+check: gap | 50 shops × 20 sales a month × $10 = $_ a month | 10000
+check: mcq | Why do investors like bottom-up estimates? | They're based on real numbers you can test* | They're bigger | They're shorter
+home: Estimate the market for a local business bottom-up with a grown-up: customers × visits × price.
+skill: market research
+
+@lesson 7.5 | Due diligence | 🕵️ | townhall
+hook: An investor wants to see all your contracts and bank statements. Is that rude?
+learn: Due diligence is the checking investors do before they hand over money.
+learn: They check your numbers, contracts, who owns your ideas and designs, and any legal problems.
+learn: You should check them too. What have they invested in before? What do other founders say about them?
+play: sort | The investor checks, You check | Your sales figures and bank statements=The investor checks; What their past founders say about them=You check; Who owns your brand and designs=The investor checks; How involved they want to be=You check; Your contracts with suppliers=The investor checks; Whether they've followed through on past promises=You check | Who checks what?
+check: mcq | What's due diligence? | Careful checking before a deal* | A type of loan | A pitch slide
+check: tf | Founders should check investors too. | true
+home: Ask a grown-up what checks they did before a big decision, like buying a car.
+skill: funding
+
+@lesson 7.6 | Term sheets | 📄 | townhall
+hook: The investor sends a two-page term sheet. What should you look for?
+learn: A term sheet lists the main terms of an investment before the full legal papers are written.
+learn: Key terms include the valuation, the amount, board seats, investor rights and founder vesting.
+learn: Get advice from a lawyer who knows start-ups before you sign anything.
+play: match | Match each term to what it means | Valuation=What the business is worth for the deal; Board seat=The investor gets a vote on the company's board; Liquidation preference=Investors get their money back first if the company is sold; Vesting=Founders earn their shares over time by staying
+check: mcq | What should you do before signing a term sheet? | Get advice from a start-up lawyer* | Sign it straight away | Ignore the details
+check: tf | Vesting means founders earn their shares over time. | true
+home: Talk with a grown-up about why it's important to read something carefully before you sign it.
+skill: equity
+
+@lesson 8.1 | Start with the people | 👂 | townhall
+hook: You want to start a social enterprise to help people experiencing homelessness. Who should you talk to first?
+learn: Many social enterprises fail because the founders guessed what people needed.
+learn: Talk with the people you want to help, and with groups already working on it.
+learn: A common saying is "Nothing about us without us." Include people in the decisions that affect them.
+play: chat | Planning with a support worker at a homelessness service | them: What are you hoping to do? | me: I'd like to learn what the people you work with actually need, before I plan anything.*/I've already decided to give out sleeping bags./I want to start a business and use your clients in the ads. | them: Good start. Many people here say a job matters most. | me: Could we talk to some of them about what would help them get work?*/I'll just guess what jobs they'd like./Jobs aren't my thing. | them: Yes. Some of them would love to be involved in planning it.
+check: mcq | Why talk to the people you want to help first? | So you solve the real problem* | To get them in your ads | It doesn't matter
+check: tf | Social enterprises sometimes fail because founders guess what people need. | true
+home: Think of a problem you'd like to help with. Who would you need to listen to first?
+skill: social enterprise
+
+@lesson 8.2 | Will people pay more for good? | 🏷️ | stall
+hook: Your ethical T-shirt costs $15 more than a regular one. Will customers pay it?
+learn: Some customers will pay more for a product that does good, but many won't.
+learn: The product must still be good value and good quality. Impact doesn't excuse a poor product.
+learn: Test what customers will really pay, not just what they say in a survey.
+play: debate | Can a social enterprise rely on customers paying extra to do good? | Only partly. It needs a great product at a fair price first* | Yes, everyone pays more for good causes | Some loyal customers really do pay more, so the extra can be part of the plan, just not all of it.
+check: mcq | What must a social enterprise's product still be? | Good quality and good value* | Expensive | Plain
+check: tf | People sometimes say they'll pay more in surveys, then don't. | true
+home: Compare an ethical product with a regular one at the shop with a grown-up. What's the price difference?
+skill: pricing
+
+@lesson 8.3 | Proving you do good | ✅ | townhall
+hook: Anyone can say they're a "business for good". How do you prove it?
+learn: B Corp certification checks a company's impact on workers, community, the environment and customers, and how it's run.
+learn: Certified companies must keep meeting the standards and recertify every few years.
+learn: {nz:Groups like Ākina support social enterprises and help big buyers find them.~au:Social Traders certifies social enterprises and connects them with big buyers.}
+play: tap | Tap the things B Corp certification looks at | 👷:yes:How workers are treated; 🌍:yes:The impact on the environment; 🏘️:yes:The impact on the community; 🧑‍⚖️:yes:How the company is run; 🎨:no; 🏎️:no
+check: mcq | What does B Corp certification check? | A company's impact on people and the planet* | Only its profits | Only its logo
+check: tf | B Corps must keep meeting standards to stay certified. | true
+home: Find a certified B Corp in {nz:New Zealand~au:Australia} with a grown-up. What does it make?
+skill: social enterprise
+
+@lesson 8.4 | Owned by members | 🤲 | bank
+hook: What if a business were owned by the people who use it?
+learn: A co-operative, or co-op, is owned by its members, like farmers, workers or customers.
+learn: {nz:Fonterra is owned by dairy farmers, and Foodstuffs, which runs New World and PAK'nSAVE, is owned by its grocers.~au:CBH Group is owned by Western Australian grain growers, and mutual banks are owned by their customers.}
+learn: Profits go back to members or into the business, not to outside shareholders.
+play: sort | Owned by members, Owned by shareholders | A farmers' co-operative=Owned by members; A company listed on the share market=Owned by shareholders; A credit union owned by its customers=Owned by members; A start-up owned by investors=Owned by shareholders; A worker-owned café=Owned by members; A big chain owned by an overseas company=Owned by shareholders | Who owns it?
+check: mcq | Who owns a co-operative? | Its members* | Outside investors | The government
+check: tf | {nz:Fonterra is owned by dairy farmers.~au:Mutual banks are owned by their customers.} | true
+home: Find a co-op or mutual near you with a grown-up. Who are its members?
+skill: ownership
+
+@lesson 8.5 | Growing the impact | 🌳 | stall
+hook: Your training café works. Do you open 20 more, or help others copy it?
+learn: Scaling up means growing your own organisation, like opening more sites.
+learn: Scaling out means sharing your model so others can copy it, like a guidebook or a franchise.
+learn: Scaling deep means changing rules or culture, like convincing the government to fund training.
+play: path | Your training café gets young people into jobs. Other towns want one. | Share your model and train other groups to run their own => good: Scaling out can spread the impact faster than you could alone. | Open 20 cafés next year with a big loan => bad: Growing too fast can sink the original café and its mission. | Keep it secret so nobody copies you => ok: That protects your café, but fewer young people get help.
+check: mcq | What's scaling out? | Sharing your model so others can copy it* | Making the café bigger | Closing down
+check: tf | Changing rules or culture is a way to grow impact. | true
+home: Talk with a grown-up about a good idea that spread from one place to many.
+skill: social enterprise
+
+@lesson 8.6 | People, planet, profit | 📊 | townhall
+hook: Your social enterprise had a great year. How do you show it?
+learn: The triple bottom line measures people, planet and profit, not just profit.
+learn: Pick a few measures for each, like jobs created, waste cut and money in the bank.
+learn: Set targets, track them every quarter and share honest results, even the bad ones.
+play: build | Build a simple impact dashboard | Write your mission in one sentence; Choose 1 or 2 people measures, like jobs created; Choose 1 or 2 planet measures, like waste cut; Choose your profit and cash measures; Set a target for each one; Report every quarter, good and bad
+check: mcq | What does the triple bottom line measure? | People, planet and profit* | Only profit | Only the planet
+check: tf | Sharing honest results, even bad ones, builds trust. | true
+home: Pick a company you know. What would you measure for its people, planet and profit?
+skill: impact
+

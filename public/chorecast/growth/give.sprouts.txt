@@ -289,3 +289,268 @@ check: tf | Helping others can make you feel happy too. | true
 home: Tell your family about a time you helped someone, and how it felt.
 skill: kindness
 
+@lesson 5.1 | Animal shelters | 🐕 | garden
+hook: A lost puppy is found on the street. Where does it go?
+learn: An animal shelter looks after lost and unwanted pets until they find a home.
+learn: {nz:The SPCA~au:The RSPCA} runs animal shelters all over the country.
+learn: Shelter workers feed the animals, take them to the vet and help them find new families.
+play: order | Put the puppy's journey in order | The puppy is found and brought in; A vet checks it is healthy; Staff feed it and keep it warm; A family comes to meet it; The puppy goes to its new home
+check: mcq | What does an animal shelter do? | Looks after pets until they find a home* | Sells toys | Fixes cars
+check: tf | Shelters take animals to the vet. | true
+home: Look at a shelter's website with a grown-up and see the animals looking for homes.
+skill: animals
+
+@lesson 5.2 | What shelters need | 🧺 | townhall
+hook: Shelters need lots of things. What could you give?
+learn: Shelters need pet food, blankets, towels, toys and money for vet bills.
+learn: Many shelters have a wish list. Check it before you give things.
+learn: Old towels can keep animals warm. Ask first, because some shelters have enough.
+play: tap | Tap the things a shelter might need | 🥫:yes:Pet food; 🧣:yes:Old blankets and towels; 🎾:yes:Toys for dogs and cats; 💰:yes:Money for vet bills; 🍫:no; 📺:no
+check: mcq | What should you check before giving things to a shelter? | Its wish list* | The weather | Your homework
+check: tf | Chocolate is a good present for shelter dogs. | false | Chocolate can make dogs very sick.
+home: Find a shelter's wish list with a grown-up. Is there something at home you could give?
+skill: animals
+
+@lesson 5.3 | Caring for a pet | 🐈 | home
+hook: Pets are fun. But what do they need every single day?
+learn: Pets need food, fresh water, a safe place to sleep and lots of love.
+learn: Dogs need walks. Every pet needs check-ups at the vet.
+learn: A pet is a job for years, not just for a week. Think hard before you get one.
+play: match | Match each pet to something it needs | Dog=A walk every day; Fish=Clean water in its tank; Cat=A clean litter tray; Rabbit=Hay and space to hop; Budgie=A big cage and seeds
+check: mcq | What does every pet need every day? | Food and fresh water* | A new toy | A bath
+check: tf | A pet is a job for many years. | true
+home: Make a list with a grown-up of everything a pet you'd like would need.
+skill: caring
+
+@lesson 5.4 | Wild animals | 🪶 | garden
+hook: A wild bird hops around your garden. Should you try to catch it?
+learn: Wild animals live free in nature. They don't want to be pets.
+learn: {nz:Tūī, kererū, geckos and penguins~au:Koalas, wombats, possums and lizards} live wild near us.
+learn: Give wild animals space. Look, but don't touch or feed them.
+play: sort | Kind to wildlife, Not kind | Watching birds from a distance=Kind to wildlife; Throwing bread to ducks=Not kind; Keeping your dog on a lead near nests=Kind to wildlife; Chasing a lizard to catch it=Not kind; Putting out a shallow bowl of water on a hot day=Kind to wildlife; Leaving rubbish at the beach=Not kind | Kind to wildlife or not?
+check: mcq | What's the best way to enjoy a wild animal? | Watch it from a distance* | Pick it up | Feed it lollies
+check: tf | Bread is a healthy food for ducks. | false | Bread fills ducks up but isn't good for them.
+home: Go on a wildlife walk with a grown-up. Count the birds you see, without getting too close.
+skill: wildlife
+
+@lesson 5.5 | A hurt animal | 🩹 | garden
+hook: You find a bird that can't fly. What should you do?
+learn: Don't touch a hurt wild animal. It's scared, and it could scratch or bite.
+learn: Tell a grown-up straight away.
+learn: A grown-up can call a vet, {nz:DOC~au:a wildlife rescue group} or {nz:the SPCA~au:the RSPCA} for help.
+play: path | You find a little bird on the ground. It isn't moving much. | Stay back and get a grown-up => good: A grown-up can call for the right help. | Pick it up and take it to your room => bad: It's scared, it might hurt you, and it needs an expert. | Walk away and forget about it => ok: You didn't hurt it, but telling a grown-up could save it.
+check: mcq | What should you do first if you find a hurt animal? | Tell a grown-up* | Pick it up | Give it a bath
+check: tf | It's safe to touch any hurt wild animal. | false | Hurt animals are scared and might scratch or bite.
+home: Find out with a grown-up who to call near you if you find a hurt wild animal.
+skill: wildlife
+
+@lesson 5.6 | Raise money for animals | 🦴 | stall
+hook: The shelter needs money for vet bills. How could you help?
+learn: You could sell baking, make bookmarks or wash cars with a grown-up.
+learn: Take away your costs first. The profit is what you give.
+learn: Some kids ask for pet food instead of birthday presents, then give it to the shelter.
+play: shop | Each dog biscuit costs you 30c to make. Raise at least $3 for the shelter. | Dog biscuit | 30 | 300
+check: gap | You raise $10 and your costs were $3. You can give $_ | 7
+check: mcq | Which is a way to help a shelter? | Sell baking and give the profit* | Keep all the money | Buy yourself a toy
+home: Plan a little fundraiser for animals with a grown-up.
+skill: fundraising
+
+@lesson 6.1 | Plant a tree | 🌱 | garden
+hook: A tiny seedling can grow taller than your house. How does one tree help?
+learn: Trees give birds and insects a home, make shade and help keep the air clean.
+learn: Native trees are best for native animals, like {nz:kōwhai and mānuka~au:wattles and gum trees}.
+learn: Many towns have planting days where families can help.
+play: order | Plant a tree with a grown-up | Choose a good spot with a grown-up; Dig a hole a bit bigger than the pot; Gently take the tree out of its pot; Put it in the hole and fill in the soil; Water it well
+check: mcq | Why are native trees good to plant? | They help native animals* | They never need water | They grow money
+check: tf | Trees give birds and insects a home. | true
+home: Find out with a grown-up if there's a tree planting day near you.
+skill: nature
+
+@lesson 6.2 | Beach clean-up | 🏖️ | garden
+hook: You're going to a beach clean-up. What should you bring?
+learn: Rubbish on beaches can wash into the sea and hurt animals.
+learn: Always go with a grown-up, and wear gloves to pick things up.
+learn: Never touch sharp things like glass or needles. Show a grown-up instead.
+play: tap | Tap the things to bring to a beach clean-up | 🧤:yes:Gloves keep your hands safe; 🛍️:yes:A bag for the rubbish; 🧢:yes:A hat for the sun; 💧:yes:Water to drink; 🎮:no; 🧸:no
+check: mcq | What should you do if you find broken glass? | Show a grown-up* | Pick it up with bare hands | Throw it in the sea
+check: tf | You should wear gloves at a clean-up. | true
+home: Pick up three bits of rubbish on your next walk, wearing gloves, with a grown-up.
+skill: nature
+
+@lesson 6.3 | Rubbish and animals | 🐢 | garden
+hook: A turtle sees a floating plastic bag. Why does it try to eat it?
+learn: To a turtle, a plastic bag can look like a jellyfish, its favourite food.
+learn: Birds can get tangled in fishing line, and animals can get stuck in rubbish.
+learn: Putting rubbish in the bin keeps animals safe.
+play: match | Match the rubbish to how it can hurt animals | Plastic bag=Turtles think it's a jellyfish; Fishing line=Birds get tangled; Balloon=Animals swallow the pieces; Plastic rings from drinks=Animals get stuck in them
+check: mcq | Why might a turtle eat a plastic bag? | It looks like a jellyfish* | It's hungry for plastic | It's a game
+check: tf | Putting rubbish in the bin helps keep animals safe. | true
+home: Look at the rubbish at home with a grown-up. Which bits could hurt animals if they got outside?
+skill: nature
+
+@lesson 6.4 | Saving water | 🚰 | home
+hook: Do you leave the tap running while you brush your teeth?
+learn: Clean water is precious. It takes work and energy to get it to your tap.
+learn: Turn off the tap while you brush. A running tap can use around 6 litres a minute.
+learn: Shorter showers and full loads in the washing machine save water too.
+try: 6 litres a minute for 1 minute is 6 litres :: gap | 6 litres a minute for 3 minutes is _ litres | 18
+play: slider | A running tap uses about 6 litres a minute. You brush for 2 minutes with it running. How many litres is that? | 0 | 30 | 12 | litres | 1 | 1
+check: mcq | What saves water when you brush your teeth? | Turning off the tap* | Brushing for longer | Running two taps
+check: tf | Shorter showers save water. | true
+home: Time your shower with a grown-up. Can you make it one minute shorter?
+skill: nature
+
+@lesson 6.5 | The right bin | ♻️ | home
+hook: You've finished your lunch. Which bin does each bit go in?
+learn: Recycling turns old things, like bottles and cans, into new things.
+learn: Food scraps can go in a compost bin to help gardens grow.
+learn: Rinse things before you recycle them. Each council has its own rules, so check yours.
+play: sort | Recycling, Compost, Rubbish | A clean plastic bottle=Recycling; Apple core=Compost; Chip packet=Rubbish; Banana peel=Compost; Empty drink can=Recycling; Used tissue=Rubbish | Which bin?
+check: mcq | Where can an apple core go? | Compost* | Recycling | In the sea
+check: tf | You should rinse things before you recycle them. | true
+home: Check your council's recycling rules with a grown-up.
+skill: recycling
+
+@lesson 6.6 | Help bees and birds | 🐝 | garden
+hook: Bees help grow lots of our food. How can you help them?
+learn: Bees and birds need flowers, water and safe places to live.
+learn: Plant flowers, put out a shallow bowl of water with stones in it and leave some wild corners.
+learn: Bug sprays can hurt bees, so use them only with a grown-up, or not at all.
+play: path | Your family wants to help bees in your garden. | Plant lots of flowers and put out a shallow water dish with stones => good: Bees get food and a safe drink. | Spray the whole garden with bug spray => bad: Sprays can hurt bees and other helpful bugs. | Cut down all the flowers to keep it tidy => bad: Without flowers, bees have nothing to eat.
+check: mcq | What do bees need? | Flowers and water* | Lollies | Bug spray
+check: tf | Bug sprays can hurt bees. | true
+home: Plant some flowers in a pot or garden with a grown-up for bees to visit.
+skill: nature
+
+@lesson 7.1 | Inside a food bank | 📦 | townhall
+hook: You drop a tin of beans in the food bank box. What happens to it next?
+learn: Volunteers sort the food and check the dates on every packet.
+learn: Then they pack food parcels, with lots of different foods for a family.
+learn: Families who need help pick up a parcel, or it's delivered to them.
+play: order | Follow the tin of beans | You put the tin in the food bank box; A volunteer takes it to the food bank; Volunteers check the date and sort it; They pack it into a food parcel; A family takes the parcel home
+check: mcq | What do food bank volunteers check on every packet? | The date* | The colour | The price
+check: tf | Food parcels have lots of different foods in them. | true
+home: Find out with a grown-up where your nearest food bank is and what it needs.
+skill: community
+
+@lesson 7.2 | Food rescue | 🥖 | kitchen
+hook: Shops sometimes have good food left at the end of the day. Should it go in the bin?
+learn: Food rescue groups, like {nz:KiwiHarvest~au:OzHarvest}, collect good food that would be thrown away and share it with people who need it.
+learn: "Best before" means food is best before that date, but often still fine after it.
+learn: "Use by" means it's not safe to eat after that date.
+play: sort | Rescue and share, Too old to share | Bread baked this morning=Rescue and share; Wonky-shaped carrots=Rescue and share; Mouldy cheese=Too old to share; Yoghurt past its use-by date=Too old to share; Apples with a small bruise=Rescue and share; A half-eaten sandwich=Too old to share | Can it be rescued?
+check: mcq | What does "use by" mean? | It's not safe to eat after that date* | It's best on that date | It never goes off
+check: tf | Wonky-shaped vegetables are still good to eat. | true
+home: Check the dates on some food at home with a grown-up. Find a "best before" and a "use by".
+skill: food
+
+@lesson 7.3 | Helping older people | 👵 | home
+hook: Some older people live alone and don't see many people. How could you help?
+learn: Lots of older people love a visit, a chat or a card.
+learn: You could read to them, help in their garden with a grown-up or draw them a picture.
+learn: Older people have lots of stories. Listening is a gift too.
+play: match | Match each way to help with what it gives | Visiting a grandparent=Company; Making a card for a rest home=Something to smile at; Helping rake leaves with a grown-up=A helping hand; Listening to their stories=Someone who cares
+check: mcq | What's a kind way to help an older neighbour? | Visit with a grown-up and have a chat* | Ignore them | Knock and run away
+check: tf | Listening to someone's stories is a kind of giving. | true
+home: Make a card or drawing for an older person you know.
+skill: kindness
+
+@lesson 7.4 | Welcome someone new | 👋 | home
+hook: A new kid has just started at your school. They don't know anyone. What could you do?
+learn: Starting somewhere new can feel scary and lonely.
+learn: Saying hello, sharing your name and inviting them to play can make a big difference.
+learn: New neighbours like a welcome too, like a wave or a card.
+play: chat | A new kid is standing alone at lunch | them: Um, hi. | me: Hi! I'm Sam. Do you want to play with us?*/Go away./Why are you here? | them: OK! I'm Ana. I just moved here. | me: Cool! Where did you live before?*/Whatever./That's weird. | them: In another town. I miss my friends. | me: That's hard. You can sit with us tomorrow too.*/Too bad./Bye.
+check: mcq | How can you help a new kid? | Say hello and invite them to play* | Ignore them | Laugh at them
+check: tf | Starting somewhere new can feel lonely. | true
+home: Think of someone new in your school or street. How could you welcome them?
+skill: kindness
+
+@lesson 7.5 | Helping at school | 🏫 | townhall
+hook: Your school is a community too. How can you help it?
+learn: You can help younger kids, like being a reading buddy.
+learn: You can pick up litter, help a teacher or be kind to someone who's sad.
+learn: Small things, done every day, make school better for everyone.
+play: tap | Tap the ways to help at school | 📚:yes:Reading with a younger kid; 🗑️:yes:Picking up litter; 🤗:yes:Checking on someone who's sad; 🙋:yes:Helping a teacher pack up; 😝:no; 🏃:no
+check: mcq | What's a way to help at school? | Be a reading buddy* | Drop litter | Push in line
+check: tf | Small kind things can make school better for everyone. | true
+home: Do one helpful thing at school tomorrow, and tell a grown-up about it.
+skill: community
+
+@lesson 7.6 | Anyone can need help | 🫶 | home
+hook: Do only some people ever need help?
+learn: Anyone can have a hard time, like losing a job, getting sick or a flood at home.
+learn: Needing help is nothing to be ashamed of.
+learn: Be kind, and never tease someone for needing help.
+play: path | A kid at school gets lunch from the school's free food box. Someone laughs at them. | Tell the person laughing that it's not OK, and sit with the kid => good: You're being kind and brave. | Laugh too, so you fit in => bad: That would hurt their feelings. | Say nothing, but tell a teacher later => ok: Telling a teacher helps, but being kind to the kid helps too.
+check: mcq | Who can need help sometimes? | Anyone* | Only some people | Nobody
+check: tf | Needing help is nothing to be ashamed of. | true
+home: Talk with a grown-up about a time your family helped someone, or someone helped your family.
+skill: kindness
+
+@lesson 8.1 | Felix and the trees | 🌳 | garden
+hook: A 9-year-old boy decided to plant a million trees. Did he do it?
+learn: In 2007, Felix Finkbeiner from Germany gave a school talk about trees and the planet.
+learn: He was 9. He had a big idea: kids could plant a million trees in his country.
+learn: Kids joined in, and his group, Plant-for-the-Planet, went on to help plant many millions of trees around the world.
+play: order | Put Felix's story in order | Felix learns about trees for a school talk; He has an idea: kids could plant a million trees; He and his class plant their first tree; Lots of other kids join in; His group helps plant millions of trees
+check: mcq | How old was Felix when he started? | 9* | 30 | 70
+check: tf | Kids can start big projects to help the planet. | true
+home: Plant a seed or a seedling with a grown-up, and look after it.
+skill: changemakers
+
+@lesson 8.2 | Bye bye plastic bags | 🛍️ | island
+hook: Two sisters in Bali wanted plastic bags gone from their island. Could kids really change the rules?
+learn: In 2013, Melati and Isabel Wijsen, aged 12 and 10, started a group called Bye Bye Plastic Bags.
+learn: They cleaned beaches, talked to shops and asked leaders to ban plastic bags.
+learn: Years later, Bali brought in rules banning single-use plastic bags.
+play: path | You and your sister want to stop plastic bags at your local market. | Make a plan, talk to stall owners and ask a grown-up to help you write to the council => good: Asking the right people, kindly and clearly, is how the Wijsen sisters did it. | Shout at shoppers who use plastic bags => bad: Being unkind makes people stop listening. | Give up, because you're just kids => bad: The Wijsen sisters were 12 and 10 when they started.
+check: mcq | What did Melati and Isabel want to stop? | Plastic bags* | Ice cream | Football
+check: tf | Kids can help change rules by asking leaders. | true
+home: Count the plastic bags you use in a week with a grown-up. Could you use fewer?
+skill: changemakers
+
+@lesson 8.3 | Malala | 📖 | museum
+hook: A girl spoke up so girls could go to school. She became the youngest person ever to win the Nobel Peace Prize. Who is she?
+learn: Malala Yousafzai grew up in Pakistan, where some people wanted to stop girls going to school.
+learn: She spoke up for girls' right to learn, even when it was dangerous.
+learn: In 2014, when she was 17, she won the Nobel Peace Prize, a famous prize for helping peace.
+play: mystery | She grew up in Pakistan; She spoke up for girls going to school; She won the Nobel Peace Prize at 17; Her first name is Malala | Malala Yousafzai* | Greta Thunberg | Mikaila Ulmer
+check: mcq | What did Malala speak up for? | Girls going to school* | Longer holidays | More lollies
+check: tf | Malala won the Nobel Peace Prize when she was 17. | true
+home: Talk with a grown-up about why going to school matters.
+skill: changemakers
+
+@lesson 8.4 | Marley's books | 📚 | museum
+hook: Marley noticed that hardly any books at school had girls like her as the main character. What did she do?
+learn: In 2015, while she was still at primary school, Marley Dias in the United States started a book drive.
+learn: She collected books with Black girls as the main characters, and gave them to schools and libraries.
+learn: She collected thousands of books, because lots of people wanted to help.
+play: tap | Tap the things Marley did to make a change | 🔍:yes:She noticed a problem; 📚:yes:She collected books; 📣:yes:She told people about her idea; 🤝:yes:She asked others to help; 😴:no; 🙈:no
+check: mcq | What did Marley collect? | Books* | Shoes | Stickers
+check: tf | Noticing a problem is the first step to fixing it. | true
+home: Look at your books with a grown-up. Do they show lots of different kinds of people?
+skill: changemakers
+
+@lesson 8.5 | What changemakers do | 🌟 | garden
+hook: Felix, the Wijsen sisters, Malala and Marley all made a change. What did they all do?
+learn: They noticed a problem they cared about.
+learn: They told people, asked for help and kept going, even when it was hard.
+learn: None of them did it alone. Changemakers bring people together.
+play: sort | Changemakers do this, Changemakers don't do this | Notice a problem=Changemakers do this; Give up straight away=Changemakers don't do this; Ask others to help=Changemakers do this; Keep going when it's hard=Changemakers do this; Do it all alone and tell no one=Changemakers don't do this; Be unkind to people who disagree=Changemakers don't do this | Do changemakers do this?
+check: mcq | What do changemakers do? | Ask others to help and keep going* | Give up straight away | Keep it secret
+check: tf | Changemakers usually work with other people. | true
+home: Think of a problem you care about. Who could you ask to help?
+skill: changemakers
+
+@lesson 8.6 | My change | 🫶 | home
+hook: You don't have to be famous to make a change. Where could you start?
+learn: Start with something small that you care about, near you.
+learn: Make a plan with a grown-up, and ask friends to help.
+learn: Small changes add up, and they can grow bigger than you think.
+play: build | Plan your own change | Pick a problem you care about; Think of one small thing you could do; Ask a grown-up to help you plan; Ask friends or family to join in; Do it, and tell people how it went
+check: mcq | Where's a good place to start making a change? | Something small, near you* | Something impossible | Nowhere
+check: tf | Small changes can add up. | true
+home: Make a plan with a grown-up for one small change you'd like to make.
+skill: changemakers
+

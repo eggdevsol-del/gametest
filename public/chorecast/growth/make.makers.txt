@@ -290,3 +290,269 @@ check: tf | Meeting in a busy public place is safer for pickups. | true
 home: Read the marketplace's safety tips with a grown-up.
 skill: scams
 
+@lesson 5.1 | Profit isn't cash | 💸 | bank
+hook: You sold $2,000 of shirts this month, but your bank account is empty. How?
+learn: Profit is what you earn on paper. Cash is the money you can actually spend today.
+learn: If customers pay later, you've made the sale but don't have the cash yet.
+learn: Bills don't wait. You need cash to pay them on time.
+play: sort | Cash now, Cash later | A customer pays by card at your stall=Cash now; A school orders 40 shirts and pays in 30 days=Cash later; A buyer pays a deposit up front=Cash now; An invoice due at the end of next month=Cash later; Cash sales at the market=Cash now; A shop pays you only when your stock sells=Cash later | When does the cash arrive?
+check: mcq | A sale paid in 30 days gives you… | Profit now, but cash later* | Cash now | Nothing ever
+check: tf | A business can make a profit and still run out of cash. | true
+home: Ask a grown-up about a time they had money coming, but not yet in the bank.
+skill: cash flow
+
+@lesson 5.2 | A cash flow forecast | 🗓️ | bank
+hook: Will you have enough cash in March? A forecast can tell you now.
+learn: A cash flow forecast lists the cash you expect in and out, month by month.
+learn: Start with the opening balance. Add cash in and take away cash out to get the closing balance.
+learn: The closing balance becomes next month's opening balance.
+try: $500 + $800 in − $600 out = $700 :: gap | $300 + $900 in − $1,000 out = $_ | 200
+play: slider | Opening balance $400. Cash in $1,200. Cash out $1,450. What's the closing balance? | 0 | 500 | 150 | $ | 0 | 50
+check: gap | Opening $1,000, cash in $500, cash out $700. The closing balance is $_ | 800
+check: mcq | What happens to this month's closing balance? | It becomes next month's opening balance* | It's thrown away | It's your profit for the year
+home: Make a three-month cash forecast for your pocket money with a grown-up.
+skill: cash flow
+
+@lesson 5.3 | Stock eats cash | 📦 | stall
+hook: You buy $1,500 of Christmas stock in October. When does the cash come back?
+learn: Stock you buy is cash stuck on the shelf until it sells.
+learn: Buying too much at once can leave you short for rent, fees or wages.
+learn: Order in smaller batches, and reorder what's actually selling.
+play: path | A supplier offers 20% off if you buy a whole year's stock now. | Buy a few months' worth and check your forecast first => good: You keep enough cash to pay bills, and still have stock. | Buy a whole year's worth with all your cash => bad: The discount is nice, but now you can't pay next month's fees. | Skip ordering and run out in the busy month => bad: No stock means no sales when customers want to buy.
+check: mcq | Why can too much stock be a problem? | Cash is stuck until it sells* | Stock always goes up in price | It's free
+check: tf | Ordering in smaller batches can protect your cash flow. | true
+home: Look in the pantry with a grown-up. Is there food that was bought ages ago and never used? That's cash on a shelf.
+skill: cash flow
+
+@lesson 5.4 | Getting paid faster | ⏩ | bank
+hook: Your client pays in 60 days. Can you speed that up?
+learn: Ask for a deposit up front, especially for big or custom jobs.
+learn: Send invoices straight away with a clear due date, like 7 or 14 days.
+learn: Make paying easy, with bank transfer or card, and send polite reminders.
+play: tap | Tap the ways to get paid faster | 💳:yes:Let customers pay by card; 🧾:yes:Send the invoice the same day; 💰:yes:Ask for a deposit; 🔔:yes:Send a polite reminder; 🐌:no; 🙈:no
+check: mcq | What helps most with a big custom order? | A deposit up front* | Waiting six months to send the invoice | No due date
+check: tf | Sending invoices straight away helps you get paid sooner. | true
+home: Find the due date on a bill at home with a grown-up. How many days did they get to pay?
+skill: invoicing
+
+@lesson 5.5 | Paying your bills | 📅 | bank
+hook: You're short on cash. Should you just pay your supplier late?
+learn: Paying late damages trust. Some suppliers charge late fees or stop supplying you.
+learn: It's better to ask for longer terms before the bill is due, like 30 days instead of 7.
+learn: Keep a list of when every bill is due, so nothing surprises you.
+play: debate | You're short on cash this month. What should you do about a supplier's bill? | Call the supplier early and ask for more time or a payment plan* | Ignore the bill and hope they forget | Some suppliers will say no, so it's still best to plan ahead and keep a cash buffer.
+check: mcq | When should you ask a supplier for more time? | Before the bill is due* | After they've sent three reminders | Never
+check: tf | Paying suppliers late can damage trust. | true
+home: Ask a grown-up how they keep track of when bills are due.
+skill: cash flow
+
+@lesson 5.6 | A cash buffer | 🛟 | bank
+hook: Sales drop in winter. Will your business survive the slow months?
+learn: A cash buffer is money kept aside for slow months and surprises.
+learn: Many small businesses aim for one to three months of costs in reserve.
+learn: Build it a little each month while sales are good.
+play: budget | Plan this month's $1,000 of sales for your candle business | 1000 | Wax and wicks=300; Market fees=150; Packaging=100; Cash buffer=0; Pay yourself=0 | Broken candle mould:120
+check: mcq | What's a cash buffer for? | Slow months and surprises* | Buying stock you don't need | Spending on fun
+check: tf | Building a buffer while sales are good helps in slow months. | true
+home: Work out with a grown-up roughly how much your household spends in a month.
+skill: cash flow
+
+@lesson 6.1 | Ways to grow | 📈 | stall
+hook: Your candles sell out every market day. How could your business grow?
+learn: You can grow by finding more customers, selling new products or selling in new places.
+learn: You can also raise your price, if customers value what you make.
+learn: Each way to grow needs time, money or both. Pick one at a time.
+play: match | Match each idea to the way it grows the business | Selling at a second market each month=New places; Adding candle gift packs=New products; Getting your local café to stock you=New customers; Charging $2 more for your best seller=Higher prices
+check: mcq | Which is growing with a new product? | Adding gift packs to your candle range* | Selling the same candles at the same market | Closing on weekends
+check: tf | Every way to grow needs time, money or both. | true
+home: Pick a small business you know. Talk with a grown-up about how it could grow.
+skill: growth
+
+@lesson 6.2 | Can you make enough? | ⏱️ | workshop
+hook: A shop wants 100 candles a month. Can you make that many?
+learn: Handmade businesses are limited by your hours. Work out how long each one takes.
+learn: Making things in batches is faster than making one at a time.
+learn: To grow past your own hours, you need better tools, help, or someone else to make part of it.
+try: 1 candle takes 30 minutes, so 10 hours makes 20 candles :: gap | 1 candle takes 20 minutes, so 10 hours makes _ candles | 30
+play: slider | Batches cut your time to 15 minutes a candle. How many hours do 100 candles take? | 0 | 50 | 25 | hours | 1 | 1
+check: gap | You have 8 hours a week. Each bracelet takes 30 minutes. You can make _ a week | 16
+check: mcq | What usually makes handmade work faster? | Making things in batches* | Making one at a time | Starting again each time
+home: Time yourself doing a job one at a time, then in a batch, like making sandwiches.
+skill: growth
+
+@lesson 6.3 | Getting help | 🙋 | workshop
+hook: You're great at making candles but terrible at photos. Should you do everything yourself?
+learn: Do the jobs that only you can do, and get help with the rest when you can afford it.
+learn: Help could be a family member, a friend you pay or a freelancer, like a photographer.
+learn: Agree the job, the pay and the deadline in writing, even with friends.
+play: sort | Do it yourself, Get help | Making your special candle recipe=Do it yourself; Product photos when yours are blurry=Get help; Choosing your scents=Do it yourself; Building a website you don't know how to make=Get help; Talking to your regular customers=Do it yourself; Bookkeeping when it's taking all weekend=Get help | Do it yourself or get help?
+check: mcq | What should you agree when someone helps your business? | The job, the pay and the deadline* | Nothing, it's fine | Only the colour of their shirt
+check: tf | It's smart to get help with jobs you're not good at, if you can afford it. | true
+home: List the jobs in a small business you'd like to run. Which would you get help with?
+skill: growth
+
+@lesson 6.4 | Growing too fast | 🚀 | stall
+hook: You said yes to every order. Now the quality has slipped and you're exhausted.
+learn: Growing too fast can mean rushed work, unhappy customers and no time to rest.
+learn: It also needs cash up front for materials, before the money comes in.
+learn: Grow at a pace you can keep up. Say when an order will be ready, honestly.
+play: path | A shop asks for 300 candles in two weeks. You usually make 50. | Offer 100 now and the rest next month, and check your cash first => good: You keep your quality, your cash and your sleep. | Say yes and work every night => bad: Rushed candles, a tired you and maybe a missed deadline. | Say yes, then buy cheap candles and sell them as yours => bad: That's dishonest, and the shop will find out.
+check: mcq | What's a risk of growing too fast? | Quality drops and you run out of cash* | You get too much sleep | Customers get happier
+check: tf | Growing at a pace you can keep up is a good plan. | true
+home: Talk with a grown-up about a time they took on too much. What did they learn?
+skill: growth
+
+@lesson 6.5 | Saying no | ✋ | stage
+hook: A customer wants you to make custom wedding signs. You make candles. Do you say yes?
+learn: Every yes uses time you could spend on something else. That's called opportunity cost.
+learn: Saying no to things that don't fit helps you get great at what you do.
+learn: You can say no politely, and suggest someone else who could help.
+play: debate | Should a small business take every order it's offered? | No. Say yes to what fits your goals and say no politely to the rest* | Yes. Never turn down money | Some extra jobs can lead to new ideas or customers, so think before you say no.
+check: mcq | What's opportunity cost? | What you give up when you choose something else* | The price of a ticket | A sale price
+check: tf | You can say no politely and suggest someone else. | true
+home: Practise a polite way to say no to a request, with a grown-up.
+skill: decisions
+
+@lesson 6.6 | Write it down | 📋 | workshop
+hook: You're sick on market day. Could someone else run your stall?
+learn: A system is a written step-by-step way of doing a job, like a recipe for your business.
+learn: Checklists for making, packing and running the stall mean others can help, and fewer mistakes happen.
+learn: Systems let a business grow without everything depending on you.
+play: build | Write a packing checklist that anyone could follow | Check the order on the order list; Check the candle for marks or cracks; Wrap it in tissue and a box; Add a thank-you card; Write the address and stick on the label; Tick the order off the list
+check: mcq | Why write down your systems? | So others can help, and mistakes happen less* | So nobody else can help | To make it slower
+check: tf | A checklist can help a business grow. | true
+home: Write a checklist for a job at home, like packing a school bag, and test it on someone.
+skill: systems
+
+@lesson 7.1 | The elevator pitch | 🛗 | stage
+hook: You meet a shop owner who could stock your product. You have 30 seconds. What do you say?
+learn: An elevator pitch is a short, clear explanation of your business that takes about 30 seconds.
+learn: Say the problem, your solution, who it's for and why you're the one to do it.
+learn: End with an ask, like "Could I drop off some samples?"
+play: order | Put an elevator pitch in order | Hi, I'm Mia from Wick and Wax.; Lots of people want candles without strong chemical smells.; We make soy candles scented only with essential oils.; We've sold 300 at local markets, and 40% of buyers come back.; Could I drop off some samples for your shop?
+check: mcq | What should an elevator pitch end with? | A clear ask* | A long story | Nothing
+check: tf | An elevator pitch should take about 30 seconds. | true
+home: Write a 30-second pitch for a business idea and say it to a grown-up.
+skill: pitching
+
+@lesson 7.2 | Know your audience | 🎯 | stage
+hook: Do customers and investors want to hear the same pitch?
+learn: Customers want to know what's in it for them, like the benefits.
+learn: Investors want to know how the business will grow and make money.
+learn: Judges of a youth competition might care most about your idea, your learning and your impact.
+play: match | Match each audience to what they care about most | A customer=How it helps them; An investor=How big it could grow and the return; A shop owner=Whether it will sell and the profit for them; A charity grant panel=The good it does
+check: mcq | What does an investor care about most? | How the business will grow and make money* | Your favourite colour | Only the logo
+check: tf | You should change your pitch for different audiences. | true
+home: Pitch the same idea twice to a grown-up, once as a customer and once as an investor.
+skill: pitching
+
+@lesson 7.3 | Tell a story | 📖 | stage
+hook: Two pitches for the same candles. Why does one stick in your head?
+learn: People remember stories more than lists of facts.
+learn: Start with a real moment, like the problem that made you start.
+learn: Then back it up with numbers that prove it works.
+play: diff | Two pitches for the same business. Tap what the stronger one adds. | We make candles; They smell nice; Please buy them | Mum's skin flared up from strong-smelling candles, so we made our own; Ours are scented only with essential oils; We've sold 300, and 40% of buyers come back
+check: mcq | What's a strong way to start a pitch? | A real story about the problem* | A list of prices | "Um, so, yeah"
+check: tf | Numbers that prove it works make a story stronger. | true
+home: Tell a grown-up the story of why you'd start a business.
+skill: storytelling
+
+@lesson 7.4 | Show your proof | 🔎 | stage
+hook: "Everyone will love it!" How do you prove that?
+learn: Proof is evidence that people want what you make.
+learn: Sales, pre-orders and repeat customers are strong proof. "My friends like it" is weak.
+learn: A working prototype is better than a drawing.
+play: sort | Strong proof, Weak proof | 300 sales at markets=Strong proof; "My mum thinks it's great"=Weak proof; 50 pre-orders paid in advance=Strong proof; A drawing of the idea=Weak proof; 40% of buyers came back to buy again=Strong proof; "Everyone will love it"=Weak proof | Strong or weak proof?
+check: mcq | Which is the strongest proof? | Paid pre-orders* | Your friend's opinion | A guess
+check: tf | A working prototype is better proof than a drawing. | true
+home: Think of a product idea. What proof could you collect that people want it?
+skill: pitching
+
+@lesson 7.5 | Tough questions | ❓ | stage
+hook: A judge asks a question you can't answer. Do you make something up?
+learn: Listen to the whole question, and take a breath before you answer.
+learn: Be honest. "I don't know yet, but here's how I'll find out" builds trust.
+learn: Practise answering likely questions, like costs, competitors and what could go wrong.
+play: chat | A judge questions your pitch | them: What stops a big company copying you? | me: Our local customers know us, and we're testing a refill service they can't easily copy.*/Nothing, I hadn't thought about it./They'd never bother. | them: What does each candle cost you to make? | me: $6.40, including the jar and wick. We sell them for $18.*/Not much, I think./Who cares? | them: How many could you make a month? | me: I'm not sure yet, but I'm timing batches this week to find out.*/Millions./Probably about a thousand, I guess.
+check: mcq | You don't know the answer to a question. What do you say? | "I don't know yet, but here's how I'll find out"* | Make up a number | Change the subject
+check: tf | Practising likely questions helps you pitch better. | true
+home: Ask a grown-up to fire three tough questions at your business idea.
+skill: pitching
+
+@lesson 7.6 | Practise and deliver | 🎤 | stage
+hook: Your pitch is written. How do you make it land on the day?
+learn: Practise out loud lots of times, and time yourself.
+learn: Slow down, look at people and stand still. Pause after your key points.
+learn: Use your slides or notes as prompts, not a script to read.
+play: tap | Tap the things that help you deliver a great pitch | 🗣️:yes:Practising out loud; ⏱️:yes:Timing yourself; 👀:yes:Looking at your audience; ⏸️:yes:Pausing after key points; 📜:no; 🏃:no
+check: mcq | How should you use your notes? | As prompts, not a script* | Read every word | Hide them
+check: tf | Practising out loud helps you deliver a pitch. | true
+home: Practise a one-minute talk about something you love, and time it.
+skill: presenting
+
+@lesson 8.1 | Rejection is normal | 🩱 | stage
+hook: She heard "no" again and again. Then her idea became a billion-dollar company. Who was she?
+learn: Sara Blakely sold fax machines door to door, and heard "no" almost every day.
+learn: In 2000, she started Spanx with $5,000 of her savings, after cutting the feet off a pair of tights.
+learn: She said selling door to door taught her not to fear rejection.
+play: mystery | She sold fax machines door to door; She started her company with $5,000 of savings; Her first product came from cutting the feet off tights; Her company is called Spanx | Sara Blakely* | Melanie Perkins | Mikaila Ulmer
+check: mcq | What did selling door to door teach her? | Not to fear rejection* | To stop selling | To avoid customers
+check: tf | Hearing "no" is a normal part of starting a business. | true
+home: Ask a grown-up about a time they heard "no" and kept going.
+skill: resilience
+
+@lesson 8.2 | No fancy start needed | 🚀 | stage
+hook: {nz:A Kiwi with no university degree started a rocket company. How?~au:Two uni graduates started a software giant with a credit card. How?}
+learn: {nz:Peter Beck didn't go to university. He trained as a tool-and-die maker and built rockets in his spare time.~au:In 2002, Mike Cannon-Brookes and Scott Farquhar started Atlassian with about $10,000 on a credit card.}
+learn: {nz:He founded Rocket Lab in 2006. In 2018, it launched a rocket to orbit from the Māhia Peninsula.~au:They started by selling software that helps teams track their work, and grew into a global company.}
+learn: Skills, persistence and solving a real problem can matter more than a fancy start.
+play: path | You want to start a business but have no degree and little money. | Start small, build skills and solve one real problem well => good: That's how many founders began. | Wait until you have a degree and $1 million => bad: Plenty of founders started with much less. | Borrow lots of money on cards to look big => bad: Debt before you've proven anything is very risky.
+check: mcq | {nz:Where did Rocket Lab launch to orbit from in 2018?~au:About how much money did Atlassian start with?} | {nz:The Māhia Peninsula~au:About $10,000 on a credit card}* | {nz:Wellington Airport~au:$10 million} | {nz:The Moon~au:Nothing at all}
+check: tf | You need a university degree to start a successful business. | false | Many founders started without one.
+home: Find out about a founder from {nz:New Zealand~au:Australia} with a grown-up. How did they start?
+skill: founders
+
+@lesson 8.3 | Staying alive | 🥣 | stage
+hook: A start-up had almost no money left. So its founders sold breakfast cereal. Why?
+learn: In 2008, the founders of Airbnb were running out of money.
+learn: They made special election-themed cereal boxes and sold them for $40 each, raising about $30,000.
+learn: That money kept the company going until investors joined. Sometimes survival needs creativity.
+play: order | Put the Airbnb cereal story in order | The founders start renting out air mattresses in their flat; They run out of money; They make election-themed cereal boxes; They sell them for $40 each; The money keeps them going until investors join
+check: mcq | What did the cereal boxes do for Airbnb? | Kept the company alive long enough to find investors* | Made them famous chefs | Nothing
+check: tf | Start-ups sometimes need creative ways to survive. | true
+home: Talk with a grown-up: if a business ran low on money, what creative things could it try?
+skill: founders
+
+@lesson 8.4 | Missing the change | 📼 | stage
+hook: In 2000, a giant video rental company was offered Netflix for $50 million. It said no. What happened?
+learn: Blockbuster had thousands of video rental stores and was hugely successful.
+learn: Netflix's founders offered to sell it to Blockbuster in 2000. Blockbuster turned it down.
+learn: People moved to streaming. Blockbuster went bankrupt in 2010. Netflix grew into a giant.
+play: debate | Why do successful companies miss big changes? | They focus on what works today and don't change fast enough* | They're always run by bad people | Sometimes it's hard to know which new idea will win. Many "next big things" fail.
+check: mcq | What lesson does Blockbuster teach? | Keep watching how customers are changing* | Never change anything | Always buy every company you're offered
+check: tf | Blockbuster turned down the chance to buy Netflix. | true
+home: Ask a grown-up how they watched movies when they were your age.
+skill: founders
+
+@lesson 8.5 | Honesty matters | ⚠️ | townhall
+hook: A founder said her machine could run hundreds of tests from one drop of blood. It couldn't. What happened?
+learn: Elizabeth Holmes founded Theranos, which claimed a tiny blood sample could run many medical tests.
+learn: The technology didn't work as claimed. In 2022, she was found guilty of fraud and later sent to prison.
+learn: Being hopeful about your idea is fine. Lying to customers or investors is fraud.
+play: sort | Healthy optimism, Dishonest | "We hope to reach 1,000 customers next year"=Healthy optimism; Faking test results for investors=Dishonest; "Our prototype works, but it's slow, and we're fixing that"=Healthy optimism; Saying a product works when it doesn't=Dishonest; Sharing real sales numbers, even when they're small=Healthy optimism; Hiding problems that could hurt people=Dishonest | Optimism or dishonesty?
+check: mcq | What's the difference between optimism and fraud? | Fraud means lying about facts* | There's no difference | Fraud is just extra optimism
+check: tf | Lying to investors about your product can be a crime. | true
+home: Talk with a grown-up about why honesty matters in business.
+skill: ethics
+
+@lesson 8.6 | The pivot | ↩️ | stage
+hook: Instagram started as a different app. So did Slack and Twitter. What's a pivot?
+learn: A pivot is when a start-up changes direction, keeping what works and dropping what doesn't.
+learn: Instagram began as Burbn, a check-in app. Users loved one part: sharing photos.
+learn: Slack began as a tool inside a games company. Twitter grew out of a podcast company.
+play: match | Match each company to how it started | Instagram=Burbn, a check-in app; Slack=A chat tool inside a games company; Twitter=A side project at a podcast company; Amazon=An online bookshop
+check: mcq | What's a pivot? | Changing direction, keeping what works* | Giving up | Spinning on one foot
+check: tf | Some big companies started as something quite different. | true
+home: Think of a business idea. What could you pivot to if the first version didn't work?
+skill: founders
+

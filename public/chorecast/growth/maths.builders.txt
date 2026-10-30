@@ -301,3 +301,273 @@ check: mcq | What else do shorter showers save? | Money for heating the water* |
 home: Time your shower with a grown-up's help and work out roughly how many litres you used.
 skill: rates
 
+@lesson 5.1 | Tens and hundreds | 🔟 | stall
+hook: A bike costs $347. Is that "about $300" or "about $350"?
+learn: To round to the nearest 10, look at the ones digit. 5 or more rounds up.
+learn: To round to the nearest 100, look at the tens digit. $347 is about $300.
+learn: To the nearest 10, $347 is about $350. Choose the rounding that fits the job.
+try: 63 to the nearest 10 is 60 :: gap | 87 to the nearest 10 is _ | 90
+play: match | Match each number to its rounded value | 347 to the nearest 100=300; 347 to the nearest 10=350; 862 to the nearest 100=900; 65 to the nearest 10=70; 1,240 to the nearest 100=1,200
+check: gap | 450 to the nearest 100 is _ | 500
+check: mcq | What's $83 to the nearest $10? | $80* | $90 | $100
+home: Round the prices on a shopping receipt to the nearest $10 with a grown-up.
+skill: rounding
+
+@lesson 5.2 | Always round up | ⬆️ | home
+hook: 26 kids are going on a trip. Each van fits 8. Are 3 vans enough?
+learn: Sometimes you must round up, even if the answer is close to the lower number.
+learn: 26 ÷ 8 = 3 and a bit. 3 vans leave 2 kids behind, so you need 4.
+learn: Round up for vans, packets, tins of paint and anything where running short is a problem.
+play: sort | Round up, Round to the nearest | Buses needed for 70 kids=Round up; Roughly what a $4.30 coffee costs=Round to the nearest; Packs of 6 rolls for 20 people=Round up; Roughly how far 9.8 km is=Round to the nearest; 2-litre bottles for 9 litres of water=Round up; Roughly how heavy 312 g of cheese is=Round to the nearest | Round up, or round to the nearest?
+check: gap | 20 people need 1 roll each. Rolls come in packs of 6. You need _ packs | 4
+check: mcq | 30 kids, 7 seats in each car. How many cars? | 5* | 4 | 3
+home: Plan a party with a grown-up. How many packs of plates do you need?
+skill: rounding
+
+@lesson 5.3 | The trolley total | 🛒 | stall
+hook: You've got $30. Will it cover everything in the trolley?
+learn: Round each price to the nearest dollar, and keep a running total as you shop.
+learn: $3.95 + $6.20 + $2.75 is about $4 + $6 + $3 = $13.
+learn: Rounding up a little on each item gives you a safety margin.
+try: $1.90 + $4.10 is about $2 + $4 = $6 :: gap | $2.95 + $5.05 is about $_ | 8
+play: slider | Estimate the total: $4.95, $2.10, $7.80, $3.20 and $5.90 | 10 | 40 | 24 | $ | 1 | 1
+check: mcq | $9.80 + $4.90 + $3.10 is about… | $18* | $15 | $21
+check: tf | Rounding each price up a little gives you a safety margin. | true
+home: Keep a rounded running total next time you shop with a grown-up. How close were you?
+skill: estimating
+
+@lesson 5.4 | Does that look right? | 🧐 | stall
+hook: The calculator says 4 × $12.50 = $500. Does that sound right?
+learn: Before trusting an answer, estimate it. 4 × $12.50 is about 4 × $12 = $48.
+learn: If the answer is way off your estimate, check what you typed.
+learn: A missed decimal point is a common slip. Typing 125 instead of 12.50 makes the answer 10 times too big.
+play: path | The calculator says 6 movie tickets at $14.50 cost $870. | Estimate 6 × $15, about $90, then check what was typed => good: The real answer is $87. A missed decimal point made it 10 times too big. | Pay $870, because calculators are always right => bad: A calculator only works out what you type. | Guess $50 instead => bad: That's not close to 6 × $15 either.
+check: mcq | 5 × $9.90 should be about… | $50* | $5 | $500
+check: tf | If an answer is far from your estimate, check what you typed. | true
+home: Do a sum on a calculator with a grown-up, but estimate the answer first.
+skill: estimating
+
+@lesson 5.5 | Head maths tricks | 🧠 | stall
+hook: 5 things at $9.99 each. Can you work it out in two seconds?
+learn: Round and fix: 5 × $9.99 is 5 × $10 = $50, take away 5c = $49.95.
+learn: Halve and double: 25 × 16 is the same as 50 × 8, which is 400.
+learn: To times by 10, every digit moves one place to the left. 10 × $3.40 = $34.
+play: match | Match each sum to its answer | 3 × $9.99=$29.97; 10 × $4.50=$45; 25 × 8, done as 50 × 4=200; 4 × $19.99=$79.96; Half of $3.60=$1.80
+check: gap | 2 × $4.99 = $_ | 9.98
+check: mcq | What's 4 × $2.99, using round and fix? | $12 − 4c = $11.96* | $8.96 | $12.40
+home: Challenge a grown-up to a head maths race using prices in a catalogue.
+skill: mental maths
+
+@lesson 5.6 | Big estimates | 🍞 | kitchen
+hook: How many slices of bread does your family eat in a year? Nobody counts, but you can estimate!
+learn: Break a big question into small ones you can guess.
+learn: 4 people × 2 slices a day × 365 days is about 4 × 2 × 360 = 2,880 slices.
+learn: Your answer won't be exact, but it'll be in the right ballpark.
+play: slider | About how many loaves is 2,880 slices, if each loaf has 20 slices? | 50 | 250 | 144 | loaves | 15 | 1
+check: mcq | What's the best first step for a big estimate? | Break it into smaller questions* | Guess a random number | Give up
+check: gap | 3 people × 2 apples a day × 7 days = _ apples | 42
+home: Estimate with a grown-up how many litres of milk your family drinks in a year.
+skill: estimating
+
+@lesson 6.1 | Parts of a chart | 📊 | online
+hook: A chart has bars, but no title and no numbers. What does it tell you?
+learn: Every good chart needs a title that says what it shows.
+learn: The axes need labels, like "Week" along the bottom and "Dollars saved" up the side.
+learn: The scale shows what each line on the chart is worth. A key explains colours.
+play: tap | Tap the things a good chart needs | 🏷️:yes:A title; 📏:yes:Labels on the axes; 🔢:yes:A scale with numbers; 🗝️:yes:A key if colours mean something; 🦄:no; 🎉:no
+check: mcq | What does a chart's title do? | Says what the chart shows* | Makes it colourful | Nothing
+check: tf | A chart with no numbers on the scale is hard to read. | true
+home: Find a chart in a newspaper or online with a grown-up. Does it have a title, labels and a scale?
+skill: charts
+
+@lesson 6.2 | Reading the scale | 📏 | online
+hook: A bar stops halfway between the 20 line and the 30 line. What's its value?
+learn: Not every line on a chart is worth 1. Lines might go up in 2s, 5s or 10s.
+learn: Check the numbers on the scale first.
+learn: A bar halfway between 20 and 30 is about 25.
+play: slider | On a chart going up in 10s, a bar stops halfway between 40 and 50. What's its value? | 0 | 100 | 45 | | 2 | 1
+check: gap | The scale goes up in 5s. A bar stops at the 4th line above zero. Its value is _ | 20
+check: mcq | What should you check first on a bar chart? | The scale* | The colour | The font
+home: Draw a bar chart with a grown-up, with lines that go up in 5s.
+skill: charts
+
+@lesson 6.3 | Line graphs | 📈 | online
+hook: Your savings over a year make a line. What does a flat part mean?
+learn: A line graph shows how something changes over time.
+learn: Going up means it's increasing. Going down means it's decreasing.
+learn: A flat part means no change. A steep part means a fast change.
+play: mystery | It shows how something changes over time; It has points joined by a line; It's great for showing the temperature through a day | A line graph* | A pie chart | A shopping list
+check: mcq | A savings line goes flat for two months. What happened? | Savings didn't change* | Savings grew fast | Savings disappeared
+check: tf | A steep line means a fast change. | true
+home: Record the temperature at the same time each day for a week, and draw a line graph with a grown-up.
+skill: charts
+
+@lesson 6.4 | Pie charts | 🥧 | online
+hook: Half your pie chart is "Savings". What fraction of your money is that?
+learn: A pie chart shows parts of a whole, like how you split your pocket money.
+learn: Half the pie is 50%. A quarter is 25%. The whole pie is 100%.
+learn: If you get $20 and half the pie is "Savings", you save $10.
+try: Half of $20 is $10 :: gap | A quarter of $20 is $_ | 5
+play: match | Match each slice of the pie to its percent | Half the pie=50%; A quarter of the pie=25%; Three quarters of the pie=75%; The whole pie=100%; A tenth of the pie=10%
+check: gap | You get $40. A quarter of the pie is "Give". You give $_ | 10
+check: mcq | What does a pie chart show? | Parts of a whole* | Change over time | Distances
+home: Make a pie chart with a grown-up of how you spend your day: sleep, school and play.
+skill: charts
+
+@lesson 6.5 | Which chart? | 🤔 | online
+hook: You want to show how your savings grew over a year. Bar, line or pie?
+learn: Bar charts are great for comparing things, like sales on different days.
+learn: Line graphs are best for change over time.
+learn: Pie charts show parts of a whole, like how a budget is split.
+play: sort | Bar chart, Line graph, Pie chart | Comparing how many cookies each class sold=Bar chart; Your height every birthday=Line graph; How your $10 is split between jars=Pie chart; Favourite fruits in your class=Bar chart; The temperature across a day=Line graph; How a family budget is shared out=Pie chart | Which chart fits best?
+check: mcq | Which chart is best for change over time? | A line graph* | A pie chart | No chart
+check: tf | Pie charts show parts of a whole. | true
+home: Find a chart with a grown-up. Was it the best kind for its job?
+skill: charts
+
+@lesson 6.6 | Make your own chart | 🖍️ | online
+hook: You asked 20 classmates their favourite snack. How do you show the answers?
+learn: Start with a tally, then turn it into a table of numbers.
+learn: Choose the right chart, and a scale that fits your biggest number.
+learn: Add a title and labels, so anyone can read it.
+play: build | Make a chart from a survey | Ask your question and keep a tally; Count the tally into a table; Choose the best kind of chart; Pick a scale that fits your biggest number; Draw the bars or slices; Add a title and labels
+check: mcq | Your biggest number is 18. Which scale fits best? | Lines going up in 2s to 20* | Lines going up in 100s | Lines going up in 1s to 5
+check: tf | A tally can help you collect survey answers. | true
+home: Survey your family about something, like favourite meals, and make a chart.
+skill: charts
+
+@lesson 7.1 | The mean | ➗ | stage
+hook: You scored 6, 8, 7 and 11 in four games. What's your average?
+learn: The mean is what most people call the average.
+learn: Add up all the numbers, then divide by how many there are.
+learn: 6 + 8 + 7 + 11 = 32. There are 4 games, so 32 ÷ 4 = 8.
+try: (4 + 6) ÷ 2 = 5 :: gap | (3 + 5 + 7) ÷ 3 = _ | 5
+play: slider | You saved $5, $9, $4 and $6 over four weeks. What's the mean each week? | 0 | 10 | 6 | $ | 0 | 1
+check: gap | The mean of 10, 20 and 30 is _ | 20
+check: mcq | How do you find the mean? | Add them up and divide by how many* | Pick the biggest | Pick the first one
+home: Find the mean of your family's ages with a grown-up.
+skill: averages
+
+@lesson 7.2 | The median | 🎯 | stage
+hook: Five friends' heights are all mixed up. Who's in the middle?
+learn: The median is the middle number when you put them in order.
+learn: For 7, 2, 9, 4 and 5, put them in order: 2, 4, 5, 7, 9. The middle one is 5.
+learn: If there's an even number of values, the median is halfway between the middle two.
+play: order | Put these in order to find the median: 7, 2, 9, 4, 5 | 2; 4; 5; 7; 9
+check: gap | The median of 3, 8, 1, 6 and 4 is _ | 4
+check: mcq | The median of 2, 4, 6 and 8 is… | 5* | 4 | 6
+home: Line up some books by height with a grown-up. Which one is the median?
+skill: averages
+
+@lesson 7.3 | The mode | 👟 | stall
+hook: A shoe shop sells sizes 4, 5, 5, 6, 5 and 7. Which size should it stock most of?
+learn: The mode is the value that appears most often.
+learn: In 4, 5, 5, 6, 5, 7, the mode is 5. It appears three times.
+learn: The mode works for things that aren't numbers too, like favourite colours.
+play: match | Match each set to its mode | Shoe sizes 4, 5, 5, 6=5; Pets per family 2, 1, 1, 3, 1=1; Scores 7, 9, 9, 9, 10=9; Favourite colours red, blue, blue, green=Blue
+check: gap | The mode of 3, 3, 4, 8, 3, 8 is _ | 3
+check: mcq | The mode is the value that… | Appears most often* | Is in the middle | Is the biggest
+home: Ask your family their favourite fruit. Which one is the mode?
+skill: averages
+
+@lesson 7.4 | The range | 🏀 | stage
+hook: Two players both average 10 points a game. Are they just as good?
+learn: The range shows how spread out the numbers are: the highest minus the lowest.
+learn: Player A scores 9, 10, 11. The range is 11 − 9 = 2. Player B scores 0, 10, 20. The range is 20.
+learn: The same average can hide very different patterns.
+play: path | Your team needs steady points in the final. Both players average 10. | Pick Player A, who scores 9 to 11 every game => good: A small range means steady scoring. | Pick Player B, who scores 0 or 20 => ok: B might win it big, or score nothing. That's a risk. | Pick whoever has the cooler shoes => bad: Shoes don't score points.
+check: gap | Scores of 4, 9 and 15 have a range of _ | 11
+check: mcq | What does a big range show? | The numbers are very spread out* | The numbers are all the same | The average is big
+home: Write down the temperature for five days. Work out the range with a grown-up.
+skill: averages
+
+@lesson 7.5 | Average per week | 📅 | bank
+hook: You spent $12, $8, $15 and $5 on snacks over four weeks. How much should you plan for each week?
+learn: Averages help you plan, because spending goes up and down.
+learn: $12 + $8 + $15 + $5 = $40. $40 ÷ 4 weeks = $10 a week.
+learn: Plan around the average, and keep a little extra for the dearer weeks.
+play: build | Plan your weekly snack money | Write down each week's spending; Add them all up; Divide by the number of weeks; Plan that amount each week; Check again next month
+check: gap | You spent $6, $10 and $8 over three weeks. That's a mean of $_ a week | 8
+check: mcq | Why plan with an average? | Spending goes up and down each week* | Every week is the same | It's always the most you spent
+home: Work out your average weekly spending over a month with a grown-up.
+skill: budgeting
+
+@lesson 7.6 | Which average? | 🤔 | stage
+hook: Mean, median or mode. Which one should you use?
+learn: Use the mean for everyday averages, like test scores, when there are no extreme numbers.
+learn: Use the median when a few huge or tiny numbers would pull the mean, like house prices.
+learn: Use the mode to find the most popular choice, like sizes or flavours.
+play: sort | Mean, Median, Mode | Which shoe size to stock most of=Mode; Typical house price in a town with a few mansions=Median; Your average test score this term=Mean; The most popular ice cream flavour=Mode; Typical pocket money when one kid gets $100=Median; Average rainfall per month=Mean | Which average fits best?
+check: mcq | Which average is best for the most popular flavour? | Mode* | Mean | Median
+check: tf | The median isn't pulled much by one huge number. | true
+home: Find an average in the news with a grown-up. Is it a mean or a median?
+skill: averages
+
+@lesson 8.1 | Weekly, monthly, yearly | 📆 | home
+hook: Some costs come every week, some every month and some once a year. Which is which?
+learn: Weekly costs come every week, like pocket money or rent in many homes.
+learn: Monthly costs come once a month, like a phone plan or streaming service.
+learn: Yearly costs come once a year, like car registration or insurance. They're easy to forget!
+play: sort | Weekly, Monthly, Yearly | Pocket money=Weekly; A phone plan=Monthly; Car registration=Yearly; Rent in many homes=Weekly; A streaming subscription=Monthly; Home insurance=Yearly | How often does it come?
+check: mcq | Which cost is easy to forget because it only comes once a year? | Car registration* | Pocket money | Weekly groceries
+check: tf | A phone plan is usually paid monthly. | true
+home: Ask a grown-up to name one weekly, one monthly and one yearly cost in your home.
+skill: budgeting
+
+@lesson 8.2 | A month isn't 4 weeks | 📅 | bank
+hook: You get $10 a week. Is that $40 a month?
+learn: There are 52 weeks in a year, but only 12 months. So a month is about 4.3 weeks.
+learn: To change weekly to monthly, times by 52, then divide by 12.
+learn: $10 a week × 52 = $520 a year. $520 ÷ 12 = about $43 a month, not $40.
+try: $5 a week × 52 = $260 a year :: gap | $20 a week × 52 = $_ a year | 1040
+play: slider | You get $10 a week. About how much is that a month? | 30 | 60 | 43 | $ | 2 | 1
+check: gap | $1,200 a year is $_ a month | 100
+check: mcq | How many weeks are in a year? | 52* | 48 | 12
+home: Work out your pocket money per month and per year with a grown-up.
+skill: budgeting
+
+@lesson 8.3 | Monthly or yearly plan? | 🎬 | online
+hook: A streaming service costs $12.99 a month, or $119 a year. Which is cheaper?
+learn: To compare, change both to the same time, like per month or per year.
+learn: $12.99 × 12 = $155.88 a year. The yearly plan is $119, so it saves about $37.
+learn: But a yearly plan only saves money if you'll keep using it all year.
+play: price | Which plan costs less per month? | Monthly plan:12.99:1:month; Yearly plan:119:12:months
+check: gap | $10 a month for 12 months is $_ | 120
+check: mcq | When is a yearly plan a good deal? | When you'll use it all year* | When you'll stop after a month | Never
+home: Find a subscription your family has with a grown-up. Is there a cheaper yearly option?
+skill: budgeting
+
+@lesson 8.4 | Small costs add up | ☕ | stall
+hook: A $3 drink every school day. That's nothing, right?
+learn: Small costs repeated often add up to big amounts.
+learn: $3 a day × 5 school days = $15 a week. Over 40 school weeks, that's $600 a year!
+learn: You don't have to stop treats. Just know what they really cost, and choose.
+play: path | You buy a $3 drink after school every day. | Bring a drink bottle from home, and buy one as a Friday treat => good: You still get a treat, and save about $480 a year. | Keep buying one every day, and plan for it in your budget => ok: That's your choice, as long as you know it's about $600 a year. | Buy two a day, because they're cheap => bad: That's about $1,200 a year.
+check: gap | $2 a day for 5 days is $_ a week | 10
+check: mcq | $15 a week for 40 weeks is… | $600* | $55 | $150
+home: Pick something small your family buys often. Work out what it costs in a year.
+skill: budgeting
+
+@lesson 8.5 | Saving for a goal | 🎯 | bank
+hook: You want a $120 skateboard in 12 weeks. How much do you save each week?
+learn: Divide the goal by the number of weeks. $120 ÷ 12 = $10 a week.
+learn: If you can only save $8 a week, it will take 15 weeks instead.
+learn: Write your weekly target down, and tick off each week.
+play: match | Match each goal to how much to save each week | $120 in 12 weeks=$10 a week; $90 in 6 weeks=$15 a week; $50 in 10 weeks=$5 a week; $200 in 8 weeks=$25 a week; $40 in 20 weeks=$2 a week
+check: gap | A $60 goal in 4 weeks needs $_ a week | 15
+check: mcq | You save $5 a week for a $50 goal. How many weeks? | 10* | 5 | 50
+home: Choose a goal with a grown-up and work out how much to save each week.
+skill: saving
+
+@lesson 8.6 | Split your money | 🫙 | bank
+hook: You earn $40. How much goes to saving, spending and giving?
+learn: Many people split their money by percent, like saving 20% or giving 10%.
+learn: 10% of $40 is $4. 20% of $40 is $8. 50% of $40 is $20.
+learn: Deciding the split before you spend makes saving automatic.
+try: 10% of $20 is $2 :: gap | 10% of $50 is $_ | 5
+play: gen | split | 4
+check: gap | You earn $30 and save 20%. You save $_ | 6
+check: mcq | When should you decide how to split your money? | Before you spend it* | After it's gone | Never
+home: Choose a percent split for your money with a grown-up, and try it next payday.
+skill: budgeting
+

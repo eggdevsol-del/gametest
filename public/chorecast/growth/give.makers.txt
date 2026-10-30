@@ -290,3 +290,267 @@ check: tf | You should check facts before sharing a post about a cause. | true
 home: Find one cause you follow online and pick one real action you could take.
 skill: advocacy
 
+@lesson 5.1 | A product's life | 👟 | workshop
+hook: Your new sneakers cost $120. What did they cost the planet?
+learn: A product's life cycle runs from raw materials, to making, to shipping, to use, to the end of its life.
+learn: Each stage uses energy and resources, and can make waste or emissions.
+learn: For clothes and shoes, making the materials is often one of the biggest parts of the footprint.
+play: order | Put a sneaker's life cycle in order | Rubber, cotton and plastic are produced; The sneaker is made in a factory; It's shipped to a shop; You wear it for a year or two; It's thrown away, recycled or passed on
+check: mcq | What's a product's life cycle? | Every stage from materials to disposal* | How fast you can cycle | A type of bike
+check: tf | Shipping is the only part of a product's footprint. | false | Materials, making, use and disposal count too.
+home: Pick one thing you own. Talk with a grown-up about where its materials came from.
+skill: sustainability
+
+@lesson 5.2 | The waste ladder | 🪜 | home
+hook: Is recycling the best thing you can do with old stuff?
+learn: The waste ladder ranks choices from best to worst: refuse, reduce, reuse, repair, recycle, then landfill.
+learn: Recycling still uses energy and loses material, so it's near the bottom, just above landfill.
+learn: Businesses can climb the ladder too, by using less packaging or offering repairs.
+play: build | Build the waste ladder from best to worst | Refuse what you don't need; Reduce how much you use; Reuse things again; Repair what breaks; Recycle what's left; Send it to landfill
+check: mcq | Which is higher on the waste ladder? | Repairing a jacket* | Recycling it | Sending it to landfill
+check: tf | Recycling is better than reusing. | false | Reusing keeps something in use, with less energy.
+home: Find one thing at home you could repair instead of replacing.
+skill: sustainability
+
+@lesson 5.3 | The circular economy | ♻️ | stall
+hook: What if nothing a business made ever became rubbish?
+learn: In a straight-line economy, we take, make, use and throw away.
+learn: A circular economy keeps things in use: refill, rent, repair, resell and take back.
+learn: It can save businesses money too, because materials get used again.
+play: match | Match each business to its circular idea | A shop that refills your shampoo bottle=Refill; A store that rents out formal clothes=Rent; A phone shop that fixes cracked screens=Repair; A shoe brand that turns old pairs into new ones=Take back; An online shop for second-hand books=Resell
+check: mcq | What's the goal of a circular economy? | Keeping things in use and out of landfill* | Making more waste faster | Selling only new things
+check: tf | Circular ideas can save businesses money. | true
+home: Find a business near you that refills, repairs, rents or resells things.
+skill: circular economy
+
+@lesson 5.4 | Makers who take it back | 🔄 | townhall
+hook: Who should pay to deal with old tyres, batteries and bottles: you, the council or the maker?
+learn: Product stewardship means makers and sellers help deal with their products at the end of their life.
+learn: {nz:NZ's tyre scheme, Tyrewise, has run since 2024. Things like e-waste and plastic packaging are also named priority products.~au:Every Australian state and territory now runs a container deposit scheme. Tasmania's started in May 2025.}
+learn: {nz:Some businesses run their own take-back schemes, for things like paint and batteries.~au:You get 10c back for each eligible can or bottle you return.}
+play: slider | A deposit scheme pays 10c for each can. Your club returns 450 cans. How many dollars is that? | 0 | 100 | 45 | $ | 0 | 5
+check: mcq | What's product stewardship? | Makers help deal with products at the end of their life* | Shops stop selling products | Councils make all the products
+check: tf | {nz:NZ has a product stewardship scheme for tyres.~au:Every Australian state and territory has a container deposit scheme.} | true
+home: {nz:Find a place near you that takes back batteries, paint or old phones.~au:Collect cans and bottles with a grown-up and take them to a refund point.}
+skill: sustainability
+
+@lesson 5.5 | Cut first, then offset | 🌍 | garden
+hook: A company says it's "carbon neutral" because it paid for trees to be planted. Is that enough?
+learn: A carbon footprint is the greenhouse gas a business causes, from energy, transport, materials and waste.
+learn: Cutting emissions means using less energy, switching to cleaner power and wasting less.
+learn: Offsets pay for cuts somewhere else. They can help, but some are low quality, so cut first.
+play: debate | Should a business cut its own emissions or buy offsets? | Cut as much as it can first, then offset only what's left* | Just buy cheap offsets and carry on as usual | Offsets can fund real projects, like protecting forests, and some emissions are hard to cut. Quality matters.
+check: mcq | Which of these cuts emissions? | Switching delivery vans to electric* | Buying offsets only | Changing the logo to green
+check: tf | All carbon offsets are high quality. | false | Some offsets don't deliver the cuts they promise.
+home: Talk with a grown-up about one way your household could use less energy.
+skill: climate
+
+@lesson 5.6 | Green choices cost green | ⚖️ | stall
+hook: Compostable cups cost twice as much as plastic ones. Should your café switch?
+learn: Greener choices sometimes cost more, at least at first.
+learn: Some save money over time, like LED lights or using less packaging.
+learn: Businesses weigh up cost, customers and impact. Being honest about trade-offs builds trust.
+play: path | Your café could switch to compostable cups for 10c more each. | Give a discount for reusable cups, and switch the rest => good: Reuse is best, and fewer cups helps cover the extra cost. | Switch and say nothing to customers => ok: It's greener, but customers might help if they knew. | Call your plastic cups "eco" without changing anything => bad: That's greenwashing, and it breaks trust.
+check: mcq | Which green choice can save money over time? | LED lights* | Leaving lights on | Using more packaging
+check: tf | Greener choices always cost more. | false | Some, like using less packaging or energy, save money.
+home: Find two products at the shop, one with less packaging. Compare the prices with a grown-up.
+skill: sustainability
+
+@lesson 6.1 | What Fairtrade does | 🤝 | stall
+hook: Fairtrade chocolate costs a bit more. Where does the extra money go?
+learn: Fairtrade sets a minimum price, so farmers aren't paid less than it costs to grow their crop.
+learn: Farmers' groups also get a Fairtrade Premium, extra money they vote to spend on things like schools, clinics or better equipment.
+learn: Farms are checked against standards for pay, safety and the environment.
+play: slider | Say a farmers' co-op sells 10,000 kg of coffee, with a premium of 20c a kg. How many dollars is the premium? | 0 | 5000 | 2000 | $ | 0 | 100
+check: mcq | Who decides how the Fairtrade Premium is spent? | The farmers and workers* | The shop | The customer
+check: tf | Fairtrade sets a minimum price for farmers. | true
+home: Find a Fairtrade label on something at the supermarket with a grown-up.
+skill: fair trade
+
+@lesson 6.2 | Fast fashion | 👗 | stall
+hook: A t-shirt for $5. Who paid the real price?
+learn: Fast fashion means cheap clothes, made fast, in new styles every few weeks.
+learn: In 2013, the Rana Plaza factory building in Bangladesh collapsed, killing more than 1,100 garment workers.
+learn: Cheap clothes can mean low pay, unsafe factories and lots of clothes thrown away.
+play: debate | Is buying cheap fast fashion always wrong? | Buy less, choose better and make clothes last, and push brands to treat workers fairly* | Yes, and anyone who buys it is a bad person | Cheap clothes help families on tight budgets. Better rules for factories may help workers more than blaming shoppers.
+check: mcq | What happened at Rana Plaza in 2013? | A garment factory building collapsed* | A new mall opened | A fashion show
+check: tf | Cheap clothes can come with hidden costs for workers. | true
+home: Check the labels on three pieces of clothing with a grown-up. Where were they made?
+skill: supply chains
+
+@lesson 6.3 | Modern slavery | ⛓️ | townhall
+hook: Could something you bought have been made by someone who wasn't free to leave?
+learn: Modern slavery is when people are forced to work through threats, debt or having their passport taken.
+learn: It can hide deep in supply chains, like fishing, farms or cotton fields.
+learn: {nz:A Modern Slavery Bill introduced in 2026 would make large organisations report on these risks.~au:Since 2019, Australian businesses with over $100 million in revenue must report on modern slavery risks.}
+play: tap | Tap the warning signs of forced work | 🛂:yes:Bosses keep workers' passports; 💸:yes:Workers owe huge recruitment fees; 🚪:yes:Workers aren't allowed to leave; ⏰:yes:Forced overtime with no pay; 📄:no; 🏖️:no
+check: mcq | Which is a sign of modern slavery? | A boss keeps workers' passports* | Workers get paid holidays | Workers can quit
+check: tf | Modern slavery can hide deep in supply chains. | true
+home: Talk with a grown-up about how a business can check who makes its products.
+skill: supply chains
+
+@lesson 6.4 | Reading the labels | 🏷️ | stall
+hook: Fairtrade, FSC, Rainforest Alliance. What do all these labels mean?
+learn: Certification labels mean an outside group checked a product against standards.
+learn: Each label checks different things, like workers' pay, forests or farming.
+learn: No label is perfect, but checked claims are more reliable than words like "ethical" with no proof.
+play: match | Match each label to what it mainly checks | Fairtrade=Fair prices and conditions for farmers; FSC=Wood and paper from well-managed forests; Rainforest Alliance=Farms that protect nature and workers; Certified B Corporation=A company's whole impact on people and planet
+check: mcq | Which is more reliable? | A label checked by an outside group* | The word "ethical" with no proof | A green leaf picture
+check: tf | Every label checks the same things. | false | Each label checks different things.
+home: Find two certification labels at home or at the shop. What does each one check?
+skill: fair trade
+
+@lesson 6.5 | Ask the brand | ❓ | online
+hook: Who made my clothes? You can actually ask.
+learn: After Rana Plaza, a campaign called Fashion Revolution started asking brands "Who made my clothes?"
+learn: Good brands share which factories they use and how they check them.
+learn: Brands that won't answer, or only give vague replies, tell you something too.
+play: chat | You message a clothing brand | them: Hi! How can we help today? | me: Can you tell me which factories make your t-shirts?*/Why are you so evil?/Give me a free shirt. | them: Our t-shirts are made in two factories in India. We list them on our website. | me: Thanks. How do you check the workers are paid fairly?*/OK whatever./That's boring. | them: Independent auditors visit every year, and we publish what they find.
+check: mcq | What does a good brand share? | Which factories it uses and how it checks them* | Nothing at all | Only its logo
+check: tf | A vague answer from a brand can tell you something. | true
+home: Look on a clothing brand's website with a grown-up. Do they say where their clothes are made?
+skill: supply chains
+
+@lesson 6.6 | Your power as a buyer | 🛍️ | stall
+hook: You're one shopper. Can your choices really change anything?
+learn: When lots of people change what they buy, brands notice.
+learn: Buying less, buying second-hand and repairing clothes all help.
+learn: Asking questions and choosing checked labels pushes brands to do better.
+play: sort | Helps workers and the planet, Doesn't help | Buying second-hand=Helps workers and the planet; Buying 10 cheap tops you'll wear once=Doesn't help; Mending a ripped jacket=Helps workers and the planet; Choosing a checked Fairtrade label=Helps workers and the planet; Throwing clothes away when they're out of fashion=Doesn't help; Asking a brand who made its clothes=Helps workers and the planet | Does it help?
+check: mcq | Which choice helps most? | Buying less and making clothes last* | Buying more | Throwing clothes away
+check: tf | When lots of people change what they buy, brands notice. | true
+home: Pick one piece of clothing to mend or pass on, instead of throwing it away.
+skill: ethical shopping
+
+@lesson 7.1 | Giving circles | ⭕ | home
+hook: Ten friends each give $10 a month. Together, could they do something big?
+learn: A giving circle is a group that pools its money and decides together where to give.
+learn: Members research causes, invite charities to talk and vote on where the money goes.
+learn: It turns small gifts into bigger ones, and members learn a lot about giving well.
+play: path | Your giving circle has $600 and two choices. | Research both, ask each charity about its results, then vote => good: You chose with evidence, and everyone had a say. | Give it to whoever the loudest member likes => bad: That skips the research and leaves others out. | Split it 50/50 without looking at either => ok: Fair, but you might miss the one that does more good.
+check: mcq | What's a giving circle? | A group that pools money and decides together* | A circle drawn on a donation box | A charity shop
+check: tf | Giving circles can turn small gifts into bigger ones. | true
+home: Talk with your family about starting a mini giving circle together.
+skill: philanthropy
+
+@lesson 7.2 | The Gates Foundation | 💉 | museum
+hook: Which foundation has said it will spend $200 billion and then close its doors in 2045?
+learn: The Gates Foundation, set up in 2000, is one of the world's biggest foundations.
+learn: It has spent billions on vaccines, fighting polio and malaria, and farming in poor countries.
+learn: In 2025 it said it would spend $200 billion over 20 years, then close at the end of 2045.
+play: mystery | It was set up in 2000; It funds vaccines and the fight against polio and malaria; In 2025 it said it would close in 2045; It carries the family name of a Microsoft co-founder |The Gates Foundation* | The Red Cross | The Rockefeller Foundation
+check: mcq | Why might a foundation plan to close? | To spend more now, while it can do the most good* | Because it ran out of ideas | It's the law
+check: tf | The Gates Foundation has funded vaccines in poor countries. | true
+home: Look up one project the Gates Foundation funds with a grown-up.
+skill: philanthropy
+
+@lesson 7.3 | Giving skills | 🛠️ | workshop
+hook: A lawyer gives a charity 20 hours of free advice. Is that philanthropy too?
+learn: Pro bono means professionals giving their skills for free, for the public good.
+learn: Skilled help, like design, legal advice or accounting, can be worth more than a small cash gift.
+learn: You have skills too, like video editing, coding or tutoring younger kids.
+play: match | Match each skill to how it could help a charity | Graphic design=A new poster for an appeal; Accounting=Checking the yearly accounts; Video editing=A short film about their work; Coding=Fixing their website; Tutoring=Homework help for kids in their programme
+check: mcq | What does pro bono mean? | Giving professional skills for free* | Charging double | A type of bone
+check: tf | Skilled help can be worth more than a small cash gift. | true
+home: List three skills you have that a charity or club might find useful.
+skill: volunteering
+
+@lesson 7.4 | Where the money came from | 🏛️ | museum
+hook: Big museums took the Sackler family's name off their walls. Why?
+learn: The Sackler family gave millions to museums and universities.
+learn: Their company sold OxyContin, a painkiller linked to a deadly opioid addiction crisis in the United States.
+learn: Several big museums, including the Louvre and the Met, removed the Sackler name. Many people argue about whether to accept money linked to harm.
+play: debate | Should a museum accept a big gift from a family linked to harm? | Look closely at how the money was made, and say no if accepting it would excuse serious harm* | Yes, money is money, whatever its source | Some argue the money can still do good, and refusing it doesn't undo the harm. It's a real debate.
+check: mcq | Why did museums remove the Sackler name? | Its link to the opioid crisis* | It was spelt wrong | The family asked for more money
+check: tf | People disagree about accepting money linked to harm. | true
+home: Talk with a grown-up: would you accept a big gift from someone whose business caused harm?
+skill: ethics
+
+@lesson 7.5 | Strings attached | 🪢 | townhall
+hook: A donor gives $50,000 but says it can only be spent on a new sign. Is that helpful?
+learn: Restricted gifts can only be spent on one thing the donor chooses.
+learn: Unrestricted gifts let the charity spend where it's most needed, like rent, staff or a crisis.
+learn: Many charities say unrestricted money helps them most, because they know what they need.
+play: sort | Restricted, Unrestricted | "Use this only for new uniforms"=Restricted; "Spend this wherever it's most needed"=Unrestricted; "This must pay for a named building"=Restricted; "Use it for running costs if you need to"=Unrestricted; "Only for this year's camp"=Restricted; "Use it as you see fit"=Unrestricted | Restricted or unrestricted?
+check: mcq | Why do many charities prefer unrestricted gifts? | They can spend it where it's most needed* | It's more fun | They don't need to report anything
+check: tf | Restricted gifts can only be spent on what the donor chooses. | true
+home: Talk with a grown-up about whether you'd give a restricted or unrestricted gift, and why.
+skill: philanthropy
+
+@lesson 7.6 | Start your giving now | 🌱 | bank
+hook: You don't need millions to be a philanthropist. Where do you start?
+learn: Start with a percentage of your money, even 5% or 10%.
+learn: Pick one or two causes you care about, and learn about them.
+learn: Give regularly, then check once a year what your giving achieved.
+play: budget | Plan your $50 of earnings this month | 50 | Spend=15; Save=15; Give=5; Invest=0 | Friend's birthday present:5
+check: gap | Giving 10% of $50 is $_ | 5
+check: mcq | What's a good habit for young givers? | Give regularly and check what it achieved* | Give once and forget | Only give when someone asks loudly
+home: Choose with a grown-up what percentage of your money you'll give.
+skill: giving
+
+@lesson 8.1 | Pick your problem | 🎯 | townhall
+hook: You want to make a change. Climate? Hunger? Your school's broken water fountain? Where do you start?
+learn: Pick a problem you care about, that's close to you, and where you can make a real dent.
+learn: "Solve climate change" is too big for one project. "Cut food waste in our school canteen" is a great start.
+learn: A small win teaches you how change works, and gets people behind your next idea.
+play: sort | Good first project, Too big for now | Cut food waste in your school canteen=Good first project; End world hunger=Too big for now; A clothing swap at school=Good first project; Fix all of the country's housing=Too big for now; A monthly beach clean-up club=Good first project; Change every law about plastic=Too big for now | Good first project, or too big for now?
+check: mcq | Which is a good first project? | Cut food waste in your canteen* | End world hunger by Friday | Fix every problem at once
+check: tf | A small win can help you make bigger changes later. | true
+home: List three problems you care about. Which one could you actually make a dent in?
+skill: project planning
+
+@lesson 8.2 | Listen first | 👂 | townhall
+hook: You've got a great idea to fix the canteen's food waste. Have you asked the canteen staff?
+learn: The people closest to a problem often understand it best.
+learn: Ask open questions, listen and take notes before you plan anything.
+learn: You might find the real problem is different from what you first thought.
+play: chat | Talking to the canteen manager | them: You wanted to ask about food waste? | me: Yes. What gets thrown away the most, and why?*/You waste too much food./I've already planned everything. | them: Mostly sandwiches. We make too many because we don't know how many kids will buy. | me: Would it help if students pre-ordered in the morning?*/Just make fewer./That's not my problem. | them: That would help a lot. Could your group help set it up?
+check: mcq | What should you do before planning your project? | Listen to the people closest to the problem* | Decide everything alone | Post about it online
+check: tf | The real problem can be different from what you first thought. | true
+home: Interview someone about a problem they deal with. Ask three open questions.
+skill: listening
+
+@lesson 8.3 | A SMART goal | 🎯 | townhall
+hook: "Reduce food waste" or "Cut canteen sandwich waste by half by the end of term". Which goal works better?
+learn: A SMART goal is Specific, Measurable, Achievable, Relevant and Time-bound.
+learn: Specific means it says exactly what. Measurable means you can count it.
+learn: Time-bound means it has a deadline. That keeps you on track.
+play: diff | A vague goal and a SMART goal. Tap what the SMART goal adds. | Reduce waste; Soon; Somehow | Cut canteen sandwich waste from 40 to 20 a day; By the end of Term 3; Using a morning pre-order system
+check: mcq | Which goal is SMART? | Cut sandwich waste by half by the end of term* | Do better | Fix waste somehow
+check: tf | A SMART goal has a deadline. | true
+home: Turn one of your goals into a SMART goal with a grown-up.
+skill: goal setting
+
+@lesson 8.4 | Plan your resources | 📋 | townhall
+hook: You've got $150 from the school council for your project. How will you spend it?
+learn: List what you need: people, materials, permission and money.
+learn: Ask for things to be donated or lent before you buy them.
+learn: Keep some money spare for surprises, and track every dollar.
+play: budget | Plan $150 for a canteen pre-order project | 150 | Printing order forms=30; Posters=20; A lockable order box=40; Thank-you morning tea for helpers=0; Spare=0 | Extra printing:20
+check: mcq | What should you do before buying things for a project? | Ask if they can be donated or lent* | Buy the most expensive version | Spend it all at once
+check: tf | Tracking every dollar helps you report back honestly. | true
+home: Make a list of what you'd need for a small project, and what it would cost.
+skill: project planning
+
+@lesson 8.5 | Get people on board | 📣 | stage
+hook: Your project needs 20 helpers. How do you get people excited?
+learn: Explain the problem and your plan in a minute or less, with one striking fact.
+learn: Ask people for one clear, small thing, like helping one lunchtime a week.
+learn: Thank helpers, and share the progress so they stay involved.
+play: tap | Tap the things that get people on board | 📊:yes:One striking fact about the problem; 🙋:yes:A clear, small ask; 🙏:yes:Thanking people who help; 📈:yes:Sharing progress; 😠:no; 🤐:no
+check: mcq | What's a good ask for new helpers? | One clear, small job* | Do everything | Nothing in particular
+check: tf | Sharing progress helps keep people involved. | true
+home: Write a one-minute pitch for your project and practise it on a grown-up.
+skill: leadership
+
+@lesson 8.6 | Measure and share | 📊 | townhall
+hook: The term is over. Did your project work?
+learn: Measure the same thing before and after, like sandwiches thrown away each day.
+learn: Share your results honestly with everyone who helped, including what didn't work.
+learn: Celebrate, then decide what's next: keep it going, hand it over or try something new.
+play: order | Finish your project well | Count the result the same way as before; Compare it with your starting number; Write up what worked and what didn't; Share the results and thank everyone; Decide what's next
+check: gap | Sandwich waste went from 40 a day to 15 a day. That's _ fewer a day | 25
+check: mcq | What should you share at the end? | Honest results, including what didn't work* | Only the good bits | Nothing
+home: Look back on something you did this year with a grown-up. What worked, and what would you change?
+skill: impact
+

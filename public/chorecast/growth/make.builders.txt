@@ -290,3 +290,269 @@ check: mcq | Which pays more per hour? | $20 in 2 hours* | $20 in 5 hours | $20 
 home: Work out your earnings per hour for a job you've done, with a grown-up.
 skill: profit
 
+@lesson 5.1 | Start with a problem | 🧩 | workshop
+hook: Is the best product the coolest idea, or the one that fixes a problem?
+learn: Great products start with a problem people really have.
+learn: Ask: who has this problem, and how do they deal with it now?
+learn: If nobody has the problem, nobody will buy the fix.
+play: match | Match each problem to a product that could fix it | Earbud cords always get tangled=A clip-on cord wrap; The dog gets bored home alone=A treat puzzle toy; Lunchbox food goes soggy=A box with separate sections; Bike lights get stolen=Lights that click on and off easily
+check: mcq | What should you find before you make a product? | A real problem people have* | The fanciest materials | The highest price
+check: tf | If nobody has the problem, nobody will buy the fix. | true
+home: List three small problems your family has at home. Could a product fix one?
+skill: product design
+
+@lesson 5.2 | Quick and cheap first | ✂️ | workshop
+hook: Should your first version be perfect?
+learn: A prototype is a rough first version you make to test an idea.
+learn: Use cheap things, like cardboard, tape or a small test batch.
+learn: Spend little until you know people like it. Then make it better.
+play: sort | Good first prototype, Too much too soon | A cardboard model of a phone stand=Good first prototype; Ordering 500 printed boxes=Too much too soon; A half batch of a new cookie=Good first prototype; Buying a $300 machine before testing=Too much too soon; A sketch shown to five friends=Good first prototype; A hand-sewn test bag=Good first prototype | Smart start or too much too soon?
+check: mcq | What's a prototype? | A rough first version to test* | The final product | A type of shop
+check: tf | You should spend lots of money before testing your idea. | false | Test cheaply first. Then spend more on what works.
+home: Make a cardboard prototype of something you'd like to invent.
+skill: prototyping
+
+@lesson 5.3 | A fair test | 🔬 | workshop
+hook: Your slime is better this time. Was it the extra glue or the new bowl?
+learn: In a fair test, you change only one thing at a time.
+learn: Keep everything else the same, so you know what made the difference.
+learn: Write down each version and what happened.
+play: diff | Two slime tests. Tap the one thing that changed. | 100 mL glue; 2 tsp contact solution; Mixed for 2 minutes; Same bowl | 100 mL glue; 3 tsp contact solution; Mixed for 2 minutes; Same bowl
+check: mcq | In a fair test, how many things do you change at once? | One* | All of them | None
+check: tf | Writing down each version helps you learn what works. | true
+home: Do a fair test with a grown-up, like paper planes with one change each time.
+skill: testing
+
+@lesson 5.4 | Honest feedback | 💬 | stall
+hook: Your best friend says your product is "awesome". Is that helpful?
+learn: Friends and family are often too nice to tell you what's wrong.
+learn: Ask open questions, like "What would you change?" instead of "Do you like it?"
+learn: Watch people use it. Where do they get stuck?
+play: chat | You're testing a new phone stand with a classmate | them: Yeah, it's cool I guess. | me: What would make it better?*/So you love it, right?/Fine, whatever | them: It tips over with my big phone. | me: Thanks! Can you show me how it tipped?*/No it doesn't/You're holding it wrong | them: See, when I tap the screen it wobbles. | me: That really helps. I'll make the base wider and test again.*/Your phone is the problem/I'll just ignore that
+check: mcq | Which question gets more useful feedback? | "What would you change?"* | "Do you like it?" | "It's great, isn't it?"
+check: tf | Watching people use your product can show problems. | true
+home: Ask a grown-up to test something you made. Ask, "What would you change?"
+skill: feedback
+
+@lesson 5.5 | Try, try again | 🔁 | workshop
+hook: James Dyson built thousands of vacuum cleaner prototypes before one worked well. Why keep going?
+learn: Most products take many versions to get right. Dyson built 5,127 prototypes of his bagless vacuum.
+learn: Each version that doesn't work teaches you something.
+learn: But know when to stop. If testers still don't want it, try a new idea.
+play: path | Your third version of a bird feeder still leaks seed. | Find where it leaks, fix that one part and test again => good: Small fixes, one at a time, make it better. | Give up and throw it all away => ok: You can stop, but you might be close. Try fixing one thing first. | Sell it anyway and hope nobody notices => bad: Unhappy customers won't come back, and they'll tell their friends.
+check: mcq | What does a version that doesn't work give you? | Something to learn* | Nothing at all | A reason to quit straight away
+check: tf | Good products often take many versions. | true
+home: Pick something you made that didn't work. Talk with a grown-up about one change to try.
+skill: improving
+
+@lesson 5.6 | Ready to sell? | ✅ | stall
+hook: Your product works. Is it ready for customers?
+learn: Check it's safe, it works every time and you can make more that are just as good.
+learn: Work out the cost to make one, so your price covers it.
+learn: Ask a grown-up to check it before you sell.
+play: tap | Tap the checks to do before you sell | 🦺:yes:It's safe to use; 🔁:yes:It works every time; 🏷️:yes:You know what each one costs to make; 📦:yes:You can make more just as good; 🎉:no; 🪄:no
+check: mcq | Why work out the cost to make one? | So your price covers it* | So it looks fancy | So you can skip testing
+check: tf | A grown-up should check your product before you sell it. | true
+home: Make a "ready to sell" checklist for something you could make.
+skill: product design
+
+@lesson 6.1 | Selling online, with help | 🧑‍💻 | online
+hook: You've made 20 keyrings. Can you sell them online by yourself?
+learn: Most online marketplaces say sellers must be 18, so kids sell through a grown-up's account, with their help.
+learn: {nz:Many social media apps also have a minimum age, often 13.~au:Since December 2025, under-16s in Australia can't have accounts on most big social media apps.}
+learn: Selling with a grown-up means they can help with payments, posting and tricky buyers.
+play: path | You want to sell your keyrings online. | Ask a grown-up to list them on their account and help you manage it => good: You follow the rules, and someone's there to help. | Make your own account and say you're 18 => bad: That breaks the rules, and your account could be shut down. | Post your phone number in a public group so buyers can text you => bad: That shares your private details with strangers.
+check: mcq | How do most kids sell on online marketplaces? | Through a grown-up's account, with their help* | By pretending to be 18 | By posting their phone number
+check: tf | Most big marketplaces need sellers to be 18. | true
+home: Look at a marketplace's rules about age with a grown-up.
+skill: online selling
+
+@lesson 6.2 | Keep your details private | 🔐 | online
+hook: A buyer asks which school you go to. Should you tell them?
+learn: Online, never share your full name, address, school or phone number with buyers.
+learn: Let your grown-up handle messages, payments and posting.
+learn: If an item is collected, a grown-up should meet the buyer in a busy public place.
+play: sort | OK to share, Keep private | What the item is made of=OK to share; Your home address=Keep private; The item's size=OK to share; Your school=Keep private; The price=OK to share; Your phone number=Keep private | Is it OK to share with a buyer?
+check: mcq | Who should meet a buyer to hand over an item? | A grown-up, in a busy public place* | You, alone | Nobody, leave it on the footpath
+check: tf | It's fine to tell a buyer which school you go to. | false | Keep your school and address private.
+home: Talk with a grown-up about which details you'd never share online.
+skill: online safety
+
+@lesson 6.3 | Postage adds up | 📮 | online
+hook: Your keyring sells for $8. Posting it costs $6. Hmm.
+learn: Posting things costs money, and small items can cost more to post than they're worth.
+learn: Decide who pays for postage. Many sellers add it to the price the buyer pays.
+learn: Selling a bundle of several items, posted together, saves on postage.
+try: $8 keyring + $6 postage = $14 for the buyer :: gap | $12 bracelet + $6 postage = $_ for the buyer | 18
+play: slider | You sell 3 keyrings at $8 each, posted together for $6. How much does the buyer pay altogether? | 0 | 50 | 30 | $ | 0 | 1
+check: gap | Posting 1 item costs $6. Posting 4 items one at a time costs $_ | 24
+check: mcq | How can you save on postage? | Post several items together* | Use a bigger box for every item | Post each one separately
+home: Look up the cost of posting a small parcel with {nz:NZ Post~au:Australia Post}.
+skill: pricing
+
+@lesson 6.4 | Dodgy buyers | 🚩 | online
+hook: A buyer says they'll pay you $50 for a $10 keyring. Lucky you?
+learn: Some "buyers" are scammers. They offer too much, rush you or ask you to click links.
+learn: Real buyers ask normal questions, like the size, colour or when it can be posted.
+learn: Show any strange message to your grown-up before you reply.
+play: scam | Real buyer or scammer? | Is the blue one still available?=real; I'll pay $50 for your $10 keyring if you send it today=scam; Click this link to get your money=scam; Could you post it to me this week?=real; Send me your bank password so I can pay you=scam | Scammers overpay, rush you, send links or ask for passwords. Real buyers ask normal questions.
+check: mcq | What should you do with a strange message from a buyer? | Show your grown-up* | Click the link | Send the item straight away
+check: tf | A real buyer would never need your password. | true
+home: Read some example scam messages with a grown-up and spot the tricks.
+skill: scams
+
+@lesson 6.5 | Reviews | ⭐ | online
+hook: A buyer gives you 2 stars because the parcel was late. What now?
+learn: Buyers often leave reviews. Good reviews help new buyers trust you.
+learn: Post on time, pack well and describe things honestly to earn good reviews.
+learn: If you get a bad review, stay calm, say sorry and try to fix the problem.
+play: chat | A buyer is unhappy, and your grown-up is helping you reply | them: My keyring arrived late and the clasp was bent. | me: I'm really sorry about that. Could we send you a new one?*/That's not my fault./Whatever, you already paid. | them: Oh, that would be great, thanks. | me: No problem. We'll post it tomorrow with tracking.*/Pay for postage first./Maybe next month. | them: Thanks! I'll update my review.
+check: mcq | What should you do after a bad review? | Stay calm, say sorry and try to fix it* | Write a mean reply | Ignore it forever
+check: tf | Good reviews help new buyers trust you. | true
+home: Read some reviews of a shop with a grown-up. What made people happy or unhappy?
+skill: customer service
+
+@lesson 6.6 | Keep your promise | 📦 | online
+hook: You promised to post on Monday. It's Thursday. What happens to your reputation?
+learn: When someone buys from you, they trust you to send what you promised, on time.
+learn: Check the item, pack it well and post it when you said you would.
+learn: Send a message when it's on its way. Buyers love updates.
+play: order | Get an online order to your buyer | Check the item has no faults; Wrap it so it won't get damaged; Write the address clearly, with a grown-up; Post it on the day you promised; Message the buyer to say it's on its way
+check: mcq | Why post on the day you promised? | So buyers trust you* | Because the post office says so | It doesn't matter
+check: tf | Sending a message when the parcel is on its way makes buyers happier. | true
+home: Help a grown-up pack and post a parcel.
+skill: customer service
+
+@lesson 7.1 | Roles that fit | 🧩 | workshop
+hook: Your team has a great artist, a great talker and someone who loves numbers. Who does what?
+learn: Teams work best when people do jobs that match what they're good at.
+learn: Every team needs making, selling and money jobs.
+learn: Swapping jobs sometimes helps people learn new skills too.
+play: match | Match each team member to a job that suits them | Loves drawing and design=Makes the posters and labels; Chatty and friendly=Serves customers; Great with numbers=Keeps the cash book; Careful and patient=Makes the products
+check: mcq | Who should keep the cash book? | Someone who's great with numbers* | Whoever arrives last | Nobody
+check: tf | Swapping jobs sometimes helps people learn new skills. | true
+home: Think of a team you're in. What is each person good at?
+skill: teamwork
+
+@lesson 7.2 | Three ways to split | ➗ | bank
+hook: You put in $30 and your friend put in $10. You made $80. How do you split it?
+learn: Equal split: everyone gets the same. $80 between two is $40 each.
+learn: Split by money put in: you paid 3 parts and your friend paid 1 part, so you get $60 and they get $20.
+learn: Split by work: if you each did different hours, share it by hours. Agree which way before you start.
+try: $60 split equally between 3 is $20 each :: gap | $90 split equally between 3 is $_ each | 30
+play: slider | You put in $20 and your friend put in $20. You made $100. Splitting by money put in, how much do you get? | 0 | 100 | 50 | $ | 0 | 5
+check: gap | You worked 6 hours and your friend worked 2. You made $40. Split by hours, you get $_ | 30
+check: mcq | When should you agree how to split the money? | Before you start* | After you've spent it | Never
+home: Work out three ways to split $60 between two people with a grown-up.
+skill: sharing
+
+@lesson 7.3 | A partner agreement | 📝 | townhall
+hook: You and a friend are starting a car wash business. What should you agree first?
+learn: A partner agreement writes down who does what, who pays for what and how money is shared.
+learn: It also says what happens if someone wants to stop, or if you disagree.
+learn: Both partners sign it, and a grown-up can help you write it.
+play: build | Write a partner agreement | Write both partners' names; List who does each job; Say who pays for supplies; Say how you'll split the profit; Say what happens if someone wants to stop; Both partners sign it
+check: mcq | Why write a partner agreement? | So everyone knows what was agreed* | To make it longer | Because it's homework
+check: tf | A partner agreement should say what happens if someone wants to stop. | true
+home: Write a simple partner agreement for a pretend business with a grown-up.
+skill: agreements
+
+@lesson 7.4 | When a partner slacks off | 😴 | stall
+hook: Your partner hasn't turned up for the last two car washes. What do you do?
+learn: Talk about it early, before you get really annoyed.
+learn: Ask what's going on. There might be a reason you don't know.
+learn: Look at your agreement together, and agree on a fair fix.
+play: chat | Talking to your business partner | them: Hey, sorry I missed the car washes. | me: That's OK. Is everything all right?*/You're so lazy!/I'm keeping all the money. | them: I've had extra swimming training on Saturdays. | me: Could you do Sundays instead, or should we change how we split the money?*/Too bad, figure it out./Whatever, I quit. | them: Sundays work! And I'll do extra next week to make up for it.
+check: mcq | What's a good first step when a partner slacks off? | Ask what's going on* | Yell at them | Take all the money
+check: tf | Looking at your agreement can help you find a fair fix. | true
+home: Talk with a grown-up about how to raise a problem kindly.
+skill: teamwork
+
+@lesson 7.5 | Making decisions together | 🗳️ | stall
+hook: You want to raise the price. Your partner doesn't. Who decides?
+learn: Agree how you'll make big decisions, like prices or spending money.
+learn: Some teams vote. Some need everyone to agree. Some give each person their own area to decide.
+learn: Listen to each other's reasons before you decide.
+play: path | You want to spend $30 of team money on a new sign. Your partner isn't sure. | Explain why, listen to their reasons and decide together => good: You both have a say, and you might find a better idea. | Spend it anyway while they're not looking => bad: That breaks trust. It's team money. | Give up and never mention it again => ok: That avoids a fight, but a good idea might be lost.
+check: mcq | What should you do before making a big team decision? | Listen to everyone's reasons* | Decide alone | Flip a coin without talking
+check: tf | Spending team money without asking breaks trust. | true
+home: Make a family decision together, like what to have for dinner, by listening to everyone first.
+skill: decisions
+
+@lesson 7.6 | Ending a partnership | 👋 | stall
+hook: Your partner is moving to another town. What happens to the business?
+learn: Partnerships can end for lots of reasons, and that's OK.
+learn: Follow your agreement. Share out the money, and decide who keeps the equipment.
+learn: End things kindly. You might want to work together again one day.
+play: debate | Your partner is leaving. You keep the business. What's fair? | Share the money as agreed, and pay them for their half of the equipment* | Keep everything, since you're staying | Some partners agree the leaver just takes their share of the cash. What matters is following what you agreed.
+check: mcq | What should guide how a partnership ends? | Your agreement* | Who shouts loudest | A coin toss
+check: tf | Ending a partnership kindly is a good idea. | true
+home: Talk with a grown-up about how to end something fairly, like a club or a team.
+skill: agreements
+
+@lesson 8.1 | Lego's start | 🧱 | museum
+hook: The world's biggest toy company started with a carpenter making wooden ducks. How?
+learn: In 1932, a carpenter in Denmark called Ole Kirk Christiansen started making wooden toys.
+learn: He named his company Lego, from Danish words meaning "play well".
+learn: Lego started making plastic bricks in 1949, and the bricks we know today in 1958.
+play: order | Put Lego's story in order | A carpenter starts making wooden toys in 1932; He names the company Lego, meaning "play well"; Lego starts making plastic bricks in 1949; The modern clicking brick arrives in 1958; Lego becomes one of the world's biggest toy companies
+check: mcq | What does "Lego" come from? | Danish words meaning "play well"* | The founder's dog | A type of plastic
+check: tf | Lego first made wooden toys. | true
+home: Build something with blocks or Lego and tell a grown-up how it started.
+skill: business history
+
+@lesson 8.2 | A famous food from small beginnings | 🍫 | museum
+hook: A favourite {nz:Kiwi chocolate~au:Aussie spread} started small, over 100 years ago. What is it?
+learn: {nz:In 1896, James Henry Whittaker started making chocolate in Christchurch.~au:In 1922, Cyril Callister made a new spread in Melbourne for Fred Walker's food company, using leftover yeast from beer making.}
+learn: {nz:The business grew slowly, and the Whittaker family still owns it today.~au:A competition chose its name. Sales were slow at first, but it became one of Australia's best-known foods.}
+learn: Big brands often start with one person, one product and lots of patience.
+play: mystery | {nz:It started in Christchurch in 1896~au:It was first made in Melbourne in 1922}; {nz:James Henry Whittaker started it~au:It's made from leftover brewer's yeast}; {nz:The same family still owns it~au:Its name was picked in a competition}; {nz:It's famous for chocolate blocks~au:It's dark brown and spread on toast} | {nz:Whittaker's~au:Vegemite}* | {nz:A fizzy drink~au:A chocolate bar} | {nz:A biscuit factory~au:A cheese}
+check: mcq | What do many big brands start with? | One person, one product and patience* | A huge factory | Millions of dollars
+check: tf | Big brands can start very small. | true
+home: Look at a food packet with a grown-up. Find out when and where that brand started.
+skill: business history
+
+@lesson 8.3 | Garage beginnings | 🏚️ | museum
+hook: Some of the world's biggest companies started in garages. Why there?
+learn: In 1939, Bill Hewlett and David Packard started Hewlett-Packard in a garage in California.
+learn: That garage is now called "the birthplace of Silicon Valley".
+learn: Starting small means low costs while you test your idea.
+play: tap | Tap the things many big companies had at the very start | 💡:yes:A good idea; 🧰:yes:A few simple tools; 💵:yes:Not much money; 🔁:yes:Lots of trying again; 🏢:no; 🛥️:no
+check: mcq | Why start small, like in a garage? | Costs stay low while you test the idea* | Garages are fancy | You must, by law
+check: tf | Hewlett-Packard started in a garage. | true
+home: Talk with a grown-up about where you could start a small business at home.
+skill: business history
+
+@lesson 8.4 | The first product | 📚 | museum
+hook: Amazon sells almost everything now. What did it sell first?
+learn: Many big companies started by selling just one thing.
+learn: Amazon began by selling books online in the 1990s.
+learn: Some first products were very different: Nintendo started with playing cards, and Nokia with paper.
+play: match | Match each company to its first product | Amazon=Books sold online; Nintendo=Playing cards; Nokia=Paper; Lego=Wooden toys; Samsung=Dried fish and groceries
+check: mcq | What did Nintendo first make? | Playing cards* | Video games | Phones
+check: tf | Many big companies started by selling just one thing. | true
+home: Pick a company you know. Find out with a grown-up what it sold first.
+skill: business history
+
+@lesson 8.5 | Failing first | 🐭 | museum
+hook: Walt Disney's first cartoon studio went broke. What happened next?
+learn: In 1923, Walt Disney's first studio, Laugh-O-Gram, went bankrupt.
+learn: He moved, started again and later created Mickey Mouse.
+learn: Lots of founders fail before they succeed. They learn from what went wrong.
+play: path | Your first business, selling slime, didn't make any money. | Work out what went wrong and try a better idea => good: That's what lots of famous founders did. | Decide you're just bad at business => bad: One failure doesn't mean you can't do it. | Blame your customers and quit => bad: Learning from what went wrong helps more than blaming.
+check: mcq | What did Walt Disney do after his first studio failed? | Started again* | Gave up for ever | Became a chef
+check: tf | Lots of founders fail before they succeed. | true
+home: Ask a grown-up about something they failed at first, then got better at.
+skill: resilience
+
+@lesson 8.6 | What they had in common | 🔑 | workshop
+hook: Lego, Amazon, Disney. What did their founders do that you could do too?
+learn: They solved a problem or made something people loved.
+learn: They kept improving, listened to customers and didn't give up after mistakes.
+learn: Luck and timing helped too. Nobody does it all alone.
+play: sort | Helps a business grow, Doesn't help | Listening to customers=Helps a business grow; Giving up after one mistake=Doesn't help; Improving the product again and again=Helps a business grow; Ignoring complaints=Doesn't help; Working with a good team=Helps a business grow; Copying someone else's work=Doesn't help | Does it help?
+check: mcq | What did many famous founders do? | Kept improving and listened to customers* | Never changed anything | Ignored customers
+check: tf | Luck and timing can help a business too. | true
+home: Pick one famous company with a grown-up and find one thing its founder did well.
+skill: business history
+

@@ -288,3 +288,270 @@ check: tf | You can split your Give jar between more than one charity. | true
 home: Choose a charity with your family using the three questions in this lesson.
 skill: giving
 
+@lesson 5.1 | Emergency volunteers | 🚒 | townhall
+hook: A fire starts in a small town at night. Who comes? Often, it's volunteers.
+learn: In many country towns, the fire brigade is run by volunteers who train in their own time.
+learn: {nz:Volunteers also crew Coastguard boats and many rural St John ambulances.~au:Volunteers also run the SES, which helps in floods and storms, and many rural fire brigades.}
+learn: They leave work, school pick-ups or their beds when the pager goes off.
+play: match | Match each volunteer group to what it does | Volunteer fire brigade=Puts out fires and helps at crashes; Surf lifesavers=Keep swimmers safe at the beach; {nz:Coastguard~au:Marine rescue}=Rescues boats in trouble at sea; {nz:Search and rescue teams~au:The SES}={nz:Find people lost in the bush~au:Helps people in floods and storms}
+check: mcq | Who runs many fire brigades in country towns? | Volunteers* | Movie stars | Robots
+check: tf | Emergency volunteers give their time for free. | true
+home: Find out with a grown-up whether your nearest fire station has volunteers.
+skill: community
+
+@lesson 5.2 | Quiet heroes | 🌼 | townhall
+hook: Not every hero wears a uniform. Who helps quietly where you live?
+learn: Some people coach kids' teams, help at the school library or visit older people who live alone.
+learn: Others drive people to the doctor, or knit beanies for babies in hospital.
+learn: This unpaid work keeps a community going.
+play: tap | Tap the quiet heroes | ⚽:yes:A parent who coaches the under-10s; 📚:yes:A volunteer who reads with kids at school; 🧶:yes:Someone who knits beanies for babies in hospital; 🚗:yes:A driver who takes older people to appointments; 🛋️:no; 🎮:no
+check: mcq | Which is a quiet hero? | A neighbour who visits a lonely older person* | Someone who watches TV all day | A person who drops litter
+check: tf | Unpaid work helps keep a community going. | true
+home: Name three quiet heroes in your life with a grown-up. Could you thank one of them?
+skill: community
+
+@lesson 5.3 | Places that bring us together | 🏘️ | townhall
+hook: When floods hit a town, where do people go for food and a bed?
+learn: Community halls, churches, clubs and {nz:marae~au:community centres} bring people together.
+learn: {nz:When Cyclone Gabrielle hit in 2023, many marae opened their doors to feed and house people.~au:After floods and bushfires, community centres and clubs often become places to eat, sleep and get help.}
+learn: Many of these places rely on volunteers, and they need help all year, not just in emergencies.
+play: sort | Brings people together, Doesn't | A community garden=Brings people together; A sports club's sausage sizzle=Brings people together; A hall that's always locked=Doesn't; Story time at the library=Brings people together; Ignoring new neighbours=Doesn't; A street party=Brings people together | Does it bring people together?
+check: mcq | What can community places do in an emergency? | Feed and shelter people* | Close for good | Sell tickets
+check: tf | Community places need help all year, not just in emergencies. | true
+home: Find a community hall, club or {nz:marae~au:centre} near you with a grown-up. What happens there?
+skill: community
+
+@lesson 5.4 | Spot a local need | 🔍 | garden
+hook: The playground is full of rubbish. Is that someone else's job?
+learn: Local heroes notice a problem and do something about it.
+learn: Look around. Is there rubbish, a lonely neighbour or a club that needs helpers?
+learn: Ask people what would help. Don't just guess.
+play: path | Your local playground has broken glass and rubbish everywhere. | Tell a grown-up, report the glass to the council and plan a clean-up with gloves => good: The glass gets reported, and you help safely. | Pick up the glass with your bare hands => bad: Broken glass can cut you badly. | Walk past, because it's not your job => ok: It isn't your job, but a small step could help lots of kids.
+check: mcq | What's a good first step to help with a local problem? | Ask people what would help* | Guess and rush in | Complain online
+check: tf | You can report problems like broken glass to the council. | true
+home: Walk around your street with a grown-up. Spot one thing that could be better.
+skill: community
+
+@lesson 5.5 | Say thank you | 💌 | home
+hook: Your coach has given up every Saturday for three years. Do they know you noticed?
+learn: Volunteers don't get paid, so thanks really matters to them.
+learn: A card, a drawing or a few kind words can make their day.
+learn: Some councils and towns give awards to volunteers. You can nominate someone.
+play: chat | You're thanking your team's volunteer coach | them: Hey! Great game today. | me: Thanks for coaching us every week. We really appreciate it.*/Why did we lose?/Can I go home now? | them: Oh, that's kind. I love doing it! | me: You helped me learn to pass. That's my favourite part now.*/Whatever/I'm quitting next week | them: That's made my week. See you Saturday!
+check: mcq | Why does thanking volunteers matter? | They give their time for free* | They get paid lots | It doesn't
+check: tf | You can nominate a local volunteer for an award. | true
+home: Make a thank-you card for a volunteer who helps you.
+skill: gratitude
+
+@lesson 5.6 | Be a local hero | 🦸 | townhall
+hook: Could you be a local hero at 11? Yes. Here's how to start.
+learn: Pick something small you can keep doing, like a monthly clean-up or helping at the library.
+learn: Join a group that's already helping, with a grown-up. They know what's needed.
+learn: Showing up again and again matters more than one big effort.
+play: build | Plan how you'll help your community | Pick a need you care about; Find a group already helping; Ask a grown-up to come with you; Choose how often you can help; Show up and keep going
+check: mcq | What matters most for a local hero? | Showing up regularly* | One huge effort once | Being famous
+check: tf | Joining a group that's already helping is a good start. | true
+home: Choose one regular way to help your community with your family.
+skill: volunteering
+
+@lesson 6.1 | Why give overseas? | 🌏 | townhall
+hook: Some kids in the world walk hours for water every day. Can we help from here?
+learn: In some countries, many families don't have clean water, enough food, schools or doctors.
+learn: Because costs can be lower there, a dollar can sometimes do a lot of good.
+learn: Charities work with local people, who know best what's needed.
+play: match | Match each need to a way charities help | No clean water nearby=Building wells and water pumps; Kids can't get to school=Building schools and training teachers; Mosquitoes spread malaria=Giving out bed nets; Families can't grow enough food=Seeds and farming training
+check: mcq | Who knows best what a community needs? | The local people* | Someone far away who's never been there | Nobody
+check: tf | A dollar can sometimes do more good in another country. | true
+home: Find a country on a map with a grown-up and look up one way a charity helps there.
+skill: global giving
+
+@lesson 6.2 | Money or stuff? | 📦 | townhall
+hook: An earthquake hits another country. Should you send your old clothes?
+learn: After a disaster, aid groups usually ask for money, not things.
+learn: Money lets them buy exactly what's needed, often from local shops, which helps local businesses too.
+learn: Shipping boxes of stuff is slow and expensive, and it can pile up unused.
+play: debate | After a disaster overseas, what's the best way to help? | Give money to a trusted aid group, which can buy what's needed locally* | Send boxes of old clothes and toys | Sometimes specific items are asked for, like blood donations or a school's book drive. Follow what the aid groups ask for.
+check: mcq | Why do aid groups usually ask for money after a disaster? | They can buy exactly what's needed, fast* | They like counting coins | Things are never useful
+check: tf | Shipping boxes of donations overseas can be slow and expensive. | true
+home: Look at a big aid group's website with a grown-up. What do they ask people to give?
+skill: global giving
+
+@lesson 6.3 | Our Pacific neighbours | 🏝️ | townhall
+hook: A cyclone hits a Pacific island near us. How do people help?
+learn: {nz:NZ~au:Australia} has close ties with Pacific countries like Tonga, Samoa, Fiji and Vanuatu.
+learn: When cyclones, floods or volcanoes hit, governments, charities and families send help.
+learn: Many Pacific families living here send money home to support their relatives.
+play: path | A big cyclone has hit a Pacific island. Your class wants to help. | Raise money and give it through a trusted aid group or a local Pacific church or community group => good: Money gets to people who know what's needed. | Collect old toys and post them yourselves => ok: Kind, but posting is slow and costly, and toys may not be what's needed. | Share a stranger's fundraising link without checking it => bad: Fake appeals pop up after disasters. Check first.
+check: mcq | What's a safe way to give after a disaster? | Through a trusted aid or community group* | A stranger's link you haven't checked | Sending cash in the post
+check: tf | Fake appeals sometimes pop up after disasters. | true
+home: Find out with a grown-up about a Pacific country and its link to {nz:NZ~au:Australia}.
+skill: global giving
+
+@lesson 6.4 | A big global helper | 🧒 | museum
+hook: Which group works for children in more than 190 countries and territories?
+learn: Some big organisations work all over the world, like UNICEF, the Red Cross and the World Food Programme.
+learn: UNICEF is part of the United Nations. It helps children with vaccines, clean water, school and safety.
+learn: The Red Cross helps in disasters and wars, and the World Food Programme brings food where it's needed.
+play: mystery | It works for children in more than 190 countries and territories; It's part of the United Nations; It helps with vaccines, clean water and school; Its name starts with U | UNICEF* | The Red Cross | The World Food Programme
+check: mcq | What does the World Food Programme do? | Brings food where it's needed* | Makes video games | Sells clothes
+check: tf | The Red Cross helps people in disasters. | true
+home: Look at UNICEF's website with a grown-up. Find one thing they did this year.
+skill: global giving
+
+@lesson 6.5 | Help that lasts | 🌾 | garden
+hook: Give a family a bag of rice, or help them grow rice for years. Which is better?
+learn: Some help is for right now, like food after a flood. That's really important.
+learn: Other help lasts for years, like teaching farming skills or building a well.
+learn: Good charities often do both: help now, then help people stand on their own feet.
+play: sort | Help for right now, Help that lasts for years | Food parcels after a flood=Help for right now; Training farmers to grow more=Help that lasts for years; Emergency tents=Help for right now; Building a school=Help that lasts for years; Bottled water after a storm=Help for right now; A small loan to start a business=Help that lasts for years | Right now, or for years?
+check: mcq | Which help lasts for years? | Teaching farming skills* | One bottle of water | A single meal
+check: tf | Help for right now is important too. | true
+home: Talk with a grown-up about the difference between help for now and help that lasts.
+skill: global giving
+
+@lesson 6.6 | How far does it go? | 🎒 | stall
+hook: Your class raised $120. How many school kits could that buy?
+learn: Charities often say what an amount can buy, like "$8 buys a school kit".
+learn: Dividing your total by the cost shows how many you could help.
+learn: Ask the charity how they know the kits get used. Good charities check.
+try: $40 ÷ $8 = 5 kits :: gap | $64 ÷ $8 = _ kits | 8
+play: slider | Your class raised $120. Each school kit costs $8. How many kits is that? | 0 | 30 | 15 | kits | 0 | 1
+check: gap | Bed nets cost $5 each. $60 buys _ nets | 12
+check: mcq | What's a good question to ask a charity? | How do you know it's working?* | What's your favourite colour? | Can I have a prize?
+home: Find a charity that says what an amount buys. Work out what your Give jar could do.
+skill: global giving
+
+@lesson 7.1 | Native or pest? | 🐀 | garden
+hook: Why would anyone set traps to save birds?
+learn: {nz:Rats, stoats and possums were brought to NZ by people. They eat native birds, eggs and insects.~au:Foxes and feral cats were brought to Australia by people. They hunt many small native animals.}
+learn: {nz:Predator Free 2050 is a goal to remove rats, stoats and possums from all of NZ.~au:Fences, baiting and trapping projects protect native animals from foxes and cats.}
+learn: Many community groups and schools run trapping projects. A grown-up should always handle the traps.
+play: sort | Native animal, Introduced pest | {nz:Kiwi~au:Bilby}=Native animal; {nz:Stoat~au:Fox}=Introduced pest; {nz:Tūī~au:Platypus}=Native animal; {nz:Ship rat~au:Feral cat}=Introduced pest; {nz:Kākāpō~au:Numbat}=Native animal; {nz:Possum~au:Cane toad}=Introduced pest | Native or pest?
+check: mcq | {nz:Which animal is an introduced pest in NZ?~au:Which animal is an introduced pest in Australia?} | {nz:The stoat~au:The fox}* | {nz:The kiwi~au:The bilby} | {nz:The tūī~au:The platypus}
+check: tf | Grown-ups should handle animal traps. | true
+home: Find out with a grown-up if there's a trapping or pest control group near you.
+skill: conservation
+
+@lesson 7.2 | Clean streams | 🏞️ | garden
+hook: A stream is muddy and warm, with no fish. How could planting trees help?
+learn: Planting along stream banks shades the water, keeping it cool for fish.
+learn: Roots hold the soil, so less mud washes in. Plants also catch some of the farm and street runoff.
+learn: Volunteers can test streams to see if the water is getting cleaner.
+play: order | Bring a stream back to life | Test the water and count the fish and bugs; Fence off the banks so animals stay out; Plant native plants along the banks; Weed and water the plants while they grow; Test again in a year to see what's changed
+check: mcq | How do trees along a stream help fish? | They shade the water and keep it cool* | They eat the fish | They make the water hot
+check: tf | Testing the water shows whether a stream is getting cleaner. | true
+home: Visit a stream with a grown-up. Is there shade? Can you see any fish or bugs?
+skill: conservation
+
+@lesson 7.3 | Citizen science | 🔭 | garden
+hook: Can kids help real scientists? Yes, by counting birds!
+learn: Citizen science means ordinary people collecting information for real research.
+learn: {nz:In the NZ Garden Bird Survey, families count birds in their garden each winter.~au:In the Aussie Backyard Bird Count, families count birds for 20 minutes each October.}
+learn: Apps like iNaturalist let you snap photos of plants and animals to help map nature.
+play: tap | Tap the things you'd use for a bird count | 🔭:yes:Binoculars to see birds; 📝:yes:A notebook to write what you see; ⏱️:yes:A timer for your counting time; 📱:yes:An app to record what you saw, with a grown-up; 🥁:no; 📢:no
+check: mcq | What's citizen science? | Ordinary people collecting information for research* | Science only done in labs | A science fiction movie
+check: tf | Families can help scientists by counting birds. | true
+home: Do a 10-minute bird count in your garden or a park with a grown-up.
+skill: citizen science
+
+@lesson 7.4 | Protected places | 🐟 | island
+hook: In some parts of the sea, fishing isn't allowed at all. Why?
+learn: Marine reserves are areas of sea where no fishing is allowed, so fish and sea life can recover.
+learn: {nz:NZ's first marine reserve, at Goat Island near Leigh, started in 1975. Snapper there are now much bigger and more common.~au:The Great Barrier Reef Marine Park protects the reef, with zones where fishing is banned.}
+learn: National parks and fenced sanctuaries protect nature on land.
+play: match | Match each protected place to what it does | Marine reserve=No fishing, so sea life recovers; National park=Protects land for nature and people; Fenced sanctuary=Keeps predators out; Wetland reserve=Filters water and gives birds a home
+check: mcq | What's a marine reserve? | Sea where no fishing is allowed* | A swimming pool | A fish shop
+check: tf | Fish can grow bigger and more common in marine reserves. | true
+home: Find a national park or reserve near you on a map with a grown-up.
+skill: conservation
+
+@lesson 7.5 | Plan a nature project | 🗒️ | townhall
+hook: Your class has $100 for a nature project. How will you spend it?
+learn: Choose a project that fits your place, like a native garden or bird feeders.
+learn: Plan what you need and what it costs before you spend.
+learn: Ask your school or council first. They might give you plants or tools for free.
+play: budget | Plan $100 for a school nature project | 100 | Native plants=40; Gloves and tools=20; Compost and mulch=15; Signs to explain the project=0; Spare=0 | Plants eaten by rabbits:10
+check: mcq | What should you do before you start a nature project at school? | Ask the school first* | Dig up the field | Spend everything at once
+check: tf | Councils sometimes give plants for community projects. | true
+home: Plan a small nature project at home with a grown-up, like a pot of flowers for bees.
+skill: planning
+
+@lesson 7.6 | Is it working? | 📊 | garden
+hook: You've been trapping pests for 3 years. How do you know it's helping?
+learn: Count before you start, then count again later, the same way.
+learn: If you counted 20 birds before and 50 after, that's 30 more.
+learn: Sharing your results helps other groups learn what works.
+try: 15 birds before and 25 after is 10 more :: gap | 12 birds before and 30 after is _ more | 18
+play: slider | Before planting, volunteers counted 8 kinds of insects in a stream. Two years later they counted 20. How many more kinds? | 0 | 20 | 12 | kinds | 0 | 1
+check: mcq | Why count the same way each time? | So you can compare fairly* | So it's faster | It doesn't matter
+check: tf | Sharing results helps other groups learn. | true
+home: Count something in your garden this week, like flowers. Count again next month and compare.
+skill: impact
+
+@lesson 8.1 | What's a social entrepreneur? | 💡 | stall
+hook: Can you start a business that also fixes a problem in the world?
+learn: A social entrepreneur starts a business to solve a social or environmental problem.
+learn: Instead of only asking "How do I make money?", they ask "How do I make a difference, and pay my way?"
+learn: The money they make keeps the good work going, without needing donations for ever.
+play: match | Match each problem to a business that helps | Young people can't find their first job=A café that trains them; Food gets wasted=A shop selling wonky fruit cheaply; Plastic fills landfills=A refill shop; People can't afford glasses=A company making very cheap glasses
+check: mcq | What does a social entrepreneur do? | Starts a business to solve a problem* | Only gives money away | Only makes money
+check: tf | Profits can keep a social enterprise's good work going. | true
+home: Find a business near you with a grown-up that helps people or the planet.
+skill: social enterprise
+
+@lesson 8.2 | One for one? | 👟 | stall
+hook: Buy a pair of shoes, and a child in need gets a pair free. Sounds great. Is it?
+learn: TOMS shoes started in 2006 with "one for one": for every pair sold, it gave a pair to a child in need.
+learn: Critics said free shoes could hurt local shoe makers and sellers in poorer countries.
+learn: In 2019, TOMS changed its model and started giving a third of its profits to community groups instead.
+play: debate | Is "buy one, give one" a good way to help? | It can help, but only if it doesn't hurt local businesses and gives people what they need* | It's always perfect, because free stuff is good | It's simple, and customers love it. Some say the money could do more good in other ways.
+check: mcq | What was one criticism of "one for one"? | Free shoes could hurt local shoe sellers* | The shoes were too colourful | Nobody bought them
+check: tf | TOMS changed its model in 2019. | true
+home: Find a "buy one, give one" product with a grown-up. Who does the giving help?
+skill: social enterprise
+
+@lesson 8.3 | A social enterprise near us | 🧻 | stall
+hook: {nz:A Christchurch couple started a shop selling fairly traded goods in 1973. What is it?~au:Three Aussie friends started selling toilet paper to fund toilets for people who don't have them. What is it?}
+learn: {nz:Vi and Richard Cottrell started Trade Aid in 1973, to give producers overseas a fair price for their crafts.~au:Who Gives A Crap started in 2012. To launch it, one founder sat on a toilet, filmed live, until they had enough pre-orders.}
+learn: {nz:Trade Aid shops sell fair trade products like coffee, chocolate and crafts, paying producers fairly.~au:It gives 50% of its profits to help build toilets and improve sanitation.}
+learn: Social enterprises can grow from small ideas and still keep their mission.
+play: mystery | {nz:It started in Christchurch in 1973~au:It started in 2012}; {nz:It was founded by Vi and Richard Cottrell~au:A founder sat on a toilet, filmed live, to launch it}; {nz:It runs shops selling fair trade goods~au:It sells toilet paper}; {nz:It pays producers overseas fairly~au:It gives 50% of its profits to help build toilets} | {nz:Trade Aid~au:Who Gives A Crap}* | {nz:A supermarket chain~au:A soft drink company} | {nz:A bank~au:A bank}
+check: mcq | What do social enterprises like this do with their money? | Use it to keep doing good* | Hide it | Spend it all on ads
+check: tf | Social enterprises can start from small ideas. | true
+home: Find a fair trade or social enterprise product at the shop with a grown-up.
+skill: social enterprise
+
+@lesson 8.4 | Jobs that change lives | 🧑‍🍳 | stall
+hook: A café hires young people who have struggled to find work. Why might that be harder to run?
+learn: Some social enterprises give jobs and training to people who find it hard to get work.
+learn: New workers need more training and support, which costs time and money.
+learn: The café has to be good enough that customers keep coming back.
+play: path | You run a café that trains young people. A new trainee is slow and nervous on their first day. | Give them a simple job, support them and let them build up => good: That's the whole point of a training café. | Fire them for being slow => bad: The café exists to help people learn. | Ignore them and let them figure it out => bad: Without support, they'll struggle and might quit.
+check: mcq | What does a training café need to stay open? | Customers who keep coming back* | No customers | Only donations
+check: tf | Training new workers takes time and money. | true
+home: Talk with a grown-up about how you'd feel on your first day at a new job.
+skill: social enterprise
+
+@lesson 8.5 | Profit with a purpose | 💵 | bank
+hook: Your social business made $200 profit. Where should it go?
+learn: Social enterprises need profit too, to stay open and grow.
+learn: Many split their profit: some for the cause, some to keep the business healthy.
+learn: A business that gives away everything can't buy stock or fix things that break.
+try: 50% of $100 is $50 :: gap | 50% of $300 is $_ | 150
+play: slider | Your social business made $200 profit. You give 40% to the cause. How much is that? | 0 | 200 | 80 | $ | 0 | 10
+check: gap | You made $500 profit and keep 30% for the business. You keep $_ | 150
+check: mcq | Why keep some profit in the business? | To buy stock and fix things* | To hide it | No reason
+home: Plan with a grown-up how a small business could split its profit.
+skill: social enterprise
+
+@lesson 8.6 | Start a mini social enterprise | 🌼 | stall
+hook: Could you run a tiny business that does good? Let's plan one.
+learn: Pick a problem, then think of something to sell that helps, like seed bombs to help bees.
+learn: Work out your costs, price and how much goes to the cause.
+learn: Tell customers honestly what their money does.
+play: build | Plan a mini social enterprise | Pick a problem you care about; Choose something to sell that helps; Work out your costs and price; Decide how much profit goes to the cause; Tell customers honestly what their money does; Sell it, then report back on what you gave
+check: mcq | What should you tell customers? | Honestly what their money does* | Nothing | That it does more than it really does
+check: tf | Reporting back on what you gave builds trust. | true
+home: Plan a mini social enterprise with a grown-up, like selling seed bombs for bees.
+skill: social enterprise
+

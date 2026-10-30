@@ -297,3 +297,269 @@ check: gap | A rate goes from 5% to 10%. That's a _% rise in the rate | 100
 home: Find a news story with a percentage change and check if it means percent or percentage points.
 skill: percent change
 
+@lesson 5.1 | Area of a room | 📐 | home
+hook: You want new carpet for your 4 m by 3 m bedroom. How much do you buy?
+learn: Area is how much flat surface something covers. We measure it in square metres, or m².
+learn: For a rectangle, area = length × width. 4 m × 3 m = 12 m².
+learn: Carpet, tiles and turf are all priced by area.
+try: 5 m × 2 m = 10 m² :: gap | 6 m × 4 m = _ m² | 24
+play: match | Match each space to its area | A 4 m by 3 m bedroom=12 m²; A 5 m by 5 m deck=25 m²; A 2.5 m by 2 m bathroom=5 m²; A 10 m by 6 m lawn=60 m²; A 3 m by 0.5 m hallway rug=1.5 m²
+check: gap | Carpet costs $40 per m². A 12 m² room costs $_ | 480
+check: mcq | What unit do we use for area? | Square metres* | Metres | Litres
+home: Measure a room at home with a grown-up and work out its area.
+skill: area
+
+@lesson 5.2 | Area or perimeter? | 🧱 | garden
+hook: Fencing a garden and laying turf both need measuring. Do you measure the same thing?
+learn: Perimeter is the distance all the way around the edge. Add up every side.
+learn: A 6 m by 4 m garden has a perimeter of 6 + 4 + 6 + 4 = 20 m, and an area of 24 m².
+learn: Fences, edging and skirting boards use perimeter. Turf, tiles and paint use area.
+play: sort | Area, Perimeter | Laying turf on a lawn=Area; Building a fence around a yard=Perimeter; Painting a wall=Area; Fitting skirting boards=Perimeter; Tiling a bathroom floor=Area; Hanging fairy lights around a window=Perimeter | Do you need the area or the perimeter?
+check: gap | A 5 m by 3 m garden needs _ m of edging to go all the way around | 16
+check: mcq | A deck is 6 m by 4 m. What's its area? | 24 m²* | 20 m | 10 m²
+home: Measure the perimeter of a table at home with a tape measure.
+skill: measurement
+
+@lesson 5.3 | How much paint? | 🎨 | home
+hook: Paint is $90 a tin. Buy too little and you're back at the shop. Buy too much and it's wasted.
+learn: Find the wall area, then take away the doors and windows.
+learn: Times by the number of coats. Most walls need two.
+learn: Divide by how far a litre goes, often about 12 to 16 m², then round up to whole tins.
+play: build | Work out how much paint to buy | Measure the length and height of each wall; Work out the total wall area; Take away doors and windows; Times by the number of coats; Divide by how far a litre goes; Round up to whole tins
+check: gap | 30 m² of wall with 2 coats needs enough paint for _ m² | 60
+check: mcq | You need 7.5 litres of paint. Tins hold 4 litres. How many tins? | 2* | 1 | 3
+home: Look up how far a litre of paint goes on a paint company's website with a grown-up.
+skill: area
+
+@lesson 5.4 | Volume | 🧊 | garden
+hook: A garden bed is 2 m long, 1 m wide and 0.3 m deep. How much soil do you order?
+learn: Volume is how much space something takes up. For a box shape, volume = length × width × height.
+learn: 2 m × 1 m × 0.3 m = 0.6 cubic metres, or 0.6 m³.
+learn: 1 m³ holds 1,000 litres, so 0.6 m³ is 600 litres of soil.
+try: 1 m × 1 m × 0.5 m = 0.5 m³ :: gap | 2 m × 2 m × 0.5 m = _ m³ | 2
+play: slider | A fish tank is 1 m long, 0.4 m wide and 0.5 m tall. How many litres does it hold? | 0 | 500 | 200 | L | 10 | 10
+check: gap | 0.25 m³ is _ litres | 250
+check: mcq | How many litres are in 1 m³? | 1,000* | 100 | 10
+home: Find a box at home and work out its volume in cm³ with a grown-up.
+skill: volume
+
+@lesson 5.5 | Cost per metre | 📏 | garden
+hook: Three shops sell fencing: one by the panel, one by the roll, one by the metre. Which is cheapest?
+learn: To compare, change every price into the same unit, like dollars per metre.
+learn: A 2.4 m panel for $60 is $60 ÷ 2.4 = $25 a metre.
+learn: Don't forget extras, like posts, delivery and offcuts.
+play: price | Which fencing costs least per metre? | Panel:60:2.4:m; Roll:180:10:m; Cut to length:22:1:m
+check: gap | A 5 m roll costs $40. That's $_ a metre | 8
+check: mcq | A 2 m panel costs $50. What's that per metre? | $25* | $100 | $50
+home: Compare two products sold by length on a hardware store's website with a grown-up.
+skill: unit price
+
+@lesson 5.6 | Measure twice, cut once | ✂️ | workshop
+hook: You ordered a shelf 1,200 cm long. It arrives 12 metres long. Oops.
+learn: Mixing up mm, cm and m is a common, costly mistake. 1 m = 100 cm = 1,000 mm.
+learn: Builders usually measure in millimetres. Write the unit next to every number.
+learn: Buy about 10% extra for offcuts and mistakes, and check your measurements twice.
+play: diff | Your measurements on the left, the order form on the right. Tap the mistakes. | Shelf 1,200 mm long; Board 90 mm wide; Screws 40 mm long; 4 brackets | Shelf 1,200 cm long; Board 90 mm wide; Screws 4 mm long; 4 brackets
+check: gap | 1,500 mm is _ m | 1.5
+check: mcq | You need 20 m² of tiles. About how much should you buy, with 10% extra? | 22 m²* | 20 m² | 30 m²
+home: Measure something twice with a grown-up, once in cm and once in mm. Do they match?
+skill: measurement
+
+@lesson 6.1 | Simple interest | 💰 | bank
+hook: You lend your sister $100 at 5% a year for 3 years. How much interest do you earn?
+learn: Simple interest is only worked out on the starting amount, called the principal.
+learn: Interest = principal × rate × time. $100 × 0.05 × 3 = $15.
+learn: Write the rate as a decimal. 5% is 0.05, and 12% is 0.12.
+play: build | Work out simple interest on $1,000 at 5% for 3 years | Write down the principal, $1,000; Write the rate as a decimal, 0.05; Write the time in years, 3; Multiply $1,000 × 0.05 to get $50 a year; Multiply $50 by 3 years to get $150
+check: gap | $500 at 4% simple interest for 2 years earns $_ | 40
+check: mcq | What's 8% as a decimal? | 0.08* | 0.8 | 8.0
+home: Work out with a grown-up how much simple interest $200 would earn at 3% for 4 years.
+skill: interest
+
+@lesson 6.2 | Months, not years | 🗓️ | bank
+hook: You borrow $2,400 at 6% a year, but only for 6 months. How much interest?
+learn: Time in the formula is in years. 6 months is 0.5 years, and 3 months is 0.25 years.
+learn: $2,400 × 0.06 × 0.5 = $72.
+learn: Or find one year's interest, then take the part you need. $144 for a year, so $72 for half a year.
+play: slider | $2,400 at 6% a year for 6 months. How much simple interest? | 0 | 200 | 72 | $ | 0 | 1
+check: gap | $1,200 at 10% a year for 3 months earns $_ | 30
+check: mcq | 9 months is how many years? | 0.75* | 0.9 | 9
+home: Find a savings rate online with a grown-up. Work out 6 months of simple interest on $1,000.
+skill: interest
+
+@lesson 6.3 | Borrowers and savers | ⚖️ | bank
+hook: Interest can be your best friend or your worst enemy. What makes the difference?
+learn: When you save, the bank pays you interest. When you borrow, you pay the lender interest.
+learn: The total to repay on a loan is the amount borrowed plus the interest.
+learn: Borrow $500 at 10% simple interest for 2 years: $100 interest, so you repay $600.
+play: sort | You pay interest, You earn interest | A car loan=You pay interest; A term deposit=You earn interest; A credit card balance you don't pay off=You pay interest; A savings account=You earn interest; A personal loan=You pay interest; Bonus interest for saving every month=You earn interest | Do you pay or earn the interest?
+check: gap | You borrow $800 at 5% simple interest for 2 years. You repay $_ in total | 880
+check: mcq | Who earns interest on a savings account? | You, the saver* | The bank only | Nobody
+home: Ask a grown-up which accounts or loans in your family earn interest and which ones pay it.
+skill: interest
+
+@lesson 6.4 | Comparing rates | 🔍 | bank
+hook: Three loans charge $60, $90 and $40 in interest. Is the $40 one the cheapest?
+learn: You can't compare interest in dollars unless the amount borrowed is the same.
+learn: Find the rate: interest ÷ amount borrowed. $90 on $1,000 for a year is 9%.
+learn: $40 on $250 is 16%. It's the smallest amount of interest, but the most expensive loan.
+play: price | Which one-year loan charges least interest per dollar borrowed? | Loan A:60:500:$ borrowed; Loan B:90:1000:$ borrowed; Loan C:40:250:$ borrowed
+check: gap | You pay $30 interest on $500 for one year. The rate is _% | 6
+check: mcq | Why compare rates, not just dollars of interest? | The amounts borrowed can be different* | Dollars don't matter | Rates are always the same
+home: Compare the interest rates on two loans or savings accounts online with a grown-up.
+skill: interest
+
+@lesson 6.5 | Interest-free? | 🎁 | stall
+hook: "No interest for 12 months!" Is that free money?
+learn: Interest-free deals can be useful if you pay it all off before the free period ends.
+learn: Afterwards, high interest rates or fees can kick in. Some deals have monthly account fees too.
+learn: Buy now, pay later services can charge late fees if you miss a payment.
+play: path | A $1,200 laptop is "interest-free for 12 months", then 25% a year. | Only buy if you can pay $100 a month and clear it in time => good: You get the laptop and pay no interest. | Pay the minimum and hope for the best => bad: Whatever's left after 12 months starts costing 25% a year. | Use it to buy a laptop and a TV you can't afford => bad: More debt, and a bigger risk of high interest later.
+check: gap | $1,200 split over 12 months is $_ a month | 100
+check: mcq | When is an interest-free deal a good idea? | When you can pay it all off in the free period* | When you can't afford the repayments | Always
+home: Find an interest-free offer in an ad with a grown-up. What happens after the free period?
+skill: borrowing
+
+@lesson 6.6 | Term deposits | 🔒 | bank
+hook: Lock away $5,000 for 6 months at 5%. What do you get back?
+learn: A term deposit locks your money away for a set time at a fixed interest rate.
+learn: Interest is often paid at the end, worked out with simple interest.
+learn: Taking the money out early can mean a lower rate or a fee, so only lock away money you won't need.
+play: match | Match each term deposit to the interest it earns | $1,000 at 4% for 1 year=$40; $5,000 at 5% for 6 months=$125; $2,000 at 3% for 2 years=$120; $10,000 at 4% for 3 months=$100
+check: gap | $4,000 at 5% for 1 year earns $_ | 200
+check: mcq | What might happen if you take money out of a term deposit early? | A lower rate or a fee* | A bonus | Nothing
+home: Look up today's term deposit rates at two banks with a grown-up.
+skill: interest
+
+@lesson 7.1 | Cells | 🟩 | workshop
+hook: A spreadsheet is a giant grid. How do you find one box in it?
+learn: Each box is called a cell. Columns have letters, and rows have numbers.
+learn: C4 is the cell in column C, row 4.
+learn: Formulas use cell names, so =B2+B3 adds whatever is in B2 and B3, even when those numbers change.
+play: mystery | I'm where column C meets row 4; I hold one value or one formula; Formulas use my name to find me | C4* | 4C | Row C
+check: mcq | In cell B7, what's the column? | B* | 7 | B7
+check: tf | A formula like =B2+B3 updates when B2 changes. | true
+home: Open a spreadsheet with a grown-up. Type numbers in A1 and A2, then =A1+A2 in A3.
+skill: spreadsheets
+
+@lesson 7.2 | Order of operations | 🧮 | workshop
+hook: Type =10+5*2 into a spreadsheet. Do you get 30 or 20?
+learn: Spreadsheets follow the order of operations: brackets first, then × and ÷, then + and −.
+learn: In formulas, * means times and / means divide.
+learn: =10+5*2 gives 20. =(10+5)*2 gives 30. Brackets change the answer.
+play: slider | What does =4+6*3 give? | 0 | 40 | 22 | | 0 | 1
+check: gap | =(2+3)*4 gives _ | 20
+check: mcq | What does =8-2*3 give? | 2* | 18 | 12
+home: Try =10+5*2 and =(10+5)*2 in a spreadsheet with a grown-up. Explain the difference.
+skill: spreadsheets
+
+@lesson 7.3 | Fill down | ⬇️ | workshop
+hook: You've got 50 rows of prices and quantities. Do you type 50 formulas?
+learn: Write the formula once, like =B2*C2, then drag it down. This is called fill down.
+learn: The cell names change as you go. In row 3 it becomes =B3*C3, in row 4 =B4*C4.
+learn: These are called relative references, because they move with the formula.
+play: diff | The left shows what fill down should give. The right was typed by hand. Tap the mistake. | =B2*C2; =B3*C3; =B4*C4; =B5*C5 | =B2*C2; =B3*C3; =B3*C4; =B5*C5
+check: mcq | You fill down =A2+B2 from row 2. What's in row 5? | =A5+B5* | =A2+B2 | =A5+B2
+check: tf | Fill down saves typing the same formula again and again. | true
+home: Make a shopping list in a spreadsheet with price and quantity columns, and fill down a total.
+skill: spreadsheets
+
+@lesson 7.4 | Locking a cell | 🔒 | workshop
+hook: You fill down a GST formula and every answer after the first one is 0. What went wrong?
+learn: Sometimes one cell should stay fixed, like a GST rate typed into B1.
+learn: Add $ signs to lock it. =A2*$B$1 keeps pointing at B1 when you fill down.
+learn: A locked cell is called an absolute reference.
+play: path | The {nz:GST rate of 15%~au:GST rate of 10%} is in B1. You type =A2*B1 in C2 and fill down. Row 3 shows 0. | Change it to =A2*$B$1, then fill down again => good: The $ signs lock B1, so every row uses the GST rate. | Type the rate into every row by hand => ok: It works, but it's slow, and changing the rate means retyping everything. | Delete the formulas and use a calculator => bad: You lose the power of the spreadsheet.
+check: mcq | What does $B$1 do in a formula? | Locks the cell when you fill down* | Adds dollars | Deletes B1
+check: tf | A relative reference moves when you fill down. | true
+home: Set up a spreadsheet with a tax rate in one cell, and lock it in your formulas.
+skill: spreadsheets
+
+@lesson 7.5 | Handy functions | 🛠️ | workshop
+hook: Which day did you spend the most? A spreadsheet can find it in a second.
+learn: Functions are built-in formulas. You type them after an = sign.
+learn: MAX finds the biggest value, MIN the smallest and COUNT how many cells hold numbers.
+learn: ROUND tidies numbers, like ROUND(B2,0) for a whole number.
+play: match | Match each function to what it does | MAX(B2:B20)=Finds the biggest number; MIN(B2:B20)=Finds the smallest number; COUNT(B2:B20)=Counts the cells with numbers; ROUND(B2,0)=Rounds B2 to a whole number; AVERAGE(B2:B20)=Finds the mean
+check: mcq | Which function finds the smallest value? | MIN* | MAX | COUNT
+check: tf | Functions are typed after an = sign. | true
+home: Use MAX and MIN on a list of temperatures or prices with a grown-up.
+skill: spreadsheets
+
+@lesson 7.6 | Sort and filter | 🔽 | workshop
+hook: Your spending sheet has 80 rows. What were your three biggest costs?
+learn: Sorting puts rows in order, like largest amount to smallest.
+learn: Filtering hides rows you don't need, so you can see one category at a time.
+learn: Select the headings too, so each row stays together.
+play: order | Find your three biggest costs this month | Select your whole table, including the headings; Choose Sort; Sort by Amount, largest to smallest; Read the top three rows; Use a filter to see one category at a time
+check: mcq | What does filtering do? | Shows only the rows you choose* | Deletes rows for ever | Adds new rows
+check: tf | You should select the headings when you sort, so rows stay together. | true
+home: Sort a list of your family's favourite songs or foods in a spreadsheet with a grown-up.
+skill: spreadsheets
+
+@lesson 8.1 | Pictures that lie | 🪙 | online
+hook: Sales doubled, so the newspaper drew a coin twice as tall. Why does it look like much more than double?
+learn: Pictograms use pictures instead of bars. When a picture is made twice as tall and twice as wide, its area grows 4 times.
+learn: Your eyes judge the area, so the change looks bigger than it really is.
+learn: Honest charts change only the length of a bar, or repeat the same-sized picture.
+play: slider | A coin picture is drawn twice as tall and twice as wide. How many times bigger does its area look? | 1 | 10 | 4 | times | 0 | 1
+check: mcq | What's the honest way to show sales doubling? | A bar twice as long* | A picture twice as tall and wide | A 3D picture
+check: tf | Making a picture twice as tall and twice as wide makes its area 4 times bigger. | true
+home: Find a chart with pictures in a newspaper or online. Is the size change fair?
+skill: data literacy
+
+@lesson 8.2 | Per person | 👥 | townhall
+hook: One council spends the most on parks. Does it really spend the most?
+learn: Big places have bigger totals, just because more people live there.
+learn: To compare fairly, divide by the number of people. That's called per person, or per capita.
+learn: A council spending $5 million for 100,000 people spends $50 per person.
+play: price | Which council spends the least on parks per person? | Council A:3000000:50000:people; Council B:1200000:15000:people; Council C:5000000:100000:people
+check: gap | $2,000,000 for 40,000 people is $_ per person | 50
+check: mcq | Why compare per person? | Bigger places have bigger totals anyway* | It makes the numbers bigger | It's more fun
+home: Find a news story comparing countries. Does it use totals or per person numbers?
+skill: data literacy
+
+@lesson 8.3 | Totals that only go up | 📈 | online
+hook: A company's chart shows its sales "always rising". But sales are falling. How?
+learn: A cumulative chart adds each month onto all the months before it.
+learn: A running total can only go up or stay flat, even when each month's sales are shrinking.
+learn: Ask to see each month on its own.
+play: path | An app's chart of "total downloads ever" keeps rising, and the app says it's booming. | Ask to see downloads for each month on their own => good: A running total always rises. The monthly numbers show the real trend. | Believe it's booming, because the line goes up => bad: A cumulative line rises even when downloads are slowing. | Ignore all charts for ever => ok: Charts are useful. You just need to know what they show.
+check: mcq | What's a cumulative chart? | A running total that adds up over time* | A chart of each month on its own | A pie chart
+check: tf | A cumulative chart can rise even when each month is getting worse. | true
+home: Keep a running total of something for a week with a grown-up, then chart each day separately too.
+skill: data literacy
+
+@lesson 8.4 | Two axes | ↔️ | online
+hook: A chart shows ice cream sales and shark sightings moving together. Is it the ice cream?
+learn: Some charts have two different scales, one on each side.
+learn: By stretching each scale, almost any two lines can be made to look like they move together.
+learn: Check both scales, and remember that moving together doesn't prove one causes the other.
+play: mystery | It has a different scale on each side; It can make two lines look linked; You should always check both sides' numbers | A dual-axis chart* | A pie chart | A pictogram
+check: mcq | What should you check on a chart with two scales? | Both scales' numbers* | Only the colours | Only the title
+check: tf | Two lines moving together proves one causes the other. | false | Moving together isn't proof of cause.
+home: Find a chart with two scales online with a grown-up. Do the lines really match?
+skill: data literacy
+
+@lesson 8.5 | Pies that don't add up | 🥧 | online
+hook: A pie chart says 50% chose pizza, 40% chose tacos and 30% chose sushi. What's wrong?
+learn: A pie chart shows parts of one whole, so the slices must add up to 100%.
+learn: If they add up to more, people may have picked more than one answer. Then a pie chart is the wrong chart.
+learn: Small rounding, like 33%, 33% and 33%, is OK. Big gaps are a warning sign.
+play: sort | Adds to 100%, Doesn't add up | 45%, 35% and 20%=Adds to 100%; 50%, 40% and 30%=Doesn't add up; 60%, 25% and 15%=Adds to 100%; 70%, 20% and 20%=Doesn't add up; 25%, 25% and 50%=Adds to 100%; 10%, 80% and 20%=Doesn't add up | Does the pie add up?
+check: gap | A pie has slices of 40% and 35%. The last slice should be _% | 25
+check: mcq | A survey let people pick more than one answer. Which chart fits better? | A bar chart* | A pie chart | No chart at all
+home: Find a pie chart with a grown-up and add up its slices.
+skill: data literacy
+
+@lesson 8.6 | Your chart checklist | ✅ | online
+hook: You see a scary chart shared online. What do you check before you believe it?
+learn: Read the title and the labels, and check where the axis starts.
+learn: Check the units, the time period and whether it's totals or per person.
+learn: Look for the source, and ask what might be missing.
+play: build | Check a chart before you believe it | Read the title and labels; Check where the axis starts; Check the units and if it's per person; Check the time period shown; Find the source; Ask what might be missing
+check: mcq | What should every trustworthy chart have? | A source* | Lots of colours | A 3D effect
+check: tf | Checking the time period can change what a chart means. | true
+home: Use the checklist on a chart in the news with a grown-up.
+skill: data literacy
+
