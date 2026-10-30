@@ -148,3 +148,76 @@ check: mcq | After volunteering, it helps to… | Think about what you learned* 
 home: Plan a volunteer activity with your family for the next school holidays.
 skill: planning
 
+@lesson 3.1 | Pick the right idea | 💡 | stall
+hook: Bake sale, car wash or quiz night? How do you choose a fundraiser?
+learn: Pick something people around you would enjoy and pay for.
+learn: Match it to your skills, time and what you can borrow.
+learn: Low-cost ideas leave more money for your cause.
+play: sort | Low cost to run, Higher cost to run | A car wash with buckets from home=Low cost to run; Hiring a bouncy castle=Higher cost to run; A sausage sizzle with donated food=Low cost to run; A concert in a rented hall=Higher cost to run; A sponsored walk=Low cost to run; Buying prizes for a raffle=Higher cost to run | Low or higher cost?
+check: mcq | Why choose a low-cost fundraiser? | More money goes to your cause* | It's always more fun | It takes longer
+check: tf | A good fundraiser matches your skills and time. | true
+check: mcq | Which is a low-cost fundraiser? | A sponsored walk* | Hiring a stadium | Buying a car to raffle
+home: List three fundraiser ideas and rate each for cost and fun.
+skill: fundraising
+
+@lesson 3.2 | Set a target | 🎯 | stall
+hook: You want to raise $300. Is that realistic?
+learn: Work out how many people might come and what each might spend.
+learn: 60 people spending $5 each makes $300.
+learn: A clear target helps you plan and tells people what you're aiming for.
+try: 60 people × $5 = $300 :: gap | 40 people × $5 = $_ | 200
+play: slider | You want $400. Each person spends about $5. How many people do you need? | 20 | 150 | 80 | people | 5 | 5
+check: gap | 25 people × $8 = $_ | 200
+check: mcq | Why set a target? | It helps you plan and motivates people* | It doesn't matter | To make it harder
+check: tf | You can estimate takings from people × average spend. | true
+home: Estimate how much a fundraiser at your school could raise.
+skill: fundraising
+
+@lesson 3.3 | Price it right | 🧁 | stall
+hook: Each cupcake costs 40c to make. What should you charge?
+learn: Costs come out first. Only the profit goes to your cause.
+learn: Price high enough to make good profit, but not so high that nobody buys.
+learn: People often pay a bit more when they know it's for a good cause.
+play: shop | Each cupcake costs 40c to make. Raise at least $3.50 for the shelter. | Cupcake | 40 | 350
+check: gap | You took $90 and costs were $25. The cause gets $_ | 65
+check: mcq | Why must costs come out first? | Only the profit is left to give* | Costs don't matter | So you can keep it
+check: tf | Pricing too high can mean nobody buys. | true
+home: Work out the cost of making one item for a bake sale.
+skill: profit
+
+@lesson 3.4 | Spread the word | 📣 | stage
+hook: The best fundraiser in the world won't work if nobody knows about it. How do you tell people?
+learn: Make a clear poster: what, when, where and who it helps.
+learn: Ask your school if it can go in the newsletter or assembly.
+learn: Tell people why the cause matters. A short story works well.
+play: build | Build a fundraiser poster | Big headline: Bake Sale for the Animal Shelter!; Friday at lunchtime in the school hall; Cupcakes $2, cookies $1; Every dollar helps feed dogs and cats; Thank you for helping!
+check: mcq | What should a fundraiser poster include? | What, when, where and who it helps* | Your home address | Nothing
+check: tf | Telling people why the cause matters can help them give. | true
+check: mcq | Where else could you tell people? | The school newsletter* | A stranger's car | A secret diary
+home: Design a poster for a pretend fundraiser.
+skill: marketing
+
+@lesson 3.5 | Safety and permission | ✅ | townhall
+hook: You want to run a car wash on the street. Can you just start?
+learn: Always ask permission from your school, parents or the place you'll use.
+learn: A grown-up should help look after the money and help keep everyone safe.
+learn: Some fundraisers, like raffles and food sales, have extra rules. Check with a grown-up.
+play: path | You want to run a car wash next to a busy road. | Ask a grown-up and find a safe spot, like the school car park => good: Safe, approved and ready to go. | Just start on the roadside => bad: Busy roads are dangerous, and you might not be allowed there. | Do it alone without telling anyone => bad: You need a grown-up for safety and to look after the money.
+check: mcq | Before running a fundraiser, you need… | Permission and a grown-up to help* | Nothing at all | A secret plan
+check: tf | Some fundraisers, like raffles, have extra rules. | true
+check: mcq | Who should help look after the money? | A trusted grown-up* | A stranger | Nobody
+home: Ask your school what the rules are for student fundraisers.
+skill: safety
+
+@lesson 3.6 | Thank and report back | 💌 | townhall
+hook: You raised $280. Is your job done?
+learn: Thank everyone who helped and gave.
+learn: Tell them how much you raised and what it will do.
+learn: People who feel thanked are more likely to help again.
+play: chat | Writing to your class after the fundraiser | them: How did the bake sale go? | me: We raised $280! That buys food for 10 shelter dogs for a month. Thank you!*/Fine/Who cares | them: Wow! Will you do another one? | me: Maybe next term. Thanks again for baking!*/No, it was boring/Only if you pay me
+check: mcq | After a fundraiser, you should… | Thank people and tell them what it achieved* | Keep it secret | Ask for more straight away
+check: tf | Thanking people makes them more likely to help again. | true
+check: mcq | Which thank-you is best? | We raised $280 for the shelter. Thank you!* | Done | Whatever
+home: Write a thank-you note to someone who helped you this term.
+skill: gratitude
+

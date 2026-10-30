@@ -150,3 +150,75 @@ check: mcq | Your little cousin can't tie shoelaces yet. You could… | Show the
 home: Teach someone in your family one thing you're good at.
 skill: kindness
 
+@lesson 3.1 | So many causes | 🌍 | garden
+hook: Animals, people, oceans, forests. There are so many ways to help! Where do you start?
+learn: A cause is something you want to help or make better.
+learn: Some causes help animals. Some help people. Some help the planet.
+learn: You don't have to help everything. Pick what matters to you.
+play: tap | Tap the causes you could help | 🐶:yes:Animals that need homes; 🌊:yes:Clean beaches and oceans; 🌳:yes:Planting trees; 🍎:yes:Families who need food; 🎮:no; 🍭:no; 🏥:yes:Sick kids in hospital
+check: mcq | What is a cause? | Something you want to help or make better* | A kind of shoe | A video game
+check: tf | You don't have to help with every cause at once. | true
+check: mcq | Which of these is a cause? | Cleaning up a beach* | Eating a lolly | Watching TV
+home: Name three causes you've heard of with a grown-up.
+skill: causes
+
+@lesson 3.2 | What do you care about? | 💗 | garden
+hook: What makes you feel sad, or makes you want to help?
+learn: Think about things you've seen that didn't seem fair or kind.
+learn: Maybe it was rubbish on the beach, or a lonely dog at the shelter.
+learn: The things you care about most can be your causes.
+play: sort | I care a lot, I care a little | Rubbish in the ocean=I care a lot; Lost pets=I care a lot; Litter at the park=I care a little; Kids without books=I care a little; Old people who feel lonely=I care a lot; Trees being cut down=I care a little | There are no wrong answers. How much do you care?
+check: mcq | How can you find your cause? | Think about what you care about most* | Copy a friend | Pick at random
+check: tf | Different people care about different causes. | true
+check: mcq | You feel sad seeing lonely dogs at the shelter. A cause for you might be… | Helping animals* | Fixing cars | Selling lollies
+home: Draw a picture of a cause you care about.
+skill: causes
+
+@lesson 3.3 | Near and far | 🗺️ | garden
+hook: Should you help people next door or people on the other side of the world?
+learn: Some causes are near you, like your school, your street or your town.
+learn: Some causes are far away, in other countries.
+learn: Both matter. Helping nearby means you can often see the difference.
+play: sort | Near me, Far away | Our school library=Near me; Kids in another country who need clean water=Far away; The local animal shelter=Near me; Saving rainforests overseas=Far away; Our town's beach clean-up=Near me; Helping after a disaster in another country=Far away | Near or far?
+check: mcq | Which is a near cause? | Your local animal shelter* | A rainforest overseas | A school far away
+check: tf | Causes near and far both matter. | true
+check: mcq | Why can helping nearby be nice? | You can often see the difference* | It's always free | Nobody far away needs help
+home: Find one cause near your home and one far away.
+skill: causes
+
+@lesson 3.4 | Ask your family | 👨‍👩‍👧 | home
+hook: What if your whole family picked a cause together?
+learn: Families can choose a cause to help together.
+learn: Everyone shares an idea, then you decide together.
+learn: Helping as a family can be lots of fun.
+play: chat | You talk with your family about a cause | them: What cause would you like our family to help? | me: Maybe the animal shelter! I love animals*/I don't care/Whatever you want | them: Good idea! Your brother wants to help clean the beach. | me: Could we do both, one each month?*/No, only mine/Fine, I'm not helping
+check: mcq | How can a family pick a cause? | Share ideas and decide together* | The loudest person wins | Never talk about it
+check: tf | Helping as a family can be fun. | true
+check: mcq | You and your brother pick different causes. A fair idea is… | Take turns, one each month* | Argue | Give up
+home: Have a family chat about a cause to help this year.
+skill: causes
+
+@lesson 3.5 | Learn about it | 📚 | museum
+hook: You want to help sea turtles. What do you need to know first?
+learn: Before helping, learn about your cause.
+learn: What's the problem? Who already helps? What do they need?
+learn: A grown-up can help you find out from books, websites or by asking.
+play: order | Get to know your cause | Pick your cause; Find out what the problem is; Find out who already helps; Ask what they need most; Decide how you can help
+check: mcq | What should you find out first? | What the problem is* | Your favourite colour | Nothing
+check: tf | Learning about a cause helps you help better. | true
+check: mcq | Who can help you learn about a cause? | A grown-up, books and websites* | Nobody | A lolly shop
+home: With a grown-up, find three facts about your cause.
+skill: causes
+
+@lesson 3.6 | Make a helping plan | 🗒️ | garden
+hook: You've picked your cause. Now what?
+learn: Decide how you'll help: with time, money from your Give jar, or things you make.
+learn: Pick a small first step, like collecting cans or making a card.
+learn: Do it, then tell someone how it went!
+play: build | Build your helping plan | My cause: the animal shelter; How I'll help: collect old towels; When: this Saturday; Who will help me: a grown-up; What I'll do after: tell my class about it
+check: mcq | Which is a way to help a cause? | Giving time, money or things you make* | Only talking about it | Doing nothing
+check: tf | A small first step is a great way to start. | true
+check: mcq | Where could money for your cause come from? | Your Give jar* | Someone's wallet without asking | A drain
+home: Write your helping plan and stick it on the fridge.
+skill: giving
+

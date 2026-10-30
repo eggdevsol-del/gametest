@@ -152,3 +152,76 @@ check: mcq | Why is "two people approve each payment" a good rule? | No one pers
 home: Check whether a club you belong to has two people approve its payments.
 skill: governance
 
+@lesson 3.1 | What is philanthropy? | 🏛️ | museum
+hook: What's the difference between giving $20 and giving $20 million?
+learn: Philanthropy is giving money, time or skills for the public good, often on a big scale.
+learn: Big philanthropy has funded libraries, universities, hospitals, medical research and parks.
+learn: Some of the oldest big foundations, like the Rockefeller Foundation set up in 1913, still give today.
+play: sort | Public good, Private benefit | Funding free public libraries=Public good; Buying yourself a yacht=Private benefit; Paying for medical research=Public good; A private party=Private benefit; Scholarships for students=Public good; Naming rights on a private gym you own=Private benefit | Public good or private benefit?
+check: mcq | What is philanthropy? | Giving for the public good, often on a big scale* | Buying luxury goods | Running a shop
+check: tf | Some foundations set up over 100 years ago still give today. | true
+check: mcq | Which is philanthropy? | Funding scholarships for students* | Buying a yacht | Paying your own bills
+home: Find a building or park near you that was paid for by a donor.
+skill: philanthropy
+
+@lesson 3.2 | How foundations work | 🏦 | bank
+hook: A foundation has $100 million. How can it give money forever?
+learn: Many foundations invest their money and give away part of it each year.
+learn: If they give away less than they earn on average, they can keep giving for a very long time.
+learn: {nz:NZ's community trusts, like Foundation North and Rātā Foundation, were set up from the sale of community savings banks in 1988.~au:In Australia, private ancillary funds must give away at least 5% of their assets each year.}
+try: 5% of $100 million = $5 million a year :: gap | 4% of $50 million = $_ million a year | 2
+play: compound | In millions: a $100 million foundation earning 7% and giving away 5% grows about 2% a year | 100 | 2 | 20
+check: mcq | How can a foundation give forever? | Invest and give away less than it earns on average* | Spend it all in year one | Never give anything
+check: gap | 5% of $20 million = $_ million | 1
+check: tf | Many foundations invest their money and give part of it each year. | true
+home: Look up a foundation in your country and see how much it gives each year.
+skill: philanthropy
+
+@lesson 3.3 | Pledges | ✍️ | townhall
+hook: Some of the world's richest people have promised to give away most of their wealth. Does a promise mean anything?
+learn: The Giving Pledge, started in 2010, invites very wealthy people to promise to give away most of their wealth.
+learn: It's a public promise, not a legal contract.
+learn: Smaller pledges exist too, like promising to give 10% of your income each year.
+play: debate | Is a public giving pledge useful if it isn't legally binding? | Yes. Public promises encourage action and accountability* | No. Only legal contracts matter | Critics point out that pledges aren't enforced, and some pledgers' wealth has kept growing faster than their giving.
+check: mcq | What is the Giving Pledge? | A public promise by the very wealthy to give away most of their wealth* | A law | A bank account
+check: tf | The Giving Pledge is a legally binding contract. | false | It's a public promise, not a contract.
+check: gap | Pledging 10% of a $50,000 income is $_ a year | 5000
+home: Think about what share of your future income you'd like to give, if any.
+skill: philanthropy
+
+@lesson 3.4 | The critics | 🧐 | townhall
+hook: Can giving billions ever be a problem?
+learn: Critics say big donors can shape public life, like schools or health, without being elected.
+learn: Some ask whether tax breaks for giving mean the public is partly paying for the donor's choices.
+learn: Others worry giving can be used to polish a reputation, while ignoring how the money was made.
+play: sort | Common criticism, Common defence | Donors have power without being elected=Common criticism; Big gifts fund research governments won't=Common defence; Tax breaks mean the public helps pay=Common criticism; Foundations can take long-term risks=Common defence; Giving can polish a bad reputation=Common criticism; Private money can move faster than government=Common defence | Criticism or defence?
+check: mcq | A common criticism of big philanthropy is… | Unelected power over public life* | It's too small | It's illegal
+check: tf | Some argue tax breaks mean the public partly pays for donors' choices. | true
+check: mcq | A common defence is… | It funds things governments won't* | It's always perfect | Nobody benefits
+home: Discuss with a grown-up: should very rich people decide what gets funded?
+skill: critical
+
+@lesson 3.5 | Big givers close to home | 🏡 | townhall
+hook: Who are the big givers in {nz:Aotearoa~au:Australia}?
+learn: {nz:Community trusts across NZ give millions each year to local groups, from sports clubs to marae projects.~au:The Paul Ramsay Foundation, set up from his estate after he died in 2014, is one of Australia's largest philanthropic foundations.}
+learn: Many big givers here focus on local communities, health, education and the environment.
+learn: You can look up who funds local projects. Thank-you plaques and annual reports often say.
+play: mystery | {nz:They're found all over NZ~au:It's one of Australia's biggest philanthropic foundations}; {nz:They were created from the sale of community savings banks~au:It was set up from a businessman's estate}; {nz:They give grants to local groups~au:He died in 2014}; {nz:Foundation North is one of them~au:It focuses on breaking cycles of disadvantage} | {nz:Community trusts~au:The Paul Ramsay Foundation}* | {nz:Supermarkets~au:A supermarket} | {nz:Sports teams~au:A sports team}
+check: mcq | Where can you find out who funds a local project? | Plaques and annual reports* | Weather apps | Nowhere
+check: tf | Many big givers focus on local communities. | true
+check: mcq | {nz:What were NZ's community trusts created from?~au:When did Paul Ramsay die?} | {nz:The sale of community savings banks~au:2014}* | {nz:A lottery win~au:1850} | {nz:A tax on lollies~au:2024}
+home: Find a local project funded by {nz:a community trust~au:a foundation} near you.
+skill: philanthropy
+
+@lesson 3.6 | Giving well at scale | 🌱 | garden
+hook: If you had $10 million to give, how would you avoid doing harm?
+learn: Listen to the communities you want to help. They know what they need.
+learn: Be open about what you fund and why, and share what didn't work.
+learn: Trust-based giving offers longer, more flexible grants with less paperwork for charities.
+play: chat | You're advising a new foundation | them: We've got $10 million. Where should we start? | me: Start by asking the communities you want to help what they need*/Fund whatever gets the most media/Build a statue of the founder | them: Good idea. Should we tie every dollar to a strict project? | me: Some flexible, long-term funding helps charities plan and do their best work*/Yes, and make them write 100-page reports/No funding at all
+check: mcq | What's a good first step for a new foundation? | Listen to the communities it wants to help* | Pick the flashiest project | Fund the founder's friends
+check: tf | Flexible, long-term grants can help charities plan. | true
+check: mcq | Being open about what didn't work helps… | Everyone learn and improve* | Nobody | Only competitors
+home: Write three rules you'd follow if you ran a foundation.
+skill: philanthropy
+

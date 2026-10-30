@@ -151,6 +151,78 @@ check: mcq | Your little cousin can't tie shoelaces yet. You could… | Show the
 home: Teach someone in your family one thing you're good at.
 skill: kindness
 
+@lesson 3.1 | So many causes | 🌍 | garden
+hook: Animals, people, oceans, forests. There are so many ways to help! Where do you start?
+learn: A cause is something you want to help or make better.
+learn: Some causes help animals. Some help people. Some help the planet.
+learn: You don't have to help everything. Pick what matters to you.
+play: tap | Tap the causes you could help | 🐶:yes:Animals that need homes; 🌊:yes:Clean beaches and oceans; 🌳:yes:Planting trees; 🍎:yes:Families who need food; 🎮:no; 🍭:no; 🏥:yes:Sick kids in hospital
+check: mcq | What is a cause? | Something you want to help or make better* | A kind of shoe | A video game
+check: tf | You don't have to help with every cause at once. | true
+check: mcq | Which of these is a cause? | Cleaning up a beach* | Eating a lolly | Watching TV
+home: Name three causes you've heard of with a grown-up.
+skill: causes
+
+@lesson 3.2 | What do you care about? | 💗 | garden
+hook: What makes you feel sad, or makes you want to help?
+learn: Think about things you've seen that didn't seem fair or kind.
+learn: Maybe it was rubbish on the beach, or a lonely dog at the shelter.
+learn: The things you care about most can be your causes.
+play: sort | I care a lot, I care a little | Rubbish in the ocean=I care a lot; Lost pets=I care a lot; Litter at the park=I care a little; Kids without books=I care a little; Old people who feel lonely=I care a lot; Trees being cut down=I care a little | There are no wrong answers. How much do you care?
+check: mcq | How can you find your cause? | Think about what you care about most* | Copy a friend | Pick at random
+check: tf | Different people care about different causes. | true
+check: mcq | You feel sad seeing lonely dogs at the shelter. A cause for you might be… | Helping animals* | Fixing cars | Selling lollies
+home: Draw a picture of a cause you care about.
+skill: causes
+
+@lesson 3.3 | Near and far | 🗺️ | garden
+hook: Should you help people next door or people on the other side of the world?
+learn: Some causes are near you, like your school, your street or your town.
+learn: Some causes are far away, in other countries.
+learn: Both matter. Helping nearby means you can often see the difference.
+play: sort | Near me, Far away | Our school library=Near me; Kids in another country who need clean water=Far away; The local animal shelter=Near me; Saving rainforests overseas=Far away; Our town's beach clean-up=Near me; Helping after a disaster in another country=Far away | Near or far?
+check: mcq | Which is a near cause? | Your local animal shelter* | A rainforest overseas | A school far away
+check: tf | Causes near and far both matter. | true
+check: mcq | Why can helping nearby be nice? | You can often see the difference* | It's always free | Nobody far away needs help
+home: Find one cause near your home and one far away.
+skill: causes
+
+@lesson 3.4 | Ask your family | 👨‍👩‍👧 | home
+hook: What if your whole family picked a cause together?
+learn: Families can choose a cause to help together.
+learn: Everyone shares an idea, then you decide together.
+learn: Helping as a family can be lots of fun.
+play: chat | You talk with your family about a cause | them: What cause would you like our family to help? | me: Maybe the animal shelter! I love animals*/I don't care/Whatever you want | them: Good idea! Your brother wants to help clean the beach. | me: Could we do both, one each month?*/No, only mine/Fine, I'm not helping
+check: mcq | How can a family pick a cause? | Share ideas and decide together* | The loudest person wins | Never talk about it
+check: tf | Helping as a family can be fun. | true
+check: mcq | You and your brother pick different causes. A fair idea is… | Take turns, one each month* | Argue | Give up
+home: Have a family chat about a cause to help this year.
+skill: causes
+
+@lesson 3.5 | Learn about it | 📚 | museum
+hook: You want to help sea turtles. What do you need to know first?
+learn: Before helping, learn about your cause.
+learn: What's the problem? Who already helps? What do they need?
+learn: A grown-up can help you find out from books, websites or by asking.
+play: order | Get to know your cause | Pick your cause; Find out what the problem is; Find out who already helps; Ask what they need most; Decide how you can help
+check: mcq | What should you find out first? | What the problem is* | Your favourite colour | Nothing
+check: tf | Learning about a cause helps you help better. | true
+check: mcq | Who can help you learn about a cause? | A grown-up, books and websites* | Nobody | A lolly shop
+home: With a grown-up, find three facts about your cause.
+skill: causes
+
+@lesson 3.6 | Make a helping plan | 🗒️ | garden
+hook: You've picked your cause. Now what?
+learn: Decide how you'll help: with time, money from your Give jar, or things you make.
+learn: Pick a small first step, like collecting cans or making a card.
+learn: Do it, then tell someone how it went!
+play: build | Build your helping plan | My cause: the animal shelter; How I'll help: collect old towels; When: this Saturday; Who will help me: a grown-up; What I'll do after: tell my class about it
+check: mcq | Which is a way to help a cause? | Giving time, money or things you make* | Only talking about it | Doing nothing
+check: tf | A small first step is a great way to start. | true
+check: mcq | Where could money for your cause come from? | Your Give jar* | Someone's wallet without asking | A drain
+home: Write your helping plan and stick it on the fridge.
+skill: giving
+
 @band builders
 @unit 1 | How charities work | Where donations go
 @unit 2 | Volunteering | Giving your time and skills
@@ -300,6 +372,79 @@ check: tf | Telling organisers you're coming helps them plan. | true
 check: mcq | After volunteering, it helps to… | Think about what you learned* | Forget it straight away | Ask for money
 home: Plan a volunteer activity with your family for the next school holidays.
 skill: planning
+
+@lesson 3.1 | Pick the right idea | 💡 | stall
+hook: Bake sale, car wash or quiz night? How do you choose a fundraiser?
+learn: Pick something people around you would enjoy and pay for.
+learn: Match it to your skills, time and what you can borrow.
+learn: Low-cost ideas leave more money for your cause.
+play: sort | Low cost to run, Higher cost to run | A car wash with buckets from home=Low cost to run; Hiring a bouncy castle=Higher cost to run; A sausage sizzle with donated food=Low cost to run; A concert in a rented hall=Higher cost to run; A sponsored walk=Low cost to run; Buying prizes for a raffle=Higher cost to run | Low or higher cost?
+check: mcq | Why choose a low-cost fundraiser? | More money goes to your cause* | It's always more fun | It takes longer
+check: tf | A good fundraiser matches your skills and time. | true
+check: mcq | Which is a low-cost fundraiser? | A sponsored walk* | Hiring a stadium | Buying a car to raffle
+home: List three fundraiser ideas and rate each for cost and fun.
+skill: fundraising
+
+@lesson 3.2 | Set a target | 🎯 | stall
+hook: You want to raise $300. Is that realistic?
+learn: Work out how many people might come and what each might spend.
+learn: 60 people spending $5 each makes $300.
+learn: A clear target helps you plan and tells people what you're aiming for.
+try: 60 people × $5 = $300 :: gap | 40 people × $5 = $_ | 200
+play: slider | You want $400. Each person spends about $5. How many people do you need? | 20 | 150 | 80 | people | 5 | 5
+check: gap | 25 people × $8 = $_ | 200
+check: mcq | Why set a target? | It helps you plan and motivates people* | It doesn't matter | To make it harder
+check: tf | You can estimate takings from people × average spend. | true
+home: Estimate how much a fundraiser at your school could raise.
+skill: fundraising
+
+@lesson 3.3 | Price it right | 🧁 | stall
+hook: Each cupcake costs 40c to make. What should you charge?
+learn: Costs come out first. Only the profit goes to your cause.
+learn: Price high enough to make good profit, but not so high that nobody buys.
+learn: People often pay a bit more when they know it's for a good cause.
+play: shop | Each cupcake costs 40c to make. Raise at least $3.50 for the shelter. | Cupcake | 40 | 350
+check: gap | You took $90 and costs were $25. The cause gets $_ | 65
+check: mcq | Why must costs come out first? | Only the profit is left to give* | Costs don't matter | So you can keep it
+check: tf | Pricing too high can mean nobody buys. | true
+home: Work out the cost of making one item for a bake sale.
+skill: profit
+
+@lesson 3.4 | Spread the word | 📣 | stage
+hook: The best fundraiser in the world won't work if nobody knows about it. How do you tell people?
+learn: Make a clear poster: what, when, where and who it helps.
+learn: Ask your school if it can go in the newsletter or assembly.
+learn: Tell people why the cause matters. A short story works well.
+play: build | Build a fundraiser poster | Big headline: Bake Sale for the Animal Shelter!; Friday at lunchtime in the school hall; Cupcakes $2, cookies $1; Every dollar helps feed dogs and cats; Thank you for helping!
+check: mcq | What should a fundraiser poster include? | What, when, where and who it helps* | Your home address | Nothing
+check: tf | Telling people why the cause matters can help them give. | true
+check: mcq | Where else could you tell people? | The school newsletter* | A stranger's car | A secret diary
+home: Design a poster for a pretend fundraiser.
+skill: marketing
+
+@lesson 3.5 | Safety and permission | ✅ | townhall
+hook: You want to run a car wash on the street. Can you just start?
+learn: Always ask permission from your school, parents or the place you'll use.
+learn: A grown-up should help look after the money and help keep everyone safe.
+learn: Some fundraisers, like raffles and food sales, have extra rules. Check with a grown-up.
+play: path | You want to run a car wash next to a busy road. | Ask a grown-up and find a safe spot, like the school car park => good: Safe, approved and ready to go. | Just start on the roadside => bad: Busy roads are dangerous, and you might not be allowed there. | Do it alone without telling anyone => bad: You need a grown-up for safety and to look after the money.
+check: mcq | Before running a fundraiser, you need… | Permission and a grown-up to help* | Nothing at all | A secret plan
+check: tf | Some fundraisers, like raffles, have extra rules. | true
+check: mcq | Who should help look after the money? | A trusted grown-up* | A stranger | Nobody
+home: Ask your school what the rules are for student fundraisers.
+skill: safety
+
+@lesson 3.6 | Thank and report back | 💌 | townhall
+hook: You raised $280. Is your job done?
+learn: Thank everyone who helped and gave.
+learn: Tell them how much you raised and what it will do.
+learn: People who feel thanked are more likely to help again.
+play: chat | Writing to your class after the fundraiser | them: How did the bake sale go? | me: We raised $280! That buys food for 10 shelter dogs for a month. Thank you!*/Fine/Who cares | them: Wow! Will you do another one? | me: Maybe next term. Thanks again for baking!*/No, it was boring/Only if you pay me
+check: mcq | After a fundraiser, you should… | Thank people and tell them what it achieved* | Keep it secret | Ask for more straight away
+check: tf | Thanking people makes them more likely to help again. | true
+check: mcq | Which thank-you is best? | We raised $280 for the shelter. Thank you!* | Done | Whatever
+home: Write a thank-you note to someone who helped you this term.
+skill: gratitude
 
 @band makers
 @unit 1 | Social enterprise | Businesses built to do good
@@ -452,6 +597,80 @@ check: tf | A report that admits what didn't work can be more trustworthy. | tru
 check: mcq | "100% loved us" from 3 people is a problem because… | The sample is tiny* | 100% is too low | Three is unlucky
 home: Read one charity's annual report. Do they say what didn't work?
 skill: evidence
+
+@lesson 3.1 | Cost per outcome | 🧮 | bank
+hook: Charity A tutors a child for a year for $500. Charity B does it for $250 with similar results. Does it matter?
+learn: Cost per outcome = total cost ÷ number of outcomes.
+learn: If two charities get similar results, the one with lower cost per outcome helps more people per dollar.
+learn: Check the outcomes are really similar, not just the activities.
+try: $10,000 helping 20 kids = $500 per child :: gap | $10,000 helping 40 kids = $_ per child | 250
+play: price | Which charity helps a child read for less? | Charity A:10000:20:children; Charity B:10000:40:children
+check: gap | $6,000 for 30 outcomes = $_ per outcome | 200
+check: mcq | What does a lower cost per outcome mean? | More good per dollar, if the outcomes are similar* | The charity is lazy | It always means lower quality
+check: tf | You should check the outcomes are really comparable. | true
+home: Find one charity's cost per person helped in its annual report, if it shares one.
+skill: impact
+
+@lesson 3.2 | What's the evidence? | 🔬 | townhall
+hook: Two programmes say they reduce school dropouts. One has been tested carefully. One just has happy photos. Which do you trust?
+learn: Strong evidence compares people who got the programme with similar people who didn't.
+learn: Some programmes that sound great turn out to do little. Some simple ones work very well.
+learn: Independent charity evaluators research which programmes have strong evidence.
+play: sort | Strong evidence, Weak evidence | A careful study with a comparison group=Strong evidence; A few happy testimonials=Weak evidence; Results checked by independent researchers=Strong evidence; "Everyone loves us!"=Weak evidence; Results repeated in several places=Strong evidence; One great photo=Weak evidence | Strong or weak?
+check: mcq | What makes evidence strong? | Comparing with similar people who didn't get the programme* | Lots of photos | A famous supporter
+check: tf | Some programmes that sound great turn out to do little. | true
+check: mcq | Who researches which charities have strong evidence? | Independent charity evaluators* | The charity's own ads | Social media
+home: Find a charity evaluator's website and read about one recommended charity.
+skill: evidence
+
+@lesson 3.3 | Big, neglected, fixable | 🎯 | townhall
+hook: Should you give to the most popular cause, or one nobody's heard of?
+learn: One way to choose: how big is the problem, how neglected is it, and how fixable is it?
+learn: Neglected problems may get more done per dollar, because fewer people are helping.
+learn: A problem must be fixable too. Money can't help if nothing works yet.
+play: match | Match each question to what it asks | Scale=How many people are affected, and how badly?; Neglect=How few others are already helping?; Fixable=Do we know what works?; Personal fit=Do I care about it and understand it?
+check: mcq | Why can neglected causes be good to support? | Each extra dollar can do more* | They're always cheaper | Nobody needs them
+check: tf | A cause needs to be fixable for money to help. | true
+check: mcq | "How many people are affected?" is about… | Scale* | Neglect | Fixable
+home: Rate one cause you care about on scale, neglect and fixability.
+skill: giving
+
+@lesson 3.4 | Regular giving | 📅 | bank
+hook: $120 once, or $10 a month. Same money. Which helps a charity more?
+learn: Regular monthly gifts help charities plan ahead and keep programmes running.
+learn: Unrestricted gifts, which the charity can use where most needed, are often the most useful.
+learn: Pick an amount you can keep up, even if it's small.
+try: $10 a month × 12 = $120 a year :: gap | $5 a month × 12 = $_ a year | 60
+play: debate | Should donors always choose exactly what their money is spent on? | Not always. Unrestricted gifts let charities use money where it's needed most* | Yes. Charities can't be trusted to choose | Some donors like to fund one project so they can see the result. That's fine, as long as the charity can cover its other costs too.
+check: mcq | Why do charities like regular gifts? | They can plan ahead* | They're bigger | They're secret
+check: tf | Unrestricted gifts can be used where they're needed most. | true
+check: gap | $15 a month for a year = $_ | 180
+home: Ask a grown-up whether they give regularly to any cause.
+skill: giving
+
+@lesson 3.5 | Tax and giving | 🧾 | bank
+hook: You give $100 to a registered charity. Can you get some of it back?
+learn: {nz:In NZ, donations of $5 or more to approved charities can earn a tax credit of a third of the donation, if you've paid tax.~au:In Australia, donations of $2 or more to charities with DGR status can be claimed as a tax deduction.}
+learn: Keep your receipts, because you'll need them to claim.
+learn: Not every cause qualifies. Check before you give, if the tax benefit matters to you.
+play: mcq | {nz:You give $90 to an approved charity and have paid enough tax. What tax credit can you claim?~au:You give $50 to a charity with DGR status. What can you do?} | {nz:$30~au:Claim it as a tax deduction}* | {nz:$90~au:Get $500 back} | {nz:Nothing ever~au:Nothing ever}
+check: tf | You need a receipt to claim a donation. | true
+check: mcq | {nz:What share of an eligible donation can NZers get back as a tax credit?~au:What's the minimum donation you can usually claim in Australia?} | {nz:A third~au:$2}* | {nz:All of it~au:$200} | {nz:Double~au:$1,000}
+check: mcq | Can every cause give you a tax benefit? | No, only eligible charities* | Yes, any cause | Only on birthdays
+home: Find out how to check a charity's tax status on {nz:the IRD website~au:the ACNC register}.
+skill: tax
+
+@lesson 3.6 | Head and heart | ❤️ | garden
+hook: Should giving be all about numbers?
+learn: Your head asks: where does each dollar do the most good?
+learn: Your heart asks: what do I care about and feel connected to?
+learn: Many people use both, like giving most where it's effective, and some to a cause close to home.
+play: path | You have $100 to give. | Give most to a proven charity and some to your local shelter => good: You balanced impact and a cause you care about. | Give it all to whichever charity has the best ad => bad: Good ads don't always mean good results. | Keep it all and never give => ok: It's your choice, but you'd miss the chance to help.
+check: mcq | What does "head" giving focus on? | Where each dollar does the most good* | Ads | Random picks
+check: tf | It's fine to care about a cause close to home. | true
+check: mcq | A balanced giving plan might… | Mix proven charities with causes you love* | Ignore evidence | Only follow ads
+home: Write your own giving plan for $100 using head and heart.
+skill: giving
 
 @band launchers
 @unit 1 | Ethical investing | Putting your money where your values are
@@ -606,3 +825,76 @@ check: tf | Good organisations welcome questions from their board and staff. | t
 check: mcq | Why is "two people approve each payment" a good rule? | No one person can misuse the money alone* | It's twice as fast | It's just tradition
 home: Check whether a club you belong to has two people approve its payments.
 skill: governance
+
+@lesson 3.1 | What is philanthropy? | 🏛️ | museum
+hook: What's the difference between giving $20 and giving $20 million?
+learn: Philanthropy is giving money, time or skills for the public good, often on a big scale.
+learn: Big philanthropy has funded libraries, universities, hospitals, medical research and parks.
+learn: Some of the oldest big foundations, like the Rockefeller Foundation set up in 1913, still give today.
+play: sort | Public good, Private benefit | Funding free public libraries=Public good; Buying yourself a yacht=Private benefit; Paying for medical research=Public good; A private party=Private benefit; Scholarships for students=Public good; Naming rights on a private gym you own=Private benefit | Public good or private benefit?
+check: mcq | What is philanthropy? | Giving for the public good, often on a big scale* | Buying luxury goods | Running a shop
+check: tf | Some foundations set up over 100 years ago still give today. | true
+check: mcq | Which is philanthropy? | Funding scholarships for students* | Buying a yacht | Paying your own bills
+home: Find a building or park near you that was paid for by a donor.
+skill: philanthropy
+
+@lesson 3.2 | How foundations work | 🏦 | bank
+hook: A foundation has $100 million. How can it give money forever?
+learn: Many foundations invest their money and give away part of it each year.
+learn: If they give away less than they earn on average, they can keep giving for a very long time.
+learn: {nz:NZ's community trusts, like Foundation North and Rātā Foundation, were set up from the sale of community savings banks in 1988.~au:In Australia, private ancillary funds must give away at least 5% of their assets each year.}
+try: 5% of $100 million = $5 million a year :: gap | 4% of $50 million = $_ million a year | 2
+play: compound | In millions: a $100 million foundation earning 7% and giving away 5% grows about 2% a year | 100 | 2 | 20
+check: mcq | How can a foundation give forever? | Invest and give away less than it earns on average* | Spend it all in year one | Never give anything
+check: gap | 5% of $20 million = $_ million | 1
+check: tf | Many foundations invest their money and give part of it each year. | true
+home: Look up a foundation in your country and see how much it gives each year.
+skill: philanthropy
+
+@lesson 3.3 | Pledges | ✍️ | townhall
+hook: Some of the world's richest people have promised to give away most of their wealth. Does a promise mean anything?
+learn: The Giving Pledge, started in 2010, invites very wealthy people to promise to give away most of their wealth.
+learn: It's a public promise, not a legal contract.
+learn: Smaller pledges exist too, like promising to give 10% of your income each year.
+play: debate | Is a public giving pledge useful if it isn't legally binding? | Yes. Public promises encourage action and accountability* | No. Only legal contracts matter | Critics point out that pledges aren't enforced, and some pledgers' wealth has kept growing faster than their giving.
+check: mcq | What is the Giving Pledge? | A public promise by the very wealthy to give away most of their wealth* | A law | A bank account
+check: tf | The Giving Pledge is a legally binding contract. | false | It's a public promise, not a contract.
+check: gap | Pledging 10% of a $50,000 income is $_ a year | 5000
+home: Think about what share of your future income you'd like to give, if any.
+skill: philanthropy
+
+@lesson 3.4 | The critics | 🧐 | townhall
+hook: Can giving billions ever be a problem?
+learn: Critics say big donors can shape public life, like schools or health, without being elected.
+learn: Some ask whether tax breaks for giving mean the public is partly paying for the donor's choices.
+learn: Others worry giving can be used to polish a reputation, while ignoring how the money was made.
+play: sort | Common criticism, Common defence | Donors have power without being elected=Common criticism; Big gifts fund research governments won't=Common defence; Tax breaks mean the public helps pay=Common criticism; Foundations can take long-term risks=Common defence; Giving can polish a bad reputation=Common criticism; Private money can move faster than government=Common defence | Criticism or defence?
+check: mcq | A common criticism of big philanthropy is… | Unelected power over public life* | It's too small | It's illegal
+check: tf | Some argue tax breaks mean the public partly pays for donors' choices. | true
+check: mcq | A common defence is… | It funds things governments won't* | It's always perfect | Nobody benefits
+home: Discuss with a grown-up: should very rich people decide what gets funded?
+skill: critical
+
+@lesson 3.5 | Big givers close to home | 🏡 | townhall
+hook: Who are the big givers in {nz:Aotearoa~au:Australia}?
+learn: {nz:Community trusts across NZ give millions each year to local groups, from sports clubs to marae projects.~au:The Paul Ramsay Foundation, set up from his estate after he died in 2014, is one of Australia's largest philanthropic foundations.}
+learn: Many big givers here focus on local communities, health, education and the environment.
+learn: You can look up who funds local projects. Thank-you plaques and annual reports often say.
+play: mystery | {nz:They're found all over NZ~au:It's one of Australia's biggest philanthropic foundations}; {nz:They were created from the sale of community savings banks~au:It was set up from a businessman's estate}; {nz:They give grants to local groups~au:He died in 2014}; {nz:Foundation North is one of them~au:It focuses on breaking cycles of disadvantage} | {nz:Community trusts~au:The Paul Ramsay Foundation}* | {nz:Supermarkets~au:A supermarket} | {nz:Sports teams~au:A sports team}
+check: mcq | Where can you find out who funds a local project? | Plaques and annual reports* | Weather apps | Nowhere
+check: tf | Many big givers focus on local communities. | true
+check: mcq | {nz:What were NZ's community trusts created from?~au:When did Paul Ramsay die?} | {nz:The sale of community savings banks~au:2014}* | {nz:A lottery win~au:1850} | {nz:A tax on lollies~au:2024}
+home: Find a local project funded by {nz:a community trust~au:a foundation} near you.
+skill: philanthropy
+
+@lesson 3.6 | Giving well at scale | 🌱 | garden
+hook: If you had $10 million to give, how would you avoid doing harm?
+learn: Listen to the communities you want to help. They know what they need.
+learn: Be open about what you fund and why, and share what didn't work.
+learn: Trust-based giving offers longer, more flexible grants with less paperwork for charities.
+play: chat | You're advising a new foundation | them: We've got $10 million. Where should we start? | me: Start by asking the communities you want to help what they need*/Fund whatever gets the most media/Build a statue of the founder | them: Good idea. Should we tie every dollar to a strict project? | me: Some flexible, long-term funding helps charities plan and do their best work*/Yes, and make them write 100-page reports/No funding at all
+check: mcq | What's a good first step for a new foundation? | Listen to the communities it wants to help* | Pick the flashiest project | Fund the founder's friends
+check: tf | Flexible, long-term grants can help charities plan. | true
+check: mcq | Being open about what didn't work helps… | Everyone learn and improve* | Nobody | Only competitors
+home: Write three rules you'd follow if you ran a foundation.
+skill: philanthropy

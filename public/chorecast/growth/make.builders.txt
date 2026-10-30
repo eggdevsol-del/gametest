@@ -148,3 +148,76 @@ check: mcq | What should you check with a grown-up before adding? | Any contact 
 home: Design a poster for something you could sell.
 skill: marketing
 
+@lesson 3.1 | Why people buy | 🛍️ | stall
+hook: Two people buy the same drink bottle. One wants it for sport. One loves the colour. Why does that matter?
+learn: Customers buy for different reasons: to solve a problem, to save time, to feel good, or as a gift.
+learn: Knowing why people buy helps you make and sell the right things.
+learn: Ask yourself: what job is my product doing for them?
+play: match | Match each customer to their reason for buying | A runner buying a drink bottle=Staying hydrated at sport; A parent buying lunch wraps=Saving time on busy mornings; A kid buying a sparkly bookmark=It looks cool and fun; A grandparent buying a candle=A gift for a friend
+check: mcq | Why does knowing customers' reasons help? | You can make and sell the right things* | It doesn't | So you can charge everyone more
+check: tf | Different customers can buy the same thing for different reasons. | true
+check: mcq | A parent buys ready-made lunches. Their reason might be… | Saving time* | Wanting to waste money | Loving packaging
+home: Ask two people why they bought something they own.
+skill: customers
+
+@lesson 3.2 | Ask your customers | 📝 | stall
+hook: You want to know what flavours to make. How do you find out?
+learn: Ask customers with a short survey.
+learn: Good questions are clear and fair: "Which flavour would you most like?"
+learn: Avoid questions that push an answer, like "You love chocolate, don't you?"
+play: sort | Fair question, Pushy question | Which flavour would you choose?=Fair question; You'd buy these, right?=Pushy question; How much would you pay?=Fair question; Don't you think my cookies are the best?=Pushy question; What could we do better?=Fair question; Everyone loves our stall, don't they?=Pushy question | Fair or pushy?
+check: mcq | Which is a fair survey question? | Which flavour would you most like?* | You love chocolate, don't you? | Admit it, mine are best
+check: tf | Pushy questions give you less useful answers. | true
+check: mcq | Why survey customers? | To find out what they really want* | To annoy them | To fill time
+home: Write three fair survey questions for a stall idea.
+skill: research
+
+@lesson 3.3 | Reading feedback | 💬 | online
+hook: You get five comments: four great, one grumpy. Which one should you read most carefully?
+learn: All feedback can teach you something.
+learn: Look for patterns. If several people say the same thing, it's probably worth fixing.
+learn: Say thanks, even for criticism, and show you've listened.
+play: diff | Your first and second market days. Tap what changed after feedback. | Cookies a bit hard; Long queue; Only one flavour; Friendly service | Cookies soft and chewy; Two people serving; Three flavours; Friendly service
+check: mcq | Several customers say your queue is too slow. You… | Find a way to speed it up* | Ignore them | Close the stall
+check: tf | Criticism can help you improve. | true
+check: mcq | What's a good reply to helpful criticism? | Thanks, we'll work on that* | You're wrong | Silence
+home: Ask a family member for honest feedback on something you made.
+skill: feedback
+
+@lesson 3.4 | Why they come back | 🔁 | stall
+hook: There are three bakeries in town. Why do people keep going back to one?
+learn: People come back for great quality, fair prices, friendly service and convenience.
+learn: You don't have to win at all four, but you need a reason for them to choose you.
+learn: Keeping a customer is usually easier than finding a new one.
+play: sort | Quality, Price, Service, Convenience | Fresh, tasty bread=Quality; Fair prices=Price; Staff who remember you=Service; Open early on the way to school=Convenience; Bread that lasts all week=Quality; A weekly special=Price; A friendly hello=Service; Close to the bus stop=Convenience | Why do customers come back?
+check: mcq | Why might a café near the bus stop get more customers? | Convenience* | Better music | A bigger sign
+check: tf | Keeping a customer is usually easier than finding a new one. | true
+check: mcq | What do customers usually need to come back? | A reason to choose you* | A long queue | High prices
+home: Ask a grown-up why they always go back to one shop.
+skill: customers
+
+@lesson 3.5 | Loyalty rewards | 🎟️ | stall
+hook: "Buy 9 coffees, get the 10th free." How much of a discount is that?
+learn: Loyalty rewards thank regular customers and give them a reason to return.
+learn: 1 free in every 10 is like a 10% discount.
+learn: Make sure your rewards don't cost more than your profit.
+try: 1 free out of 10 = 10% off :: gap | 1 free out of 5 = _% off | 20
+play: slider | "Buy 4, get the 5th free." What percent discount is that? | 0 | 50 | 20 | % | 0 | 5
+check: gap | 1 free out of 20 = _% off | 5
+check: mcq | Why offer loyalty rewards? | To give regulars a reason to come back* | To lose money | To confuse people
+check: tf | A reward that costs more than your profit loses money. | true
+home: Find a loyalty card in your family's wallet and work out the discount.
+skill: percent
+
+@lesson 3.6 | Keeping their trust | 🤝 | stall
+hook: A customer gives you their email for your newsletter. Can you share it with your friend's business?
+learn: Customers trust you with their money and information. Look after both.
+learn: Don't share customers' details without asking them.
+learn: Keep promises: if you say it's homemade or ready on Friday, make sure it is.
+play: path | Your friend asks for your customers' email list to promote their stall. | Say no, because customers didn't agree to that => good: You kept their trust and respected their privacy. | Send the list straight over => bad: Customers would feel let down, and it may break privacy rules. | Send it but don't tell anyone => bad: Secretly sharing details is still breaking their trust.
+check: mcq | Can you share customers' emails without asking them? | No* | Yes | Only on weekends
+check: tf | Keeping promises helps customers trust you. | true
+check: mcq | What do customers trust you with? | Their money and their details* | Nothing | Your homework
+home: Talk with a grown-up about why businesses ask permission to send emails.
+skill: trust
+

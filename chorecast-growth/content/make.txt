@@ -151,6 +151,79 @@ check: mcq | What is a good question for finding ideas? | What bugs people?* | W
 home: Find one small problem at home and draw an idea to fix it.
 skill: ideas
 
+@lesson 3.1 | Say hello | 👋 | stall
+hook: Someone walks up to your stall. What's the first thing you do?
+learn: Look up and smile.
+learn: Say hello in a friendly voice.
+learn: Ask, "Would you like to try one?" or "Can I help you?"
+play: chat | A customer comes to your lemonade stall | them: Hi there! | me: Hello! Would you like some lemonade?*/What do you want?/Say nothing | them: Yes please! How much is it? | me: It's $1 a cup. Thank you!*/Lots/Go away
+check: mcq | What should you do when a customer comes? | Smile and say hello* | Look away | Run off
+check: tf | A friendly hello helps customers feel welcome. | true
+check: mcq | Which is a friendly thing to ask? | Can I help you?* | What? | Why are you here?
+home: Practise saying hello and smiling, like you're at a stall.
+skill: service
+
+@lesson 3.2 | Polite words | 🙏 | stall
+hook: Which words make a stall a happy place?
+learn: Say please when you ask for something.
+learn: Say thank you when someone buys from you.
+learn: Say sorry if something goes wrong.
+play: sort | Kind words, Not kind | Thank you=Kind words; Hurry up=Not kind; Please=Kind words; Whatever=Not kind; Sorry about that=Kind words; Go away=Not kind | Kind or not kind?
+check: mcq | What do you say when someone buys from you? | Thank you* | Hurry up | Nothing
+check: tf | Saying sorry when something goes wrong is kind. | true
+check: mcq | Which word helps when asking for something? | Please* | Now | Hey
+home: Use please, thank you and sorry at home today. Count how many times.
+skill: manners
+
+@lesson 3.3 | The right change | 💵 | stall
+hook: A customer pays $5 for a $3 cookie. How much do you give back?
+learn: Change is the money you give back when someone pays too much.
+learn: Count up from the price: $3, then $4, $5. That's $2 change.
+learn: Count it out loud so the customer can see.
+try: $5 for a $3 cookie is $2 change :: gap | $5 for a $4 drink is $_ change | 1
+play: gen | change | 4
+check: gap | $2 for a $1.50 drink is _c change | 50
+check: mcq | Why count change out loud? | So the customer can see it's right* | To be noisy | It's a rule for babies
+check: tf | Giving the right change is part of good service. | true
+home: Play shops at home and practise giving change.
+skill: change
+
+@lesson 3.4 | Listen to what they want | 👂 | stall
+hook: A customer says, "The blue one, please." You hand them a red one. Oops!
+learn: Listen carefully to what the customer asks for.
+learn: Say it back to check: "One blue bracelet?"
+learn: Getting it right makes customers happy.
+play: match | Match what the customer said to what you hand over | One blue bracelet, please=A blue bracelet; Two cookies, please=Two cookies; The small lemonade=A small cup; A bookmark with a cat=The cat bookmark
+check: mcq | How can you check you heard right? | Say it back to them* | Guess | Hand over anything
+check: tf | Listening carefully helps you get orders right. | true
+check: mcq | A customer asks for two cookies. You give… | Two cookies* | One cookie | Five cookies
+home: Play a game where someone orders things and you repeat them back.
+skill: listening
+
+@lesson 3.5 | Oops moments | 🙈 | stall
+hook: You drop a customer's cupcake on the ground. What now?
+learn: Mistakes happen. Say sorry straight away.
+learn: Fix it if you can, like giving a new one.
+learn: A good fix can make a customer even happier.
+play: path | You drop a customer's cupcake on the ground. | Say sorry and give them a fresh one => good: They smile and say thanks. You fixed it! | Pick it up and hand it over anyway => bad: Yuck. Food from the ground isn't safe. | Pretend it didn't happen => bad: The customer is left with no cupcake and feels upset.
+check: mcq | You make a mistake at your stall. First step? | Say sorry* | Hide | Blame the customer
+check: tf | A good fix can make a customer happy again. | true
+check: mcq | Food falls on the ground. You… | Give a fresh one* | Sell it anyway | Blow on it
+home: Think of a time you made an oops and how you fixed it.
+skill: service
+
+@lesson 3.6 | Come back soon! | 🎟️ | stall
+hook: How do shops get you to come back again and again?
+learn: Happy customers come back and tell their friends.
+learn: A stamp card can help: buy 5, get 1 free!
+learn: Say "Come back soon!" with a smile.
+play: tap | Tap the things that make customers want to come back | 😊:yes:Friendly service; 🎟️:yes:A stamp card reward; 🍪:yes:Yummy, well-made treats; 😠:no; 🗑️:no; 💬:yes:A kind goodbye
+check: mcq | What can make customers come back? | Friendly service and good treats* | Grumpy faces | A messy stall
+check: tf | Happy customers often tell their friends. | true
+check: mcq | A stamp card says "Buy 5, get 1 free". How many do you get after buying 5? | 6* | 5 | 10
+home: Design a stamp card for a pretend stall.
+skill: service
+
 @band builders
 @unit 1 | Running a stall | Pricing, stock and selling out
 @unit 2 | Marketing | Telling the right people the right thing
@@ -300,6 +373,79 @@ check: tf | A poster should have tiny writing with lots of detail. | false | Peo
 check: mcq | What should you check with a grown-up before adding? | Any contact details* | The colour | The font
 home: Design a poster for something you could sell.
 skill: marketing
+
+@lesson 3.1 | Why people buy | 🛍️ | stall
+hook: Two people buy the same drink bottle. One wants it for sport. One loves the colour. Why does that matter?
+learn: Customers buy for different reasons: to solve a problem, to save time, to feel good, or as a gift.
+learn: Knowing why people buy helps you make and sell the right things.
+learn: Ask yourself: what job is my product doing for them?
+play: match | Match each customer to their reason for buying | A runner buying a drink bottle=Staying hydrated at sport; A parent buying lunch wraps=Saving time on busy mornings; A kid buying a sparkly bookmark=It looks cool and fun; A grandparent buying a candle=A gift for a friend
+check: mcq | Why does knowing customers' reasons help? | You can make and sell the right things* | It doesn't | So you can charge everyone more
+check: tf | Different customers can buy the same thing for different reasons. | true
+check: mcq | A parent buys ready-made lunches. Their reason might be… | Saving time* | Wanting to waste money | Loving packaging
+home: Ask two people why they bought something they own.
+skill: customers
+
+@lesson 3.2 | Ask your customers | 📝 | stall
+hook: You want to know what flavours to make. How do you find out?
+learn: Ask customers with a short survey.
+learn: Good questions are clear and fair: "Which flavour would you most like?"
+learn: Avoid questions that push an answer, like "You love chocolate, don't you?"
+play: sort | Fair question, Pushy question | Which flavour would you choose?=Fair question; You'd buy these, right?=Pushy question; How much would you pay?=Fair question; Don't you think my cookies are the best?=Pushy question; What could we do better?=Fair question; Everyone loves our stall, don't they?=Pushy question | Fair or pushy?
+check: mcq | Which is a fair survey question? | Which flavour would you most like?* | You love chocolate, don't you? | Admit it, mine are best
+check: tf | Pushy questions give you less useful answers. | true
+check: mcq | Why survey customers? | To find out what they really want* | To annoy them | To fill time
+home: Write three fair survey questions for a stall idea.
+skill: research
+
+@lesson 3.3 | Reading feedback | 💬 | online
+hook: You get five comments: four great, one grumpy. Which one should you read most carefully?
+learn: All feedback can teach you something.
+learn: Look for patterns. If several people say the same thing, it's probably worth fixing.
+learn: Say thanks, even for criticism, and show you've listened.
+play: diff | Your first and second market days. Tap what changed after feedback. | Cookies a bit hard; Long queue; Only one flavour; Friendly service | Cookies soft and chewy; Two people serving; Three flavours; Friendly service
+check: mcq | Several customers say your queue is too slow. You… | Find a way to speed it up* | Ignore them | Close the stall
+check: tf | Criticism can help you improve. | true
+check: mcq | What's a good reply to helpful criticism? | Thanks, we'll work on that* | You're wrong | Silence
+home: Ask a family member for honest feedback on something you made.
+skill: feedback
+
+@lesson 3.4 | Why they come back | 🔁 | stall
+hook: There are three bakeries in town. Why do people keep going back to one?
+learn: People come back for great quality, fair prices, friendly service and convenience.
+learn: You don't have to win at all four, but you need a reason for them to choose you.
+learn: Keeping a customer is usually easier than finding a new one.
+play: sort | Quality, Price, Service, Convenience | Fresh, tasty bread=Quality; Fair prices=Price; Staff who remember you=Service; Open early on the way to school=Convenience; Bread that lasts all week=Quality; A weekly special=Price; A friendly hello=Service; Close to the bus stop=Convenience | Why do customers come back?
+check: mcq | Why might a café near the bus stop get more customers? | Convenience* | Better music | A bigger sign
+check: tf | Keeping a customer is usually easier than finding a new one. | true
+check: mcq | What do customers usually need to come back? | A reason to choose you* | A long queue | High prices
+home: Ask a grown-up why they always go back to one shop.
+skill: customers
+
+@lesson 3.5 | Loyalty rewards | 🎟️ | stall
+hook: "Buy 9 coffees, get the 10th free." How much of a discount is that?
+learn: Loyalty rewards thank regular customers and give them a reason to return.
+learn: 1 free in every 10 is like a 10% discount.
+learn: Make sure your rewards don't cost more than your profit.
+try: 1 free out of 10 = 10% off :: gap | 1 free out of 5 = _% off | 20
+play: slider | "Buy 4, get the 5th free." What percent discount is that? | 0 | 50 | 20 | % | 0 | 5
+check: gap | 1 free out of 20 = _% off | 5
+check: mcq | Why offer loyalty rewards? | To give regulars a reason to come back* | To lose money | To confuse people
+check: tf | A reward that costs more than your profit loses money. | true
+home: Find a loyalty card in your family's wallet and work out the discount.
+skill: percent
+
+@lesson 3.6 | Keeping their trust | 🤝 | stall
+hook: A customer gives you their email for your newsletter. Can you share it with your friend's business?
+learn: Customers trust you with their money and information. Look after both.
+learn: Don't share customers' details without asking them.
+learn: Keep promises: if you say it's homemade or ready on Friday, make sure it is.
+play: path | Your friend asks for your customers' email list to promote their stall. | Say no, because customers didn't agree to that => good: You kept their trust and respected their privacy. | Send the list straight over => bad: Customers would feel let down, and it may break privacy rules. | Send it but don't tell anyone => bad: Secretly sharing details is still breaking their trust.
+check: mcq | Can you share customers' emails without asking them? | No* | Yes | Only on weekends
+check: tf | Keeping promises helps customers trust you. | true
+check: mcq | What do customers trust you with? | Their money and their details* | Nothing | Your homework
+home: Talk with a grown-up about why businesses ask permission to send emails.
+skill: trust
 
 @band makers
 @unit 1 | Business plans | From idea to plan on one page
@@ -453,6 +599,78 @@ check: tf | You always have to be the cheapest to win customers. | false
 check: mcq | Why check competitors' prices? | To see where your price fits* | To copy their logo | To report them
 home: Compare the price of one product at three sellers and decide where you'd price it.
 skill: pricing
+
+@lesson 3.1 | Choosing a name | 🏷️ | stage
+hook: "Bob's Biscuits" or "Xylophonic Baked Goods Collective". Which would you remember?
+learn: Good business names are short, easy to say and spell, and hint at what you do.
+learn: Check nobody else nearby is using it, and that the website and social names are free.
+learn: Avoid names that copy a famous brand. That can get you into legal trouble.
+play: sort | Strong name, Weak name | Bright Bake=Strong name; Kwyck Kuppcaykz Xpress=Weak name; Harbour Candles=Strong name; A name copying a famous fast-food chain=Weak name; Paws and Claws Pet Treats=Strong name; Business 1=Weak name | Strong or weak business name?
+check: mcq | What makes a good business name? | Short, easy to say, and hints at what you do* | Long and confusing | Copied from a famous brand
+check: tf | You should check a name isn't already being used. | true
+check: mcq | Why avoid copying a famous brand name? | It can get you into legal trouble* | It's too short | Nobody would notice
+home: Brainstorm five names for a pretend business and pick the strongest.
+skill: branding
+
+@lesson 3.2 | Logos and colours | 🎨 | stage
+hook: Some logos are just a shape, yet you know them instantly. Why?
+learn: Good logos are simple, so they work tiny on a phone and big on a sign.
+learn: Pick a few colours and fonts, and use them everywhere.
+learn: Being consistent helps people recognise you.
+play: tap | Tap the signs of a strong logo | ⭐:yes:Simple shapes are easy to remember; 🔍:yes:It still works when it's tiny; 🎨:yes:A few consistent colours; 🌈:no; 📜:no; 🔁:yes:Used the same way everywhere
+check: mcq | Why keep a logo simple? | It works at any size and is easy to remember* | It's cheaper to print in gold | Simple is boring
+check: tf | Using the same colours everywhere helps people recognise you. | true
+check: mcq | What's a test of a good logo? | It still works when tiny* | It has 20 colours | It changes every week
+home: Sketch a simple logo for a pretend business. Does it work when you draw it tiny?
+skill: branding
+
+@lesson 3.3 | Trademarks | ™️ | townhall
+hook: Can you protect your business name so nobody copies it?
+learn: A registered trademark protects a name, logo or slogan for certain goods or services.
+learn: {nz:In NZ, trademarks are registered with IPONZ, the Intellectual Property Office of New Zealand.~au:In Australia, trademarks are registered with IP Australia.}
+learn: Search the trademark database before you choose a name, so you don't copy someone by accident.
+play: path | You love the name "Sunny Socks" for your business. | Search the trademark database first => good: Smart. You find out early whether someone already owns it. | Print 500 labels straight away => bad: If someone owns it, you could have to stop using it and lose your labels. | Use a famous brand's name with a tiny change => bad: That can still break trademark law.
+check: mcq | What does a registered trademark protect? | A name, logo or slogan* | Your bank account | Your house
+check: tf | You should search the trademark database before choosing a name. | true
+check: mcq | {nz:Where are NZ trademarks registered?~au:Where are Australian trademarks registered?} | {nz:IPONZ~au:IP Australia}* | Your school | A social media site
+home: Search a name idea on {nz:the IPONZ website~au:the IP Australia website} with a grown-up.
+skill: law
+
+@lesson 3.4 | Brand voice | 🗣️ | stage
+hook: One brand writes "Yo! New flavours just dropped!" Another writes "We are pleased to announce new flavours." Who are they talking to?
+learn: Brand voice is how your business sounds in words.
+learn: Pick a voice that suits your customers, like friendly and fun, or calm and expert.
+learn: Use the same voice on your posts, labels and emails.
+play: match | Match each business to a voice that suits it | A kids' slime stall=Fun and playful; A tutoring service=Clear and encouraging; A dog-walking business=Warm and friendly; A bike repair shop=Practical and helpful
+check: mcq | What is brand voice? | How your business sounds in words* | Your phone number | A singer you hire
+check: tf | A consistent voice helps customers recognise you. | true
+check: mcq | A tutoring service should probably sound… | Clear and encouraging* | Rude | Confusing
+home: Write one social post for a pretend business in its brand voice.
+skill: branding
+
+@lesson 3.5 | Your brand promise | 💎 | stall
+hook: What do you want customers to expect every single time?
+learn: A brand promise is what customers can always count on from you, like "always fresh" or "fixed in 24 hours".
+learn: Only promise what you can keep, every time.
+learn: Keeping the promise builds trust. Breaking it damages the brand fast.
+play: debate | Is it better to promise a lot or to promise a little and always deliver? | Promise what you can always deliver, then delight people* | Promise as much as possible to get customers | Big promises can attract attention. But if you can't keep them, customers leave and tell others.
+check: mcq | What's a brand promise? | What customers can always count on from you* | A pinky swear | A discount code
+check: tf | Breaking your brand promise can damage trust quickly. | true
+check: mcq | Which is a good brand promise for a small bakery? | Baked fresh every morning* | The best cake in the universe | Free cake forever
+home: Write a one-line brand promise for a pretend business.
+skill: branding
+
+@lesson 3.6 | Honest green claims | 🌿 | townhall
+hook: A pack says "100% eco-friendly!" with a leaf on it. What does that actually mean?
+learn: Greenwashing is making a product sound better for the planet than it really is.
+learn: Vague claims like "eco" or "natural" can mislead. Specific, true claims are better.
+learn: {nz:The Commerce Commission can take action against misleading green claims.~au:The ACCC can take action against misleading green claims.}
+play: scam | Honest claim or greenwashing? | Made with 80% recycled cardboard=real; 100% eco-friendly!, with no details=scam; Our cups are compostable in home compost bins, tested to a standard=real; A leaf logo on a product that's no different=scam; Planet-friendly, but it's in single-use plastic=scam | Specific, provable claims are honest. Vague ones may be greenwashing.
+check: mcq | What's greenwashing? | Making something sound greener than it is* | Washing green clothes | Recycling properly
+check: tf | Vague claims like "eco" can mislead customers. | true
+check: mcq | {nz:Who can act on misleading green claims in NZ?~au:Who can act on misleading green claims in Australia?} | {nz:The Commerce Commission~au:The ACCC}* | A gardening club | Nobody
+home: Find a "green" claim on a product at home. Is it specific or vague?
+skill: honesty
 
 @band launchers
 @unit 1 | Starting a business | Structures, names and registration
@@ -608,3 +826,77 @@ check: tf | Self-employed people don't pay income tax. | false
 check: gap | You earn $2,000 and set aside 25% for tax. That's $_ | 500
 home: Ask someone who is self-employed how they put money aside for tax.
 skill: tax
+
+@lesson 3.1 | Bootstrapping | 👢 | workshop
+hook: Can you start a business without borrowing a cent?
+learn: Bootstrapping means starting with your own money and the money your first customers pay.
+learn: Keep costs low: start small, sell before you build big, and reuse what you have.
+learn: You keep full ownership and control, but growth can be slower.
+play: sort | Bootstrapping move, Not bootstrapping | Selling pre-orders before making stock=Bootstrapping move; Taking out a big loan for fancy equipment=Not bootstrapping; Using your own laptop and phone=Bootstrapping move; Renting an expensive office on day one=Not bootstrapping; Reinvesting your first profits=Bootstrapping move; Selling half the business to an investor=Not bootstrapping | Is it bootstrapping?
+check: mcq | What's a perk of bootstrapping? | You keep full ownership and control* | You grow faster than everyone | Someone else pays your bills
+check: tf | Selling pre-orders can fund your first stock. | true
+check: mcq | A downside of bootstrapping can be… | Slower growth* | Losing ownership | Interest payments
+home: List five things you'd need to start a small business, and which ones you already have.
+skill: funding
+
+@lesson 3.2 | Business loans | 🏦 | bank
+hook: You walk into a bank asking for a $20,000 business loan. What will they ask?
+learn: Banks want to see a business plan, cash flow forecasts and how you'll repay.
+learn: They may ask for security, like an asset they can take if you don't repay, or a personal guarantee.
+learn: Loans keep your ownership, but repayments start even if sales are slow.
+try: $20,000 at 10% for a year is $2,000 in interest :: gap | $15,000 at 8% for a year is $_ in interest | 1200
+play: chat | Meeting a bank about a business loan | them: Thanks for coming in. How will the loan be repaid? | me: From sales. Here's my plan and a 12-month cash flow forecast*/I'll figure it out/Do I have to repay it? | them: And if sales are slower than expected? | me: I've got savings to cover three months of repayments*/I'd stop paying/I'd ask for another loan
+check: mcq | What's a personal guarantee? | You promise to repay from your own money if the business can't* | A free gift | A type of savings account
+check: tf | Loan repayments are due even if sales are slow. | true
+check: mcq | What will a bank usually want to see? | A business plan and cash flow forecast* | Your favourite songs | Nothing
+home: Look at a bank's business loan page and note what it asks for.
+skill: funding
+
+@lesson 3.3 | Grants and competitions | 🏆 | townhall
+hook: Free money for your business? What's the catch?
+learn: Grants are money you don't repay, but they come with rules about what you spend them on.
+learn: They're competitive, take time to apply for, and often need reports afterwards.
+learn: {nz:business.govt.nz lists support for businesses, and youth programmes like Young Enterprise help students start businesses.~au:The grants finder on business.gov.au lists government grants and support for businesses.}
+play: order | Apply for a grant. Put the steps in order. | Check you're eligible; Read the rules and deadline; Write a clear plan for the money; Submit the application on time; Report on how the money was spent
+check: mcq | What's a catch with grants? | Rules on spending and reporting* | You repay double | They're always instant
+check: tf | Grants usually don't need to be repaid. | true
+check: mcq | What should you check first? | That you're eligible* | Your horoscope | How to spend it on holidays
+home: Find one grant or business competition for young people.
+skill: funding
+
+@lesson 3.4 | Friends and family money | 👨‍👩‍👧 | home
+hook: Your uncle offers $5,000 for your business. Gift, loan or a share? Does it matter?
+learn: Money from friends and family can be a gift, a loan, or an investment for a share of the business.
+learn: Write down what it is, how and when it's repaid, and what happens if the business fails.
+learn: Unclear deals can damage relationships. Treat it as seriously as a bank loan.
+play: debate | Should you write down a loan from family, even if they say it's fine? | Yes. Clear terms protect the relationship and the business* | No. Writing it down is rude | Some families prefer to keep things informal, and that can work. But memories differ, especially if the business struggles.
+check: mcq | What should you write down for a family loan? | How much, when it's repaid and what if it fails* | Nothing | Only the amount
+check: tf | Unclear money deals can damage relationships. | true
+check: mcq | If family invest for a share, they get… | Part ownership of the business* | Nothing | Free products only
+home: Ask a grown-up whether they've ever lent money to family, and how it went.
+skill: funding
+
+@lesson 3.5 | Investors and equity | 📊 | shares
+hook: An investor offers $50,000 for 20% of your business. What is your business worth to them?
+learn: Equity means ownership. Selling equity means giving up part of your business for money.
+learn: $50,000 for 20% means they value the whole business, after their money, at $250,000.
+learn: Investors want growth and a say. You get money and their help, but you own less.
+try: $50,000 for 20% values the business at $250,000 :: gap | $20,000 for 10% values the business at $_ | 200000
+play: slider | An investor offers $30,000 for 25%. What's the business valued at, in thousands? | 0 | 300 | 120 | k$ | 0 | 10
+check: mcq | What does selling equity mean? | Giving up part ownership for money* | Taking a loan | Selling your products
+check: gap | You own 100% and sell 20%. You now own _% | 80
+check: tf | Investors usually want a say in big decisions. | true
+home: Watch an episode of a business pitch show with a grown-up and work out the valuations.
+skill: equity
+
+@lesson 3.6 | Crowdfunding | 👥 | online
+hook: Could 500 strangers fund your idea?
+learn: Rewards crowdfunding means people pre-pay for your product or a reward, often online.
+learn: Equity crowdfunding means many people buy small shares in your business, through licensed platforms.
+learn: It works best with a great story, a working prototype and a real plan to deliver.
+play: sort | Rewards crowdfunding, Equity crowdfunding | Backers get the product when it's made=Rewards crowdfunding; Backers get a small share of the company=Equity crowdfunding; A T-shirt for a $30 pledge=Rewards crowdfunding; Run through a licensed platform selling shares=Equity crowdfunding; Pre-ordering a board game=Rewards crowdfunding; Investors hope the company grows in value=Equity crowdfunding | Which kind is it?
+check: mcq | In rewards crowdfunding, backers usually get… | The product or a reward* | Shares | Nothing
+check: tf | Failing to deliver on a crowdfunding promise damages your reputation. | true
+check: mcq | What helps a crowdfunding campaign succeed? | A clear story and a working prototype* | No details at all | A blank page
+home: Find a crowdfunding campaign and decide whether you'd back it, and why.
+skill: funding

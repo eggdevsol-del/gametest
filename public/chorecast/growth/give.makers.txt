@@ -150,3 +150,77 @@ check: mcq | "100% loved us" from 3 people is a problem because… | The sample 
 home: Read one charity's annual report. Do they say what didn't work?
 skill: evidence
 
+@lesson 3.1 | Cost per outcome | 🧮 | bank
+hook: Charity A tutors a child for a year for $500. Charity B does it for $250 with similar results. Does it matter?
+learn: Cost per outcome = total cost ÷ number of outcomes.
+learn: If two charities get similar results, the one with lower cost per outcome helps more people per dollar.
+learn: Check the outcomes are really similar, not just the activities.
+try: $10,000 helping 20 kids = $500 per child :: gap | $10,000 helping 40 kids = $_ per child | 250
+play: price | Which charity helps a child read for less? | Charity A:10000:20:children; Charity B:10000:40:children
+check: gap | $6,000 for 30 outcomes = $_ per outcome | 200
+check: mcq | What does a lower cost per outcome mean? | More good per dollar, if the outcomes are similar* | The charity is lazy | It always means lower quality
+check: tf | You should check the outcomes are really comparable. | true
+home: Find one charity's cost per person helped in its annual report, if it shares one.
+skill: impact
+
+@lesson 3.2 | What's the evidence? | 🔬 | townhall
+hook: Two programmes say they reduce school dropouts. One has been tested carefully. One just has happy photos. Which do you trust?
+learn: Strong evidence compares people who got the programme with similar people who didn't.
+learn: Some programmes that sound great turn out to do little. Some simple ones work very well.
+learn: Independent charity evaluators research which programmes have strong evidence.
+play: sort | Strong evidence, Weak evidence | A careful study with a comparison group=Strong evidence; A few happy testimonials=Weak evidence; Results checked by independent researchers=Strong evidence; "Everyone loves us!"=Weak evidence; Results repeated in several places=Strong evidence; One great photo=Weak evidence | Strong or weak?
+check: mcq | What makes evidence strong? | Comparing with similar people who didn't get the programme* | Lots of photos | A famous supporter
+check: tf | Some programmes that sound great turn out to do little. | true
+check: mcq | Who researches which charities have strong evidence? | Independent charity evaluators* | The charity's own ads | Social media
+home: Find a charity evaluator's website and read about one recommended charity.
+skill: evidence
+
+@lesson 3.3 | Big, neglected, fixable | 🎯 | townhall
+hook: Should you give to the most popular cause, or one nobody's heard of?
+learn: One way to choose: how big is the problem, how neglected is it, and how fixable is it?
+learn: Neglected problems may get more done per dollar, because fewer people are helping.
+learn: A problem must be fixable too. Money can't help if nothing works yet.
+play: match | Match each question to what it asks | Scale=How many people are affected, and how badly?; Neglect=How few others are already helping?; Fixable=Do we know what works?; Personal fit=Do I care about it and understand it?
+check: mcq | Why can neglected causes be good to support? | Each extra dollar can do more* | They're always cheaper | Nobody needs them
+check: tf | A cause needs to be fixable for money to help. | true
+check: mcq | "How many people are affected?" is about… | Scale* | Neglect | Fixable
+home: Rate one cause you care about on scale, neglect and fixability.
+skill: giving
+
+@lesson 3.4 | Regular giving | 📅 | bank
+hook: $120 once, or $10 a month. Same money. Which helps a charity more?
+learn: Regular monthly gifts help charities plan ahead and keep programmes running.
+learn: Unrestricted gifts, which the charity can use where most needed, are often the most useful.
+learn: Pick an amount you can keep up, even if it's small.
+try: $10 a month × 12 = $120 a year :: gap | $5 a month × 12 = $_ a year | 60
+play: debate | Should donors always choose exactly what their money is spent on? | Not always. Unrestricted gifts let charities use money where it's needed most* | Yes. Charities can't be trusted to choose | Some donors like to fund one project so they can see the result. That's fine, as long as the charity can cover its other costs too.
+check: mcq | Why do charities like regular gifts? | They can plan ahead* | They're bigger | They're secret
+check: tf | Unrestricted gifts can be used where they're needed most. | true
+check: gap | $15 a month for a year = $_ | 180
+home: Ask a grown-up whether they give regularly to any cause.
+skill: giving
+
+@lesson 3.5 | Tax and giving | 🧾 | bank
+hook: You give $100 to a registered charity. Can you get some of it back?
+learn: {nz:In NZ, donations of $5 or more to approved charities can earn a tax credit of a third of the donation, if you've paid tax.~au:In Australia, donations of $2 or more to charities with DGR status can be claimed as a tax deduction.}
+learn: Keep your receipts, because you'll need them to claim.
+learn: Not every cause qualifies. Check before you give, if the tax benefit matters to you.
+play: mcq | {nz:You give $90 to an approved charity and have paid enough tax. What tax credit can you claim?~au:You give $50 to a charity with DGR status. What can you do?} | {nz:$30~au:Claim it as a tax deduction}* | {nz:$90~au:Get $500 back} | {nz:Nothing ever~au:Nothing ever}
+check: tf | You need a receipt to claim a donation. | true
+check: mcq | {nz:What share of an eligible donation can NZers get back as a tax credit?~au:What's the minimum donation you can usually claim in Australia?} | {nz:A third~au:$2}* | {nz:All of it~au:$200} | {nz:Double~au:$1,000}
+check: mcq | Can every cause give you a tax benefit? | No, only eligible charities* | Yes, any cause | Only on birthdays
+home: Find out how to check a charity's tax status on {nz:the IRD website~au:the ACNC register}.
+skill: tax
+
+@lesson 3.6 | Head and heart | ❤️ | garden
+hook: Should giving be all about numbers?
+learn: Your head asks: where does each dollar do the most good?
+learn: Your heart asks: what do I care about and feel connected to?
+learn: Many people use both, like giving most where it's effective, and some to a cause close to home.
+play: path | You have $100 to give. | Give most to a proven charity and some to your local shelter => good: You balanced impact and a cause you care about. | Give it all to whichever charity has the best ad => bad: Good ads don't always mean good results. | Keep it all and never give => ok: It's your choice, but you'd miss the chance to help.
+check: mcq | What does "head" giving focus on? | Where each dollar does the most good* | Ads | Random picks
+check: tf | It's fine to care about a cause close to home. | true
+check: mcq | A balanced giving plan might… | Mix proven charities with causes you love* | Ignore evidence | Only follow ads
+home: Write your own giving plan for $100 using head and heart.
+skill: giving
+

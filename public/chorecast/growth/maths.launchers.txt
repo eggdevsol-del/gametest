@@ -155,3 +155,77 @@ check: gap | Prices rise 10% a year for 2 years. A $100 item now costs $_ | 121
 home: Find the interest rate on a credit card and work out a year's compound interest on $1,000.
 skill: compound
 
+@lesson 3.1 | Build a budget sheet | 🟩 | workshop
+hook: A budget in your head is easy to forget. Can a spreadsheet keep it for you?
+learn: Make columns for Item, Budgeted and Actual. Put each spending category on its own row.
+learn: At the bottom, =SUM(B2:B10) adds up the budget, and =SUM(C2:C10) adds up what you really spent.
+learn: Update it weekly. The totals change by themselves.
+play: build | Build a weekly budget sheet | Title the columns: Item, Budgeted, Actual; List categories like rent, food and transport; Type in your budget amounts; Add a total row with =SUM; Fill in what you actually spend each week; Compare the two totals
+check: mcq | What does =SUM(B2:B10) do? | Adds up cells B2 to B10* | Deletes them | Sorts them
+check: tf | Spreadsheet totals update when you change a number. | true
+check: mcq | Which columns suit a simple budget? | Item, Budgeted and Actual* | Name and birthday | Just one column
+home: Make a simple budget sheet in a spreadsheet app.
+skill: spreadsheets
+
+@lesson 3.2 | Formulas that compare | ➖ | workshop
+hook: You budgeted $120 for food and spent $135. Can the sheet tell you you're over?
+learn: In D2, type =B2-C2 to show budgeted minus actual.
+learn: A positive number means you have some left. A negative number means you overspent.
+learn: Copy the formula down the column, and every row works it out.
+try: Budget $120, actual $135, difference = -$15 :: gap | Budget $80, actual $65, difference = $_ | 15
+play: match | Match each formula (typed after an = sign) to what it does | B2-C2=Budget minus actual; SUM(C2:C10)=Total actual spending; C2/B2=Share of the budget used; B2*52=A weekly amount for a whole year
+check: mcq | =B2-C2 gives -15. What does that mean? | You spent $15 more than budgeted* | You saved $15 | Nothing
+check: gap | Weekly rent of $250 × 52 weeks = $_ a year | 13000
+check: tf | Copying a formula down a column works it out for each row. | true
+home: Add a difference column to your budget sheet.
+skill: spreadsheets
+
+@lesson 3.3 | SUMIF for categories | 🧮 | workshop
+hook: You log every purchase. How much went on food this month?
+learn: List purchases with a category in column A and the amount in column B.
+learn: =SUMIF(A:A,"Food",B:B) adds up only the rows marked Food.
+learn: One formula per category gives you an instant spending summary.
+play: diff | Two months of a spending summary built with SUMIF. Tap what changed. | Food $320; Transport $90; Fun $60; Phone $30 | Food $280; Transport $90; Fun $140; Phone $30
+check: mcq | What does =SUMIF(A:A,"Food",B:B) add up? | Amounts in rows marked Food* | Every row | Only the first row
+check: tf | SUMIF can build a spending summary by category. | true
+check: mcq | In the diff, what went up? | Fun spending* | Food spending | Phone spending
+home: Log a week of spending with categories, then try SUMIF.
+skill: spreadsheets
+
+@lesson 3.4 | IF for alerts | 🚨 | workshop
+hook: What if your sheet shouted at you when you went over budget?
+learn: =IF(C2>B2,"Over budget","OK") shows a message depending on the numbers.
+learn: The first part is the test. Then what to show if it's true, then if it's false.
+learn: Add conditional formatting to turn the cell red when you're over.
+play: chat | A flatmate asks for help with the bills sheet | them: Can the sheet tell us when the power bill is higher than budgeted? | me: Yes. Use =IF(C2>B2,"Over","OK") and colour it red if it's over*/No, spreadsheets can't do that/Just guess each month | them: Nice. Could it also show how much over? | me: Add =C2-B2 in the next column*/Only with a new laptop/No idea
+check: mcq | In =IF(C2>B2,"Over","OK"), what is C2>B2? | The test* | The answer | A typo
+check: tf | Conditional formatting can colour a cell when you're over budget. | true
+check: mcq | What does =IF(C2>B2,"Over","OK") show when C2 is 50 and B2 is 40? | Over* | OK | 10
+home: Add an IF alert to one row of your budget sheet.
+skill: spreadsheets
+
+@lesson 3.5 | Charts | 📈 | workshop
+hook: A column of numbers is hard to read. A chart shows it at a glance.
+learn: Select your categories and totals, then insert a chart.
+learn: Bar charts compare categories. Line charts show change over time.
+learn: Pie charts only work when the parts add up to one whole and there aren't too many slices.
+play: match | Match each question to the best chart | Which category costs the most?=Bar chart; How has my savings balance changed over a year?=Line chart; What share of my pay goes to rent?=Pie chart; How do my weekly spends compare month to month?=Bar chart grouped by month
+check: mcq | Which chart shows change over time? | Line chart* | Pie chart | No chart
+check: tf | Pie charts work best with a few parts of one whole. | true
+check: mcq | Which chart compares categories well? | Bar chart* | A single number | A table of contents
+home: Make a bar chart of your spending categories.
+skill: charts
+
+@lesson 3.6 | A goal tracker | 🎯 | workshop
+hook: You're saving $3,000 for a car. How far along are you, and how long to go?
+learn: Put your goal in B1 and your savings so far in B2. =B2/B1, formatted as a percentage, shows your progress.
+learn: =ROUNDUP((B1-B2)/B3,0) shows how many weeks are left, if B3 is your weekly saving.
+learn: Update B2 each payday and watch it climb.
+try: $1,200 saved of $3,000 = 40% :: gap | $750 saved of $3,000 = _% | 25
+play: slider | Goal $3,000, saved $1,200, saving $100 a week. How many weeks are left? | 0 | 40 | 18 | weeks | 0 | 1
+check: gap | Goal $2,000, saved $500, saving $50 a week. Weeks left: _ | 30
+check: mcq | What does =B2/B1 show as a percentage? | How much of the goal you've saved* | The weekly amount | The goal
+check: tf | ROUNDUP rounds a number up to the next whole number. | true
+home: Build a goal tracker for something you're saving for.
+skill: spreadsheets
+

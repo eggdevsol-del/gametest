@@ -153,3 +153,81 @@ check: tf | Cooking at home is often cheaper per serve than takeaways. | true
 home: Work out the cost per serve of one family dinner this week.
 skill: unitprice
 
+@lesson 3.1 | Per kilo or per 100 g? | ⚖️ | kitchen
+hook: Cheese A is $12 a kilo. Cheese B is $1.10 per 100 g. Which is cheaper?
+learn: 1 kg is 1,000 g, so there are 10 lots of 100 g in a kilo.
+learn: To change a price per kg into a price per 100 g, divide by 10.
+learn: $12 a kilo is $1.20 per 100 g. So Cheese B is cheaper.
+try: $15 per kg is $1.50 per 100 g :: gap | $8 per kg is $_ per 100 g | 0.8
+play: price | Which cheese is cheaper per 100 g? | Cheese A, block:12:1000:g; Cheese B, deli:1.1:100:g
+check: gap | $25 per kg is $_ per 100 g | 2.5
+check: mcq | $9 per kg is how much per 100 g? | 90c* | $9 | $90
+check: tf | To change per kg to per 100 g, divide by 10. | true
+home: Find a price per kg at the shop and change it to per 100 g.
+skill: unitprice
+
+@lesson 3.2 | Per litre | 🥛 | kitchen
+hook: Milk is $3.20 for 2 litres. Juice is $4.50 for 1.5 litres. Which costs more per litre?
+learn: Price per litre = price ÷ number of litres.
+learn: $3.20 ÷ 2 = $1.60 a litre. $4.50 ÷ 1.5 = $3 a litre.
+learn: For small drinks, shops often show the price per 100 mL instead.
+try: $6 for 2 L is $3 per litre :: gap | $9 for 3 L is $_ per litre | 3
+play: price | Which drink is cheapest per 100 mL? | Small bottle:2.5:500:ml; Big bottle:4:1500:ml; Can:1.5:330:ml
+check: gap | $4 for 2 L is $_ per litre | 2
+check: mcq | $5 for 500 mL is how much per litre? | $10* | $5 | $2.50
+check: tf | Price per litre = price ÷ litres. | true
+home: Compare the price per litre of two drinks in your fridge or at the shop.
+skill: unitprice
+
+@lesson 3.3 | Mixed-up units | 🔀 | stall
+hook: One pack says 500 g. The other says 1.2 kg. How do you compare?
+learn: Change both to the same unit first. 1.2 kg is 1,200 g.
+learn: Then work out the price per 100 g for each.
+learn: $4 for 500 g is 80c per 100 g. $9 for 1,200 g is 75c per 100 g.
+try: 1.5 kg = 1,500 g :: gap | 0.75 kg = _ g | 750
+play: price | Which rice is better value? | 500 g bag:4:500:g; 1.2 kg bag:9:1200:g
+check: gap | 2.5 L = _ mL | 2500
+check: mcq | What's the first step when units are different? | Change them to the same unit* | Pick the bigger number | Guess
+check: tf | 1.2 kg is the same as 1,200 g. | true
+home: Find two packs with different units at home and compare them.
+skill: measuring
+
+@lesson 3.4 | Quick estimates | 🎯 | stall
+hook: You're in the shop with no calculator. How can you compare fast?
+learn: Round prices to easy numbers. $4.95 is about $5.
+learn: Round amounts too. 480 g is about 500 g.
+learn: An estimate tells you which is cheaper most of the time. Check if it's close.
+try: $4.95 is about $5 :: gap | $7.90 rounded to the nearest dollar is $_ | 8
+play: gen | round | 4
+check: mcq | $3.98 for 490 g is about… | $4 for 500 g* | $3 for 400 g | $5 for 600 g
+check: tf | Rounding helps you compare quickly. | true
+check: mcq | If two estimates are very close, you should… | Work it out exactly* | Pick at random | Buy both
+home: Estimate the total of five items before you get to the checkout.
+skill: rounding
+
+@lesson 3.5 | Per item and per serve | 🥚 | kitchen
+hook: 6 eggs for $4.20 or 12 eggs for $7.80. Which is cheaper per egg?
+learn: Price per item = price ÷ number of items.
+learn: $4.20 ÷ 6 = 70c an egg. $7.80 ÷ 12 = 65c an egg.
+learn: For meals, work out the price per serve the same way.
+try: $3 for 6 items is 50c each :: gap | $5 for 10 items is _c each | 50
+play: price | Which pack of eggs is cheaper per egg? | Half dozen:4.2:6:eggs; Dozen:7.8:12:eggs
+check: gap | $9 for 12 muffins is _c each | 75
+check: mcq | A $12 lasagne serves 6. What's the cost per serve? | $2* | $6 | $72
+check: tf | Price per item = price ÷ number of items. | true
+home: Work out the cost per item of something your family buys in a pack.
+skill: unitprice
+
+@lesson 3.6 | When cheaper isn't better | 🗑️ | kitchen
+hook: The giant bag of spinach is cheaper per 100 g. Half of it goes slimy in the fridge. Was it a deal?
+learn: A lower unit price only saves money if you use it all.
+learn: Food that's thrown away is money thrown away.
+learn: Think about how fast you'll use it, where you'll store it, and what you can afford today.
+try: $6 bag, half thrown away, means you paid $6 for $3 worth :: gap | $8 bag, a quarter thrown away, means $_ worth was wasted | 2
+play: path | A huge 2 kg bag of apples is cheaper per kilo, but your family eats about 1 kg a week. | Buy the 1 kg bag you'll eat => good: You paid a bit more per kilo but wasted nothing. | Buy the 2 kg bag and let half go soft => bad: You saved per kilo, then threw money away. | Buy the 2 kg bag and plan an apple crumble => good: Smart. Using it all makes the bigger bag a real saving.
+check: mcq | When does a lower unit price save money? | When you use it all* | Always | Never
+check: tf | Thrown-away food is wasted money. | true
+check: mcq | Before buying a giant pack, think about… | How fast you'll use it* | The colour of the bag | Your favourite song
+home: Check the fridge for food that might go to waste and plan to use it.
+skill: value
+

@@ -151,3 +151,75 @@ check: mcq | Why check competitors' prices? | To see where your price fits* | To
 home: Compare the price of one product at three sellers and decide where you'd price it.
 skill: pricing
 
+@lesson 3.1 | Choosing a name | 🏷️ | stage
+hook: "Bob's Biscuits" or "Xylophonic Baked Goods Collective". Which would you remember?
+learn: Good business names are short, easy to say and spell, and hint at what you do.
+learn: Check nobody else nearby is using it, and that the website and social names are free.
+learn: Avoid names that copy a famous brand. That can get you into legal trouble.
+play: sort | Strong name, Weak name | Bright Bake=Strong name; Kwyck Kuppcaykz Xpress=Weak name; Harbour Candles=Strong name; A name copying a famous fast-food chain=Weak name; Paws and Claws Pet Treats=Strong name; Business 1=Weak name | Strong or weak business name?
+check: mcq | What makes a good business name? | Short, easy to say, and hints at what you do* | Long and confusing | Copied from a famous brand
+check: tf | You should check a name isn't already being used. | true
+check: mcq | Why avoid copying a famous brand name? | It can get you into legal trouble* | It's too short | Nobody would notice
+home: Brainstorm five names for a pretend business and pick the strongest.
+skill: branding
+
+@lesson 3.2 | Logos and colours | 🎨 | stage
+hook: Some logos are just a shape, yet you know them instantly. Why?
+learn: Good logos are simple, so they work tiny on a phone and big on a sign.
+learn: Pick a few colours and fonts, and use them everywhere.
+learn: Being consistent helps people recognise you.
+play: tap | Tap the signs of a strong logo | ⭐:yes:Simple shapes are easy to remember; 🔍:yes:It still works when it's tiny; 🎨:yes:A few consistent colours; 🌈:no; 📜:no; 🔁:yes:Used the same way everywhere
+check: mcq | Why keep a logo simple? | It works at any size and is easy to remember* | It's cheaper to print in gold | Simple is boring
+check: tf | Using the same colours everywhere helps people recognise you. | true
+check: mcq | What's a test of a good logo? | It still works when tiny* | It has 20 colours | It changes every week
+home: Sketch a simple logo for a pretend business. Does it work when you draw it tiny?
+skill: branding
+
+@lesson 3.3 | Trademarks | ™️ | townhall
+hook: Can you protect your business name so nobody copies it?
+learn: A registered trademark protects a name, logo or slogan for certain goods or services.
+learn: {nz:In NZ, trademarks are registered with IPONZ, the Intellectual Property Office of New Zealand.~au:In Australia, trademarks are registered with IP Australia.}
+learn: Search the trademark database before you choose a name, so you don't copy someone by accident.
+play: path | You love the name "Sunny Socks" for your business. | Search the trademark database first => good: Smart. You find out early whether someone already owns it. | Print 500 labels straight away => bad: If someone owns it, you could have to stop using it and lose your labels. | Use a famous brand's name with a tiny change => bad: That can still break trademark law.
+check: mcq | What does a registered trademark protect? | A name, logo or slogan* | Your bank account | Your house
+check: tf | You should search the trademark database before choosing a name. | true
+check: mcq | {nz:Where are NZ trademarks registered?~au:Where are Australian trademarks registered?} | {nz:IPONZ~au:IP Australia}* | Your school | A social media site
+home: Search a name idea on {nz:the IPONZ website~au:the IP Australia website} with a grown-up.
+skill: law
+
+@lesson 3.4 | Brand voice | 🗣️ | stage
+hook: One brand writes "Yo! New flavours just dropped!" Another writes "We are pleased to announce new flavours." Who are they talking to?
+learn: Brand voice is how your business sounds in words.
+learn: Pick a voice that suits your customers, like friendly and fun, or calm and expert.
+learn: Use the same voice on your posts, labels and emails.
+play: match | Match each business to a voice that suits it | A kids' slime stall=Fun and playful; A tutoring service=Clear and encouraging; A dog-walking business=Warm and friendly; A bike repair shop=Practical and helpful
+check: mcq | What is brand voice? | How your business sounds in words* | Your phone number | A singer you hire
+check: tf | A consistent voice helps customers recognise you. | true
+check: mcq | A tutoring service should probably sound… | Clear and encouraging* | Rude | Confusing
+home: Write one social post for a pretend business in its brand voice.
+skill: branding
+
+@lesson 3.5 | Your brand promise | 💎 | stall
+hook: What do you want customers to expect every single time?
+learn: A brand promise is what customers can always count on from you, like "always fresh" or "fixed in 24 hours".
+learn: Only promise what you can keep, every time.
+learn: Keeping the promise builds trust. Breaking it damages the brand fast.
+play: debate | Is it better to promise a lot or to promise a little and always deliver? | Promise what you can always deliver, then delight people* | Promise as much as possible to get customers | Big promises can attract attention. But if you can't keep them, customers leave and tell others.
+check: mcq | What's a brand promise? | What customers can always count on from you* | A pinky swear | A discount code
+check: tf | Breaking your brand promise can damage trust quickly. | true
+check: mcq | Which is a good brand promise for a small bakery? | Baked fresh every morning* | The best cake in the universe | Free cake forever
+home: Write a one-line brand promise for a pretend business.
+skill: branding
+
+@lesson 3.6 | Honest green claims | 🌿 | townhall
+hook: A pack says "100% eco-friendly!" with a leaf on it. What does that actually mean?
+learn: Greenwashing is making a product sound better for the planet than it really is.
+learn: Vague claims like "eco" or "natural" can mislead. Specific, true claims are better.
+learn: {nz:The Commerce Commission can take action against misleading green claims.~au:The ACCC can take action against misleading green claims.}
+play: scam | Honest claim or greenwashing? | Made with 80% recycled cardboard=real; 100% eco-friendly!, with no details=scam; Our cups are compostable in home compost bins, tested to a standard=real; A leaf logo on a product that's no different=scam; Planet-friendly, but it's in single-use plastic=scam | Specific, provable claims are honest. Vague ones may be greenwashing.
+check: mcq | What's greenwashing? | Making something sound greener than it is* | Washing green clothes | Recycling properly
+check: tf | Vague claims like "eco" can mislead customers. | true
+check: mcq | {nz:Who can act on misleading green claims in NZ?~au:Who can act on misleading green claims in Australia?} | {nz:The Commerce Commission~au:The ACCC}* | A gardening club | Nobody
+home: Find a "green" claim on a product at home. Is it specific or vague?
+skill: honesty
+

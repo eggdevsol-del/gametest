@@ -153,3 +153,77 @@ check: gap | You earn $2,000 and set aside 25% for tax. That's $_ | 500
 home: Ask someone who is self-employed how they put money aside for tax.
 skill: tax
 
+@lesson 3.1 | Bootstrapping | 👢 | workshop
+hook: Can you start a business without borrowing a cent?
+learn: Bootstrapping means starting with your own money and the money your first customers pay.
+learn: Keep costs low: start small, sell before you build big, and reuse what you have.
+learn: You keep full ownership and control, but growth can be slower.
+play: sort | Bootstrapping move, Not bootstrapping | Selling pre-orders before making stock=Bootstrapping move; Taking out a big loan for fancy equipment=Not bootstrapping; Using your own laptop and phone=Bootstrapping move; Renting an expensive office on day one=Not bootstrapping; Reinvesting your first profits=Bootstrapping move; Selling half the business to an investor=Not bootstrapping | Is it bootstrapping?
+check: mcq | What's a perk of bootstrapping? | You keep full ownership and control* | You grow faster than everyone | Someone else pays your bills
+check: tf | Selling pre-orders can fund your first stock. | true
+check: mcq | A downside of bootstrapping can be… | Slower growth* | Losing ownership | Interest payments
+home: List five things you'd need to start a small business, and which ones you already have.
+skill: funding
+
+@lesson 3.2 | Business loans | 🏦 | bank
+hook: You walk into a bank asking for a $20,000 business loan. What will they ask?
+learn: Banks want to see a business plan, cash flow forecasts and how you'll repay.
+learn: They may ask for security, like an asset they can take if you don't repay, or a personal guarantee.
+learn: Loans keep your ownership, but repayments start even if sales are slow.
+try: $20,000 at 10% for a year is $2,000 in interest :: gap | $15,000 at 8% for a year is $_ in interest | 1200
+play: chat | Meeting a bank about a business loan | them: Thanks for coming in. How will the loan be repaid? | me: From sales. Here's my plan and a 12-month cash flow forecast*/I'll figure it out/Do I have to repay it? | them: And if sales are slower than expected? | me: I've got savings to cover three months of repayments*/I'd stop paying/I'd ask for another loan
+check: mcq | What's a personal guarantee? | You promise to repay from your own money if the business can't* | A free gift | A type of savings account
+check: tf | Loan repayments are due even if sales are slow. | true
+check: mcq | What will a bank usually want to see? | A business plan and cash flow forecast* | Your favourite songs | Nothing
+home: Look at a bank's business loan page and note what it asks for.
+skill: funding
+
+@lesson 3.3 | Grants and competitions | 🏆 | townhall
+hook: Free money for your business? What's the catch?
+learn: Grants are money you don't repay, but they come with rules about what you spend them on.
+learn: They're competitive, take time to apply for, and often need reports afterwards.
+learn: {nz:business.govt.nz lists support for businesses, and youth programmes like Young Enterprise help students start businesses.~au:The grants finder on business.gov.au lists government grants and support for businesses.}
+play: order | Apply for a grant. Put the steps in order. | Check you're eligible; Read the rules and deadline; Write a clear plan for the money; Submit the application on time; Report on how the money was spent
+check: mcq | What's a catch with grants? | Rules on spending and reporting* | You repay double | They're always instant
+check: tf | Grants usually don't need to be repaid. | true
+check: mcq | What should you check first? | That you're eligible* | Your horoscope | How to spend it on holidays
+home: Find one grant or business competition for young people.
+skill: funding
+
+@lesson 3.4 | Friends and family money | 👨‍👩‍👧 | home
+hook: Your uncle offers $5,000 for your business. Gift, loan or a share? Does it matter?
+learn: Money from friends and family can be a gift, a loan, or an investment for a share of the business.
+learn: Write down what it is, how and when it's repaid, and what happens if the business fails.
+learn: Unclear deals can damage relationships. Treat it as seriously as a bank loan.
+play: debate | Should you write down a loan from family, even if they say it's fine? | Yes. Clear terms protect the relationship and the business* | No. Writing it down is rude | Some families prefer to keep things informal, and that can work. But memories differ, especially if the business struggles.
+check: mcq | What should you write down for a family loan? | How much, when it's repaid and what if it fails* | Nothing | Only the amount
+check: tf | Unclear money deals can damage relationships. | true
+check: mcq | If family invest for a share, they get… | Part ownership of the business* | Nothing | Free products only
+home: Ask a grown-up whether they've ever lent money to family, and how it went.
+skill: funding
+
+@lesson 3.5 | Investors and equity | 📊 | shares
+hook: An investor offers $50,000 for 20% of your business. What is your business worth to them?
+learn: Equity means ownership. Selling equity means giving up part of your business for money.
+learn: $50,000 for 20% means they value the whole business, after their money, at $250,000.
+learn: Investors want growth and a say. You get money and their help, but you own less.
+try: $50,000 for 20% values the business at $250,000 :: gap | $20,000 for 10% values the business at $_ | 200000
+play: slider | An investor offers $30,000 for 25%. What's the business valued at, in thousands? | 0 | 300 | 120 | k$ | 0 | 10
+check: mcq | What does selling equity mean? | Giving up part ownership for money* | Taking a loan | Selling your products
+check: gap | You own 100% and sell 20%. You now own _% | 80
+check: tf | Investors usually want a say in big decisions. | true
+home: Watch an episode of a business pitch show with a grown-up and work out the valuations.
+skill: equity
+
+@lesson 3.6 | Crowdfunding | 👥 | online
+hook: Could 500 strangers fund your idea?
+learn: Rewards crowdfunding means people pre-pay for your product or a reward, often online.
+learn: Equity crowdfunding means many people buy small shares in your business, through licensed platforms.
+learn: It works best with a great story, a working prototype and a real plan to deliver.
+play: sort | Rewards crowdfunding, Equity crowdfunding | Backers get the product when it's made=Rewards crowdfunding; Backers get a small share of the company=Equity crowdfunding; A T-shirt for a $30 pledge=Rewards crowdfunding; Run through a licensed platform selling shares=Equity crowdfunding; Pre-ordering a board game=Rewards crowdfunding; Investors hope the company grows in value=Equity crowdfunding | Which kind is it?
+check: mcq | In rewards crowdfunding, backers usually get… | The product or a reward* | Shares | Nothing
+check: tf | Failing to deliver on a crowdfunding promise damages your reputation. | true
+check: mcq | What helps a crowdfunding campaign succeed? | A clear story and a working prototype* | No details at all | A blank page
+home: Find a crowdfunding campaign and decide whether you'd back it, and why.
+skill: funding
+

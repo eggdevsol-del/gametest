@@ -151,6 +151,81 @@ check: mcq | Your swimming lesson is at 4:00. Which time is late? | 4:10* | 3:55
 home: Pick something you go to each week. Plan what time you need to be ready.
 skill: punctuality
 
+@lesson 3.1 | Halves | 🍕 | kitchen
+hook: You and a friend share one pizza. How do you make it fair?
+learn: A half is one of two equal parts.
+learn: Cut it straight down the middle, so both parts are the same size.
+learn: Two halves make one whole.
+play: sort | Fair halves, Not fair | Two pieces the same size=Fair halves; One big piece and one tiny piece=Not fair; A sandwich cut down the middle=Fair halves; A cookie snapped into a crumb and a big bit=Not fair; An apple cut into two equal pieces=Fair halves; Three pieces for two people=Not fair | Is it fair halves?
+check: mcq | A half is… | One of two equal parts* | One of three parts | The biggest piece
+check: tf | Two halves make one whole. | true
+check: mcq | Which shows fair halves? | Two pieces the same size* | A big piece and a tiny piece | Three pieces
+home: Help cut something into fair halves at home.
+skill: fractions
+
+@lesson 3.2 | Quarters | 🍰 | kitchen
+hook: Four friends and one cake. How do you cut it?
+learn: A quarter is one of four equal parts.
+learn: Cut in half, then cut each half in half again.
+learn: Four quarters make one whole.
+play: order | Cut a cake into quarters | Look at the whole cake; Cut it down the middle; Turn it around; Cut across the middle; Now you have four equal pieces
+check: mcq | A quarter is… | One of four equal parts* | One of two parts | Half of a half of a half
+check: tf | Four quarters make one whole. | true
+check: mcq | Two quarters make… | One half* | One whole | Nothing
+home: Cut a sandwich into quarters for four people.
+skill: fractions
+
+@lesson 3.3 | Half of a number | ➗ | stall
+hook: You have 8 grapes. Half go to your friend. How many is that?
+learn: Half of a number means sharing it into 2 equal groups.
+learn: Half of 8 is 4, because 4 + 4 = 8.
+learn: Half of 10 is 5. Half of 6 is 3.
+try: Half of 8 is 4 :: gap | Half of 10 is _ | 5
+play: slider | Half of 12 marbles is how many? | 0 | 12 | 6 | marbles | 0 | 1
+check: gap | Half of 6 is _ | 3
+check: mcq | Half of 20 is… | 10* | 2 | 40
+check: tf | Half of 4 is 2. | true
+home: Find 10 things and share them into two equal halves.
+skill: fractions
+
+@lesson 3.4 | A quarter of a number | 🍪 | stall
+hook: 8 cookies shared between 4 kids. How many each?
+learn: A quarter of a number means sharing it into 4 equal groups.
+learn: A quarter of 8 is 2, because 2 + 2 + 2 + 2 = 8.
+learn: You can also halve it, then halve it again: 8, then 4, then 2.
+try: A quarter of 8 is 2 :: gap | A quarter of 12 is _ | 3
+play: match | Match each number to a quarter of it | 4=1; 8=2; 12=3; 20=5
+check: gap | A quarter of 16 is _ | 4
+check: mcq | How else can you find a quarter? | Halve it, then halve it again* | Add 4 | Double it
+check: tf | A quarter of 4 is 1. | true
+home: Share 12 pieces of something into four equal groups.
+skill: fractions
+
+@lesson 3.5 | Equal or not? | 🟦 | home
+hook: Is a square cut corner to corner still in fair halves?
+learn: Parts must be the same size to be halves or quarters.
+learn: A square cut corner to corner makes two equal triangles. Those are halves too!
+learn: Different shapes can still be equal parts.
+play: tap | Tap the shapes cut into equal parts | 🔲:yes:A square cut down the middle; 🔺:no; ⭕:yes:A circle cut through the centre; 🟥:yes:A square cut corner to corner makes two equal triangles; 🥨:no; 🍫:yes:A chocolate bar snapped into same-size pieces
+check: mcq | What makes halves fair? | Both parts are the same size* | Both parts are the same colour | One is bigger
+check: tf | A square cut corner to corner makes two equal halves. | true
+check: mcq | Can different shapes be equal parts? | Yes, if they're the same size* | No, never | Only on Tuesdays
+home: Fold a square of paper into halves two different ways.
+skill: fractions
+
+@lesson 3.6 | Sharing money fairly | 💰 | bank
+hook: Grandma gives you and your sister $10 to share. How much each?
+learn: Halving money works just like halving things.
+learn: Half of $10 is $5.
+learn: If there's an odd coin, swap it for smaller coins so you can share it.
+try: Half of $10 is $5 :: gap | Half of $6 is $_ | 3
+play: path | You and your brother get $5 to share. | Swap the $5 for smaller coins and take $2.50 each => good: Fair and square! | Keep $4 and give him $1 => bad: That's not a fair half. | Say it's all yours because you're older => bad: That isn't fair sharing.
+check: gap | Half of $20 is $_ | 10
+check: mcq | You share $8 between 4 people. Each gets… | $2* | $4 | $8
+check: tf | You can swap a coin for smaller coins to share it fairly. | true
+home: Share pretend money fairly between family members.
+skill: fractions
+
 @band builders
 @unit 1 | Percentages | Discounts, tax and tips
 @unit 2 | Recipes and scaling | Cooking for more or fewer people
@@ -305,6 +380,84 @@ check: mcq | Soup costs $10 for 5 serves. What's the cost per serve? | $2* | $5 
 check: tf | Cooking at home is often cheaper per serve than takeaways. | true
 home: Work out the cost per serve of one family dinner this week.
 skill: unitprice
+
+@lesson 3.1 | Per kilo or per 100 g? | ⚖️ | kitchen
+hook: Cheese A is $12 a kilo. Cheese B is $1.10 per 100 g. Which is cheaper?
+learn: 1 kg is 1,000 g, so there are 10 lots of 100 g in a kilo.
+learn: To change a price per kg into a price per 100 g, divide by 10.
+learn: $12 a kilo is $1.20 per 100 g. So Cheese B is cheaper.
+try: $15 per kg is $1.50 per 100 g :: gap | $8 per kg is $_ per 100 g | 0.8
+play: price | Which cheese is cheaper per 100 g? | Cheese A, block:12:1000:g; Cheese B, deli:1.1:100:g
+check: gap | $25 per kg is $_ per 100 g | 2.5
+check: mcq | $9 per kg is how much per 100 g? | 90c* | $9 | $90
+check: tf | To change per kg to per 100 g, divide by 10. | true
+home: Find a price per kg at the shop and change it to per 100 g.
+skill: unitprice
+
+@lesson 3.2 | Per litre | 🥛 | kitchen
+hook: Milk is $3.20 for 2 litres. Juice is $4.50 for 1.5 litres. Which costs more per litre?
+learn: Price per litre = price ÷ number of litres.
+learn: $3.20 ÷ 2 = $1.60 a litre. $4.50 ÷ 1.5 = $3 a litre.
+learn: For small drinks, shops often show the price per 100 mL instead.
+try: $6 for 2 L is $3 per litre :: gap | $9 for 3 L is $_ per litre | 3
+play: price | Which drink is cheapest per 100 mL? | Small bottle:2.5:500:ml; Big bottle:4:1500:ml; Can:1.5:330:ml
+check: gap | $4 for 2 L is $_ per litre | 2
+check: mcq | $5 for 500 mL is how much per litre? | $10* | $5 | $2.50
+check: tf | Price per litre = price ÷ litres. | true
+home: Compare the price per litre of two drinks in your fridge or at the shop.
+skill: unitprice
+
+@lesson 3.3 | Mixed-up units | 🔀 | stall
+hook: One pack says 500 g. The other says 1.2 kg. How do you compare?
+learn: Change both to the same unit first. 1.2 kg is 1,200 g.
+learn: Then work out the price per 100 g for each.
+learn: $4 for 500 g is 80c per 100 g. $9 for 1,200 g is 75c per 100 g.
+try: 1.5 kg = 1,500 g :: gap | 0.75 kg = _ g | 750
+play: price | Which rice is better value? | 500 g bag:4:500:g; 1.2 kg bag:9:1200:g
+check: gap | 2.5 L = _ mL | 2500
+check: mcq | What's the first step when units are different? | Change them to the same unit* | Pick the bigger number | Guess
+check: tf | 1.2 kg is the same as 1,200 g. | true
+home: Find two packs with different units at home and compare them.
+skill: measuring
+
+@lesson 3.4 | Quick estimates | 🎯 | stall
+hook: You're in the shop with no calculator. How can you compare fast?
+learn: Round prices to easy numbers. $4.95 is about $5.
+learn: Round amounts too. 480 g is about 500 g.
+learn: An estimate tells you which is cheaper most of the time. Check if it's close.
+try: $4.95 is about $5 :: gap | $7.90 rounded to the nearest dollar is $_ | 8
+play: gen | round | 4
+check: mcq | $3.98 for 490 g is about… | $4 for 500 g* | $3 for 400 g | $5 for 600 g
+check: tf | Rounding helps you compare quickly. | true
+check: mcq | If two estimates are very close, you should… | Work it out exactly* | Pick at random | Buy both
+home: Estimate the total of five items before you get to the checkout.
+skill: rounding
+
+@lesson 3.5 | Per item and per serve | 🥚 | kitchen
+hook: 6 eggs for $4.20 or 12 eggs for $7.80. Which is cheaper per egg?
+learn: Price per item = price ÷ number of items.
+learn: $4.20 ÷ 6 = 70c an egg. $7.80 ÷ 12 = 65c an egg.
+learn: For meals, work out the price per serve the same way.
+try: $3 for 6 items is 50c each :: gap | $5 for 10 items is _c each | 50
+play: price | Which pack of eggs is cheaper per egg? | Half dozen:4.2:6:eggs; Dozen:7.8:12:eggs
+check: gap | $9 for 12 muffins is _c each | 75
+check: mcq | A $12 lasagne serves 6. What's the cost per serve? | $2* | $6 | $72
+check: tf | Price per item = price ÷ number of items. | true
+home: Work out the cost per item of something your family buys in a pack.
+skill: unitprice
+
+@lesson 3.6 | When cheaper isn't better | 🗑️ | kitchen
+hook: The giant bag of spinach is cheaper per 100 g. Half of it goes slimy in the fridge. Was it a deal?
+learn: A lower unit price only saves money if you use it all.
+learn: Food that's thrown away is money thrown away.
+learn: Think about how fast you'll use it, where you'll store it, and what you can afford today.
+try: $6 bag, half thrown away, means you paid $6 for $3 worth :: gap | $8 bag, a quarter thrown away, means $_ worth was wasted | 2
+play: path | A huge 2 kg bag of apples is cheaper per kilo, but your family eats about 1 kg a week. | Buy the 1 kg bag you'll eat => good: You paid a bit more per kilo but wasted nothing. | Buy the 2 kg bag and let half go soft => bad: You saved per kilo, then threw money away. | Buy the 2 kg bag and plan an apple crumble => good: Smart. Using it all makes the bigger bag a real saving.
+check: mcq | When does a lower unit price save money? | When you use it all* | Always | Never
+check: tf | Thrown-away food is wasted money. | true
+check: mcq | Before buying a giant pack, think about… | How fast you'll use it* | The colour of the bag | Your favourite song
+home: Check the fridge for food that might go to waste and plan to use it.
+skill: value
 
 @band makers
 @unit 1 | Ratios and rates | Speed, pay rates and mixing
@@ -463,6 +616,79 @@ check: mcq | A near miss on a pokie means… | Nothing. It's designed to keep yo
 home: Spot a gambling ad and work out which trick it uses.
 skill: probability
 
+@lesson 3.1 | Who did they ask? | 👥 | online
+hook: "9 out of 10 people love our app!" Ten people were asked. All of them work there. Convinced?
+learn: A sample is the group of people who were actually asked or measured.
+learn: Small samples can give odd results just by chance.
+learn: Biased samples, like only asking fans or staff, don't represent everyone.
+play: sort | Fair sample, Biased or tiny | 1,000 randomly chosen voters=Fair sample; 10 of the company's own staff=Biased or tiny; People who already follow the brand=Biased or tiny; A random sample of students from every year=Fair sample; 3 friends at lunch=Biased or tiny; A large survey across different towns=Fair sample | Is the sample fair?
+check: mcq | What's wrong with asking only a company's staff? | The sample is biased* | Nothing | It's too big
+check: tf | Small samples can give odd results by chance. | true
+check: mcq | Which sample is fairer? | A large random sample* | Your best friends | People who already agree
+home: Find a claim in an ad that uses a survey. Who was asked?
+skill: statistics
+
+@lesson 3.2 | Loaded questions | ❓ | online
+hook: "Do you agree that our wonderful school needs a longer lunch?" Is that a fair question?
+learn: The way a question is worded can push people towards an answer.
+learn: Fair questions are neutral: "How long should lunch be?"
+learn: When you see a survey result, ask what the exact question was.
+play: scam | Fair question or loaded? | How many hours a week do you game?=real; Don't you agree gaming is a waste of time?=scam; Which flavour do you prefer: A or B?=real; Since our product is the best, would you buy it again?=scam; Most experts say yes, do you agree?=scam | Loaded questions push you towards an answer.
+check: mcq | Which is a neutral question? | How long should lunch be?* | Don't you agree lunch is too short? | Surely you want more lunch?
+check: tf | The wording of a question can change the results. | true
+check: mcq | When you see a survey result, ask… | What the exact question was* | Who has the best logo | Nothing
+home: Rewrite a loaded question so it's neutral.
+skill: statistics
+
+@lesson 3.3 | Correlation isn't causation | 🍦 | online
+hook: When ice cream sales go up, so do sunburns. Does ice cream cause sunburn?
+learn: A correlation means two things go up or down together.
+learn: It doesn't prove one causes the other. Here, hot sunny weather causes both.
+learn: Look for a hidden cause, or chance, before believing "X causes Y".
+play: match | Match each correlation to the likely hidden cause | Ice cream sales and sunburn=Hot sunny weather; Umbrella sales and car crashes=Rainy weather; Number of firefighters at a fire and damage done=The size of the fire; Hot chocolate sales and flu cases=Winter
+check: mcq | What does correlation mean? | Two things change together* | One thing causes another | Nothing at all
+check: tf | A correlation proves one thing causes the other. | false | A hidden cause or chance might explain it.
+check: mcq | Bigger fires have more firefighters and more damage. What causes the damage? | The size of the fire* | The firefighters | The fire trucks
+home: Find a headline claiming "X causes Y". Could there be a hidden cause?
+skill: statistics
+
+@lesson 3.4 | Which average? | 📊 | stage
+hook: Five people earn $40k, $45k, $50k, $55k and $1 million. Is the "average income" of $238k honest?
+learn: The mean adds everything and divides by how many. One huge value can drag it up.
+learn: The median is the middle value when you line them up. It isn't pulled by extremes.
+learn: For incomes and house prices, the median often gives a fairer picture.
+try: Median of 2, 3, 9 is 3 :: gap | Median of 4, 7, 20 is _ | 7
+play: slider | Incomes: $40k, $45k, $50k, $55k and $1 million. What's the median, in thousands? | 0 | 300 | 50 | k$ | 0 | 5
+check: gap | Mean of 2, 4 and 6 is _ | 4
+check: mcq | Why is the median often used for house prices? | A few huge values don't drag it up* | It's always higher | It's easier to spell
+check: tf | One huge value can drag the mean up a lot. | true
+home: Find a news story that uses "average" or "median". Which one did they use?
+skill: statistics
+
+@lesson 3.5 | Relative or absolute? | ⚠️ | online
+hook: "This snack DOUBLES your risk!" Should you panic?
+learn: Relative risk says how much a risk changes: "double", "50% more".
+learn: Absolute risk says how big it actually is: 1 in 10,000 becoming 2 in 10,000.
+learn: Doubling a tiny risk is still a tiny risk. Always look for the actual numbers.
+play: diff | The headline and the actual study. Tap what the headline left out. | Snack doubles your risk!; Scientists warn | Snack doubles your risk; Risk goes from 1 in 10,000 to 2 in 10,000; Study of 200 people; Scientists say more research needed
+check: mcq | A risk goes from 1 in 10,000 to 2 in 10,000. That's… | Double, but still very small* | A huge risk | No change
+check: tf | Relative risk on its own can make small risks sound scary. | true
+check: mcq | What should you look for in a scary headline? | The actual numbers* | The font | The picture
+home: Find a health headline and look for the actual risk numbers.
+skill: statistics
+
+@lesson 3.6 | Cherry-picking | 🍒 | online
+hook: A fund's ad shows it beat the market in its best year. What about the other nine?
+learn: Cherry-picking means choosing only the data that supports your point.
+learn: Watch for unusual start and end dates, missing years, or one great example.
+learn: Ask: what would the full picture show?
+play: sort | Full picture, Cherry-picked | Ten years of results, good and bad=Full picture; Only the best year=Cherry-picked; A chart starting right after a big crash=Cherry-picked; Results from every school in the region=Full picture; Only the three happiest reviews=Cherry-picked; The average across all customers=Full picture | Full picture or cherry-picked?
+check: mcq | What is cherry-picking? | Choosing only data that supports your point* | Picking fruit | Using all the data
+check: tf | A chart starting right after a crash can make growth look bigger. | true
+check: mcq | A good question to ask about a chart is… | What would the full picture show?* | Is it colourful? | Who drew it?
+home: Find a chart in an ad and decide if it might be cherry-picked.
+skill: statistics
+
 @band launchers
 @unit 1 | Loan maths | Interest, repayments and total cost
 @unit 2 | Compound growth | The formula behind the snowball
@@ -619,3 +845,77 @@ check: tf | A 1% yearly fee can take a big share of a 40-year balance. | true
 check: gap | Prices rise 10% a year for 2 years. A $100 item now costs $_ | 121
 home: Find the interest rate on a credit card and work out a year's compound interest on $1,000.
 skill: compound
+
+@lesson 3.1 | Build a budget sheet | 🟩 | workshop
+hook: A budget in your head is easy to forget. Can a spreadsheet keep it for you?
+learn: Make columns for Item, Budgeted and Actual. Put each spending category on its own row.
+learn: At the bottom, =SUM(B2:B10) adds up the budget, and =SUM(C2:C10) adds up what you really spent.
+learn: Update it weekly. The totals change by themselves.
+play: build | Build a weekly budget sheet | Title the columns: Item, Budgeted, Actual; List categories like rent, food and transport; Type in your budget amounts; Add a total row with =SUM; Fill in what you actually spend each week; Compare the two totals
+check: mcq | What does =SUM(B2:B10) do? | Adds up cells B2 to B10* | Deletes them | Sorts them
+check: tf | Spreadsheet totals update when you change a number. | true
+check: mcq | Which columns suit a simple budget? | Item, Budgeted and Actual* | Name and birthday | Just one column
+home: Make a simple budget sheet in a spreadsheet app.
+skill: spreadsheets
+
+@lesson 3.2 | Formulas that compare | ➖ | workshop
+hook: You budgeted $120 for food and spent $135. Can the sheet tell you you're over?
+learn: In D2, type =B2-C2 to show budgeted minus actual.
+learn: A positive number means you have some left. A negative number means you overspent.
+learn: Copy the formula down the column, and every row works it out.
+try: Budget $120, actual $135, difference = -$15 :: gap | Budget $80, actual $65, difference = $_ | 15
+play: match | Match each formula (typed after an = sign) to what it does | B2-C2=Budget minus actual; SUM(C2:C10)=Total actual spending; C2/B2=Share of the budget used; B2*52=A weekly amount for a whole year
+check: mcq | =B2-C2 gives -15. What does that mean? | You spent $15 more than budgeted* | You saved $15 | Nothing
+check: gap | Weekly rent of $250 × 52 weeks = $_ a year | 13000
+check: tf | Copying a formula down a column works it out for each row. | true
+home: Add a difference column to your budget sheet.
+skill: spreadsheets
+
+@lesson 3.3 | SUMIF for categories | 🧮 | workshop
+hook: You log every purchase. How much went on food this month?
+learn: List purchases with a category in column A and the amount in column B.
+learn: =SUMIF(A:A,"Food",B:B) adds up only the rows marked Food.
+learn: One formula per category gives you an instant spending summary.
+play: diff | Two months of a spending summary built with SUMIF. Tap what changed. | Food $320; Transport $90; Fun $60; Phone $30 | Food $280; Transport $90; Fun $140; Phone $30
+check: mcq | What does =SUMIF(A:A,"Food",B:B) add up? | Amounts in rows marked Food* | Every row | Only the first row
+check: tf | SUMIF can build a spending summary by category. | true
+check: mcq | In the diff, what went up? | Fun spending* | Food spending | Phone spending
+home: Log a week of spending with categories, then try SUMIF.
+skill: spreadsheets
+
+@lesson 3.4 | IF for alerts | 🚨 | workshop
+hook: What if your sheet shouted at you when you went over budget?
+learn: =IF(C2>B2,"Over budget","OK") shows a message depending on the numbers.
+learn: The first part is the test. Then what to show if it's true, then if it's false.
+learn: Add conditional formatting to turn the cell red when you're over.
+play: chat | A flatmate asks for help with the bills sheet | them: Can the sheet tell us when the power bill is higher than budgeted? | me: Yes. Use =IF(C2>B2,"Over","OK") and colour it red if it's over*/No, spreadsheets can't do that/Just guess each month | them: Nice. Could it also show how much over? | me: Add =C2-B2 in the next column*/Only with a new laptop/No idea
+check: mcq | In =IF(C2>B2,"Over","OK"), what is C2>B2? | The test* | The answer | A typo
+check: tf | Conditional formatting can colour a cell when you're over budget. | true
+check: mcq | What does =IF(C2>B2,"Over","OK") show when C2 is 50 and B2 is 40? | Over* | OK | 10
+home: Add an IF alert to one row of your budget sheet.
+skill: spreadsheets
+
+@lesson 3.5 | Charts | 📈 | workshop
+hook: A column of numbers is hard to read. A chart shows it at a glance.
+learn: Select your categories and totals, then insert a chart.
+learn: Bar charts compare categories. Line charts show change over time.
+learn: Pie charts only work when the parts add up to one whole and there aren't too many slices.
+play: match | Match each question to the best chart | Which category costs the most?=Bar chart; How has my savings balance changed over a year?=Line chart; What share of my pay goes to rent?=Pie chart; How do my weekly spends compare month to month?=Bar chart grouped by month
+check: mcq | Which chart shows change over time? | Line chart* | Pie chart | No chart
+check: tf | Pie charts work best with a few parts of one whole. | true
+check: mcq | Which chart compares categories well? | Bar chart* | A single number | A table of contents
+home: Make a bar chart of your spending categories.
+skill: charts
+
+@lesson 3.6 | A goal tracker | 🎯 | workshop
+hook: You're saving $3,000 for a car. How far along are you, and how long to go?
+learn: Put your goal in B1 and your savings so far in B2. =B2/B1, formatted as a percentage, shows your progress.
+learn: =ROUNDUP((B1-B2)/B3,0) shows how many weeks are left, if B3 is your weekly saving.
+learn: Update B2 each payday and watch it climb.
+try: $1,200 saved of $3,000 = 40% :: gap | $750 saved of $3,000 = _% | 25
+play: slider | Goal $3,000, saved $1,200, saving $100 a week. How many weeks are left? | 0 | 40 | 18 | weeks | 0 | 1
+check: gap | Goal $2,000, saved $500, saving $50 a week. Weeks left: _ | 30
+check: mcq | What does =B2/B1 show as a percentage? | How much of the goal you've saved* | The weekly amount | The goal
+check: tf | ROUNDUP rounds a number up to the next whole number. | true
+home: Build a goal tracker for something you're saving for.
+skill: spreadsheets

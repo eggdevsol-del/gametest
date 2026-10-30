@@ -150,3 +150,76 @@ check: mcq | What is a good question for finding ideas? | What bugs people?* | W
 home: Find one small problem at home and draw an idea to fix it.
 skill: ideas
 
+@lesson 3.1 | Say hello | 👋 | stall
+hook: Someone walks up to your stall. What's the first thing you do?
+learn: Look up and smile.
+learn: Say hello in a friendly voice.
+learn: Ask, "Would you like to try one?" or "Can I help you?"
+play: chat | A customer comes to your lemonade stall | them: Hi there! | me: Hello! Would you like some lemonade?*/What do you want?/Say nothing | them: Yes please! How much is it? | me: It's $1 a cup. Thank you!*/Lots/Go away
+check: mcq | What should you do when a customer comes? | Smile and say hello* | Look away | Run off
+check: tf | A friendly hello helps customers feel welcome. | true
+check: mcq | Which is a friendly thing to ask? | Can I help you?* | What? | Why are you here?
+home: Practise saying hello and smiling, like you're at a stall.
+skill: service
+
+@lesson 3.2 | Polite words | 🙏 | stall
+hook: Which words make a stall a happy place?
+learn: Say please when you ask for something.
+learn: Say thank you when someone buys from you.
+learn: Say sorry if something goes wrong.
+play: sort | Kind words, Not kind | Thank you=Kind words; Hurry up=Not kind; Please=Kind words; Whatever=Not kind; Sorry about that=Kind words; Go away=Not kind | Kind or not kind?
+check: mcq | What do you say when someone buys from you? | Thank you* | Hurry up | Nothing
+check: tf | Saying sorry when something goes wrong is kind. | true
+check: mcq | Which word helps when asking for something? | Please* | Now | Hey
+home: Use please, thank you and sorry at home today. Count how many times.
+skill: manners
+
+@lesson 3.3 | The right change | 💵 | stall
+hook: A customer pays $5 for a $3 cookie. How much do you give back?
+learn: Change is the money you give back when someone pays too much.
+learn: Count up from the price: $3, then $4, $5. That's $2 change.
+learn: Count it out loud so the customer can see.
+try: $5 for a $3 cookie is $2 change :: gap | $5 for a $4 drink is $_ change | 1
+play: gen | change | 4
+check: gap | $2 for a $1.50 drink is _c change | 50
+check: mcq | Why count change out loud? | So the customer can see it's right* | To be noisy | It's a rule for babies
+check: tf | Giving the right change is part of good service. | true
+home: Play shops at home and practise giving change.
+skill: change
+
+@lesson 3.4 | Listen to what they want | 👂 | stall
+hook: A customer says, "The blue one, please." You hand them a red one. Oops!
+learn: Listen carefully to what the customer asks for.
+learn: Say it back to check: "One blue bracelet?"
+learn: Getting it right makes customers happy.
+play: match | Match what the customer said to what you hand over | One blue bracelet, please=A blue bracelet; Two cookies, please=Two cookies; The small lemonade=A small cup; A bookmark with a cat=The cat bookmark
+check: mcq | How can you check you heard right? | Say it back to them* | Guess | Hand over anything
+check: tf | Listening carefully helps you get orders right. | true
+check: mcq | A customer asks for two cookies. You give… | Two cookies* | One cookie | Five cookies
+home: Play a game where someone orders things and you repeat them back.
+skill: listening
+
+@lesson 3.5 | Oops moments | 🙈 | stall
+hook: You drop a customer's cupcake on the ground. What now?
+learn: Mistakes happen. Say sorry straight away.
+learn: Fix it if you can, like giving a new one.
+learn: A good fix can make a customer even happier.
+play: path | You drop a customer's cupcake on the ground. | Say sorry and give them a fresh one => good: They smile and say thanks. You fixed it! | Pick it up and hand it over anyway => bad: Yuck. Food from the ground isn't safe. | Pretend it didn't happen => bad: The customer is left with no cupcake and feels upset.
+check: mcq | You make a mistake at your stall. First step? | Say sorry* | Hide | Blame the customer
+check: tf | A good fix can make a customer happy again. | true
+check: mcq | Food falls on the ground. You… | Give a fresh one* | Sell it anyway | Blow on it
+home: Think of a time you made an oops and how you fixed it.
+skill: service
+
+@lesson 3.6 | Come back soon! | 🎟️ | stall
+hook: How do shops get you to come back again and again?
+learn: Happy customers come back and tell their friends.
+learn: A stamp card can help: buy 5, get 1 free!
+learn: Say "Come back soon!" with a smile.
+play: tap | Tap the things that make customers want to come back | 😊:yes:Friendly service; 🎟️:yes:A stamp card reward; 🍪:yes:Yummy, well-made treats; 😠:no; 🗑️:no; 💬:yes:A kind goodbye
+check: mcq | What can make customers come back? | Friendly service and good treats* | Grumpy faces | A messy stall
+check: tf | Happy customers often tell their friends. | true
+check: mcq | A stamp card says "Buy 5, get 1 free". How many do you get after buying 5? | 6* | 5 | 10
+home: Design a stamp card for a pretend stall.
+skill: service
+

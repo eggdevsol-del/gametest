@@ -150,3 +150,78 @@ check: mcq | Your swimming lesson is at 4:00. Which time is late? | 4:10* | 3:55
 home: Pick something you go to each week. Plan what time you need to be ready.
 skill: punctuality
 
+@lesson 3.1 | Halves | 🍕 | kitchen
+hook: You and a friend share one pizza. How do you make it fair?
+learn: A half is one of two equal parts.
+learn: Cut it straight down the middle, so both parts are the same size.
+learn: Two halves make one whole.
+play: sort | Fair halves, Not fair | Two pieces the same size=Fair halves; One big piece and one tiny piece=Not fair; A sandwich cut down the middle=Fair halves; A cookie snapped into a crumb and a big bit=Not fair; An apple cut into two equal pieces=Fair halves; Three pieces for two people=Not fair | Is it fair halves?
+check: mcq | A half is… | One of two equal parts* | One of three parts | The biggest piece
+check: tf | Two halves make one whole. | true
+check: mcq | Which shows fair halves? | Two pieces the same size* | A big piece and a tiny piece | Three pieces
+home: Help cut something into fair halves at home.
+skill: fractions
+
+@lesson 3.2 | Quarters | 🍰 | kitchen
+hook: Four friends and one cake. How do you cut it?
+learn: A quarter is one of four equal parts.
+learn: Cut in half, then cut each half in half again.
+learn: Four quarters make one whole.
+play: order | Cut a cake into quarters | Look at the whole cake; Cut it down the middle; Turn it around; Cut across the middle; Now you have four equal pieces
+check: mcq | A quarter is… | One of four equal parts* | One of two parts | Half of a half of a half
+check: tf | Four quarters make one whole. | true
+check: mcq | Two quarters make… | One half* | One whole | Nothing
+home: Cut a sandwich into quarters for four people.
+skill: fractions
+
+@lesson 3.3 | Half of a number | ➗ | stall
+hook: You have 8 grapes. Half go to your friend. How many is that?
+learn: Half of a number means sharing it into 2 equal groups.
+learn: Half of 8 is 4, because 4 + 4 = 8.
+learn: Half of 10 is 5. Half of 6 is 3.
+try: Half of 8 is 4 :: gap | Half of 10 is _ | 5
+play: slider | Half of 12 marbles is how many? | 0 | 12 | 6 | marbles | 0 | 1
+check: gap | Half of 6 is _ | 3
+check: mcq | Half of 20 is… | 10* | 2 | 40
+check: tf | Half of 4 is 2. | true
+home: Find 10 things and share them into two equal halves.
+skill: fractions
+
+@lesson 3.4 | A quarter of a number | 🍪 | stall
+hook: 8 cookies shared between 4 kids. How many each?
+learn: A quarter of a number means sharing it into 4 equal groups.
+learn: A quarter of 8 is 2, because 2 + 2 + 2 + 2 = 8.
+learn: You can also halve it, then halve it again: 8, then 4, then 2.
+try: A quarter of 8 is 2 :: gap | A quarter of 12 is _ | 3
+play: match | Match each number to a quarter of it | 4=1; 8=2; 12=3; 20=5
+check: gap | A quarter of 16 is _ | 4
+check: mcq | How else can you find a quarter? | Halve it, then halve it again* | Add 4 | Double it
+check: tf | A quarter of 4 is 1. | true
+home: Share 12 pieces of something into four equal groups.
+skill: fractions
+
+@lesson 3.5 | Equal or not? | 🟦 | home
+hook: Is a square cut corner to corner still in fair halves?
+learn: Parts must be the same size to be halves or quarters.
+learn: A square cut corner to corner makes two equal triangles. Those are halves too!
+learn: Different shapes can still be equal parts.
+play: tap | Tap the shapes cut into equal parts | 🔲:yes:A square cut down the middle; 🔺:no; ⭕:yes:A circle cut through the centre; 🟥:yes:A square cut corner to corner makes two equal triangles; 🥨:no; 🍫:yes:A chocolate bar snapped into same-size pieces
+check: mcq | What makes halves fair? | Both parts are the same size* | Both parts are the same colour | One is bigger
+check: tf | A square cut corner to corner makes two equal halves. | true
+check: mcq | Can different shapes be equal parts? | Yes, if they're the same size* | No, never | Only on Tuesdays
+home: Fold a square of paper into halves two different ways.
+skill: fractions
+
+@lesson 3.6 | Sharing money fairly | 💰 | bank
+hook: Grandma gives you and your sister $10 to share. How much each?
+learn: Halving money works just like halving things.
+learn: Half of $10 is $5.
+learn: If there's an odd coin, swap it for smaller coins so you can share it.
+try: Half of $10 is $5 :: gap | Half of $6 is $_ | 3
+play: path | You and your brother get $5 to share. | Swap the $5 for smaller coins and take $2.50 each => good: Fair and square! | Keep $4 and give him $1 => bad: That's not a fair half. | Say it's all yours because you're older => bad: That isn't fair sharing.
+check: gap | Half of $20 is $_ | 10
+check: mcq | You share $8 between 4 people. Each gets… | $2* | $4 | $8
+check: tf | You can swap a coin for smaller coins to share it fairly. | true
+home: Share pretend money fairly between family members.
+skill: fractions
+
