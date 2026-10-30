@@ -295,3 +295,275 @@ check: tf | You can always return something from a shop just because you changed
 home: Look up a shop's returns policy online with a grown-up.
 skill: consumer
 
+@lesson 5.1 | Before your first shift | 📋 | workshop
+hook: You got your first job! What do you need before payday?
+learn: You'll need {nz:an IRD number~au:a tax file number (TFN)} and a bank account in your name.
+learn: You'll fill in a form for your tax details: {nz:the IR330 tax code declaration~au:a TFN declaration}.
+learn: Without these, you could pay much more tax than you should.
+play: match | Match each thing to why you need it | {nz:IRD number~au:Tax file number}=So tax is taken correctly; Bank account=So you can get paid; {nz:IR330 form~au:TFN declaration}=Tells your employer how much tax to take; Employment agreement=Sets out your pay and hours
+check: mcq | What happens without your tax details? | You may pay too much tax* | You get paid more | Nothing
+check: tf | You'll need a bank account to get paid. | true
+home: Ask a grown-up how to get {nz:an IRD number~au:a tax file number} for you.
+skill: firstjob
+
+@lesson 5.2 | Hours times rate | ⏱️ | workshop
+hook: You worked 12 hours at $18 an hour. What should your pay be before tax?
+learn: Gross pay is hours × hourly rate. 12 × $18 = $216.
+learn: {nz:Working a public holiday pays at least time and a half.~au:Many awards pay extra, called penalty rates, for weekends, nights and public holidays.}
+learn: Keep your own record of the hours you work, so you can check your pay.
+try: 10 hours × $20 = $200 :: gap | 8 hours × $20 = $_ | 160
+play: slider | You work 15 hours at $17 an hour. What's your gross pay? | 200 | 300 | 255 | $ | 0 | 5
+check: gap | 6 hours × $18 = $_ | 108
+check: mcq | Why keep your own record of hours? | To check your pay is right* | It's illegal not to | For fun
+home: Make a simple hours log you could use for a job.
+skill: pay
+
+@lesson 5.3 | Gross and net | ➖ | bank
+hook: Your gross pay is $216. Why did only $190 arrive in your account?
+learn: Gross pay is before anything is taken out. Net pay is what actually lands in your account.
+learn: Income tax comes out first. {nz:ACC and KiwiSaver, if you've joined, may come out too.~au:Super is paid on top by your employer, not taken from your pay.}
+learn: Your payslip should show every deduction.
+try: $200 gross − $20 tax = $180 net :: gap | $300 gross − $36 tax = $_ net | 264
+play: diff | What you expected, then your real payslip. Tap the lines that changed. | Gross pay $216; Extra deductions $0; Net pay $216 | Gross pay $216; Income tax and other deductions $26; Net pay $190
+check: mcq | What is net pay? | What lands in your account* | Pay before tax | Your hourly rate
+check: gap | $250 gross − $30 deductions = $_ net | 220
+home: Look at a payslip with a grown-up and find the gross and net pay.
+skill: pay
+
+@lesson 5.4 | Holiday pay | 🏖️ | workshop
+hook: You work casual shifts. Do you get paid holidays?
+learn: {nz:Casual workers in NZ can be paid 8% extra holiday pay on top of each pay, instead of taking paid leave.~au:Casual workers in Australia get a casual loading, usually 25% extra per hour, instead of paid leave.}
+learn: Permanent workers get paid annual leave instead.
+learn: Check your payslip to see how you're getting yours.
+try: 8% of $200 is $16 :: gap | 25% of $20 is $_ | 5
+play: mcq | {nz:You earn $300 as a casual. What is 8% holiday pay?~au:Your base casual rate is $16. What is 25% casual loading?} | {nz:$24~au:$4}* | {nz:$8~au:$25} | {nz:$300~au:$16}
+check: tf | Casual workers usually get extra money instead of paid leave. | true
+check: mcq | Where can you check how your holiday pay is paid? | Your payslip* | A social media post | Your friend's payslip
+home: Look up holiday pay or casual loading on {nz:employment.govt.nz~au:fairwork.gov.au} with a grown-up.
+skill: employment
+
+@lesson 5.5 | Retirement savings from your first job | 🌱 | shares
+hook: Retirement is 50 years away. Why think about it with your first pay?
+learn: {nz:From 1 April 2026, employers must also contribute for 16- and 17-year-olds who are in KiwiSaver and contributing.~au:Employers pay super of 12% on top of your wages. If you're under 18, you get it once you work more than 30 hours in a week.}
+learn: {nz:The default rate is now 3.5% from you and 3.5% from your employer.~au:Super goes into a fund in your name. Choose one with low fees.}
+learn: Money added at 16 has about 50 years to grow before retirement.
+play: compound | Watch $500 grow at 6% a year for 50 years | 500 | 6 | 50
+check: mcq | Why does starting at 16 help? | The money has decades to grow* | It doesn't help | You can spend it next year
+check: tf | {nz:Employers now contribute for 16- and 17-year-olds in KiwiSaver who contribute.~au:Under-18s get super once they work more than 30 hours in a week.} | true
+home: Ask a grown-up to show you their {nz:KiwiSaver~au:super} balance and fund type.
+skill: retirement
+
+@lesson 5.6 | Plan your first pay | 💸 | bank
+hook: Your first pay is $190. Spend it all on one big night?
+learn: Decide before payday where your pay will go.
+learn: A simple plan: some to save, some for regular costs like your phone and transport, some to spend.
+learn: Your first pay sets your habits. Start saving now and it becomes normal.
+play: budget | Plan your first $190 pay | 190 | Phone top-up=20; Bus fares=15; Savings=0; Spending=0; Give=0 | Work shoes:40
+check: mcq | When should you plan where your pay goes? | Before payday* | After it's all spent | Never
+check: tf | Starting to save with your first pay can build a habit. | true
+home: Write a plan for a pretend $190 pay with a grown-up.
+skill: budgeting
+
+@lesson 6.1 | What's a big purchase? | 💻 | stall
+hook: A laptop, a bike, a phone. Why do big buys need a different plan?
+learn: A big purchase costs more than you can pay from one week's money.
+learn: You can save up first, or borrow and pay it off later, usually with interest or fees.
+learn: Saving first is usually cheaper, but it takes longer.
+play: sort | Everyday buy, Big purchase | Lunch=Everyday buy; A laptop for school=Big purchase; A bus fare=Everyday buy; An e-bike=Big purchase; A phone top-up=Everyday buy; A school trip overseas=Big purchase | Everyday or big?
+check: mcq | Which is usually cheaper overall? | Saving up first* | Borrowing | They always cost the same
+check: tf | Borrowing usually costs extra. | true
+home: Ask a grown-up about the last big purchase they made. Did they save or borrow?
+skill: bigbuys
+
+@lesson 6.2 | How long to save? | 📅 | bank
+hook: You want an $800 e-bike. You can save $120 a month. When can you buy it?
+learn: Divide the price by what you can save each month. $800 ÷ $120 is about 6.7, so 7 months.
+learn: Already have some saved? Take that off first.
+learn: To get there sooner, save more, earn more or look for a cheaper option.
+try: $600 ÷ $100 a month = 6 months :: gap | $900 ÷ $150 a month = _ months | 6
+play: slider | An $800 e-bike. You have $200 saved and can save $100 a month. How many months to go? | 0 | 12 | 6 | months | 0 | 1
+check: gap | $500 ÷ $50 a month = _ months | 10
+check: mcq | How can you reach a big goal sooner? | Save more, earn more or find a cheaper option* | Wait and hope | Borrow from a stranger
+home: Pick a big thing you'd like, and work out how many months it would take to save for it.
+skill: goals
+
+@lesson 6.3 | Interest-free and layby | 🔍 | stall
+hook: "No interest for 24 months!" What could go wrong?
+learn: Interest-free deals often have an establishment fee and a monthly account fee.
+learn: If it isn't paid off in time, a high interest rate, often over 20%, kicks in on what's left.
+learn: Layby is different: you pay it off first, then take it home. No interest and no debt.
+play: diff | The ad, then the fine print. Tap what's different. | No interest for 24 months; Pay $34 a month; Take it home today; Easy to apply | No interest for 24 months; Pay $34 a month, plus a $5 monthly fee; Take it home today, after a $55 establishment fee; Anything left after 24 months is charged 25.9% interest
+check: mcq | How is layby different? | You pay it off before you take it home* | You pay extra interest | You get it free
+check: tf | Interest-free deals can still have fees. | true
+home: Find an interest-free ad with a grown-up and look for the fees in the fine print.
+skill: debt
+
+@lesson 6.4 | New or second-hand? | 🔄 | stall
+hook: A new bike is $900. A two-year-old one is $400. Which is smarter?
+learn: Second-hand can save a lot, because things lose value fast when they're new.
+learn: Check it carefully: does it work, is it damaged, could it be stolen?
+learn: New things from a shop come with consumer rights. Private sales usually don't.
+play: debate | Should a teen buy a second-hand phone? | Often yes, if it's checked carefully. It can save a lot of money* | Never. Second-hand is always junk | New comes with a warranty and full consumer rights, which can be worth paying for.
+check: mcq | What should you check on a second-hand item? | That it works and isn't stolen* | Only the colour | Nothing
+check: tf | Private sales usually come with fewer consumer rights than buying from a shop. | true
+home: Compare the new and second-hand price of something you'd like, with a grown-up.
+skill: bigbuys
+
+@lesson 6.5 | The cost after you buy | 🔋 | home
+hook: The gaming console was $600. Why has it cost $870 by the end of the year?
+learn: Many big buys have running costs: games, subscriptions, accessories, repairs or power.
+learn: Add these up before you buy. That's the true cost of owning it.
+learn: Sometimes a cheaper thing with low running costs is better value.
+try: $600 + $120 + $150 = $870 :: gap | $400 + $60 + $90 = $_ | 550
+play: slider | A $600 console, a $10 a month online subscription and three $50 games. What does the first year cost? | 600 | 1000 | 870 | $ | 20 | 10
+check: mcq | What's the true cost of owning something? | The price plus the running costs* | Just the price | Only the box
+check: tf | Running costs can make a cheap thing expensive. | true
+home: Pick something your family owns and list its running costs with a grown-up.
+skill: bigbuys
+
+@lesson 6.6 | Research before you buy | 📋 | online
+hook: You're about to spend $500 on a laptop. How do you make sure it's the right one?
+learn: Write down what you really need it to do, then set your budget.
+learn: Compare a few options on price, reviews and warranty. {nz:Consumer NZ~au:CHOICE} tests products and publishes reviews.
+learn: Then wait a day before you buy. Big buys deserve a sleep.
+play: order | Plan a big purchase | Write down what you need it to do; Set your budget; Compare three options; Read independent reviews; Wait a day, then buy
+check: mcq | Which reviews are most useful? | Independent reviews from lots of buyers* | The company's own ad | One friend's guess
+check: tf | Waiting a day before a big buy can stop regret. | true
+home: Help a grown-up research one thing your family needs to buy.
+skill: bigbuys
+
+@lesson 7.1 | What is insurance? | ☂️ | bank
+hook: 100 people each pay $50. One of them has a $5,000 accident. Who pays?
+learn: Insurance is lots of people each paying a little into a pool, so the unlucky few are covered when something big goes wrong.
+learn: What you pay for insurance is called a premium.
+learn: Insurance is for losses you couldn't easily pay for yourself.
+try: 100 people × $50 = $5,000 :: gap | 200 people × $25 = $_ | 5000
+play: order | How insurance works | Lots of people pay premiums; The money goes into a pool; Someone has a loss; They make a claim; The insurer pays them out
+check: mcq | What is a premium? | What you pay for insurance* | The payout | A kind of car
+check: tf | Insurance is mainly for losses you couldn't easily pay yourself. | true
+home: Ask a grown-up what insurance your household has, and roughly what it costs.
+skill: insurance
+
+@lesson 7.2 | Kinds of insurance | 🧩 | bank
+hook: Car, contents, travel, health, life. What does each one cover?
+learn: Contents insurance covers your belongings at home, even in a rented flat.
+learn: Car insurance can cover your car, and damage you cause to other people's cars.
+learn: {nz:ACC covers injuries in NZ, but not your belongings or illness.~au:Medicare covers many medical costs, but not your belongings or medical bills overseas.}
+play: match | Match each insurance to what it covers | Contents insurance=Your stuff at home, if it's stolen or damaged; Car insurance=Damage to your car or other people's cars; Travel insurance=Medical bills and cancelled trips overseas; Health insurance=Private medical treatment; Life insurance=Money for your family if you die
+check: mcq | You're going overseas. Which insurance should you think about? | Travel insurance* | Pet insurance | None
+check: tf | Contents insurance can cover your things in a rented flat. | true
+home: Ask a grown-up which kind of insurance they'd never go without, and why.
+skill: insurance
+
+@lesson 7.3 | Premiums and excess | 💲 | bank
+hook: Your phone is stolen. It's insured, but you still pay $100. Why?
+learn: The excess is the part you pay yourself when you make a claim.
+learn: A higher excess usually means a lower premium.
+learn: Pick an excess you could actually afford in a bad moment.
+try: $900 phone − $100 excess = $800 paid out :: gap | $600 laptop − $150 excess = $_ paid out | 450
+play: slider | Your $1,200 bike is stolen. Your excess is $250. How much does the insurer pay? | 0 | 1200 | 950 | $ | 0 | 50
+check: gap | $2,000 claim − $500 excess = $_ paid out | 1500
+check: mcq | A higher excess usually means... | A lower premium* | A higher premium | No difference
+home: Ask a grown-up what excess they chose on one of their policies, and why.
+skill: insurance
+
+@lesson 7.4 | Worth insuring? | 🤔 | home
+hook: Should you insure a $15 phone case? What about your car?
+learn: Insure things that would be really hard to pay for, like a car crash or a house fire.
+learn: For small things, it's often cheaper to save and pay yourself. That's called self-insuring.
+learn: Extended warranties often cover things {nz:the Consumer Guarantees Act~au:Australian Consumer Law} already gives you.
+play: sort | Worth insuring, Probably self-insure | Damage your car causes to someone else's car=Worth insuring; A $15 phone case=Probably self-insure; Medical bills on an overseas trip=Worth insuring; A $20 pair of headphones=Probably self-insure; Everything you own in a flat=Worth insuring; A $5 umbrella=Probably self-insure | Insure it or not?
+check: mcq | What does self-insuring mean? | Saving to cover small losses yourself* | Having no money | Buying lots of policies
+check: tf | Extended warranties can overlap with rights you already have by law. | true
+home: Next time a shop offers an extended warranty, ask a grown-up what the law already covers.
+skill: insurance
+
+@lesson 7.5 | Read the policy | 📄 | bank
+hook: Your bag was stolen from your unlocked car. The insurer says no. Why?
+learn: Every policy lists exclusions: things it won't cover.
+learn: Common exclusions include leaving things unlocked or unattended, wear and tear, and not telling the truth when you applied.
+learn: Read the policy summary before you buy, and be honest on the form.
+play: diff | What you thought was covered, then the actual policy. Tap the differences. | Phone stolen: covered; Phone dropped and cracked: covered; Phone left on a café table and taken: covered; Battery wearing out: covered | Phone stolen: covered; Phone dropped and cracked: covered; Phone left on a café table and taken: not covered, left unattended; Battery wearing out: not covered, wear and tear
+check: mcq | What's an exclusion? | Something a policy won't cover* | A discount | Your payout
+check: tf | Lying on an insurance form can mean a claim is refused. | true
+home: Read the exclusions in a policy summary with a grown-up. Find two that surprise you.
+skill: insurance
+
+@lesson 7.6 | Making a claim | 📝 | bank
+hook: Your laptop was stolen from your flat. What do you do first?
+learn: Report a theft to the police and get a reference number.
+learn: Keep receipts and photos of valuable things, so you can prove what you had.
+learn: Contact your insurer soon and be honest. Exaggerating a claim is fraud.
+play: order | Make an insurance claim | Report the theft to the police; Collect receipts, photos and serial numbers; Contact your insurer soon; Fill in the claim form honestly; Pay the excess and get your payout or replacement
+check: mcq | What helps prove what you owned? | Receipts and photos* | Your memory | A friend's word
+check: tf | Adding extra things to a claim is fraud. | true
+home: Take photos of your most valuable things and save them somewhere safe.
+skill: insurance
+
+@lesson 8.1 | Spending moods | 🌧️ | home
+hook: Bad day, so you buy something to feel better. Does it work?
+learn: Emotional spending is buying to change how you feel: bored, sad, stressed or excited.
+learn: The good feeling usually fades fast, but the money's still gone.
+learn: Notice your mood before you buy. Try something free first, like a walk or a chat.
+play: tap | Tap the moods that can lead to spending you regret | 😢:yes:Feeling sad; 😴:yes:Feeling bored; 😤:yes:Feeling stressed or angry; 🤩:yes:Feeling super excited; 😌:no; 🧘:no
+check: mcq | What's emotional spending? | Buying to change how you feel* | Buying food you need | Saving money
+check: tf | The good feeling from emotional spending usually lasts a long time. | false | It usually fades fast, but the money stays spent.
+home: Next time you want to buy something, notice your mood first. Tell a grown-up what you noticed.
+skill: feelings
+
+@lesson 8.2 | Peer pressure | 👥 | stall
+hook: Everyone's going to the $60 concert. You can't afford it. What do you say?
+learn: Peer pressure is feeling you have to do what your friends do.
+learn: Real friends understand money limits. You can say no, or suggest something cheaper.
+learn: Have a line ready, like "That's not in my budget, but I'm keen to hang out."
+play: chat | Your friends are planning a big night | them: We're all going to the concert! $60. You in? | me: That's not in my budget, but I'd love to catch up after!*/I'll borrow the money somehow/You're all so annoying | them: Come on, it won't be the same without you! | me: Thanks! How about a movie night at mine next week?*/Fine, I'll use my bike savings/I'm never hanging out again
+check: mcq | What's a good way to say no because of money? | "It's not in my budget, but let's do something cheaper"* | Pretend to be sick | Borrow and hope
+check: tf | Real friends understand money limits. | true
+home: Think of your own "not in my budget" line and practise it with a grown-up.
+skill: peerpressure
+
+@lesson 8.3 | Comparing online | 📱 | online
+hook: Everyone online seems to have the latest gear and amazing holidays. Are they really that rich?
+learn: Social media shows highlights, not real life. Some of it is paid for, borrowed or bought with debt.
+learn: Comparing yourself with others pushes people to spend money to keep up.
+learn: Compare yourself with your own goals, not with someone's feed.
+play: debate | Does social media make people spend more? | It often can. Seeing highlights and ads makes people want to keep up* | No. Nobody is affected by what they see | It can also inspire good habits, like saving tips, depending on who you follow.
+check: mcq | What's a healthier comparison? | Your progress towards your own goals* | Someone else's feed | A celebrity's spending
+check: tf | Some of what people show online is paid for, borrowed or bought with debt. | true
+home: Unfollow one account that makes you want to spend, or talk with a grown-up about why it does.
+skill: feelings
+
+@lesson 8.4 | Money with friends | 🍕 | stall
+hook: Pizza for four costs $48. One friend only had a drink. How do you split it fairly?
+learn: Splitting evenly is easy. Splitting by what each person had is fairer when it's very different.
+learn: Agree on how you'll split before you order.
+learn: If you lend a friend money, only lend what you could afford to lose, and agree when they'll pay you back.
+try: $48 ÷ 4 = $12 each :: gap | $60 ÷ 3 = $_ each | 20
+play: path | Your friend keeps "forgetting" to pay back the $20 you lent them. | Remind them kindly and suggest a date => good: Clear and kind. Most people just need a nudge. | Lend them more so they still like you => bad: Now they owe you more, and the problem grows. | Post about it online => bad: That could wreck the friendship, and $20 isn't worth that.
+check: gap | $36 split between 4 friends is $_ each | 9
+check: tf | It's smart to agree on how to split a bill before ordering. | true
+home: Talk with a grown-up about how your family splits costs with friends.
+skill: friends
+
+@lesson 8.5 | Money worries | 😰 | home
+hook: Your stomach feels tight whenever you think about money. What can help?
+learn: Lots of people feel stressed about money. You're not alone.
+learn: Writing down what you have and what you owe makes the problem clearer and smaller.
+learn: Talk to a trusted adult. If worry gets big, {nz:Youthline (0800 376 633)~au:Kids Helpline (1800 55 1800)} is free to call.
+play: order | When money worry hits | Notice the feeling and take a slow breath; Write down what's worrying you; Write down what you have and what you owe; Talk to a trusted adult; Pick one small next step
+check: mcq | What can make money worries feel smaller? | Writing them down and talking to someone* | Ignoring them for ever | Spending to forget
+check: tf | Lots of people feel stressed about money. | true
+home: Tell a trusted adult about one money thing you've wondered or worried about.
+skill: feelings
+
+@lesson 8.6 | Your money values | 💎 | home
+hook: Two friends earn the same. One spends on travel, one on gaming gear. Who's right?
+learn: Values are what matter most to you, like family, adventure, security, helping others or fun.
+learn: Spending that matches your values feels good for longer.
+learn: When you know your values, it's easier to say no to things that don't matter to you.
+play: sort | Fits my values, Doesn't fit | Saving for a {nz:tramping~au:bushwalking} trip=Fits my values; A fourth hoodie=Doesn't fit; Surfing lessons=Fits my values; Lollies every day=Doesn't fit; A camping stove=Fits my values; A pricey phone case=Doesn't fit | You value adventure. Which spending fits?
+check: mcq | Why does knowing your values help with money? | It's easier to say no to things that don't matter to you* | It makes you rich | It doesn't
+check: tf | Two people can make different money choices and both be right for them. | true
+home: Write your top three values and one thing you'd love to spend on that fits them.
+skill: values
+

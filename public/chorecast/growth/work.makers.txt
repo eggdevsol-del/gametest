@@ -289,3 +289,268 @@ check: tf | Saying "we" can make a problem feel shared. | true
 home: Think of a disagreement you had recently. What would "we" language sound like?
 skill: teamwork
 
+@lesson 5.1 | Many paths after school | 🛤️ | townhall
+hook: University isn't the only way to a good job. What else is there?
+learn: After school you can go to {nz:university, a polytechnic or a wānanga~au:university or TAFE}, start an apprenticeship, or go straight into work.
+learn: Apprentices learn on the job and get paid while they train.
+learn: Short courses and certificates can get you started in months, not years.
+play: match | Match each path to how it works | University=Degrees, often 3 or more years; {nz:Polytechnic~au:TAFE}=Practical certificates and diplomas; Apprenticeship=Paid work while you train on the job; Short course=A few weeks or months on one skill
+check: mcq | Which path pays you while you train? | An apprenticeship* | A university degree | A gap year
+check: tf | University is the only way to a good career. | false | Apprenticeships, {nz:polytechnics~au:TAFE} and work can all lead to great careers.
+home: Ask two grown-ups what they did after school, and whether they'd choose the same way again.
+skill: study
+
+@lesson 5.2 | Subjects that keep doors open | 🚪 | townhall
+hook: You're picking subjects for next year. Does it matter?
+learn: Some jobs and courses need certain school subjects, like maths for engineering or science for nursing.
+learn: Keeping maths, English and a science going for longer keeps more doors open.
+learn: {nz:NCEA is being replaced by new school qualifications from 2028, so ask your school how the changes affect you.~au:In Years 11 and 12, your subjects can affect your ATAR and which uni courses you can get into.}
+play: route | Match each career idea to a school subject that helps | Engineer=Maths and physics; Nurse=Biology and chemistry; Graphic designer=Art and design; Builder=Construction or technology; Journalist=English
+check: mcq | You're not sure what you want to do. What's a smart subject plan? | Keep maths, English and a science going* | Drop every hard subject | Pick only what your friends pick
+check: tf | Some courses after school need certain school subjects. | true
+home: Look up one job you like on {nz:tahatu.govt.nz~au:yourcareer.gov.au} and find which subjects help.
+skill: study
+
+@lesson 5.3 | Try it at school | 🔧 | workshop
+hook: Could you start learning a trade while you're still at school?
+learn: {nz:Trades academies and Gateway let senior students learn trade skills and do work placements while at school.~au:VET in schools and school-based apprenticeships let you start a trade qualification while you study.}
+learn: Work experience lets you see a job up close for a few days.
+learn: Trying a job early helps you find out what you like, and what you don't.
+play: tap | Tap the ways to try out a career while you're at school | 🏗️:yes:A trades programme or work placement; 🧑‍🔬:yes:A science or tech club; 🎨:yes:Entering an art or design show; 🛋️:no; 🍳:yes:A part-time café job once you're old enough; 📱:no
+check: mcq | What's a good reason to try work experience? | To find out what a job is really like* | To skip school for ever | To get rich fast
+check: tf | {nz:Gateway lets school students do work placements.~au:School-based apprenticeships let you start a trade while at school.} | true
+home: Ask your school's careers adviser what work experience or trades options your school offers.
+skill: careers
+
+@lesson 5.4 | Qualification levels | 🪜 | townhall
+hook: Certificate, diploma, degree. What's the difference?
+learn: Qualifications go up in levels. {nz:NZ has 10 levels, from certificates at Level 1 to doctorates at Level 10.~au:Australia's framework has 10 levels, from Certificate I up to doctoral degrees.}
+learn: Certificates are shorter and practical. Diplomas go deeper. Degrees usually take 3 years or more.
+learn: You can often stack them: start with a certificate, then move up later.
+play: order | Put these from shortest to longest, usually | A short course; A certificate; A diploma; A bachelor's degree; A master's degree
+check: mcq | Which usually takes longest? | A bachelor's degree* | A short course | A certificate
+check: tf | You can start with a certificate and study at a higher level later. | true
+home: Find out what qualification someone you know has, and how long it took.
+skill: study
+
+@lesson 5.5 | Research a path | 🔎 | online
+hook: You think you'd like to be a vet. How do you find out what it really takes?
+learn: Careers websites like {nz:Tahatū~au:Your Career} show what a job involves, what it pays and how to get there.
+learn: Talk to someone who does the job. Ask what they love, what's hard and how they started.
+learn: Open days and course websites tell you entry requirements, costs and how long it takes.
+play: sort | Good source, Not reliable | A government careers website=Good source; A random comment on a video=Not reliable; Talking to a real vet nurse=Good source; A university or {nz:polytechnic~au:TAFE} course page=Good source; A friend's guess=Not reliable; An ad promising "be a vet in 2 weeks"=Not reliable | Where would you look?
+check: mcq | Who can tell you what a job is really like? | Someone who does that job* | An ad | A random comment online
+check: tf | Course websites show entry requirements and costs. | true
+home: Look up one career on {nz:tahatu.govt.nz~au:yourcareer.gov.au} with a grown-up. What does it pay?
+skill: careers
+
+@lesson 5.6 | Do you need to decide now? | 🤔 | garden
+hook: Your aunt asks, "So what are you going to be?" You're 14. Do you need an answer?
+learn: Most people change jobs many times, and plenty of today's jobs didn't exist 20 years ago.
+learn: You don't need a final answer at 14. Notice what you enjoy and what you're good at.
+learn: Each subject, job and hobby teaches skills you can use later.
+play: debate | Should you pick your career at 14? | No. Explore, keep options open and notice what you enjoy* | Yes. Pick now and never change | Having a goal can help you choose subjects, as long as you're happy to change it.
+check: mcq | What's a good thing to do at 14? | Explore what you enjoy and keep options open* | Lock in one job for ever | Stop trying at school
+check: tf | Lots of people change careers during their life. | true
+home: Write three things you enjoy and three things you're good at. Show a grown-up.
+skill: careers
+
+@lesson 6.1 | What's a gig? | 🛵 | online
+hook: Delivery riders, freelance designers, dog walkers. What do they have in common?
+learn: A gig is short-term or one-off paid work, often found through an app or website.
+learn: Gig workers are usually self-employed, not employees.
+learn: That means more freedom, but no guaranteed hours, sick pay or holiday pay.
+play: sort | Gig, Employee job | Delivering food through an app=Gig; A weekly supermarket shift=Employee job; Designing a logo for one client=Gig; A part-time café job with a roster=Employee job; Walking dogs booked through a website=Gig; Working at a cinema candy bar=Employee job | Gig or employee job?
+check: mcq | What do gig workers usually miss out on? | Sick pay and holiday pay* | Getting paid | Choosing their hours
+check: tf | Gig workers are usually self-employed. | true
+home: Ask a grown-up if they know anyone who does gig work, and what it's like.
+skill: gig
+
+@lesson 6.2 | Side hustle ideas | 💡 | stall
+hook: You've got skills and some spare time. What could you earn from?
+learn: Teen side hustles include tutoring younger kids, baking, crafts, lawn mowing, pet care and simple design work.
+learn: The best ones use something you're good at and something people need.
+learn: Start small, check with a grown-up, and don't let it crowd out school.
+play: tap | Tap good side hustle ideas for a 14-year-old | 📚:yes:Tutoring younger kids; 🧁:yes:Baking for a local market; 🐕:yes:Pet sitting for neighbours; 🚗:no; 🎨:yes:Making and selling art; 🏗️:no
+check: mcq | What makes a good side hustle? | Something you're good at that people need* | Whatever's trending | Something risky
+check: tf | A side hustle shouldn't crowd out school. | true
+home: List three things you're good at that someone might pay for. Show a grown-up.
+skill: gig
+
+@lesson 6.3 | Price it with costs | 🧾 | stall
+hook: You make bracelets. The beads cost 40c a bracelet. What should you charge?
+learn: Add up your costs for each item first: materials, packaging and any fees.
+learn: Then add something for your time. That's your profit.
+learn: Check what others charge, so you're not too high or too low.
+play: shop | Set a price for your bracelets | Bracelet | 40 | 250
+check: mcq | What should your price cover? | Your costs plus something for your time* | Just the beads | Whatever you feel like
+check: tf | Checking what others charge helps you set a price. | true
+home: Work out the cost of making one thing you could sell, with a grown-up.
+skill: pricing
+
+@lesson 6.4 | Platform fees | 📉 | online
+hook: You sell a $20 item online. Why do you only get $16?
+learn: Selling apps and websites usually take a fee, often a percentage of each sale.
+learn: Payment fees and postage can take more.
+learn: Work out what you'll really keep before you set your price.
+try: 10% of $20 is $2, so you keep $18 :: gap | 15% of $40 is $6, so you keep $_ | 34
+play: gen | percent | 3
+check: gap | A 20% fee on a $30 sale is $_ | 6
+check: mcq | Why check platform fees before pricing? | So you know what you'll really keep* | So you can skip tax | They don't matter
+home: Look up the seller fees on a selling site with a grown-up.
+skill: fees
+
+@lesson 6.5 | Gig work: good and bad | ⚖️ | workshop
+hook: Choose your own hours, but no guaranteed pay. Is gig work a good deal?
+learn: The good: flexible hours, being your own boss and trying different work.
+learn: The hard: pay can change week to week, there's no sick or holiday pay, and you cover your own costs and tax.
+learn: Some gig workers earn less than minimum wage once their costs come off.
+play: debate | Is gig work a good choice for a teen? | It can be, as a side income with a grown-up's OK, if you check what you really earn after costs* | Yes, it's always better than a normal job | A regular part-time job gives steady pay, training and rights like holiday pay.
+check: mcq | What's a downside of gig work? | Pay can change week to week* | You can't choose your hours | You always get sick pay
+check: tf | Some gig workers earn less than minimum wage after costs. | true
+home: Talk with a grown-up about whether a regular job or gig work would suit you better, and why.
+skill: gig
+
+@lesson 6.6 | Safe and legal | 🛡️ | online
+hook: A delivery app says you must be 18. Your friend says just use your mum's account. Should you?
+learn: Many apps have age limits, often 18. Using someone else's account breaks the rules and may not be insured.
+learn: Meet buyers in public places with a grown-up, and never share your home address online.
+learn: Side hustle money can be taxable. {nz:If it's a business, you may need to tell IRD. Ask a grown-up.~au:In Australia, you can earn up to $18,200 a year before income tax, but you may still need to lodge a return.}
+play: path | A buyer wants to pick up your $50 bike from your house tonight. | Meet in a public place in daylight, with a grown-up => good: Safer for everyone. | Give them your address and meet them alone => bad: You don't know them, so it isn't safe. | Ask them to pay first with a gift card => bad: Gift card payments are a common scam sign.
+check: mcq | Is using a parent's account on an 18+ app OK? | No, it breaks the rules and may not be insured* | Yes, if they're asleep | Only on weekends
+check: tf | {nz:Money from a side business can be taxable.~au:In Australia, you can earn up to $18,200 a year before income tax.} | true
+home: Make a safety plan with a grown-up for selling something online.
+skill: safety
+
+@lesson 7.1 | What's workplace culture? | 🏢 | workshop
+hook: Two cafés pay the same. At one, staff love it. At the other, people quit after a month. Why?
+learn: Workplace culture is "how things are done here": how people talk, help and treat each other.
+learn: Good cultures have respect, fair treatment, clear communication and people helping each other.
+learn: You help shape the culture, even as the newest person there.
+play: sort | Healthy culture, Unhealthy culture | New staff get trained and welcomed=Healthy culture; Mistakes get shouted about in front of customers=Unhealthy culture; People say thanks and help each other=Healthy culture; Gossip about co-workers is normal=Unhealthy culture; Managers listen to ideas from everyone=Healthy culture; The boss's friends always get the best shifts=Unhealthy culture | Healthy or unhealthy?
+check: mcq | What is workplace culture? | How people treat each other and get things done at work* | The colour of the building | The uniform
+check: tf | Even new staff help shape a workplace's culture. | true
+home: Ask a grown-up what makes a workplace good or bad to work in.
+skill: culture
+
+@lesson 7.2 | Respect and inclusion | 🌈 | townhall
+hook: A new co-worker has just started, and English is their second language. How can you help them fit in?
+learn: Inclusion means everyone feels welcome and able to take part, whatever their background.
+learn: Small things matter: saying names properly, including people at breaks and explaining things clearly.
+learn: Respect means treating people fairly, even when they're different from you.
+play: tap | Tap the inclusive things to do | 👋:yes:Introducing yourself and learning to say their name properly; 🍪:yes:Inviting them to join you at break; 🗣️:yes:Explaining things clearly, without talking down; 🙄:no; 🤫:no; 🤝:yes:Asking if they'd like a hand with the till
+check: mcq | What does inclusion mean? | Everyone feels welcome and able to take part* | Only friends get invited | Everyone must be the same
+check: tf | Learning to say someone's name properly is a sign of respect. | true
+home: Think of a time you were new somewhere. What helped you feel welcome?
+skill: inclusion
+
+@lesson 7.3 | Banter or bullying? | 😬 | workshop
+hook: Everyone laughs at the jokes about one co-worker. They laugh too. So it's fine, right?
+learn: Banter is friendly joking that everyone is genuinely OK with.
+learn: It crosses a line when it's one-sided, keeps targeting the same person, or is about who they are.
+learn: Laughing along doesn't always mean someone's OK. Watch for signs they're not.
+play: sort | Probably banter, Crossing the line | Friends teasing each other equally about footy teams=Probably banter; Jokes about one person's accent every shift=Crossing the line; A one-off joke everyone laughs at, including the person=Probably banter; Nicknames about someone's weight=Crossing the line; Jokes that carry on after someone says "stop"=Crossing the line; Light teasing about who burnt the toast, then helping fix it=Probably banter | Banter or crossing the line?
+check: mcq | When does a joke cross the line? | When it keeps targeting one person, or who they are* | When it's funny | Never
+check: tf | Someone laughing along always means they're OK with it. | false | People often laugh to fit in. Watch for signs they're not OK.
+home: Talk with a grown-up about how to tell banter from bullying.
+skill: respect
+
+@lesson 7.4 | Be an upstander | 🦸 | workshop
+hook: You see a co-worker being picked on. You're not the target. What can you do?
+learn: A bystander watches and does nothing. An upstander does something to help.
+learn: You can change the subject, check in with the person afterwards, or tell a manager.
+learn: You don't have to confront anyone if it doesn't feel safe. Small actions still help.
+play: path | A co-worker keeps making mean comments to the new person on your shift. | Check on the new person later, and tell your manager what you saw => good: You've supported them and given your manager the chance to act. | Join in so you fit in => bad: Now you're part of the problem. | Ignore it, because it's not your business => ok: Speaking up is hard, but doing nothing lets it keep happening.
+check: mcq | What's an upstander? | Someone who does something to help* | Someone who just watches | Someone who joins in
+check: tf | Checking in with someone afterwards is a way to help. | true
+home: Think of one small thing you could do to be an upstander at school or work.
+skill: respect
+
+@lesson 7.5 | Sharing your ideas | 💬 | stall
+hook: You think there's a better way to set up the stock room. You're new. Do you say something?
+learn: New eyes often spot better ways of doing things.
+learn: Pick a calm time, explain the problem and your idea, and ask what they think.
+learn: If they say no, ask why. You'll learn something either way.
+play: chat | Talking to your supervisor at the end of a shift | them: How was your shift? | me: Good, thanks! Can I suggest an idea about the stock room?*/Your stock room is a mess/Fine | them: Sure, go for it. | me: If we put the drinks near the door, restocking the fridge would be faster. What do you think?*/Do it my way or I'll quit/Never mind, forget it
+check: mcq | When's a good time to share an idea at work? | A calm moment, like the end of a shift* | In the middle of a rush | Never, because you're new
+check: tf | New staff can spot better ways of doing things. | true
+home: Suggest one small improvement at home, at a calm moment, and see what happens.
+skill: communication
+
+@lesson 7.6 | Your right to respect | ⚖️ | townhall
+hook: Does the law say anything about how people treat you at work?
+learn: Employers must provide a safe workplace, and that includes protecting you from bullying and harassment.
+learn: Treating someone worse because of things like race, sex, religion or disability is against the law.
+learn: {nz:Employment New Zealand~au:The Fair Work Ombudsman} has free advice if something isn't right.
+play: match | Match each right to what it means | A safe workplace=Your employer must manage risks, including bullying; No discrimination=You can't be treated worse because of who you are; Fair pay=At least the legal minimum for your age and job; Privacy=Your personal details aren't shared without good reason
+check: mcq | Is discrimination at work against the law? | Yes* | No | Only for adults
+check: tf | Employers must protect workers from bullying. | true
+home: Look up your rights at work on {nz:employment.govt.nz~au:fairwork.gov.au} with a grown-up.
+skill: workrights
+
+@lesson 8.1 | Jobs that changed | 🏛️ | museum
+hook: Lift operator, switchboard operator, ice deliverer. What happened to these jobs?
+learn: Technology has always changed work. Lifts became automatic, phone calls connected themselves, and fridges replaced ice deliveries.
+learn: Some jobs disappeared, but new ones appeared, like phone technicians and app developers.
+learn: The skills that last are the ones that help you learn new things.
+play: match | Match each old job to what replaced it | Lift operator=Automatic lifts; Switchboard operator=Automatic phone exchanges; Ice deliverer=Home fridges; Typing pool=Computers and word processors
+check: mcq | What happens when technology changes jobs? | Some jobs go, and new ones appear* | All jobs disappear | Nothing changes
+check: tf | New jobs often appear when technology changes. | true
+home: Ask an older family member about a job that has changed a lot in their lifetime.
+skill: future
+
+@lesson 8.2 | What AI is good at | 🤖 | online
+hook: AI can write, draw and answer questions. So what can't it do well?
+learn: AI is good at spotting patterns, summarising, drafting and repetitive tasks.
+learn: It can make mistakes, sound sure when it's wrong, and miss what people really need.
+learn: People are still needed to check its work, make judgement calls and care for others.
+play: sort | AI can help a lot, People still lead | Drafting a first version of an email=AI can help a lot; Comforting a scared patient=People still lead; Sorting thousands of photos=AI can help a lot; Deciding what's fair in a team argument=People still lead; Spotting patterns in sales numbers=AI can help a lot; Checking that an AI answer is actually right=People still lead | Where does AI help, and where do people lead?
+check: mcq | What's a weakness of AI tools? | They can sound sure when they're wrong* | They never make mistakes | They can't do anything
+check: tf | People should check AI's work. | true
+home: Ask a grown-up whether they use AI at work, and how they check it.
+skill: future
+
+@lesson 8.3 | Human skills | 💛 | workshop
+hook: Which skills will matter even more as machines get smarter?
+learn: Skills like empathy, teamwork, creativity and solving messy problems are hard to automate.
+learn: So is hands-on work in changing places, like plumbing, nursing and building.
+learn: Being able to learn new tools quickly matters in every job.
+play: tap | Tap the skills that are hard to automate | ❤️:yes:Empathy and care; 🤝:yes:Teamwork; 🎨:yes:Creative ideas; 🔧:yes:Hands-on work in changing places; 🔁:no; 📋:no
+check: mcq | Which skill is hard to automate? | Empathy* | Copying numbers into a list | Sorting files by date
+check: tf | Learning new tools quickly helps in every job. | true
+home: Pick one human skill you'd like to get better at, and one way to practise it.
+skill: future
+
+@lesson 8.4 | Using AI honestly | ⚖️ | online
+hook: An AI tool could write your whole assignment in seconds. Should you use it?
+learn: Follow your school's or workplace's rules about AI. They're different in different places.
+learn: Using AI to brainstorm or check your work can help. Handing in its work as your own is cheating.
+learn: Don't paste private or personal information into AI tools without permission.
+play: path | You have an essay due tomorrow. An AI tool could write it all for you. | Use it to brainstorm ideas, then write it yourself, following the school's rules => good: You learn, and you stay honest. | Copy its essay and hand it in as yours => bad: That's cheating, and you don't learn the skill. | Paste in a classmate's essay and ask AI to reword it => bad: That's still copying someone else's work.
+check: mcq | What's an honest way to use AI for schoolwork? | Brainstorming, within your school's rules* | Handing in its work as your own | Rewording a friend's essay
+check: tf | You shouldn't paste private information into AI tools without permission. | true
+home: Find your school's rules on AI and talk them through with a grown-up.
+skill: honesty
+
+@lesson 8.5 | Keep learning | 📚 | garden
+hook: Many adults change careers two or three times. Will you?
+learn: Many people will retrain several times during their working lives.
+learn: Learning doesn't stop at school. Short courses, apprenticeships, online learning and on-the-job training all count.
+learn: The habit of learning is a skill in itself.
+play: order | Learn a new skill, step by step | Pick a skill you want; Find a good course, video series or mentor; Practise a little, often; Get feedback; Use it in a real project
+check: mcq | What's a skill in itself? | The habit of learning* | Never changing | Avoiding new things
+check: tf | Learning doesn't stop when you leave school. | true
+home: Pick one new skill to learn this month and plan your first step.
+skill: learning
+
+@lesson 8.6 | Will robots take my job? | 🦾 | stage
+hook: Some people say AI will take all the jobs. Are they right?
+learn: Experts disagree. Some tasks will be automated, and new jobs will be created.
+learn: Jobs that mix technology with human skills often grow.
+learn: You can't control the future, but you can build skills that adapt.
+play: debate | Will AI take most jobs? | Unlikely all at once. It will change many jobs, remove some tasks and create new jobs* | Yes, there'll be no jobs left by next year | Some jobs could shrink a lot, so it's wise to build skills that adapt.
+check: mcq | Which jobs often grow when technology changes? | Ones that mix tech with human skills* | Ones that never change | None
+check: tf | Experts disagree about how AI will change work. | true
+home: Talk with a grown-up about how their job might change in the next ten years.
+skill: future
+

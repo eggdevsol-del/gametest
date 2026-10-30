@@ -284,6 +284,273 @@ check: tf | Being reliable means doing what you said you'd do. | true
 home: Promise one job to a grown-up today, and do it without a reminder.
 skill: reliability
 
+@lesson 5.1 | Kid tools and grown-up tools | 🧰 | workshop
+hook: A broom, a dustpan and a big electric saw. Which ones are for you?
+guess: mcq | Who should use a power saw? | A trained grown-up* | A 7-year-old | Anyone who wants to
+learn: Some tools are safe for kids, like a broom, a watering can or a dustpan and brush.
+learn: Some tools are only for trained grown-ups, like saws, drills and lawnmowers.
+learn: If you're not sure, ask before you touch it.
+play: sort | Kid tool, Grown-up tool | Broom=Kid tool; Watering can=Kid tool; Power drill=Grown-up tool; Dustpan and brush=Kid tool; Lawnmower=Grown-up tool; Sharp kitchen knife=Grown-up tool; Garden gloves=Kid tool; Chainsaw=Grown-up tool | Who should use it?
+check: mcq | You find a drill on the bench. What should you do? | Leave it and ask a grown-up* | Try it out | Hide it
+check: tf | A watering can is a good tool for kids. | true
+check: tf | Lawnmowers are fine for kids to use alone. | false | Lawnmowers have sharp, fast blades. They're for grown-ups.
+home: Walk around your home with a grown-up. Find two kid tools and two grown-up tools.
+skill: tools
+
+@lesson 5.2 | Scissors smarts | ✂️ | workshop
+hook: Scissors are a tool too. How do you use them safely?
+learn: Walk with scissors closed and pointing down.
+learn: Cut away from your fingers, and keep your other hand out of the way.
+learn: Pass scissors handle first, and put them back when you're done.
+play: order | Use scissors safely | Sit down at a table; Hold the paper with your other hand away from the blades; Cut slowly, away from your fingers; Close the scissors; Put them back where they live
+check: mcq | How should you walk with scissors? | Closed and pointing down* | Open and waving | Running fast
+check: mcq | How do you pass scissors to a friend? | Handle first* | Blades first | Throw them
+check: tf | You should cut towards your fingers. | false | Always cut away from your fingers.
+home: Help a grown-up with a cutting job and show them how you pass scissors safely.
+skill: safety
+
+@lesson 5.3 | Safety gear | 🧤 | garden
+hook: Gloves, a sun hat and an apron. What are they for?
+learn: Safety gear protects your body while you work.
+learn: Gloves protect your hands. A sun hat and sunscreen protect you from the sun.
+learn: Closed shoes protect your toes, and an apron keeps your clothes clean when you cook.
+play: match | Match each job to its safety gear | Weeding the garden=Gloves; Working outside on a sunny day=Sun hat and sunscreen; Baking a cake=Apron; Carrying the rubbish bin out=Closed shoes
+check: mcq | What protects your hands when you weed? | Gloves* | A hat | Sunglasses
+check: tf | Sunscreen is safety gear for sunny jobs. | true
+home: Find the safety gear your family has for garden jobs.
+skill: safety
+
+@lesson 5.4 | Put it back | 🧹 | home
+hook: Someone left a rake lying on the path. What could happen?
+learn: Tools left lying around can trip people or get broken.
+learn: Every tool should have a home. Put it back when you're done.
+learn: Then the next person can find it, and nobody gets hurt.
+play: tap | Tap the tools that have been left out | 🧹:yes:A broom lying on the floor; 🪣:yes:A bucket in the doorway; ✂️:yes:Scissors left open on the couch; 📚:no; 🪴:no; 🔨:yes:A hammer on the step; 🛏️:no
+check: mcq | You've finished sweeping. Where does the broom go? | Back in its home* | On the floor | Outside in the rain
+check: tf | Tools left out can trip people. | true
+home: Pick one tool at home and agree with a grown-up where its home is.
+skill: tidy
+
+@lesson 5.5 | Look after your tools | 🪣 | garden
+hook: The spade is all muddy and rusty. Why does that matter?
+learn: Tools last longer when you look after them.
+learn: Wipe off the mud, dry them and keep them out of the rain.
+learn: If a tool breaks, tell a grown-up. Don't use a broken tool.
+play: path | The handle on the garden rake is cracked. | Stop and tell a grown-up => good: A cracked handle could snap and hurt someone. Now it can be fixed. | Keep raking and hope it holds => bad: It might snap and give you a splinter or a bump. | Hide it in the shed => bad: The next person might use it and get hurt.
+check: mcq | What helps tools last longer? | Cleaning and drying them* | Leaving them in the rain | Throwing them in a heap
+check: tf | You should keep using a tool that's broken. | false | Tell a grown-up, so it can be fixed or replaced.
+home: Help a grown-up clean and put away a garden tool.
+skill: tools
+
+@lesson 5.6 | Can I use this? | 🙋 | workshop
+hook: You want to use the hot glue gun for your project. What do you say?
+learn: Always ask a grown-up before you use a new tool.
+learn: Ask them to show you how, and watch first.
+learn: Then try it with them nearby.
+play: chat | You want to use the hot glue gun | them: What are you making? | me: A cardboard castle. Can you show me how to use the glue gun?*/I'll just figure it out/Nothing, go away | them: Sure. The tip gets very hot, so we keep fingers away from it. | me: OK. Can I watch you first, then try?*/Hot doesn't matter/I'll do it when you're not looking
+check: mcq | Before you use a new tool, you should... | Ask a grown-up to show you* | Just try it | Wait till nobody's home
+check: tf | Watching first is a smart way to learn a tool. | true
+home: Ask a grown-up to teach you how to use one new kitchen or garden tool safely.
+skill: tools
+
+@lesson 6.1 | Everyone needs help | 🦸 | home
+hook: Even superheroes need a hand sometimes. Do grown-ups?
+learn: Everyone needs help sometimes, even grown-ups and experts.
+learn: Asking for help is brave. It shows you want to get it right.
+learn: Helpers like being asked. It's how we learn from each other.
+play: path | You can't reach the top shelf to put the plates away. | Ask a grown-up to help => good: Smart and safe. The plates get put away with no smashes. | Climb on a wobbly chair => bad: You could fall, and the plates could break. | Leave the plates on the bench and walk off => bad: The job isn't done, and nobody knows you needed help.
+check: mcq | Is asking for help brave? | Yes, it shows you want to get it right* | No, it's silly | Only babies ask for help
+check: tf | Grown-ups need help sometimes too. | true
+home: Ask a grown-up about a time they needed help at work.
+skill: askhelp
+
+@lesson 6.2 | Who can help? | 🧑‍🏫 | townhall
+hook: You're lost at the shops. You hurt your knee at school. Who can help?
+learn: Different helpers help with different things.
+learn: At school, a teacher. At home, a grown-up in your family. At the shops, a worker at the counter.
+learn: In a real emergency, call {nz:111~au:000}.
+play: match | Match each problem to someone who can help | Lost at the shops=A worker at the counter; Hurt at school=Your teacher; Stuck on homework=A grown-up at home; A fire=Firefighters, by calling {nz:111~au:000}
+check: mcq | You're lost at the shops. Who's a good helper? | A worker at the counter* | Nobody | Someone in a car
+check: tf | {nz:111~au:000} is the number to call in a real emergency. | true
+home: Practise with a grown-up what you'd say if you called {nz:111~au:000}.
+skill: askhelp
+
+@lesson 6.3 | How to ask | 🗣️ | home
+hook: Your grown-up is busy cooking. You need help with your shoelaces. How do you ask?
+learn: Get their attention politely. "Excuse me" works well.
+learn: Say what you need: "Can you help me tie my laces, please?"
+learn: Wait for your turn, then say thank you.
+play: order | Ask for help the right way | Wait for a good moment; Say "Excuse me"; Say what you need; Listen and have a go; Say thank you
+check: mcq | Which is a polite way to ask? | "Excuse me, can you help me, please?"* | "HELP ME NOW!" | Pulling their sleeve and crying
+check: tf | Saying thank you after help is kind. | true
+home: Next time you need help, try the "Excuse me" way and see how it goes.
+skill: askhelp
+
+@lesson 6.4 | Try first, then ask | 🧩 | workshop
+hook: Your puzzle piece won't fit. Should you ask for help straight away?
+learn: Have a go first. Try one or two different ways.
+learn: If you're still stuck, ask, and say what you've already tried.
+learn: Always ask straight away if something is unsafe or you could get hurt.
+play: path | You're building a block tower and it keeps falling over. | Try a wider base, then ask for help if it still falls => good: Trying first helps you learn. Asking next is smart. | Give up and kick it over => bad: Now nobody gets a tower. | Make someone else build it for you => bad: You won't learn how to build it yourself.
+check: mcq | When should you ask for help straight away? | When something is unsafe* | Before you try anything | Never
+check: tf | Saying what you've already tried helps the helper. | true
+home: Try a tricky job at home twice before asking for help. Then tell the helper what you tried.
+skill: askhelp
+
+@lesson 6.5 | "I don't understand" | ❓ | home
+hook: A grown-up explains a job, but you don't get it. Is it OK to say so?
+learn: Saying "I don't understand" is brave and helpful.
+learn: You can ask, "Can you show me?" or "Can you say it another way?"
+learn: Other kids might not understand either. Your question could help them too.
+play: chat | Your grown-up asks you to sort the washing | them: Can you sort the washing into lights and darks? | me: I don't understand. What are lights and darks?*/OK (but you don't know what to do)/No | them: Lights are white and pale clothes. Darks are black, navy and other dark colours. | me: Thanks! Can you show me with the first one?*/Too hard/Whatever
+check: mcq | You don't understand a job. What can you say? | "Can you show me?"* | Nothing, and guess | "This is dumb"
+check: tf | Your question might help other kids too. | true
+home: Ask one "Can you show me?" question about a job at home this week.
+skill: askhelp
+
+@lesson 6.6 | Being a helper | 🤗 | home
+hook: Your little cousin can't open their lunchbox. What can you do?
+learn: When someone asks for help, listen and be kind.
+learn: Show them how, so they can do it themselves next time.
+learn: If it's too big a job for you, find a grown-up.
+play: tap | Tap the kind ways to help someone who asks | 🤝:yes:Showing them how; 👂:yes:Listening to what they need; 😄:yes:Being patient and kind; 🙄:no; 😂:no; 🧑:yes:Getting a grown-up if it's too big for you
+check: mcq | Someone asks you for help. What's kind? | Listen and show them how* | Laugh at them | Ignore them
+check: tf | If a job is too big for you, finding a grown-up is a good way to help. | true
+home: Help someone in your family with a small job today, and show them how you did it.
+skill: helping
+
+@lesson 7.1 | Share the job | 🧺 | home
+hook: Tidying the whole lounge alone takes ages. What if four people help?
+learn: Teamwork means sharing a job, so it gets done faster and better.
+learn: Each person takes one part: toys, books, the table or the rubbish.
+learn: When everyone does their part, the job is done in no time.
+play: match | Match each part of the tidy to what it needs | Putting toys away=The toy box; Stacking books=The shelf; Wiping the table=A cloth; Taking out the rubbish=The bin
+check: mcq | Why share a big job? | It gets done faster and better* | So one person does it all | So nobody does it
+check: tf | When everyone does their part, big jobs get done faster. | true
+home: Do a five-minute family tidy where everyone takes one part of the room.
+skill: teamwork
+
+@lesson 7.2 | Taking turns | 🔄 | garden
+hook: Two kids, one watering can and a whole garden. How do you share?
+learn: Taking turns is fair. Everyone gets a go.
+learn: You can swap jobs: one waters and one picks up leaves, then switch.
+learn: Waiting for your turn is part of being a good teammate.
+play: timing | Wait for your turn, then tap when the marker reaches it | My turn! | Your turn
+check: mcq | One watering can, two kids. What's fair? | Take turns* | One kid keeps it all day | Nobody waters
+check: tf | Swapping jobs is a fair way to share work. | true
+home: Share a job with someone at home today by taking turns.
+skill: teamwork
+
+@lesson 7.3 | Listen to your team | 👂 | home
+hook: Your team is building a cubby. Everyone's talking at once. What helps?
+learn: Good teammates listen when others talk.
+learn: Look at the person, wait till they finish, then share your idea.
+learn: Other people's ideas can make the plan even better.
+play: chat | Building a cubby with your cousin | them: I think we should put the door here, by the tree! | me: Good idea! Can I add one too? A window on this side?*/No, my idea is better/I'm not listening | them: Yes! A window would let the light in. | me: Let's do both. You hold the sheet and I'll tie it.*/I'll just do it myself/Whatever
+check: mcq | What do good teammates do when someone talks? | Listen until they finish* | Talk over them | Walk away
+check: tf | Other people's ideas can make a plan better. | true
+home: At dinner, practise listening until someone finishes before you talk.
+skill: teamwork
+
+@lesson 7.4 | When we disagree | 🤔 | workshop
+hook: You want to paint the box red. Your friend wants blue. Now what?
+learn: It's normal to disagree. Good teams work it out together.
+learn: You can take turns choosing, mix the ideas, or find a new idea you both like.
+learn: Stay kind. Being right isn't as important as finishing together.
+play: path | You and your friend disagree about the colour for your box. | Paint half red and half blue => good: You mixed both ideas, and you're both happy. | Grab the brush and paint it red anyway => bad: Your friend feels left out, and the team falls apart. | Give up on the box => bad: Now nobody gets a box.
+check: mcq | You disagree with a teammate. What helps? | Find a way to mix both ideas* | Shout louder | Quit
+check: tf | It's normal for teammates to disagree sometimes. | true
+home: Next time you disagree with someone, try finding a way to mix both ideas.
+skill: teamwork
+
+@lesson 7.5 | Every job counts | ⭐ | townhall
+hook: At a sausage sizzle, someone cooks, someone takes the money and someone cleans up. Which job matters most?
+learn: Every job in a team matters. If one is missing, the whole thing struggles.
+learn: Small jobs, like handing out napkins, help everyone.
+learn: Thank your teammates for their part.
+play: tap | Tap the jobs that help the school sausage sizzle | 🌭:yes:Cooking the sausages; 💰:yes:Taking the money; 🧻:yes:Handing out napkins; 🗑️:yes:Cleaning up; 📱:no; 😴:no
+check: mcq | Which job matters at a sausage sizzle? | All of them* | Only the cooking | None of them
+check: tf | Thanking your teammates is a kind thing to do. | true
+home: Thank someone in your family for a small job they do that helps everyone.
+skill: teamwork
+
+@lesson 7.6 | Cheer your team | 📣 | garden
+hook: Your teammate drops the ball. What do you say?
+learn: Kind words help teammates try again.
+learn: Unkind words make people feel bad, and the whole team does worse.
+learn: Try "Good try!" or "You've got this!"
+play: sort | Helps the team, Hurts the team | "Good try!"=Helps the team; "You're useless!"=Hurts the team; "You've got this!"=Helps the team; Laughing when someone makes a mistake=Hurts the team; "Let's try again together."=Helps the team; Rolling your eyes=Hurts the team | Helps or hurts?
+check: mcq | Your teammate makes a mistake. What do you say? | "Good try! Let's go again."* | "You ruined it!" | Nothing, and walk off
+check: tf | Kind words help teammates try again. | true
+home: Cheer someone on today, at home, at school or at sport.
+skill: teamwork
+
+@lesson 8.1 | What do you love? | 💖 | stage
+hook: You love animals, drawing and building things. What jobs could that lead to?
+learn: Things you love doing can point to jobs you'd enjoy.
+learn: Love animals? Think vets, zookeepers and dog groomers. Love drawing? Think artists, designers and cartoonists.
+learn: Lots of jobs mix together things people love.
+play: match | Match each love to a job it could lead to | Animals=Vet nurse; Drawing=Illustrator; Building things=Builder; Cooking=Chef; Helping sick people=Nurse
+check: mcq | You love cooking. Which job might suit you? | Chef* | Pilot | Plumber
+check: tf | Things you love doing can point to jobs you'd enjoy. | true
+home: Tell a grown-up three things you love doing. Think of a job for each one together.
+skill: careers
+
+@lesson 8.2 | Jobs you don't see | 🎬 | stage
+hook: A movie has actors. Who else does it need?
+learn: Many jobs happen behind the scenes, where you don't see them.
+learn: A movie needs writers, camera operators, costume makers, sound engineers and lots more.
+learn: For every job you can see, there are often many you can't.
+play: tap | Tap the jobs that help make a movie | ✍️:yes:Writers who write the story; 🎥:yes:Camera operators; 👗:yes:Costume makers; 🎧:yes:Sound engineers; 🦖:no; 🍿:no
+check: mcq | Who writes the story for a movie? | A writer* | The popcorn seller | Nobody
+check: tf | Many jobs happen behind the scenes. | true
+home: Watch the credits at the end of a show with a grown-up. How many different jobs can you spot?
+skill: careers
+
+@lesson 8.3 | Brand-new jobs | 🚁 | online
+hook: Drone pilot, app designer, game tester. Did your grandparents have these jobs?
+learn: New jobs appear as the world changes.
+learn: Some jobs you might do one day haven't been invented yet!
+learn: Being curious and learning new things gets you ready for any job.
+play: mystery | It flies, but nobody sits inside; You control it from the ground; It can film from the sky or check on farms; It's quite a new job | Drone pilot* | Train driver | Baker
+check: mcq | What helps you get ready for new jobs? | Being curious and learning* | Never trying new things | Staying the same
+check: tf | Some jobs of the future haven't been invented yet. | true
+home: Ask an older family member what jobs didn't exist when they were your age.
+skill: careers
+
+@lesson 8.4 | Getting ready for a job | 🎒 | townhall
+hook: How does someone become a vet?
+learn: Most jobs need learning first: at school, then often more study or training.
+learn: Some people learn on the job, like apprentices.
+learn: Practising skills now, like reading, maths and being kind, helps with any job.
+play: order | The path to becoming a vet | Go to school and learn lots; Study science at high school; Go to university to train as a vet; Practise with real animals; Start work as a vet
+check: mcq | What helps with any job? | Reading, maths and being kind* | Watching TV all day | Nothing
+check: tf | Some people learn their job while they work. | true
+home: Ask a grown-up how they learned to do their job.
+skill: careers
+
+@lesson 8.5 | Lots of jobs in one life | 🔄 | stage
+hook: Your grown-up was a waiter, then a builder, and now a teacher. Is that normal?
+learn: Most people have more than one job in their life.
+learn: Each job teaches skills you take to the next one.
+learn: It's OK to change your mind about what you want to be.
+play: path | You want to be an astronaut. Your friend says you'll never change your mind. | Say "Maybe! I might like other jobs too, and that's OK" => good: Keeping an open mind is great. | Say "I'll be an astronaut or nothing" => ok: Big dreams are great, but there are lots of jobs to enjoy too. | Stop dreaming about jobs => bad: Dreaming helps you find what you love.
+check: mcq | Is it OK to change your mind about a dream job? | Yes* | No, never | Only on Tuesdays
+check: tf | Most people have more than one job in their life. | true
+home: Ask a grown-up how many different jobs they've had.
+skill: careers
+
+@lesson 8.6 | My dream job | 🌟 | stage
+hook: If you could do any job, what would it be?
+learn: A dream job uses things you love and things you're good at.
+learn: Ask someone who does a job you like what their day is like.
+learn: Dreams can change as you grow. Keep exploring!
+play: chat | Your aunty asks about your dream job | them: What would you love to be when you grow up? | me: Maybe a vet, because I love animals!*/I don't know and I don't care/Nothing | them: How could you find out what vets do? | me: I could ask a vet, or read about it!*/I can't/Ask someone to do it for me
+check: mcq | A dream job often uses... | Things you love and are good at* | Things you don't like | Nothing
+check: tf | Dreams can change as you grow. | true
+home: Draw yourself doing your dream job and show a grown-up.
+skill: careers
+
 @band builders
 @unit 1 | Jobs and skills | What jobs exist and what employers want
 @unit 2 | Reliable worker | Turning up, on time, every time
@@ -570,6 +837,271 @@ check: mcq | What helps customers come back? | Doing great work and being on tim
 check: tf | A thank-you can help get repeat work. | true
 home: After your next job, ask the person if there's anything you could do better next time.
 skill: reliability
+
+@lesson 5.1 | Feedback is a gift | 🎁 | workshop
+hook: Your coach says your passing needs work. Is that bad news or good news?
+learn: Feedback is information about how you're doing. It helps you get better faster.
+learn: Useful feedback is specific. "The corners are still dusty" helps more than "bad job".
+learn: Feedback is about the work, not about you as a person.
+play: sort | Useful feedback, Not useful | "The edges of the lawn still need trimming"=Useful feedback; "That was rubbish"=Not useful; "Next time, check the windows for streaks"=Useful feedback; "Whatever"=Not useful; "Your list was neat, but you forgot the milk"=Useful feedback; "You're hopeless"=Not useful | Which feedback helps you improve?
+check: mcq | Which feedback is most useful? | "You missed a spot under the table"* | "Bad job" | "Meh"
+check: tf | Feedback about your work is not about who you are. | true
+home: Ask a grown-up for one piece of specific feedback on a chore you did this week.
+skill: feedback
+
+@lesson 5.2 | Asking for feedback | 🙋 | stall
+hook: You finished mowing your neighbour's lawn. How do you find out if they're happy?
+learn: You don't have to wait for feedback. You can ask for it.
+learn: Ask a clear question, like "Is there anything I could do better next time?"
+learn: Asking shows you care about doing a good job, and customers notice.
+play: chat | You've just walked Mrs Patel's dog | them: Thanks! He looks happy. | me: Thanks! Is there anything you'd like me to do differently next time?*/So, where's my money?/Bye | them: Maybe a longer walk. He has lots of energy. | me: Great, I'll do a longer walk next time.*/That's too much work/He's fine as he is
+check: mcq | Which is a good way to ask for feedback? | "Is there anything I could do better?"* | "That was perfect, right?" | "Don't tell me anything"
+check: tf | Asking for feedback shows you care about doing a good job. | true
+home: Ask someone in your family: "What's one thing I could do better when I help at home?"
+skill: feedback
+
+@lesson 5.3 | Hearing "could be better" | 💭 | workshop
+hook: Your teacher says your project "could be better". Your face goes hot. What now?
+learn: It's normal to feel a bit hurt or cross when you hear feedback.
+learn: Take a breath before you answer. Don't argue or make excuses straight away.
+learn: Listen to all of it, then say thanks. You can think it over later, when you're calm.
+play: path | The teacher running the school fair says your stall sign is hard to read. | Take a breath, say thanks and ask what would help => good: Now you know how to fix it, and your teacher sees you can handle feedback. | Say "It's fine, you just can't see properly" => bad: Arguing means you miss the chance to sell more. | Walk off and sulk => bad: The sign stays hard to read, and nobody enjoys working with a sulker.
+check: mcq | You feel cross after feedback. What helps first? | Take a breath before you answer* | Shout back | Make excuses
+check: tf | It's normal to feel a bit hurt by feedback. | true
+home: Next time you get feedback, try taking one slow breath before you answer.
+skill: feedback
+
+@lesson 5.4 | Turn feedback into a plan | 📝 | workshop
+hook: You got three bits of feedback on your car wash. Where do you start?
+learn: Write the feedback down, so you don't forget it.
+learn: Pick one or two things to fix first. Don't try to fix everything at once.
+learn: Next time, check those things before you say you're done.
+play: build | Turn feedback into better work | Write down the feedback; Pick the most important thing to fix; Plan how you'll fix it; Do the job again; Check that thing before you finish
+check: mcq | You get lots of feedback. What's a smart first step? | Write it down and pick one thing to fix first* | Fix nothing | Try to fix everything at once
+check: tf | Writing feedback down helps you remember it. | true
+home: Write down one piece of feedback you've had and one way you'll use it.
+skill: feedback
+
+@lesson 5.5 | Giving kind feedback | 🤝 | home
+hook: Your friend asks what you think of their baking. It's a bit burnt. What do you say?
+learn: Good feedback is kind, specific and helpful.
+learn: Start with something that went well, then one thing to try next time.
+learn: Talk about the work, not the person. Say "The edges are a bit dark", not "You're a bad baker".
+play: chat | Your friend shows you their cupcakes for the school sale | them: What do you think? Be honest! | me: The icing looks amazing. Maybe take them out a couple of minutes earlier next time?*/They're burnt. Gross./They're perfect, don't change anything | them: Oh yeah, they are a bit dark on the bottom. | me: The flavour's great though. I'd buy one!*/Told you they were bad/I'm not eating that
+check: mcq | Which is kind, helpful feedback? | "The colours are great. The title could be bigger."* | "It's bad." | "You're hopeless at this."
+check: tf | Good feedback is about the work, not the person. | true
+home: Give someone in your family kind, specific feedback on something they made.
+skill: feedback
+
+@lesson 5.6 | Reviews and ratings | ⭐ | online
+hook: Your baking stall got a 3-star review: "Tasty, but we waited ages." What do you do?
+learn: Reviews and ratings are feedback from customers, and other people read them.
+learn: Look for the useful part. Here it's "we waited ages", so you could bake more beforehand.
+learn: Reply politely, thank them and say what you'll change. Never argue in public.
+play: sort | Helpful reply, Unhelpful reply | "Thanks! We'll have more ready next time."=Helpful reply; "You're wrong, it was quick."=Unhelpful reply; "Sorry about the wait. We're adding a second helper."=Helpful reply; Ignoring every review=Unhelpful reply; "Glad you liked the taste! We'll be faster next time."=Helpful reply; Posting a mean comment back=Unhelpful reply | How should you reply?
+check: mcq | What's the useful part of "Tasty, but we waited ages"? | The wait was too long* | Nothing | It was tasty, so ignore the rest
+check: tf | It's a good idea to argue with reviews in public. | false | Thank them politely and fix the problem. Other people read your replies.
+home: Read some reviews of a local shop with a grown-up. What feedback do customers give?
+skill: feedback
+
+@lesson 6.1 | Where does your time go? | ⏰ | home
+hook: You have 24 hours in a day. Where do they all go?
+learn: Kids your age need about 9 to 12 hours of sleep. School takes about 6 more.
+learn: That leaves a few hours for homework, jobs, sport, family and fun.
+learn: Tracking your time for a day can surprise you, especially screen time.
+try: 24 − 10 hours of sleep − 6 hours of school = 8 hours :: gap | 24 − 9 hours of sleep − 7 hours of school = _ hours | 8
+play: slider | You sleep 10 hours, spend 6 at school and 1 travelling. How many hours are left in the day? | 0 | 12 | 7 | hours | 0 | 1
+check: gap | 24 − 10 − 6 = _ | 8
+check: tf | Tracking your time for a day can show where it goes. | true
+home: Track one school day, hour by hour, and show a grown-up where your time went.
+skill: time
+
+@lesson 6.2 | Big rocks first | 🪨 | workshop
+hook: You have a jar, some big rocks, some pebbles and some sand. Which goes in first?
+learn: If you pour the sand in first, the big rocks won't fit.
+learn: Big rocks are the important things: sleep, homework, jobs you promised and family.
+learn: Plan the big rocks first, then fit fun and extras around them.
+play: build | Fill your week's jar, biggest rocks first | Sleep; Homework and school; Jobs you promised; Sport and family time; Games and screens
+check: mcq | What are "big rocks"? | The most important things* | Things that are heavy | Fun extras
+check: tf | Planning the big rocks first helps everything fit. | true
+home: Write your three big rocks for next week with a grown-up.
+skill: planning
+
+@lesson 6.3 | Plan your week | 🗓️ | home
+hook: Sport on Tuesday, a dog-walking job on Thursday, a test on Friday. How do you fit it all in?
+learn: Write the fixed things in first: school, sport, jobs and appointments.
+learn: Then find gaps for homework, study and fun.
+learn: Leave some empty time. Things often take longer than you think.
+play: sort | Fixed time, Flexible time | School=Fixed time; Sport practice on Tuesday=Fixed time; Studying for the test=Flexible time; The dog walk you agreed to on Thursday=Fixed time; Tidying your room=Flexible time; Playing games=Flexible time | Fixed or flexible?
+check: mcq | What goes in your plan first? | Fixed things like school and sport* | Games | Nothing
+check: tf | Leaving some empty time helps when things take longer. | true
+home: Make a plan for next week with a grown-up. Put the fixed things in first.
+skill: planning
+
+@lesson 6.4 | Beat putting it off | 🐌 | home
+hook: You know you should start your project. Instead you're watching "just one more" video. Sound familiar?
+learn: Putting things off is called procrastinating. Everyone does it sometimes.
+learn: Try the 5-minute trick: start for just 5 minutes. Starting is the hardest part.
+learn: Put your phone in another room, and plan a small reward for when you finish.
+play: tap | Tap the tricks that help you get started | ⏲️:yes:Set a 5-minute timer and start; 📵:yes:Put your phone in another room; 🍪:yes:Plan a small reward for after; 📺:no; 🛌:no; ✂️:yes:Break it into tiny steps
+check: mcq | What's the 5-minute trick? | Start for just 5 minutes* | Watch 5 more videos | Wait 5 days
+check: tf | Starting is often the hardest part. | true
+home: Use the 5-minute trick on a job you've been putting off.
+skill: procrastination
+
+@lesson 6.5 | How long will it take? | ⌛ | workshop
+hook: You think washing the car will take 15 minutes. It takes an hour. Why?
+learn: People often guess too short for how long things take.
+learn: Time yourself doing a job, so next time you'll know.
+learn: Add extra time for setting up and packing away.
+play: gen | time | 3
+check: mcq | Why add extra time to your plan? | Setting up and packing away take time too* | So you can be late | It's never needed
+check: tf | People often guess too short for how long jobs take. | true
+home: Guess how long a chore will take, then time it. How close were you?
+skill: time
+
+@lesson 6.6 | Too busy? Say so | ⚖️ | stall
+hook: A neighbour asks you to mow on Saturday, but you've got sport and a birthday party. What do you say?
+learn: Saying yes to everything can mean doing things badly or letting people down.
+learn: A polite "not this week" keeps your promises safe.
+learn: Offer another time if you'd still like the job.
+play: chat | Your neighbour asks you to mow on Saturday | them: Could you mow my lawn this Saturday? | me: Thanks for asking! I'm busy this Saturday. Could I do Sunday afternoon?*/Sure (even though you're too busy)/No, go away | them: Sunday works. Is 2 o'clock OK? | me: 2 o'clock is great. See you then.*/Maybe, I'll see/Whatever
+check: mcq | You're too busy for a job. What's a good answer? | "I'm busy then. Could I do another day?"* | Say yes, then don't turn up | Ignore them
+check: tf | Saying yes to everything can mean letting people down. | true
+home: Practise a polite "not this week, but how about..." with a grown-up.
+skill: time
+
+@lesson 7.1 | Spot the hazard | ⚠️ | workshop
+hook: A wet floor, a frayed cord and a box in the doorway. What do they have in common?
+learn: A hazard is anything that could hurt someone.
+learn: Spot hazards before you start a job: look, think, then act.
+learn: Fix it if that's safe, like moving a box. If not, tell an adult.
+play: tap | Tap the hazards | 💧:yes:A wet, slippery floor; 🔌:yes:A frayed power cord; 📦:yes:A box blocking the doorway; 🪴:no; 🔪:yes:A sharp knife on the edge of the bench; 📚:no
+check: mcq | What is a hazard? | Anything that could hurt someone* | A kind of tool | A safety sign
+check: tf | You should tell an adult about a hazard you can't fix safely. | true
+home: Do a hazard hunt at home with a grown-up. Find three and fix the safe ones.
+skill: safety
+
+@lesson 7.2 | Sun smart | 🧴 | garden
+hook: You're weeding a garden at midday in summer. How do you stay safe?
+learn: {nz:New Zealand~au:Australia} has some of the strongest UV in the world. Sunburn can happen in about 15 minutes.
+learn: Slip on a shirt, slop on sunscreen, slap on a hat and wrap on sunglasses. Find shade too.
+learn: Drink water often, and take breaks in the shade.
+play: match | Match each sun-safe step to what it means | Slip=Slip on a shirt with sleeves; Slop=Slop on sunscreen; Slap=Slap on a hat; Wrap=Wrap on sunglasses
+check: mcq | What should you do when working outside on a hot day? | Drink water and take breaks in the shade* | Work non-stop | Skip the hat
+check: tf | In strong sun, sunburn can happen in about 15 minutes. | true
+home: Check the UV forecast with a grown-up before your next outdoor job.
+skill: safety
+
+@lesson 7.3 | Lift it right | 📦 | home
+hook: The box of books is heavy. How do you lift it without hurting your back?
+learn: Check the weight first. If it's too heavy, get help or split the load.
+learn: Bend your knees, keep your back straight and hold the load close.
+learn: Don't twist while you carry. Turn with your feet.
+play: order | Lift a box safely | Check how heavy it is; Stand close with your feet apart; Bend your knees, back straight; Hold it close to your body; Stand up slowly using your legs; Turn with your feet, not your back
+check: mcq | How should you lift a box? | Bend your knees and keep your back straight* | Bend your back and pull | Throw it up
+check: tf | If a load is too heavy, it's smart to get help. | true
+home: Show a grown-up how to lift a box of shopping the safe way.
+skill: safety
+
+@lesson 7.4 | Safe in the kitchen | 🍳 | kitchen
+hook: You're baking for a cake stall. What could go wrong in the kitchen?
+learn: Hot ovens, sharp knives and slippery floors cause most kitchen accidents.
+learn: Use oven gloves, turn pan handles inwards and wipe spills straight away.
+learn: Wash your hands, and keep raw meat away from other food.
+play: sort | Safe, Not safe | Using oven gloves to take out a tray=Safe; Leaving a pan handle sticking out=Not safe; Wiping up a spill straight away=Safe; Using the same board for raw chicken and salad=Not safe; Washing hands before baking=Safe; Walking with a knife pointing up=Not safe | Safe or not?
+check: mcq | How do you take a hot tray out of the oven? | With dry oven gloves* | With a wet tea towel | With bare hands, quickly
+check: tf | Pan handles should be turned inwards. | true
+home: Bake something with a grown-up and point out three safety steps as you go.
+skill: safety
+
+@lesson 7.5 | Saying no to unsafe jobs | 🙅 | stall
+hook: A neighbour offers $20 for you to clear their roof gutters from a ladder. You're 11. What do you say?
+learn: Some jobs aren't safe for kids, like ladders, roofs, power tools and strong chemicals.
+learn: You can say no politely, even if the money is good.
+learn: Offer a safer job instead, and tell your grown-up about the offer.
+play: chat | Your neighbour asks you to clean the gutters | them: I'll pay you $20 to climb up and clear my gutters! | me: Thanks, but ladders and roofs aren't safe for me. Could I sweep the leaves on the ground instead?*/Sure, where's the ladder?/That's a dumb job | them: Oh, good point. Sweeping the path would be great. | me: Great! I'll check with my grown-up first, then come over.*/I'll climb up when you're not looking/Never mind
+check: mcq | A job isn't safe for your age. What do you do? | Say no politely and offer a safer job* | Do it anyway for the money | Do it without telling anyone
+check: tf | You can say no to a job even if the money is good. | true
+home: Make a list with your grown-up of jobs that are and aren't OK for you.
+skill: safety
+
+@lesson 7.6 | Safe online jobs | 💻 | online
+hook: Someone online offers $50 for you to test their app. They want your home address and a photo. OK?
+learn: Online "jobs" for kids are often scams, or tricks to get personal information.
+learn: Never share your address, photos, passwords or bank details with online strangers.
+learn: Tell a grown-up about any online job offer before you reply.
+play: scam | Which job offers are scams? | Get paid $50 to test an app! Just send your address and a photo=scam; Your aunt asks if you'd like to help at her market stall on Saturday=real; Earn $200 a day! Pay $20 to join first=scam; Your school library asks for volunteers to read to little kids=real; DM me for easy money, and don't tell your parents=scam | Real jobs don't ask kids for photos, fees or secrets. Tell a grown-up about any online offer.
+check: mcq | Someone online offers you a job. What first? | Tell a grown-up before you reply* | Send your address | Pay the joining fee
+check: tf | It's fine if an online job asks you to keep it secret from your parents. | false | That's a big warning sign. Tell a grown-up straight away.
+home: Agree with your grown-up on what you'd do if an online stranger offered you a job.
+skill: scams
+
+@lesson 8.1 | Job families | 🗂️ | townhall
+hook: There are thousands of jobs. How can you sort them?
+learn: Jobs can be grouped into families, like caring, building, creating, technology and outdoors.
+learn: Jobs in the same family often use similar skills.
+learn: Finding the families you like can help you explore.
+play: sort | Caring, Building, Creating | Nurse=Caring; Carpenter=Building; Graphic designer=Creating; Teacher aide=Caring; Electrician=Building; Musician=Creating | Which job family?
+check: mcq | Which family is a plumber in? | Building* | Creating | Caring
+check: tf | Jobs in the same family often use similar skills. | true
+home: Name one job from each family with a grown-up. Which family interests you most?
+skill: careers
+
+@lesson 8.2 | Interests to careers | 🧭 | townhall
+hook: You love maths, being outdoors and solving puzzles. Where could that lead?
+learn: Your interests are clues to careers you might enjoy.
+learn: Maths and puzzles might lead to engineering, coding or accounting. The outdoors might lead to farming, conservation or surveying.
+learn: Mix your interests together to find careers that fit you.
+play: match | Match each mix of interests to a career | Maths and the outdoors=Surveyor; Animals and science=Vet; Art and computers=Game designer; Helping people and science=Physiotherapist; Building and electricity=Electrician
+check: mcq | You love art and computers. Which career might fit? | Game designer* | Truck driver | Baker
+check: tf | Your interests are clues to careers you might enjoy. | true
+home: Mix two of your interests and find a career that uses both, with a grown-up.
+skill: careers
+
+@lesson 8.3 | Many paths to one job | 🛤️ | townhall
+hook: Two people became chefs. One went to cooking school. One started by washing dishes. Who did it right?
+learn: There's often more than one path to the same job.
+learn: Some paths start with study, some with an apprenticeship, and some with an entry-level job.
+learn: The best path depends on you, your money and how you like to learn.
+play: sort | Study first, Learn on the job | Going to cooking school=Study first; Washing dishes and working your way up=Learn on the job; A university degree in nutrition=Study first; A chef apprenticeship=Learn on the job; A {nz:polytechnic~au:TAFE} course=Study first; Starting as a kitchen hand=Learn on the job | Which kind of path is it?
+check: mcq | Is there only one path to most jobs? | No, there are often several* | Yes, always just one | Only for chefs
+check: tf | Some people learn a job by starting at an entry-level job. | true
+home: Ask two grown-ups how they got into their jobs. Were their paths the same?
+skill: careers
+
+@lesson 8.4 | Skills that travel | 🎒 | workshop
+hook: Which skills help in almost every job?
+learn: Some skills are useful everywhere: communication, teamwork, problem solving and being reliable.
+learn: You build them at school, at home, in sport and in clubs.
+learn: Employers often say these skills matter as much as knowing the job itself.
+play: tap | Tap the skills that help in almost every job | 🗣️:yes:Communicating clearly; 🤝:yes:Working in a team; 🧩:yes:Solving problems; ⏰:yes:Being on time; 🎻:no; 🏄:no
+check: mcq | Which skill helps in almost every job? | Teamwork* | Juggling | Surfing
+check: tf | You can build useful job skills in sport and clubs. | true
+home: Name one place outside school where you practise teamwork.
+skill: softskills
+
+@lesson 8.5 | Interview a worker | 🎤 | stage
+hook: You get 5 minutes with someone who has a job you like. What do you ask?
+learn: Good questions: What do you do each day? What do you like most? What's hard? How did you get started?
+learn: Listen carefully and take notes.
+learn: Say thank you. People usually love talking about their work.
+play: chat | You're talking to a park ranger | them: Hi! I hear you want to know about my job. | me: Yes, thanks! What do you do on a normal day?*/How much money do you get?/Is it boring? | them: I check tracks, help visitors and look after native birds. | me: That sounds amazing! How did you get started?*/Cool, bye/I could do that easily
+check: mcq | What's a good question to ask a worker? | "How did you get started?"* | "Is your job boring?" | "Can I have your job?"
+check: tf | People usually like talking about their work. | true
+home: Interview a grown-up about their job using the four good questions.
+skill: careers
+
+@lesson 8.6 | Your careers map | 🗺️ | island
+hook: How do you map a path from where you are now to a job you like?
+learn: Start with a job you're curious about.
+learn: Find out what skills, subjects and training it needs.
+learn: Then list small steps you can take now, like a club, a subject or a holiday job.
+play: build | Build your careers map | Pick a job you're curious about; Find out what it needs; List the subjects that help; Find a club or activity to try; Talk to someone who does it; Check your map again next year
+check: mcq | What's a good small step towards a career now? | Joining a club or trying a related activity* | Waiting until you're 30 | Nothing
+check: tf | It's good to check your careers map again later. | true
+home: Draw your careers map with a grown-up and stick it on your wall.
+skill: careers
 
 @band makers
 @unit 1 | Getting your first job | CVs, applications and interviews
@@ -861,6 +1393,271 @@ check: mcq | What should you do first in a people problem? | Stay calm and liste
 check: tf | Saying "we" can make a problem feel shared. | true
 home: Think of a disagreement you had recently. What would "we" language sound like?
 skill: teamwork
+
+@lesson 5.1 | Many paths after school | 🛤️ | townhall
+hook: University isn't the only way to a good job. What else is there?
+learn: After school you can go to {nz:university, a polytechnic or a wānanga~au:university or TAFE}, start an apprenticeship, or go straight into work.
+learn: Apprentices learn on the job and get paid while they train.
+learn: Short courses and certificates can get you started in months, not years.
+play: match | Match each path to how it works | University=Degrees, often 3 or more years; {nz:Polytechnic~au:TAFE}=Practical certificates and diplomas; Apprenticeship=Paid work while you train on the job; Short course=A few weeks or months on one skill
+check: mcq | Which path pays you while you train? | An apprenticeship* | A university degree | A gap year
+check: tf | University is the only way to a good career. | false | Apprenticeships, {nz:polytechnics~au:TAFE} and work can all lead to great careers.
+home: Ask two grown-ups what they did after school, and whether they'd choose the same way again.
+skill: study
+
+@lesson 5.2 | Subjects that keep doors open | 🚪 | townhall
+hook: You're picking subjects for next year. Does it matter?
+learn: Some jobs and courses need certain school subjects, like maths for engineering or science for nursing.
+learn: Keeping maths, English and a science going for longer keeps more doors open.
+learn: {nz:NCEA is being replaced by new school qualifications from 2028, so ask your school how the changes affect you.~au:In Years 11 and 12, your subjects can affect your ATAR and which uni courses you can get into.}
+play: route | Match each career idea to a school subject that helps | Engineer=Maths and physics; Nurse=Biology and chemistry; Graphic designer=Art and design; Builder=Construction or technology; Journalist=English
+check: mcq | You're not sure what you want to do. What's a smart subject plan? | Keep maths, English and a science going* | Drop every hard subject | Pick only what your friends pick
+check: tf | Some courses after school need certain school subjects. | true
+home: Look up one job you like on {nz:tahatu.govt.nz~au:yourcareer.gov.au} and find which subjects help.
+skill: study
+
+@lesson 5.3 | Try it at school | 🔧 | workshop
+hook: Could you start learning a trade while you're still at school?
+learn: {nz:Trades academies and Gateway let senior students learn trade skills and do work placements while at school.~au:VET in schools and school-based apprenticeships let you start a trade qualification while you study.}
+learn: Work experience lets you see a job up close for a few days.
+learn: Trying a job early helps you find out what you like, and what you don't.
+play: tap | Tap the ways to try out a career while you're at school | 🏗️:yes:A trades programme or work placement; 🧑‍🔬:yes:A science or tech club; 🎨:yes:Entering an art or design show; 🛋️:no; 🍳:yes:A part-time café job once you're old enough; 📱:no
+check: mcq | What's a good reason to try work experience? | To find out what a job is really like* | To skip school for ever | To get rich fast
+check: tf | {nz:Gateway lets school students do work placements.~au:School-based apprenticeships let you start a trade while at school.} | true
+home: Ask your school's careers adviser what work experience or trades options your school offers.
+skill: careers
+
+@lesson 5.4 | Qualification levels | 🪜 | townhall
+hook: Certificate, diploma, degree. What's the difference?
+learn: Qualifications go up in levels. {nz:NZ has 10 levels, from certificates at Level 1 to doctorates at Level 10.~au:Australia's framework has 10 levels, from Certificate I up to doctoral degrees.}
+learn: Certificates are shorter and practical. Diplomas go deeper. Degrees usually take 3 years or more.
+learn: You can often stack them: start with a certificate, then move up later.
+play: order | Put these from shortest to longest, usually | A short course; A certificate; A diploma; A bachelor's degree; A master's degree
+check: mcq | Which usually takes longest? | A bachelor's degree* | A short course | A certificate
+check: tf | You can start with a certificate and study at a higher level later. | true
+home: Find out what qualification someone you know has, and how long it took.
+skill: study
+
+@lesson 5.5 | Research a path | 🔎 | online
+hook: You think you'd like to be a vet. How do you find out what it really takes?
+learn: Careers websites like {nz:Tahatū~au:Your Career} show what a job involves, what it pays and how to get there.
+learn: Talk to someone who does the job. Ask what they love, what's hard and how they started.
+learn: Open days and course websites tell you entry requirements, costs and how long it takes.
+play: sort | Good source, Not reliable | A government careers website=Good source; A random comment on a video=Not reliable; Talking to a real vet nurse=Good source; A university or {nz:polytechnic~au:TAFE} course page=Good source; A friend's guess=Not reliable; An ad promising "be a vet in 2 weeks"=Not reliable | Where would you look?
+check: mcq | Who can tell you what a job is really like? | Someone who does that job* | An ad | A random comment online
+check: tf | Course websites show entry requirements and costs. | true
+home: Look up one career on {nz:tahatu.govt.nz~au:yourcareer.gov.au} with a grown-up. What does it pay?
+skill: careers
+
+@lesson 5.6 | Do you need to decide now? | 🤔 | garden
+hook: Your aunt asks, "So what are you going to be?" You're 14. Do you need an answer?
+learn: Most people change jobs many times, and plenty of today's jobs didn't exist 20 years ago.
+learn: You don't need a final answer at 14. Notice what you enjoy and what you're good at.
+learn: Each subject, job and hobby teaches skills you can use later.
+play: debate | Should you pick your career at 14? | No. Explore, keep options open and notice what you enjoy* | Yes. Pick now and never change | Having a goal can help you choose subjects, as long as you're happy to change it.
+check: mcq | What's a good thing to do at 14? | Explore what you enjoy and keep options open* | Lock in one job for ever | Stop trying at school
+check: tf | Lots of people change careers during their life. | true
+home: Write three things you enjoy and three things you're good at. Show a grown-up.
+skill: careers
+
+@lesson 6.1 | What's a gig? | 🛵 | online
+hook: Delivery riders, freelance designers, dog walkers. What do they have in common?
+learn: A gig is short-term or one-off paid work, often found through an app or website.
+learn: Gig workers are usually self-employed, not employees.
+learn: That means more freedom, but no guaranteed hours, sick pay or holiday pay.
+play: sort | Gig, Employee job | Delivering food through an app=Gig; A weekly supermarket shift=Employee job; Designing a logo for one client=Gig; A part-time café job with a roster=Employee job; Walking dogs booked through a website=Gig; Working at a cinema candy bar=Employee job | Gig or employee job?
+check: mcq | What do gig workers usually miss out on? | Sick pay and holiday pay* | Getting paid | Choosing their hours
+check: tf | Gig workers are usually self-employed. | true
+home: Ask a grown-up if they know anyone who does gig work, and what it's like.
+skill: gig
+
+@lesson 6.2 | Side hustle ideas | 💡 | stall
+hook: You've got skills and some spare time. What could you earn from?
+learn: Teen side hustles include tutoring younger kids, baking, crafts, lawn mowing, pet care and simple design work.
+learn: The best ones use something you're good at and something people need.
+learn: Start small, check with a grown-up, and don't let it crowd out school.
+play: tap | Tap good side hustle ideas for a 14-year-old | 📚:yes:Tutoring younger kids; 🧁:yes:Baking for a local market; 🐕:yes:Pet sitting for neighbours; 🚗:no; 🎨:yes:Making and selling art; 🏗️:no
+check: mcq | What makes a good side hustle? | Something you're good at that people need* | Whatever's trending | Something risky
+check: tf | A side hustle shouldn't crowd out school. | true
+home: List three things you're good at that someone might pay for. Show a grown-up.
+skill: gig
+
+@lesson 6.3 | Price it with costs | 🧾 | stall
+hook: You make bracelets. The beads cost 40c a bracelet. What should you charge?
+learn: Add up your costs for each item first: materials, packaging and any fees.
+learn: Then add something for your time. That's your profit.
+learn: Check what others charge, so you're not too high or too low.
+play: shop | Set a price for your bracelets | Bracelet | 40 | 250
+check: mcq | What should your price cover? | Your costs plus something for your time* | Just the beads | Whatever you feel like
+check: tf | Checking what others charge helps you set a price. | true
+home: Work out the cost of making one thing you could sell, with a grown-up.
+skill: pricing
+
+@lesson 6.4 | Platform fees | 📉 | online
+hook: You sell a $20 item online. Why do you only get $16?
+learn: Selling apps and websites usually take a fee, often a percentage of each sale.
+learn: Payment fees and postage can take more.
+learn: Work out what you'll really keep before you set your price.
+try: 10% of $20 is $2, so you keep $18 :: gap | 15% of $40 is $6, so you keep $_ | 34
+play: gen | percent | 3
+check: gap | A 20% fee on a $30 sale is $_ | 6
+check: mcq | Why check platform fees before pricing? | So you know what you'll really keep* | So you can skip tax | They don't matter
+home: Look up the seller fees on a selling site with a grown-up.
+skill: fees
+
+@lesson 6.5 | Gig work: good and bad | ⚖️ | workshop
+hook: Choose your own hours, but no guaranteed pay. Is gig work a good deal?
+learn: The good: flexible hours, being your own boss and trying different work.
+learn: The hard: pay can change week to week, there's no sick or holiday pay, and you cover your own costs and tax.
+learn: Some gig workers earn less than minimum wage once their costs come off.
+play: debate | Is gig work a good choice for a teen? | It can be, as a side income with a grown-up's OK, if you check what you really earn after costs* | Yes, it's always better than a normal job | A regular part-time job gives steady pay, training and rights like holiday pay.
+check: mcq | What's a downside of gig work? | Pay can change week to week* | You can't choose your hours | You always get sick pay
+check: tf | Some gig workers earn less than minimum wage after costs. | true
+home: Talk with a grown-up about whether a regular job or gig work would suit you better, and why.
+skill: gig
+
+@lesson 6.6 | Safe and legal | 🛡️ | online
+hook: A delivery app says you must be 18. Your friend says just use your mum's account. Should you?
+learn: Many apps have age limits, often 18. Using someone else's account breaks the rules and may not be insured.
+learn: Meet buyers in public places with a grown-up, and never share your home address online.
+learn: Side hustle money can be taxable. {nz:If it's a business, you may need to tell IRD. Ask a grown-up.~au:In Australia, you can earn up to $18,200 a year before income tax, but you may still need to lodge a return.}
+play: path | A buyer wants to pick up your $50 bike from your house tonight. | Meet in a public place in daylight, with a grown-up => good: Safer for everyone. | Give them your address and meet them alone => bad: You don't know them, so it isn't safe. | Ask them to pay first with a gift card => bad: Gift card payments are a common scam sign.
+check: mcq | Is using a parent's account on an 18+ app OK? | No, it breaks the rules and may not be insured* | Yes, if they're asleep | Only on weekends
+check: tf | {nz:Money from a side business can be taxable.~au:In Australia, you can earn up to $18,200 a year before income tax.} | true
+home: Make a safety plan with a grown-up for selling something online.
+skill: safety
+
+@lesson 7.1 | What's workplace culture? | 🏢 | workshop
+hook: Two cafés pay the same. At one, staff love it. At the other, people quit after a month. Why?
+learn: Workplace culture is "how things are done here": how people talk, help and treat each other.
+learn: Good cultures have respect, fair treatment, clear communication and people helping each other.
+learn: You help shape the culture, even as the newest person there.
+play: sort | Healthy culture, Unhealthy culture | New staff get trained and welcomed=Healthy culture; Mistakes get shouted about in front of customers=Unhealthy culture; People say thanks and help each other=Healthy culture; Gossip about co-workers is normal=Unhealthy culture; Managers listen to ideas from everyone=Healthy culture; The boss's friends always get the best shifts=Unhealthy culture | Healthy or unhealthy?
+check: mcq | What is workplace culture? | How people treat each other and get things done at work* | The colour of the building | The uniform
+check: tf | Even new staff help shape a workplace's culture. | true
+home: Ask a grown-up what makes a workplace good or bad to work in.
+skill: culture
+
+@lesson 7.2 | Respect and inclusion | 🌈 | townhall
+hook: A new co-worker has just started, and English is their second language. How can you help them fit in?
+learn: Inclusion means everyone feels welcome and able to take part, whatever their background.
+learn: Small things matter: saying names properly, including people at breaks and explaining things clearly.
+learn: Respect means treating people fairly, even when they're different from you.
+play: tap | Tap the inclusive things to do | 👋:yes:Introducing yourself and learning to say their name properly; 🍪:yes:Inviting them to join you at break; 🗣️:yes:Explaining things clearly, without talking down; 🙄:no; 🤫:no; 🤝:yes:Asking if they'd like a hand with the till
+check: mcq | What does inclusion mean? | Everyone feels welcome and able to take part* | Only friends get invited | Everyone must be the same
+check: tf | Learning to say someone's name properly is a sign of respect. | true
+home: Think of a time you were new somewhere. What helped you feel welcome?
+skill: inclusion
+
+@lesson 7.3 | Banter or bullying? | 😬 | workshop
+hook: Everyone laughs at the jokes about one co-worker. They laugh too. So it's fine, right?
+learn: Banter is friendly joking that everyone is genuinely OK with.
+learn: It crosses a line when it's one-sided, keeps targeting the same person, or is about who they are.
+learn: Laughing along doesn't always mean someone's OK. Watch for signs they're not.
+play: sort | Probably banter, Crossing the line | Friends teasing each other equally about footy teams=Probably banter; Jokes about one person's accent every shift=Crossing the line; A one-off joke everyone laughs at, including the person=Probably banter; Nicknames about someone's weight=Crossing the line; Jokes that carry on after someone says "stop"=Crossing the line; Light teasing about who burnt the toast, then helping fix it=Probably banter | Banter or crossing the line?
+check: mcq | When does a joke cross the line? | When it keeps targeting one person, or who they are* | When it's funny | Never
+check: tf | Someone laughing along always means they're OK with it. | false | People often laugh to fit in. Watch for signs they're not OK.
+home: Talk with a grown-up about how to tell banter from bullying.
+skill: respect
+
+@lesson 7.4 | Be an upstander | 🦸 | workshop
+hook: You see a co-worker being picked on. You're not the target. What can you do?
+learn: A bystander watches and does nothing. An upstander does something to help.
+learn: You can change the subject, check in with the person afterwards, or tell a manager.
+learn: You don't have to confront anyone if it doesn't feel safe. Small actions still help.
+play: path | A co-worker keeps making mean comments to the new person on your shift. | Check on the new person later, and tell your manager what you saw => good: You've supported them and given your manager the chance to act. | Join in so you fit in => bad: Now you're part of the problem. | Ignore it, because it's not your business => ok: Speaking up is hard, but doing nothing lets it keep happening.
+check: mcq | What's an upstander? | Someone who does something to help* | Someone who just watches | Someone who joins in
+check: tf | Checking in with someone afterwards is a way to help. | true
+home: Think of one small thing you could do to be an upstander at school or work.
+skill: respect
+
+@lesson 7.5 | Sharing your ideas | 💬 | stall
+hook: You think there's a better way to set up the stock room. You're new. Do you say something?
+learn: New eyes often spot better ways of doing things.
+learn: Pick a calm time, explain the problem and your idea, and ask what they think.
+learn: If they say no, ask why. You'll learn something either way.
+play: chat | Talking to your supervisor at the end of a shift | them: How was your shift? | me: Good, thanks! Can I suggest an idea about the stock room?*/Your stock room is a mess/Fine | them: Sure, go for it. | me: If we put the drinks near the door, restocking the fridge would be faster. What do you think?*/Do it my way or I'll quit/Never mind, forget it
+check: mcq | When's a good time to share an idea at work? | A calm moment, like the end of a shift* | In the middle of a rush | Never, because you're new
+check: tf | New staff can spot better ways of doing things. | true
+home: Suggest one small improvement at home, at a calm moment, and see what happens.
+skill: communication
+
+@lesson 7.6 | Your right to respect | ⚖️ | townhall
+hook: Does the law say anything about how people treat you at work?
+learn: Employers must provide a safe workplace, and that includes protecting you from bullying and harassment.
+learn: Treating someone worse because of things like race, sex, religion or disability is against the law.
+learn: {nz:Employment New Zealand~au:The Fair Work Ombudsman} has free advice if something isn't right.
+play: match | Match each right to what it means | A safe workplace=Your employer must manage risks, including bullying; No discrimination=You can't be treated worse because of who you are; Fair pay=At least the legal minimum for your age and job; Privacy=Your personal details aren't shared without good reason
+check: mcq | Is discrimination at work against the law? | Yes* | No | Only for adults
+check: tf | Employers must protect workers from bullying. | true
+home: Look up your rights at work on {nz:employment.govt.nz~au:fairwork.gov.au} with a grown-up.
+skill: workrights
+
+@lesson 8.1 | Jobs that changed | 🏛️ | museum
+hook: Lift operator, switchboard operator, ice deliverer. What happened to these jobs?
+learn: Technology has always changed work. Lifts became automatic, phone calls connected themselves, and fridges replaced ice deliveries.
+learn: Some jobs disappeared, but new ones appeared, like phone technicians and app developers.
+learn: The skills that last are the ones that help you learn new things.
+play: match | Match each old job to what replaced it | Lift operator=Automatic lifts; Switchboard operator=Automatic phone exchanges; Ice deliverer=Home fridges; Typing pool=Computers and word processors
+check: mcq | What happens when technology changes jobs? | Some jobs go, and new ones appear* | All jobs disappear | Nothing changes
+check: tf | New jobs often appear when technology changes. | true
+home: Ask an older family member about a job that has changed a lot in their lifetime.
+skill: future
+
+@lesson 8.2 | What AI is good at | 🤖 | online
+hook: AI can write, draw and answer questions. So what can't it do well?
+learn: AI is good at spotting patterns, summarising, drafting and repetitive tasks.
+learn: It can make mistakes, sound sure when it's wrong, and miss what people really need.
+learn: People are still needed to check its work, make judgement calls and care for others.
+play: sort | AI can help a lot, People still lead | Drafting a first version of an email=AI can help a lot; Comforting a scared patient=People still lead; Sorting thousands of photos=AI can help a lot; Deciding what's fair in a team argument=People still lead; Spotting patterns in sales numbers=AI can help a lot; Checking that an AI answer is actually right=People still lead | Where does AI help, and where do people lead?
+check: mcq | What's a weakness of AI tools? | They can sound sure when they're wrong* | They never make mistakes | They can't do anything
+check: tf | People should check AI's work. | true
+home: Ask a grown-up whether they use AI at work, and how they check it.
+skill: future
+
+@lesson 8.3 | Human skills | 💛 | workshop
+hook: Which skills will matter even more as machines get smarter?
+learn: Skills like empathy, teamwork, creativity and solving messy problems are hard to automate.
+learn: So is hands-on work in changing places, like plumbing, nursing and building.
+learn: Being able to learn new tools quickly matters in every job.
+play: tap | Tap the skills that are hard to automate | ❤️:yes:Empathy and care; 🤝:yes:Teamwork; 🎨:yes:Creative ideas; 🔧:yes:Hands-on work in changing places; 🔁:no; 📋:no
+check: mcq | Which skill is hard to automate? | Empathy* | Copying numbers into a list | Sorting files by date
+check: tf | Learning new tools quickly helps in every job. | true
+home: Pick one human skill you'd like to get better at, and one way to practise it.
+skill: future
+
+@lesson 8.4 | Using AI honestly | ⚖️ | online
+hook: An AI tool could write your whole assignment in seconds. Should you use it?
+learn: Follow your school's or workplace's rules about AI. They're different in different places.
+learn: Using AI to brainstorm or check your work can help. Handing in its work as your own is cheating.
+learn: Don't paste private or personal information into AI tools without permission.
+play: path | You have an essay due tomorrow. An AI tool could write it all for you. | Use it to brainstorm ideas, then write it yourself, following the school's rules => good: You learn, and you stay honest. | Copy its essay and hand it in as yours => bad: That's cheating, and you don't learn the skill. | Paste in a classmate's essay and ask AI to reword it => bad: That's still copying someone else's work.
+check: mcq | What's an honest way to use AI for schoolwork? | Brainstorming, within your school's rules* | Handing in its work as your own | Rewording a friend's essay
+check: tf | You shouldn't paste private information into AI tools without permission. | true
+home: Find your school's rules on AI and talk them through with a grown-up.
+skill: honesty
+
+@lesson 8.5 | Keep learning | 📚 | garden
+hook: Many adults change careers two or three times. Will you?
+learn: Many people will retrain several times during their working lives.
+learn: Learning doesn't stop at school. Short courses, apprenticeships, online learning and on-the-job training all count.
+learn: The habit of learning is a skill in itself.
+play: order | Learn a new skill, step by step | Pick a skill you want; Find a good course, video series or mentor; Practise a little, often; Get feedback; Use it in a real project
+check: mcq | What's a skill in itself? | The habit of learning* | Never changing | Avoiding new things
+check: tf | Learning doesn't stop when you leave school. | true
+home: Pick one new skill to learn this month and plan your first step.
+skill: learning
+
+@lesson 8.6 | Will robots take my job? | 🦾 | stage
+hook: Some people say AI will take all the jobs. Are they right?
+learn: Experts disagree. Some tasks will be automated, and new jobs will be created.
+learn: Jobs that mix technology with human skills often grow.
+learn: You can't control the future, but you can build skills that adapt.
+play: debate | Will AI take most jobs? | Unlikely all at once. It will change many jobs, remove some tasks and create new jobs* | Yes, there'll be no jobs left by next year | Some jobs could shrink a lot, so it's wise to build skills that adapt.
+check: mcq | Which jobs often grow when technology changes? | Ones that mix tech with human skills* | Ones that never change | None
+check: tf | Experts disagree about how AI will change work. | true
+home: Talk with a grown-up about how their job might change in the next ten years.
+skill: future
 
 @band launchers
 @unit 1 | Contracts and pay | Employment agreements, rates and conditions
@@ -1154,3 +1951,269 @@ check: mcq | What should you do before negotiating pay? | Research the usual ran
 check: tf | You can negotiate things other than pay, like hours or training. | true
 home: Ask a grown-up whether they've ever negotiated pay, and how it went.
 skill: negotiating
+
+@lesson 5.1 | Employee or contractor? | 🪪 | workshop
+hook: The ad says "contractor, $30 an hour". Is that better than $25 an hour as an employee?
+learn: Employees get minimum wage, paid holidays, sick leave and {nz:employer KiwiSaver contributions~au:super} by law.
+learn: Contractors run their own business. They usually get none of that, and they sort out their own tax.
+learn: Some businesses call workers "contractors" to dodge those costs. What counts is how the job really works, not the label.
+play: sort | Sounds like an employee, Sounds like a contractor | The boss sets your hours and tells you how to work=Sounds like an employee; You quote a price and choose how to do the job=Sounds like a contractor; You get paid sick leave=Sounds like an employee; You send invoices to several clients=Sounds like a contractor; You use your own tools and van=Sounds like a contractor; You wear the company uniform and work only for them=Sounds like an employee | Which does it sound like?
+check: mcq | Which usually comes with paid holidays? | Being an employee* | Being a contractor | Neither, ever
+check: tf | Calling someone a contractor makes them one, however the job works. | false | {nz:The Employment Relations Authority~au:The Fair Work Ombudsman and the courts} look at how the job really works.
+home: Ask a grown-up if they've ever worked as a contractor, and what was different.
+skill: selfemployed
+
+@lesson 5.2 | Setting your rate | 💲 | bank
+hook: An employee earns $25 an hour. Why might a contractor doing the same work charge $40?
+learn: Contractors don't get paid holidays, sick days or {nz:KiwiSaver contributions from an employer~au:super from an employer}.
+learn: They also pay for their own tools, phone, insurance, and the unpaid time spent quoting and travelling.
+learn: A rough start: work out what you need to earn in a year, then divide by the hours you'll really bill, not 40 hours every week.
+try: $40,000 ÷ 1,000 billable hours = $40 an hour :: gap | $36,000 ÷ 1,200 billable hours = $_ an hour | 30
+play: slider | You want to earn $45,000 a year and can bill about 1,250 hours. What hourly rate do you need? | 20 | 60 | 36 | $ | 2 | 1
+check: gap | $50,000 ÷ 1,000 billable hours = $_ an hour | 50
+check: mcq | Why do contractors charge more per hour than employees earn? | They cover their own leave, costs and unbilled time* | They're greedy | Their tax is lower
+home: List the costs a self-employed cleaner or gardener might have, with a grown-up.
+skill: pricing
+
+@lesson 5.3 | Writing an invoice | 🧾 | workshop
+hook: You did a $300 job. How do you ask to be paid?
+learn: An invoice is a bill you send to a client. It's also your record for tax.
+learn: Include your name, an invoice number, the date, what you did, the amount and when it's due.
+learn: Add how to pay you, like your bank account. {nz:Once you're registered for GST, show your GST number too.~au:Include your ABN, or the client may have to hold back 47% for tax.}
+play: diff | A rushed invoice, then a proper one. Tap what's been fixed. | Sam Lee; Invoice #014, 3 November; For: lawn stuff; Amount: 300; Pay me soon | Sam Lee; Invoice #014, 3 November; For: mowing and edging at 12 Rata St; Amount: $300; Due 17 November, by bank transfer
+check: mcq | What should every invoice include? | What you did, the amount and when it's due* | Only a smiley face | Your password
+check: tf | {nz:Once you're registered for GST, your invoices need your GST number.~au:If you don't quote an ABN, the client may hold back 47% of the payment.} | true
+home: Make an invoice template with a grown-up for a pretend job.
+skill: invoicing
+
+@lesson 5.4 | Tax as a contractor | 🏛️ | townhall
+hook: A client pays you $1,000. How much of it is really yours?
+learn: {nz:Some contractors have tax taken from each payment, called schedular payments. You choose a rate on an IR330C form, or 45% is taken.~au:Contractors who quote an ABN usually get the full amount, with no tax taken out, and pay the tax later.}
+learn: {nz:At the end of the year you file a return. If too little tax was taken, you pay the rest.~au:You lodge a tax return and pay what you owe. Bigger earners may pay PAYG instalments during the year.}
+learn: A common habit is moving 25% to 30% of every payment into a separate tax savings account.
+try: 25% of $1,000 = $250 :: gap | 30% of $1,000 = $_ | 300
+play: path | A client pays you $2,000 for building a website. | Move $500 to a tax savings account straight away => good: When the tax bill comes, the money's ready. | Spend it all and worry about tax later => bad: Tax bills arrive months later, and penalties add up if you can't pay. | Don't tell {nz:IRD~au:the ATO} about it => bad: That's tax evasion, which is illegal. Clients may report what they paid you too.
+check: mcq | A smart tax habit for contractors? | Put aside a share of every payment* | Spend first, sort tax later | Never file a return
+check: tf | {nz:If you don't give a tax rate for schedular payments, 45% can be taken.~au:Contractors who quote an ABN usually get paid with no tax taken out.} | true
+home: Ask a grown-up who's self-employed how they put money aside for tax.
+skill: tax
+
+@lesson 5.5 | Getting paid on time | ⏰ | bank
+hook: Your invoice was due two weeks ago. The client has gone quiet. Now what?
+learn: Agree on payment terms before you start, like "payment within 14 days".
+learn: For bigger jobs, ask for a deposit up front.
+learn: If payment is late, send a polite reminder, then call. {nz:The Disputes Tribunal can hear claims up to $60,000.~au:A small claims tribunal or local court can help if they still don't pay.}
+play: order | Chase a late payment, step by step | Check the invoice went to the right person; Send a polite reminder email; Phone to ask when it'll be paid; Send a final notice with a date; {nz:Lodge a claim with the Disputes Tribunal~au:Lodge a small claim with your state's tribunal or court}
+check: mcq | How can you protect yourself on a big job? | Ask for a deposit up front* | Never send an invoice | Do it for free
+check: tf | Agreeing on payment terms before you start helps avoid problems. | true
+home: Ask a grown-up what "due within 7 days" means on a bill, and what happens if it's late.
+skill: invoicing
+
+@lesson 5.6 | Your own safety net | 🦺 | bank
+hook: You're self-employed and you break your wrist. Who pays you while you heal?
+learn: Self-employed people get no paid sick leave or holidays, so they need a buffer of savings.
+learn: {nz:ACC covers injuries, and self-employed people pay ACC levies themselves. It can pay up to 80% of lost earnings after an injury.~au:Sole traders don't get workers' compensation automatically. Many buy income protection insurance.}
+learn: {nz:No employer pays into your KiwiSaver, so set up your own contributions and get the government contribution.~au:Nobody has to pay super for you, so think about adding your own.}
+play: tap | Tap the safety nets a self-employed person should think about | 💰:yes:An emergency savings buffer; 🩹:yes:Cover if you're injured or sick; 🏦:yes:Your own retirement savings; 🎰:no; 🛡️:yes:Insurance for your tools or business; 🎟️:no
+check: mcq | What do self-employed people miss out on? | Paid sick leave and holidays* | Being allowed to work | Having customers
+check: tf | {nz:ACC can pay part of your lost earnings if you're injured.~au:Sole traders don't get workers' compensation automatically.} | true
+home: Ask a grown-up what would happen to their income if they couldn't work for a month.
+skill: selfemployed
+
+@lesson 6.1 | What is workplace bullying? | 🚫 | workshop
+hook: Your supervisor jokes about you in front of everyone, every shift. Is that just banter?
+learn: Workplace bullying is repeated, unreasonable behaviour that can harm someone's health or safety.
+learn: It includes put-downs, yelling, being left out on purpose, or being set up to fail.
+learn: One disagreement, or fair feedback about your work, isn't bullying. A pattern of unreasonable behaviour is.
+play: sort | Could be bullying, Normal work | Being mocked in front of others every shift=Could be bullying; Your manager asking you to redo a task properly=Normal work; Being left off the roster for speaking up=Could be bullying; Being told politely that you were late twice=Normal work; Being shouted at and sworn at often=Could be bullying; A one-off disagreement about stacking shelves=Normal work | Bullying or normal work?
+check: mcq | What makes behaviour bullying? | It's repeated and unreasonable* | It happened once | You didn't like the feedback
+check: tf | Fair feedback about your work is not bullying. | true
+home: Talk with a grown-up about the difference between tough feedback and bullying.
+skill: workrights
+
+@lesson 6.2 | Sexual harassment | ✋ | townhall
+hook: A co-worker keeps commenting on your body. You've asked them to stop. What now?
+learn: Sexual harassment is unwelcome sexual behaviour, like comments, touching, messages or requests.
+learn: It's against the law, and your employer must take steps to prevent it and deal with it.
+learn: {nz:You have 12 months to raise a personal grievance about sexual harassment.~au:Employers have a legal duty to prevent it. The Australian Human Rights Commission and the Fair Work Commission can help.}
+play: path | A co-worker keeps sending you messages about your looks after you've asked them to stop. | Save the messages, report it to your manager or HR, and get support => good: You have evidence, and your employer must act. | Ignore it and hope it stops => bad: It often gets worse, and your employer can't act if they don't know. | Quit without telling anyone => ok: Leaving can be the right call, but reporting first protects you and others.
+check: mcq | Who has to deal with sexual harassment at work? | Your employer* | Only you | Nobody
+check: tf | Sexual harassment at work is against the law. | true
+home: Find out with a grown-up where to get support if something like this happened.
+skill: workrights
+
+@lesson 6.3 | Discrimination | ⚖️ | townhall
+hook: You're told you won't get more shifts because of your religion. Is that allowed?
+learn: Discrimination is treating someone worse because of things like race, sex, disability, religion, age or sexual orientation.
+learn: It's against the law in hiring, pay, shifts, training and firing.
+learn: Some things are allowed, like {nz:starting-out~au:junior} pay rates set by law, or needing a licence the job requires.
+play: sort | Likely discrimination, Probably not | Turned down because of your skin colour=Likely discrimination; Turned down because you don't have the licence the job needs=Probably not; Paid less than a male co-worker for the same work=Likely discrimination; Given no shifts because you use a wheelchair, when the job could be adjusted=Likely discrimination; Not rostered on days you said you can't work=Probably not; A {nz:starting-out~au:junior} pay rate set by law=Probably not | Discrimination or not?
+check: mcq | Which is likely discrimination? | Being paid less because of your sex* | Not being hired without a licence the job needs | Being rostered on the days you're free
+check: tf | Discrimination at work is against the law. | true
+home: Look up the {nz:Human Rights Commission~au:Australian Human Rights Commission} website with a grown-up.
+skill: workrights
+
+@lesson 6.4 | Raising a problem formally | 📨 | townhall
+hook: You've talked to your manager, but nothing has changed. What's next?
+learn: Put your complaint in writing: dates, what happened, who saw it and what you'd like to happen.
+learn: {nz:In NZ, you usually have 90 days to raise a personal grievance with your employer.~au:In Australia, if you're dismissed you usually have only 21 days to lodge an unfair dismissal claim.}
+learn: Get advice early from {nz:Employment New Zealand (0800 20 90 20), a union or a lawyer~au:the Fair Work Ombudsman (13 13 94), a union or a lawyer}.
+play: build | Build a written complaint | What happened, with dates; Who was involved and who saw it; How it affected you; What you've already tried; What you'd like to happen next
+check: mcq | What makes a complaint strongest? | Dates, details and what you'd like to happen* | Lots of angry words | Leaving out the dates
+check: tf | {nz:You usually have 90 days to raise a personal grievance.~au:You usually have 21 days to lodge an unfair dismissal claim.} | true
+home: Save {nz:Employment New Zealand's~au:the Fair Work Ombudsman's} number in your phone.
+skill: workrights
+
+@lesson 6.5 | Unsafe work | ⚠️ | workshop
+hook: Your boss tells you to use a machine nobody's trained you on. Do you have to?
+learn: Your employer must train you and keep you safe at work.
+learn: You can refuse work you reasonably believe would seriously risk your health or safety.
+learn: Tell your manager why. If it isn't fixed, report it to {nz:WorkSafe~au:your state's work health and safety regulator}.
+play: path | Your boss tells you to use the meat slicer, but nobody has trained you. | Say you haven't been trained and ask to be shown first => good: That's your right, and it keeps you safe. | Use it anyway so you don't annoy them => bad: Untrained use of machines causes serious injuries. | Walk out without saying anything => ok: You'd be safe, but explaining why gives them the chance to fix it.
+check: mcq | Can you refuse seriously unsafe work? | Yes, if you reasonably believe it's a serious risk* | No, never | Only on weekends
+check: tf | Employers must train you to use equipment safely. | true
+home: Ask a grown-up what safety training they had at their first job.
+skill: safety
+
+@lesson 6.6 | Where to get help | 🧭 | townhall
+hook: Something's wrong at work and your manager won't fix it. Who else can help?
+learn: {nz:Employment New Zealand gives free advice on pay, rights and workplace problems.~au:The Fair Work Ombudsman gives free advice on pay, rights and workplace problems.}
+learn: {nz:WorkSafe deals with health and safety. The Human Rights Commission deals with discrimination.~au:Your state's safety regulator deals with health and safety. The Australian Human Rights Commission deals with discrimination.}
+learn: Unions can help too. {nz:Community Law centres and Citizens Advice Bureau give free advice.~au:Community legal centres give free advice.}
+play: match | Match each problem to who can help | Unpaid wages={nz:Employment New Zealand~au:The Fair Work Ombudsman}; An unsafe machine={nz:WorkSafe~au:Your state's safety regulator}; Discrimination because of your race={nz:The Human Rights Commission~au:The Australian Human Rights Commission}; Not sure where to start={nz:Citizens Advice Bureau~au:A community legal centre}
+check: mcq | Who can help with unpaid wages? | {nz:Employment New Zealand~au:The Fair Work Ombudsman}* | A gossip site | Nobody
+check: tf | Some help, like unions and community law services, can be free. | true
+home: Find the website of a union for a job you might do one day, with a grown-up.
+skill: help
+
+@lesson 7.1 | Transferable skills | 🧳 | workshop
+hook: You've worked in a café for two years. Now you want an office job. Did the café teach you anything useful?
+learn: Transferable skills are ones you can take from job to job.
+learn: Customer service, teamwork, time management, handling money and staying calm under pressure all transfer.
+learn: Name them clearly on your CV, with examples.
+play: match | Match each café task to the skill it shows | Serving a rush of customers=Working under pressure; Handling the till=Accuracy with money; Training a new staff member=Teaching and leadership; Sorting out a complaint=Problem solving and communication
+check: mcq | Which is a transferable skill? | Communication* | Knowing one café's menu | Your uniform size
+check: tf | Skills from one job can help you in a very different job. | true
+home: List three transferable skills from any job, sport or club you've done.
+skill: careers
+
+@lesson 7.2 | Spot your skills | 🔦 | home
+hook: You've played in a band, coached juniors and run a market stall. What skills does that show?
+learn: Skills come from everywhere: jobs, sport, volunteering, hobbies and study.
+learn: Use action words like "led", "organised", "trained", "fixed" and "sold".
+learn: Add numbers when you can: "Coached 12 juniors every Saturday for two seasons."
+play: diff | A plain skills list, then a stronger one. Tap what's been improved. | Played in a band; Coached juniors; Had a market stall | Played in a band and organised three paid gigs; Coached 12 juniors every Saturday for two seasons; Ran a market stall, selling about $300 a month
+check: mcq | Which CV line is strongest? | "Trained 4 new staff on the till"* | "Did some training" | "Was there"
+check: tf | Numbers can make your skills more convincing. | true
+home: Rewrite one line of your CV or a pretend CV with an action word and a number.
+skill: cv
+
+@lesson 7.3 | Upskilling | 📚 | online
+hook: You want to move into IT, but you've worked in retail. How do you build the skills?
+learn: Short courses, micro-credentials and online certificates can add skills quickly.
+learn: Some employers pay for training. It's worth asking.
+learn: Volunteering and side projects let you practise and show proof.
+play: sort | Good way to upskill, Not so useful | A short course in your new field=Good way to upskill; Watching random videos with no practice=Not so useful; Building a small project to show employers=Good way to upskill; Helping with the IT at your sports club=Good way to upskill; Paying $3,000 for an unaccredited "guaranteed job" course=Not so useful; Asking your employer about paid training=Good way to upskill | Useful or not?
+check: mcq | What's a good way to prove a new skill? | A project you can show* | Saying you're good at it | A selfie
+check: tf | Some employers pay for staff training. | true
+home: Find one short course in a field you're curious about, and check who accredits it.
+skill: careers
+
+@lesson 7.4 | Leaving a job well | 👋 | workshop
+hook: You've got a new job. How do you leave the old one without burning bridges?
+learn: Check your employment agreement for your notice period, and give notice in writing.
+learn: Work your notice properly and hand over your tasks.
+learn: Thank your manager. They might give you a reference one day.
+play: order | Leave a job well | Check your notice period; Tell your manager in person first; Give written notice; Hand over your tasks and notes; Say thanks and goodbye
+check: mcq | Where do you find your notice period? | Your employment agreement* | A friend's contract | A movie
+check: tf | Leaving well can help you get a good reference later. | true
+home: Ask a grown-up how they left a job, and what they'd do differently.
+skill: careers
+
+@lesson 7.5 | Should you change? | 🤷 | garden
+hook: You've been in your job for a year and feel stuck. Change now, or stay?
+learn: Changing jobs can bring more pay, new skills and a better fit.
+learn: Staying can build deeper skills, a track record, and sometimes a promotion.
+learn: Before you leave, talk to your manager about what could change. Then decide.
+play: debate | Should you change jobs after a year if you feel stuck? | Maybe. First talk to your manager about growth, then decide based on your goals* | Always quit straight away | Some say staying longer builds a stronger record and deeper skills.
+check: mcq | What's a smart step before quitting because you feel stuck? | Talk to your manager about growth* | Quit by text | Stop turning up
+check: tf | Changing jobs can bring new skills and better pay. | true
+home: Ask two grown-ups how long they stayed in their first proper job, and why they left.
+skill: careers
+
+@lesson 7.6 | A career pivot | 🔀 | online
+hook: Lots of people change careers completely. How do you plan a big switch?
+learn: Research the new field. Talk to people in it, and find out what skills and qualifications it needs.
+learn: Build a bridge: study part-time, take on side projects, or try a related role first.
+learn: Save a buffer, because a pivot can mean a pay dip for a while.
+play: build | Plan a career pivot | Research the new field; Talk to people who work in it; Find your skills gap; Build skills part-time; Save a money buffer; Apply for a bridging role
+check: mcq | Why save a buffer before a career change? | Your pay might dip for a while* | It's the law | You won't need money
+check: tf | Talking to people already in a field is a good first step. | true
+home: Ask a grown-up who has changed careers how they did it.
+skill: careers
+
+@lesson 8.1 | What leaders do | 🧭 | workshop
+hook: You've just been made shift leader. What changes?
+learn: Leaders set clear goals, share the work fairly and help the team do its best.
+learn: Leading isn't bossing. Good leaders listen, support and set the example.
+learn: You're now responsible for the team's results, not just your own.
+play: sort | Good leadership, Poor leadership | Explaining the plan for the shift clearly=Good leadership; Taking the easy jobs and leaving the hard ones=Poor leadership; Thanking people for good work=Good leadership; Blaming the team for your own mistake=Poor leadership; Jumping in to help in a rush=Good leadership; Playing favourites=Poor leadership | Good or poor leadership?
+check: mcq | What do good leaders do? | Set clear goals and support the team* | Boss people around | Only look after themselves
+check: tf | Leaders are responsible for the team's results. | true
+home: Ask a grown-up about the best leader they've worked with, and what made them good.
+skill: leadership
+
+@lesson 8.2 | Delegating | 📋 | workshop
+hook: There's too much to do, and you're trying to do it all yourself. What's the fix?
+learn: Delegating means giving tasks to the right people, with clear instructions.
+learn: Match tasks to people's skills, and give them chances to grow.
+learn: Check in, but don't hover. Trust people to do the job.
+play: match | Match each task to the best person | Training the new starter on the till=The person who knows the till best; Making a sign for the specials=The co-worker who's great at design; Handling a tricky complaint=You, as the leader; A simple restock of napkins=The newest team member, to build confidence
+check: mcq | What makes delegating work? | Clear instructions to the right person* | Dumping jobs you hate | Doing everything yourself
+check: tf | Delegating can help team members grow. | true
+home: Next time you have a group project, try sharing out the tasks by people's strengths.
+skill: leadership
+
+@lesson 8.3 | Feedback as a leader | 💬 | workshop
+hook: A team member keeps arriving 10 minutes late. How do you raise it?
+learn: Talk privately and soon, and stick to the facts: what happened, and its effect.
+learn: Ask what's going on. There might be a reason you can help with.
+learn: Agree on what happens next, and praise them in front of others when it improves.
+play: chat | Talking privately to a team member who's often late | them: You wanted to see me? | me: Thanks for coming. You've been about 10 minutes late three times this week, and it leaves the counter short. Is everything OK?*/You're always late and it's annoying/Everyone's talking about you being late | them: My bus timetable changed. I'm sorry. | me: Thanks for telling me. Could we move your start time by 15 minutes so it works with the bus?*/Not my problem/Get an earlier bus or else
+check: mcq | How should a leader raise a problem? | Privately, with facts, asking what's going on* | In front of everyone | By gossiping
+check: tf | Good leaders praise in front of others and raise problems in private. | true
+home: Practise raising a small problem with facts, not blame, with a grown-up.
+skill: feedback
+
+@lesson 8.4 | Running a good meeting | 🗓️ | townhall
+hook: Your team meeting went for an hour and nothing was decided. What went wrong?
+learn: Good meetings have a clear purpose and a short agenda.
+learn: Let everyone speak, keep to time and finish with decisions: who does what, by when.
+learn: If it could be a message, skip the meeting.
+play: order | Run a good meeting | Decide the purpose; Share a short agenda; Start on time; Let everyone have their say; Agree who does what, by when; Send a short summary afterwards
+check: mcq | How should a good meeting end? | With who does what, by when* | With no decisions | With a long chat about the weekend
+check: tf | Some meetings could just be a message. | true
+home: Run a five-minute family meeting with a purpose, an agenda and a decision.
+skill: leadership
+
+@lesson 8.5 | Making a tough call | 🧠 | workshop
+hook: Two team members both want Saturday off. You can only give it to one. What do you do?
+learn: Tough calls need fair rules, applied the same way to everyone.
+learn: Explain your reasons honestly, even when people won't like the answer.
+learn: Look for a fair solution, like taking turns, before you decide.
+play: path | Two team members both want this Saturday off. Only one can have it. | Check who had the last one off, and offer the other person next Saturday => good: A fair rule, clearly explained. | Give it to your friend => bad: Playing favourites destroys trust. | Avoid deciding and let them fight it out => bad: Leaders need to make the call.
+check: mcq | What makes a tough call fairer? | Clear rules applied the same way to everyone* | Picking your friends | Flipping a coin without explaining
+check: tf | Leaders should explain their reasons, even for unpopular decisions. | true
+home: Talk with a grown-up about a tough call they had to make, and how they made it fair.
+skill: leadership
+
+@lesson 8.6 | Owning the team's mistakes | 🛡️ | workshop
+hook: Your team sent a big catering order to the wrong address. The client is furious. Who takes the blame?
+learn: Good leaders take responsibility for the team's mistakes in public.
+learn: Fix the problem first. Then work out what went wrong with the team, in private.
+learn: Focus on fixing the process, not on blaming one person.
+play: debate | Should a leader take the blame for a team member's mistake? | Yes, in public. Then fix the process with the team in private* | No. Name the person who did it so the client knows | People still need to own their part, and that's fine to talk about privately.
+check: mcq | After a team mistake, what should a leader do first? | Fix the problem for the client* | Find someone to blame | Hide it
+check: tf | Fixing the process helps stop mistakes happening again. | true
+home: Think of a mistake in a group you were in. How could the process have been fixed?
+skill: responsibility

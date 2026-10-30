@@ -297,3 +297,270 @@ check: tf | It's normal to change a budget after a few weeks. | true
 home: Do a quick monthly check-in with a grown-up: what was planned and what really happened?
 skill: budgeting
 
+@lesson 5.1 | Kinds of accounts | 🏦 | bank
+hook: Everyday, savings, offset, term deposit. Which accounts do you actually need?
+learn: An everyday account is for paying bills and spending. It usually earns little or no interest.
+learn: A savings account earns interest, sometimes only if you add money and don't withdraw that month.
+learn: A term deposit locks your money for a set time at a set rate. An offset account cuts mortgage interest.
+play: match | Match each account to its job | Everyday account=Spending and paying bills; Bonus savings account=Earning interest if you follow the rules; Term deposit=Locking money away at a fixed rate; Offset account=Reducing interest on a home loan
+check: mcq | Which locks your money for a set time? | A term deposit* | An everyday account | A debit card
+check: tf | Some savings accounts only pay bonus interest if you follow rules. | true
+home: Look at a bank's website with a grown-up and compare two savings accounts.
+skill: banking
+
+@lesson 5.2 | Fees to dodge | 💸 | bank
+hook: Your bank took $15 this month. What for?
+learn: Common fees include monthly account fees, overdrawn fees, dishonour fees and overseas transaction fees.
+learn: Using another bank's ATM can cost a fee too.
+learn: Most fees can be avoided: choose a no-fee account, set up alerts and keep a buffer.
+play: tap | Tap the fees you can often avoid | 🏧:yes:Using another bank's ATM; 📉:yes:Overdrawn fees; 💳:yes:Overseas transaction fees; 🍞:no; 🎬:no; 📆:yes:Monthly account fees
+check: mcq | How can you avoid overdrawn fees? | Set low-balance alerts and keep a buffer* | Spend faster | Ignore your balance
+check: tf | Many banks offer accounts with no monthly fee. | true
+home: Check a bank statement with a grown-up for any fees.
+skill: banking
+
+@lesson 5.3 | Sending money right | ➡️ | bank
+hook: You type one wrong digit in an account number. Where does your money go?
+learn: Bank transfers are hard to undo. A wrong account number can send money to a stranger.
+learn: Many banks now check that the name you type matches the account before you pay. Read that warning.
+learn: {nz:Double-check the account number before you pay. For a new payee, start with a small test payment.~au:PayID lets you pay to a phone number or email, and shows the name before you send.}
+play: order | Pay a new person safely | Get their details directly from them; Type the details carefully; Check the name-match result; Send a small test payment if it's a lot of money; Confirm they got it before sending the rest
+check: mcq | What should you do if the bank says the name doesn't match? | Stop and check with the person directly* | Pay anyway | Try random numbers
+check: tf | Bank transfers are easy to undo. | false | Once money is sent, it can be very hard to get back.
+home: Ask a grown-up how they check details before paying someone new.
+skill: banking
+
+@lesson 5.4 | Automatic payments and direct debits | 🔁 | bank
+hook: Your gym still takes $20 a week, three months after you stopped going. Why?
+learn: An automatic payment is one you set up to send money on a schedule. You control it.
+learn: A direct debit lets a company take money from your account. Cancel with the company and check your bank.
+learn: Make sure there's enough money on the day, or you could get a dishonour fee.
+play: sort | Automatic payment, Direct debit | You set up $50 to savings every payday=Automatic payment; Your phone company takes the bill each month=Direct debit; You send rent to your landlord every week=Automatic payment; The gym takes your fee each week=Direct debit | Which is it?
+check: mcq | How do you stop a direct debit? | Cancel with the company and check your bank* | Hope it stops | Change your phone number
+check: tf | A dishonour fee can happen if there isn't enough money when a payment is due. | true
+home: Ask a grown-up which bills they pay by direct debit.
+skill: banking
+
+@lesson 5.5 | Overdrafts | 📉 | bank
+hook: Your bank offers a $500 overdraft "for emergencies". Should you take it?
+learn: An overdraft lets your account go below $0, up to a limit. It's a loan.
+learn: Interest is often high, and some come with monthly fees.
+learn: An emergency fund is cheaper. If you use an overdraft, have a plan to pay it back fast.
+play: path | You're offered a $500 overdraft. You have $300 in savings. | Say no for now and keep building your emergency fund => good: You avoid fees and high interest. | Take it and use it for a concert ticket => bad: That's borrowing at high interest for a want. | Take it, but only use it in a real emergency and pay it back fast => ok: That's safer, but check the fees first.
+check: mcq | What is an overdraft? | A loan that lets your account go below $0* | Free money | A savings account
+check: tf | Overdraft interest is often high. | true
+home: Ask a grown-up whether they've ever used an overdraft, and what it cost.
+skill: borrowing
+
+@lesson 5.6 | Banking scams | 🚨 | online
+hook: "This is your bank. Your account is under attack. Move your money to a safe account now." Real?
+learn: Your bank will never ask you to move money to a "safe account" or share a login code.
+learn: Scammers fake bank phone numbers and texts. Hang up and call the number on your card.
+learn: If you've sent money to a scammer, call your bank straight away. Speed matters.
+play: scam | Which messages are scams? | Fraud team here. Move your savings to this safe account now=scam; We've blocked a suspicious card payment. Please call the number on the back of your card=real; Read me the code we just sent so we can verify you=scam; Your statement is ready in the banking app=real; Your account is locked. Log in at this link to unlock it=scam | Banks never ask you to move money to a safe account, share codes or log in through a text link.
+check: mcq | Someone says they're your bank and asks for a code. What do you do? | Hang up and call the number on your card* | Read them the code | Text it to them
+check: tf | If you've been scammed, calling your bank fast can help. | true
+home: Find your bank's official phone number with a grown-up and save it in your phone.
+skill: scams
+
+@lesson 6.1 | Ways to pay for study | 🎓 | townhall
+hook: Loan, allowance, scholarship. Which ones do you pay back?
+learn: A loan has to be paid back later. An allowance or scholarship usually doesn't.
+learn: {nz:StudyLink runs student loans and the Student Allowance. If you're under 24, the allowance depends on your parents' income.~au:HECS-HELP covers your share of uni fees. Youth Allowance helps with living costs and can depend on your family's income.}
+learn: A part-time job helps too, but keep enough time to pass your study.
+play: match | Match each one to how it works | {nz:Student Loan~au:HECS-HELP}=Borrowed now, paid back from your pay later; {nz:Student Allowance~au:Youth Allowance}=Weekly help that you don't repay; Scholarship=An award you apply for, usually not repaid; Part-time job=Money you earn while you study
+check: mcq | Which usually has to be paid back? | {nz:A student loan~au:A HELP loan}* | A scholarship | A birthday gift
+check: tf | {nz:The Student Allowance depends on your parents' income if you're under 24.~au:Youth Allowance can depend on your family's income.} | true
+home: Look at {nz:studylink.govt.nz~au:studyassist.gov.au} with a grown-up and find one kind of help you might get.
+skill: study
+
+@lesson 6.2 | {nz:Fees Free~au:Supported places and Fee-Free TAFE} | 🆓 | townhall
+hook: {nz:You've heard study can be "fees free". Is it, for you?~au:Uni fees are "subsidised". What does that actually mean?}
+learn: {nz:Final-year Fees Free pays up to $12,000 of fees for eligible learners who finish their first qualification in 2026.~au:A Commonwealth supported place means the government pays part of your uni fees. You pay the rest, called the student contribution.}
+learn: {nz:The scheme is ending, so learners who finish in 2027 or later won't get it.~au:Fee-Free TAFE covers fees for some courses in areas where workers are needed.}
+learn: Rules change. Check {nz:StudyLink and the TEC~au:Study Assist and your state's TAFE site} for what applies when you start.
+play: path | {nz:You're starting a degree in 2027, and your budget counts on final-year Fees Free.~au:You assume every TAFE course is free under Fee-Free TAFE.} | Check the official site for your course and start date => good: {nz:Learners finishing in 2027 or later won't get it, so now you can plan for the real cost.~au:Only some courses are covered, so now you know your real cost.} | Assume it's all sorted => bad: Rules change. A surprise fee bill could wreck your budget. | Ask a friend who studied years ago => ok: They mean well, but the rules may have changed since.
+check: mcq | Where should you check what help applies to you? | The official {nz:StudyLink and TEC~au:Study Assist and TAFE} sites* | A two-year-old forum post | A friend's guess
+check: tf | {nz:Final-year Fees Free is ending after learners who finish in 2026.~au:A Commonwealth supported place means the government pays part of your fees.} | true
+home: Find one course you're interested in and check its fees on the official site with a grown-up.
+skill: study
+
+@lesson 6.3 | How the loan grows | 📈 | bank
+hook: Does your study loan get bigger while you're studying?
+learn: {nz:NZ student loans are interest-free while you live in New Zealand.~au:HELP debts don't charge interest, but each 1 June they're indexed to keep up with prices or wages, whichever rose less.}
+learn: {nz:If you go overseas for more than 6 months, interest starts and you must make set repayments.~au:Indexation is added to whatever you still owe, so the balance can creep up if you don't repay.}
+learn: Either way it's real debt, so borrow only what you need.
+play: path | You live at home for free, but you're offered more loan money than you need. | Borrow only what you really need => good: Less debt to repay later. | Take it all and spend it on fun => bad: That's extra debt for things you'll soon forget. | Take it all and leave it in savings => ok: Some people keep a buffer this way, but it's still debt you'll repay.
+check: mcq | {nz:When is an NZ student loan interest-free?~au:What happens to a HELP debt each 1 June?} | {nz:While you live in New Zealand~au:It's indexed to keep up with prices or wages}* | {nz:Never~au:It doubles} | {nz:Only in your first year~au:It's wiped}
+check: tf | A study loan is still a debt that has to be repaid. | true
+home: Ask a grown-up who studied how long their study loan took to repay.
+skill: debt
+
+@lesson 6.4 | Paying it back | 🧮 | bank
+hook: Your first full-time job pays $50,000. How much goes on your study loan?
+learn: {nz:Once you earn over $24,128 a year, 12c of every dollar above that goes on your loan, taken from your pay.~au:In 2026–27, once your income is over $69,528, you repay 15c of each dollar above that, through the tax system.}
+learn: {nz:$50,000 − $24,128 = $25,872. 12% of that is about $3,105 a year.~au:On $80,000: $80,000 − $69,528 = $10,472. 15% of that is about $1,571 a year.}
+learn: You can pay extra any time to clear it sooner.
+try: 10% of $5,000 = $500 :: gap | 15% of $2,000 = $_ | 300
+play: gap | {nz:You earn $40,000. 12% of the amount over $24,128, to the nearest dollar, is $_ a year.~au:You earn $90,000. 15% of the amount over $69,528, to the nearest dollar, is $_ a year.} | {nz:1905~au:3071}
+check: mcq | How are {nz:student loan~au:HELP} repayments usually made? | Through your pay or tax* | You post cash | They're optional
+check: tf | You can make extra repayments to clear the loan sooner. | true
+home: Use the {nz:IRD~au:ATO} study loan calculator with a grown-up for a pretend salary.
+skill: debt
+
+@lesson 6.5 | Scholarships | 🏅 | online
+hook: Free money for study exists. Why don't more people get it?
+learn: {nz:Universities, iwi, councils, businesses and community trusts all offer scholarships.~au:Universities, businesses, community groups and charities all offer scholarships.}
+learn: Many are for something specific: a subject, a hometown, a sport, a background or money need. Some get very few applicants.
+learn: Apply for lots. An honest application that answers the actual question beats a copy-and-paste one.
+play: order | Apply for a scholarship | Search scholarship lists early; Check you meet the rules; Note the closing date; Write an answer to the actual question; Ask a teacher to read it; Submit before the deadline
+check: mcq | What makes a scholarship application stronger? | Answering the actual question honestly* | Copying the same answer everywhere | Sending it after the deadline
+check: tf | Some scholarships get very few applicants. | true
+home: Search for three scholarships you might qualify for, with a grown-up.
+skill: study
+
+@lesson 6.6 | Study debt and your future | 🌏 | bank
+hook: You finish your degree with a loan, then get a job offer overseas. Does the loan follow you?
+learn: {nz:If you're overseas for more than 6 months, your loan starts charging interest and you must make set repayments.~au:If you move overseas, you still have to report your income and make HELP repayments if you earn enough.}
+learn: Missing repayments can lead to penalties, and {nz:IRD~au:the ATO} can still chase the debt.
+learn: Study debt can be worth it when it leads to skills and work you value. Borrow with a plan.
+play: debate | Is taking on study debt worth it? | It can be, if the course leads to skills and work you value and you borrow only what you need* | Never. All debt is bad | Some people do better earning while they learn, like apprentices. It depends on the path.
+check: mcq | {nz:What happens if you move overseas for more than 6 months?~au:Do you still repay HELP if you move overseas?} | {nz:Interest is charged and repayments are set~au:Yes, if you earn enough}* | {nz:The loan is wiped~au:No, it's wiped} | {nz:Nothing changes~au:Only if you come back}
+check: tf | Missing study loan repayments can lead to penalties. | true
+home: Talk with a grown-up about whether a path you like needs study debt, and how much.
+skill: debt
+
+@lesson 7.1 | Buying a used car | 🚗 | workshop
+hook: A $6,000 car looks perfect. What should you check before you hand over the money?
+learn: Get a pre-purchase inspection from a mechanic you choose, not one the seller picks.
+learn: {nz:Search the Personal Property Securities Register (PPSR) to check no money is owing on it, and check its history and odometer.~au:Search the Personal Property Securities Register (PPSR) to check no money is owing and it isn't stolen or written off.}
+learn: Meet in a safe place, and never pay before you've seen the car and its papers.
+play: order | Buy a used car safely | Set a budget that includes running costs; Research models and their common problems; Check the PPSR for money owing; Get an independent inspection; Test drive it; Pay safely and transfer the ownership
+check: mcq | Why check the PPSR? | To see if money is still owing on the car* | To find out its colour | To book a test drive
+check: tf | It's fine to pay a deposit before you've seen the car. | false | Many car scams ask for money first. See the car and its papers before paying.
+home: Look up a used car listing with a grown-up and list what you'd check.
+skill: cars
+
+@lesson 7.2 | What a car really costs | ⛽ | home
+hook: You bought the car for $6,000. What will it cost to keep it running?
+learn: Running costs include fuel, insurance, {nz:registration and Warrant of Fitness (WoF)~au:registration and compulsory third party (CTP) insurance}, servicing, tyres and parking.
+learn: For young drivers, insurance is often one of the biggest costs.
+learn: $3,500 a year is about $67 a week, on top of what you paid for the car.
+try: $2,600 a year ÷ 52 = $50 a week :: gap | $5,200 a year ÷ 52 = $_ a week | 100
+play: slider | Fuel $1,500, insurance $1,000, registration $600 and servicing $400. What's the yearly total? | 1000 | 6000 | 3500 | $ | 200 | 100
+check: mcq | What's often one of the biggest car costs for young drivers? | Insurance* | Air freshener | Washing it
+check: tf | A car's running costs can be thousands of dollars a year. | true
+home: Ask a grown-up what their car costs to run each year.
+skill: cars
+
+@lesson 7.3 | Do you need a car? | 🚲 | townhall
+hook: A car costs thousands a year. What are the other ways to get around?
+learn: Public transport, biking, walking, car-pooling and car-share services can cost much less.
+learn: Work out your real trips each week before you decide.
+learn: Sometimes a car is worth it, like for shift work or living far from buses.
+play: debate | Should you buy a car as soon as you get your licence? | Only if your trips need it. Buses, bikes and car-pooling can save thousands* | Yes, everyone needs a car straight away | For shift work or rural areas, a car can be the only realistic option.
+check: mcq | Before buying a car, what should you work out? | Your real trips each week, and what they'd cost other ways* | Your favourite colour | How loud the stereo is
+check: tf | For some people, a car is the only realistic option. | true
+home: Work out your weekly trips and what they'd cost by bus, bike or car.
+skill: cars
+
+@lesson 7.4 | Phones: plan or outright? | 📱 | online
+hook: "$0 upfront" for a new phone on a 36-month plan. Is it free?
+learn: The phone's price is spread across the plan. You still pay for it, sometimes more.
+learn: Compare the total cost of the plan over 36 months with buying the phone outright and getting a cheaper SIM-only plan.
+learn: Leaving early can mean paying off the rest of the phone in one go.
+play: price | Which costs less per month, over 36 months? | $0 upfront, then $95 a month:3420:36:months; Buy a $1,200 phone, then a $35 SIM-only plan:2460:36:months
+check: gap | $80 a month for 36 months = $_ | 2880
+check: tf | Leaving a phone plan early can mean paying off the phone in one go. | true
+home: Work out the total cost of a family member's phone plan with them.
+skill: deals
+
+@lesson 7.5 | Setting up your first flat | 🛋️ | home
+hook: You've signed for your first flat. What do you need to pay for before you move in?
+learn: Up-front costs can include the bond, rent in advance, moving costs, and connecting power and internet.
+learn: Furniture and kitchen gear add up fast. Second-hand, family hand-me-downs and buy-nothing groups help.
+learn: Get contents insurance from day one. A burglary or fire could wipe out everything you own.
+play: budget | Plan your $3,000 of move-in money | 3000 | Bond=1200; Rent in advance=600; Power and internet connection=100; Bed and mattress=300; Kitchen gear=0; Contents insurance=0 | Moving van hire:150
+check: mcq | How can you save on furniture? | Second-hand and hand-me-downs* | Buy everything new on credit | Skip the bed
+check: tf | Contents insurance can protect your things from day one. | true
+home: Make a list of what you'd need for your first kitchen, and price it second-hand.
+skill: renting
+
+@lesson 7.6 | Flatmates and shared bills | 🧾 | home
+hook: The power bill is $240. There are four flatmates, and one was away half the month. Who pays what?
+learn: Agree how bills are split before you move in, and write it down.
+learn: Many flats use a shared bills account, with everyone paying in the same amount each week.
+learn: If a bill is in your name, you're the one responsible for paying it, even if flatmates don't pay you back.
+play: chat | A flatmate hasn't paid their share of the internet for two months | them: Hey, sorry, I'm a bit short this month. | me: No worries, but can we agree when you'll catch up? It's in my name.*/You're the worst flatmate ever/Fine, I'll just pay it for ever | them: Payday's Friday. I'll pay both months then. | me: Great. Could we set up a weekly automatic payment to the bills account so it doesn't happen again?*/Whatever/I'm telling everyone
+check: mcq | When should flatmates agree how to split bills? | Before moving in* | When the debt collector calls | Never
+check: tf | If a bill is in your name, you're responsible for paying it. | true
+home: Ask a grown-up who has flatted how they split the bills.
+skill: renting
+
+@lesson 8.1 | What independence means | 🗽 | home
+hook: Financial independence: is it being rich, or something else?
+learn: Being financially independent means covering your own costs without relying on others or on debt.
+learn: It starts with earning, budgeting and a buffer. Later it can mean investments that pay some of your costs.
+learn: It's a path built over years, not one big win.
+play: sort | Builds independence, Works against it | A buffer of 3 months' costs=Builds independence; Paying rent with a credit card every month=Works against it; Knowing what you spend each month=Builds independence; Borrowing from friends to get to payday=Works against it; Growing your skills to earn more=Builds independence; A new car loan for every upgrade=Works against it | Which way does it push?
+check: mcq | Financial independence means... | Covering your own costs without relying on others or debt* | Winning the lottery | Never working
+check: tf | Financial independence is built over years. | true
+home: Ask a grown-up when they first felt financially independent, and what helped.
+skill: independence
+
+@lesson 8.2 | Lifestyle creep | 🐌 | bank
+hook: You got a pay rise, but somehow you're no better off. Where did it go?
+learn: Lifestyle creep is when your spending rises every time your income does.
+learn: Nicer flats, takeaways and upgrades feel small one by one, but together they swallow a raise.
+learn: A simple fix: when your pay goes up, save at least half of the rise.
+play: diff | Your weekly budget before and after a pay rise. Tap what crept up. | Take-home pay $900; Rent $280; Food $150; Going out $80; Saving $150 | Take-home pay $1,050; Rent $350; Food $210; Going out $160; Saving $150
+check: gap | Your pay goes up $200 a week and you save half the rise. That's $_ a week | 100
+check: tf | Saving part of every pay rise helps stop lifestyle creep. | true
+home: Ask a grown-up which costs crept up for them as they earned more.
+skill: independence
+
+@lesson 8.3 | Your net worth | ⚖️ | bank
+hook: Two 25-year-olds both earn $70,000. Why might one be far better off?
+learn: Net worth is what you own minus what you owe.
+learn: You own things like savings, investments, {nz:KiwiSaver~au:super} and a car. You owe things like credit cards, car loans and study loans.
+learn: Tracking it once a year shows whether you're moving forward.
+try: $15,000 owned − $5,000 owed = $10,000 net worth :: gap | $20,000 owned − $12,000 owed = $_ net worth | 8000
+play: sort | Something you own, Something you owe | A savings account=Something you own; A credit card balance=Something you owe; Your {nz:KiwiSaver~au:super} balance=Something you own; A car loan=Something you owe; Units in a fund=Something you own; A {nz:student loan~au:HELP debt}=Something you owe | Own or owe?
+check: gap | $30,000 owned − $10,000 owed = $_ | 20000
+check: tf | Net worth is what you own minus what you owe. | true
+home: Work out the net worth of a pretend 25-year-old with a grown-up.
+skill: networth
+
+@lesson 8.4 | Money and relationships | 💑 | home
+hook: You move in with a partner. Do you share all your money, some, or none?
+learn: Couples handle money in different ways: fully shared, partly shared or separate.
+learn: A common way is a joint account for shared bills, plus your own accounts for personal spending.
+learn: Talk early and honestly about debt, goals and spending habits. Money stress is a big cause of arguments.
+play: chat | Your partner suggests merging all your money | them: Should we just put all our money in one account? | me: Maybe! Could we start with a joint account for rent and bills, and keep our own for fun money?*/No way, what's mine is mine/Sure, and you can manage it all | them: Good idea. How much should we each put in? | me: Let's look at what we both earn and agree on a fair amount each.*/You should pay it all/Let's not talk about it
+check: mcq | What's a common way couples share money? | A joint account for shared bills, plus their own accounts* | Never talking about money | One person hiding their debts
+check: tf | Talking about money early can prevent arguments later. | true
+home: Ask a grown-up how they'd suggest a couple talks about money.
+skill: relationships
+
+@lesson 8.5 | Growing your income | 🚀 | workshop
+hook: Spending less has limits. Earning more doesn't. How do people grow their income in their twenties?
+learn: Build skills employers pay for, through qualifications, certificates and experience.
+learn: Ask for pay reviews with evidence, and check what other employers pay.
+learn: A side income can help, but protect your time and health, and keep up with the tax.
+play: path | You've been in your job for 18 months and learned a lot. Your pay hasn't changed. | Ask for a pay review, with examples of your work and what similar jobs pay => good: You've given them a clear reason to say yes. | Quietly resent it and do less => bad: Your pay won't change, and your reputation suffers. | Quit with nothing lined up => bad: Losing your income with no plan is risky.
+check: mcq | What helps when you ask for a pay review? | Examples of your work and pay research* | Threats | Saying nothing
+check: tf | Building skills can grow your income over time. | true
+home: Look up the pay range for a job you'd like in five years, with a grown-up.
+skill: income
+
+@lesson 8.6 | Your yearly money check-up | 🩺 | bank
+hook: A car gets a check-up every year. Should your money?
+learn: Once a year, review your budget, savings, debts, insurance and {nz:KiwiSaver~au:super}.
+learn: Check fees, interest rates and plans. Switch if you're paying too much.
+learn: Then set a few goals for next year, like growing your emergency fund or clearing a card.
+play: build | Do a yearly money check-up | Work out your net worth; Compare your budget with what you really spent; Check debts and interest rates; Check insurance and {nz:KiwiSaver~au:super} fees; Set three goals for next year
+check: mcq | What's worth checking once a year? | Fees, rates, debts and goals* | Only your phone wallpaper | Nothing
+check: tf | Switching to a lower-fee account or fund can save money. | true
+home: Pick a date each year for your money check-up and put it in a calendar.
+skill: planning
+

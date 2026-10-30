@@ -292,3 +292,269 @@ check: mcq | What's the best way to compare fees? | Turn them all into dollars a
 home: Use a fund comparison tool with a grown-up and find the lowest-fee fund of one type.
 skill: fees
 
+@lesson 5.1 | Growth and defensive | 🛡️ | shares
+hook: Shares, property, bonds and cash. Why do funds mix them?
+learn: Growth assets, like shares and property, can grow a lot but bounce around more.
+learn: Defensive assets, like bonds and cash, grow less but are steadier.
+learn: A fund's mix of the two sets its risk and how much it might return.
+play: sort | Growth asset, Defensive asset | Shares in companies=Growth asset; Cash in the bank=Defensive asset; Property=Growth asset; Government bonds=Defensive asset; A world shares fund=Growth asset; Term deposits=Defensive asset | Growth or defensive?
+check: mcq | Which is a defensive asset? | Government bonds* | Shares | Property
+check: tf | Growth assets usually bounce around more. | true
+home: Look up your {nz:KiwiSaver~au:super} fund's mix of growth and defensive assets with a grown-up.
+skill: risk
+
+@lesson 5.2 | Conservative to growth | 🎚️ | shares
+hook: Conservative, balanced or growth. What do these names mean?
+learn: A conservative fund holds mostly cash and bonds. It's steadier but grows slowly.
+learn: A balanced fund holds a mix, often around half in growth assets.
+learn: A growth fund is mostly shares. It swings more but has usually grown more over long periods.
+play: match | Match each fund to its mix | Conservative=Mostly cash and bonds; Balanced=Roughly half shares and property; Growth=Mostly shares and property; Aggressive=Almost all shares
+check: mcq | Which fund swings the most? | Aggressive* | Conservative | Balanced
+check: tf | Growth funds have usually grown more over long periods. | true
+home: Find out with a grown-up which fund type their {nz:KiwiSaver~au:super} uses.
+skill: risk
+
+@lesson 5.3 | Match the fund to the time | ⌛ | shares
+hook: Money for a car next year and money for age 65. Same fund?
+learn: Money you need soon should be in steadier places. A crash right before you need it would hurt.
+learn: Money you won't touch for 10 years or more can ride out the ups and downs of growth assets.
+learn: {nz:KiwiSaver money for a first home in 2 years might suit a more conservative fund.~au:Super for retirement decades away often suits a growth fund.}
+play: route | Match each goal to a sensible fund type | A car in 1 year=Cash or conservative; A house deposit in 3 years=Conservative or balanced; University in 6 years=Balanced; Retirement in 45 years=Growth
+check: mcq | Money for retirement in 45 years usually suits... | A growth fund* | A cash account only | Under the mattress
+check: tf | Money you need soon should be in steadier places. | true
+home: Talk with a grown-up about which of your goals are short and which are long.
+skill: planning
+
+@lesson 5.4 | How much wobble can you take? | 🎢 | shares
+hook: Your $10,000 drops to $7,000 in a month. Do you hold or panic?
+learn: Your risk tolerance is how much ups and downs you can handle without panicking.
+learn: Online risk questionnaires ask about your goals, timeframe and how you'd react to falls.
+learn: Picking a fund you can stick with matters more than picking the "best" fund.
+play: path | Your growth fund fell 30% in a crash. You don't need the money for 20 years. | Hold and keep adding as normal => good: You give the fund time to recover. | Switch to cash straight away => bad: You lock in the loss and might miss the recovery. | Stop all contributions for ever => bad: You miss buying at lower prices.
+check: mcq | What is risk tolerance? | How much ups and downs you can handle* | How fast you can run | Your bank's rules
+check: tf | A fund you can stick with matters more than the "best" fund. | true
+home: Try an online risk questionnaire with a grown-up, like {nz:the Sorted website~au:the Moneysmart website}.
+skill: risk
+
+@lesson 5.5 | Bumpier but bigger | 📊 | shares
+hook: Growth funds fall harder in crashes. Why would anyone choose them?
+learn: Over long periods, growth funds have usually returned more than conservative ones.
+learn: For example, a growth fund might average 6% to 7% a year and a conservative one 3% to 4%, but neither is guaranteed.
+learn: Over 40 years, that gap makes a huge difference.
+play: compound | $10,000 at 4% a year for 40 years, like a conservative fund | 10000 | 4 | 40
+check: slider | $10,000 at 7% for 40 years becomes about $150,000. At 4% it's about $48,000. How much more? | 0 | 150000 | 102000 | $ | 8000 | 1000
+check: mcq | Why choose a growth fund for the long term? | It has usually grown more over long periods* | It never falls | It's guaranteed
+home: Ask a grown-up what their fund has returned on average over the past 10 years.
+skill: compounding
+
+@lesson 5.6 | Switching at the wrong time | 🔀 | shares
+hook: In the 2020 crash, some people switched to conservative funds. What happened next?
+learn: Markets recovered quickly in 2020. People who switched after the fall often missed the bounce back.
+learn: Switching after a fall turns a paper loss into a real one.
+learn: Switch funds because your goals or timeframe changed, not because of headlines.
+play: debate | Should you switch to a conservative fund when markets crash? | Usually not. Switching after a fall locks in losses and can miss the recovery* | Yes. Always switch when the news is scary | If your goal is very soon, moving to steadier funds can make sense, ideally planned before a crash.
+check: mcq | What's a good reason to switch funds? | Your goals or timeframe changed* | A scary headline | A friend's tip
+check: tf | Switching after a fall can turn a paper loss into a real one. | true
+home: Ask a grown-up if they've ever switched funds, and why.
+skill: patience
+
+@lesson 6.1 | Money with values | 🌱 | shares
+hook: Your savings might own shares in companies you don't agree with. Would you want that?
+learn: Ethical or responsible investing means choosing investments that match your values.
+learn: Some funds leave out industries like tobacco, weapons, gambling or fossil fuels.
+learn: Others pick companies that do well on things like the environment or how they treat workers.
+play: sort | Often left out, Often chosen | Tobacco companies=Often left out; Solar power companies=Often chosen; Weapons makers=Often left out; Gambling companies=Often left out; Companies with strong worker safety records=Often chosen; Recycling companies=Often chosen | In an ethical fund, are these usually left out or chosen?
+check: mcq | What is ethical investing? | Choosing investments that match your values* | Only buying cheap shares | Investing with no fees
+check: tf | Some funds leave out tobacco companies. | true
+home: Ask a grown-up if their {nz:KiwiSaver~au:super} fund leaves out any industries.
+skill: ethical
+
+@lesson 6.2 | Screens and ESG | 🔍 | shares
+hook: Negative screen, positive screen, ESG. What do these mean?
+learn: A negative screen leaves out companies, like tobacco or weapons makers.
+learn: A positive screen picks companies doing well, like clean energy.
+learn: ESG stands for environmental, social and governance: how a company treats the planet, people, and how it's run.
+play: match | Match each term to what it means | Negative screen=Leaving out certain industries; Positive screen=Choosing companies doing good things; Environmental=How a company treats the planet; Social=How it treats workers and communities; Governance=How the company is run and kept honest
+check: mcq | What does a negative screen do? | Leaves certain companies out* | Picks only the biggest companies | Sets the fund's colours
+check: tf | The "G" in ESG is about how a company is run. | true
+home: Look up the ESG or responsible investing page of a fund with a grown-up.
+skill: ethical
+
+@lesson 6.3 | Greenwashing | 🍃 | online
+hook: A fund calls itself "green", but it owns oil companies. Is that OK?
+learn: Greenwashing is when something claims to be greener or more ethical than it really is.
+learn: {nz:The FMA has warned fund managers about misleading green claims.~au:ASIC has taken fund managers to court over greenwashing, and courts have fined them millions.}
+learn: Check what a fund actually owns, not just its name or its pictures of trees.
+play: scam | Which fund claims look like greenwashing? | A "planet-friendly" fund that owns coal miners=scam; A fund that lists every company it owns and explains its exclusions=real; A fund with leafy pictures but no details on what it leaves out=scam; A fund that says which industries it screens out and shows its holdings=real; A "100% green" claim with no evidence=scam | Look for evidence and full holdings lists, not green words and pictures.
+check: mcq | How can you check a fund's green claims? | Look at what it actually owns* | Trust the leafy logo | Count the green words
+check: tf | Regulators have taken action against fund managers for greenwashing. | true
+home: Find a "green" or "sustainable" claim in an ad with a grown-up. What evidence does it give?
+skill: ethical
+
+@lesson 6.4 | Does ethical cost more? | ⚖️ | shares
+hook: If you leave out some companies, do you earn less?
+learn: Research is mixed. Some ethical funds have done better and some worse, over different periods.
+learn: Leaving out whole industries means less spread, which can change returns either way.
+learn: Fees matter too. Some ethical funds charge more, so compare fees like any other fund.
+play: debate | Should you choose an ethical fund even if it might return a little less? | It can make sense if those values matter to you and the fees are fair* | No. Only returns matter, ever | Others say the wider spread of a full index fund is worth more, and you can give to causes separately.
+check: mcq | What should you compare between ethical funds? | Fees, holdings and returns* | Only the name | Only the logo
+check: tf | Ethical funds always earn less. | false | Research is mixed. Some have done better and some worse.
+home: Compare the fees of an ethical fund and a regular index fund with a grown-up.
+skill: ethical
+
+@lesson 6.5 | Owners have a voice | 🗳️ | townhall
+hook: You own a tiny bit of a company. Can you change what it does?
+learn: Shareholders can vote at company meetings, on things like who sits on the board.
+learn: Big fund managers vote for their investors, and can push companies to change.
+learn: Some investors choose to stay in and push for change, instead of selling.
+play: path | A company in your fund keeps polluting a river. | Ask your fund how it votes and what it's doing about it => good: Funds can pressure companies, and investors asking helps. | Ignore it => ok: That's your choice, but your money still backs the company. | Post angry comments with no facts => bad: That rarely changes anything and can spread false claims.
+check: mcq | How can fund managers push companies to change? | By voting and talking with them as owners* | By hacking them | By hiding
+check: tf | Shareholders can vote at company meetings. | true
+home: Look for a fund's voting record or stewardship report online with a grown-up.
+skill: ethical
+
+@lesson 6.6 | Look inside the fund | 🗂️ | shares
+hook: How can you tell what your fund really owns?
+learn: Many funds publish a full list of the companies they own.
+learn: {nz:KiwiSaver funds must publish their holdings, and Mindful Money lets you search them.~au:Super funds must publish their holdings. The Responsible Investment Association Australasia also certifies some funds.}
+learn: Compare that list with what the fund promises.
+play: diff | What the fund promises, then what it holds. Tap what doesn't match. | Clean energy companies; No fossil fuels; No tobacco; No weapons | Clean energy companies; An oil and gas company; No tobacco; A company that makes missile parts
+check: mcq | Where can you see what a fund owns? | Its published holdings list* | Its TV ad | Its logo
+check: tf | You can compare a fund's holdings with its promises. | true
+home: Look up a {nz:KiwiSaver~au:super} fund's holdings list with a grown-up. Name three companies in it.
+skill: ethical
+
+@lesson 7.1 | Tulip mania | 🌷 | museum
+hook: In the 1630s, people in the Netherlands paid amazing prices for single flower bulbs. Why?
+learn: Tulips were rare and fashionable. Some bulbs sold for more than a skilled worker earned in a year.
+learn: Many people bought hoping to sell to someone else for even more.
+learn: In early 1637 the buyers vanished and prices crashed. Historians think some stories are exaggerated, but it's still told as a classic bubble.
+play: mystery | It happened in the Netherlands in the 1630s; People paid huge prices for flower bulbs; Many bought only to sell for more; Prices crashed in 1637 | Tulip mania* | The gold rush | The dot-com bubble
+check: mcq | Why did tulip prices rise so high? | People bought to sell to someone else for more* | Tulips cured illness | The government set the price
+check: tf | Tulip prices crashed in 1637. | true
+home: Tell a grown-up the tulip story and ask if they can think of a modern one.
+skill: bubbles
+
+@lesson 7.2 | How bubbles grow and pop | 🫧 | shares
+hook: Prices keep rising, everyone's talking about it, and your cousin just bought in. Is it a bubble?
+learn: A bubble is when prices rise far above what something is really worth, driven by excitement.
+learn: Bubbles often follow a pattern: a new idea, rising prices, hype, everyone piling in, then a crash.
+learn: People who buy near the top often lose the most.
+play: order | Put the stages of a bubble in order | A new idea gets people excited; Early buyers make money; Prices rise fast and it's all over the news; Everyone piles in, even people who never invest; Prices crash as buyers run out
+check: mcq | Who usually loses most in a bubble? | People who buy near the top* | People who never bought | Early sellers
+check: tf | In a bubble, prices rise far above what something is really worth. | true
+home: Ask a grown-up if they remember a time "everyone" was buying something.
+skill: bubbles
+
+@lesson 7.3 | The dot-com bubble | 💻 | museum
+hook: In the late 1990s, any company with ".com" in its name seemed to soar. What happened next?
+learn: Investors poured money into internet companies, even ones that made no profit.
+learn: In 2000 the bubble burst. By 2002, the Nasdaq index had fallen nearly 80% from its peak.
+learn: The internet did change the world, but many of those companies disappeared. A good idea isn't a good investment at any price.
+play: sort | Bubble thinking, Investor thinking | It has ".com" in its name, so it must go up=Bubble thinking; Does the company actually make a profit?=Investor thinking; Everyone's buying, so I should too=Bubble thinking; What price am I paying compared with what it earns?=Investor thinking; It doubled last month, so it'll double again=Bubble thinking; How would I feel if it fell 50%?=Investor thinking | Which kind of thinking is it?
+check: mcq | What did many dot-com companies lack? | Profits* | Websites | Names
+check: tf | A good idea is always a good investment, whatever the price. | false | Paying too much can lose money, even for a great idea.
+home: Ask a grown-up which internet companies they remember from the early 2000s. Do they still exist?
+skill: bubbles
+
+@lesson 7.4 | Meme stocks | 🦍 | online
+hook: In 2021, GameStop shares jumped from under $20 to over $300 in a few weeks. Why?
+learn: People on social media urged each other to buy GameStop, partly to hurt hedge funds betting against it.
+learn: The price rocketed, swung wildly, then dropped back. Some got rich, but many who bought late lost a lot.
+learn: When a price moves on hype, not on the business, it can fall just as fast.
+play: path | Everyone online says a meme stock will "go to the moon". It's already up 500%. | Skip it, or only use money you could afford to lose completely => good: Hype can reverse in hours. Protecting your savings comes first. | Put all your savings in now => bad: Buying after a 500% rise on hype is very risky. Many late buyers lost heavily. | Borrow money to buy more => bad: If it crashes, you'd lose money you don't even have.
+check: mcq | What drove GameStop's 2021 jump? | Social media hype and a rush of buyers* | Record profits | A new law
+check: tf | Prices that rise on hype can fall just as fast. | true
+home: Talk with a grown-up about why buying because "everyone online is" is risky.
+skill: hype
+
+@lesson 7.5 | FOMO | 😬 | online
+hook: Your friends all made money on a hot stock. You didn't buy. Do you jump in now?
+learn: FOMO, the fear of missing out, pushes people to buy after prices have already shot up.
+learn: People share their wins, not their losses, so it looks like everyone's winning.
+learn: Stick to your plan. Missing one hot stock won't ruin you. Chasing every one might.
+play: chat | Your friend is buzzing about a stock | them: I made $200 on this stock this week! Get in before it's too late! | me: Nice! What does the company actually do?*/I'm putting all my savings in now/Just tell me what to buy | them: No idea, but it's going up! | me: I'll stick to my plan. If it still looks good after I've researched it, I might buy a little.*/Then I'll buy double/OK, I'll borrow money for it
+check: mcq | What does FOMO make people do? | Buy after prices have already shot up* | Save more calmly | Research more carefully
+check: tf | People tend to share their wins more than their losses. | true
+home: Next time you feel FOMO about anything, write down why before you act.
+skill: hype
+
+@lesson 7.6 | Spot the hype | 🚩 | stage
+hook: "This coin will 100x! Last chance! Don't get left behind!" What's wrong with this?
+learn: Hype uses urgency, huge promises and fear of missing out.
+learn: Real investment information talks about risk. Hype pretends there isn't any.
+learn: Be extra careful when the person hyping it gains if you buy.
+play: scam | Which posts are hype to be wary of? | This coin will 100x by Friday! Last chance!=scam; Index funds have usually grown over long periods, but can fall in the short term=real; I bought this stock, you should too! Link in bio=scam; A fund update showing fees, risks and past returns=real; Guaranteed 30% a month, everyone's doing it!=scam | Urgency, huge promises and "no risk" are signs of hype. Real investment information talks about risk.
+check: mcq | What do real investments talk about that hype ignores? | Risk* | Rockets | Secret codes
+check: tf | Be extra careful if the person hyping it gains when you buy. | true
+home: Find an investing post online with a grown-up. Is it information or hype?
+skill: hype
+
+@lesson 8.1 | Can teens invest? | 🧑 | townhall
+hook: You're 14 with $200 saved. Can you actually invest it?
+learn: Most platforms need you to be 18 to open your own account.
+learn: {nz:Under-18s can invest through an account a parent or guardian sets up, and many kids are already in KiwiSaver.~au:Under-18s usually invest through an account a parent or guardian holds for them, sometimes called a minor or trust account.}
+learn: The money is yours, but a grown-up has to agree and sign up with you.
+play: path | You're 14 and want to invest $200. | Ask a parent to help set up an account for you => good: That's the legal, safe way to start. | Sign up with a fake birth date => bad: That breaks the rules, and the account could be frozen. | Give the money to an online "investor" => bad: That's a classic scam.
+check: mcq | How do most under-18s invest? | Through an account a parent or guardian sets up* | By lying about their age | Through strangers online
+check: tf | Most platforms need you to be 18 to open your own account. | true
+home: Ask a grown-up whether they'd help you open an investment account, and what they'd want to know first.
+skill: investing
+
+@lesson 8.2 | Minimums and fractions | 🧩 | shares
+hook: One share costs $300. You have $50. Are you stuck?
+learn: Some platforms let you buy fractional shares: part of a share, for as little as a few dollars.
+learn: Many funds have low or no minimums, so you can start with $50 or less.
+learn: Starting small is fine. The habit matters more than the amount.
+try: $150 buys half of a $300 share :: gap | $75 buys _ of a $300 share | a quarter | a quarter; a half; one whole
+play: match | Match each amount to how much of a $300 share it buys | $30=A tenth; $75=A quarter; $150=A half; $300=One whole share
+check: mcq | What's a fractional share? | Part of one share* | A broken share | A free share
+check: tf | The habit of investing matters more than starting big. | true
+home: Look up the minimum investment for two funds with a grown-up.
+skill: investing
+
+@lesson 8.3 | Choosing a first fund | 🎯 | shares
+hook: There are thousands of shares and funds. Where does a first-time investor start?
+learn: Many people start with a low-fee, diversified fund, like a world index fund.
+learn: It owns hundreds or thousands of companies, so one bad company hurts less.
+learn: Avoid starting with a single hot stock or crypto just because it's in the news.
+play: sort | Sensible first choice, Risky first choice | A low-fee world index fund=Sensible first choice; A single meme stock=Risky first choice; A diversified growth fund=Sensible first choice; A coin an influencer is hyping=Risky first choice; A fund that tracks your country's biggest companies=Sensible first choice; Borrowing to buy one company's shares=Risky first choice | Sensible or risky as a first step?
+check: mcq | What's often a sensible first investment? | A low-fee, diversified fund* | A single hot stock | Whatever's trending
+check: tf | In a diversified fund, one bad company hurts less. | true
+home: Compare two diversified funds with a grown-up: fees, what they own, and minimums.
+skill: diversify
+
+@lesson 8.4 | Is the platform safe? | 🛡️ | online
+hook: You find a new investing app with amazing ads. How do you know it's safe?
+learn: {nz:Check it's on the Financial Service Providers Register, and look at the FMA's warnings list.~au:Check it holds an Australian Financial Services licence on ASIC's register.}
+learn: Read reviews from independent sources, not just the app's own ads.
+learn: Find out who holds your money, and what the fees are.
+play: scam | Which signs are red flags? | Guaranteed 20% returns every month=scam; Listed on the official register, with fees clearly shown=real; Pay the joining fee by gift card=scam; A support line that never asks for your password=real; Only takes payment in crypto=scam | Guarantees, gift cards and crypto-only payments are red flags. Licensed platforms show their fees clearly.
+check: mcq | What's a red flag for an investing app? | Guaranteed high returns* | Clear fees | Being on the official register
+check: tf | Reading independent reviews helps you check a platform. | true
+home: Check one investing app against the official register with a grown-up.
+skill: scams
+
+@lesson 8.5 | Start small, add often | 🌱 | shares
+hook: $10 a week doesn't sound like much. Does it add up?
+learn: $10 a week is $520 a year.
+learn: Add growth over many years, and small amounts can become a lot.
+learn: Regular, automatic amounts beat waiting until you have "enough".
+try: $10 × 52 weeks = $520 :: gap | $5 × 52 weeks = $_ | 260
+play: compound | Watch one year of $10 a week ($520) grow at 6% a year for 30 years | 520 | 6 | 30
+check: gap | $20 × 52 weeks = $_ | 1040
+check: tf | Regular small amounts beat waiting until you have "enough". | true
+home: Work out what you could invest each week, and what that adds up to in a year.
+skill: compounding
+
+@lesson 8.6 | Your investing plan | 📝 | home
+hook: Before you invest a cent, what should you write down?
+learn: Write why you're investing, how long for, and how much you'll add.
+learn: Write which fund you'll use, and why.
+learn: Write what you'll do if it drops 20%. Then talk it through with a grown-up.
+play: build | Write your first investing plan | Why I'm investing; How long I'll leave it; How much I'll add, and how often; Which fund, and why; What I'll do if it drops 20%
+check: mcq | Why write down what you'll do if it drops? | So you stay calm and don't panic-sell* | So you can sell fast | It isn't needed
+check: tf | Talking your plan through with a grown-up is a smart step. | true
+home: Write your plan on one page and go through it with a grown-up.
+skill: planning
+

@@ -289,6 +289,272 @@ check: tf | The Invest jar is for money you can leave alone for a long time. | t
 home: Look at your Invest jar with a grown-up. Has it gone up or down this week?
 skill: markets
 
+@lesson 5.1 | Eggs in one basket | 🧺 | shares
+hook: You carry all your eggs in one basket and trip. What happens?
+learn: If all your eggs are in one basket and it drops, they all break.
+learn: If you use lots of baskets, one drop only breaks a few.
+learn: Money works the same way. Spreading it out keeps it safer.
+play: path | You have 12 eggs to carry home. | Put them in 4 baskets with 3 eggs each => good: If one basket drops, you still have 9 eggs. | Put all 12 in one basket => bad: One trip and every egg breaks. | Carry them in your pockets => bad: They'll all get squashed!
+check: mcq | Why use lots of baskets? | So one drop doesn't break everything* | Baskets are pretty | Eggs like baskets
+check: tf | Spreading things out keeps them safer. | true
+home: Play a game with a grown-up: put toys in one box, then in three boxes. Which is safer if one box tips over?
+skill: diversify
+
+@lesson 5.2 | A stall with one fruit | 🍌 | stall
+hook: Your stall only sells bananas. What if nobody wants bananas today?
+learn: If you only sell one thing and nobody wants it, you sell nothing.
+learn: Selling bananas, apples and oranges means if one doesn't sell, others might.
+learn: Investors spread their money across lots of companies for the same reason.
+play: tap | Tap the stalls that are safer because they sell lots of things | 🍎:yes:Apples, pears and plums; 🍌:no; 🥕:yes:Carrots, peas and corn; 🍞:yes:Bread, buns and muffins; 🍋:no; 🧃:yes:Juice, water and milk
+check: mcq | Which stall is safer? | One that sells lots of fruit* | One that sells only bananas | One that sells nothing
+check: tf | Selling more than one thing can help if one thing doesn't sell. | true
+home: Look at a shop with a grown-up. How many different things does it sell?
+skill: diversify
+
+@lesson 5.3 | When one goes wrong | 🌧️ | shares
+hook: You own a little bit of three companies. One has a bad year. Are you OK?
+learn: When you own lots of things, one bad one doesn't ruin everything.
+learn: The good ones can make up for the bad one.
+learn: That's why investors say "spread it out".
+play: sort | Ice creams sell more, Raincoats sell more | A hot, sunny summer=Ice creams sell more; A wet, rainy summer=Raincoats sell more; A heatwave at the beach=Ice creams sell more; Storms every weekend=Raincoats sell more; A long, dry holiday=Ice creams sell more; A cold, drizzly winter=Raincoats sell more | You own a bit of both. Which company has the good year?
+check: mcq | You own three companies and one has a bad year. What helps? | The other two can make up for it* | Nothing helps | Selling everything
+check: tf | Owning different things means one bad one doesn't ruin everything. | true
+home: Talk with a grown-up about why a raincoat company might do well when ice cream sells less.
+skill: diversify
+
+@lesson 5.4 | Different kinds | 🔀 | shares
+hook: Is owning three ice cream companies spreading it out?
+learn: Three ice cream companies all have bad years at the same time, like a cold summer.
+learn: Owning different kinds, like food, toys and power, spreads it out better.
+learn: Different kinds of companies do well at different times.
+play: match | Match each company to something that could help it | Ice cream company=A hot summer; Umbrella company=A rainy winter; Toy company=The holidays; Bike company=Lots of sunny weekends
+check: mcq | Which spreads it out better? | A food, a toy and a power company* | Three ice cream companies | One company
+check: tf | Different kinds of companies can do well at different times. | true
+home: Name three very different companies with a grown-up.
+skill: diversify
+
+@lesson 5.5 | A fund is a big basket | 🛍️ | shares
+hook: What if you could own a tiny bit of hundreds of companies at once?
+learn: A fund is like a giant basket that holds lots of companies.
+learn: When you buy into a fund, you own a tiny bit of all of them.
+learn: It's an easy way to spread your money out.
+play: sort | One company, A fund | A tiny bit of 500 companies=A fund; Just one toy company=One company; Food, power, phone and bank companies all together=A fund; Only the ice cream company=One company; Companies from lots of countries=A fund; A single bike shop=One company | One company or a big fund basket?
+check: mcq | What is a fund like? | A big basket of many companies* | One single company | A piggy bank with a lock
+check: tf | A fund lets you own a little of many companies. | true
+home: Ask a grown-up if their {nz:KiwiSaver~au:super} is in a fund, and how many companies it owns.
+skill: funds
+
+@lesson 5.6 | My money baskets | 🫙 | bank
+hook: In Chorecast, your money is in four jars. Is that like baskets?
+learn: Your four jars spread your money out for different jobs.
+learn: Spend is for now, Vault is safe, Invest grows and Give helps.
+learn: Keeping some in each jar means one choice doesn't use up everything.
+play: sort | jars | Money for a game this week=Spend; Money to keep safe for later=Vault; Money to grow for years=Invest; Money for the food bank=Give; Money for an ice cream today=Spend; Money for your future=Invest | Which jar?
+check: mcq | Which jar is for keeping money safe? | Vault* | Spend | Give
+check: tf | Having four jars spreads your money out for different jobs. | true
+home: Check how much is in each of your four jars with a grown-up.
+skill: jars
+
+@lesson 6.1 | Thank you, says the bank | 🏦 | bank
+hook: You lend the bank your money. Why does it give you extra back?
+learn: When you keep money in a bank, the bank lends some of it to other people.
+learn: To say thank you, the bank pays you a little extra. That extra is called interest.
+learn: You still get all your own money back, plus the interest.
+play: order | How bank interest works | You put money in the bank; The bank lends some to other people; They pay the bank back with extra; The bank pays you a little extra too; Your savings grow
+check: mcq | What is interest? | Extra money the bank pays you* | A kind of coin | A bank fee
+check: tf | When you save in a bank, you get your own money back plus interest. | true
+home: Ask a grown-up if their savings account pays interest, and how much.
+skill: interest
+
+@lesson 6.2 | More money, more interest | 💰 | bank
+hook: Mia saves $10. Leo saves $100. Who gets more interest?
+learn: Interest is a small part of what you've saved. More savings means more interest.
+learn: If the bank pays 10c for every $10, then $100 earns $1.
+learn: Saving more is the first way to earn more interest.
+try: $10 earns 10c, so $20 earns 20c :: gap | $10 earns 10c, so $50 earns _c | 50
+play: match | Match each amount to its interest, at 10c for every $10 | $10=10c; $30=30c; $50=50c; $100=$1
+check: mcq | Who gets more interest? | Leo, with $100* | Mia, with $10 | They get the same
+check: tf | Saving more money earns more interest. | true
+home: Count the money in your money box. How much interest would 10c for every $10 give you?
+skill: interest
+
+@lesson 6.3 | Longer is better | ⏰ | bank
+hook: Leave your money in for one week or for one year. Which earns more interest?
+learn: Interest keeps coming for as long as your money stays in.
+learn: The longer you leave it, the more interest you get.
+learn: Taking money out early means less interest.
+play: compound | Watch $20 grow with interest over 10 years | 20 | 5 | 10
+check: mcq | Which earns more interest? | Leaving money in for a year* | Leaving it in for a week | Taking it out today
+check: tf | Taking money out early means less interest. | true
+home: With a grown-up, pick some money you could leave in the bank for a whole year.
+skill: interest
+
+@lesson 6.4 | Borrowing costs extra | 🔁 | bank
+hook: If saving earns interest, what happens when you borrow?
+learn: When you borrow money, you pay interest. You give back more than you borrowed.
+learn: Savers get interest. Borrowers pay interest.
+learn: That's why it's better to save first when you can.
+play: sort | You get interest, You pay interest | Saving in the bank=You get interest; Borrowing to buy a car=You pay interest; Money in your Chorecast Vault=You get interest; Paying for things late on a credit card=You pay interest; A savings account for your goal=You get interest; A loan to buy a house=You pay interest | Get or pay?
+check: mcq | You borrow $10 and pay back $11. What was the extra $1? | Interest* | A present | A coin you found
+check: tf | Savers get interest and borrowers pay interest. | true
+home: Ask a grown-up about something people often borrow money for.
+skill: interest
+
+@lesson 6.5 | Your Vault pays interest | 🔒 | bank
+hook: Your Chorecast Vault grows a tiny bit every day. Where does that come from?
+learn: The Vault is like a pretend bank inside Chorecast. It pays interest every day.
+learn: Your Trust Score can earn bonus Vault interest. Doing your habits and must-do chores pushes it up.
+learn: Leave money in the Vault and the interest keeps adding up.
+play: tap | Tap the things that help your Vault grow | 🪙:yes:Adding money to the Vault; ⭐:yes:A high Trust Score for bonus interest; ⏳:yes:Leaving it there for a long time; 🍭:no; 🛍️:no; ✅:yes:Doing your must-do chores
+check: mcq | What can earn bonus Vault interest? | A high Trust Score* | Taking money out | Forgetting chores
+check: tf | The Vault pays interest every day. | true
+home: Look at your Vault with a grown-up and see how much interest it has paid.
+skill: interest
+
+@lesson 6.6 | Look for the best rate | 🔎 | bank
+hook: One bank pays 2% interest. Another pays 4%. Which should you pick?
+learn: Different banks pay different amounts of interest. The rate tells you how much.
+learn: A higher rate means your money grows faster.
+learn: Kids' savings accounts often have special rates. A grown-up can help you compare them.
+play: path | Bank A pays 2%. Bank B pays 4%. Both are safe and have no fees. | Choose Bank B => good: Your money grows twice as fast. | Choose Bank A because its sign is prettier => bad: A pretty sign doesn't grow your money. | Keep it under your bed => bad: Under the bed pays no interest at all.
+check: mcq | Which rate makes money grow faster? | 4%* | 2% | 0%
+check: tf | Different banks can pay different interest rates. | true
+home: Compare the interest rate on two kids' savings accounts with a grown-up.
+skill: interest
+
+@lesson 7.1 | Customers who come back | 🔁 | stall
+hook: Two bakeries. One has a queue every morning. One is empty. Why?
+learn: A strong business makes something people want, again and again.
+learn: Happy customers come back and tell their friends.
+learn: When lots of people keep buying, the business grows.
+play: tap | Tap the things that make customers come back | 😋:yes:Tasty food; 😊:yes:Friendly staff; 🧼:yes:A clean shop; 😠:no; 🪳:no; ⏱️:yes:Quick service
+check: mcq | Why do customers come back? | They like what the business sells* | They're lost | They have to
+check: tf | Happy customers often tell their friends. | true
+home: Think of a shop your family goes back to again and again. Why do you like it?
+skill: business
+
+@lesson 7.2 | Earn more than you spend | 🧮 | stall
+hook: A lemonade stand takes $20 but spends $25 on lemons and cups. Is it doing well?
+learn: A business needs to earn more than it spends. The extra is called profit.
+learn: If it spends more than it earns, it's losing money.
+learn: Strong businesses make a profit year after year.
+try: $20 earned − $15 spent = $5 profit :: gap | $30 earned − $20 spent = $_ profit | 10
+play: sort | Making a profit, Losing money | Earns $50, spends $30=Making a profit; Earns $20, spends $25=Losing money; Earns $100, spends $60=Making a profit; Earns $10, spends $12=Losing money; Earns $40, spends $35=Making a profit; Earns $5, spends $9=Losing money | Profit or loss?
+check: gap | $40 earned − $25 spent = $_ profit | 15
+check: tf | A business that spends more than it earns is losing money. | true
+home: Ask a grown-up what costs a café has to pay before it makes a profit.
+skill: profit
+
+@lesson 7.3 | Something special | ✨ | stall
+hook: Why do people walk past three ice cream shops to get to one?
+learn: Strong businesses have something special that others can't easily copy.
+learn: It might be a secret recipe, a famous name, the best spot or amazing service.
+learn: That special thing keeps customers coming back.
+play: match | Match each business to what makes it special | The ice cream shop=A secret recipe; The bike shop by the beach=The best spot; The toy maker with a famous bear=A name everyone knows; The café where staff know your name=Amazing service
+check: mcq | What helps a business stay strong? | Something special others can't easily copy* | Being the same as everyone else | Closing early
+check: tf | A great location can be something special for a business. | true
+home: Pick a favourite shop or brand. What's special about it?
+skill: business
+
+@lesson 7.4 | Treating people well | 🤝 | home
+hook: Does a business need to be fair to do well?
+learn: Good businesses treat their workers, customers and neighbours fairly.
+learn: Workers who are treated well work better and stay longer.
+learn: Businesses that harm people or nature can get into trouble and lose customers.
+play: sort | Treats people well, Doesn't | Pays workers fairly=Treats people well; Dumps rubbish in the river=Doesn't; Fixes things when they go wrong=Treats people well; Tricks customers with fake prices=Doesn't; Gives workers safe gear=Treats people well; Shouts at its staff=Doesn't | Good business or not?
+check: mcq | Why treat workers well? | They work better and stay longer* | It's against the rules | It makes the shop smaller
+check: tf | Businesses that harm nature can lose customers. | true
+home: Talk with a grown-up about a business you think treats people well.
+skill: business
+
+@lesson 7.5 | Changing with the times | 🔄 | museum
+hook: Lots of people used to buy film for their cameras. Now most use phones. What happened to the film shops?
+learn: The world changes, and what people want changes too.
+learn: Strong businesses notice and change, like adding online orders or new products.
+learn: Businesses that never change can shrink or close.
+play: path | Your toy shop is quiet. People are buying toys online. | Start selling online too, and run fun events in the shop => good: You reach new customers and give people a reason to visit. | Do nothing and hope => bad: Customers keep drifting away. | Grumble at people for shopping online => bad: That won't bring them back.
+check: mcq | What do strong businesses do when the world changes? | Change too* | Ignore it | Close straight away
+check: tf | Businesses that never change can shrink or close. | true
+home: Ask a grown-up about a shop or business from when they were young that's gone now.
+skill: business
+
+@lesson 7.6 | Would you own it? | 🧐 | shares
+hook: You could own a tiny piece of a company. How do you pick a good one?
+learn: Look for a business people love, that makes a profit, has something special and treats people well.
+learn: Even good businesses have bad years, so owning lots of companies is still smart.
+learn: Investors look at the business, not just at its price.
+play: debate | Is a business good just because it's famous? | No. Famous doesn't mean it makes a profit or treats people well* | Yes. Famous always means a great business | Being well known can help a business sell more, so it is one good sign.
+check: mcq | Which is a sign of a strong business? | Customers who keep coming back* | A loud logo | Lots of debt
+check: tf | Even good businesses can have bad years. | true
+home: Pick a company you know and check it against the four signs of a strong business.
+skill: business
+
+@lesson 8.1 | Meet the island market | 🏝️ | shares
+hook: Chorecast has a pretend market with four funds. What are they?
+learn: Snail Savings Bond 🐌 grows slowly and almost never falls.
+learn: Whole Forest Fund 🌳 owns a tiny piece of 100 companies. Scoops Ice Cream Co. 🍦 is just one company.
+learn: Rocket Startups 🚀 are brand-new companies. They can zoom up or crash down.
+play: match | Match each fund to what it's like | Snail Savings Bond=Slow and steady; Whole Forest Fund=100 companies in one basket; Scoops Ice Cream Co.=One company that follows the seasons; Rocket Startups=Giant ups and downs
+check: mcq | Which fund owns 100 companies? | Whole Forest Fund* | Scoops Ice Cream Co. | Snail Savings Bond
+check: tf | Rocket Startups can have giant ups and downs. | true
+home: Open the island market with a grown-up and find all four funds.
+skill: funds
+
+@lesson 8.2 | Calm or bumpy? | 🎢 | shares
+hook: Which fund would be the bumpiest ride?
+learn: Some funds move a little. Some move a lot. That's called risk.
+learn: Snail is the calmest. Rocket is the bumpiest. Forest and Scoops are in between.
+learn: Bumpy funds might grow more, but they can fall more too.
+play: order | Put the funds from calmest to bumpiest | Snail Savings Bond; Whole Forest Fund; Scoops Ice Cream Co.; Rocket Startups
+check: mcq | Which fund is the calmest? | Snail Savings Bond* | Rocket Startups | Scoops Ice Cream Co.
+check: tf | A bumpy fund can fall more, as well as grow more. | true
+home: Look at each fund's chart with a grown-up. Which line wiggles most?
+skill: risk
+
+@lesson 8.3 | Ice cream seasons | 🍦 | shares
+hook: Scoops Ice Cream Co. goes up and down with the seasons. Why?
+learn: Scoops sells more ice cream when it's hot, and less when it's cold.
+learn: So its price tends to rise in summer and dip in winter.
+learn: Owning just one company means its bad times hit you hard.
+play: market | Watch one company ride the seasons | 3
+check: mcq | When might Scoops do best? | In hot weather* | In cold weather | It never changes
+check: tf | Owning just one company means its bad times hit you hard. | true
+home: Watch the Scoops price for a few weeks with a grown-up. Does the weather seem to matter?
+skill: markets
+
+@lesson 8.4 | Buying units | 🛒 | shares
+hook: A fund unit costs $4. You have $2. Can you still buy some?
+learn: Your Invest jar fills up every payday. You use it to buy units in a fund.
+learn: If you can't afford a whole unit, you can buy part of one. That's called a fractional share.
+learn: When you sell, the money goes back into your Invest jar.
+play: match | Match each amount to how much of a $4 unit it buys | $1=A quarter of a unit; $2=Half a unit; $4=One whole unit; $8=Two units
+check: mcq | You sell some units. Where does the money go? | Back into your Invest jar* | It disappears | Into your Give jar
+check: tf | You can buy part of a unit. | true
+home: Check how many units you own in the island market, with a grown-up.
+skill: funds
+
+@lesson 8.5 | Picking a fund | 🤔 | shares
+hook: You have $10 in your Invest jar. Which fund should you choose?
+learn: Think about how long you'll leave it, and how bumpy a ride you can handle.
+learn: Mixing funds spreads your money out, like using lots of baskets.
+learn: The Forest Fund is already spread across 100 companies, so it's a calmer choice than one company.
+play: path | You have $10 in your Invest jar and won't need it for ages. | Put most in the Forest Fund and a little in Snail => good: Spread out and growing, with a calm part too. | Put it all in Rocket because it went up yesterday => bad: Yesterday's zoom can be tomorrow's crash. | Never buy anything => ok: It's safe in the jar, but it won't grow.
+check: mcq | Why mix funds? | It spreads your money out* | It's more confusing | It makes them all go up
+check: tf | A fund that went up yesterday will always go up tomorrow. | false | Prices wiggle. Nobody knows what happens tomorrow.
+home: Talk with a grown-up about which fund suits your Invest jar money, and why.
+skill: diversify
+
+@lesson 8.6 | Check in, don't freak out | 🧘 | shares
+hook: Your fund dropped today. Should you sell everything?
+learn: Prices wiggle every day. A drop today doesn't mean it's gone for ever.
+learn: Patient investors usually do better than people who panic and sell.
+learn: Check your funds about once a week, not every minute.
+play: chat | Your little brother sees your fund dropped | them: Oh no! Your Forest Fund went down! Sell it now! | me: Prices wiggle. I'm keeping it for a long time.*/Sell everything, quick!/I'm never investing again | them: But what if it goes down more? | me: It might, but it's spread across 100 companies, and I won't need the money for ages.*/Then I'll cry/I'll put it all in Rocket instead
+check: mcq | How often should you check your funds? | About once a week* | Every minute | Never ever
+check: tf | Patient investors usually do better than people who panic. | true
+home: Pick one day a week to check your island funds with a grown-up.
+skill: calm
+
 @band builders
 @unit 1 | Shares and companies | Owning part of a business
 @unit 2 | Risk and reward | Why some investments jump around
@@ -580,6 +846,277 @@ check: mcq | What usually works better? | Starting early and staying in* | Waiti
 check: tf | Experts can always predict when prices will fall. | false | Nobody can, not even experts.
 home: Ask a grown-up if they've ever waited for the "right time" to do something with money.
 skill: patience
+
+@lesson 5.1 | What's an index? | 📋 | shares
+hook: The news says "the market went up". Which market?
+learn: An index is a list of companies used to measure how a market is doing.
+learn: {nz:The S&P/NZX 50 tracks 50 of the biggest companies on the NZX.~au:The S&P/ASX 200 tracks 200 of the biggest companies on the ASX.}
+learn: When the news says the market rose 1%, it usually means an index rose 1%.
+play: match | Match each index to what it tracks | S&P/NZX 50=50 big New Zealand companies; S&P/ASX 200=200 big Australian companies; S&P 500=500 big United States companies; A world index=Thousands of companies around the world
+check: mcq | What is an index? | A list of companies that measures a market* | A single company | A bank account
+check: tf | When the news says "the market rose", it usually means an index rose. | true
+home: Find out how {nz:the NZX 50~au:the ASX 200} did today with a grown-up.
+skill: index
+
+@lesson 5.2 | Copying the list | 📑 | shares
+hook: What if a fund just bought every company on the list?
+learn: An index fund buys the companies in an index, so it moves almost exactly like that market.
+learn: It doesn't try to pick winners. It just copies the list.
+learn: When the index changes, the fund changes to match.
+play: order | How an index fund works | The index lists its companies; Investors put money into the fund; The fund buys shares in every company on the list; The fund moves up and down like the index; When the list changes, the fund changes too
+check: mcq | What does an index fund do? | Copies an index* | Picks a few favourite companies | Only holds cash
+check: tf | Index funds try to match the market, not beat it. | true
+home: Ask a grown-up if they know what an index fund is.
+skill: index
+
+@lesson 5.3 | Why the fees are low | 🪙 | shares
+hook: Why do index funds usually charge less than other funds?
+learn: Other funds pay experts to research and pick companies. That costs a lot.
+learn: Index funds just copy a list, so they need fewer people and charge lower fees.
+learn: Lower fees mean more of the growth stays with you.
+try: 1% of $1,000 is $10 :: gap | 0.2% of $1,000 is $_ | 2
+play: slider | Fund A charges 1% a year. Fund B charges 0.25%. On $10,000, how many dollars a year do you save with Fund B? | 0 | 100 | 75 | $ | 5 | 5
+check: gap | 0.5% of $2,000 is $_ | 10
+check: mcq | Why are index fund fees usually low? | They copy a list instead of paying stock pickers* | They're run by robots who work for free | They have no companies
+home: Look up the fee of an index fund online with a grown-up.
+skill: fees
+
+@lesson 5.4 | The whole world | 🌍 | shares
+hook: Could you own a tiny piece of thousands of companies around the world?
+learn: A global index fund owns thousands of companies in many countries.
+learn: That includes companies you use every day, like phone, food and clothing makers.
+learn: Spreading across countries means one country's bad year hurts less.
+play: sort | Spread out a lot, Not spread out | A world index fund=Spread out a lot; Shares in one local company=Not spread out; A fund of 500 big US companies=Spread out a lot; All your money in one game company=Not spread out; A fund of 200 local companies=Spread out a lot | Spread out or not?
+check: mcq | Which is most spread out? | A world index fund* | One company's shares | A single country's biggest bank
+check: tf | Spreading across countries can reduce risk. | true
+home: Name five companies from different countries that make things your family uses.
+skill: diversify
+
+@lesson 5.5 | Index funds still wobble | 🌊 | shares
+hook: If index funds own everything, can they still go down?
+learn: Yes. When the whole market falls, index funds fall too.
+learn: In a crash, an index fund might drop 30% or more.
+learn: Over long periods, markets have recovered and grown. Patience matters.
+play: market | Ride a crash and a recovery in an index fund | 12
+check: mcq | What happens to an index fund when the market falls? | It falls too* | It always goes up | It disappears
+check: tf | Index funds can drop a lot in a crash. | true
+home: Ask a grown-up how they felt when markets fell in 2020.
+skill: patience
+
+@lesson 5.6 | How kids can invest | 🧒 | shares
+hook: You're 11. Can you own an index fund?
+learn: Kids usually can't open investment accounts alone. A parent or guardian can open one for you.
+learn: {nz:Kids can join KiwiSaver with a parent's help. Some KiwiSaver funds are index funds.~au:A parent can invest for you in their name, or in a kids' account some platforms offer.}
+learn: Many platforms let you start with a small amount, like $10 or $50.
+play: path | You've saved $50 and want to invest it. | Talk to a grown-up about opening an account together => good: That's the safe and legal way for kids to start. | Sign up to an app by pretending to be 18 => bad: That breaks the rules, and your money may not be protected. | Give it to an online friend who says they'll invest it => bad: That's very risky, and could be a scam.
+check: mcq | How can kids usually start investing? | With a parent or guardian* | By pretending to be 18 | Through an online stranger
+check: tf | Many platforms let you start with a small amount. | true
+home: Talk with a grown-up about whether investing some of your Invest jar for real might suit you.
+skill: investing
+
+@lesson 6.1 | What's a crash? | 📉 | shares
+hook: The news says "Markets crash 20%". What does that actually mean?
+learn: A crash is when prices across the whole market fall fast, often by 20% or more.
+learn: Crashes happen every so often. Most long-term investors live through several.
+learn: Broad markets have recovered from past crashes, though some took years.
+play: market | Ride a crash and see what happens next | 15
+check: mcq | What is a market crash? | Prices across the market falling fast* | A computer breaking | A bank closing for a day
+check: tf | Some recoveries from crashes took years. | true
+home: Ask a grown-up if they remember a big market crash, and what they did.
+skill: cycles
+
+@lesson 6.2 | Crashes in history | 🏛️ | museum
+hook: 1987, 2000, 2008, 2020. What happened in those years?
+learn: In 1987, share markets around the world fell sharply in one day, called Black Monday.
+learn: In 2000, the dot-com bubble burst, and many internet companies collapsed. In 2008, the global financial crisis began with bad home loans in the US.
+learn: In 2020, markets crashed as COVID-19 spread, then bounced back within months.
+play: match | Match each crash to what happened | 1987=Black Monday, a huge one-day fall; 2000=The dot-com bubble burst; 2008=The global financial crisis, from bad home loans; 2020=The COVID-19 crash and a fast recovery
+check: mcq | What started the 2008 crisis? | Bad home loans in the US* | A volcano | A new phone
+check: tf | Markets bounced back within months after the 2020 crash. | true
+home: Ask an older family member what they remember about 2008 or 2020.
+skill: cycles
+
+@lesson 6.3 | Paper losses | 📄 | shares
+hook: Your $100 investment is now worth $80. Have you lost $20?
+learn: If you haven't sold, it's a paper loss. The price could come back.
+learn: If you sell at $80, the loss becomes real.
+learn: Falls need bigger rises to recover. A 50% fall needs a 100% rise to get back.
+try: $100 falls 20% to $80 :: gap | $200 falls 25% to $_ | 150
+play: sort | Paper loss, Real loss | Your fund fell 15% and you held on=Paper loss; You sold after a 15% fall=Real loss; Your shares are down 10% this month=Paper loss; You panicked and sold everything in a crash=Real loss; Your fund dipped, and you kept adding=Paper loss; You switched to cash at the bottom=Real loss | Paper or real?
+check: gap | $100 falls 50% to $_ | 50
+check: mcq | When does a paper loss become real? | When you sell* | When the news says so | Never
+home: Check how your Chorecast funds are doing. Are any showing a paper loss?
+skill: cycles
+
+@lesson 6.4 | Scary headlines | 📰 | online
+hook: "MARKETS IN FREEFALL! WORST DAY IN MONTHS!" Should you panic?
+learn: News headlines are written to grab attention. Scary words get more clicks.
+learn: "Worst day in months" might only be a 2% drop.
+learn: Ask yourself: how big is the fall really, and does it change my long-term plan?
+play: sort | Calm thinking, Panic thinking | It's a 2% drop and I'm investing for 10 years=Calm thinking; Sell everything before it goes to zero!=Panic thinking; Markets have had drops like this before=Calm thinking; My friend says get out now!=Panic thinking; My plan hasn't changed=Calm thinking; I'll check the price every five minutes=Panic thinking | Calm or panic?
+check: mcq | A headline screams about a market fall. What should you check first? | How big the fall really is* | Who wrote it | The font
+check: tf | Scary headlines get more clicks. | true
+home: Find a market headline with a grown-up and work out how big the move really was.
+skill: calm
+
+@lesson 6.5 | Buying in the dip | 🛍️ | shares
+hook: Your fund's price fell from $10 to $5 a unit. Is that bad news if you're still adding money?
+learn: If you invest the same amount regularly, you buy more units when prices are low.
+learn: $20 buys 2 units at $10, but 4 units at $5.
+learn: When prices recover, those cheap units grow the most.
+try: $20 at $10 a unit buys 2 units :: gap | $20 at $4 a unit buys _ units | 5
+play: diff | Two months of adding $20. Tap what changed when the price fell. | Price $10 a unit; You add $20; You get 2 units | Price $5 a unit; You add $20; You get 4 units
+check: gap | $30 at $3 a unit buys _ units | 10
+check: tf | Investing regularly buys more units when prices are low. | true
+home: Talk with a grown-up about why some people like adding money when prices fall.
+skill: cycles
+
+@lesson 6.6 | Your calm plan | 🧘 | garden
+hook: The next crash will come one day. What will you do?
+learn: Decide your plan before a crash, while you're calm.
+learn: A good plan: keep investing as normal, don't check every day, and only change things if your goal changes.
+learn: Keep money you'll need soon out of shares, so a crash can't wreck it.
+play: build | Build your calm plan for a crash | Remember why I invested; Check how long until I need the money; Keep investing as normal; Check once a week, not every hour; Talk to a grown-up before making changes
+check: mcq | When should you make a crash plan? | Before a crash, while you're calm* | In the middle of a crash | Never
+check: tf | Money you need soon is safer out of shares. | true
+home: Write your own three-line crash plan and stick it near your desk.
+skill: calm
+
+@lesson 7.1 | Fees everywhere | 🧾 | shares
+hook: Investing isn't free. Who gets paid, and how?
+learn: A management fee is a yearly percentage a fund takes for running it.
+learn: Brokerage is a fee each time you buy or sell. Some apps also charge a monthly account fee.
+learn: A currency fee can apply when you buy shares in another country.
+play: match | Match each fee to what it's for | Management fee=A yearly % for running a fund; Brokerage=A fee each time you buy or sell; Account fee=A set amount each month or year; Currency fee=Changing your money into another currency
+check: mcq | What is brokerage? | A fee each time you buy or sell* | A yearly fund fee | Interest you earn
+check: tf | Funds charge a yearly management fee. | true
+home: Find the fees page of an investing app or fund with a grown-up.
+skill: fees
+
+@lesson 7.2 | Percentage fees | 🥧 | shares
+hook: A fund charges 1% a year. On $500, how much is that?
+learn: A percentage fee grows as your balance grows.
+learn: 1% of $500 is $5. 1% of $5,000 is $50.
+learn: Small-sounding percentages become big dollars on big balances.
+try: 1% of $500 = $5 :: gap | 1% of $2,000 = $_ | 20
+play: match | Match each balance to a 1% yearly fee | $100=$1; $800=$8; $2,500=$25; $10,000=$100
+check: gap | 2% of $1,000 = $_ | 20
+check: tf | A percentage fee costs more dollars as your balance grows. | true
+home: Work out what a 1% fee would cost on a grown-up's savings balance (they don't have to tell you the real number).
+skill: fees
+
+@lesson 7.3 | Flat fees and small amounts | 🪙 | shares
+hook: A $2 fee to invest $10. Is that a lot?
+learn: A flat fee is the same however much you invest.
+learn: On $10, a $2 fee is 20%! On $1,000, it's only 0.2%.
+learn: With flat fees, invest bigger amounts less often, or find a platform with no flat fee on small amounts.
+try: $2 on $10 is 20% :: gap | $1 on $10 is _% | 10
+play: price | You'll invest $120 this year, with a $2 fee every time you buy. Which plan costs least in fees for each dollar invested? | $10 every month:24:120:dollars; $60 twice a year:4:120:dollars; $120 once:2:120:dollars
+check: gap | A $3 fee on a $30 investment is _% | 10
+check: mcq | Flat fees hurt most when you invest... | Small amounts* | Large amounts | Never
+home: Look up whether an investing app charges a flat fee on small buys, with a grown-up.
+skill: fees
+
+@lesson 7.4 | Fees snowball too | ⛄ | shares
+hook: 1% a year doesn't sound like much. What does it cost over 40 years?
+learn: Fees come out every year, so the money they take can't grow for you.
+learn: Over decades, a 1% higher fee eats a big slice of what you'd have.
+learn: $10,000 at 7% for 40 years grows to about $150,000. At 6%, it's about $103,000.
+play: compound | $10,000 growing at 6% a year (7% minus a 1% fee) for 40 years | 10000 | 6 | 40
+check: slider | At 7%, $10,000 grows to about $150,000. At 6%, it's about $103,000. About how much did the 1% fee cost? | 0 | 100000 | 47000 | $ | 5000 | 1000
+check: tf | Fees taken out each year stop that money growing for you. | true
+home: Show a grown-up the snowball with and without a 1% fee.
+skill: fees
+
+@lesson 7.5 | Trading too often | 🔄 | shares
+hook: Your friend buys and sells shares every day. Is that smart?
+learn: Every trade can cost brokerage, and sometimes currency fees too.
+learn: Frequent traders often do worse than people who buy and hold, partly because of fees.
+learn: A simple plan, like adding to one fund each month, keeps costs low.
+play: path | You have $200 to invest. A friend says to buy and sell every day to catch the ups. | Buy a low-fee fund and leave it to grow => good: Fewer trades, fewer fees and less stress. | Trade every day like your friend => bad: With a $2 fee each way, ten buys and sells cost $40. That's 20% of your money. | Never invest at all => ok: Your money's safe, but it won't grow much.
+check: mcq | Why can trading every day cost you? | Every trade can have a fee* | Shares get tired | It's always free
+check: tf | Buying and holding usually means fewer fees. | true
+home: Ask a grown-up how often they buy or sell investments, and why.
+skill: fees
+
+@lesson 7.6 | Fee detective | 🕵️ | shares
+hook: Two funds look the same. One costs much more. How can you tell?
+learn: Fund fees are listed in its {nz:fund update and product disclosure statement~au:product disclosure statement (PDS)}.
+learn: Look for the total yearly fee as a percentage, plus any flat fees.
+learn: Compare the same type of fund, like growth with growth.
+play: diff | Two growth funds. Tap what's different. | Growth fund; Owns world shares; Total yearly fee 0.25%; No account fee | Growth fund; Owns world shares; Total yearly fee 1.20%; $30 a year account fee
+check: mcq | Where can you find a fund's fees? | {nz:Its fund update or disclosure statement~au:Its product disclosure statement}* | Its logo | A random video
+check: tf | You should compare funds of the same type. | true
+home: Find the total yearly fee in a real fund document with a grown-up.
+skill: fees
+
+@lesson 8.1 | Goals and time | 🗓️ | bank
+hook: A bike next month, a car at 18, a house at 30. Should all that money go in the same place?
+learn: How long until you need the money matters most.
+learn: Money you need soon, within about 3 years, should be somewhere steady, like a savings account.
+learn: Money for 10 or more years away can be invested, because it has time to ride the ups and downs.
+play: sort | Keep it steady, Can invest | A new bike next month=Keep it steady; Money for when you're 30=Can invest; A school trip next term=Keep it steady; Retirement savings=Can invest; Concert tickets in 2 months=Keep it steady; A house deposit in 12 years=Can invest | Where should the money go?
+check: mcq | Money you need next month should be... | Somewhere steady, like a savings account* | In Rocket Startups | In a growth fund
+check: tf | Money you won't need for 10 years can ride out ups and downs. | true
+home: List your goals with a grown-up and mark each one "soon" or "long way off".
+skill: timeline
+
+@lesson 8.2 | Where short-term money lives | 🏦 | bank
+hook: You're saving $300 for a phone in 6 months. Why not put it in shares?
+learn: Shares can drop 20% in a few months. You might have only $240 when you need $300.
+learn: A savings account or term deposit keeps it safe and still pays a little interest.
+learn: Safe and boring is perfect for money with a deadline.
+try: $300 drops 20% to $240 :: gap | $500 drops 20% to $_ | 400
+play: path | You've saved $300 for a phone you'll buy in 6 months. | Keep it in a savings account => good: It's safe, and it earns a little interest. | Put it all in a share fund to grow faster => bad: A drop right before you buy could leave you short. | Keep it in your pocket => bad: It could get lost or spent.
+check: mcq | Where's a good place for money you need in 6 months? | A savings account* | A share fund | A risky app
+check: tf | Safe and boring is good for money with a deadline. | true
+home: Find a savings account with a grown-up that would suit a short-term goal.
+skill: timeline
+
+@lesson 8.3 | Long-term money can wobble | 🌊 | shares
+hook: You're investing for when you're 30. Your fund falls this year. Is that a problem?
+learn: Over 15 years there may be several drops, and there's time to recover.
+learn: Long-term money can go into growth investments, like share funds.
+learn: As your goal gets close, you can move the money somewhere steadier.
+play: market | Ride 15 years of ups and downs | 15
+check: mcq | As a long-term goal gets close, what can you do? | Move the money somewhere steadier* | Put it all in the riskiest fund | Forget about it
+check: tf | Long-term money has time to recover from drops. | true
+home: Ask a grown-up when they'd move savings for a big goal somewhere steadier.
+skill: timeline
+
+@lesson 8.4 | Plan a goal | 📋 | bank
+hook: You want $2,000 for a trip in 4 years. How do you plan it?
+learn: Every goal plan needs three things: what it's for, how much, and when.
+learn: Then work out how much to save each month, and where to keep it.
+learn: Write it down and check it every few months.
+play: build | Build a goal plan | Name the goal; Find out how much it costs; Pick the date you need it; Work out how much to save each month; Choose where to keep the money; Check it every few months
+check: mcq | What three things does every goal plan need? | What, how much and when* | A colour, a song and a logo | Nothing
+check: tf | Checking your plan every few months helps you stay on track. | true
+home: Write a goal plan for something you want, with a grown-up.
+skill: goals
+
+@lesson 8.5 | How much a month? | 🧮 | bank
+hook: $2,000 in 4 years. How much is that each month?
+learn: 4 years is 48 months. $2,000 ÷ 48 is about $42 a month.
+learn: If it's invested for long enough, growth can help a little, but don't count on it for short goals.
+learn: Starting earlier means smaller amounts each month.
+try: $1,200 over 12 months is $100 a month :: gap | $1,200 over 24 months is $_ a month | 50
+play: slider | You need $1,800 in 3 years (36 months). How much should you save each month? | 0 | 100 | 50 | $ | 3 | 1
+check: gap | $600 over 12 months is $_ a month | 50
+check: mcq | How can you make the monthly amount smaller? | Start earlier* | Start later | Buy more stuff
+home: Work out the monthly amount for your own goal plan.
+skill: goals
+
+@lesson 8.6 | Check in | 🔍 | garden
+hook: Halfway through your goal, the price went up and your fund went down. Now what?
+learn: Check your goal plan every few months. Life and prices change.
+learn: If you're behind, you can save a bit more, wait a bit longer, or change the goal.
+learn: As the date gets close, move the money somewhere steady.
+play: chat | Checking your trip savings with your grown-up | them: The trip now costs $2,300, not $2,000. What do you want to do? | me: Let's see if I can save a bit more each month, or push the trip back a few months.*/Give up on the trip/Put it all in Rocket Startups to catch up | them: And it's only a year away now. Where should the money go? | me: Into a savings account, so a market drop can't hurt it.*/Leave it all in shares/Spend it now
+check: mcq | You're behind on a goal. What can you do? | Save more, wait longer or change the goal* | Panic | Gamble to catch up
+check: tf | As a goal gets close, moving money somewhere steady protects it. | true
+home: Pick a date to check your goal plan, and put it in a calendar.
+skill: goals
 
 @band makers
 @unit 1 | Index funds | Owning a slice of everything
@@ -875,6 +1412,272 @@ check: mcq | What's the best way to compare fees? | Turn them all into dollars a
 home: Use a fund comparison tool with a grown-up and find the lowest-fee fund of one type.
 skill: fees
 
+@lesson 5.1 | Growth and defensive | 🛡️ | shares
+hook: Shares, property, bonds and cash. Why do funds mix them?
+learn: Growth assets, like shares and property, can grow a lot but bounce around more.
+learn: Defensive assets, like bonds and cash, grow less but are steadier.
+learn: A fund's mix of the two sets its risk and how much it might return.
+play: sort | Growth asset, Defensive asset | Shares in companies=Growth asset; Cash in the bank=Defensive asset; Property=Growth asset; Government bonds=Defensive asset; A world shares fund=Growth asset; Term deposits=Defensive asset | Growth or defensive?
+check: mcq | Which is a defensive asset? | Government bonds* | Shares | Property
+check: tf | Growth assets usually bounce around more. | true
+home: Look up your {nz:KiwiSaver~au:super} fund's mix of growth and defensive assets with a grown-up.
+skill: risk
+
+@lesson 5.2 | Conservative to growth | 🎚️ | shares
+hook: Conservative, balanced or growth. What do these names mean?
+learn: A conservative fund holds mostly cash and bonds. It's steadier but grows slowly.
+learn: A balanced fund holds a mix, often around half in growth assets.
+learn: A growth fund is mostly shares. It swings more but has usually grown more over long periods.
+play: match | Match each fund to its mix | Conservative=Mostly cash and bonds; Balanced=Roughly half shares and property; Growth=Mostly shares and property; Aggressive=Almost all shares
+check: mcq | Which fund swings the most? | Aggressive* | Conservative | Balanced
+check: tf | Growth funds have usually grown more over long periods. | true
+home: Find out with a grown-up which fund type their {nz:KiwiSaver~au:super} uses.
+skill: risk
+
+@lesson 5.3 | Match the fund to the time | ⌛ | shares
+hook: Money for a car next year and money for age 65. Same fund?
+learn: Money you need soon should be in steadier places. A crash right before you need it would hurt.
+learn: Money you won't touch for 10 years or more can ride out the ups and downs of growth assets.
+learn: {nz:KiwiSaver money for a first home in 2 years might suit a more conservative fund.~au:Super for retirement decades away often suits a growth fund.}
+play: route | Match each goal to a sensible fund type | A car in 1 year=Cash or conservative; A house deposit in 3 years=Conservative or balanced; University in 6 years=Balanced; Retirement in 45 years=Growth
+check: mcq | Money for retirement in 45 years usually suits... | A growth fund* | A cash account only | Under the mattress
+check: tf | Money you need soon should be in steadier places. | true
+home: Talk with a grown-up about which of your goals are short and which are long.
+skill: planning
+
+@lesson 5.4 | How much wobble can you take? | 🎢 | shares
+hook: Your $10,000 drops to $7,000 in a month. Do you hold or panic?
+learn: Your risk tolerance is how much ups and downs you can handle without panicking.
+learn: Online risk questionnaires ask about your goals, timeframe and how you'd react to falls.
+learn: Picking a fund you can stick with matters more than picking the "best" fund.
+play: path | Your growth fund fell 30% in a crash. You don't need the money for 20 years. | Hold and keep adding as normal => good: You give the fund time to recover. | Switch to cash straight away => bad: You lock in the loss and might miss the recovery. | Stop all contributions for ever => bad: You miss buying at lower prices.
+check: mcq | What is risk tolerance? | How much ups and downs you can handle* | How fast you can run | Your bank's rules
+check: tf | A fund you can stick with matters more than the "best" fund. | true
+home: Try an online risk questionnaire with a grown-up, like {nz:the Sorted website~au:the Moneysmart website}.
+skill: risk
+
+@lesson 5.5 | Bumpier but bigger | 📊 | shares
+hook: Growth funds fall harder in crashes. Why would anyone choose them?
+learn: Over long periods, growth funds have usually returned more than conservative ones.
+learn: For example, a growth fund might average 6% to 7% a year and a conservative one 3% to 4%, but neither is guaranteed.
+learn: Over 40 years, that gap makes a huge difference.
+play: compound | $10,000 at 4% a year for 40 years, like a conservative fund | 10000 | 4 | 40
+check: slider | $10,000 at 7% for 40 years becomes about $150,000. At 4% it's about $48,000. How much more? | 0 | 150000 | 102000 | $ | 8000 | 1000
+check: mcq | Why choose a growth fund for the long term? | It has usually grown more over long periods* | It never falls | It's guaranteed
+home: Ask a grown-up what their fund has returned on average over the past 10 years.
+skill: compounding
+
+@lesson 5.6 | Switching at the wrong time | 🔀 | shares
+hook: In the 2020 crash, some people switched to conservative funds. What happened next?
+learn: Markets recovered quickly in 2020. People who switched after the fall often missed the bounce back.
+learn: Switching after a fall turns a paper loss into a real one.
+learn: Switch funds because your goals or timeframe changed, not because of headlines.
+play: debate | Should you switch to a conservative fund when markets crash? | Usually not. Switching after a fall locks in losses and can miss the recovery* | Yes. Always switch when the news is scary | If your goal is very soon, moving to steadier funds can make sense, ideally planned before a crash.
+check: mcq | What's a good reason to switch funds? | Your goals or timeframe changed* | A scary headline | A friend's tip
+check: tf | Switching after a fall can turn a paper loss into a real one. | true
+home: Ask a grown-up if they've ever switched funds, and why.
+skill: patience
+
+@lesson 6.1 | Money with values | 🌱 | shares
+hook: Your savings might own shares in companies you don't agree with. Would you want that?
+learn: Ethical or responsible investing means choosing investments that match your values.
+learn: Some funds leave out industries like tobacco, weapons, gambling or fossil fuels.
+learn: Others pick companies that do well on things like the environment or how they treat workers.
+play: sort | Often left out, Often chosen | Tobacco companies=Often left out; Solar power companies=Often chosen; Weapons makers=Often left out; Gambling companies=Often left out; Companies with strong worker safety records=Often chosen; Recycling companies=Often chosen | In an ethical fund, are these usually left out or chosen?
+check: mcq | What is ethical investing? | Choosing investments that match your values* | Only buying cheap shares | Investing with no fees
+check: tf | Some funds leave out tobacco companies. | true
+home: Ask a grown-up if their {nz:KiwiSaver~au:super} fund leaves out any industries.
+skill: ethical
+
+@lesson 6.2 | Screens and ESG | 🔍 | shares
+hook: Negative screen, positive screen, ESG. What do these mean?
+learn: A negative screen leaves out companies, like tobacco or weapons makers.
+learn: A positive screen picks companies doing well, like clean energy.
+learn: ESG stands for environmental, social and governance: how a company treats the planet, people, and how it's run.
+play: match | Match each term to what it means | Negative screen=Leaving out certain industries; Positive screen=Choosing companies doing good things; Environmental=How a company treats the planet; Social=How it treats workers and communities; Governance=How the company is run and kept honest
+check: mcq | What does a negative screen do? | Leaves certain companies out* | Picks only the biggest companies | Sets the fund's colours
+check: tf | The "G" in ESG is about how a company is run. | true
+home: Look up the ESG or responsible investing page of a fund with a grown-up.
+skill: ethical
+
+@lesson 6.3 | Greenwashing | 🍃 | online
+hook: A fund calls itself "green", but it owns oil companies. Is that OK?
+learn: Greenwashing is when something claims to be greener or more ethical than it really is.
+learn: {nz:The FMA has warned fund managers about misleading green claims.~au:ASIC has taken fund managers to court over greenwashing, and courts have fined them millions.}
+learn: Check what a fund actually owns, not just its name or its pictures of trees.
+play: scam | Which fund claims look like greenwashing? | A "planet-friendly" fund that owns coal miners=scam; A fund that lists every company it owns and explains its exclusions=real; A fund with leafy pictures but no details on what it leaves out=scam; A fund that says which industries it screens out and shows its holdings=real; A "100% green" claim with no evidence=scam | Look for evidence and full holdings lists, not green words and pictures.
+check: mcq | How can you check a fund's green claims? | Look at what it actually owns* | Trust the leafy logo | Count the green words
+check: tf | Regulators have taken action against fund managers for greenwashing. | true
+home: Find a "green" or "sustainable" claim in an ad with a grown-up. What evidence does it give?
+skill: ethical
+
+@lesson 6.4 | Does ethical cost more? | ⚖️ | shares
+hook: If you leave out some companies, do you earn less?
+learn: Research is mixed. Some ethical funds have done better and some worse, over different periods.
+learn: Leaving out whole industries means less spread, which can change returns either way.
+learn: Fees matter too. Some ethical funds charge more, so compare fees like any other fund.
+play: debate | Should you choose an ethical fund even if it might return a little less? | It can make sense if those values matter to you and the fees are fair* | No. Only returns matter, ever | Others say the wider spread of a full index fund is worth more, and you can give to causes separately.
+check: mcq | What should you compare between ethical funds? | Fees, holdings and returns* | Only the name | Only the logo
+check: tf | Ethical funds always earn less. | false | Research is mixed. Some have done better and some worse.
+home: Compare the fees of an ethical fund and a regular index fund with a grown-up.
+skill: ethical
+
+@lesson 6.5 | Owners have a voice | 🗳️ | townhall
+hook: You own a tiny bit of a company. Can you change what it does?
+learn: Shareholders can vote at company meetings, on things like who sits on the board.
+learn: Big fund managers vote for their investors, and can push companies to change.
+learn: Some investors choose to stay in and push for change, instead of selling.
+play: path | A company in your fund keeps polluting a river. | Ask your fund how it votes and what it's doing about it => good: Funds can pressure companies, and investors asking helps. | Ignore it => ok: That's your choice, but your money still backs the company. | Post angry comments with no facts => bad: That rarely changes anything and can spread false claims.
+check: mcq | How can fund managers push companies to change? | By voting and talking with them as owners* | By hacking them | By hiding
+check: tf | Shareholders can vote at company meetings. | true
+home: Look for a fund's voting record or stewardship report online with a grown-up.
+skill: ethical
+
+@lesson 6.6 | Look inside the fund | 🗂️ | shares
+hook: How can you tell what your fund really owns?
+learn: Many funds publish a full list of the companies they own.
+learn: {nz:KiwiSaver funds must publish their holdings, and Mindful Money lets you search them.~au:Super funds must publish their holdings. The Responsible Investment Association Australasia also certifies some funds.}
+learn: Compare that list with what the fund promises.
+play: diff | What the fund promises, then what it holds. Tap what doesn't match. | Clean energy companies; No fossil fuels; No tobacco; No weapons | Clean energy companies; An oil and gas company; No tobacco; A company that makes missile parts
+check: mcq | Where can you see what a fund owns? | Its published holdings list* | Its TV ad | Its logo
+check: tf | You can compare a fund's holdings with its promises. | true
+home: Look up a {nz:KiwiSaver~au:super} fund's holdings list with a grown-up. Name three companies in it.
+skill: ethical
+
+@lesson 7.1 | Tulip mania | 🌷 | museum
+hook: In the 1630s, people in the Netherlands paid amazing prices for single flower bulbs. Why?
+learn: Tulips were rare and fashionable. Some bulbs sold for more than a skilled worker earned in a year.
+learn: Many people bought hoping to sell to someone else for even more.
+learn: In early 1637 the buyers vanished and prices crashed. Historians think some stories are exaggerated, but it's still told as a classic bubble.
+play: mystery | It happened in the Netherlands in the 1630s; People paid huge prices for flower bulbs; Many bought only to sell for more; Prices crashed in 1637 | Tulip mania* | The gold rush | The dot-com bubble
+check: mcq | Why did tulip prices rise so high? | People bought to sell to someone else for more* | Tulips cured illness | The government set the price
+check: tf | Tulip prices crashed in 1637. | true
+home: Tell a grown-up the tulip story and ask if they can think of a modern one.
+skill: bubbles
+
+@lesson 7.2 | How bubbles grow and pop | 🫧 | shares
+hook: Prices keep rising, everyone's talking about it, and your cousin just bought in. Is it a bubble?
+learn: A bubble is when prices rise far above what something is really worth, driven by excitement.
+learn: Bubbles often follow a pattern: a new idea, rising prices, hype, everyone piling in, then a crash.
+learn: People who buy near the top often lose the most.
+play: order | Put the stages of a bubble in order | A new idea gets people excited; Early buyers make money; Prices rise fast and it's all over the news; Everyone piles in, even people who never invest; Prices crash as buyers run out
+check: mcq | Who usually loses most in a bubble? | People who buy near the top* | People who never bought | Early sellers
+check: tf | In a bubble, prices rise far above what something is really worth. | true
+home: Ask a grown-up if they remember a time "everyone" was buying something.
+skill: bubbles
+
+@lesson 7.3 | The dot-com bubble | 💻 | museum
+hook: In the late 1990s, any company with ".com" in its name seemed to soar. What happened next?
+learn: Investors poured money into internet companies, even ones that made no profit.
+learn: In 2000 the bubble burst. By 2002, the Nasdaq index had fallen nearly 80% from its peak.
+learn: The internet did change the world, but many of those companies disappeared. A good idea isn't a good investment at any price.
+play: sort | Bubble thinking, Investor thinking | It has ".com" in its name, so it must go up=Bubble thinking; Does the company actually make a profit?=Investor thinking; Everyone's buying, so I should too=Bubble thinking; What price am I paying compared with what it earns?=Investor thinking; It doubled last month, so it'll double again=Bubble thinking; How would I feel if it fell 50%?=Investor thinking | Which kind of thinking is it?
+check: mcq | What did many dot-com companies lack? | Profits* | Websites | Names
+check: tf | A good idea is always a good investment, whatever the price. | false | Paying too much can lose money, even for a great idea.
+home: Ask a grown-up which internet companies they remember from the early 2000s. Do they still exist?
+skill: bubbles
+
+@lesson 7.4 | Meme stocks | 🦍 | online
+hook: In 2021, GameStop shares jumped from under $20 to over $300 in a few weeks. Why?
+learn: People on social media urged each other to buy GameStop, partly to hurt hedge funds betting against it.
+learn: The price rocketed, swung wildly, then dropped back. Some got rich, but many who bought late lost a lot.
+learn: When a price moves on hype, not on the business, it can fall just as fast.
+play: path | Everyone online says a meme stock will "go to the moon". It's already up 500%. | Skip it, or only use money you could afford to lose completely => good: Hype can reverse in hours. Protecting your savings comes first. | Put all your savings in now => bad: Buying after a 500% rise on hype is very risky. Many late buyers lost heavily. | Borrow money to buy more => bad: If it crashes, you'd lose money you don't even have.
+check: mcq | What drove GameStop's 2021 jump? | Social media hype and a rush of buyers* | Record profits | A new law
+check: tf | Prices that rise on hype can fall just as fast. | true
+home: Talk with a grown-up about why buying because "everyone online is" is risky.
+skill: hype
+
+@lesson 7.5 | FOMO | 😬 | online
+hook: Your friends all made money on a hot stock. You didn't buy. Do you jump in now?
+learn: FOMO, the fear of missing out, pushes people to buy after prices have already shot up.
+learn: People share their wins, not their losses, so it looks like everyone's winning.
+learn: Stick to your plan. Missing one hot stock won't ruin you. Chasing every one might.
+play: chat | Your friend is buzzing about a stock | them: I made $200 on this stock this week! Get in before it's too late! | me: Nice! What does the company actually do?*/I'm putting all my savings in now/Just tell me what to buy | them: No idea, but it's going up! | me: I'll stick to my plan. If it still looks good after I've researched it, I might buy a little.*/Then I'll buy double/OK, I'll borrow money for it
+check: mcq | What does FOMO make people do? | Buy after prices have already shot up* | Save more calmly | Research more carefully
+check: tf | People tend to share their wins more than their losses. | true
+home: Next time you feel FOMO about anything, write down why before you act.
+skill: hype
+
+@lesson 7.6 | Spot the hype | 🚩 | stage
+hook: "This coin will 100x! Last chance! Don't get left behind!" What's wrong with this?
+learn: Hype uses urgency, huge promises and fear of missing out.
+learn: Real investment information talks about risk. Hype pretends there isn't any.
+learn: Be extra careful when the person hyping it gains if you buy.
+play: scam | Which posts are hype to be wary of? | This coin will 100x by Friday! Last chance!=scam; Index funds have usually grown over long periods, but can fall in the short term=real; I bought this stock, you should too! Link in bio=scam; A fund update showing fees, risks and past returns=real; Guaranteed 30% a month, everyone's doing it!=scam | Urgency, huge promises and "no risk" are signs of hype. Real investment information talks about risk.
+check: mcq | What do real investments talk about that hype ignores? | Risk* | Rockets | Secret codes
+check: tf | Be extra careful if the person hyping it gains when you buy. | true
+home: Find an investing post online with a grown-up. Is it information or hype?
+skill: hype
+
+@lesson 8.1 | Can teens invest? | 🧑 | townhall
+hook: You're 14 with $200 saved. Can you actually invest it?
+learn: Most platforms need you to be 18 to open your own account.
+learn: {nz:Under-18s can invest through an account a parent or guardian sets up, and many kids are already in KiwiSaver.~au:Under-18s usually invest through an account a parent or guardian holds for them, sometimes called a minor or trust account.}
+learn: The money is yours, but a grown-up has to agree and sign up with you.
+play: path | You're 14 and want to invest $200. | Ask a parent to help set up an account for you => good: That's the legal, safe way to start. | Sign up with a fake birth date => bad: That breaks the rules, and the account could be frozen. | Give the money to an online "investor" => bad: That's a classic scam.
+check: mcq | How do most under-18s invest? | Through an account a parent or guardian sets up* | By lying about their age | Through strangers online
+check: tf | Most platforms need you to be 18 to open your own account. | true
+home: Ask a grown-up whether they'd help you open an investment account, and what they'd want to know first.
+skill: investing
+
+@lesson 8.2 | Minimums and fractions | 🧩 | shares
+hook: One share costs $300. You have $50. Are you stuck?
+learn: Some platforms let you buy fractional shares: part of a share, for as little as a few dollars.
+learn: Many funds have low or no minimums, so you can start with $50 or less.
+learn: Starting small is fine. The habit matters more than the amount.
+try: $150 buys half of a $300 share :: gap | $75 buys _ of a $300 share | a quarter | a quarter; a half; one whole
+play: match | Match each amount to how much of a $300 share it buys | $30=A tenth; $75=A quarter; $150=A half; $300=One whole share
+check: mcq | What's a fractional share? | Part of one share* | A broken share | A free share
+check: tf | The habit of investing matters more than starting big. | true
+home: Look up the minimum investment for two funds with a grown-up.
+skill: investing
+
+@lesson 8.3 | Choosing a first fund | 🎯 | shares
+hook: There are thousands of shares and funds. Where does a first-time investor start?
+learn: Many people start with a low-fee, diversified fund, like a world index fund.
+learn: It owns hundreds or thousands of companies, so one bad company hurts less.
+learn: Avoid starting with a single hot stock or crypto just because it's in the news.
+play: sort | Sensible first choice, Risky first choice | A low-fee world index fund=Sensible first choice; A single meme stock=Risky first choice; A diversified growth fund=Sensible first choice; A coin an influencer is hyping=Risky first choice; A fund that tracks your country's biggest companies=Sensible first choice; Borrowing to buy one company's shares=Risky first choice | Sensible or risky as a first step?
+check: mcq | What's often a sensible first investment? | A low-fee, diversified fund* | A single hot stock | Whatever's trending
+check: tf | In a diversified fund, one bad company hurts less. | true
+home: Compare two diversified funds with a grown-up: fees, what they own, and minimums.
+skill: diversify
+
+@lesson 8.4 | Is the platform safe? | 🛡️ | online
+hook: You find a new investing app with amazing ads. How do you know it's safe?
+learn: {nz:Check it's on the Financial Service Providers Register, and look at the FMA's warnings list.~au:Check it holds an Australian Financial Services licence on ASIC's register.}
+learn: Read reviews from independent sources, not just the app's own ads.
+learn: Find out who holds your money, and what the fees are.
+play: scam | Which signs are red flags? | Guaranteed 20% returns every month=scam; Listed on the official register, with fees clearly shown=real; Pay the joining fee by gift card=scam; A support line that never asks for your password=real; Only takes payment in crypto=scam | Guarantees, gift cards and crypto-only payments are red flags. Licensed platforms show their fees clearly.
+check: mcq | What's a red flag for an investing app? | Guaranteed high returns* | Clear fees | Being on the official register
+check: tf | Reading independent reviews helps you check a platform. | true
+home: Check one investing app against the official register with a grown-up.
+skill: scams
+
+@lesson 8.5 | Start small, add often | 🌱 | shares
+hook: $10 a week doesn't sound like much. Does it add up?
+learn: $10 a week is $520 a year.
+learn: Add growth over many years, and small amounts can become a lot.
+learn: Regular, automatic amounts beat waiting until you have "enough".
+try: $10 × 52 weeks = $520 :: gap | $5 × 52 weeks = $_ | 260
+play: compound | Watch one year of $10 a week ($520) grow at 6% a year for 30 years | 520 | 6 | 30
+check: gap | $20 × 52 weeks = $_ | 1040
+check: tf | Regular small amounts beat waiting until you have "enough". | true
+home: Work out what you could invest each week, and what that adds up to in a year.
+skill: compounding
+
+@lesson 8.6 | Your investing plan | 📝 | home
+hook: Before you invest a cent, what should you write down?
+learn: Write why you're investing, how long for, and how much you'll add.
+learn: Write which fund you'll use, and why.
+learn: Write what you'll do if it drops 20%. Then talk it through with a grown-up.
+play: build | Write your first investing plan | Why I'm investing; How long I'll leave it; How much I'll add, and how often; Which fund, and why; What I'll do if it drops 20%
+check: mcq | Why write down what you'll do if it drops? | So you stay calm and don't panic-sell* | So you can sell fast | It isn't needed
+check: tf | Talking your plan through with a grown-up is a smart step. | true
+home: Write your plan on one page and go through it with a grown-up.
+skill: planning
+
 @band launchers
 @unit 1 | {nz:KiwiSaver~au:Superannuation} | Your retirement fund and how to choose it
 @unit 2 | Fees and returns | Comparing funds the right way
@@ -1168,3 +1971,271 @@ check: mcq | What records should you keep? | Every buy, sell and swap, with valu
 check: tf | Swapping one coin for another can be taxable. | true
 home: Look up crypto tax on {nz:the IRD~au:the ATO} website with a grown-up.
 skill: tax
+
+@lesson 5.1 | How returns get taxed | 🧾 | townhall
+hook: Your investments earned $500 this year. Does the tax office want some?
+learn: Interest and dividends are usually taxable income in both countries.
+learn: {nz:Most NZ managed funds, including KiwiSaver, are PIEs. They pay tax for you at your PIR: 10.5%, 17.5% or 28%.~au:When you sell an investment for more than you paid, the profit is a capital gain, added to your taxable income.}
+learn: {nz:NZ has no general capital gains tax, but profits can be taxable if you bought mainly to sell.~au:Dividends and interest are added to your income and taxed at your marginal rate.}
+play: sort | Usually taxable, Usually not taxed | Interest from a savings account=Usually taxable; Dividends from shares=Usually taxable; Money you put in from your own savings=Usually not taxed; A gift from your grandma=Usually not taxed; {nz:PIE fund returns, taxed at your PIR~au:A capital gain from selling shares}=Usually taxable | Taxed or not?
+check: mcq | Is interest from a savings account usually taxable? | Yes* | No | Only on Fridays
+check: tf | {nz:KiwiSaver funds are usually PIEs.~au:A capital gain is added to your taxable income.} | true
+home: Find the tax section of an investment or bank statement with a grown-up.
+skill: tax
+
+@lesson 5.2 | {nz:Getting your PIR right~au:Capital gains tax} | 🎯 | townhall
+hook: {nz:Your PIR is 28%, but your income is low. Are you overpaying?~au:You sell shares you bought 18 months ago for a $2,000 profit. How much is taxed?}
+learn: {nz:Your PIR depends on your income in the last two years. Many students qualify for 10.5%.~au:If you held the shares for at least 12 months, individuals usually get a 50% discount on the gain.}
+learn: {nz:If your PIR is too low, you'll pay extra tax at the end of the year. Use IRD's PIR tool to check.~au:$2,000 gain with the discount means $1,000 is added to your taxable income.}
+learn: {nz:Tell your fund your PIR and IRD number, or you'll be taxed at 28%.~au:Capital losses can be used to reduce capital gains.}
+play: mcq | {nz:You don't tell your fund your PIR. What rate is used?~au:You held shares 2 years and made a $4,000 gain. How much goes into your taxable income?} | {nz:28%~au:$2,000}* | {nz:10.5%~au:$4,000} | {nz:0%~au:$0}
+check: mcq | {nz:Where can you check your PIR?~au:How long must you usually hold an asset for the 50% discount?} | {nz:IRD's PIR tool~au:At least 12 months}* | {nz:A social media post~au:One week} | {nz:Your bank's ATM~au:10 years}
+check: tf | {nz:Your PIR depends on your recent income.~au:Capital losses can reduce capital gains.} | true
+home: {nz:Check which PIR your KiwiSaver fund uses for you, with a grown-up.~au:Ask a grown-up how they keep records of when they bought investments.}
+skill: tax
+
+@lesson 5.3 | {nz:Overseas shares~au:Franking credits} | 🌐 | townhall
+hook: {nz:You buy US shares directly. Are they taxed differently?~au:Your dividend statement shows "franking credits". What are they?}
+learn: {nz:Owning overseas shares directly that cost more than $50,000 in total brings in special foreign investment fund rules.~au:Australian companies pay company tax before paying dividends. Franking credits pass that tax on to shareholders.}
+learn: {nz:Below $50,000, you're usually taxed on dividends received. Funds that are PIEs handle this for you.~au:If your tax rate is lower than the company's, you can get some or all of the credit back as a refund.}
+learn: Keep every statement. You'll need them at tax time.
+play: match | Match each one to what it means | {nz:Overseas shares costing over $50,000~au:A franking credit}={nz:Special FIF tax rules may apply~au:Company tax already paid}; {nz:Overseas shares costing under $50,000~au:Your tax rate is lower than the company's}={nz:Usually taxed on dividends received~au:You may get some of the credit back}; {nz:A PIE fund that holds overseas shares~au:An unfranked dividend}={nz:Works out and pays the tax for you~au:No tax credit attached}; Your investment statements=Keep them for tax time
+check: mcq | {nz:Which handles overseas share tax for you?~au:What do franking credits represent?} | {nz:A PIE fund~au:Company tax already paid}* | {nz:Nobody~au:A bank fee} | {nz:Your phone~au:A discount voucher}
+check: tf | You should keep every investment statement. | true
+home: Look at a dividend or fund statement with a grown-up and find the tax section.
+skill: tax
+
+@lesson 5.4 | Records that save you | 🗃️ | townhall
+hook: You bought shares six times over three years. What did each one cost?
+learn: Keep a record of every buy and sell: date, number of units, price and fees.
+learn: Platforms give statements, but download and save them. Apps and platforms can change or close.
+learn: Good records mean you pay the right tax, no more and no less.
+play: build | Build an investment record | Date bought; What you bought and how many; Price paid and fees; Date sold; Price received and fees; Gain or loss
+check: mcq | Why keep your own records? | Platforms can close, and you need proof for tax* | It's fun | You don't need to
+check: tf | Good records help you pay the right amount of tax. | true
+home: Make a simple spreadsheet for tracking investments with a grown-up.
+skill: records
+
+@lesson 5.5 | Tax-friendly accounts | 🏠 | townhall
+hook: Why might {nz:KiwiSaver~au:super} be a tax-friendly place to invest?
+learn: {nz:KiwiSaver funds are PIEs, so the top tax rate is 28%, lower than the top income tax rate of 39%.~au:Earnings inside super are taxed at up to 15%, often less than your marginal rate.}
+learn: {nz:You also get employer contributions and a government contribution if you qualify.~au:Extra contributions from your pre-tax pay are usually taxed at 15%, up to a yearly cap.}
+learn: The catch: {nz:KiwiSaver money is locked until 65, except for a first home or hardship.~au:super is mostly locked until you retire.}
+play: debate | Should young people put extra savings into {nz:KiwiSaver~au:super}? | It depends. The tax and employer benefits are good, but the money is locked away* | Yes, always put everything in | Some prefer keeping savings flexible for study, travel or a home deposit first. Both can be sensible.
+check: mcq | What's the catch with {nz:KiwiSaver~au:super}? | The money is mostly locked away* | It's always taxed at 50% | You can't choose a fund
+check: tf | {nz:KiwiSaver funds have a top PIE rate of 28%.~au:Earnings inside super are taxed at up to 15%.} | true
+home: Ask a grown-up what they know about the tax benefits of {nz:KiwiSaver~au:super}.
+skill: retirement
+
+@lesson 5.6 | Don't let tax lead | 🐕 | shares
+hook: "I won't sell, because I'd pay tax." Is that always smart?
+learn: Tax matters, but it shouldn't be the only reason for an investment choice.
+learn: Paying some tax on a gain still leaves you with most of the profit.
+learn: Choose investments for your goals, risk and fees first. Then make them tax-efficient.
+play: path | Your shares have doubled. You need the money for a house deposit next year. | Sell some and pay the tax, so the deposit is safe => good: You still keep most of the gain, and your goal is protected. | Never sell, because of the tax => bad: A crash before your house purchase could cost far more than the tax. | Hide the gain from the tax office => bad: That's illegal, and penalties can be large.
+check: mcq | What should come first in investment choices? | Your goals, risk and fees* | Avoiding all tax | A friend's tip
+check: tf | Paying tax on a gain still leaves you with most of the profit. | true
+home: Talk with a grown-up about a time a decision was made for tax reasons. Was it a good one?
+skill: decisions
+
+@lesson 6.1 | Kinds of platforms | 📲 | online
+hook: Share apps, fund managers, robo-advisers. Which one does what?
+learn: A share trading app lets you buy and sell shares and ETFs yourself.
+learn: A fund manager runs managed funds you invest in directly. A robo-adviser picks a fund mix for you from your answers.
+learn: Micro-investing apps round up spare change or let you start with a few dollars.
+play: match | Match each platform to what it does | Share trading app=You choose and buy shares and ETFs yourself; Fund manager=You invest directly in their managed funds; Robo-adviser=Asks questions, then builds a fund mix for you; Micro-investing app=Invests small amounts, like spare change
+check: mcq | Which builds a fund mix from your answers? | A robo-adviser* | A share trading app | A bank ATM
+check: tf | Some apps let you start investing with a few dollars. | true
+home: Compare two investing platforms with a grown-up. What kind is each one?
+skill: platforms
+
+@lesson 6.2 | Who holds your shares? | 🗄️ | bank
+hook: Your app says you own 10 shares. Whose name are they really in?
+learn: {nz:Many NZ apps use a custodian. The shares are held in the custodian's name, on trust for you.~au:With a CHESS-sponsored broker, shares are registered in your own name, with a holder number (HIN). Some apps use a custodian instead.}
+learn: {nz:A custodian must keep your assets separate from the app company's own money.~au:With a custodian, shares are held in the custodian's name, on trust for you.}
+learn: Read how your platform holds your investments, and what happens if the platform fails.
+play: sort | Good sign, Warning sign | A clear explanation of who holds your shares=Good sign; Your money mixed with the company's own money=Warning sign; Regular statements you can download=Good sign; No idea where the company is based=Warning sign; Assets held separately, on trust for you=Good sign; Promises of guaranteed returns=Warning sign | Good sign or warning sign?
+check: mcq | What should you find out about a platform? | Who holds your investments, and how* | Its colour scheme | How many emojis it uses
+check: tf | {nz:With a custodian, shares are held on trust for you.~au:A HIN means the shares are registered in your own name.} | true
+home: Find the "how we hold your investments" page of an investing app with a grown-up.
+skill: platforms
+
+@lesson 6.3 | Comparing platform fees | 🏷️ | shares
+hook: App A charges $3 a trade. App B charges 0.5% a trade. Which is cheaper for a $200 buy?
+learn: Platforms charge in different ways: brokerage per trade, monthly fees, currency exchange fees and fund fees.
+learn: A flat fee hurts small trades most. A percentage fee hurts big trades most.
+learn: Currency fees on overseas shares can cost more than the trading fee itself.
+try: 0.5% of $200 = $1 :: gap | 0.5% of $1,000 = $_ | 5
+play: price | You'll make one $200 buy a month for a year. Which costs least in fees? | App A, $3 a trade:36:12:trades; App B, 0.5% a trade:12:12:trades; App C, $5 a month subscription:60:12:months
+check: gap | A $3 flat fee on a $30 buy is _% | 10
+check: mcq | Which fee hurts small trades most? | A flat fee per trade* | A percentage fee | No fee
+home: Look up the fees on two investing platforms with a grown-up and compare them for a $100 buy.
+skill: fees
+
+@lesson 6.4 | Apps that nudge | 🎰 | online
+hook: Confetti when you trade, a streak to keep, and "top movers" on the home screen. Why?
+learn: Some apps use game-like features to get you trading more often.
+learn: More trading often means more fees and worse results for investors.
+learn: Turn off price alerts, ignore "top movers", and stick to your plan.
+play: tap | Tap the features that nudge you to trade more | 🎉:yes:Confetti after every trade; 🔥:yes:Trading streaks; 🚀:yes:A top movers list on the home screen; 📄:no; 🔔:yes:Constant price alerts; 📚:no
+check: mcq | Why might an app add confetti to trades? | To get you trading more often* | To help you save | Because the law says so
+check: tf | Trading more often usually improves results. | false | More trades usually mean more fees and more emotional decisions.
+home: Look at an investing app's settings with a grown-up and find how to turn off alerts.
+skill: platforms
+
+@lesson 6.5 | Is it legit? | ✅ | townhall
+hook: A slick new app promises 2% a week. How do you check it's real?
+learn: {nz:Check the Financial Service Providers Register and the FMA's warnings list.~au:Check ASIC's Professional Register for an Australian Financial Services (AFS) licence, and Moneysmart's list of companies you should not deal with.}
+learn: Guaranteed high returns, pressure to act fast and crypto-only payments are red flags.
+learn: If you can't find the company on the official register, don't invest.
+play: order | Check a platform before you invest | Find the company's full legal name; {nz:Search the Financial Service Providers Register~au:Search ASIC's register for an AFS licence}; {nz:Check the FMA's warnings list~au:Check Moneysmart's list of companies to avoid}; Read independent reviews; Start small if it all checks out
+check: mcq | A platform promises 2% a week, guaranteed. What is it most likely to be? | A scam* | A great deal | A savings account
+check: tf | You should check a platform on the official register before investing. | true
+home: Look up one investing platform on {nz:the FSPR~au:ASIC's register} with a grown-up.
+skill: scams
+
+@lesson 6.6 | Lock down your account | 🔐 | online
+hook: Someone logs into your investing app and sells everything. How do you stop that happening?
+learn: Turn on two-factor authentication (2FA), ideally with an authenticator app, not just texts.
+learn: Use a long, unique password or a password manager. Never share login codes.
+learn: Watch for fake login pages, and for "support staff" asking for remote access to your phone.
+play: scam | Which messages are scams? | Your account is locked. Log in at this link to unlock it=scam; Your monthly statement is ready in the app=real; Support here. Install this app so we can fix your account remotely=scam; Read us the 6-digit code we just sent=scam; You've turned on two-factor authentication=real | Real platforms don't send login links by text, ask for codes or ask for remote access.
+check: mcq | What's the strongest login protection here? | Two-factor authentication with an authenticator app* | A short password | The same password everywhere
+check: tf | Real support staff will ask you to read out your login code. | false | Never share login codes. Real staff don't ask for them.
+home: Check that two-factor authentication is on for one important account, with a grown-up.
+skill: security
+
+@lesson 7.1 | The order of money moves | 🧱 | bank
+hook: You've got your first full-time job. Pay off debt, save or invest first?
+learn: A common order: a starter buffer, then pay off high-interest debt, then a full emergency fund, then invest for the long term.
+learn: {nz:Join KiwiSaver early so you get your employer's contributions and the government contribution.~au:Your employer pays super for you, so check it's going into a low-fee fund.}
+learn: Investing money you might need next month is risky. A crash could force you to sell low.
+play: build | Build your money plan in order | Budget so you spend less than you earn; Build a starter buffer of $1,000; Pay off high-interest debt, like credit cards; Build an emergency fund of 3 months' costs; Invest for the long term
+check: mcq | Why pay off a credit card before investing? | Card interest is usually higher than investment returns* | Investing is illegal before 25 | Cards are free
+check: tf | Investing money you might need soon is risky. | true
+home: Ask a grown-up what order they'd do these money moves in, and why.
+skill: planning
+
+@lesson 7.2 | Debt or invest? | ⚖️ | bank
+hook: You have $2,000 spare. Your credit card charges 21%. A fund might return 7%. Which first?
+learn: Paying off a 21% card is like getting a guaranteed 21% return.
+learn: No investment reliably beats that, so high-interest debt usually comes first.
+learn: Low-interest debt is different. {nz:A student loan is interest-free while you live in NZ, so there's usually no rush to repay it early.~au:A HELP debt is only indexed, not charged interest, so there's often no rush to repay it early.}
+try: 21% of $2,000 = $420 :: gap | 7% of $2,000 = $_ | 140
+play: slider | You owe $2,000 at 21% and invest $2,000 at 7% instead of paying it off. About how much worse off are you after a year? | 0 | 500 | 280 | $ | 20 | 10
+check: mcq | Which should usually come first? | Paying off a 21% credit card* | Investing at 7% | Buying a new phone
+check: tf | Paying off high-interest debt is like getting a guaranteed return. | true
+home: Ask a grown-up which of their debts, if any, has the highest interest rate.
+skill: debt
+
+@lesson 7.3 | Get the free money | 🎁 | shares
+hook: Your employer and the government may add to your retirement savings. Are you leaving any on the table?
+learn: {nz:If you put in 3.5% of your pay, your employer must add at least 3.5% too.~au:Your employer must pay 12% of your ordinary pay into super.}
+learn: {nz:The government adds 25c for every $1 you put in, up to $260.72 a year.~au:On a lower income, adding your own after-tax money can earn a government co-contribution of up to $500 a year.}
+learn: {nz:Check you're putting in enough each year to get the full government contribution.~au:Check your payslip and super account to make sure it's really being paid.}
+try: 10% of $40,000 = $4,000 :: gap | 5% of $40,000 = $_ | 2000
+play: gap | {nz:You earn $40,000. Your employer adds 3.5%. That's $_ a year, before tax.~au:You earn $40,000. Your employer pays 12% super. That's $_ a year.} | {nz:1400~au:4800}
+check: mcq | {nz:How much does the government add to KiwiSaver?~au:How much must your employer pay into super?} | {nz:25c for every $1 you put in, up to $260.72~au:12% of your ordinary pay}* | Nothing | {nz:$1 for every $1, with no limit~au:Whatever they feel like}
+check: tf | {nz:If you contribute, your employer must add at least 3.5%.~au:You can check your payslip to see if super is being paid.} | true
+home: Look at a payslip with a grown-up and find the {nz:KiwiSaver~au:super} lines.
+skill: retirement
+
+@lesson 7.4 | Set and forget | 🔁 | bank
+hook: What if investing happened by itself, every payday?
+learn: Set up an automatic transfer to your investment account for the day after payday.
+learn: Regular investing means you buy at all sorts of prices, high and low.
+learn: Automation beats willpower. You won't skip it in a busy month.
+play: order | Set up automatic investing | Choose a low-fee fund; Pick an amount you can keep up; Set an automatic transfer for the day after payday; Check in every few months; Increase it when your pay goes up
+check: mcq | When's a good time for an automatic investment transfer? | Just after payday* | Whenever you remember | Only after a crash
+check: tf | Automatic investing means you don't rely on willpower each month. | true
+home: Ask a grown-up which of their savings or payments happen automatically.
+skill: planning
+
+@lesson 7.5 | A windfall | 💰 | bank
+hook: You get a $5,000 bonus. What does your plan say to do with it?
+learn: Windfalls, like bonuses, tax refunds or gifts, are easy to waste.
+learn: Run them through your plan: debt first, then the emergency fund, then goals and investing.
+learn: Keep a small slice for fun. It makes the plan easier to stick to.
+play: budget | Put a $5,000 bonus through your plan | 5000 | Pay off credit card=1500; Top up emergency fund=1500; Invest for the long term=0; Fun=0 | Car repair:400
+check: mcq | What's a good first use of a windfall if you have card debt? | Paying off the card* | A holiday | A new TV
+check: tf | Keeping a small slice of a windfall for fun can help you stick to a plan. | true
+home: Ask a grown-up what they'd do with a surprise $1,000.
+skill: planning
+
+@lesson 7.6 | Write it down | 📝 | home
+hook: Why write your investing plan on one page?
+learn: A written plan says your goals, timeframe, how much you'll invest, which funds, and when you'll review it.
+learn: It also says what you'll do in a crash, decided while you're calm.
+learn: When headlines get scary, you read your plan instead of panicking.
+play: diff | A vague plan, then a clear one. Tap what's been improved. | Goal: be rich; Invest: some money, sometimes; Fund: whatever's hot; In a crash: decide then | Goal: $20,000 house deposit by 2031; Invest: $150 every payday, automatically; Fund: a low-fee balanced fund; In a crash: keep investing, review in a year
+check: mcq | What's a good thing to include in a written plan? | What you'll do in a crash* | Your favourite meme | Nothing specific
+check: tf | Writing your plan while calm helps you stick to it in a crash. | true
+home: Write a one-page investing plan for a pretend goal and show a grown-up.
+skill: planning
+
+@lesson 8.1 | Decades of growth | 📈 | shares
+hook: What does 40 years in the market actually look like?
+learn: Over long periods, diversified share markets have gone up, with crashes along the way.
+learn: Over 40 years, you might live through four or five big falls.
+learn: Staying invested through them is how past investors got the long-run growth.
+play: market | Ride 40 years in the market | 40
+check: mcq | Over long periods, what have diversified share markets done? | Grown, with crashes along the way* | Gone straight up | Always gone down
+check: tf | Over 40 years, you're likely to live through several big falls. | true
+home: Ask a grown-up how many market crashes they've lived through.
+skill: longterm
+
+@lesson 8.2 | The behaviour gap | 🧠 | shares
+hook: A fund returned 8% a year. Why did many of its investors get less?
+learn: Investors often buy after prices rise and sell after they fall.
+learn: That timing makes their returns lower than the fund's. It's called the behaviour gap.
+learn: Sticking to the plan is often worth more than picking the perfect fund.
+play: debate | Does your behaviour matter more than which fund you choose? | Often yes. Panic-selling and chasing hot funds can cost more than small differences between funds* | No. Only the fund matters | Fees and fund choice still matter a lot, so both deserve attention.
+check: mcq | What causes the behaviour gap? | Buying high and selling low out of emotion* | Low fees | Investing regularly
+check: tf | Sticking to a plan can matter more than finding the perfect fund. | true
+home: Talk with a grown-up about a time emotions pushed them into a money decision.
+skill: behaviour
+
+@lesson 8.3 | Rebalancing | ⚖️ | shares
+hook: You planned 60% shares and 40% bonds. After a great year, it's 70/30. What now?
+learn: Over time, the parts that grow fastest take up more of your mix, so your risk drifts up.
+learn: Rebalancing means moving back to your planned mix, often once a year.
+learn: Many multi-asset funds rebalance for you automatically.
+try: 60% of $10,000 is $6,000 :: gap | 40% of $10,000 is $_ | 4000
+play: slider | Your $10,000 is $7,000 shares and $3,000 bonds. Your plan is 60% shares. How much should you move from shares to bonds? | 0 | 3000 | 1000 | $ | 0 | 250
+check: mcq | What does rebalancing do? | Brings your mix back to your plan* | Sells everything | Doubles your risk
+check: tf | Many multi-asset funds rebalance automatically. | true
+home: Find out with a grown-up whether their {nz:KiwiSaver~au:super} fund rebalances for them.
+skill: rebalancing
+
+@lesson 8.4 | Life changes, plans change | 🔀 | home
+hook: You're 35, with a new baby and a mortgage. Should your investing plan change?
+learn: Big life events can change your goals, your timeframe and how much risk you can take.
+learn: Review your plan after big changes, like a new job, a partner, kids, a house or a redundancy.
+learn: Change it because your life changed, not because the market did.
+play: path | Markets have just fallen 25%, and nothing in your life has changed. | Stick to your plan and keep investing => good: Your life hasn't changed, so your plan doesn't need to. | Switch everything to cash until it feels safe => bad: You'd lock in the fall and probably miss the recovery. | Stop all contributions for a year => bad: You'd miss buying while prices are low.
+check: mcq | What's a good reason to change your investing plan? | A big life change, like kids or a house* | A scary headline | A friend's tip
+check: tf | You should change your plan because the market fell. | false | Change it because your life changed, not because of the market.
+home: Ask a grown-up which life changes made them rethink their money plans.
+skill: planning
+
+@lesson 8.5 | Stop checking so often | 📵 | online
+hook: You check your investments 20 times a day. Is that helping?
+learn: Checking often means you see more drops, and losses tend to feel about twice as bad as gains feel good.
+learn: That pushes people into emotional moves.
+learn: For long-term money, checking every few months is plenty.
+play: tap | Tap the healthy habits for a long-term investor | 📅:yes:A check-in every few months; 🔕:yes:Turning off price alerts; 📖:yes:Rereading your plan when markets fall; 📱:no; 😱:no; 🤖:yes:Automatic contributions
+check: mcq | For long-term investments, how often is plenty? | Every few months* | Every minute | Every hour
+check: tf | Losses tend to feel worse than gains of the same size. | true
+home: Turn off price alerts on any investing app, or help a grown-up do it.
+skill: behaviour
+
+@lesson 8.6 | Your future self | 🧓 | shares
+hook: Picture yourself at 65. What would they thank you for doing now?
+learn: Money invested at 18 has nearly 50 years to grow before 65.
+learn: {nz:You can usually take out your KiwiSaver at 65, and NZ Super is a government pension from 65.~au:You can usually access your super from 60 once you retire, or at 65. The Age Pension starts at 67 and is means-tested.}
+learn: Small, steady habits now, like investing regularly with low fees, make the biggest difference later.
+play: compound | $5,000 invested at 18, growing at 6% a year until 65 | 5000 | 6 | 47
+check: mcq | Why does starting at 18 help so much? | The money has decades to grow* | It doesn't | Interest only works for teenagers
+check: tf | {nz:You can usually take out your KiwiSaver at 65.~au:You can usually access super at 60 once you retire, or at 65.} | true
+home: Write a short note to your 65-year-old self about one money habit you're starting now.
+skill: retirement

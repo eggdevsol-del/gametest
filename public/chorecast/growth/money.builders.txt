@@ -298,3 +298,271 @@ check: tf | Paying with a phone uses money from a card or account. | true
 home: Next time you go shopping, guess which way your grown-up will pay, and ask why.
 skill: payments
 
+@lesson 5.1 | Goals you can reach | 🎯 | bank
+hook: "I want lots of money" or "I'll save $120 for a skateboard by March." Which goal works?
+learn: Good goals are specific: what it is, how much it costs and when you want it.
+learn: They should be possible with your income, not a wild dream.
+learn: Writing the goal down makes you much more likely to stick with it.
+play: sort | Good goal, Too vague | Save $120 for a skateboard by March=Good goal; Be rich=Too vague; Save $40 for a gift by Mum's birthday=Good goal; Get lots of stuff=Too vague; Put $5 a week into my Vault for 10 weeks=Good goal; Save some money one day=Too vague | Good goal or too vague?
+check: mcq | Which is a good goal? | Save $60 for shoes by June* | Get money | Be rich
+check: tf | Writing a goal down helps you stick to it. | true
+home: Write one specific saving goal with a grown-up and stick it on the fridge.
+skill: goals
+
+@lesson 5.2 | Break it down | 🧱 | bank
+hook: $120 sounds like a lot. What if you broke it into weeks?
+learn: Divide the goal by the number of weeks you have.
+learn: $120 in 12 weeks is $10 a week. That feels possible!
+learn: If the weekly amount is too high, give yourself more time or find extra income.
+try: $60 in 6 weeks is $10 a week :: gap | $80 in 8 weeks is $_ a week | 10
+play: slider | You want $150 in 10 weeks. How much should you save each week? | 0 | 30 | 15 | $ | 0 | 1
+check: gap | $90 in 6 weeks is $_ a week | 15
+check: mcq | The weekly amount is too high. What can you do? | Give yourself more time or earn extra* | Give up | Borrow from a stranger
+home: Break your saving goal into a weekly amount with a grown-up.
+skill: goals
+
+@lesson 5.3 | Track your progress | 📈 | bank
+hook: How do you know if you're on track?
+learn: Track your savings each week. A chart or a jar with lines works well.
+learn: Compare where you are with where you planned to be.
+learn: Seeing progress keeps you motivated.
+play: order | Track a saving goal | Write your goal and weekly amount; Save each week; Mark your total on a chart; Compare it with your plan; Change your plan if you fall behind
+check: mcq | Why track your savings? | To see if you're on track* | To make it look nice | To spend more
+check: tf | Seeing progress can keep you motivated. | true
+home: Make a progress chart for your saving goal in Chorecast or on paper.
+skill: goals
+
+@lesson 5.4 | Short, medium and long | 🗓️ | bank
+hook: Some goals take a week. Some take years. How should you plan them?
+learn: Short-term goals take weeks, like a $15 book.
+learn: Medium-term goals take months, like a $200 bike.
+learn: Long-term goals take years, like a car or a trip. They need steady saving, and maybe investing.
+play: sort | Short-term, Medium-term, Long-term | A $15 book next week=Short-term; A $200 bike in 6 months=Medium-term; A first car at 18=Long-term; A movie ticket on Saturday=Short-term; A school camp in 4 months=Medium-term; A big trip after school=Long-term | How long will it take?
+check: mcq | A first car at 18 is a... | Long-term goal* | Short-term goal | Not a goal
+check: tf | Long-term goals need steady saving. | true
+home: Write one short, one medium and one long-term goal with a grown-up.
+skill: goals
+
+@lesson 5.5 | Falling behind | 🐢 | bank
+hook: You planned to have $60 by now, but you only have $40. Is the goal ruined?
+learn: Falling behind is normal. What matters is what you do next.
+learn: You can save a bit more each week, earn extra or move the deadline.
+learn: Don't give up on the whole goal because of one bad week.
+play: path | You're $20 behind on your saving goal. | Do two extra jobs and move the date a week later => good: Small changes get you back on track. | Give up on the goal => bad: You'd lose all the progress you made. | Spend the rest because it's "ruined" => bad: It's not ruined, it's just behind.
+check: mcq | You're behind on a goal. What helps? | Saving a bit more or moving the deadline* | Giving up | Spending everything
+check: tf | Falling behind is normal. | true
+home: Check your saving goal with a grown-up. Are you on track, ahead or behind?
+skill: persistence
+
+@lesson 5.6 | Plan a week | 📒 | bank
+hook: You get $20 a week. How do you save for your goal and still have fun?
+learn: Put your goal savings aside first, as soon as you get your money.
+learn: Then plan the rest: snacks, fun and a little spare.
+learn: A spare amount stops surprises from eating your goal money.
+play: budget | Plan your $20 week with a goal | 20 | Goal savings=8; Snacks=0; Fun=0; Emergency buffer=0 | Lost bus fare:2
+check: mcq | When should you put aside goal money? | As soon as you get paid* | At the end of the week if any is left | Never
+check: gap | You get $20 and save $8 for your goal. You have $_ to plan | 12
+home: Plan next week's money with a grown-up, putting goal money aside first.
+skill: budgeting
+
+@lesson 6.1 | Ads are everywhere | 📺 | online
+hook: How many ads did you see today? Most people see hundreds without noticing.
+learn: An ad is a message someone paid for, to get you to buy, use or think something.
+learn: Ads are on TV, in apps and games, on buses, on clothes and in videos.
+learn: Spotting an ad is the first step to deciding for yourself.
+play: tap | Tap all the ads | 📺:yes:A TV commercial; 🚌:yes:A poster on a bus; 📱:yes:A sponsored post in an app; 👕:yes:A big logo on a T-shirt; 🌳:no; 📖:no; 🎮:yes:An ad that pops up in a game
+check: mcq | What is an ad? | A paid message to get you to buy or think something* | A news story | A school report
+check: tf | A big brand logo on clothes is a kind of ad. | true
+home: Count the ads you see on one trip to the shops with a grown-up.
+skill: advertising
+
+@lesson 6.2 | Ad tricks | 🎩 | stage
+hook: "Only 2 left! Everyone has one! As seen on TV!" What's going on?
+learn: Ads use tricks to make you want things fast.
+learn: "Only today" or "only 2 left" makes you rush. "Everyone has one" makes you feel left out.
+learn: Famous faces, catchy songs and free gifts make products seem better than they are.
+play: match | Match each trick to an example | Hurry up=Sale ends at midnight!; Everyone has one=Join the millions of kids who love it; Famous face=A sports star holding the drink; Free gift=A free toy inside every box
+check: mcq | "Only 2 left!" tries to make you... | Rush without thinking* | Wait | Save money
+check: tf | A famous person in an ad means the product is good. | false | They're usually paid to be there.
+home: Watch an ad with a grown-up and name the tricks it uses.
+skill: advertising
+
+@lesson 6.3 | Influencers and sponsored posts | 🤳 | online
+hook: Your favourite creator loves a new energy snack. Are they just being honest?
+learn: Influencers are often paid, or given free stuff, to talk about products.
+learn: Look for labels like "ad", "sponsored", "paid partnership" or "gifted".
+learn: Advertising rules say paid posts should be clearly labelled, but not everyone follows them.
+play: sort | Probably an ad, Probably not | A post tagged "paid partnership"=Probably an ad; A video with a discount code for you=Probably an ad; Your friend showing a book they borrowed=Probably not; A creator unboxing "gifted" sneakers=Probably an ad; A news report about a storm=Probably not; A post saying "use my link to buy"=Probably an ad | Ad or not?
+check: mcq | Which label shows a post is an ad? | "Sponsored"* | "Cool" | "Today"
+check: tf | Influencers can be paid to say they love something. | true
+home: Look at a creator's post with a grown-up. Can you find an ad label?
+skill: advertising
+
+@lesson 6.4 | Spending inside games | 🎮 | online
+hook: The game is free. So why does it keep asking for money?
+learn: Many free games make money from in-game purchases, like skins, coins and loot boxes.
+learn: Games use timers, gems instead of dollars, and "limited" items to make spending feel small.
+learn: Work out the real money cost before you buy, and agree on a limit with your grown-up.
+try: 1,000 gems cost $10, so 100 gems cost $1 :: gap | 1,000 gems cost $10. A 300-gem skin costs $_ | 3
+play: path | A "limited-time" skin costs 800 gems. You have none. Gems cost $10 for 1,000. | Work out the real cost ($8) and check your plan with a grown-up => good: Now you know the real price and can decide calmly. | Buy it fast before the timer ends => bad: The timer is a trick to rush you. | Use a parent's card without asking => bad: That's spending someone else's money, and it can add up fast.
+check: mcq | Why do games use gems instead of dollars? | It hides how much real money you spend* | Gems are free | To help you save
+check: tf | A countdown timer in a game is often there to rush you. | true
+home: Agree on a game spending limit with your grown-up, in real dollars.
+skill: advertising
+
+@lesson 6.5 | Free isn't always free | 🆓 | online
+hook: "Free app!" Then it asks for your email, your location and your birthday. Is it really free?
+learn: Some "free" things make money from your attention or your information.
+learn: Your data, like what you watch and click, helps companies show you more ads.
+learn: Check what a free thing wants before you say yes, and ask a grown-up.
+play: mystery | You don't pay money for it; It shows you lots of ads; It keeps track of what you watch and click; Companies pay it to reach you | A "free" app* | A library book | A piggy bank
+check: mcq | How do some free apps make money? | Showing ads and using your data* | Magic | They don't
+check: tf | "Free" things can still cost you something, like your data. | true
+home: Check what information one app on a family device asks for, with a grown-up.
+skill: advertising
+
+@lesson 6.6 | Your ad shield | 🛡️ | home
+hook: You see an ad and suddenly you really want the thing. What's your plan?
+learn: Name it: "This is an ad. They want me to buy."
+learn: Ask: Do I need it? What does it really cost? Do other reviews agree?
+learn: Wait a day. If you still want it, add it to your plan.
+play: order | Use your ad shield | Notice it's an ad; Ask who paid for it and why; Check what it really costs; Wait a day; Decide if it fits your plan
+check: mcq | You really want something after an ad. What's a smart first step? | Notice it's an ad and wait a day* | Buy it now | Buy two
+check: tf | Waiting a day helps you see if you really want it. | true
+home: Try your ad shield the next time an ad makes you want something.
+skill: advertising
+
+@lesson 7.1 | Where your money comes from | 💼 | bank
+hook: Pocket money, birthday money, chores, selling old toys. Which ones did you earn?
+learn: Earned money comes from work you do or things you sell. Gifts are given to you.
+learn: Earning more means doing more work, or doing work that's worth more to people.
+learn: Knowing where your money comes from helps you plan.
+play: sort | Earned, Given | Washing the neighbour's car=Earned; Birthday money from Nana=Given; Selling your old books=Earned; Pocket money for doing chores=Earned; Money from the tooth fairy=Given; Minding your cousin with a grown-up home=Earned | Earned or given?
+check: mcq | Which is earned money? | Pay for washing a car* | A birthday gift | Money found on the footpath
+check: tf | Knowing where your money comes from helps you plan. | true
+home: List where your money came from last month with a grown-up. How much was earned?
+skill: earning
+
+@lesson 7.2 | Per hour or per job? | ⏱️ | bank
+hook: Mowing pays $15 a lawn. Weeding pays $8 an hour. Which is better?
+learn: Per job pay is a set price for the whole job. Per hour pay depends on how long you work.
+learn: Per job suits you if you work fast. Per hour is fairer if a job could take ages.
+learn: To compare, work out how much each one pays for every hour.
+try: $15 for a 1-hour lawn is $15 an hour :: gap | $20 for a 2-hour job is $_ an hour | 10
+play: match | Match each job to what it pays per hour | Mow a lawn for $15, taking 1 hour=$15 an hour; Wash a car for $12, taking 2 hours=$6 an hour; Walk a dog for $5, taking 30 minutes=$10 an hour; Weed for 3 hours at $8 an hour=$8 an hour
+check: gap | $24 for a 3-hour job is $_ an hour | 8
+check: mcq | Which pays most per hour? | $10 for 30 minutes* | $10 for 2 hours | $10 for 3 hours
+home: Time one paid job you do, then work out what it paid per hour.
+skill: earning
+
+@lesson 7.3 | Takings minus costs | 🧮 | stall
+hook: You sold $40 of cupcakes. Did you make $40?
+learn: Takings are all the money customers pay you.
+learn: Costs are what you spent to make things, like flour, icing and cupcake cases.
+learn: Profit is takings minus costs. That's what you really earned.
+try: $40 takings − $12 costs = $28 profit :: gap | $30 takings − $9 costs = $_ profit | 21
+play: slider | You sold 20 cupcakes at $2 each. The ingredients cost $14. What's your profit? | 0 | 40 | 26 | $ | 0 | 1
+check: gap | $50 takings − $20 costs = $_ profit | 30
+check: tf | Takings and profit are the same thing. | false | Profit is what's left after you pay your costs.
+home: Work out the costs of something you could bake and sell, with a grown-up.
+skill: profit
+
+@lesson 7.4 | Sell what you don't use | ♻️ | stall
+hook: There's a scooter in the garage you haven't used for a year. Could it earn you money?
+learn: Selling things you don't use earns money and clears space.
+learn: Used things sell for less than new. Clean them up and take clear photos.
+learn: Ask a grown-up to help, and only sell to people your grown-up says are OK.
+play: island | What could you get back if you sold your island things? | resale
+check: mcq | What helps used things sell? | Cleaning them and taking clear photos* | Hiding the scratches | Asking more than the new price
+check: tf | Used things usually sell for less than new. | true
+home: Find one thing you don't use any more and ask a grown-up if you could sell it.
+skill: selling
+
+@lesson 7.5 | Is it worth your time? | ⌛ | bank
+hook: A job pays $5 but takes all of Saturday morning. Worth it?
+learn: Your time is valuable. Think about pay per hour, not just the total.
+learn: Some jobs are worth doing for other reasons, like helping someone or learning a skill.
+learn: Saying no to a job that pays too little is OK.
+play: debate | Should you take a job that pays $5 for 5 hours of raking? | Probably not. That's $1 an hour, and your time is worth more* | Yes. Any money is good money | If it's for a neighbour who needs help, or to learn a skill, it might still be worth it.
+check: gap | $5 for 5 hours is $_ an hour | 1
+check: mcq | Besides money, what's a good reason to take a job? | Learning a new skill* | Getting out of homework | There isn't one
+home: Talk with a grown-up about a job worth doing even though it pays little.
+skill: earning
+
+@lesson 7.6 | Grow your earnings | 📈 | bank
+hook: How could you earn more next year than this year?
+learn: Get better at a job, and you can charge a bit more.
+learn: Repeat customers and good reviews bring more work.
+learn: Save some of what you earn, and spend a little on tools that help you work.
+play: budget | Plan the $30 you earned this month | 30 | Vault=6; Spend=0; Invest=0; Give=0; Tools for your job=0 | A new lead for your dog-walking job:5
+check: mcq | What can help you earn more over time? | Getting better and getting good reviews* | Doing jobs badly | Charging strangers double
+check: tf | Saving some of what you earn helps your money grow. | true
+home: Pick one skill that could help you earn more, and plan how to practise it.
+skill: earning
+
+@lesson 8.1 | Everyone makes money mistakes | 🙃 | home
+hook: Your grown-up once spent $100 on a gadget they never used. Does that make them bad with money?
+learn: Everyone makes money mistakes, even grown-ups.
+learn: Small mistakes while you're young are cheap lessons.
+learn: What matters is noticing, fixing what you can and learning.
+play: sort | Mistake, Smart move | Spending all your money on day one=Mistake; Checking the price before buying=Smart move; Losing money out of your pocket at the park=Mistake; Waiting a day before a big buy=Smart move; Buying something just because a friend did=Mistake; Keeping your receipt=Smart move | Mistake or smart move?
+check: tf | Grown-ups never make money mistakes. | false | Everyone makes money mistakes. The trick is learning from them.
+check: mcq | What matters most after a money mistake? | Learning from it* | Hiding it | Feeling bad for ever
+home: Ask a grown-up about a money mistake they made and what they learned.
+skill: mistakes
+
+@lesson 8.2 | Lost money | 😟 | stall
+hook: You get to the shop and your $10 note is gone. What now?
+learn: Stay calm and retrace your steps.
+learn: Tell a grown-up, and ask the shop if anyone handed it in.
+learn: Next time, try a zip pocket, a wallet or a card your grown-up looks after with you.
+play: order | Lost money? Try these steps | Stay calm; Check your pockets and bag; Retrace your steps; Ask if anyone handed it in; Tell a grown-up and make a plan for next time
+check: mcq | You've lost money. What's the first step? | Stay calm* | Panic | Blame your friend
+check: tf | A zip pocket or wallet can help stop money getting lost. | true
+home: Choose a safe way to carry money with a grown-up.
+skill: mistakes
+
+@lesson 8.3 | Buyer's regret | 🎧 | stall
+hook: You bought headphones, and now you wish you hadn't. Can you take them back?
+learn: If something is faulty, you have rights under {nz:the Consumer Guarantees Act~au:Australian Consumer Law}. You can ask for a repair, replacement or refund.
+learn: If you just changed your mind, the shop doesn't have to take it back. Some shops will, if you have the receipt.
+learn: Keep receipts, and check the shop's returns policy before you buy.
+play: chat | You go back to the shop with headphones that stopped working | them: Hi, how can I help? | me: Hi. These headphones stopped working after a week. Here's my receipt.*/Give me my money NOW/Um, never mind | them: Sorry about that. Would you like a replacement or a refund? | me: A refund, please. Thanks for your help.*/Whatever/You should've sold me better ones
+check: mcq | Headphones stop working after a week. What can you ask for? | A repair, replacement or refund* | Nothing | Double your money back
+check: tf | Shops must always give refunds if you change your mind. | false | Only if the item is faulty, or the shop's own policy allows it.
+home: Find a receipt at home with a grown-up and read the returns policy on it.
+skill: consumer
+
+@lesson 8.4 | Overspent | 💸 | bank
+hook: It's Wednesday and your week's money is already gone. What now?
+learn: First, stop spending. Don't borrow to keep going.
+learn: Look at what you spent and find where it went.
+learn: Next week, plan before you spend, and leave a buffer.
+play: diff | Last week's plan, then what really happened. Tap the lines that went off plan. | Lunch $10; Snacks $3; Fun $5; Savings $2 | Lunch $10; Snacks $8; Fun $9; Savings $0
+check: mcq | You've run out of money mid-week. What should you do first? | Stop spending and look at where it went* | Borrow from friends | Spend your savings
+check: tf | Leaving a buffer can stop you running out. | true
+home: Look back at last week's spending with a grown-up. Did anything go off plan?
+skill: budget
+
+@lesson 8.5 | Tricked online | 🎣 | online
+hook: You paid $20 for a game skin from a website, and nothing arrived. What now?
+learn: If you think you've been scammed, tell a grown-up straight away. Don't hide it.
+learn: The faster you act, the better the chance of getting money back. A grown-up can call the bank.
+learn: Never pay again to "unlock" the first payment. That's part of the scam.
+play: path | You paid $20 for a skin from a website. Nothing arrived, and now they want $10 more to "release" it. | Tell a grown-up straight away => good: They can contact the bank and report it. Acting fast helps. | Pay the $10 to get it released => bad: Scammers keep asking for more. You'd lose $30. | Keep it secret because you feel silly => bad: Hiding it means nobody can help. Scammers trick grown-ups too.
+check: mcq | You think you've been scammed. What first? | Tell a grown-up straight away* | Pay more to fix it | Keep it secret
+check: tf | Scammers trick grown-ups too, so there's no shame in telling. | true
+home: Agree with a grown-up on what you'd do if you were tricked online.
+skill: scams
+
+@lesson 8.6 | Bounce back | 🔁 | bank
+hook: You made a money mistake. How do you make sure it doesn't happen again?
+learn: Work out what went wrong, without being too hard on yourself.
+learn: Make one small rule, like "I wait a day for anything over $10".
+learn: Then start again. Every week is a fresh start.
+play: build | Bounce back from a money mistake | Say what happened; Work out why it happened; Fix what you can; Make one new rule; Try again next week
+check: mcq | A helpful rule after a mistake might be... | "I wait a day for anything over $10"* | "I never look at prices" | "I hide receipts"
+check: tf | Every week is a fresh start with money. | true
+home: Write one money rule for yourself and stick it somewhere you'll see it.
+skill: mistakes
+

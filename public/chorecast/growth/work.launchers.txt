@@ -291,3 +291,269 @@ check: tf | You can negotiate things other than pay, like hours or training. | t
 home: Ask a grown-up whether they've ever negotiated pay, and how it went.
 skill: negotiating
 
+@lesson 5.1 | Employee or contractor? | 🪪 | workshop
+hook: The ad says "contractor, $30 an hour". Is that better than $25 an hour as an employee?
+learn: Employees get minimum wage, paid holidays, sick leave and {nz:employer KiwiSaver contributions~au:super} by law.
+learn: Contractors run their own business. They usually get none of that, and they sort out their own tax.
+learn: Some businesses call workers "contractors" to dodge those costs. What counts is how the job really works, not the label.
+play: sort | Sounds like an employee, Sounds like a contractor | The boss sets your hours and tells you how to work=Sounds like an employee; You quote a price and choose how to do the job=Sounds like a contractor; You get paid sick leave=Sounds like an employee; You send invoices to several clients=Sounds like a contractor; You use your own tools and van=Sounds like a contractor; You wear the company uniform and work only for them=Sounds like an employee | Which does it sound like?
+check: mcq | Which usually comes with paid holidays? | Being an employee* | Being a contractor | Neither, ever
+check: tf | Calling someone a contractor makes them one, however the job works. | false | {nz:The Employment Relations Authority~au:The Fair Work Ombudsman and the courts} look at how the job really works.
+home: Ask a grown-up if they've ever worked as a contractor, and what was different.
+skill: selfemployed
+
+@lesson 5.2 | Setting your rate | 💲 | bank
+hook: An employee earns $25 an hour. Why might a contractor doing the same work charge $40?
+learn: Contractors don't get paid holidays, sick days or {nz:KiwiSaver contributions from an employer~au:super from an employer}.
+learn: They also pay for their own tools, phone, insurance, and the unpaid time spent quoting and travelling.
+learn: A rough start: work out what you need to earn in a year, then divide by the hours you'll really bill, not 40 hours every week.
+try: $40,000 ÷ 1,000 billable hours = $40 an hour :: gap | $36,000 ÷ 1,200 billable hours = $_ an hour | 30
+play: slider | You want to earn $45,000 a year and can bill about 1,250 hours. What hourly rate do you need? | 20 | 60 | 36 | $ | 2 | 1
+check: gap | $50,000 ÷ 1,000 billable hours = $_ an hour | 50
+check: mcq | Why do contractors charge more per hour than employees earn? | They cover their own leave, costs and unbilled time* | They're greedy | Their tax is lower
+home: List the costs a self-employed cleaner or gardener might have, with a grown-up.
+skill: pricing
+
+@lesson 5.3 | Writing an invoice | 🧾 | workshop
+hook: You did a $300 job. How do you ask to be paid?
+learn: An invoice is a bill you send to a client. It's also your record for tax.
+learn: Include your name, an invoice number, the date, what you did, the amount and when it's due.
+learn: Add how to pay you, like your bank account. {nz:Once you're registered for GST, show your GST number too.~au:Include your ABN, or the client may have to hold back 47% for tax.}
+play: diff | A rushed invoice, then a proper one. Tap what's been fixed. | Sam Lee; Invoice #014, 3 November; For: lawn stuff; Amount: 300; Pay me soon | Sam Lee; Invoice #014, 3 November; For: mowing and edging at 12 Rata St; Amount: $300; Due 17 November, by bank transfer
+check: mcq | What should every invoice include? | What you did, the amount and when it's due* | Only a smiley face | Your password
+check: tf | {nz:Once you're registered for GST, your invoices need your GST number.~au:If you don't quote an ABN, the client may hold back 47% of the payment.} | true
+home: Make an invoice template with a grown-up for a pretend job.
+skill: invoicing
+
+@lesson 5.4 | Tax as a contractor | 🏛️ | townhall
+hook: A client pays you $1,000. How much of it is really yours?
+learn: {nz:Some contractors have tax taken from each payment, called schedular payments. You choose a rate on an IR330C form, or 45% is taken.~au:Contractors who quote an ABN usually get the full amount, with no tax taken out, and pay the tax later.}
+learn: {nz:At the end of the year you file a return. If too little tax was taken, you pay the rest.~au:You lodge a tax return and pay what you owe. Bigger earners may pay PAYG instalments during the year.}
+learn: A common habit is moving 25% to 30% of every payment into a separate tax savings account.
+try: 25% of $1,000 = $250 :: gap | 30% of $1,000 = $_ | 300
+play: path | A client pays you $2,000 for building a website. | Move $500 to a tax savings account straight away => good: When the tax bill comes, the money's ready. | Spend it all and worry about tax later => bad: Tax bills arrive months later, and penalties add up if you can't pay. | Don't tell {nz:IRD~au:the ATO} about it => bad: That's tax evasion, which is illegal. Clients may report what they paid you too.
+check: mcq | A smart tax habit for contractors? | Put aside a share of every payment* | Spend first, sort tax later | Never file a return
+check: tf | {nz:If you don't give a tax rate for schedular payments, 45% can be taken.~au:Contractors who quote an ABN usually get paid with no tax taken out.} | true
+home: Ask a grown-up who's self-employed how they put money aside for tax.
+skill: tax
+
+@lesson 5.5 | Getting paid on time | ⏰ | bank
+hook: Your invoice was due two weeks ago. The client has gone quiet. Now what?
+learn: Agree on payment terms before you start, like "payment within 14 days".
+learn: For bigger jobs, ask for a deposit up front.
+learn: If payment is late, send a polite reminder, then call. {nz:The Disputes Tribunal can hear claims up to $60,000.~au:A small claims tribunal or local court can help if they still don't pay.}
+play: order | Chase a late payment, step by step | Check the invoice went to the right person; Send a polite reminder email; Phone to ask when it'll be paid; Send a final notice with a date; {nz:Lodge a claim with the Disputes Tribunal~au:Lodge a small claim with your state's tribunal or court}
+check: mcq | How can you protect yourself on a big job? | Ask for a deposit up front* | Never send an invoice | Do it for free
+check: tf | Agreeing on payment terms before you start helps avoid problems. | true
+home: Ask a grown-up what "due within 7 days" means on a bill, and what happens if it's late.
+skill: invoicing
+
+@lesson 5.6 | Your own safety net | 🦺 | bank
+hook: You're self-employed and you break your wrist. Who pays you while you heal?
+learn: Self-employed people get no paid sick leave or holidays, so they need a buffer of savings.
+learn: {nz:ACC covers injuries, and self-employed people pay ACC levies themselves. It can pay up to 80% of lost earnings after an injury.~au:Sole traders don't get workers' compensation automatically. Many buy income protection insurance.}
+learn: {nz:No employer pays into your KiwiSaver, so set up your own contributions and get the government contribution.~au:Nobody has to pay super for you, so think about adding your own.}
+play: tap | Tap the safety nets a self-employed person should think about | 💰:yes:An emergency savings buffer; 🩹:yes:Cover if you're injured or sick; 🏦:yes:Your own retirement savings; 🎰:no; 🛡️:yes:Insurance for your tools or business; 🎟️:no
+check: mcq | What do self-employed people miss out on? | Paid sick leave and holidays* | Being allowed to work | Having customers
+check: tf | {nz:ACC can pay part of your lost earnings if you're injured.~au:Sole traders don't get workers' compensation automatically.} | true
+home: Ask a grown-up what would happen to their income if they couldn't work for a month.
+skill: selfemployed
+
+@lesson 6.1 | What is workplace bullying? | 🚫 | workshop
+hook: Your supervisor jokes about you in front of everyone, every shift. Is that just banter?
+learn: Workplace bullying is repeated, unreasonable behaviour that can harm someone's health or safety.
+learn: It includes put-downs, yelling, being left out on purpose, or being set up to fail.
+learn: One disagreement, or fair feedback about your work, isn't bullying. A pattern of unreasonable behaviour is.
+play: sort | Could be bullying, Normal work | Being mocked in front of others every shift=Could be bullying; Your manager asking you to redo a task properly=Normal work; Being left off the roster for speaking up=Could be bullying; Being told politely that you were late twice=Normal work; Being shouted at and sworn at often=Could be bullying; A one-off disagreement about stacking shelves=Normal work | Bullying or normal work?
+check: mcq | What makes behaviour bullying? | It's repeated and unreasonable* | It happened once | You didn't like the feedback
+check: tf | Fair feedback about your work is not bullying. | true
+home: Talk with a grown-up about the difference between tough feedback and bullying.
+skill: workrights
+
+@lesson 6.2 | Sexual harassment | ✋ | townhall
+hook: A co-worker keeps commenting on your body. You've asked them to stop. What now?
+learn: Sexual harassment is unwelcome sexual behaviour, like comments, touching, messages or requests.
+learn: It's against the law, and your employer must take steps to prevent it and deal with it.
+learn: {nz:You have 12 months to raise a personal grievance about sexual harassment.~au:Employers have a legal duty to prevent it. The Australian Human Rights Commission and the Fair Work Commission can help.}
+play: path | A co-worker keeps sending you messages about your looks after you've asked them to stop. | Save the messages, report it to your manager or HR, and get support => good: You have evidence, and your employer must act. | Ignore it and hope it stops => bad: It often gets worse, and your employer can't act if they don't know. | Quit without telling anyone => ok: Leaving can be the right call, but reporting first protects you and others.
+check: mcq | Who has to deal with sexual harassment at work? | Your employer* | Only you | Nobody
+check: tf | Sexual harassment at work is against the law. | true
+home: Find out with a grown-up where to get support if something like this happened.
+skill: workrights
+
+@lesson 6.3 | Discrimination | ⚖️ | townhall
+hook: You're told you won't get more shifts because of your religion. Is that allowed?
+learn: Discrimination is treating someone worse because of things like race, sex, disability, religion, age or sexual orientation.
+learn: It's against the law in hiring, pay, shifts, training and firing.
+learn: Some things are allowed, like {nz:starting-out~au:junior} pay rates set by law, or needing a licence the job requires.
+play: sort | Likely discrimination, Probably not | Turned down because of your skin colour=Likely discrimination; Turned down because you don't have the licence the job needs=Probably not; Paid less than a male co-worker for the same work=Likely discrimination; Given no shifts because you use a wheelchair, when the job could be adjusted=Likely discrimination; Not rostered on days you said you can't work=Probably not; A {nz:starting-out~au:junior} pay rate set by law=Probably not | Discrimination or not?
+check: mcq | Which is likely discrimination? | Being paid less because of your sex* | Not being hired without a licence the job needs | Being rostered on the days you're free
+check: tf | Discrimination at work is against the law. | true
+home: Look up the {nz:Human Rights Commission~au:Australian Human Rights Commission} website with a grown-up.
+skill: workrights
+
+@lesson 6.4 | Raising a problem formally | 📨 | townhall
+hook: You've talked to your manager, but nothing has changed. What's next?
+learn: Put your complaint in writing: dates, what happened, who saw it and what you'd like to happen.
+learn: {nz:In NZ, you usually have 90 days to raise a personal grievance with your employer.~au:In Australia, if you're dismissed you usually have only 21 days to lodge an unfair dismissal claim.}
+learn: Get advice early from {nz:Employment New Zealand (0800 20 90 20), a union or a lawyer~au:the Fair Work Ombudsman (13 13 94), a union or a lawyer}.
+play: build | Build a written complaint | What happened, with dates; Who was involved and who saw it; How it affected you; What you've already tried; What you'd like to happen next
+check: mcq | What makes a complaint strongest? | Dates, details and what you'd like to happen* | Lots of angry words | Leaving out the dates
+check: tf | {nz:You usually have 90 days to raise a personal grievance.~au:You usually have 21 days to lodge an unfair dismissal claim.} | true
+home: Save {nz:Employment New Zealand's~au:the Fair Work Ombudsman's} number in your phone.
+skill: workrights
+
+@lesson 6.5 | Unsafe work | ⚠️ | workshop
+hook: Your boss tells you to use a machine nobody's trained you on. Do you have to?
+learn: Your employer must train you and keep you safe at work.
+learn: You can refuse work you reasonably believe would seriously risk your health or safety.
+learn: Tell your manager why. If it isn't fixed, report it to {nz:WorkSafe~au:your state's work health and safety regulator}.
+play: path | Your boss tells you to use the meat slicer, but nobody has trained you. | Say you haven't been trained and ask to be shown first => good: That's your right, and it keeps you safe. | Use it anyway so you don't annoy them => bad: Untrained use of machines causes serious injuries. | Walk out without saying anything => ok: You'd be safe, but explaining why gives them the chance to fix it.
+check: mcq | Can you refuse seriously unsafe work? | Yes, if you reasonably believe it's a serious risk* | No, never | Only on weekends
+check: tf | Employers must train you to use equipment safely. | true
+home: Ask a grown-up what safety training they had at their first job.
+skill: safety
+
+@lesson 6.6 | Where to get help | 🧭 | townhall
+hook: Something's wrong at work and your manager won't fix it. Who else can help?
+learn: {nz:Employment New Zealand gives free advice on pay, rights and workplace problems.~au:The Fair Work Ombudsman gives free advice on pay, rights and workplace problems.}
+learn: {nz:WorkSafe deals with health and safety. The Human Rights Commission deals with discrimination.~au:Your state's safety regulator deals with health and safety. The Australian Human Rights Commission deals with discrimination.}
+learn: Unions can help too. {nz:Community Law centres and Citizens Advice Bureau give free advice.~au:Community legal centres give free advice.}
+play: match | Match each problem to who can help | Unpaid wages={nz:Employment New Zealand~au:The Fair Work Ombudsman}; An unsafe machine={nz:WorkSafe~au:Your state's safety regulator}; Discrimination because of your race={nz:The Human Rights Commission~au:The Australian Human Rights Commission}; Not sure where to start={nz:Citizens Advice Bureau~au:A community legal centre}
+check: mcq | Who can help with unpaid wages? | {nz:Employment New Zealand~au:The Fair Work Ombudsman}* | A gossip site | Nobody
+check: tf | Some help, like unions and community law services, can be free. | true
+home: Find the website of a union for a job you might do one day, with a grown-up.
+skill: help
+
+@lesson 7.1 | Transferable skills | 🧳 | workshop
+hook: You've worked in a café for two years. Now you want an office job. Did the café teach you anything useful?
+learn: Transferable skills are ones you can take from job to job.
+learn: Customer service, teamwork, time management, handling money and staying calm under pressure all transfer.
+learn: Name them clearly on your CV, with examples.
+play: match | Match each café task to the skill it shows | Serving a rush of customers=Working under pressure; Handling the till=Accuracy with money; Training a new staff member=Teaching and leadership; Sorting out a complaint=Problem solving and communication
+check: mcq | Which is a transferable skill? | Communication* | Knowing one café's menu | Your uniform size
+check: tf | Skills from one job can help you in a very different job. | true
+home: List three transferable skills from any job, sport or club you've done.
+skill: careers
+
+@lesson 7.2 | Spot your skills | 🔦 | home
+hook: You've played in a band, coached juniors and run a market stall. What skills does that show?
+learn: Skills come from everywhere: jobs, sport, volunteering, hobbies and study.
+learn: Use action words like "led", "organised", "trained", "fixed" and "sold".
+learn: Add numbers when you can: "Coached 12 juniors every Saturday for two seasons."
+play: diff | A plain skills list, then a stronger one. Tap what's been improved. | Played in a band; Coached juniors; Had a market stall | Played in a band and organised three paid gigs; Coached 12 juniors every Saturday for two seasons; Ran a market stall, selling about $300 a month
+check: mcq | Which CV line is strongest? | "Trained 4 new staff on the till"* | "Did some training" | "Was there"
+check: tf | Numbers can make your skills more convincing. | true
+home: Rewrite one line of your CV or a pretend CV with an action word and a number.
+skill: cv
+
+@lesson 7.3 | Upskilling | 📚 | online
+hook: You want to move into IT, but you've worked in retail. How do you build the skills?
+learn: Short courses, micro-credentials and online certificates can add skills quickly.
+learn: Some employers pay for training. It's worth asking.
+learn: Volunteering and side projects let you practise and show proof.
+play: sort | Good way to upskill, Not so useful | A short course in your new field=Good way to upskill; Watching random videos with no practice=Not so useful; Building a small project to show employers=Good way to upskill; Helping with the IT at your sports club=Good way to upskill; Paying $3,000 for an unaccredited "guaranteed job" course=Not so useful; Asking your employer about paid training=Good way to upskill | Useful or not?
+check: mcq | What's a good way to prove a new skill? | A project you can show* | Saying you're good at it | A selfie
+check: tf | Some employers pay for staff training. | true
+home: Find one short course in a field you're curious about, and check who accredits it.
+skill: careers
+
+@lesson 7.4 | Leaving a job well | 👋 | workshop
+hook: You've got a new job. How do you leave the old one without burning bridges?
+learn: Check your employment agreement for your notice period, and give notice in writing.
+learn: Work your notice properly and hand over your tasks.
+learn: Thank your manager. They might give you a reference one day.
+play: order | Leave a job well | Check your notice period; Tell your manager in person first; Give written notice; Hand over your tasks and notes; Say thanks and goodbye
+check: mcq | Where do you find your notice period? | Your employment agreement* | A friend's contract | A movie
+check: tf | Leaving well can help you get a good reference later. | true
+home: Ask a grown-up how they left a job, and what they'd do differently.
+skill: careers
+
+@lesson 7.5 | Should you change? | 🤷 | garden
+hook: You've been in your job for a year and feel stuck. Change now, or stay?
+learn: Changing jobs can bring more pay, new skills and a better fit.
+learn: Staying can build deeper skills, a track record, and sometimes a promotion.
+learn: Before you leave, talk to your manager about what could change. Then decide.
+play: debate | Should you change jobs after a year if you feel stuck? | Maybe. First talk to your manager about growth, then decide based on your goals* | Always quit straight away | Some say staying longer builds a stronger record and deeper skills.
+check: mcq | What's a smart step before quitting because you feel stuck? | Talk to your manager about growth* | Quit by text | Stop turning up
+check: tf | Changing jobs can bring new skills and better pay. | true
+home: Ask two grown-ups how long they stayed in their first proper job, and why they left.
+skill: careers
+
+@lesson 7.6 | A career pivot | 🔀 | online
+hook: Lots of people change careers completely. How do you plan a big switch?
+learn: Research the new field. Talk to people in it, and find out what skills and qualifications it needs.
+learn: Build a bridge: study part-time, take on side projects, or try a related role first.
+learn: Save a buffer, because a pivot can mean a pay dip for a while.
+play: build | Plan a career pivot | Research the new field; Talk to people who work in it; Find your skills gap; Build skills part-time; Save a money buffer; Apply for a bridging role
+check: mcq | Why save a buffer before a career change? | Your pay might dip for a while* | It's the law | You won't need money
+check: tf | Talking to people already in a field is a good first step. | true
+home: Ask a grown-up who has changed careers how they did it.
+skill: careers
+
+@lesson 8.1 | What leaders do | 🧭 | workshop
+hook: You've just been made shift leader. What changes?
+learn: Leaders set clear goals, share the work fairly and help the team do its best.
+learn: Leading isn't bossing. Good leaders listen, support and set the example.
+learn: You're now responsible for the team's results, not just your own.
+play: sort | Good leadership, Poor leadership | Explaining the plan for the shift clearly=Good leadership; Taking the easy jobs and leaving the hard ones=Poor leadership; Thanking people for good work=Good leadership; Blaming the team for your own mistake=Poor leadership; Jumping in to help in a rush=Good leadership; Playing favourites=Poor leadership | Good or poor leadership?
+check: mcq | What do good leaders do? | Set clear goals and support the team* | Boss people around | Only look after themselves
+check: tf | Leaders are responsible for the team's results. | true
+home: Ask a grown-up about the best leader they've worked with, and what made them good.
+skill: leadership
+
+@lesson 8.2 | Delegating | 📋 | workshop
+hook: There's too much to do, and you're trying to do it all yourself. What's the fix?
+learn: Delegating means giving tasks to the right people, with clear instructions.
+learn: Match tasks to people's skills, and give them chances to grow.
+learn: Check in, but don't hover. Trust people to do the job.
+play: match | Match each task to the best person | Training the new starter on the till=The person who knows the till best; Making a sign for the specials=The co-worker who's great at design; Handling a tricky complaint=You, as the leader; A simple restock of napkins=The newest team member, to build confidence
+check: mcq | What makes delegating work? | Clear instructions to the right person* | Dumping jobs you hate | Doing everything yourself
+check: tf | Delegating can help team members grow. | true
+home: Next time you have a group project, try sharing out the tasks by people's strengths.
+skill: leadership
+
+@lesson 8.3 | Feedback as a leader | 💬 | workshop
+hook: A team member keeps arriving 10 minutes late. How do you raise it?
+learn: Talk privately and soon, and stick to the facts: what happened, and its effect.
+learn: Ask what's going on. There might be a reason you can help with.
+learn: Agree on what happens next, and praise them in front of others when it improves.
+play: chat | Talking privately to a team member who's often late | them: You wanted to see me? | me: Thanks for coming. You've been about 10 minutes late three times this week, and it leaves the counter short. Is everything OK?*/You're always late and it's annoying/Everyone's talking about you being late | them: My bus timetable changed. I'm sorry. | me: Thanks for telling me. Could we move your start time by 15 minutes so it works with the bus?*/Not my problem/Get an earlier bus or else
+check: mcq | How should a leader raise a problem? | Privately, with facts, asking what's going on* | In front of everyone | By gossiping
+check: tf | Good leaders praise in front of others and raise problems in private. | true
+home: Practise raising a small problem with facts, not blame, with a grown-up.
+skill: feedback
+
+@lesson 8.4 | Running a good meeting | 🗓️ | townhall
+hook: Your team meeting went for an hour and nothing was decided. What went wrong?
+learn: Good meetings have a clear purpose and a short agenda.
+learn: Let everyone speak, keep to time and finish with decisions: who does what, by when.
+learn: If it could be a message, skip the meeting.
+play: order | Run a good meeting | Decide the purpose; Share a short agenda; Start on time; Let everyone have their say; Agree who does what, by when; Send a short summary afterwards
+check: mcq | How should a good meeting end? | With who does what, by when* | With no decisions | With a long chat about the weekend
+check: tf | Some meetings could just be a message. | true
+home: Run a five-minute family meeting with a purpose, an agenda and a decision.
+skill: leadership
+
+@lesson 8.5 | Making a tough call | 🧠 | workshop
+hook: Two team members both want Saturday off. You can only give it to one. What do you do?
+learn: Tough calls need fair rules, applied the same way to everyone.
+learn: Explain your reasons honestly, even when people won't like the answer.
+learn: Look for a fair solution, like taking turns, before you decide.
+play: path | Two team members both want this Saturday off. Only one can have it. | Check who had the last one off, and offer the other person next Saturday => good: A fair rule, clearly explained. | Give it to your friend => bad: Playing favourites destroys trust. | Avoid deciding and let them fight it out => bad: Leaders need to make the call.
+check: mcq | What makes a tough call fairer? | Clear rules applied the same way to everyone* | Picking your friends | Flipping a coin without explaining
+check: tf | Leaders should explain their reasons, even for unpopular decisions. | true
+home: Talk with a grown-up about a tough call they had to make, and how they made it fair.
+skill: leadership
+
+@lesson 8.6 | Owning the team's mistakes | 🛡️ | workshop
+hook: Your team sent a big catering order to the wrong address. The client is furious. Who takes the blame?
+learn: Good leaders take responsibility for the team's mistakes in public.
+learn: Fix the problem first. Then work out what went wrong with the team, in private.
+learn: Focus on fixing the process, not on blaming one person.
+play: debate | Should a leader take the blame for a team member's mistake? | Yes, in public. Then fix the process with the team in private* | No. Name the person who did it so the client knows | People still need to own their part, and that's fine to talk about privately.
+check: mcq | After a team mistake, what should a leader do first? | Fix the problem for the client* | Find someone to blame | Hide it
+check: tf | Fixing the process helps stop mistakes happening again. | true
+home: Think of a mistake in a group you were in. How could the process have been fixed?
+skill: responsibility
+

@@ -290,3 +290,274 @@ check: tf | Experts can always predict when prices will fall. | false | Nobody c
 home: Ask a grown-up if they've ever waited for the "right time" to do something with money.
 skill: patience
 
+@lesson 5.1 | What's an index? | 📋 | shares
+hook: The news says "the market went up". Which market?
+learn: An index is a list of companies used to measure how a market is doing.
+learn: {nz:The S&P/NZX 50 tracks 50 of the biggest companies on the NZX.~au:The S&P/ASX 200 tracks 200 of the biggest companies on the ASX.}
+learn: When the news says the market rose 1%, it usually means an index rose 1%.
+play: match | Match each index to what it tracks | S&P/NZX 50=50 big New Zealand companies; S&P/ASX 200=200 big Australian companies; S&P 500=500 big United States companies; A world index=Thousands of companies around the world
+check: mcq | What is an index? | A list of companies that measures a market* | A single company | A bank account
+check: tf | When the news says "the market rose", it usually means an index rose. | true
+home: Find out how {nz:the NZX 50~au:the ASX 200} did today with a grown-up.
+skill: index
+
+@lesson 5.2 | Copying the list | 📑 | shares
+hook: What if a fund just bought every company on the list?
+learn: An index fund buys the companies in an index, so it moves almost exactly like that market.
+learn: It doesn't try to pick winners. It just copies the list.
+learn: When the index changes, the fund changes to match.
+play: order | How an index fund works | The index lists its companies; Investors put money into the fund; The fund buys shares in every company on the list; The fund moves up and down like the index; When the list changes, the fund changes too
+check: mcq | What does an index fund do? | Copies an index* | Picks a few favourite companies | Only holds cash
+check: tf | Index funds try to match the market, not beat it. | true
+home: Ask a grown-up if they know what an index fund is.
+skill: index
+
+@lesson 5.3 | Why the fees are low | 🪙 | shares
+hook: Why do index funds usually charge less than other funds?
+learn: Other funds pay experts to research and pick companies. That costs a lot.
+learn: Index funds just copy a list, so they need fewer people and charge lower fees.
+learn: Lower fees mean more of the growth stays with you.
+try: 1% of $1,000 is $10 :: gap | 0.2% of $1,000 is $_ | 2
+play: slider | Fund A charges 1% a year. Fund B charges 0.25%. On $10,000, how many dollars a year do you save with Fund B? | 0 | 100 | 75 | $ | 5 | 5
+check: gap | 0.5% of $2,000 is $_ | 10
+check: mcq | Why are index fund fees usually low? | They copy a list instead of paying stock pickers* | They're run by robots who work for free | They have no companies
+home: Look up the fee of an index fund online with a grown-up.
+skill: fees
+
+@lesson 5.4 | The whole world | 🌍 | shares
+hook: Could you own a tiny piece of thousands of companies around the world?
+learn: A global index fund owns thousands of companies in many countries.
+learn: That includes companies you use every day, like phone, food and clothing makers.
+learn: Spreading across countries means one country's bad year hurts less.
+play: sort | Spread out a lot, Not spread out | A world index fund=Spread out a lot; Shares in one local company=Not spread out; A fund of 500 big US companies=Spread out a lot; All your money in one game company=Not spread out; A fund of 200 local companies=Spread out a lot | Spread out or not?
+check: mcq | Which is most spread out? | A world index fund* | One company's shares | A single country's biggest bank
+check: tf | Spreading across countries can reduce risk. | true
+home: Name five companies from different countries that make things your family uses.
+skill: diversify
+
+@lesson 5.5 | Index funds still wobble | 🌊 | shares
+hook: If index funds own everything, can they still go down?
+learn: Yes. When the whole market falls, index funds fall too.
+learn: In a crash, an index fund might drop 30% or more.
+learn: Over long periods, markets have recovered and grown. Patience matters.
+play: market | Ride a crash and a recovery in an index fund | 12
+check: mcq | What happens to an index fund when the market falls? | It falls too* | It always goes up | It disappears
+check: tf | Index funds can drop a lot in a crash. | true
+home: Ask a grown-up how they felt when markets fell in 2020.
+skill: patience
+
+@lesson 5.6 | How kids can invest | 🧒 | shares
+hook: You're 11. Can you own an index fund?
+learn: Kids usually can't open investment accounts alone. A parent or guardian can open one for you.
+learn: {nz:Kids can join KiwiSaver with a parent's help. Some KiwiSaver funds are index funds.~au:A parent can invest for you in their name, or in a kids' account some platforms offer.}
+learn: Many platforms let you start with a small amount, like $10 or $50.
+play: path | You've saved $50 and want to invest it. | Talk to a grown-up about opening an account together => good: That's the safe and legal way for kids to start. | Sign up to an app by pretending to be 18 => bad: That breaks the rules, and your money may not be protected. | Give it to an online friend who says they'll invest it => bad: That's very risky, and could be a scam.
+check: mcq | How can kids usually start investing? | With a parent or guardian* | By pretending to be 18 | Through an online stranger
+check: tf | Many platforms let you start with a small amount. | true
+home: Talk with a grown-up about whether investing some of your Invest jar for real might suit you.
+skill: investing
+
+@lesson 6.1 | What's a crash? | 📉 | shares
+hook: The news says "Markets crash 20%". What does that actually mean?
+learn: A crash is when prices across the whole market fall fast, often by 20% or more.
+learn: Crashes happen every so often. Most long-term investors live through several.
+learn: Broad markets have recovered from past crashes, though some took years.
+play: market | Ride a crash and see what happens next | 15
+check: mcq | What is a market crash? | Prices across the market falling fast* | A computer breaking | A bank closing for a day
+check: tf | Some recoveries from crashes took years. | true
+home: Ask a grown-up if they remember a big market crash, and what they did.
+skill: cycles
+
+@lesson 6.2 | Crashes in history | 🏛️ | museum
+hook: 1987, 2000, 2008, 2020. What happened in those years?
+learn: In 1987, share markets around the world fell sharply in one day, called Black Monday.
+learn: In 2000, the dot-com bubble burst, and many internet companies collapsed. In 2008, the global financial crisis began with bad home loans in the US.
+learn: In 2020, markets crashed as COVID-19 spread, then bounced back within months.
+play: match | Match each crash to what happened | 1987=Black Monday, a huge one-day fall; 2000=The dot-com bubble burst; 2008=The global financial crisis, from bad home loans; 2020=The COVID-19 crash and a fast recovery
+check: mcq | What started the 2008 crisis? | Bad home loans in the US* | A volcano | A new phone
+check: tf | Markets bounced back within months after the 2020 crash. | true
+home: Ask an older family member what they remember about 2008 or 2020.
+skill: cycles
+
+@lesson 6.3 | Paper losses | 📄 | shares
+hook: Your $100 investment is now worth $80. Have you lost $20?
+learn: If you haven't sold, it's a paper loss. The price could come back.
+learn: If you sell at $80, the loss becomes real.
+learn: Falls need bigger rises to recover. A 50% fall needs a 100% rise to get back.
+try: $100 falls 20% to $80 :: gap | $200 falls 25% to $_ | 150
+play: sort | Paper loss, Real loss | Your fund fell 15% and you held on=Paper loss; You sold after a 15% fall=Real loss; Your shares are down 10% this month=Paper loss; You panicked and sold everything in a crash=Real loss; Your fund dipped, and you kept adding=Paper loss; You switched to cash at the bottom=Real loss | Paper or real?
+check: gap | $100 falls 50% to $_ | 50
+check: mcq | When does a paper loss become real? | When you sell* | When the news says so | Never
+home: Check how your Chorecast funds are doing. Are any showing a paper loss?
+skill: cycles
+
+@lesson 6.4 | Scary headlines | 📰 | online
+hook: "MARKETS IN FREEFALL! WORST DAY IN MONTHS!" Should you panic?
+learn: News headlines are written to grab attention. Scary words get more clicks.
+learn: "Worst day in months" might only be a 2% drop.
+learn: Ask yourself: how big is the fall really, and does it change my long-term plan?
+play: sort | Calm thinking, Panic thinking | It's a 2% drop and I'm investing for 10 years=Calm thinking; Sell everything before it goes to zero!=Panic thinking; Markets have had drops like this before=Calm thinking; My friend says get out now!=Panic thinking; My plan hasn't changed=Calm thinking; I'll check the price every five minutes=Panic thinking | Calm or panic?
+check: mcq | A headline screams about a market fall. What should you check first? | How big the fall really is* | Who wrote it | The font
+check: tf | Scary headlines get more clicks. | true
+home: Find a market headline with a grown-up and work out how big the move really was.
+skill: calm
+
+@lesson 6.5 | Buying in the dip | 🛍️ | shares
+hook: Your fund's price fell from $10 to $5 a unit. Is that bad news if you're still adding money?
+learn: If you invest the same amount regularly, you buy more units when prices are low.
+learn: $20 buys 2 units at $10, but 4 units at $5.
+learn: When prices recover, those cheap units grow the most.
+try: $20 at $10 a unit buys 2 units :: gap | $20 at $4 a unit buys _ units | 5
+play: diff | Two months of adding $20. Tap what changed when the price fell. | Price $10 a unit; You add $20; You get 2 units | Price $5 a unit; You add $20; You get 4 units
+check: gap | $30 at $3 a unit buys _ units | 10
+check: tf | Investing regularly buys more units when prices are low. | true
+home: Talk with a grown-up about why some people like adding money when prices fall.
+skill: cycles
+
+@lesson 6.6 | Your calm plan | 🧘 | garden
+hook: The next crash will come one day. What will you do?
+learn: Decide your plan before a crash, while you're calm.
+learn: A good plan: keep investing as normal, don't check every day, and only change things if your goal changes.
+learn: Keep money you'll need soon out of shares, so a crash can't wreck it.
+play: build | Build your calm plan for a crash | Remember why I invested; Check how long until I need the money; Keep investing as normal; Check once a week, not every hour; Talk to a grown-up before making changes
+check: mcq | When should you make a crash plan? | Before a crash, while you're calm* | In the middle of a crash | Never
+check: tf | Money you need soon is safer out of shares. | true
+home: Write your own three-line crash plan and stick it near your desk.
+skill: calm
+
+@lesson 7.1 | Fees everywhere | 🧾 | shares
+hook: Investing isn't free. Who gets paid, and how?
+learn: A management fee is a yearly percentage a fund takes for running it.
+learn: Brokerage is a fee each time you buy or sell. Some apps also charge a monthly account fee.
+learn: A currency fee can apply when you buy shares in another country.
+play: match | Match each fee to what it's for | Management fee=A yearly % for running a fund; Brokerage=A fee each time you buy or sell; Account fee=A set amount each month or year; Currency fee=Changing your money into another currency
+check: mcq | What is brokerage? | A fee each time you buy or sell* | A yearly fund fee | Interest you earn
+check: tf | Funds charge a yearly management fee. | true
+home: Find the fees page of an investing app or fund with a grown-up.
+skill: fees
+
+@lesson 7.2 | Percentage fees | 🥧 | shares
+hook: A fund charges 1% a year. On $500, how much is that?
+learn: A percentage fee grows as your balance grows.
+learn: 1% of $500 is $5. 1% of $5,000 is $50.
+learn: Small-sounding percentages become big dollars on big balances.
+try: 1% of $500 = $5 :: gap | 1% of $2,000 = $_ | 20
+play: match | Match each balance to a 1% yearly fee | $100=$1; $800=$8; $2,500=$25; $10,000=$100
+check: gap | 2% of $1,000 = $_ | 20
+check: tf | A percentage fee costs more dollars as your balance grows. | true
+home: Work out what a 1% fee would cost on a grown-up's savings balance (they don't have to tell you the real number).
+skill: fees
+
+@lesson 7.3 | Flat fees and small amounts | 🪙 | shares
+hook: A $2 fee to invest $10. Is that a lot?
+learn: A flat fee is the same however much you invest.
+learn: On $10, a $2 fee is 20%! On $1,000, it's only 0.2%.
+learn: With flat fees, invest bigger amounts less often, or find a platform with no flat fee on small amounts.
+try: $2 on $10 is 20% :: gap | $1 on $10 is _% | 10
+play: price | You'll invest $120 this year, with a $2 fee every time you buy. Which plan costs least in fees for each dollar invested? | $10 every month:24:120:dollars; $60 twice a year:4:120:dollars; $120 once:2:120:dollars
+check: gap | A $3 fee on a $30 investment is _% | 10
+check: mcq | Flat fees hurt most when you invest... | Small amounts* | Large amounts | Never
+home: Look up whether an investing app charges a flat fee on small buys, with a grown-up.
+skill: fees
+
+@lesson 7.4 | Fees snowball too | ⛄ | shares
+hook: 1% a year doesn't sound like much. What does it cost over 40 years?
+learn: Fees come out every year, so the money they take can't grow for you.
+learn: Over decades, a 1% higher fee eats a big slice of what you'd have.
+learn: $10,000 at 7% for 40 years grows to about $150,000. At 6%, it's about $103,000.
+play: compound | $10,000 growing at 6% a year (7% minus a 1% fee) for 40 years | 10000 | 6 | 40
+check: slider | At 7%, $10,000 grows to about $150,000. At 6%, it's about $103,000. About how much did the 1% fee cost? | 0 | 100000 | 47000 | $ | 5000 | 1000
+check: tf | Fees taken out each year stop that money growing for you. | true
+home: Show a grown-up the snowball with and without a 1% fee.
+skill: fees
+
+@lesson 7.5 | Trading too often | 🔄 | shares
+hook: Your friend buys and sells shares every day. Is that smart?
+learn: Every trade can cost brokerage, and sometimes currency fees too.
+learn: Frequent traders often do worse than people who buy and hold, partly because of fees.
+learn: A simple plan, like adding to one fund each month, keeps costs low.
+play: path | You have $200 to invest. A friend says to buy and sell every day to catch the ups. | Buy a low-fee fund and leave it to grow => good: Fewer trades, fewer fees and less stress. | Trade every day like your friend => bad: With a $2 fee each way, ten buys and sells cost $40. That's 20% of your money. | Never invest at all => ok: Your money's safe, but it won't grow much.
+check: mcq | Why can trading every day cost you? | Every trade can have a fee* | Shares get tired | It's always free
+check: tf | Buying and holding usually means fewer fees. | true
+home: Ask a grown-up how often they buy or sell investments, and why.
+skill: fees
+
+@lesson 7.6 | Fee detective | 🕵️ | shares
+hook: Two funds look the same. One costs much more. How can you tell?
+learn: Fund fees are listed in its {nz:fund update and product disclosure statement~au:product disclosure statement (PDS)}.
+learn: Look for the total yearly fee as a percentage, plus any flat fees.
+learn: Compare the same type of fund, like growth with growth.
+play: diff | Two growth funds. Tap what's different. | Growth fund; Owns world shares; Total yearly fee 0.25%; No account fee | Growth fund; Owns world shares; Total yearly fee 1.20%; $30 a year account fee
+check: mcq | Where can you find a fund's fees? | {nz:Its fund update or disclosure statement~au:Its product disclosure statement}* | Its logo | A random video
+check: tf | You should compare funds of the same type. | true
+home: Find the total yearly fee in a real fund document with a grown-up.
+skill: fees
+
+@lesson 8.1 | Goals and time | 🗓️ | bank
+hook: A bike next month, a car at 18, a house at 30. Should all that money go in the same place?
+learn: How long until you need the money matters most.
+learn: Money you need soon, within about 3 years, should be somewhere steady, like a savings account.
+learn: Money for 10 or more years away can be invested, because it has time to ride the ups and downs.
+play: sort | Keep it steady, Can invest | A new bike next month=Keep it steady; Money for when you're 30=Can invest; A school trip next term=Keep it steady; Retirement savings=Can invest; Concert tickets in 2 months=Keep it steady; A house deposit in 12 years=Can invest | Where should the money go?
+check: mcq | Money you need next month should be... | Somewhere steady, like a savings account* | In Rocket Startups | In a growth fund
+check: tf | Money you won't need for 10 years can ride out ups and downs. | true
+home: List your goals with a grown-up and mark each one "soon" or "long way off".
+skill: timeline
+
+@lesson 8.2 | Where short-term money lives | 🏦 | bank
+hook: You're saving $300 for a phone in 6 months. Why not put it in shares?
+learn: Shares can drop 20% in a few months. You might have only $240 when you need $300.
+learn: A savings account or term deposit keeps it safe and still pays a little interest.
+learn: Safe and boring is perfect for money with a deadline.
+try: $300 drops 20% to $240 :: gap | $500 drops 20% to $_ | 400
+play: path | You've saved $300 for a phone you'll buy in 6 months. | Keep it in a savings account => good: It's safe, and it earns a little interest. | Put it all in a share fund to grow faster => bad: A drop right before you buy could leave you short. | Keep it in your pocket => bad: It could get lost or spent.
+check: mcq | Where's a good place for money you need in 6 months? | A savings account* | A share fund | A risky app
+check: tf | Safe and boring is good for money with a deadline. | true
+home: Find a savings account with a grown-up that would suit a short-term goal.
+skill: timeline
+
+@lesson 8.3 | Long-term money can wobble | 🌊 | shares
+hook: You're investing for when you're 30. Your fund falls this year. Is that a problem?
+learn: Over 15 years there may be several drops, and there's time to recover.
+learn: Long-term money can go into growth investments, like share funds.
+learn: As your goal gets close, you can move the money somewhere steadier.
+play: market | Ride 15 years of ups and downs | 15
+check: mcq | As a long-term goal gets close, what can you do? | Move the money somewhere steadier* | Put it all in the riskiest fund | Forget about it
+check: tf | Long-term money has time to recover from drops. | true
+home: Ask a grown-up when they'd move savings for a big goal somewhere steadier.
+skill: timeline
+
+@lesson 8.4 | Plan a goal | 📋 | bank
+hook: You want $2,000 for a trip in 4 years. How do you plan it?
+learn: Every goal plan needs three things: what it's for, how much, and when.
+learn: Then work out how much to save each month, and where to keep it.
+learn: Write it down and check it every few months.
+play: build | Build a goal plan | Name the goal; Find out how much it costs; Pick the date you need it; Work out how much to save each month; Choose where to keep the money; Check it every few months
+check: mcq | What three things does every goal plan need? | What, how much and when* | A colour, a song and a logo | Nothing
+check: tf | Checking your plan every few months helps you stay on track. | true
+home: Write a goal plan for something you want, with a grown-up.
+skill: goals
+
+@lesson 8.5 | How much a month? | 🧮 | bank
+hook: $2,000 in 4 years. How much is that each month?
+learn: 4 years is 48 months. $2,000 ÷ 48 is about $42 a month.
+learn: If it's invested for long enough, growth can help a little, but don't count on it for short goals.
+learn: Starting earlier means smaller amounts each month.
+try: $1,200 over 12 months is $100 a month :: gap | $1,200 over 24 months is $_ a month | 50
+play: slider | You need $1,800 in 3 years (36 months). How much should you save each month? | 0 | 100 | 50 | $ | 3 | 1
+check: gap | $600 over 12 months is $_ a month | 50
+check: mcq | How can you make the monthly amount smaller? | Start earlier* | Start later | Buy more stuff
+home: Work out the monthly amount for your own goal plan.
+skill: goals
+
+@lesson 8.6 | Check in | 🔍 | garden
+hook: Halfway through your goal, the price went up and your fund went down. Now what?
+learn: Check your goal plan every few months. Life and prices change.
+learn: If you're behind, you can save a bit more, wait a bit longer, or change the goal.
+learn: As the date gets close, move the money somewhere steady.
+play: chat | Checking your trip savings with your grown-up | them: The trip now costs $2,300, not $2,000. What do you want to do? | me: Let's see if I can save a bit more each month, or push the trip back a few months.*/Give up on the trip/Put it all in Rocket Startups to catch up | them: And it's only a year away now. Where should the money go? | me: Into a savings account, so a market drop can't hurt it.*/Leave it all in shares/Spend it now
+check: mcq | You're behind on a goal. What can you do? | Save more, wait longer or change the goal* | Panic | Gamble to catch up
+check: tf | As a goal gets close, moving money somewhere steady protects it. | true
+home: Pick a date to check your goal plan, and put it in a calendar.
+skill: goals
+

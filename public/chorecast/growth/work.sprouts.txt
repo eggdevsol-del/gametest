@@ -283,3 +283,270 @@ check: tf | Being reliable means doing what you said you'd do. | true
 home: Promise one job to a grown-up today, and do it without a reminder.
 skill: reliability
 
+@lesson 5.1 | Kid tools and grown-up tools | 🧰 | workshop
+hook: A broom, a dustpan and a big electric saw. Which ones are for you?
+guess: mcq | Who should use a power saw? | A trained grown-up* | A 7-year-old | Anyone who wants to
+learn: Some tools are safe for kids, like a broom, a watering can or a dustpan and brush.
+learn: Some tools are only for trained grown-ups, like saws, drills and lawnmowers.
+learn: If you're not sure, ask before you touch it.
+play: sort | Kid tool, Grown-up tool | Broom=Kid tool; Watering can=Kid tool; Power drill=Grown-up tool; Dustpan and brush=Kid tool; Lawnmower=Grown-up tool; Sharp kitchen knife=Grown-up tool; Garden gloves=Kid tool; Chainsaw=Grown-up tool | Who should use it?
+check: mcq | You find a drill on the bench. What should you do? | Leave it and ask a grown-up* | Try it out | Hide it
+check: tf | A watering can is a good tool for kids. | true
+check: tf | Lawnmowers are fine for kids to use alone. | false | Lawnmowers have sharp, fast blades. They're for grown-ups.
+home: Walk around your home with a grown-up. Find two kid tools and two grown-up tools.
+skill: tools
+
+@lesson 5.2 | Scissors smarts | ✂️ | workshop
+hook: Scissors are a tool too. How do you use them safely?
+learn: Walk with scissors closed and pointing down.
+learn: Cut away from your fingers, and keep your other hand out of the way.
+learn: Pass scissors handle first, and put them back when you're done.
+play: order | Use scissors safely | Sit down at a table; Hold the paper with your other hand away from the blades; Cut slowly, away from your fingers; Close the scissors; Put them back where they live
+check: mcq | How should you walk with scissors? | Closed and pointing down* | Open and waving | Running fast
+check: mcq | How do you pass scissors to a friend? | Handle first* | Blades first | Throw them
+check: tf | You should cut towards your fingers. | false | Always cut away from your fingers.
+home: Help a grown-up with a cutting job and show them how you pass scissors safely.
+skill: safety
+
+@lesson 5.3 | Safety gear | 🧤 | garden
+hook: Gloves, a sun hat and an apron. What are they for?
+learn: Safety gear protects your body while you work.
+learn: Gloves protect your hands. A sun hat and sunscreen protect you from the sun.
+learn: Closed shoes protect your toes, and an apron keeps your clothes clean when you cook.
+play: match | Match each job to its safety gear | Weeding the garden=Gloves; Working outside on a sunny day=Sun hat and sunscreen; Baking a cake=Apron; Carrying the rubbish bin out=Closed shoes
+check: mcq | What protects your hands when you weed? | Gloves* | A hat | Sunglasses
+check: tf | Sunscreen is safety gear for sunny jobs. | true
+home: Find the safety gear your family has for garden jobs.
+skill: safety
+
+@lesson 5.4 | Put it back | 🧹 | home
+hook: Someone left a rake lying on the path. What could happen?
+learn: Tools left lying around can trip people or get broken.
+learn: Every tool should have a home. Put it back when you're done.
+learn: Then the next person can find it, and nobody gets hurt.
+play: tap | Tap the tools that have been left out | 🧹:yes:A broom lying on the floor; 🪣:yes:A bucket in the doorway; ✂️:yes:Scissors left open on the couch; 📚:no; 🪴:no; 🔨:yes:A hammer on the step; 🛏️:no
+check: mcq | You've finished sweeping. Where does the broom go? | Back in its home* | On the floor | Outside in the rain
+check: tf | Tools left out can trip people. | true
+home: Pick one tool at home and agree with a grown-up where its home is.
+skill: tidy
+
+@lesson 5.5 | Look after your tools | 🪣 | garden
+hook: The spade is all muddy and rusty. Why does that matter?
+learn: Tools last longer when you look after them.
+learn: Wipe off the mud, dry them and keep them out of the rain.
+learn: If a tool breaks, tell a grown-up. Don't use a broken tool.
+play: path | The handle on the garden rake is cracked. | Stop and tell a grown-up => good: A cracked handle could snap and hurt someone. Now it can be fixed. | Keep raking and hope it holds => bad: It might snap and give you a splinter or a bump. | Hide it in the shed => bad: The next person might use it and get hurt.
+check: mcq | What helps tools last longer? | Cleaning and drying them* | Leaving them in the rain | Throwing them in a heap
+check: tf | You should keep using a tool that's broken. | false | Tell a grown-up, so it can be fixed or replaced.
+home: Help a grown-up clean and put away a garden tool.
+skill: tools
+
+@lesson 5.6 | Can I use this? | 🙋 | workshop
+hook: You want to use the hot glue gun for your project. What do you say?
+learn: Always ask a grown-up before you use a new tool.
+learn: Ask them to show you how, and watch first.
+learn: Then try it with them nearby.
+play: chat | You want to use the hot glue gun | them: What are you making? | me: A cardboard castle. Can you show me how to use the glue gun?*/I'll just figure it out/Nothing, go away | them: Sure. The tip gets very hot, so we keep fingers away from it. | me: OK. Can I watch you first, then try?*/Hot doesn't matter/I'll do it when you're not looking
+check: mcq | Before you use a new tool, you should... | Ask a grown-up to show you* | Just try it | Wait till nobody's home
+check: tf | Watching first is a smart way to learn a tool. | true
+home: Ask a grown-up to teach you how to use one new kitchen or garden tool safely.
+skill: tools
+
+@lesson 6.1 | Everyone needs help | 🦸 | home
+hook: Even superheroes need a hand sometimes. Do grown-ups?
+learn: Everyone needs help sometimes, even grown-ups and experts.
+learn: Asking for help is brave. It shows you want to get it right.
+learn: Helpers like being asked. It's how we learn from each other.
+play: path | You can't reach the top shelf to put the plates away. | Ask a grown-up to help => good: Smart and safe. The plates get put away with no smashes. | Climb on a wobbly chair => bad: You could fall, and the plates could break. | Leave the plates on the bench and walk off => bad: The job isn't done, and nobody knows you needed help.
+check: mcq | Is asking for help brave? | Yes, it shows you want to get it right* | No, it's silly | Only babies ask for help
+check: tf | Grown-ups need help sometimes too. | true
+home: Ask a grown-up about a time they needed help at work.
+skill: askhelp
+
+@lesson 6.2 | Who can help? | 🧑‍🏫 | townhall
+hook: You're lost at the shops. You hurt your knee at school. Who can help?
+learn: Different helpers help with different things.
+learn: At school, a teacher. At home, a grown-up in your family. At the shops, a worker at the counter.
+learn: In a real emergency, call {nz:111~au:000}.
+play: match | Match each problem to someone who can help | Lost at the shops=A worker at the counter; Hurt at school=Your teacher; Stuck on homework=A grown-up at home; A fire=Firefighters, by calling {nz:111~au:000}
+check: mcq | You're lost at the shops. Who's a good helper? | A worker at the counter* | Nobody | Someone in a car
+check: tf | {nz:111~au:000} is the number to call in a real emergency. | true
+home: Practise with a grown-up what you'd say if you called {nz:111~au:000}.
+skill: askhelp
+
+@lesson 6.3 | How to ask | 🗣️ | home
+hook: Your grown-up is busy cooking. You need help with your shoelaces. How do you ask?
+learn: Get their attention politely. "Excuse me" works well.
+learn: Say what you need: "Can you help me tie my laces, please?"
+learn: Wait for your turn, then say thank you.
+play: order | Ask for help the right way | Wait for a good moment; Say "Excuse me"; Say what you need; Listen and have a go; Say thank you
+check: mcq | Which is a polite way to ask? | "Excuse me, can you help me, please?"* | "HELP ME NOW!" | Pulling their sleeve and crying
+check: tf | Saying thank you after help is kind. | true
+home: Next time you need help, try the "Excuse me" way and see how it goes.
+skill: askhelp
+
+@lesson 6.4 | Try first, then ask | 🧩 | workshop
+hook: Your puzzle piece won't fit. Should you ask for help straight away?
+learn: Have a go first. Try one or two different ways.
+learn: If you're still stuck, ask, and say what you've already tried.
+learn: Always ask straight away if something is unsafe or you could get hurt.
+play: path | You're building a block tower and it keeps falling over. | Try a wider base, then ask for help if it still falls => good: Trying first helps you learn. Asking next is smart. | Give up and kick it over => bad: Now nobody gets a tower. | Make someone else build it for you => bad: You won't learn how to build it yourself.
+check: mcq | When should you ask for help straight away? | When something is unsafe* | Before you try anything | Never
+check: tf | Saying what you've already tried helps the helper. | true
+home: Try a tricky job at home twice before asking for help. Then tell the helper what you tried.
+skill: askhelp
+
+@lesson 6.5 | "I don't understand" | ❓ | home
+hook: A grown-up explains a job, but you don't get it. Is it OK to say so?
+learn: Saying "I don't understand" is brave and helpful.
+learn: You can ask, "Can you show me?" or "Can you say it another way?"
+learn: Other kids might not understand either. Your question could help them too.
+play: chat | Your grown-up asks you to sort the washing | them: Can you sort the washing into lights and darks? | me: I don't understand. What are lights and darks?*/OK (but you don't know what to do)/No | them: Lights are white and pale clothes. Darks are black, navy and other dark colours. | me: Thanks! Can you show me with the first one?*/Too hard/Whatever
+check: mcq | You don't understand a job. What can you say? | "Can you show me?"* | Nothing, and guess | "This is dumb"
+check: tf | Your question might help other kids too. | true
+home: Ask one "Can you show me?" question about a job at home this week.
+skill: askhelp
+
+@lesson 6.6 | Being a helper | 🤗 | home
+hook: Your little cousin can't open their lunchbox. What can you do?
+learn: When someone asks for help, listen and be kind.
+learn: Show them how, so they can do it themselves next time.
+learn: If it's too big a job for you, find a grown-up.
+play: tap | Tap the kind ways to help someone who asks | 🤝:yes:Showing them how; 👂:yes:Listening to what they need; 😄:yes:Being patient and kind; 🙄:no; 😂:no; 🧑:yes:Getting a grown-up if it's too big for you
+check: mcq | Someone asks you for help. What's kind? | Listen and show them how* | Laugh at them | Ignore them
+check: tf | If a job is too big for you, finding a grown-up is a good way to help. | true
+home: Help someone in your family with a small job today, and show them how you did it.
+skill: helping
+
+@lesson 7.1 | Share the job | 🧺 | home
+hook: Tidying the whole lounge alone takes ages. What if four people help?
+learn: Teamwork means sharing a job, so it gets done faster and better.
+learn: Each person takes one part: toys, books, the table or the rubbish.
+learn: When everyone does their part, the job is done in no time.
+play: match | Match each part of the tidy to what it needs | Putting toys away=The toy box; Stacking books=The shelf; Wiping the table=A cloth; Taking out the rubbish=The bin
+check: mcq | Why share a big job? | It gets done faster and better* | So one person does it all | So nobody does it
+check: tf | When everyone does their part, big jobs get done faster. | true
+home: Do a five-minute family tidy where everyone takes one part of the room.
+skill: teamwork
+
+@lesson 7.2 | Taking turns | 🔄 | garden
+hook: Two kids, one watering can and a whole garden. How do you share?
+learn: Taking turns is fair. Everyone gets a go.
+learn: You can swap jobs: one waters and one picks up leaves, then switch.
+learn: Waiting for your turn is part of being a good teammate.
+play: timing | Wait for your turn, then tap when the marker reaches it | My turn! | Your turn
+check: mcq | One watering can, two kids. What's fair? | Take turns* | One kid keeps it all day | Nobody waters
+check: tf | Swapping jobs is a fair way to share work. | true
+home: Share a job with someone at home today by taking turns.
+skill: teamwork
+
+@lesson 7.3 | Listen to your team | 👂 | home
+hook: Your team is building a cubby. Everyone's talking at once. What helps?
+learn: Good teammates listen when others talk.
+learn: Look at the person, wait till they finish, then share your idea.
+learn: Other people's ideas can make the plan even better.
+play: chat | Building a cubby with your cousin | them: I think we should put the door here, by the tree! | me: Good idea! Can I add one too? A window on this side?*/No, my idea is better/I'm not listening | them: Yes! A window would let the light in. | me: Let's do both. You hold the sheet and I'll tie it.*/I'll just do it myself/Whatever
+check: mcq | What do good teammates do when someone talks? | Listen until they finish* | Talk over them | Walk away
+check: tf | Other people's ideas can make a plan better. | true
+home: At dinner, practise listening until someone finishes before you talk.
+skill: teamwork
+
+@lesson 7.4 | When we disagree | 🤔 | workshop
+hook: You want to paint the box red. Your friend wants blue. Now what?
+learn: It's normal to disagree. Good teams work it out together.
+learn: You can take turns choosing, mix the ideas, or find a new idea you both like.
+learn: Stay kind. Being right isn't as important as finishing together.
+play: path | You and your friend disagree about the colour for your box. | Paint half red and half blue => good: You mixed both ideas, and you're both happy. | Grab the brush and paint it red anyway => bad: Your friend feels left out, and the team falls apart. | Give up on the box => bad: Now nobody gets a box.
+check: mcq | You disagree with a teammate. What helps? | Find a way to mix both ideas* | Shout louder | Quit
+check: tf | It's normal for teammates to disagree sometimes. | true
+home: Next time you disagree with someone, try finding a way to mix both ideas.
+skill: teamwork
+
+@lesson 7.5 | Every job counts | ⭐ | townhall
+hook: At a sausage sizzle, someone cooks, someone takes the money and someone cleans up. Which job matters most?
+learn: Every job in a team matters. If one is missing, the whole thing struggles.
+learn: Small jobs, like handing out napkins, help everyone.
+learn: Thank your teammates for their part.
+play: tap | Tap the jobs that help the school sausage sizzle | 🌭:yes:Cooking the sausages; 💰:yes:Taking the money; 🧻:yes:Handing out napkins; 🗑️:yes:Cleaning up; 📱:no; 😴:no
+check: mcq | Which job matters at a sausage sizzle? | All of them* | Only the cooking | None of them
+check: tf | Thanking your teammates is a kind thing to do. | true
+home: Thank someone in your family for a small job they do that helps everyone.
+skill: teamwork
+
+@lesson 7.6 | Cheer your team | 📣 | garden
+hook: Your teammate drops the ball. What do you say?
+learn: Kind words help teammates try again.
+learn: Unkind words make people feel bad, and the whole team does worse.
+learn: Try "Good try!" or "You've got this!"
+play: sort | Helps the team, Hurts the team | "Good try!"=Helps the team; "You're useless!"=Hurts the team; "You've got this!"=Helps the team; Laughing when someone makes a mistake=Hurts the team; "Let's try again together."=Helps the team; Rolling your eyes=Hurts the team | Helps or hurts?
+check: mcq | Your teammate makes a mistake. What do you say? | "Good try! Let's go again."* | "You ruined it!" | Nothing, and walk off
+check: tf | Kind words help teammates try again. | true
+home: Cheer someone on today, at home, at school or at sport.
+skill: teamwork
+
+@lesson 8.1 | What do you love? | 💖 | stage
+hook: You love animals, drawing and building things. What jobs could that lead to?
+learn: Things you love doing can point to jobs you'd enjoy.
+learn: Love animals? Think vets, zookeepers and dog groomers. Love drawing? Think artists, designers and cartoonists.
+learn: Lots of jobs mix together things people love.
+play: match | Match each love to a job it could lead to | Animals=Vet nurse; Drawing=Illustrator; Building things=Builder; Cooking=Chef; Helping sick people=Nurse
+check: mcq | You love cooking. Which job might suit you? | Chef* | Pilot | Plumber
+check: tf | Things you love doing can point to jobs you'd enjoy. | true
+home: Tell a grown-up three things you love doing. Think of a job for each one together.
+skill: careers
+
+@lesson 8.2 | Jobs you don't see | 🎬 | stage
+hook: A movie has actors. Who else does it need?
+learn: Many jobs happen behind the scenes, where you don't see them.
+learn: A movie needs writers, camera operators, costume makers, sound engineers and lots more.
+learn: For every job you can see, there are often many you can't.
+play: tap | Tap the jobs that help make a movie | ✍️:yes:Writers who write the story; 🎥:yes:Camera operators; 👗:yes:Costume makers; 🎧:yes:Sound engineers; 🦖:no; 🍿:no
+check: mcq | Who writes the story for a movie? | A writer* | The popcorn seller | Nobody
+check: tf | Many jobs happen behind the scenes. | true
+home: Watch the credits at the end of a show with a grown-up. How many different jobs can you spot?
+skill: careers
+
+@lesson 8.3 | Brand-new jobs | 🚁 | online
+hook: Drone pilot, app designer, game tester. Did your grandparents have these jobs?
+learn: New jobs appear as the world changes.
+learn: Some jobs you might do one day haven't been invented yet!
+learn: Being curious and learning new things gets you ready for any job.
+play: mystery | It flies, but nobody sits inside; You control it from the ground; It can film from the sky or check on farms; It's quite a new job | Drone pilot* | Train driver | Baker
+check: mcq | What helps you get ready for new jobs? | Being curious and learning* | Never trying new things | Staying the same
+check: tf | Some jobs of the future haven't been invented yet. | true
+home: Ask an older family member what jobs didn't exist when they were your age.
+skill: careers
+
+@lesson 8.4 | Getting ready for a job | 🎒 | townhall
+hook: How does someone become a vet?
+learn: Most jobs need learning first: at school, then often more study or training.
+learn: Some people learn on the job, like apprentices.
+learn: Practising skills now, like reading, maths and being kind, helps with any job.
+play: order | The path to becoming a vet | Go to school and learn lots; Study science at high school; Go to university to train as a vet; Practise with real animals; Start work as a vet
+check: mcq | What helps with any job? | Reading, maths and being kind* | Watching TV all day | Nothing
+check: tf | Some people learn their job while they work. | true
+home: Ask a grown-up how they learned to do their job.
+skill: careers
+
+@lesson 8.5 | Lots of jobs in one life | 🔄 | stage
+hook: Your grown-up was a waiter, then a builder, and now a teacher. Is that normal?
+learn: Most people have more than one job in their life.
+learn: Each job teaches skills you take to the next one.
+learn: It's OK to change your mind about what you want to be.
+play: path | You want to be an astronaut. Your friend says you'll never change your mind. | Say "Maybe! I might like other jobs too, and that's OK" => good: Keeping an open mind is great. | Say "I'll be an astronaut or nothing" => ok: Big dreams are great, but there are lots of jobs to enjoy too. | Stop dreaming about jobs => bad: Dreaming helps you find what you love.
+check: mcq | Is it OK to change your mind about a dream job? | Yes* | No, never | Only on Tuesdays
+check: tf | Most people have more than one job in their life. | true
+home: Ask a grown-up how many different jobs they've had.
+skill: careers
+
+@lesson 8.6 | My dream job | 🌟 | stage
+hook: If you could do any job, what would it be?
+learn: A dream job uses things you love and things you're good at.
+learn: Ask someone who does a job you like what their day is like.
+learn: Dreams can change as you grow. Keep exploring!
+play: chat | Your aunty asks about your dream job | them: What would you love to be when you grow up? | me: Maybe a vet, because I love animals!*/I don't know and I don't care/Nothing | them: How could you find out what vets do? | me: I could ask a vet, or read about it!*/I can't/Ask someone to do it for me
+check: mcq | A dream job often uses... | Things you love and are good at* | Things you don't like | Nothing
+check: tf | Dreams can change as you grow. | true
+home: Draw yourself doing your dream job and show a grown-up.
+skill: careers
+
