@@ -120,7 +120,7 @@ function viewHub(kid) {
         ${story && !storyDone ? tile('story', '📰', 'This week in the market', `+${XP.story} XP`) : ''}
         ${C.kidsList().length > 1 ? tile('crewPick', '👯', 'Crew quiz', 'Answer side by side with a sibling') : ''}
       </div>
-      <h2 class="gw-h2">Skill trees</h2>
+      <h2 class="gw-h2">${treesOn().length === 1 ? 'Your island path' : 'Skill trees'}</h2>
       ${constellation(kid)}
       ${casesFor(kid).length ? `<h2 class="gw-h2">Real stories</h2><div class="gw-cases">${casesFor(kid).slice(0, 12).map(cs => `<button class="gw-case ${(prog(kid).cases || {})[cs.id] ? 'done' : ''}" data-g="case" data-id="${cs.id}" style="--th:${(TREE[cs.tree] || {}).hue || '#2F6FE4'}"><span>${esc(cs.icon)}</span><b>${esc(cs.name)}</b><small>${esc((TREE[cs.tree] || {}).name || '')}</small></button>`).join('')}</div>` : ''}
     </div>`;
@@ -128,6 +128,11 @@ function viewHub(kid) {
 // The 12 trees as a staggered constellation, 3 across and 4 down, each linked to its neighbours.
 function constellation(kid) {
   const on = treesOn(), W = 600, H = 800;
+  // With a single live tree there's nothing to link, so show one big door into its island path.
+  if (on.length === 1) {
+    const t = on[0], st = treeStats(kid, t.id), nx = nextIn(kid, t.id);
+    return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons · Open the island path</small></span></button>`;
+  }
   const pos = on.map((t, i) => { const c = i % 3, r = Math.floor(i / 3); return { t, c, r, x: 100 + c * 200, y: 95 + r * 190 + (c === 1 ? 70 : 0) }; });
   const at = (r, c) => pos.find(p => p.r === r && p.c === c);
   const links = pos.flatMap(p => [at(p.r, p.c + 1), at(p.r + 1, p.c)].filter(Boolean).map(q => `<line x1="${p.x}" y1="${p.y}" x2="${q.x}" y2="${q.y}"/>`)).join('');

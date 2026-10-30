@@ -57,6 +57,15 @@ body.gw-open{overflow:hidden}
 .gt-ic{width:42px;height:42px;flex:none;border-radius:14px;display:grid;place-items:center;font-size:22px;background:rgba(255,255,255,.2)}
 .gw-tile b{display:block;font:900 15px/1.2 var(--f-round)}
 .gw-tile small{font:700 12px var(--f-round);opacity:.85}
+.gw-one{display:flex;align-items:center;gap:16px;width:100%;max-width:520px;margin:0 auto 24px;padding:16px;border-radius:24px;text-align:left;color:#fff;background:linear-gradient(135deg,color-mix(in srgb,var(--th) 70%,#fff 10%),var(--th));box-shadow:0 14px 30px -14px rgba(0,0,0,.55),inset 0 -5px 0 rgba(0,0,0,.14)}
+.gw-one:active{transform:scale(.98)}
+.gw-one.open{animation:starPulse 2.4s ease-in-out infinite}
+.g1-ic{width:72px;height:72px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:38px;background:rgba(255,255,255,.25)}
+.g1-t{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.g1-t b{font:900 20px/1.15 var(--f-round)}
+.g1-t small{font:800 12px/1.3 var(--f-round);opacity:.9}
+.g1-bar{height:8px;border-radius:99px;background:rgba(255,255,255,.28);overflow:hidden}
+.g1-bar i{display:block;height:100%;border-radius:inherit;background:#FFE066}
 .gw-const{position:relative;width:100%;max-width:520px;margin:0 auto 24px}
 .gw-const svg{position:absolute;inset:0;width:100%;height:100%}
 .gw-links line{stroke:rgba(255,255,255,.28);stroke-width:2;stroke-dasharray:4 6}

@@ -9,8 +9,10 @@ const C = window.Chorecast; if (!C) return;
 const { Store, UI, Sound, FX, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays } = C;
 const S = () => C.S();
 
-/* ---------- Catalogue ---------- */
-const TREES = [
+/* ---------- Catalogue ----------
+   Only LIVE trees reach kids. The rest are parked in chorecast-growth/content/parked until a grown-up has read them. */
+const LIVE = ['money'];
+const ALL_TREES = [
   { id: 'money', name: 'Money Sense', icon: '💰', hue: '#30C25A', title: 'Budget Boss', scene: 'bank', blurb: 'Earning, spending, saving and budgeting' },
   { id: 'invest', name: 'Investor School', icon: '📈', hue: '#18B597', title: 'Patient Investor', scene: 'shares', blurb: 'How money grows, risk and patience' },
   { id: 'work', name: 'Work and Careers', icon: '🧰', hue: '#FF9F0A', title: 'Hard Worker', scene: 'workshop', blurb: 'Doing a job well, jobs and workplaces' },
@@ -24,6 +26,7 @@ const TREES = [
   { id: 'online', name: 'Smart Online', icon: '🛡️', hue: '#6A79F0', title: 'Scam Spotter', scene: 'online', blurb: 'Privacy, scams, ads and staying safe' },
   { id: 'world', name: 'How the World Works', icon: '🏛️', hue: '#2F6FE4', title: 'Civic Star', scene: 'townhall', blurb: 'Rules, tax, councils and government' },
 ];
+const TREES = ALL_TREES.filter(t => LIVE.includes(t.id));
 const TREE = Object.fromEntries(TREES.map(t => [t.id, t]));
 const BANDS = [
   { id: 'sprouts', name: 'Sprouts', ages: '7 to 9', words: 10 },
@@ -46,7 +49,7 @@ const RANKS = ['Saver', 'Starter', 'Steady', 'Long-termer', 'Portfolio Pro'];
    One text file per tree and band (growth/<tree>.<band>.txt), plus moments.txt and cases.txt.
    {nz:...~au:...} picks the family's country; "*" marks right answers. */
 const Packs = {}, loading = {};
-let Moments = [], Cases = [], feedLoaded = false, contentVer = '1';
+let Moments = [], Cases = [], feedLoaded = false, contentVer = '1', shipped = null;
 const local = s => String(s == null ? '' : s).replace(/\{nz:([^~}]*)~au:([^}]*)\}/g, (m, nz, au) => (GSET().country === 'au' ? au : nz));
 const splitList = s => String(s || '').split(';').map(x => x.trim()).filter(Boolean);
 const starOpts = arr => arr.map(o => o.trim()).filter(Boolean).map(o => ({ t: o.replace(/\*$/, '').trim(), ok: /\*$/.test(o) }));
@@ -136,7 +139,7 @@ function parseCases(text) {
 async function fetchText(url) { const r = await fetch(url, { cache: 'no-cache' }); if (!r.ok) throw new Error(url + ' ' + r.status); return r.text(); }
 // Content version from index.json, so every pack URL changes when the content does.
 function loadIndex() {
-  return loading.index || (loading.index = fetchText('growth/index.json').then(t => { contentVer = JSON.parse(t).version || contentVer; }).catch(() => {}));
+  return loading.index || (loading.index = fetchText('growth/index.json').then(t => { const ix = JSON.parse(t); contentVer = ix.version || contentVer; shipped = ix.counts || null; }).catch(() => {}));
 }
 async function loadBand(band) {
   await loadIndex();
@@ -150,8 +153,10 @@ async function loadExtras() {
   if (loading.extras) return loading.extras;
   loading.extras = (async () => {
     await loadIndex();
-    try { Moments = parseMoments(await fetchText(`growth/moments.txt?v=${contentVer}`)); } catch (e) { console.warn('moments', e); }
-    try { Cases = parseCases(await fetchText(`growth/cases.txt?v=${contentVer}`)); } catch (e) { console.warn('cases', e); }
+    // index.json lists what was built; skip files that are parked so they don't 404.
+    const has = f => !shipped || f in shipped;
+    if (has('moments.txt')) try { Moments = parseMoments(await fetchText(`growth/moments.txt?v=${contentVer}`)); } catch (e) { console.warn('moments', e); }
+    if (has('cases.txt')) try { Cases = parseCases(await fetchText(`growth/cases.txt?v=${contentVer}`)); } catch (e) { console.warn('cases', e); }
     await loadFeed();
   })();
   return loading.extras;
@@ -836,7 +841,7 @@ function viewHub(kid) {
         ${story && !storyDone ? tile('story', '📰', 'This week in the market', `+${XP.story} XP`) : ''}
         ${C.kidsList().length > 1 ? tile('crewPick', '👯', 'Crew quiz', 'Answer side by side with a sibling') : ''}
       </div>
-      <h2 class="gw-h2">Skill trees</h2>
+      <h2 class="gw-h2">${treesOn().length === 1 ? 'Your island path' : 'Skill trees'}</h2>
       ${constellation(kid)}
       ${casesFor(kid).length ? `<h2 class="gw-h2">Real stories</h2><div class="gw-cases">${casesFor(kid).slice(0, 12).map(cs => `<button class="gw-case ${(prog(kid).cases || {})[cs.id] ? 'done' : ''}" data-g="case" data-id="${cs.id}" style="--th:${(TREE[cs.tree] || {}).hue || '#2F6FE4'}"><span>${esc(cs.icon)}</span><b>${esc(cs.name)}</b><small>${esc((TREE[cs.tree] || {}).name || '')}</small></button>`).join('')}</div>` : ''}
     </div>`;
@@ -844,6 +849,11 @@ function viewHub(kid) {
 // The 12 trees as a staggered constellation, 3 across and 4 down, each linked to its neighbours.
 function constellation(kid) {
   const on = treesOn(), W = 600, H = 800;
+  // With a single live tree there's nothing to link, so show one big door into its island path.
+  if (on.length === 1) {
+    const t = on[0], st = treeStats(kid, t.id), nx = nextIn(kid, t.id);
+    return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons · Open the island path</small></span></button>`;
+  }
   const pos = on.map((t, i) => { const c = i % 3, r = Math.floor(i / 3); return { t, c, r, x: 100 + c * 200, y: 95 + r * 190 + (c === 1 ? 70 : 0) }; });
   const at = (r, c) => pos.find(p => p.r === r && p.c === c);
   const links = pos.flatMap(p => [at(p.r, p.c + 1), at(p.r + 1, p.c)].filter(Boolean).map(q => `<line x1="${p.x}" y1="${p.y}" x2="${q.x}" y2="${q.y}"/>`)).join('');
@@ -1187,7 +1197,7 @@ function card(kid) {
   const dots = TREES.map((t, i) => { const st = ready ? treeStats(kid, t.id) : { done: 0, total: 0 }, a = -Math.PI / 2 + i / 12 * Math.PI * 2; return `<i style="--th:${t.hue};left:${50 + Math.cos(a) * 38}%;top:${50 + Math.sin(a) * 38}%;--p:${st.total ? st.done / st.total : 0}"></i>`; }).join('');
   return `<section class="card glass cg-card"><header class="card-h"><span class="card-t">Character Growth</span><span class="card-r">Level ${charLevel(kid)}${titles(kid).length ? ` · ${esc(titles(kid)[0])}` : ''}</span></header>
     <button class="cg-main" data-act="gOpen" data-id="${kid.id}"><span class="cg-orbit" aria-hidden="true">${dots}<b class="num">${charLevel(kid)}</b></span>
-      <span class="cg-txt"><small>${sug ? `Next · ${esc(TREE[sug.tree].name)}` : ready ? 'All caught up' : 'Loading your skill trees…'}</small><b>${sug ? `${esc(sug.icon)} ${esc(local(sug.title))}` : 'Explore your 12 skill trees'}</b><span class="cg-bar"><i style="width:${Math.min(100, d.xp / XP.dayCap * 100)}%"></i></span><small>${d.xp} of ${XP.dayCap} XP earned from lessons today</small></span></button>
+      <span class="cg-txt"><small>${sug ? `Next · ${esc(TREE[sug.tree].name)}` : ready ? 'All caught up' : 'Loading your skill trees…'}</small><b>${sug ? `${esc(sug.icon)} ${esc(local(sug.title))}` : (TREES.length === 1 ? `Start ${esc(TREES[0].name)}` : `Explore your ${TREES.length} skill trees`)}</b><span class="cg-bar"><i style="width:${Math.min(100, d.xp / XP.dayCap * 100)}%"></i></span><small>${d.xp} of ${XP.dayCap} XP earned from lessons today</small></span></button>
     ${due || echo ? `<div class="cg-chips">${due ? `<button data-act="gOpen" data-id="${kid.id}">🔁 ${due} review${due === 1 ? '' : 's'} due</button>` : ''}${echo ? `<button data-act="gOpen" data-id="${kid.id}">💡 ${echo} question${echo === 1 ? '' : 's'} about your week</button>` : ''}</div>` : ''}
   </section>`;
 }
@@ -1204,7 +1214,8 @@ function momentCard(kid) {
   return `<button class="cg-moment ${done ? 'done' : ''}" data-act="gMoment" data-id="${kid.id}"><span>${done ? '✅' : '💬'}</span><span><small>Today’s Money Moment${done ? ' · done' : ` · +${XP.moment} XP`}</small><b>${esc(local(m.text)).slice(0, 110)}${m.text.length > 110 ? '…' : ''}</b></span></button>`;
 }
 function treeDoor(kid, treeId) {
-  ensureLoaded(kid); const t = TREE[treeId], st = treeStats(kid, treeId);
+  const t = TREE[treeId]; if (!t) return ''; // parked trees have no door
+  ensureLoaded(kid); const st = treeStats(kid, treeId);
   return `<button class="cg-door" data-act="gOpen" data-id="${kid.id}" data-tree="${treeId}" style="--th:${t.hue}"><span>${t.icon}</span><span><b>${esc(t.name)} skill tree</b><small>${st.done} of ${st.total} lessons · Rank: ${investorRank(kid)}</small></span>${ic('next')}</button>`;
 }
 C.ACT.gMoment = a => { open(a.dataset.id, {}).then(() => { const k = Store.kids[a.dataset.id]; if (k && momentFor(k)) startMoment(k); }); };
@@ -1732,7 +1743,7 @@ function parentView() {
       <div class="row wrap"><div class="row-main"><b>Daily learning time</b><small>After this, new lessons wait until tomorrow</small></div><div class="chips">${[[10, '10 min'], [20, '20 min'], [30, '30 min'], [45, '45 min'], [0, 'No limit']].map(([v, l]) => `<button class="chip-p ${set.cap === v ? 'on' : ''}" data-act="gpCap" data-v="${v}">${l}</button>`).join('')}</div></div>
       <div class="row wrap"><div class="row-main"><b>${esc(kid.name)}’s lessons</b><small>Picked from age ${kid.age || '?'}. Move a band if they need more or less challenge.</small></div><div class="chips">${[[-1, 'One band easier'], [0, 'Automatic'], [1, 'One band harder']].map(([v, l]) => `<button class="chip-p ${(set.band[kid.id] || 0) === v ? 'on' : ''}" data-act="gpBand" data-v="${v}">${l}</button>`).join('')}</div></div>
       <div class="row wrap"><div class="row-main"><b>Country rules</b><small>Tax, GST, KiwiSaver or super, and prices</small></div><div class="chips">${[['nz', 'New Zealand'], ['au', 'Australia']].map(([v, l]) => `<button class="chip-p ${set.country === v ? 'on' : ''}" data-act="gpCountry" data-v="${v}">${l}</button>`).join('')}</div></div>
-      <div class="row"><div class="row-main"><b>Stories about living people</b><small>Real stories include people like Melanie Perkins and Elon Musk</small></div>${sw('gpLiving', set.living, 'Stories about living people')}</div>
+      ${Cases.length ? `<div class="row"><div class="row-main"><b>Stories about living people</b><small>Real stories include people like Melanie Perkins and Elon Musk</small></div>${sw('gpLiving', set.living, 'Stories about living people')}</div>` : ''}
       <div class="row"><div class="row-main"><b>Read aloud for Sprouts</b><small>Lessons for ages 7 to 9 are read out</small></div>${sw('gpRead', set.readAloud, 'Read aloud')}</div>
       ${TREES.map(t => `<div class="row"><span class="pg-ti" style="--th:${t.hue}">${t.icon}</span><div class="row-main"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small></div>${sw('gpTree', !(set.off || {})[t.id], t.name, `data-id="${t.id}"`)}</div>`).join('')}
     </div>
@@ -1820,6 +1831,15 @@ body.gw-open{overflow:hidden}
 .gt-ic{width:42px;height:42px;flex:none;border-radius:14px;display:grid;place-items:center;font-size:22px;background:rgba(255,255,255,.2)}
 .gw-tile b{display:block;font:900 15px/1.2 var(--f-round)}
 .gw-tile small{font:700 12px var(--f-round);opacity:.85}
+.gw-one{display:flex;align-items:center;gap:16px;width:100%;max-width:520px;margin:0 auto 24px;padding:16px;border-radius:24px;text-align:left;color:#fff;background:linear-gradient(135deg,color-mix(in srgb,var(--th) 70%,#fff 10%),var(--th));box-shadow:0 14px 30px -14px rgba(0,0,0,.55),inset 0 -5px 0 rgba(0,0,0,.14)}
+.gw-one:active{transform:scale(.98)}
+.gw-one.open{animation:starPulse 2.4s ease-in-out infinite}
+.g1-ic{width:72px;height:72px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:38px;background:rgba(255,255,255,.25)}
+.g1-t{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.g1-t b{font:900 20px/1.15 var(--f-round)}
+.g1-t small{font:800 12px/1.3 var(--f-round);opacity:.9}
+.g1-bar{height:8px;border-radius:99px;background:rgba(255,255,255,.28);overflow:hidden}
+.g1-bar i{display:block;height:100%;border-radius:inherit;background:#FFE066}
 .gw-const{position:relative;width:100%;max-width:520px;margin:0 auto 24px}
 .gw-const svg{position:absolute;inset:0;width:100%;height:100%}
 .gw-links line{stroke:rgba(255,255,255,.28);stroke-width:2;stroke-dasharray:4 6}

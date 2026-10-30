@@ -1,6 +1,8 @@
 // Checks every Character Growth content pack with the app's own parser, so a typo in a lesson file is caught
 // before kids see a broken question. Run after editing chorecast-growth/content: node scripts/check-growth.mjs
+// Each band has UNITS units of PER_UNIT lessons (see CONTENT.md).
 import { readFile, readdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
@@ -13,6 +15,7 @@ const ctx = { window: { Chorecast: C }, document: { createElement: el, head: el(
 ctx.window.window = ctx.window; vm.createContext(ctx); vm.runInContext(code, ctx);
 const { parsePack, parseMoments, parseCases } = ctx.window.Growth._debug;
 
+const UNITS = 4, PER_UNIT = 4;
 const GENS = ['change', 'add', 'percent', 'round', 'scale', 'gst', 'time', 'compound', 'unit', 'split'];
 const problems = [];
 function checkItem(it, where) {
@@ -45,17 +48,19 @@ const dir = path.join(root, 'public', 'chorecast', 'growth');
 let lessons = 0, items = 0;
 for (const f of (await readdir(dir)).filter(f => /^\w+\.\w+\.txt$/.test(f))) {
   const [tree, band] = f.split('.'), pack = parsePack(await readFile(path.join(dir, f), 'utf8'), tree, band);
-  if (pack.units.length !== 8) problems.push(`${f}: has ${pack.units.length} units, expected 8`);
+  if (pack.units.length !== UNITS) problems.push(`${f}: has ${pack.units.length} units, expected ${UNITS}`);
+  pack.units.forEach(u => { if (u.lessons.length !== PER_UNIT) problems.push(`${f}: unit ${u.n} has ${u.lessons.length} lessons, expected ${PER_UNIT}`); });
   for (const u of pack.units) for (const l of u.lessons) {
     lessons++; const w = `${l.id} "${l.title}"`;
     if (!l.play) problems.push(`${w}: no play`); if (l.checks.length < 2) problems.push(`${w}: fewer than 2 checks`); if (!l.skill) problems.push(`${w}: no skill`); if (!l.hook) problems.push(`${w}: no hook`); if (!l.learn.length) problems.push(`${w}: no learn`);
     for (const it of [l.guess, l.play, ...l.tries.map(t => t.item), ...l.checks].filter(Boolean)) { items++; checkItem(it, w); }
   }
 }
-const moments = parseMoments(await readFile(path.join(dir, 'moments.txt'), 'utf8'));
+const read = async f => existsSync(path.join(dir, f)) ? readFile(path.join(dir, f), 'utf8') : '';
+const moments = parseMoments(await read('moments.txt'));
 for (const m of moments) { items++; checkItem(m.item, `moment ${m.id}`); }
 const ids = moments.map(m => m.id); ids.filter((x, i) => ids.indexOf(x) !== i).forEach(x => problems.push(`moment ${x}: duplicate id`));
-const cases = parseCases(await readFile(path.join(dir, 'cases.txt'), 'utf8'));
+const cases = parseCases(await read('cases.txt'));
 for (const c of cases) { if (c.opts.length < 2) problems.push(`case ${c.id}: needs 2+ options`); if (!c.checks.length) problems.push(`case ${c.id}: no checks`); c.checks.forEach(it => { items++; checkItem(it, `case ${c.id}`); }); }
 console.log(`${lessons} lessons, ${moments.length} moments, ${cases.length} cases, ${items} questions checked`);
 if (problems.length) { console.log(problems.join('\n')); process.exit(1); } else console.log('All content looks good.');

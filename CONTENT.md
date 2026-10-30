@@ -2,6 +2,8 @@
 
 Every lesson, Money Moment and real story in Character Growth is plain text in [`chorecast-growth/content/`](chorecast-growth/content/). No code changes are needed to add or fix one.
 
+Only files directly in `content/` ship. Files in [`content/parked/`](chorecast-growth/content/parked/) are kept but never built, so kids don't see them. A tree also has to be listed in `LIVE` in `chorecast-growth/01-core.js`.
+
 After editing, run:
 
 ```bash
@@ -16,7 +18,7 @@ The build splits the files into `public/chorecast/growth/`, one file per tree an
 
 ## Trees, bands and units
 
-There are 12 skill trees, one file each: `money`, `invest`, `work`, `make`, `give`, `maths`, `words`, `time`, `home`, `mind`, `online`, `world`.
+One tree is live: `money` (Money Sense). The other 11 (`invest`, `work`, `make`, `give`, `maths`, `words`, `time`, `home`, `mind`, `online`, `world`), `moments.txt`, `cases.txt` and the full 8-unit Money Sense (`money.full.txt`) are in `parked/`. To bring one back, read every lesson in it first, trim it to the shape below, move it up into `content/` and add it to `LIVE`.
 
 A kid's band comes from their age. A grown-up can shift it one band up or down.
 
@@ -27,7 +29,17 @@ A kid's band comes from their age. A grown-up can shift it one band up or down.
 | `makers` | 13 to 15 |
 | `launchers` | 16 to 18 |
 
-Each band has 8 units with up to 6 lessons each. Lessons in a unit open one at a time, and a unit opens once every lesson in the unit before it is passed. Each finished unit also has a unit challenge. Units that have no lessons yet show as "Coming in a content update".
+Each band has 4 units of 4 lessons, so a tree is 64 lessons and a grown-up can read one band in about half an hour. The checker fails if a band has a different shape. Lessons in a unit open one at a time, and a unit opens once every lesson in the unit before it is passed. Each finished unit also has a unit challenge.
+
+## What lessons cover
+
+Keep every lesson to things a kid can practise in Chorecast: earning from chores, the four jars, payday, the Saving goal, spending, saving and spotting a bad deal or a scam. Where it fits, the `home:` task is something to do in the app that week.
+
+Lessons never cover sex or consent, alcohol, drugs or vaping, mental health crises, body image, politics or law, Treaty or Indigenous history, religion, or real people and brands. Those belong with families and schools.
+
+No facts that go out of date: no tax rates, wages, thresholds, laws, phone numbers, websites or recent dates. Use made-up round prices ("a $20 game") so nothing needs fact-checking and both countries read the same.
+
+The app has no way for kids to spend or give money themselves. A grown-up pays out the Spend or Give jar under Grown-ups, then Pay out cash, so lessons say "ask a grown-up to pay it out".
 
 ## Lesson file layout
 
@@ -131,6 +143,8 @@ Questions are split into fields before the country text is swapped in, so keep s
 
 ## Money Moments (`moments.txt`)
 
+Parked for now: the file is `parked/moments.txt`, so none ship until it has been read and moved back.
+
 One 30-second fact and question a day, from the kid's band, never repeated within 90 days.
 
 ```
@@ -142,6 +156,8 @@ mcq | About how old are the first coins? | About 2,600 years* | About 26 years |
 The header holds: an id, the bands (or `all`), an optional season as `MM-DD..MM-DD` (for example `12-01..12-31` for Christmas or `{nz:04-01..04-30~au:06-01..06-30}` for tax time), and skill tags. The fact goes on the next line and the question on the line after.
 
 ## Real stories (`cases.txt`)
+
+Parked for now: the file is `parked/cases.txt`, so none ship until it has been read and moved back.
 
 ```
 @case buffett | Warren Buffett | invest | builders | 💼 | living

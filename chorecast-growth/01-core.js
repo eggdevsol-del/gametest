@@ -9,8 +9,10 @@ const C = window.Chorecast; if (!C) return;
 const { Store, UI, Sound, FX, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays } = C;
 const S = () => C.S();
 
-/* ---------- Catalogue ---------- */
-const TREES = [
+/* ---------- Catalogue ----------
+   Only LIVE trees reach kids. The rest are parked in chorecast-growth/content/parked until a grown-up has read them. */
+const LIVE = ['money'];
+const ALL_TREES = [
   { id: 'money', name: 'Money Sense', icon: '💰', hue: '#30C25A', title: 'Budget Boss', scene: 'bank', blurb: 'Earning, spending, saving and budgeting' },
   { id: 'invest', name: 'Investor School', icon: '📈', hue: '#18B597', title: 'Patient Investor', scene: 'shares', blurb: 'How money grows, risk and patience' },
   { id: 'work', name: 'Work and Careers', icon: '🧰', hue: '#FF9F0A', title: 'Hard Worker', scene: 'workshop', blurb: 'Doing a job well, jobs and workplaces' },
@@ -24,6 +26,7 @@ const TREES = [
   { id: 'online', name: 'Smart Online', icon: '🛡️', hue: '#6A79F0', title: 'Scam Spotter', scene: 'online', blurb: 'Privacy, scams, ads and staying safe' },
   { id: 'world', name: 'How the World Works', icon: '🏛️', hue: '#2F6FE4', title: 'Civic Star', scene: 'townhall', blurb: 'Rules, tax, councils and government' },
 ];
+const TREES = ALL_TREES.filter(t => LIVE.includes(t.id));
 const TREE = Object.fromEntries(TREES.map(t => [t.id, t]));
 const BANDS = [
   { id: 'sprouts', name: 'Sprouts', ages: '7 to 9', words: 10 },
@@ -46,7 +49,7 @@ const RANKS = ['Saver', 'Starter', 'Steady', 'Long-termer', 'Portfolio Pro'];
    One text file per tree and band (growth/<tree>.<band>.txt), plus moments.txt and cases.txt.
    {nz:...~au:...} picks the family's country; "*" marks right answers. */
 const Packs = {}, loading = {};
-let Moments = [], Cases = [], feedLoaded = false, contentVer = '1';
+let Moments = [], Cases = [], feedLoaded = false, contentVer = '1', shipped = null;
 const local = s => String(s == null ? '' : s).replace(/\{nz:([^~}]*)~au:([^}]*)\}/g, (m, nz, au) => (GSET().country === 'au' ? au : nz));
 const splitList = s => String(s || '').split(';').map(x => x.trim()).filter(Boolean);
 const starOpts = arr => arr.map(o => o.trim()).filter(Boolean).map(o => ({ t: o.replace(/\*$/, '').trim(), ok: /\*$/.test(o) }));
@@ -136,7 +139,7 @@ function parseCases(text) {
 async function fetchText(url) { const r = await fetch(url, { cache: 'no-cache' }); if (!r.ok) throw new Error(url + ' ' + r.status); return r.text(); }
 // Content version from index.json, so every pack URL changes when the content does.
 function loadIndex() {
-  return loading.index || (loading.index = fetchText('growth/index.json').then(t => { contentVer = JSON.parse(t).version || contentVer; }).catch(() => {}));
+  return loading.index || (loading.index = fetchText('growth/index.json').then(t => { const ix = JSON.parse(t); contentVer = ix.version || contentVer; shipped = ix.counts || null; }).catch(() => {}));
 }
 async function loadBand(band) {
   await loadIndex();
@@ -150,8 +153,10 @@ async function loadExtras() {
   if (loading.extras) return loading.extras;
   loading.extras = (async () => {
     await loadIndex();
-    try { Moments = parseMoments(await fetchText(`growth/moments.txt?v=${contentVer}`)); } catch (e) { console.warn('moments', e); }
-    try { Cases = parseCases(await fetchText(`growth/cases.txt?v=${contentVer}`)); } catch (e) { console.warn('cases', e); }
+    // index.json lists what was built; skip files that are parked so they don't 404.
+    const has = f => !shipped || f in shipped;
+    if (has('moments.txt')) try { Moments = parseMoments(await fetchText(`growth/moments.txt?v=${contentVer}`)); } catch (e) { console.warn('moments', e); }
+    if (has('cases.txt')) try { Cases = parseCases(await fetchText(`growth/cases.txt?v=${contentVer}`)); } catch (e) { console.warn('cases', e); }
     await loadFeed();
   })();
   return loading.extras;
