@@ -579,6 +579,155 @@ p{margin:0}
 .icon-p{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:var(--ink-2)}
 .muted{color:var(--ink-2)}
 .pempty{padding:40px 20px;text-align:center;color:var(--ink-2);background:var(--cell);border-radius:16px;font:400 16px var(--f-text)}
+/* ---------- Our home: setup questions ---------- */
+.wiz{--hue:#5AC8FA;min-height:100vh;color:var(--ink);display:flex;flex-direction:column}
+.wiz-top{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 6px) var(--gut-r) 6px var(--gut);background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%)}
+.wiz-top .plink{justify-self:start}
+.wiz-tt{font:600 17px var(--f-text)}
+.wiz-prog{display:flex;gap:5px}
+.wiz-prog i{width:20px;height:6px;border-radius:3px;background:var(--fill-2);transition:width .35s cubic-bezier(.2,.9,.3,1.2),background .3s}
+.wiz-prog i.done{background:color-mix(in srgb,var(--hue) 55%,var(--fill-2))}
+.wiz-prog i.on{width:40px;background:var(--hue)}
+.wiz-step{justify-self:end;font:500 15px var(--f-text);color:var(--ink-2)}
+.wiz-body{width:100%;max-width:780px;margin:0 auto;padding:10px var(--gut-r) 150px var(--gut);display:flex;flex-direction:column;gap:20px}
+.wiz-ex{position:relative;overflow:hidden;border-radius:28px;padding:20px;background:linear-gradient(140deg,color-mix(in srgb,var(--hue) 30%,var(--cell)),color-mix(in srgb,var(--hue) 8%,var(--cell)) 72%);box-shadow:0 18px 40px -30px color-mix(in srgb,var(--hue) 80%,#000),inset 0 0 0 1px color-mix(in srgb,var(--hue) 22%,transparent)}
+.wiz-ex::before{content:"";position:absolute;right:-70px;top:-90px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--hue) 50%,transparent),transparent 70%);pointer-events:none}
+.wiz-ex-h{position:relative;display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.wiz-ex-ic{width:66px;height:66px;flex:none;border-radius:20px;display:grid;place-items:center;font-size:38px;background:var(--cell);box-shadow:0 10px 22px -12px rgba(0,0,0,.4);animation:wizBob 3.4s ease-in-out infinite}
+@keyframes wizBob{50%{transform:translateY(-5px) rotate(-4deg)}}
+.wiz-ex-h b{display:block;font:700 13px var(--f-text);letter-spacing:.07em;text-transform:uppercase;color:color-mix(in srgb,var(--hue) 50%,var(--ink))}
+.wiz-ex-h small{display:block;font:400 16px/1.38 var(--f-text);color:var(--ink);margin-top:3px}
+.wiz-ex-list{position:relative;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.wiz-ex.wex-mini{padding:10px;border-radius:18px;margin-bottom:4px}
+.wiz-ex.wex-mini::before{display:none}
+.wiz-ex.wex-mini .wiz-ex-list{display:flex;flex-wrap:wrap}
+.wiz-ex.wex-mini .wx{flex:0 1 auto;min-height:44px;padding:5px 10px 5px 5px}
+.wiz-ex.wex-mini .wx-ic{width:32px;height:32px;font-size:18px}
+.wx{display:flex;align-items:center;gap:10px;min-height:50px;padding:7px 10px 7px 7px;border-radius:15px;background:var(--cell);box-shadow:0 1px 2px rgba(0,0,0,.07);transition:opacity .3s}
+.wx-ic{width:36px;height:36px;flex:none;border-radius:11px;display:grid;place-items:center;font-size:20px;background:linear-gradient(140deg,var(--c1),var(--c2))}
+.wx-t{flex:1;min-width:0;font:600 15px/1.25 var(--f-text)}
+.wx-s{display:inline-flex;align-items:center;gap:3px;flex:none;padding:3px 8px;border-radius:999px;font:700 12px var(--f-text);background:color-mix(in srgb,var(--good) 16%,transparent);color:color-mix(in srgb,var(--good) 72%,var(--ink))}
+.wx-s .ic{width:12px;height:12px;stroke-width:3.2}
+.wx.off{opacity:.6}
+.wx.off .wx-ic{filter:grayscale(1);opacity:.7}
+.wx.off .wx-t{text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--ink) 45%,transparent);color:var(--ink-2)}
+.wx.off .wx-s{background:var(--fill);color:var(--ink-2)}
+.wx.flip{animation:wxFlip .5s cubic-bezier(.3,.7,.4,1.3)}
+@keyframes wxFlip{0%{transform:perspective(500px) rotateX(0)}45%{transform:perspective(500px) rotateX(90deg) scale(.96)}100%{transform:perspective(500px) rotateX(0)}}
+.wiz-q h1{font:700 clamp(27px,4.4vw,36px)/1.15 var(--f-text);letter-spacing:-.018em}
+.wiz-q>p{font:400 17px/1.45 var(--f-text);color:var(--ink-2);margin-top:6px}
+.wiz-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:10px;margin-top:16px}
+.wiz-opts.two{grid-template-columns:1fr 1fr}
+.wiz-opts.n4{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:720px){ .wiz-opts.n4{grid-template-columns:repeat(4,minmax(0,1fr))} }
+.wo{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;min-height:106px;padding:14px;border-radius:20px;background:var(--cell);color:var(--ink);text-align:left;box-shadow:0 1px 2px rgba(0,0,0,.06),inset 0 0 0 1px var(--line);transition:transform .15s,box-shadow .2s,background .2s}
+.wo:active{transform:scale(.97)}
+.wo-e{font-size:34px;line-height:1}
+.wo b{font:600 16px/1.25 var(--f-text);padding-right:20px}
+.wo-ck{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 2px var(--fill-2);color:transparent;transition:background .2s,color .2s,box-shadow .2s}
+.wo-ck .ic{width:15px;height:15px;stroke-width:3.2}
+.wo.on{background:color-mix(in srgb,var(--hue) 13%,var(--cell));box-shadow:inset 0 0 0 2.5px var(--hue),0 12px 26px -18px var(--hue)}
+.wo.on .wo-ck{background:var(--hue);color:#fff;box-shadow:none}
+.wo.just .wo-e{animation:woJump .45s cubic-bezier(.2,1.6,.4,1)}
+.wo.just .wo-ck{animation:pop .3s cubic-bezier(.2,1.6,.4,1)}
+@keyframes woJump{40%{transform:translateY(-8px) scale(1.18) rotate(-8deg)}}
+.wiz-opts.two .wo{min-height:132px;align-items:center;justify-content:center;text-align:center}
+.wiz-opts.two .wo b{padding-right:0;font-size:18px}
+.wiz-opts.two .wo-e{font-size:46px}
+.wiz-count{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:16px;padding:22px 16px;border-radius:24px;background:var(--cell);box-shadow:inset 0 0 0 1px var(--line)}
+.wiz-count-row{display:flex;align-items:center;gap:26px}
+.wiz-count-row button{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--hue) 16%,var(--cell));color:color-mix(in srgb,var(--hue) 55%,var(--ink));transition:transform .12s}
+.wiz-count-row button:active{transform:scale(.92)}
+.wiz-count-row button .ic{width:26px;height:26px;stroke-width:2.6}
+.wiz-count-row button:disabled{opacity:.35}
+.wiz-count-n{min-width:2ch;text-align:center;font:800 68px/1 var(--f-round)}
+.wiz-count-l{font:600 17px var(--f-text);color:var(--ink-2)}
+.wiz-count-em{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;font-size:30px;min-height:38px}
+.wiz-count-em .new{animation:pop .35s cubic-bezier(.2,1.8,.4,1)}
+.wiz-fu{position:relative;margin-left:clamp(14px,3.4vw,30px);padding:16px 18px 18px;border-radius:24px;background:var(--cell);box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 0 0 1px var(--line)}
+.wiz-fu::before{content:"";position:absolute;left:calc(-1 * clamp(14px,3.4vw,30px) + 2px);top:-20px;height:56px;width:clamp(10px,2.6vw,24px);border-left:2.5px solid color-mix(in srgb,var(--hue) 55%,transparent);border-bottom:2.5px solid color-mix(in srgb,var(--hue) 55%,transparent);border-bottom-left-radius:16px}
+.wiz-fu.fresh{animation:fuIn .5s cubic-bezier(.2,1.2,.4,1) both}
+@keyframes fuIn{from{opacity:0;transform:translateY(-14px) scale(.98)}}
+.wiz-fu-tag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px 4px 7px;border-radius:999px;background:color-mix(in srgb,var(--hue) 16%,transparent);color:color-mix(in srgb,var(--hue) 50%,var(--ink));font:700 12px var(--f-text);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.wiz-fu-tag .ic{width:13px;height:13px;stroke-width:3}
+.wiz-fu h2{font:700 21px/1.25 var(--f-text);margin-top:8px}
+.wiz-fu>p{font:400 15px/1.4 var(--f-text);color:var(--ink-2);margin-top:4px}
+.wiz-fu .wiz-opts{margin-top:12px;grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+.wiz-fu .wiz-opts.n4{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:720px){ .wiz-fu .wiz-opts.n4{grid-template-columns:repeat(4,minmax(0,1fr))} }
+.wiz-fu .wiz-opts.two{grid-template-columns:1fr 1fr}
+.wiz-fu .wo{min-height:86px}
+.wiz-fu .wo-e{font-size:28px}
+.wiz-fu .wiz-opts.two .wo{min-height:100px}
+.wiz-fu .wiz-opts.two .wo-e{font-size:36px}
+.wiz-foot{position:fixed;left:0;right:0;bottom:0;z-index:6;display:flex;align-items:center;justify-content:center;gap:18px;padding:12px var(--gut-r) calc(12px + env(safe-area-inset-bottom,0px)) var(--gut);background:color-mix(in srgb,var(--bg) 80%,transparent);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);border-top:1px solid var(--line)}
+.wiz-fit{flex:1;max-width:460px;display:flex;flex-direction:column;gap:7px;font:400 15px var(--f-text);color:var(--ink-2)}
+.wiz-fit b{display:inline-block;font:700 17px var(--f-text);color:var(--ink)}
+.wiz-fit b.bump{animation:pop .35s cubic-bezier(.2,1.8,.4,1)}
+.wiz-bar{display:block;height:6px;border-radius:3px;background:var(--fill-2);overflow:hidden}
+.wiz-bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--hue),color-mix(in srgb,var(--hue) 55%,#fff))}
+.wiz-go{min-height:54px;min-width:190px;padding:0 28px;border-radius:16px;background:var(--p-accent);color:var(--p-accent-ink);font:600 18px var(--f-text);box-shadow:0 12px 26px -14px var(--p-accent);transition:transform .12s}
+.wiz-go:active{transform:scale(.97)}
+@media (max-width:560px){ .wiz-go{min-width:0} .wiz-fit{font-size:13px} .wiz-prog i{width:10px} .wiz-prog i.on{width:22px} .wiz-ex{padding:16px} .wiz-ex-ic{width:54px;height:54px;font-size:30px} }
+.wiz-done .wiz-body{align-items:stretch;text-align:center}
+.wiz-hero{position:relative;height:230px;margin-top:6px}
+.wiz-hero .big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:112px;line-height:1;filter:drop-shadow(0 18px 22px rgba(0,0,0,.2));animation:heroIn .7s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes heroIn{from{transform:translate(-50%,-30%) scale(.4);opacity:0}}
+.wiz-hero .orb{position:absolute;width:52px;height:52px;margin:-26px 0 0 -26px;display:grid;place-items:center;border-radius:50%;background:var(--cell);box-shadow:0 10px 22px -12px rgba(0,0,0,.35);font-size:28px;animation:orbIn .55s calc(.3s + var(--d)) cubic-bezier(.2,1.6,.4,1) both}
+.wiz-hero .orb i{font-style:normal;animation:wizBob 3s var(--d) ease-in-out infinite}
+@keyframes orbIn{from{transform:scale(0);opacity:0}}
+.wiz-done h1{font:700 clamp(28px,5vw,40px)/1.15 var(--f-text);letter-spacing:-.02em}
+.wiz-lede{font:400 17px/1.45 var(--f-text);color:var(--ink-2);max-width:46ch;margin:-8px auto 0}
+.wiz-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:620px){ .wiz-stats{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.wiz-stat{padding:16px 10px;border-radius:20px;background:var(--cell)}
+.wiz-stat b{display:block;font:800 36px/1.1 var(--f-round)}
+.wiz-stat span{font:500 14px var(--f-text);color:var(--ink-2)}
+.wiz-stat.hl{background:linear-gradient(140deg,#30C25A,#22D3A0);color:#fff}
+.wiz-stat.hl span{color:rgba(255,255,255,.9)}
+.wiz-done .pgroup-t{margin:4px 0 -8px;text-align:left}
+.wiz-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
+.wiz-tag{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border-radius:999px;background:var(--cell);font:500 15px var(--f-text);box-shadow:inset 0 0 0 1px var(--line)}
+.wiz-tag.off{color:var(--ink-2);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--ink) 35%,transparent)}
+.wiz-hidden{text-align:left}
+.wiz-hidden summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font:600 16px var(--f-text);color:var(--p-accent)}
+.wiz-done .wiz-foot .wiz-go{min-width:min(100%,320px)}
+/* Our home section */
+.home-nudge{display:flex;align-items:center;gap:14px;width:100%;margin:6px 0 4px;padding:14px 16px;border-radius:20px;text-align:left;color:var(--ink);background:linear-gradient(135deg,color-mix(in srgb,#5AC8FA 26%,var(--cell)),var(--cell) 75%);box-shadow:inset 0 0 0 1px color-mix(in srgb,#5AC8FA 30%,transparent)}
+.hn-art{font-size:38px;animation:wizBob 3.4s ease-in-out infinite}
+.hn-main{flex:1;min-width:0}
+.hn-main b{display:block;font:600 17px var(--f-text)}
+.hn-main small{display:block;font:400 14px/1.35 var(--f-text);color:var(--ink-2)}
+.home-nudge>.ic{color:var(--ink-2)}
+.home-intro{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:28px 20px 26px;border-radius:28px;background:linear-gradient(160deg,color-mix(in srgb,#5AC8FA 24%,var(--cell)),var(--cell) 70%)}
+.hi-art{position:relative;width:240px;height:150px}
+.hi-art .big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:84px;filter:drop-shadow(0 14px 18px rgba(0,0,0,.18))}
+.hi-art .o{position:absolute;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:var(--cell);box-shadow:0 8px 18px -10px rgba(0,0,0,.35);font-size:24px;animation:wizBob 3.2s ease-in-out infinite}
+.hi-art .o1{left:6px;top:20px}.hi-art .o2{right:8px;top:12px;animation-delay:-.6s}.hi-art .o3{left:30px;bottom:0;animation-delay:-1.2s}.hi-art .o4{right:30px;bottom:4px;animation-delay:-1.8s}.hi-art .o5{left:50%;top:-10px;margin-left:-22px;animation-delay:-2.4s}
+.home-intro h3{font:700 24px var(--f-text)}
+.home-intro p{font:400 16px/1.45 var(--f-text);color:var(--ink-2);max-width:48ch}
+.home-intro .wiz-go{margin-top:8px}
+.home-hero{position:relative;overflow:hidden;display:flex;align-items:center;gap:18px;padding:20px 22px;border-radius:24px;color:#fff;background:linear-gradient(135deg,#2F6FE4,#5AC8FA)}
+.home-hero::after{content:"";position:absolute;right:-50px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.3),transparent 70%)}
+.home-hero .big{font-size:64px;line-height:1;filter:drop-shadow(0 10px 16px rgba(0,0,0,.2))}
+.hh-main{flex:1;min-width:0}
+.hh-main h3{font:700 24px var(--f-text)}
+.hh-main p{font:400 16px/1.4 var(--f-text);opacity:.92;margin-top:2px}
+.hh-fit{position:relative;z-index:1;text-align:right}
+.hh-fit b{display:block;font:800 46px/1 var(--f-round)}
+.hh-fit span{font:500 14px var(--f-text);opacity:.92}
+@media (max-width:620px){ .home-hero{flex-wrap:wrap} .hh-fit{text-align:left;width:100%} }
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px;margin-top:16px}
+.hq{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:20px;background:var(--cell);text-align:left;color:var(--ink);transition:transform .15s,box-shadow .2s}
+.hq:active{transform:scale(.98)}
+.hq-ic{width:48px;height:48px;flex:none;border-radius:14px;display:grid;place-items:center;font-size:26px;background:color-mix(in srgb,var(--hue) 22%,var(--cell))}
+.hq-main{flex:1;min-width:0}
+.hq-main b{display:block;font:600 16px/1.3 var(--f-text)}
+.hq-main>span{display:block;font:400 15px/1.35 var(--f-text);color:var(--p-accent);margin-top:3px}
+.hq-main small{display:block;font:400 13px/1.35 var(--f-text);color:var(--ink-2);margin-top:3px}
+.hq>.ic{color:var(--ink-2);margin-top:13px}
+.not-here{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 12px;border-radius:999px;background:var(--fill);color:var(--ink-2);font:500 13px var(--f-text);white-space:nowrap}
+.not-here .ic{width:15px;height:15px}
 .rcard{display:grid;grid-template-columns:minmax(0,1fr);background:var(--cell);border-radius:20px;overflow:hidden;margin-bottom:16px}
 @media (min-width:760px){ .rcard{grid-template-columns:minmax(0,5fr) minmax(0,6fr)} }
 .rphoto{position:relative;display:block;width:100%;aspect-ratio:4/3;background:var(--fill);overflow:hidden}
@@ -768,20 +917,43 @@ p{margin:0}
 @keyframes flash{from{opacity:.95}to{opacity:0}}
 .p-err{font:700 14px var(--f-round);background:rgba(0,0,0,.25);padding:8px 14px;border-radius:12px}
 .result{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1.6cqh,14px);text-align:center;overflow:auto;padding:4px}
-.rstars{display:flex;gap:clamp(6px,2cqmin,16px)}
-.has3d .rstars{visibility:hidden}
-.rstar{width:clamp(56px,14cqmin,110px);height:clamp(56px,14cqmin,110px);color:rgba(255,255,255,.25);transform:scale(.4);opacity:0;animation:starIn .55s cubic-bezier(.2,1.6,.4,1) forwards;animation-delay:var(--d)}
-.rstar:nth-child(2){transform:translateY(-12px) scale(.4)}
-.rstar .ic{width:100%;height:100%}
-.rstar.on{color:#FFE066;filter:drop-shadow(0 6px 16px rgba(255,200,0,.5))}
-@keyframes starIn{to{transform:scale(1);opacity:1}}
-.rstar:nth-child(2){animation-name:starIn2}
-@keyframes starIn2{to{transform:translateY(-12px) scale(1.12);opacity:1}}
-.res-score{font:900 clamp(46px,13cqmin,104px)/1 var(--f-round);letter-spacing:-.02em}
+.result.shake{animation:resShake .45s cubic-bezier(.36,.07,.19,.97)}
+@keyframes resShake{20%,60%{transform:translateX(-7px) rotate(-.5deg)}40%,80%{transform:translateX(7px) rotate(.5deg)}}
+/* Star slots: empty sockets in an arc, the middle one bigger and higher. With WebGL the pane's 3D layer draws cel-shaded stars into these slots. */
+.rstars{display:flex;align-items:flex-end;justify-content:center;gap:clamp(2px,1.6cqmin,14px);margin-bottom:2px}
+.rstar{position:relative;width:clamp(60px,14cqmin,116px);aspect-ratio:1;transform:translateY(6%)}
+.rstar:nth-child(2){width:clamp(76px,18cqmin,146px);transform:translateY(-12%)}
+.rstar svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.rstar:nth-child(1) svg{transform:rotate(-12deg)}
+.rstar:nth-child(3) svg{transform:rotate(12deg)}
+.rs-sock path{fill:rgba(0,0,0,.22);stroke:rgba(255,255,255,.55);stroke-width:6;stroke-linejoin:round}
+.rs-gold{opacity:0}
+.rs-gold .rs-body{stroke:#2B2238;stroke-width:10;stroke-linejoin:round;paint-order:stroke}
+.rstar.on .rs-gold{opacity:1}
+.p3d .rstar svg{visibility:hidden}
+.res-meter{position:relative;width:min(100%,380px);height:14px;border-radius:8px;background:rgba(0,0,0,.22);box-shadow:inset 0 2px 4px rgba(0,0,0,.2);margin:8px 0 10px}
+.res-meter>i{position:absolute;inset:0 auto 0 0;width:0;border-radius:8px;background:linear-gradient(180deg,#FFF2A6 0 45%,#FFCC3D 45%);box-shadow:0 0 0 2px #2B2238}
+.res-notch{position:absolute;top:50%;width:24px;height:24px;margin:-12px 0 0 -12px;transition:transform .3s cubic-bezier(.2,1.6,.4,1)}
+.res-notch svg{width:100%;height:100%;overflow:visible}
+.res-notch path{fill:rgba(0,0,0,.45);stroke:rgba(255,255,255,.75);stroke-width:8;stroke-linejoin:round}
+.res-notch.on{transform:scale(1.3)}
+.res-notch.on path{fill:#FFCC3D;stroke:#2B2238;stroke-width:10}
+.res-verdict{min-height:1.25em;font:900 clamp(18px,3.6cqmin,26px) var(--f-round);color:#FFF2A6;text-shadow:0 2px 0 #2B2238}
+.res-rows{display:grid;gap:5px;width:min(100%,380px)}
+.res-row{display:flex;justify-content:space-between;gap:12px;padding:7px 14px;border-radius:12px;background:rgba(255,255,255,.1);font:800 clamp(14px,2.4cqmin,16px) var(--f-round);opacity:.4;transition:opacity .2s,background .2s}
+.res-row.live{opacity:1;background:rgba(255,255,255,.22)}
+.res-row.done{opacity:1}
+.res-row b{font-weight:900}
+.res-end{display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.6cqh,14px);width:100%}
+.res-end.in .res-pay{animation:resPay .45s cubic-bezier(.2,1.4,.4,1) both}
+.res-end.in .finish,.res-end.in .res-wait{animation:resUp .35s .2s both}
+@keyframes resPay{from{transform:scale(.6);opacity:0}}
+@keyframes resUp{from{transform:translateY(10px);opacity:0}}
+.res-score.tick{animation:resTick .12s ease-out}
+@keyframes resTick{50%{transform:scale(1.06)}}
+@container (max-height:560px){ .res-rows{display:none} .res-meter{margin:4px 0 6px} }
+.res-score{font:900 clamp(46px,13cqmin,104px)/1 var(--f-round);letter-spacing:-.02em;text-shadow:0 3px 0 rgba(0,0,0,.22)}
 .res-lbl{font:800 14px var(--f-round);letter-spacing:.1em;text-transform:uppercase;opacity:.85;margin-top:-4px}
-.res-break{display:grid;grid-template-columns:repeat(2,auto);gap:4px 18px;font:700 clamp(13px,2.4cqmin,16px) var(--f-round);margin:4px 0}
-.res-break dt{opacity:.85;text-align:left}
-.res-break dd{margin:0;text-align:right;font-weight:900}
 .res-pay{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 22px;border-radius:22px;background:rgba(0,0,0,.16)}
 .res-pay span{font:800 13px var(--f-round);letter-spacing:.05em;text-transform:uppercase;opacity:.85}
 .res-pay b{font:900 clamp(30px,7cqmin,48px) var(--f-round)}
@@ -792,7 +964,7 @@ p{margin:0}
 .crew-done{position:absolute;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:12;min-height:62px;padding:0 30px;border-radius:999px;background:#fff;color:#0D1530;font:900 19px var(--f-round);box-shadow:0 18px 40px -12px rgba(0,0,0,.5);animation:ready 1.6s ease-in-out infinite;white-space:nowrap}
 
 #fx{position:fixed;inset:0;width:100%;height:100%;z-index:150;pointer-events:none}
-/* 3D layer: a WebGL canvas above the page draws into the reserved slots */
+/* 3D layer: renders each model and copies it into its slot's own canvas, so models scroll with the page. The fixed canvas only shows the coin rain. */
 #g3{position:fixed;inset:0;z-index:5;pointer-events:none}
 .sky3d-cv{position:absolute;inset:0;width:100%;height:100%}
 .sky3d #sky .cloud,.sky3d #sky .sun,.sky3d #sky .moon{display:none}
@@ -850,8 +1022,9 @@ p{margin:0}
 .owned{font:900 12px var(--f-round);color:#2b9a48}
 .shop-foot{font:600 12px var(--f-round);color:var(--on-sky-2);margin-top:8px;text-align:center}
 @media (max-width:520px){ .st-title b{font-size:18px} .st-chip{min-height:32px;padding:0 10px;font-size:13px} .shop-item{flex-basis:118px} }
-.s3d{display:none}
+.s3d{display:none;position:relative}
 .has3d .s3d{display:block}
+.s3d-cv{position:absolute;left:-14%;top:-14%;width:128%;height:128%;pointer-events:none}
 .has3d .no3d{display:none!important}
 .kc-island{position:relative;width:100%;height:172px;margin:-6px 0 2px;display:grid;place-items:center}
 .kc-island .s3d{position:absolute;inset:0}
@@ -945,6 +1118,7 @@ const ICONS = {
   check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
   back: '<path d="M14.5 5l-7 7 7 7"/>',
   next: '<path d="M9.5 5l7 7-7 7"/>',
+  home: '<path d="M3.5 11.2L12 4l8.5 7.2"/><path d="M6 9.6v10h12v-10"/><path d="M10 19.6v-5.2h4v5.2"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
   minus: '<path d="M5 12h14"/>',
   camera: '<path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.8l1.4-2h4.6l1.4 2h1.8A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z"/><circle cx="12" cy="12.5" r="3.5"/>',
@@ -1301,16 +1475,126 @@ const pct = (x, sign) => `${sign && x > 0 ? '+' : ''}${(x * 100).toFixed(1)}%`;
 const kidsList = () => Object.values(Store.kids).sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || (a.createdAt || 0) - (b.createdAt || 0));
 const jobsList = () => Object.values(Store.jobs);
 function rateField(c) { return c.payType === 'piece' ? 'perUnit' : c.payType === 'hourly' ? 'rate' : c.payType === 'quote' ? 'quote' : 'pay'; }
+/* ---------- Our home ----------
+   Grown-ups answer a few questions about the house. Follow-ups only appear when they matter (the dog questions only
+   if there's a dog). Answers become flags such as dishwasher, cat or lawn, and NEEDS lists the flags each chore needs,
+   so the daily draft never hands a kid a job your home can't have. 'a|b' means either, 'a b' means both. Until the
+   questions are answered nothing is filtered. */
+const HOME_Q = [
+  { k: 'type', icon: '🏡', hue: '#5AC8FA', type: 'pick', s: 'Home', q: 'What kind of home do you live in?', help: 'This fills in sensible answers for the questions after it. You can change any of them.',
+    opts: [['house', '🏠', 'House'], ['town', '🏘️', 'Townhouse or unit'], ['apt', '🏢', 'Apartment'], ['farm', '🚜', 'Farm or lifestyle block']],
+    ex: ['mow', 'wheelie', 'sweepDeck', 'chooks'], note: 'An apartment won’t send kids out to mow lawns or wheel bins to the kerb.',
+    follow: [{ k: 'stairs', type: 'yesno', s: 'Stairs', yes: '🪜', q: 'Are there stairs inside?', ex: ['vacHall'], note: 'No stairs turns “Vacuum the hallway and stairs” into just the hallway.' }] },
+  { k: 'bedrooms', icon: '🛏️', hue: '#C084FC', type: 'count', s: 'Bedrooms', min: 1, max: 8, unit: ['bedroom', 'bedrooms'], q: 'How many bedrooms?', help: 'Jobs in a kid’s own room are always theirs, never shared out.',
+    ex: ['bed', 'room', 'vacRoom'], note: 'Every kid makes their own bed and looks after their own room.',
+    follow: [
+      { k: 'shared', type: 'yesno', s: 'Shared rooms', yes: '👯', q: 'Do any of the kids share a room?', ex: ['room'], note: 'Kids who share get “Tidy your side of the room”.' },
+      { k: 'roomStuff', type: 'multi', s: 'In their rooms', q: 'What’s in the kids’ rooms?', help: 'Pick everything most of their rooms have.',
+        opts: [['wardrobe', '🚪', 'Wardrobe'], ['drawers', '🗄️', 'Chest of drawers'], ['desk', '🖥️', 'Desk'], ['bookshelf', '📚', 'Bookshelf'], ['roomBin', '🗑️', 'Rubbish bin'], ['underBed', '🧦', 'Space under the bed']],
+        ex: ['wardrobe', 'desk', 'roomBin', 'underBed'] },
+    ] },
+  { k: 'bathrooms', icon: '🛁', hue: '#64D2FF', type: 'count', s: 'Bathrooms', min: 1, max: 5, unit: ['bathroom', 'bathrooms'], q: 'How many bathrooms?',
+    ex: ['toilet', 'basin', 'restock'], note: 'Toilets, basins and mirrors are shared out fairly, so nobody always gets the loo.',
+    follow: [{ k: 'bathStuff', type: 'multi', s: 'Bath or shower', q: 'Bath, shower or both?', opts: [['bath', '🛁', 'Bath'], ['shower', '🚿', 'Shower']], ex: ['bath', 'shower'] }] },
+  { k: 'dishwasher', icon: '🍽️', hue: '#FF9F0A', type: 'yesno', s: 'Dishwasher', q: 'Do you have a dishwasher?',
+    ex: ['stack', 'unload', 'handWash', 'dryDishes'], note: 'No dishwasher? Kids wash and dry by hand instead, and nobody gets “Stack the dishwasher”.',
+    follow: [{ k: 'kitchen', type: 'multi', s: 'Kitchen', q: 'What else is in the kitchen?', opts: [['microwave', '⏲️', 'Microwave'], ['jug', '🫖', 'Jug and toaster'], ['oven', '🔥', 'Oven'], ['freezer', '🧊', 'Separate freezer'], ['pantry', '🥫', 'Pantry']], ex: ['microwave', 'oven', 'freezer', 'pantry'] }] },
+  { k: 'pets', icon: '🐾', hue: '#FF6B9D', type: 'multi', s: 'Pets', none: 'No pets', q: 'Any pets?', help: 'Pick every animal that lives with you.',
+    opts: [['dog', '🐕', 'Dog'], ['cat', '🐈', 'Cat'], ['chooks', '🐔', 'Chooks'], ['fish', '🐠', 'Fish'], ['smallPet', '🐹', 'Guinea pig or rabbit']],
+    ex: ['pet', 'litter', 'walkDog', 'chooks'], note: 'A home without a cat never gets “Scoop the cat litter”.',
+    follow: [
+      { k: 'dogCare', when: v => v.dog, type: 'multi', s: 'Dog needs', q: 'What does the dog need a hand with?', opts: [['dogWalk', '🦮', 'Walks'], ['dogBrush', '🪮', 'Brushing'], ['dogBath', '🫧', 'Baths'], ['dogPoo', '💩', 'Poo pick-up on the lawn']], ex: ['walkDog', 'brushDog', 'dog', 'poop'] },
+      { k: 'litter', when: v => v.cat, type: 'yesno', s: 'Litter tray', yes: '🐈', q: 'Is there a litter tray inside?', ex: ['litter'] },
+    ] },
+  { k: 'drying', icon: '🧺', hue: '#30C25A', type: 'multi', s: 'Drying', q: 'How does the washing get dry?', help: 'Pick all that you use.',
+    opts: [['line', '🌞', 'Clothesline outside'], ['airer', '🧷', 'Airer inside'], ['dryer', '🌀', 'Dryer']],
+    ex: ['hangOut', 'bringIn', 'fold'], note: 'Only a home with a clothesline sends kids out to bring the washing in.',
+    follow: [{ k: 'iron', type: 'yesno', s: 'Ironing', yes: '👔', q: 'Does anyone iron?', ex: ['ironing', 'ironOwn'] }] },
+  { k: 'outside', icon: '🌳', hue: '#22C38E', type: 'multi', s: 'Outside', none: 'Nothing outside', q: 'What’s outside?', help: 'Pick everything at your place.',
+    opts: [['lawn', '🌱', 'Lawn'], ['gardenBeds', '🌷', 'Garden beds'], ['veggies', '🥕', 'Veggie patch'], ['fruitTrees', '🍋', 'Fruit trees'], ['bigTrees', '🍂', 'Trees that drop leaves'], ['deck', '🪵', 'Deck, patio or balcony'], ['potPlants', '🪴', 'Pot plants'], ['bbq', '🍖', 'BBQ'], ['outdoorFurn', '🪑', 'Outdoor furniture'], ['shed', '🛠️', 'Garden shed'], ['fence', '🧱', 'Fence']],
+    ex: ['mow', 'weeds', 'leaves', 'bbq'], note: 'No lawn means no mowing, and no leafy trees means no raking.',
+    follow: [
+      { k: 'mower', when: v => v.lawn, type: 'pick', s: 'Mowing', q: 'Who mows the lawns?', note: 'Mowing is a side hustle for kids 13 and up.',
+        opts: [['kids', '🙋', 'Older kids can help', ['kidsMow']], ['adults', '🧑', 'Grown-ups only'], ['pro', '🚚', 'A lawn service']], ex: ['mow', 'edges'] },
+      { k: 'compost', when: v => v.veggies || v.gardenBeds, type: 'yesno', s: 'Compost', yes: '🪱', q: 'Compost bin or worm farm?', ex: ['compost'] },
+      { k: 'fencePaint', when: v => v.fence, type: 'yesno', s: 'Painted fence', yes: '🎨', q: 'Is the fence painted or stained?', ex: ['fence'] },
+    ] },
+  { k: 'extras', icon: '🚗', hue: '#FFB020', type: 'multi', s: 'Also', none: 'None of these', q: 'Anything else at your place?',
+    opts: [['car', '🚗', 'Car'], ['bikes', '🚲', 'Bikes or scooters'], ['garage', '🏚️', 'Garage'], ['rumpus', '🎮', 'Rumpus room'], ['screens', '🦟', 'Fly screens'], ['blinds', '🪟', 'Blinds']],
+    ex: ['car', 'bikes', 'garage', 'rumpus'], note: 'No car? Nobody gets sent out to wash one.',
+    follow: [{ k: 'carKids', when: v => v.car, type: 'yesno', s: 'Kids wash the car', yes: '🧽', q: 'Happy for the kids to wash and vacuum the car?', ex: ['car', 'carIn'] }] },
+  { k: 'bins', icon: '♻️', hue: '#7C8CF8', type: 'pick', s: 'Rubbish', q: 'How does your rubbish get collected?',
+    opts: [['kerb', '🗑️', 'Wheelie bins out to the kerb', ['kerb']], ['shared', '🏢', 'Shared bins or a chute'], ['tip', '🚛', 'We take it to the tip']],
+    ex: ['wheelie', 'wheelieWash', 'rubbish'], note: 'Bin night only goes on the list if your bins go out to the kerb.',
+    follow: [{ k: 'binsMore', type: 'multi', s: 'Also', q: 'Which of these do you have?', opts: [['recycling', '♻️', 'Recycling'], ['letterbox', '📬', 'Letterbox']], ex: ['recycle', 'mail'] }] },
+  { k: 'uniform', icon: '🎒', hue: '#FF6B6B', type: 'yesno', s: 'School uniform', yes: '👕', q: 'Do the kids wear a school uniform?',
+    ex: ['shoesClean', 'ironOwn', 'bag'], note: 'Uniform kids get “Clean your school shoes”. Everyone still packs their bag.',
+    follow: [{ k: 'lunches', type: 'yesno', s: 'Packed lunch', yes: '🥪', q: 'Do they take a packed lunch?', ex: ['ownLunch', 'lunches'] }] },
+];
+const HOME_DEF = { type: 'house', stairs: false, bedrooms: 3, shared: false, wardrobe: true, drawers: true, desk: true, bookshelf: true, roomBin: true, underBed: true, bathrooms: 1, bath: true, shower: true,
+  dishwasher: true, microwave: true, jug: true, oven: true, freezer: false, pantry: true, dog: false, cat: false, chooks: false, fish: false, smallPet: false, dogWalk: true, dogBrush: true, dogBath: true, dogPoo: true, litter: true,
+  line: true, airer: false, dryer: false, iron: false, lawn: true, gardenBeds: true, veggies: false, fruitTrees: false, bigTrees: false, deck: true, potPlants: true, bbq: true, outdoorFurn: true, shed: false, fence: true,
+  mower: 'kids', compost: false, fencePaint: false, car: true, bikes: true, garage: false, rumpus: false, screens: true, blinds: true, carKids: true, bins: 'kerb', recycling: true, letterbox: true, uniform: true, lunches: true };
+// Picking a home type pre-fills these, unless the grown-up already answered them
+const HOME_PRESET = {
+  house: { lawn: true, gardenBeds: true, veggies: false, fruitTrees: false, bigTrees: false, deck: true, bbq: true, shed: false, fence: true, chooks: false, bins: 'kerb', letterbox: true, garage: false, compost: false },
+  town: { lawn: true, gardenBeds: true, veggies: false, fruitTrees: false, bigTrees: false, deck: true, bbq: true, shed: false, fence: true, chooks: false, bins: 'kerb', letterbox: true, garage: true, compost: false },
+  apt: { lawn: false, gardenBeds: false, veggies: false, fruitTrees: false, bigTrees: false, deck: true, bbq: false, shed: false, fence: false, chooks: false, bins: 'shared', letterbox: false, garage: false, compost: false },
+  farm: { lawn: true, gardenBeds: true, veggies: true, fruitTrees: true, bigTrees: true, deck: true, bbq: true, shed: true, fence: true, chooks: true, bins: 'tip', letterbox: true, garage: true, compost: true },
+};
+const NEEDS = {
+  stack: 'dishwasher', unload: 'dishwasher', microwave: 'microwave', jug: 'jug', oven: 'oven', freezer: 'freezer', pantry: 'pantry',
+  pet: 'dog|cat|chooks|fish|smallPet', walkDog: 'dogWalk', brushDog: 'dogBrush', dog: 'dogBath', poop: 'dogPoo', litter: 'litter', chooks: 'chooks', coop: 'chooks', fishTank: 'fish', hutch: 'smallPet',
+  wardrobe: 'wardrobe', drawers: 'drawers', desk: 'desk', shelf: 'bookshelf', roomBin: 'roomBin', underBed: 'underBed', bath: 'bath', shower: 'shower',
+  hangOut: 'line|airer', bringIn: 'line', ironing: 'iron', ironOwn: 'iron uniform', shoesClean: 'uniform', ownLunch: 'lunches', lunches: 'lunches',
+  mow: 'lawn kidsMow', edges: 'lawn kidsMow', leaves: 'bigTrees', fruit: 'fruitTrees', veggies: 'veggies', weeds: 'gardenBeds|veggies', garden: 'gardenBeds|veggies', compost: 'compost',
+  sweepDeck: 'deck', bbq: 'bbq', outdoorFurn: 'outdoorFurn', plants: 'potPlants', shed: 'shed', fence: 'fencePaint',
+  car: 'car carKids', carIn: 'car carKids', bikes: 'bikes', garage: 'garage', rumpus: 'rumpus', screens: 'screens', blinds: 'blinds', wheelie: 'kerb', wheelieWash: 'kerb', recycle: 'recycling', mail: 'letterbox',
+};
+const FLAG_NAME = { dishwasher: 'a dishwasher', microwave: 'a microwave', jug: 'a jug and toaster', oven: 'an oven', freezer: 'a separate freezer', pantry: 'a pantry', dog: 'a dog', cat: 'a cat', chooks: 'chooks', fish: 'fish', smallPet: 'a guinea pig or rabbit',
+  dogWalk: 'dog walks', dogBrush: 'dog brushing', dogBath: 'dog baths', dogPoo: 'dog poo on the lawn', litter: 'a litter tray', wardrobe: 'wardrobes', drawers: 'drawers', desk: 'desks', bookshelf: 'bookshelves', roomBin: 'bedroom bins', underBed: 'space under the beds',
+  bath: 'a bath', shower: 'a shower', line: 'a clothesline', airer: 'an airer', iron: 'someone who irons', uniform: 'a school uniform', lunches: 'packed lunches', lawn: 'a lawn', kidsMow: 'kids allowed to mow', bigTrees: 'leafy trees', fruitTrees: 'fruit trees',
+  veggies: 'a veggie patch', gardenBeds: 'garden beds', compost: 'a compost bin', deck: 'a deck or patio', bbq: 'a BBQ', outdoorFurn: 'outdoor furniture', potPlants: 'pot plants', shed: 'a garden shed', fencePaint: 'a painted fence', car: 'a car',
+  carKids: 'kids allowed to wash the car', bikes: 'bikes', garage: 'a garage', rumpus: 'a rumpus room', screens: 'fly screens', blinds: 'blinds', kerb: 'kerbside wheelie bins', recycling: 'recycling', letterbox: 'a letterbox' };
+const liveFollows = (q, v) => (q.follow || []).filter(f => !f.when || f.when(v));
+const findQ = k => { for (const q of HOME_Q) { if (q.k === k) return q; for (const f of q.follow || []) if (f.k === k) return f; } return null; };
+function homeFlags(v) {
+  const f = new Set(), take = q => {
+    if (q.type === 'yesno') { if (v[q.k]) f.add(q.k); }
+    else if (q.type === 'multi') q.opts.forEach(([o]) => { if (v[o]) f.add(o); });
+    else if (q.type === 'pick') { const o = q.opts.find(x => x[0] === v[q.k]); if (o && o[3]) o[3].forEach(x => f.add(x)); }
+  };
+  for (const q of HOME_Q) { take(q); liveFollows(q, v).forEach(take); }
+  return f;
+}
+const needsMet = (c, f) => { const n = NEEDS[c.key]; return !n || n.split(' ').every(part => part.split('|').some(x => f.has(x))); };
+function missingText(c, f) { const part = (NEEDS[c.key] || '').split(' ').find(x => x && !x.split('|').some(y => f.has(y))); return part ? 'Needs ' + part.split('|').map(x => FLAG_NAME[x] || x).join(' or ') : ''; }
+const homeOn = () => { const h = S().home; return !!(h && h.done && h.v); };
+let homeMemo = { ver: -1, f: null };
+function homeF() { if (homeMemo.ver !== Store.ver) homeMemo = { ver: Store.ver, f: homeFlags({ ...HOME_DEF, ...((S().home || {}).v || {}) }) }; return homeMemo.f; }
+const fitsHome = c => !homeOn() || needsMet(c, homeF());
+// Words that change with the home: no dishwasher, no compost, no stairs, kids who share a room
+function homeSwaps(f) {
+  const sw = [];
+  if (!f.has('dishwasher')) sw.push(['Stack it in the dishwasher', 'Stack it by the sink'], ['Into the dishwasher', 'Stack them by the sink']);
+  if (!f.has('compost')) sw.push(['Scrape scraps into the compost', 'Scrape scraps into the bin'], ['Scrape plates into the compost', 'Scrape plates into the bin'], ['Squishy ones to the compost', 'Squishy ones in the bin'], ['Old bedding into the compost', 'Old bedding into the bin']);
+  if (!f.has('stairs')) sw.push(['Vacuum the hallway and stairs', 'Vacuum the hallway'], ['Each stair from the top down', 'Into the corners and along the edges']);
+  if (f.has('shared')) sw.push(['Tidy your bedroom', 'Tidy your side of the room']);
+  if (!f.has('dog')) sw.push(['Check the lawn for toys and dog poo', 'Check the lawn for toys and sticks']);
+  return sw;
+}
+function swapWords(c, sw) { if (!sw.length) return c; const fix = t => { for (const [a, b] of sw) if (t === a) return b; return t; }; return { ...c, title: fix(c.title), steps: c.steps.map(fix) }; }
 function allChores() {
-  const s = S();
+  const s = S(), sw = homeOn() ? homeSwaps(homeF()) : null;
   return CHORES.concat((s.custom || []).map(c => ({ payType: 'fixed', minAge: 0, scope: 'home', every: 1, ...c, custom: true }))).map(c => {
     const o = s.payOverride && s.payOverride[c.key];
-    return o != null ? { ...c, [rateField(c)]: o } : c;
+    if (o != null) c = { ...c, [rateField(c)]: o };
+    return sw ? swapWords(c, sw) : c;
   });
 }
 function choreDef(key) { return allChores().find(c => c.key === key) || null; }
 const fitsAge = (c, age) => (c.minAge || 0) <= age && (c.maxAge == null || age <= c.maxAge);
-const isOff = c => !!(S().choreOff || {})[c.key];
+const isOff = c => !!(S().choreOff || {})[c.key] || !fitsHome(c);
 function pool(tier, age) { return allChores().filter(c => c.tier === tier && !isOff(c) && fitsAge(c, age)); }
 /* ---------- The fair chore draft ----------
    Shared household jobs are drafted between the kids every day, so two kids never get the same job, and nobody
@@ -1579,7 +1863,8 @@ const Sound = (() => {
     whoosh() { if (!ok()) return; const t = T(); noise(t, 0.45, { vol: 0.18, type: 'bandpass', freq: 900, q: 0.5, a: 0.15 }); },
     power() { if (!ok()) return; tone(300, T(), 0.4, { type: 'square', vol: 0.06, slide: 1400, lp: 2600 }); },
     error() { if (!ok()) return; const t = T(); tone(240, t, 0.14, { type: 'square', vol: 0.05, lp: 1200 }); tone(180, t + 0.12, 0.22, { type: 'square', vol: 0.05, lp: 1200 }); },
-    star(i) { if (!ok()) return; const t = T(); tone(mtof(79 + i * 5), t, 0.45, { type: 'triangle', vol: 0.2 }); tone(mtof(91 + i * 5), t, 0.3, { vol: 0.07 }); },
+    star(i) { if (!ok()) return; const t = T(), b = [0, 76, 79, 84][i] || 84; [0, 4, 7, 12].forEach((s, k) => tone(mtof(b + s), t + k * 0.045, 0.5, { type: 'triangle', vol: 0.15 })); tone(mtof(b + 24), t + 0.12, 0.6, { vol: 0.06 }); noise(t, 0.22, { vol: 0.08, freq: 7000 }); },
+    tick(p = 0) { if (!ok()) return; tone(900 + p * 900, T(), 0.035, { type: 'square', vol: 0.025, lp: 6000 }); },
   };
   const SCALE = [0, 2, 4, 5, 7, 9, 11];
   const chord = (root, deg) => [0, 2, 4].map(k => { const d = deg + k; return root + SCALE[d % 7] + 12 * Math.floor(d / 7); });
@@ -2154,14 +2439,15 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     fund: ([id]) => ({ obj: outline(fundModel(id), 0.035), unit: 2.3, cy: 0.5 }),
   };
   const live = new Map();
-  function drop(k) { const o = live.get(k); if (!o) return; scene.remove(o.obj); o.obj.traverse(m => { if (m.geometry && m.geometry !== COIN_S && m.geometry !== BLADE && m.geometry !== FLAG_GEO) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); live.delete(k); }
+  function drop(k) { const o = live.get(k); if (!o) return; scene.remove(o.obj); o.cv.remove(); o.obj.traverse(m => { if (m.geometry && m.geometry !== COIN_S && m.geometry !== BLADE && m.geometry !== FLAG_GEO) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); live.delete(k); }
   api.sync = () => {
     const seen = new Set();
     for (const el of document.querySelectorAll('#app [data-3d]')) {
       const k = el.dataset['3d'], sig = el.dataset.sig || ''; seen.add(k);
       let o = live.get(k);
       if (o && o.sig !== sig) { drop(k); o = null; }
-      if (!o) { const [kind, ...args] = k.split(':'), b = BUILD[kind] && BUILD[kind](args); if (!b) continue; o = { ...b, kind, sig, t0: performance.now(), ph: Math.random() * 6, hop: 0 }; scene.add(o.obj); live.set(k, o); }
+      if (!o) { const [kind, ...args] = k.split(':'), b = BUILD[kind] && BUILD[kind](args); if (!b) continue; const c = document.createElement('canvas'); c.className = 's3d-cv'; o = { ...b, kind, sig, t0: performance.now(), ph: Math.random() * 6, hop: 0, cv: c, g: c.getContext('2d') }; scene.add(o.obj); live.set(k, o); }
+      if (o.cv.parentNode !== el) el.appendChild(o.cv);
       o.el = el;
     }
     for (const k of [...live.keys()]) if (!seen.has(k)) drop(k);
@@ -2197,25 +2483,38 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
   }
   let raf = 0, last = 0;
   function kick() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+  // Each slot owns a small canvas inside the page, so its model rides along with native scrolling instead of chasing
+  // the page a frame behind from a fixed overlay. Every frame renders the visible models one at a time into the corner
+  // of this shared WebGL canvas and copies each into its slot. PAD leaves room for hops, flags and balloons.
+  const PAD = 0.14;
   function frame(now) {
     raf = 0; const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
-    const top = cv.classList.contains('top'); let any = false;
+    const top = cv.classList.contains('top'), pr = R.getPixelRatio(), hold = Stage.active || Studio.open; let any = false;
+    for (const o of live.values()) o.obj.visible = false;
+    rainM.visible = false; R.setScissorTest(false);
     for (const o of live.values()) {
-      const el = o.el; let vis = !Stage.active && !Studio.open && !(top && UI.sheet) && el && el.isConnected, r;
-      if (vis) { r = el.getBoundingClientRect(); vis = r.width > 4 && r.bottom > 0 && r.top < H; }
-      o.obj.visible = !!vis; if (!vis) continue; any = true;
+      const el = o.el; if (hold || !el || !el.isConnected) continue;
+      const r = el.getBoundingClientRect(), mx = r.width * PAD, my = r.height * PAD;
+      if (r.width < 4 || r.bottom + my < 0 || r.top - my > H || r.right + mx < 0 || r.left - mx > W) continue;
+      any = true;
+      const w = Math.min(W, r.width + mx * 2), h = Math.min(H, r.height + my * 2), cw = Math.round(w * pr), ch = Math.round(h * pr);
+      if (o.cv.width !== cw || o.cv.height !== ch) { o.cv.width = cw; o.cv.height = ch; }
       const k = Math.min(1, (now - o.t0) / 700), pop = k < 1 ? 1 + 2.70158 * Math.pow(k - 1, 3) + 1.70158 * Math.pow(k - 1, 2) : 1;
+      o.obj.visible = true;
       o.obj.scale.setScalar(Math.max(0.001, Math.min(r.height / o.unit, r.width / (o.unit * 0.85)) * pop));
-      o.obj.position.set(r.left + r.width * (+el.dataset.cx || 0.5), -(r.top + r.height * o.cy), 0);
+      o.obj.position.set(mx + r.width * (+el.dataset.cx || 0.5), -(my + r.height * o.cy), 0);
       animate(o, t, dt);
+      Object.assign(cam, { left: 0, right: w, top: 0, bottom: -h }); cam.updateProjectionMatrix();
+      R.setViewport(0, 0, w, h); R.clear(); inkFor(R); INK.uniforms.uRes.value.set(cw, ch);
+      R.render(scene, cam);
+      o.g.clearRect(0, 0, cw, ch); o.g.drawImage(cv, 0, cv.height - ch, cw, ch, 0, 0, cw, ch);
+      o.obj.visible = false;
     }
     if (drops.length) stepRain(dt); else { rainM.count = 0; if (top) cv.classList.remove('top'); }
-    R.setScissorTest(false); R.clear();
-    if (any || drops.length) {
-      const tb = UI.screen === 'kid' && !top ? $('.tabbar') : null;
-      if (tb) { const rr = tb.getBoundingClientRect(); R.setScissorTest(true); R.setScissor(0, H - rr.top, W, rr.top); }
-      inkFor(R); R.render(scene, cam); kick();
-    }
+    Object.assign(cam, { left: 0, right: W, top: 0, bottom: -H }); cam.updateProjectionMatrix();
+    R.setViewport(0, 0, W, H); R.clear();
+    if (drops.length) { rainM.visible = true; inkFor(R); R.render(scene, cam); }
+    if (any || drops.length) kick();
   }
   Object.assign(api, { GRAD, rimPatch, outline, inkFor, weather: w => { WIND.value = clamp(0.5 + (w.windKph ?? 12) / 22, 0.5, 2.6); SNOW.value = w.snow ? 0.75 : 0; }, island: (kid, o = {}) => islandModel({ ...islandParams(kid), ...o }), item: buildItem, placeItem, tickIsland, inHouse, puff, envFor, cloudMats, tintClouds, cloudCluster });
   size(); addEventListener('resize', size); addEventListener('scroll', kick, { passive: true });
@@ -2567,6 +2866,7 @@ function Pane3D(canvas, th) {
   const starS = new T.Shape(); for (let i = 0; i < 10; i++) { const r = i % 2 ? 0.42 : 1, a = i / 10 * Math.PI * 2 + Math.PI / 2; i ? starS.lineTo(Math.cos(a) * r, Math.sin(a) * r) : starS.moveTo(Math.cos(a) * r, Math.sin(a) * r); }
   const heartS = new T.Shape(); heartS.moveTo(0, -0.9); heartS.bezierCurveTo(-1.25, -0.1, -0.9, 0.95, 0, 0.35); heartS.bezierCurveTo(0.9, 0.95, 1.25, -0.1, 0, -0.9);
   const STAR = shape(starS, 0.28), goldM = std(0xffd43b, { r: 0.25, m: 0.45, e: 0x5a3a00 }), COIN = G(new T.CylinderGeometry(0.5, 0.5, 0.1, 24).rotateX(Math.PI / 2));
+  const goldT = std(0x9c5f00, { e: 0x1a0c00 }), sockM = std(new T.Color(th.c2).lerp(new T.Color(0x05071a), 0.86).getHex()), RING = G(new T.TorusGeometry(1, 0.07, 8, 48));
   const mk = (geo, m) => new T.Mesh(geo, m);
   const grp = (...ms) => { const g = new T.Group(); ms.forEach(([geo, m, x = 0, y = 0, z = 0, s = 1]) => { const o = mk(geo, m); o.position.set(x, y, z); o.scale.setScalar(s); g.add(o); }); return g; };
   const sph = G(new T.SphereGeometry(1, 28, 18));
@@ -2598,14 +2898,38 @@ function Pane3D(canvas, th) {
   function spawn(o, pos, v, life, spin = 6) { o.position.copy(pos); o.userData = { v, w: new T.Vector3(Math.random(), Math.random(), Math.random()).multiplyScalar(spin), life, max: life, s0: o.scale.x }; scene.add(o); parts.push(o); }
   function size() { const r = canvas.getBoundingClientRect(); if (!r.width) return; R.setSize(r.width, r.height, false); aspect = r.width / r.height; cam.aspect = aspect; cam.updateProjectionMatrix(); }
   size();
+  // Results: star sockets pinned to the page's star slots. earn(k) slams a gold star into socket k from in front of
+  // the camera, then it squashes, bounces and settles with a ring and a burst of mini stars.
+  const ZS = 2, TANF = Math.tan(cam.fov * Math.PI / 360), FLY = 0.3; let slots = [], clock = 0;
+  function pin(el, z) {
+    const c = canvas.getBoundingClientRect(), r = el.getBoundingClientRect(), h = 2 * (cam.position.z - z) * TANF;
+    if (!c.height || !r.width) return null;
+    return { x: (((r.left + r.width / 2 - c.left) / c.width) * 2 - 1) * h / 2 * aspect, y: -(((r.top + r.height / 2 - c.top) / c.height) * 2 - 1) * h / 2, s: r.width * h / c.height / 2 };
+  }
+  function impact(s, p) {
+    const m = M(new T.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9, depthWrite: false }));
+    s.ring = new T.Mesh(RING, m); s.ring.position.set(p.x, p.y, ZS + 0.2); s.ring.userData.age = 0; scene.add(s.ring);
+    for (let i = 0; i < (reduced ? 4 : 12); i++) {
+      const o = mk(STAR, i % 3 ? goldT : std(0xffffff, { e: 0x777777 })); o.scale.setScalar(p.s * (0.14 + Math.random() * 0.12));
+      const a = i / 12 * Math.PI * 2 + Math.random() * 0.4, sp = p.s * (3.5 + Math.random() * 3);
+      spawn(o, new T.Vector3(p.x, p.y, ZS + 0.4), new T.Vector3(Math.cos(a) * sp, Math.sin(a) * sp + 2.5, Math.random() * 2), 0.9, 8);
+    }
+  }
   return {
     size,
     burst(x, y) {
       const p = at(x, y);
       for (let i = 0; i < (reduced ? 4 : 12); i++) { const o = i % 3 === 0 ? mk(COIN, goldM) : kinds[mix[i % mix.length]](); o.scale.multiplyScalar(0.28 + Math.random() * 0.18); const a = Math.random() * Math.PI * 2, sp = 3 + Math.random() * 4; spawn(o, p, new T.Vector3(Math.cos(a) * sp, Math.abs(Math.sin(a)) * sp + 3, (Math.random() - 0.3) * 3), 1.3); }
     },
-    celebrate(n) {
-      for (let i = 0; i < 3; i++) { const o = mk(STAR, i < n ? goldM : std(0xffffff, { op: 0.35 })); o.scale.setScalar(0.72); spawn(o, new T.Vector3((i - 1) * 1.75, -7, 3), new T.Vector3(0, 13, 0), 99, 3); o.userData.star = true; o.userData.ty = 2.35 + (i === 1 ? 0.3 : 0); }
+    stars(els) {
+      slots.forEach(s => { scene.remove(s.sock); if (s.gold) scene.remove(s.gold); if (s.ring) scene.remove(s.ring); });
+      slots = els.map((el, i) => { const sock = G3.outline(mk(STAR, sockM)); scene.add(sock); return { el, i, sock, gold: null, ring: null, t: 0, hit: false, born: 0, tilt: [0.21, 0, -0.21][i] }; });
+    },
+    earn(k, quick) {
+      const s = slots[k - 1]; if (!s || s.gold) return;
+      s.gold = G3.outline(mk(STAR, goldT)); s.t = quick || reduced ? 1.2 : 0; s.hit = !!(quick || reduced); scene.add(s.gold);
+    },
+    shower() {
       for (let i = 0; i < (reduced ? 6 : 30); i++) { const o = mk(COIN, goldM); o.scale.setScalar(0.5 + Math.random() * 0.3); const a = Math.random() * Math.PI * 2, sp = 4 + Math.random() * 6; spawn(o, new T.Vector3(0, -1, 2), new T.Vector3(Math.cos(a) * sp, Math.sin(a) * sp + 6, Math.random() * 2), 2.4, 10); }
     },
     draw(dt) {
@@ -2616,10 +2940,24 @@ function Pane3D(canvas, th) {
       }
       for (let i = parts.length - 1; i >= 0; i--) {
         const o = parts[i], u = o.userData; u.life -= dt;
-        if (u.star) { o.position.y += (u.ty - o.position.y) * Math.min(1, dt * 4); o.rotation.set(0.15, Math.sin(u.life * 2.2) * 0.55, Math.sin(u.life * 3) * 0.12); }
-        else { u.v.y -= 9 * dt; o.position.addScaledVector(u.v, dt); o.rotation.x += u.w.x * dt; o.rotation.y += u.w.y * dt; }
+        u.v.y -= 9 * dt; o.position.addScaledVector(u.v, dt); o.rotation.x += u.w.x * dt; o.rotation.y += u.w.y * dt;
         if (u.life < 0.4) o.scale.setScalar(u.s0 * Math.max(0.01, u.life / 0.4));
         if (u.life <= 0) { scene.remove(o); parts.splice(i, 1); }
+      }
+      clock += dt;
+      for (const s of slots) {
+        const p = pin(s.el, ZS); if (!p) continue;
+        s.born = Math.min(1, s.born + dt * 3); const b = 1 - Math.pow(1 - s.born, 3), k0 = p.s * 0.92;
+        s.sock.position.set(p.x, p.y, ZS - 0.3); s.sock.scale.set(k0 * b, k0 * b, k0 * 0.45 * b); s.sock.rotation.set(0, 0, s.tilt);
+        if (s.ring) { const a = (s.ring.userData.age += dt); s.ring.scale.setScalar(p.s * (0.9 + a * 4)); s.ring.material.opacity = Math.max(0, 0.9 - a * 1.9); if (a > 0.5) { scene.remove(s.ring); s.ring = null; } }
+        if (!s.gold) continue;
+        s.t += dt; let z = ZS, sc = 1, ry = 0;
+        if (s.t < FLY) { const e = s.t / FLY; z = ZS + 7 * (1 - e * e); sc = 1.7 - 0.55 * e * e; ry = -Math.PI * 2.5 * (1 - e); }
+        else {
+          const a = s.t - FLY; sc = 1 + 0.16 * Math.cos(a * 16) * Math.exp(-a * 6); ry = Math.sin(a * 10) * 0.5 * Math.exp(-a * 4) + Math.sin(clock * 1.6 + s.i) * 0.2 * (1 - Math.exp(-a * 2));
+          if (!s.hit) { s.hit = true; impact(s, p); }
+        }
+        const q = pin(s.el, z); s.gold.position.set(q.x, q.y, z); s.gold.scale.set(k0 * sc, k0 * sc, k0 * sc); s.gold.rotation.set(0.12, ry, s.tilt + Math.sin(clock * 2 + s.i) * 0.04);
       }
       G3.inkFor(R); R.render(scene, cam);
     },
@@ -2630,7 +2968,7 @@ function Pane3D(canvas, th) {
 /* =========================================================
    UI state, rendering, sheets
    ========================================================= */
-const UI = { screen: 'boot', kidId: null, tab: 'today', ptab: 'review', pkid: null, unlocked: false, sheet: null, gate: null, tips: {}, quotes: {}, redoFor: null, tm: 12, skyProgress: null, confirmRemove: null };
+const UI = { screen: 'boot', kidId: null, tab: 'today', ptab: 'review', pkid: null, unlocked: false, wiz: null, sheet: null, gate: null, tips: {}, quotes: {}, redoFor: null, tm: 12, skyProgress: null, confirmRemove: null };
 let rq = 0;
 function scheduleRender() { Store.ver++; if (rq) return; rq = requestAnimationFrame(() => { rq = 0; render(); }); }
 function render() {
@@ -3214,14 +3552,20 @@ async function pinComplete() {
   if ((await hashPin(g.pin)) === S().pinHash) return unlock();
   g.err = 'Wrong PIN. Try again.'; g.pin = ''; Sound.error(); render();
 }
-function unlock() { UI.unlocked = true; UI.screen = 'parent'; UI.gate = null; const after = UI.afterUnlock; UI.afterUnlock = null; scrollTo(0, 0); render(); if (after === 'addKid') { UI.ptab = 'kids'; render(); openKidForm(); } }
+function unlock() {
+  UI.unlocked = true; UI.screen = 'parent'; UI.gate = null; const after = UI.afterUnlock; UI.afterUnlock = null; scrollTo(0, 0);
+  const h = S().home; if (!h || (!h.done && !h.skipped)) return startWizard(0, { then: after });
+  render(); afterWizard(after);
+}
+function afterWizard(after) { if (after === 'addKid') { UI.ptab = 'kids'; render(); openKidForm(); } }
 
 /* ---------- Grown-ups ---------- */
 function viewParent() {
   if (!UI.unlocked) { openGate(); return viewGate(); }
+  if (UI.wiz) return viewWizard();
   const t = UI.ptab, pend = jobsList().filter(j => j.status === 'pending').length;
-  const nav = [['review', 'review', 'To review', pend], ['kids', 'crew', 'Kids', 0], ['chores', 'list', 'Chores', 0], ['bank', 'bank', 'Money rules', 0]];
-  const main = t === 'kids' ? pKids() : t === 'chores' ? pChores() : t === 'bank' ? pBank() : pReview();
+  const nav = [['review', 'review', 'To review', pend], ['kids', 'crew', 'Kids', 0], ['chores', 'list', 'Chores', 0], ['home', 'home', 'Our home', 0], ['bank', 'bank', 'Money rules', 0]];
+  const main = t === 'kids' ? pKids() : t === 'chores' ? pChores() : t === 'home' ? pHome() : t === 'bank' ? pBank() : pReview();
   return `<div class="pwrap">
     <aside class="pside">
       <div class="pside-top"><button class="plink" data-act="lock">${ic('back')} Lock and go back</button></div>
@@ -3230,6 +3574,110 @@ function viewParent() {
       <p class="psync">${Store.mode === 'cloud' ? 'Synced. Chores, pay and photos show up on every device that opens this link while signed in to your account.' : 'Saved on this device only.'}</p>
     </aside>
     <main class="pmain">${main}</main></div>`;
+}
+/* ---------- Our home: the setup questions ----------
+   One question per screen. Above it, a box of real chores that the answer turns on or off, flipping live as you tap.
+   Follow-ups slide in underneath when an answer opens them up (pick Dog and the dog questions appear).
+   Animations are keyed to when something changed, not to which render shows it, so a second render straight after
+   (a save echoing back) replays them instead of cutting them off. */
+const wizRecent = t => !!t && performance.now() - t < 450;
+function startWizard(i, o = {}) {
+  const had = (S().home || {}).v || null;
+  UI.wiz = { i, v: { ...HOME_DEF, ...(had || {}) }, touched: had ? Object.fromEntries(Object.keys(HOME_DEF).map(k => [k, 1])) : {}, seen: {}, prev: {}, flipAt: {}, just: null, justAt: 0, fit: null, fitAt: 0, edit: !!o.edit, then: o.then || null };
+  UI.screen = 'parent'; closeSheet(); scrollTo(0, 0); render();
+}
+function homeAnswer(q, v) {
+  if (q.type === 'yesno') return v[q.k] ? 'Yes' : 'No';
+  if (q.type === 'count') return `${v[q.k]} ${v[q.k] === 1 ? q.unit[0] : q.unit[1]}`;
+  if (q.type === 'pick') return (q.opts.find(o => o[0] === v[q.k]) || [, , '–'])[2];
+  const on = q.opts.filter(([o]) => v[o]).map(o => o[2]); return on.length ? on.join(', ') : (q.none || 'None');
+}
+function homeHave(v, qs = HOME_Q) {
+  const out = [], take = q => {
+    if (q.type === 'multi') q.opts.forEach(([o, e, l]) => { if (v[o]) out.push([e, l]); });
+    else if (q.type === 'yesno') { if (v[q.k]) out.push([q.yes || q.icon, q.s]); }
+    else if (q.type === 'count') out.push([q.icon, homeAnswer(q, v)]);
+    else if (q.k !== 'type') { const o = q.opts.find(x => x[0] === v[q.k]); if (o) out.push([o[1], o[2]]); }
+  };
+  for (const q of qs) { take(q); liveFollows(q, v).forEach(take); }
+  return out;
+}
+function woBtn(key, val, e, label, on, w) {
+  return `<button class="wo ${on ? 'on' : ''} ${w.just === key + ':' + val && wizRecent(w.justAt) ? 'just' : ''}" data-act="wizSet" data-k="${key}" data-v="${val}" aria-pressed="${on}"><span class="wo-e" aria-hidden="true">${e}</span><b>${esc(label)}</b><span class="wo-ck" aria-hidden="true">${ic('check')}</span></button>`;
+}
+function wizAnswer(q, v, w, main) {
+  if (q.type === 'yesno') return `<div class="wiz-opts two">${woBtn(q.k, '1', q.yes || (main ? q.icon : '👍'), 'Yes', v[q.k] === true, w)}${woBtn(q.k, '0', '🚫', 'No', v[q.k] === false, w)}</div>`;
+  if (q.type === 'pick') return `<div class="wiz-opts ${q.opts.length === 4 ? 'n4' : ''}">${q.opts.map(([val, e, l]) => woBtn(q.k, val, e, l, v[q.k] === val, w)).join('')}</div>`;
+  if (q.type === 'multi') { const any = q.opts.some(([o]) => v[o]); return `<div class="wiz-opts ${q.opts.length + (q.none ? 1 : 0) === 4 ? 'n4' : ''}">${q.opts.map(([o, e, l]) => woBtn(o, 't', e, l, !!v[o], w)).join('')}${q.none ? woBtn(q.k, 'none', '🚫', q.none, !any, w) : ''}</div>`; }
+  const n = v[q.k];
+  return `<div class="wiz-count"><div class="wiz-count-row"><button data-act="wizCount" data-k="${q.k}" data-d="-1" ${n <= q.min ? 'disabled' : ''} aria-label="Fewer ${q.unit[1]}">${ic('minus')}</button><span class="wiz-count-n num" aria-live="polite">${n}</span><button data-act="wizCount" data-k="${q.k}" data-d="1" ${n >= q.max ? 'disabled' : ''} aria-label="More ${q.unit[1]}">${ic('plus')}</button></div>
+    <span class="wiz-count-l">${n === 1 ? q.unit[0] : q.unit[1]}</span><div class="wiz-count-em" aria-hidden="true">${Array.from({ length: n }, (_, i) => `<span class="${i === n - 1 && w.just === q.k + ':+' && wizRecent(w.justAt) ? 'new' : ''}">${q.icon}</span>`).join('')}</div></div>`;
+}
+// The examples box: real chores from the list, each marked In or Hidden for the answers so far
+function wizExamples(q, f, w, mini) {
+  const sw = homeSwaps(f), cs = (q.ex || []).map(k => CHORES.find(c => c.key === k)).filter(Boolean);
+  if (!cs.length) return '';
+  const chips = cs.map(c => {
+    const on = needsMet(c, f), th = THEMES[c.theme] || THEMES.tidy, t = swapWords(c, sw).title, st = on + '|' + t;
+    if (w.prev[c.key] != null && w.prev[c.key] !== st) w.flipAt[c.key] = performance.now();
+    w.next[c.key] = st;
+    return `<div class="wx ${on ? 'on' : 'off'} ${wizRecent(w.flipAt[c.key]) ? 'flip' : ''}" style="--c1:${th.c1};--c2:${th.c2}"><span class="wx-ic" aria-hidden="true">${c.icon}</span><span class="wx-t">${esc(t)}</span><span class="wx-s">${on ? `${ic('check')} In` : 'Hidden'}</span></div>`;
+  }).join('');
+  if (mini) return `<div class="wiz-ex wex-mini" aria-label="Examples"><div class="wiz-ex-list">${chips}</div></div>`;
+  return `<section class="wiz-ex" aria-label="Examples"><div class="wiz-ex-h"><span class="wiz-ex-ic" aria-hidden="true">${q.icon}</span><div><b>For example</b><small>${esc(q.note || 'These jobs depend on your answer.')}</small></div></div><div class="wiz-ex-list">${chips}</div></section>`;
+}
+function viewWizard() {
+  const w = UI.wiz, N = HOME_Q.length, v = w.v, f = homeFlags(v), fit = CHORES.filter(c => needsMet(c, f)).length;
+  if (w.i >= N) return wizDone(w, f, fit);
+  const q = HOME_Q[w.i]; w.next = {};
+  if (w.fit != null && w.fit !== fit) w.fitAt = performance.now();
+  const follows = liveFollows(q, v).map(fq => { if (!w.seen[fq.k]) w.seen[fq.k] = performance.now(); return `<section class="wiz-fu ${wizRecent(w.seen[fq.k]) ? 'fresh' : ''}"><span class="wiz-fu-tag">${ic('next')} Follow-up</span>${wizExamples(fq, f, w, true)}<h2>${esc(fq.q)}</h2>${fq.help || fq.note ? `<p>${esc(fq.help || fq.note)}</p>` : ''}${wizAnswer(fq, v, w, false)}</section>`; }).join('');
+  const html = `<div class="wiz" style="--hue:${q.hue}">
+    <header class="wiz-top">
+      <button class="plink" data-act="${w.edit ? 'wizCancel' : w.i ? 'wizBack' : 'wizSkip'}">${w.edit ? 'Cancel' : w.i ? `${ic('back')} Back` : 'Skip for now'}</button>
+      ${w.edit ? '<b class="wiz-tt">Our home</b>' : `<div class="wiz-prog" role="progressbar" aria-label="Question ${w.i + 1} of ${N}" aria-valuemin="1" aria-valuemax="${N}" aria-valuenow="${w.i + 1}">${HOME_Q.map((x, i) => `<i class="${i < w.i ? 'done' : i === w.i ? 'on' : ''}"></i>`).join('')}</div>`}
+      <span class="wiz-step">${w.edit ? '' : `${w.i + 1} of ${N}`}</span>
+    </header>
+    <div class="wiz-body">
+      ${wizExamples(q, f, w, false)}
+      <section class="wiz-q"><h1>${esc(q.q)}</h1>${q.help ? `<p>${esc(q.help)}</p>` : ''}${wizAnswer(q, v, w, true)}</section>
+      ${follows}
+    </div>
+    <footer class="wiz-foot">
+      <div class="wiz-fit"><span><b class="num ${wizRecent(w.fitAt) ? 'bump' : ''}">${fit}</b> of ${CHORES.length} jobs fit your home</span><span class="wiz-bar"><i style="width:${(fit / CHORES.length * 100).toFixed(1)}%"></i></span></div>
+      <button class="wiz-go" data-act="wizNext">${w.edit ? 'Save' : w.i === N - 1 ? 'Finish' : 'Continue'}</button>
+    </footer>
+  </div>`;
+  w.prev = w.next; w.fit = fit;
+  return html;
+}
+function wizDone(w, f, fit) {
+  const t = HOME_Q[0].opts.find(o => o[0] === w.v.type) || [, '🏡'], have = homeHave(w.v), hidden = CHORES.filter(c => !needsMet(c, f));
+  const orbs = HOME_Q.slice(1).map(q => homeHave(w.v, [q])[0]).filter(Boolean), R = 112; // one from each question, for variety
+  return `<div class="wiz wiz-done" style="--hue:#30C25A">
+    <div class="wiz-body">
+      <div class="wiz-hero" aria-hidden="true"><span class="big">${t[1]}</span>${orbs.map(([e], i) => { const a = i / orbs.length * Math.PI * 2 - Math.PI / 2; return `<span class="orb" style="left:calc(50% + ${(Math.cos(a) * R * 1.35).toFixed(0)}px);top:calc(50% + ${(Math.sin(a) * R * 0.78).toFixed(0)}px);--d:${(i * 0.07).toFixed(2)}s"><i>${e}</i></span>`; }).join('')}</div>
+      <h1>Your home is all set</h1>
+      <p class="wiz-lede">Chorecast now only hands out jobs that fit your place. You can change any answer in Our home.</p>
+      <div class="wiz-stats"><div class="wiz-stat hl"><b class="num">${fit}</b><span>of ${CHORES.length} jobs fit</span></div>${['must', 'team', 'gig'].map(k => `<div class="wiz-stat"><b class="num">${CHORES.filter(c => c.tier === k && needsMet(c, f)).length}</b><span>${TIERS[k].label}</span></div>`).join('')}</div>
+      <h3 class="pgroup-t">At your place</h3><div class="wiz-tags">${have.map(([e, l]) => `<span class="wiz-tag"><span aria-hidden="true">${e}</span>${esc(l)}</span>`).join('')}</div>
+      ${hidden.length ? `<details class="wiz-hidden"><summary>${hidden.length} jobs hidden for your home</summary><div class="wiz-tags">${hidden.map(c => `<span class="wiz-tag off" title="${esc(missingText(c, f))}"><span aria-hidden="true">${c.icon}</span>${esc(c.title)}</span>`).join('')}</div></details>` : ''}
+    </div>
+    <footer class="wiz-foot"><button class="wiz-go" data-act="wizClose">${w.then === 'addKid' ? 'Next: add your kids' : 'Done'}</button></footer>
+  </div>`;
+}
+function pHome() {
+  const h = S().home || {};
+  if (!homeOn()) return `<header class="phead"><h2>Our home</h2><p>Your answers decide which jobs Chorecast hands out.</p></header>
+    <section class="home-intro"><div class="hi-art" aria-hidden="true"><span class="big">🏡</span><span class="o o1">🐕</span><span class="o o2">🍽️</span><span class="o o3">🌱</span><span class="o o4">🧺</span><span class="o o5">🐈</span></div>
+      <h3>Tell Chorecast about your home</h3><p>Ten quick questions, with a few follow-ups. A home without a cat won’t get cat jobs, and no dishwasher means no dishwasher jobs.</p>
+      <button class="wiz-go" data-act="wizStart">${h.v ? 'Pick up where you left off' : 'Start the questions'}</button></section>`;
+  const v = { ...HOME_DEF, ...h.v }, f = homeF(), fit = CHORES.filter(c => needsMet(c, f)).length, hidden = CHORES.filter(c => !needsMet(c, f));
+  const t = HOME_Q[0].opts.find(o => o[0] === v.type) || [, '🏡', 'Home'], pets = HOME_Q[4].opts.filter(([o]) => v[o]).map(o => o[2]);
+  return `<header class="phead row-h"><div><h2>Our home</h2><p>Your answers decide which jobs Chorecast hands out. Tap a card to change an answer.</p></div><button class="pbtn" data-act="wizStart">${ic('swap')} Go through them again</button></header>
+    <section class="home-hero"><span class="big" aria-hidden="true">${t[1]}</span><div class="hh-main"><h3>${esc(t[2])}</h3><p>${[homeAnswer(HOME_Q[1], v), homeAnswer(HOME_Q[2], v), pets.length ? pets.join(', ') : 'No pets'].map(esc).join(' · ')}</p></div><div class="hh-fit"><b class="num">${fit}</b><span>of ${CHORES.length} jobs fit</span></div></section>
+    <div class="home-grid">${HOME_Q.map((q, i) => `<button class="hq" data-act="wizEdit" data-i="${i}" style="--hue:${q.hue}"><span class="hq-ic" aria-hidden="true">${q.icon}</span><span class="hq-main"><b>${esc(q.q)}</b><span>${esc(homeAnswer(q, v))}</span>${liveFollows(q, v).map(fq => `<small>${esc(fq.s)}: ${esc(homeAnswer(fq, v))}</small>`).join('')}</span>${ic('next')}</button>`).join('')}</div>
+    ${hidden.length ? `<h3 class="pgroup-t">Hidden at your place<small>${hidden.length} jobs</small></h3><div class="group">${hidden.map(c => { const th = THEMES[c.theme] || THEMES.tidy; return `<div class="row"><span class="sticker xs" style="--c1:${th.c1};--c2:${th.c2}" aria-hidden="true">${c.icon}</span><div class="row-main"><b>${esc(c.title)}</b><small>${esc(missingText(c, f))}</small></div></div>`; }).join('')}</div>` : ''}`;
 }
 function payTypeLine(j) {
   if (j.payType === 'piece') return `${j.units} ${j.unit}${j.units === 1 ? '' : 's'} × ${fmt(j.perUnit)}`;
@@ -3240,7 +3688,7 @@ function payTypeLine(j) {
 function pReview() {
   const pend = jobsList().filter(j => j.status === 'pending').sort((a, b) => a.at - b.at);
   const recent = jobsList().filter(j => j.status !== 'pending' && j.reviewedAt).sort((a, b) => b.reviewedAt - a.reviewedAt).slice(0, 10);
-  return `<header class="phead"><h2>To review</h2><p>${pend.length ? `${pend.length} job${pend.length === 1 ? '' : 's'} waiting. Check the photo, then pay or ask for a redo. Kids see their pay slip the next time they open their sky.` : 'All caught up. New jobs appear here as soon as a kid sends a photo.'}</p></header>
+  return `${homeOn() ? '' : `<button class="home-nudge" data-act="wizStart"><span class="hn-art" aria-hidden="true">🏡</span><span class="hn-main"><b>Tell us about your home</b><small>Ten quick questions, so kids only get jobs your place actually has.</small></span>${ic('next')}</button>`}<header class="phead"><h2>To review</h2><p>${pend.length ? `${pend.length} job${pend.length === 1 ? '' : 's'} waiting. Check the photo, then pay or ask for a redo. Kids see their pay slip the next time they open their sky.` : 'All caught up. New jobs appear here as soon as a kid sends a photo.'}</p></header>
     ${pend.map(reviewCard).join('')}
     ${recent.length ? `<h3 class="pgroup-t">Recently reviewed</h3><div class="group">${recent.map(j => { const k = Store.kids[j.kidId]; return `<div class="recent"><span class="ava-s" style="--hue:${k ? k.hue : '#999'}">${k ? k.avatar : '?'}</span><div class="row-main"><b>${j.icon} ${esc(j.title)}</b><small>${esc(k ? k.name : 'Removed')} · ${timeAgo(j.reviewedAt)}${j.note ? ` · “${esc(j.note)}”` : ''}</small></div><span class="tag ${j.status}">${j.status === 'approved' ? `Paid ${fmt((j.paid && j.paid.gross) || 0)}` : 'Redo'}</span></div>`; }).join('')}</div>` : ''}`;
 }
@@ -3303,16 +3751,16 @@ function pKidDetail(kid) {
 }
 function pChores() {
   const all = allChores();
-  return `<header class="phead row-h"><div><h2>Chores</h2><p>Every morning Chorecast runs a fair chore draft. Each kid gets 3 must-dos and 2 team tasks, and no two kids ever get the same job. Anything in their own bedroom is always each kid’s own. A job a sibling has done sits out until it is due again, the pick order rotates daily, and kids get the jobs they’ve done least lately. The family also shares 4 side hustles (5 at weekends). Kids only see chores that suit their age.</p></div><button class="pbtn" data-act="addChore">${ic('plus')} Add a chore</button></header>
+  return `<header class="phead row-h"><div><h2>Chores</h2><p>Every morning Chorecast runs a fair chore draft. Each kid gets 3 must-dos and 2 team tasks, and no two kids ever get the same job. Anything in their own bedroom is always each kid’s own. A job a sibling has done sits out until it is due again, the pick order rotates daily, and kids get the jobs they’ve done least lately. The family also shares 4 side hustles (5 at weekends). Kids only see chores that suit their age and your home.</p></div><button class="pbtn" data-act="addChore">${ic('plus')} Add a chore</button></header>
     ${['must', 'team', 'gig'].map(tier => `<h3 class="pgroup-t">${TIERS[tier].label}<small>${TIERS[tier].pblurb}</small></h3><div class="group">${all.filter(c => c.tier === tier).map(choreRow).join('')}</div>`).join('')}`;
 }
 function choreRow(c) {
-  const on = !(S().choreOff || {})[c.key], th = THEMES[c.theme] || THEMES.tidy, val = c[rateField(c)] || 0;
+  const here = fitsHome(c), on = here && !(S().choreOff || {})[c.key], th = THEMES[c.theme] || THEMES.tidy, val = c[rateField(c)] || 0;
   const suffix = c.payType === 'piece' ? `/${c.unit}` : c.payType === 'hourly' ? '/hr' : '';
   return `<div class="row wrap ${on ? '' : 'off'}"><span class="sticker xs" style="--c1:${th.c1};--c2:${th.c2}" aria-hidden="true">${c.icon}</span>
     <div class="row-main"><b>${esc(c.title)}</b><small>${c.maxAge ? `Ages ${c.minAge}–${c.maxAge}` : `Age ${c.minAge || 5}+`} · ${c.scope === 'me' ? 'Each kid does their own' : c.every > 1 ? `Due every ${c.every} days` : 'Daily, one kid'} · ${c.payType === 'hourly' ? `up to ${c.maxMins}` : c.mins} min · ${PAYTYPE[c.payType]}${c.custom ? ' · Yours' : ''}${c.custom && c.daily ? ' · Every day' : ''}</small></div>
     ${c.payType === 'quote' ? '<span class="muted" style="font-size:14px">Kid quotes</span>' : `<div class="stepper"><button data-act="rate" data-key="${c.key}" data-d="${c.payType === 'hourly' ? -50 : -10}" aria-label="Lower pay">${ic('minus')}</button><b>${fmt(val)}${suffix}</b><button data-act="rate" data-key="${c.key}" data-d="${c.payType === 'hourly' ? 50 : 10}" aria-label="Raise pay">${ic('plus')}</button></div>`}
-    <button class="switch ${on ? 'on' : ''}" role="switch" aria-checked="${on}" aria-label="Offer ${esc(c.title)}" data-act="choreToggle" data-key="${c.key}"></button>
+    ${here ? `<button class="switch ${on ? 'on' : ''}" role="switch" aria-checked="${on}" aria-label="Offer ${esc(c.title)}" data-act="choreToggle" data-key="${c.key}"></button>` : `<button class="not-here" data-act="ptab" data-tab="home" title="${esc(missingText(c, homeF()))}">${ic('home')} Not at your place</button>`}
     ${c.custom ? `<button class="icon-p" data-act="delChore" data-key="${c.key}" aria-label="Delete ${esc(c.title)}">${ic('trash')}</button>` : ''}</div>`;
 }
 function pBank() {
@@ -3458,20 +3906,98 @@ function renderPane(p) {
         <button class="link-btn" data-act="sSkipPhoto" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${p.uploading ? 'Sending…' : 'No camera? Send without a photo'}</button>`}
     </div>`;
   } else {
-    const pay = grossFor(jobFromPane(p)), qp = Math.round(((QUALITY[p.stars] || 1) - 1) * 100), all = Stage.panes.every(x => x.phase === 'result');
-    const rows = [['Steps', p.br.steps], ['Combos', p.br.combo], [p.c.payType === 'hourly' ? 'Minutes worked' : p.c.payType === 'piece' ? `${p.c.unit[0].toUpperCase() + p.c.unit.slice(1)}s counted` : 'Speed bonus', p.c.payType === 'hourly' || p.c.payType === 'piece' ? p.br.extra : p.br.speed], ['Photo proof', p.br.photo]].filter(r => r[1] > 0 || r[0] === 'Steps');
-    inner.innerHTML = `${paneHead(p)}<div class="result">
-      <div class="rstars" aria-label="${p.stars} of 3 stars">${[1, 2, 3].map(n => `<span class="rstar ${n <= p.stars ? 'on' : ''}" style="--d:${n * 0.28}s">${ic('star')}</span>`).join('')}</div>
-      <div class="res-score num" data-countup="${p.score}">0</div><div class="res-lbl">points</div>
-      <dl class="res-break">${rows.map(([l, v]) => `<dt>${l}</dt><dd class="num">+${v.toLocaleString()}</dd>`).join('')}</dl>
-      <div class="res-pay"><span>Pay after a grown-up checks</span><b class="num">${fmt(pay)}</b><small>${qp > 0 ? `includes +${qp}% for 3 stars` : qp < 0 ? `${qp}% for 1 star. More stars, more pay.` : '2 stars pays full price'}${p.c.surge ? ' · surge ×1.5' : ''}</small></div>
-      ${Stage.crew ? (all ? '' : '<p class="res-wait">Waiting for the rest of your crew…</p>') : `<button class="finish ready" data-act="sExit">Back to my sky</button>`}
+    // Angry Birds style: points tally up row by row, and each star slams in as the meter passes its notch.
+    // A repaint after the tally has started shows the finished screen straight away.
+    const rows = resultRows(p), fin = !!p.tally;
+    if (!fin) p.tally = { fast: false, done: false };
+    inner.innerHTML = `${paneHead(p)}<div class="result" data-act="sSkip" data-pane="${p.i}">
+      <div class="rstars" role="img" aria-label="${p.stars} of 3 stars">${[1, 2, 3].map(n => `<span class="rstar ${fin && n <= p.stars ? 'on' : ''}" data-star="${n}">${STAR_SOCK}${starGold(p.i + '-' + n)}</span>`).join('')}</div>
+      <div class="res-score num" data-total>${fin ? p.score.toLocaleString() : 0}</div><div class="res-lbl">points</div>
+      <div class="res-meter" aria-hidden="true"><i data-fill style="width:${fin ? clamp(rows.reduce((a, r) => a + r[2], 0) / starMax(p), 0, 1) * 100 : 0}%"></i>${STAR_TH.map((t, i) => `<span class="res-notch ${fin && i < p.stars ? 'on' : ''}" data-notch="${i + 1}" style="left:${t * 100}%">${STAR_MINI}</span>`).join('')}</div>
+      <p class="res-verdict" data-verdict>${fin ? VERDICT[p.stars] : ''}</p>
+      <div class="res-rows">${rows.map(([l, v], i) => `<div class="res-row ${fin ? 'done' : ''}" data-row="${i}"><span>${l}</span><b class="num">+${fin ? v.toLocaleString() : 0}</b></div>`).join('')}</div>
+      <div class="res-end" data-end ${fin ? '' : 'hidden'}>${fin ? resEnd(p) : ''}</div>
     </div>`;
-    countUp(inner.querySelector('[data-countup]'), p.score);
-    [1, 2, 3].forEach(n => { if (n <= p.stars) setTimeout(() => Sound.star(n), n * 280 + 200); });
+    const slots = [...inner.querySelectorAll('.rstar')];
+    if (p.fx && p.fx.stars) { p.el.classList.add('p3d'); p.fx.stars(slots); if (fin) for (let k = 1; k <= p.stars; k++) p.fx.earn(k, true); }
+    if (fin) p.tally.done = true; else runTally(p);
   }
 }
-function countUp(el, to) { if (!el) return; const t0 = performance.now(), d = reduced ? 1 : 1100; const f = t => { const k = clamp((t - t0) / d, 0, 1), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(to * e).toLocaleString(); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }
+const STAR_TH = [0.2, 0.5, 0.78], VERDICT = ['', 'Nice work!', 'Great job!', 'Perfect mission!'];
+const STAR_D = (() => { let d = ''; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, q = i % 2 ? 25 : 54; d += (i ? 'L' : 'M') + (60 + Math.cos(a) * q).toFixed(1) + ' ' + (64 + Math.sin(a) * q).toFixed(1); } return d + 'Z'; })();
+const STAR_SOCK = `<svg class="rs-sock" viewBox="0 0 120 120" aria-hidden="true"><path d="${STAR_D}"/></svg>`, STAR_MINI = `<svg viewBox="0 0 120 120"><path d="${STAR_D}"/></svg>`;
+const starGold = id => `<svg class="rs-gold" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="rsg${id}" x1="0" y1="0" x2="0" y2="1"><stop offset=".42" stop-color="#FFF2A6"/><stop offset=".42" stop-color="#FFCC3D"/><stop offset=".7" stop-color="#FFCC3D"/><stop offset=".7" stop-color="#F29A1D"/></linearGradient></defs><path class="rs-body" d="${STAR_D}" fill="url(#rsg${id})"/><path d="M42 40Q50 30 58 30Q52 40 48 52Z" fill="#fff" opacity=".8"/></svg>`;
+const starMax = p => p.c.steps.length * 100 + 650;
+// [label, points, how much the row counts towards stars], matching starsFor
+function resultRows(p) {
+  const c = p.c, br = p.br, rows = [['Steps', br.steps, br.steps]];
+  if (br.combo) rows.push(['Combos', br.combo, br.combo]);
+  if (br.speed) rows.push(['Speed bonus', br.speed, c.payType === 'hourly' ? 0 : br.speed]);
+  if (c.payType === 'hourly' && br.extra) rows.push(['Minutes worked', br.extra, Math.min(500, br.extra)]);
+  if (c.payType === 'piece') rows.push([`${c.unit[0].toUpperCase() + c.unit.slice(1)}s counted`, br.extra, 0]);
+  if (br.photo) rows.push(['Photo proof', br.photo, br.photo]);
+  const gap = p.score - rows.reduce((a, r) => a + r[1], 0);
+  if (gap > 0) rows[c.payType === 'piece' ? rows.length - (br.photo ? 2 : 1) : 0][1] += gap;
+  return rows;
+}
+function resEnd(p) {
+  const pay = grossFor(jobFromPane(p)), qp = Math.round(((QUALITY[p.stars] || 1) - 1) * 100);
+  return `<div class="res-pay"><span>Pay after a grown-up checks</span><b class="num">${fmt(pay)}</b><small>${qp > 0 ? `includes +${qp}% for 3 stars` : qp < 0 ? `${qp}% for 1 star. More stars, more pay.` : '2 stars pays full price'}${p.c.surge ? ' · surge ×1.5' : ''}</small></div>
+    ${Stage.crew ? (crewFinished() ? '' : '<p class="res-wait">Waiting for the rest of your crew…</p>') : '<button class="finish ready" data-act="sExit">Back to my sky</button>'}`;
+}
+const crewFinished = () => Stage.panes.every(x => x.phase === 'result' && x.tally && x.tally.done);
+async function runTally(p) {
+  const T0 = p.tally, el = p.el.querySelector('.result'), rows = resultRows(p), max = starMax(p);
+  const $t = el.querySelector('[data-total]'), $f = el.querySelector('[data-fill]');
+  const alive = () => Stage.active && p.tally === T0 && el.isConnected;
+  let total = 0, meter = 0, queued = 0, chain = Promise.resolve();
+  const earn = k => {
+    const s = el.querySelector(`[data-star="${k}"]`); el.querySelector(`[data-notch="${k}"]`).classList.add('on');
+    if (p.fx && p.fx.earn) p.fx.earn(k);
+    else if (!reduced) s.querySelector('.rs-gold').animate([{ transform: 'scale(2.4) rotate(-120deg)', opacity: 0 }, { transform: 'scale(1) rotate(0)', opacity: 1, offset: 0.42 }, { transform: 'scale(1.18)', offset: 0.6 }, { transform: 'scale(.94)', offset: 0.8 }, { transform: 'scale(1)', opacity: 1 }], { duration: 700, easing: 'cubic-bezier(.3,.7,.4,1)' });
+    s.classList.add('on');
+    setTimeout(() => {
+      if (!alive()) return;
+      Sound.star(k); const r = s.getBoundingClientRect(); FX.burst(r.left + r.width / 2, r.top + r.height / 2, [p.th.c3, '#FFE066', '#fff'], k === 3 ? 26 : 14);
+      if (k === 3) { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
+    }, reduced ? 0 : 300);
+  };
+  const want = k => { if (k <= queued) return; queued = k; chain = chain.then(() => { if (alive()) earn(k); return sleep(T0.fast ? 180 : 330); }); };
+  const set = (tot, met) => { $t.textContent = Math.round(tot).toLocaleString(); $f.style.width = clamp(met / max, 0, 1) * 100 + '%'; for (let k = queued + 1; k <= p.stars && met / max >= STAR_TH[k - 1]; k++) want(k); };
+  Sound.whoosh(); await sleep(reduced ? 0 : 450);
+  for (let i = 0; i < rows.length; i++) {
+    if (!alive()) return;
+    const [, v, m] = rows[i], row = el.querySelector(`[data-row="${i}"]`), cell = row.querySelector('b'), t0 = total, m0 = meter, dur = clamp(v * 1.4, 300, 900);
+    row.classList.add('live');
+    await new Promise(res => {
+      const start = performance.now(); let tick = 0;
+      const f = now => {
+        if (!alive()) return res();
+        const k = T0.fast || reduced ? 1 : clamp((now - start) / dur, 0, 1), e = 1 - (1 - k) * (1 - k);
+        cell.textContent = '+' + Math.round(v * e).toLocaleString(); set(t0 + v * e, m0 + m * e);
+        if (k < 1 && now - tick > 50) { tick = now; Sound.tick(clamp((m0 + m * e) / max, 0, 1)); $t.classList.remove('tick'); void $t.offsetWidth; $t.classList.add('tick'); }
+        if (k < 1) requestAnimationFrame(f); else res();
+      };
+      requestAnimationFrame(f);
+    });
+    total += v; meter += m; row.classList.replace('live', 'done');
+    if (!T0.fast && !reduced) await sleep(140);
+  }
+  if (!alive()) return;
+  for (let k = queued + 1; k <= p.stars; k++) want(k);
+  await chain; if (!alive()) return;
+  await sleep(T0.fast ? 0 : 250); if (!alive()) return;
+  T0.done = true;
+  el.querySelector('[data-verdict]').textContent = VERDICT[p.stars];
+  const end = el.querySelector('[data-end]'); end.innerHTML = resEnd(p); end.hidden = false; end.classList.add('in');
+  Sound.coin(); bumpScore(p);
+  if (p.stars === 3) setTimeout(() => { if (!alive()) return; Sound.fanfare(); FX.rain([p.th.c1, p.th.c2, p.th.c3, '#FFE066', '#fff']); if (p.fx && p.fx.shower) p.fx.shower(); }, 200);
+  if (Stage.crew && crewFinished()) {
+    Stage.panes.forEach(x => { const w = x.el.querySelector('.res-wait'); if (w) w.remove(); });
+    $('#crewDone').innerHTML = `<button class="crew-done" data-act="sExit">Crew complete! ${Stage.panes.reduce((a, x) => a + x.score, 0).toLocaleString()} pts together</button>`;
+    setTimeout(() => FX.rain(), 700);
+  }
+}
 async function countdown() {
   const cd = $('#cd'); cd.hidden = false;
   for (const n of ['3', '2', '1']) { if (!Stage.active) return; cd.innerHTML = `<span>${n}</span>`; Sound.count(); await sleep(reduced ? 450 : 800); }
@@ -3579,12 +4105,6 @@ async function submitPane(p, withPhoto) {
   p.stars = starsFor(p);
   setDoc('jobs', uid(), { ...jobFromPane(p), photo: ref, status: 'pending', date: dkey(), at: Date.now(), breakdown: p.br });
   p.uploading = false; p.phase = 'result'; renderPane(p);
-  Sound.fanfare(); FX.rain([p.th.c1, p.th.c2, p.th.c3, '#FFE066', '#fff']); if (p.fx && p.fx.celebrate) p.fx.celebrate(p.stars);
-  if (Stage.crew && Stage.panes.every(x => x.phase === 'result')) {
-    Stage.panes.forEach(renderPane);
-    $('#crewDone').innerHTML = `<button class="crew-done" data-act="sExit">Crew complete! ${Stage.panes.reduce((a, x) => a + x.score, 0).toLocaleString()} pts together</button>`;
-    setTimeout(() => FX.rain(), 700);
-  }
 }
 function pauseStage(on) {
   Stage.paused = on; const pv = $('#pv');
@@ -3639,8 +4159,31 @@ const ACT = {
   pin: a => { const g = UI.gate, len = g.mode === 'math' ? String(g.a * g.b).length : 4; if (g.pin.length >= len) return; g.pin += a.dataset.n; g.err = ''; Sound.ensure(); Sound.tap(); render(); if (g.pin.length === len) setTimeout(pinComplete, 150); },
   pinDel: () => { UI.gate.pin = UI.gate.pin.slice(0, -1); render(); },
   forgot: () => { const g = UI.gate; g.mode = 'math'; g.pin = ''; g.err = ''; newMath(g); render(); },
-  lock: () => { UI.unlocked = false; UI.screen = 'who'; UI.redoFor = null; scrollTo(0, 0); render(); },
+  lock: () => { UI.unlocked = false; UI.wiz = null; UI.screen = 'who'; UI.redoFor = null; scrollTo(0, 0); render(); },
   changePin: () => openGate('create'),
+  wizStart: () => startWizard(0),
+  wizEdit: a => startWizard(+a.dataset.i, { edit: true }),
+  wizSet: a => {
+    const w = UI.wiz; if (!w) return; const k = a.dataset.k, val = a.dataset.v, v = w.v;
+    if (val === 't') v[k] = !v[k];
+    else if (val === 'none') findQ(k).opts.forEach(([o]) => { v[o] = false; w.touched[o] = 1; });
+    else if (val === '1' || val === '0') v[k] = val === '1';
+    else { v[k] = val; if (k === 'type') for (const [pk, pv] of Object.entries(HOME_PRESET[val] || {})) if (!w.touched[pk]) v[pk] = pv; }
+    w.touched[k] = 1; w.just = k + ':' + val; w.justAt = performance.now(); Sound.ensure(); Sound.tap(); render();
+  },
+  wizCount: a => { const w = UI.wiz, k = a.dataset.k, q = findQ(k), d = +a.dataset.d; w.v[k] = clamp(w.v[k] + d, q.min, q.max); w.touched[k] = 1; w.just = d > 0 ? k + ':+' : null; w.justAt = performance.now(); Sound.ensure(); Sound.tap(); render(); },
+  wizNext: () => {
+    const w = UI.wiz; if (!w) return;
+    if (w.edit) { saveSettings({ home: { v: w.v, done: true, skipped: false, at: Date.now() } }); UI.wiz = null; UI.ptab = 'home'; toast('Saved. Chores now match your home.'); scrollTo(0, 0); return render(); }
+    w.i++; w.prev = {}; w.flipAt = {}; w.fit = null; scrollTo(0, 0);
+    if (w.i >= HOME_Q.length) { saveSettings({ home: { v: w.v, done: true, skipped: false, at: Date.now() } }); Sound.ensure(); Sound.fanfare(); setTimeout(() => FX.rain(['#5AC8FA', '#FFC94D', '#30C25A', '#FF6B9D', '#FFFFFF']), 150); }
+    else saveSettings({ home: { v: w.v } });
+    render();
+  },
+  wizBack: () => { const w = UI.wiz; w.i = Math.max(0, w.i - 1); w.prev = {}; w.flipAt = {}; w.fit = null; scrollTo(0, 0); render(); },
+  wizSkip: () => { const then = UI.wiz && UI.wiz.then; saveSettings({ home: { skipped: true } }); UI.wiz = null; scrollTo(0, 0); render(); afterWizard(then); },
+  wizCancel: () => { UI.wiz = null; scrollTo(0, 0); render(); },
+  wizClose: () => { const then = UI.wiz && UI.wiz.then; UI.wiz = null; if (!then) UI.ptab = 'home'; scrollTo(0, 0); render(); afterWizard(then); },
   ptab: a => { UI.ptab = a.dataset.tab; UI.redoFor = null; UI.confirmRemove = null; scrollTo(0, 0); render(); },
 
   brief: a => { UI.brief = { kidId: UI.kidId, key: a.dataset.key, quote: null }; Sound.ensure(); Sound.pop(); openSheet(briefSheet, { cls: 'brief' }); },
@@ -3732,6 +4275,7 @@ const ACT = {
   sSubmit: a => submitPane(Stage.panes[+a.dataset.pane], true),
   sSkipPhoto: a => submitPane(Stage.panes[+a.dataset.pane], false),
   sExit: () => exitStage(),
+  sSkip: a => { const p = Stage.panes[+a.dataset.pane]; if (p && p.tally && !p.tally.done) p.tally.fast = true; },
 
   approve: a => {
     const j = Store.jobs[a.dataset.id]; if (!j) return; const kid = Store.kids[j.kidId]; if (!kid) return;

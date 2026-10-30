@@ -22,7 +22,8 @@ It also works from any static host, or by opening the HTML file directly in a br
 ## What's inside
 
 - **Fair chore draft:** 112 NZ/AU chores. Each morning, shared household jobs are drafted between kids so no two get the same job, and a job a sibling just did sits out until it's due again. Bedroom jobs are always each kid's own.
-- **Missions:** full-screen chore events with music, a timer, scoring, split-screen crew mode and a photo of the finished job.
+- **Our home:** the first time a grown-up unlocks the dashboard, ten quick questions with follow-ups ask about the house: bedrooms, pets, dishwasher, lawn, bins and so on. Each question shows real chores above it that the answer turns on or off. Chores the home can't have (no cat means no litter tray) never get drafted. Answers can be changed any time under Our home.
+- **Missions:** full-screen chore events with music, a timer, scoring, split-screen crew mode and a photo of the finished job. At the end the points tally up row by row and three 3D stars slam in, Angry Birds style, as the score passes each mark.
 - **Money:** pay slips with family tax, a budget split into Spend, Vault, Invest and Give jars, a savings vault with daily interest, a Trust Score, and a pretend stock market.
 - **Island:** a cel-shaded 3D island per kid. It has wind-blown grass, a shop of animals, toys and furniture, and upkeep jobs (mowing, weeding, raking, pond cleaning, pruning, water blasting) that each need their own tool.
 - **Grown-ups:** a PIN-locked dashboard to review photos, approve pay, check habits and set the money rules.
