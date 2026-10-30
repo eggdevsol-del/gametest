@@ -231,3 +231,73 @@ check: mcq | Before buying a giant pack, think about… | How fast you'll use it
 home: Check the fridge for food that might go to waste and plan to use it.
 skill: value
 
+@lesson 4.1 | What is a rate? | 🚀 | home
+hook: $15 an hour, 60 km an hour, 3 goals a game. What do these have in common?
+learn: A rate compares two different things, like dollars and hours or kilometres and hours.
+learn: The word "per" or "an" usually means a rate: $15 per hour, 60 km an hour.
+learn: Rates help you compare things that aren't the same size.
+play: match | Match each rate to what it measures | $15 an hour=Pay; 60 km an hour=Speed; 9 litres a minute=Water flow; $3 per kilo=Price; 2 goals a game=Scoring
+check: mcq | What does "per" usually mean? | For each* | Plus | Minus
+check: tf | A rate compares two different things. | true
+home: Find three rates on packets, signs or receipts with a grown-up.
+skill: rates
+
+@lesson 4.2 | Paid by the hour | 💼 | bank
+hook: You earn $12 an hour babysitting for 3 hours. How much do you get?
+learn: Pay = rate × hours. $12 an hour for 3 hours is $36.
+learn: Half an hour is half the rate. $12 for half an hour is $6.
+learn: Check your pay matches your hours. Mistakes happen.
+try: $10 an hour for 4 hours is $40 :: gap | $15 an hour for 4 hours is $_ | 60
+play: slider | You earn $14 an hour for 2½ hours. How much do you get? | 0 | 60 | 35 | $ | 0 | 1
+check: gap | $8 an hour for 5 hours is $_ | 40
+check: mcq | $20 an hour for half an hour is... | $10* | $20 | $40
+home: Ask a grown-up to make up a job and hourly rate. Work out the pay.
+skill: rates
+
+@lesson 4.3 | Speed and distance | 🚗 | home
+hook: You're driving 120 km at 60 km an hour. How long will it take?
+learn: Distance = speed × time. At 60 km an hour for 2 hours, you go 120 km.
+learn: Time = distance ÷ speed. 90 km at 60 km an hour takes 1½ hours.
+learn: Real trips take longer because of stops, traffic and slower roads.
+try: 50 km an hour for 2 hours is 100 km :: gap | 80 km an hour for 3 hours is _ km | 240
+play: route | At 60 km an hour, match each trip to how long it takes | 30 km=30 minutes; 60 km=1 hour; 90 km=1½ hours; 180 km=3 hours
+check: gap | 100 km at 50 km an hour takes _ hours | 2
+check: mcq | Why do real trips take longer? | Stops, traffic and slower roads* | Cars get tired | Maps are wrong
+home: On your next car or bus trip, ask a grown-up the distance and time, and work out the average speed.
+skill: rates
+
+@lesson 4.4 | Comparing rates | ⚖️ | stall
+hook: Bike hire: $12 for 2 hours, or $20 for 4 hours. Which is cheaper per hour?
+learn: To compare, change each one to the same unit, like dollars per hour.
+learn: $12 for 2 hours is $6 an hour. $20 for 4 hours is $5 an hour.
+learn: The cheaper rate only helps if you need that much time.
+play: price | Which bike hire costs less per hour? | Bike shop A:12:2:hours; Bike shop B:20:4:hours; Bike shop C:9:1:hours
+check: gap | $30 for 5 hours is $_ an hour | 6
+check: mcq | Which is faster? | 100 km in 1 hour* | 100 km in 2 hours | 50 km in 2 hours
+home: Compare two prices at the shop as a rate, like dollars per kilo, with a grown-up.
+skill: rates
+
+@lesson 4.5 | Timetables | 🚌 | home
+hook: The bus leaves at 3:15 and the trip takes 25 minutes. When do you get there?
+learn: Add the minutes to the start time. 3:15 plus 25 minutes is 3:40.
+learn: If the minutes go past 60, go to the next hour. 3:50 plus 20 minutes is 4:10.
+learn: Leave extra time in case the bus is late.
+try: 9:00 plus 45 minutes is 9:45 :: gap | 10:30 plus 45 minutes is _ | 11:15 | 11:15; 10:75; 11:45
+play: gen | time | 4
+check: gap | The bus leaves at 4:40. The trip takes 30 minutes. You arrive at _ | 5:10 | 5:10; 4:70; 5:40
+check: mcq | Why leave extra time? | The bus might be late* | Buses always leave early | It's more fun
+home: Look at a bus or train timetable with a grown-up and work out an arrival time.
+skill: time
+
+@lesson 4.6 | Litres a minute | 🚿 | home
+hook: A 10-minute shower or a 4-minute shower. How much water is the difference?
+learn: Many showers use about 9 litres of water a minute.
+learn: A 10-minute shower uses about 90 litres. A 4-minute one uses about 36.
+learn: Heating that water costs money, so shorter showers save on power or gas bills too.
+try: 9 litres a minute for 5 minutes is 45 litres :: gap | 9 litres a minute for 6 minutes is _ litres | 54
+play: slider | A shower uses 9 litres a minute. How many litres does an 8-minute shower use? | 0 | 150 | 72 | L | 3 | 1
+check: gap | 9 litres a minute for 10 minutes is _ litres | 90
+check: mcq | What else do shorter showers save? | Money for heating the water* | Nothing | Time at school
+home: Time your shower with a grown-up's help and work out roughly how many litres you used.
+skill: rates
+

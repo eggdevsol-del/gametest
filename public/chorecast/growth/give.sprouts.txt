@@ -222,3 +222,70 @@ check: mcq | Where could money for your cause come from? | Your Give jar* | Some
 home: Write your helping plan and stick it on the fridge.
 skill: giving
 
+@lesson 4.1 | What the Give jar is for | 💝 | bank
+hook: You have four jars. Which one is for helping others?
+learn: The Give jar holds money you'll use to help someone else.
+learn: Spend is for now, Vault is for keeping safe, Invest is for growing, and Give is for helping.
+learn: Even a little in the Give jar can help when it's added together.
+play: sort | jars | Money for a lolly today=Spend; Money for the animal shelter=Give; Money to keep safe for later=Vault; Money to grow over many years=Invest; Money for a friend's fundraiser=Give; Money for a new ball this week=Spend | Which jar?
+check: mcq | Which jar is for helping others? | Give* | Spend | Vault
+check: tf | A little money in the Give jar can help. | true
+home: Show a grown-up your four jars in Chorecast and say what each one is for.
+skill: jars
+
+@lesson 4.2 | A little each time | 🪙 | bank
+hook: How much should go in the Give jar?
+learn: Some kids put a little in the Give jar every time they earn.
+learn: If you put 10c of every $1 in the Give jar, $5 of pocket money gives 50c.
+learn: You and your grown-up can choose an amount that feels right.
+try: 10c from each $1, and you earn $3, gives 30c :: gap | 10c from each $1, and you earn $6, gives _c | 60
+play: slider | You earn $8 and give 10c of every $1. How many cents go in the Give jar? | 0 | 200 | 80 | c | 0 | 10
+check: gap | You put $1 in the Give jar each week for 4 weeks. You have $_ | 4
+check: mcq | Who can help you choose how much to give? | A grown-up* | A stranger online | Nobody
+home: Choose with a grown-up how much of your earnings will go in the Give jar.
+skill: giving
+
+@lesson 4.3 | Who will you help? | 🤔 | home
+hook: Your Give jar has $5 in it. Who should get it?
+learn: Think about what you care about most: animals, people, nature or your school.
+learn: Talk with your family about groups that help with that.
+learn: You can help one group a lot, or a few groups a little.
+play: tap | Tap the groups that help others | 🐶:yes:An animal shelter; 🌳:yes:A tree-planting group; 🥫:yes:A food bank; 🎮:no; 🍭:no; 🏥:yes:A children's hospital
+check: mcq | What's a good first step in choosing who to help? | Think about what you care about* | Pick the first ad you see | Give it to whoever asks loudest
+check: tf | You can help one group or a few groups. | true
+home: Pick a cause with your family for your Give jar money.
+skill: giving
+
+@lesson 4.4 | More than money | 🤲 | home
+hook: Your Give jar is empty. Can you still help?
+learn: You can give your time, like helping at a beach clean-up with your family.
+learn: You can give things, like toys and clothes you've grown out of.
+learn: You can give kind words, like a thank-you card for a bus driver.
+play: match | Match each way to help with what you give | Picking up rubbish at the park=Time; Giving outgrown clothes to a charity shop=Things; Making a card for a lonely neighbour=Kind words; Putting coins in a donation box=Money
+check: mcq | Which is giving your time? | Helping at a beach clean-up* | Buying a toy for yourself | Watching TV
+check: tf | You need money to help others. | false | You can give time, things and kind words too.
+home: Find one thing you've grown out of that could go to a charity shop.
+skill: giving
+
+@lesson 4.5 | Giving it away | 📮 | home
+hook: Your Give jar is full! How does the money get to the people it helps?
+learn: A grown-up can help you give it, in a donation box, at an event or online.
+learn: Some charities send a thank-you, telling you how your money helped.
+learn: Count it first, so you know how much you're giving.
+play: order | Give your Give jar money | Count the money in your Give jar; Choose your cause with a grown-up; Give it in a box, at an event or online with a grown-up; Say what you gave in Chorecast; Feel good about helping
+check: mcq | Who should help you give money online? | A grown-up* | A stranger | Nobody
+check: tf | Counting the money first tells you how much you're giving. | true
+home: Count your Give jar with a grown-up and plan when you'll give it.
+skill: giving
+
+@lesson 4.6 | That good feeling | 😊 | home
+hook: How do you feel after you help someone?
+learn: Helping others often makes people feel happy too.
+learn: It's not about getting thanked. It's about making something better.
+learn: Telling your family what you did can help them want to give too.
+play: path | You gave $3 from your Give jar to the animal shelter. | Tell your family about it and how it might help => good: Sharing can get others giving too. | Brag to your friends that you're the best => bad: Giving isn't a contest. | Ask the shelter to give it back => bad: Once you give, it's theirs to help animals.
+check: mcq | Why do people give? | To help make something better* | To get a prize | To be the best
+check: tf | Helping others can make you feel happy too. | true
+home: Tell your family about a time you helped someone, and how it felt.
+skill: kindness
+

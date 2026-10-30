@@ -229,3 +229,70 @@ check: tf | ROUNDUP rounds a number up to the next whole number. | true
 home: Build a goal tracker for something you're saving for.
 skill: spreadsheets
 
+@lesson 4.1 | Tax brackets | 🪜 | townhall
+hook: If you earn more, do all your dollars get taxed at a higher rate?
+learn: Income tax uses brackets. Each slice of income is taxed at its own rate.
+learn: {nz:NZ rates: 10.5% up to $15,600, 17.5% to $53,500, 30% to $78,100, 33% to $180,000 and 39% above.~au:2026–27 rates: 0% up to $18,200, 15% to $45,000, 30% to $135,000, 37% to $190,000 and 45% above, plus a 2% Medicare levy.}
+learn: Only the dollars inside a higher bracket pay that higher rate.
+play: match | Match each income slice to its tax rate | {nz:The first $15,600~au:The first $18,200}={nz:10.5%~au:0%}; {nz:$15,601 to $53,500~au:$18,201 to $45,000}={nz:17.5%~au:15%}; {nz:$53,501 to $78,100~au:$45,001 to $135,000}=30%; {nz:Over $180,000~au:Over $190,000}={nz:39%~au:45%}
+check: mcq | In a bracket system, which dollars pay the top rate? | Only the dollars in the top bracket* | Every dollar you earn | None of them
+check: tf | Earning one dollar into a higher bracket makes all your income taxed at that rate. | false | Only the dollars in that bracket pay the higher rate.
+home: Look up the tax rates on {nz:ird.govt.nz~au:ato.gov.au} with a grown-up.
+skill: tax
+
+@lesson 4.2 | Working out income tax | 🧮 | townhall
+hook: You earn $50,000 a year. How much income tax is that?
+learn: Work slice by slice. Tax each slice at its rate, then add them up.
+learn: {nz:$15,600 × 10.5% = $1,638, then $34,400 × 17.5% = $6,020. Total: $7,658.~au:$0 on the first $18,200, then $26,800 × 15% = $4,020, then $5,000 × 30% = $1,500. Total: $5,520, plus the Medicare levy.}
+learn: Tax credits and offsets can change the final amount, so use {nz:IRD's~au:the ATO's} calculator for your real number.
+play: build | Work out tax on $50,000 | Split the income into bracket slices; Multiply each slice by its rate; Add the slices together; Check against the official calculator
+check: mcq | Roughly how much income tax on $50,000, before credits and levies? | {nz:$7,658~au:$5,520}* | {nz:$15,000~au:$15,000} | {nz:$50~au:$50}
+check: mcq | What's the first step? | Split the income into bracket slices* | Multiply everything by the top rate | Guess
+home: Use the official tax calculator with a grown-up to check the tax on a made-up income.
+skill: tax
+
+@lesson 4.3 | Marginal or average? | 📐 | townhall
+hook: A pay rise pushes you into the 30% bracket. Should you turn it down?
+learn: Your marginal rate is the rate on your next dollar. Your average rate is total tax ÷ total income.
+learn: {nz:On $50,000, NZ tax is $7,658, an average of about 15%, even though the marginal rate is 17.5%.~au:On $50,000, tax is $5,520, an average of about 11%, even though the marginal rate is 30%.}
+learn: Income tax brackets alone can't make a pay rise leave you worse off. You keep most of every extra dollar.
+play: path | A $2,000 pay rise moves part of your income into a higher bracket. | Take it, because only the extra dollars pay the higher rate => good: You keep most of the extra $2,000. | Turn it down to avoid the higher bracket => bad: That's a myth. You'd lose money by saying no. | Ask to be paid less => bad: Lower pay means less money, not less tax trouble.
+check: mcq | What is your average tax rate? | Total tax ÷ total income* | Your top bracket rate | Always 50%
+check: tf | Moving into a higher bracket means you keep less money overall. | false | Only the extra dollars pay more. You still take home more.
+home: Work out an average tax rate with a grown-up using the official calculator.
+skill: tax
+
+@lesson 4.4 | GST maths | 🧾 | stall
+hook: A receipt says $57.50 including GST. How much of that is GST?
+learn: To add GST, multiply by {nz:1.15~au:1.1}. $50 becomes {nz:$57.50~au:$55}.
+learn: To find the GST inside a price, {nz:multiply by 3 and divide by 23~au:divide by 11}.
+learn: {nz:$57.50 × 3 ÷ 23 = $7.50 of GST.~au:$55 ÷ 11 = $5 of GST.}
+play: gen | gst | 4
+check: mcq | A price is $100 before GST. What is it after GST? | {nz:$115~au:$110}* | $100 | $150
+check: mcq | How do you find the GST inside a GST-inclusive price? | {nz:Multiply by 3, then divide by 23~au:Divide by 11}* | Divide by 2 | Multiply by 15
+home: Pick a receipt with a grown-up and work out how much GST was paid.
+skill: GST
+
+@lesson 4.5 | Deductions | ✂️ | townhall
+hook: Self-employed people "claim" expenses. What does that actually save?
+learn: A deduction reduces your taxable income, not your tax bill dollar for dollar.
+learn: A $300 deduction at a 30% marginal rate saves $90 of tax.
+learn: {nz:Most NZ employees can't claim work expenses. Self-employed people can claim business costs.~au:Employees can claim work-related costs they paid, if they have records. Self-employed people claim business costs.}
+try: A $200 deduction at 30% saves $60 :: gap | A $500 deduction at 30% saves $_ | 150
+play: sort | Business cost, Private cost | Materials for a client job=Business cost; Your own lunch=Private cost; Accounting software=Business cost; Clothes you could wear anywhere=Private cost; Fuel for client visits=Business cost; Your gym membership=Private cost | Can a self-employed person claim it?
+check: gap | A $100 deduction at 17.5% saves $_ | 17.50
+check: mcq | What does a deduction reduce? | Your taxable income* | Your tax bill dollar for dollar | Your GST rate
+home: Ask a grown-up who's self-employed, or look online, for one cost that can be claimed.
+skill: tax
+
+@lesson 4.6 | End of the tax year | 📅 | townhall
+hook: The tax year just ended. Do you owe money or get some back?
+learn: {nz:The NZ tax year ends on 31 March. For most wage earners, IRD works out the result and pays refunds automatically.~au:The Australian tax year ends on 30 June. If you lodge your own return, it's due by 31 October.}
+learn: If too much tax was taken, you get a refund. If too little, you'll owe the difference.
+learn: Keep payslips, receipts and records so the numbers add up.
+play: order | Get through the end of the tax year | Collect payslips and income records; Gather receipts for any costs you can claim; Log in to {nz:myIR~au:myGov and the ATO}; Check the numbers match your records; Pay any tax owed or get your refund
+check: mcq | When does the tax year end? | {nz:31 March~au:30 June}* | 31 December | Your birthday
+check: tf | Keeping records helps make sure your tax is right. | true
+home: Ask a grown-up when they last got a tax refund or bill, and why.
+skill: tax
+

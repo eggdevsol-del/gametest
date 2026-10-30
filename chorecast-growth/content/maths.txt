@@ -226,6 +226,74 @@ check: tf | You can swap a coin for smaller coins to share it fairly. | true
 home: Share pretend money fairly between family members.
 skill: fractions
 
+@lesson 4.1 | Long or short? | 📏 | home
+hook: How long is your bed? How long is your finger? Do we use the same measure?
+learn: We measure short things in centimetres, or cm. Your finger is about 5 cm long.
+learn: We measure longer things in metres, or m. A bed is about 2 m long.
+learn: 100 cm make 1 metre.
+play: sort | Centimetres, Metres | A pencil=Centimetres; A swimming pool=Metres; A crayon=Centimetres; A soccer field=Metres; A spoon=Centimetres; A bus=Metres | Would you use cm or m?
+check: mcq | How many cm make 1 metre? | 100* | 10 | 1,000
+check: tf | You'd measure a bus in centimetres. | false | A bus is long, so we use metres.
+home: Use a ruler or tape measure with a grown-up to find something about 1 metre long.
+skill: measuring
+
+@lesson 4.2 | Heavy or light? | 🏋️ | kitchen
+hook: Is a feather heavier than a bag of potatoes?
+learn: Light things are weighed in grams, or g. A biscuit is about 10 g.
+learn: Heavy things are weighed in kilograms, or kg. A bag of potatoes might be 2 kg.
+learn: 1,000 grams make 1 kilogram.
+play: sort | Grams, Kilograms | An apple=Grams; A bag of flour=Kilograms; A strawberry=Grams; A dog=Kilograms; A biscuit=Grams; A watermelon=Kilograms | Grams or kilograms?
+check: mcq | How many grams make 1 kilogram? | 1,000* | 100 | 10
+check: tf | A strawberry weighs about 1 kilogram. | false | It's only a few grams.
+home: Look at packets in your kitchen with a grown-up. Which say g and which say kg?
+skill: measuring
+
+@lesson 4.3 | Cups and spoons | 🥄 | kitchen
+hook: A recipe says one cup of flour. Can you use any cup?
+learn: Baking uses special measuring cups and spoons, so it turns out the same every time.
+learn: A teaspoon is small, a tablespoon is bigger, and a cup is much bigger.
+learn: Fill it, then level it off with a knife, so it's not too much.
+play: order | Put these from smallest to biggest | Teaspoon; Tablespoon; Half a cup; One cup; A 1-litre jug
+check: mcq | Which is the biggest? | One cup* | A teaspoon | A tablespoon
+check: tf | You should level off flour in a measuring cup. | true
+home: Help measure something for a recipe with a grown-up, using measuring cups.
+skill: measuring
+
+@lesson 4.4 | Using a ruler | 📐 | home
+hook: Your ruler starts at 0. Why not at 1?
+learn: Line up the end of the thing with the 0 on the ruler.
+learn: Read the number where the other end stops.
+learn: Keep the ruler straight and flat, so your measure is right.
+try: From 0 to 8 is 8 cm :: gap | A crayon goes from 0 to 9 on the ruler. It's _ cm | 9
+play: tap | Tap the things that are easy to measure with a ruler | ✏️:yes:A pencil; 📕:yes:A book; 🔑:yes:A key; 🏠:no; 🌳:no; 🥄:yes:A spoon
+check: mcq | Where should you start measuring on a ruler? | At 0* | At 1 | Anywhere
+check: gap | A leaf goes from 0 to 6 on the ruler. It's _ cm | 6
+home: Measure three things in your room with a ruler, and tell a grown-up how long they are.
+skill: measuring
+
+@lesson 4.5 | Litres | 🥛 | kitchen
+hook: How much milk fits in a big bottle?
+learn: We measure drinks and water in litres, or L.
+learn: Many milk bottles hold 1 litre or 2 litres.
+learn: Small amounts are measured in millilitres, or mL. 1,000 mL make 1 litre.
+try: Two 1-litre bottles make 2 litres :: gap | Three 1-litre bottles make _ litres | 3
+play: slider | How many 1-litre bottles fill a 4-litre bucket? | 0 | 10 | 4 | bottles | 0 | 1
+check: mcq | How many mL make 1 litre? | 1,000* | 10 | 100
+check: tf | Milk is measured in kilograms. | false | Drinks are measured in litres and mL.
+home: Find something in your fridge measured in litres and something in mL.
+skill: measuring
+
+@lesson 4.6 | Hands and feet | 👣 | home
+hook: Measure the room with your footsteps. Then a grown-up does it too. Why are the answers different?
+learn: Hands and feet are different sizes, so body measures change from person to person.
+learn: That's why we use rulers and tape measures. A metre is the same for everyone.
+learn: Shops, builders and cooks all use the same measures, so things fit and work.
+play: mystery | You walked 10 steps across the room.; Your grown-up walked only 6 steps.; The room didn't change size. | Grown-ups have bigger steps* | The room shrank | You walked the wrong way
+check: mcq | Why do we use metres instead of footsteps? | A metre is the same for everyone* | Feet are too smelly | Metres are prettier
+check: tf | Everyone's footsteps are the same size. | false
+home: Measure your room in footsteps, then with a tape measure, with a grown-up.
+skill: measuring
+
 @band builders
 @unit 1 | Percentages | Discounts, tax and tips
 @unit 2 | Recipes and scaling | Cooking for more or fewer people
@@ -459,6 +527,76 @@ check: mcq | Before buying a giant pack, think about… | How fast you'll use it
 home: Check the fridge for food that might go to waste and plan to use it.
 skill: value
 
+@lesson 4.1 | What is a rate? | 🚀 | home
+hook: $15 an hour, 60 km an hour, 3 goals a game. What do these have in common?
+learn: A rate compares two different things, like dollars and hours or kilometres and hours.
+learn: The word "per" or "an" usually means a rate: $15 per hour, 60 km an hour.
+learn: Rates help you compare things that aren't the same size.
+play: match | Match each rate to what it measures | $15 an hour=Pay; 60 km an hour=Speed; 9 litres a minute=Water flow; $3 per kilo=Price; 2 goals a game=Scoring
+check: mcq | What does "per" usually mean? | For each* | Plus | Minus
+check: tf | A rate compares two different things. | true
+home: Find three rates on packets, signs or receipts with a grown-up.
+skill: rates
+
+@lesson 4.2 | Paid by the hour | 💼 | bank
+hook: You earn $12 an hour babysitting for 3 hours. How much do you get?
+learn: Pay = rate × hours. $12 an hour for 3 hours is $36.
+learn: Half an hour is half the rate. $12 for half an hour is $6.
+learn: Check your pay matches your hours. Mistakes happen.
+try: $10 an hour for 4 hours is $40 :: gap | $15 an hour for 4 hours is $_ | 60
+play: slider | You earn $14 an hour for 2½ hours. How much do you get? | 0 | 60 | 35 | $ | 0 | 1
+check: gap | $8 an hour for 5 hours is $_ | 40
+check: mcq | $20 an hour for half an hour is... | $10* | $20 | $40
+home: Ask a grown-up to make up a job and hourly rate. Work out the pay.
+skill: rates
+
+@lesson 4.3 | Speed and distance | 🚗 | home
+hook: You're driving 120 km at 60 km an hour. How long will it take?
+learn: Distance = speed × time. At 60 km an hour for 2 hours, you go 120 km.
+learn: Time = distance ÷ speed. 90 km at 60 km an hour takes 1½ hours.
+learn: Real trips take longer because of stops, traffic and slower roads.
+try: 50 km an hour for 2 hours is 100 km :: gap | 80 km an hour for 3 hours is _ km | 240
+play: route | At 60 km an hour, match each trip to how long it takes | 30 km=30 minutes; 60 km=1 hour; 90 km=1½ hours; 180 km=3 hours
+check: gap | 100 km at 50 km an hour takes _ hours | 2
+check: mcq | Why do real trips take longer? | Stops, traffic and slower roads* | Cars get tired | Maps are wrong
+home: On your next car or bus trip, ask a grown-up the distance and time, and work out the average speed.
+skill: rates
+
+@lesson 4.4 | Comparing rates | ⚖️ | stall
+hook: Bike hire: $12 for 2 hours, or $20 for 4 hours. Which is cheaper per hour?
+learn: To compare, change each one to the same unit, like dollars per hour.
+learn: $12 for 2 hours is $6 an hour. $20 for 4 hours is $5 an hour.
+learn: The cheaper rate only helps if you need that much time.
+play: price | Which bike hire costs less per hour? | Bike shop A:12:2:hours; Bike shop B:20:4:hours; Bike shop C:9:1:hours
+check: gap | $30 for 5 hours is $_ an hour | 6
+check: mcq | Which is faster? | 100 km in 1 hour* | 100 km in 2 hours | 50 km in 2 hours
+home: Compare two prices at the shop as a rate, like dollars per kilo, with a grown-up.
+skill: rates
+
+@lesson 4.5 | Timetables | 🚌 | home
+hook: The bus leaves at 3:15 and the trip takes 25 minutes. When do you get there?
+learn: Add the minutes to the start time. 3:15 plus 25 minutes is 3:40.
+learn: If the minutes go past 60, go to the next hour. 3:50 plus 20 minutes is 4:10.
+learn: Leave extra time in case the bus is late.
+try: 9:00 plus 45 minutes is 9:45 :: gap | 10:30 plus 45 minutes is _ | 11:15 | 11:15; 10:75; 11:45
+play: gen | time | 4
+check: gap | The bus leaves at 4:40. The trip takes 30 minutes. You arrive at _ | 5:10 | 5:10; 4:70; 5:40
+check: mcq | Why leave extra time? | The bus might be late* | Buses always leave early | It's more fun
+home: Look at a bus or train timetable with a grown-up and work out an arrival time.
+skill: time
+
+@lesson 4.6 | Litres a minute | 🚿 | home
+hook: A 10-minute shower or a 4-minute shower. How much water is the difference?
+learn: Many showers use about 9 litres of water a minute.
+learn: A 10-minute shower uses about 90 litres. A 4-minute one uses about 36.
+learn: Heating that water costs money, so shorter showers save on power or gas bills too.
+try: 9 litres a minute for 5 minutes is 45 litres :: gap | 9 litres a minute for 6 minutes is _ litres | 54
+play: slider | A shower uses 9 litres a minute. How many litres does an 8-minute shower use? | 0 | 150 | 72 | L | 3 | 1
+check: gap | 9 litres a minute for 10 minutes is _ litres | 90
+check: mcq | What else do shorter showers save? | Money for heating the water* | Nothing | Time at school
+home: Time your shower with a grown-up's help and work out roughly how many litres you used.
+skill: rates
+
 @band makers
 @unit 1 | Ratios and rates | Speed, pay rates and mixing
 @unit 2 | Probability | Chance, odds and why the house wins
@@ -688,6 +826,75 @@ check: tf | A chart starting right after a crash can make growth look bigger. | 
 check: mcq | A good question to ask about a chart is… | What would the full picture show?* | Is it colourful? | Who drew it?
 home: Find a chart in an ad and decide if it might be cherry-picked.
 skill: statistics
+
+@lesson 4.1 | Finding percent change | 📊 | stall
+hook: A $50 hoodie now costs $60. By what percent did it go up?
+learn: Percent change = change ÷ old price × 100.
+learn: $60 − $50 = $10. $10 ÷ $50 = 0.2, so it went up 20%.
+learn: Always divide by the old value, not the new one.
+try: $40 to $50 is $10 more, and $10 ÷ $40 = 25% :: gap | $80 to $100 is a _% rise | 25
+play: slider | A ticket went from $25 to $30. What's the percent increase? | 0 | 50 | 20 | % | 1 | 1
+check: gap | $200 to $150 is a _% fall | 25
+check: mcq | Which value do you divide by? | The old value* | The new value | Always 100
+home: Find a price that has changed and work out the percent change with a grown-up.
+skill: percent change
+
+@lesson 4.2 | Multipliers | ✖️ | stall
+hook: Is there a one-step way to add 15%?
+learn: To increase by a percent, multiply by 1 plus the percent. Up 15% means × 1.15.
+learn: To decrease, multiply by 1 minus the percent. 20% off means × 0.8.
+learn: Multipliers make calculator work quick, and they're how spreadsheets do it.
+try: $40 × 1.1 = $44 :: gap | $60 × 1.1 = $_ | 66
+play: match | Match each change to its multiplier | Up 10%=× 1.1; Up 15%=× 1.15; Down 20%=× 0.8; Down 5%=× 0.95; Up 100%=× 2
+check: gap | 25% off $80 is $80 × 0.75 = $_ | 60
+check: mcq | What multiplier means 30% off? | × 0.7* | × 1.3 | × 0.3
+home: Use a calculator with a grown-up to add GST to a price using a multiplier.
+skill: percent change
+
+@lesson 4.3 | Stacked discounts | 🏷️ | stall
+hook: 20% off, plus an extra 10% off at the counter. Is that 30% off?
+learn: Stacked discounts multiply, they don't add. 20% then 10% is × 0.8 × 0.9 = × 0.72.
+learn: That's 28% off, not 30%.
+learn: On a $100 jacket, you pay $72, not $70.
+play: order | Work out 20% off then an extra 10% off $100 | Start with $100; Take 20% off to get $80; Take 10% off the $80, which is $8; Pay $72; That's 28% off in total
+check: gap | 50% off, then another 50% off, $100 becomes $_ | 25
+check: mcq | 20% off then 10% off is how much off in total? | 28%* | 30% | 10%
+home: Spot a "take an extra % off" deal with a grown-up and work out the real total discount.
+skill: percent change
+
+@lesson 4.4 | Up then down | 🎢 | shares
+hook: A share goes up 50%, then down 50%. Are you back where you started?
+learn: $100 up 50% is $150. Then 50% of $150 is $75, so down 50% gives $75.
+learn: Up then down by the same percent always leaves you lower.
+learn: That's why big falls hurt: after a 50% fall you need a 100% gain to recover.
+try: $100 up 10% is $110, then down 10% is $99 :: gap | $100 up 20% is $120, then down 20% is $_ | 96
+play: slider | $1,000 falls 40%. What percent rise gets it back to $1,000? | 0 | 100 | 67 | % | 5 | 1
+check: gap | $200 down 50%, then up 50%, becomes $_ | 150
+check: mcq | After a 50% fall, what gain gets you back? | 100%* | 50% | 25%
+home: Try "up 50%, then down 50%" on a calculator with a grown-up, starting from any number.
+skill: percent change
+
+@lesson 4.5 | Inflation | 🛒 | stall
+hook: Why does the same trolley of groceries cost more every year?
+learn: Inflation is how fast prices rise overall. At 3% a year, a $100 trolley costs $103 next year.
+learn: It compounds. At 3% a year for 10 years, $100 of shopping costs about $134.
+learn: Inflation peaked at about {nz:7.3% in 2022~au:7.8% in late 2022}. {nz:The Reserve Bank aims for 1% to 3%.~au:The Reserve Bank aims for 2% to 3%.}
+play: compound | Watch a $100 trolley's price rise at 3% a year for 10 years | 100 | 3 | 10
+check: gap | $200 of shopping with 5% inflation costs $_ a year later | 210
+check: mcq | What does inflation do to $100 in a jar? | It buys less over time* | It grows by itself | Nothing
+home: Ask a grown-up what something cost when they were your age, and work out the percent change.
+skill: inflation
+
+@lesson 4.6 | Percent or percentage points? | 🔢 | bank
+hook: An interest rate rose from 4% to 5%. Did it rise 1% or 25%?
+learn: The rate rose by 1 percentage point: 5 − 4 = 1.
+learn: But it rose by 25% of the old rate: 1 ÷ 4 = 0.25.
+learn: News stories sometimes mix these up. Check which one they mean.
+play: mystery | The old rate was 2%.; The new rate is 3%.; The headline says it "rose by half". | Both are right: up 1 percentage point, or 50%* | The rate doubled | The rate rose 3%
+check: mcq | A rate goes from 6% to 8%. By how many percentage points did it rise? | 2* | 33 | 8
+check: gap | A rate goes from 5% to 10%. That's a _% rise in the rate | 100
+home: Find a news story with a percentage change and check if it means percent or percentage points.
+skill: percent change
 
 @band launchers
 @unit 1 | Loan maths | Interest, repayments and total cost
@@ -919,3 +1126,70 @@ check: mcq | What does =B2/B1 show as a percentage? | How much of the goal you'v
 check: tf | ROUNDUP rounds a number up to the next whole number. | true
 home: Build a goal tracker for something you're saving for.
 skill: spreadsheets
+
+@lesson 4.1 | Tax brackets | 🪜 | townhall
+hook: If you earn more, do all your dollars get taxed at a higher rate?
+learn: Income tax uses brackets. Each slice of income is taxed at its own rate.
+learn: {nz:NZ rates: 10.5% up to $15,600, 17.5% to $53,500, 30% to $78,100, 33% to $180,000 and 39% above.~au:2026–27 rates: 0% up to $18,200, 15% to $45,000, 30% to $135,000, 37% to $190,000 and 45% above, plus a 2% Medicare levy.}
+learn: Only the dollars inside a higher bracket pay that higher rate.
+play: match | Match each income slice to its tax rate | {nz:The first $15,600~au:The first $18,200}={nz:10.5%~au:0%}; {nz:$15,601 to $53,500~au:$18,201 to $45,000}={nz:17.5%~au:15%}; {nz:$53,501 to $78,100~au:$45,001 to $135,000}=30%; {nz:Over $180,000~au:Over $190,000}={nz:39%~au:45%}
+check: mcq | In a bracket system, which dollars pay the top rate? | Only the dollars in the top bracket* | Every dollar you earn | None of them
+check: tf | Earning one dollar into a higher bracket makes all your income taxed at that rate. | false | Only the dollars in that bracket pay the higher rate.
+home: Look up the tax rates on {nz:ird.govt.nz~au:ato.gov.au} with a grown-up.
+skill: tax
+
+@lesson 4.2 | Working out income tax | 🧮 | townhall
+hook: You earn $50,000 a year. How much income tax is that?
+learn: Work slice by slice. Tax each slice at its rate, then add them up.
+learn: {nz:$15,600 × 10.5% = $1,638, then $34,400 × 17.5% = $6,020. Total: $7,658.~au:$0 on the first $18,200, then $26,800 × 15% = $4,020, then $5,000 × 30% = $1,500. Total: $5,520, plus the Medicare levy.}
+learn: Tax credits and offsets can change the final amount, so use {nz:IRD's~au:the ATO's} calculator for your real number.
+play: build | Work out tax on $50,000 | Split the income into bracket slices; Multiply each slice by its rate; Add the slices together; Check against the official calculator
+check: mcq | Roughly how much income tax on $50,000, before credits and levies? | {nz:$7,658~au:$5,520}* | {nz:$15,000~au:$15,000} | {nz:$50~au:$50}
+check: mcq | What's the first step? | Split the income into bracket slices* | Multiply everything by the top rate | Guess
+home: Use the official tax calculator with a grown-up to check the tax on a made-up income.
+skill: tax
+
+@lesson 4.3 | Marginal or average? | 📐 | townhall
+hook: A pay rise pushes you into the 30% bracket. Should you turn it down?
+learn: Your marginal rate is the rate on your next dollar. Your average rate is total tax ÷ total income.
+learn: {nz:On $50,000, NZ tax is $7,658, an average of about 15%, even though the marginal rate is 17.5%.~au:On $50,000, tax is $5,520, an average of about 11%, even though the marginal rate is 30%.}
+learn: Income tax brackets alone can't make a pay rise leave you worse off. You keep most of every extra dollar.
+play: path | A $2,000 pay rise moves part of your income into a higher bracket. | Take it, because only the extra dollars pay the higher rate => good: You keep most of the extra $2,000. | Turn it down to avoid the higher bracket => bad: That's a myth. You'd lose money by saying no. | Ask to be paid less => bad: Lower pay means less money, not less tax trouble.
+check: mcq | What is your average tax rate? | Total tax ÷ total income* | Your top bracket rate | Always 50%
+check: tf | Moving into a higher bracket means you keep less money overall. | false | Only the extra dollars pay more. You still take home more.
+home: Work out an average tax rate with a grown-up using the official calculator.
+skill: tax
+
+@lesson 4.4 | GST maths | 🧾 | stall
+hook: A receipt says $57.50 including GST. How much of that is GST?
+learn: To add GST, multiply by {nz:1.15~au:1.1}. $50 becomes {nz:$57.50~au:$55}.
+learn: To find the GST inside a price, {nz:multiply by 3 and divide by 23~au:divide by 11}.
+learn: {nz:$57.50 × 3 ÷ 23 = $7.50 of GST.~au:$55 ÷ 11 = $5 of GST.}
+play: gen | gst | 4
+check: mcq | A price is $100 before GST. What is it after GST? | {nz:$115~au:$110}* | $100 | $150
+check: mcq | How do you find the GST inside a GST-inclusive price? | {nz:Multiply by 3, then divide by 23~au:Divide by 11}* | Divide by 2 | Multiply by 15
+home: Pick a receipt with a grown-up and work out how much GST was paid.
+skill: GST
+
+@lesson 4.5 | Deductions | ✂️ | townhall
+hook: Self-employed people "claim" expenses. What does that actually save?
+learn: A deduction reduces your taxable income, not your tax bill dollar for dollar.
+learn: A $300 deduction at a 30% marginal rate saves $90 of tax.
+learn: {nz:Most NZ employees can't claim work expenses. Self-employed people can claim business costs.~au:Employees can claim work-related costs they paid, if they have records. Self-employed people claim business costs.}
+try: A $200 deduction at 30% saves $60 :: gap | A $500 deduction at 30% saves $_ | 150
+play: sort | Business cost, Private cost | Materials for a client job=Business cost; Your own lunch=Private cost; Accounting software=Business cost; Clothes you could wear anywhere=Private cost; Fuel for client visits=Business cost; Your gym membership=Private cost | Can a self-employed person claim it?
+check: gap | A $100 deduction at 17.5% saves $_ | 17.50
+check: mcq | What does a deduction reduce? | Your taxable income* | Your tax bill dollar for dollar | Your GST rate
+home: Ask a grown-up who's self-employed, or look online, for one cost that can be claimed.
+skill: tax
+
+@lesson 4.6 | End of the tax year | 📅 | townhall
+hook: The tax year just ended. Do you owe money or get some back?
+learn: {nz:The NZ tax year ends on 31 March. For most wage earners, IRD works out the result and pays refunds automatically.~au:The Australian tax year ends on 30 June. If you lodge your own return, it's due by 31 October.}
+learn: If too much tax was taken, you get a refund. If too little, you'll owe the difference.
+learn: Keep payslips, receipts and records so the numbers add up.
+play: order | Get through the end of the tax year | Collect payslips and income records; Gather receipts for any costs you can claim; Log in to {nz:myIR~au:myGov and the ATO}; Check the numbers match your records; Pay any tax owed or get your refund
+check: mcq | When does the tax year end? | {nz:31 March~au:30 June}* | 31 December | Your birthday
+check: tf | Keeping records helps make sure your tax is right. | true
+home: Ask a grown-up when they last got a tax refund or bill, and why.
+skill: tax

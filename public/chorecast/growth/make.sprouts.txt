@@ -223,3 +223,69 @@ check: mcq | A stamp card says "Buy 5, get 1 free". How many do you get after bu
 home: Design a stamp card for a pretend stall.
 skill: service
 
+@lesson 4.1 | What a sign says | 🪧 | stall
+hook: People walk past your stall. How do they know what you're selling?
+learn: A good sign tells people three things: what you sell, the price and when you're open.
+learn: "Lemonade $1 a cup" tells people everything fast.
+learn: Leave off things people don't need to know.
+play: sort | Put it on the sign, Leave it off | What you sell=Put it on the sign; The price=Put it on the sign; When you're open=Put it on the sign; Your full name and address=Leave it off; Your favourite colour=Leave it off; What you had for breakfast=Leave it off | What goes on a sign?
+check: mcq | Which sign is best? | "Lemonade $1 a cup"* | "Hello!" | "My stall"
+check: tf | Your home address should go on your stall sign. | false | Keep your address private. Your stall is right there.
+home: Look at signs on shops near you with a grown-up. Do they say what, how much and when?
+skill: marketing
+
+@lesson 4.2 | Big and clear | 🔠 | stall
+hook: Can people read your sign from across the street?
+learn: Use big letters and only a few words.
+learn: Dark letters on a light background are easiest to read.
+learn: Check it by standing far away. Can you still read it?
+play: tap | Tap the things that make a sign easy to read | 🔠:yes:Big letters; ⚫:yes:Dark letters on a light background; ✂️:yes:Only a few words; 🌀:no; 🔍:no; 📏:yes:Check it from far away
+check: mcq | Which sign is easiest to read from far away? | Big dark letters on white* | Tiny pale letters | Lots of tiny words
+check: tf | A sign with fewer words is easier to read. | true
+home: Make a test sign and see if a grown-up can read it from across the room.
+skill: marketing
+
+@lesson 4.3 | Pictures help | 🖍️ | stall
+hook: Some people can't read your words yet. How else can a sign talk?
+learn: A picture tells people what you sell before they even read.
+learn: A lemon for lemonade or a cookie for cookies works fast.
+learn: Keep pictures simple and big.
+play: match | Match what you sell to a good picture for your sign | Lemonade=🍋; Cookies=🍪; Plants=🪴; Bookmarks=🔖; Ice blocks=🧊
+check: mcq | What picture would help a cupcake sign? | A cupcake* | A car | A rain cloud
+check: tf | Pictures can help little kids understand your sign. | true
+home: Draw a picture for a sign about something you could sell.
+skill: marketing
+
+@lesson 4.4 | Where to put your sign | 📍 | stall
+hook: Your sign is ready. Where should it go?
+learn: Put signs where lots of people walk past, like the footpath near your gate.
+learn: Always ask a grown-up first, and ask before putting a sign on someone else's fence or pole.
+learn: Take your signs down when you finish, so you don't leave rubbish.
+play: path | You want to put up a sign for your plant stall. | Put it by your own front gate with a grown-up's OK => good: Easy to see, and you're allowed. | Tape it to a neighbour's car => bad: That's their car, and it's not OK without asking. | Put it in the middle of the road => bad: That's dangerous for drivers and for you.
+check: mcq | What should you do before putting a sign on someone's fence? | Ask them first* | Just do it | Hide it
+check: tf | You should take your signs down when the stall is finished. | true
+home: Walk past your house with a grown-up and choose the best spot for a sign.
+skill: marketing
+
+@lesson 4.5 | Honest signs | 😇 | stall
+hook: Your sign says "World's best cookies!" Is that true?
+learn: Signs should tell the truth about what you sell.
+learn: "Homemade choc chip cookies" is true. "Cures colds" is not.
+learn: If people trust your sign, they'll trust you and come back.
+play: sort | Honest, Not honest | Homemade cookies=Honest; Cookies that make you fly=Not honest; Fresh lemonade, made today=Honest; Free cookies, but you charge for them=Not honest; Plants grown by me=Honest; Lollies that are good for your teeth=Not honest | Is the sign honest?
+check: mcq | Which sign is honest? | "Homemade banana bread"* | "Banana bread that makes you rich" | "Free!" when it costs $2
+check: tf | Honest signs help people trust you. | true
+home: Read a food packet with a grown-up. Is everything on it true?
+skill: honesty
+
+@lesson 4.6 | Make a poster | 🎨 | stall
+hook: Let's put it all together and make a great poster!
+learn: A poster has a big title, a picture, the price and the time.
+learn: Plan it in pencil first, then colour it in.
+learn: Show a grown-up and fix anything that's hard to read.
+play: order | Make a poster for your stall | Plan what to say in pencil; Write the title in big letters; Draw a big, simple picture; Add the price and time; Colour it in; Check it from far away
+check: mcq | What should you do first? | Plan it in pencil* | Colour it in | Hang it up
+check: tf | You should check your poster from far away. | true
+home: Make a poster for a pretend or real stall, and stick it on the fridge.
+skill: marketing
+

@@ -223,6 +223,73 @@ check: mcq | Where could money for your cause come from? | Your Give jar* | Some
 home: Write your helping plan and stick it on the fridge.
 skill: giving
 
+@lesson 4.1 | What the Give jar is for | 💝 | bank
+hook: You have four jars. Which one is for helping others?
+learn: The Give jar holds money you'll use to help someone else.
+learn: Spend is for now, Vault is for keeping safe, Invest is for growing, and Give is for helping.
+learn: Even a little in the Give jar can help when it's added together.
+play: sort | jars | Money for a lolly today=Spend; Money for the animal shelter=Give; Money to keep safe for later=Vault; Money to grow over many years=Invest; Money for a friend's fundraiser=Give; Money for a new ball this week=Spend | Which jar?
+check: mcq | Which jar is for helping others? | Give* | Spend | Vault
+check: tf | A little money in the Give jar can help. | true
+home: Show a grown-up your four jars in Chorecast and say what each one is for.
+skill: jars
+
+@lesson 4.2 | A little each time | 🪙 | bank
+hook: How much should go in the Give jar?
+learn: Some kids put a little in the Give jar every time they earn.
+learn: If you put 10c of every $1 in the Give jar, $5 of pocket money gives 50c.
+learn: You and your grown-up can choose an amount that feels right.
+try: 10c from each $1, and you earn $3, gives 30c :: gap | 10c from each $1, and you earn $6, gives _c | 60
+play: slider | You earn $8 and give 10c of every $1. How many cents go in the Give jar? | 0 | 200 | 80 | c | 0 | 10
+check: gap | You put $1 in the Give jar each week for 4 weeks. You have $_ | 4
+check: mcq | Who can help you choose how much to give? | A grown-up* | A stranger online | Nobody
+home: Choose with a grown-up how much of your earnings will go in the Give jar.
+skill: giving
+
+@lesson 4.3 | Who will you help? | 🤔 | home
+hook: Your Give jar has $5 in it. Who should get it?
+learn: Think about what you care about most: animals, people, nature or your school.
+learn: Talk with your family about groups that help with that.
+learn: You can help one group a lot, or a few groups a little.
+play: tap | Tap the groups that help others | 🐶:yes:An animal shelter; 🌳:yes:A tree-planting group; 🥫:yes:A food bank; 🎮:no; 🍭:no; 🏥:yes:A children's hospital
+check: mcq | What's a good first step in choosing who to help? | Think about what you care about* | Pick the first ad you see | Give it to whoever asks loudest
+check: tf | You can help one group or a few groups. | true
+home: Pick a cause with your family for your Give jar money.
+skill: giving
+
+@lesson 4.4 | More than money | 🤲 | home
+hook: Your Give jar is empty. Can you still help?
+learn: You can give your time, like helping at a beach clean-up with your family.
+learn: You can give things, like toys and clothes you've grown out of.
+learn: You can give kind words, like a thank-you card for a bus driver.
+play: match | Match each way to help with what you give | Picking up rubbish at the park=Time; Giving outgrown clothes to a charity shop=Things; Making a card for a lonely neighbour=Kind words; Putting coins in a donation box=Money
+check: mcq | Which is giving your time? | Helping at a beach clean-up* | Buying a toy for yourself | Watching TV
+check: tf | You need money to help others. | false | You can give time, things and kind words too.
+home: Find one thing you've grown out of that could go to a charity shop.
+skill: giving
+
+@lesson 4.5 | Giving it away | 📮 | home
+hook: Your Give jar is full! How does the money get to the people it helps?
+learn: A grown-up can help you give it, in a donation box, at an event or online.
+learn: Some charities send a thank-you, telling you how your money helped.
+learn: Count it first, so you know how much you're giving.
+play: order | Give your Give jar money | Count the money in your Give jar; Choose your cause with a grown-up; Give it in a box, at an event or online with a grown-up; Say what you gave in Chorecast; Feel good about helping
+check: mcq | Who should help you give money online? | A grown-up* | A stranger | Nobody
+check: tf | Counting the money first tells you how much you're giving. | true
+home: Count your Give jar with a grown-up and plan when you'll give it.
+skill: giving
+
+@lesson 4.6 | That good feeling | 😊 | home
+hook: How do you feel after you help someone?
+learn: Helping others often makes people feel happy too.
+learn: It's not about getting thanked. It's about making something better.
+learn: Telling your family what you did can help them want to give too.
+play: path | You gave $3 from your Give jar to the animal shelter. | Tell your family about it and how it might help => good: Sharing can get others giving too. | Brag to your friends that you're the best => bad: Giving isn't a contest. | Ask the shelter to give it back => bad: Once you give, it's theirs to help animals.
+check: mcq | Why do people give? | To help make something better* | To get a prize | To be the best
+check: tf | Helping others can make you feel happy too. | true
+home: Tell your family about a time you helped someone, and how it felt.
+skill: kindness
+
 @band builders
 @unit 1 | How charities work | Where donations go
 @unit 2 | Volunteering | Giving your time and skills
@@ -445,6 +512,73 @@ check: tf | Thanking people makes them more likely to help again. | true
 check: mcq | Which thank-you is best? | We raised $280 for the shelter. Thank you!* | Done | Whatever
 home: Write a thank-you note to someone who helped you this term.
 skill: gratitude
+
+@lesson 4.1 | Is it a real charity? | ✅ | townhall
+hook: A group says it's a charity. How can you check?
+learn: Registered charities are listed on a public register run by {nz:Charities Services~au:the ACNC}.
+learn: You can search the register for the charity's name and see its purpose and reports.
+learn: If you can't find it, ask more questions before you give.
+play: order | Check a charity before you give | Find the charity's full name; Search the {nz:Charities Register~au:ACNC Charity Register}; Check it's registered and what it does; Read its latest yearly report; Decide if you want to give
+check: mcq | Where can you check if a charity is registered? | {nz:The Charities Register~au:The ACNC Charity Register}* | Its own poster | A random social media post
+check: tf | You can search a charity's name on a public register. | true
+home: Search the charities register with a grown-up for a charity you know.
+skill: checking charities
+
+@lesson 4.2 | Where the money goes | 🥧 | townhall
+hook: You give $10. How much actually helps?
+learn: Charities spend money on their programs, like food, vets or teachers. They also spend some on running costs and fundraising.
+learn: Some running costs are needed. Staff, offices and computers help the work happen.
+learn: Look at what a charity achieves, not just how little it spends on running costs.
+try: $80 out of $100 is 80% :: gap | $60 out of $100 is _% | 60
+play: slider | A charity spent $70,000 on programs out of $100,000. What percent went on programs? | 0 | 100 | 70 | % | 3 | 1
+check: gap | $45 out of $50 is _% | 90
+check: mcq | What matters most about a charity? | What it achieves* | How tiny its costs are | How many ads it has
+home: Find a charity's yearly report with a grown-up and look for what it achieved.
+skill: checking charities
+
+@lesson 4.3 | Fake collectors | 🚨 | townhall
+hook: Someone at the door collects money for "sick puppies" but has no badge. What do you do?
+learn: Real collectors usually wear ID and can tell you the charity's full name.
+learn: Fake charities often rush you, want cash only, or pop up after disasters.
+learn: If unsure, don't give at the door. Give on the charity's real website with a grown-up.
+play: scam | Which requests look fake? | Give cash now for sick puppies! No time for questions=scam; Hi, I'm with the Red Cross. Here's my ID badge. You can also give on our website=real; Donate to flood victims by sending gift cards to this number=scam; Our school is raising money for new library books. Notes went home last week=real; Send money to my personal account for the charity=scam | Fake charities rush you, want cash, gift cards or personal accounts, and dodge questions.
+check: mcq | What should real collectors have? | ID and the charity's full name* | Only a bucket | Nothing
+check: tf | Giving on a charity's real website is safer than giving cash to a stranger. | true
+home: Talk with a grown-up about what you'd say to a door collector without ID.
+skill: scams
+
+@lesson 4.4 | Showing results | 📊 | townhall
+hook: Two charities both say "we help kids". Which one shows it?
+learn: Good charities say exactly what they do and what changed because of it.
+learn: "We gave 2,000 breakfasts at 10 schools" is clearer than "we make a difference".
+learn: Look for numbers, stories and honest updates, including things that didn't work.
+play: sort | Shows results, Too vague | We planted 5,000 native trees this year=Shows results; We make the world better=Too vague; 300 kids learned to swim in our program=Shows results; We care a lot=Too vague; Attendance went up 15% at the schools we help=Shows results; Help us help=Too vague | Clear results or too vague?
+check: mcq | Which shows results best? | "We gave 2,000 breakfasts"* | "We make a difference" | "We care"
+check: tf | Good charities share what didn't work too. | true
+home: Read a charity's website with a grown-up and find one clear result.
+skill: impact
+
+@lesson 4.5 | Ask good questions | ❔ | townhall
+hook: It's OK to ask a charity questions. What would you ask?
+learn: Ask what they do, where they work, and how your money helps.
+learn: Ask how they know it's working.
+learn: A good charity is happy to answer.
+play: chat | You email a local charity | them: Thanks for your interest! How can we help? | me: What would a $20 donation pay for?*/Can I have a prize?/Why should I bother? | them: $20 pays for a week of meals for one family. | me: Great. How do you know it's helping families?*/Whatever/Can you pay me instead? | them: We survey families each term. Last year 9 in 10 said it helped them a lot.
+check: mcq | Which is a good question to ask a charity? | How do you know it's working?* | What's your favourite colour? | Can I have my money back next year?
+check: tf | A good charity is happy to answer questions. | true
+home: Write two questions you'd ask a charity before giving.
+skill: checking charities
+
+@lesson 4.6 | Make your choice | 🏆 | home
+hook: You've checked three charities. How do you choose?
+learn: Is it registered? Does it show results? Does it match what you care about?
+learn: You can pick one, or split your Give jar between two.
+learn: Write down why you chose it. Next year, check how it went.
+play: path | You have $20 in your Give jar and three choices. | A registered charity with clear results that you care about => good: You checked it, and it fits your values. | A group that isn't registered and won't answer questions => bad: That's a red flag. | A charity with the flashiest ad => ok: It might be good, but you haven't checked.
+check: mcq | What should you check first? | Whether it's registered* | Its logo colour | How many ads it has
+check: tf | You can split your Give jar between more than one charity. | true
+home: Choose a charity with your family using the three questions in this lesson.
+skill: giving
 
 @band makers
 @unit 1 | Social enterprise | Businesses built to do good
@@ -672,6 +806,72 @@ check: mcq | A balanced giving plan might… | Mix proven charities with causes 
 home: Write your own giving plan for $100 using head and heart.
 skill: giving
 
+@lesson 4.1 | Help now or fix the cause? | 🧩 | townhall
+hook: A food bank feeds hungry families. Advocacy asks why they're hungry. Which is better?
+learn: Charity helps people now, like giving food or shelter.
+learn: Advocacy tries to change the rules or systems that cause a problem.
+learn: Both matter. Many groups do both.
+play: sort | Charity, Advocacy | Giving food parcels=Charity; Asking the council for a bus route to the food bank=Advocacy; Running a winter coat drive=Charity; Petitioning for free school lunches=Advocacy; Volunteering at a soup kitchen=Charity; Writing to an MP about housing=Advocacy | Charity or advocacy?
+check: mcq | What is advocacy? | Trying to change rules or systems* | Giving out food | Selling things
+check: tf | Groups can do both charity and advocacy. | true
+home: Pick an issue you care about. Talk with a grown-up about a charity way and an advocacy way to help.
+skill: advocacy
+
+@lesson 4.2 | Who decides? | 🏛️ | townhall
+hook: You want a pedestrian crossing outside school. Who can actually make it happen?
+learn: Find the decision maker. Roads are often the local council's job. Laws are Parliament's.
+learn: Schools have a principal and a {nz:board~au:school council or board}. Companies have managers.
+learn: Asking the right person saves months of effort.
+play: match | Match the change to who can make it | A new crossing on a local street=The local council; A new national law=Parliament; A new school uniform rule=The school's leaders and board; Less plastic packaging at a supermarket=The company's managers
+check: mcq | Who usually decides on local street crossings? | The local council* | The Prime Minister | The supermarket
+check: tf | Finding the right decision maker saves time. | true
+home: Find out with a grown-up who your local councillor is.
+skill: advocacy
+
+@lesson 4.3 | Make your case | 📝 | townhall
+hook: Facts alone rarely change minds. Stories alone are easy to dismiss. What works?
+learn: A strong case has three parts: the problem with facts, a real story, and a clear ask.
+learn: "Cars speed past our school at 50 km/h. Last month my friend was nearly hit. Please install a 30 km/h zone."
+learn: Be polite and specific. Say exactly what you want them to do.
+play: order | Build a short case for a school water fountain | The problem: our school has one working fountain for 400 students; The facts: the queue takes 10 minutes at lunch; A story: on sports day, kids ran out of water; The ask: please fix two broken fountains this term; Thank them and offer to help
+check: mcq | What should a strong case end with? | A clear, specific ask* | A complaint | Nothing
+check: tf | A real story can make facts more powerful. | true
+home: Write a three-sentence case for a small change at home or school.
+skill: persuasion
+
+@lesson 4.4 | Petitions | ✍️ | townhall
+hook: A petition has 1,000 signatures. Does that change anything?
+learn: A petition shows decision makers how many people want something.
+learn: {nz:Anyone can petition Parliament. Petitions are sent to a select committee to consider.~au:Petitions to Parliament must follow set rules. Accepted ones are presented and can get a response from a minister.}
+learn: A petition works best with a clear ask, a real decision maker and follow-up, like meeting them.
+play: tap | Tap the things that make a petition stronger | 🎯:yes:A clear, specific ask; 🏛️:yes:Sent to the right decision maker; 📣:yes:Shared widely; ❓:no; 😡:no; 🤝:yes:Follow-up meetings
+check: mcq | What makes a petition stronger? | A clear ask to the right decision maker* | An angry title | Lots of spelling mistakes
+check: tf | A petition can show decision makers how many people care. | true
+home: Look at petitions on the {nz:New Zealand~au:Australian} Parliament website with a grown-up.
+skill: advocacy
+
+@lesson 4.5 | Peaceful protest | ✊ | townhall
+hook: Students march for climate action. Is that allowed?
+learn: In both countries, people have the right to gather peacefully and speak out.
+learn: Rules still apply, like not blocking emergency routes, and some events need permits.
+learn: If you're under 18, go with a grown-up, and plan how to stay safe and together.
+play: path | Your friends want to join a climate march in town. | Go with a grown-up, plan a meeting spot and stay peaceful => good: Safe, legal and your voice is heard. | Skip school without telling anyone => bad: Your family and school need to know where you are. | Go and vandalise a building => bad: Damage is a crime and hurts your cause.
+check: mcq | What should under-18s do at a protest? | Go with a grown-up and stay safe* | Go alone without telling anyone | Climb on cars
+check: tf | People have a right to protest peacefully. | true
+home: Talk with a grown-up about a protest in history that changed something.
+skill: advocacy
+
+@lesson 4.6 | Clicking isn't enough | 📱 | online
+hook: You liked and shared a post about saving the oceans. Did it help?
+learn: Liking or sharing can spread the word, but on its own it rarely changes anything.
+learn: Turn online interest into action: sign a real petition, write to a decision maker or volunteer.
+learn: Check facts before sharing. Wrong information can hurt a good cause.
+play: debate | Does sharing posts help a cause? | It can spread the word, but it works best when it leads to real action* | Yes, sharing alone fixes problems | Some campaigns did grow from shares, and awareness can lead to donations. It depends what happens next.
+check: mcq | What turns online interest into change? | Real actions, like writing to a decision maker* | Just more likes | Arguing in comments
+check: tf | You should check facts before sharing a post about a cause. | true
+home: Find one cause you follow online and pick one real action you could take.
+skill: advocacy
+
 @band launchers
 @unit 1 | Ethical investing | Putting your money where your values are
 @unit 2 | Governance | How charities and companies stay honest
@@ -898,3 +1098,69 @@ check: tf | Flexible, long-term grants can help charities plan. | true
 check: mcq | Being open about what didn't work helps… | Everyone learn and improve* | Nobody | Only competitors
 home: Write three rules you'd follow if you ran a foundation.
 skill: philanthropy
+
+@lesson 4.1 | Pick your model | 🧭 | stall
+hook: A café that trains young people, or a shop that donates profits. Which model fits your mission?
+learn: An employment model hires people who face barriers to work and trains them.
+learn: A give-back model sells products and gives some profit to a cause. A cross-subsidy model has richer customers pay more so others pay less.
+learn: Some products are the impact, like clean cookstoves or cheap solar lights.
+play: match | Match each social enterprise to its model | A café that trains young people leaving care=Employment model; A sock brand that gives a pair for every pair sold=Give-back model; An eye clinic where paying patients fund free surgery=Cross-subsidy model; A company selling cheap solar lights to homes without power=The product is the impact
+check: mcq | What's an employment model? | Hiring and training people who face barriers to work* | Giving away all your profit | Selling to rich people only
+check: tf | A product can be the impact itself. | true
+home: Find a social enterprise near you with a grown-up and work out its model.
+skill: social enterprise
+
+@lesson 4.2 | Legal structure | 🏗️ | townhall
+hook: Should your social enterprise be a charity, a company or both?
+learn: A company can trade freely and raise investment, but it pays tax and isn't a charity.
+learn: A registered charity can get tax benefits and donations, but must stick to charitable purposes.
+learn: B Corp is a certification, not a legal structure. Some groups run a company and a charity side by side.
+play: sort | Company, Registered charity | Can sell shares to investors=Company; Must stick to charitable purposes=Registered charity; Donors may get a tax benefit=Registered charity; Pays tax on profits=Company; Profits can go to owners=Company; Reports to {nz:Charities Services~au:the ACNC}=Registered charity | Company or charity?
+check: mcq | What is B Corp? | A certification, not a legal structure* | A type of charity | A government grant
+check: tf | A charity must stick to its charitable purposes. | true
+home: Look up one social enterprise's legal structure with a grown-up.
+skill: social enterprise
+
+@lesson 4.3 | Making it pay | 💵 | stall
+hook: Grants run out. How does a social enterprise stay alive?
+learn: Most social enterprises need sales to cover costs, just like any business.
+learn: Training staff costs more, so price, volume and grants all need to add up.
+learn: Plan for the impact costs, like a trainer's wages, from the start.
+play: budget | Plan a month for a café that trains young people, in hundreds of dollars | 300 | Rent=50; Ingredients=80; Staff wages=110; Trainer=40; Savings buffer=0 | Broken coffee machine:15
+check: mcq | Where does most social enterprise money need to come from? | Sales to customers* | One big grant for ever | Donations only
+check: tf | Impact costs, like training, should be in the plan from the start. | true
+home: Ask a grown-up what costs a small café might have each month.
+skill: planning
+
+@lesson 4.4 | Outputs and outcomes | 📈 | townhall
+hook: "We trained 40 people." Great, but did their lives change?
+learn: Outputs are what you did: 40 people trained, 2,000 meals served.
+learn: Outcomes are what changed: 30 people got jobs and still had them a year later.
+learn: Measure both, and be honest when outcomes are smaller than you hoped.
+play: sort | Output, Outcome | 40 people trained=Output; 30 got jobs and kept them a year=Outcome; 2,000 meals served=Output; Fewer kids missed school from hunger=Outcome; 500 solar lights sold=Output; Families saved $15 a month on kerosene=Outcome | Output or outcome?
+check: mcq | Which is an outcome? | 30 people got and kept jobs* | 40 people trained | 2,000 meals served
+check: tf | Outputs and outcomes are the same thing. | false | Outputs are what you did. Outcomes are what changed.
+home: Pick a charity's report with a grown-up. Find one output and one outcome.
+skill: impact
+
+@lesson 4.5 | Mission drift | 🧲 | stall
+hook: Your café is so busy that you've stopped hiring trainees. Is that success?
+learn: Mission drift happens when making money slowly pushes out the reason you started.
+learn: Write your mission down and check big decisions against it.
+learn: Some enterprises lock the mission into their rules, so it can't be dropped easily.
+play: path | A big chain offers to buy your training café, but it won't keep the trainee program. | Say no, or only sell if the mission is protected in writing => good: You kept your purpose at the centre. | Sell straight away for the money => bad: The mission you built it for disappears. | Quietly drop the trainees to look better to buyers => bad: That's mission drift, and it breaks trust.
+check: mcq | What is mission drift? | Making money slowly pushes out your purpose* | Moving to a new building | Hiring more trainees
+check: tf | Writing your mission into your rules can protect it. | true
+home: Write a one-sentence mission for a social enterprise you'd like to start.
+skill: social enterprise
+
+@lesson 4.6 | Funding the start | 🌱 | stall
+hook: You need $20,000 to start. Where could it come from?
+learn: Grants from trusts and councils can fund a start, but usually come with conditions and reports.
+learn: Impact investors want both a return and a social result.
+learn: Pre-sales, crowdfunding and loans are other options. Many enterprises mix several.
+play: mystery | The money doesn't have to be paid back.; It usually comes with a report on results.; Trusts and councils offer it.; You often apply in funding rounds. | A grant* | A bank loan | Selling shares
+check: mcq | What do impact investors want? | A financial return and a social result* | Nothing at all | Only free products
+check: tf | Grants often come with conditions. | true
+home: Look up a local community trust or council grant with a grown-up.
+skill: funding

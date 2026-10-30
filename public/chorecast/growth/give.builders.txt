@@ -221,3 +221,70 @@ check: mcq | Which thank-you is best? | We raised $280 for the shelter. Thank yo
 home: Write a thank-you note to someone who helped you this term.
 skill: gratitude
 
+@lesson 4.1 | Is it a real charity? | ✅ | townhall
+hook: A group says it's a charity. How can you check?
+learn: Registered charities are listed on a public register run by {nz:Charities Services~au:the ACNC}.
+learn: You can search the register for the charity's name and see its purpose and reports.
+learn: If you can't find it, ask more questions before you give.
+play: order | Check a charity before you give | Find the charity's full name; Search the {nz:Charities Register~au:ACNC Charity Register}; Check it's registered and what it does; Read its latest yearly report; Decide if you want to give
+check: mcq | Where can you check if a charity is registered? | {nz:The Charities Register~au:The ACNC Charity Register}* | Its own poster | A random social media post
+check: tf | You can search a charity's name on a public register. | true
+home: Search the charities register with a grown-up for a charity you know.
+skill: checking charities
+
+@lesson 4.2 | Where the money goes | 🥧 | townhall
+hook: You give $10. How much actually helps?
+learn: Charities spend money on their programs, like food, vets or teachers. They also spend some on running costs and fundraising.
+learn: Some running costs are needed. Staff, offices and computers help the work happen.
+learn: Look at what a charity achieves, not just how little it spends on running costs.
+try: $80 out of $100 is 80% :: gap | $60 out of $100 is _% | 60
+play: slider | A charity spent $70,000 on programs out of $100,000. What percent went on programs? | 0 | 100 | 70 | % | 3 | 1
+check: gap | $45 out of $50 is _% | 90
+check: mcq | What matters most about a charity? | What it achieves* | How tiny its costs are | How many ads it has
+home: Find a charity's yearly report with a grown-up and look for what it achieved.
+skill: checking charities
+
+@lesson 4.3 | Fake collectors | 🚨 | townhall
+hook: Someone at the door collects money for "sick puppies" but has no badge. What do you do?
+learn: Real collectors usually wear ID and can tell you the charity's full name.
+learn: Fake charities often rush you, want cash only, or pop up after disasters.
+learn: If unsure, don't give at the door. Give on the charity's real website with a grown-up.
+play: scam | Which requests look fake? | Give cash now for sick puppies! No time for questions=scam; Hi, I'm with the Red Cross. Here's my ID badge. You can also give on our website=real; Donate to flood victims by sending gift cards to this number=scam; Our school is raising money for new library books. Notes went home last week=real; Send money to my personal account for the charity=scam | Fake charities rush you, want cash, gift cards or personal accounts, and dodge questions.
+check: mcq | What should real collectors have? | ID and the charity's full name* | Only a bucket | Nothing
+check: tf | Giving on a charity's real website is safer than giving cash to a stranger. | true
+home: Talk with a grown-up about what you'd say to a door collector without ID.
+skill: scams
+
+@lesson 4.4 | Showing results | 📊 | townhall
+hook: Two charities both say "we help kids". Which one shows it?
+learn: Good charities say exactly what they do and what changed because of it.
+learn: "We gave 2,000 breakfasts at 10 schools" is clearer than "we make a difference".
+learn: Look for numbers, stories and honest updates, including things that didn't work.
+play: sort | Shows results, Too vague | We planted 5,000 native trees this year=Shows results; We make the world better=Too vague; 300 kids learned to swim in our program=Shows results; We care a lot=Too vague; Attendance went up 15% at the schools we help=Shows results; Help us help=Too vague | Clear results or too vague?
+check: mcq | Which shows results best? | "We gave 2,000 breakfasts"* | "We make a difference" | "We care"
+check: tf | Good charities share what didn't work too. | true
+home: Read a charity's website with a grown-up and find one clear result.
+skill: impact
+
+@lesson 4.5 | Ask good questions | ❔ | townhall
+hook: It's OK to ask a charity questions. What would you ask?
+learn: Ask what they do, where they work, and how your money helps.
+learn: Ask how they know it's working.
+learn: A good charity is happy to answer.
+play: chat | You email a local charity | them: Thanks for your interest! How can we help? | me: What would a $20 donation pay for?*/Can I have a prize?/Why should I bother? | them: $20 pays for a week of meals for one family. | me: Great. How do you know it's helping families?*/Whatever/Can you pay me instead? | them: We survey families each term. Last year 9 in 10 said it helped them a lot.
+check: mcq | Which is a good question to ask a charity? | How do you know it's working?* | What's your favourite colour? | Can I have my money back next year?
+check: tf | A good charity is happy to answer questions. | true
+home: Write two questions you'd ask a charity before giving.
+skill: checking charities
+
+@lesson 4.6 | Make your choice | 🏆 | home
+hook: You've checked three charities. How do you choose?
+learn: Is it registered? Does it show results? Does it match what you care about?
+learn: You can pick one, or split your Give jar between two.
+learn: Write down why you chose it. Next year, check how it went.
+play: path | You have $20 in your Give jar and three choices. | A registered charity with clear results that you care about => good: You checked it, and it fits your values. | A group that isn't registered and won't answer questions => bad: That's a red flag. | A charity with the flashiest ad => ok: It might be good, but you haven't checked.
+check: mcq | What should you check first? | Whether it's registered* | Its logo colour | How many ads it has
+check: tf | You can split your Give jar between more than one charity. | true
+home: Choose a charity with your family using the three questions in this lesson.
+skill: giving
+

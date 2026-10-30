@@ -223,3 +223,70 @@ check: mcq | {nz:Who can act on misleading green claims in NZ?~au:Who can act on
 home: Find a "green" claim on a product at home. Is it specific or vague?
 skill: honesty
 
+@lesson 4.1 | Where to sell online | 🛒 | online
+hook: Marketplace, your own shop or social media? Where should your products go?
+learn: Marketplaces like {nz:Trade Me~au:eBay and Gumtree} and Etsy already have shoppers, but they take fees.
+learn: Most marketplaces need sellers to be 18. Under-18s usually sell through a grown-up's account, with their help.
+learn: Your own online shop has fewer fees but no ready-made shoppers. You have to bring them.
+play: debate | Should a new seller start on a marketplace or their own website? | A marketplace, because shoppers are already there and setup is quick* | Their own website, because fees are always worse | Your own site gives you more control and lower fees later. Many sellers use both.
+check: mcq | How old do you usually need to be to sell on a big marketplace? | 18* | 10 | 13
+check: tf | Marketplaces have shoppers, but they charge fees. | true
+home: Look at one marketplace's seller rules and fees with a grown-up.
+skill: online selling
+
+@lesson 4.2 | Great photos | 📸 | online
+hook: Online, buyers can't pick up your product. Your photos have to do it for them.
+learn: Use daylight near a window and a plain background.
+learn: Take several angles, show the size with something familiar and show any flaws honestly.
+learn: Your first photo is your shop window. Make it the clearest one.
+play: tap | Tap the things that make a great product photo | 🪟:yes:Daylight from a window; ⬜:yes:A plain background; 🔄:yes:Several angles; 🌑:no; 🫥:no; 📏:yes:Something that shows the size
+check: mcq | What's the best light for product photos? | Daylight near a window* | A dark room | A coloured party light
+check: tf | You should show flaws in your photos. | true | Honest photos mean fewer unhappy buyers.
+home: Take three photos of something you own: one good, one bad, one great. Compare them.
+skill: online selling
+
+@lesson 4.3 | Writing the listing | ✍️ | online
+hook: "Cool thing for sale." Would you click on that?
+learn: Start the title with the words buyers search for: what it is, the brand, the size and the colour.
+learn: In the description, give the measurements, the condition and what's included.
+learn: Be honest. A listing that hides problems leads to returns and bad reviews.
+play: diff | Two listings for the same jumper. Tap what the better one adds. | Jumper; Nice; $20 | Hand-knitted wool jumper, kids' size 10, navy; Worn twice, no marks. Chest 80 cm; $20 plus $6 tracked shipping
+check: mcq | Which title is best? | "Hand-knitted navy wool jumper, size 10"* | "Cool thing" | "BUY NOW!!!"
+check: tf | Hiding a problem in a listing can lead to returns. | true
+home: Write a listing title for something in your house using what, brand, size and colour.
+skill: online selling
+
+@lesson 4.4 | Fees and shipping | 📦 | online
+hook: You sold it for $40. How much do you actually keep?
+learn: Marketplaces take a success fee, often a percentage, and payment fees can be extra.
+learn: Packaging and postage cost money too. Decide whether the buyer pays shipping.
+learn: $40 sale − $4 in fees − $3 packaging = $33, before your making costs.
+try: $40 − $4 − $3 = $33 :: gap | $50 − $5 − $3 = $_ | 42
+play: slider | You sell a bag for $60. Fees are 10% and packaging is $4. About how much do you keep? | 40 | 60 | 50 | $ | 1 | 1
+check: gap | $30 sale − $3 fee − $2 packaging = $_ | 25
+check: mcq | What should you include when pricing for online sales? | Fees, packaging and shipping* | Only the cost of making it | Nothing, it's all profit
+home: Work out with a grown-up what you'd keep from a $25 online sale after fees and packaging.
+skill: pricing
+
+@lesson 4.5 | Packing and posting | 📮 | online
+hook: Your product arrived broken. Whose problem is that?
+learn: Wrap items well and use a strong box or a padded bag.
+learn: Use tracked postage so you can prove it was sent and delivered.
+learn: Post quickly and send the tracking number. Buyers love updates.
+play: order | Get an order out the door | Check the item for faults; Wrap it so it can't move around; Pack it in a strong box or bag; Weigh it and buy tracked postage; Drop it off and send the buyer the tracking number
+check: mcq | Why use tracked postage? | You can prove it was sent and delivered* | It's always free | It goes by plane every time
+check: tf | Sending a tracking number makes buyers happier. | true
+home: Look up the cost of sending a small parcel with {nz:NZ Post~au:Australia Post}.
+skill: online selling
+
+@lesson 4.6 | Safe selling | 🛡️ | online
+hook: A buyer wants to pay you extra and have you send the difference back. Sounds kind?
+learn: Overpayment scams send fake or reversible payments, then ask you to send money back.
+learn: Fake "payment received" screenshots and courier links are common tricks. Check your real account or the marketplace's own system.
+learn: For local pickups, meet in a busy public place with a grown-up, and never share your address online.
+play: scam | Which buyer messages are scams? | I've paid $200 for your $50 item by mistake. Please send me $150 back=scam; Is this still available? Could I pick it up Saturday?=real; Here's a screenshot of my payment. Please send it today=scam; My courier will collect. Click this link to confirm your bank details=scam; Can you tell me the measurements please?=real | Scammers overpay, send fake screenshots and push you to links. Real buyers ask normal questions.
+check: mcq | How should you check you've been paid? | Log in to your real account or the marketplace* | Trust the buyer's screenshot | Click the buyer's link
+check: tf | Meeting in a busy public place is safer for pickups. | true
+home: Read the marketplace's safety tips with a grown-up.
+skill: scams
+

@@ -221,3 +221,72 @@ check: mcq | What do customers trust you with? | Their money and their details* 
 home: Talk with a grown-up about why businesses ask permission to send emails.
 skill: trust
 
+@lesson 4.1 | The cash book | 📒 | stall
+hook: At the end of the day, how do you know if your stall made money?
+learn: A cash book is a list of every bit of money that comes in and goes out.
+learn: Write the date, what it was for and the amount, every time.
+learn: Money in is income. Money out is expenses.
+play: build | Set up a cash book page | Write the date at the top; List each sale under Money in; List each cost under Money out; Add up both columns; Take Money out from Money in to find the profit
+check: mcq | What is income? | Money coming in* | Money going out | Money you lost
+check: tf | You should write every sale and cost in the cash book. | true
+home: Start a simple cash book for your pocket money with a grown-up.
+skill: accounts
+
+@lesson 4.2 | In or out? | ↔️ | stall
+hook: Is buying more flour money in or money out?
+learn: Sales, tips and payments from customers are money in.
+learn: Ingredients, cups, signs and stall fees are money out.
+learn: Keep your own spending money separate, so the cash book stays clear.
+play: sort | Money in, Money out | Selling 10 cupcakes=Money in; Buying flour=Money out; A customer's tip=Money in; Paying for paper cups=Money out; The school's stall fee=Money out; A customer paying for a cookie=Money in | Money in or money out?
+check: mcq | Buying paper cups is... | Money out* | Money in | Neither
+check: tf | A tip from a customer is money in. | true
+home: Sort last week's money with a grown-up into money in and money out.
+skill: accounts
+
+@lesson 4.3 | Working out profit | ➖ | stall
+hook: You sold $50 of cupcakes. Did you make $50?
+learn: Profit is money in minus money out.
+learn: $50 in sales minus $18 of ingredients is $32 profit.
+learn: If money out is bigger than money in, that's a loss.
+try: $40 in − $15 out = $25 profit :: gap | $60 in − $22 out = $_ profit | 38
+play: match | Match each stall day to its profit | $30 in and $10 out=$20 profit; $45 in and $20 out=$25 profit; $25 in and $25 out=No profit; $15 in and $20 out=$5 loss
+check: gap | $80 in − $35 out = $_ profit | 45
+check: mcq | You took $20 and spent $30. What happened? | A $10 loss* | A $10 profit | A $50 profit
+home: Work out the profit of a pretend stall with a grown-up, using real prices from the shop.
+skill: profit
+
+@lesson 4.4 | Receipts | 🧾 | stall
+hook: Why keep that little piece of paper from the shop?
+learn: A receipt shows what you bought, when, and how much it cost.
+learn: Check your cash book against your receipts. They should match.
+learn: Keep receipts in an envelope or take a photo of them.
+play: diff | Receipts on the left, your cash book on the right. Tap the cash book mistakes. | Flour $4.50; Sugar $3.20; Eggs $5.80; Cups $2.00 | Flour $4.50; Sugar $2.30; Eggs $5.80; Cups $20.00
+check: mcq | What should your cash book match? | Your receipts* | Your friend's cash book | A guess
+check: tf | Taking a photo of a receipt is a good way to keep it. | true
+home: Ask for the receipt next time you shop with a grown-up, and check it together.
+skill: accounts
+
+@lesson 4.5 | Where the money went | 🗂️ | stall
+hook: You spent $40 on your stall. On what?
+learn: Group your costs into types, like ingredients, packaging and stall fees.
+learn: That shows where most of your money goes.
+learn: The biggest group is often the best place to save money.
+try: $12 + $8 = $20 on ingredients :: gap | $15 + $9 = $_ on ingredients | 24
+play: slider | Your costs: $24 ingredients, $10 packaging, $6 stall fee. What percent went on ingredients? | 0 | 100 | 60 | % | 5 | 5
+check: gap | $6 + $4 + $10 = $_ | 20
+check: mcq | Why group your costs? | To see where most money goes* | To make it look fancy | So you can spend more
+home: Group your own spending from last month into types, with a grown-up.
+skill: accounts
+
+@lesson 4.6 | Was it worth it? | ⏱️ | stall
+hook: You made $30 profit, but it took 10 hours. Was it worth it?
+learn: Divide your profit by your hours. $30 profit for 10 hours is $3 an hour.
+learn: If you can make more per hour another way, think about changing what you do.
+learn: Some things are worth it for fun or for a good cause, not just money.
+try: $40 profit in 4 hours is $10 an hour :: gap | $24 profit in 3 hours is $_ an hour | 8
+play: match | Match each job to what it earns per hour | $30 in 3 hours=$10 an hour; $20 in 4 hours=$5 an hour; $36 in 3 hours=$12 an hour; $14 in 2 hours=$7 an hour
+check: gap | $50 profit in 5 hours is $_ an hour | 10
+check: mcq | Which pays more per hour? | $20 in 2 hours* | $20 in 5 hours | $20 in 10 hours
+home: Work out your earnings per hour for a job you've done, with a grown-up.
+skill: profit
+

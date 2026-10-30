@@ -224,3 +224,69 @@ check: mcq | A balanced giving plan might… | Mix proven charities with causes 
 home: Write your own giving plan for $100 using head and heart.
 skill: giving
 
+@lesson 4.1 | Help now or fix the cause? | 🧩 | townhall
+hook: A food bank feeds hungry families. Advocacy asks why they're hungry. Which is better?
+learn: Charity helps people now, like giving food or shelter.
+learn: Advocacy tries to change the rules or systems that cause a problem.
+learn: Both matter. Many groups do both.
+play: sort | Charity, Advocacy | Giving food parcels=Charity; Asking the council for a bus route to the food bank=Advocacy; Running a winter coat drive=Charity; Petitioning for free school lunches=Advocacy; Volunteering at a soup kitchen=Charity; Writing to an MP about housing=Advocacy | Charity or advocacy?
+check: mcq | What is advocacy? | Trying to change rules or systems* | Giving out food | Selling things
+check: tf | Groups can do both charity and advocacy. | true
+home: Pick an issue you care about. Talk with a grown-up about a charity way and an advocacy way to help.
+skill: advocacy
+
+@lesson 4.2 | Who decides? | 🏛️ | townhall
+hook: You want a pedestrian crossing outside school. Who can actually make it happen?
+learn: Find the decision maker. Roads are often the local council's job. Laws are Parliament's.
+learn: Schools have a principal and a {nz:board~au:school council or board}. Companies have managers.
+learn: Asking the right person saves months of effort.
+play: match | Match the change to who can make it | A new crossing on a local street=The local council; A new national law=Parliament; A new school uniform rule=The school's leaders and board; Less plastic packaging at a supermarket=The company's managers
+check: mcq | Who usually decides on local street crossings? | The local council* | The Prime Minister | The supermarket
+check: tf | Finding the right decision maker saves time. | true
+home: Find out with a grown-up who your local councillor is.
+skill: advocacy
+
+@lesson 4.3 | Make your case | 📝 | townhall
+hook: Facts alone rarely change minds. Stories alone are easy to dismiss. What works?
+learn: A strong case has three parts: the problem with facts, a real story, and a clear ask.
+learn: "Cars speed past our school at 50 km/h. Last month my friend was nearly hit. Please install a 30 km/h zone."
+learn: Be polite and specific. Say exactly what you want them to do.
+play: order | Build a short case for a school water fountain | The problem: our school has one working fountain for 400 students; The facts: the queue takes 10 minutes at lunch; A story: on sports day, kids ran out of water; The ask: please fix two broken fountains this term; Thank them and offer to help
+check: mcq | What should a strong case end with? | A clear, specific ask* | A complaint | Nothing
+check: tf | A real story can make facts more powerful. | true
+home: Write a three-sentence case for a small change at home or school.
+skill: persuasion
+
+@lesson 4.4 | Petitions | ✍️ | townhall
+hook: A petition has 1,000 signatures. Does that change anything?
+learn: A petition shows decision makers how many people want something.
+learn: {nz:Anyone can petition Parliament. Petitions are sent to a select committee to consider.~au:Petitions to Parliament must follow set rules. Accepted ones are presented and can get a response from a minister.}
+learn: A petition works best with a clear ask, a real decision maker and follow-up, like meeting them.
+play: tap | Tap the things that make a petition stronger | 🎯:yes:A clear, specific ask; 🏛️:yes:Sent to the right decision maker; 📣:yes:Shared widely; ❓:no; 😡:no; 🤝:yes:Follow-up meetings
+check: mcq | What makes a petition stronger? | A clear ask to the right decision maker* | An angry title | Lots of spelling mistakes
+check: tf | A petition can show decision makers how many people care. | true
+home: Look at petitions on the {nz:New Zealand~au:Australian} Parliament website with a grown-up.
+skill: advocacy
+
+@lesson 4.5 | Peaceful protest | ✊ | townhall
+hook: Students march for climate action. Is that allowed?
+learn: In both countries, people have the right to gather peacefully and speak out.
+learn: Rules still apply, like not blocking emergency routes, and some events need permits.
+learn: If you're under 18, go with a grown-up, and plan how to stay safe and together.
+play: path | Your friends want to join a climate march in town. | Go with a grown-up, plan a meeting spot and stay peaceful => good: Safe, legal and your voice is heard. | Skip school without telling anyone => bad: Your family and school need to know where you are. | Go and vandalise a building => bad: Damage is a crime and hurts your cause.
+check: mcq | What should under-18s do at a protest? | Go with a grown-up and stay safe* | Go alone without telling anyone | Climb on cars
+check: tf | People have a right to protest peacefully. | true
+home: Talk with a grown-up about a protest in history that changed something.
+skill: advocacy
+
+@lesson 4.6 | Clicking isn't enough | 📱 | online
+hook: You liked and shared a post about saving the oceans. Did it help?
+learn: Liking or sharing can spread the word, but on its own it rarely changes anything.
+learn: Turn online interest into action: sign a real petition, write to a decision maker or volunteer.
+learn: Check facts before sharing. Wrong information can hurt a good cause.
+play: debate | Does sharing posts help a cause? | It can spread the word, but it works best when it leads to real action* | Yes, sharing alone fixes problems | Some campaigns did grow from shares, and awareness can lead to donations. It depends what happens next.
+check: mcq | What turns online interest into change? | Real actions, like writing to a decision maker* | Just more likes | Arguing in comments
+check: tf | You should check facts before sharing a post about a cause. | true
+home: Find one cause you follow online and pick one real action you could take.
+skill: advocacy
+

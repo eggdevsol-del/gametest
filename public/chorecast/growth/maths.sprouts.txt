@@ -225,3 +225,71 @@ check: tf | You can swap a coin for smaller coins to share it fairly. | true
 home: Share pretend money fairly between family members.
 skill: fractions
 
+@lesson 4.1 | Long or short? | 📏 | home
+hook: How long is your bed? How long is your finger? Do we use the same measure?
+learn: We measure short things in centimetres, or cm. Your finger is about 5 cm long.
+learn: We measure longer things in metres, or m. A bed is about 2 m long.
+learn: 100 cm make 1 metre.
+play: sort | Centimetres, Metres | A pencil=Centimetres; A swimming pool=Metres; A crayon=Centimetres; A soccer field=Metres; A spoon=Centimetres; A bus=Metres | Would you use cm or m?
+check: mcq | How many cm make 1 metre? | 100* | 10 | 1,000
+check: tf | You'd measure a bus in centimetres. | false | A bus is long, so we use metres.
+home: Use a ruler or tape measure with a grown-up to find something about 1 metre long.
+skill: measuring
+
+@lesson 4.2 | Heavy or light? | 🏋️ | kitchen
+hook: Is a feather heavier than a bag of potatoes?
+learn: Light things are weighed in grams, or g. A biscuit is about 10 g.
+learn: Heavy things are weighed in kilograms, or kg. A bag of potatoes might be 2 kg.
+learn: 1,000 grams make 1 kilogram.
+play: sort | Grams, Kilograms | An apple=Grams; A bag of flour=Kilograms; A strawberry=Grams; A dog=Kilograms; A biscuit=Grams; A watermelon=Kilograms | Grams or kilograms?
+check: mcq | How many grams make 1 kilogram? | 1,000* | 100 | 10
+check: tf | A strawberry weighs about 1 kilogram. | false | It's only a few grams.
+home: Look at packets in your kitchen with a grown-up. Which say g and which say kg?
+skill: measuring
+
+@lesson 4.3 | Cups and spoons | 🥄 | kitchen
+hook: A recipe says one cup of flour. Can you use any cup?
+learn: Baking uses special measuring cups and spoons, so it turns out the same every time.
+learn: A teaspoon is small, a tablespoon is bigger, and a cup is much bigger.
+learn: Fill it, then level it off with a knife, so it's not too much.
+play: order | Put these from smallest to biggest | Teaspoon; Tablespoon; Half a cup; One cup; A 1-litre jug
+check: mcq | Which is the biggest? | One cup* | A teaspoon | A tablespoon
+check: tf | You should level off flour in a measuring cup. | true
+home: Help measure something for a recipe with a grown-up, using measuring cups.
+skill: measuring
+
+@lesson 4.4 | Using a ruler | 📐 | home
+hook: Your ruler starts at 0. Why not at 1?
+learn: Line up the end of the thing with the 0 on the ruler.
+learn: Read the number where the other end stops.
+learn: Keep the ruler straight and flat, so your measure is right.
+try: From 0 to 8 is 8 cm :: gap | A crayon goes from 0 to 9 on the ruler. It's _ cm | 9
+play: tap | Tap the things that are easy to measure with a ruler | ✏️:yes:A pencil; 📕:yes:A book; 🔑:yes:A key; 🏠:no; 🌳:no; 🥄:yes:A spoon
+check: mcq | Where should you start measuring on a ruler? | At 0* | At 1 | Anywhere
+check: gap | A leaf goes from 0 to 6 on the ruler. It's _ cm | 6
+home: Measure three things in your room with a ruler, and tell a grown-up how long they are.
+skill: measuring
+
+@lesson 4.5 | Litres | 🥛 | kitchen
+hook: How much milk fits in a big bottle?
+learn: We measure drinks and water in litres, or L.
+learn: Many milk bottles hold 1 litre or 2 litres.
+learn: Small amounts are measured in millilitres, or mL. 1,000 mL make 1 litre.
+try: Two 1-litre bottles make 2 litres :: gap | Three 1-litre bottles make _ litres | 3
+play: slider | How many 1-litre bottles fill a 4-litre bucket? | 0 | 10 | 4 | bottles | 0 | 1
+check: mcq | How many mL make 1 litre? | 1,000* | 10 | 100
+check: tf | Milk is measured in kilograms. | false | Drinks are measured in litres and mL.
+home: Find something in your fridge measured in litres and something in mL.
+skill: measuring
+
+@lesson 4.6 | Hands and feet | 👣 | home
+hook: Measure the room with your footsteps. Then a grown-up does it too. Why are the answers different?
+learn: Hands and feet are different sizes, so body measures change from person to person.
+learn: That's why we use rulers and tape measures. A metre is the same for everyone.
+learn: Shops, builders and cooks all use the same measures, so things fit and work.
+play: mystery | You walked 10 steps across the room.; Your grown-up walked only 6 steps.; The room didn't change size. | Grown-ups have bigger steps* | The room shrank | You walked the wrong way
+check: mcq | Why do we use metres instead of footsteps? | A metre is the same for everyone* | Feet are too smelly | Metres are prettier
+check: tf | Everyone's footsteps are the same size. | false
+home: Measure your room in footsteps, then with a tape measure, with a grown-up.
+skill: measuring
+

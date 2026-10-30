@@ -224,6 +224,72 @@ check: mcq | A stamp card says "Buy 5, get 1 free". How many do you get after bu
 home: Design a stamp card for a pretend stall.
 skill: service
 
+@lesson 4.1 | What a sign says | 🪧 | stall
+hook: People walk past your stall. How do they know what you're selling?
+learn: A good sign tells people three things: what you sell, the price and when you're open.
+learn: "Lemonade $1 a cup" tells people everything fast.
+learn: Leave off things people don't need to know.
+play: sort | Put it on the sign, Leave it off | What you sell=Put it on the sign; The price=Put it on the sign; When you're open=Put it on the sign; Your full name and address=Leave it off; Your favourite colour=Leave it off; What you had for breakfast=Leave it off | What goes on a sign?
+check: mcq | Which sign is best? | "Lemonade $1 a cup"* | "Hello!" | "My stall"
+check: tf | Your home address should go on your stall sign. | false | Keep your address private. Your stall is right there.
+home: Look at signs on shops near you with a grown-up. Do they say what, how much and when?
+skill: marketing
+
+@lesson 4.2 | Big and clear | 🔠 | stall
+hook: Can people read your sign from across the street?
+learn: Use big letters and only a few words.
+learn: Dark letters on a light background are easiest to read.
+learn: Check it by standing far away. Can you still read it?
+play: tap | Tap the things that make a sign easy to read | 🔠:yes:Big letters; ⚫:yes:Dark letters on a light background; ✂️:yes:Only a few words; 🌀:no; 🔍:no; 📏:yes:Check it from far away
+check: mcq | Which sign is easiest to read from far away? | Big dark letters on white* | Tiny pale letters | Lots of tiny words
+check: tf | A sign with fewer words is easier to read. | true
+home: Make a test sign and see if a grown-up can read it from across the room.
+skill: marketing
+
+@lesson 4.3 | Pictures help | 🖍️ | stall
+hook: Some people can't read your words yet. How else can a sign talk?
+learn: A picture tells people what you sell before they even read.
+learn: A lemon for lemonade or a cookie for cookies works fast.
+learn: Keep pictures simple and big.
+play: match | Match what you sell to a good picture for your sign | Lemonade=🍋; Cookies=🍪; Plants=🪴; Bookmarks=🔖; Ice blocks=🧊
+check: mcq | What picture would help a cupcake sign? | A cupcake* | A car | A rain cloud
+check: tf | Pictures can help little kids understand your sign. | true
+home: Draw a picture for a sign about something you could sell.
+skill: marketing
+
+@lesson 4.4 | Where to put your sign | 📍 | stall
+hook: Your sign is ready. Where should it go?
+learn: Put signs where lots of people walk past, like the footpath near your gate.
+learn: Always ask a grown-up first, and ask before putting a sign on someone else's fence or pole.
+learn: Take your signs down when you finish, so you don't leave rubbish.
+play: path | You want to put up a sign for your plant stall. | Put it by your own front gate with a grown-up's OK => good: Easy to see, and you're allowed. | Tape it to a neighbour's car => bad: That's their car, and it's not OK without asking. | Put it in the middle of the road => bad: That's dangerous for drivers and for you.
+check: mcq | What should you do before putting a sign on someone's fence? | Ask them first* | Just do it | Hide it
+check: tf | You should take your signs down when the stall is finished. | true
+home: Walk past your house with a grown-up and choose the best spot for a sign.
+skill: marketing
+
+@lesson 4.5 | Honest signs | 😇 | stall
+hook: Your sign says "World's best cookies!" Is that true?
+learn: Signs should tell the truth about what you sell.
+learn: "Homemade choc chip cookies" is true. "Cures colds" is not.
+learn: If people trust your sign, they'll trust you and come back.
+play: sort | Honest, Not honest | Homemade cookies=Honest; Cookies that make you fly=Not honest; Fresh lemonade, made today=Honest; Free cookies, but you charge for them=Not honest; Plants grown by me=Honest; Lollies that are good for your teeth=Not honest | Is the sign honest?
+check: mcq | Which sign is honest? | "Homemade banana bread"* | "Banana bread that makes you rich" | "Free!" when it costs $2
+check: tf | Honest signs help people trust you. | true
+home: Read a food packet with a grown-up. Is everything on it true?
+skill: honesty
+
+@lesson 4.6 | Make a poster | 🎨 | stall
+hook: Let's put it all together and make a great poster!
+learn: A poster has a big title, a picture, the price and the time.
+learn: Plan it in pencil first, then colour it in.
+learn: Show a grown-up and fix anything that's hard to read.
+play: order | Make a poster for your stall | Plan what to say in pencil; Write the title in big letters; Draw a big, simple picture; Add the price and time; Colour it in; Check it from far away
+check: mcq | What should you do first? | Plan it in pencil* | Colour it in | Hang it up
+check: tf | You should check your poster from far away. | true
+home: Make a poster for a pretend or real stall, and stick it on the fridge.
+skill: marketing
+
 @band builders
 @unit 1 | Running a stall | Pricing, stock and selling out
 @unit 2 | Marketing | Telling the right people the right thing
@@ -446,6 +512,75 @@ check: tf | Keeping promises helps customers trust you. | true
 check: mcq | What do customers trust you with? | Their money and their details* | Nothing | Your homework
 home: Talk with a grown-up about why businesses ask permission to send emails.
 skill: trust
+
+@lesson 4.1 | The cash book | 📒 | stall
+hook: At the end of the day, how do you know if your stall made money?
+learn: A cash book is a list of every bit of money that comes in and goes out.
+learn: Write the date, what it was for and the amount, every time.
+learn: Money in is income. Money out is expenses.
+play: build | Set up a cash book page | Write the date at the top; List each sale under Money in; List each cost under Money out; Add up both columns; Take Money out from Money in to find the profit
+check: mcq | What is income? | Money coming in* | Money going out | Money you lost
+check: tf | You should write every sale and cost in the cash book. | true
+home: Start a simple cash book for your pocket money with a grown-up.
+skill: accounts
+
+@lesson 4.2 | In or out? | ↔️ | stall
+hook: Is buying more flour money in or money out?
+learn: Sales, tips and payments from customers are money in.
+learn: Ingredients, cups, signs and stall fees are money out.
+learn: Keep your own spending money separate, so the cash book stays clear.
+play: sort | Money in, Money out | Selling 10 cupcakes=Money in; Buying flour=Money out; A customer's tip=Money in; Paying for paper cups=Money out; The school's stall fee=Money out; A customer paying for a cookie=Money in | Money in or money out?
+check: mcq | Buying paper cups is... | Money out* | Money in | Neither
+check: tf | A tip from a customer is money in. | true
+home: Sort last week's money with a grown-up into money in and money out.
+skill: accounts
+
+@lesson 4.3 | Working out profit | ➖ | stall
+hook: You sold $50 of cupcakes. Did you make $50?
+learn: Profit is money in minus money out.
+learn: $50 in sales minus $18 of ingredients is $32 profit.
+learn: If money out is bigger than money in, that's a loss.
+try: $40 in − $15 out = $25 profit :: gap | $60 in − $22 out = $_ profit | 38
+play: match | Match each stall day to its profit | $30 in and $10 out=$20 profit; $45 in and $20 out=$25 profit; $25 in and $25 out=No profit; $15 in and $20 out=$5 loss
+check: gap | $80 in − $35 out = $_ profit | 45
+check: mcq | You took $20 and spent $30. What happened? | A $10 loss* | A $10 profit | A $50 profit
+home: Work out the profit of a pretend stall with a grown-up, using real prices from the shop.
+skill: profit
+
+@lesson 4.4 | Receipts | 🧾 | stall
+hook: Why keep that little piece of paper from the shop?
+learn: A receipt shows what you bought, when, and how much it cost.
+learn: Check your cash book against your receipts. They should match.
+learn: Keep receipts in an envelope or take a photo of them.
+play: diff | Receipts on the left, your cash book on the right. Tap the cash book mistakes. | Flour $4.50; Sugar $3.20; Eggs $5.80; Cups $2.00 | Flour $4.50; Sugar $2.30; Eggs $5.80; Cups $20.00
+check: mcq | What should your cash book match? | Your receipts* | Your friend's cash book | A guess
+check: tf | Taking a photo of a receipt is a good way to keep it. | true
+home: Ask for the receipt next time you shop with a grown-up, and check it together.
+skill: accounts
+
+@lesson 4.5 | Where the money went | 🗂️ | stall
+hook: You spent $40 on your stall. On what?
+learn: Group your costs into types, like ingredients, packaging and stall fees.
+learn: That shows where most of your money goes.
+learn: The biggest group is often the best place to save money.
+try: $12 + $8 = $20 on ingredients :: gap | $15 + $9 = $_ on ingredients | 24
+play: slider | Your costs: $24 ingredients, $10 packaging, $6 stall fee. What percent went on ingredients? | 0 | 100 | 60 | % | 5 | 5
+check: gap | $6 + $4 + $10 = $_ | 20
+check: mcq | Why group your costs? | To see where most money goes* | To make it look fancy | So you can spend more
+home: Group your own spending from last month into types, with a grown-up.
+skill: accounts
+
+@lesson 4.6 | Was it worth it? | ⏱️ | stall
+hook: You made $30 profit, but it took 10 hours. Was it worth it?
+learn: Divide your profit by your hours. $30 profit for 10 hours is $3 an hour.
+learn: If you can make more per hour another way, think about changing what you do.
+learn: Some things are worth it for fun or for a good cause, not just money.
+try: $40 profit in 4 hours is $10 an hour :: gap | $24 profit in 3 hours is $_ an hour | 8
+play: match | Match each job to what it earns per hour | $30 in 3 hours=$10 an hour; $20 in 4 hours=$5 an hour; $36 in 3 hours=$12 an hour; $14 in 2 hours=$7 an hour
+check: gap | $50 profit in 5 hours is $_ an hour | 10
+check: mcq | Which pays more per hour? | $20 in 2 hours* | $20 in 5 hours | $20 in 10 hours
+home: Work out your earnings per hour for a job you've done, with a grown-up.
+skill: profit
 
 @band makers
 @unit 1 | Business plans | From idea to plan on one page
@@ -671,6 +806,73 @@ check: tf | Vague claims like "eco" can mislead customers. | true
 check: mcq | {nz:Who can act on misleading green claims in NZ?~au:Who can act on misleading green claims in Australia?} | {nz:The Commerce Commission~au:The ACCC}* | A gardening club | Nobody
 home: Find a "green" claim on a product at home. Is it specific or vague?
 skill: honesty
+
+@lesson 4.1 | Where to sell online | 🛒 | online
+hook: Marketplace, your own shop or social media? Where should your products go?
+learn: Marketplaces like {nz:Trade Me~au:eBay and Gumtree} and Etsy already have shoppers, but they take fees.
+learn: Most marketplaces need sellers to be 18. Under-18s usually sell through a grown-up's account, with their help.
+learn: Your own online shop has fewer fees but no ready-made shoppers. You have to bring them.
+play: debate | Should a new seller start on a marketplace or their own website? | A marketplace, because shoppers are already there and setup is quick* | Their own website, because fees are always worse | Your own site gives you more control and lower fees later. Many sellers use both.
+check: mcq | How old do you usually need to be to sell on a big marketplace? | 18* | 10 | 13
+check: tf | Marketplaces have shoppers, but they charge fees. | true
+home: Look at one marketplace's seller rules and fees with a grown-up.
+skill: online selling
+
+@lesson 4.2 | Great photos | 📸 | online
+hook: Online, buyers can't pick up your product. Your photos have to do it for them.
+learn: Use daylight near a window and a plain background.
+learn: Take several angles, show the size with something familiar and show any flaws honestly.
+learn: Your first photo is your shop window. Make it the clearest one.
+play: tap | Tap the things that make a great product photo | 🪟:yes:Daylight from a window; ⬜:yes:A plain background; 🔄:yes:Several angles; 🌑:no; 🫥:no; 📏:yes:Something that shows the size
+check: mcq | What's the best light for product photos? | Daylight near a window* | A dark room | A coloured party light
+check: tf | You should show flaws in your photos. | true | Honest photos mean fewer unhappy buyers.
+home: Take three photos of something you own: one good, one bad, one great. Compare them.
+skill: online selling
+
+@lesson 4.3 | Writing the listing | ✍️ | online
+hook: "Cool thing for sale." Would you click on that?
+learn: Start the title with the words buyers search for: what it is, the brand, the size and the colour.
+learn: In the description, give the measurements, the condition and what's included.
+learn: Be honest. A listing that hides problems leads to returns and bad reviews.
+play: diff | Two listings for the same jumper. Tap what the better one adds. | Jumper; Nice; $20 | Hand-knitted wool jumper, kids' size 10, navy; Worn twice, no marks. Chest 80 cm; $20 plus $6 tracked shipping
+check: mcq | Which title is best? | "Hand-knitted navy wool jumper, size 10"* | "Cool thing" | "BUY NOW!!!"
+check: tf | Hiding a problem in a listing can lead to returns. | true
+home: Write a listing title for something in your house using what, brand, size and colour.
+skill: online selling
+
+@lesson 4.4 | Fees and shipping | 📦 | online
+hook: You sold it for $40. How much do you actually keep?
+learn: Marketplaces take a success fee, often a percentage, and payment fees can be extra.
+learn: Packaging and postage cost money too. Decide whether the buyer pays shipping.
+learn: $40 sale − $4 in fees − $3 packaging = $33, before your making costs.
+try: $40 − $4 − $3 = $33 :: gap | $50 − $5 − $3 = $_ | 42
+play: slider | You sell a bag for $60. Fees are 10% and packaging is $4. About how much do you keep? | 40 | 60 | 50 | $ | 1 | 1
+check: gap | $30 sale − $3 fee − $2 packaging = $_ | 25
+check: mcq | What should you include when pricing for online sales? | Fees, packaging and shipping* | Only the cost of making it | Nothing, it's all profit
+home: Work out with a grown-up what you'd keep from a $25 online sale after fees and packaging.
+skill: pricing
+
+@lesson 4.5 | Packing and posting | 📮 | online
+hook: Your product arrived broken. Whose problem is that?
+learn: Wrap items well and use a strong box or a padded bag.
+learn: Use tracked postage so you can prove it was sent and delivered.
+learn: Post quickly and send the tracking number. Buyers love updates.
+play: order | Get an order out the door | Check the item for faults; Wrap it so it can't move around; Pack it in a strong box or bag; Weigh it and buy tracked postage; Drop it off and send the buyer the tracking number
+check: mcq | Why use tracked postage? | You can prove it was sent and delivered* | It's always free | It goes by plane every time
+check: tf | Sending a tracking number makes buyers happier. | true
+home: Look up the cost of sending a small parcel with {nz:NZ Post~au:Australia Post}.
+skill: online selling
+
+@lesson 4.6 | Safe selling | 🛡️ | online
+hook: A buyer wants to pay you extra and have you send the difference back. Sounds kind?
+learn: Overpayment scams send fake or reversible payments, then ask you to send money back.
+learn: Fake "payment received" screenshots and courier links are common tricks. Check your real account or the marketplace's own system.
+learn: For local pickups, meet in a busy public place with a grown-up, and never share your address online.
+play: scam | Which buyer messages are scams? | I've paid $200 for your $50 item by mistake. Please send me $150 back=scam; Is this still available? Could I pick it up Saturday?=real; Here's a screenshot of my payment. Please send it today=scam; My courier will collect. Click this link to confirm your bank details=scam; Can you tell me the measurements please?=real | Scammers overpay, send fake screenshots and push you to links. Real buyers ask normal questions.
+check: mcq | How should you check you've been paid? | Log in to your real account or the marketplace* | Trust the buyer's screenshot | Click the buyer's link
+check: tf | Meeting in a busy public place is safer for pickups. | true
+home: Read the marketplace's safety tips with a grown-up.
+skill: scams
 
 @band launchers
 @unit 1 | Starting a business | Structures, names and registration
@@ -900,3 +1102,69 @@ check: tf | Failing to deliver on a crowdfunding promise damages your reputation
 check: mcq | What helps a crowdfunding campaign succeed? | A clear story and a working prototype* | No details at all | A blank page
 home: Find a crowdfunding campaign and decide whether you'd back it, and why.
 skill: funding
+
+@lesson 4.1 | What makes a contract | 🤝 | townhall
+hook: You agree to make 50 shirts for a club over text. Is that a contract?
+learn: A contract is an agreement the law will enforce. It needs an offer, acceptance and something of value swapped.
+learn: Many contracts don't have to be on paper. A text or a handshake can count.
+learn: Writing it down avoids fights over what was agreed: what, how many, the price, the deadline and what happens if plans change.
+play: sort | Likely a contract, Not a contract | "I'll pay $500 for 50 shirts by June." "Deal."=Likely a contract; "Maybe I'll get some shirts one day"=Not a contract; Clicking "I agree" on a website's terms=Likely a contract; A friend saying they'll come to your party=Not a contract; An emailed quote that the client accepts=Likely a contract | Contract or not?
+check: mcq | Which of these can form a contract? | A text agreement* | Only a document signed by a lawyer | Nothing that isn't printed
+check: tf | Writing down what was agreed helps avoid disputes. | true
+home: Ask a grown-up about a contract they've agreed to, like a phone plan or a lease.
+skill: law
+
+@lesson 4.2 | Your terms | 📃 | townhall
+hook: A client pays three months late. What did your terms say?
+learn: Business terms set out how and when you get paid, deposits, cancellations and who owns the work.
+learn: Asking for a deposit, like 30% up front, cuts the risk of not being paid.
+learn: Keep terms short and clear, and make sure the client sees them before agreeing.
+play: match | Match each term to what it covers | Payment due in 14 days=When you get paid; 30% deposit to start=Money up front to reduce risk; 48 hours' notice to cancel=What happens if plans change; Designs stay mine until paid in full=Who owns the work
+check: mcq | Why ask for a deposit? | It reduces the risk of not being paid* | It's illegal not to | So you can stop working
+check: tf | Clients should see your terms before agreeing to the job. | true
+home: Write three simple terms for a pretend lawn-mowing or tutoring business.
+skill: law
+
+@lesson 4.3 | Unfair terms | ⚖️ | townhall
+hook: The fine print says the company can change the price whenever it likes. Is that allowed?
+learn: Standard form contracts are take-it-or-leave-it deals, like most phone and gym contracts.
+learn: {nz:The Commerce Commission can ask a court to declare unfair terms in these contracts unfair, and then they can't be used.~au:Unfair terms in standard form contracts are illegal, and since November 2023 businesses can be fined for them.}
+learn: As a business owner, don't copy someone else's harsh terms. Unfair terms can be struck out.
+play: tap | Tap the terms that could be unfair | 💲:yes:We can change the price at any time without notice; 🚪:yes:Only we can cancel this contract; 🛑:yes:You can't claim for anything we do wrong; 📅:no; 🧾:no; 🔒:yes:You must pay the full contract even if we stop the service
+check: mcq | What's a standard form contract? | A take-it-or-leave-it contract* | One you negotiate line by line | A handshake
+check: tf | Unfair terms in standard form contracts can be struck out. | true
+home: Read a gym or phone contract with a grown-up. Find a term that seems one-sided.
+skill: law
+
+@lesson 4.4 | Privacy | 🔐 | online
+hook: Your business has a list of customers' emails and addresses. What are your duties?
+learn: {nz:The Privacy Act 2020 covers every business, however small.~au:The Privacy Act has long exempted many small businesses, but good practice is the same for everyone, and some, like health services, are always covered.}
+learn: Only collect what you need, say why you collect it, keep it secure and let people see or fix their information.
+learn: If a breach could cause serious harm, it must be reported to {nz:the Privacy Commissioner~au:the OAIC} by businesses covered by the law.
+play: sort | Good privacy practice, Bad practice | Only asking for an email to send receipts=Good privacy practice; Selling your customer list without telling them=Bad practice; Using a strong password and 2FA on your shop=Good privacy practice; Keeping card numbers in a spreadsheet=Bad practice; Telling customers why you collect their details=Good privacy practice; Asking for a birth date you don't need=Bad practice | Good or bad?
+check: mcq | How much information should you collect? | Only what you need* | As much as possible | Everything, just in case
+check: tf | People have the right to see the information a business holds about them. | true
+home: Read a small business's privacy policy online with a grown-up. What do they collect?
+skill: privacy
+
+@lesson 4.5 | Consumer law for sellers | 🛍️ | townhall
+hook: Your sign says "No refunds". Can you say that?
+learn: When you sell to consumers, the law says goods must be of acceptable quality, fit for purpose and as described.
+learn: These rights come from {nz:the Consumer Guarantees Act~au:the Australian Consumer Law}. You can't remove them with a sign or a policy.
+learn: You don't have to refund someone who just changed their mind, but "No refunds" signs can mislead people about their rights.
+play: path | A customer brings back a mug that cracked the first time they used it. | Offer a repair, replacement or refund => good: The mug wasn't of acceptable quality, so they have rights. | Point to your "No refunds" sign => bad: A sign can't remove consumer rights. | Say it must have been their fault, without checking => bad: Faulty goods have to be fixed, replaced or refunded.
+check: mcq | Can a "No refunds" sign remove consumer guarantees? | No* | Yes | Only on Sundays
+check: tf | You must refund someone who simply changed their mind. | false | Change-of-mind refunds are up to your policy, unless you promised them.
+home: Find a shop's returns policy with a grown-up and check if it mentions faulty goods.
+skill: consumer law
+
+@lesson 4.6 | When things go wrong | 🧯 | townhall
+hook: A client won't pay your $1,200 invoice. What can you do?
+learn: Start by talking, then put it in writing: what's owed, the due date and what happens next.
+learn: If that fails, {nz:the Disputes Tribunal hears claims up to $60,000 without lawyers.~au:state and territory tribunals, like NCAT or VCAT, hear small claims cheaply.}
+learn: Clear terms, deposits and written records make these disputes much easier to win.
+play: order | Chase an unpaid invoice step by step | Check your invoice and terms are correct; Send a polite reminder; Call or meet to talk it through; Send a written final notice with a date; Take a claim to {nz:the Disputes Tribunal~au:your state's tribunal}
+check: mcq | What should you do first if an invoice isn't paid? | Check your invoice and send a polite reminder* | Post about them online | Go straight to court
+check: tf | Written records help you win a dispute. | true
+home: Ask a grown-up if they've ever had to chase money they were owed, and what worked.
+skill: law

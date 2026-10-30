@@ -227,3 +227,69 @@ check: mcq | What helps a crowdfunding campaign succeed? | A clear story and a w
 home: Find a crowdfunding campaign and decide whether you'd back it, and why.
 skill: funding
 
+@lesson 4.1 | What makes a contract | 🤝 | townhall
+hook: You agree to make 50 shirts for a club over text. Is that a contract?
+learn: A contract is an agreement the law will enforce. It needs an offer, acceptance and something of value swapped.
+learn: Many contracts don't have to be on paper. A text or a handshake can count.
+learn: Writing it down avoids fights over what was agreed: what, how many, the price, the deadline and what happens if plans change.
+play: sort | Likely a contract, Not a contract | "I'll pay $500 for 50 shirts by June." "Deal."=Likely a contract; "Maybe I'll get some shirts one day"=Not a contract; Clicking "I agree" on a website's terms=Likely a contract; A friend saying they'll come to your party=Not a contract; An emailed quote that the client accepts=Likely a contract | Contract or not?
+check: mcq | Which of these can form a contract? | A text agreement* | Only a document signed by a lawyer | Nothing that isn't printed
+check: tf | Writing down what was agreed helps avoid disputes. | true
+home: Ask a grown-up about a contract they've agreed to, like a phone plan or a lease.
+skill: law
+
+@lesson 4.2 | Your terms | 📃 | townhall
+hook: A client pays three months late. What did your terms say?
+learn: Business terms set out how and when you get paid, deposits, cancellations and who owns the work.
+learn: Asking for a deposit, like 30% up front, cuts the risk of not being paid.
+learn: Keep terms short and clear, and make sure the client sees them before agreeing.
+play: match | Match each term to what it covers | Payment due in 14 days=When you get paid; 30% deposit to start=Money up front to reduce risk; 48 hours' notice to cancel=What happens if plans change; Designs stay mine until paid in full=Who owns the work
+check: mcq | Why ask for a deposit? | It reduces the risk of not being paid* | It's illegal not to | So you can stop working
+check: tf | Clients should see your terms before agreeing to the job. | true
+home: Write three simple terms for a pretend lawn-mowing or tutoring business.
+skill: law
+
+@lesson 4.3 | Unfair terms | ⚖️ | townhall
+hook: The fine print says the company can change the price whenever it likes. Is that allowed?
+learn: Standard form contracts are take-it-or-leave-it deals, like most phone and gym contracts.
+learn: {nz:The Commerce Commission can ask a court to declare unfair terms in these contracts unfair, and then they can't be used.~au:Unfair terms in standard form contracts are illegal, and since November 2023 businesses can be fined for them.}
+learn: As a business owner, don't copy someone else's harsh terms. Unfair terms can be struck out.
+play: tap | Tap the terms that could be unfair | 💲:yes:We can change the price at any time without notice; 🚪:yes:Only we can cancel this contract; 🛑:yes:You can't claim for anything we do wrong; 📅:no; 🧾:no; 🔒:yes:You must pay the full contract even if we stop the service
+check: mcq | What's a standard form contract? | A take-it-or-leave-it contract* | One you negotiate line by line | A handshake
+check: tf | Unfair terms in standard form contracts can be struck out. | true
+home: Read a gym or phone contract with a grown-up. Find a term that seems one-sided.
+skill: law
+
+@lesson 4.4 | Privacy | 🔐 | online
+hook: Your business has a list of customers' emails and addresses. What are your duties?
+learn: {nz:The Privacy Act 2020 covers every business, however small.~au:The Privacy Act has long exempted many small businesses, but good practice is the same for everyone, and some, like health services, are always covered.}
+learn: Only collect what you need, say why you collect it, keep it secure and let people see or fix their information.
+learn: If a breach could cause serious harm, it must be reported to {nz:the Privacy Commissioner~au:the OAIC} by businesses covered by the law.
+play: sort | Good privacy practice, Bad practice | Only asking for an email to send receipts=Good privacy practice; Selling your customer list without telling them=Bad practice; Using a strong password and 2FA on your shop=Good privacy practice; Keeping card numbers in a spreadsheet=Bad practice; Telling customers why you collect their details=Good privacy practice; Asking for a birth date you don't need=Bad practice | Good or bad?
+check: mcq | How much information should you collect? | Only what you need* | As much as possible | Everything, just in case
+check: tf | People have the right to see the information a business holds about them. | true
+home: Read a small business's privacy policy online with a grown-up. What do they collect?
+skill: privacy
+
+@lesson 4.5 | Consumer law for sellers | 🛍️ | townhall
+hook: Your sign says "No refunds". Can you say that?
+learn: When you sell to consumers, the law says goods must be of acceptable quality, fit for purpose and as described.
+learn: These rights come from {nz:the Consumer Guarantees Act~au:the Australian Consumer Law}. You can't remove them with a sign or a policy.
+learn: You don't have to refund someone who just changed their mind, but "No refunds" signs can mislead people about their rights.
+play: path | A customer brings back a mug that cracked the first time they used it. | Offer a repair, replacement or refund => good: The mug wasn't of acceptable quality, so they have rights. | Point to your "No refunds" sign => bad: A sign can't remove consumer rights. | Say it must have been their fault, without checking => bad: Faulty goods have to be fixed, replaced or refunded.
+check: mcq | Can a "No refunds" sign remove consumer guarantees? | No* | Yes | Only on Sundays
+check: tf | You must refund someone who simply changed their mind. | false | Change-of-mind refunds are up to your policy, unless you promised them.
+home: Find a shop's returns policy with a grown-up and check if it mentions faulty goods.
+skill: consumer law
+
+@lesson 4.6 | When things go wrong | 🧯 | townhall
+hook: A client won't pay your $1,200 invoice. What can you do?
+learn: Start by talking, then put it in writing: what's owed, the due date and what happens next.
+learn: If that fails, {nz:the Disputes Tribunal hears claims up to $60,000 without lawyers.~au:state and territory tribunals, like NCAT or VCAT, hear small claims cheaply.}
+learn: Clear terms, deposits and written records make these disputes much easier to win.
+play: order | Chase an unpaid invoice step by step | Check your invoice and terms are correct; Send a polite reminder; Call or meet to talk it through; Send a written final notice with a date; Take a claim to {nz:the Disputes Tribunal~au:your state's tribunal}
+check: mcq | What should you do first if an invoice isn't paid? | Check your invoice and send a polite reminder* | Post about them online | Go straight to court
+check: tf | Written records help you win a dispute. | true
+home: Ask a grown-up if they've ever had to chase money they were owed, and what worked.
+skill: law
+
