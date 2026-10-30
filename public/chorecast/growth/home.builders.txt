@@ -1,0 +1,76 @@
+# home · builders
+@unit 1 | Cooking basics | Simple meals and kitchen skills
+@unit 2 | Laundry | Washing, drying and stains
+@unit 3 | First aid basics | Cuts, burns and when to get help
+@unit 4 | Cleaning a room | Top to bottom, dry to wet
+@unit 5 | Shopping lists | Planning food for a week
+@unit 6 | Getting around | Buses, bikes and road safety
+@unit 7 | Home safety | Power, heat and emergencies
+@unit 8 | Gardening | Growing food at home
+
+@lesson 1.1 | Kitchen basics | 🍳 | kitchen
+hook: Could you make a simple lunch with no help?
+learn: Wash your hands, read the recipe, and get everything ready before you start.
+learn: Measure carefully and clean up as you go.
+play: order | Make scrambled eggs in order | Wash your hands; Crack eggs into a bowl and whisk; Melt butter in a pan on medium heat; Stir the eggs gently until just set; Turn off the stove and serve
+check: mcq | What should you do before cooking? | Wash your hands and read the recipe* | Turn the heat on high | Skip the recipe
+check: tf | Cleaning as you go makes cooking easier. | true
+check: mcq | Pot handles should point… | Inwards, away from the edge* | Out over the edge | Anywhere
+home: Make a simple snack with a grown-up nearby.
+skill: cooking
+
+@lesson 1.2 | Laundry sorting | 🧺 | home
+hook: Why did the white school shirt turn pink?
+learn: Sort clothes into lights, darks and colours before washing.
+learn: Check pockets and read the care labels.
+play: sort | Lights, Darks, Colours | White school shirt=Lights; Navy jeans=Darks; Red hoodie=Colours; Black socks=Darks; Cream towel=Lights; Green t-shirt=Colours | Sort the washing
+check: mcq | A red sock in a white wash can… | Turn whites pink* | Make whites whiter | Do nothing
+check: tf | You should check pockets before washing. | true
+check: mcq | What tells you how to wash something? | The care label* | Its colour | A guess
+home: Sort a basket of washing into lights, darks and colours.
+skill: laundry
+
+@lesson 1.3 | First aid for cuts | 🩹 | home
+hook: A friend cuts their finger. What do you do first?
+learn: Wash your hands, press a clean cloth on the cut to stop bleeding, then rinse and cover it.
+learn: Get a grown-up for deep cuts or if bleeding won't stop. {nz:Call 111~au:Call 000} in an emergency.
+play: order | Put first aid for a small cut in order | Wash your hands; Press a clean cloth on the cut; Rinse it with clean water; Cover it with a plaster; Tell a grown-up
+check: mcq | First step for a bleeding cut? | Press a clean cloth on it* | Ignore it | Rub dirt on it
+check: tf | Deep cuts need a grown-up's help. | true
+check: mcq | For a minor burn, you should… | Cool it under cool running water for 20 minutes* | Put butter on it | Put ice straight on it
+home: Find where your family keeps the first aid kit.
+skill: firstaid
+
+@lesson 1.4 | Cleaning a room | 🧽 | home
+hook: Should you vacuum first or dust first?
+learn: Clean top to bottom, so dust falls onto areas you haven't cleaned yet.
+learn: Do dry jobs before wet ones: dust and vacuum, then wipe and mop.
+play: order | Clean the room in the right order | Pick up clutter; Dust shelves; Wipe surfaces; Vacuum the floor; Mop if needed
+check: mcq | Why clean top to bottom? | Dust falls down onto the floor* | It's fancy | No reason
+check: tf | Vacuum before you mop. | true
+check: mcq | First job when cleaning a room? | Pick up clutter* | Mop | Paint the walls
+home: Clean one room using top to bottom.
+skill: cleaning
+
+@lesson 1.5 | Shopping list | 📝 | kitchen
+hook: Without a list, how much extra do people often spend?
+learn: A list keeps you to what you need and stops impulse buys.
+learn: Check the cupboard first, then write meals and ingredients.
+play: budget | Plan a $60 shopping trip | 60 | Bread and milk=8; Fruit and veg=15; Dinner ingredients=25; Snacks=0; Spare=0 | Forgot washing powder:9
+check: mcq | What should you do before writing the list? | Check what's in the cupboard* | Go to the shop hungry | Buy everything
+check: tf | A list can help stop impulse buys. | true
+check: mcq | Shopping when hungry can make you… | Buy more snacks* | Buy less | Faster
+home: Help write next week's shopping list.
+skill: shopping
+
+@lesson 1.6 | Road safety | 🚲 | home
+hook: You're biking to a friend's. What keeps you safe?
+learn: Wear a helmet, check your brakes and be seen.
+learn: Stop, look and listen at every road. Use crossings when you can.
+play: tap | Tap the safe biking gear and habits | ⛑️:yes:A helmet protects your head; 🔦:yes:Lights help you be seen; 📱:no; 🦺:yes:Bright clothing helps drivers see you; 🎧:no; 🔔:yes:A bell warns others
+check: mcq | What should you always wear on a bike? | A helmet* | Headphones | Jandals only
+check: tf | Using your phone while biking is safe. | false
+check: mcq | At a road, you should… | Stop, look and listen* | Ride straight across | Close your eyes
+home: Check your bike's brakes and helmet with a grown-up.
+skill: safety
+

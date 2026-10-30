@@ -1,0 +1,79 @@
+# invest · makers
+@unit 1 | Index funds | Owning a slice of everything
+@unit 2 | Compound charts | Reading growth over decades
+@unit 3 | Market cycles | Booms, busts and recoveries
+@unit 4 | Fees matter | How 1% eats your future
+@unit 5 | Risk profiles | Conservative, balanced and growth
+@unit 6 | Ethical investing | Putting money where your values are
+@unit 7 | Hype and bubbles | Tulips, meme stocks and FOMO
+@unit 8 | Your first real investment | Platforms, minimums and staying safe
+
+@lesson 1.1 | Picking winners is hard | 🎯 | shares
+hook: Professional investors spend all day picking shares. Do they beat the market?
+learn: Studies that track fund managers find most fall behind a simple index fund over 10 to 15 years.
+learn: Fees, luck and guessing wrong all add up.
+learn: An index fund doesn't pick. It buys a bit of everything in a market.
+play: debate | Should a beginner pick single shares or buy an index fund? | An index fund, because it spreads risk and costs less* | Single shares, because you can find the next big winner | Picking single shares can teach you a lot and can win big, but most people who try it end up behind the index.
+check: tf | Most professional fund managers beat the index over long periods. | false
+check: mcq | What does an index fund do? | Buys a bit of everything in a market or index* | Picks only the best companies | Guarantees profits
+check: mcq | Why do many active funds fall behind? | Higher fees and wrong guesses* | They're lazy | They aren't allowed to win
+home: Find out if a grown-up's {nz:KiwiSaver~au:super} uses index funds.
+skill: index
+
+@lesson 1.2 | What's an index? | 📊 | shares
+hook: How do you measure how a whole share market is doing?
+learn: An index tracks a group of companies, like the biggest 50 or 200 in a country.
+learn: {nz:The NZX 50 tracks 50 of New Zealand's largest listed companies.~au:The S&P/ASX 200 tracks 200 of Australia's largest listed companies.}
+learn: The S&P 500 tracks about 500 large US companies.
+play: match | Match each index to what it tracks | {nz:NZX 50~au:S&P/ASX 200}={nz:50 big New Zealand companies~au:200 big Australian companies}; S&P 500=About 500 big US companies; A world index=Thousands of companies across many countries; A tech index=Technology companies
+check: mcq | What is an index? | A list that tracks a group of companies* | A type of loan | A single company
+check: tf | An index fund tries to copy an index, not beat it. | true
+check: mcq | Which is likely to be more diversified? | A world index fund* | One company's shares | A single tech start-up
+home: Look up today's {nz:NZX 50~au:S&P/ASX 200} level with a grown-up.
+skill: index
+
+@lesson 1.3 | Fees on funds | 🧮 | bank
+hook: Fund A charges 0.2% a year. Fund B charges 1.5%. Does it matter?
+learn: Fees come out every year, whether the fund goes up or down.
+learn: Over decades, a small fee difference can cost thousands.
+try: 1% of $10,000 is $100 a year :: gap | 1.5% of $10,000 = $_ a year | 150
+play: slider | $10,000 for 30 years at 6% grows to about $57,000. With 1% higher fees it grows at about 5%. Roughly how much less? | 0 | 30000 | 14000 | $ | 3000 | 500
+check: mcq | Which usually matters most over 30 years? | Ongoing fees* | The fund's logo | Which day you start
+check: gap | 0.5% of $20,000 = $_ | 100
+check: tf | A fund with higher fees is always better. | false
+home: Find the yearly fee of one fund your family uses.
+skill: fees
+
+@lesson 1.4 | One company or many? | 🧺 | shares
+hook: One company or 500 companies: which is riskier?
+learn: If one company fails, its shares can fall to zero.
+learn: In an index fund, one failure is a tiny part of the whole.
+play: sort | One company, Index fund | Can fall to zero if the company fails=One company; Spreads money over many companies=Index fund; Big wins and big losses possible=One company; Usually low fees=Index fund; You need to research each company=One company; Moves with the whole market=Index fund | Which is it?
+check: mcq | Why is an index fund less risky than one share? | Losses in one company are spread out* | It can't go down | The government owns it
+check: tf | An index fund can still go down when the whole market falls. | true
+check: mcq | What's the word for spreading risk? | Diversification* | Inflation | Taxation
+home: Look at your Chorecast holdings. Are your eggs in one basket?
+skill: diversify
+
+@lesson 1.5 | Time in the market | ⏱️ | shares
+hook: Is it smarter to wait for the perfect moment to invest?
+learn: Nobody can reliably predict the best day to buy or sell.
+learn: Investors who stay in the market through ups and downs have usually done better than those who jump in and out.
+play: market | Hold through 10 years with a crash in the middle | 10
+check: mcq | What's usually better for long-term investors? | Time in the market* | Timing the market | Selling on bad days
+check: tf | Experts can always predict market crashes. | false
+check: mcq | A crash happens. A long-term investor usually… | Holds, and sticks to the plan* | Sells everything | Stops saving forever
+home: Ask a grown-up how they felt during a market drop, and what they did.
+skill: cycles
+
+@lesson 1.6 | Guess the investor | 🕵️ | museum
+hook: One person made it cheap for ordinary people to invest in the whole market. Who?
+learn: Before low-cost index funds, investing often came with high fees.
+learn: One idea changed that for millions of people.
+play: mystery | He founded the investment company Vanguard in 1975; In 1976 he started an index fund for everyday investors; He said investors should keep costs low and hold for the long run; His first name was John | John Bogle* | Warren Buffett | Elon Musk
+check: mcq | What did John Bogle push for? | Low-cost index funds* | Day trading | Crypto
+check: tf | Keeping costs low helps investors keep more of their returns. | true
+check: mcq | What kind of investing did Bogle encourage? | Long-term and low-cost* | Quick trades | Guessing tips
+home: Tell someone at home what an index fund is in one sentence.
+skill: index
+

@@ -1,0 +1,78 @@
+# maths · builders
+@unit 1 | Percentages | Discounts, tax and tips
+@unit 2 | Recipes and scaling | Cooking for more or fewer people
+@unit 3 | Unit prices | Best buys at the supermarket
+@unit 4 | Time and rates | How fast, how long, how much
+@unit 5 | Rounding and estimating | Quick maths in your head
+@unit 6 | Reading charts | Bars, lines and pies
+@unit 7 | Averages | Mean, median and mode
+@unit 8 | Budget maths | Weekly, monthly and yearly
+
+@lesson 1.1 | What is a percentage? | 💯 | stall
+hook: "30% off" sounds great. But 30% of what?
+learn: Per cent means "out of 100". 30% means 30 out of every 100.
+learn: 10% is easy: divide by 10. Then build from there.
+try: 10% of $50 = $5, so 30% = $15 :: gap | 10% of $80 = $_ | 8
+play: gen | percent | 4
+check: gap | 50% of $60 = $_ | 30
+check: gap | 20% of $40 = $_ | 8
+check: mcq | 25% is the same as… | A quarter* | A half | A tenth
+home: Find a "% off" sign and work out the saving.
+skill: percent
+
+@lesson 1.2 | Discounts | 🏷️ | stall
+hook: Shoes are $80 with 25% off. What do you pay?
+learn: Find the discount, then take it away from the price.
+try: $80 × 25% = $20 off, so you pay $60 :: gap | $40 with 25% off. You pay $_ | 30
+play: mcq | Which is the better deal on a $60 jacket? | 30% off* | $15 off | They're the same
+check: gap | $100 with 20% off. You pay $_ | 80
+check: tf | 50% off means half price. | true
+check: mcq | $50 with 10% off costs… | $45* | $40 | $5
+home: Work out the sale price of something you'd like.
+skill: percent
+
+@lesson 1.3 | Scaling recipes | 🍝 | kitchen
+hook: The recipe serves 4. There are 6 of you. How much pasta now?
+learn: Find how much one serving needs, then multiply.
+learn: Or find the scale: 6 ÷ 4 = 1.5, then multiply every ingredient by 1.5.
+try: 400 g for 4 people is 100 g each :: gap | 400 g for 4 people. For 6 people: _ g | 600
+play: gen | scale | 3
+check: gap | 2 eggs for 4 people. For 8 people: _ eggs | 4
+check: mcq | A recipe for 2 needs 1 cup of rice. For 6? | 3 cups* | 2 cups | 6 cups
+check: tf | To halve a recipe, divide every ingredient by 2. | true
+home: Help scale a recipe for your family's dinner.
+skill: scaling
+
+@lesson 1.4 | Unit prices | ⚖️ | kitchen
+hook: A small cereal box is $4. The big one is $7. Which is better value?
+learn: The unit price is the cost per gram, per litre or per item.
+learn: Bigger isn't always cheaper. Check the unit price on the shelf label.
+play: gen | unit | 3
+check: price | Which is cheaper per 100 g? | Small cereal:4:400:g; Big cereal:7:1000:g
+check: tf | The biggest pack is always the best value. | false
+check: mcq | Unit price means… | Price per gram, litre or item* | The price of the whole pack | The discount
+home: Find the unit price on a supermarket shelf label.
+skill: unitprice
+
+@lesson 1.5 | Rounding | 🎯 | stall
+hook: Your trolley has $2.95, $4.10 and $6.99. Roughly how much is that?
+learn: Round to the nearest dollar to estimate fast.
+learn: $2.95 is about $3, $4.10 is about $4, $6.99 is about $7.
+play: gen | round | 4
+check: gap | $3 + $4 + $7 is about $_ | 14
+check: mcq | $9.49 rounds to… | $9* | $10 | $9.50
+check: tf | Rounding helps you check a bill quickly. | true
+home: Round your family's shopping items and estimate the total.
+skill: rounding
+
+@lesson 1.6 | Time maths | ⏰ | home
+hook: You start homework at 4:15 and it takes 45 minutes. When can you play?
+learn: Add minutes. Every 60 minutes is one more hour.
+try: 4:15 + 30 min = 4:45 :: gap | 4:15 + 45 minutes = _ (h:mm) | 5:00
+play: gen | time | 3
+check: gap | 9:30 + 90 minutes = _ (h:mm) | 11:00
+check: mcq | How many minutes in 2 hours? | 120* | 100 | 60
+check: tf | 75 minutes is more than an hour. | true
+home: Plan your afternoon with start and finish times.
+skill: time
+

@@ -1,0 +1,78 @@
+# make · sprouts
+@unit 1 | The lemonade stand | Cost, price and profit
+@unit 2 | Making things to sell | Crafts, baking and ideas
+@unit 3 | Happy customers | Smiles, thank yous and good service
+@unit 4 | Signs and posters | Telling people what you sell
+@unit 5 | Counting the cash box | Money in, money out
+@unit 6 | Selling with friends | Sharing work and sharing money
+@unit 7 | Fixing problems | When things go wrong at the stall
+@unit 8 | Big ideas | Inventions that help people
+
+@lesson 1.1 | What's a stall? | 🍋 | stall
+hook: You want to sell lemonade. What do you need?
+learn: A stall is a little shop. You make or get things, then sell them.
+learn: You need things to sell, a table, a sign and somewhere people walk past.
+play: tap | Tap what you need for a lemonade stand | 🍋:yes:Lemons to make lemonade; 🥤:yes:Cups to serve it; 🪧:yes:A sign so people know; 🛏️:no; 🧊:yes:Ice keeps it cold; 🎮:no; 🧸:no; 💰:yes:A cash box for change
+check: mcq | What does a stall need so people know what you sell? | A sign* | A bed | A game
+check: tf | You need somewhere people walk past. | true
+check: mcq | What's a stall? | A little shop* | A type of drink | A bank
+home: Plan a pretend stall: what would you sell?
+skill: business
+
+@lesson 1.2 | Costs | 🧾 | stall
+hook: Lemons, sugar and cups cost money. Does that matter if you sell lemonade?
+learn: Costs are what you spend to make your product.
+learn: You need to sell for more than your costs.
+play: order | Put the lemonade business in order | Buy lemons, sugar and cups; Make the lemonade; Sell cups to customers; Count the money; Take away what you spent
+check: mcq | What are costs? | Money you spend to make things* | Money customers give you | Free stuff
+check: tf | Lemons and cups are costs. | true
+check: mcq | If a cup costs 30c to make, you should sell it for… | More than 30c* | Less than 30c | Nothing
+home: Find the price of a bag of lemons at the shop.
+skill: costs
+
+@lesson 1.3 | Price and profit | 💰 | stall
+hook: You sell a cup for 50c. It cost 30c to make. How much did you really earn?
+learn: Price is what customers pay.
+learn: Profit is price take away cost.
+try: Price 50c take away cost 30c = 20c profit :: gap | Price 80c take away cost 30c = _c profit | 50
+play: shop | Set a price for your lemonade | Lemonade | 30 | 300
+check: gap | Price $1 take away cost 40c = _c profit | 60
+check: tf | If the price is too high, fewer people buy. | true
+check: mcq | What is profit? | Price take away costs* | All the money in the box | The cost of lemons
+home: Work out the profit if you sold 10 cups at 50c that cost 30c each.
+skill: profit
+
+@lesson 1.4 | Mikaila's lemonade | 🐝 | garden
+hook: A girl's family lemonade recipe became a real business. How?
+learn: Mikaila Ulmer started selling lemonade when she was 4, using her great-gran's recipe with honey.
+learn: She gave some of her money to help save bees.
+learn: Her lemonade later went on sale in big supermarkets in America.
+play: mystery | She started a business when she was 4; Her lemonade uses honey; Part of her money helps save bees; Her first name is Mikaila | Mikaila Ulmer* | A bee keeper in NZ | A lemon farmer
+check: tf | Kids can start small businesses. | true
+check: mcq | What did Mikaila's business help? | Bees* | Sharks | Cars
+check: mcq | What made her lemonade special? | Her great-gran's recipe with honey* | It was free | It was blue
+home: Think of a business idea that could help animals or nature.
+skill: business
+
+@lesson 1.5 | Being friendly | 😊 | stall
+hook: Would you buy from a grumpy stall or a smiley one?
+learn: People like buying from friendly sellers.
+learn: Say hello, say thank you, and give the right change.
+play: path | A customer gives you $1 for a 50c lemonade. | Smile, say thanks and give 50c change => good: The customer is happy and comes back tomorrow! | Keep the whole $1 => bad: That's not fair. Customers need the right change. | Say nothing and look at your phone => ok: They got their drink, but they didn't feel welcome.
+check: mcq | What do you say when someone buys something? | Thank you* | Go away | Nothing
+check: gap | A 50c drink, paid with $1. Change = _c | 50
+check: tf | Friendly sellers often get more customers. | true
+home: Practise saying "Hello, would you like a lemonade?" in a friendly voice.
+skill: service
+
+@lesson 1.6 | Make a sign | 🪧 | stall
+hook: Your stall needs a sign. What should it say?
+learn: A good sign is big, easy to read and says what and how much.
+learn: Pictures help too!
+play: mcq | Which sign is best? | LEMONADE 50c, with a lemon picture* | A tiny sign with no words | A sign saying "stuff"
+check: tf | Your sign should show the price. | true
+check: mcq | What helps people read a sign from far away? | Big letters* | Tiny writing | Grey on grey
+check: mcq | What two things should a sign say? | What it is and how much* | Your birthday and your pet's name | Nothing
+home: Draw a sign for a pretend stall with a price and a picture.
+skill: marketing
+

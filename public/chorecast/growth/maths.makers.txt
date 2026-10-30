@@ -1,0 +1,81 @@
+# maths · makers
+@unit 1 | Ratios and rates | Speed, pay rates and mixing
+@unit 2 | Probability | Chance, odds and why the house wins
+@unit 3 | Statistics | Reading data without being fooled
+@unit 4 | Percent change | Increases, decreases and inflation
+@unit 5 | Measurement | Areas, volumes and DIY
+@unit 6 | Simple interest | Borrowing and saving maths
+@unit 7 | Spreadsheets | Formulas that do the work
+@unit 8 | Graphs in the news | Spotting misleading charts
+
+@lesson 1.1 | Ratios | 🧃 | kitchen
+hook: Cordial says 1 part syrup to 4 parts water. How much water for 50 ml of syrup?
+learn: A ratio compares amounts. 1:4 means for every 1 of this, 4 of that.
+learn: Multiply both sides by the same number to scale up.
+try: 1:4 with 50 ml syrup means 200 ml water :: gap | 1:5 with 40 ml syrup needs _ ml water | 200
+play: match | Match the ratio to the mix | 1:1=Equal amounts; 1:3=One part to three parts; 2:1=Twice as much of the first; 1:10=A tiny bit of the first
+check: gap | Paint mixes 2:3 blue to white. 4 cups of blue needs _ cups of white | 6
+check: tf | 1:4 and 2:8 are the same ratio. | true
+check: mcq | 3 boys to 2 girls in a group of 10. How many girls? | 4* | 2 | 6
+home: Find a ratio on a packet at home.
+skill: ratio
+
+@lesson 1.2 | Rates | 🚗 | home
+hook: You earn $15 an hour and work 6 hours. Your friend earns $100 for a 7-hour day. Who earns more per hour?
+learn: A rate compares two different units, like dollars per hour or kilometres per hour.
+learn: Divide to compare. $100 ÷ 7 hours ≈ $14.29 an hour.
+try: $90 for 6 hours is $15 an hour :: gap | $120 for 8 hours = $_ an hour | 15
+play: mcq | Which job pays more per hour? | Café: $90 for 6 hours, so $15 an hour* | Babysitting: $100 for 7 hours, so about $14.29 an hour | They pay the same
+check: gap | 300 km in 3 hours = _ km per hour | 100
+check: mcq | $60 for 4 hours is… | $15 an hour* | $20 an hour | $240 an hour
+check: tf | A rate compares two different units. | true
+home: Work out a family car trip's average speed.
+skill: rates
+
+@lesson 1.3 | Chance | 🎲 | stage
+hook: A game says "1 in 10 win!" Should you play every day?
+learn: Probability is how likely something is, from 0 (impossible) to 1 (certain).
+learn: 1 in 10 means you'd expect to lose 9 times out of 10.
+learn: Games of chance are designed so the house wins over time.
+play: slider | You buy a $2 ticket with a 1 in 10 chance to win $10. Over 100 tries, roughly how much would you end up with if you start with $200? | 0 | 300 | 100 | $ | 30 | 10
+check: mcq | A 1 in 4 chance is… | 25%* | 4% | 40%
+check: tf | Over many games, games of chance usually favour the house. | true
+check: mcq | Probability of rolling a 6 on a die? | 1 in 6* | 1 in 2 | 6 in 6
+home: Flip a coin 20 times and count the heads.
+skill: probability
+
+@lesson 1.4 | Percent change | 📈 | shares
+hook: Prices went up from $4 to $5. Is that a 1% rise?
+learn: Percent change = change ÷ original × 100.
+learn: $4 to $5 is a $1 change. $1 ÷ $4 = 0.25, so 25%.
+try: $10 to $12 is $2 ÷ $10 = 20% :: gap | $20 to $25 = _% increase | 25
+play: gen | percent | 3
+check: gap | $50 down to $40 = _% decrease | 20
+check: mcq | A price rises 10% then falls 10%. It ends… | A bit lower than it started* | Back where it started | Higher
+check: tf | Percent change uses the original amount. | true
+home: Find an old price for something and work out how much it's risen.
+skill: percent
+
+@lesson 1.5 | Misleading charts | 📊 | online
+hook: Two charts show the same numbers. One looks like a disaster. How?
+learn: Charts can mislead with cut-off axes, odd scales or cherry-picked dates.
+learn: Always check where the axis starts and what period is shown.
+play: diff | The same data, two charts. Tap what's different about the second one. | Y axis starts at 0; Shows 10 years; Units: dollars; Source: listed | Y axis starts at 98; Shows 3 months; Units: dollars; Source: missing
+check: mcq | What can make a small change look huge? | Starting the axis above zero* | Using a title | Labelling units
+check: tf | Checking the source of a chart is a good habit. | true
+check: mcq | A chart shows only the worst three months. That's… | Cherry-picking* | Fair | A pie chart
+home: Find a chart in the news and check where its axis starts.
+skill: data
+
+@lesson 1.6 | Averages | 🧮 | stage
+hook: Five friends earn $10, $12, $12, $15 and $200. What's "typical"?
+learn: The mean adds everything and divides. One huge number pulls it up.
+learn: The median is the middle value, so it's less affected by extremes.
+try: $10, $12, $12, $15, $200 has a median of $12 :: gap | Median of 3, 5, 9 = _ | 5
+play: mcq | For the friends' earnings, which average best shows a typical friend? | The median, $12* | The mean, $49.80 | The biggest, $200
+check: gap | Mean of 4, 6 and 8 = _ | 6
+check: mcq | Which is affected most by one huge value? | The mean* | The median | Neither
+check: tf | The median is the middle value when sorted. | true
+home: Find the median of your family's ages.
+skill: data
+

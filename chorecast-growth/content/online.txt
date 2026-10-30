@@ -1,0 +1,306 @@
+# Smart Online
+@band sprouts
+@unit 1 | Private stuff | What not to share online
+@unit 2 | Ask first | Checking with a grown-up
+@unit 3 | Kind online | Being nice in games and chats
+@unit 4 | Tricky pop-ups | Ads and buttons that trick you
+@unit 5 | Passwords | Keeping secrets secret
+@unit 6 | Screen time | Balancing screens and play
+@unit 7 | Real or pretend | Not everything online is true
+@unit 8 | Telling someone | What to do if something feels wrong
+
+@lesson 1.1 | Private stuff | 🔒 | online
+hook: Your new game asks for your address. Do you type it in?
+learn: Some things are private: your full name, address, school, phone number and passwords.
+learn: Keep them offline unless a grown-up says it's OK.
+play: sort | Private, OK to share | Your home address=Private; Your favourite colour=OK to share; Your password=Private; Your school's name=Private; Your favourite animal=OK to share; Your phone number=Private | Private or OK to share?
+check: mcq | Which is private? | Your address* | Your favourite food | Your favourite colour
+check: tf | You should share your password with online friends. | false
+check: mcq | A game asks for your phone number. You… | Ask a grown-up first* | Type it in | Shout it out
+home: Make a list of private things with a grown-up.
+skill: privacy
+
+@lesson 1.2 | Ask a grown-up | 🙋 | online
+hook: A message says "Click here for free coins!" What do you do?
+learn: If something online asks you to click, buy, download or share, ask a grown-up first.
+learn: Free stuff online is often a trick.
+play: scam | Ask first or OK? | Click here for 1,000 free coins!=scam; Your teacher's homework page=real; Download this game hack=scam; Enter your parent's card for a prize=scam; A game your family already plays=real | Free prizes, hacks and card details are tricks. Ask first!
+check: tf | Free coins offers are always real. | false
+check: mcq | Someone asks for a card number in a game. You… | Tell a grown-up* | Get the card | Make one up
+check: mcq | Before downloading something, you… | Ask a grown-up* | Just do it | Download five things
+home: Agree with a grown-up which apps you can use on your own.
+skill: asking
+
+@lesson 1.3 | Kind online | 💬 | online
+hook: Someone loses a game and you type "LOL loser". How might they feel?
+learn: People online have feelings too, even if you can't see them.
+learn: Only type what you'd say to someone's face.
+play: sort | Kind, Unkind | Good game!=Kind; LOL loser=Unkind; Nice building!=Kind; Leaving someone out on purpose=Unkind; Want to play again?=Kind; Sharing a mean picture=Unkind | Kind or unkind?
+check: mcq | Which message is kind? | Good game!* | You're rubbish | Quit
+check: tf | People online have feelings too. | true
+check: mcq | Someone is mean to you online. You… | Tell a grown-up* | Be mean back | Keep it secret
+home: Say something kind to someone in a game or chat.
+skill: kindness
+
+@lesson 1.4 | Tricky buttons | 🔘 | online
+hook: A big green "PLAY" button is really an ad. How do you spot it?
+learn: Some buttons are ads dressed up as part of the game.
+learn: Look for small words like "Ad" or "Sponsored". When unsure, ask.
+play: tap | Tap the sneaky ads | 🟢:yes:A giant flashing "Download" button is often an ad; 🎁:yes:"Claim your prize!" pop-ups are tricks; ❌:no; ⏯️:no; 💎:yes:"Buy gems now 90% off!" is an ad; 🔊:no
+check: mcq | What words show an ad? | Ad or Sponsored* | Hello | Level 2
+check: tf | A flashing "You won!" pop-up is usually a trick. | true
+check: mcq | You're not sure if a button is an ad. You… | Ask a grown-up* | Tap it | Tap it twice
+home: Spot an "Ad" label on a website with a grown-up.
+skill: ads
+
+@lesson 1.5 | Strong passwords | 🔑 | online
+hook: Is "1234" a good password?
+learn: Strong passwords are long and hard to guess. A silly sentence works well: "PurpleFrogsEatPizza!"
+learn: Never share passwords, except with your grown-up.
+play: sort | Strong, Weak | 1234=Weak; PurpleFrogsEatPizza!=Strong; password=Weak; MyDogRunsFast2Day=Strong; your name=Weak; Ilove2SkateOnSundays=Strong | Strong or weak?
+check: mcq | Which password is strongest? | TigersLoveTacoTuesday* | tiger | 1111
+check: tf | You should tell friends your password. | false
+check: mcq | Who can know your password? | Your grown-up* | Your online friends | Everyone
+home: Make up a silly-sentence password with a grown-up.
+skill: passwords
+
+@lesson 1.6 | Something feels wrong | 🚨 | online
+hook: Someone online asks you to keep a secret from your parents. What now?
+learn: Grown-ups who are safe don't ask kids to keep secrets from their family.
+learn: If anything online feels wrong or scary, stop, close it and tell a grown-up straight away.
+play: order | What to do if something feels wrong | Stop typing; Close the app or screen; Tell a grown-up you trust; Show them what happened
+check: mcq | Someone online asks you to keep a secret from your parents. You… | Tell a grown-up* | Keep the secret | Send a photo
+check: tf | You will get in trouble for telling a grown-up. | false | Telling is always the right thing.
+check: mcq | First step when something feels wrong? | Stop and close it* | Keep chatting | Share it
+home: Agree with a grown-up who you'd tell if something online felt wrong.
+skill: safety
+
+@band builders
+@unit 1 | Scams | Spotting tricks for money and info
+@unit 2 | In-app purchases | Gems, coins and real money
+@unit 3 | Privacy settings | Who can see your stuff
+@unit 4 | Passwords and 2FA | Locking your accounts
+@unit 5 | Digital footprint | What stays online
+@unit 6 | Cyberbullying | Standing up and getting help
+@unit 7 | Fake news | Checking before you share
+@unit 8 | Healthy gaming | Fun without the regret
+
+@lesson 1.1 | Spot the scam | 🎣 | online
+hook: "You've won a free phone! Just pay $2 postage." Real?
+learn: Scams try to get your money or information.
+learn: Warning signs: prizes you didn't enter, urgency, secrecy, and requests for card details, codes or gift cards.
+play: scam | Real or scam? | You won a phone! Pay $2 postage now=scam; Your school's newsletter with the term dates=real; Send us a gift card code to unlock your account=scam; Your friend asks to meet at the park after school (in person at school earlier)=real; Act now or lose your account forever!=scam | Prizes you didn't enter, urgency and gift cards are big red flags.
+check: mcq | Which is a scam warning sign? | A prize for a competition you didn't enter* | Your teacher's email | A school notice
+check: tf | Real companies ask for gift card codes. | false
+check: mcq | You think something is a scam. You… | Don't reply, and tell a grown-up* | Pay just in case | Send your details
+home: Show a grown-up one scam message and how you spotted it.
+skill: scams
+
+@lesson 1.2 | Gems cost real money | 💎 | online
+hook: 500 gems for $7.99. How many real dollars is one gem?
+learn: Game currencies hide real prices on purpose.
+learn: Work out the real cost before you buy, and ask a grown-up.
+try: 100 gems for $2 is 2c a gem :: gap | 500 gems for $10 = _c a gem | 2
+play: mcq | Small pack: $2 for 100 gems. Big pack: $20 for 1,500 gems. Which is cheaper per gem? | The big pack, about 1.3c a gem* | The small pack, 2c a gem | They cost the same per gem
+check: mcq | Why do games use gems? | To hide real prices* | To be fair | Because gems are pretty
+check: tf | Gems cost real money. | true
+check: mcq | Before buying gems, you should… | Work out the real cost and ask a grown-up* | Buy the biggest pack | Use a parent's card secretly
+home: Find a game currency and work out what it really costs.
+skill: inapp
+
+@lesson 1.3 | Privacy settings | 🛡️ | online
+hook: Who can see your posts right now? Everyone in the world?
+learn: Privacy settings control who sees your posts, location and profile.
+learn: Set accounts to private or friends-only, and turn off location sharing.
+play: sort | Safer setting, Riskier setting | Private account=Safer setting; Location shared on every post=Riskier setting; Friends-only posts=Safer setting; Accepting requests from strangers=Riskier setting; Hiding your birthday=Safer setting | Safer or riskier?
+check: mcq | Safest account setting for kids? | Private* | Public | Everyone can message
+check: tf | Turning off location sharing helps keep you safe. | true
+check: mcq | A stranger sends a friend request. You… | Ignore or decline it* | Accept it | Send your address
+home: Check privacy settings on one app with a grown-up.
+skill: privacy
+
+@lesson 1.4 | Two-step login | 📲 | online
+hook: Someone guessed your password. Can they still get in?
+learn: Two-factor authentication (2FA) needs your password plus a code from your phone or app.
+learn: Even if someone has your password, they can't get in without the code.
+play: order | Log in with 2FA in order | Type your username; Type your password; Get a code on your phone or app; Type the code; You're in
+check: mcq | What does 2FA add? | A second code to log in* | A second password you share | Nothing
+check: tf | You should share 2FA codes with people who message you. | false
+check: mcq | Someone asks for your 2FA code. That's… | A scam* | Normal | Helpful
+home: Turn on 2FA for one account with a grown-up.
+skill: passwords
+
+@lesson 1.5 | Your digital footprint | 👣 | online
+hook: You deleted that silly post. Is it gone forever?
+learn: Posts can be screenshotted, shared and saved.
+learn: Think before you post: would you be OK with your grandparent or future boss seeing it?
+play: sort | Fine to post, Think twice | Your art project=Fine to post; An embarrassing photo of a friend=Think twice; A cool sunset=Fine to post; Your school uniform and street name=Think twice; A funny cat video=Fine to post | Fine to post or think twice?
+check: mcq | Can deleted posts still be seen? | Yes, if someone saved or screenshotted them* | Never | Only on Mondays
+check: tf | Your digital footprint can last a long time. | true
+check: mcq | A good test before posting? | Would I be OK with anyone seeing this?* | Will it get likes? | Is it mean?
+home: Search your name with a grown-up and see what comes up.
+skill: footprint
+
+@lesson 1.6 | Standing up to cyberbullying | 🛑 | online
+hook: Someone in your group chat keeps posting mean memes about a classmate. What do you do?
+learn: Don't join in, don't share, and support the person being targeted.
+learn: Save evidence and tell a grown-up. {nz:Netsafe (0508 638 723) can help.~au:The eSafety Commissioner can help.}
+play: path | A group chat is mocking a classmate. | Don't share it, message the classmate kindly and tell a grown-up => good: That takes courage, and it helps the person feel less alone. | Leave the chat quietly => ok: You didn't join in, which is good. Telling a grown-up would help more. | Add a funny reply => bad: Joining in makes it worse and hurts someone.
+check: mcq | You see cyberbullying. You… | Don't share, support them, tell a grown-up* | Share it | Join in
+check: tf | Saving evidence can help stop bullying. | true
+check: mcq | {nz:Who can help with online bullying in NZ?~au:Who can help with online bullying in Australia?} | {nz:Netsafe~au:The eSafety Commissioner}* | Nobody | The bully
+home: Talk with a grown-up about what you'd do if you saw cyberbullying.
+skill: bullying
+
+@band makers
+@unit 1 | Phishing and fraud | Emails, texts and fake websites
+@unit 2 | AI and deepfakes | When you can't trust what you see
+@unit 3 | Your data | Who collects it and why
+@unit 4 | Online shopping | Safe buying and fake stores
+@unit 5 | Social media and money | Influencers, hustles and get-rich schemes
+@unit 6 | Account security | Password managers and recovery
+@unit 7 | Sextortion and safety | Pressure, threats and getting help
+@unit 8 | Online reputation | Building a positive presence
+
+@lesson 1.1 | Phishing | 🎣 | online
+hook: An email from "Netflix" says your payment failed. The link goes to netf1ix-billing.com. Spot it?
+learn: Phishing tricks you into giving passwords or card details through fake messages and websites.
+learn: Check the sender, hover over links, and log in through the real app instead.
+play: scam | Real or phishing? | Login alert from your bank app, inside the app=real; Email from support@netf1ix-billing.com asking you to update your card=scam; Text: Your parcel is held. Pay $2.99 at this link=scam; Your school's portal, which you opened yourself=real; DM from a "brand" saying you've won, click to claim=scam | Look-alike addresses, small payments and prize links are classic phishing.
+check: mcq | What's suspicious about "netf1ix-billing.com"? | The 1 instead of an l, and an odd domain* | Nothing | It's too short
+check: tf | Logging in through the real app is safer than clicking email links. | true
+check: mcq | You clicked a phishing link and typed your password. Now… | Change your password and turn on 2FA* | Wait and see | Tell nobody
+home: Forward a suspicious message to {nz:Netsafe or the bank~au:Scamwatch or your bank}, with a grown-up.
+skill: scams
+
+@lesson 1.2 | Deepfakes | 🤖 | online
+hook: A video shows a famous person saying something shocking. Is it real?
+learn: AI can create realistic fake images, voices and videos.
+learn: Check the source, look for odd details, and see if trusted news reports it. Scammers also fake voices of family members.
+play: tap | Tap the signs something might be AI-made | 👀:yes:Odd eyes or blinking; 🖐️:yes:Hands with the wrong number of fingers; 📰:no; 🔊:yes:A voice that sounds slightly robotic; 💡:yes:Lighting that doesn't match; ✅:no
+check: mcq | Best way to check a shocking video? | Look for trusted sources reporting it* | Share it first | Trust it because it looks real
+check: tf | AI can fake voices of people you know. | true
+check: mcq | A "family member" calls asking for money urgently. You… | Hang up and call them back on their real number* | Send money | Give your bank login
+home: Agree a family "safe word" for emergencies.
+skill: ai
+
+@lesson 1.3 | Your data | 📊 | online
+hook: A free app. How does it make money?
+learn: Many free apps collect data about you and sell ads using it.
+learn: Check what permissions apps ask for. A torch app doesn't need your contacts.
+play: sort | Makes sense, Suspicious | Map app wants your location=Makes sense; Torch app wants your contacts=Suspicious; Camera app wants the camera=Makes sense; Calculator wants your microphone=Suspicious; Music app wants storage=Makes sense | Does the permission make sense?
+check: mcq | How do many free apps make money? | Ads using your data* | Magic | Charity
+check: tf | You can turn off app permissions you don't need. | true
+check: mcq | Which permission is suspicious? | A torch app wanting your contacts* | A map wanting location | A camera wanting the camera
+home: Check app permissions on a device with a grown-up.
+skill: data
+
+@lesson 1.4 | Fake online stores | 🛒 | online
+hook: Brand-name sneakers, 80% off, on a website you've never heard of. Bargain?
+learn: Fake stores use huge discounts, new domains, no contact details and pressure to pay by bank transfer.
+learn: Check reviews from other sites, and pay with methods that offer protection.
+play: scam | Real store or fake? | Big-name store you know, normal prices, clear returns policy=real; Brand-name shoes 85% off, bank transfer only=scam; Store with a physical address, phone number and reviews on other sites=real; Site created last week with countdown timers on every item=scam | Huge discounts, transfer-only payments and brand-new sites are red flags.
+check: mcq | Which payment usually offers more protection? | A credit card or trusted payment service* | Bank transfer to a stranger | Gift cards
+check: tf | A deal that seems too good to be true often is. | true
+check: mcq | Where should you check reviews? | On other trusted sites* | Only on the store's own page | Nowhere
+home: Check a store you use for contact details and a returns policy.
+skill: shopping
+
+@lesson 1.5 | Get-rich-quick | 🚗 | online
+hook: An influencer with a rented sports car says you can make $10,000 a month from your phone. Will you?
+learn: Get-rich-quick schemes sell dreams, courses or "systems". Often the only person getting rich is the seller.
+learn: Real income takes skills, time and effort.
+play: debate | An influencer's $499 course promises $10k a month. Buy it? | Be very sceptical. Check independent reviews and evidence of real results* | Yes, they have a nice car so it must work | Some online courses genuinely teach valuable skills. The test is evidence, refunds and realistic promises.
+check: mcq | A sign of a get-rich-quick scheme? | Huge promises with little proof* | Clear, modest claims | Free library books
+check: tf | A flashy lifestyle online proves someone's scheme works. | false
+check: mcq | Real income usually needs… | Skills, time and effort* | A secret trick | Luck only
+home: Find a "make money fast" ad and list its warning signs.
+skill: hype
+
+@lesson 1.6 | Pressure and threats | 🛑 | online
+hook: Someone online threatens to share a private photo unless you pay. What do you do?
+learn: This is a crime called sextortion. It's never your fault.
+learn: Don't pay, stop replying, save evidence and tell a trusted adult. {nz:Netsafe (0508 638 723) or the Police can help.~au:The eSafety Commissioner, the AFP and Kids Helpline can help.}
+play: order | What to do if someone threatens you online | Stop replying; Don't pay or send anything more; Screenshot the messages; Tell a trusted adult; Report it to {nz:Netsafe or the Police~au:eSafety or the police}
+check: mcq | Someone threatens you online for money. You… | Don't pay, save evidence, get help* | Pay them | Keep it secret
+check: tf | It's never the victim's fault. | true
+check: mcq | {nz:Who can help in NZ?~au:Who can help in Australia?} | {nz:Netsafe or the Police~au:eSafety, the police or Kids Helpline}* | Nobody | The person threatening you
+home: Save {nz:Netsafe's~au:eSafety's} contact details in your phone.
+skill: safety
+
+@band launchers
+@unit 1 | Identity theft | Protecting your identity documents
+@unit 2 | Banking online safely | Apps, transfers and scams
+@unit 3 | Digital contracts | Terms of service and subscriptions
+@unit 4 | Side hustles online | Selling, freelancing and getting paid
+@unit 5 | Crypto and investment scams | Fake platforms and pig butchering
+@unit 6 | Professional presence | LinkedIn and portfolios
+@unit 7 | Privacy rights | Your data and the law
+@unit 8 | AI at work and study | Using AI well and honestly
+
+@lesson 1.1 | Protecting your identity | 🪪 | online
+hook: Someone takes out a loan in your name. How could they get your details?
+learn: Identity thieves use stolen IDs, birth dates, addresses and photos of documents.
+learn: Never post your licence or passport, shred old documents, and check your credit report.
+play: tap | Tap the things worth protecting | 🪪:yes:Your licence or ID; 📮:yes:Mail with your address and bank details; 🎂:yes:Your full birth date; 🍕:no; 🛂:yes:Your passport; 🎵:no; 📱:yes:Your phone's verification codes
+check: mcq | What can help you spot identity theft? | Checking your credit report* | Ignoring mail | Posting your ID
+check: tf | Posting a photo of your licence online is safe. | false
+check: mcq | {nz:Where can NZers get identity theft help?~au:Where can Australians get identity theft help?} | {nz:IDCARE or the Police~au:IDCARE}* | A random forum | Nobody
+home: Check your mailbox habits and shred one old document.
+skill: identity
+
+@lesson 1.2 | Bank transfer scams | 💸 | bank
+hook: A text from your "bank" says a payment is pending and to call this number. Do you?
+learn: Scammers pretend to be banks, delivery companies or government agencies.
+learn: Never move money to a "safe account". Banks don't ask you to.
+play: scam | Real or scam? | Your bank app notification about a new device login, which you check inside the app=real; Caller from "the bank" asking you to move money to a safe account=scam; Text: IRD refund waiting. Click to claim=scam; Email receipt for a purchase you made, matching your bank statement=real | Banks never ask you to move money to a "safe account".
+check: mcq | Someone asks you to move money to a "safe account". That's… | A scam* | Normal | Helpful
+check: tf | You should call the number in a suspicious text. | false | Use the number on your card or the official website.
+check: mcq | You've been scammed. First step? | Call your bank immediately* | Wait a week | Send more money
+home: Save your bank's real phone number in your contacts.
+skill: scams
+
+@lesson 1.3 | Subscriptions | 🔁 | online
+hook: Free trial! You forget to cancel. How much does that cost over a year?
+learn: Free trials often turn into paid subscriptions automatically.
+learn: Set reminders, check your statements and cancel what you don't use.
+try: $12.99 a month is about $156 a year :: gap | $9.99 a month for 12 months = $_ (round to dollars) | 120
+play: diff | Your subscriptions in January and now. Tap what's new. | Music $11.99; Phone plan $30 | Music $11.99; Phone plan $30; Video app $18.99; Fitness app $14.99; Cloud storage $4.99
+check: mcq | How to avoid forgotten trials? | Set a reminder to cancel* | Hope they stop | Never check
+check: tf | Free trials can turn into paid plans automatically. | true
+check: gap | $15 a month × 12 = $_ a year | 180
+home: List all your subscriptions and their yearly cost.
+skill: subscriptions
+
+@lesson 1.4 | Freelancing online | 💻 | online
+hook: Someone wants you to design a logo for $50. They'll pay after. Risky?
+learn: Use platforms with payment protection, or ask for a deposit upfront.
+learn: Agree the scope, deadline and number of changes in writing.
+play: chat | A client wants a logo | them: Can you do a logo for my cafe? $50, I'll pay when it's done. | me: Sure! I ask for half up front, and the price covers two rounds of changes*/Sure, I'll start now, no questions/$5000 or nothing | them: Two rounds is fine. When can you have it ready? | me: A first draft by Friday, final by next Wednesday, once the deposit's in*/Whenever/Maybe never
+check: mcq | What protects freelancers? | Deposits and written agreements* | Trusting everyone | Working for free
+check: tf | Agreeing the number of changes up front helps. | true
+check: mcq | A safe way to get paid online? | A platform with payment protection* | Gift cards | Cash in the mail
+home: Write a simple scope for a freelance job you could do.
+skill: selfemployed
+
+@lesson 1.5 | Investment scams | 📉 | shares
+hook: A friendly stranger online shows you their crypto profits and offers to help you invest. Nice?
+learn: In "pig butchering" scams, scammers build trust over weeks, then push fake investment platforms.
+learn: Fake platforms show big gains, but you can't withdraw. Then they ask for "fees".
+play: scam | Real or scam? | A licensed fund you can check on the official register=real; A new online friend with a "secret" crypto platform=scam; Guaranteed 20% a month returns=scam; Your bank's investment app with clear fees=real; Pay a fee to withdraw your profits=scam | Guaranteed returns, secret platforms and withdrawal fees are huge red flags.
+check: mcq | A red flag for investment scams? | Guaranteed high returns* | Clear fees | Being on an official register
+check: tf | You should check if an investment provider is licensed. | true
+check: mcq | {nz:Where can you check a NZ financial provider?~au:Where can you check an Australian financial provider?} | {nz:The FMA and the Financial Service Providers Register~au:ASIC's registers and Moneysmart}* | A chat group | Nowhere
+home: Look up the {nz:FMA~au:ASIC} scam warnings list.
+skill: scams
+
+@lesson 1.6 | Using AI honestly | 🧠 | online
+hook: AI writes your essay. Is that cheating?
+learn: AI can help brainstorm, explain and check, but passing off its work as yours can break school rules.
+learn: AI makes mistakes. Check facts, and follow your school's or employer's rules.
+play: sort | Usually fine, Usually not OK | Asking AI to explain a hard topic=Usually fine; Submitting an AI essay as your own=Usually not OK; Using AI to check grammar=Usually fine; Copying AI answers in a test=Usually not OK; Brainstorming ideas then writing yourself=Usually fine | Fine or not OK?
+check: mcq | What should you do with AI answers? | Check them, because AI can be wrong* | Trust them completely | Never read them
+check: tf | Rules on AI use can differ between schools and jobs. | true
+check: mcq | Honest AI use means… | Following the rules and saying when you used it* | Hiding it | Copying everything
+home: Read your school's rules about using AI.
+skill: ai

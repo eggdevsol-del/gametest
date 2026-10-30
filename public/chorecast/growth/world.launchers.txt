@@ -1,0 +1,77 @@
+# world · launchers
+@unit 1 | Tax systems | {nz:IRD, PAYE and tax returns~au:The ATO, PAYG and tax returns}
+@unit 2 | Law for young adults | Contracts, tenancy and your rights
+@unit 3 | Citizenship and voting | Enrolling and making your vote count
+@unit 4 | Government money | Budgets, debt and trade-offs
+@unit 5 | Social support | {nz:Work and Income and StudyLink~au:Centrelink and youth payments}
+@unit 6 | Treaty and reconciliation | {nz:Te Tiriti in modern life~au:Reconciliation and the Uluru Statement}
+@unit 7 | Global economy | Trade, sanctions and aid
+@unit 8 | Building a fairer world | Systems change and your role
+
+@lesson 1.1 | Filing a tax return | 📨 | townhall
+hook: Your first year of work is done. Do you need to file a tax return?
+learn: {nz:Most NZ employees don't need to file. IRD sends an automatic assessment, which can mean a refund or a bill. Check myIR.~au:Most Australian workers lodge a tax return each year, often through myTax in myGov, between July and 31 October.}
+learn: Keep payslips and receipts for work expenses.
+play: mcq | {nz:Where do NZers manage their tax online?~au:Where do Australians usually lodge their own tax return online?} | {nz:myIR~au:myTax in myGov}* | {nz:A bank app~au:A bank app} | {nz:Nowhere~au:Nowhere}
+check: tf | You should keep payslips and receipts. | true
+check: mcq | {nz:What might an automatic IRD assessment give you?~au:When is the usual deadline to lodge your own return?} | {nz:A refund or a bill~au:31 October}* | {nz:A new car~au:Christmas Day} | {nz:Nothing ever~au:Any time}
+check: mcq | A tax refund means… | You paid too much tax during the year* | You won a prize | You owe more
+home: {nz:Set up a myIR account with a grown-up.~au:Look at the myGov sign-up page with a grown-up.}
+skill: tax
+
+@lesson 1.2 | Contracts and age | ✍️ | townhall
+hook: You're 17 and sign a phone contract. Is it binding?
+learn: Rules about contracts for under-18s differ, but adults and businesses often need a parent to co-sign.
+learn: Once you're 18, contracts you sign are generally binding. Read before you sign.
+play: diff | The sales pitch and the actual contract. Tap what the pitch didn't mention. | Phone: $0 upfront; Plan: $45 a month; Data: 40 GB | Phone: $0 upfront; Plan: $45 a month for 36 months; Data: 40 GB; Early exit fee: remaining phone balance; Price rises each April
+check: mcq | Before signing a contract you should… | Read it and ask questions* | Sign fast | Skip the fine print
+check: tf | At 18, contracts you sign are generally binding. | true
+check: mcq | Which is a hidden cost to check? | Early exit fees* | The logo | The shop music
+home: Read the key terms of a contract a grown-up has signed.
+skill: contracts
+
+@lesson 1.3 | Government trade-offs | ⚖️ | townhall
+hook: The government has $1 billion. More nurses or more roads?
+learn: Budgets involve trade-offs. Money spent on one thing can't be spent on another.
+learn: Governments can also borrow, which means paying interest later.
+play: budget | Plan a pretend $100 million budget | 100 | Health=30; Education=25; Transport=15; Welfare=20; Reserve=0 | Flood recovery:8
+check: mcq | What is a trade-off? | Choosing one thing means giving up another* | A free lunch | A type of tax
+check: tf | Government borrowing has to be repaid with interest. | true
+check: mcq | Why keep a reserve? | For emergencies like floods* | To waste it | No reason
+home: Read a news story about this year's budget and list one trade-off.
+skill: civics
+
+@lesson 1.4 | Social support | 🤝 | townhall
+hook: You lose your job at 19. Is there help?
+learn: {nz:Work and Income can help with job seeking and benefits. StudyLink helps students with allowances and loans.~au:Centrelink, through Services Australia, can help with youth payments, JobSeeker and study support.}
+learn: Eligibility rules apply. Apply early and keep records.
+play: match | Match the situation to where to start | Lost your job={nz:Work and Income~au:Centrelink}; Studying full time={nz:StudyLink~au:Centrelink youth payments}; Need tax help={nz:IRD~au:The ATO}; Renting problem={nz:Tenancy Services~au:Your state tenancy service}
+check: mcq | {nz:Who helps NZ students with allowances?~au:Who handles youth payments in Australia?} | {nz:StudyLink~au:Centrelink}* | A bank | Nobody
+check: tf | Applying early for support is a good idea. | true
+check: mcq | What should you keep when applying? | Records and documents* | Nothing | Only photos
+home: Find the youth support page on {nz:workandincome.govt.nz~au:servicesaustralia.gov.au}.
+skill: support
+
+@lesson 1.5 | {nz:Te Tiriti today~au:Reconciliation} | 🌿 | museum
+hook: {nz:How does Te Tiriti show up in everyday life today?~au:What does reconciliation mean in Australia today?}
+learn: {nz:Te Tiriti principles are referred to in many laws. Treaty settlements have funded iwi organisations that invest for future generations.~au:Reconciliation is about building respectful relationships between First Nations peoples and other Australians.}
+learn: {nz:Te reo Māori is an official language, and many workplaces now use it every day.~au:The 2017 Uluru Statement from the Heart called for a Voice, Treaty and Truth. A 2023 referendum on a Voice to Parliament did not pass.}
+learn: People hold different views on these questions. Learning the history helps you form your own.
+play: mcq | {nz:Which is an official language of New Zealand?~au:What did the 2017 Uluru Statement call for?} | {nz:Te reo Māori~au:Voice, Treaty and Truth}* | {nz:Latin~au:A new flag} | {nz:French~au:Lower taxes}
+check: tf | People hold different views on these questions. | true
+check: mcq | {nz:Treaty settlements have often funded…~au:What happened in the 2023 Voice referendum?} | {nz:Iwi organisations investing for the future~au:It did not pass}* | {nz:Nothing~au:It passed in every state} | {nz:Sports stadiums only~au:It was cancelled}
+check: mcq | A good way to form your own view? | Learn the history from many voices* | Read one comment | Ignore it
+home: {nz:Learn a few everyday te reo Māori phrases.~au:Find out what the Uluru Statement says in its own words.}
+skill: history
+
+@lesson 1.6 | Systems change | 🔧 | townhall
+hook: Why do some problems come back no matter how much people help?
+learn: Some problems have causes built into systems, like rules, prices or how services are designed.
+learn: Changing systems takes time: research, coalitions, and persistent advocacy.
+play: debate | Is it better to help one person now or change the system? | Both matter. Help now, and work on causes* | Only systems matter, never help individuals | Helping one person makes a real difference to their life today, even if the system takes years to change.
+check: mcq | What is systems change? | Fixing the causes built into rules and services* | Changing your phone | Buying more
+check: tf | Systems change often takes years. | true
+check: mcq | What helps systems change? | Research, partners and persistence* | One angry post | Giving up
+home: Pick a problem you care about and name one possible cause.
+skill: advocacy
+

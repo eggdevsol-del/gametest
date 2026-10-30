@@ -1,0 +1,80 @@
+# time · launchers
+@unit 1 | Modern money | Fiat money, banks and how money is created
+@unit 2 | Inflation and policy | Why central banks target inflation
+@unit 3 | Crises and lessons | Enron, 2008 and FTX
+@unit 4 | Currency and exchange | Why exchange rates move
+@unit 5 | Debt through history | Countries, people and default
+@unit 6 | Indigenous economies | {nz:Māori trade and enterprise~au:Aboriginal and Torres Strait Islander trade}
+@unit 7 | Crypto in context | Bitcoin's history and risks
+@unit 8 | The future of money | Digital currencies and cashless societies
+
+@lesson 1.1 | Fiat money | 💵 | bank
+hook: Your $20 note isn't backed by gold. So why is it worth anything?
+learn: Modern money is "fiat" money. It's valuable because people trust it and the law says it must be accepted for debts.
+learn: Most money is created when banks make loans, as deposits in accounts.
+play: debate | What gives modern money its value? | Trust, law and a stable economy* | Gold locked in a vault | Some people argue gold-backed money would be more stable. Most economists think fiat money gives more flexibility in a crisis.
+check: mcq | What is fiat money? | Money valued by trust and law, not gold* | Money made of gold | Bartering
+check: tf | Most money today exists as bank deposits. | true
+check: mcq | How is most new money created? | When banks make loans* | Printing only | Mining
+home: Read about how money is created on {nz:the Reserve Bank's~au:the RBA's} education pages.
+skill: money
+
+@lesson 1.2 | Enron | 📊 | townhall
+hook: A giant energy company looked super profitable. Then it collapsed in weeks. How?
+learn: Enron hid debts and invented profits with accounting tricks.
+learn: When the truth came out in 2001, the company went bankrupt and its auditor collapsed too.
+learn: New laws made company leaders and auditors more responsible for honest accounts.
+play: diff | What Enron reported and what was true. Tap the differences. | Profits: growing fast; Debts: small; Auditor: independent; Shares: a safe bet | Profits: partly invented; Debts: hidden off the books; Auditor: compromised; Shares: almost worthless
+check: mcq | What did Enron hide? | Debts and real losses* | Its logo | Its office
+check: tf | Auditors are meant to check accounts independently. | true
+check: mcq | When did Enron collapse? | 2001* | 1929 | 2020
+home: Find out what an auditor does.
+skill: governance
+
+@lesson 1.3 | FTX | 🪙 | online
+hook: A crypto exchange worth billions collapsed in days in 2022. Where did customers' money go?
+learn: FTX was a crypto exchange. Customers deposited money to trade.
+learn: Customer funds were secretly used by a related trading firm. When people rushed to withdraw, the money wasn't there.
+learn: Its founder, Sam Bankman-Fried, was convicted of fraud in 2023.
+play: scam | Warning sign or normal? | An exchange mixes customer money with its own trading=scam; Customer money kept separate and audited=real; Promises of guaranteed high returns=scam; Clear fees and regular independent audits=real | Mixing customer funds and guaranteed returns are red flags.
+check: mcq | What went wrong at FTX? | Customer money was used without permission* | A website crash only | Nothing
+check: tf | Customer funds should be kept separate from a company's own money. | true
+check: mcq | What happened to the founder? | Convicted of fraud in 2023* | Became prime minister | Nothing
+home: Read one article about why keeping customer funds separate matters.
+skill: scams
+
+@lesson 1.4 | Exchange rates | 💱 | bank
+hook: Your trip to Japan suddenly costs more. Why?
+learn: An exchange rate is how much of one currency buys another.
+learn: Rates move with interest rates, trade, and how confident investors feel.
+try: If $1 buys ¥90, then $100 buys ¥9,000 :: gap | If $1 buys ¥90, ¥4,500 costs $_ | 50
+play: slider | $1 used to buy ¥95. Now it buys ¥85. Roughly how many dollars does a ¥17,000 hotel cost now? | 100 | 300 | 200 | $ | 15 | 5
+check: mcq | If your dollar buys fewer yen, overseas trips cost… | More* | Less | The same
+check: tf | Exchange rates change over time. | true
+check: mcq | What can move exchange rates? | Interest rates and trade* | The weather only | Nothing
+home: Look up today's exchange rate to the yen or euro.
+skill: currency
+
+@lesson 1.5 | Bitcoin's story | ₿ | online
+hook: In 2010, someone paid 10,000 bitcoin for two pizzas. Was that a bad deal?
+learn: Bitcoin launched in 2009 as digital money without a central bank.
+learn: Its price has swung wildly, up and down by huge amounts in short times.
+learn: Some see it as the future. Others see a speculative bubble. Both views have serious supporters.
+play: market | Ride a very bumpy price for 10 years | 10
+check: mcq | What makes crypto risky? | Huge price swings and little protection* | It's printed by banks | It's guaranteed
+check: tf | Experts disagree about crypto's future. | true
+check: mcq | When did Bitcoin launch? | 2009* | 1990 | 2020
+home: Explain "high risk" in your own words to a grown-up.
+skill: risk
+
+@lesson 1.6 | Early trade | 🛶 | museum
+hook: {nz:When Europeans first arrived, how did Māori trade with them?~au:Long before 1788, how did Aboriginal and Torres Strait Islander peoples trade?}
+learn: {nz:Māori traded flax, timber and food for tools and other goods, and by the 1840s and 1850s many iwi ran their own ships and flour mills.~au:Trade networks across the continent moved ochre, stone tools, shells and other goods over long distances for thousands of years.}
+learn: These economies were sophisticated and are an important part of our history. Stories like these should be told with the communities they belong to.
+play: tf | {nz:Many iwi ran their own ships and flour mills in the mid-1800s.~au:Aboriginal trade networks moved goods across long distances.} | true
+check: mcq | {nz:What did Māori trade with early Europeans?~au:What moved along Aboriginal trade networks?} | {nz:Flax, timber and food~au:Ochre, stone tools and shells}* | {nz:Smartphones~au:Smartphones} | Nothing
+check: tf | Indigenous economies existed long before colonisation. | true
+check: mcq | Who should help tell these stories? | The communities they belong to* | Nobody | Only tourists
+home: Visit a museum website and find one object linked to early trade.
+skill: history
+

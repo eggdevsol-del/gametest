@@ -728,6 +728,45 @@ p{margin:0}
 .hq>.ic{color:var(--ink-2);margin-top:13px}
 .not-here{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 12px;border-radius:999px;background:var(--fill);color:var(--ink-2);font:500 13px var(--f-text);white-space:nowrap}
 .not-here .ic{width:15px;height:15px}
+/* ---------- Sign-in ---------- */
+.auth{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:calc(env(safe-area-inset-top,0px) + 24px) var(--gut-r) calc(env(safe-area-inset-bottom,0px) + 24px) var(--gut);position:relative;z-index:2}
+.auth-card{width:100%;max-width:460px;border-radius:32px;padding:26px 24px;display:flex;flex-direction:column;gap:18px;color:#fff}
+.auth-brand{display:flex;align-items:center;gap:14px}
+.auth-brand b{display:block;font:900 26px var(--f-round);letter-spacing:-.01em}
+.auth-brand small{font:700 14px var(--f-round);color:var(--on-sky-2)}
+.auth-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:16px;background:rgba(0,20,70,.22)}
+.auth-tabs button{min-height:40px;border-radius:12px;font:800 15px var(--f-round);color:var(--on-sky-2)}
+.auth-tabs button.on{background:#fff;color:#0D1530;box-shadow:0 4px 12px -6px rgba(0,0,0,.4)}
+.auth-form{display:flex;flex-direction:column;gap:12px}
+.auth-form h2,.auth-done h2{font:900 24px var(--f-round)}
+.auth-help{font:600 15px/1.45 var(--f-round);color:var(--on-sky-2)}
+.auth-field{display:flex;flex-direction:column;gap:6px;font:800 13px var(--f-round);letter-spacing:.04em;text-transform:uppercase;color:var(--on-sky-2)}
+.auth-field input{min-height:52px;padding:0 16px;border-radius:16px;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;font:700 18px var(--f-round);letter-spacing:0;text-transform:none;outline:none;-webkit-user-select:text;user-select:text}
+.auth-field input::placeholder{color:rgba(255,255,255,.55)}
+.auth-field input:focus{border-color:#fff;background:rgba(255,255,255,.22)}
+.auth-form .btn-white,.auth-done .btn-white{width:100%;margin-top:4px}
+.auth-err{padding:10px 14px;border-radius:14px;background:rgba(160,20,40,.35);font:700 15px/1.4 var(--f-round)}
+.auth-link{min-height:44px;font:800 15px var(--f-round);color:#fff;text-decoration:underline;text-underline-offset:3px;opacity:.9}
+.auth-local{min-height:44px;padding:0 16px;font:700 14px var(--f-round);color:var(--on-sky-2);text-decoration:underline;text-underline-offset:3px}
+.auth-done{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.auth-done p{font:600 15px/1.45 var(--f-round);color:var(--on-sky-2)}
+.auth-ic{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;background:rgba(255,255,255,.2)}
+.auth-ic .ic{width:32px;height:32px}
+.auth-code{font:900 30px var(--f-round);letter-spacing:.08em;padding:14px 20px;border-radius:18px;background:#fff;color:#0D1530;-webkit-user-select:all;user-select:all}
+/* ---------- Family and devices ---------- */
+.fam-hero{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:18px 20px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#2F6FE4,#5AC8FA)}
+.fam-hero>div{flex:1;min-width:200px}
+.fam-hero h3{font:700 22px var(--f-text)}
+.fam-hero p{font:400 15px/1.4 var(--f-text);opacity:.92;margin-top:2px}
+.fam-hero .pbtn{background:#fff;color:#2F6FE4}
+.fh-ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.22)}
+.fh-ic .ic{width:28px;height:28px}
+.fam-av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--p-accent);color:#fff;font:700 16px var(--f-text);flex:none}
+.fam-dev{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--fill);color:var(--ink-2);flex:none}
+.fam-code{font:700 20px var(--f-mono);letter-spacing:.08em;padding:8px 12px;border-radius:12px;background:var(--fill);-webkit-user-select:all;user-select:all}
+.fam-code.big{font-size:28px;color:var(--p-accent)}
+.cg-earn{background:linear-gradient(135deg,#7C5CFF,#C084FC)!important;color:#fff!important}
+.res-grow{min-height:44px;padding:0 18px;border-radius:999px;background:rgba(255,255,255,.2);font:800 15px var(--f-round);display:inline-flex;align-items:center;gap:8px}
 .rcard{display:grid;grid-template-columns:minmax(0,1fr);background:var(--cell);border-radius:20px;overflow:hidden;margin-bottom:16px}
 @media (min-width:760px){ .rcard{grid-template-columns:minmax(0,5fr) minmax(0,6fr)} }
 .rphoto{position:relative;display:block;width:100%;aspect-ratio:4/3;background:var(--fill);overflow:hidden}
@@ -1345,10 +1384,10 @@ const DEFAULT_SETTINGS = { currency: '$', taxRate: 10, interestWeekly: 2, photoR
 /* =========================================================
    Store: cloud db + assets when available, this device otherwise
    ========================================================= */
-const Store = { mode: 'local', db: null, assets: null, ready: false, ver: 0, settings: null, kids: {}, jobs: {}, habits: {} };
+const Store = { mode: 'local', db: null, assets: null, ready: false, ver: 0, settings: null, kids: {}, jobs: {}, habits: {}, growth: {} };
 const LOCAL_KEY = 'chorecast:v1';
-function loadLocal() { const d = lsGet(LOCAL_KEY, null); if (d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; } }
-function saveLocal() { if (Store.mode === 'local') lsSet(LOCAL_KEY, { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits }); }
+function loadLocal() { const d = lsGet(LOCAL_KEY, null); if (d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; } }
+function saveLocal() { if (Store.mode === 'local') lsSet(LOCAL_KEY, { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits, growth: Store.growth }); else if (Store.mode === 'server') cacheSoon(); }
 const queues = {};
 function enqueue(path, fn) { const p = (queues[path] || Promise.resolve()).then(fn, fn); queues[path] = p.catch(() => {}); return p; }
 function applyLocal(col, id, body, merge) {
@@ -1360,6 +1399,7 @@ function writeDoc(col, id, body, merge, defer = 0) {
   applyLocal(col, id, body, merge);
   scheduleRender();
   if (Store.mode === 'local') { saveLocal(); return Promise.resolve(true); }
+  if (Store.mode === 'server') cacheSoon();
   const path = `${col}/${id}`;
   if (defer) {
     const d = deferred[path] || (deferred[path] = { patch: {}, t: 0 });
@@ -1370,6 +1410,7 @@ function writeDoc(col, id, body, merge, defer = 0) {
   return remote(path, body, merge);
 }
 function remote(path, body, merge) {
+  if (Store.mode === 'server') return enqueue(path, () => serverWrite(merge ? 'PATCH' : 'PUT', path, body));
   return enqueue(path, async () => {
     const run = () => { const ref = Store.db.doc(path); return merge ? ref.update(body) : ref.set(body); };
     try { await run(); return true; }
@@ -1386,6 +1427,7 @@ const updDoc = (c, i, b, defer) => writeDoc(c, i, b, true, defer);
 function delDoc(col, id) {
   delete Store[col][id]; scheduleRender();
   if (Store.mode === 'local') { saveLocal(); return Promise.resolve(); }
+  if (Store.mode === 'server') { cacheSoon(); return enqueue(`${col}/${id}`, () => serverWrite('DELETE', `${col}/${id}`)); }
   return enqueue(`${col}/${id}`, () => Store.db.doc(`${col}/${id}`).delete().catch(e => console.warn(e)));
 }
 function saveSettings(patch, defer) {
@@ -1401,15 +1443,23 @@ async function initStore() {
     }
   } catch (e) { db = null; }
   Store.assets = assets;
-  if (!db) { Store.mode = 'local'; loadLocal(); return; }
+  if (!db) {
+    // On the Chorecast website a signed-in family syncs through the server; anywhere else data stays on this device.
+    const acct = await probeServer();
+    if (acct && acct.me) return startServerMode(acct.me);
+    Store.mode = 'local'; loadLocal();
+    if (acct && acct.signedOut && !lsGet('cc:localOnly', false)) UI.needSignIn = true;
+    Acct.available = !!acct;
+    return;
+  }
   Store.mode = 'cloud'; Store.db = db;
   await new Promise(resolve => {
-    let left = 4, done = false;
+    let left = 5, done = false;
     const finish = () => { if (!done) { done = true; resolve(); } };
     const first = fn => { let fired = false; return arg => { fn(arg); Store.ver++; scheduleRender(); if (!fired) { fired = true; if (--left === 0) finish(); } }; };
     const onErr = e => { console.warn('sync stopped', e); if (e && e.code !== 'revoked') toast('Live sync paused. Reload to reconnect.'); finish(); };
     db.doc('family/settings').onSnapshot(first(s => { Store.settings = s.exists ? { ...s.data() } : null; }), onErr);
-    for (const col of ['kids', 'jobs', 'habits']) {
+    for (const col of ['kids', 'jobs', 'habits', 'growth']) {
       let q = db.collection(col);
       if (col === 'jobs') q = q.orderBy('at', 'desc').limit(800);
       q.onSnapshot(first(qs => { const m = {}; qs.docs.forEach(d => { m[d.id] = { ...d.data(), id: d.id }; }); Store[col] = m; }), onErr);
@@ -1418,7 +1468,108 @@ async function initStore() {
   });
 }
 
-/* Photos: cloud assets, or IndexedDB on this device */
+/* ---------- Family account: email sign-in and live sync through the Chorecast server ----------
+   Parents sign in with email and password; kids' iPads pair with a 6-digit code from a parent. Every write goes to
+   the server, which pushes it to the family's other devices over an event stream. Offline writes wait in an outbox,
+   and the last snapshot is kept on the device so the app still opens without a connection. */
+const Acct = { me: null, available: false, clientId: uid(), es: null, down: false, outbox: lsGet('cc:outbox', []), flushing: false };
+async function api(method, url, body, raw) {
+  const headers = { 'x-client-id': Acct.clientId };
+  if (raw) headers['content-type'] = raw.type || 'application/octet-stream'; else if (body !== undefined) headers['content-type'] = 'application/json';
+  const r = await fetch(url, { method, credentials: 'same-origin', headers, body: raw || (body !== undefined ? JSON.stringify(body) : undefined) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error(j.error || 'Something went wrong. Try again.'); e.status = r.status; e.code = j.code; throw e; }
+  return j;
+}
+async function probeServer() {
+  if (!/^https?:$/.test(location.protocol)) return null;
+  try {
+    const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
+    if (r.status === 401) return { signedOut: true };
+    if (!r.ok || !/json/.test(r.headers.get('content-type') || '')) return null;
+    return { me: await r.json() };
+  } catch (e) { const me = lsGet('cc:me', null); return me ? { me, offline: true } : null; }
+}
+const cacheKey = () => 'chorecast:server:' + ((Acct.me && Acct.me.family && Acct.me.family.id) || '');
+let cacheT = 0;
+function cacheSoon() { clearTimeout(cacheT); cacheT = setTimeout(() => lsSet(cacheKey(), { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits, growth: Store.growth }), 600); }
+function applySnapshot(d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; }
+async function startServerMode(me) {
+  Acct.me = me; Acct.available = true; lsSet('cc:me', me); Store.mode = 'server';
+  const cached = lsGet(cacheKey(), null); if (cached) applySnapshot(cached);
+  try { applySnapshot(await api('GET', '/api/sync')); cacheSoon(); }
+  catch (e) { if (e.status === 401) return signedOut(); if (!cached) toast('Offline. Showing what this device saved last.'); }
+  openStream(); flushOutbox(); track('app.open', { screen: me.role });
+}
+function openStream() {
+  if (Acct.es) Acct.es.close();
+  const es = new EventSource('/api/stream?client=' + encodeURIComponent(Acct.clientId)); Acct.es = es;
+  es.addEventListener('change', e => {
+    const m = JSON.parse(e.data);
+    if (m.col === 'family') Store.settings = m.data; else if (m.data) Store[m.col][m.id] = { ...m.data, id: m.id }; else delete Store[m.col][m.id];
+    Store.ver++; scheduleRender(); cacheSoon();
+  });
+  es.addEventListener('signedout', () => signedOut('This device was removed from the family.'));
+  es.onopen = () => { if (Acct.down) { Acct.down = false; resync(); } flushOutbox(); };
+  es.onerror = () => { Acct.down = true; };
+}
+async function resync() {
+  try { applySnapshot(await api('GET', '/api/sync')); Store.ver++; scheduleRender(); cacheSoon(); }
+  catch (e) { if (e.status === 401) signedOut(); }
+}
+async function serverWrite(method, path, body) {
+  if (Acct.outbox.length) { queueOutbox(method, path, body); return true; } // keep writes in order behind earlier offline ones
+  try { await api(method, '/api/docs/' + path.split('/').map(encodeURIComponent).join('/'), body); return true; }
+  catch (e) {
+    if (!e.status) { queueOutbox(method, path, body); return true; }
+    if (e.status === 401) { signedOut(); return false; }
+    toast(e.code === 'locked' ? 'A grown-up needs to unlock this on this iPad first.' : e.message);
+    resync(); return false;
+  }
+}
+function queueOutbox(method, path, body) { Acct.outbox.push({ method, path, body }); lsSet('cc:outbox', Acct.outbox); }
+async function flushOutbox() {
+  if (Acct.flushing || !Acct.outbox.length) return; Acct.flushing = true;
+  try {
+    while (Acct.outbox.length) {
+      const w = Acct.outbox[0];
+      try { await api(w.method, '/api/docs/' + w.path.split('/').map(encodeURIComponent).join('/'), w.body); }
+      catch (e) { if (!e.status) break; if (e.status === 401) { signedOut(); break; } }
+      Acct.outbox.shift(); lsSet('cc:outbox', Acct.outbox);
+    }
+  } finally { Acct.flushing = false; }
+}
+addEventListener('online', () => { if (Store.mode === 'server') { flushOutbox(); resync(); } });
+function signedOut(msg) {
+  if (Acct.es) Acct.es.close(); Acct.es = null;
+  for (const k of ['cc:me', 'cc:outbox', cacheKey()]) { try { localStorage.removeItem(k); } catch (e) {} }
+  Acct.me = null; Acct.outbox = []; Store.mode = 'local'; applySnapshot({}); loadLocal();
+  UI.auth = { mode: 'signin', err: msg || '' }; UI.unlocked = false; UI.screen = 'signin'; render();
+}
+// In-app events: batched and sent to the server's events table (only when signed in to a family).
+const Events = { q: [], t: 0 };
+function track(type, payload = {}, kidId) {
+  if (Store.mode !== 'server') return;
+  Events.q.push({ type, kidId: kidId !== undefined ? kidId : (UI.kidId || null), payload, at: Date.now() });
+  clearTimeout(Events.t); Events.t = setTimeout(flushEvents, 1500);
+}
+async function flushEvents() {
+  const list = Events.q.splice(0, 200); if (!list.length) return;
+  try { await api('POST', '/api/events', { events: list }); } catch (e) { if (!e.status) Events.q.unshift(...list); }
+}
+addEventListener('pagehide', () => { if (Events.q.length && navigator.sendBeacon) navigator.sendBeacon('/api/events', new Blob([JSON.stringify({ events: Events.q.splice(0) })], { type: 'application/json' })); });
+// First sign-in on a device that already has local data: offer to move it into the (empty) family account.
+function localData() { const d = lsGet(LOCAL_KEY, null); return d && Object.keys(d.kids || {}).length ? d : null; }
+async function importLocal() {
+  const d = localData(); if (!d) return;
+  for (const j of Object.values(d.jobs || {})) {
+    if (j.photo && j.photo.startsWith('l:')) { const b = await IDB.get(j.photo.slice(2)).catch(() => null); if (b) { try { j.photo = 's:' + (await api('POST', '/api/photos', undefined, b)).id; } catch (e) {} } }
+  }
+  await api('POST', '/api/import', d);
+  lsSet('cc:imported', true); await resync();
+}
+
+/* Photos: cloud assets, the family server, or IndexedDB on this device */
 const IDB = {
   db: null,
   open() { if (this.db) return Promise.resolve(this.db); return new Promise((res, rej) => { const r = indexedDB.open('chorecast', 1); r.onupgradeneeded = () => r.result.createObjectStore('photos'); r.onsuccess = () => { this.db = r.result; res(r.result); }; r.onerror = () => rej(r.error); }); },
@@ -1433,6 +1584,10 @@ async function savePhoto(blob) {
     catch (e) { if (e && e.code === 'store_unavailable') { await sleep(800); r = await Store.assets.upload(blob, { type: 'image/jpeg' }); } else throw e; }
     return { ref: 'a:' + r.id, url: r.url };
   }
+  if (Store.mode === 'server') {
+    try { const r = await api('POST', '/api/photos', undefined, blob); return { ref: 's:' + r.id, url: '/api/photos/' + r.id }; }
+    catch (e) { if (e.status) throw e; } // offline: keep it on this device instead
+  }
   const id = uid();
   await IDB.put(id, blob);
   localUrls[id] = URL.createObjectURL(blob);
@@ -1441,6 +1596,7 @@ async function savePhoto(blob) {
 function photoAttr(ref) {
   if (!ref) return '';
   if (ref.startsWith('a:')) return `src="/_blob/${esc(ref.slice(2))}"`;
+  if (ref.startsWith('s:')) return `src="/api/photos/${esc(ref.slice(2))}"`;
   const id = ref.slice(2);
   return localUrls[id] ? `src="${localUrls[id]}"` : `data-lphoto="${esc(id)}"`;
 }
@@ -1769,6 +1925,7 @@ const levelOf = kid => LEVELS.reduce((a, L, i) => (netWorth(kid) >= L.at ? i : a
 function islandParams(kid) {
   const j = kid.jars || {}, p = kidProgress(kid, dkey());
   return { seed: hash(kid.id), hue: kid.hue, avatar: kid.avatar, level: levelOf(kid), trees: Math.min(8, jobsList().filter(x => x.kidId === kid.id && x.status === 'approved' && x.tier !== 'bonus').length),
+    skills: (() => { const g = (Store.growth || {})[kid.id] || {}; return Math.min(24, Object.values(g.done || {}).filter(d => d.best >= 0.8).length); })(), marks: Object.keys(((Store.growth || {})[kid.id] || {}).mile || {}).sort(),
     pond: Math.round(clamp((j.save || 0) / 5000, 0, 1) * 10) / 10, mill: holdingsValue(kid) > 0, coins: Math.min(6, Math.ceil((j.spend || 0) / 300)), rainbow: p.total > 0 && p.done >= p.total, night: phaseNow() === 'night', wx: wxNow().key, care: Object.fromEntries(Object.entries(careOf(kid)).map(([q, v]) => [q, Math.round(v * 10) / 10])), items: ((kid.island || {}).items || []).map(i => ({ id: i.id, t: i.t, x: i.x, z: i.z, r: i.r })) };
 }
 const islandSig = kid => { const p = islandParams(kid); delete p.seed; return hash(JSON.stringify(p)).toString(36); };
@@ -2299,6 +2456,16 @@ void main() {
     }
     g.userData.walls = walls; return g;
   }
+// Character Growth landmark: a little tree whose glowing orbs count the skills a kid has mastered (up to 24).
+const GROWTH_TREE_IDS = ['money', 'invest', 'work', 'make', 'give', 'maths', 'words', 'time', 'home', 'mind', 'online', 'world'];
+const GROWTH_HUES = [0x30c25a, 0x22c3a6, 0xff9f0a, 0xff6b6b, 0xff6b9d, 0x5ac8fa, 0xc084fc, 0xd9a35b, 0xffb020, 0x64d2ff, 0x7c8cf8, 0x2f6fe4];
+function skillTree(n) {
+  const g = new T.Group(), orbs = [];
+  add(g, new T.CylinderGeometry(0.018, 0.03, 0.26, 7), mat(0x8a5a3c), 0, 0.13, 0);
+  add(g, new T.IcosahedronGeometry(0.11, 1), mat(0x6fd17a, { flat: true }), 0, 0.3, 0).scale.set(1, 0.85, 1);
+  for (let i = 0; i < n; i++) { const a = i * 2.39996, r = 0.06 + (i % 4) * 0.022, y = 0.22 + (i / 24) * 0.2, c = GROWTH_HUES[i % 12]; const o = add(g, new T.SphereGeometry(0.016, 10, 8), mat(c, { e: c, smooth: true })); o.position.set(Math.cos(a) * (0.1 + r * 0.4), y, Math.sin(a) * (0.1 + r * 0.4)); o.userData.y0 = y; o.userData.ph = i; o.userData.noInk = true; orbs.push(o); }
+  g.userData.orbs = orbs; return g;
+}
 function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.CylinderGeometry(0.06, 0.11, 0.55, 6), mat(0xffffff), 0, 0.27, 0); b.position.set(0, 0.55, 0.08); for (let i = 0; i < 4; i++) { const p = new T.Group(); p.rotation.z = i * Math.PI / 2; add(p, new T.BoxGeometry(0.05, 0.28, 0.015), mat(0x4ade80), 0, 0.14, 0); b.add(p); } g.add(b); g.userData.spin = b; return g; }
   function puff(seed) { const r = mulberry(seed), g = new T.Group(); for (let i = 0; i < 4; i++) add(g, new T.IcosahedronGeometry(0.1 + r() * 0.08, 1), mat(0xffffff, { r: 1 }), (i - 1.5) * 0.12, r() * 0.06, r() * 0.05); return g; }
   function islandModel(k) {
@@ -2324,6 +2491,8 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     u.weeds = []; for (let i = 0; i < Math.floor(cm('weeds') * 6); i++) { const [x, z] = spot(), w = new T.Group(); w.position.set(x, top, z); for (let j = 0; j < 5; j++) add(w, new T.ConeGeometry(0.013, 0.1, 4), mat(0x3d6b21), (j - 2) * 0.012, 0.05, (j % 2) * 0.012).rotation.z = (j - 2) * 0.28; add(w, new T.SphereGeometry(0.014, 8, 6), mat(0xffd43b), 0, 0.1, 0); g.add(w); u.weeds.push(w); }
     u.leaves = []; for (let i = 0; i < Math.floor(cm('leaves') * 10); i++) { const [x, z] = spot(), l = add(g, new T.CylinderGeometry(0.028, 0.028, 0.004, 5), mat([0xd9822b, 0xb5541c, 0xe8b04a][i % 3]), x, top + 0.006, z); l.rotation.set(0, rr() * 6, (rr() - 0.5) * 0.3); u.leaves.push(l); }
     if (k.mill) { const m = mill(); m.position.set(-0.6, top, -0.45); g.add(m); u.spin = m.userData.spin; }
+    if (k.skills) { const st = skillTree(k.skills); st.position.set(0.5, top, 0.6); g.add(st); u.skillOrbs = st.userData.orbs; }
+    (k.marks || []).forEach(id => { const i = GROWTH_TREE_IDS.indexOf(id); if (i < 0) return; const a = i / GROWTH_TREE_IDS.length * Math.PI * 2, c = add(g, new T.OctahedronGeometry(0.035, 0), mat(GROWTH_HUES[i], { e: GROWTH_HUES[i] & 0x3f3f3f })); c.position.set(Math.cos(a) * 0.93, top + 0.05, Math.sin(a) * 0.93); c.scale.y = 1.6; });
     // Flag pole with a gold finial and the kid's own flag
     add(g, new T.CylinderGeometry(0.009, 0.012, 0.6, 10), mat(0xf4f1ea), 0.88, top + 0.3, -0.05);
     add(g, new T.SphereGeometry(0.018, 12, 10), mat(0xffd43b, { std: true, m: 0.8, r: 0.3, smooth: true }), 0.88, top + 0.61, -0.05);
@@ -2422,6 +2591,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
   function tickIsland(g, t, dt, ph = 0, hopAt = 0) {
     const u = g.userData;
     if (u.spin) u.spin.rotation.z += dt * 2.4;
+    if (u.skillOrbs) for (const o of u.skillOrbs) o.position.y = o.userData.y0 + Math.sin(t * 2 + o.userData.ph) * 0.008;
     FLAG_T.value = t; u.flag.rotation.y = Math.sin(t * 0.5 + ph) * 0.15; u.clouds.rotation.y = t * 0.15;
     if (u.precip) stepPrecip(u.precip, dt, t);
     if (u.grassMesh) u.grassMesh.material.userData.U.uTime.value = t + ph;
@@ -2650,7 +2820,7 @@ function xpOf(kid) {
   let e = 0;
   for (const j of jobsList()) if (j.kidId === kid.id && j.status === 'approved' && j.tier !== 'bonus') e += Math.round((j.score || 500) / 10);
   for (const h of Object.values(Store.habits)) if (h.kidId === kid.id) for (const a of Object.values(h.days || {})) e += a.length * 10;
-  e += Object.keys(kid.badges || {}).length * 50 + ((kid.island || {}).careXp || 0);
+  e += Object.keys(kid.badges || {}).length * 50 + ((kid.island || {}).careXp || 0) + (((Store.growth || {})[kid.id] || {}).xp || 0);
   const spent = (kid.island || {}).xpSpent || 0;
   return { earned: e, spent, left: Math.max(0, e - spent) };
 }
@@ -2733,8 +2903,8 @@ const Studio = (() => {
   }
   function buyTool(d, pay) {
     const k = kid(), isl = { items: [], xpSpent: 0, ...(k.island || {}) }, patch = {};
-    if (pay === 'xp') { if (xpOf(k).left < d.xp) { S0.msg = 'Not enough XP yet. Finish a mission to earn more.'; return ui(); } isl.xpSpent = (isl.xpSpent || 0) + d.xp; }
-    else { const jars = { ...(k.jars || {}) }; if ((jars.spend || 0) < d.cash) { S0.msg = 'Not enough in your Spend jar.'; return ui(); } jars.spend -= d.cash; patch.jars = jars; patch.ledger = pushLedger(k, { kind: 'spend', amt: -d.cash, memo: `Island shop: ${d.name}` }); }
+    if (pay === 'xp') { if (xpOf(k).left < d.xp) { S0.msg = 'Not enough XP yet. Finish a mission or a Character Growth lesson to earn more.'; return ui(); } isl.xpSpent = (isl.xpSpent || 0) + d.xp; }
+    else { const jars = { ...(k.jars || {}) }; if ((jars.spend || 0) < d.cash) { S0.msg = 'Not enough in your Spend jar.'; return ui(); } jars.spend -= d.cash; patch.jars = jars; patch.ledger = pushLedger(k, { kind: 'spend', amt: -d.cash, memo: `Island shop: ${d.name}` }); if (window.Growth) Growth.onEvent(k, 'buyCash', { name: d.name, cost: d.cash }); }
     isl.tools = { ...(isl.tools || {}), [d.t]: true }; patch.island = isl; updDoc('kids', k.id, patch);
     S0.confirm = null; S0.cat = 'jobs'; S0.msg = `The ${d.name.toLowerCase()} is in your shed. Time to get to work!`; Sound.cash(); FX.burst(innerWidth / 2, innerHeight * 0.6, CONF, 24); ui();
   }
@@ -2796,7 +2966,7 @@ const Studio = (() => {
       ${panel}
       <section class="shop" aria-label="Island shop">
         <div class="shop-tabs">${SHOP_CATS.map(([c, l]) => `<button class="chip ${S0.cat === c ? 'on' : ''}" data-act="stCat" data-c="${c}">${l}</button>`).join('')}</div>
-        ${S0.cat === 'jobs' ? jobsRow(k) : `<div class="shop-row">${SHOP.filter(s => s.cat === S0.cat).map(it => { const locked = (it.lvl || 0) > lvl, n = owned(it.t), shed = it.cat === 'tools' && ((k.island || {}).tools || {})[it.t]; return `<div class="shop-item ${locked ? 'locked' : ''}">${n ? `<span class="shop-n">×${n}</span>` : ''}<img src="${THUMBS[it.t] || ''}" alt="" width="84" height="84"><b>${esc(it.name)}</b>${locked ? `<small>Unlocks with a ${LEVELS[it.lvl].name.toLowerCase()}</small>` : shed ? '<small class="owned">In your shed</small>' : `<div class="shop-buy"><button data-act="stBuyXp" data-t="${it.t}" ${xp.left < it.xp ? 'disabled' : ''}>${ic('sparkle')} ${it.xp} XP</button>${allowCash ? `<button data-act="stBuyCash" data-t="${it.t}" ${cash < it.cash ? 'disabled' : ''}>${fmt(it.cash)}</button>` : ''}</div>`}</div>`; }).join('')}</div>`}
+        ${S0.cat === 'jobs' ? jobsRow(k) : `<div class="shop-row">${SHOP.filter(s => s.cat === S0.cat).map(it => { const locked = (it.lvl || 0) > lvl && !((window.Growth || null) && Growth.mastered(k) >= it.lvl * 4), n = owned(it.t), shed = it.cat === 'tools' && ((k.island || {}).tools || {})[it.t]; return `<div class="shop-item ${locked ? 'locked' : ''}">${n ? `<span class="shop-n">×${n}</span>` : ''}<img src="${THUMBS[it.t] || ''}" alt="" width="84" height="84"><b>${esc(it.name)}</b>${locked ? `<small>Unlocks with a ${LEVELS[it.lvl].name.toLowerCase()}${(window.Growth || null) ? `, or master ${it.lvl * 4 - Growth.mastered(k)} more skills` : ''}</small>` : shed ? '<small class="owned">In your shed</small>' : `<div class="shop-buy"><button data-act="stBuyXp" data-t="${it.t}" ${xp.left < it.xp ? 'disabled' : ''}>${ic('sparkle')} ${it.xp} XP</button>${xp.left < it.xp && (window.Growth || null) ? `<button class="cg-earn" data-act="gEarn" data-id="${k.id}" data-need="${it.xp - xp.left}">Earn it: lesson</button>` : ''}${allowCash ? `<button data-act="stBuyCash" data-t="${it.t}" ${cash < it.cash ? 'disabled' : ''}>${fmt(it.cash)}</button>` : ''}</div>`}</div>`; }).join('')}</div>`}
         <p class="shop-foot">${S0.cat === 'jobs' ? 'Everything you own needs looking after. Island jobs pop up every few days and earn XP.' : `Earn XP from approved missions, habits, lessons and island jobs.${allowCash ? ' Spend-jar money works too, but once it’s spent it’s gone.' : ''}`}</p>
       </section>`;
     const row = $('.shop-row', root); if (row) row.scrollLeft = keepX;
@@ -2805,8 +2975,8 @@ const Studio = (() => {
     const d = SHOP.find(s => s.t === t); S0.confirm = null; S0.sel = null; S0.msg = `Tap the grass where your ${d.name.toLowerCase()} should go.`;
     S0.place = (x, z, sx, sy) => {
       const k = kid(), isl = { items: [], xpSpent: 0, ...(k.island || {}) }, it = { id: uid(), t, x: +x.toFixed(3), z: +z.toFixed(3), r: +(Math.random() * 6.28).toFixed(2) }, patch = {};
-      if (pay === 'xp') { if (xpOf(k).left < d.xp) { S0.msg = 'Not enough XP yet. Finish a mission to earn more.'; return ui(); } it.xp = d.xp; isl.xpSpent = (isl.xpSpent || 0) + d.xp; }
-      else { const jars = { ...(k.jars || {}) }; if ((jars.spend || 0) < d.cash) { S0.msg = 'Not enough in your Spend jar.'; return ui(); } it.cash = d.cash; jars.spend -= d.cash; patch.jars = jars; patch.ledger = pushLedger(k, { kind: 'spend', amt: -d.cash, memo: `Island shop: ${d.name}` }); }
+      if (pay === 'xp') { if (xpOf(k).left < d.xp) { S0.msg = 'Not enough XP yet. Finish a mission or a Character Growth lesson to earn more.'; return ui(); } it.xp = d.xp; isl.xpSpent = (isl.xpSpent || 0) + d.xp; }
+      else { const jars = { ...(k.jars || {}) }; if ((jars.spend || 0) < d.cash) { S0.msg = 'Not enough in your Spend jar.'; return ui(); } it.cash = d.cash; jars.spend -= d.cash; patch.jars = jars; patch.ledger = pushLedger(k, { kind: 'spend', amt: -d.cash, memo: `Island shop: ${d.name}` }); if (window.Growth) Growth.onEvent(k, 'buyCash', { name: d.name, cost: d.cash }); }
       isl.items = [...(isl.items || []), it]; patch.island = isl;
       updDoc('kids', k.id, patch);
       const m = G3.placeItem(island, it); if (m) shadows(m);
@@ -2834,6 +3004,7 @@ const Studio = (() => {
     } else if (n === 'sell') {
       const id = S0.sel, it = isl.items.find(i => i.id === id); if (!it) return;
       const patch = { island: { ...isl, items: isl.items.filter(i => i.id !== id) } }, name = (SHOP.find(s => s.t === it.t) || {}).name || 'item';
+      if (it.cash && window.Growth) Growth.onEvent(k, 'sell', { name, cost: it.cash, back: Math.floor(it.cash / 2) });
       if (it.cash) { const back = Math.floor(it.cash / 2); patch.jars = { ...(k.jars || {}), spend: ((k.jars || {}).spend || 0) + back }; patch.ledger = pushLedger(k, { kind: 'sell', amt: back, memo: `Sold island ${name.toLowerCase()}` }); }
       else patch.island.xpSpent = Math.max(0, (isl.xpSpent || 0) - Math.floor((it.xp || 0) / 2));
       updDoc('kids', k.id, patch); const m = findMesh(id); if (m) { island.remove(m); island.userData.items = island.userData.items.filter(x => x !== m); }
@@ -2983,6 +3154,7 @@ function render() {
   else if (UI.screen === 'kid') html = viewKid();
   else if (UI.screen === 'gate') html = viewGate();
   else if (UI.screen === 'parent') html = viewParent();
+  else if (UI.screen === 'signin') html = viewSignin();
   else html = viewWho();
   app.innerHTML = html;
   $$('[data-keep]', app).forEach(el => { if (keep[el.dataset.keep]) el.scrollLeft = keep[el.dataset.keep]; });
@@ -3144,6 +3316,7 @@ function kidToday(kid) {
       <div class="minis">${JARS.map(x => `<div class="mini glass"><span><i style="background:${x.color}"></i>${x.label}</span><b class="num">${fmt(x.k === 'invest' ? (j.invest || 0) + holdingsValue(kid) : j[x.k] || 0)}</b></div>`).join('')}</div>
     </section>
     <div class="col">
+      ${(window.Growth || null) ? Growth.card(kid) : ''}
       ${choreCard('must', b.must, kid, date)}
       ${choreCard('team', b.team, kid, date)}
       ${gigCard(gigs, kid, date)}
@@ -3287,7 +3460,8 @@ function slipCard(kid) {
 }
 function lessonsCard(kid) {
   const b = kid.badges || {}, n = LESSONS.filter(l => b[l.key]).length;
-  return `<section class="card glass"><header class="card-h"><span class="card-t">Money moments</span><span class="card-r">${n}/${LESSONS.length} learned</span></header>
+  return `<section class="card glass"><header class="card-h"><span class="card-t">Money moments</span><span class="card-r">${n}/${LESSONS.length} classics</span></header>
+    ${(window.Growth || null) ? Growth.momentCard(kid) : ''}
     <div class="lessons" data-keep="lessons">${LESSONS.map(l => `<button class="lsn ${b[l.key] ? 'done' : ''}" data-act="lesson" data-key="${l.key}"><span class="lsn-ic" aria-hidden="true">${l.icon}</span><span class="lsn-t">${esc(l.title)}</span></button>`).join('')}</div>
     <p class="card-foot">Each one ends with a quick quiz. Get it right to earn a Money Smart tick.</p></section>`;
 }
@@ -3316,7 +3490,7 @@ function kidMarket(kid) {
     ${tabHead(kid, 'investments', heroMoney(hv), hv ? `${gain >= 0 ? 'Up' : 'Down'} ${fmt(Math.abs(gain))} since you bought · ${fmt(cash)} cash ready to invest` : `${fmt(cash)} cash ready to invest. Tap a fund to buy a piece of it.`)}
     <div class="funds">${FUNDS.map(f => fundCard(f, kid)).join('')}</div>
     <div class="masonry two">${holdingsCard(kid)}${newsCard()}
-      <section class="card glass"><header class="card-h"><span class="card-t">Investor school</span></header><div class="lessons" data-keep="mlessons">${['risk', 'eggs', 'wobble'].map(k => { const l = LESSONS.find(x => x.key === k); return `<button class="lsn ${(kid.badges || {})[k] ? 'done' : ''}" data-act="lesson" data-key="${k}"><span class="lsn-ic">${l.icon}</span><span class="lsn-t">${esc(l.title)}</span></button>`; }).join('')}</div></section>
+      <section class="card glass"><header class="card-h"><span class="card-t">Investor School</span>${(window.Growth || null) ? Growth.investorRank(kid) : ''}</header>${(window.Growth || null) ? Growth.treeDoor(kid, 'invest') : ''}<div class="lessons" data-keep="mlessons">${['risk', 'eggs', 'wobble'].map(k => { const l = LESSONS.find(x => x.key === k); return `<button class="lsn ${(kid.badges || {})[k] ? 'done' : ''}" data-act="lesson" data-key="${k}"><span class="lsn-ic">${l.icon}</span><span class="lsn-t">${esc(l.title)}</span></button>`; }).join('')}</div></section>
     </div>`;
 }
 function fundCard(f, kid) {
@@ -3555,6 +3729,8 @@ async function pinComplete() {
   g.err = 'Wrong PIN. Try again.'; g.pin = ''; Sound.error(); render();
 }
 function unlock() {
+  if (Store.mode === 'server' && Acct.me && Acct.me.role === 'kid') api('POST', '/api/auth/elevate', { pinHash: S().pinHash }).catch(() => toast('Couldn’t unlock grown-up changes on this iPad. Check the connection.'));
+  track('app.parent_unlocked', {}, null);
   UI.unlocked = true; UI.screen = 'parent'; UI.gate = null; const after = UI.afterUnlock; UI.afterUnlock = null; scrollTo(0, 0);
   const h = S().home; if (!h || (!h.done && !h.skipped)) return startWizard(0, { then: after });
   render(); afterWizard(after);
@@ -3566,14 +3742,14 @@ function viewParent() {
   if (!UI.unlocked) { openGate(); return viewGate(); }
   if (UI.wiz) return viewWizard();
   const t = UI.ptab, pend = jobsList().filter(j => j.status === 'pending').length;
-  const nav = [['review', 'review', 'To review', pend], ['kids', 'crew', 'Kids', 0], ['chores', 'list', 'Chores', 0], ['home', 'home', 'Our home', 0], ['bank', 'bank', 'Money rules', 0]];
-  const main = t === 'kids' ? pKids() : t === 'chores' ? pChores() : t === 'home' ? pHome() : t === 'bank' ? pBank() : pReview();
+  const nav = [['review', 'review', 'To review', pend], ['kids', 'crew', 'Kids', 0], ['chores', 'list', 'Chores', 0], ['home', 'home', 'Our home', 0], ['bank', 'bank', 'Money rules', 0], ['skills', 'sparkle', 'Character Growth', 0], ['family', 'lock', 'Family and devices', 0]];
+  const main = t === 'kids' ? pKids() : t === 'chores' ? pChores() : t === 'home' ? pHome() : t === 'bank' ? pBank() : t === 'family' ? pFamily() : t === 'skills' ? (window.Growth ? Growth.parentView() : '<div class="pempty">Character Growth is loading…</div>') : pReview();
   return `<div class="pwrap">
     <aside class="pside">
       <div class="pside-top"><button class="plink" data-act="lock">${ic('back')} Lock and go back</button></div>
       <h1 class="ptitle">Grown-ups</h1>
       <nav class="pnav" aria-label="Grown-up sections">${nav.map(([k, i, l, b]) => `<button class="pnav-i ${t === k ? 'on' : ''}" data-act="ptab" data-tab="${k}" ${t === k ? 'aria-current="page"' : ''}>${ic(i)}<span>${l}</span>${b ? `<b class="pbadge">${b}</b>` : ''}</button>`).join('')}</nav>
-      <p class="psync">${Store.mode === 'cloud' ? 'Synced. Chores, pay and photos show up on every device that opens this link while signed in to your account.' : 'Saved on this device only.'}</p>
+      <p class="psync">${Store.mode === 'cloud' ? 'Synced. Chores, pay and photos show up on every device that opens this link while signed in to your account.' : Store.mode === 'server' ? `Synced to ${esc(Acct.me.family.name)}. Changes show up on every family device.` : 'Saved on this device only.'}</p>
     </aside>
     <main class="pmain">${main}</main></div>`;
 }
@@ -3680,6 +3856,65 @@ function pHome() {
     <section class="home-hero"><span class="big" aria-hidden="true">${t[1]}</span><div class="hh-main"><h3>${esc(t[2])}</h3><p>${[homeAnswer(HOME_Q[1], v), homeAnswer(HOME_Q[2], v), pets.length ? pets.join(', ') : 'No pets'].map(esc).join(' · ')}</p></div><div class="hh-fit"><b class="num">${fit}</b><span>of ${CHORES.length} jobs fit</span></div></section>
     <div class="home-grid">${HOME_Q.map((q, i) => `<button class="hq" data-act="wizEdit" data-i="${i}" style="--hue:${q.hue}"><span class="hq-ic" aria-hidden="true">${q.icon}</span><span class="hq-main"><b>${esc(q.q)}</b><span>${esc(homeAnswer(q, v))}</span>${liveFollows(q, v).map(fq => `<small>${esc(fq.s)}: ${esc(homeAnswer(fq, v))}</small>`).join('')}</span>${ic('next')}</button>`).join('')}</div>
     ${hidden.length ? `<h3 class="pgroup-t">Hidden at your place<small>${hidden.length} jobs</small></h3><div class="group">${hidden.map(c => { const th = THEMES[c.theme] || THEMES.tidy; return `<div class="row"><span class="sticker xs" style="--c1:${th.c1};--c2:${th.c2}" aria-hidden="true">${c.icon}</span><div class="row-main"><b>${esc(c.title)}</b><small>${esc(missingText(c, f))}</small></div></div>`; }).join('')}</div>` : ''}`;
+}
+/* ---------- Sign-in ---------- */
+function viewSignin() {
+  const a = UI.auth || (UI.auth = { mode: 'signin' }), m = a.mode, busy = a.busy ? 'disabled' : '';
+  const tabs = [['signin', 'Sign in'], ['signup', 'New family'], ['pair', 'Kid’s iPad']];
+  const field = (id, label, type, ac, ph, extra = '') => `<label class="auth-field"><span>${label}</span><input id="${id}" name="${id}" type="${type}" autocomplete="${ac}" placeholder="${ph}" value="${esc(a[id] || '')}" data-in="authField" ${extra}></label>`;
+  let body;
+  if (m === 'recovery') body = `<div class="auth-done"><div class="auth-ic">${ic('lock')}</div><h2>Save your recovery code</h2><p>If you ever forget your password, this code lets you set a new one. Write it down or save it in your password manager. It won’t be shown again.</p>
+      <div class="auth-code num" aria-label="Recovery code">${esc(a.recovery)}</div>
+      <button class="btn-white" data-act="authNext">I’ve saved it</button></div>`;
+  else if (m === 'import') body = `<div class="auth-done"><div class="auth-ic">${ic('swap')}</div><h2>Bring this iPad’s family across?</h2><p>This device already has ${Object.keys(localData().kids).length} kid${Object.keys(localData().kids).length === 1 ? '' : 's'}, their jobs and their money saved. Move them into your new family account so every device sees them.</p>
+      <button class="btn-white" data-act="authImport" ${busy}>${a.busy ? 'Moving…' : 'Move them across'}</button><button class="auth-link" data-act="authNext">Start fresh instead</button></div>`;
+  else if (m === 'reset') body = `<form class="auth-form" data-submit="authReset"><h2>Set a new password</h2><p class="auth-help">Use the recovery code you saved when you made the account.</p>
+      ${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}${field('recovery', 'Recovery code', 'text', 'off', 'ABCD-EFGH-JKLM', 'required')}${field('password', 'New password', 'password', 'new-password', 'At least 8 characters', 'required minlength="8"')}
+      ${a.err ? `<p class="auth-err" role="alert">${esc(a.err)}</p>` : ''}<button class="btn-white" type="submit" ${busy}>${a.busy ? 'Saving…' : 'Set password'}</button><button class="auth-link" type="button" data-act="authMode" data-m="signin">Back to sign in</button></form>`;
+  else body = `<div class="auth-tabs" role="tablist">${tabs.map(([k, l]) => `<button role="tab" aria-selected="${m === k}" class="${m === k ? 'on' : ''}" data-act="authMode" data-m="${k}">${l}</button>`).join('')}</div>
+    <form class="auth-form" data-submit="${m === 'pair' ? 'authPair' : m === 'signup' ? 'authSignup' : 'authSignin'}">
+      ${m === 'signin' ? `<p class="auth-help">Sign in to see your family on this device. Chores, pay and photos sync to every device.</p>${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}${field('password', 'Password', 'password', 'current-password', 'Your password', 'required')}` : ''}
+      ${m === 'signup' ? `<p class="auth-help">Start a family account. Each grown-up gets their own sign-in, and kids’ iPads pair with a code, so kids never need an email.</p>${field('name', 'Your name', 'text', 'given-name', 'Pip')}${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}${field('password', 'Password', 'password', 'new-password', 'At least 8 characters', 'required minlength="8"')}${field('invite', 'Invite code (optional)', 'text', 'off', 'From the other grown-up')}` : ''}
+      ${m === 'pair' ? `<p class="auth-help">On a grown-up’s device, open Grown-ups, then Family, then “Add a kid’s iPad” for a 6-digit code.</p>${field('code', 'Pairing code', 'text', 'one-time-code', '123456', 'inputmode="numeric" maxlength="7" required')}${field('device', 'Name this iPad', 'text', 'off', 'Ava’s iPad')}` : ''}
+      ${a.err ? `<p class="auth-err" role="alert">${esc(a.err)}</p>` : ''}
+      <button class="btn-white" type="submit" ${busy}>${a.busy ? 'One moment…' : m === 'signup' ? 'Create family account' : m === 'pair' ? 'Pair this iPad' : 'Sign in'}</button>
+      ${m === 'signin' ? '<button class="auth-link" type="button" data-act="authMode" data-m="reset">Forgot your password?</button>' : ''}
+    </form>`;
+  return `<div class="auth"><div class="auth-card glass">
+    <div class="auth-brand">${sunMark(54)}<div><b>Chorecast</b><small>Family chores, pay and growing up</small></div></div>${body}</div>
+    ${m === 'recovery' || m === 'import' ? '' : '<button class="auth-local" data-act="authLocal">Use on this device only, without an account</button>'}</div>`;
+}
+async function authRun(fn) {
+  const a = UI.auth; if (a.busy) return; a.busy = true; a.err = ''; render();
+  try { await fn(a); } catch (e) { a.err = e.status ? e.message : 'Can’t reach Chorecast. Check the internet connection.'; Sound.error(); }
+  a.busy = false; if (UI.screen === 'signin') render();
+}
+async function afterAuth(me, recovery) {
+  await startServerMode(me); Store.ready = true; buildMarket(); applyInterest();
+  const empty = !Object.keys(Store.kids).length;
+  if (recovery) { UI.auth = { mode: 'recovery', recovery, next: empty && localData() ? 'import' : null }; return render(); }
+  if (empty && localData() && !lsGet('cc:imported', false)) { UI.auth = { mode: 'import' }; return render(); }
+  UI.screen = 'who'; scrollTo(0, 0); render();
+}
+
+/* ---------- Grown-ups: Family and devices ---------- */
+function pFamily() {
+  if (Store.mode === 'cloud') return `<header class="phead"><h2>Family and devices</h2><p>This copy of Chorecast runs inside Claude and syncs through your Claude account. Anyone you share it with can open it on their own devices.</p></header>
+    <div class="pempty">Family sign-in, kids’ iPad pairing and the event log are part of the Chorecast website.</div>`;
+  if (Store.mode !== 'server') return `<header class="phead"><h2>Family and devices</h2><p>Right now everything is saved on this device only.</p></header>
+    ${Acct.available ? `<section class="fam-hero"><div class="fh-ic">${ic('crew')}</div><div><h3>Sync across your family’s devices</h3><p>Make a free family account with your email. Every grown-up gets their own sign-in, and kids’ iPads pair with a code.</p></div><button class="pbtn primary" data-act="authOpen">Sign in or create account</button></section>` : '<div class="pempty">Open Chorecast from its website to sign in and sync between devices.</div>'}`;
+  const me = Acct.me, f = UI.fam || (UI.fam = {}), parent = me.role === 'parent';
+  if (parent && !f.loaded && !f.loading) { f.loading = true; api('GET', '/api/devices').then(r => { f.devices = r.devices; }).catch(() => { f.devices = []; }).finally(() => { f.loading = false; f.loaded = true; if (UI.ptab === 'family') render(); }); }
+  const when = t => timeAgo(new Date(t).getTime());
+  return `<header class="phead"><h2>Family and devices</h2><p>Everything syncs live between these devices. Each change is saved to your family’s database on the Chorecast server.</p></header>
+    <section class="fam-hero"><div class="fh-ic">${ic('home')}</div><div><h3>${esc(me.family.name)}</h3><p>${me.user ? `Signed in as ${esc(me.user.email)}` : `This is a kid’s iPad: <b>${esc(me.device.name)}</b>`}${Acct.outbox.length ? ` · ${Acct.outbox.length} change${Acct.outbox.length === 1 ? '' : 's'} waiting to sync` : ' · All changes synced'}</p></div></section>
+    <h3 class="pgroup-t">Grown-ups</h3><div class="group">${me.members.map(m => `<div class="row"><span class="fam-av">${esc((m.name || m.email)[0].toUpperCase())}</span><div class="row-main"><b>${esc(m.name || m.email)}</b><small>${esc(m.email)}</small></div></div>`).join('')}
+      ${parent ? `<div class="row"><div class="row-main"><b>Invite another grown-up</b><small>${f.invite ? `Give them this code. They choose “New family”, then type it in. It lasts 7 days.` : 'They get their own sign-in to the same family.'}</small></div>${f.invite ? `<span class="fam-code num">${esc(f.invite)}</span>` : `<button class="pbtn" data-act="famInvite">${ic('plus')} Get a code</button>`}</div>` : ''}</div>
+    ${parent ? `<h3 class="pgroup-t">Devices</h3><div class="group">
+      <div class="row"><div class="row-main"><b>Add a kid’s iPad</b><small>${f.pair ? `On the iPad, open Chorecast, choose “Kid’s iPad” and type this code. It lasts 15 minutes.` : 'Kids don’t need an email. Their iPad pairs once and stays signed in.'}</small></div>${f.pair ? `<span class="fam-code big num">${esc(f.pair.replace(/(\d{3})(\d{3})/, '$1 $2'))}</span>` : `<button class="pbtn primary" data-act="famPair">${ic('plus')} Pairing code</button>`}</div>
+      ${(f.devices || []).map(d => `<div class="row"><span class="fam-dev">${ic(d.kind === 'kid' ? 'star' : 'lock')}</span><div class="row-main"><b>${esc(d.name)}${d.current ? ' <small class="muted">(this device)</small>' : ''}</b><small>${d.kind === 'kid' ? 'Kid’s iPad' : `Grown-up${d.owner ? ` · ${esc(d.owner)}` : ''}`} · last used ${when(d.last_seen_at)}</small></div>${d.current ? '' : UI.confirmDev === d.id ? `<button class="pbtn solid-danger" data-act="famRemoveYes" data-id="${d.id}">Remove</button><button class="pbtn" data-act="famRemoveNo">Keep</button>` : `<button class="pbtn danger" data-act="famRemove" data-id="${d.id}">Remove</button>`}</div>`).join('')}
+      ${f.loading ? '<div class="row"><div class="row-main"><small>Loading devices…</small></div></div>' : ''}</div>` : ''}
+    <div class="pactions" style="margin-top:20px"><button class="pbtn danger" data-act="famSignOut">${ic('back')} Sign out of this device</button></div>`;
 }
 function payTypeLine(j) {
   if (j.payType === 'piece') return `${j.units} ${j.unit}${j.units === 1 ? '' : 's'} × ${fmt(j.perUnit)}`;
@@ -3947,7 +4182,7 @@ function resultRows(p) {
 function resEnd(p) {
   const pay = grossFor(jobFromPane(p)), qp = Math.round(((QUALITY[p.stars] || 1) - 1) * 100);
   return `<div class="res-pay"><span>Pay after a grown-up checks</span><b class="num">${fmt(pay)}</b><small>${qp > 0 ? `includes +${qp}% for 3 stars` : qp < 0 ? `${qp}% for 1 star. More stars, more pay.` : '2 stars pays full price'}${p.c.surge ? ' · surge ×1.5' : ''}</small></div>
-    ${Stage.crew ? (crewFinished() ? '' : '<p class="res-wait">Waiting for the rest of your crew…</p>') : '<button class="finish ready" data-act="sExit">Back to my sky</button>'}`;
+    ${Stage.crew ? (crewFinished() ? '' : '<p class="res-wait">Waiting for the rest of your crew…</p>') : `<button class="finish ready" data-act="sExit">Back to my sky</button>${window.Growth && Growth.hasLesson(p.kid) ? `<button class="res-grow" data-act="gFromResult" data-id="${p.kid.id}">${ic('sparkle')} More XP waiting in Character Growth</button>` : ''}`}`;
 }
 const crewFinished = () => Stage.panes.every(x => x.phase === 'result' && x.tally && x.tally.done);
 async function runTally(p) {
@@ -3995,6 +4230,7 @@ async function runTally(p) {
   el.querySelector('[data-verdict]').textContent = VERDICT[p.stars];
   const end = el.querySelector('[data-end]'); end.innerHTML = resEnd(p); end.hidden = false; end.classList.add('in');
   Sound.coin(); bumpScore(p);
+  if (window.Growth && p.stars === 3 && p.elapsed < p.target) Growth.onEvent(p.kid, 'fast3', { title: p.c.title, saved: Math.round((p.target - p.elapsed) / 60) });
   if (p.stars === 3) setTimeout(() => { if (!alive()) return; Sound.fanfare(); FX.rain([p.th.c1, p.th.c2, p.th.c3, '#FFE066', '#fff']); if (p.fx && p.fx.shower) p.fx.shower(); }, 200);
   if (Stage.crew && crewFinished()) {
     Stage.panes.forEach(x => { const w = x.el.querySelector('.res-wait'); if (w) w.remove(); });
@@ -4158,6 +4394,24 @@ function checkPayday() {
   if (fresh.some(j => j.status === 'approved')) { setTimeout(() => { Sound.cash(); FX.rain(); G3.coins(60); }, 250); }
 }
 const ACT = {
+  gOpen: a => window.Growth && Growth.open(a.dataset.id || UI.kidId, { tree: a.dataset.tree }),
+  gEarn: a => window.Growth && Growth.open(a.dataset.id, { need: +a.dataset.need }),
+  gFromResult: a => { exitStage(); if (window.Growth) Growth.open(a.dataset.id, {}); },
+  authMode: a => { const keep = UI.auth || {}; UI.auth = { mode: a.dataset.m, email: keep.email }; render(); },
+  authLocal: () => { lsSet('cc:localOnly', true); UI.screen = 'who'; render(); },
+  authOpen: () => { lsSet('cc:localOnly', false); UI.auth = { mode: 'signin' }; UI.screen = 'signin'; UI.unlocked = false; render(); },
+  authSignin: () => authRun(async a => afterAuth(await api('POST', '/api/auth/login', { email: a.email, password: a.password, deviceName: navigator.platform || 'Grown-up device' }))),
+  authSignup: () => authRun(async a => { const r = await api('POST', '/api/auth/signup', { email: a.email, password: a.password, name: a.name, invite: a.invite || undefined, deviceName: navigator.platform || 'Grown-up device' }); await afterAuth(r, r.recovery); }),
+  authPair: () => authRun(async a => afterAuth(await api('POST', '/api/devices/pair', { code: a.code, name: a.device || 'Kids’ iPad' }))),
+  authReset: () => authRun(async a => { await api('POST', '/api/auth/reset', { email: a.email, recovery: a.recovery, password: a.password }); UI.auth = { mode: 'signin', email: a.email, err: '' }; toast('Password changed. Sign in with the new one.'); }),
+  authImport: () => authRun(async () => { await importLocal(); UI.screen = 'who'; toast('Moved across. Every device sees them now.'); }),
+  authNext: () => { const n = UI.auth && UI.auth.next; if (n) { UI.auth = { mode: n }; return render(); } lsSet('cc:imported', true); UI.screen = 'who'; scrollTo(0, 0); render(); },
+  famInvite: async () => { try { UI.fam.invite = (await api('POST', '/api/family/invite', {})).code; } catch (e) { toast(e.message); } render(); },
+  famPair: async () => { try { UI.fam.pair = (await api('POST', '/api/devices/code', {})).code; setTimeout(() => { if (UI.fam) { UI.fam.pair = null; if (UI.ptab === 'family') render(); } }, 15 * 60 * 1000); } catch (e) { toast(e.message); } render(); },
+  famRemove: a => { UI.confirmDev = a.dataset.id; render(); },
+  famRemoveNo: () => { UI.confirmDev = null; render(); },
+  famRemoveYes: async a => { try { await api('DELETE', '/api/devices/' + a.dataset.id); UI.fam.loaded = false; toast('Device removed. It’s signed out now.'); } catch (e) { toast(e.message); } UI.confirmDev = null; render(); },
+  famSignOut: async () => { await flushEvents(); try { await api('POST', '/api/auth/logout', {}); } catch (e) {} lsSet('cc:localOnly', false); signedOut(); },
   veil: () => { if (UI.sheet && !UI.sheet.sticky) closeSheet(); },
   close: () => closeSheet(),
   mute: () => { Sound.toggle(); render(); },
@@ -4170,7 +4424,7 @@ const ACT = {
   pin: a => { const g = UI.gate, len = g.mode === 'math' ? String(g.a * g.b).length : 4; if (g.pin.length >= len) return; g.pin += a.dataset.n; g.err = ''; Sound.ensure(); Sound.tap(); render(); if (g.pin.length === len) setTimeout(pinComplete, 150); },
   pinDel: () => { UI.gate.pin = UI.gate.pin.slice(0, -1); render(); },
   forgot: () => { const g = UI.gate; g.mode = 'math'; g.pin = ''; g.err = ''; newMath(g); render(); },
-  lock: () => { UI.unlocked = false; UI.wiz = null; UI.screen = 'who'; UI.redoFor = null; scrollTo(0, 0); render(); },
+  lock: () => { UI.unlocked = false; UI.wiz = null; UI.screen = 'who'; if (Store.mode === 'server' && Acct.me && Acct.me.role === 'kid') api('POST', '/api/auth/lock', {}).catch(() => {}); UI.redoFor = null; scrollTo(0, 0); render(); },
   changePin: () => openGate('create'),
   wizStart: () => startWizard(0),
   wizEdit: a => startWizard(+a.dataset.i, { edit: true }),
@@ -4195,7 +4449,7 @@ const ACT = {
   wizSkip: () => { const then = UI.wiz && UI.wiz.then; saveSettings({ home: { skipped: true } }); UI.wiz = null; scrollTo(0, 0); render(); afterWizard(then); },
   wizCancel: () => { UI.wiz = null; scrollTo(0, 0); render(); },
   wizClose: () => { const then = UI.wiz && UI.wiz.then; UI.wiz = null; if (!then) UI.ptab = 'home'; scrollTo(0, 0); render(); afterWizard(then); },
-  ptab: a => { UI.ptab = a.dataset.tab; UI.redoFor = null; UI.confirmRemove = null; scrollTo(0, 0); render(); },
+  ptab: a => { if (window.Growth && Growth.resetParent) Growth.resetParent(); UI.ptab = a.dataset.tab; UI.redoFor = null; UI.confirmRemove = null; scrollTo(0, 0); render(); },
 
   brief: a => { UI.brief = { kidId: UI.kidId, key: a.dataset.key, quote: null }; Sound.ensure(); Sound.pop(); openSheet(briefSheet, { cls: 'brief' }); },
   quote: a => { const c = choreDef(UI.brief.key); UI.brief.quote = clamp((UI.brief.quote ?? c.quote) + +a.dataset.d, c.quoteMin, c.quoteMax); Sound.tap(); renderSheet(false); },
@@ -4294,13 +4548,14 @@ const ACT = {
     const slip = payslipFor(kid, grossFor(j, q) + tip);
     updDoc('jobs', j.id, { status: 'approved', reviewedAt: Date.now(), quote: q, paid: { ...slip, tip } });
     payKid(kid, slip, j.title); delete UI.tips[j.id]; delete UI.quotes[j.id];
+    if (window.Growth) { Growth.onEvent(kid, 'pay', { gross: slip.gross, tax: slip.tax, net: slip.net, rate: S().taxRate, title: j.title, theme: j.theme }); if (q != null && j.quote != null && q < j.quote) Growth.onEvent(kid, 'counter', { asked: j.quote, offered: q }); }
     Sound.ensure(); Sound.cash(); G3.coins(30); toast(`Paid ${kid.name} ${fmt(slip.net)} after family tax`);
   },
   tip: a => { UI.tips[a.dataset.id] = +a.dataset.c; render(); },
   pQuote: a => { const j = Store.jobs[a.dataset.id], c = choreDef(j.key) || {}; UI.quotes[j.id] = clamp((UI.quotes[j.id] ?? j.quote) + +a.dataset.d, 0, Math.max(c.quoteMax || 2000, j.quote)); render(); },
   redoAsk: a => { UI.redoFor = a.dataset.id; render(); },
   redoCancel: () => { UI.redoFor = null; render(); },
-  redo: a => { updDoc('jobs', a.dataset.id, { status: 'redo', reviewedAt: Date.now(), note: a.dataset.note }); UI.redoFor = null; toast('Sent back for a redo'); },
+  redo: a => { const j = Store.jobs[a.dataset.id]; updDoc('jobs', a.dataset.id, { status: 'redo', reviewedAt: Date.now(), note: a.dataset.note }); if (window.Growth && j && Store.kids[j.kidId]) Growth.onEvent(Store.kids[j.kidId], 'redo', { title: j.title, note: a.dataset.note }); UI.redoFor = null; toast('Sent back for a redo'); },
   pkid: a => { UI.pkid = a.dataset.id; UI.confirmRemove = null; render(); },
   addKid: () => openKidForm(),
   editKid: a => openKidForm(Store.kids[a.dataset.id]),
@@ -4364,6 +4619,7 @@ const ACT = {
   clearExamples: () => { const ex = kidsList().filter(k => k.example); ex.forEach(k => delDoc('kids', k.id)); jobsList().filter(j => j.example).forEach(j => delDoc('jobs', j.id)); Object.values(Store.habits).filter(h => ex.some(k => k.id === h.kidId)).forEach(h => delDoc('habits', h.id)); toast('Examples removed'); },
 };
 const IN = {
+  authField: a => { if (UI.auth) UI.auth[a.name] = a.value; },
   tm: a => {
     const kid = curKid(); if (!kid) return; const w = +a.value, save = (kid.jars || {}).save || 0, rate = vaultRate(kid), pts = tmPoints(save, rate), [x, y] = pts[w]; UI.tm = w;
     $('#tm-val').textContent = fmt(futureValue(save, rate, w)); $('#tm-cap').textContent = tmCaption(save, rate, w);
@@ -4397,8 +4653,11 @@ function toggleHabit(kid, key, btn) {
 document.addEventListener('click', e => {
   const a = e.target.closest('[data-act]'); if (!a || a.disabled) return;
   if (a.dataset.act === 'veil' && e.target !== a) return;
-  const fn = ACT[a.dataset.act]; if (fn) fn(a, e);
+  const fn = ACT[a.dataset.act]; if (fn) { fn(a, e); if (TRACKED.has(a.dataset.act)) { const { act, ...rest } = a.dataset; track('app.' + act, rest); } }
 });
+// Actions worth recording in the family's event log (every synced write is also logged on the server).
+const TRACKED = new Set(['openKid', 'start', 'crewGo', 'habit', 'mvGo', 'preset', 'goalSave', 'goalRemove', 'quiz', 'paydayDone', 'trade', 'sFinish', 'sSubmit', 'sSkipPhoto', 'sQuit', 'approve', 'redo', 'payout', 'bonus', 'mGo', 'saveKid', 'removeKidYes', 'choreToggle', 'saveChore', 'delChore', 'tax', 'interest', 'setFlag', 'currency', 'fundReset', 'lesson', 'wizNext', 'wizSkip', 'lock', 'gStart', 'gNode', 'gAssign', 'gMoment', 'gCase']);
+document.addEventListener('submit', e => { const f = e.target.closest('[data-submit]'); if (!f) return; e.preventDefault(); const fn = ACT[f.dataset.submit]; if (fn) fn(f, e); });
 document.addEventListener('input', e => { const a = e.target.closest('[data-in]'); if (a && IN[a.dataset.in]) IN[a.dataset.in](a, e); });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { if (Studio.open) Studio.close(); else if (UI.sheet) closeSheet(); else if (Stage.active && !Stage.paused) pauseStage(true); }
@@ -4414,6 +4673,9 @@ document.addEventListener('visibilitychange', () => {
 let lastDay = dkey();
 setInterval(() => { if (!Store.ready) return; const d = dkey(); const t = Market.last; buildMarket(); if (d !== lastDay) { lastDay = d; applyInterest(); scheduleRender(); } else if (t !== Market.last && UI.screen === 'kid' && UI.tab === 'market') scheduleRender(); }, 60000);
 
+/* Character Growth lives in growth.js and reaches the app through this bridge. */
+window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet };
+
 /* =========================================================
    Boot
    ========================================================= */
@@ -4421,10 +4683,12 @@ initSky(); paintSky(); render();
 (async () => {
   await initStore();
   Store.ready = true; buildMarket(); applyInterest();
-  UI.screen = 'who'; render();
+  UI.screen = UI.needSignIn ? 'signin' : 'who'; if (UI.needSignIn) UI.auth = { mode: 'signin' }; render();
+  if (window.Growth) Growth.ready();
 })();
 })();
 </script>
+<script src="growth.js"></script>
 
 </body>
 </html>

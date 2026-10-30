@@ -1,0 +1,76 @@
+# mind · launchers
+@unit 1 | Wellbeing at work | Boundaries, breaks and burnout
+@unit 2 | Money stress | When money worries hit
+@unit 3 | Decision making | Big choices without regret
+@unit 4 | Healthy relationships | Respect, consent and red flags
+@unit 5 | Alcohol and drugs | Facts, laws and safety
+@unit 6 | Gambling | Odds, harm and getting help
+@unit 7 | Purpose | What matters to you
+@unit 8 | Support networks | Building your team
+
+@lesson 1.1 | Burnout | 🔥 | workshop
+hook: School, a job, sport and friends. When is it too much?
+learn: Burnout is exhaustion from long-term stress. Signs include tiredness, cynicism and dropping performance.
+learn: Boundaries help: saying no, protecting sleep and taking real breaks.
+play: sort | Burnout sign, Healthy sign | Always tired even after sleep=Burnout sign; Enjoying time off=Healthy sign; Not caring about things you used to love=Burnout sign; Saying no to extra shifts sometimes=Healthy sign; Getting sick often=Burnout sign | Which is which?
+check: mcq | What is burnout? | Exhaustion from long-term stress* | A cooking term | A short bad day
+check: tf | Setting boundaries can prevent burnout. | true
+check: mcq | A healthy boundary at work? | Saying no to some extra shifts* | Answering messages at 2am | Never taking breaks
+home: List your commitments and spot one to cut back.
+skill: wellbeing
+
+@lesson 1.2 | Money stress | 💭 | bank
+hook: Bills pile up and you can't sleep. What actually helps?
+learn: Facing it helps: list what you owe, when it's due, and what you can pay.
+learn: {nz:Free financial mentors are available through MoneyTalks (0800 345 123).~au:Free financial counsellors are available through the National Debt Helpline (1800 007 007).}
+play: order | Put the steps for handling money stress in order | Write down every bill and debt; Note due dates; Work out what you can pay; Contact lenders early about a plan; Get free help from a financial mentor
+check: mcq | First step with money stress? | List what you owe* | Ignore it | Borrow more
+check: tf | Contacting lenders early can help. | true
+check: mcq | {nz:Where can NZers get free money help?~au:Where can Australians get free debt help?} | {nz:MoneyTalks~au:The National Debt Helpline}* | A payday lender | An ad
+home: Save the free money-help number in your phone.
+skill: moneystress
+
+@lesson 1.3 | Big decisions | 🧭 | townhall
+hook: Gap year, uni or job? How do you choose without regret?
+learn: List options, think about pros and cons, and imagine yourself in a year.
+learn: Talk to people who've done each path. Reversible decisions can be made faster.
+play: debate | Should big decisions be made quickly or slowly? | Slowly for hard-to-reverse ones, faster for reversible ones* | Always instantly, go with your gut | Gut feelings carry real information, especially when you've thought about a topic before. They work best alongside facts.
+check: mcq | What helps with big decisions? | Pros and cons and advice from people who've done it* | A coin flip only | Asking a random stranger
+check: tf | Reversible decisions can be made faster. | true
+check: mcq | A useful question? | How will I feel about this in a year?* | What will be fun tonight? | What do my enemies want?
+home: Use a pros and cons list on a decision this week.
+skill: decisions
+
+@lesson 1.4 | Respect and red flags | 🚩 | garden
+hook: Your partner checks your phone and gets angry when you see friends. Is that love?
+learn: Healthy relationships have respect, trust and freedom. Consent is ongoing and can be withdrawn.
+learn: Red flags include control, jealousy, put-downs and isolating you from friends.
+play: sort | Healthy, Red flag | Respecting your time with friends=Healthy; Demanding your passwords=Red flag; Listening when you say no=Healthy; Constant put-downs=Red flag; Supporting your goals=Healthy; Getting angry when you see family=Red flag | Healthy or red flag?
+check: mcq | Which is a red flag? | Controlling who you see* | Supporting your goals | Respecting your no
+check: tf | Consent can be withdrawn at any time. | true
+check: mcq | {nz:Where can you get help about unhealthy relationships in NZ?~au:Where can you get help about unhealthy relationships in Australia?} | {nz:Youthline or 1737~au:1800RESPECT}* | Nowhere | An ad
+home: Talk with a trusted adult about what respect looks like.
+skill: relationships
+
+@lesson 1.5 | Gambling | 🎲 | stage
+hook: Sports betting ads are everywhere. Why does the house always win?
+learn: Betting odds are set so the operator profits over time. Most people lose money over time.
+learn: Loot boxes in games use similar tricks. {nz:Gambling Helpline: 0800 654 655.~au:Gambling Help Online: 1800 858 858.}
+play: slider | You bet $10 a week on games with a 5% house edge. Roughly how much would you expect to lose over a year? | 0 | 100 | 26 | $ | 8 | 1
+check: mcq | Who wins over time in gambling? | The operator* | Most gamblers | Everyone
+check: tf | Loot boxes can work like gambling. | true
+check: mcq | Signs gambling is a problem? | Chasing losses and hiding it* | Playing a board game | Saving money
+home: Count the gambling ads you see in one day.
+skill: gambling
+
+@lesson 1.6 | Your support team | 🧑‍🤝‍🧑 | garden
+hook: Who would you call at 2am in a crisis?
+learn: A support network includes family, friends, mentors, doctors and helplines.
+learn: Build it before you need it. Check in on others too.
+play: match | Match each need to who could help | Money worries=A financial mentor; Feeling low for weeks=A doctor or counsellor; Career advice=A mentor in that field; Someone to talk to tonight=A close friend or helpline
+check: mcq | When should you build a support network? | Before you need it* | Only in a crisis | Never
+check: tf | Checking in on friends is part of a support network. | true
+check: mcq | Who can help with feeling low for weeks? | A doctor or counsellor* | An advertiser | Nobody
+home: Write down three people you could call for help.
+skill: help
+

@@ -1,0 +1,315 @@
+# Make and Sell
+@band sprouts
+@unit 1 | The lemonade stand | Cost, price and profit
+@unit 2 | Making things to sell | Crafts, baking and ideas
+@unit 3 | Happy customers | Smiles, thank yous and good service
+@unit 4 | Signs and posters | Telling people what you sell
+@unit 5 | Counting the cash box | Money in, money out
+@unit 6 | Selling with friends | Sharing work and sharing money
+@unit 7 | Fixing problems | When things go wrong at the stall
+@unit 8 | Big ideas | Inventions that help people
+
+@lesson 1.1 | What's a stall? | 🍋 | stall
+hook: You want to sell lemonade. What do you need?
+learn: A stall is a little shop. You make or get things, then sell them.
+learn: You need things to sell, a table, a sign and somewhere people walk past.
+play: tap | Tap what you need for a lemonade stand | 🍋:yes:Lemons to make lemonade; 🥤:yes:Cups to serve it; 🪧:yes:A sign so people know; 🛏️:no; 🧊:yes:Ice keeps it cold; 🎮:no; 🧸:no; 💰:yes:A cash box for change
+check: mcq | What does a stall need so people know what you sell? | A sign* | A bed | A game
+check: tf | You need somewhere people walk past. | true
+check: mcq | What's a stall? | A little shop* | A type of drink | A bank
+home: Plan a pretend stall: what would you sell?
+skill: business
+
+@lesson 1.2 | Costs | 🧾 | stall
+hook: Lemons, sugar and cups cost money. Does that matter if you sell lemonade?
+learn: Costs are what you spend to make your product.
+learn: You need to sell for more than your costs.
+play: order | Put the lemonade business in order | Buy lemons, sugar and cups; Make the lemonade; Sell cups to customers; Count the money; Take away what you spent
+check: mcq | What are costs? | Money you spend to make things* | Money customers give you | Free stuff
+check: tf | Lemons and cups are costs. | true
+check: mcq | If a cup costs 30c to make, you should sell it for… | More than 30c* | Less than 30c | Nothing
+home: Find the price of a bag of lemons at the shop.
+skill: costs
+
+@lesson 1.3 | Price and profit | 💰 | stall
+hook: You sell a cup for 50c. It cost 30c to make. How much did you really earn?
+learn: Price is what customers pay.
+learn: Profit is price take away cost.
+try: Price 50c take away cost 30c = 20c profit :: gap | Price 80c take away cost 30c = _c profit | 50
+play: shop | Set a price for your lemonade | Lemonade | 30 | 300
+check: gap | Price $1 take away cost 40c = _c profit | 60
+check: tf | If the price is too high, fewer people buy. | true
+check: mcq | What is profit? | Price take away costs* | All the money in the box | The cost of lemons
+home: Work out the profit if you sold 10 cups at 50c that cost 30c each.
+skill: profit
+
+@lesson 1.4 | Mikaila's lemonade | 🐝 | garden
+hook: A girl's family lemonade recipe became a real business. How?
+learn: Mikaila Ulmer started selling lemonade when she was 4, using her great-gran's recipe with honey.
+learn: She gave some of her money to help save bees.
+learn: Her lemonade later went on sale in big supermarkets in America.
+play: mystery | She started a business when she was 4; Her lemonade uses honey; Part of her money helps save bees; Her first name is Mikaila | Mikaila Ulmer* | A bee keeper in NZ | A lemon farmer
+check: tf | Kids can start small businesses. | true
+check: mcq | What did Mikaila's business help? | Bees* | Sharks | Cars
+check: mcq | What made her lemonade special? | Her great-gran's recipe with honey* | It was free | It was blue
+home: Think of a business idea that could help animals or nature.
+skill: business
+
+@lesson 1.5 | Being friendly | 😊 | stall
+hook: Would you buy from a grumpy stall or a smiley one?
+learn: People like buying from friendly sellers.
+learn: Say hello, say thank you, and give the right change.
+play: path | A customer gives you $1 for a 50c lemonade. | Smile, say thanks and give 50c change => good: The customer is happy and comes back tomorrow! | Keep the whole $1 => bad: That's not fair. Customers need the right change. | Say nothing and look at your phone => ok: They got their drink, but they didn't feel welcome.
+check: mcq | What do you say when someone buys something? | Thank you* | Go away | Nothing
+check: gap | A 50c drink, paid with $1. Change = _c | 50
+check: tf | Friendly sellers often get more customers. | true
+home: Practise saying "Hello, would you like a lemonade?" in a friendly voice.
+skill: service
+
+@lesson 1.6 | Make a sign | 🪧 | stall
+hook: Your stall needs a sign. What should it say?
+learn: A good sign is big, easy to read and says what and how much.
+learn: Pictures help too!
+play: mcq | Which sign is best? | LEMONADE 50c, with a lemon picture* | A tiny sign with no words | A sign saying "stuff"
+check: tf | Your sign should show the price. | true
+check: mcq | What helps people read a sign from far away? | Big letters* | Tiny writing | Grey on grey
+check: mcq | What two things should a sign say? | What it is and how much* | Your birthday and your pet's name | Nothing
+home: Draw a sign for a pretend stall with a price and a picture.
+skill: marketing
+
+@band builders
+@unit 1 | Running a stall | Pricing, stock and selling out
+@unit 2 | Marketing | Telling the right people the right thing
+@unit 3 | Customers | What they want and why they come back
+@unit 4 | Money in and out | Simple accounts for a small business
+@unit 5 | Making a product | Prototypes, testing and improving
+@unit 6 | Selling online | Safely selling things you've made
+@unit 7 | Teams and partners | Splitting jobs and profits fairly
+@unit 8 | Famous starts | How big companies began small
+
+@lesson 1.1 | How much stock? | 📦 | stall
+hook: You bake 100 cookies for the school fair and sell 30. What went wrong?
+learn: Stock is what you have ready to sell.
+learn: Too much and you waste money. Too little and you sell out early.
+learn: Use last time's sales to guess, then add a little extra.
+play: slider | Last fair you sold 40 cookies and ran out an hour early. How many should you bake this time? | 20 | 100 | 50 | cookies | 8 | 1
+check: mcq | What happens if you make too much stock? | You might waste money* | You always earn more | Nothing
+check: tf | Last time's sales help you plan this time. | true
+check: mcq | You sold out fast. Next time you should… | Make a bit more* | Make less | Stop selling
+home: Plan how many treats you'd bake for a family event.
+skill: planning
+
+@lesson 1.2 | Setting the price | 🏷️ | stall
+hook: Should your cupcakes be $1 or $5?
+learn: Your price must cover costs and leave profit.
+learn: Check what others charge. Too high and nobody buys.
+play: shop | Run the stall and find a good price | Cupcake | 40 | 400
+check: mcq | What must a price cover? | Your costs, plus profit* | Only the sign | Nothing
+check: tf | Checking other sellers' prices helps you choose yours. | true
+check: gap | Costs 40c, price $1.20. Profit = _c | 80
+home: Compare the price of the same snack at two shops.
+skill: profit
+
+@lesson 1.3 | Who are your customers? | 🎯 | stall
+hook: You sell dog treats. Should you put your sign at the skate park or the dog park?
+learn: Your customers are the people most likely to want what you sell.
+learn: Put your effort where those people are.
+play: match | Match the product to its best customers | Dog treats=Dog owners at the park; Homework help=Younger kids and their parents; Car wash=Neighbours with cars; Handmade bookmarks=People at the library
+check: mcq | Where should you advertise dog treats? | The dog park* | The swimming pool | A car show
+check: tf | Knowing your customers helps you sell more. | true
+check: mcq | Who are your customers? | The people most likely to buy* | Everyone in the world | Only your friends
+home: Pick a product and describe who would buy it.
+skill: marketing
+
+@lesson 1.4 | Money in, money out | 📒 | bank
+hook: You sold $40 of cupcakes. Did you make $40?
+learn: Takings are all the money that comes in.
+learn: Profit is takings minus all costs, including ingredients, cases and the stall fee.
+try: Takings $30 minus costs $12 = $18 profit :: gap | Takings $40 minus costs $15 = $_ profit | 25
+play: sort | Money in, Money out | Selling 20 cupcakes=Money in; Buying flour and sugar=Money out; Stall fee at the fair=Money out; A tip from a happy customer=Money in; Cupcake cases=Money out; Selling the leftover cupcakes=Money in | Is it money in or money out?
+check: gap | Takings $50, costs $22. Profit = $_ | 28
+check: tf | Takings and profit are the same thing. | false
+check: mcq | Which is a cost? | The stall fee* | A customer's payment | A tip
+home: Write a simple money in and money out list for a pretend stall.
+skill: accounts
+
+@lesson 1.5 | Test and improve | 🔬 | workshop
+hook: Your first batch of slime is too sticky. Give up, or try again?
+learn: A prototype is a first try.
+learn: Test it, ask people what they think, then make it better.
+play: order | Put the steps for improving a product in order | Make a first version; Let a few people try it; Ask what they liked and didn't; Change the recipe; Test again
+check: mcq | What is a prototype? | A first try to test* | The final product | A type of sign
+check: tf | Asking customers for feedback helps improve a product. | true
+check: mcq | Your first batch fails. Best move? | Learn from it and try again* | Quit forever | Sell it anyway
+home: Improve something you made, like a paper plane, and test it again.
+skill: improving
+
+@lesson 1.6 | Splitting the profit | 🤝 | stall
+hook: You and a friend ran a stall. You did more work. How should you split the money?
+learn: Agree how to split before you start.
+learn: Fair can mean equal, or based on work or money put in.
+play: debate | You baked twice as much as your friend. How should you split the profit? | Agree before you start, maybe based on work done* | Whoever grabs the cash box first keeps it | Splitting equally is simple and keeps friendships happy, especially if you agreed to it at the start.
+check: mcq | When should you agree how to split money? | Before you start* | After an argument | Never
+check: tf | Fair doesn't always mean exactly equal. | true
+check: gap | $30 profit split equally between 3 friends = $_ each | 10
+home: Plan how you'd split jobs and money for a stall with a sibling.
+skill: fairness
+
+@band makers
+@unit 1 | Business plans | From idea to plan on one page
+@unit 2 | Pricing strategy | Margins, markups and discounts
+@unit 3 | Branding | Names, logos and trust
+@unit 4 | Selling online | Marketplaces, photos and shipping
+@unit 5 | Cash flow | Why profitable businesses can run out of money
+@unit 6 | Growing a business | Hiring, scaling and saying no
+@unit 7 | Pitching | Convincing investors and customers
+@unit 8 | Founders' stories | What real founders learned
+
+@lesson 1.1 | The one-page plan | 🗒️ | workshop
+hook: You've got a business idea. What should you write down before spending a cent?
+learn: A one-page plan covers the problem, your solution, your customers, costs, price and how you'll reach people.
+learn: Writing it down shows the gaps before they cost you money.
+play: match | Match each part of the plan to an example | Problem=Students forget their lunches; Solution=A lunch subscription; Customers=Busy parents; Price=$6 a lunch; Getting the word out=Flyers at school pick-up
+check: mcq | What should a plan start with? | The problem you're solving* | Your logo | Your profit
+check: tf | A plan can show problems before you spend money. | true
+check: mcq | Who are "customers" in a plan? | The people who'll pay* | Your friends | Your competitors
+home: Write a one-page plan for a business idea you like.
+skill: planning
+
+@lesson 1.2 | Margins | 📐 | stall
+hook: Two businesses each sell $1,000 of stuff. Why does one keep $600 and the other $100?
+learn: Margin is the share of the price you keep after the cost of making it.
+learn: Margin % = (price − cost) ÷ price × 100.
+try: Price $10, cost $6. Margin = $4, or 40% :: gap | Price $20, cost $15. Margin = _% | 25
+play: price | Which supplier gives you cheaper stock per candle? | Supplier A:48:24:candles; Supplier B:30:12:candles
+check: gap | Price $50, cost $30. Margin = _% | 40
+check: tf | A bigger margin means you keep more of each sale. | true
+check: mcq | What lowers your margin? | Higher costs* | Higher prices | More customers
+home: Find a product and estimate its margin.
+skill: profit
+
+@lesson 1.3 | Build a brand | ✨ | stage
+hook: Why would someone pay more for a brand they know?
+learn: A brand is what people think and feel about your business.
+learn: It's built by being consistent, keeping promises and treating customers well.
+play: debate | What builds a strong brand most? | Keeping promises to customers, every time* | A really cool logo | A great logo and name help people remember you, but trust is what keeps them coming back.
+check: mcq | A brand is mostly… | What people think and feel about you* | Just your logo | Your bank balance
+check: tf | Breaking promises hurts a brand. | true
+check: mcq | What helps people recognise a brand? | Being consistent* | Changing your name every week | Hiding your name
+home: Pick a brand you trust and say why you trust it.
+skill: marketing
+
+@lesson 1.4 | Selling online safely | 🛒 | online
+hook: You're selling sneakers online. A buyer wants to pay later with a weird link. Hmm.
+learn: Use trusted marketplaces and their payment systems.
+learn: Never send items before payment clears, and never click links buyers send you.
+play: scam | Real buyer or scammer? | I'll pay through the marketplace now and pick up tomorrow=real; I've overpaid by $200, please refund the difference to my cousin=scam; Click this link to receive your payment=scam; Can you post it today? Paid through the site just now=real; I'm overseas. My courier will collect it. Send it first, I'll pay later=scam | Overpayment refunds, payment links and "send first" are classic scams.
+check: mcq | A buyer overpays and asks for a refund to someone else. That's… | A common scam* | Generous | Normal
+check: tf | You should send items before the payment clears. | false
+check: mcq | Safest way to get paid online? | Through the marketplace's own system* | A link from the buyer | Gift cards
+home: Check the safety tips page on a marketplace you know.
+skill: scams
+
+@lesson 1.5 | Cash flow | 🌊 | bank
+hook: A business is making a profit but can't pay its bills. How?
+learn: Cash flow is the timing of money in and out.
+learn: If you pay suppliers now but customers pay in 30 days, you can run out of cash.
+play: diff | Plan and reality. Tap what changed. | Week 1: Buy stock −$200; Week 2: Sales +$300; Week 3: Rent −$100; Week 4: Sales +$300 | Week 1: Buy stock −$200; Week 2: Sales +$50; Week 3: Rent −$100; Week 4: Sales +$550
+check: mcq | What is cash flow? | When money comes in and goes out* | Your logo | Total profit only
+check: tf | A profitable business can still run out of cash. | true
+check: mcq | What helps cash flow? | Getting customers to pay sooner* | Paying bills early when you have no money | Ignoring it
+home: Ask a grown-up when their bills are due compared with when they get paid.
+skill: cashflow
+
+@lesson 1.6 | Canva's start | 🎨 | stage
+hook: An Australian student kept getting told "no". Then she built one of the world's biggest design tools.
+learn: As a university student in Perth, Melanie Perkins taught other students to use design software, and saw how hard it was.
+learn: Her first business made school yearbooks easier to design. Then came Canva.
+learn: Many investors said no before some said yes. She kept improving her pitch.
+play: mystery | She grew up in Perth, Australia; She noticed design software was too hard; Her first company made yearbook design easier; She co-founded Canva | Melanie Perkins* | Sara Blakely | Mikaila Ulmer
+check: mcq | What problem did Canva solve? | Design tools were too hard to use* | People needed more phones | Cars were too slow
+check: tf | Hearing "no" from investors meant the idea was bad. | false | Many great ideas get lots of no's first.
+check: mcq | What did Melanie do after rejections? | Improved her pitch and kept going* | Gave up | Copied someone else
+home: Think of an everyday problem and an idea that could make it easier.
+skill: grit
+
+@band launchers
+@unit 1 | Starting a business | Structures, names and registration
+@unit 2 | Tax and GST | Invoices, GST and record keeping
+@unit 3 | Funding | Savings, loans, grants and investors
+@unit 4 | Contracts and law | Agreements, privacy and consumer law
+@unit 5 | Marketing that works | Data, testing and budgets
+@unit 6 | Hiring | Employing people the right way
+@unit 7 | Pitching to investors | Decks, valuations and equity
+@unit 8 | Social enterprise | Businesses built to do good
+
+@lesson 1.1 | Business structures | 🏢 | townhall
+hook: Sole trader, partnership or company. Which should a 17-year-old start with?
+learn: A sole trader is just you. It's simple, but you're personally responsible for debts.
+learn: A company is a separate legal entity. It costs more to run but can protect your personal assets.
+learn: {nz:In New Zealand you register companies with the Companies Office.~au:In Australia you'll need an ABN, and companies register with ASIC.}
+play: match | Match each structure to its description | Sole trader=Just you, simple, you're responsible for debts; Partnership=Two or more people sharing a business; Company=A separate legal entity with shareholders; Trust=Assets held by trustees for beneficiaries
+check: mcq | Simplest way to start a small business? | Sole trader* | A listed company | A trust
+check: tf | A sole trader is personally responsible for business debts. | true
+check: mcq | {nz:Where are NZ companies registered?~au:What number does an Australian business usually need?} | {nz:The Companies Office~au:An ABN}* | {nz:The post office~au:A phone number} | {nz:Nowhere~au:None}
+home: Look up the {nz:Companies Office~au:ABN} website and find how to register.
+skill: business
+
+@lesson 1.2 | GST and invoices | 🧾 | bank
+hook: Your business charges GST. Whose money is it?
+learn: GST is a tax on most goods and services: {nz:15% in New Zealand~au:10% in Australia}.
+learn: Registered businesses collect it from customers and pass it on to {nz:IRD~au:the ATO}. It's not your money to spend.
+learn: A tax invoice shows the GST and your {nz:GST number~au:ABN}.
+try: {nz:$100 + 15% GST = $115~au:$100 + 10% GST = $110} :: gap | {nz:$200 + 15% GST = $_~au:$300 + 10% GST = $_} | {nz:230~au:330}
+play: gen | gst | 4
+check: mcq | GST you collect belongs to… | {nz:IRD~au:The ATO}, once you pass it on* | You to spend | Your customers
+check: tf | A tax invoice shows the GST amount. | true
+check: mcq | {nz:What's the GST rate in New Zealand?~au:What's the GST rate in Australia?} | {nz:15%~au:10%}* | {nz:10%~au:15%} | 0%
+home: Find the GST line on a receipt from the shop.
+skill: tax
+
+@lesson 1.3 | Funding a start-up | 💵 | bank
+hook: You need $5,000 to start. Where could it come from?
+learn: Options include savings, family, loans, grants and investors.
+learn: Loans must be repaid with interest. Investors take a share of your business.
+learn: Start small with your own money when you can, and prove the idea first.
+play: match | Match the funding to what you give up | Your savings=Money you could spend on other things; Bank loan=Repayments plus interest; Investor=A share of the business; Grant=Time to apply, and rules about how you spend it
+check: mcq | What do investors usually get? | A share of the business* | Nothing | Free products only
+check: tf | Loans must be repaid with interest. | true
+check: mcq | A smart way to start? | Small, with your own money, proving the idea* | Borrow as much as possible | Spend before you have customers
+home: Research one grant or programme for young entrepreneurs in your area.
+skill: funding
+
+@lesson 1.4 | Consumer law | ⚖️ | townhall
+hook: A customer says your product broke after a week. Do you have to fix it?
+learn: {nz:The Consumer Guarantees Act says products must be of acceptable quality and match their description.~au:Australian Consumer Law gives customers guarantees that products are of acceptable quality.}
+learn: "No refunds" signs don't remove these rights.
+play: tf | A "no refunds" sign means customers have no rights. | false | Consumer law guarantees still apply.
+check: mcq | A product breaks quickly through normal use. What applies? | Consumer guarantees, so repair, replace or refund* | Nothing | Only if the customer is polite
+check: tf | Products must match their description. | true
+check: mcq | {nz:Which law protects NZ consumers?~au:Which law protects Australian consumers?} | {nz:The Consumer Guarantees Act~au:Australian Consumer Law}* | The Road Code | School rules
+home: Read the {nz:Consumer Protection~au:ACCC} page on refunds.
+skill: law
+
+@lesson 1.5 | Testing your marketing | 📈 | online
+hook: Two ads, $20 each. One gets 5 sales, one gets 40. What next?
+learn: Test small, measure results, then spend more on what works.
+learn: Track cost per sale, not just likes.
+try: $20 ad, 5 sales = $4 a sale :: gap | $30 ad, 10 sales = $_ a sale | 3
+play: price | Which ad got sales more cheaply? | Ad A:20:5:sales; Ad B:20:40:sales
+check: mcq | What matters most in an ad? | Cost per sale* | Number of likes | Pretty colours
+check: gap | $50 ad, 25 sales = $_ a sale | 2
+check: tf | Testing small before spending big is smart. | true
+home: Find an ad and guess who it's aimed at.
+skill: marketing
+
+@lesson 1.6 | Businesses that do good | 🌍 | garden
+hook: Can a business make money and change the world?
+learn: A social enterprise uses business to solve a social or environmental problem.
+learn: Profits often fund the mission. {nz:Eat My Lunch, for example, began in 2015 with a "buy one, give one" model for school lunches.~au:Thankyou, for example, was set up to send its profits to projects fighting poverty.}
+play: sort | Social enterprise, Regular business | Sells coffee and trains young people who need work=Social enterprise; Sells phones for profit=Regular business; Cafe that funds a youth mental health service=Social enterprise; Car dealership=Regular business; Clothing brand that pays fair wages and plants trees=Social enterprise | Which is which?
+check: mcq | What is a social enterprise? | A business with a social or environmental mission* | A charity that sells nothing | Any business
+check: tf | A social enterprise can make a profit. | true
+check: mcq | Where do social enterprise profits often go? | The mission* | Only the owners | Nowhere
+home: Find a social enterprise near you and what it does.
+skill: impact

@@ -1,0 +1,80 @@
+# home · launchers
+@unit 1 | Renting your first place | Searching, applying and moving in
+@unit 2 | Bills and utilities | Power, internet and water
+@unit 3 | Insurance | Contents, car and health
+@unit 4 | Moving out | What it really costs
+@unit 5 | Cooking on a budget | Feeding yourself well for less
+@unit 6 | Flatting | Living with others
+@unit 7 | Cars | Buying, owning and safety
+@unit 8 | Adulting admin | Documents, deadlines and records
+
+@lesson 1.1 | Finding a rental | 🏘️ | home
+hook: 40 people at the viewing. How do you stand out?
+learn: Have references, proof of income and ID ready before you view.
+learn: Check the property for damp, mould, heating and security.
+learn: {nz:Landlords must meet Healthy Homes standards for heating, insulation and ventilation.~au:Each state has rental standards and a body that manages bonds.}
+play: tap | Tap the warning signs at a rental viewing | 🍄:yes:Mould means damp; 💧:yes:Water stains can mean leaks; 🔒:no; 🪟:yes:Broken window latches are a security risk; 🔥:no; 🧱:yes:Big cracks can mean structural problems; 🌿:no
+check: mcq | What should you bring to a viewing? | References, proof of income and ID* | Nothing | Your entire wardrobe
+check: tf | Mould at a viewing is a warning sign. | true
+check: mcq | {nz:What standards cover NZ rental heating and insulation?~au:Who manages rental bonds in Australia?} | {nz:Healthy Homes standards~au:A state bond authority}* | {nz:The Road Code~au:Your landlord's bank} | Nobody
+home: Look at a rental listing and list what you'd check at the viewing.
+skill: renting
+
+@lesson 1.2 | Bond and rent | 💰 | bank
+hook: Rent is $250 a week. You need bond too. How much cash before moving in?
+learn: Bond is a deposit held by {nz:Tenancy Services~au:your state's bond authority}, not your landlord, and returned at the end if there's no damage or unpaid rent.
+learn: {nz:In NZ, bond can be up to 4 weeks' rent, and rent in advance up to 2 weeks.~au:In most states, bond is usually up to 4 weeks' rent.}
+try: 4 weeks × $250 = $1,000 bond :: gap | Rent $300 a week, 4 weeks' bond = $_ | 1200
+play: gen | percent | 2
+check: gap | Rent $220 a week, 2 weeks in advance = $_ | 440
+check: tf | Bond should be lodged with {nz:Tenancy Services~au:the state bond authority}. | true
+check: mcq | When do you usually get bond back? | At the end, if there's no damage or unpaid rent* | Never | After one week
+home: Look up the bond rules on {nz:tenancy.govt.nz~au:your state's rental authority website}.
+skill: renting
+
+@lesson 1.3 | Bills and utilities | 🔌 | home
+hook: Power, internet, phone, streaming. How do bills add up?
+learn: Compare plans, read fixed vs variable charges, and set up automatic payments to avoid late fees.
+learn: Split shared bills fairly and keep records.
+play: price | Which internet plan is cheaper per month over a year? | Plan A, $70 a month with $0 setup:840:12:months; Plan B, $60 a month with $150 setup:870:12:months
+check: mcq | What helps avoid late fees? | Automatic payments* | Ignoring bills | Paying whenever
+check: tf | Setup fees count when comparing plans. | true
+check: mcq | Fair way to split a shared bill? | Agreed shares, written down* | Whoever remembers | Never pay
+home: Look at a family bill and find the fixed and variable charges.
+skill: bills
+
+@lesson 1.4 | Insurance | ☂️ | home
+hook: A burst pipe ruins your laptop and clothes. Who pays?
+learn: Contents insurance covers your belongings if they're damaged or stolen.
+learn: An excess is what you pay before insurance pays the rest.
+learn: Cheaper premiums often mean higher excesses. Read what's covered.
+try: $2,000 claim with $400 excess means insurance pays $1,600 :: gap | $1,500 claim, $300 excess. Insurance pays $_ | 1200
+play: match | Match the word to its meaning | Premium=What you pay for the insurance; Excess=What you pay toward a claim; Claim=Asking the insurer to pay; Policy=The contract and what it covers
+check: mcq | What is an excess? | The amount you pay before insurance pays* | A bonus | The premium
+check: tf | Cheaper premiums often come with higher excesses. | true
+check: mcq | What covers your belongings in a rental? | Contents insurance* | The landlord's insurance always | Nothing
+home: Ask a grown-up what their insurance excess is.
+skill: insurance
+
+@lesson 1.5 | Moving-out budget | 📦 | bank
+hook: You earn $600 a week. Can you afford to move out?
+learn: Add up rent, bills, food, transport, phone, and savings.
+learn: A common rule of thumb: try to keep rent around 30% of take-home pay or less.
+play: budget | Plan your first week living out on $600 | 600 | Rent=230; Power and internet=40; Food=100; Transport=50; Phone=15; Savings=0 | Doctor's visit:60
+check: gap | 30% of $600 = $_ | 180
+check: mcq | What should a moving-out budget include? | Rent, bills, food and savings* | Only rent | Only fun
+check: tf | Keeping savings for surprises matters when living out. | true
+home: Build a moving-out budget for a job you'd like.
+skill: budget
+
+@lesson 1.6 | Flatmate agreement | 🏠 | home
+hook: Who cleans the bathroom? Who pays for toilet paper? Fights incoming.
+learn: A flatmate agreement covers rent shares, bills, chores, guests and what happens if someone leaves.
+learn: Writing it down early prevents arguments later.
+play: chat | Setting up a flat agreement | them: Do we really need to write stuff down? | me: It saves fights later. Let's agree on bills, chores and guests*/No, let's just wing it/I'll decide everything | them: OK. How do we split power? | me: Equal shares, paid by automatic payment on the 1st*/Whoever has money/You pay it
+check: mcq | What should a flat agreement cover? | Rent, bills, chores and guests* | Favourite movies | Nothing
+check: tf | Writing things down can prevent arguments. | true
+check: mcq | A fair way to share chores? | A written roster* | Whoever cares most | Nobody does them
+home: Draft a mini agreement with a sibling about shared chores.
+skill: flatting
+

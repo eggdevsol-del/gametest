@@ -1,0 +1,83 @@
+# money · launchers
+@unit 1 | Payslips and tax | Read every line of a payslip
+@unit 2 | Renting | Bonds, rent and your rights as a tenant
+@unit 3 | Debt and credit scores | Borrowing well and building a record
+@unit 4 | Budgeting for life | Running your money when you leave home
+@unit 5 | Adult banking | Accounts, fees, transfers and online safety
+@unit 6 | Paying for study | {nz:StudyLink, fees-free and student loans~au:HECS-HELP and study costs}
+@unit 7 | Big money moves | Cars, phones and your first flat
+@unit 8 | Financial independence | A plan for your twenties
+
+@lesson 1.1 | Gross and net pay | 🧾 | bank
+hook: Your job pays $20 an hour. You work 10 hours. Why isn't $200 in your account?
+learn: Gross pay is what you earn before anything comes out.
+learn: Net pay, or take-home pay, is what lands in your account.
+learn: Tax and other deductions sit in between.
+try: 10 hours × $20 = $200 gross :: gap | 15 hours × $22 = $_ gross | 330
+play: gen | percent | 4
+check: mcq | What is net pay? | What you take home after deductions* | What you earn before tax | Your hourly rate
+check: gap | Gross $300, deductions $45. Net = $_ | 255
+check: tf | Gross pay is always bigger than or equal to net pay. | true
+home: Ask a grown-up to show you the gross and net lines on a payslip.
+skill: payslip
+
+@lesson 1.2 | How income tax works | 🏛️ | townhall
+hook: If you earn more, do you lose more of every dollar to tax?
+learn: Income tax is taken from your pay by your employer and sent to {nz:Inland Revenue (IRD)~au:the Australian Taxation Office (ATO)}.
+learn: Rates go up in steps called brackets. A higher rate only applies to the part of your income above each step.
+learn: So a pay rise never leaves you worse off after tax.
+learn: Rates change from time to time. Check {nz:ird.govt.nz~au:ato.gov.au} for this year's numbers.
+play: debate | Is it true that a pay rise can push you into a higher bracket and leave you with less? | No. Only the extra dollars are taxed at the higher rate* | Yes. All your income gets taxed at the new rate | Some benefits and student loan repayments can change with income, so it's worth checking the whole picture.
+check: mcq | Who usually takes tax from your pay? | Your employer* | You, at the end of the year only | Your bank
+check: tf | Moving into a higher tax bracket makes all your income taxed at that rate. | false
+check: mcq | Where do you find this year's official tax rates? | {nz:ird.govt.nz~au:ato.gov.au}* | A social media post | Your friend's guess
+home: Look up this year's tax rates on {nz:ird.govt.nz~au:ato.gov.au} with a grown-up.
+skill: tax
+
+@lesson 1.3 | Your tax details | 🔢 | townhall
+hook: Your new boss hands you a form on day one. What do you write?
+learn: {nz:In New Zealand you give your employer your IRD number and a tax code on a Tax code declaration (IR330).~au:In Australia you give your employer your Tax File Number (TFN) on a TFN declaration.}
+learn: {nz:Your main job usually uses code M. Add SL if you have a student loan. A second job uses a secondary code.~au:You claim the tax-free threshold from one employer only. If you have two jobs, the second one usually doesn't claim it.}
+learn: The wrong details can mean too much or too little tax. You can fix it by giving your employer a new form.
+play: mcq | {nz:Your only job, no student loan. Which tax code?~au:Your first and only job. Should you claim the tax-free threshold?} | {nz:M~au:Yes}* | {nz:S~au:No} | {nz:ND~au:Only in July}
+check: tf | You can fix wrong tax details by giving your employer an updated form. | true
+check: mcq | {nz:What does SL added to a tax code mean?~au:How many employers should you claim the tax-free threshold from?} | {nz:You have a student loan~au:Just one}* | {nz:Small Living~au:Every one} | {nz:Second Language~au:None ever}
+check: mcq | What happens with wrong tax details? | You may pay too much or too little tax* | Nothing at all | Your job ends
+home: Find where your {nz:IRD number~au:TFN} would come from, and how to keep it private.
+skill: tax
+
+@lesson 1.4 | {nz:KiwiSaver~au:Super} on your payslip | 🌱 | shares
+hook: There's a deduction on your payslip for retirement. You're 17. Why bother?
+learn: {nz:KiwiSaver is a savings scheme for when you're older. You put in a share of your pay, your employer adds more, and the government may add a yearly top-up.~au:Superannuation is money your employer must pay into a fund for your retirement, on top of your wage.}
+learn: {nz:From April 2026 the default is 3.5% of your pay from you, and usually a matching amount from your employer. Check the current rates on ird.govt.nz.~au:The Super Guarantee is 12% of your ordinary earnings, paid by your employer. Check the current rate on ato.gov.au.}
+learn: Starting young means decades of compounding.
+play: compound | Money left to grow for decades snowballs | 1000 | 6 | 40
+check: tf | Money put in at 17 has more time to grow than money put in at 47. | true
+check: mcq | {nz:Who usually adds to your KiwiSaver as well as you?~au:Who pays the Super Guarantee?} | {nz:Your employer~au:Your employer}* | {nz:Your school~au:You, out of your wage} | {nz:Nobody~au:Nobody}
+check: mcq | Why does starting young help so much? | More years of compound growth* | Young people get better rates | It doesn't help at all
+home: Ask a grown-up which fund they're in, and what its yearly fee is.
+skill: retirement
+
+@lesson 1.5 | Deductions | ➖ | bank
+hook: Two payslips, same hours, different take-home pay. Can you spot why?
+learn: Deductions can include tax, {nz:the ACC earners' levy, KiwiSaver and student loan repayments~au:the Medicare levy (withheld with your tax), salary sacrifice or union fees}.
+learn: Each line should have a name and an amount. If one's a mystery, ask.
+play: diff | Week 1 and week 2. Tap what changed. | Hours 20; Rate $23.50; Gross $470.00; Tax $58.10; {nz:KiwiSaver $16.45~au:Union fee $5.00}; Net $395.45 | Hours 20; Rate $23.50; Gross $470.00; Tax $58.10; {nz:KiwiSaver $16.45~au:Union fee $5.00}; Uniform $30.00; Net $365.45
+check: mcq | A deduction you don't recognise appears. What should you do? | Ask your employer what it's for* | Quit the job | Ignore it
+check: tf | Every deduction on a payslip should be explained. | true
+check: gap | Gross $500, deductions $95. Net = $_ | 405
+home: Find three different deductions on a real payslip and say what each one is.
+skill: payslip
+
+@lesson 1.6 | Fixing a pay mistake | 🛠️ | workshop
+hook: You worked 18 hours. Your payslip says 15. Awkward, or easy to fix?
+learn: Employers must keep accurate records and pay you for all the hours you work.
+learn: Raise it politely, early and in writing, with your own record of hours.
+learn: If it isn't fixed, {nz:Employment New Zealand~au:the Fair Work Ombudsman} can help.
+play: chat | Your payslip is short by 3 hours | them: Hi! Everything okay with your first pay? | me: Mostly! I think 3 hours are missing. I worked 18 and it shows 15. Here's my record*/You stole my money/It's fine, never mind | them: Oh, let me check the roster. Can you send me the dates? | me: Sure, I'll email them today*/Can't you just trust me?/Forget it
+check: mcq | Best way to raise a pay mistake? | Politely, early, with your own records* | Angrily, in front of everyone | Wait a year
+check: tf | Keeping your own record of hours is a smart idea. | true
+check: mcq | Who can help if a pay problem isn't fixed? | {nz:Employment New Zealand~au:The Fair Work Ombudsman}* | Your bank | Nobody
+home: Start a simple note on your phone to track hours you work.
+skill: workrights
+

@@ -1,0 +1,309 @@
+# How the World Works
+@band sprouts
+@unit 1 | Rules and fairness | Why we have rules
+@unit 2 | Community helpers | People who keep us safe and well
+@unit 3 | Sharing the cost | What tax pays for
+@unit 4 | Our community | Parks, libraries and pools
+@unit 5 | Voting | Choosing together
+@unit 6 | Taking care of places | Beaches, parks and streets
+@unit 7 | Different families | Many kinds of families
+@unit 8 | Our country | {nz:Aotearoa New Zealand~au:Australia}
+
+@lesson 1.1 | Why rules? | 📏 | townhall
+hook: What would a game be like with no rules?
+learn: Rules help everyone be safe and treated fairly.
+learn: Families, schools and countries all have rules.
+play: sort | Fair rule, Unfair rule | Everyone takes turns on the slide=Fair rule; Only the biggest kid plays=Unfair rule; Hands up to talk in class=Fair rule; One person gets all the cake=Unfair rule; Everyone helps tidy up=Fair rule | Fair or unfair?
+check: mcq | Why do we have rules? | To keep things safe and fair* | To be boring | No reason
+check: tf | Countries have rules called laws. | true
+check: mcq | A fair rule is one that… | Treats everyone fairly* | Helps only one person | Changes every minute
+home: Make a fair rule with your family for a game.
+skill: fairness
+
+@lesson 1.2 | Who keeps us safe? | 👮 | townhall
+hook: Who helps when there's a car crash?
+learn: Police, firefighters and ambulance officers help in emergencies.
+learn: {nz:In New Zealand, call 111 in an emergency.~au:In Australia, call 000 in an emergency.}
+play: match | Match the emergency to who helps | A fire=Firefighters; Someone badly hurt=Ambulance; A crime=Police; Someone lost at sea=Coastguard
+check: mcq | {nz:What's the emergency number in New Zealand?~au:What's the emergency number in Australia?} | {nz:111~au:000}* | 123 | 911
+check: tf | You should only call the emergency number for real emergencies. | true
+check: mcq | Who helps when someone is badly hurt? | Ambulance officers* | Librarians | Bakers
+home: Learn your home address by heart.
+skill: safety
+
+@lesson 1.3 | What tax pays for | 🏫 | townhall
+hook: Who pays for roads, schools and hospitals?
+learn: Grown-ups pay tax from their pay and when they buy things.
+learn: Tax pays for things everyone shares, like schools, roads, parks and hospitals.
+play: tap | Tap things tax helps pay for | 🏫:yes:Schools; 🛣️:yes:Roads; 🏥:yes:Hospitals; 🧸:no; 🌳:yes:Parks; 🍦:no; 🚒:yes:Fire stations
+check: mcq | What does tax pay for? | Things everyone shares, like schools* | Your toys | Nothing
+check: tf | Hospitals are partly paid for by tax. | true
+check: mcq | Who pays tax? | Grown-ups who earn and buy things* | Only kings | Nobody
+home: Spot three things on a walk that tax helps pay for.
+skill: tax
+
+@lesson 1.4 | Voting | 🗳️ | townhall
+hook: Your class can't agree: pizza day or movie day. How do you decide fairly?
+learn: Voting lets everyone have a say. The choice with the most votes wins.
+learn: Grown-ups vote to choose leaders.
+play: order | Run a fair class vote | List the choices; Everyone gets one vote; Count the votes; The choice with the most votes wins; Everyone accepts the result
+check: mcq | How many votes does each person get? | One* | As many as they want | None
+check: tf | Voting gives everyone a say. | true
+check: mcq | Who wins a vote? | The choice with the most votes* | The loudest person | The tallest person
+home: Hold a family vote for dinner or a movie.
+skill: voting
+
+@lesson 1.5 | Libraries and parks | 📚 | townhall
+hook: Who owns the playground?
+learn: Some places belong to everyone: parks, libraries, pools and playgrounds.
+learn: We share them, so we take care of them.
+play: sort | Belongs to everyone, Belongs to one family | The public library=Belongs to everyone; Your bedroom=Belongs to one family; The town pool=Belongs to everyone; Your backyard=Belongs to one family; The playground=Belongs to everyone | Who does it belong to?
+check: mcq | Who owns a public park? | Everyone in the community* | One kid | Nobody
+check: tf | We should look after shared places. | true
+check: mcq | At the library, you borrow books and… | Bring them back* | Keep them forever | Draw in them
+home: Visit a library or park and find one way to look after it.
+skill: community
+
+@lesson 1.6 | Many kinds of families | 👨‍👩‍👧 | home
+hook: Do all families look the same?
+learn: Families come in many shapes: one parent, two parents, grandparents, aunties, foster families and more.
+learn: What matters is caring for each other.
+play: tf | All families look the same. | false | Families come in many shapes and sizes.
+check: mcq | What makes a family? | People who care for each other* | Exactly four people | Matching clothes
+check: tf | Some kids live with their grandparents. | true
+check: mcq | How should we treat families different from ours? | With respect* | With jokes | By ignoring them
+home: Draw your family and the people who care for you.
+skill: respect
+
+@band builders
+@unit 1 | Tax and what it pays for | Income tax, GST and public services
+@unit 2 | Local councils | Rates, rubbish and roads
+@unit 3 | Government | Who makes laws and how
+@unit 4 | Rights and responsibilities | What you can expect and what's expected
+@unit 5 | Consumer rights | Refunds, repairs and fair deals
+@unit 6 | The economy | Jobs, prices and trade
+@unit 7 | Our history | How {nz:Aotearoa~au:Australia} got here
+@unit 8 | Global citizens | Our place in the world
+
+@lesson 1.1 | Two kinds of tax | 🧾 | townhall
+hook: You buy a $10 book. Do you pay tax?
+learn: Income tax comes out of people's pay.
+learn: GST is added to most things you buy: {nz:15% in New Zealand~au:10% in Australia}.
+learn: Even kids pay GST when they buy things.
+try: {nz:A $20 item before GST costs $23 with 15% GST~au:A $20 item before GST costs $22 with 10% GST} :: gap | {nz:$40 before GST. With 15% GST it's $_~au:$40 before GST. With 10% GST it's $_} | {nz:46~au:44}
+play: gen | gst | 3
+check: mcq | Which tax is added when you buy things? | GST* | Income tax | Pocket money tax
+check: tf | Kids pay GST when they buy things. | true
+check: mcq | Income tax comes from… | People's pay* | Library books | Rain
+home: Find "GST" on a receipt.
+skill: tax
+
+@lesson 1.2 | Councils and rates | 🏘️ | townhall
+hook: Who empties your rubbish bin each week?
+learn: Local councils run things like rubbish collection, local roads, parks, libraries and water.
+learn: Homeowners pay rates to the council to fund them.
+play: sort | Council job, Not a council job | Rubbish collection=Council job; Local parks=Council job; Running the army=Not a council job; Libraries=Council job; Printing money=Not a council job; Local roads=Council job | Council or not?
+check: mcq | What do rates pay for? | Council services like parks and rubbish* | The army | Movie tickets
+check: tf | Councils run local libraries. | true
+check: mcq | Who pays rates? | Homeowners* | Kids | Tourists only
+home: Find your local council's website and one service it runs.
+skill: council
+
+@lesson 1.3 | How laws are made | 🏛️ | townhall
+hook: Who decides it's illegal to drive without a seatbelt?
+learn: {nz:In New Zealand, Members of Parliament debate and vote on bills in Parliament. Bills that pass become laws.~au:In Australia, laws are debated in Parliament. Federal bills must pass both the House of Representatives and the Senate.}
+learn: People can make submissions to share their views on a bill.
+play: order | How an idea becomes a law | Someone proposes a bill; Parliament debates it; The public can make submissions; Parliament votes; If it passes, it becomes law
+check: mcq | Where are laws debated? | In Parliament* | At the supermarket | At school
+check: tf | The public can share views on new laws. | true
+check: mcq | A proposed law is called a… | Bill* | Receipt | Ticket
+home: Look up one bill being discussed in Parliament now.
+skill: civics
+
+@lesson 1.4 | Consumer rights | 🧾 | stall
+hook: Your new headphones broke after two days. Can you get your money back?
+learn: Products must be of acceptable quality, fit for purpose and as described.
+learn: If they fail, you're usually entitled to a repair, replacement or refund. Keep your receipt.
+play: chat | Returning broken headphones | them: Hi, how can I help? | me: I bought these headphones on Saturday and the left side stopped working. Here's my receipt*/These are rubbish, give me money/Never mind | them: Sorry about that! Would you like a replacement or a refund? | me: A replacement would be great, thanks*/I want both/Whatever
+check: mcq | Your new product breaks quickly. You're usually entitled to… | A repair, replacement or refund* | Nothing | A free car
+check: tf | Keeping your receipt helps with returns. | true
+check: mcq | A good way to ask for a refund? | Calmly, with the receipt* | Shouting | Not asking
+home: Find the returns policy of a shop you like.
+skill: consumer
+
+@lesson 1.5 | Supply and demand | ⚖️ | stall
+hook: Why do strawberries cost more in winter?
+learn: When lots of people want something and there isn't much, prices go up.
+learn: When there's plenty and fewer people want it, prices go down.
+play: match | Match the situation to the price change | Strawberries in winter=Price goes up; Strawberries in summer=Price goes down; A toy everyone wants at Christmas=Price goes up; Umbrellas after the rain stops=Price goes down
+check: mcq | Little supply plus lots of demand means prices usually… | Go up* | Go down | Stay the same
+check: tf | Seasons can change food prices. | true
+check: mcq | Why are summer strawberries cheaper? | There are lots of them* | They taste worse | Shops are kind
+home: Compare a fruit price in two different seasons.
+skill: economy
+
+@lesson 1.6 | Rights and responsibilities | 🤲 | townhall
+hook: You have the right to go to school. Do you have responsibilities too?
+learn: Rights are things everyone should have, like safety and education.
+learn: Responsibilities are things we should do, like respecting others and following fair rules.
+play: sort | Right, Responsibility | Going to school=Right; Treating others with respect=Responsibility; Being safe=Right; Looking after shared places=Responsibility; Having a say=Right; Telling the truth=Responsibility | Right or responsibility?
+check: mcq | Which is a right? | An education* | Doing the dishes | Picking up litter
+check: tf | Rights and responsibilities go together. | true
+check: mcq | Which is a responsibility? | Respecting others* | Free lunch every day | Nothing
+home: Name one right and one responsibility you have at home.
+skill: civics
+
+@band makers
+@unit 1 | Government and voting | How elections and Parliament work
+@unit 2 | Tax and spending | Where the money goes
+@unit 3 | Consumer law | Your rights when buying
+@unit 4 | The economy | Inflation, interest rates and jobs
+@unit 5 | Law and justice | Courts, police and your rights
+@unit 6 | Founding documents | {nz:Te Tiriti o Waitangi~au:The Constitution and First Nations history}
+@unit 7 | Global issues | Climate, trade and aid
+@unit 8 | Having your say | Submissions, petitions and protest
+
+@lesson 1.1 | Elections | 🗳️ | townhall
+hook: Why does your vote matter if millions of people vote?
+learn: {nz:New Zealand uses MMP. You get two votes: one for a local MP and one for a party.~au:Australia uses preferential voting for the House of Representatives. You number the candidates in order of preference.}
+learn: {nz:General elections are held at least every three years.~au:Voting is compulsory for citizens 18 and over.}
+learn: Close results happen. Every vote counts.
+play: mcq | {nz:How many votes do you get in a NZ general election?~au:How do you fill in an Australian House of Representatives ballot?} | {nz:Two: an electorate vote and a party vote~au:Number every candidate in order of preference}* | {nz:One~au:Tick one name only} | {nz:Ten~au:Write a letter}
+check: tf | {nz:NZ elections happen at least every three years.~au:Voting is compulsory for Australian citizens 18 and over.} | true
+check: mcq | {nz:What voting system does NZ use?~au:What does "preferential" mean?} | {nz:MMP~au:You rank candidates in order}* | {nz:First past the post only~au:You pick your favourite colour} | {nz:Coin toss~au:Only one person votes}
+check: mcq | Why does every vote matter? | Close results can be decided by a few votes* | It doesn't | Only famous people vote
+home: Look up {nz:vote.nz~au:aec.gov.au} and find when the next election is.
+skill: civics
+
+@lesson 1.2 | Where tax goes | 🥧 | townhall
+hook: If tax were a pie, which slice would be biggest?
+learn: Big areas of government spending include social welfare, health, education and debt interest.
+learn: Governments publish budgets every year showing where money goes.
+play: sort | Usually a big slice, Usually a small slice | Health=Usually a big slice; Education=Usually a big slice; Social welfare and pensions=Usually a big slice; Arts funding=Usually a small slice; Running Parliament itself=Usually a small slice | Big or small slice?
+check: mcq | Which is usually one of the biggest areas of spending? | Health* | Arts funding | Running Parliament
+check: tf | Governments publish yearly budgets. | true
+check: mcq | Where can you see where tax goes? | The government's budget* | A gossip site | Nowhere
+home: Find one number from this year's government budget.
+skill: tax
+
+@lesson 1.3 | Your rights with police | 👮 | townhall
+hook: Police stop you on the street. What are your rights?
+learn: Stay calm and polite. You can ask why you're being stopped.
+learn: {nz:You usually have the right to remain silent and to talk to a lawyer. Youth Law Aotearoa gives free advice.~au:You usually have the right to remain silent and to contact a lawyer. Legal Aid and youth legal services give free advice.}
+play: order | Staying safe if police stop you | Stay calm and polite; Ask why you've been stopped; Give your name and address if asked; Ask to speak to a lawyer or adult if questioned; Write down what happened afterwards
+check: mcq | If stopped by police, you should… | Stay calm and polite* | Run away | Shout
+check: tf | You can usually ask to talk to a lawyer. | true
+check: mcq | {nz:Where can young NZers get free legal advice?~au:Where can young Australians get free legal advice?} | {nz:Youth Law Aotearoa~au:Legal Aid or a youth legal service}* | A meme page | Nowhere
+home: Look up {nz:Youth Law Aotearoa~au:your state's Legal Aid} and save the number.
+skill: law
+
+@lesson 1.4 | {nz:Te Tiriti o Waitangi~au:First Nations history} | 📜 | museum
+hook: {nz:Why does a document signed in 1840 still matter today?~au:Whose land was Australia before 1788?}
+learn: {nz:Te Tiriti o Waitangi was signed in 1840 by many Māori rangatira and representatives of the British Crown.~au:Aboriginal and Torres Strait Islander peoples have cared for this continent for more than 60,000 years.}
+learn: {nz:The Māori and English texts differ in important ways, which has led to disagreement about what was agreed.~au:British colonisation from 1788 took land without treaty, which still affects communities today.}
+learn: {nz:The Waitangi Tribunal investigates breaches, and settlements have returned some land and resources to iwi.~au:The 1992 Mabo decision recognised native title, overturning the idea that the land had belonged to no one.}
+play: mcq | {nz:When was Te Tiriti o Waitangi signed?~au:What did the 1992 Mabo decision recognise?} | {nz:1840~au:Native title}* | {nz:1940~au:A new flag} | {nz:2000~au:A new currency}
+check: tf | {nz:The Māori and English texts of the Treaty differ.~au:Aboriginal and Torres Strait Islander peoples lived here long before 1788.} | true
+check: mcq | {nz:What does the Waitangi Tribunal do?~au:About how long have First Nations peoples cared for Australia?} | {nz:Investigates Treaty breaches~au:More than 60,000 years}* | {nz:Runs elections~au:About 200 years} | {nz:Sells land~au:About 10 years}
+check: mcq | Who should help tell these histories? | The communities they belong to* | Nobody | Only tourists
+home: {nz:Find out which iwi or hapū are mana whenua where you live.~au:Find out whose Country your home is on.}
+skill: history
+
+@lesson 1.5 | Inflation and you | 🎈 | bank
+hook: Why does the same bag of groceries cost more each year?
+learn: Inflation means prices rise over time. Central banks try to keep it low and steady.
+learn: If your pay or savings grow slower than inflation, you can buy less.
+play: slider | Inflation is 4% a year. Roughly what does a $100 shop cost after 3 years? | 100 | 130 | 112 | $ | 3 | 1
+check: mcq | What is inflation? | Prices rising over time* | Prices always falling | A balloon festival
+check: tf | High inflation can make savings buy less. | true
+check: mcq | Who tries to keep inflation steady? | The central bank* | Supermarkets | Schools
+home: Compare a receipt from a year ago with today's prices.
+skill: inflation
+
+@lesson 1.6 | Petitions and protest | ✊ | townhall
+hook: You want a pedestrian crossing outside school. How do you make it happen?
+learn: You can make submissions, start petitions, talk to your council or MP, and protest peacefully.
+learn: Facts, numbers and stories from people affected make your case strong.
+play: debate | What's most likely to get a crossing built? | A petition with signatures, traffic counts and a meeting with the council* | Angry posts online | Online posts can raise awareness quickly and gather supporters. They work best alongside a clear ask to decision makers.
+check: mcq | What makes a petition stronger? | Facts and real stories* | Insults | Only one signature
+check: tf | Peaceful protest is a way to have your say. | true
+check: mcq | Who decides on local crossings? | Usually the local council* | The Prime Minister personally | Nobody
+home: Count cars outside school for 10 minutes for a pretend petition.
+skill: advocacy
+
+@band launchers
+@unit 1 | Tax systems | {nz:IRD, PAYE and tax returns~au:The ATO, PAYG and tax returns}
+@unit 2 | Law for young adults | Contracts, tenancy and your rights
+@unit 3 | Citizenship and voting | Enrolling and making your vote count
+@unit 4 | Government money | Budgets, debt and trade-offs
+@unit 5 | Social support | {nz:Work and Income and StudyLink~au:Centrelink and youth payments}
+@unit 6 | Treaty and reconciliation | {nz:Te Tiriti in modern life~au:Reconciliation and the Uluru Statement}
+@unit 7 | Global economy | Trade, sanctions and aid
+@unit 8 | Building a fairer world | Systems change and your role
+
+@lesson 1.1 | Filing a tax return | 📨 | townhall
+hook: Your first year of work is done. Do you need to file a tax return?
+learn: {nz:Most NZ employees don't need to file. IRD sends an automatic assessment, which can mean a refund or a bill. Check myIR.~au:Most Australian workers lodge a tax return each year, often through myTax in myGov, between July and 31 October.}
+learn: Keep payslips and receipts for work expenses.
+play: mcq | {nz:Where do NZers manage their tax online?~au:Where do Australians usually lodge their own tax return online?} | {nz:myIR~au:myTax in myGov}* | {nz:A bank app~au:A bank app} | {nz:Nowhere~au:Nowhere}
+check: tf | You should keep payslips and receipts. | true
+check: mcq | {nz:What might an automatic IRD assessment give you?~au:When is the usual deadline to lodge your own return?} | {nz:A refund or a bill~au:31 October}* | {nz:A new car~au:Christmas Day} | {nz:Nothing ever~au:Any time}
+check: mcq | A tax refund means… | You paid too much tax during the year* | You won a prize | You owe more
+home: {nz:Set up a myIR account with a grown-up.~au:Look at the myGov sign-up page with a grown-up.}
+skill: tax
+
+@lesson 1.2 | Contracts and age | ✍️ | townhall
+hook: You're 17 and sign a phone contract. Is it binding?
+learn: Rules about contracts for under-18s differ, but adults and businesses often need a parent to co-sign.
+learn: Once you're 18, contracts you sign are generally binding. Read before you sign.
+play: diff | The sales pitch and the actual contract. Tap what the pitch didn't mention. | Phone: $0 upfront; Plan: $45 a month; Data: 40 GB | Phone: $0 upfront; Plan: $45 a month for 36 months; Data: 40 GB; Early exit fee: remaining phone balance; Price rises each April
+check: mcq | Before signing a contract you should… | Read it and ask questions* | Sign fast | Skip the fine print
+check: tf | At 18, contracts you sign are generally binding. | true
+check: mcq | Which is a hidden cost to check? | Early exit fees* | The logo | The shop music
+home: Read the key terms of a contract a grown-up has signed.
+skill: contracts
+
+@lesson 1.3 | Government trade-offs | ⚖️ | townhall
+hook: The government has $1 billion. More nurses or more roads?
+learn: Budgets involve trade-offs. Money spent on one thing can't be spent on another.
+learn: Governments can also borrow, which means paying interest later.
+play: budget | Plan a pretend $100 million budget | 100 | Health=30; Education=25; Transport=15; Welfare=20; Reserve=0 | Flood recovery:8
+check: mcq | What is a trade-off? | Choosing one thing means giving up another* | A free lunch | A type of tax
+check: tf | Government borrowing has to be repaid with interest. | true
+check: mcq | Why keep a reserve? | For emergencies like floods* | To waste it | No reason
+home: Read a news story about this year's budget and list one trade-off.
+skill: civics
+
+@lesson 1.4 | Social support | 🤝 | townhall
+hook: You lose your job at 19. Is there help?
+learn: {nz:Work and Income can help with job seeking and benefits. StudyLink helps students with allowances and loans.~au:Centrelink, through Services Australia, can help with youth payments, JobSeeker and study support.}
+learn: Eligibility rules apply. Apply early and keep records.
+play: match | Match the situation to where to start | Lost your job={nz:Work and Income~au:Centrelink}; Studying full time={nz:StudyLink~au:Centrelink youth payments}; Need tax help={nz:IRD~au:The ATO}; Renting problem={nz:Tenancy Services~au:Your state tenancy service}
+check: mcq | {nz:Who helps NZ students with allowances?~au:Who handles youth payments in Australia?} | {nz:StudyLink~au:Centrelink}* | A bank | Nobody
+check: tf | Applying early for support is a good idea. | true
+check: mcq | What should you keep when applying? | Records and documents* | Nothing | Only photos
+home: Find the youth support page on {nz:workandincome.govt.nz~au:servicesaustralia.gov.au}.
+skill: support
+
+@lesson 1.5 | {nz:Te Tiriti today~au:Reconciliation} | 🌿 | museum
+hook: {nz:How does Te Tiriti show up in everyday life today?~au:What does reconciliation mean in Australia today?}
+learn: {nz:Te Tiriti principles are referred to in many laws. Treaty settlements have funded iwi organisations that invest for future generations.~au:Reconciliation is about building respectful relationships between First Nations peoples and other Australians.}
+learn: {nz:Te reo Māori is an official language, and many workplaces now use it every day.~au:The 2017 Uluru Statement from the Heart called for a Voice, Treaty and Truth. A 2023 referendum on a Voice to Parliament did not pass.}
+learn: People hold different views on these questions. Learning the history helps you form your own.
+play: mcq | {nz:Which is an official language of New Zealand?~au:What did the 2017 Uluru Statement call for?} | {nz:Te reo Māori~au:Voice, Treaty and Truth}* | {nz:Latin~au:A new flag} | {nz:French~au:Lower taxes}
+check: tf | People hold different views on these questions. | true
+check: mcq | {nz:Treaty settlements have often funded…~au:What happened in the 2023 Voice referendum?} | {nz:Iwi organisations investing for the future~au:It did not pass}* | {nz:Nothing~au:It passed in every state} | {nz:Sports stadiums only~au:It was cancelled}
+check: mcq | A good way to form your own view? | Learn the history from many voices* | Read one comment | Ignore it
+home: {nz:Learn a few everyday te reo Māori phrases.~au:Find out what the Uluru Statement says in its own words.}
+skill: history
+
+@lesson 1.6 | Systems change | 🔧 | townhall
+hook: Why do some problems come back no matter how much people help?
+learn: Some problems have causes built into systems, like rules, prices or how services are designed.
+learn: Changing systems takes time: research, coalitions, and persistent advocacy.
+play: debate | Is it better to help one person now or change the system? | Both matter. Help now, and work on causes* | Only systems matter, never help individuals | Helping one person makes a real difference to their life today, even if the system takes years to change.
+check: mcq | What is systems change? | Fixing the causes built into rules and services* | Changing your phone | Buying more
+check: tf | Systems change often takes years. | true
+check: mcq | What helps systems change? | Research, partners and persistence* | One angry post | Giving up
+home: Pick a problem you care about and name one possible cause.
+skill: advocacy

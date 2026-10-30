@@ -1,0 +1,82 @@
+# money · builders
+@unit 1 | Budget basics | Plan where money goes before you spend it
+@unit 2 | Best value | Use unit prices to spot the real deal
+@unit 3 | Interest | How banks pay you for saving
+@unit 4 | Ways to pay | Cash, cards, phones and pay-later
+@unit 5 | Goals and plans | Big goals, small steps
+@unit 6 | Advertising | How ads try to change your mind
+@unit 7 | Earning more | Jobs, side hustles and pricing your work
+@unit 8 | Money mistakes | What to do when money goes wrong
+
+@lesson 1.1 | What is a budget? | 📋 | bank
+hook: Two kids get the same pocket money. One always runs out. One never does. What's the difference?
+learn: A budget is a plan for your money before you spend it.
+learn: It splits money into needs, wants and savings.
+learn: A plan beats hoping there is some left at the end of the week.
+play: sort | Need, Want, Save | Lunch at school=Need; New game skin=Want; Bus fare=Need; Lollies=Want; Money for a bike=Save; Rain jacket=Need; Cinema ticket=Want; Birthday present fund=Save | Sort each spend
+check: mcq | What is a budget? | A plan for money before you spend it* | A list of things you bought | A type of bank account
+check: tf | A budget only matters if you have lots of money. | false | Budgets help most when money is tight.
+check: mcq | Which is usually a need? | Food* | A new phone case | Concert tickets
+home: Write a three-line budget for your next pocket money: needs, wants, save.
+skill: budget
+
+@lesson 1.2 | Pay yourself first | 🥇 | bank
+hook: Most people try to save what's left over. Usually nothing is left. Is there a better way?
+learn: Paying yourself first means saving the moment money arrives.
+learn: Then you spend what's left, without touching the savings.
+learn: Your Chorecast budget split does this for you every payday.
+play: order | Put payday in the best order | Money arrives; Move your savings first; Pay for needs; Spend some on wants; Check what's left at the end of the week
+check: mcq | When should savings come out? | As soon as the money arrives* | At the end of the week | Only when you feel like it
+check: tf | Paying yourself first means buying yourself a treat first. | false | It means saving first.
+check: mcq | Why does saving first work? | You can't spend what you've already put away* | Banks charge less | Saving is more fun than spending
+home: Next payday, move your savings before you buy anything.
+skill: saving
+
+@lesson 1.3 | Split it three ways | 🍕 | bank
+hook: If you got $20, how much should you save?
+learn: One simple rule: half for needs, almost a third for wants, and a fifth to save.
+learn: That's 50% for needs, 30% for wants and 20% for savings.
+learn: It's a starting point, not a law. Change it to fit your goals.
+try: $10 × 20% = $2 :: gap | 20% of $20 = $_ | 4
+play: gen | split | 4
+check: gap | 50% of $40 = $_ | 20
+check: mcq | In the 50/30/20 idea, what is the 20% for? | Savings* | Wants | Needs
+check: slider | You earn $30. About how much is 30%? | 0 | 30 | 9 | $ | 1 | 1
+home: Try the 50/30/20 split on your next pocket money.
+skill: percent
+
+@lesson 1.4 | Build a weekly budget | 🗓️ | home
+hook: Your week has $40 coming in. Can you make every dollar do a job?
+learn: List what comes in. Then list where it must go.
+learn: Needs first. Then savings. Then wants.
+learn: Leave some money spare. Surprises happen.
+play: budget | Plan your $40 week | 40 | Bus fares=10; Lunches=10; Savings=0; Fun=0 | Lost library book:8
+check: mcq | What goes first in a budget? | Needs* | Wants | Treats
+check: tf | A good budget leaves some money for surprises. | true
+check: mcq | Your plan spends $45 but you only get $40. What now? | Cut some wants* | Hope it works out | Borrow from a friend every week
+home: Plan next week's money with a grown-up, including $2 spare for surprises.
+skill: budget
+
+@lesson 1.5 | Tracking spending | 🧾 | stall
+hook: You had $25 on Monday and $3 on Friday. Where did it go?
+learn: Tracking means writing down what you spend.
+learn: Little spends add up fast. Three $4 drinks a week is $12.
+learn: When you can see it, you can change it.
+play: diff | Your plan and what you really spent. Tap what changed. | Bus $10; Lunch $10; Savings $5; Fun $0 | Bus $10; Lunch $14; Savings $0; Fun $11
+check: gap | Three $4 drinks cost $_ | 12
+check: mcq | Why track your spending? | To see where money really goes* | To make shops happy | Because banks make you
+check: tf | Small spends don't matter. | false | Small spends add up quickly.
+home: Write down everything you spend for one week.
+skill: tracking
+
+@lesson 1.6 | When money runs out | 😬 | home
+hook: It's Wednesday. You've spent the whole week's money. Now what?
+learn: Everyone gets it wrong sometimes. The fix is to learn, not to panic.
+learn: Pause spending, look at what happened, and plan better next time.
+play: chat | Your friend wants to borrow $10 again | them: Hey, can you lend me $10? I'll pay you back next week. | me: I can't this week, my budget's tight*/Sure, here's all my money/I'll borrow it from my mum for you | them: Aw, come on. You did last time. | me: Last time took a month to come back. Maybe next week*/Fine, take it/Never ask me again
+check: mcq | You've run out mid-week. What's the best first step? | Stop spending and look at what happened* | Borrow money straight away | Pretend it didn't happen
+check: tf | Saying no to lending money can be the kind thing to do. | true
+check: mcq | What helps next week go better? | A plan with some money spare* | Spending faster | Not looking at your money
+home: Think of one change that would make your money last all week.
+skill: budget
+

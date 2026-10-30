@@ -1,0 +1,78 @@
+# make · builders
+@unit 1 | Running a stall | Pricing, stock and selling out
+@unit 2 | Marketing | Telling the right people the right thing
+@unit 3 | Customers | What they want and why they come back
+@unit 4 | Money in and out | Simple accounts for a small business
+@unit 5 | Making a product | Prototypes, testing and improving
+@unit 6 | Selling online | Safely selling things you've made
+@unit 7 | Teams and partners | Splitting jobs and profits fairly
+@unit 8 | Famous starts | How big companies began small
+
+@lesson 1.1 | How much stock? | 📦 | stall
+hook: You bake 100 cookies for the school fair and sell 30. What went wrong?
+learn: Stock is what you have ready to sell.
+learn: Too much and you waste money. Too little and you sell out early.
+learn: Use last time's sales to guess, then add a little extra.
+play: slider | Last fair you sold 40 cookies and ran out an hour early. How many should you bake this time? | 20 | 100 | 50 | cookies | 8 | 1
+check: mcq | What happens if you make too much stock? | You might waste money* | You always earn more | Nothing
+check: tf | Last time's sales help you plan this time. | true
+check: mcq | You sold out fast. Next time you should… | Make a bit more* | Make less | Stop selling
+home: Plan how many treats you'd bake for a family event.
+skill: planning
+
+@lesson 1.2 | Setting the price | 🏷️ | stall
+hook: Should your cupcakes be $1 or $5?
+learn: Your price must cover costs and leave profit.
+learn: Check what others charge. Too high and nobody buys.
+play: shop | Run the stall and find a good price | Cupcake | 40 | 400
+check: mcq | What must a price cover? | Your costs, plus profit* | Only the sign | Nothing
+check: tf | Checking other sellers' prices helps you choose yours. | true
+check: gap | Costs 40c, price $1.20. Profit = _c | 80
+home: Compare the price of the same snack at two shops.
+skill: profit
+
+@lesson 1.3 | Who are your customers? | 🎯 | stall
+hook: You sell dog treats. Should you put your sign at the skate park or the dog park?
+learn: Your customers are the people most likely to want what you sell.
+learn: Put your effort where those people are.
+play: match | Match the product to its best customers | Dog treats=Dog owners at the park; Homework help=Younger kids and their parents; Car wash=Neighbours with cars; Handmade bookmarks=People at the library
+check: mcq | Where should you advertise dog treats? | The dog park* | The swimming pool | A car show
+check: tf | Knowing your customers helps you sell more. | true
+check: mcq | Who are your customers? | The people most likely to buy* | Everyone in the world | Only your friends
+home: Pick a product and describe who would buy it.
+skill: marketing
+
+@lesson 1.4 | Money in, money out | 📒 | bank
+hook: You sold $40 of cupcakes. Did you make $40?
+learn: Takings are all the money that comes in.
+learn: Profit is takings minus all costs, including ingredients, cases and the stall fee.
+try: Takings $30 minus costs $12 = $18 profit :: gap | Takings $40 minus costs $15 = $_ profit | 25
+play: sort | Money in, Money out | Selling 20 cupcakes=Money in; Buying flour and sugar=Money out; Stall fee at the fair=Money out; A tip from a happy customer=Money in; Cupcake cases=Money out; Selling the leftover cupcakes=Money in | Is it money in or money out?
+check: gap | Takings $50, costs $22. Profit = $_ | 28
+check: tf | Takings and profit are the same thing. | false
+check: mcq | Which is a cost? | The stall fee* | A customer's payment | A tip
+home: Write a simple money in and money out list for a pretend stall.
+skill: accounts
+
+@lesson 1.5 | Test and improve | 🔬 | workshop
+hook: Your first batch of slime is too sticky. Give up, or try again?
+learn: A prototype is a first try.
+learn: Test it, ask people what they think, then make it better.
+play: order | Put the steps for improving a product in order | Make a first version; Let a few people try it; Ask what they liked and didn't; Change the recipe; Test again
+check: mcq | What is a prototype? | A first try to test* | The final product | A type of sign
+check: tf | Asking customers for feedback helps improve a product. | true
+check: mcq | Your first batch fails. Best move? | Learn from it and try again* | Quit forever | Sell it anyway
+home: Improve something you made, like a paper plane, and test it again.
+skill: improving
+
+@lesson 1.6 | Splitting the profit | 🤝 | stall
+hook: You and a friend ran a stall. You did more work. How should you split the money?
+learn: Agree how to split before you start.
+learn: Fair can mean equal, or based on work or money put in.
+play: debate | You baked twice as much as your friend. How should you split the profit? | Agree before you start, maybe based on work done* | Whoever grabs the cash box first keeps it | Splitting equally is simple and keeps friendships happy, especially if you agreed to it at the start.
+check: mcq | When should you agree how to split money? | Before you start* | After an argument | Never
+check: tf | Fair doesn't always mean exactly equal. | true
+check: gap | $30 profit split equally between 3 friends = $_ each | 10
+home: Plan how you'd split jobs and money for a stall with a sibling.
+skill: fairness
+

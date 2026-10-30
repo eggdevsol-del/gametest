@@ -1,0 +1,79 @@
+# invest · launchers
+@unit 1 | {nz:KiwiSaver~au:Superannuation} | Your retirement fund and how to choose it
+@unit 2 | Fees and returns | Comparing funds the right way
+@unit 3 | Property | Renting, buying and what houses really cost
+@unit 4 | Crypto and speculation | High risk and high hype
+@unit 5 | Tax on investments | {nz:PIE funds and your PIR~au:Capital gains and franking credits}
+@unit 6 | Investing platforms | Apps, brokers and keeping safe
+@unit 7 | Building a plan | Emergency fund first, then invest
+@unit 8 | The long game | Staying the course for decades
+
+@lesson 1.1 | How it works | 🏦 | shares
+hook: Retirement feels 50 years away. Why does it matter at 16?
+learn: {nz:KiwiSaver is a voluntary savings scheme. You, your employer and the government can all add money.~au:Super is compulsory: your employer must pay a share of your earnings into a super fund for you.}
+learn: {nz:You can usually only take it out at 65, or for your first home, or in hardship.~au:You usually can't touch it until you reach preservation age and retire.}
+learn: Because it's locked away for decades, compound growth does most of the work.
+play: compound | A little invested at 18 can grow a lot by 65 | 2000 | 6 | 47
+check: mcq | {nz:Who can add to your KiwiSaver?~au:Who must pay into your super?} | {nz:You, your employer and the government~au:Your employer}* | {nz:Only the government~au:Only you} | {nz:Nobody~au:The bank}
+check: tf | Money that stays invested for decades has the most time to compound. | true
+check: mcq | {nz:When can you usually take KiwiSaver out?~au:When can you usually access super?} | {nz:At 65, for a first home, or in hardship~au:When you reach preservation age and retire}* | {nz:Any time~au:Any time} | {nz:Never~au:At 18}
+home: Check whether you're already in a {nz:KiwiSaver~au:super} fund and which one.
+skill: retirement
+
+@lesson 1.2 | Fund types | 🎚️ | shares
+hook: Conservative, balanced, growth. What do the labels mean?
+learn: Funds mix safer investments (cash, bonds) with riskier ones (shares, property).
+learn: More shares means bigger ups and downs but usually more growth over long periods.
+play: match | Match the fund type to how it behaves | Conservative=Mostly cash and bonds. Small ups and downs.; Balanced=A mix. Medium ups and downs.; Growth=Mostly shares. Bigger ups and downs.; Aggressive=Almost all shares. The biggest swings.
+check: mcq | Which fund type usually swings the most? | Aggressive or high growth* | Conservative | Cash
+check: tf | A conservative fund never goes down. | false | It can, just usually by less.
+check: mcq | What do safer funds hold more of? | Cash and bonds* | Start-up shares | Crypto
+home: Find which fund type you or a grown-up are in.
+skill: risk
+
+@lesson 1.3 | Picking for your timeline | 🧭 | shares
+hook: You're 17 and won't touch this money for 40 years. Which fund fits?
+learn: Long timelines can ride out bigger swings, so growth funds often suit young people.
+learn: If you'll need the money soon, like a first home in 3 years, a safer fund protects it.
+learn: {nz:This is general information, not advice. Sorted.org.nz has a free fund finder.~au:This is general information, not advice. MoneySmart.gov.au has free super tools.}
+play: path | You're 17, starting your first job, and won't touch this money for decades. | A growth fund => good: Good fit. Decades of time let growth funds recover from drops. | A conservative fund => ok: Safe, but you may miss out on a lot of growth over 40 years. | No fund, keep cash under the bed => bad: Cash loses value to inflation over decades.
+check: mcq | Who might suit a conservative fund? | Someone needing the money soon* | A 17-year-old saving for retirement | Nobody
+check: tf | Your timeline matters when choosing a fund. | true
+check: mcq | Where can you compare funds for free? | {nz:sorted.org.nz~au:moneysmart.gov.au}* | A random social post | A pop-up ad
+home: Use the {nz:Sorted fund finder~au:MoneySmart super tool} with a grown-up.
+skill: risk
+
+@lesson 1.4 | Fees compound too | 🐌 | bank
+hook: A 1% fee sounds tiny. What does it cost over a working life?
+learn: Fees are taken every year, so they compound against you.
+learn: Over 40 years, a 1% higher fee can mean a much smaller balance.
+try: $50,000 × 1% = $500 a year :: gap | $80,000 × 1.25% = $_ | 1000
+play: gen | compound | 3
+check: mcq | Why do fees matter more over long periods? | They compound against you* | They stop after a year | They don't
+check: gap | 0.75% of $40,000 = $_ | 300
+check: tf | Comparing fees is worth doing when choosing a fund. | true
+home: Find the total yearly fee of your fund on its fees page.
+skill: fees
+
+@lesson 1.5 | {nz:KiwiSaver and your first home~au:Super and your first home} | 🏠 | home
+hook: Can retirement savings help you buy a house?
+learn: {nz:After 3 years in KiwiSaver, you may be able to withdraw most of your balance to buy your first home.~au:The First Home Super Saver scheme lets you save extra voluntary contributions inside super, then withdraw them for a first home, within limits.}
+learn: Rules and limits change, so check the official site before you rely on it.
+play: mcq | {nz:How long must you usually be in KiwiSaver before a first-home withdrawal?~au:Which contributions can the First Home Super Saver scheme release?} | {nz:3 years~au:Extra voluntary contributions, within limits}* | {nz:3 days~au:All of your employer's payments} | {nz:30 years~au:None}
+check: tf | Rules for using retirement savings on a house can change. | true
+check: mcq | Where should you check the current rules? | {nz:Inland Revenue or Kāinga Ora~au:The ATO}* | A friend's guess | An ad
+check: mcq | What's the main purpose of {nz:KiwiSaver~au:super}? | Retirement* | Buying lollies | Paying rent each week
+home: Look up the {nz:KiwiSaver first-home withdrawal~au:First Home Super Saver scheme} page with a grown-up.
+skill: retirement
+
+@lesson 1.6 | Reading your annual statement | 📬 | bank
+hook: Your fund sends a yearly statement. What should you look at?
+learn: Check contributions in, fees out, returns, and the fund type.
+learn: If your fund type or details are wrong, you can change them.
+play: diff | Last year and this year's statement. Tap what changed. | Fund type: Balanced; Your contributions: $1,200; {nz:Employer contributions~au:Employer super}: $1,200; Fees: $45; Return: +$310 | Fund type: Conservative; Your contributions: $1,200; {nz:Employer contributions~au:Employer super}: $1,200; Fees: $95; Return: +$120
+check: mcq | Your fund type changed and you didn't ask. What now? | Contact the fund and ask* | Ignore it | Close your bank account
+check: tf | Fees on a statement are worth checking every year. | true
+check: mcq | Which lines matter most? | Contributions, fees, returns and fund type* | Only the logo | Only the date
+home: Find last year's statement for your fund and read the fees line.
+skill: fees
+

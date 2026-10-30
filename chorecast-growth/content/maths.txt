@@ -1,0 +1,319 @@
+# Everyday Maths
+@band sprouts
+@unit 1 | Money maths | Adding coins and giving change
+@unit 2 | Telling time | Clocks, minutes and being on time
+@unit 3 | Halves and quarters | Sharing fairly
+@unit 4 | Measuring | Cups, metres and kilos
+@unit 5 | Shapes around us | Spotting shapes at home
+@unit 6 | Patterns | What comes next?
+@unit 7 | Bigger and smaller | Comparing numbers
+@unit 8 | Estimating | Good guesses
+
+@lesson 1.1 | Adding money | ➕ | stall
+hook: An apple is 50c and a banana is 40c. Do you have enough with $1?
+learn: To add money, add the cents, then the dollars.
+learn: 100 cents makes $1.
+try: 50c + 40c = 90c :: gap | 30c + 50c = _c | 80
+play: gen | add | 4
+check: gap | 60c + 40c = _c | 100
+check: mcq | 100 cents is the same as… | $1* | $10 | 10c
+check: tf | 50c + 50c = $1 | true
+home: Add up the prices of two things on a shopping list.
+skill: adding
+
+@lesson 1.2 | Giving change | 💵 | stall
+hook: You pay $2 for a $1.50 ice block. How much comes back?
+learn: Change is what you get back when you pay too much.
+learn: Count up from the price to what you paid.
+try: $1.50 up to $2 is 50c :: gap | Something costs $3. You pay $5. Change = $_ | 2
+play: gen | change | 3
+check: gap | A 70c lolly, paid with $1. Change = _c | 30
+check: tf | Change is money you get back. | true
+check: mcq | Price $4, you pay $5. Change? | $1* | $5 | $9
+home: Play shop at home and give the right change.
+skill: change
+
+@lesson 1.3 | Telling the time | 🕒 | home
+hook: Swimming starts at 4 o'clock. It's 3:30. Do you have time to eat?
+learn: The short hand shows the hour. The long hand shows the minutes.
+learn: Half past means 30 minutes after the hour.
+play: match | Match the time words to the clock | 3 o'clock=3:00; Half past 3=3:30; Quarter past 3=3:15; Quarter to 4=3:45
+check: mcq | Half past 7 is… | 7:30* | 7:00 | 7:15
+check: tf | There are 60 minutes in an hour. | true
+check: gap | It's 3:30. Swimming is at 4:00. That's _ minutes away. | 30
+home: Tell a grown-up the time three times today.
+skill: time
+
+@lesson 1.4 | Halves and quarters | 🍕 | kitchen
+hook: Two kids, one pizza. How do you share fairly?
+learn: A half is one of 2 equal parts. A quarter is one of 4.
+learn: Half of 8 is 4. A quarter of 8 is 2.
+play: gen | percent | 3
+check: gap | Half of 10 = _ | 5
+check: gap | A quarter of 12 = _ | 3
+check: mcq | 4 kids share a pizza equally. Each gets… | A quarter* | A half | The whole pizza
+home: Cut a sandwich into quarters.
+skill: fractions
+
+@lesson 1.5 | Good guesses | 🤔 | home
+hook: How many jellybeans are in the jar? Don't count. Guess!
+learn: Estimating is making a smart guess.
+learn: Use what you know. A handful is about 20.
+play: slider | About how many pencils fit in a pencil case? | 0 | 100 | 20 | pencils | 10 | 1
+check: tf | An estimate has to be exactly right. | false
+check: mcq | About how long is a pencil? | 15 cm* | 15 metres | 1 cm
+check: slider | About how many kids are in a class? | 0 | 100 | 25 | kids | 8 | 1
+home: Guess how many steps from your bed to the door, then count.
+skill: estimating
+
+@lesson 1.6 | Catch the sale | ⏱️ | stall
+hook: A price tag zooms past. Tap when it's on SALE!
+learn: Sales make things cheaper for a short time.
+learn: Saving money on things you already need is smart. Buying things you don't need because they're cheap isn't.
+play: timing | Tap when the marker reaches the sale | Catch it! | SALE
+check: tf | A sale is smart if you buy things you don't need. | false
+check: mcq | A $10 toy is half price. It now costs… | $5* | $10 | $20
+check: mcq | When is a sale a good deal? | When you needed it anyway* | Always | Never
+home: Find a sale sign at the shop and work out the new price.
+skill: sales
+
+@band builders
+@unit 1 | Percentages | Discounts, tax and tips
+@unit 2 | Recipes and scaling | Cooking for more or fewer people
+@unit 3 | Unit prices | Best buys at the supermarket
+@unit 4 | Time and rates | How fast, how long, how much
+@unit 5 | Rounding and estimating | Quick maths in your head
+@unit 6 | Reading charts | Bars, lines and pies
+@unit 7 | Averages | Mean, median and mode
+@unit 8 | Budget maths | Weekly, monthly and yearly
+
+@lesson 1.1 | What is a percentage? | 💯 | stall
+hook: "30% off" sounds great. But 30% of what?
+learn: Per cent means "out of 100". 30% means 30 out of every 100.
+learn: 10% is easy: divide by 10. Then build from there.
+try: 10% of $50 = $5, so 30% = $15 :: gap | 10% of $80 = $_ | 8
+play: gen | percent | 4
+check: gap | 50% of $60 = $_ | 30
+check: gap | 20% of $40 = $_ | 8
+check: mcq | 25% is the same as… | A quarter* | A half | A tenth
+home: Find a "% off" sign and work out the saving.
+skill: percent
+
+@lesson 1.2 | Discounts | 🏷️ | stall
+hook: Shoes are $80 with 25% off. What do you pay?
+learn: Find the discount, then take it away from the price.
+try: $80 × 25% = $20 off, so you pay $60 :: gap | $40 with 25% off. You pay $_ | 30
+play: mcq | Which is the better deal on a $60 jacket? | 30% off* | $15 off | They're the same
+check: gap | $100 with 20% off. You pay $_ | 80
+check: tf | 50% off means half price. | true
+check: mcq | $50 with 10% off costs… | $45* | $40 | $5
+home: Work out the sale price of something you'd like.
+skill: percent
+
+@lesson 1.3 | Scaling recipes | 🍝 | kitchen
+hook: The recipe serves 4. There are 6 of you. How much pasta now?
+learn: Find how much one serving needs, then multiply.
+learn: Or find the scale: 6 ÷ 4 = 1.5, then multiply every ingredient by 1.5.
+try: 400 g for 4 people is 100 g each :: gap | 400 g for 4 people. For 6 people: _ g | 600
+play: gen | scale | 3
+check: gap | 2 eggs for 4 people. For 8 people: _ eggs | 4
+check: mcq | A recipe for 2 needs 1 cup of rice. For 6? | 3 cups* | 2 cups | 6 cups
+check: tf | To halve a recipe, divide every ingredient by 2. | true
+home: Help scale a recipe for your family's dinner.
+skill: scaling
+
+@lesson 1.4 | Unit prices | ⚖️ | kitchen
+hook: A small cereal box is $4. The big one is $7. Which is better value?
+learn: The unit price is the cost per gram, per litre or per item.
+learn: Bigger isn't always cheaper. Check the unit price on the shelf label.
+play: gen | unit | 3
+check: price | Which is cheaper per 100 g? | Small cereal:4:400:g; Big cereal:7:1000:g
+check: tf | The biggest pack is always the best value. | false
+check: mcq | Unit price means… | Price per gram, litre or item* | The price of the whole pack | The discount
+home: Find the unit price on a supermarket shelf label.
+skill: unitprice
+
+@lesson 1.5 | Rounding | 🎯 | stall
+hook: Your trolley has $2.95, $4.10 and $6.99. Roughly how much is that?
+learn: Round to the nearest dollar to estimate fast.
+learn: $2.95 is about $3, $4.10 is about $4, $6.99 is about $7.
+play: gen | round | 4
+check: gap | $3 + $4 + $7 is about $_ | 14
+check: mcq | $9.49 rounds to… | $9* | $10 | $9.50
+check: tf | Rounding helps you check a bill quickly. | true
+home: Round your family's shopping items and estimate the total.
+skill: rounding
+
+@lesson 1.6 | Time maths | ⏰ | home
+hook: You start homework at 4:15 and it takes 45 minutes. When can you play?
+learn: Add minutes. Every 60 minutes is one more hour.
+try: 4:15 + 30 min = 4:45 :: gap | 4:15 + 45 minutes = _ (h:mm) | 5:00
+play: gen | time | 3
+check: gap | 9:30 + 90 minutes = _ (h:mm) | 11:00
+check: mcq | How many minutes in 2 hours? | 120* | 100 | 60
+check: tf | 75 minutes is more than an hour. | true
+home: Plan your afternoon with start and finish times.
+skill: time
+
+@band makers
+@unit 1 | Ratios and rates | Speed, pay rates and mixing
+@unit 2 | Probability | Chance, odds and why the house wins
+@unit 3 | Statistics | Reading data without being fooled
+@unit 4 | Percent change | Increases, decreases and inflation
+@unit 5 | Measurement | Areas, volumes and DIY
+@unit 6 | Simple interest | Borrowing and saving maths
+@unit 7 | Spreadsheets | Formulas that do the work
+@unit 8 | Graphs in the news | Spotting misleading charts
+
+@lesson 1.1 | Ratios | 🧃 | kitchen
+hook: Cordial says 1 part syrup to 4 parts water. How much water for 50 ml of syrup?
+learn: A ratio compares amounts. 1:4 means for every 1 of this, 4 of that.
+learn: Multiply both sides by the same number to scale up.
+try: 1:4 with 50 ml syrup means 200 ml water :: gap | 1:5 with 40 ml syrup needs _ ml water | 200
+play: match | Match the ratio to the mix | 1:1=Equal amounts; 1:3=One part to three parts; 2:1=Twice as much of the first; 1:10=A tiny bit of the first
+check: gap | Paint mixes 2:3 blue to white. 4 cups of blue needs _ cups of white | 6
+check: tf | 1:4 and 2:8 are the same ratio. | true
+check: mcq | 3 boys to 2 girls in a group of 10. How many girls? | 4* | 2 | 6
+home: Find a ratio on a packet at home.
+skill: ratio
+
+@lesson 1.2 | Rates | 🚗 | home
+hook: You earn $15 an hour and work 6 hours. Your friend earns $100 for a 7-hour day. Who earns more per hour?
+learn: A rate compares two different units, like dollars per hour or kilometres per hour.
+learn: Divide to compare. $100 ÷ 7 hours ≈ $14.29 an hour.
+try: $90 for 6 hours is $15 an hour :: gap | $120 for 8 hours = $_ an hour | 15
+play: mcq | Which job pays more per hour? | Café: $90 for 6 hours, so $15 an hour* | Babysitting: $100 for 7 hours, so about $14.29 an hour | They pay the same
+check: gap | 300 km in 3 hours = _ km per hour | 100
+check: mcq | $60 for 4 hours is… | $15 an hour* | $20 an hour | $240 an hour
+check: tf | A rate compares two different units. | true
+home: Work out a family car trip's average speed.
+skill: rates
+
+@lesson 1.3 | Chance | 🎲 | stage
+hook: A game says "1 in 10 win!" Should you play every day?
+learn: Probability is how likely something is, from 0 (impossible) to 1 (certain).
+learn: 1 in 10 means you'd expect to lose 9 times out of 10.
+learn: Games of chance are designed so the house wins over time.
+play: slider | You buy a $2 ticket with a 1 in 10 chance to win $10. Over 100 tries, roughly how much would you end up with if you start with $200? | 0 | 300 | 100 | $ | 30 | 10
+check: mcq | A 1 in 4 chance is… | 25%* | 4% | 40%
+check: tf | Over many games, games of chance usually favour the house. | true
+check: mcq | Probability of rolling a 6 on a die? | 1 in 6* | 1 in 2 | 6 in 6
+home: Flip a coin 20 times and count the heads.
+skill: probability
+
+@lesson 1.4 | Percent change | 📈 | shares
+hook: Prices went up from $4 to $5. Is that a 1% rise?
+learn: Percent change = change ÷ original × 100.
+learn: $4 to $5 is a $1 change. $1 ÷ $4 = 0.25, so 25%.
+try: $10 to $12 is $2 ÷ $10 = 20% :: gap | $20 to $25 = _% increase | 25
+play: gen | percent | 3
+check: gap | $50 down to $40 = _% decrease | 20
+check: mcq | A price rises 10% then falls 10%. It ends… | A bit lower than it started* | Back where it started | Higher
+check: tf | Percent change uses the original amount. | true
+home: Find an old price for something and work out how much it's risen.
+skill: percent
+
+@lesson 1.5 | Misleading charts | 📊 | online
+hook: Two charts show the same numbers. One looks like a disaster. How?
+learn: Charts can mislead with cut-off axes, odd scales or cherry-picked dates.
+learn: Always check where the axis starts and what period is shown.
+play: diff | The same data, two charts. Tap what's different about the second one. | Y axis starts at 0; Shows 10 years; Units: dollars; Source: listed | Y axis starts at 98; Shows 3 months; Units: dollars; Source: missing
+check: mcq | What can make a small change look huge? | Starting the axis above zero* | Using a title | Labelling units
+check: tf | Checking the source of a chart is a good habit. | true
+check: mcq | A chart shows only the worst three months. That's… | Cherry-picking* | Fair | A pie chart
+home: Find a chart in the news and check where its axis starts.
+skill: data
+
+@lesson 1.6 | Averages | 🧮 | stage
+hook: Five friends earn $10, $12, $12, $15 and $200. What's "typical"?
+learn: The mean adds everything and divides. One huge number pulls it up.
+learn: The median is the middle value, so it's less affected by extremes.
+try: $10, $12, $12, $15, $200 has a median of $12 :: gap | Median of 3, 5, 9 = _ | 5
+play: mcq | For the friends' earnings, which average best shows a typical friend? | The median, $12* | The mean, $49.80 | The biggest, $200
+check: gap | Mean of 4, 6 and 8 = _ | 6
+check: mcq | Which is affected most by one huge value? | The mean* | The median | Neither
+check: tf | The median is the middle value when sorted. | true
+home: Find the median of your family's ages.
+skill: data
+
+@band launchers
+@unit 1 | Loan maths | Interest, repayments and total cost
+@unit 2 | Compound growth | The formula behind the snowball
+@unit 3 | Spreadsheets for life | Budgets and trackers that update themselves
+@unit 4 | Tax maths | Brackets, GST and deductions
+@unit 5 | Inflation | Why prices rise and what it does to savings
+@unit 6 | Risk and return | Expected value and variance
+@unit 7 | Big purchase maths | Cars, phones and total cost of ownership
+@unit 8 | Data literacy | Statistics in the news and research
+
+@lesson 1.1 | Simple vs compound | 🔁 | bank
+hook: $1,000 at 5% for 10 years. Simple interest gives $1,500. Compound gives more. How much more?
+learn: Simple interest: interest only on the original amount.
+learn: Compound interest: interest on the original plus past interest.
+learn: Compound value = start × (1 + rate)^years.
+try: $1,000 at 10% for 2 years compound = $1,210 :: gap | $1,000 at 10% for 2 years simple = $_ | 1200
+play: compound | Compare simple and compound growth | 1000 | 5 | 10
+check: mcq | What does compound interest earn interest on? | The original plus past interest* | Only the original | Nothing
+check: gap | $2,000 at 5% simple for 3 years = $_ | 2300
+check: tf | Over long periods, compound interest grows faster than simple. | true
+home: Use a compound interest calculator with a grown-up.
+skill: compound
+
+@lesson 1.2 | The real cost of a loan | 💳 | bank
+hook: A $1,000 phone on a plan at $50 a month for 24 months. What does it really cost?
+learn: Total cost = repayment × number of payments, plus any fees.
+learn: Compare that with the cash price to see the cost of borrowing.
+try: $50 × 24 = $1,200, so $200 more than cash :: gap | $40 × 30 months = $_ total | 1200
+play: price | Which way of buying the $1,000 phone costs less in total? | Pay cash now:1000:1:phone; 24 payments of $50:1200:1:phone
+check: gap | $30 a month for 36 months = $_ | 1080
+check: mcq | The extra over the cash price is… | The cost of borrowing* | A gift | A tax refund
+check: tf | Always work out the total cost of a payment plan. | true
+home: Check a real payment plan and work out its total cost.
+skill: loans
+
+@lesson 1.3 | Inflation | 🎈 | museum
+hook: A pie cost $3 ten years ago and $5 now. Did pies get better?
+learn: Inflation is prices rising over time. Each dollar buys less.
+learn: If savings earn less than inflation, they lose buying power.
+try: 3% inflation on a $100 basket makes it $103 next year :: gap | 5% inflation on $200 = $_ next year | 210
+play: slider | Your savings earn 2% while inflation is 5%. Roughly how much buying power does $1,000 lose in a year? | 0 | 100 | 30 | $ | 10 | 5
+check: mcq | What is inflation? | Prices rising over time* | Prices always falling | A type of tax
+check: tf | Savings earning less than inflation lose buying power. | true
+check: gap | Inflation 4%. A $50 item next year costs about $_ | 52
+home: Ask a grown-up what something cost when they were your age.
+skill: inflation
+
+@lesson 1.4 | Spreadsheet formulas | 🟩 | workshop
+hook: You change one number and the whole budget updates. Magic?
+learn: Spreadsheets use formulas. =SUM(B2:B6) adds a range.
+learn: =B2*C2 multiplies two cells. Formulas start with "=".
+play: match | Match each formula (typed after an = sign) to what it does | SUM(B2:B6)=Adds cells B2 to B6; B2*C2=Multiplies B2 by C2; AVERAGE(B2:B6)=Finds the mean of B2 to B6; B7-B8=Takes B8 away from B7
+check: mcq | What does every formula start with? | =* | # | $
+check: tf | =SUM adds up a range of cells. | true
+check: mcq | To find income minus costs, you'd use… | =B2-B3* | =B2+B3 | =SUM(B2)
+home: Build a tiny budget spreadsheet with a SUM formula.
+skill: spreadsheets
+
+@lesson 1.5 | Expected value | 🎰 | stage
+hook: A $5 raffle ticket. 1 in 100 chance to win $300. Worth it?
+learn: Expected value = chance × prize, minus the cost.
+learn: 1/100 × $300 = $3. You pay $5, so on average you lose $2 a ticket.
+learn: Raffles for a good cause can still be worth it. Just know it's giving, not investing.
+try: 1 in 10 chance at $20 = $2 expected :: gap | 1 in 50 chance at $100 = $_ expected | 2
+play: debate | Is buying a lottery ticket every week a smart money plan? | No. The expected value is negative, so it's entertainment at best* | Yes. Someone has to win | Some people enjoy the dream for a small cost. Keeping it tiny and fun, not a plan, is the key.
+check: gap | 1 in 4 chance to win $8, ticket $3. On average you lose $_ a ticket | 1
+check: mcq | Negative expected value means… | You lose on average over time* | You always win | It's free
+check: tf | Lotteries usually have negative expected value. | true
+home: Work out the expected value of a school raffle.
+skill: probability
+
+@lesson 1.6 | Cost of owning a car | 🚙 | home
+hook: A $6,000 car. Is that what it costs?
+learn: Total cost of ownership includes fuel, insurance, registration, servicing, tyres and repairs.
+learn: Add up a year to see the real cost per week.
+play: budget | Plan a year of car costs on $3,200 | 3200 | Fuel=1500; Insurance=600; {nz:Registration and WOF~au:Registration}=300; Servicing=300; Emergency fund=0 | New tyres:400
+check: mcq | Which is part of car ownership costs? | Insurance* | Your phone plan | Netflix
+check: gap | $2,600 a year is about $_ a week | 50
+check: tf | The purchase price is the only cost of a car. | false
+home: Ask a grown-up how much their car costs to run each month.
+skill: budget

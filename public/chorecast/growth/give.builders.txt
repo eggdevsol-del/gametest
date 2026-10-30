@@ -1,0 +1,78 @@
+# give · builders
+@unit 1 | How charities work | Where donations go
+@unit 2 | Volunteering | Giving your time and skills
+@unit 3 | Fundraising | Planning a fundraiser
+@unit 4 | Choosing well | Checking a charity before you give
+@unit 5 | Local heroes | People helping their own community
+@unit 6 | Global giving | Helping people around the world
+@unit 7 | The environment | Projects that protect nature
+@unit 8 | Social entrepreneurs | Businesses that do good
+
+@lesson 1.1 | Where does the money go? | 🏥 | townhall
+hook: You give $10 to a charity. Where does it actually go?
+learn: Charities spend money on their programmes, staff, and fundraising.
+learn: Staff and running costs aren't bad. Good charities need skilled people.
+learn: You can look up registered charities: {nz:charities.govt.nz~au:acnc.gov.au}.
+play: match | Match each charity cost to what it pays for | Programmes=Food parcels for families; Staff=A nurse at a health clinic; Fundraising=Posters for an appeal; Running costs=Rent for the office
+check: mcq | Where can you check if a charity is registered? | {nz:charities.govt.nz~au:acnc.gov.au}* | A random website | Nowhere
+check: tf | All charity spending on staff is wasted. | false | Skilled staff help charities do good work.
+check: mcq | What are programmes? | The actual helping work* | The logo | The CEO's car
+home: Look up a charity you know on {nz:charities.govt.nz~au:acnc.gov.au}.
+skill: charities
+
+@lesson 1.2 | Volunteering | 🙌 | garden
+hook: You don't have money to give. Can you still help?
+learn: Volunteering is giving your time and skills for free.
+learn: You learn new skills, meet people and help your community.
+play: match | Match each skill to a volunteer job | Good with animals=Walking dogs at a shelter; Love reading=Reading to younger kids; Strong and energetic=Planting trees; Good at baking=Baking for a fundraiser
+check: mcq | What is volunteering? | Helping for free* | A paid job | Shopping
+check: tf | Volunteering can help you learn skills. | true
+check: mcq | Which could a kid volunteer for with a grown-up? | A beach clean-up* | Fixing power lines | Flying a plane
+home: Find one volunteering activity for kids near you.
+skill: volunteering
+
+@lesson 1.3 | Plan a fundraiser | 🧁 | stall
+hook: Your class wants to raise $200 for the local shelter. Where to start?
+learn: Set a goal, pick an idea, plan costs, then tell people.
+learn: Remember: costs come out first. You give the profit.
+play: order | Put the fundraiser steps in order | Choose your cause and goal; Pick an idea, like a bake sale; Work out costs and price; Tell people about it; Run it and count the money; Give the money and say thanks
+check: mcq | What should you do before the event? | Plan costs and prices* | Spend all the money | Nothing
+check: gap | You raised $260 and costs were $60. You can give $_ | 200
+check: tf | Thanking people who helped is part of fundraising. | true
+home: Plan a mini fundraiser idea on paper with a goal.
+skill: fundraising
+
+@lesson 1.4 | Check before you give | 🔍 | online
+hook: A website asks for donations for a "very sad cause" with no details. Hmm.
+learn: Scammers sometimes pretend to be charities, especially after disasters.
+learn: Check the charity is registered and give through its official website.
+play: scam | Real charity request or scam? | A registered charity's website with its charity number=real; A message from a stranger asking for gift cards for flood victims=scam; Your school's notice about a food bank drive=real; Pay now or the puppies will die! Bank transfer only=scam | Gift cards, pressure and no details are warning signs.
+check: tf | Real charities ask for donations in gift cards. | false
+check: mcq | How can you check a charity? | Look it up on the charity register* | Trust any message | Ask a stranger
+check: mcq | When are charity scams common? | After big disasters* | Never | Only at Christmas
+home: Find the registration number on a charity's website.
+skill: scams
+
+@lesson 1.5 | Local heroes | 🏘️ | townhall
+hook: Who helps people in your town without being paid?
+learn: Lots of local groups run on volunteers: surf lifesavers, sports clubs, food banks and more.
+learn: These groups make communities stronger.
+play: match | Match the group to how it helps | Surf lifesavers=Keep beaches safe; Food bank=Gives food to families who need it; Sports club volunteers=Run games for kids; Community garden=Grows food together
+check: mcq | Who keeps beaches safe on weekends? | Surf lifesavers* | Bus drivers | Bankers
+check: tf | Many community groups rely on volunteers. | true
+check: mcq | What makes a community stronger? | People helping each other* | Everyone staying inside | Nothing
+home: Thank a local volunteer, like a coach or lifesaver.
+skill: community
+
+@lesson 1.6 | Muhammad Yunus | 🏦 | museum
+hook: Could lending someone $27 change their life?
+learn: Muhammad Yunus, an economist in Bangladesh, lent small amounts to women in a village who couldn't get bank loans.
+learn: They used the loans to start small businesses and paid them back.
+learn: He started Grameen Bank and won the Nobel Peace Prize in 2006.
+play: mystery | He's an economist from Bangladesh; He lent tiny amounts to people banks ignored; He started Grameen Bank; He won the Nobel Peace Prize in 2006 | Muhammad Yunus* | Warren Buffett | Andrew Carnegie
+check: mcq | What did Yunus give people? | Small loans to start businesses* | Free houses | Cars
+check: tf | Small loans can help people start businesses. | true
+check: mcq | What prize did he win? | The Nobel Peace Prize* | An Olympic medal | A music award
+home: Think of a small business someone could start with $30.
+skill: impact
+

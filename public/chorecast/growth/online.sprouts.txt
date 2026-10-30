@@ -1,0 +1,76 @@
+# online · sprouts
+@unit 1 | Private stuff | What not to share online
+@unit 2 | Ask first | Checking with a grown-up
+@unit 3 | Kind online | Being nice in games and chats
+@unit 4 | Tricky pop-ups | Ads and buttons that trick you
+@unit 5 | Passwords | Keeping secrets secret
+@unit 6 | Screen time | Balancing screens and play
+@unit 7 | Real or pretend | Not everything online is true
+@unit 8 | Telling someone | What to do if something feels wrong
+
+@lesson 1.1 | Private stuff | 🔒 | online
+hook: Your new game asks for your address. Do you type it in?
+learn: Some things are private: your full name, address, school, phone number and passwords.
+learn: Keep them offline unless a grown-up says it's OK.
+play: sort | Private, OK to share | Your home address=Private; Your favourite colour=OK to share; Your password=Private; Your school's name=Private; Your favourite animal=OK to share; Your phone number=Private | Private or OK to share?
+check: mcq | Which is private? | Your address* | Your favourite food | Your favourite colour
+check: tf | You should share your password with online friends. | false
+check: mcq | A game asks for your phone number. You… | Ask a grown-up first* | Type it in | Shout it out
+home: Make a list of private things with a grown-up.
+skill: privacy
+
+@lesson 1.2 | Ask a grown-up | 🙋 | online
+hook: A message says "Click here for free coins!" What do you do?
+learn: If something online asks you to click, buy, download or share, ask a grown-up first.
+learn: Free stuff online is often a trick.
+play: scam | Ask first or OK? | Click here for 1,000 free coins!=scam; Your teacher's homework page=real; Download this game hack=scam; Enter your parent's card for a prize=scam; A game your family already plays=real | Free prizes, hacks and card details are tricks. Ask first!
+check: tf | Free coins offers are always real. | false
+check: mcq | Someone asks for a card number in a game. You… | Tell a grown-up* | Get the card | Make one up
+check: mcq | Before downloading something, you… | Ask a grown-up* | Just do it | Download five things
+home: Agree with a grown-up which apps you can use on your own.
+skill: asking
+
+@lesson 1.3 | Kind online | 💬 | online
+hook: Someone loses a game and you type "LOL loser". How might they feel?
+learn: People online have feelings too, even if you can't see them.
+learn: Only type what you'd say to someone's face.
+play: sort | Kind, Unkind | Good game!=Kind; LOL loser=Unkind; Nice building!=Kind; Leaving someone out on purpose=Unkind; Want to play again?=Kind; Sharing a mean picture=Unkind | Kind or unkind?
+check: mcq | Which message is kind? | Good game!* | You're rubbish | Quit
+check: tf | People online have feelings too. | true
+check: mcq | Someone is mean to you online. You… | Tell a grown-up* | Be mean back | Keep it secret
+home: Say something kind to someone in a game or chat.
+skill: kindness
+
+@lesson 1.4 | Tricky buttons | 🔘 | online
+hook: A big green "PLAY" button is really an ad. How do you spot it?
+learn: Some buttons are ads dressed up as part of the game.
+learn: Look for small words like "Ad" or "Sponsored". When unsure, ask.
+play: tap | Tap the sneaky ads | 🟢:yes:A giant flashing "Download" button is often an ad; 🎁:yes:"Claim your prize!" pop-ups are tricks; ❌:no; ⏯️:no; 💎:yes:"Buy gems now 90% off!" is an ad; 🔊:no
+check: mcq | What words show an ad? | Ad or Sponsored* | Hello | Level 2
+check: tf | A flashing "You won!" pop-up is usually a trick. | true
+check: mcq | You're not sure if a button is an ad. You… | Ask a grown-up* | Tap it | Tap it twice
+home: Spot an "Ad" label on a website with a grown-up.
+skill: ads
+
+@lesson 1.5 | Strong passwords | 🔑 | online
+hook: Is "1234" a good password?
+learn: Strong passwords are long and hard to guess. A silly sentence works well: "PurpleFrogsEatPizza!"
+learn: Never share passwords, except with your grown-up.
+play: sort | Strong, Weak | 1234=Weak; PurpleFrogsEatPizza!=Strong; password=Weak; MyDogRunsFast2Day=Strong; your name=Weak; Ilove2SkateOnSundays=Strong | Strong or weak?
+check: mcq | Which password is strongest? | TigersLoveTacoTuesday* | tiger | 1111
+check: tf | You should tell friends your password. | false
+check: mcq | Who can know your password? | Your grown-up* | Your online friends | Everyone
+home: Make up a silly-sentence password with a grown-up.
+skill: passwords
+
+@lesson 1.6 | Something feels wrong | 🚨 | online
+hook: Someone online asks you to keep a secret from your parents. What now?
+learn: Grown-ups who are safe don't ask kids to keep secrets from their family.
+learn: If anything online feels wrong or scary, stop, close it and tell a grown-up straight away.
+play: order | What to do if something feels wrong | Stop typing; Close the app or screen; Tell a grown-up you trust; Show them what happened
+check: mcq | Someone online asks you to keep a secret from your parents. You… | Tell a grown-up* | Keep the secret | Send a photo
+check: tf | You will get in trouble for telling a grown-up. | false | Telling is always the right thing.
+check: mcq | First step when something feels wrong? | Stop and close it* | Keep chatting | Share it
+home: Agree with a grown-up who you'd tell if something online felt wrong.
+skill: safety
+

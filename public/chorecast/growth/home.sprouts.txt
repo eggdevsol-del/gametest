@@ -1,0 +1,76 @@
+# home · sprouts
+@unit 1 | Tidy systems | A place for everything
+@unit 2 | Kitchen safety | Hot, sharp and clean
+@unit 3 | Water safety | Pools, beaches and baths
+@unit 4 | Washing up | Clean dishes, step by step
+@unit 5 | Laundry helper | Sorting, folding and putting away
+@unit 6 | Healthy food | Fuel for growing bodies
+@unit 7 | Staying safe at home | Fire, power and strangers
+@unit 8 | Looking after things | Toys, books and clothes
+
+@lesson 1.1 | A place for everything | 🧺 | home
+hook: Why is tidying faster when everything has a home?
+learn: When each thing has its own place, tidying is quick.
+learn: Toys in the toy box, books on the shelf, clothes in the drawer.
+play: sort | Toy box, Bookshelf, Drawer | Teddy=Toy box; Storybook=Bookshelf; Socks=Drawer; Toy car=Toy box; Comic=Bookshelf; T-shirt=Drawer | Where does each thing live?
+check: mcq | Where do socks go? | The drawer* | The bookshelf | The toy box
+check: tf | Tidying is quicker when things have a home. | true
+check: mcq | Your book is on the floor. Where does it go? | Back on the shelf* | Under the bed | In the bin
+home: Give three things in your room a "home" and put them there.
+skill: tidy
+
+@lesson 1.2 | Kitchen safety | 🔪 | kitchen
+hook: Kitchens are fun, but some things can hurt. Which ones?
+learn: Hot things like stoves, kettles and ovens can burn.
+learn: Sharp things like knives can cut. Always ask a grown-up first.
+play: tap | Tap what's dangerous in the kitchen | 🔪:yes:Knives are sharp; 🔥:yes:Stoves are hot; 🍎:no; 🫖:yes:Kettles have boiling water; 🥄:no; 🧊:no; 🔌:yes:Power and water don't mix; 🥕:no
+check: mcq | What should you do before using a knife? | Ask a grown-up* | Just grab it | Run with it
+check: tf | Pot handles should point inwards, away from the edge. | true
+check: mcq | A kettle has… | Boiling water, so be careful* | Cold juice | Nothing
+home: Point out three hot things in your kitchen to a grown-up.
+skill: safety
+
+@lesson 1.3 | Water safety | 🏊 | home
+hook: The beach looks fun. What keeps you safe?
+learn: Always swim with a grown-up watching.
+learn: At the beach, swim between the red and yellow flags.
+play: order | Get ready to swim safely | Find a grown-up to watch; Look for the red and yellow flags; Swim between the flags; Stay close to the shore; Get out if you feel tired or cold
+check: mcq | Where should you swim at the beach? | Between the red and yellow flags* | Wherever you like | Far out
+check: tf | You can swim alone if you're a good swimmer. | false | Always have a grown-up watching.
+check: mcq | You feel tired in the water. You should… | Get out and rest* | Swim further | Go under
+home: Next time you swim, find the flags with a grown-up.
+skill: safety
+
+@lesson 1.4 | Washing up | 🍽️ | kitchen
+hook: Glasses, plates or greasy pots. Which go in the water first?
+learn: Wash the cleanest things first: glasses, then cutlery, then plates, then pots.
+learn: That way the water stays cleaner for longer.
+play: order | Put the washing-up in order | Scrape scraps into the bin; Fill the sink with hot soapy water; Wash glasses; Wash cutlery; Wash plates; Wash pots last
+check: mcq | What goes in the water first? | Glasses* | Greasy pots | Dirty pans
+check: tf | Washing pots last keeps the water cleaner for longer. | true
+check: mcq | Before washing, you should… | Scrape scraps off* | Add more scraps | Nothing
+home: Help wash the dishes in the right order tonight.
+skill: chores
+
+@lesson 1.5 | Folding clothes | 👕 | home
+hook: Can you fold a t-shirt so it fits in a drawer?
+learn: Lay it flat. Fold each side in. Then fold it in half.
+learn: Folded clothes stay neat and are easy to find.
+play: build | Fold the t-shirt in order | Lay the t-shirt flat; Fold the left side in; Fold the right side in; Fold it in half from the bottom; Put it in the drawer
+check: mcq | First step to fold a t-shirt? | Lay it flat* | Throw it | Scrunch it
+check: tf | Folded clothes are easier to find. | true
+check: mcq | Where do folded t-shirts go? | In the drawer* | On the floor | In the bath
+home: Fold three t-shirts on your own.
+skill: chores
+
+@lesson 1.6 | Fire safety | 🚒 | home
+hook: The smoke alarm beeps loudly. What do you do?
+learn: Get down low, get out fast, and stay out.
+learn: {nz:Call 111~au:Call 000} from outside and never go back in.
+play: order | Put the fire plan in order | Hear the smoke alarm; Get down low under the smoke; Get out of the house fast; Go to your meeting spot; {nz:Call 111~au:Call 000}
+check: mcq | {nz:What number do you call for a fire in New Zealand?~au:What number do you call for a fire in Australia?} | {nz:111~au:000}* | 123 | 999
+check: tf | You should go back inside to get your toys. | false
+check: mcq | Why get down low? | Smoke rises, so the air is clearer down low* | It's a game | To hide
+home: Agree a family meeting spot outside your house.
+skill: safety
+

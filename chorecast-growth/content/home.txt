@@ -1,0 +1,308 @@
+# Home and Life
+@band sprouts
+@unit 1 | Tidy systems | A place for everything
+@unit 2 | Kitchen safety | Hot, sharp and clean
+@unit 3 | Water safety | Pools, beaches and baths
+@unit 4 | Washing up | Clean dishes, step by step
+@unit 5 | Laundry helper | Sorting, folding and putting away
+@unit 6 | Healthy food | Fuel for growing bodies
+@unit 7 | Staying safe at home | Fire, power and strangers
+@unit 8 | Looking after things | Toys, books and clothes
+
+@lesson 1.1 | A place for everything | 🧺 | home
+hook: Why is tidying faster when everything has a home?
+learn: When each thing has its own place, tidying is quick.
+learn: Toys in the toy box, books on the shelf, clothes in the drawer.
+play: sort | Toy box, Bookshelf, Drawer | Teddy=Toy box; Storybook=Bookshelf; Socks=Drawer; Toy car=Toy box; Comic=Bookshelf; T-shirt=Drawer | Where does each thing live?
+check: mcq | Where do socks go? | The drawer* | The bookshelf | The toy box
+check: tf | Tidying is quicker when things have a home. | true
+check: mcq | Your book is on the floor. Where does it go? | Back on the shelf* | Under the bed | In the bin
+home: Give three things in your room a "home" and put them there.
+skill: tidy
+
+@lesson 1.2 | Kitchen safety | 🔪 | kitchen
+hook: Kitchens are fun, but some things can hurt. Which ones?
+learn: Hot things like stoves, kettles and ovens can burn.
+learn: Sharp things like knives can cut. Always ask a grown-up first.
+play: tap | Tap what's dangerous in the kitchen | 🔪:yes:Knives are sharp; 🔥:yes:Stoves are hot; 🍎:no; 🫖:yes:Kettles have boiling water; 🥄:no; 🧊:no; 🔌:yes:Power and water don't mix; 🥕:no
+check: mcq | What should you do before using a knife? | Ask a grown-up* | Just grab it | Run with it
+check: tf | Pot handles should point inwards, away from the edge. | true
+check: mcq | A kettle has… | Boiling water, so be careful* | Cold juice | Nothing
+home: Point out three hot things in your kitchen to a grown-up.
+skill: safety
+
+@lesson 1.3 | Water safety | 🏊 | home
+hook: The beach looks fun. What keeps you safe?
+learn: Always swim with a grown-up watching.
+learn: At the beach, swim between the red and yellow flags.
+play: order | Get ready to swim safely | Find a grown-up to watch; Look for the red and yellow flags; Swim between the flags; Stay close to the shore; Get out if you feel tired or cold
+check: mcq | Where should you swim at the beach? | Between the red and yellow flags* | Wherever you like | Far out
+check: tf | You can swim alone if you're a good swimmer. | false | Always have a grown-up watching.
+check: mcq | You feel tired in the water. You should… | Get out and rest* | Swim further | Go under
+home: Next time you swim, find the flags with a grown-up.
+skill: safety
+
+@lesson 1.4 | Washing up | 🍽️ | kitchen
+hook: Glasses, plates or greasy pots. Which go in the water first?
+learn: Wash the cleanest things first: glasses, then cutlery, then plates, then pots.
+learn: That way the water stays cleaner for longer.
+play: order | Put the washing-up in order | Scrape scraps into the bin; Fill the sink with hot soapy water; Wash glasses; Wash cutlery; Wash plates; Wash pots last
+check: mcq | What goes in the water first? | Glasses* | Greasy pots | Dirty pans
+check: tf | Washing pots last keeps the water cleaner for longer. | true
+check: mcq | Before washing, you should… | Scrape scraps off* | Add more scraps | Nothing
+home: Help wash the dishes in the right order tonight.
+skill: chores
+
+@lesson 1.5 | Folding clothes | 👕 | home
+hook: Can you fold a t-shirt so it fits in a drawer?
+learn: Lay it flat. Fold each side in. Then fold it in half.
+learn: Folded clothes stay neat and are easy to find.
+play: build | Fold the t-shirt in order | Lay the t-shirt flat; Fold the left side in; Fold the right side in; Fold it in half from the bottom; Put it in the drawer
+check: mcq | First step to fold a t-shirt? | Lay it flat* | Throw it | Scrunch it
+check: tf | Folded clothes are easier to find. | true
+check: mcq | Where do folded t-shirts go? | In the drawer* | On the floor | In the bath
+home: Fold three t-shirts on your own.
+skill: chores
+
+@lesson 1.6 | Fire safety | 🚒 | home
+hook: The smoke alarm beeps loudly. What do you do?
+learn: Get down low, get out fast, and stay out.
+learn: {nz:Call 111~au:Call 000} from outside and never go back in.
+play: order | Put the fire plan in order | Hear the smoke alarm; Get down low under the smoke; Get out of the house fast; Go to your meeting spot; {nz:Call 111~au:Call 000}
+check: mcq | {nz:What number do you call for a fire in New Zealand?~au:What number do you call for a fire in Australia?} | {nz:111~au:000}* | 123 | 999
+check: tf | You should go back inside to get your toys. | false
+check: mcq | Why get down low? | Smoke rises, so the air is clearer down low* | It's a game | To hide
+home: Agree a family meeting spot outside your house.
+skill: safety
+
+@band builders
+@unit 1 | Cooking basics | Simple meals and kitchen skills
+@unit 2 | Laundry | Washing, drying and stains
+@unit 3 | First aid basics | Cuts, burns and when to get help
+@unit 4 | Cleaning a room | Top to bottom, dry to wet
+@unit 5 | Shopping lists | Planning food for a week
+@unit 6 | Getting around | Buses, bikes and road safety
+@unit 7 | Home safety | Power, heat and emergencies
+@unit 8 | Gardening | Growing food at home
+
+@lesson 1.1 | Kitchen basics | 🍳 | kitchen
+hook: Could you make a simple lunch with no help?
+learn: Wash your hands, read the recipe, and get everything ready before you start.
+learn: Measure carefully and clean up as you go.
+play: order | Make scrambled eggs in order | Wash your hands; Crack eggs into a bowl and whisk; Melt butter in a pan on medium heat; Stir the eggs gently until just set; Turn off the stove and serve
+check: mcq | What should you do before cooking? | Wash your hands and read the recipe* | Turn the heat on high | Skip the recipe
+check: tf | Cleaning as you go makes cooking easier. | true
+check: mcq | Pot handles should point… | Inwards, away from the edge* | Out over the edge | Anywhere
+home: Make a simple snack with a grown-up nearby.
+skill: cooking
+
+@lesson 1.2 | Laundry sorting | 🧺 | home
+hook: Why did the white school shirt turn pink?
+learn: Sort clothes into lights, darks and colours before washing.
+learn: Check pockets and read the care labels.
+play: sort | Lights, Darks, Colours | White school shirt=Lights; Navy jeans=Darks; Red hoodie=Colours; Black socks=Darks; Cream towel=Lights; Green t-shirt=Colours | Sort the washing
+check: mcq | A red sock in a white wash can… | Turn whites pink* | Make whites whiter | Do nothing
+check: tf | You should check pockets before washing. | true
+check: mcq | What tells you how to wash something? | The care label* | Its colour | A guess
+home: Sort a basket of washing into lights, darks and colours.
+skill: laundry
+
+@lesson 1.3 | First aid for cuts | 🩹 | home
+hook: A friend cuts their finger. What do you do first?
+learn: Wash your hands, press a clean cloth on the cut to stop bleeding, then rinse and cover it.
+learn: Get a grown-up for deep cuts or if bleeding won't stop. {nz:Call 111~au:Call 000} in an emergency.
+play: order | Put first aid for a small cut in order | Wash your hands; Press a clean cloth on the cut; Rinse it with clean water; Cover it with a plaster; Tell a grown-up
+check: mcq | First step for a bleeding cut? | Press a clean cloth on it* | Ignore it | Rub dirt on it
+check: tf | Deep cuts need a grown-up's help. | true
+check: mcq | For a minor burn, you should… | Cool it under cool running water for 20 minutes* | Put butter on it | Put ice straight on it
+home: Find where your family keeps the first aid kit.
+skill: firstaid
+
+@lesson 1.4 | Cleaning a room | 🧽 | home
+hook: Should you vacuum first or dust first?
+learn: Clean top to bottom, so dust falls onto areas you haven't cleaned yet.
+learn: Do dry jobs before wet ones: dust and vacuum, then wipe and mop.
+play: order | Clean the room in the right order | Pick up clutter; Dust shelves; Wipe surfaces; Vacuum the floor; Mop if needed
+check: mcq | Why clean top to bottom? | Dust falls down onto the floor* | It's fancy | No reason
+check: tf | Vacuum before you mop. | true
+check: mcq | First job when cleaning a room? | Pick up clutter* | Mop | Paint the walls
+home: Clean one room using top to bottom.
+skill: cleaning
+
+@lesson 1.5 | Shopping list | 📝 | kitchen
+hook: Without a list, how much extra do people often spend?
+learn: A list keeps you to what you need and stops impulse buys.
+learn: Check the cupboard first, then write meals and ingredients.
+play: budget | Plan a $60 shopping trip | 60 | Bread and milk=8; Fruit and veg=15; Dinner ingredients=25; Snacks=0; Spare=0 | Forgot washing powder:9
+check: mcq | What should you do before writing the list? | Check what's in the cupboard* | Go to the shop hungry | Buy everything
+check: tf | A list can help stop impulse buys. | true
+check: mcq | Shopping when hungry can make you… | Buy more snacks* | Buy less | Faster
+home: Help write next week's shopping list.
+skill: shopping
+
+@lesson 1.6 | Road safety | 🚲 | home
+hook: You're biking to a friend's. What keeps you safe?
+learn: Wear a helmet, check your brakes and be seen.
+learn: Stop, look and listen at every road. Use crossings when you can.
+play: tap | Tap the safe biking gear and habits | ⛑️:yes:A helmet protects your head; 🔦:yes:Lights help you be seen; 📱:no; 🦺:yes:Bright clothing helps drivers see you; 🎧:no; 🔔:yes:A bell warns others
+check: mcq | What should you always wear on a bike? | A helmet* | Headphones | Jandals only
+check: tf | Using your phone while biking is safe. | false
+check: mcq | At a road, you should… | Stop, look and listen* | Ride straight across | Close your eyes
+home: Check your bike's brakes and helmet with a grown-up.
+skill: safety
+
+@band makers
+@unit 1 | Shopping on a budget | Meal planning and saving at the supermarket
+@unit 2 | Cooking for the family | Planning, prepping and timing
+@unit 3 | Transport | Public transport, cars and costs
+@unit 4 | Planning a week | Time, tasks and energy
+@unit 5 | Home maintenance | Small fixes and when to call a pro
+@unit 6 | Power and water | Using less and paying less
+@unit 7 | Health admin | Doctors, dentists and prescriptions
+@unit 8 | Emergencies | Kits, plans and staying calm
+
+@lesson 1.1 | Meal planning | 🥘 | kitchen
+hook: A family of four. $200 for a week of food. Can you plan it?
+learn: Plan meals around cheap staples like rice, pasta, beans, eggs and seasonal veg.
+learn: Cook once, eat twice: leftovers save time and money.
+play: budget | Plan a week's food on $200 | 200 | Breakfasts=25; Lunches=40; Dinners=90; Snacks=0; Buffer=0 | Unexpected visitor for dinner:15
+check: mcq | Which is usually cheapest? | Seasonal vegetables* | Out-of-season berries | Pre-cut fruit platters
+check: tf | Leftovers can save time and money. | true
+check: mcq | Planning meals helps reduce… | Food waste* | Flavour | Sleep
+home: Plan three dinners for your family with a shopping list.
+skill: mealplan
+
+@lesson 1.2 | Supermarket tricks | 🛒 | stall
+hook: Why is the milk always at the back of the supermarket?
+learn: Shops place essentials at the back so you walk past tempting things.
+learn: Eye-level shelves often hold pricier brands. Look high and low.
+play: tap | Tap the supermarket tricks | 🍫:yes:Lollies at the checkout tempt you while you wait; 🥛:yes:Milk at the back makes you walk past other things; 🏷️:yes:"Big" sale signs aren't always real savings; 🧾:no; 🛒:yes:Big trolleys make you buy more; 🍞:no
+check: mcq | Where are pricier brands often placed? | At eye level* | On the floor | Outside
+check: tf | Every "special" sign is a real saving. | false
+check: mcq | Best defence against shop tricks? | A list and a budget* | Shopping hungry | Grabbing what's at eye level
+home: Spot two supermarket tricks on your next shop.
+skill: shopping
+
+@lesson 1.3 | Getting around | 🚌 | home
+hook: Bus, bike, scooter or car. Which costs least to get to school?
+learn: Transport costs include fares, fuel, parking and wear and tear.
+learn: {nz:Many NZ cities have travel cards with lower fares, and some regions offer youth discounts.~au:Many Australian cities have travel cards with student concessions.}
+play: price | Which costs less per trip over a term? | Bus pass:120:80:trips; Paying cash each time:3:1:trip
+check: mcq | Which is usually cheapest for short trips? | Walking or biking* | Taxi | Plane
+check: tf | Travel cards often make fares cheaper. | true
+check: mcq | Car costs include… | Fuel, insurance and parking* | Only fuel | Nothing
+home: Work out the cost of your weekly travel.
+skill: transport
+
+@lesson 1.4 | Using less power | 💡 | home
+hook: Your family's power bill jumped in winter. Why?
+learn: Heating and hot water use the most power in most homes.
+learn: Shorter showers, closing curtains at night and heating only rooms you're in all help.
+play: sort | Saves power, Wastes power | Shorter showers=Saves power; Heating an empty room=Wastes power; Closing curtains at night=Saves power; Leaving lights on=Wastes power; Washing in cold water=Saves power; Leaving the heater on all day=Wastes power | Saves or wastes?
+check: mcq | What uses lots of power in most homes? | Heating and hot water* | Phone chargers | Light switches
+check: tf | Shorter showers can lower the power bill. | true
+check: mcq | A free way to keep heat in at night? | Close the curtains* | Open all windows | Turn on fans
+home: Time your shower and try to cut a minute.
+skill: energy
+
+@lesson 1.5 | Small fixes | 🔧 | workshop
+hook: The tap drips. The toilet runs. DIY, or call someone?
+learn: Small jobs like a loose cupboard handle are often DIY.
+learn: Electrical and gas work must be done by licensed professionals. Plumbing jobs often need one too.
+play: sort | DIY job, Call a pro | Tighten a loose cupboard handle=DIY job; Rewire a power point=Call a pro; Unblock a sink with a plunger=DIY job; Fix a gas heater=Call a pro; Replace a light bulb=DIY job; Move a hot water cylinder=Call a pro | Who should do it?
+check: mcq | Who should do electrical wiring? | A licensed electrician* | Anyone with YouTube | A kid
+check: tf | Gas work needs a licensed professional. | true
+check: mcq | A safe small DIY job? | Tighten a loose handle* | Rewire a fuse box | Fix a gas leak
+home: Help a grown-up with a small fix at home.
+skill: maintenance
+
+@lesson 1.6 | Emergency kit | 🎒 | home
+hook: An earthquake or storm cuts power for three days. Are you ready?
+learn: Keep water, food, a torch, batteries, a radio, first aid kit and medicines ready.
+learn: Agree a family plan: where to meet and who to call.
+play: tap | Tap what belongs in an emergency kit | 💧:yes:Water for every person; 🔦:yes:A torch for power cuts; 🥫:yes:Food that doesn't need cooking; 🎮:no; 🩹:yes:A first aid kit; 📻:yes:A radio for updates; 🪴:no
+check: mcq | What's most important in a kit? | Water* | Games | Decorations
+check: tf | A family emergency plan should include a meeting place. | true
+check: mcq | {nz:Where can you find emergency advice in NZ?~au:Where can you find emergency advice in Australia?} | {nz:getready.govt.nz~au:Your state emergency service}* | A random forum | Nowhere
+home: Check your family's emergency kit and plan together.
+skill: emergency
+
+@band launchers
+@unit 1 | Renting your first place | Searching, applying and moving in
+@unit 2 | Bills and utilities | Power, internet and water
+@unit 3 | Insurance | Contents, car and health
+@unit 4 | Moving out | What it really costs
+@unit 5 | Cooking on a budget | Feeding yourself well for less
+@unit 6 | Flatting | Living with others
+@unit 7 | Cars | Buying, owning and safety
+@unit 8 | Adulting admin | Documents, deadlines and records
+
+@lesson 1.1 | Finding a rental | 🏘️ | home
+hook: 40 people at the viewing. How do you stand out?
+learn: Have references, proof of income and ID ready before you view.
+learn: Check the property for damp, mould, heating and security.
+learn: {nz:Landlords must meet Healthy Homes standards for heating, insulation and ventilation.~au:Each state has rental standards and a body that manages bonds.}
+play: tap | Tap the warning signs at a rental viewing | 🍄:yes:Mould means damp; 💧:yes:Water stains can mean leaks; 🔒:no; 🪟:yes:Broken window latches are a security risk; 🔥:no; 🧱:yes:Big cracks can mean structural problems; 🌿:no
+check: mcq | What should you bring to a viewing? | References, proof of income and ID* | Nothing | Your entire wardrobe
+check: tf | Mould at a viewing is a warning sign. | true
+check: mcq | {nz:What standards cover NZ rental heating and insulation?~au:Who manages rental bonds in Australia?} | {nz:Healthy Homes standards~au:A state bond authority}* | {nz:The Road Code~au:Your landlord's bank} | Nobody
+home: Look at a rental listing and list what you'd check at the viewing.
+skill: renting
+
+@lesson 1.2 | Bond and rent | 💰 | bank
+hook: Rent is $250 a week. You need bond too. How much cash before moving in?
+learn: Bond is a deposit held by {nz:Tenancy Services~au:your state's bond authority}, not your landlord, and returned at the end if there's no damage or unpaid rent.
+learn: {nz:In NZ, bond can be up to 4 weeks' rent, and rent in advance up to 2 weeks.~au:In most states, bond is usually up to 4 weeks' rent.}
+try: 4 weeks × $250 = $1,000 bond :: gap | Rent $300 a week, 4 weeks' bond = $_ | 1200
+play: gen | percent | 2
+check: gap | Rent $220 a week, 2 weeks in advance = $_ | 440
+check: tf | Bond should be lodged with {nz:Tenancy Services~au:the state bond authority}. | true
+check: mcq | When do you usually get bond back? | At the end, if there's no damage or unpaid rent* | Never | After one week
+home: Look up the bond rules on {nz:tenancy.govt.nz~au:your state's rental authority website}.
+skill: renting
+
+@lesson 1.3 | Bills and utilities | 🔌 | home
+hook: Power, internet, phone, streaming. How do bills add up?
+learn: Compare plans, read fixed vs variable charges, and set up automatic payments to avoid late fees.
+learn: Split shared bills fairly and keep records.
+play: price | Which internet plan is cheaper per month over a year? | Plan A, $70 a month with $0 setup:840:12:months; Plan B, $60 a month with $150 setup:870:12:months
+check: mcq | What helps avoid late fees? | Automatic payments* | Ignoring bills | Paying whenever
+check: tf | Setup fees count when comparing plans. | true
+check: mcq | Fair way to split a shared bill? | Agreed shares, written down* | Whoever remembers | Never pay
+home: Look at a family bill and find the fixed and variable charges.
+skill: bills
+
+@lesson 1.4 | Insurance | ☂️ | home
+hook: A burst pipe ruins your laptop and clothes. Who pays?
+learn: Contents insurance covers your belongings if they're damaged or stolen.
+learn: An excess is what you pay before insurance pays the rest.
+learn: Cheaper premiums often mean higher excesses. Read what's covered.
+try: $2,000 claim with $400 excess means insurance pays $1,600 :: gap | $1,500 claim, $300 excess. Insurance pays $_ | 1200
+play: match | Match the word to its meaning | Premium=What you pay for the insurance; Excess=What you pay toward a claim; Claim=Asking the insurer to pay; Policy=The contract and what it covers
+check: mcq | What is an excess? | The amount you pay before insurance pays* | A bonus | The premium
+check: tf | Cheaper premiums often come with higher excesses. | true
+check: mcq | What covers your belongings in a rental? | Contents insurance* | The landlord's insurance always | Nothing
+home: Ask a grown-up what their insurance excess is.
+skill: insurance
+
+@lesson 1.5 | Moving-out budget | 📦 | bank
+hook: You earn $600 a week. Can you afford to move out?
+learn: Add up rent, bills, food, transport, phone, and savings.
+learn: A common rule of thumb: try to keep rent around 30% of take-home pay or less.
+play: budget | Plan your first week living out on $600 | 600 | Rent=230; Power and internet=40; Food=100; Transport=50; Phone=15; Savings=0 | Doctor's visit:60
+check: gap | 30% of $600 = $_ | 180
+check: mcq | What should a moving-out budget include? | Rent, bills, food and savings* | Only rent | Only fun
+check: tf | Keeping savings for surprises matters when living out. | true
+home: Build a moving-out budget for a job you'd like.
+skill: budget
+
+@lesson 1.6 | Flatmate agreement | 🏠 | home
+hook: Who cleans the bathroom? Who pays for toilet paper? Fights incoming.
+learn: A flatmate agreement covers rent shares, bills, chores, guests and what happens if someone leaves.
+learn: Writing it down early prevents arguments later.
+play: chat | Setting up a flat agreement | them: Do we really need to write stuff down? | me: It saves fights later. Let's agree on bills, chores and guests*/No, let's just wing it/I'll decide everything | them: OK. How do we split power? | me: Equal shares, paid by automatic payment on the 1st*/Whoever has money/You pay it
+check: mcq | What should a flat agreement cover? | Rent, bills, chores and guests* | Favourite movies | Nothing
+check: tf | Writing things down can prevent arguments. | true
+check: mcq | A fair way to share chores? | A written roster* | Whoever cares most | Nobody does them
+home: Draft a mini agreement with a sibling about shared chores.
+skill: flatting

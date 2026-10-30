@@ -1,0 +1,78 @@
+# world · builders
+@unit 1 | Tax and what it pays for | Income tax, GST and public services
+@unit 2 | Local councils | Rates, rubbish and roads
+@unit 3 | Government | Who makes laws and how
+@unit 4 | Rights and responsibilities | What you can expect and what's expected
+@unit 5 | Consumer rights | Refunds, repairs and fair deals
+@unit 6 | The economy | Jobs, prices and trade
+@unit 7 | Our history | How {nz:Aotearoa~au:Australia} got here
+@unit 8 | Global citizens | Our place in the world
+
+@lesson 1.1 | Two kinds of tax | 🧾 | townhall
+hook: You buy a $10 book. Do you pay tax?
+learn: Income tax comes out of people's pay.
+learn: GST is added to most things you buy: {nz:15% in New Zealand~au:10% in Australia}.
+learn: Even kids pay GST when they buy things.
+try: {nz:A $20 item before GST costs $23 with 15% GST~au:A $20 item before GST costs $22 with 10% GST} :: gap | {nz:$40 before GST. With 15% GST it's $_~au:$40 before GST. With 10% GST it's $_} | {nz:46~au:44}
+play: gen | gst | 3
+check: mcq | Which tax is added when you buy things? | GST* | Income tax | Pocket money tax
+check: tf | Kids pay GST when they buy things. | true
+check: mcq | Income tax comes from… | People's pay* | Library books | Rain
+home: Find "GST" on a receipt.
+skill: tax
+
+@lesson 1.2 | Councils and rates | 🏘️ | townhall
+hook: Who empties your rubbish bin each week?
+learn: Local councils run things like rubbish collection, local roads, parks, libraries and water.
+learn: Homeowners pay rates to the council to fund them.
+play: sort | Council job, Not a council job | Rubbish collection=Council job; Local parks=Council job; Running the army=Not a council job; Libraries=Council job; Printing money=Not a council job; Local roads=Council job | Council or not?
+check: mcq | What do rates pay for? | Council services like parks and rubbish* | The army | Movie tickets
+check: tf | Councils run local libraries. | true
+check: mcq | Who pays rates? | Homeowners* | Kids | Tourists only
+home: Find your local council's website and one service it runs.
+skill: council
+
+@lesson 1.3 | How laws are made | 🏛️ | townhall
+hook: Who decides it's illegal to drive without a seatbelt?
+learn: {nz:In New Zealand, Members of Parliament debate and vote on bills in Parliament. Bills that pass become laws.~au:In Australia, laws are debated in Parliament. Federal bills must pass both the House of Representatives and the Senate.}
+learn: People can make submissions to share their views on a bill.
+play: order | How an idea becomes a law | Someone proposes a bill; Parliament debates it; The public can make submissions; Parliament votes; If it passes, it becomes law
+check: mcq | Where are laws debated? | In Parliament* | At the supermarket | At school
+check: tf | The public can share views on new laws. | true
+check: mcq | A proposed law is called a… | Bill* | Receipt | Ticket
+home: Look up one bill being discussed in Parliament now.
+skill: civics
+
+@lesson 1.4 | Consumer rights | 🧾 | stall
+hook: Your new headphones broke after two days. Can you get your money back?
+learn: Products must be of acceptable quality, fit for purpose and as described.
+learn: If they fail, you're usually entitled to a repair, replacement or refund. Keep your receipt.
+play: chat | Returning broken headphones | them: Hi, how can I help? | me: I bought these headphones on Saturday and the left side stopped working. Here's my receipt*/These are rubbish, give me money/Never mind | them: Sorry about that! Would you like a replacement or a refund? | me: A replacement would be great, thanks*/I want both/Whatever
+check: mcq | Your new product breaks quickly. You're usually entitled to… | A repair, replacement or refund* | Nothing | A free car
+check: tf | Keeping your receipt helps with returns. | true
+check: mcq | A good way to ask for a refund? | Calmly, with the receipt* | Shouting | Not asking
+home: Find the returns policy of a shop you like.
+skill: consumer
+
+@lesson 1.5 | Supply and demand | ⚖️ | stall
+hook: Why do strawberries cost more in winter?
+learn: When lots of people want something and there isn't much, prices go up.
+learn: When there's plenty and fewer people want it, prices go down.
+play: match | Match the situation to the price change | Strawberries in winter=Price goes up; Strawberries in summer=Price goes down; A toy everyone wants at Christmas=Price goes up; Umbrellas after the rain stops=Price goes down
+check: mcq | Little supply plus lots of demand means prices usually… | Go up* | Go down | Stay the same
+check: tf | Seasons can change food prices. | true
+check: mcq | Why are summer strawberries cheaper? | There are lots of them* | They taste worse | Shops are kind
+home: Compare a fruit price in two different seasons.
+skill: economy
+
+@lesson 1.6 | Rights and responsibilities | 🤲 | townhall
+hook: You have the right to go to school. Do you have responsibilities too?
+learn: Rights are things everyone should have, like safety and education.
+learn: Responsibilities are things we should do, like respecting others and following fair rules.
+play: sort | Right, Responsibility | Going to school=Right; Treating others with respect=Responsibility; Being safe=Right; Looking after shared places=Responsibility; Having a say=Right; Telling the truth=Responsibility | Right or responsibility?
+check: mcq | Which is a right? | An education* | Doing the dishes | Picking up litter
+check: tf | Rights and responsibilities go together. | true
+check: mcq | Which is a responsibility? | Respecting others* | Free lunch every day | Nothing
+home: Name one right and one responsibility you have at home.
+skill: civics
+

@@ -1,0 +1,76 @@
+# home · makers
+@unit 1 | Shopping on a budget | Meal planning and saving at the supermarket
+@unit 2 | Cooking for the family | Planning, prepping and timing
+@unit 3 | Transport | Public transport, cars and costs
+@unit 4 | Planning a week | Time, tasks and energy
+@unit 5 | Home maintenance | Small fixes and when to call a pro
+@unit 6 | Power and water | Using less and paying less
+@unit 7 | Health admin | Doctors, dentists and prescriptions
+@unit 8 | Emergencies | Kits, plans and staying calm
+
+@lesson 1.1 | Meal planning | 🥘 | kitchen
+hook: A family of four. $200 for a week of food. Can you plan it?
+learn: Plan meals around cheap staples like rice, pasta, beans, eggs and seasonal veg.
+learn: Cook once, eat twice: leftovers save time and money.
+play: budget | Plan a week's food on $200 | 200 | Breakfasts=25; Lunches=40; Dinners=90; Snacks=0; Buffer=0 | Unexpected visitor for dinner:15
+check: mcq | Which is usually cheapest? | Seasonal vegetables* | Out-of-season berries | Pre-cut fruit platters
+check: tf | Leftovers can save time and money. | true
+check: mcq | Planning meals helps reduce… | Food waste* | Flavour | Sleep
+home: Plan three dinners for your family with a shopping list.
+skill: mealplan
+
+@lesson 1.2 | Supermarket tricks | 🛒 | stall
+hook: Why is the milk always at the back of the supermarket?
+learn: Shops place essentials at the back so you walk past tempting things.
+learn: Eye-level shelves often hold pricier brands. Look high and low.
+play: tap | Tap the supermarket tricks | 🍫:yes:Lollies at the checkout tempt you while you wait; 🥛:yes:Milk at the back makes you walk past other things; 🏷️:yes:"Big" sale signs aren't always real savings; 🧾:no; 🛒:yes:Big trolleys make you buy more; 🍞:no
+check: mcq | Where are pricier brands often placed? | At eye level* | On the floor | Outside
+check: tf | Every "special" sign is a real saving. | false
+check: mcq | Best defence against shop tricks? | A list and a budget* | Shopping hungry | Grabbing what's at eye level
+home: Spot two supermarket tricks on your next shop.
+skill: shopping
+
+@lesson 1.3 | Getting around | 🚌 | home
+hook: Bus, bike, scooter or car. Which costs least to get to school?
+learn: Transport costs include fares, fuel, parking and wear and tear.
+learn: {nz:Many NZ cities have travel cards with lower fares, and some regions offer youth discounts.~au:Many Australian cities have travel cards with student concessions.}
+play: price | Which costs less per trip over a term? | Bus pass:120:80:trips; Paying cash each time:3:1:trip
+check: mcq | Which is usually cheapest for short trips? | Walking or biking* | Taxi | Plane
+check: tf | Travel cards often make fares cheaper. | true
+check: mcq | Car costs include… | Fuel, insurance and parking* | Only fuel | Nothing
+home: Work out the cost of your weekly travel.
+skill: transport
+
+@lesson 1.4 | Using less power | 💡 | home
+hook: Your family's power bill jumped in winter. Why?
+learn: Heating and hot water use the most power in most homes.
+learn: Shorter showers, closing curtains at night and heating only rooms you're in all help.
+play: sort | Saves power, Wastes power | Shorter showers=Saves power; Heating an empty room=Wastes power; Closing curtains at night=Saves power; Leaving lights on=Wastes power; Washing in cold water=Saves power; Leaving the heater on all day=Wastes power | Saves or wastes?
+check: mcq | What uses lots of power in most homes? | Heating and hot water* | Phone chargers | Light switches
+check: tf | Shorter showers can lower the power bill. | true
+check: mcq | A free way to keep heat in at night? | Close the curtains* | Open all windows | Turn on fans
+home: Time your shower and try to cut a minute.
+skill: energy
+
+@lesson 1.5 | Small fixes | 🔧 | workshop
+hook: The tap drips. The toilet runs. DIY, or call someone?
+learn: Small jobs like a loose cupboard handle are often DIY.
+learn: Electrical and gas work must be done by licensed professionals. Plumbing jobs often need one too.
+play: sort | DIY job, Call a pro | Tighten a loose cupboard handle=DIY job; Rewire a power point=Call a pro; Unblock a sink with a plunger=DIY job; Fix a gas heater=Call a pro; Replace a light bulb=DIY job; Move a hot water cylinder=Call a pro | Who should do it?
+check: mcq | Who should do electrical wiring? | A licensed electrician* | Anyone with YouTube | A kid
+check: tf | Gas work needs a licensed professional. | true
+check: mcq | A safe small DIY job? | Tighten a loose handle* | Rewire a fuse box | Fix a gas leak
+home: Help a grown-up with a small fix at home.
+skill: maintenance
+
+@lesson 1.6 | Emergency kit | 🎒 | home
+hook: An earthquake or storm cuts power for three days. Are you ready?
+learn: Keep water, food, a torch, batteries, a radio, first aid kit and medicines ready.
+learn: Agree a family plan: where to meet and who to call.
+play: tap | Tap what belongs in an emergency kit | 💧:yes:Water for every person; 🔦:yes:A torch for power cuts; 🥫:yes:Food that doesn't need cooking; 🎮:no; 🩹:yes:A first aid kit; 📻:yes:A radio for updates; 🪴:no
+check: mcq | What's most important in a kit? | Water* | Games | Decorations
+check: tf | A family emergency plan should include a meeting place. | true
+check: mcq | {nz:Where can you find emergency advice in NZ?~au:Where can you find emergency advice in Australia?} | {nz:getready.govt.nz~au:Your state emergency service}* | A random forum | Nowhere
+home: Check your family's emergency kit and plan together.
+skill: emergency
+

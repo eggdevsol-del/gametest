@@ -1,0 +1,77 @@
+# invest · sprouts
+@unit 1 | Money can grow | Planting money seeds
+@unit 2 | Waiting pays | Patience gets you more
+@unit 3 | Owning a little piece | What a share is
+@unit 4 | Ups and downs | Prices wiggle, and that's normal
+@unit 5 | Lots of baskets | Don't put all your eggs in one basket
+@unit 6 | Interest | The bank says thank you
+@unit 7 | Good businesses | What makes a company strong
+@unit 8 | My island market | Choosing funds in Chorecast
+
+@lesson 1.1 | Money seeds | 🌱 | shares
+hook: Can a coin grow like a seed?
+learn: Spending money uses it up. It's gone.
+learn: Saving money keeps it. It stays the same size.
+learn: Growing money means putting it somewhere that adds more over time.
+play: sort | Grows, Stays the same, Gets used up | Money in a savings account=Grows; Coins under your bed=Stays the same; Buying lollies=Gets used up; Shares in a company=Grows; Money in your piggy bank=Stays the same; A movie ticket=Gets used up | Where does each money go?
+check: mcq | Which one can make money grow? | A savings account* | Spending it | Hiding it under the bed
+check: tf | Money under your bed gets bigger by itself. | false
+check: mcq | What happens to money you spend? | It's used up* | It grows | It comes back
+home: Ask a grown-up where their money grows.
+skill: growth
+
+@lesson 1.2 | The money tree | 🌳 | shares
+hook: If you planted a money tree today, when would it be biggest?
+learn: Growing money takes time, like a tree.
+learn: Each year it adds a little more. Then that grows too!
+play: order | Grow your money tree | Plant your savings; Wait a year; A little extra grows; The extra grows too; Your tree is much bigger
+check: mcq | What does growing money need most? | Time* | Luck | Shouting at it
+check: tf | A money tree grows faster when you dig it up every day. | false | Taking money out stops it growing.
+check: mcq | When is a money tree biggest? | After many years* | On the first day | Never
+home: Draw your money tree and how big it might be in 10 years.
+skill: growth
+
+@lesson 1.3 | Waiting pays | ⏳ | garden
+hook: One treat now, or two treats if you wait? What would you choose?
+learn: Waiting for something better is called patience.
+learn: People who save and wait can often get bigger things.
+play: path | You can have one cookie now, or two cookies if you wait 10 minutes. | Wait for two => good: You waited and got two! Waiting is a superpower. | Eat one now => ok: Yum! But you missed out on the second cookie. | Grab the cookie jar => bad: That's not the deal. Waiting is part of the game.
+check: mcq | What is patience? | Waiting for something better* | Getting everything now | Giving up
+check: tf | Saving and waiting can help you buy bigger things. | true
+check: mcq | You want a $20 toy. You get $5 a week. What helps? | Save for 4 weeks* | Spend it each week | Cry
+home: Pick something you'd like and work out how many weeks to save.
+skill: patience
+
+@lesson 1.4 | The snowball | ❄️ | shares
+hook: A tiny snowball rolls down a hill. What happens to it?
+learn: When savings earn a bit extra, that extra earns a bit too.
+learn: Like a snowball, it gets bigger and bigger as it rolls.
+play: compound | Roll the money snowball | 10 | 10 | 5
+check: tf | The longer the snowball rolls, the bigger it gets. | true
+check: mcq | What makes the money snowball grow? | Extra money on top of extra money* | Spending it | Hiding it
+check: mcq | Who will have a bigger snowball? | Someone who starts early* | Someone who starts late | They'll be the same
+home: Roll a real snowball or ball of play dough and watch it grow.
+skill: compound
+
+@lesson 1.5 | Spend, save or grow? | 🧺 | bank
+hook: You got $10. You can spend it, save it or grow it. Can you do a bit of each?
+learn: You don't have to pick just one. You can split your money.
+learn: Chorecast splits your pay into jars for you.
+play: sort | jars | A new book=Spend; Money for a bike next year=Vault; Shares in the island market=Invest; Food for the animal shelter=Give; An ice cream=Spend; Saving for a holiday=Vault | Which jar should each go in?
+check: mcq | Which jar is for growing money? | Invest* | Spend | Give
+check: tf | You can only use one jar at a time. | false
+check: mcq | Which jar is for helping others? | Give* | Vault | Spend
+home: Look at your four jars in Chorecast. Which is biggest?
+skill: jars
+
+@lesson 1.6 | Guess the money word | 🎁 | bank
+hook: There's a mystery money word in the box. Can you guess it with the fewest clues?
+learn: Banks pay you a little extra for keeping your money with them.
+learn: That extra money has a special name.
+play: mystery | It's money the bank gives you; You get it for saving, not spending; The more you save, the more you get; It starts with the letter I | Interest* | A loan | A bill
+check: mcq | What is interest? | Extra money for saving* | A type of coin | A shop
+check: tf | Banks pay interest because you keep money with them. | true
+check: mcq | Your vault in Chorecast grows a little each day. Why? | Interest* | Magic | A mistake
+home: Check your Chorecast vault and see how much interest it has earned.
+skill: interest
+

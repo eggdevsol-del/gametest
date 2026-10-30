@@ -1,0 +1,76 @@
+# online · makers
+@unit 1 | Phishing and fraud | Emails, texts and fake websites
+@unit 2 | AI and deepfakes | When you can't trust what you see
+@unit 3 | Your data | Who collects it and why
+@unit 4 | Online shopping | Safe buying and fake stores
+@unit 5 | Social media and money | Influencers, hustles and get-rich schemes
+@unit 6 | Account security | Password managers and recovery
+@unit 7 | Sextortion and safety | Pressure, threats and getting help
+@unit 8 | Online reputation | Building a positive presence
+
+@lesson 1.1 | Phishing | 🎣 | online
+hook: An email from "Netflix" says your payment failed. The link goes to netf1ix-billing.com. Spot it?
+learn: Phishing tricks you into giving passwords or card details through fake messages and websites.
+learn: Check the sender, hover over links, and log in through the real app instead.
+play: scam | Real or phishing? | Login alert from your bank app, inside the app=real; Email from support@netf1ix-billing.com asking you to update your card=scam; Text: Your parcel is held. Pay $2.99 at this link=scam; Your school's portal, which you opened yourself=real; DM from a "brand" saying you've won, click to claim=scam | Look-alike addresses, small payments and prize links are classic phishing.
+check: mcq | What's suspicious about "netf1ix-billing.com"? | The 1 instead of an l, and an odd domain* | Nothing | It's too short
+check: tf | Logging in through the real app is safer than clicking email links. | true
+check: mcq | You clicked a phishing link and typed your password. Now… | Change your password and turn on 2FA* | Wait and see | Tell nobody
+home: Forward a suspicious message to {nz:Netsafe or the bank~au:Scamwatch or your bank}, with a grown-up.
+skill: scams
+
+@lesson 1.2 | Deepfakes | 🤖 | online
+hook: A video shows a famous person saying something shocking. Is it real?
+learn: AI can create realistic fake images, voices and videos.
+learn: Check the source, look for odd details, and see if trusted news reports it. Scammers also fake voices of family members.
+play: tap | Tap the signs something might be AI-made | 👀:yes:Odd eyes or blinking; 🖐️:yes:Hands with the wrong number of fingers; 📰:no; 🔊:yes:A voice that sounds slightly robotic; 💡:yes:Lighting that doesn't match; ✅:no
+check: mcq | Best way to check a shocking video? | Look for trusted sources reporting it* | Share it first | Trust it because it looks real
+check: tf | AI can fake voices of people you know. | true
+check: mcq | A "family member" calls asking for money urgently. You… | Hang up and call them back on their real number* | Send money | Give your bank login
+home: Agree a family "safe word" for emergencies.
+skill: ai
+
+@lesson 1.3 | Your data | 📊 | online
+hook: A free app. How does it make money?
+learn: Many free apps collect data about you and sell ads using it.
+learn: Check what permissions apps ask for. A torch app doesn't need your contacts.
+play: sort | Makes sense, Suspicious | Map app wants your location=Makes sense; Torch app wants your contacts=Suspicious; Camera app wants the camera=Makes sense; Calculator wants your microphone=Suspicious; Music app wants storage=Makes sense | Does the permission make sense?
+check: mcq | How do many free apps make money? | Ads using your data* | Magic | Charity
+check: tf | You can turn off app permissions you don't need. | true
+check: mcq | Which permission is suspicious? | A torch app wanting your contacts* | A map wanting location | A camera wanting the camera
+home: Check app permissions on a device with a grown-up.
+skill: data
+
+@lesson 1.4 | Fake online stores | 🛒 | online
+hook: Brand-name sneakers, 80% off, on a website you've never heard of. Bargain?
+learn: Fake stores use huge discounts, new domains, no contact details and pressure to pay by bank transfer.
+learn: Check reviews from other sites, and pay with methods that offer protection.
+play: scam | Real store or fake? | Big-name store you know, normal prices, clear returns policy=real; Brand-name shoes 85% off, bank transfer only=scam; Store with a physical address, phone number and reviews on other sites=real; Site created last week with countdown timers on every item=scam | Huge discounts, transfer-only payments and brand-new sites are red flags.
+check: mcq | Which payment usually offers more protection? | A credit card or trusted payment service* | Bank transfer to a stranger | Gift cards
+check: tf | A deal that seems too good to be true often is. | true
+check: mcq | Where should you check reviews? | On other trusted sites* | Only on the store's own page | Nowhere
+home: Check a store you use for contact details and a returns policy.
+skill: shopping
+
+@lesson 1.5 | Get-rich-quick | 🚗 | online
+hook: An influencer with a rented sports car says you can make $10,000 a month from your phone. Will you?
+learn: Get-rich-quick schemes sell dreams, courses or "systems". Often the only person getting rich is the seller.
+learn: Real income takes skills, time and effort.
+play: debate | An influencer's $499 course promises $10k a month. Buy it? | Be very sceptical. Check independent reviews and evidence of real results* | Yes, they have a nice car so it must work | Some online courses genuinely teach valuable skills. The test is evidence, refunds and realistic promises.
+check: mcq | A sign of a get-rich-quick scheme? | Huge promises with little proof* | Clear, modest claims | Free library books
+check: tf | A flashy lifestyle online proves someone's scheme works. | false
+check: mcq | Real income usually needs… | Skills, time and effort* | A secret trick | Luck only
+home: Find a "make money fast" ad and list its warning signs.
+skill: hype
+
+@lesson 1.6 | Pressure and threats | 🛑 | online
+hook: Someone online threatens to share a private photo unless you pay. What do you do?
+learn: This is a crime called sextortion. It's never your fault.
+learn: Don't pay, stop replying, save evidence and tell a trusted adult. {nz:Netsafe (0508 638 723) or the Police can help.~au:The eSafety Commissioner, the AFP and Kids Helpline can help.}
+play: order | What to do if someone threatens you online | Stop replying; Don't pay or send anything more; Screenshot the messages; Tell a trusted adult; Report it to {nz:Netsafe or the Police~au:eSafety or the police}
+check: mcq | Someone threatens you online for money. You… | Don't pay, save evidence, get help* | Pay them | Keep it secret
+check: tf | It's never the victim's fault. | true
+check: mcq | {nz:Who can help in NZ?~au:Who can help in Australia?} | {nz:Netsafe or the Police~au:eSafety, the police or Kids Helpline}* | Nobody | The person threatening you
+home: Save {nz:Netsafe's~au:eSafety's} contact details in your phone.
+skill: safety
+

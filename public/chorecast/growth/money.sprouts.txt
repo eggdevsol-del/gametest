@@ -1,0 +1,82 @@
+# money · sprouts
+@unit 1 | Coins and notes | Know our money and what it can do
+@unit 2 | Needs and wants | Tell what we must have from what would be nice
+@unit 3 | Saving for a goal | Wait, save and get something bigger
+@unit 4 | Earning money | Money comes from doing work
+@unit 5 | Spending wisely | Stop and think before you buy
+@unit 6 | My four jars | Spend, Vault, Invest and Give
+@unit 7 | Prices and shops | How shops decide what things cost
+@unit 8 | Sharing and swapping | Trading fairly with friends
+
+@lesson 1.1 | Coins and notes | 🪙 | bank
+hook: Some money is small and round. Some is flat and bendy. Why two kinds?
+guess: mcq | Which is worth more? | One $5 note* | One $2 coin | One 50c coin
+learn: Coins are small, round money. We use them for small amounts.
+learn: Notes are flat money for bigger amounts. They are easier to carry than lots of coins.
+learn: The number on it tells you what it is worth, not how big it is.
+play: sort | Coin, Note | 10c=Coin; 50c=Coin; $1=Coin; $2=Coin; $5=Note; $10=Note; $20=Note; $50=Note | Is it a coin or a note?
+check: mcq | Which one is a note? | $10* | $2 | 50c
+check: tf | A bigger coin is always worth more. | false | A $2 coin is smaller than a 50c coin but worth more.
+check: mcq | What tells you what money is worth? | The number on it* | Its size | Its colour
+home: Look at some coins with a grown-up. Find the number on each one.
+skill: coins
+
+@lesson 1.2 | Counting coins | 🧮 | bank
+hook: You have a handful of coins. How do you know how much is there?
+learn: Start with the biggest coins first. It makes counting faster.
+learn: Two 50c coins make $1. Two $1 coins make $2.
+try: 50c + 50c = $1 :: gap | $1 + $1 = $_ | 2
+play: gen | add | 4
+check: gap | 20c + 20c + 10c = _c | 50
+check: mcq | Which makes $1? | Two 50c coins* | Two 20c coins | Five 10c coins and a 20c coin
+check: tf | Five 20c coins make $1. | true
+home: Count the coins in your money box, biggest first.
+skill: counting
+
+@lesson 1.3 | What can money buy? | 🛒 | stall
+hook: A banana, a bike and a box of crayons walk into a shop. Which costs the most?
+learn: Different things cost different amounts.
+learn: Small things like a banana cost a little. Big things like a bike cost a lot.
+learn: Knowing roughly what things cost helps you plan.
+play: match | Match each thing to its price | Banana=50c; Box of crayons=$5; Movie ticket=$15; Bike=$200
+check: mcq | Which costs the most? | A bike* | A banana | A pencil
+check: mcq | About how much is an ice block? | $2* | $200 | 2c
+check: tf | A bike costs about the same as a banana. | false
+home: At the shop, guess a price, then check the tag.
+skill: prices
+
+@lesson 1.4 | Money hunt | 🔎 | home
+hook: Money is hiding all over this room. Can you find it?
+learn: Money is anything people agree to swap for things. Coins and notes are money. Toys are not.
+learn: Some money is not on paper at all. Cards and phones can pay too.
+play: tap | Tap all the money in the room | 🪙:yes:Coins are money; 💵:yes:Notes are money; 💳:yes:A card can pay with money from the bank; 🧸:no; 🍎:no; ⚽:no; 💶:yes:Money from another country is still money; 📚:no
+check: tf | A bank card can pay for things. | true
+check: mcq | Which of these is money? | A $5 note* | A teddy | A football
+check: tf | Toys are a kind of money. | false
+home: Next time you go shopping, watch how the grown-up pays.
+skill: coins
+
+@lesson 1.5 | Swapping and money | 🔄 | museum
+hook: Long ago there was no money. How did people get what they needed?
+learn: People swapped things. That is called bartering.
+learn: Swapping is hard if the other person doesn't want your thing.
+learn: Money fixes that. Everyone takes it, so you can swap it for anything.
+play: path | You have apples and want bread. The baker doesn't want apples. | Find someone who wants apples and has bread => good: You found a swap! But it took all morning. That is why money is handy. | Give up and go hungry => bad: Oh no. With money you could just buy the bread. | Grab the bread anyway => bad: That is taking, not swapping. It isn't fair to the baker.
+check: mcq | What is bartering? | Swapping things without money* | Saving money | Buying with a card
+check: tf | Money makes swapping easier. | true
+check: mcq | Why is money handy? | Almost everyone will take it* | It is pretty | It never runs out
+home: Swap something fairly with someone in your family today.
+skill: barter
+
+@lesson 1.6 | Keeping money safe | 🔐 | bank
+hook: You got $10 for your birthday. Where should it live?
+learn: Money can get lost if you leave it lying around.
+learn: A money box or a bank keeps it safe until you need it.
+learn: Never give money or card numbers to someone you don't know.
+play: order | Put the steps in order for keeping birthday money safe | Count the money; Tell a grown-up how much you got; Put it in your money box or bank; Write down what you saved
+check: mcq | Where is the safest place for your money? | A money box or bank* | Under your pillow | In your pocket at the park
+check: tf | You should tell a stranger your bank card number. | false
+check: mcq | Who should you tell when you get money? | A grown-up you trust* | Nobody ever | A stranger online
+home: Find a safe place at home for your money with a grown-up.
+skill: safety
+

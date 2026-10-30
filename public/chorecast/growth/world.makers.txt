@@ -1,0 +1,78 @@
+# world · makers
+@unit 1 | Government and voting | How elections and Parliament work
+@unit 2 | Tax and spending | Where the money goes
+@unit 3 | Consumer law | Your rights when buying
+@unit 4 | The economy | Inflation, interest rates and jobs
+@unit 5 | Law and justice | Courts, police and your rights
+@unit 6 | Founding documents | {nz:Te Tiriti o Waitangi~au:The Constitution and First Nations history}
+@unit 7 | Global issues | Climate, trade and aid
+@unit 8 | Having your say | Submissions, petitions and protest
+
+@lesson 1.1 | Elections | 🗳️ | townhall
+hook: Why does your vote matter if millions of people vote?
+learn: {nz:New Zealand uses MMP. You get two votes: one for a local MP and one for a party.~au:Australia uses preferential voting for the House of Representatives. You number the candidates in order of preference.}
+learn: {nz:General elections are held at least every three years.~au:Voting is compulsory for citizens 18 and over.}
+learn: Close results happen. Every vote counts.
+play: mcq | {nz:How many votes do you get in a NZ general election?~au:How do you fill in an Australian House of Representatives ballot?} | {nz:Two: an electorate vote and a party vote~au:Number every candidate in order of preference}* | {nz:One~au:Tick one name only} | {nz:Ten~au:Write a letter}
+check: tf | {nz:NZ elections happen at least every three years.~au:Voting is compulsory for Australian citizens 18 and over.} | true
+check: mcq | {nz:What voting system does NZ use?~au:What does "preferential" mean?} | {nz:MMP~au:You rank candidates in order}* | {nz:First past the post only~au:You pick your favourite colour} | {nz:Coin toss~au:Only one person votes}
+check: mcq | Why does every vote matter? | Close results can be decided by a few votes* | It doesn't | Only famous people vote
+home: Look up {nz:vote.nz~au:aec.gov.au} and find when the next election is.
+skill: civics
+
+@lesson 1.2 | Where tax goes | 🥧 | townhall
+hook: If tax were a pie, which slice would be biggest?
+learn: Big areas of government spending include social welfare, health, education and debt interest.
+learn: Governments publish budgets every year showing where money goes.
+play: sort | Usually a big slice, Usually a small slice | Health=Usually a big slice; Education=Usually a big slice; Social welfare and pensions=Usually a big slice; Arts funding=Usually a small slice; Running Parliament itself=Usually a small slice | Big or small slice?
+check: mcq | Which is usually one of the biggest areas of spending? | Health* | Arts funding | Running Parliament
+check: tf | Governments publish yearly budgets. | true
+check: mcq | Where can you see where tax goes? | The government's budget* | A gossip site | Nowhere
+home: Find one number from this year's government budget.
+skill: tax
+
+@lesson 1.3 | Your rights with police | 👮 | townhall
+hook: Police stop you on the street. What are your rights?
+learn: Stay calm and polite. You can ask why you're being stopped.
+learn: {nz:You usually have the right to remain silent and to talk to a lawyer. Youth Law Aotearoa gives free advice.~au:You usually have the right to remain silent and to contact a lawyer. Legal Aid and youth legal services give free advice.}
+play: order | Staying safe if police stop you | Stay calm and polite; Ask why you've been stopped; Give your name and address if asked; Ask to speak to a lawyer or adult if questioned; Write down what happened afterwards
+check: mcq | If stopped by police, you should… | Stay calm and polite* | Run away | Shout
+check: tf | You can usually ask to talk to a lawyer. | true
+check: mcq | {nz:Where can young NZers get free legal advice?~au:Where can young Australians get free legal advice?} | {nz:Youth Law Aotearoa~au:Legal Aid or a youth legal service}* | A meme page | Nowhere
+home: Look up {nz:Youth Law Aotearoa~au:your state's Legal Aid} and save the number.
+skill: law
+
+@lesson 1.4 | {nz:Te Tiriti o Waitangi~au:First Nations history} | 📜 | museum
+hook: {nz:Why does a document signed in 1840 still matter today?~au:Whose land was Australia before 1788?}
+learn: {nz:Te Tiriti o Waitangi was signed in 1840 by many Māori rangatira and representatives of the British Crown.~au:Aboriginal and Torres Strait Islander peoples have cared for this continent for more than 60,000 years.}
+learn: {nz:The Māori and English texts differ in important ways, which has led to disagreement about what was agreed.~au:British colonisation from 1788 took land without treaty, which still affects communities today.}
+learn: {nz:The Waitangi Tribunal investigates breaches, and settlements have returned some land and resources to iwi.~au:The 1992 Mabo decision recognised native title, overturning the idea that the land had belonged to no one.}
+play: mcq | {nz:When was Te Tiriti o Waitangi signed?~au:What did the 1992 Mabo decision recognise?} | {nz:1840~au:Native title}* | {nz:1940~au:A new flag} | {nz:2000~au:A new currency}
+check: tf | {nz:The Māori and English texts of the Treaty differ.~au:Aboriginal and Torres Strait Islander peoples lived here long before 1788.} | true
+check: mcq | {nz:What does the Waitangi Tribunal do?~au:About how long have First Nations peoples cared for Australia?} | {nz:Investigates Treaty breaches~au:More than 60,000 years}* | {nz:Runs elections~au:About 200 years} | {nz:Sells land~au:About 10 years}
+check: mcq | Who should help tell these histories? | The communities they belong to* | Nobody | Only tourists
+home: {nz:Find out which iwi or hapū are mana whenua where you live.~au:Find out whose Country your home is on.}
+skill: history
+
+@lesson 1.5 | Inflation and you | 🎈 | bank
+hook: Why does the same bag of groceries cost more each year?
+learn: Inflation means prices rise over time. Central banks try to keep it low and steady.
+learn: If your pay or savings grow slower than inflation, you can buy less.
+play: slider | Inflation is 4% a year. Roughly what does a $100 shop cost after 3 years? | 100 | 130 | 112 | $ | 3 | 1
+check: mcq | What is inflation? | Prices rising over time* | Prices always falling | A balloon festival
+check: tf | High inflation can make savings buy less. | true
+check: mcq | Who tries to keep inflation steady? | The central bank* | Supermarkets | Schools
+home: Compare a receipt from a year ago with today's prices.
+skill: inflation
+
+@lesson 1.6 | Petitions and protest | ✊ | townhall
+hook: You want a pedestrian crossing outside school. How do you make it happen?
+learn: You can make submissions, start petitions, talk to your council or MP, and protest peacefully.
+learn: Facts, numbers and stories from people affected make your case strong.
+play: debate | What's most likely to get a crossing built? | A petition with signatures, traffic counts and a meeting with the council* | Angry posts online | Online posts can raise awareness quickly and gather supporters. They work best alongside a clear ask to decision makers.
+check: mcq | What makes a petition stronger? | Facts and real stories* | Insults | Only one signature
+check: tf | Peaceful protest is a way to have your say. | true
+check: mcq | Who decides on local crossings? | Usually the local council* | The Prime Minister personally | Nobody
+home: Count cars outside school for 10 minutes for a pretend petition.
+skill: advocacy
+

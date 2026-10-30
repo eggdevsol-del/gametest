@@ -1,0 +1,81 @@
+# make · launchers
+@unit 1 | Starting a business | Structures, names and registration
+@unit 2 | Tax and GST | Invoices, GST and record keeping
+@unit 3 | Funding | Savings, loans, grants and investors
+@unit 4 | Contracts and law | Agreements, privacy and consumer law
+@unit 5 | Marketing that works | Data, testing and budgets
+@unit 6 | Hiring | Employing people the right way
+@unit 7 | Pitching to investors | Decks, valuations and equity
+@unit 8 | Social enterprise | Businesses built to do good
+
+@lesson 1.1 | Business structures | 🏢 | townhall
+hook: Sole trader, partnership or company. Which should a 17-year-old start with?
+learn: A sole trader is just you. It's simple, but you're personally responsible for debts.
+learn: A company is a separate legal entity. It costs more to run but can protect your personal assets.
+learn: {nz:In New Zealand you register companies with the Companies Office.~au:In Australia you'll need an ABN, and companies register with ASIC.}
+play: match | Match each structure to its description | Sole trader=Just you, simple, you're responsible for debts; Partnership=Two or more people sharing a business; Company=A separate legal entity with shareholders; Trust=Assets held by trustees for beneficiaries
+check: mcq | Simplest way to start a small business? | Sole trader* | A listed company | A trust
+check: tf | A sole trader is personally responsible for business debts. | true
+check: mcq | {nz:Where are NZ companies registered?~au:What number does an Australian business usually need?} | {nz:The Companies Office~au:An ABN}* | {nz:The post office~au:A phone number} | {nz:Nowhere~au:None}
+home: Look up the {nz:Companies Office~au:ABN} website and find how to register.
+skill: business
+
+@lesson 1.2 | GST and invoices | 🧾 | bank
+hook: Your business charges GST. Whose money is it?
+learn: GST is a tax on most goods and services: {nz:15% in New Zealand~au:10% in Australia}.
+learn: Registered businesses collect it from customers and pass it on to {nz:IRD~au:the ATO}. It's not your money to spend.
+learn: A tax invoice shows the GST and your {nz:GST number~au:ABN}.
+try: {nz:$100 + 15% GST = $115~au:$100 + 10% GST = $110} :: gap | {nz:$200 + 15% GST = $_~au:$300 + 10% GST = $_} | {nz:230~au:330}
+play: gen | gst | 4
+check: mcq | GST you collect belongs to… | {nz:IRD~au:The ATO}, once you pass it on* | You to spend | Your customers
+check: tf | A tax invoice shows the GST amount. | true
+check: mcq | {nz:What's the GST rate in New Zealand?~au:What's the GST rate in Australia?} | {nz:15%~au:10%}* | {nz:10%~au:15%} | 0%
+home: Find the GST line on a receipt from the shop.
+skill: tax
+
+@lesson 1.3 | Funding a start-up | 💵 | bank
+hook: You need $5,000 to start. Where could it come from?
+learn: Options include savings, family, loans, grants and investors.
+learn: Loans must be repaid with interest. Investors take a share of your business.
+learn: Start small with your own money when you can, and prove the idea first.
+play: match | Match the funding to what you give up | Your savings=Money you could spend on other things; Bank loan=Repayments plus interest; Investor=A share of the business; Grant=Time to apply, and rules about how you spend it
+check: mcq | What do investors usually get? | A share of the business* | Nothing | Free products only
+check: tf | Loans must be repaid with interest. | true
+check: mcq | A smart way to start? | Small, with your own money, proving the idea* | Borrow as much as possible | Spend before you have customers
+home: Research one grant or programme for young entrepreneurs in your area.
+skill: funding
+
+@lesson 1.4 | Consumer law | ⚖️ | townhall
+hook: A customer says your product broke after a week. Do you have to fix it?
+learn: {nz:The Consumer Guarantees Act says products must be of acceptable quality and match their description.~au:Australian Consumer Law gives customers guarantees that products are of acceptable quality.}
+learn: "No refunds" signs don't remove these rights.
+play: tf | A "no refunds" sign means customers have no rights. | false | Consumer law guarantees still apply.
+check: mcq | A product breaks quickly through normal use. What applies? | Consumer guarantees, so repair, replace or refund* | Nothing | Only if the customer is polite
+check: tf | Products must match their description. | true
+check: mcq | {nz:Which law protects NZ consumers?~au:Which law protects Australian consumers?} | {nz:The Consumer Guarantees Act~au:Australian Consumer Law}* | The Road Code | School rules
+home: Read the {nz:Consumer Protection~au:ACCC} page on refunds.
+skill: law
+
+@lesson 1.5 | Testing your marketing | 📈 | online
+hook: Two ads, $20 each. One gets 5 sales, one gets 40. What next?
+learn: Test small, measure results, then spend more on what works.
+learn: Track cost per sale, not just likes.
+try: $20 ad, 5 sales = $4 a sale :: gap | $30 ad, 10 sales = $_ a sale | 3
+play: price | Which ad got sales more cheaply? | Ad A:20:5:sales; Ad B:20:40:sales
+check: mcq | What matters most in an ad? | Cost per sale* | Number of likes | Pretty colours
+check: gap | $50 ad, 25 sales = $_ a sale | 2
+check: tf | Testing small before spending big is smart. | true
+home: Find an ad and guess who it's aimed at.
+skill: marketing
+
+@lesson 1.6 | Businesses that do good | 🌍 | garden
+hook: Can a business make money and change the world?
+learn: A social enterprise uses business to solve a social or environmental problem.
+learn: Profits often fund the mission. {nz:Eat My Lunch, for example, began in 2015 with a "buy one, give one" model for school lunches.~au:Thankyou, for example, was set up to send its profits to projects fighting poverty.}
+play: sort | Social enterprise, Regular business | Sells coffee and trains young people who need work=Social enterprise; Sells phones for profit=Regular business; Cafe that funds a youth mental health service=Social enterprise; Car dealership=Regular business; Clothing brand that pays fair wages and plants trees=Social enterprise | Which is which?
+check: mcq | What is a social enterprise? | A business with a social or environmental mission* | A charity that sells nothing | Any business
+check: tf | A social enterprise can make a profit. | true
+check: mcq | Where do social enterprise profits often go? | The mission* | Only the owners | Nowhere
+home: Find a social enterprise near you and what it does.
+skill: impact
+

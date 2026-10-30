@@ -1,0 +1,77 @@
+# online · builders
+@unit 1 | Scams | Spotting tricks for money and info
+@unit 2 | In-app purchases | Gems, coins and real money
+@unit 3 | Privacy settings | Who can see your stuff
+@unit 4 | Passwords and 2FA | Locking your accounts
+@unit 5 | Digital footprint | What stays online
+@unit 6 | Cyberbullying | Standing up and getting help
+@unit 7 | Fake news | Checking before you share
+@unit 8 | Healthy gaming | Fun without the regret
+
+@lesson 1.1 | Spot the scam | 🎣 | online
+hook: "You've won a free phone! Just pay $2 postage." Real?
+learn: Scams try to get your money or information.
+learn: Warning signs: prizes you didn't enter, urgency, secrecy, and requests for card details, codes or gift cards.
+play: scam | Real or scam? | You won a phone! Pay $2 postage now=scam; Your school's newsletter with the term dates=real; Send us a gift card code to unlock your account=scam; Your friend asks to meet at the park after school (in person at school earlier)=real; Act now or lose your account forever!=scam | Prizes you didn't enter, urgency and gift cards are big red flags.
+check: mcq | Which is a scam warning sign? | A prize for a competition you didn't enter* | Your teacher's email | A school notice
+check: tf | Real companies ask for gift card codes. | false
+check: mcq | You think something is a scam. You… | Don't reply, and tell a grown-up* | Pay just in case | Send your details
+home: Show a grown-up one scam message and how you spotted it.
+skill: scams
+
+@lesson 1.2 | Gems cost real money | 💎 | online
+hook: 500 gems for $7.99. How many real dollars is one gem?
+learn: Game currencies hide real prices on purpose.
+learn: Work out the real cost before you buy, and ask a grown-up.
+try: 100 gems for $2 is 2c a gem :: gap | 500 gems for $10 = _c a gem | 2
+play: mcq | Small pack: $2 for 100 gems. Big pack: $20 for 1,500 gems. Which is cheaper per gem? | The big pack, about 1.3c a gem* | The small pack, 2c a gem | They cost the same per gem
+check: mcq | Why do games use gems? | To hide real prices* | To be fair | Because gems are pretty
+check: tf | Gems cost real money. | true
+check: mcq | Before buying gems, you should… | Work out the real cost and ask a grown-up* | Buy the biggest pack | Use a parent's card secretly
+home: Find a game currency and work out what it really costs.
+skill: inapp
+
+@lesson 1.3 | Privacy settings | 🛡️ | online
+hook: Who can see your posts right now? Everyone in the world?
+learn: Privacy settings control who sees your posts, location and profile.
+learn: Set accounts to private or friends-only, and turn off location sharing.
+play: sort | Safer setting, Riskier setting | Private account=Safer setting; Location shared on every post=Riskier setting; Friends-only posts=Safer setting; Accepting requests from strangers=Riskier setting; Hiding your birthday=Safer setting | Safer or riskier?
+check: mcq | Safest account setting for kids? | Private* | Public | Everyone can message
+check: tf | Turning off location sharing helps keep you safe. | true
+check: mcq | A stranger sends a friend request. You… | Ignore or decline it* | Accept it | Send your address
+home: Check privacy settings on one app with a grown-up.
+skill: privacy
+
+@lesson 1.4 | Two-step login | 📲 | online
+hook: Someone guessed your password. Can they still get in?
+learn: Two-factor authentication (2FA) needs your password plus a code from your phone or app.
+learn: Even if someone has your password, they can't get in without the code.
+play: order | Log in with 2FA in order | Type your username; Type your password; Get a code on your phone or app; Type the code; You're in
+check: mcq | What does 2FA add? | A second code to log in* | A second password you share | Nothing
+check: tf | You should share 2FA codes with people who message you. | false
+check: mcq | Someone asks for your 2FA code. That's… | A scam* | Normal | Helpful
+home: Turn on 2FA for one account with a grown-up.
+skill: passwords
+
+@lesson 1.5 | Your digital footprint | 👣 | online
+hook: You deleted that silly post. Is it gone forever?
+learn: Posts can be screenshotted, shared and saved.
+learn: Think before you post: would you be OK with your grandparent or future boss seeing it?
+play: sort | Fine to post, Think twice | Your art project=Fine to post; An embarrassing photo of a friend=Think twice; A cool sunset=Fine to post; Your school uniform and street name=Think twice; A funny cat video=Fine to post | Fine to post or think twice?
+check: mcq | Can deleted posts still be seen? | Yes, if someone saved or screenshotted them* | Never | Only on Mondays
+check: tf | Your digital footprint can last a long time. | true
+check: mcq | A good test before posting? | Would I be OK with anyone seeing this?* | Will it get likes? | Is it mean?
+home: Search your name with a grown-up and see what comes up.
+skill: footprint
+
+@lesson 1.6 | Standing up to cyberbullying | 🛑 | online
+hook: Someone in your group chat keeps posting mean memes about a classmate. What do you do?
+learn: Don't join in, don't share, and support the person being targeted.
+learn: Save evidence and tell a grown-up. {nz:Netsafe (0508 638 723) can help.~au:The eSafety Commissioner can help.}
+play: path | A group chat is mocking a classmate. | Don't share it, message the classmate kindly and tell a grown-up => good: That takes courage, and it helps the person feel less alone. | Leave the chat quietly => ok: You didn't join in, which is good. Telling a grown-up would help more. | Add a funny reply => bad: Joining in makes it worse and hurts someone.
+check: mcq | You see cyberbullying. You… | Don't share, support them, tell a grown-up* | Share it | Join in
+check: tf | Saving evidence can help stop bullying. | true
+check: mcq | {nz:Who can help with online bullying in NZ?~au:Who can help with online bullying in Australia?} | {nz:Netsafe~au:The eSafety Commissioner}* | Nobody | The bully
+home: Talk with a grown-up about what you'd do if you saw cyberbullying.
+skill: bullying
+

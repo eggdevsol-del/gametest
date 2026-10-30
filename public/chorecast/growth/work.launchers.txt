@@ -1,0 +1,81 @@
+# work · launchers
+@unit 1 | Contracts and pay | Employment agreements, rates and conditions
+@unit 2 | Study paths | {nz:University, polytechnic and apprenticeships~au:University, TAFE and apprenticeships}
+@unit 3 | Job hunting | Networking, LinkedIn and applications that stand out
+@unit 4 | Interviews and offers | Answering well and negotiating
+@unit 5 | Self-employment | Contracting, invoicing and tax
+@unit 6 | Workplace issues | Bullying, harassment and getting help
+@unit 7 | Career changes | Building skills that transfer
+@unit 8 | Leadership | Leading a team and taking responsibility
+
+@lesson 1.1 | Reading an employment agreement | 📑 | workshop
+hook: You're handed a 6-page agreement and asked to sign today. Do you?
+learn: You can take time to read it and get advice before signing.
+learn: Check pay rate, hours, role, trial period, notice and leave.
+learn: If something's unclear, ask before you sign, not after.
+play: diff | The job ad and the agreement. Tap what doesn't match. | Pay: $25.00 an hour; Hours: 20 a week; Role: Barista; Start: 1 March | Pay: $23.00 an hour; Hours: 20 a week; Role: Barista and cleaner; Start: 1 March
+check: mcq | You're asked to sign an agreement on the spot. Best move? | Ask for time to read it and get advice* | Sign without reading | Refuse the job
+check: tf | Things that don't match the ad are worth asking about. | true
+check: mcq | Which should an agreement include? | Pay rate, hours and duties* | Your favourite food | Your bank PIN
+home: Ask a grown-up what's in their employment agreement.
+skill: contracts
+
+@lesson 1.2 | Pay types | 💵 | bank
+hook: Hourly, salary, commission, casual. Which is which?
+learn: Hourly workers are paid for each hour worked. Salaried workers get a fixed amount a year.
+learn: Casual work can be flexible but less certain. Commission pays a share of what you sell.
+play: match | Match the pay type to how it works | Hourly=Paid for each hour worked; Salary=A fixed amount per year; Commission=A share of what you sell; Casual=Work offered as needed, hours vary
+check: mcq | Which pay type changes most week to week? | Casual or commission* | Salary | None
+check: gap | $24 an hour × 25 hours = $_ | 600
+check: tf | Salaried workers are paid the same each pay period. | true
+home: Work out your weekly pay if you earned $23 an hour for 12 hours.
+skill: payslip
+
+@lesson 1.3 | Study or start work? | 🎓 | townhall
+hook: Uni, an apprenticeship or a job straight away. Which is right?
+learn: Different paths suit different people and careers.
+learn: {nz:Apprenticeships let you earn while you train. Many NZ trades are short of workers.~au:Apprenticeships and TAFE courses let you earn and train. Many trades are in demand.}
+learn: {nz:Fees Free now covers the final year of study or training for people who are eligible, and StudyLink offers student loans. Check the current rules.~au:HECS-HELP loans can cover uni fees. You repay through tax once you earn above a threshold.}
+play: debate | Is university always the best path after school? | No. It depends on the career and the person* | Yes. Everyone should go to university | University suits many careers, like medicine and law, and can open doors. It's just not the only good path.
+check: mcq | What's a perk of an apprenticeship? | You earn while you learn* | No work needed | It's free money forever
+check: tf | There's only one right path after school. | false
+check: mcq | What should you check before choosing study? | Costs, career paths and what suits you* | What your friends pick | Nothing
+home: Research one apprenticeship and one degree linked to a job you like.
+skill: careers
+
+@lesson 1.4 | Negotiating an offer | 🤝 | stage
+hook: You're offered a job at $24 an hour. Can you ask for more?
+learn: Often you can, politely, with reasons like skills or experience.
+learn: Research what similar jobs pay first.
+learn: You can also negotiate hours, start dates or training.
+play: chat | Your first job offer | them: We'd like to offer you the role at $24 an hour. | me: Thanks, I'm keen! I've got my barista certificate. Is there room for $25?*/That's insulting/OK whatever | them: We can do $24.50 now and review it in 3 months. | me: That sounds fair. Can we put the review date in writing?*/No deal/Fine, but I'll be grumpy
+check: mcq | Before negotiating, you should… | Research what similar jobs pay* | Make demands | Say nothing
+check: tf | You can negotiate things other than pay. | true
+check: mcq | What makes a request stronger? | Reasons, like skills or experience* | Shouting | Threats
+home: Look up typical pay for a job you'd like on a job site.
+skill: negotiate
+
+@lesson 1.5 | Working for yourself | 🧾 | stall
+hook: You start a lawn-mowing business. Who pays your tax?
+learn: Self-employed people must keep records and pay their own tax.
+learn: {nz:You may need to file an IR3 return and pay provisional tax as you earn more. GST registration is needed once turnover passes $60,000 a year.~au:You may need an ABN, and must lodge a tax return. GST registration is needed once turnover reaches $75,000 a year.}
+learn: Set money aside from every payment for tax.
+play: sort | Business cost, Personal cost | Fuel for the mower=Business cost; New mower blades=Business cost; Your own phone game=Personal cost; Trailer hire for a job=Business cost; Takeaway dinner with friends=Personal cost; Safety earmuffs=Business cost | Which costs belong to the business?
+check: mcq | Who pays tax when you're self-employed? | You do* | Your customers | Nobody
+check: tf | Keeping receipts for business costs is important. | true
+check: mcq | A smart habit for self-employed people? | Set aside money for tax from every payment* | Spend it all | Never send invoices
+home: Draw up a simple invoice for a pretend job.
+skill: selfemployed
+
+@lesson 1.6 | Speaking up | 📢 | townhall
+hook: A co-worker keeps making nasty comments about you. What can you do?
+learn: Bullying and harassment are not OK at work, and employers must deal with them.
+learn: Write down what happened and when, tell someone you trust, and report it.
+learn: {nz:Employment New Zealand and WorkSafe have help.~au:Fair Work, Safe Work Australia and state agencies can help.}
+play: order | Put the steps in a sensible order | Write down what happened and when; Talk to someone you trust; Report it to your manager or HR; If it isn't fixed, get outside help
+check: mcq | Something unsafe or unfair happens at work. What first? | Write it down and tell someone* | Ignore it forever | Quit without telling anyone
+check: tf | Employers have to deal with bullying at work. | true
+check: mcq | Where can you get outside help? | {nz:Employment New Zealand or WorkSafe~au:Fair Work or Safe Work Australia}* | A gossip site | Nowhere
+home: Find out who you'd talk to about a problem at your school or job.
+skill: workrights
+

@@ -1,0 +1,330 @@
+# Money Sense. Format: see CONTENT.md
+@band sprouts
+@unit 1 | Coins and notes | Know our money and what it can do
+@unit 2 | Needs and wants | Tell what we must have from what would be nice
+@unit 3 | Saving for a goal | Wait, save and get something bigger
+@unit 4 | Earning money | Money comes from doing work
+@unit 5 | Spending wisely | Stop and think before you buy
+@unit 6 | My four jars | Spend, Vault, Invest and Give
+@unit 7 | Prices and shops | How shops decide what things cost
+@unit 8 | Sharing and swapping | Trading fairly with friends
+
+@lesson 1.1 | Coins and notes | 🪙 | bank
+hook: Some money is small and round. Some is flat and bendy. Why two kinds?
+guess: mcq | Which is worth more? | One $5 note* | One $2 coin | One 50c coin
+learn: Coins are small, round money. We use them for small amounts.
+learn: Notes are flat money for bigger amounts. They are easier to carry than lots of coins.
+learn: The number on it tells you what it is worth, not how big it is.
+play: sort | Coin, Note | 10c=Coin; 50c=Coin; $1=Coin; $2=Coin; $5=Note; $10=Note; $20=Note; $50=Note | Is it a coin or a note?
+check: mcq | Which one is a note? | $10* | $2 | 50c
+check: tf | A bigger coin is always worth more. | false | A $2 coin is smaller than a 50c coin but worth more.
+check: mcq | What tells you what money is worth? | The number on it* | Its size | Its colour
+home: Look at some coins with a grown-up. Find the number on each one.
+skill: coins
+
+@lesson 1.2 | Counting coins | 🧮 | bank
+hook: You have a handful of coins. How do you know how much is there?
+learn: Start with the biggest coins first. It makes counting faster.
+learn: Two 50c coins make $1. Two $1 coins make $2.
+try: 50c + 50c = $1 :: gap | $1 + $1 = $_ | 2
+play: gen | add | 4
+check: gap | 20c + 20c + 10c = _c | 50
+check: mcq | Which makes $1? | Two 50c coins* | Two 20c coins | Five 10c coins and a 20c coin
+check: tf | Five 20c coins make $1. | true
+home: Count the coins in your money box, biggest first.
+skill: counting
+
+@lesson 1.3 | What can money buy? | 🛒 | stall
+hook: A banana, a bike and a box of crayons walk into a shop. Which costs the most?
+learn: Different things cost different amounts.
+learn: Small things like a banana cost a little. Big things like a bike cost a lot.
+learn: Knowing roughly what things cost helps you plan.
+play: match | Match each thing to its price | Banana=50c; Box of crayons=$5; Movie ticket=$15; Bike=$200
+check: mcq | Which costs the most? | A bike* | A banana | A pencil
+check: mcq | About how much is an ice block? | $2* | $200 | 2c
+check: tf | A bike costs about the same as a banana. | false
+home: At the shop, guess a price, then check the tag.
+skill: prices
+
+@lesson 1.4 | Money hunt | 🔎 | home
+hook: Money is hiding all over this room. Can you find it?
+learn: Money is anything people agree to swap for things. Coins and notes are money. Toys are not.
+learn: Some money is not on paper at all. Cards and phones can pay too.
+play: tap | Tap all the money in the room | 🪙:yes:Coins are money; 💵:yes:Notes are money; 💳:yes:A card can pay with money from the bank; 🧸:no; 🍎:no; ⚽:no; 💶:yes:Money from another country is still money; 📚:no
+check: tf | A bank card can pay for things. | true
+check: mcq | Which of these is money? | A $5 note* | A teddy | A football
+check: tf | Toys are a kind of money. | false
+home: Next time you go shopping, watch how the grown-up pays.
+skill: coins
+
+@lesson 1.5 | Swapping and money | 🔄 | museum
+hook: Long ago there was no money. How did people get what they needed?
+learn: People swapped things. That is called bartering.
+learn: Swapping is hard if the other person doesn't want your thing.
+learn: Money fixes that. Everyone takes it, so you can swap it for anything.
+play: path | You have apples and want bread. The baker doesn't want apples. | Find someone who wants apples and has bread => good: You found a swap! But it took all morning. That is why money is handy. | Give up and go hungry => bad: Oh no. With money you could just buy the bread. | Grab the bread anyway => bad: That is taking, not swapping. It isn't fair to the baker.
+check: mcq | What is bartering? | Swapping things without money* | Saving money | Buying with a card
+check: tf | Money makes swapping easier. | true
+check: mcq | Why is money handy? | Almost everyone will take it* | It is pretty | It never runs out
+home: Swap something fairly with someone in your family today.
+skill: barter
+
+@lesson 1.6 | Keeping money safe | 🔐 | bank
+hook: You got $10 for your birthday. Where should it live?
+learn: Money can get lost if you leave it lying around.
+learn: A money box or a bank keeps it safe until you need it.
+learn: Never give money or card numbers to someone you don't know.
+play: order | Put the steps in order for keeping birthday money safe | Count the money; Tell a grown-up how much you got; Put it in your money box or bank; Write down what you saved
+check: mcq | Where is the safest place for your money? | A money box or bank* | Under your pillow | In your pocket at the park
+check: tf | You should tell a stranger your bank card number. | false
+check: mcq | Who should you tell when you get money? | A grown-up you trust* | Nobody ever | A stranger online
+home: Find a safe place at home for your money with a grown-up.
+skill: safety
+
+@band builders
+@unit 1 | Budget basics | Plan where money goes before you spend it
+@unit 2 | Best value | Use unit prices to spot the real deal
+@unit 3 | Interest | How banks pay you for saving
+@unit 4 | Ways to pay | Cash, cards, phones and pay-later
+@unit 5 | Goals and plans | Big goals, small steps
+@unit 6 | Advertising | How ads try to change your mind
+@unit 7 | Earning more | Jobs, side hustles and pricing your work
+@unit 8 | Money mistakes | What to do when money goes wrong
+
+@lesson 1.1 | What is a budget? | 📋 | bank
+hook: Two kids get the same pocket money. One always runs out. One never does. What's the difference?
+learn: A budget is a plan for your money before you spend it.
+learn: It splits money into needs, wants and savings.
+learn: A plan beats hoping there is some left at the end of the week.
+play: sort | Need, Want, Save | Lunch at school=Need; New game skin=Want; Bus fare=Need; Lollies=Want; Money for a bike=Save; Rain jacket=Need; Cinema ticket=Want; Birthday present fund=Save | Sort each spend
+check: mcq | What is a budget? | A plan for money before you spend it* | A list of things you bought | A type of bank account
+check: tf | A budget only matters if you have lots of money. | false | Budgets help most when money is tight.
+check: mcq | Which is usually a need? | Food* | A new phone case | Concert tickets
+home: Write a three-line budget for your next pocket money: needs, wants, save.
+skill: budget
+
+@lesson 1.2 | Pay yourself first | 🥇 | bank
+hook: Most people try to save what's left over. Usually nothing is left. Is there a better way?
+learn: Paying yourself first means saving the moment money arrives.
+learn: Then you spend what's left, without touching the savings.
+learn: Your Chorecast budget split does this for you every payday.
+play: order | Put payday in the best order | Money arrives; Move your savings first; Pay for needs; Spend some on wants; Check what's left at the end of the week
+check: mcq | When should savings come out? | As soon as the money arrives* | At the end of the week | Only when you feel like it
+check: tf | Paying yourself first means buying yourself a treat first. | false | It means saving first.
+check: mcq | Why does saving first work? | You can't spend what you've already put away* | Banks charge less | Saving is more fun than spending
+home: Next payday, move your savings before you buy anything.
+skill: saving
+
+@lesson 1.3 | Split it three ways | 🍕 | bank
+hook: If you got $20, how much should you save?
+learn: One simple rule: half for needs, almost a third for wants, and a fifth to save.
+learn: That's 50% for needs, 30% for wants and 20% for savings.
+learn: It's a starting point, not a law. Change it to fit your goals.
+try: $10 × 20% = $2 :: gap | 20% of $20 = $_ | 4
+play: gen | split | 4
+check: gap | 50% of $40 = $_ | 20
+check: mcq | In the 50/30/20 idea, what is the 20% for? | Savings* | Wants | Needs
+check: slider | You earn $30. About how much is 30%? | 0 | 30 | 9 | $ | 1 | 1
+home: Try the 50/30/20 split on your next pocket money.
+skill: percent
+
+@lesson 1.4 | Build a weekly budget | 🗓️ | home
+hook: Your week has $40 coming in. Can you make every dollar do a job?
+learn: List what comes in. Then list where it must go.
+learn: Needs first. Then savings. Then wants.
+learn: Leave some money spare. Surprises happen.
+play: budget | Plan your $40 week | 40 | Bus fares=10; Lunches=10; Savings=0; Fun=0 | Lost library book:8
+check: mcq | What goes first in a budget? | Needs* | Wants | Treats
+check: tf | A good budget leaves some money for surprises. | true
+check: mcq | Your plan spends $45 but you only get $40. What now? | Cut some wants* | Hope it works out | Borrow from a friend every week
+home: Plan next week's money with a grown-up, including $2 spare for surprises.
+skill: budget
+
+@lesson 1.5 | Tracking spending | 🧾 | stall
+hook: You had $25 on Monday and $3 on Friday. Where did it go?
+learn: Tracking means writing down what you spend.
+learn: Little spends add up fast. Three $4 drinks a week is $12.
+learn: When you can see it, you can change it.
+play: diff | Your plan and what you really spent. Tap what changed. | Bus $10; Lunch $10; Savings $5; Fun $0 | Bus $10; Lunch $14; Savings $0; Fun $11
+check: gap | Three $4 drinks cost $_ | 12
+check: mcq | Why track your spending? | To see where money really goes* | To make shops happy | Because banks make you
+check: tf | Small spends don't matter. | false | Small spends add up quickly.
+home: Write down everything you spend for one week.
+skill: tracking
+
+@lesson 1.6 | When money runs out | 😬 | home
+hook: It's Wednesday. You've spent the whole week's money. Now what?
+learn: Everyone gets it wrong sometimes. The fix is to learn, not to panic.
+learn: Pause spending, look at what happened, and plan better next time.
+play: chat | Your friend wants to borrow $10 again | them: Hey, can you lend me $10? I'll pay you back next week. | me: I can't this week, my budget's tight*/Sure, here's all my money/I'll borrow it from my mum for you | them: Aw, come on. You did last time. | me: Last time took a month to come back. Maybe next week*/Fine, take it/Never ask me again
+check: mcq | You've run out mid-week. What's the best first step? | Stop spending and look at what happened* | Borrow money straight away | Pretend it didn't happen
+check: tf | Saying no to lending money can be the kind thing to do. | true
+check: mcq | What helps next week go better? | A plan with some money spare* | Spending faster | Not looking at your money
+home: Think of one change that would make your money last all week.
+skill: budget
+
+@band makers
+@unit 1 | Bank accounts | Everyday, savings and how to choose
+@unit 2 | Cards and borrowing | Debit, credit and the true cost of debt
+@unit 3 | Scams and fraud | Spot it, stop it, report it
+@unit 4 | Comparing deals | Phone plans, subscriptions and the fine print
+@unit 5 | Your first pay | Wages, tax and your payslip
+@unit 6 | Big purchases | Saving up versus borrowing
+@unit 7 | Insurance | Paying a little to avoid losing a lot
+@unit 8 | Money and feelings | Spending moods and peer pressure
+
+@lesson 1.1 | Why use a bank? | 🏦 | bank
+hook: Your gran keeps her savings in a tin. What could go wrong?
+learn: Banks keep money safe, let you pay without cash, and can pay you interest.
+learn: In {nz:New Zealand~au:Australia}, bank deposits are protected up to a limit by a government scheme if a bank fails.
+learn: Cash at home can be lost, stolen or burned, and it never earns interest.
+play: debate | Cash in a tin or money in a bank? | A bank keeps it safer and can pay interest* | A tin is better because you can always see it | The tin feels safe because you can touch it. Some people also like that cash stops them overspending.
+check: mcq | Which is NOT a usual reason to use a bank? | To get free money for nothing* | To keep money safe | To pay without cash
+check: tf | Money in a tin at home earns interest. | false
+check: mcq | What can happen to cash kept at home? | It can be lost or stolen* | It grows by itself | The government doubles it
+home: Ask a grown-up which bank they use and why they chose it.
+skill: banking
+
+@lesson 1.2 | Everyday or savings? | 💳 | bank
+hook: Why do most people have more than one bank account?
+learn: An everyday account is for spending. It usually comes with a card.
+learn: A savings account pays more interest but can be harder to spend from.
+learn: Keeping them apart stops savings leaking into daily spending.
+play: match | Match each account to what it's good for | Everyday account=Paying for lunch with a card; Savings account=Money for a car in two years; Term deposit=Locking money away for a set time at a set rate; Kids' or youth account=Low or no fees while you're young
+check: mcq | Which account usually pays the most interest? | Savings or term deposit* | Everyday account | They all pay the same
+check: tf | Keeping savings in a separate account can help you not spend them. | true
+check: mcq | What usually comes with an everyday account? | A bank card* | A loan | A house
+home: Look at a bank's website with a grown-up and find one youth account.
+skill: banking
+
+@lesson 1.3 | Fees and interest | 💸 | bank
+hook: One account pays 3% interest but charges $5 a month. Another pays 1% with no fees. Which wins?
+learn: Interest is what the bank pays you. Fees are what you pay the bank.
+learn: Always compare both. A high rate can be eaten by fees.
+learn: Interest rates are yearly. 3% on $500 is about $15 a year.
+try: 2% of $1,000 is $20 a year :: gap | 3% of $500 a year = $_ | 15
+play: slider | You save $600 at 3% a year, with a $5 monthly fee. Roughly how much do you end the year with? | 500 | 700 | 558 | $ | 12 | 1
+check: mcq | What eats into interest? | Fees* | Deposits | Your card colour
+check: gap | 2% of $1,000 for a year = $_ | 20
+check: tf | The account with the highest interest rate is always best. | false | Fees can make it worse.
+home: Find the monthly fee on one of your family's accounts.
+skill: interest
+
+@lesson 1.4 | Reading a statement | 📄 | bank
+hook: Your bank statement says you spent $9.99 at a place you've never heard of. What now?
+learn: A statement lists every payment in and out of your account.
+learn: Check it every month. Mistakes and fraud are easier to fix early.
+learn: Watch for subscriptions you forgot about.
+play: diff | Last month and this month. Tap the payments that are new. | Pocket money +$20; Bus card −$10; Music app −$5.99 | Pocket money +$20; Bus card −$10; Music app −$5.99; GameZone −$9.99; GameZone −$9.99
+check: mcq | You see a payment you don't recognise. What first? | Tell a grown-up and contact the bank* | Ignore it | Post about it online
+check: tf | Checking your statement every month is a good habit. | true
+check: mcq | What often sneaks onto statements? | Forgotten subscriptions* | Free gifts | Tax refunds
+home: Look over a real statement with a grown-up and spot one subscription.
+skill: tracking
+
+@lesson 1.5 | Keeping your account safe | 🛡️ | online
+hook: A text says your bank account is locked. Click to fix it! Do you?
+learn: Banks never ask for your password or PIN by text or email.
+learn: Scammers copy bank logos and make you rush.
+learn: If unsure, call the number on the back of your card.
+play: scam | Real or scam? | Your bank: Click here within 1 hour or your account closes=scam; Your card ending 4421 was used at City Bakery for $6.50=real; We need your PIN to verify you. Reply now=scam; Your monthly statement is ready. Log in through our app to view it=real; You have won $500! Pay a $20 fee to claim=scam | Rushing you, asking for a PIN, or asking you to pay to get money are big warning signs.
+check: tf | A bank might text you asking for your PIN. | false
+check: mcq | A message says you must act in 1 hour. That's… | A classic scam pressure trick* | Normal bank behaviour | A good deal
+check: mcq | The safest way to check a weird message from your bank? | Call the number on your card* | Click the link | Reply to the text
+home: Set up a strong password or PIN with a grown-up, and never share it.
+skill: scams
+
+@lesson 1.6 | Choosing an account | 🔍 | bank
+hook: Three banks all want your first job's pay. How do you choose?
+learn: Compare fees, interest, the app, and how easy it is to get help.
+learn: Youth accounts often have no fees until you're older.
+learn: You can switch banks later. You're not stuck forever.
+play: mcq | You have $1,000 to save for a year. Which account earns you more? | Bank B: 1.5% and no fees, so about $15* | Bank A: 3% but a $2 monthly fee, so about $6 | They earn exactly the same
+check: mcq | What should you compare between accounts? | Fees, interest and the app* | Only the logo | Which one your friend likes
+check: tf | Once you pick a bank you can never change. | false
+check: mcq | Why are youth accounts popular? | Low or no fees* | They pay double interest | They come with a free car
+home: Pick the account you'd choose and explain why to a grown-up.
+skill: banking
+
+@band launchers
+@unit 1 | Payslips and tax | Read every line of a payslip
+@unit 2 | Renting | Bonds, rent and your rights as a tenant
+@unit 3 | Debt and credit scores | Borrowing well and building a record
+@unit 4 | Budgeting for life | Running your money when you leave home
+@unit 5 | Adult banking | Accounts, fees, transfers and online safety
+@unit 6 | Paying for study | {nz:StudyLink, fees-free and student loans~au:HECS-HELP and study costs}
+@unit 7 | Big money moves | Cars, phones and your first flat
+@unit 8 | Financial independence | A plan for your twenties
+
+@lesson 1.1 | Gross and net pay | 🧾 | bank
+hook: Your job pays $20 an hour. You work 10 hours. Why isn't $200 in your account?
+learn: Gross pay is what you earn before anything comes out.
+learn: Net pay, or take-home pay, is what lands in your account.
+learn: Tax and other deductions sit in between.
+try: 10 hours × $20 = $200 gross :: gap | 15 hours × $22 = $_ gross | 330
+play: gen | percent | 4
+check: mcq | What is net pay? | What you take home after deductions* | What you earn before tax | Your hourly rate
+check: gap | Gross $300, deductions $45. Net = $_ | 255
+check: tf | Gross pay is always bigger than or equal to net pay. | true
+home: Ask a grown-up to show you the gross and net lines on a payslip.
+skill: payslip
+
+@lesson 1.2 | How income tax works | 🏛️ | townhall
+hook: If you earn more, do you lose more of every dollar to tax?
+learn: Income tax is taken from your pay by your employer and sent to {nz:Inland Revenue (IRD)~au:the Australian Taxation Office (ATO)}.
+learn: Rates go up in steps called brackets. A higher rate only applies to the part of your income above each step.
+learn: So a pay rise never leaves you worse off after tax.
+learn: Rates change from time to time. Check {nz:ird.govt.nz~au:ato.gov.au} for this year's numbers.
+play: debate | Is it true that a pay rise can push you into a higher bracket and leave you with less? | No. Only the extra dollars are taxed at the higher rate* | Yes. All your income gets taxed at the new rate | Some benefits and student loan repayments can change with income, so it's worth checking the whole picture.
+check: mcq | Who usually takes tax from your pay? | Your employer* | You, at the end of the year only | Your bank
+check: tf | Moving into a higher tax bracket makes all your income taxed at that rate. | false
+check: mcq | Where do you find this year's official tax rates? | {nz:ird.govt.nz~au:ato.gov.au}* | A social media post | Your friend's guess
+home: Look up this year's tax rates on {nz:ird.govt.nz~au:ato.gov.au} with a grown-up.
+skill: tax
+
+@lesson 1.3 | Your tax details | 🔢 | townhall
+hook: Your new boss hands you a form on day one. What do you write?
+learn: {nz:In New Zealand you give your employer your IRD number and a tax code on a Tax code declaration (IR330).~au:In Australia you give your employer your Tax File Number (TFN) on a TFN declaration.}
+learn: {nz:Your main job usually uses code M. Add SL if you have a student loan. A second job uses a secondary code.~au:You claim the tax-free threshold from one employer only. If you have two jobs, the second one usually doesn't claim it.}
+learn: The wrong details can mean too much or too little tax. You can fix it by giving your employer a new form.
+play: mcq | {nz:Your only job, no student loan. Which tax code?~au:Your first and only job. Should you claim the tax-free threshold?} | {nz:M~au:Yes}* | {nz:S~au:No} | {nz:ND~au:Only in July}
+check: tf | You can fix wrong tax details by giving your employer an updated form. | true
+check: mcq | {nz:What does SL added to a tax code mean?~au:How many employers should you claim the tax-free threshold from?} | {nz:You have a student loan~au:Just one}* | {nz:Small Living~au:Every one} | {nz:Second Language~au:None ever}
+check: mcq | What happens with wrong tax details? | You may pay too much or too little tax* | Nothing at all | Your job ends
+home: Find where your {nz:IRD number~au:TFN} would come from, and how to keep it private.
+skill: tax
+
+@lesson 1.4 | {nz:KiwiSaver~au:Super} on your payslip | 🌱 | shares
+hook: There's a deduction on your payslip for retirement. You're 17. Why bother?
+learn: {nz:KiwiSaver is a savings scheme for when you're older. You put in a share of your pay, your employer adds more, and the government may add a yearly top-up.~au:Superannuation is money your employer must pay into a fund for your retirement, on top of your wage.}
+learn: {nz:From April 2026 the default is 3.5% of your pay from you, and usually a matching amount from your employer. Check the current rates on ird.govt.nz.~au:The Super Guarantee is 12% of your ordinary earnings, paid by your employer. Check the current rate on ato.gov.au.}
+learn: Starting young means decades of compounding.
+play: compound | Money left to grow for decades snowballs | 1000 | 6 | 40
+check: tf | Money put in at 17 has more time to grow than money put in at 47. | true
+check: mcq | {nz:Who usually adds to your KiwiSaver as well as you?~au:Who pays the Super Guarantee?} | {nz:Your employer~au:Your employer}* | {nz:Your school~au:You, out of your wage} | {nz:Nobody~au:Nobody}
+check: mcq | Why does starting young help so much? | More years of compound growth* | Young people get better rates | It doesn't help at all
+home: Ask a grown-up which fund they're in, and what its yearly fee is.
+skill: retirement
+
+@lesson 1.5 | Deductions | ➖ | bank
+hook: Two payslips, same hours, different take-home pay. Can you spot why?
+learn: Deductions can include tax, {nz:the ACC earners' levy, KiwiSaver and student loan repayments~au:the Medicare levy (withheld with your tax), salary sacrifice or union fees}.
+learn: Each line should have a name and an amount. If one's a mystery, ask.
+play: diff | Week 1 and week 2. Tap what changed. | Hours 20; Rate $23.50; Gross $470.00; Tax $58.10; {nz:KiwiSaver $16.45~au:Union fee $5.00}; Net $395.45 | Hours 20; Rate $23.50; Gross $470.00; Tax $58.10; {nz:KiwiSaver $16.45~au:Union fee $5.00}; Uniform $30.00; Net $365.45
+check: mcq | A deduction you don't recognise appears. What should you do? | Ask your employer what it's for* | Quit the job | Ignore it
+check: tf | Every deduction on a payslip should be explained. | true
+check: gap | Gross $500, deductions $95. Net = $_ | 405
+home: Find three different deductions on a real payslip and say what each one is.
+skill: payslip
+
+@lesson 1.6 | Fixing a pay mistake | 🛠️ | workshop
+hook: You worked 18 hours. Your payslip says 15. Awkward, or easy to fix?
+learn: Employers must keep accurate records and pay you for all the hours you work.
+learn: Raise it politely, early and in writing, with your own record of hours.
+learn: If it isn't fixed, {nz:Employment New Zealand~au:the Fair Work Ombudsman} can help.
+play: chat | Your payslip is short by 3 hours | them: Hi! Everything okay with your first pay? | me: Mostly! I think 3 hours are missing. I worked 18 and it shows 15. Here's my record*/You stole my money/It's fine, never mind | them: Oh, let me check the roster. Can you send me the dates? | me: Sure, I'll email them today*/Can't you just trust me?/Forget it
+check: mcq | Best way to raise a pay mistake? | Politely, early, with your own records* | Angrily, in front of everyone | Wait a year
+check: tf | Keeping your own record of hours is a smart idea. | true
+check: mcq | Who can help if a pay problem isn't fixed? | {nz:Employment New Zealand~au:The Fair Work Ombudsman}* | Your bank | Nobody
+home: Start a simple note on your phone to track hours you work.
+skill: workrights

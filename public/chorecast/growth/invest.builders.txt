@@ -1,0 +1,79 @@
+# invest · builders
+@unit 1 | Shares and companies | Owning part of a business
+@unit 2 | Risk and reward | Why some investments jump around
+@unit 3 | Diversification | Many baskets, fewer broken eggs
+@unit 4 | Compound growth | Time is your superpower
+@unit 5 | Index funds | Owning a bit of the whole market
+@unit 6 | Market wobbles | Staying calm when prices fall
+@unit 7 | Fees and costs | Small fees make a big difference
+@unit 8 | Investing for goals | Matching money to time
+
+@lesson 1.1 | What is a share? | 🧩 | shares
+hook: Could you own a tiny piece of your favourite company?
+learn: A company can be split into millions of pieces called shares.
+learn: If you own a share, you own a tiny bit of the company.
+learn: When the company does well, your piece can be worth more.
+play: match | Match each word to what it means | Share=A tiny piece of a company; Shareholder=Someone who owns shares; Dividend=Profit shared with owners; Share price=What one share costs today
+check: mcq | What is a share? | A tiny piece of a company* | A loan to a friend | A type of bank account
+check: tf | Shareholders own part of the company. | true
+check: mcq | What is a dividend? | Profit paid to shareholders* | A company's logo | A tax
+home: Name three companies you know. Ask a grown-up if they sell shares.
+skill: shares
+
+@lesson 1.2 | Why companies sell shares | 🏗️ | shares
+hook: A smoothie shop wants to open 10 more stores but doesn't have the money. What can it do?
+learn: Companies sell shares to raise money to grow.
+learn: Investors give money now, hoping to share in profits later.
+play: order | Put the company's story in order | A small company needs money to grow; It sells shares to investors; It uses the money to open new stores; It makes more profit; Shareholders may get dividends or higher share prices
+check: mcq | Why do companies sell shares? | To raise money to grow* | To get rid of customers | Because the law says so
+check: tf | Investors always get their money back. | false | Companies can fail, and shares can fall in value.
+check: mcq | What do investors hope for? | To share in future profits* | Free smoothies forever | A guaranteed prize
+home: Think of a local business. What would it need money for to grow?
+skill: shares
+
+@lesson 1.3 | Prices go up and down | 🎢 | shares
+hook: If a share price drops, have you lost money?
+learn: Share prices move every day as people buy and sell.
+learn: You only lock in a loss if you sell when the price is low.
+learn: Over long periods, share markets have usually grown, but there are no guarantees.
+play: market | Ride 10 years of a pretend share market | 10
+check: mcq | A share falls 20% in a week. What's often wise? | Stay calm and think long term* | Sell everything in a panic | Buy lollies instead
+check: tf | Share prices can go down as well as up. | true
+check: mcq | When is a loss "locked in"? | When you sell at the low price* | When the price wiggles | Never
+home: Look at your Chorecast market. Which fund wiggles most?
+skill: cycles
+
+@lesson 1.4 | Dividends | 🍰 | shares
+hook: You own 100 shares and the company pays 5c per share. How much do you get?
+learn: Some companies share profits with owners. That's a dividend.
+learn: Dividend = number of shares × amount per share.
+try: 50 shares × 10c = $5 :: gap | 100 shares × 5c = $_ | 5
+play: gen | percent | 3
+check: gap | 200 shares × 10c = $_ | 20
+check: tf | Every company pays dividends. | false | Many growing companies keep their profits to grow instead.
+check: mcq | What is a dividend paid from? | The company's profits* | The shareholder's bank | The government
+home: Explain dividends to someone using a pizza as the company.
+skill: shares
+
+@lesson 1.5 | Good business or not? | 🧐 | stall
+hook: Two companies want your money. How do you tell which is stronger?
+learn: Strong businesses usually make a profit, have loyal customers and don't owe too much.
+learn: A cool logo or a famous owner doesn't make a business good.
+play: debate | Which is the better reason to invest in a company? | It makes a steady profit and customers keep coming back* | Everyone online is talking about it | Online buzz can mean a company is growing fast, but buzz alone often fades.
+check: mcq | Which is a sign of a strong business? | Steady profits* | A flashy advert | A celebrity owner
+check: tf | A company that's popular on social media is always a good investment. | false
+check: mcq | Why do loyal customers matter? | They keep buying, so the business keeps earning* | They make the logo nicer | They don't matter
+home: Pick a business you like and list two reasons it might be strong.
+skill: business
+
+@lesson 1.6 | Hot tips | 🔥 | online
+hook: Your friend says a share is going to the moon and you must buy now. Do you?
+learn: Hot tips often come too late, or are wrong.
+learn: Good investors take their time and never feel rushed.
+play: chat | A friend has a "can't lose" tip | them: Quick! Rocket Startups is going to double tomorrow. Put all your money in! | me: How do you know? I don't rush money decisions*/OK, all of it!/I'll borrow money to buy more | them: Everyone's saying it online! | me: I'll look into it and maybe put in a little, not everything*/Then it must be true/I'll sell my bike to buy some
+check: mcq | Someone says "buy now or miss out!" What's that? | A pressure trick* | Great advice | A guarantee
+check: tf | Putting all your money in one hot tip is risky. | true
+check: mcq | What do good investors do with tips? | Check them carefully and take their time* | Act straight away | Tell everyone to buy
+home: Spot one ad or post that tries to rush you, and tell a grown-up.
+skill: hype
+

@@ -1,0 +1,78 @@
+# maths · sprouts
+@unit 1 | Money maths | Adding coins and giving change
+@unit 2 | Telling time | Clocks, minutes and being on time
+@unit 3 | Halves and quarters | Sharing fairly
+@unit 4 | Measuring | Cups, metres and kilos
+@unit 5 | Shapes around us | Spotting shapes at home
+@unit 6 | Patterns | What comes next?
+@unit 7 | Bigger and smaller | Comparing numbers
+@unit 8 | Estimating | Good guesses
+
+@lesson 1.1 | Adding money | ➕ | stall
+hook: An apple is 50c and a banana is 40c. Do you have enough with $1?
+learn: To add money, add the cents, then the dollars.
+learn: 100 cents makes $1.
+try: 50c + 40c = 90c :: gap | 30c + 50c = _c | 80
+play: gen | add | 4
+check: gap | 60c + 40c = _c | 100
+check: mcq | 100 cents is the same as… | $1* | $10 | 10c
+check: tf | 50c + 50c = $1 | true
+home: Add up the prices of two things on a shopping list.
+skill: adding
+
+@lesson 1.2 | Giving change | 💵 | stall
+hook: You pay $2 for a $1.50 ice block. How much comes back?
+learn: Change is what you get back when you pay too much.
+learn: Count up from the price to what you paid.
+try: $1.50 up to $2 is 50c :: gap | Something costs $3. You pay $5. Change = $_ | 2
+play: gen | change | 3
+check: gap | A 70c lolly, paid with $1. Change = _c | 30
+check: tf | Change is money you get back. | true
+check: mcq | Price $4, you pay $5. Change? | $1* | $5 | $9
+home: Play shop at home and give the right change.
+skill: change
+
+@lesson 1.3 | Telling the time | 🕒 | home
+hook: Swimming starts at 4 o'clock. It's 3:30. Do you have time to eat?
+learn: The short hand shows the hour. The long hand shows the minutes.
+learn: Half past means 30 minutes after the hour.
+play: match | Match the time words to the clock | 3 o'clock=3:00; Half past 3=3:30; Quarter past 3=3:15; Quarter to 4=3:45
+check: mcq | Half past 7 is… | 7:30* | 7:00 | 7:15
+check: tf | There are 60 minutes in an hour. | true
+check: gap | It's 3:30. Swimming is at 4:00. That's _ minutes away. | 30
+home: Tell a grown-up the time three times today.
+skill: time
+
+@lesson 1.4 | Halves and quarters | 🍕 | kitchen
+hook: Two kids, one pizza. How do you share fairly?
+learn: A half is one of 2 equal parts. A quarter is one of 4.
+learn: Half of 8 is 4. A quarter of 8 is 2.
+play: gen | percent | 3
+check: gap | Half of 10 = _ | 5
+check: gap | A quarter of 12 = _ | 3
+check: mcq | 4 kids share a pizza equally. Each gets… | A quarter* | A half | The whole pizza
+home: Cut a sandwich into quarters.
+skill: fractions
+
+@lesson 1.5 | Good guesses | 🤔 | home
+hook: How many jellybeans are in the jar? Don't count. Guess!
+learn: Estimating is making a smart guess.
+learn: Use what you know. A handful is about 20.
+play: slider | About how many pencils fit in a pencil case? | 0 | 100 | 20 | pencils | 10 | 1
+check: tf | An estimate has to be exactly right. | false
+check: mcq | About how long is a pencil? | 15 cm* | 15 metres | 1 cm
+check: slider | About how many kids are in a class? | 0 | 100 | 25 | kids | 8 | 1
+home: Guess how many steps from your bed to the door, then count.
+skill: estimating
+
+@lesson 1.6 | Catch the sale | ⏱️ | stall
+hook: A price tag zooms past. Tap when it's on SALE!
+learn: Sales make things cheaper for a short time.
+learn: Saving money on things you already need is smart. Buying things you don't need because they're cheap isn't.
+play: timing | Tap when the marker reaches the sale | Catch it! | SALE
+check: tf | A sale is smart if you buy things you don't need. | false
+check: mcq | A $10 toy is half price. It now costs… | $5* | $10 | $20
+check: mcq | When is a sale a good deal? | When you needed it anyway* | Always | Never
+home: Find a sale sign at the shop and work out the new price.
+skill: sales
+

@@ -1,0 +1,316 @@
+# Give and Change
+@band sprouts
+@unit 1 | Kindness counts | Small kind acts make a big difference
+@unit 2 | Sharing | Sharing what we have
+@unit 3 | Picking a cause | What do you care about?
+@unit 4 | My Give jar | Saving up to help
+@unit 5 | Helping animals | Shelters, pets and wildlife
+@unit 6 | Helping nature | Trees, beaches and rubbish
+@unit 7 | Helping people | Food banks and community
+@unit 8 | Kids who changed things | Real kids, real help
+
+@lesson 1.1 | Kind acts | 💛 | garden
+hook: Can one small kind thing really change someone's day?
+learn: Kindness is doing something nice for someone, even when you don't have to.
+learn: It can be a smile, a helping hand or sharing a toy.
+play: sort | Kind, Not kind | Holding the door open=Kind; Saying thank you=Kind; Laughing at someone who fell=Not kind; Sharing your crayons=Kind; Leaving someone out of a game=Not kind; Helping pick up dropped books=Kind | Is it kind?
+check: mcq | Which is a kind act? | Helping a friend carry their bag* | Taking their snack | Ignoring them
+check: tf | Kindness has to cost money. | false
+check: mcq | How does kindness make people feel? | Happier* | Sadder | Nothing
+home: Do three kind things today and tell a grown-up what they were.
+skill: kindness
+
+@lesson 1.2 | What does giving mean? | 🎁 | garden
+hook: Can you give without spending money?
+learn: Giving means sharing what you have to help others.
+learn: You can give money, time, things or kindness.
+play: match | Match each kind of giving to an example | Money=Coins from your Give jar for the shelter; Time=Helping at a beach clean-up; Things=Toys you've outgrown; Kindness=Making a card for someone who's sick
+check: mcq | Which is giving time? | Helping at a clean-up* | Buying a toy for yourself | Watching TV
+check: tf | You can give without money. | true
+check: mcq | What could you give from your toy box? | Toys you don't play with any more* | Toys that are broken and dirty | Your sibling's toys without asking
+home: Find one thing you've outgrown that someone else could use.
+skill: giving
+
+@lesson 1.3 | What do you care about? | 🌏 | garden
+hook: Animals, people, or the planet. Which would you help first?
+learn: A cause is something you want to help.
+learn: Picking a cause you care about makes giving feel good.
+play: mcq | Which cause do you care about most right now? | Animals* | People who need food or a home* | Nature and the planet* | Kids at my school*
+check: mcq | What is a cause? | Something you want to help* | A type of toy | A shop
+check: tf | It's good to pick causes you care about. | true
+check: mcq | An animal shelter helps… | Pets that need homes* | Cars | Computers
+home: Tell a grown-up which cause you'd pick and why.
+skill: giving
+
+@lesson 1.4 | Filling the Give jar | 🫙 | bank
+hook: Your Give jar has 50c. Can tiny amounts help?
+learn: Your Give jar grows a little every payday.
+learn: Lots of small amounts add up to a big help.
+try: 10c each week for 10 weeks is $1 :: gap | 20c each week for 10 weeks = $_ | 2
+play: sort | jars | Saving to help the animal shelter=Give; A new toy=Spend; Money for later=Vault; Shares that might grow=Invest; Buying food for the food bank=Give | Which jar?
+check: tf | Small amounts can add up to a big help. | true
+check: mcq | Which jar is for helping others? | Give* | Spend | Invest
+check: gap | 50c a week for 4 weeks = $_ | 2
+home: Look at your Give jar and decide who it might help.
+skill: giving
+
+@lesson 1.5 | Ryan's well | 💧 | garden
+hook: A 6-year-old heard some kids had to walk hours for clean water. What did he do?
+learn: In 1998, Ryan Hreljac from Canada learned that a well could bring clean water to a village.
+learn: He did extra chores to earn the money, then kept going.
+learn: His idea grew into a charity that has helped build many wells.
+play: order | Put Ryan's story in order | Ryan heard about kids without clean water; He did extra chores to earn money; He raised enough for his first well; People heard and helped too; It grew into a charity helping many communities
+check: mcq | How did Ryan raise his first money? | Doing extra chores* | Winning a prize | Asking strangers online
+check: tf | Kids can help make big changes. | true
+check: mcq | What did Ryan's wells bring? | Clean water* | Toys | Cars
+home: Think of a chore you could do to raise money for a cause.
+skill: giving
+
+@lesson 1.6 | Helping nature | 🌳 | garden
+hook: A beach is covered in rubbish. Can you help?
+learn: Helping nature can mean picking up rubbish, planting trees or saving water.
+learn: Always help with a grown-up, and wear gloves for rubbish.
+play: tap | Tap the things that help nature | 🌱:yes:Planting trees gives animals homes; 🧤:yes:Gloves keep you safe picking up rubbish; 🗑️:yes:Putting rubbish in the bin; 🚿:no; 🛍️:no; ♻️:yes:Recycling saves resources; 💡:no; 🚲:yes:Biking instead of driving
+check: mcq | What should you wear to pick up rubbish? | Gloves* | Sandals only | Nothing
+check: tf | Planting trees helps nature. | true
+check: mcq | Who should you go with to a clean-up? | A grown-up* | Nobody | A stranger
+home: Pick up three bits of rubbish (with gloves and a grown-up).
+skill: environment
+
+@band builders
+@unit 1 | How charities work | Where donations go
+@unit 2 | Volunteering | Giving your time and skills
+@unit 3 | Fundraising | Planning a fundraiser
+@unit 4 | Choosing well | Checking a charity before you give
+@unit 5 | Local heroes | People helping their own community
+@unit 6 | Global giving | Helping people around the world
+@unit 7 | The environment | Projects that protect nature
+@unit 8 | Social entrepreneurs | Businesses that do good
+
+@lesson 1.1 | Where does the money go? | 🏥 | townhall
+hook: You give $10 to a charity. Where does it actually go?
+learn: Charities spend money on their programmes, staff, and fundraising.
+learn: Staff and running costs aren't bad. Good charities need skilled people.
+learn: You can look up registered charities: {nz:charities.govt.nz~au:acnc.gov.au}.
+play: match | Match each charity cost to what it pays for | Programmes=Food parcels for families; Staff=A nurse at a health clinic; Fundraising=Posters for an appeal; Running costs=Rent for the office
+check: mcq | Where can you check if a charity is registered? | {nz:charities.govt.nz~au:acnc.gov.au}* | A random website | Nowhere
+check: tf | All charity spending on staff is wasted. | false | Skilled staff help charities do good work.
+check: mcq | What are programmes? | The actual helping work* | The logo | The CEO's car
+home: Look up a charity you know on {nz:charities.govt.nz~au:acnc.gov.au}.
+skill: charities
+
+@lesson 1.2 | Volunteering | 🙌 | garden
+hook: You don't have money to give. Can you still help?
+learn: Volunteering is giving your time and skills for free.
+learn: You learn new skills, meet people and help your community.
+play: match | Match each skill to a volunteer job | Good with animals=Walking dogs at a shelter; Love reading=Reading to younger kids; Strong and energetic=Planting trees; Good at baking=Baking for a fundraiser
+check: mcq | What is volunteering? | Helping for free* | A paid job | Shopping
+check: tf | Volunteering can help you learn skills. | true
+check: mcq | Which could a kid volunteer for with a grown-up? | A beach clean-up* | Fixing power lines | Flying a plane
+home: Find one volunteering activity for kids near you.
+skill: volunteering
+
+@lesson 1.3 | Plan a fundraiser | 🧁 | stall
+hook: Your class wants to raise $200 for the local shelter. Where to start?
+learn: Set a goal, pick an idea, plan costs, then tell people.
+learn: Remember: costs come out first. You give the profit.
+play: order | Put the fundraiser steps in order | Choose your cause and goal; Pick an idea, like a bake sale; Work out costs and price; Tell people about it; Run it and count the money; Give the money and say thanks
+check: mcq | What should you do before the event? | Plan costs and prices* | Spend all the money | Nothing
+check: gap | You raised $260 and costs were $60. You can give $_ | 200
+check: tf | Thanking people who helped is part of fundraising. | true
+home: Plan a mini fundraiser idea on paper with a goal.
+skill: fundraising
+
+@lesson 1.4 | Check before you give | 🔍 | online
+hook: A website asks for donations for a "very sad cause" with no details. Hmm.
+learn: Scammers sometimes pretend to be charities, especially after disasters.
+learn: Check the charity is registered and give through its official website.
+play: scam | Real charity request or scam? | A registered charity's website with its charity number=real; A message from a stranger asking for gift cards for flood victims=scam; Your school's notice about a food bank drive=real; Pay now or the puppies will die! Bank transfer only=scam | Gift cards, pressure and no details are warning signs.
+check: tf | Real charities ask for donations in gift cards. | false
+check: mcq | How can you check a charity? | Look it up on the charity register* | Trust any message | Ask a stranger
+check: mcq | When are charity scams common? | After big disasters* | Never | Only at Christmas
+home: Find the registration number on a charity's website.
+skill: scams
+
+@lesson 1.5 | Local heroes | 🏘️ | townhall
+hook: Who helps people in your town without being paid?
+learn: Lots of local groups run on volunteers: surf lifesavers, sports clubs, food banks and more.
+learn: These groups make communities stronger.
+play: match | Match the group to how it helps | Surf lifesavers=Keep beaches safe; Food bank=Gives food to families who need it; Sports club volunteers=Run games for kids; Community garden=Grows food together
+check: mcq | Who keeps beaches safe on weekends? | Surf lifesavers* | Bus drivers | Bankers
+check: tf | Many community groups rely on volunteers. | true
+check: mcq | What makes a community stronger? | People helping each other* | Everyone staying inside | Nothing
+home: Thank a local volunteer, like a coach or lifesaver.
+skill: community
+
+@lesson 1.6 | Muhammad Yunus | 🏦 | museum
+hook: Could lending someone $27 change their life?
+learn: Muhammad Yunus, an economist in Bangladesh, lent small amounts to women in a village who couldn't get bank loans.
+learn: They used the loans to start small businesses and paid them back.
+learn: He started Grameen Bank and won the Nobel Peace Prize in 2006.
+play: mystery | He's an economist from Bangladesh; He lent tiny amounts to people banks ignored; He started Grameen Bank; He won the Nobel Peace Prize in 2006 | Muhammad Yunus* | Warren Buffett | Andrew Carnegie
+check: mcq | What did Yunus give people? | Small loans to start businesses* | Free houses | Cars
+check: tf | Small loans can help people start businesses. | true
+check: mcq | What prize did he win? | The Nobel Peace Prize* | An Olympic medal | A music award
+home: Think of a small business someone could start with $30.
+skill: impact
+
+@band makers
+@unit 1 | Social enterprise | Businesses built to do good
+@unit 2 | Measuring impact | How do you know you helped?
+@unit 3 | Effective giving | Getting the most good per dollar
+@unit 4 | Activism and advocacy | Speaking up for change
+@unit 5 | Sustainability | Business and the planet
+@unit 6 | Fair trade and supply chains | Who made your stuff?
+@unit 7 | Philanthropy | Big giving and its critics
+@unit 8 | Your project | Plan a change you can make
+
+@lesson 1.1 | What's a social enterprise? | 🌱 | garden
+hook: Can a business exist mainly to fix a problem?
+learn: A social enterprise trades like a business but puts its mission first.
+learn: Profits are reinvested in the mission, not mainly paid to owners.
+play: sort | Social enterprise, Charity, Regular business | Cafe employing young people leaving care, profits fund training=Social enterprise; Gets donations to run a free helpline=Charity; Sells phone cases for profit=Regular business; Sells soap and funds clean water projects=Social enterprise; Animal shelter funded by donations=Charity | Which is it?
+check: mcq | How is a social enterprise different from a regular business? | Its mission comes first* | It never sells anything | It can't make money
+check: tf | Social enterprises sell products or services. | true
+check: mcq | Where do social enterprise profits mostly go? | Back into the mission* | Only to owners | Nowhere
+home: Find a social enterprise and describe its mission in one line.
+skill: impact
+
+@lesson 1.2 | Measuring impact | 📏 | townhall
+hook: A charity says it "raised awareness". How do you know it helped?
+learn: Impact is the real change that happens, not just activity.
+learn: Good organisations measure outcomes, like more kids reading, not just outputs, like books handed out.
+play: sort | Output, Outcome | 1,000 books handed out=Output; Kids' reading levels went up=Outcome; 50 workshops held=Output; Fewer people sleeping rough=Outcome; 500 posters printed=Output; More families with steady food=Outcome | Is it an output or an outcome?
+check: mcq | Which is an outcome? | More students passing exams* | Number of flyers printed | Hours spent in meetings
+check: tf | Counting activities is the same as measuring impact. | false
+check: mcq | Why measure outcomes? | To check real change happened* | To look busy | It doesn't matter
+home: Pick a charity and find one outcome it reports.
+skill: impact
+
+@lesson 1.3 | Effective giving | 🎯 | bank
+hook: Two charities. One helps 10 people with $1,000. One helps 100. Does it matter which?
+learn: Effective giving means looking at how much good each dollar does.
+learn: It's not the only thing that matters. Causes close to your heart count too.
+play: debate | Should you always give to the charity that helps the most people per dollar? | It's a strong guide, balanced with causes you care about* | Only give to causes near you, no matter what | Giving locally builds your own community and lets you see the impact, which matters too.
+check: mcq | What does effective giving look at? | How much good each dollar does* | Which logo is nicest | Which charity has the most ads
+check: tf | There can be more than one good reason to choose a charity. | true
+check: mcq | Charity A helps 10 people with $1,000. Charity B helps 50. Per dollar, B helps… | 5 times as many people* | The same | Fewer
+home: Compare two charities' annual reports with a grown-up.
+skill: giving
+
+@lesson 1.4 | Speaking up | 📣 | stage
+hook: You think your school should have a recycling system. How do you make it happen?
+learn: Advocacy is speaking up to change rules or decisions.
+learn: Facts, a clear ask and respectful persistence work better than shouting.
+play: chat | Asking your principal for recycling bins | them: Hi! You wanted to talk about recycling? | me: Yes. Our class counted 200 plastic bottles in the bins last week. Could we trial recycling bins for a term?*/Recycling is obviously right and you're wrong/Whatever, forget it | them: That's useful data. Who would empty them? | me: Our enviro group would roster it, and we'd report back each month*/Not my problem/The cleaners, obviously
+check: mcq | What makes advocacy work? | Facts and a clear ask* | Yelling | Giving up fast
+check: tf | Being respectful helps persuade decision makers. | true
+check: mcq | What's a good first step? | Gather some facts* | Start a fight | Complain online anonymously
+home: Pick a small change at school and write a two-sentence pitch with a fact.
+skill: advocacy
+
+@lesson 1.5 | Patagonia | 🏔️ | garden
+hook: A company owner gave his whole company away to fight climate change. Why?
+learn: Yvon Chouinard founded the outdoor clothing company Patagonia.
+learn: For years it pushed repairing clothes instead of buying new.
+learn: In 2022 his family transferred ownership so that profits not reinvested in the business go to fighting climate change.
+play: mystery | He was a rock climber who started making gear; His company makes outdoor clothing; It encourages people to repair clothes; In 2022 his family gave the company's future profits to climate causes | Yvon Chouinard* | Henry Ford | Rod Drury
+check: mcq | What did Patagonia encourage customers to do? | Repair clothes instead of buying new* | Buy more every month | Throw clothes away
+check: tf | A business can choose to put the planet before profits. | true
+check: mcq | What did the 2022 change do? | Sent future profits to climate causes* | Closed the company | Made clothes free
+home: Fix or reuse one thing instead of replacing it.
+skill: sustainability
+
+@lesson 1.6 | Who made my clothes? | 👕 | stall
+hook: A t-shirt costs $5. Who got paid what to make it?
+learn: A supply chain is every step from raw material to the shop.
+learn: Very cheap prices can mean very low pay for workers somewhere in the chain.
+learn: Fair trade labels show producers met certain standards for pay and conditions.
+play: order | Put the t-shirt's supply chain in order | Cotton is grown on a farm; Cotton is spun into thread; Fabric is woven and dyed; Workers sew the t-shirt; It's shipped to a shop; You buy it
+check: mcq | What is a supply chain? | Every step from materials to the shop* | A chain for bikes | A shop's checkout
+check: tf | Very cheap clothes can mean very low pay for workers. | true
+check: mcq | What do fair trade labels show? | Producers met standards for pay and conditions* | The clothes are free | The clothes are stolen
+home: Check the label of a piece of clothing and find where it was made.
+skill: fairtrade
+
+@band launchers
+@unit 1 | Ethical investing | Putting your money where your values are
+@unit 2 | Governance | How charities and companies stay honest
+@unit 3 | Big philanthropy | Pledges, foundations and critics
+@unit 4 | Starting a social enterprise | Mission, model and money
+@unit 5 | Policy and voting | Changing systems, not just helping
+@unit 6 | Global issues | Poverty, health and climate
+@unit 7 | Indigenous enterprise | {nz:Iwi and Māori business~au:Aboriginal and Torres Strait Islander enterprise}
+@unit 8 | Your giving plan | A lifelong giving habit
+
+@lesson 1.1 | Ethical investing | 🌿 | shares
+hook: Your {nz:KiwiSaver~au:super} might own shares in companies you don't agree with. Can you change that?
+learn: Ethical or responsible funds screen out some industries, like weapons or tobacco, or favour companies doing good.
+learn: Labels vary. Read what a fund actually excludes and holds.
+learn: {nz:Mindful Money is a NZ charity that shows what's inside KiwiSaver funds.~au:Super funds publish what they hold, and many offer ethical options.}
+play: sort | Often screened out, Often favoured | Weapons makers=Often screened out; Renewable energy=Often favoured; Tobacco=Often screened out; Companies with strong worker safety=Often favoured; Gambling=Often screened out; Clean water technology=Often favoured | What do ethical funds often do?
+check: mcq | What should you check in an ethical fund? | What it actually excludes and holds* | Only its name | Its logo colour
+check: tf | Every fund labelled "ethical" means the same thing. | false
+check: mcq | What can ethical funds screen out? | Industries like weapons or tobacco* | Every company | Nothing ever
+home: Look up what's inside your {nz:KiwiSaver~au:super} fund.
+skill: ethics
+
+@lesson 1.2 | Governance | 🏛️ | townhall
+hook: Who checks that a charity spends money honestly?
+learn: Boards oversee charities and companies. They set direction and hold leaders to account.
+learn: Audits, annual reports and regulators add checks.
+learn: When governance fails, money can go missing and trust collapses.
+play: match | Match each check to what it does | Board=Oversees leaders and strategy; Audit=Independent check of the accounts; Annual report=Public account of money and results; Regulator=Government body that enforces the rules
+check: mcq | Who oversees a charity's leaders? | The board* | The customers | Nobody
+check: tf | Independent audits help keep organisations honest. | true
+check: mcq | What happens when governance fails? | Money can go missing and trust collapses* | Nothing | Everyone gets a bonus
+home: Read the board page of a charity or company you know.
+skill: governance
+
+@lesson 1.3 | Andrew Carnegie | 📚 | museum
+hook: One of history's richest men said dying rich was a disgrace. What did he do?
+learn: Andrew Carnegie made a fortune in steel in the 1800s.
+learn: He gave much of it away, funding more than 2,500 public libraries.
+learn: Critics point out his steel workers worked long hours for low pay. Both parts of the story matter.
+play: debate | Does giving a fortune away make up for how it was made? | Both matter: how money is made and how it's given* | Yes, giving cancels out everything | Carnegie's libraries helped millions of people learn for free, which is a real and lasting good.
+check: mcq | What did Carnegie fund? | More than 2,500 public libraries* | Space rockets | Video games
+check: tf | Carnegie's story includes both generosity and criticism. | true
+check: mcq | Where did his fortune come from? | Steel* | Software | Sport
+home: Visit or look up the history of your local library.
+skill: philanthropy
+
+@lesson 1.4 | Mission, model, money | 🧭 | stall
+hook: You want to start a social enterprise. What three things must line up?
+learn: Mission: the problem you're solving.
+learn: Model: how you'll earn money doing it.
+learn: Money: enough to survive. A great mission with no income won't last.
+play: match | Match each to an example from a coffee cart that trains young people | Mission=Help young people into work; Model=Sell coffee at events; Money=Prices that cover wages, beans and training; Impact=Number of trainees who get jobs
+check: mcq | Why does the model matter? | Without income the mission can't last* | It doesn't | Only the logo matters
+check: tf | A social enterprise needs to cover its costs. | true
+check: mcq | How might you measure this coffee cart's impact? | Trainees who get jobs* | Cups of coffee only | Number of likes
+home: Sketch mission, model and money for a social enterprise idea.
+skill: impact
+
+@lesson 1.5 | Changing systems | 🗳️ | townhall
+hook: Food banks help hungry families. What would mean fewer families needed them?
+learn: Charity helps people now. Policy change can fix causes, like wages or housing.
+learn: Voting, submissions on laws and joining campaigns are ways to change systems.
+learn: {nz:You can enrol to vote at 17 and vote from 18.~au:You can enrol at 16 and must enrol and vote from 18.}
+play: sort | Helps now, Fixes causes | Donating to a food bank=Helps now; Making a submission on a housing law=Fixes causes; Volunteering at a soup kitchen=Helps now; Voting in an election=Fixes causes; Giving a coat to a coat drive=Helps now; Campaigning for a fairer minimum wage=Fixes causes | Which is which?
+check: mcq | What can fix the causes of a problem? | Policy change* | Ignoring it | Only buying things
+check: tf | Charity and policy change can both matter. | true
+check: mcq | {nz:At what age can you enrol to vote in NZ?~au:At what age can you enrol to vote in Australia?} | {nz:17~au:16}* | 12 | 25
+home: Check how to enrol to vote at {nz:vote.nz~au:aec.gov.au}.
+skill: civics
+
+@lesson 1.6 | Your giving plan | 📝 | bank
+hook: What if giving was a habit for life, not just once?
+learn: A giving plan sets a percentage, picks causes and reviews them each year.
+learn: Many people start with 1% to 10% of income, or give time instead.
+try: 5% of $400 is $20 :: gap | 2% of $1,500 = $_ | 30
+play: budget | Plan a month on $800 that includes giving | 800 | Rent and bills=400; Food=150; Savings=50; Giving=20; Fun=0
+check: mcq | What's in a giving plan? | A percentage, causes and a yearly review* | Only guilt | Random giving
+check: gap | 10% of $250 = $_ | 25
+check: tf | Giving time counts too. | true
+home: Pick a giving percentage for your Give jar and tell a grown-up.
+skill: giving

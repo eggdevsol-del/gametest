@@ -1,0 +1,76 @@
+# work · builders
+@unit 1 | Jobs and skills | What jobs exist and what employers want
+@unit 2 | Reliable worker | Turning up, on time, every time
+@unit 3 | Customer service | Being helpful and polite
+@unit 4 | Your first jobs | Pet sitting, lawns, baking and more
+@unit 5 | Feedback | Learning from "could be better"
+@unit 6 | Time management | Fitting work, school and play
+@unit 7 | Safety at work | Looking after yourself and others
+@unit 8 | Careers map | Paths to the jobs you like
+
+@lesson 1.1 | So many jobs | 🗺️ | workshop
+hook: There are thousands of different jobs. How many can you name in 30 seconds?
+learn: Jobs fit into groups like health, building, technology, the outdoors, creative work and helping people.
+learn: Many jobs need skills you can start building now.
+play: sort | Health, Building, Technology, Outdoors | Nurse=Health; Builder=Building; App developer=Technology; Park ranger=Outdoors; Dentist=Health; Electrician=Building; Game designer=Technology; Farmer=Outdoors | Which group does each job fit?
+check: mcq | Which job is in the health group? | Physiotherapist* | Plumber | Coder
+check: tf | You can start building job skills while you're still at school. | true
+check: mcq | Which job is outdoors? | Ranger* | Accountant | Software tester
+home: Ask three grown-ups what their job is and what they like about it.
+skill: careers
+
+@lesson 1.2 | What employers want | 🧲 | workshop
+hook: Two people apply for a job. One is brilliant but late. One is reliable and keen. Who gets it?
+learn: Employers value reliability, attitude, teamwork and willingness to learn.
+learn: These are called soft skills. They matter in every job.
+play: sort | Soft skill, Not a soft skill | Turning up on time=Soft skill; Being polite to customers=Soft skill; Owning a fancy phone=Not a soft skill; Asking questions to learn=Soft skill; Having lots of followers=Not a soft skill; Working well in a team=Soft skill | Which are soft skills?
+check: mcq | Which do employers value most in a new worker? | Reliability and a good attitude* | Expensive shoes | Being famous
+check: tf | Soft skills only matter in some jobs. | false
+check: mcq | What's a soft skill? | Teamwork* | Height | A big house
+home: Name one soft skill you're good at and one to work on.
+skill: softskills
+
+@lesson 1.3 | Being reliable | ⏰ | home
+hook: You promised to walk the neighbour's dog at 4pm. It's 3:55 and your show is on. What now?
+learn: Reliable people do what they say, when they say.
+learn: If you can't, you tell people early and make a plan.
+play: path | You promised to walk the neighbour's dog at 4pm, but a friend invites you to the park. | Walk the dog first, then go to the park => good: You kept your promise and still had fun. That's reliable. | Go to the park and say nothing => bad: The dog waited. The neighbour may not trust you again. | Message the neighbour early to swap the time => ok: Telling people early is much better than not turning up.
+check: mcq | What does reliable mean? | Doing what you say you'll do* | Doing what you feel like | Being fast
+check: tf | If you can't do something, telling people early is better than not showing up. | true
+check: mcq | Why does reliability matter for paid jobs? | People keep hiring you* | It doesn't | It makes jobs shorter
+home: Make one promise this week and keep it exactly.
+skill: reliability
+
+@lesson 1.4 | Great customer service | 😊 | stall
+hook: A customer at your stall is grumpy. What do you say?
+learn: Good service means being polite, listening and helping.
+learn: Happy customers come back and tell their friends.
+play: chat | A customer is unhappy with their cupcake | them: This cupcake is squashed! | me: Oh no, sorry about that. Would you like a new one?*/Not my problem/You probably dropped it | them: Yes please. Thanks for being nice about it. | me: No worries. Enjoy, and come back soon!*/Whatever/Don't drop this one
+check: mcq | A customer complains. What's the best first step? | Listen and say sorry* | Argue | Ignore them
+check: tf | Happy customers can bring more customers. | true
+check: mcq | What's good customer service? | Polite, helpful and listening* | Fast and grumpy | Rude but cheap
+home: Practise saying "How can I help?" in a friendly voice.
+skill: service
+
+@lesson 1.5 | Taking feedback | 🗣️ | workshop
+hook: Your boss says your work "could be better". Are you in trouble?
+learn: Feedback helps you improve. It's about the work, not about you.
+learn: Say thanks, ask how to fix it, then try again.
+play: order | Put the steps for handling feedback in order | Listen without interrupting; Say thanks for the feedback; Ask how to do it better; Try again; Check if it's better now
+check: mcq | Someone says your work needs fixing. Best response? | "Thanks. How can I make it better?"* | "You're wrong" | Walk away
+check: tf | Feedback is about your work, not who you are. | true
+check: mcq | What should you do after feedback? | Try again using it* | Forget it | Stop working
+home: Ask a grown-up for one piece of feedback on a chore, and use it.
+skill: feedback
+
+@lesson 1.6 | Juggling time | 📆 | home
+hook: Homework, sport, a pet-sitting job and a birthday party, all on Saturday. Help!
+learn: Write everything down, then sort by what's important and what's urgent.
+learn: Say no or move things if it's too much.
+play: sort | Do first, Plan for later, Maybe skip | Homework due tomorrow=Do first; Pet-sitting you promised=Do first; Tidying your games shelf=Plan for later; Watching another episode=Maybe skip; Practising for next week's test=Plan for later; Scrolling videos=Maybe skip | Sort your Saturday
+check: mcq | Too many things on one day. Good first step? | Write them all down* | Panic | Do none of them
+check: tf | It's OK to say no if you have too much on. | true
+check: mcq | What goes first? | Important things that are due soon* | Whatever's most fun | Nothing
+home: Plan your next weekend on paper before it starts.
+skill: planning
+

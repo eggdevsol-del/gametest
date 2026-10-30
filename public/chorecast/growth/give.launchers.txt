@@ -1,0 +1,82 @@
+# give · launchers
+@unit 1 | Ethical investing | Putting your money where your values are
+@unit 2 | Governance | How charities and companies stay honest
+@unit 3 | Big philanthropy | Pledges, foundations and critics
+@unit 4 | Starting a social enterprise | Mission, model and money
+@unit 5 | Policy and voting | Changing systems, not just helping
+@unit 6 | Global issues | Poverty, health and climate
+@unit 7 | Indigenous enterprise | {nz:Iwi and Māori business~au:Aboriginal and Torres Strait Islander enterprise}
+@unit 8 | Your giving plan | A lifelong giving habit
+
+@lesson 1.1 | Ethical investing | 🌿 | shares
+hook: Your {nz:KiwiSaver~au:super} might own shares in companies you don't agree with. Can you change that?
+learn: Ethical or responsible funds screen out some industries, like weapons or tobacco, or favour companies doing good.
+learn: Labels vary. Read what a fund actually excludes and holds.
+learn: {nz:Mindful Money is a NZ charity that shows what's inside KiwiSaver funds.~au:Super funds publish what they hold, and many offer ethical options.}
+play: sort | Often screened out, Often favoured | Weapons makers=Often screened out; Renewable energy=Often favoured; Tobacco=Often screened out; Companies with strong worker safety=Often favoured; Gambling=Often screened out; Clean water technology=Often favoured | What do ethical funds often do?
+check: mcq | What should you check in an ethical fund? | What it actually excludes and holds* | Only its name | Its logo colour
+check: tf | Every fund labelled "ethical" means the same thing. | false
+check: mcq | What can ethical funds screen out? | Industries like weapons or tobacco* | Every company | Nothing ever
+home: Look up what's inside your {nz:KiwiSaver~au:super} fund.
+skill: ethics
+
+@lesson 1.2 | Governance | 🏛️ | townhall
+hook: Who checks that a charity spends money honestly?
+learn: Boards oversee charities and companies. They set direction and hold leaders to account.
+learn: Audits, annual reports and regulators add checks.
+learn: When governance fails, money can go missing and trust collapses.
+play: match | Match each check to what it does | Board=Oversees leaders and strategy; Audit=Independent check of the accounts; Annual report=Public account of money and results; Regulator=Government body that enforces the rules
+check: mcq | Who oversees a charity's leaders? | The board* | The customers | Nobody
+check: tf | Independent audits help keep organisations honest. | true
+check: mcq | What happens when governance fails? | Money can go missing and trust collapses* | Nothing | Everyone gets a bonus
+home: Read the board page of a charity or company you know.
+skill: governance
+
+@lesson 1.3 | Andrew Carnegie | 📚 | museum
+hook: One of history's richest men said dying rich was a disgrace. What did he do?
+learn: Andrew Carnegie made a fortune in steel in the 1800s.
+learn: He gave much of it away, funding more than 2,500 public libraries.
+learn: Critics point out his steel workers worked long hours for low pay. Both parts of the story matter.
+play: debate | Does giving a fortune away make up for how it was made? | Both matter: how money is made and how it's given* | Yes, giving cancels out everything | Carnegie's libraries helped millions of people learn for free, which is a real and lasting good.
+check: mcq | What did Carnegie fund? | More than 2,500 public libraries* | Space rockets | Video games
+check: tf | Carnegie's story includes both generosity and criticism. | true
+check: mcq | Where did his fortune come from? | Steel* | Software | Sport
+home: Visit or look up the history of your local library.
+skill: philanthropy
+
+@lesson 1.4 | Mission, model, money | 🧭 | stall
+hook: You want to start a social enterprise. What three things must line up?
+learn: Mission: the problem you're solving.
+learn: Model: how you'll earn money doing it.
+learn: Money: enough to survive. A great mission with no income won't last.
+play: match | Match each to an example from a coffee cart that trains young people | Mission=Help young people into work; Model=Sell coffee at events; Money=Prices that cover wages, beans and training; Impact=Number of trainees who get jobs
+check: mcq | Why does the model matter? | Without income the mission can't last* | It doesn't | Only the logo matters
+check: tf | A social enterprise needs to cover its costs. | true
+check: mcq | How might you measure this coffee cart's impact? | Trainees who get jobs* | Cups of coffee only | Number of likes
+home: Sketch mission, model and money for a social enterprise idea.
+skill: impact
+
+@lesson 1.5 | Changing systems | 🗳️ | townhall
+hook: Food banks help hungry families. What would mean fewer families needed them?
+learn: Charity helps people now. Policy change can fix causes, like wages or housing.
+learn: Voting, submissions on laws and joining campaigns are ways to change systems.
+learn: {nz:You can enrol to vote at 17 and vote from 18.~au:You can enrol at 16 and must enrol and vote from 18.}
+play: sort | Helps now, Fixes causes | Donating to a food bank=Helps now; Making a submission on a housing law=Fixes causes; Volunteering at a soup kitchen=Helps now; Voting in an election=Fixes causes; Giving a coat to a coat drive=Helps now; Campaigning for a fairer minimum wage=Fixes causes | Which is which?
+check: mcq | What can fix the causes of a problem? | Policy change* | Ignoring it | Only buying things
+check: tf | Charity and policy change can both matter. | true
+check: mcq | {nz:At what age can you enrol to vote in NZ?~au:At what age can you enrol to vote in Australia?} | {nz:17~au:16}* | 12 | 25
+home: Check how to enrol to vote at {nz:vote.nz~au:aec.gov.au}.
+skill: civics
+
+@lesson 1.6 | Your giving plan | 📝 | bank
+hook: What if giving was a habit for life, not just once?
+learn: A giving plan sets a percentage, picks causes and reviews them each year.
+learn: Many people start with 1% to 10% of income, or give time instead.
+try: 5% of $400 is $20 :: gap | 2% of $1,500 = $_ | 30
+play: budget | Plan a month on $800 that includes giving | 800 | Rent and bills=400; Food=150; Savings=50; Giving=20; Fun=0
+check: mcq | What's in a giving plan? | A percentage, causes and a yearly review* | Only guilt | Random giving
+check: gap | 10% of $250 = $_ | 25
+check: tf | Giving time counts too. | true
+home: Pick a giving percentage for your Give jar and tell a grown-up.
+skill: giving
+

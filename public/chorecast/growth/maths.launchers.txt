@@ -1,0 +1,82 @@
+# maths · launchers
+@unit 1 | Loan maths | Interest, repayments and total cost
+@unit 2 | Compound growth | The formula behind the snowball
+@unit 3 | Spreadsheets for life | Budgets and trackers that update themselves
+@unit 4 | Tax maths | Brackets, GST and deductions
+@unit 5 | Inflation | Why prices rise and what it does to savings
+@unit 6 | Risk and return | Expected value and variance
+@unit 7 | Big purchase maths | Cars, phones and total cost of ownership
+@unit 8 | Data literacy | Statistics in the news and research
+
+@lesson 1.1 | Simple vs compound | 🔁 | bank
+hook: $1,000 at 5% for 10 years. Simple interest gives $1,500. Compound gives more. How much more?
+learn: Simple interest: interest only on the original amount.
+learn: Compound interest: interest on the original plus past interest.
+learn: Compound value = start × (1 + rate)^years.
+try: $1,000 at 10% for 2 years compound = $1,210 :: gap | $1,000 at 10% for 2 years simple = $_ | 1200
+play: compound | Compare simple and compound growth | 1000 | 5 | 10
+check: mcq | What does compound interest earn interest on? | The original plus past interest* | Only the original | Nothing
+check: gap | $2,000 at 5% simple for 3 years = $_ | 2300
+check: tf | Over long periods, compound interest grows faster than simple. | true
+home: Use a compound interest calculator with a grown-up.
+skill: compound
+
+@lesson 1.2 | The real cost of a loan | 💳 | bank
+hook: A $1,000 phone on a plan at $50 a month for 24 months. What does it really cost?
+learn: Total cost = repayment × number of payments, plus any fees.
+learn: Compare that with the cash price to see the cost of borrowing.
+try: $50 × 24 = $1,200, so $200 more than cash :: gap | $40 × 30 months = $_ total | 1200
+play: price | Which way of buying the $1,000 phone costs less in total? | Pay cash now:1000:1:phone; 24 payments of $50:1200:1:phone
+check: gap | $30 a month for 36 months = $_ | 1080
+check: mcq | The extra over the cash price is… | The cost of borrowing* | A gift | A tax refund
+check: tf | Always work out the total cost of a payment plan. | true
+home: Check a real payment plan and work out its total cost.
+skill: loans
+
+@lesson 1.3 | Inflation | 🎈 | museum
+hook: A pie cost $3 ten years ago and $5 now. Did pies get better?
+learn: Inflation is prices rising over time. Each dollar buys less.
+learn: If savings earn less than inflation, they lose buying power.
+try: 3% inflation on a $100 basket makes it $103 next year :: gap | 5% inflation on $200 = $_ next year | 210
+play: slider | Your savings earn 2% while inflation is 5%. Roughly how much buying power does $1,000 lose in a year? | 0 | 100 | 30 | $ | 10 | 5
+check: mcq | What is inflation? | Prices rising over time* | Prices always falling | A type of tax
+check: tf | Savings earning less than inflation lose buying power. | true
+check: gap | Inflation 4%. A $50 item next year costs about $_ | 52
+home: Ask a grown-up what something cost when they were your age.
+skill: inflation
+
+@lesson 1.4 | Spreadsheet formulas | 🟩 | workshop
+hook: You change one number and the whole budget updates. Magic?
+learn: Spreadsheets use formulas. =SUM(B2:B6) adds a range.
+learn: =B2*C2 multiplies two cells. Formulas start with "=".
+play: match | Match each formula (typed after an = sign) to what it does | SUM(B2:B6)=Adds cells B2 to B6; B2*C2=Multiplies B2 by C2; AVERAGE(B2:B6)=Finds the mean of B2 to B6; B7-B8=Takes B8 away from B7
+check: mcq | What does every formula start with? | =* | # | $
+check: tf | =SUM adds up a range of cells. | true
+check: mcq | To find income minus costs, you'd use… | =B2-B3* | =B2+B3 | =SUM(B2)
+home: Build a tiny budget spreadsheet with a SUM formula.
+skill: spreadsheets
+
+@lesson 1.5 | Expected value | 🎰 | stage
+hook: A $5 raffle ticket. 1 in 100 chance to win $300. Worth it?
+learn: Expected value = chance × prize, minus the cost.
+learn: 1/100 × $300 = $3. You pay $5, so on average you lose $2 a ticket.
+learn: Raffles for a good cause can still be worth it. Just know it's giving, not investing.
+try: 1 in 10 chance at $20 = $2 expected :: gap | 1 in 50 chance at $100 = $_ expected | 2
+play: debate | Is buying a lottery ticket every week a smart money plan? | No. The expected value is negative, so it's entertainment at best* | Yes. Someone has to win | Some people enjoy the dream for a small cost. Keeping it tiny and fun, not a plan, is the key.
+check: gap | 1 in 4 chance to win $8, ticket $3. On average you lose $_ a ticket | 1
+check: mcq | Negative expected value means… | You lose on average over time* | You always win | It's free
+check: tf | Lotteries usually have negative expected value. | true
+home: Work out the expected value of a school raffle.
+skill: probability
+
+@lesson 1.6 | Cost of owning a car | 🚙 | home
+hook: A $6,000 car. Is that what it costs?
+learn: Total cost of ownership includes fuel, insurance, registration, servicing, tyres and repairs.
+learn: Add up a year to see the real cost per week.
+play: budget | Plan a year of car costs on $3,200 | 3200 | Fuel=1500; Insurance=600; {nz:Registration and WOF~au:Registration}=300; Servicing=300; Emergency fund=0 | New tyres:400
+check: mcq | Which is part of car ownership costs? | Insurance* | Your phone plan | Netflix
+check: gap | $2,600 a year is about $_ a week | 50
+check: tf | The purchase price is the only cost of a car. | false
+home: Ask a grown-up how much their car costs to run each month.
+skill: budget
+
