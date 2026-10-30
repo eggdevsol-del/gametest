@@ -149,3 +149,75 @@ check: mcq | Which one shows patience? | Waiting your turn on the slide* | Pushi
 home: Bake or cook something with a grown-up and practise waiting for it.
 skill: patience
 
+@lesson 3.1 | A piece of the pie | 🥧 | shares
+hook: A big company is like a giant pie. Could you own a slice?
+learn: Big companies can be cut into lots of tiny pieces called shares.
+learn: If you buy a share, you own a tiny piece of that company.
+learn: People who own shares are called shareholders.
+play: match | Match each word to what it means | Company=A business that makes or sells things; Share=A tiny piece of a company; Shareholder=Someone who owns shares; Owner=Someone a thing belongs to
+check: mcq | What is a share? | A tiny piece of a company* | A kind of pie | A bank card
+check: tf | If you own a share, you own a tiny bit of the company. | true
+check: mcq | What do we call people who own shares? | Shareholders* | Shopkeepers | Shoemakers
+home: Cut a sandwich into four pieces. If you have one piece, how much of the sandwich do you own?
+skill: shares
+
+@lesson 3.2 | Companies you know | 🏢 | shares
+hook: The airline you fly with, the shop where you buy food... who owns them?
+learn: Lots of big companies are owned by many shareholders, not just one person.
+learn: {nz:Air New Zealand is partly owned by the government and partly by people who bought its shares.~au:Big companies like Qantas and Woolworths are owned by people who bought their shares.}
+learn: Anyone, even a grown-up saving for a kid, can buy shares in big companies.
+play: tap | Tap the things a big company might make or sell | ✈️:yes:Airlines fly people around; 🛒:yes:Supermarkets sell food; 🏦:yes:Banks look after money; 🌈:no; 📱:yes:Phone companies sell phone plans; 🌙:no
+check: mcq | Who owns many big companies? | Lots of shareholders* | Nobody | Only the boss
+check: tf | Anyone can buy shares in many big companies. | true
+check: mcq | Which of these is a company? | {nz:Air New Zealand~au:Qantas}* | The Moon | A rainbow
+home: With a grown-up, name three companies you know.
+skill: shares
+
+@lesson 3.3 | When the company does well | 🌟 | shares
+hook: The company you own a piece of has a great year. What happens to your piece?
+learn: When a company makes more money, more people want its shares.
+learn: Then each share can be worth more.
+learn: Some companies also share part of their profit with shareholders. That's called a dividend.
+play: path | You own one share in a juice company. It sells lots of juice this year. | Keep your share and see what happens => good: More people want shares in a busy company, so yours may be worth more. You might get a dividend too! | Throw it away => bad: Then you don't own any of the company. | Swap it for one lolly => bad: A share in a busy company could be worth much more than a lolly.
+check: mcq | What's a dividend? | Part of the profit shared with shareholders* | A kind of drink | A sale price
+check: tf | When a company does well, its shares can be worth more. | true
+check: mcq | A company sells lots this year. Its shares might… | Be worth more* | Disappear | Turn into coins
+home: Pick a favourite company and guess if it had a good year. Ask a grown-up what they think.
+skill: shares
+
+@lesson 3.4 | Owners get a say | 🗳️ | townhall
+hook: If you own part of a company, do you get to help decide things?
+learn: Shareholders are owners, so they get to vote on some big decisions.
+learn: The more shares you own, the more votes you have.
+learn: Owners pick people to run the company well for them.
+play: sort | Owners vote on it, Workers decide it | Who is on the board=Owners vote on it; Which song plays in the shop=Workers decide it; Big changes to the company=Owners vote on it; What to have for lunch=Workers decide it | Who decides?
+check: mcq | Why do shareholders get a vote? | They own part of the company* | They are customers | They are famous
+check: tf | More shares usually means more votes. | true
+check: mcq | Shareholders choose people to… | Help run the company well* | Eat lunch | Sing songs
+home: Have a family vote on something small, like a game to play.
+skill: shares
+
+@lesson 3.5 | Shares or a money box? | 🫙 | bank
+hook: $10 in a money box stays $10. Is a share the same?
+learn: Money in a money box stays the same.
+learn: A share's price can go up or down, a bit every day.
+learn: Over a long time, shares in good companies have often grown. But not always.
+play: sort | Money box, Shares | Stays the same amount=Money box; Can go up or down=Shares; Easy to take out today=Money box; Can grow over many years=Shares; Never changes=Money box; Owns a piece of a company=Shares | Money box or shares?
+check: mcq | What can happen to a share's price? | It can go up or down* | It never changes | It always doubles
+check: tf | Money in a money box stays the same amount. | true
+check: mcq | Over a long time, shares in good companies have often… | Grown* | Disappeared | Turned into toys
+home: Draw a money box and a share. Write one difference under each.
+skill: shares
+
+@lesson 3.6 | Your Invest jar | 🌱 | bank
+hook: In Chorecast, one of your jars is called Invest. What's it for?
+learn: Your Invest jar is for money you want to grow over a long time.
+learn: In real life, kids usually need a grown-up to buy shares for them.
+learn: Money for investing is money you won't need for a long time.
+play: sort | jars | Saving for a bike next month=Vault; A treat this weekend=Spend; Money to grow until you're grown up=Invest; Helping the animal shelter=Give; Lunch at the school gala=Spend; Money to leave alone for years=Invest | Which jar?
+check: mcq | What's the Invest jar for? | Money to grow over a long time* | Lollies today | Giving away
+check: tf | Kids usually need a grown-up to buy real shares. | true
+check: mcq | Money you'll need next week should go in… | Spend or Vault* | Invest | Nowhere
+home: Talk with a grown-up about how much of your money could go in the Invest jar.
+skill: jars
+

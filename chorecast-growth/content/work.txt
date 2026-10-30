@@ -146,6 +146,78 @@ check: mcq | You forgot your job yesterday. What now? | Do it today and say sorr
 home: Look at your jobs in Chorecast with a grown-up, or draw a job chart together.
 skill: teamwork
 
+@lesson 3.1 | Jobs behind breakfast | 🥣 | kitchen
+hook: Your cereal and milk took lots of people to make. Who?
+learn: A farmer grows the wheat and milks the cows.
+learn: A factory worker makes the cereal. A truck driver brings it to the shop.
+learn: A shop worker puts it on the shelf. So many jobs, just for breakfast!
+play: order | Follow the cereal from farm to bowl | A farmer grows the wheat; A factory makes the cereal; A truck driver takes it to the shop; A shop worker puts it on the shelf; Your family buys it; You eat it for breakfast
+check: mcq | Who grows the wheat for cereal? | A farmer* | A pilot | A dentist
+check: tf | Lots of jobs help get food to your table. | true
+check: mcq | Who brings food to the shop? | A truck driver* | A teacher | A lifeguard
+home: Pick one food at home and guess how many jobs it took to get there.
+skill: careers
+
+@lesson 3.2 | Tools of the job | 🧰 | workshop
+hook: A builder has a hammer. What does a doctor have?
+learn: Every job has its own tools.
+learn: Knowing how to use the tools safely is part of the job.
+learn: Some tools are machines. Some are computers. Some are just your hands and voice.
+play: match | Match each worker to a tool they use | Builder=Hammer; Doctor=Stethoscope; Chef=Frying pan; Hairdresser=Scissors; Gardener=Spade
+check: mcq | Which tool does a chef use? | A frying pan* | A stethoscope | A spade
+check: tf | Learning to use tools safely is part of a job. | true
+check: mcq | A teacher's tools might include… | A whiteboard and books* | A fire hose | A tractor
+home: Find three tools at home and guess which jobs use them.
+skill: tools
+
+@lesson 3.3 | Inside or outside? | 🌤️ | garden
+hook: Some people work in offices. Some work up mountains! Where would you like to work?
+learn: Some jobs are mostly inside, like a librarian or a baker.
+learn: Some jobs are mostly outside, like a farmer, a park ranger or a builder.
+learn: Some jobs are both, like a vet who visits farms.
+play: sort | Mostly inside, Mostly outside | Librarian=Mostly inside; Farmer=Mostly outside; Baker=Mostly inside; Park ranger=Mostly outside; Dentist=Mostly inside; Builder=Mostly outside | Inside or outside job?
+check: mcq | Which job is mostly outside? | Park ranger* | Librarian | Dentist
+check: tf | Some jobs are inside and outside. | true
+check: mcq | Where does a baker mostly work? | Inside, in a bakery* | Up a mountain | On a boat
+home: Ask two grown-ups whether they work inside or outside.
+skill: careers
+
+@lesson 3.4 | Jobs with animals and nature | 🐾 | garden
+hook: Love animals or the outdoors? There are jobs for that!
+learn: Vets look after sick and hurt animals.
+learn: Rangers look after parks and wildlife. Farmers care for animals and crops.
+learn: Scientists study plants, animals and oceans to help protect them.
+play: tap | Tap the jobs that work with animals or nature | 🩺:yes:Vets care for animals; 🌲:yes:Rangers look after parks; 🚜:yes:Farmers care for crops and animals; 🏦:no; 🔬:yes:Scientists study nature; 💇:no; 🐟:yes:Fishers catch fish
+check: mcq | Who looks after sick pets? | A vet* | A banker | A pilot
+check: tf | Some scientists study animals and oceans. | true
+check: mcq | Who looks after parks and wildlife? | A ranger* | A barber | A chef
+home: With a grown-up, look up one job that works with animals or nature.
+skill: careers
+
+@lesson 3.5 | Making and fixing jobs | 🔨 | workshop
+hook: The tap is dripping, the car won't start and the house needs a new room. Who do you call?
+learn: Plumbers fix pipes and taps. Electricians fix wiring and power.
+learn: Mechanics fix cars. Builders build houses.
+learn: These jobs are called trades. People learn them as apprentices.
+play: match | Match each problem to the worker who fixes it | Dripping tap=Plumber; Lights not working=Electrician; Car won't start=Mechanic; A new deck=Builder
+check: mcq | Who fixes a dripping tap? | A plumber* | A vet | A librarian
+check: tf | People learn trades as apprentices. | true
+check: mcq | Who should fix electrical wiring? | An electrician* | A kid | Anyone with a screwdriver
+home: Ask a grown-up who they'd call to fix something at home.
+skill: careers
+
+@lesson 3.6 | Ask a worker | 🎤 | stage
+hook: The best way to learn about a job? Ask someone who does it!
+learn: Ask what they do in a day, what they like, and what's hard.
+learn: Listen carefully and say thank you.
+learn: Lots of grown-ups love talking about their work.
+play: chat | You're asking your aunt about her job | them: Hi! You wanted to know about my job? | me: Yes! What do you do in a normal day?*/Is it boring?/How much money do you get? | them: I fix computers for a big company. Every day is different! | me: Cool! What's the best part?*/I'd hate that/Can you fix my game for free?
+check: mcq | A good question to ask a worker is… | What do you like about your job?* | Why is your job boring? | Can I have your money?
+check: tf | Saying thank you after asking questions is polite. | true
+check: mcq | What should you do while they answer? | Listen carefully* | Play on your tablet | Talk over them
+home: Ask a grown-up three questions about their job.
+skill: careers
+
 @band builders
 @unit 1 | Jobs and skills | What jobs exist and what employers want
 @unit 2 | Reliable worker | Turning up, on time, every time
@@ -294,6 +366,78 @@ check: tf | A good reputation can be damaged quickly. | true
 check: mcq | What do happy customers often do? | Ask you back and tell others* | Forget you | Ask for a refund
 home: Ask a grown-up who they'd recommend for a job, and why.
 skill: reputation
+
+@lesson 3.1 | First impressions | 👋 | stall
+hook: A customer walks up to your stall. You're on your phone. What do they think?
+learn: People decide a lot in the first few seconds.
+learn: Look up, smile, and say hello.
+learn: A tidy stall and a friendly face make people want to stay.
+play: sort | Good first impression, Bad first impression | Smiling and saying hi=Good first impression; Staring at your phone=Bad first impression; A tidy table=Good first impression; Ignoring the customer=Bad first impression; Making eye contact=Good first impression; Eating while serving=Bad first impression | Good or bad first impression?
+check: mcq | A customer arrives. What should you do first? | Look up, smile and say hello* | Finish your game | Look away
+check: tf | People form first impressions quickly. | true
+check: mcq | Which makes a stall look welcoming? | Tidy, with a friendly seller* | Messy and empty | Closed
+home: Notice how a shop worker greets you this week. What did they do well?
+skill: service
+
+@lesson 3.2 | Finding out what they need | 🔍 | stall
+hook: A customer says "I need a present." How do you help?
+learn: Ask friendly questions to find out what they want.
+learn: "Who is it for?" "What do they like?" "How much would you like to spend?"
+learn: Then suggest something that fits.
+play: chat | A customer at your craft stall | them: Hi. I need a present, but I'm not sure what. | me: Sure! Who's it for, and what do they like?*/Just buy anything/We're closed | them: My niece. She's 7 and loves animals. | me: These animal bookmarks are popular with 7-year-olds. Would one suit?*/Buy the most expensive thing/I don't know, sorry
+check: mcq | What's a good question to help a customer? | Who's it for?* | Why are you here? | Can you hurry up?
+check: tf | Asking questions helps you suggest the right thing. | true
+check: mcq | After asking questions, you should… | Suggest something that fits* | Walk away | Ask the same thing again
+home: Help a family member choose a gift by asking three questions first.
+skill: service
+
+@lesson 3.3 | Handling complaints | 🙏 | stall
+hook: A customer says the bracelet they bought broke. How do you turn it around?
+learn: Use LAST: Listen, Apologise, Solve, Thank.
+learn: Listen without interrupting. Say sorry. Fix it, like a swap or a refund.
+learn: Thank them for telling you. Now you can make it better.
+play: build | Handle the complaint with LAST | Listen without interrupting; Say sorry it happened; Offer a fix, like a new bracelet; Thank them for telling you
+check: mcq | What does the L in LAST stand for? | Listen* | Leave | Laugh
+check: tf | Thanking a customer for a complaint can help. | true
+check: mcq | A customer's item broke. A good fix is… | A swap or a refund* | Arguing | Ignoring them
+home: Practise LAST with a grown-up pretending to be a grumpy customer.
+skill: service
+
+@lesson 3.4 | The extra mile | ⭐ | stall
+hook: Two cafés make the same hot chocolate. One remembers your name. Which do you go back to?
+learn: Going the extra mile means doing a little more than people expect.
+learn: Remember regulars, carry a heavy bag, or add a thank-you note.
+learn: Small extras often matter more than big ones.
+play: tap | Tap the extra-mile ideas | 📝:yes:A handwritten thank-you note; 👜:yes:Helping carry a heavy bag; 😊:yes:Remembering a customer's name; 🙄:no; 📵:yes:Putting your phone away to focus on them; 💤:no
+check: mcq | What does "going the extra mile" mean? | Doing a little more than expected* | Running a mile | Charging extra
+check: tf | Small extras can make customers come back. | true
+check: mcq | Which is going the extra mile? | Remembering a regular's name* | Being late | Forgetting their order
+home: Do one extra-mile thing for someone at home this week.
+skill: service
+
+@lesson 3.5 | Phone and door manners | ☎️ | home
+hook: The home phone rings and the grown-ups are busy. What do you say?
+learn: Answer clearly and politely: "Hello, this is Sam."
+learn: If they want someone who's busy, take a message: name, number and what it's about.
+learn: Never tell a stranger you're home alone, or give out personal details.
+play: chat | You answer the family phone | them: Hi, is your mum there? | me: She can't come to the phone right now. Can I take a message?*/No, I'm home alone/What do you want? | them: Yes, it's Kim from the dentist. Can she call me back? | me: Sure. Can I have your number, please? I'll tell her*/Whatever/I'll forget
+check: mcq | What should you write in a phone message? | Name, number and what it's about* | Only their name | Nothing
+check: tf | You should tell callers when you're home alone. | false | Never tell a stranger you're home alone.
+check: mcq | A polite way to answer the phone is… | Hello, this is Sam* | What? | Grunting
+home: Practise taking a phone message with a grown-up.
+skill: communication
+
+@lesson 3.6 | Staying calm | 😌 | stall
+hook: A customer is rude to you at the school stall. What do you do?
+learn: Stay calm and polite, even if they aren't. Don't argue back.
+learn: Take a breath. Speak slowly and kindly.
+learn: If someone is very rude or you feel unsafe, get a grown-up straight away.
+play: path | A customer shouts that your prices are a rip-off. | Stay calm and say, "Sorry you feel that way. Our prices help the shelter." => good: You stayed polite and explained. They calmed down. | Shout back that they're rude => bad: Now it's an argument, and other customers walk away. | Cry and run off => ok: It's OK to feel upset. Next time, try taking a breath or getting a grown-up.
+check: mcq | A customer is rude. What's best? | Stay calm and polite* | Be rude back | Throw something
+check: tf | If you feel unsafe, get a grown-up straight away. | true
+check: mcq | What can help you stay calm? | Taking a slow breath* | Shouting | Stamping your feet
+home: Practise a calm breath and a polite reply with a grown-up.
+skill: calm
 
 @band makers
 @unit 1 | Getting your first job | CVs, applications and interviews
@@ -447,6 +591,78 @@ check: tf | An employer can punish you for asking about your rights. | false | T
 check: mcq | A good first step when something's wrong at work? | Write down what happened and talk to someone you trust* | Post about it online | Quit without telling anyone
 home: Save the {nz:Employment New Zealand~au:Fair Work Ombudsman} website on your phone.
 skill: help
+
+@lesson 3.1 | Call, text or email? | 📱 | online
+hook: You need to swap a shift, say thanks for an interview, and report a broken machine. Same way for all three?
+learn: Urgent things, like being sick today, usually need a call or the way your boss asked.
+learn: Quick, simple things can be a text or app message if that's how your workplace talks.
+learn: Things that need a record, like a request or an application, suit email.
+play: match | Match each situation to the best way to communicate | Sick on the morning of a shift=A call; Thanking someone after an interview=An email; Confirming your shift time=A quick message; Asking for time off next month=An email or the roster app
+check: mcq | You're sick an hour before your shift. Best way to tell your boss? | Call, or the way they asked you to* | An email next week | Say nothing
+check: tf | Email is good for things that need a record. | true
+check: mcq | Which suits a quick message? | Confirming your shift time* | Quitting your job | A serious complaint
+home: Ask a grown-up how their workplace prefers people to get in touch.
+skill: communication
+
+@lesson 3.2 | Phone calls | 📞 | online
+hook: You have to call a café about a job. Your heart is racing. What do you say?
+learn: Plan before you call: who you are, why you're calling, and what you want.
+learn: Start with: "Hi, my name is Jess. I'm calling about the job ad for a kitchen hand."
+learn: If you get voicemail, leave your name, number, reason and a good time to call back.
+play: build | Build a phone call about a job ad | Hi, my name is Jess; I'm calling about the kitchen hand job; Is it still open?; Could I drop off my CV this week?; Thanks so much for your time
+check: mcq | What should you plan before a call? | Who you are, why you're calling and what you want* | A joke | Nothing
+check: tf | A good voicemail includes your name and number. | true
+check: mcq | Which is the best opening? | Hi, my name is Jess. I'm calling about the job ad* | Yo, got any jobs? | Who's this?
+home: Write a short script for calling about a job, and practise it with a grown-up.
+skill: communication
+
+@lesson 3.3 | Messages to your manager | 💬 | online
+hook: You need to swap your Saturday shift. How do you ask?
+learn: Be clear and polite. Say what you need and offer a solution.
+learn: "Hi Sam, could I swap my Saturday 9 to 1 shift? Alex has said they can cover it."
+learn: Ask early, and wait for a yes before you assume it's sorted.
+play: mcq | Which message is best for swapping a shift? | Hi Sam, could I swap my Sat 9-1 shift? Alex can cover it if that's OK* | cant do sat | Not coming Saturday, sort it out
+check: tf | Offering a solution makes it easier for your manager to say yes. | true
+check: mcq | When should you ask about a shift swap? | As early as possible* | Ten minutes before | After you miss it
+check: mcq | Your manager hasn't replied yet. You… | Wait for a yes before assuming it's sorted* | Don't turn up | Send 20 messages
+home: Write a polite shift-swap message, as practice.
+skill: communication
+
+@lesson 3.4 | Tone at work | 🎭 | online
+hook: "ok." "OK!" "Okay, thanks!" Do they all sound the same?
+learn: In writing, people can't hear your voice, so short messages can sound cold or annoyed.
+learn: A greeting, a thank-you and full words help. Keep it friendly but professional.
+learn: Go easy on emojis and slang until you know how your workplace talks.
+play: sort | Professional, Too casual | Hi Sam, thanks for the roster=Professional; k=Too casual; Thanks, see you at 4=Professional; lol whatever 💀=Too casual; Sorry for the late reply. Yes, I can do Friday=Professional; ya i guess=Too casual | Professional or too casual?
+check: mcq | Why can short messages sound rude? | People can't hear your tone* | They're too long | They use capitals
+check: tf | It's wise to go easy on emojis until you know the workplace. | true
+check: mcq | Which reply sounds most professional? | Thanks, I can do Friday* | k | ya
+home: Rewrite a short, blunt message so it sounds friendly and professional.
+skill: tone
+
+@lesson 3.5 | Asking good questions | ❓ | workshop
+hook: Your boss explains a task fast. You only caught half. Do you ask or guess?
+learn: Ask. Guessing can cause mistakes that take longer to fix.
+learn: Repeat it back: "So I clean the machines first, then restock the cups?"
+learn: Write steps down if there are lots of them.
+play: path | Your manager rushes through how to close the café. You missed a step. | Repeat back what you heard and ask about the missed step => good: Your manager fills the gap. You close up perfectly. | Guess and hope for the best => bad: You forgot to turn off the coffee machine. Oops. | Ask a customer what to do => bad: They don't know your café's closing steps.
+check: mcq | You don't understand an instruction. Best move? | Ask, and repeat it back* | Guess | Do nothing
+check: tf | Repeating instructions back helps check you understood. | true
+check: mcq | What helps when there are lots of steps? | Writing them down* | Hoping you remember | Skipping some
+home: Next time someone gives you instructions, repeat them back.
+skill: communication
+
+@lesson 3.6 | Owning a mistake | 🙋 | workshop
+hook: You gave a customer the wrong change and the till is $10 short. Do you say anything?
+learn: Tell your manager quickly and honestly. Hiding mistakes usually makes them worse.
+learn: Say what happened, what you've done to fix it, and how you'll avoid it next time.
+learn: Most managers respect people who own their mistakes.
+play: chat | Telling your manager about a mistake | them: The till's $10 short tonight. Any idea why? | me: I think I gave someone wrong change earlier. I'm sorry*/No idea/It must be someone else | them: Thanks for telling me. What happened? | me: I rushed counting change. From now on I'll count it back out loud*/Doesn't matter/You should have checked
+check: mcq | You made a mistake at work. What's best? | Tell your manager honestly and quickly* | Hide it | Blame a co-worker
+check: tf | Saying how you'll avoid a mistake next time helps rebuild trust. | true
+check: mcq | What do most managers respect? | People who own their mistakes* | People who blame others | People who hide things
+home: Think of a mistake you made and what you'd say to own it.
+skill: honesty
 
 @band launchers
 @unit 1 | Contracts and pay | Employment agreements, rates and conditions
@@ -602,3 +818,75 @@ check: mcq | Who can help you change courses? | A course adviser* | A random str
 check: mcq | {nz:Why do withdrawal dates matter?~au:Why does the census date matter?} | {nz:Leaving before them can mean a refund~au:Withdraw before it and you usually aren't charged for that unit}* | It's a public holiday | It doesn't matter at all
 home: Ask a grown-up if they ever changed paths, and what they learned.
 skill: careers
+
+@lesson 3.1 | Where the jobs are | 🔎 | online
+hook: You want a part-time job. Where do you look?
+learn: Job sites like {nz:Seek and Trade Me Jobs~au:Seek and Indeed} list lots of jobs.
+learn: Company websites, noticeboards, careers advisers and social media have more.
+learn: Many jobs are never advertised. They're filled by people who asked or were recommended.
+play: tap | Tap good places to find a job | 💻:yes:Job sites list thousands of jobs; 🏪:yes:Asking in local shops can turn up jobs; 👥:yes:Friends and family may know of openings; 📌:yes:Community noticeboards; 🎰:no; 📺:no
+check: mcq | How are many jobs filled? | Through people who asked or were recommended* | By lottery | Only by job ads
+check: tf | Some jobs are never advertised. | true
+check: mcq | {nz:Which is an NZ job site?~au:Which is an Australian job site?} | {nz:Trade Me Jobs~au:Indeed}* | A weather app | A food delivery app
+home: Find three part-time jobs near you on a job site.
+skill: jobhunting
+
+@lesson 3.2 | Networking | 🤝 | stage
+hook: "Networking" sounds scary. Is it just talking to people?
+learn: Networking means building relationships with people who might help with work, and helping them back.
+learn: Start with people you know: family, friends' parents, teachers, coaches and past bosses.
+learn: Ask for advice, not a job: "Could I ask you a few questions about working in engineering?"
+play: chat | Messaging a family friend who works in design | them: Hi! Your mum said you're interested in design? | me: Yes! Could I ask you a few questions about how you got started?*/Can you give me a job?/Hey | them: Of course. Happy to chat. | me: Thanks! Would a 15-minute call next week suit you?*/Send me your password/Never mind
+check: mcq | A good first networking ask is… | Could I ask you a few questions?* | Give me a job | Can you write my CV?
+check: tf | Your network includes family, teachers and coaches. | true
+check: mcq | Networking works best when you… | Build relationships and help back* | Only take | Send 100 identical messages
+home: List five people who might know about jobs you're interested in.
+skill: networking
+
+@lesson 3.3 | LinkedIn | 💼 | online
+hook: Employers sometimes look you up online. What will they find?
+learn: LinkedIn is a site for work profiles. You can join from 16.
+learn: Use a clear photo, a short headline, and list your skills, jobs, volunteering and study.
+learn: Keep it honest and professional. Check your other profiles are tidy too.
+play: build | Build a strong LinkedIn profile | A clear, friendly photo; A headline: Student and part-time barista; A short about section; Your jobs and volunteering; Your skills; Connect with people you know
+check: mcq | What's a good LinkedIn headline? | Student and part-time barista* | Party legend | Nothing
+check: tf | It's OK to exaggerate on LinkedIn. | false | Keep it honest. Employers check.
+check: mcq | What else might an employer look at? | Your other public profiles* | Your bank PIN | Your diary
+home: Search your own name online with a grown-up and see what comes up.
+skill: reputation
+
+@lesson 3.4 | Tailoring applications | ✂️ | workshop
+hook: You send the same CV to 30 jobs and hear nothing. Why?
+learn: Employers want to see you fit their job. Tailor each application.
+learn: Use words from the ad. If it asks for "customer service", show where you've done it.
+learn: Many employers use software to scan applications for these key words first.
+play: diff | Your general CV line and your tailored one. Tap what changed. | Skills: hard worker; Experience: volunteering; Available: weekends | Skills: customer service and teamwork; Experience: served 200 people at the {nz:school gala~au:school fete}; Available: weekends
+check: mcq | Why tailor each application? | To show you fit that job* | To make it longer | Because it's the law
+check: tf | Some employers use software to scan applications for key words. | true
+check: mcq | The ad asks for "teamwork". You should… | Give an example of teamwork* | Ignore it | Write "teamwork" 20 times
+home: Pick a job ad and underline the key words you'd use.
+skill: applying
+
+@lesson 3.5 | Job scams | 🚩 | online
+hook: A "recruiter" offers you a $40-an-hour remote job without an interview. They just need your bank details and a $50 training fee. Hmm.
+learn: Real employers don't charge you to apply or train.
+learn: Be wary of jobs with no interview, vague duties, pay that's too good, or requests for ID and bank details early.
+learn: Check the company is real, using its official website and phone number.
+play: scam | Real job or scam? | Café interview at the shop, then a trial shift paid at the proper rate=real; Pay $50 for training before you start=scam; Send a copy of your passport to get the job before any interview=scam; Online application through the company's official careers page=real; Get paid to receive and forward packages=scam | Real jobs don't charge fees or rush for your ID.
+check: mcq | A job asks for a training fee upfront. That's… | A warning sign of a scam* | Normal | A bonus
+check: tf | Real employers usually interview you before offering a job. | true
+check: mcq | How can you check a job is real? | Use the company's official website and phone number* | Trust the recruiter's message | Ask the recruiter if they're real
+home: Look up the job scam warnings on {nz:netsafe.org.nz~au:scamwatch.gov.au}.
+skill: scams
+
+@lesson 3.6 | Follow-ups and rejection | 📬 | workshop
+hook: You had an interview a week ago and heard nothing. Do you follow up?
+learn: Yes. A short, polite follow-up shows interest. A thank-you email after an interview helps too.
+learn: Rejection is part of job hunting. Nearly everyone gets lots of nos.
+learn: Ask for feedback if you can, and use it on the next application.
+play: chat | Following up a week after an interview | them: Hi, thanks for following up. We've chosen another applicant this time. | me: Thanks for letting me know. Could you share any feedback for next time?*/Your loss/Why didn't you pick me? | them: Sure. More examples of customer service would help. | me: That's really helpful. Thanks again*/Whatever/I'll never apply again
+check: mcq | You didn't get the job. A good next step is… | Ask for feedback and use it* | Send an angry email | Give up on job hunting
+check: tf | Most people face rejection when job hunting. | true
+check: mcq | When might you send a thank-you email? | After an interview* | Before you apply | Never
+home: Write a short thank-you email you could send after an interview.
+skill: resilience

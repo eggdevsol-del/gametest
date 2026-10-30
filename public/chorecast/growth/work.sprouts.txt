@@ -145,3 +145,75 @@ check: mcq | You forgot your job yesterday. What now? | Do it today and say sorr
 home: Look at your jobs in Chorecast with a grown-up, or draw a job chart together.
 skill: teamwork
 
+@lesson 3.1 | Jobs behind breakfast | 🥣 | kitchen
+hook: Your cereal and milk took lots of people to make. Who?
+learn: A farmer grows the wheat and milks the cows.
+learn: A factory worker makes the cereal. A truck driver brings it to the shop.
+learn: A shop worker puts it on the shelf. So many jobs, just for breakfast!
+play: order | Follow the cereal from farm to bowl | A farmer grows the wheat; A factory makes the cereal; A truck driver takes it to the shop; A shop worker puts it on the shelf; Your family buys it; You eat it for breakfast
+check: mcq | Who grows the wheat for cereal? | A farmer* | A pilot | A dentist
+check: tf | Lots of jobs help get food to your table. | true
+check: mcq | Who brings food to the shop? | A truck driver* | A teacher | A lifeguard
+home: Pick one food at home and guess how many jobs it took to get there.
+skill: careers
+
+@lesson 3.2 | Tools of the job | 🧰 | workshop
+hook: A builder has a hammer. What does a doctor have?
+learn: Every job has its own tools.
+learn: Knowing how to use the tools safely is part of the job.
+learn: Some tools are machines. Some are computers. Some are just your hands and voice.
+play: match | Match each worker to a tool they use | Builder=Hammer; Doctor=Stethoscope; Chef=Frying pan; Hairdresser=Scissors; Gardener=Spade
+check: mcq | Which tool does a chef use? | A frying pan* | A stethoscope | A spade
+check: tf | Learning to use tools safely is part of a job. | true
+check: mcq | A teacher's tools might include… | A whiteboard and books* | A fire hose | A tractor
+home: Find three tools at home and guess which jobs use them.
+skill: tools
+
+@lesson 3.3 | Inside or outside? | 🌤️ | garden
+hook: Some people work in offices. Some work up mountains! Where would you like to work?
+learn: Some jobs are mostly inside, like a librarian or a baker.
+learn: Some jobs are mostly outside, like a farmer, a park ranger or a builder.
+learn: Some jobs are both, like a vet who visits farms.
+play: sort | Mostly inside, Mostly outside | Librarian=Mostly inside; Farmer=Mostly outside; Baker=Mostly inside; Park ranger=Mostly outside; Dentist=Mostly inside; Builder=Mostly outside | Inside or outside job?
+check: mcq | Which job is mostly outside? | Park ranger* | Librarian | Dentist
+check: tf | Some jobs are inside and outside. | true
+check: mcq | Where does a baker mostly work? | Inside, in a bakery* | Up a mountain | On a boat
+home: Ask two grown-ups whether they work inside or outside.
+skill: careers
+
+@lesson 3.4 | Jobs with animals and nature | 🐾 | garden
+hook: Love animals or the outdoors? There are jobs for that!
+learn: Vets look after sick and hurt animals.
+learn: Rangers look after parks and wildlife. Farmers care for animals and crops.
+learn: Scientists study plants, animals and oceans to help protect them.
+play: tap | Tap the jobs that work with animals or nature | 🩺:yes:Vets care for animals; 🌲:yes:Rangers look after parks; 🚜:yes:Farmers care for crops and animals; 🏦:no; 🔬:yes:Scientists study nature; 💇:no; 🐟:yes:Fishers catch fish
+check: mcq | Who looks after sick pets? | A vet* | A banker | A pilot
+check: tf | Some scientists study animals and oceans. | true
+check: mcq | Who looks after parks and wildlife? | A ranger* | A barber | A chef
+home: With a grown-up, look up one job that works with animals or nature.
+skill: careers
+
+@lesson 3.5 | Making and fixing jobs | 🔨 | workshop
+hook: The tap is dripping, the car won't start and the house needs a new room. Who do you call?
+learn: Plumbers fix pipes and taps. Electricians fix wiring and power.
+learn: Mechanics fix cars. Builders build houses.
+learn: These jobs are called trades. People learn them as apprentices.
+play: match | Match each problem to the worker who fixes it | Dripping tap=Plumber; Lights not working=Electrician; Car won't start=Mechanic; A new deck=Builder
+check: mcq | Who fixes a dripping tap? | A plumber* | A vet | A librarian
+check: tf | People learn trades as apprentices. | true
+check: mcq | Who should fix electrical wiring? | An electrician* | A kid | Anyone with a screwdriver
+home: Ask a grown-up who they'd call to fix something at home.
+skill: careers
+
+@lesson 3.6 | Ask a worker | 🎤 | stage
+hook: The best way to learn about a job? Ask someone who does it!
+learn: Ask what they do in a day, what they like, and what's hard.
+learn: Listen carefully and say thank you.
+learn: Lots of grown-ups love talking about their work.
+play: chat | You're asking your aunt about her job | them: Hi! You wanted to know about my job? | me: Yes! What do you do in a normal day?*/Is it boring?/How much money do you get? | them: I fix computers for a big company. Every day is different! | me: Cool! What's the best part?*/I'd hate that/Can you fix my game for free?
+check: mcq | A good question to ask a worker is… | What do you like about your job?* | Why is your job boring? | Can I have your money?
+check: tf | Saying thank you after asking questions is polite. | true
+check: mcq | What should you do while they answer? | Listen carefully* | Play on your tablet | Talk over them
+home: Ask a grown-up three questions about their job.
+skill: careers
+

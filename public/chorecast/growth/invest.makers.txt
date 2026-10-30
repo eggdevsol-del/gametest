@@ -151,3 +151,76 @@ check: gap | You put in $1,000 a year for 10 years. You've deposited $_ in total
 home: Use an online savings calculator, like {nz:Sorted's~au:Moneysmart's}, with a grown-up and look at the chart.
 skill: compound
 
+@lesson 3.1 | The economic cycle | 🔄 | shares
+hook: Good times, bad times, good times again. Is there a pattern?
+learn: Economies tend to move in cycles: growth, a peak, a slowdown, a low point, then recovery.
+learn: In growth times, jobs and profits rise. In slowdowns, they shrink.
+learn: Share markets often move ahead of the economy, because investors look to the future.
+play: build | Build the economic cycle | Growth: jobs and profits rise; Peak: things are booming; Slowdown: spending and profits fall; Low point: lots of people out of work; Recovery: things start growing again
+check: mcq | What comes after a slowdown's low point? | Recovery* | Another peak straight away | The end
+check: tf | Share markets often move before the economy does. | true
+check: mcq | In a slowdown, what usually happens? | Spending and profits fall* | Everyone gets a pay rise | Prices double
+home: Ask a grown-up which part of the cycle they think the economy is in now.
+skill: cycles
+
+@lesson 3.2 | Bulls and bears | 🐂 | shares
+hook: Why do investors talk about bulls and bears?
+learn: A bull market is a long stretch of rising prices.
+learn: A bear market is when prices fall 20% or more from their peak.
+learn: Bear markets have always ended so far, but they can take months or years.
+play: sort | Bull market, Bear market | Prices rising for years=Bull market; Prices down 25% from the peak=Bear market; Investors feeling confident=Bull market; Lots of scary headlines=Bear market; New highs every few months=Bull market; Long fall in prices=Bear market | Bull or bear?
+check: mcq | A bear market usually means prices have fallen… | 20% or more from the peak* | 1% | Exactly 50%
+check: tf | Every bear market so far has eventually ended. | true
+check: mcq | A bull market is… | A long stretch of rising prices* | A farm show | A falling market
+home: Look up whether markets are rising or falling this year.
+skill: cycles
+
+@lesson 3.3 | Drops and recoveries | 📉 | shares
+hook: In 2008, shares in the US fell more than 50%. In 2020, they fell about a third in a month. What happened next?
+learn: In the 2008 financial crisis, the US share market fell about 57% and took until 2013 to get back to its old high.
+learn: In early 2020, as COVID-19 spread, it fell about 34% in a month, then recovered within about six months.
+learn: Recoveries can be quick or slow. Nobody knows in advance.
+play: market | Ride a crash and a recovery over 15 years | 15
+check: mcq | How long did the 2020 COVID drop take to recover in the US market? | About six months* | 50 years | It never recovered
+check: tf | Recoveries after crashes always happen quickly. | false | Some take months, some take years.
+check: mcq | In the 2008 crisis, the US market fell about… | 57%* | 5% | 100%
+home: Ask a grown-up what they remember about 2008 or 2020.
+skill: cycles
+
+@lesson 3.4 | Greed and fear | 😱 | stage
+hook: People rush to buy when prices are high and panic-sell when prices are low. Why?
+learn: When prices rise, excitement and fear of missing out make people pile in.
+learn: When prices crash, fear makes people sell, often near the bottom.
+learn: Buying high and selling low is the opposite of what makes money.
+play: scam | Calm thinking or a feelings trap? | Everyone's getting rich, I have to buy now!=scam; I'll stick to my long-term plan=real; Prices fell, sell everything before it's zero!=scam; I'll keep investing a set amount each month=real; My friend doubled their money, so I'll borrow to buy=scam | Fear of missing out and panic are the two biggest traps.
+check: mcq | What does fear often make investors do in a crash? | Sell near the bottom* | Buy more calmly | Nothing
+check: tf | Buying high and selling low loses money. | true
+check: mcq | A calm way to handle a crash is… | Stick to your long-term plan* | Panic-sell | Borrow to gamble
+home: Write one sentence you'd tell yourself if your investments dropped 20%.
+skill: cycles
+
+@lesson 3.5 | Investing regularly | 📅 | shares
+hook: You invest $100 every month, whatever happens. Is that a smart plan?
+learn: Investing the same amount regularly is called dollar-cost averaging.
+learn: When prices are low, your $100 buys more units. When prices are high, it buys fewer.
+learn: It takes the guessing and the feelings out of it.
+try: $100 at $10 a unit buys 10 units :: gap | $100 at $5 a unit buys _ units | 20
+play: diff | Your monthly $100 in January and in March, after a drop. Tap what changed. | Invested: $100; Price per unit: $10; Units bought: 10 | Invested: $100; Price per unit: $5; Units bought: 20
+check: mcq | When prices fall, a regular $100 buys… | More units* | Fewer units | No units
+check: gap | $100 at $20 a unit buys _ units | 5
+check: tf | Investing regularly takes some feelings out of investing. | true
+home: Ask a grown-up whether their {nz:KiwiSaver~au:super} works like regular investing.
+skill: cycles
+
+@lesson 3.6 | You can't time it | ⏱️ | shares
+hook: What if you just sold before every crash and bought back before every rise?
+learn: Nobody can reliably predict crashes or rises, not even professionals.
+learn: Some of the best days often come soon after the worst ones. Miss a few and returns drop a lot.
+learn: Time in the market usually beats timing the market.
+play: timing | Try to tap exactly at the bottom of the market. Not easy! | Buy now | Bottom
+check: mcq | What usually works better? | Time in the market* | Timing the market | Selling every Friday
+check: tf | Some of the best days often come soon after the worst. | true
+check: mcq | Who can reliably predict every crash? | Nobody* | Every expert | Social media
+home: Find a chart of a share market over 30 years and spot the big drops.
+skill: cycles
+

@@ -155,3 +155,75 @@ check: tf | The true cost of borrowing includes fees as well as interest. | true
 home: Find a "pay weekly" price in an ad and work out the total cost.
 skill: debt
 
+@lesson 3.1 | How scams work | 🎣 | online
+hook: Scams come in many shapes. Most follow the same recipe. What is it?
+learn: First they contact you: a text, call, email, DM or ad.
+learn: Then the hook: a prize, a scare, a deal or a new friend. Then pressure: act now!
+learn: Finally they ask for money or details, often by gift cards, crypto or a bank transfer.
+play: build | Build the scam recipe | Contact out of the blue; A hook, like a prize or a scare; Pressure to act fast; A request for money or details; A hard-to-trace payment, like gift cards or crypto
+check: mcq | What do most scams try to make you do? | Act fast without thinking* | Take your time | Ask a grown-up
+check: tf | Scams often ask for payment by gift card or crypto. | true
+check: mcq | A message offers a prize but wants a fee first. That's… | A classic scam* | A lucky day | A normal prize
+home: Show a grown-up the scam recipe and ask if they've seen one.
+skill: scams
+
+@lesson 3.2 | Gift card payments | 🎁 | stall
+hook: A caller says you owe tax and must pay today with gift cards. Real?
+learn: No real government department, bank or company asks to be paid in gift cards.
+learn: Gift cards are like cash. Once you share the code, the money is gone.
+learn: If anyone asks you to buy gift cards to pay a bill, it's a scam.
+play: scam | Real or scam? | {nz:IRD~au:The ATO} says pay your tax debt today with gift cards=scam; Your aunt gives you a gift card for your birthday=real; Your "boss" emails asking you to buy gift cards for clients, urgently=scam; A shop sells you a gift card at the counter=real; A friend you met online asks for a gift card to fix their phone=scam | Gift cards are for gifts, never for paying bills or fees.
+check: mcq | Someone wants a bill paid with gift cards. That's… | A scam* | Normal | A special deal
+check: tf | Once you share a gift card code, the money is usually gone. | true
+check: mcq | Who might really ask you to pay with gift cards? | Nobody legitimate* | {nz:IRD~au:The ATO} | Your bank
+home: Next time you're at the shops, find the scam warning near the gift cards.
+skill: scams
+
+@lesson 3.3 | Easy money offers | 💰 | online
+hook: "Earn $300 a day just liking videos!" They even pay you $10 at first. What's the catch?
+learn: Task scams pay a little at first, then ask you to deposit money to "unlock" bigger earnings.
+learn: Once you pay in, the money vanishes, and they ask for more.
+learn: Real jobs pay you. They never ask you to pay to work.
+play: path | An app paid you $10 for liking videos. Now it says deposit $100 to unlock $500. | Stop, don't pay, and tell a grown-up => good: You spotted the trap. The first $10 was bait. | Deposit $100 to unlock the $500 => bad: The money vanishes, and they ask for more to "release" it. | Get friends to join for a bonus => bad: Now your friends lose money too.
+check: mcq | A "job" asks you to pay money to start earning. That's… | A scam* | A great offer | Normal
+check: tf | Real jobs pay you. They don't ask you to pay to work. | true
+check: mcq | Why do task scams pay a little at first? | To make you trust them before they take more* | Because they're generous | By mistake
+home: Talk with a grown-up about a too-good-to-be-true offer you've seen online.
+skill: scams
+
+@lesson 3.4 | Online friend scams | 💔 | online
+hook: Someone you've chatted with online for weeks suddenly needs money for an emergency. What do you do?
+learn: Some scammers spend weeks building a friendship or romance, then ask for money.
+learn: Warning signs: they won't video call, they have a sad emergency, and they ask you to keep it secret.
+learn: Never send money or gift cards to someone you haven't met in real life.
+play: chat | An online friend you've never met messages you | them: I'm stuck overseas and lost my wallet. Can you send $200? I'll pay you back! | me: I can't send money. Can we video call?*/Sure, what's your account?/I'll send gift cards | them: My camera's broken. Please, I really need help. | me: Sorry, I won't send money. I'm going to talk to a grown-up*/OK, I'll send it/I'll borrow from my parents for you
+check: mcq | An online friend you've never met asks for money. You… | Don't send it, and tell a trusted adult* | Send a little | Send gift cards
+check: tf | Refusing to video call is a warning sign. | true
+check: mcq | Why do scammers build friendships first? | So you'll trust them when they ask for money* | They're lonely | It's a game
+home: Agree with a grown-up on a rule about sending money online.
+skill: scams
+
+@lesson 3.5 | Card fraud | 💳 | bank
+hook: There's a $49 charge on your card from a shop you've never heard of. What now?
+learn: Card details can be stolen by fake websites, data leaks or card skimmers.
+learn: Check your account often. Small test charges can come before bigger ones.
+learn: Lock your card in your bank's app and call your bank straight away.
+play: diff | Your planned spending and your statement. Tap the charges you didn't make. | Bus card $10; Lunch $8; Music app $5.99 | Bus card $10; Lunch $8; Music app $5.99; OnlineMart $1.00; OnlineMart $49.00
+check: mcq | You see a charge you didn't make. First step? | Lock the card and call your bank* | Wait and see | Post about it
+check: tf | Small charges you don't recognise can be a warning sign. | true
+check: mcq | How can card details be stolen? | Fake websites and data leaks* | Using your card in the bank's own app | Keeping it in your wallet
+home: Find the "lock card" button in a banking app with a grown-up.
+skill: fraud
+
+@lesson 3.6 | Report it | 📣 | townhall
+hook: You nearly fell for a scam. Is it worth reporting?
+learn: Yes. Reports help warn others and help stop scammers.
+learn: {nz:Report scams to Netsafe. If you lost money, tell your bank and Police (105).~au:Report scams to Scamwatch. If you lost money, tell your bank and use ReportCyber.}
+learn: Being scammed isn't your fault. Scammers are professionals. Talk to a trusted adult.
+play: order | You lost money to a scam. Put the steps in order. | Tell a trusted adult; Call your bank straight away; Change any passwords you shared; Report it to {nz:Netsafe and Police~au:Scamwatch and ReportCyber}; Warn friends about the scam
+check: mcq | {nz:Where can you report a scam in NZ?~au:Where can you report a scam in Australia?} | {nz:Netsafe~au:Scamwatch}* | A comment section | Nowhere
+check: tf | Being scammed is always your own fault. | false | Scammers are professionals. Anyone can be fooled.
+check: mcq | Why report a scam you nearly fell for? | It helps warn and protect others* | It's not worth it | You'll get a prize
+home: Save {nz:netsafe.org.nz~au:scamwatch.gov.au} in your browser.
+skill: scams
+

@@ -150,6 +150,78 @@ check: mcq | Which one shows patience? | Waiting your turn on the slide* | Pushi
 home: Bake or cook something with a grown-up and practise waiting for it.
 skill: patience
 
+@lesson 3.1 | A piece of the pie | 🥧 | shares
+hook: A big company is like a giant pie. Could you own a slice?
+learn: Big companies can be cut into lots of tiny pieces called shares.
+learn: If you buy a share, you own a tiny piece of that company.
+learn: People who own shares are called shareholders.
+play: match | Match each word to what it means | Company=A business that makes or sells things; Share=A tiny piece of a company; Shareholder=Someone who owns shares; Owner=Someone a thing belongs to
+check: mcq | What is a share? | A tiny piece of a company* | A kind of pie | A bank card
+check: tf | If you own a share, you own a tiny bit of the company. | true
+check: mcq | What do we call people who own shares? | Shareholders* | Shopkeepers | Shoemakers
+home: Cut a sandwich into four pieces. If you have one piece, how much of the sandwich do you own?
+skill: shares
+
+@lesson 3.2 | Companies you know | 🏢 | shares
+hook: The airline you fly with, the shop where you buy food... who owns them?
+learn: Lots of big companies are owned by many shareholders, not just one person.
+learn: {nz:Air New Zealand is partly owned by the government and partly by people who bought its shares.~au:Big companies like Qantas and Woolworths are owned by people who bought their shares.}
+learn: Anyone, even a grown-up saving for a kid, can buy shares in big companies.
+play: tap | Tap the things a big company might make or sell | ✈️:yes:Airlines fly people around; 🛒:yes:Supermarkets sell food; 🏦:yes:Banks look after money; 🌈:no; 📱:yes:Phone companies sell phone plans; 🌙:no
+check: mcq | Who owns many big companies? | Lots of shareholders* | Nobody | Only the boss
+check: tf | Anyone can buy shares in many big companies. | true
+check: mcq | Which of these is a company? | {nz:Air New Zealand~au:Qantas}* | The Moon | A rainbow
+home: With a grown-up, name three companies you know.
+skill: shares
+
+@lesson 3.3 | When the company does well | 🌟 | shares
+hook: The company you own a piece of has a great year. What happens to your piece?
+learn: When a company makes more money, more people want its shares.
+learn: Then each share can be worth more.
+learn: Some companies also share part of their profit with shareholders. That's called a dividend.
+play: path | You own one share in a juice company. It sells lots of juice this year. | Keep your share and see what happens => good: More people want shares in a busy company, so yours may be worth more. You might get a dividend too! | Throw it away => bad: Then you don't own any of the company. | Swap it for one lolly => bad: A share in a busy company could be worth much more than a lolly.
+check: mcq | What's a dividend? | Part of the profit shared with shareholders* | A kind of drink | A sale price
+check: tf | When a company does well, its shares can be worth more. | true
+check: mcq | A company sells lots this year. Its shares might… | Be worth more* | Disappear | Turn into coins
+home: Pick a favourite company and guess if it had a good year. Ask a grown-up what they think.
+skill: shares
+
+@lesson 3.4 | Owners get a say | 🗳️ | townhall
+hook: If you own part of a company, do you get to help decide things?
+learn: Shareholders are owners, so they get to vote on some big decisions.
+learn: The more shares you own, the more votes you have.
+learn: Owners pick people to run the company well for them.
+play: sort | Owners vote on it, Workers decide it | Who is on the board=Owners vote on it; Which song plays in the shop=Workers decide it; Big changes to the company=Owners vote on it; What to have for lunch=Workers decide it | Who decides?
+check: mcq | Why do shareholders get a vote? | They own part of the company* | They are customers | They are famous
+check: tf | More shares usually means more votes. | true
+check: mcq | Shareholders choose people to… | Help run the company well* | Eat lunch | Sing songs
+home: Have a family vote on something small, like a game to play.
+skill: shares
+
+@lesson 3.5 | Shares or a money box? | 🫙 | bank
+hook: $10 in a money box stays $10. Is a share the same?
+learn: Money in a money box stays the same.
+learn: A share's price can go up or down, a bit every day.
+learn: Over a long time, shares in good companies have often grown. But not always.
+play: sort | Money box, Shares | Stays the same amount=Money box; Can go up or down=Shares; Easy to take out today=Money box; Can grow over many years=Shares; Never changes=Money box; Owns a piece of a company=Shares | Money box or shares?
+check: mcq | What can happen to a share's price? | It can go up or down* | It never changes | It always doubles
+check: tf | Money in a money box stays the same amount. | true
+check: mcq | Over a long time, shares in good companies have often… | Grown* | Disappeared | Turned into toys
+home: Draw a money box and a share. Write one difference under each.
+skill: shares
+
+@lesson 3.6 | Your Invest jar | 🌱 | bank
+hook: In Chorecast, one of your jars is called Invest. What's it for?
+learn: Your Invest jar is for money you want to grow over a long time.
+learn: In real life, kids usually need a grown-up to buy shares for them.
+learn: Money for investing is money you won't need for a long time.
+play: sort | jars | Saving for a bike next month=Vault; A treat this weekend=Spend; Money to grow until you're grown up=Invest; Helping the animal shelter=Give; Lunch at the school gala=Spend; Money to leave alone for years=Invest | Which jar?
+check: mcq | What's the Invest jar for? | Money to grow over a long time* | Lollies today | Giving away
+check: tf | Kids usually need a grown-up to buy real shares. | true
+check: mcq | Money you'll need next week should go in… | Spend or Vault* | Invest | Nowhere
+home: Talk with a grown-up about how much of your money could go in the Invest jar.
+skill: jars
+
 @band builders
 @unit 1 | Shares and companies | Owning part of a business
 @unit 2 | Risk and reward | Why some investments jump around
@@ -300,6 +372,79 @@ check: tf | Everyone feels the same about risk. | false | People feel very diffe
 check: mcq | What money should you invest? | Money you won't need for a long time* | This week's lunch money | Money borrowed from a friend
 home: Ask two family members how they'd feel if their savings dropped 20%. Compare the answers.
 skill: risk
+
+@lesson 3.1 | Eggs in one basket | 🥚 | shares
+hook: You carry all your eggs in one basket and trip. What happens?
+learn: "Don't put all your eggs in one basket" means don't risk everything on one thing.
+learn: If all your money is in one company and it fails, you could lose most of it.
+learn: Spreading your money out is called diversification.
+play: path | You have $100 to invest. | Spread it across lots of companies => good: If one company has a bad year, the others can balance it out. | Put it all in your friend's favourite company => bad: If that one company struggles, most of your money goes with it. | Put it all in a brand-new company with no products yet => bad: New companies often fail. That's a big risk for all your money.
+check: mcq | What is diversification? | Spreading your money across many investments* | Putting it all in one place | Spending it fast
+check: tf | If one company fails, it hurts less when your money is spread out. | true
+check: mcq | Which is the most diversified? | Shares in 100 companies* | Shares in 1 company | Shares in 2 companies
+home: Explain "don't put all your eggs in one basket" to someone at home.
+skill: diversify
+
+@lesson 3.2 | Different industries | 🏭 | shares
+hook: You own shares in five airlines. A storm grounds every plane for a month. Are you diversified?
+learn: Owning many companies helps, but not if they're all in the same industry.
+learn: Spread across industries like food, health, energy, banks and technology.
+learn: When one industry has a bad time, others may be fine.
+play: sort | Well spread, All in one area | One food, one health, one bank and one tech company=Well spread; Five airlines=All in one area; Shares across 10 different industries=Well spread; Three gaming companies=All in one area; A fund that owns the whole share market=Well spread; Four car makers=All in one area | Well spread or not?
+check: mcq | Which portfolio is spread across industries? | A food, a health and a tech company* | Three airlines | Two car makers
+check: tf | Owning many companies in one industry is still risky. | true
+check: mcq | Why spread across industries? | When one has a bad time, others may be fine* | It's the law | It makes shares cheaper
+home: Name three different industries and one company in each.
+skill: diversify
+
+@lesson 3.3 | Different countries | 🌏 | shares
+hook: {nz:The NZ share market is less than 1% of the world's.~au:The Australian share market is only about 2% of the world's.} Should all your shares be local?
+learn: Investing only in your own country means missing most of the world's companies.
+learn: Funds can hold shares in many countries at once.
+learn: Different countries' economies don't all go up and down at the same time.
+play: debate | Should you only invest in companies from your own country? | No. Spreading across countries reduces risk and adds choice* | Yes. Local is always better | Local shares are easier to understand, and some have tax perks. Many investors keep some at home and some overseas.
+check: mcq | Why invest in other countries too? | Most of the world's companies are overseas* | Overseas shares never fall | It's free
+check: tf | Funds can hold shares from many countries. | true
+check: mcq | {nz:About how much of the world's share market is in NZ?~au:About how much of the world's share market is in Australia?} | {nz:Less than 1%~au:About 2%}* | Half | All of it
+home: Look at a global fund's fact sheet with a grown-up and find which countries it invests in.
+skill: diversify
+
+@lesson 3.4 | Different kinds | 🎨 | shares
+hook: Shares, bonds, cash and property. Why might someone own a bit of each?
+learn: Different kinds of investments behave differently.
+learn: When shares fall, cash and bonds often hold their value better.
+learn: A mix can make the ride smoother, though it may grow more slowly.
+play: match | Match each investment to how it usually behaves | Shares=Most growth, biggest wobbles; Bonds=Steady interest, smaller wobbles; Cash=Very steady, slow growth; Property=Can grow, but hard to sell quickly
+check: mcq | Why mix different kinds of investments? | To make the ups and downs smoother* | To make it confusing | To pay more fees
+check: tf | A mix of investments usually wobbles less than shares alone. | true
+check: mcq | Which usually wobbles the least? | Cash* | Shares in one company | Crypto
+home: Ask a grown-up whether their {nz:KiwiSaver~au:super} fund holds a mix of investments.
+skill: diversify
+
+@lesson 3.5 | Funds do it for you | 🧺 | shares
+hook: Buying 500 different shares sounds hard. Is there an easier way?
+learn: A fund pools money from lots of people and buys many investments at once.
+learn: With one small payment, you can own a tiny slice of hundreds of companies.
+learn: Index funds are a low-cost way to spread across a whole market.
+try: $100 spread over 100 companies is $1 each :: gap | $500 spread over 250 companies is $_ each | 2
+play: mystery | It pools money from lots of people; It buys many investments at once; Your small payment gets a slice of hundreds of companies; Some just follow a whole market | A fund* | A piggy bank | A credit card
+check: mcq | What does a fund do? | Pools money to buy many investments* | Lends you money | Pays your bills
+check: tf | With a fund, a small amount can be spread across hundreds of companies. | true
+check: mcq | A low-cost way to own a whole market is… | An index fund* | One hot share | A lottery ticket
+home: Ask a grown-up if they have money in a fund, like {nz:KiwiSaver~au:super}.
+skill: diversify
+
+@lesson 3.6 | What diversification can't do | 🌧️ | shares
+hook: You own shares in 1,000 companies. The whole market drops. Are you safe?
+learn: Diversification lowers the risk of one company or industry hurting you badly.
+learn: But when the whole market falls, a diversified portfolio usually falls too.
+learn: That's why time matters. Money you need soon shouldn't be in shares.
+play: sort | Diversification helps, Diversification can't stop it | One company goes bust=Diversification helps; The whole market falls 20%=Diversification can't stop it; One industry has a bad year=Diversification helps; A world-wide recession=Diversification can't stop it; One country's market slumps=Diversification helps | Can spreading out protect you?
+check: mcq | What can't diversification stop? | The whole market falling* | One company failing hurting you badly | One industry's bad year hurting you badly
+check: tf | A diversified portfolio can still fall when the whole market does. | true
+check: mcq | Money you need next month should be in… | A savings account* | Shares | Crypto
+home: Explain to someone at home one thing diversification can do and one thing it can't.
+skill: diversify
 
 @band makers
 @unit 1 | Index funds | Owning a slice of everything
@@ -454,6 +599,79 @@ check: gap | You put in $1,000 a year for 10 years. You've deposited $_ in total
 home: Use an online savings calculator, like {nz:Sorted's~au:Moneysmart's}, with a grown-up and look at the chart.
 skill: compound
 
+@lesson 3.1 | The economic cycle | 🔄 | shares
+hook: Good times, bad times, good times again. Is there a pattern?
+learn: Economies tend to move in cycles: growth, a peak, a slowdown, a low point, then recovery.
+learn: In growth times, jobs and profits rise. In slowdowns, they shrink.
+learn: Share markets often move ahead of the economy, because investors look to the future.
+play: build | Build the economic cycle | Growth: jobs and profits rise; Peak: things are booming; Slowdown: spending and profits fall; Low point: lots of people out of work; Recovery: things start growing again
+check: mcq | What comes after a slowdown's low point? | Recovery* | Another peak straight away | The end
+check: tf | Share markets often move before the economy does. | true
+check: mcq | In a slowdown, what usually happens? | Spending and profits fall* | Everyone gets a pay rise | Prices double
+home: Ask a grown-up which part of the cycle they think the economy is in now.
+skill: cycles
+
+@lesson 3.2 | Bulls and bears | 🐂 | shares
+hook: Why do investors talk about bulls and bears?
+learn: A bull market is a long stretch of rising prices.
+learn: A bear market is when prices fall 20% or more from their peak.
+learn: Bear markets have always ended so far, but they can take months or years.
+play: sort | Bull market, Bear market | Prices rising for years=Bull market; Prices down 25% from the peak=Bear market; Investors feeling confident=Bull market; Lots of scary headlines=Bear market; New highs every few months=Bull market; Long fall in prices=Bear market | Bull or bear?
+check: mcq | A bear market usually means prices have fallen… | 20% or more from the peak* | 1% | Exactly 50%
+check: tf | Every bear market so far has eventually ended. | true
+check: mcq | A bull market is… | A long stretch of rising prices* | A farm show | A falling market
+home: Look up whether markets are rising or falling this year.
+skill: cycles
+
+@lesson 3.3 | Drops and recoveries | 📉 | shares
+hook: In 2008, shares in the US fell more than 50%. In 2020, they fell about a third in a month. What happened next?
+learn: In the 2008 financial crisis, the US share market fell about 57% and took until 2013 to get back to its old high.
+learn: In early 2020, as COVID-19 spread, it fell about 34% in a month, then recovered within about six months.
+learn: Recoveries can be quick or slow. Nobody knows in advance.
+play: market | Ride a crash and a recovery over 15 years | 15
+check: mcq | How long did the 2020 COVID drop take to recover in the US market? | About six months* | 50 years | It never recovered
+check: tf | Recoveries after crashes always happen quickly. | false | Some take months, some take years.
+check: mcq | In the 2008 crisis, the US market fell about… | 57%* | 5% | 100%
+home: Ask a grown-up what they remember about 2008 or 2020.
+skill: cycles
+
+@lesson 3.4 | Greed and fear | 😱 | stage
+hook: People rush to buy when prices are high and panic-sell when prices are low. Why?
+learn: When prices rise, excitement and fear of missing out make people pile in.
+learn: When prices crash, fear makes people sell, often near the bottom.
+learn: Buying high and selling low is the opposite of what makes money.
+play: scam | Calm thinking or a feelings trap? | Everyone's getting rich, I have to buy now!=scam; I'll stick to my long-term plan=real; Prices fell, sell everything before it's zero!=scam; I'll keep investing a set amount each month=real; My friend doubled their money, so I'll borrow to buy=scam | Fear of missing out and panic are the two biggest traps.
+check: mcq | What does fear often make investors do in a crash? | Sell near the bottom* | Buy more calmly | Nothing
+check: tf | Buying high and selling low loses money. | true
+check: mcq | A calm way to handle a crash is… | Stick to your long-term plan* | Panic-sell | Borrow to gamble
+home: Write one sentence you'd tell yourself if your investments dropped 20%.
+skill: cycles
+
+@lesson 3.5 | Investing regularly | 📅 | shares
+hook: You invest $100 every month, whatever happens. Is that a smart plan?
+learn: Investing the same amount regularly is called dollar-cost averaging.
+learn: When prices are low, your $100 buys more units. When prices are high, it buys fewer.
+learn: It takes the guessing and the feelings out of it.
+try: $100 at $10 a unit buys 10 units :: gap | $100 at $5 a unit buys _ units | 20
+play: diff | Your monthly $100 in January and in March, after a drop. Tap what changed. | Invested: $100; Price per unit: $10; Units bought: 10 | Invested: $100; Price per unit: $5; Units bought: 20
+check: mcq | When prices fall, a regular $100 buys… | More units* | Fewer units | No units
+check: gap | $100 at $20 a unit buys _ units | 5
+check: tf | Investing regularly takes some feelings out of investing. | true
+home: Ask a grown-up whether their {nz:KiwiSaver~au:super} works like regular investing.
+skill: cycles
+
+@lesson 3.6 | You can't time it | ⏱️ | shares
+hook: What if you just sold before every crash and bought back before every rise?
+learn: Nobody can reliably predict crashes or rises, not even professionals.
+learn: Some of the best days often come soon after the worst ones. Miss a few and returns drop a lot.
+learn: Time in the market usually beats timing the market.
+play: timing | Try to tap exactly at the bottom of the market. Not easy! | Buy now | Bottom
+check: mcq | What usually works better? | Time in the market* | Timing the market | Selling every Friday
+check: tf | Some of the best days often come soon after the worst. | true
+check: mcq | Who can reliably predict every crash? | Nobody* | Every expert | Social media
+home: Find a chart of a share market over 30 years and spot the big drops.
+skill: cycles
+
 @band launchers
 @unit 1 | {nz:KiwiSaver~au:Superannuation} | Your retirement fund and how to choose it
 @unit 2 | Fees and returns | Comparing funds the right way
@@ -606,3 +824,77 @@ check: tf | Index funds usually have lower fees than active funds. | true
 check: mcq | An index fund… | Buys everything in an index* | Picks a few hot shares | Guarantees a return
 home: Find one index fund and one active fund and compare their fees.
 skill: index
+
+@lesson 3.1 | Rent or buy? | 🏠 | home
+hook: Renting feels like "dead money". Is buying always better?
+learn: Buying can build wealth over time, but comes with big costs: a deposit, interest, rates, insurance and repairs.
+learn: Renting costs rent, but you can move easily and your savings can be invested elsewhere.
+learn: The right choice depends on prices, interest rates, your job and your plans.
+play: debate | Is renting just "dead money"? | Not really. Owners pay interest, rates and repairs too, and renters can invest the difference* | Yes. Renting is always a waste | Owning gives security and can build wealth through paying down a loan. Many people value that a lot.
+check: mcq | Which is a cost of owning a home? | Rates, insurance and repairs* | Rent to a landlord | Nothing
+check: tf | Renting makes it easier to move for a job. | true
+check: mcq | The best choice between renting and buying depends on… | Prices, interest rates and your plans* | Your star sign | What your friends do
+home: Ask a grown-up what they think the pros and cons of renting and buying are.
+skill: property
+
+@lesson 3.2 | The deposit | 💰 | bank
+hook: A $700,000 house. How much do you need before the bank will lend you the rest?
+learn: Banks usually want a deposit of about 20% of the price.
+learn: 20% of $700,000 is $140,000. That takes most people years to save.
+learn: {nz:Some first-home schemes, like First Home Loans, let eligible buyers start with a 5% deposit.~au:With a smaller deposit you may pay lenders mortgage insurance. The government's First Home Guarantee lets eligible buyers start with 5% without it.}
+try: 20% of $500,000 = $100,000 :: gap | 20% of $600,000 = $_ | 120000
+play: slider | You save $400 a week for a $120,000 deposit. About how many years will it take? | 1 | 15 | 6 | years | 1 | 1
+check: mcq | What deposit do banks usually want? | About 20%* | 1% | 100%
+check: gap | 5% of $600,000 = $_ | 30000
+check: tf | A smaller deposit can mean extra costs or a bigger loan. | true
+home: Look up a house price near you and work out a 20% deposit.
+skill: property
+
+@lesson 3.3 | Mortgage maths | 🧮 | bank
+hook: Borrow $600,000 at 6% over 30 years. How much do you pay back in total?
+learn: A $600,000 loan at 6% over 30 years costs about $3,600 a month.
+learn: Over 30 years that's about $1.3 million in total, more than double the loan.
+learn: Paying a little extra each month, or a lower rate, can save tens of thousands.
+play: slider | $600,000 at 6% over 30 years costs about $3,600 a month. Roughly how much is paid in total, in thousands? | 600 | 2000 | 1295 | k$ | 60 | 5
+check: mcq | Why do you pay back much more than you borrowed? | Interest over many years* | Bank gifts | Inflation only
+check: tf | Paying a little extra each month can save a lot of interest. | true
+check: gap | $3,600 a month for 12 months = $_ a year | 43200
+home: Try an online mortgage calculator with a grown-up and change the interest rate.
+skill: property
+
+@lesson 3.4 | Hidden costs of owning | 🔧 | home
+hook: You've bought a house. The mortgage is the only cost now, right?
+learn: Owners pay council rates, insurance, maintenance and sometimes body corporate fees.
+learn: A rough rule is to budget about 1% of the home's value a year for maintenance.
+learn: {nz:NZ has no stamp duty, but buyers pay for a lawyer, a building inspection and moving.~au:Most buyers pay stamp duty to the state, though many first-home buyers get it reduced or waived.}
+try: 1% of $700,000 = $7,000 a year :: gap | 1% of $500,000 = $_ a year | 5000
+play: budget | Plan the yearly costs of a $600,000 home, in thousands of dollars. | 60 | Mortgage=43; Rates=3; Insurance=3; Maintenance=6; Savings buffer=0 | Hot water cylinder:3
+check: mcq | Which is a cost of owning a home? | Council rates* | Rent | Bond
+check: tf | A rough rule is to budget about 1% of a home's value a year for maintenance. | true
+check: mcq | {nz:Does NZ charge stamp duty on house purchases?~au:Who charges stamp duty on house purchases?} | {nz:No~au:State and territory governments}* | {nz:Yes, 20%~au:Your bank} | {nz:Only on Sundays~au:Nobody}
+home: Ask a grown-up what their home costs each year besides rent or the mortgage.
+skill: property
+
+@lesson 3.5 | Interest rate risk | 📈 | bank
+hook: Your mortgage rate rises from 5% to 7%. What happens to your repayments?
+learn: On a floating or variable rate, repayments can rise or fall when rates change.
+learn: Fixing your rate for a set time keeps repayments steady, but you might miss out if rates fall.
+learn: Before buying, check you could still pay if rates rose by 2%.
+play: path | You're buying your first home. Rates might rise. | Fix part of the loan and test you could afford 2% higher => good: Smart. You have some certainty and a safety margin. | Borrow the maximum and hope rates never rise => bad: If rates jump, your repayments could become unaffordable. | Pick the loan with the lowest rate today without reading the terms => ok: Rate matters, but so do fees, the fixed period and break costs.
+check: mcq | What does fixing your rate do? | Keeps repayments steady for a set time* | Makes the loan free | Lowers the price of the house
+check: tf | Repayments on a floating or variable rate can rise. | true
+check: mcq | A sensible test before borrowing is… | Could I still pay if rates rose 2%?* | Can I borrow more? | Is the bank's logo nice?
+home: Ask a grown-up whether their home loan, if they have one, is fixed or floating.
+skill: property
+
+@lesson 3.6 | Property as an investment | 🏘️ | shares
+hook: "House prices always go up." True?
+learn: Over long periods, house prices in NZ and Australia have mostly risen, but not always or everywhere.
+learn: From their 2021 to 2022 peaks, average prices fell roughly 15% to 20% in NZ and about 9% in Australia.
+learn: Property ties up a lot of money in one asset, often with a big loan. That increases both gains and losses.
+play: sort | True about property, Myth | Prices can fall=True about property; Prices always go up=Myth; A big loan increases both gains and losses=True about property; You can sell a house in a day=Myth; Owners pay ongoing costs=True about property; Property has no risk=Myth | True or myth?
+check: mcq | What happened to house prices after the 2021 to 2022 peaks? | They fell for a while* | They doubled | Nothing
+check: tf | Borrowing a lot increases both your possible gains and losses. | true
+check: mcq | A risk of property as an investment is… | A lot of money tied up in one asset* | It's too easy to sell | It never needs repairs
+home: Look up how house prices in your area have changed over the last 5 years.
+skill: property

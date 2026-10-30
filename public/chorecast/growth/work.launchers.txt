@@ -153,3 +153,75 @@ check: mcq | {nz:Why do withdrawal dates matter?~au:Why does the census date mat
 home: Ask a grown-up if they ever changed paths, and what they learned.
 skill: careers
 
+@lesson 3.1 | Where the jobs are | 🔎 | online
+hook: You want a part-time job. Where do you look?
+learn: Job sites like {nz:Seek and Trade Me Jobs~au:Seek and Indeed} list lots of jobs.
+learn: Company websites, noticeboards, careers advisers and social media have more.
+learn: Many jobs are never advertised. They're filled by people who asked or were recommended.
+play: tap | Tap good places to find a job | 💻:yes:Job sites list thousands of jobs; 🏪:yes:Asking in local shops can turn up jobs; 👥:yes:Friends and family may know of openings; 📌:yes:Community noticeboards; 🎰:no; 📺:no
+check: mcq | How are many jobs filled? | Through people who asked or were recommended* | By lottery | Only by job ads
+check: tf | Some jobs are never advertised. | true
+check: mcq | {nz:Which is an NZ job site?~au:Which is an Australian job site?} | {nz:Trade Me Jobs~au:Indeed}* | A weather app | A food delivery app
+home: Find three part-time jobs near you on a job site.
+skill: jobhunting
+
+@lesson 3.2 | Networking | 🤝 | stage
+hook: "Networking" sounds scary. Is it just talking to people?
+learn: Networking means building relationships with people who might help with work, and helping them back.
+learn: Start with people you know: family, friends' parents, teachers, coaches and past bosses.
+learn: Ask for advice, not a job: "Could I ask you a few questions about working in engineering?"
+play: chat | Messaging a family friend who works in design | them: Hi! Your mum said you're interested in design? | me: Yes! Could I ask you a few questions about how you got started?*/Can you give me a job?/Hey | them: Of course. Happy to chat. | me: Thanks! Would a 15-minute call next week suit you?*/Send me your password/Never mind
+check: mcq | A good first networking ask is… | Could I ask you a few questions?* | Give me a job | Can you write my CV?
+check: tf | Your network includes family, teachers and coaches. | true
+check: mcq | Networking works best when you… | Build relationships and help back* | Only take | Send 100 identical messages
+home: List five people who might know about jobs you're interested in.
+skill: networking
+
+@lesson 3.3 | LinkedIn | 💼 | online
+hook: Employers sometimes look you up online. What will they find?
+learn: LinkedIn is a site for work profiles. You can join from 16.
+learn: Use a clear photo, a short headline, and list your skills, jobs, volunteering and study.
+learn: Keep it honest and professional. Check your other profiles are tidy too.
+play: build | Build a strong LinkedIn profile | A clear, friendly photo; A headline: Student and part-time barista; A short about section; Your jobs and volunteering; Your skills; Connect with people you know
+check: mcq | What's a good LinkedIn headline? | Student and part-time barista* | Party legend | Nothing
+check: tf | It's OK to exaggerate on LinkedIn. | false | Keep it honest. Employers check.
+check: mcq | What else might an employer look at? | Your other public profiles* | Your bank PIN | Your diary
+home: Search your own name online with a grown-up and see what comes up.
+skill: reputation
+
+@lesson 3.4 | Tailoring applications | ✂️ | workshop
+hook: You send the same CV to 30 jobs and hear nothing. Why?
+learn: Employers want to see you fit their job. Tailor each application.
+learn: Use words from the ad. If it asks for "customer service", show where you've done it.
+learn: Many employers use software to scan applications for these key words first.
+play: diff | Your general CV line and your tailored one. Tap what changed. | Skills: hard worker; Experience: volunteering; Available: weekends | Skills: customer service and teamwork; Experience: served 200 people at the {nz:school gala~au:school fete}; Available: weekends
+check: mcq | Why tailor each application? | To show you fit that job* | To make it longer | Because it's the law
+check: tf | Some employers use software to scan applications for key words. | true
+check: mcq | The ad asks for "teamwork". You should… | Give an example of teamwork* | Ignore it | Write "teamwork" 20 times
+home: Pick a job ad and underline the key words you'd use.
+skill: applying
+
+@lesson 3.5 | Job scams | 🚩 | online
+hook: A "recruiter" offers you a $40-an-hour remote job without an interview. They just need your bank details and a $50 training fee. Hmm.
+learn: Real employers don't charge you to apply or train.
+learn: Be wary of jobs with no interview, vague duties, pay that's too good, or requests for ID and bank details early.
+learn: Check the company is real, using its official website and phone number.
+play: scam | Real job or scam? | Café interview at the shop, then a trial shift paid at the proper rate=real; Pay $50 for training before you start=scam; Send a copy of your passport to get the job before any interview=scam; Online application through the company's official careers page=real; Get paid to receive and forward packages=scam | Real jobs don't charge fees or rush for your ID.
+check: mcq | A job asks for a training fee upfront. That's… | A warning sign of a scam* | Normal | A bonus
+check: tf | Real employers usually interview you before offering a job. | true
+check: mcq | How can you check a job is real? | Use the company's official website and phone number* | Trust the recruiter's message | Ask the recruiter if they're real
+home: Look up the job scam warnings on {nz:netsafe.org.nz~au:scamwatch.gov.au}.
+skill: scams
+
+@lesson 3.6 | Follow-ups and rejection | 📬 | workshop
+hook: You had an interview a week ago and heard nothing. Do you follow up?
+learn: Yes. A short, polite follow-up shows interest. A thank-you email after an interview helps too.
+learn: Rejection is part of job hunting. Nearly everyone gets lots of nos.
+learn: Ask for feedback if you can, and use it on the next application.
+play: chat | Following up a week after an interview | them: Hi, thanks for following up. We've chosen another applicant this time. | me: Thanks for letting me know. Could you share any feedback for next time?*/Your loss/Why didn't you pick me? | them: Sure. More examples of customer service would help. | me: That's really helpful. Thanks again*/Whatever/I'll never apply again
+check: mcq | You didn't get the job. A good next step is… | Ask for feedback and use it* | Send an angry email | Give up on job hunting
+check: tf | Most people face rejection when job hunting. | true
+check: mcq | When might you send a thank-you email? | After an interview* | Before you apply | Never
+home: Write a short thank-you email you could send after an interview.
+skill: resilience
+

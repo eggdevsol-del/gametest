@@ -147,3 +147,75 @@ check: mcq | What do happy customers often do? | Ask you back and tell others* |
 home: Ask a grown-up who they'd recommend for a job, and why.
 skill: reputation
 
+@lesson 3.1 | First impressions | 👋 | stall
+hook: A customer walks up to your stall. You're on your phone. What do they think?
+learn: People decide a lot in the first few seconds.
+learn: Look up, smile, and say hello.
+learn: A tidy stall and a friendly face make people want to stay.
+play: sort | Good first impression, Bad first impression | Smiling and saying hi=Good first impression; Staring at your phone=Bad first impression; A tidy table=Good first impression; Ignoring the customer=Bad first impression; Making eye contact=Good first impression; Eating while serving=Bad first impression | Good or bad first impression?
+check: mcq | A customer arrives. What should you do first? | Look up, smile and say hello* | Finish your game | Look away
+check: tf | People form first impressions quickly. | true
+check: mcq | Which makes a stall look welcoming? | Tidy, with a friendly seller* | Messy and empty | Closed
+home: Notice how a shop worker greets you this week. What did they do well?
+skill: service
+
+@lesson 3.2 | Finding out what they need | 🔍 | stall
+hook: A customer says "I need a present." How do you help?
+learn: Ask friendly questions to find out what they want.
+learn: "Who is it for?" "What do they like?" "How much would you like to spend?"
+learn: Then suggest something that fits.
+play: chat | A customer at your craft stall | them: Hi. I need a present, but I'm not sure what. | me: Sure! Who's it for, and what do they like?*/Just buy anything/We're closed | them: My niece. She's 7 and loves animals. | me: These animal bookmarks are popular with 7-year-olds. Would one suit?*/Buy the most expensive thing/I don't know, sorry
+check: mcq | What's a good question to help a customer? | Who's it for?* | Why are you here? | Can you hurry up?
+check: tf | Asking questions helps you suggest the right thing. | true
+check: mcq | After asking questions, you should… | Suggest something that fits* | Walk away | Ask the same thing again
+home: Help a family member choose a gift by asking three questions first.
+skill: service
+
+@lesson 3.3 | Handling complaints | 🙏 | stall
+hook: A customer says the bracelet they bought broke. How do you turn it around?
+learn: Use LAST: Listen, Apologise, Solve, Thank.
+learn: Listen without interrupting. Say sorry. Fix it, like a swap or a refund.
+learn: Thank them for telling you. Now you can make it better.
+play: build | Handle the complaint with LAST | Listen without interrupting; Say sorry it happened; Offer a fix, like a new bracelet; Thank them for telling you
+check: mcq | What does the L in LAST stand for? | Listen* | Leave | Laugh
+check: tf | Thanking a customer for a complaint can help. | true
+check: mcq | A customer's item broke. A good fix is… | A swap or a refund* | Arguing | Ignoring them
+home: Practise LAST with a grown-up pretending to be a grumpy customer.
+skill: service
+
+@lesson 3.4 | The extra mile | ⭐ | stall
+hook: Two cafés make the same hot chocolate. One remembers your name. Which do you go back to?
+learn: Going the extra mile means doing a little more than people expect.
+learn: Remember regulars, carry a heavy bag, or add a thank-you note.
+learn: Small extras often matter more than big ones.
+play: tap | Tap the extra-mile ideas | 📝:yes:A handwritten thank-you note; 👜:yes:Helping carry a heavy bag; 😊:yes:Remembering a customer's name; 🙄:no; 📵:yes:Putting your phone away to focus on them; 💤:no
+check: mcq | What does "going the extra mile" mean? | Doing a little more than expected* | Running a mile | Charging extra
+check: tf | Small extras can make customers come back. | true
+check: mcq | Which is going the extra mile? | Remembering a regular's name* | Being late | Forgetting their order
+home: Do one extra-mile thing for someone at home this week.
+skill: service
+
+@lesson 3.5 | Phone and door manners | ☎️ | home
+hook: The home phone rings and the grown-ups are busy. What do you say?
+learn: Answer clearly and politely: "Hello, this is Sam."
+learn: If they want someone who's busy, take a message: name, number and what it's about.
+learn: Never tell a stranger you're home alone, or give out personal details.
+play: chat | You answer the family phone | them: Hi, is your mum there? | me: She can't come to the phone right now. Can I take a message?*/No, I'm home alone/What do you want? | them: Yes, it's Kim from the dentist. Can she call me back? | me: Sure. Can I have your number, please? I'll tell her*/Whatever/I'll forget
+check: mcq | What should you write in a phone message? | Name, number and what it's about* | Only their name | Nothing
+check: tf | You should tell callers when you're home alone. | false | Never tell a stranger you're home alone.
+check: mcq | A polite way to answer the phone is… | Hello, this is Sam* | What? | Grunting
+home: Practise taking a phone message with a grown-up.
+skill: communication
+
+@lesson 3.6 | Staying calm | 😌 | stall
+hook: A customer is rude to you at the school stall. What do you do?
+learn: Stay calm and polite, even if they aren't. Don't argue back.
+learn: Take a breath. Speak slowly and kindly.
+learn: If someone is very rude or you feel unsafe, get a grown-up straight away.
+play: path | A customer shouts that your prices are a rip-off. | Stay calm and say, "Sorry you feel that way. Our prices help the shelter." => good: You stayed polite and explained. They calmed down. | Shout back that they're rude => bad: Now it's an argument, and other customers walk away. | Cry and run off => ok: It's OK to feel upset. Next time, try taking a breath or getting a grown-up.
+check: mcq | A customer is rude. What's best? | Stay calm and polite* | Be rude back | Throw something
+check: tf | If you feel unsafe, get a grown-up straight away. | true
+check: mcq | What can help you stay calm? | Taking a slow breath* | Shouting | Stamping your feet
+home: Practise a calm breath and a polite reply with a grown-up.
+skill: calm
+

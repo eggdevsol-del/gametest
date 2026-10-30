@@ -155,3 +155,76 @@ check: mcq | What should you do with your power account when you leave? | Close 
 home: Make a moving-out checklist with a grown-up who has moved house.
 skill: renting
 
+@lesson 3.1 | Your credit report | 📄 | bank
+hook: A bank checks your history before lending you money. What does it see?
+learn: A credit report is a record of your borrowing: loans, cards, phone plans and how you repaid them.
+learn: {nz:In NZ, credit reports are held by Centrix, Equifax and illion.~au:In Australia, credit reports are held by Equifax, Experian and illion.}
+learn: {nz:You can get your own credit report free from each agency.~au:You can get your own credit report free every three months from each agency.}
+play: sort | On your credit report, Not on it | Credit card accounts=On your credit report; Late or missed repayments=On your credit report; Your favourite music=Not on it; Credit applications you've made=On your credit report; Your school grades=Not on it; Defaults on unpaid debts=On your credit report | What's on a credit report?
+check: mcq | What does a credit report show? | Your history of borrowing and repaying* | Your social media | Your exam results
+check: tf | You can get your own credit report for free. | true
+check: mcq | {nz:Which is an NZ credit reporting agency?~au:Which is an Australian credit reporting agency?} | {nz:Centrix~au:Experian}* | A bank's app | The post office
+home: Find out how to request a free credit report from one agency.
+skill: credit
+
+@lesson 3.2 | Credit scores | 🔢 | bank
+hook: Your credit report gets turned into a single number. What does it mean?
+learn: A credit score sums up how risky you look as a borrower. Higher is usually better.
+learn: Each agency has its own scale, often out of 1,000 or 1,200.
+learn: Lenders use it, along with your income and spending, to decide whether to lend and at what rate.
+play: debate | Does having no credit history at all count against you? | It can, because lenders have nothing to judge you on* | No. A blank record is perfect | Many young people start with little history, and that's normal. A phone plan or small account paid on time can build it slowly.
+check: mcq | What does a higher credit score usually mean? | You look less risky to lenders* | You owe more money | You're older
+check: tf | Lenders also look at your income and spending, not just your score. | true
+check: mcq | Your score is mainly built from… | Your history of repaying on time* | How many friends you have | Your job title
+home: Look up what score range one agency uses.
+skill: credit
+
+@lesson 3.3 | Building a good record | 🧱 | bank
+hook: You're 18 with no credit history. How do you build a good one?
+learn: Pay every bill and repayment on time. Repayment history is now recorded on your report.
+learn: Keep credit small and manageable, like one phone plan or a low-limit card you pay in full.
+learn: Set up automatic payments so you never forget.
+play: order | Build a good credit record. Put these in a sensible order. | Get a phone plan or small account you can afford; Set up automatic payments; Pay on time every month; Check your credit report once a year; Only apply for more credit when you need it
+check: mcq | What's the best way to build good credit? | Pay on time, every time* | Apply for lots of cards | Never pay anything
+check: tf | Automatic payments help you avoid missing due dates. | true
+check: mcq | Which is a sensible first step to build credit? | A phone plan you can easily afford* | Five credit cards at once | A big personal loan
+home: Ask a grown-up which bills they pay automatically.
+skill: credit
+
+@lesson 3.4 | What hurts your record | ⚠️ | bank
+hook: What can drag your credit score down?
+learn: Late or missed payments, and defaults on debts you didn't pay.
+learn: Lots of credit applications in a short time can look like you're desperate for money.
+learn: A default can stay on your report for about 5 years, so act early if you're struggling.
+play: sort | Hurts your record, Helps or neutral | Paying a bill 60 days late=Hurts your record; Paying your phone bill on time=Helps or neutral; Applying for 5 cards in a month=Hurts your record; Checking your own credit report=Helps or neutral; Ignoring a debt until it's sent to collectors=Hurts your record; Asking for a hardship plan early=Helps or neutral | Hurts or helps?
+check: mcq | Which can hurt your credit record? | Many applications in a short time* | Checking your own report | Paying on time
+check: tf | Checking your own credit report hurts your score. | false | Checking your own report doesn't count against you.
+check: mcq | Roughly how long can a default stay on your report? | About 5 years* | One week | Forever
+home: Write down the due dates of any bills you pay, and set reminders.
+skill: credit
+
+@lesson 3.5 | Why it matters | 💵 | bank
+hook: Two people borrow $10,000 for a car. One pays 9% interest. One pays 18%. Why?
+learn: A good record can get you a lower interest rate, or a yes instead of a no.
+learn: A poor record can mean higher rates, smaller limits or being turned down.
+learn: Some landlords, power and phone companies check your history too.
+try: 9% of $10,000 is $900 a year :: gap | 18% of $10,000 is $_ a year | 1800
+play: price | Two $10,000 car loans over 3 years. Which costs less in total? | Good record, 9% loan:11448:1:car; Poor record, 18% loan:13015:1:car
+check: mcq | What can a good credit record get you? | Lower interest rates* | Free money | A higher rent
+check: gap | $10,000 at 9% vs 18% for a year. The difference is $_ | 900
+check: tf | Some phone and power companies check your credit history. | true
+home: Find the interest range on a bank's personal loan page. Why is it a range?
+skill: credit
+
+@lesson 3.6 | Fixing mistakes | 🛠️ | bank
+hook: Your credit report shows a debt you never had. What do you do?
+learn: Mistakes happen, and sometimes it's identity fraud. Check your report every year.
+learn: You can ask the agency to correct errors for free. Have your evidence ready.
+learn: Be wary of "credit repair" companies. They charge for things you can do yourself for free.
+play: chat | You call a credit reporting agency about a mistake | them: Hello, how can I help? | me: There's a debt on my report that isn't mine. I'd like to dispute it*/Delete my whole report/Never mind | them: Sure. Can you send details of the account you don't recognise? | me: Yes, I'll email them today. Could you tell me how long it takes?*/No, you find it/I'll pay a repair company instead
+check: mcq | How much does it cost to dispute an error with the agency? | Nothing* | $500 | $50 a month
+check: tf | Credit repair companies can do things you can't do for free yourself. | false | You can dispute errors yourself for free.
+check: mcq | A debt you never had appears. It might be… | A mistake or identity fraud* | A gift | Normal
+home: Read the "correcting your credit report" page on {nz:a credit agency's website~au:moneysmart.gov.au}.
+skill: credit
+

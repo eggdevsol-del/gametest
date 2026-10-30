@@ -155,3 +155,77 @@ check: price | Which juice is better value? | 1 litre bottle:3.5:1000:ml; 2 litr
 home: Be the value detective on your next family shop. Find the best-value pasta.
 skill: unitprice
 
+@lesson 3.1 | What is interest? | 🏦 | bank
+hook: Leave $100 in a savings account for a year and get back $104. Where did the extra $4 come from?
+learn: Interest is money a bank pays you for keeping your money with them.
+learn: Banks lend your savings to other people and charge them interest. They share some of it with you.
+learn: Interest rates are shown as a percent per year, like 4% a year.
+play: match | Match each word to its meaning | Interest=Money the bank pays you for saving; Interest rate=How much, as a percent per year; Savings account=An account that pays interest; Balance=How much money is in your account
+check: mcq | What is interest on savings? | Money the bank pays you for keeping money there* | A fee you pay the bank | A kind of coin
+check: tf | Interest rates are usually shown per year. | true
+check: mcq | How can banks afford to pay you interest? | They lend your savings and charge borrowers more* | They print money | It's a gift from the government
+home: Ask a grown-up what interest rate their savings account pays.
+skill: interest
+
+@lesson 3.2 | Working out interest | ➗ | bank
+hook: $200 at 5% a year. How much interest after one year?
+learn: To find a percent of a number, divide by 100, then multiply.
+learn: 5% of $200 is $200 ÷ 100 × 5 = $10.
+learn: That's for one year. Half a year would be about half as much.
+try: 5% of $200 = $10 :: gap | 4% of $300 = $_ | 12
+play: gen | percent | 4
+check: gap | 3% of $500 = $_ | 15
+check: mcq | 10% of $50 a year is… | $5* | $50 | $10
+check: tf | Interest for half a year is about half of a full year's interest. | true
+home: Work out a year's interest on your savings at 4%.
+skill: percent
+
+@lesson 3.3 | Interest on interest | ❄️ | bank
+hook: In year two, does the bank pay interest on your interest too?
+learn: Yes. With compound interest, the interest you earned gets added to your savings.
+learn: Next year, you earn interest on the bigger amount.
+learn: $100 at 10% becomes $110, then $121, then $133.10. It snowballs.
+try: $100 at 10% for 2 years = $121 :: gap | $200 at 10% for 2 years = $_ | 242
+play: compound | Watch $100 grow at 5% a year for 10 years | 100 | 5 | 10
+check: mcq | What is compound interest? | Interest earned on your interest too* | Interest that shrinks | A bank fee
+check: gap | $100 at 10% after one year = $_ | 110
+check: tf | Compound interest grows faster over time. | true
+home: Work out $50 at 10% for three years, year by year.
+skill: compound
+
+@lesson 3.4 | Choosing a savings account | 🔍 | bank
+hook: One account pays 1%. Another pays 4%, but only if you add money every month and take none out. Which would you pick?
+learn: Rates can be different between banks and between accounts.
+learn: Some accounts pay bonus interest if you follow rules, like adding money each month and not withdrawing.
+learn: Banks change their rates over time, so check now and then.
+play: debate | Is a bonus saver account a good choice for your savings? | Yes, if you can stick to the rules and won't need the money often* | No. Higher rates are always a trick | If you take money out often, you'd lose the bonus and get a low rate. Then a simpler account might suit you better.
+check: mcq | How do you get bonus interest? | Follow the rules, like adding money each month* | Ask nicely | Spend more
+check: tf | Banks can change their interest rates. | true
+check: gap | 4% of $100 for a year is $_ | 4
+home: Compare the savings rates at two banks with a grown-up.
+skill: banking
+
+@lesson 3.5 | Borrowers pay interest | 💳 | bank
+hook: If the bank pays savers interest, who pays the bank?
+learn: People who borrow money pay interest to the bank.
+learn: Borrowers usually pay a higher rate than savers get. The gap is how banks make money.
+learn: So saving earns interest, and borrowing costs interest.
+play: sort | You earn interest, You pay interest | Money in a savings account=You earn interest; A loan for a car=You pay interest; A term deposit=You earn interest; Credit card debt=You pay interest; A kids' bonus saver=You earn interest; A home loan=You pay interest | Earn or pay?
+check: mcq | Who pays interest to the bank? | Borrowers* | Savers | Nobody
+check: tf | Borrowers usually pay a higher rate than savers earn. | true
+check: mcq | How do banks make money from interest? | They charge borrowers more than they pay savers* | They keep all the savings | They don't
+home: Ask a grown-up whether they earn interest, pay interest, or both.
+skill: interest
+
+@lesson 3.6 | Tax on interest | 🧾 | townhall
+hook: Interest is income. Does the government want a share?
+learn: Yes. Interest counts as income, so tax can be taken from it.
+learn: {nz:Give your bank your IRD number. If you don't, they take 45% of your interest as tax.~au:Give your bank your Tax File Number (TFN). If you don't, they may take 47% of your interest as tax.}
+learn: {nz:With your IRD number, most kids pay the lowest rate.~au:If you're under 16 and earn less than $420 interest a year, you don't need to give one.}
+play: mcq | {nz:What happens if your bank doesn't have your IRD number?~au:What happens if your bank doesn't have your TFN?} | {nz:It takes 45% of your interest as tax~au:It may take 47% of your interest as tax}* | Nothing at all | It pays you double
+check: tf | Interest you earn counts as income. | true
+check: mcq | {nz:Which number should you give your bank?~au:Which number should you give your bank?} | {nz:Your IRD number~au:Your Tax File Number}* | Your phone PIN | Your school ID
+check: mcq | Who should help you find your tax number? | A grown-up you trust* | A stranger online | Nobody
+home: Ask a grown-up whether your savings account has your {nz:IRD number~au:TFN}.
+skill: tax
+

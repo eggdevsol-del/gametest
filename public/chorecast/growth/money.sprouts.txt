@@ -153,3 +153,76 @@ check: mcq | How do you pick which want to buy? | The one you will love the long
 home: Start a wish list with a grown-up. Put the thing you want most at the top.
 skill: choosing
 
+@lesson 3.1 | Pick a goal | 🎯 | bank
+hook: What would you love to save up for?
+learn: A saving goal is something you want to buy later, with money you put away now.
+learn: A good goal says what it is and how much it costs. "A $12 kite" is a goal you can plan.
+learn: Pick something you really want. That makes saving easier.
+play: sort | Clear goal, Not clear yet | A $12 kite=Clear goal; Something cool=Not clear yet; A $20 book set=Clear goal; Lots of stuff=Not clear yet; An $8 ball=Clear goal; I don't know=Not clear yet | Is it a clear goal?
+check: mcq | Which is a clear saving goal? | A $15 puzzle* | Something nice | Everything
+check: tf | Knowing how much your goal costs helps you plan. | true
+check: mcq | What makes saving easier? | A goal you really want* | Forgetting your goal | Spending first
+home: Pick one saving goal and find out what it costs, with a grown-up.
+skill: goals
+
+@lesson 3.2 | A see-through jar | 🫙 | bank
+hook: Why might a see-through jar help you save?
+learn: When you can see your money grow, you want to keep going.
+learn: Stick a picture of your goal on the jar.
+learn: Mark lines on it to show how close you are.
+play: order | Make a saving jar | Find a clean jar; Stick a picture of your goal on it; Draw lines for every $2; Put your savings in; Watch it fill up
+check: mcq | Why use a see-through jar? | You can see your savings grow* | It's heavier | Coins like jars
+check: tf | A picture of your goal can help you keep saving. | true
+check: mcq | Your goal is $10. You have $6. How much more do you need? | $4* | $16 | $6
+home: Make a saving jar with a picture of your goal on it.
+skill: saving
+
+@lesson 3.3 | Grow it or shrink it? | 📈 | bank
+hook: Some choices make your savings grow. Some make them shrink. Can you tell which?
+learn: Adding money to your jar makes your savings grow.
+learn: Taking money out makes them shrink.
+learn: Every small choice adds up, one way or the other.
+play: sort | Grows my savings, Shrinks my savings | Putting birthday money in=Grows my savings; Buying lollies from my jar=Shrinks my savings; Doing an extra job for $2=Grows my savings; Spending it on a toy I don't need=Shrinks my savings; Saving half my pocket money=Grows my savings; Losing coins under the couch=Shrinks my savings | Grow or shrink?
+check: mcq | Which helps your savings grow? | Putting birthday money in* | Buying lollies | Losing coins
+check: tf | Small choices can add up. | true
+check: mcq | You have $8 and spend $3. How much is left? | $5* | $11 | $3
+home: Tell a grown-up one choice you made this week that grew your savings.
+skill: saving
+
+@lesson 3.4 | Count your savings | 🧮 | bank
+hook: Your jar is full of coins. How much have you saved?
+learn: Sort coins into piles of the same kind first.
+learn: Count the biggest coins first, then the smaller ones.
+learn: Write the total down so you remember.
+try: $2 + $2 + $1 = $5 :: gap | $2 + $1 + $1 = $_ | 4
+play: gen | add | 4
+check: gap | $2 + $2 + $2 = $_ | 6
+check: mcq | What should you count first? | The biggest coins* | The smallest coins | The jar
+check: tf | Writing your total down helps you remember it. | true
+home: Count the money in your jar or money box, biggest coins first.
+skill: counting
+
+@lesson 3.5 | Ways to save more | 💡 | home
+hook: Your goal feels far away. How could you get there faster?
+learn: You could save a bit more of your pocket money.
+learn: You could do an extra job, if a grown-up says it's OK.
+learn: You could save part of any birthday money.
+play: tap | Tap the ways to reach a goal faster | 🧹:yes:An extra job can earn a bit more; 🎂:yes:Saving some birthday money helps; 🍭:no; 🛍️:no; 🪙:yes:Saving more of your pocket money helps; 🎮:no
+check: mcq | Which helps you reach a goal faster? | Saving some birthday money* | Buying more toys | Forgetting to save
+check: tf | You should always ask a grown-up before doing a job for money. | true
+check: mcq | You save $2 a week. If you save $3 a week instead, you reach your goal… | Sooner* | Later | Never
+home: With a grown-up, think of one extra way you could add to your savings.
+skill: saving
+
+@lesson 3.6 | Goal reached! | 🎉 | stall
+hook: Your jar is full. You have enough! What now?
+learn: Check the price again. Prices can change.
+learn: Buy your goal and enjoy it. You earned it!
+learn: Then pick a new goal and start again.
+play: price | You saved $12 for a kite. Which one costs less? | Red kite:12:1:kite; Blue kite, on sale:9:1:kite
+check: mcq | Before you buy, you should… | Check the price again* | Throw the jar away | Buy two
+check: tf | After you reach a goal, you can pick a new one. | true
+check: gap | You saved $12. The kite costs $9. You have $_ left. | 3
+home: Tell a grown-up what your next saving goal will be.
+skill: goals
+

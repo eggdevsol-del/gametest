@@ -154,6 +154,79 @@ check: mcq | How do you pick which want to buy? | The one you will love the long
 home: Start a wish list with a grown-up. Put the thing you want most at the top.
 skill: choosing
 
+@lesson 3.1 | Pick a goal | 🎯 | bank
+hook: What would you love to save up for?
+learn: A saving goal is something you want to buy later, with money you put away now.
+learn: A good goal says what it is and how much it costs. "A $12 kite" is a goal you can plan.
+learn: Pick something you really want. That makes saving easier.
+play: sort | Clear goal, Not clear yet | A $12 kite=Clear goal; Something cool=Not clear yet; A $20 book set=Clear goal; Lots of stuff=Not clear yet; An $8 ball=Clear goal; I don't know=Not clear yet | Is it a clear goal?
+check: mcq | Which is a clear saving goal? | A $15 puzzle* | Something nice | Everything
+check: tf | Knowing how much your goal costs helps you plan. | true
+check: mcq | What makes saving easier? | A goal you really want* | Forgetting your goal | Spending first
+home: Pick one saving goal and find out what it costs, with a grown-up.
+skill: goals
+
+@lesson 3.2 | A see-through jar | 🫙 | bank
+hook: Why might a see-through jar help you save?
+learn: When you can see your money grow, you want to keep going.
+learn: Stick a picture of your goal on the jar.
+learn: Mark lines on it to show how close you are.
+play: order | Make a saving jar | Find a clean jar; Stick a picture of your goal on it; Draw lines for every $2; Put your savings in; Watch it fill up
+check: mcq | Why use a see-through jar? | You can see your savings grow* | It's heavier | Coins like jars
+check: tf | A picture of your goal can help you keep saving. | true
+check: mcq | Your goal is $10. You have $6. How much more do you need? | $4* | $16 | $6
+home: Make a saving jar with a picture of your goal on it.
+skill: saving
+
+@lesson 3.3 | Grow it or shrink it? | 📈 | bank
+hook: Some choices make your savings grow. Some make them shrink. Can you tell which?
+learn: Adding money to your jar makes your savings grow.
+learn: Taking money out makes them shrink.
+learn: Every small choice adds up, one way or the other.
+play: sort | Grows my savings, Shrinks my savings | Putting birthday money in=Grows my savings; Buying lollies from my jar=Shrinks my savings; Doing an extra job for $2=Grows my savings; Spending it on a toy I don't need=Shrinks my savings; Saving half my pocket money=Grows my savings; Losing coins under the couch=Shrinks my savings | Grow or shrink?
+check: mcq | Which helps your savings grow? | Putting birthday money in* | Buying lollies | Losing coins
+check: tf | Small choices can add up. | true
+check: mcq | You have $8 and spend $3. How much is left? | $5* | $11 | $3
+home: Tell a grown-up one choice you made this week that grew your savings.
+skill: saving
+
+@lesson 3.4 | Count your savings | 🧮 | bank
+hook: Your jar is full of coins. How much have you saved?
+learn: Sort coins into piles of the same kind first.
+learn: Count the biggest coins first, then the smaller ones.
+learn: Write the total down so you remember.
+try: $2 + $2 + $1 = $5 :: gap | $2 + $1 + $1 = $_ | 4
+play: gen | add | 4
+check: gap | $2 + $2 + $2 = $_ | 6
+check: mcq | What should you count first? | The biggest coins* | The smallest coins | The jar
+check: tf | Writing your total down helps you remember it. | true
+home: Count the money in your jar or money box, biggest coins first.
+skill: counting
+
+@lesson 3.5 | Ways to save more | 💡 | home
+hook: Your goal feels far away. How could you get there faster?
+learn: You could save a bit more of your pocket money.
+learn: You could do an extra job, if a grown-up says it's OK.
+learn: You could save part of any birthday money.
+play: tap | Tap the ways to reach a goal faster | 🧹:yes:An extra job can earn a bit more; 🎂:yes:Saving some birthday money helps; 🍭:no; 🛍️:no; 🪙:yes:Saving more of your pocket money helps; 🎮:no
+check: mcq | Which helps you reach a goal faster? | Saving some birthday money* | Buying more toys | Forgetting to save
+check: tf | You should always ask a grown-up before doing a job for money. | true
+check: mcq | You save $2 a week. If you save $3 a week instead, you reach your goal… | Sooner* | Later | Never
+home: With a grown-up, think of one extra way you could add to your savings.
+skill: saving
+
+@lesson 3.6 | Goal reached! | 🎉 | stall
+hook: Your jar is full. You have enough! What now?
+learn: Check the price again. Prices can change.
+learn: Buy your goal and enjoy it. You earned it!
+learn: Then pick a new goal and start again.
+play: price | You saved $12 for a kite. Which one costs less? | Red kite:12:1:kite; Blue kite, on sale:9:1:kite
+check: mcq | Before you buy, you should… | Check the price again* | Throw the jar away | Buy two
+check: tf | After you reach a goal, you can pick a new one. | true
+check: gap | You saved $12. The kite costs $9. You have $_ left. | 3
+home: Tell a grown-up what your next saving goal will be.
+skill: goals
+
 @band builders
 @unit 1 | Budget basics | Plan where money goes before you spend it
 @unit 2 | Best value | Use unit prices to spot the real deal
@@ -310,6 +383,80 @@ check: tf | A big red "sale" sign always means a good price. | false | Compare w
 check: price | Which juice is better value? | 1 litre bottle:3.5:1000:ml; 2 litre bottle:6:2000:ml
 home: Be the value detective on your next family shop. Find the best-value pasta.
 skill: unitprice
+
+@lesson 3.1 | What is interest? | 🏦 | bank
+hook: Leave $100 in a savings account for a year and get back $104. Where did the extra $4 come from?
+learn: Interest is money a bank pays you for keeping your money with them.
+learn: Banks lend your savings to other people and charge them interest. They share some of it with you.
+learn: Interest rates are shown as a percent per year, like 4% a year.
+play: match | Match each word to its meaning | Interest=Money the bank pays you for saving; Interest rate=How much, as a percent per year; Savings account=An account that pays interest; Balance=How much money is in your account
+check: mcq | What is interest on savings? | Money the bank pays you for keeping money there* | A fee you pay the bank | A kind of coin
+check: tf | Interest rates are usually shown per year. | true
+check: mcq | How can banks afford to pay you interest? | They lend your savings and charge borrowers more* | They print money | It's a gift from the government
+home: Ask a grown-up what interest rate their savings account pays.
+skill: interest
+
+@lesson 3.2 | Working out interest | ➗ | bank
+hook: $200 at 5% a year. How much interest after one year?
+learn: To find a percent of a number, divide by 100, then multiply.
+learn: 5% of $200 is $200 ÷ 100 × 5 = $10.
+learn: That's for one year. Half a year would be about half as much.
+try: 5% of $200 = $10 :: gap | 4% of $300 = $_ | 12
+play: gen | percent | 4
+check: gap | 3% of $500 = $_ | 15
+check: mcq | 10% of $50 a year is… | $5* | $50 | $10
+check: tf | Interest for half a year is about half of a full year's interest. | true
+home: Work out a year's interest on your savings at 4%.
+skill: percent
+
+@lesson 3.3 | Interest on interest | ❄️ | bank
+hook: In year two, does the bank pay interest on your interest too?
+learn: Yes. With compound interest, the interest you earned gets added to your savings.
+learn: Next year, you earn interest on the bigger amount.
+learn: $100 at 10% becomes $110, then $121, then $133.10. It snowballs.
+try: $100 at 10% for 2 years = $121 :: gap | $200 at 10% for 2 years = $_ | 242
+play: compound | Watch $100 grow at 5% a year for 10 years | 100 | 5 | 10
+check: mcq | What is compound interest? | Interest earned on your interest too* | Interest that shrinks | A bank fee
+check: gap | $100 at 10% after one year = $_ | 110
+check: tf | Compound interest grows faster over time. | true
+home: Work out $50 at 10% for three years, year by year.
+skill: compound
+
+@lesson 3.4 | Choosing a savings account | 🔍 | bank
+hook: One account pays 1%. Another pays 4%, but only if you add money every month and take none out. Which would you pick?
+learn: Rates can be different between banks and between accounts.
+learn: Some accounts pay bonus interest if you follow rules, like adding money each month and not withdrawing.
+learn: Banks change their rates over time, so check now and then.
+play: debate | Is a bonus saver account a good choice for your savings? | Yes, if you can stick to the rules and won't need the money often* | No. Higher rates are always a trick | If you take money out often, you'd lose the bonus and get a low rate. Then a simpler account might suit you better.
+check: mcq | How do you get bonus interest? | Follow the rules, like adding money each month* | Ask nicely | Spend more
+check: tf | Banks can change their interest rates. | true
+check: gap | 4% of $100 for a year is $_ | 4
+home: Compare the savings rates at two banks with a grown-up.
+skill: banking
+
+@lesson 3.5 | Borrowers pay interest | 💳 | bank
+hook: If the bank pays savers interest, who pays the bank?
+learn: People who borrow money pay interest to the bank.
+learn: Borrowers usually pay a higher rate than savers get. The gap is how banks make money.
+learn: So saving earns interest, and borrowing costs interest.
+play: sort | You earn interest, You pay interest | Money in a savings account=You earn interest; A loan for a car=You pay interest; A term deposit=You earn interest; Credit card debt=You pay interest; A kids' bonus saver=You earn interest; A home loan=You pay interest | Earn or pay?
+check: mcq | Who pays interest to the bank? | Borrowers* | Savers | Nobody
+check: tf | Borrowers usually pay a higher rate than savers earn. | true
+check: mcq | How do banks make money from interest? | They charge borrowers more than they pay savers* | They keep all the savings | They don't
+home: Ask a grown-up whether they earn interest, pay interest, or both.
+skill: interest
+
+@lesson 3.6 | Tax on interest | 🧾 | townhall
+hook: Interest is income. Does the government want a share?
+learn: Yes. Interest counts as income, so tax can be taken from it.
+learn: {nz:Give your bank your IRD number. If you don't, they take 45% of your interest as tax.~au:Give your bank your Tax File Number (TFN). If you don't, they may take 47% of your interest as tax.}
+learn: {nz:With your IRD number, most kids pay the lowest rate.~au:If you're under 16 and earn less than $420 interest a year, you don't need to give one.}
+play: mcq | {nz:What happens if your bank doesn't have your IRD number?~au:What happens if your bank doesn't have your TFN?} | {nz:It takes 45% of your interest as tax~au:It may take 47% of your interest as tax}* | Nothing at all | It pays you double
+check: tf | Interest you earn counts as income. | true
+check: mcq | {nz:Which number should you give your bank?~au:Which number should you give your bank?} | {nz:Your IRD number~au:Your Tax File Number}* | Your phone PIN | Your school ID
+check: mcq | Who should help you find your tax number? | A grown-up you trust* | A stranger online | Nobody
+home: Ask a grown-up whether your savings account has your {nz:IRD number~au:TFN}.
+skill: tax
 
 @band makers
 @unit 1 | Bank accounts | Everyday, savings and how to choose
@@ -468,6 +615,78 @@ check: tf | The true cost of borrowing includes fees as well as interest. | true
 home: Find a "pay weekly" price in an ad and work out the total cost.
 skill: debt
 
+@lesson 3.1 | How scams work | 🎣 | online
+hook: Scams come in many shapes. Most follow the same recipe. What is it?
+learn: First they contact you: a text, call, email, DM or ad.
+learn: Then the hook: a prize, a scare, a deal or a new friend. Then pressure: act now!
+learn: Finally they ask for money or details, often by gift cards, crypto or a bank transfer.
+play: build | Build the scam recipe | Contact out of the blue; A hook, like a prize or a scare; Pressure to act fast; A request for money or details; A hard-to-trace payment, like gift cards or crypto
+check: mcq | What do most scams try to make you do? | Act fast without thinking* | Take your time | Ask a grown-up
+check: tf | Scams often ask for payment by gift card or crypto. | true
+check: mcq | A message offers a prize but wants a fee first. That's… | A classic scam* | A lucky day | A normal prize
+home: Show a grown-up the scam recipe and ask if they've seen one.
+skill: scams
+
+@lesson 3.2 | Gift card payments | 🎁 | stall
+hook: A caller says you owe tax and must pay today with gift cards. Real?
+learn: No real government department, bank or company asks to be paid in gift cards.
+learn: Gift cards are like cash. Once you share the code, the money is gone.
+learn: If anyone asks you to buy gift cards to pay a bill, it's a scam.
+play: scam | Real or scam? | {nz:IRD~au:The ATO} says pay your tax debt today with gift cards=scam; Your aunt gives you a gift card for your birthday=real; Your "boss" emails asking you to buy gift cards for clients, urgently=scam; A shop sells you a gift card at the counter=real; A friend you met online asks for a gift card to fix their phone=scam | Gift cards are for gifts, never for paying bills or fees.
+check: mcq | Someone wants a bill paid with gift cards. That's… | A scam* | Normal | A special deal
+check: tf | Once you share a gift card code, the money is usually gone. | true
+check: mcq | Who might really ask you to pay with gift cards? | Nobody legitimate* | {nz:IRD~au:The ATO} | Your bank
+home: Next time you're at the shops, find the scam warning near the gift cards.
+skill: scams
+
+@lesson 3.3 | Easy money offers | 💰 | online
+hook: "Earn $300 a day just liking videos!" They even pay you $10 at first. What's the catch?
+learn: Task scams pay a little at first, then ask you to deposit money to "unlock" bigger earnings.
+learn: Once you pay in, the money vanishes, and they ask for more.
+learn: Real jobs pay you. They never ask you to pay to work.
+play: path | An app paid you $10 for liking videos. Now it says deposit $100 to unlock $500. | Stop, don't pay, and tell a grown-up => good: You spotted the trap. The first $10 was bait. | Deposit $100 to unlock the $500 => bad: The money vanishes, and they ask for more to "release" it. | Get friends to join for a bonus => bad: Now your friends lose money too.
+check: mcq | A "job" asks you to pay money to start earning. That's… | A scam* | A great offer | Normal
+check: tf | Real jobs pay you. They don't ask you to pay to work. | true
+check: mcq | Why do task scams pay a little at first? | To make you trust them before they take more* | Because they're generous | By mistake
+home: Talk with a grown-up about a too-good-to-be-true offer you've seen online.
+skill: scams
+
+@lesson 3.4 | Online friend scams | 💔 | online
+hook: Someone you've chatted with online for weeks suddenly needs money for an emergency. What do you do?
+learn: Some scammers spend weeks building a friendship or romance, then ask for money.
+learn: Warning signs: they won't video call, they have a sad emergency, and they ask you to keep it secret.
+learn: Never send money or gift cards to someone you haven't met in real life.
+play: chat | An online friend you've never met messages you | them: I'm stuck overseas and lost my wallet. Can you send $200? I'll pay you back! | me: I can't send money. Can we video call?*/Sure, what's your account?/I'll send gift cards | them: My camera's broken. Please, I really need help. | me: Sorry, I won't send money. I'm going to talk to a grown-up*/OK, I'll send it/I'll borrow from my parents for you
+check: mcq | An online friend you've never met asks for money. You… | Don't send it, and tell a trusted adult* | Send a little | Send gift cards
+check: tf | Refusing to video call is a warning sign. | true
+check: mcq | Why do scammers build friendships first? | So you'll trust them when they ask for money* | They're lonely | It's a game
+home: Agree with a grown-up on a rule about sending money online.
+skill: scams
+
+@lesson 3.5 | Card fraud | 💳 | bank
+hook: There's a $49 charge on your card from a shop you've never heard of. What now?
+learn: Card details can be stolen by fake websites, data leaks or card skimmers.
+learn: Check your account often. Small test charges can come before bigger ones.
+learn: Lock your card in your bank's app and call your bank straight away.
+play: diff | Your planned spending and your statement. Tap the charges you didn't make. | Bus card $10; Lunch $8; Music app $5.99 | Bus card $10; Lunch $8; Music app $5.99; OnlineMart $1.00; OnlineMart $49.00
+check: mcq | You see a charge you didn't make. First step? | Lock the card and call your bank* | Wait and see | Post about it
+check: tf | Small charges you don't recognise can be a warning sign. | true
+check: mcq | How can card details be stolen? | Fake websites and data leaks* | Using your card in the bank's own app | Keeping it in your wallet
+home: Find the "lock card" button in a banking app with a grown-up.
+skill: fraud
+
+@lesson 3.6 | Report it | 📣 | townhall
+hook: You nearly fell for a scam. Is it worth reporting?
+learn: Yes. Reports help warn others and help stop scammers.
+learn: {nz:Report scams to Netsafe. If you lost money, tell your bank and Police (105).~au:Report scams to Scamwatch. If you lost money, tell your bank and use ReportCyber.}
+learn: Being scammed isn't your fault. Scammers are professionals. Talk to a trusted adult.
+play: order | You lost money to a scam. Put the steps in order. | Tell a trusted adult; Call your bank straight away; Change any passwords you shared; Report it to {nz:Netsafe and Police~au:Scamwatch and ReportCyber}; Warn friends about the scam
+check: mcq | {nz:Where can you report a scam in NZ?~au:Where can you report a scam in Australia?} | {nz:Netsafe~au:Scamwatch}* | A comment section | Nowhere
+check: tf | Being scammed is always your own fault. | false | Scammers are professionals. Anyone can be fooled.
+check: mcq | Why report a scam you nearly fell for? | It helps warn and protect others* | It's not worth it | You'll get a prize
+home: Save {nz:netsafe.org.nz~au:scamwatch.gov.au} in your browser.
+skill: scams
+
 @band launchers
 @unit 1 | Payslips and tax | Read every line of a payslip
 @unit 2 | Renting | Bonds, rent and your rights as a tenant
@@ -624,3 +843,76 @@ check: tf | Taking photos when you move out can protect your bond. | true
 check: mcq | What should you do with your power account when you leave? | Close it or move it, with a final reading* | Leave it for the next person | Nothing
 home: Make a moving-out checklist with a grown-up who has moved house.
 skill: renting
+
+@lesson 3.1 | Your credit report | 📄 | bank
+hook: A bank checks your history before lending you money. What does it see?
+learn: A credit report is a record of your borrowing: loans, cards, phone plans and how you repaid them.
+learn: {nz:In NZ, credit reports are held by Centrix, Equifax and illion.~au:In Australia, credit reports are held by Equifax, Experian and illion.}
+learn: {nz:You can get your own credit report free from each agency.~au:You can get your own credit report free every three months from each agency.}
+play: sort | On your credit report, Not on it | Credit card accounts=On your credit report; Late or missed repayments=On your credit report; Your favourite music=Not on it; Credit applications you've made=On your credit report; Your school grades=Not on it; Defaults on unpaid debts=On your credit report | What's on a credit report?
+check: mcq | What does a credit report show? | Your history of borrowing and repaying* | Your social media | Your exam results
+check: tf | You can get your own credit report for free. | true
+check: mcq | {nz:Which is an NZ credit reporting agency?~au:Which is an Australian credit reporting agency?} | {nz:Centrix~au:Experian}* | A bank's app | The post office
+home: Find out how to request a free credit report from one agency.
+skill: credit
+
+@lesson 3.2 | Credit scores | 🔢 | bank
+hook: Your credit report gets turned into a single number. What does it mean?
+learn: A credit score sums up how risky you look as a borrower. Higher is usually better.
+learn: Each agency has its own scale, often out of 1,000 or 1,200.
+learn: Lenders use it, along with your income and spending, to decide whether to lend and at what rate.
+play: debate | Does having no credit history at all count against you? | It can, because lenders have nothing to judge you on* | No. A blank record is perfect | Many young people start with little history, and that's normal. A phone plan or small account paid on time can build it slowly.
+check: mcq | What does a higher credit score usually mean? | You look less risky to lenders* | You owe more money | You're older
+check: tf | Lenders also look at your income and spending, not just your score. | true
+check: mcq | Your score is mainly built from… | Your history of repaying on time* | How many friends you have | Your job title
+home: Look up what score range one agency uses.
+skill: credit
+
+@lesson 3.3 | Building a good record | 🧱 | bank
+hook: You're 18 with no credit history. How do you build a good one?
+learn: Pay every bill and repayment on time. Repayment history is now recorded on your report.
+learn: Keep credit small and manageable, like one phone plan or a low-limit card you pay in full.
+learn: Set up automatic payments so you never forget.
+play: order | Build a good credit record. Put these in a sensible order. | Get a phone plan or small account you can afford; Set up automatic payments; Pay on time every month; Check your credit report once a year; Only apply for more credit when you need it
+check: mcq | What's the best way to build good credit? | Pay on time, every time* | Apply for lots of cards | Never pay anything
+check: tf | Automatic payments help you avoid missing due dates. | true
+check: mcq | Which is a sensible first step to build credit? | A phone plan you can easily afford* | Five credit cards at once | A big personal loan
+home: Ask a grown-up which bills they pay automatically.
+skill: credit
+
+@lesson 3.4 | What hurts your record | ⚠️ | bank
+hook: What can drag your credit score down?
+learn: Late or missed payments, and defaults on debts you didn't pay.
+learn: Lots of credit applications in a short time can look like you're desperate for money.
+learn: A default can stay on your report for about 5 years, so act early if you're struggling.
+play: sort | Hurts your record, Helps or neutral | Paying a bill 60 days late=Hurts your record; Paying your phone bill on time=Helps or neutral; Applying for 5 cards in a month=Hurts your record; Checking your own credit report=Helps or neutral; Ignoring a debt until it's sent to collectors=Hurts your record; Asking for a hardship plan early=Helps or neutral | Hurts or helps?
+check: mcq | Which can hurt your credit record? | Many applications in a short time* | Checking your own report | Paying on time
+check: tf | Checking your own credit report hurts your score. | false | Checking your own report doesn't count against you.
+check: mcq | Roughly how long can a default stay on your report? | About 5 years* | One week | Forever
+home: Write down the due dates of any bills you pay, and set reminders.
+skill: credit
+
+@lesson 3.5 | Why it matters | 💵 | bank
+hook: Two people borrow $10,000 for a car. One pays 9% interest. One pays 18%. Why?
+learn: A good record can get you a lower interest rate, or a yes instead of a no.
+learn: A poor record can mean higher rates, smaller limits or being turned down.
+learn: Some landlords, power and phone companies check your history too.
+try: 9% of $10,000 is $900 a year :: gap | 18% of $10,000 is $_ a year | 1800
+play: price | Two $10,000 car loans over 3 years. Which costs less in total? | Good record, 9% loan:11448:1:car; Poor record, 18% loan:13015:1:car
+check: mcq | What can a good credit record get you? | Lower interest rates* | Free money | A higher rent
+check: gap | $10,000 at 9% vs 18% for a year. The difference is $_ | 900
+check: tf | Some phone and power companies check your credit history. | true
+home: Find the interest range on a bank's personal loan page. Why is it a range?
+skill: credit
+
+@lesson 3.6 | Fixing mistakes | 🛠️ | bank
+hook: Your credit report shows a debt you never had. What do you do?
+learn: Mistakes happen, and sometimes it's identity fraud. Check your report every year.
+learn: You can ask the agency to correct errors for free. Have your evidence ready.
+learn: Be wary of "credit repair" companies. They charge for things you can do yourself for free.
+play: chat | You call a credit reporting agency about a mistake | them: Hello, how can I help? | me: There's a debt on my report that isn't mine. I'd like to dispute it*/Delete my whole report/Never mind | them: Sure. Can you send details of the account you don't recognise? | me: Yes, I'll email them today. Could you tell me how long it takes?*/No, you find it/I'll pay a repair company instead
+check: mcq | How much does it cost to dispute an error with the agency? | Nothing* | $500 | $50 a month
+check: tf | Credit repair companies can do things you can't do for free yourself. | false | You can dispute errors yourself for free.
+check: mcq | A debt you never had appears. It might be… | A mistake or identity fraud* | A gift | Normal
+home: Read the "correcting your credit report" page on {nz:a credit agency's website~au:moneysmart.gov.au}.
+skill: credit

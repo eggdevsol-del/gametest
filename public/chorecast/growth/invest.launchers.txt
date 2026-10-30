@@ -151,3 +151,77 @@ check: mcq | An index fund… | Buys everything in an index* | Picks a few hot s
 home: Find one index fund and one active fund and compare their fees.
 skill: index
 
+@lesson 3.1 | Rent or buy? | 🏠 | home
+hook: Renting feels like "dead money". Is buying always better?
+learn: Buying can build wealth over time, but comes with big costs: a deposit, interest, rates, insurance and repairs.
+learn: Renting costs rent, but you can move easily and your savings can be invested elsewhere.
+learn: The right choice depends on prices, interest rates, your job and your plans.
+play: debate | Is renting just "dead money"? | Not really. Owners pay interest, rates and repairs too, and renters can invest the difference* | Yes. Renting is always a waste | Owning gives security and can build wealth through paying down a loan. Many people value that a lot.
+check: mcq | Which is a cost of owning a home? | Rates, insurance and repairs* | Rent to a landlord | Nothing
+check: tf | Renting makes it easier to move for a job. | true
+check: mcq | The best choice between renting and buying depends on… | Prices, interest rates and your plans* | Your star sign | What your friends do
+home: Ask a grown-up what they think the pros and cons of renting and buying are.
+skill: property
+
+@lesson 3.2 | The deposit | 💰 | bank
+hook: A $700,000 house. How much do you need before the bank will lend you the rest?
+learn: Banks usually want a deposit of about 20% of the price.
+learn: 20% of $700,000 is $140,000. That takes most people years to save.
+learn: {nz:Some first-home schemes, like First Home Loans, let eligible buyers start with a 5% deposit.~au:With a smaller deposit you may pay lenders mortgage insurance. The government's First Home Guarantee lets eligible buyers start with 5% without it.}
+try: 20% of $500,000 = $100,000 :: gap | 20% of $600,000 = $_ | 120000
+play: slider | You save $400 a week for a $120,000 deposit. About how many years will it take? | 1 | 15 | 6 | years | 1 | 1
+check: mcq | What deposit do banks usually want? | About 20%* | 1% | 100%
+check: gap | 5% of $600,000 = $_ | 30000
+check: tf | A smaller deposit can mean extra costs or a bigger loan. | true
+home: Look up a house price near you and work out a 20% deposit.
+skill: property
+
+@lesson 3.3 | Mortgage maths | 🧮 | bank
+hook: Borrow $600,000 at 6% over 30 years. How much do you pay back in total?
+learn: A $600,000 loan at 6% over 30 years costs about $3,600 a month.
+learn: Over 30 years that's about $1.3 million in total, more than double the loan.
+learn: Paying a little extra each month, or a lower rate, can save tens of thousands.
+play: slider | $600,000 at 6% over 30 years costs about $3,600 a month. Roughly how much is paid in total, in thousands? | 600 | 2000 | 1295 | k$ | 60 | 5
+check: mcq | Why do you pay back much more than you borrowed? | Interest over many years* | Bank gifts | Inflation only
+check: tf | Paying a little extra each month can save a lot of interest. | true
+check: gap | $3,600 a month for 12 months = $_ a year | 43200
+home: Try an online mortgage calculator with a grown-up and change the interest rate.
+skill: property
+
+@lesson 3.4 | Hidden costs of owning | 🔧 | home
+hook: You've bought a house. The mortgage is the only cost now, right?
+learn: Owners pay council rates, insurance, maintenance and sometimes body corporate fees.
+learn: A rough rule is to budget about 1% of the home's value a year for maintenance.
+learn: {nz:NZ has no stamp duty, but buyers pay for a lawyer, a building inspection and moving.~au:Most buyers pay stamp duty to the state, though many first-home buyers get it reduced or waived.}
+try: 1% of $700,000 = $7,000 a year :: gap | 1% of $500,000 = $_ a year | 5000
+play: budget | Plan the yearly costs of a $600,000 home, in thousands of dollars. | 60 | Mortgage=43; Rates=3; Insurance=3; Maintenance=6; Savings buffer=0 | Hot water cylinder:3
+check: mcq | Which is a cost of owning a home? | Council rates* | Rent | Bond
+check: tf | A rough rule is to budget about 1% of a home's value a year for maintenance. | true
+check: mcq | {nz:Does NZ charge stamp duty on house purchases?~au:Who charges stamp duty on house purchases?} | {nz:No~au:State and territory governments}* | {nz:Yes, 20%~au:Your bank} | {nz:Only on Sundays~au:Nobody}
+home: Ask a grown-up what their home costs each year besides rent or the mortgage.
+skill: property
+
+@lesson 3.5 | Interest rate risk | 📈 | bank
+hook: Your mortgage rate rises from 5% to 7%. What happens to your repayments?
+learn: On a floating or variable rate, repayments can rise or fall when rates change.
+learn: Fixing your rate for a set time keeps repayments steady, but you might miss out if rates fall.
+learn: Before buying, check you could still pay if rates rose by 2%.
+play: path | You're buying your first home. Rates might rise. | Fix part of the loan and test you could afford 2% higher => good: Smart. You have some certainty and a safety margin. | Borrow the maximum and hope rates never rise => bad: If rates jump, your repayments could become unaffordable. | Pick the loan with the lowest rate today without reading the terms => ok: Rate matters, but so do fees, the fixed period and break costs.
+check: mcq | What does fixing your rate do? | Keeps repayments steady for a set time* | Makes the loan free | Lowers the price of the house
+check: tf | Repayments on a floating or variable rate can rise. | true
+check: mcq | A sensible test before borrowing is… | Could I still pay if rates rose 2%?* | Can I borrow more? | Is the bank's logo nice?
+home: Ask a grown-up whether their home loan, if they have one, is fixed or floating.
+skill: property
+
+@lesson 3.6 | Property as an investment | 🏘️ | shares
+hook: "House prices always go up." True?
+learn: Over long periods, house prices in NZ and Australia have mostly risen, but not always or everywhere.
+learn: From their 2021 to 2022 peaks, average prices fell roughly 15% to 20% in NZ and about 9% in Australia.
+learn: Property ties up a lot of money in one asset, often with a big loan. That increases both gains and losses.
+play: sort | True about property, Myth | Prices can fall=True about property; Prices always go up=Myth; A big loan increases both gains and losses=True about property; You can sell a house in a day=Myth; Owners pay ongoing costs=True about property; Property has no risk=Myth | True or myth?
+check: mcq | What happened to house prices after the 2021 to 2022 peaks? | They fell for a while* | They doubled | Nothing
+check: tf | Borrowing a lot increases both your possible gains and losses. | true
+check: mcq | A risk of property as an investment is… | A lot of money tied up in one asset* | It's too easy to sell | It never needs repairs
+home: Look up how house prices in your area have changed over the last 5 years.
+skill: property
+

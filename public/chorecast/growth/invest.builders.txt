@@ -149,3 +149,76 @@ check: mcq | What money should you invest? | Money you won't need for a long tim
 home: Ask two family members how they'd feel if their savings dropped 20%. Compare the answers.
 skill: risk
 
+@lesson 3.1 | Eggs in one basket | 🥚 | shares
+hook: You carry all your eggs in one basket and trip. What happens?
+learn: "Don't put all your eggs in one basket" means don't risk everything on one thing.
+learn: If all your money is in one company and it fails, you could lose most of it.
+learn: Spreading your money out is called diversification.
+play: path | You have $100 to invest. | Spread it across lots of companies => good: If one company has a bad year, the others can balance it out. | Put it all in your friend's favourite company => bad: If that one company struggles, most of your money goes with it. | Put it all in a brand-new company with no products yet => bad: New companies often fail. That's a big risk for all your money.
+check: mcq | What is diversification? | Spreading your money across many investments* | Putting it all in one place | Spending it fast
+check: tf | If one company fails, it hurts less when your money is spread out. | true
+check: mcq | Which is the most diversified? | Shares in 100 companies* | Shares in 1 company | Shares in 2 companies
+home: Explain "don't put all your eggs in one basket" to someone at home.
+skill: diversify
+
+@lesson 3.2 | Different industries | 🏭 | shares
+hook: You own shares in five airlines. A storm grounds every plane for a month. Are you diversified?
+learn: Owning many companies helps, but not if they're all in the same industry.
+learn: Spread across industries like food, health, energy, banks and technology.
+learn: When one industry has a bad time, others may be fine.
+play: sort | Well spread, All in one area | One food, one health, one bank and one tech company=Well spread; Five airlines=All in one area; Shares across 10 different industries=Well spread; Three gaming companies=All in one area; A fund that owns the whole share market=Well spread; Four car makers=All in one area | Well spread or not?
+check: mcq | Which portfolio is spread across industries? | A food, a health and a tech company* | Three airlines | Two car makers
+check: tf | Owning many companies in one industry is still risky. | true
+check: mcq | Why spread across industries? | When one has a bad time, others may be fine* | It's the law | It makes shares cheaper
+home: Name three different industries and one company in each.
+skill: diversify
+
+@lesson 3.3 | Different countries | 🌏 | shares
+hook: {nz:The NZ share market is less than 1% of the world's.~au:The Australian share market is only about 2% of the world's.} Should all your shares be local?
+learn: Investing only in your own country means missing most of the world's companies.
+learn: Funds can hold shares in many countries at once.
+learn: Different countries' economies don't all go up and down at the same time.
+play: debate | Should you only invest in companies from your own country? | No. Spreading across countries reduces risk and adds choice* | Yes. Local is always better | Local shares are easier to understand, and some have tax perks. Many investors keep some at home and some overseas.
+check: mcq | Why invest in other countries too? | Most of the world's companies are overseas* | Overseas shares never fall | It's free
+check: tf | Funds can hold shares from many countries. | true
+check: mcq | {nz:About how much of the world's share market is in NZ?~au:About how much of the world's share market is in Australia?} | {nz:Less than 1%~au:About 2%}* | Half | All of it
+home: Look at a global fund's fact sheet with a grown-up and find which countries it invests in.
+skill: diversify
+
+@lesson 3.4 | Different kinds | 🎨 | shares
+hook: Shares, bonds, cash and property. Why might someone own a bit of each?
+learn: Different kinds of investments behave differently.
+learn: When shares fall, cash and bonds often hold their value better.
+learn: A mix can make the ride smoother, though it may grow more slowly.
+play: match | Match each investment to how it usually behaves | Shares=Most growth, biggest wobbles; Bonds=Steady interest, smaller wobbles; Cash=Very steady, slow growth; Property=Can grow, but hard to sell quickly
+check: mcq | Why mix different kinds of investments? | To make the ups and downs smoother* | To make it confusing | To pay more fees
+check: tf | A mix of investments usually wobbles less than shares alone. | true
+check: mcq | Which usually wobbles the least? | Cash* | Shares in one company | Crypto
+home: Ask a grown-up whether their {nz:KiwiSaver~au:super} fund holds a mix of investments.
+skill: diversify
+
+@lesson 3.5 | Funds do it for you | 🧺 | shares
+hook: Buying 500 different shares sounds hard. Is there an easier way?
+learn: A fund pools money from lots of people and buys many investments at once.
+learn: With one small payment, you can own a tiny slice of hundreds of companies.
+learn: Index funds are a low-cost way to spread across a whole market.
+try: $100 spread over 100 companies is $1 each :: gap | $500 spread over 250 companies is $_ each | 2
+play: mystery | It pools money from lots of people; It buys many investments at once; Your small payment gets a slice of hundreds of companies; Some just follow a whole market | A fund* | A piggy bank | A credit card
+check: mcq | What does a fund do? | Pools money to buy many investments* | Lends you money | Pays your bills
+check: tf | With a fund, a small amount can be spread across hundreds of companies. | true
+check: mcq | A low-cost way to own a whole market is… | An index fund* | One hot share | A lottery ticket
+home: Ask a grown-up if they have money in a fund, like {nz:KiwiSaver~au:super}.
+skill: diversify
+
+@lesson 3.6 | What diversification can't do | 🌧️ | shares
+hook: You own shares in 1,000 companies. The whole market drops. Are you safe?
+learn: Diversification lowers the risk of one company or industry hurting you badly.
+learn: But when the whole market falls, a diversified portfolio usually falls too.
+learn: That's why time matters. Money you need soon shouldn't be in shares.
+play: sort | Diversification helps, Diversification can't stop it | One company goes bust=Diversification helps; The whole market falls 20%=Diversification can't stop it; One industry has a bad year=Diversification helps; A world-wide recession=Diversification can't stop it; One country's market slumps=Diversification helps | Can spreading out protect you?
+check: mcq | What can't diversification stop? | The whole market falling* | One company failing hurting you badly | One industry's bad year hurting you badly
+check: tf | A diversified portfolio can still fall when the whole market does. | true
+check: mcq | Money you need next month should be in… | A savings account* | Shares | Crypto
+home: Explain to someone at home one thing diversification can do and one thing it can't.
+skill: diversify
+
