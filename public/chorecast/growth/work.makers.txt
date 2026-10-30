@@ -223,3 +223,69 @@ check: mcq | What do most managers respect? | People who own their mistakes* | P
 home: Think of a mistake you made and what you'd say to own it.
 skill: honesty
 
+@lesson 4.1 | Define the problem | 🎯 | workshop
+hook: "The website's broken!" What does that actually mean?
+learn: Before you fix anything, say exactly what's wrong: what, where, when and how often.
+learn: "The checkout button does nothing on phones" is a problem you can solve. "It's broken" isn't.
+learn: Separate the problem from the guesses about why it's happening.
+play: match | Turn each vague problem into a clear one | Sales are bad=Sales dropped 20% since March; The app is slow=The app takes 10 seconds to open on older phones; Customers are angry=Five customers said deliveries were late this week; The team is lazy=Three tasks missed deadlines this month
+check: mcq | Which is a clearly defined problem? | The checkout button does nothing on phones* | Everything is broken | People don't like us
+check: tf | You should separate what's happening from your guess about why. | true
+home: Take a problem at home and write it as what, where, when and how often.
+skill: problem solving
+
+@lesson 4.2 | Find the cause | ❓ | workshop
+hook: The café keeps running out of milk. Is buying more milk the answer?
+learn: Ask "why?" a few times to dig past the first answer.
+learn: Why out of milk? The order is too small. Why? The order is set by last year's numbers. Why? Nobody updated it.
+learn: Fixing the real cause stops the problem coming back.
+play: order | Ask "why?" to find the real cause | The café ran out of milk again; Why? The milk order was too small; Why? It's based on last year's sales; Why? Nobody updates the order when sales grow; Fix: check and update the order every month
+check: mcq | What does asking "why?" several times help you find? | The real cause* | Someone to blame | A shortcut
+check: tf | Fixing the real cause stops a problem coming back. | true
+home: Use "why?" three times on a small problem at home, like a lost charger.
+skill: problem solving
+
+@lesson 4.3 | Lots of ideas first | 💡 | workshop
+hook: Is the first idea usually the best one?
+learn: Write down lots of ideas before judging any of them. Quantity first, quality later.
+learn: Strange ideas can lead to good ones. Don't shoot them down too early.
+learn: Then pick two or three by asking: will it work, what does it cost, and how fast?
+play: sort | Good brainstorming, Kills ideas | Writing every idea down=Good brainstorming; "That'll never work" in the first minute=Kills ideas; Building on someone else's idea=Good brainstorming; Only the boss talks=Kills ideas; Setting a 10-minute timer=Good brainstorming; Laughing at odd ideas=Kills ideas | Good brainstorming or not?
+check: mcq | When should you judge ideas? | After you've written lots down* | Before anyone speaks | Never
+check: tf | Building on someone else's idea is good brainstorming. | true
+home: Brainstorm 10 ideas with your family for a cheap weekend activity, then pick one.
+skill: creativity
+
+@lesson 4.4 | Test it small | 🧪 | workshop
+hook: You have a fix. Should you change everything at once?
+learn: Try your idea on a small scale first, like one shift, one product or one week.
+learn: Decide in advance how you'll know if it worked.
+learn: If it works, roll it out. If not, you've lost little and learned a lot.
+play: path | You think a new menu layout will sell more smoothies. | Try it for one week and compare sales => good: You'll have real evidence before spending more. | Reprint every menu today => bad: If it doesn't work, you've wasted time and money. | Ask one friend if they like it => ok: Their opinion helps, but sales data tells you more.
+check: mcq | Why test an idea small first? | You lose little if it fails and learn a lot* | It's always slower | It never works
+check: tf | You should decide how to measure success before you start. | true
+home: Test one small change to a routine at home for a week, and see if it helps.
+skill: problem solving
+
+@lesson 4.5 | Detective work | 🔍 | workshop
+hook: Some problems need clues before you can solve them.
+learn: Collect facts before deciding: what changed, when it started and who's affected.
+learn: Look for patterns. Problems that only happen on Mondays have a Monday cause.
+learn: Test your best guess against all the clues, not just one.
+play: mystery | Complaints about cold pies only come on Saturdays.; The pie warmer was fine on weekdays.; A new staff member started working Saturdays.; Nobody showed them how to set the warmer. | Training the new staff member on the warmer* | Buying a new pie warmer | Closing on Saturdays
+check: mcq | What's a good first step in a tricky problem? | Collect facts and look for patterns* | Guess and act fast | Blame someone
+check: tf | Your best guess should fit all the clues. | true
+home: Solve a household mystery, like where the TV remote keeps disappearing, by collecting clues.
+skill: problem solving
+
+@lesson 4.6 | Problems with people | 🗣️ | workshop
+hook: Some problems aren't about things. They're about people disagreeing.
+learn: Stay calm and listen first. Find out what the other person needs.
+learn: Say the problem as "we" not "you": "We keep missing deadlines."
+learn: Agree on one next step and check back later.
+play: chat | Your group project partner hasn't done their part | them: Sorry, I haven't started my section. | me: Thanks for telling me. What's getting in the way?*/You're so lazy/Fine, I'll do it all | them: I didn't get what to do. | me: Let's go through it together and split it into steps*/Figure it out yourself/I'll tell the teacher on you
+check: mcq | What should you do first in a people problem? | Stay calm and listen* | Shout | Walk away for ever
+check: tf | Saying "we" can make a problem feel shared. | true
+home: Think of a disagreement you had recently. What would "we" language sound like?
+skill: teamwork
+

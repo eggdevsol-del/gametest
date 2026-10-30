@@ -229,3 +229,72 @@ check: mcq | Who should help you find your tax number? | A grown-up you trust* |
 home: Ask a grown-up whether your savings account has your {nz:IRD number~au:TFN}.
 skill: tax
 
+@lesson 4.1 | Paying with cash | 💵 | bank
+hook: Cash is getting rarer. Why do some people still like it?
+learn: With cash, you can see exactly how much you have left. When it's gone, it's gone.
+learn: Paying $20 for something that costs $16.50 should get you $3.50 change. Always count it.
+learn: Cash can be lost or stolen, and many online shops won't take it.
+try: Pay $10 for $7.50 and get $2.50 change :: gap | Pay $20 for $14 and get $_ change | 6
+play: gen | change | 4
+check: mcq | What's one good thing about cash? | You can see how much is left* | It works in every online shop | It can't be lost
+check: gap | You pay $5 for a $3.20 snack. Your change is $_ | 1.80
+home: Next time you pay with cash, count your change before you leave the counter.
+skill: payments
+
+@lesson 4.2 | Debit cards | 💳 | bank
+hook: Is a debit card free money?
+learn: A debit card spends money that's already in your bank account. It's your own money.
+learn: You can tap or put in your PIN at the shop. Keep your PIN secret and cover the keypad.
+learn: Check your bank app, because taps happen so fast you can lose track of your spending.
+play: sort | Good habit, Risky habit | Covering the keypad for your PIN=Good habit; Telling a friend your PIN=Risky habit; Checking your bank app each week=Good habit; Writing your PIN on the card=Risky habit; Locking the card in the app if you lose it=Good habit; Lending your card to someone=Risky habit | Good or risky?
+check: mcq | Where does debit card money come from? | Your own bank account* | The bank lends it to you | The shop gives it to you
+check: tf | You should tell a friend your PIN in case you forget it. | false | Your PIN is only for you. Banks never ask for it.
+home: Ask a grown-up to show you how they check their spending in a bank app.
+skill: payments
+
+@lesson 4.3 | Phone and watch pay | 📱 | online
+hook: Some people pay by tapping their phone. Where is the money coming from?
+learn: Phone pay uses a card stored on the phone. The money still comes from that card's account.
+learn: A phone lock, like a code or a face scan, stops other people paying with it.
+learn: Because it's so easy, it's easy to overspend. Check what you've spent each week.
+play: path | Your friend wants to borrow your unlocked phone to buy a game. | Say no, and keep your phone locked => good: Your card stays safe. | Hand it over while you go to the toilet => bad: They could buy anything on your card. | Give them your phone code => bad: Now they can pay with your phone any time.
+check: mcq | When you pay by phone, where does the money come from? | The card saved on the phone* | The phone company pays | It's free
+check: tf | A phone lock helps stop other people using your money. | true
+home: With a grown-up, look at how a phone keeps its payment cards locked.
+skill: payments
+
+@lesson 4.4 | Credit cards | 🏦 | bank
+hook: A credit card lets you buy now with the bank's money. What's the catch?
+learn: A credit card is a loan. The bank pays the shop, and you pay the bank back later.
+learn: If you pay it all back on time, there's usually no interest. If not, interest gets added, often about 20% a year.
+learn: You need to be 18 to get your own credit card.
+try: $100 left owing at 20% a year adds about $20 in a year :: gap | $200 left owing at 20% a year adds about $_ in a year | 40
+play: debate | Are credit cards bad? | They're a tool. They're fine if you pay the full amount every month, and costly if you don't* | They're always free money | Some people prefer debit cards so they can never owe money. That's a fair choice too.
+check: mcq | What is a credit card? | A loan you pay back later* | Your own savings | A gift from the bank
+check: tf | Leaving money owing on a credit card can cost you interest. | true
+home: Ask a grown-up whether they use a debit card, a credit card or both, and why.
+skill: borrowing
+
+@lesson 4.5 | Buy now, pay later | ⏳ | bank
+hook: "Pay in 4 easy payments!" Is that easier than it sounds?
+learn: Buy now, pay later splits a price into parts, often 4 payments every 2 weeks.
+learn: A $120 jacket becomes 4 payments of $30. Miss one and there can be a late fee.
+learn: It's still borrowing. If you can't afford it now, splitting it doesn't make it cheaper.
+try: $80 in 4 payments is $20 each :: gap | $200 in 4 payments is $_ each | 50
+play: diff | Two ways to buy the same $120 jacket. Tap what's different with pay later. | Pay $120 today; Done straight away; No fees | Pay $30 today; Pay $30 more three more times; A late fee if you miss one
+check: mcq | A $60 game split into 4 payments costs how much each? | $15* | $60 | $4
+check: tf | Buy now, pay later is a kind of borrowing. | true
+home: Spot a "pay later" sign or button and talk with a grown-up about it.
+skill: borrowing
+
+@lesson 4.6 | Pick the best way to pay | 🤔 | stall
+hook: Cash, debit card, phone or pay later? Which one fits?
+learn: Cash is good when you want to stick to a set amount.
+learn: A debit card or phone pay is easy and spends money you already have.
+learn: Borrowing, like credit or pay later, costs extra if you miss a payment. Use it with care.
+play: match | Match the situation to a good way to pay | Spending money at the {nz:school gala~au:school fete}=Cash; Buying a book online with a grown-up=Debit card; Tapping at the supermarket with your own card=Phone or card; A big buy you can't afford yet=Wait and save
+check: mcq | You can't afford a game yet. What's the smartest choice? | Wait and save for it* | Use pay later and hope | Borrow from a friend
+check: tf | Paying with a phone uses money from a card or account. | true
+home: Next time you go shopping, guess which way your grown-up will pay, and ask why.
+skill: payments
+

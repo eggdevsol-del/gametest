@@ -221,3 +221,70 @@ check: mcq | Money you'll need next week should go in… | Spend or Vault* | Inv
 home: Talk with a grown-up about how much of your money could go in the Invest jar.
 skill: jars
 
+@lesson 4.1 | Prices wiggle | 🌊 | shares
+hook: Share prices go up and down like waves. Is something wrong?
+learn: The price of a share changes every day. Sometimes up, sometimes down.
+learn: Small ups and downs are normal, like waves on a beach.
+learn: Over many years, the market has gone up more than it has gone down.
+play: market | Watch the market go up, down and up again | 5
+check: mcq | What do share prices do? | Go up and down* | Only go up | Never change
+check: tf | Small ups and downs in prices are normal. | true
+home: Watch the waves at a beach, pool or bath with a grown-up. They go up and down, but the water stays.
+skill: markets
+
+@lesson 4.2 | Why prices move | 🔀 | shares
+hook: Why would a share price go up one day and down the next?
+learn: When lots of people want to buy a share, its price goes up.
+learn: When lots of people want to sell, its price goes down.
+learn: Good news about a company often pushes the price up. Bad news can push it down.
+play: sort | Price goes up, Price goes down | A toy company's new toy sells out=Price goes up; A juice company's drink makes people sick=Price goes down; Lots of people want to buy the share=Price goes up; Lots of people want to sell the share=Price goes down; An ice cream company has a record hot summer=Price goes up; A shop company closes half its shops=Price goes down | Up or down?
+check: mcq | What happens when lots of people want to buy a share? | The price goes up* | The price goes down | Nothing
+check: tf | Bad news about a company can make its share price drop. | true
+home: Pick a company you know. Talk with a grown-up about what news might make its price go up.
+skill: markets
+
+@lesson 4.3 | Wait it out | ⏰ | shares
+hook: Your shares went down this week. Should you sell them all?
+learn: When prices drop, some people panic and sell. Then they miss it when prices come back up.
+learn: Waiting, and not selling in a rush, has usually worked better.
+learn: Only invest money you won't need for a long time, so you can wait.
+play: path | Your Invest jar dropped from $10 to $8 this week. | Wait and keep investing a little => good: Prices often come back over time, and you kept your shares. | Sell it all right now => bad: You turned a dip into a real loss. | Cry and never invest again => bad: Dips are normal. It's OK to feel sad, but don't give up.
+check: mcq | Prices drop a little. What usually works better? | Waiting* | Selling in a rush | Shouting at the market
+check: tf | You should only invest money you won't need for a long time. | true
+home: Tell a grown-up what you would do if your Invest jar dropped this week.
+skill: patience
+
+@lesson 4.4 | Up the big hill | ⛰️ | shares
+hook: Climbing a hill, you go up and down little bumps. Do you still reach the top?
+learn: Over one day or week, prices bounce around a lot.
+learn: Over 10 or 20 years, the bumps look small and the path has usually gone up.
+learn: Looking at the long path helps you stay calm about the bumps.
+try: $10 then up to $12 is $2 higher :: gap | $10 then up to $15 is $_ higher | 5
+play: slider | A share started at $10. It dropped to $8, then climbed to $13. How much higher is it than at the start? | 0 | 6 | 3 | $ | 0 | 1
+check: gap | A share went from $5 to $9. It went up $_ | 4
+check: tf | Over many years, the bumps look smaller. | true
+home: Draw a bumpy hill path with a grown-up. Mark the small dips and the top.
+skill: markets
+
+@lesson 4.5 | Calm about wiggles | 😌 | shares
+hook: Watching prices fall can feel scary. What can you do with that feeling?
+learn: It's normal to feel worried when prices drop.
+learn: Take a slow breath before you decide anything.
+learn: Talk to a grown-up. Big choices are better made calm.
+play: timing | Breathe in slowly... then tap as you breathe out | Breathe out | Calm
+check: mcq | Prices drop and you feel worried. What should you do first? | Take a slow breath* | Sell everything fast | Hide your jar
+check: tf | It's OK to feel worried when prices fall. | true
+home: Practise one slow breath with a grown-up: in for 4, out for 4.
+skill: calm
+
+@lesson 4.6 | My jar wiggles too | 🫙 | shares
+hook: The Invest jar in Chorecast goes up and down. Why?
+learn: Your Invest jar acts a bit like real shares, so it wiggles.
+learn: Your Vault jar doesn't wiggle. It's for money you need to keep safe.
+learn: Use the Invest jar for money you can leave alone for a long time.
+play: tap | Tap the calm things to do when your Invest jar drops | 😌:yes:Take a slow breath; ⏳:yes:Wait and see; 🗣️:yes:Talk to a grown-up; 😱:no; 💸:no; 📈:yes:Remember it has gone up before
+check: mcq | Which jar doesn't wiggle? | Vault* | Invest | All jars wiggle
+check: tf | The Invest jar is for money you can leave alone for a long time. | true
+home: Look at your Invest jar with a grown-up. Has it gone up or down this week?
+skill: markets
+

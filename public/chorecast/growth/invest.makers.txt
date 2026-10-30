@@ -224,3 +224,71 @@ check: mcq | Who can reliably predict every crash? | Nobody* | Every expert | So
 home: Find a chart of a share market over 30 years and spot the big drops.
 skill: cycles
 
+@lesson 4.1 | Kinds of fees | 🧾 | shares
+hook: Fees hide in different places. Can you find them all?
+learn: A management fee is a percentage of your balance each year, like 0.5% or 1.5%.
+learn: Some funds also charge a flat fee, like $3 a month, whatever your balance.
+learn: Buying or selling can cost brokerage, and changing currency can cost a foreign exchange fee.
+play: match | Match each fee to how it's charged | Management fee=A percentage of your balance each year; Flat admin fee=Dollars each month; Brokerage=A charge on each trade; Currency fee=A cut when changing money to buy overseas shares
+check: mcq | Which fee is a percentage of your balance? | Management fee* | Flat admin fee | Brokerage
+check: tf | Some funds charge a flat fee no matter how much you have. | true
+home: Find the fees on a {nz:KiwiSaver~au:super} statement or fund page with a grown-up.
+skill: fees
+
+@lesson 4.2 | What 1% costs | 📉 | shares
+hook: 1% sounds tiny. What does it cost over 40 years?
+learn: $10,000 growing 7% a year for 40 years becomes about $150,000.
+learn: Take a 1% fee each year and it grows 6% instead, ending near $103,000.
+learn: That 1% cost about $47,000. A 0.25% fee would cost about $13,000.
+play: compound | $10,000 growing 6% a year after a 1% fee, for 40 years | 10000 | 6 | 40
+check: slider | About how much did a 1% fee cost over 40 years on $10,000, in thousands? | 0 | 100 | 47 | k$ | 8 | 1
+check: mcq | Why do small fees matter so much? | They compound, just like growth* | They don't, they're tiny | They only apply once
+home: Ask a grown-up what fee their {nz:KiwiSaver~au:super} fund charges.
+skill: fees
+
+@lesson 4.3 | Flat fees and small balances | 🪶 | shares
+hook: $5 a month doesn't sound bad. But what if you only have $500?
+learn: $5 a month is $60 a year. On $500, that's 12% of your money.
+learn: On $5,000, the same $60 is only 1.2%.
+learn: With a small balance, choose funds with low or no flat fees.
+try: $60 out of $500 is 12% :: gap | $60 out of $1,000 is _% | 6
+play: gen | percent | 4
+check: gap | A $24 yearly fee on a $400 balance is _% | 6
+check: mcq | Who gets hurt most by a flat fee? | People with small balances* | People with big balances | Nobody
+home: Work out with a grown-up what a $3 monthly fee would be as a percentage of your savings.
+skill: fees
+
+@lesson 4.4 | Do higher fees buy better returns? | 🏷️ | shares
+hook: An expensive fund must be better, right?
+learn: A higher fee is a guaranteed cost. Better returns are not guaranteed.
+learn: Over 10 years or more, most higher-fee active funds have done worse than simple index funds after fees.
+learn: Some active funds do well, but it's hard to know in advance which ones.
+play: debate | Should you pick the fund with the highest fee because it must be better? | No. Fees are certain, but extra returns aren't, and most high-fee funds fall behind over time* | Yes. You get what you pay for | Some people value active managers for certain strategies, and a few do beat the index. They just can't be picked reliably in advance.
+check: mcq | Over the long run, most higher-fee active funds have... | Done worse than index funds after fees* | Always beaten index funds | Had no fees at all
+check: tf | A high fee guarantees a high return. | false | The fee is guaranteed. The return isn't.
+home: Compare the fees of two funds online with a grown-up.
+skill: fees
+
+@lesson 4.5 | Hidden costs | 🕵️ | shares
+hook: The fund's fee says 0.3%. Is that everything you pay?
+learn: Some platforms add a spread: you pay a little more to buy than you get when you sell.
+learn: Buying overseas shares can mean a currency fee each time you convert money.
+learn: Trading often means paying brokerage many times. Buying and holding keeps costs low.
+play: diff | Two platforms, both "0.3% fees". Tap the extra costs on Platform B. | Fund fee 0.3%; No brokerage; No currency fee | Fund fee 0.3%; $5 brokerage per trade; 0.5% currency fee; Buy-sell spread
+check: mcq | Which habit keeps costs low? | Buying and holding* | Trading every day | Converting currency often
+check: tf | The headline fee always shows every cost. | false | Spreads, brokerage and currency fees can be extra.
+home: Look at one investing app's fee page with a grown-up and list every cost.
+skill: fees
+
+@lesson 4.6 | Fee detective | 🔎 | shares
+hook: Two funds look alike. Which one costs you less?
+learn: Turn every fee into dollars a year. 1% of $10,000 is $100.
+learn: Add flat fees too. $3 a month is $36 a year.
+learn: {nz:Sorted's Smart Investor~au:Moneysmart and the ATO's YourSuper tool} can help you compare funds.
+try: 0.5% of $10,000 is $50 :: gap | 1.2% of $10,000 is $_ | 120
+play: price | Which fund costs less on $10,000? | Fund A, 1.2% a year:120:10000:dollars; Fund B, 0.4% plus $36 a year:76:10000:dollars; Fund C, 0.9% a year:90:10000:dollars
+check: gap | 0.4% of $10,000 is $_ | 40
+check: mcq | What's the best way to compare fees? | Turn them all into dollars a year* | Pick the nicest website | Look only at the flat fee
+home: Use a fund comparison tool with a grown-up and find the lowest-fee fund of one type.
+skill: fees
+

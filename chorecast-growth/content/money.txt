@@ -227,6 +227,75 @@ check: gap | You saved $12. The kite costs $9. You have $_ left. | 3
 home: Tell a grown-up what your next saving goal will be.
 skill: goals
 
+@lesson 4.1 | Where money comes from | 💼 | bank
+hook: Where does money come from? Does it grow in the bank machine?
+guess: mcq | Where does most grown-ups' money come from? | Their work* | The bank machine makes it | It falls from the sky
+learn: Most grown-ups earn money by doing work. They get paid for their job.
+learn: A bank machine only gives out money that is already in your account. It doesn't make new money.
+learn: When people work, they help others. Bakers make bread and nurses help sick people.
+play: sort | Earns money, Doesn't earn money | Baking bread at a bakery=Earns money; Fixing cars at a garage=Earns money; Watching TV=Doesn't earn money; Driving a bus=Earns money; Taking a nap=Doesn't earn money; Teaching a class=Earns money | Does it earn money?
+check: mcq | How do most grown-ups get money? | They earn it at work* | The bank machine makes it | They find it
+check: tf | A bank machine makes new money for anyone who asks. | false | It only gives out money that is already in your account.
+home: Ask a grown-up what their job is and how it helps other people.
+skill: earning
+
+@lesson 4.2 | Family jobs and paid jobs | 🧹 | home
+hook: Should you get paid for making your bed?
+learn: Some jobs are family jobs. Everyone helps, like setting the table or tidying your toys.
+learn: Some families also have extra jobs you can earn money for, like washing the car.
+learn: Chorecast keeps track of the jobs you do and what you earn.
+play: sort | Family job, Extra job | Putting my clothes away=Family job; Clearing my plate=Family job; Washing the car=Extra job; Feeding my own pet=Family job; Weeding the whole garden=Extra job; Sweeping the deck=Extra job | Is it a family job or an extra job?
+check: mcq | Which is usually a family job that everyone helps with? | Clearing your plate* | Washing the car for pay | Weeding the whole garden
+check: tf | Helping your family is good, even when there's no money. | true
+home: With a grown-up, make a list of family jobs and extra jobs at your place.
+skill: earning
+
+@lesson 4.3 | Doing the job well | ✅ | home
+hook: You washed the car, but there's still mud on the wheels. Is the job done?
+learn: A job is done when it's done well, not just when you stop.
+learn: Look back and check your work before you say "finished".
+learn: People pay more and ask again when the work is good.
+play: order | Wash the car the right way | Get a bucket of soapy water and a sponge; Wash from the roof down; Scrub the wheels last; Rinse off the soap; Look around the car and fix spots you missed
+check: mcq | What should you do before you say "finished"? | Check your work* | Run away | Ask for more money
+check: tf | Good work makes people want to ask you again. | true
+home: Do one job at home, then check it with a grown-up before you say you're done.
+skill: work
+
+@lesson 4.4 | Bigger jobs, bigger pay | ⚖️ | bank
+hook: Should tidying one shelf earn the same as cleaning the whole garage?
+learn: Big jobs take more time and work, so they often pay more.
+learn: If one small job pays $1, a big job might pay $5.
+learn: Earning a little at a time adds up when you save it.
+try: $2 + $2 = $4 :: gap | $1 + $2 + $2 = $_ | 5
+play: match | Match each job to fair pay | Tidy one shelf=$1; Rake the whole lawn=$5; Fold one basket of washing=$2; Wash every window=$6
+check: mcq | Which job would usually pay the most? | Cleaning the whole garage* | Tidying one shelf | Putting one cup away
+check: gap | You earn $2 and then $3. You have $_ | 5
+home: Talk with a grown-up about which jobs at home are big and which are small.
+skill: earning
+
+@lesson 4.5 | Safe ways to earn | 🛡️ | home
+hook: A stranger says they'll pay you $10 to come and help them. What should you do?
+learn: Only earn money with a grown-up who looks after you knowing about it.
+learn: Never go with a stranger, even if they offer money.
+learn: Safe ways to earn are jobs at home, or jobs your grown-up has said yes to.
+play: path | A stranger offers you $10 to help find their lost dog. | Say no and tell your grown-up straight away => good: That's the safe choice. Grown-ups can help with lost dogs. | Go with them to look => bad: Never go with a stranger, even for money or a puppy. | Ask a friend to go instead => bad: That's not safe for your friend either.
+check: mcq | Who needs to know before you earn money? | A grown-up who looks after you* | Nobody | Only your friends
+check: tf | It's OK to go with a stranger if they offer money. | false | Never go with a stranger. Tell a grown-up.
+home: Talk with your grown-up about which jobs they're happy for you to earn money from.
+skill: safety
+
+@lesson 4.6 | It all adds up | 🐷 | bank
+hook: You earn $2 a week. Is that a lot?
+learn: Small amounts add up when you keep earning and save.
+learn: $2 a week for 5 weeks is $10.
+learn: Put what you earn in your jars, so you can save for a goal.
+try: $2 each week for 3 weeks is $6 :: gap | $2 each week for 4 weeks is $_ | 8
+play: tap | Tap the ways a kid can earn money with a grown-up's OK | 🚗:yes:Washing the car; 🪴:yes:Watering the plants; 📺:no; 🐕:yes:Walking the dog with a grown-up; 😴:no; 🍪:yes:Baking for a school sale
+check: gap | You earn $3 a week for 2 weeks. You have $_ | 6
+check: mcq | What helps small amounts become big amounts? | Saving them each week* | Spending them straight away | Losing them
+home: Count what you've earned in Chorecast so far with a grown-up.
+skill: saving
+
 @band builders
 @unit 1 | Budget basics | Plan where money goes before you spend it
 @unit 2 | Best value | Use unit prices to spot the real deal
@@ -458,6 +527,75 @@ check: mcq | Who should help you find your tax number? | A grown-up you trust* |
 home: Ask a grown-up whether your savings account has your {nz:IRD number~au:TFN}.
 skill: tax
 
+@lesson 4.1 | Paying with cash | 💵 | bank
+hook: Cash is getting rarer. Why do some people still like it?
+learn: With cash, you can see exactly how much you have left. When it's gone, it's gone.
+learn: Paying $20 for something that costs $16.50 should get you $3.50 change. Always count it.
+learn: Cash can be lost or stolen, and many online shops won't take it.
+try: Pay $10 for $7.50 and get $2.50 change :: gap | Pay $20 for $14 and get $_ change | 6
+play: gen | change | 4
+check: mcq | What's one good thing about cash? | You can see how much is left* | It works in every online shop | It can't be lost
+check: gap | You pay $5 for a $3.20 snack. Your change is $_ | 1.80
+home: Next time you pay with cash, count your change before you leave the counter.
+skill: payments
+
+@lesson 4.2 | Debit cards | 💳 | bank
+hook: Is a debit card free money?
+learn: A debit card spends money that's already in your bank account. It's your own money.
+learn: You can tap or put in your PIN at the shop. Keep your PIN secret and cover the keypad.
+learn: Check your bank app, because taps happen so fast you can lose track of your spending.
+play: sort | Good habit, Risky habit | Covering the keypad for your PIN=Good habit; Telling a friend your PIN=Risky habit; Checking your bank app each week=Good habit; Writing your PIN on the card=Risky habit; Locking the card in the app if you lose it=Good habit; Lending your card to someone=Risky habit | Good or risky?
+check: mcq | Where does debit card money come from? | Your own bank account* | The bank lends it to you | The shop gives it to you
+check: tf | You should tell a friend your PIN in case you forget it. | false | Your PIN is only for you. Banks never ask for it.
+home: Ask a grown-up to show you how they check their spending in a bank app.
+skill: payments
+
+@lesson 4.3 | Phone and watch pay | 📱 | online
+hook: Some people pay by tapping their phone. Where is the money coming from?
+learn: Phone pay uses a card stored on the phone. The money still comes from that card's account.
+learn: A phone lock, like a code or a face scan, stops other people paying with it.
+learn: Because it's so easy, it's easy to overspend. Check what you've spent each week.
+play: path | Your friend wants to borrow your unlocked phone to buy a game. | Say no, and keep your phone locked => good: Your card stays safe. | Hand it over while you go to the toilet => bad: They could buy anything on your card. | Give them your phone code => bad: Now they can pay with your phone any time.
+check: mcq | When you pay by phone, where does the money come from? | The card saved on the phone* | The phone company pays | It's free
+check: tf | A phone lock helps stop other people using your money. | true
+home: With a grown-up, look at how a phone keeps its payment cards locked.
+skill: payments
+
+@lesson 4.4 | Credit cards | 🏦 | bank
+hook: A credit card lets you buy now with the bank's money. What's the catch?
+learn: A credit card is a loan. The bank pays the shop, and you pay the bank back later.
+learn: If you pay it all back on time, there's usually no interest. If not, interest gets added, often about 20% a year.
+learn: You need to be 18 to get your own credit card.
+try: $100 left owing at 20% a year adds about $20 in a year :: gap | $200 left owing at 20% a year adds about $_ in a year | 40
+play: debate | Are credit cards bad? | They're a tool. They're fine if you pay the full amount every month, and costly if you don't* | They're always free money | Some people prefer debit cards so they can never owe money. That's a fair choice too.
+check: mcq | What is a credit card? | A loan you pay back later* | Your own savings | A gift from the bank
+check: tf | Leaving money owing on a credit card can cost you interest. | true
+home: Ask a grown-up whether they use a debit card, a credit card or both, and why.
+skill: borrowing
+
+@lesson 4.5 | Buy now, pay later | ⏳ | bank
+hook: "Pay in 4 easy payments!" Is that easier than it sounds?
+learn: Buy now, pay later splits a price into parts, often 4 payments every 2 weeks.
+learn: A $120 jacket becomes 4 payments of $30. Miss one and there can be a late fee.
+learn: It's still borrowing. If you can't afford it now, splitting it doesn't make it cheaper.
+try: $80 in 4 payments is $20 each :: gap | $200 in 4 payments is $_ each | 50
+play: diff | Two ways to buy the same $120 jacket. Tap what's different with pay later. | Pay $120 today; Done straight away; No fees | Pay $30 today; Pay $30 more three more times; A late fee if you miss one
+check: mcq | A $60 game split into 4 payments costs how much each? | $15* | $60 | $4
+check: tf | Buy now, pay later is a kind of borrowing. | true
+home: Spot a "pay later" sign or button and talk with a grown-up about it.
+skill: borrowing
+
+@lesson 4.6 | Pick the best way to pay | 🤔 | stall
+hook: Cash, debit card, phone or pay later? Which one fits?
+learn: Cash is good when you want to stick to a set amount.
+learn: A debit card or phone pay is easy and spends money you already have.
+learn: Borrowing, like credit or pay later, costs extra if you miss a payment. Use it with care.
+play: match | Match the situation to a good way to pay | Spending money at the {nz:school gala~au:school fete}=Cash; Buying a book online with a grown-up=Debit card; Tapping at the supermarket with your own card=Phone or card; A big buy you can't afford yet=Wait and save
+check: mcq | You can't afford a game yet. What's the smartest choice? | Wait and save for it* | Use pay later and hope | Borrow from a friend
+check: tf | Paying with a phone uses money from a card or account. | true
+home: Next time you go shopping, guess which way your grown-up will pay, and ask why.
+skill: payments
+
 @band makers
 @unit 1 | Bank accounts | Everyday, savings and how to choose
 @unit 2 | Cards and borrowing | Debit, credit and the true cost of debt
@@ -686,6 +824,74 @@ check: tf | Being scammed is always your own fault. | false | Scammers are profe
 check: mcq | Why report a scam you nearly fell for? | It helps warn and protect others* | It's not worth it | You'll get a prize
 home: Save {nz:netsafe.org.nz~au:scamwatch.gov.au} in your browser.
 skill: scams
+
+@lesson 4.1 | Phone plans | 📶 | online
+hook: Prepay or on account? Unlimited or 20 GB? Phone plans are designed to confuse.
+learn: Prepay means you pay first and can't go over. On account (postpay) means a monthly bill, sometimes with a contract.
+learn: Look at how much data you really use. Your phone's settings show it each month.
+learn: Compare the cost per GB, but only for data you'll actually use.
+play: price | You use about 30 GB a month. Which plan costs least for each GB you'd really use? | 40 GB prepay:35:40:GB; 20 GB plan:25:20:GB; Unlimited, but you'd only use 30 GB:65:30:GB
+check: mcq | Where can you see how much data you really use? | In your phone's settings* | On the box the phone came in | On the plan's poster
+check: tf | Prepay plans let you go over and pay later. | false | With prepay you pay first, so you can't go over.
+home: Check your phone's data use for last month and compare it with your plan.
+skill: deals
+
+@lesson 4.2 | Subscriptions add up | 🔁 | online
+hook: $9.99 here, $14.99 there. What do your subscriptions cost in a year?
+learn: Monthly costs feel small. $15 a month is $180 a year.
+learn: Several at once can quietly cost hundreds of dollars a year.
+learn: Check them every few months. Cancel the ones you don't use.
+try: $10 a month is $120 a year :: gap | $15 a month is $_ a year | 180
+play: budget | You have $60 a month for apps and streaming. Choose what to keep. | 60 | Music=15; Video streaming=0; Game pass=0; Cloud storage=5; Savings=0 | Price rise on music:3
+check: gap | $12 a month is $_ a year | 144
+check: mcq | What's the best habit with subscriptions? | Check and cancel the ones you don't use* | Keep them all just in case | Never look at them
+home: List every subscription in your house with a grown-up and add up the yearly cost.
+skill: deals
+
+@lesson 4.3 | Free trials | 🎁 | online
+hook: "Free for 30 days!" Then what?
+learn: Most free trials need a card. When the trial ends, the paid plan starts by itself.
+learn: Set a reminder a few days before the trial ends.
+learn: If you won't use it, cancel early. Many keep working until the trial ends anyway.
+play: order | Use a free trial without getting stung | Read what it costs after the trial; Note the end date; Set a reminder 3 days before; Decide if you really use it; Cancel in the account settings if you don't
+check: mcq | What usually happens when a free trial ends? | The paid plan starts and your card is charged* | It stops and nothing happens | You get another free month
+check: tf | Setting a reminder before a trial ends can save you money. | true
+home: With a grown-up, find where to cancel a subscription in one app you use.
+skill: deals
+
+@lesson 4.4 | The fine print | 🔍 | online
+hook: The big print says $39. The small print says something else.
+learn: Fine print holds the real rules: the contract length, exit fees, price after the deal, and data limits.
+learn: "$39 for the first 6 months" might become $55 after that.
+learn: Before you agree, find the total cost for the whole contract, not just the first month.
+try: $39 for 6 months, then $55 for 6 months, is $564 a year :: gap | $30 for 6 months, then $50 for 6 months, is $_ a year | 480
+play: diff | Read the ad and its fine print. Tap what the fine print adds. | Unlimited data; $39 a month; Cancel any time | Unlimited data, slowed after 50 GB; $39 a month for 6 months, then $55; Cancel any time, $99 exit fee in year one
+check: mcq | What should you work out before you sign? | The total cost of the whole contract* | Only the first month's price | Only the colour of the phone
+check: tf | "Unlimited" plans can have limits in the fine print. | true
+home: Find a phone or internet ad and read its fine print with a grown-up.
+skill: deals
+
+@lesson 4.5 | Bundles and deals | 📦 | stall
+hook: "Bundle and save!" Do you save if you didn't need half the bundle?
+learn: A bundle is a good deal only if you'd buy every part anyway.
+learn: Shops make bundles to sell more, not always to save you money.
+learn: Compare the bundle with buying just what you need.
+play: price | You need a phone case and a charger. Which is the better deal for you? | Case and charger, bought separately:45:2:items; Bundle with case, charger, earbuds and a stand:60:2:items
+check: mcq | When is a bundle a good deal? | When you'd buy every part anyway* | Whenever it says "save" | When it has the most items
+check: tf | Shops use bundles to get you to spend more. | true
+home: Spot a bundle deal and work out with a grown-up whether it really saves money.
+skill: deals
+
+@lesson 4.6 | Changing your mind | ↩️ | townhall
+hook: A salesperson at the door talked you into a deal. Can you back out?
+learn: If a seller comes to your door or calls you uninvited, you get a cooling-off period: {nz:5 working days~au:10 business days}.
+learn: For normal shop and online buys, there's no automatic right to change your mind. The shop's own returns policy decides.
+learn: Contracts often let you cancel, but read the notice period and any exit fees first.
+play: sort | Cooling-off period, No automatic right | A door-to-door salesperson's deal=Cooling-off period; An uninvited phone sales deal=Cooling-off period; Shoes you bought in a shop and now dislike=No automatic right; A game you bought online and got bored of=No automatic right | Can you back out under the law?
+check: mcq | How long is the cooling-off period for uninvited door-to-door sales? | {nz:5 working days~au:10 business days}* | 1 hour | There isn't one
+check: tf | You can always return something from a shop just because you changed your mind. | false | It depends on the shop's policy. Faulty goods are different.
+home: Look up a shop's returns policy online with a grown-up.
+skill: consumer
 
 @band launchers
 @unit 1 | Payslips and tax | Read every line of a payslip
@@ -916,3 +1122,72 @@ check: tf | Credit repair companies can do things you can't do for free yourself
 check: mcq | A debt you never had appears. It might be… | A mistake or identity fraud* | A gift | Normal
 home: Read the "correcting your credit report" page on {nz:a credit agency's website~au:moneysmart.gov.au}.
 skill: credit
+
+@lesson 4.1 | Fixed and changing costs | 📌 | home
+hook: Rent is the same each week. Groceries never are. Why does that matter?
+learn: Fixed costs stay the same, like rent, a phone plan or insurance.
+learn: Changing costs move around, like food, power, fuel and fun.
+learn: Cover fixed costs first, then plan the changing ones with room to spare.
+play: sort | Fixed cost, Changing cost | Rent=Fixed cost; Phone plan=Fixed cost; Groceries=Changing cost; Power bill=Changing cost; Car insurance=Fixed cost; Takeaways=Changing cost; Fuel=Changing cost | Fixed or changing?
+check: mcq | Which is usually a fixed cost? | Rent* | Groceries | Takeaways
+check: tf | Power bills are usually higher in winter. | true
+home: Ask a grown-up which of your household's costs are fixed and which change.
+skill: budgeting
+
+@lesson 4.2 | The 50/30/20 guide | 🥧 | bank
+hook: Is there a simple starting point for splitting your pay?
+learn: One guide is 50% for needs, 30% for wants and 20% for saving.
+learn: On $800 a week take-home, that's $400 for needs, $240 for wants and $160 for saving.
+learn: It's a starting point. In a city with high rent, needs often take more than 50%.
+try: 20% of $800 is $160 :: gap | 20% of $600 is $_ | 120
+play: budget | Plan $850 a week take-home in your first flat | 850 | Rent=300; Groceries=110; Transport=60; Power and internet=45; Phone=15; Fun=0; Savings=0 | Dentist bill:90
+check: gap | 50% of $900 is $_ | 450
+check: mcq | In the 50/30/20 guide, what is the 20% for? | Saving* | Rent | Fun
+home: Ask a grown-up how they split their pay, and whether 50/30/20 would work for them.
+skill: budgeting
+
+@lesson 4.3 | Bills that sneak up | 📅 | home
+hook: Car registration, insurance and a new laptop don't come every week. How do you plan for them?
+learn: Some bills come once or twice a year. They feel like surprises, but they're not.
+learn: Add them up and divide by 52. Put that amount aside each week in a separate account.
+learn: $1,300 of yearly bills is $25 a week. When the bill arrives, the money's there.
+try: $520 a year is $10 a week :: gap | $1,040 a year is $_ a week | 20
+play: slider | Your yearly bills are $1,820. About how much should you put aside each week? | 10 | 60 | 35 | $ | 3 | 1
+check: gap | $2,600 of yearly bills is $_ a week | 50
+check: mcq | What's the best way to handle a yearly bill? | Save a little for it every week* | Hope you have money when it comes | Put it on a credit card
+home: List the yearly bills your household pays, with a grown-up.
+skill: budgeting
+
+@lesson 4.4 | Accounts that do the work | 🏧 | bank
+hook: What if your budget ran itself on payday?
+learn: Many people use a few accounts: one for bills, one for spending and one for savings.
+learn: Set automatic transfers for the day after payday. Bills and savings come out first.
+learn: Whatever is left in your spending account is yours to use. No sums each time you buy.
+play: build | Set up a payday plan | Pay lands in your main account; Bills money moves to the bills account; Savings move to the savings account; Spending money moves to your card; Check once a week that it's on track
+check: mcq | When should automatic savings transfers happen? | Just after payday* | At the end of the month, if there's money left | Only when you remember
+check: tf | Splitting money into different accounts can make budgeting easier. | true
+home: Ask a grown-up whether they use automatic payments, and for what.
+skill: banking
+
+@lesson 4.5 | Your emergency fund | 🧯 | bank
+hook: Your car breaks down and the repair is $900. What now?
+learn: An emergency fund is money kept only for real surprises: repairs, job loss or a big bill.
+learn: Start with $1,000. Then aim for 3 months of needs.
+learn: Keep it in a separate savings account that's easy to reach but not on your card.
+try: Needs of $500 a week for 13 weeks is $6,500 :: gap | Needs of $400 a week for 13 weeks is $_ | 5200
+play: tap | Tap the real emergencies | 🚗:yes:A car repair to get to work; 🦷:yes:An urgent dentist visit; 🎫:no; 👟:no; 💼:yes:Losing your job; 🏠:yes:A bond for a sudden move
+check: mcq | Where should an emergency fund live? | A separate savings account* | In your spending account | In crypto
+check: tf | A concert ticket sale is an emergency. | false | Emergencies are surprises you need, not deals you want.
+home: Ask a grown-up what counts as an emergency for your family.
+skill: saving
+
+@lesson 4.6 | Check-ins and fixes | 🔧 | home
+hook: You've gone over your food budget three weeks running. Is your budget broken?
+learn: A budget is a plan, not a test. Plans need changing.
+learn: Check in once a month. Look at what you planned and what really happened.
+learn: If one area keeps going over, cut somewhere else or find a cheaper way, like cooking more.
+play: chat | Your flatmate asks about splitting costs | them: We keep running out of money for groceries. What should we do? | me: Let's check what we spend and plan meals for the week*/Just stop buying food/Put it all on my credit card | them: Good idea. Should we change the budget too? | me: Yes. Let's move $20 from takeaways to groceries*/No, budgets never change/Let's stop paying the power bill
+check: mcq | You keep overspending on food. What's a good fix? | Plan meals and move money from another area* | Give up on budgeting | Ignore it
+check: tf | It's normal to change a budget after a few weeks. | true
+home: Do a quick monthly check-in with a grown-up: what was planned and what really happened?
+skill: budgeting

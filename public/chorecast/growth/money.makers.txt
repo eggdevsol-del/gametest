@@ -227,3 +227,71 @@ check: mcq | Why report a scam you nearly fell for? | It helps warn and protect 
 home: Save {nz:netsafe.org.nz~au:scamwatch.gov.au} in your browser.
 skill: scams
 
+@lesson 4.1 | Phone plans | 📶 | online
+hook: Prepay or on account? Unlimited or 20 GB? Phone plans are designed to confuse.
+learn: Prepay means you pay first and can't go over. On account (postpay) means a monthly bill, sometimes with a contract.
+learn: Look at how much data you really use. Your phone's settings show it each month.
+learn: Compare the cost per GB, but only for data you'll actually use.
+play: price | You use about 30 GB a month. Which plan costs least for each GB you'd really use? | 40 GB prepay:35:40:GB; 20 GB plan:25:20:GB; Unlimited, but you'd only use 30 GB:65:30:GB
+check: mcq | Where can you see how much data you really use? | In your phone's settings* | On the box the phone came in | On the plan's poster
+check: tf | Prepay plans let you go over and pay later. | false | With prepay you pay first, so you can't go over.
+home: Check your phone's data use for last month and compare it with your plan.
+skill: deals
+
+@lesson 4.2 | Subscriptions add up | 🔁 | online
+hook: $9.99 here, $14.99 there. What do your subscriptions cost in a year?
+learn: Monthly costs feel small. $15 a month is $180 a year.
+learn: Several at once can quietly cost hundreds of dollars a year.
+learn: Check them every few months. Cancel the ones you don't use.
+try: $10 a month is $120 a year :: gap | $15 a month is $_ a year | 180
+play: budget | You have $60 a month for apps and streaming. Choose what to keep. | 60 | Music=15; Video streaming=0; Game pass=0; Cloud storage=5; Savings=0 | Price rise on music:3
+check: gap | $12 a month is $_ a year | 144
+check: mcq | What's the best habit with subscriptions? | Check and cancel the ones you don't use* | Keep them all just in case | Never look at them
+home: List every subscription in your house with a grown-up and add up the yearly cost.
+skill: deals
+
+@lesson 4.3 | Free trials | 🎁 | online
+hook: "Free for 30 days!" Then what?
+learn: Most free trials need a card. When the trial ends, the paid plan starts by itself.
+learn: Set a reminder a few days before the trial ends.
+learn: If you won't use it, cancel early. Many keep working until the trial ends anyway.
+play: order | Use a free trial without getting stung | Read what it costs after the trial; Note the end date; Set a reminder 3 days before; Decide if you really use it; Cancel in the account settings if you don't
+check: mcq | What usually happens when a free trial ends? | The paid plan starts and your card is charged* | It stops and nothing happens | You get another free month
+check: tf | Setting a reminder before a trial ends can save you money. | true
+home: With a grown-up, find where to cancel a subscription in one app you use.
+skill: deals
+
+@lesson 4.4 | The fine print | 🔍 | online
+hook: The big print says $39. The small print says something else.
+learn: Fine print holds the real rules: the contract length, exit fees, price after the deal, and data limits.
+learn: "$39 for the first 6 months" might become $55 after that.
+learn: Before you agree, find the total cost for the whole contract, not just the first month.
+try: $39 for 6 months, then $55 for 6 months, is $564 a year :: gap | $30 for 6 months, then $50 for 6 months, is $_ a year | 480
+play: diff | Read the ad and its fine print. Tap what the fine print adds. | Unlimited data; $39 a month; Cancel any time | Unlimited data, slowed after 50 GB; $39 a month for 6 months, then $55; Cancel any time, $99 exit fee in year one
+check: mcq | What should you work out before you sign? | The total cost of the whole contract* | Only the first month's price | Only the colour of the phone
+check: tf | "Unlimited" plans can have limits in the fine print. | true
+home: Find a phone or internet ad and read its fine print with a grown-up.
+skill: deals
+
+@lesson 4.5 | Bundles and deals | 📦 | stall
+hook: "Bundle and save!" Do you save if you didn't need half the bundle?
+learn: A bundle is a good deal only if you'd buy every part anyway.
+learn: Shops make bundles to sell more, not always to save you money.
+learn: Compare the bundle with buying just what you need.
+play: price | You need a phone case and a charger. Which is the better deal for you? | Case and charger, bought separately:45:2:items; Bundle with case, charger, earbuds and a stand:60:2:items
+check: mcq | When is a bundle a good deal? | When you'd buy every part anyway* | Whenever it says "save" | When it has the most items
+check: tf | Shops use bundles to get you to spend more. | true
+home: Spot a bundle deal and work out with a grown-up whether it really saves money.
+skill: deals
+
+@lesson 4.6 | Changing your mind | ↩️ | townhall
+hook: A salesperson at the door talked you into a deal. Can you back out?
+learn: If a seller comes to your door or calls you uninvited, you get a cooling-off period: {nz:5 working days~au:10 business days}.
+learn: For normal shop and online buys, there's no automatic right to change your mind. The shop's own returns policy decides.
+learn: Contracts often let you cancel, but read the notice period and any exit fees first.
+play: sort | Cooling-off period, No automatic right | A door-to-door salesperson's deal=Cooling-off period; An uninvited phone sales deal=Cooling-off period; Shoes you bought in a shop and now dislike=No automatic right; A game you bought online and got bored of=No automatic right | Can you back out under the law?
+check: mcq | How long is the cooling-off period for uninvited door-to-door sales? | {nz:5 working days~au:10 business days}* | 1 hour | There isn't one
+check: tf | You can always return something from a shop just because you changed your mind. | false | It depends on the shop's policy. Faulty goods are different.
+home: Look up a shop's returns policy online with a grown-up.
+skill: consumer
+

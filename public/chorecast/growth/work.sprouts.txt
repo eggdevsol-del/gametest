@@ -217,3 +217,69 @@ check: mcq | What should you do while they answer? | Listen carefully* | Play on
 home: Ask a grown-up three questions about their job.
 skill: careers
 
+@lesson 4.1 | Big jobs, small steps | 🪜 | workshop
+hook: Tidying your whole room feels too big. What if you did it one bit at a time?
+learn: A big job is easier when you break it into small steps.
+learn: Do one step, then the next. Soon the whole job is done.
+learn: Ticking off each step feels good and keeps you going.
+play: order | Tidy your room one step at a time | Put dirty clothes in the wash basket; Put toys back in their boxes; Put books on the shelf; Make your bed; Look around and check
+check: mcq | What makes a big job feel easier? | Breaking it into small steps* | Doing nothing | Starting ten things at once
+check: tf | Ticking off steps can help you keep going. | true
+home: Pick one big job at home and break it into 3 small steps with a grown-up.
+skill: persistence
+
+@lesson 4.2 | When it gets boring | 🥱 | workshop
+hook: Halfway through a job, it gets boring. What can you do?
+learn: Lots of jobs get boring in the middle. That's normal.
+learn: Music, a timer race or a little break can help you keep going.
+learn: Think about how good it will feel when it's finished.
+play: tap | Tap the tricks that help you keep going | 🎵:yes:Play some music; ⏱️:yes:Race a timer; 🧃:yes:Have a short break, then come back; 📺:no; 🛌:no; 🌟:yes:Think about how good it will feel
+check: mcq | A job gets boring. What helps? | Racing a timer* | Giving up | Hiding the job
+check: tf | It's normal for jobs to get boring in the middle. | true
+home: Try racing a timer on your next job at home.
+skill: persistence
+
+@lesson 4.3 | Check before you stop | 👀 | home
+hook: You think you've finished. But have you really?
+learn: Before you say "done", look back at your work.
+learn: Check each part. Did you miss anything?
+learn: Fixing small things at the end makes a job great.
+play: diff | A finished table and your table. Tap the spots that aren't finished yet. | Plate; Fork; Knife; Cup; Napkin | Plate; Fork; No knife yet; Cup; No napkin yet
+check: mcq | What should you do before saying "done"? | Look back and check* | Run outside | Start a new job
+check: tf | Fixing small things at the end makes a job better. | true
+home: After your next job, check it with a grown-up and fix one small thing.
+skill: quality
+
+@lesson 4.4 | Stuck? Try another way | 🔄 | workshop
+hook: You've tried the same thing three times and it still won't work. Now what?
+learn: If one way doesn't work, try a different way.
+learn: It's OK to ask for help when you're stuck.
+learn: Being stuck is part of learning. Everyone gets stuck sometimes.
+play: path | The puzzle piece won't fit, no matter how hard you push. | Try turning it, or try a different spot => good: Trying another way often works. | Push it harder until it bends => bad: Forcing it can break the piece. | Throw the puzzle away => bad: You'd never get to finish it.
+check: mcq | You're stuck on a job. What's a good idea? | Try a different way or ask for help* | Give up for ever | Get angry
+check: tf | Everyone gets stuck sometimes. | true
+home: Next time you're stuck, say "Let me try another way", then try it.
+skill: persistence
+
+@lesson 4.5 | Finish line | 🏁 | workshop
+hook: How does it feel to finish something you started?
+learn: Finishing a job feels great. You can be proud.
+learn: People trust you more when you finish what you start.
+learn: Keep going until the job is really done.
+play: timing | Keep going until the bar reaches the finish, then tap | Finish | Done
+check: mcq | Why do people trust you more? | You finish what you start* | You start lots of things | You leave jobs half done
+check: tf | Finishing a job can make you feel proud. | true
+home: Tell a grown-up about something you finished this week that you're proud of.
+skill: persistence
+
+@lesson 4.6 | I said I would | 🤝 | home
+hook: You said you'd feed the cat. It's nearly bedtime. Did you?
+learn: When you say you'll do a job, people count on you.
+learn: Doing what you said, even when nobody reminds you, is called being reliable.
+learn: If you forget, say sorry and do it straight away.
+play: chat | Mum asks about your job | them: Did you feed the cat like you said? | me: Oh no, I forgot! I'll do it right now*/The cat isn't hungry/Someone else did it | them: Thanks. What could help you remember next time? | me: I could put it on my Chorecast list*/I'll just forget again/Cats can feed themselves
+check: mcq | You forgot a job you promised to do. What should you do? | Say sorry and do it now* | Hope nobody notices | Blame your sister
+check: tf | Being reliable means doing what you said you'd do. | true
+home: Promise one job to a grown-up today, and do it without a reminder.
+skill: reliability
+

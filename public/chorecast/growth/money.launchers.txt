@@ -228,3 +228,72 @@ check: mcq | A debt you never had appears. It might be… | A mistake or identit
 home: Read the "correcting your credit report" page on {nz:a credit agency's website~au:moneysmart.gov.au}.
 skill: credit
 
+@lesson 4.1 | Fixed and changing costs | 📌 | home
+hook: Rent is the same each week. Groceries never are. Why does that matter?
+learn: Fixed costs stay the same, like rent, a phone plan or insurance.
+learn: Changing costs move around, like food, power, fuel and fun.
+learn: Cover fixed costs first, then plan the changing ones with room to spare.
+play: sort | Fixed cost, Changing cost | Rent=Fixed cost; Phone plan=Fixed cost; Groceries=Changing cost; Power bill=Changing cost; Car insurance=Fixed cost; Takeaways=Changing cost; Fuel=Changing cost | Fixed or changing?
+check: mcq | Which is usually a fixed cost? | Rent* | Groceries | Takeaways
+check: tf | Power bills are usually higher in winter. | true
+home: Ask a grown-up which of your household's costs are fixed and which change.
+skill: budgeting
+
+@lesson 4.2 | The 50/30/20 guide | 🥧 | bank
+hook: Is there a simple starting point for splitting your pay?
+learn: One guide is 50% for needs, 30% for wants and 20% for saving.
+learn: On $800 a week take-home, that's $400 for needs, $240 for wants and $160 for saving.
+learn: It's a starting point. In a city with high rent, needs often take more than 50%.
+try: 20% of $800 is $160 :: gap | 20% of $600 is $_ | 120
+play: budget | Plan $850 a week take-home in your first flat | 850 | Rent=300; Groceries=110; Transport=60; Power and internet=45; Phone=15; Fun=0; Savings=0 | Dentist bill:90
+check: gap | 50% of $900 is $_ | 450
+check: mcq | In the 50/30/20 guide, what is the 20% for? | Saving* | Rent | Fun
+home: Ask a grown-up how they split their pay, and whether 50/30/20 would work for them.
+skill: budgeting
+
+@lesson 4.3 | Bills that sneak up | 📅 | home
+hook: Car registration, insurance and a new laptop don't come every week. How do you plan for them?
+learn: Some bills come once or twice a year. They feel like surprises, but they're not.
+learn: Add them up and divide by 52. Put that amount aside each week in a separate account.
+learn: $1,300 of yearly bills is $25 a week. When the bill arrives, the money's there.
+try: $520 a year is $10 a week :: gap | $1,040 a year is $_ a week | 20
+play: slider | Your yearly bills are $1,820. About how much should you put aside each week? | 10 | 60 | 35 | $ | 3 | 1
+check: gap | $2,600 of yearly bills is $_ a week | 50
+check: mcq | What's the best way to handle a yearly bill? | Save a little for it every week* | Hope you have money when it comes | Put it on a credit card
+home: List the yearly bills your household pays, with a grown-up.
+skill: budgeting
+
+@lesson 4.4 | Accounts that do the work | 🏧 | bank
+hook: What if your budget ran itself on payday?
+learn: Many people use a few accounts: one for bills, one for spending and one for savings.
+learn: Set automatic transfers for the day after payday. Bills and savings come out first.
+learn: Whatever is left in your spending account is yours to use. No sums each time you buy.
+play: build | Set up a payday plan | Pay lands in your main account; Bills money moves to the bills account; Savings move to the savings account; Spending money moves to your card; Check once a week that it's on track
+check: mcq | When should automatic savings transfers happen? | Just after payday* | At the end of the month, if there's money left | Only when you remember
+check: tf | Splitting money into different accounts can make budgeting easier. | true
+home: Ask a grown-up whether they use automatic payments, and for what.
+skill: banking
+
+@lesson 4.5 | Your emergency fund | 🧯 | bank
+hook: Your car breaks down and the repair is $900. What now?
+learn: An emergency fund is money kept only for real surprises: repairs, job loss or a big bill.
+learn: Start with $1,000. Then aim for 3 months of needs.
+learn: Keep it in a separate savings account that's easy to reach but not on your card.
+try: Needs of $500 a week for 13 weeks is $6,500 :: gap | Needs of $400 a week for 13 weeks is $_ | 5200
+play: tap | Tap the real emergencies | 🚗:yes:A car repair to get to work; 🦷:yes:An urgent dentist visit; 🎫:no; 👟:no; 💼:yes:Losing your job; 🏠:yes:A bond for a sudden move
+check: mcq | Where should an emergency fund live? | A separate savings account* | In your spending account | In crypto
+check: tf | A concert ticket sale is an emergency. | false | Emergencies are surprises you need, not deals you want.
+home: Ask a grown-up what counts as an emergency for your family.
+skill: saving
+
+@lesson 4.6 | Check-ins and fixes | 🔧 | home
+hook: You've gone over your food budget three weeks running. Is your budget broken?
+learn: A budget is a plan, not a test. Plans need changing.
+learn: Check in once a month. Look at what you planned and what really happened.
+learn: If one area keeps going over, cut somewhere else or find a cheaper way, like cooking more.
+play: chat | Your flatmate asks about splitting costs | them: We keep running out of money for groceries. What should we do? | me: Let's check what we spend and plan meals for the week*/Just stop buying food/Put it all on my credit card | them: Good idea. Should we change the budget too? | me: Yes. Let's move $20 from takeaways to groceries*/No, budgets never change/Let's stop paying the power bill
+check: mcq | You keep overspending on food. What's a good fix? | Plan meals and move money from another area* | Give up on budgeting | Ignore it
+check: tf | It's normal to change a budget after a few weeks. | true
+home: Do a quick monthly check-in with a grown-up: what was planned and what really happened?
+skill: budgeting
+

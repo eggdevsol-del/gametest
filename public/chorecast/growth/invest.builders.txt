@@ -222,3 +222,71 @@ check: mcq | Money you need next month should be in… | A savings account* | Sh
 home: Explain to someone at home one thing diversification can do and one thing it can't.
 skill: diversify
 
+@lesson 4.1 | Growth on growth | ❄️ | shares
+hook: Why does money grow faster the longer you leave it?
+learn: When an investment grows, the growth itself starts growing too. That's compound growth.
+learn: $100 growing 7% a year becomes $107, then about $114.50, then about $122.50.
+learn: After 10 years it's about $197. Most of that extra came from growth on growth.
+play: compound | Watch $100 grow at 7% a year for 10 years | 100 | 7 | 10
+check: mcq | What is compound growth? | Growth on top of earlier growth* | The same amount each year | Money that never changes
+check: tf | With compound growth, the yearly increase gets bigger over time. | true
+home: Ask a grown-up to show you how much their savings grew last year.
+skill: compounding
+
+@lesson 4.2 | Start early | 🌱 | shares
+hook: Two kids invest $1,000. One starts at 10, the other at 20. How much does 10 years matter?
+learn: At 7% a year, $1,000 grows to about $15,000 after 40 years.
+learn: After 50 years, it's about $29,000. Ten extra years almost doubles it.
+learn: The early years matter most because they have the longest time to grow.
+play: compound | Watch $1,000 grow at 7% a year for 50 years | 1000 | 7 | 50
+check: mcq | Who ends up with more, if both invest $1,000 at 7%? | The kid who starts at 10* | The kid who starts at 20 | They end up the same
+check: slider | About how much does $1,000 grow to after 40 years at 7%, in thousands? | 1 | 40 | 15 | k$ | 3 | 1
+home: Work out with a grown-up how many years until you turn 60. That's your growing time.
+skill: compounding
+
+@lesson 4.3 | Keep adding | ➕ | shares
+hook: What beats one big start? Adding a bit, again and again.
+learn: Adding money regularly gives your snowball more to roll with.
+learn: $500 a year for 40 years at 7% grows to about $100,000. You only put in $20,000.
+learn: The rest is growth. Small, steady amounts add up over time.
+try: $500 a year for 40 years is $20,000 put in :: gap | $250 a year for 40 years is $_ put in | 10000
+play: slider | You put in $20,000 over 40 years and end with about $100,000. About how much came from growth, in thousands? | 0 | 100 | 80 | k$ | 5 | 5
+check: gap | $10 a week for 52 weeks is $_ | 520
+check: mcq | What helps an investment grow most over time? | Adding regularly and waiting* | Checking it every hour | Taking money out often
+home: Pick a small amount you could add to your Invest jar every week.
+skill: compounding
+
+@lesson 4.4 | Don't break the snowball | ⛄ | shares
+hook: What happens to a snowball if you keep taking chunks out?
+learn: Taking money out early means the growth on that money stops too.
+learn: Taking out $500 now could cost you thousands of dollars of growth later.
+learn: Keep a separate savings pot for spending, so your investments can keep rolling.
+play: path | You've grown $800 in your Invest jar. You want a $300 gaming headset. | Save for the headset separately and leave the investment alone => good: Your snowball keeps growing. | Take $300 out now => ok: You get the headset, but that $300 stops growing. | Take it all out => bad: Your whole snowball stops, and you have to start again.
+check: mcq | Why is taking money out early costly? | That money stops growing* | It makes the money bigger | Banks charge a giant fine every time
+check: tf | Having a separate spending pot helps protect your investments. | true
+home: Talk with a grown-up about what you'd save for in a spending pot and what you'd leave invested.
+skill: patience
+
+@lesson 4.5 | How long to double? | ✖️ | shares
+hook: Is there a quick way to tell how long it takes money to double?
+learn: Divide 72 by the yearly growth rate. That's roughly how many years it takes to double.
+learn: At 6%, money doubles in about 12 years. At 8%, about 9 years.
+learn: Higher growth usually means more risk, so faster isn't always better.
+try: 72 ÷ 6 = 12 years :: gap | 72 ÷ 9 = _ years | 8
+play: match | Match each growth rate to its doubling time | 3% a year=24 years; 4% a year=18 years; 6% a year=12 years; 12% a year=6 years
+check: gap | At 8% a year, money doubles in about _ years | 9
+check: mcq | What usually comes with higher growth rates? | More risk* | Less risk | No risk
+home: Show a grown-up the rule of 72. How long would their savings rate take to double?
+skill: compounding
+
+@lesson 4.6 | Time beats timing | ⌛ | shares
+hook: Should you wait for the perfect moment to start investing?
+learn: Nobody knows when prices will rise or fall. Even experts get it wrong.
+learn: Starting early and staying in has usually beaten waiting for a "good time".
+learn: Missing a few of the best days can shrink your growth a lot, and they often come right after bad ones.
+play: debate | Should you wait for prices to drop before investing? | No. Nobody can predict it, and time in the market matters more* | Yes. Experts always know when prices will drop | If you have a big lump sum, some people put it in bit by bit to feel calmer. That's a fair choice.
+check: mcq | What usually works better? | Starting early and staying in* | Waiting for the perfect moment | Buying and selling every day
+check: tf | Experts can always predict when prices will fall. | false | Nobody can, not even experts.
+home: Ask a grown-up if they've ever waited for the "right time" to do something with money.
+skill: patience
+

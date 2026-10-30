@@ -222,6 +222,73 @@ check: mcq | Money you'll need next week should go in… | Spend or Vault* | Inv
 home: Talk with a grown-up about how much of your money could go in the Invest jar.
 skill: jars
 
+@lesson 4.1 | Prices wiggle | 🌊 | shares
+hook: Share prices go up and down like waves. Is something wrong?
+learn: The price of a share changes every day. Sometimes up, sometimes down.
+learn: Small ups and downs are normal, like waves on a beach.
+learn: Over many years, the market has gone up more than it has gone down.
+play: market | Watch the market go up, down and up again | 5
+check: mcq | What do share prices do? | Go up and down* | Only go up | Never change
+check: tf | Small ups and downs in prices are normal. | true
+home: Watch the waves at a beach, pool or bath with a grown-up. They go up and down, but the water stays.
+skill: markets
+
+@lesson 4.2 | Why prices move | 🔀 | shares
+hook: Why would a share price go up one day and down the next?
+learn: When lots of people want to buy a share, its price goes up.
+learn: When lots of people want to sell, its price goes down.
+learn: Good news about a company often pushes the price up. Bad news can push it down.
+play: sort | Price goes up, Price goes down | A toy company's new toy sells out=Price goes up; A juice company's drink makes people sick=Price goes down; Lots of people want to buy the share=Price goes up; Lots of people want to sell the share=Price goes down; An ice cream company has a record hot summer=Price goes up; A shop company closes half its shops=Price goes down | Up or down?
+check: mcq | What happens when lots of people want to buy a share? | The price goes up* | The price goes down | Nothing
+check: tf | Bad news about a company can make its share price drop. | true
+home: Pick a company you know. Talk with a grown-up about what news might make its price go up.
+skill: markets
+
+@lesson 4.3 | Wait it out | ⏰ | shares
+hook: Your shares went down this week. Should you sell them all?
+learn: When prices drop, some people panic and sell. Then they miss it when prices come back up.
+learn: Waiting, and not selling in a rush, has usually worked better.
+learn: Only invest money you won't need for a long time, so you can wait.
+play: path | Your Invest jar dropped from $10 to $8 this week. | Wait and keep investing a little => good: Prices often come back over time, and you kept your shares. | Sell it all right now => bad: You turned a dip into a real loss. | Cry and never invest again => bad: Dips are normal. It's OK to feel sad, but don't give up.
+check: mcq | Prices drop a little. What usually works better? | Waiting* | Selling in a rush | Shouting at the market
+check: tf | You should only invest money you won't need for a long time. | true
+home: Tell a grown-up what you would do if your Invest jar dropped this week.
+skill: patience
+
+@lesson 4.4 | Up the big hill | ⛰️ | shares
+hook: Climbing a hill, you go up and down little bumps. Do you still reach the top?
+learn: Over one day or week, prices bounce around a lot.
+learn: Over 10 or 20 years, the bumps look small and the path has usually gone up.
+learn: Looking at the long path helps you stay calm about the bumps.
+try: $10 then up to $12 is $2 higher :: gap | $10 then up to $15 is $_ higher | 5
+play: slider | A share started at $10. It dropped to $8, then climbed to $13. How much higher is it than at the start? | 0 | 6 | 3 | $ | 0 | 1
+check: gap | A share went from $5 to $9. It went up $_ | 4
+check: tf | Over many years, the bumps look smaller. | true
+home: Draw a bumpy hill path with a grown-up. Mark the small dips and the top.
+skill: markets
+
+@lesson 4.5 | Calm about wiggles | 😌 | shares
+hook: Watching prices fall can feel scary. What can you do with that feeling?
+learn: It's normal to feel worried when prices drop.
+learn: Take a slow breath before you decide anything.
+learn: Talk to a grown-up. Big choices are better made calm.
+play: timing | Breathe in slowly... then tap as you breathe out | Breathe out | Calm
+check: mcq | Prices drop and you feel worried. What should you do first? | Take a slow breath* | Sell everything fast | Hide your jar
+check: tf | It's OK to feel worried when prices fall. | true
+home: Practise one slow breath with a grown-up: in for 4, out for 4.
+skill: calm
+
+@lesson 4.6 | My jar wiggles too | 🫙 | shares
+hook: The Invest jar in Chorecast goes up and down. Why?
+learn: Your Invest jar acts a bit like real shares, so it wiggles.
+learn: Your Vault jar doesn't wiggle. It's for money you need to keep safe.
+learn: Use the Invest jar for money you can leave alone for a long time.
+play: tap | Tap the calm things to do when your Invest jar drops | 😌:yes:Take a slow breath; ⏳:yes:Wait and see; 🗣️:yes:Talk to a grown-up; 😱:no; 💸:no; 📈:yes:Remember it has gone up before
+check: mcq | Which jar doesn't wiggle? | Vault* | Invest | All jars wiggle
+check: tf | The Invest jar is for money you can leave alone for a long time. | true
+home: Look at your Invest jar with a grown-up. Has it gone up or down this week?
+skill: markets
+
 @band builders
 @unit 1 | Shares and companies | Owning part of a business
 @unit 2 | Risk and reward | Why some investments jump around
@@ -445,6 +512,74 @@ check: tf | A diversified portfolio can still fall when the whole market does. |
 check: mcq | Money you need next month should be in… | A savings account* | Shares | Crypto
 home: Explain to someone at home one thing diversification can do and one thing it can't.
 skill: diversify
+
+@lesson 4.1 | Growth on growth | ❄️ | shares
+hook: Why does money grow faster the longer you leave it?
+learn: When an investment grows, the growth itself starts growing too. That's compound growth.
+learn: $100 growing 7% a year becomes $107, then about $114.50, then about $122.50.
+learn: After 10 years it's about $197. Most of that extra came from growth on growth.
+play: compound | Watch $100 grow at 7% a year for 10 years | 100 | 7 | 10
+check: mcq | What is compound growth? | Growth on top of earlier growth* | The same amount each year | Money that never changes
+check: tf | With compound growth, the yearly increase gets bigger over time. | true
+home: Ask a grown-up to show you how much their savings grew last year.
+skill: compounding
+
+@lesson 4.2 | Start early | 🌱 | shares
+hook: Two kids invest $1,000. One starts at 10, the other at 20. How much does 10 years matter?
+learn: At 7% a year, $1,000 grows to about $15,000 after 40 years.
+learn: After 50 years, it's about $29,000. Ten extra years almost doubles it.
+learn: The early years matter most because they have the longest time to grow.
+play: compound | Watch $1,000 grow at 7% a year for 50 years | 1000 | 7 | 50
+check: mcq | Who ends up with more, if both invest $1,000 at 7%? | The kid who starts at 10* | The kid who starts at 20 | They end up the same
+check: slider | About how much does $1,000 grow to after 40 years at 7%, in thousands? | 1 | 40 | 15 | k$ | 3 | 1
+home: Work out with a grown-up how many years until you turn 60. That's your growing time.
+skill: compounding
+
+@lesson 4.3 | Keep adding | ➕ | shares
+hook: What beats one big start? Adding a bit, again and again.
+learn: Adding money regularly gives your snowball more to roll with.
+learn: $500 a year for 40 years at 7% grows to about $100,000. You only put in $20,000.
+learn: The rest is growth. Small, steady amounts add up over time.
+try: $500 a year for 40 years is $20,000 put in :: gap | $250 a year for 40 years is $_ put in | 10000
+play: slider | You put in $20,000 over 40 years and end with about $100,000. About how much came from growth, in thousands? | 0 | 100 | 80 | k$ | 5 | 5
+check: gap | $10 a week for 52 weeks is $_ | 520
+check: mcq | What helps an investment grow most over time? | Adding regularly and waiting* | Checking it every hour | Taking money out often
+home: Pick a small amount you could add to your Invest jar every week.
+skill: compounding
+
+@lesson 4.4 | Don't break the snowball | ⛄ | shares
+hook: What happens to a snowball if you keep taking chunks out?
+learn: Taking money out early means the growth on that money stops too.
+learn: Taking out $500 now could cost you thousands of dollars of growth later.
+learn: Keep a separate savings pot for spending, so your investments can keep rolling.
+play: path | You've grown $800 in your Invest jar. You want a $300 gaming headset. | Save for the headset separately and leave the investment alone => good: Your snowball keeps growing. | Take $300 out now => ok: You get the headset, but that $300 stops growing. | Take it all out => bad: Your whole snowball stops, and you have to start again.
+check: mcq | Why is taking money out early costly? | That money stops growing* | It makes the money bigger | Banks charge a giant fine every time
+check: tf | Having a separate spending pot helps protect your investments. | true
+home: Talk with a grown-up about what you'd save for in a spending pot and what you'd leave invested.
+skill: patience
+
+@lesson 4.5 | How long to double? | ✖️ | shares
+hook: Is there a quick way to tell how long it takes money to double?
+learn: Divide 72 by the yearly growth rate. That's roughly how many years it takes to double.
+learn: At 6%, money doubles in about 12 years. At 8%, about 9 years.
+learn: Higher growth usually means more risk, so faster isn't always better.
+try: 72 ÷ 6 = 12 years :: gap | 72 ÷ 9 = _ years | 8
+play: match | Match each growth rate to its doubling time | 3% a year=24 years; 4% a year=18 years; 6% a year=12 years; 12% a year=6 years
+check: gap | At 8% a year, money doubles in about _ years | 9
+check: mcq | What usually comes with higher growth rates? | More risk* | Less risk | No risk
+home: Show a grown-up the rule of 72. How long would their savings rate take to double?
+skill: compounding
+
+@lesson 4.6 | Time beats timing | ⌛ | shares
+hook: Should you wait for the perfect moment to start investing?
+learn: Nobody knows when prices will rise or fall. Even experts get it wrong.
+learn: Starting early and staying in has usually beaten waiting for a "good time".
+learn: Missing a few of the best days can shrink your growth a lot, and they often come right after bad ones.
+play: debate | Should you wait for prices to drop before investing? | No. Nobody can predict it, and time in the market matters more* | Yes. Experts always know when prices will drop | If you have a big lump sum, some people put it in bit by bit to feel calmer. That's a fair choice.
+check: mcq | What usually works better? | Starting early and staying in* | Waiting for the perfect moment | Buying and selling every day
+check: tf | Experts can always predict when prices will fall. | false | Nobody can, not even experts.
+home: Ask a grown-up if they've ever waited for the "right time" to do something with money.
+skill: patience
 
 @band makers
 @unit 1 | Index funds | Owning a slice of everything
@@ -672,6 +807,74 @@ check: mcq | Who can reliably predict every crash? | Nobody* | Every expert | So
 home: Find a chart of a share market over 30 years and spot the big drops.
 skill: cycles
 
+@lesson 4.1 | Kinds of fees | 🧾 | shares
+hook: Fees hide in different places. Can you find them all?
+learn: A management fee is a percentage of your balance each year, like 0.5% or 1.5%.
+learn: Some funds also charge a flat fee, like $3 a month, whatever your balance.
+learn: Buying or selling can cost brokerage, and changing currency can cost a foreign exchange fee.
+play: match | Match each fee to how it's charged | Management fee=A percentage of your balance each year; Flat admin fee=Dollars each month; Brokerage=A charge on each trade; Currency fee=A cut when changing money to buy overseas shares
+check: mcq | Which fee is a percentage of your balance? | Management fee* | Flat admin fee | Brokerage
+check: tf | Some funds charge a flat fee no matter how much you have. | true
+home: Find the fees on a {nz:KiwiSaver~au:super} statement or fund page with a grown-up.
+skill: fees
+
+@lesson 4.2 | What 1% costs | 📉 | shares
+hook: 1% sounds tiny. What does it cost over 40 years?
+learn: $10,000 growing 7% a year for 40 years becomes about $150,000.
+learn: Take a 1% fee each year and it grows 6% instead, ending near $103,000.
+learn: That 1% cost about $47,000. A 0.25% fee would cost about $13,000.
+play: compound | $10,000 growing 6% a year after a 1% fee, for 40 years | 10000 | 6 | 40
+check: slider | About how much did a 1% fee cost over 40 years on $10,000, in thousands? | 0 | 100 | 47 | k$ | 8 | 1
+check: mcq | Why do small fees matter so much? | They compound, just like growth* | They don't, they're tiny | They only apply once
+home: Ask a grown-up what fee their {nz:KiwiSaver~au:super} fund charges.
+skill: fees
+
+@lesson 4.3 | Flat fees and small balances | 🪶 | shares
+hook: $5 a month doesn't sound bad. But what if you only have $500?
+learn: $5 a month is $60 a year. On $500, that's 12% of your money.
+learn: On $5,000, the same $60 is only 1.2%.
+learn: With a small balance, choose funds with low or no flat fees.
+try: $60 out of $500 is 12% :: gap | $60 out of $1,000 is _% | 6
+play: gen | percent | 4
+check: gap | A $24 yearly fee on a $400 balance is _% | 6
+check: mcq | Who gets hurt most by a flat fee? | People with small balances* | People with big balances | Nobody
+home: Work out with a grown-up what a $3 monthly fee would be as a percentage of your savings.
+skill: fees
+
+@lesson 4.4 | Do higher fees buy better returns? | 🏷️ | shares
+hook: An expensive fund must be better, right?
+learn: A higher fee is a guaranteed cost. Better returns are not guaranteed.
+learn: Over 10 years or more, most higher-fee active funds have done worse than simple index funds after fees.
+learn: Some active funds do well, but it's hard to know in advance which ones.
+play: debate | Should you pick the fund with the highest fee because it must be better? | No. Fees are certain, but extra returns aren't, and most high-fee funds fall behind over time* | Yes. You get what you pay for | Some people value active managers for certain strategies, and a few do beat the index. They just can't be picked reliably in advance.
+check: mcq | Over the long run, most higher-fee active funds have... | Done worse than index funds after fees* | Always beaten index funds | Had no fees at all
+check: tf | A high fee guarantees a high return. | false | The fee is guaranteed. The return isn't.
+home: Compare the fees of two funds online with a grown-up.
+skill: fees
+
+@lesson 4.5 | Hidden costs | 🕵️ | shares
+hook: The fund's fee says 0.3%. Is that everything you pay?
+learn: Some platforms add a spread: you pay a little more to buy than you get when you sell.
+learn: Buying overseas shares can mean a currency fee each time you convert money.
+learn: Trading often means paying brokerage many times. Buying and holding keeps costs low.
+play: diff | Two platforms, both "0.3% fees". Tap the extra costs on Platform B. | Fund fee 0.3%; No brokerage; No currency fee | Fund fee 0.3%; $5 brokerage per trade; 0.5% currency fee; Buy-sell spread
+check: mcq | Which habit keeps costs low? | Buying and holding* | Trading every day | Converting currency often
+check: tf | The headline fee always shows every cost. | false | Spreads, brokerage and currency fees can be extra.
+home: Look at one investing app's fee page with a grown-up and list every cost.
+skill: fees
+
+@lesson 4.6 | Fee detective | 🔎 | shares
+hook: Two funds look alike. Which one costs you less?
+learn: Turn every fee into dollars a year. 1% of $10,000 is $100.
+learn: Add flat fees too. $3 a month is $36 a year.
+learn: {nz:Sorted's Smart Investor~au:Moneysmart and the ATO's YourSuper tool} can help you compare funds.
+try: 0.5% of $10,000 is $50 :: gap | 1.2% of $10,000 is $_ | 120
+play: price | Which fund costs less on $10,000? | Fund A, 1.2% a year:120:10000:dollars; Fund B, 0.4% plus $36 a year:76:10000:dollars; Fund C, 0.9% a year:90:10000:dollars
+check: gap | 0.4% of $10,000 is $_ | 40
+check: mcq | What's the best way to compare fees? | Turn them all into dollars a year* | Pick the nicest website | Look only at the flat fee
+home: Use a fund comparison tool with a grown-up and find the lowest-fee fund of one type.
+skill: fees
+
 @band launchers
 @unit 1 | {nz:KiwiSaver~au:Superannuation} | Your retirement fund and how to choose it
 @unit 2 | Fees and returns | Comparing funds the right way
@@ -898,3 +1101,70 @@ check: tf | Borrowing a lot increases both your possible gains and losses. | tru
 check: mcq | A risk of property as an investment is… | A lot of money tied up in one asset* | It's too easy to sell | It never needs repairs
 home: Look up how house prices in your area have changed over the last 5 years.
 skill: property
+
+@lesson 4.1 | What crypto is | 🪙 | online
+hook: Bitcoin, Ethereum, memecoins. What are you actually buying?
+learn: A cryptocurrency is a digital token recorded on a shared ledger called a blockchain.
+learn: Most crypto isn't backed by a government, a company's profits or anything physical. Its price is whatever people will pay.
+learn: Stablecoins try to stay at $1 by holding other assets, but some have failed.
+play: match | Match each crypto word to its meaning | Blockchain=A shared digital record of transactions; Wallet=Where your keys to the tokens are kept; Exchange=A platform for buying and selling crypto; Stablecoin=A token meant to stay at a fixed price
+check: mcq | What sets the price of most crypto? | What people are willing to pay* | The government | The company's profits
+check: tf | Every stablecoin has kept its fixed price. | false | Some have broken their peg and collapsed.
+home: Ask a grown-up what they've heard about crypto, and where they heard it.
+skill: crypto
+
+@lesson 4.2 | Wild swings | 🎢 | shares
+hook: Bitcoin has more than doubled in a year, and fallen by three-quarters too. Can you handle that?
+learn: Bitcoin has fallen by more than 70% several times since 2011.
+learn: A 75% fall turns $1,000 into $250. It then needs to rise 300% just to get back.
+learn: Smaller coins can fall 90% or more and never come back.
+try: $1,000 down 50% is $500 :: gap | $1,000 down 75% is $_ | 250
+play: market | Ride a big crash and recovery over 10 years | 10
+check: gap | $2,000 down 80% is $_ | 400
+check: mcq | After a 50% fall, how much does a price need to rise to get back? | 100%* | 50% | 25%
+home: Ask a grown-up how they'd feel if a quarter of their savings disappeared in a month.
+skill: risk
+
+@lesson 4.3 | Investing or speculating? | 🎲 | shares
+hook: Buying shares and buying a memecoin. Are they the same thing?
+learn: Investing means owning something that produces value: company profits, rent or interest.
+learn: Speculating means buying something only because you hope someone pays more later.
+learn: Speculating isn't illegal, but it's closer to betting. Only use money you could lose.
+play: sort | Investing, Speculating | A fund that owns 500 companies=Investing; A memecoin a friend says will "moon"=Speculating; A term deposit earning interest=Investing; A rental property earning rent=Investing; An NFT bought to flip next week=Speculating; A coin hyped by an influencer=Speculating | Investing or speculating?
+check: mcq | What does investing usually involve? | Owning something that produces value* | Hoping someone pays more | Guessing coin flips
+check: tf | Speculating is closer to betting than investing. | true
+home: Talk with a grown-up about the difference between investing and speculating.
+skill: risk
+
+@lesson 4.4 | Hype and red flags | 🚩 | online
+hook: "This coin will 100x! Get in before it's too late!" Sound familiar?
+learn: Hype pushes you to act fast, before you think. That's a red flag.
+learn: Promises of guaranteed returns, celebrity endorsements and secret groups are classic warning signs.
+learn: Real investments never guarantee high returns.
+play: scam | Which messages are red flags? | Guaranteed 20% a week. Join our private group now!=scam; Index fund returns vary year to year. Past returns don't predict the future=real; A famous actor says this coin will 100x. Buy before Friday!=scam; Our platform is registered. Here's how to check that yourself=real; Send us your wallet's secret phrase to claim your bonus=scam | Hype rushes you and promises big wins. Real investments explain the risks.
+check: mcq | Which is a red flag? | A guaranteed high return* | A warning about risk | A clear fee list
+check: tf | Real platforms will ask for your wallet's secret recovery phrase. | false | Never share it. Whoever has it can take everything.
+home: Find a crypto ad or post with a grown-up and spot any hype words.
+skill: scams
+
+@lesson 4.5 | If you do buy | 🧭 | online
+hook: You've decided to try a little crypto. How do you keep the damage small?
+learn: A starter emergency fund first, then pay off high-interest debt, then invest regularly. Speculation comes last, if at all.
+learn: Keep it to a small share you could lose without harm. Many people cap it at 5% or less.
+learn: Exchanges can fail, like FTX in 2022. Check that it's {nz:registered on the Financial Service Providers Register~au:registered with AUSTRAC}, but registration doesn't mean it's safe.
+play: build | Stack your money plan in the right order | A starter emergency fund; Paying off high-interest debt; Regular investing in a diversified fund; A small amount for speculation, if you want
+check: mcq | What should come before buying crypto? | An emergency fund and paying off high-interest debt* | Nothing, buy it first | A new phone
+check: tf | A registered exchange can never fail. | false | Registration is a minimum check, not a guarantee.
+home: Ask a grown-up what order they'd put saving, investing and paying off debt in.
+skill: planning
+
+@lesson 4.6 | Crypto and tax | 🧾 | townhall
+hook: You swapped one coin for another and never touched dollars. Do you owe tax?
+learn: In both countries, crypto is treated as property, not money.
+learn: {nz:If you bought crypto mainly to sell, any profit is taxable income, even if you swap coins.~au:Selling, swapping or spending crypto is a capital gains tax event, even if you never get dollars.}
+learn: Keep records of every buy, sell and swap: dates, amounts and values in dollars.
+play: mystery | You bought a coin for $500.; Later you swapped it for a different coin worth $800.; You never changed anything back to dollars. | You may owe tax on the $300 gain* | No tax because you never got dollars | Only the exchange pays tax
+check: mcq | What records should you keep? | Every buy, sell and swap, with values in dollars* | Only the coins you still have | Nothing, it's anonymous
+check: tf | Swapping one coin for another can be taxable. | true
+home: Look up crypto tax on {nz:the IRD~au:the ATO} website with a grown-up.
+skill: tax

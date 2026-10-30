@@ -218,6 +218,72 @@ check: mcq | What should you do while they answer? | Listen carefully* | Play on
 home: Ask a grown-up three questions about their job.
 skill: careers
 
+@lesson 4.1 | Big jobs, small steps | 🪜 | workshop
+hook: Tidying your whole room feels too big. What if you did it one bit at a time?
+learn: A big job is easier when you break it into small steps.
+learn: Do one step, then the next. Soon the whole job is done.
+learn: Ticking off each step feels good and keeps you going.
+play: order | Tidy your room one step at a time | Put dirty clothes in the wash basket; Put toys back in their boxes; Put books on the shelf; Make your bed; Look around and check
+check: mcq | What makes a big job feel easier? | Breaking it into small steps* | Doing nothing | Starting ten things at once
+check: tf | Ticking off steps can help you keep going. | true
+home: Pick one big job at home and break it into 3 small steps with a grown-up.
+skill: persistence
+
+@lesson 4.2 | When it gets boring | 🥱 | workshop
+hook: Halfway through a job, it gets boring. What can you do?
+learn: Lots of jobs get boring in the middle. That's normal.
+learn: Music, a timer race or a little break can help you keep going.
+learn: Think about how good it will feel when it's finished.
+play: tap | Tap the tricks that help you keep going | 🎵:yes:Play some music; ⏱️:yes:Race a timer; 🧃:yes:Have a short break, then come back; 📺:no; 🛌:no; 🌟:yes:Think about how good it will feel
+check: mcq | A job gets boring. What helps? | Racing a timer* | Giving up | Hiding the job
+check: tf | It's normal for jobs to get boring in the middle. | true
+home: Try racing a timer on your next job at home.
+skill: persistence
+
+@lesson 4.3 | Check before you stop | 👀 | home
+hook: You think you've finished. But have you really?
+learn: Before you say "done", look back at your work.
+learn: Check each part. Did you miss anything?
+learn: Fixing small things at the end makes a job great.
+play: diff | A finished table and your table. Tap the spots that aren't finished yet. | Plate; Fork; Knife; Cup; Napkin | Plate; Fork; No knife yet; Cup; No napkin yet
+check: mcq | What should you do before saying "done"? | Look back and check* | Run outside | Start a new job
+check: tf | Fixing small things at the end makes a job better. | true
+home: After your next job, check it with a grown-up and fix one small thing.
+skill: quality
+
+@lesson 4.4 | Stuck? Try another way | 🔄 | workshop
+hook: You've tried the same thing three times and it still won't work. Now what?
+learn: If one way doesn't work, try a different way.
+learn: It's OK to ask for help when you're stuck.
+learn: Being stuck is part of learning. Everyone gets stuck sometimes.
+play: path | The puzzle piece won't fit, no matter how hard you push. | Try turning it, or try a different spot => good: Trying another way often works. | Push it harder until it bends => bad: Forcing it can break the piece. | Throw the puzzle away => bad: You'd never get to finish it.
+check: mcq | You're stuck on a job. What's a good idea? | Try a different way or ask for help* | Give up for ever | Get angry
+check: tf | Everyone gets stuck sometimes. | true
+home: Next time you're stuck, say "Let me try another way", then try it.
+skill: persistence
+
+@lesson 4.5 | Finish line | 🏁 | workshop
+hook: How does it feel to finish something you started?
+learn: Finishing a job feels great. You can be proud.
+learn: People trust you more when you finish what you start.
+learn: Keep going until the job is really done.
+play: timing | Keep going until the bar reaches the finish, then tap | Finish | Done
+check: mcq | Why do people trust you more? | You finish what you start* | You start lots of things | You leave jobs half done
+check: tf | Finishing a job can make you feel proud. | true
+home: Tell a grown-up about something you finished this week that you're proud of.
+skill: persistence
+
+@lesson 4.6 | I said I would | 🤝 | home
+hook: You said you'd feed the cat. It's nearly bedtime. Did you?
+learn: When you say you'll do a job, people count on you.
+learn: Doing what you said, even when nobody reminds you, is called being reliable.
+learn: If you forget, say sorry and do it straight away.
+play: chat | Mum asks about your job | them: Did you feed the cat like you said? | me: Oh no, I forgot! I'll do it right now*/The cat isn't hungry/Someone else did it | them: Thanks. What could help you remember next time? | me: I could put it on my Chorecast list*/I'll just forget again/Cats can feed themselves
+check: mcq | You forgot a job you promised to do. What should you do? | Say sorry and do it now* | Hope nobody notices | Blame your sister
+check: tf | Being reliable means doing what you said you'd do. | true
+home: Promise one job to a grown-up today, and do it without a reminder.
+skill: reliability
+
 @band builders
 @unit 1 | Jobs and skills | What jobs exist and what employers want
 @unit 2 | Reliable worker | Turning up, on time, every time
@@ -438,6 +504,72 @@ check: tf | If you feel unsafe, get a grown-up straight away. | true
 check: mcq | What can help you stay calm? | Taking a slow breath* | Shouting | Stamping your feet
 home: Practise a calm breath and a polite reply with a grown-up.
 skill: calm
+
+@lesson 4.1 | Jobs you could do | 🧰 | workshop
+hook: You want to earn some money. What jobs could a 10 to 12-year-old do?
+learn: Lots of kids your age earn by helping neighbours, family friends or at home.
+learn: Good starter jobs include pet sitting, washing cars, weeding, baking and sorting recycling.
+learn: Always check with a grown-up first. They'll help you choose safe jobs and people you know.
+play: tap | Tap the good starter jobs for your age, with a grown-up's OK | 🐕:yes:Walking a neighbour's dog; 🚗:yes:Washing cars; 🧁:yes:Baking for a school sale; 🪚:no; 🚜:no; 🌿:yes:Weeding gardens
+check: mcq | Who should you check with before taking a job? | A grown-up who looks after you* | Nobody | Only the customer
+check: tf | Using a power saw is a good job for a 10-year-old. | false | Power tools and big machines are for trained adults.
+home: Make a list of three jobs you could do for neighbours you know, and talk it over with a grown-up.
+skill: jobs
+
+@lesson 4.2 | What should you charge? | 🏷️ | stall
+hook: How much should you charge to wash a car? $2? $50?
+learn: Find out what others charge. Ask a grown-up or neighbours.
+learn: Think about how long it takes and what you need to buy, like soap or flour.
+learn: A fair price is one customers are happy to pay and that's worth your time.
+play: shop | You're baking cookies. Each cookie costs 20c to make. Earn at least $5 profit. | Cookie | 20 | 500
+check: mcq | What should you think about when setting a price? | Time, costs and what others charge* | Only what you want to buy | Whatever sounds cool
+check: tf | Your costs, like soap or flour, should be part of your price. | true
+home: Work out the cost of making one cookie or one car wash with a grown-up.
+skill: pricing
+
+@lesson 4.3 | Pet sitting | 🐾 | home
+hook: A neighbour is going away and wants you to look after their cat. What do you need to know?
+learn: Ask about food, water, how much, how often and any medicine.
+learn: Write it down. Get a phone number to call if something goes wrong.
+learn: Do the job at the same time each day. Pets like routines.
+play: order | Get ready for a pet-sitting job | Meet the pet and its owner with your grown-up; Write down food, water and times; Get the owner's phone number; Visit at the same time each day; Send a quick update to the owner
+check: mcq | What should you get before the owner leaves? | Their phone number* | Their password | Nothing
+check: tf | Pets usually like the same routine each day. | true
+home: Write a pet-care checklist for your own pet or a friend's pet.
+skill: jobs
+
+@lesson 4.4 | Garden jobs | 🌱 | garden
+hook: Gardens need lots of work. Which jobs are right for you?
+learn: Weeding, raking leaves, watering and sweeping paths are great garden jobs.
+learn: Lawn mowers, hedge trimmers and chainsaws can badly hurt people. Leave those to trained adults.
+learn: Wear gloves, a hat and sunscreen, and drink water.
+play: sort | Good job for me, Grown-up only | Raking leaves=Good job for me; Watering pots=Good job for me; Using a hedge trimmer=Grown-up only; Pulling weeds=Good job for me; Using a chainsaw=Grown-up only; Mowing on a ride-on mower=Grown-up only; Sweeping paths=Good job for me | Who should do it?
+check: mcq | Which garden job is safe for you? | Raking leaves* | Using a chainsaw | Using a hedge trimmer
+check: tf | Sunscreen and water matter on outdoor jobs. | true
+home: Do one garden job at home, with gloves, a hat and sunscreen.
+skill: safety
+
+@lesson 4.5 | Finding customers | 📣 | stall
+hook: You're ready to work. How do people find out?
+learn: Start with people you and your family know, like neighbours and family friends.
+learn: A simple flyer says what you do, your price and how to contact your grown-up.
+learn: Never put your own address or phone number online. Use a grown-up's contact details.
+play: chat | You knock on a neighbour's door with your mum | them: Hello! What can I do for you? | me: Hi, I'm washing cars this weekend for $10. Would you like one?*/Give me money/Can I come inside? | them: Maybe. What do you use? | me: A bucket, car soap and a soft sponge. My mum can tell you more*/Whatever's lying around/I don't know
+check: mcq | Whose contact details should go on your flyer? | A grown-up's* | Your own phone number | Your home address online
+check: tf | Neighbours you know are a good place to start. | true
+home: Design a flyer for a job you could do, with a grown-up's contact details.
+skill: marketing
+
+@lesson 4.6 | Customers who come back | 🔁 | stall
+hook: Your first customer liked your work. How do you get them to ask again?
+learn: Turn up on time and do what you said.
+learn: Do a little extra, like wiping the car's mirrors.
+learn: Say thank you and ask if they'd like you again next week.
+play: path | You finish washing a car and notice you missed the back window. | Wash it before you tell them you're done => good: They'll see careful work and ask you back. | Say you're done and hope they don't notice => bad: They'll notice, and may not ask again. | Ask for extra money to do it => bad: It was part of the job you agreed to.
+check: mcq | What helps customers come back? | Doing great work and being on time* | Charging more each time | Leaving early
+check: tf | A thank-you can help get repeat work. | true
+home: After your next job, ask the person if there's anything you could do better next time.
+skill: reliability
 
 @band makers
 @unit 1 | Getting your first job | CVs, applications and interviews
@@ -663,6 +795,72 @@ check: tf | Saying how you'll avoid a mistake next time helps rebuild trust. | t
 check: mcq | What do most managers respect? | People who own their mistakes* | People who blame others | People who hide things
 home: Think of a mistake you made and what you'd say to own it.
 skill: honesty
+
+@lesson 4.1 | Define the problem | 🎯 | workshop
+hook: "The website's broken!" What does that actually mean?
+learn: Before you fix anything, say exactly what's wrong: what, where, when and how often.
+learn: "The checkout button does nothing on phones" is a problem you can solve. "It's broken" isn't.
+learn: Separate the problem from the guesses about why it's happening.
+play: match | Turn each vague problem into a clear one | Sales are bad=Sales dropped 20% since March; The app is slow=The app takes 10 seconds to open on older phones; Customers are angry=Five customers said deliveries were late this week; The team is lazy=Three tasks missed deadlines this month
+check: mcq | Which is a clearly defined problem? | The checkout button does nothing on phones* | Everything is broken | People don't like us
+check: tf | You should separate what's happening from your guess about why. | true
+home: Take a problem at home and write it as what, where, when and how often.
+skill: problem solving
+
+@lesson 4.2 | Find the cause | ❓ | workshop
+hook: The café keeps running out of milk. Is buying more milk the answer?
+learn: Ask "why?" a few times to dig past the first answer.
+learn: Why out of milk? The order is too small. Why? The order is set by last year's numbers. Why? Nobody updated it.
+learn: Fixing the real cause stops the problem coming back.
+play: order | Ask "why?" to find the real cause | The café ran out of milk again; Why? The milk order was too small; Why? It's based on last year's sales; Why? Nobody updates the order when sales grow; Fix: check and update the order every month
+check: mcq | What does asking "why?" several times help you find? | The real cause* | Someone to blame | A shortcut
+check: tf | Fixing the real cause stops a problem coming back. | true
+home: Use "why?" three times on a small problem at home, like a lost charger.
+skill: problem solving
+
+@lesson 4.3 | Lots of ideas first | 💡 | workshop
+hook: Is the first idea usually the best one?
+learn: Write down lots of ideas before judging any of them. Quantity first, quality later.
+learn: Strange ideas can lead to good ones. Don't shoot them down too early.
+learn: Then pick two or three by asking: will it work, what does it cost, and how fast?
+play: sort | Good brainstorming, Kills ideas | Writing every idea down=Good brainstorming; "That'll never work" in the first minute=Kills ideas; Building on someone else's idea=Good brainstorming; Only the boss talks=Kills ideas; Setting a 10-minute timer=Good brainstorming; Laughing at odd ideas=Kills ideas | Good brainstorming or not?
+check: mcq | When should you judge ideas? | After you've written lots down* | Before anyone speaks | Never
+check: tf | Building on someone else's idea is good brainstorming. | true
+home: Brainstorm 10 ideas with your family for a cheap weekend activity, then pick one.
+skill: creativity
+
+@lesson 4.4 | Test it small | 🧪 | workshop
+hook: You have a fix. Should you change everything at once?
+learn: Try your idea on a small scale first, like one shift, one product or one week.
+learn: Decide in advance how you'll know if it worked.
+learn: If it works, roll it out. If not, you've lost little and learned a lot.
+play: path | You think a new menu layout will sell more smoothies. | Try it for one week and compare sales => good: You'll have real evidence before spending more. | Reprint every menu today => bad: If it doesn't work, you've wasted time and money. | Ask one friend if they like it => ok: Their opinion helps, but sales data tells you more.
+check: mcq | Why test an idea small first? | You lose little if it fails and learn a lot* | It's always slower | It never works
+check: tf | You should decide how to measure success before you start. | true
+home: Test one small change to a routine at home for a week, and see if it helps.
+skill: problem solving
+
+@lesson 4.5 | Detective work | 🔍 | workshop
+hook: Some problems need clues before you can solve them.
+learn: Collect facts before deciding: what changed, when it started and who's affected.
+learn: Look for patterns. Problems that only happen on Mondays have a Monday cause.
+learn: Test your best guess against all the clues, not just one.
+play: mystery | Complaints about cold pies only come on Saturdays.; The pie warmer was fine on weekdays.; A new staff member started working Saturdays.; Nobody showed them how to set the warmer. | Training the new staff member on the warmer* | Buying a new pie warmer | Closing on Saturdays
+check: mcq | What's a good first step in a tricky problem? | Collect facts and look for patterns* | Guess and act fast | Blame someone
+check: tf | Your best guess should fit all the clues. | true
+home: Solve a household mystery, like where the TV remote keeps disappearing, by collecting clues.
+skill: problem solving
+
+@lesson 4.6 | Problems with people | 🗣️ | workshop
+hook: Some problems aren't about things. They're about people disagreeing.
+learn: Stay calm and listen first. Find out what the other person needs.
+learn: Say the problem as "we" not "you": "We keep missing deadlines."
+learn: Agree on one next step and check back later.
+play: chat | Your group project partner hasn't done their part | them: Sorry, I haven't started my section. | me: Thanks for telling me. What's getting in the way?*/You're so lazy/Fine, I'll do it all | them: I didn't get what to do. | me: Let's go through it together and split it into steps*/Figure it out yourself/I'll tell the teacher on you
+check: mcq | What should you do first in a people problem? | Stay calm and listen* | Shout | Walk away for ever
+check: tf | Saying "we" can make a problem feel shared. | true
+home: Think of a disagreement you had recently. What would "we" language sound like?
+skill: teamwork
 
 @band launchers
 @unit 1 | Contracts and pay | Employment agreements, rates and conditions
@@ -890,3 +1088,69 @@ check: tf | Most people face rejection when job hunting. | true
 check: mcq | When might you send a thank-you email? | After an interview* | Before you apply | Never
 home: Write a short thank-you email you could send after an interview.
 skill: resilience
+
+@lesson 4.1 | Prepare for the interview | 📋 | workshop
+hook: The interview is tomorrow. What should you be doing tonight?
+learn: Research the employer: what they do, their customers and their values.
+learn: Read the job ad again. Match each thing they want to an example from your life.
+learn: Plan the trip, your clothes and a few questions to ask them.
+play: sort | Useful prep, Not useful | Reading the company's website=Useful prep; Planning how to get there on time=Useful prep; Memorising a script word for word=Not useful; Matching examples to the job ad=Useful prep; Staying up all night=Not useful; Preparing two questions to ask=Useful prep | Useful prep or not?
+check: mcq | What's the best way to use the job ad? | Match each thing they want to an example of yours* | Ignore it | Copy it into your answers
+check: tf | Planning your trip helps you arrive on time and calm. | true
+home: Ask a grown-up what they wish they'd known before their first job interview.
+skill: interviews
+
+@lesson 4.2 | STAR answers | ⭐ | stage
+hook: "Tell me about a time you solved a problem." Where do you even start?
+learn: STAR stands for Situation, Task, Action and Result.
+learn: Keep the Situation and Task short. Spend most of your answer on what you did.
+learn: End with a Result, ideally with a number: "We raised $400" or "Complaints dropped".
+play: order | Put this STAR answer in order | Situation: our team's fundraising stall was losing money; Task: I had to find out why; Action: I tracked sales and changed our prices; Result: we made $400 profit by the end of term
+check: mcq | Which part of a STAR answer should be longest? | Action* | Situation | Task
+check: tf | A result with a number is often more convincing. | true
+home: Write one STAR answer about something you did at school, sport or home.
+skill: interviews
+
+@lesson 4.3 | Tricky questions | 🤔 | stage
+hook: "What's your biggest weakness?" How do you answer without wrecking your chances?
+learn: Pick a real weakness that won't stop you doing the job, and say what you're doing about it.
+learn: For "Why should we hire you?", link two or three of your strengths to what they need.
+learn: If you don't know, it's OK to say "I haven't done that yet, but here's how I'd learn."
+play: chat | The interviewer asks a tricky one | them: What's your biggest weakness? | me: I used to leave things late, so now I plan tasks in my calendar*/I'm a perfectionist who works too hard/I don't have any | them: Why should we hire you? | me: You need someone reliable with customers. I've done two years of sport coaching and never missed a session*/I need the money/Because I'm the best
+check: mcq | What's a good way to answer the weakness question? | A real weakness and what you're doing about it* | Say you have none | Say you're too perfect
+check: tf | It's OK to say you haven't done something yet and explain how you'd learn. | true
+home: Practise answering "Why should we hire you?" out loud with a grown-up.
+skill: interviews
+
+@lesson 4.4 | Your questions | 🙋 | stage
+hook: "Do you have any questions for us?" Saying "no" is a missed chance.
+learn: Good questions show you're interested and help you decide if the job suits you.
+learn: Ask about the work: what a typical day is like, how you'd be trained and what success looks like.
+learn: Leave pay questions until there's an offer, unless they bring it up.
+play: tap | Tap the good questions to ask at an interview | 📅:yes:What does a typical day look like?; 🎓:yes:How will I be trained?; 🏆:yes:What does doing well look like in this role?; 🏖️:no; 🙄:no; 👥:yes:Who would I work with most?
+check: mcq | Which is a good question to ask an interviewer? | How will I be trained?* | How many days off can I take straight away? | Nothing, I'm good
+check: tf | Asking good questions helps you decide if the job suits you. | true
+home: Write three questions you'd ask at an interview for a job you'd like.
+skill: interviews
+
+@lesson 4.5 | Reading the offer | 📄 | workshop
+hook: You got the job! Before you say yes, what should you check?
+learn: Check the pay rate, hours, job title, start date and where you'll work.
+learn: {nz:A 90-day trial period is only valid if it's in your written agreement before you start.~au:Probation periods are common. Most workers are protected from unfair dismissal after 6 months, or 12 months at a small business.}
+learn: Make sure the pay is at least the legal minimum for your age and job. Check {nz:employment.govt.nz~au:fairwork.gov.au}.
+play: diff | The interview and the written offer. Tap what's different. | $25 an hour; 20 hours a week; Weekday shifts | $23 an hour; 20 hours a week; Weekday and weekend shifts
+check: mcq | What should you do if the offer doesn't match what you discussed? | Ask about it politely before signing* | Sign anyway | Say nothing and quit later
+check: tf | You should check the pay is at least the legal minimum. | true
+home: Read through a sample employment agreement online with a grown-up.
+skill: employment
+
+@lesson 4.6 | Negotiating | 🤝 | workshop
+hook: They offered $24 an hour. Could you ask for more?
+learn: Research the usual pay range for that job first, so your ask is realistic.
+learn: Ask politely and give a reason: your skills, experience or the market rate.
+learn: Pay isn't everything. You can also ask about hours, training or start date. Get the final deal in writing.
+play: path | You're offered $24 an hour. Similar jobs pay $24 to $27. | Thank them and ask for $26, explaining your two years of experience => good: A polite, researched ask is reasonable. The worst they can say is no. | Demand $35 or you'll walk => bad: An unrealistic demand can lose the offer. | Accept without asking anything => ok: That's fine, but you may have left money on the table.
+check: mcq | What should you do before negotiating pay? | Research the usual range* | Make up a big number | Ask your friends to call them
+check: tf | You can negotiate things other than pay, like hours or training. | true
+home: Ask a grown-up whether they've ever negotiated pay, and how it went.
+skill: negotiating

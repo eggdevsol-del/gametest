@@ -225,3 +225,69 @@ check: mcq | When might you send a thank-you email? | After an interview* | Befo
 home: Write a short thank-you email you could send after an interview.
 skill: resilience
 
+@lesson 4.1 | Prepare for the interview | 📋 | workshop
+hook: The interview is tomorrow. What should you be doing tonight?
+learn: Research the employer: what they do, their customers and their values.
+learn: Read the job ad again. Match each thing they want to an example from your life.
+learn: Plan the trip, your clothes and a few questions to ask them.
+play: sort | Useful prep, Not useful | Reading the company's website=Useful prep; Planning how to get there on time=Useful prep; Memorising a script word for word=Not useful; Matching examples to the job ad=Useful prep; Staying up all night=Not useful; Preparing two questions to ask=Useful prep | Useful prep or not?
+check: mcq | What's the best way to use the job ad? | Match each thing they want to an example of yours* | Ignore it | Copy it into your answers
+check: tf | Planning your trip helps you arrive on time and calm. | true
+home: Ask a grown-up what they wish they'd known before their first job interview.
+skill: interviews
+
+@lesson 4.2 | STAR answers | ⭐ | stage
+hook: "Tell me about a time you solved a problem." Where do you even start?
+learn: STAR stands for Situation, Task, Action and Result.
+learn: Keep the Situation and Task short. Spend most of your answer on what you did.
+learn: End with a Result, ideally with a number: "We raised $400" or "Complaints dropped".
+play: order | Put this STAR answer in order | Situation: our team's fundraising stall was losing money; Task: I had to find out why; Action: I tracked sales and changed our prices; Result: we made $400 profit by the end of term
+check: mcq | Which part of a STAR answer should be longest? | Action* | Situation | Task
+check: tf | A result with a number is often more convincing. | true
+home: Write one STAR answer about something you did at school, sport or home.
+skill: interviews
+
+@lesson 4.3 | Tricky questions | 🤔 | stage
+hook: "What's your biggest weakness?" How do you answer without wrecking your chances?
+learn: Pick a real weakness that won't stop you doing the job, and say what you're doing about it.
+learn: For "Why should we hire you?", link two or three of your strengths to what they need.
+learn: If you don't know, it's OK to say "I haven't done that yet, but here's how I'd learn."
+play: chat | The interviewer asks a tricky one | them: What's your biggest weakness? | me: I used to leave things late, so now I plan tasks in my calendar*/I'm a perfectionist who works too hard/I don't have any | them: Why should we hire you? | me: You need someone reliable with customers. I've done two years of sport coaching and never missed a session*/I need the money/Because I'm the best
+check: mcq | What's a good way to answer the weakness question? | A real weakness and what you're doing about it* | Say you have none | Say you're too perfect
+check: tf | It's OK to say you haven't done something yet and explain how you'd learn. | true
+home: Practise answering "Why should we hire you?" out loud with a grown-up.
+skill: interviews
+
+@lesson 4.4 | Your questions | 🙋 | stage
+hook: "Do you have any questions for us?" Saying "no" is a missed chance.
+learn: Good questions show you're interested and help you decide if the job suits you.
+learn: Ask about the work: what a typical day is like, how you'd be trained and what success looks like.
+learn: Leave pay questions until there's an offer, unless they bring it up.
+play: tap | Tap the good questions to ask at an interview | 📅:yes:What does a typical day look like?; 🎓:yes:How will I be trained?; 🏆:yes:What does doing well look like in this role?; 🏖️:no; 🙄:no; 👥:yes:Who would I work with most?
+check: mcq | Which is a good question to ask an interviewer? | How will I be trained?* | How many days off can I take straight away? | Nothing, I'm good
+check: tf | Asking good questions helps you decide if the job suits you. | true
+home: Write three questions you'd ask at an interview for a job you'd like.
+skill: interviews
+
+@lesson 4.5 | Reading the offer | 📄 | workshop
+hook: You got the job! Before you say yes, what should you check?
+learn: Check the pay rate, hours, job title, start date and where you'll work.
+learn: {nz:A 90-day trial period is only valid if it's in your written agreement before you start.~au:Probation periods are common. Most workers are protected from unfair dismissal after 6 months, or 12 months at a small business.}
+learn: Make sure the pay is at least the legal minimum for your age and job. Check {nz:employment.govt.nz~au:fairwork.gov.au}.
+play: diff | The interview and the written offer. Tap what's different. | $25 an hour; 20 hours a week; Weekday shifts | $23 an hour; 20 hours a week; Weekday and weekend shifts
+check: mcq | What should you do if the offer doesn't match what you discussed? | Ask about it politely before signing* | Sign anyway | Say nothing and quit later
+check: tf | You should check the pay is at least the legal minimum. | true
+home: Read through a sample employment agreement online with a grown-up.
+skill: employment
+
+@lesson 4.6 | Negotiating | 🤝 | workshop
+hook: They offered $24 an hour. Could you ask for more?
+learn: Research the usual pay range for that job first, so your ask is realistic.
+learn: Ask politely and give a reason: your skills, experience or the market rate.
+learn: Pay isn't everything. You can also ask about hours, training or start date. Get the final deal in writing.
+play: path | You're offered $24 an hour. Similar jobs pay $24 to $27. | Thank them and ask for $26, explaining your two years of experience => good: A polite, researched ask is reasonable. The worst they can say is no. | Demand $35 or you'll walk => bad: An unrealistic demand can lose the offer. | Accept without asking anything => ok: That's fine, but you may have left money on the table.
+check: mcq | What should you do before negotiating pay? | Research the usual range* | Make up a big number | Ask your friends to call them
+check: tf | You can negotiate things other than pay, like hours or training. | true
+home: Ask a grown-up whether they've ever negotiated pay, and how it went.
+skill: negotiating
+

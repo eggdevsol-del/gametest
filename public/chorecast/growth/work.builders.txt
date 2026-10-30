@@ -219,3 +219,69 @@ check: mcq | What can help you stay calm? | Taking a slow breath* | Shouting | S
 home: Practise a calm breath and a polite reply with a grown-up.
 skill: calm
 
+@lesson 4.1 | Jobs you could do | 🧰 | workshop
+hook: You want to earn some money. What jobs could a 10 to 12-year-old do?
+learn: Lots of kids your age earn by helping neighbours, family friends or at home.
+learn: Good starter jobs include pet sitting, washing cars, weeding, baking and sorting recycling.
+learn: Always check with a grown-up first. They'll help you choose safe jobs and people you know.
+play: tap | Tap the good starter jobs for your age, with a grown-up's OK | 🐕:yes:Walking a neighbour's dog; 🚗:yes:Washing cars; 🧁:yes:Baking for a school sale; 🪚:no; 🚜:no; 🌿:yes:Weeding gardens
+check: mcq | Who should you check with before taking a job? | A grown-up who looks after you* | Nobody | Only the customer
+check: tf | Using a power saw is a good job for a 10-year-old. | false | Power tools and big machines are for trained adults.
+home: Make a list of three jobs you could do for neighbours you know, and talk it over with a grown-up.
+skill: jobs
+
+@lesson 4.2 | What should you charge? | 🏷️ | stall
+hook: How much should you charge to wash a car? $2? $50?
+learn: Find out what others charge. Ask a grown-up or neighbours.
+learn: Think about how long it takes and what you need to buy, like soap or flour.
+learn: A fair price is one customers are happy to pay and that's worth your time.
+play: shop | You're baking cookies. Each cookie costs 20c to make. Earn at least $5 profit. | Cookie | 20 | 500
+check: mcq | What should you think about when setting a price? | Time, costs and what others charge* | Only what you want to buy | Whatever sounds cool
+check: tf | Your costs, like soap or flour, should be part of your price. | true
+home: Work out the cost of making one cookie or one car wash with a grown-up.
+skill: pricing
+
+@lesson 4.3 | Pet sitting | 🐾 | home
+hook: A neighbour is going away and wants you to look after their cat. What do you need to know?
+learn: Ask about food, water, how much, how often and any medicine.
+learn: Write it down. Get a phone number to call if something goes wrong.
+learn: Do the job at the same time each day. Pets like routines.
+play: order | Get ready for a pet-sitting job | Meet the pet and its owner with your grown-up; Write down food, water and times; Get the owner's phone number; Visit at the same time each day; Send a quick update to the owner
+check: mcq | What should you get before the owner leaves? | Their phone number* | Their password | Nothing
+check: tf | Pets usually like the same routine each day. | true
+home: Write a pet-care checklist for your own pet or a friend's pet.
+skill: jobs
+
+@lesson 4.4 | Garden jobs | 🌱 | garden
+hook: Gardens need lots of work. Which jobs are right for you?
+learn: Weeding, raking leaves, watering and sweeping paths are great garden jobs.
+learn: Lawn mowers, hedge trimmers and chainsaws can badly hurt people. Leave those to trained adults.
+learn: Wear gloves, a hat and sunscreen, and drink water.
+play: sort | Good job for me, Grown-up only | Raking leaves=Good job for me; Watering pots=Good job for me; Using a hedge trimmer=Grown-up only; Pulling weeds=Good job for me; Using a chainsaw=Grown-up only; Mowing on a ride-on mower=Grown-up only; Sweeping paths=Good job for me | Who should do it?
+check: mcq | Which garden job is safe for you? | Raking leaves* | Using a chainsaw | Using a hedge trimmer
+check: tf | Sunscreen and water matter on outdoor jobs. | true
+home: Do one garden job at home, with gloves, a hat and sunscreen.
+skill: safety
+
+@lesson 4.5 | Finding customers | 📣 | stall
+hook: You're ready to work. How do people find out?
+learn: Start with people you and your family know, like neighbours and family friends.
+learn: A simple flyer says what you do, your price and how to contact your grown-up.
+learn: Never put your own address or phone number online. Use a grown-up's contact details.
+play: chat | You knock on a neighbour's door with your mum | them: Hello! What can I do for you? | me: Hi, I'm washing cars this weekend for $10. Would you like one?*/Give me money/Can I come inside? | them: Maybe. What do you use? | me: A bucket, car soap and a soft sponge. My mum can tell you more*/Whatever's lying around/I don't know
+check: mcq | Whose contact details should go on your flyer? | A grown-up's* | Your own phone number | Your home address online
+check: tf | Neighbours you know are a good place to start. | true
+home: Design a flyer for a job you could do, with a grown-up's contact details.
+skill: marketing
+
+@lesson 4.6 | Customers who come back | 🔁 | stall
+hook: Your first customer liked your work. How do you get them to ask again?
+learn: Turn up on time and do what you said.
+learn: Do a little extra, like wiping the car's mirrors.
+learn: Say thank you and ask if they'd like you again next week.
+play: path | You finish washing a car and notice you missed the back window. | Wash it before you tell them you're done => good: They'll see careful work and ask you back. | Say you're done and hope they don't notice => bad: They'll notice, and may not ask again. | Ask for extra money to do it => bad: It was part of the job you agreed to.
+check: mcq | What helps customers come back? | Doing great work and being on time* | Charging more each time | Leaving early
+check: tf | A thank-you can help get repeat work. | true
+home: After your next job, ask the person if there's anything you could do better next time.
+skill: reliability
+

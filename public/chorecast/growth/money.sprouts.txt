@@ -226,3 +226,72 @@ check: gap | You saved $12. The kite costs $9. You have $_ left. | 3
 home: Tell a grown-up what your next saving goal will be.
 skill: goals
 
+@lesson 4.1 | Where money comes from | 💼 | bank
+hook: Where does money come from? Does it grow in the bank machine?
+guess: mcq | Where does most grown-ups' money come from? | Their work* | The bank machine makes it | It falls from the sky
+learn: Most grown-ups earn money by doing work. They get paid for their job.
+learn: A bank machine only gives out money that is already in your account. It doesn't make new money.
+learn: When people work, they help others. Bakers make bread and nurses help sick people.
+play: sort | Earns money, Doesn't earn money | Baking bread at a bakery=Earns money; Fixing cars at a garage=Earns money; Watching TV=Doesn't earn money; Driving a bus=Earns money; Taking a nap=Doesn't earn money; Teaching a class=Earns money | Does it earn money?
+check: mcq | How do most grown-ups get money? | They earn it at work* | The bank machine makes it | They find it
+check: tf | A bank machine makes new money for anyone who asks. | false | It only gives out money that is already in your account.
+home: Ask a grown-up what their job is and how it helps other people.
+skill: earning
+
+@lesson 4.2 | Family jobs and paid jobs | 🧹 | home
+hook: Should you get paid for making your bed?
+learn: Some jobs are family jobs. Everyone helps, like setting the table or tidying your toys.
+learn: Some families also have extra jobs you can earn money for, like washing the car.
+learn: Chorecast keeps track of the jobs you do and what you earn.
+play: sort | Family job, Extra job | Putting my clothes away=Family job; Clearing my plate=Family job; Washing the car=Extra job; Feeding my own pet=Family job; Weeding the whole garden=Extra job; Sweeping the deck=Extra job | Is it a family job or an extra job?
+check: mcq | Which is usually a family job that everyone helps with? | Clearing your plate* | Washing the car for pay | Weeding the whole garden
+check: tf | Helping your family is good, even when there's no money. | true
+home: With a grown-up, make a list of family jobs and extra jobs at your place.
+skill: earning
+
+@lesson 4.3 | Doing the job well | ✅ | home
+hook: You washed the car, but there's still mud on the wheels. Is the job done?
+learn: A job is done when it's done well, not just when you stop.
+learn: Look back and check your work before you say "finished".
+learn: People pay more and ask again when the work is good.
+play: order | Wash the car the right way | Get a bucket of soapy water and a sponge; Wash from the roof down; Scrub the wheels last; Rinse off the soap; Look around the car and fix spots you missed
+check: mcq | What should you do before you say "finished"? | Check your work* | Run away | Ask for more money
+check: tf | Good work makes people want to ask you again. | true
+home: Do one job at home, then check it with a grown-up before you say you're done.
+skill: work
+
+@lesson 4.4 | Bigger jobs, bigger pay | ⚖️ | bank
+hook: Should tidying one shelf earn the same as cleaning the whole garage?
+learn: Big jobs take more time and work, so they often pay more.
+learn: If one small job pays $1, a big job might pay $5.
+learn: Earning a little at a time adds up when you save it.
+try: $2 + $2 = $4 :: gap | $1 + $2 + $2 = $_ | 5
+play: match | Match each job to fair pay | Tidy one shelf=$1; Rake the whole lawn=$5; Fold one basket of washing=$2; Wash every window=$6
+check: mcq | Which job would usually pay the most? | Cleaning the whole garage* | Tidying one shelf | Putting one cup away
+check: gap | You earn $2 and then $3. You have $_ | 5
+home: Talk with a grown-up about which jobs at home are big and which are small.
+skill: earning
+
+@lesson 4.5 | Safe ways to earn | 🛡️ | home
+hook: A stranger says they'll pay you $10 to come and help them. What should you do?
+learn: Only earn money with a grown-up who looks after you knowing about it.
+learn: Never go with a stranger, even if they offer money.
+learn: Safe ways to earn are jobs at home, or jobs your grown-up has said yes to.
+play: path | A stranger offers you $10 to help find their lost dog. | Say no and tell your grown-up straight away => good: That's the safe choice. Grown-ups can help with lost dogs. | Go with them to look => bad: Never go with a stranger, even for money or a puppy. | Ask a friend to go instead => bad: That's not safe for your friend either.
+check: mcq | Who needs to know before you earn money? | A grown-up who looks after you* | Nobody | Only your friends
+check: tf | It's OK to go with a stranger if they offer money. | false | Never go with a stranger. Tell a grown-up.
+home: Talk with your grown-up about which jobs they're happy for you to earn money from.
+skill: safety
+
+@lesson 4.6 | It all adds up | 🐷 | bank
+hook: You earn $2 a week. Is that a lot?
+learn: Small amounts add up when you keep earning and save.
+learn: $2 a week for 5 weeks is $10.
+learn: Put what you earn in your jars, so you can save for a goal.
+try: $2 each week for 3 weeks is $6 :: gap | $2 each week for 4 weeks is $_ | 8
+play: tap | Tap the ways a kid can earn money with a grown-up's OK | 🚗:yes:Washing the car; 🪴:yes:Watering the plants; 📺:no; 🐕:yes:Walking the dog with a grown-up; 😴:no; 🍪:yes:Baking for a school sale
+check: gap | You earn $3 a week for 2 weeks. You have $_ | 6
+check: mcq | What helps small amounts become big amounts? | Saving them each week* | Spending them straight away | Losing them
+home: Count what you've earned in Chorecast so far with a grown-up.
+skill: saving
+
