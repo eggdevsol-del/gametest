@@ -79,3 +79,79 @@ check: tf | The median is the middle value when sorted. | true
 home: Find the median of your family's ages.
 skill: data
 
+@lesson 2.1 | Probability as a fraction | 🎯 | stage
+hook: A bag has 3 red marbles and 7 blue. You grab one without looking. What's the chance it's red?
+learn: Probability = the number of ways it can happen ÷ the total number of outcomes.
+learn: 3 red out of 10 marbles is 3/10, or 30%.
+learn: The probabilities of all the outcomes add up to 1, or 100%.
+try: 3 red out of 10 = 3/10 = 30% :: gap | 2 green out of 8 marbles = _% | 25
+play: slider | A spinner has 5 equal sections: 1 gold and 4 grey. What's the chance of gold, in %? | 0 | 100 | 20 | % | 0 | 5
+check: gap | A bag has 4 red and 6 blue. The chance of blue is _% | 60
+check: mcq | The chance of red is 30%. What's the chance of not red? | 70%* | 30% | 100%
+check: tf | The probabilities of all the outcomes add up to 1. | true
+home: Put coloured objects in a bag. Predict the chance of each colour, then test it 20 times.
+skill: probability
+
+@lesson 2.2 | Coins have no memory | 🪙 | stage
+hook: A coin lands heads 5 times in a row. Is tails "due" next?
+learn: Each fair coin flip is independent. It doesn't remember what happened before.
+learn: The chance of tails is still 1 in 2, every single time.
+learn: Believing a result is "due" is called the gambler's fallacy. It costs gamblers a lot.
+play: debate | After 5 heads in a row, should you bet big on tails? | No. Each flip is still 50/50* | Yes. Tails is due | Streaks feel meaningful, and if a coin came up heads hundreds of times you might suspect it wasn't fair. For a fair coin, each flip is still 50/50.
+check: mcq | A fair coin lands heads 5 times. The chance of tails next is… | 1 in 2* | Almost certain | 1 in 6
+check: tf | A pokie machine is more likely to pay out after a long losing streak. | false | Each spin is random. Machines don't owe you a win.
+check: mcq | What's the gambler's fallacy? | Thinking a result is "due" after a streak* | A gambling law | A lucky charm
+home: Flip a coin 30 times and record the longest streak. Streaks happen by chance!
+skill: probability
+
+@lesson 2.3 | Two dice | 🎲 | stage
+hook: Roll two dice and add them. Which total comes up most often?
+learn: Two dice have 6 × 6 = 36 possible outcomes.
+learn: There are 6 ways to make 7 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1), so 7 is the most likely total: 6 in 36, or 1 in 6.
+learn: 2 and 12 have only one way each: 1 in 36.
+try: Ways to make 3: 1+2 and 2+1, so 2 out of 36 :: gap | Ways to make 4 with two dice: _ | 3
+play: match | Match each total to the number of ways to roll it | 2=1 way; 3=2 ways; 5=4 ways; 7=6 ways
+check: mcq | What's the most likely total with two dice? | 7* | 12 | 2
+check: gap | Two dice have _ possible outcomes | 36
+check: tf | Rolling 12 is as likely as rolling 7. | false | 12 has 1 way. 7 has 6 ways.
+home: Roll two dice 36 times and tally the totals. Does 7 win?
+skill: probability
+
+@lesson 2.4 | Odds and probability | ⚖️ | stage
+hook: A betting ad says "5 to 1". What's the actual chance?
+learn: Odds against of 5 to 1 mean 5 ways to lose for every 1 way to win.
+learn: That's 1 win out of 6 in total: a probability of 1/6, about 17%.
+learn: Betting odds also include the bookmaker's cut, so they're stacked against you.
+try: Odds of 3 to 1 against = 1 out of 4 = 25% :: gap | Odds of 4 to 1 against = 1 out of _ | 5
+play: match | Match the odds against to the probability | 1 to 1=50%; 3 to 1=25%; 4 to 1=20%; 9 to 1=10%
+check: mcq | Odds of 9 to 1 against mean the chance is… | 10%* | 90% | 9%
+check: tf | Betting odds include a cut for the bookmaker. | true
+check: gap | Odds of 19 to 1 against = _% chance | 5
+home: Next time you see odds in an ad, turn them into a percentage.
+skill: probability
+
+@lesson 2.5 | Lotto odds | 🎟️ | stage
+hook: What's your chance of winning first division with one Lotto ticket? Take a guess.
+learn: {nz:NZ Lotto draws 6 numbers from 40. There are 3,838,380 possible lines, so one line has about a 1 in 3.8 million chance of first division.~au:Saturday Lotto draws 6 numbers from 45. There are 8,145,060 possible games, so one game has about a 1 in 8.1 million chance of first division.}
+learn: Buying 10 lines only makes it 10 chances in millions. Still tiny.
+learn: You have to be 18 to buy Lotto.
+play: slider | Your chance is 1 in 5 million and you play once a week. 5,000,000 ÷ 52 is about how many thousand years of waiting, on average? | 0 | 200 | 96 | thousand years | 10 | 1
+check: mcq | Which is more likely? | Flipping 20 heads in a row, about 1 in a million* | Winning first division with one line | They're the same
+check: tf | Buying a few more lines makes winning likely. | false | It's still millions to one.
+check: mcq | {nz:One line of NZ Lotto has about what chance of first division?~au:One game of Saturday Lotto has about what chance of first division?} | {nz:1 in 3.8 million~au:1 in 8.1 million}* | 1 in 100 | 1 in 1,000
+home: Work out how long you'd expect to wait for a 1 in 1,000,000 chance if you played once a week.
+skill: probability
+
+@lesson 2.6 | Why the house wins | 🏠 | stage
+hook: Casinos have bright lights, music and free drinks. Who pays for it all?
+learn: Every casino game has a house edge: a small advantage built into the rules.
+learn: A roulette wheel with one zero has 37 numbers, but a win pays as if there were 36. The house keeps about 2.7% of every bet on average.
+learn: Pokies are set to pay back less than goes in. The longer you play, the more you lose on average.
+try: 2.7% of $100 = $2.70 :: gap | 2.7% of $1,000 bet over a night = $_ expected loss | 27
+play: scam | Honest fact or gambling hook? | Pokies pay back less than goes in=real; You're due for a win, keep spinning!=scam; Free bonus bet when you deposit $50!=scam; Each spin is random=real; A near miss means you're getting close=scam | Gambling marketing uses near misses, "due" wins and bonuses to keep you playing.
+check: mcq | What's the house edge? | An advantage built into the game for the casino* | The edge of the table | A lucky seat
+check: tf | Over many bets, the house edge means players lose money on average. | true
+check: mcq | A near miss on a pokie means… | Nothing. It's designed to keep you playing* | You'll win soon | The machine is broken
+home: Spot a gambling ad and work out which trick it uses.
+skill: probability
+

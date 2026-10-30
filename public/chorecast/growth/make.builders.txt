@@ -76,3 +76,75 @@ check: gap | $30 profit split equally between 3 friends = $_ each | 10
 home: Plan how you'd split jobs and money for a stall with a sibling.
 skill: fairness
 
+@lesson 2.1 | What is marketing? | 📣 | stall
+hook: You make the best brownies in town. Nobody knows. Do you sell any?
+learn: Marketing is how you tell people about what you sell and why they'd want it.
+learn: It covers the product, the price, where you sell it and how you tell people.
+learn: These are often called the four Ps: product, price, place and promotion.
+play: sort | Product, Price, Place, Promotion | Chocolate brownies=Product; $2 each=Price; Saturday market=Place; A poster on a noticeboard=Promotion; A gluten-free option=Product; 3 for $5=Price; Outside the sports club=Place; Free tastes=Promotion | Sort into the four Ps
+check: mcq | What is marketing? | Telling the right people why they'd want your product* | Only making posters | Buying things
+check: tf | Price is part of marketing. | true
+check: mcq | Which one is promotion? | A poster about your stall* | The flour in your brownies | Your cash box
+home: Look at one ad and find its product, price, place and promotion.
+skill: marketing
+
+@lesson 2.2 | Features and benefits | 🎁 | stall
+hook: "Our bottle is stainless steel." Or: "Keeps your water cold all day." Which makes you want it?
+learn: A feature is a fact about the product.
+learn: A benefit is what it does for the customer.
+learn: People buy benefits. Lead with what's in it for them.
+play: match | Match each feature to its benefit | Stainless steel bottle=Keeps your drink cold all day; Waterproof bag=Your books stay dry in the rain; Rechargeable torch=No more buying batteries; Big pockets=Room for all your snacks
+check: mcq | Which is a benefit? | Keeps your drink cold all day* | Made of steel | Weighs 300 g
+check: tf | People usually care more about benefits than features. | true
+check: mcq | A bracelet is made of glass beads. What's a benefit? | It goes with any outfit* | It has 20 beads | It's round
+home: Pick something you own. Write one feature and one benefit.
+skill: marketing
+
+@lesson 2.3 | Where are your customers? | 📍 | stall
+hook: You sell dog treats. Where would you put your poster?
+learn: Put your message where your customers already are.
+learn: Dog treats? Try the dog park or a vet's noticeboard, with permission.
+learn: Selling online needs a grown-up's help and permission.
+play: route | Match each product to the best place to tell people | Dog treats=The dog park noticeboard; Sports drinks=Saturday sports games; Bookmarks=The library; Seedlings=The community garden
+check: mcq | Where should you advertise surfboard wax? | Near the beach* | At a ski field | In a library
+check: tf | You should ask permission before putting up a poster. | true
+check: mcq | What's the smartest place for an ad? | Where your customers already are* | Anywhere at all | Somewhere nobody goes
+home: Find a community noticeboard near you. What's being advertised?
+skill: marketing
+
+@lesson 2.4 | Honest marketing | ✅ | townhall
+hook: "These cookies cure colds!" Can you say that?
+learn: Marketing must be honest. You can't make false claims about what you sell.
+learn: {nz:In NZ, the Fair Trading Act bans misleading claims.~au:In Australia, the Australian Consumer Law bans misleading claims.}
+learn: "The yummiest cookies ever!" is an obvious boast nobody takes as fact. But "100% organic" has to be true.
+play: scam | Honest or misleading? | Homemade by me on Saturday=real; Cures colds!=scam; 100% organic, when it isn't=scam; Made with real butter, when it is=real; Was $10, now $3, when it was never $10=scam | Claims about your product have to be true.
+check: tf | You can say your slime cures sadness if it sells more. | false | Claims must be true.
+check: mcq | Which claim is OK if it's true? | Made with real fruit* | Cures all illness | Doctors' top pick, when it isn't
+check: mcq | {nz:Which NZ law bans misleading claims?~au:Which Australian law bans misleading claims?} | {nz:The Fair Trading Act~au:The Australian Consumer Law}* | The rules of netball | The school timetable
+home: Find an ad and decide whether its claims are honest.
+skill: honesty
+
+@lesson 2.5 | Word of mouth | 🗣️ | stall
+hook: What makes people tell their friends about something?
+learn: Word of mouth is when happy customers tell other people about you.
+learn: It's free, and people trust friends more than ads.
+learn: Great products and friendly service get people talking.
+play: path | A customer says your brownie was a bit dry. | Thank them, give a fresh one, and tweak your recipe => good: They'll likely tell friends you're great to deal with. | Argue that it was fine => bad: They'll tell friends you were rude. | Ignore them => bad: A quiet, unhappy customer still tells others.
+check: mcq | What is word of mouth? | Customers telling others about you* | Shouting through a megaphone | A paid ad
+check: tf | People often trust a friend more than an ad. | true
+check: mcq | What gets good word of mouth? | Great products and friendly service* | Rude replies | High prices
+home: Ask a grown-up which local shop they'd recommend, and why.
+skill: service
+
+@lesson 2.6 | Make a poster | 🪧 | workshop
+hook: Your poster has 3 seconds to grab someone walking past. What goes on it?
+learn: A big, clear headline and a picture of the product.
+learn: The price, plus where and when.
+learn: A call to action, like "Come and try one!" Ask a grown-up before adding any contact details.
+play: build | Build a poster from top to bottom | Big headline: Fresh lemonade!; A bright photo of the lemonade; $2 a cup; Saturday 10am to 1pm at the {nz:school gala~au:school fete}; Come and grab a cup!
+check: mcq | What's a call to action? | Words telling people what to do next* | The price | The colour scheme
+check: tf | A poster should have tiny writing with lots of detail. | false | People need to read it in a few seconds.
+check: mcq | What should you check with a grown-up before adding? | Any contact details* | The colour | The font
+home: Design a poster for something you could sell.
+skill: marketing
+

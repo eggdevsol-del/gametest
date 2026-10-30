@@ -76,3 +76,77 @@ check: mcq | What do fair trade labels show? | Producers met standards for pay a
 home: Check the label of a piece of clothing and find where it was made.
 skill: fairtrade
 
+@lesson 2.1 | Theory of change | 🗺️ | townhall
+hook: A group gives free breakfast at school. What change do they hope for, and how would it happen?
+learn: A theory of change is the "if this, then that" chain from what you do to the change you want.
+learn: If kids get breakfast, they're less hungry. Then they can focus. Then learning improves.
+learn: Writing out the chain shows which steps you need to check.
+play: build | Build the theory of change for a school breakfast club | Activity: serve free breakfast; Output: 80 kids fed each morning; Short-term outcome: fewer hungry kids in class; Medium-term outcome: better focus and attendance; Long-term impact: better learning
+check: mcq | What is a theory of change? | The chain from what you do to the change you want* | A science theory | A budget
+check: tf | Writing out the chain shows which steps you need to check. | true
+check: mcq | In the breakfast example, which is an outcome? | Better focus in class* | Bowls of cereal served | A volunteer roster
+home: Write a theory of change for something you'd like to fix at school.
+skill: impact
+
+@lesson 2.2 | Before and after | 📏 | townhall
+hook: After a tutoring programme, 70% of kids read at their level. Is that good?
+learn: You can't tell without a baseline: a measure of how things were before.
+learn: If 40% read at their level before, 70% is a big jump. If 68% did, it's tiny.
+learn: Measure the same way before and after, or the comparison isn't fair.
+try: 40% before, 70% after: up 30 points :: gap | 55% before, 80% after: up _ points | 25
+play: slider | A beach had 300 bits of rubbish per 100 m before a campaign, and 120 after. How many fewer is that? | 0 | 300 | 180 | pieces | 5 | 5
+check: mcq | What is a baseline? | A measurement from before you started* | The final result | A type of graph
+check: gap | 200 people came before, 260 after. That's _ more | 60
+check: tf | Measuring in different ways before and after makes the comparison unfair. | true
+home: Pick a habit and measure it for a week before you try to change it.
+skill: impact
+
+@lesson 2.3 | Would it have happened anyway? | 🔬 | townhall
+hook: Reading scores rose 10% at a school with a new programme. They rose 8% at nearby schools without it. What did the programme really do?
+learn: Some change might have happened anyway. Good measurement asks what would have happened without you.
+learn: Comparing with a similar group that didn't get the programme shows the real difference.
+learn: Here, the programme probably added about 2%, not 10%.
+try: Up 10% with it, up 8% without: about 2% from the programme :: gap | Up 15% with it, up 5% without: about _% from the programme | 10
+play: path | Your group gave out free bike helmets, and head injuries in town fell. How do you check it was the helmets? | Compare with a similar town that didn't get helmets => good: If injuries fell there too, something else is going on. That's a fair test. | Assume the helmets did it => bad: Maybe a new bike lane or a rainy year did it. You can't be sure. | Only count the kids who liked their helmets => bad: Liking a helmet tells you nothing about injuries.
+check: mcq | Why use a comparison group? | To see what would have happened anyway* | To make the numbers bigger | To save paper
+check: tf | If things improved after your project, your project must have caused it. | false | Something else might explain it.
+check: gap | Up 12% with the project, up 9% without. The project probably added about _% | 3
+home: Think of something that improved recently. What else might have caused it?
+skill: evidence
+
+@lesson 2.4 | Ask the people you help | 👂 | garden
+hook: A group builds a playground. Nobody uses it. What went wrong?
+learn: The people you're helping know best what they need. Ask them first.
+learn: Surveys, conversations and testing ideas together all help.
+learn: Keep asking afterwards. Feedback shows whether it's really working.
+play: chat | You're planning a project to help older people in your town | them: Hi, I'm from the local seniors' club. What's this about? | me: We'd like to help. What would be most useful for your members?*/We're building you a skate park/We already know what you need | them: Honestly, lots of our members want help using their phones. | me: Could we run a weekly phone help session, and check how it's going?*/Phones are boring, let's do something else/OK, but we're still building the skate park
+check: mcq | Who knows best what a community needs? | The people in that community* | Whoever has the most money | A random website
+check: tf | Asking for feedback after a project helps you check it's working. | true
+check: mcq | Why might nobody use the new playground? | Nobody asked what people wanted* | Playgrounds never work | Bad luck only
+home: Ask a family member what would help them most this week, then do it.
+skill: listening
+
+@lesson 2.5 | Side effects | ⚠️ | garden
+hook: A group ships boxes of free T-shirts to a town overseas. Local clothing sellers lose customers. Help or harm?
+learn: Projects can have side effects nobody planned, good or bad.
+learn: Free goods can hurt local businesses. Short volunteer visits to orphanages can harm children who need steady carers, and many experts warn against them.
+learn: Think ahead, ask local people, and keep watching for harm.
+play: sort | Likely helpful, Watch for harm | Buying from local sellers after a disaster=Likely helpful; Shipping unwanted clothes overseas=Watch for harm; Funding local teachers=Likely helpful; A one-week visit to cuddle orphans=Watch for harm; Asking locals what they need first=Likely helpful; Donating broken old computers=Watch for harm | Sort the ideas
+check: mcq | What's a possible side effect of free imported goods? | Local sellers lose business* | Everyone gets rich | Nothing at all
+check: tf | Helping projects can have side effects nobody planned. | true
+check: mcq | After a disaster, many aid groups ask for… | Money, so they can buy what's needed locally* | Boxes of random items | Old shoes
+home: Find what a recent disaster appeal asked people to give. Was it goods or money?
+skill: impact
+
+@lesson 2.6 | Honest impact stories | 📊 | stage
+hook: A charity's report shows one amazing success story. Is that enough?
+learn: One great story can hide a lot. Good reports share numbers and stories.
+learn: They show what didn't work too, and what they changed.
+learn: Be wary of reports that only show the best bits.
+play: scam | Honest or cherry-picked? | We helped 500 families. 80% said life got easier. Here's what we'll fix=real; Meet Sam, whose life we changed! (No other numbers)=scam; Our pilot didn't work, so we changed it=real; 100% of people loved us (we asked 3 people)=scam; Results checked by an independent evaluator=real | Look for numbers, comparisons and honesty about what didn't work.
+check: mcq | What makes an impact report trustworthy? | Numbers, stories and honesty about failures* | Only happy photos | One famous supporter
+check: tf | A report that admits what didn't work can be more trustworthy. | true
+check: mcq | "100% loved us" from 3 people is a problem because… | The sample is tiny* | 100% is too low | Three is unlucky
+home: Read one charity's annual report. Do they say what didn't work?
+skill: evidence
+

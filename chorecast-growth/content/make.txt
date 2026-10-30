@@ -77,6 +77,80 @@ check: mcq | What two things should a sign say? | What it is and how much* | You
 home: Draw a sign for a pretend stall with a price and a picture.
 skill: marketing
 
+@lesson 2.1 | What could I make? | 💡 | workshop
+hook: You want to sell something at the {nz:school gala~au:school fete}. What could you make?
+learn: Good things to make are things people want, that you can make well.
+learn: Ideas: biscuits, bookmarks, bracelets, painted rocks or seedlings.
+learn: Pick something you can make lots of without it costing too much.
+play: tap | Tap the good things for a kid to make and sell | 🍪:yes:Biscuits are popular and cheap to make; 🔖:yes:Bookmarks are quick to make; 🚗:no; 📿:yes:Bracelets can be made with beads; 🏠:no; 🪨:yes:Painted rocks cost almost nothing; 🌱:yes:Seedlings grow from cheap seeds; 📱:no
+check: mcq | What makes a good thing to sell? | Something people want that you can make well* | Something nobody needs | Something that costs heaps to make
+check: tf | It helps to pick something you can make lots of. | true
+check: mcq | Which would be easiest for a kid to make and sell? | Bookmarks* | A car | A house
+home: Make a list of three things you could make and sell.
+skill: ideas
+
+@lesson 2.2 | Materials | 🧶 | stall
+hook: You want to make bracelets. Beads cost $4. String costs $2. How much to start?
+learn: Materials are the things you use to make your product.
+learn: Add up all your materials to find your costs.
+learn: One bag of beads might make lots of bracelets.
+try: $4 beads + $2 string = $6 :: gap | $3 paint + $2 brushes = $_ | 5
+play: match | Match each product to its materials | Bracelet=Beads and string; Biscuits=Flour, butter and sugar; Painted rock=A rock and paint; Bookmark=Card and pens
+check: gap | Flour $3, butter $5, sugar $2. Total cost $_ | 10
+check: mcq | What are materials? | The things you use to make a product* | The money you earn | The customers
+check: tf | One bag of beads can make many bracelets. | true
+home: Pick one thing to make. Write a list of the materials you'd need.
+skill: costs
+
+@lesson 2.3 | Cost of one | 🏷️ | stall
+hook: $3 of ingredients makes 10 cookies. What does each cookie cost you?
+learn: Share the cost of materials across everything you make.
+learn: $3 for 10 cookies is 30c each.
+learn: Sell each one for more than it costs you, and you make a profit.
+try: $3 makes 10 cookies, so each costs 30c :: gap | $4 makes 8 cookies. Each costs _c | 50
+play: shop | Each cookie costs you 30c. Find a price that makes a good profit. | Cookie | 30 | 300
+check: gap | $6 makes 6 bracelets. Each costs $_ | 1
+check: mcq | Each cookie costs you 30c to make. Which price makes a profit? | 60c* | 30c | 20c
+check: tf | If you sell for less than it costs to make, you lose money. | true
+home: Work out the cost of one thing you could make, with a grown-up.
+skill: profit
+
+@lesson 2.4 | Make it well | ✨ | workshop
+hook: Two cookies. One is burnt and broken. One is golden and neat. Which would you buy?
+learn: People buy things that look good and work well.
+learn: Take your time. Check each one before you sell it.
+learn: If one doesn't turn out, keep it for yourself or try again.
+play: diff | Your plan and your first batch. Tap what went wrong. | Golden cookies; All the same size; Neatly wrapped; Name label | Burnt cookies; All the same size; Neatly wrapped; No label
+check: mcq | What should you do with a broken bracelet? | Fix it or keep it. Don't sell it* | Sell it anyway | Hide it in the pile
+check: tf | Checking each item before you sell it is a good idea. | true
+check: mcq | Why does making it well matter? | People want things that look good and work* | It doesn't | Only the price matters
+home: Make one thing slowly and carefully. Check it like a shop would.
+skill: quality
+
+@lesson 2.5 | Safe food to sell | 🧼 | kitchen
+hook: You're baking cupcakes to sell. What keeps them safe to eat?
+learn: Wash your hands with soap before you start.
+learn: Tie back long hair and keep the bench clean.
+learn: Tell buyers what's in your food, like nuts or eggs. Some people are allergic.
+play: order | Put the baking steps in a safe order | Wash your hands with soap; Clean the bench; Bake with a grown-up; Let the cupcakes cool; Wrap them up; Write a label that says what's in them
+check: mcq | What should you do before you start baking? | Wash your hands* | Lick the spoon | Open the oven
+check: tf | Some people are allergic to foods like nuts or eggs. | true
+check: mcq | Why put a label on food you sell? | So people know what's in it* | To make it heavier | Labels are just for fun
+home: Bake something with a grown-up and make a label that lists what's in it.
+skill: safety
+
+@lesson 2.6 | Ideas that help | 🌟 | workshop
+hook: Good ideas often start with a problem. What problems can you see?
+learn: Lots of inventions started when someone noticed a problem.
+learn: Ask: what bugs people? What could make it easier?
+learn: An idea that helps people might be something they'd pay for.
+play: match | Match each problem to an idea that could help | Lost keys=A bright keyring; Messy pencils=A pencil holder; Bored on rainy days=A puzzle book; Cold hands=Knitted mittens
+check: mcq | Where do many good ideas start? | With a problem* | With a nap | With a big bank
+check: tf | A good product can help people. | true
+check: mcq | What is a good question for finding ideas? | What bugs people?* | What's on TV? | What's the biggest thing?
+home: Find one small problem at home and draw an idea to fix it.
+skill: ideas
+
 @band builders
 @unit 1 | Running a stall | Pricing, stock and selling out
 @unit 2 | Marketing | Telling the right people the right thing
@@ -155,6 +229,78 @@ check: gap | $30 profit split equally between 3 friends = $_ each | 10
 home: Plan how you'd split jobs and money for a stall with a sibling.
 skill: fairness
 
+@lesson 2.1 | What is marketing? | 📣 | stall
+hook: You make the best brownies in town. Nobody knows. Do you sell any?
+learn: Marketing is how you tell people about what you sell and why they'd want it.
+learn: It covers the product, the price, where you sell it and how you tell people.
+learn: These are often called the four Ps: product, price, place and promotion.
+play: sort | Product, Price, Place, Promotion | Chocolate brownies=Product; $2 each=Price; Saturday market=Place; A poster on a noticeboard=Promotion; A gluten-free option=Product; 3 for $5=Price; Outside the sports club=Place; Free tastes=Promotion | Sort into the four Ps
+check: mcq | What is marketing? | Telling the right people why they'd want your product* | Only making posters | Buying things
+check: tf | Price is part of marketing. | true
+check: mcq | Which one is promotion? | A poster about your stall* | The flour in your brownies | Your cash box
+home: Look at one ad and find its product, price, place and promotion.
+skill: marketing
+
+@lesson 2.2 | Features and benefits | 🎁 | stall
+hook: "Our bottle is stainless steel." Or: "Keeps your water cold all day." Which makes you want it?
+learn: A feature is a fact about the product.
+learn: A benefit is what it does for the customer.
+learn: People buy benefits. Lead with what's in it for them.
+play: match | Match each feature to its benefit | Stainless steel bottle=Keeps your drink cold all day; Waterproof bag=Your books stay dry in the rain; Rechargeable torch=No more buying batteries; Big pockets=Room for all your snacks
+check: mcq | Which is a benefit? | Keeps your drink cold all day* | Made of steel | Weighs 300 g
+check: tf | People usually care more about benefits than features. | true
+check: mcq | A bracelet is made of glass beads. What's a benefit? | It goes with any outfit* | It has 20 beads | It's round
+home: Pick something you own. Write one feature and one benefit.
+skill: marketing
+
+@lesson 2.3 | Where are your customers? | 📍 | stall
+hook: You sell dog treats. Where would you put your poster?
+learn: Put your message where your customers already are.
+learn: Dog treats? Try the dog park or a vet's noticeboard, with permission.
+learn: Selling online needs a grown-up's help and permission.
+play: route | Match each product to the best place to tell people | Dog treats=The dog park noticeboard; Sports drinks=Saturday sports games; Bookmarks=The library; Seedlings=The community garden
+check: mcq | Where should you advertise surfboard wax? | Near the beach* | At a ski field | In a library
+check: tf | You should ask permission before putting up a poster. | true
+check: mcq | What's the smartest place for an ad? | Where your customers already are* | Anywhere at all | Somewhere nobody goes
+home: Find a community noticeboard near you. What's being advertised?
+skill: marketing
+
+@lesson 2.4 | Honest marketing | ✅ | townhall
+hook: "These cookies cure colds!" Can you say that?
+learn: Marketing must be honest. You can't make false claims about what you sell.
+learn: {nz:In NZ, the Fair Trading Act bans misleading claims.~au:In Australia, the Australian Consumer Law bans misleading claims.}
+learn: "The yummiest cookies ever!" is an obvious boast nobody takes as fact. But "100% organic" has to be true.
+play: scam | Honest or misleading? | Homemade by me on Saturday=real; Cures colds!=scam; 100% organic, when it isn't=scam; Made with real butter, when it is=real; Was $10, now $3, when it was never $10=scam | Claims about your product have to be true.
+check: tf | You can say your slime cures sadness if it sells more. | false | Claims must be true.
+check: mcq | Which claim is OK if it's true? | Made with real fruit* | Cures all illness | Doctors' top pick, when it isn't
+check: mcq | {nz:Which NZ law bans misleading claims?~au:Which Australian law bans misleading claims?} | {nz:The Fair Trading Act~au:The Australian Consumer Law}* | The rules of netball | The school timetable
+home: Find an ad and decide whether its claims are honest.
+skill: honesty
+
+@lesson 2.5 | Word of mouth | 🗣️ | stall
+hook: What makes people tell their friends about something?
+learn: Word of mouth is when happy customers tell other people about you.
+learn: It's free, and people trust friends more than ads.
+learn: Great products and friendly service get people talking.
+play: path | A customer says your brownie was a bit dry. | Thank them, give a fresh one, and tweak your recipe => good: They'll likely tell friends you're great to deal with. | Argue that it was fine => bad: They'll tell friends you were rude. | Ignore them => bad: A quiet, unhappy customer still tells others.
+check: mcq | What is word of mouth? | Customers telling others about you* | Shouting through a megaphone | A paid ad
+check: tf | People often trust a friend more than an ad. | true
+check: mcq | What gets good word of mouth? | Great products and friendly service* | Rude replies | High prices
+home: Ask a grown-up which local shop they'd recommend, and why.
+skill: service
+
+@lesson 2.6 | Make a poster | 🪧 | workshop
+hook: Your poster has 3 seconds to grab someone walking past. What goes on it?
+learn: A big, clear headline and a picture of the product.
+learn: The price, plus where and when.
+learn: A call to action, like "Come and try one!" Ask a grown-up before adding any contact details.
+play: build | Build a poster from top to bottom | Big headline: Fresh lemonade!; A bright photo of the lemonade; $2 a cup; Saturday 10am to 1pm at the {nz:school gala~au:school fete}; Come and grab a cup!
+check: mcq | What's a call to action? | Words telling people what to do next* | The price | The colour scheme
+check: tf | A poster should have tiny writing with lots of detail. | false | People need to read it in a few seconds.
+check: mcq | What should you check with a grown-up before adding? | Any contact details* | The colour | The font
+home: Design a poster for something you could sell.
+skill: marketing
+
 @band makers
 @unit 1 | Business plans | From idea to plan on one page
 @unit 2 | Pricing strategy | Margins, markups and discounts
@@ -232,6 +378,81 @@ check: tf | Hearing "no" from investors meant the idea was bad. | false | Many g
 check: mcq | What did Melanie do after rejections? | Improved her pitch and kept going* | Gave up | Copied someone else
 home: Think of an everyday problem and an idea that could make it easier.
 skill: grit
+
+@lesson 2.1 | Markup or margin? | 📐 | stall
+hook: You buy a candle for $6 and sell it for $10. Is that 40% or 67%?
+learn: Markup compares profit to cost. $4 profit on a $6 cost is about a 67% markup.
+learn: Margin compares profit to price. $4 profit on a $10 price is a 40% margin.
+learn: Same sale, two numbers. Always say which one you mean.
+try: Cost $5, price $10. Markup = $5 ÷ $5 = 100% :: gap | Cost $8, price $10. Markup = _% | 25
+play: match | Match each sale to its markup | Cost $5, price $10=100%; Cost $10, price $15=50%; Cost $4, price $5=25%; Cost $2, price $8=300%
+check: gap | Cost $20, price $25. Markup = _% | 25
+check: mcq | Cost $6, price $10. What's the margin? | 40%* | 67% | 60%
+check: tf | Markup and margin are always the same number. | false | Markup divides by cost. Margin divides by price.
+home: Find something you could resell. Work out its markup and margin.
+skill: profit
+
+@lesson 2.2 | Cost-plus pricing | ➕ | workshop
+hook: How do many small businesses set prices? They start with cost.
+learn: Cost-plus pricing means adding a set markup to what each item costs you.
+learn: Count every cost: materials, packaging, platform fees and shipping.
+learn: Then check the result against what customers will actually pay.
+try: Cost $4 + 50% markup = $6 :: gap | Cost $12 + 50% markup = $_ | 18
+play: slider | Earrings: $3.20 materials, $0.80 packaging and a $1 platform fee. With a 100% markup, what's the price? | 0 | 20 | 10 | $ | 0.5 | 0.5
+check: gap | Materials $7, packaging $1, fees $2. Total cost = $_ | 10
+check: mcq | What's the risk of forgetting a cost? | Your profit is smaller than you think* | Customers pay more | Nothing
+check: tf | A cost-plus price should still be checked against what customers will pay. | true
+home: List every cost for something you could sell, including the small ones.
+skill: pricing
+
+@lesson 2.3 | Value-based pricing | 💎 | stage
+hook: A custom-painted phone case costs $8 to make. People happily pay $45. Why?
+learn: Value-based pricing sets the price by what the product is worth to the customer.
+learn: Unique, handmade or personalised products can often charge well above cost-plus.
+learn: Research what similar things sell for, and be clear about what makes yours special.
+play: debate | Should you charge $45 for a phone case that costs $8 to make? | Yes, if customers value it at that and you're honest about what it is* | No. You should only ever charge cost plus a little | Some people feel big markups are unfair. Being open about what makes it special lets customers decide.
+check: mcq | What does value-based pricing focus on? | What the product is worth to customers* | Only your costs | The cheapest competitor
+check: tf | Personalised products can often charge more. | true
+check: mcq | A good way to test a value price? | See what similar products sell for* | Guess randomly | Only ask your family
+home: Find a handmade product online and estimate what it costs to make.
+skill: pricing
+
+@lesson 2.4 | Discounts | 🏷️ | stall
+hook: A 20% discount sounds generous. How much of your profit does it eat?
+learn: A discount comes straight off your profit, not your costs.
+learn: Price $10, cost $6, profit $4. A 20% discount takes $2 off, so your profit halves to $2.
+learn: Use discounts on purpose: to clear old stock, reward loyal customers or win new ones.
+try: 20% off $10 = $8 :: gap | 25% off $20 = $_ | 15
+play: gen | percent | 4
+check: mcq | Price $10, cost $6. After 20% off, what's your profit per sale? | $2* | $4 | $8
+check: tf | A 20% discount can cut your profit by much more than 20%. | true
+check: mcq | A sensible reason for a discount? | Clearing old stock* | It's a Tuesday | To lose money on purpose
+home: Find a sale in a shop and work out the discount in dollars.
+skill: discounts
+
+@lesson 2.5 | Price psychology | 🧠 | stall
+hook: $9.99 or $10. Does one cent really change anything?
+learn: Prices ending in .99 can feel cheaper, even though they're almost the same.
+learn: Bundles like "3 for $10" and decoys, a pricey middle option that makes the big one look good, shape choices too.
+learn: Knowing the tricks helps you as a seller and as a shopper.
+play: price | Cinema popcorn. Which is the best value? | Small popcorn:4:100:g; Medium popcorn:7:250:g; Large popcorn:7.5:300:g
+check: mcq | Why do shops use $9.99 instead of $10? | It can feel cheaper* | Coins are heavy | It's the law
+check: tf | A pricey middle option can make the large one look like a bargain. | true
+check: mcq | What's a bundle? | Several items sold together for one price* | A free gift card | A refund
+home: Spot three prices ending in .99 and one bundle deal this week.
+skill: pricing
+
+@lesson 2.6 | Competitor pricing | 🔍 | online
+hook: Three stalls sell candles for $12, $15 and $18. What should yours be?
+learn: Check what competitors charge for similar products.
+learn: You don't have to be cheapest. Be clear about why yours is worth it.
+learn: In a price war, sellers keep cutting until nobody makes money.
+play: path | A new stall nearby sells candles for $8. Yours are $14. | Explain what makes yours better, like longer burn time and natural wax => good: Customers who value quality stay, and you keep your margin. | Cut your price to $7 => bad: Now you barely cover costs, and they might cut again. | Post nasty comments about their candles => bad: Unfair, and it damages your own reputation.
+check: mcq | What's a price war? | Sellers keep cutting prices until nobody profits* | A sale on war films | A fair deal
+check: tf | You always have to be the cheapest to win customers. | false
+check: mcq | Why check competitors' prices? | To see where your price fits* | To copy their logo | To report them
+home: Compare the price of one product at three sellers and decide where you'd price it.
+skill: pricing
 
 @band launchers
 @unit 1 | Starting a business | Structures, names and registration
@@ -313,3 +534,77 @@ check: tf | A social enterprise can make a profit. | true
 check: mcq | Where do social enterprise profits often go? | The mission* | Only the owners | Nowhere
 home: Find a social enterprise near you and what it does.
 skill: impact
+
+@lesson 2.1 | Do I need to register? | 📝 | townhall
+hook: Your weekend business is growing fast. When do you have to register for GST?
+learn: {nz:In NZ you must register for GST once your sales go over $60,000 in 12 months, or are expected to.~au:In Australia you must register for GST once your turnover reaches $75,000 a year, or is expected to.}
+learn: You can register below that if you choose. Then you charge GST and can claim GST back on business costs.
+learn: {nz:Your GST number is usually the same as your IRD number.~au:You'll need an ABN before you register for GST.}
+play: sort | Must register, Doesn't have to | {nz:Expecting $65,000 of sales this year~au:Expecting $80,000 turnover this year}=Must register; {nz:$12,000 of sales from weekend markets~au:$12,000 turnover from weekend markets}=Doesn't have to; {nz:$61,000 of sales in the last 12 months~au:$76,000 turnover in the last 12 months}=Must register; {nz:$40,000 of sales a year, steady~au:$40,000 turnover a year, steady}=Doesn't have to | Does this business have to register?
+check: mcq | {nz:What's the GST registration threshold in NZ?~au:What's the GST registration threshold in Australia?} | {nz:Over $60,000 in 12 months~au:$75,000 a year}* | {nz:$6,000~au:$7,500} | {nz:$600,000~au:$750,000}
+check: tf | You can choose to register for GST even if you're under the threshold. | true
+check: mcq | What can a GST-registered business claim back? | GST on its business costs* | Its income tax | Its rent at home
+home: Read the GST registration page on {nz:ird.govt.nz~au:ato.gov.au}.
+skill: gst
+
+@lesson 2.2 | Working out GST | 🧮 | bank
+hook: A customer pays you {nz:$115~au:$110} including GST. How much of that is yours?
+learn: To add GST, multiply by {nz:1.15~au:1.1}.
+learn: To find the GST inside a GST-inclusive price, {nz:multiply by 3 and divide by 23~au:divide by 11}.
+learn: Always know whether a price includes GST or not.
+try: {nz:$115 including GST has $15 of GST~au:$110 including GST has $10 of GST} :: gap | {nz:$230 including GST has $_ of GST~au:$220 including GST has $_ of GST} | {nz:30~au:20}
+play: gen | gst | 4
+check: gap | {nz:$460 including GST has $_ of GST~au:$440 including GST has $_ of GST} | {nz:60~au:40}
+check: mcq | A price of $200 plus GST is… | {nz:$230~au:$220}* | {nz:$215~au:$210} | $200
+check: tf | A GST-inclusive price already has the GST in it. | true
+home: Take a receipt and check its GST amount with the formula.
+skill: gst
+
+@lesson 2.3 | Tax invoices | 🧾 | bank
+hook: A client asks for a tax invoice. What has to be on it?
+learn: A tax invoice is a record of a sale that shows the GST.
+learn: {nz:NZ calls the required details taxable supply information. For sales over $200 it includes your name and GST number, the date, what you sold, the price and the GST.~au:For sales of $82.50 or more including GST, a tax invoice must show your name and ABN, the date, what you sold, the price and the GST.}
+learn: Number your invoices in order. It makes record keeping much easier.
+play: diff | Your invoice template and the one you sent. Tap what's missing. | Invoice #014; Date 3 May; {nz:GST number 123-456-789~au:ABN 12 345 678 901}; Logo design $400; GST included | Invoice #014; Date missing; {nz:GST number missing~au:ABN missing}; Logo design $400; GST included
+check: mcq | What does a tax invoice show? | The GST on a sale* | Your bank password | Only your home address
+check: tf | Numbering invoices in order helps with record keeping. | true
+check: mcq | Which number goes on your tax invoices? | {nz:Your GST number~au:Your ABN}* | Your phone PIN | Your student ID
+home: Find a tax invoice from a business and spot the required details.
+skill: invoices
+
+@lesson 2.4 | Keeping records | 🗂️ | bank
+hook: The tax office asks about a sale from three years ago. Can you prove it?
+learn: Keep records of every sale and expense: invoices, receipts and bank statements.
+learn: {nz:IRD says to keep business records for at least 7 years.~au:The ATO says to keep business records for 5 years.}
+learn: A separate business bank account and a simple app or spreadsheet make it much easier.
+play: sort | Keep it, Not needed | Receipt for a laptop used for the business=Keep it; Invoices you sent=Keep it; Business bank statements=Keep it; A flyer for a pizza place=Not needed; Receipts for materials=Keep it; Your personal streaming receipt=Not needed | What should a small business keep?
+check: mcq | {nz:How long should NZ businesses keep records?~au:How long should Australian businesses keep records?} | {nz:At least 7 years~au:5 years}* | 1 month | Only until the end of the week
+check: tf | A separate business bank account makes record keeping easier. | true
+check: mcq | Why keep receipts for business costs? | To claim them and back up your numbers* | To decorate the office | Because shops ask you to
+home: Set up a spreadsheet with columns for date, item, money in and money out.
+skill: records
+
+@lesson 2.5 | Filing GST | 📅 | townhall
+hook: You've collected GST all quarter. Now what?
+learn: {nz:GST returns are filed monthly, two-monthly or six-monthly, depending on your business.~au:Most small businesses report GST on a Business Activity Statement (BAS), usually every quarter.}
+learn: You pay the GST you collected, minus the GST you paid on business costs.
+learn: If you paid more GST than you collected, you get a refund.
+try: Collected $1,500, paid $400 on costs, so you pay $1,100 :: gap | Collected $900, paid $300 on costs. You pay $_ | 600
+play: slider | You collected $2,300 of GST and paid $500 of GST on costs. How much do you pay? | 0 | 3000 | 1800 | $ | 0 | 100
+check: mcq | You collected $600 of GST and paid $800 on costs. What happens? | You get a $200 refund* | You pay $1,400 | Nothing
+check: tf | Missing a GST due date can mean penalties. | true
+check: mcq | {nz:How often can NZ businesses file GST returns?~au:What do most small Australian businesses use to report GST?} | {nz:Monthly, two-monthly or six-monthly~au:A Business Activity Statement (BAS)}* | {nz:Once every 10 years~au:A birthday card} | {nz:Never~au:A text message}
+home: Find the next GST due dates on {nz:ird.govt.nz~au:ato.gov.au}.
+skill: gst
+
+@lesson 2.6 | Income tax on your profit | 💼 | bank
+hook: GST is sorted. Is that all the tax you owe?
+learn: No. Your business profit is income, and income tax is due on it.
+learn: Nobody takes tax out for you, so set aside a share of every payment. Many people put aside 20% to 30%.
+learn: {nz:Once your tax bill grows, you may have to pay provisional tax during the year.~au:Once your business income grows, you may have to pay PAYG instalments during the year.}
+play: budget | A client pays you $1,000. Plan where it goes. | 1000 | Tax set-aside=250; Materials=150; Pay yourself=0; Emergency buffer=0 | Software renewal:80
+check: mcq | Why set aside part of each payment? | To cover income tax later* | To buy snacks | Self-employed people never pay tax
+check: tf | Self-employed people don't pay income tax. | false
+check: gap | You earn $2,000 and set aside 25% for tax. That's $_ | 500
+home: Ask someone who is self-employed how they put money aside for tax.
+skill: tax

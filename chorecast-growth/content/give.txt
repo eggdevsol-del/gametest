@@ -77,6 +77,80 @@ check: mcq | Who should you go with to a clean-up? | A grown-up* | Nobody | A st
 home: Pick up three bits of rubbish (with gloves and a grown-up).
 skill: environment
 
+@lesson 2.1 | What is sharing? | 🤲 | garden
+hook: You have 6 strawberries. Your friend has none. What could you do?
+learn: Sharing means letting others use or have some of what you have.
+learn: Sharing can make you and the other person feel good.
+learn: You can share things, your time and kind words.
+try: 6 strawberries shared by 2 is 3 each :: gap | 8 grapes shared by 2 is _ each | 4
+play: sort | Sharing, Not sharing | Giving a friend half your sandwich=Sharing; Taking all the crayons=Not sharing; Letting someone have a go of your game=Sharing; Hiding the ball=Not sharing; Reading a story to your little sister=Sharing; Grabbing the last biscuit=Not sharing | Is it sharing?
+check: mcq | 10 grapes shared between 2 friends is… | 5 each* | 10 each | 1 each
+check: tf | You can share time and kind words, not just things. | true
+check: mcq | How can sharing feel? | Good for you and your friend* | Always bad | Scary
+home: Share something with someone in your family today.
+skill: sharing
+
+@lesson 2.2 | Taking turns | 🔄 | garden
+hook: There is one swing and three kids. What's fair?
+learn: Taking turns is a kind of sharing.
+learn: Everyone gets a go. Counting or a timer can make it fair.
+learn: Waiting for your turn is hard, but it's fair.
+play: order | Three kids, one swing. Put a fair plan in order. | Agree to take turns; Pick who goes first; Count to 50 for each turn; Swap when the count ends; Start again with the first kid
+check: mcq | What is a fair way to share one swing? | Take turns* | The biggest kid keeps it | Nobody uses it
+check: tf | A timer can help make turns fair. | true
+check: mcq | Your friend has had a long turn. What could you say? | Can I have the next turn, please?* | Get off now! | Nothing, and push them
+home: Play a game with your family where everyone takes turns.
+skill: sharing
+
+@lesson 2.3 | Fair shares | 🍕 | kitchen
+hook: Four friends and one pizza. How do you cut it so it's fair?
+learn: A fair share means everyone gets the same amount.
+learn: Cut a pizza into 4 equal slices, and each friend gets 1.
+learn: If someone is extra hungry, you can talk about it together.
+try: 8 slices shared by 4 is 2 each :: gap | 12 slices shared by 4 is _ each | 3
+play: slider | 20 crackers shared fairly by 4 kids. How many each? | 1 | 10 | 5 | crackers | 0 | 1
+check: gap | 6 cookies shared by 3 is _ each | 2
+check: mcq | What does a fair share mean? | Everyone gets the same* | The fastest gets the most | Grown-ups get none
+check: tf | Talking together helps when sharing is tricky. | true
+home: Help share out a snack fairly in your family.
+skill: fairness
+
+@lesson 2.4 | Special things | 🧸 | home
+hook: Your best teddy is special. Do you have to share it?
+learn: Some things are special to you. It's OK to keep them for yourself.
+learn: You can say, "This one is special, but you can play with this one."
+learn: Sharing should feel kind, not forced.
+play: chat | A friend wants your special teddy | them: Can I take your teddy home? | me: That one is special to me. Want to play with my blocks instead?*/No! Go away!/Fine, keep it forever | them: OK! Can we build a tower? | me: Yes! Let's build it together*/No, they're mine/Build it by yourself
+check: tf | You must share everything, even special things. | false | It's OK to keep special things. Offer something else instead.
+check: mcq | A kind way to say no to sharing? | This one is special, but you can use this one* | Go away! | Grab it back
+check: mcq | Which is a good thing to share? | Toys you don't mind others using* | Your toothbrush | A secret password
+home: Pick a few toys you're happy to share when friends visit.
+skill: sharing
+
+@lesson 2.5 | Sharing food | 🥫 | townhall
+hook: Some families don't have enough food this week. How can we share?
+learn: Food banks collect food and give it to people who need it.
+learn: Families can give tins and packets that won't go off.
+learn: Sharing with people you don't know is a big kind of giving.
+play: tap | Tap the things a food bank could use | 🥫:yes:Tins last a long time; 🍝:yes:Dry pasta keeps well; 🍦:no; 🧃:yes:Unopened boxed drinks keep; 🧸:no; 🥣:yes:Cereal is handy for breakfast; 🍰:no; 🍚:yes:Rice keeps for ages
+check: mcq | What does a food bank do? | Gives food to people who need it* | Keeps money safe | Sells lollies
+check: tf | Tins and dry packets are good to give to a food bank. | true
+check: mcq | Why give food that won't go off? | It keeps until someone needs it* | It tastes nicer | It's heavier
+home: With a grown-up, pick two tins to give to a food bank or collection box.
+skill: giving
+
+@lesson 2.6 | Sharing your skills | 🎨 | garden
+hook: You're great at drawing. How could you share that?
+learn: You can share what you're good at, not just things.
+learn: Teach a friend, help a younger kid, or make a card for someone.
+learn: Sharing a skill costs nothing and can mean a lot.
+play: match | Match each skill to a way to share it | Good at drawing=Make a card for a neighbour; Good at reading=Read to a younger kid; Good at football=Teach a friend to kick; Good at tidying=Help clean up the classroom
+check: mcq | Which is sharing a skill? | Teaching a friend to skip* | Keeping your skipping rope | Hiding your drawing
+check: tf | Sharing a skill can cost nothing at all. | true
+check: mcq | Your little cousin can't tie shoelaces yet. You could… | Show them how* | Laugh at them | Tie them together
+home: Teach someone in your family one thing you're good at.
+skill: kindness
+
 @band builders
 @unit 1 | How charities work | Where donations go
 @unit 2 | Volunteering | Giving your time and skills
@@ -155,6 +229,78 @@ check: mcq | What prize did he win? | The Nobel Peace Prize* | An Olympic medal 
 home: Think of a small business someone could start with $30.
 skill: impact
 
+@lesson 2.1 | What is volunteering? | 🙌 | garden
+hook: Who coaches your sports team? Who runs the beach patrol? Are they paid?
+learn: Volunteering means giving your time to help, without being paid.
+learn: Volunteers run sports clubs, plant trees, coach teams and help at events.
+learn: {nz:Most firefighters in NZ are volunteers, especially in small towns.~au:Many rural firefighters and surf lifesavers in Australia are volunteers.}
+play: tap | Tap the people who are often volunteers | ⚽:yes:Kids' sports coaches are often parents who volunteer; 🌳:yes:Tree-planting groups use volunteers; 🏪:no; 🚒:yes:Many firefighters in small towns are volunteers; 🏄:yes:Surf lifesavers on patrol are volunteers; 🏦:no; 🍲:yes:Community kitchens rely on volunteers
+check: mcq | What is volunteering? | Giving your time to help, without pay* | A paid job | Buying things for charity
+check: tf | Lots of sports clubs are run by volunteers. | true
+check: mcq | Which is volunteering? | Helping at a beach clean-up* | Working in a shop for pay | Playing video games
+home: Ask a grown-up if they've ever volunteered, and what they did.
+skill: volunteering
+
+@lesson 2.2 | Ways kids can help | 🧤 | garden
+hook: You're 11. Can you volunteer?
+learn: Kids can volunteer too, often alongside a grown-up.
+learn: Beach and park clean-ups, planting days, school events and visiting older people with family are all great.
+learn: Some places have age limits for safety, so check first.
+play: sort | Kids with a grown-up, Grown-ups only | Beach clean-up=Kids with a grown-up; Tree planting day=Kids with a grown-up; Driving people to hospital=Grown-ups only; Fighting fires=Grown-ups only; Helping at a school event=Kids with a grown-up; Making cards for {nz:a rest home~au:an aged care home}=Kids with a grown-up | Who can do it?
+check: mcq | Which volunteering suits an 11-year-old? | A beach clean-up with a grown-up* | Driving an ambulance | Running a bank
+check: tf | Some volunteering has age limits for safety. | true
+check: mcq | Before volunteering, you should… | Check with a grown-up and the group* | Just turn up anywhere | Bring a stranger
+home: Find one volunteering activity near you that a kid could join with family.
+skill: volunteering
+
+@lesson 2.3 | Bring your skills | 🛠️ | workshop
+hook: What are you good at? That might be exactly what a group needs.
+learn: Think about what you're good at and what you enjoy.
+learn: Good at drawing? Make posters for an event. Good with animals? Help at a shelter with an adult.
+learn: Using your skills makes volunteering more fun and more helpful.
+play: match | Match each skill to a volunteering idea | Good at art=Posters for a fundraiser; Good with little kids=Helping at a holiday programme; Good at gardening=A community garden; Good with tech=Helping older people with their phones
+check: mcq | Why use your skills when volunteering? | It's more fun and more helpful* | It doesn't matter | So you get paid
+check: tf | You need special training for every kind of volunteering. | false | Many jobs just need willing helpers.
+check: mcq | You love animals. A good idea is… | Helping at an animal shelter with an adult* | Adopting ten dogs | Feeding wild birds lollies
+home: Write down two skills you have and a way to use each one to help.
+skill: volunteering
+
+@lesson 2.4 | Being a good volunteer | ⭐ | garden
+hook: The leader gives you the most boring job at the planting day. What now?
+learn: Turn up when you said, and stay for the time you promised.
+learn: Listen to the leader and follow the safety rules.
+learn: Do the boring jobs too. Every job helps.
+play: path | At a tree-planting day, the leader asks you to carry mulch instead of planting. | Carry the mulch cheerfully => good: The trees need mulch to grow. Every job helps the team. | Sulk and plant trees anyway => bad: You might plant in the wrong spot, and the leader can't trust the plan. | Leave early without telling anyone => bad: The group was counting on you, and leaving without saying isn't safe.
+check: mcq | What makes a good volunteer? | Reliable, safe and willing to do any job* | Only doing the fun jobs | Being the loudest
+check: tf | Following the leader's safety rules matters when volunteering. | true
+check: mcq | The job you're given is boring. You… | Do it well, because it still helps* | Complain loudly | Go home
+home: Do a "boring" job at home and do it really well.
+skill: reliability
+
+@lesson 2.5 | What volunteers get | 🎁 | garden
+hook: Volunteers don't get paid. So why do millions of people do it?
+learn: Volunteers get lots back, even without pay.
+learn: You learn skills, meet people, feel good and help your community.
+learn: Volunteering can look great on a CV later, too.
+play: debate | Is it OK to volunteer partly because it looks good on a CV? | Yes. You still help, and you learn real skills* | No. Only pure kindness counts | Some people say the best volunteering comes from caring about the cause. Most agree that the help matters more than the reason.
+check: mcq | Which is something volunteers get? | New skills and friends* | A big pay cheque | A free car
+check: tf | Volunteering can help your community and you. | true
+check: mcq | A skill you might learn from volunteering? | Teamwork* | How to get paid more | Nothing at all
+home: Ask a volunteer what they get out of it.
+skill: volunteering
+
+@lesson 2.6 | Plan a volunteer day | 🗓️ | townhall
+hook: You want to give a day of the holidays to a good cause. Where do you start?
+learn: Pick a cause, find a group, and check the date and what to bring.
+learn: Go with a grown-up, and let the organisers know you're coming.
+learn: Afterwards, think about what you learned and whether you'd go again.
+play: order | Plan a family volunteer day. Put the steps in order. | Pick a cause you care about; Find a local group; Ask a grown-up to come with you; Sign up and check what to bring; Turn up on time and help; Talk about how it went
+check: mcq | What's the first step? | Pick a cause you care about* | Turn up anywhere | Buy a T-shirt
+check: tf | Telling organisers you're coming helps them plan. | true
+check: mcq | After volunteering, it helps to… | Think about what you learned* | Forget it straight away | Ask for money
+home: Plan a volunteer activity with your family for the next school holidays.
+skill: planning
+
 @band makers
 @unit 1 | Social enterprise | Businesses built to do good
 @unit 2 | Measuring impact | How do you know you helped?
@@ -232,6 +378,80 @@ check: tf | Very cheap clothes can mean very low pay for workers. | true
 check: mcq | What do fair trade labels show? | Producers met standards for pay and conditions* | The clothes are free | The clothes are stolen
 home: Check the label of a piece of clothing and find where it was made.
 skill: fairtrade
+
+@lesson 2.1 | Theory of change | 🗺️ | townhall
+hook: A group gives free breakfast at school. What change do they hope for, and how would it happen?
+learn: A theory of change is the "if this, then that" chain from what you do to the change you want.
+learn: If kids get breakfast, they're less hungry. Then they can focus. Then learning improves.
+learn: Writing out the chain shows which steps you need to check.
+play: build | Build the theory of change for a school breakfast club | Activity: serve free breakfast; Output: 80 kids fed each morning; Short-term outcome: fewer hungry kids in class; Medium-term outcome: better focus and attendance; Long-term impact: better learning
+check: mcq | What is a theory of change? | The chain from what you do to the change you want* | A science theory | A budget
+check: tf | Writing out the chain shows which steps you need to check. | true
+check: mcq | In the breakfast example, which is an outcome? | Better focus in class* | Bowls of cereal served | A volunteer roster
+home: Write a theory of change for something you'd like to fix at school.
+skill: impact
+
+@lesson 2.2 | Before and after | 📏 | townhall
+hook: After a tutoring programme, 70% of kids read at their level. Is that good?
+learn: You can't tell without a baseline: a measure of how things were before.
+learn: If 40% read at their level before, 70% is a big jump. If 68% did, it's tiny.
+learn: Measure the same way before and after, or the comparison isn't fair.
+try: 40% before, 70% after: up 30 points :: gap | 55% before, 80% after: up _ points | 25
+play: slider | A beach had 300 bits of rubbish per 100 m before a campaign, and 120 after. How many fewer is that? | 0 | 300 | 180 | pieces | 5 | 5
+check: mcq | What is a baseline? | A measurement from before you started* | The final result | A type of graph
+check: gap | 200 people came before, 260 after. That's _ more | 60
+check: tf | Measuring in different ways before and after makes the comparison unfair. | true
+home: Pick a habit and measure it for a week before you try to change it.
+skill: impact
+
+@lesson 2.3 | Would it have happened anyway? | 🔬 | townhall
+hook: Reading scores rose 10% at a school with a new programme. They rose 8% at nearby schools without it. What did the programme really do?
+learn: Some change might have happened anyway. Good measurement asks what would have happened without you.
+learn: Comparing with a similar group that didn't get the programme shows the real difference.
+learn: Here, the programme probably added about 2%, not 10%.
+try: Up 10% with it, up 8% without: about 2% from the programme :: gap | Up 15% with it, up 5% without: about _% from the programme | 10
+play: path | Your group gave out free bike helmets, and head injuries in town fell. How do you check it was the helmets? | Compare with a similar town that didn't get helmets => good: If injuries fell there too, something else is going on. That's a fair test. | Assume the helmets did it => bad: Maybe a new bike lane or a rainy year did it. You can't be sure. | Only count the kids who liked their helmets => bad: Liking a helmet tells you nothing about injuries.
+check: mcq | Why use a comparison group? | To see what would have happened anyway* | To make the numbers bigger | To save paper
+check: tf | If things improved after your project, your project must have caused it. | false | Something else might explain it.
+check: gap | Up 12% with the project, up 9% without. The project probably added about _% | 3
+home: Think of something that improved recently. What else might have caused it?
+skill: evidence
+
+@lesson 2.4 | Ask the people you help | 👂 | garden
+hook: A group builds a playground. Nobody uses it. What went wrong?
+learn: The people you're helping know best what they need. Ask them first.
+learn: Surveys, conversations and testing ideas together all help.
+learn: Keep asking afterwards. Feedback shows whether it's really working.
+play: chat | You're planning a project to help older people in your town | them: Hi, I'm from the local seniors' club. What's this about? | me: We'd like to help. What would be most useful for your members?*/We're building you a skate park/We already know what you need | them: Honestly, lots of our members want help using their phones. | me: Could we run a weekly phone help session, and check how it's going?*/Phones are boring, let's do something else/OK, but we're still building the skate park
+check: mcq | Who knows best what a community needs? | The people in that community* | Whoever has the most money | A random website
+check: tf | Asking for feedback after a project helps you check it's working. | true
+check: mcq | Why might nobody use the new playground? | Nobody asked what people wanted* | Playgrounds never work | Bad luck only
+home: Ask a family member what would help them most this week, then do it.
+skill: listening
+
+@lesson 2.5 | Side effects | ⚠️ | garden
+hook: A group ships boxes of free T-shirts to a town overseas. Local clothing sellers lose customers. Help or harm?
+learn: Projects can have side effects nobody planned, good or bad.
+learn: Free goods can hurt local businesses. Short volunteer visits to orphanages can harm children who need steady carers, and many experts warn against them.
+learn: Think ahead, ask local people, and keep watching for harm.
+play: sort | Likely helpful, Watch for harm | Buying from local sellers after a disaster=Likely helpful; Shipping unwanted clothes overseas=Watch for harm; Funding local teachers=Likely helpful; A one-week visit to cuddle orphans=Watch for harm; Asking locals what they need first=Likely helpful; Donating broken old computers=Watch for harm | Sort the ideas
+check: mcq | What's a possible side effect of free imported goods? | Local sellers lose business* | Everyone gets rich | Nothing at all
+check: tf | Helping projects can have side effects nobody planned. | true
+check: mcq | After a disaster, many aid groups ask for… | Money, so they can buy what's needed locally* | Boxes of random items | Old shoes
+home: Find what a recent disaster appeal asked people to give. Was it goods or money?
+skill: impact
+
+@lesson 2.6 | Honest impact stories | 📊 | stage
+hook: A charity's report shows one amazing success story. Is that enough?
+learn: One great story can hide a lot. Good reports share numbers and stories.
+learn: They show what didn't work too, and what they changed.
+learn: Be wary of reports that only show the best bits.
+play: scam | Honest or cherry-picked? | We helped 500 families. 80% said life got easier. Here's what we'll fix=real; Meet Sam, whose life we changed! (No other numbers)=scam; Our pilot didn't work, so we changed it=real; 100% of people loved us (we asked 3 people)=scam; Results checked by an independent evaluator=real | Look for numbers, comparisons and honesty about what didn't work.
+check: mcq | What makes an impact report trustworthy? | Numbers, stories and honesty about failures* | Only happy photos | One famous supporter
+check: tf | A report that admits what didn't work can be more trustworthy. | true
+check: mcq | "100% loved us" from 3 people is a problem because… | The sample is tiny* | 100% is too low | Three is unlucky
+home: Read one charity's annual report. Do they say what didn't work?
+skill: evidence
 
 @band launchers
 @unit 1 | Ethical investing | Putting your money where your values are
@@ -314,3 +534,75 @@ check: gap | 10% of $250 = $_ | 25
 check: tf | Giving time counts too. | true
 home: Pick a giving percentage for your Give jar and tell a grown-up.
 skill: giving
+
+@lesson 2.1 | The charities register | 📚 | townhall
+hook: You want to check a charity is real before you donate. Where do you look?
+learn: {nz:NZ registered charities are listed on the Charities Register, run by Charities Services at the Department of Internal Affairs.~au:Australian charities are listed on the ACNC Charity Register, run by the Australian Charities and Not-for-profits Commission.}
+learn: Registered charities must report every year, and anyone can search the register for free.
+learn: You can see each charity's purpose, who runs it, and its money in and out.
+play: order | Check a charity before you give. Put the steps in order. | Search the charity's name on {nz:the Charities Register~au:the ACNC Charity Register}; Check it's registered and its reports are up to date; Read its purpose; Look at its latest financials; Decide whether to give
+check: mcq | {nz:Where can you check an NZ charity?~au:Where can you check an Australian charity?} | {nz:The Charities Register~au:The ACNC Charity Register}* | A social media comment | A street sign
+check: tf | Anyone can search the charity register for free. | true
+check: mcq | A charity's yearly report shows… | Its money in and out, and its work* | Its staff's home addresses | Nothing useful
+home: Look up a charity you know on {nz:charities.govt.nz~au:acnc.gov.au}.
+skill: governance
+
+@lesson 2.2 | Conflicts of interest | ⚖️ | townhall
+hook: A board member's company wins a big contract from the charity they help run. Problem?
+learn: A conflict of interest is when someone's personal interests could sway their decisions.
+learn: Conflicts happen. Good governance means declaring them and stepping out of the decision.
+learn: Hidden conflicts are where trouble starts.
+play: path | You're on a youth club committee. Your aunt's bakery wants the club's catering contract. | Declare the link and step out of the vote => good: That's how conflicts are handled. The committee can decide fairly. | Vote for your aunt without saying anything => bad: That's a hidden conflict. Even if she's the best, trust is damaged. | Quietly vote against her to look fair => ok: Well meant, but the link is still swaying your vote. Declare it and step out.
+check: mcq | What's a conflict of interest? | When personal interests could sway your decisions* | An argument at a meeting | A competition
+check: tf | Having a conflict of interest is always wrongdoing. | false | Conflicts are normal. Hiding them is the problem.
+check: mcq | The right way to handle a conflict? | Declare it and step out of the decision* | Keep it quiet | Vote twice
+home: Find the conflicts of interest rule in a charity's, club's or council's rules.
+skill: governance
+
+@lesson 2.3 | Reading charity accounts | 📊 | bank
+hook: A charity spends 25% on admin. Is that bad?
+learn: Look at where the income comes from: donations, grants, government contracts or sales.
+learn: Look at where it goes: programmes, fundraising and admin.
+learn: Very low admin isn't always good. Charities need decent staff, systems and audits to do good work.
+play: diff | Two years of a charity's accounts. Tap what changed. | Donations $400,000; Grants $200,000; Programmes $450,000; Admin $90,000; Fundraising $60,000 | Donations $400,000; Grants $50,000; Programmes $300,000; Admin $90,000; Fundraising $60,000
+check: mcq | In the second year, what happened? | Grants fell, so programme spending dropped* | Donations doubled | Admin tripled
+check: tf | The lowest admin spending always means the best charity. | false | Good systems and staff cost money and help charities do good work.
+check: mcq | Which is a source of charity income? | Grants* | Programme spending | Admin costs
+home: Find a charity's income and spending on {nz:the Charities Register~au:the ACNC Charity Register}.
+skill: financials
+
+@lesson 2.4 | Board members' duties | 🏛️ | townhall
+hook: Being on a board sounds like going to meetings. What are you actually responsible for?
+learn: Directors and board members must act honestly, in good faith, and in the organisation's best interests.
+learn: They must take reasonable care, understand the finances and ask hard questions.
+learn: {nz:Company directors' duties are set out in the Companies Act 1993.~au:Company directors' duties are set out in the Corporations Act 2001.} Charity boards have similar duties.
+play: match | Match each duty to an example | Act in good faith=Put the organisation first, not yourself; Take reasonable care=Read the papers before the meeting; Avoid conflicts=Declare your links and step out; Keep proper records=Make sure the accounts are accurate
+check: mcq | What must board members do? | Act honestly, in the organisation's best interests* | Just turn up for the snacks | Agree with the CEO no matter what
+check: tf | Board members should ask hard questions about the finances. | true
+check: mcq | {nz:Which law sets out NZ company directors' duties?~au:Which law sets out Australian company directors' duties?} | {nz:The Companies Act 1993~au:The Corporations Act 2001}* | A sports club newsletter | The school timetable
+home: Ask someone who has been on a board or club committee what the job involves.
+skill: governance
+
+@lesson 2.5 | Whistleblowing | 📣 | townhall
+hook: You work at a charity and see donations paying for a manager's holidays. What can you do?
+learn: Whistleblowing means reporting serious wrongdoing inside an organisation.
+learn: {nz:The Protected Disclosures (Protection of Whistleblowers) Act 2022 protects people who report serious wrongdoing in the right way.~au:Australian law protects many whistleblowers who report misconduct in the right way, for example under the Corporations Act.}
+learn: Write down what you saw. Report it through the proper channel, inside the organisation or to the right authority.
+play: path | You see donation money paying for a manager's personal holidays. | Note the facts and report through the proper channel => good: That's how whistleblower protections are meant to work. | Post it all on social media straight away => bad: You could lose legal protection, and the facts might get twisted. | Say nothing because it's not your job => bad: The wrongdoing carries on, and donors keep being misled.
+check: mcq | What is whistleblowing? | Reporting serious wrongdoing in an organisation* | Refereeing a game | Gossiping about a workmate
+check: tf | The law can protect whistleblowers who report in the right way. | true
+check: mcq | A good first step if you see wrongdoing? | Write down the facts* | Delete the evidence | Confront them in public
+home: Find out who you could report serious wrongdoing to at a workplace or club you know.
+skill: governance
+
+@lesson 2.6 | Red flags | 🚩 | museum
+hook: What warning signs come before an organisation's money goes missing?
+learn: Watch for one person controlling everything, with no one checking.
+learn: Late or missing reports, secret decisions and staff who are scared to speak up are red flags.
+learn: Strong governance spreads power, keeps records and welcomes questions.
+play: sort | Red flag, Good sign | One person approves every payment alone=Red flag; Accounts audited every year=Good sign; Annual report two years late=Red flag; The board meets and asks questions=Good sign; Staff afraid to raise concerns=Red flag; Conflicts declared at each meeting=Good sign | Red flag or good sign?
+check: mcq | Which is a governance red flag? | One person controls the money with no checks* | Yearly audits | Declared conflicts
+check: tf | Good organisations welcome questions from their board and staff. | true
+check: mcq | Why is "two people approve each payment" a good rule? | No one person can misuse the money alone* | It's twice as fast | It's just tradition
+home: Check whether a club you belong to has two people approve its payments.
+skill: governance

@@ -76,3 +76,80 @@ check: tf | 75 minutes is more than an hour. | true
 home: Plan your afternoon with start and finish times.
 skill: time
 
+@lesson 2.1 | Doubling a recipe | 🍪 | kitchen
+hook: Your biscuit recipe makes 12. You need 24. What changes?
+learn: To double a recipe, multiply every ingredient by 2.
+learn: Don't forget the small things, like baking powder and salt.
+learn: Cooking time doesn't always double. Keep checking the food as it cooks.
+try: 1 cup of flour doubled is 2 cups :: gap | 150 g of butter doubled is _ g | 300
+play: match | Double the biscuit recipe | 1 cup flour=2 cups flour; 100 g butter=200 g butter; 1 egg=2 eggs; ½ cup sugar=1 cup sugar
+check: gap | 3 tablespoons of honey doubled is _ tablespoons | 6
+check: tf | When you double a recipe, the cooking time always doubles too. | false | Check the food as it cooks.
+check: mcq | What do you multiply by to double a recipe? | 2* | 10 | ½
+home: Double a simple recipe on paper with a grown-up.
+skill: scaling
+
+@lesson 2.2 | Halving a recipe | 🧁 | kitchen
+hook: A cake recipe uses 3 eggs. You want a half-size cake. How do you halve an egg?
+learn: To halve a recipe, divide every ingredient by 2.
+learn: Odd numbers make halves. Half of 3 eggs is 1½ eggs.
+learn: Beat the egg and use half, or round sensibly and adjust.
+try: 400 g halved is 200 g :: gap | 250 mL halved is _ mL | 125
+play: slider | A recipe needs 3 cups of milk. How many cups for half the recipe? | 0 | 3 | 1.5 | cups | 0 | 0.5
+check: gap | 300 g of pasta halved is _ g | 150
+check: mcq | Half of 3 eggs is… | 1½ eggs* | 3 eggs | 6 eggs
+check: tf | To halve a recipe, divide every ingredient by 2. | true
+home: Halve a recipe on paper and check your maths with a grown-up.
+skill: scaling
+
+@lesson 2.3 | Scale it any size | 🍝 | kitchen
+hook: The recipe serves 4. You're cooking for 6. Now what?
+learn: Scale factor = people you're cooking for ÷ people the recipe serves.
+learn: 6 ÷ 4 = 1.5. Multiply every ingredient by 1.5.
+learn: So 200 g × 1.5 = 300 g.
+try: Serves 4, cooking for 6, so × 1.5 :: gap | Serves 2, cooking for 6, so × _ | 3
+play: gen | scale | 4
+check: gap | A recipe for 4 uses 400 g of rice. For 6 you need _ g | 600
+check: mcq | The recipe serves 4. You're cooking for 2. What's the scale factor? | 0.5* | 2 | 4
+check: tf | To scale a recipe, multiply every ingredient by the same number. | true
+home: Pick a family recipe and scale it for a different number of people.
+skill: scaling
+
+@lesson 2.4 | Cups and spoons | 🥄 | kitchen
+hook: A recipe says 1 tablespoon. Is that any big spoon from the drawer?
+learn: In cooking, a cup is 250 mL and a teaspoon is 5 mL.
+learn: {nz:In New Zealand a tablespoon is 15 mL.~au:In Australia a tablespoon is 20 mL. Some recipes from overseas use 15 mL.}
+learn: Use measuring cups and spoons, not the ones you eat with.
+play: match | Match each measure to its size | 1 cup=250 mL; ½ cup=125 mL; 1 teaspoon=5 mL; 1 tablespoon={nz:15 mL~au:20 mL}
+check: gap | 2 cups = _ mL | 500
+check: mcq | How many mL in one of our tablespoons? | {nz:15~au:20}* | 5 | 250
+check: tf | Measuring spoons are more accurate than eating spoons. | true
+home: Find the measuring cups and spoons in your kitchen.
+skill: measuring
+
+@lesson 2.5 | Grams and kilos | ⚖️ | kitchen
+hook: The recipe says 1.5 kg of potatoes. The scales show grams. How many grams?
+learn: 1 kilogram (kg) = 1,000 grams (g).
+learn: 1 litre (L) = 1,000 millilitres (mL).
+learn: To change kg to g, multiply by 1,000.
+try: 2 kg = 2,000 g :: gap | 1.5 kg = _ g | 1500
+play: match | Match the amounts that are the same | 1 kg=1,000 g; 0.5 kg=500 g; 1 L=1,000 mL; 250 mL=0.25 L; 2.5 kg=2,500 g
+check: gap | 750 mL + 250 mL = _ L | 1
+check: mcq | 3 L is how many mL? | 3,000* | 300 | 30
+check: tf | 500 g is half a kilogram. | true
+home: Read the weights on three packets in the pantry. Change them to kg or g.
+skill: measuring
+
+@lesson 2.6 | Cost per serve | 💲 | kitchen
+hook: Homemade pizza costs $12 and serves 4. Takeaway pizza is $15 and serves 3. Which is cheaper per person?
+learn: Cost per serve = total cost ÷ number of serves.
+learn: $12 ÷ 4 = $3 a serve. $15 ÷ 3 = $5 a serve.
+learn: Cooking at home is often much cheaper per serve.
+try: $12 for 4 serves is $3 each :: gap | $20 for 5 serves is $_ each | 4
+play: price | Which dinner is cheapest per serve? | Homemade pizza:12:4:serves; Takeaway pizza:15:3:serves; Frozen pizza:9:2:serves
+check: gap | Spaghetti costs $9 and serves 6. That's $_ a serve | 1.5
+check: mcq | Soup costs $10 for 5 serves. What's the cost per serve? | $2* | $5 | $50
+check: tf | Cooking at home is often cheaper per serve than takeaways. | true
+home: Work out the cost per serve of one family dinner this week.
+skill: unitprice
+

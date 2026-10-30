@@ -80,3 +80,78 @@ check: tf | The purchase price is the only cost of a car. | false
 home: Ask a grown-up how much their car costs to run each month.
 skill: budget
 
+@lesson 2.1 | The formula | 🧮 | bank
+hook: $1,000 at 5% a year for 3 years. Can you work it out yourself?
+learn: Future value = P × (1 + r)ⁿ.
+learn: P is the starting amount, r is the yearly rate as a decimal, and n is the number of years.
+learn: $1,000 × 1.05³ = $1,000 × 1.157625 = $1,157.63.
+try: $1,000 × 1.1² = $1,210 :: gap | $500 × 1.1² = $_ | 605
+play: compound | Slide through the years for $5,000 at 6% | 5000 | 6 | 10
+check: mcq | In P × (1 + r)ⁿ, what is n? | The number of years* | The rate | The starting amount
+check: gap | $2,000 × 1.05² = $_ | 2205
+check: tf | A 6% rate goes into the formula as 0.06. | true
+home: Use the formula to check a bank's term deposit example.
+skill: compound
+
+@lesson 2.2 | How often it compounds | 📅 | bank
+hook: Bank A pays 6% a year, added yearly. Bank B pays 6% a year, added monthly. Which pays more?
+learn: Compounding more often means interest starts earning interest sooner.
+learn: 6% compounded monthly works out to about 6.17% a year. That's the effective annual rate.
+learn: When comparing accounts, use the effective rate, or make sure both compound the same way.
+try: 12% a year compounded monthly is 1% a month :: gap | 6% a year compounded monthly is _% a month | 0.5
+play: slider | $10,000 at 6% a year, compounded monthly, for one year. About how much interest? | 500 | 700 | 617 | $ | 5 | 1
+check: mcq | Which pays more on $10,000? | 6% compounded monthly* | 6% compounded yearly | They're exactly the same
+check: tf | The effective annual rate lets you compare different compounding periods fairly. | true
+check: gap | 12% a year compounded quarterly is _% a quarter | 3
+home: Find out whether a savings account you know compounds daily, monthly or yearly.
+skill: compound
+
+@lesson 2.3 | Regular deposits | ➕ | bank
+hook: You save $100 a month at 5% a year for 10 years. How much do you end up with?
+learn: Each deposit grows for a different length of time. The early ones grow the most.
+learn: Future value of regular deposits = payment × ((1 + r)ⁿ − 1) ÷ r, with r and n in the same periods.
+learn: $100 a month at 5% a year for 10 years comes to about $15,500, from $12,000 deposited.
+play: order | Sort these $100 deposits from most growth to least by the end of year 10 | The deposit in month 1; The deposit in year 3; The deposit in year 6; The deposit in year 9; The deposit in the final month
+check: mcq | Which deposit has grown the most by year 10? | The first one* | The last one | They've all grown the same
+check: gap | $100 a month for 10 years is $_ deposited | 12000
+check: tf | Regular deposits plus compounding can grow to well over what you put in. | true
+home: Try a savings calculator with $20 a week for 10 years and compare the total with what you put in.
+skill: compound
+
+@lesson 2.4 | Let the spreadsheet do it | 🟩 | workshop
+hook: Spreadsheets can do compound maths for you. Which formula?
+learn: In Excel or Google Sheets: =FV(rate, periods, payment, present value).
+learn: Money you pay in is entered as a negative, so =FV(5%/12, 120, -100, 0) gives about $15,528.
+learn: Or build a table: start in B2, then =B2*(1+$E$1) in B3, copied down. $E$1 holds the rate.
+play: match | Match each part of =FV(5%/12, 120, -100, 0) | 5%/12=The monthly interest rate; 120=The number of months; -100=The monthly deposit; 0=The starting balance
+check: mcq | In =FV(rate, periods, payment, pv), what's "periods"? | How many compounding periods or deposits* | The interest rate | The final answer
+check: tf | In FV, money you pay in is usually entered as a negative. | true
+check: mcq | Why use $E$1 instead of E1 when copying the formula down? | It keeps pointing at the rate cell* | It makes the number bigger | It deletes the cell
+home: Build a 10-year compound growth table in a spreadsheet.
+skill: spreadsheets
+
+@lesson 2.5 | How long to double? | ⌛ | bank
+hook: How many years until $5,000 becomes $10,000 at 7%? The rule of 72 says about 10. Can you get it exactly?
+learn: Solve (1 + r)ⁿ = 2 with logs: n = log 2 ÷ log(1 + r).
+learn: At 7%: 0.301 ÷ 0.0294 ≈ 10.2 years.
+learn: The same idea finds any target: n = log(target ÷ start) ÷ log(1 + r).
+try: Rule of 72 at 8%: about 9 years :: gap | Rule of 72 at 6%: about _ years | 12
+play: slider | Using n = log 2 ÷ log(1 + r), how many years does money take to double at 10%? | 5 | 10 | 7.3 | years | 0.2 | 0.1
+check: mcq | At 7%, about how long does money take to double? | 10 years* | 7 years | 20 years
+check: tf | The rule of 72 is a quick estimate, not an exact answer. | true
+check: gap | Money quadruples after doubling _ times | 2
+home: Work out how long savings would take to double at a bank's current rate.
+skill: compound
+
+@lesson 2.6 | When compounding works against you | 📉 | bank
+hook: Compounding builds wealth. What happens when it runs the other way?
+learn: Debt compounds. Unpaid credit card interest joins the balance, and then that gets charged interest too.
+learn: Inflation compounds. At 3% a year, prices rise by about a third in 10 years.
+learn: Fees compound. A 1% yearly fee can shrink a 40-year balance by around 30%.
+play: compound | A $2,000 credit card balance left unpaid at 21% a year | 2000 | 21 | 5
+check: mcq | At 3% inflation, prices after 10 years are about… | A third higher* | 3% higher | Double
+check: tf | A 1% yearly fee can take a big share of a 40-year balance. | true
+check: gap | Prices rise 10% a year for 2 years. A $100 item now costs $_ | 121
+home: Find the interest rate on a credit card and work out a year's compound interest on $1,000.
+skill: compound
+

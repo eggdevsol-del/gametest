@@ -76,3 +76,78 @@ check: mcq | What did Melanie do after rejections? | Improved her pitch and kept
 home: Think of an everyday problem and an idea that could make it easier.
 skill: grit
 
+@lesson 2.1 | Markup or margin? | 📐 | stall
+hook: You buy a candle for $6 and sell it for $10. Is that 40% or 67%?
+learn: Markup compares profit to cost. $4 profit on a $6 cost is about a 67% markup.
+learn: Margin compares profit to price. $4 profit on a $10 price is a 40% margin.
+learn: Same sale, two numbers. Always say which one you mean.
+try: Cost $5, price $10. Markup = $5 ÷ $5 = 100% :: gap | Cost $8, price $10. Markup = _% | 25
+play: match | Match each sale to its markup | Cost $5, price $10=100%; Cost $10, price $15=50%; Cost $4, price $5=25%; Cost $2, price $8=300%
+check: gap | Cost $20, price $25. Markup = _% | 25
+check: mcq | Cost $6, price $10. What's the margin? | 40%* | 67% | 60%
+check: tf | Markup and margin are always the same number. | false | Markup divides by cost. Margin divides by price.
+home: Find something you could resell. Work out its markup and margin.
+skill: profit
+
+@lesson 2.2 | Cost-plus pricing | ➕ | workshop
+hook: How do many small businesses set prices? They start with cost.
+learn: Cost-plus pricing means adding a set markup to what each item costs you.
+learn: Count every cost: materials, packaging, platform fees and shipping.
+learn: Then check the result against what customers will actually pay.
+try: Cost $4 + 50% markup = $6 :: gap | Cost $12 + 50% markup = $_ | 18
+play: slider | Earrings: $3.20 materials, $0.80 packaging and a $1 platform fee. With a 100% markup, what's the price? | 0 | 20 | 10 | $ | 0.5 | 0.5
+check: gap | Materials $7, packaging $1, fees $2. Total cost = $_ | 10
+check: mcq | What's the risk of forgetting a cost? | Your profit is smaller than you think* | Customers pay more | Nothing
+check: tf | A cost-plus price should still be checked against what customers will pay. | true
+home: List every cost for something you could sell, including the small ones.
+skill: pricing
+
+@lesson 2.3 | Value-based pricing | 💎 | stage
+hook: A custom-painted phone case costs $8 to make. People happily pay $45. Why?
+learn: Value-based pricing sets the price by what the product is worth to the customer.
+learn: Unique, handmade or personalised products can often charge well above cost-plus.
+learn: Research what similar things sell for, and be clear about what makes yours special.
+play: debate | Should you charge $45 for a phone case that costs $8 to make? | Yes, if customers value it at that and you're honest about what it is* | No. You should only ever charge cost plus a little | Some people feel big markups are unfair. Being open about what makes it special lets customers decide.
+check: mcq | What does value-based pricing focus on? | What the product is worth to customers* | Only your costs | The cheapest competitor
+check: tf | Personalised products can often charge more. | true
+check: mcq | A good way to test a value price? | See what similar products sell for* | Guess randomly | Only ask your family
+home: Find a handmade product online and estimate what it costs to make.
+skill: pricing
+
+@lesson 2.4 | Discounts | 🏷️ | stall
+hook: A 20% discount sounds generous. How much of your profit does it eat?
+learn: A discount comes straight off your profit, not your costs.
+learn: Price $10, cost $6, profit $4. A 20% discount takes $2 off, so your profit halves to $2.
+learn: Use discounts on purpose: to clear old stock, reward loyal customers or win new ones.
+try: 20% off $10 = $8 :: gap | 25% off $20 = $_ | 15
+play: gen | percent | 4
+check: mcq | Price $10, cost $6. After 20% off, what's your profit per sale? | $2* | $4 | $8
+check: tf | A 20% discount can cut your profit by much more than 20%. | true
+check: mcq | A sensible reason for a discount? | Clearing old stock* | It's a Tuesday | To lose money on purpose
+home: Find a sale in a shop and work out the discount in dollars.
+skill: discounts
+
+@lesson 2.5 | Price psychology | 🧠 | stall
+hook: $9.99 or $10. Does one cent really change anything?
+learn: Prices ending in .99 can feel cheaper, even though they're almost the same.
+learn: Bundles like "3 for $10" and decoys, a pricey middle option that makes the big one look good, shape choices too.
+learn: Knowing the tricks helps you as a seller and as a shopper.
+play: price | Cinema popcorn. Which is the best value? | Small popcorn:4:100:g; Medium popcorn:7:250:g; Large popcorn:7.5:300:g
+check: mcq | Why do shops use $9.99 instead of $10? | It can feel cheaper* | Coins are heavy | It's the law
+check: tf | A pricey middle option can make the large one look like a bargain. | true
+check: mcq | What's a bundle? | Several items sold together for one price* | A free gift card | A refund
+home: Spot three prices ending in .99 and one bundle deal this week.
+skill: pricing
+
+@lesson 2.6 | Competitor pricing | 🔍 | online
+hook: Three stalls sell candles for $12, $15 and $18. What should yours be?
+learn: Check what competitors charge for similar products.
+learn: You don't have to be cheapest. Be clear about why yours is worth it.
+learn: In a price war, sellers keep cutting until nobody makes money.
+play: path | A new stall nearby sells candles for $8. Yours are $14. | Explain what makes yours better, like longer burn time and natural wax => good: Customers who value quality stay, and you keep your margin. | Cut your price to $7 => bad: Now you barely cover costs, and they might cut again. | Post nasty comments about their candles => bad: Unfair, and it damages your own reputation.
+check: mcq | What's a price war? | Sellers keep cutting prices until nobody profits* | A sale on war films | A fair deal
+check: tf | You always have to be the cheapest to win customers. | false
+check: mcq | Why check competitors' prices? | To see where your price fits* | To copy their logo | To report them
+home: Compare the price of one product at three sellers and decide where you'd price it.
+skill: pricing
+

@@ -76,3 +76,75 @@ check: mcq | What prize did he win? | The Nobel Peace Prize* | An Olympic medal 
 home: Think of a small business someone could start with $30.
 skill: impact
 
+@lesson 2.1 | What is volunteering? | 🙌 | garden
+hook: Who coaches your sports team? Who runs the beach patrol? Are they paid?
+learn: Volunteering means giving your time to help, without being paid.
+learn: Volunteers run sports clubs, plant trees, coach teams and help at events.
+learn: {nz:Most firefighters in NZ are volunteers, especially in small towns.~au:Many rural firefighters and surf lifesavers in Australia are volunteers.}
+play: tap | Tap the people who are often volunteers | ⚽:yes:Kids' sports coaches are often parents who volunteer; 🌳:yes:Tree-planting groups use volunteers; 🏪:no; 🚒:yes:Many firefighters in small towns are volunteers; 🏄:yes:Surf lifesavers on patrol are volunteers; 🏦:no; 🍲:yes:Community kitchens rely on volunteers
+check: mcq | What is volunteering? | Giving your time to help, without pay* | A paid job | Buying things for charity
+check: tf | Lots of sports clubs are run by volunteers. | true
+check: mcq | Which is volunteering? | Helping at a beach clean-up* | Working in a shop for pay | Playing video games
+home: Ask a grown-up if they've ever volunteered, and what they did.
+skill: volunteering
+
+@lesson 2.2 | Ways kids can help | 🧤 | garden
+hook: You're 11. Can you volunteer?
+learn: Kids can volunteer too, often alongside a grown-up.
+learn: Beach and park clean-ups, planting days, school events and visiting older people with family are all great.
+learn: Some places have age limits for safety, so check first.
+play: sort | Kids with a grown-up, Grown-ups only | Beach clean-up=Kids with a grown-up; Tree planting day=Kids with a grown-up; Driving people to hospital=Grown-ups only; Fighting fires=Grown-ups only; Helping at a school event=Kids with a grown-up; Making cards for {nz:a rest home~au:an aged care home}=Kids with a grown-up | Who can do it?
+check: mcq | Which volunteering suits an 11-year-old? | A beach clean-up with a grown-up* | Driving an ambulance | Running a bank
+check: tf | Some volunteering has age limits for safety. | true
+check: mcq | Before volunteering, you should… | Check with a grown-up and the group* | Just turn up anywhere | Bring a stranger
+home: Find one volunteering activity near you that a kid could join with family.
+skill: volunteering
+
+@lesson 2.3 | Bring your skills | 🛠️ | workshop
+hook: What are you good at? That might be exactly what a group needs.
+learn: Think about what you're good at and what you enjoy.
+learn: Good at drawing? Make posters for an event. Good with animals? Help at a shelter with an adult.
+learn: Using your skills makes volunteering more fun and more helpful.
+play: match | Match each skill to a volunteering idea | Good at art=Posters for a fundraiser; Good with little kids=Helping at a holiday programme; Good at gardening=A community garden; Good with tech=Helping older people with their phones
+check: mcq | Why use your skills when volunteering? | It's more fun and more helpful* | It doesn't matter | So you get paid
+check: tf | You need special training for every kind of volunteering. | false | Many jobs just need willing helpers.
+check: mcq | You love animals. A good idea is… | Helping at an animal shelter with an adult* | Adopting ten dogs | Feeding wild birds lollies
+home: Write down two skills you have and a way to use each one to help.
+skill: volunteering
+
+@lesson 2.4 | Being a good volunteer | ⭐ | garden
+hook: The leader gives you the most boring job at the planting day. What now?
+learn: Turn up when you said, and stay for the time you promised.
+learn: Listen to the leader and follow the safety rules.
+learn: Do the boring jobs too. Every job helps.
+play: path | At a tree-planting day, the leader asks you to carry mulch instead of planting. | Carry the mulch cheerfully => good: The trees need mulch to grow. Every job helps the team. | Sulk and plant trees anyway => bad: You might plant in the wrong spot, and the leader can't trust the plan. | Leave early without telling anyone => bad: The group was counting on you, and leaving without saying isn't safe.
+check: mcq | What makes a good volunteer? | Reliable, safe and willing to do any job* | Only doing the fun jobs | Being the loudest
+check: tf | Following the leader's safety rules matters when volunteering. | true
+check: mcq | The job you're given is boring. You… | Do it well, because it still helps* | Complain loudly | Go home
+home: Do a "boring" job at home and do it really well.
+skill: reliability
+
+@lesson 2.5 | What volunteers get | 🎁 | garden
+hook: Volunteers don't get paid. So why do millions of people do it?
+learn: Volunteers get lots back, even without pay.
+learn: You learn skills, meet people, feel good and help your community.
+learn: Volunteering can look great on a CV later, too.
+play: debate | Is it OK to volunteer partly because it looks good on a CV? | Yes. You still help, and you learn real skills* | No. Only pure kindness counts | Some people say the best volunteering comes from caring about the cause. Most agree that the help matters more than the reason.
+check: mcq | Which is something volunteers get? | New skills and friends* | A big pay cheque | A free car
+check: tf | Volunteering can help your community and you. | true
+check: mcq | A skill you might learn from volunteering? | Teamwork* | How to get paid more | Nothing at all
+home: Ask a volunteer what they get out of it.
+skill: volunteering
+
+@lesson 2.6 | Plan a volunteer day | 🗓️ | townhall
+hook: You want to give a day of the holidays to a good cause. Where do you start?
+learn: Pick a cause, find a group, and check the date and what to bring.
+learn: Go with a grown-up, and let the organisers know you're coming.
+learn: Afterwards, think about what you learned and whether you'd go again.
+play: order | Plan a family volunteer day. Put the steps in order. | Pick a cause you care about; Find a local group; Ask a grown-up to come with you; Sign up and check what to bring; Turn up on time and help; Talk about how it went
+check: mcq | What's the first step? | Pick a cause you care about* | Turn up anywhere | Buy a T-shirt
+check: tf | Telling organisers you're coming helps them plan. | true
+check: mcq | After volunteering, it helps to… | Think about what you learned* | Forget it straight away | Ask for money
+home: Plan a volunteer activity with your family for the next school holidays.
+skill: planning
+

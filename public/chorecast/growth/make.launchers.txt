@@ -79,3 +79,77 @@ check: mcq | Where do social enterprise profits often go? | The mission* | Only 
 home: Find a social enterprise near you and what it does.
 skill: impact
 
+@lesson 2.1 | Do I need to register? | 📝 | townhall
+hook: Your weekend business is growing fast. When do you have to register for GST?
+learn: {nz:In NZ you must register for GST once your sales go over $60,000 in 12 months, or are expected to.~au:In Australia you must register for GST once your turnover reaches $75,000 a year, or is expected to.}
+learn: You can register below that if you choose. Then you charge GST and can claim GST back on business costs.
+learn: {nz:Your GST number is usually the same as your IRD number.~au:You'll need an ABN before you register for GST.}
+play: sort | Must register, Doesn't have to | {nz:Expecting $65,000 of sales this year~au:Expecting $80,000 turnover this year}=Must register; {nz:$12,000 of sales from weekend markets~au:$12,000 turnover from weekend markets}=Doesn't have to; {nz:$61,000 of sales in the last 12 months~au:$76,000 turnover in the last 12 months}=Must register; {nz:$40,000 of sales a year, steady~au:$40,000 turnover a year, steady}=Doesn't have to | Does this business have to register?
+check: mcq | {nz:What's the GST registration threshold in NZ?~au:What's the GST registration threshold in Australia?} | {nz:Over $60,000 in 12 months~au:$75,000 a year}* | {nz:$6,000~au:$7,500} | {nz:$600,000~au:$750,000}
+check: tf | You can choose to register for GST even if you're under the threshold. | true
+check: mcq | What can a GST-registered business claim back? | GST on its business costs* | Its income tax | Its rent at home
+home: Read the GST registration page on {nz:ird.govt.nz~au:ato.gov.au}.
+skill: gst
+
+@lesson 2.2 | Working out GST | 🧮 | bank
+hook: A customer pays you {nz:$115~au:$110} including GST. How much of that is yours?
+learn: To add GST, multiply by {nz:1.15~au:1.1}.
+learn: To find the GST inside a GST-inclusive price, {nz:multiply by 3 and divide by 23~au:divide by 11}.
+learn: Always know whether a price includes GST or not.
+try: {nz:$115 including GST has $15 of GST~au:$110 including GST has $10 of GST} :: gap | {nz:$230 including GST has $_ of GST~au:$220 including GST has $_ of GST} | {nz:30~au:20}
+play: gen | gst | 4
+check: gap | {nz:$460 including GST has $_ of GST~au:$440 including GST has $_ of GST} | {nz:60~au:40}
+check: mcq | A price of $200 plus GST is… | {nz:$230~au:$220}* | {nz:$215~au:$210} | $200
+check: tf | A GST-inclusive price already has the GST in it. | true
+home: Take a receipt and check its GST amount with the formula.
+skill: gst
+
+@lesson 2.3 | Tax invoices | 🧾 | bank
+hook: A client asks for a tax invoice. What has to be on it?
+learn: A tax invoice is a record of a sale that shows the GST.
+learn: {nz:NZ calls the required details taxable supply information. For sales over $200 it includes your name and GST number, the date, what you sold, the price and the GST.~au:For sales of $82.50 or more including GST, a tax invoice must show your name and ABN, the date, what you sold, the price and the GST.}
+learn: Number your invoices in order. It makes record keeping much easier.
+play: diff | Your invoice template and the one you sent. Tap what's missing. | Invoice #014; Date 3 May; {nz:GST number 123-456-789~au:ABN 12 345 678 901}; Logo design $400; GST included | Invoice #014; Date missing; {nz:GST number missing~au:ABN missing}; Logo design $400; GST included
+check: mcq | What does a tax invoice show? | The GST on a sale* | Your bank password | Only your home address
+check: tf | Numbering invoices in order helps with record keeping. | true
+check: mcq | Which number goes on your tax invoices? | {nz:Your GST number~au:Your ABN}* | Your phone PIN | Your student ID
+home: Find a tax invoice from a business and spot the required details.
+skill: invoices
+
+@lesson 2.4 | Keeping records | 🗂️ | bank
+hook: The tax office asks about a sale from three years ago. Can you prove it?
+learn: Keep records of every sale and expense: invoices, receipts and bank statements.
+learn: {nz:IRD says to keep business records for at least 7 years.~au:The ATO says to keep business records for 5 years.}
+learn: A separate business bank account and a simple app or spreadsheet make it much easier.
+play: sort | Keep it, Not needed | Receipt for a laptop used for the business=Keep it; Invoices you sent=Keep it; Business bank statements=Keep it; A flyer for a pizza place=Not needed; Receipts for materials=Keep it; Your personal streaming receipt=Not needed | What should a small business keep?
+check: mcq | {nz:How long should NZ businesses keep records?~au:How long should Australian businesses keep records?} | {nz:At least 7 years~au:5 years}* | 1 month | Only until the end of the week
+check: tf | A separate business bank account makes record keeping easier. | true
+check: mcq | Why keep receipts for business costs? | To claim them and back up your numbers* | To decorate the office | Because shops ask you to
+home: Set up a spreadsheet with columns for date, item, money in and money out.
+skill: records
+
+@lesson 2.5 | Filing GST | 📅 | townhall
+hook: You've collected GST all quarter. Now what?
+learn: {nz:GST returns are filed monthly, two-monthly or six-monthly, depending on your business.~au:Most small businesses report GST on a Business Activity Statement (BAS), usually every quarter.}
+learn: You pay the GST you collected, minus the GST you paid on business costs.
+learn: If you paid more GST than you collected, you get a refund.
+try: Collected $1,500, paid $400 on costs, so you pay $1,100 :: gap | Collected $900, paid $300 on costs. You pay $_ | 600
+play: slider | You collected $2,300 of GST and paid $500 of GST on costs. How much do you pay? | 0 | 3000 | 1800 | $ | 0 | 100
+check: mcq | You collected $600 of GST and paid $800 on costs. What happens? | You get a $200 refund* | You pay $1,400 | Nothing
+check: tf | Missing a GST due date can mean penalties. | true
+check: mcq | {nz:How often can NZ businesses file GST returns?~au:What do most small Australian businesses use to report GST?} | {nz:Monthly, two-monthly or six-monthly~au:A Business Activity Statement (BAS)}* | {nz:Once every 10 years~au:A birthday card} | {nz:Never~au:A text message}
+home: Find the next GST due dates on {nz:ird.govt.nz~au:ato.gov.au}.
+skill: gst
+
+@lesson 2.6 | Income tax on your profit | 💼 | bank
+hook: GST is sorted. Is that all the tax you owe?
+learn: No. Your business profit is income, and income tax is due on it.
+learn: Nobody takes tax out for you, so set aside a share of every payment. Many people put aside 20% to 30%.
+learn: {nz:Once your tax bill grows, you may have to pay provisional tax during the year.~au:Once your business income grows, you may have to pay PAYG instalments during the year.}
+play: budget | A client pays you $1,000. Plan where it goes. | 1000 | Tax set-aside=250; Materials=150; Pay yourself=0; Emergency buffer=0 | Software renewal:80
+check: mcq | Why set aside part of each payment? | To cover income tax later* | To buy snacks | Self-employed people never pay tax
+check: tf | Self-employed people don't pay income tax. | false
+check: gap | You earn $2,000 and set aside 25% for tax. That's $_ | 500
+home: Ask someone who is self-employed how they put money aside for tax.
+skill: tax
+

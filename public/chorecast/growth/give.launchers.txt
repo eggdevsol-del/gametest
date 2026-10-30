@@ -80,3 +80,75 @@ check: tf | Giving time counts too. | true
 home: Pick a giving percentage for your Give jar and tell a grown-up.
 skill: giving
 
+@lesson 2.1 | The charities register | 📚 | townhall
+hook: You want to check a charity is real before you donate. Where do you look?
+learn: {nz:NZ registered charities are listed on the Charities Register, run by Charities Services at the Department of Internal Affairs.~au:Australian charities are listed on the ACNC Charity Register, run by the Australian Charities and Not-for-profits Commission.}
+learn: Registered charities must report every year, and anyone can search the register for free.
+learn: You can see each charity's purpose, who runs it, and its money in and out.
+play: order | Check a charity before you give. Put the steps in order. | Search the charity's name on {nz:the Charities Register~au:the ACNC Charity Register}; Check it's registered and its reports are up to date; Read its purpose; Look at its latest financials; Decide whether to give
+check: mcq | {nz:Where can you check an NZ charity?~au:Where can you check an Australian charity?} | {nz:The Charities Register~au:The ACNC Charity Register}* | A social media comment | A street sign
+check: tf | Anyone can search the charity register for free. | true
+check: mcq | A charity's yearly report shows… | Its money in and out, and its work* | Its staff's home addresses | Nothing useful
+home: Look up a charity you know on {nz:charities.govt.nz~au:acnc.gov.au}.
+skill: governance
+
+@lesson 2.2 | Conflicts of interest | ⚖️ | townhall
+hook: A board member's company wins a big contract from the charity they help run. Problem?
+learn: A conflict of interest is when someone's personal interests could sway their decisions.
+learn: Conflicts happen. Good governance means declaring them and stepping out of the decision.
+learn: Hidden conflicts are where trouble starts.
+play: path | You're on a youth club committee. Your aunt's bakery wants the club's catering contract. | Declare the link and step out of the vote => good: That's how conflicts are handled. The committee can decide fairly. | Vote for your aunt without saying anything => bad: That's a hidden conflict. Even if she's the best, trust is damaged. | Quietly vote against her to look fair => ok: Well meant, but the link is still swaying your vote. Declare it and step out.
+check: mcq | What's a conflict of interest? | When personal interests could sway your decisions* | An argument at a meeting | A competition
+check: tf | Having a conflict of interest is always wrongdoing. | false | Conflicts are normal. Hiding them is the problem.
+check: mcq | The right way to handle a conflict? | Declare it and step out of the decision* | Keep it quiet | Vote twice
+home: Find the conflicts of interest rule in a charity's, club's or council's rules.
+skill: governance
+
+@lesson 2.3 | Reading charity accounts | 📊 | bank
+hook: A charity spends 25% on admin. Is that bad?
+learn: Look at where the income comes from: donations, grants, government contracts or sales.
+learn: Look at where it goes: programmes, fundraising and admin.
+learn: Very low admin isn't always good. Charities need decent staff, systems and audits to do good work.
+play: diff | Two years of a charity's accounts. Tap what changed. | Donations $400,000; Grants $200,000; Programmes $450,000; Admin $90,000; Fundraising $60,000 | Donations $400,000; Grants $50,000; Programmes $300,000; Admin $90,000; Fundraising $60,000
+check: mcq | In the second year, what happened? | Grants fell, so programme spending dropped* | Donations doubled | Admin tripled
+check: tf | The lowest admin spending always means the best charity. | false | Good systems and staff cost money and help charities do good work.
+check: mcq | Which is a source of charity income? | Grants* | Programme spending | Admin costs
+home: Find a charity's income and spending on {nz:the Charities Register~au:the ACNC Charity Register}.
+skill: financials
+
+@lesson 2.4 | Board members' duties | 🏛️ | townhall
+hook: Being on a board sounds like going to meetings. What are you actually responsible for?
+learn: Directors and board members must act honestly, in good faith, and in the organisation's best interests.
+learn: They must take reasonable care, understand the finances and ask hard questions.
+learn: {nz:Company directors' duties are set out in the Companies Act 1993.~au:Company directors' duties are set out in the Corporations Act 2001.} Charity boards have similar duties.
+play: match | Match each duty to an example | Act in good faith=Put the organisation first, not yourself; Take reasonable care=Read the papers before the meeting; Avoid conflicts=Declare your links and step out; Keep proper records=Make sure the accounts are accurate
+check: mcq | What must board members do? | Act honestly, in the organisation's best interests* | Just turn up for the snacks | Agree with the CEO no matter what
+check: tf | Board members should ask hard questions about the finances. | true
+check: mcq | {nz:Which law sets out NZ company directors' duties?~au:Which law sets out Australian company directors' duties?} | {nz:The Companies Act 1993~au:The Corporations Act 2001}* | A sports club newsletter | The school timetable
+home: Ask someone who has been on a board or club committee what the job involves.
+skill: governance
+
+@lesson 2.5 | Whistleblowing | 📣 | townhall
+hook: You work at a charity and see donations paying for a manager's holidays. What can you do?
+learn: Whistleblowing means reporting serious wrongdoing inside an organisation.
+learn: {nz:The Protected Disclosures (Protection of Whistleblowers) Act 2022 protects people who report serious wrongdoing in the right way.~au:Australian law protects many whistleblowers who report misconduct in the right way, for example under the Corporations Act.}
+learn: Write down what you saw. Report it through the proper channel, inside the organisation or to the right authority.
+play: path | You see donation money paying for a manager's personal holidays. | Note the facts and report through the proper channel => good: That's how whistleblower protections are meant to work. | Post it all on social media straight away => bad: You could lose legal protection, and the facts might get twisted. | Say nothing because it's not your job => bad: The wrongdoing carries on, and donors keep being misled.
+check: mcq | What is whistleblowing? | Reporting serious wrongdoing in an organisation* | Refereeing a game | Gossiping about a workmate
+check: tf | The law can protect whistleblowers who report in the right way. | true
+check: mcq | A good first step if you see wrongdoing? | Write down the facts* | Delete the evidence | Confront them in public
+home: Find out who you could report serious wrongdoing to at a workplace or club you know.
+skill: governance
+
+@lesson 2.6 | Red flags | 🚩 | museum
+hook: What warning signs come before an organisation's money goes missing?
+learn: Watch for one person controlling everything, with no one checking.
+learn: Late or missing reports, secret decisions and staff who are scared to speak up are red flags.
+learn: Strong governance spreads power, keeps records and welcomes questions.
+play: sort | Red flag, Good sign | One person approves every payment alone=Red flag; Accounts audited every year=Good sign; Annual report two years late=Red flag; The board meets and asks questions=Good sign; Staff afraid to raise concerns=Red flag; Conflicts declared at each meeting=Good sign | Red flag or good sign?
+check: mcq | Which is a governance red flag? | One person controls the money with no checks* | Yearly audits | Declared conflicts
+check: tf | Good organisations welcome questions from their board and staff. | true
+check: mcq | Why is "two people approve each payment" a good rule? | No one person can misuse the money alone* | It's twice as fast | It's just tradition
+home: Check whether a club you belong to has two people approve its payments.
+skill: governance
+

@@ -77,6 +77,80 @@ check: mcq | When is a sale a good deal? | When you needed it anyway* | Always |
 home: Find a sale sign at the shop and work out the new price.
 skill: sales
 
+@lesson 2.1 | O'clock and half past | 🕐 | home
+hook: The long hand points straight up. The short hand points at 3. What time is it?
+learn: A clock has a short hand for hours and a long hand for minutes.
+learn: When the long hand points to 12, it's something o'clock.
+learn: When the long hand points to 6, it's half past.
+play: match | Match each clock to its time | Short hand on 3, long hand on 12=3 o'clock; Short hand on 7, long hand on 12=7 o'clock; Short hand between 4 and 5, long hand on 6=Half past 4; Short hand between 9 and 10, long hand on 6=Half past 9
+check: mcq | The long hand is on 12 and the short hand is on 8. It's… | 8 o'clock* | Half past 8 | 12 o'clock
+check: tf | When the long hand points to 6, it's half past. | true
+check: mcq | Which hand shows the hours? | The short hand* | The long hand | Neither
+home: Find a clock at home. Read it at o'clock and at half past.
+skill: time
+
+@lesson 2.2 | Quarter past and quarter to | 🕒 | home
+hook: Half an hour is half the clock. What is a quarter?
+learn: Quarter past means 15 minutes after the hour. The long hand points to 3.
+learn: Quarter to means 15 minutes before the next hour. The long hand points to 9.
+learn: On a digital clock, quarter past 2 is 2:15. Quarter to 3 is 2:45.
+play: match | Match the words to the digital time | Quarter past 2=2:15; Half past 2=2:30; Quarter to 3=2:45; 3 o'clock=3:00
+check: mcq | Quarter past 5 on a digital clock is… | 5:15* | 5:45 | 5:25
+check: gap | Quarter to 8 is 7:_ | 45
+check: tf | Quarter to 4 is 15 minutes before 4 o'clock. | true
+home: Say "quarter past" or "quarter to" each time you spot one on a clock today.
+skill: time
+
+@lesson 2.3 | Minutes and hours | ⏳ | home
+hook: How many minutes are in one hour?
+learn: There are 60 minutes in an hour.
+learn: Half an hour is 30 minutes. A quarter of an hour is 15 minutes.
+learn: There are 24 hours in a whole day.
+try: 30 minutes + 30 minutes = 60 minutes, which is 1 hour :: gap | 15 + 15 + 15 + 15 = _ minutes | 60
+play: sort | Less than an hour, More than an hour | Brushing teeth=Less than an hour; A night's sleep=More than an hour; Eating a snack=Less than an hour; A school day=More than an hour; Tying shoes=Less than an hour; A long car trip=More than an hour | How long does it take?
+check: gap | Half an hour is _ minutes | 30
+check: mcq | How many hours are in a day? | 24* | 12 | 60
+check: tf | Brushing your teeth takes more than an hour. | false | It takes about 2 minutes.
+home: Time how long it takes you to get dressed in the morning.
+skill: time
+
+@lesson 2.4 | Morning or afternoon? | 🌅 | home
+hook: 7 o'clock can be breakfast time or dinner time. How do we tell?
+learn: Am means the morning, from midnight to midday.
+learn: Pm means the afternoon and night, from midday to midnight.
+learn: Breakfast is around 7 am. Dinner is around 6 pm.
+play: order | Put Saturday in order | Wake up at 7 am; Breakfast at 7:30 am; Sport at 10 am; Lunch at 12:30 pm; Dinner at 6 pm; Bed at 7:30 pm
+check: mcq | You eat breakfast at about… | 7 am* | 7 pm | Midnight
+check: tf | Pm means the morning. | false | Am is the morning. Pm is the afternoon and night.
+check: mcq | Midday is… | 12 o'clock in the middle of the day* | 12 o'clock at night | 6 pm
+home: Write down three things you do in the am and three in the pm.
+skill: time
+
+@lesson 2.5 | How long? | ⏱️ | home
+hook: The movie starts at 2:00 and ends at 3:30. How long is it?
+learn: To find how long, count from the start time to the end time.
+learn: 2:00 to 3:00 is 1 hour. 3:00 to 3:30 is 30 minutes more.
+learn: So the movie is one and a half hours long.
+try: 9:00 to 9:30 is 30 minutes :: gap | 4:00 to 4:15 is _ minutes | 15
+play: gen | time | 3
+check: gap | 10:00 to 11:00 is _ hour | 1
+check: mcq | Swimming starts at 3:00 and ends at 3:45. How long is it? | 45 minutes* | 3 hours | 15 minutes
+check: tf | 1:00 to 2:30 is one and a half hours. | true
+home: Check when your favourite show starts and ends. How long is it?
+skill: time
+
+@lesson 2.6 | Being on time | 🚌 | home
+hook: The school bus comes at 8:15. You're ready at 8:20. Uh oh!
+learn: Being on time means being ready before it starts.
+learn: Look at the clock and plan to be a few minutes early.
+learn: If you might be late, tell a grown-up.
+play: timing | Tap when the clock reaches bus time | Catch the bus! | 8:15
+check: mcq | The bus comes at 8:15. When should you be ready? | 8:10* | 8:20 | 9:00
+check: tf | Being ready a few minutes early helps you be on time. | true
+check: mcq | Your swimming lesson is at 4:00. Which time is late? | 4:10* | 3:55 | 3:50
+home: Pick something you go to each week. Plan what time you need to be ready.
+skill: punctuality
+
 @band builders
 @unit 1 | Percentages | Discounts, tax and tips
 @unit 2 | Recipes and scaling | Cooking for more or fewer people
@@ -154,6 +228,83 @@ check: mcq | How many minutes in 2 hours? | 120* | 100 | 60
 check: tf | 75 minutes is more than an hour. | true
 home: Plan your afternoon with start and finish times.
 skill: time
+
+@lesson 2.1 | Doubling a recipe | 🍪 | kitchen
+hook: Your biscuit recipe makes 12. You need 24. What changes?
+learn: To double a recipe, multiply every ingredient by 2.
+learn: Don't forget the small things, like baking powder and salt.
+learn: Cooking time doesn't always double. Keep checking the food as it cooks.
+try: 1 cup of flour doubled is 2 cups :: gap | 150 g of butter doubled is _ g | 300
+play: match | Double the biscuit recipe | 1 cup flour=2 cups flour; 100 g butter=200 g butter; 1 egg=2 eggs; ½ cup sugar=1 cup sugar
+check: gap | 3 tablespoons of honey doubled is _ tablespoons | 6
+check: tf | When you double a recipe, the cooking time always doubles too. | false | Check the food as it cooks.
+check: mcq | What do you multiply by to double a recipe? | 2* | 10 | ½
+home: Double a simple recipe on paper with a grown-up.
+skill: scaling
+
+@lesson 2.2 | Halving a recipe | 🧁 | kitchen
+hook: A cake recipe uses 3 eggs. You want a half-size cake. How do you halve an egg?
+learn: To halve a recipe, divide every ingredient by 2.
+learn: Odd numbers make halves. Half of 3 eggs is 1½ eggs.
+learn: Beat the egg and use half, or round sensibly and adjust.
+try: 400 g halved is 200 g :: gap | 250 mL halved is _ mL | 125
+play: slider | A recipe needs 3 cups of milk. How many cups for half the recipe? | 0 | 3 | 1.5 | cups | 0 | 0.5
+check: gap | 300 g of pasta halved is _ g | 150
+check: mcq | Half of 3 eggs is… | 1½ eggs* | 3 eggs | 6 eggs
+check: tf | To halve a recipe, divide every ingredient by 2. | true
+home: Halve a recipe on paper and check your maths with a grown-up.
+skill: scaling
+
+@lesson 2.3 | Scale it any size | 🍝 | kitchen
+hook: The recipe serves 4. You're cooking for 6. Now what?
+learn: Scale factor = people you're cooking for ÷ people the recipe serves.
+learn: 6 ÷ 4 = 1.5. Multiply every ingredient by 1.5.
+learn: So 200 g × 1.5 = 300 g.
+try: Serves 4, cooking for 6, so × 1.5 :: gap | Serves 2, cooking for 6, so × _ | 3
+play: gen | scale | 4
+check: gap | A recipe for 4 uses 400 g of rice. For 6 you need _ g | 600
+check: mcq | The recipe serves 4. You're cooking for 2. What's the scale factor? | 0.5* | 2 | 4
+check: tf | To scale a recipe, multiply every ingredient by the same number. | true
+home: Pick a family recipe and scale it for a different number of people.
+skill: scaling
+
+@lesson 2.4 | Cups and spoons | 🥄 | kitchen
+hook: A recipe says 1 tablespoon. Is that any big spoon from the drawer?
+learn: In cooking, a cup is 250 mL and a teaspoon is 5 mL.
+learn: {nz:In New Zealand a tablespoon is 15 mL.~au:In Australia a tablespoon is 20 mL. Some recipes from overseas use 15 mL.}
+learn: Use measuring cups and spoons, not the ones you eat with.
+play: match | Match each measure to its size | 1 cup=250 mL; ½ cup=125 mL; 1 teaspoon=5 mL; 1 tablespoon={nz:15 mL~au:20 mL}
+check: gap | 2 cups = _ mL | 500
+check: mcq | How many mL in one of our tablespoons? | {nz:15~au:20}* | 5 | 250
+check: tf | Measuring spoons are more accurate than eating spoons. | true
+home: Find the measuring cups and spoons in your kitchen.
+skill: measuring
+
+@lesson 2.5 | Grams and kilos | ⚖️ | kitchen
+hook: The recipe says 1.5 kg of potatoes. The scales show grams. How many grams?
+learn: 1 kilogram (kg) = 1,000 grams (g).
+learn: 1 litre (L) = 1,000 millilitres (mL).
+learn: To change kg to g, multiply by 1,000.
+try: 2 kg = 2,000 g :: gap | 1.5 kg = _ g | 1500
+play: match | Match the amounts that are the same | 1 kg=1,000 g; 0.5 kg=500 g; 1 L=1,000 mL; 250 mL=0.25 L; 2.5 kg=2,500 g
+check: gap | 750 mL + 250 mL = _ L | 1
+check: mcq | 3 L is how many mL? | 3,000* | 300 | 30
+check: tf | 500 g is half a kilogram. | true
+home: Read the weights on three packets in the pantry. Change them to kg or g.
+skill: measuring
+
+@lesson 2.6 | Cost per serve | 💲 | kitchen
+hook: Homemade pizza costs $12 and serves 4. Takeaway pizza is $15 and serves 3. Which is cheaper per person?
+learn: Cost per serve = total cost ÷ number of serves.
+learn: $12 ÷ 4 = $3 a serve. $15 ÷ 3 = $5 a serve.
+learn: Cooking at home is often much cheaper per serve.
+try: $12 for 4 serves is $3 each :: gap | $20 for 5 serves is $_ each | 4
+play: price | Which dinner is cheapest per serve? | Homemade pizza:12:4:serves; Takeaway pizza:15:3:serves; Frozen pizza:9:2:serves
+check: gap | Spaghetti costs $9 and serves 6. That's $_ a serve | 1.5
+check: mcq | Soup costs $10 for 5 serves. What's the cost per serve? | $2* | $5 | $50
+check: tf | Cooking at home is often cheaper per serve than takeaways. | true
+home: Work out the cost per serve of one family dinner this week.
+skill: unitprice
 
 @band makers
 @unit 1 | Ratios and rates | Speed, pay rates and mixing
@@ -236,6 +387,82 @@ check: tf | The median is the middle value when sorted. | true
 home: Find the median of your family's ages.
 skill: data
 
+@lesson 2.1 | Probability as a fraction | 🎯 | stage
+hook: A bag has 3 red marbles and 7 blue. You grab one without looking. What's the chance it's red?
+learn: Probability = the number of ways it can happen ÷ the total number of outcomes.
+learn: 3 red out of 10 marbles is 3/10, or 30%.
+learn: The probabilities of all the outcomes add up to 1, or 100%.
+try: 3 red out of 10 = 3/10 = 30% :: gap | 2 green out of 8 marbles = _% | 25
+play: slider | A spinner has 5 equal sections: 1 gold and 4 grey. What's the chance of gold, in %? | 0 | 100 | 20 | % | 0 | 5
+check: gap | A bag has 4 red and 6 blue. The chance of blue is _% | 60
+check: mcq | The chance of red is 30%. What's the chance of not red? | 70%* | 30% | 100%
+check: tf | The probabilities of all the outcomes add up to 1. | true
+home: Put coloured objects in a bag. Predict the chance of each colour, then test it 20 times.
+skill: probability
+
+@lesson 2.2 | Coins have no memory | 🪙 | stage
+hook: A coin lands heads 5 times in a row. Is tails "due" next?
+learn: Each fair coin flip is independent. It doesn't remember what happened before.
+learn: The chance of tails is still 1 in 2, every single time.
+learn: Believing a result is "due" is called the gambler's fallacy. It costs gamblers a lot.
+play: debate | After 5 heads in a row, should you bet big on tails? | No. Each flip is still 50/50* | Yes. Tails is due | Streaks feel meaningful, and if a coin came up heads hundreds of times you might suspect it wasn't fair. For a fair coin, each flip is still 50/50.
+check: mcq | A fair coin lands heads 5 times. The chance of tails next is… | 1 in 2* | Almost certain | 1 in 6
+check: tf | A pokie machine is more likely to pay out after a long losing streak. | false | Each spin is random. Machines don't owe you a win.
+check: mcq | What's the gambler's fallacy? | Thinking a result is "due" after a streak* | A gambling law | A lucky charm
+home: Flip a coin 30 times and record the longest streak. Streaks happen by chance!
+skill: probability
+
+@lesson 2.3 | Two dice | 🎲 | stage
+hook: Roll two dice and add them. Which total comes up most often?
+learn: Two dice have 6 × 6 = 36 possible outcomes.
+learn: There are 6 ways to make 7 (1+6, 2+5, 3+4, 4+3, 5+2, 6+1), so 7 is the most likely total: 6 in 36, or 1 in 6.
+learn: 2 and 12 have only one way each: 1 in 36.
+try: Ways to make 3: 1+2 and 2+1, so 2 out of 36 :: gap | Ways to make 4 with two dice: _ | 3
+play: match | Match each total to the number of ways to roll it | 2=1 way; 3=2 ways; 5=4 ways; 7=6 ways
+check: mcq | What's the most likely total with two dice? | 7* | 12 | 2
+check: gap | Two dice have _ possible outcomes | 36
+check: tf | Rolling 12 is as likely as rolling 7. | false | 12 has 1 way. 7 has 6 ways.
+home: Roll two dice 36 times and tally the totals. Does 7 win?
+skill: probability
+
+@lesson 2.4 | Odds and probability | ⚖️ | stage
+hook: A betting ad says "5 to 1". What's the actual chance?
+learn: Odds against of 5 to 1 mean 5 ways to lose for every 1 way to win.
+learn: That's 1 win out of 6 in total: a probability of 1/6, about 17%.
+learn: Betting odds also include the bookmaker's cut, so they're stacked against you.
+try: Odds of 3 to 1 against = 1 out of 4 = 25% :: gap | Odds of 4 to 1 against = 1 out of _ | 5
+play: match | Match the odds against to the probability | 1 to 1=50%; 3 to 1=25%; 4 to 1=20%; 9 to 1=10%
+check: mcq | Odds of 9 to 1 against mean the chance is… | 10%* | 90% | 9%
+check: tf | Betting odds include a cut for the bookmaker. | true
+check: gap | Odds of 19 to 1 against = _% chance | 5
+home: Next time you see odds in an ad, turn them into a percentage.
+skill: probability
+
+@lesson 2.5 | Lotto odds | 🎟️ | stage
+hook: What's your chance of winning first division with one Lotto ticket? Take a guess.
+learn: {nz:NZ Lotto draws 6 numbers from 40. There are 3,838,380 possible lines, so one line has about a 1 in 3.8 million chance of first division.~au:Saturday Lotto draws 6 numbers from 45. There are 8,145,060 possible games, so one game has about a 1 in 8.1 million chance of first division.}
+learn: Buying 10 lines only makes it 10 chances in millions. Still tiny.
+learn: You have to be 18 to buy Lotto.
+play: slider | Your chance is 1 in 5 million and you play once a week. 5,000,000 ÷ 52 is about how many thousand years of waiting, on average? | 0 | 200 | 96 | thousand years | 10 | 1
+check: mcq | Which is more likely? | Flipping 20 heads in a row, about 1 in a million* | Winning first division with one line | They're the same
+check: tf | Buying a few more lines makes winning likely. | false | It's still millions to one.
+check: mcq | {nz:One line of NZ Lotto has about what chance of first division?~au:One game of Saturday Lotto has about what chance of first division?} | {nz:1 in 3.8 million~au:1 in 8.1 million}* | 1 in 100 | 1 in 1,000
+home: Work out how long you'd expect to wait for a 1 in 1,000,000 chance if you played once a week.
+skill: probability
+
+@lesson 2.6 | Why the house wins | 🏠 | stage
+hook: Casinos have bright lights, music and free drinks. Who pays for it all?
+learn: Every casino game has a house edge: a small advantage built into the rules.
+learn: A roulette wheel with one zero has 37 numbers, but a win pays as if there were 36. The house keeps about 2.7% of every bet on average.
+learn: Pokies are set to pay back less than goes in. The longer you play, the more you lose on average.
+try: 2.7% of $100 = $2.70 :: gap | 2.7% of $1,000 bet over a night = $_ expected loss | 27
+play: scam | Honest fact or gambling hook? | Pokies pay back less than goes in=real; You're due for a win, keep spinning!=scam; Free bonus bet when you deposit $50!=scam; Each spin is random=real; A near miss means you're getting close=scam | Gambling marketing uses near misses, "due" wins and bonuses to keep you playing.
+check: mcq | What's the house edge? | An advantage built into the game for the casino* | The edge of the table | A lucky seat
+check: tf | Over many bets, the house edge means players lose money on average. | true
+check: mcq | A near miss on a pokie means… | Nothing. It's designed to keep you playing* | You'll win soon | The machine is broken
+home: Spot a gambling ad and work out which trick it uses.
+skill: probability
+
 @band launchers
 @unit 1 | Loan maths | Interest, repayments and total cost
 @unit 2 | Compound growth | The formula behind the snowball
@@ -317,3 +544,78 @@ check: gap | $2,600 a year is about $_ a week | 50
 check: tf | The purchase price is the only cost of a car. | false
 home: Ask a grown-up how much their car costs to run each month.
 skill: budget
+
+@lesson 2.1 | The formula | 🧮 | bank
+hook: $1,000 at 5% a year for 3 years. Can you work it out yourself?
+learn: Future value = P × (1 + r)ⁿ.
+learn: P is the starting amount, r is the yearly rate as a decimal, and n is the number of years.
+learn: $1,000 × 1.05³ = $1,000 × 1.157625 = $1,157.63.
+try: $1,000 × 1.1² = $1,210 :: gap | $500 × 1.1² = $_ | 605
+play: compound | Slide through the years for $5,000 at 6% | 5000 | 6 | 10
+check: mcq | In P × (1 + r)ⁿ, what is n? | The number of years* | The rate | The starting amount
+check: gap | $2,000 × 1.05² = $_ | 2205
+check: tf | A 6% rate goes into the formula as 0.06. | true
+home: Use the formula to check a bank's term deposit example.
+skill: compound
+
+@lesson 2.2 | How often it compounds | 📅 | bank
+hook: Bank A pays 6% a year, added yearly. Bank B pays 6% a year, added monthly. Which pays more?
+learn: Compounding more often means interest starts earning interest sooner.
+learn: 6% compounded monthly works out to about 6.17% a year. That's the effective annual rate.
+learn: When comparing accounts, use the effective rate, or make sure both compound the same way.
+try: 12% a year compounded monthly is 1% a month :: gap | 6% a year compounded monthly is _% a month | 0.5
+play: slider | $10,000 at 6% a year, compounded monthly, for one year. About how much interest? | 500 | 700 | 617 | $ | 5 | 1
+check: mcq | Which pays more on $10,000? | 6% compounded monthly* | 6% compounded yearly | They're exactly the same
+check: tf | The effective annual rate lets you compare different compounding periods fairly. | true
+check: gap | 12% a year compounded quarterly is _% a quarter | 3
+home: Find out whether a savings account you know compounds daily, monthly or yearly.
+skill: compound
+
+@lesson 2.3 | Regular deposits | ➕ | bank
+hook: You save $100 a month at 5% a year for 10 years. How much do you end up with?
+learn: Each deposit grows for a different length of time. The early ones grow the most.
+learn: Future value of regular deposits = payment × ((1 + r)ⁿ − 1) ÷ r, with r and n in the same periods.
+learn: $100 a month at 5% a year for 10 years comes to about $15,500, from $12,000 deposited.
+play: order | Sort these $100 deposits from most growth to least by the end of year 10 | The deposit in month 1; The deposit in year 3; The deposit in year 6; The deposit in year 9; The deposit in the final month
+check: mcq | Which deposit has grown the most by year 10? | The first one* | The last one | They've all grown the same
+check: gap | $100 a month for 10 years is $_ deposited | 12000
+check: tf | Regular deposits plus compounding can grow to well over what you put in. | true
+home: Try a savings calculator with $20 a week for 10 years and compare the total with what you put in.
+skill: compound
+
+@lesson 2.4 | Let the spreadsheet do it | 🟩 | workshop
+hook: Spreadsheets can do compound maths for you. Which formula?
+learn: In Excel or Google Sheets: =FV(rate, periods, payment, present value).
+learn: Money you pay in is entered as a negative, so =FV(5%/12, 120, -100, 0) gives about $15,528.
+learn: Or build a table: start in B2, then =B2*(1+$E$1) in B3, copied down. $E$1 holds the rate.
+play: match | Match each part of =FV(5%/12, 120, -100, 0) | 5%/12=The monthly interest rate; 120=The number of months; -100=The monthly deposit; 0=The starting balance
+check: mcq | In =FV(rate, periods, payment, pv), what's "periods"? | How many compounding periods or deposits* | The interest rate | The final answer
+check: tf | In FV, money you pay in is usually entered as a negative. | true
+check: mcq | Why use $E$1 instead of E1 when copying the formula down? | It keeps pointing at the rate cell* | It makes the number bigger | It deletes the cell
+home: Build a 10-year compound growth table in a spreadsheet.
+skill: spreadsheets
+
+@lesson 2.5 | How long to double? | ⌛ | bank
+hook: How many years until $5,000 becomes $10,000 at 7%? The rule of 72 says about 10. Can you get it exactly?
+learn: Solve (1 + r)ⁿ = 2 with logs: n = log 2 ÷ log(1 + r).
+learn: At 7%: 0.301 ÷ 0.0294 ≈ 10.2 years.
+learn: The same idea finds any target: n = log(target ÷ start) ÷ log(1 + r).
+try: Rule of 72 at 8%: about 9 years :: gap | Rule of 72 at 6%: about _ years | 12
+play: slider | Using n = log 2 ÷ log(1 + r), how many years does money take to double at 10%? | 5 | 10 | 7.3 | years | 0.2 | 0.1
+check: mcq | At 7%, about how long does money take to double? | 10 years* | 7 years | 20 years
+check: tf | The rule of 72 is a quick estimate, not an exact answer. | true
+check: gap | Money quadruples after doubling _ times | 2
+home: Work out how long savings would take to double at a bank's current rate.
+skill: compound
+
+@lesson 2.6 | When compounding works against you | 📉 | bank
+hook: Compounding builds wealth. What happens when it runs the other way?
+learn: Debt compounds. Unpaid credit card interest joins the balance, and then that gets charged interest too.
+learn: Inflation compounds. At 3% a year, prices rise by about a third in 10 years.
+learn: Fees compound. A 1% yearly fee can shrink a 40-year balance by around 30%.
+play: compound | A $2,000 credit card balance left unpaid at 21% a year | 2000 | 21 | 5
+check: mcq | At 3% inflation, prices after 10 years are about… | A third higher* | 3% higher | Double
+check: tf | A 1% yearly fee can take a big share of a 40-year balance. | true
+check: gap | Prices rise 10% a year for 2 years. A $100 item now costs $_ | 121
+home: Find the interest rate on a credit card and work out a year's compound interest on $1,000.
+skill: compound

@@ -76,3 +76,77 @@ check: mcq | What two things should a sign say? | What it is and how much* | You
 home: Draw a sign for a pretend stall with a price and a picture.
 skill: marketing
 
+@lesson 2.1 | What could I make? | 💡 | workshop
+hook: You want to sell something at the {nz:school gala~au:school fete}. What could you make?
+learn: Good things to make are things people want, that you can make well.
+learn: Ideas: biscuits, bookmarks, bracelets, painted rocks or seedlings.
+learn: Pick something you can make lots of without it costing too much.
+play: tap | Tap the good things for a kid to make and sell | 🍪:yes:Biscuits are popular and cheap to make; 🔖:yes:Bookmarks are quick to make; 🚗:no; 📿:yes:Bracelets can be made with beads; 🏠:no; 🪨:yes:Painted rocks cost almost nothing; 🌱:yes:Seedlings grow from cheap seeds; 📱:no
+check: mcq | What makes a good thing to sell? | Something people want that you can make well* | Something nobody needs | Something that costs heaps to make
+check: tf | It helps to pick something you can make lots of. | true
+check: mcq | Which would be easiest for a kid to make and sell? | Bookmarks* | A car | A house
+home: Make a list of three things you could make and sell.
+skill: ideas
+
+@lesson 2.2 | Materials | 🧶 | stall
+hook: You want to make bracelets. Beads cost $4. String costs $2. How much to start?
+learn: Materials are the things you use to make your product.
+learn: Add up all your materials to find your costs.
+learn: One bag of beads might make lots of bracelets.
+try: $4 beads + $2 string = $6 :: gap | $3 paint + $2 brushes = $_ | 5
+play: match | Match each product to its materials | Bracelet=Beads and string; Biscuits=Flour, butter and sugar; Painted rock=A rock and paint; Bookmark=Card and pens
+check: gap | Flour $3, butter $5, sugar $2. Total cost $_ | 10
+check: mcq | What are materials? | The things you use to make a product* | The money you earn | The customers
+check: tf | One bag of beads can make many bracelets. | true
+home: Pick one thing to make. Write a list of the materials you'd need.
+skill: costs
+
+@lesson 2.3 | Cost of one | 🏷️ | stall
+hook: $3 of ingredients makes 10 cookies. What does each cookie cost you?
+learn: Share the cost of materials across everything you make.
+learn: $3 for 10 cookies is 30c each.
+learn: Sell each one for more than it costs you, and you make a profit.
+try: $3 makes 10 cookies, so each costs 30c :: gap | $4 makes 8 cookies. Each costs _c | 50
+play: shop | Each cookie costs you 30c. Find a price that makes a good profit. | Cookie | 30 | 300
+check: gap | $6 makes 6 bracelets. Each costs $_ | 1
+check: mcq | Each cookie costs you 30c to make. Which price makes a profit? | 60c* | 30c | 20c
+check: tf | If you sell for less than it costs to make, you lose money. | true
+home: Work out the cost of one thing you could make, with a grown-up.
+skill: profit
+
+@lesson 2.4 | Make it well | ✨ | workshop
+hook: Two cookies. One is burnt and broken. One is golden and neat. Which would you buy?
+learn: People buy things that look good and work well.
+learn: Take your time. Check each one before you sell it.
+learn: If one doesn't turn out, keep it for yourself or try again.
+play: diff | Your plan and your first batch. Tap what went wrong. | Golden cookies; All the same size; Neatly wrapped; Name label | Burnt cookies; All the same size; Neatly wrapped; No label
+check: mcq | What should you do with a broken bracelet? | Fix it or keep it. Don't sell it* | Sell it anyway | Hide it in the pile
+check: tf | Checking each item before you sell it is a good idea. | true
+check: mcq | Why does making it well matter? | People want things that look good and work* | It doesn't | Only the price matters
+home: Make one thing slowly and carefully. Check it like a shop would.
+skill: quality
+
+@lesson 2.5 | Safe food to sell | 🧼 | kitchen
+hook: You're baking cupcakes to sell. What keeps them safe to eat?
+learn: Wash your hands with soap before you start.
+learn: Tie back long hair and keep the bench clean.
+learn: Tell buyers what's in your food, like nuts or eggs. Some people are allergic.
+play: order | Put the baking steps in a safe order | Wash your hands with soap; Clean the bench; Bake with a grown-up; Let the cupcakes cool; Wrap them up; Write a label that says what's in them
+check: mcq | What should you do before you start baking? | Wash your hands* | Lick the spoon | Open the oven
+check: tf | Some people are allergic to foods like nuts or eggs. | true
+check: mcq | Why put a label on food you sell? | So people know what's in it* | To make it heavier | Labels are just for fun
+home: Bake something with a grown-up and make a label that lists what's in it.
+skill: safety
+
+@lesson 2.6 | Ideas that help | 🌟 | workshop
+hook: Good ideas often start with a problem. What problems can you see?
+learn: Lots of inventions started when someone noticed a problem.
+learn: Ask: what bugs people? What could make it easier?
+learn: An idea that helps people might be something they'd pay for.
+play: match | Match each problem to an idea that could help | Lost keys=A bright keyring; Messy pencils=A pencil holder; Bored on rainy days=A puzzle book; Cold hands=Knitted mittens
+check: mcq | Where do many good ideas start? | With a problem* | With a nap | With a big bank
+check: tf | A good product can help people. | true
+check: mcq | What is a good question for finding ideas? | What bugs people?* | What's on TV? | What's the biggest thing?
+home: Find one small problem at home and draw an idea to fix it.
+skill: ideas
+

@@ -76,3 +76,77 @@ check: mcq | When is a sale a good deal? | When you needed it anyway* | Always |
 home: Find a sale sign at the shop and work out the new price.
 skill: sales
 
+@lesson 2.1 | O'clock and half past | 🕐 | home
+hook: The long hand points straight up. The short hand points at 3. What time is it?
+learn: A clock has a short hand for hours and a long hand for minutes.
+learn: When the long hand points to 12, it's something o'clock.
+learn: When the long hand points to 6, it's half past.
+play: match | Match each clock to its time | Short hand on 3, long hand on 12=3 o'clock; Short hand on 7, long hand on 12=7 o'clock; Short hand between 4 and 5, long hand on 6=Half past 4; Short hand between 9 and 10, long hand on 6=Half past 9
+check: mcq | The long hand is on 12 and the short hand is on 8. It's… | 8 o'clock* | Half past 8 | 12 o'clock
+check: tf | When the long hand points to 6, it's half past. | true
+check: mcq | Which hand shows the hours? | The short hand* | The long hand | Neither
+home: Find a clock at home. Read it at o'clock and at half past.
+skill: time
+
+@lesson 2.2 | Quarter past and quarter to | 🕒 | home
+hook: Half an hour is half the clock. What is a quarter?
+learn: Quarter past means 15 minutes after the hour. The long hand points to 3.
+learn: Quarter to means 15 minutes before the next hour. The long hand points to 9.
+learn: On a digital clock, quarter past 2 is 2:15. Quarter to 3 is 2:45.
+play: match | Match the words to the digital time | Quarter past 2=2:15; Half past 2=2:30; Quarter to 3=2:45; 3 o'clock=3:00
+check: mcq | Quarter past 5 on a digital clock is… | 5:15* | 5:45 | 5:25
+check: gap | Quarter to 8 is 7:_ | 45
+check: tf | Quarter to 4 is 15 minutes before 4 o'clock. | true
+home: Say "quarter past" or "quarter to" each time you spot one on a clock today.
+skill: time
+
+@lesson 2.3 | Minutes and hours | ⏳ | home
+hook: How many minutes are in one hour?
+learn: There are 60 minutes in an hour.
+learn: Half an hour is 30 minutes. A quarter of an hour is 15 minutes.
+learn: There are 24 hours in a whole day.
+try: 30 minutes + 30 minutes = 60 minutes, which is 1 hour :: gap | 15 + 15 + 15 + 15 = _ minutes | 60
+play: sort | Less than an hour, More than an hour | Brushing teeth=Less than an hour; A night's sleep=More than an hour; Eating a snack=Less than an hour; A school day=More than an hour; Tying shoes=Less than an hour; A long car trip=More than an hour | How long does it take?
+check: gap | Half an hour is _ minutes | 30
+check: mcq | How many hours are in a day? | 24* | 12 | 60
+check: tf | Brushing your teeth takes more than an hour. | false | It takes about 2 minutes.
+home: Time how long it takes you to get dressed in the morning.
+skill: time
+
+@lesson 2.4 | Morning or afternoon? | 🌅 | home
+hook: 7 o'clock can be breakfast time or dinner time. How do we tell?
+learn: Am means the morning, from midnight to midday.
+learn: Pm means the afternoon and night, from midday to midnight.
+learn: Breakfast is around 7 am. Dinner is around 6 pm.
+play: order | Put Saturday in order | Wake up at 7 am; Breakfast at 7:30 am; Sport at 10 am; Lunch at 12:30 pm; Dinner at 6 pm; Bed at 7:30 pm
+check: mcq | You eat breakfast at about… | 7 am* | 7 pm | Midnight
+check: tf | Pm means the morning. | false | Am is the morning. Pm is the afternoon and night.
+check: mcq | Midday is… | 12 o'clock in the middle of the day* | 12 o'clock at night | 6 pm
+home: Write down three things you do in the am and three in the pm.
+skill: time
+
+@lesson 2.5 | How long? | ⏱️ | home
+hook: The movie starts at 2:00 and ends at 3:30. How long is it?
+learn: To find how long, count from the start time to the end time.
+learn: 2:00 to 3:00 is 1 hour. 3:00 to 3:30 is 30 minutes more.
+learn: So the movie is one and a half hours long.
+try: 9:00 to 9:30 is 30 minutes :: gap | 4:00 to 4:15 is _ minutes | 15
+play: gen | time | 3
+check: gap | 10:00 to 11:00 is _ hour | 1
+check: mcq | Swimming starts at 3:00 and ends at 3:45. How long is it? | 45 minutes* | 3 hours | 15 minutes
+check: tf | 1:00 to 2:30 is one and a half hours. | true
+home: Check when your favourite show starts and ends. How long is it?
+skill: time
+
+@lesson 2.6 | Being on time | 🚌 | home
+hook: The school bus comes at 8:15. You're ready at 8:20. Uh oh!
+learn: Being on time means being ready before it starts.
+learn: Look at the clock and plan to be a few minutes early.
+learn: If you might be late, tell a grown-up.
+play: timing | Tap when the clock reaches bus time | Catch the bus! | 8:15
+check: mcq | The bus comes at 8:15. When should you be ready? | 8:10* | 8:20 | 9:00
+check: tf | Being ready a few minutes early helps you be on time. | true
+check: mcq | Your swimming lesson is at 4:00. Which time is late? | 4:10* | 3:55 | 3:50
+home: Pick something you go to each week. Plan what time you need to be ready.
+skill: punctuality
+
