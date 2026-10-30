@@ -37,7 +37,7 @@ async function open(kidId, opts = {}) {
 }
 function close() {
   if (!root) return; Grow.cleanup.splice(0).forEach(f => f()); try { speechSynthesis.cancel(); } catch (e) {}
-  root.hidden = true; Grow.open = false; document.body.classList.remove('gw-open'); if (Grow.stage) Grow.stage.stop();
+  root.hidden = true; Grow.open = false; document.body.classList.remove('gw-open'); if (Grow.stage) Grow.stage.stop(); if (PathView.ok) PathView.stop(); HowTo.stop();
   C.scheduleRender();
 }
 function back() {
@@ -69,11 +69,15 @@ function hasLesson(kid) { if (!allLessons(bandOf(kid)).length) { loadBand(bandOf
 /* ---------- Rendering ---------- */
 function render() {
   if (!root || !Grow.open) return; const kid = kidNow(); if (!kid) return close();
-  Grow.cleanup.splice(0).forEach(f => f());
+  Grow.cleanup.splice(0).forEach(f => f()); HowTo.stop();
   const v = Grow.view, tree = Grow.tree && TREE[Grow.tree];
   root.style.setProperty('--gh', (tree || (Grow.run && TREE[Grow.run.lesson ? Grow.run.lesson.tree : Grow.run.tree]) || { hue: '#2F6FE4' }).hue);
   root.dataset.view = v;
   if (Grow.stage) Grow.stage.setScene(v === 'tree' && tree ? tree.scene : Grow.run && Grow.run.lesson ? Grow.run.lesson.scene : Grow.run && Grow.run.scene ? Grow.run.scene : 'island');
+  // The tree view is a full-screen island path with its own 3D view, so the stage rests; lesson steps and the
+  // finish screen show their own 3D scene on the stage, and other screens show just the guide.
+  if (Grow.stage) { if (v === 'tree' && PathView.ok) Grow.stage.stop(); else Grow.stage.start(); if (!RUN_VIEWS.includes(v) && v !== 'done') Grow.stage.show(null); }
+  if (v !== 'tree' && PathView.ok) PathView.stop();
   if (v === 'guide') return viewGuide(kid);
   if (v === 'hub') return viewHub(kid);
   if (v === 'tree') return viewTree(kid, tree);
@@ -83,6 +87,7 @@ function render() {
   if (v === 'crewPick') return viewCrewPick(kid);
   if (v === 'crew') return viewCrew();
 }
+const RUN_VIEWS = ['lesson', 'challenge', 'review', 'moment', 'echo', 'story', 'case'];
 const topbar = (kid, title, sub) => `<header class="gw-top"><button class="gw-back" data-g="back" aria-label="Back">${ic('back')}<span>${Grow.view === 'hub' ? 'Back to my sky' : 'Back'}</span></button><div class="gw-tt"><b>${esc(title)}</b>${sub ? `<small>${sub}</small>` : ''}</div>${xpRing(kid)}</header>`;
 function xpRing(kid) {
   const d = dayInfo(kid), p = Math.min(1, d.xp / XP.dayCap), R = 17, L = 2 * Math.PI * R;
@@ -136,6 +141,11 @@ function viewTree(kid, tree) {
   const band = bandOf(kid), pack = packFor(tree.id, band), st = treeStats(kid, tree.id), g = prog(kid);
   const nx = nextIn(kid, tree.id);
   say(nx ? `Next up in ${tree.name}: ${stop(local(nx.title))}` : st.total ? `You’ve done every ${tree.name} lesson for now!` : 'Lessons for this tree are on their way.');
+  if (PathView.ok && pack) {
+    ui.innerHTML = topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`);
+    const cel = Grow.celebrate; Grow.celebrate = null;
+    PathView.show(ui, kid, tree, cel && cel.split('.')[0] === tree.id ? cel : null); return;
+  }
   const units = pack ? pack.units : [];
   const node = (l, idx) => {
     const done = passed(kid, l.id), open = !done && available(kid, l), md = medal(kid, l), side = idx % 4 === 1 ? 'r' : idx % 4 === 3 ? 'l' : 'c';
@@ -225,10 +235,54 @@ function viewRun(kid) {
   else if (step.kind === 'home') { body = `<div class="gw-card home"><span class="gw-big">🏠</span><h3>Take it home</h3><p>${esc(local(l.home || 'Tell a grown-up one thing you learned today.'))}</p><button class="g-go" data-g="finish">Finish lesson</button></div>`; say('Last bit! Try this at home.'); }
   else { body = `<div class="gw-card"><div class="gw-host"></div><div class="gw-fb"></div></div>`; say(step.kind === 'guess' ? 'Have a guess! It’s fine to get it wrong.' : step.kind === 'play' ? 'Game time!' : R.mode === 'review' ? `From “${local(step.title || '')}”` : ''); }
   ui.innerHTML = `${head}<div class="gw-pad gw-runpad">${title}${body}</div>`;
+  if (Grow.stage) { const [kind, data] = stageFor(step, R) || []; Grow.stage.show(kind, data); }
   const host = ui.querySelector('.gw-host');
   if (host) {
-    const ctx = { kid, mode: step.kind, cleanup: Grow.cleanup };
+    const ctx = { kid, mode: step.kind, cleanup: Grow.cleanup, fx: (e, d) => Grow.stage && Grow.stage.fx(e, d) };
     renderItem(step.item, host, ctx, res => answered(kid, step, res));
+    const card = host.closest('.gw-card');
+    if (card && HowTo.has(step.item)) {
+      card.classList.add('has-how'); card.insertAdjacentHTML('afterbegin', '<button class="gw-howbtn" data-g="how" aria-label="How to play">?</button>');
+      if (!HowTo.seen(kid, step.item) && R.mode !== 'challenge') HowTo.run(card, step.item, kid);
+    }
+  }
+}
+// Which 3D scene acts out a step: the lesson's subject for hooks and learn cards, the task itself for questions and games.
+function stageFor(step, R) {
+  const l = R.lesson, it = step.item;
+  if (step.kind === 'hook') return ['hook', { icon: l.icon, text: `${local(l.title)} ${local(l.hook)}` }];
+  if (step.kind === 'learn') return ['idea', { text: `${step.title || ''} ${local(step.text)}`, icon: l ? l.icon : R.cs ? R.cs.icon : R.mode === 'story' ? '📈' : '💡' }];
+  if (step.kind === 'home') return ['home', { text: local((l && l.home) || '') }];
+  if (step.kind === 'intro') return ['intro', { n: R.steps.length - 1 }];
+  if (step.kind === 'decide') return ['fork', { n: step.opts.length }];
+  return it ? itemStage(it) : null;
+}
+function itemStage(it) {
+  const jarC = Object.fromEntries((C.JARS || []).map(j => [j.label, j.color]));
+  switch (it.type) {
+    case 'mcq': return ['mcq', { n: it.opts.length, q: local(it.q) }];
+    case 'island': return ['mcq', { n: 3, q: local(it.q || '') }];
+    case 'tf': return ['tf', { q: local(it.q) }];
+    case 'gap': return ['gap', { q: local(it.q), opts: it.opts }];
+    case 'gen': return ['gap', { q: '' }];
+    case 'sort': return ['sort', { bins: it.bins.map(b => local(b)), colors: it.bins.map((b, i) => (jarC[b] ? parseInt(String(jarC[b]).replace('#', ''), 16) : null)) }];
+    case 'order': case 'build': return ['order', { n: it.steps.length, build: it.type === 'build' }];
+    case 'match': case 'route': return ['match', { n: it.pairs.length, left: it.pairs.map(p => local(p[0])) }];
+    case 'slider': return ['slider', { min: it.min, max: it.max, unit: it.unit, start: it.min }];
+    case 'price': return ['price', { products: it.products }];
+    case 'scam': return ['scam', {}];
+    case 'path': return ['fork', { n: it.choices.length }];
+    case 'debate': return ['debate', {}];
+    case 'tap': return ['tap', { items: it.items.map(x => x.e) }];
+    case 'budget': return ['budget', { cats: it.cats, income: it.income }];
+    case 'market': return ['market', { years: it.years }];
+    case 'compound': return ['snowball', { start: it.start }];
+    case 'shop': return ['shop', { item: it.item }];
+    case 'timing': return ['timing', { zone: it.zone }];
+    case 'diff': return ['docs', { n: it.b.length }];
+    case 'chat': return ['chat', {}];
+    case 'mystery': return ['mystery', { n: it.clues.length }];
+    default: return ['idea', { text: local(it.q || ''), icon: '💡' }];
   }
 }
 function answered(kid, step, res) {
@@ -251,5 +305,5 @@ function decide(i) {
   const R = Grow.run, step = R.steps[R.k], o = step.opts[i], fb = ui.querySelector('.gw-fb');
   ui.querySelectorAll('[data-g="decide"]').forEach((b, j) => { b.disabled = true; if (j === i) b.classList.add('picked'); });
   fb.innerHTML = `<div class="gw-fbin good"><b>You chose: ${esc(local(o.t))}</b>${o.out ? `<span>${esc(local(o.out))}</span>` : ''}</div><button class="g-go" data-g="next">Next</button>`;
-  Sound.pop(); if (Grow.stage) Grow.stage.react('point');
+  Sound.pop(); if (Grow.stage) { Grow.stage.react('point'); Grow.stage.fx('pick', { i }); }
 }

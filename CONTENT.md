@@ -91,6 +91,38 @@ Fields are separated by `|`. Lists inside a field are separated by `;`. Mark rig
 | Island link | `island \| Question \| items, resale or stand` |
 | Generated maths | `gen \| kind \| how many` (kinds: change, add, percent, round, scale, gst, time, compound, unit, split) |
 
+## 3D scenes
+
+Every step of a lesson acts itself out on the guide's 3D island. The scene is built from what you write, so there's nothing extra to add.
+
+- **Hook:** the lesson's emoji spins in on a pedestal, with props for the ideas the hook mentions.
+- **Learn cards:** dollar amounts become coin towers and percentages become slices of a pie. Key words add an animated prop, up to two per card:
+  - save: piggy bank;
+  - plan, budget or goal: clipboard;
+  - price, cost or deal: price tag;
+  - spend or buy: shopping bag;
+  - interest, grow or invest: money plant;
+  - shares, market or fund: chart;
+  - scam or fake: shield;
+  - online, phone or password: phone;
+  - give, help or thank: heart;
+  - work, job or skills: toolbox;
+  - sell, customer or profit: stall;
+  - card, loan or debt: bank card;
+  - tax, council or rules: town hall;
+  - home or bills: house;
+  - food, lunch or recipe: plate of food;
+  - feelings, calm or habits: breathing bubble;
+  - history or barter: old urn;
+  - time, week or year: clock;
+  - read, write or explain: speech bubbles;
+  - compare or unit price: balance scale;
+  - money, pay or earn: coins.
+- **Questions and games:** each kind has a scene that reacts to every move, such as lettered answer plinths, True and False signposts, a number tile, jars to sort into, stepping stones, a balance scale, spending stands, a bar chart or a snowball.
+- **Take it home:** a house and a to-do board.
+
+The first time a kid meets each kind of game, a hand plays it on a made-up example before their turn, so the demo never gives away a lesson's answers.
+
 ## New Zealand and Australia
 
 Wrap anything that differs by country in `{nz:...~au:...}`, for example `{nz:IRD~au:the ATO}` or `{nz:15% GST~au:10% GST}`. A grown-up picks the country in Character Growth settings. Use `~` between the two, because `|` and `;` already split fields.

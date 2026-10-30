@@ -55,6 +55,7 @@ function finish() {
   const [tree, band, unit] = String(itemId).split('.');
   C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: right, total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
   Grow.last = out; Grow.view = 'done'; Grow.cleanup.splice(0).forEach(f => f());
+  if (out.first && l) Grow.celebrate = l.id;
   if ((out.pass && (out.stars === 3 || out.unitDone)) || out.lvlUp) { Sound.fanfare(); FX.rain(['#FFE066', '#fff', '#7CF5B5', '#9BD8FF', '#FF9FC6']); if (Grow.stage) Grow.stage.react('cheer'); }
   else if (out.pass || !('pass' in out)) { Sound.coin(); if (Grow.stage) Grow.stage.react('cheer'); }
   render();
@@ -67,6 +68,7 @@ function viewDone(kid) {
   const sub = isScored ? (o.pass ? `${o.right} of ${o.total} right.${o.first ? ' New skill mastered!' : ''}` : `${o.right} of ${o.total} right. You need 80% to master it. Try again: practice is how brains grow.`) : o.total ? `${o.right} of ${o.total} right.` : '';
   const nx = suggestions(kid, 1)[0];
   say(isScored && !o.pass ? 'So close! Want another go?' : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : 'Great work!');
+  if (Grow.stage) Grow.stage.show('done', { stars: isScored ? o.stars : 3, pass: o.pass !== false });
   ui.innerHTML = `<div class="gw-pad gw-done">${starRow}<h1 class="gw-h1">${head}</h1><p class="gw-p">${sub}</p>
     <div class="gw-xpwin ${o.xp ? '' : 'none'}">${ic('sparkle')} <b class="num">+${o.xp} XP</b>${o.capped ? '<small>You reached today’s XP limit. Learning still counts!</small>' : ''}</div>
     ${o.lvlUp ? `<div class="gw-banner lvl">⬆️ Level ${o.lvlUp}!</div>` : ''}
@@ -124,6 +126,9 @@ function onClick(e) {
     case 'tree': Grow.tree = id; Grow.view = 'tree'; Sound.tap(); return render();
     case 'lesson': { const l = lessonById(id); if (l) { if (!Grow.tree) Grow.tree = l.tree; startLesson(kid, l); } return; }
     case 'locked': Sound.tap(); return C.toast('Finish the lesson before this one to open it.');
+    case 'pathSel': return PathView.ok && PathView.select(+a.dataset.i);
+    case 'how': case 'howAgain': { const R = Grow.run, step = R && R.steps[R.k]; if (step && step.item) HowTo.run(a.closest('.gw-card'), step.item, kid, { again: true }); return; }
+    case 'howSkip': case 'howDone': return HowTo.finish(a.closest('.gw-card'));
     case 'challenge': return startChallenge(kid, id);
     case 'review': return startReview(kid);
     case 'echo': return startEcho(kid);

@@ -7,7 +7,7 @@ body.gw-open{overflow:hidden}
 @media (min-width:900px) and (min-aspect-ratio:5/4){ .gw{grid-template-rows:minmax(0,1fr);grid-template-columns:minmax(300px,40%) minmax(0,1fr)} }
 .gw[data-view=lesson] .gw-stage,.gw[data-view=challenge] .gw-stage,.gw[data-view=review] .gw-stage,.gw[data-view=crew] .gw-stage{min-height:0}
 .gw[data-view=crew]{grid-template-rows:0 minmax(0,1fr)}
-@media (min-width:900px) and (min-aspect-ratio:5/4){ .gw[data-view=crew]{grid-template-columns:0 minmax(0,1fr)} }
+@media (min-width:900px) and (min-aspect-ratio:5/4){ .gw[data-view=crew]{grid-template-rows:minmax(0,1fr);grid-template-columns:0 minmax(0,1fr)} }
 .gw-stage{position:relative;min-height:0;overflow:hidden}
 .gw-cv{position:absolute;inset:0;width:100%;height:100%}
 .gw-say{position:absolute;left:50%;top:max(14px,env(safe-area-inset-top,0px));transform:translate(-50%,-6px) scale(.9);max-width:min(86%,420px);padding:10px 16px;border-radius:18px 18px 18px 6px;background:#fff;color:#0D1530;font:800 15px/1.35 var(--f-round);box-shadow:0 10px 24px -12px rgba(0,0,0,.45);opacity:0;transition:opacity .25s,transform .3s cubic-bezier(.2,1.4,.4,1);pointer-events:none;text-align:center}
