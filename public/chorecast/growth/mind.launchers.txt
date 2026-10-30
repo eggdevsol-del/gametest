@@ -223,3 +223,69 @@ check: mcq | After deciding, it helps to… | Commit, then check in and adjust* 
 home: Think of a decision that turned out badly. Was the way you decided good?
 skill: decisions
 
+@lesson 4.1 | What healthy looks like | 💚 | home
+hook: Relationships come in all kinds. What do healthy ones have in common?
+learn: Healthy relationships have trust, respect, honesty and good communication.
+learn: You both keep your own friends, interests and time.
+learn: Disagreements happen, but they're talked through without fear.
+play: sort | Healthy, Unhealthy | You can see your friends without a fight=Healthy; They check your phone without asking=Unhealthy; You can disagree and talk it through=Healthy; They say who you can hang out with=Unhealthy; You both say sorry when you get it wrong=Healthy; You're scared of how they'll react=Unhealthy | Healthy or unhealthy?
+check: mcq | What's a sign of a healthy relationship? | You can disagree without fear* | They check your phone | They choose your friends
+check: tf | In a healthy relationship, you can keep your own friends. | true
+home: Think about what healthy relationships around you look like.
+skill: relationships
+
+@lesson 4.2 | Consent | ✋ | home
+hook: Consent comes up a lot. What does it actually mean?
+learn: Consent means freely agreeing to something, without pressure, guilt or threats.
+learn: Consent can be changed at any time. Saying yes once doesn't mean yes always.
+learn: Someone who is very drunk, high or asleep can't give consent.
+play: tf | If someone agreed before, they have to agree again. | false | Consent can be withdrawn at any time. Each time counts.
+check: mcq | Which shows consent? | A clear, free yes with no pressure* | Silence | A yes after being pressured
+check: tf | Someone who is asleep can't give consent. | true
+home: Talk with a trusted adult about how people can check in with each other respectfully.
+skill: consent
+
+@lesson 4.3 | Control and red flags | 🚩 | home
+hook: "They only check my phone because they care." Is that true?
+learn: Controlling behaviour isn't care. It's about power.
+learn: Red flags: tracking where you are, checking messages, cutting you off from friends, extreme jealousy and threats.
+learn: Control often starts small and grows. Trust your gut if something feels wrong.
+play: tap | Tap the red flags | 📍:yes:Demands to track your location; 📱:yes:Checks your messages; 🚫:yes:Tries to stop you seeing friends; 💐:no; 🗣️:no; 😡:yes:Extreme jealousy or threats
+check: mcq | What is controlling behaviour about? | Power* | Love | Being helpful
+check: tf | Controlling behaviour often starts small. | true
+home: Find a support line for your country and save the number in your phone.
+skill: relationships
+
+@lesson 4.4 | Money and control | 💳 | bank
+hook: A partner wants to "look after" all your money. Helpful or harmful?
+learn: Financial abuse is when someone controls another person's money to control them.
+learn: Signs include taking your pay, making you ask for money, running up debt in your name or stopping you from working.
+learn: Keep your own account and passwords, and never sign a loan you don't understand.
+play: sort | Fair money teamwork, Financial abuse | Agreeing on a shared budget together=Fair money teamwork; Taking your pay and giving you "pocket money"=Financial abuse; Each keeping your own account=Fair money teamwork; Pressuring you to take out a loan for them=Financial abuse; Talking openly about spending=Fair money teamwork; Stopping you from getting a job=Financial abuse | Fair or abusive?
+check: mcq | Which is financial abuse? | Taking someone's pay and controlling their spending* | Agreeing on a budget together | Keeping separate accounts
+check: tf | You should never sign a loan you don't understand. | true
+home: Make sure your bank passwords are known only to you.
+skill: financial safety
+
+@lesson 4.5 | Supporting a friend | 🫂 | home
+hook: Your friend tells you their partner is controlling them. What do you say?
+learn: Listen without judging. Say you believe them.
+learn: Don't force them to leave. It's their choice, and leaving can be risky.
+learn: Help them find support, and tell an adult or call for help if they're in danger.
+play: chat | A friend opens up to you | them: My partner gets really angry if I see you guys. | me: That sounds really hard. I'm glad you told me*/You're overreacting/Just dump them right now | them: I don't know what to do. | me: You don't have to decide now. Want to look at some support options together?*/That's your problem/I'm telling everyone
+check: mcq | What's the best first response? | Listen and believe them* | Tell them they're overreacting | Post about it
+check: tf | You should force a friend to leave a relationship. | false | Support them. It's their choice, and leaving can be risky.
+home: Talk with a trusted adult about how you'd support a friend.
+skill: support
+
+@lesson 4.6 | Where to get help | ☎️ | home
+hook: Who can you call if you or a friend need help?
+learn: In an emergency, call {nz:111~au:000}.
+learn: {nz:Youthline is 0800 376 633, and you can call or text 1737 any time. Women's Refuge is 0800 733 843.~au:1800RESPECT is 1800 737 732. Kids Helpline is 1800 55 1800 for people up to 25.}
+learn: These services are free and confidential. You can call for yourself or for a friend.
+play: match | Match the situation to where to get help | Someone is in danger right now={nz:111~au:000}; You want to talk to someone any time={nz:1737~au:Kids Helpline}; You're worried about a relationship={nz:Women's Refuge or Youthline~au:1800RESPECT}; You want to talk to a trusted adult nearby=A teacher, counsellor or family member
+check: mcq | What's the emergency number? | {nz:111~au:000}* | 123 | 999
+check: tf | Support lines can help you even if you're calling about a friend. | true
+home: Save a support line number in your phone.
+skill: help seeking
+

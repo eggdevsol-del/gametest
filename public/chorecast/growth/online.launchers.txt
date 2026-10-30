@@ -221,3 +221,70 @@ check: mcq | After cancelling a subscription, check… | That no more charges ar
 home: Find the "download your data" and "delete account" options in an app you use.
 skill: privacy
 
+@lesson 4.1 | Real hustles and red flags | 🧭 | online
+hook: "Earn $500 a day from your phone!" Hustle or scam?
+learn: Real online side hustles include selling things you make, tutoring, design, editing and reselling second-hand goods.
+learn: Red flags: paying to join, recruiting others to earn, or "jobs" receiving parcels or money for strangers.
+learn: Receiving and passing on money for others can make you a money mule, which is a crime.
+play: sort | Real side hustle, Red flag | Selling handmade earrings=Real side hustle; Paying $99 to unlock a "money system"=Red flag; Tutoring maths online=Real side hustle; Receiving payments and forwarding them for a stranger=Red flag; Editing videos for a local business=Real side hustle; Recruiting friends to earn commission on their sign-up fees=Red flag | Real or red flag?
+check: mcq | What's a money mule? | Someone who moves money for criminals* | A farm animal | A savings account
+check: tf | Real jobs make you pay to join. | false | Real jobs pay you, not the other way round.
+home: Look at one online job ad with a grown-up and check it for red flags.
+skill: side hustles
+
+@lesson 4.2 | Platform fees | 🧾 | online
+hook: You did a $100 design job through a freelance platform. Why did you get $80?
+learn: Freelance platforms often take 10% to 20% of what you earn.
+learn: Payment and withdrawal fees can come off too.
+learn: Build fees into your price, or move repeat clients to direct invoices if the platform's rules allow it.
+try: 20% of $100 is $20 :: gap | 20% of $250 is $_ | 50
+play: slider | A platform takes 15% and a $2 withdrawal fee. You earn $200. How much reaches your account? | 150 | 200 | 168 | $ | 2 | 1
+check: gap | A $60 job with a 10% fee pays you $_ | 54
+check: mcq | What should you do about platform fees? | Build them into your price* | Ignore them | Hide them from clients
+home: Look up the fees on a freelance platform with a grown-up.
+skill: pricing
+
+@lesson 4.3 | Price your time | ⏱️ | online
+hook: You want $25 an hour. Should you charge $25 an hour?
+learn: Freelancers pay their own tax and don't get paid for admin, learning or finding clients.
+learn: If only half your time is paid work, you need to charge more to make up for it.
+learn: Add your costs, like software, and set aside money for tax from every payment.
+play: budget | Plan what a $1,000 freelance month needs to cover, in tens of dollars | 100 | Tax set-aside=20; Software and tools=5; Platform fees=10; Savings buffer=0; Pay to yourself=0 | Laptop repair:10
+check: mcq | Why should freelancers charge more than a wage? | They pay their own tax and unpaid admin time* | They're greedy | They have no costs
+check: tf | Setting aside money for tax from every payment helps. | true
+home: Work out with a grown-up what hourly rate you'd need to take home $20 an hour.
+skill: pricing
+
+@lesson 4.4 | Getting paid safely | 🛡️ | online
+hook: A new client sends a cheque for $2,000 more than your fee and asks for the rest back. Lucky?
+learn: Overpayment scams send fake or reversible payments, then ask you to refund the "extra".
+learn: For new clients, ask for a deposit or use the platform's protected payment.
+learn: Send clear invoices with your name, the work, the amount and the due date.
+play: scam | Which client messages are scams? | I overpaid by $2,000. Please send the extra back today=scam; Here's the 50% deposit. Looking forward to the draft=real; Pay $50 for our training kit before you start=scam; Please invoice us when the job's done. We pay within 14 days=real; Use my courier and send your bank login so we can pay you=scam | Real clients pay you. Scammers overpay, ask for fees or want your login.
+check: mcq | What protects you with a new client? | A deposit or protected platform payment* | Sending money first | Sharing your bank login
+check: tf | You should refund an "overpayment" straight away. | false | It's a classic scam. Wait for the bank to confirm, and don't send money back.
+home: Make a simple invoice template with your name, the work, the amount and the due date.
+skill: invoicing
+
+@lesson 4.5 | Tax on side income | 📮 | townhall
+hook: You earned $3,000 from online sales this year. Does the tax office need to know?
+learn: Side income is usually taxable, even if it's small or paid through an app.
+learn: Many platforms now report sellers' income to {nz:IRD~au:the ATO}, so it's best to declare it yourself.
+learn: GST registration is needed once turnover goes over {nz:$60,000~au:$75,000} a year. Below that, it's optional.
+play: path | You earned $3,000 from freelancing this year. | Keep records and declare it to {nz:IRD~au:the ATO} => good: You've done it right, and you can claim your business costs. | Say nothing because it's small => bad: Platforms may report it anyway, and you could owe penalties. | Spend it all and hope => bad: You may still owe tax on it.
+check: mcq | When must you register for GST? | When turnover goes over {nz:$60,000~au:$75,000} a year* | From your first sale | Never
+check: tf | Some platforms report sellers' income to the tax office. | true
+home: Look up "side income" on {nz:ird.govt.nz~au:ato.gov.au} with a grown-up.
+skill: tax
+
+@lesson 4.6 | Reviews and reputation | ⭐ | online
+hook: One bad review is sitting at the top of your profile. What should you do?
+learn: Online, your reviews are your reputation. New clients read them first.
+learn: Reply to bad reviews calmly and professionally. Say what you'll do to fix it.
+learn: Never buy fake reviews. It breaks platform rules and consumer law.
+play: chat | A client left a 2-star review | them: The logo was 3 days late and I had to ask twice. | me: I'm sorry about the delay. That's not my usual standard. I'd like to offer a free extra revision*/That's a lie. You're a terrible client/Whatever, I don't care | them: OK, thanks. That helps. | me: Thanks for your patience. I've added a deadline tracker so it won't happen again*/Can you delete your review now?/Pay me extra for the revision
+check: mcq | How should you reply to a bad review? | Calmly, with what you'll do to fix it* | Angrily | Pay for fake good reviews
+check: tf | Buying fake reviews can break the law. | true
+home: Read how a business replied to a bad review online, with a grown-up. Was it good?
+skill: reputation
+

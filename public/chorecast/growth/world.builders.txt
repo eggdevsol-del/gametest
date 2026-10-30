@@ -221,3 +221,69 @@ check: mcq | {nz:How often does NZ hold a Youth Parliament?~au:What happens at a
 home: Find out if your council or school has a youth council or student council.
 skill: civics
 
+@lesson 4.1 | Children's rights | 🧒 | townhall
+hook: Do kids have rights, or just grown-ups?
+learn: The United Nations agreed the Convention on the Rights of the Child in 1989.
+learn: {nz:New Zealand~au:Australia} signed up to it, promising to protect children's rights.
+learn: Rights include safety, health, education, play and having a say in decisions about you.
+play: sort | A right, A want | Being safe from harm=A right; The newest phone=A want; Going to school=A right; A bigger bedroom=A want; Health care=A right; Designer shoes=A want; Having a say about things that affect you=A right | Right or want?
+check: mcq | When was the Convention on the Rights of the Child agreed? | 1989* | 1789 | 2019
+check: tf | Children have a right to play. | true
+home: Look up the UN Convention on the Rights of the Child with a grown-up and pick your favourite right.
+skill: rights
+
+@lesson 4.2 | Rights come with responsibilities | 🤝 | townhall
+hook: You have a right to be safe. What's your part?
+learn: Rights and responsibilities go together.
+learn: If you have a right to learn, you also have a responsibility not to stop others learning.
+learn: If you have a right to be safe, you have a responsibility to keep others safe too.
+play: match | Match each right to a responsibility | The right to learn=Not disrupting others in class; The right to be safe=Not hurting others; The right to have a say=Listening to others' views; The right to use the park=Looking after it for everyone
+check: mcq | What goes with the right to learn? | Not stopping others from learning* | Doing no homework | Talking all lesson
+check: tf | Rights and responsibilities go together. | true
+home: Talk with a grown-up about a right and a responsibility at your home.
+skill: rights
+
+@lesson 4.3 | A say in decisions | 🙋 | townhall
+hook: Your school is changing the playground. Should kids get a say?
+learn: Kids have a right to share their views on decisions that affect them.
+learn: That doesn't mean always getting your way, but your views should be heard.
+learn: Student councils, surveys and talking to teachers are ways to have your say.
+play: path | Your school is choosing new playground equipment. | Share your ideas through the student council or a survey => good: That's how your views get heard. | Complain to friends but tell no one else => bad: Decision makers won't hear you. | Demand your choice or you'll refuse to play => bad: Having a say isn't the same as always getting your way.
+check: mcq | What does having a say mean? | Your views are heard and considered* | You always get your way | Adults must do what you say
+check: tf | Student councils help kids have a say. | true
+home: Think of one change at school you'd like, and how you could share it.
+skill: civics
+
+@lesson 4.4 | Free speech | 🗣️ | townhall
+hook: Can you say anything you like?
+learn: People have the right to share their opinions, even unpopular ones.
+learn: But there are limits, like threats, hate speech that stirs up hostility against groups of people and lies that damage someone's reputation.
+learn: Free speech also means listening to people you disagree with.
+play: debate | Should people be able to say anything at all, with no limits? | No. Free speech matters, but threats and stirring up hatred cause real harm* | Yes, any words at all should be allowed | Some worry that limits can be used to silence fair opinions, so any limits need to be narrow and clear.
+check: mcq | Which is NOT protected free speech? | A threat to hurt someone* | Disagreeing with a decision | Sharing an opinion
+check: tf | Free speech includes listening to people you disagree with. | true
+home: Talk with a grown-up about a time you disagreed with someone respectfully.
+skill: rights
+
+@lesson 4.5 | Fair treatment | ⚖️ | townhall
+hook: A shop won't let someone in because of their skin colour. Is that allowed?
+learn: Discrimination means treating someone unfairly because of things like race, disability, religion, age or gender.
+learn: The law says this isn't allowed in places like shops, schools and work.
+learn: {nz:The Human Rights Commission~au:The Australian Human Rights Commission} helps people who are treated unfairly.
+play: sort | Fair, Unfair discrimination | A ramp so wheelchair users can get in=Fair; Refusing service because of someone's religion=Unfair discrimination; Running races grouped by age=Fair; Not hiring someone because of their skin colour=Unfair discrimination; A quiet room for kids who need one=Fair; Teasing someone for their accent=Unfair discrimination | Fair or unfair?
+check: mcq | What is discrimination? | Treating someone unfairly because of who they are* | Choosing a sport | Saying no to lollies
+check: tf | There's a Human Rights Commission that helps people treated unfairly. | true
+home: Talk with a grown-up about why some places have ramps, quiet rooms or signs in different languages.
+skill: fairness
+
+@lesson 4.6 | Speaking up | 📢 | townhall
+hook: You see someone being treated unfairly. What can you do?
+learn: If it's safe, you can say "That's not OK" or help the person get away.
+learn: You can tell a trusted adult, like a teacher or parent.
+learn: Speaking up helps others feel safe too.
+play: chat | You see a kid being teased about their lunch | them: Ew, what's that smell? Your food is gross! | me: Hey, that's not OK. Leave them alone*/Ha ha, yeah, gross/Say nothing and look away | them: Whatever, it was just a joke. | me: It's not funny to them. Come sit with us*/OK, it was funny/I'm going to tease them too
+check: mcq | You see someone being treated unfairly. What could you do? | Speak up if it's safe, or tell an adult* | Join in | Film it for social media
+check: tf | Telling a trusted adult is a way to speak up. | true
+home: Practise with a grown-up what you could say if you saw someone being teased.
+skill: courage
+

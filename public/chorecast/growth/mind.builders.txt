@@ -220,3 +220,69 @@ check: mcq | What's a bounce-back kit? | Things that help you recover after a to
 home: Write your own bounce-back kit and keep it in your room.
 skill: resilience
 
+@lesson 4.1 | What good friends do | 🫶 | home
+hook: You have lots of people you know. How do you tell who's a real friend?
+learn: Good friends are kind to you when others aren't around.
+learn: They keep your secrets, unless keeping one would put you in danger.
+learn: They're happy when good things happen to you.
+play: sort | Good friend, Not a good friend | Sticks up for you=Good friend; Laughs at you in front of others=Not a good friend; Keeps your secrets=Good friend; Only talks to you when they want something=Not a good friend; Is happy when you win=Good friend; Tells lies about you=Not a good friend | Good friend or not?
+check: mcq | What does a good friend do? | Sticks up for you* | Laughs at you in front of others | Only talks when they want something
+check: tf | A good friend should keep a secret even if you're in danger. | false | Safety comes first. Tell a trusted adult.
+home: Talk with a grown-up about the qualities of their best friend.
+skill: friendship
+
+@lesson 4.2 | Making new friends | 👋 | home
+hook: You're at a new club and don't know anyone. Where do you start?
+learn: Start small: smile, say hi and ask a question.
+learn: Ask about things they like: "What games do you play?"
+learn: Friendships take time. Keep saying hi.
+play: chat | Starting a chat at a new club | them: Hi. | me: Hi! I'm new. What's your name?*/Whatever/Go away | them: I'm Ari. Are you new to swimming? | me: Yeah! Have you been coming long?*/None of your business/I'm better than you
+check: mcq | What's a good way to start a friendship? | Smile and ask a question* | Ignore everyone | Boast about yourself
+check: tf | Friendships can take time to grow. | true
+home: Think of one question you could ask someone new at school this week.
+skill: friendship
+
+@lesson 4.3 | Friendship fights | ⚡ | home
+hook: You and your friend are fighting about a game. Is the friendship over?
+learn: All friends disagree sometimes. It doesn't mean the friendship is over.
+learn: Cool down first. Then talk about how you each feel.
+learn: Look for a fix you both can live with, or agree to disagree.
+play: path | Your friend says you cheated in a game. You didn't. | Cool down, then calmly explain what happened => good: Calm talk can sort it out. | Yell and storm off => bad: That makes things worse. | Tell everyone your friend is a liar => bad: Spreading it hurts the friendship.
+check: mcq | What should you do first in a fight? | Cool down* | Shout louder | Post about it online
+check: tf | All friends disagree sometimes. | true
+home: Think of a time you disagreed with a friend. What helped fix it?
+skill: conflict
+
+@lesson 4.4 | Not-so-good friends | 🚩 | home
+hook: A "friend" keeps making you feel bad about yourself. What's going on?
+learn: Some people act friendly but are often unkind, bossy or mean behind your back.
+learn: Feeling worried or bad around someone a lot is a sign to step back.
+learn: You can spend time with other friends and talk to a grown-up you trust.
+play: tap | Tap the warning signs of an unkind friendship | 😒:yes:They put you down a lot; 👑:yes:They boss you around; 🗣️:yes:They talk about you behind your back; 🎉:no; 🫂:no; 🔒:yes:They say you can't have other friends
+check: mcq | What can you do if a friend is often unkind? | Spend time with other friends and talk to a grown-up* | Do whatever they say | Keep it secret
+check: tf | Feeling bad around someone a lot can be a warning sign. | true
+home: Talk with a grown-up about how a good friend makes you feel.
+skill: friendship
+
+@lesson 4.5 | Left out | 🥀 | home
+hook: Your group made plans without you. How do you work out what happened?
+learn: Being left out hurts. It's OK to feel sad or upset.
+learn: Sometimes it's a mistake. Sometimes it's on purpose. Find out before you decide.
+learn: Ask calmly, and keep other friendships going too.
+play: mystery | Your friends went to the park without you.; They made the plan in a group chat you're not in.; One friend says, "I thought someone told you!"; They invite you next time. | It was probably a mix-up* | They all hate you | You'll never have friends
+check: mcq | What's a good first step when you feel left out? | Calmly ask what happened* | Decide they hate you | Leave every group
+check: tf | Being left out is sometimes a mistake. | true
+home: Talk with a grown-up about a time you felt left out and what helped.
+skill: friendship
+
+@lesson 4.6 | Online friends | 💻 | online
+hook: Someone you met in a game says they're 11 too. Are they really?
+learn: Online, people can pretend to be anyone. An online friend you've never met may not be who they say.
+learn: Never share your address, school or photos with online-only friends.
+learn: If an online friend asks to meet, or asks you to keep secrets, tell a grown-up.
+play: sort | OK to share, Keep private | Your favourite game=OK to share; Your home address=Keep private; Your favourite colour=OK to share; Your school name=Keep private; A photo of yourself=Keep private; What level you're on=OK to share | OK to share with an online-only friend?
+check: mcq | An online friend asks to meet in person. What should you do? | Tell a grown-up* | Go alone | Keep it secret
+check: tf | Online friends are always who they say they are. | false | People can pretend to be anyone online.
+home: Show a grown-up who you chat with online.
+skill: online safety
+

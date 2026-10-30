@@ -220,3 +220,69 @@ check: mcq | Who can help you with a privacy check-up? | A grown-up* | A strange
 home: Do a privacy check-up on one app this week.
 skill: privacy
 
+@lesson 4.1 | Passphrases | 🔤 | online
+hook: Which is harder to crack: "Fluffy1" or "purple-tiger-pizza-rocket"?
+learn: Long passwords are much harder to crack than short ones.
+learn: A passphrase is four or more random words joined together. It's long and easy to remember.
+learn: Don't use your name, birthday or pet's name. They're easy to guess.
+play: sort | Strong, Weak | purple-tiger-pizza-rocket=Strong; Fluffy1=Weak; 123456=Weak; cactus-moon-blanket-river=Strong; password=Weak; MyName2015=Weak | Strong or weak?
+check: mcq | What makes a password strongest? | Being long and random* | Being your pet's name | Being 123
+check: tf | A passphrase of four random words is strong and easy to remember. | true
+home: Make up a pretend passphrase with a grown-up (don't use it for real).
+skill: passwords
+
+@lesson 4.2 | One password per account | 🔑 | online
+hook: You use the same password for everything. One site gets hacked. What happens?
+learn: When a website is hacked, criminals try the stolen passwords on other sites.
+learn: If you use the same password everywhere, one leak can open all your accounts.
+learn: Use a different password for each account. A password manager can remember them for you.
+play: mystery | You used one password for your game, email and music app.; The game company got hacked.; Next week, someone logged into your email.; Your music app sent a "new login" alert. | The leaked game password was tried on your other accounts* | Your email broke by itself | The music app is haunted
+check: mcq | Why use a different password for each account? | So one leak doesn't open everything* | It's more fun | Websites ask you to
+check: tf | Criminals try stolen passwords on other sites. | true
+home: Ask a grown-up whether they use a password manager.
+skill: passwords
+
+@lesson 4.3 | Turning on 2FA | 🔐 | online
+hook: Your password leaked, but the hacker still can't get in. Why?
+learn: Two-factor authentication, or 2FA, needs your password and a second thing, like a code.
+learn: The code can come from an authenticator app or a text message. Apps are usually safer.
+learn: Turn on 2FA for email first. Email can reset all your other accounts.
+play: order | Turn on two-factor login with a grown-up | Open the account's security settings; Find two-factor or two-step login; Choose an authenticator app or text code; Enter the code to confirm it works; Save the backup codes somewhere safe
+check: mcq | Which account should get 2FA first? | Your email* | A game you never play | A weather app
+check: tf | 2FA means a stolen password alone isn't enough. | true
+home: Check with a grown-up whether 2FA is on for your main accounts.
+skill: security
+
+@lesson 4.4 | Codes are secret | 🤫 | online
+hook: Someone in a game says, "I sent you a code by mistake. Can you tell me what it says?"
+learn: A login code is like a key. Anyone who has it can get into your account.
+learn: Real companies never ask you to tell them a code they sent.
+learn: If someone asks for a code, it's a scam. Don't share it, and tell a grown-up.
+play: scam | Which messages are trying to steal your account? | I sent a code to your phone by mistake. Can you read it to me?=scam; Your code is 482910. Don't share this code with anyone=real; Support team here. Tell us your login code to verify you=scam; You've signed in on a new device. Was this you?=real; Send me your code and I'll give you free skins=scam | Anyone asking for your code is trying to get into your account.
+check: mcq | Someone asks for a login code. What is it? | A scam* | Normal | A prize
+check: tf | Real companies ask you to read out codes they send. | false
+home: Show a grown-up a real login code message and read the warning on it.
+skill: scams
+
+@lesson 4.5 | Passkeys and face unlock | 👤 | online
+hook: Some sites let you log in with your face or fingerprint. Is that safer?
+learn: Passkeys let you sign in with your device's face scan, fingerprint or PIN instead of a password.
+learn: They're very hard to steal with fake websites, because they only work on the real site.
+learn: Keep your device locked, because it's now part of your key.
+play: tf | Passkeys only work on the real website, so fake sites can't steal them. | true | That's a big reason they're safer than passwords.
+check: mcq | What does a passkey use to sign you in? | Your device's face scan, fingerprint or PIN* | Your pet's name | Nothing
+check: tf | With passkeys, keeping your device locked matters even more. | true
+home: Ask a grown-up if any of their accounts use passkeys.
+skill: security
+
+@lesson 4.6 | Lock and log out | 🔒 | online
+hook: You used a library computer and left without logging out. What could happen?
+learn: Anyone can use an account that's still logged in.
+learn: On shared devices, always log out when you finish.
+learn: Lock your own phone or tablet with a code, so others can't get in.
+play: path | You finish using a school computer to check your email. | Log out and close the browser => good: Your account stays safe. | Just walk away => bad: The next person could read or send your emails. | Tell a friend to use your account => bad: They could post or buy things as you.
+check: mcq | What should you do after using a shared computer? | Log out* | Leave it on | Write your password on a note
+check: tf | A screen lock helps keep your device safe. | true
+home: Check that your device has a screen lock, with a grown-up.
+skill: security
+

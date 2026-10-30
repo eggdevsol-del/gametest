@@ -220,6 +220,72 @@ check: mcq | What does the government do with tax money? | Spends it on things w
 home: Ask a grown-up what they think tax should be spent on most.
 skill: civics
 
+@lesson 4.1 | Places we share | 🏞️ | townhall
+hook: Parks, libraries and pools. Who are they for?
+learn: Community places are for everyone to use and enjoy.
+learn: Parks, playgrounds, libraries, pools and halls are all community places.
+learn: Because we share them, we take care of them together.
+play: tap | Tap the community places | 🏞️:yes:A park; 📚:yes:A library; 🏊:yes:A public pool; 🛏️:no; 🚗:no; 🛝:yes:A playground
+check: mcq | Who are community places for? | Everyone* | Only grown-ups | Only one family
+check: tf | We take care of shared places together. | true
+home: Visit a community place near you with a grown-up.
+skill: community
+
+@lesson 4.2 | The library | 📚 | townhall
+hook: You can take home a book for free. How does that work?
+learn: Libraries let you borrow books, then bring them back by a due date.
+learn: Many libraries also have games, computers, events and help with homework.
+learn: Look after borrowed books, so the next person can enjoy them too.
+play: order | Borrow a library book | Get a library card with a grown-up; Choose a book; Check it out at the desk or machine; Read it and keep it safe; Bring it back by the due date
+check: mcq | What do you do when you borrow a book? | Bring it back by the due date* | Keep it for ever | Sell it
+check: tf | Libraries can have games and events too. | true
+home: Visit your library with a grown-up and borrow something new.
+skill: community
+
+@lesson 4.3 | Pool rules | 🏊 | townhall
+hook: The pool has rules on the wall. Why?
+learn: Pool rules keep everyone safe, like "walk, don't run".
+learn: Lifeguards watch the water and help people in trouble.
+learn: Always listen to the lifeguard and swim with a grown-up watching.
+play: path | You're at the pool and want to get to the slide fast. | Walk carefully around the pool => good: Wet floors are slippery, so walking keeps you safe. | Run as fast as you can => bad: You could slip and get hurt. | Push past people in the water => bad: That could hurt someone.
+check: mcq | Who watches the water at a pool? | Lifeguards* | Nobody | The ducks
+check: tf | You should listen to the lifeguard. | true
+home: Read the rules at your local pool with a grown-up.
+skill: safety
+
+@lesson 4.4 | Looking after parks | 🌳 | garden
+hook: There's rubbish under the slide at the park. Whose job is it?
+learn: Councils look after parks, but everyone can help.
+learn: Put rubbish in the bin, or take it home if the bin is full.
+learn: Be gentle with plants, play equipment and animals.
+play: sort | Helps the park, Hurts the park | Putting rubbish in the bin=Helps the park; Breaking branches off trees=Hurts the park; Picking up litter with a grown-up=Helps the park; Drawing on the slide=Hurts the park; Taking rubbish home when the bin is full=Helps the park; Chasing the ducks=Hurts the park | Helps or hurts?
+check: mcq | The bin is full. What should you do with your rubbish? | Take it home* | Leave it on the ground | Throw it in the pond
+check: tf | Everyone can help look after parks. | true
+home: Take a bag to the park with a grown-up and pick up some litter.
+skill: community
+
+@lesson 4.5 | Who pays for it? | 💰 | townhall
+hook: Parks and libraries cost money to run. Who pays?
+learn: Councils pay for many community places using rates. Rates are money people pay for their homes and land.
+learn: The government also uses tax money for things like schools and hospitals.
+learn: When everyone chips in a little, we can all share big things.
+play: match | Match each place to who usually pays for it | The local park=The council; The library=The council; Schools=The government; Hospitals=The government
+check: mcq | What do councils use to pay for parks? | Rates* | Pocket money | Magic
+check: tf | When everyone chips in, we can share big things. | true
+home: Ask a grown-up if they pay rates, or if it's part of their rent.
+skill: tax
+
+@lesson 4.6 | Community events | 🎪 | townhall
+hook: Markets, festivals and fun runs. What makes them special?
+learn: Community events bring people together, like markets, festivals and sports days.
+learn: Lots of them are run by volunteers who give their time.
+learn: You can help too, by joining in or helping with a grown-up.
+play: match | Match each event to what happens there | Farmers' market=People sell fresh food; Fun run=People run or walk together; Library story time=Kids listen to stories; Beach clean-up=People pick up rubbish
+check: mcq | Who runs lots of community events? | Volunteers* | Robots | Nobody
+check: tf | You can help at community events with a grown-up. | true
+home: Find a community event near you with a grown-up.
+skill: community
+
 @band builders
 @unit 1 | Tax and what it pays for | Income tax, GST and public services
 @unit 2 | Local councils | Rates, rubbish and roads
@@ -442,6 +508,72 @@ check: tf | Young people can write to their MP. | true
 check: mcq | {nz:How often does NZ hold a Youth Parliament?~au:What happens at a youth parliament?} | {nz:Every three years~au:Young people debate and vote on bills}* | {nz:Every 50 years~au:Nothing} | {nz:Never~au:Movies are shown}
 home: Find out if your council or school has a youth council or student council.
 skill: civics
+
+@lesson 4.1 | Children's rights | 🧒 | townhall
+hook: Do kids have rights, or just grown-ups?
+learn: The United Nations agreed the Convention on the Rights of the Child in 1989.
+learn: {nz:New Zealand~au:Australia} signed up to it, promising to protect children's rights.
+learn: Rights include safety, health, education, play and having a say in decisions about you.
+play: sort | A right, A want | Being safe from harm=A right; The newest phone=A want; Going to school=A right; A bigger bedroom=A want; Health care=A right; Designer shoes=A want; Having a say about things that affect you=A right | Right or want?
+check: mcq | When was the Convention on the Rights of the Child agreed? | 1989* | 1789 | 2019
+check: tf | Children have a right to play. | true
+home: Look up the UN Convention on the Rights of the Child with a grown-up and pick your favourite right.
+skill: rights
+
+@lesson 4.2 | Rights come with responsibilities | 🤝 | townhall
+hook: You have a right to be safe. What's your part?
+learn: Rights and responsibilities go together.
+learn: If you have a right to learn, you also have a responsibility not to stop others learning.
+learn: If you have a right to be safe, you have a responsibility to keep others safe too.
+play: match | Match each right to a responsibility | The right to learn=Not disrupting others in class; The right to be safe=Not hurting others; The right to have a say=Listening to others' views; The right to use the park=Looking after it for everyone
+check: mcq | What goes with the right to learn? | Not stopping others from learning* | Doing no homework | Talking all lesson
+check: tf | Rights and responsibilities go together. | true
+home: Talk with a grown-up about a right and a responsibility at your home.
+skill: rights
+
+@lesson 4.3 | A say in decisions | 🙋 | townhall
+hook: Your school is changing the playground. Should kids get a say?
+learn: Kids have a right to share their views on decisions that affect them.
+learn: That doesn't mean always getting your way, but your views should be heard.
+learn: Student councils, surveys and talking to teachers are ways to have your say.
+play: path | Your school is choosing new playground equipment. | Share your ideas through the student council or a survey => good: That's how your views get heard. | Complain to friends but tell no one else => bad: Decision makers won't hear you. | Demand your choice or you'll refuse to play => bad: Having a say isn't the same as always getting your way.
+check: mcq | What does having a say mean? | Your views are heard and considered* | You always get your way | Adults must do what you say
+check: tf | Student councils help kids have a say. | true
+home: Think of one change at school you'd like, and how you could share it.
+skill: civics
+
+@lesson 4.4 | Free speech | 🗣️ | townhall
+hook: Can you say anything you like?
+learn: People have the right to share their opinions, even unpopular ones.
+learn: But there are limits, like threats, hate speech that stirs up hostility against groups of people and lies that damage someone's reputation.
+learn: Free speech also means listening to people you disagree with.
+play: debate | Should people be able to say anything at all, with no limits? | No. Free speech matters, but threats and stirring up hatred cause real harm* | Yes, any words at all should be allowed | Some worry that limits can be used to silence fair opinions, so any limits need to be narrow and clear.
+check: mcq | Which is NOT protected free speech? | A threat to hurt someone* | Disagreeing with a decision | Sharing an opinion
+check: tf | Free speech includes listening to people you disagree with. | true
+home: Talk with a grown-up about a time you disagreed with someone respectfully.
+skill: rights
+
+@lesson 4.5 | Fair treatment | ⚖️ | townhall
+hook: A shop won't let someone in because of their skin colour. Is that allowed?
+learn: Discrimination means treating someone unfairly because of things like race, disability, religion, age or gender.
+learn: The law says this isn't allowed in places like shops, schools and work.
+learn: {nz:The Human Rights Commission~au:The Australian Human Rights Commission} helps people who are treated unfairly.
+play: sort | Fair, Unfair discrimination | A ramp so wheelchair users can get in=Fair; Refusing service because of someone's religion=Unfair discrimination; Running races grouped by age=Fair; Not hiring someone because of their skin colour=Unfair discrimination; A quiet room for kids who need one=Fair; Teasing someone for their accent=Unfair discrimination | Fair or unfair?
+check: mcq | What is discrimination? | Treating someone unfairly because of who they are* | Choosing a sport | Saying no to lollies
+check: tf | There's a Human Rights Commission that helps people treated unfairly. | true
+home: Talk with a grown-up about why some places have ramps, quiet rooms or signs in different languages.
+skill: fairness
+
+@lesson 4.6 | Speaking up | 📢 | townhall
+hook: You see someone being treated unfairly. What can you do?
+learn: If it's safe, you can say "That's not OK" or help the person get away.
+learn: You can tell a trusted adult, like a teacher or parent.
+learn: Speaking up helps others feel safe too.
+play: chat | You see a kid being teased about their lunch | them: Ew, what's that smell? Your food is gross! | me: Hey, that's not OK. Leave them alone*/Ha ha, yeah, gross/Say nothing and look away | them: Whatever, it was just a joke. | me: It's not funny to them. Come sit with us*/OK, it was funny/I'm going to tease them too
+check: mcq | You see someone being treated unfairly. What could you do? | Speak up if it's safe, or tell an adult* | Join in | Film it for social media
+check: tf | Telling a trusted adult is a way to speak up. | true
+home: Practise with a grown-up what you could say if you saw someone being teased.
+skill: courage
 
 @band makers
 @unit 1 | Government and voting | How elections and Parliament work
@@ -666,6 +798,73 @@ check: mcq | {nz:Where can NZ consumers take unresolved disputes?~au:Where can A
 home: Write a short, polite complaint letter for a pretend faulty product.
 skill: consumer
 
+@lesson 4.1 | What is GDP? | 📏 | townhall
+hook: The news says the economy grew 0.5%. Grew how?
+learn: GDP, or gross domestic product, is the value of all the goods and services a country produces.
+learn: When GDP grows, the economy is producing more. When it falls, it's shrinking.
+learn: A recession is often defined as GDP falling two quarters in a row.
+play: match | Match each term to its meaning | GDP=The value of everything a country produces; Growth=GDP getting bigger; Recession=GDP falling for two quarters in a row; Quarter=Three months
+check: mcq | What does GDP measure? | The value of goods and services produced* | The number of people | The weather
+check: tf | A recession is often two quarters of falling GDP. | true
+home: Find a news story about GDP with a grown-up.
+skill: economy
+
+@lesson 4.2 | Unemployment | 🧑‍💼 | townhall
+hook: What does it mean when unemployment is 5%?
+learn: Unemployment counts people who want work and are looking, but don't have a job.
+learn: Students not looking for work and retirees don't count as unemployed.
+learn: 5% unemployment means 5 out of every 100 people in the labour force are looking for work.
+play: sort | Counted as unemployed, Not counted | Looking for work but no job=Counted as unemployed; Retired and not looking=Not counted; Full-time student not looking=Not counted; Lost their job and applying for others=Counted as unemployed; Working part-time=Not counted | Unemployed or not?
+check: mcq | Who counts as unemployed? | People looking for work without a job* | Retired people | Full-time students not looking
+check: tf | A retired person counts as unemployed. | false | They're not looking for work.
+home: Look up your country's latest unemployment rate with a grown-up.
+skill: economy
+
+@lesson 4.3 | How it all links | 🔗 | townhall
+hook: Inflation, interest rates and jobs. How do they affect each other?
+learn: When spending booms, businesses hire more and raise prices. Inflation can rise.
+learn: The central bank may raise interest rates to cool spending.
+learn: Slower spending can mean fewer new jobs. Getting the balance right is hard.
+play: order | Follow a boom and cool-down | People and businesses spend a lot; Businesses hire more and raise prices; Inflation rises above target; The central bank raises interest rates; Spending slows and inflation eases
+check: mcq | Why might a central bank raise rates? | To cool spending and bring down inflation* | To make everything cheaper overnight | To hire more people
+check: tf | Slower spending can mean fewer new jobs. | true
+home: Talk with a grown-up about how interest rates affect your family.
+skill: economy
+
+@lesson 4.4 | Real wages | 💵 | townhall
+hook: Your pay went up 3%, but prices went up 5%. Are you better off?
+learn: Real wages compare pay rises with price rises.
+learn: If pay rises 3% and prices rise 5%, your real wage fell about 2%. You can buy less.
+learn: If pay rises faster than prices, real wages grow.
+try: Pay up 4%, prices up 2%, is about 2% better off :: gap | Pay up 6%, prices up 4%, is about _% better off | 2
+play: slider | Pay rises 2% and prices rise 6%. About how much did real wages change, in percent? | -10 | 10 | -4 | % | 1 | 1
+check: gap | Pay up 5%, prices up 3%, is about _% better off | 2
+check: mcq | Pay rises 3%, prices rise 5%. What happened to real wages? | They fell* | They rose | They stayed the same
+home: Ask a grown-up whether their pay has kept up with prices.
+skill: economy
+
+@lesson 4.5 | When a recession hits | 🌧️ | townhall
+hook: The country is in a recession. What does that mean for families?
+learn: In a recession, businesses sell less, some cut jobs and unemployment rises.
+learn: Governments may spend more on support, and central banks often cut interest rates.
+learn: Families with emergency savings and steady habits cope better.
+play: path | A recession starts and your family worries about jobs. | Keep building savings and cut spending you don't need => good: That gives a buffer if hours or jobs are cut. | Take out a big loan for a holiday => bad: That adds debt when income is uncertain. | Panic-sell every investment => bad: That can lock in losses.
+check: mcq | What often rises in a recession? | Unemployment* | Business sales | Hiring
+check: tf | Emergency savings help families cope in a recession. | true
+home: Talk with a grown-up about how your family would handle a tough time.
+skill: economy
+
+@lesson 4.6 | Reading economic news | 📰 | townhall
+hook: "Economy shrinks!" The headline sounds scary. What does it really say?
+learn: Look for the actual number. "Shrinks 0.1%" is very different from "shrinks 5%".
+learn: Check the time period: one quarter, or a whole year?
+learn: Compare it with past numbers and forecasts, not just the headline.
+play: diff | A headline and the full facts. Tap what the facts add. | Economy shrinks!; Jobs crisis!; Prices soar! | GDP fell 0.1% in the last quarter; Unemployment rose from 4.9% to 5.1%; Inflation was 3.2% over the year, down from 3.5%
+check: mcq | What should you check in an economic headline? | The actual number and time period* | Only the headline | The font
+check: tf | A headline can make a small change sound big. | true
+home: Find an economic headline with a grown-up and check the real numbers in the story.
+skill: media literacy
+
 @band launchers
 @unit 1 | Tax systems | {nz:IRD, PAYE and tax returns~au:The ATO, PAYG and tax returns}
 @unit 2 | Law for young adults | Contracts, tenancy and your rights
@@ -886,3 +1085,70 @@ check: tf | You can contact your MP between elections. | true
 check: mcq | Which is a way to take part between elections? | Making a submission* | Ignoring everything | Sharing unchecked rumours
 home: Find your MP's contact details and one issue you'd raise with them.
 skill: civics
+
+@lesson 4.1 | Where the money comes from | 🏦 | townhall
+hook: The government spends billions. Where does it get the money?
+learn: Income tax from people is the biggest single source in both countries.
+learn: GST, company tax and other taxes, like excise on fuel and alcohol, add more.
+learn: When spending is bigger than income, the government borrows by selling bonds.
+play: sort | Government income, Government spending | Income tax=Government income; Pensions=Government spending; GST=Government income; Hospitals=Government spending; Company tax=Government income; Interest on debt=Government spending | Income or spending?
+check: mcq | What's the biggest single source of government income? | Income tax from people* | Parking fines | Selling stamps
+check: tf | Governments borrow by selling bonds. | true
+home: Find the latest Budget summary online with a grown-up and look at the income sources.
+skill: government
+
+@lesson 4.2 | Splitting the budget | 🥧 | townhall
+hook: You're the Finance Minister for a day. How would you split the money?
+learn: The biggest spending areas are usually welfare and pensions, health and education.
+learn: Interest on government debt also costs billions each year.
+learn: Every choice has a trade-off: more for one area means less for another, more tax or more debt.
+play: budget | Split a $100 government budget | 100 | Pensions and welfare=30; Health=20; Education=15; Interest on debt=5; Defence and police=5; Rainy day savings=0 | Natural disaster recovery:5
+check: mcq | What happens if you spend more on one area? | Less for another, more tax or more debt* | Nothing changes | The money appears by magic
+check: tf | Interest on government debt costs money every year. | true
+home: Talk with a grown-up about which area they'd give more money to, and why.
+skill: government
+
+@lesson 4.3 | Deficits and debt | 📉 | townhall
+hook: The government spent $10 billion more than it took in. What happens next?
+learn: A deficit is one year's gap between spending and income. Debt is all the borrowing added up.
+learn: Debt isn't always bad. Borrowing for roads or a crisis can make sense.
+learn: But higher debt means more interest to pay, which leaves less for other things.
+try: Spend $110 billion, take in $100 billion: a $10 billion deficit :: gap | Spend $120 billion, take in $105 billion: a $_ billion deficit | 15
+play: slider | Debt is $200 billion and the interest rate is 4%. About how much interest is paid each year, in billions? | 0 | 20 | 8 | $b | 1 | 1
+check: gap | Debt of $100 billion at 5% costs about $_ billion a year in interest | 5
+check: mcq | What's the difference between a deficit and debt? | A deficit is one year's gap. Debt is the total borrowed* | They're the same | Debt is one year only
+home: Look up your government's latest deficit or surplus with a grown-up.
+skill: government
+
+@lesson 4.4 | Comparing debt | 🌏 | townhall
+hook: Is $100 billion of debt a lot?
+learn: Economists compare debt with GDP, the size of the economy.
+learn: $100 billion of debt is small for a huge economy and big for a small one.
+learn: Debt as a share of GDP shows how heavy the load is, like comparing a loan with someone's income.
+play: mystery | Country A owes $100 billion. Its GDP is $2,000 billion.; Country B owes $50 billion. Its GDP is $100 billion.; Both pay similar interest rates. | Country B's debt is the heavier load* | Country A's debt is heavier because it's a bigger number | They're exactly the same
+check: mcq | Why compare debt with GDP? | It shows how big the debt is compared to the economy* | It makes debt disappear | GDP is a type of debt
+check: gap | Debt of $50 billion with GDP of $200 billion is _% of GDP | 25
+home: Compare a $10,000 loan for someone earning $30,000 and someone earning $150,000 with a grown-up.
+skill: government
+
+@lesson 4.5 | Trade-offs | ⚖️ | townhall
+hook: Free dental care for everyone. Who could say no to that?
+learn: Every policy costs something. Paying for it means higher taxes, more debt or cuts elsewhere.
+learn: The value of the next best thing you give up is called the opportunity cost.
+learn: Good debates ask: who benefits, who pays, and what else could the money do?
+play: debate | Should the government pay for free dental care for all adults? | It depends on the trade-offs: who benefits, who pays, and what else the money could do* | Yes, it's free so it costs nothing | Supporters say it prevents costly health problems later. Opponents point to the cost and other priorities.
+check: mcq | What is opportunity cost? | The value of the next best thing you give up* | The price on a label | A free gift
+check: tf | Every policy has to be paid for somehow. | true
+home: Pick a policy idea and list who benefits and who pays, with a grown-up.
+skill: decisions
+
+@lesson 4.6 | Budget day | 📅 | townhall
+hook: Once a year, the government announces its Budget. What should you look for?
+learn: The Budget sets out spending, tax changes and forecasts for the next few years. It's usually announced in May.
+learn: Look for changes that affect you: student support, tax, transport or health.
+learn: Check the forecasts for debt and deficits, and whether the government expects them to improve.
+play: order | Read a Budget like a pro | Find the official summary; List changes that affect people like you; Check what it costs and how it's paid for; Look at the debt and deficit forecasts; Compare different views on it
+check: mcq | When is the Budget usually announced? | May* | December | Every week
+check: tf | The Budget includes forecasts for the next few years. | true
+home: Read a news story about the latest Budget with a grown-up and find one change that affects your family.
+skill: government

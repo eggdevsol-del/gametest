@@ -219,6 +219,72 @@ check: mcq | On a long car trip, what could help? | Playing a game like I spy* |
 home: Draw your patience toolbox with your three favourite tricks.
 skill: patience
 
+@lesson 4.1 | A good friend | 🤗 | home
+hook: What makes someone a good friend?
+learn: Good friends are kind, share and take turns.
+learn: Good friends listen to you and help when you're sad.
+learn: You can be a good friend too, by doing the same things.
+play: tap | Tap the things good friends do | 🤝:yes:Share and take turns; 👂:yes:Listen to you; 🫂:yes:Help when you're sad; 😠:no; 🙊:no; 😄:yes:Make you laugh
+check: mcq | What does a good friend do? | Listens to you* | Always wins | Leaves you out
+check: tf | You can be a good friend by sharing and listening. | true
+home: Tell a grown-up about a friend and one kind thing they do.
+skill: friendship
+
+@lesson 4.2 | Sharing and turns | 🔄 | home
+hook: There's one swing and two kids. What now?
+learn: Taking turns means everyone gets a go.
+learn: You can use a timer, or count to 50, then swap.
+learn: Sharing feels fair, and friends want to play with you again.
+play: sort | Kind, Not kind | Counting to 50, then swapping=Kind; Grabbing the toy=Not kind; Asking "Can I have a turn soon?"=Kind; Never letting anyone else have a go=Not kind; Sharing your crayons=Kind; Pushing in=Not kind | Kind or not kind?
+check: mcq | Two kids want one swing. What's fair? | Take turns* | The biggest kid gets it | Nobody uses it
+check: tf | Using a timer can help with taking turns. | true
+home: Play a game with your family where everyone takes turns.
+skill: sharing
+
+@lesson 4.3 | Kind words | 💬 | home
+hook: Words can make someone smile or make them sad. Which will you choose?
+learn: Kind words help people feel good, like "Great job!" or "Do you want to play?"
+learn: Unkind words can hurt, even as a joke.
+learn: If you say something unkind, you can fix it by saying sorry.
+play: chat | Your friend drops their ice cream | them: Oh no! My ice cream fell on the ground! | me: Oh no! Do you want to share some of mine?*/Ha ha, that's funny!/That's your fault | them: Really? Thank you! | me: That's what friends are for*/Never mind, I changed my mind/Only if you give me your toy
+check: mcq | Which words are kind? | "Do you want to play?"* | "Go away" | "You're bad at this"
+check: tf | Unkind words can hurt even as a joke. | true
+home: Say three kind things to people in your family today.
+skill: kindness
+
+@lesson 4.4 | When a friend is sad | 😢 | home
+hook: Your friend is sitting alone and looks sad. What could you do?
+learn: Go and sit with them. Ask "Are you OK?"
+learn: Listen. You don't have to fix it, just be there.
+learn: If something is really wrong, tell a grown-up.
+play: path | Your friend is crying at lunch time. | Sit with them and ask if they're OK => good: Being there helps a lot. | Laugh and walk away => bad: That would make them feel worse. | Ignore them => bad: They might feel even more alone.
+check: mcq | What can you ask a sad friend? | "Are you OK?"* | "Why are you so weird?" | Nothing
+check: tf | You need to fix everything for a sad friend. | false | Just being there and listening helps.
+home: Talk with a grown-up about what helps you when you're sad.
+skill: empathy
+
+@lesson 4.5 | Let them join | 🙋 | home
+hook: A new kid is watching your game. How do they feel?
+learn: Being left out feels lonely.
+learn: You can ask "Do you want to play?" It's a small thing that means a lot.
+learn: Show them the rules and give them a turn.
+play: order | Invite someone into your game | Notice someone watching; Walk over and smile; Ask "Do you want to play?"; Tell them the rules; Give them a turn
+check: mcq | A new kid is watching your game. What's kind? | Ask them to play* | Turn your back | Tell them to go away
+check: tf | Being left out can feel lonely. | true
+home: Think of someone you could invite to play this week.
+skill: kindness
+
+@lesson 4.6 | Saying sorry | 💐 | home
+hook: You bumped your friend's tower and it fell. What now?
+learn: A good sorry says what you did: "Sorry I knocked your tower."
+learn: Then try to fix it: "Can I help build it again?"
+learn: Next time, try to be more careful.
+play: build | Build a good sorry | Say what you did; Say sorry; Offer to fix it; Try to do better next time
+check: mcq | What makes a good sorry? | Saying what you did and helping fix it* | Saying sorry while laughing | Running away
+check: tf | Offering to fix things is part of a good sorry. | true
+home: Practise a good sorry with a grown-up using the four steps.
+skill: friendship
+
 @band builders
 @unit 1 | Habits | How tiny habits become big changes
 @unit 2 | Delayed gratification | Waiting for something better
@@ -441,6 +507,72 @@ check: mcq | What's a bounce-back kit? | Things that help you recover after a to
 home: Write your own bounce-back kit and keep it in your room.
 skill: resilience
 
+@lesson 4.1 | What good friends do | 🫶 | home
+hook: You have lots of people you know. How do you tell who's a real friend?
+learn: Good friends are kind to you when others aren't around.
+learn: They keep your secrets, unless keeping one would put you in danger.
+learn: They're happy when good things happen to you.
+play: sort | Good friend, Not a good friend | Sticks up for you=Good friend; Laughs at you in front of others=Not a good friend; Keeps your secrets=Good friend; Only talks to you when they want something=Not a good friend; Is happy when you win=Good friend; Tells lies about you=Not a good friend | Good friend or not?
+check: mcq | What does a good friend do? | Sticks up for you* | Laughs at you in front of others | Only talks when they want something
+check: tf | A good friend should keep a secret even if you're in danger. | false | Safety comes first. Tell a trusted adult.
+home: Talk with a grown-up about the qualities of their best friend.
+skill: friendship
+
+@lesson 4.2 | Making new friends | 👋 | home
+hook: You're at a new club and don't know anyone. Where do you start?
+learn: Start small: smile, say hi and ask a question.
+learn: Ask about things they like: "What games do you play?"
+learn: Friendships take time. Keep saying hi.
+play: chat | Starting a chat at a new club | them: Hi. | me: Hi! I'm new. What's your name?*/Whatever/Go away | them: I'm Ari. Are you new to swimming? | me: Yeah! Have you been coming long?*/None of your business/I'm better than you
+check: mcq | What's a good way to start a friendship? | Smile and ask a question* | Ignore everyone | Boast about yourself
+check: tf | Friendships can take time to grow. | true
+home: Think of one question you could ask someone new at school this week.
+skill: friendship
+
+@lesson 4.3 | Friendship fights | ⚡ | home
+hook: You and your friend are fighting about a game. Is the friendship over?
+learn: All friends disagree sometimes. It doesn't mean the friendship is over.
+learn: Cool down first. Then talk about how you each feel.
+learn: Look for a fix you both can live with, or agree to disagree.
+play: path | Your friend says you cheated in a game. You didn't. | Cool down, then calmly explain what happened => good: Calm talk can sort it out. | Yell and storm off => bad: That makes things worse. | Tell everyone your friend is a liar => bad: Spreading it hurts the friendship.
+check: mcq | What should you do first in a fight? | Cool down* | Shout louder | Post about it online
+check: tf | All friends disagree sometimes. | true
+home: Think of a time you disagreed with a friend. What helped fix it?
+skill: conflict
+
+@lesson 4.4 | Not-so-good friends | 🚩 | home
+hook: A "friend" keeps making you feel bad about yourself. What's going on?
+learn: Some people act friendly but are often unkind, bossy or mean behind your back.
+learn: Feeling worried or bad around someone a lot is a sign to step back.
+learn: You can spend time with other friends and talk to a grown-up you trust.
+play: tap | Tap the warning signs of an unkind friendship | 😒:yes:They put you down a lot; 👑:yes:They boss you around; 🗣️:yes:They talk about you behind your back; 🎉:no; 🫂:no; 🔒:yes:They say you can't have other friends
+check: mcq | What can you do if a friend is often unkind? | Spend time with other friends and talk to a grown-up* | Do whatever they say | Keep it secret
+check: tf | Feeling bad around someone a lot can be a warning sign. | true
+home: Talk with a grown-up about how a good friend makes you feel.
+skill: friendship
+
+@lesson 4.5 | Left out | 🥀 | home
+hook: Your group made plans without you. How do you work out what happened?
+learn: Being left out hurts. It's OK to feel sad or upset.
+learn: Sometimes it's a mistake. Sometimes it's on purpose. Find out before you decide.
+learn: Ask calmly, and keep other friendships going too.
+play: mystery | Your friends went to the park without you.; They made the plan in a group chat you're not in.; One friend says, "I thought someone told you!"; They invite you next time. | It was probably a mix-up* | They all hate you | You'll never have friends
+check: mcq | What's a good first step when you feel left out? | Calmly ask what happened* | Decide they hate you | Leave every group
+check: tf | Being left out is sometimes a mistake. | true
+home: Talk with a grown-up about a time you felt left out and what helped.
+skill: friendship
+
+@lesson 4.6 | Online friends | 💻 | online
+hook: Someone you met in a game says they're 11 too. Are they really?
+learn: Online, people can pretend to be anyone. An online friend you've never met may not be who they say.
+learn: Never share your address, school or photos with online-only friends.
+learn: If an online friend asks to meet, or asks you to keep secrets, tell a grown-up.
+play: sort | OK to share, Keep private | Your favourite game=OK to share; Your home address=Keep private; Your favourite colour=OK to share; Your school name=Keep private; A photo of yourself=Keep private; What level you're on=OK to share | OK to share with an online-only friend?
+check: mcq | An online friend asks to meet in person. What should you do? | Tell a grown-up* | Go alone | Keep it secret
+check: tf | Online friends are always who they say they are. | false | People can pretend to be anyone online.
+home: Show a grown-up who you chat with online.
+skill: online safety
+
 @band makers
 @unit 1 | Stress | Recognising it and handling it
 @unit 2 | Peer pressure | Saying no and staying you
@@ -660,6 +792,73 @@ check: tf | Sponsorships can be a sneaky form of advertising. | true
 check: mcq | Which is a sneaky ad tactic? | A game tie-in with a fast-food brand* | A plain price list | A safety warning
 home: Spot a sponsorship or tie-in ad at a sports event or in a game.
 skill: advertising
+
+@lesson 4.1 | How much sleep? | 😴 | home
+hook: Teens need more sleep than adults. How much?
+learn: Teens aged 13 to 18 need about 8 to 10 hours of sleep a night.
+learn: Many teens get far less, which affects mood, memory and even sport.
+learn: Sleep is when your brain stores what you learned that day.
+try: Sleep at 10pm, wake at 7am is 9 hours :: gap | Sleep at 11pm, wake at 7am is _ hours | 8
+play: slider | You need to wake at 7am and want 9 hours of sleep. What time should you be asleep? Answer in pm. | 7 | 12 | 10 | pm | 0 | 1
+check: mcq | How much sleep do teens need? | About 8 to 10 hours* | 4 hours | 14 hours
+check: tf | Sleep helps your brain store what you learned. | true
+home: Track your sleep for a week and work out your average.
+skill: sleep
+
+@lesson 4.2 | The teen body clock | 🕰️ | home
+hook: Why do teens feel wide awake at 11pm but like zombies at 7am?
+learn: In the teen years, the body clock shifts later. Sleepiness comes later at night.
+learn: But school still starts early, so many teens run short on sleep.
+learn: A regular wake-up time, even on weekends, helps your body clock adjust.
+play: tf | Teens' body clocks naturally shift later. | true | That's why teens often feel awake late at night.
+check: mcq | What helps your body clock most? | Waking at the same time each day* | Sleeping until 2pm on weekends | Drinking energy drinks
+check: tf | Big weekend sleep-ins can make Monday mornings harder. | true
+home: Try waking at the same time every day for a week.
+skill: sleep
+
+@lesson 4.3 | Screens and sleep | 📵 | home
+hook: Just one more video. Then another. Why is it so hard to put the phone down?
+learn: Apps are designed to keep you watching, with autoplay and endless scroll.
+learn: Exciting content keeps your brain alert when it should be winding down.
+learn: Try stopping screens 30 to 60 minutes before bed, and charge your phone outside your room.
+play: tap | Tap the things that help you sleep | 🔌:yes:Charge your phone outside your room; 📖:yes:Read a paper book; 🌙:yes:Dim the lights; 📱:no; ☕:no; ⏰:yes:Stop screens an hour before bed
+check: mcq | Where's the best place to charge your phone at night? | Outside your bedroom* | Under your pillow | In your hand
+check: tf | Apps are designed to keep you watching. | true
+home: Try charging your phone outside your room for three nights.
+skill: sleep
+
+@lesson 4.4 | Study smarter | 🧠 | home
+hook: You've read your notes five times. Why can't you remember them?
+learn: Re-reading feels like learning but often isn't. Testing yourself works better.
+learn: Retrieval practice means trying to recall without looking: flashcards, practice questions or explaining it out loud.
+learn: Spacing out your study over days beats doing it all at once.
+play: sort | Strong study method, Weak study method | Testing yourself with flashcards=Strong study method; Re-reading notes again and again=Weak study method; Explaining it to someone else=Strong study method; Highlighting everything=Weak study method; Doing practice questions=Strong study method; Studying with the TV on=Weak study method | Strong or weak?
+check: mcq | Which works better? | Testing yourself* | Re-reading | Highlighting everything
+check: tf | Spacing study over several days helps you remember. | true
+home: Make five flashcards for something you're learning and test yourself.
+skill: study
+
+@lesson 4.5 | Cram or space? | 📆 | home
+hook: You have 4 hours to study for a test. All the night before, or 1 hour on 4 days?
+learn: Cramming can help you pass tomorrow, but you forget most of it fast.
+learn: Spacing it out builds memories that last.
+learn: Cramming also cuts into sleep, which you need to remember things.
+play: debate | Is cramming the night before a good way to study? | No. Spacing study over several days helps you remember more and sleep better* | Yes. It's always the best way | Sometimes it's all you have time for. A little cramming is better than none, but planning ahead works better.
+check: mcq | Why does spacing study help? | It builds longer-lasting memories* | It takes less effort | It's more fun to cram
+check: tf | Cramming can cut into your sleep. | true
+home: Plan your next test study over 4 days instead of 1 night.
+skill: study
+
+@lesson 4.6 | Focus blocks | 🍅 | home
+hook: Can you study for 3 hours straight? Should you?
+learn: Short focus blocks work well: 25 minutes of work, then a 5-minute break.
+learn: After four blocks, take a longer break.
+learn: Put your phone in another room during a block. Even having it nearby can distract you.
+play: timing | Focus for the block, then tap when the break zone arrives | Take a break | Break
+check: mcq | What's a common focus block? | 25 minutes of work, then a 5-minute break* | 3 hours without a break | 5 minutes of work, then an hour off
+check: tf | Having your phone nearby can distract you. | true
+home: Try three 25-minute focus blocks with breaks this week.
+skill: focus
 
 @band launchers
 @unit 1 | Wellbeing at work | Boundaries, breaks and burnout
@@ -885,3 +1084,69 @@ check: tf | A good decision can still turn out badly. | true
 check: mcq | After deciding, it helps to… | Commit, then check in and adjust* | Never think about it again | Change your mind daily
 home: Think of a decision that turned out badly. Was the way you decided good?
 skill: decisions
+
+@lesson 4.1 | What healthy looks like | 💚 | home
+hook: Relationships come in all kinds. What do healthy ones have in common?
+learn: Healthy relationships have trust, respect, honesty and good communication.
+learn: You both keep your own friends, interests and time.
+learn: Disagreements happen, but they're talked through without fear.
+play: sort | Healthy, Unhealthy | You can see your friends without a fight=Healthy; They check your phone without asking=Unhealthy; You can disagree and talk it through=Healthy; They say who you can hang out with=Unhealthy; You both say sorry when you get it wrong=Healthy; You're scared of how they'll react=Unhealthy | Healthy or unhealthy?
+check: mcq | What's a sign of a healthy relationship? | You can disagree without fear* | They check your phone | They choose your friends
+check: tf | In a healthy relationship, you can keep your own friends. | true
+home: Think about what healthy relationships around you look like.
+skill: relationships
+
+@lesson 4.2 | Consent | ✋ | home
+hook: Consent comes up a lot. What does it actually mean?
+learn: Consent means freely agreeing to something, without pressure, guilt or threats.
+learn: Consent can be changed at any time. Saying yes once doesn't mean yes always.
+learn: Someone who is very drunk, high or asleep can't give consent.
+play: tf | If someone agreed before, they have to agree again. | false | Consent can be withdrawn at any time. Each time counts.
+check: mcq | Which shows consent? | A clear, free yes with no pressure* | Silence | A yes after being pressured
+check: tf | Someone who is asleep can't give consent. | true
+home: Talk with a trusted adult about how people can check in with each other respectfully.
+skill: consent
+
+@lesson 4.3 | Control and red flags | 🚩 | home
+hook: "They only check my phone because they care." Is that true?
+learn: Controlling behaviour isn't care. It's about power.
+learn: Red flags: tracking where you are, checking messages, cutting you off from friends, extreme jealousy and threats.
+learn: Control often starts small and grows. Trust your gut if something feels wrong.
+play: tap | Tap the red flags | 📍:yes:Demands to track your location; 📱:yes:Checks your messages; 🚫:yes:Tries to stop you seeing friends; 💐:no; 🗣️:no; 😡:yes:Extreme jealousy or threats
+check: mcq | What is controlling behaviour about? | Power* | Love | Being helpful
+check: tf | Controlling behaviour often starts small. | true
+home: Find a support line for your country and save the number in your phone.
+skill: relationships
+
+@lesson 4.4 | Money and control | 💳 | bank
+hook: A partner wants to "look after" all your money. Helpful or harmful?
+learn: Financial abuse is when someone controls another person's money to control them.
+learn: Signs include taking your pay, making you ask for money, running up debt in your name or stopping you from working.
+learn: Keep your own account and passwords, and never sign a loan you don't understand.
+play: sort | Fair money teamwork, Financial abuse | Agreeing on a shared budget together=Fair money teamwork; Taking your pay and giving you "pocket money"=Financial abuse; Each keeping your own account=Fair money teamwork; Pressuring you to take out a loan for them=Financial abuse; Talking openly about spending=Fair money teamwork; Stopping you from getting a job=Financial abuse | Fair or abusive?
+check: mcq | Which is financial abuse? | Taking someone's pay and controlling their spending* | Agreeing on a budget together | Keeping separate accounts
+check: tf | You should never sign a loan you don't understand. | true
+home: Make sure your bank passwords are known only to you.
+skill: financial safety
+
+@lesson 4.5 | Supporting a friend | 🫂 | home
+hook: Your friend tells you their partner is controlling them. What do you say?
+learn: Listen without judging. Say you believe them.
+learn: Don't force them to leave. It's their choice, and leaving can be risky.
+learn: Help them find support, and tell an adult or call for help if they're in danger.
+play: chat | A friend opens up to you | them: My partner gets really angry if I see you guys. | me: That sounds really hard. I'm glad you told me*/You're overreacting/Just dump them right now | them: I don't know what to do. | me: You don't have to decide now. Want to look at some support options together?*/That's your problem/I'm telling everyone
+check: mcq | What's the best first response? | Listen and believe them* | Tell them they're overreacting | Post about it
+check: tf | You should force a friend to leave a relationship. | false | Support them. It's their choice, and leaving can be risky.
+home: Talk with a trusted adult about how you'd support a friend.
+skill: support
+
+@lesson 4.6 | Where to get help | ☎️ | home
+hook: Who can you call if you or a friend need help?
+learn: In an emergency, call {nz:111~au:000}.
+learn: {nz:Youthline is 0800 376 633, and you can call or text 1737 any time. Women's Refuge is 0800 733 843.~au:1800RESPECT is 1800 737 732. Kids Helpline is 1800 55 1800 for people up to 25.}
+learn: These services are free and confidential. You can call for yourself or for a friend.
+play: match | Match the situation to where to get help | Someone is in danger right now={nz:111~au:000}; You want to talk to someone any time={nz:1737~au:Kids Helpline}; You're worried about a relationship={nz:Women's Refuge or Youthline~au:1800RESPECT}; You want to talk to a trusted adult nearby=A teacher, counsellor or family member
+check: mcq | What's the emergency number? | {nz:111~au:000}* | 123 | 999
+check: tf | Support lines can help you even if you're calling about a friend. | true
+home: Save a support line number in your phone.
+skill: help seeking

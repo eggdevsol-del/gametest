@@ -219,3 +219,69 @@ check: mcq | What does the government do with tax money? | Spends it on things w
 home: Ask a grown-up what they think tax should be spent on most.
 skill: civics
 
+@lesson 4.1 | Places we share | 🏞️ | townhall
+hook: Parks, libraries and pools. Who are they for?
+learn: Community places are for everyone to use and enjoy.
+learn: Parks, playgrounds, libraries, pools and halls are all community places.
+learn: Because we share them, we take care of them together.
+play: tap | Tap the community places | 🏞️:yes:A park; 📚:yes:A library; 🏊:yes:A public pool; 🛏️:no; 🚗:no; 🛝:yes:A playground
+check: mcq | Who are community places for? | Everyone* | Only grown-ups | Only one family
+check: tf | We take care of shared places together. | true
+home: Visit a community place near you with a grown-up.
+skill: community
+
+@lesson 4.2 | The library | 📚 | townhall
+hook: You can take home a book for free. How does that work?
+learn: Libraries let you borrow books, then bring them back by a due date.
+learn: Many libraries also have games, computers, events and help with homework.
+learn: Look after borrowed books, so the next person can enjoy them too.
+play: order | Borrow a library book | Get a library card with a grown-up; Choose a book; Check it out at the desk or machine; Read it and keep it safe; Bring it back by the due date
+check: mcq | What do you do when you borrow a book? | Bring it back by the due date* | Keep it for ever | Sell it
+check: tf | Libraries can have games and events too. | true
+home: Visit your library with a grown-up and borrow something new.
+skill: community
+
+@lesson 4.3 | Pool rules | 🏊 | townhall
+hook: The pool has rules on the wall. Why?
+learn: Pool rules keep everyone safe, like "walk, don't run".
+learn: Lifeguards watch the water and help people in trouble.
+learn: Always listen to the lifeguard and swim with a grown-up watching.
+play: path | You're at the pool and want to get to the slide fast. | Walk carefully around the pool => good: Wet floors are slippery, so walking keeps you safe. | Run as fast as you can => bad: You could slip and get hurt. | Push past people in the water => bad: That could hurt someone.
+check: mcq | Who watches the water at a pool? | Lifeguards* | Nobody | The ducks
+check: tf | You should listen to the lifeguard. | true
+home: Read the rules at your local pool with a grown-up.
+skill: safety
+
+@lesson 4.4 | Looking after parks | 🌳 | garden
+hook: There's rubbish under the slide at the park. Whose job is it?
+learn: Councils look after parks, but everyone can help.
+learn: Put rubbish in the bin, or take it home if the bin is full.
+learn: Be gentle with plants, play equipment and animals.
+play: sort | Helps the park, Hurts the park | Putting rubbish in the bin=Helps the park; Breaking branches off trees=Hurts the park; Picking up litter with a grown-up=Helps the park; Drawing on the slide=Hurts the park; Taking rubbish home when the bin is full=Helps the park; Chasing the ducks=Hurts the park | Helps or hurts?
+check: mcq | The bin is full. What should you do with your rubbish? | Take it home* | Leave it on the ground | Throw it in the pond
+check: tf | Everyone can help look after parks. | true
+home: Take a bag to the park with a grown-up and pick up some litter.
+skill: community
+
+@lesson 4.5 | Who pays for it? | 💰 | townhall
+hook: Parks and libraries cost money to run. Who pays?
+learn: Councils pay for many community places using rates. Rates are money people pay for their homes and land.
+learn: The government also uses tax money for things like schools and hospitals.
+learn: When everyone chips in a little, we can all share big things.
+play: match | Match each place to who usually pays for it | The local park=The council; The library=The council; Schools=The government; Hospitals=The government
+check: mcq | What do councils use to pay for parks? | Rates* | Pocket money | Magic
+check: tf | When everyone chips in, we can share big things. | true
+home: Ask a grown-up if they pay rates, or if it's part of their rent.
+skill: tax
+
+@lesson 4.6 | Community events | 🎪 | townhall
+hook: Markets, festivals and fun runs. What makes them special?
+learn: Community events bring people together, like markets, festivals and sports days.
+learn: Lots of them are run by volunteers who give their time.
+learn: You can help too, by joining in or helping with a grown-up.
+play: match | Match each event to what happens there | Farmers' market=People sell fresh food; Fun run=People run or walk together; Library story time=Kids listen to stories; Beach clean-up=People pick up rubbish
+check: mcq | Who runs lots of community events? | Volunteers* | Robots | Nobody
+check: tf | You can help at community events with a grown-up. | true
+home: Find a community event near you with a grown-up.
+skill: community
+

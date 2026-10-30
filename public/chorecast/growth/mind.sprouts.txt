@@ -218,3 +218,69 @@ check: mcq | On a long car trip, what could help? | Playing a game like I spy* |
 home: Draw your patience toolbox with your three favourite tricks.
 skill: patience
 
+@lesson 4.1 | A good friend | 🤗 | home
+hook: What makes someone a good friend?
+learn: Good friends are kind, share and take turns.
+learn: Good friends listen to you and help when you're sad.
+learn: You can be a good friend too, by doing the same things.
+play: tap | Tap the things good friends do | 🤝:yes:Share and take turns; 👂:yes:Listen to you; 🫂:yes:Help when you're sad; 😠:no; 🙊:no; 😄:yes:Make you laugh
+check: mcq | What does a good friend do? | Listens to you* | Always wins | Leaves you out
+check: tf | You can be a good friend by sharing and listening. | true
+home: Tell a grown-up about a friend and one kind thing they do.
+skill: friendship
+
+@lesson 4.2 | Sharing and turns | 🔄 | home
+hook: There's one swing and two kids. What now?
+learn: Taking turns means everyone gets a go.
+learn: You can use a timer, or count to 50, then swap.
+learn: Sharing feels fair, and friends want to play with you again.
+play: sort | Kind, Not kind | Counting to 50, then swapping=Kind; Grabbing the toy=Not kind; Asking "Can I have a turn soon?"=Kind; Never letting anyone else have a go=Not kind; Sharing your crayons=Kind; Pushing in=Not kind | Kind or not kind?
+check: mcq | Two kids want one swing. What's fair? | Take turns* | The biggest kid gets it | Nobody uses it
+check: tf | Using a timer can help with taking turns. | true
+home: Play a game with your family where everyone takes turns.
+skill: sharing
+
+@lesson 4.3 | Kind words | 💬 | home
+hook: Words can make someone smile or make them sad. Which will you choose?
+learn: Kind words help people feel good, like "Great job!" or "Do you want to play?"
+learn: Unkind words can hurt, even as a joke.
+learn: If you say something unkind, you can fix it by saying sorry.
+play: chat | Your friend drops their ice cream | them: Oh no! My ice cream fell on the ground! | me: Oh no! Do you want to share some of mine?*/Ha ha, that's funny!/That's your fault | them: Really? Thank you! | me: That's what friends are for*/Never mind, I changed my mind/Only if you give me your toy
+check: mcq | Which words are kind? | "Do you want to play?"* | "Go away" | "You're bad at this"
+check: tf | Unkind words can hurt even as a joke. | true
+home: Say three kind things to people in your family today.
+skill: kindness
+
+@lesson 4.4 | When a friend is sad | 😢 | home
+hook: Your friend is sitting alone and looks sad. What could you do?
+learn: Go and sit with them. Ask "Are you OK?"
+learn: Listen. You don't have to fix it, just be there.
+learn: If something is really wrong, tell a grown-up.
+play: path | Your friend is crying at lunch time. | Sit with them and ask if they're OK => good: Being there helps a lot. | Laugh and walk away => bad: That would make them feel worse. | Ignore them => bad: They might feel even more alone.
+check: mcq | What can you ask a sad friend? | "Are you OK?"* | "Why are you so weird?" | Nothing
+check: tf | You need to fix everything for a sad friend. | false | Just being there and listening helps.
+home: Talk with a grown-up about what helps you when you're sad.
+skill: empathy
+
+@lesson 4.5 | Let them join | 🙋 | home
+hook: A new kid is watching your game. How do they feel?
+learn: Being left out feels lonely.
+learn: You can ask "Do you want to play?" It's a small thing that means a lot.
+learn: Show them the rules and give them a turn.
+play: order | Invite someone into your game | Notice someone watching; Walk over and smile; Ask "Do you want to play?"; Tell them the rules; Give them a turn
+check: mcq | A new kid is watching your game. What's kind? | Ask them to play* | Turn your back | Tell them to go away
+check: tf | Being left out can feel lonely. | true
+home: Think of someone you could invite to play this week.
+skill: kindness
+
+@lesson 4.6 | Saying sorry | 💐 | home
+hook: You bumped your friend's tower and it fell. What now?
+learn: A good sorry says what you did: "Sorry I knocked your tower."
+learn: Then try to fix it: "Can I help build it again?"
+learn: Next time, try to be more careful.
+play: build | Build a good sorry | Say what you did; Say sorry; Offer to fix it; Try to do better next time
+check: mcq | What makes a good sorry? | Saying what you did and helping fix it* | Saying sorry while laughing | Running away
+check: tf | Offering to fix things is part of a good sorry. | true
+home: Practise a good sorry with a grown-up using the four steps.
+skill: friendship
+

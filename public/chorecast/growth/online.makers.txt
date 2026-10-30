@@ -218,3 +218,69 @@ check: mcq | Why share less data? | Less can be leaked or misused* | It's boring
 home: Look at a sign-up form and spot which fields are optional.
 skill: data
 
+@lesson 4.1 | Is this store real? | 🏪 | online
+hook: An online store has amazing sneakers for 80% off. Real deal or fake store?
+learn: Check the store before you buy: real contact details, a physical address and a clear returns policy.
+learn: Search the store's name plus "reviews" or "scam" on other sites, not just its own reviews.
+learn: Prices that are far too low, a brand-new website and bad spelling are red flags.
+play: tap | Tap the red flags for a fake store | 💸:yes:Prices 80% below everywhere else; 📧:yes:Only a contact form, no phone or address; 🆕:yes:The website is a few weeks old; 🏢:no; ⭐:no; 🔤:yes:Lots of spelling mistakes
+check: mcq | Where should you check a store's reviews? | On other websites, not just its own* | Only on its home page | Nowhere
+check: tf | A price that's far too low can be a red flag. | true
+home: Pick a store you've never used and check it with a grown-up using these steps.
+skill: online shopping
+
+@lesson 4.2 | Pay the safe way | 💳 | online
+hook: The store only accepts bank transfer or gift cards. Is that a problem?
+learn: Credit cards, debit cards and some payment services let you ask for your money back if goods never arrive.
+learn: Bank transfers, crypto and gift cards are very hard to get back. Scam stores love them.
+learn: Look for a padlock and the right web address, but remember fake stores can have padlocks too.
+play: sort | Safer way to pay, Risky way to pay | Credit card=Safer way to pay; Gift cards=Risky way to pay; Bank transfer to a stranger=Risky way to pay; A payment service with buyer protection=Safer way to pay; Crypto=Risky way to pay; Debit card=Safer way to pay | Safer or risky?
+check: mcq | Which is hardest to get back if you're scammed? | Gift cards* | A credit card payment | A payment with buyer protection
+check: tf | A padlock in the address bar proves a store is honest. | false | Fake stores can have padlocks too.
+home: Ask a grown-up which way they pay online, and why.
+skill: online shopping
+
+@lesson 4.3 | Overseas surprises | ✈️ | online
+hook: A $40 hoodie from overseas costs $62 at checkout. Where did $22 go?
+learn: Overseas shopping can add shipping, {nz:15% GST~au:10% GST} and currency fees.
+learn: Returns can be slow and expensive, so check sizing carefully.
+learn: Compare the total delivered price with a local store.
+play: price | Which hoodie costs less, delivered to your door? | Overseas, $40 plus shipping, GST and fees:62:1:hoodie; Local store, free shipping:55:1:hoodie
+check: mcq | What should you compare? | The total delivered price* | Only the price on the photo | The website colour
+check: tf | Returning things overseas can be slow and costly. | true
+home: Add an overseas item to a cart with a grown-up and see the full price at checkout.
+skill: online shopping
+
+@lesson 4.4 | Fake reviews | 🤖 | online
+hook: 2,000 five-star reviews, all posted last week. Trustworthy?
+learn: Some sellers buy fake reviews or post them with bots.
+learn: Warning signs: lots of reviews in a short time, vague praise and reviewers with no history.
+learn: Read the 2- and 3-star reviews. They're often the most honest.
+play: mystery | All 500 reviews are 5 stars.; They were all posted in the same week.; Most just say "Great product!!!".; The reviewers have no other reviews. | The reviews are probably fake* | It's the best product ever | Reviews are always fake
+check: mcq | Which reviews are often most honest? | The 2- and 3-star ones* | Only 5-star ones | None
+check: tf | Lots of reviews posted in a short time can be a warning sign. | true
+home: Read the middle-star reviews of a product you like with a grown-up.
+skill: online shopping
+
+@lesson 4.5 | Shop ads on social media | 📲 | online
+hook: An ad on your feed shows a famous brand at a giant discount. Should you tap?
+learn: Scammers run ads that copy real brands, with fake websites that look almost the same.
+learn: Check the web address carefully. One wrong letter can mean a fake site.
+learn: Go to the brand's real website yourself, instead of tapping the ad.
+play: scam | Which ads are likely scams? | Big-brand sneakers 90% off. Closing down sale today only!=scam; New season styles from a store you know, prices like in store=real; Win a free phone! Just pay $2 shipping=scam; A local café's ad for its new menu=real; Designer bags for $19, link goes to a strange web address=scam | Huge discounts, "only today" and odd web addresses are red flags.
+check: mcq | What's safest when you see a brand deal in an ad? | Go to the brand's real website yourself* | Tap the ad and buy fast | Share it with friends
+check: tf | Fake websites can look almost the same as real ones. | true
+home: Find a brand's real website with a grown-up, and compare its web address to a suspicious one.
+skill: scams
+
+@lesson 4.6 | It never arrived | 📭 | online
+hook: Your order is three weeks late and the store isn't replying. What now?
+learn: Contact the seller in writing first and keep copies of everything.
+learn: If you paid by card, ask your bank about a chargeback. Act quickly, because there are time limits.
+learn: Report scam stores to {nz:Netsafe and the Commerce Commission~au:Scamwatch}, which helps warn others.
+play: order | Sort out an order that never came | Check the tracking and the delivery date; Contact the seller in writing; Keep screenshots of the order and messages; Ask your bank or card company about a chargeback; Report it to {nz:Netsafe~au:Scamwatch}
+check: mcq | You paid by card and the store vanished. Who can help get money back? | Your bank, with a chargeback* | Nobody | The scammer
+check: tf | Chargebacks have time limits. | true
+home: Find where to report a scam store in your country with a grown-up.
+skill: consumer rights
+

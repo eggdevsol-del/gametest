@@ -219,6 +219,72 @@ check: mcq | Someone shares a mean picture of you. You… | Tell a grown-up* | S
 home: Look at photos with a grown-up and talk about which are OK to share.
 skill: privacy
 
+@lesson 4.1 | Ad or game? | 📺 | online
+hook: You're playing a game and a picture of a new game pops up. Is it part of your game?
+learn: Lots of free games show ads. Ads try to get you to tap and buy or download something.
+learn: Ads often have words like "Ad", "Sponsored" or "Install".
+learn: If you're not sure, stop and ask a grown-up.
+play: sort | Part of my game, An ad | My character jumping=Part of my game; A video for a different game=An ad; A box that says "Install now"=An ad; The level map=Part of my game; A banner saying "Sponsored"=An ad; My score=Part of my game | Game or ad?
+check: mcq | Which word often shows something is an ad? | Sponsored* | Level | Score
+check: tf | Ads try to get you to tap and download or buy something. | true
+home: Play a game with a grown-up and point out every ad you see.
+skill: ads
+
+@lesson 4.2 | The fake X | ❌ | online
+hook: You tap the X to close an ad, but it opens a shop instead! What happened?
+learn: Some ads have tiny or fake X buttons to trick you into tapping the ad.
+learn: The real close button might be small, in a corner, or appear after a few seconds.
+learn: If you're stuck, ask a grown-up or close the app.
+play: path | An ad pops up with a big X in the middle and a tiny x in the corner. | Ask a grown-up which one closes it => good: Asking keeps you from tapping into a shop by mistake. | Tap the big X fast => bad: Big X buttons in the middle can be part of the ad. | Tap everything until it goes away => bad: You might buy or download something by mistake.
+check: mcq | You can't find how to close an ad. What should you do? | Ask a grown-up* | Tap everything | Type in a password
+check: tf | Some ads have fake X buttons. | true
+home: Show a grown-up an ad in a game and find the real close button together.
+skill: ads
+
+@lesson 4.3 | You won! Or did you? | 🎁 | online
+hook: "Congratulations! You won a free tablet! Tap here!" Is it real?
+learn: Messages saying you've won something you never entered are tricks.
+learn: They want you to tap, share private details or pay money.
+learn: Real prizes don't ask kids for passwords or money.
+play: scam | Which messages are tricks? | You won a free tablet! Tap and enter your address=scam; Great job! You finished level 3=real; You're our 1,000,000th visitor! Claim your prize=scam; Your mum has set a reminder for reading time=real; Free gems! Just type your password=scam | Tricks say you won something you didn't enter, or ask for private things.
+check: mcq | A pop-up says you won a prize you never entered. What is it? | A trick* | A real prize | A game level
+check: tf | Real prizes ask kids for passwords. | false | Never share a password for a prize.
+home: Talk with a grown-up about a "you won" message they've seen.
+skill: scams
+
+@lesson 4.4 | Buttons that buy | 💎 | online
+hook: A big shiny button says "Get more!" What happens if you tap it?
+learn: Some buttons in games spend real money, even if they show gems or coins.
+learn: Shiny, flashing buttons are designed to make you want to tap.
+learn: Only tap buy buttons with a grown-up who said yes.
+play: tap | Tap the buttons that might cost real money | 💎:yes:Buy gems; 🛒:yes:Shop; 🎁:yes:Special offer; ▶️:no; ⏸️:no; ⭐:yes:Get the premium pass
+check: mcq | Who should say yes before you tap a buy button? | A grown-up* | Your friend | Nobody
+check: tf | Gems in games can cost real money. | true
+home: Ask a grown-up to turn on purchase controls on your device.
+skill: spending
+
+@lesson 4.5 | Hurry, hurry! | ⏱️ | online
+hook: "Only 10 seconds left! Buy now!" Why the rush?
+learn: Countdown timers try to make you tap before you think.
+learn: When something rushes you, that's the time to stop.
+learn: Wait, breathe and ask a grown-up.
+play: timing | Don't rush! Wait until the pause zone, then tap | Stop and ask | Pause
+check: mcq | A timer says "Buy in 10 seconds!" What should you do? | Stop and ask a grown-up* | Tap quickly | Tap ten times
+check: tf | Timers try to make you tap before you think. | true
+home: Look for a countdown timer on a website or game with a grown-up.
+skill: ads
+
+@lesson 4.6 | Stop, look, ask | 🛑 | online
+hook: Something pops up and you're not sure what it is. What are the three steps?
+learn: Stop: don't tap straight away.
+learn: Look: is it an ad, a prize or a buy button?
+learn: Ask: show a grown-up before you tap.
+play: order | What to do when something pops up | Stop and don't tap; Look at what it says; Ask a grown-up; Tap only if they say it's OK
+check: mcq | What's the first step? | Stop* | Tap | Share it
+check: tf | It's OK to ask a grown-up about every pop-up. | true
+home: Practise "stop, look, ask" with a grown-up on a game you play.
+skill: online safety
+
 @band builders
 @unit 1 | Scams | Spotting tricks for money and info
 @unit 2 | In-app purchases | Gems, coins and real money
@@ -441,6 +507,72 @@ check: mcq | Who can help you with a privacy check-up? | A grown-up* | A strange
 home: Do a privacy check-up on one app this week.
 skill: privacy
 
+@lesson 4.1 | Passphrases | 🔤 | online
+hook: Which is harder to crack: "Fluffy1" or "purple-tiger-pizza-rocket"?
+learn: Long passwords are much harder to crack than short ones.
+learn: A passphrase is four or more random words joined together. It's long and easy to remember.
+learn: Don't use your name, birthday or pet's name. They're easy to guess.
+play: sort | Strong, Weak | purple-tiger-pizza-rocket=Strong; Fluffy1=Weak; 123456=Weak; cactus-moon-blanket-river=Strong; password=Weak; MyName2015=Weak | Strong or weak?
+check: mcq | What makes a password strongest? | Being long and random* | Being your pet's name | Being 123
+check: tf | A passphrase of four random words is strong and easy to remember. | true
+home: Make up a pretend passphrase with a grown-up (don't use it for real).
+skill: passwords
+
+@lesson 4.2 | One password per account | 🔑 | online
+hook: You use the same password for everything. One site gets hacked. What happens?
+learn: When a website is hacked, criminals try the stolen passwords on other sites.
+learn: If you use the same password everywhere, one leak can open all your accounts.
+learn: Use a different password for each account. A password manager can remember them for you.
+play: mystery | You used one password for your game, email and music app.; The game company got hacked.; Next week, someone logged into your email.; Your music app sent a "new login" alert. | The leaked game password was tried on your other accounts* | Your email broke by itself | The music app is haunted
+check: mcq | Why use a different password for each account? | So one leak doesn't open everything* | It's more fun | Websites ask you to
+check: tf | Criminals try stolen passwords on other sites. | true
+home: Ask a grown-up whether they use a password manager.
+skill: passwords
+
+@lesson 4.3 | Turning on 2FA | 🔐 | online
+hook: Your password leaked, but the hacker still can't get in. Why?
+learn: Two-factor authentication, or 2FA, needs your password and a second thing, like a code.
+learn: The code can come from an authenticator app or a text message. Apps are usually safer.
+learn: Turn on 2FA for email first. Email can reset all your other accounts.
+play: order | Turn on two-factor login with a grown-up | Open the account's security settings; Find two-factor or two-step login; Choose an authenticator app or text code; Enter the code to confirm it works; Save the backup codes somewhere safe
+check: mcq | Which account should get 2FA first? | Your email* | A game you never play | A weather app
+check: tf | 2FA means a stolen password alone isn't enough. | true
+home: Check with a grown-up whether 2FA is on for your main accounts.
+skill: security
+
+@lesson 4.4 | Codes are secret | 🤫 | online
+hook: Someone in a game says, "I sent you a code by mistake. Can you tell me what it says?"
+learn: A login code is like a key. Anyone who has it can get into your account.
+learn: Real companies never ask you to tell them a code they sent.
+learn: If someone asks for a code, it's a scam. Don't share it, and tell a grown-up.
+play: scam | Which messages are trying to steal your account? | I sent a code to your phone by mistake. Can you read it to me?=scam; Your code is 482910. Don't share this code with anyone=real; Support team here. Tell us your login code to verify you=scam; You've signed in on a new device. Was this you?=real; Send me your code and I'll give you free skins=scam | Anyone asking for your code is trying to get into your account.
+check: mcq | Someone asks for a login code. What is it? | A scam* | Normal | A prize
+check: tf | Real companies ask you to read out codes they send. | false
+home: Show a grown-up a real login code message and read the warning on it.
+skill: scams
+
+@lesson 4.5 | Passkeys and face unlock | 👤 | online
+hook: Some sites let you log in with your face or fingerprint. Is that safer?
+learn: Passkeys let you sign in with your device's face scan, fingerprint or PIN instead of a password.
+learn: They're very hard to steal with fake websites, because they only work on the real site.
+learn: Keep your device locked, because it's now part of your key.
+play: tf | Passkeys only work on the real website, so fake sites can't steal them. | true | That's a big reason they're safer than passwords.
+check: mcq | What does a passkey use to sign you in? | Your device's face scan, fingerprint or PIN* | Your pet's name | Nothing
+check: tf | With passkeys, keeping your device locked matters even more. | true
+home: Ask a grown-up if any of their accounts use passkeys.
+skill: security
+
+@lesson 4.6 | Lock and log out | 🔒 | online
+hook: You used a library computer and left without logging out. What could happen?
+learn: Anyone can use an account that's still logged in.
+learn: On shared devices, always log out when you finish.
+learn: Lock your own phone or tablet with a code, so others can't get in.
+play: path | You finish using a school computer to check your email. | Log out and close the browser => good: Your account stays safe. | Just walk away => bad: The next person could read or send your emails. | Tell a friend to use your account => bad: They could post or buy things as you.
+check: mcq | What should you do after using a shared computer? | Log out* | Leave it on | Write your password on a note
+check: tf | A screen lock helps keep your device safe. | true
+home: Check that your device has a screen lock, with a grown-up.
+skill: security
+
 @band makers
 @unit 1 | Phishing and fraud | Emails, texts and fake websites
 @unit 2 | AI and deepfakes | When you can't trust what you see
@@ -660,6 +792,72 @@ check: tf | Some online quizzes collect answers to common security questions. | 
 check: mcq | Why share less data? | Less can be leaked or misused* | It's boring | It makes apps faster
 home: Look at a sign-up form and spot which fields are optional.
 skill: data
+
+@lesson 4.1 | Is this store real? | 🏪 | online
+hook: An online store has amazing sneakers for 80% off. Real deal or fake store?
+learn: Check the store before you buy: real contact details, a physical address and a clear returns policy.
+learn: Search the store's name plus "reviews" or "scam" on other sites, not just its own reviews.
+learn: Prices that are far too low, a brand-new website and bad spelling are red flags.
+play: tap | Tap the red flags for a fake store | 💸:yes:Prices 80% below everywhere else; 📧:yes:Only a contact form, no phone or address; 🆕:yes:The website is a few weeks old; 🏢:no; ⭐:no; 🔤:yes:Lots of spelling mistakes
+check: mcq | Where should you check a store's reviews? | On other websites, not just its own* | Only on its home page | Nowhere
+check: tf | A price that's far too low can be a red flag. | true
+home: Pick a store you've never used and check it with a grown-up using these steps.
+skill: online shopping
+
+@lesson 4.2 | Pay the safe way | 💳 | online
+hook: The store only accepts bank transfer or gift cards. Is that a problem?
+learn: Credit cards, debit cards and some payment services let you ask for your money back if goods never arrive.
+learn: Bank transfers, crypto and gift cards are very hard to get back. Scam stores love them.
+learn: Look for a padlock and the right web address, but remember fake stores can have padlocks too.
+play: sort | Safer way to pay, Risky way to pay | Credit card=Safer way to pay; Gift cards=Risky way to pay; Bank transfer to a stranger=Risky way to pay; A payment service with buyer protection=Safer way to pay; Crypto=Risky way to pay; Debit card=Safer way to pay | Safer or risky?
+check: mcq | Which is hardest to get back if you're scammed? | Gift cards* | A credit card payment | A payment with buyer protection
+check: tf | A padlock in the address bar proves a store is honest. | false | Fake stores can have padlocks too.
+home: Ask a grown-up which way they pay online, and why.
+skill: online shopping
+
+@lesson 4.3 | Overseas surprises | ✈️ | online
+hook: A $40 hoodie from overseas costs $62 at checkout. Where did $22 go?
+learn: Overseas shopping can add shipping, {nz:15% GST~au:10% GST} and currency fees.
+learn: Returns can be slow and expensive, so check sizing carefully.
+learn: Compare the total delivered price with a local store.
+play: price | Which hoodie costs less, delivered to your door? | Overseas, $40 plus shipping, GST and fees:62:1:hoodie; Local store, free shipping:55:1:hoodie
+check: mcq | What should you compare? | The total delivered price* | Only the price on the photo | The website colour
+check: tf | Returning things overseas can be slow and costly. | true
+home: Add an overseas item to a cart with a grown-up and see the full price at checkout.
+skill: online shopping
+
+@lesson 4.4 | Fake reviews | 🤖 | online
+hook: 2,000 five-star reviews, all posted last week. Trustworthy?
+learn: Some sellers buy fake reviews or post them with bots.
+learn: Warning signs: lots of reviews in a short time, vague praise and reviewers with no history.
+learn: Read the 2- and 3-star reviews. They're often the most honest.
+play: mystery | All 500 reviews are 5 stars.; They were all posted in the same week.; Most just say "Great product!!!".; The reviewers have no other reviews. | The reviews are probably fake* | It's the best product ever | Reviews are always fake
+check: mcq | Which reviews are often most honest? | The 2- and 3-star ones* | Only 5-star ones | None
+check: tf | Lots of reviews posted in a short time can be a warning sign. | true
+home: Read the middle-star reviews of a product you like with a grown-up.
+skill: online shopping
+
+@lesson 4.5 | Shop ads on social media | 📲 | online
+hook: An ad on your feed shows a famous brand at a giant discount. Should you tap?
+learn: Scammers run ads that copy real brands, with fake websites that look almost the same.
+learn: Check the web address carefully. One wrong letter can mean a fake site.
+learn: Go to the brand's real website yourself, instead of tapping the ad.
+play: scam | Which ads are likely scams? | Big-brand sneakers 90% off. Closing down sale today only!=scam; New season styles from a store you know, prices like in store=real; Win a free phone! Just pay $2 shipping=scam; A local café's ad for its new menu=real; Designer bags for $19, link goes to a strange web address=scam | Huge discounts, "only today" and odd web addresses are red flags.
+check: mcq | What's safest when you see a brand deal in an ad? | Go to the brand's real website yourself* | Tap the ad and buy fast | Share it with friends
+check: tf | Fake websites can look almost the same as real ones. | true
+home: Find a brand's real website with a grown-up, and compare its web address to a suspicious one.
+skill: scams
+
+@lesson 4.6 | It never arrived | 📭 | online
+hook: Your order is three weeks late and the store isn't replying. What now?
+learn: Contact the seller in writing first and keep copies of everything.
+learn: If you paid by card, ask your bank about a chargeback. Act quickly, because there are time limits.
+learn: Report scam stores to {nz:Netsafe and the Commerce Commission~au:Scamwatch}, which helps warn others.
+play: order | Sort out an order that never came | Check the tracking and the delivery date; Contact the seller in writing; Keep screenshots of the order and messages; Ask your bank or card company about a chargeback; Report it to {nz:Netsafe~au:Scamwatch}
+check: mcq | You paid by card and the store vanished. Who can help get money back? | Your bank, with a chargeback* | Nobody | The scammer
+check: tf | Chargebacks have time limits. | true
+home: Find where to report a scam store in your country with a grown-up.
+skill: consumer rights
 
 @band launchers
 @unit 1 | Identity theft | Protecting your identity documents
@@ -883,3 +1081,70 @@ check: tf | Deleting an app usually doesn't close the account. | true
 check: mcq | After cancelling a subscription, check… | That no more charges are coming* | Your horoscope | Nothing
 home: Find the "download your data" and "delete account" options in an app you use.
 skill: privacy
+
+@lesson 4.1 | Real hustles and red flags | 🧭 | online
+hook: "Earn $500 a day from your phone!" Hustle or scam?
+learn: Real online side hustles include selling things you make, tutoring, design, editing and reselling second-hand goods.
+learn: Red flags: paying to join, recruiting others to earn, or "jobs" receiving parcels or money for strangers.
+learn: Receiving and passing on money for others can make you a money mule, which is a crime.
+play: sort | Real side hustle, Red flag | Selling handmade earrings=Real side hustle; Paying $99 to unlock a "money system"=Red flag; Tutoring maths online=Real side hustle; Receiving payments and forwarding them for a stranger=Red flag; Editing videos for a local business=Real side hustle; Recruiting friends to earn commission on their sign-up fees=Red flag | Real or red flag?
+check: mcq | What's a money mule? | Someone who moves money for criminals* | A farm animal | A savings account
+check: tf | Real jobs make you pay to join. | false | Real jobs pay you, not the other way round.
+home: Look at one online job ad with a grown-up and check it for red flags.
+skill: side hustles
+
+@lesson 4.2 | Platform fees | 🧾 | online
+hook: You did a $100 design job through a freelance platform. Why did you get $80?
+learn: Freelance platforms often take 10% to 20% of what you earn.
+learn: Payment and withdrawal fees can come off too.
+learn: Build fees into your price, or move repeat clients to direct invoices if the platform's rules allow it.
+try: 20% of $100 is $20 :: gap | 20% of $250 is $_ | 50
+play: slider | A platform takes 15% and a $2 withdrawal fee. You earn $200. How much reaches your account? | 150 | 200 | 168 | $ | 2 | 1
+check: gap | A $60 job with a 10% fee pays you $_ | 54
+check: mcq | What should you do about platform fees? | Build them into your price* | Ignore them | Hide them from clients
+home: Look up the fees on a freelance platform with a grown-up.
+skill: pricing
+
+@lesson 4.3 | Price your time | ⏱️ | online
+hook: You want $25 an hour. Should you charge $25 an hour?
+learn: Freelancers pay their own tax and don't get paid for admin, learning or finding clients.
+learn: If only half your time is paid work, you need to charge more to make up for it.
+learn: Add your costs, like software, and set aside money for tax from every payment.
+play: budget | Plan what a $1,000 freelance month needs to cover, in tens of dollars | 100 | Tax set-aside=20; Software and tools=5; Platform fees=10; Savings buffer=0; Pay to yourself=0 | Laptop repair:10
+check: mcq | Why should freelancers charge more than a wage? | They pay their own tax and unpaid admin time* | They're greedy | They have no costs
+check: tf | Setting aside money for tax from every payment helps. | true
+home: Work out with a grown-up what hourly rate you'd need to take home $20 an hour.
+skill: pricing
+
+@lesson 4.4 | Getting paid safely | 🛡️ | online
+hook: A new client sends a cheque for $2,000 more than your fee and asks for the rest back. Lucky?
+learn: Overpayment scams send fake or reversible payments, then ask you to refund the "extra".
+learn: For new clients, ask for a deposit or use the platform's protected payment.
+learn: Send clear invoices with your name, the work, the amount and the due date.
+play: scam | Which client messages are scams? | I overpaid by $2,000. Please send the extra back today=scam; Here's the 50% deposit. Looking forward to the draft=real; Pay $50 for our training kit before you start=scam; Please invoice us when the job's done. We pay within 14 days=real; Use my courier and send your bank login so we can pay you=scam | Real clients pay you. Scammers overpay, ask for fees or want your login.
+check: mcq | What protects you with a new client? | A deposit or protected platform payment* | Sending money first | Sharing your bank login
+check: tf | You should refund an "overpayment" straight away. | false | It's a classic scam. Wait for the bank to confirm, and don't send money back.
+home: Make a simple invoice template with your name, the work, the amount and the due date.
+skill: invoicing
+
+@lesson 4.5 | Tax on side income | 📮 | townhall
+hook: You earned $3,000 from online sales this year. Does the tax office need to know?
+learn: Side income is usually taxable, even if it's small or paid through an app.
+learn: Many platforms now report sellers' income to {nz:IRD~au:the ATO}, so it's best to declare it yourself.
+learn: GST registration is needed once turnover goes over {nz:$60,000~au:$75,000} a year. Below that, it's optional.
+play: path | You earned $3,000 from freelancing this year. | Keep records and declare it to {nz:IRD~au:the ATO} => good: You've done it right, and you can claim your business costs. | Say nothing because it's small => bad: Platforms may report it anyway, and you could owe penalties. | Spend it all and hope => bad: You may still owe tax on it.
+check: mcq | When must you register for GST? | When turnover goes over {nz:$60,000~au:$75,000} a year* | From your first sale | Never
+check: tf | Some platforms report sellers' income to the tax office. | true
+home: Look up "side income" on {nz:ird.govt.nz~au:ato.gov.au} with a grown-up.
+skill: tax
+
+@lesson 4.6 | Reviews and reputation | ⭐ | online
+hook: One bad review is sitting at the top of your profile. What should you do?
+learn: Online, your reviews are your reputation. New clients read them first.
+learn: Reply to bad reviews calmly and professionally. Say what you'll do to fix it.
+learn: Never buy fake reviews. It breaks platform rules and consumer law.
+play: chat | A client left a 2-star review | them: The logo was 3 days late and I had to ask twice. | me: I'm sorry about the delay. That's not my usual standard. I'd like to offer a free extra revision*/That's a lie. You're a terrible client/Whatever, I don't care | them: OK, thanks. That helps. | me: Thanks for your patience. I've added a deadline tracker so it won't happen again*/Can you delete your review now?/Pay me extra for the revision
+check: mcq | How should you reply to a bad review? | Calmly, with what you'll do to fix it* | Angrily | Pay for fake good reviews
+check: tf | Buying fake reviews can break the law. | true
+home: Read how a business replied to a bad review online, with a grown-up. Was it good?
+skill: reputation

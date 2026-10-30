@@ -219,3 +219,70 @@ check: mcq | Which is a way to take part between elections? | Making a submissio
 home: Find your MP's contact details and one issue you'd raise with them.
 skill: civics
 
+@lesson 4.1 | Where the money comes from | 🏦 | townhall
+hook: The government spends billions. Where does it get the money?
+learn: Income tax from people is the biggest single source in both countries.
+learn: GST, company tax and other taxes, like excise on fuel and alcohol, add more.
+learn: When spending is bigger than income, the government borrows by selling bonds.
+play: sort | Government income, Government spending | Income tax=Government income; Pensions=Government spending; GST=Government income; Hospitals=Government spending; Company tax=Government income; Interest on debt=Government spending | Income or spending?
+check: mcq | What's the biggest single source of government income? | Income tax from people* | Parking fines | Selling stamps
+check: tf | Governments borrow by selling bonds. | true
+home: Find the latest Budget summary online with a grown-up and look at the income sources.
+skill: government
+
+@lesson 4.2 | Splitting the budget | 🥧 | townhall
+hook: You're the Finance Minister for a day. How would you split the money?
+learn: The biggest spending areas are usually welfare and pensions, health and education.
+learn: Interest on government debt also costs billions each year.
+learn: Every choice has a trade-off: more for one area means less for another, more tax or more debt.
+play: budget | Split a $100 government budget | 100 | Pensions and welfare=30; Health=20; Education=15; Interest on debt=5; Defence and police=5; Rainy day savings=0 | Natural disaster recovery:5
+check: mcq | What happens if you spend more on one area? | Less for another, more tax or more debt* | Nothing changes | The money appears by magic
+check: tf | Interest on government debt costs money every year. | true
+home: Talk with a grown-up about which area they'd give more money to, and why.
+skill: government
+
+@lesson 4.3 | Deficits and debt | 📉 | townhall
+hook: The government spent $10 billion more than it took in. What happens next?
+learn: A deficit is one year's gap between spending and income. Debt is all the borrowing added up.
+learn: Debt isn't always bad. Borrowing for roads or a crisis can make sense.
+learn: But higher debt means more interest to pay, which leaves less for other things.
+try: Spend $110 billion, take in $100 billion: a $10 billion deficit :: gap | Spend $120 billion, take in $105 billion: a $_ billion deficit | 15
+play: slider | Debt is $200 billion and the interest rate is 4%. About how much interest is paid each year, in billions? | 0 | 20 | 8 | $b | 1 | 1
+check: gap | Debt of $100 billion at 5% costs about $_ billion a year in interest | 5
+check: mcq | What's the difference between a deficit and debt? | A deficit is one year's gap. Debt is the total borrowed* | They're the same | Debt is one year only
+home: Look up your government's latest deficit or surplus with a grown-up.
+skill: government
+
+@lesson 4.4 | Comparing debt | 🌏 | townhall
+hook: Is $100 billion of debt a lot?
+learn: Economists compare debt with GDP, the size of the economy.
+learn: $100 billion of debt is small for a huge economy and big for a small one.
+learn: Debt as a share of GDP shows how heavy the load is, like comparing a loan with someone's income.
+play: mystery | Country A owes $100 billion. Its GDP is $2,000 billion.; Country B owes $50 billion. Its GDP is $100 billion.; Both pay similar interest rates. | Country B's debt is the heavier load* | Country A's debt is heavier because it's a bigger number | They're exactly the same
+check: mcq | Why compare debt with GDP? | It shows how big the debt is compared to the economy* | It makes debt disappear | GDP is a type of debt
+check: gap | Debt of $50 billion with GDP of $200 billion is _% of GDP | 25
+home: Compare a $10,000 loan for someone earning $30,000 and someone earning $150,000 with a grown-up.
+skill: government
+
+@lesson 4.5 | Trade-offs | ⚖️ | townhall
+hook: Free dental care for everyone. Who could say no to that?
+learn: Every policy costs something. Paying for it means higher taxes, more debt or cuts elsewhere.
+learn: The value of the next best thing you give up is called the opportunity cost.
+learn: Good debates ask: who benefits, who pays, and what else could the money do?
+play: debate | Should the government pay for free dental care for all adults? | It depends on the trade-offs: who benefits, who pays, and what else the money could do* | Yes, it's free so it costs nothing | Supporters say it prevents costly health problems later. Opponents point to the cost and other priorities.
+check: mcq | What is opportunity cost? | The value of the next best thing you give up* | The price on a label | A free gift
+check: tf | Every policy has to be paid for somehow. | true
+home: Pick a policy idea and list who benefits and who pays, with a grown-up.
+skill: decisions
+
+@lesson 4.6 | Budget day | 📅 | townhall
+hook: Once a year, the government announces its Budget. What should you look for?
+learn: The Budget sets out spending, tax changes and forecasts for the next few years. It's usually announced in May.
+learn: Look for changes that affect you: student support, tax, transport or health.
+learn: Check the forecasts for debt and deficits, and whether the government expects them to improve.
+play: order | Read a Budget like a pro | Find the official summary; List changes that affect people like you; Check what it costs and how it's paid for; Look at the debt and deficit forecasts; Compare different views on it
+check: mcq | When is the Budget usually announced? | May* | December | Every week
+check: tf | The Budget includes forecasts for the next few years. | true
+home: Read a news story about the latest Budget with a grown-up and find one change that affects your family.
+skill: government
+

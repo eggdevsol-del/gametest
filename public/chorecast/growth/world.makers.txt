@@ -221,3 +221,70 @@ check: mcq | {nz:Where can NZ consumers take unresolved disputes?~au:Where can A
 home: Write a short, polite complaint letter for a pretend faulty product.
 skill: consumer
 
+@lesson 4.1 | What is GDP? | 📏 | townhall
+hook: The news says the economy grew 0.5%. Grew how?
+learn: GDP, or gross domestic product, is the value of all the goods and services a country produces.
+learn: When GDP grows, the economy is producing more. When it falls, it's shrinking.
+learn: A recession is often defined as GDP falling two quarters in a row.
+play: match | Match each term to its meaning | GDP=The value of everything a country produces; Growth=GDP getting bigger; Recession=GDP falling for two quarters in a row; Quarter=Three months
+check: mcq | What does GDP measure? | The value of goods and services produced* | The number of people | The weather
+check: tf | A recession is often two quarters of falling GDP. | true
+home: Find a news story about GDP with a grown-up.
+skill: economy
+
+@lesson 4.2 | Unemployment | 🧑‍💼 | townhall
+hook: What does it mean when unemployment is 5%?
+learn: Unemployment counts people who want work and are looking, but don't have a job.
+learn: Students not looking for work and retirees don't count as unemployed.
+learn: 5% unemployment means 5 out of every 100 people in the labour force are looking for work.
+play: sort | Counted as unemployed, Not counted | Looking for work but no job=Counted as unemployed; Retired and not looking=Not counted; Full-time student not looking=Not counted; Lost their job and applying for others=Counted as unemployed; Working part-time=Not counted | Unemployed or not?
+check: mcq | Who counts as unemployed? | People looking for work without a job* | Retired people | Full-time students not looking
+check: tf | A retired person counts as unemployed. | false | They're not looking for work.
+home: Look up your country's latest unemployment rate with a grown-up.
+skill: economy
+
+@lesson 4.3 | How it all links | 🔗 | townhall
+hook: Inflation, interest rates and jobs. How do they affect each other?
+learn: When spending booms, businesses hire more and raise prices. Inflation can rise.
+learn: The central bank may raise interest rates to cool spending.
+learn: Slower spending can mean fewer new jobs. Getting the balance right is hard.
+play: order | Follow a boom and cool-down | People and businesses spend a lot; Businesses hire more and raise prices; Inflation rises above target; The central bank raises interest rates; Spending slows and inflation eases
+check: mcq | Why might a central bank raise rates? | To cool spending and bring down inflation* | To make everything cheaper overnight | To hire more people
+check: tf | Slower spending can mean fewer new jobs. | true
+home: Talk with a grown-up about how interest rates affect your family.
+skill: economy
+
+@lesson 4.4 | Real wages | 💵 | townhall
+hook: Your pay went up 3%, but prices went up 5%. Are you better off?
+learn: Real wages compare pay rises with price rises.
+learn: If pay rises 3% and prices rise 5%, your real wage fell about 2%. You can buy less.
+learn: If pay rises faster than prices, real wages grow.
+try: Pay up 4%, prices up 2%, is about 2% better off :: gap | Pay up 6%, prices up 4%, is about _% better off | 2
+play: slider | Pay rises 2% and prices rise 6%. About how much did real wages change, in percent? | -10 | 10 | -4 | % | 1 | 1
+check: gap | Pay up 5%, prices up 3%, is about _% better off | 2
+check: mcq | Pay rises 3%, prices rise 5%. What happened to real wages? | They fell* | They rose | They stayed the same
+home: Ask a grown-up whether their pay has kept up with prices.
+skill: economy
+
+@lesson 4.5 | When a recession hits | 🌧️ | townhall
+hook: The country is in a recession. What does that mean for families?
+learn: In a recession, businesses sell less, some cut jobs and unemployment rises.
+learn: Governments may spend more on support, and central banks often cut interest rates.
+learn: Families with emergency savings and steady habits cope better.
+play: path | A recession starts and your family worries about jobs. | Keep building savings and cut spending you don't need => good: That gives a buffer if hours or jobs are cut. | Take out a big loan for a holiday => bad: That adds debt when income is uncertain. | Panic-sell every investment => bad: That can lock in losses.
+check: mcq | What often rises in a recession? | Unemployment* | Business sales | Hiring
+check: tf | Emergency savings help families cope in a recession. | true
+home: Talk with a grown-up about how your family would handle a tough time.
+skill: economy
+
+@lesson 4.6 | Reading economic news | 📰 | townhall
+hook: "Economy shrinks!" The headline sounds scary. What does it really say?
+learn: Look for the actual number. "Shrinks 0.1%" is very different from "shrinks 5%".
+learn: Check the time period: one quarter, or a whole year?
+learn: Compare it with past numbers and forecasts, not just the headline.
+play: diff | A headline and the full facts. Tap what the facts add. | Economy shrinks!; Jobs crisis!; Prices soar! | GDP fell 0.1% in the last quarter; Unemployment rose from 4.9% to 5.1%; Inflation was 3.2% over the year, down from 3.5%
+check: mcq | What should you check in an economic headline? | The actual number and time period* | Only the headline | The font
+check: tf | A headline can make a small change sound big. | true
+home: Find an economic headline with a grown-up and check the real numbers in the story.
+skill: media literacy
+

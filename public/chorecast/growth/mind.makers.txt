@@ -218,3 +218,70 @@ check: mcq | Which is a sneaky ad tactic? | A game tie-in with a fast-food brand
 home: Spot a sponsorship or tie-in ad at a sports event or in a game.
 skill: advertising
 
+@lesson 4.1 | How much sleep? | 😴 | home
+hook: Teens need more sleep than adults. How much?
+learn: Teens aged 13 to 18 need about 8 to 10 hours of sleep a night.
+learn: Many teens get far less, which affects mood, memory and even sport.
+learn: Sleep is when your brain stores what you learned that day.
+try: Sleep at 10pm, wake at 7am is 9 hours :: gap | Sleep at 11pm, wake at 7am is _ hours | 8
+play: slider | You need to wake at 7am and want 9 hours of sleep. What time should you be asleep? Answer in pm. | 7 | 12 | 10 | pm | 0 | 1
+check: mcq | How much sleep do teens need? | About 8 to 10 hours* | 4 hours | 14 hours
+check: tf | Sleep helps your brain store what you learned. | true
+home: Track your sleep for a week and work out your average.
+skill: sleep
+
+@lesson 4.2 | The teen body clock | 🕰️ | home
+hook: Why do teens feel wide awake at 11pm but like zombies at 7am?
+learn: In the teen years, the body clock shifts later. Sleepiness comes later at night.
+learn: But school still starts early, so many teens run short on sleep.
+learn: A regular wake-up time, even on weekends, helps your body clock adjust.
+play: tf | Teens' body clocks naturally shift later. | true | That's why teens often feel awake late at night.
+check: mcq | What helps your body clock most? | Waking at the same time each day* | Sleeping until 2pm on weekends | Drinking energy drinks
+check: tf | Big weekend sleep-ins can make Monday mornings harder. | true
+home: Try waking at the same time every day for a week.
+skill: sleep
+
+@lesson 4.3 | Screens and sleep | 📵 | home
+hook: Just one more video. Then another. Why is it so hard to put the phone down?
+learn: Apps are designed to keep you watching, with autoplay and endless scroll.
+learn: Exciting content keeps your brain alert when it should be winding down.
+learn: Try stopping screens 30 to 60 minutes before bed, and charge your phone outside your room.
+play: tap | Tap the things that help you sleep | 🔌:yes:Charge your phone outside your room; 📖:yes:Read a paper book; 🌙:yes:Dim the lights; 📱:no; ☕:no; ⏰:yes:Stop screens an hour before bed
+check: mcq | Where's the best place to charge your phone at night? | Outside your bedroom* | Under your pillow | In your hand
+check: tf | Apps are designed to keep you watching. | true
+home: Try charging your phone outside your room for three nights.
+skill: sleep
+
+@lesson 4.4 | Study smarter | 🧠 | home
+hook: You've read your notes five times. Why can't you remember them?
+learn: Re-reading feels like learning but often isn't. Testing yourself works better.
+learn: Retrieval practice means trying to recall without looking: flashcards, practice questions or explaining it out loud.
+learn: Spacing out your study over days beats doing it all at once.
+play: sort | Strong study method, Weak study method | Testing yourself with flashcards=Strong study method; Re-reading notes again and again=Weak study method; Explaining it to someone else=Strong study method; Highlighting everything=Weak study method; Doing practice questions=Strong study method; Studying with the TV on=Weak study method | Strong or weak?
+check: mcq | Which works better? | Testing yourself* | Re-reading | Highlighting everything
+check: tf | Spacing study over several days helps you remember. | true
+home: Make five flashcards for something you're learning and test yourself.
+skill: study
+
+@lesson 4.5 | Cram or space? | 📆 | home
+hook: You have 4 hours to study for a test. All the night before, or 1 hour on 4 days?
+learn: Cramming can help you pass tomorrow, but you forget most of it fast.
+learn: Spacing it out builds memories that last.
+learn: Cramming also cuts into sleep, which you need to remember things.
+play: debate | Is cramming the night before a good way to study? | No. Spacing study over several days helps you remember more and sleep better* | Yes. It's always the best way | Sometimes it's all you have time for. A little cramming is better than none, but planning ahead works better.
+check: mcq | Why does spacing study help? | It builds longer-lasting memories* | It takes less effort | It's more fun to cram
+check: tf | Cramming can cut into your sleep. | true
+home: Plan your next test study over 4 days instead of 1 night.
+skill: study
+
+@lesson 4.6 | Focus blocks | 🍅 | home
+hook: Can you study for 3 hours straight? Should you?
+learn: Short focus blocks work well: 25 minutes of work, then a 5-minute break.
+learn: After four blocks, take a longer break.
+learn: Put your phone in another room during a block. Even having it nearby can distract you.
+play: timing | Focus for the block, then tap when the break zone arrives | Take a break | Break
+check: mcq | What's a common focus block? | 25 minutes of work, then a 5-minute break* | 3 hours without a break | 5 minutes of work, then an hour off
+check: tf | Having your phone nearby can distract you. | true
+home: Try three 25-minute focus blocks with breaks this week.
+skill: focus
+
