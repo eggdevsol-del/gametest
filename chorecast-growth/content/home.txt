@@ -219,6 +219,73 @@ check: mcq | What does "slap" mean in the sun safe saying? | Slap on a hat* | Sl
 home: Pack a sun-safe beach bag with a grown-up.
 skill: sunsafety
 
+@lesson 4.1 | Get ready to wash | 🧽 | kitchen
+hook: Before you wash a single dish, there are a few jobs to do. What are they?
+learn: Scrape leftover food into the bin or compost first.
+learn: Stack the dirty dishes next to the sink.
+learn: Ask a grown-up to help fill the sink with warm, soapy water. Not too hot!
+play: order | Get ready to wash the dishes | Scrape leftover food into the bin; Stack the dishes by the sink; Put the plug in the sink; Ask a grown-up to help with warm water; Add a little dish soap
+check: mcq | What should you do first? | Scrape the leftover food off* | Put the plates in the cupboard | Add lots of soap to the floor
+check: tf | The water should be warm, not burning hot. | true
+home: Help get the sink ready for washing up with a grown-up tonight.
+skill: dishes
+
+@lesson 4.2 | Cleanest first | 🥛 | kitchen
+hook: Glasses or greasy pots: which should you wash first?
+learn: Wash the cleanest things first, while the water is fresh.
+learn: Glasses and cups go first, then cutlery, then plates and bowls.
+learn: Greasy pots and pans go last.
+play: build | Stack the washing-up order | Glasses and cups; Cutlery; Plates and bowls; Pots and pans
+check: mcq | What should you wash last? | Greasy pots and pans* | Glasses | Cups
+check: tf | Washing the cleanest things first keeps the water cleaner for longer. | true
+home: Wash the dishes in the right order with a grown-up.
+skill: dishes
+
+@lesson 4.3 | Careful with knives | 🔪 | kitchen
+hook: Why shouldn't you drop a sharp knife into soapy water?
+learn: In soapy water, you can't see a knife. Someone could reach in and get cut.
+learn: Leave sharp knives on the bench for a grown-up, or wash them one at a time, carefully.
+learn: Hold knives by the handle, with the sharp edge pointing away from you.
+play: path | There's a sharp knife on the bench next to the sink. | Leave it on the bench and tell a grown-up => good: That keeps everyone's hands safe. | Drop it into the soapy water => bad: Someone could reach in and get cut. | Hide it under the tea towel => bad: Someone could grab the towel and get hurt.
+check: mcq | Where should a sharp knife go while you wash up? | On the bench for a grown-up* | Hidden in the soapy water | Under a tea towel
+check: tf | You can see a knife easily in soapy water. | false | Bubbles hide it, so someone could get cut.
+home: Ask a grown-up to show you how to hold a knife safely by the handle.
+skill: safety
+
+@lesson 4.4 | Rinse and dry | 🍽️ | kitchen
+hook: The dishes are washed. Are you finished?
+learn: Rinse off the soap bubbles with clean water.
+learn: Put dishes in the rack to drip, or dry them with a clean tea towel.
+learn: Put them away in the right cupboard when they're dry.
+play: tap | Tap the things that finish the job | 🚿:yes:Rinse off the bubbles; 🧺:yes:Put dishes in the rack; 🧻:yes:Dry with a clean tea towel; 🙈:no; 🏃:no; 🗄️:yes:Put them away
+check: mcq | What should you do after washing? | Rinse off the soap* | Leave the bubbles on | Hide the dishes
+check: tf | Dry dishes go back in the cupboard. | true
+home: Rinse, dry and put away the dishes tonight with a grown-up.
+skill: dishes
+
+@lesson 4.5 | Dishwasher or hand wash? | 🫧 | kitchen
+hook: Can everything go in the dishwasher?
+learn: Plates, cups, bowls and most cutlery can go in the dishwasher.
+learn: Wooden spoons, sharp knives and special pans should be washed by hand.
+learn: If you're not sure, ask a grown-up first.
+play: sort | Dishwasher, Hand wash | Plates=Dishwasher; Wooden spoon=Hand wash; Cups=Dishwasher; Sharp knife=Hand wash; Bowls=Dishwasher; Wooden chopping board=Hand wash | Dishwasher or hand wash?
+check: mcq | Which should be washed by hand? | A wooden spoon* | A plate | A cup
+check: tf | If you're not sure, ask a grown-up first. | true
+home: Help load the dishwasher with a grown-up, and find one thing that must be hand washed.
+skill: dishes
+
+@lesson 4.6 | Saving water | 💧 | kitchen
+hook: Leaving the tap running while you wash up. Is that a big deal?
+learn: A running tap can pour out about 10 litres of water every minute.
+learn: Washing in a sink of water uses much less.
+learn: Turn the tap off between rinses.
+try: 10 litres a minute for 2 minutes is 20 litres :: gap | 10 litres a minute for 5 minutes is _ litres | 50
+play: slider | A tap runs 10 litres a minute. How many litres in 3 minutes? | 0 | 60 | 30 | L | 0 | 5
+check: gap | 10 litres a minute for 4 minutes is _ litres | 40
+check: mcq | What saves water when washing up? | Using a sink of water* | Leaving the tap on | Washing each fork under the tap
+home: Help wash up with the tap off between rinses.
+skill: saving water
+
 @band builders
 @unit 1 | Cooking basics | Simple meals and kitchen skills
 @unit 2 | Laundry | Washing, drying and stains
@@ -438,6 +505,73 @@ check: tf | You should keep checking their breathing until help comes. | true
 check: mcq | When is the recovery position used? | When someone is unconscious but breathing* | When someone is sprinting | When someone is eating
 home: Practise the recovery position on a grown-up who's happy to help.
 skill: firstaid
+
+@lesson 4.1 | Top to bottom | ⬇️ | home
+hook: You vacuumed the floor, then dusted the shelves. Dust fell everywhere! What went wrong?
+learn: Clean from top to bottom. Dust and crumbs fall down as you go.
+learn: Start with high shelves, then tables and desks, then the floor last.
+learn: That way you only clean each place once.
+play: order | Clean a room from top to bottom | Dust high shelves and the top of the wardrobe; Wipe the desk and bedside table; Wipe the skirting boards; Vacuum the floor
+check: mcq | What should you clean last? | The floor* | The top shelf | The desk
+check: tf | Cleaning top to bottom means you only clean each place once. | true
+home: Clean one room at home from top to bottom.
+skill: cleaning
+
+@lesson 4.2 | Dry, then wet | 💦 | home
+hook: Should you mop before you vacuum?
+learn: Do dry jobs first: tidy, dust and vacuum.
+learn: Then wet jobs: wipe benches and mop floors.
+learn: If you mop first, dust and crumbs turn into mud!
+play: sort | Dry job, Wet job | Dusting shelves=Dry job; Mopping the floor=Wet job; Vacuuming=Dry job; Wiping the bench with spray=Wet job; Sweeping=Dry job; Cleaning the mirror=Wet job | Dry or wet?
+check: mcq | What comes first, vacuuming or mopping? | Vacuuming* | Mopping | It doesn't matter
+check: tf | Mopping before vacuuming can turn dust into mud. | true
+home: Do the dry jobs, then the wet jobs, in one room at home.
+skill: cleaning
+
+@lesson 4.3 | Safe cleaning products | ⚠️ | home
+hook: Two cleaning sprays together must clean twice as well, right?
+learn: Never mix cleaning products. Some, like bleach and ammonia, make poisonous gas together.
+learn: Read the label, use gloves if it says so, and open a window.
+learn: Keep products in their own bottles, away from little kids.
+play: path | The toilet cleaner isn't working fast. You find a bottle of bleach. | Ask a grown-up and use just one product as the label says => good: Safe and still clean. | Pour bleach in with the other cleaner => bad: Mixing products can make poisonous gas. | Put cleaner in a drink bottle to make it easier => bad: Someone could drink it by mistake.
+check: mcq | What should you never do with cleaning products? | Mix them together* | Read the label | Open a window
+check: tf | Cleaning products should be kept in their own bottles. | true
+home: Read the warning label on one cleaning product with a grown-up.
+skill: safety
+
+@lesson 4.4 | The right tool | 🧹 | home
+hook: Would you clean a window with a scrubbing brush?
+learn: Different jobs need different tools.
+learn: Microfibre cloths grab dust. A vacuum gets carpet. A squeegee leaves glass streak-free.
+learn: Using the right tool is faster and does a better job.
+play: match | Match each job to the best tool | Dusting a shelf=Microfibre cloth; Cleaning carpet=Vacuum cleaner; Washing a window=Squeegee; Scrubbing a dirty pot=Scrubbing brush; Sweeping a deck=Broom
+check: mcq | What's best for dust? | A microfibre cloth* | A wet mop | A squeegee
+check: tf | The right tool makes cleaning faster. | true
+home: Find three cleaning tools at home and say what each one is best for.
+skill: cleaning
+
+@lesson 4.5 | Keep, give or throw? | 📦 | home
+hook: Your room is full of stuff you never use. What can you do?
+learn: Decluttering means sorting things into keep, give away and throw out.
+learn: Give away things in good condition, like clothes and toys you've grown out of.
+learn: Throw out broken things or recycle them if you can.
+play: sort | Keep, Give away, Throw out | Your favourite book=Keep; Clothes that are too small=Give away; A broken pen=Throw out; A puzzle you've finished, all pieces there=Give away; Your school bag=Keep; A torn, stained T-shirt=Throw out | Keep, give or throw?
+check: mcq | What should you do with toys you've grown out of that still work? | Give them away* | Throw them out | Hide them
+check: tf | Less clutter makes a room easier to clean. | true
+home: Pick five things in your room to give away, with a grown-up's OK.
+skill: tidying
+
+@lesson 4.6 | The 10-minute reset | ⏲️ | home
+hook: What if a few minutes a day meant you never had a giant clean-up?
+learn: A quick reset each evening keeps a room under control.
+learn: Put things back, clear your desk and get clothes off the floor.
+learn: Ten minutes a day is about 70 minutes a week, and stops big messes.
+try: 10 minutes a day for 7 days is 70 minutes :: gap | 5 minutes a day for 7 days is _ minutes | 35
+play: timing | Tidy fast! Tap when the timer reaches the reset zone | Reset done | Reset
+check: gap | 15 minutes a day for 4 days is _ minutes | 60
+check: mcq | What's the point of a daily reset? | Stopping big messes building up* | Making more mess | Missing dinner
+home: Try a 10-minute reset in your room tonight.
+skill: tidying
 
 @band makers
 @unit 1 | Shopping on a budget | Meal planning and saving at the supermarket
@@ -660,6 +794,72 @@ check: tf | You should never ride with a driver who's been drinking. | true
 check: gap | $24 of fuel and parking split 4 ways is $_ each | 6
 home: Plan a carpool for something your family goes to regularly.
 skill: transport
+
+@lesson 4.1 | Fixed things first | 🗓️ | home
+hook: School, sport, a part-time job and homework. How do you fit it all in?
+learn: Start your week plan with fixed things: school, practice, work shifts and family events.
+learn: Then add the flexible things around them, like homework, chores and fun.
+learn: Leave some gaps. Something always comes up.
+play: build | Build a weekly plan | Add school and work shifts; Add sport, clubs and family events; Add homework and study time; Add chores; Add fun and rest; Leave a few empty gaps
+check: mcq | What goes into your plan first? | Fixed things like school and shifts* | Gaming time | Nothing
+check: tf | Leaving gaps in your plan helps when things come up. | true
+home: Write next week's fixed things on a calendar with your family.
+skill: planning
+
+@lesson 4.2 | Blocks of time | 🧱 | home
+hook: "I'll do homework sometime tonight." Does that usually happen?
+learn: Time blocking means giving each task its own slot, like "4:30 to 5:15: maths".
+learn: Blocks make it clear what you're doing and when you'll stop.
+learn: Put your phone away during study blocks. Notifications break focus.
+play: match | Match each task to a sensible block | Maths homework=4:30 to 5:15; Walk the dog=5:15 to 5:45; Dinner and dishes=6:00 to 7:00; Read for English=7:15 to 7:45; Screens and chat=7:45 to 8:30
+check: mcq | What is time blocking? | Giving each task its own time slot* | Doing everything at once | Not planning at all
+check: tf | Notifications can break your focus during study. | true
+home: Time-block one afternoon this week and see if it helps.
+skill: planning
+
+@lesson 4.3 | Energy, not just time | 🔋 | home
+hook: You have an hour free. Is it the same at 4pm as at 10pm?
+learn: Some times of day you're sharp. Others you're tired.
+learn: Do hard thinking tasks when you have the most energy.
+learn: Save easy tasks, like tidying or replying to messages, for low-energy times.
+play: sort | High-energy task, Low-energy task | Studying for a test=High-energy task; Folding washing=Low-energy task; Writing an essay=High-energy task; Replying to group chat=Low-energy task; Learning new maths=High-energy task; Packing your bag for tomorrow=Low-energy task | High or low energy?
+check: mcq | When should you do hard thinking tasks? | When you have the most energy* | Just before sleep | During a movie
+check: tf | Low-energy times are good for easy tasks. | true
+home: Notice when you feel most awake this week and plan one hard task for that time.
+skill: planning
+
+@lesson 4.4 | Big task, small chunks | 🧩 | home
+hook: A project is due in three weeks. When do you start?
+learn: Break big tasks into chunks, each with its own mini-deadline.
+learn: Work backwards from the due date.
+learn: Starting early leaves time to fix problems, and to ask for help.
+play: order | Plan a 3-week project | Week 1: choose a topic and research; Week 2: write a rough draft; Week 3, early: get feedback and improve it; Week 3, late: final check and hand in
+check: mcq | How should you plan a big project? | Break it into chunks with mini-deadlines* | Do it all the night before | Wait for inspiration
+check: tf | Working backwards from the due date helps you plan. | true
+home: Break one upcoming task into chunks and add them to a calendar.
+skill: planning
+
+@lesson 4.5 | Saying no | 🙅 | home
+hook: Your week is full, and a friend asks you to help with their event. Do you have to say yes?
+learn: Saying yes to everything means doing nothing well.
+learn: You can say no kindly: "I'd love to, but I can't this week."
+learn: Offer something smaller if you want to help: "I can help for an hour on Sunday."
+play: chat | A friend asks for help | them: Can you help run my stall all day Saturday? | me: I'd love to help, but I've got a shift Saturday. I could do an hour on Sunday?*/No. Never ask me again/Sure, I'll cancel my shift | them: That would be great, thanks! | me: Cool. I'll put it in my calendar*/Actually, never mind/Maybe, maybe not
+check: mcq | Which is a kind way to say no? | "I can't this week, but I could help for an hour on Sunday."* | "No, go away." | Ignore the message
+check: tf | Saying yes to everything can mean doing nothing well. | true
+home: Practise a kind no with a grown-up for something you can't fit in.
+skill: boundaries
+
+@lesson 4.6 | The weekly review | 🔁 | home
+hook: Sunday night. Five minutes. What could you check?
+learn: Look back: what got done, and what didn't?
+learn: Look ahead: what's coming up, and what needs preparing?
+learn: Move unfinished tasks into next week's plan, or decide to drop them.
+play: path | It's Sunday. Two tasks from last week aren't done. | Move them into specific slots this week => good: They're planned, not forgotten. | Ignore them and hope they go away => bad: They'll pile up and cause stress later. | Stay up until 2am to finish them tonight => bad: You'll be exhausted for the whole week.
+check: mcq | What should you do with unfinished tasks? | Plan them into next week or drop them* | Forget about them | Panic
+check: tf | A weekly review can take just five minutes. | true
+home: Do a five-minute weekly review this Sunday.
+skill: planning
 
 @band launchers
 @unit 1 | Renting your first place | Searching, applying and moving in
@@ -886,3 +1086,71 @@ check: tf | Extended warranties often cover things the law already guarantees. |
 check: mcq | For a $25 item, it's usually better to… | Save the money yourself* | Buy insurance | Buy two
 home: List your three most valuable things and whether you'd insure them.
 skill: insurance
+
+@lesson 4.1 | Up-front costs | 💸 | home
+hook: Rent is $250 a week. How much do you need before you can move in?
+learn: Bond is usually up to 4 weeks' rent. Rent in advance is usually up to 2 weeks.
+learn: $250 rent means about $1,000 of bond and $500 in advance: $1,500 before moving day.
+learn: Add moving costs, connection fees and basic furniture. Many people need $2,500 or more.
+try: 4 weeks of $250 rent is $1,000 bond :: gap | 4 weeks of $300 rent is $_ bond | 1200
+play: budget | Plan the up-front costs of moving into a $250-a-week room, in tens of dollars | 300 | Bond=100; Rent in advance=50; Moving van=15; Bed and bedding=40; Kitchen basics=15; Emergency buffer=0 | Internet connection fee:5
+check: gap | Bond of 4 weeks plus 2 weeks in advance at $200 rent is $_ | 1200
+check: mcq | What's usually the biggest up-front cost? | The bond* | Toilet paper | A plant
+home: Look up the rent and bond for a room near you with a grown-up.
+skill: renting
+
+@lesson 4.2 | What you really need | 🛏️ | home
+hook: Do you need a brand-new couch on day one?
+learn: Day-one essentials: a bed, bedding, towels, basic kitchen gear and cleaning supplies.
+learn: Lots can wait or come second-hand: couches, desks and decorations.
+learn: Family, friends and second-hand sites can save you hundreds of dollars.
+play: sort | Day-one essential, Can wait | A bed and bedding=Day-one essential; A big TV=Can wait; A pot, pan and plates=Day-one essential; A new couch=Can wait; Towels=Day-one essential; Wall art=Can wait; Toilet paper and soap=Day-one essential | Essential or can it wait?
+check: mcq | Which is a day-one essential? | Bedding* | A big TV | Wall art
+check: tf | Second-hand furniture can save you a lot. | true
+home: Make a day-one list for moving out with a grown-up.
+skill: renting
+
+@lesson 4.3 | The weekly cost of living | 🧮 | home
+hook: Rent is $250. Is that all you need each week?
+learn: Add food, power, internet, phone and transport. They often add $200 or more a week.
+learn: $250 rent + $100 food + $30 power + $20 internet + $15 phone + $40 transport = $455.
+learn: That's before fun, clothes and saving.
+try: $250 + $100 = $350 :: gap | $350 + $30 + $20 = $_ | 400
+play: slider | Rent $220, food $110, power $30, internet $20, phone $15, transport $45. Weekly total? | 300 | 600 | 440 | $ | 5 | 5
+check: gap | $200 rent + $100 food + $50 bills = $_ | 350
+check: mcq | What's often forgotten in a moving-out budget? | Food, power and transport* | Rent | Bond
+home: Ask a grown-up roughly what your household spends on food each week.
+skill: budgeting
+
+@lesson 4.4 | Costs nobody mentions | 👻 | home
+hook: Toilet paper, cleaning spray and laundry powder. Who pays for those now?
+learn: When you move out, you pay for everyday items your family used to buy.
+learn: Contents insurance protects your things if there's a fire or theft. It's often worth having.
+learn: Plan $15 to $30 a week for household items and small surprises.
+play: tap | Tap the costs people forget when moving out | 🧻:yes:Toilet paper; 🧴:yes:Cleaning products; 🧺:yes:Laundry powder; 🎂:no; 🏖️:no; 🛡️:yes:Contents insurance
+check: mcq | What does contents insurance cover? | Your things, if there's a fire or theft* | The building itself | Your rent
+check: tf | You'll need to buy everyday items like toilet paper yourself. | true
+home: List with a grown-up the household items your family buys each month.
+skill: budgeting
+
+@lesson 4.5 | Home, flat or solo? | 🏘️ | home
+hook: Stay at home, flat with friends or live alone. Which costs least?
+learn: Living at home is usually cheapest, but you may pay board and help out.
+learn: Flatting splits rent and bills, so it's often much cheaper than living alone.
+learn: Living alone gives privacy but costs the most.
+play: debate | Should you move out as soon as you can? | Not always. Staying home while you save or study can set you up well* | Yes. Everyone should leave at 18 | Moving out builds independence and life skills, and some homes aren't good places to stay. It depends on your situation.
+check: mcq | Which is usually cheapest? | Living at home, maybe paying board* | Living alone | Renting a whole house by yourself
+check: tf | Flatting splits rent and bills. | true
+home: Talk with your family about when moving out might make sense for you.
+skill: decisions
+
+@lesson 4.6 | Moving day | 🚚 | home
+hook: The keys are yours! What should you do first?
+learn: Do a property inspection and take dated photos of every room before you unpack.
+learn: Check the {nz:bond is lodged with Tenancy Services~au:bond is lodged with your state's bond authority} and get a receipt.
+learn: Set up power and internet in your name, and update your address with the bank and others.
+play: order | Do moving day right | Get the keys and the inspection report; Take dated photos of every room; Note any damage on the report and return it; Check your bond has been lodged; Set up power and internet; Update your address
+check: mcq | Why take dated photos when you move in? | To prove the condition when you move out* | For social media | To make the flat look nicer
+check: tf | Your bond should be lodged with an official bond authority. | true
+home: Practise taking clear photos of a room as if you were doing a move-in inspection.
+skill: renting

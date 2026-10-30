@@ -224,3 +224,69 @@ check: mcq | Why would returning to gold be hard? | There isn't enough gold at c
 home: Ask a grown-up whether they'd trust gold-backed money more, and why.
 skill: money
 
+@lesson 4.1 | A bank for banks | 🏦 | bank
+hook: Your bank has a bank. Who is it?
+learn: A central bank is the government's bank and the banks' bank. Ours is {nz:the Reserve Bank of New Zealand~au:the Reserve Bank of Australia}.
+learn: It sets the official interest rate, issues notes and keeps the payment system running.
+learn: In a crisis, it can lend to banks so they don't collapse. That's called being the lender of last resort.
+play: match | Match each job to what it means | Set the official cash rate=Influence interest rates across the economy; Issue notes=Make sure there's enough real money; Run payment systems=Help money move between banks; Lender of last resort=Lend to banks in a crisis
+check: mcq | Who is the lender of last resort? | The central bank* | Your local café | The stock exchange
+check: tf | A central bank issues our notes. | true
+home: Find one thing your central bank did this year on its website with a grown-up.
+skill: central banks
+
+@lesson 4.2 | Our central banks | 📜 | museum
+hook: How old are our central banks?
+learn: {nz:The Reserve Bank of New Zealand opened in 1934, during the Great Depression.~au:The Reserve Bank of Australia started in 1960. Before that, the Commonwealth Bank did central bank jobs.}
+learn: {nz:In 1989, New Zealand became the first country to give its central bank a formal inflation target.~au:Since the 1990s, it has aimed to keep inflation between 2% and 3% on average.}
+learn: Today a committee of experts makes rate decisions, not one person.
+play: tf | {nz:New Zealand was the first country to give its central bank a formal inflation target.~au:The Reserve Bank of Australia aims to keep inflation between 2% and 3%.} | true
+check: mcq | When did our central bank start? | {nz:1934~au:1960}* | 1800 | 2010
+check: tf | One person alone makes every rate decision. | false | A committee decides.
+home: Ask a grown-up if they remember a time when interest rates were very high.
+skill: central banks
+
+@lesson 4.3 | How the cash rate spreads | 🌊 | bank
+hook: The central bank raises one rate. Why does your family's mortgage change?
+learn: The official cash rate is what banks pay to borrow from each other overnight.
+learn: When it rises, banks usually raise rates on loans and savings too.
+learn: Higher loan rates mean people borrow and spend less, which slows price rises.
+play: order | Follow a cash rate rise through the economy | The central bank raises the cash rate; Banks raise their loan and savings rates; Mortgages and loans cost more; People and businesses spend less; Price rises slow down
+check: mcq | What usually happens when the cash rate rises? | Loan rates rise* | Loans get cheaper | Nothing
+check: tf | Higher interest rates usually slow spending. | true
+home: Look up today's official cash rate with a grown-up.
+skill: interest rates
+
+@lesson 4.4 | Too hot or too cold? | 🌡️ | bank
+hook: Is the economy running too hot or too cold? How does the central bank choose?
+learn: When prices rise too fast, the economy is "too hot". The central bank may raise rates.
+learn: When jobs are being lost and spending falls, it's "too cold". The bank may cut rates.
+learn: Rate changes take a year or two to work fully, so central banks try to look ahead.
+play: sort | Likely to raise rates, Likely to cut rates | Inflation is well above target=Likely to raise rates; Unemployment is rising fast=Likely to cut rates; Spending and prices are booming=Likely to raise rates; A recession has started=Likely to cut rates; Inflation is falling below target=Likely to cut rates | Raise or cut?
+check: mcq | Inflation is well above target. What might the central bank do? | Raise rates* | Cut rates | Print notes for everyone
+check: tf | Rate changes take time to work. | true
+home: Find a news story about the latest rate decision and see whether it was a rise, a cut or no change.
+skill: interest rates
+
+@lesson 4.5 | Independent central banks | 🧑‍⚖️ | townhall
+hook: Why doesn't the government set interest rates itself?
+learn: Governments set the target, like keeping inflation low. The central bank decides how to hit it.
+learn: This independence stops rates being cut just to win an election, which could push inflation up later.
+learn: The bank still has to explain its decisions publicly and can be questioned by Parliament.
+play: debate | Should central banks be independent from politicians? | Yes. It stops short-term political choices that could cause inflation later* | No. Politicians should change rates whenever they like | Some argue elected people should have more say, because rate decisions affect everyone's lives.
+check: mcq | Who sets the central bank's target? | The government* | The central bank alone | Big banks
+check: tf | Central banks must explain their decisions publicly. | true
+home: Talk with a grown-up about why it might be risky to let politicians set interest rates.
+skill: central banks
+
+@lesson 4.6 | Why not just print more? | 🖨️ | bank
+hook: If the central bank can make money, why not give everyone a million dollars?
+learn: If there's much more money but the same amount of stuff, prices rise. That's inflation.
+learn: Printing too much has led to hyperinflation, like in Zimbabwe in the 2000s.
+learn: In 2020, both our central banks bought government bonds to support the economy, but carefully and for a set time.
+play: path | The country is in a deep recession. What should the central bank do? | Cut rates and support lending for a while, watching inflation => good: That's a common, careful response. | Print money and give everyone $1 million => bad: Prices would soar and money would lose its value. | Do nothing at all, ever => bad: That could make the recession worse.
+check: mcq | What happens if far more money is printed than there is stuff to buy? | Prices rise* | Everyone gets richer for ever | Nothing
+check: tf | Printing too much money can cause hyperinflation. | true
+home: Ask a grown-up what they'd buy if everyone had a million dollars, and what shops might do to prices.
+skill: inflation
+

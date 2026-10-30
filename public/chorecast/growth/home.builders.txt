@@ -218,3 +218,70 @@ check: mcq | When is the recovery position used? | When someone is unconscious b
 home: Practise the recovery position on a grown-up who's happy to help.
 skill: firstaid
 
+@lesson 4.1 | Top to bottom | ⬇️ | home
+hook: You vacuumed the floor, then dusted the shelves. Dust fell everywhere! What went wrong?
+learn: Clean from top to bottom. Dust and crumbs fall down as you go.
+learn: Start with high shelves, then tables and desks, then the floor last.
+learn: That way you only clean each place once.
+play: order | Clean a room from top to bottom | Dust high shelves and the top of the wardrobe; Wipe the desk and bedside table; Wipe the skirting boards; Vacuum the floor
+check: mcq | What should you clean last? | The floor* | The top shelf | The desk
+check: tf | Cleaning top to bottom means you only clean each place once. | true
+home: Clean one room at home from top to bottom.
+skill: cleaning
+
+@lesson 4.2 | Dry, then wet | 💦 | home
+hook: Should you mop before you vacuum?
+learn: Do dry jobs first: tidy, dust and vacuum.
+learn: Then wet jobs: wipe benches and mop floors.
+learn: If you mop first, dust and crumbs turn into mud!
+play: sort | Dry job, Wet job | Dusting shelves=Dry job; Mopping the floor=Wet job; Vacuuming=Dry job; Wiping the bench with spray=Wet job; Sweeping=Dry job; Cleaning the mirror=Wet job | Dry or wet?
+check: mcq | What comes first, vacuuming or mopping? | Vacuuming* | Mopping | It doesn't matter
+check: tf | Mopping before vacuuming can turn dust into mud. | true
+home: Do the dry jobs, then the wet jobs, in one room at home.
+skill: cleaning
+
+@lesson 4.3 | Safe cleaning products | ⚠️ | home
+hook: Two cleaning sprays together must clean twice as well, right?
+learn: Never mix cleaning products. Some, like bleach and ammonia, make poisonous gas together.
+learn: Read the label, use gloves if it says so, and open a window.
+learn: Keep products in their own bottles, away from little kids.
+play: path | The toilet cleaner isn't working fast. You find a bottle of bleach. | Ask a grown-up and use just one product as the label says => good: Safe and still clean. | Pour bleach in with the other cleaner => bad: Mixing products can make poisonous gas. | Put cleaner in a drink bottle to make it easier => bad: Someone could drink it by mistake.
+check: mcq | What should you never do with cleaning products? | Mix them together* | Read the label | Open a window
+check: tf | Cleaning products should be kept in their own bottles. | true
+home: Read the warning label on one cleaning product with a grown-up.
+skill: safety
+
+@lesson 4.4 | The right tool | 🧹 | home
+hook: Would you clean a window with a scrubbing brush?
+learn: Different jobs need different tools.
+learn: Microfibre cloths grab dust. A vacuum gets carpet. A squeegee leaves glass streak-free.
+learn: Using the right tool is faster and does a better job.
+play: match | Match each job to the best tool | Dusting a shelf=Microfibre cloth; Cleaning carpet=Vacuum cleaner; Washing a window=Squeegee; Scrubbing a dirty pot=Scrubbing brush; Sweeping a deck=Broom
+check: mcq | What's best for dust? | A microfibre cloth* | A wet mop | A squeegee
+check: tf | The right tool makes cleaning faster. | true
+home: Find three cleaning tools at home and say what each one is best for.
+skill: cleaning
+
+@lesson 4.5 | Keep, give or throw? | 📦 | home
+hook: Your room is full of stuff you never use. What can you do?
+learn: Decluttering means sorting things into keep, give away and throw out.
+learn: Give away things in good condition, like clothes and toys you've grown out of.
+learn: Throw out broken things or recycle them if you can.
+play: sort | Keep, Give away, Throw out | Your favourite book=Keep; Clothes that are too small=Give away; A broken pen=Throw out; A puzzle you've finished, all pieces there=Give away; Your school bag=Keep; A torn, stained T-shirt=Throw out | Keep, give or throw?
+check: mcq | What should you do with toys you've grown out of that still work? | Give them away* | Throw them out | Hide them
+check: tf | Less clutter makes a room easier to clean. | true
+home: Pick five things in your room to give away, with a grown-up's OK.
+skill: tidying
+
+@lesson 4.6 | The 10-minute reset | ⏲️ | home
+hook: What if a few minutes a day meant you never had a giant clean-up?
+learn: A quick reset each evening keeps a room under control.
+learn: Put things back, clear your desk and get clothes off the floor.
+learn: Ten minutes a day is about 70 minutes a week, and stops big messes.
+try: 10 minutes a day for 7 days is 70 minutes :: gap | 5 minutes a day for 7 days is _ minutes | 35
+play: timing | Tidy fast! Tap when the timer reaches the reset zone | Reset done | Reset
+check: gap | 15 minutes a day for 4 days is _ minutes | 60
+check: mcq | What's the point of a daily reset? | Stopping big messes building up* | Making more mess | Missing dinner
+home: Try a 10-minute reset in your room tonight.
+skill: tidying
+

@@ -218,3 +218,69 @@ check: mcq | Which lighting works best? | Light in front of you* | A bright wind
 home: Set up a practice video call and check your camera, light and sound.
 skill: communication
 
+@lesson 4.1 | Where to have your say | 🏛️ | townhall
+hook: A new law or a council plan affects you. How do you get your view in?
+learn: Parliaments ask for public submissions on many bills through committees.
+learn: Councils ask for feedback on long-term plans, bylaws, transport and parks.
+learn: {nz:Look on Parliament's website under bills open for submissions, and your council's "have your say" page.~au:Look on Parliament's committee inquiry pages and your state's and council's "have your say" pages.}
+play: match | Match each issue to where you'd send a submission | A national bill on vaping=A parliamentary committee; A new skate park plan=Your local council; A {nz:regional~au:state} public transport plan={nz:Your regional council~au:Your state government}; Changes to school term dates={nz:The Ministry of Education~au:Your state education department}
+check: mcq | Who usually asks for submissions on a bill? | A parliamentary committee* | A supermarket | Your school canteen
+check: tf | Councils ask the public for feedback on their plans. | true
+home: Find one consultation that's open now on a government or council website.
+skill: civics
+
+@lesson 4.2 | Read the proposal | 🔍 | townhall
+hook: You've found a bill about something you care about. It's 40 pages long. Now what?
+learn: Start with the summary or explanatory note. It says what the bill is trying to do.
+learn: Find the sections or clauses that affect you, and note their numbers.
+learn: Comment on what's actually proposed, not on rumours about it.
+play: mystery | The bill's summary says it's about youth employment.; Clause 7 changes the training wage age.; Clause 12 covers paid breaks.; You work part-time after school at 16. | Clauses 7 and 12 matter most to you* | Only the title matters | Nothing in it affects you
+check: mcq | Where should you start reading a bill? | Its summary or explanatory note* | The last page | Social media comments
+check: tf | Noting clause numbers makes your submission clearer. | true
+home: Read the summary of a current bill with a grown-up and say what it's trying to do.
+skill: civics
+
+@lesson 4.3 | Structure a submission | 🧱 | townhall
+hook: What does a good submission actually look like?
+learn: Say who you are and why it matters to you: "I'm a 17-year-old who works part-time."
+learn: Say whether you support or oppose it, or which parts.
+learn: Give reasons, then clear recommendations. Short and specific beats long and vague.
+play: build | Build a submission | Who you are and your link to the issue; Your overall position; Your reasons, with evidence; Your specific recommendations; Whether you'd like to speak to the committee
+check: mcq | What should a submission end with? | Specific recommendations* | A complaint about politicians | Nothing
+check: tf | Short and specific submissions are often more useful. | true
+home: Write a three-line submission about a school or local issue.
+skill: civics
+
+@lesson 4.4 | Specific recommendations | 🎯 | townhall
+hook: "Make it better" won't change a law. What will?
+learn: Recommend a clear change: "Change clause 7 so the training wage ends at 18."
+learn: Explain what will happen if they accept it.
+learn: If you support something, say so too. Committees count support as well as opposition.
+play: sort | Specific, Too vague | Change clause 7 so it applies to workers under 18=Specific; Make it fairer=Too vague; Add a bus stop outside the new library=Specific; Do better for young people=Too vague; Keep the skate park lights on until 9pm=Specific; Fix everything=Too vague | Specific or vague?
+check: mcq | Which is a specific recommendation? | Keep the skate park lights on until 9pm* | Make it better | Help youth
+check: tf | Saying you support something can be useful too. | true
+home: Turn a vague complaint you've heard into a specific recommendation.
+skill: civics
+
+@lesson 4.5 | Speaking to a committee | 🎤 | townhall
+hook: You've been invited to speak about your submission for 5 minutes. Scary?
+learn: Committees often hear from people in person or online. You can usually ask to speak.
+learn: Don't read your whole submission. Pick your two strongest points and a real example.
+learn: Leave time for questions. It's OK to say "I don't know, but I can find out."
+play: chat | You speak to a committee about a youth wage bill | them: Thank you for coming. Please begin. | me: Thank you. I'm 17 and work 12 hours a week. I'll focus on two points*/I'll read all 8 pages now/Why is this even a bill? | them: Can you tell us how clause 7 would affect you? | me: It would cut my pay by $2 an hour, which is my bus fare to school each day*/I don't care about clause 7/That's a silly question
+check: mcq | What should you focus on when speaking? | Your two strongest points and a real example* | Reading every page | Arguing with the committee
+check: tf | It's OK to say you don't know but can find out. | true
+home: Watch a short committee hearing online with a grown-up.
+skill: speaking
+
+@lesson 4.6 | After you submit | 📬 | townhall
+hook: You sent your submission. Did it disappear?
+learn: Submissions are usually published, so keep them respectful and leave out private details you don't want public.
+learn: The committee or council writes a report saying what it heard and what it recommends.
+learn: Even if you don't get everything, numbers and good arguments shape the final decision.
+play: tap | Tap the things that happen after submissions close | 📰:yes:Submissions are often published; 📝:yes:A report summarises what people said; 🔁:yes:The plan or bill may be changed; 🗑️:no; 💰:no; 🗳️:yes:Decision makers then vote or decide
+check: mcq | Why leave private details out of a submission? | Submissions are often published* | They're not allowed to read them | It saves paper
+check: tf | Good arguments can change a final decision. | true
+home: Find a committee report or council decision online and see what changed after submissions.
+skill: civics
+

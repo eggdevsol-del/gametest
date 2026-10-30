@@ -220,3 +220,69 @@ check: gap | $24 of fuel and parking split 4 ways is $_ each | 6
 home: Plan a carpool for something your family goes to regularly.
 skill: transport
 
+@lesson 4.1 | Fixed things first | 🗓️ | home
+hook: School, sport, a part-time job and homework. How do you fit it all in?
+learn: Start your week plan with fixed things: school, practice, work shifts and family events.
+learn: Then add the flexible things around them, like homework, chores and fun.
+learn: Leave some gaps. Something always comes up.
+play: build | Build a weekly plan | Add school and work shifts; Add sport, clubs and family events; Add homework and study time; Add chores; Add fun and rest; Leave a few empty gaps
+check: mcq | What goes into your plan first? | Fixed things like school and shifts* | Gaming time | Nothing
+check: tf | Leaving gaps in your plan helps when things come up. | true
+home: Write next week's fixed things on a calendar with your family.
+skill: planning
+
+@lesson 4.2 | Blocks of time | 🧱 | home
+hook: "I'll do homework sometime tonight." Does that usually happen?
+learn: Time blocking means giving each task its own slot, like "4:30 to 5:15: maths".
+learn: Blocks make it clear what you're doing and when you'll stop.
+learn: Put your phone away during study blocks. Notifications break focus.
+play: match | Match each task to a sensible block | Maths homework=4:30 to 5:15; Walk the dog=5:15 to 5:45; Dinner and dishes=6:00 to 7:00; Read for English=7:15 to 7:45; Screens and chat=7:45 to 8:30
+check: mcq | What is time blocking? | Giving each task its own time slot* | Doing everything at once | Not planning at all
+check: tf | Notifications can break your focus during study. | true
+home: Time-block one afternoon this week and see if it helps.
+skill: planning
+
+@lesson 4.3 | Energy, not just time | 🔋 | home
+hook: You have an hour free. Is it the same at 4pm as at 10pm?
+learn: Some times of day you're sharp. Others you're tired.
+learn: Do hard thinking tasks when you have the most energy.
+learn: Save easy tasks, like tidying or replying to messages, for low-energy times.
+play: sort | High-energy task, Low-energy task | Studying for a test=High-energy task; Folding washing=Low-energy task; Writing an essay=High-energy task; Replying to group chat=Low-energy task; Learning new maths=High-energy task; Packing your bag for tomorrow=Low-energy task | High or low energy?
+check: mcq | When should you do hard thinking tasks? | When you have the most energy* | Just before sleep | During a movie
+check: tf | Low-energy times are good for easy tasks. | true
+home: Notice when you feel most awake this week and plan one hard task for that time.
+skill: planning
+
+@lesson 4.4 | Big task, small chunks | 🧩 | home
+hook: A project is due in three weeks. When do you start?
+learn: Break big tasks into chunks, each with its own mini-deadline.
+learn: Work backwards from the due date.
+learn: Starting early leaves time to fix problems, and to ask for help.
+play: order | Plan a 3-week project | Week 1: choose a topic and research; Week 2: write a rough draft; Week 3, early: get feedback and improve it; Week 3, late: final check and hand in
+check: mcq | How should you plan a big project? | Break it into chunks with mini-deadlines* | Do it all the night before | Wait for inspiration
+check: tf | Working backwards from the due date helps you plan. | true
+home: Break one upcoming task into chunks and add them to a calendar.
+skill: planning
+
+@lesson 4.5 | Saying no | 🙅 | home
+hook: Your week is full, and a friend asks you to help with their event. Do you have to say yes?
+learn: Saying yes to everything means doing nothing well.
+learn: You can say no kindly: "I'd love to, but I can't this week."
+learn: Offer something smaller if you want to help: "I can help for an hour on Sunday."
+play: chat | A friend asks for help | them: Can you help run my stall all day Saturday? | me: I'd love to help, but I've got a shift Saturday. I could do an hour on Sunday?*/No. Never ask me again/Sure, I'll cancel my shift | them: That would be great, thanks! | me: Cool. I'll put it in my calendar*/Actually, never mind/Maybe, maybe not
+check: mcq | Which is a kind way to say no? | "I can't this week, but I could help for an hour on Sunday."* | "No, go away." | Ignore the message
+check: tf | Saying yes to everything can mean doing nothing well. | true
+home: Practise a kind no with a grown-up for something you can't fit in.
+skill: boundaries
+
+@lesson 4.6 | The weekly review | 🔁 | home
+hook: Sunday night. Five minutes. What could you check?
+learn: Look back: what got done, and what didn't?
+learn: Look ahead: what's coming up, and what needs preparing?
+learn: Move unfinished tasks into next week's plan, or decide to drop them.
+play: path | It's Sunday. Two tasks from last week aren't done. | Move them into specific slots this week => good: They're planned, not forgotten. | Ignore them and hope they go away => bad: They'll pile up and cause stress later. | Stay up until 2am to finish them tonight => bad: You'll be exhausted for the whole week.
+check: mcq | What should you do with unfinished tasks? | Plan them into next week or drop them* | Forget about them | Panic
+check: tf | A weekly review can take just five minutes. | true
+home: Do a five-minute weekly review this Sunday.
+skill: planning
+

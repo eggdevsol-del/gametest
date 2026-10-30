@@ -224,3 +224,71 @@ check: mcq | For a $25 item, it's usually better to… | Save the money yourself
 home: List your three most valuable things and whether you'd insure them.
 skill: insurance
 
+@lesson 4.1 | Up-front costs | 💸 | home
+hook: Rent is $250 a week. How much do you need before you can move in?
+learn: Bond is usually up to 4 weeks' rent. Rent in advance is usually up to 2 weeks.
+learn: $250 rent means about $1,000 of bond and $500 in advance: $1,500 before moving day.
+learn: Add moving costs, connection fees and basic furniture. Many people need $2,500 or more.
+try: 4 weeks of $250 rent is $1,000 bond :: gap | 4 weeks of $300 rent is $_ bond | 1200
+play: budget | Plan the up-front costs of moving into a $250-a-week room, in tens of dollars | 300 | Bond=100; Rent in advance=50; Moving van=15; Bed and bedding=40; Kitchen basics=15; Emergency buffer=0 | Internet connection fee:5
+check: gap | Bond of 4 weeks plus 2 weeks in advance at $200 rent is $_ | 1200
+check: mcq | What's usually the biggest up-front cost? | The bond* | Toilet paper | A plant
+home: Look up the rent and bond for a room near you with a grown-up.
+skill: renting
+
+@lesson 4.2 | What you really need | 🛏️ | home
+hook: Do you need a brand-new couch on day one?
+learn: Day-one essentials: a bed, bedding, towels, basic kitchen gear and cleaning supplies.
+learn: Lots can wait or come second-hand: couches, desks and decorations.
+learn: Family, friends and second-hand sites can save you hundreds of dollars.
+play: sort | Day-one essential, Can wait | A bed and bedding=Day-one essential; A big TV=Can wait; A pot, pan and plates=Day-one essential; A new couch=Can wait; Towels=Day-one essential; Wall art=Can wait; Toilet paper and soap=Day-one essential | Essential or can it wait?
+check: mcq | Which is a day-one essential? | Bedding* | A big TV | Wall art
+check: tf | Second-hand furniture can save you a lot. | true
+home: Make a day-one list for moving out with a grown-up.
+skill: renting
+
+@lesson 4.3 | The weekly cost of living | 🧮 | home
+hook: Rent is $250. Is that all you need each week?
+learn: Add food, power, internet, phone and transport. They often add $200 or more a week.
+learn: $250 rent + $100 food + $30 power + $20 internet + $15 phone + $40 transport = $455.
+learn: That's before fun, clothes and saving.
+try: $250 + $100 = $350 :: gap | $350 + $30 + $20 = $_ | 400
+play: slider | Rent $220, food $110, power $30, internet $20, phone $15, transport $45. Weekly total? | 300 | 600 | 440 | $ | 5 | 5
+check: gap | $200 rent + $100 food + $50 bills = $_ | 350
+check: mcq | What's often forgotten in a moving-out budget? | Food, power and transport* | Rent | Bond
+home: Ask a grown-up roughly what your household spends on food each week.
+skill: budgeting
+
+@lesson 4.4 | Costs nobody mentions | 👻 | home
+hook: Toilet paper, cleaning spray and laundry powder. Who pays for those now?
+learn: When you move out, you pay for everyday items your family used to buy.
+learn: Contents insurance protects your things if there's a fire or theft. It's often worth having.
+learn: Plan $15 to $30 a week for household items and small surprises.
+play: tap | Tap the costs people forget when moving out | 🧻:yes:Toilet paper; 🧴:yes:Cleaning products; 🧺:yes:Laundry powder; 🎂:no; 🏖️:no; 🛡️:yes:Contents insurance
+check: mcq | What does contents insurance cover? | Your things, if there's a fire or theft* | The building itself | Your rent
+check: tf | You'll need to buy everyday items like toilet paper yourself. | true
+home: List with a grown-up the household items your family buys each month.
+skill: budgeting
+
+@lesson 4.5 | Home, flat or solo? | 🏘️ | home
+hook: Stay at home, flat with friends or live alone. Which costs least?
+learn: Living at home is usually cheapest, but you may pay board and help out.
+learn: Flatting splits rent and bills, so it's often much cheaper than living alone.
+learn: Living alone gives privacy but costs the most.
+play: debate | Should you move out as soon as you can? | Not always. Staying home while you save or study can set you up well* | Yes. Everyone should leave at 18 | Moving out builds independence and life skills, and some homes aren't good places to stay. It depends on your situation.
+check: mcq | Which is usually cheapest? | Living at home, maybe paying board* | Living alone | Renting a whole house by yourself
+check: tf | Flatting splits rent and bills. | true
+home: Talk with your family about when moving out might make sense for you.
+skill: decisions
+
+@lesson 4.6 | Moving day | 🚚 | home
+hook: The keys are yours! What should you do first?
+learn: Do a property inspection and take dated photos of every room before you unpack.
+learn: Check the {nz:bond is lodged with Tenancy Services~au:bond is lodged with your state's bond authority} and get a receipt.
+learn: Set up power and internet in your name, and update your address with the bank and others.
+play: order | Do moving day right | Get the keys and the inspection report; Take dated photos of every room; Note any damage on the report and return it; Check your bond has been lodged; Set up power and internet; Update your address
+check: mcq | Why take dated photos when you move in? | To prove the condition when you move out* | For social media | To make the flat look nicer
+check: tf | Your bond should be lodged with an official bond authority. | true
+home: Practise taking clear photos of a room as if you were doing a move-in inspection.
+skill: renting
+

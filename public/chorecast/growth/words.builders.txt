@@ -217,3 +217,69 @@ check: mcq | You wrote "see attached". You should… | Check it's really attache
 home: Before your next message, check who it's to and read it once more.
 skill: writing
 
+@lesson 4.1 | Plan your talk | 🗂️ | stage
+hook: You have to talk to the class for 2 minutes. Where do you start?
+learn: Choose one topic and three main points. Three is easy to remember.
+learn: Think about your audience. What do they already know? What will interest them?
+learn: Put your points in an order that makes sense, like time order or most important first.
+play: sort | Good for a 2-minute talk, Too much | Three main points=Good for a 2-minute talk; Every fact you can find=Too much; One clear topic=Good for a 2-minute talk; Ten different topics=Too much; A short example for each point=Good for a 2-minute talk; Reading a whole book chapter=Too much | Good plan or too much?
+check: mcq | How many main points work well in a short talk? | About three* | Twenty | None
+check: tf | Thinking about your audience helps you plan. | true
+home: Plan a 1-minute talk about your favourite animal with three main points.
+skill: presenting
+
+@lesson 4.2 | A strong start | 🚀 | stage
+hook: How do you grab people's attention in the first 10 seconds?
+learn: Start with a question: "Who here has ever lost money?"
+learn: Or a surprising fact: "The first coins were made about 2,600 years ago."
+learn: Or a short story. Avoid starting with "Um, so, my talk is about..."
+play: tap | Tap the strong ways to start a talk | ❓:yes:A question for the audience; 😲:yes:A surprising fact; 📖:yes:A short story; 😶:no; 🙄:no; 🖼️:yes:A picture to look at
+check: mcq | Which is the strongest start? | "Who here has ever lost money?"* | "Um, so, my talk is about money." | "I didn't really practise."
+check: tf | A surprising fact can grab attention. | true
+home: Write three possible first lines for a talk, and test them on a grown-up.
+skill: presenting
+
+@lesson 4.3 | Cue cards | 🃏 | stage
+hook: Should you read your whole talk from a page?
+learn: Cue cards hold key words, not full sentences.
+learn: Key words remind you what to say, so you can look up at the audience.
+learn: Number your cards in case you drop them!
+play: diff | A full script and a good cue card. Tap what the cue card changes. | Today I am going to tell you all about how bees make honey from flowers; First of all, bees fly to flowers and collect nectar; Card 1 | Bees make honey; Nectar from flowers; Card 1 of 3
+check: mcq | What should cue cards have on them? | Key words* | Every word of your talk | Pictures of your friends
+check: tf | Numbering your cards helps if you drop them. | true
+home: Turn a paragraph from a book into three key words for a cue card.
+skill: presenting
+
+@lesson 4.4 | Eyes and body | 👀 | stage
+hook: Your words are great, but you're staring at the floor. What happens?
+learn: Look at different people around the room, not just your teacher.
+learn: Stand still with your feet apart. Swaying distracts people.
+learn: Use your hands to show things, like how big or how many.
+play: path | You're halfway through your talk and feel nervous. | Look up at a friendly face and keep going => good: It helps you feel calm and connect. | Stare at the floor and mumble => bad: People can't hear you or see you. | Turn your back to the class => bad: The audience will stop listening.
+check: mcq | Where should you look during a talk? | At different people around the room* | At the floor | At the ceiling
+check: tf | Swaying back and forth can distract the audience. | true
+home: Practise a talk in front of a mirror or a grown-up. Look up at least five times.
+skill: presenting
+
+@lesson 4.5 | Nervous? That's normal | 😬 | stage
+hook: Your heart is racing before your talk. What can you do?
+learn: Nearly everyone feels nervous before speaking. It means you care.
+learn: Slow breathing calms your body: breathe in for 4, out for 6.
+learn: Practising out loud a few times makes the real talk feel easier.
+play: timing | Breathe in... then tap as you breathe out slowly | Breathe out | Calm
+check: mcq | What helps calm nerves before a talk? | Slow breathing and practice* | Not practising at all | Running around
+check: tf | Feeling nervous means you care. | true
+home: Practise "in for 4, out for 6" breathing with a grown-up.
+skill: calm
+
+@lesson 4.6 | A strong finish | 🏁 | stage
+hook: How do you end a talk so people remember it?
+learn: Sum up your three points in one sentence.
+learn: End with a strong line: a question to think about, or something to try.
+learn: Then say "Thank you" and smile. Don't just stop and walk off.
+play: order | Put the end of a talk in order | Say "So, to sum up..."; Repeat your three main points quickly; Give one thing to think about or try; Say "Thank you"; Ask if anyone has questions
+check: mcq | What's a good last thing to say? | "Thank you"* | "That's it, I guess" | Nothing
+check: tf | Summing up your points helps people remember them. | true
+home: Practise ending a short talk with a summary and a thank-you for a grown-up.
+skill: presenting
+

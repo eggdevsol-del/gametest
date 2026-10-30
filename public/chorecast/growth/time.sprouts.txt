@@ -218,3 +218,69 @@ check: mcq | Which coin is worth the most? | $2* | 50c | 10c
 home: Sort some coins from smallest value to biggest.
 skill: currency
 
+@lesson 4.1 | The first paper money | 📜 | museum
+hook: Imagine carrying a bag of heavy coins everywhere. What could be easier?
+learn: About 1,000 years ago, people in China started using paper money.
+learn: Paper was much lighter than big bags of metal coins.
+learn: Traders could carry lots of money a long way without getting tired.
+play: tf | Paper money was first used in China about 1,000 years ago. | true | Chinese traders used it so they didn't have to carry heavy coins.
+check: mcq | Where was paper money first used? | China* | The Moon | Antarctica
+check: mcq | Why was paper money useful? | It was lighter than lots of coins* | It was made of gold | It could fly
+home: Hold some coins in one hand and a note in the other with a grown-up. Which feels lighter?
+skill: history
+
+@lesson 4.2 | Coins or notes? | ⚖️ | museum
+hook: Why do we still have coins if notes are lighter?
+learn: Coins are good for small amounts, like 50c or $1. They last a long time.
+learn: Notes are good for bigger amounts, like $20 or $50.
+learn: Carrying $100 in $1 coins would be very heavy!
+play: sort | Better as coins, Better as notes | 50 cents=Better as coins; $50=Better as notes; $1=Better as coins; $100=Better as notes; 10 cents=Better as coins; $20=Better as notes | Coin or note?
+check: mcq | Which is easier to carry? | One $100 note* | One hundred $1 coins | They weigh the same
+check: tf | Coins are good for small amounts. | true
+home: Count how many different coins and notes your family has at home.
+skill: money
+
+@lesson 4.3 | A note is a promise | 🤝 | museum
+hook: A note is just a piece of plastic. Why can it buy a toy?
+learn: A note is worth what it says because everyone agrees it is.
+learn: The bank that makes our notes, {nz:the Reserve Bank of New Zealand~au:the Reserve Bank of Australia}, promises they're real money.
+learn: Shops take notes because they know other people will take them too.
+play: path | A kid at school says, "My drawing is a $100 note. Give me your lunch for it." | Say no, because only real notes are money => good: Shops won't take a drawing, so it can't buy anything. | Swap your lunch for it => bad: Nobody else will take a drawing as money. | Make your own $1,000 drawing => bad: Drawings aren't money, no matter what number is on them.
+check: mcq | Who makes our notes? | {nz:The Reserve Bank of New Zealand~au:The Reserve Bank of Australia}* | Any shop | Kids at school
+check: tf | A drawing of money can buy things at a shop. | false | Only real notes and coins are money.
+home: Look at a note with a grown-up and find the name of the bank that made it.
+skill: money
+
+@lesson 4.4 | Stopping fake notes | 🔍 | museum
+hook: People have tried to make fake notes for hundreds of years. How do we stop them?
+learn: Our notes are made of a special plastic called polymer. {nz:New Zealand~au:Australia} uses polymer notes.
+learn: Australia made the world's first polymer notes in 1988.
+learn: Clear windows, shiny pictures and raised printing make notes hard to copy.
+play: tap | Tap the things that help stop fake notes | 🪟:yes:A clear window; ✨:yes:A shiny picture that changes; 👆:yes:Raised printing you can feel; ✏️:no; 🍌:no; 🔢:yes:A special number on each note
+check: mcq | Which country made the first polymer notes? | Australia* | China | Mars
+check: tf | Clear windows help stop fake notes. | true
+home: Look closely at a note with a grown-up. Find the clear window and feel the raised print.
+skill: money
+
+@lesson 4.5 | Faces on our notes | 👤 | museum
+hook: Who are the people on our notes?
+learn: Our notes show people who did important things for our country.
+learn: {nz:The $10 note shows Kate Sheppard. She led the campaign that made New Zealand, in 1893, the first country where women could vote in national elections.~au:The $50 note shows David Unaipon, a Ngarrindjeri inventor and writer, and Edith Cowan, the first woman elected to an Australian parliament.}
+learn: Notes also show plants, animals and places from our country.
+play: match | Match each note to its colour | $5={nz:Orange~au:Purple}; $10=Blue; $20={nz:Green~au:Red}; $50={nz:Purple~au:Yellow}; $100={nz:Red~au:Green}
+check: mcq | {nz:Who is on the $10 note?~au:Who is on the $50 note?} | {nz:Kate Sheppard~au:David Unaipon and Edith Cowan}* | A famous singer | A cartoon character
+check: tf | Our notes show people who did important things. | true
+home: Look at a note with a grown-up. Who is on it, and what did they do?
+skill: history
+
+@lesson 4.6 | Looking after notes | 🧺 | home
+hook: Oops! A note went through the washing machine. Is it ruined?
+learn: Polymer notes are tough. They often survive the wash.
+learn: But heat can melt them, so never iron a note or leave it on a hot dashboard.
+learn: Keep notes flat in a wallet or purse, and keep them safe.
+play: path | You find a note in your pocket after the washing machine. | Let it dry flat and keep it safe => good: Polymer notes usually survive a wash. | Iron it to make it flat => bad: Heat can melt polymer notes. | Throw it away => bad: It's probably still fine!
+check: mcq | What can damage polymer notes? | Heat* | Water | Folding once
+check: tf | You should keep notes flat in a wallet or purse. | true
+home: Check your pockets before the wash with a grown-up.
+skill: money
+

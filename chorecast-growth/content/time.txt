@@ -219,6 +219,72 @@ check: mcq | Which coin is worth the most? | $2* | 50c | 10c
 home: Sort some coins from smallest value to biggest.
 skill: currency
 
+@lesson 4.1 | The first paper money | 📜 | museum
+hook: Imagine carrying a bag of heavy coins everywhere. What could be easier?
+learn: About 1,000 years ago, people in China started using paper money.
+learn: Paper was much lighter than big bags of metal coins.
+learn: Traders could carry lots of money a long way without getting tired.
+play: tf | Paper money was first used in China about 1,000 years ago. | true | Chinese traders used it so they didn't have to carry heavy coins.
+check: mcq | Where was paper money first used? | China* | The Moon | Antarctica
+check: mcq | Why was paper money useful? | It was lighter than lots of coins* | It was made of gold | It could fly
+home: Hold some coins in one hand and a note in the other with a grown-up. Which feels lighter?
+skill: history
+
+@lesson 4.2 | Coins or notes? | ⚖️ | museum
+hook: Why do we still have coins if notes are lighter?
+learn: Coins are good for small amounts, like 50c or $1. They last a long time.
+learn: Notes are good for bigger amounts, like $20 or $50.
+learn: Carrying $100 in $1 coins would be very heavy!
+play: sort | Better as coins, Better as notes | 50 cents=Better as coins; $50=Better as notes; $1=Better as coins; $100=Better as notes; 10 cents=Better as coins; $20=Better as notes | Coin or note?
+check: mcq | Which is easier to carry? | One $100 note* | One hundred $1 coins | They weigh the same
+check: tf | Coins are good for small amounts. | true
+home: Count how many different coins and notes your family has at home.
+skill: money
+
+@lesson 4.3 | A note is a promise | 🤝 | museum
+hook: A note is just a piece of plastic. Why can it buy a toy?
+learn: A note is worth what it says because everyone agrees it is.
+learn: The bank that makes our notes, {nz:the Reserve Bank of New Zealand~au:the Reserve Bank of Australia}, promises they're real money.
+learn: Shops take notes because they know other people will take them too.
+play: path | A kid at school says, "My drawing is a $100 note. Give me your lunch for it." | Say no, because only real notes are money => good: Shops won't take a drawing, so it can't buy anything. | Swap your lunch for it => bad: Nobody else will take a drawing as money. | Make your own $1,000 drawing => bad: Drawings aren't money, no matter what number is on them.
+check: mcq | Who makes our notes? | {nz:The Reserve Bank of New Zealand~au:The Reserve Bank of Australia}* | Any shop | Kids at school
+check: tf | A drawing of money can buy things at a shop. | false | Only real notes and coins are money.
+home: Look at a note with a grown-up and find the name of the bank that made it.
+skill: money
+
+@lesson 4.4 | Stopping fake notes | 🔍 | museum
+hook: People have tried to make fake notes for hundreds of years. How do we stop them?
+learn: Our notes are made of a special plastic called polymer. {nz:New Zealand~au:Australia} uses polymer notes.
+learn: Australia made the world's first polymer notes in 1988.
+learn: Clear windows, shiny pictures and raised printing make notes hard to copy.
+play: tap | Tap the things that help stop fake notes | 🪟:yes:A clear window; ✨:yes:A shiny picture that changes; 👆:yes:Raised printing you can feel; ✏️:no; 🍌:no; 🔢:yes:A special number on each note
+check: mcq | Which country made the first polymer notes? | Australia* | China | Mars
+check: tf | Clear windows help stop fake notes. | true
+home: Look closely at a note with a grown-up. Find the clear window and feel the raised print.
+skill: money
+
+@lesson 4.5 | Faces on our notes | 👤 | museum
+hook: Who are the people on our notes?
+learn: Our notes show people who did important things for our country.
+learn: {nz:The $10 note shows Kate Sheppard. She led the campaign that made New Zealand, in 1893, the first country where women could vote in national elections.~au:The $50 note shows David Unaipon, a Ngarrindjeri inventor and writer, and Edith Cowan, the first woman elected to an Australian parliament.}
+learn: Notes also show plants, animals and places from our country.
+play: match | Match each note to its colour | $5={nz:Orange~au:Purple}; $10=Blue; $20={nz:Green~au:Red}; $50={nz:Purple~au:Yellow}; $100={nz:Red~au:Green}
+check: mcq | {nz:Who is on the $10 note?~au:Who is on the $50 note?} | {nz:Kate Sheppard~au:David Unaipon and Edith Cowan}* | A famous singer | A cartoon character
+check: tf | Our notes show people who did important things. | true
+home: Look at a note with a grown-up. Who is on it, and what did they do?
+skill: history
+
+@lesson 4.6 | Looking after notes | 🧺 | home
+hook: Oops! A note went through the washing machine. Is it ruined?
+learn: Polymer notes are tough. They often survive the wash.
+learn: But heat can melt them, so never iron a note or leave it on a hot dashboard.
+learn: Keep notes flat in a wallet or purse, and keep them safe.
+play: path | You find a note in your pocket after the washing machine. | Let it dry flat and keep it safe => good: Polymer notes usually survive a wash. | Iron it to make it flat => bad: Heat can melt polymer notes. | Throw it away => bad: It's probably still fine!
+check: mcq | What can damage polymer notes? | Heat* | Water | Folding once
+check: tf | You should keep notes flat in a wallet or purse. | true
+home: Check your pockets before the wash with a grown-up.
+skill: money
+
 @band builders
 @unit 1 | How money began | Barter, commodity money and coins
 @unit 2 | Trade routes | Silk, spices and sailors
@@ -443,6 +509,73 @@ check: mcq | {nz:Which bank started in NZ in 1861?~au:What's the Bank of New Sou
 check: mcq | What did early banks help with? | Storing money and borrowing for farms and shops* | Delivering mail | Building roads
 home: Find out when your family's bank was started.
 skill: history
+
+@lesson 4.1 | Sharing the risk | ⛵ | museum
+hook: A spice voyage to Asia could make a fortune, or sink. Would you risk all your money on one ship?
+learn: Long sea voyages in the 1500s and 1600s were risky. Ships sank, got lost or were attacked.
+learn: Instead of one merchant risking everything, many people each paid for a small share of the trip.
+learn: If the voyage succeeded, everyone got a share of the profit. If it failed, each person lost only their part.
+play: path | You have 100 gold coins and can invest in spice voyages. | Put 10 coins into each of 10 voyages => good: Some may sink, but the winners can cover the losses. | Put all 100 into one voyage => bad: If that ship sinks, you lose everything. | Keep it under your bed => ok: It's safe, but it won't grow.
+check: mcq | Why did people share the cost of voyages? | To spread the risk* | Because ships were free | To make ships faster
+check: tf | Sharing a voyage meant each person risked only their part. | true
+home: Talk with a grown-up about something risky your family might share with others, like a big order.
+skill: history
+
+@lesson 4.2 | The first big company | 🏢 | museum
+hook: In 1602, one company let anyone buy a share. What was it?
+learn: The Dutch East India Company, called the VOC, was set up in 1602.
+learn: It sold shares to the public, not just to rich merchants. Thousands of people bought in.
+learn: It traded spices like nutmeg, cloves and pepper from Asia to Europe.
+play: build | Build the VOC's story | 1602: the company is set up in the Netherlands; It sells shares to the public; Ships sail to Asia for spices; Spices sell in Europe for big profits; Shareholders get a share of the profits
+check: mcq | When was the Dutch East India Company set up? | 1602* | 1902 | 2002
+check: tf | The VOC sold shares to ordinary people. | true
+home: Find the Netherlands and Indonesia on a map with a grown-up. That was the VOC's route.
+skill: history
+
+@lesson 4.3 | The first stock exchange | 🏛️ | shares
+hook: You own a VOC share but need your money now. Who will buy it?
+learn: In Amsterdam, people started buying and selling VOC shares with each other.
+learn: That became the world's first stock exchange, in the early 1600s.
+learn: Being able to sell your share made people happier to buy one.
+play: sort | Stock exchange, Not a stock exchange | A place to buy and sell shares=Stock exchange; A market for fish=Not a stock exchange; Amsterdam's share market in the 1600s=Stock exchange; A shop that sells shoes=Not a stock exchange; Today's {nz:NZX~au:ASX}=Stock exchange | Is it a stock exchange?
+check: mcq | What happens at a stock exchange? | Shares are bought and sold* | Fish are sold | Notes are printed
+check: tf | Being able to sell shares made people more willing to buy them. | true
+home: Look up the {nz:NZX~au:ASX} website with a grown-up and find one company you know.
+skill: shares
+
+@lesson 4.4 | Paid in spices | 🌶️ | museum
+hook: Imagine getting paid in pepper instead of money!
+learn: A dividend is a share of a company's profits paid to its owners.
+learn: In its early years, the VOC sometimes paid dividends in spices instead of money.
+learn: Today, dividends are paid in money, often twice a year.
+try: 100 shares × 10c each = $10 :: gap | 200 shares × 10c each = $_ | 20
+play: match | Match the word to its meaning | Dividend=A share of profits paid to owners; Shareholder=Someone who owns part of a company; Share=A small piece of a company; Profit=Money left after costs
+check: mcq | What's a dividend? | A share of profits paid to owners* | A type of ship | A spice
+check: gap | 50 shares × 20c each = $_ | 10
+home: Ask a grown-up if they've ever been paid a dividend, maybe through {nz:KiwiSaver~au:super}.
+skill: shares
+
+@lesson 4.5 | The South Sea Bubble | 🫧 | museum
+hook: Even the famous scientist Isaac Newton lost money in a share bubble. How?
+learn: In 1720 in Britain, shares in the South Sea Company shot up as people rushed to buy.
+learn: The company didn't make much money. People just hoped prices would keep rising.
+learn: When the bubble burst, prices crashed and many people lost their savings, including Newton.
+play: market | Ride a bubble and a crash | 6
+check: mcq | What causes a bubble? | People buying because they hope prices will keep rising* | A company making steady profits | Soap
+check: tf | Smart people can lose money in bubbles too. | true
+home: Blow some bubbles with a grown-up. What happens when they get too big?
+skill: risk
+
+@lesson 4.6 | Our own exchanges | 🌏 | shares
+hook: When did people in {nz:New Zealand~au:Australia} start trading shares?
+learn: Stock exchanges started in both countries in the 1800s, around the time of the gold rushes.
+learn: Miners and investors bought shares in gold mining companies.
+learn: Today, {nz:the NZX~au:the ASX} is where shares in many big local companies are traded.
+play: route | Match each place to its share market today | New Zealand=NZX; Australia=ASX; United States=New York Stock Exchange; United Kingdom=London Stock Exchange
+check: mcq | What helped start stock exchanges in our countries? | The gold rushes* | The internet | Spaceships
+check: tf | {nz:The NZX~au:The ASX} is our country's main stock exchange. | true
+home: Find a local company on {nz:the NZX~au:the ASX} with a grown-up and look at its share price.
+skill: shares
 
 @band makers
 @unit 1 | Booms and busts | Bubbles, crashes and recoveries
@@ -670,6 +803,72 @@ check: mcq | Why would returning to gold be hard? | There isn't enough gold at c
 home: Ask a grown-up whether they'd trust gold-backed money more, and why.
 skill: money
 
+@lesson 4.1 | A bank for banks | 🏦 | bank
+hook: Your bank has a bank. Who is it?
+learn: A central bank is the government's bank and the banks' bank. Ours is {nz:the Reserve Bank of New Zealand~au:the Reserve Bank of Australia}.
+learn: It sets the official interest rate, issues notes and keeps the payment system running.
+learn: In a crisis, it can lend to banks so they don't collapse. That's called being the lender of last resort.
+play: match | Match each job to what it means | Set the official cash rate=Influence interest rates across the economy; Issue notes=Make sure there's enough real money; Run payment systems=Help money move between banks; Lender of last resort=Lend to banks in a crisis
+check: mcq | Who is the lender of last resort? | The central bank* | Your local café | The stock exchange
+check: tf | A central bank issues our notes. | true
+home: Find one thing your central bank did this year on its website with a grown-up.
+skill: central banks
+
+@lesson 4.2 | Our central banks | 📜 | museum
+hook: How old are our central banks?
+learn: {nz:The Reserve Bank of New Zealand opened in 1934, during the Great Depression.~au:The Reserve Bank of Australia started in 1960. Before that, the Commonwealth Bank did central bank jobs.}
+learn: {nz:In 1989, New Zealand became the first country to give its central bank a formal inflation target.~au:Since the 1990s, it has aimed to keep inflation between 2% and 3% on average.}
+learn: Today a committee of experts makes rate decisions, not one person.
+play: tf | {nz:New Zealand was the first country to give its central bank a formal inflation target.~au:The Reserve Bank of Australia aims to keep inflation between 2% and 3%.} | true
+check: mcq | When did our central bank start? | {nz:1934~au:1960}* | 1800 | 2010
+check: tf | One person alone makes every rate decision. | false | A committee decides.
+home: Ask a grown-up if they remember a time when interest rates were very high.
+skill: central banks
+
+@lesson 4.3 | How the cash rate spreads | 🌊 | bank
+hook: The central bank raises one rate. Why does your family's mortgage change?
+learn: The official cash rate is what banks pay to borrow from each other overnight.
+learn: When it rises, banks usually raise rates on loans and savings too.
+learn: Higher loan rates mean people borrow and spend less, which slows price rises.
+play: order | Follow a cash rate rise through the economy | The central bank raises the cash rate; Banks raise their loan and savings rates; Mortgages and loans cost more; People and businesses spend less; Price rises slow down
+check: mcq | What usually happens when the cash rate rises? | Loan rates rise* | Loans get cheaper | Nothing
+check: tf | Higher interest rates usually slow spending. | true
+home: Look up today's official cash rate with a grown-up.
+skill: interest rates
+
+@lesson 4.4 | Too hot or too cold? | 🌡️ | bank
+hook: Is the economy running too hot or too cold? How does the central bank choose?
+learn: When prices rise too fast, the economy is "too hot". The central bank may raise rates.
+learn: When jobs are being lost and spending falls, it's "too cold". The bank may cut rates.
+learn: Rate changes take a year or two to work fully, so central banks try to look ahead.
+play: sort | Likely to raise rates, Likely to cut rates | Inflation is well above target=Likely to raise rates; Unemployment is rising fast=Likely to cut rates; Spending and prices are booming=Likely to raise rates; A recession has started=Likely to cut rates; Inflation is falling below target=Likely to cut rates | Raise or cut?
+check: mcq | Inflation is well above target. What might the central bank do? | Raise rates* | Cut rates | Print notes for everyone
+check: tf | Rate changes take time to work. | true
+home: Find a news story about the latest rate decision and see whether it was a rise, a cut or no change.
+skill: interest rates
+
+@lesson 4.5 | Independent central banks | 🧑‍⚖️ | townhall
+hook: Why doesn't the government set interest rates itself?
+learn: Governments set the target, like keeping inflation low. The central bank decides how to hit it.
+learn: This independence stops rates being cut just to win an election, which could push inflation up later.
+learn: The bank still has to explain its decisions publicly and can be questioned by Parliament.
+play: debate | Should central banks be independent from politicians? | Yes. It stops short-term political choices that could cause inflation later* | No. Politicians should change rates whenever they like | Some argue elected people should have more say, because rate decisions affect everyone's lives.
+check: mcq | Who sets the central bank's target? | The government* | The central bank alone | Big banks
+check: tf | Central banks must explain their decisions publicly. | true
+home: Talk with a grown-up about why it might be risky to let politicians set interest rates.
+skill: central banks
+
+@lesson 4.6 | Why not just print more? | 🖨️ | bank
+hook: If the central bank can make money, why not give everyone a million dollars?
+learn: If there's much more money but the same amount of stuff, prices rise. That's inflation.
+learn: Printing too much has led to hyperinflation, like in Zimbabwe in the 2000s.
+learn: In 2020, both our central banks bought government bonds to support the economy, but carefully and for a set time.
+play: path | The country is in a deep recession. What should the central bank do? | Cut rates and support lending for a while, watching inflation => good: That's a common, careful response. | Print money and give everyone $1 million => bad: Prices would soar and money would lose its value. | Do nothing at all, ever => bad: That could make the recession worse.
+check: mcq | What happens if far more money is printed than there is stuff to buy? | Prices rise* | Everyone gets richer for ever | Nothing
+check: tf | Printing too much money can cause hyperinflation. | true
+home: Ask a grown-up what they'd buy if everyone had a million dollars, and what shops might do to prices.
+skill: inflation
+
 @band launchers
 @unit 1 | Modern money | Fiat money, banks and how money is created
 @unit 2 | Inflation and policy | Why central banks target inflation
@@ -894,3 +1093,70 @@ check: tf | New kinds of crises can still happen after rules change. | true
 check: mcq | What does a stress test check? | How a bank would cope in a crash* | How stressed staff feel | How fast the website is
 home: Find one rule your country changed after 2008.
 skill: governance
+
+@lesson 4.1 | Reading exchange rates | 💱 | bank
+hook: Your dollar buys 0.60 US dollars. What does that actually mean?
+learn: An exchange rate is the price of one currency in another.
+learn: If 1 {nz:NZD~au:AUD} buys 0.60 USD, then $500 buys 300 USD.
+learn: Banks sell foreign money for more than they buy it back. That gap is their spread.
+try: $100 at 0.60 buys 60 USD :: gap | $400 at 0.60 buys _ USD | 240
+play: slider | 1 local dollar buys 0.55 euros. About how many euros does $800 buy? | 0 | 800 | 440 | € | 10 | 10
+check: gap | $1,000 at 0.60 buys _ USD | 600
+check: mcq | What is a bank's spread? | The gap between its buying and selling rates* | A type of jam | A tax
+home: Check today's exchange rate for US dollars with a grown-up.
+skill: currency
+
+@lesson 4.2 | What moves the dollar | 📈 | shares
+hook: The {nz:Kiwi~au:Aussie} dollar rose 5% this year. Why?
+learn: Higher local interest rates attract overseas savers, which can push our dollar up.
+learn: {nz:Strong prices for dairy, meat and wood can lift the NZ dollar.~au:Strong prices for iron ore, coal and gas can lift the Aussie dollar.}
+learn: When the world gets nervous, investors often buy US dollars, so our dollar tends to fall.
+play: sort | Dollar likely to rise, Dollar likely to fall | Our interest rates rise faster than elsewhere=Dollar likely to rise; {nz:Dairy prices~au:Iron ore prices} jump=Dollar likely to rise; A global crisis scares investors=Dollar likely to fall; Our interest rates are cut sharply=Dollar likely to fall; Big export orders from overseas=Dollar likely to rise | Rise or fall?
+check: mcq | What often happens to our dollar in a global scare? | It falls* | It rises | It stays exactly the same
+check: tf | Higher interest rates can attract overseas money. | true
+home: Ask a grown-up what our country's biggest exports are.
+skill: currency
+
+@lesson 4.3 | Winners and losers | ⚖️ | stall
+hook: A strong dollar sounds good. Is it good for everyone?
+learn: A strong dollar makes imports and overseas travel cheaper.
+learn: But exporters earn fewer local dollars for each sale overseas, and tourism here gets pricier for visitors.
+learn: A weak dollar does the opposite: good for exporters, harder for importers and travellers.
+play: sort | Helped by a strong dollar, Hurt by a strong dollar | A family flying overseas=Helped by a strong dollar; A {nz:dairy farmer~au:wine maker} selling overseas=Hurt by a strong dollar; A shop importing phones=Helped by a strong dollar; A tourism business hoping for overseas visitors=Hurt by a strong dollar; Someone buying from overseas websites=Helped by a strong dollar | Helped or hurt?
+check: mcq | Who is usually hurt by a strong dollar? | Exporters* | People travelling overseas | Shops that import
+check: tf | A weak dollar helps exporters. | true
+home: Talk with a grown-up about whether your family gains or loses when the dollar is strong.
+skill: currency
+
+@lesson 4.4 | Currency fees | 💳 | bank
+hook: You spend $100 on an overseas website. Why does your statement say $103?
+learn: Many cards charge a foreign transaction fee, often about 3%, on overseas purchases.
+learn: Airport money changers often have the worst rates. Bank and travel cards vary.
+learn: If a card machine offers to charge you in your home currency, it's often a worse rate. Choose the local currency.
+play: price | Changing $500 into US dollars. Which costs least? | Airport counter, 8% worse than the market:40:500:dollars changed; Bank card with a 3% fee:15:500:dollars changed; Travel card with a 1% margin:5:500:dollars changed
+check: mcq | A card machine overseas offers your home currency. What's usually better? | Paying in the local currency* | Paying in your home currency | Paying twice
+check: gap | A 3% fee on $200 is $_ | 6
+home: Check a bank card's foreign transaction fee with a grown-up.
+skill: currency
+
+@lesson 4.5 | Floating, fixed and pegged | ⚓ | museum
+hook: Some currencies move every second. Others barely move. Why?
+learn: A floating currency's price is set by the market. {nz:The NZ dollar has floated since 1985.~au:The Aussie dollar has floated since 1983.}
+learn: A pegged currency is held at a set rate by its central bank. The Hong Kong dollar has been pegged to the US dollar since 1983.
+learn: Pegs give stability but can break if the central bank runs out of reserves to defend them.
+play: match | Match each system to its description | Floating=The market sets the price; Pegged=Held close to another currency; Managed=Allowed to move, but the central bank steps in; Shared currency=Several countries use one money, like the euro
+check: mcq | What sets a floating currency's price? | The market* | A fixed rule | The weather
+check: tf | Pegs can break if a central bank runs out of reserves. | true
+home: Pick a country with a grown-up and find out if its money floats or is pegged.
+skill: currency
+
+@lesson 4.6 | Locking in a rate | 🔒 | bank
+hook: An exporter gets paid in US dollars in six months. What if our dollar jumps by then?
+learn: Hedging means locking in an exchange rate now for a future payment.
+learn: A forward contract agrees today's rate for a date later on. It removes surprises, good or bad.
+learn: Big exporters, airlines and importers hedge so they can plan prices and wages.
+play: path | Your business will be paid 100,000 USD in 6 months. | Lock in today's rate with a forward contract => good: You know exactly what you'll get and can plan. | Wait and hope the rate moves your way => ok: You might win, but you might lose a lot. | Spend the money now as if you'd already been paid => bad: You don't have it yet, and the amount isn't certain.
+check: mcq | What does hedging do? | Locks in a rate to remove surprises* | Guarantees extra profit | Changes the currency's name
+check: tf | Hedging removes good surprises as well as bad ones. | true
+home: Ask a grown-up whether they'd rather know a price for sure or gamble on a better one.
+skill: currency

@@ -218,3 +218,70 @@ check: mcq | What does "slap" mean in the sun safe saying? | Slap on a hat* | Sl
 home: Pack a sun-safe beach bag with a grown-up.
 skill: sunsafety
 
+@lesson 4.1 | Get ready to wash | 🧽 | kitchen
+hook: Before you wash a single dish, there are a few jobs to do. What are they?
+learn: Scrape leftover food into the bin or compost first.
+learn: Stack the dirty dishes next to the sink.
+learn: Ask a grown-up to help fill the sink with warm, soapy water. Not too hot!
+play: order | Get ready to wash the dishes | Scrape leftover food into the bin; Stack the dishes by the sink; Put the plug in the sink; Ask a grown-up to help with warm water; Add a little dish soap
+check: mcq | What should you do first? | Scrape the leftover food off* | Put the plates in the cupboard | Add lots of soap to the floor
+check: tf | The water should be warm, not burning hot. | true
+home: Help get the sink ready for washing up with a grown-up tonight.
+skill: dishes
+
+@lesson 4.2 | Cleanest first | 🥛 | kitchen
+hook: Glasses or greasy pots: which should you wash first?
+learn: Wash the cleanest things first, while the water is fresh.
+learn: Glasses and cups go first, then cutlery, then plates and bowls.
+learn: Greasy pots and pans go last.
+play: build | Stack the washing-up order | Glasses and cups; Cutlery; Plates and bowls; Pots and pans
+check: mcq | What should you wash last? | Greasy pots and pans* | Glasses | Cups
+check: tf | Washing the cleanest things first keeps the water cleaner for longer. | true
+home: Wash the dishes in the right order with a grown-up.
+skill: dishes
+
+@lesson 4.3 | Careful with knives | 🔪 | kitchen
+hook: Why shouldn't you drop a sharp knife into soapy water?
+learn: In soapy water, you can't see a knife. Someone could reach in and get cut.
+learn: Leave sharp knives on the bench for a grown-up, or wash them one at a time, carefully.
+learn: Hold knives by the handle, with the sharp edge pointing away from you.
+play: path | There's a sharp knife on the bench next to the sink. | Leave it on the bench and tell a grown-up => good: That keeps everyone's hands safe. | Drop it into the soapy water => bad: Someone could reach in and get cut. | Hide it under the tea towel => bad: Someone could grab the towel and get hurt.
+check: mcq | Where should a sharp knife go while you wash up? | On the bench for a grown-up* | Hidden in the soapy water | Under a tea towel
+check: tf | You can see a knife easily in soapy water. | false | Bubbles hide it, so someone could get cut.
+home: Ask a grown-up to show you how to hold a knife safely by the handle.
+skill: safety
+
+@lesson 4.4 | Rinse and dry | 🍽️ | kitchen
+hook: The dishes are washed. Are you finished?
+learn: Rinse off the soap bubbles with clean water.
+learn: Put dishes in the rack to drip, or dry them with a clean tea towel.
+learn: Put them away in the right cupboard when they're dry.
+play: tap | Tap the things that finish the job | 🚿:yes:Rinse off the bubbles; 🧺:yes:Put dishes in the rack; 🧻:yes:Dry with a clean tea towel; 🙈:no; 🏃:no; 🗄️:yes:Put them away
+check: mcq | What should you do after washing? | Rinse off the soap* | Leave the bubbles on | Hide the dishes
+check: tf | Dry dishes go back in the cupboard. | true
+home: Rinse, dry and put away the dishes tonight with a grown-up.
+skill: dishes
+
+@lesson 4.5 | Dishwasher or hand wash? | 🫧 | kitchen
+hook: Can everything go in the dishwasher?
+learn: Plates, cups, bowls and most cutlery can go in the dishwasher.
+learn: Wooden spoons, sharp knives and special pans should be washed by hand.
+learn: If you're not sure, ask a grown-up first.
+play: sort | Dishwasher, Hand wash | Plates=Dishwasher; Wooden spoon=Hand wash; Cups=Dishwasher; Sharp knife=Hand wash; Bowls=Dishwasher; Wooden chopping board=Hand wash | Dishwasher or hand wash?
+check: mcq | Which should be washed by hand? | A wooden spoon* | A plate | A cup
+check: tf | If you're not sure, ask a grown-up first. | true
+home: Help load the dishwasher with a grown-up, and find one thing that must be hand washed.
+skill: dishes
+
+@lesson 4.6 | Saving water | 💧 | kitchen
+hook: Leaving the tap running while you wash up. Is that a big deal?
+learn: A running tap can pour out about 10 litres of water every minute.
+learn: Washing in a sink of water uses much less.
+learn: Turn the tap off between rinses.
+try: 10 litres a minute for 2 minutes is 20 litres :: gap | 10 litres a minute for 5 minutes is _ litres | 50
+play: slider | A tap runs 10 litres a minute. How many litres in 3 minutes? | 0 | 60 | 30 | L | 0 | 5
+check: gap | 10 litres a minute for 4 minutes is _ litres | 40
+check: mcq | What saves water when washing up? | Using a sink of water* | Leaving the tap on | Washing each fork under the tap
+home: Help wash up with the tap off between rinses.
+skill: saving water
+

@@ -223,3 +223,70 @@ check: mcq | What did early banks help with? | Storing money and borrowing for f
 home: Find out when your family's bank was started.
 skill: history
 
+@lesson 4.1 | Sharing the risk | ⛵ | museum
+hook: A spice voyage to Asia could make a fortune, or sink. Would you risk all your money on one ship?
+learn: Long sea voyages in the 1500s and 1600s were risky. Ships sank, got lost or were attacked.
+learn: Instead of one merchant risking everything, many people each paid for a small share of the trip.
+learn: If the voyage succeeded, everyone got a share of the profit. If it failed, each person lost only their part.
+play: path | You have 100 gold coins and can invest in spice voyages. | Put 10 coins into each of 10 voyages => good: Some may sink, but the winners can cover the losses. | Put all 100 into one voyage => bad: If that ship sinks, you lose everything. | Keep it under your bed => ok: It's safe, but it won't grow.
+check: mcq | Why did people share the cost of voyages? | To spread the risk* | Because ships were free | To make ships faster
+check: tf | Sharing a voyage meant each person risked only their part. | true
+home: Talk with a grown-up about something risky your family might share with others, like a big order.
+skill: history
+
+@lesson 4.2 | The first big company | 🏢 | museum
+hook: In 1602, one company let anyone buy a share. What was it?
+learn: The Dutch East India Company, called the VOC, was set up in 1602.
+learn: It sold shares to the public, not just to rich merchants. Thousands of people bought in.
+learn: It traded spices like nutmeg, cloves and pepper from Asia to Europe.
+play: build | Build the VOC's story | 1602: the company is set up in the Netherlands; It sells shares to the public; Ships sail to Asia for spices; Spices sell in Europe for big profits; Shareholders get a share of the profits
+check: mcq | When was the Dutch East India Company set up? | 1602* | 1902 | 2002
+check: tf | The VOC sold shares to ordinary people. | true
+home: Find the Netherlands and Indonesia on a map with a grown-up. That was the VOC's route.
+skill: history
+
+@lesson 4.3 | The first stock exchange | 🏛️ | shares
+hook: You own a VOC share but need your money now. Who will buy it?
+learn: In Amsterdam, people started buying and selling VOC shares with each other.
+learn: That became the world's first stock exchange, in the early 1600s.
+learn: Being able to sell your share made people happier to buy one.
+play: sort | Stock exchange, Not a stock exchange | A place to buy and sell shares=Stock exchange; A market for fish=Not a stock exchange; Amsterdam's share market in the 1600s=Stock exchange; A shop that sells shoes=Not a stock exchange; Today's {nz:NZX~au:ASX}=Stock exchange | Is it a stock exchange?
+check: mcq | What happens at a stock exchange? | Shares are bought and sold* | Fish are sold | Notes are printed
+check: tf | Being able to sell shares made people more willing to buy them. | true
+home: Look up the {nz:NZX~au:ASX} website with a grown-up and find one company you know.
+skill: shares
+
+@lesson 4.4 | Paid in spices | 🌶️ | museum
+hook: Imagine getting paid in pepper instead of money!
+learn: A dividend is a share of a company's profits paid to its owners.
+learn: In its early years, the VOC sometimes paid dividends in spices instead of money.
+learn: Today, dividends are paid in money, often twice a year.
+try: 100 shares × 10c each = $10 :: gap | 200 shares × 10c each = $_ | 20
+play: match | Match the word to its meaning | Dividend=A share of profits paid to owners; Shareholder=Someone who owns part of a company; Share=A small piece of a company; Profit=Money left after costs
+check: mcq | What's a dividend? | A share of profits paid to owners* | A type of ship | A spice
+check: gap | 50 shares × 20c each = $_ | 10
+home: Ask a grown-up if they've ever been paid a dividend, maybe through {nz:KiwiSaver~au:super}.
+skill: shares
+
+@lesson 4.5 | The South Sea Bubble | 🫧 | museum
+hook: Even the famous scientist Isaac Newton lost money in a share bubble. How?
+learn: In 1720 in Britain, shares in the South Sea Company shot up as people rushed to buy.
+learn: The company didn't make much money. People just hoped prices would keep rising.
+learn: When the bubble burst, prices crashed and many people lost their savings, including Newton.
+play: market | Ride a bubble and a crash | 6
+check: mcq | What causes a bubble? | People buying because they hope prices will keep rising* | A company making steady profits | Soap
+check: tf | Smart people can lose money in bubbles too. | true
+home: Blow some bubbles with a grown-up. What happens when they get too big?
+skill: risk
+
+@lesson 4.6 | Our own exchanges | 🌏 | shares
+hook: When did people in {nz:New Zealand~au:Australia} start trading shares?
+learn: Stock exchanges started in both countries in the 1800s, around the time of the gold rushes.
+learn: Miners and investors bought shares in gold mining companies.
+learn: Today, {nz:the NZX~au:the ASX} is where shares in many big local companies are traded.
+play: route | Match each place to its share market today | New Zealand=NZX; Australia=ASX; United States=New York Stock Exchange; United Kingdom=London Stock Exchange
+check: mcq | What helped start stock exchanges in our countries? | The gold rushes* | The internet | Spaceships
+check: tf | {nz:The NZX~au:The ASX} is our country's main stock exchange. | true
+home: Find a local company on {nz:the NZX~au:the ASX} with a grown-up and look at its share price.
+skill: shares
+

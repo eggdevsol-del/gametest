@@ -217,6 +217,72 @@ check: mcq | You have news but someone is talking. You… | Wait for them to fin
 home: Play a talking game with a teddy as the "talking turn". Only the person holding it talks.
 skill: listening
 
+@lesson 4.1 | Beginning, middle and end | 📖 | stage
+hook: Every good story has three parts. Can you name them?
+learn: The beginning tells us who is in the story and where they are.
+learn: The middle has a problem, like a lost dog or a broken bike.
+learn: The end tells us how the problem was fixed.
+play: order | Put the story in order | Mia saved her coins in a jar; One day the jar fell and the coins rolled everywhere; Mia and her brother found every coin; She bought the book she wanted
+check: mcq | What usually happens in the middle of a story? | A problem* | Everyone goes to sleep | The story stops
+check: tf | The end tells how the problem was fixed. | true
+home: Tell a grown-up a story about your day with a beginning, middle and end.
+skill: storytelling
+
+@lesson 4.2 | Who and where | 🏡 | stage
+hook: "Once upon a time..." Who was it about? Where were they?
+learn: The characters are who the story is about.
+learn: The setting is where and when the story happens.
+learn: Telling these first helps people picture your story.
+play: sort | Character, Setting | A brave little kiwi=Character; A dark forest=Setting; A grumpy shopkeeper=Character; A busy market=Setting; A girl called Ana=Character; A beach at night=Setting | Character or setting?
+check: mcq | What is a setting? | Where and when a story happens* | Who the story is about | The last page
+check: tf | A kiwi in a story can be a character. | true
+home: Pick a character and a setting with a grown-up and make up a story together.
+skill: storytelling
+
+@lesson 4.3 | The problem | 😮 | stage
+hook: What makes you want to keep listening to a story?
+learn: Stories get exciting when something goes wrong.
+learn: The character has to try to fix the problem.
+learn: Sometimes the first try doesn't work. That makes it more exciting!
+play: path | In your story, a puppy runs away at the park. What happens next? | The girl looks in the bushes, asks people, then finds the puppy at the pond => good: That's a great middle! She tries hard and fixes the problem. | The story just ends => bad: Listeners want to know what happens. | The puppy turns into a rocket for no reason => ok: That's funny, but it doesn't solve the problem.
+check: mcq | What makes a story exciting? | A problem to fix* | Nothing happening | Everyone is bored
+check: tf | Sometimes a character needs more than one try. | true
+home: Think of a problem for a story, and tell a grown-up how your character fixes it.
+skill: storytelling
+
+@lesson 4.4 | Linking words | 🔗 | stage
+hook: First, then, next, finally. What do these words do?
+learn: Linking words help people follow your story in order.
+learn: Use "first" at the start, "then" and "next" in the middle, and "finally" at the end.
+learn: They help listeners know what happened when.
+play: build | Build a story with linking words | First, Leo found a seed; Then, he planted it in a pot; Next, he watered it every day; Finally, it grew into a sunflower
+check: mcq | Which word goes at the end of a story? | Finally* | First | Then
+check: tf | Linking words help people follow a story. | true
+home: Tell a grown-up how you got ready for school using first, then, next and finally.
+skill: storytelling
+
+@lesson 4.5 | Telling it with your voice | 🎙️ | stage
+hook: How can your voice make a story more fun?
+learn: Speak softly for quiet parts and louder for exciting parts.
+learn: Use different voices for different characters.
+learn: Pause before something surprising. It makes people lean in!
+play: tap | Tap the things that make a story fun to hear | 🤫:yes:A soft voice for quiet parts; 📢:yes:A louder voice for exciting parts; ⏸️:yes:A pause before a surprise; 😐:no; 🏃:no; 🎭:yes:Different voices for characters
+check: mcq | What can you do before a surprise? | Pause* | Mumble | Rush
+check: tf | Different voices can make characters fun. | true
+home: Read a story to a grown-up using a different voice for each character.
+skill: speaking
+
+@lesson 4.6 | A money story | 🐷 | bank
+hook: Can you tell a story about saving up?
+learn: Money stories have characters, a goal, a problem and an ending too.
+learn: The goal could be saving for something special.
+learn: The problem could be wanting to spend it on something else first.
+play: order | Put this saving story in order | Sam wanted a $20 kite; He put $2 in his jar every week; At the shop, he wanted to buy lollies with his savings; He remembered his kite and kept saving; After 10 weeks, he bought the kite
+check: mcq | What was Sam's problem? | He wanted to spend his savings on lollies* | He had no jar | The kite was free
+check: gap | Sam saves $2 a week for 10 weeks. He has $_ | 20
+home: Make up a saving story with a grown-up, with a goal, a problem and an ending.
+skill: storytelling
+
 @band builders
 @unit 1 | Clear requests | Asking so people say yes
 @unit 2 | Persuasion | Reasons, examples and good timing
@@ -435,6 +501,72 @@ check: tf | Sending a message to the wrong person can cause problems. | true
 check: mcq | You wrote "see attached". You should… | Check it's really attached* | Hope for the best | Delete the email
 home: Before your next message, check who it's to and read it once more.
 skill: writing
+
+@lesson 4.1 | Plan your talk | 🗂️ | stage
+hook: You have to talk to the class for 2 minutes. Where do you start?
+learn: Choose one topic and three main points. Three is easy to remember.
+learn: Think about your audience. What do they already know? What will interest them?
+learn: Put your points in an order that makes sense, like time order or most important first.
+play: sort | Good for a 2-minute talk, Too much | Three main points=Good for a 2-minute talk; Every fact you can find=Too much; One clear topic=Good for a 2-minute talk; Ten different topics=Too much; A short example for each point=Good for a 2-minute talk; Reading a whole book chapter=Too much | Good plan or too much?
+check: mcq | How many main points work well in a short talk? | About three* | Twenty | None
+check: tf | Thinking about your audience helps you plan. | true
+home: Plan a 1-minute talk about your favourite animal with three main points.
+skill: presenting
+
+@lesson 4.2 | A strong start | 🚀 | stage
+hook: How do you grab people's attention in the first 10 seconds?
+learn: Start with a question: "Who here has ever lost money?"
+learn: Or a surprising fact: "The first coins were made about 2,600 years ago."
+learn: Or a short story. Avoid starting with "Um, so, my talk is about..."
+play: tap | Tap the strong ways to start a talk | ❓:yes:A question for the audience; 😲:yes:A surprising fact; 📖:yes:A short story; 😶:no; 🙄:no; 🖼️:yes:A picture to look at
+check: mcq | Which is the strongest start? | "Who here has ever lost money?"* | "Um, so, my talk is about money." | "I didn't really practise."
+check: tf | A surprising fact can grab attention. | true
+home: Write three possible first lines for a talk, and test them on a grown-up.
+skill: presenting
+
+@lesson 4.3 | Cue cards | 🃏 | stage
+hook: Should you read your whole talk from a page?
+learn: Cue cards hold key words, not full sentences.
+learn: Key words remind you what to say, so you can look up at the audience.
+learn: Number your cards in case you drop them!
+play: diff | A full script and a good cue card. Tap what the cue card changes. | Today I am going to tell you all about how bees make honey from flowers; First of all, bees fly to flowers and collect nectar; Card 1 | Bees make honey; Nectar from flowers; Card 1 of 3
+check: mcq | What should cue cards have on them? | Key words* | Every word of your talk | Pictures of your friends
+check: tf | Numbering your cards helps if you drop them. | true
+home: Turn a paragraph from a book into three key words for a cue card.
+skill: presenting
+
+@lesson 4.4 | Eyes and body | 👀 | stage
+hook: Your words are great, but you're staring at the floor. What happens?
+learn: Look at different people around the room, not just your teacher.
+learn: Stand still with your feet apart. Swaying distracts people.
+learn: Use your hands to show things, like how big or how many.
+play: path | You're halfway through your talk and feel nervous. | Look up at a friendly face and keep going => good: It helps you feel calm and connect. | Stare at the floor and mumble => bad: People can't hear you or see you. | Turn your back to the class => bad: The audience will stop listening.
+check: mcq | Where should you look during a talk? | At different people around the room* | At the floor | At the ceiling
+check: tf | Swaying back and forth can distract the audience. | true
+home: Practise a talk in front of a mirror or a grown-up. Look up at least five times.
+skill: presenting
+
+@lesson 4.5 | Nervous? That's normal | 😬 | stage
+hook: Your heart is racing before your talk. What can you do?
+learn: Nearly everyone feels nervous before speaking. It means you care.
+learn: Slow breathing calms your body: breathe in for 4, out for 6.
+learn: Practising out loud a few times makes the real talk feel easier.
+play: timing | Breathe in... then tap as you breathe out slowly | Breathe out | Calm
+check: mcq | What helps calm nerves before a talk? | Slow breathing and practice* | Not practising at all | Running around
+check: tf | Feeling nervous means you care. | true
+home: Practise "in for 4, out for 6" breathing with a grown-up.
+skill: calm
+
+@lesson 4.6 | A strong finish | 🏁 | stage
+hook: How do you end a talk so people remember it?
+learn: Sum up your three points in one sentence.
+learn: End with a strong line: a question to think about, or something to try.
+learn: Then say "Thank you" and smile. Don't just stop and walk off.
+play: order | Put the end of a talk in order | Say "So, to sum up..."; Repeat your three main points quickly; Give one thing to think about or try; Say "Thank you"; Ask if anyone has questions
+check: mcq | What's a good last thing to say? | "Thank you"* | "That's it, I guess" | Nothing
+check: tf | Summing up your points helps people remember them. | true
+home: Practise ending a short talk with a summary and a thank-you for a grown-up.
+skill: presenting
 
 @band makers
 @unit 1 | Professional emails | Subject lines, tone and sign-offs
@@ -656,6 +788,72 @@ check: mcq | Helpful feedback includes… | One thing that worked and one to imp
 home: Practise a short talk three times for someone at home.
 skill: presenting
 
+@lesson 4.1 | Know your reader | 🎯 | stage
+hook: Would you write the same letter to your principal and to a newspaper?
+learn: Persuasive writing starts with who will read it and what they care about.
+learn: A principal cares about students and the school's budget. A council cares about ratepayers and safety.
+learn: Use reasons that matter to them, not just to you.
+play: match | Match each reader to a reason they'd care about | Your principal=It would help students learn; The local council=It would make the street safer; A business owner=It would bring more customers; Your parents=It would save the family money
+check: mcq | What should you think about first? | Who will read it and what they care about* | Using big words | Making it long
+check: tf | The best reasons are the ones your reader cares about. | true
+home: Think of a change you want and write who could make it happen and what they care about.
+skill: persuasion
+
+@lesson 4.2 | The persuasive letter | ✉️ | stage
+hook: Your letter gets read for 30 seconds. What has to be in the first lines?
+learn: Say your request early: "I'm writing to ask for a bike rack at the library."
+learn: Give two or three reasons, each with evidence.
+learn: End by repeating your ask and offering to help or talk more.
+play: build | Build a persuasive letter | Greeting and who you are; Your request in one sentence; Reason one with evidence; Reason two with evidence; Repeat your request and offer to help; Thank them and sign off
+check: mcq | Where should your request go? | Near the start* | Only at the very end | Hidden in the middle
+check: tf | Offering to help makes a request stronger. | true
+home: Write a short letter to a family member asking for something, using this structure.
+skill: persuasion
+
+@lesson 4.3 | Kinds of evidence | 📚 | stage
+hook: "Everyone thinks so" isn't evidence. What is?
+learn: Statistics: "60% of students walk to school."
+learn: Expert views: "The local police say this road is a crash risk."
+learn: Examples and stories: "Last week my friend was nearly hit at this corner."
+play: sort | Strong evidence, Weak evidence | A survey of 200 students=Strong evidence; "Everyone knows"=Weak evidence; Crash numbers from the council=Strong evidence; "I just feel it"=Weak evidence; A road safety expert's report=Strong evidence; One random comment online=Weak evidence | Strong or weak evidence?
+check: mcq | Which is the strongest evidence? | A survey of 200 students* | "Everyone knows" | "I feel like it"
+check: tf | A real story can support statistics. | true
+home: Find one statistic and one story that support an opinion you hold.
+skill: evidence
+
+@lesson 4.4 | The other side | 🔄 | stage
+hook: Should you ignore the arguments against you?
+learn: Good persuasive writing names the strongest objection and answers it.
+learn: "Some say a bike rack costs too much. It actually costs about $1,500, less than one week of repairs."
+learn: This shows you've thought about it and makes you more believable.
+play: debate | Should a persuasive letter mention the other side? | Yes. Answering the strongest objection makes you more convincing* | No. Never admit there's another side | Some short messages don't have room for it, but in a letter it usually helps.
+check: mcq | Why mention an objection? | It shows you've thought it through* | It makes the letter longer | It confuses the reader
+check: tf | Answering objections can make you more believable. | true
+home: Think of an opinion you hold. What's the strongest argument against it, and how would you answer it?
+skill: persuasion
+
+@lesson 4.5 | Writing an opinion piece | 📰 | stage
+hook: Newspapers and websites publish opinion pieces by everyday people. How do yours get picked?
+learn: An opinion piece, or op-ed, argues one clear point in about 600 to 800 words.
+learn: Start with a hook linked to news or a real moment, not a dictionary definition.
+learn: Use short paragraphs, plain words and one strong ending line.
+play: diff | Two openings for an op-ed about school lunches. Tap what the stronger one changes. | The dictionary defines lunch as a meal eaten in the middle of the day; In this essay I will talk about lunches; Many people have opinions | Last Tuesday, 14 kids in my class had no lunch; Free school lunches would fix that for under $10 a week each; Here's why the plan deserves support
+check: mcq | What's a good op-ed opening? | A real moment linked to the issue* | A dictionary definition | "In this essay I will..."
+check: tf | An op-ed should focus on one clear point. | true
+home: Read an opinion piece online with a grown-up and find its main point.
+skill: writing
+
+@lesson 4.6 | Firm and polite | 🤝 | stage
+hook: You're angry about the issue. Should your letter sound angry?
+learn: Angry writing makes readers defensive. Firm, polite writing gets taken seriously.
+learn: Say what you want clearly: "Please fix the crossing by the end of term."
+learn: Avoid insults, all capitals and too many exclamation marks.
+play: tap | Tap the things that keep a letter firm and polite | 🙏:yes:Saying please and thank you; 🎯:yes:A clear request with a date; 📊:yes:Facts instead of insults; 🔠:no; ‼️:no; 🤝:yes:Offering to help
+check: mcq | Which line is firm and polite? | "Please fix the crossing by the end of term."* | "FIX IT NOW!!!" | "You obviously don't care about kids."
+check: tf | Insults make readers more likely to agree. | false | They make people defensive.
+home: Rewrite an angry message into a firm and polite one, with a grown-up.
+skill: tone
+
 @band launchers
 @unit 1 | Cover letters | Matching your story to the job
 @unit 2 | Reading contracts | Terms, conditions and red flags
@@ -875,3 +1073,69 @@ check: tf | Testing your sound and internet first is a smart move. | true
 check: mcq | Which lighting works best? | Light in front of you* | A bright window behind you | Total darkness
 home: Set up a practice video call and check your camera, light and sound.
 skill: communication
+
+@lesson 4.1 | Where to have your say | 🏛️ | townhall
+hook: A new law or a council plan affects you. How do you get your view in?
+learn: Parliaments ask for public submissions on many bills through committees.
+learn: Councils ask for feedback on long-term plans, bylaws, transport and parks.
+learn: {nz:Look on Parliament's website under bills open for submissions, and your council's "have your say" page.~au:Look on Parliament's committee inquiry pages and your state's and council's "have your say" pages.}
+play: match | Match each issue to where you'd send a submission | A national bill on vaping=A parliamentary committee; A new skate park plan=Your local council; A {nz:regional~au:state} public transport plan={nz:Your regional council~au:Your state government}; Changes to school term dates={nz:The Ministry of Education~au:Your state education department}
+check: mcq | Who usually asks for submissions on a bill? | A parliamentary committee* | A supermarket | Your school canteen
+check: tf | Councils ask the public for feedback on their plans. | true
+home: Find one consultation that's open now on a government or council website.
+skill: civics
+
+@lesson 4.2 | Read the proposal | 🔍 | townhall
+hook: You've found a bill about something you care about. It's 40 pages long. Now what?
+learn: Start with the summary or explanatory note. It says what the bill is trying to do.
+learn: Find the sections or clauses that affect you, and note their numbers.
+learn: Comment on what's actually proposed, not on rumours about it.
+play: mystery | The bill's summary says it's about youth employment.; Clause 7 changes the training wage age.; Clause 12 covers paid breaks.; You work part-time after school at 16. | Clauses 7 and 12 matter most to you* | Only the title matters | Nothing in it affects you
+check: mcq | Where should you start reading a bill? | Its summary or explanatory note* | The last page | Social media comments
+check: tf | Noting clause numbers makes your submission clearer. | true
+home: Read the summary of a current bill with a grown-up and say what it's trying to do.
+skill: civics
+
+@lesson 4.3 | Structure a submission | 🧱 | townhall
+hook: What does a good submission actually look like?
+learn: Say who you are and why it matters to you: "I'm a 17-year-old who works part-time."
+learn: Say whether you support or oppose it, or which parts.
+learn: Give reasons, then clear recommendations. Short and specific beats long and vague.
+play: build | Build a submission | Who you are and your link to the issue; Your overall position; Your reasons, with evidence; Your specific recommendations; Whether you'd like to speak to the committee
+check: mcq | What should a submission end with? | Specific recommendations* | A complaint about politicians | Nothing
+check: tf | Short and specific submissions are often more useful. | true
+home: Write a three-line submission about a school or local issue.
+skill: civics
+
+@lesson 4.4 | Specific recommendations | 🎯 | townhall
+hook: "Make it better" won't change a law. What will?
+learn: Recommend a clear change: "Change clause 7 so the training wage ends at 18."
+learn: Explain what will happen if they accept it.
+learn: If you support something, say so too. Committees count support as well as opposition.
+play: sort | Specific, Too vague | Change clause 7 so it applies to workers under 18=Specific; Make it fairer=Too vague; Add a bus stop outside the new library=Specific; Do better for young people=Too vague; Keep the skate park lights on until 9pm=Specific; Fix everything=Too vague | Specific or vague?
+check: mcq | Which is a specific recommendation? | Keep the skate park lights on until 9pm* | Make it better | Help youth
+check: tf | Saying you support something can be useful too. | true
+home: Turn a vague complaint you've heard into a specific recommendation.
+skill: civics
+
+@lesson 4.5 | Speaking to a committee | 🎤 | townhall
+hook: You've been invited to speak about your submission for 5 minutes. Scary?
+learn: Committees often hear from people in person or online. You can usually ask to speak.
+learn: Don't read your whole submission. Pick your two strongest points and a real example.
+learn: Leave time for questions. It's OK to say "I don't know, but I can find out."
+play: chat | You speak to a committee about a youth wage bill | them: Thank you for coming. Please begin. | me: Thank you. I'm 17 and work 12 hours a week. I'll focus on two points*/I'll read all 8 pages now/Why is this even a bill? | them: Can you tell us how clause 7 would affect you? | me: It would cut my pay by $2 an hour, which is my bus fare to school each day*/I don't care about clause 7/That's a silly question
+check: mcq | What should you focus on when speaking? | Your two strongest points and a real example* | Reading every page | Arguing with the committee
+check: tf | It's OK to say you don't know but can find out. | true
+home: Watch a short committee hearing online with a grown-up.
+skill: speaking
+
+@lesson 4.6 | After you submit | 📬 | townhall
+hook: You sent your submission. Did it disappear?
+learn: Submissions are usually published, so keep them respectful and leave out private details you don't want public.
+learn: The committee or council writes a report saying what it heard and what it recommends.
+learn: Even if you don't get everything, numbers and good arguments shape the final decision.
+play: tap | Tap the things that happen after submissions close | 📰:yes:Submissions are often published; 📝:yes:A report summarises what people said; 🔁:yes:The plan or bill may be changed; 🗑️:no; 💰:no; 🗳️:yes:Decision makers then vote or decide
+check: mcq | Why leave private details out of a submission? | Submissions are often published* | They're not allowed to read them | It saves paper
+check: tf | Good arguments can change a final decision. | true
+home: Find a committee report or council decision online and see what changed after submissions.
+skill: civics
