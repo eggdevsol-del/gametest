@@ -152,3 +152,75 @@ check: mcq | What does deposit protection help prevent? | Savers losing everythi
 home: Ask a grown-up which government support they think matters most, and why.
 skill: history
 
+@lesson 3.1 | Backed by gold | 🥇 | museum
+hook: Once, you could take a banknote to the bank and swap it for real gold. Why did that stop?
+learn: Under the gold standard, a country's money could be swapped for a fixed amount of gold.
+learn: It made people trust paper money, because it was "as good as gold".
+learn: But the amount of money was limited by how much gold the country had.
+play: debate | Was the gold standard a good system? | It built trust, but made it hard to respond to crises* | It was perfect and had no problems | Supporters say it stopped governments printing too much money and kept prices steady over long periods.
+check: mcq | What was the gold standard? | Money could be swapped for a fixed amount of gold* | Only gold coins were allowed | Gold was banned
+check: tf | Under the gold standard, the money supply was limited by gold. | true
+check: mcq | Why did people trust gold-backed money? | It could be swapped for gold* | It was shiny | It was free
+home: Ask a grown-up if they've heard the phrase "as good as gold".
+skill: money
+
+@lesson 3.2 | Gold's problems | ⛏️ | museum
+hook: If money is tied to gold, what happens when a big gold rush happens? Or when there's no new gold?
+learn: When lots of new gold was found, money could suddenly increase and prices rise.
+learn: When the economy needed more money in a crisis, governments couldn't easily create it.
+learn: In the 1930s Depression, many countries, including Britain in 1931, left the gold standard to help their economies recover.
+play: sort | A gold standard problem, Not a problem with gold | Money supply depends on gold discoveries=A gold standard problem; Hard to respond in a crisis=A gold standard problem; Countries need big gold reserves=A gold standard problem; Gold is shiny=Not a problem with gold; Gold doesn't rust=Not a problem with gold | Problem or not?
+check: mcq | Why did many countries leave gold in the 1930s? | To help their economies recover* | Gold ran out completely | It was a fashion
+check: tf | Britain left the gold standard in 1931. | true
+check: mcq | What happens if new gold is suddenly found under a gold standard? | Money can increase and prices rise* | Nothing at all | Money disappears
+home: Find out when there was a gold rush in {nz:Otago~au:Victoria} and what it did to the area.
+skill: money
+
+@lesson 3.3 | Bretton Woods | 🏨 | townhall
+hook: In 1944, leaders from 44 countries met at a hotel in the US to plan the world's money after the war. What did they decide?
+learn: At Bretton Woods, countries agreed to tie their currencies to the US dollar.
+learn: The US dollar was tied to gold, at $35 an ounce.
+learn: The meeting also created the International Monetary Fund and what became the World Bank.
+play: build | Build the Bretton Woods system | Gold at the base; The US dollar fixed at $35 an ounce of gold; Other currencies fixed to the US dollar; The IMF to help countries in trouble; The World Bank to help rebuild after the war
+check: mcq | What was the US dollar tied to under Bretton Woods? | Gold, at $35 an ounce* | Silver | Nothing
+check: tf | Bretton Woods created the International Monetary Fund. | true
+check: mcq | When was the Bretton Woods meeting? | 1944* | 1066 | 2008
+home: Look up where Bretton Woods is on a map.
+skill: money
+
+@lesson 3.4 | 1971 and floating money | 🌊 | bank
+hook: In 1971, the US stopped swapping dollars for gold. What happened to money?
+learn: In August 1971, the US ended the link between the dollar and gold. The Bretton Woods system soon fell apart.
+learn: Most currencies became fiat money, valued by trust and the economy, not gold.
+learn: {nz:NZ floated its dollar in March 1985, letting the market set its value.~au:Australia floated its dollar in December 1983, letting the market set its value.}
+play: order | Put modern money history in order | The gold standard; Leaving gold in the 1930s; The Bretton Woods deal in 1944; The US ends the gold link in 1971; {nz:NZ floats its dollar in 1985~au:Australia floats its dollar in 1983}
+check: mcq | What happened in 1971? | The US ended the dollar's link to gold* | Gold was invented | Banks closed forever
+check: tf | A floating currency's value is set by the market. | true
+check: mcq | {nz:When did NZ float its dollar?~au:When did Australia float its dollar?} | {nz:1985~au:1983}* | 1905 | 2020
+home: Find today's exchange rate between your dollar and the US dollar.
+skill: currency
+
+@lesson 3.5 | Who makes money now? | 🏛️ | bank
+hook: If money isn't tied to gold, who decides how much there is?
+learn: Central banks issue notes and coins, and set interest rates to keep inflation in check.
+learn: Most money, though, is created by banks when they make loans and add deposits to accounts.
+learn: Rules on lending and interest rates keep this in check.
+play: match | Match each player to its role in modern money | Central bank=Sets interest rates and issues notes and coins; Commercial banks=Create deposits when they lend; Government=Sets laws and spends and taxes; Savers and borrowers=Decide how much to save and borrow
+check: mcq | How is most new money created today? | When banks make loans* | Mining gold | Printing at home
+check: tf | Central banks set interest rates to keep inflation in check. | true
+check: mcq | Who issues our notes and coins? | {nz:The Reserve Bank of New Zealand~au:The Reserve Bank of Australia and the Royal Australian Mint}* | Any shop | Your school
+home: Look at a banknote. Find the name of the bank that issued it.
+skill: centralbank
+
+@lesson 3.6 | Back to gold? | ⚖️ | stage
+hook: Some people say we should go back to gold. Would it fix money problems?
+learn: Supporters say gold would stop governments creating too much money.
+learn: Most economists say it would make recessions worse, because central banks couldn't respond.
+learn: There also isn't enough gold to back all the money in today's economy at current prices.
+play: debate | Should countries go back to the gold standard? | Most economists say no, because it limits how central banks can respond to crises* | Yes, it would fix every problem | Supporters point to long periods of steady prices under gold, and worry about governments printing too much money.
+check: mcq | What do most economists think of returning to gold? | It would make crises harder to handle* | It would fix everything | It's already happened
+check: tf | Some people argue gold would stop governments creating too much money. | true
+check: mcq | Why would returning to gold be hard? | There isn't enough gold at current prices to back all money* | Gold is too light | Gold is illegal
+home: Ask a grown-up whether they'd trust gold-backed money more, and why.
+skill: money
+

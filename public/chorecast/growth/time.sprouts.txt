@@ -146,3 +146,75 @@ check: mcq | What made coins easier than cows? | Small, easy to carry and easy t
 home: Ask a grown-up what they think would be the hardest thing to use as money.
 skill: history
 
+@lesson 3.1 | Why metal? | ⚙️ | museum
+hook: Shells crack and cows wander off. Why did people start using metal for money?
+learn: Metal lasts a long time. It doesn't rot or melt in the sun.
+learn: It can be made into small pieces that are easy to carry.
+learn: Gold, silver and copper were all used to make coins.
+play: sort | Good for coins, Not good for coins | Gold=Good for coins; Ice=Not good for coins; Silver=Good for coins; Bread=Not good for coins; Copper=Good for coins; Paper towels=Not good for coins | Would it make good coins?
+check: mcq | Why is metal good for money? | It lasts a long time* | It melts in the sun | It's alive
+check: tf | Gold and silver were used to make coins. | true
+check: mcq | Which would make the worst coin? | Ice* | Copper | Silver
+home: Find three metal things at home. Which one would make the best coin?
+skill: history
+
+@lesson 3.2 | Stamped coins | 🔨 | museum
+hook: How did people know a lump of metal was real money?
+learn: Long ago in Lydia, now part of Türkiye, people stamped pictures onto small lumps of metal.
+learn: The stamp showed who made it and that it was real.
+learn: Some of these first coins were made of electrum, a mix of gold and silver.
+play: order | Make an old-time coin. Put the steps in order. | Dig up the metal; Melt it down; Make small round pieces; Stamp a picture on each one; Use them to buy things
+check: mcq | Why were coins stamped? | To show they were real* | To make them heavier | For fun only
+check: tf | Some of the first coins were a mix of gold and silver. | true
+check: mcq | Where were some of the first coins made? | Lydia, now part of Türkiye* | Antarctica | The Moon
+home: Look closely at a coin. What pictures are stamped on it?
+skill: history
+
+@lesson 3.3 | Faces on coins | 👑 | museum
+hook: Look at a coin. Whose face is on it?
+learn: For thousands of years, coins have shown the faces of kings, queens and emperors.
+learn: It showed who was in charge and who made the coin.
+learn: {nz:NZ coins show Queen Elizabeth II, and new ones will show King Charles III.~au:Older Australian coins show Queen Elizabeth II. Newer ones show King Charles III.}
+play: tap | Tap the things you might find on a coin | 👑:yes:A king or queen's face; 🔢:yes:A number showing its value; 🐦:yes:An animal or bird; 📅:yes:The year it was made; 🍕:no; 📱:no
+check: mcq | Why did coins show a ruler's face? | To show who was in charge* | Because it looked funny | To scare people
+check: tf | Coins often show the year they were made. | true
+check: mcq | What does the number on a coin tell you? | What it's worth* | How old you are | The time
+home: Find the year on three coins at home. Which is the oldest?
+skill: history
+
+@lesson 3.4 | Coins with holes | ⭕ | museum
+hook: In ancient China, coins had square holes in the middle. Why?
+learn: Chinese coins were round with a square hole.
+learn: People threaded them onto string so they were easy to carry and count.
+learn: Some countries still make coins with holes today.
+play: mystery | It's round with a square hole; It comes from ancient China; People threaded lots onto a string; It was made of metal | An old Chinese coin* | A doughnut | A button
+check: mcq | Why did Chinese coins have holes? | To thread them onto string* | To make them lighter for birds | Because they were broken
+check: tf | People carried strings of coins in ancient China. | true
+check: mcq | What shape was the hole? | Square* | Star | Heart
+home: Thread some buttons on a string. How easy is it to count them?
+skill: history
+
+@lesson 3.5 | Stopping cheats | 🕵️ | museum
+hook: Long ago, sneaky people shaved tiny bits of gold off coins. Why?
+learn: Gold and silver coins were worth the metal inside them.
+learn: Cheats shaved or clipped the edges and kept the bits. That's called clipping.
+learn: To stop it, coin makers added ridges around the edges, so clipping was easy to spot.
+play: path | You get a gold coin with a smooth, shaved edge. | Check it carefully and tell a grown-up => good: Good detective work! A clipped coin is worth less. | Use it and say nothing => bad: That passes the cheat on to someone else. | Shave a bit more off for yourself => bad: That's cheating too.
+check: mcq | What is coin clipping? | Shaving metal off the edges* | Cutting hair | Clapping
+check: tf | Ridges on a coin's edge helped stop cheats. | true
+check: mcq | Why would someone clip a gold coin? | To keep the gold bits* | To make it pretty | To make it bigger
+home: Feel the edges of different coins. Which ones have ridges?
+skill: history
+
+@lesson 3.6 | Coins today | 🪙 | bank
+hook: Are our gold-coloured coins made of real gold?
+learn: No! Our coins are made of cheaper metals like steel, copper and nickel.
+learn: The gold-coloured $1 and $2 coins are made of a mix called aluminium bronze.
+learn: A coin's value comes from the number on it, not the metal inside.
+play: match | Match each coin to what it can buy | 10c=Part of a lolly; 50c=A small treat; $1=A piece of fruit; $2=A drink bottle refill or an ice block
+check: mcq | Are our $1 and $2 coins made of real gold? | No, aluminium bronze* | Yes, solid gold | Yes, gold paint
+check: tf | A coin's value comes from the number on it. | true
+check: mcq | Which coin is worth the most? | $2* | 50c | 10c
+home: Sort some coins from smallest value to biggest.
+skill: currency
+

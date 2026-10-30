@@ -146,3 +146,75 @@ check: mcq | Where should shirts often go? | On a hanger* | Under the bed | In t
 home: Fold and put away your own clean clothes this week.
 skill: chores
 
+@lesson 3.1 | DRSABCD | 🚑 | home
+hook: Someone has collapsed. What do you do first?
+learn: First aid trainers use DRSABCD: Danger, Response, Send for help, Airway, Breathing, CPR, Defibrillation.
+learn: Check for danger first, so you don't get hurt too.
+learn: Then check if they respond, and call {nz:111~au:000} or get an adult straight away.
+play: order | Put the DRSABCD steps in order | Danger: check it's safe; Response: talk to them and gently squeeze their shoulders; Send for help: call {nz:111~au:000}; Airway: check their mouth is clear; Breathing: look, listen and feel; CPR: if they're not breathing normally; Defibrillation: use an AED if there is one
+check: mcq | What does the D at the start of DRSABCD mean? | Danger* | Dinner | Doctor
+check: tf | You should check for danger before helping. | true
+check: mcq | What's the emergency number? | {nz:111~au:000}* | {nz:000~au:111} | 123
+home: Learn DRSABCD and say it to a grown-up.
+skill: firstaid
+
+@lesson 3.2 | Calling for help | ☎️ | townhall
+hook: You call {nz:111~au:000}. What will they ask?
+learn: They'll ask which service you need: police, fire or ambulance.
+learn: Then where you are, what happened and how the person is.
+learn: Stay calm, answer clearly and don't hang up until they tell you to.
+play: chat | You call for an ambulance | them: Emergency. Which service do you need? | me: Ambulance, please*/Um, I don't know, bye/Pizza delivery | them: What's the address of the emergency? | me: 14 Rimu Street. My grandad has fallen and isn't answering*/Somewhere near the shops/I'll tell you later
+check: mcq | What's the first question they usually ask? | Which service do you need?* | What's your favourite food? | How old are you?
+check: tf | You should stay on the line until they tell you to hang up. | true
+check: mcq | Why is knowing your address important? | So help can find you* | It isn't | To post a letter
+home: Make sure you know your full home address.
+skill: safety
+
+@lesson 3.3 | Nosebleeds | 👃 | home
+hook: Your friend's nose starts bleeding. Head back or head forward?
+learn: Sit them down and lean them slightly forward, so blood doesn't run down the throat.
+learn: Pinch the soft part of the nose, below the bony bit, for about 10 minutes.
+learn: Get help if it won't stop after 20 minutes, or after a hard knock.
+play: path | A friend gets a nosebleed at lunch. | Sit them down, lean forward and pinch the soft part of the nose => good: That's right. The bleeding slows and stops. | Tip their head back => bad: Blood runs down the throat, which can make them sick. | Tell them to run around => bad: Moving around can make it bleed more.
+check: mcq | Which way should someone lean with a nosebleed? | Slightly forward* | Far back | Upside down
+check: tf | You should pinch the soft part of the nose. | true
+check: mcq | About how long should you pinch it? | 10 minutes* | 5 seconds | 2 hours
+home: Practise the nosebleed position with a grown-up.
+skill: firstaid
+
+@lesson 3.4 | Sprains | 🦶 | home
+hook: You roll your ankle at netball and it swells up. What helps?
+learn: Remember RICE: Rest, Ice, Compression and Elevation.
+learn: Rest it, wrap a cold pack in a cloth and hold it on for about 20 minutes, use a firm bandage, and raise it up.
+learn: See a doctor if you can't walk on it or it looks out of shape.
+play: match | Match each letter of RICE to what you do | Rest=Stop using the injured part; Ice=A cold pack wrapped in a cloth; Compression=A firm bandage; Elevation=Raise it up on a pillow
+check: mcq | What does the E in RICE mean? | Elevation* | Eat | Exercise
+check: tf | Ice should be wrapped in a cloth, not put straight on skin. | true
+check: mcq | When should you see a doctor about a sprain? | If you can't walk on it or it looks out of shape* | Never | Only after a month
+home: Find the cold packs and bandages in your home's first aid kit.
+skill: firstaid
+
+@lesson 3.5 | Stings and bites | 🐝 | garden
+hook: Ouch! A bee sting. What do you do?
+learn: For a bee sting, scrape the stinger out sideways with a fingernail or card. Don't squeeze it.
+learn: Use a cold pack to ease the pain and swelling.
+learn: If the person has trouble breathing, a swollen face, or feels faint, it's an emergency. Call {nz:111~au:000}.
+play: sort | Normal reaction, Emergency | A little red bump=Normal reaction; Trouble breathing=Emergency; Some itching=Normal reaction; Swollen face and lips=Emergency; A sore spot=Normal reaction; Feeling faint or dizzy=Emergency | Normal or emergency?
+check: mcq | How should you get a bee stinger out? | Scrape it out sideways* | Squeeze it hard | Leave it in for a week
+check: tf | Trouble breathing after a sting is an emergency. | true
+check: mcq | What helps a normal sting? | A cold pack* | Hot water | Rubbing it with dirt
+home: Ask a grown-up if anyone in your family is allergic to stings.
+skill: firstaid
+
+@lesson 3.6 | The recovery position | 🛌 | home
+hook: Someone has fainted but is breathing. What position keeps them safe while help comes?
+learn: The recovery position is lying on their side, so their airway stays clear.
+learn: Their top leg is bent to stop them rolling, and their head tilted back slightly.
+learn: Stay with them and keep checking their breathing until help arrives.
+play: build | Put someone in the recovery position | Kneel beside them; Put the arm nearest you at a right angle; Bring the other arm across their chest; Bend their far knee up; Roll them towards you onto their side; Tilt their head back slightly to keep the airway open
+check: mcq | Why use the recovery position? | It keeps their airway clear* | It's comfier for you | It wakes them up
+check: tf | You should keep checking their breathing until help comes. | true
+check: mcq | When is the recovery position used? | When someone is unconscious but breathing* | When someone is sprinting | When someone is eating
+home: Practise the recovery position on a grown-up who's happy to help.
+skill: firstaid
+

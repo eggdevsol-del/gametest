@@ -147,6 +147,78 @@ check: mcq | What made coins easier than cows? | Small, easy to carry and easy t
 home: Ask a grown-up what they think would be the hardest thing to use as money.
 skill: history
 
+@lesson 3.1 | Why metal? | ⚙️ | museum
+hook: Shells crack and cows wander off. Why did people start using metal for money?
+learn: Metal lasts a long time. It doesn't rot or melt in the sun.
+learn: It can be made into small pieces that are easy to carry.
+learn: Gold, silver and copper were all used to make coins.
+play: sort | Good for coins, Not good for coins | Gold=Good for coins; Ice=Not good for coins; Silver=Good for coins; Bread=Not good for coins; Copper=Good for coins; Paper towels=Not good for coins | Would it make good coins?
+check: mcq | Why is metal good for money? | It lasts a long time* | It melts in the sun | It's alive
+check: tf | Gold and silver were used to make coins. | true
+check: mcq | Which would make the worst coin? | Ice* | Copper | Silver
+home: Find three metal things at home. Which one would make the best coin?
+skill: history
+
+@lesson 3.2 | Stamped coins | 🔨 | museum
+hook: How did people know a lump of metal was real money?
+learn: Long ago in Lydia, now part of Türkiye, people stamped pictures onto small lumps of metal.
+learn: The stamp showed who made it and that it was real.
+learn: Some of these first coins were made of electrum, a mix of gold and silver.
+play: order | Make an old-time coin. Put the steps in order. | Dig up the metal; Melt it down; Make small round pieces; Stamp a picture on each one; Use them to buy things
+check: mcq | Why were coins stamped? | To show they were real* | To make them heavier | For fun only
+check: tf | Some of the first coins were a mix of gold and silver. | true
+check: mcq | Where were some of the first coins made? | Lydia, now part of Türkiye* | Antarctica | The Moon
+home: Look closely at a coin. What pictures are stamped on it?
+skill: history
+
+@lesson 3.3 | Faces on coins | 👑 | museum
+hook: Look at a coin. Whose face is on it?
+learn: For thousands of years, coins have shown the faces of kings, queens and emperors.
+learn: It showed who was in charge and who made the coin.
+learn: {nz:NZ coins show Queen Elizabeth II, and new ones will show King Charles III.~au:Older Australian coins show Queen Elizabeth II. Newer ones show King Charles III.}
+play: tap | Tap the things you might find on a coin | 👑:yes:A king or queen's face; 🔢:yes:A number showing its value; 🐦:yes:An animal or bird; 📅:yes:The year it was made; 🍕:no; 📱:no
+check: mcq | Why did coins show a ruler's face? | To show who was in charge* | Because it looked funny | To scare people
+check: tf | Coins often show the year they were made. | true
+check: mcq | What does the number on a coin tell you? | What it's worth* | How old you are | The time
+home: Find the year on three coins at home. Which is the oldest?
+skill: history
+
+@lesson 3.4 | Coins with holes | ⭕ | museum
+hook: In ancient China, coins had square holes in the middle. Why?
+learn: Chinese coins were round with a square hole.
+learn: People threaded them onto string so they were easy to carry and count.
+learn: Some countries still make coins with holes today.
+play: mystery | It's round with a square hole; It comes from ancient China; People threaded lots onto a string; It was made of metal | An old Chinese coin* | A doughnut | A button
+check: mcq | Why did Chinese coins have holes? | To thread them onto string* | To make them lighter for birds | Because they were broken
+check: tf | People carried strings of coins in ancient China. | true
+check: mcq | What shape was the hole? | Square* | Star | Heart
+home: Thread some buttons on a string. How easy is it to count them?
+skill: history
+
+@lesson 3.5 | Stopping cheats | 🕵️ | museum
+hook: Long ago, sneaky people shaved tiny bits of gold off coins. Why?
+learn: Gold and silver coins were worth the metal inside them.
+learn: Cheats shaved or clipped the edges and kept the bits. That's called clipping.
+learn: To stop it, coin makers added ridges around the edges, so clipping was easy to spot.
+play: path | You get a gold coin with a smooth, shaved edge. | Check it carefully and tell a grown-up => good: Good detective work! A clipped coin is worth less. | Use it and say nothing => bad: That passes the cheat on to someone else. | Shave a bit more off for yourself => bad: That's cheating too.
+check: mcq | What is coin clipping? | Shaving metal off the edges* | Cutting hair | Clapping
+check: tf | Ridges on a coin's edge helped stop cheats. | true
+check: mcq | Why would someone clip a gold coin? | To keep the gold bits* | To make it pretty | To make it bigger
+home: Feel the edges of different coins. Which ones have ridges?
+skill: history
+
+@lesson 3.6 | Coins today | 🪙 | bank
+hook: Are our gold-coloured coins made of real gold?
+learn: No! Our coins are made of cheaper metals like steel, copper and nickel.
+learn: The gold-coloured $1 and $2 coins are made of a mix called aluminium bronze.
+learn: A coin's value comes from the number on it, not the metal inside.
+play: match | Match each coin to what it can buy | 10c=Part of a lolly; 50c=A small treat; $1=A piece of fruit; $2=A drink bottle refill or an ice block
+check: mcq | Are our $1 and $2 coins made of real gold? | No, aluminium bronze* | Yes, solid gold | Yes, gold paint
+check: tf | A coin's value comes from the number on it. | true
+check: mcq | Which coin is worth the most? | $2* | 50c | 10c
+home: Sort some coins from smallest value to biggest.
+skill: currency
+
 @band builders
 @unit 1 | How money began | Barter, commodity money and coins
 @unit 2 | Trade routes | Silk, spices and sailors
@@ -298,6 +370,79 @@ check: tf | The sea route to India let Europeans cut out many middlemen. | true
 check: mcq | What was one harmful result of these voyages? | European empires took over other people's lands* | Spices disappeared | The ocean dried up
 home: Trace Vasco da Gama's route on a map with a grown-up.
 skill: trade
+
+@lesson 3.1 | Grain and temples | 🌾 | museum
+hook: Thousands of years ago, the first "banks" stored something other than money. What?
+learn: In ancient Mesopotamia, in what's now Iraq, temples and palaces stored grain for people.
+learn: They also lent grain to farmers, who paid back extra after the harvest.
+learn: The Code of Hammurabi, written about 3,700 years ago, had rules about loans and interest.
+play: order | A Mesopotamian grain loan. Put it in order. | A farmer needs seed in spring; The temple lends him grain; He plants and the crop grows; He harvests in autumn; He pays back the grain plus a little extra
+check: mcq | What did early temple "banks" store? | Grain* | Phones | Paper money
+check: tf | The Code of Hammurabi had rules about loans. | true
+check: mcq | The "little extra" paid back on a loan is called… | Interest* | A gift | A tax
+home: Find Mesopotamia on a map with a grown-up.
+skill: banking
+
+@lesson 3.2 | Benches and bankrupts | 🪑 | museum
+hook: Where does the word "bank" come from?
+learn: In Italy about 700 years ago, moneychangers worked at benches in the market. The Italian word for bench is "banca".
+learn: They swapped coins from different places and made loans.
+learn: Legend says a moneychanger who couldn't pay had their bench broken: "banca rotta". That's where "bankrupt" comes from.
+play: match | Match each word to its meaning | Banca=An Italian word for bench; Moneychanger=Someone who swaps coins from different places; Bankrupt=Unable to pay your debts; Loan=Money lent that must be paid back
+check: mcq | Where does the word "bank" come from? | The Italian word for bench* | A riverbank | A type of fish
+check: tf | Moneychangers swapped coins from different places. | true
+check: mcq | What does "bankrupt" mean? | Unable to pay your debts* | Very rich | Owning a bench
+home: Ask a grown-up if they know any other words that come from Italian.
+skill: history
+
+@lesson 3.3 | Goldsmiths' receipts | 📜 | museum
+hook: In London 400 years ago, people left their gold with goldsmiths. What did they get in return?
+learn: Goldsmiths had strong safes, so people stored gold with them and got a written receipt.
+learn: People started paying each other with the receipts instead of fetching the gold.
+learn: Those receipts were an early kind of banknote.
+play: build | Build the story of the first banknotes | People store gold with a goldsmith; The goldsmith writes a receipt; People pay with the receipt instead of the gold; Receipts pass from person to person; Banks start printing notes
+check: mcq | What did goldsmiths give people for their gold? | A written receipt* | A sandwich | Nothing
+check: tf | Goldsmiths' receipts were an early kind of banknote. | true
+check: mcq | Why use receipts instead of gold? | They were easier to carry* | They were heavier | Gold was illegal
+home: Write a pretend receipt for something you're "storing" for a family member.
+skill: banking
+
+@lesson 3.4 | Lending most of it out | 🔁 | bank
+hook: Goldsmiths noticed something. Not everyone came back for their gold at the same time. What did they do?
+learn: They realised they could lend out some of the gold and earn interest, while keeping enough for people who came back.
+learn: Banks still work like this. They keep some money ready and lend most of the rest.
+learn: It works as long as not everyone wants their money back at once.
+try: A bank keeps 10% of $1,000 ready, so it can lend $900 :: gap | A bank keeps 10% of $5,000 ready, so it can lend $_ | 4500
+play: slider | A bank has $10,000 in deposits and keeps 10% ready. How much can it lend? | 0 | 10000 | 9000 | $ | 0 | 500
+check: mcq | Why can banks lend most of what's deposited? | Not everyone takes their money out at once* | They print more | Savers never want it back
+check: tf | Banks keep some money ready for people who want it back. | true
+check: gap | Keep 20% of $1,000 ready. You can lend $_ | 800
+home: Explain to a grown-up how a bank can lend money it is looking after.
+skill: banking
+
+@lesson 3.5 | When trust breaks | 💔 | bank
+hook: What happens if everyone rushes to a bank on the same day?
+learn: Because banks lend most of their money out, they can't pay everyone back at once.
+learn: If people panic and rush to withdraw, a bank can run out of cash. That's a bank run.
+learn: Today there are protections, like deposit schemes, so most savers don't need to panic.
+play: sort | Builds trust, Breaks trust | Clear, honest reports=Builds trust; Rumours that the bank is broke=Breaks trust; Deposit protection schemes=Builds trust; Everyone rushing to withdraw=Breaks trust; Strong rules for banks=Builds trust; A bank hiding losses=Breaks trust | Builds or breaks trust?
+check: mcq | What is a bank run? | Lots of people rushing to take money out* | A running race | A bank opening late
+check: tf | Banks only work if people trust them. | true
+check: mcq | What helps protect savers today? | Deposit protection schemes* | Rumours | Hiding cash at home
+home: Ask a grown-up why they trust their bank.
+skill: banking
+
+@lesson 3.6 | Our first banks | 🏦 | bank
+hook: When did banks first open in {nz:Aotearoa~au:Australia}?
+learn: {nz:NZ's first bank opened in Wellington in 1840. The Bank of New Zealand started in 1861.~au:Australia's first bank, the Bank of New South Wales, opened in Sydney in 1817. Today it's called Westpac.}
+learn: Early banks helped settlers and businesses store money and borrow for farms, shops and trade.
+learn: Banks also printed their own banknotes, until the government took over that job.
+play: mcq | {nz:When did NZ's first bank open?~au:When did Australia's first bank open?} | {nz:1840~au:1817}* | {nz:1940~au:1917} | {nz:2000~au:2000}
+check: tf | Banks once printed their own banknotes. | true
+check: mcq | {nz:Which bank started in NZ in 1861?~au:What's the Bank of New South Wales called today?} | {nz:The Bank of New Zealand~au:Westpac}* | A pizza shop | A library
+check: mcq | What did early banks help with? | Storing money and borrowing for farms and shops* | Delivering mail | Building roads
+home: Find out when your family's bank was started.
+skill: history
 
 @band makers
 @unit 1 | Booms and busts | Bubbles, crashes and recoveries
@@ -453,6 +598,78 @@ check: mcq | What does deposit protection help prevent? | Savers losing everythi
 home: Ask a grown-up which government support they think matters most, and why.
 skill: history
 
+@lesson 3.1 | Backed by gold | 🥇 | museum
+hook: Once, you could take a banknote to the bank and swap it for real gold. Why did that stop?
+learn: Under the gold standard, a country's money could be swapped for a fixed amount of gold.
+learn: It made people trust paper money, because it was "as good as gold".
+learn: But the amount of money was limited by how much gold the country had.
+play: debate | Was the gold standard a good system? | It built trust, but made it hard to respond to crises* | It was perfect and had no problems | Supporters say it stopped governments printing too much money and kept prices steady over long periods.
+check: mcq | What was the gold standard? | Money could be swapped for a fixed amount of gold* | Only gold coins were allowed | Gold was banned
+check: tf | Under the gold standard, the money supply was limited by gold. | true
+check: mcq | Why did people trust gold-backed money? | It could be swapped for gold* | It was shiny | It was free
+home: Ask a grown-up if they've heard the phrase "as good as gold".
+skill: money
+
+@lesson 3.2 | Gold's problems | ⛏️ | museum
+hook: If money is tied to gold, what happens when a big gold rush happens? Or when there's no new gold?
+learn: When lots of new gold was found, money could suddenly increase and prices rise.
+learn: When the economy needed more money in a crisis, governments couldn't easily create it.
+learn: In the 1930s Depression, many countries, including Britain in 1931, left the gold standard to help their economies recover.
+play: sort | A gold standard problem, Not a problem with gold | Money supply depends on gold discoveries=A gold standard problem; Hard to respond in a crisis=A gold standard problem; Countries need big gold reserves=A gold standard problem; Gold is shiny=Not a problem with gold; Gold doesn't rust=Not a problem with gold | Problem or not?
+check: mcq | Why did many countries leave gold in the 1930s? | To help their economies recover* | Gold ran out completely | It was a fashion
+check: tf | Britain left the gold standard in 1931. | true
+check: mcq | What happens if new gold is suddenly found under a gold standard? | Money can increase and prices rise* | Nothing at all | Money disappears
+home: Find out when there was a gold rush in {nz:Otago~au:Victoria} and what it did to the area.
+skill: money
+
+@lesson 3.3 | Bretton Woods | 🏨 | townhall
+hook: In 1944, leaders from 44 countries met at a hotel in the US to plan the world's money after the war. What did they decide?
+learn: At Bretton Woods, countries agreed to tie their currencies to the US dollar.
+learn: The US dollar was tied to gold, at $35 an ounce.
+learn: The meeting also created the International Monetary Fund and what became the World Bank.
+play: build | Build the Bretton Woods system | Gold at the base; The US dollar fixed at $35 an ounce of gold; Other currencies fixed to the US dollar; The IMF to help countries in trouble; The World Bank to help rebuild after the war
+check: mcq | What was the US dollar tied to under Bretton Woods? | Gold, at $35 an ounce* | Silver | Nothing
+check: tf | Bretton Woods created the International Monetary Fund. | true
+check: mcq | When was the Bretton Woods meeting? | 1944* | 1066 | 2008
+home: Look up where Bretton Woods is on a map.
+skill: money
+
+@lesson 3.4 | 1971 and floating money | 🌊 | bank
+hook: In 1971, the US stopped swapping dollars for gold. What happened to money?
+learn: In August 1971, the US ended the link between the dollar and gold. The Bretton Woods system soon fell apart.
+learn: Most currencies became fiat money, valued by trust and the economy, not gold.
+learn: {nz:NZ floated its dollar in March 1985, letting the market set its value.~au:Australia floated its dollar in December 1983, letting the market set its value.}
+play: order | Put modern money history in order | The gold standard; Leaving gold in the 1930s; The Bretton Woods deal in 1944; The US ends the gold link in 1971; {nz:NZ floats its dollar in 1985~au:Australia floats its dollar in 1983}
+check: mcq | What happened in 1971? | The US ended the dollar's link to gold* | Gold was invented | Banks closed forever
+check: tf | A floating currency's value is set by the market. | true
+check: mcq | {nz:When did NZ float its dollar?~au:When did Australia float its dollar?} | {nz:1985~au:1983}* | 1905 | 2020
+home: Find today's exchange rate between your dollar and the US dollar.
+skill: currency
+
+@lesson 3.5 | Who makes money now? | 🏛️ | bank
+hook: If money isn't tied to gold, who decides how much there is?
+learn: Central banks issue notes and coins, and set interest rates to keep inflation in check.
+learn: Most money, though, is created by banks when they make loans and add deposits to accounts.
+learn: Rules on lending and interest rates keep this in check.
+play: match | Match each player to its role in modern money | Central bank=Sets interest rates and issues notes and coins; Commercial banks=Create deposits when they lend; Government=Sets laws and spends and taxes; Savers and borrowers=Decide how much to save and borrow
+check: mcq | How is most new money created today? | When banks make loans* | Mining gold | Printing at home
+check: tf | Central banks set interest rates to keep inflation in check. | true
+check: mcq | Who issues our notes and coins? | {nz:The Reserve Bank of New Zealand~au:The Reserve Bank of Australia and the Royal Australian Mint}* | Any shop | Your school
+home: Look at a banknote. Find the name of the bank that issued it.
+skill: centralbank
+
+@lesson 3.6 | Back to gold? | ⚖️ | stage
+hook: Some people say we should go back to gold. Would it fix money problems?
+learn: Supporters say gold would stop governments creating too much money.
+learn: Most economists say it would make recessions worse, because central banks couldn't respond.
+learn: There also isn't enough gold to back all the money in today's economy at current prices.
+play: debate | Should countries go back to the gold standard? | Most economists say no, because it limits how central banks can respond to crises* | Yes, it would fix every problem | Supporters point to long periods of steady prices under gold, and worry about governments printing too much money.
+check: mcq | What do most economists think of returning to gold? | It would make crises harder to handle* | It would fix everything | It's already happened
+check: tf | Some people argue gold would stop governments creating too much money. | true
+check: mcq | Why would returning to gold be hard? | There isn't enough gold at current prices to back all money* | Gold is too light | Gold is illegal
+home: Ask a grown-up whether they'd trust gold-backed money more, and why.
+skill: money
+
 @band launchers
 @unit 1 | Modern money | Fiat money, banks and how money is created
 @unit 2 | Inflation and policy | Why central banks target inflation
@@ -604,3 +821,76 @@ check: tf | Raising interest rates helped bring inflation back down. | true
 check: mcq | {nz:NZ inflation peaked in 2022 at about…~au:Australian inflation peaked in late 2022 at about…} | {nz:7.3%~au:7.8%}* | 30% | 0.5%
 home: Ask a grown-up how rising prices or interest rates affected your household in 2022 and 2023.
 skill: inflation
+
+@lesson 3.1 | Subprime loans | 🏚️ | museum
+hook: In the 2000s, US lenders gave home loans to people who couldn't afford them. Why would anyone do that?
+learn: Lenders made "subprime" loans to risky borrowers, often with low starting rates that jumped later.
+learn: They sold the loans to banks, which bundled them into investments that were rated as safe.
+learn: When house prices fell and borrowers defaulted, those "safe" investments collapsed in value.
+play: build | Build the chain that led to the 2008 crisis | Lenders make risky home loans; Loans are sold and bundled into investments; Rating agencies call them safe; Banks around the world buy them; House prices fall and borrowers can't pay; The investments collapse and banks fail
+check: mcq | What were subprime loans? | Loans to borrowers likely to struggle to repay* | Loans to the richest people | Loans under the sea
+check: tf | Many risky loan bundles were wrongly rated as safe. | true
+check: mcq | What set off the collapse? | House prices falling and borrowers defaulting* | A new phone | A good harvest
+home: Ask a grown-up what they remember about the 2008 financial crisis.
+skill: history
+
+@lesson 3.2 | Lehman Brothers | 🏦 | museum
+hook: On 15 September 2008, a 158-year-old bank went bust. Why did the whole world feel it?
+learn: Lehman Brothers was a huge US investment bank with big bets on property loans.
+learn: When it collapsed, banks stopped trusting each other and stopped lending. Credit froze around the world.
+learn: Governments and central banks stepped in with bailouts and emergency lending to stop more collapses.
+play: mystery | It was a big US investment bank; It was founded in the 1850s; It made big bets on home loans; It collapsed on 15 September 2008 | Lehman Brothers* | Enron | Barings Bank
+check: mcq | Why did one bank's collapse affect the world? | Banks stopped trusting each other and stopped lending* | It owned every company | It printed all money
+check: tf | Governments stepped in to stop more banks collapsing in 2008. | true
+check: mcq | When did Lehman Brothers collapse? | September 2008* | October 1929 | March 2020
+home: Find a timeline of the 2008 crisis and pick out three key dates.
+skill: history
+
+@lesson 3.3 | Leverage | 🎚️ | shares
+hook: Borrow $29 for every $1 of your own, and invest $30. Prices fall 4%. What's left?
+learn: Leverage means using borrowed money to invest. It magnifies gains and losses.
+learn: Before 2008, some investment banks borrowed around $30 for every $1 of their own money.
+learn: At that level, a fall of just over 3% wipes out all your own money.
+try: $30 invested falls 4% to $28.80. You owe $29, so you're $0.20 down :: gap | $10 invested ($1 yours, $9 borrowed) falls 10%. Your $1 is now worth $_ | 0
+play: slider | You invest $20: $2 of your own and $18 borrowed. It falls 5%. How much of your own $2 is left? | 0 | 2 | 1 | $ | 0 | 0.5
+check: mcq | What does leverage do? | Magnifies gains and losses* | Removes risk | Guarantees profit
+check: tf | High leverage means a small fall can wipe out your own money. | true
+check: mcq | Borrowing to invest is… | Riskier than investing your own money* | Always safe | Free money
+home: Explain leverage to a grown-up using a simple example.
+skill: risk
+
+@lesson 3.4 | Collapses close to home | 🧯 | museum
+hook: Big collapses didn't only happen overseas. What happened in {nz:NZ~au:Australia}?
+learn: {nz:Between 2006 and 2012, dozens of NZ finance companies collapsed. Many offered high interest, and many investors, often retirees, lost savings.~au:In 2001, HIH Insurance collapsed with debts of about $5 billion, one of the biggest company collapses in Australian history.}
+learn: {nz:Common problems were risky property loans, too much lending to related parties and poor disclosure.~au:A Royal Commission found poor management, weak oversight and misleading accounts.}
+learn: {nz:NZ set up the Financial Markets Authority in 2011, partly in response.~au:Rules for directors, auditors and insurance regulation were tightened afterwards.}
+play: sort | Red flag, Good sign | Much higher interest than the banks offer=Red flag; Lots of loans to companies linked to the directors=Red flag; Independent audits and clear reports=Good sign; Glossy ads with a famous face=Red flag; Spread across many types of borrower=Good sign; Directors who explain risks plainly=Good sign | Red flag or good sign?
+check: mcq | A warning sign before many collapses was… | Promising much higher returns than others* | Clear reports | Independent audits
+check: tf | High returns usually come with higher risk. | true
+check: mcq | {nz:What did NZ set up in 2011, partly in response?~au:Which company collapsed in Australia in 2001?} | {nz:The Financial Markets Authority~au:HIH Insurance}* | A new flag | A sports league
+home: Ask an older relative if they remember {nz:the finance company collapses~au:the HIH collapse}.
+skill: history
+
+@lesson 3.5 | Red flags across crises | 🚩 | townhall
+hook: Enron, 2008, FTX. Different decades, same warning signs?
+learn: Returns that seem too good, and complexity nobody can explain, show up again and again.
+learn: Conflicts of interest, weak auditors, and customers' money being mixed with the company's are classic signs.
+learn: When a lot of borrowed money is involved, a small problem can become a collapse.
+play: scam | Warning sign or healthy sign? | Customer money kept separate and audited=real; Returns that never go down=scam; Nobody can explain how it makes money=scam; Independent board and auditors=real; Huge borrowing to boost profits=scam | The same red flags show up in crisis after crisis.
+check: mcq | Which red flag appeared in many crises? | Complexity nobody could explain* | Plain, simple reports | Independent auditors
+check: tf | Mixing customer money with company money is a red flag. | true
+check: mcq | Returns that never go down are… | A warning sign* | Normal | Guaranteed
+home: Pick a company in the news and look for any of these red flags.
+skill: critical
+
+@lesson 3.6 | What changed after | 🔧 | townhall
+hook: After each crisis, rules change. Did it work?
+learn: After 2008, banks around the world had to hold more of their own capital and more cash, under rules called Basel III.
+learn: Deposit protection, stress tests and rules on how loans are sold all grew stronger.
+learn: New crises still happen, like crypto collapses, which is why rules keep evolving.
+play: match | Match each change to the problem it tackles | More bank capital=Banks too thin to absorb losses; Stress tests=Not knowing how banks would cope in a crash; Deposit protection=Savers losing everything; Rules for crypto platforms=Customer money being misused
+check: mcq | What did Basel III require? | Banks to hold more capital and cash* | Banks to close | Everyone to use gold
+check: tf | New kinds of crises can still happen after rules change. | true
+check: mcq | What does a stress test check? | How a bank would cope in a crash* | How stressed staff feel | How fast the website is
+home: Find one rule your country changed after 2008.
+skill: governance

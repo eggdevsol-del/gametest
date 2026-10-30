@@ -146,3 +146,77 @@ check: mcq | How long can most leftovers stay in the fridge? | About 2 days* | A
 home: Help pack and label tonight's leftovers.
 skill: foodsafety
 
+@lesson 3.1 | Plan a trip | 🗺️ | online
+hook: You need to get across town by 10:00 on public transport. Where do you start?
+learn: Use a journey planner app or website. Enter where you're starting and where you're going.
+learn: Check the time to walk to the stop, how long the trip takes, and any changes.
+learn: Leave a buffer in case the bus is late.
+play: gen | time | 4
+check: mcq | What should you leave time for? | A late bus or missed connection* | Nothing | A nap
+check: tf | Journey planners show changes between buses or trains. | true
+check: gap | The trip takes 35 minutes and you must arrive by 10:00. Leave by _ | 9:25 | 9:25; 9:35; 10:35
+home: Plan a public transport trip to somewhere you'd like to go.
+skill: transport
+
+@lesson 3.2 | Fares and travel cards | 🎫 | stall
+hook: Paying cash on every bus, or a travel card. Which is cheaper?
+learn: Travel cards usually give cheaper fares than paying cash.
+learn: Many places offer child, student or youth fares. Check your regional transport website.
+learn: Fare caps can limit how much you pay in a day or a week.
+try: 10 trips at $3 is $30 :: gap | 10 trips at $2.20 on a card is $_ | 22
+play: price | Which way costs less for 10 trips? | Cash each time:3.5:1:trip; Travel card:2.4:1:trip; Weekly pass:20:10:trips
+check: mcq | What can a fare cap do? | Limit what you pay in a day or week* | Make fares higher | Ban buses
+check: tf | Travel cards are often cheaper than cash fares. | true
+check: mcq | Where can you find youth or student fares? | Your regional transport website* | A gaming forum | The back of a cereal box
+home: Find the youth or student fare for a bus or train near you.
+skill: transport
+
+@lesson 3.3 | What a car really costs | 🚗 | home
+hook: A cheap second-hand car for $5,000! Is that all you'll spend?
+learn: The price is just the start. Add fuel, insurance, registration, repairs and tyres.
+learn: {nz:In NZ you also need a Warrant of Fitness (WoF) to check the car is safe.~au:In Australia, registration usually includes compulsory third party (CTP) insurance in most states.}
+learn: Many cars cost thousands of dollars a year to run, on top of the price.
+play: budget | Plan a year of car costs, in hundreds of dollars | 60 | Fuel=20; Insurance=10; Registration=5; Repairs and tyres=8; Savings for surprises=0 | Flat tyre:2
+check: mcq | Which is a running cost of a car? | Fuel and insurance* | The radio station | Nothing
+check: tf | Running a car can cost thousands of dollars a year. | true
+check: mcq | {nz:What's a WoF?~au:What does registration usually include in most states?} | {nz:A Warrant of Fitness safety check~au:Compulsory third party insurance}* | {nz:A type of fuel~au:Free fuel} | {nz:A car colour~au:A car wash}
+home: Ask a grown-up how much they spend on their car in a year.
+skill: transport
+
+@lesson 3.4 | Cost per kilometre | 📏 | home
+hook: A 20 km trip. Drive alone or take the bus?
+learn: A car's real cost per km includes fuel, wear and tear, and a share of insurance and repairs.
+learn: Fuel alone for a small car is often around 10c to 20c per km. Add the other costs and it's often 50c or more.
+learn: Sharing the drive with friends splits the cost.
+try: 20 km at 15c per km is $3 :: gap | 40 km at 15c per km is $_ | 6
+play: slider | A 30 km trip costs about 60c per km all-in. How much is that? | 0 | 40 | 18 | $ | 1 | 1
+check: gap | $12 of fuel split between 3 friends is $_ each | 4
+check: mcq | What else should cost per km include, beyond fuel? | Wear and tear, insurance and repairs* | Snacks | Nothing
+check: tf | Carpooling splits the cost of a trip. | true
+home: Work out the fuel cost of a regular trip your family makes.
+skill: transport
+
+@lesson 3.5 | Bikes and scooters | 🚲 | home
+hook: Bikes and e-scooters are cheap ways to get around. What keeps you safe?
+learn: {nz:In NZ you must wear a helmet on a bike. Helmets aren't required on e-scooters, but they're strongly recommended.~au:Bike helmets are compulsory in every state. E-scooter rules, including helmets and where you can ride, differ by state.}
+learn: Use lights at night and wear something bright.
+learn: Keep your bike in good shape: check the brakes, tyres and chain.
+play: tap | Tap the things that help keep you safe on a bike | ⛑️:yes:A helmet protects your head; 💡:yes:Lights help others see you; 🦺:yes:Bright clothing; 🎧:no; 🔧:yes:Checking your brakes; 📱:no
+check: mcq | {nz:Is a helmet required on a bike in NZ?~au:Are bike helmets compulsory in Australia?} | Yes* | No | Only on weekends
+check: tf | Lights help others see you at night. | true
+check: mcq | What should you check on your bike? | Brakes, tyres and chain* | The paint colour | Nothing
+home: Do a quick safety check on your bike with a grown-up.
+skill: safety
+
+@lesson 3.6 | Sharing rides | 🤝 | home
+hook: Four friends going to the same concert. Four cars, or one?
+learn: Carpooling saves money, fuel and parking.
+learn: Agree beforehand how to split costs, like fuel and parking.
+learn: Only ride with drivers you trust, and never with a driver who's been drinking.
+play: chat | Organising a carpool to a game | them: I can drive us all on Saturday! | me: Awesome. Should we split fuel and parking four ways?*/Cool, free ride!/I'll pay nothing and complain | them: Sounds fair. About $6 each. | me: Perfect. I'll pay you before we leave*/Maybe next week/I'll forget
+check: mcq | What should a carpool agree on first? | How to split the costs* | Who picks the music only | Nothing
+check: tf | You should never ride with a driver who's been drinking. | true
+check: gap | $24 of fuel and parking split 4 ways is $_ each | 6
+home: Plan a carpool for something your family goes to regularly.
+skill: transport
+

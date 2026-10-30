@@ -150,3 +150,76 @@ check: mcq | {nz:NZ inflation peaked in 2022 at about…~au:Australian inflation
 home: Ask a grown-up how rising prices or interest rates affected your household in 2022 and 2023.
 skill: inflation
 
+@lesson 3.1 | Subprime loans | 🏚️ | museum
+hook: In the 2000s, US lenders gave home loans to people who couldn't afford them. Why would anyone do that?
+learn: Lenders made "subprime" loans to risky borrowers, often with low starting rates that jumped later.
+learn: They sold the loans to banks, which bundled them into investments that were rated as safe.
+learn: When house prices fell and borrowers defaulted, those "safe" investments collapsed in value.
+play: build | Build the chain that led to the 2008 crisis | Lenders make risky home loans; Loans are sold and bundled into investments; Rating agencies call them safe; Banks around the world buy them; House prices fall and borrowers can't pay; The investments collapse and banks fail
+check: mcq | What were subprime loans? | Loans to borrowers likely to struggle to repay* | Loans to the richest people | Loans under the sea
+check: tf | Many risky loan bundles were wrongly rated as safe. | true
+check: mcq | What set off the collapse? | House prices falling and borrowers defaulting* | A new phone | A good harvest
+home: Ask a grown-up what they remember about the 2008 financial crisis.
+skill: history
+
+@lesson 3.2 | Lehman Brothers | 🏦 | museum
+hook: On 15 September 2008, a 158-year-old bank went bust. Why did the whole world feel it?
+learn: Lehman Brothers was a huge US investment bank with big bets on property loans.
+learn: When it collapsed, banks stopped trusting each other and stopped lending. Credit froze around the world.
+learn: Governments and central banks stepped in with bailouts and emergency lending to stop more collapses.
+play: mystery | It was a big US investment bank; It was founded in the 1850s; It made big bets on home loans; It collapsed on 15 September 2008 | Lehman Brothers* | Enron | Barings Bank
+check: mcq | Why did one bank's collapse affect the world? | Banks stopped trusting each other and stopped lending* | It owned every company | It printed all money
+check: tf | Governments stepped in to stop more banks collapsing in 2008. | true
+check: mcq | When did Lehman Brothers collapse? | September 2008* | October 1929 | March 2020
+home: Find a timeline of the 2008 crisis and pick out three key dates.
+skill: history
+
+@lesson 3.3 | Leverage | 🎚️ | shares
+hook: Borrow $29 for every $1 of your own, and invest $30. Prices fall 4%. What's left?
+learn: Leverage means using borrowed money to invest. It magnifies gains and losses.
+learn: Before 2008, some investment banks borrowed around $30 for every $1 of their own money.
+learn: At that level, a fall of just over 3% wipes out all your own money.
+try: $30 invested falls 4% to $28.80. You owe $29, so you're $0.20 down :: gap | $10 invested ($1 yours, $9 borrowed) falls 10%. Your $1 is now worth $_ | 0
+play: slider | You invest $20: $2 of your own and $18 borrowed. It falls 5%. How much of your own $2 is left? | 0 | 2 | 1 | $ | 0 | 0.5
+check: mcq | What does leverage do? | Magnifies gains and losses* | Removes risk | Guarantees profit
+check: tf | High leverage means a small fall can wipe out your own money. | true
+check: mcq | Borrowing to invest is… | Riskier than investing your own money* | Always safe | Free money
+home: Explain leverage to a grown-up using a simple example.
+skill: risk
+
+@lesson 3.4 | Collapses close to home | 🧯 | museum
+hook: Big collapses didn't only happen overseas. What happened in {nz:NZ~au:Australia}?
+learn: {nz:Between 2006 and 2012, dozens of NZ finance companies collapsed. Many offered high interest, and many investors, often retirees, lost savings.~au:In 2001, HIH Insurance collapsed with debts of about $5 billion, one of the biggest company collapses in Australian history.}
+learn: {nz:Common problems were risky property loans, too much lending to related parties and poor disclosure.~au:A Royal Commission found poor management, weak oversight and misleading accounts.}
+learn: {nz:NZ set up the Financial Markets Authority in 2011, partly in response.~au:Rules for directors, auditors and insurance regulation were tightened afterwards.}
+play: sort | Red flag, Good sign | Much higher interest than the banks offer=Red flag; Lots of loans to companies linked to the directors=Red flag; Independent audits and clear reports=Good sign; Glossy ads with a famous face=Red flag; Spread across many types of borrower=Good sign; Directors who explain risks plainly=Good sign | Red flag or good sign?
+check: mcq | A warning sign before many collapses was… | Promising much higher returns than others* | Clear reports | Independent audits
+check: tf | High returns usually come with higher risk. | true
+check: mcq | {nz:What did NZ set up in 2011, partly in response?~au:Which company collapsed in Australia in 2001?} | {nz:The Financial Markets Authority~au:HIH Insurance}* | A new flag | A sports league
+home: Ask an older relative if they remember {nz:the finance company collapses~au:the HIH collapse}.
+skill: history
+
+@lesson 3.5 | Red flags across crises | 🚩 | townhall
+hook: Enron, 2008, FTX. Different decades, same warning signs?
+learn: Returns that seem too good, and complexity nobody can explain, show up again and again.
+learn: Conflicts of interest, weak auditors, and customers' money being mixed with the company's are classic signs.
+learn: When a lot of borrowed money is involved, a small problem can become a collapse.
+play: scam | Warning sign or healthy sign? | Customer money kept separate and audited=real; Returns that never go down=scam; Nobody can explain how it makes money=scam; Independent board and auditors=real; Huge borrowing to boost profits=scam | The same red flags show up in crisis after crisis.
+check: mcq | Which red flag appeared in many crises? | Complexity nobody could explain* | Plain, simple reports | Independent auditors
+check: tf | Mixing customer money with company money is a red flag. | true
+check: mcq | Returns that never go down are… | A warning sign* | Normal | Guaranteed
+home: Pick a company in the news and look for any of these red flags.
+skill: critical
+
+@lesson 3.6 | What changed after | 🔧 | townhall
+hook: After each crisis, rules change. Did it work?
+learn: After 2008, banks around the world had to hold more of their own capital and more cash, under rules called Basel III.
+learn: Deposit protection, stress tests and rules on how loans are sold all grew stronger.
+learn: New crises still happen, like crypto collapses, which is why rules keep evolving.
+play: match | Match each change to the problem it tackles | More bank capital=Banks too thin to absorb losses; Stress tests=Not knowing how banks would cope in a crash; Deposit protection=Savers losing everything; Rules for crypto platforms=Customer money being misused
+check: mcq | What did Basel III require? | Banks to hold more capital and cash* | Banks to close | Everyone to use gold
+check: tf | New kinds of crises can still happen after rules change. | true
+check: mcq | What does a stress test check? | How a bank would cope in a crash* | How stressed staff feel | How fast the website is
+home: Find one rule your country changed after 2008.
+skill: governance
+

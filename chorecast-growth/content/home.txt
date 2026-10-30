@@ -147,6 +147,78 @@ check: mcq | How long should a burn stay under cool water? | 20 minutes* | 2 sec
 home: Show a grown-up what you would do for a small burn.
 skill: firstaid
 
+@lesson 3.1 | Pool rules | 🏊 | home
+hook: The pool looks so inviting! What are the rules before you jump in?
+learn: Pools must have a fence and a gate that closes by itself. Never prop it open.
+learn: Walk, don't run. Wet ground is slippery.
+learn: Only swim when a grown-up is watching you.
+play: sort | Safe at the pool, Not safe | Walking around the pool=Safe at the pool; Running on wet tiles=Not safe; Closing the pool gate=Safe at the pool; Propping the gate open=Not safe; Swimming with a grown-up watching=Safe at the pool; Pushing someone in=Not safe | Safe or not safe?
+check: mcq | What should the pool gate do? | Close by itself* | Stay open | Be taken off
+check: tf | You should walk, not run, around a pool. | true
+check: mcq | When can you swim in a pool? | When a grown-up is watching* | Whenever you like | At night alone
+home: Check the pool gate with a grown-up next time you visit a pool.
+skill: watersafety
+
+@lesson 3.2 | Bath time | 🛁 | home
+hook: A bath is only a little bit deep. Can it still be dangerous?
+learn: Even shallow water can be dangerous for babies and little kids.
+learn: Never leave a little brother or sister alone in the bath, not even for a moment.
+learn: Pull the plug when bath time is over.
+play: path | You're helping with your baby sister's bath when the doorbell rings. | Call a grown-up and stay with her, or lift her out wrapped in a towel => good: Smart. She is never left alone in the water. | Run to the door and leave her in the bath => bad: Babies can slip under the water in seconds. Never leave them. | Ignore the door and keep splashing => ok: She's safe with you, but a grown-up should know. Call out for help.
+check: mcq | Can shallow bath water be dangerous? | Yes, for babies and little kids* | No, never | Only on Sundays
+check: tf | Little kids should never be left alone in the bath. | true
+check: mcq | What should you do when bath time is over? | Pull the plug* | Leave the water in | Add more water
+home: Remind a grown-up that you know never to leave little kids alone in water.
+skill: watersafety
+
+@lesson 3.3 | Rivers and lakes | 🏞️ | garden
+hook: A river looks calm and shallow. Should you jump in?
+learn: Rivers and lakes can be colder and deeper than they look.
+learn: Rivers can have strong currents and hidden rocks or branches under the water.
+learn: Never jump in without a grown-up checking first. Always go in feet first.
+play: tap | Tap the hidden dangers in a river | 🪨:yes:Rocks under the water; 🌊:yes:Strong currents; 🥶:yes:Very cold water; 🌳:yes:Branches stuck under the water; 🦆:no; 🌸:no
+check: mcq | Why are rivers tricky? | Hidden rocks, cold water and currents* | They're too sunny | Ducks bite
+check: tf | You should check the water before jumping in. | true
+check: mcq | How should you get into a river or lake? | Feet first, after a grown-up checks* | Head first | Jumping off a bridge
+home: Talk with a grown-up about safe swimming spots near you.
+skill: watersafety
+
+@lesson 3.4 | Life jackets | 🦺 | island
+hook: You're going out on a boat. What's the first thing to put on?
+learn: Wear a life jacket on boats, kayaks and paddleboards.
+learn: It should fit snugly. Do up every strap and clip.
+learn: A life jacket helps you float, even if you're tired or the water is cold.
+play: build | Put on a life jacket the right way | Pick a life jacket your size; Put your arms through; Do up the zip or clips; Tighten the straps until it's snug; Get a grown-up to check it
+check: mcq | When should you wear a life jacket? | On boats and kayaks* | In the bath | At the shops
+check: tf | A life jacket should fit snugly. | true
+check: mcq | Who should check your life jacket? | A grown-up* | Nobody | A fish
+home: Ask a grown-up to show you how to check a life jacket fits.
+skill: watersafety
+
+@lesson 3.5 | Rips | 🌊 | island
+hook: Some parts of the sea look calm and dark, with no waves. Are they safe?
+learn: A rip is a strong current that pulls water out to sea.
+learn: Rips often look like calm, dark gaps between the waves. That's why it's safest to swim between the flags.
+learn: If a rip takes you, stay calm, float, and raise an arm for help. Don't fight it.
+play: order | Caught in a rip? Put the steps in order. | Stay calm; Float on your back; Raise one arm to signal for help; Wait for a lifesaver or the rip to let go; Swim back along the beach, not straight against the rip
+check: mcq | What does a rip often look like? | A calm, dark gap between waves* | Big white waves | A rainbow
+check: tf | If you're caught in a rip, you should float and signal for help. | true
+check: mcq | Why swim between the red and yellow flags? | Lifesavers watch there and avoid rips* | The water is warmer | It's prettier
+home: Look at a beach photo with a grown-up and try to spot a rip.
+skill: watersafety
+
+@lesson 3.6 | Sun safe at the water | 😎 | island
+hook: A fun day at the beach. Then a sunburn that hurts for days. How do you stop that?
+learn: The sun in {nz:Aotearoa~au:Australia} can burn you quickly, even on cloudy days.
+learn: {nz:Slip, slop, slap and wrap: slip on a shirt, slop on sunscreen, slap on a hat and wrap on sunglasses.~au:Slip, slop, slap, seek and slide: slip on a shirt, slop on sunscreen, slap on a hat, seek shade and slide on sunglasses.}
+learn: Put sunscreen on again after swimming.
+play: tap | Tap the ways to be sun safe | 👕:yes:A shirt covers your skin; 🧴:yes:Sunscreen protects skin; 👒:yes:A hat shades your face; 🕶️:yes:Sunglasses protect your eyes; 🍦:no; ⛱️:yes:Shade gives your skin a break
+check: mcq | When should you put on more sunscreen? | After swimming* | Never | Only at night
+check: tf | You can get sunburnt on a cloudy day. | true
+check: mcq | What does "slap" mean in the sun safe saying? | Slap on a hat* | Slap your friend | Slap the water
+home: Pack a sun-safe beach bag with a grown-up.
+skill: sunsafety
+
 @band builders
 @unit 1 | Cooking basics | Simple meals and kitchen skills
 @unit 2 | Laundry | Washing, drying and stains
@@ -295,6 +367,78 @@ check: mcq | Where should shirts often go? | On a hanger* | Under the bed | In t
 home: Fold and put away your own clean clothes this week.
 skill: chores
 
+@lesson 3.1 | DRSABCD | 🚑 | home
+hook: Someone has collapsed. What do you do first?
+learn: First aid trainers use DRSABCD: Danger, Response, Send for help, Airway, Breathing, CPR, Defibrillation.
+learn: Check for danger first, so you don't get hurt too.
+learn: Then check if they respond, and call {nz:111~au:000} or get an adult straight away.
+play: order | Put the DRSABCD steps in order | Danger: check it's safe; Response: talk to them and gently squeeze their shoulders; Send for help: call {nz:111~au:000}; Airway: check their mouth is clear; Breathing: look, listen and feel; CPR: if they're not breathing normally; Defibrillation: use an AED if there is one
+check: mcq | What does the D at the start of DRSABCD mean? | Danger* | Dinner | Doctor
+check: tf | You should check for danger before helping. | true
+check: mcq | What's the emergency number? | {nz:111~au:000}* | {nz:000~au:111} | 123
+home: Learn DRSABCD and say it to a grown-up.
+skill: firstaid
+
+@lesson 3.2 | Calling for help | ☎️ | townhall
+hook: You call {nz:111~au:000}. What will they ask?
+learn: They'll ask which service you need: police, fire or ambulance.
+learn: Then where you are, what happened and how the person is.
+learn: Stay calm, answer clearly and don't hang up until they tell you to.
+play: chat | You call for an ambulance | them: Emergency. Which service do you need? | me: Ambulance, please*/Um, I don't know, bye/Pizza delivery | them: What's the address of the emergency? | me: 14 Rimu Street. My grandad has fallen and isn't answering*/Somewhere near the shops/I'll tell you later
+check: mcq | What's the first question they usually ask? | Which service do you need?* | What's your favourite food? | How old are you?
+check: tf | You should stay on the line until they tell you to hang up. | true
+check: mcq | Why is knowing your address important? | So help can find you* | It isn't | To post a letter
+home: Make sure you know your full home address.
+skill: safety
+
+@lesson 3.3 | Nosebleeds | 👃 | home
+hook: Your friend's nose starts bleeding. Head back or head forward?
+learn: Sit them down and lean them slightly forward, so blood doesn't run down the throat.
+learn: Pinch the soft part of the nose, below the bony bit, for about 10 minutes.
+learn: Get help if it won't stop after 20 minutes, or after a hard knock.
+play: path | A friend gets a nosebleed at lunch. | Sit them down, lean forward and pinch the soft part of the nose => good: That's right. The bleeding slows and stops. | Tip their head back => bad: Blood runs down the throat, which can make them sick. | Tell them to run around => bad: Moving around can make it bleed more.
+check: mcq | Which way should someone lean with a nosebleed? | Slightly forward* | Far back | Upside down
+check: tf | You should pinch the soft part of the nose. | true
+check: mcq | About how long should you pinch it? | 10 minutes* | 5 seconds | 2 hours
+home: Practise the nosebleed position with a grown-up.
+skill: firstaid
+
+@lesson 3.4 | Sprains | 🦶 | home
+hook: You roll your ankle at netball and it swells up. What helps?
+learn: Remember RICE: Rest, Ice, Compression and Elevation.
+learn: Rest it, wrap a cold pack in a cloth and hold it on for about 20 minutes, use a firm bandage, and raise it up.
+learn: See a doctor if you can't walk on it or it looks out of shape.
+play: match | Match each letter of RICE to what you do | Rest=Stop using the injured part; Ice=A cold pack wrapped in a cloth; Compression=A firm bandage; Elevation=Raise it up on a pillow
+check: mcq | What does the E in RICE mean? | Elevation* | Eat | Exercise
+check: tf | Ice should be wrapped in a cloth, not put straight on skin. | true
+check: mcq | When should you see a doctor about a sprain? | If you can't walk on it or it looks out of shape* | Never | Only after a month
+home: Find the cold packs and bandages in your home's first aid kit.
+skill: firstaid
+
+@lesson 3.5 | Stings and bites | 🐝 | garden
+hook: Ouch! A bee sting. What do you do?
+learn: For a bee sting, scrape the stinger out sideways with a fingernail or card. Don't squeeze it.
+learn: Use a cold pack to ease the pain and swelling.
+learn: If the person has trouble breathing, a swollen face, or feels faint, it's an emergency. Call {nz:111~au:000}.
+play: sort | Normal reaction, Emergency | A little red bump=Normal reaction; Trouble breathing=Emergency; Some itching=Normal reaction; Swollen face and lips=Emergency; A sore spot=Normal reaction; Feeling faint or dizzy=Emergency | Normal or emergency?
+check: mcq | How should you get a bee stinger out? | Scrape it out sideways* | Squeeze it hard | Leave it in for a week
+check: tf | Trouble breathing after a sting is an emergency. | true
+check: mcq | What helps a normal sting? | A cold pack* | Hot water | Rubbing it with dirt
+home: Ask a grown-up if anyone in your family is allergic to stings.
+skill: firstaid
+
+@lesson 3.6 | The recovery position | 🛌 | home
+hook: Someone has fainted but is breathing. What position keeps them safe while help comes?
+learn: The recovery position is lying on their side, so their airway stays clear.
+learn: Their top leg is bent to stop them rolling, and their head tilted back slightly.
+learn: Stay with them and keep checking their breathing until help arrives.
+play: build | Put someone in the recovery position | Kneel beside them; Put the arm nearest you at a right angle; Bring the other arm across their chest; Bend their far knee up; Roll them towards you onto their side; Tilt their head back slightly to keep the airway open
+check: mcq | Why use the recovery position? | It keeps their airway clear* | It's comfier for you | It wakes them up
+check: tf | You should keep checking their breathing until help comes. | true
+check: mcq | When is the recovery position used? | When someone is unconscious but breathing* | When someone is sprinting | When someone is eating
+home: Practise the recovery position on a grown-up who's happy to help.
+skill: firstaid
+
 @band makers
 @unit 1 | Shopping on a budget | Meal planning and saving at the supermarket
 @unit 2 | Cooking for the family | Planning, prepping and timing
@@ -442,6 +586,80 @@ check: tf | Leftovers should be reheated until steaming hot. | true
 check: mcq | How long can most leftovers stay in the fridge? | About 2 days* | A month | Forever
 home: Help pack and label tonight's leftovers.
 skill: foodsafety
+
+@lesson 3.1 | Plan a trip | 🗺️ | online
+hook: You need to get across town by 10:00 on public transport. Where do you start?
+learn: Use a journey planner app or website. Enter where you're starting and where you're going.
+learn: Check the time to walk to the stop, how long the trip takes, and any changes.
+learn: Leave a buffer in case the bus is late.
+play: gen | time | 4
+check: mcq | What should you leave time for? | A late bus or missed connection* | Nothing | A nap
+check: tf | Journey planners show changes between buses or trains. | true
+check: gap | The trip takes 35 minutes and you must arrive by 10:00. Leave by _ | 9:25 | 9:25; 9:35; 10:35
+home: Plan a public transport trip to somewhere you'd like to go.
+skill: transport
+
+@lesson 3.2 | Fares and travel cards | 🎫 | stall
+hook: Paying cash on every bus, or a travel card. Which is cheaper?
+learn: Travel cards usually give cheaper fares than paying cash.
+learn: Many places offer child, student or youth fares. Check your regional transport website.
+learn: Fare caps can limit how much you pay in a day or a week.
+try: 10 trips at $3 is $30 :: gap | 10 trips at $2.20 on a card is $_ | 22
+play: price | Which way costs less for 10 trips? | Cash each time:3.5:1:trip; Travel card:2.4:1:trip; Weekly pass:20:10:trips
+check: mcq | What can a fare cap do? | Limit what you pay in a day or week* | Make fares higher | Ban buses
+check: tf | Travel cards are often cheaper than cash fares. | true
+check: mcq | Where can you find youth or student fares? | Your regional transport website* | A gaming forum | The back of a cereal box
+home: Find the youth or student fare for a bus or train near you.
+skill: transport
+
+@lesson 3.3 | What a car really costs | 🚗 | home
+hook: A cheap second-hand car for $5,000! Is that all you'll spend?
+learn: The price is just the start. Add fuel, insurance, registration, repairs and tyres.
+learn: {nz:In NZ you also need a Warrant of Fitness (WoF) to check the car is safe.~au:In Australia, registration usually includes compulsory third party (CTP) insurance in most states.}
+learn: Many cars cost thousands of dollars a year to run, on top of the price.
+play: budget | Plan a year of car costs, in hundreds of dollars | 60 | Fuel=20; Insurance=10; Registration=5; Repairs and tyres=8; Savings for surprises=0 | Flat tyre:2
+check: mcq | Which is a running cost of a car? | Fuel and insurance* | The radio station | Nothing
+check: tf | Running a car can cost thousands of dollars a year. | true
+check: mcq | {nz:What's a WoF?~au:What does registration usually include in most states?} | {nz:A Warrant of Fitness safety check~au:Compulsory third party insurance}* | {nz:A type of fuel~au:Free fuel} | {nz:A car colour~au:A car wash}
+home: Ask a grown-up how much they spend on their car in a year.
+skill: transport
+
+@lesson 3.4 | Cost per kilometre | 📏 | home
+hook: A 20 km trip. Drive alone or take the bus?
+learn: A car's real cost per km includes fuel, wear and tear, and a share of insurance and repairs.
+learn: Fuel alone for a small car is often around 10c to 20c per km. Add the other costs and it's often 50c or more.
+learn: Sharing the drive with friends splits the cost.
+try: 20 km at 15c per km is $3 :: gap | 40 km at 15c per km is $_ | 6
+play: slider | A 30 km trip costs about 60c per km all-in. How much is that? | 0 | 40 | 18 | $ | 1 | 1
+check: gap | $12 of fuel split between 3 friends is $_ each | 4
+check: mcq | What else should cost per km include, beyond fuel? | Wear and tear, insurance and repairs* | Snacks | Nothing
+check: tf | Carpooling splits the cost of a trip. | true
+home: Work out the fuel cost of a regular trip your family makes.
+skill: transport
+
+@lesson 3.5 | Bikes and scooters | 🚲 | home
+hook: Bikes and e-scooters are cheap ways to get around. What keeps you safe?
+learn: {nz:In NZ you must wear a helmet on a bike. Helmets aren't required on e-scooters, but they're strongly recommended.~au:Bike helmets are compulsory in every state. E-scooter rules, including helmets and where you can ride, differ by state.}
+learn: Use lights at night and wear something bright.
+learn: Keep your bike in good shape: check the brakes, tyres and chain.
+play: tap | Tap the things that help keep you safe on a bike | ⛑️:yes:A helmet protects your head; 💡:yes:Lights help others see you; 🦺:yes:Bright clothing; 🎧:no; 🔧:yes:Checking your brakes; 📱:no
+check: mcq | {nz:Is a helmet required on a bike in NZ?~au:Are bike helmets compulsory in Australia?} | Yes* | No | Only on weekends
+check: tf | Lights help others see you at night. | true
+check: mcq | What should you check on your bike? | Brakes, tyres and chain* | The paint colour | Nothing
+home: Do a quick safety check on your bike with a grown-up.
+skill: safety
+
+@lesson 3.6 | Sharing rides | 🤝 | home
+hook: Four friends going to the same concert. Four cars, or one?
+learn: Carpooling saves money, fuel and parking.
+learn: Agree beforehand how to split costs, like fuel and parking.
+learn: Only ride with drivers you trust, and never with a driver who's been drinking.
+play: chat | Organising a carpool to a game | them: I can drive us all on Saturday! | me: Awesome. Should we split fuel and parking four ways?*/Cool, free ride!/I'll pay nothing and complain | them: Sounds fair. About $6 each. | me: Perfect. I'll pay you before we leave*/Maybe next week/I'll forget
+check: mcq | What should a carpool agree on first? | How to split the costs* | Who picks the music only | Nothing
+check: tf | You should never ride with a driver who's been drinking. | true
+check: gap | $24 of fuel and parking split 4 ways is $_ each | 6
+home: Plan a carpool for something your family goes to regularly.
+skill: transport
 
 @band launchers
 @unit 1 | Renting your first place | Searching, applying and moving in
@@ -595,3 +813,76 @@ check: tf | Power companies must help customers who are struggling to pay. | tru
 check: mcq | {nz:Which free service helps sort NZ power and water complaints?~au:Who can help with an energy complaint you can't sort out?} | {nz:Utilities Disputes~au:Your state's energy and water ombudsman}* | A debt collector | A social media group
 home: Save {nz:MoneyTalks (0800 345 123)~au:the National Debt Helpline (1800 007 007)} in your phone.
 skill: bills
+
+@lesson 3.1 | Car insurance | 🚙 | home
+hook: You bump into a fancy car in a car park. Who pays for the damage?
+learn: {nz:In NZ, car insurance isn't compulsory, but without it you'd pay for damage to other people's cars yourself. ACC covers injuries.~au:In Australia, CTP insurance covers injuries to people and is required to register a car. It doesn't cover damage to cars.}
+learn: Third party covers damage you do to other people's property. Third party, fire and theft adds your car if it's stolen or burned.
+learn: Comprehensive covers your car too, even if the crash was your fault.
+play: match | Match each policy to what it covers | Third party=Damage you cause to other people's cars and property; Third party, fire and theft=Third party, plus your car if it's stolen or burned; Comprehensive=Damage to your car and others', even if it's your fault; {nz:ACC~au:CTP}=Injuries to people
+check: mcq | What does third party insurance cover? | Damage you cause to other people's property* | Your own car only | Your phone
+check: tf | Comprehensive insurance can cover your own car, even if the crash was your fault. | true
+check: mcq | {nz:Who covers injuries from car crashes in NZ?~au:What does CTP insurance cover?} | {nz:ACC~au:Injuries to people}* | {nz:Nobody~au:Damage to cars} | {nz:Your school~au:Your phone}
+home: Ask a grown-up what kind of car insurance they have, if they have a car.
+skill: insurance
+
+@lesson 3.2 | Health cover | 🏥 | townhall
+hook: You break your arm. Who pays for the hospital?
+learn: {nz:In NZ, ACC covers accident injuries for everyone, and public hospitals are free for eligible people.~au:In Australia, Medicare covers treatment in public hospitals and part of the cost of seeing a doctor.}
+learn: {nz:Private health insurance is optional. It can mean faster treatment for non-urgent surgery.~au:Private hospital cover is optional. But higher earners without it may pay the Medicare Levy Surcharge.}
+learn: {nz:Check what ACC and the public system cover before paying for extras.~au:If you don't take out hospital cover by the 1 July after you turn 31, you'll pay a Lifetime Health Cover loading if you get it later.}
+play: debate | Should young people buy private health insurance? | It depends on income, health and what the public system covers* | Yes, everyone always needs it | Some young people like the peace of mind and faster access, and in some cases the tax rules make it worth it.
+check: mcq | {nz:What covers accident injuries in NZ?~au:What covers treatment in Australian public hospitals?} | {nz:ACC~au:Medicare}* | {nz:Your bank~au:Your bank} | Nothing
+check: tf | Private health insurance is optional. | true
+check: mcq | {nz:What can private health insurance help with in NZ?~au:When does Lifetime Health Cover loading kick in?} | {nz:Faster non-urgent surgery~au:If you take out hospital cover after the 1 July following your 31st birthday}* | {nz:Free groceries~au:At age 5} | {nz:Nothing at all~au:Never}
+home: Ask a grown-up how health costs are covered in your family.
+skill: insurance
+
+@lesson 3.3 | Reading a policy | 🔍 | bank
+hook: Your bike is stolen from outside a café. Your contents insurance says no. Why?
+learn: Policies list exclusions, things they won't cover, like items left unlocked or away from home.
+learn: The sum insured is the most they'll pay. Make sure it's enough to replace your things.
+learn: Market value pays what it's worth now. Agreed or replacement value can pay more.
+play: diff | What you thought was covered and what the policy says. Tap the surprises. | Laptop covered anywhere; Bike covered; Phone covered; Sum insured enough | Laptop covered at home only; Bike covered only if locked; Phone covered; Sum insured $10,000 less than your stuff is worth
+check: mcq | What's an exclusion? | Something the policy won't cover* | A bonus | A discount
+check: tf | The sum insured is the most the insurer will pay. | true
+check: mcq | Which usually pays more for an old item? | Replacement value* | Market value | They're always the same
+home: Read the exclusions section of an insurance policy with a grown-up.
+skill: insurance
+
+@lesson 3.4 | Making a claim | 📸 | bank
+hook: A storm floods your flat. What do you do to make an insurance claim go smoothly?
+learn: Make sure everyone is safe, then take photos and videos of the damage.
+learn: Contact your insurer quickly. Keep receipts and don't throw out damaged items until they say so.
+learn: Be completely honest. Exaggerating a claim is fraud and can void your policy.
+play: order | Make an insurance claim. Put the steps in order. | Make sure everyone is safe; Take photos and video of the damage; Contact your insurer; Keep damaged items and receipts; Fill in the claim form honestly; Pay the excess when it's settled
+check: mcq | What's the first priority after a disaster? | Making sure everyone is safe* | Calling the insurer | Throwing out damaged things
+check: tf | Exaggerating an insurance claim is fraud. | true
+check: mcq | Why keep damaged items? | The insurer may want to see them* | For decoration | No reason
+home: Take photos of your valuable things, so you'd have a record for a claim.
+skill: insurance
+
+@lesson 3.5 | Disasters and under-insurance | 🌪️ | home
+hook: A flood hits and the house is badly damaged. The insurance pays out, but it's not enough to rebuild. How?
+learn: Under-insurance means your sum insured is less than it would cost to replace or rebuild.
+learn: {nz:Natural Hazards Commission Toka Tū Ake covers the first $300,000 plus GST of damage to insured homes from natural disasters. Your private insurance covers the rest, up to your sum insured.~au:In some flood-prone areas, flood cover can be very expensive. Check your policy covers flood, storm and bushfire.}
+learn: Review your sum insured every year, as building costs rise.
+try: Rebuild costs $500,000 but you're insured for $400,000, so you're $100,000 short :: gap | Rebuild costs $650,000, insured for $500,000. You're $_ short | 150000
+play: path | Your insurer suggests checking your sum insured. Building costs have risen 15%. | Use a rebuild calculator and update the sum insured => good: Your premium rises a little, but you're properly covered. | Leave it the same to keep the premium low => bad: If disaster hits, you could be thousands short. | Cancel the insurance to save money => bad: Then you'd pay for everything yourself.
+check: mcq | What is under-insurance? | Being insured for less than it costs to replace* | Having too much insurance | Not paying the premium
+check: tf | You should review your sum insured regularly. | true
+check: mcq | {nz:What does the Natural Hazards Commission cover?~au:What should you check your home policy covers?} | {nz:The first $300,000 plus GST of natural disaster damage to insured homes~au:Flood, storm and bushfire}* | {nz:Your phone~au:Your phone} | {nz:Nothing~au:Nothing}
+home: Ask a grown-up when they last checked their home's sum insured.
+skill: insurance
+
+@lesson 3.6 | What's worth insuring? | ⚖️ | bank
+hook: Should you buy insurance for your $25 headphones?
+learn: Insure things you couldn't afford to replace or pay for, like a car crash, your home or your income.
+learn: For small items, it's often cheaper to save the money yourself.
+learn: Extended warranties often cover things the law already guarantees.
+play: sort | Worth insuring, Probably not | Damage to someone else's car=Worth insuring; $25 headphones=Probably not; All your belongings in a fire=Worth insuring; An extended warranty on a $40 toaster=Probably not; Your home=Worth insuring; Phone case insurance=Probably not | Worth insuring or not?
+check: mcq | What's most worth insuring? | Things you couldn't afford to replace* | Every small item | Nothing
+check: tf | Extended warranties often cover things the law already guarantees. | true
+check: mcq | For a $25 item, it's usually better to… | Save the money yourself* | Buy insurance | Buy two
+home: List your three most valuable things and whether you'd insure them.
+skill: insurance

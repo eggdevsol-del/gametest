@@ -150,3 +150,76 @@ check: mcq | What was one harmful result of these voyages? | European empires to
 home: Trace Vasco da Gama's route on a map with a grown-up.
 skill: trade
 
+@lesson 3.1 | Grain and temples | 🌾 | museum
+hook: Thousands of years ago, the first "banks" stored something other than money. What?
+learn: In ancient Mesopotamia, in what's now Iraq, temples and palaces stored grain for people.
+learn: They also lent grain to farmers, who paid back extra after the harvest.
+learn: The Code of Hammurabi, written about 3,700 years ago, had rules about loans and interest.
+play: order | A Mesopotamian grain loan. Put it in order. | A farmer needs seed in spring; The temple lends him grain; He plants and the crop grows; He harvests in autumn; He pays back the grain plus a little extra
+check: mcq | What did early temple "banks" store? | Grain* | Phones | Paper money
+check: tf | The Code of Hammurabi had rules about loans. | true
+check: mcq | The "little extra" paid back on a loan is called… | Interest* | A gift | A tax
+home: Find Mesopotamia on a map with a grown-up.
+skill: banking
+
+@lesson 3.2 | Benches and bankrupts | 🪑 | museum
+hook: Where does the word "bank" come from?
+learn: In Italy about 700 years ago, moneychangers worked at benches in the market. The Italian word for bench is "banca".
+learn: They swapped coins from different places and made loans.
+learn: Legend says a moneychanger who couldn't pay had their bench broken: "banca rotta". That's where "bankrupt" comes from.
+play: match | Match each word to its meaning | Banca=An Italian word for bench; Moneychanger=Someone who swaps coins from different places; Bankrupt=Unable to pay your debts; Loan=Money lent that must be paid back
+check: mcq | Where does the word "bank" come from? | The Italian word for bench* | A riverbank | A type of fish
+check: tf | Moneychangers swapped coins from different places. | true
+check: mcq | What does "bankrupt" mean? | Unable to pay your debts* | Very rich | Owning a bench
+home: Ask a grown-up if they know any other words that come from Italian.
+skill: history
+
+@lesson 3.3 | Goldsmiths' receipts | 📜 | museum
+hook: In London 400 years ago, people left their gold with goldsmiths. What did they get in return?
+learn: Goldsmiths had strong safes, so people stored gold with them and got a written receipt.
+learn: People started paying each other with the receipts instead of fetching the gold.
+learn: Those receipts were an early kind of banknote.
+play: build | Build the story of the first banknotes | People store gold with a goldsmith; The goldsmith writes a receipt; People pay with the receipt instead of the gold; Receipts pass from person to person; Banks start printing notes
+check: mcq | What did goldsmiths give people for their gold? | A written receipt* | A sandwich | Nothing
+check: tf | Goldsmiths' receipts were an early kind of banknote. | true
+check: mcq | Why use receipts instead of gold? | They were easier to carry* | They were heavier | Gold was illegal
+home: Write a pretend receipt for something you're "storing" for a family member.
+skill: banking
+
+@lesson 3.4 | Lending most of it out | 🔁 | bank
+hook: Goldsmiths noticed something. Not everyone came back for their gold at the same time. What did they do?
+learn: They realised they could lend out some of the gold and earn interest, while keeping enough for people who came back.
+learn: Banks still work like this. They keep some money ready and lend most of the rest.
+learn: It works as long as not everyone wants their money back at once.
+try: A bank keeps 10% of $1,000 ready, so it can lend $900 :: gap | A bank keeps 10% of $5,000 ready, so it can lend $_ | 4500
+play: slider | A bank has $10,000 in deposits and keeps 10% ready. How much can it lend? | 0 | 10000 | 9000 | $ | 0 | 500
+check: mcq | Why can banks lend most of what's deposited? | Not everyone takes their money out at once* | They print more | Savers never want it back
+check: tf | Banks keep some money ready for people who want it back. | true
+check: gap | Keep 20% of $1,000 ready. You can lend $_ | 800
+home: Explain to a grown-up how a bank can lend money it is looking after.
+skill: banking
+
+@lesson 3.5 | When trust breaks | 💔 | bank
+hook: What happens if everyone rushes to a bank on the same day?
+learn: Because banks lend most of their money out, they can't pay everyone back at once.
+learn: If people panic and rush to withdraw, a bank can run out of cash. That's a bank run.
+learn: Today there are protections, like deposit schemes, so most savers don't need to panic.
+play: sort | Builds trust, Breaks trust | Clear, honest reports=Builds trust; Rumours that the bank is broke=Breaks trust; Deposit protection schemes=Builds trust; Everyone rushing to withdraw=Breaks trust; Strong rules for banks=Builds trust; A bank hiding losses=Breaks trust | Builds or breaks trust?
+check: mcq | What is a bank run? | Lots of people rushing to take money out* | A running race | A bank opening late
+check: tf | Banks only work if people trust them. | true
+check: mcq | What helps protect savers today? | Deposit protection schemes* | Rumours | Hiding cash at home
+home: Ask a grown-up why they trust their bank.
+skill: banking
+
+@lesson 3.6 | Our first banks | 🏦 | bank
+hook: When did banks first open in {nz:Aotearoa~au:Australia}?
+learn: {nz:NZ's first bank opened in Wellington in 1840. The Bank of New Zealand started in 1861.~au:Australia's first bank, the Bank of New South Wales, opened in Sydney in 1817. Today it's called Westpac.}
+learn: Early banks helped settlers and businesses store money and borrow for farms, shops and trade.
+learn: Banks also printed their own banknotes, until the government took over that job.
+play: mcq | {nz:When did NZ's first bank open?~au:When did Australia's first bank open?} | {nz:1840~au:1817}* | {nz:1940~au:1917} | {nz:2000~au:2000}
+check: tf | Banks once printed their own banknotes. | true
+check: mcq | {nz:Which bank started in NZ in 1861?~au:What's the Bank of New South Wales called today?} | {nz:The Bank of New Zealand~au:Westpac}* | A pizza shop | A library
+check: mcq | What did early banks help with? | Storing money and borrowing for farms and shops* | Delivering mail | Building roads
+home: Find out when your family's bank was started.
+skill: history
+

@@ -151,3 +151,76 @@ check: mcq | {nz:Which free service helps sort NZ power and water complaints?~au
 home: Save {nz:MoneyTalks (0800 345 123)~au:the National Debt Helpline (1800 007 007)} in your phone.
 skill: bills
 
+@lesson 3.1 | Car insurance | 🚙 | home
+hook: You bump into a fancy car in a car park. Who pays for the damage?
+learn: {nz:In NZ, car insurance isn't compulsory, but without it you'd pay for damage to other people's cars yourself. ACC covers injuries.~au:In Australia, CTP insurance covers injuries to people and is required to register a car. It doesn't cover damage to cars.}
+learn: Third party covers damage you do to other people's property. Third party, fire and theft adds your car if it's stolen or burned.
+learn: Comprehensive covers your car too, even if the crash was your fault.
+play: match | Match each policy to what it covers | Third party=Damage you cause to other people's cars and property; Third party, fire and theft=Third party, plus your car if it's stolen or burned; Comprehensive=Damage to your car and others', even if it's your fault; {nz:ACC~au:CTP}=Injuries to people
+check: mcq | What does third party insurance cover? | Damage you cause to other people's property* | Your own car only | Your phone
+check: tf | Comprehensive insurance can cover your own car, even if the crash was your fault. | true
+check: mcq | {nz:Who covers injuries from car crashes in NZ?~au:What does CTP insurance cover?} | {nz:ACC~au:Injuries to people}* | {nz:Nobody~au:Damage to cars} | {nz:Your school~au:Your phone}
+home: Ask a grown-up what kind of car insurance they have, if they have a car.
+skill: insurance
+
+@lesson 3.2 | Health cover | 🏥 | townhall
+hook: You break your arm. Who pays for the hospital?
+learn: {nz:In NZ, ACC covers accident injuries for everyone, and public hospitals are free for eligible people.~au:In Australia, Medicare covers treatment in public hospitals and part of the cost of seeing a doctor.}
+learn: {nz:Private health insurance is optional. It can mean faster treatment for non-urgent surgery.~au:Private hospital cover is optional. But higher earners without it may pay the Medicare Levy Surcharge.}
+learn: {nz:Check what ACC and the public system cover before paying for extras.~au:If you don't take out hospital cover by the 1 July after you turn 31, you'll pay a Lifetime Health Cover loading if you get it later.}
+play: debate | Should young people buy private health insurance? | It depends on income, health and what the public system covers* | Yes, everyone always needs it | Some young people like the peace of mind and faster access, and in some cases the tax rules make it worth it.
+check: mcq | {nz:What covers accident injuries in NZ?~au:What covers treatment in Australian public hospitals?} | {nz:ACC~au:Medicare}* | {nz:Your bank~au:Your bank} | Nothing
+check: tf | Private health insurance is optional. | true
+check: mcq | {nz:What can private health insurance help with in NZ?~au:When does Lifetime Health Cover loading kick in?} | {nz:Faster non-urgent surgery~au:If you take out hospital cover after the 1 July following your 31st birthday}* | {nz:Free groceries~au:At age 5} | {nz:Nothing at all~au:Never}
+home: Ask a grown-up how health costs are covered in your family.
+skill: insurance
+
+@lesson 3.3 | Reading a policy | 🔍 | bank
+hook: Your bike is stolen from outside a café. Your contents insurance says no. Why?
+learn: Policies list exclusions, things they won't cover, like items left unlocked or away from home.
+learn: The sum insured is the most they'll pay. Make sure it's enough to replace your things.
+learn: Market value pays what it's worth now. Agreed or replacement value can pay more.
+play: diff | What you thought was covered and what the policy says. Tap the surprises. | Laptop covered anywhere; Bike covered; Phone covered; Sum insured enough | Laptop covered at home only; Bike covered only if locked; Phone covered; Sum insured $10,000 less than your stuff is worth
+check: mcq | What's an exclusion? | Something the policy won't cover* | A bonus | A discount
+check: tf | The sum insured is the most the insurer will pay. | true
+check: mcq | Which usually pays more for an old item? | Replacement value* | Market value | They're always the same
+home: Read the exclusions section of an insurance policy with a grown-up.
+skill: insurance
+
+@lesson 3.4 | Making a claim | 📸 | bank
+hook: A storm floods your flat. What do you do to make an insurance claim go smoothly?
+learn: Make sure everyone is safe, then take photos and videos of the damage.
+learn: Contact your insurer quickly. Keep receipts and don't throw out damaged items until they say so.
+learn: Be completely honest. Exaggerating a claim is fraud and can void your policy.
+play: order | Make an insurance claim. Put the steps in order. | Make sure everyone is safe; Take photos and video of the damage; Contact your insurer; Keep damaged items and receipts; Fill in the claim form honestly; Pay the excess when it's settled
+check: mcq | What's the first priority after a disaster? | Making sure everyone is safe* | Calling the insurer | Throwing out damaged things
+check: tf | Exaggerating an insurance claim is fraud. | true
+check: mcq | Why keep damaged items? | The insurer may want to see them* | For decoration | No reason
+home: Take photos of your valuable things, so you'd have a record for a claim.
+skill: insurance
+
+@lesson 3.5 | Disasters and under-insurance | 🌪️ | home
+hook: A flood hits and the house is badly damaged. The insurance pays out, but it's not enough to rebuild. How?
+learn: Under-insurance means your sum insured is less than it would cost to replace or rebuild.
+learn: {nz:Natural Hazards Commission Toka Tū Ake covers the first $300,000 plus GST of damage to insured homes from natural disasters. Your private insurance covers the rest, up to your sum insured.~au:In some flood-prone areas, flood cover can be very expensive. Check your policy covers flood, storm and bushfire.}
+learn: Review your sum insured every year, as building costs rise.
+try: Rebuild costs $500,000 but you're insured for $400,000, so you're $100,000 short :: gap | Rebuild costs $650,000, insured for $500,000. You're $_ short | 150000
+play: path | Your insurer suggests checking your sum insured. Building costs have risen 15%. | Use a rebuild calculator and update the sum insured => good: Your premium rises a little, but you're properly covered. | Leave it the same to keep the premium low => bad: If disaster hits, you could be thousands short. | Cancel the insurance to save money => bad: Then you'd pay for everything yourself.
+check: mcq | What is under-insurance? | Being insured for less than it costs to replace* | Having too much insurance | Not paying the premium
+check: tf | You should review your sum insured regularly. | true
+check: mcq | {nz:What does the Natural Hazards Commission cover?~au:What should you check your home policy covers?} | {nz:The first $300,000 plus GST of natural disaster damage to insured homes~au:Flood, storm and bushfire}* | {nz:Your phone~au:Your phone} | {nz:Nothing~au:Nothing}
+home: Ask a grown-up when they last checked their home's sum insured.
+skill: insurance
+
+@lesson 3.6 | What's worth insuring? | ⚖️ | bank
+hook: Should you buy insurance for your $25 headphones?
+learn: Insure things you couldn't afford to replace or pay for, like a car crash, your home or your income.
+learn: For small items, it's often cheaper to save the money yourself.
+learn: Extended warranties often cover things the law already guarantees.
+play: sort | Worth insuring, Probably not | Damage to someone else's car=Worth insuring; $25 headphones=Probably not; All your belongings in a fire=Worth insuring; An extended warranty on a $40 toaster=Probably not; Your home=Worth insuring; Phone case insurance=Probably not | Worth insuring or not?
+check: mcq | What's most worth insuring? | Things you couldn't afford to replace* | Every small item | Nothing
+check: tf | Extended warranties often cover things the law already guarantees. | true
+check: mcq | For a $25 item, it's usually better to… | Save the money yourself* | Buy insurance | Buy two
+home: List your three most valuable things and whether you'd insure them.
+skill: insurance
+

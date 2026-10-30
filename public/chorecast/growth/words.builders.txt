@@ -145,3 +145,75 @@ check: mcq | They say no after you asked fairly. What now? | Accept it, and mayb
 home: Spot a sneaky persuasion trick in an ad or a show this week.
 skill: persuasion
 
+@lesson 3.1 | Clear messages | ✉️ | online
+hook: "Meet u there later." Where? When? Who's coming?
+learn: Clear messages answer who, what, when and where.
+learn: "Hi Mia, let's meet at the library at 3:30 on Saturday."
+learn: Read it as if you were the other person. Would you know exactly what to do?
+play: diff | Your first message and your clearer one. Tap what you added. | Hey; Meet later; Bring stuff | Hi Mia; Meet at the library at 3:30 on Saturday; Bring your science notes
+check: mcq | Which message is clearest? | Let's meet at the library at 3:30 on Saturday* | Meet u there | Later?
+check: tf | Clear messages say who, what, when and where. | true
+check: mcq | Before sending, read it as if… | You were the other person* | You were a robot | Nobody will read it
+home: Rewrite a vague message so it answers who, what, when and where.
+skill: writing
+
+@lesson 3.2 | Emailing a teacher | 📧 | online
+hook: You missed a class and need the homework. How do you email your teacher?
+learn: Start with a greeting: {nz:"Kia ora Ms Patel"~au:"Good morning Ms Patel"} or "Hi Mr Lee".
+learn: Say clearly what you need, and why, in a sentence or two.
+learn: End with thanks and your name.
+play: build | Build an email to your teacher | Subject: Missed homework for Tuesday; Hi Ms Patel,; I was away sick on Tuesday.; Could you please send me the maths homework?; Thanks very much,; Sam
+check: mcq | What's a good email subject line? | Missed homework for Tuesday* | hi | ???
+check: tf | Thanking your teacher at the end is polite. | true
+check: mcq | Which opening is best for a teacher email? | Hi Ms Patel,* | Yo | Hey you
+home: Write a practice email to a teacher asking a question.
+skill: writing
+
+@lesson 3.3 | Group chats | 👥 | online
+hook: In a group chat, everyone can see what you write. Does that change what you should say?
+learn: Group chats can be fun, but messages can be screenshotted and shared.
+learn: Don't say anything about someone you wouldn't say to their face.
+learn: If a chat turns mean, you can leave, mute it, or tell a grown-up.
+play: sort | OK for the group, Better not to post | Who's bringing snacks to the movie?=OK for the group; A mean joke about a classmate=Better not to post; Happy birthday, Ana!=OK for the group; A friend's secret=Better not to post; Great game today, team!=OK for the group; An embarrassing photo of someone=Better not to post | Post it or not?
+check: mcq | Why be careful in group chats? | Messages can be screenshotted and shared* | They disappear forever | Nobody reads them
+check: tf | You can leave or mute a group chat that turns mean. | true
+check: mcq | A good rule for group chats is… | Don't write anything you wouldn't say to their face* | Post everything you think | Share secrets
+home: Talk with a grown-up about the group chats you're in and how they're going.
+skill: tone
+
+@lesson 3.4 | Emojis and tone | 😅 | online
+hook: Your friend sends 🙂 after you tell them news. Are they happy, or annoyed?
+learn: Emojis can add warmth, but people read them differently.
+learn: Some emojis mean different things to different groups, so they can be misread.
+learn: If something matters, say it in words.
+play: sort | Clear in words, Easy to misread | Congrats, that's amazing!=Clear in words; 🙂=Easy to misread; Sorry, I can't come Saturday=Clear in words; 💀=Easy to misread; k=Easy to misread; I'm a bit upset about what happened=Clear in words | Clear or easy to misread?
+check: mcq | Why can emojis cause confusion? | People read them differently* | They're too colourful | They're always rude
+check: tf | If something matters, it's best to say it in words. | true
+check: mcq | Which message is clearest? | Congrats, that's amazing!* | 🙂 | k
+home: Ask a grown-up what they think three emojis mean. Do you agree?
+skill: tone
+
+@lesson 3.5 | Writing when you're upset | 😤 | online
+hook: Your friend posted something that hurt you. You want to reply right now. Should you?
+learn: Messages sent while angry often say things you regret.
+learn: Wait a bit. Take a breath, or write it but don't send it yet.
+learn: Later, say how you feel calmly, or talk in person.
+play: path | Your friend posted a photo that embarrassed you. You're really cross. | Wait, calm down, then message them calmly or talk in person => good: You sorted it out without saying something you'd regret. | Send an angry reply straight away => bad: Your reply makes it worse, and now you both feel bad. | Post something mean about them => bad: Two wrongs make a bigger mess, and it can't be taken back.
+check: mcq | You're really upset about a message. Best first step? | Wait and calm down before replying* | Reply straight away | Post about it
+check: tf | Messages sent while angry can cause regret. | true
+check: mcq | A calm reply might say… | That photo upset me. Could you take it down?* | I hate you | Everyone thinks you're mean
+home: Think of a calm sentence you could use when someone upsets you online.
+skill: tone
+
+@lesson 3.6 | Check before you send | 🔎 | online
+hook: You typed a message to your friend about a surprise party... and sent it to the birthday kid. Oops!
+learn: Check who you're sending to, especially in emails and group chats.
+learn: Re-read for spelling, missing words and tone.
+learn: If you said you'd attach something, check it's attached.
+play: diff | Your draft and the final check. Tap what you fixed. | To: whole class; Their coming at 3; See attached (nothing attached); Thanks | To: Mia only; They're coming at 3; See attached (photo added); Thanks
+check: mcq | What should you check before sending? | Who it's going to, spelling and attachments* | Nothing | Only the emojis
+check: tf | Sending a message to the wrong person can cause problems. | true
+check: mcq | You wrote "see attached". You should… | Check it's really attached* | Hope for the best | Delete the email
+home: Before your next message, check who it's to and read it once more.
+skill: writing
+

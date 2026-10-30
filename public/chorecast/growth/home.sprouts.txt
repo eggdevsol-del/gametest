@@ -146,3 +146,75 @@ check: mcq | How long should a burn stay under cool water? | 20 minutes* | 2 sec
 home: Show a grown-up what you would do for a small burn.
 skill: firstaid
 
+@lesson 3.1 | Pool rules | 🏊 | home
+hook: The pool looks so inviting! What are the rules before you jump in?
+learn: Pools must have a fence and a gate that closes by itself. Never prop it open.
+learn: Walk, don't run. Wet ground is slippery.
+learn: Only swim when a grown-up is watching you.
+play: sort | Safe at the pool, Not safe | Walking around the pool=Safe at the pool; Running on wet tiles=Not safe; Closing the pool gate=Safe at the pool; Propping the gate open=Not safe; Swimming with a grown-up watching=Safe at the pool; Pushing someone in=Not safe | Safe or not safe?
+check: mcq | What should the pool gate do? | Close by itself* | Stay open | Be taken off
+check: tf | You should walk, not run, around a pool. | true
+check: mcq | When can you swim in a pool? | When a grown-up is watching* | Whenever you like | At night alone
+home: Check the pool gate with a grown-up next time you visit a pool.
+skill: watersafety
+
+@lesson 3.2 | Bath time | 🛁 | home
+hook: A bath is only a little bit deep. Can it still be dangerous?
+learn: Even shallow water can be dangerous for babies and little kids.
+learn: Never leave a little brother or sister alone in the bath, not even for a moment.
+learn: Pull the plug when bath time is over.
+play: path | You're helping with your baby sister's bath when the doorbell rings. | Call a grown-up and stay with her, or lift her out wrapped in a towel => good: Smart. She is never left alone in the water. | Run to the door and leave her in the bath => bad: Babies can slip under the water in seconds. Never leave them. | Ignore the door and keep splashing => ok: She's safe with you, but a grown-up should know. Call out for help.
+check: mcq | Can shallow bath water be dangerous? | Yes, for babies and little kids* | No, never | Only on Sundays
+check: tf | Little kids should never be left alone in the bath. | true
+check: mcq | What should you do when bath time is over? | Pull the plug* | Leave the water in | Add more water
+home: Remind a grown-up that you know never to leave little kids alone in water.
+skill: watersafety
+
+@lesson 3.3 | Rivers and lakes | 🏞️ | garden
+hook: A river looks calm and shallow. Should you jump in?
+learn: Rivers and lakes can be colder and deeper than they look.
+learn: Rivers can have strong currents and hidden rocks or branches under the water.
+learn: Never jump in without a grown-up checking first. Always go in feet first.
+play: tap | Tap the hidden dangers in a river | 🪨:yes:Rocks under the water; 🌊:yes:Strong currents; 🥶:yes:Very cold water; 🌳:yes:Branches stuck under the water; 🦆:no; 🌸:no
+check: mcq | Why are rivers tricky? | Hidden rocks, cold water and currents* | They're too sunny | Ducks bite
+check: tf | You should check the water before jumping in. | true
+check: mcq | How should you get into a river or lake? | Feet first, after a grown-up checks* | Head first | Jumping off a bridge
+home: Talk with a grown-up about safe swimming spots near you.
+skill: watersafety
+
+@lesson 3.4 | Life jackets | 🦺 | island
+hook: You're going out on a boat. What's the first thing to put on?
+learn: Wear a life jacket on boats, kayaks and paddleboards.
+learn: It should fit snugly. Do up every strap and clip.
+learn: A life jacket helps you float, even if you're tired or the water is cold.
+play: build | Put on a life jacket the right way | Pick a life jacket your size; Put your arms through; Do up the zip or clips; Tighten the straps until it's snug; Get a grown-up to check it
+check: mcq | When should you wear a life jacket? | On boats and kayaks* | In the bath | At the shops
+check: tf | A life jacket should fit snugly. | true
+check: mcq | Who should check your life jacket? | A grown-up* | Nobody | A fish
+home: Ask a grown-up to show you how to check a life jacket fits.
+skill: watersafety
+
+@lesson 3.5 | Rips | 🌊 | island
+hook: Some parts of the sea look calm and dark, with no waves. Are they safe?
+learn: A rip is a strong current that pulls water out to sea.
+learn: Rips often look like calm, dark gaps between the waves. That's why it's safest to swim between the flags.
+learn: If a rip takes you, stay calm, float, and raise an arm for help. Don't fight it.
+play: order | Caught in a rip? Put the steps in order. | Stay calm; Float on your back; Raise one arm to signal for help; Wait for a lifesaver or the rip to let go; Swim back along the beach, not straight against the rip
+check: mcq | What does a rip often look like? | A calm, dark gap between waves* | Big white waves | A rainbow
+check: tf | If you're caught in a rip, you should float and signal for help. | true
+check: mcq | Why swim between the red and yellow flags? | Lifesavers watch there and avoid rips* | The water is warmer | It's prettier
+home: Look at a beach photo with a grown-up and try to spot a rip.
+skill: watersafety
+
+@lesson 3.6 | Sun safe at the water | 😎 | island
+hook: A fun day at the beach. Then a sunburn that hurts for days. How do you stop that?
+learn: The sun in {nz:Aotearoa~au:Australia} can burn you quickly, even on cloudy days.
+learn: {nz:Slip, slop, slap and wrap: slip on a shirt, slop on sunscreen, slap on a hat and wrap on sunglasses.~au:Slip, slop, slap, seek and slide: slip on a shirt, slop on sunscreen, slap on a hat, seek shade and slide on sunglasses.}
+learn: Put sunscreen on again after swimming.
+play: tap | Tap the ways to be sun safe | 👕:yes:A shirt covers your skin; 🧴:yes:Sunscreen protects skin; 👒:yes:A hat shades your face; 🕶️:yes:Sunglasses protect your eyes; 🍦:no; ⛱️:yes:Shade gives your skin a break
+check: mcq | When should you put on more sunscreen? | After swimming* | Never | Only at night
+check: tf | You can get sunburnt on a cloudy day. | true
+check: mcq | What does "slap" mean in the sun safe saying? | Slap on a hat* | Slap your friend | Slap the water
+home: Pack a sun-safe beach bag with a grown-up.
+skill: sunsafety
+
