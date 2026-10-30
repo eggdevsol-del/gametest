@@ -148,3 +148,75 @@ check: tf | Celebrating milestones can help you keep going. | true
 home: Pick a big goal and work out how many weeks it would take to save for.
 skill: goals
 
+@lesson 3.1 | What can I control? | 🎯 | garden
+hook: It rains on sports day. You didn't make the team. Your friend is grumpy. What can you actually change?
+learn: Some things are in your control: your effort, your words, how you treat people.
+learn: Some things aren't: the weather, other people's choices, what's already happened.
+learn: Putting your energy into what you can control helps you bounce back faster.
+play: sort | In my control, Not in my control | How hard I practise=In my control; The weather on sports day=Not in my control; How I speak to people=In my control; Who the coach picks=Not in my control; Whether I ask for help=In my control; What other people think=Not in my control | In my control or not?
+check: mcq | Which is in your control? | Your effort* | The weather | Other people's choices
+check: tf | Focusing on what you can control helps you bounce back. | true
+check: mcq | You didn't make the team. What's in your control? | How you practise for next time* | The coach's decision | The other players
+home: Write down one worry and sort it into "can control" and "can't control".
+skill: resilience
+
+@lesson 3.2 | Helpful self-talk | 💭 | garden
+hook: You get a low mark. Your brain says, "I'm so dumb." Is that true?
+learn: Self-talk is what you say to yourself in your head.
+learn: Unhelpful self-talk is harsh and makes things feel worse.
+learn: Helpful self-talk is kind and honest, like talking to a friend.
+play: match | Match each unhelpful thought to a helpful one | I'm so dumb=I didn't get it yet. I can ask for help; I always mess up=I made a mistake this time. I can learn from it; Nobody likes me=That was a hard day. My friends still care; I'll never be good at this=I'm getting better with practice
+check: mcq | Which is helpful self-talk? | I can learn from this* | I'm useless | I always fail
+check: tf | Talking to yourself like a friend can help. | true
+check: mcq | Self-talk is… | What you say to yourself in your head* | Talking on the phone | Singing
+home: Write one helpful thing to say to yourself next time something goes wrong.
+skill: selftalk
+
+@lesson 3.3 | Your support crew | 🧑‍🤝‍🧑 | garden
+hook: Who could you talk to if you had a really bad day?
+learn: Everyone needs people to lean on: family, friends, teachers, coaches.
+learn: Talking about a problem can make it feel smaller.
+learn: {nz:You can also call or text Kidsline or Youthline, or free call or text 1737, any time.~au:You can also call Kids Helpline on 1800 55 1800, any time.}
+play: tap | Tap the people who could be in your support crew | 👨‍👩‍👧:yes:Family members; 🧑‍🏫:yes:A teacher; 🧑‍🤝‍🧑:yes:A good friend; ⚽:yes:A coach; 🤖:no; 📞:yes:A free helpline
+check: mcq | Who could be in your support crew? | Family, friends and teachers* | Nobody | A stranger online
+check: tf | Talking about a problem can make it feel smaller. | true
+check: mcq | {nz:Which free number can you call or text to talk to someone?~au:What's the Kids Helpline number?} | {nz:1737~au:1800 55 1800}* | 123 | {nz:0800 PIZZA~au:1800 PIZZA}
+home: Make a list of your support crew and stick it somewhere you'll see it.
+skill: help
+
+@lesson 3.4 | Solve the problem | 🧩 | workshop
+hook: You've left your project to the last minute and it's due tomorrow. Panic, or plan?
+learn: Name the problem clearly.
+learn: Think of a few possible solutions, and pick the best one to try.
+learn: Try it, then check how it went. If it didn't work, try another.
+play: order | Solve a problem step by step | Name the problem; Think of possible solutions; Pick the best one; Try it; Check how it went
+check: mcq | What's the first step in solving a problem? | Name it clearly* | Panic | Ignore it
+check: tf | If one solution doesn't work, you can try another. | true
+check: mcq | You forgot your lunch. A good solution is… | Ask the office or a teacher for help* | Go hungry and say nothing | Take someone else's
+home: Use the five steps to solve a small problem this week.
+skill: problemsolving
+
+@lesson 3.5 | Learning from setbacks | 📈 | garden
+hook: You lost the chess tournament. Is that the end of the story?
+learn: A setback is something that doesn't go the way you hoped.
+learn: Ask: What went well? What could I do differently?
+learn: Many people who are great at something lost lots of times on the way.
+play: diff | Your plan before and after a setback. Tap what you changed. | Practise once a week; Play only easy opponents; Give up if I lose | Practise three times a week; Play stronger opponents too; Learn from each loss
+check: mcq | After a setback, a useful question is… | What could I do differently?* | Who can I blame? | Why bother?
+check: tf | Many skilled people lost lots of times on the way. | true
+check: mcq | What's a setback? | Something that doesn't go as hoped* | A chair | A win
+home: Think of a setback you've had and one thing it taught you.
+skill: resilience
+
+@lesson 3.6 | Your bounce-back kit | 🎒 | garden
+hook: What helps you feel better after a tough day?
+learn: A bounce-back kit is a list of things that help you recover.
+learn: Sleep, food, moving your body, time outside and fun all help your brain bounce back.
+learn: Pick a few that work for you, and use them when you need them.
+play: build | Build your bounce-back kit | A good night's sleep; A healthy snack; A walk or a run outside; Time with someone I like; Something fun, like drawing or music; Talking it through with someone I trust
+check: mcq | Which helps you bounce back? | Sleep and time outside* | Staying up all night | Skipping meals
+check: tf | Moving your body can help your mood. | true
+check: mcq | What's a bounce-back kit? | Things that help you recover after a tough day* | A first aid box | A toy box
+home: Write your own bounce-back kit and keep it in your room.
+skill: resilience
+

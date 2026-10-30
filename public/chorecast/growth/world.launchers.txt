@@ -147,3 +147,75 @@ check: mcq | Before going to a tribunal, you should… | Try to sort it out dire
 home: Look up how to file a claim on {nz:disputestribunal.govt.nz~au:your state's tribunal website}.
 skill: law
 
+@lesson 3.1 | Enrolling to vote | 📝 | townhall
+hook: You'll be 18 soon. What do you need to do before you can vote?
+learn: {nz:In NZ you can enrol from 17 and vote from 18. Citizens and permanent residents who have lived here for at least a year can vote.~au:In Australia you can enrol from 16 and vote from 18. Enrolling and voting are compulsory for citizens aged 18 and over.}
+learn: {nz:Enrol online at vote.nz.~au:Enrol online with the Australian Electoral Commission.}
+learn: Update your details whenever you move, so you vote in the right place.
+play: order | Get ready to vote. Put the steps in order. | Check you're eligible; Enrol online; Get confirmation; Update your address when you move; Vote at the next election
+check: mcq | {nz:At what age can you enrol in NZ?~au:At what age can you enrol in Australia?} | {nz:17~au:16}* | 21 | 12
+check: tf | You should update your enrolment when you move. | true
+check: mcq | {nz:Where can you enrol in NZ?~au:Who runs enrolment in Australia?} | {nz:vote.nz~au:The Australian Electoral Commission}* | A gaming site | Your bank
+home: Check how to enrol on {nz:vote.nz~au:aec.gov.au}.
+skill: voting
+
+@lesson 3.2 | How your vote counts | 🔢 | townhall
+hook: Does your vote actually change anything?
+learn: {nz:Under MMP, your party vote decides how many seats each party gets. A party needs 5% of the party vote, or to win an electorate, to get seats.~au:In the House of Representatives you number candidates in order. If your first choice is knocked out, your vote moves to your next choice.}
+learn: {nz:Your electorate vote chooses your local MP.~au:The Senate uses a proportional system, so smaller parties can win seats.}
+learn: Close results happen, so every vote counts.
+play: diff | Two election results. Tap what changed. | {nz:Party A 32%~au:Candidate A 45% first preferences}; {nz:Party B 30%~au:Candidate B 40% first preferences}; {nz:Party C 4%~au:Candidate C 15% first preferences} | {nz:Party A 32%~au:Candidate A 45% first preferences}; {nz:Party B 30%~au:Candidate B 52% after preferences}; {nz:Party C 5%~au:Candidate C knocked out}
+check: mcq | {nz:What does a party need to get seats under MMP?~au:What happens to your vote if your first choice is knocked out?} | {nz:5% of the party vote, or to win an electorate~au:It moves to your next choice}* | {nz:1 vote~au:It's thrown away} | {nz:Nothing~au:It's counted twice}
+check: tf | Close results happen. | true
+check: mcq | {nz:What does your electorate vote choose?~au:Which house uses a proportional system?} | {nz:Your local MP~au:The Senate}* | {nz:The King~au:The local council} | {nz:A sports team~au:Neither}
+home: Look up the results of the last election in your electorate.
+skill: voting
+
+@lesson 3.3 | Researching who to vote for | 🔍 | online
+hook: Your feed is full of election posts. How do you work out who to vote for?
+learn: Start with what matters to you, like housing, jobs, climate or health.
+learn: Read parties' and candidates' own policies, and check reliable news and fact-checkers.
+learn: Be wary of posts with no source, deepfakes and attack ads. Check before you share.
+play: sort | Reliable source, Treat with caution | A party's official policy page=Reliable source; An anonymous post with no source=Treat with caution; A candidates' debate on a major channel=Reliable source; A shocking video of a candidate that no news outlet has reported=Treat with caution; An independent fact-check=Reliable source; A meme about a politician=Treat with caution | Reliable or treat with caution?
+check: mcq | Where should you check a party's policy? | Their official policy page* | A random meme | An anonymous post
+check: tf | Deepfakes can be used in elections. | true
+check: mcq | A good first step in choosing who to vote for is… | Working out what matters to you* | Voting for the best poster | Copying a friend
+home: Pick an issue you care about and compare two parties' policies on it.
+skill: voting
+
+@lesson 3.4 | Voting day | 🗓️ | townhall
+hook: It's election day. What actually happens when you vote?
+learn: {nz:You can vote early in the two weeks before election day, or on the day. Bring your EasyVote card if you have one, but you don't need it.~au:You can vote early, by post if you're eligible, or on election day. You'll be asked your name and address.}
+learn: You vote in private. Nobody can see how you voted, and nobody can make you tell them.
+learn: {nz:If you can't vote where you're enrolled, you can cast a special vote.~au:Voting is compulsory. If you don't vote without a valid reason, you can be fined.}
+play: build | Build your voting day plan | Check where you can vote; Pick a time to go; Bring ID or your voting card if you have one; Get your ballot papers; Fill them in privately; Put them in the ballot box
+check: mcq | Can anyone see how you voted? | No, voting is private* | Yes, everyone | Only your boss
+check: tf | You can vote before election day. | true
+check: mcq | {nz:What can you do if you can't vote where you're enrolled?~au:What can happen if you don't vote without a valid reason?} | {nz:Cast a special vote~au:You can be fined}* | {nz:Nothing~au:Nothing} | {nz:Vote twice~au:You get a prize}
+home: Ask a grown-up what voting was like the first time they did it.
+skill: voting
+
+@lesson 3.5 | Referendums | ✅ | townhall
+hook: Sometimes the whole country votes on one question. What's that called?
+learn: A referendum is a vote by everyone on a single question.
+learn: {nz:In 2020, New Zealanders voted in two referendums: on end-of-life choice, which passed, and on legalising cannabis, which didn't.~au:Australia's Constitution can only be changed by a referendum. It needs a majority of voters nationally and a majority in at least four of six states.}
+learn: {nz:Referendums in NZ can be binding or just advisory, depending on the law that sets them up.~au:Most referendums in Australia have failed. The 2023 referendum on a First Nations Voice to Parliament did not pass.}
+play: mcq | {nz:Which 2020 NZ referendum passed?~au:What does an Australian referendum need to pass?} | {nz:End-of-life choice~au:A national majority and a majority in at least four states}* | {nz:Both of them~au:Just one more yes than no anywhere} | {nz:Neither~au:The Prime Minister's OK only}
+check: tf | A referendum asks everyone to vote on one question. | true
+check: mcq | What is a referendum? | A vote by everyone on one question* | An election for mayor | A court case
+check: mcq | {nz:What were NZ's two 2020 referendums about?~au:What was the 2023 referendum about?} | {nz:End-of-life choice and cannabis~au:A First Nations Voice to Parliament}* | {nz:Flags and sport~au:Daylight saving} | {nz:School holidays~au:A new flag}
+home: Ask a grown-up how they voted in a referendum, if they're happy to share.
+skill: civics
+
+@lesson 3.6 | Beyond election day | 🌱 | townhall
+hook: Elections happen every few years. Is voting the only way to have a say?
+learn: Local elections choose your council, which affects rates, transport and parks.
+learn: Between elections, you can make submissions, contact your MP, join a group or sign petitions.
+learn: Talking with friends and family about issues matters too. Democracy works best when people take part.
+play: sort | A way to take part, Not really taking part | Voting in local elections=A way to take part; Making a submission on a bill=A way to take part; Emailing your MP=A way to take part; Complaining but never voting=Not really taking part; Joining a community group=A way to take part; Sharing unchecked rumours=Not really taking part | A way to take part or not?
+check: mcq | What do local elections choose? | Your council* | The Prime Minister | The King
+check: tf | You can contact your MP between elections. | true
+check: mcq | Which is a way to take part between elections? | Making a submission* | Ignoring everything | Sharing unchecked rumours
+home: Find your MP's contact details and one issue you'd raise with them.
+skill: civics
+

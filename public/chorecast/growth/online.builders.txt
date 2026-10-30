@@ -148,3 +148,75 @@ check: tf | Tracking small spends shows you where your money goes. | true
 home: Agree a monthly game budget with a grown-up.
 skill: budget
 
+@lesson 3.1 | Your profile check | 👤 | online
+hook: What could a stranger learn about you from your profile?
+learn: Profiles can reveal your full name, school, birthday, location and photos.
+learn: Together, those details can help someone find you in real life.
+learn: Keep your profile simple. Use a nickname and a picture that isn't your face.
+play: tap | Tap the details that are risky to show on a public profile | 🏫:yes:Your school's name; 🎂:yes:Your full birthday; 🏠:yes:Your street or suburb; 🐶:no; 🎮:no; 📸:yes:A photo in your school uniform
+check: mcq | Which is safest to show on a public profile? | A favourite game* | Your school | Your home address
+check: tf | Small details together can help a stranger find you. | true
+check: mcq | A safer profile picture is… | A cartoon or your pet* | You in your school uniform | A photo outside your house
+home: Check one of your profiles with a grown-up and remove any risky details.
+skill: privacy
+
+@lesson 3.2 | Location sharing | 📍 | online
+hook: You post a photo from the park. Could someone tell exactly where you are?
+learn: Many apps can share your location, sometimes live.
+learn: Photos can also contain hidden location data.
+learn: Turn off location sharing for apps that don't need it, and post photos after you've left.
+play: sort | Safer, Riskier | Location sharing off for social apps=Safer; Live location shared with everyone=Riskier; Posting the beach photo after you get home=Safer; Tagging your house in a post=Riskier; Location shared only with family=Safer; Checking in at school every day=Riskier | Safer or riskier?
+check: mcq | When is it safer to post a holiday photo? | After you've left the place* | While you're there | Before you go
+check: tf | Photos can contain hidden location data. | true
+check: mcq | Who might you safely share live location with? | Your family* | Everyone | Online strangers
+home: Check which apps on a family device use your location.
+skill: privacy
+
+@lesson 3.3 | Who can message you? | 💌 | online
+hook: A stranger can send you messages in an app. Can you change that?
+learn: Most apps let you choose who can message you or send friend requests.
+learn: Set it to friends only, or people you know.
+learn: Don't accept requests from people you don't know in real life.
+play: build | Lock down your messages | Open the app's settings; Find "privacy" or "messages"; Set messages to friends only; Turn off requests from strangers; Ask a grown-up to check it
+check: mcq | Safest message setting? | Friends only* | Everyone | Strangers welcome
+check: tf | Most apps let you choose who can message you. | true
+check: mcq | A request comes from someone you don't know. You… | Decline it* | Accept it | Send them your number
+home: Set your message settings to friends only in an app you use.
+skill: privacy
+
+@lesson 3.4 | App permissions | 🔓 | online
+hook: A drawing app wants your microphone, camera and contacts. Does it need them?
+learn: Apps ask permission to use things like your camera, mic, contacts and location.
+learn: Only allow what the app really needs to work.
+learn: You can change permissions later in your device's settings.
+play: sort | Makes sense, Doesn't make sense | A camera app wants the camera=Makes sense; A drawing app wants your contacts=Doesn't make sense; A map app wants your location=Makes sense; A calculator wants your microphone=Doesn't make sense; A video call app wants the camera=Makes sense; A torch app wants your photos=Doesn't make sense | Does the permission make sense?
+check: mcq | Which permission doesn't make sense? | A calculator wanting your microphone* | A camera app wanting the camera | A map wanting location
+check: tf | You can change app permissions later. | true
+check: mcq | What should you allow? | Only what the app needs* | Everything | Nothing ever
+home: Check the permissions on three apps with a grown-up.
+skill: privacy
+
+@lesson 3.5 | Game chat settings | 🎮 | online
+hook: In an online game, strangers can talk to you by voice. Is that OK?
+learn: Many games have voice and text chat with players you don't know.
+learn: Set chat to friends only, or turn it off.
+learn: Never share personal details in game chat, and tell a grown-up if anyone makes you uncomfortable.
+play: chat | A stranger messages you in a game | them: Hey, you're good! What school do you go to? | me: I don't share that. Let's just play*/Riverside Primary!/Here's my address too | them: Come on, just tell me. Add me on another app? | me: No thanks. I'm going to tell a grown-up*/OK, here's my username/Sure, what app?
+check: mcq | A stranger in a game asks your school. You… | Don't tell them, and tell a grown-up* | Tell them | Send a photo
+check: tf | You can set game chat to friends only. | true
+check: mcq | A player asks you to move to another app. That's… | A warning sign* | Normal | A great idea
+home: Check the chat settings on a game you play, with a grown-up.
+skill: safety
+
+@lesson 3.6 | Privacy check-up | 🔁 | online
+hook: Apps change their settings all the time. How often should you check yours?
+learn: Do a privacy check-up every few months, and whenever you get a new app.
+learn: Check who can see your posts, who can message you, location and permissions.
+learn: Do it with a grown-up. It only takes a few minutes.
+play: order | Do a privacy check-up | Pick an app; Check who can see your posts; Check who can message you; Check location and permissions; Fix anything that's too open; Set a reminder for next time
+check: mcq | How often should you check privacy settings? | Every few months and with new apps* | Never | Once in your life
+check: tf | Apps can change their settings. | true
+check: mcq | Who can help you with a privacy check-up? | A grown-up* | A stranger | Nobody
+home: Do a privacy check-up on one app this week.
+skill: privacy
+

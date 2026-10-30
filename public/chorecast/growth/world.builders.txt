@@ -149,3 +149,75 @@ check: mcq | A storm damages roads. Where could the money come from? | An emerge
 home: If you ran the council, what would you spend more on? Tell a grown-up why.
 skill: council
 
+@lesson 3.1 | Three branches | 🌳 | townhall
+hook: Who makes the laws, who runs the country, and who decides if a law was broken?
+learn: Parliament makes laws.
+learn: The government, led by the Prime Minister and ministers, runs things and puts laws into action.
+learn: Courts and judges decide what laws mean and whether they've been broken. Keeping these separate helps stop anyone having too much power.
+play: match | Match each branch to its job | Parliament=Makes the laws; The government=Runs the country and puts laws into action; The courts=Decide what laws mean and if they've been broken
+check: mcq | Who makes the laws? | Parliament* | The courts | The police
+check: tf | Keeping the branches separate helps stop anyone having too much power. | true
+check: mcq | Who decides if a law has been broken? | The courts* | Parliament | Your school
+home: Explain the three branches to someone at home using a sports example: rule-makers, coaches and referees.
+skill: civics
+
+@lesson 3.2 | Parliament | 🏛️ | townhall
+hook: How many people sit in Parliament, and where do they meet?
+learn: {nz:NZ's Parliament has one house, the House of Representatives, with about 120 MPs. It meets in Wellington.~au:Australia's federal Parliament has two houses: the House of Representatives, with 150 members, and the Senate, with 76 senators. It meets in Canberra.}
+learn: MPs debate ideas, ask the government questions and vote on new laws.
+learn: {nz:Some MPs represent an area, called an electorate. Others come from party lists.~au:Each member of the House represents an area, called an electorate. Senators represent a whole state or territory.}
+play: mcq | {nz:Where does NZ's Parliament meet?~au:Where does Australia's federal Parliament meet?} | {nz:Wellington~au:Canberra}* | {nz:Auckland~au:Sydney} | {nz:Christchurch~au:Melbourne}
+check: mcq | {nz:How many houses does NZ's Parliament have?~au:How many houses does Australia's federal Parliament have?} | {nz:One~au:Two}* | {nz:Two~au:One} | Five
+check: tf | MPs vote on new laws. | true
+check: mcq | What's an electorate? | An area an MP represents* | A type of electricity | A shop
+home: Find out who your local {nz:electorate MP~au:federal member} is.
+skill: civics
+
+@lesson 3.3 | Prime Minister and Cabinet | 👔 | townhall
+hook: The Prime Minister is in charge. But do they decide everything alone?
+learn: The Prime Minister leads the government. They're usually the leader of the biggest party, or group of parties, in Parliament.
+learn: Ministers look after areas like health, education and transport.
+learn: The most senior ministers form Cabinet, which makes the big decisions together.
+play: match | Match each minister to their area | Health Minister=Hospitals and doctors; Education Minister=Schools; Transport Minister=Roads, buses and trains; Finance Minister=Government money and the Budget
+check: mcq | Who leads the government? | The Prime Minister* | The mayor | A judge
+check: tf | Cabinet makes big decisions together. | true
+check: mcq | Which minister looks after schools? | The Education Minister* | The Transport Minister | The Health Minister
+home: Find out who the Prime Minister and the Education Minister are right now.
+skill: civics
+
+@lesson 3.4 | Head of state | 👑 | townhall
+hook: Who is {nz:New Zealand's~au:Australia's} head of state? It might surprise you.
+learn: Our head of state is the King, King Charles III. He lives in the United Kingdom.
+learn: The Governor-General represents the King here and signs laws after Parliament passes them.
+learn: The Prime Minister runs the government. The head of state's role is mostly ceremonial.
+play: mystery | They represent the King here; They sign laws after Parliament passes them; They live in {nz:Government House in Wellington~au:Government House in Canberra}; Their title has two words joined by a dash | The Governor-General* | The Prime Minister | The mayor
+check: mcq | Who represents the King here? | The Governor-General* | The Prime Minister | The police chief
+check: tf | The Governor-General signs laws after Parliament passes them. | true
+check: mcq | Who runs the government day to day? | The Prime Minister and ministers* | The King | The Governor-General
+home: Find out who the Governor-General is right now.
+skill: civics
+
+@lesson 3.5 | Having a say on laws | 📝 | townhall
+hook: Parliament is considering a new law about school lunches. Can you tell them what you think?
+learn: {nz:Bills usually go to a select committee, a small group of MPs who hear public submissions.~au:Parliamentary committees often ask the public for submissions on new laws.}
+learn: Anyone can make a submission, including young people.
+learn: Keep it short and clear: who you are, what you think and why.
+play: build | Build a submission on a school lunch law | Who I am: an 11-year-old student; What I think: I support free school lunches; Why: Hungry kids find it hard to learn; An example: Some kids in my class skip breakfast; Thank you for reading my submission
+check: mcq | Who can make a submission on a new law? | Anyone, including young people* | Only MPs | Only lawyers
+check: tf | Submissions should be short and clear. | true
+check: mcq | {nz:What is a select committee?~au:What do parliamentary committees often ask for?} | {nz:A small group of MPs who hear submissions~au:Public submissions}* | {nz:A sports team~au:Pizza} | {nz:A shop~au:Nothing}
+home: Find a bill being discussed in Parliament right now.
+skill: civics
+
+@lesson 3.6 | Youth voices | 🧒 | stage
+hook: Do young people get a voice in government before they can vote?
+learn: {nz:NZ holds a Youth Parliament every three years, where young people take on the role of MPs.~au:Many states run youth parliaments, where young people debate and vote on bills.}
+learn: Many councils have youth councils. Schools have student councils.
+learn: You can also write to your MP, sign petitions and make submissions.
+play: sort | A real way for young people to have a say, Not a real way | Joining a youth council=A real way for young people to have a say; Writing to your MP=A real way for young people to have a say; Making a submission=A real way for young people to have a say; Shouting at the TV=Not a real way; Signing a petition=A real way for young people to have a say; Ignoring the news=Not a real way | Real way or not?
+check: mcq | How can young people have a say? | Youth councils, writing to MPs and submissions* | Only by voting at 18 | They can't
+check: tf | Young people can write to their MP. | true
+check: mcq | {nz:How often does NZ hold a Youth Parliament?~au:What happens at a youth parliament?} | {nz:Every three years~au:Young people debate and vote on bills}* | {nz:Every 50 years~au:Nothing} | {nz:Never~au:Movies are shown}
+home: Find out if your council or school has a youth council or student council.
+skill: civics
+

@@ -146,3 +146,76 @@ check: mcq | An ambulance with flashing lights is coming. You… | Stay out of t
 home: Make a thank-you card for a helper in your community.
 skill: community
 
+@lesson 3.1 | Chipping in | 🍕 | townhall
+hook: Your class wants a pizza party. It costs $60. How could everyone pay for it?
+learn: When a lot of people each chip in a little, they can pay for something big together.
+learn: 30 kids chipping in $2 each makes $60.
+learn: Tax works like that. Lots of people chip in to pay for things everyone shares.
+try: 10 kids × $2 = $20 :: gap | 20 kids × $3 = $_ | 60
+play: slider | A $50 class trip. 25 kids chip in the same amount. How much each? | 0 | 10 | 2 | $ | 0 | 1
+check: gap | 10 people × $5 = $_ | 50
+check: mcq | How can lots of people pay for something big? | Everyone chips in a little* | One kid pays for it all | Nobody pays
+check: tf | Tax is a bit like everyone chipping in. | true
+home: Ask a grown-up about something your family or friends chipped in for together.
+skill: tax
+
+@lesson 3.2 | Things we share | 🏞️ | townhall
+hook: Who owns the park down the road?
+learn: Some things belong to one family, like your house or your bike.
+learn: Some things are shared by everyone, like parks, roads and libraries.
+learn: Shared things are paid for by tax, and we all look after them.
+play: sort | Everyone shares it, One family owns it | The park=Everyone shares it; Your bike=One family owns it; The library=Everyone shares it; Your bedroom=One family owns it; The footpath=Everyone shares it; The family car=One family owns it | Shared or owned?
+check: mcq | Who shares the park? | Everyone* | Only one family | Nobody
+check: tf | Shared things are paid for by tax. | true
+check: mcq | How can you look after shared things? | Put rubbish in the bin* | Draw on the walls | Break the swings
+home: Name three shared things in your town that you use.
+skill: community
+
+@lesson 3.3 | Two ways to pay tax | 🧾 | stall
+hook: Grown-ups pay tax in two main ways. Can you guess them?
+learn: Some tax comes out of grown-ups' pay before they get it. That's income tax.
+learn: Some tax is added when people buy things. That's GST.
+learn: Businesses pay tax on their profits too.
+play: match | Match each kind of tax to when it's paid | Income tax=Taken out of pay; GST=Added when you buy things; Company tax=Paid by businesses on profits
+check: mcq | When is GST paid? | When people buy things* | On birthdays | Never
+check: tf | Income tax comes out of grown-ups' pay. | true
+check: mcq | Who pays tax on business profits? | Businesses* | Babies | Pets
+home: Find the GST on a receipt with a grown-up.
+skill: tax
+
+@lesson 3.4 | What tax pays for you | 🏫 | townhall
+hook: Your school, your doctor visits and the road to the beach. Who helps pay for them?
+learn: Tax helps pay for public schools, so families don't pay the full cost of teachers and classrooms.
+learn: It helps pay for hospitals, doctors and nurses.
+learn: It pays for roads, parks, police and firefighters too.
+play: tap | Tap the things tax helps pay for | 🏫:yes:Public schools; 🏥:yes:Hospitals; 🛣️:yes:Roads; 🚒:yes:Firefighters; 🎮:no; 🍭:no; 🌳:yes:Parks
+check: mcq | What does tax help pay for? | Schools and hospitals* | Your video games | Your lollies
+check: tf | Tax helps pay for public schools. | true
+check: mcq | Which is paid for by tax? | Fire stations* | Your birthday party | Your toys
+home: Walk around your neighbourhood and spot three things tax helped pay for.
+skill: tax
+
+@lesson 3.5 | Fair shares | ⚖️ | townhall
+hook: Should someone who earns lots pay the same tax as someone who earns a little?
+learn: In our countries, people who earn more pay more tax.
+learn: Kids and people who earn very little usually pay little or no income tax.
+learn: People argue about what's fair, and voters help decide.
+play: debate | Should people who earn more pay more tax? | Most people think yes, because they can afford to chip in more* | No, everyone should pay exactly the same dollars | Some people say everyone should pay the same share, so the system feels simple and equal.
+check: mcq | In our countries, who pays more income tax? | People who earn more* | Kids | Pets
+check: tf | People argue about what's fair in tax. | true
+check: mcq | Who helps decide tax rules? | Voters and the people they elect* | Supermarkets | Nobody
+home: Ask a grown-up what they think is fair about tax.
+skill: fairness
+
+@lesson 3.6 | Who decides? | 🗳️ | townhall
+hook: Tax money is spent on lots of things. Who decides where it goes?
+learn: Grown-ups vote to choose the government.
+learn: The government decides how to spend tax money, and shows its plan every year.
+learn: If people don't like the choices, they can vote for someone else next time.
+play: order | How tax money gets spent. Put it in order. | Grown-ups vote; A government is chosen; The government makes a spending plan; Tax money pays for schools, roads and hospitals; People vote again next time
+check: mcq | Who chooses the government? | Grown-up voters* | Kids at school | A lucky dip
+check: tf | If people don't like the government's choices, they can vote differently next time. | true
+check: mcq | What does the government do with tax money? | Spends it on things we share* | Keeps it in a box | Throws it away
+home: Ask a grown-up what they think tax should be spent on most.
+skill: civics
+

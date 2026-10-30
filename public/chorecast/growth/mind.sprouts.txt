@@ -146,3 +146,75 @@ check: mcq | You're yawning and grumpy at school. What might help tonight? | An 
 home: Notice how you feel after a good sleep and after a short one.
 skill: sleep
 
+@lesson 3.1 | Waiting in line | 🧍 | garden
+hook: There's a long line for the slide. Your legs are wriggly. What do you do?
+learn: Waiting your turn is fair. Everyone wants a go.
+learn: Stand in line, keep your hands to yourself, and wait.
+learn: Your turn will come!
+play: order | Waiting for the slide. Put it in order. | Join the end of the line; Wait for the kids in front; Move up when it's your turn; Have your slide; Go to the end of the line again
+check: mcq | Where do you join a line? | At the end* | At the front | In the middle
+check: tf | Waiting your turn is fair to everyone. | true
+check: mcq | Someone pushes in front of you. You could… | Say "Excuse me, the line starts back there"* | Push them over | Cry and leave
+home: Notice a time you waited your turn today. How did it feel?
+skill: patience
+
+@lesson 3.2 | When waiting is hard | 😣 | garden
+hook: Waiting can make you feel grumpy, wriggly or cross. Is that OK?
+learn: It's normal to feel frustrated when you have to wait.
+learn: Notice the feeling: "I feel cross because I want it now."
+learn: Then try something to help, like a deep breath or counting to 10.
+play: tap | Tap the things that help when waiting is hard | 🌬️:yes:Taking a deep breath; 🔢:yes:Counting slowly to 10; 🎵:yes:Humming a song in your head; 😡:no; 👊:no; 🤔:yes:Thinking about something fun
+check: mcq | What helps when waiting feels hard? | A deep breath* | Shouting | Kicking things
+check: tf | It's normal to feel frustrated when you wait. | true
+check: mcq | You feel cross waiting. What could you say to yourself? | It's hard, but my turn will come* | I'll never get a turn | This is the worst day ever
+home: Practise counting slowly to 10 with a grown-up.
+skill: patience
+
+@lesson 3.3 | Try, try again | 🚲 | garden
+hook: You try to ride a bike and fall off. Do you give up?
+learn: New things are hard at first. Nearly everyone falls off a bike when they start!
+learn: Each try teaches your body and brain a little more.
+learn: Saying "I can't do it yet" helps you keep trying.
+play: path | You've tried to tie your shoelaces five times. They keep coming undone. | Take a breath and try again slowly, or ask for help => good: On the next try, you get it! Practice paid off. | Throw your shoes across the room => bad: Now you're cross, and your shoes are still untied. | Say "I'll never be able to do it" => bad: You can, you just can't yet. Keep practising.
+check: mcq | You fall off your bike when learning. You… | Try again* | Give up forever | Blame the bike
+check: tf | "I can't do it yet" helps you keep trying. | true
+check: mcq | Why do new things get easier? | Each try teaches you a little more* | Magic | They don't
+home: Pick something you can't do yet and practise it this week.
+skill: grit
+
+@lesson 3.4 | Patience with others | 🤗 | home
+hook: Your little brother is slow putting his shoes on, and you want to go! What helps?
+learn: Everyone learns at their own speed.
+learn: Being patient with others means giving them time, and not getting cross.
+learn: You could help, or kindly show them how.
+play: chat | Your little brother is slow getting ready | them: I can't do my shoes! | me: That's OK. Want me to show you?*/Hurry up, you're so slow!/I'm leaving without you | them: Yes please. Is this right? | me: Yes! Nearly there. Pull it tight*/No, you're doing it wrong/Ugh, just let me do it
+check: mcq | Someone is slower than you. A kind thing to do is… | Give them time or help* | Get cross | Leave them behind
+check: tf | Everyone learns at their own speed. | true
+check: mcq | What does being patient with others mean? | Giving them time and not getting cross* | Rushing them | Ignoring them
+home: Help someone in your family with something they're learning.
+skill: kindness
+
+@lesson 3.5 | Growing slowly | 🌱 | garden
+hook: You start piano lessons. After one week, you can't play a whole song. Is something wrong?
+learn: Skills grow slowly, like plants.
+learn: A little practice every day helps more than a lot once in a while.
+learn: Look back after a month and you'll see how far you've come!
+play: build | Build a skill over time | Week 1: learn where your fingers go; Week 2: play a few notes; Week 3: play part of a song; Week 4: play the whole song slowly; Week 6: play it to your family
+check: mcq | How do skills grow? | Slowly, with practice* | All at once | Never
+check: tf | A little practice every day helps a lot. | true
+check: mcq | After a month of practice, you'll probably… | See how far you've come* | Be exactly the same | Forget everything
+home: Start a practice chart for something you want to get better at.
+skill: grit
+
+@lesson 3.6 | Patience helpers | 🧰 | garden
+hook: What's in your patience toolbox?
+learn: Different tricks help different people.
+learn: Some count, some breathe, some think of a happy place, some keep busy.
+learn: Try a few and find your favourites.
+play: sort | Helps me be patient, Makes it harder | Counting to 10=Helps me be patient; Stamping my feet=Makes it harder; Slow breathing=Helps me be patient; Asking "Are we there yet?" 50 times=Makes it harder; Playing I spy=Helps me be patient; Grabbing the toy=Makes it harder | Helper or not?
+check: mcq | Which is a patience helper? | Playing I spy while you wait* | Stamping your feet | Grabbing
+check: tf | Different tricks help different people. | true
+check: mcq | On a long car trip, what could help? | Playing a game like I spy* | Kicking the seat | Shouting
+home: Draw your patience toolbox with your three favourite tricks.
+skill: patience
+

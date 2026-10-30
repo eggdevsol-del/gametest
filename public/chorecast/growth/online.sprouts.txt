@@ -146,3 +146,75 @@ check: mcq | Why tell a grown-up about a mistake? | They can help, and you won't
 home: Agree with a grown-up what you'll do if something goes wrong online.
 skill: asking
 
+@lesson 3.1 | Good sport | 🏆 | online
+hook: You win a game online. Your friend loses. What do you say?
+learn: Being a good sport means being kind whether you win or lose.
+learn: If you win, don't brag. If you lose, say "good game" anyway.
+learn: Games are more fun when everyone feels good.
+play: chat | You just won an online game against a friend | them: Aw, I lost again. | me: Good game! You nearly got me at the end*/Haha, you're so bad/Loser! | them: Thanks. Want to play again? | me: Yes! Let's go*/No, you're too easy/Only if I win again
+check: mcq | You win a game. What's a kind thing to say? | Good game!* | You're so bad | Haha, loser
+check: tf | Being a good sport matters whether you win or lose. | true
+check: mcq | You lose a game. You could… | Say "good game" and try again* | Throw the controller | Call them a cheater
+home: Play a game with your family and practise saying "good game".
+skill: kindness
+
+@lesson 3.2 | Let them join | 🙌 | online
+hook: A new kid wants to join your online game. Your friends say no. What do you do?
+learn: Leaving people out on purpose can really hurt.
+learn: Inviting someone to join is a kind thing to do.
+learn: Only play with people you know in real life, and ask a grown-up if you're not sure.
+play: path | A kid from your class asks to join your game. Your friend says, "No, they're annoying." | Invite them to join and be friendly => good: The new kid feels welcome, and the game is even more fun. | Ignore their message => bad: They feel left out and sad. | Send a mean message telling them to go away => bad: That's unkind, and it can really hurt.
+check: mcq | A classmate wants to join your game. A kind choice is… | Invite them in* | Ignore them | Tell them to go away
+check: tf | Leaving people out on purpose can hurt. | true
+check: mcq | Who should you play online games with? | People you know in real life* | Anyone at all | Strangers who offer gifts
+home: Think of a time you felt left out. How would it have felt to be invited?
+skill: kindness
+
+@lesson 3.3 | Think before you type | 🤔 | online
+hook: You're about to type something. How can you tell if it's kind?
+learn: Ask yourself: would I say this to their face?
+learn: Ask: is it true? Is it kind? Is it helpful?
+learn: If not, don't send it.
+play: sort | Send it, Don't send it | Nice build!=Send it; You're so slow, noob=Don't send it; Want to team up?=Send it; Everyone thinks you're weird=Don't send it; Thanks for helping me=Send it; A mean joke about someone=Don't send it | Send it or not?
+check: mcq | What should you ask before typing? | Would I say this to their face?* | Will it get likes? | How fast can I type?
+check: tf | If a message isn't kind or true, it's best not to send it. | true
+check: mcq | Which message is kind? | Thanks for helping me* | You're a noob | Go away
+home: Think of a kind message you could send someone today.
+skill: kindness
+
+@lesson 3.4 | When someone is mean | 🛑 | online
+hook: Someone in a game calls you names. What do you do?
+learn: Don't be mean back. It usually makes it worse.
+learn: Stop playing with them, and use the block or report button.
+learn: Tell a grown-up. You won't be in trouble for telling.
+play: order | Someone is mean to you online. Put the steps in order. | Don't reply with something mean; Stop playing with them; Block or report them; Tell a grown-up; Do something that cheers you up
+check: mcq | Someone is mean to you online. First step? | Don't be mean back* | Call them names | Keep it secret
+check: tf | Telling a grown-up is the right thing to do. | true
+check: mcq | What can a block button do? | Stop that person contacting you* | Make them your friend | Delete your game
+home: Find the block and report buttons in a game you play, with a grown-up.
+skill: safety
+
+@lesson 3.5 | Kind words | 💬 | online
+hook: Some words make people feel great. Which ones?
+learn: Kind words online can make someone's whole day.
+learn: Say well done, thank you, and want to play?
+learn: Emojis like 👍 and 😊 can add a friendly feeling.
+play: tap | Tap the kind messages | 👍:yes:Thumbs up means well done; 😊:yes:A smile is friendly; 🎉:yes:Celebrating someone's win; 😠:no; 👎:no; 🤝:yes:Teaming up together
+check: mcq | Which is a kind thing to type? | Well done!* | You're rubbish | Quit now
+check: tf | Kind words online can make someone's day. | true
+check: mcq | Your friend builds something cool. You could say… | That's awesome!* | Mine's better | Boring
+home: Send a kind message to a family member today.
+skill: kindness
+
+@lesson 3.6 | Kind with pictures | 🖼️ | online
+hook: You took a funny picture of your friend. Should you share it with everyone?
+learn: Ask before you share a picture of someone else.
+learn: Never share pictures to make fun of someone.
+learn: If someone shares a mean picture of you, tell a grown-up.
+play: scam | Kind or unkind? | Asking your friend before sharing a picture=real; Sharing a picture to laugh at someone=scam; Making a funny face on someone's photo without asking=scam; Sharing your own drawing with family=real; Sending a nice photo of a pet=real | Ask first, and never share pictures to make fun of someone.
+check: mcq | Before sharing a picture of a friend, you should… | Ask them first* | Share it fast | Add a mean caption
+check: tf | Sharing pictures to make fun of someone is unkind. | true
+check: mcq | Someone shares a mean picture of you. You… | Tell a grown-up* | Share a mean one back | Keep it secret
+home: Look at photos with a grown-up and talk about which are OK to share.
+skill: privacy
+

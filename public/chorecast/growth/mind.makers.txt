@@ -146,3 +146,75 @@ check: mcq | What's spending pressure? | Feeling you must buy things to fit in* 
 home: List three fun things to do with friends that cost less than $5.
 skill: spending
 
+@lesson 3.1 | Why you see that ad | 🎯 | online
+hook: You talk about sneakers once and now sneaker ads are everywhere. Coincidence?
+learn: Apps and websites track what you search, watch, like and buy.
+learn: Advertisers use that data to show ads to people most likely to buy.
+learn: Targeted ads feel personal, which makes them more persuasive.
+play: tap | Tap the things that can be used to target ads at you | 🔍:yes:Your searches; 👍:yes:What you like and follow; 📍:yes:Your location; 🛒:yes:What you've bought; 🌙:no; ⏱️:yes:How long you watch videos
+check: mcq | How do advertisers target ads? | Using data about what you do online* | Random luck | Reading your mind
+check: tf | Targeted ads can feel more persuasive because they seem personal. | true
+check: mcq | You can see fewer targeted ads by… | Changing ad and privacy settings* | Liking more ads | Searching more
+home: Open the ad settings in an app with a grown-up and see what it thinks you like.
+skill: advertising
+
+@lesson 3.2 | Hurry, hurry! | ⏰ | stall
+hook: "Only 3 left!" "Sale ends at midnight!" Why do you suddenly want it more?
+learn: Scarcity makes things feel more valuable. Urgency makes you decide fast.
+learn: Both push you to buy before you've had time to think.
+learn: Some "only 3 left" messages aren't even true.
+play: timing | The timer is ticking! Wait for the pause zone, then tap | Pause and think | Pause
+check: mcq | Why do ads say "only 3 left"? | To make you buy fast before thinking* | To be helpful | Because it's always true
+check: tf | Urgency tricks push you to decide quickly. | true
+check: mcq | A good response to "sale ends tonight"? | Pause and ask if you really need it* | Buy it straight away | Buy two
+home: Count how many "hurry" messages you see in ads today.
+skill: advertising
+
+@lesson 3.3 | Everyone's buying it | 👥 | online
+hook: "10,000 people bought this today!" Does that make it good?
+learn: Social proof means we copy what other people do, because it feels safe.
+learn: Ads use star ratings, "bestseller" badges and big numbers to show popularity.
+learn: Reviews can be fake or paid for. Look for detailed reviews from a range of people.
+play: scam | Trustworthy or a social proof trick? | A detailed review with pros and cons=real; 500 five-star reviews all posted on the same day=scam; "Everyone's talking about it!" with no details=scam; Reviews from a trusted independent tester=real; A review that says "Best product ever!!!" and nothing else=scam | Look for detailed, varied reviews and independent tests.
+check: mcq | What is social proof? | Copying what others seem to be doing* | Proof from a scientist | A receipt
+check: tf | Some online reviews are fake. | true
+check: mcq | Which review is most useful? | Detailed, with pros and cons* | "Best ever!!!" | One word
+home: Read five reviews of a product and decide which ones seem real.
+skill: advertising
+
+@lesson 3.4 | Influencer rules | 📱 | online
+hook: Your favourite creator raves about a drink. Were they paid?
+learn: Influencers are often paid in money, free products or both.
+learn: {nz:NZ's advertising codes say paid posts must be clearly labelled as ads.~au:Australian rules say paid posts must be clearly marked as advertising.}
+learn: Look for "ad", "sponsored", "paid partnership" or "gifted". If it's hidden, be extra careful.
+play: sort | Clearly labelled, Hidden or unclear | Paid partnership label at the top=Clearly labelled; Tiny #sp hidden in 30 hashtags=Hidden or unclear; "Ad: I'm working with this brand"=Clearly labelled; No label, but they got it free=Hidden or unclear; "Gifted" in the caption=Clearly labelled; A discount code with no ad label=Hidden or unclear | Labelled or hidden?
+check: mcq | What should a paid post show? | A clear label like "ad" or "sponsored"* | Nothing | A secret code
+check: tf | Influencers can be paid with free products. | true
+check: mcq | A creator gives a discount code but no ad label. That's… | A warning sign it might be a hidden ad* | Definitely not an ad | Illegal for you to see
+home: Find three influencer posts and check whether they're labelled.
+skill: advertising
+
+@lesson 3.5 | Dark patterns | 🕳️ | online
+hook: To cancel, you have to click through six screens and a button that says "No, I hate saving money." Why?
+learn: Dark patterns are designs that trick you into doing what the company wants.
+learn: Examples: pre-ticked boxes, hidden fees at checkout, hard-to-find cancel buttons, and guilt-trip buttons.
+learn: Slow down, read every screen, and untick boxes you didn't choose.
+play: tap | Tap the dark patterns | ☑️:yes:A box already ticked to sign you up; 💸:yes:Fees that only appear at the last step; 😢:yes:A "No thanks, I don't like deals" button; 🔍:yes:A cancel button that's hard to find; ✅:no; 📄:no
+check: mcq | What's a dark pattern? | A design that tricks you* | A spooky font | A night mode
+check: tf | Hidden fees at checkout are a dark pattern. | true
+check: mcq | What should you do at checkout? | Read every screen and untick boxes you didn't choose* | Click fast | Accept everything
+home: Check a sign-up page for pre-ticked boxes with a grown-up.
+skill: advertising
+
+@lesson 3.6 | Ads for unhealthy things | 🍟 | stage
+hook: Why are there rules about ads for junk food, alcohol and gambling?
+learn: Ads can shape what people want, especially young people.
+learn: Both countries have codes limiting junk food and gambling ads aimed at kids, and alcohol ads aimed at under-18s.
+learn: Sneaky ads still get through, like sponsorships, game tie-ins and influencers.
+play: debate | Should junk food ads be banned during kids' shows? | Yes, because ads shape what kids want to eat* | No, ads have no effect on anyone | Some say parents, not ad rules, should decide what kids eat, and that bans can be hard to enforce online.
+check: mcq | Why limit some ads aimed at kids? | Ads shape what young people want* | Kids don't watch TV | Ads are always true
+check: tf | Sponsorships can be a sneaky form of advertising. | true
+check: mcq | Which is a sneaky ad tactic? | A game tie-in with a fast-food brand* | A plain price list | A safety warning
+home: Spot a sponsorship or tie-in ad at a sports event or in a game.
+skill: advertising
+

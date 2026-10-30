@@ -147,6 +147,78 @@ check: mcq | You're yawning and grumpy at school. What might help tonight? | An 
 home: Notice how you feel after a good sleep and after a short one.
 skill: sleep
 
+@lesson 3.1 | Waiting in line | 🧍 | garden
+hook: There's a long line for the slide. Your legs are wriggly. What do you do?
+learn: Waiting your turn is fair. Everyone wants a go.
+learn: Stand in line, keep your hands to yourself, and wait.
+learn: Your turn will come!
+play: order | Waiting for the slide. Put it in order. | Join the end of the line; Wait for the kids in front; Move up when it's your turn; Have your slide; Go to the end of the line again
+check: mcq | Where do you join a line? | At the end* | At the front | In the middle
+check: tf | Waiting your turn is fair to everyone. | true
+check: mcq | Someone pushes in front of you. You could… | Say "Excuse me, the line starts back there"* | Push them over | Cry and leave
+home: Notice a time you waited your turn today. How did it feel?
+skill: patience
+
+@lesson 3.2 | When waiting is hard | 😣 | garden
+hook: Waiting can make you feel grumpy, wriggly or cross. Is that OK?
+learn: It's normal to feel frustrated when you have to wait.
+learn: Notice the feeling: "I feel cross because I want it now."
+learn: Then try something to help, like a deep breath or counting to 10.
+play: tap | Tap the things that help when waiting is hard | 🌬️:yes:Taking a deep breath; 🔢:yes:Counting slowly to 10; 🎵:yes:Humming a song in your head; 😡:no; 👊:no; 🤔:yes:Thinking about something fun
+check: mcq | What helps when waiting feels hard? | A deep breath* | Shouting | Kicking things
+check: tf | It's normal to feel frustrated when you wait. | true
+check: mcq | You feel cross waiting. What could you say to yourself? | It's hard, but my turn will come* | I'll never get a turn | This is the worst day ever
+home: Practise counting slowly to 10 with a grown-up.
+skill: patience
+
+@lesson 3.3 | Try, try again | 🚲 | garden
+hook: You try to ride a bike and fall off. Do you give up?
+learn: New things are hard at first. Nearly everyone falls off a bike when they start!
+learn: Each try teaches your body and brain a little more.
+learn: Saying "I can't do it yet" helps you keep trying.
+play: path | You've tried to tie your shoelaces five times. They keep coming undone. | Take a breath and try again slowly, or ask for help => good: On the next try, you get it! Practice paid off. | Throw your shoes across the room => bad: Now you're cross, and your shoes are still untied. | Say "I'll never be able to do it" => bad: You can, you just can't yet. Keep practising.
+check: mcq | You fall off your bike when learning. You… | Try again* | Give up forever | Blame the bike
+check: tf | "I can't do it yet" helps you keep trying. | true
+check: mcq | Why do new things get easier? | Each try teaches you a little more* | Magic | They don't
+home: Pick something you can't do yet and practise it this week.
+skill: grit
+
+@lesson 3.4 | Patience with others | 🤗 | home
+hook: Your little brother is slow putting his shoes on, and you want to go! What helps?
+learn: Everyone learns at their own speed.
+learn: Being patient with others means giving them time, and not getting cross.
+learn: You could help, or kindly show them how.
+play: chat | Your little brother is slow getting ready | them: I can't do my shoes! | me: That's OK. Want me to show you?*/Hurry up, you're so slow!/I'm leaving without you | them: Yes please. Is this right? | me: Yes! Nearly there. Pull it tight*/No, you're doing it wrong/Ugh, just let me do it
+check: mcq | Someone is slower than you. A kind thing to do is… | Give them time or help* | Get cross | Leave them behind
+check: tf | Everyone learns at their own speed. | true
+check: mcq | What does being patient with others mean? | Giving them time and not getting cross* | Rushing them | Ignoring them
+home: Help someone in your family with something they're learning.
+skill: kindness
+
+@lesson 3.5 | Growing slowly | 🌱 | garden
+hook: You start piano lessons. After one week, you can't play a whole song. Is something wrong?
+learn: Skills grow slowly, like plants.
+learn: A little practice every day helps more than a lot once in a while.
+learn: Look back after a month and you'll see how far you've come!
+play: build | Build a skill over time | Week 1: learn where your fingers go; Week 2: play a few notes; Week 3: play part of a song; Week 4: play the whole song slowly; Week 6: play it to your family
+check: mcq | How do skills grow? | Slowly, with practice* | All at once | Never
+check: tf | A little practice every day helps a lot. | true
+check: mcq | After a month of practice, you'll probably… | See how far you've come* | Be exactly the same | Forget everything
+home: Start a practice chart for something you want to get better at.
+skill: grit
+
+@lesson 3.6 | Patience helpers | 🧰 | garden
+hook: What's in your patience toolbox?
+learn: Different tricks help different people.
+learn: Some count, some breathe, some think of a happy place, some keep busy.
+learn: Try a few and find your favourites.
+play: sort | Helps me be patient, Makes it harder | Counting to 10=Helps me be patient; Stamping my feet=Makes it harder; Slow breathing=Helps me be patient; Asking "Are we there yet?" 50 times=Makes it harder; Playing I spy=Helps me be patient; Grabbing the toy=Makes it harder | Helper or not?
+check: mcq | Which is a patience helper? | Playing I spy while you wait* | Stamping your feet | Grabbing
+check: tf | Different tricks help different people. | true
+check: mcq | On a long car trip, what could help? | Playing a game like I spy* | Kicking the seat | Shouting
+home: Draw your patience toolbox with your three favourite tricks.
+skill: patience
+
 @band builders
 @unit 1 | Habits | How tiny habits become big changes
 @unit 2 | Delayed gratification | Waiting for something better
@@ -297,6 +369,78 @@ check: tf | Celebrating milestones can help you keep going. | true
 home: Pick a big goal and work out how many weeks it would take to save for.
 skill: goals
 
+@lesson 3.1 | What can I control? | 🎯 | garden
+hook: It rains on sports day. You didn't make the team. Your friend is grumpy. What can you actually change?
+learn: Some things are in your control: your effort, your words, how you treat people.
+learn: Some things aren't: the weather, other people's choices, what's already happened.
+learn: Putting your energy into what you can control helps you bounce back faster.
+play: sort | In my control, Not in my control | How hard I practise=In my control; The weather on sports day=Not in my control; How I speak to people=In my control; Who the coach picks=Not in my control; Whether I ask for help=In my control; What other people think=Not in my control | In my control or not?
+check: mcq | Which is in your control? | Your effort* | The weather | Other people's choices
+check: tf | Focusing on what you can control helps you bounce back. | true
+check: mcq | You didn't make the team. What's in your control? | How you practise for next time* | The coach's decision | The other players
+home: Write down one worry and sort it into "can control" and "can't control".
+skill: resilience
+
+@lesson 3.2 | Helpful self-talk | 💭 | garden
+hook: You get a low mark. Your brain says, "I'm so dumb." Is that true?
+learn: Self-talk is what you say to yourself in your head.
+learn: Unhelpful self-talk is harsh and makes things feel worse.
+learn: Helpful self-talk is kind and honest, like talking to a friend.
+play: match | Match each unhelpful thought to a helpful one | I'm so dumb=I didn't get it yet. I can ask for help; I always mess up=I made a mistake this time. I can learn from it; Nobody likes me=That was a hard day. My friends still care; I'll never be good at this=I'm getting better with practice
+check: mcq | Which is helpful self-talk? | I can learn from this* | I'm useless | I always fail
+check: tf | Talking to yourself like a friend can help. | true
+check: mcq | Self-talk is… | What you say to yourself in your head* | Talking on the phone | Singing
+home: Write one helpful thing to say to yourself next time something goes wrong.
+skill: selftalk
+
+@lesson 3.3 | Your support crew | 🧑‍🤝‍🧑 | garden
+hook: Who could you talk to if you had a really bad day?
+learn: Everyone needs people to lean on: family, friends, teachers, coaches.
+learn: Talking about a problem can make it feel smaller.
+learn: {nz:You can also call or text Kidsline or Youthline, or free call or text 1737, any time.~au:You can also call Kids Helpline on 1800 55 1800, any time.}
+play: tap | Tap the people who could be in your support crew | 👨‍👩‍👧:yes:Family members; 🧑‍🏫:yes:A teacher; 🧑‍🤝‍🧑:yes:A good friend; ⚽:yes:A coach; 🤖:no; 📞:yes:A free helpline
+check: mcq | Who could be in your support crew? | Family, friends and teachers* | Nobody | A stranger online
+check: tf | Talking about a problem can make it feel smaller. | true
+check: mcq | {nz:Which free number can you call or text to talk to someone?~au:What's the Kids Helpline number?} | {nz:1737~au:1800 55 1800}* | 123 | {nz:0800 PIZZA~au:1800 PIZZA}
+home: Make a list of your support crew and stick it somewhere you'll see it.
+skill: help
+
+@lesson 3.4 | Solve the problem | 🧩 | workshop
+hook: You've left your project to the last minute and it's due tomorrow. Panic, or plan?
+learn: Name the problem clearly.
+learn: Think of a few possible solutions, and pick the best one to try.
+learn: Try it, then check how it went. If it didn't work, try another.
+play: order | Solve a problem step by step | Name the problem; Think of possible solutions; Pick the best one; Try it; Check how it went
+check: mcq | What's the first step in solving a problem? | Name it clearly* | Panic | Ignore it
+check: tf | If one solution doesn't work, you can try another. | true
+check: mcq | You forgot your lunch. A good solution is… | Ask the office or a teacher for help* | Go hungry and say nothing | Take someone else's
+home: Use the five steps to solve a small problem this week.
+skill: problemsolving
+
+@lesson 3.5 | Learning from setbacks | 📈 | garden
+hook: You lost the chess tournament. Is that the end of the story?
+learn: A setback is something that doesn't go the way you hoped.
+learn: Ask: What went well? What could I do differently?
+learn: Many people who are great at something lost lots of times on the way.
+play: diff | Your plan before and after a setback. Tap what you changed. | Practise once a week; Play only easy opponents; Give up if I lose | Practise three times a week; Play stronger opponents too; Learn from each loss
+check: mcq | After a setback, a useful question is… | What could I do differently?* | Who can I blame? | Why bother?
+check: tf | Many skilled people lost lots of times on the way. | true
+check: mcq | What's a setback? | Something that doesn't go as hoped* | A chair | A win
+home: Think of a setback you've had and one thing it taught you.
+skill: resilience
+
+@lesson 3.6 | Your bounce-back kit | 🎒 | garden
+hook: What helps you feel better after a tough day?
+learn: A bounce-back kit is a list of things that help you recover.
+learn: Sleep, food, moving your body, time outside and fun all help your brain bounce back.
+learn: Pick a few that work for you, and use them when you need them.
+play: build | Build your bounce-back kit | A good night's sleep; A healthy snack; A walk or a run outside; Time with someone I like; Something fun, like drawing or music; Talking it through with someone I trust
+check: mcq | Which helps you bounce back? | Sleep and time outside* | Staying up all night | Skipping meals
+check: tf | Moving your body can help your mood. | true
+check: mcq | What's a bounce-back kit? | Things that help you recover after a tough day* | A first aid box | A toy box
+home: Write your own bounce-back kit and keep it in your room.
+skill: resilience
+
 @band makers
 @unit 1 | Stress | Recognising it and handling it
 @unit 2 | Peer pressure | Saying no and staying you
@@ -444,6 +588,78 @@ check: tf | Real friends like you for who you are. | true
 check: mcq | What's spending pressure? | Feeling you must buy things to fit in* | Paying with a card | A sale
 home: List three fun things to do with friends that cost less than $5.
 skill: spending
+
+@lesson 3.1 | Why you see that ad | 🎯 | online
+hook: You talk about sneakers once and now sneaker ads are everywhere. Coincidence?
+learn: Apps and websites track what you search, watch, like and buy.
+learn: Advertisers use that data to show ads to people most likely to buy.
+learn: Targeted ads feel personal, which makes them more persuasive.
+play: tap | Tap the things that can be used to target ads at you | 🔍:yes:Your searches; 👍:yes:What you like and follow; 📍:yes:Your location; 🛒:yes:What you've bought; 🌙:no; ⏱️:yes:How long you watch videos
+check: mcq | How do advertisers target ads? | Using data about what you do online* | Random luck | Reading your mind
+check: tf | Targeted ads can feel more persuasive because they seem personal. | true
+check: mcq | You can see fewer targeted ads by… | Changing ad and privacy settings* | Liking more ads | Searching more
+home: Open the ad settings in an app with a grown-up and see what it thinks you like.
+skill: advertising
+
+@lesson 3.2 | Hurry, hurry! | ⏰ | stall
+hook: "Only 3 left!" "Sale ends at midnight!" Why do you suddenly want it more?
+learn: Scarcity makes things feel more valuable. Urgency makes you decide fast.
+learn: Both push you to buy before you've had time to think.
+learn: Some "only 3 left" messages aren't even true.
+play: timing | The timer is ticking! Wait for the pause zone, then tap | Pause and think | Pause
+check: mcq | Why do ads say "only 3 left"? | To make you buy fast before thinking* | To be helpful | Because it's always true
+check: tf | Urgency tricks push you to decide quickly. | true
+check: mcq | A good response to "sale ends tonight"? | Pause and ask if you really need it* | Buy it straight away | Buy two
+home: Count how many "hurry" messages you see in ads today.
+skill: advertising
+
+@lesson 3.3 | Everyone's buying it | 👥 | online
+hook: "10,000 people bought this today!" Does that make it good?
+learn: Social proof means we copy what other people do, because it feels safe.
+learn: Ads use star ratings, "bestseller" badges and big numbers to show popularity.
+learn: Reviews can be fake or paid for. Look for detailed reviews from a range of people.
+play: scam | Trustworthy or a social proof trick? | A detailed review with pros and cons=real; 500 five-star reviews all posted on the same day=scam; "Everyone's talking about it!" with no details=scam; Reviews from a trusted independent tester=real; A review that says "Best product ever!!!" and nothing else=scam | Look for detailed, varied reviews and independent tests.
+check: mcq | What is social proof? | Copying what others seem to be doing* | Proof from a scientist | A receipt
+check: tf | Some online reviews are fake. | true
+check: mcq | Which review is most useful? | Detailed, with pros and cons* | "Best ever!!!" | One word
+home: Read five reviews of a product and decide which ones seem real.
+skill: advertising
+
+@lesson 3.4 | Influencer rules | 📱 | online
+hook: Your favourite creator raves about a drink. Were they paid?
+learn: Influencers are often paid in money, free products or both.
+learn: {nz:NZ's advertising codes say paid posts must be clearly labelled as ads.~au:Australian rules say paid posts must be clearly marked as advertising.}
+learn: Look for "ad", "sponsored", "paid partnership" or "gifted". If it's hidden, be extra careful.
+play: sort | Clearly labelled, Hidden or unclear | Paid partnership label at the top=Clearly labelled; Tiny #sp hidden in 30 hashtags=Hidden or unclear; "Ad: I'm working with this brand"=Clearly labelled; No label, but they got it free=Hidden or unclear; "Gifted" in the caption=Clearly labelled; A discount code with no ad label=Hidden or unclear | Labelled or hidden?
+check: mcq | What should a paid post show? | A clear label like "ad" or "sponsored"* | Nothing | A secret code
+check: tf | Influencers can be paid with free products. | true
+check: mcq | A creator gives a discount code but no ad label. That's… | A warning sign it might be a hidden ad* | Definitely not an ad | Illegal for you to see
+home: Find three influencer posts and check whether they're labelled.
+skill: advertising
+
+@lesson 3.5 | Dark patterns | 🕳️ | online
+hook: To cancel, you have to click through six screens and a button that says "No, I hate saving money." Why?
+learn: Dark patterns are designs that trick you into doing what the company wants.
+learn: Examples: pre-ticked boxes, hidden fees at checkout, hard-to-find cancel buttons, and guilt-trip buttons.
+learn: Slow down, read every screen, and untick boxes you didn't choose.
+play: tap | Tap the dark patterns | ☑️:yes:A box already ticked to sign you up; 💸:yes:Fees that only appear at the last step; 😢:yes:A "No thanks, I don't like deals" button; 🔍:yes:A cancel button that's hard to find; ✅:no; 📄:no
+check: mcq | What's a dark pattern? | A design that tricks you* | A spooky font | A night mode
+check: tf | Hidden fees at checkout are a dark pattern. | true
+check: mcq | What should you do at checkout? | Read every screen and untick boxes you didn't choose* | Click fast | Accept everything
+home: Check a sign-up page for pre-ticked boxes with a grown-up.
+skill: advertising
+
+@lesson 3.6 | Ads for unhealthy things | 🍟 | stage
+hook: Why are there rules about ads for junk food, alcohol and gambling?
+learn: Ads can shape what people want, especially young people.
+learn: Both countries have codes limiting junk food and gambling ads aimed at kids, and alcohol ads aimed at under-18s.
+learn: Sneaky ads still get through, like sponsorships, game tie-ins and influencers.
+play: debate | Should junk food ads be banned during kids' shows? | Yes, because ads shape what kids want to eat* | No, ads have no effect on anyone | Some say parents, not ad rules, should decide what kids eat, and that bans can be hard to enforce online.
+check: mcq | Why limit some ads aimed at kids? | Ads shape what young people want* | Kids don't watch TV | Ads are always true
+check: tf | Sponsorships can be a sneaky form of advertising. | true
+check: mcq | Which is a sneaky ad tactic? | A game tie-in with a fast-food brand* | A plain price list | A safety warning
+home: Spot a sponsorship or tie-in ad at a sports event or in a game.
+skill: advertising
 
 @band launchers
 @unit 1 | Wellbeing at work | Boundaries, breaks and burnout
@@ -596,3 +812,76 @@ check: tf | Asking for help with stress is a sign of weakness. | false | It's a 
 check: mcq | Someone is in danger right now. You call… | {nz:111~au:000}* | A friend's mum | Nobody
 home: Save {nz:1737~au:Lifeline, 13 11 14,} in your phone.
 skill: help
+
+@lesson 3.1 | Define the decision | 🧭 | townhall
+hook: "Uni or a job?" Is that really the only choice?
+learn: Start by saying clearly what you're deciding, and what matters most to you.
+learn: Big decisions often have more than two options. Try listing at least four.
+learn: Part-time study, an apprenticeship, a gap year with a plan, or working while you study could all be options.
+play: sort | Narrow framing, Wider framing | Uni or nothing=Narrow framing; Uni, apprenticeship, part-time study or working first=Wider framing; Move out now or never=Narrow framing; Move out now, in six months, or into a flat with friends=Wider framing; Quit or stay forever=Narrow framing; Stay, change roles or study on the side=Wider framing | Narrow or wide?
+check: mcq | Why list more than two options? | Better options often hide outside "this or that"* | It's confusing | It takes too long
+check: tf | Knowing what matters most to you helps you decide. | true
+check: mcq | A wider version of "Uni or a job?" is… | Uni, apprenticeship, part-time study or work first* | Uni or nothing | Job or nothing
+home: Take a decision you're facing and list four options.
+skill: decisions
+
+@lesson 3.2 | Weigh it up | ⚖️ | workshop
+hook: Two job offers. One pays more. One is closer to home and has better training. How do you compare?
+learn: List what matters to you, like pay, travel, learning and people.
+learn: Give each factor a weight, then score each option from 1 to 5.
+learn: Multiply and add. The scores don't decide for you, but they make your thinking clear.
+try: Pay matters ×3. Job A scores 4, so 12 points :: gap | Learning matters ×2. Job B scores 5, so _ points | 10
+play: slider | Job A: pay 5 (×3), travel 2 (×2), learning 3 (×2). What's its total score? | 0 | 40 | 25 | points | 0 | 1
+check: gap | Job B: pay 3 (×3), travel 5 (×2), learning 5 (×2). Total = _ | 29
+check: mcq | What does weighting do? | Shows which factors matter more to you* | Makes the maths harder | Picks for you
+check: tf | A scoring table helps make your thinking clear. | true
+home: Build a weighted pros-and-cons table for a choice you're facing.
+skill: decisions
+
+@lesson 3.3 | Brain traps | 🧠 | stage
+hook: You've spent two years on a course you hate. Quit or keep going because you've "already invested so much"?
+learn: The sunk cost trap: sticking with something because of what you've already put in, not what's ahead.
+learn: Confirmation bias: only noticing information that agrees with what you already think.
+learn: Fear of missing out: choosing because others are, not because it suits you.
+play: match | Match each thought to the brain trap | I've already paid for it, so I'll keep going=Sunk cost; I only read reviews that agree with me=Confirmation bias; All my friends are going, so I should too=Fear of missing out; I'll decide when I feel less nervous, forever=Putting it off
+check: mcq | What's the sunk cost trap? | Sticking with something because of what's already spent* | Saving money | A sinking ship
+check: tf | Confirmation bias means noticing information that agrees with you. | true
+check: mcq | A good question to beat sunk cost is… | Knowing what I know now, would I start this today?* | How much did I spend? | What will people say?
+home: Think of a time you fell into one of these traps.
+skill: decisions
+
+@lesson 3.4 | The 10/10/10 test | 🔟 | garden
+hook: You're about to quit your job in a rage. How will you feel about it later?
+learn: Ask: How will I feel about this in 10 minutes? In 10 months? In 10 years?
+learn: It helps separate strong feelings now from what matters long term.
+learn: Some things feel huge today and won't matter in a year. Some feel small now and matter a lot later.
+play: path | You're angry after a bad shift and want to quit on the spot. | Use 10/10/10, sleep on it, then decide calmly => good: You decide with a clear head, and can still leave properly if it's right. | Quit by text right now => bad: In 10 minutes you feel relief. In 10 months you may wish you'd left on better terms. | Say nothing and stew for months => ok: You avoided a rash move, but the problem is still there. Talk to someone about it.
+check: mcq | What does 10/10/10 help with? | Separating strong feelings now from what matters long term* | Counting to 10 | Timing a race
+check: tf | Some decisions feel huge today but won't matter in a year. | true
+check: mcq | Before a big emotional decision, it often helps to… | Sleep on it* | Act within 10 seconds | Ask a stranger
+home: Use 10/10/10 on a decision you're facing this week.
+skill: decisions
+
+@lesson 3.5 | Test it small | 🧪 | workshop
+hook: You think you'd love being a nurse. How can you find out before a three-year degree?
+learn: Many big choices can be tested small first.
+learn: Try work experience, volunteering, a short course, or talking to people who do it.
+learn: A small, cheap test can save you from a big, expensive mistake.
+play: sort | Small test, Big leap | A week of work experience=Small test; Signing up for a 3-year degree straight away=Big leap; A short online course=Small test; Moving cities for a job you've never tried=Big leap; Interviewing someone in the job=Small test; Volunteering at a hospital=Small test | Small test or big leap?
+check: mcq | Why test a choice small first? | It can save you from a big mistake* | It's always slower | It costs more
+check: tf | Talking to people who do a job is a small test. | true
+check: mcq | A small test of becoming a chef could be… | A few shifts in a café kitchen* | Opening a restaurant | Buying an oven
+home: Pick a career you're curious about and plan one small test.
+skill: decisions
+
+@lesson 3.6 | After you decide | ✅ | garden
+hook: You chose, and it didn't work out. Was it a bad decision?
+learn: A good decision can still have a bad result, because of luck or things you couldn't know.
+learn: Judge your decision by how you made it, not only by how it turned out.
+learn: Commit, check in after a while, and adjust if things change.
+play: debate | If a decision turns out badly, was it a bad decision? | Not always. Judge how you decided, not just the result* | Yes, always. Results are all that matter | Results do matter, and they can show you what to change next time.
+check: mcq | How should you judge a decision? | By how you made it, as well as the result* | Only by luck | Never think about it
+check: tf | A good decision can still turn out badly. | true
+check: mcq | After deciding, it helps to… | Commit, then check in and adjust* | Never think about it again | Change your mind daily
+home: Think of a decision that turned out badly. Was the way you decided good?
+skill: decisions

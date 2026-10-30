@@ -146,3 +146,75 @@ check: mcq | What matters most when judging if something is real? | Checking the
 home: Find an AI label on a social app or an image tool.
 skill: ai
 
+@lesson 3.1 | What counts as data? | 📊 | online
+hook: You haven't posted anything today. Have you still made data?
+learn: Data isn't just what you post. It's also what you search, watch, like and scroll past.
+learn: Your location, contacts, device and even how long you look at something can be collected.
+learn: Each piece seems small, but together they build a detailed picture of you.
+play: tap | Tap the things that can be collected as data | 🔍:yes:Your searches; ⏱️:yes:How long you watch each video; 📍:yes:Where you go; 📇:yes:Your contacts, if you allow it; 💭:no; 📱:yes:What phone you use
+check: mcq | Which is data an app might collect? | How long you watch each video* | Your private thoughts | Your dreams
+check: tf | Small pieces of data can build a detailed picture of you. | true
+check: mcq | You scroll without posting. Have you made data? | Yes* | No | Only on Sundays
+home: Ask a grown-up to show you the "download your data" option in an app.
+skill: data
+
+@lesson 3.2 | Profiles and brokers | 🗂️ | online
+hook: Companies you've never heard of may know your age, interests and where you shop. How?
+learn: Apps and websites share or sell data to advertisers and data brokers.
+learn: Brokers combine data from many sources to build profiles of people.
+learn: Profiles are used to target ads and, sometimes, to make decisions about you.
+play: build | How a data profile is built | You use apps and websites; They collect your data; Some share it with partners or brokers; Brokers combine it with other data; A profile of you is created; It's used to target ads at you
+check: mcq | What do data brokers do? | Combine data to build profiles of people* | Fix broken phones | Sell phones
+check: tf | Data can be shared with companies you've never heard of. | true
+check: mcq | What are data profiles often used for? | Targeting ads* | Nothing | Sending birthday cakes
+home: Read the "who we share data with" part of an app's privacy policy.
+skill: data
+
+@lesson 3.3 | Cookies and tracking | 🍪 | online
+hook: A website asks, "Accept all cookies?" What are you agreeing to?
+learn: Cookies are small files websites save to remember you.
+learn: Some are needed for the site to work. Others track you across sites for ads.
+learn: Choose "reject" or "necessary only" when you can.
+play: path | A pop-up asks you to accept all cookies. | Choose "necessary only" or "reject" => good: The site still works, and you're tracked less. | Click "accept all" without reading => ok: The site works, but you may be tracked across other sites for ads. | Close the website forever => bad: You don't need to leave. You can just choose fewer cookies.
+check: mcq | What are tracking cookies used for? | Following you across sites for ads* | Baking | Making the site load
+check: tf | You can often reject non-essential cookies. | true
+check: mcq | The most private cookie choice is usually… | Necessary only* | Accept all | Accept all twice
+home: Find a website's cookie settings and choose "necessary only".
+skill: data
+
+@lesson 3.4 | Data breaches | 🔓 | online
+hook: A company you use gets hacked. Your email and password are leaked. What now?
+learn: A data breach is when information is stolen or exposed.
+learn: Change your password on that site, and anywhere else you used the same one.
+learn: Turn on two-step login, and watch for scam emails that use your leaked details.
+play: order | You hear your data was in a breach. Put the steps in order. | Change your password on that site; Change it anywhere you reused it; Turn on two-step login; Watch for scam emails; Use a different password for every site
+check: mcq | Your password was leaked. First step? | Change it* | Ignore it | Post it online
+check: tf | Using the same password everywhere makes breaches worse. | true
+check: mcq | After a breach, why watch for scam emails? | Scammers may use your leaked details* | Breaches send gifts | There's no reason
+home: Check whether your email has been in a breach on a breach-checking site, with a grown-up.
+skill: security
+
+@lesson 3.5 | Your privacy rights | ⚖️ | townhall
+hook: Can you make a company tell you what data it holds about you?
+learn: {nz:Under NZ's Privacy Act 2020, you can ask any organisation for the personal information it holds about you, and ask for it to be corrected.~au:Under Australia's Privacy Act, you can ask many organisations for the personal information they hold about you, and ask for it to be corrected.}
+learn: Organisations should only collect what they need, keep it safe, and tell you why they're collecting it.
+learn: {nz:The Office of the Privacy Commissioner can help if an organisation won't.~au:The Office of the Australian Information Commissioner (OAIC) can help if an organisation won't.}
+play: sort | Your right, Not a right | Asking what data a company holds about you=Your right; Asking for wrong information to be fixed=Your right; Being told why data is collected=Your right; Seeing other people's data=Not a right; Getting paid for every post=Not a right | Is it a privacy right?
+check: mcq | What can you ask an organisation for? | The personal information it holds about you* | Someone else's data | Free products
+check: tf | You can ask for incorrect information about you to be corrected. | true
+check: mcq | {nz:Who can help with privacy complaints in NZ?~au:Who can help with privacy complaints in Australia?} | {nz:The Office of the Privacy Commissioner~au:The OAIC}* | A gaming site | Nobody
+home: Find the privacy contact on a company's website.
+skill: privacy
+
+@lesson 3.6 | Share less | 🤏 | online
+hook: A sign-up form asks for your phone, birthday, address and school. Do you have to fill it all in?
+learn: Often you only need to fill in the fields marked as required.
+learn: The less you share, the less can be leaked or misused.
+learn: Think twice before quizzes and "fun" apps that ask for lots of personal details.
+play: scam | Smart share or oversharing? | Only filling in required fields=real; A quiz asking your first pet and mum's maiden name=scam; Using a separate email for sign-ups=real; Giving your address to enter a "free prize" draw=scam; Leaving optional boxes blank=real | Quiz questions often match security questions. Share only what's needed.
+check: mcq | What should you fill in on sign-up forms? | Only the required fields* | Everything | Your password in every box
+check: tf | Some online quizzes collect answers to common security questions. | true
+check: mcq | Why share less data? | Less can be leaked or misused* | It's boring | It makes apps faster
+home: Look at a sign-up form and spot which fields are optional.
+skill: data
+

@@ -149,3 +149,75 @@ check: mcq | {nz:Where can you report scams in NZ?~au:Where can you report scams
 home: Save your bank's fraud phone number in your contacts.
 skill: scams
 
+@lesson 3.1 | Clicking "I agree" | ✅ | online
+hook: You tick "I agree to the terms" without reading. Did you just sign a contract?
+learn: Yes. Clicking "I agree" usually forms a binding contract, just like signing on paper.
+learn: Terms of service set the rules for using the app, what you can do, and what they can do.
+learn: You can't read every word of every app, but skim the key parts for big decisions.
+play: debate | Is it realistic to read every terms of service? | Not every word, but skim key sections for important services* | Yes, you must read every word of everything | Some argue terms are so long that nobody can truly agree to them, and that laws should protect people more.
+check: mcq | What does clicking "I agree" usually create? | A binding contract* | A friendship | Nothing
+check: tf | Terms of service set rules for using an app. | true
+check: mcq | Which terms are most worth skimming? | Ones for services you'll pay for or rely on* | None | Only games
+home: Skim the terms of one app you use and find one surprising rule.
+skill: contracts
+
+@lesson 3.2 | What's in the terms | 📃 | online
+hook: Terms of service can be 20,000 words. What are the parts that really matter?
+learn: Look for: what you pay, how to cancel, what they can do with your content, and when they can close your account.
+learn: Check how disputes are handled, and which country's laws apply.
+learn: Use search (Ctrl+F) for words like "cancel", "renew", "license" and "terminate".
+play: match | Match each section to what it tells you | Fees and billing=What you pay and when; Cancellation=How to stop and what it costs; Content licence=What they can do with your posts; Termination=When they can close your account; Governing law=Which country's laws apply
+check: mcq | What does the termination section tell you? | When they can close your account* | How to make friends | Nothing useful
+check: tf | Searching for key words is a quick way to check terms. | true
+check: mcq | Which word helps you find renewal rules? | Renew* | Banana | Happy
+home: Search an app's terms for "cancel" and read that part.
+skill: contracts
+
+@lesson 3.3 | Who owns your posts? | 📸 | online
+hook: You post a photo. Can the platform use it in an ad?
+learn: You usually keep ownership of what you post, but you give the platform a licence to use it.
+learn: That licence can be broad: to show, copy and share your content around the world.
+learn: Think about this before posting creative work you might want to sell later.
+play: sort | Usually true, Usually false | You keep ownership of your posts=Usually true; The platform gets a licence to use them=Usually true; Deleting a post always removes every copy=Usually false; The platform must pay you for every post=Usually false; Licences can be worldwide=Usually true | Usually true or false?
+check: mcq | When you post a photo, you usually… | Keep ownership but give the platform a licence* | Give away ownership | Lose your account
+check: tf | Deleting a post always removes every copy. | false | Copies, shares and backups can remain.
+check: mcq | Before posting creative work you might sell, you should… | Check the platform's licence terms* | Post it everywhere | Not think about it
+home: Find the "content" or "licence" part of a platform's terms.
+skill: contracts
+
+@lesson 3.4 | Bought or borrowed? | 🎬 | online
+hook: You "buy" a movie in an app. The app shuts down. Is your movie gone?
+learn: Many digital purchases, like movies, games and e-books, are licences to use, not things you own outright.
+learn: If an account is closed or a service ends, you may lose access.
+learn: Read the terms, back up what you can, and keep your account secure.
+play: path | Your favourite game platform announces it's shutting down next year. | Check the terms and see what you can download or move => good: You saved what you could and learned how digital licences work. | Assume you own the games forever => bad: When it shuts, you might lose access to games you paid for. | Spend more on new games there anyway => bad: You'd be paying for things you may soon lose.
+check: mcq | Many digital purchases are… | Licences to use, not outright ownership* | Owned forever, no matter what | Free
+check: tf | If a service shuts down, you can lose access to things you bought. | true
+check: mcq | Why keep your account secure? | Losing it can mean losing your purchases* | It doesn't matter | Accounts never get closed
+home: Check whether a digital purchase you have could be downloaded and kept.
+skill: contracts
+
+@lesson 3.5 | Your rights still apply | 🛡️ | townhall
+hook: The terms say "No refunds, ever." Is that the final word?
+learn: Consumer laws still protect you when you buy from businesses here, even online.
+learn: {nz:Under the Consumer Guarantees Act, digital content must be of acceptable quality and fit for purpose.~au:Under the Australian Consumer Law, digital products must be of acceptable quality and fit for purpose.}
+learn: A business can't use its terms to take away rights the law gives you.
+play: scam | Holds up or doesn't hold up? | We don't refund for change of mind=real; No refunds, even if the app never works=scam; You can cancel with 30 days' notice=real; By agreeing, you give up all your consumer rights=scam; Prices may change with notice=real | Terms can't remove the rights consumer law gives you.
+check: mcq | Can terms remove your consumer rights? | No* | Yes, always | Only if written in capitals
+check: tf | Digital products must be of acceptable quality. | true
+check: mcq | An app you paid for never works. Under consumer law you may be able to get… | A remedy, like a refund* | Nothing at all | A new phone
+home: Read the consumer rights page about digital content on {nz:consumerprotection.govt.nz~au:accc.gov.au}.
+skill: consumer
+
+@lesson 3.6 | Leaving a service | 🚪 | online
+hook: You want to quit a platform for good. What should you do before you hit delete?
+learn: Download your data, photos and anything you want to keep first.
+learn: Cancel any paid plans, and check you won't be charged again.
+learn: Delete the account properly. Just deleting the app often doesn't close it.
+play: order | Leave a platform properly. Put the steps in order. | Download your photos and data; Cancel any paid subscription; Check there are no more charges coming; Delete the account in its settings; Delete the app from your phone
+check: mcq | What should you do before deleting an account? | Download what you want to keep* | Nothing | Post a goodbye only
+check: tf | Deleting an app usually doesn't close the account. | true
+check: mcq | After cancelling a subscription, check… | That no more charges are coming* | Your horoscope | Nothing
+home: Find the "download your data" and "delete account" options in an app you use.
+skill: privacy
+

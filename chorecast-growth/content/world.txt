@@ -147,6 +147,79 @@ check: mcq | An ambulance with flashing lights is coming. You… | Stay out of t
 home: Make a thank-you card for a helper in your community.
 skill: community
 
+@lesson 3.1 | Chipping in | 🍕 | townhall
+hook: Your class wants a pizza party. It costs $60. How could everyone pay for it?
+learn: When a lot of people each chip in a little, they can pay for something big together.
+learn: 30 kids chipping in $2 each makes $60.
+learn: Tax works like that. Lots of people chip in to pay for things everyone shares.
+try: 10 kids × $2 = $20 :: gap | 20 kids × $3 = $_ | 60
+play: slider | A $50 class trip. 25 kids chip in the same amount. How much each? | 0 | 10 | 2 | $ | 0 | 1
+check: gap | 10 people × $5 = $_ | 50
+check: mcq | How can lots of people pay for something big? | Everyone chips in a little* | One kid pays for it all | Nobody pays
+check: tf | Tax is a bit like everyone chipping in. | true
+home: Ask a grown-up about something your family or friends chipped in for together.
+skill: tax
+
+@lesson 3.2 | Things we share | 🏞️ | townhall
+hook: Who owns the park down the road?
+learn: Some things belong to one family, like your house or your bike.
+learn: Some things are shared by everyone, like parks, roads and libraries.
+learn: Shared things are paid for by tax, and we all look after them.
+play: sort | Everyone shares it, One family owns it | The park=Everyone shares it; Your bike=One family owns it; The library=Everyone shares it; Your bedroom=One family owns it; The footpath=Everyone shares it; The family car=One family owns it | Shared or owned?
+check: mcq | Who shares the park? | Everyone* | Only one family | Nobody
+check: tf | Shared things are paid for by tax. | true
+check: mcq | How can you look after shared things? | Put rubbish in the bin* | Draw on the walls | Break the swings
+home: Name three shared things in your town that you use.
+skill: community
+
+@lesson 3.3 | Two ways to pay tax | 🧾 | stall
+hook: Grown-ups pay tax in two main ways. Can you guess them?
+learn: Some tax comes out of grown-ups' pay before they get it. That's income tax.
+learn: Some tax is added when people buy things. That's GST.
+learn: Businesses pay tax on their profits too.
+play: match | Match each kind of tax to when it's paid | Income tax=Taken out of pay; GST=Added when you buy things; Company tax=Paid by businesses on profits
+check: mcq | When is GST paid? | When people buy things* | On birthdays | Never
+check: tf | Income tax comes out of grown-ups' pay. | true
+check: mcq | Who pays tax on business profits? | Businesses* | Babies | Pets
+home: Find the GST on a receipt with a grown-up.
+skill: tax
+
+@lesson 3.4 | What tax pays for you | 🏫 | townhall
+hook: Your school, your doctor visits and the road to the beach. Who helps pay for them?
+learn: Tax helps pay for public schools, so families don't pay the full cost of teachers and classrooms.
+learn: It helps pay for hospitals, doctors and nurses.
+learn: It pays for roads, parks, police and firefighters too.
+play: tap | Tap the things tax helps pay for | 🏫:yes:Public schools; 🏥:yes:Hospitals; 🛣️:yes:Roads; 🚒:yes:Firefighters; 🎮:no; 🍭:no; 🌳:yes:Parks
+check: mcq | What does tax help pay for? | Schools and hospitals* | Your video games | Your lollies
+check: tf | Tax helps pay for public schools. | true
+check: mcq | Which is paid for by tax? | Fire stations* | Your birthday party | Your toys
+home: Walk around your neighbourhood and spot three things tax helped pay for.
+skill: tax
+
+@lesson 3.5 | Fair shares | ⚖️ | townhall
+hook: Should someone who earns lots pay the same tax as someone who earns a little?
+learn: In our countries, people who earn more pay more tax.
+learn: Kids and people who earn very little usually pay little or no income tax.
+learn: People argue about what's fair, and voters help decide.
+play: debate | Should people who earn more pay more tax? | Most people think yes, because they can afford to chip in more* | No, everyone should pay exactly the same dollars | Some people say everyone should pay the same share, so the system feels simple and equal.
+check: mcq | In our countries, who pays more income tax? | People who earn more* | Kids | Pets
+check: tf | People argue about what's fair in tax. | true
+check: mcq | Who helps decide tax rules? | Voters and the people they elect* | Supermarkets | Nobody
+home: Ask a grown-up what they think is fair about tax.
+skill: fairness
+
+@lesson 3.6 | Who decides? | 🗳️ | townhall
+hook: Tax money is spent on lots of things. Who decides where it goes?
+learn: Grown-ups vote to choose the government.
+learn: The government decides how to spend tax money, and shows its plan every year.
+learn: If people don't like the choices, they can vote for someone else next time.
+play: order | How tax money gets spent. Put it in order. | Grown-ups vote; A government is chosen; The government makes a spending plan; Tax money pays for schools, roads and hospitals; People vote again next time
+check: mcq | Who chooses the government? | Grown-up voters* | Kids at school | A lucky dip
+check: tf | If people don't like the government's choices, they can vote differently next time. | true
+check: mcq | What does the government do with tax money? | Spends it on things we share* | Keeps it in a box | Throws it away
+home: Ask a grown-up what they think tax should be spent on most.
+skill: civics
+
 @band builders
 @unit 1 | Tax and what it pays for | Income tax, GST and public services
 @unit 2 | Local councils | Rates, rubbish and roads
@@ -297,6 +370,78 @@ check: tf | Spending more on one thing can mean less for another. | true
 check: mcq | A storm damages roads. Where could the money come from? | An emergency fund* | Nowhere, ever | Printing money
 home: If you ran the council, what would you spend more on? Tell a grown-up why.
 skill: council
+
+@lesson 3.1 | Three branches | 🌳 | townhall
+hook: Who makes the laws, who runs the country, and who decides if a law was broken?
+learn: Parliament makes laws.
+learn: The government, led by the Prime Minister and ministers, runs things and puts laws into action.
+learn: Courts and judges decide what laws mean and whether they've been broken. Keeping these separate helps stop anyone having too much power.
+play: match | Match each branch to its job | Parliament=Makes the laws; The government=Runs the country and puts laws into action; The courts=Decide what laws mean and if they've been broken
+check: mcq | Who makes the laws? | Parliament* | The courts | The police
+check: tf | Keeping the branches separate helps stop anyone having too much power. | true
+check: mcq | Who decides if a law has been broken? | The courts* | Parliament | Your school
+home: Explain the three branches to someone at home using a sports example: rule-makers, coaches and referees.
+skill: civics
+
+@lesson 3.2 | Parliament | 🏛️ | townhall
+hook: How many people sit in Parliament, and where do they meet?
+learn: {nz:NZ's Parliament has one house, the House of Representatives, with about 120 MPs. It meets in Wellington.~au:Australia's federal Parliament has two houses: the House of Representatives, with 150 members, and the Senate, with 76 senators. It meets in Canberra.}
+learn: MPs debate ideas, ask the government questions and vote on new laws.
+learn: {nz:Some MPs represent an area, called an electorate. Others come from party lists.~au:Each member of the House represents an area, called an electorate. Senators represent a whole state or territory.}
+play: mcq | {nz:Where does NZ's Parliament meet?~au:Where does Australia's federal Parliament meet?} | {nz:Wellington~au:Canberra}* | {nz:Auckland~au:Sydney} | {nz:Christchurch~au:Melbourne}
+check: mcq | {nz:How many houses does NZ's Parliament have?~au:How many houses does Australia's federal Parliament have?} | {nz:One~au:Two}* | {nz:Two~au:One} | Five
+check: tf | MPs vote on new laws. | true
+check: mcq | What's an electorate? | An area an MP represents* | A type of electricity | A shop
+home: Find out who your local {nz:electorate MP~au:federal member} is.
+skill: civics
+
+@lesson 3.3 | Prime Minister and Cabinet | 👔 | townhall
+hook: The Prime Minister is in charge. But do they decide everything alone?
+learn: The Prime Minister leads the government. They're usually the leader of the biggest party, or group of parties, in Parliament.
+learn: Ministers look after areas like health, education and transport.
+learn: The most senior ministers form Cabinet, which makes the big decisions together.
+play: match | Match each minister to their area | Health Minister=Hospitals and doctors; Education Minister=Schools; Transport Minister=Roads, buses and trains; Finance Minister=Government money and the Budget
+check: mcq | Who leads the government? | The Prime Minister* | The mayor | A judge
+check: tf | Cabinet makes big decisions together. | true
+check: mcq | Which minister looks after schools? | The Education Minister* | The Transport Minister | The Health Minister
+home: Find out who the Prime Minister and the Education Minister are right now.
+skill: civics
+
+@lesson 3.4 | Head of state | 👑 | townhall
+hook: Who is {nz:New Zealand's~au:Australia's} head of state? It might surprise you.
+learn: Our head of state is the King, King Charles III. He lives in the United Kingdom.
+learn: The Governor-General represents the King here and signs laws after Parliament passes them.
+learn: The Prime Minister runs the government. The head of state's role is mostly ceremonial.
+play: mystery | They represent the King here; They sign laws after Parliament passes them; They live in {nz:Government House in Wellington~au:Government House in Canberra}; Their title has two words joined by a dash | The Governor-General* | The Prime Minister | The mayor
+check: mcq | Who represents the King here? | The Governor-General* | The Prime Minister | The police chief
+check: tf | The Governor-General signs laws after Parliament passes them. | true
+check: mcq | Who runs the government day to day? | The Prime Minister and ministers* | The King | The Governor-General
+home: Find out who the Governor-General is right now.
+skill: civics
+
+@lesson 3.5 | Having a say on laws | 📝 | townhall
+hook: Parliament is considering a new law about school lunches. Can you tell them what you think?
+learn: {nz:Bills usually go to a select committee, a small group of MPs who hear public submissions.~au:Parliamentary committees often ask the public for submissions on new laws.}
+learn: Anyone can make a submission, including young people.
+learn: Keep it short and clear: who you are, what you think and why.
+play: build | Build a submission on a school lunch law | Who I am: an 11-year-old student; What I think: I support free school lunches; Why: Hungry kids find it hard to learn; An example: Some kids in my class skip breakfast; Thank you for reading my submission
+check: mcq | Who can make a submission on a new law? | Anyone, including young people* | Only MPs | Only lawyers
+check: tf | Submissions should be short and clear. | true
+check: mcq | {nz:What is a select committee?~au:What do parliamentary committees often ask for?} | {nz:A small group of MPs who hear submissions~au:Public submissions}* | {nz:A sports team~au:Pizza} | {nz:A shop~au:Nothing}
+home: Find a bill being discussed in Parliament right now.
+skill: civics
+
+@lesson 3.6 | Youth voices | 🧒 | stage
+hook: Do young people get a voice in government before they can vote?
+learn: {nz:NZ holds a Youth Parliament every three years, where young people take on the role of MPs.~au:Many states run youth parliaments, where young people debate and vote on bills.}
+learn: Many councils have youth councils. Schools have student councils.
+learn: You can also write to your MP, sign petitions and make submissions.
+play: sort | A real way for young people to have a say, Not a real way | Joining a youth council=A real way for young people to have a say; Writing to your MP=A real way for young people to have a say; Making a submission=A real way for young people to have a say; Shouting at the TV=Not a real way; Signing a petition=A real way for young people to have a say; Ignoring the news=Not a real way | Real way or not?
+check: mcq | How can young people have a say? | Youth councils, writing to MPs and submissions* | Only by voting at 18 | They can't
+check: tf | Young people can write to their MP. | true
+check: mcq | {nz:How often does NZ hold a Youth Parliament?~au:What happens at a youth parliament?} | {nz:Every three years~au:Young people debate and vote on bills}* | {nz:Every 50 years~au:Nothing} | {nz:Never~au:Movies are shown}
+home: Find out if your council or school has a youth council or student council.
+skill: civics
 
 @band makers
 @unit 1 | Government and voting | How elections and Parliament work
@@ -449,6 +594,78 @@ check: mcq | More health spending, with the same taxes, means… | Less elsewher
 home: Read or watch a short news summary of this year's Budget.
 skill: civics
 
+@lesson 3.1 | Guarantees and warranties | 📜 | stall
+hook: The salesperson says your phone has a one-year warranty. What happens if it breaks after 18 months?
+learn: Consumer guarantees are automatic legal rights. They can last longer than a warranty, depending on what's reasonable for the product.
+learn: A manufacturer's warranty is an extra promise on top of your legal rights.
+learn: An expensive phone should last more than a year, so you may still have rights after the warranty ends.
+play: sort | Consumer guarantee, Manufacturer's warranty | Automatic, by law=Consumer guarantee; A written promise from the maker=Manufacturer's warranty; Lasts as long as is reasonable for the product=Consumer guarantee; Often a set time, like one year=Manufacturer's warranty; Can't be signed away by the shop=Consumer guarantee; Extra, on top of your rights=Manufacturer's warranty | Guarantee or warranty?
+check: mcq | What are consumer guarantees? | Automatic legal rights* | A paid add-on | A gift card
+check: tf | Your rights can last longer than a manufacturer's warranty. | true
+check: mcq | A $1,500 phone fails after 18 months. Its 1-year warranty is over. You might… | Still have rights under consumer law* | Have no rights at all | Need to buy a warranty first
+home: Find the warranty card or page for something your family bought.
+skill: consumer
+
+@lesson 3.2 | Buying online | 🛒 | online
+hook: You order sneakers from an overseas site. They never arrive. Now what?
+learn: Buying from businesses here gives you the strongest protection. Overseas sellers can be harder to chase.
+learn: Use a credit or debit card. If goods never arrive, your bank may be able to reverse the payment. That's called a chargeback.
+learn: Check reviews, the returns policy and contact details before you buy.
+play: path | Your online order never arrives, and the seller won't reply. | Contact your bank and ask about a chargeback => good: Your bank investigates and may return your money. | Leave an angry comment and do nothing else => bad: That doesn't get your money back. | Order again from the same site => bad: You could lose more money to the same seller.
+check: mcq | What is a chargeback? | Your bank reversing a card payment* | A free gift | A shipping fee
+check: tf | It's often harder to chase overseas sellers. | true
+check: mcq | Before buying from a new site, check… | Reviews, returns policy and contact details* | Only the photos | Nothing
+home: Look at an online shop's returns policy with a grown-up.
+skill: consumer
+
+@lesson 3.3 | Gift cards | 🎁 | stall
+hook: You find an old gift card in a drawer. Is it still good?
+learn: In both countries, most gift cards must now last at least 3 years.
+learn: The expiry date must be clearly shown on the card.
+learn: If a shop closes down, a gift card can become hard to use, so spend them sooner rather than later.
+play: mcq | You got a gift card this year. At the earliest, it usually can't expire until… | About 3 years from purchase* | Tomorrow | After 3 days
+check: tf | Gift cards should show their expiry date clearly. | true
+check: mcq | Why spend gift cards sooner? | The shop could close down* | They grow in value | They're too heavy
+check: mcq | Most gift cards must now last at least… | 3 years* | 3 weeks | 3 days
+home: Check the expiry dates on any gift cards in your home.
+skill: consumer
+
+@lesson 3.4 | Unfair sales tactics | 🚫 | townhall
+hook: An ad shows a TV for $99. In the shop, they say "Sold out, but this one's $899." Is that allowed?
+learn: Bait advertising, where an ad offers a deal a business can't reasonably supply, can break the law.
+learn: Pressure selling, false "was" prices and misleading claims are also banned.
+learn: {nz:The Fair Trading Act covers this. Report it to the Commerce Commission.~au:The Australian Consumer Law covers this. Report it to the ACCC or your state's fair trading office.}
+play: scam | Fair or unfair sales tactic? | A clear sale price for a limited time, with stock available=real; A huge deal that was never really in stock=scam; "Was $500, now $200" when it was never $500=scam; A salesperson who answers questions and lets you think=real; "Sign today or the price doubles tomorrow"=scam | Bait ads, fake "was" prices and pressure are unfair tactics.
+check: mcq | What is bait advertising? | Advertising a deal the business can't really supply* | A fishing ad | A real sale
+check: tf | Fake "was" prices can break the law. | true
+check: mcq | {nz:Where can you report unfair sales tactics in NZ?~au:Where can you report unfair sales tactics in Australia?} | {nz:The Commerce Commission~au:The ACCC}* | A radio station | Nowhere
+home: Look for a "was" price in an ad. How could you check it's real?
+skill: consumer
+
+@lesson 3.5 | Services count too | 🔧 | workshop
+hook: A plumber fixes your tap. It drips again the next day. Do you have rights?
+learn: Services must be done with reasonable care and skill.
+learn: They must be fit for the purpose you told them about, and done in a reasonable time.
+learn: If no price was agreed, the price must be reasonable.
+play: match | Match each service problem to the guarantee it breaks | The tap drips again the next day=Reasonable care and skill; A painter uses indoor paint on your outside fence, though you said outside=Fit for purpose; A two-hour job takes three weeks=Reasonable time; A huge bill when no price was agreed=Reasonable price
+check: mcq | Services must be done with… | Reasonable care and skill* | Magic | No rules at all
+check: tf | If no price was agreed, the price must be reasonable. | true
+check: mcq | A repair fails the next day. You can ask for… | The problem to be fixed, or a refund* | Nothing | A free car
+home: Ask a grown-up about a time a service wasn't done properly and what they did.
+skill: consumer
+
+@lesson 3.6 | Getting it sorted | 🧭 | townhall
+hook: The shop won't help with your faulty laptop. What's the next step?
+learn: Start with the seller. Stay calm, bring your receipt and say what you want.
+learn: If they won't help, put it in writing, with a date for them to reply.
+learn: {nz:Then get free advice from Consumer Protection or Citizens Advice, and take it to the Disputes Tribunal if needed.~au:Then contact your state's fair trading office, and take it to your state's tribunal if needed.}
+play: order | Getting a faulty product sorted. Put the steps in order. | Go back to the seller with your receipt; Explain the problem and what you want; If they won't help, write to them with a reply date; Get free advice; Take it to {nz:the Disputes Tribunal~au:your state's tribunal} if needed
+check: mcq | Where should you start with a faulty product? | The seller* | The tribunal | Social media
+check: tf | Putting a complaint in writing can help. | true
+check: mcq | {nz:Where can NZ consumers take unresolved disputes?~au:Where can Australian consumers take unresolved disputes?} | {nz:The Disputes Tribunal~au:Their state's tribunal}* | A radio show | A game forum
+home: Write a short, polite complaint letter for a pretend faulty product.
+skill: consumer
+
 @band launchers
 @unit 1 | Tax systems | {nz:IRD, PAYE and tax returns~au:The ATO, PAYG and tax returns}
 @unit 2 | Law for young adults | Contracts, tenancy and your rights
@@ -597,3 +814,75 @@ check: tf | Good evidence includes messages, receipts and photos. | true
 check: mcq | Before going to a tribunal, you should… | Try to sort it out directly* | Post about it online | Do nothing
 home: Look up how to file a claim on {nz:disputestribunal.govt.nz~au:your state's tribunal website}.
 skill: law
+
+@lesson 3.1 | Enrolling to vote | 📝 | townhall
+hook: You'll be 18 soon. What do you need to do before you can vote?
+learn: {nz:In NZ you can enrol from 17 and vote from 18. Citizens and permanent residents who have lived here for at least a year can vote.~au:In Australia you can enrol from 16 and vote from 18. Enrolling and voting are compulsory for citizens aged 18 and over.}
+learn: {nz:Enrol online at vote.nz.~au:Enrol online with the Australian Electoral Commission.}
+learn: Update your details whenever you move, so you vote in the right place.
+play: order | Get ready to vote. Put the steps in order. | Check you're eligible; Enrol online; Get confirmation; Update your address when you move; Vote at the next election
+check: mcq | {nz:At what age can you enrol in NZ?~au:At what age can you enrol in Australia?} | {nz:17~au:16}* | 21 | 12
+check: tf | You should update your enrolment when you move. | true
+check: mcq | {nz:Where can you enrol in NZ?~au:Who runs enrolment in Australia?} | {nz:vote.nz~au:The Australian Electoral Commission}* | A gaming site | Your bank
+home: Check how to enrol on {nz:vote.nz~au:aec.gov.au}.
+skill: voting
+
+@lesson 3.2 | How your vote counts | 🔢 | townhall
+hook: Does your vote actually change anything?
+learn: {nz:Under MMP, your party vote decides how many seats each party gets. A party needs 5% of the party vote, or to win an electorate, to get seats.~au:In the House of Representatives you number candidates in order. If your first choice is knocked out, your vote moves to your next choice.}
+learn: {nz:Your electorate vote chooses your local MP.~au:The Senate uses a proportional system, so smaller parties can win seats.}
+learn: Close results happen, so every vote counts.
+play: diff | Two election results. Tap what changed. | {nz:Party A 32%~au:Candidate A 45% first preferences}; {nz:Party B 30%~au:Candidate B 40% first preferences}; {nz:Party C 4%~au:Candidate C 15% first preferences} | {nz:Party A 32%~au:Candidate A 45% first preferences}; {nz:Party B 30%~au:Candidate B 52% after preferences}; {nz:Party C 5%~au:Candidate C knocked out}
+check: mcq | {nz:What does a party need to get seats under MMP?~au:What happens to your vote if your first choice is knocked out?} | {nz:5% of the party vote, or to win an electorate~au:It moves to your next choice}* | {nz:1 vote~au:It's thrown away} | {nz:Nothing~au:It's counted twice}
+check: tf | Close results happen. | true
+check: mcq | {nz:What does your electorate vote choose?~au:Which house uses a proportional system?} | {nz:Your local MP~au:The Senate}* | {nz:The King~au:The local council} | {nz:A sports team~au:Neither}
+home: Look up the results of the last election in your electorate.
+skill: voting
+
+@lesson 3.3 | Researching who to vote for | 🔍 | online
+hook: Your feed is full of election posts. How do you work out who to vote for?
+learn: Start with what matters to you, like housing, jobs, climate or health.
+learn: Read parties' and candidates' own policies, and check reliable news and fact-checkers.
+learn: Be wary of posts with no source, deepfakes and attack ads. Check before you share.
+play: sort | Reliable source, Treat with caution | A party's official policy page=Reliable source; An anonymous post with no source=Treat with caution; A candidates' debate on a major channel=Reliable source; A shocking video of a candidate that no news outlet has reported=Treat with caution; An independent fact-check=Reliable source; A meme about a politician=Treat with caution | Reliable or treat with caution?
+check: mcq | Where should you check a party's policy? | Their official policy page* | A random meme | An anonymous post
+check: tf | Deepfakes can be used in elections. | true
+check: mcq | A good first step in choosing who to vote for is… | Working out what matters to you* | Voting for the best poster | Copying a friend
+home: Pick an issue you care about and compare two parties' policies on it.
+skill: voting
+
+@lesson 3.4 | Voting day | 🗓️ | townhall
+hook: It's election day. What actually happens when you vote?
+learn: {nz:You can vote early in the two weeks before election day, or on the day. Bring your EasyVote card if you have one, but you don't need it.~au:You can vote early, by post if you're eligible, or on election day. You'll be asked your name and address.}
+learn: You vote in private. Nobody can see how you voted, and nobody can make you tell them.
+learn: {nz:If you can't vote where you're enrolled, you can cast a special vote.~au:Voting is compulsory. If you don't vote without a valid reason, you can be fined.}
+play: build | Build your voting day plan | Check where you can vote; Pick a time to go; Bring ID or your voting card if you have one; Get your ballot papers; Fill them in privately; Put them in the ballot box
+check: mcq | Can anyone see how you voted? | No, voting is private* | Yes, everyone | Only your boss
+check: tf | You can vote before election day. | true
+check: mcq | {nz:What can you do if you can't vote where you're enrolled?~au:What can happen if you don't vote without a valid reason?} | {nz:Cast a special vote~au:You can be fined}* | {nz:Nothing~au:Nothing} | {nz:Vote twice~au:You get a prize}
+home: Ask a grown-up what voting was like the first time they did it.
+skill: voting
+
+@lesson 3.5 | Referendums | ✅ | townhall
+hook: Sometimes the whole country votes on one question. What's that called?
+learn: A referendum is a vote by everyone on a single question.
+learn: {nz:In 2020, New Zealanders voted in two referendums: on end-of-life choice, which passed, and on legalising cannabis, which didn't.~au:Australia's Constitution can only be changed by a referendum. It needs a majority of voters nationally and a majority in at least four of six states.}
+learn: {nz:Referendums in NZ can be binding or just advisory, depending on the law that sets them up.~au:Most referendums in Australia have failed. The 2023 referendum on a First Nations Voice to Parliament did not pass.}
+play: mcq | {nz:Which 2020 NZ referendum passed?~au:What does an Australian referendum need to pass?} | {nz:End-of-life choice~au:A national majority and a majority in at least four states}* | {nz:Both of them~au:Just one more yes than no anywhere} | {nz:Neither~au:The Prime Minister's OK only}
+check: tf | A referendum asks everyone to vote on one question. | true
+check: mcq | What is a referendum? | A vote by everyone on one question* | An election for mayor | A court case
+check: mcq | {nz:What were NZ's two 2020 referendums about?~au:What was the 2023 referendum about?} | {nz:End-of-life choice and cannabis~au:A First Nations Voice to Parliament}* | {nz:Flags and sport~au:Daylight saving} | {nz:School holidays~au:A new flag}
+home: Ask a grown-up how they voted in a referendum, if they're happy to share.
+skill: civics
+
+@lesson 3.6 | Beyond election day | 🌱 | townhall
+hook: Elections happen every few years. Is voting the only way to have a say?
+learn: Local elections choose your council, which affects rates, transport and parks.
+learn: Between elections, you can make submissions, contact your MP, join a group or sign petitions.
+learn: Talking with friends and family about issues matters too. Democracy works best when people take part.
+play: sort | A way to take part, Not really taking part | Voting in local elections=A way to take part; Making a submission on a bill=A way to take part; Emailing your MP=A way to take part; Complaining but never voting=Not really taking part; Joining a community group=A way to take part; Sharing unchecked rumours=Not really taking part | A way to take part or not?
+check: mcq | What do local elections choose? | Your council* | The Prime Minister | The King
+check: tf | You can contact your MP between elections. | true
+check: mcq | Which is a way to take part between elections? | Making a submission* | Ignoring everything | Sharing unchecked rumours
+home: Find your MP's contact details and one issue you'd raise with them.
+skill: civics

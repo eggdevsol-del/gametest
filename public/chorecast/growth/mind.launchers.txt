@@ -150,3 +150,76 @@ check: mcq | Someone is in danger right now. You call… | {nz:111~au:000}* | A 
 home: Save {nz:1737~au:Lifeline, 13 11 14,} in your phone.
 skill: help
 
+@lesson 3.1 | Define the decision | 🧭 | townhall
+hook: "Uni or a job?" Is that really the only choice?
+learn: Start by saying clearly what you're deciding, and what matters most to you.
+learn: Big decisions often have more than two options. Try listing at least four.
+learn: Part-time study, an apprenticeship, a gap year with a plan, or working while you study could all be options.
+play: sort | Narrow framing, Wider framing | Uni or nothing=Narrow framing; Uni, apprenticeship, part-time study or working first=Wider framing; Move out now or never=Narrow framing; Move out now, in six months, or into a flat with friends=Wider framing; Quit or stay forever=Narrow framing; Stay, change roles or study on the side=Wider framing | Narrow or wide?
+check: mcq | Why list more than two options? | Better options often hide outside "this or that"* | It's confusing | It takes too long
+check: tf | Knowing what matters most to you helps you decide. | true
+check: mcq | A wider version of "Uni or a job?" is… | Uni, apprenticeship, part-time study or work first* | Uni or nothing | Job or nothing
+home: Take a decision you're facing and list four options.
+skill: decisions
+
+@lesson 3.2 | Weigh it up | ⚖️ | workshop
+hook: Two job offers. One pays more. One is closer to home and has better training. How do you compare?
+learn: List what matters to you, like pay, travel, learning and people.
+learn: Give each factor a weight, then score each option from 1 to 5.
+learn: Multiply and add. The scores don't decide for you, but they make your thinking clear.
+try: Pay matters ×3. Job A scores 4, so 12 points :: gap | Learning matters ×2. Job B scores 5, so _ points | 10
+play: slider | Job A: pay 5 (×3), travel 2 (×2), learning 3 (×2). What's its total score? | 0 | 40 | 25 | points | 0 | 1
+check: gap | Job B: pay 3 (×3), travel 5 (×2), learning 5 (×2). Total = _ | 29
+check: mcq | What does weighting do? | Shows which factors matter more to you* | Makes the maths harder | Picks for you
+check: tf | A scoring table helps make your thinking clear. | true
+home: Build a weighted pros-and-cons table for a choice you're facing.
+skill: decisions
+
+@lesson 3.3 | Brain traps | 🧠 | stage
+hook: You've spent two years on a course you hate. Quit or keep going because you've "already invested so much"?
+learn: The sunk cost trap: sticking with something because of what you've already put in, not what's ahead.
+learn: Confirmation bias: only noticing information that agrees with what you already think.
+learn: Fear of missing out: choosing because others are, not because it suits you.
+play: match | Match each thought to the brain trap | I've already paid for it, so I'll keep going=Sunk cost; I only read reviews that agree with me=Confirmation bias; All my friends are going, so I should too=Fear of missing out; I'll decide when I feel less nervous, forever=Putting it off
+check: mcq | What's the sunk cost trap? | Sticking with something because of what's already spent* | Saving money | A sinking ship
+check: tf | Confirmation bias means noticing information that agrees with you. | true
+check: mcq | A good question to beat sunk cost is… | Knowing what I know now, would I start this today?* | How much did I spend? | What will people say?
+home: Think of a time you fell into one of these traps.
+skill: decisions
+
+@lesson 3.4 | The 10/10/10 test | 🔟 | garden
+hook: You're about to quit your job in a rage. How will you feel about it later?
+learn: Ask: How will I feel about this in 10 minutes? In 10 months? In 10 years?
+learn: It helps separate strong feelings now from what matters long term.
+learn: Some things feel huge today and won't matter in a year. Some feel small now and matter a lot later.
+play: path | You're angry after a bad shift and want to quit on the spot. | Use 10/10/10, sleep on it, then decide calmly => good: You decide with a clear head, and can still leave properly if it's right. | Quit by text right now => bad: In 10 minutes you feel relief. In 10 months you may wish you'd left on better terms. | Say nothing and stew for months => ok: You avoided a rash move, but the problem is still there. Talk to someone about it.
+check: mcq | What does 10/10/10 help with? | Separating strong feelings now from what matters long term* | Counting to 10 | Timing a race
+check: tf | Some decisions feel huge today but won't matter in a year. | true
+check: mcq | Before a big emotional decision, it often helps to… | Sleep on it* | Act within 10 seconds | Ask a stranger
+home: Use 10/10/10 on a decision you're facing this week.
+skill: decisions
+
+@lesson 3.5 | Test it small | 🧪 | workshop
+hook: You think you'd love being a nurse. How can you find out before a three-year degree?
+learn: Many big choices can be tested small first.
+learn: Try work experience, volunteering, a short course, or talking to people who do it.
+learn: A small, cheap test can save you from a big, expensive mistake.
+play: sort | Small test, Big leap | A week of work experience=Small test; Signing up for a 3-year degree straight away=Big leap; A short online course=Small test; Moving cities for a job you've never tried=Big leap; Interviewing someone in the job=Small test; Volunteering at a hospital=Small test | Small test or big leap?
+check: mcq | Why test a choice small first? | It can save you from a big mistake* | It's always slower | It costs more
+check: tf | Talking to people who do a job is a small test. | true
+check: mcq | A small test of becoming a chef could be… | A few shifts in a café kitchen* | Opening a restaurant | Buying an oven
+home: Pick a career you're curious about and plan one small test.
+skill: decisions
+
+@lesson 3.6 | After you decide | ✅ | garden
+hook: You chose, and it didn't work out. Was it a bad decision?
+learn: A good decision can still have a bad result, because of luck or things you couldn't know.
+learn: Judge your decision by how you made it, not only by how it turned out.
+learn: Commit, check in after a while, and adjust if things change.
+play: debate | If a decision turns out badly, was it a bad decision? | Not always. Judge how you decided, not just the result* | Yes, always. Results are all that matter | Results do matter, and they can show you what to change next time.
+check: mcq | How should you judge a decision? | By how you made it, as well as the result* | Only by luck | Never think about it
+check: tf | A good decision can still turn out badly. | true
+check: mcq | After deciding, it helps to… | Commit, then check in and adjust* | Never think about it again | Change your mind daily
+home: Think of a decision that turned out badly. Was the way you decided good?
+skill: decisions
+
