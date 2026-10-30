@@ -176,7 +176,7 @@ skill: selftalk
 hook: Who could you talk to if you had a really bad day?
 learn: Everyone needs people to lean on: family, friends, teachers, coaches.
 learn: Talking about a problem can make it feel smaller.
-learn: {nz:You can also call or text Kidsline or Youthline, or free call or text 1737, any time.~au:You can also call Kids Helpline on 1800 55 1800, any time.}
+learn: {nz:You can also call Kidsline or Youthline, or free call or text 1737 any time.~au:You can also call Kids Helpline on 1800 55 1800, any time.}
 play: tap | Tap the people who could be in your support crew | 👨‍👩‍👧:yes:Family members; 🧑‍🏫:yes:A teacher; 🧑‍🤝‍🧑:yes:A good friend; ⚽:yes:A coach; 🤖:no; 📞:yes:A free helpline
 check: mcq | Who could be in your support crew? | Family, friends and teachers* | Nobody | A stranger online
 check: tf | Talking about a problem can make it feel smaller. | true

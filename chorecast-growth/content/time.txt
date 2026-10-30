@@ -2177,7 +2177,7 @@ skill: payments
 hook: If shops stop taking cash, who struggles most?
 learn: Some people rely on cash: older people, people without a bank account or smartphone, and people who budget with cash in envelopes.
 learn: Cash still works in a power cut, or when networks go down.
-learn: {nz:New Zealand has no law making shops accept cash, but the Reserve Bank is working with banks to keep cash services available.~au:Since 1 January 2026, most supermarkets and service stations must accept cash for in-person purchases of $500 or less.}
+learn: {nz:New Zealand has no law making shops accept cash, but the Reserve Bank has proposed rules to make banks keep cash services close to where people live.~au:Since 1 January 2026, most supermarkets and service stations must accept cash for in-person purchases of $500 or less.}
 play: tap | Tap the people or moments where cash still matters | 🧓:yes:Older people who prefer cash; 📵:yes:People without a smartphone; ⚡:yes:Power cuts and network outages; ✉️:yes:People budgeting with cash envelopes; 🚀:no; 🎮:no
 check: mcq | Why can cash matter in an emergency? | It works when power and networks are down* | It's lighter than a phone | It earns interest
 check: tf | {nz:New Zealand has no law making shops accept cash.~au:Since 2026, most Australian supermarkets and service stations must accept cash for purchases up to $500.} | true

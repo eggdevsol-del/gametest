@@ -1696,7 +1696,7 @@ skill: payslip
 hook: Uni, an apprenticeship or a job straight away. Which is right?
 learn: Different paths suit different people and careers.
 learn: {nz:Apprenticeships let you earn while you train. Many NZ trades are short of workers.~au:Apprenticeships and TAFE courses let you earn and train. Many trades are in demand.}
-learn: {nz:Fees Free now covers the final year of study or training for people who are eligible, and StudyLink offers student loans. Check the current rules.~au:HECS-HELP loans can cover uni fees. You repay through tax once you earn above a threshold.}
+learn: {nz:Final-year Fees Free ends with people who finish in 2026, so check the current rules. StudyLink offers student loans.~au:HECS-HELP loans can cover uni fees. You repay through tax once you earn above a threshold.}
 play: debate | Is university always the best path after school? | No. It depends on the career and the person* | Yes. Everyone should go to university | University suits many careers, like medicine and law, and can open doors. It's just not the only good path.
 check: mcq | What's a perk of an apprenticeship? | You earn while you learn* | No work needed | It's free money forever
 check: tf | There's only one right path after school. | false
@@ -1769,7 +1769,7 @@ skill: study
 hook: Fees are just the start. What else does studying cost?
 learn: Study costs include fees, plus living costs like rent, food, transport and a laptop.
 learn: There's also the money you aren't earning while you study full-time.
-learn: {nz:StudyLink runs student loans and allowances. Fees Free can cover your final year if you're eligible.~au:HECS-HELP can cover uni fees. Centrelink payments like Youth Allowance may help with living costs if you're eligible.}
+learn: {nz:StudyLink runs student loans and allowances. Final-year Fees Free ends after 2026, so check what help is on offer when you start.~au:HECS-HELP can cover uni fees. Centrelink payments like Youth Allowance may help with living costs if you're eligible.}
 play: budget | You're a full-time student with $450 a week from a part-time job and support payments. Plan it. | 450 | Rent=220; Food=90; Transport=30; Phone and internet=20; Savings=0; Fun=0 | Textbook:60
 check: mcq | Which is a hidden cost of full-time study? | Money you're not earning* | Free lunches | Holidays
 check: tf | Living costs can add up to more than fees. | true
@@ -1793,12 +1793,12 @@ skill: careers
 hook: Two courses look the same online. How do you choose?
 learn: Look at what graduates go on to do, how much hands-on learning there is, and the total cost.
 learn: Go to open days, talk to current students and ask about support services.
-learn: {nz:careers.govt.nz has free tools to explore jobs and courses.~au:yourcareer.gov.au and myfuture have free tools to explore jobs and courses.}
+learn: {nz:Tahatū (tahatu.govt.nz) has free tools to explore jobs and courses.~au:yourcareer.gov.au and myfuture have free tools to explore jobs and courses.}
 play: sort | Good reason, Weak reason | It leads to jobs I'm interested in=Good reason; My best friend is going there=Weak reason; It has the hands-on work I like=Good reason; The campus has nice cafés=Weak reason; I can afford it=Good reason; It looked cool in one video=Weak reason | Good reasons to pick a course?
 check: mcq | A useful question at an open day? | What do graduates go on to do?* | Where's the best café? | Who's the most famous student?
 check: tf | Following your friends is a strong reason to pick a course. | false
-check: mcq | Where can you find free career and course tools? | {nz:careers.govt.nz~au:yourcareer.gov.au and myfuture}* | A random forum | An ad on social media
-home: Use {nz:careers.govt.nz~au:yourcareer.gov.au} to explore one job you'd like.
+check: mcq | Where can you find free career and course tools? | {nz:Tahatū~au:yourcareer.gov.au and myfuture}* | A random forum | An ad on social media
+home: Use {nz:tahatu.govt.nz~au:yourcareer.gov.au} to explore one job you'd like.
 skill: careers
 
 @lesson 2.6 | Changing your mind | 🔄 | garden
