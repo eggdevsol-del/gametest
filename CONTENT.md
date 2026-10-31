@@ -18,7 +18,7 @@ The build splits the files into `public/chorecast/growth/`, one file per tree an
 
 ## Trees, bands and units
 
-One tree is live: `money` (Money Sense). The other 11 (`invest`, `work`, `make`, `give`, `maths`, `words`, `time`, `home`, `mind`, `online`, `world`), `moments.txt`, `cases.txt` and the full 8-unit Money Sense (`money.full.txt`) are in `parked/`. To bring one back, read every lesson in it first, trim it to the shape below, move it up into `content/` and add it to `LIVE`.
+Two trees are live: `money` (Money Sense) and `character` (Good Character). The other 11 (`invest`, `work`, `make`, `give`, `maths`, `words`, `time`, `home`, `mind`, `online`, `world`), `moments.txt`, `cases.txt` and the full 8-unit Money Sense (`money.full.txt`) are in `parked/`. To bring one back, read every lesson in it first, trim it to the shape below, move it up into `content/` and add it to `LIVE`.
 
 A kid's band comes from their age. A grown-up can shift it one band up or down.
 
@@ -30,13 +30,15 @@ A kid's band comes from their age. A grown-up can shift it one band up or down.
 
 Kids 16 and over use the Makers band. Chorecast isn't made for older teens.
 
-Each band has 8 units of 6 lessons, so a tree is 144 lessons. The checker fails if a band has a different shape. A tree still being reviewed is cut to fewer lessons in its review file, and only goes live in full. Lessons in a unit open one at a time, and a unit opens once every lesson in the unit before it is passed. Each finished unit also has a unit challenge.
+Money Sense has 8 units of 6 lessons in each band (144 lessons). A newer tree starts with 4 units of 4 (48 lessons), like Good Character. The checker fails if a band has a different shape (`SHAPE` in `scripts/check-growth.mjs`). A tree still being reviewed is cut to fewer lessons in its review file, and only goes live in full. Lessons in a unit open one at a time, and a unit opens once every lesson in the unit before it is passed. Each finished unit also has a unit challenge.
 
 ## What lessons cover
 
 Keep every lesson to things a kid can practise in Chorecast: earning from chores, the four jars, payday, the Saving goal, spending, saving and spotting a bad deal or a scam. Where it fits, the `home:` task is something to do in the app that week.
 
 Lessons never cover sex or consent, alcohol, drugs or vaping, mental health crises, body image, politics or law, Treaty or Indigenous history, religion, or real people and brands. Those belong with families and schools.
+
+Good Character teaches gratitude, attitude, honesty, respect, body safety, online safety and screens, from a family's point of view. Body safety stays protective and plain: private parts are the parts a swimsuit covers, nobody touches them, asks to see them or sends pictures, and kids say no, get away and tell Mum or Dad, even about a \"secret\". Anything about relationships, sex, religion or politics is left to parents, so the `home:` task sends kids to ask their parents what their family believes. Screen science sticks to what is well established (late screens hurt sleep, apps are built to hold attention, the brain's planning and self-control keep developing into the twenties) and gives no statistics.
 
 No facts that go out of date: no tax rates, wages, thresholds, laws, phone numbers, websites or recent dates. The one exception is Money Sense's Makers band, which a grown-up asked to keep in full: its lessons on bank accounts, your first pay, scams and worry use {nz:…~au:…} lines with tax numbers, KiwiSaver and super rules, helpline numbers and websites, and need checking each year. Use made-up round prices ("a $20 game") so nothing needs fact-checking and both countries read the same.
 

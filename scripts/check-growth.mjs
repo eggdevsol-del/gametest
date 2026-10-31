@@ -1,6 +1,6 @@
 // Checks every Character Growth content pack with the app's own parser, so a typo in a lesson file is caught
 // before kids see a broken question. Run after editing chorecast-growth/content: node scripts/check-growth.mjs
-// Each band has UNITS units of PER_UNIT lessons (see CONTENT.md).
+// Each band has the units and lessons per unit SHAPE gives for its tree (see CONTENT.md).
 import { readFile, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
@@ -15,7 +15,8 @@ const ctx = { window: { Chorecast: C }, document: { createElement: el, head: el(
 ctx.window.window = ctx.window; vm.createContext(ctx); vm.runInContext(code, ctx);
 const { parsePack, parseMoments, parseCases } = ctx.window.Growth._debug;
 
-const UNITS = 8, PER_UNIT = 6;
+// Units and lessons per band, per tree: Money Sense is in full, a newer tree starts at 4 x 4
+const SHAPE = { money: [8, 6] }, SHAPE_NEW = [4, 4];
 const GENS = ['change', 'add', 'percent', 'round', 'scale', 'gst', 'time', 'compound', 'unit', 'split'];
 const problems = [];
 function checkItem(it, where) {
@@ -47,7 +48,7 @@ function checkItem(it, where) {
 const dir = path.join(root, 'public', 'chorecast', 'growth');
 let lessons = 0, items = 0;
 for (const f of (await readdir(dir)).filter(f => /^\w+\.\w+\.txt$/.test(f))) {
-  const [tree, band] = f.split('.'), pack = parsePack(await readFile(path.join(dir, f), 'utf8'), tree, band);
+  const [tree, band] = f.split('.'), pack = parsePack(await readFile(path.join(dir, f), 'utf8'), tree, band), [UNITS, PER_UNIT] = SHAPE[tree] || SHAPE_NEW;
   if (pack.units.length !== UNITS) problems.push(`${f}: has ${pack.units.length} units, expected ${UNITS}`);
   pack.units.forEach(u => { if (u.lessons.length !== PER_UNIT) problems.push(`${f}: unit ${u.n} has ${u.lessons.length} lessons, expected ${PER_UNIT}`); });
   for (const u of pack.units) for (const l of u.lessons) {

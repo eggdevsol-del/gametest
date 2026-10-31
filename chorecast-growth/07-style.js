@@ -58,6 +58,8 @@ body.gw-open{overflow:hidden}
 .gw-tile b{display:block;font:900 15px/1.2 var(--f-round)}
 .gw-tile small{font:700 12px var(--f-round);opacity:.85}
 .gw-one{display:flex;align-items:center;gap:16px;width:100%;max-width:520px;margin:0 auto 24px;padding:16px;border-radius:24px;text-align:left;color:#fff;background:linear-gradient(135deg,color-mix(in srgb,var(--th) 70%,#fff 10%),var(--th));box-shadow:0 14px 30px -14px rgba(0,0,0,.55),inset 0 -5px 0 rgba(0,0,0,.14)}
+.gw-ones{display:grid;gap:12px;margin-bottom:24px}
+.gw-ones .gw-one{margin-bottom:0}
 .gw-one:active{transform:scale(.98)}
 .gw-one.open{animation:starPulse 2.4s ease-in-out infinite}
 .g1-ic{width:72px;height:72px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:38px;background:rgba(255,255,255,.25)}

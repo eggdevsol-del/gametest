@@ -11,9 +11,10 @@ const S = () => C.S();
 
 /* ---------- Catalogue ----------
    Only LIVE trees reach kids. The rest are parked in chorecast-growth/content/parked until a grown-up has read them. */
-const LIVE = ['money'];
+const LIVE = ['money', 'character'];
 const ALL_TREES = [
   { id: 'money', name: 'Money Sense', icon: '💰', hue: '#30C25A', title: 'Budget Boss', scene: 'bank', blurb: 'Earning, spending, saving and budgeting' },
+  { id: 'character', name: 'Good Character', icon: '🌟', hue: '#E8A317', title: 'Good Egg', scene: 'home', blurb: 'Gratitude, attitude, boundaries and screens' },
   { id: 'invest', name: 'Investor School', icon: '📈', hue: '#18B597', title: 'Patient Investor', scene: 'shares', blurb: 'How money grows, risk and patience' },
   { id: 'work', name: 'Work and Careers', icon: '🧰', hue: '#FF9F0A', title: 'Hard Worker', scene: 'workshop', blurb: 'Doing a job well, jobs and workplaces' },
   { id: 'make', name: 'Make and Sell', icon: '🍋', hue: '#FF6B6B', title: 'Market Maker', scene: 'stall', blurb: 'Costs, prices, customers and profit' },

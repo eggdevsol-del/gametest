@@ -11,9 +11,10 @@ const S = () => C.S();
 
 /* ---------- Catalogue ----------
    Only LIVE trees reach kids. The rest are parked in chorecast-growth/content/parked until a grown-up has read them. */
-const LIVE = ['money'];
+const LIVE = ['money', 'character'];
 const ALL_TREES = [
   { id: 'money', name: 'Money Sense', icon: '💰', hue: '#30C25A', title: 'Budget Boss', scene: 'bank', blurb: 'Earning, spending, saving and budgeting' },
+  { id: 'character', name: 'Good Character', icon: '🌟', hue: '#E8A317', title: 'Good Egg', scene: 'home', blurb: 'Gratitude, attitude, boundaries and screens' },
   { id: 'invest', name: 'Investor School', icon: '📈', hue: '#18B597', title: 'Patient Investor', scene: 'shares', blurb: 'How money grows, risk and patience' },
   { id: 'work', name: 'Work and Careers', icon: '🧰', hue: '#FF9F0A', title: 'Hard Worker', scene: 'workshop', blurb: 'Doing a job well, jobs and workplaces' },
   { id: 'make', name: 'Make and Sell', icon: '🍋', hue: '#FF6B6B', title: 'Market Maker', scene: 'stall', blurb: 'Costs, prices, customers and profit' },
@@ -865,7 +866,7 @@ function viewHub(kid) {
         ${story && !storyDone ? tile('story', '📰', 'This week in the market', `+${XP.story} XP`) : ''}
         ${C.kidsList().length > 1 ? tile('crewPick', '👯', 'Crew quiz', 'Answer side by side with a sibling') : ''}
       </div>
-      <h2 class="gw-h2">${treesOn().length === 1 ? 'Your plant' : 'Skill trees'}</h2>
+      <h2 class="gw-h2">${treesOn().length <= 3 ? 'Your Learning Tree' : 'Skill trees'}</h2>
       ${constellation(kid)}
       ${casesFor(kid).length ? `<h2 class="gw-h2">Real stories</h2><div class="gw-cases">${casesFor(kid).slice(0, 12).map(cs => `<button class="gw-case ${(prog(kid).cases || {})[cs.id] ? 'done' : ''}" data-g="case" data-id="${cs.id}" style="--th:${(TREE[cs.tree] || {}).hue || '#2F6FE4'}"><span>${esc(cs.icon)}</span><b>${esc(cs.name)}</b><small>${esc((TREE[cs.tree] || {}).name || '')}</small></button>`).join('')}</div>` : ''}
     </div>`;
@@ -873,10 +874,10 @@ function viewHub(kid) {
 // The 12 trees as a staggered constellation, 3 across and 4 down, each linked to its neighbours.
 function constellation(kid) {
   const on = treesOn(), W = 600, H = 800;
-  // With a single live tree there's nothing to link, so show one big door into its plant.
-  if (on.length === 1) {
-    const t = on[0], st = treeStats(kid, t.id), nx = nextIn(kid, t.id);
-    return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons · ${st.done ? 'See your plant grow' : 'Plant your seed'}</small></span></button>`;
+  // With up to three live trees there's little to link, so each gets a big door into its part of the Learning Tree.
+  if (on.length <= 3) {
+    const door = t => { const st = treeStats(kid, t.id), nx = nextIn(kid, t.id); return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons · ${t.id === 'money' ? (st.done ? 'See your tree grow' : 'Plant your seed') : st.done ? 'See your branch grow' : 'Start a new branch'}</small></span></button>`; };
+    return `<div class="gw-ones">${on.map(door).join('')}</div>`;
   }
   const pos = on.map((t, i) => { const c = i % 3, r = Math.floor(i / 3); return { t, c, r, x: 100 + c * 200, y: 95 + r * 190 + (c === 1 ? 70 : 0) }; });
   const at = (r, c) => pos.find(p => p.r === r && p.c === c);
@@ -1983,6 +1984,8 @@ body.gw-open{overflow:hidden}
 .gw-tile b{display:block;font:900 15px/1.2 var(--f-round)}
 .gw-tile small{font:700 12px var(--f-round);opacity:.85}
 .gw-one{display:flex;align-items:center;gap:16px;width:100%;max-width:520px;margin:0 auto 24px;padding:16px;border-radius:24px;text-align:left;color:#fff;background:linear-gradient(135deg,color-mix(in srgb,var(--th) 70%,#fff 10%),var(--th));box-shadow:0 14px 30px -14px rgba(0,0,0,.55),inset 0 -5px 0 rgba(0,0,0,.14)}
+.gw-ones{display:grid;gap:12px;margin-bottom:24px}
+.gw-ones .gw-one{margin-bottom:0}
 .gw-one:active{transform:scale(.98)}
 .gw-one.open{animation:starPulse 2.4s ease-in-out infinite}
 .g1-ic{width:72px;height:72px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:38px;background:rgba(255,255,255,.25)}
@@ -2395,7 +2398,7 @@ const PlantView = (() => {
   const TRUNK = makePath(new T.CatmullRomCurve3([[0, BASE - 0.05, 0], [0.04, BASE + 1, 0.02], [-0.18, BASE + 3.2, 0.1], [0.2, BASE + 6, -0.08], [-0.16, BASE + 9, 0.06], [0.17, BASE + 12, -0.05], [-0.1, BASE + 15, 0.04], [0, BASE + H, 0]].map(p => V3(...p)), false, 'centripetal'), NS);
   TRUNK.sprout = 0.95 / TRUNK.LEN; TRUNK.K = 1;
   // How much the other subjects have grown the tree (0 to 1), and how woody the stalk is
-  const treeG = () => Math.pow(clamp(V.F / 11, 0, 1), 0.75), woodOf = () => smooth(clamp(V.F / 1.4, 0, 1));
+  const treeG = () => Math.pow(clamp(V.F / (ALL_TREES.length - 1), 0, 1), 0.75), woodOf = () => smooth(clamp(V.F / 1.4, 0, 1));
   TRUNK.radius = (u, s) => { const L = TRUNK.LEN, W = woodOf(), flare = 1 + (0.7 + 1.2 * W) * Math.max(0, 1 - u * L / (0.45 + 1.4 * W)), tip = clamp((s - u) * L / 0.6, 0, 1); return (0.17 - 0.09 * u) * (1 + 3.2 * treeG() * (1 - 0.55 * u)) * flare * (0.16 + 0.84 * Math.sqrt(tip)); };
   /* Branches: one per subject after Money Sense, in catalogue order so each subject always has the same branch.
      They spiral up the trunk (golden angle), leave it nearly level and sweep up, longest in the middle so the
@@ -2868,7 +2871,7 @@ void main() {
     ['Growing tree', 'The trunk thickens with every subject and the leaves fill in, with your first flower still at the top.'],
     ['Full bloom', 'Every subject is done. Your whole tree is in blossom.'],
   ];
-  function stageOf() { const F = TS.F, ms = TS.ms || { k: 0, all: false }; return F >= 10.99 ? 6 : F >= 4 ? 5 : F >= 1 ? 4 : F > 0 ? 3 : ms.all ? 2 : ms.k ? 1 : 0; }
+  function stageOf() { const F = TS.F, ms = TS.ms || { k: 0, all: false }; return F >= ALL_TREES.length - 1.01 ? 6 : F >= 4 ? 5 : F >= 1 ? 4 : F > 0 ? 3 : ms.all ? 2 : ms.k ? 1 : 0; }
   // The top of the tree as it stands: the stalk's tip, or the highest branch tip
   function treeTop() { let y = TRUNK.sample(Math.max(trunkS(), 0.08)).p.y + 1.5; BR.forEach(P => { if (P.s > 0) y = Math.max(y, P.sample(P.s).p.y + 1.8); }); return y; }
   const trunkS = () => Math.max(isMS() ? V.s : V.ts, TS.need);
@@ -3006,7 +3009,7 @@ void main() {
       if (P.badge.visible) { const s = Math.max(0.001, outBack(clamp((P.bloomT - 0.4) / 0.5, 0, 1))) * (view ? 0.55 : 1.1); P.sample(1, tipQ); P.badge.position.copy(tipQ.p).addScaledVector(P.d, 0.3 * s).add(tB.set(0, -1.1 * s + Math.sin(t * 2 + P.b) * 0.04, 0)); P.badge.scale.set(s, s, 1); }
     });
     // The crown: a ring of leaves and mixed blossoms around the first flower once every subject is done
-    const crown = smooth(clamp((V.F - 10.6) / 0.4, 0, 1));
+    const crown = smooth(clamp((V.F - (BR.length - 0.4)) / 0.4, 0, 1));
     if (all || (crown > 0 && crown < 1)) {
       TRUNK.sample(1, flQ); pd = bd = true;
       for (let j = 0; j < 14; j++, pi++) { const a = j / 14 * Math.PI * 2, r = 1.8 + (j % 3) * 0.4, sz = (0.7 + (j % 4) * 0.08) * crown; tA.set(flQ.p.x + Math.cos(a) * r, flQ.p.y - 1.2 + (j % 2) * 0.6, flQ.p.z + Math.sin(a) * r); q4.identity(); s4.set(sz, sz * 0.82, sz); m4.compose(tA, q4, s4); puffs.setMatrixAt(pi, m4); puffs.setColorAt(pi, LEAFC[j % 4]); }
