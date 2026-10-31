@@ -100,4 +100,10 @@ Tables are created by numbered SQL files in [`server/migrations/`](server/migrat
 - `node scripts/check-growth.mjs` checks every lesson and question. `node scripts/chorecast-artifact.mjs out.html` makes the Claude artifact version of the page.
 - The server is plain Node (`node:http`) with `pg`, or PGlite locally. Passwords are hashed with scrypt, and sessions are HttpOnly cookies.
 - [Three.js r128](https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js) comes from cdnjs, and the Nunito font from Google Fonts.
+- **3D performance rules:**
+  - **One renderer at a time:** the card renderer and the page sky pause while a full-screen 3D view covers them (a mission, the island studio, Character Growth).
+  - **Card renderer buffer:** it is only as big as the largest card it draws, and only full-screen while coins rain.
+  - **Clouds:** each cloud is one batched mesh (`cloudCluster`) that draws exactly like the old puff sprites, and is re-sorted back to front as the view turns.
+  - **Static scenery:** in the plant, scenery is baked into one mesh per material (`bake`), and pieces still at zero size are hidden.
+  - **Pacer:** every full-screen view sets its pixel ratio through `G3.pacer(renderer, max)` and calls the function it returns each frame. On a device that can't keep up, it lowers the sharpness a quarter step at a time (never below 1). A device that keeps up, or one capped at 30 fps in Low Power Mode, stays as designed.
 - Weather effects (rain, storm, snow, fog, wind) are built in but switched off by `WEATHER_ON = false`.

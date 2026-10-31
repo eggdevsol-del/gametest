@@ -2378,7 +2378,7 @@ const G3 = (() => {
   const back = new T.DirectionalLight(0xa8d8ff, 0.4); back.position.set(0.9, 0.2, -0.8); scene.add(back);
   scene.environment = envFor(R);
   let W = 1, H = 1;
-  function size() { W = innerWidth; H = innerHeight; R.setSize(W, H); Object.assign(cam, { left: 0, right: W, top: 0, bottom: -H }); cam.updateProjectionMatrix(); kick(); }
+  function size() { W = innerWidth; H = innerHeight; R.setSize(W, H); bufW = bufH = 0; Object.assign(cam, { left: 0, right: W, top: 0, bottom: -H }); cam.updateProjectionMatrix(); kick(); }
   const MC = {};
   const mat = (c, o = {}) => {
     const k = c + '|' + JSON.stringify(o); if (MC[k]) return MC[k];
@@ -2461,6 +2461,24 @@ void main() {
     return root;
   }
   function inkFor(r) { r.getDrawingBufferSize(INK.uniforms.uRes.value); INK.uniforms.uPx.value = 1.7 * r.getPixelRatio(); }
+  // A safety net for the full-screen 3D views on devices that can't keep up. It sets the renderer's pixel ratio
+  // (up to `max`) and returns a function to call every frame. If frames take well over what this device has shown it
+  // can do (a third again its usual best, and over 22 ms, which includes stuttering between 60 and 30 fps) for a
+  // second or so, the view renders a quarter step less sharp, never below 1. A device that keeps up never changes. A display capped at 30 fps (Low Power Mode) doesn't
+  // count as slow, because its best frames are slow too. Outlines keep their width, as inkFor scales them.
+  function pacer(r, max) {
+    let pr = Math.min(max, devicePixelRatio || 1), last = 0, warm = 0, best = 1e9; const win = [];
+    r.setPixelRatio(pr);
+    return now => {
+      const dt = last ? now - last : 0; last = now;
+      if (!dt || dt > 250) { win.length = 0; warm = 0; return; } // a pause (hidden, just opened) starts over
+      if ((warm += dt) < 1500 || pr <= 1) return; // skip shader warm-up
+      win.push(dt); if (win.length < 60) return;
+      const s = win.slice().sort((a, b) => a - b), avg = win.reduce((a, b) => a + b, 0) / win.length; win.length = 0;
+      best = Math.min(best, s[6]);
+      if (avg > Math.max(22, best * 1.35)) { pr = Math.max(1, pr - 0.25); r.setPixelRatio(pr); }
+    };
+  }
   // A soft sky to reflect: gradient dome with a warm sun spot, prefiltered for image-based lighting
   function envFor(renderer) {
     const w = 256, h = 128, c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d');
@@ -2588,16 +2606,73 @@ void main() {
     g.putImageData(img, 0, 0); const t = new T.CanvasTexture(c); if (srgb) t.encoding = T.sRGBEncoding; return (PUFFS[key] = t);
   }
   const BANDS = 6;
-  function cloudMats(lit, shade, srgb) { const ms = Array.from({ length: BANDS }, () => [0, 1, 2].map(i => new T.SpriteMaterial({ map: puffTex(i, srgb), transparent: true, depthWrite: false, opacity: 0.92, toneMapped: false }))); tintClouds(ms, lit, shade, srgb); return ms; }
-  function tintClouds(ms, lit, shade, srgb) { ms.forEach((row, b) => { const c = new T.Color(shade).lerp(new T.Color(lit), b / (BANDS - 1)); if (srgb) c.convertSRGBToLinear(); row.forEach(m => m.color.copy(c)); }); }
+  // Each cloud draws as one batch instead of dozens of sprites: its puffs are camera-facing quads in a single mesh,
+  // shaded exactly as the sprites were (puff texture, tinted by height band, 0.92 opacity, fog) and re-sorted back
+  // to front whenever the view turns, as three.js sorts sprites. The three puff textures share one atlas.
+  const ATLAS = {};
+  function puffAtlas(srgb) {
+    const key = srgb ? 's' : 'l'; if (ATLAS[key]) return ATLAS[key];
+    const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d');
+    for (let i = 0; i < 3; i++) g.drawImage(puffTex(i, srgb).image, (i % 2) * 128, (i >> 1) * 128);
+    const t = new T.CanvasTexture(c); if (srgb) t.encoding = T.sRGBEncoding; return (ATLAS[key] = t);
+  }
+  const PUFF_VS = `attribute vec3 offset; attribute vec2 size; attribute float band; attribute vec2 cell;
+uniform vec3 bands[${BANDS}];
+varying vec2 vUv; varying vec3 vTint;
+#include <fog_pars_vertex>
+void main() {
+  vUv = cell + uv * 0.5; vTint = bands[int(band + 0.5)];
+  vec4 mvPosition = modelViewMatrix * vec4(offset, 1.0);
+  mvPosition.xy += position.xy * size * vec2(length(modelMatrix[0].xyz), length(modelMatrix[1].xyz));
+  gl_Position = projectionMatrix * mvPosition;
+  #include <fog_vertex>
+}`;
+  const PUFF_FS = `uniform sampler2D map; uniform float opacity;
+varying vec2 vUv; varying vec3 vTint;
+#include <fog_pars_fragment>
+void main() {
+  gl_FragColor = vec4(vTint, opacity) * mapTexelToLinear(texture2D(map, vUv));
+  #include <encodings_fragment>
+  #include <fog_fragment>
+}`;
+  function cloudMats(lit, shade, srgb) {
+    const map = puffAtlas(srgb), bands = Array.from({ length: BANDS }, () => new T.Color());
+    const mat = new T.ShaderMaterial({ uniforms: T.UniformsUtils.merge([T.UniformsLib.fog, { map: { value: null }, opacity: { value: 0.92 }, bands: { value: null } }]), vertexShader: PUFF_VS, fragmentShader: PUFF_FS, transparent: true, depthWrite: false, fog: true });
+    mat.uniforms.map.value = map; mat.uniforms.bands.value = bands; mat.map = map; // `map` also tells three.js the atlas's colour encoding
+    const ms = { mat, bands }; tintClouds(ms, lit, shade, srgb); return ms;
+  }
+  function tintClouds(ms, lit, shade, srgb) { ms.bands.forEach((c, b) => { c.set(shade).lerp(new T.Color(lit), b / (BANDS - 1)); if (srgb) c.convertSRGBToLinear(); }); }
+  const CORNERS = [[-0.5, -0.5, 0, 0], [0.5, -0.5, 1, 0], [0.5, 0.5, 1, 1], [-0.5, 0.5, 0, 1]], CELLS = [[0, 0.5], [0.5, 0.5], [0, 0]];
+  const puffV = new T.Vector3(), puffM = new T.Matrix4();
+  // Draws the puffs back to front from this view, in the order three.js would have drawn the sprites
+  function sortPuffs(renderer, scene, camera) {
+    const P = this.puffs, n = P.length, d = this.depth, nx = this.next, ord = this.order;
+    puffM.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse).multiply(this.matrixWorld);
+    for (let i = 0; i < n; i++) { d[i] = puffV.set(P[i][0], P[i][1], P[i][2]).applyMatrix4(puffM).z; nx[i] = i; }
+    for (let i = 1; i < n; i++) { const v = nx[i]; let j = i - 1; while (j >= 0 && d[nx[j]] < d[v]) { nx[j + 1] = nx[j]; j--; } nx[j + 1] = v; }
+    let same = this.sorted; for (let i = 0; same && i < n; i++) same = nx[i] === ord[i]; if (same) return;
+    const idx = this.geometry.index.array; for (let k = 0; k < n; k++) { const q = nx[k] * 4; ord[k] = nx[k]; idx.set([q, q + 1, q + 2, q, q + 2, q + 3], k * 6); }
+    this.sorted = true; this.geometry.index.needsUpdate = true;
+  }
   function cloudCluster(seed, ms, w = 3, h = 1.2, count = 0) {
-    const r = mulberry(seed), g = new T.Group(), n = count || 26 + Math.floor(r() * 14);
+    const r = mulberry(seed), g = new T.Group(), n = count || 26 + Math.floor(r() * 14), P = [];
     for (let i = 0; i < n; i++) {
       const a = r() * 6.283, d = Math.sqrt(r()), x = Math.cos(a) * d * w * 0.5, z = Math.sin(a) * d * w * 0.24, top = 1 - Math.abs(x) / (w * 0.62);
       const y = r() * h * Math.max(0.15, top) - 0.1 * h, band = clamp(Math.round((y / h + 0.15) * (BANDS - 1)), 0, BANDS - 1), s = (0.55 + r() * 0.6) * h * (0.7 + Math.max(0, top) * 0.5);
-      const sp = new T.Sprite(ms[band][i % 3]); sp.position.set(x, y, z); sp.scale.set(s * 1.35, s, 1); g.add(sp);
+      P.push([x, y, z, s * 1.35, s, band, i % 3]);
     }
-    return g;
+    const pos = new Float32Array(n * 12), uv = new Float32Array(n * 8), off = new Float32Array(n * 12), size = new Float32Array(n * 8), bandA = new Float32Array(n * 4), cell = new Float32Array(n * 8);
+    const box = new T.Box3(); let half = 0;
+    P.forEach(([x, y, z, sw, sh, b, k], i) => {
+      CORNERS.forEach(([cx, cy, u, v], j) => { const q = i * 4 + j; pos.set([cx, cy, 0], q * 3); uv.set([u, v], q * 2); off.set([x, y, z], q * 3); size.set([sw, sh], q * 2); bandA[q] = b; cell.set(CELLS[k], q * 2); });
+      box.expandByPoint(puffV.set(x, y, z)); half = Math.max(half, Math.hypot(sw, sh) / 2);
+    });
+    const geo = new T.BufferGeometry(); geo.setAttribute('position', new T.BufferAttribute(pos, 3)); geo.setAttribute('uv', new T.BufferAttribute(uv, 2)); geo.setAttribute('offset', new T.BufferAttribute(off, 3));
+    geo.setAttribute('size', new T.BufferAttribute(size, 2)); geo.setAttribute('band', new T.BufferAttribute(bandA, 1)); geo.setAttribute('cell', new T.BufferAttribute(cell, 2)); geo.setIndex(new T.BufferAttribute(new Uint16Array(n * 6), 1));
+    // The quads are placed in the shader, so the bounds come from the puffs (for culling), not the raw corners
+    box.expandByScalar(half); geo.boundingBox = box; geo.boundingSphere = box.getBoundingSphere(new T.Sphere());
+    const m = new T.Mesh(geo, ms.mat); Object.assign(m, { puffs: P, depth: new Float32Array(n), next: new Uint16Array(n), order: new Uint16Array(n), sorted: false, onBeforeRender: sortPuffs, raycast() {} });
+    m.userData.puffs = true; g.add(m); return g;
   }
   let islandCloudMats = null;
   const smallCloud = seed => cloudCluster(seed, islandCloudMats || (islandCloudMats = cloudMats(0xffffff, 0xa9b6d3, true)), 0.75, 0.32, 14);
@@ -2978,17 +3053,33 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
       b.close();
     }, () => { snap = false; kick(); });
   }
+  // The shared canvas only needs to be as big as the largest card it draws (the whole screen while coins rain), so
+  // a few small cards don't clear and copy a full-screen buffer every frame. It grows in steps and shrinks only
+  // when it is well over, so scrolling doesn't keep resizing it.
+  let bufW = 0, bufH = 0;
+  function fitBuffer(w, h) {
+    if (w <= bufW && h <= bufH && w > bufW - 256 && h > bufH - 256) return;
+    bufW = Math.min(W, Math.ceil(w / 64) * 64); bufH = Math.min(H, Math.ceil(h / 64) * 64); R.setSize(bufW, bufH, false);
+  }
   function frame(now) {
     raf = 0; const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
-    const top = cv.classList.contains('top'), pr = R.getPixelRatio(), hold = Stage.active || Studio.open; let any = false;
+    // Cards under a full-screen view (a mission, the island studio, Character Growth) can't be seen, so they wait
+    const top = cv.classList.contains('top'), hold = Stage.active || Studio.open || document.body.classList.contains('gw-open'); let any = false;
     for (const o of live.values()) o.obj.visible = false;
     rainM.visible = false; R.setScissorTest(false);
+    const shown = []; let needW = 1, needH = 1;
     for (const o of live.values()) {
       const el = o.el; if (hold || !el || !el.isConnected) continue;
       const r = el.getBoundingClientRect(), mx = r.width * PAD, my = r.height * PAD;
       if (r.width < 4 || r.bottom + my < 0 || r.top - my > H || r.right + mx < 0 || r.left - mx > W) continue;
+      const w = Math.min(W, r.width + mx * 2), h = Math.min(H, r.height + my * 2); shown.push([o, el, r, mx, my, w, h]); needW = Math.max(needW, w); needH = Math.max(needH, h);
+    }
+    if (drops.length) { needW = W; needH = H; }
+    fitBuffer(needW, needH);
+    const pr = R.getPixelRatio();
+    for (const [o, el, r, mx, my, w, h] of shown) {
       any = true;
-      const w = Math.min(W, r.width + mx * 2), h = Math.min(H, r.height + my * 2), cw = Math.round(w * pr), ch = Math.round(h * pr);
+      const cw = Math.round(w * pr), ch = Math.round(h * pr);
       if (o.cv.width !== cw || o.cv.height !== ch) { o.cv.width = cw; o.cv.height = ch; }
       const k = Math.min(1, (now - o.t0) / 700), pop = k < 1 ? 1 + 2.70158 * Math.pow(k - 1, 3) + 1.70158 * Math.pow(k - 1, 2) : 1;
       o.obj.visible = true;
@@ -3007,7 +3098,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     if (drops.length) { rainM.visible = true; inkFor(R); R.render(scene, cam); }
     if (any || drops.length) kick();
   }
-  Object.assign(api, { GRAD, rimPatch, outline, inkFor, weather: w => { WIND.value = clamp(0.5 + (w.windKph ?? 12) / 22, 0.5, 2.6); SNOW.value = w.snow ? 0.75 : 0; }, island: (kid, o = {}) => islandModel({ ...islandParams(kid), ...o }), item: buildItem, prize: prizeModel, placeItem, tickIsland, inHouse, inPaddock, inBarn, FARM, emoji: (e, s) => sprite(emojiTex(e), s), puff, envFor, cloudMats, tintClouds, cloudCluster });
+  Object.assign(api, { GRAD, rimPatch, outline, inkFor, pacer, weather: w => { WIND.value = clamp(0.5 + (w.windKph ?? 12) / 22, 0.5, 2.6); SNOW.value = w.snow ? 0.75 : 0; }, island: (kid, o = {}) => islandModel({ ...islandParams(kid), ...o }), item: buildItem, prize: prizeModel, placeItem, tickIsland, inHouse, inPaddock, inBarn, FARM, emoji: (e, s) => sprite(emojiTex(e), s), puff, envFor, cloudMats, tintClouds, cloudCluster });
   size(); addEventListener('resize', size); addEventListener('scroll', kick, { passive: true });
   return api;
 })();
@@ -3020,7 +3111,7 @@ const Sky3D = (() => {
   let R; try { R = new T.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { return api; }
   api.ok = true; document.documentElement.classList.add('sky3d');
   const cv = R.domElement; cv.className = 'sky3d-cv'; cv.setAttribute('aria-hidden', 'true');
-  R.setPixelRatio(Math.min(1.5, devicePixelRatio || 1)); R.setClearColor(0, 0);
+  const pace = G3.pacer(R, 1.5); R.setClearColor(0, 0);
   const scene = new T.Scene(), cam = new T.PerspectiveCamera(50, 1, 0.1, 200), TAN = Math.tan(25 * Math.PI / 180);
   cam.position.set(0, 0, 20);
   const hemi = new T.HemisphereLight(0xffffff, 0x9fb4ff, 0.9); scene.add(hemi);
@@ -3106,7 +3197,7 @@ const Sky3D = (() => {
   };
   function frame(now) {
     raf = 0;
-    if (Stage.active || Studio.open || UI.screen === 'parent' || document.hidden) return;
+    if (Stage.active || Studio.open || UI.screen === 'parent' || document.hidden || document.body.classList.contains('gw-open')) return;
     const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000, asp = cam.aspect, still = reduced ? 0 : 1; last = now;
     for (const c of clouds) {
       if (!c.visible) continue; const u = c.userData, lim = (20 - c.position.z) * TAN * asp + 7;
@@ -3125,7 +3216,7 @@ const Sky3D = (() => {
     if (snow.visible) { const a = snow.geometry.attributes.position.array; let k = 0; for (const d of drops) { d.y -= d.v * 0.08 * dt * still; d.x += Math.sin(t * 0.8 + d.z) * 0.3 * dt * still; if (d.y < -13) d.y = 13; a[k++] = d.x; a[k++] = d.y; a[k++] = d.z; } snow.geometry.attributes.position.needsUpdate = true; }
     if (wxCur.bolt && t > nextBolt) { nextBolt = t + 4 + Math.random() * 8; if (!reduced) { const sk = $('#sky'); if (sk && sk.animate) sk.animate([{ filter: 'brightness(1)' }, { filter: 'brightness(2.4)' }, { filter: 'brightness(1.1)' }, { filter: 'brightness(2)' }, { filter: 'brightness(1)' }], { duration: 520 }); } }
     sun.position.lerp(sunTarget, Math.min(1, dt * 2)); rays.material.rotation = t * 0.04; glow.scale.setScalar(11.5 + Math.sin(t * 1.4) * 0.7);
-    G3.inkFor(R); R.render(scene, cam);
+    pace(now); G3.inkFor(R); R.render(scene, cam);
     raf = requestAnimationFrame(frame);
   }
   function kick() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }
@@ -3148,14 +3239,14 @@ function xpOf(kid) {
    Animals wander about, swings swing, the campfire flickers. Paying with real Spend money asks "spend it or save it?" first. */
 const Studio = (() => {
   const T = window.THREE, S0 = { open: false, cat: 'animals', msg: '', sel: null, confirm: null, place: null };
-  let R, scene, cam, island, clouds, kidId = null, raf = 0, last = 0, theta = 0.7, phi = 1.02, rad = 4.6, idle = 0, moved = 0, pinch0 = 0, rad0 = 0;
+  let R, pace, scene, cam, island, clouds, kidId = null, raf = 0, last = 0, theta = 0.7, phi = 1.02, rad = 4.6, idle = 0, moved = 0, pinch0 = 0, rad0 = 0;
   const ptrs = new Map(), THUMBS = {}, ray = T ? new T.Raycaster() : null, target = T ? new T.Vector3(0, -0.42, 0) : null;
   const kid = () => Store.kids[kidId];
   const findMesh = id => ((island && island.userData.items) || []).find(m => m.userData.itemId === id);
   function ensure() {
     if (R) return true; if (!T || !G3.ok) return false;
     try { R = new T.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { return false; }
-    R.setPixelRatio(Math.min(2, devicePixelRatio || 1)); R.setClearColor(0, 0); R.shadowMap.enabled = true; R.shadowMap.type = T.PCFSoftShadowMap;
+    pace = G3.pacer(R, 2); R.setClearColor(0, 0); R.shadowMap.enabled = true; R.shadowMap.type = T.PCFSoftShadowMap;
     R.outputEncoding = T.sRGBEncoding; R.toneMapping = T.NoToneMapping; R.toneMappingExposure = 1.1;
     R.domElement.className = 'studio-cv';
     scene = new T.Scene(); cam = new T.PerspectiveCamera(38, 1, 0.1, 100);
@@ -3170,7 +3261,8 @@ const Studio = (() => {
     return true;
   }
   function size() { R.setSize(innerWidth, innerHeight); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); }
-  const shadows = o => o.traverse(m => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; } });
+  // Cloud puffs are drawn in their shader, so like the sprites they replaced they stay out of the shadow map
+  const shadows = o => o.traverse(m => { if (m.isMesh && !m.userData.puffs) { m.castShadow = true; m.receiveShadow = true; } });
   function build() { if (island) { scene.remove(island); island.traverse(m => { if (m.geometry) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); } island = G3.island(kid(), { flat: true, ...(S0.preview ? { look: S0.preview } : {}) }); target.x = (kid().island || {}).farm ? -0.5 : 0; shadows(island); scene.add(island); scene.fog = wxNow().fog ? new T.Fog(new T.Color(0xdde3ea).convertSRGBToLinear(), 4.5, 10) : null; }
   function thumbs() {
     if (THUMBS.done) return; THUMBS.done = true;
@@ -3209,7 +3301,7 @@ const Studio = (() => {
     island.position.y = Math.sin(t * 0.8) * 0.03; clouds.rotation.y = t * 0.03;
     if (S0.job) stepJob(now, dt);
     G3.tickIsland(island, t, dt, 0, island.userData.hopAt || 0);
-    G3.inkFor(R); R.render(scene, cam); raf = requestAnimationFrame(frame);
+    pace(now); G3.inkFor(R); R.render(scene, cam); raf = requestAnimationFrame(frame);
   }
   // ---- Island jobs: each one plays out on the island with its tool, then the island is rebuilt clean
   function jobsRow(k) {
@@ -3436,7 +3528,7 @@ const Studio = (() => {
 function Pane3D(canvas, th) {
   const T = window.THREE; if (!T || !G3.ok) return null;
   let R; try { R = new T.WebGLRenderer({ canvas, alpha: true, antialias: true }); } catch (e) { return null; }
-  R.setPixelRatio(Math.min(2, devicePixelRatio || 1)); R.setClearColor(0, 0);
+  const pace = G3.pacer(R, 2); R.setClearColor(0, 0);
   const scene = new T.Scene(), cam = new T.PerspectiveCamera(42, 1, 0.1, 100); cam.position.set(0, 0, 12);
   const c2 = new T.Color(th.c2).getHex(), c3 = new T.Color(th.c3).getHex();
   scene.add(new T.HemisphereLight(0xffffff, c2, 1));
@@ -3542,7 +3634,7 @@ function Pane3D(canvas, th) {
         }
         const q = pin(s.el, z); s.gold.position.set(q.x, q.y, z); s.gold.scale.set(k0 * sc, k0 * sc, k0 * sc); s.gold.rotation.set(0.12, ry, s.tilt + Math.sin(clock * 2 + s.i) * 0.04);
       }
-      G3.inkFor(R); R.render(scene, cam);
+      pace(performance.now()); G3.inkFor(R); R.render(scene, cam);
     },
     dispose() { geos.forEach(g => g.dispose()); mats.forEach(m => m.dispose()); R.dispose(); try { R.forceContextLoss(); } catch (e) {} },
   };

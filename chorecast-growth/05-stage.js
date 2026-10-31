@@ -49,7 +49,7 @@ function guideModel(kind, toon) {
 function Stage3D(canvas) {
   const T = window.THREE, G3 = C.G3; if (!T || !G3 || !G3.ok) return null;
   let R; try { R = new T.WebGLRenderer({ canvas, alpha: true, antialias: true }); } catch (e) { return null; }
-  R.setPixelRatio(Math.min(2, devicePixelRatio || 1)); R.setClearColor(0, 0);
+  const pace = G3.pacer ? G3.pacer(R, 2) : (R.setPixelRatio(Math.min(2, devicePixelRatio || 1)), () => {}); R.setClearColor(0, 0);
   const scene = new T.Scene(), cam = new T.PerspectiveCamera(34, 1, 0.1, 100);
   scene.add(new T.HemisphereLight(0xffffff, 0x7d95e8, 0.85));
   const sun = new T.DirectionalLight(0xfff3dc, 0.85); sun.position.set(-3, 6, 5); scene.add(sun);
@@ -452,7 +452,7 @@ function Stage3D(canvas) {
       if (t > blinkAt) { const b = (t - blinkAt) / 0.14; const s = b < 1 ? Math.max(0.1, Math.abs(1 - 2 * b)) : 1; P.eyeL.scale.y = P.eyeR.scale.y = (guideKind === 'robot' ? 0.07 : 0.06) * s; if (b >= 1) blinkAt = t + 2 + Math.random() * 3; }
       if (P.tip) P.tip.material.emissive.setHex(Math.sin(t * 4) > 0 ? 0x8a1010 : 0x3a0505);
     }
-    G3.inkFor(R); R.render(scene, cam);
+    pace(now); G3.inkFor(R); R.render(scene, cam);
   }
   return {
     setGuide, setScene, react, show, fx,
