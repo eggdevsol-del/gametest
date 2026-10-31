@@ -735,12 +735,14 @@ p{margin:0}
 .auth-brand{display:flex;align-items:center;gap:14px}
 .auth-brand b{display:block;font:900 26px var(--f-round);letter-spacing:-.01em}
 .auth-brand small{font:700 14px var(--f-round);color:var(--on-sky-2)}
-.auth-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:16px;background:rgba(0,20,70,.22)}
-.auth-tabs button{min-height:40px;border-radius:12px;font:800 15px var(--f-round);color:var(--on-sky-2)}
+.auth-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;border-radius:16px;background:rgba(0,20,70,.22)}
+.auth-tabs button{min-height:44px;padding:4px 2px;border-radius:12px;font:800 14px/1.1 var(--f-round);color:var(--on-sky-2)}
+.auth-inline{font:inherit;color:inherit;font-weight:800;text-decoration:underline;text-underline-offset:2px}
 .auth-tabs button.on{background:#fff;color:#0D1530;box-shadow:0 4px 12px -6px rgba(0,0,0,.4)}
 .auth-form{display:flex;flex-direction:column;gap:12px}
 .auth-form h2,.auth-done h2{font:900 24px var(--f-round)}
 .auth-help{font:600 15px/1.45 var(--f-round);color:var(--on-sky-2)}
+.auth-help.small{font-size:13px}
 .auth-field{display:flex;flex-direction:column;gap:6px;font:800 13px var(--f-round);letter-spacing:.04em;text-transform:uppercase;color:var(--on-sky-2)}
 .auth-field input{min-height:52px;padding:0 16px;border-radius:16px;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;font:700 18px var(--f-round);letter-spacing:0;text-transform:none;outline:none;-webkit-user-select:text;user-select:text}
 .auth-field input::placeholder{color:rgba(255,255,255,.55)}
@@ -4291,7 +4293,7 @@ function pHome() {
 /* ---------- Sign-in ---------- */
 function viewSignin() {
   const a = UI.auth || (UI.auth = { mode: 'signin' }), m = a.mode, busy = a.busy ? 'disabled' : '';
-  const tabs = [['signin', 'Sign in'], ['signup', 'New family'], ['pair', 'Kid’s iPad']];
+  const tabs = [['signin', 'Sign in'], ['signup', 'New family'], ['join', 'Join family'], ['pair', 'Kid’s iPad']];
   const field = (id, label, type, ac, ph, extra = '') => `<label class="auth-field"><span>${label}</span><input id="${id}" name="${id}" type="${type}" autocomplete="${ac}" placeholder="${ph}" value="${esc(a[id] || '')}" data-in="authField" ${extra}></label>`;
   let body;
   if (m === 'recovery') body = `<div class="auth-done"><div class="auth-ic">${ic('lock')}</div><h2>Save your recovery code</h2><p>If you ever forget your password, this code lets you set a new one. Write it down or save it in your password manager. It won’t be shown again.</p>
@@ -4303,12 +4305,14 @@ function viewSignin() {
       ${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}${field('recovery', 'Recovery code', 'text', 'off', 'ABCD-EFGH-JKLM', 'required')}${field('password', 'New password', 'password', 'new-password', 'At least 8 characters', 'required minlength="8"')}
       ${a.err ? `<p class="auth-err" role="alert">${esc(a.err)}</p>` : ''}<button class="btn-white" type="submit" ${busy}>${a.busy ? 'Saving…' : 'Set password'}</button><button class="auth-link" type="button" data-act="authMode" data-m="signin">Back to sign in</button></form>`;
   else body = `<div class="auth-tabs" role="tablist">${tabs.map(([k, l]) => `<button role="tab" aria-selected="${m === k}" class="${m === k ? 'on' : ''}" data-act="authMode" data-m="${k}">${l}</button>`).join('')}</div>
-    <form class="auth-form" data-submit="${m === 'pair' ? 'authPair' : m === 'signup' ? 'authSignup' : 'authSignin'}">
+    <form class="auth-form" data-submit="${m === 'pair' ? 'authPair' : m === 'signup' || m === 'join' ? 'authSignup' : 'authSignin'}">
       ${m === 'signin' ? `<p class="auth-help">Sign in to see your family on this device. Chores, pay and photos sync to every device.</p>${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}${field('password', 'Password', 'password', 'current-password', 'Your password', 'required')}` : ''}
-      ${m === 'signup' ? `<p class="auth-help">Start a family account. Each grown-up gets their own sign-in, and kids’ iPads pair with a code, so kids never need an email.</p>${field('name', 'Your name', 'text', 'given-name', 'Pip')}${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}${field('password', 'Password', 'password', 'new-password', 'At least 8 characters', 'required minlength="8"')}${field('invite', 'Invite code (optional)', 'text', 'off', 'From the other grown-up')}` : ''}
+      ${m === 'signup' ? `<p class="auth-help">Start a family account. Each grown-up gets their own sign-in, and kids’ iPads pair with a code, so kids never need an email. Got an invite code from another grown-up? Choose <button class="auth-inline" type="button" data-act="authMode" data-m="join">Join family</button> instead.</p>${field('name', 'Your name', 'text', 'given-name', 'Pip')}${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}${field('password', 'Password', 'password', 'new-password', 'At least 8 characters', 'required minlength="8"')}` : ''}
+      ${m === 'join' ? `<p class="auth-help">Type the invite code from the grown-up who set up the family, then make your own sign-in. You’ll see the same kids, chores and pay.</p>${field('invite', 'Invite code', 'text', 'off', '8 letters and numbers', 'required autocapitalize="characters" spellcheck="false" maxlength="12"')}${field('name', 'Your name', 'text', 'given-name', 'Sam')}${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}${field('password', 'Password', 'password', 'new-password', 'At least 8 characters', 'required minlength="8"')}
+        <p class="auth-help small">No code yet? On their device: Grown-ups, then Family, then Invite another grown-up.</p>` : ''}
       ${m === 'pair' ? `<p class="auth-help">On a grown-up’s device, open Grown-ups, then Family, then “Add a kid’s iPad” for a 6-digit code.</p>${field('code', 'Pairing code', 'text', 'one-time-code', '123456', 'inputmode="numeric" maxlength="7" required')}${field('device', 'Name this iPad', 'text', 'off', 'Ava’s iPad')}` : ''}
       ${a.err ? `<p class="auth-err" role="alert">${esc(a.err)}</p>` : ''}
-      <button class="btn-white" type="submit" ${busy}>${a.busy ? 'One moment…' : m === 'signup' ? 'Create family account' : m === 'pair' ? 'Pair this iPad' : 'Sign in'}</button>
+      <button class="btn-white" type="submit" ${busy}>${a.busy ? 'One moment…' : m === 'signup' ? 'Create family account' : m === 'join' ? 'Join the family' : m === 'pair' ? 'Pair this iPad' : 'Sign in'}</button>
       ${m === 'signin' ? '<button class="auth-link" type="button" data-act="authMode" data-m="reset">Forgot your password?</button>' : ''}
     </form>`;
   return `<div class="auth"><div class="auth-card glass">
@@ -4340,7 +4344,7 @@ function pFamily() {
   return `<header class="phead"><h2>Family and devices</h2><p>Everything syncs live between these devices. Each change is saved to your family’s database on the Chorecast server.</p></header>
     <section class="fam-hero"><div class="fh-ic">${ic('home')}</div><div><h3>${esc(me.family.name)}</h3><p>${me.user ? `Signed in as ${esc(me.user.email)}` : `This is a kid’s iPad: <b>${esc(me.device.name)}</b>`}${Acct.outbox.length ? ` · ${Acct.outbox.length} change${Acct.outbox.length === 1 ? '' : 's'} waiting to sync` : ' · All changes synced'}</p></div></section>
     <h3 class="pgroup-t">Grown-ups</h3><div class="group">${me.members.map(m => `<div class="row"><span class="fam-av">${esc((m.name || m.email)[0].toUpperCase())}</span><div class="row-main"><b>${esc(m.name || m.email)}</b><small>${esc(m.email)}</small></div></div>`).join('')}
-      ${parent ? `<div class="row"><div class="row-main"><b>Invite another grown-up</b><small>${f.invite ? `Give them this code. They choose “New family”, then type it in. It lasts 7 days.` : 'They get their own sign-in to the same family.'}</small></div>${f.invite ? `<span class="fam-code num">${esc(f.invite)}</span>` : `<button class="pbtn" data-act="famInvite">${ic('plus')} Get a code</button>`}</div>` : ''}</div>
+      ${parent ? `<div class="row"><div class="row-main"><b>Invite another grown-up</b><small>${f.invite ? `Give them this code. On the sign-in screen they choose “Join family” and type it in. It works once and lasts 7 days.` : 'They get their own sign-in to the same family.'}</small></div>${f.invite ? `<span class="fam-code num">${esc(f.invite)}</span>` : `<button class="pbtn" data-act="famInvite">${ic('plus')} Get a code</button>`}</div>` : ''}</div>
     ${parent ? `<h3 class="pgroup-t">Devices</h3><div class="group">
       <div class="row"><div class="row-main"><b>Add a kid’s iPad</b><small>${f.pair ? `On the iPad, open Chorecast, choose “Kid’s iPad” and type this code. It lasts 15 minutes.` : 'Kids don’t need an email. Their iPad pairs once and stays signed in.'}</small></div>${f.pair ? `<span class="fam-code big num">${esc(f.pair.replace(/(\d{3})(\d{3})/, '$1 $2'))}</span>` : `<button class="pbtn primary" data-act="famPair">${ic('plus')} Pairing code</button>`}</div>
       ${(f.devices || []).map(d => `<div class="row"><span class="fam-dev">${ic(d.kind === 'kid' ? 'star' : 'lock')}</span><div class="row-main"><b>${esc(d.name)}${d.current ? ' <small class="muted">(this device)</small>' : ''}</b><small>${d.kind === 'kid' ? 'Kid’s iPad' : `Grown-up${d.owner ? ` · ${esc(d.owner)}` : ''}`} · last used ${when(d.last_seen_at)}</small></div>${d.current ? '' : UI.confirmDev === d.id ? `<button class="pbtn solid-danger" data-act="famRemoveYes" data-id="${d.id}">Remove</button><button class="pbtn" data-act="famRemoveNo">Keep</button>` : `<button class="pbtn danger" data-act="famRemove" data-id="${d.id}">Remove</button>`}</div>`).join('')}
@@ -5023,7 +5027,12 @@ const ACT = {
   authLocal: () => { lsSet('cc:localOnly', true); UI.screen = 'who'; render(); },
   authOpen: () => { lsSet('cc:localOnly', false); UI.auth = { mode: 'signin' }; UI.screen = 'signin'; UI.unlocked = false; render(); },
   authSignin: () => authRun(async a => afterAuth(await api('POST', '/api/auth/login', { email: a.email, password: a.password, deviceName: navigator.platform || 'Grown-up device' }))),
-  authSignup: () => authRun(async a => { const r = await api('POST', '/api/auth/signup', { email: a.email, password: a.password, name: a.name, invite: a.invite || undefined, deviceName: navigator.platform || 'Grown-up device' }); await afterAuth(r, r.recovery); }),
+  authSignup: () => authRun(async a => {
+    const join = a.mode === 'join';
+    let r; try { r = await api('POST', '/api/auth/signup', { email: a.email, password: a.password, name: a.name, invite: join ? a.invite : undefined, deviceName: navigator.platform || 'Grown-up device' }); }
+    catch (e) { if (join && e.code === 'exists') e.message = 'That email already has a Chorecast account, and an account can’t join a second family yet. Use a different email to join.'; throw e; }
+    await afterAuth(r, r.recovery);
+  }),
   authPair: () => authRun(async a => afterAuth(await api('POST', '/api/devices/pair', { code: a.code, name: a.device || 'Kids’ iPad' }))),
   authReset: () => authRun(async a => { await api('POST', '/api/auth/reset', { email: a.email, recovery: a.recovery, password: a.password }); UI.auth = { mode: 'signin', email: a.email, err: '' }; toast('Password changed. Sign in with the new one.'); }),
   authImport: () => authRun(async () => { await importLocal(); UI.screen = 'who'; toast('Moved across. Every device sees them now.'); }),
