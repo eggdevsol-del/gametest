@@ -64,8 +64,9 @@ function finish() {
   render();
 }
 function celebrate(o) {
-  if ((o.pass && (o.stars === 3 || o.unitDone)) || o.lvlUp || o.prize) { Sound.fanfare(); FX.rain(['#FFE066', '#fff', '#7CF5B5', '#9BD8FF', '#FF9FC6']); if (Grow.stage) Grow.stage.react('cheer'); }
-  else if (o.pass || !('pass' in o)) { Sound.coin(); if (Grow.stage) Grow.stage.react('cheer'); }
+  const cheer = () => { if (PlantView.ok) PlantView.answer(true); else if (Grow.stage) Grow.stage.react('cheer'); };
+  if ((o.pass && (o.stars === 3 || o.unitDone)) || o.lvlUp || o.prize) { Sound.fanfare(); FX.rain(['#FFE066', '#fff', '#7CF5B5', '#9BD8FF', '#FF9FC6']); cheer(); }
+  else if (o.pass || !('pass' in o)) { Sound.coin(); cheer(); }
 }
 
 /* ---------- Results: scored like a finished chore ----------
@@ -84,7 +85,8 @@ function viewDone(kid) {
     : o.stars === 2 && o.acc === 1 && o.game != null ? 'Every answer right! Score 80% in the game for the third star.' : opened ? 'New skill mastered! The next lesson is open.' : o.first ? 'New skill mastered!' : '';
   const bal = C.xpOf ? C.xpOf(kid).left : 0, day = dayInfo(kid), nx = suggestions(kid, 1)[0];
   say(isScored && !o.pass ? `So close! You need ${need} of ${o.total} right. Tap Try again.` : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : opened ? 'Great work! The next lesson is open.' : 'Great work!');
-  if (Grow.stage) Grow.stage.show('done', { stars: isScored ? o.stars : 3, pass: o.pass !== false, quiet: true });
+  if (PlantView.ok && Grow.run) plantFor(kid, Grow.run, Grow.run.steps[Grow.run.k], o.first ? o.lesson.id : null);
+  else if (Grow.stage) Grow.stage.show('done', { stars: isScored ? o.stars : 3, pass: o.pass !== false, quiet: true });
   ui.innerHTML = `<div class="gw-pad gw-done"><div class="gw-res" data-g="tallySkip">
     ${isScored ? `<div class="rstars" role="img" aria-label="${o.stars} of 3 stars">${[1, 2, 3].map(n => `<span class="rstar ${fin && n <= o.stars ? 'on' : ''}" data-star="${n}">${C.STAR_SOCK}${C.starGold('g' + n)}</span>`).join('')}</div>` : ''}
     <div class="res-score num" data-total>${fin ? signed(o.xp) : '+0'}</div><div class="res-lbl">XP earned</div>

@@ -55,7 +55,7 @@ const PlantView = (() => {
   let R = null, pace = null, glowTex = null, scene, cam, el, cv, tagsEl, cardEl, followEl, overEl, plant, planG = null, sky, sunSprite, clouds = [], isl, signMesh, coinsG, seed, shells, coty, flower, sepals, outer, inner, rays, dots, goalStar, butterflies, guide = null, guideKind = '';
   let mode = 'tree', crownI = -1, running = false, raf = 0, last = 0, t = 0, key = '', treeId = '', busy = false, celTok = 0, drag = null, prizeSig = '', kidName = '';
   let LS = [], US = [], Q = 1, UN = [], LEAVES = [], ITEMS = [], tagEls = [], utagEls = [], goalEl = null, prizeAt = {}, prizeGs = [];
-  let done = [], real = [], udone = [], crowned = [], cur = -1, sel = null, bloomOn = false, passedA = 0, shown = 0, quizFresh = false, quizMax = 0;
+  let done = [], real = [], udone = [], crowned = [], cur = -1, sel = null, bloomOn = false, passedA = 0, shown = 0, quizFresh = false, quizGrow = false, quizMax = 0;
   const V = { s: 0, ts: 0, F: 0, shell: 0, shiver: 0, bloomT: 0, bud: 0 };
   const CAM = { y: 0.75, manual: null, idle: 0, az: 0.35, az0: 0.35, dist: 6, w: 1, h: 1, wide: true, sheet: 0, top: 0, cardW: 0, over: false, tgt: V3(0, 0.75, 0) };
 
@@ -803,11 +803,12 @@ void main() {
       if (fresh) { snap(); if (!reduced) { CAM.over = true; CAM.dist = baseDist(); CAM.y = followY(); CAM.tgt.set(0, CAM.y, 0); CAM.over = false; } }
       pickDefault(kid); showFollow();
     },
-    // The plant on the lesson stage during the quiz; `right` is how many questions are already right this time.
-    quiz(host, kid, l, right) {
+    // The plant on the lesson stage through a lesson; `right` is how many quiz questions are already right this time.
+    // Only the quiz's answers (`grow`) grow it.
+    quiz(host, kid, l, right, grow = true) {
       const tree = TREE[l.tree]; if (!tree) return false;
       mount(); mode = 'quiz'; CAM.over = false; el.classList.add('quiz'); if (el.parentNode !== host) host.insertBefore(el, host.querySelector('.gw-say'));
-      const fresh = ensure(kid, tree), x = LS.find(y => y.l.id === l.id); ++celTok; busy = false; crownI = -1; refresh(kid); quizFresh = !passed(kid, l.id) && !!x;
+      const fresh = ensure(kid, tree), x = LS.find(y => y.l.id === l.id); ++celTok; busy = false; crownI = -1; refresh(kid); quizFresh = !passed(kid, l.id) && !!x; quizGrow = grow;
       quizMax = quizFresh ? passedA + x.to - x.from : passedA; shown = Math.min(quizMax, passedA + (quizFresh ? right : 0));
       if (fresh) snap(); CAM.manual = null; resize(); this.start(); return true;
     },
@@ -819,18 +820,20 @@ void main() {
       crownI = US.findIndex(U => U.unit.id === unit.id); CAM.manual = crownI >= 0 ? sample(UN[crownI].at).p.y : null; CAM.idle = 0;
       resize(); this.start(); return true;
     },
-    // The plant behind any other question (a guess, a practice question, a game, a review, a real story): it
-    // follows the subject's growing tip, sparkling at a right answer and shivering at a wrong one, but only the quiz grows it.
-    look(host, kid, tree) {
+    // The plant behind a review, a real story or a results screen: it follows the subject's growing tip, sparkling at
+    // a right answer and shivering at a wrong one. On the results of a lesson's first pass (`newLeaf`), it stays as the
+    // quiz left it, and the lesson's leaf waits to unfurl when the kid goes back to the plant.
+    look(host, kid, tree, newLeaf) {
       if (!tree) return false;
       mount(); mode = 'quiz'; CAM.over = false; el.classList.add('quiz'); if (el.parentNode !== host) host.insertBefore(el, host.querySelector('.gw-say'));
-      const fresh = ensure(kid, tree); ++celTok; busy = false; crownI = -1; quizFresh = false; refresh(kid); shown = quizMax = passedA;
+      const fresh = ensure(kid, tree), x = newLeaf && LS.find(y => y.l.id === newLeaf); ++celTok; busy = false; crownI = -1; quizFresh = false; refresh(kid, x ? newLeaf : undefined);
+      shown = quizMax = x && !fresh ? clamp(shown, passedA - (x.to - x.from), passedA) : passedA;
       if (fresh) snap(); CAM.manual = null; resize(); this.start(); return true;
     },
     answer(ok) {
       if (mode !== 'quiz' || !running) return;
       if (crownI >= 0) { if (ok) { const k = UN[crownI]; k.gold = 1; burst(plant.localToWorld(sample(k.at).p.clone()), 12, 'star'); Sound.step(3); if (guide) guide.hop = 1; } else { V.shiver = 1; if (guide) guide.shake = 1; } return; }
-      if (ok) { if (quizFresh) shown = Math.min(quizMax, shown + 1); pulse(shown); if (guide) guide.hop = 1; } else { V.shiver = 1; if (guide) guide.shake = 1; }
+      if (ok) { if (quizFresh && quizGrow) shown = Math.min(quizMax, shown + 1); pulse(shown); if (guide) guide.hop = 1; } else { V.shiver = 1; if (guide) guide.shake = 1; }
       CAM.manual = null;
     },
     select: i => select('l', i),

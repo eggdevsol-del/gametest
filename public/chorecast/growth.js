@@ -815,10 +815,10 @@ function render() {
   root.style.setProperty('--gh', (tree || (Grow.run && TREE[Grow.run.lesson ? Grow.run.lesson.tree : Grow.run.tree]) || { hue: '#2F6FE4' }).hue);
   root.dataset.view = v;
   if (Grow.stage) Grow.stage.setScene(v === 'tree' && tree ? tree.scene : Grow.run && Grow.run.lesson ? Grow.run.lesson.scene : Grow.run && Grow.run.scene ? Grow.run.scene : 'island');
-  // The tree view is a full-screen plant with its own 3D view, so the stage rests. Every question takes place in
-  // front of the plant, which grows with each right answer in a lesson's quiz; reading steps and the finish screen
-  // show their own 3D scene on the stage, and other screens show just the guide.
-  const plant = PlantView.ok && (v === 'tree' || plantStep());
+  // The tree view is a full-screen plant with its own 3D view, so the stage rests. Every step of a lesson, quiz,
+  // review or story, and its results, take place in front of the plant, which grows with each right answer in a
+  // lesson's quiz; other screens show just the guide.
+  const plant = PlantView.ok && (v === 'tree' || plantRun());
   if (Grow.stage) { if (plant) Grow.stage.stop(); else Grow.stage.start(); if (!RUN_VIEWS.includes(v) && v !== 'done') Grow.stage.show(null); }
   if (PlantView.ok && !plant) PlantView.stop();
   if (v === 'guide') return viewGuide(kid);
@@ -831,13 +831,21 @@ function render() {
   if (v === 'crew') return viewCrew();
 }
 const RUN_VIEWS = ['lesson', 'challenge', 'review', 'moment', 'echo', 'story', 'case'];
-// Steps that ask the kid something. All of them play in front of the plant.
-const ASKS = ['check', 'guess', 'try', 'play', 'decide'];
-const plantStep = () => { const R = Grow.run; return RUN_VIEWS.includes(Grow.view) && !!R && ASKS.includes(R.steps[R.k].kind); };
-// The subject a question's plant view looks along: its lesson's, its story's, or else Money Sense, the stalk
+const plantRun = () => !!Grow.run && (RUN_VIEWS.includes(Grow.view) || Grow.view === 'done');
+// The subject a run's plant view looks along: its lesson's, its story's, or else Money Sense, the stalk
 const plantTree = (R, step) => TREE[(R.lesson && R.lesson.tree) || step.tree || R.tree] || TREE.money || TREES[0];
+/* Puts the plant on the stage for a run's step, or for its results. Through a lesson it stands as grown by the quiz
+   questions answered right so far, and only the quiz's answers grow it. A unit's crown quiz holds on that unit's
+   ring, which glows with every right answer. Anything else shows the plant as it stands. On the results of a
+   lesson's first pass, its new leaf waits (`newLeaf`) to unfurl when the kid goes back to the plant. */
+function plantFor(kid, R, step, newLeaf) {
+  const stage = root.querySelector('.gw-stage'), l = R.lesson;
+  if (R.mode === 'challenge') return PlantView.crown(stage, kid, TREE[R.tree], R.unit);
+  if (l && Grow.view !== 'done') return PlantView.quiz(stage, kid, l, R.res.filter((r, i) => r && r.ok && i <= R.k && R.steps[i].kind === 'check').length, step.kind === 'check');
+  return PlantView.look(stage, kid, plantTree(R, step), newLeaf);
+}
 // A lesson's quiz grows the plant and a unit's crown quiz lights its ring
-const plantQuiz =() => { const R = Grow.run; return (Grow.view === 'lesson' || Grow.view === 'challenge') && !!R && (R.mode === 'lesson' || R.mode === 'challenge') && R.steps[R.k].kind === 'check'; };
+const plantQuiz = () => { const R = Grow.run; return (Grow.view === 'lesson' || Grow.view === 'challenge') && !!R && (R.mode === 'lesson' || R.mode === 'challenge') && R.steps[R.k].kind === 'check'; };
 const topbar = (kid, title, sub) => `<header class="gw-top"><button class="gw-back" data-g="back" aria-label="Back">${ic('back')}<span>${Grow.view === 'hub' ? 'Back to my sky' : 'Back'}</span></button><div class="gw-tt"><b>${esc(title)}</b>${sub ? `<small>${sub}</small>` : ''}</div>${xpRing(kid)}</header>`;
 function xpRing(kid) {
   const d = dayInfo(kid), p = Math.min(1, d.xp / XP.dayCap), R = 17, L = 2 * Math.PI * R;
@@ -1006,12 +1014,7 @@ function viewRun(kid) {
   }
   ui.innerHTML = `${head}<div class="gw-pad gw-runpad">${title}${body}</div>`;
   if (step.kind === 'learn') holdNext(ui.querySelector('.gw-card.learn [data-g="next"]'), 'learn' + R.k, kid, `${step.title || ''} ${local(step.text)}`);
-  // In a lesson's quiz the plant takes the stage, already grown by the questions answered right so far. In a unit's
-  // crown quiz it looks at that unit's ring, which glows with every right answer. Other questions show it as it is.
-  if (PlantView.ok && plantStep()) {
-    const stage = root.querySelector('.gw-stage'), right = R.res.filter((r, i) => r && r.ok && i <= R.k && R.steps[i].kind === 'check').length;
-    if (plantQuiz() && R.mode === 'challenge') PlantView.crown(stage, kid, TREE[R.tree], R.unit); else if (plantQuiz()) PlantView.quiz(stage, kid, l, right); else PlantView.look(stage, kid, plantTree(R, step));
-  }
+  if (PlantView.ok) plantFor(kid, R, step);
   else if (Grow.stage) { const [kind, data] = stageFor(step, R) || []; Grow.stage.show(kind, data); }
   const host = ui.querySelector('.gw-host');
   if (host) {
@@ -1102,7 +1105,7 @@ function answered(kid, step, res) {
   const why = !res.ok && res.right && !guess ? res.right : '';
   fb.innerHTML = `<div class="gw-fbin ${res.ok || guess ? 'good' : 'bad'}"><b>${msg}</b>${why ? `<span>${esc(why)}</span>` : ''}</div>${where ? `<p class="gw-fbgoal">${where}</p>` : ''}<button class="g-go" data-g="next">${R.k + 1 >= R.steps.length ? 'Finish' : 'Next'}</button>`;
   if (why || where) holdNext(fb.querySelector('[data-g="next"]'), 'fb' + R.k, kid, `${why ? `${msg} ${why}` : ''} ${where}`);
-  if (PlantView.ok && plantStep()) PlantView.answer(res.ok || guess); else if (Grow.stage) Grow.stage.react(res.ok || guess ? 'cheer' : 'puzzled');
+  if (PlantView.ok) PlantView.answer(res.ok || guess); else if (Grow.stage) Grow.stage.react(res.ok || guess ? 'cheer' : 'puzzled');
   say(res.ok ? msg : guess ? 'Let’s find out!' : 'That’s how we learn. Keep going!');
   if (R.mode === 'review') reviewAnswer(kid, step, res.ok);
   if (R.mode === 'echo') echoAnswer(kid, step, res.ok);
@@ -1118,7 +1121,7 @@ function decide(i) {
   ui.querySelectorAll('[data-g="decide"]').forEach((b, j) => { b.disabled = true; if (j === i) b.classList.add('picked'); });
   fb.innerHTML = `<div class="gw-fbin good"><b>You chose: ${esc(local(o.t))}</b>${o.out ? `<span>${esc(local(o.out))}</span>` : ''}</div><button class="g-go" data-g="next">Next</button>`;
   if (o.out) holdNext(fb.querySelector('[data-g="next"]'), 'dec' + R.k, kidNow(), local(o.out));
-  Sound.pop(); if (PlantView.ok && plantStep()) PlantView.answer(true); else if (Grow.stage) { Grow.stage.react('point'); Grow.stage.fx('pick', { i }); }
+  Sound.pop(); if (PlantView.ok) PlantView.answer(true); else if (Grow.stage) { Grow.stage.react('point'); Grow.stage.fx('pick', { i }); }
 }
 
 
@@ -1187,8 +1190,9 @@ function finish() {
   render();
 }
 function celebrate(o) {
-  if ((o.pass && (o.stars === 3 || o.unitDone)) || o.lvlUp || o.prize) { Sound.fanfare(); FX.rain(['#FFE066', '#fff', '#7CF5B5', '#9BD8FF', '#FF9FC6']); if (Grow.stage) Grow.stage.react('cheer'); }
-  else if (o.pass || !('pass' in o)) { Sound.coin(); if (Grow.stage) Grow.stage.react('cheer'); }
+  const cheer = () => { if (PlantView.ok) PlantView.answer(true); else if (Grow.stage) Grow.stage.react('cheer'); };
+  if ((o.pass && (o.stars === 3 || o.unitDone)) || o.lvlUp || o.prize) { Sound.fanfare(); FX.rain(['#FFE066', '#fff', '#7CF5B5', '#9BD8FF', '#FF9FC6']); cheer(); }
+  else if (o.pass || !('pass' in o)) { Sound.coin(); cheer(); }
 }
 
 /* ---------- Results: scored like a finished chore ----------
@@ -1207,7 +1211,8 @@ function viewDone(kid) {
     : o.stars === 2 && o.acc === 1 && o.game != null ? 'Every answer right! Score 80% in the game for the third star.' : opened ? 'New skill mastered! The next lesson is open.' : o.first ? 'New skill mastered!' : '';
   const bal = C.xpOf ? C.xpOf(kid).left : 0, day = dayInfo(kid), nx = suggestions(kid, 1)[0];
   say(isScored && !o.pass ? `So close! You need ${need} of ${o.total} right. Tap Try again.` : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : opened ? 'Great work! The next lesson is open.' : 'Great work!');
-  if (Grow.stage) Grow.stage.show('done', { stars: isScored ? o.stars : 3, pass: o.pass !== false, quiet: true });
+  if (PlantView.ok && Grow.run) plantFor(kid, Grow.run, Grow.run.steps[Grow.run.k], o.first ? o.lesson.id : null);
+  else if (Grow.stage) Grow.stage.show('done', { stars: isScored ? o.stars : 3, pass: o.pass !== false, quiet: true });
   ui.innerHTML = `<div class="gw-pad gw-done"><div class="gw-res" data-g="tallySkip">
     ${isScored ? `<div class="rstars" role="img" aria-label="${o.stars} of 3 stars">${[1, 2, 3].map(n => `<span class="rstar ${fin && n <= o.stars ? 'on' : ''}" data-star="${n}">${C.STAR_SOCK}${C.starGold('g' + n)}</span>`).join('')}</div>` : ''}
     <div class="res-score num" data-total>${fin ? signed(o.xp) : '+0'}</div><div class="res-lbl">XP earned</div>
@@ -2387,7 +2392,7 @@ const PlantView = (() => {
   let R = null, pace = null, glowTex = null, scene, cam, el, cv, tagsEl, cardEl, followEl, overEl, plant, planG = null, sky, sunSprite, clouds = [], isl, signMesh, coinsG, seed, shells, coty, flower, sepals, outer, inner, rays, dots, goalStar, butterflies, guide = null, guideKind = '';
   let mode = 'tree', crownI = -1, running = false, raf = 0, last = 0, t = 0, key = '', treeId = '', busy = false, celTok = 0, drag = null, prizeSig = '', kidName = '';
   let LS = [], US = [], Q = 1, UN = [], LEAVES = [], ITEMS = [], tagEls = [], utagEls = [], goalEl = null, prizeAt = {}, prizeGs = [];
-  let done = [], real = [], udone = [], crowned = [], cur = -1, sel = null, bloomOn = false, passedA = 0, shown = 0, quizFresh = false, quizMax = 0;
+  let done = [], real = [], udone = [], crowned = [], cur = -1, sel = null, bloomOn = false, passedA = 0, shown = 0, quizFresh = false, quizGrow = false, quizMax = 0;
   const V = { s: 0, ts: 0, F: 0, shell: 0, shiver: 0, bloomT: 0, bud: 0 };
   const CAM = { y: 0.75, manual: null, idle: 0, az: 0.35, az0: 0.35, dist: 6, w: 1, h: 1, wide: true, sheet: 0, top: 0, cardW: 0, over: false, tgt: V3(0, 0.75, 0) };
 
@@ -3135,11 +3140,12 @@ void main() {
       if (fresh) { snap(); if (!reduced) { CAM.over = true; CAM.dist = baseDist(); CAM.y = followY(); CAM.tgt.set(0, CAM.y, 0); CAM.over = false; } }
       pickDefault(kid); showFollow();
     },
-    // The plant on the lesson stage during the quiz; `right` is how many questions are already right this time.
-    quiz(host, kid, l, right) {
+    // The plant on the lesson stage through a lesson; `right` is how many quiz questions are already right this time.
+    // Only the quiz's answers (`grow`) grow it.
+    quiz(host, kid, l, right, grow = true) {
       const tree = TREE[l.tree]; if (!tree) return false;
       mount(); mode = 'quiz'; CAM.over = false; el.classList.add('quiz'); if (el.parentNode !== host) host.insertBefore(el, host.querySelector('.gw-say'));
-      const fresh = ensure(kid, tree), x = LS.find(y => y.l.id === l.id); ++celTok; busy = false; crownI = -1; refresh(kid); quizFresh = !passed(kid, l.id) && !!x;
+      const fresh = ensure(kid, tree), x = LS.find(y => y.l.id === l.id); ++celTok; busy = false; crownI = -1; refresh(kid); quizFresh = !passed(kid, l.id) && !!x; quizGrow = grow;
       quizMax = quizFresh ? passedA + x.to - x.from : passedA; shown = Math.min(quizMax, passedA + (quizFresh ? right : 0));
       if (fresh) snap(); CAM.manual = null; resize(); this.start(); return true;
     },
@@ -3151,18 +3157,20 @@ void main() {
       crownI = US.findIndex(U => U.unit.id === unit.id); CAM.manual = crownI >= 0 ? sample(UN[crownI].at).p.y : null; CAM.idle = 0;
       resize(); this.start(); return true;
     },
-    // The plant behind any other question (a guess, a practice question, a game, a review, a real story): it
-    // follows the subject's growing tip, sparkling at a right answer and shivering at a wrong one, but only the quiz grows it.
-    look(host, kid, tree) {
+    // The plant behind a review, a real story or a results screen: it follows the subject's growing tip, sparkling at
+    // a right answer and shivering at a wrong one. On the results of a lesson's first pass (`newLeaf`), it stays as the
+    // quiz left it, and the lesson's leaf waits to unfurl when the kid goes back to the plant.
+    look(host, kid, tree, newLeaf) {
       if (!tree) return false;
       mount(); mode = 'quiz'; CAM.over = false; el.classList.add('quiz'); if (el.parentNode !== host) host.insertBefore(el, host.querySelector('.gw-say'));
-      const fresh = ensure(kid, tree); ++celTok; busy = false; crownI = -1; quizFresh = false; refresh(kid); shown = quizMax = passedA;
+      const fresh = ensure(kid, tree), x = newLeaf && LS.find(y => y.l.id === newLeaf); ++celTok; busy = false; crownI = -1; quizFresh = false; refresh(kid, x ? newLeaf : undefined);
+      shown = quizMax = x && !fresh ? clamp(shown, passedA - (x.to - x.from), passedA) : passedA;
       if (fresh) snap(); CAM.manual = null; resize(); this.start(); return true;
     },
     answer(ok) {
       if (mode !== 'quiz' || !running) return;
       if (crownI >= 0) { if (ok) { const k = UN[crownI]; k.gold = 1; burst(plant.localToWorld(sample(k.at).p.clone()), 12, 'star'); Sound.step(3); if (guide) guide.hop = 1; } else { V.shiver = 1; if (guide) guide.shake = 1; } return; }
-      if (ok) { if (quizFresh) shown = Math.min(quizMax, shown + 1); pulse(shown); if (guide) guide.hop = 1; } else { V.shiver = 1; if (guide) guide.shake = 1; }
+      if (ok) { if (quizFresh && quizGrow) shown = Math.min(quizMax, shown + 1); pulse(shown); if (guide) guide.hop = 1; } else { V.shiver = 1; if (guide) guide.shake = 1; }
       CAM.manual = null;
     },
     select: i => select('l', i),
