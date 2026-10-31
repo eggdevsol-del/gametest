@@ -819,6 +819,14 @@ void main() {
       crownI = US.findIndex(U => U.unit.id === unit.id); CAM.manual = crownI >= 0 ? sample(UN[crownI].at).p.y : null; CAM.idle = 0;
       resize(); this.start(); return true;
     },
+    // The plant behind any other question (a guess, a practice question, a game, a review, a real story): it
+    // follows the subject's growing tip, sparkling at a right answer and shivering at a wrong one, but only the quiz grows it.
+    look(host, kid, tree) {
+      if (!tree) return false;
+      mount(); mode = 'quiz'; CAM.over = false; el.classList.add('quiz'); if (el.parentNode !== host) host.insertBefore(el, host.querySelector('.gw-say'));
+      const fresh = ensure(kid, tree); ++celTok; busy = false; crownI = -1; quizFresh = false; refresh(kid); shown = quizMax = passedA;
+      if (fresh) snap(); CAM.manual = null; resize(); this.start(); return true;
+    },
     answer(ok) {
       if (mode !== 'quiz' || !running) return;
       if (crownI >= 0) { if (ok) { const k = UN[crownI]; k.gold = 1; burst(plant.localToWorld(sample(k.at).p.clone()), 12, 'star'); Sound.step(3); if (guide) guide.hop = 1; } else { V.shiver = 1; if (guide) guide.shake = 1; } return; }
