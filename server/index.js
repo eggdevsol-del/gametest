@@ -394,8 +394,8 @@ route('POST', '/api/events', async ({ req, s }) => {
     }
     const when = at || new Date(), txt = (v, n = 80) => (v == null ? null : String(v).slice(0, n)), int = v => (Number.isFinite(+v) ? Math.round(+v) : null);
     if (type === 'growth.prize' && kid) {
-      await db.query('insert into island_prizes (family_id, kid_id, prize_id, name, kind, big, prize_no, lessons_at, gap, pace, next_gap, won_at) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
-        [s.family_id, kid, txt(pl.id) || '?', txt(pl.name), ['look', 'item', 'chest'].includes(pl.kind) ? pl.kind : null, !!pl.big, int(pl.n), int(pl.lessons), int(pl.gap), int(pl.pace), int(pl.next), when]);
+      await db.query('insert into island_prizes (family_id, kid_id, prize_id, name, kind, big, prize_no, lessons_at, gap, pace, next_gap, won_at, lesson_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
+        [s.family_id, kid, txt(pl.id) || '?', txt(pl.name), ['look', 'item', 'chest'].includes(pl.kind) ? pl.kind : null, !!pl.big, int(pl.n), int(pl.lessons), int(pl.gap), int(pl.pace), int(pl.next), when, txt(pl.lesson)]);
     }
     if (type === 'island.buy' && kid) {
       await db.query('insert into island_purchases (family_id, kid_id, item, name, category, paid_with, price, bought_at) values ($1, $2, $3, $4, $5, $6, $7, $8)',

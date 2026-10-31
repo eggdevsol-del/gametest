@@ -50,10 +50,12 @@ function finish() {
   }
   const lvl0 = charLevel(kid), titles0 = titles(kid).length, given = Math.max(0, Math.min(xp, XP.dayCap - day.xp));
   if (given < xp) rows.push(['Over today’s XP limit', given - xp]);
+  // A first pass keeps what it earned, for the lesson's leaf on the plant
+  if (out.first) patch.done[l.id].xp = given;
   const itemId = l ? l.id : R.mode === 'challenge' ? R.unit.id : R.mode === 'case' ? R.cs.id : R.mode === 'moment' ? R.moment.id : R.mode;
   patch.log = [...(g.log || []).slice(-59), { id: itemId, kind: R.mode, c: right, t: total, xp: given, at: Date.now(), ms }];
   award(kid, xp, patch);
-  if (out.first) out.prize = Prize.onPass(kid);
+  if (out.first) out.prize = Prize.onPass(kid, l.id);
   Object.assign(out, { xp: given, rows, capped: given < xp, lvlUp: charLevel(kid) > lvl0 ? charLevel(kid) : 0, newTitle: titles(kid).length > titles0 ? titles(kid).slice(-1)[0] : '' });
   const [tree, band, unit] = String(itemId).split('.');
   C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: right, total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
@@ -95,7 +97,7 @@ function viewDone(kid) {
     <div class="res-pay"><span>XP to spend on your island</span><b class="num">${bal.toLocaleString()}</b><small>${o.capped ? 'You reached today’s XP limit. Learning still counts!' : `${day.xp} of ${XP.dayCap} XP from learning today`}</small></div>
     ${o.lvlUp ? `<div class="gw-banner lvl">⬆️ Level ${o.lvlUp}!</div>` : ''}
     ${prizeBanner(o, kid)}
-    ${o.unitDone ? `<div class="gw-banner unit">🍃 Unit complete! Your plant grows a new leaf, and the unit challenge is open.</div>` : ''}
+    ${o.unitDone ? `<div class="gw-banner unit">🏆 Unit complete! A ring grows on your plant, and the unit challenge is open.</div>` : ''}
     ${o.first && o.lesson && treeStats(kid, o.lesson.tree).done === treeStats(kid, o.lesson.tree).total ? `<div class="gw-banner title">🌸 Every lesson done! Go back to your plant to watch it bloom.</div>` : ''}
     ${o.newTitle ? `<div class="gw-banner title">🎖️ New title: ${esc(o.newTitle)}</div>` : ''}
     ${o.home && o.pass ? `<div class="gw-homecard"><b>Take it home</b><p>${esc(local(o.home))}</p><button class="g-go ghost" data-g="homeDone">I’ll try it</button></div>` : ''}

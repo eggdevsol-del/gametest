@@ -1094,10 +1094,12 @@ function finish() {
   }
   const lvl0 = charLevel(kid), titles0 = titles(kid).length, given = Math.max(0, Math.min(xp, XP.dayCap - day.xp));
   if (given < xp) rows.push(['Over today’s XP limit', given - xp]);
+  // A first pass keeps what it earned, for the lesson's leaf on the plant
+  if (out.first) patch.done[l.id].xp = given;
   const itemId = l ? l.id : R.mode === 'challenge' ? R.unit.id : R.mode === 'case' ? R.cs.id : R.mode === 'moment' ? R.moment.id : R.mode;
   patch.log = [...(g.log || []).slice(-59), { id: itemId, kind: R.mode, c: right, t: total, xp: given, at: Date.now(), ms }];
   award(kid, xp, patch);
-  if (out.first) out.prize = Prize.onPass(kid);
+  if (out.first) out.prize = Prize.onPass(kid, l.id);
   Object.assign(out, { xp: given, rows, capped: given < xp, lvlUp: charLevel(kid) > lvl0 ? charLevel(kid) : 0, newTitle: titles(kid).length > titles0 ? titles(kid).slice(-1)[0] : '' });
   const [tree, band, unit] = String(itemId).split('.');
   C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: right, total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
@@ -1139,7 +1141,7 @@ function viewDone(kid) {
     <div class="res-pay"><span>XP to spend on your island</span><b class="num">${bal.toLocaleString()}</b><small>${o.capped ? 'You reached today’s XP limit. Learning still counts!' : `${day.xp} of ${XP.dayCap} XP from learning today`}</small></div>
     ${o.lvlUp ? `<div class="gw-banner lvl">⬆️ Level ${o.lvlUp}!</div>` : ''}
     ${prizeBanner(o, kid)}
-    ${o.unitDone ? `<div class="gw-banner unit">🍃 Unit complete! Your plant grows a new leaf, and the unit challenge is open.</div>` : ''}
+    ${o.unitDone ? `<div class="gw-banner unit">🏆 Unit complete! A ring grows on your plant, and the unit challenge is open.</div>` : ''}
     ${o.first && o.lesson && treeStats(kid, o.lesson.tree).done === treeStats(kid, o.lesson.tree).total ? `<div class="gw-banner title">🌸 Every lesson done! Go back to your plant to watch it bloom.</div>` : ''}
     ${o.newTitle ? `<div class="gw-banner title">🎖️ New title: ${esc(o.newTitle)}</div>` : ''}
     ${o.home && o.pass ? `<div class="gw-homecard"><b>Take it home</b><p>${esc(local(o.home))}</p><button class="g-go ghost" data-g="homeDone">I’ll try it</button></div>` : ''}
@@ -2233,15 +2235,18 @@ const style = document.createElement('style'); style.id = 'growth-css'; style.te
 
 /* ---------- A skill tree as a plant that grows from a seed ----------
    Each tree is one plant on a floating island, for the kid's band. It starts as a seed in the soil. Every quiz
-   question answered right in a lesson grows the stalk a step (the plant takes the stage beside the questions),
-   every lesson passed adds a ring to the stalk, every finished unit unfurls a leaf, right then left, and passing
-   the last lesson opens a flower at the top. The camera follows the growing tip; drag, swipe or scroll to look up
-   and down, and tap a label for its card. Without WebGL, viewTree falls back to a list. */
+   question answered right in a lesson grows the stalk a step (the plant takes the stage beside the questions).
+   Every lesson passed unfurls a big leaf, right then left, carrying what the lesson earned on top: its XP, or the
+   island prize it won. A prize waits in a locked bubble where its leaf will grow and unlocks onto the leaf when
+   the lesson is passed. A finished unit puts a ring on the stalk that opens its challenge, and passing the last
+   lesson opens a flower at the top. The camera follows the growing tip; drag, swipe or scroll to look up and
+   down, and tap a label for its card. Without WebGL, viewTree falls back to a list. */
 const PlantView = (() => {
   const T = window.THREE, G3 = C.G3;
   if (!T || !G3 || !G3.ok) return { ok: false };
   const V3 = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z), lerp = (a, b, t) => a + (b - a) * t, smooth = t => t * t * (3 - 2 * t);
   const outBack = t => 1 + 2.7 * (t - 1) ** 3 + 1.7 * (t - 1) ** 2;
+  const outBounce = t => (t < 0.55 ? (t / 0.55) ** 2 : t < 0.85 ? 1 - 0.12 * Math.sin((t - 0.55) / 0.3 * Math.PI) : 1 - 0.04 * Math.sin((t - 0.85) / 0.15 * Math.PI));
   const wait = ms => new Promise(r => setTimeout(r, ms * (reduced ? 0.4 : 1)));
   // This view renders in sRGB like the main island, so colours are given in sRGB and converted.
   const col = h => new T.Color(h).convertSRGBToLinear();
@@ -2260,7 +2265,7 @@ const PlantView = (() => {
   /* State */
   let R = null, glowTex = null, scene, cam, el, cv, tagsEl, cardEl, followEl, plant, planG = null, sky, sunSprite, clouds = [], signMesh, coinsG, seed, shells, stalk, stalkInk, coty, flower, sepals, outer, inner, rays, dots, goalStar, butterflies, guide = null, guideKind = '';
   let mode = 'tree', running = false, raf = 0, last = 0, t = 0, key = '', treeId = '', busy = false, celTok = 0, drag = null, prizeSig = '';
-  let LS = [], US = [], Q = 1, KN = [], LEAVES = [], tagEls = [], utagEls = [], goalEl = null, prizeAt = {}, prizeGs = [];
+  let LS = [], US = [], Q = 1, UN = [], LEAVES = [], ITEMS = [], tagEls = [], utagEls = [], goalEl = null, prizeAt = {}, prizeGs = [];
   let done = [], real = [], udone = [], crowned = [], cur = -1, sel = null, bloomOn = false, passedA = 0, shown = 0, quizFresh = false, quizMax = 0;
   const V = { s: 0, shell: 0, shiver: 0, bloomT: 0, bud: 0 };
   const CAM = { y: 0.75, manual: null, idle: 0, az: 0.35, dist: 6, w: 1, h: 1, wide: true, sheet: 0, top: 0, cardW: 0 };
@@ -2429,21 +2434,30 @@ const PlantView = (() => {
     world();
   }
 
-  /* The plan: this band's lessons in order, each with its share of the stalk, and a leaf at the end of every unit */
+  /* The plan: this band's lessons in order, each with its share of the stalk and a big leaf where it ends, and a
+     ring at the end of every unit */
+  const PITCH = 0.2, ROLL = 0.22, LEAF_AZ = 0.35;
+  const leafSide = i => (i % 2 ? -1 : 1);
   function plan(kid, tree) {
-    if (planG) { planG.traverse(o => { if (o.userData.own) o.geometry.dispose(); }); plant.remove(planG); }
-    planG = new T.Group(); plant.add(planG); prizeGs = []; prizeSig = '';
+    if (planG) { planG.traverse(o => { if (o.userData.own) o.geometry.dispose(); }); dropItems(); plant.remove(planG); }
+    planG = new T.Group(); plant.add(planG); prizeGs = []; prizeSig = ''; ITEMS = [];
     const pack = packFor(tree.id, bandOf(kid)); LS = []; US = []; let a = 0;
     for (const u of pack ? pack.units : []) { if (!u.lessons.length) continue; const ls = []; for (const l of u.lessons) { const w = Math.max(1, l.checks.length); ls.push(LS.length); LS.push({ l, u: US.length, from: a, to: a + w }); a += w; } US.push({ unit: u, ls }); }
-    Q = Math.max(1, a);
-    KN = LS.map(x => { const u = uOf(x.to), q = sample(u), m = new T.Mesh(KNG, RING); m.position.copy(q.p); m.quaternion.setFromUnitVectors(V3(0, 0, 1), q.t); m.scale.setScalar(0.001); G3.outline(m); planG.add(m); return { m, t: 0, gold: 0, at: u, r: radius(u, 1) * 1.05 }; });
-    LEAVES = US.map((U, i) => {
-      const at = uOf(LS[U.ls[U.ls.length - 1]].to) - 0.012, side = i % 2 ? -1 : 1, pv = new T.Group(); pv.position.copy(sample(at).p); pv.rotation.y = (side > 0 ? 0 : Math.PI) + (i % 2 ? -0.35 : 0.35); planG.add(pv);
-      const pitch = new T.Group(); pv.add(pitch); const roll = new T.Group(); pitch.add(roll); const L = Math.max(1.5, 2.3 - i * 0.15);
+    Q = Math.max(1, a); LS.forEach(x => { x.at = uOf(x.to); });
+    // Leaves fan out to either side of where the camera usually looks from, so both show their tops
+    LEAVES = LS.map((x, i) => {
+      const side = leafSide(i), at = x.at - 0.01, L = lerp(1.65, 1.3, LS.length > 1 ? i / (LS.length - 1) : 0), pv = new T.Group(); pv.position.copy(sample(at).p);
+      pv.rotation.y = (side > 0 ? LEAF_AZ - 0.35 : Math.PI + LEAF_AZ + 0.35) + ((i * 7) % 5 - 2) * 0.05; planG.add(pv);
+      const pitch = new T.Group(); pv.add(pitch); const roll = new T.Group(); pitch.add(roll);
       const stem = mesh(new T.CylinderGeometry(0.035, 0.05, 0.5, 8), toon(0x4fae36), roll, 0.25, 0, 0); stem.rotation.z = Math.PI / 2; stem.userData.own = 1;
-      mesh(leafGeo(L, L * 0.36, false, 0.35, 0.3), leafM, roll, 0.45, 0, 0).userData.own = 1;
-      G3.outline(roll); pv.scale.setScalar(0.001); return { pv, pitch, roll, side, at, t: 0, L };
+      mesh(leafGeo(L, L * 0.42, true, 0.12, 0.35), leafM, roll, 0.45, 0, 0).userData.own = 1;
+      G3.outline(roll);
+      // The spot on the blade's top where its XP or prize sits, found with the leaf fully open
+      const padL = V3(0.45 + L * 0.55, 0.02 - 0.12 * L * 0.3, 0), padS = V3();
+      pitch.rotation.z = PITCH; roll.rotation.x = side * ROLL; pv.updateMatrixWorld(true); planG.worldToLocal(roll.localToWorld(padS.copy(padL)));
+      pv.scale.setScalar(0.001); return { pv, pitch, roll, side, at, t: 0, L, padL, padS, pad: padS.clone() };
     });
+    UN = US.map(U => { const u = LS[U.ls[U.ls.length - 1]].at - 0.02, q = sample(u), m = new T.Mesh(KNG, RING); m.position.copy(q.p); m.quaternion.setFromUnitVectors(V3(0, 0, 1), q.t); m.scale.setScalar(0.001); G3.outline(m); planG.add(m); return { m, t: 0, gold: 0, at: u, r: radius(u, 1) * 1.15 }; });
     tagsEl.innerHTML = '';
     tagEls = LS.map((x, i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pl-tag'; b.dataset.g = 'plantSel'; b.dataset.i = i; tagsEl.appendChild(b); return b; });
     utagEls = US.map((U, i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pl-utag'; b.dataset.g = 'plantUnit'; b.dataset.i = i; tagsEl.appendChild(b); return b; });
@@ -2458,6 +2472,64 @@ const PlantView = (() => {
     G3.outline(gm.g); guide = { g: new T.Group(), body: gm.g, P: gm.P, hop: 0, shake: 0 }; guide.g.add(gm.g); guide.g.scale.setScalar(0.5); guide.g.position.set(1.3, 0, 0.6); plant.add(guide.g); guideKind = kind;
   }
 
+  /* What sits on a leaf: a gold star with the lesson's XP, or the island prize the lesson won */
+  const TX = {}, sprite = (map, w, h, o = {}) => { const s = new T.Sprite(new T.SpriteMaterial({ map, transparent: true, depthWrite: false, ...o })); s.scale.set(w, h, 1); return s; };
+  function badgeTex(text, c1, c2, fg) {
+    const k = `b|${text}|${c1}`; if (TX[k]) return TX[k];
+    return (TX[k] = canvasTex(256, 104, (g, w, h) => {
+      const r = 40, path = () => { g.beginPath(); g.moveTo(r + 6, 6); g.arcTo(w - 6, 6, w - 6, h - 6, r); g.arcTo(w - 6, h - 6, 6, h - 6, r); g.arcTo(6, h - 6, 6, 6, r); g.arcTo(6, 6, w - 6, 6, r); g.closePath(); };
+      const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, c1); gr.addColorStop(1, c2); path(); g.fillStyle = gr; g.fill(); g.lineWidth = 7; g.strokeStyle = '#2b2238'; g.stroke();
+      g.fillStyle = 'rgba(255,255,255,.45)'; g.beginPath(); g.ellipse(w / 2, 26, w / 2 - 34, 9, 0, 0, Math.PI * 2); g.fill();
+      g.fillStyle = fg; g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `900 ${text.length > 8 ? 40 : 48}px Nunito, ui-rounded, sans-serif`; g.fillText(text, w / 2, h / 2 + 3);
+    }));
+  }
+  // A padlock, shut or sprung open
+  function lockTex(open) {
+    const k = `lock|${open}`; if (TX[k]) return TX[k];
+    return (TX[k] = canvasTex(128, 128, (g) => {
+      g.lineCap = 'round'; g.lineWidth = 15; g.strokeStyle = '#2b2238'; const sh = () => { g.beginPath(); g.moveTo(40, 66); g.lineTo(40, 42); g.arc(64, 42, 24, Math.PI, 0); g.lineTo(88, open ? 30 : 66); g.stroke(); };
+      g.save(); if (open) { g.translate(64, 0); g.rotate(-0.5); g.translate(-64, -16); } sh(); g.lineWidth = 7; g.strokeStyle = '#c9cfdc'; sh(); g.restore();
+      const box = (x, y, w, h, r) => { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); g.fill(); };
+      g.fillStyle = '#2b2238'; box(22, 58, 84, 62, 14); const gr = g.createLinearGradient(0, 62, 0, 116); gr.addColorStop(0, '#ffe066'); gr.addColorStop(1, '#f2a91e'); g.fillStyle = gr; box(28, 64, 72, 50, 10);
+      g.fillStyle = '#2b2238'; g.beginPath(); g.arc(64, 84, 8, 0, Math.PI * 2); g.fill(); g.fillRect(60, 86, 8, 16);
+    }));
+  }
+  const bubbleTex = () => TX.bubble || (TX.bubble = canvasTex(256, 256, (g, w) => {
+    const r = g.createRadialGradient(w / 2, w / 2, w * 0.3, w / 2, w / 2, w / 2 - 4); r.addColorStop(0, 'rgba(255,255,255,0.06)'); r.addColorStop(0.8, 'rgba(220,245,255,0.3)'); r.addColorStop(1, 'rgba(255,255,255,0.9)');
+    g.fillStyle = r; g.beginPath(); g.arc(w / 2, w / 2, w / 2 - 4, 0, Math.PI * 2); g.fill(); g.fillStyle = 'rgba(255,255,255,.85)'; g.beginPath(); g.ellipse(w * 0.33, w * 0.3, 26, 14, -0.7, 0, Math.PI * 2); g.fill();
+  }));
+  let STAR_G = null;
+  function starG() {
+    if (STAR_G) return STAR_G; const sh = new T.Shape(); for (let k = 0; k < 10; k++) { const r = k % 2 ? 0.11 : 0.25, a = Math.PI / 2 + k * Math.PI / 5; k ? sh.lineTo(Math.cos(a) * r, Math.sin(a) * r) : sh.moveTo(Math.cos(a) * r, Math.sin(a) * r); }
+    STAR_G = new T.ExtrudeGeometry(sh, { depth: 0.07, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 1 }); STAR_G.center(); return STAR_G;
+  }
+  // Scales a prize model to about the same size as the leaf's star
+  function prizeMesh(id) { const m = G3.prize && G3.prize(id); if (!m) return null; const b = new T.Box3().setFromObject(m); m.scale.setScalar(clamp(0.55 / Math.max(0.05, b.max.y - b.min.y), 0.8, 3.2)); return m; }
+  // A locked bubble around a prize that is still to be won
+  function encase(g) { const bubble = sprite(bubbleTex(), 1.05, 1.05), lock = sprite(lockTex(false), 0.34, 0.34); bubble.position.y = 0.28; lock.position.set(0.3, 0.02, 0); g.add(bubble, lock); return { bubble, lock }; }
+  // What passing a lesson earned: saved with the pass, or found in the attempt log for passes from before that
+  function earned(kid, id) {
+    const g = prog(kid), d = (g.done || {})[id] || {}; if (d.xp != null || d.prize) return { xp: d.xp || 0, prize: d.prize || null };
+    const e = (g.log || []).find(x => x.id === id && x.kind === 'lesson' && x.t && x.c / x.t >= 0.8); return { xp: e ? e.xp : XP.lesson, prize: null };
+  }
+  function freeG(g) { g.traverse(o => { if (o.isMesh && !o.userData.ink && o.geometry && o.geometry !== STAR_G) o.geometry.dispose(); if (o.isSprite) o.material.dispose(); }); }
+  function dropItems() { for (const it of ITEMS) if (it) { planG.remove(it.g); freeG(it.g); } ITEMS = []; }
+  // Builds or keeps what sits on each passed lesson's leaf. The lesson being celebrated keeps its prize locked.
+  function placeItems(kid, skip) {
+    LS.forEach((x, i) => {
+      const old = ITEMS[i]; if (!real[i]) { if (old) { planG.remove(old.g); freeG(old.g); ITEMS[i] = null; } return; }
+      const e = earned(kid, x.l.id), info = e.prize && C.prizeInfo ? C.prizeInfo(e.prize) : null, sig = info ? `p:${e.prize}` : `x:${e.xp}`;
+      // A prize left locked by a celebration that was cut short just sits on its leaf
+      if (old && old.sig === sig) { if (old.state === 'locked' && x.l.id !== skip) { old.g.remove(old.bubble, old.lock); old.bubble.material.dispose(); old.lock.material.dispose(); old.state = 'on'; } return; }
+      if (old) { planG.remove(old.g); freeG(old.g); }
+      const g = new T.Group(), it = { g, i, sig, kind: 'xp', state: 'on', k: 0 }; planG.add(g); g.scale.setScalar(0.001);
+      const m = info && prizeMesh(e.prize);
+      if (m) { Object.assign(it, { kind: 'prize', m, info }); g.add(m); const halo = sprite(glowTex, 1.1, 1.1, { opacity: 0.4 }); halo.position.y = 0.25; g.add(halo); if (x.l.id === skip) { it.state = 'locked'; Object.assign(it, encase(g)); } }
+      else { const s = mesh(starG(), toon(0xffc93c, { e: 0x5a3a00 }), g, 0, 0.3, 0); G3.outline(s); it.m = s; const b = sprite(badgeTex(e.xp > 0 ? `+${e.xp} XP` : 'Passed!', '#fff6c8', '#ffd84d', '#3a2400'), 0.86, 0.35); b.position.y = 0.78; g.add(b); it.badge = b; }
+      ITEMS[i] = it;
+    });
+  }
+
   /* Progress */
   function refresh(kid, skip) {
     real = LS.map(x => passed(kid, x.l.id)); done = LS.map((x, i) => real[i] && x.l.id !== skip);
@@ -2467,31 +2539,31 @@ const PlantView = (() => {
     const wasBloom = bloomOn; bloomOn = LS.length > 0 && done.every(Boolean);
     if (bloomOn && !wasBloom) { V.bloomT = 10; butterflies.forEach(b => { b.g.visible = true; }); }
     if (!bloomOn) { V.bloomT = 0; butterflies.forEach(b => { b.g.visible = false; }); }
-    placePrizes(kid); paintTags(kid);
+    placeItems(kid, skip); placePrizes(kid); paintTags(kid);
   }
   // Snap every piece to where progress says it is, for a plant shown for the first time.
   function snap() {
     V.s = bloomOn ? 1 : uOf(shown); V.shell = shown > 0 || bloomOn ? 1 : 0; V.bud = budTarget();
-    KN.forEach((k, i) => { k.t = done[i] && k.at <= V.s + 0.004 ? 1 : 0; }); LEAVES.forEach((lf, i) => { lf.t = udone[i] && lf.at <= V.s + 0.004 ? 1 : 0; });
+    UN.forEach((k, i) => { k.t = udone[i] && k.at <= V.s + 0.004 ? 1 : 0; }); LEAVES.forEach((lf, i) => { lf.t = done[i] && lf.at <= V.s + 0.004 ? 1 : 0; });
     CAM.manual = null; CAM.y = followY(); CAM.dist = baseDist();
   }
   function budTarget() { if (bloomOn) return 1; const U = US[US.length - 1]; if (!U) return 0; const from = LS[U.ls[0]].from; return clamp((shown - from) / Math.max(1, Q - from), 0, 1) * 0.5; }
-  // Island prizes: the next prize, and the one planned after it, float beside the lessons that will win them.
+  // Island prizes: the next prize, and the one planned after it, wait in a locked bubble where the leaf of the
+  // lesson that will win them is going to grow.
   function placePrizes(kid) {
     const ups = Prize.upcoming(kid); prizeAt = {}; let n = 0;
     LS.forEach((x, i) => { if (real[i]) return; n++; const u = ups.find(p => p.left === n); if (u) prizeAt[i] = u; });
     const sig = Object.entries(prizeAt).map(([i, u]) => `${i}:${u.id}`).join(','); if (sig === prizeSig) return; prizeSig = sig;
-    for (const p of prizeGs) { planG.remove(p.g); p.g.traverse(o => { if (o.isMesh && !o.userData.ink && o.geometry) o.geometry.dispose(); }); } prizeGs = [];
-    if (!G3.prize) return;
+    for (const p of prizeGs) { planG.remove(p.g); freeG(p.g); } prizeGs = [];
     for (const [i, u] of Object.entries(prizeAt)) {
-      const m = G3.prize(u.id); if (!m) continue; const g = new T.Group(), b = new T.Box3().setFromObject(m), hgt = Math.max(0.05, b.max.y - b.min.y);
-      m.scale.setScalar(clamp(0.55 / hgt, 0.8, 3.2)); g.add(m); const halo = new T.Sprite(new T.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, opacity: 0.55 })); halo.scale.set(1.3, 1.3, 1); halo.position.y = 0.28; g.add(halo);
-      planG.add(g); prizeGs.push({ g, m, i: +i });
+      const m = prizeMesh(u.id); if (!m) continue; const g = new T.Group(); g.add(m); const { bubble, lock } = encase(g);
+      planG.add(g); prizeGs.push({ g, m, i: +i, bubble, lock });
     }
   }
 
   /* Labels that ride on the stalk */
-  const sideOf = i => (LS[i].u % 2 ? 1 : -1); // lesson labels sit opposite their unit's leaf
+  // A lesson's label sits just under its own leaf, so the space above every leaf is free for what it carries
+  const sideOf = i => leafSide(i), UNDER = 30;
   function medalOf(kid, l) { const m = medal(kid, l); return m === 'gold' ? '🥇' : m === 'silver' ? '🥈' : '🥉'; }
   function paintTags(kid) {
     LS.forEach((x, i) => {
@@ -2501,24 +2573,26 @@ const PlantView = (() => {
       b.innerHTML = d ? `<span class="n">${medalOf(kid, l)}</span>${title}` : isCur ? `<span class="n">▶</span><span><small>Up next${pz ? ' · wins a prize' : ''}</small>${title}</span>${pz ? `<span class="pz">${pz.info.icon}</span>` : ''}` : `<span class="n">${open ? `${l.unit}.${l.n}` : '🔒'}</span>${open ? title : `${l.unit}.${l.n}`}${pz ? `<span class="pz">${pz.info.icon}</span>` : ''}`;
       b._w = 0;
     });
-    US.forEach((U, i) => { const b = utagEls[i]; b.className = `pl-utag${crowned[i] ? ' crown' : ''}${sel && sel.k === 'u' && sel.i === i ? ' sel' : ''}`; b.innerHTML = `<small>Unit ${U.unit.n}${crowned[i] ? ' · 👑 crown won' : ' · 🏆 challenge'}</small>${esc(local(U.unit.title))}`; b.setAttribute('aria-label', `Unit ${U.unit.n}, ${local(U.unit.title)}: ${crowned[i] ? 'crown won' : 'challenge open'}`); b._w = 0; });
+    US.forEach((U, i) => { const b = utagEls[i]; b.className = `pl-utag${crowned[i] ? ' crown' : ''}${sel && sel.k === 'u' && sel.i === i ? ' sel' : ''}`; b.innerHTML = `${crowned[i] ? '👑' : '🏆'} Unit ${U.unit.n} ${crowned[i] ? 'crown won' : 'challenge'}`; b.setAttribute('aria-label', `Unit ${U.unit.n}, ${local(U.unit.title)}: ${crowned[i] ? 'crown won' : 'challenge open'}`); b._w = 0; });
   }
   const tmp = V3(), tq = {}, hide = b => { if (b._on !== false) { b.style.visibility = 'hidden'; b._on = false; } };
   function placeTags() {
     const W = CAM.w, Hh = CAM.h, topY = CAM.top + 6, botY = Hh - (CAM.wide ? 0 : CAM.sheet) - 10, maxX = CAM.wide ? W - CAM.cardW - 24 : W - 8, cy = CAM.manual ?? CAM.y;
     const hideBloom = bloomOn && V.bloomT > 1 && V.bloomT < 8 ? 0 : 1;
-    // Puts a label beside a point on the plant: outward to the right (side 1) or left (-1), or centred below it (0).
-    const put = (b, p, side, fade) => {
+    // Puts a label beside a point on the plant: outward to the right (side 1) or left (-1), or centred below it
+    // (0), moved down by dy pixels.
+    const put = (b, p, side, fade, dy = 0) => {
       tmp.copy(p); plant.localToWorld(tmp); tmp.project(cam);
       const x = (tmp.x + 1) / 2 * W, y = (1 - tmp.y) / 2 * Hh;
       if (!b._w) { b._w = b.offsetWidth; b._h = b.offsetHeight; }
       if (tmp.z > 1 || fade <= 0.02 || y < topY + b._h / 2 || y > botY - b._h || x < -200 || x > W + 200) return hide(b);
       if (b._on !== true) { b.style.visibility = 'visible'; b._on = true; }
-      const left = side > 0 ? x + 26 : side < 0 ? x - 26 - b._w : x - b._w / 2, top = side ? y - b._h / 2 : y;
+      const left = side > 0 ? x + 26 : side < 0 ? x - 26 - b._w : x - b._w / 2, top = (side ? y - b._h / 2 : y) + dy;
       b.style.transform = `translate(${clamp(left, 8, Math.max(8, maxX - b._w)).toFixed(1)}px,${top.toFixed(1)}px)`; b.style.opacity = fade.toFixed(2);
     };
-    LS.forEach((x, i) => { const p = sample(KN[i].at, tq).p; put(tagEls[i], p, sideOf(i), hideBloom * clamp(1.25 - Math.abs(p.y - cy) / 4.2, 0, 1)); });
-    US.forEach((U, i) => { const lf = LEAVES[i]; if (lf.t < 0.6) { hide(utagEls[i]); return; } const tip = V3(lf.L * 0.8 + 0.45, 0, 0); lf.roll.localToWorld(tip); plant.worldToLocal(tip); tip.y -= 0.3; put(utagEls[i], tip, 0, hideBloom * clamp(1.3 - Math.abs(tip.y - cy) / 5, 0, 1)); });
+    LS.forEach((x, i) => { const p = sample(x.at, tq).p; put(tagEls[i], p, sideOf(i), hideBloom * clamp(1.25 - Math.abs(p.y - cy) / 4.2, 0, 1), UNDER); });
+    // A finished unit's label stacks under the label of its last lesson
+    US.forEach((U, i) => { const j = U.ls[U.ls.length - 1], k = UN[i]; if (k.t < 0.6) { hide(utagEls[i]); return; } const p = sample(LS[j].at, tq).p; if (!utagEls[i]._w) { utagEls[i]._w = utagEls[i].offsetWidth; utagEls[i]._h = utagEls[i].offsetHeight; } put(utagEls[i], p, sideOf(j), hideBloom * clamp(1.25 - Math.abs(p.y - cy) / 4.2, 0, 1), UNDER + (tagEls[j]._h || 30) / 2 + 6 + utagEls[i]._h / 2); });
     const g = sample(1).p.clone().add(V3(0, 0.6, 0)); put(goalEl, g, 1, bloomOn ? 0 : clamp(1.2 - Math.abs(g.y - cy) / 6, 0, 1));
   }
 
@@ -2527,18 +2601,19 @@ const PlantView = (() => {
     const tree = TREE[treeId], s = sel || { k: 'l', i: 0 }; let h;
     if (s.k === 'b') {
       const left = crowned.filter(c => !c).length;
-      h = `<div class="plc-ic">🌸</div><div class="plc-eb">${esc(tree.name)} · every lesson done</div><div class="plc-t">Your plant bloomed!</div><p class="plc-p">You passed all ${LS.length} lessons and grew ${US.length} leaves. ${left ? `Tap a leaf to try its unit challenge: ${left === 1 ? 'one crown' : `${left} crowns`} still to win.` : 'You won every unit crown too!'}</p><div class="plc-act"><button class="g-go ghost" data-g="plantBloom">🌸 Watch it bloom again</button></div>`;
+      h = `<div class="plc-ic">🌸</div><div class="plc-eb">${esc(tree.name)} · every lesson done</div><div class="plc-t">Your plant bloomed!</div><p class="plc-p">You passed all ${LS.length} lessons and grew ${LS.length} leaves. ${left ? `Tap a unit’s label to try its challenge: ${left === 1 ? 'one crown' : `${left} crowns`} still to win.` : 'You won every unit crown too!'}</p><div class="plc-act"><button class="g-go ghost" data-g="plantBloom">🌸 Watch it bloom again</button></div>`;
     } else if (s.k === 'u') {
       const U = US[s.i], all = udone[s.i];
-      h = `<div class="plc-ic">${crowned[s.i] ? '👑' : '🏆'}</div><div class="plc-eb">Unit ${U.unit.n} · ${all ? 'Leaf grown' : 'Leaf still growing'}</div><div class="plc-t">${esc(local(U.unit.title))} challenge</div><p class="plc-p">Mixed questions from the whole unit, with no hints. Get 80% to win the crown.</p><div class="plc-chips"><span>❓ Up to 8 questions</span><span>✨ +${XP.challenge} XP</span></div><div class="plc-act">${all ? `<button class="g-go" data-g="challenge" data-id="${U.unit.id}">${crowned[s.i] ? 'Play again' : '▶ Start the challenge'}</button>` : `<button class="g-go ghost" data-g="locked">🔒 Finish every lesson in Unit ${U.unit.n} first</button>`}</div>`;
+      h = `<div class="plc-ic">${crowned[s.i] ? '👑' : '🏆'}</div><div class="plc-eb">Unit ${U.unit.n} · ${all ? 'Every lesson passed' : 'Lessons still to pass'}</div><div class="plc-t">${esc(local(U.unit.title))} challenge</div><p class="plc-p">Mixed questions from the whole unit, with no hints. Get 80% to win the crown.</p><div class="plc-chips"><span>❓ Up to 8 questions</span><span>✨ +${XP.challenge} XP</span></div><div class="plc-act">${all ? `<button class="g-go" data-g="challenge" data-id="${U.unit.id}">${crowned[s.i] ? 'Play again' : '▶ Start the challenge'}</button>` : `<button class="g-go ghost" data-g="locked">🔒 Finish every lesson in Unit ${U.unit.n} first</button>`}</div>`;
     } else {
       const x = LS[s.i], l = x.l, d = done[s.i], open = d || s.i === cur || available(kid, l), first = s.i === cur && !real.some(Boolean), pz = prizeAt[s.i];
       const game = l.play ? GAME_NAME[l.play.type] || 'Game' : null, prev = s.i > 0 ? LS[s.i - 1].l : null;
-      const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `🌱 ${l.checks.length} question${l.checks.length === 1 ? '' : 's'} to grow` : '', `✨ +${XP.lesson} XP`].filter(Boolean);
+      const e = real[s.i] ? earned(kid, l.id) : null, won = e && e.prize && C.prizeInfo ? C.prizeInfo(e.prize) : null;
+      const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `🌱 ${l.checks.length} question${l.checks.length === 1 ? '' : 's'} to grow` : '', e ? `✨ Earned +${e.xp} XP` : `✨ +${XP.lesson} XP`].filter(Boolean);
       const act = !open ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Finish “${esc(local(prev.title))}” first` : 'Finish the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${d ? 'Play again' : first ? '🌱 Plant my seed' : '▶ Start lesson'}</button>`;
       h = `<div class="plc-ic">${esc(l.icon)}</div><div class="plc-eb">Unit ${l.unit} · Lesson ${l.n}${d ? ` · ${medalOf(kid, l)}` : ''}</div><div class="plc-t">${esc(local(l.title))}</div><p class="plc-p">${esc(local(l.hook))}</p>
-        ${first ? `<ul class="plc-how"><li><span>🌱</span>Every question you get right helps your seed grow.</li><li><span>🍃</span>Finish a unit and a new leaf opens.</li><li><span>🌸</span>Pass all ${LS.length} lessons and it blooms.</li></ul>` : `<div class="plc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>`}
-        ${pz ? `<div class="plc-prize ${pz.info.big ? 'big' : ''}"><span>${pz.info.icon}</span><span><small>${pz.planned ? 'Planned prize' : 'Prize'}</small><b>${pz.planned ? 'Should win' : 'Pass this to win'} ${esc(pz.info.name)}</b></span></div>` : ''}<div class="plc-act">${act}</div>`;
+        ${first ? `<ul class="plc-how"><li><span>🌱</span>Every question you get right helps your seed grow.</li><li><span>🍃</span>Pass a lesson and a big leaf grows, with your XP or a prize on top.</li><li><span>🌸</span>Pass all ${LS.length} lessons and it blooms.</li></ul>` : `<div class="plc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>`}
+        ${won ? `<div class="plc-prize ${won.big ? 'big' : ''}"><span>${won.icon}</span><span><small>Unlocked on this leaf</small><b>${esc(won.name)}</b></span></div>` : pz ? `<div class="plc-prize ${pz.info.big ? 'big' : ''}"><span>${pz.info.icon}</span><span><small>${pz.planned ? 'Planned prize' : 'Prize'}</small><b>${pz.planned ? 'Should win' : 'Pass this to win'} ${esc(pz.info.name)}</b></span></div>` : ''}<div class="plc-act">${act}</div>`;
     }
     cardEl.innerHTML = h; cardEl.classList.remove('in'); void cardEl.offsetWidth; cardEl.classList.add('in');
   }
@@ -2547,30 +2622,40 @@ const PlantView = (() => {
     const kid = kidNow(); if (!kid || busy || (k === 'l' && !LS[i]) || (k === 'u' && !US[i])) return;
     sel = { k, i }; paintTags(kid); card(kid); Sound.tap();
     // Look at what was tapped; the current lesson and the bloom go back to following the tip.
-    CAM.manual = k === 'u' ? LEAVES[i].pv.position.y : k === 'l' && i !== cur ? sample(KN[i].at).p.y - 0.3 : null; CAM.idle = 0; showFollow();
+    CAM.manual = k === 'u' ? sample(UN[i].at).p.y : k === 'l' && i !== cur ? sample(LS[i].at).p.y + 0.1 : null; CAM.idle = 0; showFollow();
   }
   function showFollow() { if (followEl) followEl.hidden = mode !== 'tree' || CAM.manual == null || Math.abs(CAM.manual - followY()) < 0.6; }
   const tipY = () => sample(V.s).p.y;
   const followY = () => (bloomOn ? tipY() - lerp(0.4, 1.3, smooth(clamp(V.bloomT / 2.5, 0, 1))) : Math.max(1, tipY() - 0.2));
-  const baseDist = () => { const near = smooth(clamp(V.s / 0.12, 0, 1)); return cam.aspect < 0.8 ? lerp(8.6, 10.5, near) : lerp(6.6, 8.2, near); };
+  const TAN = Math.tan(Math.PI / 9); // half the camera's 40° view
+  const baseDist = () => {
+    const near = smooth(clamp(V.s / 0.12, 0, 1)), d = cam.aspect < 0.8 ? lerp(8.6, 10.5, near) : lerp(6.6, 8.2, near);
+    // Far enough back that a whole leaf fits beside the stalk in the space the card leaves
+    return Math.max(d, lerp(1.2, 2.65, near) * CAM.h / (Math.max(240, CAM.w - CAM.cardW) * TAN));
+  };
 
-  /* The moment a lesson is passed for the first time: the stalk catches up, a ring forms, a leaf may unfurl, and
-     after the last lesson the flower opens. */
+  /* The moment a lesson is passed for the first time: the stalk catches up, the lesson's leaf unfurls and its XP
+     pops up on top, or its prize unlocks onto it; a finished unit adds a ring, and after the last lesson the flower
+     opens. */
   async function celebrate(kid, id, fresh, tok) {
     const i = LS.findIndex(x => x.l.id === id), x = LS[i], w = x.to - x.from;
     busy = true; refresh(kid, id); const full = passedA;
     shown = fresh ? full - w : clamp(shown, full - w, full); if (fresh) snap();
     sel = { k: 'l', i }; paintTags(kid); card(kid); CAM.manual = null; showFollow();
-    const ok = () => tok === celTok && running;
+    const ok = () => tok === celTok && running, padWorld = () => plant.localToWorld(LEAVES[i].pad.clone());
     await wait(500);
     while (shown < full) { if (!ok()) return; shown++; pulse(shown); await wait(380); }
     for (let k = 0; k < 20 && Math.abs(uOf(shown) - V.s) > 0.004; k++) { await wait(80); if (!ok()) return; }
-    done[i] = true; KN[i].gold = 1; Sound.star(2); burst(plant.localToWorld(sample(KN[i].at).p.clone()), 12, 'star'); paintTags(kid);
-    await wait(800); if (!ok()) return;
+    done[i] = true; Sound.star(2); paintTags(kid);
+    setTimeout(() => { if (ok()) burst(padWorld(), 16, 'leaf'); }, 350);
+    await wait(1500); if (!ok()) return;
+    const it = ITEMS[i];
+    if (it && it.state === 'locked') { it.state = 'unlocking'; it.k = 0; await wait(3000); if (!ok()) return; }
+    else { Sound.step(4); burst(padWorld().add(V3(0, 0.4, 0)), 12, 'star'); await wait(900); if (!ok()) return; }
     if (US[x.u].ls.every(j => done[j])) {
-      udone[x.u] = true; Sound.fanfare(); C.toast(`Unit ${US[x.u].unit.n} done! Your plant grew a new leaf.`);
-      setTimeout(() => { const at = V3(); LEAVES[x.u].pv.getWorldPosition(at); burst(at, 18, 'leaf'); burst(at, 8, 'star'); }, 300);
-      await wait(1800); if (!ok()) return;
+      udone[x.u] = true; UN[x.u].gold = 1; Sound.fanfare(); C.toast(`Unit ${US[x.u].unit.n} done! Its challenge is open.`);
+      setTimeout(() => { if (ok()) burst(plant.localToWorld(sample(UN[x.u].at).p.clone()), 14, 'star'); }, 300);
+      await wait(1600); if (!ok()) return;
     }
     if (done.every(Boolean)) { bloom(); await wait(4200); if (!ok()) return; }
     busy = false; refresh(kid); pickDefault(kid);
@@ -2596,6 +2681,30 @@ const PlantView = (() => {
 
   /* Every frame */
   const tipQ = {}, right = V3(), fwd = V3(), gp = V3();
+  const hover = (g, lf, i) => { g.position.copy(lf.padS); g.position.y += 0.62 + (reduced ? 0 : Math.sin(t * 2 + i) * 0.06); };
+  // The bubble and its lock sit on the camera's side of the prize, so they show in front of it
+  function faceBubble(o, i) { o.bubble.position.set(0, 0.28, 0).addScaledVector(fwd, 0.42); o.lock.position.set(0, 0.04, 0).addScaledVector(right, 0.3).addScaledVector(fwd, 0.55); o.lock.material.rotation = reduced ? 0 : Math.sin(t * 3 + i) * 0.08; }
+  // The unlock: the lock shakes and springs open, the bubble pops, and the prize drops onto its leaf with a spin
+  // under an "Unlocked!" badge.
+  const UNLOCK = 3.2;
+  function unlockStep(it, lf, dt) {
+    const k = (it.k += dt), g = it.g; g.scale.setScalar(1);
+    if (k < 0.75) { hover(g, lf, it.i); faceBubble(it, it.i); it.lock.material.rotation = Math.sin(k * 38) * 0.35 * (k / 0.75); it.bubble.scale.setScalar(1.05 * (1 + Math.sin(k * 14) * 0.05)); it.m.rotation.y += dt * 0.7; return; }
+    if (!it.popped) {
+      it.popped = 1; it.from = g.position.clone(); it.spin0 = it.m.rotation.y; it.lock.material.map = lockTex(true); it.lock.material.rotation = 0; it.lock.material.needsUpdate = true;
+      const at = plant.localToWorld(g.position.clone().add(V3(0, 0.28, 0))); burst(at, 22, 'star'); burst(at, 10, 'petal');
+      it.rays = sprite(rays.material.map, 2.4, 2.4, { blending: T.AdditiveBlending, opacity: 0 }); it.rays.position.y = 0.3; g.add(it.rays);
+      it.label = sprite(badgeTex('Unlocked!', '#a8f7cd', '#2fb35a', '#0b3d1f'), 0.001, 0.001); it.label.position.y = 1.1; g.add(it.label);
+      Sound.star(3); if (it.info.big) setTimeout(() => { if (running) Sound.fanfare(); }, 250); C.toast(`You unlocked ${it.info.name}!`);
+    }
+    g.position.lerpVectors(it.from, lf.pad, outBounce(clamp((k - 0.75) / 0.65, 0, 1)));
+    it.m.rotation.y = it.spin0 + (1 - (1 - clamp((k - 0.75) / 1.3, 0, 1)) ** 3) * Math.PI * 4;
+    const b = clamp((k - 0.75) / 0.25, 0, 1); it.bubble.scale.setScalar(1.05 * (1 + b * 0.7)); it.bubble.material.opacity = 1 - b;
+    const lk = clamp((k - 0.75) / 0.6, 0, 1); it.lock.position.set(0, 0.04 + lk * 0.8, 0).addScaledVector(right, 0.3 + lk * 0.2).addScaledVector(fwd, 0.55); it.lock.material.opacity = 1 - lk;
+    it.rays.material.opacity = 0.75 * clamp((k - 0.8) / 0.3, 0, 1) * clamp((UNLOCK - k) / 0.8, 0, 1); it.rays.material.rotation = k * 0.8;
+    const ls = Math.max(0.001, outBack(clamp((k - 0.95) / 0.4, 0, 1))); it.label.scale.set(1.15 * ls, 0.47 * ls, 1); it.label.material.opacity = clamp((UNLOCK - k) / 0.5, 0, 1);
+    if (k >= UNLOCK) { [it.bubble, it.lock, it.rays, it.label].forEach(s => { g.remove(s); s.material.dispose(); }); it.state = 'on'; }
+  }
   function frame(now) {
     if (!running) return; raf = requestAnimationFrame(frame);
     const dt = Math.min(0.05, (now - last) / 1000 || 0.016) * (reduced ? 1.6 : 1); last = now; t += dt;
@@ -2607,8 +2716,8 @@ const PlantView = (() => {
     seed.scale.setScalar(shown > 0 || bloomOn || reduced ? 1 : 1 + Math.sin(t * 3) * 0.05);
     shells.forEach((p, k) => { p.rotation.x = (k ? -1 : 1) * V.shell * 1.05; p.position.z = (k ? -1 : 1) * V.shell * 0.12; p.position.y = -V.shell * 0.1; });
     coty.forEach((c, k) => { c.scale.setScalar(Math.max(0.001, outBack(clamp((V.s - 0.8 / LEN) / (0.15 / LEN), 0, 1)))); c.children[0].rotation.z = 0.5 + Math.sin(t * 1.7 + k) * 0.04; });
-    KN.forEach((k, i) => { const on = done[i] && k.at <= V.s + 0.004; k.t = lerp(k.t, on ? 1 : 0, 1 - Math.exp(-dt * 5)); const s = Math.max(0.001, outBack(clamp(k.t, 0, 1)) * k.r); k.m.scale.set(s, s, s * 0.8); k.gold = Math.max(0, k.gold - dt * 0.8); k.m.material = k.gold > 0.05 ? RING_GOLD : RING; });
-    LEAVES.forEach((lf, i) => { const on = udone[i] && lf.at <= V.s + 0.004; lf.t = clamp(lf.t + (on ? dt / 1.6 : -dt * 3), 0, 1); lf.pv.scale.setScalar(Math.max(0.001, outBack(lf.t))); lf.pitch.rotation.z = lerp(1.35, 0.42, smooth(lf.t)) + Math.sin(t * 1.3 + i) * 0.03; lf.roll.rotation.x = lerp(lf.side * 1.6, lf.side * 0.75, smooth(lf.t)) + Math.sin(t * 2.1 + i) * 0.04; });
+    UN.forEach((k, i) => { const on = udone[i] && k.at <= V.s + 0.004; k.t = lerp(k.t, on ? 1 : 0, 1 - Math.exp(-dt * 5)); const s = Math.max(0.001, outBack(clamp(k.t, 0, 1)) * k.r); k.m.scale.set(s, s, s * 0.8); k.gold = Math.max(0, k.gold - dt * 0.8); k.m.material = crowned[i] || k.gold > 0.05 ? RING_GOLD : RING; });
+    LEAVES.forEach((lf, i) => { const on = done[i] && lf.at <= V.s + 0.004; lf.t = clamp(lf.t + (on ? dt / 1.4 : -dt * 3), 0, 1); lf.pv.scale.setScalar(Math.max(0.001, outBack(lf.t))); const o = smooth(lf.t); lf.pitch.rotation.z = lerp(1.35, PITCH, o) + Math.sin(t * 1.3 + i) * 0.025; lf.roll.rotation.x = lf.side * lerp(1.3, ROLL, o) + Math.sin(t * 2.1 + i) * 0.03; });
     // The bud rides the tip through the last unit, then opens
     sample(V.s, tipQ); flower.position.copy(tipQ.p); flower.quaternion.setFromUnitVectors(V3(0, 1, 0), tipQ.t);
     if (bloomOn) V.bloomT += dt;
@@ -2622,22 +2731,35 @@ const PlantView = (() => {
     goalStar.material.opacity = bloomOn ? 0 : 0.55 + Math.sin(t * 2.4) * 0.3;
     clouds.forEach(c => { c.position.x += c.userData.v * dt; if (c.position.x > 26) c.position.x = -26; });
     tickParticles(dt);
-    // The guide flies across from the lesson labels, between the ring at the tip and the one below it, so it
-    // never covers a label; prizes float across from the lesson that wins them
+    // The guide perches on the newest leaf beside the stalk, clear of the labels and of what the leaves carry, and
+    // hops up to each new leaf. Before the first leaf it stands by the seed, and around the open flower it flies.
     right.set(Math.cos(CAM.az), 0, -Math.sin(CAM.az)); fwd.set(Math.sin(CAM.az), 0, Math.cos(CAM.az));
     if (guide) {
-      const side = LS.length ? -sideOf(cur >= 0 ? cur : LS.length - 1) : 1, rr = lerp(1.15, 2.4, open), g = guide.g;
-      gp.copy(tipQ.p).addScaledVector(right, side * rr).addScaledVector(fwd, 0.35); gp.y = Math.max(0, gp.y - 0.95 - open * 0.7 - (V.s < 0.03 ? 1 : 0));
-      g.position.lerp(gp, 1 - Math.exp(-dt * 3)); guide.hop = Math.max(0, guide.hop - dt * 1.6); guide.shake = Math.max(0, guide.shake - dt * 2);
-      const air = g.position.y > 0.08, P2 = guide.P; guide.body.position.y = Math.sin(guide.hop * Math.PI) * 0.6 + (air && !reduced ? Math.sin(t * 2.2) * 0.06 : 0);
+      let tl = -1; LEAVES.forEach((lf, i) => { if (lf.t > 0.85) tl = i; });
+      const lf = tl >= 0 && !open ? LEAVES[tl] : null, side = lf ? lf.side : 1, g = guide.g;
+      if (lf) planG.worldToLocal(lf.roll.localToWorld(gp.set(0.45 + lf.L * 0.1, 0.03, 0)));
+      else { gp.copy(tipQ.p).addScaledVector(right, side * lerp(1.15, 2.4, open)).addScaledVector(fwd, 0.35); gp.y = Math.max(0, gp.y - 0.95 - open * 0.7 - (V.s < 0.03 ? 1 : 0)); }
+      g.position.lerp(gp, 1 - Math.exp(-dt * 3)); g.scale.setScalar(0.5 * clamp(CAM.dist / 9, 1, 1.15)); guide.hop = Math.max(0, guide.hop - dt * 1.6); guide.shake = Math.max(0, guide.shake - dt * 2);
+      const air = g.position.distanceTo(gp) > 0.15 || (!lf && g.position.y > 0.08), P2 = guide.P; guide.body.position.y = Math.sin(guide.hop * Math.PI) * 0.6 + (air && !reduced ? Math.sin(t * 2.2) * 0.06 : 0);
       g.rotation.y = CAM.az - side * 0.5 + (guide.hop > 0 ? (1 - guide.hop) * Math.PI * 2 : 0); g.rotation.z = Math.sin(t * 30) * guide.shake * 0.12;
       const wv = air || guide.hop > 0 ? 0.6 + Math.sin(t * 18) * 0.5 : 0.06; P2.wingL.rotation.z = wv; P2.wingR.rotation.z = -wv; P2.head.rotation.z = Math.sin(t * 0.8) * 0.1;
     }
-    for (const p of prizeGs) { sample(KN[p.i].at, tq); p.g.position.copy(tq.p).addScaledVector(right, -sideOf(p.i) * 0.95).addScaledVector(fwd, 0.2); p.g.position.y += Math.sin(t * 2 + p.i) * 0.06 - 0.3; p.m.rotation.y = t * 0.7 + p.i; if (p.m.userData.tick) p.m.userData.tick(t, dt); }
+    // What sits on the leaves rides on them as they sway. Prizes still to win wait in their bubbles above where
+    // their leaf will grow, and a prize just won unlocks onto its leaf.
+    plant.updateMatrixWorld(true);
+    LEAVES.forEach(lf => { if (lf.t > 0.02) planG.worldToLocal(lf.roll.localToWorld(lf.pad.copy(lf.padL))); else lf.pad.copy(lf.padS); });
+    for (const p of prizeGs) { hover(p.g, LEAVES[p.i], p.i); p.m.rotation.y = t * 0.7 + p.i; faceBubble(p, p.i); if (p.m.userData.tick) p.m.userData.tick(t, dt); }
+    for (const it of ITEMS) {
+      if (!it) continue; const lf = LEAVES[it.i], g = it.g;
+      if (it.state === 'locked') { hover(g, lf, it.i); g.scale.setScalar(1); it.m.rotation.y = t * 0.7 + it.i; faceBubble(it, it.i); }
+      else if (it.state === 'unlocking') unlockStep(it, lf, dt);
+      else { g.position.copy(lf.pad); g.scale.setScalar(Math.max(0.001, outBack(smooth(clamp((lf.t - 0.7) / 0.3, 0, 1))))); it.m.rotation.y = t * (it.kind === 'xp' ? 1.2 : 0.5) + it.i; if (it.badge) it.badge.position.y = 0.78 + Math.sin(t * 2.2 + it.i) * 0.03; }
+      if (it.kind === 'prize' && it.m.userData.tick) it.m.userData.tick(t, dt);
+    }
     // Camera: follows the tip; a drag, swipe or scroll looks around and it drifts back after a while
     CAM.idle += dt; if (CAM.manual != null && CAM.idle > 8 && !drag) { CAM.manual = null; showFollow(); }
     CAM.y += ((CAM.manual ?? followY()) - CAM.y) * (1 - Math.exp(-dt * 2.2));
-    const bl = bloomOn ? smooth(clamp(V.bloomT / 3, 0, 1)) : 0; CAM.dist = lerp(CAM.dist, baseDist() * lerp(1, 1.55, bl), 1 - Math.exp(-dt * 1.5));
+    const bl = bloomOn ? smooth(clamp(V.bloomT / 3, 0, 1)) : 0; CAM.dist = lerp(CAM.dist, baseDist() * lerp(1, 1.12, bl), 1 - Math.exp(-dt * 1.5));
     if (bloomOn && !drag && !reduced) CAM.az += dt * 0.18; else if (!reduced && !drag) CAM.az += (0.35 + Math.sin(t * 0.12) * 0.25 - CAM.az) * dt * 0.2;
     cam.position.set(Math.sin(CAM.az) * CAM.dist, CAM.y + CAM.dist * lerp(0.16, 0.3, bl), Math.cos(CAM.az) * CAM.dist); cam.lookAt(0, CAM.y, 0);
     sky.position.copy(cam.position); sunSprite.position.set(cam.position.x - 40, cam.position.y + 30, cam.position.z - 90);
@@ -2705,8 +2827,7 @@ const PLANT_CSS = `
 .pl-tag.sel{box-shadow:0 0 0 3px #fff,0 0 0 6px #2FB35A,0 10px 22px -8px rgba(8,20,60,.6)}
 .pl-tag.cur.sel{box-shadow:0 0 0 3px #FFC93C,0 0 0 6px #fff,0 10px 22px -8px rgba(8,20,60,.6)}
 .pl-tag .pz{margin-left:2px;font-size:15px}
-.pl-utag{pointer-events:auto;border:0;padding:7px 12px;border-radius:14px;background:#1F8A43;color:#fff;font:900 14px/1.2 var(--f-round);text-align:left;box-shadow:0 8px 18px -10px rgba(0,0,0,.6);cursor:pointer}
-.pl-utag small{display:block;font:900 10px var(--f-round);letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+.pl-utag{pointer-events:auto;border:0;padding:5px 11px;border-radius:999px;background:#1F8A43;color:#fff;font:900 13px/1.2 var(--f-round);box-shadow:0 8px 18px -10px rgba(0,0,0,.6);cursor:pointer}
 .pl-utag.crown{background:#B07800}
 .pl-utag.sel{box-shadow:0 0 0 3px #fff,0 8px 18px -10px rgba(0,0,0,.6)}
 .pl-goal{padding:6px 12px;border-radius:999px;background:#FF6FA8;color:#fff;font:900 12px/1 var(--f-round);letter-spacing:.06em;text-transform:uppercase;pointer-events:none;box-shadow:0 6px 14px -8px rgba(0,0,0,.6)}
@@ -2920,7 +3041,8 @@ const HOW_CSS = `
 /* ---------- Island prizes: passing lessons wins things for the kid's island ----------
    Every few lessons a kid passes, in any tree, wins a prize: a makeover colour (paint or a tree colour), and every
    second prize something big, like an animal or a treehouse (the list is C.PRIZES in the app). The next prizes
-   stand on the real islands that will win them in every skill tree's path, so a kid can see which lesson to aim for.
+   wait in locked bubbles on the plant where the leaf of the lesson that will win them is going to grow, so a kid
+   can see which lesson to aim for; once won, the prize sits on that lesson's leaf.
    How many lessons a prize takes follows the kid's pace, counted as lessons passed in the last 7 days:
      0 to 2 → 3 lessons, 3 to 6 → 4, 7 to 12 → 5, 13 to 18 → 6, 19 to 24 → 7, more → 8.
    A kid who learns now and then still wins something about once a week. A kid racing ahead gets prizes a little
@@ -2941,17 +3063,18 @@ const Prize = (() => {
   // A planned prize the kid has since got some other way is swapped for the next one on the list.
   const cur = (kid, p) => (!p.id.startsWith('chest') && C.hasPrize(kid, p.id) ? pick(kid, p.k, p.got) : p.id);
   // After a lesson is passed for the first time: wins the prize if this lesson reached it, then plans the next one.
-  function onPass(kid) {
+  // The lesson keeps the prize it won, for its leaf on the plant.
+  function onPass(kid, lesson) {
     const p = { ...state(kid, 1) }, m = mastered(kid); p.h = [...(p.h || []), Date.now()].slice(-40); p.id = cur(kid, p);
     let won = null;
     if (m >= p.at) {
       won = C.prizeInfo(p.id) || C.prizeInfo('chest:small');
       if (won.kind === 'chest') save(kid, { xp: (prog(kid).xp || 0) + won.xp }); else C.grantPrize(kid, p.id);
       const n = pace(p.h);
-      C.track('growth.prize', { id: p.id, name: won.name, kind: won.kind, big: !!won.big, n: p.k + 1, lessons: m, gap: p.gap, pace: n, next: gapFor(n) }, kid.id);
+      C.track('growth.prize', { id: p.id, name: won.name, kind: won.kind, big: !!won.big, n: p.k + 1, lessons: m, gap: p.gap, pace: n, next: gapFor(n), lesson: lesson || null }, kid.id);
       p.got = { ...(p.got || {}), [p.id]: today() }; p.k += 1; p.gap = gapFor(n); p.at = m + p.gap; p.id = pick(kid, p.k, p.got); p.closer = null;
     }
-    save(kid, { prize: p }); return won;
+    save(kid, won && lesson ? { prize: p, done: { [lesson]: { prize: won.id } } } : { prize: p }); return won;
   }
   // Saves a first schedule, and after a quiet spell pulls the next prize closer (never further away).
   function tick(kid) {

@@ -1,7 +1,8 @@
 /* ---------- Island prizes: passing lessons wins things for the kid's island ----------
    Every few lessons a kid passes, in any tree, wins a prize: a makeover colour (paint or a tree colour), and every
    second prize something big, like an animal or a treehouse (the list is C.PRIZES in the app). The next prizes
-   stand on the real islands that will win them in every skill tree's path, so a kid can see which lesson to aim for.
+   wait in locked bubbles on the plant where the leaf of the lesson that will win them is going to grow, so a kid
+   can see which lesson to aim for; once won, the prize sits on that lesson's leaf.
    How many lessons a prize takes follows the kid's pace, counted as lessons passed in the last 7 days:
      0 to 2 → 3 lessons, 3 to 6 → 4, 7 to 12 → 5, 13 to 18 → 6, 19 to 24 → 7, more → 8.
    A kid who learns now and then still wins something about once a week. A kid racing ahead gets prizes a little
@@ -22,17 +23,18 @@ const Prize = (() => {
   // A planned prize the kid has since got some other way is swapped for the next one on the list.
   const cur = (kid, p) => (!p.id.startsWith('chest') && C.hasPrize(kid, p.id) ? pick(kid, p.k, p.got) : p.id);
   // After a lesson is passed for the first time: wins the prize if this lesson reached it, then plans the next one.
-  function onPass(kid) {
+  // The lesson keeps the prize it won, for its leaf on the plant.
+  function onPass(kid, lesson) {
     const p = { ...state(kid, 1) }, m = mastered(kid); p.h = [...(p.h || []), Date.now()].slice(-40); p.id = cur(kid, p);
     let won = null;
     if (m >= p.at) {
       won = C.prizeInfo(p.id) || C.prizeInfo('chest:small');
       if (won.kind === 'chest') save(kid, { xp: (prog(kid).xp || 0) + won.xp }); else C.grantPrize(kid, p.id);
       const n = pace(p.h);
-      C.track('growth.prize', { id: p.id, name: won.name, kind: won.kind, big: !!won.big, n: p.k + 1, lessons: m, gap: p.gap, pace: n, next: gapFor(n) }, kid.id);
+      C.track('growth.prize', { id: p.id, name: won.name, kind: won.kind, big: !!won.big, n: p.k + 1, lessons: m, gap: p.gap, pace: n, next: gapFor(n), lesson: lesson || null }, kid.id);
       p.got = { ...(p.got || {}), [p.id]: today() }; p.k += 1; p.gap = gapFor(n); p.at = m + p.gap; p.id = pick(kid, p.k, p.got); p.closer = null;
     }
-    save(kid, { prize: p }); return won;
+    save(kid, won && lesson ? { prize: p, done: { [lesson]: { prize: won.id } } } : { prize: p }); return won;
   }
   // Saves a first schedule, and after a quiet spell pulls the next prize closer (never further away).
   function tick(kid) {
