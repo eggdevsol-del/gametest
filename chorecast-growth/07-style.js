@@ -149,18 +149,16 @@ body.gw-open{overflow:hidden}
 .gw-fbin.good{background:#E3F9EA;color:#14532D}
 .gw-fbin.bad{background:#FFF1E6;color:#7A3B00}
 .gw-done{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:12px}
-.gw-stars{display:flex;align-items:flex-end;gap:8px;margin-top:8px}
-.gw-star3{position:relative;width:76px;height:76px}
-.gw-star3:nth-child(2){width:96px;height:96px;transform:translateY(-10px)}
-.gw-star3 svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.gw-star3 .rs-sock path{fill:rgba(0,0,0,.22);stroke:rgba(255,255,255,.55);stroke-width:6;stroke-linejoin:round}
-.gw-star3 .rs-gold{opacity:0}
-.gw-star3 .rs-gold .rs-body{stroke:#2B2238;stroke-width:10;stroke-linejoin:round;paint-order:stroke}
-.gw-star3.on .rs-gold{animation:gwSlam .65s var(--d) cubic-bezier(.3,.7,.4,1) both}
-@keyframes gwSlam{0%{opacity:0;transform:scale(2.4) rotate(-120deg)}42%{opacity:1;transform:scale(1) rotate(0)}60%{transform:scale(1.18)}80%{transform:scale(.94)}100%{opacity:1;transform:scale(1)}}
-.gw-xpwin{display:inline-flex;flex-direction:column;align-items:center;gap:2px;padding:10px 20px;border-radius:20px;background:rgba(255,230,102,.25);font:900 22px var(--f-round)}
-.gw-xpwin.none{display:none}
-.gw-xpwin small{font:700 13px var(--f-round);opacity:.9}
+/* Results reuse the chore results look (.rstar, .res-score, .res-meter, .res-row, .res-pay from the app), a bit smaller under the stage */
+.gw-res{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
+.gw-res .rstar{width:clamp(62px,15vw,96px)}
+.gw-res .rstar:nth-child(2){width:clamp(78px,19vw,120px)}
+.gw-res .res-score{font-size:clamp(44px,11vw,84px)}
+.gw-acc{font:800 16px var(--f-round);opacity:.95;margin-top:-6px}
+.gw-acc b{font-weight:900}
+.gw-res .res-row.minus b{color:#FFD9D9}
+.res-end.in>.gw-p{animation:gwIn .3s both}
+.res-end.in .gw-actions{animation:gwIn .35s .2s both}
 .gw-banner{padding:10px 16px;border-radius:16px;background:rgba(255,255,255,.2);font:900 16px var(--f-round);animation:gwIn .4s .3s both}
 .gw-homecard{width:min(100%,460px);padding:14px 16px;border-radius:20px;background:#fff;color:#0D1530;text-align:left}
 .gw-homecard b{font:900 13px var(--f-round);text-transform:uppercase;letter-spacing:.06em;color:#B7791F}

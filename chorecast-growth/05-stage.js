@@ -254,10 +254,11 @@ function Stage3D(canvas) {
     const qs = []; for (let i = 0; i < Math.min(8, n || 6); i++) { const q = label('?', { h: 0.2, fg: '#2F6FE4' }); const a = i / Math.min(8, n || 6) * Math.PI * 2; q.position.set(X0 + Math.cos(a) * 0.95, 0.7, Math.sin(a) * 0.5); g.add(q); qs.push([q, a]); }
     return { g, tick(t) { cup.rotation.y = t * 0.8; qs.forEach(([q, a]) => { q.position.set(X0 + Math.cos(a + t * 0.6) * 0.95, 0.7 + Math.sin(t * 2 + a) * 0.1, Math.sin(a + t * 0.6) * 0.5); }); } };
   };
-  SC.done = ({ stars = 0, pass = true }) => {
+  // quiet: the results screen underneath plays the star sounds
+  SC.done = ({ stars = 0, pass = true, quiet = false }) => {
     const g = new T.Group(), list = [];
     for (let i = 0; i < 3; i++) { const sh = new T.Shape(); for (let k = 0; k < 10; k++) { const r = k % 2 ? 0.12 : 0.28, a = Math.PI / 2 + k * Math.PI / 5; k ? sh.lineTo(Math.cos(a) * r, Math.sin(a) * r) : sh.moveTo(Math.cos(a) * r, Math.sin(a) * r); } const sg = new T.ExtrudeGeometry(sh, { depth: 0.08, bevelEnabled: false }); sg.center(); const s = new T.Mesh(sg, i < stars ? coinM : toon(0x4b5675)); s.position.set(X0 + (i - 1) * 0.75, i === 1 ? 1.0 : 0.8, 0); s.visible = false; g.add(s); list.push(s); }
-    return { g, enter() { list.forEach((s, i) => pop(s, 1, 500, i * 260).then(() => { if (i < stars) { burst(g, s.position.clone(), 0xffe066, 10); if (C.Sound && C.Sound.step) C.Sound.step(i + 2); } })); }, tick(t) { list.forEach((s, i) => { s.rotation.y = Math.sin(t * 2 + i) * 0.4; }); } };
+    return { g, enter() { list.forEach((s, i) => pop(s, 1, 500, i * 260).then(() => { if (i < stars) { burst(g, s.position.clone(), 0xffe066, 10); if (!quiet && C.Sound && C.Sound.step) C.Sound.step(i + 2); } })); }, tick(t) { list.forEach((s, i) => { s.rotation.y = Math.sin(t * 2 + i) * 0.4; }); } };
   };
 
   /* ---- Task scenes: one per kind of question or game, reacting to every move the kid makes ---- */
