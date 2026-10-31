@@ -1,0 +1,329 @@
+# Real stories. Each teaches a skill, never just "this person got rich".
+# @case id | Name | tree | youngest band | icon | living (if about a living person)
+# meet: (meet@sprouts: for the youngest), decide: + opt: choice => what happened, happened:, skill:, turn:, check: items.
+# Facts were checked in October 2026 and should be re-checked every 6 months.
+
+@case buffett | Warren Buffett | invest | builders | 💼 | living
+meet: Warren Buffett bought his first shares at 11 and filed his first tax return at 13. He grew up delivering newspapers and running small businesses.
+decide: You're young and have saved a little. A friend says to spend it all on fun. What do you do?
+opt: Invest some and leave it for years => Buffett did this. Most of his wealth came after age 50, because his money compounded for decades.
+opt: Spend it all now => Fun, but it can't grow. Buffett often says time is an investor's best friend.
+happened: Buffett became one of the world's most famous investors by buying good businesses and holding them for a very long time. He has pledged to give the vast majority of his wealth to charity.
+skill: Patience. Start early, choose carefully, and let time do the work.
+turn: Look at your Chorecast Invest jar. What could it grow to if you left it alone for a year?
+check: mcq | What was the key to Buffett's investing? | Patience and holding for a long time* | Quick trades every day | Luck only
+check: tf | Most of Buffett's wealth came after he turned 50. | true
+
+@case graham | Benjamin Graham | invest | makers | 📘
+meet: Benjamin Graham taught investing at university and wrote "The Intelligent Investor" in 1949. Warren Buffett was one of his students.
+decide: Share prices crash and everyone is panicking. What would a careful investor do?
+opt: Look at what the business is really worth => Graham said the market is like a moody partner, "Mr Market", who offers silly prices on bad days. Careful investors can use that.
+opt: Sell everything because others are => That's following the crowd. Graham warned against letting Mr Market's mood become yours.
+happened: Graham's ideas of a "margin of safety" (paying well below what something's worth) and ignoring market moods shaped generations of investors.
+skill: Thinking for yourself, especially when everyone else is emotional.
+turn: Next time a Chorecast fund drops, ask: has the business changed, or just the mood?
+check: mcq | Who is "Mr Market"? | An imaginary moody partner who offers prices daily* | A real banker | A TV host
+check: tf | A margin of safety means paying well below what something is worth. | true
+
+@case bogle | John Bogle | invest | makers | 🧭
+meet: John Bogle founded Vanguard in 1975 and started one of the first index funds for ordinary investors the next year.
+decide: Most funds charge high fees to try to beat the market. What did Bogle try instead?
+opt: Just own the whole market at a very low cost => That was his idea. Critics called it "Bogle's folly", but index funds now hold trillions of dollars.
+opt: Charge even higher fees for star managers => That's what many others did. Bogle showed that low costs often win over time.
+happened: Low-cost index funds spread around the world. Millions of people, including through {nz:KiwiSaver~au:super} funds, now invest this way.
+skill: Keeping costs low and staying the course.
+turn: Check what fee your Chorecast funds would charge if they were real. (Hint: the island market has no fees, but real funds do.)
+check: mcq | What was Bogle's big idea? | Low-cost index funds* | Day trading | Buying lottery tickets
+check: tf | Some people mocked Bogle's idea at first. | true
+
+@case musk | Elon Musk | make | builders | 🚀 | living
+meet: Elon Musk co-founded or led companies including SpaceX and Tesla.
+meet@builders: Elon Musk started SpaceX in 2002 to make space rockets cheaper.
+decide: Your first three rockets have exploded. You have money for one more try. What do you do?
+opt: Launch once more, fixing every lesson learned => That's what happened. The fourth Falcon 1 launch reached orbit in September 2008.
+opt: Give up and keep the money => Safer, but SpaceX would never have flown again.
+happened: SpaceX's first three launches failed between 2006 and 2008. The fourth succeeded and saved the company. Musk is also widely criticised, for example for his public statements and how some workers say they've been treated. People have strong views both ways.
+skill: Persistence and learning from failure, while remembering that how you treat people matters too.
+turn: Think of something that didn't work the first time. What would your "fourth launch" look like?
+check: mcq | How many SpaceX launches failed before the first success? | Three* | None | Ten
+check: tf | It's possible to admire someone's persistence and still question other things they do. | true
+
+@case perkins | Melanie Perkins | make | builders | 🎨 | living
+meet: Melanie Perkins grew up in Perth. At university she taught other students to use design software and saw how hard it was.
+decide: Investors keep saying no to your idea. What do you do?
+opt: Improve the pitch and keep going => She did, and Canva launched in 2013 after many rejections.
+opt: Decide the idea must be bad => Many great ideas get lots of no's first.
+happened: Canva became one of Australia's biggest tech companies, used by many millions of people. Melanie and her co-founder have pledged to give most of their shares to charity.
+skill: Turning rejection into feedback.
+turn: Ask someone for honest feedback on something you made, then improve one thing.
+check: mcq | What problem did Canva solve? | Design tools were too hard* | Phones were too big | Food was too expensive
+check: tf | Hearing "no" from investors can be part of the journey. | true
+
+@case atlassian | Mike Cannon-Brookes and Scott Farquhar | make | makers | 🧩 | living
+meet: In 2002 two Sydney university students started Atlassian with very little money, reportedly funding it on a credit card.
+decide: You have almost no money. Do you hire a big sales team or let the product sell itself?
+opt: Build a great product and let customers find it => Atlassian grew by letting teams try its software cheaply online, with almost no salespeople.
+opt: Borrow heavily for a huge sales team => Risky without customers yet.
+happened: Atlassian became a global software company used by teams worldwide.
+skill: Starting lean and making something people truly want.
+turn: Think of a business you could start with almost no money.
+check: mcq | How did Atlassian grow early on? | Customers trying its software cheaply online* | A huge TV ad campaign | Free cars
+check: tf | Atlassian was started by two university students. | true
+
+@case drury | Rod Drury | work | makers | 📊 | living
+meet: Rod Drury founded the accounting software company Xero in Wellington in 2006.
+decide: Small businesses hate doing their accounts. What would you build?
+opt: Simple online accounting that connects to bank accounts => That's what Xero did, so small businesses could see their numbers in real time.
+opt: A thicker paper accounts book => Paper books were the problem, not the solution.
+happened: Xero grew from New Zealand into a global business serving millions of subscribers.
+skill: Solving a boring but real problem really well.
+turn: What's a boring task at home that could be made easier?
+check: mcq | What does Xero help with? | Small business accounting* | Gaming | Travel
+check: tf | Xero started in New Zealand. | true
+
+@case morgan | Sam Morgan | make | builders | 🛒 | living
+meet: In 1999 Sam Morgan was trying to buy a heater and couldn't find a good place online. So he built one.
+decide: You can't find what you want online. What do you do?
+opt: Build a simple site where people can buy and sell => That was Trade Me. It grew into one of New Zealand's most-used websites.
+opt: Complain about it => Complaining doesn't build anything.
+happened: Trade Me was sold in 2006 for about NZ$700 million. Sam Morgan went on to give to many causes.
+skill: Spotting a problem in your own life and building the fix.
+turn: Name something you've wished existed. Who else might want it?
+check: mcq | What started Trade Me? | Sam couldn't find a heater online* | A movie | A school project about cats
+check: tf | Some businesses start from the founder's own problem. | true
+
+@case blakely | Sara Blakely | make | builders | 👖 | living
+meet: Sara Blakely sold fax machines door to door. She started Spanx in 2000 with about US$5,000 of her own savings.
+decide: You have a product idea but no experience. What now?
+opt: Learn as you go and start small with your own savings => She wrote her own patent from library books and cold-called stores.
+opt: Wait until you know everything => You might wait forever.
+happened: Spanx became a huge brand. Blakely credits her dad asking at dinner, "What did you fail at this week?" for making her unafraid to try.
+skill: Being brave about failure.
+turn: At dinner, share something you tried this week that didn't work.
+check: mcq | How much did Sara start with? | About US$5,000 of savings* | A billion dollars | Nothing
+check: tf | Her dad celebrated trying and failing. | true
+
+@case walker | Madam C. J. Walker | make | builders | 💇🏾‍♀️
+meet: Born Sarah Breedlove in 1867 to parents who had been enslaved, she worked as a laundress for very little pay.
+decide: You've made a hair care product that works. How do you grow?
+opt: Train other women to sell it and earn their own money => She trained thousands of sales agents, giving many Black women good incomes.
+opt: Sell only from your kitchen => Safe, but it would have helped far fewer people.
+happened: Madam C. J. Walker is often described as the first self-made female millionaire in the United States. She gave generously to schools and causes.
+skill: Building a business that lifts others up.
+turn: How could a business you dream up help other people earn money too?
+check: mcq | How did Madam C. J. Walker grow her business? | By training sales agents* | By borrowing a fortune | By luck
+check: tf | Her business helped many women earn their own money. | true
+
+@case disney | Walt Disney | mind | sprouts | 🎬
+meet@sprouts: Walt Disney loved drawing. His first cartoon company ran out of money. But he didn't stop drawing.
+meet: Walt Disney's first animation studio, Laugh-O-Gram, went bankrupt in 1923.
+decide: Your first company has failed. What do you do?
+opt: Move, start again and keep learning => He did, and later made famous cartoons and films.
+opt: Never draw again => Then Mickey Mouse might never have existed!
+happened: Disney's later studio became famous worldwide.
+skill: Bouncing back after failure.
+turn: Try again at something you gave up on.
+check: mcq | What happened to Walt's first studio? | It ran out of money* | It won a prize | It flew away
+check: tf | Failing once means you'll always fail. | false
+
+@case ford | Henry Ford | work | builders | 🚗
+meet: In 1913 Henry Ford's factory started using a moving assembly line to build cars.
+decide: Cars take ages to build and cost too much. What would you change?
+opt: Split the work into simple steps along a moving line => Building a car got much faster and cheaper.
+opt: Make every car by hand, one at a time => That's how it was done, and why cars were so expensive.
+happened: In 1914 Ford also raised pay to $5 a day, much more than usual, so workers stayed and could afford cars themselves. Ford is also criticised today, including for antisemitic writings he published.
+skill: Improving how work is done, while remembering people's whole story.
+turn: Time a chore, then try doing it in a smarter order.
+check: mcq | What did the assembly line do? | Made building cars faster and cheaper* | Made cars more expensive | Nothing
+check: tf | Ford raised pay to keep workers. | true
+
+@case ulmer | Mikaila Ulmer | make | sprouts | 🐝 | living
+meet@sprouts: When Mikaila was 4, she made lemonade using her great-gran's recipe with honey. She wanted to help bees too.
+meet: Mikaila Ulmer started a lemonade business at about 4 years old, after being stung by bees and then learning how important they are.
+decide: Your lemonade is popular. What else could it do?
+opt: Give some money to help save bees => She did. Her business supports groups that protect bees.
+opt: Keep it all => Fine, but Mikaila wanted her business to help.
+happened: Her lemonade went on sale in big supermarkets in the United States.
+skill: Using a business to help a cause you care about.
+turn: Plan a mini business that helps animals.
+check: mcq | What did Mikaila's lemonade help? | Bees* | Dragons | Cars
+check: tf | Kids can start businesses that help causes. | true
+
+@case hreljac | Ryan Hreljac | give | sprouts | 💧 | living
+meet@sprouts: When Ryan was 6, he learned some kids had no clean water. He did chores to earn money for a well.
+meet: In 1998, six-year-old Ryan Hreljac from Canada raised money for a well by doing extra chores.
+decide: You raised enough for one well. What next?
+opt: Keep going and get others involved => His project grew into a charity that has helped many communities get clean water.
+opt: Stop at one => One well still helps a whole village, which is great!
+happened: Ryan's Well Foundation grew from one boy's chores.
+skill: Small actions can grow into big change.
+turn: Pick a cause and a chore you could do to help it.
+check: mcq | How did Ryan raise money? | Doing chores* | Selling his house | A lottery
+check: tf | One kid's idea can grow into something big. | true
+
+@case yunus | Muhammad Yunus | give | builders | 🏦 | living
+meet: In 1976, economist Muhammad Yunus lent about US$27 to a group of women in a village in Bangladesh.
+decide: Banks won't lend to poor villagers. What do you do?
+opt: Lend tiny amounts and trust people to repay => They did repay. He started Grameen Bank to do this at scale.
+opt: Agree that poor people can't be trusted => That's what many banks believed. Yunus proved them wrong.
+happened: Yunus and Grameen Bank won the Nobel Peace Prize in 2006.
+skill: Trusting people and finding new ways to help.
+turn: What small amount could help someone start a tiny business?
+check: mcq | What did Yunus give villagers? | Small loans* | Free phones | Nothing
+check: tf | Most borrowers repaid their small loans. | true
+
+@case chouinard | Yvon Chouinard | give | makers | 🏔️ | living
+meet: Yvon Chouinard was a rock climber who started making climbing gear, then founded the outdoor clothing company Patagonia.
+decide: Your company is worth billions. What will you do with it?
+opt: Give it away so its profits fight climate change => In 2022 his family transferred ownership so future profits go to climate causes.
+opt: Sell it and buy a huge yacht => Many founders do. Chouinard chose differently.
+happened: Patagonia also encourages people to repair clothes instead of buying new.
+skill: Living by your values, even when it costs you.
+turn: Repair something instead of replacing it.
+check: mcq | What did Chouinard do in 2022? | Gave the company's future profits to climate causes* | Closed the company | Bought a rival
+check: tf | Patagonia encourages repairing clothes. | true
+
+@case hollows | Fred Hollows | give | sprouts | 👁️
+meet@sprouts: Fred Hollows was an eye doctor born in New Zealand. He helped thousands of people see again.
+meet: Fred Hollows, born in Dunedin in 1929, worked as an eye surgeon in Australia and helped people around the world.
+decide: Eye operations cost too much for many people. What do you do?
+opt: Find a way to make them cheap => His work helped make lenses much cheaper, so many more people could get cataract surgery.
+opt: Only help people who can pay => Then millions would stay blind.
+happened: The Fred Hollows Foundation continues his work today.
+skill: Using your skills to help as many people as possible.
+turn: What skill do you have that could help someone?
+check: mcq | What did Fred Hollows help people do? | See again* | Fly | Swim
+check: tf | Fred Hollows was born in New Zealand. | true
+
+@case thankyou | Thankyou | give | builders | 💧
+meet: Thankyou is an Australian social enterprise. It began in 2008 by selling bottled water.
+decide: You want to fight poverty. Do you start a charity or a business?
+opt: A business whose profits fund the cause => That's the social enterprise model Thankyou used.
+opt: Just ask for donations => Charities do great work too. Thankyou tried a different way.
+happened: Thankyou was set up to send its profits to projects fighting poverty.
+skill: Using business to fund a mission.
+turn: Design a product whose profits could help a cause.
+check: mcq | What is a social enterprise? | A business with a social mission* | A bank | A school
+check: tf | Businesses can be set up to help causes. | true
+
+@case eatmylunch | Eat My Lunch | give | sprouts | 🥪
+meet@sprouts: When people bought a lunch from Eat My Lunch, another lunch went to a kid at school who needed one.
+meet: Eat My Lunch started in Auckland in 2015 with a "buy one, give one" model for school lunches.
+decide: How could buying lunch help someone else?
+opt: Every lunch bought pays for a lunch for a hungry kid => That was the idea when it started.
+opt: Sell lunch only => Fine, but it wouldn't help anyone extra.
+happened: Eat My Lunch showed how everyday buying could help kids.
+skill: Making helping easy for everyone.
+turn: Think of a "buy one, give one" idea.
+check: mcq | What did "buy one, give one" mean? | Your purchase paid for a lunch for someone else* | Two lunches for you | Free lunches for adults
+check: tf | Everyday buying can help others. | true
+
+@case carnegie | Andrew Carnegie | give | makers | 📚
+meet: Andrew Carnegie arrived in the US as a poor boy from Scotland and made a fortune in steel.
+decide: You're one of the richest people alive. What will you do with it?
+opt: Give most of it away to things like libraries => He funded more than 2,500 public libraries.
+opt: Keep it all => Carnegie wrote that dying rich was a disgrace.
+happened: His workers often worked long hours for low pay, and a violent strike at one of his plants in 1892 is part of his story too.
+skill: Thinking about both how money is made and how it's used.
+turn: Find out when your local library was built.
+check: mcq | What did Carnegie fund? | Public libraries* | Rockets | Video games
+check: tf | Carnegie's story includes both giving and criticism. | true
+
+@case ngaitahu | Iwi investment | world | makers | 🌿
+meet: {nz:After Treaty settlements, many iwi manage collective assets for future generations. Ngāi Tahu's 1998 settlement is one example.~au:In New Zealand, many iwi manage collective assets for future generations after Treaty settlements. Ngāi Tahu's 1998 settlement is one example.}
+decide: Your community receives a settlement. Spend it now or invest it for many generations?
+opt: Invest it to support people for generations => Ngāi Tahu invested its settlement and has used returns for things like education grants and savings schemes for members.
+opt: Spend it all at once => It would help now, but not grandchildren.
+happened: Collective, long-term thinking is a strong tradition in many Indigenous cultures.
+skill: Thinking in generations, not years. This story should be told with iwi voices. Check Ngāi Tahu's own website.
+turn: What would you want to leave for your grandchildren?
+check: mcq | What does collective investment aim to do? | Support people for generations* | Spend everything now | Nothing
+check: tf | Long-term thinking is part of many Indigenous traditions. | true
+
+@case voc | The Dutch East India Company | time | builders | ⛵
+meet: In 1602 the Dutch East India Company (VOC) sold shares to the public.
+decide: Ships to Asia often sink. How can merchants share the risk?
+opt: Sell shares so many people own a little => One sunk ship then hurt everyone a little instead of one person a lot.
+opt: One rich person pays for everything => One bad storm could ruin them.
+happened: Its shares were traded in Amsterdam, an early stock exchange. The company also did terrible harm through violence and colonisation.
+skill: Understanding shared risk, and that history has hard sides.
+turn: Share a cost with a sibling, like a gift for a parent.
+check: mcq | What did the VOC do in 1602? | Sold shares to the public* | Invented the internet | Built a car
+check: tf | The VOC's history includes serious harm. | true
+
+@case mansamusa | Mansa Musa | time | builders | 👑
+meet: Mansa Musa ruled the Mali Empire in West Africa in the 1300s.
+decide: You travel with huge amounts of gold. What happens if you give lots away in one city?
+opt: Gold becomes worth less there => On his 1324 journey through Cairo, so much gold changed hands that its value dropped for years.
+opt: Gold becomes worth more => More of something usually makes it worth less, not more.
+happened: Mansa Musa is often called the richest person in history.
+skill: Understanding supply and inflation.
+turn: Find something that got cheaper because there was more of it.
+check: mcq | What happened to gold's value in Cairo? | It fell* | It rose | Nothing
+check: tf | Lots more of something can make it worth less. | true
+
+@case medici | The Medici | time | makers | 🏰
+meet: The Medici family of Florence ran a bank with branches across Europe in the 1400s.
+decide: Merchants don't want to carry chests of gold on dangerous roads. What could a bank offer?
+opt: Bills of exchange, a paper promise payable in another city => That let money move without moving gold.
+opt: Bigger chests => That doesn't solve the danger.
+happened: The Medici also funded famous artists and became very powerful in politics.
+skill: Seeing how trust and good records make money work.
+turn: Keep a simple record of your money for a week.
+check: mcq | What were bills of exchange? | Paper promises to pay in another city* | Gold bars | Tax forms
+check: tf | The Medici also funded artists. | true
+
+@case tulips | Tulip mania | invest | makers | 🌷
+meet: In the 1630s, rare tulip bulbs in the Netherlands sold for astonishing prices.
+decide: Everyone is buying tulips to sell for more next week. Do you join in?
+opt: Buy, hoping to sell higher => In February 1637 buyers vanished and prices collapsed.
+opt: Stay out because the price is about hype, not value => The cautious ones avoided the crash.
+happened: Historians debate how big the damage was, but "tulip mania" is the classic example of a bubble.
+skill: Telling hype from value.
+turn: Spot one thing that's popular right now because of hype.
+check: mcq | What ended tulip mania? | Buyers suddenly disappeared* | Tulips became illegal | Rain
+check: tf | Bubbles are driven by hype. | true
+
+@case madoff | Bernie Madoff | online | makers | 🕳️
+meet: Bernie Madoff ran an investment firm that promised steady, high returns year after year.
+decide: An investment always goes up, never down, no matter what the market does. What do you think?
+opt: Too good to be true. Ask questions => The returns were fake. He paid old investors with new investors' money.
+opt: Invest everything => Many people did and lost their savings.
+happened: Madoff was arrested in 2008. It was one of the biggest Ponzi schemes in history.
+skill: Spotting "too good to be true".
+turn: Find one ad promising guaranteed returns and list why it's suspicious.
+check: mcq | What's a Ponzi scheme? | Paying old investors with new investors' money* | A pizza shop | A real investment
+check: tf | Steady returns no matter what are a warning sign. | true
+
+@case enron | Enron | world | launchers | 📉
+meet: Enron was a giant US energy company that reported huge profits.
+decide: The company's numbers look amazing, but nobody can explain how. What would you do?
+opt: Ask hard questions and check independently => The profits were partly invented and debts were hidden.
+opt: Trust the numbers because they're big => Many did, and lost their money and jobs.
+happened: Enron collapsed in 2001. New laws made leaders and auditors more responsible for honest accounts.
+skill: Asking "how?" when numbers look too good.
+turn: Read a company's annual report summary and find one number you'd question.
+check: mcq | What did Enron hide? | Debts and real losses* | Its logo | Nothing
+check: tf | Auditors are meant to check accounts independently. | true
+
+@case theranos | Theranos | mind | makers | 🧪
+meet: Theranos claimed it could run many medical tests from a single drop of blood.
+decide: A company makes huge claims but won't let experts check its machines. What's the right response?
+opt: Ask for evidence before believing => Journalists and scientists did, and found the technology didn't work as claimed.
+opt: Believe it because famous people support it => Many big names did, and were misled.
+happened: Founder Elizabeth Holmes was convicted of fraud in 2022.
+skill: Evidence matters more than hype or famous supporters.
+turn: Find a product claim and look for real evidence behind it.
+check: mcq | What should you ask for with big claims? | Evidence* | More hype | Nothing
+check: tf | Famous supporters don't prove something works. | true
+
+@case ftx | FTX | invest | launchers | 🪙
+meet: FTX was a large crypto exchange where customers kept money to trade.
+decide: An exchange offers great deals but its finances are secret. Do you trust it with your savings?
+opt: Be cautious and check how customer money is protected => FTX had secretly used customer funds. It collapsed in November 2022.
+opt: Put everything in because it's popular => Many customers lost access to their money.
+happened: Founder Sam Bankman-Fried was convicted of fraud in 2023.
+skill: Protecting your money by checking who holds it and how.
+turn: Find out how your bank protects your money.
+check: mcq | What went wrong at FTX? | Customer money was secretly used* | A website crash | Too many customers
+check: tf | Customer funds should be kept separate. | true

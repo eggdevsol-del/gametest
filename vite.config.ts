@@ -7,6 +7,9 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      // This branch serves Chorecast, so retire the Tattoo Tycoon offline copy: devices that installed it get a
+      // service worker that unregisters itself and clears its cache, instead of replaying the game for every page.
+      selfDestroying: true,
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
