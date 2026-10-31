@@ -201,6 +201,7 @@ function onClick(e) {
     case 'plantSel': return PlantView.ok && PlantView.select(+a.dataset.i);
     case 'plantUnit': return PlantView.ok && PlantView.unit(+a.dataset.i);
     case 'plantBloom': return PlantView.ok && PlantView.bloomAgain();
+    case 'plantOver': return PlantView.ok && PlantView.overview(false);
     case 'how': case 'howAgain': { const R = Grow.run, step = R && R.steps[R.k]; if (step && step.item) HowTo.run(a.closest('.gw-card'), step.item, kid, { again: true }); return; }
     case 'howSkip': case 'howDone': return HowTo.finish(a.closest('.gw-card'));
     case 'challenge': return startChallenge(kid, id);
