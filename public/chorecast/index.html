@@ -688,6 +688,7 @@ p{margin:0}
 .wiz-bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--hue),color-mix(in srgb,var(--hue) 55%,#fff))}
 .wiz-go{min-height:54px;min-width:190px;padding:0 28px;border-radius:16px;background:var(--p-accent);color:var(--p-accent-ink);font:600 18px var(--f-text);box-shadow:0 12px 26px -14px var(--p-accent);transition:transform .12s}
 .wiz-go:active{transform:scale(.97)}
+.wiz-go:disabled{opacity:.45;box-shadow:none}
 @media (max-width:560px){ .wiz-go{min-width:0} .wiz-fit{font-size:13px} .wiz-prog i{width:10px} .wiz-prog i.on{width:22px} .wiz-ex{padding:16px} .wiz-ex-ic{width:54px;height:54px;font-size:30px} }
 .wiz-done .wiz-body{align-items:stretch;text-align:center}
 .wiz-hero{position:relative;height:230px;margin-top:6px}
@@ -1214,6 +1215,76 @@ p{margin:0}
 .shots .pol-cap{font-size:12px;margin-top:6px}
 .proof-note{font:800 clamp(15px,2.8cqmin,19px) var(--f-round)}
 
+/* ---------- First use: welcome cards, Do this next, the guide's tour, pocket money, Getting started ---------- */
+.wel{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;text-align:left;width:100%}
+.wel li{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:20px;background:rgba(255,255,255,.14)}
+.wel-pic{position:relative;flex:none;width:86px;display:flex;align-items:center;justify-content:center}
+.wel-pay{position:absolute;right:-2px;bottom:-6px;padding:2px 7px;border-radius:999px;background:#fff;color:#0D1530;font:900 12px var(--f-round)}
+.wel-jars{gap:1px}
+.wel-jars .jar-svg,.has3d .wel-jars .jar-svg{display:block;width:20px;height:auto;margin:0}
+.wel-t{min-width:0}
+.wel-t b{display:block;font:800 17px/1.25 var(--f-round)}
+.wel-t small{display:block;margin-top:3px;font:600 14px/1.4 var(--f-round);color:var(--on-sky-2)}
+.wel-head h1{font:900 clamp(23px,4.6vw,28px)/1.15 var(--f-round);letter-spacing:-.01em}
+.wel-head p{margin-top:6px;font:600 15px/1.45 var(--f-round);color:var(--on-sky-2)}
+.auth-card>.btn-white{width:100%}
+.wel-links{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px}
+.auth-local-note{max-width:40ch;margin-top:-12px;text-align:center;font:600 13px/1.4 var(--f-round);color:var(--on-sky-3)}
+.wel-empty{max-width:600px}
+.wel-empty .btn-white{margin-top:6px}
+.next-card{grid-column:1/-1;display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;border-radius:var(--r-lg);text-align:left;color:#fff;transition:transform .15s}
+.next-card:active{transform:scale(.985)}
+.next-ic{flex:none}
+.next-card.done .next-ic{font-size:44px;width:54px;text-align:center}
+.next-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.next-txt small{font:800 12px var(--f-round);letter-spacing:.08em;text-transform:uppercase;color:var(--on-sky-2)}
+.next-txt b{font:900 clamp(20px,3.6vw,26px)/1.15 var(--f-round)}
+.next-txt em{font:700 15px var(--f-round);font-style:normal;color:var(--on-sky-2)}
+.next-go{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#0D1530;box-shadow:0 10px 22px -10px rgba(0,0,0,.4)}
+.next-go .ic{width:24px;height:24px;margin-left:3px}
+.card.flash{animation:flash 1.2s ease-out}
+@keyframes flash{0%,40%{box-shadow:0 0 0 4px #FFE08A,0 14px 34px -14px rgba(8,20,60,.4)}}
+.tour-again{justify-self:center;min-height:44px;padding:0 18px;border-radius:999px;font:800 15px var(--f-round);color:var(--on-sky-2)}
+#tour{position:relative;z-index:50}
+.tour{position:fixed;inset:0}
+.tour.dim{background:rgba(5,10,30,.66)}
+.tour.mid{display:flex;align-items:center;justify-content:center;padding:16px}
+.tour-shade{position:fixed;inset:0;background:rgba(5,10,30,.66)}
+.tour-ring{position:fixed;border-radius:22px;box-shadow:0 0 0 3px #FFE08A,0 0 26px 4px rgba(255,224,138,.45);pointer-events:none}
+.tour-box{position:fixed;left:0;right:0;margin-inline:auto;width:min(460px,calc(100% - 32px));display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:24px;background:var(--sheet);color:var(--ink);box-shadow:0 24px 50px -20px rgba(0,0,0,.55);animation:zoom .3s ease-out}
+.tour.mid .tour-box{position:relative}
+.tour-guide{flex:none;width:60px;height:60px;border-radius:20px;display:grid;place-items:center;font-size:38px;background:linear-gradient(145deg,#FFE08A,#FFB547);animation:float 3s ease-in-out infinite}
+.tour-main{flex:1;min-width:0}
+.tour-main small{font:800 12px var(--f-round);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.tour-main p{margin-top:4px;font:800 19px/1.35 var(--f-round)}
+.tour-acts{display:flex;align-items:center;gap:8px;margin-top:12px}
+.tour-say{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--fill);color:var(--p-accent)}
+.tour-skip{min-height:44px;padding:0 12px;margin-left:auto;font:700 16px var(--f-round);color:var(--ink-2)}
+.tour-next{min-height:48px;padding:0 22px;border-radius:999px;background:var(--p-accent);color:#fff;font:800 17px var(--f-round)}
+.tour-pick{flex-direction:column;align-items:stretch;text-align:center}
+.tour-pick h2{font:900 22px/1.25 var(--f-round)}
+.tour-guides{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tour-guides button{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px;border-radius:20px;background:var(--fill);color:var(--ink);font:800 14px/1.2 var(--f-round)}
+.tour-guides button span{font-size:44px}
+.tour-pick .tour-skip{margin:0 auto}
+.wo b small{display:block;margin-top:2px;font:400 14px var(--f-text);color:var(--ink-2)}
+.pk-real{padding:18px 20px;border-radius:24px;background:var(--cell);box-shadow:inset 0 0 0 1px var(--line)}
+.pk-real h2{font:700 21px var(--f-text);margin-bottom:8px}
+.pk-real p{font:400 16px/1.5 var(--f-text);color:var(--ink-2);margin-top:6px}
+.pk-real b{color:var(--ink);font-weight:600}
+.start-bar{height:8px;border-radius:4px;background:var(--fill-2);overflow:hidden;margin:-6px 0 16px}
+.start-bar i{display:block;height:100%;border-radius:4px;background:var(--good);transition:width .4s}
+.start-row{align-items:flex-start;padding-block:14px}
+.start-ck{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 15px var(--f-text);color:var(--p-accent);box-shadow:inset 0 0 0 2px var(--p-accent)}
+.start-ck .ic{width:17px;height:17px;stroke-width:3}
+.start-row.done .start-ck{background:var(--good);color:#fff;box-shadow:none}
+.start-row.done .row-main b{color:var(--ink-2)}
+.start-row .pbtn{align-self:center}
+.start-kids{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.start-kids .ava-s{width:26px;height:26px;font-size:15px}
+.start-e{flex:none;width:30px;font-size:24px;text-align:center}
+.hs-steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;font:400 16px/1.45 var(--f-text)}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   #sky .cloud{animation:none;transform:translateX(var(--x))}
@@ -1633,7 +1704,7 @@ let cacheT = 0;
 function cacheSoon() { clearTimeout(cacheT); cacheT = setTimeout(() => lsSet(cacheKey(), { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits, growth: Store.growth, guides: Store.guides }), 600); }
 function applySnapshot(d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; Store.guides = d.guides || {}; }
 async function startServerMode(me) {
-  Acct.me = me; Acct.available = true; lsSet('cc:me', me); Store.mode = 'server';
+  Acct.me = me; Acct.available = true; lsSet('cc:me', me); lsSet('cc:hadAcct', true); Store.mode = 'server';
   const cached = lsGet(cacheKey(), null); if (cached) applySnapshot(cached);
   try { applySnapshot(await api('GET', '/api/sync')); cacheSoon(); }
   catch (e) { if (e.status === 401) return signedOut(); if (!cached) toast('Offline. Showing what this device saved last.'); }
@@ -1891,9 +1962,29 @@ function homeSwaps(f) {
   return sw;
 }
 function swapWords(c, sw) { if (!sw.length) return c; const fix = t => { for (const [a, b] of sw) if (t === a) return b; return t; }; return { ...c, title: fix(c.title), steps: c.steps.map(fix) }; }
+// The pocket-money step sets one scale for every built-in job's price, so a week of jobs comes to roughly what the
+// family picked. A grown-up's own prices (custom jobs and prices they changed) stay as they set them.
+const nicePay = (v, step) => Math.max(step, Math.round(v / step) * step);
+function scalePay(c, k) {
+  if (k === 1) return c;
+  const o = { ...c };
+  if (c.pay > 0) o.pay = nicePay(c.pay * k, 10);
+  if (c.perUnit > 0) o.perUnit = nicePay(c.perUnit * k, 5);
+  if (c.rate > 0) o.rate = nicePay(c.rate * k, 50);
+  if (c.quoteMin > 0) { o.quoteMin = nicePay(c.quoteMin * k, 50); o.quoteMax = Math.max(o.quoteMin + 50, nicePay(c.quoteMax * k, 50)); o.quote = clamp(nicePay(c.quote * k, 50), o.quoteMin, o.quoteMax); }
+  return o;
+}
+// Roughly a week's pay for a kid who does every must-do and team task: their own bed, two more must-dos and two team
+// tasks a day, at the average price of the fixed-price jobs their age gets. Side hustles come on top.
+function weekPay(age, list = allChores()) {
+  const fits = t => list.filter(c => c.tier === t && c.payType === 'fixed' && !c.custom && fitsAge(c, age) && !isOff(c));
+  const avg = l => (l.length ? l.reduce((n, c) => n + (c.pay || 0), 0) / l.length : 0), must = fits('must'), bed = must.find(c => c.anchor);
+  return Math.round(7 * ((bed ? bed.pay : 0) + 2 * avg(must.filter(c => !c.anchor)) + 2 * avg(fits('team'))));
+}
+const aboutDollars = c => fmt(Math.max(100, Math.round(c / 100) * 100)).replace(/\.00$/, '');
 function allChores() {
-  const s = S(), sw = homeOn() ? homeSwaps(homeF()) : null;
-  return CHORES.concat((s.custom || []).map(c => ({ payType: 'fixed', minAge: 0, scope: 'home', every: 1, ...c, custom: true }))).map(c => {
+  const s = S(), sw = homeOn() ? homeSwaps(homeF()) : null, k = (s.pocket && s.pocket.scale) || 1;
+  return CHORES.map(c => scalePay(c, k)).concat((s.custom || []).map(c => ({ payType: 'fixed', minAge: 0, scope: 'home', every: 1, ...c, custom: true }))).map(c => {
     const o = s.payOverride && s.payOverride[c.key];
     if (o != null) c = { ...c, [rateField(c)]: o };
     return sw ? swapWords(c, sw) : c;
@@ -3733,6 +3824,10 @@ function render() {
   hydratePhotos(app);
   paintSky();
   G3.sync();
+  // The tour sits in its own layer above the 3D canvas, so the dimming covers islands and stickers too
+  const tr = $('#tour') || document.body.appendChild(Object.assign(document.createElement('div'), { id: 'tour' })), th = UI.screen === 'kid' && curKid() ? tourView(curKid()) : '';
+  if (tr.dataset.h !== String(hash(th))) { tr.innerHTML = th; tr.dataset.h = hash(th); }
+  if (UI.tour) placeTour();
   if (UI.sheet && UI.sheet.live) renderSheet(false);
   checkPayday();
 }
@@ -3830,7 +3925,7 @@ function viewWho() {
     ${kids.length ? `<h2 class="sec-t">Who's working today?</h2>
     <div class="kid-grid">${kids.map(k => kidCard(k, date)).join('')}
       ${kids.length > 1 ? `<button class="kcard crew-card glass" data-act="crew"><div class="crew-avas">${kids.slice(0, 4).map(k => `<span style="--hue:${k.hue}">${k.avatar}</span>`).join('')}</div><div class="kc-name">${ic('crew')} Crew mode</div><p>Do chores at the same time, side by side on a split screen.</p></button>` : ''}
-    </div>` : `<section class="empty glass">${sunMark(84)}<h2>Your family sky is clear</h2><p>Add your kids and each one gets a daily forecast of chores, habits and pay.</p><button class="btn-white" data-act="setup">Set up your family</button></section>`}
+    </div>` : `<section class="empty glass wel-empty">${sunMark(64)}<h2>Welcome to Chorecast</h2>${welcomeList()}<button class="btn-white" data-act="setup">Set up your family</button></section>`}
   </div>`;
 }
 function kidCard(k, date) {
@@ -3844,6 +3939,19 @@ function kidCard(k, date) {
     ${k.pin ? `<div class="kc-money kc-private">${ic('lock')} Private</div>` : `<div class="kc-money num">${fmt(netWorth(k))}</div>`}
     <div class="kc-meta"><span>${ic('check')} ${p.done}/${p.total} chores</span><span>${ic('flame')} ${st} day${st === 1 ? '' : 's'}</span></div>
   </button>`;
+}
+
+/* ---------- Welcome: what Chorecast is for, before anyone signs in or sets up ---------- */
+function welcomeList() {
+  const bed = THEMES.bedroom, out = THEMES.outdoor, lv = { spend: 0.72, save: 0.5, invest: 0.3, give: 0.38 };
+  return `<ol class="wel">
+    <li><span class="wel-pic" aria-hidden="true"><span class="sticker sm" style="--c1:${bed.c1};--c2:${bed.c2}">🛏️</span><span class="wel-pay num">${fmt((allChores().find(c => c.key === 'bed') || {}).pay || 50)}</span></span>
+      <span class="wel-t"><b>Kids do real jobs at home and get paid fairly</b><small>A few jobs a day that suit their age. They take a photo when they finish, a grown-up checks it, then they’re paid.</small></span></li>
+    <li><span class="wel-pic wel-jars" aria-hidden="true">${JARS.map(x => jarSVG(lv[x.k], x.color, 'wel' + x.k)).join('')}</span>
+      <span class="wel-t"><b>They practise saving, spending and giving</b><small>Pay splits into four jars: Spend, Vault, Invest and Give. Real cash only changes hands when a grown-up chooses.</small></span></li>
+    <li><span class="wel-pic" aria-hidden="true"><span class="sticker sm" style="--c1:${out.c1};--c2:${out.c2}">🌳</span></span>
+      <span class="wel-t"><b>Short lessons grow their Learning Tree</b><small>Money and good character, a little at a time, read aloud for younger kids. Lessons win prizes for their island.</small></span></li>
+  </ol>`;
 }
 
 /* ---------- Kid home ---------- */
@@ -3881,6 +3989,7 @@ function kidToday(kid) {
   const prog = all.length ? done / all.length : 0; UI.skyProgress = prog;
   const nw = netWorth(kid), cond = condition(done, all.length), tm = todayMoney(kid), j = kid.jars || {};
   return `<div class="split">
+    ${nextCard(kid, date)}
     <section class="hero" aria-label="Today's forecast">
       <div class="hero-loc"><span class="hero-ava" style="--hue:${kid.hue}">${kid.avatar}</span><span>${esc(kid.name)}'s sky</span>${kid.example ? '<span class="chip-ex">Example</span>' : ''}${wxChip()}</div>
       <div class="hero-num num ${nw >= 100000 ? 'long' : ''}" aria-label="All your money: ${fmt(nw)}">${heroMoney(nw)}</div>
@@ -3902,12 +4011,102 @@ function kidToday(kid) {
       ${gigCard(gigs, kid, date)}
       ${habitCard(kid, date)}
       ${paydayCard(kid)}
+      <button class="tour-again" data-act="tourAgain">👋 Show me around again</button>
     </div>
   </div>`;
 }
+// "Do this next": one card at the top of Today that walks a kid through their day in order. Must-dos, team tasks,
+// today's lesson, good habits, then a side hustle, and finally "All done for today!".
+function nextUp(kid, date) {
+  const b = boardFor(kid, date), st = c => choreState(kid.id, c, date).state;
+  for (const c of [...b.must, ...b.team]) { const s = st(c); if (s === 'open' || s === 'redo') return { kind: 'chore', key: c.key, icon: c.icon, c, t: s === 'redo' ? `Fix up: ${c.title}` : c.title, s: `${TIERS[c.tier].label} · ${c.mins} min · ${payLabel(c)}` }; }
+  const L = window.Growth && Growth.nextLesson ? Growth.nextLesson(kid) : null;
+  if (L && !L.done && L.next) return { kind: 'lesson', icon: L.next.icon, t: L.next.title, s: `Today’s lesson · ${L.next.tree}` };
+  const hl = habitsForDay(kid, date), hd = habitDone(kid.id, date), left = Math.min(HABIT_GOAL, hl.length) - hl.filter(h => hd.has(h.key)).length;
+  if (left > 0) return { kind: 'habits', icon: '🔥', t: 'Tick off your good habits', s: `${left} more today keeps your streak going` };
+  const g = gigsFor(kid, date).find(c => { const s = st(c); return (s === 'open' || s === 'redo') && (c.minAge || 0) <= (kid.age || 8); });
+  if (g) return { kind: 'chore', key: g.key, icon: g.icon, c: g, t: g.title, s: `Side hustle · ${payLabel(g)} · earn a bit extra` };
+  return null;
+}
+function nextCard(kid, date) {
+  const n = nextUp(kid, date);
+  if (!n) return `<section class="next-card done glass"><span class="next-ic" aria-hidden="true">🌈</span><span class="next-txt"><small>Do this next</small><b>All done for today!</b><em>New jobs arrive tomorrow morning.</em></span></section>`;
+  const th = n.c ? THEMES[n.c.theme] || THEMES.tidy : { c1: '#FFB547', c2: '#F0509A' };
+  return `<button class="next-card glass" data-act="nextGo" data-kind="${n.kind}" ${n.key ? `data-key="${n.key}"` : ''}><span class="next-ic sticker sm" style="--c1:${th.c1};--c2:${th.c2}" aria-hidden="true">${n.icon}</span><span class="next-txt"><small>Do this next</small><b>${esc(n.t)}</b><em>${esc(n.s)}</em></span><span class="next-go" aria-hidden="true">${ic('play')}</span></button>`;
+}
+
+/* ---------- Show me around: the kid's guide on their first visit ----------
+   The guide they pick (the same one Character Growth uses) points at their jobs, how a job works, the jars, Grow and
+   the "Do this next" card in turn, read aloud for kids under 10, then opens their first job. Finishing or skipping marks the kid as toured; "Show me around again" on
+   Today replays it. */
+// A kid who has already done jobs knows their way round, so only brand-new kids get the tour on their own
+const knowsWay = k => !!k.toured || jobsOfKid(k.id).length > 0;
+const GUIDES = [['kea', '🦜', 'Kiri the kea'], ['cocky', '🐦', 'Coco the cockatoo'], ['robot', '🤖', 'Bolt the robot']];
+const guideFor = kid => GUIDES.find(g => g[0] === (Store.growth[kid.id] || {}).guide) || null;
+function tourSteps(kid) {
+  const b = boardFor(kid, dkey()), first = b.must.concat(b.team).find(c => choreState(kid.id, c, dkey()).state === 'open');
+  return [
+    { sel: '[data-tour="jobs"]', say: `These are your jobs for today, ${kid.name}. Must-dos first, then team tasks.` },
+    { sel: '[data-tour="jobs"] .tile', say: 'Tap a job to see its steps. Do each step, then take a photo of the finished job.' },
+    { sel: '.hero .minis', say: 'A grown-up checks your photo. Then your pay lands in your jars: Spend, Vault, Invest and Give.' },
+    { sel: '.tabbar [data-act="gOpen"]', say: 'Learn with me in Grow. Every lesson grows your Learning Tree and can win prizes for your island.' },
+    { sel: '.next-card', say: first ? `That’s everything! This card always shows what to do next. Let’s start with: ${first.title}.` : 'That’s everything! This card always shows what to do next.', first },
+  ];
+}
+function tourView(kid) {
+  const T = UI.tour; if (!T || T.kidId !== kid.id || UI.tab !== 'today') return '';
+  const g = guideFor(kid);
+  if (T.i < 0 || !g) return `<div class="tour dim mid" role="dialog" aria-modal="true" aria-label="Pick your guide"><div class="tour-box tour-pick">
+      <h2>Hi ${esc(kid.name)}! Who would you like to show you around?</h2>
+      <div class="tour-guides">${GUIDES.map(([k, e, n]) => `<button data-act="tourGuide" data-k="${k}"><span aria-hidden="true">${e}</span><b>${n}</b></button>`).join('')}</div>
+      <button class="tour-skip" data-act="tourSkip">Skip</button></div></div>`;
+  const L = tourSteps(kid), st = L[T.i], last = T.i === L.length - 1;
+  return `<div class="tour" role="dialog" aria-modal="true" aria-label="Show me around"><div class="tour-shade"></div><div class="tour-ring" hidden></div><div class="tour-box">
+      <span class="tour-guide" aria-hidden="true">${g[1]}</span>
+      <div class="tour-main"><small>${esc(g[2].split(' ')[0])} · ${T.i + 1} of ${L.length}</small><p aria-live="polite">${esc(st.say)}</p>
+        <div class="tour-acts"><button class="tour-say" data-act="tourSay" aria-label="Read it out loud">${ic('soundOn')}</button>
+          ${last ? '<button class="tour-skip" data-act="tourAgain">Show me again</button>' : `${T.i ? '<button class="tour-skip" data-act="tourBack">Back</button>' : '<button class="tour-skip" data-act="tourSkip">Skip</button>'}`}
+          <button class="tour-next" data-act="${last ? 'tourDone' : 'tourNext'}">${last ? (st.first ? 'Let’s go!' : 'Done') : 'Next'}</button></div></div>
+    </div></div>`;
+}
+// Called after every render: ring the step's target, dim the rest, and put the guide's bubble above or below it.
+function placeTour() {
+  const root = $('#tour .tour'); if (!root || root.classList.contains('mid')) return;
+  const T = UI.tour, kid = curKid(); if (!T || !kid) return;
+  const st = tourSteps(kid)[T.i], el = st && $(st.sel), ring = $('.tour-ring', root), box = $('.tour-box', root), shade = $('.tour-shade', root);
+  if (!el) { ring.hidden = true; shade.style.clipPath = shade.style.webkitClipPath = ''; box.style.top = Math.max(16, (innerHeight - box.offsetHeight) / 2) + 'px'; return; }
+  if (T.scrolled !== T.i) { T.scrolled = T.i; if (!el.closest('.tabbar')) el.scrollIntoView({ block: 'center' }); }
+  const r = el.getBoundingClientRect(), pad = 8, bh = box.offsetHeight;
+  ring.hidden = false;
+  Object.assign(ring.style, { left: `${r.left - pad}px`, top: `${r.top - pad}px`, width: `${r.width + pad * 2}px`, height: `${r.height + pad * 2}px` });
+  // Dim everything but the target: the whole screen, with the target's box cut out the other way round
+  const x1 = r.left - pad, y1 = r.top - pad, x2 = r.right + pad, y2 = r.bottom + pad;
+  shade.style.clipPath = shade.style.webkitClipPath = `polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, ${x1}px ${y1}px, ${x1}px ${y2}px, ${x2}px ${y2}px, ${x2}px ${y1}px, ${x1}px ${y1}px)`;
+  const below = r.top + r.height / 2 < innerHeight / 2;
+  box.style.top = `${below ? Math.min(innerHeight - bh - 12, r.bottom + pad + 14) : Math.max(12, r.top - pad - 14 - bh)}px`;
+}
+addEventListener('resize', () => { if (UI.tour) placeTour(); });
+addEventListener('scroll', () => { if (UI.tour) placeTour(); }, { passive: true });
+function sayOut(text) {
+  try { const u = new SpeechSynthesisUtterance(text), vs = speechSynthesis.getVoices(), v = vs.find(x => /en-(NZ|AU)/i.test(x.lang)) || vs.find(x => /^en/i.test(x.lang)); if (v) u.voice = v; u.rate = 0.95; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) {}
+}
+// Read each step out for kids under 10, as their lessons are, unless sound or Read aloud is off
+function tourSpeak(force) {
+  const T = UI.tour, kid = curKid(); if (!T || !kid) return;
+  if (!force && ((kid.age || 8) >= 10 || Sound.muted || (S().growth || {}).readAloud === false)) return;
+  const g = guideFor(kid), st = T.i >= 0 && g ? tourSteps(kid)[T.i] : null;
+  sayOut(st ? st.say : `Hi ${kid.name}! Who would you like to show you around?`);
+}
+function tourEnd(how) {
+  const T = UI.tour; UI.tour = null; if (!T) return;
+  try { speechSynthesis.cancel(); } catch (e) {}
+  const k = Store.kids[T.kidId]; if (k && !k.toured) updDoc('kids', k.id, { toured: Date.now() });
+  track('onboard.step', { step: 'kid_tour', how }, T.kidId);
+  scrollTo(0, 0); render();
+}
 function choreCard(tier, list, kid, date) {
   const T = TIERS[tier], n = list.filter(c => isDone(choreState(kid.id, c, date).state)).length;
-  return `<section class="card glass">
+  return `<section class="card glass" data-tour="${tier === 'must' ? 'jobs' : tier}">
     <header class="card-h"><span class="dot" style="background:${T.color}"></span><span class="card-t">${T.label}</span><span class="card-tag">· ${T.tag}</span><span class="card-r">${n}/${list.length}</span></header>
     <div class="tiles">${list.map((c, i) => tile(c, choreState(kid.id, c, date))).join('')}</div>
   </section>`;
@@ -3939,7 +4138,7 @@ function gigCard(gigs, kid, date) {
 function habitCard(kid, date) {
   const list = habitsForDay(kid, date), done = habitDone(kid.id, date), st = streakFor(kid.id), cnt = list.filter(h => done.has(h.key)).length;
   const cycle = st % 7, toBonus = 7 - cycle;
-  return `<section class="card glass wide">
+  return `<section class="card glass wide" data-tour="habits">
     <header class="card-h"><span class="dot" style="background:var(--habit)"></span><span class="card-t">Good habits</span><span class="card-tag">· Builds trust</span><span class="card-r">${ic('flame')} ${st}-day streak</span></header>
     <div class="habits">${list.map(h => `<button class="habit ${done.has(h.key) ? 'on' : ''}" data-act="habit" data-key="${h.key}" aria-pressed="${done.has(h.key)}"><span class="habit-ic" aria-hidden="true">${h.icon}</span><span class="habit-t">${esc(h.title)}</span><span class="habit-ck">${ic('check')}</span></button>`).join('')}</div>
     <div class="streak-track" aria-hidden="true">${Array.from({ length: 7 }, (_, i) => `<i class="${i < (cycle || (st && cnt >= HABIT_GOAL ? 7 : 0)) ? 'on' : ''}"></i>`).join('')}</div>
@@ -4323,7 +4522,11 @@ async function pinComplete() {
    minute with the app in the background. A grown-up can turn it off in Grown-ups, Kids, if it's forgotten. */
 const kidPinHash = (id, pin) => hashPin(`kid|${id}|${pin}`);
 function openKidGate(kid, mode, back) { UI.gate = { pin: '', first: null, err: '', mode, kid: kid.id, back: back || 'who' }; UI.screen = 'gate'; closeSheet(); render(); }
-function enterKid(id) { UI.kidId = id; UI.kidUnlocked = id; UI.kidTouch = Date.now(); UI.tab = 'today'; UI.screen = 'kid'; UI.paydaySig = null; Sound.ensure(); Sound.pop(); scrollTo(0, 0); render(); }
+function enterKid(id, o = {}) {
+  const k = Store.kids[id], tour = o.tour || UI.tourFor === id || (k && !k.example && !knowsWay(k)); UI.tourFor = null;
+  UI.kidId = id; UI.kidUnlocked = id; UI.kidTouch = Date.now(); UI.tab = 'today'; UI.screen = 'kid'; UI.paydaySig = null; Sound.ensure(); Sound.pop(); scrollTo(0, 0);
+  UI.tour = tour && k ? { kidId: id, i: guideFor(k) ? 0 : -1 } : null; render(); if (UI.tour) tourSpeak();
+}
 async function kidPinComplete(g) {
   const kid = Store.kids[g.kid]; if (!kid) { UI.gate = null; UI.screen = 'who'; return render(); }
   if (g.mode === 'kidCreate') {
@@ -4352,18 +4555,93 @@ function unlock() {
   if (Store.mode === 'server' && Acct.me && Acct.me.role === 'kid') api('POST', '/api/auth/elevate', { pinHash: S().pinHash }).catch(() => toast('Couldn’t unlock grown-up changes on this iPad. Check the connection.'));
   track('app.parent_unlocked', {}, null);
   UI.unlocked = true; UI.screen = 'parent'; UI.gate = null; const after = UI.afterUnlock; UI.afterUnlock = null; scrollTo(0, 0);
-  const h = S().home; if (!h || (!h.done && !h.skipped)) return startWizard(0, { then: after });
+  const h = S().home, fresh = !h || (!h.done && !h.skipped);
+  if (fresh && !S().pocket) return openPocket({ then: after, next: 'home' });
+  if (fresh) return startWizard(0, { then: after });
+  if (!after && startShown() && startList().some(x => !x.done) && !jobsList().some(j => j.status === 'pending')) UI.ptab = 'start';
   render(); afterWizard(after);
 }
-function afterWizard(after) { if (after === 'addKid') { UI.ptab = 'kids'; render(); openKidForm(); } }
+function afterWizard(after) { if (after === 'addKid') { UI.ptab = 'kids'; UI.backToStart = startShown(); render(); openKidForm(); } }
+
+/* ---------- Pocket money ----------
+   One screen in setup, and again from Money rules or Getting started: roughly how much a week, or pretend money
+   only. It answers "is this real money?" and scales the price of every built-in job so a week of jobs comes to about
+   what the family picked (see scalePay). */
+const POCKET = [[500, '🪙'], [1000, '💵'], [2000, '💰'], [3000, '🏦']];
+function openPocket(o = {}) {
+  const p = S().pocket; UI.pocket = { pick: p ? (p.pretend ? 'pretend' : p.week) : null, then: o.then || null, next: o.next || null, edit: !!o.edit };
+  UI.screen = 'parent'; closeSheet(); scrollTo(0, 0); render();
+}
+const pocketScale = week => { const ref = weekPay(9, CHORES); return ref ? Math.round(week / ref * 1000) / 1000 : 1; };
+const pocketLine = (p = S().pocket) => (!p ? 'Not chosen yet' : p.pretend ? 'Pretend money only. You never pay out' : `About ${aboutDollars(p.week)} a week per kid, if they do all their jobs`);
+function viewPocket() {
+  const P = UI.pocket, pick = P.pick, pretend = pick === 'pretend', k = pick == null || pretend ? 1 : pocketScale(pick), s = S();
+  const ex = ['bed', 'unload', 'car'].map(key => CHORES.find(c => c.key === key)).filter(Boolean).map(c => scalePay(c, k));
+  const opt = (v, e, label, sub) => `<button class="wo ${pick === v ? 'on' : ''}" data-act="pocketPick" data-v="${v}" aria-pressed="${pick === v}"><span class="wo-e" aria-hidden="true">${e}</span><b>${label}${sub ? `<small>${sub}</small>` : ''}</b><span class="wo-ck" aria-hidden="true">${ic('check')}</span></button>`;
+  return `<div class="wiz pocket" style="--hue:#30C25A">
+    <header class="wiz-top"><button class="plink" data-act="${P.edit ? 'pocketCancel' : 'pocketSkip'}">${P.edit ? 'Cancel' : 'Skip for now'}</button><b class="wiz-tt">Pocket money</b><span class="wiz-step"></span></header>
+    <div class="wiz-body">
+      <section class="wiz-q"><h1>How much pocket money a week?</h1><p>Roughly, for each kid who does all their jobs. Chorecast sets the price of every job to match. Older kids get bigger jobs, so they earn a little more.</p>
+        <div class="wiz-opts">${POCKET.map(([v, e]) => opt(v, e, `About ${aboutDollars(v)}`, 'a week')).join('')}${opt('pretend', '🎲', 'Pretend money only', 'no real cash')}</div></section>
+      <section class="wiz-ex" aria-label="What jobs pay"><div class="wiz-ex-h"><span class="wiz-ex-ic" aria-hidden="true">🏷️</span><div><b>What jobs pay</b><small>${pick == null ? 'Pick an amount to see the prices.' : pretend ? 'Play money, at the standard prices.' : 'You can change any price later in Chores.'}</small></div></div>
+        <div class="wiz-ex-list">${ex.map(c => { const th = THEMES[c.theme] || THEMES.tidy; return `<div class="wx on" style="--c1:${th.c1};--c2:${th.c2}"><span class="wx-ic" aria-hidden="true">${c.icon}</span><span class="wx-t">${esc(c.title)}</span><span class="wx-s num">${fmt(c.pay)}</span></div>`; }).join('')}</div></section>
+      <section class="pk-real"><h2>Is this real money?</h2>${pretend ? `
+        <p>No. Kids earn, save and spend play money, and you never hand over cash.</p>
+        <p>They still learn the same things: working for pay, saving in the vault and giving some away.</p>
+        <p>You can switch to real pocket money any time in Money rules.</p>` : `
+        <p><b>Yes, and you choose when it’s paid.</b> Chorecast keeps count, and each kid’s jars show what you owe them.</p>
+        <p>When they want cash, open Grown-ups, then Kids, and tap <b>Pay out cash</b>. Hand it over and their jar goes down.</p>
+        <p>If they buy something for their island with Spend money, it leaves their jar, so you don’t owe it any more. ${s.taxRate ? `Family tax (${s.taxRate}%) goes to a family fund for something everyone shares.` : ''}</p>`}</section>
+    </div>
+    <footer class="wiz-foot"><button class="wiz-go" data-act="pocketSave" ${pick == null ? 'disabled' : ''}>${P.edit ? 'Save' : 'Continue'}</button></footer>
+  </div>`;
+}
+function pocketDone(P) { UI.pocket = null; scrollTo(0, 0); if (P.next === 'home') return startWizard(0, { then: P.then }); render(); afterWizard(P.then); }
+
+/* ---------- Getting started ----------
+   A checklist for new grown-ups, first in the Grown-ups menu until it's hidden. Each line opens the place that does
+   it. Most lines read what's already true (kids added, home answered, a job paid), so little is stored. */
+const startShown = () => !(S().start || {}).hidden;
+function startList() {
+  const kids = kidsList().filter(k => !k.example), s = S(), pend = jobsList().filter(j => j.status === 'pending').length, f = homeOn() ? homeF() : null;
+  return [
+    { k: 'kids', done: kids.length > 0, t: 'Add your kids', sub: kids.length ? `${kids.map(k => esc(k.name)).join(', ')}. Add another from Kids any time.` : 'A name, an age and an animal. Their age decides which jobs they get.', act: 'startKid', go: 'Add a kid' },
+    { k: 'home', done: homeOn(), t: 'Tell Chorecast about your home', sub: f ? `${CHORES.filter(c => needsMet(c, f)).length} of ${CHORES.length} jobs fit your place.` : '10 quick questions, so kids only get jobs your place has.', act: 'wizStart', go: 'Start' },
+    { k: 'pocket', done: !!s.pocket, t: 'Choose pocket money', sub: s.pocket ? `${pocketLine()}.` : 'Roughly how much a week, or pretend money only. It sets the price of every job.', act: 'pocketOpen', go: 'Choose' },
+    { k: 'tour', done: kids.length > 0 && kids.every(knowsWay), t: 'Show your kids around', sub: 'Hand them the iPad. Their guide shows them where everything is, and reads it out for kids under 10.', kids: kids.filter(k => !knowsWay(k)) },
+    { k: 'pay', done: jobsList().some(j => j.status === 'approved' && j.tier !== 'bonus'), t: 'Check and pay their first job', sub: pend ? `${pend} job${pend === 1 ? '' : 's'} waiting for you in To review.` : 'When a kid finishes a job, it comes to To review with their photo. Check it, then pay or ask for a redo.', act: pend ? 'ptab' : '', tab: 'review', go: 'Review' },
+  ];
+}
+function pStart() {
+  const L = startList(), n = L.filter(x => x.done).length, all = n === L.length, srv = Store.mode === 'server' && Acct.me && Acct.me.role === 'parent';
+  const opt = (e, t, sub, act, tab) => `<button class="row rowbtn" data-act="${act}" ${tab ? `data-tab="${tab}"` : ''}><span class="start-e" aria-hidden="true">${e}</span><div class="row-main"><b>${t}</b><small>${sub}</small></div>${ic('next')}</button>`;
+  return `<header class="phead"><h2>${all ? 'You’re all set' : 'Getting started'}</h2><p>${all ? 'Everything’s ready. Kids get new jobs each morning, and finished jobs come to To review.' : `Five steps to get your family going. ${n} of ${L.length} done.`}</p></header>
+    <div class="start-bar" role="progressbar" aria-label="Getting started" aria-valuemin="0" aria-valuemax="${L.length}" aria-valuenow="${n}"><i style="width:${(n / L.length * 100).toFixed(0)}%"></i></div>
+    <div class="group">${L.map((x, i) => `<div class="row start-row ${x.done ? 'done' : ''}"><span class="start-ck" role="img" aria-label="${x.done ? 'Done' : `Step ${i + 1}`}">${x.done ? ic('check') : i + 1}</span><div class="row-main"><b>${x.t}</b><small>${x.sub}</small>
+        ${!x.done && x.kids && x.kids.length ? `<span class="start-kids">${x.kids.map(k => `<button class="pbtn" data-act="startTour" data-id="${k.id}"><span class="ava-s" style="--hue:${k.hue}">${k.avatar}</span>Show ${esc(k.name)} around</button>`).join('')}</span>` : ''}</div>
+        ${!x.done && x.act ? `<button class="pbtn primary" data-act="${x.act}" ${x.tab ? `data-tab="${x.tab}"` : ''}>${x.go}</button>` : ''}</div>`).join('')}</div>
+    <h3 class="pgroup-t">Whenever you like</h3><div class="group">
+      ${srv ? opt('📱', 'Pair a kid’s iPad', 'Kids don’t need an email. Their iPad pairs once with a 6-digit code.', 'ptab', 'family') + opt('🧑‍🤝‍🧑', 'Invite another grown-up', 'They get their own sign-in to the same family.', 'ptab', 'family') : ''}
+      ${opt('📲', 'Add Chorecast to your Home Screen', 'It opens full screen, like an app.', 'homeScreenHelp')}
+    </div>
+    <div class="pactions" style="margin-top:20px"><button class="pbtn" data-act="startHide">${all ? 'Hide Getting started' : 'Hide this list'}</button></div>`;
+}
+function homeScreenSheet() {
+  return `<div class="sh-head"><span></span><h2>Add to Home Screen</h2><button class="sh-ok" data-act="close">Done</button></div>
+    <div class="sh-body"><p class="hint">On an iPad or iPhone, in Safari:</p>
+      <ol class="hs-steps"><li>Tap the Share button, the square with an arrow pointing up.</li><li>Scroll down and tap <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b>. Chorecast now has its own icon and opens full screen.</li></ol>
+      <p class="hint">On Android, in Chrome: tap the ⋮ menu, then <b>Add to Home screen</b>.</p></div>`;
+}
 
 /* ---------- Grown-ups ---------- */
 function viewParent() {
   if (!UI.unlocked) { openGate(); return viewGate(); }
+  if (UI.pocket) return viewPocket();
   if (UI.wiz) return viewWizard();
+  if (UI.ptab === 'start' && !startShown()) UI.ptab = 'review';
   const t = UI.ptab, pend = jobsList().filter(j => j.status === 'pending').length;
-  const nav = [['review', 'review', 'To review', pend], ['kids', 'crew', 'Kids', 0], ['chores', 'list', 'Chores', 0], ['home', 'home', 'Our home', 0], ['bank', 'bank', 'Money rules', 0], ['skills', 'sparkle', 'Character Growth', 0], ['family', 'lock', 'Family and devices', 0]];
-  const main = t === 'kids' ? pKids() : t === 'chores' ? pChores() : t === 'home' ? pHome() : t === 'bank' ? pBank() : t === 'family' ? pFamily() : t === 'skills' ? (window.Growth ? Growth.parentView() : '<div class="pempty">Character Growth is loading…</div>') : pReview();
+  const nav = [...(startShown() ? [['start', 'star', 'Getting started', 0]] : []), ['review', 'review', 'To review', pend], ['kids', 'crew', 'Kids', 0], ['chores', 'list', 'Chores', 0], ['home', 'home', 'Our home', 0], ['bank', 'bank', 'Money rules', 0], ['skills', 'sparkle', 'Character Growth', 0], ['family', 'lock', 'Family and devices', 0]];
+  const main = t === 'start' ? pStart() : t === 'kids' ? pKids() : t === 'chores' ? pChores() : t === 'home' ? pHome() : t === 'bank' ? pBank() : t === 'family' ? pFamily() : t === 'skills' ? (window.Growth ? Growth.parentView() : '<div class="pempty">Character Growth is loading…</div>') : pReview();
   return `<div class="pwrap">
     <aside class="pside">
       <div class="pside-top"><button class="plink" data-act="lock">${ic('back')} Lock and go back</button></div>
@@ -4479,11 +4757,15 @@ function pHome() {
 }
 /* ---------- Sign-in ---------- */
 function viewSignin() {
-  const a = UI.auth || (UI.auth = { mode: 'signin' }), m = a.mode, busy = a.busy ? 'disabled' : '';
+  const a = UI.auth || (UI.auth = { mode: firstAuthMode() }), m = a.mode, busy = a.busy ? 'disabled' : '';
   const tabs = [['signin', 'Sign in'], ['signup', 'New family'], ['join', 'Join family'], ['pair', 'Kid’s iPad']];
   const field = (id, label, type, ac, ph, extra = '') => `<label class="auth-field"><span>${label}</span><input id="${id}" name="${id}" type="${type}" autocomplete="${ac}" placeholder="${ph}" value="${esc(a[id] || '')}" data-in="authField" ${extra}></label>`;
   let body;
-  if (m === 'recovery') body = `<div class="auth-done"><div class="auth-ic">${ic('lock')}</div><h2>Save your recovery code</h2><p>If you ever forget your password, this code lets you set a new one. Write it down or save it in your password manager. It won’t be shown again.</p>
+  if (m === 'welcome') body = `<div class="wel-head"><h1>Chores, pocket money and growing up, all in one place</h1><p>For families with kids aged 7 to 15. Grown-ups set it up, then each kid gets their own sky.</p></div>
+      ${welcomeList()}
+      <button class="btn-white" data-act="welGo" data-m="signup">Start a new family</button>
+      <div class="wel-links"><button class="auth-link" data-act="welGo" data-m="signin">I already have an account</button><button class="auth-link" data-act="welGo" data-m="pair">Set up a kid’s iPad</button></div>`;
+  else if (m === 'recovery') body = `<div class="auth-done"><div class="auth-ic">${ic('lock')}</div><h2>Save your recovery code</h2><p>If you ever forget your password, this code lets you set a new one. Write it down or save it in your password manager. It won’t be shown again.</p>
       <div class="auth-code num" aria-label="Recovery code">${esc(a.recovery)}</div>
       <button class="btn-white" data-act="authNext">I’ve saved it</button></div>`;
   else if (m === 'import') body = `<div class="auth-done"><div class="auth-ic">${ic('swap')}</div><h2>Bring this iPad’s family across?</h2><p>This device already has ${Object.keys(localData().kids).length} kid${Object.keys(localData().kids).length === 1 ? '' : 's'}, their jobs and their money saved. Move them into your new family account so every device sees them.</p>
@@ -4501,11 +4783,14 @@ function viewSignin() {
       ${a.err ? `<p class="auth-err" role="alert">${esc(a.err)}</p>` : ''}
       <button class="btn-white" type="submit" ${busy}>${a.busy ? 'One moment…' : m === 'signup' ? 'Create family account' : m === 'join' ? 'Join the family' : m === 'pair' ? 'Pair this iPad' : 'Sign in'}</button>
       ${m === 'signin' ? '<button class="auth-link" type="button" data-act="authMode" data-m="reset">Forgot your password?</button>' : ''}
+      ${lsGet('cc:hadAcct', false) ? '' : '<button class="auth-link" type="button" data-act="authMode" data-m="welcome">What is Chorecast?</button>'}
     </form>`;
   return `<div class="auth"><div class="auth-card glass">
     <div class="auth-brand">${sunMark(54)}<div><b>Chorecast</b><small>Family chores, pay and growing up</small></div></div>${body}</div>
-    ${m === 'recovery' || m === 'import' ? '' : '<button class="auth-local" data-act="authLocal">Use on this device only, without an account</button>'}</div>`;
+    ${m === 'recovery' || m === 'import' ? '' : `<button class="auth-local" data-act="authLocal">${m === 'welcome' ? 'Try it on this device first, without an account' : 'Use on this device only, without an account'}</button><p class="auth-local-note">Nothing is backed up and other devices won’t see it. You can move it into an account later.</p>`}</div>`;
 }
+// A device that has never been signed in opens on the welcome cards; one that has opens on Sign in.
+const firstAuthMode = () => (lsGet('cc:hadAcct', false) ? 'signin' : 'welcome');
 async function authRun(fn) {
   const a = UI.auth; if (a.busy) return; a.busy = true; a.err = ''; render();
   try { await fn(a); } catch (e) { a.err = e.status ? e.message : 'Can’t reach Chorecast. Check the internet connection.'; Sound.error(); }
@@ -4513,6 +4798,7 @@ async function authRun(fn) {
 }
 async function afterAuth(me, recovery) {
   await startServerMode(me); Store.ready = true; buildMarket(); applyInterest();
+  const wc = lsGet('cc:welcomeChoice', null); if (wc) { track('onboard.step', { step: 'welcome', choice: wc }, null); lsSet('cc:welcomeChoice', null); }
   const empty = !Object.keys(Store.kids).length;
   if (recovery) { UI.auth = { mode: 'recovery', recovery, next: empty && localData() ? 'import' : null }; return render(); }
   if (empty && localData() && !lsGet('cc:imported', false)) { UI.auth = { mode: 'import' }; return render(); }
@@ -4603,6 +4889,7 @@ function pKidDetail(kid) {
       <div class="pstat"><span>Give jar</span><b>${fmt(j.give || 0)}</b></div><div class="pstat"><span>Trust score</span><b>${t.score}</b><small>${t.band}</small></div>
     </div>
     <div class="pactions"><button class="pbtn" data-act="payout" data-id="${kid.id}">${ic('cash')} Pay out cash</button><button class="pbtn" data-act="bonus" data-id="${kid.id}">${ic('gift')} Give a bonus</button><button class="pbtn" data-act="editKid" data-id="${kid.id}">${ic('edit')} Edit</button></div>
+    <p class="pkid-lock">${ic('coins')} ${esc(kid.name)} can earn about ${aboutDollars(weekPay(kid.age || 8))} a week${S().pocket && S().pocket.pretend ? ' of play money' : ''} doing all their must-dos and team tasks. Side hustles come on top.</p>
     ${kid.pin ? `<p class="pkid-lock">${ic('lock')} ${esc(kid.name)} locks their account with a passcode, and their total is private on the family screen. <button class="link-in" data-act="kidPinOff" data-id="${kid.id}">Turn the passcode off</button> if they forget it.</p>`
       : `<p class="pkid-lock muted">${ic('lock')} No passcode. ${esc(kid.name)} can add one with the Lock button in their own account.</p>`}</section>
     <section class="pcard"><h3>Habits, last 4 weeks · ${st}-day streak</h3>${heatmap(kid)}<h4>Today</h4><div class="plist">${habitsForDay(kid, date).map(h => `<div class="pli"><span class="ck ${done.has(h.key) ? 'on' : ''}">${ic('check')}</span><span class="grow">${h.icon} ${esc(h.title)}</span></div>`).join('')}</div></section>
@@ -4639,12 +4926,13 @@ function pBank() {
   const s = S(), ex = kidsList().filter(k => k.example);
   const stepRow = (title, sub, act, val) => `<div class="row"><div class="row-main"><b>${title}</b><small>${sub}</small></div><div class="stepper"><button data-act="${act}" data-d="-1" aria-label="Lower ${title}">${ic('minus')}</button><b>${val}</b><button data-act="${act}" data-d="1" aria-label="Raise ${title}">${ic('plus')}</button></div></div>`;
   const swRow = (title, sub, key) => `<div class="row"><div class="row-main"><b>${title}</b><small>${sub}</small></div><button class="switch ${s[key] ? 'on' : ''}" role="switch" aria-checked="${!!s[key]}" aria-label="${title}" data-act="setFlag" data-k="${key}"></button></div>`;
-  return `<header class="phead"><h2>Money rules</h2><p>These rules run the pretend economy. Real money only changes hands when you pay out cash from the Kids page.</p></header>
+  return `<header class="phead"><h2>Money rules</h2><p>${s.pocket && s.pocket.pretend ? 'You chose pretend money only. Kids earn, save and spend play money, and you never pay out.' : 'It’s your money, paid when you choose. Each kid’s jars show what you owe them. When they want cash, tap Pay out cash on the Kids page and their jar goes down.'}</p></header>
+    <h3 class="pgroup-t">Pocket money</h3><div class="group"><div class="row"><div class="row-main"><b>${s.pocket ? esc(pocketLine()) : 'Not chosen yet'}</b><small>This sets the price of every job. Prices you changed yourself stay as they are.</small></div><button class="pbtn" data-act="pocketOpen">${s.pocket ? 'Change' : 'Choose'}</button></div></div>
     <h3 class="pgroup-t">Pay</h3><div class="group">
       ${stepRow('Family tax', `${s.taxRate}% of every pay goes to the family fund. 0 turns tax off.`, 'tax', s.taxRate + '%')}
       ${swRow('Surge pricing', 'One side hustle each day pays ×1.5 to teach supply and demand.', 'surge')}
       ${swRow('Photo proof', 'Ask kids to photograph each finished job. They can still skip if there’s no camera.', 'photoRequired')}
-      ${swRow('Island shop takes money', 'Kids can spend Spend-jar money on island items, as well as the XP they earn.', 'shopCash')}
+      ${swRow('Island shop takes money', 'Kids can spend Spend-jar money on island items, as well as the XP they earn. Money spent there leaves their jar, so you don’t owe it any more.', 'shopCash')}
     </div>
     <h3 class="pgroup-t">Savings vault</h3><div class="group">${stepRow('Interest', `${s.interestWeekly}% a week, added daily. A high Trust Score adds up to +1%.`, 'interest', s.interestWeekly + '%')}</div>
     <h3 class="pgroup-t">Currency</h3><div class="group"><div class="row"><div class="row-main"><b>Symbol</b><small>Amounts stay the same, only the sign changes.</small></div><div class="seg">${['$', '£', '€', 'R', '₹'].map(c => `<button class="seg-i ${s.currency === c ? 'on' : ''}" data-act="currency" data-c="${c}">${c}</button>`).join('')}</div></div></div>
@@ -5260,6 +5548,33 @@ const ACT = {
   gFromResult: a => { exitStage(); if (window.Growth) Growth.open(a.dataset.id, {}); },
   authMode: a => { const keep = UI.auth || {}; UI.auth = { mode: a.dataset.m, email: keep.email }; render(); },
   authLocal: () => { lsSet('cc:localOnly', true); UI.screen = 'who'; render(); },
+  welGo: a => { lsSet('cc:welcomeChoice', a.dataset.m); ACT.authMode(a); },
+  pocketPick: a => { UI.pocket.pick = a.dataset.v === 'pretend' ? 'pretend' : +a.dataset.v; Sound.tap(); render(); },
+  pocketSave: () => {
+    const P = UI.pocket; if (!P || P.pick == null) return; const pretend = P.pick === 'pretend', week = pretend ? 0 : P.pick;
+    saveSettings({ pocket: { week, pretend, scale: pretend ? 1 : pocketScale(week), at: Date.now() } });
+    track('onboard.step', { step: 'pocket', week, pretend }, null); toast(pretend ? 'Pretend money it is' : `Prices set for about ${aboutDollars(week)} a week`); pocketDone(P);
+  },
+  pocketSkip: () => pocketDone(UI.pocket),
+  pocketCancel: () => { UI.pocket = null; scrollTo(0, 0); render(); },
+  pocketOpen: () => openPocket({ edit: true }),
+  startKid: () => { UI.ptab = 'kids'; UI.backToStart = true; render(); openKidForm(); },
+  startTour: a => { const k = Store.kids[a.dataset.id]; if (!k) return; ACT.lock(); track('onboard.step', { step: 'tour_handover' }, k.id); if (k.pin && UI.kidUnlocked !== k.id) { UI.tourFor = k.id; return openKidGate(k, 'kid'); } enterKid(k.id, { tour: true }); },
+  startHide: () => { saveSettings({ start: { hidden: Date.now() } }); track('onboard.step', { step: 'checklist_hidden', done: startList().filter(x => x.done).length }, null); UI.ptab = 'review'; scrollTo(0, 0); render(); },
+  homeScreenHelp: () => openSheet(homeScreenSheet),
+  nextGo: a => {
+    const k = a.dataset.kind;
+    if (k === 'chore') return ACT.brief(a);
+    if (k === 'lesson') return window.Growth && Growth.open(UI.kidId, { from: 'next' });
+    const h = $('[data-tour="habits"]'); if (h) { h.scrollIntoView({ behavior: 'smooth', block: 'center' }); h.classList.remove('flash'); void h.offsetWidth; h.classList.add('flash'); }
+  },
+  tourGuide: a => { const kid = curKid(); if (!kid || !UI.tour) return; updDoc('growth', kid.id, { guide: a.dataset.k }); Sound.pop(); UI.tour.i = 0; render(); tourSpeak(); },
+  tourNext: () => { if (!UI.tour) return; UI.tour.i++; Sound.tap(); render(); tourSpeak(); },
+  tourBack: () => { if (!UI.tour) return; UI.tour.i = Math.max(0, UI.tour.i - 1); render(); tourSpeak(); },
+  tourSay: () => tourSpeak(true),
+  tourSkip: () => tourEnd('skipped'),
+  tourAgain: () => { const kid = curKid(); if (!kid) return; UI.tab = 'today'; UI.tour = { kidId: kid.id, i: guideFor(kid) ? 0 : -1 }; scrollTo(0, 0); render(); tourSpeak(); },
+  tourDone: () => { const kid = curKid(), st = kid && UI.tour ? tourSteps(kid)[UI.tour.i] : null; tourEnd('finished'); if (st && st.first) ACT.brief({ dataset: { key: st.first.key } }); },
   authOpen: () => { lsSet('cc:localOnly', false); UI.auth = { mode: 'signin' }; UI.screen = 'signin'; UI.unlocked = false; render(); },
   authSignin: () => authRun(async a => afterAuth(await api('POST', '/api/auth/login', { email: a.email, password: a.password, deviceName: navigator.platform || 'Grown-up device' }))),
   authSignup: () => authRun(async a => {
@@ -5442,6 +5757,7 @@ const ACT = {
     if (f.id) updDoc('kids', f.id, { name, age: f.age, avatar: f.avatar, hue: f.hue });
     else { const id = uid(); setDoc('kids', id, newKid({ name, age: f.age, avatar: f.avatar, hue: f.hue, order: kidsList().length })); UI.pkid = id; }
     closeSheet(); toast(f.id ? 'Profile saved' : `${name} joined the family sky`);
+    if (!f.id && UI.backToStart) { UI.backToStart = false; UI.ptab = 'start'; scrollTo(0, 0); render(); }
   },
   removeKid: a => { UI.confirmRemove = a.dataset.id; render(); },
   removeKidNo: () => { UI.confirmRemove = null; render(); },
@@ -5589,7 +5905,7 @@ document.addEventListener('click', e => {
   const fn = ACT[a.dataset.act]; if (fn) { fn(a, e); if (TRACKED.has(a.dataset.act)) { const { act, ...rest } = a.dataset; track('app.' + act, rest); } }
 });
 // Actions worth recording in the family's event log (every synced write is also logged on the server).
-const TRACKED = new Set(['openKid', 'start', 'crewGo', 'habit', 'mvGo', 'preset', 'goalSave', 'goalRemove', 'quiz', 'paydayDone', 'trade', 'sFinish', 'sSubmit', 'sSkipPhoto', 'sQuit', 'approve', 'redo', 'payout', 'bonus', 'mGo', 'saveKid', 'removeKidYes', 'choreToggle', 'saveChore', 'delChore', 'cfRecord', 'gaMode', 'gaRedo', 'sShot', 'tax', 'interest', 'setFlag', 'currency', 'fundReset', 'lesson', 'wizNext', 'wizSkip', 'lock', 'gStart', 'gNode', 'gAssign', 'gMoment', 'gCase']);
+const TRACKED = new Set(['openKid', 'start', 'crewGo', 'habit', 'mvGo', 'preset', 'goalSave', 'goalRemove', 'quiz', 'paydayDone', 'trade', 'sFinish', 'sSubmit', 'sSkipPhoto', 'sQuit', 'approve', 'redo', 'payout', 'bonus', 'mGo', 'saveKid', 'removeKidYes', 'choreToggle', 'saveChore', 'delChore', 'cfRecord', 'gaMode', 'gaRedo', 'sShot', 'tax', 'interest', 'setFlag', 'currency', 'fundReset', 'lesson', 'wizNext', 'wizSkip', 'lock', 'nextGo', 'gStart', 'gNode', 'gAssign', 'gMoment', 'gCase']);
 document.addEventListener('submit', e => { const f = e.target.closest('[data-submit]'); if (!f) return; e.preventDefault(); const fn = ACT[f.dataset.submit]; if (fn) fn(f, e); });
 document.addEventListener('input', e => { const a = e.target.closest('[data-in]'); if (a && IN[a.dataset.in]) IN[a.dataset.in](a, e); });
 document.addEventListener('keydown', e => {
@@ -5620,7 +5936,7 @@ initSky(); paintSky(); render();
 (async () => {
   await initStore();
   Store.ready = true; buildMarket(); applyInterest();
-  UI.screen = UI.needSignIn ? 'signin' : 'who'; if (UI.needSignIn) UI.auth = { mode: 'signin' }; render();
+  UI.screen = UI.needSignIn ? 'signin' : 'who'; if (UI.needSignIn) UI.auth = { mode: firstAuthMode() }; render();
   if (window.Growth) Growth.ready();
 })();
 })();

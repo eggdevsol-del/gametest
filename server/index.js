@@ -401,6 +401,9 @@ route('POST', '/api/events', async ({ req, s }) => {
       await db.query('insert into chore_sends (family_id, kid_id, chore_key, title, tier, freq, sent_by, sent_at) values ($1, $2, $3, $4, $5, $6, $7, $8)',
         [s.family_id, kid, txt(pl.key) || '?', txt(pl.title), ['must', 'team', 'gig'].includes(pl.tier) ? pl.tier : null, txt(pl.freq, 20), s.user_id || null, when]);
     }
+    if (type === 'onboard.step') {
+      await db.query('insert into first_steps (family_id, kid_id, step, detail, done_at) values ($1, $2, $3, $4::jsonb, $5)', [s.family_id, kid, txt(pl.step, 40) || '?', JSON.stringify(pl), when]);
+    }
     if (type === 'island.buy' && kid) {
       await db.query('insert into island_purchases (family_id, kid_id, item, name, category, paid_with, price, bought_at) values ($1, $2, $3, $4, $5, $6, $7, $8)',
         [s.family_id, kid, txt(pl.item) || '?', txt(pl.name), txt(pl.cat, 40), pl.pay === 'xp' || pl.pay === 'cash' ? pl.pay : null, int(pl.price), when]);

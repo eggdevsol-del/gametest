@@ -244,6 +244,12 @@ function waiting(kid) {
   if (!ensureLoaded(kid)) return 0; const g = prog(kid);
   return dueCards(kid).length + (g.echo || []).length + (g.assigned || []).filter(a => !passed(kid, a.id)).length;
 }
+// For the main app's "Do this next" card: the lesson the Growth card suggests, and whether today's is done (any lesson
+// XP earned today, or the daily time limit reached).
+function nextLesson(kid) {
+  if (!ensureLoaded(kid)) return null; const sug = suggestions(kid, 1)[0], d = dayInfo(kid);
+  return { done: d.xp > 0 || overTime(kid), next: sug ? { icon: sug.icon, title: local(sug.title), tree: TREE[sug.tree].name } : null };
+}
 let echoScanAt = {};
 function scanEchoesSoon(kid) { const t = Date.now(); if (t - (echoScanAt[kid.id] || 0) < 60000) return; echoScanAt[kid.id] = t; setTimeout(() => scanEchoes(kid), 0); }
 function momentCard(kid) {
@@ -259,7 +265,7 @@ function treeDoor(kid, treeId) {
 C.ACT.gMoment = a => { open(a.dataset.id, {}).then(() => { const k = Store.kids[a.dataset.id]; if (k && momentFor(k)) startMoment(k); }); };
 
 window.Growth = {
-  card, momentCard, treeDoor, hasLesson, onEvent, open, close, waiting,
+  card, momentCard, treeDoor, hasLesson, onEvent, open, close, waiting, nextLesson,
   investorRank: kid => `<span class="card-r">Rank: ${investorRank(kid)}</span>`,
   mastered: kid => mastered(kid),
   parentView: () => parentView(), resetParent: () => { if (Grow.parent) Grow.parent.msg = ''; },
