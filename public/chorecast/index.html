@@ -512,6 +512,11 @@ p{margin:0}
 .gate-x{position:absolute;top:12px;left:var(--gut)}
 .gate-lock{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.2)}
 .gate-lock .ic{width:28px;height:28px}
+.gate-ava{font-size:34px;line-height:1}
+.kc-private{display:inline-flex;align-items:center;gap:6px;font:800 18px var(--f-round);opacity:.85}
+.kc-private .ic{width:18px;height:18px}
+.pkid-lock{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:12px;font:400 15px/1.4 var(--f-text)}
+.pkid-lock .ic{width:16px;height:16px;flex:none}
 .gate-t{font:800 26px var(--f-round)}
 .gate-s{font:600 16px var(--f-round);color:var(--on-sky-2);max-width:32ch}
 .dots{display:flex;gap:18px;margin:14px 0 2px}
@@ -3691,7 +3696,7 @@ function kidCard(k, date) {
     <div class="kc-lvl">Level ${islandCaption(k).lvl} · ${islandCaption(k).name}</div>
     <div class="kc-name">${esc(k.name)}${k.example ? '<span class="chip-ex">Example</span>' : ''}</div>
     <div class="kc-prog s3d" aria-hidden="true"><i style="width:${p.total ? Math.round(p.done / p.total * 100) : 0}%"></i></div>
-    <div class="kc-money num">${fmt(netWorth(k))}</div>
+    ${k.pin ? `<div class="kc-money kc-private">${ic('lock')} Private</div>` : `<div class="kc-money num">${fmt(netWorth(k))}</div>`}
     <div class="kc-meta"><span>${ic('check')} ${p.done}/${p.total} chores</span><span>${ic('flame')} ${st} day${st === 1 ? '' : 's'}</span></div>
   </button>`;
 }
@@ -3706,7 +3711,7 @@ function viewKid() {
   return `<div class="wrap kid" style="--hue:${kid.hue}">
     <header class="topbar">
       <button class="pill glass" data-act="home">${ic('back')}<span>Family</span></button>
-      <div class="topbar-r">${others.length ? `<button class="pill glass" data-act="crew" data-kid="${kid.id}">${ic('crew')}<span>Crew mode</span></button>` : ''}${soundBtn()}</div>
+      <div class="topbar-r">${others.length ? `<button class="pill glass" data-act="crew" data-kid="${kid.id}">${ic('crew')}<span>Crew mode</span></button>` : ''}${others.length || kid.pin ? `<button class="pill glass" data-act="kidPin" aria-label="${kid.pin ? 'Your passcode' : 'Lock my account with a passcode'}">${ic('lock')}<span>${kid.pin ? 'Locked' : 'Lock'}</span></button>` : ''}${soundBtn()}</div>
     </header>
     ${body}
   </div>
@@ -4130,18 +4135,20 @@ function photoSheet() {
 /* ---------- Gate ---------- */
 function newMath(g) { g.a = 12 + Math.floor(Math.random() * 8); g.b = 3 + Math.floor(Math.random() * 7); }
 function viewGate() {
-  const g = UI.gate; let title, sub;
-  if (g.mode === 'math') { title = 'Grown-ups only'; sub = `To reset the PIN, type the answer: ${g.a} × ${g.b}`; }
+  const g = UI.gate, kid = g.kid && Store.kids[g.kid]; let title, sub;
+  if (g.mode === 'kid') { title = `Hi ${esc(kid.name)}!`; sub = 'Type your passcode to open your account.'; }
+  else if (g.mode === 'kidCreate') { title = g.first ? 'Type it once more' : 'Pick a 4-digit passcode'; sub = g.first ? 'Just to be sure you remember it.' : 'You’ll type it to open your account, so only you can spend your money and XP. Keep it a secret!'; }
+  else if (g.mode === 'math') { title = 'Grown-ups only'; sub = `To reset the PIN, type the answer: ${g.a} × ${g.b}`; }
   else if (g.mode === 'create') { title = g.first ? 'Type it once more' : g.reset ? 'Create a new PIN' : 'Create a grown-up PIN'; sub = g.first ? 'Just to be sure you remember it.' : 'Kids won’t know it, so only you can approve pay and see the dashboard.'; }
   else { title = 'Enter grown-up PIN'; sub = 'To check photos, pay jobs and see habits.'; }
   const len = g.mode === 'math' ? String(g.a * g.b).length : 4;
   const key = n => `<button class="key glass" data-act="pin" data-n="${n}" aria-label="${n}"><b>${n}</b><small>${['', '', 'ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQRS', 'TUV', 'WXYZ'][n] || ''}</small></button>`;
   return `<div class="gate">
     <button class="pill glass gate-x" data-act="gateCancel">Cancel</button>
-    <div class="gate-lock">${ic('lock')}</div><h1 class="gate-t">${title}</h1><p class="gate-s">${sub}</p>
+    <div class="gate-lock">${kid ? `<span class="gate-ava">${kid.avatar}</span>` : ic('lock')}</div><h1 class="gate-t">${title}</h1><p class="gate-s">${sub}</p>
     <div class="dots ${g.err ? 'shake' : ''}" aria-label="${g.pin.length} of ${len} digits">${Array.from({ length: len }, (_, i) => `<i class="${i < g.pin.length ? 'on' : ''}"></i>`).join('')}</div>
     <p class="gate-err" aria-live="polite">${esc(g.err || '')}</p>
-    <div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(key).join('')}${g.mode === 'enter' ? '<button class="key key-txt" data-act="forgot">Forgot?</button>' : '<span></span>'}${key(0)}<button class="key key-txt" data-act="pinDel" aria-label="Delete">${ic('back')}</button></div>
+    <div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(key).join('')}${g.mode === 'enter' || g.mode === 'kid' ? `<button class="key key-txt" data-act="${g.mode === 'kid' ? 'kidForgot' : 'forgot'}">Forgot?</button>` : '<span></span>'}${key(0)}<button class="key key-txt" data-act="pinDel" aria-label="Delete">${ic('back')}</button></div>
   </div>`;
 }
 async function hashPin(pin) {
@@ -4152,6 +4159,7 @@ async function hashPin(pin) {
 function openGate(mode, after) { UI.gate = { pin: '', first: null, err: '', mode: mode || (S().pinHash ? 'enter' : 'create'), back: UI.screen === 'parent' ? 'parent' : 'who' }; if (after) UI.afterUnlock = after; UI.screen = 'gate'; closeSheet(); render(); }
 async function pinComplete() {
   const g = UI.gate;
+  if (g.kid) return kidPinComplete(g);
   if (g.mode === 'math') { if (+g.pin === g.a * g.b) { g.mode = 'create'; g.reset = true; g.first = null; g.pin = ''; } else { g.err = 'Not quite. Try a new one.'; g.pin = ''; newMath(g); Sound.error(); } return render(); }
   if (g.mode === 'create') {
     if (!g.first) { g.first = g.pin; g.pin = ''; return render(); }
@@ -4160,6 +4168,37 @@ async function pinComplete() {
   }
   if ((await hashPin(g.pin)) === S().pinHash) return unlock();
   g.err = 'Wrong PIN. Try again.'; g.pin = ''; Sound.error(); render();
+}
+/* Kid passcodes: a kid can lock their own account with 4 digits, so a brother or sister can't open it to spend their
+   money or XP, or see their total on the family screen. It's saved hashed on the kid's record, and the account locks
+   again on the way back to the family screen, after 3 minutes untouched (never in the middle of a chore) or after a
+   minute with the app in the background. A grown-up can turn it off in Grown-ups, Kids, if it's forgotten. */
+const kidPinHash = (id, pin) => hashPin(`kid|${id}|${pin}`);
+function openKidGate(kid, mode, back) { UI.gate = { pin: '', first: null, err: '', mode, kid: kid.id, back: back || 'who' }; UI.screen = 'gate'; closeSheet(); render(); }
+function enterKid(id) { UI.kidId = id; UI.kidUnlocked = id; UI.kidTouch = Date.now(); UI.tab = 'today'; UI.screen = 'kid'; UI.paydaySig = null; Sound.ensure(); Sound.pop(); scrollTo(0, 0); render(); }
+async function kidPinComplete(g) {
+  const kid = Store.kids[g.kid]; if (!kid) { UI.gate = null; UI.screen = 'who'; return render(); }
+  if (g.mode === 'kidCreate') {
+    if (!g.first) { g.first = g.pin; g.pin = ''; return render(); }
+    if (g.pin !== g.first) { g.err = 'Those didn’t match. Start again.'; g.first = null; g.pin = ''; Sound.error(); return render(); }
+    updDoc('kids', kid.id, { pin: await kidPinHash(kid.id, g.pin) }); toast('Passcode saved. Only you can open your account now.');
+    UI.gate = null; UI.kidUnlocked = kid.id; UI.kidTouch = Date.now(); UI.screen = 'kid'; return render();
+  }
+  if ((await kidPinHash(kid.id, g.pin)) === kid.pin) { UI.gate = null; return enterKid(kid.id); }
+  g.err = 'That’s not it. Try again.'; g.pin = ''; Sound.error(); render();
+}
+function lockKid(why) {
+  const k = curKid(); UI.kidUnlocked = null;
+  if (UI.screen !== 'kid' || !k || !k.pin || Stage.active) return;
+  if (window.Growth && Growth.close) Growth.close();
+  closeSheet(); UI.screen = 'who'; scrollTo(0, 0); render(); if (why) toast(why);
+}
+function kidPinSheet() {
+  const k = curKid(); if (!k) return '';
+  return `<div class="sh-head"><span></span><h2>Your passcode</h2><button class="sh-ok" data-act="close">Done</button></div>
+    <div class="sh-body"><p class="hint">Your account is locked with a passcode. Your brothers and sisters can’t open it or see your money on the family screen.</p>
+      <button class="btn-big" data-act="kidPinChange">${ic('lock')} Change my passcode</button>
+      <button class="btn-soft" data-act="kidPinOff" data-id="${k.id}">Turn off my passcode</button></div>`;
 }
 function unlock() {
   if (Store.mode === 'server' && Acct.me && Acct.me.role === 'kid') api('POST', '/api/auth/elevate', { pinHash: S().pinHash }).catch(() => toast('Couldn’t unlock grown-up changes on this iPad. Check the connection.'));
@@ -4415,7 +4454,9 @@ function pKidDetail(kid) {
       <div class="pstat"><span>Invest cash</span><b>${fmt(j.invest || 0)}</b></div><div class="pstat"><span>In the market</span><b>${fmt(holdingsValue(kid))}</b></div>
       <div class="pstat"><span>Give jar</span><b>${fmt(j.give || 0)}</b></div><div class="pstat"><span>Trust score</span><b>${t.score}</b><small>${t.band}</small></div>
     </div>
-    <div class="pactions"><button class="pbtn" data-act="payout" data-id="${kid.id}">${ic('cash')} Pay out cash</button><button class="pbtn" data-act="bonus" data-id="${kid.id}">${ic('gift')} Give a bonus</button><button class="pbtn" data-act="editKid" data-id="${kid.id}">${ic('edit')} Edit</button></div></section>
+    <div class="pactions"><button class="pbtn" data-act="payout" data-id="${kid.id}">${ic('cash')} Pay out cash</button><button class="pbtn" data-act="bonus" data-id="${kid.id}">${ic('gift')} Give a bonus</button><button class="pbtn" data-act="editKid" data-id="${kid.id}">${ic('edit')} Edit</button></div>
+    ${kid.pin ? `<p class="pkid-lock">${ic('lock')} ${esc(kid.name)} locks their account with a passcode, and their total is private on the family screen. <button class="link-in" data-act="kidPinOff" data-id="${kid.id}">Turn the passcode off</button> if they forget it.</p>`
+      : `<p class="pkid-lock muted">${ic('lock')} No passcode. ${esc(kid.name)} can add one with the Lock button in their own account.</p>`}</section>
     <section class="pcard"><h3>Habits, last 4 weeks · ${st}-day streak</h3>${heatmap(kid)}<h4>Today</h4><div class="plist">${habitsForDay(kid, date).map(h => `<div class="pli"><span class="ck ${done.has(h.key) ? 'on' : ''}">${ic('check')}</span><span class="grow">${h.icon} ${esc(h.title)}</span></div>`).join('')}</div></section>
     <section class="pcard"><h3>Today's chores</h3><div class="plist">${[...b.must, ...b.team].map(c => { const s = choreState(kid.id, c, date).state; return `<div class="pli"><span class="ck ${isDone(s) ? 'on' : ''}">${ic('check')}</span><span class="grow">${c.icon} ${esc(c.title)}</span><span class="tag ${s === 'open' ? 'pending' : s}">${{ open: 'Not done', pending: 'To review', approved: 'Paid', redo: 'Redo' }[s] || s}</span></div>`; }).join('')}</div>
       <h4>Lifetime</h4><div class="plist"><div class="pli"><span class="grow">Earned before tax</span><span class="amt">${fmt(kid.earned || 0)}</span></div><div class="pli"><span class="grow">Family tax paid</span><span class="amt">${fmt(kid.taxPaid || 0)}</span></div><div class="pli"><span class="grow">Vault interest</span><span class="amt">${fmt(kid.interestEarned || 0)}</span></div></div></section>
@@ -5046,12 +5087,16 @@ const ACT = {
   veil: () => { if (UI.sheet && !UI.sheet.sticky) closeSheet(); },
   close: () => closeSheet(),
   mute: () => { Sound.toggle(); render(); },
-  home: () => { UI.screen = 'who'; scrollTo(0, 0); render(); },
-  openKid: a => { UI.kidId = a.dataset.id; UI.tab = 'today'; UI.screen = 'kid'; UI.paydaySig = null; Sound.ensure(); Sound.pop(); scrollTo(0, 0); render(); },
+  home: () => { UI.kidUnlocked = null; UI.screen = 'who'; scrollTo(0, 0); render(); },
+  openKid: a => { const k = Store.kids[a.dataset.id]; if (!k) return; if (k.pin && UI.kidUnlocked !== k.id) return openKidGate(k, 'kid'); enterKid(k.id); },
+  kidPin: () => { const k = curKid(); if (!k) return; if (!k.pin) return openKidGate(k, 'kidCreate', 'kid'); openSheet(kidPinSheet); },
+  kidPinChange: () => { const k = curKid(); if (k) openKidGate(k, 'kidCreate', 'kid'); },
+  kidPinOff: a => { const k = Store.kids[a.dataset.id]; if (!k) return; updDoc('kids', k.id, { pin: null }); closeSheet(); toast(`Passcode turned off for ${k.name}`); render(); },
+  kidForgot: () => { const g = UI.gate; if (!g) return; g.err = 'Ask a grown-up to turn it off in Grown-ups, then Kids.'; g.pin = ''; render(); },
   tab: a => { UI.tab = a.dataset.tab; Sound.tap(); scrollTo(0, 0); render(); },
   parent: () => openGate(),
   setup: () => openGate(null, 'addKid'),
-  gateCancel: () => { const b = UI.gate && UI.gate.back; UI.gate = null; UI.screen = b === 'parent' && UI.unlocked ? 'parent' : 'who'; render(); },
+  gateCancel: () => { const b = UI.gate && UI.gate.back; UI.gate = null; UI.screen = b === 'parent' && UI.unlocked ? 'parent' : b === 'kid' && curKid() ? 'kid' : 'who'; render(); },
   pin: a => { const g = UI.gate, len = g.mode === 'math' ? String(g.a * g.b).length : 4; if (g.pin.length >= len) return; g.pin += a.dataset.n; g.err = ''; Sound.ensure(); Sound.tap(); render(); if (g.pin.length === len) setTimeout(pinComplete, 150); },
   pinDel: () => { UI.gate.pin = UI.gate.pin.slice(0, -1); render(); },
   forgot: () => { const g = UI.gate; g.mode = 'math'; g.pin = ''; g.err = ''; newMath(g); render(); },
@@ -5352,6 +5397,9 @@ document.addEventListener('keydown', e => {
 document.addEventListener('pointerdown', () => { if (Stage.active) Sound.ensure(); }, { passive: true });
 addEventListener('resize', () => { Stage.panes.forEach(p => { if (p.fx) p.fx.size(); if (p.more) p.more(); }); if (!Stage.active && UI.screen !== 'boot') { paintSky(); layMasonry($('#app')); } });
 if (document.fonts) document.fonts.ready.then(() => layMasonry($('#app')));
+['pointerdown', 'keydown'].forEach(t => document.addEventListener(t, () => { UI.kidTouch = Date.now(); }, { passive: true, capture: true }));
+setInterval(() => { const k = curKid(); if (UI.screen === 'kid' && k && k.pin && !Stage.active && Date.now() - (UI.kidTouch || 0) > 3 * 60000) lockKid(`${k.name}’s account locked to keep it private.`); }, 15000);
+document.addEventListener('visibilitychange', () => { if (document.hidden) UI.kidHiddenAt = Date.now(); else if (UI.kidHiddenAt && Date.now() - UI.kidHiddenAt > 60000) { UI.kidHiddenAt = 0; lockKid(); } });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { if (Stage.active && !Stage.paused && Stage.panes.some(p => p.phase === 'play')) pauseStage(true); }
   else { if (Stage.active && Stage.wake == null) requestWake(); if (Store.ready) { buildMarket(); applyInterest(); scheduleRender(); } }
