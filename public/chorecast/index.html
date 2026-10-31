@@ -918,6 +918,7 @@ p{margin:0}
 .hourly{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-radius:22px;background:rgba(0,0,0,.14);font:700 15px var(--f-round)}
 .hourly b{font:900 clamp(26px,6cqmin,40px) var(--f-round)}
 .pane-foot{padding-top:clamp(8px,1.6cqh,16px)}
+.noneed{display:block;margin:clamp(6px,1.2cqh,10px) auto 0;min-height:40px;padding:0 18px;border-radius:999px;background:rgba(255,255,255,.16);font:800 clamp(14px,2.6cqmin,17px) var(--f-round);color:#fff}
 .finish{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:clamp(54px,9cqh,72px);border-radius:22px;background:rgba(255,255,255,.25);font:900 clamp(17px,3.4cqmin,24px) var(--f-round);color:#fff;transition:background .25s,color .25s,transform .15s}
 .finish:active{transform:scale(.98)}
 .finish.ready{background:#fff;color:var(--c2);box-shadow:0 14px 30px -12px rgba(0,0,0,.4)}
@@ -1125,6 +1126,10 @@ p{margin:0}
 .rec-empty .ic{width:40px;height:40px;color:var(--p-accent)}
 .rec-empty b{font:600 17px var(--f-text);color:var(--ink)}
 .rec-foot{display:grid;gap:10px}
+.rec-pair{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}
+.rec-pair>*{padding:6px 14px;text-align:center;line-height:1.2}
+.rec-pair>:last-child{white-space:nowrap}
+.btn-big.alt{background:var(--fill);color:var(--p-accent);box-shadow:none}
 .rec-sum{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--fill);font:400 16px var(--f-text)}
 .rec-sum .ic{width:20px;height:20px;color:var(--p-accent);flex:none}
 .rec-need{color:var(--warn)}
@@ -1203,6 +1208,7 @@ p{margin:0}
 <canvas id="fx" aria-hidden="true"></canvas>
 <div id="toast" role="status" aria-live="polite" hidden></div>
 <input type="file" id="cam" accept="image/*" capture="environment" hidden>
+<input type="file" id="pick" accept="image/*" hidden>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -2052,7 +2058,9 @@ function basePay(j, quoteOverride) {
     default: return j.base ?? j.pay ?? 0;
   }
 }
-function grossFor(j, quoteOverride) { let b = basePay(j, quoteOverride); if (j.surge) b = Math.round(b * 1.5); return Math.round(b * (QUALITY[j.stars || 2] || 1)); }
+// A chore that didn't need doing (the kid checked and sent a photo) pays half
+const halfIfChecked = (j, b) => (j.noNeed ? Math.round(b / 2) : b);
+function grossFor(j, quoteOverride) { let b = halfIfChecked(j, basePay(j, quoteOverride)); if (j.surge) b = Math.round(b * 1.5); return Math.round(b * (QUALITY[j.stars || 2] || 1)); }
 function normSplit(s) { const d = { spend: 50, save: 30, invest: 10, give: 10, ...(s || {}) }; const t = d.save + d.invest + d.give; if (t > 100) return { spend: 0, save: d.save, invest: d.invest, give: 100 - d.save - d.invest }; return { spend: 100 - t, save: d.save, invest: d.invest, give: d.give }; }
 function payslipFor(kid, gross) {
   const tax = Math.round(gross * (S().taxRate || 0) / 100), net = gross - tax, sp = normSplit(kid.split);
@@ -4009,7 +4017,7 @@ function paydaySheet() {
     ${paid.length ? `<div class="payday-h"><div class="payday-burst">${ic('sparkle')}</div><h2>Payday!</h2><p>A grown-up checked your work and paid you.</p></div>
     <div class="slip">
       <div class="slip-h"><b>CHORECAST FAMILY PAYROLL</b><span>Pay slip · ${esc(kid.name)} · ${esc(new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' }))}</span></div>
-      <div class="slip-lines">${paid.map((j, i) => `<div class="sl" style="--i:${i}"><span>${esc(j.title)} ${'★'.repeat(j.stars || 0)}</span><span>${fmt(j.paid.gross)}</span></div>`).join('')}</div>
+      <div class="slip-lines">${paid.map((j, i) => `<div class="sl" style="--i:${i}"><span>${esc(j.title)} ${'★'.repeat(j.stars || 0)}${j.noNeed ? ' · didn’t need doing, half pay' : ''}</span><span>${fmt(j.paid.gross)}</span></div>`).join('')}</div>
       <div class="slip-sum"><div class="sl"><span>Gross pay</span><span>${fmt(tot.gross)}</span></div><div class="sl muted"><span>Family tax ${S().taxRate}%</span><span>−${fmt(tot.tax)}</span></div><div class="sl big"><span>Net pay</span><span>${fmt(tot.net)}</span></div></div>
       <div class="slip-split"><span class="slip-k">Your budget plan sent it to:</span>${JARS.map(x => `<div class="sl"><span><i class="sdot" style="background:${x.color}"></i>${x.label}</span><span>${fmt(tot.parts[x.k] || 0)}</span></div>`).join('')}</div>
       <p class="slip-note">Why tax? It pays for things everyone shares. <button class="link-in" data-act="lesson" data-key="tax">Learn more</button></p>
@@ -4355,19 +4363,20 @@ function pReview() {
 function reviewCard(j) {
   const kid = Store.kids[j.kidId]; if (!kid) return '';
   const s = S(), tip = UI.tips[j.id] || 0, q = j.payType === 'quote' ? (UI.quotes[j.id] ?? j.quote) : null;
-  const base = basePay(j, q), surged = j.surge ? Math.round(base * 1.5) : base, gross = grossFor(j, q), total = gross + tip, tax = Math.round(total * s.taxRate / 100);
+  const base = basePay(j, q), half = halfIfChecked(j, base), surged = j.surge ? Math.round(half * 1.5) : half, gross = grossFor(j, q), total = gross + tip, tax = Math.round(total * s.taxRate / 100);
   const qp = Math.round(((QUALITY[j.stars || 2] || 1) - 1) * 100);
   return `<article class="rcard">
     ${j.photo ? `<button class="rphoto ph" data-act="photo" data-id="${j.id}" aria-label="Enlarge photo"><img ${photoAttr(j.photo)} alt="Photo of ${esc(j.title)}"></button>` : `<div class="rphoto"><span class="nophoto">${j.tier === 'bonus' ? '<span style="font-size:44px">🔥</span><span>Habit streak bonus</span>' : `${ic('camera')}<span>No photo sent</span>`}</span></div>`}
     <div class="rbody">
       <div class="rkid"><span class="ava-s" style="--hue:${kid.hue}">${kid.avatar}</span><b>${esc(kid.name)}</b><span class="muted">${timeAgo(j.at)}</span></div>
       <h3 class="rtitle">${j.icon} ${esc(j.title)}</h3>
-      ${j.tier !== 'bonus' ? `<div class="rstats"><span>${ic('clock')} ${mmss(j.durSec)} <small>/ ${mmss(j.targetSec)}</small></span><span class="stars-s">${starRow(j.stars)}</span><span>${(j.score || 0).toLocaleString()} pts</span><span>${j.stepsDone}/${j.stepsTotal} steps</span>${j.crew ? '<span>Crew mode</span>' : ''}${j.durSec && j.targetSec && j.durSec < j.targetSec * 0.2 ? '<span>⚡ Very fast, worth a closer look</span>' : ''}</div>` : `<p class="muted">${esc(kid.name)} completed their habit goal ${j.title.split('-')[0]} days in a row.</p>`}
+      ${j.tier !== 'bonus' ? `<div class="rstats"><span>${ic('clock')} ${mmss(j.durSec)} <small>/ ${mmss(j.targetSec)}</small></span><span class="stars-s">${starRow(j.stars)}</span><span>${(j.score || 0).toLocaleString()} pts</span>${j.noNeed ? '<span>✅ Didn’t need doing</span>' : `<span>${j.stepsDone}/${j.stepsTotal} steps</span>`}${j.crew ? '<span>Crew mode</span>' : ''}${j.durSec && j.targetSec && j.durSec < j.targetSec * 0.2 ? '<span>⚡ Very fast, worth a closer look</span>' : ''}</div>` : `<p class="muted">${esc(kid.name)} completed their habit goal ${j.title.split('-')[0]} days in a row.</p>`}
       ${j.stepPhotos && j.stepPhotos.some(Boolean) ? `<button class="rsteps" data-act="photo" data-id="${j.id}">${j.stepPhotos.map((r, k) => (r ? `<span class="ph"><img ${photoAttr(r)} alt="Step ${k + 1}"><b>${k + 1}</b></span>` : '')).join('')}<small>Compare with your guide ${ic('next')}</small></button>`
         : j.guide && j.photo && Store.guides[j.key] ? `<button class="plink" data-act="photo" data-id="${j.id}">Compare with your guide ${ic('next')}</button>` : ''}
       <dl class="rpay">
         <div><dt>${payTypeLine(j)}</dt><dd>${fmt(base)}</dd></div>
-        ${j.surge ? `<div><dt>Surge ×1.5</dt><dd>+${fmt(surged - base)}</dd></div>` : ''}
+        ${j.noNeed ? `<div><dt>Didn’t need doing: half pay</dt><dd>−${fmt(base - half)}</dd></div>` : ''}
+        ${j.surge ? `<div><dt>Surge ×1.5</dt><dd>+${fmt(surged - half)}</dd></div>` : ''}
         ${j.tier !== 'bonus' ? `<div><dt>Quality ${starRow(j.stars)} ${qp > 0 ? `+${qp}%` : qp < 0 ? `${qp}%` : ''}</dt><dd>${gross - surged >= 0 ? '+' : '−'}${fmt(Math.abs(gross - surged))}</dd></div>` : ''}
         ${tip ? `<div><dt>Your tip</dt><dd>+${fmt(tip)}</dd></div>` : ''}
         <div class="tot"><dt>Gross pay</dt><dd>${fmt(total)}</dd></div>
@@ -4375,7 +4384,7 @@ function reviewCard(j) {
       </dl>
       ${q != null ? `<div class="field"><span>Their quote${q !== j.quote ? ` <small class="muted">(was ${fmt(j.quote)})</small>` : ''}</span><div class="stepper"><button data-act="pQuote" data-id="${j.id}" data-d="-50" aria-label="Counter lower">${ic('minus')}</button><b class="num">${fmt(q)}</b><button data-act="pQuote" data-id="${j.id}" data-d="50" aria-label="Counter higher">${ic('plus')}</button></div></div>` : ''}
       <div class="tips"><span>Tip</span>${[0, 20, 50, 100].map(c => `<button class="chip-p ${tip === c ? 'on' : ''}" data-act="tip" data-id="${j.id}" data-c="${c}">${c ? '+' + fmt(c) : 'None'}</button>`).join('')}</div>
-      ${UI.redoFor === j.id ? `<div class="redo-pick"><b>What should ${esc(kid.name)} fix?</b><div class="chips">${['Almost! You missed a spot.', 'Please finish every step.', 'The photo doesn’t show the job.', 'Slow down and do it carefully.'].map(n => `<button class="chip-p" data-act="redo" data-id="${j.id}" data-note="${esc(n)}">${esc(n)}</button>`).join('')}</div><button class="pbtn" data-act="redoCancel">Cancel</button></div>`
+      ${UI.redoFor === j.id ? `<div class="redo-pick"><b>What should ${esc(kid.name)} fix?</b><div class="chips">${[...(j.noNeed ? ['It did need doing. Please do it now.'] : []), 'Almost! You missed a spot.', 'Please finish every step.', 'The photo doesn’t show the job.', 'Slow down and do it carefully.'].map(n => `<button class="chip-p" data-act="redo" data-id="${j.id}" data-note="${esc(n)}">${esc(n)}</button>`).join('')}</div><button class="pbtn" data-act="redoCancel">Cancel</button></div>`
         : `<div class="ractions"><button class="pbtn primary" data-act="approve" data-id="${j.id}">${ic('check')} Approve and pay ${fmt(total)}</button><button class="pbtn" data-act="redoAsk" data-id="${j.id}">Ask for a redo</button></div>`}
     </div></article>`;
 }
@@ -4581,19 +4590,21 @@ function recSheet() {
   const card = (x, i) => `<div class="rstep">${recThumb(x)}
       <div class="rstep-main"><b>Step ${i + 1}</b>
         <input type="text" id="rec-t-${i}" maxlength="70" autocomplete="off" placeholder="What are you doing? Fill the feeder" value="${esc(x.text)}" data-in="recText" data-i="${i}" aria-label="What happens in step ${i + 1}">
-        <div class="rstep-acts"><button class="plink" data-act="recRetake" data-i="${i}">${ic('camera')} Retake</button><button class="plink danger" data-act="recDel" data-i="${i}">${ic('trash')} Remove</button></div></div></div>`;
+        <div class="rstep-acts"><button class="plink" data-act="recRetake" data-i="${i}">${ic('camera')} Retake</button><button class="plink" data-act="recRetake" data-i="${i}" data-pick="1">${ic('photo')} Choose photo</button><button class="plink danger" data-act="recDel" data-i="${i}">${ic('trash')} Remove</button></div></div></div>`;
   if (r.phase === 'rec') return `<div class="sh-head"><button class="sh-x" data-act="recCancel">Cancel</button><h2>${f.icon} ${esc(f.title)}</h2><span class="rec-time" aria-label="Recording time"><i></i><b id="rec-time" class="num">${mmss((Date.now() - r.startAt) / 1000)}</b></span></div>
     <div class="sh-body">
-      <p class="hint">Do the chore now, the way you’d like it done. Take a photo at each step and add a few words. Your photos become ${esc(who)} how-to guide.</p>
-      ${r.steps.map(card).join('') || `<div class="rec-empty">${ic('camera')}<b>Start with step 1</b><span>Take a photo of the first thing you do, like getting the gear out.</span></div>`}
+      <p class="hint">Do the chore now, the way you’d like it done. Take a photo at each step, or add one you already have, and add a few words. Your photos become ${esc(who)} how-to guide.</p>
+      ${r.steps.map(card).join('') || `<div class="rec-empty">${ic('camera')}<b>Start with step 1</b><span>Take or add a photo of the first thing you do, like getting the gear out.</span></div>`}
     </div>
-    <div class="sh-foot rec-foot"><button class="btn-big" data-act="recSnap">${ic('camera')} Photo of step ${r.steps.length + 1}</button>${r.steps.length ? `<button class="btn-soft" data-act="recEnd">${ic('check')} ${r.finish ? 'Done adding steps' : 'I’ve finished: photo of the finished job'}</button>` : ''}</div>`;
+    <div class="sh-foot rec-foot"><div class="rec-pair"><button class="btn-big" data-act="recSnap">${ic('camera')} Take photo of step ${r.steps.length + 1}</button><button class="btn-big alt" data-act="recSnap" data-pick="1">${ic('photo')} Add photo</button></div>
+      ${!r.steps.length ? '' : r.finish ? `<button class="btn-soft" data-act="recEnd">${ic('check')} Done adding steps</button>`
+        : `<div class="rec-pair"><button class="btn-soft" data-act="recEnd">${ic('check')} I’ve finished: photo of the finished job</button><button class="btn-soft" data-act="recEnd" data-pick="1">${ic('photo')} Add photo</button></div>`}</div>`;
   const ok = recReady(r);
   return `<div class="sh-head"><button class="sh-x" data-act="recBack">Add steps</button><h2>Check your guide</h2><button class="sh-ok" id="rec-ok" data-act="recSave" ${ok ? '' : 'disabled'}>Save</button></div>
     <div class="sh-body">
       <div class="rec-sum">${ic('clock')}<span>You took <b>${mmss(r.durSec)}</b> for ${r.steps.length} step${r.steps.length === 1 ? '' : 's'}.</span></div>
       ${r.steps.map(card).join('')}
-      <div class="rstep fin">${recThumb(r.finish)}<div class="rstep-main"><b>The finished job</b><span class="hint">Kids see this as what done looks like.</span><div class="rstep-acts"><button class="plink" data-act="recRetake" data-i="finish">${ic('camera')} Retake</button></div></div></div>
+      <div class="rstep fin">${recThumb(r.finish)}<div class="rstep-main"><b>The finished job</b><span class="hint">Kids see this as what done looks like.</span><div class="rstep-acts"><button class="plink" data-act="recRetake" data-i="finish">${ic('camera')} Retake</button><button class="plink" data-act="recRetake" data-i="finish" data-pick="1">${ic('photo')} Choose photo</button></div></div></div>
       <div class="field"><span>Minutes on the kids’ clock</span><div class="stepper"><button data-act="recMins" data-d="-1" aria-label="Fewer minutes">${ic('minus')}</button><b>${r.mins}</b><button data-act="recMins" data-d="1" aria-label="More minutes">${ic('plus')}</button></div></div>
       <p class="hint" style="margin-top:-8px">A little longer than you took, since the job is new to them.</p>
       <div class="field col"><span>Kids’ photos</span><div class="seg"><button class="seg-i ${each ? 'on' : ''}" data-act="recMode" data-m="each">A photo at every step</button><button class="seg-i ${each ? '' : 'on'}" data-act="recMode" data-m="end">One photo at the end</button></div></div>
@@ -4663,26 +4674,27 @@ function renderPane(p) {
           <div class="steps">${stepsHtml(p)}</div>
         </div>
       </div>
-      <footer class="pane-foot"><button class="finish ${allDone ? 'ready' : ''}" data-act="sFinish" data-pane="${p.i}">${ic('check')} I'm done</button></footer>
+      <footer class="pane-foot"><button class="finish ${allDone ? 'ready' : ''}" data-act="sFinish" data-pane="${p.i}">${ic('check')} I'm done</button>${canNoNeed(p) ? `<button class="noneed" data-act="sNoNeed" data-pane="${p.i}">Doesn’t need doing</button>` : ''}</footer>
       <div class="hype" data-hype></div>`;
     const w = inner.querySelector('.work'), more = () => w.classList.toggle('more', w.scrollHeight - w.scrollTop - w.clientHeight > 4);
     w.addEventListener('scroll', more, { passive: true }); requestAnimationFrame(more); p.more = more;
     if (p.g) hydratePhotos(inner);
   } else if (p.phase === 'proof') {
     const err = p.err ? `<p class="p-err">${esc(p.err)}</p>` : '', send = p.uploading ? 'Sending…' : 'Send to grown-ups';
-    const match = p.mode === 'end' && p.g && p.g.finish ? `<figure class="match"><span class="ph"><img ${photoAttr(p.g.finish)} alt="The grown-up’s photo of the finished job"></span><figcaption>Make it look like this</figcaption></figure>` : '';
-    const n = p.shots.filter(Boolean).length;
+    const match = (p.mode === 'end' || p.noNeed) && p.g && p.g.finish ? `<figure class="match"><span class="ph"><img ${photoAttr(p.g.finish)} alt="The grown-up’s photo of the finished job"></span><figcaption>${p.noNeed ? 'Done looks like this' : 'Make it look like this'}</figcaption></figure>` : '';
+    const n = p.shots.filter(Boolean).length, back = p.noNeed && !p.uploading ? `<button class="link-btn" data-act="sNoNeedUndo" data-pane="${p.i}">It does need doing</button>` : '';
     inner.innerHTML = `${paneHead(p)}<div class="proof">
-      ${p.mode === 'each' ? `<div class="shots">${p.shots.map((sh, k) => (sh ? `<div class="polaroid" style="--rot:${k % 2 ? 2 : -2}deg"><span class="ph"><img src="${sh.url}" alt="Step ${k + 1}"></span><span class="pol-cap">${k + 1}. ${esc(c.steps[k])}</span></div>` : '')).join('')}</div>
+      ${p.mode === 'each' && !p.noNeed ? `<div class="shots">${p.shots.map((sh, k) => (sh ? `<div class="polaroid" style="--rot:${k % 2 ? 2 : -2}deg"><span class="ph"><img src="${sh.url}" alt="Step ${k + 1}"></span><span class="pol-cap">${k + 1}. ${esc(c.steps[k])}</span></div>` : '')).join('')}</div>
         <p class="proof-note">${n ? `${n} step photo${n === 1 ? '' : 's'} ready for the grown-ups.` : 'No step photos this time.'}</p>
         ${err}<button class="finish ready no-pulse" data-act="sSubmit" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${send}</button>`
       : p.photoUrl ? `<div class="proof-pair">${match}<div class="polaroid big" style="--rot:-3deg"><span class="ph"><img src="${p.photoUrl}" alt="Your photo"></span><span class="pol-cap">${esc(c.title)}<small>${esc(p.kid.name)} · today</small></span></div></div>
         ${err}
-        <div class="proof-row"><button class="finish" data-act="sSnap" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${ic('camera')} Retake</button><button class="finish ready no-pulse" data-act="sSubmit" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${send}</button></div>`
-      : `<div class="proof-pair">${match}<div class="viewfinder"><i></i><i></i><i></i><i></i>${ic('camera')}<p>Snap your finished job</p><small>${match ? 'Match the grown-up’s photo. +150 points.' : 'A grown-up checks the photo before payday. +150 points.'}</small></div></div>
+        <div class="proof-row"><button class="finish" data-act="sSnap" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${ic('camera')} Retake</button><button class="finish ready no-pulse" data-act="sSubmit" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${send}</button></div>${back}`
+      : `<div class="proof-pair">${match}<div class="viewfinder"><i></i><i></i><i></i><i></i>${ic('camera')}${p.noNeed ? '<p>Show it’s already done</p><small>Snap a photo for the grown-ups. It pays half, and you still get points for checking.</small>'
+        : `<p>Snap your finished job</p><small>${match ? 'Match the grown-up’s photo. +150 points.' : 'A grown-up checks the photo before payday. +150 points.'}</small>`}</div></div>
         ${err}
         <button class="finish ready" data-act="sSnap" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${ic('camera')} Open camera</button>
-        ${p.mode ? '' : `<button class="link-btn" data-act="sSkipPhoto" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${p.uploading ? 'Sending…' : 'No camera? Send without a photo'}</button>`}`}
+        ${p.mode || p.noNeed ? back : `<button class="link-btn" data-act="sSkipPhoto" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${p.uploading ? 'Sending…' : 'No camera? Send without a photo'}</button>`}`}
     </div>`;
     if (p.g) hydratePhotos(inner);
   } else {
@@ -4694,7 +4706,7 @@ function renderPane(p) {
       <div class="rstars" role="img" aria-label="${p.stars} of 3 stars">${[1, 2, 3].map(n => `<span class="rstar ${fin && n <= p.stars ? 'on' : ''}" data-star="${n}">${STAR_SOCK}${starGold(p.i + '-' + n)}</span>`).join('')}</div>
       <div class="res-score num" data-total>${fin ? p.score.toLocaleString() : 0}</div><div class="res-lbl">points</div>
       <div class="res-meter" aria-hidden="true"><i data-fill style="width:${fin ? clamp(rows.reduce((a, r) => a + r[2], 0) / starMax(p), 0, 1) * 100 : 0}%"></i>${STAR_TH.map((t, i) => `<span class="res-notch ${fin && i < p.stars ? 'on' : ''}" data-notch="${i + 1}" style="left:${t * 100}%">${STAR_MINI}</span>`).join('')}</div>
-      <p class="res-verdict" data-verdict>${fin ? VERDICT[p.stars] : ''}</p>
+      <p class="res-verdict" data-verdict>${fin ? verdictFor(p) : ''}</p>
       <div class="res-rows">${rows.map(([l, v], i) => `<div class="res-row ${fin ? 'done' : ''}" data-row="${i}"><span>${l}</span><b class="num">+${fin ? v.toLocaleString() : 0}</b></div>`).join('')}</div>
       <div class="res-end" data-end ${fin ? '' : 'hidden'}>${fin ? resEnd(p) : ''}</div>
     </div>`;
@@ -4704,6 +4716,7 @@ function renderPane(p) {
   }
 }
 const STAR_TH = [0.2, 0.5, 0.78], VERDICT = ['', 'Nice work!', 'Great job!', 'Perfect mission!'];
+const verdictFor = p => (p.noNeed ? 'Good checking!' : VERDICT[p.stars]);
 const STAR_D = (() => { let d = ''; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, q = i % 2 ? 25 : 54; d += (i ? 'L' : 'M') + (60 + Math.cos(a) * q).toFixed(1) + ' ' + (64 + Math.sin(a) * q).toFixed(1); } return d + 'Z'; })();
 const STAR_SOCK = `<svg class="rs-sock" viewBox="0 0 120 120" aria-hidden="true"><path d="${STAR_D}"/></svg>`, STAR_MINI = `<svg viewBox="0 0 120 120"><path d="${STAR_D}"/></svg>`;
 const starGold = id => `<svg class="rs-gold" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="rsg${id}" x1="0" y1="0" x2="0" y2="1"><stop offset=".42" stop-color="#FFF2A6"/><stop offset=".42" stop-color="#FFCC3D"/><stop offset=".7" stop-color="#FFCC3D"/><stop offset=".7" stop-color="#F29A1D"/></linearGradient></defs><path class="rs-body" d="${STAR_D}" fill="url(#rsg${id})"/><path d="M42 40Q50 30 58 30Q52 40 48 52Z" fill="#fff" opacity=".8"/></svg>`;
@@ -4711,6 +4724,7 @@ const starMax = p => p.c.steps.length * 100 + 650;
 // [label, points, how much the row counts towards stars], matching starsFor
 function resultRows(p) {
   const c = p.c, br = p.br, rows = [['Steps', br.steps, br.steps]];
+  if (p.noNeed) return [['Checked it', br.checked, br.checked], ['Photo proof', br.photo, br.photo]];
   if (br.combo) rows.push(['Combos', br.combo, br.combo]);
   if (br.speed) rows.push(['Speed bonus', br.speed, c.payType === 'hourly' ? 0 : br.speed]);
   if (c.payType === 'hourly' && br.extra) rows.push(['Minutes worked', br.extra, Math.min(500, br.extra)]);
@@ -4722,7 +4736,7 @@ function resultRows(p) {
 }
 function resEnd(p) {
   const pay = grossFor(jobFromPane(p)), qp = Math.round(((QUALITY[p.stars] || 1) - 1) * 100);
-  return `<div class="res-pay"><span>Pay after a grown-up checks</span><b class="num">${fmt(pay)}</b><small>${qp > 0 ? `includes +${qp}% for 3 stars` : qp < 0 ? `${qp}% for 1 star. More stars, more pay.` : '2 stars pays full price'}${p.c.surge ? ' · surge ×1.5' : ''}</small></div>
+  return `<div class="res-pay"><span>Pay after a grown-up checks</span><b class="num">${fmt(pay)}</b><small>${p.noNeed ? 'Half pay, because it didn’t need doing' : qp > 0 ? `includes +${qp}% for 3 stars` : qp < 0 ? `${qp}% for 1 star. More stars, more pay.` : '2 stars pays full price'}${p.c.surge ? ' · surge ×1.5' : ''}</small></div>
     ${Stage.crew ? (crewFinished() ? '' : '<p class="res-wait">Waiting for the rest of your crew…</p>') : `<button class="finish ready" data-act="sExit">Back to my sky</button>${window.Growth && Growth.hasLesson(p.kid) ? `<button class="res-grow" data-act="gFromResult" data-id="${p.kid.id}">${ic('sparkle')} More XP waiting in Character Growth</button>` : ''}`}`;
 }
 const crewFinished = () => Stage.panes.every(x => x.phase === 'result' && x.tally && x.tally.done);
@@ -4768,7 +4782,7 @@ async function runTally(p) {
   await chain; if (!alive()) return;
   await sleep(T0.fast ? 0 : 250); if (!alive()) return;
   T0.done = true;
-  el.querySelector('[data-verdict]').textContent = VERDICT[p.stars];
+  el.querySelector('[data-verdict]').textContent = verdictFor(p);
   const end = el.querySelector('[data-end]'); end.innerHTML = resEnd(p); end.hidden = false; end.classList.add('in');
   Sound.coin(); bumpScore(p);
   if (window.Growth && p.stars === 3 && p.elapsed < p.target) Growth.onEvent(p.kid, 'fast3', { title: p.c.title, saved: Math.round((p.target - p.elapsed) / 60) });
@@ -4870,7 +4884,7 @@ function stepTap(p, k, btn) {
     if (k !== cur) { Sound.error(); showHype(p, `Finish step ${cur + 1} first`); return; }
     if (!p.shots[k]) { snapStep(p, k); return; }
   }
-  p.steps[k] = true;
+  p.steps[k] = true; p.el.querySelector('.noneed')?.remove();
   if (p.g) { refreshSteps(p); btn = p.el.querySelector(`.gstep[data-k="${k}"] .gmain`) || btn; }
   else { btn.classList.add('done'); btn.setAttribute('aria-pressed', 'true'); }
   const pace = Math.max(20, (p.target / p.c.steps.length) * 1.25);
@@ -4909,6 +4923,18 @@ function finishPane(p, auto) {
   }
   p.phase = 'proof'; Sound.whoosh(); renderPane(p);
 }
+// "Doesn't need doing": the kid checked and it's already done. Offered on fixed-price chores until a step is ticked.
+// They still send a photo for the grown-ups to check, it pays half, and it scores two stars, because checking was
+// the job. "It does need doing" takes them back to the steps with the clock where it was.
+const canNoNeed = p => !['piece', 'hourly', 'quote'].includes(p.c.payType) && !p.steps.some(Boolean);
+function noNeedPane(p, btn) {
+  if (p.phase !== 'play' || !canNoNeed(p)) return;
+  if (!p.confirmNoNeed) {
+    p.confirmNoNeed = true; btn.textContent = 'Already done? Tap again';
+    setTimeout(() => { p.confirmNoNeed = false; if (p.phase === 'play' && btn.isConnected) btn.textContent = 'Doesn’t need doing'; }, 3500); return;
+  }
+  p.confirmNoNeed = false; p.noNeed = true; p.finishedAt = p.elapsed; p.phase = 'proof'; Sound.whoosh(); renderPane(p);
+}
 function starsFor(p) {
   const max = p.c.steps.length * 100 + 650;
   const got = p.br.steps + p.br.combo + p.br.photo + (p.c.payType === 'hourly' ? Math.min(500, p.br.extra) : p.br.speed);
@@ -4920,13 +4946,14 @@ function starsFor(p) {
 }
 function jobFromPane(p) {
   const c = p.c;
-  return { kidId: p.kid.id, key: c.key, title: c.title, icon: c.icon, tier: c.tier, theme: c.theme, payType: c.payType, base: c.pay || 0, perUnit: c.perUnit || 0, unit: c.unit || '', units: p.units, maxUnits: c.maxUnits || 0, rate: c.rate || 0, minutes: p.minutes || 0, maxMins: c.maxMins || 0, quote: p.quote || 0, surge: !!c.surge, score: p.score, stars: p.stars || starsFor(p), durSec: Math.round(p.finishedAt || p.elapsed), targetSec: p.target, stepsDone: p.steps.filter(Boolean).length, stepsTotal: p.steps.length, crew: Stage.crew };
+  return { kidId: p.kid.id, key: c.key, title: c.title, icon: c.icon, tier: c.tier, theme: c.theme, payType: c.payType, base: c.pay || 0, perUnit: c.perUnit || 0, unit: c.unit || '', units: p.units, maxUnits: c.maxUnits || 0, rate: c.rate || 0, minutes: p.minutes || 0, maxMins: c.maxMins || 0, quote: p.quote || 0, surge: !!c.surge, score: p.score, stars: p.stars || starsFor(p), durSec: Math.round(p.finishedAt || p.elapsed), targetSec: p.target, stepsDone: p.steps.filter(Boolean).length, stepsTotal: p.steps.length, crew: Stage.crew, ...(p.noNeed ? { noNeed: true } : {}) };
 }
 async function submitPane(p, withPhoto) {
   if (p.uploading || p.phase !== 'proof') return;
   p.uploading = true; p.err = ''; renderPane(p);
   let ref = null, stepPhotos = null;
-  if (p.mode === 'each') {
+  if (p.noNeed && !(withPhoto && p.photoBlob)) { p.uploading = false; p.err = 'Snap a photo that shows it’s already done.'; renderPane(p); return; }
+  if (p.mode === 'each' && !p.noNeed) {
     try { stepPhotos = await Promise.all(p.shots.map(sh => (sh ? sh.ref || sh.prom || uploadShot(sh) : null))); }
     catch (e) { console.warn(e); p.uploading = false; p.err = 'Some photos didn’t upload. Check the Wi-Fi and try again.'; renderPane(p); return; }
     ref = [...stepPhotos].reverse().find(Boolean) || null;
@@ -4936,7 +4963,9 @@ async function submitPane(p, withPhoto) {
     catch (e) { console.warn(e); p.uploading = false; p.err = e && e.code === 'quota_or_state' ? 'Photo storage is full. Send without the photo, and ask a grown-up to tidy up.' : 'The photo didn’t upload. Try again, or send without it.'; renderPane(p); return; }
     p.br.photo = 150; p.score += 150; bumpScore(p);
   }
-  p.stars = starsFor(p);
+  // Checking earns 60% of the chore's best score with the photo: two stars, whatever the chore's length
+  if (p.noNeed) { p.br.checked = Math.round(starMax(p) * 0.6) - p.br.photo; p.score = p.br.checked + p.br.photo; bumpScore(p); }
+  p.stars = p.noNeed ? 2 : starsFor(p);
   setDoc('jobs', uid(), { ...jobFromPane(p), photo: ref, ...(p.mode ? { guide: p.mode } : {}), ...(stepPhotos ? { stepPhotos } : {}), status: 'pending', date: dkey(), at: Date.now(), breakdown: p.br });
   p.uploading = false; p.phase = 'result'; renderPane(p);
 }
@@ -4953,10 +4982,11 @@ function exitStage() {
 }
 async function requestWake() { try { if (navigator.wakeLock) Stage.wake = await navigator.wakeLock.request('screen'); } catch (e) { Stage.wake = null; } }
 function releaseWake() { try { Stage.wake && Stage.wake.release(); } catch (e) {} Stage.wake = null; }
-// One camera input for the whole app: whoever opens it says what to do with the photo (null if it couldn't be read).
+// One camera input and one photo-library input (#pick, no capture, so it opens Photos) for the whole app: whoever
+// opens one says what to do with the photo (null if it couldn't be read).
 const Cam = { cb: null };
-function openCamera(cb) { Cam.cb = cb; const cam = $('#cam'); cam.value = ''; cam.click(); }
-$('#cam').addEventListener('change', async e => {
+function openCamera(cb, pick) { Cam.cb = cb; const cam = $(pick ? '#pick' : '#cam'); cam.value = ''; cam.click(); }
+for (const id of ['#cam', '#pick']) $(id).addEventListener('change', async e => {
   const file = e.target.files && e.target.files[0], cb = Cam.cb; e.target.value = ''; Cam.cb = null;
   if (!file || !cb) return;
   let blob = null; try { blob = await processPhoto(file); } catch (err) { console.warn(err); }
@@ -5128,6 +5158,8 @@ const ACT = {
   },
   sUnitUndo: a => { const p = Stage.panes[+a.dataset.pane]; if (p.units <= 0 || p.phase !== 'play') return; p.units--; p.score -= 30; bumpScore(p); p.el.querySelector('[data-units]').textContent = p.units; p.el.querySelector('[data-earn]').textContent = fmt(p.c.perUnit * p.units * (p.c.surge ? 1.5 : 1)); },
   sFinish: a => { const p = Stage.panes[+a.dataset.pane]; if (!Stage.paused) finishPane(p, false); },
+  sNoNeed: a => { const p = Stage.panes[+a.dataset.pane]; if (!Stage.paused) noNeedPane(p, a); },
+  sNoNeedUndo: a => { const p = Stage.panes[+a.dataset.pane]; if (!p || p.phase !== 'proof' || p.uploading) return; p.noNeed = false; if (p.photoUrl) URL.revokeObjectURL(p.photoUrl); p.photoBlob = p.photoUrl = null; p.err = ''; p.phase = 'play'; Sound.tap(); renderPane(p); },
   sSnap: a => { const p = Stage.panes[+a.dataset.pane]; openCamera(b => proofPhoto(p, b)); },
   sShot: a => { const p = Stage.panes[+a.dataset.pane], k = +a.dataset.k; if (p && p.phase === 'play' && !Stage.paused && !p.steps[k] && k === p.steps.findIndex(x => !x)) snapStep(p, k); },
   sGuide: a => { const p = Stage.panes[+a.dataset.pane], k = +a.dataset.k, st = p && p.g && p.g.steps[k]; if (st) showLight(p, st.photo, `Step ${k + 1}: ${st.text}`); },
@@ -5142,7 +5174,7 @@ const ACT = {
     const tip = UI.tips[j.id] || 0, q = j.payType === 'quote' ? (UI.quotes[j.id] ?? j.quote) : j.quote;
     const slip = payslipFor(kid, grossFor(j, q) + tip);
     updDoc('jobs', j.id, { status: 'approved', reviewedAt: Date.now(), quote: q, paid: { ...slip, tip } });
-    payKid(kid, slip, j.title); delete UI.tips[j.id]; delete UI.quotes[j.id];
+    payKid(kid, slip, j.noNeed ? `${j.title} (didn’t need doing)` : j.title); delete UI.tips[j.id]; delete UI.quotes[j.id];
     if (window.Growth) { Growth.onEvent(kid, 'pay', { gross: slip.gross, tax: slip.tax, net: slip.net, rate: S().taxRate, title: j.title, theme: j.theme }); if (q != null && j.quote != null && q < j.quote) Growth.onEvent(kid, 'counter', { asked: j.quote, offered: q }); }
     Sound.ensure(); Sound.cash(); G3.coins(30); toast(`Paid ${kid.name} ${fmt(slip.net)} after family tax`);
   },
@@ -5201,13 +5233,13 @@ const ACT = {
   cfHow: a => { UI.choreForm.how = a.dataset.h; renderSheet(false); },
   cfMode: a => { UI.choreForm.photoMode = a.dataset.m; renderSheet(false); },
   cfRecord: () => { if (UI.choreForm.title.trim()) startRecording(UI.choreForm); },
-  recSnap: () => openCamera(b => UI.rec && recPhoto(UI.rec.steps.length, b)),
-  recRetake: a => { const i = a.dataset.i; openCamera(b => recPhoto(i === 'finish' ? 'finish' : +i, b)); },
+  recSnap: a => openCamera(b => UI.rec && recPhoto(UI.rec.steps.length, b), a.dataset.pick),
+  recRetake: a => { const i = a.dataset.i; openCamera(b => recPhoto(i === 'finish' ? 'finish' : +i, b), a.dataset.pick); },
   recRetry: a => { const r = UI.rec, x = r && recShots(r).find(y => y.id === a.dataset.id); if (!x) return; const el = $(`[data-shot="${x.id}"]`); if (el) { el.classList.add('busy'); el.classList.remove('err'); } uploadGuidePhoto(x); recOk(); },
   recDel: a => { const r = UI.rec, [x] = r.steps.splice(+a.dataset.i, 1); if (x) URL.revokeObjectURL(x.url); if (!r.steps.length) r.phase = 'rec'; renderSheet(false); },
-  recEnd: () => {
+  recEnd: a => {
     const r = UI.rec; if (!r || !r.steps.length) return;
-    if (!r.finish) { openCamera(b => recPhoto('finish', b)); return; }
+    if (!r.finish) { openCamera(b => recPhoto('finish', b), a.dataset.pick); return; }
     r.durSec = Math.round((Date.now() - r.startAt) / 1000); r.phase = 'review'; renderSheet(false);
     const sh = $('#sheets .sheet'); if (sh) sh.scrollTop = 0;
   },
