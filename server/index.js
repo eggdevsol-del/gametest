@@ -397,6 +397,10 @@ route('POST', '/api/events', async ({ req, s }) => {
       await db.query('insert into island_prizes (family_id, kid_id, prize_id, name, kind, big, prize_no, lessons_at, gap, pace, next_gap, won_at, lesson_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
         [s.family_id, kid, txt(pl.id) || '?', txt(pl.name), ['look', 'item', 'chest'].includes(pl.kind) ? pl.kind : null, !!pl.big, int(pl.n), int(pl.lessons), int(pl.gap), int(pl.pace), int(pl.next), when, txt(pl.lesson)]);
     }
+    if (type === 'chore.sent' && kid) {
+      await db.query('insert into chore_sends (family_id, kid_id, chore_key, title, tier, freq, sent_by, sent_at) values ($1, $2, $3, $4, $5, $6, $7, $8)',
+        [s.family_id, kid, txt(pl.key) || '?', txt(pl.title), ['must', 'team', 'gig'].includes(pl.tier) ? pl.tier : null, txt(pl.freq, 20), s.user_id || null, when]);
+    }
     if (type === 'island.buy' && kid) {
       await db.query('insert into island_purchases (family_id, kid_id, item, name, category, paid_with, price, bought_at) values ($1, $2, $3, $4, $5, $6, $7, $8)',
         [s.family_id, kid, txt(pl.item) || '?', txt(pl.name), txt(pl.cat, 40), pl.pay === 'xp' || pl.pay === 'cash' ? pl.pay : null, int(pl.price), when]);

@@ -171,6 +171,8 @@ p{margin:0}
 .tile{position:relative;display:flex;flex-direction:column;align-items:center;gap:7px;padding:12px 8px 12px;border-radius:22px;background:var(--glass-2);text-align:center;min-height:172px;transition:transform .18s,background .2s}
 .tile:active{transform:scale(.95)}
 .tile-top{font:700 12px var(--f-round);color:var(--on-sky-2)}
+.tile-freq{font:800 11px var(--f-round);padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.18);color:var(--on-sky)}
+.for-you{font:800 11px var(--f-round);padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.92);color:#0D1530;white-space:nowrap}
 .sticker{width:66px;height:66px;border-radius:22px;display:grid;place-items:center;font-size:36px;background:linear-gradient(145deg,var(--c1),var(--c2));box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset 0 -4px 10px rgba(0,0,0,.12),0 10px 18px -8px var(--c2);transform:rotate(-5deg);flex:none}
 .tile:nth-child(even) .sticker{transform:rotate(5deg)}
 .tile-name{font:800 14px/1.2 var(--f-round);min-height:2.4em;display:flex;align-items:center}
@@ -1259,6 +1261,7 @@ function greeting(d) { const h = d.getHours(); return h < 5 ? 'Good night' : h <
    Icons (SF Symbols-style line icons)
    ========================================================= */
 const ICONS = {
+  send: '<path d="M21 3 3 10.5l7.2 2.6L13 21 21 3z"/><path d="M10.2 13.1 15 8.4"/>',
   sun: '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.1M12 19.3v2.1M2.6 12h2.1M19.3 12h2.1M5.4 5.4l1.5 1.5M17.1 17.1l1.5 1.5M5.4 18.6l1.5-1.5M17.1 6.9l1.5-1.5"/>',
   jar: '<path d="M8 3.5h8"/><path d="M9 3.5v2.3C6.9 6.9 5.5 8.6 5.5 11.2v6.3a3.5 3.5 0 0 0 3.5 3.5h6a3.5 3.5 0 0 0 3.5-3.5v-6.3c0-2.6-1.4-4.3-3.5-5.4V3.5"/><path d="M12 10.3v6.6M14 11.8c-.4-.6-1.1-.9-2-.9-1.1 0-2 .6-2 1.4 0 1.9 4 1.1 4 3 0 .8-.9 1.4-2 1.4-.9 0-1.7-.3-2.1-.9"/>',
   chart: '<path d="M3.5 19.5h17"/><path d="M5 15.5l4.5-4.5 3.5 3 6.5-7"/><path d="M15.5 7h4v4"/>',
@@ -1318,6 +1321,16 @@ const TIERS = {
   bonus: { label: 'Bonus',        tag: 'Reward',    color: 'var(--bonus)', pblurb: '' },
 };
 const PAYTYPE = { fixed: 'Fixed price', piece: 'Piece rate', hourly: 'Hourly', quote: 'Name your price' };
+// How often a custom chore comes round. A grown-up picks it and kids see it on the chore. "Just once" chores leave
+// for good once they're done.
+const FREQS = [
+  { k: 'daily', every: 1, label: 'Every day' }, { k: '2days', every: 2, label: 'Every 2 days' }, { k: 'twice', every: 3, label: 'Twice a week' },
+  { k: 'weekly', every: 7, label: 'Once a week' }, { k: 'fortnight', every: 14, label: 'Every 2 weeks' }, { k: 'monthly', every: 30, label: 'Once a month' },
+  { k: 'once', every: 1e5, label: 'Just once' },
+];
+// Older custom chores had only an every-day switch
+const freqOf = c => (c && c.custom ? FREQS.find(f => f.k === c.freq) || (c.daily ? FREQS[0] : null) : null);
+const freqWhy = c => { const f = freqOf(c); return !f ? '' : f.k === 'once' ? 'A grown-up asked for this one, just once.' : `A grown-up wants this done ${f.label.toLowerCase()}.`; };
 // scope 'me' = each kid does their own (own bed, own washing); otherwise one kid per family, handed out by the daily draft.
 // e = cooldown in days: once anyone does it, it sits out until it is due again. max = oldest age it suits.
 const C = (key, tier, title, icon, theme, mins, pay, minAge, steps, x = {}) => { const { me, e, max, ...rest } = x; return { key, tier, title, icon, theme, mins, pay, minAge, steps, payType: 'fixed', scope: me ? 'me' : 'home', every: e || 1, maxAge: max, ...rest }; };
@@ -1908,16 +1921,21 @@ function draftFor(date) {
   if (draftCache.map.has(date)) return draftCache.map.get(date);
   const kids = kidsList(), h = historyBefore(date), r = mulberry(hash('draft|' + date)), all = allChores(), out = {};
   const since = (c, k) => { const d = h[c.key] && h[c.key].by[k.id]; return d ? Math.min(21, daysBetween(d, date)) : 21; };
+  // Uncapped, for chores that come round less often than every three weeks
+  const dueMine = (c, k) => { const d = h[c.key] && h[c.key].by[k.id]; return !d || daysBetween(d, date) >= (c.every || 1); };
+  const sent = sentKeys(date);
   for (const k of kids) {
     const age = k.age || 8, mine = all.filter(c => c.scope === 'me' && fitsAge(c, age) && !isOff(c));
-    const rank = tier => mine.filter(c => c.tier === tier && !c.anchor && since(c, k) >= (c.every || 1)).map(c => [c, since(c, k) + r() * 3]).sort((a, b) => b[1] - a[1]).map(x => x[0]);
+    const rank = tier => mine.filter(c => c.tier === tier && !c.anchor && !freqOf(c) && since(c, k) >= (c.every || 1)).map(c => [c, since(c, k) + r() * 3]).sort((a, b) => b[1] - a[1]).map(x => x[0]);
     const me = out[k.id] = { must: mine.filter(c => c.anchor), team: [], why: {}, spareMust: rank('must'), spareTeam: rank('team'), first: false };
     me.must.forEach(c => { me.why[c.key] = 'Everyone looks after their own bed.'; });
+    // A grown-up's own chores for every kid come round on the schedule they picked
+    for (const c of mine) if (freqOf(c) && !c.anchor && dueMine(c, k)) { me[c.tier === 'team' ? 'team' : 'must'].push(c); me.why[c.key] = freqWhy(c); }
     const pm = me.spareMust.shift(); if (pm) { me.must.push(pm); me.why[pm.key] = whyMine(since(pm, k)); }
     const pt = me.spareTeam.shift(); if (pt) { me.team.push(pt); me.why[pt.key] = `Your own ${pt.theme === 'bedroom' ? 'room' : 'stuff'}, so it’s yours alone. ${whyMine(since(pt, k))}`; }
   }
   const left = { must: [], team: [] };
-  for (const c of all) if (c.scope !== 'me' && (c.tier === 'must' || c.tier === 'team') && !isOff(c) && dueFamily(c, h, date)) left[c.tier].push(c);
+  for (const c of all) if (c.scope !== 'me' && (c.tier === 'must' || c.tier === 'team') && !isOff(c) && !sent.has(c.key) && dueFamily(c, h, date)) left[c.tier].push(c);
   if (kids.length) {
     const s = Math.round(parseKey(date) / 864e5) % kids.length, order = kids.slice(s).concat(kids.slice(0, s));
     out[order[0].id].first = true;
@@ -1933,7 +1951,7 @@ function draftFor(date) {
           if (d <= 1) sc -= 12;
           sc += ((c.minAge || 5) / age) * 4;
           if (me.must.concat(me.team).some(x => x.theme === c.theme)) sc -= 5;
-          if (c.custom && c.daily) { sc += 50; why = 'A grown-up wants this done every day.'; }
+          if (freqOf(c)) { sc += 50; why = freqWhy(c); }
           sc += r() * 2;
           if (!best || sc > best.sc) best = { c, sc, why };
         }
@@ -1949,10 +1967,33 @@ function draftFor(date) {
   }
   draftCache.map.set(date, out); return out;
 }
-function boardFor(kid, date) { const d = draftFor(date)[kid.id]; return d ? { must: d.must, team: d.team } : { must: [], team: [] }; }
+/* ---------- Chores sent straight to one kid ----------
+   A grown-up can send a custom chore to a kid at any moment. It lands on that kid's list at once (settings sync
+   live), marked as sent, and stays there each day until they've done it, for up to a week. While it's with them
+   it sits out of everyone else's draft, and a side hustle sent to one kid is theirs alone. */
+const SEND_DAYS = 7;
+let sendCache = { ver: -1, map: new Map() };
+function sendsFor(kidId, date) {
+  if (sendCache.ver !== Store.ver) sendCache = { ver: Store.ver, map: new Map() };
+  const k = kidId + '|' + date; if (sendCache.map.has(k)) return sendCache.map.get(k);
+  const out = (S().sends || []).filter(x => x.kidId === kidId && x.date <= date && daysBetween(x.date, date) < SEND_DAYS && !doneBefore(kidId, x.key, x.date, date));
+  sendCache.map.set(k, out); return out;
+}
+// Done on an earlier day than `date` (done today, it stays on today's list as done)
+const doneBefore = (kidId, key, from, date) => jobsList().some(j => j.kidId === kidId && j.key === key && j.date >= from && j.date < date && j.status !== 'redo');
+const sentKeys = date => new Set(kidsList().flatMap(k => sendsFor(k.id, date).map(x => x.key)));
+function boardFor(kid, date) {
+  const d = draftFor(date)[kid.id], b = d ? { must: [...d.must], team: [...d.team] } : { must: [], team: [] };
+  for (const x of sendsFor(kid.id, date)) { const c = choreDef(x.key); if (!c || c.tier === 'gig') continue; const list = b[c.tier === 'team' ? 'team' : 'must'], i = list.findIndex(y => y.key === c.key); if (i >= 0) list[i] = { ...list[i], sent: x }; else list.push({ ...c, sent: x }); }
+  return b;
+}
+function gigsFor(kid, date) {
+  const mine = sendsFor(kid.id, date).map(x => { const c = choreDef(x.key); return c && c.tier === 'gig' ? { ...c, sent: x } : null; }).filter(Boolean);
+  return mine.concat(gigBoard(date).filter(g => !mine.some(m => m.key === g.key)));
+}
 function gigBoard(date) {
   const kids = kidsList(); const maxAge = Math.max(8, ...kids.map(k => k.age || 8));
-  const r = mulberry(hash('gigs|' + date)), h = historyBefore(date); const p = pool('gig', maxAge).filter(c => dueFamily(c, h, date));
+  const r = mulberry(hash('gigs|' + date)), h = historyBefore(date), sent = sentKeys(date); const p = pool('gig', maxAge).filter(c => dueFamily(c, h, date) && !sent.has(c.key));
   const customs = p.filter(c => c.custom); let rest = shuffle(p.filter(c => !c.custom), r);
   // Always offer a mix of pay types: one piece-rate gig and one hourly or quote gig, then fill up.
   const lead = [rest.find(c => c.payType === 'piece'), rest.find(c => c.payType === 'hourly' || c.payType === 'quote')].filter(Boolean);
@@ -3796,6 +3837,7 @@ function kidCard(k, date) {
 /* ---------- Kid home ---------- */
 function viewKid() {
   const kid = curKid(); if (!kid) { UI.screen = 'who'; return viewWho(); }
+  noticeSends(kid);
   const t = UI.tab;
   const body = t === 'money' ? kidMoney(kid) : t === 'market' ? kidMarket(kid) : t === 'proof' ? kidProof(kid) : kidToday(kid);
   if (t !== 'today') UI.skyProgress = (() => { const p = kidProgress(kid, dkey()); return p.total ? p.done / p.total : 0; })();
@@ -3822,7 +3864,7 @@ function todayMoney(kid) {
   return { earned, pending };
 }
 function kidToday(kid) {
-  const date = dkey(), b = boardFor(kid, date), gigs = gigBoard(date);
+  const date = dkey(), b = boardFor(kid, date), gigs = gigsFor(kid, date);
   const all = [...b.must, ...b.team], done = all.filter(c => isDone(choreState(kid.id, c, date).state)).length;
   const prog = all.length ? done / all.length : 0; UI.skyProgress = prog;
   const nw = netWorth(kid), cond = condition(done, all.length), tm = todayMoney(kid), j = kid.jars || {};
@@ -3862,8 +3904,8 @@ function tile(c, st) {
   const th = THEMES[c.theme] || THEMES.tidy, s = st.state;
   const badge = s === 'approved' ? `<span class="tb ok" aria-label="Paid">${ic('check')}</span>` : s === 'pending' ? `<span class="tb wait" aria-label="Waiting for a grown-up">${ic('clock')}</span>` : s === 'redo' ? '<span class="tb redo">Redo</span>' : '';
   return `<button class="tile st-${s}" data-act="brief" data-key="${c.key}" style="--c1:${th.c1};--c2:${th.c2}">
-    <span class="tile-top">${c.mins} min${guideOf(c) ? ' · 📷' : ''}</span><span class="sticker" aria-hidden="true">${c.icon}</span>
-    <span class="tile-name">${esc(c.title)}</span><span class="tile-pay num">${payLabel(c)}</span>${badge}</button>`;
+    <span class="tile-top">${c.sent ? '📨 Sent to you' : `${c.mins} min${guideOf(c) ? ' · 📷' : ''}`}</span><span class="sticker" aria-hidden="true">${c.icon}</span>
+    <span class="tile-name">${esc(c.title)}</span>${freqOf(c) ? `<span class="tile-freq">${freqOf(c).label}</span>` : ''}<span class="tile-pay num">${payLabel(c)}</span>${badge}</button>`;
 }
 function gigCard(gigs, kid, date) {
   const open = gigs.filter(g => choreState(kid.id, g, date).state === 'open' || choreState(kid.id, g, date).state === 'redo').length;
@@ -3876,8 +3918,8 @@ function gigCard(gigs, kid, date) {
         : st.state === 'approved' ? `<span class="tb ok" style="position:static">${ic('check')}</span>` : st.state === 'pending' ? `<span class="gig-taken">${ic('clock')} Checking</span>` : '';
       return `<button class="gig" data-act="brief" data-key="${c.key}" ${young || st.state === 'taken' ? 'disabled' : ''} style="--c1:${th.c1};--c2:${th.c2}">
         <span class="sticker sm" aria-hidden="true">${c.icon}</span>
-        <span><span class="gig-t">${esc(c.title)}</span><span class="gig-s">${young ? `Unlocks at age ${c.minAge}` : payDetail(c)}</span></span>
-        <span class="gig-r">${c.surge ? `<span class="surge">${ic('flame')} Surge ×1.5</span>` : ''}<span class="gig-pay num">${payLabel(c)}</span>${right}</span>
+        <span><span class="gig-t">${esc(c.title)}</span><span class="gig-s">${young ? `Unlocks at age ${c.minAge}` : payDetail(c)}${freqOf(c) ? ` · ${freqOf(c).label}` : ''}</span></span>
+        <span class="gig-r">${c.sent ? '<span class="for-you">📨 Just for you</span>' : ''}${c.surge ? `<span class="surge">${ic('flame')} Surge ×1.5</span>` : ''}<span class="gig-pay num">${payLabel(c)}</span>${right}</span>
       </button>`;
     }).join('')}</div>
   </section>`;
@@ -4082,9 +4124,11 @@ function polaroid(j, i) {
 function briefSheet() {
   const { kidId, key } = UI.brief, kid = Store.kids[kidId], date = dkey();
   let c = choreDef(key); if (!c || !kid) return '<div class="sh-body"><p class="hint">That chore is no longer offered.</p></div>';
-  const g = gigBoard(date).find(x => x.key === key); if (g) c = { ...c, surge: g.surge };
+  const g = gigsFor(kid, date).find(x => x.key === key); if (g) c = { ...c, surge: g.surge };
+  const sent = sendsFor(kidId, date).find(x => x.key === key), freq = freqOf(c);
   const th = THEMES[c.theme] || THEMES.tidy, st = choreState(kidId, c, date), T = TIERS[c.tier];
-  const why = c.tier === 'gig' ? `Up for grabs. The first kid to finish gets paid, then it’s off the board${c.every > 1 ? ` for ${c.every} days` : ' until tomorrow'}.` : ((draftFor(date)[kidId] || {}).why || {})[key];
+  const why = sent ? `${sent.by || 'A grown-up'} sent this ${c.tier === 'gig' ? 'side hustle' : 'chore'} to you${c.tier === 'gig' ? ', so it’s yours alone' : ''}. It stays on your list until it’s done.`
+    : c.tier === 'gig' ? `Up for grabs. The first kid to finish gets paid, then it’s off the board${freq ? (freq.k === 'once' ? ' for good' : ` until it comes round again (${freq.label.toLowerCase()})`) : c.every > 1 ? ` for ${c.every} days` : ' until tomorrow'}.` : ((draftFor(date)[kidId] || {}).why || {})[key];
   const done = isDone(st.state), q = UI.brief.quote ?? c.quote, gd = guideOf(c), gm = gd ? c.photoMode || 'each' : null;
   let payTxt = '', payBig = payLabel(c);
   if (c.payType === 'piece') payTxt = `You earn ${fmt(c.perUnit * (c.surge ? 1.5 : 1))} for every ${c.unit}, up to ${c.maxUnits}. Count them during the mission. More ${c.unit}s, more money.`;
@@ -4094,7 +4138,7 @@ function briefSheet() {
   return `<div class="brief-h" style="--c1:${th.c1};--c2:${th.c2};--c3:${th.c3}">
       <button class="brief-close" data-act="close" aria-label="Close">${ic('x')}</button>
       <div class="brief-top"><span class="sticker" aria-hidden="true">${c.icon}</span><div><div class="brief-mode">Mission · ${th.name}</div><h2>${esc(c.title)}</h2></div></div>
-      <div class="brief-chips"><span class="bchip">${T.label} · ${T.tag}</span><span class="bchip">${ic('clock')} ${c.payType === 'hourly' ? `up to ${c.maxMins}` : c.mins} min</span><span class="bchip">${ic('coins')} ${PAYTYPE[c.payType]}</span>${c.surge ? `<span class="bchip">${ic('flame')} Surge ×1.5</span>` : ''}</div>
+      <div class="brief-chips"><span class="bchip">${T.label} · ${T.tag}</span><span class="bchip">${ic('clock')} ${c.payType === 'hourly' ? `up to ${c.maxMins}` : c.mins} min</span><span class="bchip">${ic('coins')} ${PAYTYPE[c.payType]}</span>${freq ? `<span class="bchip">🔁 ${freq.label}</span>` : ''}${sent ? '<span class="bchip">📨 Sent to you</span>' : ''}${c.surge ? `<span class="bchip">${ic('flame')} Surge ×1.5</span>` : ''}</div>
     </div>
     <div class="sh-body">
       ${why ? `<div class="why-note">${ic('crew')}<span><b>Why you got this:</b> ${esc(why)}</span></div>` : ''}
@@ -4197,7 +4241,7 @@ function fundSheet() {
 function openChores(kid, date) {
   const b = boardFor(kid, date), out = [];
   for (const c of [...b.must, ...b.team]) { const s = choreState(kid.id, c, date).state; if (s === 'open' || s === 'redo') out.push(c); }
-  for (const c of gigBoard(date)) { const s = choreState(kid.id, c, date).state; if ((s === 'open' || s === 'redo') && (c.minAge || 0) <= (kid.age || 8)) out.push(c); }
+  for (const c of gigsFor(kid, date)) { const s = choreState(kid.id, c, date).state; if ((s === 'open' || s === 'redo') && (c.minAge || 0) <= (kid.age || 8)) out.push(c); }
   return out;
 }
 const crewMax = () => (Math.min(innerWidth, innerHeight) < 600 ? 2 : 4);
@@ -4566,10 +4610,11 @@ function choreRow(c) {
   const here = fitsHome(c), on = here && !(S().choreOff || {})[c.key], th = THEMES[c.theme] || THEMES.tidy, val = c[rateField(c)] || 0;
   const suffix = c.payType === 'piece' ? `/${c.unit}` : c.payType === 'hourly' ? '/hr' : '';
   return `<div class="row wrap ${on ? '' : 'off'}"><span class="sticker xs" style="--c1:${th.c1};--c2:${th.c2}" aria-hidden="true">${c.icon}</span>
-    <div class="row-main"><b>${esc(c.title)}</b><small>${c.maxAge ? `Ages ${c.minAge}–${c.maxAge}` : `Age ${c.minAge || 5}+`} · ${c.scope === 'me' ? 'Each kid does their own' : c.every > 1 ? `Due every ${c.every} days` : 'Daily, one kid'} · ${c.payType === 'hourly' ? `up to ${c.maxMins}` : c.mins} min · ${PAYTYPE[c.payType]}${c.custom ? ' · Yours' : ''}${c.custom && c.daily ? ' · Every day' : ''}${c.guide ? ` · 📷 Photo guide, ${c.photoMode === 'end' ? 'one photo at the end' : 'a photo every step'}` : ''}</small></div>
+    <div class="row-main"><b>${esc(c.title)}</b><small>${c.maxAge ? `Ages ${c.minAge}–${c.maxAge}` : `Age ${c.minAge || 5}+`} · ${freqOf(c) ? `${freqOf(c).label}${c.tier === 'gig' ? '' : c.scope === 'me' ? ', each kid' : ', one kid'}` : c.scope === 'me' ? 'Each kid does their own' : c.every > 1 ? `Due every ${c.every} days` : 'Daily, one kid'} · ${c.payType === 'hourly' ? `up to ${c.maxMins}` : c.mins} min · ${PAYTYPE[c.payType]}${c.custom ? ' · Yours' : ''}${(() => { const w = kidsList().filter(k => sendsFor(k.id, dkey()).some(x => x.key === c.key)); return w.length ? ` · 📨 With ${w.map(k => esc(k.name)).join(' and ')}` : ''; })()}${c.guide ? ` · 📷 Photo guide, ${c.photoMode === 'end' ? 'one photo at the end' : 'a photo every step'}` : ''}</small></div>
     ${c.payType === 'quote' ? '<span class="muted" style="font-size:14px">Kid quotes</span>' : `<div class="stepper"><button data-act="rate" data-key="${c.key}" data-d="${c.payType === 'hourly' ? -50 : -10}" aria-label="Lower pay">${ic('minus')}</button><b>${fmt(val)}${suffix}</b><button data-act="rate" data-key="${c.key}" data-d="${c.payType === 'hourly' ? 50 : 10}" aria-label="Raise pay">${ic('plus')}</button></div>`}
     ${here ? `<button class="switch ${on ? 'on' : ''}" role="switch" aria-checked="${on}" aria-label="Offer ${esc(c.title)}" data-act="choreToggle" data-key="${c.key}"></button>` : `<button class="not-here" data-act="ptab" data-tab="home" title="${esc(missingText(c, homeF()))}">${ic('home')} Not at your place</button>`}
     ${c.guide ? `<button class="icon-p" data-act="gaOpen" data-key="${c.key}" aria-label="Photo guide for ${esc(c.title)}">${ic('photo')}</button>` : ''}
+    ${c.custom && on ? `<button class="icon-p" data-act="sendOpen" data-key="${c.key}" aria-label="Send ${esc(c.title)} to a kid now">${ic('send')}</button>` : ''}
     ${c.custom ? `<button class="icon-p" data-act="delChore" data-key="${c.key}" aria-label="Delete ${esc(c.title)}">${ic('trash')}</button>` : ''}</div>`;
 }
 function pBank() {
@@ -4639,9 +4684,33 @@ function moneyFormSheet() {
     <div class="sh-foot"><button class="btn-big" data-act="mGo" ${m.amt > 0 && m.amt <= have ? '' : 'disabled'}>${isPay ? `Record ${fmt(m.amt)} paid out` : `Pay ${fmt(m.amt)} bonus`}</button></div>`;
 }
 const THEME_KEYS = Object.keys(THEMES);
+// A custom chore's schedule: the frequency kids see, how many days it sits out after it's done, and the old
+// every-day flag for chores made before frequencies
+const freqFields = f => { const fr = FREQS.find(x => x.k === f.freq) || FREQS[0]; return { freq: fr.k, every: fr.every, daily: f.tier !== 'gig' && fr.k === 'daily' }; };
+// Puts a chore on kids' lists right now (settings sync to every device at once). Sending it again restarts it.
+// Sends older than a month are tidied away. Returns the kids' names for the toast.
+function sendChore(c, kidIds) {
+  const date = dkey(), by = parentName(), keep = (S().sends || []).filter(x => daysBetween(x.date, date) < 30 && !(x.key === c.key && kidIds.includes(x.kidId)));
+  const add = kidIds.filter(id => Store.kids[id]).map(id => ({ id: uid(), key: c.key, kidId: id, date, at: Date.now(), by }));
+  saveSettings({ sends: [...keep, ...add] });
+  add.forEach(x => track('chore.sent', { key: c.key, title: c.title, tier: c.tier, freq: c.freq || null }, x.kidId));
+  return add.map(x => Store.kids[x.kidId].name).join(' and ');
+}
+function sendSheet() {
+  const c = choreDef(UI.send.key), date = dkey(); if (!c) return '<div class="sh-body"><p class="hint">That chore was deleted.</p></div>';
+  const th = THEMES[c.theme] || THEMES.tidy, fr = freqOf(c), pick = UI.send.kids, gig = c.tier === 'gig';
+  const has = kidsList().map(k => [k, sendsFor(k.id, date).find(x => x.key === c.key)]).filter(([, x]) => x);
+  return `<div class="sh-head"><button class="sh-x" data-act="close">Cancel</button><h2>Send it now</h2><button class="sh-ok" data-act="sendGo" ${pick.length ? '' : 'disabled'}>Send</button></div>
+    <div class="sh-body">
+      <div class="row"><span class="sticker xs" style="--c1:${th.c1};--c2:${th.c2}" aria-hidden="true">${c.icon}</span><div class="row-main"><b>${esc(c.title)}</b><small>${gig ? 'Side hustle' : TIERS[c.tier].label} · ${fr ? fr.label : 'Every day'} · ${payLabel(c)}</small></div></div>
+      <div class="field col"><span>Send to</span><div class="crew-pick">${kidsList().map(k => `<button class="crew-kid ${pick.includes(k.id) ? 'on' : ''}" data-act="sendKid" data-id="${k.id}" aria-pressed="${pick.includes(k.id)}"><span style="--hue:${k.hue}">${k.avatar}</span>${esc(k.name)}</button>`).join('')}</div></div>
+      <p class="hint">It lands on their list straight away, marked as from you, and stays there until it’s done${gig ? '. Nobody else can take it' : ''}.</p>
+      ${has.length ? `<div class="field col"><span>On their lists now</span>${has.map(([k, x]) => `<div class="row"><div class="row-main"><b>${esc(k.name)}</b><small>Sent ${x.date === date ? 'today' : timeAgo(x.at)}</small></div><button class="pbtn" data-act="sendUndo" data-id="${x.id}">Take back</button></div>`).join('')}</div>` : ''}
+    </div>`;
+}
 function choreFormSheet() {
-  const f = UI.choreForm, photo = f.how === 'photo', each = f.photoMode !== 'end';
-  return `<div class="sh-head"><button class="sh-x" data-act="close">Cancel</button><h2>New custom chore</h2><button class="sh-ok" id="cf-ok" data-act="${photo ? 'cfRecord' : 'saveChore'}" ${f.title.trim() ? '' : 'disabled'}>${photo ? 'Next' : 'Add'}</button></div>
+  const f = UI.choreForm, photo = f.how === 'photo', each = f.photoMode !== 'end', gig = f.tier === 'gig';
+  return `<div class="sh-head"><button class="sh-x" data-act="close">Cancel</button><h2>New custom chore</h2><button class="sh-ok" id="cf-ok" data-act="${photo ? 'cfRecord' : 'saveChore'}" ${f.title.trim() ? '' : 'disabled'}>${photo ? 'Next' : f.sendTo.length ? 'Send' : 'Add'}</button></div>
     <div class="sh-body">
       <label class="field"><span>Chore</span><input id="cf-title" type="text" maxlength="34" autocomplete="off" placeholder="Feed the chickens" value="${esc(f.title)}" data-in="cfTitle"></label>
       <div class="field col"><span>How kids learn it</span><div class="seg"><button class="seg-i ${photo ? 'on' : ''}" data-act="cfHow" data-h="photo">📷 Photo guide</button><button class="seg-i ${photo ? '' : 'on'}" data-act="cfHow" data-h="text">Written steps</button></div>
@@ -4649,13 +4718,18 @@ function choreFormSheet() {
       ${photo ? `<div class="field col"><span>Kids’ photos</span><div class="seg"><button class="seg-i ${each ? 'on' : ''}" data-act="cfMode" data-m="each">A photo at every step</button><button class="seg-i ${each ? '' : 'on'}" data-act="cfMode" data-m="end">One photo at the end</button></div>
         <small class="hint">${each ? 'Kids must photograph each step before they can tick it off and move to the next one.' : 'Kids tick the steps off as they go, then photograph the finished job to match yours.'}</small></div>` : ''}
       <div class="field col"><span>Icon</span><div class="ava-grid">${['🐔', '🧹', '🪣', '🗑️', '🧺', '🍳', '🌿', '🐈', '🛒', '📬', '🪴', '🧽'].map(a => `<button class="ava-opt ${a === f.icon ? 'on' : ''}" data-act="cfIcon" data-a="${a}">${a}</button>`).join('')}</div></div>
-      <div class="field col"><span>Who does it</span><div class="seg"><button class="seg-i ${f.scope !== 'me' ? 'on' : ''}" data-act="cfScope" data-s="home">One kid, shared by the draft</button><button class="seg-i ${f.scope === 'me' ? 'on' : ''}" data-act="cfScope" data-s="me">Every kid does their own</button></div></div>
-      <div class="field col"><span>Type</span><div class="seg">${['must', 'team', 'gig'].map(t => `<button class="seg-i ${f.tier === t ? 'on' : ''}" data-act="cfTier" data-t="${t}">${TIERS[t].label}</button>`).join('')}</div></div>
+      <div class="field col"><span>Kind of job</span><div class="seg"><button class="seg-i ${gig ? '' : 'on'}" data-act="cfKind" data-k="chore">🧹 Daily chore</button><button class="seg-i ${gig ? 'on' : ''}" data-act="cfKind" data-k="gig">💼 Side hustle</button></div>
+        <small class="hint">${gig ? 'Optional extra work for more pay. The first kid to finish it gets paid.' : 'Goes on a kid’s list with their other chores for the day.'}</small></div>
+      ${gig ? '' : `<div class="field col"><span>Counts as</span><div class="seg">${['must', 'team'].map(t => `<button class="seg-i ${f.tier === t ? 'on' : ''}" data-act="cfTier" data-t="${t}">${TIERS[t].label}</button>`).join('')}</div><small class="hint">${f.tier === 'team' ? 'Better pay for helping the household.' : 'Small pay. Doing it builds the Trust Score.'}</small></div>
+      <div class="field col"><span>Who does it</span><div class="seg"><button class="seg-i ${f.scope !== 'me' ? 'on' : ''}" data-act="cfScope" data-s="home">One kid, shared by the draft</button><button class="seg-i ${f.scope === 'me' ? 'on' : ''}" data-act="cfScope" data-s="me">Every kid does their own</button></div></div>`}
+      <div class="field col"><span>How often</span><div class="chips">${FREQS.map(fr => `<button class="chip-p ${f.freq === fr.k ? 'on' : ''}" data-act="cfFreq" data-k="${fr.k}">${fr.label}</button>`).join('')}</div>
+        <small class="hint">${f.freq === 'once' ? 'It goes once it’s done.' : gig ? `It goes back on the board ${FREQS.find(x => x.k === f.freq).label.toLowerCase()}.` : `It comes round ${FREQS.find(x => x.k === f.freq).label.toLowerCase()}.`} Kids see this on the ${gig ? 'side hustle' : 'chore'}.</small></div>
       <div class="field col"><span>Mission look and music</span><div class="hue-grid">${THEME_KEYS.map(k => `<button class="hue-opt ${f.theme === k ? 'on' : ''}" style="background:linear-gradient(145deg,${THEMES[k].c1},${THEMES[k].c2})" data-act="cfTheme" data-k="${k}" aria-label="${THEMES[k].name}"></button>`).join('')}</div><small class="hint">${THEMES[f.theme].name}</small></div>
       ${photo ? '' : `<div class="field"><span>Minutes</span><div class="stepper"><button data-act="cfMins" data-d="-1" aria-label="Fewer minutes">${ic('minus')}</button><b>${f.mins}</b><button data-act="cfMins" data-d="1" aria-label="More minutes">${ic('plus')}</button></div></div>`}
       <div class="field"><span>Pay</span><div class="stepper"><button data-act="cfPay" data-d="-10" aria-label="Lower pay">${ic('minus')}</button><b>${fmt(f.pay)}</b><button data-act="cfPay" data-d="10" aria-label="Raise pay">${ic('plus')}</button></div></div>
       ${photo ? '' : `<label class="field col"><span>Steps, one per line</span><textarea id="cf-steps" data-in="cfSteps" placeholder="Fill the feeder&#10;Fresh water&#10;Collect the eggs">${esc(f.steps)}</textarea></label>`}
-      ${f.tier !== 'gig' ? `<div class="field"><span>Show every day</span><button class="switch ${f.daily ? 'on' : ''}" role="switch" aria-checked="${f.daily}" data-act="cfDaily" aria-label="Show every day"></button></div>` : ''}
+      ${kidsList().length ? `<div class="field col"><span>Send it now</span><div class="crew-pick">${kidsList().map(k => `<button class="crew-kid ${f.sendTo.includes(k.id) ? 'on' : ''}" data-act="cfSendTo" data-id="${k.id}" aria-pressed="${f.sendTo.includes(k.id)}"><span style="--hue:${k.hue}">${k.avatar}</span>${esc(k.name)}</button>`).join('')}</div>
+        <small class="hint">${f.sendTo.length ? `It goes straight onto ${f.sendTo.map(id => esc((Store.kids[id] || {}).name || '')).join(' and ')}’s list, marked as from you, and stays there until it’s done.` : 'Optional. Pick a kid to put it on their list straight away. Otherwise it joins the chore draft on its schedule.'}</small></div>` : ''}
     </div>
     ${photo ? `<div class="sh-foot"><button class="btn-big" id="cf-go" data-act="cfRecord" ${f.title.trim() ? '' : 'disabled'}>${ic('camera')} Start recording</button></div>` : ''}`;
 }
@@ -4767,6 +4841,16 @@ function guideAdminSheet() {
    Mission stage: full-screen event, solo or split crew
    ========================================================= */
 const Stage = { active: false, panes: [], crew: false, paused: true, raf: 0, last: 0, wake: null, dirty: false };
+// A chore sent while a kid's screen is open pops up with a sound. Ones already there when the app opened are just
+// on their list, marked as sent.
+function noticeSends(kid) {
+  const all = S().sends || []; if (!UI.sendSeen) { UI.sendSeen = new Set(all.map(x => x.id)); return; }
+  for (const x of all) {
+    if (UI.sendSeen.has(x.id)) continue; UI.sendSeen.add(x.id);
+    const c = x.kidId === kid.id && choreDef(x.key);
+    if (c) setTimeout(() => { toast(`📨 ${x.by || 'A grown-up'} sent you ${c.tier === 'gig' ? 'a side hustle' : 'a chore'}: ${c.title}`); Sound.pop(); }, 0);
+  }
+}
 const CIRC = 2 * Math.PI * 86;
 function startMission(entries) {
   Sound.ensure();
@@ -5375,7 +5459,11 @@ const ACT = {
     if (UI.sheet && UI.sheet.fn === guideAdminSheet) closeSheet();
     toast('Chore deleted');
   },
-  addChore: () => { UI.choreForm = { title: '', icon: '🧹', tier: 'team', theme: 'tidy', mins: 10, pay: 100, steps: '', daily: false, scope: 'home', how: 'photo', photoMode: 'each' }; openSheet(choreFormSheet); },
+  addChore: () => { UI.choreForm = { title: '', icon: '🧹', tier: 'team', theme: 'tidy', mins: 10, pay: 100, steps: '', freq: 'daily', sendTo: [], scope: 'home', how: 'photo', photoMode: 'each' }; openSheet(choreFormSheet); },
+  sendOpen: a => { UI.send = { key: a.dataset.key, kids: [] }; openSheet(sendSheet); },
+  sendKid: a => { const k = UI.send.kids, id = a.dataset.id; UI.send.kids = k.includes(id) ? k.filter(x => x !== id) : [...k, id]; renderSheet(false); },
+  sendGo: () => { const c = choreDef(UI.send.key); if (!c || !UI.send.kids.length) return; const names = sendChore(c, UI.send.kids); closeSheet(); toast(`📨 Sent to ${names}`); },
+  sendUndo: a => { saveSettings({ sends: (S().sends || []).filter(x => x.id !== a.dataset.id) }); renderSheet(false); },
   cfHow: a => { UI.choreForm.how = a.dataset.h; renderSheet(false); },
   cfMode: a => { UI.choreForm.photoMode = a.dataset.m; renderSheet(false); },
   cfRecord: () => { if (UI.choreForm.title.trim()) startRecording(UI.choreForm); },
@@ -5401,12 +5489,13 @@ const ACT = {
   recSave: () => {
     const r = UI.rec; if (!r || !recReady(r)) return;
     const f = r.form, key = f.editKey || 'c-' + uid(), steps = r.steps.map(x => ({ text: x.text.trim(), photo: x.ref })), photoMode = f.photoMode === 'end' ? 'end' : 'each';
-    const c = { key, tier: f.tier, title: f.title.trim(), icon: f.icon, theme: f.theme, mins: r.mins, pay: f.pay, minAge: 0, steps: steps.map(x => x.text), payType: 'fixed', scope: f.tier === 'gig' ? 'home' : f.scope, every: 1, daily: f.tier !== 'gig' && f.daily, guide: true, photoMode };
+    const c = { key, tier: f.tier, title: f.title.trim(), icon: f.icon, theme: f.theme, mins: r.mins, pay: f.pay, minAge: 0, steps: steps.map(x => x.text), payType: 'fixed', scope: f.tier === 'gig' ? 'home' : f.scope, ...freqFields(f), guide: true, photoMode };
     setDoc('guides', key, { key, title: c.title, photoMode, steps, finish: r.finish.ref, durSec: r.durSec, recordedAt: Date.now(), recordedBy: parentName() || null });
     const list = S().custom || [];
     saveSettings({ custom: list.some(x => x.key === key) ? list.map(x => (x.key === key ? c : x)) : [...list, c] });
     track('guide.recorded', { key, title: c.title, steps: steps.length, photoMode, durSec: r.durSec, again: !!f.editKey });
-    closeSheet(); toast(`${c.title} added with a ${steps.length}-step photo guide`);
+    const names = (f.sendTo || []).length ? sendChore({ ...c, custom: true }, f.sendTo) : '';
+    closeSheet(); toast(names ? `📨 ${c.title} sent to ${names}, with a ${steps.length}-step photo guide` : `${c.title} added with a ${steps.length}-step photo guide`);
   },
   gaOpen: a => { UI.gKey = a.dataset.key; openSheet(guideAdminSheet, { cls: 'wide' }); },
   gaMode: a => {
@@ -5417,20 +5506,23 @@ const ACT = {
   },
   gaRedo: () => {
     const c = (S().custom || []).find(x => x.key === UI.gKey); if (!c) return;
-    startRecording({ title: c.title, icon: c.icon, tier: c.tier, theme: c.theme, pay: c.pay, mins: c.mins, daily: !!c.daily, scope: c.scope, how: 'photo', photoMode: c.photoMode || 'each', editKey: c.key });
+    startRecording({ title: c.title, icon: c.icon, tier: c.tier, theme: c.theme, pay: c.pay, mins: c.mins, freq: (freqOf({ ...c, custom: true }) || FREQS[0]).k, sendTo: [], scope: c.scope, how: 'photo', photoMode: c.photoMode || 'each', editKey: c.key });
   },
   cfIcon: a => { UI.choreForm.icon = a.dataset.a; renderSheet(false); },
   cfTier: a => { UI.choreForm.tier = a.dataset.t; renderSheet(false); },
   cfTheme: a => { UI.choreForm.theme = a.dataset.k; renderSheet(false); },
   cfMins: a => { UI.choreForm.mins = clamp(UI.choreForm.mins + +a.dataset.d, 1, 90); renderSheet(false); },
   cfPay: a => { UI.choreForm.pay = clamp(UI.choreForm.pay + +a.dataset.d, 0, 5000); renderSheet(false); },
-  cfDaily: () => { UI.choreForm.daily = !UI.choreForm.daily; renderSheet(false); },
+  cfKind: a => { const f = UI.choreForm; f.tier = a.dataset.k === 'gig' ? 'gig' : f.tier === 'gig' ? 'team' : f.tier; renderSheet(false); },
+  cfFreq: a => { UI.choreForm.freq = a.dataset.k; renderSheet(false); },
+  cfSendTo: a => { const f = UI.choreForm, id = a.dataset.id; f.sendTo = f.sendTo.includes(id) ? f.sendTo.filter(x => x !== id) : [...f.sendTo, id]; renderSheet(false); },
   cfScope: a => { UI.choreForm.scope = a.dataset.s; renderSheet(false); },
   saveChore: () => {
     const f = UI.choreForm; if (!f.title.trim()) return;
     let steps = f.steps.split('\n').map(s => s.trim()).filter(Boolean).slice(0, 8); if (!steps.length) steps = ['Get set up', 'Do the job', 'Check your work', 'Tidy up'];
-    const c = { key: 'c-' + uid(), tier: f.tier, title: f.title.trim(), icon: f.icon, theme: f.theme, mins: f.mins, pay: f.pay, minAge: 0, steps, payType: 'fixed', scope: f.tier === 'gig' ? 'home' : f.scope, every: 1, daily: f.tier !== 'gig' && f.daily };
-    saveSettings({ custom: [...(S().custom || []), c] }); closeSheet(); toast(`${c.title} added`);
+    const c = { key: 'c-' + uid(), tier: f.tier, title: f.title.trim(), icon: f.icon, theme: f.theme, mins: f.mins, pay: f.pay, minAge: 0, steps, payType: 'fixed', scope: f.tier === 'gig' ? 'home' : f.scope, ...freqFields(f) };
+    saveSettings({ custom: [...(S().custom || []), c] }); track('chore.custom', { key: c.key, title: c.title, tier: c.tier, freq: c.freq }, null);
+    const names = f.sendTo.length ? sendChore({ ...c, custom: true }, f.sendTo) : ''; closeSheet(); toast(names ? `📨 ${c.title} sent to ${names}` : `${c.title} added`);
   },
   tax: a => saveSettings({ taxRate: clamp(S().taxRate + 5 * +a.dataset.d, 0, 30) }),
   interest: a => saveSettings({ interestWeekly: clamp(Math.round((S().interestWeekly + 0.5 * +a.dataset.d) * 10) / 10, 0, 5) }),
