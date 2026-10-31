@@ -415,6 +415,7 @@ function renderItem(item, host, ctx, done) {
   (GAMES[item.type] || GAMES.note)(item, host, ctx, done);
   host.querySelectorAll('[data-say]').forEach(b => { b.onclick = () => speak(b.dataset.say); });
 }
-function speak(text) {
-  try { const u = new SpeechSynthesisUtterance(text), vs = speechSynthesis.getVoices(), v = vs.find(x => /en-(NZ|AU)/i.test(x.lang)) || vs.find(x => /^en/i.test(x.lang)); if (v) u.voice = v; u.rate = 0.95; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) {}
+// done (optional) runs when the reading ends, is cut off, or can't start
+function speak(text, done) {
+  try { const u = new SpeechSynthesisUtterance(text), vs = speechSynthesis.getVoices(), v = vs.find(x => /en-(NZ|AU)/i.test(x.lang)) || vs.find(x => /^en/i.test(x.lang)); if (v) u.voice = v; u.rate = 0.95; if (done) u.onend = u.onerror = () => done(); speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) { if (done) done(); }
 }

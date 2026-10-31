@@ -35,7 +35,7 @@ function finish() {
     const prev = (g.units || {})[R.unit.id] || {}, pass = acc >= 0.8;
     if (pass && !(prev.best >= 0.8)) add('Unit challenge passed', XP.challenge);
     patch.units = { [R.unit.id]: { best: Math.max(prev.best || 0, acc), at: Date.now() } };
-    Object.assign(out, { pass, stars: pass ? (acc === 1 ? 3 : 2) : 1, unit: R.unit });
+    Object.assign(out, { pass, stars: pass ? (acc === 1 ? 3 : 2) : 1, unit: R.unit, crown: pass && !(prev.best >= 0.8) });
   } else if (R.mode === 'review') {
     const room = Math.max(0, XP.cardsPerDay - (day.cards || 0)), n = Math.min(right, room); add(`${n} card${n === 1 ? '' : 's'} remembered`, n * XP.card); patch.day.cards = (day.cards || 0) + total;
   } else if (R.mode === 'moment') {
@@ -55,7 +55,7 @@ function finish() {
   const itemId = l ? l.id : R.mode === 'challenge' ? R.unit.id : R.mode === 'case' ? R.cs.id : R.mode === 'moment' ? R.moment.id : R.mode;
   patch.log = [...(g.log || []).slice(-59), { id: itemId, kind: R.mode, c: right, t: total, xp: given, at: Date.now(), ms }];
   award(kid, xp, patch);
-  if (out.first) out.prize = Prize.onPass(kid, l.id);
+  if (out.first || out.crown) out.prize = Prize.onPass(kid, out.first ? l.id : null);
   Object.assign(out, { xp: given, rows, capped: given < xp, lvlUp: charLevel(kid) > lvl0 ? charLevel(kid) : 0, newTitle: titles(kid).length > titles0 ? titles(kid).slice(-1)[0] : '' });
   const [tree, band, unit] = String(itemId).split('.');
   C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: right, total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
@@ -78,11 +78,12 @@ function viewDone(kid) {
   const o = Grow.last, isScored = 'pass' in o, fin = !!o.tally, rows = o.rows || [];
   if (!fin) o.tally = { fast: false, done: false };
   const head = isScored ? (o.pass ? (o.stars === 3 ? 'Perfect!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!' }[o.mode] || 'Done!';
-  const need = Math.ceil(o.total * 0.8 - 1e-9);
-  const sub = !isScored ? '' : !o.pass ? `Get ${need} of ${o.total} right to pass${o.could ? ` and earn ${o.could} XP` : ''}. Practice is how brains grow!`
-    : o.stars === 2 && o.acc === 1 && o.game != null ? 'Every answer right! Score 80% in the game for the third star.' : o.first ? 'New skill mastered!' : '';
+  // Kids are told exactly what moving on takes, and whether it's open now
+  const need = passNeed(o.total), opened = o.first && o.lesson && nextIn(kid, o.lesson.tree);
+  const sub = !isScored ? '' : !o.pass ? `You got ${o.right} of ${o.total}. To ${o.mode === 'challenge' ? 'win the crown' : 'open the next lesson'}, you need ${need} of ${o.total} right (that’s 80% or more). Tap Try again: practice is how brains grow!${o.could ? ` Passing earns ${o.could} XP.` : ''}`
+    : o.stars === 2 && o.acc === 1 && o.game != null ? 'Every answer right! Score 80% in the game for the third star.' : opened ? 'New skill mastered! The next lesson is open.' : o.first ? 'New skill mastered!' : '';
   const bal = C.xpOf ? C.xpOf(kid).left : 0, day = dayInfo(kid), nx = suggestions(kid, 1)[0];
-  say(isScored && !o.pass ? 'So close! Want another go?' : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : 'Great work!');
+  say(isScored && !o.pass ? `So close! You need ${need} of ${o.total} right. Tap Try again.` : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : opened ? 'Great work! The next lesson is open.' : 'Great work!');
   if (Grow.stage) Grow.stage.show('done', { stars: isScored ? o.stars : 3, pass: o.pass !== false, quiet: true });
   ui.innerHTML = `<div class="gw-pad gw-done"><div class="gw-res" data-g="tallySkip">
     ${isScored ? `<div class="rstars" role="img" aria-label="${o.stars} of 3 stars">${[1, 2, 3].map(n => `<span class="rstar ${fin && n <= o.stars ? 'on' : ''}" data-star="${n}">${C.STAR_SOCK}${C.starGold('g' + n)}</span>`).join('')}</div>` : ''}
@@ -196,7 +197,7 @@ function onClick(e) {
     case 'guide': save(kid, { guide: a.dataset.k }); if (Grow.stage) Grow.stage.setGuide(a.dataset.k); Sound.pop(); Grow.view = Grow.tree ? 'tree' : 'hub'; return render();
     case 'tree': Grow.tree = id; Grow.view = 'tree'; Sound.tap(); return render();
     case 'lesson': { const l = lessonById(id); if (l) { if (!Grow.tree) Grow.tree = l.tree; startLesson(kid, l); } return; }
-    case 'locked': Sound.tap(); return C.toast('Finish the lesson before this one to open it.');
+    case 'locked': Sound.tap(); return C.toast('Pass the lesson before this one to open it: get 80% or more of its questions right.');
     case 'plantSel': return PlantView.ok && PlantView.select(+a.dataset.i);
     case 'plantUnit': return PlantView.ok && PlantView.unit(+a.dataset.i);
     case 'plantBloom': return PlantView.ok && PlantView.bloomAgain();

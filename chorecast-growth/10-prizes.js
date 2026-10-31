@@ -8,6 +8,9 @@
    A kid who learns now and then still wins something about once a week. A kid racing ahead gets prizes a little
    further apart, so there is always one coming up and the list lasts. Each gap is set when a prize is won, so a
    prize a kid can see never moves further away; after a quiet week the next one moves closer to welcome them back. */
+// Prize progress counts lessons passed and unit challenges won, so a kid who has passed every lesson can still win
+// the prize they can see by winning unit crowns.
+const prizeCount = kid => mastered(kid) + Object.values(prog(kid).units || {}).filter(u => u.best >= 0.8).length;
 const Prize = (() => {
   const P = C.PRIZES;
   if (!P) return { upcoming: () => [], onPass: () => null, tick() {}, hint: () => '', stats: () => null };
@@ -18,14 +21,14 @@ const Prize = (() => {
   // `before` counts the lesson just passed as not passed yet, for a kid's very first prize schedule.
   function state(kid, before = 0) {
     const p = prog(kid).prize; if (p && p.id) return p;
-    return { k: 0, at: mastered(kid) - before + 3, gap: 3, id: pick(kid, 0, {}), got: {}, h: [] };
+    return { k: 0, at: prizeCount(kid) - before + 3, gap: 3, id: pick(kid, 0, {}), got: {}, h: [] };
   }
   // A planned prize the kid has since got some other way is swapped for the next one on the list.
   const cur = (kid, p) => (!p.id.startsWith('chest') && C.hasPrize(kid, p.id) ? pick(kid, p.k, p.got) : p.id);
-  // After a lesson is passed for the first time: wins the prize if this lesson reached it, then plans the next one.
-  // The lesson keeps the prize it won, for its leaf on the plant.
+  // After a lesson is passed or a unit crown won for the first time: wins the prize if this reached it, then plans
+  // the next one. A lesson keeps the prize it won, for its leaf on the plant.
   function onPass(kid, lesson) {
-    const p = { ...state(kid, 1) }, m = mastered(kid); p.h = [...(p.h || []), Date.now()].slice(-40); p.id = cur(kid, p);
+    const p = { ...state(kid, 1) }, m = prizeCount(kid); p.h = [...(p.h || []), Date.now()].slice(-40); p.id = cur(kid, p);
     let won = null;
     if (m >= p.at) {
       won = C.prizeInfo(p.id) || C.prizeInfo('chest:small');
@@ -40,11 +43,11 @@ const Prize = (() => {
   function tick(kid) {
     const p = prog(kid).prize;
     if (!p || !p.id) { save(kid, { prize: state(kid) }); return; }
-    const m = mastered(kid), g = gapFor(pace(p.h)); if (m + g < p.at) save(kid, { prize: { at: m + g, gap: g, closer: today() } });
+    const m = prizeCount(kid), g = gapFor(pace(p.h)); if (m + g < p.at) save(kid, { prize: { at: m + g, gap: g, closer: today() } });
   }
   // The next prize, and a planned one after it (its gap is only fixed once the first is won).
   function upcoming(kid) {
-    const p = state(kid), m = mastered(kid), left = Math.max(1, p.at - m), id1 = cur(kid, p), a = C.prizeInfo(id1);
+    const p = state(kid), m = prizeCount(kid), left = Math.max(1, p.at - m), id1 = cur(kid, p), a = C.prizeInfo(id1);
     const id2 = pick(kid, p.k + 1, { ...(p.got || {}), [id1]: 1 }), b = C.prizeInfo(id2);
     return [a && { id: id1, info: a, left, of: p.gap || left }, b && { id: id2, info: b, left: left + gapFor(pace(p.h)), planned: true }].filter(Boolean);
   }
@@ -57,17 +60,26 @@ const Prize = (() => {
   return { upcoming, onPass, tick, hint, stats };
 })();
 
+// How to reach a prize in steps a kid can take now: lessons while there are any, then unit crowns, and once
+// both are done, that new lessons will win it.
+function prizeHow(kid, left, what = 'it') {
+  const crowns = openCrowns(kid).length;
+  if (treesOn().some(t => nextIn(kid, t.id))) return left === 1 ? `Pass your next lesson to win ${what}!` : `Pass ${left} more lessons to win ${what}`;
+  if (crowns >= left) return left === 1 ? `Win a unit crown to win ${what}!` : `Win ${left} more unit crowns to win ${what}`;
+  if (crowns) return `Win your ${crowns === 1 ? 'last unit crown' : `${crowns} unit crowns`} to get closer. New lessons on the way will win ${what}.`;
+  return `You’ve done every lesson and crown for now. New lessons on the way will win ${what}!`;
+}
 // The strip on the Character Growth home screen: what the next lesson or two will win.
 function prizeStrip(kid) {
   const [a, b] = Prize.upcoming(kid); if (!a) return '';
   const done = clamp(1 - a.left / Math.max(a.left, a.of), 0, 1), closer = (prog(kid).prize || {}).closer === today();
   return `<section class="gw-prize ${a.info.big ? 'big' : ''}"><span class="gwp-ic">${a.info.icon}</span><div class="gwp-t"><small>Next island prize${closer ? ' · it moved closer!' : ''}</small><b>${esc(a.info.name)}</b>
-    <span>${a.left === 1 ? 'Pass your next lesson to win it!' : `Pass ${a.left} more lessons to win it`}${b ? ` · then ${esc(b.info.name)}` : ''}</span>
+    <span>${prizeHow(kid, a.left)}${b ? ` · then ${esc(b.info.name)}` : ''}</span>
     <i class="gwp-bar" aria-hidden="true"><i style="width:${Math.round(done * 100)}%"></i></i></div></section>`;
 }
 // On the lesson-done screen: the prize just won, or how close the next one is.
 function prizeBanner(o, kid) {
-  if (!o.prize) { const a = o.first && Prize.upcoming(kid)[0]; return a ? `<div class="gw-banner">${a.info.icon} ${a.left === 1 ? 'One more lesson' : `${a.left} more lessons`} to win ${esc(a.info.name)}</div>` : ''; }
+  if (!o.prize) { const a = (o.first || o.crown) && Prize.upcoming(kid)[0]; return a ? `<div class="gw-banner">${a.info.icon} ${prizeHow(kid, a.left, esc(a.info.name))}</div>` : ''; }
   const p = o.prize, how = p.kind === 'chest' ? `+${p.xp} bonus XP for your island shop.` : p.kind === 'look' ? `Try it on your ${p.part === 'leaf' ? 'trees' : 'house'} in the island shop’s Makeover tab.` : 'Place it on your island from the island shop, for free.';
   return `<div class="gw-banner prize">${p.icon} You won ${p.kind === 'chest' ? 'a ' : ''}${esc(p.name)}! <small>${how}</small></div>`;
 }

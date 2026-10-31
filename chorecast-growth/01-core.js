@@ -191,6 +191,9 @@ function lessonById(id) {
 const prog = kid => (Store.growth || {})[kid.id] || {};
 const save = (kid, patch) => C.updDoc('growth', kid.id, patch);
 const passed = (kid, id) => ((prog(kid).done || {})[id] || {}).best >= 0.8;
+// Passing (and opening the next lesson) takes 80% of the questions right. Kids are told it as "get N of M right".
+const passNeed = n => Math.max(1, Math.ceil(n * 0.8 - 1e-9));
+const passGoal = (n, cap) => `${cap ? 'Get' : 'get'} ${passNeed(n)} of ${n} right`;
 function mastered(kid) { return Object.values(prog(kid).done || {}).filter(d => d.best >= 0.8).length; }
 function charLevel(kid) { return Math.min(50, 1 + Math.floor(Math.sqrt(mastered(kid) * 4))); }
 function medal(kid, l) {

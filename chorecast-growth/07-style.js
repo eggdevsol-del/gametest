@@ -145,6 +145,21 @@ body.gw-open{overflow:hidden}
 .gw-fb:empty{display:none}
 .gw-fb{margin-top:14px;display:flex;flex-direction:column;gap:10px;animation:gwIn .3s both}
 .gw-fbin{padding:12px 14px;border-radius:16px;font:700 15px/1.4 var(--f-round);display:flex;flex-direction:column;gap:2px}
+/* Every lesson passed: what's left to win */
+.gw-alldone{display:flex;gap:14px;align-items:center;margin:14px 0 10px;padding:14px 16px;border-radius:22px;background:#fff;color:#0D1530;box-shadow:0 0 0 3px #FFE066,0 14px 28px -16px rgba(0,0,0,.5);animation:gwIn .35s both}
+.gad-ic{flex:none;width:56px;height:56px;border-radius:18px;display:grid;place-items:center;font-size:32px;background:#FFF3D1}
+.gw-alldone b{display:block;font:900 19px/1.2 var(--f-round)}
+.gw-alldone p{margin:4px 0 0;font:700 15px/1.4 var(--f-round);color:#3A4466}
+/* What passing takes: on the lesson's first card, above every question, and after each answer */
+.gw-goal,.gw-fbgoal{margin:0;padding:10px 14px;border-radius:14px;background:#FFF3D1;color:#6B4300;font:800 15px/1.4 var(--f-round);text-align:left}
+.gw-qgoal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;margin:0 0 10px;padding:9px 14px;border-radius:14px;background:rgba(255,255,255,.18);font:800 14px/1.3 var(--f-round)}
+.gw-qgoal b{font-weight:900}
+/* An explanation's Next button fills up while there's still time to read or listen, and works once it's full */
+.g-go.hold,.g-go.hold:disabled{position:relative;isolation:isolate;overflow:hidden;opacity:.85;cursor:default}
+.g-go.hold::before{content:"";position:absolute;inset:0 auto 0 0;z-index:-1;width:var(--from,0%);background:rgba(255,255,255,.32);animation:gwHold var(--hold,1s) linear forwards}
+@keyframes gwHold{from{width:var(--from,0%)}to{width:100%}}
+.g-go.held{animation:gwReady .35s cubic-bezier(.2,1.6,.4,1)}
+@keyframes gwReady{40%{transform:scale(1.05)}}
 .gw-fbin b{font:900 17px var(--f-round)}
 .gw-fbin.good{background:#E3F9EA;color:#14532D}
 .gw-fbin.bad{background:#FFF1E6;color:#7A3B00}

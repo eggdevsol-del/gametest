@@ -56,6 +56,21 @@ function available(kid, l) {
   return !prevU || prevU.lessons.every(x => passed(kid, x.id));
 }
 function nextIn(kid, treeId) { const pack = packFor(treeId, bandOf(kid)); if (!pack) return null; for (const u of pack.units) for (const l of u.lessons) if (!passed(kid, l.id) && available(kid, l)) return l; return null; }
+// Unit challenges a kid has opened (every lesson in the unit passed) but hasn't won the crown for yet
+function openCrowns(kid) {
+  const won = prog(kid).units || {};
+  return treesOn().flatMap(tree => { const pack = packFor(tree.id, bandOf(kid)); return pack ? pack.units.filter(u => u.lessons.length && u.lessons.every(l => passed(kid, l.id)) && !((won[u.id] || {}).best >= 0.8)).map(u => ({ u, tree })) : []; });
+}
+// A unit challenge asks up to 8 of the unit's questions
+const crownSize = u => Math.min(8, u.lessons.reduce((n, l) => n + l.checks.length, 0));
+// With every lesson passed, the home screen says so plainly and points at what's still to win
+function allDoneCard(kid) {
+  const crowns = openCrowns(kid);
+  return `<section class="gw-alldone"><span class="gad-ic" aria-hidden="true">${crowns.length ? '🏆' : '🌸'}</span><div><b>You finished every lesson!</b><p>${crowns.length
+    ? `Next, win your unit crown${crowns.length === 1 ? '' : 's'}. A crown quiz mixes questions from a whole unit. Get 80% or more right to win the crown and ${XP.challenge} XP.`
+    : 'You won every unit crown too. Amazing! New lessons are on the way in an update.'}</p></div></section>
+    ${crowns.length ? `<div class="gw-pick">${crowns.map(({ u, tree }, i) => `<button class="gw-lcard ${i === 0 ? 'main' : ''}" style="--th:${tree.hue}" data-g="challenge" data-id="${u.id}"><span class="lc-ic">🏆</span><span class="lc-t"><small>${esc(tree.name)} · Unit ${u.n} crown</small><b>${esc(local(u.title))}</b><em>${crownSize(u)} questions · ${passGoal(crownSize(u))} · +${XP.challenge} XP</em></span><span class="lc-go">${ic('play')}</span></button>`).join('')}</div>` : ''}`;
+}
 function suggestions(kid, n = 3) {
   const g = prog(kid), assigned = (g.assigned || []).map(a => lessonById(a.id)).filter(l => l && !passed(kid, l.id));
   const recent = (g.log || []).slice().reverse().map(x => String(x.id).split('.')[0]);
@@ -108,11 +123,12 @@ function viewHub(kid) {
   const g = prog(kid), lvl = charLevel(kid), m = mastered(kid), sug = suggestions(kid, 3), due = dueCards(kid).length, echo = (g.echo || []).length;
   const mom = momentFor(kid), momDone = g.mom && g.mom.d === today() && g.mom.done, story = marketStory(kid), storyDone = g.story === weekKey();
   const t = titles(kid), needN = Grow.need ? Math.ceil(Grow.need / XP.lesson) : 0;
-  say(Grow.need ? `You need ${Grow.need} more XP. ${needN === 1 ? 'One lesson' : `${needN} lessons`} will do it!` : sug.length ? `Ready, ${kid.name}? Pick what to learn next.` : `You’ve finished every lesson here, ${kid.name}! New ones arrive in updates.`);
+  say(Grow.need ? `You need ${Grow.need} more XP. ${needN === 1 ? 'One lesson' : `${needN} lessons`} will do it!` : sug.length ? `Ready, ${kid.name}? Pick what to learn next.` : openCrowns(kid).length ? `You finished every lesson, ${kid.name}! Now win your unit crowns.` : `You’ve done everything here, ${kid.name}! New lessons arrive in updates.`);
   const tile = (g2, ico, title, sub, extra = '') => `<button class="gw-tile" data-g="${g2}" ${extra}><span class="gt-ic">${ico}</span><span><b>${title}</b><small>${sub}</small></span></button>`;
   ui.innerHTML = `${topbar(kid, 'Character Growth', `${esc(kid.name)} · ${BANDS[BAND_IX[bandOf(kid)]].name}, ages ${BANDS[BAND_IX[bandOf(kid)]].ages}`)}
     <div class="gw-pad">
       <section class="gw-me"><div class="gw-lvl"><b class="num">${lvl}</b><small>Level</small></div><div class="gw-me-t"><b>${m} skill${m === 1 ? '' : 's'} mastered</b><small>${t.length ? t.map(esc).join(' · ') : 'Master 4 lessons in a tree to earn its title'}</small>${minutesToday(kid) ? `<small>${minutesToday(kid)} minute${minutesToday(kid) === 1 ? '' : 's'} of learning today</small>` : ''}</div></section>
+      ${!sug.length && !Grow.need ? allDoneCard(kid) : ''}
       ${prizeStrip(kid)}
       ${Grow.need ? `<div class="gw-need">${ic('sparkle')} Each lesson you pass pays ${XP.lesson} XP, up to ${XP.dayCap} XP a day.</div>` : ''}
       ${sug.length ? `<h2 class="gw-h2">Pick your next lesson</h2><div class="gw-pick">${sug.map((l, i) => { const tr = TREE[l.tree], as = (g.assigned || []).find(a => a.id === l.id); return `<button class="gw-lcard ${i === 0 ? 'main' : ''}" style="--th:${tr.hue}" data-g="lesson" data-id="${l.id}"><span class="lc-ic">${esc(l.icon)}</span><span class="lc-t"><small>${esc(tr.name)} · Unit ${l.unit}</small><b>${esc(local(l.title))}</b>${as ? `<em>From a grown-up${as.bonus ? ` · +${as.bonus} XP bonus` : ''}</em>` : ''}</span><span class="lc-go">${ic('play')}</span></button>`; }).join('')}</div>` : ''}
@@ -191,7 +207,7 @@ function startLesson(kid, l, mode = 'lesson') {
 function startChallenge(kid, unitId) {
   const [tree, band, un] = unitId.split('.'), u = packFor(tree, band).units.find(x => x.n === +un);
   const pool = shuffle(u.lessons.flatMap(l => l.checks.map((item, i) => ({ item, qid: `${l.id}#${i}`, skill: l.skill }))), Math.random).slice(0, 8);
-  Grow.run = { mode: 'challenge', unit: u, tree, scene: TREE[tree].scene, steps: [{ kind: 'intro', text: `Unit challenge: ${stop(local(u.title))} ${pool.length} mixed questions, no hints. Get 80% to win the crown.` }, ...pool.map((p, i) => ({ kind: 'check', item: p.item, i, qid: p.qid, skill: p.skill }))], k: 0, res: [], t0: Date.now() };
+  Grow.run = { mode: 'challenge', unit: u, tree, scene: TREE[tree].scene, steps: [{ kind: 'intro', text: `Unit challenge: ${stop(local(u.title))} ${pool.length} mixed questions, no hints. ${passGoal(pool.length, true)} (80% or more) to win the crown.` }, ...pool.map((p, i) => ({ kind: 'check', item: p.item, i, qid: p.qid, skill: p.skill }))], k: 0, res: [], t0: Date.now() };
   Grow.view = 'challenge'; Sound.go(); render();
 }
 function startReview(kid) {
@@ -237,14 +253,25 @@ function viewRun(kid) {
   const head = `<header class="gw-run-top"><button class="gw-x" data-g="back" aria-label="Stop">${ic('x')}</button><div class="gw-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${R.k + 1}"><i style="width:${(R.k + 1) / total * 100}%"></i></div><span class="gw-beat">${esc(beat)}</span></header>`;
   const title = l ? `<p class="gw-ltitle">${esc(l.icon)} ${esc(local(l.title))}</p>` : R.mode === 'challenge' ? `<p class="gw-ltitle">🏆 ${esc(local(R.unit.title))}</p>` : R.mode === 'case' ? `<p class="gw-ltitle">${esc(R.cs.icon)} ${esc(R.cs.name)}</p>` : '';
   let body = '';
-  if (step.kind === 'hook') { body = `<div class="gw-card hook"><span class="gw-big">${esc(l.icon)}</span><h2>${esc(local(l.title))}</h2><p>${esc(local(l.hook))}</p>${speakBtn(l.hook)}<button class="g-go" data-g="next">Let’s go</button></div>`; say(l.hook); }
+  // Scored runs tell the kid the pass mark up front and on every question, with how they're going
+  const q = quizAt(R), scored = q && (R.mode === 'lesson' || R.mode === 'challenge') && !(R.mode === 'lesson' && passed(kid, l.id));
+  const goalFor = n => (R.mode === 'challenge' ? `${passGoal(n, true)} to win the crown` : `${passGoal(n, true)} to pass and open the next lesson`);
+  if (step.kind === 'hook') {
+    const n = l.checks.length, goal = n && !passed(kid, l.id) ? `<p class="gw-goal">🎯 At the end there ${n === 1 ? 'is 1 question' : `are ${n} questions`}. ${goalFor(n)}.</p>` : '';
+    body = `<div class="gw-card hook"><span class="gw-big">${esc(l.icon)}</span><h2>${esc(local(l.title))}</h2><p>${esc(local(l.hook))}</p>${goal}${speakBtn(l.hook)}<button class="g-go" data-g="next">Let’s go</button></div>`; say(l.hook);
+  }
   else if (step.kind === 'intro') { body = `<div class="gw-card hook"><span class="gw-big">🏆</span><p>${esc(step.text)}</p><button class="g-go" data-g="next">Start</button></div>`; say('You’ve got this. No hints this time!'); }
-  else if (step.kind === 'learn') { body = `<div class="gw-card learn">${step.title ? `<h3>${esc(step.title)}</h3>` : ''}${local(step.text).split('\n').map(p => `<p>${esc(p)}</p>`).join('')}${speakBtn(step.text)}<button class="g-go" data-g="next">Next</button></div>`; say(R.mode === 'lesson' ? ['Here’s the idea.', 'Got it?', 'Nearly there!'][Math.min(2, R.k % 3)] : ''); if (Grow.stage) Grow.stage.react('point'); if (GSET().readAloud && bandOf(kid) === 'sprouts') speak(local(step.text)); }
+  else if (step.kind === 'learn') { body = `<div class="gw-card learn">${step.title ? `<h3>${esc(step.title)}</h3>` : ''}${local(step.text).split('\n').map(p => `<p>${esc(p)}</p>`).join('')}${speakBtn(step.text)}<button class="g-go" data-g="next">Next</button></div>`; say(R.mode === 'lesson' ? ['Here’s the idea.', 'Got it?', 'Nearly there!'][Math.min(2, R.k % 3)] : ''); if (Grow.stage) Grow.stage.react('point'); }
   else if (step.kind === 'try') { body = `<div class="gw-card try">${step.ex ? `<div class="gw-ex"><b>Worked example</b><p>${esc(local(step.ex))}</p></div><p class="gw-yt">Now you try:</p>` : ''}<div class="gw-host"></div><div class="gw-fb"></div></div>`; say('Your turn to try one.'); }
   else if (step.kind === 'decide') { body = `<div class="gw-card"><h3>Decision point</h3><p class="gw-p2">${esc(local(step.q))}</p><div class="g-cards col n${step.opts.length}">${step.opts.map((o, i) => `<button class="g-card" style="--d:${i * 70}ms" data-g="decide" data-i="${i}"><span>${esc(local(o.t))}</span></button>`).join('')}</div><div class="gw-fb"></div></div>`; say('What would you do?'); }
   else if (step.kind === 'home') { body = `<div class="gw-card home"><span class="gw-big">🏠</span><h3>Take it home</h3><p>${esc(local(l.home || 'Tell a grown-up one thing you learned today.'))}</p><button class="g-go" data-g="finish">Finish lesson</button></div>`; say('Last bit! Try this at home.'); }
-  else { body = `<div class="gw-card"><div class="gw-host"></div><div class="gw-fb"></div></div>`; say(step.kind === 'guess' ? 'Have a guess! It’s fine to get it wrong.' : step.kind === 'play' ? 'Game time!' : R.mode === 'review' ? `From “${local(step.title || '')}”` : ''); }
+  else {
+    const bar = scored && step.kind === 'check' ? `<div class="gw-qgoal"><b>Question ${q.i} of ${q.n}</b><span>🎯 ${passGoal(q.n, true)} · ${q.right} right so far</span></div>` : '';
+    body = `${bar}<div class="gw-card"><div class="gw-host"></div><div class="gw-fb"></div></div>`;
+    say(step.kind === 'guess' ? 'Have a guess! It’s fine to get it wrong.' : step.kind === 'play' ? 'Game time!' : R.mode === 'review' ? `From “${local(step.title || '')}”` : scored && step.kind === 'check' && q.i === 1 ? `Question time! ${goalFor(q.n)}.` : '');
+  }
   ui.innerHTML = `${head}<div class="gw-pad gw-runpad">${title}${body}</div>`;
+  if (step.kind === 'learn') holdNext(ui.querySelector('.gw-card.learn [data-g="next"]'), 'learn' + R.k, kid, `${step.title || ''} ${local(step.text)}`);
   // In a lesson's quiz the plant takes the stage, already grown by the questions answered right so far.
   if (plantQuiz()) PlantView.quiz(root.querySelector('.gw-stage'), kid, l, R.res.filter((r, i) => r && r.ok && i <= R.k && R.steps[i].kind === 'check').length);
   else if (Grow.stage) { const [kind, data] = stageFor(step, R) || []; Grow.stage.show(kind, data); }
@@ -258,6 +285,33 @@ function viewRun(kid) {
       if (!HowTo.seen(kid, step.item) && R.mode !== 'challenge') HowTo.run(card, step.item, kid);
     }
   }
+}
+// Where a run's questions stand at its current step: this question's number, how many there are, and how many
+// were answered right before it (and including it, once it's answered).
+function quizAt(R) {
+  const qs = R.steps.map((s, i) => (s.kind === 'check' ? i : -1)).filter(i => i >= 0); if (!qs.length) return null;
+  return { n: qs.length, i: qs.filter(i => i <= R.k).length, right: qs.filter(i => i <= R.k && R.res[i] && R.res[i].ok).length, left: qs.filter(i => i > R.k).length };
+}
+/* Explanations (learn cards, why an answer was wrong, what a choice led to) hold their Next button until there's
+   been time to read them: about 90 words a minute at 7 to 9, 140 at 10 to 12, 190 at 13 to 15 and 230 at 16 to 18.
+   The youngest hear them read out when read-aloud is on, so for them it's the voice's pace (about 130 words a
+   minute) and Next also waits for the voice to finish. The button fills up as the time passes. A hold is kept per
+   step, so drawing the step again doesn't restart it. */
+const WPM = { sprouts: 90, builders: 140, makers: 190, launchers: 230 }, VOICE_WPM = 130;
+function holdNext(btn, key, kid, text) {
+  const R = Grow.run, words = String(text || '').split(/\s+/).filter(w => /\w/.test(w)).length; if (!btn || !R || !words) return;
+  const listen = GSET().readAloud && bandOf(kid) === 'sprouts' && 'speechSynthesis' in window;
+  const ms = clamp(words / (listen ? VOICE_WPM : WPM[bandOf(kid)] || 140) * 60000, 1500, 30000);
+  const hs = R.holds || (R.holds = {}), fresh = !hs[key], h = hs[key] || (hs[key] = { until: Date.now() + ms, ms, heard: !listen });
+  if (fresh && listen) {
+    speak(String(text).replace(/\p{Extended_Pictographic}/gu, '').trim(), () => { h.heard = true; });
+    setTimeout(() => { h.heard = true; }, ms + 1500); // a voice that never starts or never ends doesn't lock the step
+  }
+  const open = () => Date.now() >= h.until && h.heard; if (open()) return;
+  btn.disabled = true; btn.classList.add('hold'); btn.setAttribute('aria-label', 'Next, once you’ve had time to read this');
+  btn.style.setProperty('--from', `${clamp(1 - (h.until - Date.now()) / h.ms, 0, 1) * 100}%`); btn.style.setProperty('--hold', `${Math.max(0, h.until - Date.now())}ms`);
+  const t = setInterval(() => { if (!btn.isConnected) return clearInterval(t); if (open()) { clearInterval(t); btn.disabled = false; btn.classList.replace('hold', 'held'); btn.removeAttribute('aria-label'); } }, 200);
+  Grow.cleanup.push(() => clearInterval(t));
 }
 // Which 3D scene acts out a step: the lesson's subject for hooks and learn cards, the task itself for questions and games.
 function stageFor(step, R) {
@@ -302,7 +356,14 @@ function answered(kid, step, res) {
   const fb = ui.querySelector('.gw-fb'); if (!fb) return;
   const guess = step.kind === 'guess', grows = plantQuiz() && !passed(kid, R.lesson.id);
   const msg = guess ? (res.ok ? 'Great guess!' : 'Good guess. Let’s find out why.') : res.ok ? (grows ? ['Right! Your plant grew.', 'Yes! Up it grows.', 'Nice one. Look at it grow!'] : ['Nice one!', 'Spot on!', 'You got it!', 'Brilliant!'])[Math.floor(Math.random() * (grows ? 3 : 4))] : 'Not quite.';
-  fb.innerHTML = `<div class="gw-fbin ${res.ok || guess ? 'good' : 'bad'}"><b>${msg}</b>${!res.ok && res.right && !guess ? `<span>${esc(res.right)}</span>` : ''}</div><button class="g-go" data-g="next">${R.k + 1 >= R.steps.length ? 'Finish' : 'Next'}</button>`;
+  // After a scored question, say where that leaves the pass: made it, still possible, or not this time
+  const q = step.kind === 'check' && (R.mode === 'challenge' || (R.mode === 'lesson' && !passed(kid, R.lesson.id))) ? quizAt(R) : null, need = q ? passNeed(q.n) : 0;
+  const where = !q ? '' : res.ok && q.right === need ? `🎉 That’s ${need} right: you’ve passed!${q.left ? ' Keep going.' : ''}`
+    : q.right + q.left < need ? `You need ${need} of ${q.n} right to pass. Finish, then tap Try again.`
+    : !res.ok ? `You can still pass: get ${need - q.right} more right.` : '';
+  const why = !res.ok && res.right && !guess ? res.right : '';
+  fb.innerHTML = `<div class="gw-fbin ${res.ok || guess ? 'good' : 'bad'}"><b>${msg}</b>${why ? `<span>${esc(why)}</span>` : ''}</div>${where ? `<p class="gw-fbgoal">${where}</p>` : ''}<button class="g-go" data-g="next">${R.k + 1 >= R.steps.length ? 'Finish' : 'Next'}</button>`;
+  if (why || where) holdNext(fb.querySelector('[data-g="next"]'), 'fb' + R.k, kid, `${why ? `${msg} ${why}` : ''} ${where}`);
   if (plantQuiz()) PlantView.answer(res.ok); else if (Grow.stage) Grow.stage.react(res.ok || guess ? 'cheer' : 'puzzled');
   say(res.ok ? msg : guess ? 'Let’s find out!' : 'That’s how we learn. Keep going!');
   if (R.mode === 'review') reviewAnswer(kid, step, res.ok);
@@ -318,5 +379,6 @@ function decide(i) {
   const R = Grow.run, step = R.steps[R.k], o = step.opts[i], fb = ui.querySelector('.gw-fb');
   ui.querySelectorAll('[data-g="decide"]').forEach((b, j) => { b.disabled = true; if (j === i) b.classList.add('picked'); });
   fb.innerHTML = `<div class="gw-fbin good"><b>You chose: ${esc(local(o.t))}</b>${o.out ? `<span>${esc(local(o.out))}</span>` : ''}</div><button class="g-go" data-g="next">Next</button>`;
+  if (o.out) holdNext(fb.querySelector('[data-g="next"]'), 'dec' + R.k, kidNow(), local(o.out));
   Sound.pop(); if (Grow.stage) { Grow.stage.react('point'); Grow.stage.fx('pick', { i }); }
 }

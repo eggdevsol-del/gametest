@@ -376,10 +376,13 @@ const PlantView = (() => {
       const game = l.play ? GAME_NAME[l.play.type] || 'Game' : null, prev = s.i > 0 ? LS[s.i - 1].l : null;
       const e = real[s.i] ? earned(kid, l.id) : null, won = e && e.prize && C.prizeInfo ? C.prizeInfo(e.prize) : null;
       const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `🌱 ${l.checks.length} question${l.checks.length === 1 ? '' : 's'} to grow` : '', e ? `✨ Earned +${e.xp} XP` : `✨ +${XP.lesson} XP`].filter(Boolean);
-      const act = !open ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Finish “${esc(local(prev.title))}” first` : 'Finish the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${d ? 'Play again' : first ? '🌱 Plant my seed' : '▶ Start lesson'}</button>`;
+      const act = !open ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Pass “${esc(local(prev.title))}” first` : 'Pass the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${d ? 'Play again' : first ? '🌱 Plant my seed' : '▶ Start lesson'}</button>`;
+      // What it takes to move on, said plainly: kids need telling at every step
+      const goal = d ? '' : !open ? (prev ? `🎯 To open this lesson, go back to “${esc(local(prev.title))}” and ${passGoal(prev.checks.length)}.` : '🎯 To open this lesson, pass every lesson in the unit before it.')
+        : l.checks.length ? `🎯 ${passGoal(l.checks.length, true)} at the end to pass${s.i + 1 < LS.length ? ' and open the next lesson' : ''}.` : '';
       h = `<div class="plc-ic">${esc(l.icon)}</div><div class="plc-eb">Unit ${l.unit} · Lesson ${l.n}${d ? ` · ${medalOf(kid, l)}` : ''}</div><div class="plc-t">${esc(local(l.title))}</div><p class="plc-p">${esc(local(l.hook))}</p>
         ${first ? `<ul class="plc-how"><li><span>🌱</span>Every question you get right helps your seed grow.</li><li><span>🍃</span>Pass a lesson and a big leaf grows, with your XP or a prize on top.</li><li><span>🌸</span>Pass all ${LS.length} lessons and it blooms.</li></ul>` : `<div class="plc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>`}
-        ${won ? `<div class="plc-prize ${won.big ? 'big' : ''}"><span>${won.icon}</span><span><small>Unlocked on this leaf</small><b>${esc(won.name)}</b></span></div>` : pz ? `<div class="plc-prize ${pz.info.big ? 'big' : ''}"><span>${pz.info.icon}</span><span><small>${pz.planned ? 'Planned prize' : 'Prize'}</small><b>${pz.planned ? 'Should win' : 'Pass this to win'} ${esc(pz.info.name)}</b></span></div>` : ''}<div class="plc-act">${act}</div>`;
+        ${won ? `<div class="plc-prize ${won.big ? 'big' : ''}"><span>${won.icon}</span><span><small>Unlocked on this leaf</small><b>${esc(won.name)}</b></span></div>` : pz ? `<div class="plc-prize ${pz.info.big ? 'big' : ''}"><span>${pz.info.icon}</span><span><small>${pz.planned ? 'Planned prize' : 'Prize'}</small><b>${pz.planned ? 'Should win' : 'Pass this to win'} ${esc(pz.info.name)}</b></span></div>` : ''}${goal ? `<p class="plc-goal">${goal}</p>` : ''}<div class="plc-act">${act}</div>`;
     }
     cardEl.innerHTML = h; cardEl.classList.remove('in'); void cardEl.offsetWidth; cardEl.classList.add('in');
   }
@@ -613,6 +616,7 @@ const PLANT_CSS = `
 .plc-chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .plc-chips span{padding:5px 10px;border-radius:999px;background:#EEF3FA;font:800 13px var(--f-round)}
 .plc-how{grid-column:1/-1;display:grid;gap:8px;margin:10px 0 0;padding:0;list-style:none}
+.plc-goal{grid-column:1/-1;margin:10px 0 0;padding:10px 12px;border-radius:14px;background:#FFF3D1;color:#6B4300;font:800 15px/1.35 var(--f-round)}
 .plc-how li{display:flex;gap:10px;align-items:center;font:800 15px/1.35 var(--f-round)}
 .plc-how span{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:12px;background:#EAF8EE;font-size:18px}
 .plc-prize{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin-top:10px;padding:8px 12px;border-radius:16px;background:#FFF6D6;box-shadow:inset 0 0 0 2px #FFC93C}
