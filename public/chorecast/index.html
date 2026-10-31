@@ -587,6 +587,18 @@ p{margin:0}
 .icon-p{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:var(--ink-2)}
 .muted{color:var(--ink-2)}
 .pempty{padding:40px 20px;text-align:center;color:var(--ink-2);background:var(--cell);border-radius:16px;font:400 16px var(--f-text)}
+.fold{margin-top:16px}
+.fold-h{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:12px 16px;border-radius:16px;background:var(--cell);text-align:left;color:var(--ink)}
+.fold-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.fold-t b{font:700 20px/1.25 var(--f-text)}
+.fold-t small{font:400 14px/1.35 var(--f-text);color:var(--ink-2)}
+.fold-n{min-width:34px;height:28px;padding:0 10px;border-radius:14px;background:var(--fill);display:grid;place-items:center;font:600 15px var(--f-text);color:var(--ink-2);flex:none}
+.fold-h>.ic{color:var(--ink-2);transition:transform .2s}
+.fold.open .fold-h>.ic{transform:rotate(90deg)}
+.fold-b{padding-bottom:6px}
+.fold-empty{margin-top:10px;padding:26px 20px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.fold-empty p{max-width:44ch}
+.pbtn.send-p{min-height:40px;padding:0 14px;background:var(--p-accent);color:#fff}
 /* ---------- Our home: setup questions ---------- */
 .wiz{--hue:#5AC8FA;min-height:100vh;color:var(--ink);display:flex;flex-direction:column}
 .wiz-top{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 6px) var(--gut-r) 6px var(--gut);background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%)}
@@ -4601,10 +4613,16 @@ function pKidDetail(kid) {
     <section class="pcard">${UI.confirmRemove === kid.id ? `<h3>Remove ${esc(kid.name)}?</h3><p class="muted" style="margin-bottom:12px">Their balances and profile are deleted. Past jobs stay in the review history.</p><div class="pactions"><button class="pbtn solid-danger" data-act="removeKidYes" data-id="${kid.id}">Remove</button><button class="pbtn" data-act="removeKidNo">Keep</button></div>` : `<button class="pbtn danger" data-act="removeKid" data-id="${kid.id}">${ic('trash')} Remove ${esc(kid.name)}</button>`}</section>
   </div>`;
 }
+// The Chores page folds into Custom chores and Default chores. Which is open is remembered on this device only.
+const choreFold = () => (UI.choreFold = UI.choreFold || { custom: true, base: false, ...lsGet('cc:choreFold', {}) });
 function pChores() {
-  const all = allChores();
+  const all = allChores(), mine = all.filter(c => c.custom), base = all.filter(c => !c.custom), open = choreFold();
+  const tiers = list => ['must', 'team', 'gig'].filter(t => list.some(c => c.tier === t)).map(tier => `<h3 class="pgroup-t">${TIERS[tier].label}<small>${TIERS[tier].pblurb}</small></h3><div class="group">${list.filter(c => c.tier === tier).map(choreRow).join('')}</div>`).join('');
+  const fold = (k, title, sub, n, body) => `<section class="fold ${open[k] ? 'open' : ''}"><button class="fold-h" data-act="choreFold" data-k="${k}" aria-expanded="${!!open[k]}"><span class="fold-t"><b>${title}</b><small>${sub}</small></span><span class="fold-n">${n}</span>${ic('next')}</button>${open[k] ? `<div class="fold-b">${body}</div>` : ''}</section>`;
   return `<header class="phead row-h"><div><h2>Chores</h2><p>Every morning Chorecast runs a fair chore draft. Each kid gets 3 must-dos and 2 team tasks, and no two kids ever get the same job. Anything in their own bedroom is always each kid’s own. A job a sibling has done sits out until it is due again, the pick order rotates daily, and kids get the jobs they’ve done least lately. The family also shares 4 side hustles (5 at weekends). Kids only see chores that suit their age and your home.</p></div><button class="pbtn" data-act="addChore">${ic('plus')} Add a custom chore</button></header>
-    ${['must', 'team', 'gig'].map(tier => `<h3 class="pgroup-t">${TIERS[tier].label}<small>${TIERS[tier].pblurb}</small></h3><div class="group">${all.filter(c => c.tier === tier).map(choreRow).join('')}</div>`).join('')}`;
+    ${fold('custom', 'Custom chores', 'Jobs you made. Tap Send to put one on a kid’s list right now.', mine.length, mine.length ? tiers(mine)
+      : `<div class="pempty fold-empty"><p>No custom chores yet. Make one for a job only your family does, then send it to a kid straight away.</p><button class="pbtn" data-act="addChore">${ic('plus')} Add a custom chore</button></div>`)}
+    ${fold('base', 'Default chores', 'The jobs Chorecast comes with. Switch off any you don’t want and set the pay.', base.length, tiers(base))}`;
 }
 function choreRow(c) {
   const here = fitsHome(c), on = here && !(S().choreOff || {})[c.key], th = THEMES[c.theme] || THEMES.tidy, val = c[rateField(c)] || 0;
@@ -4614,7 +4632,7 @@ function choreRow(c) {
     ${c.payType === 'quote' ? '<span class="muted" style="font-size:14px">Kid quotes</span>' : `<div class="stepper"><button data-act="rate" data-key="${c.key}" data-d="${c.payType === 'hourly' ? -50 : -10}" aria-label="Lower pay">${ic('minus')}</button><b>${fmt(val)}${suffix}</b><button data-act="rate" data-key="${c.key}" data-d="${c.payType === 'hourly' ? 50 : 10}" aria-label="Raise pay">${ic('plus')}</button></div>`}
     ${here ? `<button class="switch ${on ? 'on' : ''}" role="switch" aria-checked="${on}" aria-label="Offer ${esc(c.title)}" data-act="choreToggle" data-key="${c.key}"></button>` : `<button class="not-here" data-act="ptab" data-tab="home" title="${esc(missingText(c, homeF()))}">${ic('home')} Not at your place</button>`}
     ${c.guide ? `<button class="icon-p" data-act="gaOpen" data-key="${c.key}" aria-label="Photo guide for ${esc(c.title)}">${ic('photo')}</button>` : ''}
-    ${c.custom && on ? `<button class="icon-p" data-act="sendOpen" data-key="${c.key}" aria-label="Send ${esc(c.title)} to a kid now">${ic('send')}</button>` : ''}
+    ${c.custom && on && kidsList().length ? `<button class="pbtn send-p" data-act="sendOpen" data-key="${c.key}" aria-label="Send ${esc(c.title)} to a kid now">${ic('send')} Send</button>` : ''}
     ${c.custom ? `<button class="icon-p" data-act="delChore" data-key="${c.key}" aria-label="Delete ${esc(c.title)}">${ic('trash')}</button>` : ''}</div>`;
 }
 function pBank() {
@@ -4713,6 +4731,8 @@ function choreFormSheet() {
   return `<div class="sh-head"><button class="sh-x" data-act="close">Cancel</button><h2>New custom chore</h2><button class="sh-ok" id="cf-ok" data-act="${photo ? 'cfRecord' : 'saveChore'}" ${f.title.trim() ? '' : 'disabled'}>${photo ? 'Next' : f.sendTo.length ? 'Send' : 'Add'}</button></div>
     <div class="sh-body">
       <label class="field"><span>Chore</span><input id="cf-title" type="text" maxlength="34" autocomplete="off" placeholder="Feed the chickens" value="${esc(f.title)}" data-in="cfTitle"></label>
+      ${kidsList().length ? `<div class="field col"><span>📨 Send it now</span><div class="crew-pick">${kidsList().map(k => `<button class="crew-kid ${f.sendTo.includes(k.id) ? 'on' : ''}" data-act="cfSendTo" data-id="${k.id}" aria-pressed="${f.sendTo.includes(k.id)}"><span style="--hue:${k.hue}">${k.avatar}</span>${esc(k.name)}</button>`).join('')}</div>
+        <small class="hint">${f.sendTo.length ? `It goes straight onto ${f.sendTo.map(id => esc((Store.kids[id] || {}).name || '')).join(' and ')}’s list, marked as from you, and stays there until it’s done.${photo ? ' It’s sent when you save the photo guide.' : ''}` : 'Optional. Pick a kid to put it on their list straight away. Otherwise it joins the chore draft on its schedule.'}</small></div>` : ''}
       <div class="field col"><span>How kids learn it</span><div class="seg"><button class="seg-i ${photo ? 'on' : ''}" data-act="cfHow" data-h="photo">📷 Photo guide</button><button class="seg-i ${photo ? '' : 'on'}" data-act="cfHow" data-h="text">Written steps</button></div>
         <small class="hint">${photo ? 'You do the chore once, start to finish, and take a photo at each step. Your photos become the kids’ how-to guide.' : 'Type the steps. Kids tick them off as they go.'}</small></div>
       ${photo ? `<div class="field col"><span>Kids’ photos</span><div class="seg"><button class="seg-i ${each ? 'on' : ''}" data-act="cfMode" data-m="each">A photo at every step</button><button class="seg-i ${each ? '' : 'on'}" data-act="cfMode" data-m="end">One photo at the end</button></div>
@@ -4728,8 +4748,6 @@ function choreFormSheet() {
       ${photo ? '' : `<div class="field"><span>Minutes</span><div class="stepper"><button data-act="cfMins" data-d="-1" aria-label="Fewer minutes">${ic('minus')}</button><b>${f.mins}</b><button data-act="cfMins" data-d="1" aria-label="More minutes">${ic('plus')}</button></div></div>`}
       <div class="field"><span>Pay</span><div class="stepper"><button data-act="cfPay" data-d="-10" aria-label="Lower pay">${ic('minus')}</button><b>${fmt(f.pay)}</b><button data-act="cfPay" data-d="10" aria-label="Raise pay">${ic('plus')}</button></div></div>
       ${photo ? '' : `<label class="field col"><span>Steps, one per line</span><textarea id="cf-steps" data-in="cfSteps" placeholder="Fill the feeder&#10;Fresh water&#10;Collect the eggs">${esc(f.steps)}</textarea></label>`}
-      ${kidsList().length ? `<div class="field col"><span>Send it now</span><div class="crew-pick">${kidsList().map(k => `<button class="crew-kid ${f.sendTo.includes(k.id) ? 'on' : ''}" data-act="cfSendTo" data-id="${k.id}" aria-pressed="${f.sendTo.includes(k.id)}"><span style="--hue:${k.hue}">${k.avatar}</span>${esc(k.name)}</button>`).join('')}</div>
-        <small class="hint">${f.sendTo.length ? `It goes straight onto ${f.sendTo.map(id => esc((Store.kids[id] || {}).name || '')).join(' and ')}’s list, marked as from you, and stays there until it’s done.` : 'Optional. Pick a kid to put it on their list straight away. Otherwise it joins the chore draft on its schedule.'}</small></div>` : ''}
     </div>
     ${photo ? `<div class="sh-foot"><button class="btn-big" id="cf-go" data-act="cfRecord" ${f.title.trim() ? '' : 'disabled'}>${ic('camera')} Start recording</button></div>` : ''}`;
 }
@@ -5460,6 +5478,7 @@ const ACT = {
     toast('Chore deleted');
   },
   addChore: () => { UI.choreForm = { title: '', icon: '🧹', tier: 'team', theme: 'tidy', mins: 10, pay: 100, steps: '', freq: 'daily', sendTo: [], scope: 'home', how: 'photo', photoMode: 'each' }; openSheet(choreFormSheet); },
+  choreFold: a => { const f = choreFold(), k = a.dataset.k; f[k] = !f[k]; lsSet('cc:choreFold', f); render(); },
   sendOpen: a => { UI.send = { key: a.dataset.key, kids: [] }; openSheet(sendSheet); },
   sendKid: a => { const k = UI.send.kids, id = a.dataset.id; UI.send.kids = k.includes(id) ? k.filter(x => x !== id) : [...k, id]; renderSheet(false); },
   sendGo: () => { const c = choreDef(UI.send.key); if (!c || !UI.send.kids.length) return; const names = sendChore(c, UI.send.kids); closeSheet(); toast(`📨 Sent to ${names}`); },
