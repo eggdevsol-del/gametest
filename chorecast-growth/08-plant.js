@@ -25,11 +25,29 @@ const PlantView = (() => {
   const RING = toon(0x8be06a), RING_GOLD = toon(0xffc93c);
   const mesh = (geo, mat, parent, x = 0, y = 0, z = 0) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); if (parent) parent.add(m); return m; };
   const faceted = g => { const f = g.index ? g.toNonIndexed() : g; f.computeVertexNormals(); return f; };
+  // Bakes the pieces of scenery that never move on their own into one mesh per material, so a field of tufts costs
+  // one draw call instead of eighty. Same geometry, same materials, same look; outline the result afterwards.
+  // A mesh marked `keep`, or carrying children, stays as it is.
+  function bake(group, only = null) {
+    group.updateMatrixWorld(true); const inv = group.matrixWorld.clone().invert(), by = new Map();
+    (only || (() => { const a = []; group.traverse(o => { if (o.isMesh && !o.userData.keep && !o.children.length) a.push(o); }); return a; })()).forEach(o => { if (!by.has(o.material)) by.set(o.material, []); by.get(o.material).push(o); });
+    for (const [mat, list] of by) {
+      if (list.length < 2) continue;
+      const geos = list.map(o => o.geometry.clone().applyMatrix4(inv.clone().multiply(o.matrixWorld))), indexed = geos.every(g => g.index);
+      const parts = indexed ? geos : geos.map(g => (g.index ? g.toNonIndexed() : g)), names = Object.keys(parts[0].attributes).filter(k => parts.every(g => g.attributes[k]));
+      const out = new T.BufferGeometry();
+      for (const k of names) { const sz = parts[0].attributes[k].itemSize, arr = new Float32Array(parts.reduce((a, g) => a + g.attributes[k].count * sz, 0)); let at = 0; for (const g of parts) { arr.set(g.attributes[k].array, at); at += g.attributes[k].array.length; } out.setAttribute(k, new T.BufferAttribute(arr, sz)); }
+      if (indexed) { const verts = parts.reduce((a, g) => a + g.attributes.position.count, 0), idx = new (verts > 65535 ? Uint32Array : Uint16Array)(parts.reduce((a, g) => a + g.index.count, 0)); let at = 0, base = 0; for (const g of parts) { for (let i = 0; i < g.index.count; i++) idx[at++] = g.index.array[i] + base; base += g.attributes.position.count; } out.setIndex(new T.BufferAttribute(idx, 1)); }
+      list.forEach(o => o.parent.remove(o)); geos.forEach(g => g.dispose());
+      const m = new T.Mesh(out, mat); m.userData.noInk = !!list[0].userData.noInk; group.add(m);
+    }
+    return group;
+  }
   function canvasTex(w, h, draw) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; return t; }
   const GAME_NAME = { sort: 'Sort', order: 'Put in order', build: 'Build it', match: 'Match', route: 'Route', slider: 'Slider', price: 'Best price', scam: 'Scam spotter', path: 'Choose a path', debate: 'Debate', tap: 'Find them', budget: 'Budget planner', market: 'Market time-lapse', compound: 'Snowball', shop: 'Run a stall', timing: 'Timing', diff: 'Spot the difference', chat: 'Chat', mystery: 'Mystery box', island: 'Your island', gen: 'Quick maths', mcq: 'Quiz', tf: 'True or false', gap: 'Fill the gap' };
 
   /* State */
-  let R = null, glowTex = null, scene, cam, el, cv, tagsEl, cardEl, followEl, plant, planG = null, sky, sunSprite, clouds = [], signMesh, coinsG, seed, shells, stalk, stalkInk, coty, flower, sepals, outer, inner, rays, dots, goalStar, butterflies, guide = null, guideKind = '';
+  let R = null, pace = null, glowTex = null, scene, cam, el, cv, tagsEl, cardEl, followEl, plant, planG = null, sky, sunSprite, clouds = [], signMesh, coinsG, seed, shells, stalk, stalkInk, coty, flower, sepals, outer, inner, rays, dots, goalStar, butterflies, guide = null, guideKind = '';
   let mode = 'tree', running = false, raf = 0, last = 0, t = 0, key = '', treeId = '', busy = false, celTok = 0, drag = null, prizeSig = '';
   let LS = [], US = [], Q = 1, UN = [], LEAVES = [], ITEMS = [], tagEls = [], utagEls = [], goalEl = null, prizeAt = {}, prizeGs = [];
   let done = [], real = [], udone = [], crowned = [], cur = -1, sel = null, bloomOn = false, passedA = 0, shown = 0, quizFresh = false, quizMax = 0;
@@ -42,23 +60,29 @@ const PlantView = (() => {
   const curve = new T.CatmullRomCurve3([[0, BASE - 0.05, 0], [0.04, BASE + 1, 0.02], [-0.18, BASE + 3.2, 0.1], [0.2, BASE + 6, -0.08], [-0.16, BASE + 9, 0.06], [0.17, BASE + 12, -0.05], [-0.1, BASE + 15, 0.04], [0, BASE + H, 0]].map(p => V3(...p)), false, 'centripetal');
   const LEN = curve.getLength(), SPROUT = 0.95 / LEN, SP = [], SN = [], SB = [], STn = [];
   { const fr = curve.computeFrenetFrames(NS, false); for (let i = 0; i <= NS; i++) { SP.push(curve.getPointAt(i / NS)); SN.push(fr.normals[i]); SB.push(fr.binormals[i]); STn.push(fr.tangents[i]); } }
-  const uOf = a => (a <= 0 ? 0 : SPROUT + (TOP - SPROUT) * Math.min(1, a / Q));
+  const uOf = a => (a <= 0 ? 0 : SPROUT + (TOP - SPROUT) * Math.min(1, a / Q)), GOAL = curve.getPointAt(1).add(V3(0, 0.6, 0));
   function sample(u, out = {}) { const f = clamp(u, 0, 1) * NS, i0 = Math.floor(Math.min(f, NS - 1)), k = f - i0; out.p = (out.p || V3()).lerpVectors(SP[i0], SP[i0 + 1], k); out.n = (out.n || V3()).lerpVectors(SN[i0], SN[i0 + 1], k).normalize(); out.b = (out.b || V3()).lerpVectors(SB[i0], SB[i0 + 1], k).normalize(); out.t = (out.t || V3()).lerpVectors(STn[i0], STn[i0 + 1], k).normalize(); return out; }
   function radius(u, s) { const flare = 1 + 0.7 * Math.max(0, 1 - u * LEN / 0.45), tip = clamp((s - u) * LEN / 0.6, 0, 1); return (0.17 - 0.09 * u) * flare * (0.16 + 0.84 * Math.sqrt(tip)); }
+  // The stalk's mesh is made once at full length and rewritten in place as it grows, drawing only the grown part,
+  // so growing doesn't allocate a new geometry every frame.
   let builtS = -1;
+  const SV = (NS + 1) * (RAD + 1) + 1, SPOS = new Float32Array(SV * 3), SNOR = new Float32Array(SV * 3), SIDX = new Uint16Array(NS * RAD * 6 + RAD * 3);
+  const stalkGeo = new T.BufferGeometry();
+  stalkGeo.setAttribute('position', new T.BufferAttribute(SPOS, 3)); stalkGeo.setAttribute('normal', new T.BufferAttribute(SNOR, 3)); stalkGeo.setAttribute('inkNormal', new T.BufferAttribute(SNOR, 3)); stalkGeo.setIndex(new T.BufferAttribute(SIDX, 1));
   function buildStalk(s) {
     if (Math.abs(s - builtS) < 0.0004) return; builtS = s;
     if (s <= 0.0005) { stalk.visible = false; return; } stalk.visible = true;
-    const rings = Math.max(2, Math.ceil(s * NS)) + 1, NV = rings * (RAD + 1) + 1, pos = new Float32Array(NV * 3), nor = new Float32Array(NV * 3), idx = [], q = {};
+    const rings = Math.max(2, Math.ceil(s * NS)) + 1, ti = rings * (RAD + 1), q = {}; let k = 0;
     for (let i = 0; i < rings; i++) {
       const u = Math.min(s, i / NS), r = radius(u, s); sample(u, q);
-      for (let j = 0; j <= RAD; j++) { const a = j / RAD * Math.PI * 2, c = Math.cos(a), sn = Math.sin(a), o = (i * (RAD + 1) + j) * 3, nx = c * q.n.x + sn * q.b.x, ny = c * q.n.y + sn * q.b.y, nz = c * q.n.z + sn * q.b.z; pos[o] = q.p.x + nx * r; pos[o + 1] = q.p.y + ny * r; pos[o + 2] = q.p.z + nz * r; nor[o] = nx; nor[o + 1] = ny; nor[o + 2] = nz; }
+      for (let j = 0; j <= RAD; j++) { const a = j / RAD * Math.PI * 2, c = Math.cos(a), sn = Math.sin(a), o = (i * (RAD + 1) + j) * 3, nx = c * q.n.x + sn * q.b.x, ny = c * q.n.y + sn * q.b.y, nz = c * q.n.z + sn * q.b.z; SPOS[o] = q.p.x + nx * r; SPOS[o + 1] = q.p.y + ny * r; SPOS[o + 2] = q.p.z + nz * r; SNOR[o] = nx; SNOR[o + 1] = ny; SNOR[o + 2] = nz; }
     }
-    for (let i = 0; i < rings - 1; i++) for (let j = 0; j < RAD; j++) { const a = i * (RAD + 1) + j, b = a + RAD + 1; idx.push(a, a + 1, b, b, a + 1, b + 1); }
-    sample(s, q); const ti = NV - 1; pos[ti * 3] = q.p.x + q.t.x * 0.04; pos[ti * 3 + 1] = q.p.y + q.t.y * 0.04; pos[ti * 3 + 2] = q.p.z + q.t.z * 0.04; nor[ti * 3 + 1] = 1;
-    const lastRing = (rings - 1) * (RAD + 1); for (let j = 0; j < RAD; j++) idx.push(lastRing + j + 1, lastRing + j, ti);
-    const g = new T.BufferGeometry(); g.setAttribute('position', new T.BufferAttribute(pos, 3)); g.setAttribute('normal', new T.BufferAttribute(nor, 3)); g.setAttribute('inkNormal', new T.BufferAttribute(nor, 3)); g.setIndex(idx);
-    stalk.geometry.dispose(); stalk.geometry = g; if (stalkInk) stalkInk.geometry = g;
+    for (let i = 0; i < rings - 1; i++) for (let j = 0; j < RAD; j++) { const a = i * (RAD + 1) + j, b = a + RAD + 1; SIDX[k++] = a; SIDX[k++] = a + 1; SIDX[k++] = b; SIDX[k++] = b; SIDX[k++] = a + 1; SIDX[k++] = b + 1; }
+    sample(s, q); SPOS[ti * 3] = q.p.x + q.t.x * 0.04; SPOS[ti * 3 + 1] = q.p.y + q.t.y * 0.04; SPOS[ti * 3 + 2] = q.p.z + q.t.z * 0.04; SNOR[ti * 3] = 0; SNOR[ti * 3 + 1] = 1; SNOR[ti * 3 + 2] = 0;
+    const lastRing = (rings - 1) * (RAD + 1); for (let j = 0; j < RAD; j++) { SIDX[k++] = lastRing + j + 1; SIDX[k++] = lastRing + j; SIDX[k++] = ti; }
+    const pa = stalkGeo.attributes.position, na = stalkGeo.attributes.normal, ia = stalkGeo.attributes.inkNormal;
+    pa.updateRange.count = na.updateRange.count = ia.updateRange.count = (ti + 1) * 3; stalkGeo.index.updateRange.count = k;
+    pa.needsUpdate = na.needsUpdate = ia.needsUpdate = stalkGeo.index.needsUpdate = true; stalkGeo.setDrawRange(0, k);
   }
 
   /* Leaves: a veined texture on a curved, slightly cupped blade */
@@ -84,7 +108,7 @@ const PlantView = (() => {
     glowTex = glow;
     sunSprite = new T.Sprite(new T.SpriteMaterial({ map: glow, depthWrite: false, transparent: true })); sunSprite.scale.set(36, 36, 1); scene.add(sunSprite);
     { const cm = toon(0xffffff), cg = new T.SphereGeometry(1, 18, 12); let sd = 7; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
-      for (let i = 0; i < 18; i++) { const g = new T.Group(), n = 4 + Math.floor(rnd() * 3); for (let k = 0; k < n; k++) { const r = 0.9 + rnd() * 1.1, b = mesh(cg, cm, g, (k - n / 2) * 1.2 + rnd() * 0.4, rnd() * 0.5 + (k % 2) * 0.4, rnd() * 0.6); b.scale.set(r, r * 0.75, r); } g.position.set(-22 + rnd() * 44, -3 + rnd() * 34, -14 - rnd() * 22); g.userData.v = 0.15 + rnd() * 0.25; g.scale.setScalar(0.8 + rnd() * 0.7); scene.add(g); clouds.push(g); } }
+      for (let i = 0; i < 18; i++) { const g = new T.Group(), n = 4 + Math.floor(rnd() * 3); for (let k = 0; k < n; k++) { const r = 0.9 + rnd() * 1.1, b = mesh(cg, cm, g, (k - n / 2) * 1.2 + rnd() * 0.4, rnd() * 0.5 + (k % 2) * 0.4, rnd() * 0.6); b.scale.set(r, r * 0.75, r); } bake(g); g.position.set(-22 + rnd() * 44, -3 + rnd() * 34, -14 - rnd() * 22); g.userData.v = 0.15 + rnd() * 0.25; g.scale.setScalar(0.8 + rnd() * 0.7); scene.add(g); clouds.push(g); } }
 
     const wld = new T.Group(); scene.add(wld); plant = new T.Group(); wld.add(plant);
     // The floating island: grass, a layered rock cone, a soil mound for the seed, tufts, daisies and a sign
@@ -106,15 +130,16 @@ const PlantView = (() => {
     mesh(new T.BoxGeometry(0.08, 0.7, 0.08), toon(0xc98a4b), sign, 0, 0.35, 0);
     const board = mesh(new T.BoxGeometry(0.95, 0.42, 0.06), toon(0xc98a4b), sign, 0, 0.72, 0);
     signMesh = mesh(new T.PlaneGeometry(0.86, 0.34), new T.MeshBasicMaterial(), board, 0, 0, 0.032); signMesh.userData.noInk = true;
-    G3.outline(isl);
-    [[-36, 4, -34, 1.6], [40, 13, -30, 2], [-38, 25, -28, 1.4]].forEach(([x, y, z, s]) => { const f = new T.Group(); f.position.set(x, y, z); f.scale.setScalar(s); mesh(new T.CylinderGeometry(2, 1.8, 0.4, 24), toon(0x7fd65f), f); mesh(faceted(new T.ConeGeometry(1.9, 2.4, 9)), toon(0xa98263), f, 0, -1.4, 0).rotation.x = Math.PI; mesh(new T.SphereGeometry(0.7, 12, 8), toon(0x4fae36), f, 0.4, 0.7, 0).scale.y = 1.3; scene.add(f); });
+    bake(coinsG).children.forEach(c => { c.userData.keep = true; }); bake(isl); G3.outline(isl);
+    { const far = new T.Group(); [[-36, 4, -34, 1.6], [40, 13, -30, 2], [-38, 25, -28, 1.4]].forEach(([x, y, z, s]) => { const f = new T.Group(); f.position.set(x, y, z); f.scale.setScalar(s); mesh(new T.CylinderGeometry(2, 1.8, 0.4, 24), toon(0x7fd65f), f); mesh(faceted(new T.ConeGeometry(1.9, 2.4, 9)), toon(0xa98263), f, 0, -1.4, 0).rotation.x = Math.PI; mesh(new T.SphereGeometry(0.7, 12, 8), toon(0x4fae36), f, 0.4, 0.7, 0).scale.y = 1.3; far.add(f); }); scene.add(bake(far)); }
 
     // The seed: two half shells that split open on the first right answer
     seed = new T.Group(); seed.position.set(0, 0.4, 0); plant.add(seed);
     const shellG = new T.SphereGeometry(0.26, 22, 14, 0, Math.PI);
     shells = [0, 1].map(k => { const p = new T.Group(); seed.add(p); const m = mesh(shellG, toon(0xf0bd6a, { ds: 1 }), p); m.scale.set(1, 1.45, 1); m.rotation.y = k ? Math.PI : 0; m.userData.noInk = true; return p; });
     // A first sliver of stalk gives the outline its geometry; it is rebuilt as the plant grows.
-    stalk = new T.Mesh(new T.BufferGeometry(), toon(0x5cc13f)); plant.add(stalk); buildStalk(0.01); G3.outline(stalk); stalkInk = stalk.children[0]; builtS = -1;
+    // The stalk changes length every frame, so it is never culled from a stale bounding box
+    stalk = new T.Mesh(stalkGeo, toon(0x5cc13f)); stalk.frustumCulled = false; plant.add(stalk); G3.outline(stalk); stalkInk = stalk.children[0]; stalkInk.frustumCulled = false;
 
     leafM = toon(0xffffff, { map: canvasTex(256, 128, (g, w, h) => {
       const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#53c447'); gr.addColorStop(0.5, '#7ddb5a'); gr.addColorStop(1, '#53c447'); g.fillStyle = gr; g.fillRect(0, 0, w, h);
@@ -135,7 +160,7 @@ const PlantView = (() => {
     };
     sepals = petalRing(5, 0.95, 0x3e9e31, 0.06, -0.15, 1.85, 0.3); outer = petalRing(8, 1.65, 0xff7db8, 0.12, -0.3, 1.1, 0); inner = petalRing(6, 1.15, 0xffc2dc, 0.08, -0.22, 0.75, 0.25);
     const heart = mesh(new T.SphereGeometry(0.38, 20, 12), toon(0xffd84d), flower, 0, 0.14, 0); heart.scale.y = 0.55; G3.outline(heart);
-    { const dg = new T.SphereGeometry(0.035, 6, 4); for (let i = 0; i < 14; i++) { const a = i * 2.39, r = 0.07 + 0.17 * Math.sqrt(i / 14); mesh(dg, toon(0xf08a24), flower, Math.cos(a) * r * 1.25, 0.33 - r * 0.35, Math.sin(a) * r * 1.25); } }
+    { const dg = new T.SphereGeometry(0.035, 6, 4), ds = []; for (let i = 0; i < 14; i++) { const a = i * 2.39, r = 0.07 + 0.17 * Math.sqrt(i / 14); ds.push(mesh(dg, toon(0xf08a24), flower, Math.cos(a) * r * 1.25, 0.33 - r * 0.35, Math.sin(a) * r * 1.25)); } bake(flower, ds); }
     rays = new T.Sprite(new T.SpriteMaterial({ map: canvasTex(512, 512, (g, w) => { g.translate(w / 2, w / 2); for (let i = 0; i < 16; i++) { g.rotate(Math.PI / 8); const gr = g.createLinearGradient(0, 0, 0, -w / 2); gr.addColorStop(0, 'rgba(255,240,170,.55)'); gr.addColorStop(1, 'rgba(255,240,170,0)'); g.fillStyle = gr; g.beginPath(); g.moveTo(-14, 0); g.lineTo(14, 0); g.lineTo(0, -w / 2); g.fill(); } }), transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: 0 }));
     rays.scale.set(8, 8, 1); plant.add(rays);
 
@@ -159,13 +184,13 @@ const PlantView = (() => {
   }
 
   /* Particles: sparkles, leaf bits and petals */
-  const P = []; let starTex = null;
+  const P = [], PG = {}; let starTex = null; // leaf bits and petals share one plane each
   function burst(at, n, kind) {
     starTex = starTex || canvasTex(64, 64, (g, w) => { g.translate(w / 2, w / 2); g.fillStyle = '#fff6c8'; g.beginPath(); for (let i = 0; i < 8; i++) { const r = i % 2 ? 7 : 30, a = i * Math.PI / 4; g.lineTo(Math.cos(a) * r, Math.sin(a) * r); } g.fill(); });
     for (let i = 0; i < n; i++) {
       let o;
       if (kind === 'star') { o = new T.Sprite(new T.SpriteMaterial({ map: starTex, transparent: true, depthWrite: false, color: col(i % 3 ? 0xfff2a8 : 0xffffff) })); o.scale.setScalar(0.28 + Math.random() * 0.2); }
-      else { const c = kind === 'leaf' ? [0x5cc13f, 0x8be06a, 0x3e9e31][i % 3] : [0xff6fa8, 0xffa8cb, 0xffffff, 0xffd84d][i % 4]; o = new T.Mesh(new T.PlaneGeometry(kind === 'leaf' ? 0.22 : 0.2, 0.13), new T.MeshBasicMaterial({ color: col(c), side: T.DoubleSide, transparent: true })); }
+      else { const c = kind === 'leaf' ? [0x5cc13f, 0x8be06a, 0x3e9e31][i % 3] : [0xff6fa8, 0xffa8cb, 0xffffff, 0xffd84d][i % 4]; o = new T.Mesh(PG[kind] || (PG[kind] = new T.PlaneGeometry(kind === 'leaf' ? 0.22 : 0.2, 0.13)), new T.MeshBasicMaterial({ color: col(c), side: T.DoubleSide, transparent: true })); }
       o.position.copy(at); scene.add(o);
       const a = Math.random() * Math.PI * 2, up = kind === 'petal' ? 2.5 + Math.random() * 3 : 1 + Math.random() * 2.2, sp = kind === 'petal' ? 2 + Math.random() * 3 : 1 + Math.random() * 1.6;
       P.push({ o, v: V3(Math.cos(a) * sp, up, Math.sin(a) * sp), life: 0, max: kind === 'petal' ? 4 + Math.random() * 2 : 1 + Math.random() * 0.6, spin: V3(Math.random() * 6, Math.random() * 6, Math.random() * 6), kind });
@@ -174,7 +199,7 @@ const PlantView = (() => {
   function tickParticles(dt) {
     for (let i = P.length - 1; i >= 0; i--) {
       const p = P[i]; p.life += dt; const f = p.life / p.max;
-      if (f >= 1) { scene.remove(p.o); p.o.material.dispose(); if (!p.o.isSprite) p.o.geometry.dispose(); P.splice(i, 1); continue; }
+      if (f >= 1) { scene.remove(p.o); p.o.material.dispose(); P.splice(i, 1); continue; }
       p.v.multiplyScalar(Math.exp(-(p.kind === 'star' ? 2.2 : 1.1) * dt)); p.v.y -= (p.kind === 'star' ? 1.5 : 1.2) * dt; if (p.kind === 'petal') p.v.x += Math.sin(p.life * 3 + i) * dt * 1.5;
       p.o.position.addScaledVector(p.v, dt); if (!p.o.isSprite) { p.o.rotation.x += p.spin.x * dt; p.o.rotation.y += p.spin.y * dt; p.o.rotation.z += p.spin.z * dt; }
       p.o.material.opacity = f > 0.7 ? 1 - (f - 0.7) / 0.3 : 1;
@@ -185,7 +210,7 @@ const PlantView = (() => {
 
   function mount() {
     if (el) return;
-    R = new T.WebGLRenderer({ antialias: true }); R.setPixelRatio(Math.min(2, devicePixelRatio || 1)); R.outputEncoding = T.sRGBEncoding; R.toneMapping = T.NoToneMapping;
+    R = new T.WebGLRenderer({ antialias: true }); pace = G3.pacer ? G3.pacer(R, 2) : (R.setPixelRatio(Math.min(2, devicePixelRatio || 1)), () => {}); R.outputEncoding = T.sRGBEncoding; R.toneMapping = T.NoToneMapping;
     el = document.createElement('div'); el.className = 'pl';
     el.innerHTML = '<div class="pl-tags"></div><button class="pl-follow" type="button" hidden>⬇ Back to my plant</button><section class="pl-card" aria-live="polite"></section>';
     cv = R.domElement; cv.className = 'pl-cv'; cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', 'Your plant. Drag or scroll to look up and down the stalk, and tap a label to see its lesson.'); el.prepend(cv);
@@ -354,12 +379,14 @@ const PlantView = (() => {
       if (tmp.z > 1 || fade <= 0.02 || y < topY + b._h / 2 || y > botY - b._h || x < -200 || x > W + 200) return hide(b);
       if (b._on !== true) { b.style.visibility = 'visible'; b._on = true; }
       const left = side > 0 ? x + 26 : side < 0 ? x - 26 - b._w : x - b._w / 2, top = (side ? y - b._h / 2 : y) + dy;
-      b.style.transform = `translate(${clamp(left, 8, Math.max(8, maxX - b._w)).toFixed(1)}px,${top.toFixed(1)}px)`; b.style.opacity = fade.toFixed(2);
+      // Only labels that moved are written, so a still plant doesn't restyle the page every frame
+      const tf = `translate(${clamp(left, 8, Math.max(8, maxX - b._w)).toFixed(1)}px,${top.toFixed(1)}px)`, op = fade.toFixed(2);
+      if (b._tf !== tf) { b.style.transform = tf; b._tf = tf; } if (b._op !== op) { b.style.opacity = op; b._op = op; }
     };
     LS.forEach((x, i) => { const p = sample(x.at, tq).p; put(tagEls[i], p, sideOf(i), hideBloom * clamp(1.25 - Math.abs(p.y - cy) / 4.2, 0, 1), UNDER); });
     // A finished unit's label stacks under the label of its last lesson
     US.forEach((U, i) => { const j = U.ls[U.ls.length - 1], k = UN[i]; if (k.t < 0.6) { hide(utagEls[i]); return; } const p = sample(LS[j].at, tq).p; if (!utagEls[i]._w) { utagEls[i]._w = utagEls[i].offsetWidth; utagEls[i]._h = utagEls[i].offsetHeight; } put(utagEls[i], p, sideOf(j), hideBloom * clamp(1.25 - Math.abs(p.y - cy) / 4.2, 0, 1), UNDER + (tagEls[j]._h || 30) / 2 + 6 + utagEls[i]._h / 2); });
-    const g = sample(1).p.clone().add(V3(0, 0.6, 0)); put(goalEl, g, 1, bloomOn ? 0 : clamp(1.2 - Math.abs(g.y - cy) / 6, 0, 1));
+    put(goalEl, GOAL, 1, bloomOn ? 0 : clamp(1.2 - Math.abs(GOAL.y - cy) / 6, 0, 1));
   }
 
   /* The card beside the plant: the chosen lesson, a unit's challenge, or the finished plant */
@@ -449,7 +476,7 @@ const PlantView = (() => {
   }
 
   /* Every frame */
-  const tipQ = {}, right = V3(), fwd = V3(), gp = V3();
+  const tipQ = {}, right = V3(), fwd = V3(), gp = V3(), dotQ = {}, dotM = new T.Matrix4(), bfV = V3(), UP = V3(0, 1, 0);
   const hover = (g, lf, i) => { g.position.copy(lf.padS); g.position.y += 0.62 + (reduced ? 0 : Math.sin(t * 2 + i) * 0.06); };
   // The bubble and its lock sit on the camera's side of the prize, so they show in front of it
   function faceBubble(o, i) { o.bubble.position.set(0, 0.28, 0).addScaledVector(fwd, 0.42); o.lock.position.set(0, 0.04, 0).addScaledVector(right, 0.3).addScaledVector(fwd, 0.55); o.lock.material.rotation = reduced ? 0 : Math.sin(t * 3 + i) * 0.08; }
@@ -480,24 +507,25 @@ const PlantView = (() => {
     // Growth eases toward the answers shown
     V.s += ((bloomOn ? 1 : uOf(shown)) - V.s) * (1 - Math.exp(-dt * (bloomOn ? 1.2 : 2.6)));
     buildStalk(V.s);
-    if (Math.abs(V.s - (dots.userData.s ?? -1)) > 0.002) { dots.userData.s = V.s; const m = new T.Matrix4(), q = {}; dots.userData.at.forEach((u, i) => { sample(u, q); const k = u > V.s + 0.01 ? 1 : 0; m.makeScale(k, k, k); m.setPosition(q.p); dots.setMatrixAt(i, m); }); dots.instanceMatrix.needsUpdate = true; }
+    if (Math.abs(V.s - (dots.userData.s ?? -1)) > 0.002) { dots.userData.s = V.s; dots.userData.at.forEach((u, i) => { sample(u, dotQ); const k = u > V.s + 0.01 ? 1 : 0; dotM.makeScale(k, k, k); dotM.setPosition(dotQ.p); dots.setMatrixAt(i, dotM); }); dots.instanceMatrix.needsUpdate = true; }
     V.shell = lerp(V.shell, shown > 0 || bloomOn ? 1 : 0, 1 - Math.exp(-dt * 3));
     seed.scale.setScalar(shown > 0 || bloomOn || reduced ? 1 : 1 + Math.sin(t * 3) * 0.05);
     shells.forEach((p, k) => { p.rotation.x = (k ? -1 : 1) * V.shell * 1.05; p.position.z = (k ? -1 : 1) * V.shell * 0.12; p.position.y = -V.shell * 0.1; });
-    coty.forEach((c, k) => { c.scale.setScalar(Math.max(0.001, outBack(clamp((V.s - 0.8 / LEN) / (0.15 / LEN), 0, 1)))); c.children[0].rotation.z = 0.5 + Math.sin(t * 1.7 + k) * 0.04; });
-    UN.forEach((k, i) => { const on = udone[i] && k.at <= V.s + 0.004; k.t = lerp(k.t, on ? 1 : 0, 1 - Math.exp(-dt * 5)); const s = Math.max(0.001, outBack(clamp(k.t, 0, 1)) * k.r); k.m.scale.set(s, s, s * 0.8); k.gold = Math.max(0, k.gold - dt * 0.8); k.m.material = crowned[i] || k.gold > 0.05 ? RING_GOLD : RING; });
-    LEAVES.forEach((lf, i) => { const on = done[i] && lf.at <= V.s + 0.004; lf.t = clamp(lf.t + (on ? dt / 1.4 : -dt * 3), 0, 1); lf.pv.scale.setScalar(Math.max(0.001, outBack(lf.t))); const o = smooth(lf.t); lf.pitch.rotation.z = lerp(1.35, PITCH, o) + Math.sin(t * 1.3 + i) * 0.025; lf.roll.rotation.x = lf.side * lerp(1.3, ROLL, o) + Math.sin(t * 2.1 + i) * 0.03; });
+    // Pieces still at zero size are hidden, so they cost nothing to draw
+    coty.forEach((c, k) => { const s = outBack(clamp((V.s - 0.8 / LEN) / (0.15 / LEN), 0, 1)); c.scale.setScalar(Math.max(0.001, s)); c.visible = s > 0.001; c.children[0].rotation.z = 0.5 + Math.sin(t * 1.7 + k) * 0.04; });
+    UN.forEach((k, i) => { const on = udone[i] && k.at <= V.s + 0.004; k.t = lerp(k.t, on ? 1 : 0, 1 - Math.exp(-dt * 5)); const s = Math.max(0.001, outBack(clamp(k.t, 0, 1)) * k.r); k.m.scale.set(s, s, s * 0.8); k.m.visible = k.t > 0.002; k.gold = Math.max(0, k.gold - dt * 0.8); k.m.material = crowned[i] || k.gold > 0.05 ? RING_GOLD : RING; });
+    LEAVES.forEach((lf, i) => { const on = done[i] && lf.at <= V.s + 0.004; lf.t = clamp(lf.t + (on ? dt / 1.4 : -dt * 3), 0, 1); lf.pv.scale.setScalar(Math.max(0.001, outBack(lf.t))); lf.pv.visible = lf.t > 0; const o = smooth(lf.t); lf.pitch.rotation.z = lerp(1.35, PITCH, o) + Math.sin(t * 1.3 + i) * 0.025; lf.roll.rotation.x = lf.side * lerp(1.3, ROLL, o) + Math.sin(t * 2.1 + i) * 0.03; });
     // The bud rides the tip through the last unit, then opens
-    sample(V.s, tipQ); flower.position.copy(tipQ.p); flower.quaternion.setFromUnitVectors(V3(0, 1, 0), tipQ.t);
+    sample(V.s, tipQ); flower.position.copy(tipQ.p); flower.quaternion.setFromUnitVectors(UP, tipQ.t);
     if (bloomOn) V.bloomT += dt;
-    V.bud = lerp(V.bud, budTarget(), 1 - Math.exp(-dt * 2)); flower.scale.setScalar(Math.max(0.001, V.bud));
+    V.bud = lerp(V.bud, budTarget(), 1 - Math.exp(-dt * 2)); flower.scale.setScalar(Math.max(0.001, V.bud)); flower.visible = V.bud > 0.0015;
     const open = bloomOn ? smooth(clamp((V.bloomT - 1.6) / 2.2, 0, 1)) : 0;
     sepals.concat(outer, inner).forEach(p => { const o = smooth(clamp(open * 1.3 - p.d * 0.3, 0, 1)); p.tilt.rotation.x = lerp(p.open0, p.open1, o) + (open > 0.99 ? Math.sin(t * 1.5 + p.d * 6) * 0.03 : 0); });
-    rays.position.copy(tipQ.p); rays.material.opacity = bloomOn ? clamp((V.bloomT - 2.2) / 1.2, 0, 0.7) * (0.8 + Math.sin(t * 2) * 0.15) : 0; rays.material.rotation = t * 0.15;
-    butterflies.forEach((b, k) => { if (!b.g.visible) return; const a = t * (0.7 + k * 0.25) + k * 3, r = 1.8 + Math.sin(t * 0.6 + k) * 0.4, c = V3(); flower.getWorldPosition(c); b.g.position.set(c.x + Math.cos(a) * r, c.y + 0.4 + Math.sin(t * 2 + k) * 0.5, c.z + Math.sin(a) * r); b.g.rotation.y = -a; const f = Math.sin(t * 22 + k) * 0.9; b.wings[0].rotation.z = f; b.wings[1].rotation.z = -f; });
+    rays.position.copy(tipQ.p); rays.material.opacity = bloomOn ? clamp((V.bloomT - 2.2) / 1.2, 0, 0.7) * (0.8 + Math.sin(t * 2) * 0.15) : 0; rays.material.rotation = t * 0.15; rays.visible = rays.material.opacity > 0;
+    butterflies.forEach((b, k) => { if (!b.g.visible) return; const a = t * (0.7 + k * 0.25) + k * 3, r = 1.8 + Math.sin(t * 0.6 + k) * 0.4, c = flower.getWorldPosition(bfV); b.g.position.set(c.x + Math.cos(a) * r, c.y + 0.4 + Math.sin(t * 2 + k) * 0.5, c.z + Math.sin(a) * r); b.g.rotation.y = -a; const f = Math.sin(t * 22 + k) * 0.9; b.wings[0].rotation.z = f; b.wings[1].rotation.z = -f; });
     V.shiver = Math.max(0, V.shiver - dt * 1.8);
     plant.rotation.z = (reduced ? 0 : Math.sin(t * 0.8) * 0.012) + Math.sin(t * 38) * V.shiver * 0.02;
-    goalStar.material.opacity = bloomOn ? 0 : 0.55 + Math.sin(t * 2.4) * 0.3;
+    goalStar.material.opacity = bloomOn ? 0 : 0.55 + Math.sin(t * 2.4) * 0.3; goalStar.visible = !bloomOn;
     clouds.forEach(c => { c.position.x += c.userData.v * dt; if (c.position.x > 26) c.position.x = -26; });
     tickParticles(dt);
     // The guide perches on the newest leaf beside the stalk, clear of the labels and of what the leaves carry, and
@@ -515,14 +543,13 @@ const PlantView = (() => {
     }
     // What sits on the leaves rides on them as they sway. Prizes still to win wait in their bubbles above where
     // their leaf will grow, and a prize just won unlocks onto its leaf.
-    plant.updateMatrixWorld(true);
-    LEAVES.forEach(lf => { if (lf.t > 0.02) planG.worldToLocal(lf.roll.localToWorld(lf.pad.copy(lf.padL))); else lf.pad.copy(lf.padS); });
+    LEAVES.forEach(lf => { if (lf.t > 0.02) { lf.roll.updateWorldMatrix(true, false); planG.worldToLocal(lf.roll.localToWorld(lf.pad.copy(lf.padL))); } else lf.pad.copy(lf.padS); });
     for (const p of prizeGs) { hover(p.g, LEAVES[p.i], p.i); p.m.rotation.y = t * 0.7 + p.i; faceBubble(p, p.i); if (p.m.userData.tick) p.m.userData.tick(t, dt); }
     for (const it of ITEMS) {
       if (!it) continue; const lf = LEAVES[it.i], g = it.g;
-      if (it.state === 'locked') { hover(g, lf, it.i); g.scale.setScalar(1); it.m.rotation.y = t * 0.7 + it.i; faceBubble(it, it.i); }
+      if (it.state === 'locked') { hover(g, lf, it.i); g.scale.setScalar(1); g.visible = true; it.m.rotation.y = t * 0.7 + it.i; faceBubble(it, it.i); }
       else if (it.state === 'unlocking') unlockStep(it, lf, dt);
-      else { g.position.copy(lf.pad); g.scale.setScalar(Math.max(0.001, outBack(smooth(clamp((lf.t - 0.7) / 0.3, 0, 1))))); it.m.rotation.y = t * (it.kind === 'xp' ? 1.2 : 0.5) + it.i; if (it.badge) it.badge.position.y = 0.78 + Math.sin(t * 2.2 + it.i) * 0.03; }
+      else { const sc = outBack(smooth(clamp((lf.t - 0.7) / 0.3, 0, 1))); g.position.copy(lf.pad); g.scale.setScalar(Math.max(0.001, sc)); g.visible = sc > 0; it.m.rotation.y = t * (it.kind === 'xp' ? 1.2 : 0.5) + it.i; if (it.badge) it.badge.position.y = 0.78 + Math.sin(t * 2.2 + it.i) * 0.03; }
       if (it.kind === 'prize' && it.m.userData.tick) it.m.userData.tick(t, dt);
     }
     // Camera: follows the tip; a drag, swipe or scroll looks around and it drifts back after a while
@@ -532,7 +559,7 @@ const PlantView = (() => {
     if (bloomOn && !drag && !reduced) CAM.az += dt * 0.18; else if (!reduced && !drag) CAM.az += (0.35 + Math.sin(t * 0.12) * 0.25 - CAM.az) * dt * 0.2;
     cam.position.set(Math.sin(CAM.az) * CAM.dist, CAM.y + CAM.dist * lerp(0.16, 0.3, bl), Math.cos(CAM.az) * CAM.dist); cam.lookAt(0, CAM.y, 0);
     sky.position.copy(cam.position); sunSprite.position.set(cam.position.x - 40, cam.position.y + 30, cam.position.z - 90);
-    G3.inkFor(R); R.render(scene, cam);
+    pace(now); G3.inkFor(R); R.render(scene, cam);
     if (mode === 'tree') placeTags();
   }
 
