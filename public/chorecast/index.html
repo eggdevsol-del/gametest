@@ -231,9 +231,9 @@ p{margin:0}
 /* ---------- Money tab ---------- */
 .tab-head{padding:8px 4px 20px;container-type:inline-size}
 .tab-num{font:200 clamp(64px,14vw,130px)/1 var(--f-round);letter-spacing:-.05em;margin:12px 0 6px;white-space:nowrap}
-.masonry{columns:3 320px;column-gap:16px}
-.masonry>*{break-inside:avoid;margin-bottom:16px;display:block;width:100%}
-.masonry.two{columns:2 340px}
+.masonry{display:flex;flex-direction:column;gap:16px}
+.masonry.laid{flex-direction:row;align-items:flex-start}
+.mcol{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:16px}
 .jars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;text-align:center}
 .jar{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
 .jar-svg{width:100%;max-width:84px;height:auto;margin-bottom:4px;overflow:visible}
@@ -2952,6 +2952,17 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
   // the page a frame behind from a fixed overlay. Every frame renders the visible models one at a time into the corner
   // of this shared WebGL canvas and copies each into its slot. PAD leaves room for hops, flags and balloons.
   const PAD = 0.14;
+  // Safari holds a drawImage from a WebGL canvas until the page next paints, so the clear at the end of the frame wiped
+  // whichever model was copied last (the Give jar, or a kid card's lone island). An ImageBitmap is taken on the spot.
+  let snap = typeof createImageBitmap === 'function';
+  function blit(o, cw, ch) {
+    if (!snap) { o.g.clearRect(0, 0, cw, ch); o.g.drawImage(cv, 0, cv.height - ch, cw, ch, 0, 0, cw, ch); return; }
+    const n = o.shot = (o.shot || 0) + 1;
+    createImageBitmap(cv, 0, cv.height - ch, cw, ch).then(b => {
+      if (n > (o.shown || 0) && o.cv.width === cw && o.cv.height === ch) { o.shown = n; o.g.clearRect(0, 0, cw, ch); o.g.drawImage(b, 0, 0); }
+      b.close();
+    }, () => { snap = false; kick(); });
+  }
   function frame(now) {
     raf = 0; const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
     const top = cv.classList.contains('top'), pr = R.getPixelRatio(), hold = Stage.active || Studio.open; let any = false;
@@ -2972,7 +2983,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
       Object.assign(cam, { left: 0, right: w, top: 0, bottom: -h }); cam.updateProjectionMatrix();
       R.setViewport(0, 0, w, h); R.clear(); inkFor(R); INK.uniforms.uRes.value.set(cw, ch);
       R.render(scene, cam);
-      o.g.clearRect(0, 0, cw, ch); o.g.drawImage(cv, 0, cv.height - ch, cw, ch, 0, 0, cw, ch);
+      blit(o, cw, ch);
       o.obj.visible = false;
     }
     if (drops.length) stepRain(dt); else { rainM.count = 0; if (top) cv.classList.remove('top'); }
@@ -3528,6 +3539,22 @@ function Pane3D(canvas, th) {
 const UI = { screen: 'boot', kidId: null, tab: 'today', ptab: 'review', pkid: null, unlocked: false, wiz: null, sheet: null, gate: null, tips: {}, quotes: {}, redoFor: null, tm: 12, skyProgress: null, confirmRemove: null };
 let rq = 0;
 function scheduleRender() { Store.ver++; if (rq) return; rq = requestAnimationFrame(() => { rq = 0; render(); }); }
+// Card columns, filled top to bottom in order and balanced the way CSS columns balance them. CSS columns themselves
+// can't be used: Safari paints a frosted-glass card that starts a new column at the foot of the column before it.
+function layMasonry(root) {
+  for (const m of $$('.masonry', root)) {
+    const two = m.classList.contains('two'), gap = 16, n = clamp(Math.floor((m.clientWidth + gap) / ((two ? 340 : 320) + gap)), 1, two ? 2 : 3);
+    let cols = $$(':scope > .mcol', m);
+    const cards = cols.length ? cols.flatMap(c => [...c.children]) : [...m.children];
+    if (cols.length !== n) { m.textContent = ''; m.classList.add('laid'); cols = Array.from({ length: n }, () => m.appendChild(Object.assign(document.createElement('div'), { className: 'mcol' }))); cols[0].append(...cards); }
+    const h = cards.map(c => c.offsetHeight);
+    const cut = H => { const g = [[]]; let y = 0; h.forEach((x, i) => { if (y && y + gap + x > H) { g.push([]); y = 0; } y += (y && gap) + x; g[g.length - 1].push(cards[i]); }); return g; };
+    let lo = Math.max(0, ...h), hi = h.reduce((s, x) => s + x + gap, 0);
+    while (lo < hi) { const mid = (lo + hi) >> 1; if (cut(mid).length <= n) hi = mid; else lo = mid + 1; }
+    const want = cut(lo);
+    if (want.some((g, i) => g.length !== cols[i].children.length || g.some((c, j) => cols[i].children[j] !== c))) want.forEach((g, i) => cols[i].append(...g));
+  }
+}
 function render() {
   if (Stage.active) { Stage.dirty = true; return; }
   const app = $('#app');
@@ -3541,6 +3568,7 @@ function render() {
   else if (UI.screen === 'signin') html = viewSignin();
   else html = viewWho();
   app.innerHTML = html;
+  layMasonry(app);
   $$('[data-keep]', app).forEach(el => { if (keep[el.dataset.keep]) el.scrollLeft = keep[el.dataset.keep]; });
   hydratePhotos(app);
   paintSky();
@@ -5281,7 +5309,8 @@ document.addEventListener('keydown', e => {
   if (UI.screen === 'gate' && e.key === 'Backspace') ACT.pinDel();
 });
 document.addEventListener('pointerdown', () => { if (Stage.active) Sound.ensure(); }, { passive: true });
-addEventListener('resize', () => { Stage.panes.forEach(p => { if (p.fx) p.fx.size(); if (p.more) p.more(); }); if (!Stage.active && UI.screen !== 'boot') paintSky(); });
+addEventListener('resize', () => { Stage.panes.forEach(p => { if (p.fx) p.fx.size(); if (p.more) p.more(); }); if (!Stage.active && UI.screen !== 'boot') { paintSky(); layMasonry($('#app')); } });
+if (document.fonts) document.fonts.ready.then(() => layMasonry($('#app')));
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { if (Stage.active && !Stage.paused && Stage.panes.some(p => p.phase === 'play')) pauseStage(true); }
   else { if (Stage.active && Stage.wake == null) requestWake(); if (Store.ready) { buildMarket(); applyInterest(); scheduleRender(); } }
