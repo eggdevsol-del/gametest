@@ -27,9 +27,10 @@ A kid's band comes from their age. A grown-up can shift it one band up or down.
 | `sprouts` | 7 to 9 |
 | `builders` | 10 to 12 |
 | `makers` | 13 to 15 |
-| `launchers` | 16 to 18 |
 
-Each band has 4 units of 4 lessons, so a tree is 64 lessons and a grown-up can read one band in about half an hour. The checker fails if a band has a different shape. Lessons in a unit open one at a time, and a unit opens once every lesson in the unit before it is passed. Each finished unit also has a unit challenge.
+Kids 16 and over use the Makers band. Chorecast isn't made for older teens.
+
+Each band has 8 units of 6 lessons, so a tree is 144 lessons. The checker fails if a band has a different shape. A tree still being reviewed is cut to fewer lessons in its review file, and only goes live in full. Lessons in a unit open one at a time, and a unit opens once every lesson in the unit before it is passed. Each finished unit also has a unit challenge.
 
 ## What lessons cover
 
@@ -37,7 +38,7 @@ Keep every lesson to things a kid can practise in Chorecast: earning from chores
 
 Lessons never cover sex or consent, alcohol, drugs or vaping, mental health crises, body image, politics or law, Treaty or Indigenous history, religion, or real people and brands. Those belong with families and schools.
 
-No facts that go out of date: no tax rates, wages, thresholds, laws, phone numbers, websites or recent dates. Use made-up round prices ("a $20 game") so nothing needs fact-checking and both countries read the same.
+No facts that go out of date: no tax rates, wages, thresholds, laws, phone numbers, websites or recent dates. The one exception is Money Sense's Makers band, which a grown-up asked to keep in full: its lessons on bank accounts, your first pay, scams and worry use {nz:…~au:…} lines with tax numbers, KiwiSaver and super rules, helpline numbers and websites, and need checking each year. Use made-up round prices ("a $20 game") so nothing needs fact-checking and both countries read the same.
 
 The app has no way for kids to spend or give money themselves. A grown-up pays out the Spend or Give jar under Grown-ups, then Pay out cash, so lessons say "ask a grown-up to pay it out".
 

@@ -28,17 +28,17 @@ const ALL_TREES = [
 ];
 const TREES = ALL_TREES.filter(t => LIVE.includes(t.id));
 const TREE = Object.fromEntries(TREES.map(t => [t.id, t]));
+// Kids 16 and up use the Makers band: older teens aren't who Chorecast is for.
 const BANDS = [
   { id: 'sprouts', name: 'Sprouts', ages: '7 to 9', words: 10 },
   { id: 'builders', name: 'Builders', ages: '10 to 12', words: 14 },
   { id: 'makers', name: 'Makers', ages: '13 to 15', words: 18 },
-  { id: 'launchers', name: 'Launchers', ages: '16 to 18', words: 22 },
 ];
 const BAND_IX = Object.fromEntries(BANDS.map((b, i) => [b.id, i]));
 const GSET = () => ({ cap: 20, off: {}, band: {}, country: 'nz', living: true, readAloud: true, ...((S().growth) || {}) });
 function bandOf(kid) {
-  const age = kid.age || 9, base = age <= 9 ? 0 : age <= 12 ? 1 : age <= 15 ? 2 : 3, shift = GSET().band[kid.id] || 0;
-  return BANDS[clamp(base + shift, 0, 3)].id;
+  const age = kid.age || 9, base = age <= 9 ? 0 : age <= 12 ? 1 : 2, shift = GSET().band[kid.id] || 0;
+  return BANDS[clamp(base + shift, 0, BANDS.length - 1)].id;
 }
 // XP rules from the plan: modest, capped, and only for correct, completed learning.
 const XP = { lesson: 40, perfect: 10, replay: 10, card: 3, cardsPerDay: 15, echo: 15, caseStudy: 50, challenge: 120, moment: 10, story: 20, path: 500, dayCap: 250, assignedMax: 50 };
@@ -1022,11 +1022,11 @@ function quizAt(R) {
   return { n: qs.length, i: qs.filter(i => i <= R.k).length, right: qs.filter(i => i <= R.k && R.res[i] && R.res[i].ok).length, left: qs.filter(i => i > R.k).length };
 }
 /* Explanations (learn cards, why an answer was wrong, what a choice led to) hold their Next button until there's
-   been time to read them: about 90 words a minute at 7 to 9, 140 at 10 to 12, 190 at 13 to 15 and 230 at 16 to 18.
+   been time to read them: about 90 words a minute at 7 to 9, 140 at 10 to 12, and 190 at 13 to 15.
    The youngest hear them read out when read-aloud is on, so for them it's the voice's pace (about 130 words a
    minute) and Next also waits for the voice to finish. The button fills up as the time passes. A hold is kept per
    step, so drawing the step again doesn't restart it. */
-const WPM = { sprouts: 90, builders: 140, makers: 190, launchers: 230 }, VOICE_WPM = 130;
+const WPM = { sprouts: 90, builders: 140, makers: 190 }, VOICE_WPM = 130;
 function holdNext(btn, key, kid, text) {
   const R = Grow.run, words = String(text || '').split(/\s+/).filter(w => /\w/.test(w)).length; if (!btn || !R || !words) return;
   const listen = GSET().readAloud && bandOf(kid) === 'sprouts' && 'speechSynthesis' in window;

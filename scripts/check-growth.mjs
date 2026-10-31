@@ -15,7 +15,7 @@ const ctx = { window: { Chorecast: C }, document: { createElement: el, head: el(
 ctx.window.window = ctx.window; vm.createContext(ctx); vm.runInContext(code, ctx);
 const { parsePack, parseMoments, parseCases } = ctx.window.Growth._debug;
 
-const UNITS = 4, PER_UNIT = 4;
+const UNITS = 8, PER_UNIT = 6;
 const GENS = ['change', 'add', 'percent', 'round', 'scale', 'gst', 'time', 'compound', 'unit', 'split'];
 const problems = [];
 function checkItem(it, where) {

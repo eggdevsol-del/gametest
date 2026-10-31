@@ -3,6 +3,10 @@
 @unit 2 | Goals and plans | Big goals, small steps
 @unit 3 | Best value | Use unit prices to spot the real deal
 @unit 4 | Advertising | How ads try to change your mind
+@unit 5 | Interest | How banks pay you for saving
+@unit 6 | Ways to pay | Cash, cards, phones and pay-later
+@unit 7 | Earning more | Jobs, side hustles and pricing your work
+@unit 8 | Money mistakes | What to do when money goes wrong
 
 @lesson 1.1 | What is a budget? | 📋 | bank
 hook: Two kids get the same pocket money. One always runs out. One never does. What's the difference?
@@ -52,6 +56,30 @@ check: tf | Small spends don't matter. | false | Small spends add up quickly.
 home: Write down everything you spend from your Spend jar this week. Any surprises?
 skill: tracking
 
+@lesson 1.5 | Split it three ways | 🍕 | bank
+hook: If you got $20, how much should you save?
+learn: One simple rule: half for needs, almost a third for wants, and a fifth to save.
+learn: That's 50% for needs, 30% for wants and 20% for savings.
+learn: It's a starting point, not a law. Change it to fit your goals.
+try: $10 × 20% = $2 :: gap | 20% of $20 = $_ | 4
+play: gen | split | 4
+check: gap | 50% of $40 = $_ | 20
+check: mcq | In the 50/30/20 idea, what is the 20% for? | Savings* | Wants | Needs
+check: slider | You earn $30. About how much is 30%? | 0 | 30 | 9 | $ | 1 | 1
+home: Try the 50/30/20 split on your next pocket money.
+skill: percent
+
+@lesson 1.6 | When money runs out | 😬 | home
+hook: It's Wednesday. You've spent the whole week's money. Now what?
+learn: Everyone gets it wrong sometimes. The fix is to learn, not to panic.
+learn: Pause spending, look at what happened, and plan better next time.
+play: chat | Your friend wants to borrow $10 again | them: Hey, can you lend me $10? I'll pay you back next week. | me: I can't this week, my budget's tight*/Sure, here's all my money/I'll borrow it from my mum for you | them: Aw, come on. You did last time. | me: Last time took a month to come back. Maybe next week*/Fine, take it/Never ask me again
+check: mcq | You've run out mid-week. What's the best first step? | Stop spending and look at what happened* | Borrow money straight away | Pretend it didn't happen
+check: tf | Saying no to lending money can be the kind thing to do. | true
+check: mcq | What helps next week go better? | A plan with some money spare* | Spending faster | Not looking at your money
+home: Think of one change that would make your money last all week.
+skill: budget
+
 @lesson 2.1 | Goals you can reach | 🎯 | bank
 hook: "I want lots of money" or "I'll save $120 for a skateboard by March." Which goal works?
 learn: Good goals are specific: what it is, how much it costs and when you want it.
@@ -96,6 +124,28 @@ check: mcq | When should you put aside goal money? | As soon as you get paid* | 
 check: gap | You get $20 and save $8 for your goal. You have $_ to plan | 12
 home: On your next Chorecast payday, check your savings go aside first. Then plan your Spend jar.
 skill: budgeting
+
+@lesson 2.5 | Track your progress | 📈 | bank
+hook: How do you know if you're on track?
+learn: Track your savings each week. A chart or a jar with lines works well.
+learn: Compare where you are with where you planned to be.
+learn: Seeing progress keeps you motivated.
+play: order | Track a saving goal | Write your goal and weekly amount; Save each week; Mark your total on a chart; Compare it with your plan; Change your plan if you fall behind
+check: mcq | Why track your savings? | To see if you're on track* | To make it look nice | To spend more
+check: tf | Seeing progress can keep you motivated. | true
+home: Make a progress chart for your saving goal in Chorecast or on paper.
+skill: goals
+
+@lesson 2.6 | Short, medium and long | 🗓️ | bank
+hook: Some goals take a week. Some take years. How should you plan them?
+learn: Short-term goals take weeks, like a $15 book.
+learn: Medium-term goals take months, like a $200 bike.
+learn: Long-term goals take years, like a car or a trip. They need steady saving, and maybe investing.
+play: sort | Short-term, Medium-term, Long-term | A $15 book next week=Short-term; A $200 bike in 6 months=Medium-term; A first car at 18=Long-term; A movie ticket on Saturday=Short-term; A school camp in 4 months=Medium-term; A big trip after school=Long-term | How long will it take?
+check: mcq | A first car at 18 is a... | Long-term goal* | Short-term goal | Not a goal
+check: tf | Long-term goals need steady saving. | true
+home: Write one short, one medium and one long-term goal with a grown-up.
+skill: goals
 
 @lesson 3.1 | What is a unit price? | ⚖️ | stall
 hook: A small bag of chips is $2. A big bag is $5. Which is the better deal?
@@ -148,6 +198,30 @@ check: tf | The lowest price always means the best value. | false | How long it 
 home: Before your next Spend jar buy, work out its cost per use.
 skill: value
 
+@lesson 3.5 | Shop around | 🗺️ | stall
+hook: The same headphones cost $49 at one shop and $35 at another. Would you check?
+learn: Different shops charge different prices for the same thing.
+learn: Checking two or three shops can save real money, especially on big buys.
+learn: Count the extras too, like delivery or a bus fare to get there.
+play: route | Match each shop to what you would really pay for the $40 game | Online shop, $35 plus $8 delivery=$43; Town shop, $40 and no extras=$40; Mall shop, $38 plus $4 bus fare=$42
+check: mcq | Headphones are $35 online plus $8 delivery, or $40 at a shop nearby. Which costs less? | The shop nearby* | Online | They are the same
+check: tf | Shopping around matters most for big buys. | true
+check: mcq | What else should you count when comparing prices? | Delivery and travel costs* | The colour of the shop | How busy it is
+home: Pick one thing your family wants and check its price at three shops.
+skill: compare
+
+@lesson 3.6 | Value detective | 🕵️ | stall
+hook: Your favourite biscuits cost the same as last year. But are there fewer in the pack?
+learn: Sometimes packs get smaller but the price stays the same. People call it shrinkflation.
+learn: Checking the unit price catches it.
+learn: A "sale" sign doesn't always mean a good price. Compare it with the normal price.
+play: mystery | It's on shelf labels at big supermarkets; It shows the cost per 100 g, per litre or per item; It helps you compare big and small packs; It catches packs that quietly shrink | The unit price* | The barcode | The best-before date
+check: mcq | A biscuit pack shrinks from 250 g to 200 g. The price stays $4. What happened? | You pay more per biscuit* | You got a deal | Nothing changed
+check: tf | A big red "sale" sign always means a good price. | false | Compare with the normal price and with other shops.
+check: price | Which juice is better value? | 1 litre bottle:3.5:1000:ml; 2 litre bottle:6:2000:ml
+home: Be the value detective on your next family shop. Find the best-value pasta.
+skill: unitprice
+
 @lesson 4.1 | Ads are everywhere | 📺 | online
 hook: How many ads did you see today? Most people see hundreds without noticing.
 learn: An ad is a message someone paid for, to get you to buy, use or think something.
@@ -192,4 +266,303 @@ check: mcq | You really want something after an ad. What's a smart first step? |
 check: tf | Waiting a day helps you see if you really want it. | true
 home: Next time an ad makes you want something, wait a day. If you still want it, make it your Saving goal.
 skill: advertising
+
+@lesson 4.5 | Influencers and sponsored posts | 🤳 | online
+hook: Your favourite creator loves a new energy snack. Are they just being honest?
+learn: Influencers are often paid, or given free stuff, to talk about products.
+learn: Look for labels like "ad", "sponsored", "paid partnership" or "gifted".
+learn: Advertising rules say paid posts should be clearly labelled, but not everyone follows them.
+play: sort | Probably an ad, Probably not | A post tagged "paid partnership"=Probably an ad; A video with a discount code for you=Probably an ad; Your friend showing a book they borrowed=Probably not; A creator unboxing "gifted" sneakers=Probably an ad; A news report about a storm=Probably not; A post saying "use my link to buy"=Probably an ad | Ad or not?
+check: mcq | Which label shows a post is an ad? | "Sponsored"* | "Cool" | "Today"
+check: tf | Influencers can be paid to say they love something. | true
+home: Look at a creator's post with a grown-up. Can you find an ad label?
+skill: advertising
+
+@lesson 4.6 | Free isn't always free | 🆓 | online
+hook: "Free app!" Then it asks for your email, your location and your birthday. Is it really free?
+learn: Some "free" things make money from your attention or your information.
+learn: Your data, like what you watch and click, helps companies show you more ads.
+learn: Check what a free thing wants before you say yes, and ask a grown-up.
+play: mystery | You don't pay money for it; It shows you lots of ads; It keeps track of what you watch and click; Companies pay it to reach you | A "free" app* | A library book | A piggy bank
+check: mcq | How do some free apps make money? | Showing ads and using your data* | Magic | They don't
+check: tf | "Free" things can still cost you something, like your data. | true
+home: Check what information one app on a family device asks for, with a grown-up.
+skill: advertising
+
+@lesson 5.1 | What is interest? | 🏦 | bank
+hook: Leave $100 in a savings account for a year and get back $104. Where did the extra $4 come from?
+learn: Interest is money a bank pays you for keeping your money with them.
+learn: Banks lend your savings to other people and charge them interest. They share some of it with you.
+learn: Interest rates are shown as a percent per year, like 4% a year.
+play: match | Match each word to its meaning | Interest=Money the bank pays you for saving; Interest rate=How much, as a percent per year; Savings account=An account that pays interest; Balance=How much money is in your account
+check: mcq | What is interest on savings? | Money the bank pays you for keeping money there* | A fee you pay the bank | A kind of coin
+check: tf | Interest rates are usually shown per year. | true
+check: mcq | How can banks afford to pay you interest? | They lend your savings and charge borrowers more* | They print money | It's a gift from the government
+home: Ask a grown-up what interest rate their savings account pays.
+skill: interest
+
+@lesson 5.2 | Working out interest | ➗ | bank
+hook: $200 at 5% a year. How much interest after one year?
+learn: To find a percent of a number, divide by 100, then multiply.
+learn: 5% of $200 is $200 ÷ 100 × 5 = $10.
+learn: That's for one year. Half a year would be about half as much.
+try: 5% of $200 = $10 :: gap | 4% of $300 = $_ | 12
+play: gen | percent | 4
+check: gap | 3% of $500 = $_ | 15
+check: mcq | 10% of $50 a year is… | $5* | $50 | $10
+check: tf | Interest for half a year is about half of a full year's interest. | true
+home: Work out a year's interest on your savings at 4%.
+skill: percent
+
+@lesson 5.3 | Interest on interest | ❄️ | bank
+hook: In year two, does the bank pay interest on your interest too?
+learn: Yes. With compound interest, the interest you earned gets added to your savings.
+learn: Next year, you earn interest on the bigger amount.
+learn: $100 at 10% becomes $110, then $121, then $133.10. It snowballs.
+try: $100 at 10% for 2 years = $121 :: gap | $200 at 10% for 2 years = $_ | 242
+play: compound | Watch $100 grow at 5% a year for 10 years | 100 | 5 | 10
+check: mcq | What is compound interest? | Interest earned on your interest too* | Interest that shrinks | A bank fee
+check: gap | $100 at 10% after one year = $_ | 110
+check: tf | Compound interest grows faster over time. | true
+home: Work out $50 at 10% for three years, year by year.
+skill: compound
+
+@lesson 5.4 | Choosing a savings account | 🔍 | bank
+hook: One account pays 1%. Another pays 4%, but only if you add money every month and take none out. Which would you pick?
+learn: Rates can be different between banks and between accounts.
+learn: Some accounts pay bonus interest if you follow rules, like adding money each month and not withdrawing.
+learn: Banks change their rates over time, so check now and then.
+play: debate | Is a bonus saver account a good choice for your savings? | Yes, if you can stick to the rules and won't need the money often* | No. Higher rates are always a trick | If you take money out often, you'd lose the bonus and get a low rate. Then a simpler account might suit you better.
+check: mcq | How do you get bonus interest? | Follow the rules, like adding money each month* | Ask nicely | Spend more
+check: tf | Banks can change their interest rates. | true
+check: gap | 4% of $100 for a year is $_ | 4
+home: Compare the savings rates at two banks with a grown-up.
+skill: banking
+
+@lesson 5.5 | Borrowers pay interest | 💳 | bank
+hook: If the bank pays savers interest, who pays the bank?
+learn: People who borrow money pay interest to the bank.
+learn: Borrowers usually pay a higher rate than savers get. The gap is how banks make money.
+learn: So saving earns interest, and borrowing costs interest.
+play: sort | You earn interest, You pay interest | Money in a savings account=You earn interest; A loan for a car=You pay interest; A term deposit=You earn interest; Credit card debt=You pay interest; A kids' bonus saver=You earn interest; A home loan=You pay interest | Earn or pay?
+check: mcq | Who pays interest to the bank? | Borrowers* | Savers | Nobody
+check: tf | Borrowers usually pay a higher rate than savers earn. | true
+check: mcq | How do banks make money from interest? | They charge borrowers more than they pay savers* | They keep all the savings | They don't
+home: Ask a grown-up whether they earn interest, pay interest, or both.
+skill: interest
+
+@lesson 5.6 | Tax on interest | 🧾 | townhall
+hook: Interest is income. Does the government want a share?
+learn: Yes. Interest counts as income, so tax can be taken from it.
+learn: {nz:Give your bank your IRD number. If you don't, they take 45% of your interest as tax.~au:Give your bank your Tax File Number (TFN). If you don't, they may take 47% of your interest as tax.}
+learn: {nz:With your IRD number, most kids pay the lowest rate.~au:If you're under 16 and earn less than $420 interest a year, you don't need to give one.}
+play: mcq | {nz:What happens if your bank doesn't have your IRD number?~au:What happens if your bank doesn't have your TFN?} | {nz:It takes 45% of your interest as tax~au:It may take 47% of your interest as tax}* | Nothing at all | It pays you double
+check: tf | Interest you earn counts as income. | true
+check: mcq | {nz:Which number should you give your bank?~au:Which number should you give your bank?} | {nz:Your IRD number~au:Your Tax File Number}* | Your phone PIN | Your school ID
+check: mcq | Who should help you find your tax number? | A grown-up you trust* | A stranger online | Nobody
+home: Ask a grown-up whether your savings account has your {nz:IRD number~au:TFN}.
+skill: tax
+
+@lesson 6.1 | Paying with cash | 💵 | bank
+hook: Cash is getting rarer. Why do some people still like it?
+learn: With cash, you can see exactly how much you have left. When it's gone, it's gone.
+learn: Paying $20 for something that costs $16.50 should get you $3.50 change. Always count it.
+learn: Cash can be lost or stolen, and many online shops won't take it.
+try: Pay $10 for $7.50 and get $2.50 change :: gap | Pay $20 for $14 and get $_ change | 6
+play: gen | change | 4
+check: mcq | What's one good thing about cash? | You can see how much is left* | It works in every online shop | It can't be lost
+check: gap | You pay $5 for a $3.20 snack. Your change is $_ | 1.80
+home: Next time you pay with cash, count your change before you leave the counter.
+skill: payments
+
+@lesson 6.2 | Debit cards | 💳 | bank
+hook: Is a debit card free money?
+learn: A debit card spends money that's already in your bank account. It's your own money.
+learn: You can tap or put in your PIN at the shop. Keep your PIN secret and cover the keypad.
+learn: Check your bank app, because taps happen so fast you can lose track of your spending.
+play: sort | Good habit, Risky habit | Covering the keypad for your PIN=Good habit; Telling a friend your PIN=Risky habit; Checking your bank app each week=Good habit; Writing your PIN on the card=Risky habit; Locking the card in the app if you lose it=Good habit; Lending your card to someone=Risky habit | Good or risky?
+check: mcq | Where does debit card money come from? | Your own bank account* | The bank lends it to you | The shop gives it to you
+check: tf | You should tell a friend your PIN in case you forget it. | false | Your PIN is only for you. Banks never ask for it.
+home: Ask a grown-up to show you how they check their spending in a bank app.
+skill: payments
+
+@lesson 6.3 | Phone and watch pay | 📱 | online
+hook: Some people pay by tapping their phone. Where is the money coming from?
+learn: Phone pay uses a card stored on the phone. The money still comes from that card's account.
+learn: A phone lock, like a code or a face scan, stops other people paying with it.
+learn: Because it's so easy, it's easy to overspend. Check what you've spent each week.
+play: path | Your friend wants to borrow your unlocked phone to buy a game. | Say no, and keep your phone locked => good: Your card stays safe. | Hand it over while you go to the toilet => bad: They could buy anything on your card. | Give them your phone code => bad: Now they can pay with your phone any time.
+check: mcq | When you pay by phone, where does the money come from? | The card saved on the phone* | The phone company pays | It's free
+check: tf | A phone lock helps stop other people using your money. | true
+home: With a grown-up, look at how a phone keeps its payment cards locked.
+skill: payments
+
+@lesson 6.4 | Credit cards | 🏦 | bank
+hook: A credit card lets you buy now with the bank's money. What's the catch?
+learn: A credit card is a loan. The bank pays the shop, and you pay the bank back later.
+learn: If you pay it all back on time, there's usually no interest. If not, interest gets added, often about 20% a year.
+learn: You need to be 18 to get your own credit card.
+try: $100 left owing at 20% a year adds about $20 in a year :: gap | $200 left owing at 20% a year adds about $_ in a year | 40
+play: debate | Are credit cards bad? | They're a tool. They're fine if you pay the full amount every month, and costly if you don't* | They're always free money | Some people prefer debit cards so they can never owe money. That's a fair choice too.
+check: mcq | What is a credit card? | A loan you pay back later* | Your own savings | A gift from the bank
+check: tf | Leaving money owing on a credit card can cost you interest. | true
+home: Ask a grown-up whether they use a debit card, a credit card or both, and why.
+skill: borrowing
+
+@lesson 6.5 | Buy now, pay later | ⏳ | bank
+hook: "Pay in 4 easy payments!" Is that easier than it sounds?
+learn: Buy now, pay later splits a price into parts, often 4 payments every 2 weeks.
+learn: A $120 jacket becomes 4 payments of $30. Miss one and there can be a late fee.
+learn: It's still borrowing. If you can't afford it now, splitting it doesn't make it cheaper.
+try: $80 in 4 payments is $20 each :: gap | $200 in 4 payments is $_ each | 50
+play: diff | Two ways to buy the same $120 jacket. Tap what's different with pay later. | Pay $120 today; Done straight away; No fees | Pay $30 today; Pay $30 more three more times; A late fee if you miss one
+check: mcq | A $60 game split into 4 payments costs how much each? | $15* | $60 | $4
+check: tf | Buy now, pay later is a kind of borrowing. | true
+home: Spot a "pay later" sign or button and talk with a grown-up about it.
+skill: borrowing
+
+@lesson 6.6 | Pick the best way to pay | 🤔 | stall
+hook: Cash, debit card, phone or pay later? Which one fits?
+learn: Cash is good when you want to stick to a set amount.
+learn: A debit card or phone pay is easy and spends money you already have.
+learn: Borrowing, like credit or pay later, costs extra if you miss a payment. Use it with care.
+play: match | Match the situation to a good way to pay | Spending money at the {nz:school gala~au:school fete}=Cash; Buying a book online with a grown-up=Debit card; Tapping at the supermarket with your own card=Phone or card; A big buy you can't afford yet=Wait and save
+check: mcq | You can't afford a game yet. What's the smartest choice? | Wait and save for it* | Use pay later and hope | Borrow from a friend
+check: tf | Paying with a phone uses money from a card or account. | true
+home: Next time you go shopping, guess which way your grown-up will pay, and ask why.
+skill: payments
+
+@lesson 7.1 | Where your money comes from | 💼 | bank
+hook: Pocket money, birthday money, chores, selling old toys. Which ones did you earn?
+learn: Earned money comes from work you do or things you sell. Gifts are given to you.
+learn: Earning more means doing more work, or doing work that's worth more to people.
+learn: Knowing where your money comes from helps you plan.
+play: sort | Earned, Given | Washing the neighbour's car=Earned; Birthday money from Nana=Given; Selling your old books=Earned; Pocket money for doing chores=Earned; Money from the tooth fairy=Given; Minding your cousin with a grown-up home=Earned | Earned or given?
+check: mcq | Which is earned money? | Pay for washing a car* | A birthday gift | Money found on the footpath
+check: tf | Knowing where your money comes from helps you plan. | true
+home: List where your money came from last month with a grown-up. How much was earned?
+skill: earning
+
+@lesson 7.2 | Per hour or per job? | ⏱️ | bank
+hook: Mowing pays $15 a lawn. Weeding pays $8 an hour. Which is better?
+learn: Per job pay is a set price for the whole job. Per hour pay depends on how long you work.
+learn: Per job suits you if you work fast. Per hour is fairer if a job could take ages.
+learn: To compare, work out how much each one pays for every hour.
+try: $15 for a 1-hour lawn is $15 an hour :: gap | $20 for a 2-hour job is $_ an hour | 10
+play: match | Match each job to what it pays per hour | Mow a lawn for $15, taking 1 hour=$15 an hour; Wash a car for $12, taking 2 hours=$6 an hour; Walk a dog for $5, taking 30 minutes=$10 an hour; Weed for 3 hours at $8 an hour=$8 an hour
+check: gap | $24 for a 3-hour job is $_ an hour | 8
+check: mcq | Which pays most per hour? | $10 for 30 minutes* | $10 for 2 hours | $10 for 3 hours
+home: Time one paid job you do, then work out what it paid per hour.
+skill: earning
+
+@lesson 7.3 | Takings minus costs | 🧮 | stall
+hook: You sold $40 of cupcakes. Did you make $40?
+learn: Takings are all the money customers pay you.
+learn: Costs are what you spent to make things, like flour, icing and cupcake cases.
+learn: Profit is takings minus costs. That's what you really earned.
+try: $40 takings − $12 costs = $28 profit :: gap | $30 takings − $9 costs = $_ profit | 21
+play: slider | You sold 20 cupcakes at $2 each. The ingredients cost $14. What's your profit? | 0 | 40 | 26 | $ | 0 | 1
+check: gap | $50 takings − $20 costs = $_ profit | 30
+check: tf | Takings and profit are the same thing. | false | Profit is what's left after you pay your costs.
+home: Work out the costs of something you could bake and sell, with a grown-up.
+skill: profit
+
+@lesson 7.4 | Sell what you don't use | ♻️ | stall
+hook: There's a scooter in the garage you haven't used for a year. Could it earn you money?
+learn: Selling things you don't use earns money and clears space.
+learn: Used things sell for less than new. Clean them up and take clear photos.
+learn: Ask a grown-up to help, and only sell to people your grown-up says are OK.
+play: island | What could you get back if you sold your island things? | resale
+check: mcq | What helps used things sell? | Cleaning them and taking clear photos* | Hiding the scratches | Asking more than the new price
+check: tf | Used things usually sell for less than new. | true
+home: Find one thing you don't use any more and ask a grown-up if you could sell it.
+skill: selling
+
+@lesson 7.5 | Is it worth your time? | ⌛ | bank
+hook: A job pays $5 but takes all of Saturday morning. Worth it?
+learn: Your time is valuable. Think about pay per hour, not just the total.
+learn: Some jobs are worth doing for other reasons, like helping someone or learning a skill.
+learn: Saying no to a job that pays too little is OK.
+play: debate | Should you take a job that pays $5 for 5 hours of raking? | Probably not. That's $1 an hour, and your time is worth more* | Yes. Any money is good money | If it's for a neighbour who needs help, or to learn a skill, it might still be worth it.
+check: gap | $5 for 5 hours is $_ an hour | 1
+check: mcq | Besides money, what's a good reason to take a job? | Learning a new skill* | Getting out of homework | There isn't one
+home: Talk with a grown-up about a job worth doing even though it pays little.
+skill: earning
+
+@lesson 7.6 | Grow your earnings | 📈 | bank
+hook: How could you earn more next year than this year?
+learn: Get better at a job, and you can charge a bit more.
+learn: Repeat customers and good reviews bring more work.
+learn: Save some of what you earn, and spend a little on tools that help you work.
+play: budget | Plan the $30 you earned this month | 30 | Vault=6; Spend=0; Invest=0; Give=0; Tools for your job=0 | A new lead for your dog-walking job:5
+check: mcq | What can help you earn more over time? | Getting better and getting good reviews* | Doing jobs badly | Charging strangers double
+check: tf | Saving some of what you earn helps your money grow. | true
+home: Pick one skill that could help you earn more, and plan how to practise it.
+skill: earning
+
+@lesson 8.1 | Everyone makes money mistakes | 🙃 | home
+hook: Your grown-up once spent $100 on a gadget they never used. Does that make them bad with money?
+learn: Everyone makes money mistakes, even grown-ups.
+learn: Small mistakes while you're young are cheap lessons.
+learn: What matters is noticing, fixing what you can and learning.
+play: sort | Mistake, Smart move | Spending all your money on day one=Mistake; Checking the price before buying=Smart move; Losing money out of your pocket at the park=Mistake; Waiting a day before a big buy=Smart move; Buying something just because a friend did=Mistake; Keeping your receipt=Smart move | Mistake or smart move?
+check: tf | Grown-ups never make money mistakes. | false | Everyone makes money mistakes. The trick is learning from them.
+check: mcq | What matters most after a money mistake? | Learning from it* | Hiding it | Feeling bad for ever
+home: Ask a grown-up about a money mistake they made and what they learned.
+skill: mistakes
+
+@lesson 8.2 | Lost money | 😟 | stall
+hook: You get to the shop and your $10 note is gone. What now?
+learn: Stay calm and retrace your steps.
+learn: Tell a grown-up, and ask the shop if anyone handed it in.
+learn: Next time, try a zip pocket, a wallet or a card your grown-up looks after with you.
+play: order | Lost money? Try these steps | Stay calm; Check your pockets and bag; Retrace your steps; Ask if anyone handed it in; Tell a grown-up and make a plan for next time
+check: mcq | You've lost money. What's the first step? | Stay calm* | Panic | Blame your friend
+check: tf | A zip pocket or wallet can help stop money getting lost. | true
+home: Choose a safe way to carry money with a grown-up.
+skill: mistakes
+
+@lesson 8.3 | Buyer's regret | 🎧 | stall
+hook: You bought headphones, and now you wish you hadn't. Can you take them back?
+learn: If something is faulty, you have rights under {nz:the Consumer Guarantees Act~au:Australian Consumer Law}. You can ask for a repair, replacement or refund.
+learn: If you just changed your mind, the shop doesn't have to take it back. Some shops will, if you have the receipt.
+learn: Keep receipts, and check the shop's returns policy before you buy.
+play: chat | You go back to the shop with headphones that stopped working | them: Hi, how can I help? | me: Hi. These headphones stopped working after a week. Here's my receipt.*/Give me my money NOW/Um, never mind | them: Sorry about that. Would you like a replacement or a refund? | me: A refund, please. Thanks for your help.*/Whatever/You should've sold me better ones
+check: mcq | Headphones stop working after a week. What can you ask for? | A repair, replacement or refund* | Nothing | Double your money back
+check: tf | Shops must always give refunds if you change your mind. | false | Only if the item is faulty, or the shop's own policy allows it.
+home: Find a receipt at home with a grown-up and read the returns policy on it.
+skill: consumer
+
+@lesson 8.4 | Overspent | 💸 | bank
+hook: It's Wednesday and your week's money is already gone. What now?
+learn: First, stop spending. Don't borrow to keep going.
+learn: Look at what you spent and find where it went.
+learn: Next week, plan before you spend, and leave a buffer.
+play: diff | Last week's plan, then what really happened. Tap the lines that went off plan. | Lunch $10; Snacks $3; Fun $5; Savings $2 | Lunch $10; Snacks $8; Fun $9; Savings $0
+check: mcq | You've run out of money mid-week. What should you do first? | Stop spending and look at where it went* | Borrow from friends | Spend your savings
+check: tf | Leaving a buffer can stop you running out. | true
+home: Look back at last week's spending with a grown-up. Did anything go off plan?
+skill: budget
+
+@lesson 8.5 | Tricked online | 🎣 | online
+hook: You paid $20 for a game skin from a website, and nothing arrived. What now?
+learn: If you think you've been scammed, tell a grown-up straight away. Don't hide it.
+learn: The faster you act, the better the chance of getting money back. A grown-up can call the bank.
+learn: Never pay again to "unlock" the first payment. That's part of the scam.
+play: path | You paid $20 for a skin from a website. Nothing arrived, and now they want $10 more to "release" it. | Tell a grown-up straight away => good: They can contact the bank and report it. Acting fast helps. | Pay the $10 to get it released => bad: Scammers keep asking for more. You'd lose $30. | Keep it secret because you feel silly => bad: Hiding it means nobody can help. Scammers trick grown-ups too.
+check: mcq | You think you've been scammed. What first? | Tell a grown-up straight away* | Pay more to fix it | Keep it secret
+check: tf | Scammers trick grown-ups too, so there's no shame in telling. | true
+home: Agree with a grown-up on what you'd do if you were tricked online.
+skill: scams
+
+@lesson 8.6 | Bounce back | 🔁 | bank
+hook: You made a money mistake. How do you make sure it doesn't happen again?
+learn: Work out what went wrong, without being too hard on yourself.
+learn: Make one small rule, like "I wait a day for anything over $10".
+learn: Then start again. Every week is a fresh start.
+play: build | Bounce back from a money mistake | Say what happened; Work out why it happened; Fix what you can; Make one new rule; Try again next week
+check: mcq | A helpful rule after a mistake might be... | "I wait a day for anything over $10"* | "I never look at prices" | "I hide receipts"
+check: tf | Every week is a fresh start with money. | true
+home: Write one money rule for yourself and stick it somewhere you'll see it.
+skill: mistakes
 

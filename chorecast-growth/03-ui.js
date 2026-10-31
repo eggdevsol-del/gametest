@@ -297,11 +297,11 @@ function quizAt(R) {
   return { n: qs.length, i: qs.filter(i => i <= R.k).length, right: qs.filter(i => i <= R.k && R.res[i] && R.res[i].ok).length, left: qs.filter(i => i > R.k).length };
 }
 /* Explanations (learn cards, why an answer was wrong, what a choice led to) hold their Next button until there's
-   been time to read them: about 90 words a minute at 7 to 9, 140 at 10 to 12, 190 at 13 to 15 and 230 at 16 to 18.
+   been time to read them: about 90 words a minute at 7 to 9, 140 at 10 to 12, and 190 at 13 to 15.
    The youngest hear them read out when read-aloud is on, so for them it's the voice's pace (about 130 words a
    minute) and Next also waits for the voice to finish. The button fills up as the time passes. A hold is kept per
    step, so drawing the step again doesn't restart it. */
-const WPM = { sprouts: 90, builders: 140, makers: 190, launchers: 230 }, VOICE_WPM = 130;
+const WPM = { sprouts: 90, builders: 140, makers: 190 }, VOICE_WPM = 130;
 function holdNext(btn, key, kid, text) {
   const R = Grow.run, words = String(text || '').split(/\s+/).filter(w => /\w/.test(w)).length; if (!btn || !R || !words) return;
   const listen = GSET().readAloud && bandOf(kid) === 'sprouts' && 'speechSynthesis' in window;
