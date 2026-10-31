@@ -830,7 +830,8 @@ function render() {
   if (v === 'crew') return viewCrew();
 }
 const RUN_VIEWS = ['lesson', 'challenge', 'review', 'moment', 'echo', 'story', 'case'];
-const plantQuiz = () => { const R = Grow.run; return Grow.view === 'lesson' && !!R && R.mode === 'lesson' && R.steps[R.k].kind === 'check'; };
+// A lesson's quiz and a unit's crown quiz both play on the plant
+const plantQuiz = () => { const R = Grow.run; return (Grow.view === 'lesson' || Grow.view === 'challenge') && !!R && (R.mode === 'lesson' || R.mode === 'challenge') && R.steps[R.k].kind === 'check'; };
 const topbar = (kid, title, sub) => `<header class="gw-top"><button class="gw-back" data-g="back" aria-label="Back">${ic('back')}<span>${Grow.view === 'hub' ? 'Back to my sky' : 'Back'}</span></button><div class="gw-tt"><b>${esc(title)}</b>${sub ? `<small>${sub}</small>` : ''}</div>${xpRing(kid)}</header>`;
 function xpRing(kid) {
   const d = dayInfo(kid), p = Math.min(1, d.xp / XP.dayCap), R = 17, L = 2 * Math.PI * R;
@@ -892,7 +893,9 @@ function viewTree(kid, tree) {
   const band = bandOf(kid), pack = packFor(tree.id, band), st = treeStats(kid, tree.id), g = prog(kid);
   const nx = nextIn(kid, tree.id);
   say(nx ? `Next up in ${tree.name}: ${stop(local(nx.title))}` : st.total ? `You’ve done every ${tree.name} lesson for now!` : 'Lessons for this tree are on their way.');
-  if (PlantView.ok && pack) {
+  // Every subject is a plant. One whose lessons haven't loaded yet shows its seed and fills in once they arrive.
+  if (PlantView.ok) {
+    if (!pack) loadBand(band).then(() => C.scheduleRender());
     ui.innerHTML = topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`);
     const cel = Grow.celebrate; Grow.celebrate = null;
     PlantView.show(ui, kid, tree, cel && cel.split('.')[0] === tree.id ? cel : null); return;
@@ -997,8 +1000,9 @@ function viewRun(kid) {
   }
   ui.innerHTML = `${head}<div class="gw-pad gw-runpad">${title}${body}</div>`;
   if (step.kind === 'learn') holdNext(ui.querySelector('.gw-card.learn [data-g="next"]'), 'learn' + R.k, kid, `${step.title || ''} ${local(step.text)}`);
-  // In a lesson's quiz the plant takes the stage, already grown by the questions answered right so far.
-  if (plantQuiz()) PlantView.quiz(root.querySelector('.gw-stage'), kid, l, R.res.filter((r, i) => r && r.ok && i <= R.k && R.steps[i].kind === 'check').length);
+  // In a lesson's quiz the plant takes the stage, already grown by the questions answered right so far. In a unit's
+  // crown quiz it looks at that unit's ring, which glows with every right answer.
+  if (plantQuiz()) { const right = R.res.filter((r, i) => r && r.ok && i <= R.k && R.steps[i].kind === 'check').length; if (R.mode === 'challenge') PlantView.crown(root.querySelector('.gw-stage'), kid, TREE[R.tree], R.unit); else PlantView.quiz(root.querySelector('.gw-stage'), kid, l, right); }
   else if (Grow.stage) { const [kind, data] = stageFor(step, R) || []; Grow.stage.show(kind, data); }
   const host = ui.querySelector('.gw-host');
   if (host) {
@@ -1079,7 +1083,7 @@ function itemStage(it) {
 function answered(kid, step, res) {
   const R = Grow.run; R.res[R.k] = { ...res, kind: step.kind, step };
   const fb = ui.querySelector('.gw-fb'); if (!fb) return;
-  const guess = step.kind === 'guess', grows = plantQuiz() && !passed(kid, R.lesson.id);
+  const guess = step.kind === 'guess', grows = plantQuiz() && R.mode === 'lesson' && !passed(kid, R.lesson.id);
   const msg = guess ? (res.ok ? 'Great guess!' : 'Good guess. Let’s find out why.') : res.ok ? (grows ? ['Right! Your plant grew.', 'Yes! Up it grows.', 'Nice one. Look at it grow!'] : ['Nice one!', 'Spot on!', 'You got it!', 'Brilliant!'])[Math.floor(Math.random() * (grows ? 3 : 4))] : 'Not quite.';
   // After a scored question, say where that leaves the pass: made it, still possible, or not this time
   const q = step.kind === 'check' && (R.mode === 'challenge' || (R.mode === 'lesson' && !passed(kid, R.lesson.id))) ? quizAt(R) : null, need = q ? passNeed(q.n) : 0;
@@ -2364,7 +2368,7 @@ const PlantView = (() => {
 
   /* State */
   let R = null, pace = null, glowTex = null, scene, cam, el, cv, tagsEl, cardEl, followEl, plant, planG = null, sky, sunSprite, clouds = [], signMesh, coinsG, seed, shells, stalk, stalkInk, coty, flower, sepals, outer, inner, rays, dots, goalStar, butterflies, guide = null, guideKind = '';
-  let mode = 'tree', running = false, raf = 0, last = 0, t = 0, key = '', treeId = '', busy = false, celTok = 0, drag = null, prizeSig = '';
+  let mode = 'tree', crownI = -1, running = false, raf = 0, last = 0, t = 0, key = '', treeId = '', busy = false, celTok = 0, drag = null, prizeSig = '';
   let LS = [], US = [], Q = 1, UN = [], LEAVES = [], ITEMS = [], tagEls = [], utagEls = [], goalEl = null, prizeAt = {}, prizeGs = [];
   let done = [], real = [], udone = [], crowned = [], cur = -1, sel = null, bloomOn = false, passedA = 0, shown = 0, quizFresh = false, quizMax = 0;
   const V = { s: 0, shell: 0, shiver: 0, bloomT: 0, bud: 0 };
@@ -2708,7 +2712,9 @@ const PlantView = (() => {
   /* The card beside the plant: the chosen lesson, a unit's challenge, or the finished plant */
   function card(kid) {
     const tree = TREE[treeId], s = sel || { k: 'l', i: 0 }; let h;
-    if (s.k === 'b') {
+    if (s.k === 'e') {
+      h = `<div class="plc-ic">🌱</div><div class="plc-eb">${esc(tree.name)}</div><div class="plc-t">Your seed is planted</div><p class="plc-p">Lessons for ${esc(tree.name)} are on their way. When they arrive, every question you get right helps this seed grow.</p>`;
+    } else if (s.k === 'b') {
       const left = crowned.filter(c => !c).length;
       h = `<div class="plc-ic">🌸</div><div class="plc-eb">${esc(tree.name)} · every lesson done</div><div class="plc-t">Your plant bloomed!</div><p class="plc-p">You passed all ${LS.length} lessons and grew ${LS.length} leaves. ${left ? `Tap a unit’s label to try its challenge: ${left === 1 ? 'one crown' : `${left} crowns`} still to win.` : 'You won every unit crown too!'}</p><div class="plc-act"><button class="g-go ghost" data-g="plantBloom">🌸 Watch it bloom again</button></div>`;
     } else if (s.k === 'u') {
@@ -2729,7 +2735,7 @@ const PlantView = (() => {
     }
     cardEl.innerHTML = h; cardEl.classList.remove('in'); void cardEl.offsetWidth; cardEl.classList.add('in');
   }
-  function pickDefault(kid) { sel = cur >= 0 ? { k: 'l', i: cur } : bloomOn ? { k: 'b' } : { k: 'l', i: 0 }; paintTags(kid); card(kid); }
+  function pickDefault(kid) { sel = !LS.length ? { k: 'e' } : cur >= 0 ? { k: 'l', i: cur } : bloomOn ? { k: 'b' } : { k: 'l', i: 0 }; paintTags(kid); card(kid); }
   function select(k, i) {
     const kid = kidNow(); if (!kid || busy || (k === 'l' && !LS[i]) || (k === 'u' && !US[i])) return;
     sel = { k, i }; paintTags(kid); card(kid); Sound.tap();
@@ -2869,7 +2875,7 @@ const PlantView = (() => {
       if (it.kind === 'prize' && it.m.userData.tick) it.m.userData.tick(t, dt);
     }
     // Camera: follows the tip; a drag, swipe or scroll looks around and it drifts back after a while
-    CAM.idle += dt; if (CAM.manual != null && CAM.idle > 8 && !drag) { CAM.manual = null; showFollow(); }
+    CAM.idle += dt; if (CAM.manual != null && CAM.idle > 8 && !drag && crownI < 0) { CAM.manual = null; showFollow(); }
     CAM.y += ((CAM.manual ?? followY()) - CAM.y) * (1 - Math.exp(-dt * 2.2));
     const bl = bloomOn ? smooth(clamp(V.bloomT / 3, 0, 1)) : 0; CAM.dist = lerp(CAM.dist, baseDist() * lerp(1, 1.12, bl), 1 - Math.exp(-dt * 1.5));
     if (bloomOn && !drag && !reduced) CAM.az += dt * 0.18; else if (!reduced && !drag) CAM.az += (0.35 + Math.sin(t * 0.12) * 0.25 - CAM.az) * dt * 0.2;
@@ -2889,7 +2895,7 @@ const PlantView = (() => {
     ok: true,
     // The full-screen plant for a tree. `celebrateId` is a lesson just passed for the first time.
     show(host, kid, tree, celebrateId) {
-      mount(); Prize.tick(kid); mode = 'tree'; el.classList.remove('quiz'); host.appendChild(el);
+      mount(); Prize.tick(kid); mode = 'tree'; crownI = -1; el.classList.remove('quiz'); host.appendChild(el);
       const fresh = ensure(kid, tree), tok = ++celTok; busy = false; resize(); this.start();
       if (celebrateId && LS.some(x => x.l.id === celebrateId)) { celebrate(kid, celebrateId, fresh, tok); return; }
       refresh(kid); shown = passedA; if (fresh) snap(); pickDefault(kid); showFollow();
@@ -2898,12 +2904,21 @@ const PlantView = (() => {
     quiz(host, kid, l, right) {
       const tree = TREE[l.tree]; if (!tree) return false;
       mount(); mode = 'quiz'; el.classList.add('quiz'); if (el.parentNode !== host) host.insertBefore(el, host.querySelector('.gw-say'));
-      const fresh = ensure(kid, tree), x = LS.find(y => y.l.id === l.id); ++celTok; busy = false; refresh(kid); quizFresh = !passed(kid, l.id) && !!x;
+      const fresh = ensure(kid, tree), x = LS.find(y => y.l.id === l.id); ++celTok; busy = false; crownI = -1; refresh(kid); quizFresh = !passed(kid, l.id) && !!x;
       quizMax = quizFresh ? passedA + x.to - x.from : passedA; shown = Math.min(quizMax, passedA + (quizFresh ? right : 0));
       if (fresh) snap(); CAM.manual = null; resize(); this.start(); return true;
     },
+    // A unit's crown quiz on the plant: the camera holds on the unit's ring, which flashes gold with every right answer.
+    crown(host, kid, tree, unit) {
+      if (!tree || !unit) return false;
+      mount(); mode = 'quiz'; el.classList.add('quiz'); if (el.parentNode !== host) host.insertBefore(el, host.querySelector('.gw-say'));
+      const fresh = ensure(kid, tree); ++celTok; busy = false; quizFresh = false; refresh(kid); shown = quizMax = passedA; if (fresh) snap();
+      crownI = US.findIndex(U => U.unit.id === unit.id); CAM.manual = crownI >= 0 ? sample(UN[crownI].at).p.y : null; CAM.idle = 0;
+      resize(); this.start(); return true;
+    },
     answer(ok) {
       if (mode !== 'quiz' || !running) return;
+      if (crownI >= 0) { if (ok) { const k = UN[crownI]; k.gold = 1; burst(plant.localToWorld(sample(k.at).p.clone()), 12, 'star'); Sound.step(3); if (guide) guide.hop = 1; } else { V.shiver = 1; if (guide) guide.shake = 1; } return; }
       if (ok) { if (quizFresh) shown = Math.min(quizMax, shown + 1); pulse(shown); if (guide) guide.hop = 1; } else { V.shiver = 1; if (guide) guide.shake = 1; }
       CAM.manual = null;
     },
