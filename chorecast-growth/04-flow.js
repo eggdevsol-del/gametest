@@ -74,7 +74,8 @@ function viewDone(kid) {
     <div class="gw-xpwin ${o.xp ? '' : 'none'}">${ic('sparkle')} <b class="num">+${o.xp} XP</b>${o.capped ? '<small>You reached today’s XP limit. Learning still counts!</small>' : ''}</div>
     ${o.lvlUp ? `<div class="gw-banner lvl">⬆️ Level ${o.lvlUp}!</div>` : ''}
     ${prizeBanner(o, kid)}
-    ${o.unitDone ? `<div class="gw-banner unit">🏅 Unit complete! A crystal appears on your island, and the unit challenge is open.</div>` : ''}
+    ${o.unitDone ? `<div class="gw-banner unit">🍃 Unit complete! Your plant grows a new leaf, and the unit challenge is open.</div>` : ''}
+    ${o.first && o.lesson && treeStats(kid, o.lesson.tree).done === treeStats(kid, o.lesson.tree).total ? `<div class="gw-banner title">🌸 Every lesson done! Go back to your plant to watch it bloom.</div>` : ''}
     ${o.newTitle ? `<div class="gw-banner title">🎖️ New title: ${esc(o.newTitle)}</div>` : ''}
     ${o.home && o.pass ? `<div class="gw-homecard"><b>Take it home</b><p>${esc(local(o.home))}</p><button class="g-go ghost" data-g="homeDone">I’ll try it</button></div>` : ''}
     <div class="gw-actions">${isScored && !o.pass ? `<button class="g-go" data-g="retry">Try again</button>` : nx && o.mode === 'lesson' ? `<button class="g-go" data-g="lesson" data-id="${nx.id}">Next: ${esc(local(nx.title))}</button>` : ''}
@@ -128,7 +129,9 @@ function onClick(e) {
     case 'tree': Grow.tree = id; Grow.view = 'tree'; Sound.tap(); return render();
     case 'lesson': { const l = lessonById(id); if (l) { if (!Grow.tree) Grow.tree = l.tree; startLesson(kid, l); } return; }
     case 'locked': Sound.tap(); return C.toast('Finish the lesson before this one to open it.');
-    case 'pathSel': return PathView.ok && PathView.select(+a.dataset.i);
+    case 'plantSel': return PlantView.ok && PlantView.select(+a.dataset.i);
+    case 'plantUnit': return PlantView.ok && PlantView.unit(+a.dataset.i);
+    case 'plantBloom': return PlantView.ok && PlantView.bloomAgain();
     case 'how': case 'howAgain': { const R = Grow.run, step = R && R.steps[R.k]; if (step && step.item) HowTo.run(a.closest('.gw-card'), step.item, kid, { again: true }); return; }
     case 'howSkip': case 'howDone': return HowTo.finish(a.closest('.gw-card'));
     case 'challenge': return startChallenge(kid, id);

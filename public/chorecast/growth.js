@@ -758,7 +758,7 @@ async function open(kidId, opts = {}) {
 }
 function close() {
   if (!root) return; Grow.cleanup.splice(0).forEach(f => f()); try { speechSynthesis.cancel(); } catch (e) {}
-  root.hidden = true; Grow.open = false; document.body.classList.remove('gw-open'); if (Grow.stage) Grow.stage.stop(); if (PathView.ok) PathView.stop(); HowTo.stop();
+  root.hidden = true; Grow.open = false; document.body.classList.remove('gw-open'); if (Grow.stage) Grow.stage.stop(); if (PlantView.ok) PlantView.stop(); HowTo.stop();
   C.scheduleRender();
 }
 function back() {
@@ -795,10 +795,12 @@ function render() {
   root.style.setProperty('--gh', (tree || (Grow.run && TREE[Grow.run.lesson ? Grow.run.lesson.tree : Grow.run.tree]) || { hue: '#2F6FE4' }).hue);
   root.dataset.view = v;
   if (Grow.stage) Grow.stage.setScene(v === 'tree' && tree ? tree.scene : Grow.run && Grow.run.lesson ? Grow.run.lesson.scene : Grow.run && Grow.run.scene ? Grow.run.scene : 'island');
-  // The tree view is a full-screen island path with its own 3D view, so the stage rests; lesson steps and the
-  // finish screen show their own 3D scene on the stage, and other screens show just the guide.
-  if (Grow.stage) { if (v === 'tree' && PathView.ok) Grow.stage.stop(); else Grow.stage.start(); if (!RUN_VIEWS.includes(v) && v !== 'done') Grow.stage.show(null); }
-  if (v !== 'tree' && PathView.ok) PathView.stop();
+  // The tree view is a full-screen plant with its own 3D view, so the stage rests. In a lesson's quiz the plant
+  // takes the stage and grows with each right answer; other lesson steps and the finish screen show their own
+  // 3D scene on the stage, and other screens show just the guide.
+  const plant = PlantView.ok && (v === 'tree' || plantQuiz());
+  if (Grow.stage) { if (plant) Grow.stage.stop(); else Grow.stage.start(); if (!RUN_VIEWS.includes(v) && v !== 'done') Grow.stage.show(null); }
+  if (PlantView.ok && !plant) PlantView.stop();
   if (v === 'guide') return viewGuide(kid);
   if (v === 'hub') return viewHub(kid);
   if (v === 'tree') return viewTree(kid, tree);
@@ -809,6 +811,7 @@ function render() {
   if (v === 'crew') return viewCrew();
 }
 const RUN_VIEWS = ['lesson', 'challenge', 'review', 'moment', 'echo', 'story', 'case'];
+const plantQuiz = () => { const R = Grow.run; return Grow.view === 'lesson' && !!R && R.mode === 'lesson' && R.steps[R.k].kind === 'check'; };
 const topbar = (kid, title, sub) => `<header class="gw-top"><button class="gw-back" data-g="back" aria-label="Back">${ic('back')}<span>${Grow.view === 'hub' ? 'Back to my sky' : 'Back'}</span></button><div class="gw-tt"><b>${esc(title)}</b>${sub ? `<small>${sub}</small>` : ''}</div>${xpRing(kid)}</header>`;
 function xpRing(kid) {
   const d = dayInfo(kid), p = Math.min(1, d.xp / XP.dayCap), R = 17, L = 2 * Math.PI * R;
@@ -841,7 +844,7 @@ function viewHub(kid) {
         ${story && !storyDone ? tile('story', '📰', 'This week in the market', `+${XP.story} XP`) : ''}
         ${C.kidsList().length > 1 ? tile('crewPick', '👯', 'Crew quiz', 'Answer side by side with a sibling') : ''}
       </div>
-      <h2 class="gw-h2">${treesOn().length === 1 ? 'Your island path' : 'Skill trees'}</h2>
+      <h2 class="gw-h2">${treesOn().length === 1 ? 'Your plant' : 'Skill trees'}</h2>
       ${constellation(kid)}
       ${casesFor(kid).length ? `<h2 class="gw-h2">Real stories</h2><div class="gw-cases">${casesFor(kid).slice(0, 12).map(cs => `<button class="gw-case ${(prog(kid).cases || {})[cs.id] ? 'done' : ''}" data-g="case" data-id="${cs.id}" style="--th:${(TREE[cs.tree] || {}).hue || '#2F6FE4'}"><span>${esc(cs.icon)}</span><b>${esc(cs.name)}</b><small>${esc((TREE[cs.tree] || {}).name || '')}</small></button>`).join('')}</div>` : ''}
     </div>`;
@@ -849,10 +852,10 @@ function viewHub(kid) {
 // The 12 trees as a staggered constellation, 3 across and 4 down, each linked to its neighbours.
 function constellation(kid) {
   const on = treesOn(), W = 600, H = 800;
-  // With a single live tree there's nothing to link, so show one big door into its island path.
+  // With a single live tree there's nothing to link, so show one big door into its plant.
   if (on.length === 1) {
     const t = on[0], st = treeStats(kid, t.id), nx = nextIn(kid, t.id);
-    return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons · Open the island path</small></span></button>`;
+    return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons · ${st.done ? 'See your plant grow' : 'Plant your seed'}</small></span></button>`;
   }
   const pos = on.map((t, i) => { const c = i % 3, r = Math.floor(i / 3); return { t, c, r, x: 100 + c * 200, y: 95 + r * 190 + (c === 1 ? 70 : 0) }; });
   const at = (r, c) => pos.find(p => p.r === r && p.c === c);
@@ -869,10 +872,10 @@ function viewTree(kid, tree) {
   const band = bandOf(kid), pack = packFor(tree.id, band), st = treeStats(kid, tree.id), g = prog(kid);
   const nx = nextIn(kid, tree.id);
   say(nx ? `Next up in ${tree.name}: ${stop(local(nx.title))}` : st.total ? `You’ve done every ${tree.name} lesson for now!` : 'Lessons for this tree are on their way.');
-  if (PathView.ok && pack) {
+  if (PlantView.ok && pack) {
     ui.innerHTML = topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`);
     const cel = Grow.celebrate; Grow.celebrate = null;
-    PathView.show(ui, kid, tree, cel && cel.split('.')[0] === tree.id ? cel : null); return;
+    PlantView.show(ui, kid, tree, cel && cel.split('.')[0] === tree.id ? cel : null); return;
   }
   const units = pack ? pack.units : [];
   const node = (l, idx) => {
@@ -963,7 +966,9 @@ function viewRun(kid) {
   else if (step.kind === 'home') { body = `<div class="gw-card home"><span class="gw-big">🏠</span><h3>Take it home</h3><p>${esc(local(l.home || 'Tell a grown-up one thing you learned today.'))}</p><button class="g-go" data-g="finish">Finish lesson</button></div>`; say('Last bit! Try this at home.'); }
   else { body = `<div class="gw-card"><div class="gw-host"></div><div class="gw-fb"></div></div>`; say(step.kind === 'guess' ? 'Have a guess! It’s fine to get it wrong.' : step.kind === 'play' ? 'Game time!' : R.mode === 'review' ? `From “${local(step.title || '')}”` : ''); }
   ui.innerHTML = `${head}<div class="gw-pad gw-runpad">${title}${body}</div>`;
-  if (Grow.stage) { const [kind, data] = stageFor(step, R) || []; Grow.stage.show(kind, data); }
+  // In a lesson's quiz the plant takes the stage, already grown by the questions answered right so far.
+  if (plantQuiz()) PlantView.quiz(root.querySelector('.gw-stage'), kid, l, R.res.filter((r, i) => r && r.ok && i <= R.k && R.steps[i].kind === 'check').length);
+  else if (Grow.stage) { const [kind, data] = stageFor(step, R) || []; Grow.stage.show(kind, data); }
   const host = ui.querySelector('.gw-host');
   if (host) {
     const ctx = { kid, mode: step.kind, cleanup: Grow.cleanup, fx: (e, d) => Grow.stage && Grow.stage.fx(e, d) };
@@ -1016,9 +1021,10 @@ function itemStage(it) {
 function answered(kid, step, res) {
   const R = Grow.run; R.res[R.k] = { ...res, kind: step.kind, step };
   const fb = ui.querySelector('.gw-fb'); if (!fb) return;
-  const guess = step.kind === 'guess', msg = guess ? (res.ok ? 'Great guess!' : 'Good guess. Let’s find out why.') : res.ok ? ['Nice one!', 'Spot on!', 'You got it!', 'Brilliant!'][Math.floor(Math.random() * 4)] : 'Not quite.';
+  const guess = step.kind === 'guess', grows = plantQuiz() && !passed(kid, R.lesson.id);
+  const msg = guess ? (res.ok ? 'Great guess!' : 'Good guess. Let’s find out why.') : res.ok ? (grows ? ['Right! Your plant grew.', 'Yes! Up it grows.', 'Nice one. Look at it grow!'] : ['Nice one!', 'Spot on!', 'You got it!', 'Brilliant!'])[Math.floor(Math.random() * (grows ? 3 : 4))] : 'Not quite.';
   fb.innerHTML = `<div class="gw-fbin ${res.ok || guess ? 'good' : 'bad'}"><b>${msg}</b>${!res.ok && res.right && !guess ? `<span>${esc(res.right)}</span>` : ''}</div><button class="g-go" data-g="next">${R.k + 1 >= R.steps.length ? 'Finish' : 'Next'}</button>`;
-  if (Grow.stage) Grow.stage.react(res.ok || guess ? 'cheer' : 'puzzled');
+  if (plantQuiz()) PlantView.answer(res.ok); else if (Grow.stage) Grow.stage.react(res.ok || guess ? 'cheer' : 'puzzled');
   say(res.ok ? msg : guess ? 'Let’s find out!' : 'That’s how we learn. Keep going!');
   if (R.mode === 'review') reviewAnswer(kid, step, res.ok);
   if (R.mode === 'echo') echoAnswer(kid, step, res.ok);
@@ -1112,7 +1118,8 @@ function viewDone(kid) {
     <div class="gw-xpwin ${o.xp ? '' : 'none'}">${ic('sparkle')} <b class="num">+${o.xp} XP</b>${o.capped ? '<small>You reached today’s XP limit. Learning still counts!</small>' : ''}</div>
     ${o.lvlUp ? `<div class="gw-banner lvl">⬆️ Level ${o.lvlUp}!</div>` : ''}
     ${prizeBanner(o, kid)}
-    ${o.unitDone ? `<div class="gw-banner unit">🏅 Unit complete! A crystal appears on your island, and the unit challenge is open.</div>` : ''}
+    ${o.unitDone ? `<div class="gw-banner unit">🍃 Unit complete! Your plant grows a new leaf, and the unit challenge is open.</div>` : ''}
+    ${o.first && o.lesson && treeStats(kid, o.lesson.tree).done === treeStats(kid, o.lesson.tree).total ? `<div class="gw-banner title">🌸 Every lesson done! Go back to your plant to watch it bloom.</div>` : ''}
     ${o.newTitle ? `<div class="gw-banner title">🎖️ New title: ${esc(o.newTitle)}</div>` : ''}
     ${o.home && o.pass ? `<div class="gw-homecard"><b>Take it home</b><p>${esc(local(o.home))}</p><button class="g-go ghost" data-g="homeDone">I’ll try it</button></div>` : ''}
     <div class="gw-actions">${isScored && !o.pass ? `<button class="g-go" data-g="retry">Try again</button>` : nx && o.mode === 'lesson' ? `<button class="g-go" data-g="lesson" data-id="${nx.id}">Next: ${esc(local(nx.title))}</button>` : ''}
@@ -1166,7 +1173,9 @@ function onClick(e) {
     case 'tree': Grow.tree = id; Grow.view = 'tree'; Sound.tap(); return render();
     case 'lesson': { const l = lessonById(id); if (l) { if (!Grow.tree) Grow.tree = l.tree; startLesson(kid, l); } return; }
     case 'locked': Sound.tap(); return C.toast('Finish the lesson before this one to open it.');
-    case 'pathSel': return PathView.ok && PathView.select(+a.dataset.i);
+    case 'plantSel': return PlantView.ok && PlantView.select(+a.dataset.i);
+    case 'plantUnit': return PlantView.ok && PlantView.unit(+a.dataset.i);
+    case 'plantBloom': return PlantView.ok && PlantView.bloomAgain();
     case 'how': case 'howAgain': { const R = Grow.run, step = R && R.steps[R.k]; if (step && step.item) HowTo.run(a.closest('.gw-card'), step.item, kid, { again: true }); return; }
     case 'howSkip': case 'howDone': return HowTo.finish(a.closest('.gw-card'));
     case 'challenge': return startChallenge(kid, id);
@@ -1230,7 +1239,7 @@ window.Growth = {
 };
 
 
-// The kid's guide (Kiri the kea, Coco the cockatoo or Bolt the robot), shared by the lesson stage and the island path.
+// The kid's guide (Kiri the kea, Coco the cockatoo or Bolt the robot), shared by the lesson stage and the plant.
 const GUIDE_GEO = {};
 function guideModel(kind, toon) {
   const T = window.THREE, G3 = C.G3;
@@ -2156,364 +2165,514 @@ body.gw-open{overflow:hidden}
 const style = document.createElement('style'); style.id = 'growth-css'; style.textContent = CSS; document.head.appendChild(style);
 
 
-/* ---------- A skill tree as a path of floating 3D islands ----------
-   Every lesson is an island, with a challenge island closing each unit. Passing a lesson builds a rope bridge
-   to the next island, which shakes off its mist and colours in, and the kid's guide hops across. Units still
-   being written show as small misty islands with no bridge yet. Drag or scroll along the path; tap an island
-   for its card. Lessons with no WebGL fall back to the list in viewTree. */
-const PathView = (() => {
+/* ---------- A skill tree as a plant that grows from a seed ----------
+   Each tree is one plant on a floating island, for the kid's band. It starts as a seed in the soil. Every quiz
+   question answered right in a lesson grows the stalk a step (the plant takes the stage beside the questions),
+   every lesson passed adds a ring to the stalk, every finished unit unfurls a leaf, right then left, and passing
+   the last lesson opens a flower at the top. The camera follows the growing tip; drag, swipe or scroll to look up
+   and down, and tap a label for its card. Without WebGL, viewTree falls back to a list. */
+const PlantView = (() => {
   const T = window.THREE, G3 = C.G3;
   if (!T || !G3 || !G3.ok) return { ok: false };
-  const V = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z), lerp = (a, b, t) => a + (b - a) * t;
-  const E = { out: t => 1 - (1 - t) ** 3, io: t => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2), back: t => 1 + 2.70158 * (t - 1) ** 3 + 1.70158 * (t - 1) ** 2, lin: t => t };
-  const tws = new Set();
-  const tw = (ms, fn, e = E.out, group = 'path') => new Promise(res => tws.add({ t0: performance.now(), d: Math.max(1, ms * (reduced ? 0.3 : 1)), fn, e, res, group }));
-  const kill = group => { for (const w of tws) if (w.group === group) tws.delete(w); };
-  const wait = ms => new Promise(r => setTimeout(r, ms * (reduced ? 0.3 : 1)));
-
-  // Toon shading with a fogged, screen-space ink outline, so faraway islands fade into the sky together.
-  const INK_VS = `attribute vec3 inkN; uniform vec2 uRes; uniform float uPx; varying float vD;
-void main(){ vec4 p = vec4(position, 1.0); vec3 n = inkN;
-  #ifdef USE_INSTANCING
-  p = instanceMatrix * p; n = mat3(instanceMatrix) * n;
-  #endif
-  vec4 mv = modelViewMatrix * p; vec4 cp = projectionMatrix * mv; vec2 d = (normalMatrix * n).xy; float l = length(d);
-  if (l > 1e-5) cp.xy += (d / l) * uPx * 2.0 / uRes * cp.w; gl_Position = cp; vD = -mv.z; }`;
-  const U = { uRes: { value: new T.Vector2(1, 1) }, uFogCol: { value: new T.Color(0x9fd3f8) }, uFog: { value: new T.Vector2(17, 44) } };
-  const INKM = new T.ShaderMaterial({ uniforms: { uRes: U.uRes, uPx: { value: 1.8 * Math.min(2, devicePixelRatio || 1) }, uCol: { value: new T.Color(0x2b2238) }, uFogCol: U.uFogCol, uFog: U.uFog }, vertexShader: INK_VS, fragmentShader: 'uniform vec3 uCol, uFogCol; uniform vec2 uFog; varying float vD; void main(){ gl_FragColor = vec4(mix(uCol, uFogCol, smoothstep(uFog.x, uFog.y, vD)), 1.0); }', side: T.BackSide });
-  function prepInk(g) {
-    if (g.attributes.inkN) return g; if (!g.attributes.normal) g.computeVertexNormals();
-    const p = g.attributes.position, n = g.attributes.normal, map = new Map(), key = i => (p.getX(i) * 1000 | 0) + ',' + (p.getY(i) * 1000 | 0) + ',' + (p.getZ(i) * 1000 | 0);
-    for (let i = 0; i < p.count; i++) { const k = key(i), v = map.get(k) || [0, 0, 0]; v[0] += n.getX(i); v[1] += n.getY(i); v[2] += n.getZ(i); map.set(k, v); }
-    const a = new Float32Array(p.count * 3); for (let i = 0; i < p.count; i++) { const v = map.get(key(i)), l = Math.hypot(v[0], v[1], v[2]) || 1; a[i * 3] = v[0] / l; a[i * 3 + 1] = v[1] / l; a[i * 3 + 2] = v[2] / l; }
-    g.setAttribute('inkN', new T.BufferAttribute(a, 3)); return g;
-  }
+  const V3 = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z), lerp = (a, b, t) => a + (b - a) * t, smooth = t => t * t * (3 - 2 * t);
+  const outBack = t => 1 + 2.7 * (t - 1) ** 3 + 1.7 * (t - 1) ** 2;
+  const wait = ms => new Promise(r => setTimeout(r, ms * (reduced ? 0.4 : 1)));
+  // This view renders in sRGB like the main island, so colours are given in sRGB and converted.
+  const col = h => new T.Color(h).convertSRGBToLinear();
   const MC = {};
-  const toonC = c => { const k = 'c' + c; if (MC[k]) return MC[k]; const m = new T.MeshToonMaterial({ color: c, gradientMap: G3.GRAD }); G3.rimPatch(m); return (MC[k] = m); };
-  const own = c => { const m = new T.MeshToonMaterial({ color: c, gradientMap: G3.GRAD }); G3.rimPatch(m); return m; };
-  function M(geo, mat, o = {}) { const m = new T.Mesh(geo, typeof mat === 'number' ? (o.own ? own(mat) : toonC(mat)) : mat); if (o.ink !== false) { prepInk(geo); const k = new T.Mesh(geo, INKM); k.raycast = () => {}; k.userData.ink = 1; m.add(k); } if (m.material.color) m.userData.base = m.material.color.clone(); return m; }
-  const faceted = g => { const f = g.index ? g.toNonIndexed() : g.clone(); f.computeVertexNormals(); return f; };
-  const GEO = { sph: new T.SphereGeometry(1, 20, 14), box: new T.BoxGeometry(1, 1, 1), cyl: new T.CylinderGeometry(1, 1, 1, 20), cone: new T.ConeGeometry(1, 1, 16), tor: new T.TorusGeometry(1, 0.08, 10, 40), coin: new T.CylinderGeometry(0.11, 0.11, 0.032, 20) };
-  GEO.icoF = faceted(new T.IcosahedronGeometry(1, 1)); GEO.dodeF = faceted(new T.DodecahedronGeometry(1, 0)); GEO.coneF = faceted(GEO.cone);
-  Object.values(GEO).forEach(prepInk);
-  const at = (o, x, y, z) => { o.position.set(x, y, z); return o; };
-  const sc = (o, x, y = x, z = x) => { o.scale.set(x, y, z); return o; };
-  const EMO = new Map();
-  function emoji(e, h = 0.5) { let t = EMO.get(e); if (!t) { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d'); x.font = '100px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(e, 64, 72); t = new T.CanvasTexture(c); EMO.set(e, t); } const s = new T.Sprite(new T.SpriteMaterial({ map: t, transparent: true, depthWrite: false, fog: false })); s.scale.set(h, h, 1); return s; }
-
-  /* Islands, trees, props */
-  function warp(geo, fn) { const p = geo.attributes.position; for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), z = p.getZ(i); if (Math.hypot(x, z) < 1e-4) continue; const k = fn(x, z, y); p.setX(i, x * k); p.setZ(i, z * k); } geo.computeVertexNormals(); return geo; }
-  function island(r, seed, grass) {
-    const g = new T.Group(), rnd = mulberry(seed), ph = [rnd() * 6, rnd() * 6, rnd() * 6];
-    const jit = (x, z) => { const a = Math.atan2(z, x); return 1 + 0.07 * Math.sin(a * 3 + ph[0]) + 0.04 * Math.sin(a * 5 + ph[1]); };
-    g.add(at(M(warp(new T.CylinderGeometry(r, r * 0.95, 0.24, 30), jit), grass, { own: 1 }), 0, -0.12, 0));
-    g.add(at(M(warp(new T.CylinderGeometry(r * 0.95, r * 0.8, 0.3, 30), jit), 0x9b6b45, { own: 1 }), 0, -0.39, 0));
-    const rk = new T.ConeGeometry(r * 0.8, r * 1.3, 11, 4); rk.rotateX(Math.PI); warp(rk, (x, z, y) => jit(x, z) * (1 + 0.12 * Math.sin(Math.atan2(z, x) * 7 + y * 6 + ph[2])));
-    g.add(at(M(faceted(rk), 0x8a7566, { own: 1 }), 0, -0.54 - r * 0.65, 0));
-    const n = Math.round(2 + r * 2);
-    for (let i = 0, tries = 0; i < n && tries < 50; tries++) {
-      const a = rnd() * Math.PI * 2, da = Math.atan2(Math.sin(a - Math.PI / 2), Math.cos(a - Math.PI / 2)); if (Math.abs(da) < 1.05) continue;
-      const rr = r * (0.6 + rnd() * 0.22), t = rnd(), d = new T.Group();
-      if (t < 0.5) { d.add(at(sc(M(GEO.cyl, 0x8a5a35, { own: 1 }), 0.045, 0.32, 0.045), 0, 0.16, 0)); const c = [0x2e9c49, 0x43b65a, 0x5bc86b][Math.floor(rnd() * 3)]; for (let k = 0; k < 3; k++) d.add(at(sc(M(GEO.icoF, c, { own: 1 }), 0.19 - k * 0.035), (rnd() - 0.5) * 0.1, 0.38 + k * 0.12, (rnd() - 0.5) * 0.1)); d.scale.setScalar(0.75 + rnd() * 0.5); }
-      else if (t < 0.7) { d.add(at(sc(M(GEO.cyl, 0x7a4e2e, { own: 1 }), 0.04, 0.2, 0.04), 0, 0.1, 0)); for (let k = 0; k < 3; k++) d.add(at(sc(M(GEO.coneF, 0x2a8a55, { own: 1 }), 0.22 - k * 0.05, 0.26, 0.22 - k * 0.05), 0, 0.3 + k * 0.16, 0)); }
-      else if (t < 0.88) d.add(at(sc(M(GEO.dodeF, 0xa6a3b0, { own: 1 }), 0.13 + rnd() * 0.08, 0.1 + rnd() * 0.06, 0.12), 0, 0.05, 0));
-      else for (let k = 0; k < 4; k++) d.add(at(sc(M(GEO.sph, [0xff7aa8, 0xffd43b, 0xffffff, 0xb18cff][k], { ink: false, own: 1 }), 0.04), (rnd() - 0.5) * 0.3, 0.04, (rnd() - 0.5) * 0.3));
-      d.position.set(Math.cos(a) * rr, 0, Math.sin(a) * rr); d.rotation.y = rnd() * 6; g.add(d); i++;
-    }
-    return g;
+  function toon(hex, o = {}) {
+    const k = `${hex}|${o.ds ? 1 : 0}|${o.vc ? 1 : 0}|${o.e ?? ''}`; if (!o.map && MC[k]) return MC[k];
+    const m = new T.MeshToonMaterial({ color: col(hex), gradientMap: G3.GRAD, side: o.ds ? T.DoubleSide : T.FrontSide, vertexColors: !!o.vc, map: o.map || null, emissive: o.e != null ? col(o.e) : new T.Color(0) });
+    G3.rimPatch(m); return o.map ? m : (MC[k] = m);
   }
-  // A small prop for the lesson's scene, so a bank lesson looks like a bank and a market lesson like a stall.
-  const PROP = {
-    bank: g => { g.add(at(sc(M(GEO.box, 0xf1ece2), 0.6, 0.36, 0.4), 0, 0.18, 0)); const roof = sc(M(new T.ConeGeometry(0.5, 0.26, 4), 0xd9cbb0), 1); roof.rotation.y = Math.PI / 4; g.add(at(roof, 0, 0.49, 0)); for (let i = 0; i < 3; i++) g.add(at(sc(M(GEO.cyl, 0xffffff), 0.035, 0.32, 0.035), -0.18 + i * 0.18, 0.18, 0.22)); for (let i = 0; i < 4; i++) g.add(at(sc(M(GEO.coin, 0xffc93c), 1), 0.45, 0.02 + i * 0.035, 0.25)); },
-    shares: g => { [0.3, 0.5, 0.38, 0.7].forEach((h, i) => g.add(at(sc(M(GEO.box, i === 2 ? 0xe5533d : 0x2fb257), 0.16, h, 0.16), -0.27 + i * 0.18, h / 2, 0))); },
-    workshop: g => { g.add(at(sc(M(GEO.box, 0xc23a2c), 0.5, 0.28, 0.28), 0, 0.14, 0)); g.add(at(sc(M(GEO.tor, 0x6d7486), 0.1), 0, 0.33, 0)); },
-    stall: g => { g.add(at(sc(M(GEO.box, 0xe9c08a), 0.56, 0.3, 0.26), 0, 0.15, 0)); for (let i = 0; i < 4; i++) { const s = sc(M(GEO.box, i % 2 ? 0xffffff : 0xe8473c), 0.15, 0.025, 0.34); s.rotation.x = 0.3; g.add(at(s, -0.22 + i * 0.15, 0.62, 0.02)); } for (const x of [-0.26, 0.26]) g.add(at(sc(M(GEO.cyl, 0x9c6b3c), 0.02, 0.6, 0.02), x, 0.32, -0.1)); },
-    garden: g => { [[-0.2, 0xff6b9d], [0, 0xffd23b], [0.2, 0xc084fc]].forEach(([x, c]) => { g.add(at(sc(M(GEO.cyl, 0x3f8f35), 0.015, 0.3, 0.015), x, 0.15, 0)); g.add(at(sc(M(GEO.sph, c), 0.07, 0.04, 0.07), x, 0.32, 0)); }); },
-    kitchen: g => { g.add(at(sc(M(GEO.box, 0xe8dfcf), 0.5, 0.34, 0.32), 0, 0.17, 0)); g.add(at(sc(M(GEO.cyl, 0x3d4357), 0.12, 0.16, 0.12), 0.08, 0.42, 0)); },
-    stage: g => { g.add(at(sc(M(GEO.cyl, 0x3d4357), 0.02, 0.6, 0.02), 0, 0.3, 0)); g.add(at(sc(M(GEO.sph, 0x9aa3b5), 0.08, 0.1, 0.08), 0, 0.64, 0)); },
-    museum: g => { for (const x of [-0.25, 0.25]) { g.add(at(sc(M(GEO.cyl, 0xf1ece2), 0.06, 0.6, 0.06), x, 0.3, 0)); g.add(at(sc(M(GEO.box, 0xe2dac9), 0.16, 0.04, 0.16), x, 0.62, 0)); } g.add(at(sc(M(GEO.box, 0xe2dac9), 0.6, 0.05, 0.18), 0, 0.66, 0)); },
-    home: g => { g.add(at(sc(M(GEO.box, 0xf4e3c3), 0.5, 0.4, 0.42), 0, 0.2, 0)); const roof = sc(M(new T.ConeGeometry(0.42, 0.32, 4), 0xd9534f), 1); roof.rotation.y = Math.PI / 4; g.add(at(roof, 0, 0.56, 0)); },
-    online: g => { g.add(at(sc(M(GEO.box, 0x23283a), 0.34, 0.6, 0.05), 0, 0.32, 0)); g.add(at(sc(M(GEO.box, 0x5ac8fa), 0.28, 0.5, 0.01), 0, 0.33, 0.03)); },
-    townhall: g => { g.add(at(sc(M(GEO.box, 0xf1ece2), 0.6, 0.36, 0.36), 0, 0.18, 0)); const roof = sc(M(new T.ConeGeometry(0.46, 0.26, 4), 0xd9cbb0), 1); roof.rotation.y = Math.PI / 4; g.add(at(roof, 0, 0.49, 0)); g.add(at(sc(M(GEO.box, 0x2f6fe4), 0.16, 0.1, 0.01), 0.1, 0.8, 0)); g.add(at(sc(M(GEO.cyl, 0x5d636b), 0.01, 0.3, 0.01), 0, 0.72, 0)); },
-    island: g => { g.add(at(sc(M(GEO.cyl, 0x8a5a3c), 0.04, 0.4, 0.04), 0, 0.2, 0)); g.add(at(sc(M(GEO.sph, 0x4caf50), 0.26), 0, 0.5, 0)); },
-    trophy: g => { const prof = [[0, 0], [0.2, 0], [0.2, 0.06], [0.07, 0.1], [0.05, 0.3], [0.1, 0.34], [0.24, 0.42], [0.27, 0.7], [0.25, 0.7], [0.21, 0.46], [0, 0.44]].map(p => new T.Vector2(p[0], p[1])); g.add(at(M(new T.LatheGeometry(prof, 24), 0xffc93c), 0, 0.12, 0)); g.add(at(sc(M(GEO.box, 0x3b2f5c), 0.42, 0.12, 0.42), 0, 0.06, 0)); },
-    start: g => { g.add(at(sc(M(GEO.box, 0xfff1d6), 0.72, 0.5, 0.6), 0, 0.25, 0)); const roof = M(new T.ConeGeometry(0.6, 0.44, 4), 0xe5533d); roof.rotation.y = Math.PI / 4; g.add(at(roof, 0, 0.72, 0)); g.add(at(sc(M(GEO.box, 0x8a5a35), 0.16, 0.27, 0.03), -0.12, 0.14, 0.3)); g.add(at(sc(M(GEO.box, 0x8fd3ff), 0.15, 0.13, 0.03), 0.18, 0.32, 0.3)); },
-  };
+  const RING = toon(0x8be06a), RING_GOLD = toon(0xffc93c);
+  const mesh = (geo, mat, parent, x = 0, y = 0, z = 0) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); if (parent) parent.add(m); return m; };
+  const faceted = g => { const f = g.index ? g.toNonIndexed() : g; f.computeVertexNormals(); return f; };
+  function canvasTex(w, h, draw) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; return t; }
+  const GAME_NAME = { sort: 'Sort', order: 'Put in order', build: 'Build it', match: 'Match', route: 'Route', slider: 'Slider', price: 'Best price', scam: 'Scam spotter', path: 'Choose a path', debate: 'Debate', tap: 'Find them', budget: 'Budget planner', market: 'Market time-lapse', compound: 'Snowball', shop: 'Run a stall', timing: 'Timing', diff: 'Spot the difference', chat: 'Chat', mystery: 'Mystery box', island: 'Your island', gen: 'Quick maths', mcq: 'Quiz', tf: 'True or false', gap: 'Fill the gap' };
 
   /* State */
-  let R = null, scene, cam, el, cv, tagsEl, cardEl, guide = null, ring, selRing, planks, kidId = '', treeId = '', key = '';
-  let isles = [], bridges = [], POS = [], L = [], tagEls = [], unitEls = [], clouds, cloudData = [], prizeGs = [], prizeAt = {};
-  let s = 0, vel = 0, sel = 0, cur = -1, busy = false, intro = false, travel = false, running = false, raf = 0, last = 0;
-  const ray = new T.Raycaster(), ndc = new T.Vector2(), tmp = V();
-  const GAME_NAME = { sort: 'Sort', order: 'Put in order', build: 'Build it', match: 'Match', route: 'Route', slider: 'Slider', price: 'Best price', scam: 'Scam spotter', path: 'Choose a path', debate: 'Debate', tap: 'Find them', budget: 'Budget planner', market: 'Market time-lapse', compound: 'Snowball', shop: 'Run a stall', timing: 'Timing', diff: 'Spot the difference', chat: 'Chat', mystery: 'Mystery box', island: 'Your island', gen: 'Quick maths', mcq: 'Quiz', tf: 'True or false', gap: 'Fill the gap' };
+  let R = null, glowTex = null, scene, cam, el, cv, tagsEl, cardEl, followEl, plant, planG = null, sky, sunSprite, clouds = [], signMesh, coinsG, seed, shells, stalk, stalkInk, coty, flower, sepals, outer, inner, rays, dots, goalStar, butterflies, guide = null, guideKind = '';
+  let mode = 'tree', running = false, raf = 0, last = 0, t = 0, key = '', treeId = '', busy = false, celTok = 0, drag = null, prizeSig = '';
+  let LS = [], US = [], Q = 1, KN = [], LEAVES = [], tagEls = [], utagEls = [], goalEl = null, prizeAt = {}, prizeGs = [];
+  let done = [], real = [], udone = [], crowned = [], cur = -1, sel = null, bloomOn = false, passedA = 0, shown = 0, quizFresh = false, quizMax = 0;
+  const V = { s: 0, shell: 0, shiver: 0, bloomT: 0, bud: 0 };
+  const CAM = { y: 0.75, manual: null, idle: 0, az: 0.35, dist: 6, w: 1, h: 1, wide: true, sheet: 0, top: 0, cardW: 0 };
+
+  /* The stalk follows one gentle S curve. Answers map onto it: the first right answer pushes a shoot clear of the
+     seed, every lesson's questions take an equal share of the rest, and the bloom grows the last bit (TOP to 1). */
+  const H = 18, BASE = 0.3, NS = 540, RAD = 10, TOP = 0.93;
+  const curve = new T.CatmullRomCurve3([[0, BASE - 0.05, 0], [0.04, BASE + 1, 0.02], [-0.18, BASE + 3.2, 0.1], [0.2, BASE + 6, -0.08], [-0.16, BASE + 9, 0.06], [0.17, BASE + 12, -0.05], [-0.1, BASE + 15, 0.04], [0, BASE + H, 0]].map(p => V3(...p)), false, 'centripetal');
+  const LEN = curve.getLength(), SPROUT = 0.95 / LEN, SP = [], SN = [], SB = [], STn = [];
+  { const fr = curve.computeFrenetFrames(NS, false); for (let i = 0; i <= NS; i++) { SP.push(curve.getPointAt(i / NS)); SN.push(fr.normals[i]); SB.push(fr.binormals[i]); STn.push(fr.tangents[i]); } }
+  const uOf = a => (a <= 0 ? 0 : SPROUT + (TOP - SPROUT) * Math.min(1, a / Q));
+  function sample(u, out = {}) { const f = clamp(u, 0, 1) * NS, i0 = Math.floor(Math.min(f, NS - 1)), k = f - i0; out.p = (out.p || V3()).lerpVectors(SP[i0], SP[i0 + 1], k); out.n = (out.n || V3()).lerpVectors(SN[i0], SN[i0 + 1], k).normalize(); out.b = (out.b || V3()).lerpVectors(SB[i0], SB[i0 + 1], k).normalize(); out.t = (out.t || V3()).lerpVectors(STn[i0], STn[i0 + 1], k).normalize(); return out; }
+  function radius(u, s) { const flare = 1 + 0.7 * Math.max(0, 1 - u * LEN / 0.45), tip = clamp((s - u) * LEN / 0.6, 0, 1); return (0.17 - 0.09 * u) * flare * (0.16 + 0.84 * Math.sqrt(tip)); }
+  let builtS = -1;
+  function buildStalk(s) {
+    if (Math.abs(s - builtS) < 0.0004) return; builtS = s;
+    if (s <= 0.0005) { stalk.visible = false; return; } stalk.visible = true;
+    const rings = Math.max(2, Math.ceil(s * NS)) + 1, NV = rings * (RAD + 1) + 1, pos = new Float32Array(NV * 3), nor = new Float32Array(NV * 3), idx = [], q = {};
+    for (let i = 0; i < rings; i++) {
+      const u = Math.min(s, i / NS), r = radius(u, s); sample(u, q);
+      for (let j = 0; j <= RAD; j++) { const a = j / RAD * Math.PI * 2, c = Math.cos(a), sn = Math.sin(a), o = (i * (RAD + 1) + j) * 3, nx = c * q.n.x + sn * q.b.x, ny = c * q.n.y + sn * q.b.y, nz = c * q.n.z + sn * q.b.z; pos[o] = q.p.x + nx * r; pos[o + 1] = q.p.y + ny * r; pos[o + 2] = q.p.z + nz * r; nor[o] = nx; nor[o + 1] = ny; nor[o + 2] = nz; }
+    }
+    for (let i = 0; i < rings - 1; i++) for (let j = 0; j < RAD; j++) { const a = i * (RAD + 1) + j, b = a + RAD + 1; idx.push(a, a + 1, b, b, a + 1, b + 1); }
+    sample(s, q); const ti = NV - 1; pos[ti * 3] = q.p.x + q.t.x * 0.04; pos[ti * 3 + 1] = q.p.y + q.t.y * 0.04; pos[ti * 3 + 2] = q.p.z + q.t.z * 0.04; nor[ti * 3 + 1] = 1;
+    const lastRing = (rings - 1) * (RAD + 1); for (let j = 0; j < RAD; j++) idx.push(lastRing + j + 1, lastRing + j, ti);
+    const g = new T.BufferGeometry(); g.setAttribute('position', new T.BufferAttribute(pos, 3)); g.setAttribute('normal', new T.BufferAttribute(nor, 3)); g.setAttribute('inkNormal', new T.BufferAttribute(nor, 3)); g.setIndex(idx);
+    stalk.geometry.dispose(); stalk.geometry = g; if (stalkInk) stalkInk.geometry = g;
+  }
+
+  /* Leaves: a veined texture on a curved, slightly cupped blade */
+  function leafShape(L, W, round) { const s = new T.Shape(); s.moveTo(0, 0); s.bezierCurveTo(L * 0.25, W * (round ? 1.1 : 0.95), L * (round ? 0.8 : 0.7), W * (round ? 1 : 0.75), L, 0); s.bezierCurveTo(L * (round ? 0.8 : 0.7), -W * (round ? 1 : 0.75), L * 0.25, -W * (round ? 1.1 : 0.95), 0, 0); return s; }
+  function leafGeo(L, W, round, droop, cup) {
+    const g = new T.ExtrudeGeometry(leafShape(L, W, round), { depth: 0.035, bevelEnabled: false, curveSegments: 18 }); g.translate(0, 0, -0.0175); g.rotateX(-Math.PI / 2);
+    const p = g.attributes.position, uv = g.attributes.uv; for (let i = 0; i < p.count; i++) { const x = p.getX(i), z = p.getZ(i); p.setY(i, p.getY(i) - droop * x * x / L + cup * z * z / W); uv.setXY(i, x / L, (-z + W) / (2 * W)); }
+    g.computeVertexNormals(); return g;
+  }
+  let leafM = null;
+  const KNG = new T.TorusGeometry(1, 0.32, 8, 18);
+
+  /* Scene pieces every plant shares: sky, island, seed, stalk, baby leaves, flower, butterflies */
+  function world() {
+    scene = new T.Scene(); cam = new T.PerspectiveCamera(40, 1, 0.1, 400);
+    scene.add(new T.HemisphereLight(col(0xdff2ff), col(0x7fbf6a), 0.75));
+    const sun = new T.DirectionalLight(col(0xfff3dc), 0.95); sun.position.set(-6, 10, 8); scene.add(sun);
+    sky = new T.Mesh(new T.SphereGeometry(200, 32, 16), new T.ShaderMaterial({ side: T.BackSide, depthWrite: false, uniforms: { top: { value: col(0x3f9cff) }, mid: { value: col(0x8fd0ff) }, low: { value: col(0xe8f7ff) } },
+      vertexShader: 'varying vec3 vW; void main(){ vW = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+      fragmentShader: 'uniform vec3 top, mid, low; varying vec3 vW; void main(){ float h = vW.y; vec3 c = h > 0.0 ? mix(mid, top, smoothstep(0.0, 0.7, h)) : mix(mid, low, smoothstep(0.0, -0.5, h)); gl_FragColor = linearToOutputTexel(vec4(c, 1.0)); }' }));
+    scene.add(sky);
+    const glow = canvasTex(256, 256, (g, w, h) => { const r = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2); r.addColorStop(0, 'rgba(255,250,220,1)'); r.addColorStop(0.18, 'rgba(255,240,170,1)'); r.addColorStop(0.32, 'rgba(255,230,140,.55)'); r.addColorStop(1, 'rgba(255,230,140,0)'); g.fillStyle = r; g.fillRect(0, 0, w, h); });
+    glowTex = glow;
+    sunSprite = new T.Sprite(new T.SpriteMaterial({ map: glow, depthWrite: false, transparent: true })); sunSprite.scale.set(36, 36, 1); scene.add(sunSprite);
+    { const cm = toon(0xffffff), cg = new T.SphereGeometry(1, 18, 12); let sd = 7; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+      for (let i = 0; i < 18; i++) { const g = new T.Group(), n = 4 + Math.floor(rnd() * 3); for (let k = 0; k < n; k++) { const r = 0.9 + rnd() * 1.1, b = mesh(cg, cm, g, (k - n / 2) * 1.2 + rnd() * 0.4, rnd() * 0.5 + (k % 2) * 0.4, rnd() * 0.6); b.scale.set(r, r * 0.75, r); } g.position.set(-22 + rnd() * 44, -3 + rnd() * 34, -14 - rnd() * 22); g.userData.v = 0.15 + rnd() * 0.25; g.scale.setScalar(0.8 + rnd() * 0.7); scene.add(g); clouds.push(g); } }
+
+    const wld = new T.Group(); scene.add(wld); plant = new T.Group(); wld.add(plant);
+    // The floating island: grass, a layered rock cone, a soil mound for the seed, tufts, daisies and a sign
+    const isl = new T.Group(); wld.add(isl);
+    mesh(new T.CylinderGeometry(3.1, 2.8, 0.5, 48), toon(0x6fcf4f), isl, 0, -0.25, 0);
+    mesh(new T.TorusGeometry(2.95, 0.16, 8, 48), toon(0x58b83d), isl, 0, -0.02, 0).rotation.x = Math.PI / 2;
+    const rockG = faceted(new T.ConeGeometry(2.85, 3.6, 11, 3)); rockG.rotateX(Math.PI);
+    { const p = rockG.attributes.position, cs = [], A = col(0x9b7655), B = col(0x6f5040), Lt = col(0xc29a72); for (let i = 0; i < p.count; i++) { const band = Math.sin(p.getY(i) * 4.2 + Math.sin(p.getX(i) * 2) * 0.8), c = band > 0.35 ? Lt : band < -0.45 ? B : A; cs.push(c.r, c.g, c.b); } rockG.setAttribute('color', new T.Float32BufferAttribute(cs, 3)); }
+    mesh(rockG, toon(0xffffff, { vc: 1 }), isl, 0, -2.3, 0);
+    const soilG = new T.SphereGeometry(1.05, 32, 14, 0, Math.PI * 2, 0, Math.PI / 2);
+    { const p = soilG.attributes.position, cs = [], A = col(0x7a4e2d), B = col(0x5e3a20); for (let i = 0; i < p.count; i++) { const c = Math.sin(p.getX(i) * 13) * Math.cos(p.getZ(i) * 11) > 0.55 ? B : A; cs.push(c.r, c.g, c.b); } soilG.setAttribute('color', new T.Float32BufferAttribute(cs, 3)); }
+    mesh(soilG, toon(0xffffff, { vc: 1 }), isl).scale.y = 0.36;
+    coinsG = new T.Group(); isl.add(coinsG); { const cg = new T.CylinderGeometry(0.2, 0.2, 0.05, 24); [[1.25, 0.35, 0.6], [-1.1, 0.7, -0.9], [0.2, -1.35, 0.3]].forEach(([x, z, r]) => mesh(cg, toon(0xffc93c), coinsG, x, 0.05, z).rotation.set(r, r * 2, 0.4)); }
+    { const tg = new T.ConeGeometry(0.06, 0.38, 5); for (let i = 0; i < 26; i++) { const a = i * 2.4, d = 1.45 + (i % 5) * 0.28, tf = new T.Group(); tf.position.set(Math.cos(a) * d, 0, Math.sin(a) * d); [-0.06, 0, 0.06].forEach((o, k) => { mesh(tg, toon(0x4fae36), tf, o, 0.16, (k - 1) * 0.03).rotation.z = o * 3; }); isl.add(tf); } }
+    { const sg = new T.CylinderGeometry(0.02, 0.02, 0.36, 5), pg = new T.SphereGeometry(0.07, 8, 6), mg = new T.SphereGeometry(0.06, 8, 6);
+      [[2.2, 0.9], [-2.1, -0.4], [0.9, 2.15], [-0.6, -2.2], [1.8, -1.5]].forEach(([x, z]) => { const f = new T.Group(); f.position.set(x, 0, z); mesh(sg, toon(0x4fae36), f, 0, 0.18, 0); for (let k = 0; k < 5; k++) mesh(pg, toon(0xffffff), f, Math.cos(k * 1.26) * 0.09, 0.38, Math.sin(k * 1.26) * 0.09).scale.y = 0.45; mesh(mg, toon(0xffd84d), f, 0, 0.4, 0); isl.add(f); }); }
+    [[1.9, 1.6, 0.22], [-2.3, 0.9, 0.16], [-1.4, -1.9, 0.26]].forEach(([x, z, s]) => mesh(faceted(new T.DodecahedronGeometry(s)), toon(0xb9b2c4), isl, x, s * 0.4, z).rotation.set(x, z, 0));
+    const sign = new T.Group(); sign.position.set(-1.75, 0, 1.35); sign.rotation.y = 0.5; isl.add(sign);
+    mesh(new T.BoxGeometry(0.08, 0.7, 0.08), toon(0xc98a4b), sign, 0, 0.35, 0);
+    const board = mesh(new T.BoxGeometry(0.95, 0.42, 0.06), toon(0xc98a4b), sign, 0, 0.72, 0);
+    signMesh = mesh(new T.PlaneGeometry(0.86, 0.34), new T.MeshBasicMaterial(), board, 0, 0, 0.032); signMesh.userData.noInk = true;
+    G3.outline(isl);
+    [[-36, 4, -34, 1.6], [40, 13, -30, 2], [-38, 25, -28, 1.4]].forEach(([x, y, z, s]) => { const f = new T.Group(); f.position.set(x, y, z); f.scale.setScalar(s); mesh(new T.CylinderGeometry(2, 1.8, 0.4, 24), toon(0x7fd65f), f); mesh(faceted(new T.ConeGeometry(1.9, 2.4, 9)), toon(0xa98263), f, 0, -1.4, 0).rotation.x = Math.PI; mesh(new T.SphereGeometry(0.7, 12, 8), toon(0x4fae36), f, 0.4, 0.7, 0).scale.y = 1.3; scene.add(f); });
+
+    // The seed: two half shells that split open on the first right answer
+    seed = new T.Group(); seed.position.set(0, 0.4, 0); plant.add(seed);
+    const shellG = new T.SphereGeometry(0.26, 22, 14, 0, Math.PI);
+    shells = [0, 1].map(k => { const p = new T.Group(); seed.add(p); const m = mesh(shellG, toon(0xf0bd6a, { ds: 1 }), p); m.scale.set(1, 1.45, 1); m.rotation.y = k ? Math.PI : 0; m.userData.noInk = true; return p; });
+    // A first sliver of stalk gives the outline its geometry; it is rebuilt as the plant grows.
+    stalk = new T.Mesh(new T.BufferGeometry(), toon(0x5cc13f)); plant.add(stalk); buildStalk(0.01); G3.outline(stalk); stalkInk = stalk.children[0]; builtS = -1;
+
+    leafM = toon(0xffffff, { map: canvasTex(256, 128, (g, w, h) => {
+      const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#53c447'); gr.addColorStop(0.5, '#7ddb5a'); gr.addColorStop(1, '#53c447'); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+      g.strokeStyle = '#c8f59c'; g.lineCap = 'round'; g.lineWidth = 5; g.beginPath(); g.moveTo(4, h / 2); g.lineTo(w - 6, h / 2); g.stroke();
+      g.lineWidth = 3; for (let i = 1; i < 6; i++) { const x = i * w / 6.2; [1, -1].forEach(d => { g.beginPath(); g.moveTo(x, h / 2); g.quadraticCurveTo(x + 18, h / 2 - d * 20, x + 34, h / 2 - d * 44); g.stroke(); }); }
+    }) });
+    // Two round baby leaves near the soil, out with the first right answers
+    coty = [1, -1].map(side => { const pv = new T.Group(); pv.position.copy(curve.getPointAt(0.72 / LEN)); pv.rotation.y = side > 0 ? 0.3 : Math.PI + 0.3; plant.add(pv); const tilt = new T.Group(); pv.add(tilt); tilt.rotation.z = 0.5; G3.outline(mesh(leafGeo(0.6, 0.26, true, 0.25, 0.25), leafM, tilt, 0.05, 0, 0)); pv.scale.setScalar(0.001); return pv; });
+
+    // The flower: sepals and two rings of petals around a sunny centre, a closed bud until the last lesson
+    flower = new T.Group(); plant.add(flower); flower.scale.setScalar(0.001);
+    const petalShape = new T.Shape(); petalShape.moveTo(0, 0); petalShape.bezierCurveTo(0.36, 0.2, 0.44, 0.85, 0, 1.15); petalShape.bezierCurveTo(-0.44, 0.85, -0.36, 0.2, 0, 0);
+    const petalRing = (n, len, c, base, open0, open1, offset) => {
+      const g = new T.ExtrudeGeometry(petalShape, { depth: 0.03, bevelEnabled: false, curveSegments: 14 }); g.translate(0, 0, -0.015); g.scale(len / 1.15 * 0.9, len / 1.15, 1);
+      { const p = g.attributes.position; for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i); p.setZ(i, p.getZ(i) + 0.9 * x * x - 0.1 * y * y); } g.computeVertexNormals(); }
+      const m = new T.MeshToonMaterial({ color: col(c), gradientMap: G3.GRAD, emissive: col(c).multiplyScalar(0.22) }); G3.rimPatch(m);
+      return Array.from({ length: n }, (_, i) => { const yaw = new T.Group(); yaw.rotation.y = i / n * Math.PI * 2 + offset; flower.add(yaw); const tilt = new T.Group(); tilt.position.z = base; yaw.add(tilt); G3.outline(mesh(g, m, tilt)); return { tilt, open0, open1, d: i / n }; });
+    };
+    sepals = petalRing(5, 0.95, 0x3e9e31, 0.06, -0.15, 1.85, 0.3); outer = petalRing(8, 1.65, 0xff7db8, 0.12, -0.3, 1.1, 0); inner = petalRing(6, 1.15, 0xffc2dc, 0.08, -0.22, 0.75, 0.25);
+    const heart = mesh(new T.SphereGeometry(0.38, 20, 12), toon(0xffd84d), flower, 0, 0.14, 0); heart.scale.y = 0.55; G3.outline(heart);
+    { const dg = new T.SphereGeometry(0.035, 6, 4); for (let i = 0; i < 14; i++) { const a = i * 2.39, r = 0.07 + 0.17 * Math.sqrt(i / 14); mesh(dg, toon(0xf08a24), flower, Math.cos(a) * r * 1.25, 0.33 - r * 0.35, Math.sin(a) * r * 1.25); } }
+    rays = new T.Sprite(new T.SpriteMaterial({ map: canvasTex(512, 512, (g, w) => { g.translate(w / 2, w / 2); for (let i = 0; i < 16; i++) { g.rotate(Math.PI / 8); const gr = g.createLinearGradient(0, 0, 0, -w / 2); gr.addColorStop(0, 'rgba(255,240,170,.55)'); gr.addColorStop(1, 'rgba(255,240,170,0)'); g.fillStyle = gr; g.beginPath(); g.moveTo(-14, 0); g.lineTo(14, 0); g.lineTo(0, -w / 2); g.fill(); } }), transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: 0 }));
+    rays.scale.set(8, 8, 1); plant.add(rays);
+
+    // A faint dotted path up to where the flower will open, so kids can see the journey ahead
+    const DOTS = []; for (let d = 0.18; d < LEN * TOP; d += 0.32) DOTS.push(d / LEN);
+    dots = new T.InstancedMesh(new T.SphereGeometry(0.045, 8, 6), new T.MeshBasicMaterial({ color: col(0xffffff), transparent: true, opacity: 0.75 }), DOTS.length); dots.userData.at = DOTS; dots.frustumCulled = false; plant.add(dots);
+    goalStar = new T.Sprite(new T.SpriteMaterial({ map: glow, transparent: true, depthWrite: false, opacity: 0.85 })); goalStar.scale.set(1.6, 1.6, 1); goalStar.position.copy(sample(1).p); plant.add(goalStar);
+
+    butterflies = [0xff9f1c, 0x5b8cff].map(c => {
+      const g = new T.Group(), wm = new T.MeshBasicMaterial({ transparent: true, side: T.DoubleSide, depthWrite: false, map: canvasTex(128, 128, (x, w, h) => { x.fillStyle = '#' + c.toString(16).padStart(6, '0'); x.beginPath(); x.ellipse(w * 0.45, h * 0.36, w * 0.4, h * 0.3, -0.3, 0, Math.PI * 2); x.fill(); x.beginPath(); x.ellipse(w * 0.4, h * 0.74, w * 0.28, h * 0.2, 0.4, 0, Math.PI * 2); x.fill(); x.fillStyle = '#fff'; x.beginPath(); x.arc(w * 0.55, h * 0.3, w * 0.07, 0, 7); x.fill(); x.strokeStyle = '#2b2238'; x.lineWidth = 6; x.beginPath(); x.ellipse(w * 0.45, h * 0.36, w * 0.4, h * 0.3, -0.3, 0, Math.PI * 2); x.stroke(); }) });
+      const wings = [1, -1].map(s => { const w = new T.Group(); g.add(w); const m = mesh(new T.PlaneGeometry(0.5, 0.5), wm, w, s * 0.25, 0, 0); if (s < 0) m.scale.x = -1; m.rotation.x = -Math.PI / 2; return w; });
+      mesh(new T.CylinderGeometry(0.03, 0.03, 0.34, 6), new T.MeshBasicMaterial({ color: col(0x2b2238) }), g).rotation.x = Math.PI / 2;
+      g.visible = false; scene.add(g); return { g, wings };
+    });
+  }
+  function signFor(name) {
+    const words = String(name).split(' '), lines = words.length > 1 ? [words.slice(0, Math.ceil(words.length / 2)).join(' '), words.slice(Math.ceil(words.length / 2)).join(' ')] : [name];
+    if (signMesh.material.map) signMesh.material.map.dispose();
+    signMesh.material.map = canvasTex(256, 100, (g, w, h) => { g.fillStyle = '#c98a4b'; g.fillRect(0, 0, w, h); g.fillStyle = '#3b2412'; g.textAlign = 'center'; g.textBaseline = 'middle'; const fs = Math.min(38, 230 / Math.max(...lines.map(l => l.length)) * 1.7); g.font = `900 ${fs}px Nunito, ui-rounded, sans-serif`; lines.forEach((l, i) => g.fillText(l, w / 2, lines.length > 1 ? h * (i ? 0.72 : 0.3) : h / 2)); });
+    signMesh.material.needsUpdate = true;
+  }
+
+  /* Particles: sparkles, leaf bits and petals */
+  const P = []; let starTex = null;
+  function burst(at, n, kind) {
+    starTex = starTex || canvasTex(64, 64, (g, w) => { g.translate(w / 2, w / 2); g.fillStyle = '#fff6c8'; g.beginPath(); for (let i = 0; i < 8; i++) { const r = i % 2 ? 7 : 30, a = i * Math.PI / 4; g.lineTo(Math.cos(a) * r, Math.sin(a) * r); } g.fill(); });
+    for (let i = 0; i < n; i++) {
+      let o;
+      if (kind === 'star') { o = new T.Sprite(new T.SpriteMaterial({ map: starTex, transparent: true, depthWrite: false, color: col(i % 3 ? 0xfff2a8 : 0xffffff) })); o.scale.setScalar(0.28 + Math.random() * 0.2); }
+      else { const c = kind === 'leaf' ? [0x5cc13f, 0x8be06a, 0x3e9e31][i % 3] : [0xff6fa8, 0xffa8cb, 0xffffff, 0xffd84d][i % 4]; o = new T.Mesh(new T.PlaneGeometry(kind === 'leaf' ? 0.22 : 0.2, 0.13), new T.MeshBasicMaterial({ color: col(c), side: T.DoubleSide, transparent: true })); }
+      o.position.copy(at); scene.add(o);
+      const a = Math.random() * Math.PI * 2, up = kind === 'petal' ? 2.5 + Math.random() * 3 : 1 + Math.random() * 2.2, sp = kind === 'petal' ? 2 + Math.random() * 3 : 1 + Math.random() * 1.6;
+      P.push({ o, v: V3(Math.cos(a) * sp, up, Math.sin(a) * sp), life: 0, max: kind === 'petal' ? 4 + Math.random() * 2 : 1 + Math.random() * 0.6, spin: V3(Math.random() * 6, Math.random() * 6, Math.random() * 6), kind });
+    }
+  }
+  function tickParticles(dt) {
+    for (let i = P.length - 1; i >= 0; i--) {
+      const p = P[i]; p.life += dt; const f = p.life / p.max;
+      if (f >= 1) { scene.remove(p.o); p.o.material.dispose(); if (!p.o.isSprite) p.o.geometry.dispose(); P.splice(i, 1); continue; }
+      p.v.multiplyScalar(Math.exp(-(p.kind === 'star' ? 2.2 : 1.1) * dt)); p.v.y -= (p.kind === 'star' ? 1.5 : 1.2) * dt; if (p.kind === 'petal') p.v.x += Math.sin(p.life * 3 + i) * dt * 1.5;
+      p.o.position.addScaledVector(p.v, dt); if (!p.o.isSprite) { p.o.rotation.x += p.spin.x * dt; p.o.rotation.y += p.spin.y * dt; p.o.rotation.z += p.spin.z * dt; }
+      p.o.material.opacity = f > 0.7 ? 1 - (f - 0.7) / 0.3 : 1;
+    }
+  }
+  const tipWorld = () => plant.localToWorld(sample(V.s).p.clone());
+  function pulse(n) { setTimeout(() => { if (!running) return; burst(tipWorld(), 10, 'star'); Sound.step(n); }, 220); }
 
   function mount() {
     if (el) return;
-    el = document.createElement('div'); el.className = 'gp';
-    el.innerHTML = '<canvas class="gp-cv" aria-label="Skill tree islands. Drag to move along the path, tap an island to see its lesson."></canvas><div class="gp-tags"></div><section class="gp-card" aria-live="polite"></section>';
-    cv = el.querySelector('.gp-cv'); tagsEl = el.querySelector('.gp-tags'); cardEl = el.querySelector('.gp-card');
-    R = new T.WebGLRenderer({ canvas: cv, antialias: true, alpha: true }); R.setPixelRatio(Math.min(2, devicePixelRatio || 1)); R.setClearColor(0, 0);
-    cam = new T.PerspectiveCamera(40, 1, 0.1, 200);
-    cv.addEventListener('pointerdown', onDown); addEventListener('pointermove', onMove); addEventListener('pointerup', onUp); addEventListener('pointercancel', onUp);
-    cv.addEventListener('wheel', e => { e.preventDefault(); if (busy) return; kill('pan'); intro = false; vel = 0; s = clamp(s - e.deltaY / 380, -0.4, POS.length - 0.8); }, { passive: false });
-    new (window.ResizeObserver || function () { return { observe() {} }; })(resize).observe(el);
+    R = new T.WebGLRenderer({ antialias: true }); R.setPixelRatio(Math.min(2, devicePixelRatio || 1)); R.outputEncoding = T.sRGBEncoding; R.toneMapping = T.NoToneMapping;
+    el = document.createElement('div'); el.className = 'pl';
+    el.innerHTML = '<div class="pl-tags"></div><button class="pl-follow" type="button" hidden>⬇ Back to my plant</button><section class="pl-card" aria-live="polite"></section>';
+    cv = R.domElement; cv.className = 'pl-cv'; cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', 'Your plant. Drag or scroll to look up and down the stalk, and tap a label to see its lesson.'); el.prepend(cv);
+    tagsEl = el.querySelector('.pl-tags'); cardEl = el.querySelector('.pl-card'); followEl = el.querySelector('.pl-follow');
+    followEl.onclick = () => { CAM.manual = null; showFollow(); Sound.tap(); };
+    const top = () => sample(1).p.y + 1.5;
+    cv.addEventListener('wheel', e => { e.preventDefault(); CAM.manual = clamp((CAM.manual ?? CAM.y) - e.deltaY * 0.012, 0.4, top()); CAM.idle = 0; showFollow(); }, { passive: false });
+    cv.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY, cy: CAM.manual ?? CAM.y, az: CAM.az }; try { cv.setPointerCapture(e.pointerId); } catch (_) {} cv.classList.add('drag'); });
+    cv.addEventListener('pointermove', e => { if (!drag) return; const dy = e.clientY - drag.y, dx = e.clientX - drag.x; if (Math.abs(dy) > 3 || CAM.manual != null) { CAM.manual = clamp(drag.cy + dy * (CAM.dist / Math.max(300, CAM.h)) * 1.1, 0.4, top()); CAM.idle = 0; showFollow(); } CAM.az = drag.az - dx * 0.004; });
+    const up = () => { drag = null; cv.classList.remove('drag'); }; cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+    const ro = new (window.ResizeObserver || function () { return { observe() {} }; })(resize); ro.observe(el); ro.observe(cardEl);
+    world();
   }
 
-  // Islands in path order: a start island, each unit's lessons and its challenge, and misty islands for units still to come.
+  /* The plan: this band's lessons in order, each with its share of the stalk, and a leaf at the end of every unit */
   function plan(kid, tree) {
-    const pack = packFor(tree.id, bandOf(kid)), out = [{ kind: 'start' }]; if (!pack) return out;
-    for (const u of pack.units) {
-      if (!u.lessons.length) { out.push({ kind: 'soon', unit: u }); continue; }
-      u.lessons.forEach(l => out.push({ kind: 'lesson', l, unit: u })); out.push({ kind: 'boss', unit: u });
-    }
-    return out;
+    if (planG) { planG.traverse(o => { if (o.userData.own) o.geometry.dispose(); }); plant.remove(planG); }
+    planG = new T.Group(); plant.add(planG); prizeGs = []; prizeSig = '';
+    const pack = packFor(tree.id, bandOf(kid)); LS = []; US = []; let a = 0;
+    for (const u of pack ? pack.units : []) { if (!u.lessons.length) continue; const ls = []; for (const l of u.lessons) { const w = Math.max(1, l.checks.length); ls.push(LS.length); LS.push({ l, u: US.length, from: a, to: a + w }); a += w; } US.push({ unit: u, ls }); }
+    Q = Math.max(1, a);
+    KN = LS.map(x => { const u = uOf(x.to), q = sample(u), m = new T.Mesh(KNG, RING); m.position.copy(q.p); m.quaternion.setFromUnitVectors(V3(0, 0, 1), q.t); m.scale.setScalar(0.001); G3.outline(m); planG.add(m); return { m, t: 0, gold: 0, at: u, r: radius(u, 1) * 1.05 }; });
+    LEAVES = US.map((U, i) => {
+      const at = uOf(LS[U.ls[U.ls.length - 1]].to) - 0.012, side = i % 2 ? -1 : 1, pv = new T.Group(); pv.position.copy(sample(at).p); pv.rotation.y = (side > 0 ? 0 : Math.PI) + (i % 2 ? -0.35 : 0.35); planG.add(pv);
+      const pitch = new T.Group(); pv.add(pitch); const roll = new T.Group(); pitch.add(roll); const L = Math.max(1.5, 2.3 - i * 0.15);
+      const stem = mesh(new T.CylinderGeometry(0.035, 0.05, 0.5, 8), toon(0x4fae36), roll, 0.25, 0, 0); stem.rotation.z = Math.PI / 2; stem.userData.own = 1;
+      mesh(leafGeo(L, L * 0.36, false, 0.35, 0.3), leafM, roll, 0.45, 0, 0).userData.own = 1;
+      G3.outline(roll); pv.scale.setScalar(0.001); return { pv, pitch, roll, side, at, t: 0, L };
+    });
+    tagsEl.innerHTML = '';
+    tagEls = LS.map((x, i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pl-tag'; b.dataset.g = 'plantSel'; b.dataset.i = i; tagsEl.appendChild(b); return b; });
+    utagEls = US.map((U, i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pl-utag'; b.dataset.g = 'plantUnit'; b.dataset.i = i; tagsEl.appendChild(b); return b; });
+    goalEl = document.createElement('div'); goalEl.className = 'pl-goal'; goalEl.textContent = '🌸 Bloom'; tagsEl.appendChild(goalEl);
+    signFor(tree.name); coinsG.visible = tree.id === 'money';
   }
-  function stateOf(kid, d, skip) {
-    if (d.kind === 'start') return 'start';
-    if (d.kind === 'soon') return 'soon';
-    if (d.kind === 'boss') { const uc = (prog(kid).units || {})[d.unit.id] || {}; if (uc.best >= 0.8) return 'done'; return d.unit.lessons.every(l => passed(kid, l.id) && l.id !== skip) ? 'open' : 'locked'; }
-    if (passed(kid, d.l.id) && d.l.id !== skip) return 'done';
-    return available(kid, d.l) && !(skip && !passedOr(kid, d.l, skip)) ? 'open' : 'locked';
+  // The kid's guide hovers beside the growing tip. Its colours are sRGB like the rest of this view.
+  function setGuide(kind) {
+    if (guide && guideKind === kind) return; if (guide) plant.remove(guide.g);
+    const mine = new Set(), gm = guideModel(kind, (c, o = {}) => { const m = toon(c, { e: o.e }); mine.add(m); return m; });
+    gm.g.traverse(o => { const m = o.material; if (!o.isMesh || mine.has(m) || m.userData.lin) return; m.color.convertSRGBToLinear(); if (m.emissive) m.emissive.convertSRGBToLinear(); m.userData.lin = 1; });
+    G3.outline(gm.g); guide = { g: new T.Group(), body: gm.g, P: gm.P, hop: 0, shake: 0 }; guide.g.add(gm.g); guide.g.scale.setScalar(0.5); guide.g.position.set(1.3, 0, 0.6); plant.add(guide.g); guideKind = kind;
   }
-  // While a just-passed lesson is replayed as "not yet passed" for the bridge-building moment.
-  function passedOr(kid, l, skip) { const pack = packFor(l.tree, l.band), u = pack.units.find(x => x.n === l.unit), i = u.lessons.indexOf(l); return !(i > 0 && u.lessons[i - 1].id === skip); }
 
-  function build(kid, tree) {
-    // Free the last tree's island meshes; shared shapes, cached materials and emoji textures stay.
-    if (scene) { const keepG = new Set(Object.values(GEO)), keepM = new Set(Object.values(MC)); scene.traverse(o => { if (o.isSprite) { o.material.dispose(); return; } if (o.geometry && !keepG.has(o.geometry)) o.geometry.dispose(); if (o.material && o.material !== INKM && !keepM.has(o.material)) o.material.dispose(); }); }
-    scene = new T.Scene(); prizeGs = []; prizeAt = {}; const hue = new T.Color(tree.hue), fog = hue.clone().lerp(new T.Color(0x7fd3ff), 0.45);
-    scene.fog = new T.Fog(fog, 17, 44); U.uFogCol.value.copy(fog);
-    scene.add(new T.HemisphereLight(0xffffff, 0xafc2e6, 0.55)); const d = new T.DirectionalLight(0xfff3dc, 0.7); d.position.set(-4, 8, 6); scene.add(d);
-    L = plan(kid, tree); const N = L.length;
-    POS = L.map((x, i) => V(i ? Math.sin(i * 1.1) * 2.1 : 0, i * 0.24, -i * 3.75));
-    const grass = new T.Color(0x5ccb61).lerp(hue, 0.18).getHex();
-    isles = L.map((x, i) => {
-      const r = x.kind === 'start' ? 1.5 : x.kind === 'boss' ? 1.3 : x.kind === 'soon' ? 0.85 : 1, g = new T.Group(); g.position.copy(POS[i]); scene.add(g);
-      g.add(island(r, hash(tree.id) + i * 7, grass));
-      const prop = new T.Group(); (PROP[x.kind === 'start' ? 'start' : x.kind === 'boss' ? 'trophy' : x.kind === 'soon' ? 'island' : x.l.scene] || PROP.island)(prop); prop.position.z = -0.1; g.add(prop);
-      const badge = x.kind === 'lesson' ? emoji(x.l.icon, 0.55) : x.kind === 'start' ? emoji(tree.icon, 0.6) : null; if (badge) { badge.position.set(0, x.kind === 'start' ? 1.55 : 1.2, -0.1); g.add(badge); }
-      const pick = new T.Mesh(new T.SphereGeometry(r * 1.15, 12, 8), new T.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false, colorWrite: false })); pick.position.y = 0.2; pick.userData.i = i; g.add(pick);
-      const sh = new T.Shape(); for (let k = 0; k < 10; k++) { const rr = k % 2 ? 0.12 : 0.28, a = Math.PI / 2 + k * Math.PI / 5; k ? sh.lineTo(Math.cos(a) * rr, Math.sin(a) * rr) : sh.moveTo(Math.cos(a) * rr, Math.sin(a) * rr); } const sg = new T.ExtrudeGeometry(sh, { depth: 0.08, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.025, bevelSegments: 1 }); sg.center();
-      const star = M(sg, 0xffc93c); star.scale.setScalar(0.6); star.position.set(0.55, 1.0, 0.2); star.visible = false; g.add(star);
-      const mist = new T.Group(), mm = new T.MeshToonMaterial({ color: 0xf4f8ff, gradientMap: G3.GRAD, transparent: true, opacity: 0.9, depthWrite: false }); for (let k = 0; k < 7; k++) { const a = k / 7 * Math.PI * 2 + i, m = new T.Mesh(GEO.sph, mm); m.scale.set(0.45, 0.26, 0.36); m.position.set(Math.cos(a) * r * 0.85, 0.15 + (k % 2) * 0.18, Math.sin(a) * r * 0.85); mist.add(m); } g.add(mist);
-      const meshes = []; g.traverse(o => { if (o.isMesh && o.userData.base && !mist.children.includes(o) && o !== star) { o.userData.grey = greyOf(o.userData.base); if (MC['c' + o.material.color.getHex()] === o.material) { o.material = o.material.clone(); G3.rimPatch(o.material); } meshes.push(o); } });
-      return { g, pick, star, mist, mm, meshes, badge, look: -1, r };
-    });
-    // Bridges: planks share one instanced mesh and one instanced outline.
-    const PLANK = prepInk(new T.BoxGeometry(0.46, 0.05, 0.15)); let total = 0; bridges = [];
-    for (let b = 0; b < N - 1; b++) {
-      const a = POS[b], c = POS[b + 1], dir = V(c.x - a.x, 0, c.z - a.z).normalize(), p0 = a.clone().addScaledVector(dir, isles[b].r * 0.9), p1 = c.clone().addScaledVector(dir, -isles[b + 1].r * 0.9);
-      p0.y = a.y - 0.02; p1.y = c.y - 0.02; const len = p0.distanceTo(p1), n = Math.max(4, Math.round(len / 0.23)), yaw = Math.atan2(dir.x, dir.z), side = V(dir.z, 0, -dir.x);
-      const pts = []; for (let k = 0; k <= 20; k++) { const t = k / 20; pts.push(V().lerpVectors(p0, p1, t).add(V(0, -0.22 * Math.sin(Math.PI * t), 0))); }
-      const g = new T.Group(); scene.add(g);
-      for (const sd of [-1, 1]) { g.add(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts.map(p => p.clone().addScaledVector(side, 0.22 * sd).add(V(0, 0.2, 0)))), 24, 0.014, 5), toonC(0x6e4a2e))); for (const p of [p0, p1]) g.add(at(sc(M(GEO.cyl, 0x8a5a35), 0.03, 0.32, 0.03), p.x + side.x * 0.22 * sd, p.y + 0.12, p.z + side.z * 0.22 * sd)); }
-      const puffs = new T.Group(); for (let k = 1; k < 6; k++) { const m = new T.Mesh(GEO.sph, toonC(0xf4f8ff)); m.scale.set(0.16, 0.1, 0.14); m.position.copy(pts[k * 3 + 1]).add(V(0, 0.08, 0)); puffs.add(m); } scene.add(puffs);
-      bridges.push({ g, puffs, first: total, n, p0, p1, yaw, pts }); total += n;
-    }
-    planks = new T.InstancedMesh(PLANK, toonC(0xb57a45), Math.max(1, total)); const plankInk = new T.InstancedMesh(PLANK, INKM, Math.max(1, total));
-    plankInk.instanceMatrix = planks.instanceMatrix; planks.frustumCulled = plankInk.frustumCulled = false; scene.add(planks, plankInk);
-    // Puffy clouds drift beside and below the path.
-    const rnd = mulberry(5); cloudData = [];
-    for (let c = 0; c < Math.ceil(N * 1.6) + 6; c++) {
-      const z = 9 - c * 2.6 - rnd() * 2, under = c % 5 === 2, sd = under ? 0 : (c % 2 ? 1 : -1), cx = under ? (rnd() - 0.5) * 6 : sd * (4.6 + rnd() * 5), cy = -z * 0.064 - (under ? 6.5 : 2.4 + rnd() * 3), v = (0.04 + rnd() * 0.06) * (rnd() < 0.5 ? -1 : 1), k = 4 + Math.floor(rnd() * 3), big = 0.8 + rnd() * 0.7;
-      for (let j = 0; j < k; j++) cloudData.push({ x: cx + (j - k / 2) * 0.7 * big + (rnd() - 0.5) * 0.3, y: cy + (rnd() - 0.3) * 0.35 * big, z: z + (rnd() - 0.5) * 0.9, s: (0.55 + rnd() * 0.45) * big * (j === Math.floor(k / 2) ? 1.3 : 1), v, ph: c });
-    }
-    clouds = new T.InstancedMesh(GEO.sph, toonC(0xf4f9ff), cloudData.length); clouds.frustumCulled = false; scene.add(clouds);
-    ring = new T.Mesh(GEO.tor, new T.MeshToonMaterial({ color: 0xffc93c, gradientMap: G3.GRAD, emissive: 0x6a4300 })); ring.rotation.x = Math.PI / 2; scene.add(ring);
-    selRing = new T.Mesh(GEO.tor, new T.MeshToonMaterial({ color: 0xffffff, gradientMap: G3.GRAD, emissive: 0x777777 })); selRing.rotation.x = Math.PI / 2; scene.add(selRing);
-    const gm = guideModel(prog(kid).guide || 'kea', c => { const m = new T.MeshToonMaterial({ color: c, gradientMap: G3.GRAD }); G3.rimPatch(m); return m; });
-    gm.g.traverse(o => { if (o.isMesh && o.material.isMeshToonMaterial) { prepInk(o.geometry); const k = new T.Mesh(o.geometry, INKM); k.userData.ink = 1; o.add(k); } });
-    guide = { g: new T.Group(), P: gm.P, face: 0, flap: 0 }; guide.g.add(gm.g); guide.g.scale.setScalar(0.55); scene.add(guide.g);
-    // HTML labels and unit banners
-    tagsEl.innerHTML = ''; tagEls = L.map((x, i) => { const b = document.createElement('button'); b.className = 'gp-tag'; b.dataset.g = 'pathSel'; b.dataset.i = i; tagsEl.appendChild(b); return b; });
-    unitEls = [];
-    L.forEach((x, i) => { if (!i || x.kind === 'boss' || (x.kind === 'lesson' && x.unit.lessons[0] !== x.l)) return; const div = document.createElement('div'); div.className = 'gp-unit'; div.innerHTML = `<small>Unit ${x.unit.n}${x.kind === 'soon' ? ' · coming soon' : ''}</small><b>${esc(local(x.unit.title))}</b>`; tagsEl.appendChild(div); const mid = POS[i - 1].clone().lerp(POS[i], 0.5), sd = mid.x > 0 ? -1 : 1; unitEls.push({ el: div, at: mid.add(V(sd * 2.3, 1.1, 0)) }); });
-  }
-  function greyOf(c) { const l = c.r * 0.3 + c.g * 0.59 + c.b * 0.11; return new T.Color(l * 0.55 + 0.66 * 0.45, l * 0.55 + 0.7 * 0.45, l * 0.55 + 0.8 * 0.45); }
-  function setLook(i, k) { const I = isles[i]; if (I.look === k) return; I.look = k; for (const m of I.meshes) m.material.color.copy(m.userData.base).lerp(m.userData.grey, k); I.mm.opacity = 0.9 * k; I.mist.visible = k > 0.02; if (I.badge) I.badge.material.opacity = 1 - k * 0.6; }
-  function plankM(b, k, show) { const B = bridges[b], t = (k + 0.5) / B.n, p = V().lerpVectors(B.p0, B.p1, t); p.y += -0.22 * Math.sin(Math.PI * t); const m = new T.Matrix4().makeRotationY(B.yaw + Math.sin(k * 12.9) * 0.06); m.setPosition(p); if (show < 1) m.scale(V(Math.max(0.001, show), Math.max(0.001, show), Math.max(0.001, show))); planks.setMatrixAt(B.first + k, m); }
-  function setBridge(b, show) { const B = bridges[b]; for (let k = 0; k < B.n; k++) plankM(b, k, show ? 1 : 0); B.g.visible = show; B.puffs.visible = !show; planks.instanceMatrix.needsUpdate = true; }
-
-  // Island prizes: the next prize, and the one planned after it, stand on gold plinths on the lessons that will win
-  // them, counting this tree's unpassed lessons in path order (prizes count lessons passed in any tree).
-  function adopt(g) {
-    const old = []; g.traverse(o => { if (o.userData.ink) old.push(o); }); old.forEach(o => o.parent.remove(o));
-    g.traverse(o => {
-      if (!o.isMesh || !o.material) return; const m0 = o.material; o.material = m0.clone();
-      if (m0.isMeshToonMaterial) { G3.rimPatch(o.material); if (!m0.transparent && !o.userData.noInk) { prepInk(o.geometry); const k = new T.Mesh(o.geometry, INKM); k.raycast = () => {}; k.userData.ink = 1; o.add(k); } }
-    });
-    return g;
-  }
-  function placePrizes(kid) {
-    for (const p of prizeGs) { p.host.remove(p.g); p.g.traverse(o => { if (o.userData.ink) return; if (o.geometry && !Object.values(GEO).includes(o.geometry)) o.geometry.dispose(); if (o.material && !Object.values(MC).includes(o.material)) o.material.dispose(); }); }
-    prizeGs = []; prizeAt = {};
-    const ups = Prize.upcoming(kid); if (!ups.length || !G3.prize) return;
-    let n = 0;
-    L.forEach((d, i) => {
-      if (d.kind !== 'lesson' || passed(kid, d.l.id)) return; n++;
-      const u = ups.find(x => x.left === n); if (!u) return; prizeAt[i] = u;
-      const m = G3.prize(u.id); if (!m) return; adopt(m);
-      const b = new T.Box3().setFromObject(m), h = Math.max(0.05, b.max.y - b.min.y), s = clamp(0.7 / h, 1.4, 3.2), g = new T.Group();
-      g.add(at(sc(M(GEO.cyl, 0xfff3d6), 0.3, 0.07, 0.3), 0, 0.035, 0)); const rim = M(GEO.tor, 0xffc93c); rim.rotation.x = Math.PI / 2; g.add(at(sc(rim, 0.31), 0, 0.07, 0));
-      m.scale.setScalar(s); m.position.y = 0.07; g.add(m); const tag = emoji(u.info.big ? '🎁' : '✨', 0.32); tag.position.set(0.28, 0.18 + h * s, 0); g.add(tag);
-      g.position.set(-0.52, 0, 0.32); g.userData.spin = m; g.userData.y0 = 0.07; isles[i].g.add(g); prizeGs.push({ host: isles[i].g, g, m, tag, ty: tag.position.y, i });
-    });
-  }
-  let states = [];
+  /* Progress */
   function refresh(kid, skip) {
-    states = L.map(d => stateOf(kid, d, skip));
-    cur = states.findIndex(x => x === 'open'); if (cur < 0) cur = -1;
-    L.forEach((d, i) => { const st = states[i]; setLook(i, st === 'locked' || st === 'soon' ? 0.82 : 0); isles[i].star.visible = st === 'done'; paintTag(kid, i); });
-    bridges.forEach((B, b) => setBridge(b, states[b + 1] !== 'locked' && states[b + 1] !== 'soon'));
-    if (!skip) { placePrizes(kid); L.forEach((d, i) => paintTag(kid, i)); }
+    real = LS.map(x => passed(kid, x.l.id)); done = LS.map((x, i) => real[i] && x.l.id !== skip);
+    passedA = LS.reduce((a, x, i) => a + (real[i] ? x.to - x.from : 0), 0);
+    udone = US.map(U => U.ls.every(i => done[i])); crowned = US.map(U => ((prog(kid).units || {})[U.unit.id] || {}).best >= 0.8);
+    cur = LS.findIndex((x, i) => !done[i] && (x.l.id === skip || available(kid, x.l)));
+    const wasBloom = bloomOn; bloomOn = LS.length > 0 && done.every(Boolean);
+    if (bloomOn && !wasBloom) { V.bloomT = 10; butterflies.forEach(b => { b.g.visible = true; }); }
+    if (!bloomOn) { V.bloomT = 0; butterflies.forEach(b => { b.g.visible = false; }); }
+    placePrizes(kid); paintTags(kid);
   }
-  function medalOf(kid, d) { if (d.kind === 'boss') return '👑'; const m = medal(kid, d.l); return m === 'gold' ? '🥇' : m === 'silver' ? '🥈' : '🥉'; }
-  function num(d) { return d.kind === 'boss' ? '🏆' : `${d.l.unit}.${d.l.n}`; }
-  function paintTag(kid, i) {
-    const d = L[i], st = states[i], b = tagEls[i], isCur = i === cur, title = d.kind === 'lesson' ? local(d.l.title) : d.kind === 'boss' ? 'Unit challenge' : d.kind === 'soon' ? 'Coming soon' : 'Start';
-    b.className = `gp-tag ${st}${isCur ? ' cur' : ''}${i === sel ? ' sel' : ''}`;
-    b.setAttribute('aria-label', `${title}${st === 'locked' ? ', locked' : st === 'done' ? ', done' : isCur ? ', up next' : ''}`);
-    if (st === 'start') b.innerHTML = `<span class="n">🌱</span>Start`;
-    else if (st === 'soon') b.innerHTML = `<span class="n">☁️</span>Unit ${d.unit.n}`;
-    else if (st === 'done') b.innerHTML = `<span class="n">${medalOf(kid, d)}</span>${esc(title)}`;
-    else if (isCur) b.innerHTML = `<span class="n">${num(d)}</span><span><small>Up next${prizeAt[i] ? ' · wins a prize' : ''}</small>${esc(title)}</span>${prizeAt[i] ? `<span class="pz">${prizeAt[i].info.icon}</span>` : ''}`;
-    else if (st === 'open') b.innerHTML = `<span class="n">${num(d)}</span>${esc(title)}${prizeAt[i] ? `<span class="pz">${prizeAt[i].info.icon}</span>` : ''}`;
-    else b.innerHTML = `<span class="n">🔒</span>${num(d)}${prizeAt[i] ? `<span class="pz">${prizeAt[i].info.icon}</span>` : ''}`;
+  // Snap every piece to where progress says it is, for a plant shown for the first time.
+  function snap() {
+    V.s = bloomOn ? 1 : uOf(shown); V.shell = shown > 0 || bloomOn ? 1 : 0; V.bud = budTarget();
+    KN.forEach((k, i) => { k.t = done[i] && k.at <= V.s + 0.004 ? 1 : 0; }); LEAVES.forEach((lf, i) => { lf.t = udone[i] && lf.at <= V.s + 0.004 ? 1 : 0; });
+    CAM.manual = null; CAM.y = followY(); CAM.dist = baseDist();
   }
-  function card(kid, i) {
-    const d = L[i], st = states[i], tree = TREE[treeId]; let h;
-    if (d.kind === 'start') { const nx = cur >= 0 ? L[cur] : null; h = `<div class="gpc-ic">${tree.icon}</div><div class="gpc-eb">${esc(tree.name)}</div><div class="gpc-t">Where the path begins</div><p class="gpc-p">Every lesson you pass builds a bridge to the next island. Finish a unit to open its challenge island.</p><div class="gpc-act">${nx ? `<button class="g-go" data-g="pathSel" data-i="${cur}">Go to the next island</button>` : ''}</div>`; }
-    else if (d.kind === 'soon') h = `<div class="gpc-ic">☁️</div><div class="gpc-eb">Unit ${d.unit.n}</div><div class="gpc-t">${esc(local(d.unit.title))}</div><p class="gpc-p">${esc(local(d.unit.goal))}. These lessons are on their way in a content update.</p>`;
-    else if (d.kind === 'boss') { const all = st !== 'locked'; h = `<div class="gpc-ic">🏆</div><div class="gpc-eb">Unit ${d.unit.n} · Challenge island</div><div class="gpc-t">${esc(local(d.unit.title))} challenge</div><p class="gpc-p">Mixed questions from the whole unit, with no hints. Get 80% to win the crown.</p><div class="gpc-chips"><span>❓ Up to 8 questions</span><span>✨ +${XP.challenge} XP</span></div><div class="gpc-act">${all ? `<button class="g-go" data-g="challenge" data-id="${d.unit.id}">${st === 'done' ? 'Play again' : '▶ Start the challenge'}</button>` : `<button class="g-go ghost" data-g="locked">🔒 Finish every lesson in Unit ${d.unit.n} first</button>`}</div>`; }
-    else {
-      const l = d.l, game = l.play ? GAME_NAME[l.play.type] || 'Game' : null, prev = i > 0 && L[i - 1].kind === 'lesson' ? L[i - 1].l : null;
-      const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `✅ ${l.checks.length} questions` : '', `✨ +${XP.lesson} XP`].filter(Boolean), pz = prizeAt[i];
-      const act = st === 'locked' ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Finish “${esc(local(prev.title))}” first` : 'Finish the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${st === 'done' ? 'Play again' : '▶ Start lesson'}</button>`;
-      h = `<div class="gpc-ic">${esc(l.icon)}</div><div class="gpc-eb">Unit ${l.unit} · Lesson ${l.n}${st === 'done' ? ` · ${medalOf(kid, d)}` : ''}</div><div class="gpc-t">${esc(local(l.title))}</div><p class="gpc-p">${esc(local(l.hook))}</p><div class="gpc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>${pz ? `<div class="gpc-prize ${pz.info.big ? 'big' : ''}"><span>${pz.info.icon}</span><span><small>${pz.planned ? 'Planned island prize' : 'Island prize'}</small><b>${pz.planned ? 'Should win' : 'Pass this to win'} ${esc(pz.info.name)}</b></span></div>` : ''}<div class="gpc-act">${act}</div>`;
+  function budTarget() { if (bloomOn) return 1; const U = US[US.length - 1]; if (!U) return 0; const from = LS[U.ls[0]].from; return clamp((shown - from) / Math.max(1, Q - from), 0, 1) * 0.5; }
+  // Island prizes: the next prize, and the one planned after it, float beside the lessons that will win them.
+  function placePrizes(kid) {
+    const ups = Prize.upcoming(kid); prizeAt = {}; let n = 0;
+    LS.forEach((x, i) => { if (real[i]) return; n++; const u = ups.find(p => p.left === n); if (u) prizeAt[i] = u; });
+    const sig = Object.entries(prizeAt).map(([i, u]) => `${i}:${u.id}`).join(','); if (sig === prizeSig) return; prizeSig = sig;
+    for (const p of prizeGs) { planG.remove(p.g); p.g.traverse(o => { if (o.isMesh && !o.userData.ink && o.geometry) o.geometry.dispose(); }); } prizeGs = [];
+    if (!G3.prize) return;
+    for (const [i, u] of Object.entries(prizeAt)) {
+      const m = G3.prize(u.id); if (!m) continue; const g = new T.Group(), b = new T.Box3().setFromObject(m), hgt = Math.max(0.05, b.max.y - b.min.y);
+      m.scale.setScalar(clamp(0.55 / hgt, 0.8, 3.2)); g.add(m); const halo = new T.Sprite(new T.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, opacity: 0.55 })); halo.scale.set(1.3, 1.3, 1); halo.position.y = 0.28; g.add(halo);
+      planG.add(g); prizeGs.push({ g, m, i: +i });
+    }
+  }
+
+  /* Labels that ride on the stalk */
+  const sideOf = i => (LS[i].u % 2 ? 1 : -1); // lesson labels sit opposite their unit's leaf
+  function medalOf(kid, l) { const m = medal(kid, l); return m === 'gold' ? '🥇' : m === 'silver' ? '🥈' : '🥉'; }
+  function paintTags(kid) {
+    LS.forEach((x, i) => {
+      const b = tagEls[i], l = x.l, d = done[i], isCur = i === cur, open = !d && !isCur && available(kid, l), pz = prizeAt[i], isSel = sel && sel.k === 'l' && sel.i === i, title = esc(local(l.title));
+      b.className = `pl-tag ${d ? 'done' : isCur ? 'cur' : open ? 'open' : 'locked'}${isSel ? ' sel' : ''}`;
+      b.setAttribute('aria-label', `Lesson ${l.unit}.${l.n}, ${local(l.title)}, ${d ? 'done' : isCur ? 'up next' : open ? 'ready' : 'locked'}`);
+      b.innerHTML = d ? `<span class="n">${medalOf(kid, l)}</span>${title}` : isCur ? `<span class="n">▶</span><span><small>Up next${pz ? ' · wins a prize' : ''}</small>${title}</span>${pz ? `<span class="pz">${pz.info.icon}</span>` : ''}` : `<span class="n">${open ? `${l.unit}.${l.n}` : '🔒'}</span>${open ? title : `${l.unit}.${l.n}`}${pz ? `<span class="pz">${pz.info.icon}</span>` : ''}`;
+      b._w = 0;
+    });
+    US.forEach((U, i) => { const b = utagEls[i]; b.className = `pl-utag${crowned[i] ? ' crown' : ''}${sel && sel.k === 'u' && sel.i === i ? ' sel' : ''}`; b.innerHTML = `<small>Unit ${U.unit.n}${crowned[i] ? ' · 👑 crown won' : ' · 🏆 challenge'}</small>${esc(local(U.unit.title))}`; b.setAttribute('aria-label', `Unit ${U.unit.n}, ${local(U.unit.title)}: ${crowned[i] ? 'crown won' : 'challenge open'}`); b._w = 0; });
+  }
+  const tmp = V3(), tq = {}, hide = b => { if (b._on !== false) { b.style.visibility = 'hidden'; b._on = false; } };
+  function placeTags() {
+    const W = CAM.w, Hh = CAM.h, topY = CAM.top + 6, botY = Hh - (CAM.wide ? 0 : CAM.sheet) - 10, maxX = CAM.wide ? W - CAM.cardW - 24 : W - 8, cy = CAM.manual ?? CAM.y;
+    const hideBloom = bloomOn && V.bloomT > 1 && V.bloomT < 8 ? 0 : 1;
+    // Puts a label beside a point on the plant: outward to the right (side 1) or left (-1), or centred below it (0).
+    const put = (b, p, side, fade) => {
+      tmp.copy(p); plant.localToWorld(tmp); tmp.project(cam);
+      const x = (tmp.x + 1) / 2 * W, y = (1 - tmp.y) / 2 * Hh;
+      if (!b._w) { b._w = b.offsetWidth; b._h = b.offsetHeight; }
+      if (tmp.z > 1 || fade <= 0.02 || y < topY + b._h / 2 || y > botY - b._h || x < -200 || x > W + 200) return hide(b);
+      if (b._on !== true) { b.style.visibility = 'visible'; b._on = true; }
+      const left = side > 0 ? x + 26 : side < 0 ? x - 26 - b._w : x - b._w / 2, top = side ? y - b._h / 2 : y;
+      b.style.transform = `translate(${clamp(left, 8, Math.max(8, maxX - b._w)).toFixed(1)}px,${top.toFixed(1)}px)`; b.style.opacity = fade.toFixed(2);
+    };
+    LS.forEach((x, i) => { const p = sample(KN[i].at, tq).p; put(tagEls[i], p, sideOf(i), hideBloom * clamp(1.25 - Math.abs(p.y - cy) / 4.2, 0, 1)); });
+    US.forEach((U, i) => { const lf = LEAVES[i]; if (lf.t < 0.6) { hide(utagEls[i]); return; } const tip = V3(lf.L * 0.8 + 0.45, 0, 0); lf.roll.localToWorld(tip); plant.worldToLocal(tip); tip.y -= 0.3; put(utagEls[i], tip, 0, hideBloom * clamp(1.3 - Math.abs(tip.y - cy) / 5, 0, 1)); });
+    const g = sample(1).p.clone().add(V3(0, 0.6, 0)); put(goalEl, g, 1, bloomOn ? 0 : clamp(1.2 - Math.abs(g.y - cy) / 6, 0, 1));
+  }
+
+  /* The card beside the plant: the chosen lesson, a unit's challenge, or the finished plant */
+  function card(kid) {
+    const tree = TREE[treeId], s = sel || { k: 'l', i: 0 }; let h;
+    if (s.k === 'b') {
+      const left = crowned.filter(c => !c).length;
+      h = `<div class="plc-ic">🌸</div><div class="plc-eb">${esc(tree.name)} · every lesson done</div><div class="plc-t">Your plant bloomed!</div><p class="plc-p">You passed all ${LS.length} lessons and grew ${US.length} leaves. ${left ? `Tap a leaf to try its unit challenge: ${left === 1 ? 'one crown' : `${left} crowns`} still to win.` : 'You won every unit crown too!'}</p><div class="plc-act"><button class="g-go ghost" data-g="plantBloom">🌸 Watch it bloom again</button></div>`;
+    } else if (s.k === 'u') {
+      const U = US[s.i], all = udone[s.i];
+      h = `<div class="plc-ic">${crowned[s.i] ? '👑' : '🏆'}</div><div class="plc-eb">Unit ${U.unit.n} · ${all ? 'Leaf grown' : 'Leaf still growing'}</div><div class="plc-t">${esc(local(U.unit.title))} challenge</div><p class="plc-p">Mixed questions from the whole unit, with no hints. Get 80% to win the crown.</p><div class="plc-chips"><span>❓ Up to 8 questions</span><span>✨ +${XP.challenge} XP</span></div><div class="plc-act">${all ? `<button class="g-go" data-g="challenge" data-id="${U.unit.id}">${crowned[s.i] ? 'Play again' : '▶ Start the challenge'}</button>` : `<button class="g-go ghost" data-g="locked">🔒 Finish every lesson in Unit ${U.unit.n} first</button>`}</div>`;
+    } else {
+      const x = LS[s.i], l = x.l, d = done[s.i], open = d || s.i === cur || available(kid, l), first = s.i === cur && !real.some(Boolean), pz = prizeAt[s.i];
+      const game = l.play ? GAME_NAME[l.play.type] || 'Game' : null, prev = s.i > 0 ? LS[s.i - 1].l : null;
+      const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `🌱 ${l.checks.length} question${l.checks.length === 1 ? '' : 's'} to grow` : '', `✨ +${XP.lesson} XP`].filter(Boolean);
+      const act = !open ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Finish “${esc(local(prev.title))}” first` : 'Finish the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${d ? 'Play again' : first ? '🌱 Plant my seed' : '▶ Start lesson'}</button>`;
+      h = `<div class="plc-ic">${esc(l.icon)}</div><div class="plc-eb">Unit ${l.unit} · Lesson ${l.n}${d ? ` · ${medalOf(kid, l)}` : ''}</div><div class="plc-t">${esc(local(l.title))}</div><p class="plc-p">${esc(local(l.hook))}</p>
+        ${first ? `<ul class="plc-how"><li><span>🌱</span>Every question you get right helps your seed grow.</li><li><span>🍃</span>Finish a unit and a new leaf opens.</li><li><span>🌸</span>Pass all ${LS.length} lessons and it blooms.</li></ul>` : `<div class="plc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>`}
+        ${pz ? `<div class="plc-prize ${pz.info.big ? 'big' : ''}"><span>${pz.info.icon}</span><span><small>${pz.planned ? 'Planned prize' : 'Prize'}</small><b>${pz.planned ? 'Should win' : 'Pass this to win'} ${esc(pz.info.name)}</b></span></div>` : ''}<div class="plc-act">${act}</div>`;
     }
     cardEl.innerHTML = h; cardEl.classList.remove('in'); void cardEl.offsetWidth; cardEl.classList.add('in');
   }
-
-  /* Camera along the path */
-  const focusOf = i => i - 0.12;
-  function camTarget(sv) { const N = POS.length, i0 = clamp(Math.floor(sv), 0, N - 1), i1 = clamp(i0 + 1, 0, N - 1), f = clamp(sv - i0, 0, 1), k = f * f * (3 - 2 * f), t = V().lerpVectors(POS[i0], POS[i1], k); if (sv < 0) t.z -= sv * 3.75; if (sv > N - 1) t.z -= (sv - N + 1) * 3.75; return t; }
-  function placeCam() { const t = camTarget(s), tan = Math.tan(cam.fov * Math.PI / 360), d = clamp(10 / (2 * tan * cam.aspect), 11.5, 21); cam.position.set(t.x * 0.5, t.y + d * 0.66, t.z + d * 0.75); cam.lookAt(t.x * 0.5, t.y - 0.6, t.z - 0.2); }
-  function panTo(i, ms = 650, group = 'pan') { kill('pan'); const s0 = s, s1 = focusOf(i); vel = 0; return tw(ms, k => { s = lerp(s0, s1, k); }, E.io, group); }
-  let down = null;
-  function onDown(e) { if (busy) return; intro = false; kill('pan'); kill('intro'); down = { x: e.clientX, y: e.clientY, s, drag: false, ly: e.clientY, lt: performance.now() }; vel = 0; try { cv.setPointerCapture(e.pointerId); } catch (_) {} }
-  function onMove(e) { if (!down) return; const dy = e.clientY - down.y; if (!down.drag && Math.hypot(e.clientX - down.x, dy) > 7) { down.drag = true; cv.classList.add('drag'); } if (down.drag) { const ppi = Math.max(150, innerHeight / 3.6), now = performance.now(); s = clamp(down.s + dy / ppi, -0.4, POS.length - 0.8); vel = (e.clientY - down.ly) / ppi / Math.max(0.008, (now - down.lt) / 1000); down.ly = e.clientY; down.lt = now; } }
-  function onUp(e) {
-    if (!down) return; const d = down; down = null; cv.classList.remove('drag');
-    if (!d.drag && e.type === 'pointerup') { const r = cv.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, cam); const hit = ray.intersectObjects(isles.map(I => I.pick))[0]; if (hit) select(hit.object.userData.i, true); vel = 0; }
-    else vel = clamp(vel, -6, 6);
+  function pickDefault(kid) { sel = cur >= 0 ? { k: 'l', i: cur } : bloomOn ? { k: 'b' } : { k: 'l', i: 0 }; paintTags(kid); card(kid); }
+  function select(k, i) {
+    const kid = kidNow(); if (!kid || busy || (k === 'l' && !LS[i]) || (k === 'u' && !US[i])) return;
+    sel = { k, i }; paintTags(kid); card(kid); Sound.tap();
+    // Look at what was tapped; the current lesson and the bloom go back to following the tip.
+    CAM.manual = k === 'u' ? LEAVES[i].pv.position.y : k === 'l' && i !== cur ? sample(KN[i].at).p.y - 0.3 : null; CAM.idle = 0; showFollow();
   }
-  function select(i, pan) { const kid = kidNow(); if (!kid || !L[i]) return; sel = i; L.forEach((_, k) => paintTag(kid, k)); card(kid, i); if (pan && !busy) { Sound.tap(); panTo(i); } if (!travel && guide) { const I = POS[i], K = guide.g.position; guide.face = Math.atan2(I.x - K.x, I.z - K.z); } }
-  const spotOn = i => POS[i].clone().add(V(0.3, 0, 0.58));
+  function showFollow() { if (followEl) followEl.hidden = mode !== 'tree' || CAM.manual == null || Math.abs(CAM.manual - followY()) < 0.6; }
+  const tipY = () => sample(V.s).p.y;
+  const followY = () => (bloomOn ? tipY() - lerp(0.4, 1.3, smooth(clamp(V.bloomT / 2.5, 0, 1))) : Math.max(1, tipY() - 0.2));
+  const baseDist = () => { const near = smooth(clamp(V.s / 0.12, 0, 1)); return cam.aspect < 0.8 ? lerp(8.6, 10.5, near) : lerp(6.6, 8.2, near); };
 
-  /* The bridge-building moment after a lesson is passed for the first time */
-  async function celebrate(kid, id) {
-    const i = L.findIndex(d => d.kind === 'lesson' && d.l.id === id); if (i < 0) return refresh(kid);
-    busy = true; refresh(kid, id); guide.g.position.copy(spotOn(i)); s = focusOf(i); await wait(450);
-    const I = isles[i]; I.star.visible = true; I.star.scale.setScalar(0.001); Sound.fanfare && Sound.fanfare();
-    await tw(600, k => I.star.scale.setScalar(Math.max(0.001, k * 0.6)), E.back); states[i] = 'done'; paintTag(kid, i);
-    const realNext = L[i + 1] ? stateOf(kid, L[i + 1], null) : 'locked';
-    if (L[i + 1] && realNext !== 'locked' && realNext !== 'soon') {
-      const B = bridges[i]; B.g.visible = true; B.puffs.visible = false; for (let k = 0; k < B.n; k++) plankM(i, k, 0); planks.instanceMatrix.needsUpdate = true;
-      for (let k = 0; k < B.n; k++) { const kk = k; tw(260, q => { plankM(i, kk, E.back(q)); planks.instanceMatrix.needsUpdate = true; }, E.lin); Sound.tap(); await wait(70); }
-      await wait(250);
-      const J = isles[i + 1], k0 = J.look; await tw(900, q => { J.look = -1; for (const m of J.meshes) m.material.color.copy(m.userData.base).lerp(m.userData.grey, k0 * (1 - q)); J.mm.opacity = 0.9 * (1 - q); J.g.scale.setScalar(1 + Math.sin(q * Math.PI) * 0.08); }, E.out);
-      J.look = 0; J.mist.visible = false; Sound.pop();
-      await hopAcross(i, i + 1);
+  /* The moment a lesson is passed for the first time: the stalk catches up, a ring forms, a leaf may unfurl, and
+     after the last lesson the flower opens. */
+  async function celebrate(kid, id, fresh, tok) {
+    const i = LS.findIndex(x => x.l.id === id), x = LS[i], w = x.to - x.from;
+    busy = true; refresh(kid, id); const full = passedA;
+    shown = fresh ? full - w : clamp(shown, full - w, full); if (fresh) snap();
+    sel = { k: 'l', i }; paintTags(kid); card(kid); CAM.manual = null; showFollow();
+    const ok = () => tok === celTok && running;
+    await wait(500);
+    while (shown < full) { if (!ok()) return; shown++; pulse(shown); await wait(380); }
+    for (let k = 0; k < 20 && Math.abs(uOf(shown) - V.s) > 0.004; k++) { await wait(80); if (!ok()) return; }
+    done[i] = true; KN[i].gold = 1; Sound.star(2); burst(plant.localToWorld(sample(KN[i].at).p.clone()), 12, 'star'); paintTags(kid);
+    await wait(800); if (!ok()) return;
+    if (US[x.u].ls.every(j => done[j])) {
+      udone[x.u] = true; Sound.fanfare(); C.toast(`Unit ${US[x.u].unit.n} done! Your plant grew a new leaf.`);
+      setTimeout(() => { const at = V3(); LEAVES[x.u].pv.getWorldPosition(at); burst(at, 18, 'leaf'); burst(at, 8, 'star'); }, 300);
+      await wait(1800); if (!ok()) return;
     }
-    busy = false; refresh(kid); select(cur >= 0 ? cur : i, false);
+    if (done.every(Boolean)) { bloom(); await wait(4200); if (!ok()) return; }
+    busy = false; refresh(kid); pickDefault(kid);
   }
-  async function hopAcross(a, b) {
-    travel = true; const B = bridges[a], pts = [B.p0.clone(), B.pts[6].clone(), B.pts[10].clone(), B.pts[14].clone(), B.p1.clone(), spotOn(b)], s0 = s, s1 = focusOf(b);
-    for (let k = 0; k < pts.length; k++) { const from = guide.g.position.clone(), to = pts[k]; guide.face = Math.atan2(to.x - from.x, to.z - from.z); guide.flap = 1; await tw(360, q => { guide.g.position.lerpVectors(from, to, q); guide.g.position.y += Math.sin(Math.PI * q) * 0.45; s = lerp(s0, s1, (k + q) / pts.length); }, E.io); guide.flap = 0; }
-    guide.face = 0; travel = false;
+  function bloom() {
+    bloomOn = true; V.bloomT = 0; CAM.manual = null; showFollow(); sepals.concat(outer, inner).forEach(p => { p.tilt.rotation.x = p.open0; });
+    butterflies.forEach(b => { b.g.visible = false; });
+    setTimeout(() => { if (running) Sound.fanfare(); }, 1400);
+    setTimeout(() => { if (!running) return; const at = V3(); flower.getWorldPosition(at); burst(at, 70, 'petal'); burst(at, 30, 'star'); butterflies.forEach(b => { b.g.visible = true; }); FX.rain(['#FF7DB8', '#FFC2DC', '#FFE066', '#fff', '#7CF5B5']); }, 2300);
   }
 
-  function resize() { if (!R || !el.isConnected) return; const r = el.getBoundingClientRect(); if (!r.width || !r.height) return; R.setSize(r.width, r.height, false); cam.aspect = r.width / r.height; cam.updateProjectionMatrix(); R.getDrawingBufferSize(U.uRes.value); }
+  function resize() {
+    if (!R || !el.isConnected) return; const r = el.getBoundingClientRect(); if (!r.width || !r.height) return;
+    const w = r.width, h = r.height; R.setSize(w, h, false); cam.aspect = w / h; CAM.w = w; CAM.h = h;
+    const quiz = mode === 'quiz', bar = !quiz && el.parentNode && el.parentNode.querySelector('.gw-top');
+    CAM.wide = !quiz && w > 760 && w / h >= 0.8; CAM.top = bar ? bar.getBoundingClientRect().bottom - r.top : 0;
+    el.classList.toggle('wide', CAM.wide); el.classList.toggle('phone', !quiz && !CAM.wide); el.style.setProperty('--pl-top', `${Math.round(CAM.top + 8)}px`);
+    CAM.cardW = CAM.wide ? cardEl.offsetWidth + 16 : 0; CAM.sheet = !quiz && !CAM.wide ? cardEl.offsetHeight + 12 : 0;
+    // Shift the picture so the plant sits in the space the card and top bar (or the guide's speech bubble) leave free.
+    if (quiz) cam.setViewOffset(w, h, 0, -Math.min(50, h * 0.1), w, h); else cam.setViewOffset(w, h, CAM.wide ? Math.min(220, CAM.cardW / 2) : 0, (CAM.sheet - CAM.top) / 2, w, h);
+    cam.updateProjectionMatrix(); tagEls.concat(utagEls, goalEl ? [goalEl] : []).forEach(b => { b._w = 0; });
+  }
+
+  /* Every frame */
+  const tipQ = {}, right = V3(), fwd = V3(), gp = V3();
   function frame(now) {
     if (!running) return; raf = requestAnimationFrame(frame);
-    const dt = Math.min(0.05, (now - last) / 1000 || 0.016), t = now / 1000; last = now;
-    for (const w of tws) { const k = Math.min(1, (now - w.t0) / w.d); w.fn(w.e(k), k); if (k >= 1) { tws.delete(w); w.res(); } }
-    if (!down && !busy && !intro) { if (Math.abs(vel) > 0.01) { s = clamp(s + vel * dt, -0.4, POS.length - 0.8); vel *= Math.pow(0.04, dt); } else vel = 0; }
-    placeCam();
-    const m = new T.Matrix4(), q = new T.Quaternion(), p = V(), sv = V(); cloudData.forEach((d, i) => { p.set(d.x + Math.sin(t * d.v + d.ph) * 1.2, d.y + Math.sin(t * 0.4 + d.ph) * 0.08, d.z); sv.set(d.s, d.s * 0.72, d.s * 0.85); m.compose(p, q, sv); clouds.setMatrixAt(i, m); }); clouds.instanceMatrix.needsUpdate = true;
-    ring.visible = cur >= 0; if (cur >= 0) { const P = POS[cur]; ring.position.set(P.x, P.y + 0.03, P.z); ring.scale.setScalar(isles[cur].r * (1.05 + Math.sin(t * 3) * 0.025)); }
-    selRing.visible = sel !== cur && sel > 0; if (selRing.visible) { const P = POS[sel]; selRing.position.set(P.x, P.y + 0.04, P.z); selRing.scale.setScalar(isles[sel].r * 1.1); }
-    for (const p of prizeGs) { p.m.rotation.y = t * 0.6 + p.i; p.tag.position.y = p.ty + Math.sin(t * 2.4 + p.i) * 0.04; if (p.m.userData.tick) p.m.userData.tick(t, dt); }
-    isles.forEach((I, i) => { if (I.star.visible) { I.star.rotation.y = t * 1.6; I.star.position.y = 1.0 + Math.sin(t * 2 + i) * 0.05; } if (I.badge) I.badge.position.y = (L[i].kind === 'start' ? 1.55 : 1.2) + Math.sin(t * 1.8 + i) * 0.05; });
-    if (guide) { const P = guide.P; guide.g.rotation.y += (((guide.face - guide.g.rotation.y + Math.PI * 3) % (Math.PI * 2)) - Math.PI) * Math.min(1, dt * 8); P.head.rotation.z = Math.sin(t * 0.8) * 0.1; const w = 0.06 + guide.flap * (0.6 + Math.sin(t * 30) * 0.45); P.wingL.rotation.z = w; P.wingR.rotation.z = -w; if (!travel) guide.g.children[0].position.y = Math.abs(Math.sin(t * 2.4)) * 0.04; }
-    R.render(scene, cam);
-    const r = el.getBoundingClientRect(), W = r.width, H = r.height;
-    L.forEach((d, i) => { const b = tagEls[i]; tmp.copy(POS[i]).add(V(0, -0.1, isles[i].r * 0.95)).project(cam); const dist = cam.position.distanceTo(POS[i]), op = tmp.z > 1 ? 0 : clamp((34 - dist) / 9, 0, 1); b.style.opacity = op; b.style.visibility = op < 0.05 ? 'hidden' : 'visible'; b.style.transform = `translate(${(tmp.x * 0.5 + 0.5) * W}px,${(-tmp.y * 0.5 + 0.5) * H}px) translate(-50%,4px)`; });
-    unitEls.forEach(u => { tmp.copy(u.at).project(cam); const dist = cam.position.distanceTo(u.at), op = tmp.z > 1 ? 0 : clamp((30 - dist) / 8, 0, 1); u.el.style.opacity = op; const w2 = (u.el.offsetWidth || 160) / 2, x = clamp((tmp.x * 0.5 + 0.5) * W, w2 + 8, W - w2 - 8); u.el.style.transform = `translate(${x}px,${(-tmp.y * 0.5 + 0.5) * H}px) translate(-50%,-50%)`; });
+    const dt = Math.min(0.05, (now - last) / 1000 || 0.016) * (reduced ? 1.6 : 1); last = now; t += dt;
+    // Growth eases toward the answers shown
+    V.s += ((bloomOn ? 1 : uOf(shown)) - V.s) * (1 - Math.exp(-dt * (bloomOn ? 1.2 : 2.6)));
+    buildStalk(V.s);
+    if (Math.abs(V.s - (dots.userData.s ?? -1)) > 0.002) { dots.userData.s = V.s; const m = new T.Matrix4(), q = {}; dots.userData.at.forEach((u, i) => { sample(u, q); const k = u > V.s + 0.01 ? 1 : 0; m.makeScale(k, k, k); m.setPosition(q.p); dots.setMatrixAt(i, m); }); dots.instanceMatrix.needsUpdate = true; }
+    V.shell = lerp(V.shell, shown > 0 || bloomOn ? 1 : 0, 1 - Math.exp(-dt * 3));
+    seed.scale.setScalar(shown > 0 || bloomOn || reduced ? 1 : 1 + Math.sin(t * 3) * 0.05);
+    shells.forEach((p, k) => { p.rotation.x = (k ? -1 : 1) * V.shell * 1.05; p.position.z = (k ? -1 : 1) * V.shell * 0.12; p.position.y = -V.shell * 0.1; });
+    coty.forEach((c, k) => { c.scale.setScalar(Math.max(0.001, outBack(clamp((V.s - 0.8 / LEN) / (0.15 / LEN), 0, 1)))); c.children[0].rotation.z = 0.5 + Math.sin(t * 1.7 + k) * 0.04; });
+    KN.forEach((k, i) => { const on = done[i] && k.at <= V.s + 0.004; k.t = lerp(k.t, on ? 1 : 0, 1 - Math.exp(-dt * 5)); const s = Math.max(0.001, outBack(clamp(k.t, 0, 1)) * k.r); k.m.scale.set(s, s, s * 0.8); k.gold = Math.max(0, k.gold - dt * 0.8); k.m.material = k.gold > 0.05 ? RING_GOLD : RING; });
+    LEAVES.forEach((lf, i) => { const on = udone[i] && lf.at <= V.s + 0.004; lf.t = clamp(lf.t + (on ? dt / 1.6 : -dt * 3), 0, 1); lf.pv.scale.setScalar(Math.max(0.001, outBack(lf.t))); lf.pitch.rotation.z = lerp(1.35, 0.42, smooth(lf.t)) + Math.sin(t * 1.3 + i) * 0.03; lf.roll.rotation.x = lerp(lf.side * 1.6, lf.side * 0.75, smooth(lf.t)) + Math.sin(t * 2.1 + i) * 0.04; });
+    // The bud rides the tip through the last unit, then opens
+    sample(V.s, tipQ); flower.position.copy(tipQ.p); flower.quaternion.setFromUnitVectors(V3(0, 1, 0), tipQ.t);
+    if (bloomOn) V.bloomT += dt;
+    V.bud = lerp(V.bud, budTarget(), 1 - Math.exp(-dt * 2)); flower.scale.setScalar(Math.max(0.001, V.bud));
+    const open = bloomOn ? smooth(clamp((V.bloomT - 1.6) / 2.2, 0, 1)) : 0;
+    sepals.concat(outer, inner).forEach(p => { const o = smooth(clamp(open * 1.3 - p.d * 0.3, 0, 1)); p.tilt.rotation.x = lerp(p.open0, p.open1, o) + (open > 0.99 ? Math.sin(t * 1.5 + p.d * 6) * 0.03 : 0); });
+    rays.position.copy(tipQ.p); rays.material.opacity = bloomOn ? clamp((V.bloomT - 2.2) / 1.2, 0, 0.7) * (0.8 + Math.sin(t * 2) * 0.15) : 0; rays.material.rotation = t * 0.15;
+    butterflies.forEach((b, k) => { if (!b.g.visible) return; const a = t * (0.7 + k * 0.25) + k * 3, r = 1.8 + Math.sin(t * 0.6 + k) * 0.4, c = V3(); flower.getWorldPosition(c); b.g.position.set(c.x + Math.cos(a) * r, c.y + 0.4 + Math.sin(t * 2 + k) * 0.5, c.z + Math.sin(a) * r); b.g.rotation.y = -a; const f = Math.sin(t * 22 + k) * 0.9; b.wings[0].rotation.z = f; b.wings[1].rotation.z = -f; });
+    V.shiver = Math.max(0, V.shiver - dt * 1.8);
+    plant.rotation.z = (reduced ? 0 : Math.sin(t * 0.8) * 0.012) + Math.sin(t * 38) * V.shiver * 0.02;
+    goalStar.material.opacity = bloomOn ? 0 : 0.55 + Math.sin(t * 2.4) * 0.3;
+    clouds.forEach(c => { c.position.x += c.userData.v * dt; if (c.position.x > 26) c.position.x = -26; });
+    tickParticles(dt);
+    // The guide flies across from the lesson labels, between the ring at the tip and the one below it, so it
+    // never covers a label; prizes float across from the lesson that wins them
+    right.set(Math.cos(CAM.az), 0, -Math.sin(CAM.az)); fwd.set(Math.sin(CAM.az), 0, Math.cos(CAM.az));
+    if (guide) {
+      const side = LS.length ? -sideOf(cur >= 0 ? cur : LS.length - 1) : 1, rr = lerp(1.15, 2.4, open), g = guide.g;
+      gp.copy(tipQ.p).addScaledVector(right, side * rr).addScaledVector(fwd, 0.35); gp.y = Math.max(0, gp.y - 0.95 - open * 0.7 - (V.s < 0.03 ? 1 : 0));
+      g.position.lerp(gp, 1 - Math.exp(-dt * 3)); guide.hop = Math.max(0, guide.hop - dt * 1.6); guide.shake = Math.max(0, guide.shake - dt * 2);
+      const air = g.position.y > 0.08, P2 = guide.P; guide.body.position.y = Math.sin(guide.hop * Math.PI) * 0.6 + (air && !reduced ? Math.sin(t * 2.2) * 0.06 : 0);
+      g.rotation.y = CAM.az - side * 0.5 + (guide.hop > 0 ? (1 - guide.hop) * Math.PI * 2 : 0); g.rotation.z = Math.sin(t * 30) * guide.shake * 0.12;
+      const wv = air || guide.hop > 0 ? 0.6 + Math.sin(t * 18) * 0.5 : 0.06; P2.wingL.rotation.z = wv; P2.wingR.rotation.z = -wv; P2.head.rotation.z = Math.sin(t * 0.8) * 0.1;
+    }
+    for (const p of prizeGs) { sample(KN[p.i].at, tq); p.g.position.copy(tq.p).addScaledVector(right, -sideOf(p.i) * 0.95).addScaledVector(fwd, 0.2); p.g.position.y += Math.sin(t * 2 + p.i) * 0.06 - 0.3; p.m.rotation.y = t * 0.7 + p.i; if (p.m.userData.tick) p.m.userData.tick(t, dt); }
+    // Camera: follows the tip; a drag, swipe or scroll looks around and it drifts back after a while
+    CAM.idle += dt; if (CAM.manual != null && CAM.idle > 8 && !drag) { CAM.manual = null; showFollow(); }
+    CAM.y += ((CAM.manual ?? followY()) - CAM.y) * (1 - Math.exp(-dt * 2.2));
+    const bl = bloomOn ? smooth(clamp(V.bloomT / 3, 0, 1)) : 0; CAM.dist = lerp(CAM.dist, baseDist() * lerp(1, 1.55, bl), 1 - Math.exp(-dt * 1.5));
+    if (bloomOn && !drag && !reduced) CAM.az += dt * 0.18; else if (!reduced && !drag) CAM.az += (0.35 + Math.sin(t * 0.12) * 0.25 - CAM.az) * dt * 0.2;
+    cam.position.set(Math.sin(CAM.az) * CAM.dist, CAM.y + CAM.dist * lerp(0.16, 0.3, bl), Math.cos(CAM.az) * CAM.dist); cam.lookAt(0, CAM.y, 0);
+    sky.position.copy(cam.position); sunSprite.position.set(cam.position.x - 40, cam.position.y + 30, cam.position.z - 90);
+    G3.inkFor(R); R.render(scene, cam);
+    if (mode === 'tree') placeTags();
   }
 
+  // Builds the plant for a kid's tree, or keeps the one already built. Returns true when it was built fresh.
+  function ensure(kid, tree) {
+    mount(); setGuide(prog(kid).guide || 'kea');
+    const k = `${kid.id}|${tree.id}|${bandOf(kid)}|${(packFor(tree.id, bandOf(kid)) || { units: [] }).units.map(u => u.lessons.map(l => l.checks.length).join('.')).join(',')}`;
+    if (k === key) return false; key = k; treeId = tree.id; plan(kid, tree); return true;
+  }
   return {
     ok: true,
-    // Shows a tree's path for a kid. `celebrateId` is a lesson just passed for the first time.
+    // The full-screen plant for a tree. `celebrateId` is a lesson just passed for the first time.
     show(host, kid, tree, celebrateId) {
-      mount(); host.appendChild(el); Prize.tick(kid);
-      const k = `${kid.id}|${tree.id}|${bandOf(kid)}|${(packFor(tree.id, bandOf(kid)) || { units: [] }).units.map(u => u.lessons.length).join(',')}|${prog(kid).guide || 'kea'}`;
-      const fresh = k !== key; if (fresh) { kill('path'); build(kid, tree); key = k; kidId = kid.id; treeId = tree.id; }
-      resize();
-      if (celebrateId) { running || this.start(); celebrate(kid, celebrateId); return; }
-      refresh(kid); guide.g.position.copy(spotOn(cur >= 0 ? cur : 0)); guide.face = 0;
-      sel = cur >= 0 ? cur : 0; L.forEach((_, i) => paintTag(kid, i)); card(kid, sel);
-      if (fresh) { intro = true; s = -0.3; tw(1800, q => { s = lerp(-0.3, focusOf(sel), q); }, E.io, 'intro').then(() => { intro = false; }); } else s = focusOf(sel);
-      this.start();
+      mount(); Prize.tick(kid); mode = 'tree'; el.classList.remove('quiz'); host.appendChild(el);
+      const fresh = ensure(kid, tree), tok = ++celTok; busy = false; resize(); this.start();
+      if (celebrateId && LS.some(x => x.l.id === celebrateId)) { celebrate(kid, celebrateId, fresh, tok); return; }
+      refresh(kid); shown = passedA; if (fresh) snap(); pickDefault(kid); showFollow();
     },
-    select: i => select(i, true),
+    // The plant on the lesson stage during the quiz; `right` is how many questions are already right this time.
+    quiz(host, kid, l, right) {
+      const tree = TREE[l.tree]; if (!tree) return false;
+      mount(); mode = 'quiz'; el.classList.add('quiz'); if (el.parentNode !== host) host.insertBefore(el, host.querySelector('.gw-say'));
+      const fresh = ensure(kid, tree), x = LS.find(y => y.l.id === l.id); ++celTok; busy = false; refresh(kid); quizFresh = !passed(kid, l.id) && !!x;
+      quizMax = quizFresh ? passedA + x.to - x.from : passedA; shown = Math.min(quizMax, passedA + (quizFresh ? right : 0));
+      if (fresh) snap(); CAM.manual = null; resize(); this.start(); return true;
+    },
+    answer(ok) {
+      if (mode !== 'quiz' || !running) return;
+      if (ok) { if (quizFresh) shown = Math.min(quizMax, shown + 1); pulse(shown); if (guide) guide.hop = 1; } else { V.shiver = 1; if (guide) guide.shake = 1; }
+      CAM.manual = null;
+    },
+    select: i => select('l', i),
+    unit: i => select('u', i),
+    bloomAgain() { if (!bloomOn || busy) return; bloom(); },
     start() { if (running) return; running = true; last = performance.now(); raf = requestAnimationFrame(frame); },
-    stop() { running = false; cancelAnimationFrame(raf); },
+    stop() { running = false; cancelAnimationFrame(raf); ++celTok; busy = false; if (el && mode === 'quiz') el.remove(); },
   };
 })();
 
-const PATH_CSS = `
+const PLANT_CSS = `
 .gw[data-view=tree]{grid-template-rows:0 minmax(0,1fr)}
 @media (min-width:900px) and (min-aspect-ratio:5/4){ .gw[data-view=tree]{grid-template-rows:minmax(0,1fr);grid-template-columns:0 minmax(0,1fr)} }
 .gw[data-view=tree] .gw-ui{overflow:hidden;padding-bottom:0}
-.gw[data-view=tree] .gw-top{position:absolute;left:0;right:0;top:0;background:linear-gradient(color-mix(in srgb,var(--gh) 50%,#0B1A4A),transparent)}
-.gp{position:absolute;inset:0;overflow:hidden}
-.gp-cv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
-.gp-cv.drag{cursor:grabbing}
-.gp-tags{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.gp-tag{position:absolute;left:0;top:0;pointer-events:auto;display:inline-flex;align-items:center;gap:7px;padding:5px 12px 5px 5px;border-radius:999px;background:#fff;color:#16203D;font:800 13px/1.15 var(--f-round);white-space:nowrap;box-shadow:0 6px 16px -8px rgba(8,20,60,.6);will-change:transform}
-.gp-tag .n{display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:12px;background:#E6EDF8;font:900 12px var(--f-round)}
-.gp-tag.done .n{background:#FFF3C4}
-.gp-tag.cur{padding:6px 14px 6px 6px;font-size:15px;box-shadow:0 0 0 3px #FFC93C,0 10px 22px -8px rgba(8,20,60,.6)}
-.gp-tag.cur .n{background:#FFC93C;color:#5A3A00;height:30px;min-width:30px;border-radius:15px}
-.gp-tag.cur small{display:block;font:900 10px var(--f-round);letter-spacing:.1em;text-transform:uppercase;color:#B07800}
-.gp-tag.locked,.gp-tag.soon{opacity:.8}
-.gp-tag.sel{box-shadow:0 0 0 3px #fff,0 10px 22px -8px rgba(8,20,60,.6)}
-.gp-tag.cur.sel{box-shadow:0 0 0 3px #FFC93C,0 0 0 6px #fff,0 10px 22px -8px rgba(8,20,60,.6)}
-.gp-unit{position:absolute;left:0;top:0;padding:8px 14px;border-radius:14px;background:rgba(13,21,48,.42);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;pointer-events:none;will-change:transform;max-width:220px}
-.gp-unit small{display:block;font:900 11px var(--f-round);letter-spacing:.12em;text-transform:uppercase;opacity:.85}
-.gp-unit b{font:900 16px/1.2 var(--f-round)}
-.gp-card{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);transform:translateX(-50%);width:min(560px,calc(100% - 2 * var(--gut)));background:#fff;color:#0D1530;border-radius:26px;padding:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 14px;box-shadow:0 24px 50px -20px rgba(8,20,60,.6)}
-.gp-card.in{animation:gpIn .38s cubic-bezier(.2,.9,.2,1)}
-@keyframes gpIn{from{transform:translate(-50%,20px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
-.gpc-ic{grid-row:span 2;width:60px;height:60px;border-radius:19px;display:grid;place-items:center;font-size:32px;background:color-mix(in srgb,var(--gh) 18%,#fff)}
-.gpc-eb{font:900 12px var(--f-round);letter-spacing:.1em;text-transform:uppercase;color:#5A6380;align-self:end}
-.gpc-t{font:900 21px/1.15 var(--f-round)}
-.gpc-p{grid-column:1/-1;font:700 15px/1.45 var(--f-round);color:#5A6380;margin-top:8px}
-.gpc-chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.gpc-chips span{padding:5px 10px;border-radius:999px;background:#EEF3FA;font:800 13px var(--f-round)}
-.gpc-act{grid-column:1/-1;display:flex;margin-top:12px}
-.gpc-prize{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin-top:10px;padding:8px 12px;border-radius:16px;background:#FFF6D6;box-shadow:inset 0 0 0 2px #FFC93C}
-.gpc-prize.big{background:#FFE8D6;box-shadow:inset 0 0 0 2px #FF9F43}
-.gpc-prize>span:first-child{font-size:26px}
-.gpc-prize small{display:block;font:900 10px var(--f-round);letter-spacing:.1em;text-transform:uppercase;color:#8A5A00}
-.gpc-prize b{font:900 15px/1.25 var(--f-round)}
-.gp-tag .pz{margin-left:2px;font-size:15px}
-.gpc-act .g-go{flex:1;margin:0}
-@media (max-width:560px){ .gpc-p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden} .gpc-t{font-size:19px} }
-@media (prefers-reduced-motion:reduce){ .gp-card.in{animation:none} }
+.gw[data-view=tree] .gw-top{position:absolute;left:0;right:0;top:0;background:linear-gradient(color-mix(in srgb,var(--gh) 45%,#0B1A4A),transparent)}
+.pl{position:absolute;inset:0;overflow:hidden;background:#8FD0FF}
+.gw-stage>.pl{z-index:0}
+.gw-stage>.gw-say{z-index:1}
+.pl-cv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.pl-cv.drag{cursor:grabbing}
+.pl-tags{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.pl.quiz .pl-tags,.pl.quiz .pl-card,.pl.quiz .pl-follow{display:none}
+.pl-tag,.pl-utag,.pl-goal{position:absolute;left:0;top:0;visibility:hidden;will-change:transform;white-space:nowrap}
+.pl-tag{pointer-events:auto;display:inline-flex;align-items:center;gap:7px;padding:5px 12px 5px 5px;border:0;border-radius:999px;background:#fff;color:#16203D;font:800 13px/1.15 var(--f-round);box-shadow:0 6px 16px -8px rgba(8,20,60,.6);cursor:pointer}
+.pl-tag .n{display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:12px;background:#E6EDF8;font:900 12px var(--f-round)}
+.pl-tag.done{background:#EAF8EE}
+.pl-tag.done .n{background:#FFF3C4}
+.pl-tag.cur{padding:6px 14px 6px 6px;font-size:15px;box-shadow:0 0 0 3px #FFC93C,0 10px 22px -8px rgba(8,20,60,.6)}
+.pl-tag.cur .n{background:#FFC93C;color:#5A3A00;height:30px;min-width:30px;border-radius:15px}
+.pl-tag.cur small{display:block;font:900 10px var(--f-round);letter-spacing:.1em;text-transform:uppercase;color:#B07800}
+.pl-tag.locked{background:rgba(255,255,255,.7);color:rgba(22,32,61,.7);box-shadow:none}
+.pl-tag.sel{box-shadow:0 0 0 3px #fff,0 0 0 6px #2FB35A,0 10px 22px -8px rgba(8,20,60,.6)}
+.pl-tag.cur.sel{box-shadow:0 0 0 3px #FFC93C,0 0 0 6px #fff,0 10px 22px -8px rgba(8,20,60,.6)}
+.pl-tag .pz{margin-left:2px;font-size:15px}
+.pl-utag{pointer-events:auto;border:0;padding:7px 12px;border-radius:14px;background:#1F8A43;color:#fff;font:900 14px/1.2 var(--f-round);text-align:left;box-shadow:0 8px 18px -10px rgba(0,0,0,.6);cursor:pointer}
+.pl-utag small{display:block;font:900 10px var(--f-round);letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+.pl-utag.crown{background:#B07800}
+.pl-utag.sel{box-shadow:0 0 0 3px #fff,0 8px 18px -10px rgba(0,0,0,.6)}
+.pl-goal{padding:6px 12px;border-radius:999px;background:#FF6FA8;color:#fff;font:900 12px/1 var(--f-round);letter-spacing:.06em;text-transform:uppercase;pointer-events:none;box-shadow:0 6px 14px -8px rgba(0,0,0,.6)}
+.pl-follow{position:absolute;z-index:2;border:0;border-radius:14px;padding:10px 14px;background:rgba(255,255,255,.94);color:#16203D;font:800 14px/1 var(--f-round);box-shadow:inset 0 -3px 0 rgba(22,32,61,.1),0 8px 18px -10px rgba(8,20,60,.6);cursor:pointer}
+.pl-follow[hidden]{display:none}
+.pl.wide .pl-follow{left:var(--gut,16px);bottom:calc(env(safe-area-inset-bottom,0px) + 16px)}
+.pl.phone .pl-follow{left:var(--gut,16px);top:var(--pl-top,84px)}
+.pl-card{position:absolute;z-index:2;background:#fff;color:#0D1530;border-radius:26px;padding:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 14px;align-content:start;overflow:auto;box-shadow:0 24px 50px -20px rgba(8,20,60,.6)}
+.pl.wide .pl-card{right:var(--gut-r,16px);top:var(--pl-top,84px);width:min(380px,42%);max-height:calc(100% - var(--pl-top,84px) - 16px)}
+.pl.phone .pl-card{left:var(--gut,16px);right:var(--gut-r,16px);bottom:calc(env(safe-area-inset-bottom,0px) + 12px);max-width:560px;margin:0 auto;max-height:52%}
+.pl-card.in{animation:plIn .38s cubic-bezier(.2,.9,.2,1)}
+@keyframes plIn{from{translate:0 18px;opacity:0}to{translate:0 0;opacity:1}}
+.plc-ic{grid-row:span 2;width:60px;height:60px;border-radius:19px;display:grid;place-items:center;font-size:32px;background:color-mix(in srgb,var(--gh) 18%,#fff)}
+.plc-eb{font:900 12px var(--f-round);letter-spacing:.1em;text-transform:uppercase;color:#5A6380;align-self:end}
+.plc-t{font:900 21px/1.15 var(--f-round)}
+.plc-p{grid-column:1/-1;font:700 15px/1.45 var(--f-round);color:#5A6380;margin-top:8px}
+.plc-chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.plc-chips span{padding:5px 10px;border-radius:999px;background:#EEF3FA;font:800 13px var(--f-round)}
+.plc-how{grid-column:1/-1;display:grid;gap:8px;margin:10px 0 0;padding:0;list-style:none}
+.plc-how li{display:flex;gap:10px;align-items:center;font:800 15px/1.35 var(--f-round)}
+.plc-how span{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:12px;background:#EAF8EE;font-size:18px}
+.plc-prize{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin-top:10px;padding:8px 12px;border-radius:16px;background:#FFF6D6;box-shadow:inset 0 0 0 2px #FFC93C}
+.plc-prize.big{background:#FFE8D6;box-shadow:inset 0 0 0 2px #FF9F43}
+.plc-prize>span:first-child{font-size:26px}
+.plc-prize small{display:block;font:900 10px var(--f-round);letter-spacing:.1em;text-transform:uppercase;color:#8A5A00}
+.plc-prize b{font:900 15px/1.25 var(--f-round)}
+.plc-act{grid-column:1/-1;display:flex;margin-top:12px}
+.plc-act .g-go{flex:1;margin:0}
+@media (max-width:560px){ .pl.phone .plc-p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden} .plc-t{font-size:19px} .plc-ic{width:52px;height:52px;font-size:28px} }
+@media (prefers-reduced-motion:reduce){ .pl-card.in{animation:none} }
 `;
-{ const st = document.createElement('style'); st.id = 'growth-path-css'; st.textContent = PATH_CSS; document.head.appendChild(st); }
+{ const st = document.createElement('style'); st.id = 'growth-plant-css'; st.textContent = PLANT_CSS; document.head.appendChild(st); }
 
 
 /* ---------- How to play: a hand demonstrates each kind of game before the kid's first go ----------

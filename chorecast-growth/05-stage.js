@@ -1,5 +1,5 @@
 
-// The kid's guide (Kiri the kea, Coco the cockatoo or Bolt the robot), shared by the lesson stage and the island path.
+// The kid's guide (Kiri the kea, Coco the cockatoo or Bolt the robot), shared by the lesson stage and the plant.
 const GUIDE_GEO = {};
 function guideModel(kind, toon) {
   const T = window.THREE, G3 = C.G3;

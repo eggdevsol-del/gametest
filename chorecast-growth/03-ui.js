@@ -37,7 +37,7 @@ async function open(kidId, opts = {}) {
 }
 function close() {
   if (!root) return; Grow.cleanup.splice(0).forEach(f => f()); try { speechSynthesis.cancel(); } catch (e) {}
-  root.hidden = true; Grow.open = false; document.body.classList.remove('gw-open'); if (Grow.stage) Grow.stage.stop(); if (PathView.ok) PathView.stop(); HowTo.stop();
+  root.hidden = true; Grow.open = false; document.body.classList.remove('gw-open'); if (Grow.stage) Grow.stage.stop(); if (PlantView.ok) PlantView.stop(); HowTo.stop();
   C.scheduleRender();
 }
 function back() {
@@ -74,10 +74,12 @@ function render() {
   root.style.setProperty('--gh', (tree || (Grow.run && TREE[Grow.run.lesson ? Grow.run.lesson.tree : Grow.run.tree]) || { hue: '#2F6FE4' }).hue);
   root.dataset.view = v;
   if (Grow.stage) Grow.stage.setScene(v === 'tree' && tree ? tree.scene : Grow.run && Grow.run.lesson ? Grow.run.lesson.scene : Grow.run && Grow.run.scene ? Grow.run.scene : 'island');
-  // The tree view is a full-screen island path with its own 3D view, so the stage rests; lesson steps and the
-  // finish screen show their own 3D scene on the stage, and other screens show just the guide.
-  if (Grow.stage) { if (v === 'tree' && PathView.ok) Grow.stage.stop(); else Grow.stage.start(); if (!RUN_VIEWS.includes(v) && v !== 'done') Grow.stage.show(null); }
-  if (v !== 'tree' && PathView.ok) PathView.stop();
+  // The tree view is a full-screen plant with its own 3D view, so the stage rests. In a lesson's quiz the plant
+  // takes the stage and grows with each right answer; other lesson steps and the finish screen show their own
+  // 3D scene on the stage, and other screens show just the guide.
+  const plant = PlantView.ok && (v === 'tree' || plantQuiz());
+  if (Grow.stage) { if (plant) Grow.stage.stop(); else Grow.stage.start(); if (!RUN_VIEWS.includes(v) && v !== 'done') Grow.stage.show(null); }
+  if (PlantView.ok && !plant) PlantView.stop();
   if (v === 'guide') return viewGuide(kid);
   if (v === 'hub') return viewHub(kid);
   if (v === 'tree') return viewTree(kid, tree);
@@ -88,6 +90,7 @@ function render() {
   if (v === 'crew') return viewCrew();
 }
 const RUN_VIEWS = ['lesson', 'challenge', 'review', 'moment', 'echo', 'story', 'case'];
+const plantQuiz = () => { const R = Grow.run; return Grow.view === 'lesson' && !!R && R.mode === 'lesson' && R.steps[R.k].kind === 'check'; };
 const topbar = (kid, title, sub) => `<header class="gw-top"><button class="gw-back" data-g="back" aria-label="Back">${ic('back')}<span>${Grow.view === 'hub' ? 'Back to my sky' : 'Back'}</span></button><div class="gw-tt"><b>${esc(title)}</b>${sub ? `<small>${sub}</small>` : ''}</div>${xpRing(kid)}</header>`;
 function xpRing(kid) {
   const d = dayInfo(kid), p = Math.min(1, d.xp / XP.dayCap), R = 17, L = 2 * Math.PI * R;
@@ -120,7 +123,7 @@ function viewHub(kid) {
         ${story && !storyDone ? tile('story', '📰', 'This week in the market', `+${XP.story} XP`) : ''}
         ${C.kidsList().length > 1 ? tile('crewPick', '👯', 'Crew quiz', 'Answer side by side with a sibling') : ''}
       </div>
-      <h2 class="gw-h2">${treesOn().length === 1 ? 'Your island path' : 'Skill trees'}</h2>
+      <h2 class="gw-h2">${treesOn().length === 1 ? 'Your plant' : 'Skill trees'}</h2>
       ${constellation(kid)}
       ${casesFor(kid).length ? `<h2 class="gw-h2">Real stories</h2><div class="gw-cases">${casesFor(kid).slice(0, 12).map(cs => `<button class="gw-case ${(prog(kid).cases || {})[cs.id] ? 'done' : ''}" data-g="case" data-id="${cs.id}" style="--th:${(TREE[cs.tree] || {}).hue || '#2F6FE4'}"><span>${esc(cs.icon)}</span><b>${esc(cs.name)}</b><small>${esc((TREE[cs.tree] || {}).name || '')}</small></button>`).join('')}</div>` : ''}
     </div>`;
@@ -128,10 +131,10 @@ function viewHub(kid) {
 // The 12 trees as a staggered constellation, 3 across and 4 down, each linked to its neighbours.
 function constellation(kid) {
   const on = treesOn(), W = 600, H = 800;
-  // With a single live tree there's nothing to link, so show one big door into its island path.
+  // With a single live tree there's nothing to link, so show one big door into its plant.
   if (on.length === 1) {
     const t = on[0], st = treeStats(kid, t.id), nx = nextIn(kid, t.id);
-    return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons · Open the island path</small></span></button>`;
+    return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons · ${st.done ? 'See your plant grow' : 'Plant your seed'}</small></span></button>`;
   }
   const pos = on.map((t, i) => { const c = i % 3, r = Math.floor(i / 3); return { t, c, r, x: 100 + c * 200, y: 95 + r * 190 + (c === 1 ? 70 : 0) }; });
   const at = (r, c) => pos.find(p => p.r === r && p.c === c);
@@ -148,10 +151,10 @@ function viewTree(kid, tree) {
   const band = bandOf(kid), pack = packFor(tree.id, band), st = treeStats(kid, tree.id), g = prog(kid);
   const nx = nextIn(kid, tree.id);
   say(nx ? `Next up in ${tree.name}: ${stop(local(nx.title))}` : st.total ? `You’ve done every ${tree.name} lesson for now!` : 'Lessons for this tree are on their way.');
-  if (PathView.ok && pack) {
+  if (PlantView.ok && pack) {
     ui.innerHTML = topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`);
     const cel = Grow.celebrate; Grow.celebrate = null;
-    PathView.show(ui, kid, tree, cel && cel.split('.')[0] === tree.id ? cel : null); return;
+    PlantView.show(ui, kid, tree, cel && cel.split('.')[0] === tree.id ? cel : null); return;
   }
   const units = pack ? pack.units : [];
   const node = (l, idx) => {
@@ -242,7 +245,9 @@ function viewRun(kid) {
   else if (step.kind === 'home') { body = `<div class="gw-card home"><span class="gw-big">🏠</span><h3>Take it home</h3><p>${esc(local(l.home || 'Tell a grown-up one thing you learned today.'))}</p><button class="g-go" data-g="finish">Finish lesson</button></div>`; say('Last bit! Try this at home.'); }
   else { body = `<div class="gw-card"><div class="gw-host"></div><div class="gw-fb"></div></div>`; say(step.kind === 'guess' ? 'Have a guess! It’s fine to get it wrong.' : step.kind === 'play' ? 'Game time!' : R.mode === 'review' ? `From “${local(step.title || '')}”` : ''); }
   ui.innerHTML = `${head}<div class="gw-pad gw-runpad">${title}${body}</div>`;
-  if (Grow.stage) { const [kind, data] = stageFor(step, R) || []; Grow.stage.show(kind, data); }
+  // In a lesson's quiz the plant takes the stage, already grown by the questions answered right so far.
+  if (plantQuiz()) PlantView.quiz(root.querySelector('.gw-stage'), kid, l, R.res.filter((r, i) => r && r.ok && i <= R.k && R.steps[i].kind === 'check').length);
+  else if (Grow.stage) { const [kind, data] = stageFor(step, R) || []; Grow.stage.show(kind, data); }
   const host = ui.querySelector('.gw-host');
   if (host) {
     const ctx = { kid, mode: step.kind, cleanup: Grow.cleanup, fx: (e, d) => Grow.stage && Grow.stage.fx(e, d) };
@@ -295,9 +300,10 @@ function itemStage(it) {
 function answered(kid, step, res) {
   const R = Grow.run; R.res[R.k] = { ...res, kind: step.kind, step };
   const fb = ui.querySelector('.gw-fb'); if (!fb) return;
-  const guess = step.kind === 'guess', msg = guess ? (res.ok ? 'Great guess!' : 'Good guess. Let’s find out why.') : res.ok ? ['Nice one!', 'Spot on!', 'You got it!', 'Brilliant!'][Math.floor(Math.random() * 4)] : 'Not quite.';
+  const guess = step.kind === 'guess', grows = plantQuiz() && !passed(kid, R.lesson.id);
+  const msg = guess ? (res.ok ? 'Great guess!' : 'Good guess. Let’s find out why.') : res.ok ? (grows ? ['Right! Your plant grew.', 'Yes! Up it grows.', 'Nice one. Look at it grow!'] : ['Nice one!', 'Spot on!', 'You got it!', 'Brilliant!'])[Math.floor(Math.random() * (grows ? 3 : 4))] : 'Not quite.';
   fb.innerHTML = `<div class="gw-fbin ${res.ok || guess ? 'good' : 'bad'}"><b>${msg}</b>${!res.ok && res.right && !guess ? `<span>${esc(res.right)}</span>` : ''}</div><button class="g-go" data-g="next">${R.k + 1 >= R.steps.length ? 'Finish' : 'Next'}</button>`;
-  if (Grow.stage) Grow.stage.react(res.ok || guess ? 'cheer' : 'puzzled');
+  if (plantQuiz()) PlantView.answer(res.ok); else if (Grow.stage) Grow.stage.react(res.ok || guess ? 'cheer' : 'puzzled');
   say(res.ok ? msg : guess ? 'Let’s find out!' : 'That’s how we learn. Keep going!');
   if (R.mode === 'review') reviewAnswer(kid, step, res.ok);
   if (R.mode === 'echo') echoAnswer(kid, step, res.ok);
