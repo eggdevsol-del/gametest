@@ -299,6 +299,10 @@ p{margin:0}
 .led-t small{display:block;font:600 12px var(--f-round);color:var(--on-sky-2)}
 .led-a{font:800 15px var(--f-round);white-space:nowrap}
 .led-a.pos{color:#B7FFD0}
+.stmt-day{font:700 13px var(--f-text);color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em;margin:0 0 2px}
+.stmt-ic{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--fill)}
+.stmt-ic .ic{width:16px;height:16px}
+.stmt-sum{font:600 15px/1.4 var(--f-text);text-align:center}
 .slip-mini{display:block;width:100%;text-align:left;background:#FFFDF6;color:#1C2340;border-radius:10px;padding:14px 14px 12px;font:500 13px/1.55 var(--f-mono);transform:rotate(-1deg);box-shadow:0 12px 26px -14px rgba(0,0,0,.5)}
 .slip-mini .sl{display:flex;justify-content:space-between;gap:10px}
 .slip-mini .sl.b{font-weight:800;border-top:1px dashed #C9CBD6;margin-top:6px;padding-top:6px}
@@ -3463,7 +3467,7 @@ const Studio = (() => {
   // there isn't enough. `rec` (a placed item) remembers what was paid, so selling it back can refund half.
   function charge(k, d, pay, isl, patch, rec) {
     if (pay === 'won') return true;
-    if (pay === 'xp') { if (xpOf(k).left < d.xp) { S0.msg = 'Not enough XP yet. Finish a mission or a Character Growth lesson to earn more.'; ui(); return false; } isl.xpSpent = (isl.xpSpent || 0) + d.xp; if (rec) rec.xp = d.xp; }
+    if (pay === 'xp') { if (xpOf(k).left < d.xp) { S0.msg = 'Not enough XP yet. Finish a mission or a Character Growth lesson to earn more.'; ui(); return false; } isl.xpSpent = (isl.xpSpent || 0) + d.xp; if (rec) rec.xp = d.xp; patch.ledger = pushLedger(k, { kind: 'xp', amt: 0, xp: -d.xp, memo: `Island shop: ${d.name}` }); }
     else { const jars = { ...(k.jars || {}) }; if ((jars.spend || 0) < d.cash) { S0.msg = 'Not enough in your Spend jar.'; ui(); return false; } jars.spend -= d.cash; patch.jars = jars; patch.ledger = pushLedger(k, { kind: 'spend', amt: -d.cash, memo: `Island shop: ${d.name}` }); if (rec) rec.cash = d.cash; if (window.Growth) Growth.onEvent(k, 'buyCash', { name: d.name, cost: d.cash }); }
     track('island.buy', { item: d.t || d.id, name: d.name, cat: d.cat || 'look', pay, price: pay === 'xp' ? d.xp : d.cash }, k.id);
     return true;
@@ -3652,7 +3656,7 @@ const Studio = (() => {
       if (it.cash && window.Growth) Growth.onEvent(k, 'sell', { name, cost: it.cash, back: Math.floor(it.cash / 2) });
       if (it.won) {}
       else if (it.cash) { const back = Math.floor(it.cash / 2); patch.jars = { ...(k.jars || {}), spend: ((k.jars || {}).spend || 0) + back }; patch.ledger = pushLedger(k, { kind: 'sell', amt: back, memo: `Sold island ${name.toLowerCase()}` }); }
-      else patch.island.xpSpent = Math.max(0, (isl.xpSpent || 0) - Math.floor((it.xp || 0) / 2));
+      else { const back = Math.floor((it.xp || 0) / 2); patch.island.xpSpent = Math.max(0, (isl.xpSpent || 0) - back); if (back) patch.ledger = pushLedger(k, { kind: 'xp', amt: 0, xp: back, memo: `Sold island ${name.toLowerCase()}` }); }
       updDoc('kids', k.id, patch); const m = findMesh(id); if (m) { island.remove(m); island.userData.items = island.userData.items.filter(x => x !== m); }
       S0.sel = null; Sound.coin(); toast(it.won ? `The ${name.toLowerCase()} is put away. Place it again from the shop any time.` : `Sold the ${name.toLowerCase()} for half what you paid`);
     }
@@ -4244,11 +4248,17 @@ function lessonsCard(kid) {
     <div class="lessons" data-keep="lessons">${LESSONS.map(l => `<button class="lsn ${b[l.key] ? 'done' : ''}" data-act="lesson" data-key="${l.key}"><span class="lsn-ic" aria-hidden="true">${l.icon}</span><span class="lsn-t">${esc(l.title)}</span></button>`).join('')}</div>
     <p class="card-foot">Each one ends with a quick quiz. Get it right to earn a Money Smart tick.</p></section>`;
 }
-const LED_IC = { spend: 'gift', pay: 'coins', interest: 'sparkle', buy: 'chart', sell: 'chart', move: 'swap', payout: 'cash', bonus: 'gift' };
+const LED_IC = { spend: 'gift', xp: 'gift', pay: 'coins', interest: 'sparkle', buy: 'chart', sell: 'chart', move: 'swap', payout: 'cash', bonus: 'gift' };
+// Island shop buys paid in XP go on the statement too (kind 'xp', no money moves), so kids and grown-ups see
+// everything that was bought.
+const isBuy = e => e.kind === 'spend' || (e.kind === 'xp' && e.xp < 0);
+const ledAmt = e => e.kind === 'xp' ? `${e.xp < 0 ? '−' : '+'}${Math.abs(e.xp).toLocaleString()} XP` : e.kind === 'move' ? fmt(Math.abs(e.amt)) : fmt(e.amt, { sign: true });
+const ledIn = e => e.kind !== 'move' && (e.kind === 'xp' ? e.xp : e.amt) > 0;
 function ledgerCard(kid) {
-  const L = (kid.ledger || []).slice(0, 8);
-  return `<section class="card glass"><header class="card-h"><span class="card-t">Bank statement</span></header>
-    ${L.length ? `<div class="ledger">${L.map(e => `<div class="led"><span class="led-ic">${ic(LED_IC[e.kind] || 'coins')}</span><span class="led-t">${esc(e.memo || e.kind)}<small>${timeAgo(e.at)}</small></span><span class="led-a num ${e.amt > 0 && e.kind !== 'move' ? 'pos' : ''}">${e.kind === 'move' ? fmt(Math.abs(e.amt)) : fmt(e.amt, { sign: true })}</span></div>`).join('')}</div>` : '<p class="goal-empty" style="margin:0">Nothing yet. Every coin in and out shows up here.</p>'}</section>`;
+  const all = kid.ledger || [], L = all.slice(0, 8);
+  return `<section class="card glass"><header class="card-h"><span class="card-t">Bank statement</span><span class="card-r">${all.length > 8 ? `<button class="mini-btn" data-act="stmt" data-id="${kid.id}">See all</button>` : ''}</span></header>
+    ${L.length ? `<div class="ledger">${L.map(e => `<div class="led"><span class="led-ic">${ic(LED_IC[e.kind] || 'coins')}</span><span class="led-t">${esc(e.memo || e.kind)}<small>${timeAgo(e.at)}</small></span><span class="led-a num ${ledIn(e) ? 'pos' : ''}">${ledAmt(e)}</span></div>`).join('')}</div>` : '<p class="goal-empty" style="margin:0">Nothing yet. Every coin in and out, and everything you buy, shows up here.</p>'}
+    ${all.some(isBuy) ? `<p class="card-foot"><button class="link-in" data-act="stmt" data-id="${kid.id}" data-f="buys">See everything you've bought</button></p>` : ''}</section>`;
 }
 
 /* ---------- Market tab ---------- */
@@ -4417,6 +4427,18 @@ function slipsSheet() {
   const kid = curKid(), list = jobsOfKid(kid.id).filter(j => j.status === 'approved' && j.paid).slice(0, 40);
   return `<div class="sh-head"><button class="sh-x" data-act="close">Close</button><h2>Pay slips</h2><span></span></div>
     <div class="sh-body">${list.map(j => `<div class="slip-mini" style="transform:none"><div class="hd">${esc(new Date(j.reviewedAt || j.at).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' }))} · ${starRow(j.stars)}</div><div class="sl"><span>${esc(j.title)}</span><span>${fmt(j.paid.gross)}</span></div><div class="sl"><span>Family tax</span><span>−${fmt(j.paid.tax)}</span></div>${j.paid.tip ? `<div class="sl"><span>incl. tip</span><span>${fmt(j.paid.tip)}</span></div>` : ''}<div class="sl b"><span>Net pay</span><span>${fmt(j.paid.net)}</span></div></div>`).join('')}</div>`;
+}
+// The whole statement, a day at a time. "Things bought" keeps just the island shop buys and adds up what they cost.
+function stmtSheet() {
+  const kid = Store.kids[UI.stmt.kidId]; if (!kid) return '';
+  const f = UI.stmt.f, all = kid.ledger || [], L = f === 'buys' ? all.filter(isBuy) : all, days = [];
+  for (const e of L) { const d = new Date(e.at).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' }); if (!days.length || days[days.length - 1][0] !== d) days.push([d, []]); days[days.length - 1][1].push(e); }
+  const cash = L.filter(e => e.kind === 'spend').reduce((t, e) => t - e.amt, 0), xp = L.filter(e => e.kind === 'xp' && e.xp < 0).reduce((t, e) => t - e.xp, 0);
+  return `<div class="sh-head"><button class="sh-x" data-act="close">Close</button><h2>${esc(kid.name)}'s bank statement</h2><span></span></div>
+    <div class="sh-body"><div class="seg" style="align-self:center">${[['all', 'Everything'], ['buys', 'Things bought']].map(([k, l]) => `<button class="seg-i ${f === k ? 'on' : ''}" data-act="stmtF" data-f="${k}">${l}</button>`).join('')}</div>
+    ${f === 'buys' && L.length ? `<p class="stmt-sum">${[cash && `${fmt(cash)} from the Spend jar`, xp && `${xp.toLocaleString()} XP`].filter(Boolean).join(' and ')} spent in the island shop.</p>` : ''}
+    ${days.length ? days.map(([d, es]) => `<section><h4 class="stmt-day">${esc(d)}</h4><div class="plist">${es.map(e => `<div class="pli"><span class="stmt-ic">${ic(LED_IC[e.kind] || 'coins')}</span><span class="grow">${esc(e.memo || e.kind)}</span><span class="amt ${ledIn(e) ? 'pos' : ''}">${ledAmt(e)}</span></div>`).join('')}</div></section>`).join('')
+      : `<p class="muted" style="text-align:center">${f === 'buys' ? 'Nothing bought yet. Things bought in the island shop show up here.' : 'Nothing yet.'}</p>`}</div>`;
 }
 const RANGES = { '1W': [56, 1], '1M': [120, 2], '3M': [120, 6], 'All': [150, 0] };
 function fundSheet() {
@@ -4896,7 +4918,8 @@ function pKidDetail(kid) {
     <section class="pcard"><h3>Today's chores</h3><div class="plist">${[...b.must, ...b.team].map(c => { const s = choreState(kid.id, c, date).state; return `<div class="pli"><span class="ck ${isDone(s) ? 'on' : ''}">${ic('check')}</span><span class="grow">${c.icon} ${esc(c.title)}</span><span class="tag ${s === 'open' ? 'pending' : s}">${{ open: 'Not done', pending: 'To review', approved: 'Paid', redo: 'Redo' }[s] || s}</span></div>`; }).join('')}</div>
       <h4>Lifetime</h4><div class="plist"><div class="pli"><span class="grow">Earned before tax</span><span class="amt">${fmt(kid.earned || 0)}</span></div><div class="pli"><span class="grow">Family tax paid</span><span class="amt">${fmt(kid.taxPaid || 0)}</span></div><div class="pli"><span class="grow">Vault interest</span><span class="amt">${fmt(kid.interestEarned || 0)}</span></div></div></section>
     <section class="pcard wide"><h3>Recent jobs and photos</h3>${jobs.length ? `<div class="pjobs">${jobs.map(x => `<button class="pjob" data-act="photo" data-id="${x.id}"><span class="ph">${x.photo ? `<img ${photoAttr(x.photo)} alt="" loading="lazy">` : x.icon}</span><b>${esc(x.title)}</b><small>${esc(parseKey(x.date).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }))} · <span class="stars-s">${starRow(x.stars)}</span> · ${{ approved: 'Paid', pending: 'To review', redo: 'Redo' }[x.status]}</small></button>`).join('')}</div>` : '<p class="muted">No jobs yet.</p>'}</section>
-    <section class="pcard"><h3>Payments</h3>${L.length ? `<div class="plist">${L.map(e => `<div class="pli"><span class="grow">${esc(e.memo || e.kind)}<br><small class="muted">${timeAgo(e.at)}</small></span><span class="amt ${e.amt > 0 && e.kind !== 'move' ? 'pos' : ''}">${e.kind === 'move' ? fmt(Math.abs(e.amt)) : fmt(e.amt, { sign: true })}</span></div>`).join('')}</div>` : '<p class="muted">Nothing yet.</p>'}</section>
+    <section class="pcard"><h3>Bank statement</h3>${L.length ? `<div class="plist">${L.map(e => `<div class="pli"><span class="grow">${esc(e.memo || e.kind)}<br><small class="muted">${timeAgo(e.at)}</small></span><span class="amt ${ledIn(e) ? 'pos' : ''}">${ledAmt(e)}</span></div>`).join('')}</div>
+      <div class="pactions"><button class="pbtn" data-act="stmt" data-id="${kid.id}">${ic('list')} See all</button>${(kid.ledger || []).some(isBuy) ? `<button class="pbtn" data-act="stmt" data-id="${kid.id}" data-f="buys">${ic('gift')} Things bought</button>` : ''}</div>` : '<p class="muted">Nothing yet.</p>'}</section>
     <section class="pcard">${UI.confirmRemove === kid.id ? `<h3>Remove ${esc(kid.name)}?</h3><p class="muted" style="margin-bottom:12px">Their balances and profile are deleted. Past jobs stay in the review history.</p><div class="pactions"><button class="pbtn solid-danger" data-act="removeKidYes" data-id="${kid.id}">Remove</button><button class="pbtn" data-act="removeKidNo">Keep</button></div>` : `<button class="pbtn danger" data-act="removeKid" data-id="${kid.id}">${ic('trash')} Remove ${esc(kid.name)}</button>`}</section>
   </div>`;
 }
@@ -5668,6 +5691,8 @@ const ACT = {
   goalSave: () => { const g = UI.goalForm; if (!g.name.trim()) return; updDoc('kids', curKid().id, { goal: { name: g.name.trim(), icon: g.icon, target: g.target } }); closeSheet(); Sound.pop(); toast('Goal set'); },
   goalRemove: () => { updDoc('kids', curKid().id, { goal: null }); closeSheet(); },
   slips: () => openSheet(slipsSheet),
+  stmt: a => { UI.stmt = { kidId: a.dataset.id, f: a.dataset.f || 'all' }; openSheet(stmtSheet); },
+  stmtF: a => { UI.stmt.f = a.dataset.f; renderSheet(false); },
   lesson: a => { UI.lesson = { key: a.dataset.key, ans: null }; openSheet(lessonSheet); },
   quiz: a => {
     const L = LESSONS.find(l => l.key === UI.lesson.key), i = +a.dataset.i; UI.lesson.ans = i; renderSheet(false);
@@ -5905,7 +5930,7 @@ document.addEventListener('click', e => {
   const fn = ACT[a.dataset.act]; if (fn) { fn(a, e); if (TRACKED.has(a.dataset.act)) { const { act, ...rest } = a.dataset; track('app.' + act, rest); } }
 });
 // Actions worth recording in the family's event log (every synced write is also logged on the server).
-const TRACKED = new Set(['openKid', 'start', 'crewGo', 'habit', 'mvGo', 'preset', 'goalSave', 'goalRemove', 'quiz', 'paydayDone', 'trade', 'sFinish', 'sSubmit', 'sSkipPhoto', 'sQuit', 'approve', 'redo', 'payout', 'bonus', 'mGo', 'saveKid', 'removeKidYes', 'choreToggle', 'saveChore', 'delChore', 'cfRecord', 'gaMode', 'gaRedo', 'sShot', 'tax', 'interest', 'setFlag', 'currency', 'fundReset', 'lesson', 'wizNext', 'wizSkip', 'lock', 'nextGo', 'gStart', 'gNode', 'gAssign', 'gMoment', 'gCase']);
+const TRACKED = new Set(['openKid', 'start', 'crewGo', 'habit', 'mvGo', 'preset', 'goalSave', 'goalRemove', 'quiz', 'paydayDone', 'trade', 'sFinish', 'sSubmit', 'sSkipPhoto', 'sQuit', 'approve', 'redo', 'payout', 'bonus', 'mGo', 'saveKid', 'removeKidYes', 'choreToggle', 'saveChore', 'delChore', 'cfRecord', 'gaMode', 'gaRedo', 'sShot', 'tax', 'interest', 'setFlag', 'currency', 'fundReset', 'lesson', 'wizNext', 'wizSkip', 'lock', 'nextGo', 'gStart', 'gNode', 'gAssign', 'gMoment', 'gCase', 'stmt']);
 document.addEventListener('submit', e => { const f = e.target.closest('[data-submit]'); if (!f) return; e.preventDefault(); const fn = ACT[f.dataset.submit]; if (fn) fn(f, e); });
 document.addEventListener('input', e => { const a = e.target.closest('[data-in]'); if (a && IN[a.dataset.in]) IN[a.dataset.in](a, e); });
 document.addEventListener('keydown', e => {
