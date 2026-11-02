@@ -7,7 +7,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { openDb, migrate } from './db.js';
-import { hashPassword, verifyPassword, newToken, sha256, wordCode, digitCode, recoveryCode, parseCookies, sessionCookie, limited, validEmail } from './auth.js';
+import { hashPassword, verifyPassword, newToken, sha256, wordCode, digitCode, recoveryCode, parseCookies, sessionCookie, limited, hitCount, validEmail } from './auth.js';
+import { checkKidWrite } from './guard.js';
+import { hash as fnv } from './market.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 // Options: PORT and STATIC_DIR environment variables, or --port 8787 --static public on the command line.
@@ -135,7 +137,16 @@ function checkWrite(s, col, body, prev) {
 const guidePhotoIds = d => [...((d && d.steps) || []).map(x => x && x.photo), d && d.finish].filter(r => typeof r === 'string' && r.startsWith('s:')).map(r => r.slice(2));
 const dropGuidePhotos = (t, familyId, ids) => (ids.length ? t.q(`delete from photos where family_id = $1 and kind = 'guide' and id = any($2)`, [familyId, ids]) : null);
 
-async function writeDoc(s, col, id, body, merge, clientId) {
+// Fields only the server sets: whether a grown-up PIN or a kid's passcode is set (the codes live in family_pins).
+// Writes from devices keep whatever is already there; pinHash is from older versions of the app and is dropped.
+const SERVER_OWNED = { family: ['pinSet'], kids: ['pin'] };
+function keepServerOwned(col, prev, data) {
+  if (col === 'family') delete data.pinHash;
+  for (const k of SERVER_OWNED[col] || []) { if (prev && prev[k]) data[k] = true; else delete data[k]; }
+}
+
+// `system` is the server's own write (the PIN routes setting pinSet or a kid's pin): no device rules apply.
+async function writeDoc(s, col, id, body, merge, clientId, system = false) {
   const C = COLS[col]; if (!C) fail(404, 'Unknown collection.', 'bad_path');
   if (!body || typeof body !== 'object' || Array.isArray(body)) fail(400, 'Expected an object.', 'bad_body');
   const out = await db.tx(async t => {
@@ -143,8 +154,14 @@ async function writeDoc(s, col, id, body, merge, clientId) {
       ? (await t.q('select data, version from family_settings where family_id = $1 for update', [s.family_id])).rows[0]
       : (await t.q(`select data, version from ${C.table} where family_id = $1 and id = $2 for update`, [s.family_id, id])).rows[0];
     const prev = cur ? asObj(cur.data) : null;
-    checkWrite(s, col, body, prev);
+    if (!system) checkWrite(s, col, body, prev);
     const data = merge ? deepMerge(prev || {}, body) : { ...body };
+    if (!system) keepServerOwned(col, prev, data);
+    if (!system && !s.elevated && col === 'kids' && prev) {
+      const set = (await t.q('select data from family_settings where family_id = $1', [s.family_id])).rows[0];
+      const bad = checkKidWrite(prev, data, set ? asObj(set.data) : {});
+      if (bad) fail(bad.code === 'stale' ? 409 : 403, bad.message, bad.code);
+    }
     if (!C.single) data.id = id;
     if (col === 'guides' && prev) { const keep = new Set(guidePhotoIds(data)); await dropGuidePhotos(t, s.family_id, guidePhotoIds(prev).filter(x => !keep.has(x))); }
     const version = (cur ? Number(cur.version) : 0) + 1, who = s.user_id || s.device_id;
@@ -184,9 +201,13 @@ async function deleteDoc(s, col, id, clientId) {
 async function snapshot(familyId) {
   const rows = async (sql) => Object.fromEntries((await db.query(sql, [familyId])).rows.map(r => [r.id, { ...asObj(r.data), id: r.id }]));
   const set = (await db.query('select data from family_settings where family_id = $1', [familyId])).rows[0];
+  const settings = set ? asObj(set.data) : null, kids = await rows('select id, data from kids where family_id = $1');
+  // Belt and braces: no PIN or passcode hash ever goes to a device (migration 008 moved them to family_pins).
+  if (settings) delete settings.pinHash;
+  for (const k of Object.values(kids)) if (k.pin) k.pin = true;
   return {
-    settings: set ? asObj(set.data) : null,
-    kids: await rows('select id, data from kids where family_id = $1'),
+    settings,
+    kids,
     jobs: await rows('select id, data from jobs where family_id = $1 order by created_at desc limit 800'),
     habits: await rows('select id, data from habits where family_id = $1'),
     growth: await rows('select id, data from growth_progress where family_id = $1'),
@@ -260,14 +281,74 @@ route('POST', '/api/auth/logout', async ({ req, res, s }) => {
 
 route('GET', '/api/auth/me', async ({ s }) => me(needSession(s)));
 
-// A grown-up who knows the PIN unlocks parent actions on a kid's iPad for 30 minutes.
-route('POST', '/api/auth/elevate', async ({ req, s }) => {
-  needSession(s); const b = await readJson(req);
-  if (limited('elevate:' + s.device_id, 10)) fail(429, 'Too many tries. Wait a few minutes.', 'slow_down');
-  const set = (await db.query('select data from family_settings where family_id = $1', [s.family_id])).rows[0], pin = set && asObj(set.data).pinHash;
-  if (!pin || pin !== b.pinHash) fail(403, 'Wrong PIN.', 'bad_pin');
-  await db.query(`update sessions set elevated_until = now() + interval '30 minutes' where token_hash = $1`, [s.token_hash]);
-  await logEvent(s, 'auth.unlocked');
+/* ---------- grown-up PIN and kids' passcodes ----------
+   The codes live only in family_pins as salted scrypt hashes; devices send the digits. kidId '' (or none) is the
+   grown-up PIN. Hashes from older versions of the app ('legacy$' + SHA-256 of 'chorecast|' and the digits, or 'h' + an
+   FNV hash where the browser had no crypto) are checked the old way once, then upgraded. */
+const PIN_RE = /^\d{4}$/;
+const pinText = (kidId, pin) => 'chorecast|' + (kidId ? `kid|${kidId}|${pin}` : pin);
+async function pinMatches(familyId, kidId, pin) {
+  const row = (await db.query('select hash from family_pins where family_id = $1 and kid_id = $2', [familyId, kidId])).rows[0];
+  if (!row) return null;
+  if (!row.hash.startsWith('legacy$')) return verifyPassword(pin, row.hash);
+  const old = row.hash.slice(7), txt = pinText(kidId, pin);
+  if (old !== (old.startsWith('h') ? 'h' + fnv(txt).toString(16) : sha256(txt))) return false;
+  await db.query('update family_pins set hash = $3 where family_id = $1 and kid_id = $2', [familyId, kidId, await hashPassword(pin)]);
+  return true;
+}
+// 8 wrong codes from one device, or 20 across the family, in 15 minutes and it waits.
+async function checkPin(s, kidId, pin) {
+  if (hitCount('pinfail:' + s.device_id) >= 8 || hitCount('pinfail:' + s.family_id) >= 20) fail(429, 'Too many wrong tries. Wait 15 minutes, then try again.', 'slow_down');
+  const ok = PIN_RE.test(String(pin || '')) ? await pinMatches(s.family_id, kidId, String(pin)) : false;
+  if (ok === false) { limited('pinfail:' + s.device_id, 99); limited('pinfail:' + s.family_id, 99); await logEvent(s, kidId ? 'auth.kid_pin_wrong' : 'auth.pin_wrong', {}, kidId || null); }
+  return ok;
+}
+const kidIdOf = b => (b.kidId ? String(b.kidId).slice(0, 80) : '');
+async function needKid(s, kidId) { if (!(await db.query('select 1 from kids where family_id = $1 and id = $2', [s.family_id, kidId])).rows.length) fail(404, 'Kid not found.', 'not_found'); }
+
+// Checks the grown-up PIN or a kid's passcode. The right grown-up PIN also unlocks grown-up changes on a kid's iPad for
+// 30 minutes.
+route('POST', '/api/pin/check', async ({ req, s }) => {
+  needSession(s); const b = await readJson(req), kidId = kidIdOf(b);
+  const ok = await checkPin(s, kidId, b.pin);
+  if (ok === null) fail(404, kidId ? 'There’s no passcode on this account.' : 'There’s no grown-up PIN yet.', 'no_pin');
+  if (!ok) fail(403, kidId ? 'That’s not it. Try again.' : 'Wrong PIN. Try again.', 'bad_pin');
+  if (!kidId) {
+    if (s.role === 'kid') await db.query(`update sessions set elevated_until = now() + interval '30 minutes' where token_hash = $1`, [s.token_hash]);
+    await logEvent(s, 'auth.unlocked');
+  }
+  return { ok: true };
+});
+
+// Sets the grown-up PIN (a grown-up's phone, or a kid's iPad already unlocked with the PIN) or a kid's passcode (the
+// first one, a new one with the old one, or any one from an unlocked grown-up).
+route('PUT', '/api/pin', async ({ req, s }) => {
+  needSession(s); const b = await readJson(req), kidId = kidIdOf(b), pin = String(b.pin || '');
+  if (!PIN_RE.test(pin)) fail(400, 'Use 4 digits.', 'bad_pin');
+  if (!kidId) { if (!s.elevated) fail(403, 'Set the grown-up PIN on a grown-up’s phone first.', 'locked'); }
+  else {
+    await needKid(s, kidId);
+    if (!s.elevated) {
+      const ok = b.old == null ? null : await checkPin(s, kidId, b.old);
+      if (ok === false || (ok === null && (await db.query('select 1 from family_pins where family_id = $1 and kid_id = $2', [s.family_id, kidId])).rows.length)) fail(403, 'Type your old passcode first.', 'bad_old');
+    }
+  }
+  await db.query(`insert into family_pins (family_id, kid_id, hash, set_by) values ($1, $2, $3, $4)
+    on conflict (family_id, kid_id) do update set hash = excluded.hash, set_by = excluded.set_by, set_at = now()`, [s.family_id, kidId, await hashPassword(pin), s.user_id || s.device_id]);
+  await writeDoc(s, kidId ? 'kids' : 'family', kidId || 'settings', kidId ? { pin: true } : { pinSet: true }, true, null, true);
+  await logEvent(s, kidId ? 'auth.kid_pin_set' : 'auth.pin_set', {}, kidId || null);
+  return { ok: true };
+});
+
+// Turns a kid's passcode off: an unlocked grown-up, or the kid with their passcode. The grown-up PIN can only change.
+route('POST', '/api/pin/clear', async ({ req, s }) => {
+  needSession(s); const b = await readJson(req), kidId = kidIdOf(b);
+  if (!kidId) fail(400, 'The grown-up PIN can be changed but not turned off.', 'bad_request');
+  await needKid(s, kidId);
+  if (!s.elevated && !(await checkPin(s, kidId, b.old))) fail(403, 'Type your passcode first.', 'bad_old');
+  await db.query('delete from family_pins where family_id = $1 and kid_id = $2', [s.family_id, kidId]);
+  await writeDoc(s, 'kids', kidId, { pin: null }, true, null, true);
+  await logEvent(s, 'auth.kid_pin_off', {}, kidId);
   return { ok: true };
 });
 
@@ -352,6 +433,12 @@ route('POST', '/api/import', async ({ req, s }) => {
   if (has && !b.force) fail(409, 'This family already has kids saved.', 'not_empty');
   if (b.settings) await writeDoc(s, 'family', 'settings', b.settings, true);
   for (const col of ['kids', 'jobs', 'habits', 'growth', 'guides']) for (const [id, d] of Object.entries(b[col] || {})) await writeDoc(s, col, id, d, true);
+  // The device's PIN and passcodes come along as old-style hashes, checked and upgraded when next typed.
+  const pins = [['', b.settings && b.settings.pinHash], ...Object.entries(b.kids || {}).map(([id, k]) => [id, k && k.pin])].filter(([, h]) => typeof h === 'string' && h);
+  for (const [kidId, h] of pins) {
+    await db.query(`insert into family_pins (family_id, kid_id, hash) values ($1, $2, $3) on conflict do nothing`, [s.family_id, kidId, 'legacy$' + h]);
+    await writeDoc(s, kidId ? 'kids' : 'family', kidId || 'settings', kidId ? { pin: true } : { pinSet: true }, true, null, true);
+  }
   await logEvent(s, 'family.imported', { kids: Object.keys(b.kids || {}).length, jobs: Object.keys(b.jobs || {}).length });
   return { ok: true };
 });

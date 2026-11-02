@@ -2174,7 +2174,8 @@ function trustFor(kid) {
 const vaultRate = kid => (S().interestWeekly || 0) + trustFor(kid).bonus;
 const futureValue = (c, ratePct, weeks) => Math.round(c * Math.pow(1 + ratePct / 100, weeks));
 
-/* Market: deterministic random walk, one tick every 3 hours since 1 Jan 2026 */
+/* Market: deterministic random walk, one tick every 3 hours since 1 Jan 2026. server/market.js works out the same
+   prices to check kids' trades, so a change to FUNDS or the walk goes there too. */
 const EPOCH = Date.UTC(2026, 0, 1), TICK = 3 * 3600e3;
 const Market = { series: {}, last: -1 };
 function buildMarket() {
@@ -4539,6 +4540,8 @@ function newMath(g) { g.a = 12 + Math.floor(Math.random() * 8); g.b = 3 + Math.f
 function viewGate() {
   const g = UI.gate, kid = g.kid && Store.kids[g.kid]; let title, sub;
   if (g.mode === 'kid') { title = `Hi ${esc(kid.name)}!`; sub = 'Type your passcode to open your account.'; }
+  else if (g.mode === 'kidOld') { title = 'Type your passcode'; sub = 'Your passcode now, then you’ll pick a new one.'; }
+  else if (g.mode === 'kidOff') { title = 'Turn off your passcode'; sub = 'Type your passcode to turn it off.'; }
   else if (g.mode === 'kidCreate') { title = g.first ? 'Type it once more' : 'Pick a 4-digit passcode'; sub = g.first ? 'Just to be sure you remember it.' : 'You’ll type it to open your account, so only you can spend your money and XP. Keep it a secret!'; }
   else if (g.mode === 'math') { title = 'Grown-ups only'; sub = `To reset the PIN, type the answer: ${g.a} × ${g.b}`; }
   else if (g.mode === 'create') { title = g.first ? 'Type it once more' : g.reset ? 'Create a new PIN' : 'Create a grown-up PIN'; sub = g.first ? 'Just to be sure you remember it.' : 'Kids won’t know it, so only you can approve pay and see the dashboard.'; }
@@ -4550,7 +4553,7 @@ function viewGate() {
     <div class="gate-lock">${kid ? `<span class="gate-ava">${kid.avatar}</span>` : ic('lock')}</div><h1 class="gate-t">${title}</h1><p class="gate-s">${sub}</p>
     <div class="dots ${g.err ? 'shake' : ''}" aria-label="${g.pin.length} of ${len} digits">${Array.from({ length: len }, (_, i) => `<i class="${i < g.pin.length ? 'on' : ''}"></i>`).join('')}</div>
     <p class="gate-err" aria-live="polite">${esc(g.err || '')}</p>
-    <div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(key).join('')}${g.mode === 'enter' || g.mode === 'kid' ? `<button class="key key-txt" data-act="${g.mode === 'kid' ? 'kidForgot' : 'forgot'}">Forgot?</button>` : '<span></span>'}${key(0)}<button class="key key-txt" data-act="pinDel" aria-label="Delete">${ic('back')}</button></div>
+    <div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(key).join('')}${g.mode === 'enter' || g.kid && g.mode !== 'kidCreate' ? `<button class="key key-txt" data-act="${g.kid ? 'kidForgot' : 'forgot'}">Forgot?</button>` : '<span></span>'}${key(0)}<button class="key key-txt" data-act="pinDel" aria-label="Delete">${ic('back')}</button></div>
   </div>`;
 }
 async function hashPin(pin) {
@@ -4558,24 +4561,53 @@ async function hashPin(pin) {
   try { const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(txt)); return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join(''); }
   catch (e) { return 'h' + hash(txt).toString(16); }
 }
-function openGate(mode, after) { UI.gate = { pin: '', first: null, err: '', mode: mode || (S().pinHash ? 'enter' : 'create'), back: UI.screen === 'parent' ? 'parent' : 'who' }; if (after) UI.afterUnlock = after; UI.screen = 'gate'; closeSheet(); render(); }
+// Signed in to a family, the PIN and kids' passcodes are checked by the server, which keeps them hashed where no device
+// can read them (settings.pinSet and a kid's `pin: true` only say one is set). On this device only, they're hashed here.
+const onServer = () => Store.mode === 'server';
+const hasPin = () => !!(onServer() ? S().pinSet : S().pinHash);
+const offlineMsg = what => `You’re offline. Connect to the internet to ${what}.`;
+function openGate(mode, after) { UI.gate = { pin: '', first: null, err: '', mode: mode || (hasPin() ? 'enter' : 'create'), back: UI.screen === 'parent' ? 'parent' : 'who' }; if (after) UI.afterUnlock = after; UI.screen = 'gate'; closeSheet(); render(); }
+function gateErr(g, msg) { g.err = msg; g.pin = ''; Sound.error(); render(); }
 async function pinComplete() {
   const g = UI.gate;
   if (g.kid) return kidPinComplete(g);
   if (g.mode === 'math') { if (+g.pin === g.a * g.b) { g.mode = 'create'; g.reset = true; g.first = null; g.pin = ''; } else { g.err = 'Not quite. Try a new one.'; g.pin = ''; newMath(g); Sound.error(); } return render(); }
   if (g.mode === 'create') {
     if (!g.first) { g.first = g.pin; g.pin = ''; return render(); }
-    if (g.pin !== g.first) { g.err = 'Those didn’t match. Start again.'; g.first = null; g.pin = ''; Sound.error(); return render(); }
-    saveSettings({ pinHash: await hashPin(g.pin) }); toast('PIN saved'); return unlock();
+    if (g.pin !== g.first) { g.first = null; return gateErr(g, 'Those didn’t match. Start again.'); }
+    if (onServer()) {
+      try {
+        if (!Store.settings && Acct.me.role === 'parent') await saveSettings({});
+        await api('PUT', '/api/pin', { pin: g.pin }); applyLocal('family', 'settings', { pinSet: true }, true);
+      } catch (e) { g.first = null; return gateErr(g, e.status ? e.message : offlineMsg('set the PIN')); }
+    } else saveSettings({ pinHash: await hashPin(g.pin) });
+    toast('PIN saved'); return unlock();
+  }
+  if (onServer()) {
+    try { await api('POST', '/api/pin/check', { pin: g.pin }); return unlock(); }
+    catch (e) { return gateErr(g, e.status ? e.message : offlineMsg('open Grown-ups')); }
   }
   if ((await hashPin(g.pin)) === S().pinHash) return unlock();
-  g.err = 'Wrong PIN. Try again.'; g.pin = ''; Sound.error(); render();
+  gateErr(g, 'Wrong PIN. Try again.');
 }
 /* Kid passcodes: a kid can lock their own account with 4 digits, so a brother or sister can't open it to spend their
-   money or XP, or see their total on the family screen. It's saved hashed on the kid's record, and the account locks
-   again on the way back to the family screen, after 3 minutes untouched (never in the middle of a chore) or after a
-   minute with the app in the background. A grown-up can turn it off in Grown-ups, Kids, if it's forgotten. */
+   money or XP, or see their total on the family screen. Signed in, the server keeps it; on this device only, it's saved
+   hashed on the kid's record. Changing it or turning it off asks for it first. The account locks again on the way
+   back to the family screen, after 3 minutes untouched (never in the middle of a chore) or after a minute with the app
+   in the background. A grown-up can reset it in Grown-ups, Kids, if it's forgotten. */
 const kidPinHash = (id, pin) => hashPin(`kid|${id}|${pin}`);
+// true for the right passcode, false for a wrong one, or a message when it couldn't be checked.
+async function kidPinOk(kid, pin) {
+  if (!onServer()) return (await kidPinHash(kid.id, pin)) === kid.pin;
+  try { await api('POST', '/api/pin/check', { kidId: kid.id, pin }); return true; }
+  catch (e) { return e.code === 'bad_pin' ? false : e.status ? e.message : offlineMsg('open your account'); }
+}
+// Turns a kid's passcode off: a grown-up in Grown-ups, or the kid with `old`, the passcode they just typed.
+async function kidPinClear(kid, old) {
+  if (!onServer()) { updDoc('kids', kid.id, { pin: null }); return true; }
+  try { await api('POST', '/api/pin/clear', { kidId: kid.id, old }); applyLocal('kids', kid.id, { pin: null }, true); scheduleRender(); return true; }
+  catch (e) { toast(e.status ? e.message : offlineMsg('change the passcode')); return false; }
+}
 function openKidGate(kid, mode, back) { UI.gate = { pin: '', first: null, err: '', mode, kid: kid.id, back: back || 'who' }; UI.screen = 'gate'; closeSheet(); render(); }
 function enterKid(id, o = {}) {
   const k = Store.kids[id], tour = o.tour || UI.tourFor === id || (k && !k.example && !knowsWay(k)); UI.tourFor = null;
@@ -4586,12 +4618,23 @@ async function kidPinComplete(g) {
   const kid = Store.kids[g.kid]; if (!kid) { UI.gate = null; UI.screen = 'who'; return render(); }
   if (g.mode === 'kidCreate') {
     if (!g.first) { g.first = g.pin; g.pin = ''; return render(); }
-    if (g.pin !== g.first) { g.err = 'Those didn’t match. Start again.'; g.first = null; g.pin = ''; Sound.error(); return render(); }
-    updDoc('kids', kid.id, { pin: await kidPinHash(kid.id, g.pin) }); toast('Passcode saved. Only you can open your account now.');
+    if (g.pin !== g.first) { g.first = null; return gateErr(g, 'Those didn’t match. Start again.'); }
+    if (onServer()) {
+      try { await api('PUT', '/api/pin', { kidId: kid.id, pin: g.pin, old: g.old }); applyLocal('kids', kid.id, { pin: true }, true); }
+      catch (e) { g.first = null; return gateErr(g, e.status ? e.message : offlineMsg('save your passcode')); }
+    } else updDoc('kids', kid.id, { pin: await kidPinHash(kid.id, g.pin) });
+    toast('Passcode saved. Only you can open your account now.');
     UI.gate = null; UI.kidUnlocked = kid.id; UI.kidTouch = Date.now(); UI.screen = 'kid'; return render();
   }
-  if ((await kidPinHash(kid.id, g.pin)) === kid.pin) { UI.gate = null; return enterKid(kid.id); }
-  g.err = 'That’s not it. Try again.'; g.pin = ''; Sound.error(); render();
+  const ok = await kidPinOk(kid, g.pin);
+  if (ok !== true) return gateErr(g, ok === false ? 'That’s not it. Try again.' : ok);
+  // Changing it: the old one checks out, so pick the new one. Turning it off: done.
+  if (g.mode === 'kidOld') { g.old = g.pin; g.mode = 'kidCreate'; g.first = null; g.pin = ''; return render(); }
+  if (g.mode === 'kidOff') {
+    if (!(await kidPinClear(kid, g.pin))) return gateErr(g, '');
+    toast('Passcode turned off'); UI.gate = null; UI.screen = 'kid'; return render();
+  }
+  UI.gate = null; return enterKid(kid.id);
 }
 function lockKid(why) {
   const k = curKid(); UI.kidUnlocked = null;
@@ -4604,7 +4647,7 @@ function kidPinSheet() {
   return `<div class="sh-head"><span></span><h2>Your passcode</h2><button class="sh-ok" data-act="close">Done</button></div>
     <div class="sh-body"><p class="hint">Your account is locked with a passcode. Your brothers and sisters can’t open it or see your money on the family screen.</p>
       <button class="btn-big" data-act="kidPinChange">${ic('lock')} Change my passcode</button>
-      <button class="btn-soft" data-act="kidPinOff" data-id="${k.id}">Turn off my passcode</button></div>`;
+      <button class="btn-soft" data-act="kidPinOffMine">Turn off my passcode</button></div>`;
 }
 // A grown-up's way out when a kid forgets their passcode. The old one stops working, then either the kid picks a new
 // one straight away (Grown-ups locks first, as the iPad is being handed over) or the account stays open until they
@@ -4618,8 +4661,8 @@ function kidPinResetSheet() {
       <button class="btn-soft" data-act="kidPinOff" data-id="${k.id}">Just turn it off</button>
       <p class="hint pin-why">${esc(k.name)}’s account stays open until they add a passcode again with the Lock button.</p></div>`;
 }
+// On a kid's iPad the server already unlocked grown-up changes when it accepted the PIN.
 function unlock() {
-  if (Store.mode === 'server' && Acct.me && Acct.me.role === 'kid') api('POST', '/api/auth/elevate', { pinHash: S().pinHash }).catch(() => toast('Couldn’t unlock grown-up changes on this iPad. Check the connection.'));
   track('app.parent_unlocked', {}, null);
   UI.unlocked = true; UI.screen = 'parent'; UI.gate = null; const after = UI.afterUnlock; UI.afterUnlock = null; scrollTo(0, 0);
   const h = S().home, fresh = !h || (!h.done && !h.skipped);
@@ -5667,18 +5710,24 @@ const ACT = {
   home: () => { UI.kidUnlocked = null; UI.screen = 'who'; scrollTo(0, 0); render(); },
   openKid: a => { const k = Store.kids[a.dataset.id]; if (!k) return; if (k.pin && UI.kidUnlocked !== k.id) return openKidGate(k, 'kid'); enterKid(k.id); },
   kidPin: () => { const k = curKid(); if (!k) return; if (!k.pin) return openKidGate(k, 'kidCreate', 'kid'); openSheet(kidPinSheet); },
-  kidPinChange: () => { const k = curKid(); if (k) openKidGate(k, 'kidCreate', 'kid'); },
+  kidPinChange: () => { const k = curKid(); if (k) openKidGate(k, 'kidOld', 'kid'); },
+  kidPinOffMine: () => { const k = curKid(); if (k) openKidGate(k, 'kidOff', 'kid'); },
   kidPinReset: a => { UI.pinReset = a.dataset.id; openSheet(kidPinResetSheet); },
-  kidPinNew: a => { const k = Store.kids[a.dataset.id]; if (!k) return; updDoc('kids', k.id, { pin: null }); ACT.lock(); openKidGate(k, 'kidCreate', 'who'); },
-  kidPinOff: a => { const k = Store.kids[a.dataset.id]; if (!k) return; updDoc('kids', k.id, { pin: null }); closeSheet(); toast(`Passcode turned off for ${k.name}`); render(); },
-  kidForgot: () => { const g = UI.gate; if (!g) return; g.err = 'Ask a grown-up to turn it off in Grown-ups, then Kids.'; g.pin = ''; render(); },
+  kidPinNew: async a => { const k = Store.kids[a.dataset.id]; if (!k || !(await kidPinClear(k))) return; ACT.lock(); openKidGate(k, 'kidCreate', 'who'); },
+  kidPinOff: async a => { const k = Store.kids[a.dataset.id]; if (!k || !(await kidPinClear(k))) return; closeSheet(); toast(`Passcode turned off for ${k.name}`); render(); },
+  kidForgot: () => { const g = UI.gate; if (!g) return; g.err = 'Ask a grown-up to reset it in Grown-ups, then Kids.'; g.pin = ''; render(); },
   tab: a => { UI.tab = a.dataset.tab; Sound.tap(); scrollTo(0, 0); render(); },
   parent: () => openGate(),
   setup: () => openGate(null, 'addKid'),
   gateCancel: () => { const b = UI.gate && UI.gate.back; UI.gate = null; UI.screen = b === 'parent' && UI.unlocked ? 'parent' : b === 'kid' && curKid() ? 'kid' : 'who'; render(); },
   pin: a => { const g = UI.gate, len = g.mode === 'math' ? String(g.a * g.b).length : 4; if (g.pin.length >= len) return; g.pin += a.dataset.n; g.err = ''; Sound.ensure(); Sound.tap(); render(); if (g.pin.length === len) setTimeout(pinComplete, 150); },
   pinDel: () => { UI.gate.pin = UI.gate.pin.slice(0, -1); render(); },
-  forgot: () => { const g = UI.gate; g.mode = 'math'; g.pin = ''; g.err = ''; newMath(g); render(); },
+  // A new PIN needs a grown-up: on this device only, a sum kids can't do yet; signed in, a grown-up's own phone.
+  forgot: () => {
+    const g = UI.gate;
+    if (onServer() && Acct.me && Acct.me.role === 'kid') { g.err = 'Open Chorecast on a grown-up’s phone and tap Forgot? there to set a new PIN.'; g.pin = ''; return render(); }
+    g.mode = 'math'; g.pin = ''; g.err = ''; newMath(g); render();
+  },
   lock: () => { UI.unlocked = false; UI.wiz = null; UI.screen = 'who'; if (Store.mode === 'server' && Acct.me && Acct.me.role === 'kid') api('POST', '/api/auth/lock', {}).catch(() => {}); UI.redoFor = null; scrollTo(0, 0); render(); },
   changePin: () => openGate('create'),
   wizStart: () => startWizard(0),

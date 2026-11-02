@@ -48,5 +48,7 @@ export function limited(key, limit = 10, windowMs = 15 * 60 * 1000) {
   if (hits.size > 5000) for (const [k, v] of hits) if (!v.some(t => now - t < windowMs)) hits.delete(k);
   return h.length > limit;
 }
+// How many hits `key` has had in the window, without adding one.
+export function hitCount(key, windowMs = 15 * 60 * 1000) { const now = Date.now(); return (hits.get(key) || []).filter(t => now - t < windowMs).length; }
 
 export const validEmail = e => typeof e === 'string' && e.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
