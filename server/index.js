@@ -179,7 +179,7 @@ function checkWrite(s, col, body, prev) {
   if (col === 'kids' && !prev) fail(403, 'Only a grown-up can add a kid.', 'locked');
   if (col === 'jobs') {
     if (body.status && body.status !== 'pending' && body.status !== (prev && prev.status)) fail(403, 'Only a grown-up can approve jobs.', 'locked');
-    if ('paid' in body || 'reviewedAt' in body) fail(403, 'Only a grown-up can approve jobs.', 'locked');
+    if ('paid' in body || 'reviewedAt' in body || 'xpAward' in body) fail(403, 'Only a grown-up can approve jobs.', 'locked');
   }
 }
 
@@ -809,6 +809,10 @@ route('POST', '/api/events', async ({ req, s }) => {
     if (type === 'island.buy' && kid) {
       await db.query('insert into island_purchases (family_id, kid_id, item, name, category, paid_with, price, bought_at) values ($1, $2, $3, $4, $5, $6, $7, $8)',
         [s.family_id, kid, txt(pl.item) || '?', txt(pl.name), txt(pl.cat, 40), pl.pay === 'xp' || pl.pay === 'cash' ? pl.pay : null, int(pl.price), when]);
+    }
+    if (type === 'farm.sell' && kid) {
+      await db.query('insert into farm_sales (family_id, kid_id, product, qty, price, xp, sold_at) values ($1, $2, $3, $4, $5, $6, $7)',
+        [s.family_id, kid, txt(pl.k, 20) || '?', int(pl.n) || 0, int(pl.price), int(pl.xp) || 0, when]);
     }
     if (type === 'island.feed' && kid) {
       await db.query('insert into farm_feedings (family_id, kid_id, animals, scoops, were_hungry, scoops_left, xp, fed_at) values ($1, $2, $3, $4, $5, $6, $7, $8)',

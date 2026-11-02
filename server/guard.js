@@ -3,7 +3,10 @@
 // and the island shop, and collect vault interest. Every change to their money has to be one of those, recorded as a new
 // statement entry, and add up, so a kid can't hand themselves money a grown-up would then pay out.
 // XP from lessons, habits and island jobs is still counted on the device: it's game points and can't become money.
+// The island shop's prices come from the app's catalog.js, so nothing can be bought for less than the shop asks, and
+// farm sales can't earn more XP in a day than the family's farm limit.
 import { FUNDS, priceAt, tickAt } from './market.js';
+import { ITEMS, LAND, SIZES, LOOKS, SETS, RULES } from './catalog.js';
 
 const JARS = ['spend', 'save', 'invest', 'give'];
 // Only grown-ups set who the kid is and their pay totals.
@@ -96,13 +99,53 @@ export function checkKidWrite(prev, next, settings, now = Date.now()) {
   // returns at most half what was paid.
   const isP = prev.island || {}, isN = next.island || {}, itemsP = Array.isArray(isP.items) ? isP.items : [], itemsN = Array.isArray(isN.items) ? isN.items : [];
   const before = new Map(itemsP.filter(Boolean).map(i => [i.id, i])), still = new Set(); let newCash = 0, newXp = 0;
+  // A purchase is paid in XP or Spend-jar cents, at least the shop's price in that currency.
+  const paid = (rec, def) => !!rec && typeof rec === 'object' && ((num(rec.xp) > 0 && num(rec.xp) >= num(def.xp)) || (num(rec.cash) > 0 && num(rec.cash) >= num(def.cash)));
   for (const it of itemsN) {
     if (!it) continue; const old = before.get(it.id);
     if (old) {
       if (still.has(it.id)) return nope('an island item can’t be copied.'); still.add(it.id);
       for (const f of ['t', 'cash', 'xp', 'won']) if (!same(old[f], it[f])) return nope('an island item’s price can’t change.');
-    } else { if (it.won && (it.cash || it.xp)) return nope('a prize is free.'); newCash += num(it.cash); newXp += num(it.xp); }
+    } else {
+      const def = ITEMS.get(it.t); if (!def) return nope('that isn’t in the island shop.');
+      if (it.won) { if (it.cash || it.xp) return nope('a prize is free.'); if (!def.prize) return nope('only prizes are free.'); }
+      else { if (def.prize) return nope('prizes can’t be bought.'); if (!paid(it, def)) return nope('that costs more in the island shop.'); }
+      newCash += num(it.cash); newXp += num(it.xp);
+    }
   }
+  // Land, island sizes, tools, upgrades and looks keep what was paid for them, like items.
+  const added = (a, b) => Object.keys(b || {}).filter(k => !(a || {})[k]);
+  const buys = [];
+  for (const k of added(isP.land, isN.land)) { const def = LAND.get(k); if (!def) return nope('that land isn’t in the shop.'); buys.push([isN.land[k], def]); }
+  for (const k of added(isP.sizes, isN.sizes)) { const def = SIZES.get(+k); if (!def) return nope('that island size isn’t in the shop.'); buys.push([isN.sizes[k], def]); }
+  if (num(isN.size) !== num(isP.size) && (num(isN.size) !== num(isP.size) + 1 || !(isN.sizes || {})[num(isN.size)])) return nope('an island grows one size at a time.');
+  for (const k of added(isP.upgrades, isN.upgrades)) { const def = ITEMS.get(k); if (!def || !def.upgrade) return nope('that upgrade isn’t in the shop.'); buys.push([isN.upgrades[k], def]); }
+  for (const k of added(isP.tools, isN.tools)) {
+    const def = ITEMS.get(k), v = isN.tools[k]; if (!def || def.cat !== 'tools') return nope('that tool isn’t in the shop.');
+    if (v === true) { if (k !== 'bucket' || isP.farm || !isN.farm) return nope('a tool has to be bought.'); continue; } // the paddock's free feed bucket
+    buys.push([v, def]);
+  }
+  for (const k of added(isP.owned, isN.owned)) {
+    const def = LOOKS.get(k), v = isN.owned[k]; if (!def) return nope('that look isn’t in the shop.');
+    if (v === 'won') { if (!def.prize) return nope('only prize looks are free.'); continue; }
+    if (def.prize) return nope('prize looks can’t be bought.'); buys.push([v, def]);
+  }
+  for (const [rec, def] of buys) { if (!paid(rec, def)) return nope('that costs more in the island shop.'); newCash += num(rec.cash); newXp += num(rec.xp); }
+  for (const ty of Object.values(isN.treeType || {})) if (ty && !(isN.owned || {})[`tree:${ty}`]) return nope('that tree type hasn’t been bought.');
+  // Farm earnings: only on a day the farm is on, and no more in a day than the family's farm limit.
+  const f0 = num(isP.farmXp), f1 = num(isN.farmXp);
+  if (f1 !== f0) {
+    if (f1 < f0) return nope('farm earnings only go up.');
+    if (settings && settings.farmOn === false) return nope('the island farm is switched off.');
+    const d0 = isP.farmDay || {}, d1 = isN.farmDay || {}, cap = settings && settings.farmCap === 0 ? Infinity : num(settings && settings.farmCap != null ? settings.farmCap : RULES.farmCap);
+    if (typeof d1.d !== 'string' || !/^\d{4}-\d\d-\d\d$/.test(d1.d) || d1.d > latestDay(now) || (d0.d && d1.d < d0.d)) return nope('the farm’s day is wrong.');
+    const before0 = d0.d === d1.d ? num(d0.xp) : 0;
+    if (Math.abs((num(d1.xp) - before0) - (f1 - f0)) > 0.5 || num(d1.xp) > cap + 0.5) return nope('that’s more than the farm can earn today.');
+  }
+  // A collection pays its bonus once.
+  const newSets = added(isP.sets, isN.sets);
+  for (const k of newSets) if (!SETS.has(k)) return nope('that collection isn’t real.');
+  if (num(isN.bonusXp) - num(isP.bonusXp) > newSets.length * num(RULES.setXp) + 0.5) return nope('that’s more bonus XP than the collections give.');
   let cashBack = 0, xpBack = 0;
   for (const it of before.values()) if (!still.has(it.id) && !it.won) { cashBack += Math.floor(num(it.cash) / 2); xpBack += Math.floor(num(it.xp) / 2); }
   if (newCash > spent + 0.5) return nope('a new island item wasn’t paid for.');

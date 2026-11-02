@@ -1,9 +1,11 @@
 
 // The kid's guide (Kiri the kea, Coco the cockatoo or Bolt the robot), shared by the lesson stage and the plant.
+// It wears the outfit the kid bought in the island shop's Makeover (party hat, sunnies, scarf, raincoat, cape or crown).
 const GUIDE_GEO = {};
-function guideModel(kind, toon) {
+const outfitNow = () => { const k = kidNow(); return (k && ((k.island || {}).look || {}).outfit) || ''; };
+function guideModel(kind, toon, outfit = outfitNow()) {
   const T = window.THREE, G3 = C.G3;
-  if (!GUIDE_GEO.s) Object.assign(GUIDE_GEO, { s: new T.SphereGeometry(1, 24, 16), c: new T.CylinderGeometry(1, 1, 1, 24), b: new T.BoxGeometry(1, 1, 1), k: new T.ConeGeometry(1, 1, 18) });
+  if (!GUIDE_GEO.s) Object.assign(GUIDE_GEO, { s: new T.SphereGeometry(1, 24, 16), c: new T.CylinderGeometry(1, 1, 1, 24), b: new T.BoxGeometry(1, 1, 1), k: new T.ConeGeometry(1, 1, 18), t: new T.TorusGeometry(1, 0.28, 10, 28), h: new T.SphereGeometry(1, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2) });
   const basic = c => new T.MeshBasicMaterial({ color: c });
   const part = (g, shape, mat, [x, y, z] = [0, 0, 0], [sx, sy, sz] = [1, 1, 1], rot) => { const m = new T.Mesh(GUIDE_GEO[shape], mat); m.position.set(x, y, z); m.scale.set(sx, sy, sz); if (rot) m.rotation.set(...rot); g.add(m); return m; };
   const g = new T.Group(), P = {};
@@ -37,6 +39,13 @@ function guideModel(kind, toon) {
     part(g, 'k', toon(wing), [0, 0.35, -0.36], [0.16, 0.5, 0.08], [-1.9, 0, 0]);
     for (const x of [-0.13, 0.13]) part(g, 'c', toon(0x777a85), [x, 0.12, 0.05], [0.035, 0.22, 0.035]);
   }
+  const bot = kind === 'robot', top = bot ? 0.36 : 0.28, eyeY = bot ? 0.15 : 0.05, eyeZ = bot ? 0.26 : 0.27;
+  if (outfit === 'partyhat') { part(P.head, 'k', toon(0xff6b9d), [0.04, top + 0.13, 0], [0.13, 0.28, 0.13], [0, 0, -0.2]); part(P.head, 's', toon(0xffd43b), [0.09, top + 0.27, 0], [0.04, 0.04, 0.04]); part(P.head, 'c', toon(0xffffff), [0.04, top + 0.06, 0], [0.13, 0.025, 0.13], [0, 0, -0.2]); }
+  else if (outfit === 'sunnies') { for (const x of [-0.13, 0.13]) part(P.head, 'c', toon(0x16161c), [x, eyeY, eyeZ + 0.02], [0.085, 0.02, 0.07], [Math.PI / 2, 0, 0]); part(P.head, 'b', toon(0x16161c), [0, eyeY + 0.02, eyeZ + 0.02], [0.12, 0.02, 0.02]); }
+  else if (outfit === 'scarf') { part(g, 't', toon(0xe03131), [0, bot ? 0.98 : 0.96, 0.02], [0.3, 0.3, 0.3], [Math.PI / 2, 0, 0]); part(g, 'b', toon(0xe03131), [0.14, 0.8, 0.26], [0.08, 0.26, 0.04], [0.2, 0, -0.2]); part(g, 'b', toon(0xffffff), [0.15, 0.7, 0.28], [0.085, 0.03, 0.045], [0.2, 0, -0.2]); }
+  else if (outfit === 'raincoat') { part(P.head, 'h', toon(0xffd43b), [0, 0.04, -0.03], [0.36, 0.34, 0.34]); part(g, 'h', toon(0xffd43b), [0, 0.42, 0], [0.48, 0.62, 0.44]); }
+  else if (outfit === 'cape') { part(g, 'b', toon(0x7c4dff), [0, 0.6, -0.36], [0.62, 0.72, 0.03], [-0.12, 0, 0]); part(g, 's', toon(0xffd43b), [0, 0.96, 0.2], [0.05, 0.05, 0.03]); }
+  else if (outfit === 'crown') { part(P.head, 'c', toon(0xffc93c, { e: 0x3a2a00 }), [0, top + 0.05, 0], [0.17, 0.1, 0.17]); for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2; part(P.head, 'k', toon(0xffc93c, { e: 0x3a2a00 }), [Math.cos(a) * 0.15, top + 0.14, Math.sin(a) * 0.15], [0.035, 0.09, 0.035]); } part(P.head, 's', toon(0xe03131), [0, top + 0.06, 0.17], [0.03, 0.03, 0.02]); }
   return { g, P };
 }
 
@@ -118,10 +127,10 @@ function Stage3D(canvas) {
   const tick = (o, fn) => { o.userData.tick = fn; return o; };
 
   function buildGuide(kind) { const r = guideModel(kind, toon); G3.outline(r.g); return r; }
-  let guide = null, guideKind = '';
+  let guide = null, guideKind = '', guideKey = '';
   const holder = grp(world, 0, 0, 0.1); // moves the guide aside while a lesson scene is showing
   function setGuide(kind) {
-    if (kind === guideKind) return; guideKind = kind;
+    const key = kind + '|' + outfitNow(); if (key === guideKey) return; guideKind = kind; guideKey = key;
     if (guide) holder.remove(guide.g);
     guide = buildGuide(kind); holder.add(guide.g);
   }

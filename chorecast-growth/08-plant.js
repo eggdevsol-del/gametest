@@ -352,10 +352,10 @@ void main() {
   }
   // The kid's guide hovers beside the growing tip. Its colours are sRGB like the rest of this view.
   function setGuide(kind) {
-    if (guide && guideKind === kind) return; if (guide) plant.remove(guide.g);
+    if (guide && guideKind === kind + '|' + outfitNow()) return; if (guide) plant.remove(guide.g);
     const mine = new Set(), gm = guideModel(kind, (c, o = {}) => { const m = toon(c, { e: o.e }); mine.add(m); return m; });
     gm.g.traverse(o => { const m = o.material; if (!o.isMesh || mine.has(m) || m.userData.lin) return; m.color.convertSRGBToLinear(); if (m.emissive) m.emissive.convertSRGBToLinear(); m.userData.lin = 1; });
-    G3.outline(gm.g); guide = { g: new T.Group(), body: gm.g, P: gm.P, hop: 0, shake: 0 }; guide.g.add(gm.g); guide.g.scale.setScalar(0.5); guide.g.position.set(1.3, 0, 0.6); plant.add(guide.g); guideKind = kind;
+    G3.outline(gm.g); guide = { g: new T.Group(), body: gm.g, P: gm.P, hop: 0, shake: 0 }; guide.g.add(gm.g); guide.g.scale.setScalar(0.5); guide.g.position.set(1.3, 0, 0.6); plant.add(guide.g); guideKind = kind + '|' + outfitNow();
   }
 
   /* What sits on a leaf: a gold star with the lesson's XP, or the island prize the lesson won */
