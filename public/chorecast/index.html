@@ -386,6 +386,7 @@ p{margin:0}
 .btn-big:disabled{opacity:.4;box-shadow:none}
 .btn-soft{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:50px;border-radius:16px;background:var(--fill);color:var(--ink);font:800 16px var(--f-round)}
 .hint{font:400 15px/1.4 var(--f-text);color:var(--ink-2)}
+.hint.pin-why{margin-top:-8px;font-size:14px;text-align:center}
 .field{display:flex;align-items:center;justify-content:space-between;gap:12px;font:600 16px var(--f-text)}
 .field.col{flex-direction:column;align-items:stretch}
 .field input[type=text],.field textarea{flex:1;min-width:0;min-height:48px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--fill);color:var(--ink);font:500 17px var(--f-text);outline:none}
@@ -521,8 +522,8 @@ p{margin:0}
 .gate-ava{font-size:34px;line-height:1}
 .kc-private{display:inline-flex;align-items:center;gap:6px;font:800 18px var(--f-round);opacity:.85}
 .kc-private .ic{width:18px;height:18px}
-.pkid-lock{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:12px;font:400 15px/1.4 var(--f-text)}
-.pkid-lock .ic{width:16px;height:16px;flex:none}
+.pkid-lock{display:flex;align-items:flex-start;gap:6px;margin-top:12px;font:400 15px/1.4 var(--f-text)}
+.pkid-lock .ic{width:16px;height:16px;flex:none;margin-top:2px}
 .gate-t{font:800 26px var(--f-round)}
 .gate-s{font:600 16px var(--f-round);color:var(--on-sky-2);max-width:32ch}
 .dots{display:flex;gap:18px;margin:14px 0 2px}
@@ -4573,6 +4574,18 @@ function kidPinSheet() {
       <button class="btn-big" data-act="kidPinChange">${ic('lock')} Change my passcode</button>
       <button class="btn-soft" data-act="kidPinOff" data-id="${k.id}">Turn off my passcode</button></div>`;
 }
+// A grown-up's way out when a kid forgets their passcode. The old one stops working, then either the kid picks a new
+// one straight away (Grown-ups locks first, as the iPad is being handed over) or the account stays open until they
+// add one with the Lock button.
+function kidPinResetSheet() {
+  const k = Store.kids[UI.pinReset]; if (!k) return '';
+  return `<div class="sh-head"><button class="sh-x" data-act="close">Cancel</button><h2>Reset ${esc(k.name)}’s passcode</h2><span></span></div>
+    <div class="sh-body"><p class="hint">Use this if ${esc(k.name)} forgets their passcode. The old one stops working straight away.</p>
+      <button class="btn-big" data-act="kidPinNew" data-id="${k.id}">${ic('lock')} Pick a new one with ${esc(k.name)}</button>
+      <p class="hint pin-why">Grown-ups locks, then hand the iPad to ${esc(k.name)} to choose 4 new digits.</p>
+      <button class="btn-soft" data-act="kidPinOff" data-id="${k.id}">Just turn it off</button>
+      <p class="hint pin-why">${esc(k.name)}’s account stays open until they add a passcode again with the Lock button.</p></div>`;
+}
 function unlock() {
   if (Store.mode === 'server' && Acct.me && Acct.me.role === 'kid') api('POST', '/api/auth/elevate', { pinHash: S().pinHash }).catch(() => toast('Couldn’t unlock grown-up changes on this iPad. Check the connection.'));
   track('app.parent_unlocked', {}, null);
@@ -4910,9 +4923,9 @@ function pKidDetail(kid) {
       <div class="pstat"><span>Invest cash</span><b>${fmt(j.invest || 0)}</b></div><div class="pstat"><span>In the market</span><b>${fmt(holdingsValue(kid))}</b></div>
       <div class="pstat"><span>Give jar</span><b>${fmt(j.give || 0)}</b></div><div class="pstat"><span>Trust score</span><b>${t.score}</b><small>${t.band}</small></div>
     </div>
-    <div class="pactions"><button class="pbtn" data-act="payout" data-id="${kid.id}">${ic('cash')} Pay out cash</button><button class="pbtn" data-act="bonus" data-id="${kid.id}">${ic('gift')} Give a bonus</button><button class="pbtn" data-act="editKid" data-id="${kid.id}">${ic('edit')} Edit</button></div>
+    <div class="pactions"><button class="pbtn" data-act="payout" data-id="${kid.id}">${ic('cash')} Pay out cash</button><button class="pbtn" data-act="bonus" data-id="${kid.id}">${ic('gift')} Give a bonus</button><button class="pbtn" data-act="editKid" data-id="${kid.id}">${ic('edit')} Edit</button>${kid.pin ? `<button class="pbtn" data-act="kidPinReset" data-id="${kid.id}">${ic('lock')} Reset passcode</button>` : ''}</div>
     <p class="pkid-lock">${ic('coins')} ${esc(kid.name)} can earn about ${aboutDollars(weekPay(kid.age || 8))} a week${S().pocket && S().pocket.pretend ? ' of play money' : ''} doing all their must-dos and team tasks. Side hustles come on top.</p>
-    ${kid.pin ? `<p class="pkid-lock">${ic('lock')} ${esc(kid.name)} locks their account with a passcode, and their total is private on the family screen. <button class="link-in" data-act="kidPinOff" data-id="${kid.id}">Turn the passcode off</button> if they forget it.</p>`
+    ${kid.pin ? `<p class="pkid-lock">${ic('lock')} ${esc(kid.name)} locks their account with a passcode, and their total is private on the family screen. If they forget it, tap Reset passcode.</p>`
       : `<p class="pkid-lock muted">${ic('lock')} No passcode. ${esc(kid.name)} can add one with the Lock button in their own account.</p>`}</section>
     <section class="pcard"><h3>Habits, last 4 weeks · ${st}-day streak</h3>${heatmap(kid)}<h4>Today</h4><div class="plist">${habitsForDay(kid, date).map(h => `<div class="pli"><span class="ck ${done.has(h.key) ? 'on' : ''}">${ic('check')}</span><span class="grow">${h.icon} ${esc(h.title)}</span></div>`).join('')}</div></section>
     <section class="pcard"><h3>Today's chores</h3><div class="plist">${[...b.must, ...b.team].map(c => { const s = choreState(kid.id, c, date).state; return `<div class="pli"><span class="ck ${isDone(s) ? 'on' : ''}">${ic('check')}</span><span class="grow">${c.icon} ${esc(c.title)}</span><span class="tag ${s === 'open' ? 'pending' : s}">${{ open: 'Not done', pending: 'To review', approved: 'Paid', redo: 'Redo' }[s] || s}</span></div>`; }).join('')}</div>
@@ -5623,6 +5636,8 @@ const ACT = {
   openKid: a => { const k = Store.kids[a.dataset.id]; if (!k) return; if (k.pin && UI.kidUnlocked !== k.id) return openKidGate(k, 'kid'); enterKid(k.id); },
   kidPin: () => { const k = curKid(); if (!k) return; if (!k.pin) return openKidGate(k, 'kidCreate', 'kid'); openSheet(kidPinSheet); },
   kidPinChange: () => { const k = curKid(); if (k) openKidGate(k, 'kidCreate', 'kid'); },
+  kidPinReset: a => { UI.pinReset = a.dataset.id; openSheet(kidPinResetSheet); },
+  kidPinNew: a => { const k = Store.kids[a.dataset.id]; if (!k) return; updDoc('kids', k.id, { pin: null }); ACT.lock(); openKidGate(k, 'kidCreate', 'who'); },
   kidPinOff: a => { const k = Store.kids[a.dataset.id]; if (!k) return; updDoc('kids', k.id, { pin: null }); closeSheet(); toast(`Passcode turned off for ${k.name}`); render(); },
   kidForgot: () => { const g = UI.gate; if (!g) return; g.err = 'Ask a grown-up to turn it off in Grown-ups, then Kids.'; g.pin = ''; render(); },
   tab: a => { UI.tab = a.dataset.tab; Sound.tap(); scrollTo(0, 0); render(); },
@@ -5930,7 +5945,7 @@ document.addEventListener('click', e => {
   const fn = ACT[a.dataset.act]; if (fn) { fn(a, e); if (TRACKED.has(a.dataset.act)) { const { act, ...rest } = a.dataset; track('app.' + act, rest); } }
 });
 // Actions worth recording in the family's event log (every synced write is also logged on the server).
-const TRACKED = new Set(['openKid', 'start', 'crewGo', 'habit', 'mvGo', 'preset', 'goalSave', 'goalRemove', 'quiz', 'paydayDone', 'trade', 'sFinish', 'sSubmit', 'sSkipPhoto', 'sQuit', 'approve', 'redo', 'payout', 'bonus', 'mGo', 'saveKid', 'removeKidYes', 'choreToggle', 'saveChore', 'delChore', 'cfRecord', 'gaMode', 'gaRedo', 'sShot', 'tax', 'interest', 'setFlag', 'currency', 'fundReset', 'lesson', 'wizNext', 'wizSkip', 'lock', 'nextGo', 'gStart', 'gNode', 'gAssign', 'gMoment', 'gCase', 'stmt']);
+const TRACKED = new Set(['openKid', 'start', 'crewGo', 'habit', 'mvGo', 'preset', 'goalSave', 'goalRemove', 'quiz', 'paydayDone', 'trade', 'sFinish', 'sSubmit', 'sSkipPhoto', 'sQuit', 'approve', 'redo', 'payout', 'bonus', 'mGo', 'saveKid', 'removeKidYes', 'choreToggle', 'saveChore', 'delChore', 'cfRecord', 'gaMode', 'gaRedo', 'sShot', 'tax', 'interest', 'setFlag', 'currency', 'fundReset', 'lesson', 'wizNext', 'wizSkip', 'lock', 'nextGo', 'gStart', 'gNode', 'gAssign', 'gMoment', 'gCase', 'stmt', 'kidPinNew', 'kidPinOff']);
 document.addEventListener('submit', e => { const f = e.target.closest('[data-submit]'); if (!f) return; e.preventDefault(); const fn = ACT[f.dataset.submit]; if (fn) fn(f, e); });
 document.addEventListener('input', e => { const a = e.target.closest('[data-in]'); if (a && IN[a.dataset.in]) IN[a.dataset.in](a, e); });
 document.addEventListener('keydown', e => {
