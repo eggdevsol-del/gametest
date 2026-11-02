@@ -200,6 +200,7 @@ function onClick(e) {
     case 'tree': Grow.tree = id; Grow.view = 'tree'; Sound.tap(); return render();
     case 'lesson': { const l = lessonById(id); if (l) { if (!Grow.tree) Grow.tree = l.tree; startLesson(kid, l); } return; }
     case 'locked': Sound.tap(); return C.toast('Pass the lesson before this one to open it: get 80% or more of its questions right.');
+    case 'planLocked': Sound.tap(); return C.toast('🔒 Grown-ups can open this. Ask a grown-up!');
     case 'plantSel': return PlantView.ok && PlantView.select(+a.dataset.i);
     case 'plantUnit': return PlantView.ok && PlantView.unit(+a.dataset.i);
     case 'plantBloom': return PlantView.ok && PlantView.bloomAgain();

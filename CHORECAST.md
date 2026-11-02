@@ -1,6 +1,6 @@
 # Chorecast
 
-An iPad-first family chores app for kids aged 7 to 18. Each kid gets:
+An iPad-first family chores app for kids aged 7 to 15. Each kid gets:
 
 - a daily "forecast" of chores;
 - a floating 3D island that grows with their savings;
@@ -46,7 +46,24 @@ If `DATABASE_URL` is missing, the server still starts on the embedded database a
 Optional variables:
 
 - `CONTENT_EDITORS`: a comma-separated list of grown-up emails allowed to approve new Character Growth content for all families.
-- `ADMIN_TOKEN`: lets a script or scheduled agent post content drafts (see [CONTENT.md](CONTENT.md)).
+- `ADMIN_TOKEN`: lets a script or scheduled agent post content drafts (see [CONTENT.md](CONTENT.md)), and read the error log at `GET /api/admin/errors`.
+- `APP_URL`: the address in emailed links, such as `https://chorecast.app`. Defaults to Railway's public domain.
+- `POSTMARK_TOKEN` and `MAIL_FROM`: send address checks and password reset links through Postmark. Without them, emails are only logged and the app offers the recovery code instead.
+- `ERROR_WEBHOOK`: a Slack or Discord incoming webhook that hears about each new kind of error.
+- `PAYWALL=on`: turns on the plans (free limits, kid locks, purchases). Leave it unset until launch; until then every family has everything and the app says "beta".
+- `APP_BUNDLE_ID`: the iOS app's bundle id. App Store purchases for any other app are refused.
+- `APP_ORIGINS`: the iOS app's page origin (such as `chorecast://app`), allowed to call the API with a sign-in token.
+- `APNS_KEY`, `APNS_KEY_ID`, `APNS_TEAM_ID` and `APNS_TOPIC`: the Apple push key (the .p8 file's text), its id, the team id and the bundle id. Without them no notifications are sent.
+
+### Running it for real families
+
+These need doing once in the Railway and Apple dashboards; the code is ready for them.
+
+1. **Backups:** turn on backups for the Postgres service in Railway. Once a month, check one: run `npm run backup` against production (with `DATABASE_URL` set), then `npm run restore <file>` into an empty local database, and open the app on it. The backup holds kids' data, so keep it somewhere private and delete it after.
+2. **Uptime:** point an uptime monitor (Better Stack, UptimeRobot or similar) at `/api/health` every minute. It fails when the database stops answering.
+3. **Errors:** set `ERROR_WEBHOOK`, or read `GET /api/admin/errors` with the `ADMIN_TOKEN`.
+4. **App Store notifications:** in App Store Connect, set the production and sandbox URLs for App Store Server Notifications (version 2) to `https://<your domain>/api/appstore/notifications`.
+5. **Before every release:** `npm run smoke`.
 
 ## Database
 
@@ -62,10 +79,20 @@ Tables are created by numbered SQL files in [`server/migrations/`](server/migrat
 | `003_chore_guides.sql` | `chore_guides` (each custom chore's photo guide: the steps, the grown-up's photos and whether kids photograph every step or just the end). Adds a `kind` column to `photos`: `proof`, `step` or `guide`. Guide photos are deleted when a guide is re-recorded or deleted. |
 | `005_prize_lesson.sql` | Adds `lesson_id` to `island_prizes`: the lesson whose leaf each prize sits on. |
 | `006_chore_sends.sql` | `chore_sends` (every custom chore a grown-up sent straight to a kid: the chore, its type and frequency, who sent it and when). |
+| `007_first_steps.sql` | `first_steps` (each Getting started step a family finishes). |
+| `008_pins.sql` | `family_pins`: the grown-up PIN and kids' passcodes as salted scrypt hashes, which no device ever receives. |
+| `009_housekeeping.sql` | `housekeeping` (the daily clean-up's last run) and indexes for it. The clean-up deletes kids' job photos 60 days after review (grown-ups can choose 1 to 12 months), unused photos after a week, events after a year, lesson answers after two years and the change log after 90 days. |
+| `010_consents.sql` | `consents`: what each grown-up agreed to at sign-up (parent or guardian, and the dated terms and privacy policy). |
+| `011_email.sql` | `email_tokens` (hashed address-check and reset links) and `users.email_verified_at`. |
+| `012_errors.sql` | `app_errors`: server and app errors grouped by where and what, with a count. |
+| `013_entitlements.sql` | `entitlements` (each family's plans and lesson packs, keyed by Apple's original transaction id) and `app_store_notifications` (each notice from Apple, kept once). |
+| `014_push.sql` | `push_devices`: each iOS device's push token and time zone. |
 
 ## Accounts and devices
 
-- **Sign in with email:** a grown-up makes a family with an email and password. They get a one-time recovery code, which resets the password, since the app sends no email.
+- **Sign in with email:** a grown-up makes a family with an email and password, after ticking that they're the parent or guardian and agree to the [terms](public/chorecast/terms.html) and [privacy policy](public/chorecast/privacy.html). They confirm the address from an emailed link, and can reset the password by email. The one-time recovery code from sign-up still works as a backup.
+- **Deleting:** Grown-ups, then Family and devices, then Delete account removes one grown-up's sign-in, or the whole family and everything in it, after the password.
+- **The iOS app** signs in with the same kind of token as the website's cookie, kept in the Keychain and sent as `Authorization: Bearer`. Its event stream uses a one-minute ticket from `POST /api/stream/ticket`.
 - **Other grown-ups:** Grown-ups, then Family and devices, makes an invite code. The other grown-up signs up with it and joins the same family on their own device.
 - **Kid's iPad:** the same page shows a 6-digit code that lasts 15 minutes. On the iPad, choose "Kid's iPad" and type it. Kid iPads can do everything a kid does, but changing money rules, approving or paying jobs, adding kids and deleting need the grown-up PIN. The PIN unlocks the iPad for 30 minutes.
 - **Live sync:** every change is saved on the server and pushed straight to the family's other devices. Changes made offline wait in a queue and send when the connection is back.

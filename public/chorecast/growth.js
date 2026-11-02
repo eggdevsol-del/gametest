@@ -1,5 +1,5 @@
 /* Chorecast · Character Growth
-   Interactive lessons in money, life, work and learning skills for ages 7 to 18, earning XP for the island.
+   Interactive lessons in money, life, work and learning skills for ages 7 to 15, earning XP for the island.
    Built from chorecast-growth/*.js by scripts/build-growth.mjs into public/chorecast/growth.js.
    Lessons live in public/chorecast/growth/*.txt content packs (format in CONTENT.md), so new lessons,
    Money Moments and case studies ship without touching this code, and the server's content feed adds more. */
@@ -777,6 +777,8 @@ function back() {
 function treesOn() { const off = GSET().off || {}; return TREES.filter(t => !off[t.id]); }
 function available(kid, l) {
   // A lesson opens once the lesson before it in its unit is passed; each unit opens when the unit before is done.
+  // On the free plan only unit 1 of each subject opens (the app's planLocked); kids see "Grown-ups can open this".
+  if (C.planLocked && C.planLocked(l)) return false;
   const pack = packFor(l.tree, l.band), u = pack.units.find(x => x.n === l.unit), i = u.lessons.indexOf(l);
   if (i > 0 && !passed(kid, u.lessons[i - 1].id)) return false;
   const prevU = pack.units.filter(x => x.n < u.n && x.lessons.length).pop();
@@ -917,8 +919,8 @@ function viewTree(kid, tree) {
   }
   const units = pack ? pack.units : [];
   const node = (l, idx) => {
-    const done = passed(kid, l.id), open = !done && available(kid, l), md = medal(kid, l), side = idx % 4 === 1 ? 'r' : idx % 4 === 3 ? 'l' : 'c';
-    return `<button class="gw-node ${done ? 'done ' + md : open ? 'open' : 'locked'} ${l === nx ? 'next' : ''} s-${side}" data-g="${open || done ? 'lesson' : 'locked'}" data-id="${l.id}" aria-label="${esc(local(l.title))}${done ? `, ${md} medal` : open ? ', ready' : ', locked'}"><span class="gn-ic">${done ? (md === 'gold' ? '🥇' : md === 'silver' ? '🥈' : '🥉') : open ? esc(l.icon) : '🔒'}</span><span class="gn-t">${esc(local(l.title))}</span></button>`;
+    const done = passed(kid, l.id), open = !done && available(kid, l), md = medal(kid, l), side = idx % 4 === 1 ? 'r' : idx % 4 === 3 ? 'l' : 'c', plan = !done && C.planLocked && C.planLocked(l);
+    return `<button class="gw-node ${done ? 'done ' + md : open ? 'open' : 'locked'} ${l === nx ? 'next' : ''} s-${side}" data-g="${open || done ? 'lesson' : plan ? 'planLocked' : 'locked'}" data-id="${l.id}" aria-label="${esc(local(l.title))}${done ? `, ${md} medal` : open ? ', ready' : ', locked'}"><span class="gn-ic">${done ? (md === 'gold' ? '🥇' : md === 'silver' ? '🥈' : '🥉') : open ? esc(l.icon) : '🔒'}</span><span class="gn-t">${esc(local(l.title))}</span></button>`;
   };
   ui.innerHTML = `${topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`)}
     <div class="gw-pad gw-path">
@@ -1327,6 +1329,7 @@ function onClick(e) {
     case 'tree': Grow.tree = id; Grow.view = 'tree'; Sound.tap(); return render();
     case 'lesson': { const l = lessonById(id); if (l) { if (!Grow.tree) Grow.tree = l.tree; startLesson(kid, l); } return; }
     case 'locked': Sound.tap(); return C.toast('Pass the lesson before this one to open it: get 80% or more of its questions right.');
+    case 'planLocked': Sound.tap(); return C.toast('🔒 Grown-ups can open this. Ask a grown-up!');
     case 'plantSel': return PlantView.ok && PlantView.select(+a.dataset.i);
     case 'plantUnit': return PlantView.ok && PlantView.unit(+a.dataset.i);
     case 'plantBloom': return PlantView.ok && PlantView.bloomAgain();
@@ -2858,9 +2861,10 @@ void main() {
       const game = l.play ? GAME_NAME[l.play.type] || 'Game' : null, prev = s.i > 0 ? LS[s.i - 1].l : null;
       const e = real[s.i] ? earned(kid, l.id) : null, won = e && e.prize && C.prizeInfo ? C.prizeInfo(e.prize) : null;
       const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `🌱 ${l.checks.length} question${l.checks.length === 1 ? '' : 's'} to grow` : '', e ? `✨ Earned +${e.xp} XP` : `✨ +${XP.lesson} XP`].filter(Boolean);
-      const act = !open ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Pass “${esc(local(prev.title))}” first` : 'Pass the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${d ? 'Play again' : first ? (ms ? '🌱 Plant my seed' : '🌿 Grow my branch') : '▶ Start lesson'}</button>`;
+      const plan = !open && C.planLocked && C.planLocked(l);
+      const act = plan ? '<button class="g-go ghost" data-g="planLocked">🔒 Grown-ups can open this</button>' : !open ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Pass “${esc(local(prev.title))}” first` : 'Pass the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${d ? 'Play again' : first ? (ms ? '🌱 Plant my seed' : '🌿 Grow my branch') : '▶ Start lesson'}</button>`;
       // What it takes to move on, said plainly: kids need telling at every step
-      const goal = d ? '' : !open ? (prev ? `🎯 To open this lesson, go back to “${esc(local(prev.title))}” and ${passGoal(prev.checks.length)}.` : '🎯 To open this lesson, pass every lesson in the unit before it.')
+      const goal = d ? '' : plan ? '🎯 Ask a grown-up. They can open more lessons.' : !open ? (prev ? `🎯 To open this lesson, go back to “${esc(local(prev.title))}” and ${passGoal(prev.checks.length)}.` : '🎯 To open this lesson, pass every lesson in the unit before it.')
         : l.checks.length ? `🎯 ${passGoal(l.checks.length, true)} at the end to pass${s.i + 1 < LS.length ? ' and open the next lesson' : ''}.` : '';
       h = `<div class="plc-ic">${esc(l.icon)}</div><div class="plc-eb">Unit ${l.unit} · Lesson ${l.n}${d ? ` · ${medalOf(kid, l)}` : ''}</div><div class="plc-t">${esc(local(l.title))}</div><p class="plc-p">${esc(local(l.hook))}</p>
         ${first ? `<ul class="plc-how"><li><span>${ms ? '🌱' : '🌿'}</span>Every question you get right helps your ${ms ? 'seed' : 'branch'} grow.</li><li><span>🍃</span>Pass a lesson and a big leaf grows, with your XP or a prize on top.</li><li><span>🌸</span>Pass all ${LS.length} lessons and it ${ms ? 'flowers' : 'blossoms'}.</li></ul>` : `<div class="plc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>`}

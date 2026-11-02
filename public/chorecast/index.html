@@ -9,9 +9,12 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1F6FD6">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap">
+<link rel="preload" href="fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Nunito (SIL Open Font License, fonts/OFL.txt) is served from here, not Google: one variable font for every weight. Latin-ext carries te reo Māori macrons. */
+@font-face{font-family:'Nunito';font-style:normal;font-weight:200 900;font-display:swap;src:url(fonts/nunito-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:200 900;font-display:swap;src:url(fonts/nunito-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+</style>
 <style>
 :root{
   /* Layout: a living sky fills the screen and frosted-glass panels float on it. iPad landscape = sticky forecast hero + scrolling detail column. Grown-ups get an iPadOS-style sidebar with inset-grouped lists. */
@@ -398,7 +401,7 @@ p{margin:0}
 .hint.pin-why{margin-top:-8px;font-size:14px;text-align:center}
 .field{display:flex;align-items:center;justify-content:space-between;gap:12px;font:600 16px var(--f-text)}
 .field.col{flex-direction:column;align-items:stretch}
-.field input[type=text],.field textarea{flex:1;min-width:0;min-height:48px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--fill);color:var(--ink);font:500 17px var(--f-text);outline:none}
+.field input[type=text],.field input[type=password],.field textarea{flex:1;min-width:0;min-height:48px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--fill);color:var(--ink);font:500 17px var(--f-text);outline:none}
 .field input:focus,.field textarea:focus{border-color:var(--p-accent)}
 .field textarea{min-height:110px;resize:vertical}
 .stepper{display:inline-flex;align-items:center;gap:4px;background:var(--fill);border-radius:12px;padding:3px}
@@ -783,6 +786,7 @@ p{margin:0}
 .auth-field input:focus{border-color:#fff;background:rgba(255,255,255,.22)}
 .auth-form .btn-white,.auth-done .btn-white{width:100%;margin-top:4px}
 .auth-err{padding:10px 14px;border-radius:14px;background:rgba(160,20,40,.35);font:700 15px/1.4 var(--f-round)}
+.auth-check{display:flex;gap:12px;align-items:flex-start;font:600 15px/1.45 var(--f-round);color:var(--on-sky-2);text-align:left;cursor:pointer}.auth-check input{width:24px;height:24px;flex:none;margin:0;accent-color:#fff}.auth-check a{color:#fff;text-decoration:underline;text-underline-offset:3px}
 .auth-link{min-height:44px;font:800 15px var(--f-round);color:#fff;text-decoration:underline;text-underline-offset:3px;opacity:.9}
 .auth-local{min-height:44px;padding:0 16px;font:700 14px var(--f-round);color:var(--on-sky-2);text-decoration:underline;text-underline-offset:3px}
 .auth-done{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
@@ -995,6 +999,16 @@ p{margin:0}
 .flash{position:absolute;inset:0;z-index:40;background:#fff;animation:flash .5s ease-out forwards;pointer-events:none}
 @keyframes flash{from{opacity:.95}to{opacity:0}}
 .p-err{font:700 14px var(--f-round);background:rgba(0,0,0,.25);padding:8px 14px;border-radius:12px}
+a.row{text-decoration:none;color:inherit}
+.plan-cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:6px 0 14px}
+.plan-c{border:1px solid var(--line);border-radius:18px;padding:14px 16px;background:var(--fill)}.plan-c.on{border-color:var(--p-accent);box-shadow:0 0 0 2px var(--p-accent) inset}
+.plan-c h4{margin:0 0 6px;font:900 18px var(--f-round)}.plan-c ul{margin:0;padding-left:18px;font:500 14px/1.45 var(--f-text)}.plan-c li{margin:3px 0}
+.plan-buy{display:grid;gap:10px;margin-top:6px}.plan-buy .pbtn{justify-content:space-between;width:100%}.plan-buy .pbtn span{text-align:left}.plan-why{font:700 16px/1.4 var(--f-round);margin:0 0 10px}
+.plan-small{font:500 13px/1.45 var(--f-text);color:var(--ink-2,inherit);opacity:.75;margin-top:14px}.plan-small a{color:inherit}
+#print-root{display:none}
+@media print{body.printing>*:not(#print-root){display:none!important}body.printing{background:#fff!important}body.printing #print-root{display:block;color:#000;font:12pt/1.45 system-ui,sans-serif}
+#print-root h1{font-size:20pt;margin:0 0 4pt}#print-root h2{font-size:14pt;margin:16pt 0 6pt}#print-root table{width:100%;border-collapse:collapse}#print-root td,#print-root th{text-align:left;padding:3pt 4pt;border-bottom:.5pt solid #ccc}#print-root .r{text-align:right}}
+.del-note{font:500 16px/1.45 var(--f-text);margin:2px 0 16px}.del-err{color:var(--bad);font:700 15px var(--f-round);margin:10px 0 0}.del-go{width:100%;margin-top:16px;justify-content:center}
 .result{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.6cqh,14px);text-align:center;overflow:auto;overscroll-behavior:contain;padding:4px}
 .result.shake{animation:resShake .45s cubic-bezier(.36,.07,.19,.97)}
 @keyframes resShake{20%,60%{transform:translateX(-7px) rotate(-.5deg)}40%,80%{transform:translateX(7px) rotate(.5deg)}}
@@ -1309,6 +1323,7 @@ p{margin:0}
 <div id="sky" aria-hidden="true"></div>
 <div id="app"></div>
 <div id="sheets"></div>
+<div id="print-root"></div>
 <div id="stage" hidden></div>
 <div id="studio" hidden><div class="studio-ui"></div></div>
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -1316,7 +1331,7 @@ p{margin:0}
 <input type="file" id="cam" accept="image/*" capture="environment" hidden>
 <input type="file" id="pick" accept="image/*" hidden>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="vendor/three-r128.min.js"></script>
 <script>
 (() => {
 'use strict';
@@ -1696,6 +1711,20 @@ async function initStore() {
    the server, which pushes it to the family's other devices over an event stream. Offline writes wait in an outbox,
    and the last snapshot is kept on the device so the app still opens without a connection. */
 const Acct = { me: null, available: false, clientId: uid(), es: null, down: false, outbox: lsGet('cc:outbox', []), flushing: false };
+/* ---------- Plans ----------
+   The family's plan comes from the server (GET /api/plan). Until launch the server has no paywall and every family has
+   everything. Inside the iOS app, window.ChorecastApp buys and restores with StoreKit 2:
+     products(ids) → [{ id, displayPrice, period, trial }], buy(id, appAccountToken) → { jws } or null, restore() → [jws].
+   The website can't sell plans; it says where to buy. Kids never see a price, only "Grown-ups can open this". */
+const PRODUCT_IDS = ['chorecast.plus.yearly', 'chorecast.plus.monthly', 'chorecast.family.yearly', 'chorecast.family.monthly', 'chorecast.lifetime', 'chorecast.lifetime.founding'];
+const FREE_LIMITS = { name: 'Free', kids: 2, grownups: 1, allLessons: false, extras: false };
+const Plan = { plan: 'plus', beta: true, paywall: false, packs: [], limits: { name: 'Plus', kids: 99, grownups: 2, allLessons: true, extras: true }, foundingLeft: 0, appAccountToken: null };
+async function loadPlan() {
+  if (Store.mode !== 'server') return;
+  try { Object.assign(Plan, await api('GET', '/api/plan')); scheduleRender(); } catch (e) {}
+}
+const planLocked = l => !Plan.limits.allLessons && l.unit > 1 && !(Plan.packs || []).includes(l.tree);
+const kidRoom = () => kidsList().filter(k => !k.example).length < Plan.limits.kids;
 async function api(method, url, body, raw) {
   const headers = { 'x-client-id': Acct.clientId };
   if (raw) headers['content-type'] = raw.type || 'application/octet-stream'; else if (body !== undefined) headers['content-type'] = 'application/json';
@@ -1708,7 +1737,7 @@ async function probeServer() {
   if (!/^https?:$/.test(location.protocol)) return null;
   try {
     const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
-    if (r.status === 401) return { signedOut: true };
+    if (r.status === 401) { fetch('/api/health').then(h => h.json()).then(h => { Acct.mail = !!h.mail; if (h.paywall) Object.assign(Plan, { plan: 'free', beta: false, paywall: true, limits: FREE_LIMITS }); scheduleRender(); }).catch(() => {}); return { signedOut: true }; }
     if (!r.ok || !/json/.test(r.headers.get('content-type') || '')) return null;
     return { me: await r.json() };
   } catch (e) { const me = lsGet('cc:me', null); return me ? { me, offline: true } : null; }
@@ -1718,11 +1747,14 @@ let cacheT = 0;
 function cacheSoon() { clearTimeout(cacheT); cacheT = setTimeout(() => lsSet(cacheKey(), { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits, growth: Store.growth, guides: Store.guides }), 600); }
 function applySnapshot(d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; Store.guides = d.guides || {}; }
 async function startServerMode(me) {
-  Acct.me = me; Acct.available = true; lsSet('cc:me', me); lsSet('cc:hadAcct', true); Store.mode = 'server';
+  Acct.me = me; Acct.mail = !!me.mail; Acct.available = true; lsSet('cc:me', me); lsSet('cc:hadAcct', true); Store.mode = 'server';
   const cached = lsGet(cacheKey(), null); if (cached) applySnapshot(cached);
   try { applySnapshot(await api('GET', '/api/sync')); cacheSoon(); }
   catch (e) { if (e.status === 401) return signedOut(); if (!cached) toast('Offline. Showing what this device saved last.'); }
-  openStream(); flushOutbox(); track('app.open', { screen: me.role });
+  openStream(); flushOutbox(); loadPlan(); track('app.open', { screen: me.role });
+  // In the iOS app: this device's push address, so grown-ups hear about finished jobs and kids get their reminder.
+  const app = window.ChorecastApp;
+  if (app && app.pushToken) app.pushToken().then(t => t && t.token && api('PUT', '/api/push', { token: t.token, environment: t.environment, tz: Intl.DateTimeFormat().resolvedOptions().timeZone })).catch(() => {});
 }
 function openStream() {
   if (Acct.es) Acct.es.close();
@@ -1737,6 +1769,7 @@ function openStream() {
   es.onerror = () => { Acct.down = true; };
 }
 async function resync() {
+  loadPlan();
   try { applySnapshot(await api('GET', '/api/sync')); Store.ver++; scheduleRender(); cacheSoon(); }
   catch (e) { if (e.status === 401) signedOut(); }
 }
@@ -1769,6 +1802,14 @@ function signedOut(msg) {
   Acct.me = null; Acct.outbox = []; Store.mode = 'local'; applySnapshot({}); loadLocal();
   UI.auth = { mode: 'signin', err: msg || '' }; UI.unlocked = false; UI.screen = 'signin'; render();
 }
+// Crashes go to the server's error log (on the Chorecast website only), at most 5 per page load.
+let errSent = 0;
+function reportError(message, stack) {
+  if (errSent >= 5 || !/^https?:$/.test(location.protocol) || Store.mode === 'cloud') return; errSent++;
+  fetch('/api/errors', { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ message: String(message).slice(0, 500), stack: String(stack || '').slice(0, 2000), where: `${UI.screen || 'boot'}${UI.ptab && UI.screen === 'parent' ? '/' + UI.ptab : ''}` }) }).catch(() => {});
+}
+addEventListener('error', e => { if (e.error || e.message) reportError(e.message, e.error && e.error.stack); });
+addEventListener('unhandledrejection', e => { const r = e.reason; if (r && r.status) return; reportError(r && r.message ? r.message : r, r && r.stack); });
 // In-app events: batched and sent to the server's events table (only when signed in to a family).
 const Events = { q: [], t: 0 };
 function track(type, payload = {}, kidId) {
@@ -1776,11 +1817,13 @@ function track(type, payload = {}, kidId) {
   Events.q.push({ type, kidId: kidId !== undefined ? kidId : (UI.kidId || null), payload, at: Date.now() });
   clearTimeout(Events.t); Events.t = setTimeout(flushEvents, 1500);
 }
+// The server takes 100 events a request; a bigger queue goes in turns. Offline, the queue keeps its newest 500.
 async function flushEvents() {
-  const list = Events.q.splice(0, 200); if (!list.length) return;
-  try { await api('POST', '/api/events', { events: list }); } catch (e) { if (!e.status) Events.q.unshift(...list); }
+  const list = Events.q.splice(0, 100); if (!list.length) return;
+  try { await api('POST', '/api/events', { events: list }); } catch (e) { if (!e.status) { Events.q.unshift(...list); Events.q.splice(0, Math.max(0, Events.q.length - 500)); } return; }
+  if (Events.q.length) { clearTimeout(Events.t); Events.t = setTimeout(flushEvents, 1500); }
 }
-addEventListener('pagehide', () => { if (Events.q.length && navigator.sendBeacon) navigator.sendBeacon('/api/events', new Blob([JSON.stringify({ events: Events.q.splice(0) })], { type: 'application/json' })); });
+addEventListener('pagehide', () => { if (Events.q.length && navigator.sendBeacon) navigator.sendBeacon('/api/events', new Blob([JSON.stringify({ events: Events.q.splice(0, 100) })], { type: 'application/json' })); });
 // First sign-in on a device that already has local data: offer to move it into the (empty) family account.
 function localData() { const d = lsGet(LOCAL_KEY, null); return d && Object.keys(d.kids || {}).length ? d : null; }
 async function importLocal() {
@@ -4880,7 +4923,15 @@ function viewSignin() {
       <button class="btn-white" data-act="authNext">I’ve saved it</button></div>`;
   else if (m === 'import') body = `<div class="auth-done"><div class="auth-ic">${ic('swap')}</div><h2>Bring this iPad’s family across?</h2><p>This device already has ${Object.keys(localData().kids).length} kid${Object.keys(localData().kids).length === 1 ? '' : 's'}, their jobs and their money saved. Move them into your new family account so every device sees them.</p>
       <button class="btn-white" data-act="authImport" ${busy}>${a.busy ? 'Moving…' : 'Move them across'}</button><button class="auth-link" data-act="authNext">Start fresh instead</button></div>`;
-  else if (m === 'reset') body = `<form class="auth-form" data-submit="authReset"><h2>Set a new password</h2><p class="auth-help">Use the recovery code you saved when you made the account.</p>
+  else if (m === 'reset' && a.token) body = `<form class="auth-form" data-submit="authResetToken"><h2>Choose a new password</h2><p class="auth-help">Every device signs out, then you sign in with the new password.</p>
+      ${field('password', 'New password', 'password', 'new-password', 'At least 8 characters', 'required minlength="8"')}
+      ${a.err ? `<p class="auth-err" role="alert">${esc(a.err)}</p>` : ''}<button class="btn-white" type="submit" ${busy}>${a.busy ? 'Saving…' : 'Save new password'}</button><button class="auth-link" type="button" data-act="authMode" data-m="signin">Back to sign in</button></form>`;
+  else if (m === 'reset' && a.sent) body = `<div class="auth-done"><div class="auth-ic">${ic('send')}</div><h2>Check your email</h2><p>If there’s a Chorecast account for ${esc(a.email || 'that address')}, we’ve sent a link to choose a new password. It lasts an hour. Check the junk folder too.</p>
+      <button class="btn-white" data-act="authMode" data-m="signin">Back to sign in</button><button class="auth-link" data-act="authMode" data-m="recover">Use my recovery code instead</button></div>`;
+  else if (m === 'reset' && Acct.mail) body = `<form class="auth-form" data-submit="authResetSend"><h2>Reset your password</h2><p class="auth-help">We’ll email you a link to choose a new one.</p>
+      ${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}
+      ${a.err ? `<p class="auth-err" role="alert">${esc(a.err)}</p>` : ''}<button class="btn-white" type="submit" ${busy}>${a.busy ? 'Sending…' : 'Email me a link'}</button><button class="auth-link" type="button" data-act="authMode" data-m="recover">Use my recovery code instead</button><button class="auth-link" type="button" data-act="authMode" data-m="signin">Back to sign in</button></form>`;
+  else if (m === 'reset' || m === 'recover') body = `<form class="auth-form" data-submit="authReset"><h2>Set a new password</h2><p class="auth-help">Use the recovery code you saved when you made the account.</p>
       ${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}${field('recovery', 'Recovery code', 'text', 'off', 'ABCD-EFGH-JKLM', 'required')}${field('password', 'New password', 'password', 'new-password', 'At least 8 characters', 'required minlength="8"')}
       ${a.err ? `<p class="auth-err" role="alert">${esc(a.err)}</p>` : ''}<button class="btn-white" type="submit" ${busy}>${a.busy ? 'Saving…' : 'Set password'}</button><button class="auth-link" type="button" data-act="authMode" data-m="signin">Back to sign in</button></form>`;
   else body = `<div class="auth-tabs" role="tablist">${tabs.map(([k, l]) => `<button role="tab" aria-selected="${m === k}" class="${m === k ? 'on' : ''}" data-act="authMode" data-m="${k}">${l}</button>`).join('')}</div>
@@ -4890,6 +4941,7 @@ function viewSignin() {
       ${m === 'join' ? `<p class="auth-help">Type the invite code from the grown-up who set up the family, then make your own sign-in. You’ll see the same kids, chores and pay.</p>${field('invite', 'Invite code', 'text', 'off', '8 letters and numbers', 'required autocapitalize="characters" spellcheck="false" maxlength="12"')}${field('name', 'Your name', 'text', 'given-name', 'Sam')}${field('email', 'Email', 'email', 'username', 'you@example.com', 'required')}${field('password', 'Password', 'password', 'new-password', 'At least 8 characters', 'required minlength="8"')}
         <p class="auth-help small">No code yet? On their device: Grown-ups, then Family, then Invite another grown-up.</p>` : ''}
       ${m === 'pair' ? `<p class="auth-help">On a grown-up’s device, open Grown-ups, then Family, then “Add a kid’s iPad” for a 6-digit code.</p>${field('code', 'Pairing code', 'text', 'one-time-code', '123456', 'inputmode="numeric" maxlength="7" required')}${field('device', 'Name this iPad', 'text', 'off', 'Ava’s iPad')}` : ''}
+      ${m === 'signup' || m === 'join' ? `<label class="auth-check"><input type="checkbox" data-in="authConsent" ${a.consent ? 'checked' : ''}><span>I’m the parent or guardian of the kids I’ll add, and I agree to the <a href="terms.html" target="_blank" rel="noopener">terms</a> and <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</span></label>` : ''}
       ${a.err ? `<p class="auth-err" role="alert">${esc(a.err)}</p>` : ''}
       <button class="btn-white" type="submit" ${busy}>${a.busy ? 'One moment…' : m === 'signup' ? 'Create family account' : m === 'join' ? 'Join the family' : m === 'pair' ? 'Pair this iPad' : 'Sign in'}</button>
       ${m === 'signin' ? '<button class="auth-link" type="button" data-act="authMode" data-m="reset">Forgot your password?</button>' : ''}
@@ -4926,13 +4978,78 @@ function pFamily() {
   const when = t => timeAgo(new Date(t).getTime());
   return `<header class="phead"><h2>Family and devices</h2><p>Everything syncs live between these devices. Each change is saved to your family’s database on the Chorecast server.</p></header>
     <section class="fam-hero"><div class="fh-ic">${ic('home')}</div><div><h3>${esc(me.family.name)}</h3><p>${me.user ? `Signed in as ${esc(me.user.email)}` : `This is a kid’s iPad: <b>${esc(me.device.name)}</b>`}${Acct.outbox.length ? ` · ${Acct.outbox.length} change${Acct.outbox.length === 1 ? '' : 's'} waiting to sync` : ' · All changes synced'}</p></div></section>
+    ${me.user && me.mail && !me.user.emailVerified ? `<div class="group"><div class="row"><div class="row-main"><b>Confirm your email</b><small>We sent a link to ${esc(me.user.email)}. Once it’s confirmed, you can reset your password by email.</small></div><button class="pbtn" data-act="famVerify">Send again</button></div></div>` : ''}
+    <h3 class="pgroup-t">Plan</h3><div class="group"><div class="row"><div class="row-main"><b>Chorecast ${esc(Plan.limits.name)}${Plan.trial ? ' (free trial)' : ''}</b><small>${Plan.beta ? 'Everything is open while Chorecast is in beta.' : Plan.lifetime ? 'Yours for good.' : Plan.until ? `${Plan.renews === false ? 'Ends' : 'Renews'} ${new Date(Plan.until).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}` : 'Up to 2 kids and the first unit of every subject.'}</small></div><button class="pbtn" data-act="planOpen">${Plan.plan === 'free' ? 'See plans' : 'Details'}</button></div></div>
     <h3 class="pgroup-t">Grown-ups</h3><div class="group">${me.members.map(m => `<div class="row"><span class="fam-av">${esc((m.name || m.email)[0].toUpperCase())}</span><div class="row-main"><b>${esc(m.name || m.email)}</b><small>${esc(m.email)}</small></div></div>`).join('')}
       ${parent ? `<div class="row"><div class="row-main"><b>Invite another grown-up</b><small>${f.invite ? `Give them this code. On the sign-in screen they choose “Join family” and type it in. It works once and lasts 7 days.` : 'They get their own sign-in to the same family.'}</small></div>${f.invite ? `<span class="fam-code num">${esc(f.invite)}</span>` : `<button class="pbtn" data-act="famInvite">${ic('plus')} Get a code</button>`}</div>` : ''}</div>
     ${parent ? `<h3 class="pgroup-t">Devices</h3><div class="group">
       <div class="row"><div class="row-main"><b>Add a kid’s iPad</b><small>${f.pair ? `On the iPad, open Chorecast, choose “Kid’s iPad” and type this code. It lasts 15 minutes.` : 'Kids don’t need an email. Their iPad pairs once and stays signed in.'}</small></div>${f.pair ? `<span class="fam-code big num">${esc(f.pair.replace(/(\d{3})(\d{3})/, '$1 $2'))}</span>` : `<button class="pbtn primary" data-act="famPair">${ic('plus')} Pairing code</button>`}</div>
       ${(f.devices || []).map(d => `<div class="row"><span class="fam-dev">${ic(d.kind === 'kid' ? 'star' : 'lock')}</span><div class="row-main"><b>${esc(d.name)}${d.current ? ' <small class="muted">(this device)</small>' : ''}</b><small>${d.kind === 'kid' ? 'Kid’s iPad' : `Grown-up${d.owner ? ` · ${esc(d.owner)}` : ''}`} · last used ${when(d.last_seen_at)}</small></div>${d.current ? '' : UI.confirmDev === d.id ? `<button class="pbtn solid-danger" data-act="famRemoveYes" data-id="${d.id}">Remove</button><button class="pbtn" data-act="famRemoveNo">Keep</button>` : `<button class="pbtn danger" data-act="famRemove" data-id="${d.id}">Remove</button>`}</div>`).join('')}
-      ${f.loading ? '<div class="row"><div class="row-main"><small>Loading devices…</small></div></div>' : ''}</div>` : ''}
+      ${f.loading ? '<div class="row"><div class="row-main"><small>Loading devices…</small></div></div>' : ''}
+      <div class="row wrap"><div class="row-main"><b>Chore reminder</b><small>A notification on kids’ iPads at this time each day, in the Chorecast app.</small></div><div class="seg">${[[null, 'Off'], [15, '3 pm'], [16, '4 pm'], [17, '5 pm'], [18, '6 pm']].map(([h, l]) => `<button class="seg-i ${(S().remindAt ?? null) === h ? 'on' : ''}" data-act="remindAt" data-h="${h ?? ''}">${l}</button>`).join('')}</div></div></div>` : ''}
+    ${parent ? `<h3 class="pgroup-t">Privacy</h3><div class="group">
+      <div class="row wrap"><div class="row-main"><b>Keep job photos</b><small>Kids’ job photos are deleted this long after you approve them or send them back. Chore guide photos stay until you change the guide.</small></div><div class="seg">${PHOTO_DAYS.map(([d, l]) => `<button class="seg-i ${photoDays() === d ? 'on' : ''}" data-act="photoDays" data-d="${d}" aria-label="${d} days">${l}</button>`).join('')}</div></div>
+      <a class="row rowbtn" href="privacy.html" target="_blank" rel="noopener"><div class="row-main"><b>Privacy policy</b><small>What Chorecast keeps, for how long, and who sees it</small></div>${ic('next')}</a>
+      <a class="row rowbtn" href="terms.html" target="_blank" rel="noopener"><div class="row-main"><b>Terms of use</b></div>${ic('next')}</a>
+      <button class="row rowbtn" data-act="delOpen"><div class="row-main"><b style="color:var(--bad)">Delete account</b><small>Delete your sign-in, or the whole family and everything in it</small></div>${ic('next')}</button>
+    </div>` : ''}
     <div class="pactions" style="margin-top:20px"><button class="pbtn danger" data-act="famSignOut">${ic('back')} Sign out of this device</button></div>`;
+}
+// Job photos are kept this many days after review (server/housekeeping.js has the same list).
+const PHOTO_DAYS = [[30, '1 mo'], [60, '2 mo'], [90, '3 mo'], [180, '6 mo'], [365, '1 yr']];
+const photoDays = () => (PHOTO_DAYS.some(([d]) => d === S().photoDays) ? S().photoDays : 60);
+function planSheet() {
+  const p = UI.planS || {}, app = window.ChorecastApp, prods = p.products || [], free = Plan.plan === 'free';
+  const why = { kids: `The free plan has room for ${FREE_LIMITS.kids} kids. Plus has room for everyone.`, lessons: 'The free plan has the first unit of every subject. Plus opens them all.', extras: 'Statement export and printable reports come with Plus.' }[p.why] || '';
+  const card = (id, name, items) => `<div class="plan-c ${Plan.plan === id && !Plan.beta ? 'on' : ''}"><h4>${name}</h4><ul>${items.map(t => `<li>${t}</li>`).join('')}</ul></div>`;
+  const buy = (id, label, sub) => { const x = prods.find(q => q.id === id); return x ? `<button class="pbtn ${id === 'chorecast.plus.yearly' ? 'primary' : ''}" data-act="planBuy" data-id="${id}" ${p.busy ? 'disabled' : ''}><span>${label}${sub ? `<br><small>${sub}</small>` : ''}</span><b>${esc(x.displayPrice)}${x.period ? ` / ${esc(x.period)}` : ''}</b></button>` : ''; };
+  return `<div class="sh-head"><button class="sh-x" data-act="close">Close</button><h2>Chorecast plans</h2><span></span></div>
+    <div class="sh-body">
+      ${why && free ? `<p class="plan-why">${why}</p>` : ''}
+      ${Plan.beta ? '<p class="plan-why">Everything is open while Chorecast is in beta. Plans start when the app launches.</p>' : ''}
+      <div class="plan-cards">
+        ${card('free', 'Free', ['Up to 2 kids and 1 grown-up', 'Chores, must-dos, photos, jars and statement', 'The starter island', 'The first unit of every lesson subject'])}
+        ${card('plus', 'Plus', ['Every kid in the family and 2 grown-ups', 'Every lesson subject, and new ones as they come', 'The full island shop, the Market, interest and tax', 'Statement export and printable reports'])}
+        ${card('family', 'Family', ['Everything in Plus', 'Up to 6 grown-ups, including grandparents', 'A second home is on its way'])}
+      </div>
+      ${app && !Plan.beta ? `<div class="plan-buy">
+          ${buy('chorecast.plus.yearly', 'Plus, yearly', '14 days free, then yearly')}${buy('chorecast.plus.monthly', 'Plus, monthly')}
+          ${buy('chorecast.family.yearly', 'Family, yearly')}${buy('chorecast.family.monthly', 'Family, monthly')}
+          ${Plan.foundingLeft > 0 ? buy('chorecast.lifetime.founding', 'Founding Family lifetime', `Plus for good, paid once. ${Plan.foundingLeft.toLocaleString()} of 1,000 left`) : buy('chorecast.lifetime', 'Lifetime', 'Plus for good, paid once')}
+          ${!prods.length ? '<p class="muted">Loading prices…</p>' : ''}
+          <button class="link-btn" data-act="planRestore" ${p.busy ? 'disabled' : ''}>Restore purchases</button>
+        </div>
+        <p class="plan-small">Subscriptions renew automatically until you cancel in your Apple account settings, at least 24 hours before the period ends. Payment is charged to your Apple account. A free trial becomes a paid subscription when it ends unless you cancel first. <a href="terms.html" target="_blank" rel="noopener">Terms of use</a> · <a href="privacy.html" target="_blank" rel="noopener">Privacy policy</a></p>`
+      : !Plan.beta ? '<p class="plan-why">Plans are bought in the Chorecast app on iPhone or iPad, in Grown-ups, then Family.</p>' : ''}
+      ${p.err ? `<p class="del-err" role="alert">${esc(p.err)}</p>` : ''}
+    </div>`;
+}
+// A kid's statement as a spreadsheet file, and a one-page report to print (both Plus extras).
+function stmtCsv(kid) {
+  const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`, rows = [['Date', 'Time', 'What', 'Type', 'Amount', 'XP']];
+  for (const e of kid.ledger || []) { const d = new Date(e.at); rows.push([d.toLocaleDateString('en-CA'), d.toTimeString().slice(0, 5), e.memo || e.kind, e.kind, e.kind === 'xp' ? '' : (e.amt / 100).toFixed(2), e.kind === 'xp' ? e.xp : '']); }
+  return rows.map(r => r.map(q).join(',')).join('\r\n') + '\r\n';
+}
+function reportHtml(kid) {
+  const j = kid.jars || {}, since = Date.now() - 30 * 864e5, jobs = jobsList().filter(x => x.kidId === kid.id && x.status === 'approved' && x.reviewedAt > since);
+  const L = (kid.ledger || []).slice(0, 40), row = (a, b) => `<tr><td>${a}</td><td class="r">${b}</td></tr>`;
+  return `<h1>${esc(kid.name)}’s Chorecast report</h1><p>${esc(Acct.me && Acct.me.family ? Acct.me.family.name : 'Our family')} · ${new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}${S().pocket && S().pocket.pretend ? ' · Play money' : ''}</p>
+    <h2>Money now</h2><table>${row('Spend jar', fmt(j.spend || 0))}${row('Vault (savings)', fmt(j.save || 0))}${row('Invest cash', fmt(j.invest || 0))}${row('In the Market', fmt(holdingsValue(kid)))}${row('Give jar', fmt(j.give || 0))}${row('<b>All money</b>', `<b>${fmt(netWorth(kid))}</b>`)}</table>
+    <h2>Since joining</h2><table>${row('Earned before tax', fmt(kid.earned || 0))}${row('Family tax paid', fmt(kid.taxPaid || 0))}${row('Interest earned', fmt(kid.interestEarned || 0))}</table>
+    <h2>Last 30 days</h2><table>${row('Jobs approved', jobs.length)}${row('Paid for jobs', fmt(jobs.reduce((t, x) => t + ((x.paid && x.paid.net) || 0), 0)))}</table>
+    <h2>Latest statement</h2><table><tr><th>Date</th><th>What</th><th class="r">Amount</th></tr>${L.map(e => `<tr><td>${new Date(e.at).toLocaleDateString()}</td><td>${esc(e.memo || e.kind)}</td><td class="r">${ledAmt(e)}</td></tr>`).join('')}</table>`;
+}
+function delSheet() {
+  const d = UI.del, others = Acct.me.members.filter(m => !Acct.me.user || m.email !== Acct.me.user.email), whole = d.scope === 'family' || !others.length;
+  const names = others.map(m => esc(m.name || m.email)).join(' and ');
+  return `<div class="sh-head"><button class="sh-x" data-act="close">Cancel</button><h2>Delete account</h2><span></span></div>
+    <div class="sh-body">
+      ${others.length ? `<div class="seg" style="margin-bottom:14px"><button class="seg-i ${whole ? '' : 'on'}" data-act="delScope" data-s="me">Just my sign-in</button><button class="seg-i ${whole ? 'on' : ''}" data-act="delScope" data-s="family">The whole family</button></div>` : ''}
+      <p class="del-note">${whole ? `This deletes <b>${esc(Acct.me.family.name)}</b> for everyone: every kid’s profile, jars and statement, all jobs and photos, lesson progress and the activity log${others.length ? `, and ${names}’s sign-in too` : ', and your sign-in'}. Kids’ iPads are signed out. It can’t be undone.` : `This deletes your sign-in and signs out your devices. ${names} keep${others.length === 1 ? 's' : ''} the family and everything in it.`}</p>
+      <label class="field"><span>Your password</span><input id="del-pw" type="password" autocomplete="current-password" data-in="delPw"></label>
+      ${d.err ? `<p class="del-err" role="alert">${esc(d.err)}</p>` : ''}
+      <button class="pbtn danger del-go" data-act="delGo" ${d.busy ? 'disabled' : ''}>${d.busy ? 'Deleting…' : whole ? 'Delete the family for good' : 'Delete my account'}</button>
+    </div>`;
 }
 function payTypeLine(j) {
   if (j.payType === 'piece') return `${j.units} ${j.unit}${j.units === 1 ? '' : 's'} × ${fmt(j.perUnit)}`;
@@ -5007,7 +5124,7 @@ function pKidDetail(kid) {
       <h4>Lifetime</h4><div class="plist"><div class="pli"><span class="grow">Earned before tax</span><span class="amt">${fmt(kid.earned || 0)}</span></div><div class="pli"><span class="grow">Family tax paid</span><span class="amt">${fmt(kid.taxPaid || 0)}</span></div><div class="pli"><span class="grow">Vault interest</span><span class="amt">${fmt(kid.interestEarned || 0)}</span></div></div></section>
     <section class="pcard wide"><h3>Recent jobs and photos</h3>${jobs.length ? `<div class="pjobs">${jobs.map(x => `<button class="pjob" data-act="photo" data-id="${x.id}"><span class="ph">${x.photo ? `<img ${photoAttr(x.photo)} alt="" loading="lazy">` : x.icon}</span><b>${esc(x.title)}</b><small>${esc(parseKey(x.date).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }))} · <span class="stars-s">${starRow(x.stars)}</span> · ${{ approved: 'Paid', pending: 'To review', redo: 'Redo' }[x.status]}</small></button>`).join('')}</div>` : '<p class="muted">No jobs yet.</p>'}</section>
     <section class="pcard"><h3>Bank statement</h3>${L.length ? `<div class="plist">${L.map(e => `<div class="pli"><span class="grow">${esc(e.memo || e.kind)}<br><small class="muted">${timeAgo(e.at)}</small></span><span class="amt ${ledIn(e) ? 'pos' : ''}">${ledAmt(e)}</span></div>`).join('')}</div>
-      <div class="pactions"><button class="pbtn" data-act="stmt" data-id="${kid.id}">${ic('list')} See all</button>${(kid.ledger || []).some(isBuy) ? `<button class="pbtn" data-act="stmt" data-id="${kid.id}" data-f="buys">${ic('gift')} Things bought</button>` : ''}</div>` : '<p class="muted">Nothing yet.</p>'}</section>
+      <div class="pactions"><button class="pbtn" data-act="stmt" data-id="${kid.id}">${ic('list')} See all</button>${(kid.ledger || []).some(isBuy) ? `<button class="pbtn" data-act="stmt" data-id="${kid.id}" data-f="buys">${ic('gift')} Things bought</button>` : ''}<button class="pbtn" data-act="stmtExport" data-id="${kid.id}">${ic('send')} Export</button><button class="pbtn" data-act="stmtPrint" data-id="${kid.id}">${ic('list')} Print report</button></div>` : '<p class="muted">Nothing yet.</p>'}</section>
     <section class="pcard">${UI.confirmRemove === kid.id ? `<h3>Remove ${esc(kid.name)}?</h3><p class="muted" style="margin-bottom:12px">Their balances and profile are deleted. Past jobs stay in the review history.</p><div class="pactions"><button class="pbtn solid-danger" data-act="removeKidYes" data-id="${kid.id}">Remove</button><button class="pbtn" data-act="removeKidNo">Keep</button></div>` : `<button class="pbtn danger" data-act="removeKid" data-id="${kid.id}">${ic('trash')} Remove ${esc(kid.name)}</button>`}</section>
   </div>`;
 }
@@ -5690,12 +5807,16 @@ const ACT = {
   authSignin: () => authRun(async a => afterAuth(await api('POST', '/api/auth/login', { email: a.email, password: a.password, deviceName: navigator.platform || 'Grown-up device' }))),
   authSignup: () => authRun(async a => {
     const join = a.mode === 'join';
-    let r; try { r = await api('POST', '/api/auth/signup', { email: a.email, password: a.password, name: a.name, invite: join ? a.invite : undefined, deviceName: navigator.platform || 'Grown-up device' }); }
+    if (!a.consent) throw Object.assign(new Error('Tick the box to say you’re a parent or guardian and agree to the terms.'), { status: 400 });
+    let r; try { r = await api('POST', '/api/auth/signup', { email: a.email, password: a.password, name: a.name, invite: join ? a.invite : undefined, consent: true, deviceName: navigator.platform || 'Grown-up device' }); }
     catch (e) { if (join && e.code === 'exists') e.message = 'That email already has a Chorecast account, and an account can’t join a second family yet. Use a different email to join.'; throw e; }
     await afterAuth(r, r.recovery);
   }),
   authPair: () => authRun(async a => afterAuth(await api('POST', '/api/devices/pair', { code: a.code, name: a.device || 'Kids’ iPad' }))),
   authReset: () => authRun(async a => { await api('POST', '/api/auth/reset', { email: a.email, recovery: a.recovery, password: a.password }); UI.auth = { mode: 'signin', email: a.email, err: '' }; toast('Password changed. Sign in with the new one.'); }),
+  authResetSend: () => authRun(async a => { await api('POST', '/api/auth/reset/send', { email: a.email }); a.sent = true; }),
+  authResetToken: () => authRun(async a => { await api('POST', '/api/auth/reset', { token: a.token, password: a.password }); UI.auth = { mode: 'signin', err: '' }; toast('Password changed. Sign in with the new one.'); }),
+  famVerify: async () => { try { const r = await api('POST', '/api/auth/verify/send', {}); toast(r.verified ? 'Your email is already confirmed.' : 'Sent. Check your email for the link.'); } catch (e) { toast(e.message); } },
   authImport: () => authRun(async () => { await importLocal(); UI.screen = 'who'; toast('Moved across. Every device sees them now.'); }),
   authNext: () => { const n = UI.auth && UI.auth.next; if (n) { UI.auth = { mode: n }; return render(); } lsSet('cc:imported', true); UI.screen = 'who'; scrollTo(0, 0); render(); },
   famInvite: async () => { try { UI.fam.invite = (await api('POST', '/api/family/invite', {})).code; } catch (e) { toast(e.message); } render(); },
@@ -5703,6 +5824,55 @@ const ACT = {
   famRemove: a => { UI.confirmDev = a.dataset.id; render(); },
   famRemoveNo: () => { UI.confirmDev = null; render(); },
   famRemoveYes: async a => { try { await api('DELETE', '/api/devices/' + a.dataset.id); UI.fam.loaded = false; toast('Device removed. It’s signed out now.'); } catch (e) { toast(e.message); } UI.confirmDev = null; render(); },
+  photoDays: a => saveSettings({ photoDays: +a.dataset.d }),
+  remindAt: a => saveSettings({ remindAt: a.dataset.h === '' ? null : +a.dataset.h }),
+  planOpen: a => {
+    UI.planS = { why: a && a.dataset ? a.dataset.why : '' }; openSheet(planSheet); loadPlan().then(() => UI.sheet && UI.sheet.fn === planSheet && renderSheet());
+    const app = window.ChorecastApp; if (app && app.products) app.products(PRODUCT_IDS).then(list => { if (UI.planS) { UI.planS.products = list || []; renderSheet(); } }).catch(() => {});
+  },
+  planBuy: async a => {
+    const p = UI.planS, app = window.ChorecastApp; if (!app || p.busy) return; p.busy = true; p.err = ''; renderSheet();
+    try {
+      const r = await app.buy(a.dataset.id, Plan.appAccountToken);
+      if (r && r.jws) { await api('POST', '/api/purchases/apple', { transaction: r.jws }); await loadPlan(); closeSheet(); toast(`Thank you! ${Plan.limits.name} is on for the whole family.`); return; }
+    } catch (e) { p.err = e.message || 'That didn’t go through. Try again.'; }
+    p.busy = false; renderSheet();
+  },
+  planRestore: async () => {
+    const p = UI.planS, app = window.ChorecastApp; if (!app || p.busy) return; p.busy = true; p.err = ''; renderSheet();
+    try { const list = await app.restore(); if (list && list.length) await api('POST', '/api/purchases/apple', { transactions: list }); await loadPlan(); toast(list && list.length ? 'Purchases restored.' : 'No purchases to restore on this Apple account.'); }
+    catch (e) { p.err = e.message; }
+    p.busy = false; renderSheet();
+  },
+  stmtExport: a => {
+    if (!Plan.limits.extras) return ACT.planOpen({ dataset: { why: 'extras' } });
+    const kid = Store.kids[a.dataset.id]; if (!kid) return;
+    const name = `${kid.name.replace(/[^\w-]+/g, '-')}-statement-${dkey()}.csv`, text = stmtCsv(kid);
+    if (window.ChorecastApp && window.ChorecastApp.share) return window.ChorecastApp.share({ filename: name, text, type: 'text/csv' });
+    const url = URL.createObjectURL(new Blob([text], { type: 'text/csv' })), link = Object.assign(document.createElement('a'), { href: url, download: name });
+    document.body.appendChild(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000);
+    track('report.export', { kind: 'statement' }, kid.id);
+  },
+  stmtPrint: a => {
+    if (!Plan.limits.extras) return ACT.planOpen({ dataset: { why: 'extras' } });
+    const kid = Store.kids[a.dataset.id]; if (!kid) return;
+    $('#print-root').innerHTML = reportHtml(kid); document.body.classList.add('printing');
+    const done = () => { document.body.classList.remove('printing'); $('#print-root').innerHTML = ''; removeEventListener('afterprint', done); };
+    addEventListener('afterprint', done);
+    if (window.ChorecastApp && window.ChorecastApp.print) window.ChorecastApp.print().finally(done); else window.print();
+    track('report.print', {}, kid.id);
+  },
+  delOpen: () => { UI.del = { scope: 'me', pw: '', err: '', busy: false }; openSheet(delSheet); },
+  delScope: a => { Object.assign(UI.del, { scope: a.dataset.s, err: '', pw: '' }); renderSheet(); },
+  delGo: async () => {
+    const d = UI.del; if (!d.pw) { d.err = 'Type your password first.'; renderSheet(); return; }
+    d.busy = true; d.err = ''; renderSheet();
+    try {
+      const r = await api('POST', '/api/account/delete', { password: d.pw, scope: d.scope });
+      closeSheet(); UI.del = null; lsSet('cc:localOnly', false);
+      signedOut(r.deleted === 'family' ? 'Your family’s account and everything in it were deleted.' : 'Your account was deleted.');
+    } catch (e) { d.busy = false; d.err = e.message; renderSheet(); $('#del-pw') && $('#del-pw').focus(); }
+  },
   famSignOut: async () => { await flushEvents(); try { await api('POST', '/api/auth/logout', {}); } catch (e) {} lsSet('cc:localOnly', false); signedOut(); },
   veil: () => { if (UI.sheet && !UI.sheet.sticky) closeSheet(); },
   close: () => closeSheet(),
@@ -5868,7 +6038,7 @@ const ACT = {
   redoCancel: () => { UI.redoFor = null; render(); },
   redo: a => { const j = Store.jobs[a.dataset.id]; updDoc('jobs', a.dataset.id, { status: 'redo', reviewedAt: Date.now(), note: a.dataset.note }); if (window.Growth && j && Store.kids[j.kidId]) Growth.onEvent(Store.kids[j.kidId], 'redo', { title: j.title, note: a.dataset.note }); UI.redoFor = null; toast('Sent back for a redo'); },
   pkid: a => { UI.pkid = a.dataset.id; UI.confirmRemove = null; render(); },
-  addKid: () => openKidForm(),
+  addKid: () => (kidRoom() ? openKidForm() : ACT.planOpen({ dataset: { why: 'kids' } })),
   editKid: a => openKidForm(Store.kids[a.dataset.id]),
   kfAge: a => { UI.kidForm.age = clamp(UI.kidForm.age + +a.dataset.d, 3, 17); renderSheet(false); },
   kfAva: a => { UI.kidForm.avatar = a.dataset.a; renderSheet(false); },
@@ -5876,6 +6046,7 @@ const ACT = {
   saveKid: () => {
     const f = UI.kidForm, name = f.name.trim(); if (!name) return;
     if (f.id) updDoc('kids', f.id, { name, age: f.age, avatar: f.avatar, hue: f.hue });
+    else if (!kidRoom()) { closeSheet(); ACT.planOpen({ dataset: { why: 'kids' } }); return; }
     else { const id = uid(); setDoc('kids', id, newKid({ name, age: f.age, avatar: f.avatar, hue: f.hue, order: kidsList().length })); UI.pkid = id; }
     closeSheet(); toast(f.id ? 'Profile saved' : `${name} joined the family sky`);
     if (!f.id && UI.backToStart) { UI.backToStart = false; UI.ptab = 'start'; scrollTo(0, 0); render(); }
@@ -5989,11 +6160,13 @@ const ACT = {
 };
 const IN = {
   authField: a => { if (UI.auth) UI.auth[a.name] = a.value; },
+  authConsent: a => { if (UI.auth) UI.auth.consent = a.checked; },
   tm: a => {
     const kid = curKid(); if (!kid) return; const w = +a.value, save = (kid.jars || {}).save || 0, rate = vaultRate(kid), pts = tmPoints(save, rate), [x, y] = pts[w]; UI.tm = w;
     $('#tm-val').textContent = fmt(futureValue(save, rate, w)); $('#tm-cap').textContent = tmCaption(save, rate, w);
     const dot = $('#tm-dot'), line = $('#tm-line'); dot.setAttribute('cx', x.toFixed(1)); dot.setAttribute('cy', y.toFixed(1)); line.setAttribute('x1', x.toFixed(1)); line.setAttribute('x2', x.toFixed(1));
   },
+  delPw: a => { UI.del.pw = a.value; },
   kfName: a => { UI.kidForm.name = a.value; $('#kf-ok').disabled = !a.value.trim(); },
   goalName: a => { UI.goalForm.name = a.value; $('#goal-ok').disabled = !a.value.trim(); },
   cfTitle: a => { UI.choreForm.title = a.value; const off = !a.value.trim(); $('#cf-ok').disabled = off; const go = $('#cf-go'); if (go) go.disabled = off; },
@@ -6048,16 +6221,22 @@ let lastDay = dkey();
 setInterval(() => { if (!Store.ready) return; const d = dkey(); const t = Market.last; buildMarket(); if (d !== lastDay) { lastDay = d; applyInterest(); scheduleRender(); } else if (t !== Market.last && UI.screen === 'kid' && UI.tab === 'market') scheduleRender(); }, 60000);
 
 /* Character Growth lives in growth.js and reaches the app through this bridge. */
-window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, PRIZES, LOOKS, prizeInfo, hasPrize, grantPrize, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet, mustLeft, learnLock };
+window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, PRIZES, LOOKS, prizeInfo, hasPrize, grantPrize, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet, mustLeft, learnLock, Plan, planLocked };
 
 /* =========================================================
    Boot
    ========================================================= */
+// Links from account emails: ?verify= confirms the address, ?reset= opens Choose a new password. The token leaves the
+// address bar straight away.
+const LINK = (() => { const q = new URLSearchParams(location.search), out = { verify: q.get('verify'), reset: q.get('reset') }; if (out.verify || out.reset) history.replaceState(null, '', location.pathname + location.hash); return out; })();
 initSky(); paintSky(); render();
 (async () => {
   await initStore();
   Store.ready = true; buildMarket(); applyInterest();
-  UI.screen = UI.needSignIn ? 'signin' : 'who'; if (UI.needSignIn) UI.auth = { mode: firstAuthMode() }; render();
+  UI.screen = UI.needSignIn ? 'signin' : 'who'; if (UI.needSignIn) UI.auth = { mode: firstAuthMode() };
+  if (LINK.reset) { UI.screen = 'signin'; UI.auth = { mode: 'reset', token: LINK.reset }; }
+  render();
+  if (LINK.verify) api('POST', '/api/auth/verify', { token: LINK.verify }).then(() => { toast('Email confirmed. Thanks!'); if (Acct.me && Acct.me.user) { Acct.me.user.emailVerified = true; render(); } }).catch(e => toast(e.message));
   if (window.Growth) Growth.ready();
 })();
 })();

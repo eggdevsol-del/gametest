@@ -1,5 +1,5 @@
 /* Chorecast · Character Growth
-   Interactive lessons in money, life, work and learning skills for ages 7 to 18, earning XP for the island.
+   Interactive lessons in money, life, work and learning skills for ages 7 to 15, earning XP for the island.
    Built from chorecast-growth/*.js by scripts/build-growth.mjs into public/chorecast/growth.js.
    Lessons live in public/chorecast/growth/*.txt content packs (format in CONTENT.md), so new lessons,
    Money Moments and case studies ship without touching this code, and the server's content feed adds more. */
