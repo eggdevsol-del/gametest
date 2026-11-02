@@ -113,6 +113,7 @@ export function checkKidWrite(prev, next, settings, now = Date.now()) {
       newCash += num(it.cash); newXp += num(it.xp);
     }
   }
+  if (!!isN.unlockAll !== !!isP.unlockAll) return nope('only a grown-up can unlock the whole island shop.');
   // Land, island sizes, tools, upgrades and looks keep what was paid for them, like items.
   const added = (a, b) => Object.keys(b || {}).filter(k => !(a || {})[k]);
   const buys = [];

@@ -2256,7 +2256,10 @@ function holdingsCost(kid) { return Object.values(kid.holdings || {}).reduce((s,
 function netWorth(kid) { const j = kid.jars || {}; return (j.spend || 0) + (j.save || 0) + (j.invest || 0) + (j.give || 0) + holdingsValue(kid); }
 /* Each kid's floating island is a picture of their money: the house grows with net worth, every approved job plants a tree,
    the pond is the vault, the windmill means they invest, the coin stack is Spend, and a rainbow appears when today's chores are done. */
-const levelOf = kid => LEVELS.reduce((a, L, i) => (netWorth(kid) >= L.at ? i : a), 0);
+// A grown-up can unlock the whole island shop for one kid (island.unlockAll, set from a grown-up's device only): the
+// top level, seasonal things all year and every prize to place for free. Prices stay the same.
+const unlockedAll = kid => !!((kid || {}).island || {}).unlockAll;
+const levelOf = kid => (unlockedAll(kid) ? LEVELS.length - 1 : LEVELS.reduce((a, L, i) => (netWorth(kid) >= L.at ? i : a), 0));
 function islandParams(kid) {
   const j = kid.jars || {}, p = kidProgress(kid, dkey());
   const isl = kid.island || {};
@@ -3858,7 +3861,7 @@ const Studio = (() => {
     const isl = k.island || {}, cur = isl.look || {}, own = isl.owned || {}, sel = S0.lk;
     const trees = `<div class="mk-part"><b>Chore tree types</b><div class="mk-sw">${TREE_TYPES.map(o => { const id = `tree:${o.k}`, mine = own[id], pick = sel && sel.part === 'tree' && sel.k === o.k; return `<button class="mk-dot ${pick ? 'pick' : ''} ${mine ? '' : 'lock'}" style="--c:${TREE_SW[o.k] || '#3d8b40'}" data-act="stLook" data-p="tree" data-k="${o.k}" aria-label="${esc(o.name)}${mine ? ', yours' : ''}">${mine ? '' : '🌳'}</button>`; }).join('')}</div></div>`;
     return `<div class="mk" style="--kid-hue:${esc(k.hue)}">${trees}${LOOKS.map(p => `<div class="mk-part"><b>${p.name}</b><div class="mk-sw">${[{ k: '', name: NONE_PARTS.includes(p.k) ? 'None' : 'Original' }, ...p.opts].map(o => {
-      const mine = !o.k || own[`${p.k}:${o.k}`], on = (cur[p.k] || '') === o.k, pick = sel && sel.part === p.k && sel.k === o.k;
+      const mine = !o.k || own[`${p.k}:${o.k}`] || (o.prize && unlockedAll(k)), on = (cur[p.k] || '') === o.k, pick = sel && sel.part === p.k && sel.k === o.k;
       return `<button class="mk-dot ${on ? 'on' : ''} ${pick ? 'pick' : ''} ${mine ? '' : 'lock'}" style="--c:${swatch(p.k, o)}" data-act="stLook" data-p="${p.k}" data-k="${o.k}" aria-label="${esc(o.name)}${on ? ', in use' : mine ? '' : o.prize ? ', a Character Growth prize' : ''}">${o.prize && !mine ? '🎁' : ''}</button>`;
     }).join('')}</div></div>`).join('')}</div>`;
   }
@@ -3885,10 +3888,10 @@ const Studio = (() => {
   // things are only sold in their months (and come back every year).
   function itemCard(it, k, xp, cash, allowCash, lvl, owned) {
     const isl = k.island || {}, n = owned(it.t), G = window.Growth || null, need = needOf(k, it), month = new Date().getMonth() + 1;
-    const locked = (it.lvl || 0) > lvl && !(G && G.mastered(k) >= it.lvl * 4), offSeason = it.season && !it.season.includes(month);
+    const locked = (it.lvl || 0) > lvl && !(G && G.mastered(k) >= it.lvl * 4), offSeason = it.season && !it.season.includes(month) && !unlockedAll(k);
     const have = it.size ? (isl.size || 0) >= it.size : it.land ? (it.land === 'farm' ? !!isl.farm : !!(isl.land || {})[it.land]) : it.upgrade ? !!(isl.upgrades || {})[it.t] : it.cat === 'tools' ? !!(isl.tools || {})[it.t] : it.one ? n > 0 : false;
     let foot;
-    if (it.prize) { const left = ((isl.won || {})[it.t] || 0) - items(k).filter(i => i.t === it.t && i.won).length; foot = left > 0 ? `<div class="shop-buy"><button data-act="stPlaceWon" data-t="${it.t}">Place it · free</button></div>` : n ? '<small class="owned">On your island</small>' : `<small class="prize">🎁 ${esc(G && G.prizeHint ? G.prizeHint(k, 'item:' + it.t) : 'A Character Growth prize')}</small>`; }
+    if (it.prize) { const left = unlockedAll(k) ? 1 : ((isl.won || {})[it.t] || 0) - items(k).filter(i => i.t === it.t && i.won).length; foot = left > 0 ? `<div class="shop-buy"><button data-act="stPlaceWon" data-t="${it.t}">Place it · free</button></div>` : n ? '<small class="owned">On your island</small>' : `<small class="prize">🎁 ${esc(G && G.prizeHint ? G.prizeHint(k, 'item:' + it.t) : 'A Character Growth prize')}</small>`; }
     else if (have) foot = `<small class="owned">${it.size || it.land ? 'Yours' : it.cat === 'tools' ? 'In your shed' : it.upgrade ? 'Done' : 'On your island'}</small>`;
     else if (offSeason) foot = `<small>Back in ${monthName(it.season[0])}</small>`;
     else if (locked) foot = `<small>Unlocks with a ${LEVELS[it.lvl].name.toLowerCase()}${G ? `, or master ${it.lvl * 4 - G.mastered(k)} more skills` : ''}</small>`;
@@ -4008,7 +4011,7 @@ const Studio = (() => {
         ${spade && types.length ? `<div class="st-sw"><span>Type</span><button class="chip ${cur ? '' : 'on'}" data-act="st" data-n="treeType" data-k="">Standard</button>${types.map(o => `<button class="chip ${cur === o.k ? 'on' : ''}" data-act="st" data-n="treeType" data-k="${o.k}">${esc(o.name)}</button>`).join('')}</div>` : ''}
         <div class="st-actions">${spade ? '<button class="st-btn primary" data-act="st" data-n="treeMove">Move it</button>' : '<button class="st-btn" data-act="stCat" data-c="tools">See the tree spade</button>'}<button class="st-btn ghost" data-act="st" data-n="treeDone">Done</button></div></div>`;
     } else if (S0.lk) {
-      const { part, k: key } = S0.lk, id = `${part}:${key}`, d = key ? lookDef(id) : null, own = (k.island || {}).owned || {}, mine = !key || own[id], inUse = part !== 'tree' && (((k.island || {}).look || {})[part] || '') === key, G = window.Growth || null;
+      const { part, k: key } = S0.lk, id = `${part}:${key}`, d = key ? lookDef(id) : null, own = (k.island || {}).owned || {}, mine = !key || own[id] || (d && d.prize && unlockedAll(k)), inUse = part !== 'tree' && (((k.island || {}).look || {})[part] || '') === key, G = window.Growth || null;
       const partName = part === 'tree' ? 'chore tree' : ((LOOKS.find(p => p.k === part) || {}).name || part).toLowerCase(), name = d ? d.name : `${NONE_PARTS.includes(part) ? 'No' : 'Original'} ${partName}`;
       const tentNote = !lvl && (part === 'wall' || part === 'door' || part === 'shutter' || part === 'windowbox' || part === 'wallart') ? ' Your tent has no walls or door yet, so this shows once you build a little hut.' : '', lvlNote = d && d.lvl && lvl < d.lvl ? ` It needs a ${LEVELS[d.lvl].name.toLowerCase()}.` : '', guideNote = part === 'outfit' ? ' Your guide wears it in Character Growth.' : '';
       const acts = inUse ? '<button class="st-btn ghost" data-act="stLookOff">Done</button>' : mine ? (part === 'tree' ? '<button class="st-btn ghost" data-act="stLookOff">Got it</button>' : `<button class="st-btn primary" data-act="stLookUse">Use it</button><button class="st-btn ghost" data-act="stLookOff">Cancel</button>`) : d.prize ? '<button class="st-btn ghost" data-act="stLookOff">Cancel</button>' : `<button class="st-btn primary" data-act="stLookXp" ${xp.left < d.xp || lvlNote ? 'disabled' : ''}>${ic('sparkle')} ${d.xp.toLocaleString()} XP</button>${allowCash ? `<button class="st-btn" data-act="stLookCash" ${cash < d.cash || lvlNote ? 'disabled' : ''}>${fmt(d.cash)}</button>` : ''}<button class="st-btn ghost" data-act="stLookOff">Cancel</button>`;
