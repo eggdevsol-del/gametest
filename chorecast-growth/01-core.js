@@ -36,7 +36,7 @@ const BANDS = [
   { id: 'makers', name: 'Makers', ages: '13 to 15', words: 18 },
 ];
 const BAND_IX = Object.fromEntries(BANDS.map((b, i) => [b.id, i]));
-const GSET = () => ({ cap: 20, off: {}, band: {}, country: 'nz', living: true, readAloud: true, ...((S().growth) || {}) });
+const GSET = () => ({ cap: 20, off: {}, band: {}, country: 'nz', living: true, readAloud: true, choresFirst: true, ...((S().growth) || {}) });
 function bandOf(kid) {
   const age = kid.age || 9, base = age <= 9 ? 0 : age <= 12 ? 1 : 2, shift = GSET().band[kid.id] || 0;
   return BANDS[clamp(base + shift, 0, BANDS.length - 1)].id;

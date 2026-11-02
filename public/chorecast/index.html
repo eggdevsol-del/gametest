@@ -386,6 +386,15 @@ p{margin:0}
 .btn-big:disabled{opacity:.4;box-shadow:none}
 .btn-soft{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:50px;border-radius:16px;background:var(--fill);color:var(--ink);font:800 16px var(--f-round)}
 .hint{font:400 15px/1.4 var(--f-text);color:var(--ink-2)}
+.ll-hero{display:flex;align-items:center;gap:14px}
+.ll-guide{font-size:44px;line-height:1;flex:none}
+.ll-hero p{font:700 17px/1.4 var(--f-round)}
+.ll-jobs{display:flex;flex-direction:column;gap:8px}
+.ll-job{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;min-height:58px;padding:8px 14px;border-radius:16px;background:var(--fill);color:var(--ink);text-align:left}
+.ll-job>span:first-child{font-size:26px;line-height:1}
+.ll-job b{display:block;font:800 16px/1.2 var(--f-round)}
+.ll-job small{font:600 13px var(--f-text);color:var(--ink-2)}
+.ll-job .ic{width:18px;height:18px;color:var(--ink-2)}
 .hint.pin-why{margin-top:-8px;font-size:14px;text-align:center}
 .field{display:flex;align-items:center;justify-content:space-between;gap:12px;font:600 16px var(--f-text)}
 .field.col{flex-direction:column;align-items:stretch}
@@ -3976,12 +3985,35 @@ function viewKid() {
   </div>
   <nav class="tabbar glass" aria-label="Sections">${[['today', 'sun', 'Today'], ['grow', 'sprout', 'Grow'], ['money', 'jar', 'Money'], ['market', 'chart', 'Market'], ['proof', 'photo', 'Proof wall']].map(([k, i, l]) => k === 'grow' ? growTab(kid, i, l) : `<button class="tab ${t === k ? 'on' : ''}" data-act="tab" data-tab="${k}" ${t === k ? 'aria-current="page"' : ''}>${ic(i)}<span>${l}</span></button>`).join('')}</nav>`;
 }
+// Lessons can wait until today's must-dos are done (Grown-ups, Character Growth: a switch that starts on). A must-do
+// counts as soon as its photo is in, so nobody waits on a grown-up's review. Gives the must-dos still to do, or null
+// when lessons are open.
+function mustLeft(kid) {
+  if (!kid || (S().growth || {}).choresFirst === false) return null;
+  const date = dkey(), left = boardFor(kid, date).must.filter(c => !isDone(choreState(kid.id, c, date).state));
+  return left.length ? left : null;
+}
+// Every way into a lesson asks this first. When must-dos are left it shows them instead and says so.
+function learnLock(kid, o = {}) {
+  const left = mustLeft(kid); if (!left) return false;
+  UI.llKid = kid.id; openSheet(learnLockSheet); track('growth.locked', { left: left.length, from: o.from || '' }, kid.id);
+  if ((kid.age || 8) < 10 && !Sound.muted && (S().growth || {}).readAloud !== false) sayOut(`Must-dos first! Finish ${left.length === 1 ? 'your last must-do' : `your ${left.length} must-dos`}, then your lessons open.`);
+  return true;
+}
+function learnLockSheet() {
+  const kid = Store.kids[UI.llKid]; if (!kid) return '';
+  const left = mustLeft(kid), g = guideFor(kid), date = dkey();
+  return `<div class="sh-head"><span></span><h2>Must-dos first</h2><button class="sh-ok" data-act="close">OK</button></div>
+    <div class="sh-body"><div class="ll-hero"><span class="ll-guide" aria-hidden="true">${g ? g[1] : '🌳'}</span><p>${left ? `Finish today’s must-dos, then your lessons open. ${left.length === 1 ? 'Just 1 to go!' : `${left.length} to go.`}` : 'Your must-dos are done. Your lessons are open!'}</p></div>
+    ${left ? `<div class="ll-jobs">${left.map(c => `<button class="ll-job" data-act="brief" data-key="${c.key}"><span aria-hidden="true">${c.icon}</span><span><b>${esc(choreState(kid.id, c, date).state === 'redo' ? `Fix up: ${c.title}` : c.title)}</b><small>${c.mins} min · ${payLabel(c)}</small></span>${ic('next')}</button>`).join('')}</div>`
+      : `<button class="btn-big" data-act="gOpen" data-id="${kid.id}">${ic('sprout')} Start learning</button>`}</div>`;
+}
 // Grow opens Character Growth on top of whichever tab the kid is on. A dot shows when reviews, questions
 // about their week or a grown-up's lesson are waiting.
 function growTab(kid, i, l) {
   if (!window.Growth) return '';
   const n = Growth.waiting ? Growth.waiting(kid) : 0;
-  return `<button class="tab" data-act="gOpen" data-id="${kid.id}" data-from="tab" aria-label="${l}: Character Growth${n ? `, ${n} waiting` : ''}">${ic(i)}${n ? '<i class="tab-dot" aria-hidden="true"></i>' : ''}<span>${l}</span></button>`;
+  return `<button class="tab" data-act="gOpen" data-id="${kid.id}" data-from="tab" aria-label="${l}: Character Growth${mustLeft(kid) ? ', opens after your must-dos' : n ? `, ${n} waiting` : ''}">${ic(i)}${n ? '<i class="tab-dot" aria-hidden="true"></i>' : ''}<span>${l}</span></button>`;
 }
 function todayMoney(kid) {
   const d = dkey(); let earned = 0, pending = 0;
@@ -4054,7 +4086,7 @@ function tourSteps(kid) {
     { sel: '[data-tour="jobs"]', say: `These are your jobs for today, ${kid.name}. Must-dos first, then team tasks.` },
     { sel: '[data-tour="jobs"] .tile', say: 'Tap a job to see its steps. Do each step, then take a photo of the finished job.' },
     { sel: '.hero .minis', say: 'A grown-up checks your photo. Then your pay lands in your jars: Spend, Vault, Invest and Give.' },
-    { sel: '.tabbar [data-act="gOpen"]', say: 'Learn with me in Grow. Every lesson grows your Learning Tree and can win prizes for your island.' },
+    { sel: '.tabbar [data-act="gOpen"]', say: `Learn with me in Grow${(S().growth || {}).choresFirst === false ? '' : ' once your must-dos are done'}. Every lesson grows your Learning Tree and can win prizes for your island.` },
     { sel: '.next-card', say: first ? `That’s everything! This card always shows what to do next. Let’s start with: ${first.title}.` : 'That’s everything! This card always shows what to do next.', first },
   ];
 }
@@ -5708,7 +5740,7 @@ const ACT = {
   slips: () => openSheet(slipsSheet),
   stmt: a => { UI.stmt = { kidId: a.dataset.id, f: a.dataset.f || 'all' }; openSheet(stmtSheet); },
   stmtF: a => { UI.stmt.f = a.dataset.f; renderSheet(false); },
-  lesson: a => { UI.lesson = { key: a.dataset.key, ans: null }; openSheet(lessonSheet); },
+  lesson: a => { if (UI.screen === 'kid' && learnLock(curKid(), { from: 'classic' })) return; UI.lesson = { key: a.dataset.key, ans: null }; openSheet(lessonSheet); },
   quiz: a => {
     const L = LESSONS.find(l => l.key === UI.lesson.key), i = +a.dataset.i; UI.lesson.ans = i; renderSheet(false);
     const kid = curKid();
@@ -5967,7 +5999,7 @@ let lastDay = dkey();
 setInterval(() => { if (!Store.ready) return; const d = dkey(); const t = Market.last; buildMarket(); if (d !== lastDay) { lastDay = d; applyInterest(); scheduleRender(); } else if (t !== Market.last && UI.screen === 'kid' && UI.tab === 'market') scheduleRender(); }, 60000);
 
 /* Character Growth lives in growth.js and reaches the app through this bridge. */
-window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, PRIZES, LOOKS, prizeInfo, hasPrize, grantPrize, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet };
+window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, PRIZES, LOOKS, prizeInfo, hasPrize, grantPrize, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet, mustLeft, learnLock };
 
 /* =========================================================
    Boot

@@ -36,7 +36,7 @@ const BANDS = [
   { id: 'makers', name: 'Makers', ages: '13 to 15', words: 18 },
 ];
 const BAND_IX = Object.fromEntries(BANDS.map((b, i) => [b.id, i]));
-const GSET = () => ({ cap: 20, off: {}, band: {}, country: 'nz', living: true, readAloud: true, ...((S().growth) || {}) });
+const GSET = () => ({ cap: 20, off: {}, band: {}, country: 'nz', living: true, readAloud: true, choresFirst: true, ...((S().growth) || {}) });
 function bandOf(kid) {
   const age = kid.age || 9, base = age <= 9 ? 0 : age <= 12 ? 1 : 2, shift = GSET().band[kid.id] || 0;
   return BANDS[clamp(base + shift, 0, BANDS.length - 1)].id;
@@ -748,6 +748,7 @@ function say(text) { const b = root && root.querySelector('.gw-say'); if (!b) re
 
 async function open(kidId, opts = {}) {
   const kid = Store.kids[kidId]; if (!kid) return;
+  if (C.learnLock && C.learnLock(kid, opts)) return; // must-dos first, when the family has that switch on
   mount(); Grow.kidId = kidId; Grow.need = opts.need || 0; Grow.view = 'hub'; Grow.tree = opts.tree || null; Grow.run = null;
   root.hidden = false; Grow.open = true; document.body.classList.add('gw-open'); Grow.sessionAt = Date.now(); Grow.breakShown = false;
   Sound.ensure(); Sound.whoosh();
@@ -1358,10 +1359,11 @@ function ensureLoaded(kid) { const band = bandOf(kid); if (!Packs[`money.${band}
 function card(kid) {
   const ready = ensureLoaded(kid), g = prog(kid), sug = ready ? suggestions(kid, 1)[0] : null, due = ready ? dueCards(kid).length : 0, echo = (g.echo || []).length, d = dayInfo(kid);
   if (ready) scanEchoesSoon(kid);
+  const lock = C.mustLeft ? C.mustLeft(kid) : null;
   const dots = TREES.map((t, i) => { const st = ready ? treeStats(kid, t.id) : { done: 0, total: 0 }, a = -Math.PI / 2 + i / 12 * Math.PI * 2; return `<i style="--th:${t.hue};left:${50 + Math.cos(a) * 38}%;top:${50 + Math.sin(a) * 38}%;--p:${st.total ? st.done / st.total : 0}"></i>`; }).join('');
   return `<section class="card glass cg-card"><header class="card-h"><span class="card-t">Character Growth</span><span class="card-r">Level ${charLevel(kid)}${titles(kid).length ? ` · ${esc(titles(kid)[0])}` : ''}</span></header>
     <button class="cg-main" data-act="gOpen" data-id="${kid.id}"><span class="cg-orbit" aria-hidden="true">${dots}<b class="num">${charLevel(kid)}</b></span>
-      <span class="cg-txt"><small>${sug ? `Next · ${esc(TREE[sug.tree].name)}` : ready ? 'All caught up' : 'Loading your skill trees…'}</small><b>${sug ? `${esc(sug.icon)} ${esc(local(sug.title))}` : (TREES.length === 1 ? `Start ${esc(TREES[0].name)}` : `Explore your ${TREES.length} skill trees`)}</b><span class="cg-bar"><i style="width:${Math.min(100, d.xp / XP.dayCap * 100)}%"></i></span><small>${d.xp} of ${XP.dayCap} XP earned from lessons today</small></span></button>
+      <span class="cg-txt"><small>${lock ? `🔒 Opens after your must-dos · ${lock.length} to go` : sug ? `Next · ${esc(TREE[sug.tree].name)}` : ready ? 'All caught up' : 'Loading your skill trees…'}</small><b>${sug ? `${esc(sug.icon)} ${esc(local(sug.title))}` : (TREES.length === 1 ? `Start ${esc(TREES[0].name)}` : `Explore your ${TREES.length} skill trees`)}</b><span class="cg-bar"><i style="width:${Math.min(100, d.xp / XP.dayCap * 100)}%"></i></span><small>${d.xp} of ${XP.dayCap} XP earned from lessons today</small></span></button>
     ${due || echo ? `<div class="cg-chips">${due ? `<button data-act="gOpen" data-id="${kid.id}">🔁 ${due} review${due === 1 ? '' : 's'} due</button>` : ''}${echo ? `<button data-act="gOpen" data-id="${kid.id}">💡 ${echo} question${echo === 1 ? '' : 's'} about your week</button>` : ''}</div>` : ''}
   </section>`;
 }
@@ -1912,6 +1914,7 @@ function parentView() {
     <h3 class="pgroup-t">Settings<small>For the whole family</small></h3>
     <div class="group">
       <div class="row wrap"><div class="row-main"><b>Daily learning time</b><small>After this, new lessons wait until tomorrow</small></div><div class="chips">${[[10, '10 min'], [20, '20 min'], [30, '30 min'], [45, '45 min'], [0, 'No limit']].map(([v, l]) => `<button class="chip-p ${set.cap === v ? 'on' : ''}" data-act="gpCap" data-v="${v}">${l}</button>`).join('')}</div></div>
+      <div class="row"><div class="row-main"><b>Must-dos before lessons</b><small>Lessons open once today’s must-do jobs are done. A job counts as soon as its photo is in.</small></div>${sw('gpChores', set.choresFirst, 'Must-dos before lessons')}</div>
       <div class="row wrap"><div class="row-main"><b>${esc(kid.name)}’s lessons</b><small>Picked from age ${kid.age || '?'}. Move a band if they need more or less challenge.</small></div><div class="chips">${[[-1, 'One band easier'], [0, 'Automatic'], [1, 'One band harder']].map(([v, l]) => `<button class="chip-p ${(set.band[kid.id] || 0) === v ? 'on' : ''}" data-act="gpBand" data-v="${v}">${l}</button>`).join('')}</div></div>
       <div class="row wrap"><div class="row-main"><b>Country rules</b><small>Tax, GST, KiwiSaver or super, and prices</small></div><div class="chips">${[['nz', 'New Zealand'], ['au', 'Australia']].map(([v, l]) => `<button class="chip-p ${set.country === v ? 'on' : ''}" data-act="gpCountry" data-v="${v}">${l}</button>`).join('')}</div></div>
       ${Cases.length ? `<div class="row"><div class="row-main"><b>Stories about living people</b><small>Real stories include people like Melanie Perkins and Elon Musk</small></div>${sw('gpLiving', set.living, 'Stories about living people')}</div>` : ''}
@@ -1928,6 +1931,7 @@ Object.assign(C.ACT, {
   gpCountry: a => setG({ country: a.dataset.v }),
   gpLiving: () => setG({ living: !GSET().living }),
   gpRead: () => setG({ readAloud: !GSET().readAloud }),
+  gpChores: () => { const on = !GSET().choresFirst; setG({ choresFirst: on }); C.track('growth.setting', { choresFirst: on }, null); },
   gpTree: a => setG({ off: { [a.dataset.id]: !(GSET().off || {})[a.dataset.id] } }),
   gpATree: a => { Grow.parent.aTree = a.dataset.id; Grow.parent.aLesson = null; C.render(); },
   gpALesson: a => { Grow.parent.aLesson = a.dataset.id; C.render(); },

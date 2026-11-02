@@ -22,6 +22,7 @@ function say(text) { const b = root && root.querySelector('.gw-say'); if (!b) re
 
 async function open(kidId, opts = {}) {
   const kid = Store.kids[kidId]; if (!kid) return;
+  if (C.learnLock && C.learnLock(kid, opts)) return; // must-dos first, when the family has that switch on
   mount(); Grow.kidId = kidId; Grow.need = opts.need || 0; Grow.view = 'hub'; Grow.tree = opts.tree || null; Grow.run = null;
   root.hidden = false; Grow.open = true; document.body.classList.add('gw-open'); Grow.sessionAt = Date.now(); Grow.breakShown = false;
   Sound.ensure(); Sound.whoosh();

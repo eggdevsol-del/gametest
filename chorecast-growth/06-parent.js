@@ -48,6 +48,7 @@ function parentView() {
     <h3 class="pgroup-t">Settings<small>For the whole family</small></h3>
     <div class="group">
       <div class="row wrap"><div class="row-main"><b>Daily learning time</b><small>After this, new lessons wait until tomorrow</small></div><div class="chips">${[[10, '10 min'], [20, '20 min'], [30, '30 min'], [45, '45 min'], [0, 'No limit']].map(([v, l]) => `<button class="chip-p ${set.cap === v ? 'on' : ''}" data-act="gpCap" data-v="${v}">${l}</button>`).join('')}</div></div>
+      <div class="row"><div class="row-main"><b>Must-dos before lessons</b><small>Lessons open once today’s must-do jobs are done. A job counts as soon as its photo is in.</small></div>${sw('gpChores', set.choresFirst, 'Must-dos before lessons')}</div>
       <div class="row wrap"><div class="row-main"><b>${esc(kid.name)}’s lessons</b><small>Picked from age ${kid.age || '?'}. Move a band if they need more or less challenge.</small></div><div class="chips">${[[-1, 'One band easier'], [0, 'Automatic'], [1, 'One band harder']].map(([v, l]) => `<button class="chip-p ${(set.band[kid.id] || 0) === v ? 'on' : ''}" data-act="gpBand" data-v="${v}">${l}</button>`).join('')}</div></div>
       <div class="row wrap"><div class="row-main"><b>Country rules</b><small>Tax, GST, KiwiSaver or super, and prices</small></div><div class="chips">${[['nz', 'New Zealand'], ['au', 'Australia']].map(([v, l]) => `<button class="chip-p ${set.country === v ? 'on' : ''}" data-act="gpCountry" data-v="${v}">${l}</button>`).join('')}</div></div>
       ${Cases.length ? `<div class="row"><div class="row-main"><b>Stories about living people</b><small>Real stories include people like Melanie Perkins and Elon Musk</small></div>${sw('gpLiving', set.living, 'Stories about living people')}</div>` : ''}
@@ -64,6 +65,7 @@ Object.assign(C.ACT, {
   gpCountry: a => setG({ country: a.dataset.v }),
   gpLiving: () => setG({ living: !GSET().living }),
   gpRead: () => setG({ readAloud: !GSET().readAloud }),
+  gpChores: () => { const on = !GSET().choresFirst; setG({ choresFirst: on }); C.track('growth.setting', { choresFirst: on }, null); },
   gpTree: a => setG({ off: { [a.dataset.id]: !(GSET().off || {})[a.dataset.id] } }),
   gpATree: a => { Grow.parent.aTree = a.dataset.id; Grow.parent.aLesson = null; C.render(); },
   gpALesson: a => { Grow.parent.aLesson = a.dataset.id; C.render(); },
