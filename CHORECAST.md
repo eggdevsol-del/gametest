@@ -53,7 +53,7 @@ Optional variables:
 - `PAYWALL=on`: turns on the plans (free limits, kid locks, purchases). Leave it unset until launch; until then every family has Plus so everything can be tried. There's no beta: the plans start at launch.
 - `WELCOME_DAYS`: how long a new family's free welcome fortnight of Plus lasts (default 14; 0 turns it off, as the paywall test does).
 - `APP_BUNDLE_ID`: the iOS app's bundle id. App Store purchases for any other app are refused.
-- `APP_ORIGINS`: the iOS app's page origin (such as `chorecast://app`), allowed to call the API with a sign-in token.
+- `APP_ORIGINS`: the iOS app's page origin, allowed to call the API with a sign-in token. Default `capacitor://localhost`, which is what the Capacitor app in `ios/` uses.
 - `APNS_KEY`, `APNS_KEY_ID`, `APNS_TEAM_ID` and `APNS_TOPIC`: the Apple push key (the .p8 file's text), its id, the team id and the bundle id. Without them no notifications are sent.
 
 ### Running it for real families
@@ -166,6 +166,31 @@ Tables are created by numbered SQL files in [`server/migrations/`](server/migrat
   - **Preview the free plan** (Grown-ups, then Family, only while `PAYWALL` is off): `settings.planPreview = 'free'` makes the server and every device behave exactly as Free, so the free plan can be tried before launch. Upgrade moments show but aren't recorded.
 - **Accessibility:** every text size is a multiple of `--ts`. On an iPhone or iPad it follows the system text size (Settings, Display & Brightness, Text Size, measured from Apple's body text style), and a grown-up can choose Standard, Large or Larger for a device in Grown-ups, then Family; it stays between 0.9 and 1.35 so screens still fit (the jars go two by two at bigger sizes). Every button and control has a name a screen reader can say (icon-only buttons have an `aria-label`), the 3D layer is hidden from screen readers, and moving effects respect "reduce motion".
 - **Grown-ups:** a PIN-locked dashboard to review photos, approve pay, check habits, set the money rules, follow Character Growth and manage family devices.
+
+## The iOS app
+
+`ios/` is the iPhone and iPad app, made with [Capacitor](https://capacitorjs.com) 8. It carries the same web app (`public/`, copied in by `npx cap sync ios`) in a web view, so it looks and works exactly like the website, and adds what a web page can't do through one Swift plugin, `ios/App/App/ChorecastNative.swift`. `public/chorecast/native.js` is that plugin's JavaScript side: it makes `window.ChorecastApp` inside the app and does nothing on the website.
+
+- **Signing in:** the app sends `x-chorecast-client: app` when signing in, signing up or pairing, and the server answers with a token instead of a cookie. The token lives only in the Keychain (this device only) and goes with every request as `Authorization: Bearer`. A fresh install starts signed out.
+- **Server address:** `plugins.ChorecastNative.apiBase` in `capacitor.config.json` (the live server). The app's pages come from `capacitor://localhost`, which the server lets in by default (`APP_ORIGINS`).
+- **Live sync:** the event stream opens with a one-minute ticket, and a dropped stream reconnects with a new one.
+- **Photos** load through the API with the token and show from memory.
+- **Purchases:** StoreKit 2. The family's id goes with each purchase as its `appAccountToken`. A purchase stays open with Apple until the server has it (`finish`); one cut off part way waits in `cc:buys` and is sent again next time the app opens.
+- **Also:** notifications (the push address goes to `PUT /api/push`), the share sheet for statement exports, printing reports, and Terms and Privacy opening on the website in Safari.
+
+### Building and running it
+
+1. `npm install`, then `npx cap sync ios` after any change to `public/`.
+2. `npx cap open ios`, pick an iPad simulator or a plugged-in iPad, and Run.
+3. Purchases in Xcode use `ios/App/App/Chorecast.storekit` (every product, NZ prices). The server refuses purchases signed by Xcode on purpose, so buying all the way through needs App Store Connect's sandbox (TestFlight).
+4. To try it against a server on this Mac, set `apiBase` to `http://localhost:8787` in `ios/App/App/capacitor.config.json` (that copy is rebuilt by every sync, so it never gets committed).
+
+### Before TestFlight
+
+- In Xcode, Signing & Capabilities: choose the Apple Developer team and add **Push Notifications** and **In-App Purchase**. The bundle id is `app.chorecast.ios` (the server's `APP_BUNDLE_ID` must match).
+- App Store Connect: the app record, every product id in `server/plans.js`, Family Sharing for plans, and the App Store Server Notifications URL (`/api/appstore/notifications`).
+- The server needs this branch's `APP_ORIGINS` default live (or set `APP_ORIGINS=capacitor://localhost` on Railway), and the `APNS_*` settings for notifications.
+- The app icon and launch screen use Chorecast's sun mark on its blue. A designed icon can replace `ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png` (1024 by 1024, no transparency).
 
 ## Tech notes
 

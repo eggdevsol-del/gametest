@@ -1,0 +1,18 @@
+{
+  "appId": "app.chorecast.ios",
+  "appName": "Chorecast",
+  "webDir": "public",
+  "backgroundColor": "#1F6FD6",
+  "ios": {
+    "contentInset": "never",
+    "limitsNavigationsToAppBoundDomains": false
+  },
+  "plugins": {
+    "ChorecastNative": {
+      "apiBase": "https://chorecast.up.railway.app"
+    }
+  },
+  "server": {
+    "appStartPath": "chorecast/index.html"
+  }
+}

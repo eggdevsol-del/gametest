@@ -25,9 +25,10 @@ const ROOT = path.resolve(arg('static') || process.env.STATIC_DIR || path.join(h
 const PORT = Number(arg('port') || process.env.PORT || 8787);
 // Links in emails always use this address, never the request's Host header (which anyone can set).
 const APP_URL = (process.env.APP_URL || (process.env.RAILWAY_PUBLIC_DOMAIN ? 'https://' + process.env.RAILWAY_PUBLIC_DOMAIN : `http://localhost:${PORT}`)).replace(/\/$/, '');
-// Origins of the native app's bundled pages (comma-separated, such as chorecast://app), allowed to call the API with a
-// sign-in token instead of a cookie.
-const APP_ORIGINS = (process.env.APP_ORIGINS || '').split(',').map(o => o.trim()).filter(Boolean);
+// Origins of the native app's bundled pages (comma-separated), allowed to call the API with a sign-in token instead of
+// a cookie. The iOS app (Capacitor) serves its pages from capacitor://localhost. No cookies cross origins, so this lets
+// nothing in that a plain HTTP client couldn't already do.
+const APP_ORIGINS = (process.env.APP_ORIGINS || 'capacitor://localhost').split(',').map(o => o.trim()).filter(Boolean);
 // The iOS app's bundle id: App Store purchases for any other app are refused. APPSTORE_TEST_ROOT (a PEM file) swaps
 // Apple's root certificate for a test one, for local tests only; it is never set on Railway.
 const BUNDLE_ID = process.env.APP_BUNDLE_ID || 'app.chorecast.ios';

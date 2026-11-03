@@ -3,9 +3,10 @@ import globals from 'globals'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 // The server, scripts and tests run on Node; the app's separate script files run in the browser. index.html's
-// inline script and the built growth.js aren't linted here (the tests parse and run them instead).
+// inline script and the built growth.js aren't linted here (the tests parse and run them instead). ios/ is the native
+// app (Capacitor), with build output and a copy of public/ inside it.
 export default defineConfig([
-  globalIgnores(['node_modules', 'public/chorecast/growth.js', 'public/chorecast/vendor', 'chorecast-growth']),
+  globalIgnores(['node_modules', 'public/chorecast/growth.js', 'public/chorecast/vendor', 'chorecast-growth', 'ios']),
   {
     files: ['server/**/*.js', 'scripts/**/*.mjs', 'tests/**/*.mjs', 'eslint.config.js'],
     extends: [js.configs.recommended],

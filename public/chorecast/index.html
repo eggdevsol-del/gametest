@@ -1440,6 +1440,7 @@ a.row{text-decoration:none;color:inherit}
 <input type="file" id="cam" accept="image/*" capture="environment" hidden>
 <input type="file" id="pick" accept="image/*" hidden>
 
+<script src="native.js"></script>
 <script src="vendor/three-r128.min.js"></script>
 <script src="catalog.js"></script>
 <script src="island.js"></script>
@@ -1838,6 +1839,22 @@ async function initStore() {
    the server, which pushes it to the family's other devices over an event stream. Offline writes wait in an outbox,
    and the last snapshot is kept on the device so the app still opens without a connection. */
 const Acct = { me: null, available: false, clientId: uid(), es: null, down: false, outbox: lsGet('cc:outbox', []), flushing: false };
+/* Inside the iOS app (native.js), this same page talks to the Chorecast server from another origin. It signs in with a
+   token kept in the Keychain and sent as "Authorization: Bearer" (the server hands one over when asked with
+   x-chorecast-client: app), opens its event stream with a one-minute ticket, and loads family photos through the API,
+   since an <img> can't send the token. */
+const Native = { on: !!(window.ChorecastApp && window.ChorecastApp.native), base: '', token: null, ready: null };
+if (Native.on) Native.ready = Promise.race([ChorecastApp.session(), sleep(5000).then(() => ({}))]).then(c => { Native.base = String(c.apiBase || 'https://chorecast.up.railway.app').replace(/\/+$/, ''); Native.token = c.token || null; }).catch(() => {});
+const apiUrl = u => Native.base + u;
+// Terms and privacy open on the Chorecast website (in Safari): the app's own pages can't be opened outside it.
+if (Native.on) document.addEventListener('click', e => {
+  const a = e.target.closest && e.target.closest('a[target="_blank"]'), href = a && a.getAttribute('href');
+  if (href && !/^[a-z][\w+.-]*:/i.test(href) && Native.base) a.href = Native.base + '/chorecast/' + href.replace(/^\.?\//, '');
+}, true);
+function apiHeaders(h = {}) {
+  if (Native.on) { h['x-chorecast-client'] = 'app'; if (Native.token) h.authorization = 'Bearer ' + Native.token; }
+  return h;
+}
 /* ---------- Plans ----------
    The family's plan comes from the server (GET /api/plan). Until launch the server has no paywall and every family has
    everything. Inside the iOS app, window.ChorecastApp buys and restores with StoreKit 2:
@@ -1846,6 +1863,18 @@ const Acct = { me: null, available: false, clientId: uid(), es: null, down: fals
 const PRODUCT_IDS = ['chorecast.plus.yearly', 'chorecast.plus.monthly', 'chorecast.family.yearly', 'chorecast.family.monthly', 'chorecast.lifetime', 'chorecast.lifetime.founding'];
 const FREE_LIMITS = { name: 'Free', kids: 2, grownups: 1, allLessons: false, extras: false, shop: 'starter', funds: 'starter', rules: false };
 const Plan = { plan: 'plus', paywall: false, packs: [], moments: {}, limits: { name: 'Plus', kids: 99, grownups: 2, allLessons: true, extras: true, shop: 'all', funds: 'all', rules: true }, foundingLeft: 0, appAccountToken: null };
+// An App Store purchase goes to the server, then Apple is told it's done (finish). Until then it waits in cc:buys,
+// and is sent again when the app next opens, so a dropped connection never loses what a family paid for.
+async function sendPurchase(p) {
+  const list = lsGet('cc:buys', []).filter(x => x.transactionId !== p.transactionId); list.push(p); lsSet('cc:buys', list);
+  const r = p.kind === 'shop' ? await api('POST', '/api/shop/buy', { transaction: p.jws, kidId: p.kidId, wish: p.wish }) : await api('POST', '/api/purchases/apple', { transaction: p.jws });
+  lsSet('cc:buys', lsGet('cc:buys', []).filter(x => x.transactionId !== p.transactionId));
+  if (p.transactionId && window.ChorecastApp && ChorecastApp.finish) ChorecastApp.finish(p.transactionId).catch(() => {});
+  return r;
+}
+async function retryPurchases() {
+  for (const p of lsGet('cc:buys', [])) { try { await sendPurchase(p); } catch (e) { if (!e.status || e.status === 401 || e.status === 403) break; lsSet('cc:buys', lsGet('cc:buys', []).filter(x => x.transactionId !== p.transactionId)); } }
+}
 async function loadPlan() {
   if (Store.mode !== 'server') return;
   try { Object.assign(Plan, await api('GET', '/api/plan')); planTidy(); scheduleRender(); } catch (e) {}
@@ -1889,18 +1918,20 @@ const WISH_MAX = 3, WISH_IC = { animals: '🐾', farm: '🌾', play: '🎈', gar
 const wishList = k => (Array.isArray(k.wishes) ? k.wishes : k.wish && k.wish.t ? [k.wish] : []).filter(w => w && w.t && shopDef(w.t));
 const kidRoom = () => kidsList().filter(k => !k.example).length < Plan.limits.kids;
 async function api(method, url, body, raw) {
-  const headers = { 'x-client-id': Acct.clientId };
+  const headers = apiHeaders({ 'x-client-id': Acct.clientId });
   if (raw) headers['content-type'] = raw.type || 'application/octet-stream'; else if (body !== undefined) headers['content-type'] = 'application/json';
-  const r = await fetch(url, { method, credentials: 'same-origin', headers, body: raw || (body !== undefined ? JSON.stringify(body) : undefined) });
+  const r = await fetch(apiUrl(url), { method, credentials: 'same-origin', headers, body: raw || (body !== undefined ? JSON.stringify(body) : undefined) });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) { const e = new Error(j.error || 'Something went wrong. Try again.'); e.status = r.status; e.code = j.code; throw e; }
+  // Signing in or pairing in the app: keep the new token in the Keychain, never in the page's own storage.
+  if (Native.on && typeof j.token === 'string') { Native.token = j.token; delete j.token; await ChorecastApp.setToken(Native.token).catch(() => {}); }
   return j;
 }
 async function probeServer() {
-  if (!/^https?:$/.test(location.protocol)) return null;
+  if (Native.on) await Native.ready; else if (!/^https?:$/.test(location.protocol)) return null;
   try {
-    const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
-    if (r.status === 401) { fetch('/api/health').then(h => h.json()).then(h => { Acct.mail = !!h.mail; if (h.paywall) Object.assign(Plan, { plan: 'free', paywall: true, limits: FREE_LIMITS }); scheduleRender(); }).catch(() => {}); return { signedOut: true }; }
+    const r = await fetch(apiUrl('/api/auth/me'), { credentials: 'same-origin', headers: apiHeaders() });
+    if (r.status === 401) { fetch(apiUrl('/api/health')).then(h => h.json()).then(h => { Acct.mail = !!h.mail; if (h.paywall) Object.assign(Plan, { plan: 'free', paywall: true, limits: FREE_LIMITS }); scheduleRender(); }).catch(() => {}); return { signedOut: true }; }
     if (!r.ok || !/json/.test(r.headers.get('content-type') || '')) return null;
     return { me: await r.json() };
   } catch (e) { const me = lsGet('cc:me', null); return me ? { me, offline: true } : null; }
@@ -1914,14 +1945,20 @@ async function startServerMode(me) {
   const cached = lsGet(cacheKey(), null); if (cached) applySnapshot(cached);
   try { applySnapshot(await api('GET', '/api/sync')); cacheSoon(); }
   catch (e) { if (e.status === 401) return signedOut(); if (!cached) toast('Offline. Showing what this device saved last.'); }
-  openStream(); flushOutbox(); loadPlan(); track('app.open', { screen: me.role });
+  openStream(); flushOutbox(); loadPlan(); retryPurchases(); track('app.open', { screen: me.role });
   // In the iOS app: this device's push address, so grown-ups hear about finished jobs and kids get their reminder.
   const app = window.ChorecastApp;
   if (app && app.pushToken) app.pushToken().then(t => t && t.token && api('PUT', '/api/push', { token: t.token, environment: t.environment, tz: Intl.DateTimeFormat().resolvedOptions().timeZone })).catch(() => {});
 }
-function openStream() {
-  if (Acct.es) Acct.es.close();
-  const es = new EventSource('/api/stream?client=' + encodeURIComponent(Acct.clientId)); Acct.es = es;
+async function openStream() {
+  if (Acct.es) Acct.es.close(); Acct.es = null; clearTimeout(Acct.esRetry);
+  let q = 'client=' + encodeURIComponent(Acct.clientId);
+  if (Native.on) {
+    try { q += '&ticket=' + encodeURIComponent((await api('POST', '/api/stream/ticket', {})).ticket); }
+    catch (e) { if (e.status === 401) return signedOut(); Acct.down = true; Acct.esRetry = setTimeout(openStream, 5000); return; }
+    if (Store.mode !== 'server') return;
+  }
+  const es = new EventSource(apiUrl('/api/stream?' + q)); Acct.es = es;
   es.addEventListener('change', e => {
     const m = JSON.parse(e.data);
     if (m.col === 'family') Store.settings = m.data; else if (m.data) Store[m.col][m.id] = { ...m.data, id: m.id }; else delete Store[m.col][m.id];
@@ -1929,7 +1966,11 @@ function openStream() {
   });
   es.addEventListener('signedout', () => signedOut('This device was removed from the family.'));
   es.onopen = () => { if (Acct.down) { Acct.down = false; resync(); } flushOutbox(); };
-  es.onerror = () => { Acct.down = true; };
+  es.onerror = () => {
+    Acct.down = true;
+    // A ticket works once, so the app reconnects with a new one instead of letting the stream retry with the old.
+    if (Native.on && Acct.es === es) { es.close(); Acct.es = null; Acct.esRetry = setTimeout(openStream, 3000); }
+  };
 }
 async function resync() {
   loadPlan();
@@ -1960,7 +2001,8 @@ async function flushOutbox() {
 }
 addEventListener('online', () => { if (Store.mode === 'server') { flushOutbox(); resync(); } });
 function signedOut(msg) {
-  if (Acct.es) Acct.es.close(); Acct.es = null;
+  if (Acct.es) Acct.es.close(); Acct.es = null; clearTimeout(Acct.esRetry);
+  if (Native.on && Native.token) { Native.token = null; ChorecastApp.setToken(null).catch(() => {}); }
   for (const k of ['cc:me', 'cc:outbox', cacheKey()]) { try { localStorage.removeItem(k); } catch (e) {} }
   Acct.me = null; Acct.outbox = []; Store.mode = 'local'; applySnapshot({}); loadLocal();
   UI.auth = { mode: 'signin', err: msg || '' }; UI.unlocked = false; UI.screen = 'signin'; render();
@@ -1968,8 +2010,8 @@ function signedOut(msg) {
 // Crashes go to the server's error log (on the Chorecast website only), at most 5 per page load.
 let errSent = 0;
 function reportError(message, stack) {
-  if (errSent >= 5 || !/^https?:$/.test(location.protocol) || Store.mode === 'cloud') return; errSent++;
-  fetch('/api/errors', { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ message: String(message).slice(0, 500), stack: String(stack || '').slice(0, 2000), where: `${UI.screen || 'boot'}${UI.ptab && UI.screen === 'parent' ? '/' + UI.ptab : ''}` }) }).catch(() => {});
+  if (errSent >= 5 || !(Native.on || /^https?:$/.test(location.protocol)) || Store.mode === 'cloud') return; errSent++;
+  fetch(apiUrl('/api/errors'), { method: 'POST', credentials: 'same-origin', headers: apiHeaders({ 'content-type': 'application/json' }), body: JSON.stringify({ message: String(message).slice(0, 500), stack: String(stack || '').slice(0, 2000), where: `${UI.screen || 'boot'}${UI.ptab && UI.screen === 'parent' ? '/' + UI.ptab : ''}` }) }).catch(() => {});
 }
 addEventListener('error', e => { if (e.error || e.message) reportError(e.message, e.error && e.error.stack); });
 addEventListener('unhandledrejection', e => { const r = e.reason; if (r && r.status) return; reportError(r && r.message ? r.message : r, r && r.stack); });
@@ -1986,7 +2028,11 @@ async function flushEvents() {
   try { await api('POST', '/api/events', { events: list }); } catch (e) { if (!e.status) { Events.q.unshift(...list); Events.q.splice(0, Math.max(0, Events.q.length - 500)); } return; }
   if (Events.q.length) { clearTimeout(Events.t); Events.t = setTimeout(flushEvents, 1500); }
 }
-addEventListener('pagehide', () => { if (Events.q.length && navigator.sendBeacon) navigator.sendBeacon('/api/events', new Blob([JSON.stringify({ events: Events.q.splice(0, 100) })], { type: 'application/json' })); });
+addEventListener('pagehide', () => {
+  if (!Events.q.length) return;
+  if (Native.on) fetch(apiUrl('/api/events'), { method: 'POST', keepalive: true, headers: apiHeaders({ 'content-type': 'application/json' }), body: JSON.stringify({ events: Events.q.splice(0, 100) }) }).catch(() => {});
+  else if (navigator.sendBeacon) navigator.sendBeacon('/api/events', new Blob([JSON.stringify({ events: Events.q.splice(0, 100) })], { type: 'application/json' }));
+});
 // First sign-in on a device that already has local data: offer to move it into the (empty) family account.
 function localData() { const d = lsGet(LOCAL_KEY, null); return d && Object.keys(d.kids || {}).length ? d : null; }
 async function importLocal() {
@@ -2025,7 +2071,7 @@ async function savePhoto(blob, kind = 'proof') {
     return { ref: 'a:' + r.id, url: r.url };
   }
   if (Store.mode === 'server') {
-    try { const r = await api('POST', '/api/photos?kind=' + kind, undefined, blob); return { ref: 's:' + r.id, url: '/api/photos/' + r.id }; }
+    try { const r = await api('POST', '/api/photos?kind=' + kind, undefined, blob); return { ref: 's:' + r.id, url: Native.on ? (serverUrls[r.id] = URL.createObjectURL(blob)) : '/api/photos/' + r.id }; }
     catch (e) { if (e.status) throw e; } // offline: keep it on this device instead
   }
   const id = uid();
@@ -2036,11 +2082,23 @@ async function savePhoto(blob, kind = 'proof') {
 function photoAttr(ref) {
   if (!ref) return '';
   if (ref.startsWith('a:')) return `src="/_blob/${esc(ref.slice(2))}"`;
-  if (ref.startsWith('s:')) return `src="/api/photos/${esc(ref.slice(2))}"`;
+  if (ref.startsWith('s:')) { const id = ref.slice(2); return !Native.on ? `src="/api/photos/${esc(id)}"` : serverUrls[id] ? `src="${serverUrls[id]}"` : `data-sphoto="${esc(id)}"`; }
   const id = ref.slice(2);
   return localUrls[id] ? `src="${localUrls[id]}"` : `data-lphoto="${esc(id)}"`;
 }
+// In the iOS app, family photos come through the API with the sign-in token and are shown from memory.
+const serverUrls = {}, serverLoads = {};
+function serverPhoto(id) {
+  return serverLoads[id] || (serverLoads[id] = fetch(apiUrl('/api/photos/' + encodeURIComponent(id)), { headers: apiHeaders() })
+    .then(r => (r.ok ? r.blob() : null)).then(b => (b ? (serverUrls[id] = URL.createObjectURL(b)) : null))
+    .catch(() => { delete serverLoads[id]; return null; }));
+}
 async function hydratePhotos(root) {
+  await Promise.all($$('img[data-sphoto]', root).map(async img => {
+    const id = img.dataset.sphoto; img.removeAttribute('data-sphoto');
+    const u = await serverPhoto(id);
+    if (u) img.src = u; else img.closest('.ph')?.classList.add('ph-missing');
+  }));
   for (const img of $$('img[data-lphoto]', root)) {
     const id = img.dataset.lphoto; img.removeAttribute('data-lphoto');
     if (!localUrls[id]) { const b = await IDB.get(id).catch(() => null); if (b) localUrls[id] = URL.createObjectURL(b); }
@@ -5985,6 +6043,8 @@ async function authRun(fn) {
   try { await fn(a); } catch (e) { a.err = e.status ? e.message : 'Can’t reach Chorecast. Check the internet connection.'; Sound.error(); }
   a.busy = false; if (UI.screen === 'signin') render();
 }
+// What this device is called in Grown-ups, Family. iPads describe themselves as Macs, so they're told apart by touch.
+const deviceLabel = () => (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform) ? 'iPad' : /iPhone/.test(navigator.userAgent) ? 'iPhone' : navigator.platform || 'Grown-up device');
 async function afterAuth(me, recovery) {
   await startServerMode(me); Store.ready = true; buildMarket(); applyInterest();
   const wc = lsGet('cc:welcomeChoice', null); if (wc) { track('onboard.step', { step: 'welcome', choice: wc }, null); lsSet('cc:welcomeChoice', null); }
@@ -6953,11 +7013,11 @@ const ACT = {
   tourAgain: () => { const kid = curKid(); if (!kid) return; UI.tab = 'today'; UI.tour = { kidId: kid.id, i: guideFor(kid) ? 0 : -1 }; scrollTo(0, 0); render(); tourSpeak(); },
   tourDone: () => { const kid = curKid(), st = kid && UI.tour ? tourSteps(kid)[UI.tour.i] : null; tourEnd('finished'); if (st && st.first) ACT.brief({ dataset: { key: st.first.key } }); },
   authOpen: () => { lsSet('cc:localOnly', false); UI.auth = { mode: 'signin' }; UI.screen = 'signin'; UI.unlocked = false; render(); },
-  authSignin: () => authRun(async a => afterAuth(await api('POST', '/api/auth/login', { email: a.email, password: a.password, deviceName: navigator.platform || 'Grown-up device' }))),
+  authSignin: () => authRun(async a => afterAuth(await api('POST', '/api/auth/login', { email: a.email, password: a.password, deviceName: deviceLabel() }))),
   authSignup: () => authRun(async a => {
     const join = a.mode === 'join';
     if (!a.consent) throw Object.assign(new Error('Tick the box to say you’re a parent or guardian and agree to the terms.'), { status: 400 });
-    let r; try { r = await api('POST', '/api/auth/signup', { email: a.email, password: a.password, name: a.name, invite: join ? a.invite : undefined, consent: true, deviceName: navigator.platform || 'Grown-up device' }); }
+    let r; try { r = await api('POST', '/api/auth/signup', { email: a.email, password: a.password, name: a.name, invite: join ? a.invite : undefined, consent: true, deviceName: deviceLabel() }); }
     catch (e) { if (join && e.code === 'exists') e.message = 'That email already has a Chorecast account, and an account can’t join a second family yet. Use a different email to join.'; throw e; }
     await afterAuth(r, r.recovery);
   }),
@@ -6985,7 +7045,10 @@ const ACT = {
     const b = UI.shopB, app = window.ChorecastApp; if (!b || b.busy) return; b.busy = true; b.err = ''; renderSheet();
     try {
       let r;
-      if (app && app.buy) { const t = await app.buy(b.id, Plan.appAccountToken); if (!t || !t.jws) throw new Error(''); r = await api('POST', '/api/shop/buy', { transaction: t.jws, kidId: b.kid, wish: b.wish }); }
+      if (app && app.buy) {
+        const t = await app.buy(b.id, Plan.appAccountToken); if (!t || !t.jws) { b.busy = false; return renderSheet(); }
+        r = await sendPurchase({ kind: 'shop', jws: t.jws, transactionId: t.transactionId, kidId: b.kid, wish: b.wish });
+      }
       else r = await api('POST', '/api/shop/buy', { productId: b.id, kidId: b.kid, wish: b.wish });
       if (r && r.ok) { const k = b.kid && Store.kids[b.kid]; closeSheet(); await loadShop(); await loadPlan(); Sound.cash(); FX.rain(); FX.burst(innerWidth / 2, innerHeight * 0.4, CONF, 36); toast(k ? `${shopName(b.id)} for ${k.name}. Thank you!` : `Thank you! ${shopName(b.id)} is open for the whole family.`); return; }
     } catch (e) { b.err = e.message || 'That didn’t go through. Try again.'; }
@@ -7012,7 +7075,7 @@ const ACT = {
     const p = UI.planS, app = window.ChorecastApp; if (!app || p.busy) return; p.busy = true; p.err = ''; renderSheet();
     try {
       const r = await app.buy(a.dataset.id, Plan.appAccountToken);
-      if (r && r.jws) { await api('POST', '/api/purchases/apple', { transaction: r.jws }); await loadPlan(); closeSheet(); toast(`Thank you! ${Plan.limits.name} is on for the whole family.`); return; }
+      if (r && r.jws) { await sendPurchase({ kind: 'plan', jws: r.jws, transactionId: r.transactionId }); await loadPlan(); closeSheet(); toast(`Thank you! ${Plan.limits.name} is on for the whole family.`); return; }
     } catch (e) { p.err = e.message || 'That didn’t go through. Try again.'; }
     p.busy = false; renderSheet();
   },

@@ -1,0 +1,430 @@
+{
+  "identifier": "C4A0E1F2",
+  "nonRenewingSubscriptions": [],
+  "products": [
+    {
+      "displayPrice": "229.0",
+      "familyShareable": true,
+      "internalID": "13628775",
+      "localizations": [
+        {
+          "description": "Plus for good.",
+          "displayName": "Chorecast Lifetime",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.lifetime",
+      "referenceName": "Lifetime",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "149.0",
+      "familyShareable": true,
+      "internalID": "18965197",
+      "localizations": [
+        {
+          "description": "Plus for good, for the first 1,000 families.",
+          "displayName": "Founding Family",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.lifetime.founding",
+      "referenceName": "Founding Family",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "28704890",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: money",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.money",
+      "referenceName": "Pack money",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "33530306",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: character",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.character",
+      "referenceName": "Pack character",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "78792385",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: work",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.work",
+      "referenceName": "Pack work",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "44097247",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: make",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.make",
+      "referenceName": "Pack make",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "91953649",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: give",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.give",
+      "referenceName": "Pack give",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "74973744",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: maths",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.maths",
+      "referenceName": "Pack maths",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "15040865",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: words",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.words",
+      "referenceName": "Pack words",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "37906774",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: time",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.time",
+      "referenceName": "Pack time",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "25187189",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: home",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.home",
+      "referenceName": "Pack home",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "27406216",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: mind",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.mind",
+      "referenceName": "Pack mind",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "34074781",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: online",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.online",
+      "referenceName": "Pack online",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "31023080",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: world",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.world",
+      "referenceName": "Pack world",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": true,
+      "internalID": "13691055",
+      "localizations": [
+        {
+          "description": "Opens one subject for the whole family, for good.",
+          "displayName": "Lesson pack: invest",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.pack.invest",
+      "referenceName": "Pack invest",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "1.99",
+      "familyShareable": false,
+      "internalID": "15447707",
+      "localizations": [
+        {
+          "description": "XP for one kid's island.",
+          "displayName": "500 XP",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.xp.500",
+      "referenceName": "XP 500",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "3.99",
+      "familyShareable": false,
+      "internalID": "79742172",
+      "localizations": [
+        {
+          "description": "XP for one kid's island.",
+          "displayName": "1,200 XP",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.xp.1200",
+      "referenceName": "XP 1200",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "7.99",
+      "familyShareable": false,
+      "internalID": "59890568",
+      "localizations": [
+        {
+          "description": "XP for one kid's island.",
+          "displayName": "3,000 XP",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.xp.3000",
+      "referenceName": "XP 3000",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "14.99",
+      "familyShareable": false,
+      "internalID": "13419276",
+      "localizations": [
+        {
+          "description": "XP for one kid's island.",
+          "displayName": "7,500 XP",
+          "locale": "en_NZ"
+        }
+      ],
+      "productID": "chorecast.xp.7500",
+      "referenceName": "XP 7500",
+      "type": "Consumable"
+    }
+  ],
+  "settings": {
+    "_applicationInternalID": "6700000000",
+    "_developerTeamID": "",
+    "_failTransactionsEnabled": false,
+    "_lastSynchronizedDate": 0,
+    "_locale": "en_NZ",
+    "_storefront": "NZL",
+    "_storeKitErrors": []
+  },
+  "subscriptionGroups": [
+    {
+      "id": "21700001",
+      "localizations": [],
+      "name": "Chorecast plans",
+      "subscriptions": [
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "89.99",
+          "familyShareable": true,
+          "groupNumber": 2,
+          "internalID": "10052288",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "Every kid, every lesson, the whole island.",
+              "displayName": "Chorecast Plus, yearly",
+              "locale": "en_NZ"
+            }
+          ],
+          "productID": "chorecast.plus.yearly",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "Chorecast Plus, yearly",
+          "subscriptionGroupID": "21700001",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "9.99",
+          "familyShareable": true,
+          "groupNumber": 2,
+          "internalID": "16286693",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "Every kid, every lesson, the whole island.",
+              "displayName": "Chorecast Plus, monthly",
+              "locale": "en_NZ"
+            }
+          ],
+          "productID": "chorecast.plus.monthly",
+          "recurringSubscriptionPeriod": "P1M",
+          "referenceName": "Chorecast Plus, monthly",
+          "subscriptionGroupID": "21700001",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "119.99",
+          "familyShareable": true,
+          "groupNumber": 1,
+          "internalID": "22030985",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "Plus, for two homes and the grandparents.",
+              "displayName": "Chorecast Family, yearly",
+              "locale": "en_NZ"
+            }
+          ],
+          "productID": "chorecast.family.yearly",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "Chorecast Family, yearly",
+          "subscriptionGroupID": "21700001",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "13.99",
+          "familyShareable": true,
+          "groupNumber": 1,
+          "internalID": "31742334",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "Plus, for two homes and the grandparents.",
+              "displayName": "Chorecast Family, monthly",
+              "locale": "en_NZ"
+            }
+          ],
+          "productID": "chorecast.family.monthly",
+          "recurringSubscriptionPeriod": "P1M",
+          "referenceName": "Chorecast Family, monthly",
+          "subscriptionGroupID": "21700001",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        }
+      ]
+    },
+    {
+      "id": "21700002",
+      "localizations": [],
+      "name": "Island Club",
+      "subscriptions": [
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "2.99",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "25549726",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "A monthly XP gift and the members' prize for one kid.",
+              "displayName": "Island Club",
+              "locale": "en_NZ"
+            }
+          ],
+          "productID": "chorecast.club.monthly",
+          "recurringSubscriptionPeriod": "P1M",
+          "referenceName": "Island Club",
+          "subscriptionGroupID": "21700002",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 4,
+    "minor": 0
+  }
+}
