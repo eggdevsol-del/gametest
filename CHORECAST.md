@@ -53,7 +53,7 @@ Optional variables:
 - `PAYWALL=on`: turns on the plans (free limits, kid locks, purchases). Leave it unset until launch; until then every family has Plus so everything can be tried. There's no beta: the plans start at launch.
 - `WELCOME_DAYS`: how long a new family's free welcome fortnight of Plus lasts (default 14; 0 turns it off, as the paywall test does).
 - `APP_BUNDLE_ID`: the iOS app's bundle id. App Store purchases for any other app are refused.
-- `APP_ORIGINS`: the iOS app's page origin (such as `chorecast://app`), allowed to call the API with a sign-in token.
+- `APP_ORIGINS`: the iOS app's page origin, allowed to call the API with a sign-in token. Default `capacitor://localhost`, which is what the Capacitor app (branch `capacitor-ios`) uses.
 - `APNS_KEY`, `APNS_KEY_ID`, `APNS_TEAM_ID` and `APNS_TOPIC`: the Apple push key (the .p8 file's text), its id, the team id and the bundle id. Without them no notifications are sent.
 
 ### Running it for real families
