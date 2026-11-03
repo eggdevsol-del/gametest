@@ -362,129 +362,116 @@ window.ChorecastIsland = K => {
     g.add(t); return t;
   }
 
-  /* ---------- New land ----------
-     Every piece of land is a big half-round lobe growing out of the island's edge: a circle centred just inside the
-     rim, so about half of it shows beyond the old edge. Its ground is the lawn's own colour, height and grass density,
-     so it reads as one island; only what's on it differs (trees, a lake dug into it, a beach sloping into the sea, a
-     garden plot). Lobes are spread round the island with the front kept clear for the path and the waterfall. Where
-     two meet, the later one sits a hair lower so the earlier one covers it. A lobe's zone is the middle of its outer
-     half: where animals wander and things go. */
-  // Each piece's favourite spot round the edge (radians; π/2 is the front). The front, from ARC1 round to ARC0, is
-  // kept clear for the path and the waterfall.
-  const AT = { plot: 2.55, farm: PI, stable: 3.84, lookout: 4.45, orchard: 5.06, lake: 5.67, grove: 2 * PI + 0.02, beach: 2 * PI + 0.72 };
-  const ORDER = Object.keys(AT), ARC0 = 2.2, ARC1 = 2 * PI + 0.94, SOIL = 0x8a5f3c;
-  // Where the owned pieces go. They all get the same size: as big as fits (up to about half the island) with every
-  // piece in the open arc and a gap between neighbours, so no two pieces ever touch. Each starts at its favourite
-  // spot and is nudged along the edge until it clears its neighbours. A piece bought later re-spaces the rest;
-  // what's on them is stored relative to its piece (toLocal and toWorld), so it moves with it.
-  function layout(keys, R) {
-    const own = ORDER.filter(k => keys.includes(k)), n = own.length, out = {}; if (!n) return out;
-    const span = ARC1 - ARC0, s = Math.sin(Math.min(PI / 2, span / n / 2)), r = Math.min(0.52 * R, 0.96 * R * s / (1.05 - 0.3 * s)), d = 0.96 * R + 0.3 * r;
-    const gap = 2 * Math.asin(Math.min(1, 1.05 * r / d)), a = own.map(k => AT[k]);
-    for (let pass = 0; pass < 6; pass++) {
-      for (let i = 0; i < n; i++) a[i] = Math.max(a[i], i ? a[i - 1] + gap : ARC0 + gap / 2);
-      for (let i = n - 1; i >= 0; i--) a[i] = Math.min(a[i], i < n - 1 ? a[i + 1] - gap : ARC1 - gap / 2);
-    }
-    own.forEach((k, i) => { const ox = Math.cos(a[i]), oz = Math.sin(a[i]), cx = ox * d, cz = oz * d; out[k] = { key: k, a: a[i], r, cx, cz, ox, oz, x: cx + ox * r * 0.42, z: cz + oz * r * 0.42, zr: r * 0.5 }; });
-    return out;
-  }
-  // A spot on a piece as (u, v) in its own frame (u outward, v along the edge, in piece radii), and back.
+  /* ---------- Islands of land ----------
+     Every piece of land a kid owns is a floating island of its own, which the studio travels to with its arrows. Each
+     is built by itself at the origin, with the home island's lawn colour, grass and rock, and faces the camera's usual
+     side (FRONT): the beach's sand and sea and the stable's open yard face the viewer. What's on an island is stored
+     relative to it (isle, lu, lv, in island radii: toLocal and toWorld), so things keep their spot if it changes size.
+     Its zones are where things go and animals wander; a zone's `not` marks spots to keep out of (the lake, the
+     mountain, the veggie patch, the stable). */
+  const FRONT = 0.7, SOIL = 0x8a5f3c;
+  // An island's frame: its centre, radius r and (ox, oz), the way its front faces.
+  const isle = key => { const r = key === 'sky' ? 0.85 : 1; return { key, a: FRONT, r, cx: 0, cz: 0, ox: Math.cos(FRONT), oz: Math.sin(FRONT) }; };
+  // A spot on an island as (u, v) in its own frame (u towards the front, v across, in island radii), and back.
   const toLocal = (L, x, z) => ({ u: +(((x - L.cx) * L.ox + (z - L.cz) * L.oz) / L.r).toFixed(4), v: +((-(x - L.cx) * L.oz + (z - L.cz) * L.ox) / L.r).toFixed(4) });
   const toWorld = (L, u, v) => [L.cx + (u * L.ox - v * L.oz) * L.r, L.cz + (u * L.oz + v * L.ox) * L.r];
-  // o: { seed, rock, lawnC, h(x, z) ground height, col(x, z) ground colour, side (rim colour) }. Returns the ground mesh.
-  function lobe(g, L, y, o) {
-    add(g, K.strata(rough(new T.ConeGeometry(L.r * 0.92, 1.15, 12, 5).rotateX(PI), 0.13, o.seed), o.seed, o.rock), mat(0xffffff, { vc: true, flat: true }), L.cx + L.ox * L.r * 0.2, -0.64, L.cz + L.oz * L.r * 0.2);
+  // The island itself: rock underneath like the home island's, a soil band, and the grassy top with a rounded rim.
+  // o: { seed, rock, lawnC, h(x, z) ground height, col(x, z, h) ground colour, side (rim colour) }. Returns the ground.
+  function ground(g, L, y, o) {
+    const H = 1.3 * L.r + 0.1, sa = FRONT + 2.4, rk = mat(0xffffff, { vc: true, flat: true });
+    add(g, K.strata(rough(new T.ConeGeometry(L.r * 0.92, H, 12, 6).rotateX(PI), 0.16, o.seed), o.seed, o.rock), rk, L.cx, -0.115 - H / 2, L.cz);
+    add(g, K.strata(rough(new T.ConeGeometry(L.r * 0.32, L.r * 0.6, 7, 3).rotateX(PI), 0.08, o.seed + 1), o.seed + 1, o.rock), rk, L.cx + Math.cos(sa) * L.r * 0.45, -0.2 - L.r * 0.3, L.cz + Math.sin(sa) * L.r * 0.45);
     add(g, new T.CylinderGeometry(L.r, L.r * 0.95, 0.24, 40), mat(SOIL), L.cx, -0.05, L.cz);
-    // The rim rounds down below ground level, so where this lobe overlaps the island or another lobe, no edge shows.
     add(g, new T.CylinderGeometry(L.r + 0.05, L.r, y - 0.08, 48, 1, true), mat(o.side || o.lawnC), L.cx, (y - 0.03 + 0.05) / 2, L.cz).userData.noInk = true;
     const n = 44, E = L.r + 0.05, geo = new T.PlaneGeometry(2 * E, 2 * E, n, n).rotateX(-P2), p = geo.attributes.position, cols = [], C = new T.Color(), mud = new T.Color(0x5a4a32);
     for (let i = 0; i < p.count; i++) { let x = p.getX(i), z = p.getZ(i), lip = 0; const d = Math.hypot(x, z); if (d > E) { x *= E / d; z *= E / d; lip = -0.03; } const wx = L.cx + x, wz = L.cz + z, h = (o.h ? o.h(wx, wz) : 0) + lip; p.setXYZ(i, x, h, z); C.set(o.col ? o.col(wx, wz, h) : o.lawnC); if (!o.col) C.lerp(mud, K.smooth01(0.006, 0.03, -h)); C.convertSRGBToLinear(); cols.push(C.r, C.g, C.b); }
     geo.setAttribute('color', new T.Float32BufferAttribute(cols, 3)); geo.computeVertexNormals();
     const s = add(g, geo, mat(0xffffff, { vc: true }), L.cx, y, L.cz); s.userData.noInk = true; return s;
   }
-  // Grass on a lobe at the lawn's own density, leaving out the main island (it has its own) and anything in `ex`.
-  const lobeGrass = (g, ctx, seed, L, y, ex = {}) => { if (ctx.meadow) meadow(g, seed, L, y, ctx, ex); return K.grassField(g, seed, Math.round(ctx.dens * PI * (L.r + 0.03) ** 2), ctx.grow ?? K.MOWN + 0.3, ctx.night, { exact: true, cx: L.cx, cz: L.cz, rad: L.r + 0.03, y, tint: ctx.tint, skip: [0, 0, ctx.R - 0.015], ...ex }); };
-  function meadow(g, seed, L, y, ctx, ex) {
+  // Grass on an island at the lawn's own density, leaving out anything in `ex`.
+  const isleGrass = (g, ctx, seed, L, y, ex = {}) => { if (ctx.meadow) meadow(g, seed, L, y, ex); return K.grassField(g, seed, Math.round(ctx.dens * PI * (L.r + 0.03) ** 2), ctx.grow ?? K.MOWN + 0.3, ctx.night, { exact: true, cx: L.cx, cz: L.cz, rad: L.r + 0.03, y, tint: ctx.tint, ...ex }); };
+  function meadow(g, seed, L, y, ex) {
     const n = Math.round(L.r * L.r * 70 / (1.1 * 1.1)), fm = new T.InstancedMesh(new T.SphereGeometry(0.013, 6, 4), mat(0xffffff), n), d0 = new T.Object3D(), rr = K.mulberry(seed + 41), c = new T.Color(); let k = 0;
-    for (let i = 0; i < n && k < n; i++) { const a = rr() * PI * 2, r0 = Math.sqrt(rr()) * L.r * 0.95, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0; if (Math.hypot(x, z) < ctx.R || (ex.not && ex.not(x, z)) || (ex.clear && ex.clear.some(([cx, cz, cr]) => Math.hypot(x - cx, z - cz) < cr)) || (ex.dens && rr() > ex.dens(x, z))) continue; d0.position.set(x, y + 0.03 + rr() * 0.02 + (ex.ground ? ex.ground(x, z) : 0), z); d0.updateMatrix(); fm.setMatrixAt(k, d0.matrix); fm.setColorAt(k++, c.set([0xff6b9d, 0xffd43b, 0xffffff, 0xc084fc, 0xff8c42][k % 5])); }
+    for (let i = 0; i < n && k < n; i++) { const a = rr() * PI * 2, r0 = Math.sqrt(rr()) * L.r * 0.95, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0; if ((ex.not && ex.not(x, z)) || (ex.clear && ex.clear.some(([cx, cz, cr]) => Math.hypot(x - cx, z - cz) < cr)) || (ex.dens && rr() > ex.dens(x, z))) continue; d0.position.set(x, y + 0.03 + rr() * 0.02 + (ex.ground ? ex.ground(x, z) : 0), z); d0.updateMatrix(); fm.setMatrixAt(k, d0.matrix); fm.setColorAt(k++, c.set([0xff6b9d, 0xffd43b, 0xffffff, 0xc084fc, 0xff8c42][k % 5])); }
     fm.count = k; fm.userData.noInk = true; fm.userData.ownMat = true; g.add(fm);
   }
-  // Posts along a lobe's outer arc (beyond the old edge), for fences and stone edging.
-  const arc = (L, R, n, f, inset = 0.06) => { for (let i = 0; i < n; i++) { const a = i / n * PI * 2, x = L.cx + Math.cos(a) * (L.r - inset), z = L.cz + Math.sin(a) * (L.r - inset); if (Math.hypot(x, z) > R + 0.05) f(x, z, a, i); } };
-  // How far out a point is across a lobe: -1 where it joins the island, 1 at its outer edge.
+  // Posts round an island's edge, for fences and stone edging.
+  const arc = (L, n, f, inset = 0.06) => { for (let i = 0; i < n; i++) { const a = i / n * PI * 2; f(L.cx + Math.cos(a) * (L.r - inset), L.cz + Math.sin(a) * (L.r - inset), a, i); } };
+  // How far towards the front a point is: -1 at the back edge, 1 at the front.
   const outward = (L, x, z) => ((x - L.cx) * L.ox + (z - L.cz) * L.oz) / L.r;
-  // Builds every piece of land the kid owns (the paddock is built by the island itself, with lobe()). ctx.lobes is
-  // the layout.
-  // ctx: { top, lawnC, R (lawn radius), S, night, flat, tint, rock, dens (blades per unit area) }.
-  function land(g, k, ctx) {
-    const { top, lawnC, R } = ctx, zones = {}, surf = [], fx = [], own = new Set(k.land || []), tag = (m, key) => { m.userData.lobe = key; return m; };
-    ORDER.forEach((key, idx) => {
-      if (key === 'farm' || !own.has(key) || !ctx.lobes[key]) return;
-      const L = ctx.lobes[key], seed = k.seed + key.length * 17, y = top - 0.004 - idx * 0.0015, zone = { x: L.x, z: L.z, r: L.zr, y, out: R, lobe: key }, base = { seed, rock: ctx.rock, lawnC };
-      if (key === 'plot') {
-        // A tilled garden patch in the lawn, with a timber edge and furrows across it.
-        const s = tag(lobe(g, L, y, base), key); s.userData.hab = 'field'; surf.push(s);
-        const pw = L.r * 1.0, pd2 = L.r * 0.62, px = L.x + L.ox * L.r * 0.02, pz = L.z + L.oz * L.r * 0.02, rot = -L.a + P2;
-        const inPatch = (x, z) => { const dx = x - px, dz = z - pz, u = dx * Math.cos(rot) - dz * Math.sin(rot), v = dx * Math.sin(rot) + dz * Math.cos(rot); return Math.abs(u) < pw / 2 + 0.03 && Math.abs(v) < pd2 / 2 + 0.03; };
-        lobeGrass(g, ctx, seed, L, y, { not: inPatch });
-        const patch = new T.Group(); patch.position.set(px, y, pz); patch.rotation.y = rot; g.add(patch);
-        const soil = tag(bx(patch, pw, 0.03, pd2, 0x6b4a2a, 0, 0.012, 0), key); soil.userData.hab = 'plot'; surf.push(soil);
-        for (let i = 0; i < 6; i++) bx(patch, pw - 0.04, 0.014, 0.03, 0x4a3020, 0, 0.03, -pd2 / 2 + 0.05 + i * (pd2 - 0.1) / 5);
-        [[0, pd2 / 2], [0, -pd2 / 2]].forEach(([x0, z0]) => bx(patch, pw + 0.04, 0.04, 0.025, WOOD, x0, 0.02, z0)); [-1, 1].forEach(sx => bx(patch, 0.025, 0.04, pd2, WOOD, sx * pw / 2, 0.02, 0));
-        zones.plot = { x: px, z: pz, r: Math.min(pw, pd2) * 0.42, y: y + 0.03 };
-      } else if (key === 'stable') {
-        const s = tag(lobe(g, L, y, base), key); s.userData.hab = 'stable'; surf.push(s); lobeGrass(g, ctx, seed, L, y);
-        const st = new T.Group(); st.position.set(L.x + L.ox * L.r * 0.2, y, L.z + L.oz * L.r * 0.2); st.rotation.y = Math.atan2(-L.ox, -L.oz); g.add(st);
-        bx(st, 0.36, 0.17, 0.17, 0x9c5a3a, 0, 0.085, 0); tilt(bx(st, 0.4, 0.014, 0.23, 0x5b5f6e, 0, 0.2, 0), 0.3); for (let i = 0; i < 3; i++) bx(st, 0.07, 0.1, 0.006, 0x3b2a24, -0.11 + i * 0.11, 0.06, 0.086);
-        let prev = null; arc(L, R, 34, (x, z) => { bx(g, 0.024, 0.1, 0.024, 0xb07a4a, x, y + 0.05, z); if (prev && Math.hypot(x - prev[0], z - prev[1]) < 0.2) [0.045, 0.085].forEach(hh => stick(g, [prev[0], y + hh, prev[1]], [x, y + hh, z], 0.006, 0xf7f3ea)); prev = [x, z]; });
-        zones.stable = { ...zone, x: L.x - L.ox * L.r * 0.05, z: L.z - L.oz * L.r * 0.05 };
-      } else if (key === 'lookout') {
-        const h = 0.5, s0 = tag(lobe(g, L, y, base), key); s0.userData.hab = 'field'; surf.push(s0); lobeGrass(g, ctx, seed, L, y, { clear: [[L.x, L.z, L.r * 0.55]] });
-        add(g, rough(new T.CylinderGeometry(L.r * 0.3, L.r * 0.6, h, 10, 3), 0.04, seed + 3), mat(0x8a8f96, { flat: true }), L.x, y + h / 2, L.z);
-        const s = tag(add(g, new T.CircleGeometry(L.r * 0.33, 24).rotateX(-P2), mat(lawnC), L.x, y + h + 0.002, L.z), key); s.userData.hab = 'lookout'; s.userData.noInk = true; surf.push(s);
-        for (let i = 0; i < 12; i++) { const a = i * 0.62, rr = L.r * (0.62 - i * 0.026); bx(g, 0.06, 0.012, 0.035, 0xc9b38a, L.x + Math.cos(a) * rr, y + 0.02 + i * h / 12, L.z + Math.sin(a) * rr).rotation.y = -a; }
-        zones.lookout = { x: L.x, z: L.z, r: L.r * 0.24, y: y + h };
-      } else if (key === 'orchard') {
-        const s = tag(lobe(g, L, y, base), key); s.userData.hab = 'orchard'; surf.push(s); lobeGrass(g, ctx, seed, L, y);
-        arc(L, R, 30, (x, z, a, i) => { const o = add(g, rough(new T.BoxGeometry(0.075, 0.05, 0.045), 0.006, seed + i), mat(i % 2 ? 0xb7ada0 : 0xa59b8e, { flat: true }), x, y + 0.02, z); o.rotation.y = -a; });
-        zones.orchard = zone;
-      } else if (key === 'lake') {
-        // A lake dug into the ground: the bank slopes down into it, and the water sits in the hollow.
-        const lr = L.r * 0.52, dip = (x, z) => -0.085 * (1 - K.smooth01(lr - 0.06, lr + 0.05, Math.hypot(x - L.x, z - L.z)));
-        const s0 = tag(lobe(g, L, y, { ...base, h: dip }), key); s0.userData.hab = 'lakeshore'; surf.push(s0); lobeGrass(g, ctx, seed, L, y, { clear: [[L.x, L.z, lr + 0.03]], ground: dip });
-        const w = K.waterSheet(g, L.x, L.z, lr + 0.08, y - 0.022, (x, z) => dip(x, z) + 0.022, { night: ctx.night, deepAt: 0.06, deep: 0x16609e }); tag(w, key); w.userData.hab = 'lake'; surf.push(w);
-        for (let i = 0; i < 6; i++) { const a = i * 1.1, pad = add(g, new T.CylinderGeometry(0.022, 0.022, 0.003, 7), mat(0x4caf50), L.x + Math.cos(a) * lr * 0.6, y - 0.019, L.z + Math.sin(a) * lr * 0.55); pad.userData.noInk = true; }
-        ring(10, (a, i) => { const rx = L.x + Math.cos(a) * (lr + 0.02), rz = L.z + Math.sin(a) * (lr + 0.02); if (i % 3 === 2) return; for (let j = 0; j < 3; j++) cyl(g, 0.004, 0.004, 0.08 + j * 0.02, 0x6b8a3a, rx + j * 0.01, y + dip(rx, rz) + 0.04, rz, 4); });
-        zones.lake = { x: L.x, z: L.z, r: lr * 0.7, y: y - 0.026, water: true };
-      } else if (key === 'grove') {
-        const s = tag(lobe(g, L, y, base), key); s.userData.hab = 'grove'; surf.push(s); lobeGrass(g, ctx, seed, L, y);
-        arc(L, R, 9, (x, z, a, i) => species(g, x, y, z, ['kauri', 'pine', 'nikau', 'cabbage', 'oak'][i % 5], seed + i, 0.95), 0.12);
-        for (let i = 0; i < 6; i++) { const a = i * 1.7, f = new T.Group(); f.position.set(L.x + Math.cos(a) * L.zr * 0.9, y, L.z + Math.sin(a) * L.zr * 0.9); g.add(f); for (let q = 0; q < 5; q++) { const o = cn(f, 0.012, 0.12, 0x3f8a3f, 0, 0.04, 0, 4); o.rotation.set(Math.sin(q * 1.3) * 0.7, q * 1.26, Math.cos(q * 1.3) * 0.7); o.scale.z = 0.35; } }
-        zones.grove = { ...zone, r: L.zr * 0.85 };
-      } else if (key === 'beach') {
-        // The lawn gives way to sand, which slopes gently down into the sea at the outer edge: wet sand, shallows
-        // and foam where the waves lap.
-        const sand = new T.Color(0xf1d9a0), wet = new T.Color(0xc9ae78), grassC = new T.Color(lawnC), C2 = new T.Color();
-        const h = (x, z) => -0.095 * K.smooth01(0.32, 0.98, outward(L, x, z));
-        const col = (x, z, hh) => { const u = outward(L, x, z), toSand = K.smooth01(0.06, 0.34, u); return C2.copy(grassC).lerp(sand, toSand).lerp(wet, K.smooth01(0.012, 0.035, -hh)).getHex(); };
-        const s = tag(lobe(g, L, y, { ...base, h, col, side: 0xe0c48a }), key); s.userData.hab = 'beach'; surf.push(s);
-        lobeGrass(g, ctx, seed, L, y, { dens: (x, z) => 1 - K.smooth01(0.04, 0.3, outward(L, x, z)) });
-        const w = K.waterSheet(g, L.cx, L.cz, L.r + 0.05, y - 0.03, (x, z) => h(x, z) + 0.03, { night: ctx.night, deepAt: 0.07, foam: 0.014, shallow: 0x8ff0e6, deep: 0x1f8fd0, n: 56 }); w.userData.hab = 'beach';
-        [[0.3, -0.35], [-0.2, -0.45], [0.42, 0.1]].forEach(([dx, dz], i) => { const px = L.x + (dx * -L.oz + dz * L.ox) * L.r, pz = L.z + (dx * L.ox + dz * L.oz) * L.r; add(g, rough(new T.DodecahedronGeometry(0.05, 0), 0.01, seed + i), mat(0x8a8f96, { flat: true }), px, y + h(px, pz), pz); });
-        zones.beach = { ...zone, x: L.x - L.ox * L.r * 0.02, z: L.z - L.oz * L.r * 0.02, r: L.zr * 0.6 };
-      }
-    });
-    if (own.has('sky')) {
-      const isl = new T.Group(), sz = -0.45 * ctx.S, h = 1.1, rr = 0.42; isl.position.set(-0.2, h, sz); g.add(isl);
-      add(isl, K.strata(rough(new T.ConeGeometry(rr * 0.9, 0.6, 10, 4).rotateX(PI), 0.06, k.seed + 71), k.seed + 71, ctx.rock), mat(0xffffff, { vc: true, flat: true }), 0, -0.28, 0);
-      const s = add(isl, new T.CylinderGeometry(rr + 0.03, rr, 0.06, 32), mat(lawnC), 0, 0.17, 0); s.userData.hab = 'sky'; surf.push(s);
-      K.grassField(isl, k.seed + 72, Math.round(ctx.dens * PI * rr * rr), K.MOWN + 0.3, ctx.night, { cx: 0, cz: 0, rad: rr, y: 0.2, tint: ctx.tint });
-      for (let i = 0; i < 12; i++) bx(g, 0.07, 0.006, 0.014, WOOD, 0.1, top + 0.04 + i * (h - top + 0.1) / 12, sz + 0.3);
-      [-0.03, 0.03].forEach(dx => stick(g, [0.1 + dx, top, sz + 0.3], [0.1 + dx, h + 0.17, sz + 0.3], 0.002, 0xeadfc4));
-      fx.push(t => { isl.position.y = h + Math.sin(t * 1.1) * 0.025; });
-      zones.sky = { x: -0.2, z: sz, r: rr * 0.75, y: h + 0.2, float: isl };
+  // Builds one piece of land as an island (the farm's is built by index.html, with ground()).
+  // ctx: { top, lawnC, night, flat, tint, rock, dens (blades per unit area), grow, meadow }. Returns { L, zones, surf, tick }.
+  function land(g, k, key, ctx) {
+    const { lawnC } = ctx, L = isle(key), y = ctx.top, seed = k.seed + key.length * 17, base = { seed, rock: ctx.rock, lawnC }, zones = { lawn: { x: L.cx, z: L.cz, r: L.r * 0.8, y } }, surf = [], fx = [];
+    const on = (m, hab) => { m.userData.hab = hab; surf.push(m); return m; };
+    if (key === 'plot') {
+      // A tilled veggie patch in the middle, with a timber edge and furrows across it.
+      const pw = L.r, pd2 = L.r * 0.62, rot = -L.a + P2;
+      const inPatch = (x, z, m = 0.03) => { const dx = x - L.cx, dz = z - L.cz, u = dx * Math.cos(rot) - dz * Math.sin(rot), v = dx * Math.sin(rot) + dz * Math.cos(rot); return Math.abs(u) < pw / 2 + m && Math.abs(v) < pd2 / 2 + m; };
+      on(ground(g, L, y, base), 'field'); isleGrass(g, ctx, seed, L, y, { not: inPatch });
+      const patch = new T.Group(); patch.position.set(L.cx, y, L.cz); patch.rotation.y = rot; g.add(patch);
+      on(bx(patch, pw, 0.03, pd2, 0x6b4a2a, 0, 0.012, 0), 'plot');
+      for (let i = 0; i < 6; i++) bx(patch, pw - 0.04, 0.014, 0.03, 0x4a3020, 0, 0.03, -pd2 / 2 + 0.05 + i * (pd2 - 0.1) / 5);
+      [[0, pd2 / 2], [0, -pd2 / 2]].forEach(([x0, z0]) => bx(patch, pw + 0.04, 0.04, 0.025, WOOD, x0, 0.02, z0)); [-1, 1].forEach(sx => bx(patch, 0.025, 0.04, pd2, WOOD, sx * pw / 2, 0.02, 0));
+      zones.plot = { x: L.cx, z: L.cz, r: Math.min(pw, pd2) * 0.42, y: y + 0.03 };
+      zones.lawn.not = (x, z) => inPatch(x, z, 0.08);
+    } else if (key === 'stable') {
+      // A stable at the back of a fenced yard, open to the front, where horses and farm animals roam.
+      const sx = L.cx - L.ox * L.r * 0.5, sz = L.cz - L.oz * L.r * 0.5;
+      on(ground(g, L, y, base), 'stable'); isleGrass(g, ctx, seed, L, y, { clear: [[sx, sz, 0.3]] });
+      const st = new T.Group(); st.position.set(sx, y, sz); st.rotation.y = Math.atan2(L.ox, L.oz); st.scale.setScalar(1.3); g.add(st);
+      bx(st, 0.36, 0.17, 0.17, 0x9c5a3a, 0, 0.085, 0); tilt(bx(st, 0.4, 0.014, 0.23, 0x5b5f6e, 0, 0.2, 0), 0.3); for (let i = 0; i < 3; i++) bx(st, 0.07, 0.1, 0.006, 0x3b2a24, -0.11 + i * 0.11, 0.06, 0.086);
+      let prev = null; arc(L, 44, (x, z) => { bx(g, 0.024, 0.1, 0.024, 0xb07a4a, x, y + 0.05, z); if (prev && Math.hypot(x - prev[0], z - prev[1]) < 0.2) [0.045, 0.085].forEach(hh => stick(g, [prev[0], y + hh, prev[1]], [x, y + hh, z], 0.006, 0xf7f3ea)); prev = [x, z]; });
+      zones.stable = { x: L.cx + L.ox * L.r * 0.12, z: L.cz + L.oz * L.r * 0.12, r: L.r * 0.6, y, not: (x, z) => Math.hypot(x - sx, z - sz) < 0.36 };
+    } else if (key === 'lookout') {
+      // A rocky mountain in the middle, with steps winding up to a lookout on top.
+      const h = 0.62, mr = L.r * 0.6;
+      on(ground(g, L, y, base), 'field'); isleGrass(g, ctx, seed, L, y, { clear: [[L.cx, L.cz, mr - 0.02]] });
+      add(g, rough(new T.CylinderGeometry(L.r * 0.3, mr, h, 10, 3), 0.04, seed + 3), mat(0x8a8f96, { flat: true }), L.cx, y + h / 2, L.cz);
+      on(add(g, new T.CircleGeometry(L.r * 0.33, 24).rotateX(-P2), mat(lawnC), L.cx, y + h + 0.002, L.cz), 'lookout').userData.noInk = true;
+      for (let i = 0; i < 12; i++) { const a = i * 0.62, rr = L.r * (0.62 - i * 0.026); bx(g, 0.06, 0.012, 0.035, 0xc9b38a, L.cx + Math.cos(a) * rr, y + 0.02 + i * h / 12, L.cz + Math.sin(a) * rr).rotation.y = -a; }
+      zones.lookout = { x: L.cx, z: L.cz, r: L.r * 0.24, y: y + h };
+      zones.lawn.not = (x, z) => Math.hypot(x - L.cx, z - L.cz) < mr + 0.06;
+    } else if (key === 'orchard') {
+      on(ground(g, L, y, base), 'orchard'); isleGrass(g, ctx, seed, L, y);
+      arc(L, 40, (x, z, a, i) => { const o = add(g, rough(new T.BoxGeometry(0.075, 0.05, 0.045), 0.006, seed + i), mat(i % 2 ? 0xb7ada0 : 0xa59b8e, { flat: true }), x, y + 0.02, z); o.rotation.y = -a; });
+      zones.orchard = { x: L.cx, z: L.cz, r: L.r * 0.78, y };
+    } else if (key === 'lake') {
+      // A lake dug into the middle: the bank slopes down into it, and the water sits in the hollow.
+      const lr = L.r * 0.55, dip = (x, z) => -0.085 * (1 - K.smooth01(lr - 0.06, lr + 0.05, Math.hypot(x - L.cx, z - L.cz)));
+      on(ground(g, L, y, { ...base, h: dip }), 'lakeshore'); isleGrass(g, ctx, seed, L, y, { clear: [[L.cx, L.cz, lr + 0.03]], ground: dip });
+      on(K.waterSheet(g, L.cx, L.cz, lr + 0.08, y - 0.022, (x, z) => dip(x, z) + 0.022, { night: ctx.night, deepAt: 0.06, deep: 0x16609e }), 'lake');
+      for (let i = 0; i < 6; i++) { const a = i * 1.1, pad = add(g, new T.CylinderGeometry(0.022, 0.022, 0.003, 7), mat(0x4caf50), L.cx + Math.cos(a) * lr * 0.6, y - 0.019, L.cz + Math.sin(a) * lr * 0.55); pad.userData.noInk = true; }
+      ring(12, (a, i) => { const rx = L.cx + Math.cos(a) * (lr + 0.02), rz = L.cz + Math.sin(a) * (lr + 0.02); if (i % 3 === 2) return; for (let j = 0; j < 3; j++) cyl(g, 0.004, 0.004, 0.08 + j * 0.02, 0x6b8a3a, rx + j * 0.01, y + dip(rx, rz) + 0.04, rz, 4); });
+      zones.lake = { x: L.cx, z: L.cz, r: lr * 0.7, y: y - 0.026, water: true };
+      zones.lawn.not = (x, z) => Math.hypot(x - L.cx, z - L.cz) < lr + 0.08;
+    } else if (key === 'grove') {
+      // Native trees round the back and sides (the front stays open to see in), with ferns underneath.
+      on(ground(g, L, y, base), 'grove'); isleGrass(g, ctx, seed, L, y);
+      arc(L, 13, (x, z, a, i) => { if (Math.cos(a - L.a) > 0.35) return; species(g, x, y, z, ['kauri', 'pine', 'nikau', 'cabbage', 'oak'][i % 5], seed + i, 0.95); }, 0.14);
+      for (let i = 0; i < 8; i++) { const a = i * 1.7, f = new T.Group(); f.position.set(L.cx + Math.cos(a) * L.r * 0.55, y, L.cz + Math.sin(a) * L.r * 0.55); g.add(f); for (let q = 0; q < 5; q++) { const o = cn(f, 0.012, 0.12, 0x3f8a3f, 0, 0.04, 0, 4); o.rotation.set(Math.sin(q * 1.3) * 0.7, q * 1.26, Math.cos(q * 1.3) * 0.7); o.scale.z = 0.35; } }
+      zones.grove = { x: L.cx, z: L.cz, r: L.r * 0.62, y };
+    } else if (key === 'beach') {
+      // Grass at the back gives way to sand, which slopes gently down into the sea at the front: wet sand, shallows
+      // and foam where the waves lap.
+      const sand = new T.Color(0xf1d9a0), wet = new T.Color(0xc9ae78), grassC = new T.Color(lawnC), C2 = new T.Color();
+      const h = (x, z) => -0.095 * K.smooth01(0.32, 0.98, outward(L, x, z));
+      const col = (x, z, hh) => { const u = outward(L, x, z), toSand = K.smooth01(-0.2, 0.1, u); return C2.copy(grassC).lerp(sand, toSand).lerp(wet, K.smooth01(0.012, 0.035, -hh)).getHex(); };
+      on(ground(g, L, y, { ...base, h, col, side: 0xe0c48a }), 'beach');
+      isleGrass(g, ctx, seed, L, y, { dens: (x, z) => 1 - K.smooth01(-0.25, 0.02, outward(L, x, z)) });
+      const w = K.waterSheet(g, L.cx, L.cz, L.r + 0.05, y - 0.03, (x, z) => h(x, z) + 0.03, { night: ctx.night, deepAt: 0.07, foam: 0.014, shallow: 0x8ff0e6, deep: 0x1f8fd0, n: 56 }); w.userData.hab = 'beach';
+      [[0.3, 0.1], [-0.25, 0.05], [0.5, 0.3]].forEach(([dv, du], i) => { const [px, pz] = toWorld(L, du, dv); add(g, rough(new T.DodecahedronGeometry(0.05, 0), 0.01, seed + i), mat(0x8a8f96, { flat: true }), px, y + h(px, pz), pz); });
+      zones.beach = { x: L.cx + L.ox * L.r * 0.28, z: L.cz + L.oz * L.r * 0.28, r: L.r * 0.26, y };
+      zones.lawn = { x: L.cx - L.ox * L.r * 0.4, z: L.cz - L.oz * L.r * 0.4, r: L.r * 0.42, y };
+    } else if (key === 'sky') {
+      // A smaller island with clouds drifting round its rock.
+      on(ground(g, L, y, base), 'sky'); isleGrass(g, ctx, seed, L, y);
+      const puffs = new T.Group(); g.add(puffs);
+      for (let i = 0; i < 10; i++) { const a = i / 10 * PI * 2, rr = L.r * (0.8 + (i % 3) * 0.12), p = add(puffs, new T.SphereGeometry(0.11 + (i % 3) * 0.05, 12, 8), mat(0xffffff), Math.cos(a) * rr, -0.3 - (i % 2) * 0.28, Math.sin(a) * rr); p.scale.y = 0.6; p.userData.noInk = true; }
+      fx.push(t => { puffs.rotation.y = t * 0.08; });
+      zones.sky = { x: L.cx, z: L.cz, r: L.r * 0.75, y };
     }
-    return { zones, surf, tick: fx.length ? t => fx.forEach(f => f(t)) : null };
+    return { L, zones, surf, tick: fx.length ? t => fx.forEach(f => f(t)) : null };
   }
 
   /* ---------- House styles ---------- */
@@ -556,19 +543,18 @@ window.ChorecastIsland = K => {
     const b = add(s, new T.BoxGeometry(0.22, 0.085, 0.012), new T.MeshToonMaterial({ map: tx, gradientMap: K.GRAD }), 0, 0.15, 0); b.userData.ownMat = true;
     return s;
   }
-  // Adds the kid's chosen dressing. ctx: { top, R, S, house (group), houseAt (x, z), night }.
+  // Adds the kid's chosen dressing. ctx: { top, R, house (group), night } on the home island; on a land island ctx.isle
+  // is its frame, and only the fence and the sky go on it.
   function dress(g, k, ctx) {
-    const L = k.lookKeys || {}, { top, R } = ctx, fx = [];
-    if (L.fence && FENCE[L.fence]) {
-      // The fence follows the whole island's outline: the old edge where no land joins it, then round each lobe
-      // that has no fence of its own (the paddock and stable yard do), leaving a gap for the path.
-      const lobes = Object.values(ctx.lobes || {}).map(L => ({ key: L.key, L })), inLobe = (x, z, skip) => lobes.some(o => o !== skip && Math.hypot(x - o.L.cx, z - o.L.cz) < o.L.r + 0.02);
-      const pts = [], n = Math.round(R * 34);
-      for (let i = 0; i < n; i++) { const a = i / n * PI * 2, x = Math.cos(a) * (R - 0.05), z = Math.sin(a) * (R - 0.05); if (Math.abs(a - P2) < 0.14 || inLobe(x, z)) continue; pts.push([x, z, a]); }
-      for (const o of lobes) { if (o.key === 'farm' || o.key === 'stable') continue; const m = Math.round(o.L.r * 30); for (let i = 0; i < m; i++) { const a = i / m * PI * 2, x = o.L.cx + Math.cos(a) * (o.L.r - 0.04), z = o.L.cz + Math.sin(a) * (o.L.r - 0.04); if (Math.hypot(x, z) < R + 0.02 || inLobe(x, z, o)) continue; if (o.key === 'beach' && ((x - o.L.cx) * o.L.ox + (z - o.L.cz) * o.L.oz) / o.L.r > 0.25) continue; pts.push([x, z, a]); } }
+    const L = k.lookKeys || {}, { top, R } = ctx, fx = [], I = ctx.isle;
+    if (L.fence && FENCE[L.fence] && !(I && (I.key === 'farm' || I.key === 'stable'))) {
+      // Round the island's edge, leaving a gap at the front for the path (or, on the beach, the sand and the sea).
+      const pts = [], cr = I ? I.r - 0.04 : R - 0.05, n = Math.round(cr * 34);
+      for (let i = 0; i < n; i++) { const a = i / n * PI * 2; if (I ? I.key === 'beach' && Math.cos(a - I.a) > -0.15 : Math.abs(a - P2) < 0.14) continue; pts.push([Math.cos(a) * cr, Math.sin(a) * cr, a]); }
       const f = new T.Group(); f.position.y = top; g.add(f); pts.forEach(([x, z, a], i) => FENCE[L.fence](f, x, z, a, i));
       if (L.fence === 'rustic') pts.forEach(([x, z], i) => { const nb = pts.find(([x2, z2], j) => j > i && Math.hypot(x2 - x, z2 - z) < 0.16); if (nb) [0.05, 0.085].forEach(h => stick(f, [x, h, z], [nb[0], h, nb[1]], 0.006, 0xa86f3e)); });
     }
+    if (I) { if (L.sky && SKY_FX[L.sky]) { const f = SKY_FX[L.sky](g, I.r, top); if (f) fx.push(f); } return fx.length ? t => fx.forEach(f => f(t)) : null; }
     if (L.path) {
       const p = new T.Group(); p.position.y = top; g.add(p); const z0 = 0.1, z1 = R - 0.06, n = Math.max(4, Math.round((z1 - z0) / 0.07));
       for (let i = 0; i < n; i++) { const z = z0 + (z1 - z0) * i / (n - 1), x = 0.05 + Math.sin(i * 0.9) * 0.02;
@@ -593,5 +579,5 @@ window.ChorecastIsland = K => {
   const LAWN = { clover: [0x2f8a3f, 0x1f6b2a, 0x8fd45a], golden: [0x9fb33a, 0x6b7a2a, 0xe8e07a], autumn: [0xb98b3a, 0x7a5a2a, 0xe8a85a], sand: [0xe7d3a1, 0xc8b07a, 0xf6e7c0], meadow: [0x4c9a3a, 0x2a6b2a, 0xc4e86a] };
   // Cliff colours: middle, dark and light bands.
   const ROCK = { sandstone: [0xe2b77d, 0xc8925a, 0xf1d3a0], granite: [0x9aa0a8, 0x6f757d, 0xc8cdd3], volcanic: [0x3b3a40, 0x26252a, 0x5a5960], crystal: [0x9fe3ff, 0x6fb8e0, 0xdff6ff], gold: [0xffc93c, 0xd99a1a, 0xffe58a] };
-  return { items: M, species, land, layout, toLocal, toWorld, lobe, lobeGrass, arc, style, dress, LAWN, ROCK, AT, glow, emo };
+  return { items: M, species, land, isle, toLocal, toWorld, ground, isleGrass, arc, style, dress, LAWN, ROCK, glow, emo };
 };

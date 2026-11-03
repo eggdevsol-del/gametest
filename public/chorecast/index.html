@@ -1076,6 +1076,12 @@ a.row{text-decoration:none;color:inherit}
 .st-tip{align-self:center;margin-top:10px;padding:8px 16px;border-radius:999px;background:rgba(10,20,60,.3);font:700 14px var(--f-round);text-align:center;max-width:92%}
 .st-tip.on{background:#fff;color:#0D1530;animation:ready 1.6s ease-in-out infinite}
 .st-link{text-decoration:underline;font-weight:900;margin-left:6px}
+.st-nav{position:absolute;top:44%;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;transform:translateY(-50%);color:#fff;font:800 12px/1.15 var(--f-round);text-shadow:0 1px 3px rgba(10,30,90,.55)}
+.st-nav span{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.94);color:#0D1530;box-shadow:0 8px 20px -6px rgba(10,30,90,.45);transition:transform .15s}
+.st-nav:active span{transform:scale(.92)}
+.st-nav small{max-width:88px;text-align:center}
+.st-nav.prev{left:calc(var(--gut) + 4px)}
+.st-nav.next{right:calc(var(--gut-r) + 4px)}
 .st-panel{align-self:center;margin-top:auto;margin-bottom:10px;width:100%;max-width:540px;padding:16px 18px;border-radius:24px;background:rgba(255,255,255,.95);color:#0D1530;box-shadow:0 20px 40px -16px rgba(0,0,0,.45);animation:zoom .3s cubic-bezier(.2,.9,.2,1)}
 .st-panel h3{font:900 20px/1.2 var(--f-round)}
 .st-panel p{font:500 15px/1.45 var(--f-text);color:#4a5372;margin-top:6px}
@@ -2266,7 +2272,7 @@ function islandParams(kid) {
   return { seed: hash(kid.id), hue: kid.hue, avatar: kid.avatar, name: kid.name, level: levelOf(kid), size: isl.size || 0, land: Object.keys(isl.land || {}).filter(x => x !== 'farm'), lookKeys: lookKeys(kid), treeAt: isl.treeAt || null, treeType: isl.treeType || null, ready: Farm.readyIcons(kid),
     trees: Math.min(8 + (RULES.sizeTrees || 4) * (isl.size || 0), jobsList().filter(x => x.kidId === kid.id && x.status === 'approved' && x.tier !== 'bonus').length),
     skills: (() => { const g = (Store.growth || {})[kid.id] || {}; return Math.min(24, Object.values(g.done || {}).filter(d => d.best >= 0.8).length); })(), marks: Object.keys(((Store.growth || {})[kid.id] || {}).mile || {}).sort(),
-    pond: Math.round(clamp((j.save || 0) / 5000, 0, 1) * 10) / 10, mill: holdingsValue(kid) > 0, coins: Math.min(6, Math.ceil((j.spend || 0) / 300)), rainbow: p.total > 0 && p.done >= p.total, night: phaseNow() === 'night', wx: wxNow().key, care: Object.fromEntries(Object.entries(careOf(kid)).map(([q, v]) => [q, Math.round(v * 10) / 10])), farm: !!(kid.island || {}).farm, look: lookOf(kid), items: ((kid.island || {}).items || []).map(i => ({ id: i.id, t: i.t, x: i.x, z: i.z, r: i.r, zone: i.zone, lobe: i.lobe, lu: i.lu, lv: i.lv, tint: i.tint, v: i.v })) };
+    pond: Math.round(clamp((j.save || 0) / 5000, 0, 1) * 10) / 10, mill: holdingsValue(kid) > 0, coins: Math.min(6, Math.ceil((j.spend || 0) / 300)), rainbow: p.total > 0 && p.done >= p.total, night: phaseNow() === 'night', wx: wxNow().key, care: Object.fromEntries(Object.entries(careOf(kid)).map(([q, v]) => [q, Math.round(v * 10) / 10])), farm: !!(kid.island || {}).farm, look: lookOf(kid), items: ((kid.island || {}).items || []).map(i => ({ id: i.id, t: i.t, x: i.x, z: i.z, r: i.r, zone: i.zone, isle: i.isle, lobe: i.lobe, lu: i.lu, lv: i.lv, tint: i.tint, v: i.v })) };
 }
 const islandSig = kid => { const p = islandParams(kid); delete p.seed; return hash(JSON.stringify(p)).toString(36); };
 function islandCaption(kid) { const i = levelOf(kid), next = LEVELS[i + 1]; return { name: LEVELS[i].name, lvl: i + 1, next: next ? `${fmt(next.at - netWorth(kid))} more builds a ${next.name.toLowerCase()}` : 'You built the castle!' }; }
@@ -2474,6 +2480,17 @@ function PaneFX(canvas, th) {
 const CAT = window.ChorecastCatalog || { cats: [], items: [], looks: [], trees: [], produce: {}, books: {}, sets: [], rules: {} };
 const SHOP = CAT.items, SHOP_CATS = CAT.cats, LOOKS = CAT.looks, TREE_TYPES = CAT.trees, PRODUCE = CAT.produce, BOOKS = CAT.books, SETS = CAT.sets, RULES = CAT.rules;
 const shopDef = t => SHOP.find(s => s.t === t) || null;
+// Each piece of land is an island of its own, visited from the island studio with its arrows, in this order after the
+// home island. A placed thing remembers its island (isle). Older ones on land store the piece (lobe), measured from
+// where it used to join the home island; farm animals from before land had no piece, and live on the farm island.
+const ISLES = ['farm', 'plot', 'stable', 'lookout', 'orchard', 'lake', 'grove', 'beach', 'sky'];
+const ISLE_NAME = { home: 'Home', farm: 'Farm', plot: 'Veggie plot', stable: 'Stable yard', lookout: 'Mountain lookout', orchard: 'Orchard', lake: 'Lake', grove: 'Forest grove', beach: 'Beach cove', sky: 'Sky islet' };
+function isleOf(it) {
+  if (it.isle || it.lobe) return it.isle || it.lobe;
+  if (it.zone === 'sky') return 'sky';
+  return it.zone === 'farm' || it.zone === 'stable' || ((shopDef(it.t) || {}).farm && !it.zone) ? (it.zone === 'stable' ? 'stable' : 'farm') : 'home';
+}
+const islesOf = kid => { const isl = (kid && kid.island) || {}; return ['home', ...ISLES.filter(key => (key === 'farm' ? !!isl.farm : !!(isl.land || {})[key]))]; };
 // Makeovers: walls, roof, door, shutters, window boxes, fence, path, lawn, rock, flag, sky magic, house style and more.
 // A look is bought once and can be switched to and from for free. Ones marked prize only come from Character Growth.
 const lookOpt = (part, k) => ((LOOKS.find(p => p.k === part) || { opts: [] }).opts.find(o => o.k === k)) || null;
@@ -3121,6 +3138,7 @@ function skillTree(n) {
 function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.CylinderGeometry(0.06, 0.11, 0.55, 6), mat(0xffffff), 0, 0.27, 0); b.position.set(0, 0.55, 0.08); for (let i = 0; i < 4; i++) { const p = new T.Group(); p.rotation.z = i * Math.PI / 2; add(p, new T.BoxGeometry(0.05, 0.28, 0.015), mat(0x4ade80), 0, 0.14, 0); b.add(p); } g.add(b); g.userData.spin = b; return g; }
   function puff(seed) { const r = mulberry(seed), g = new T.Group(); for (let i = 0; i < 4; i++) add(g, new T.IcosahedronGeometry(0.1 + r() * 0.08, 1), mat(0xffffff, { r: 1 }), (i - 1.5) * 0.12, r() * 0.06, r() * 0.05); return g; }
   function islandModel(k) {
+    if (X && k.isle && k.isle !== 'home') return isleModel(k);
     const g = new T.Group(), s = k.seed, top = 0.2, care = k.care || {}, u = g.userData, cm = q => Math.min(1.5, care[q] || 0), wx = { ...(WEATHER[k.wx] || WEATHER.clear), key: k.wx || 'clear' };
     // Bigger islands (Land) scale the island out; the house stays the same size in the middle.
     const keys = k.lookKeys || {}, S = (RULES.sizeScale || [1])[k.size || 0] || 1, R = 1.1 * S, tint = X && X.LAWN[keys.lawn], rock = X && X.ROCK[keys.rock];
@@ -3134,7 +3152,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     const segD = (x, z) => { const dx = fall.bx - fall.ax, dz = fall.bz - fall.az, t = clamp(((x - fall.ax) * dx + (z - fall.az) * dz) / (dx * dx + dz * dz), 0, 1); return Math.hypot(x - fall.ax - dx * t, z - fall.az - dz * t); };
     const ground = (x, z) => surfH(x, z, pd) + (fall ? -0.03 * (1 - smooth01(fall.w * 0.5, fall.w * 1.4, segD(x, z))) : 0);
     u.ground = ground;
-    const lawnC = new T.Color(tint ? tint[0] : k.night ? 0x1d4a3a : 0x3f8f35).lerp(new T.Color(0x0f2a24), tint && k.night ? 0.55 : 0).lerp(new T.Color(0xeef3f8), wx.snow ? 0.75 : 0).getHex();
+    const lawnC = lawnColour(k, tint, wx);
     add(g, new T.CylinderGeometry(1.1 * S, 1.05 * S, 0.13, 48, 1, true), mat(lawnC), 0, 0.105, 0).userData.noInk = true;
     u.grass = add(g, lawnTop(ground, S, lawnC), mat(0xffffff, { vc: true }), 0, top, 0); u.grass.userData.noInk = true; u.grass.userData.hab = 'lawn';
     u.grassMesh = grassField(g, s, Math.round((k.flat ? 41600 : 7200) * S * S), MOWN + cm('lawn') * 1.28, k.night, { exact: true, foot: FOOT[k.level] || FOOT[0], pd, rad: 1.09 * S, tint, ground, not: fall ? (x, z) => segD(x, z) < fall.w * 1.05 : null, clear: k.level === 0 ? [[0.32, 0.07, 0.1]] : null });
@@ -3172,13 +3190,27 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     // Patches of land (zones) and the surfaces a tap can land on, each tagged with its habitat.
     u.zones = { lawn: { x: 0, z: 0, r: 0.98 * S, y: top } };
     if (pd) u.zones.pond = { x: pd.x, z: pd.z, r: pd.r * 0.75, y: top - 0.03, water: true };
-    // Land round the edge (the paddock and every piece the kid owns), spaced so no two pieces touch.
-    u.lobes = X ? X.layout([...(k.farm ? ['farm'] : []), ...(k.land || [])], R) : {};
-    const lctx = { top, lawnC, R, S, night: k.night, flat: k.flat, tint, rock, dens: u.dens, grow: MOWN + cm('lawn') * 1.28, meadow: keys.lawn === 'meadow', lobes: u.lobes };
-    if (k.farm && u.lobes.farm) { const F = farmZone(u.lobes.farm, R, top); u.zones.farm = F; farmLand(g, k, F, lctx); u.paddock.userData.hab = 'farm'; }
-    u.surf = [u.grass, u.paddock].filter(Boolean);
-    if (X) { const L = X.land(g, k, lctx); Object.assign(u.zones, L.zones); u.surf.push(...L.surf); u.landTick = L.tick; u.dressTick = X.dress(g, k, { top, R, S, house: h, night: k.night, lobes: u.lobes }); }
-    u.items = []; (k.items || []).forEach(it => placeItem(g, it));
+    u.surf = [u.grass];
+    if (X) u.dressTick = X.dress(g, k, { top, R, S, house: h, night: k.night });
+    u.items = []; (k.items || []).filter(it => isleOf(it) === 'home').forEach(it => placeItem(g, it));
+    outline(g);
+    if (!k.flat) g.rotation.x = 0.42; return g;
+  }
+  const lawnColour = (k, tint, wx) => new T.Color(tint ? tint[0] : k.night ? 0x1d4a3a : 0x3f8f35).lerp(new T.Color(0x0f2a24), tint && k.night ? 0.55 : 0).lerp(new T.Color(0xeef3f8), wx.snow ? 0.75 : 0).getHex();
+  // A piece of land as an island of its own (k.isle): its rock, grass and features from island.js (the farm's barn
+  // and paddock from here), the kid's lawn, rock, fence and sky, its own clouds and weather, and what's been put on it.
+  function isleModel(k) {
+    const g = new T.Group(), u = g.userData, top = 0.2, care = k.care || {}, cm = q => Math.min(1.5, care[q] || 0), keys = k.lookKeys || {}, wx = { ...(WEATHER[k.wx] || WEATHER.clear), key: k.wx || 'clear' };
+    const tint = X.LAWN[keys.lawn], rock = X.ROCK[keys.rock], lawnC = lawnColour(k, tint, wx);
+    u.isle = k.isle; u.kidAvatar = k.avatar; u.ready = k.ready || {}; u.hungry = k.isle === 'farm' && cm('feed') >= 1;
+    const ctx = { top, lawnC, night: k.night, flat: k.flat, tint, rock, dens: (k.flat ? 41600 : 7200) / (Math.PI * 1.09 * 1.09), grow: MOWN + cm('lawn') * 1.28, meadow: keys.lawn === 'meadow' };
+    if (k.isle === 'farm') { const L = X.isle('farm'), F = farmZone(L, top); u.L = L; u.zones = { farm: F }; farmLand(g, k, F, ctx); u.paddock.userData.hab = 'farm'; u.surf = [u.paddock]; }
+    else { const r = X.land(g, k, k.isle, ctx); u.L = r.L; u.zones = r.zones; u.surf = r.surf; u.landTick = r.tick; }
+    u.S = u.L.r / 1.1;
+    u.dressTick = X.dress(g, k, { top, R: u.L.r, night: k.night, isle: u.L });
+    const clouds = new T.Group(); [0, 1].forEach(i => { const c = smallCloud(k.seed + 60 + i), a = u.L.a + Math.PI + (i ? 1 : -1) * 0.95; c.position.set(Math.cos(a) * 1.5, i ? 0.45 : 0.75, Math.sin(a) * 1.5); clouds.add(c); }); g.add(clouds); u.clouds = clouds;
+    u.precip = precip(g, wx, k.flat);
+    u.items = []; (k.items || []).filter(it => isleOf(it) === k.isle).forEach(it => placeItem(g, it));
     outline(g);
     if (!k.flat) g.rotation.x = 0.42; return g;
   }
@@ -3324,20 +3356,19 @@ void main() {
   const ring2 = (n, f) => { for (let i = 0; i < n; i++) f(i / n * Math.PI * 2, i); };
   // The farm paddock: a second slab of land joined to the island's west side, fenced, with a barn, hay bales and a
   // feed trough. Farm animals stay inside the fence and graze the grass short.
-  // The paddock is a lobe of the island (laid out with the other land by island.js): fenced along its outer arc, open
-  // to the island, with a barn, hay bales and a feed trough. F is its zone; F.barn and F.trough are spots animals
-  // keep out of.
+  // The farm is an island of its own (island.js lays it out like the other land): a fenced paddock with a barn at the
+  // back, hay bales and a feed trough. F is its zone; F.barn and F.trough are spots animals keep out of.
   const inBarnZ = (F, x, z) => !!F && !!F.barn && (Math.hypot(x - F.barn[0], z - F.barn[1]) < 0.24 || Math.hypot(x - F.trough[0], z - F.trough[1]) < 0.1);
-  function farmZone(L, R, top) {
-    const tx = -L.oz, tz = L.ox;
-    return { L, x: L.x, z: L.z, r: L.zr, y: top - 0.003, out: R, lobe: 'farm', barn: [L.x + tx * L.r * 0.32 + L.ox * L.r * 0.12, L.z + tz * L.r * 0.32 + L.oz * L.r * 0.12], trough: [L.x - tx * L.r * 0.3, L.z - tz * L.r * 0.3], face: Math.atan2(-L.ox, -L.oz) };
+  function farmZone(L, top) {
+    const tx = -L.oz, tz = L.ox, at = (f, s) => [L.cx + (L.ox * f + tx * s) * L.r, L.cz + (L.oz * f + tz * s) * L.r];
+    return { L, x: L.cx + L.ox * L.r * 0.08, z: L.cz + L.oz * L.r * 0.08, r: L.r * 0.78, y: top, barn: at(-0.5, 0.12), trough: at(0.05, -0.5), face: Math.atan2(L.ox, L.oz) };
   }
   function farmLand(g, k, F, ctx) {
     const u = g.userData, L = F.L, post = mat(0xb07a4a), rail = mat(0xf7f3ea), y = F.y;
-    u.paddock = X.lobe(g, L, y, { seed: k.seed + 5, rock: ctx.rock, lawnC: ctx.lawnC }); u.paddock.userData.lobe = 'farm';
-    u.paddockGrass = X.lobeGrass(g, ctx, k.seed + 9, L, y, { clear: [[F.barn[0], F.barn[1], 0.22], [F.trough[0], F.trough[1], 0.09]] });
+    u.paddock = X.ground(g, L, y, { seed: k.seed + 5, rock: ctx.rock, lawnC: ctx.lawnC });
+    u.paddockGrass = X.isleGrass(g, ctx, k.seed + 9, L, y, { clear: [[F.barn[0], F.barn[1], 0.22], [F.trough[0], F.trough[1], 0.09]] });
     let prev = null;
-    X.arc(L, ctx.R, 38, (x, z) => {
+    X.arc(L, 46, (x, z) => {
       add(g, new T.BoxGeometry(0.03, 0.12, 0.03), post, x, y + 0.06, z);
       if (prev && Math.hypot(x - prev[0], z - prev[1]) < 0.2) { const len = Math.hypot(x - prev[0], z - prev[1]), ry = -Math.atan2(z - prev[1], x - prev[0]); [0.05, 0.095].forEach(h => { add(g, new T.BoxGeometry(len, 0.016, 0.012), rail, (x + prev[0]) / 2, y + h, (z + prev[1]) / 2).rotation.y = ry; }); }
       prev = [x, z];
@@ -3354,7 +3385,7 @@ void main() {
   // animals swim and bob; hungry farm animals sit and wait. o: { farm, lawn, swim }.
   function walker(m, g, Z, o = {}) {
     const st = { tx: m.position.x, tz: m.position.z, wait: Math.random() * 2, hop: 0 }, own = m.userData.tick, bub = m.userData.bub, y0 = m.userData.y0 ?? 0.2;
-    const pickSpot = () => { for (let i = 0; i < 10; i++) { const a = Math.random() * 6.283, r = Math.sqrt(Math.random()) * Z.r * (o.farm ? 0.75 : o.lawn ? 0.87 : 0.9), x = Z.x + Math.cos(a) * r, z = Z.z + Math.sin(a) * r, pi = g.userData.pondInfo; if (o.farm && inBarnZ(Z, x, z)) continue; if (Z.out && Math.hypot(x, z) < Z.out + 0.04) continue; if (o.lawn && (inHouse(x, z) || (pi && Math.hypot(x - pi.x, z - pi.z) < pi.r + 0.08))) continue; return [x, z]; } return null; };
+    const pickSpot = () => { for (let i = 0; i < 10; i++) { const a = Math.random() * 6.283, r = Math.sqrt(Math.random()) * Z.r * (o.farm ? 0.75 : o.lawn ? 0.87 : 0.9), x = Z.x + Math.cos(a) * r, z = Z.z + Math.sin(a) * r, pi = g.userData.pondInfo; if (o.farm && inBarnZ(Z, x, z)) continue; if (Z.not && Z.not(x, z)) continue; if (o.lawn && (inHouse(x, z) || (pi && Math.hypot(x - pi.x, z - pi.z) < pi.r + 0.08))) continue; return [x, z]; } return null; };
     m.userData.tick = (t, dt) => {
       if (own) own(t, dt);
       const hungry = o.farm && g.userData.hungry && !m.userData.fedNow, bob = o.swim ? Math.sin(t * 2 + st.tx * 9) * 0.006 : 0;
@@ -3378,15 +3409,17 @@ void main() {
     bird: g => { sph(g, 0.05, 0x2f7d3f, 0, 0.29, 0.05); cn(g, 0.05, 0.12, 0x2f7d3f, 0, 0.21, -0.1, 6).rotation.x = -2; },
     heart: g => { [-1, 1].forEach(s => sph(g, 0.06, 0x2f7d3f, s * 0.045, 0.3, 0)); cn(g, 0.09, 0.12, 0x2f7d3f, 0, 0.2, 0, 4).rotation.z = Math.PI; },
   };
-  // A shop item on the island. it.zone is the patch it was put on (older items: the paddock for farm animals, else the
-  // lawn); items on the floating sky islet ride along with it.
+  // A shop item on an island. it.zone is the patch it was put on (older items: the paddock for farm animals, else the
+  // lawn). On a land island its spot is (lu, lv) on that island; one placed when land joined the home island is moved
+  // back by where its piece's middle was (0.42), and one with no spot gets a fixed one in its zone.
   function placeItem(g, it) {
     const m = buildItem(it.t); if (!m) return null;
-    const def = shopDef(it.t) || {}, u = g.userData, zk = it.zone || (def.farm ? 'farm' : 'lawn'), zs = u.zones || {}, Z = zs[zk] || zs.lawn || { x: 0, z: 0, r: 0.98, y: 0.2 };
-    const host = Z.float || g, y0 = Z.float ? 0.2 : (Z.y ?? 0.2), L = it.lobe && (u.lobes || {})[it.lobe];
-    let [px, pz] = L && it.lu != null ? X.toWorld(L, it.lu, it.lv) : [it.x, it.z];
-    if (def.farm && !it.lobe && zs.farm) { const h0 = hash(it.id), a = (h0 % 628) / 100, r0 = ((h0 >> 10) % 100) / 100 * zs.farm.r * 0.8; px = zs.farm.x + Math.cos(a) * r0; pz = zs.farm.z + Math.sin(a) * r0; }
-    m.position.set(Z.float ? px - Z.x : px, y0, Z.float ? pz - Z.z : pz); m.rotation.y = it.r || 0; m.userData.itemId = it.id; m.userData.born = performance.now(); m.userData.y0 = y0;
+    const def = shopDef(it.t) || {}, u = g.userData, zk = it.zone || (def.farm ? 'farm' : 'lawn'), zs = u.zones || {}, Z = zs[zk] || zs.lawn || Object.values(zs)[0] || { x: 0, z: 0, r: 0.98, y: 0.2 };
+    const host = g, y0 = Z.y ?? 0.2, L = u.L;
+    let px = it.x, pz = it.z;
+    if (L && it.lu != null) { let a = it.isle ? it.lu : it.lu - 0.42, b = it.lv; const d = Math.hypot(a, b); if (d > 0.9) { a *= 0.9 / d; b *= 0.9 / d; } [px, pz] = X.toWorld(L, a, b); }
+    else if (L) { const h0 = hash(it.id), a = (h0 % 628) / 100, r0 = ((h0 >> 10) % 100) / 100 * Z.r * 0.8; px = Z.x + Math.cos(a) * r0; pz = Z.z + Math.sin(a) * r0; }
+    m.position.set(px, y0, pz); m.rotation.y = it.r || 0; m.userData.itemId = it.id; m.userData.born = performance.now(); m.userData.y0 = y0;
     m.userData.farm = !!def.farm;
     if (it.t === 'topiary' && TOPIARY[it.v]) { m.traverse(c => { if (c.isMesh && c.geometry.type === 'SphereGeometry' && c.position.y > 0.15) c.visible = false; }); const sg = new T.Group(); TOPIARY[it.v](sg); outline(sg, 0.006); m.add(sg); }
     if (it.tint != null) tintModel(m, it.tint);
@@ -3394,21 +3427,23 @@ void main() {
     if (def.trophy && it.v) { const set = (SETS.find(x => x.k === it.v) || {}).icon; if (set) { const b = sprite(emojiTex(set), 0.08); b.position.set(...(m.userData.badgeAt || [0, 0.05, 0.09])); m.add(b); } }
     if (def.farm) { const b = sprite(emojiTex('🌾'), 0.11); b.position.y = 0.34; b.visible = false; m.add(b); m.userData.bub = b; }
     if (u.ready && u.ready[it.id]) { const b = sprite(emojiTex(u.ready[it.id]), 0.1); b.position.y = def.habitat === 'orchard' ? 0.5 : 0.3; m.add(b); const own = m.userData.tick; m.userData.tick = (t, dt) => { if (own) own(t, dt); b.position.y = (def.habitat === 'orchard' ? 0.5 : 0.3) + Math.sin(t * 3 + m.position.x * 7) * 0.02; }; }
-    if ((def.cat === 'animals' && !def.home) || def.farm) walker(m, host, Z.float ? { x: 0, z: 0, r: Z.r } : Z, { farm: !!def.farm && (zk === 'farm' || zk === 'stable'), lawn: zk === 'lawn', swim: !!Z.water });
+    if ((def.cat === 'animals' && !def.home) || def.farm) walker(m, host, Z, { farm: !!def.farm && (zk === 'farm' || zk === 'stable'), lawn: zk === 'lawn' && !L, swim: !!Z.water });
     host.add(m); (u.items || (u.items = [])).push(m); return m;
   }
   // Which surfaces a shop item can stand on, from its habitat. hab is what the tap landed on.
-  const GENERAL = ['lawn', 'field', 'grove', 'beach', 'lakeshore', 'lookout', 'sky'];
-  function canPlace(u, hab, def, x, z, lobe) {
+  const GENERAL = ['lawn', 'field', 'grove', 'beach', 'lakeshore', 'lookout', 'orchard', 'sky'];
+  function canPlace(u, hab, def, x, z) {
     const need = def.tree ? ['lawn'] : def.farm ? (def.habitat === 'stable' ? ['stable'] : ['farm', 'stable']) : def.habitat === 'water' ? ['pond', 'lake'] : def.habitat && def.habitat !== 'lawn' ? [def.habitat] : GENERAL;
     let h = hab; const pi = u.pondInfo;
     if (h === 'lawn' && pi && Math.hypot(x - pi.x, z - pi.z) < pi.r + 0.02) h = 'pond';
     if (!need.includes(h)) return { ok: false, need };
     if (h === 'lawn' && (Math.hypot(x, z) > 0.98 * (u.S || 1) || inHouse(x, z))) return { ok: false, need };
     if (h === 'farm' && inBarnZ((u.zones || {}).farm, x, z)) return { ok: false, need };
-    const L = lobe && (u.lobes || {})[lobe];
-    const q = L && X ? X.toLocal(L, x, z) : null;
-    return { ok: true, zone: h, ...(q ? { lobe, lu: q.u, lv: q.v } : {}) };
+    const L = u.L; if (!L) return { ok: true, zone: h };
+    const Zh = (u.zones || {})[h] || (u.zones || {}).lawn;
+    if (Math.hypot(x - L.cx, z - L.cz) > L.r * 0.92 || (Zh && Zh.not && Zh.not(x, z))) return { ok: false, need };
+    const q = X.toLocal(L, x, z);
+    return { ok: true, zone: h, isle: L.key, lu: q.u, lv: q.v };
   }
   // How big an island model is, so cards and the studio can fit the land a kid has added.
   function islandFrame(obj) {
@@ -3421,16 +3456,16 @@ void main() {
     if (u.spin) u.spin.rotation.z += dt * 2.4;
     if (u.flame) { u.flame.scale.set(1, 1 + Math.sin(t * 13 + ph) * 0.12 + Math.sin(t * 29) * 0.06, 1); u.flame.rotation.y = t * 1.5; }
     if (u.skillOrbs) for (const o of u.skillOrbs) o.position.y = o.userData.y0 + Math.sin(t * 2 + o.userData.ph) * 0.008;
-    FLAG_T.value = t; WATER_T.value = t; u.flag.rotation.y = Math.sin(t * 0.5 + ph) * 0.15; u.clouds.rotation.y = t * 0.15;
+    FLAG_T.value = t; WATER_T.value = t; if (u.flag) u.flag.rotation.y = Math.sin(t * 0.5 + ph) * 0.15; if (u.clouds) u.clouds.rotation.y = t * 0.15;
     if (u.precip) stepPrecip(u.precip, dt, t);
-    // Every grass field on the island (the lawn, the paddock and each piece of land) sways in the same wind.
+    // Every grass field on the island sways in the same wind.
     if (!u.grassAll) { u.grassAll = []; g.traverse(o => { if (o.isInstancedMesh && o.material.userData.U && o.material.userData.U.uGrow) u.grassAll.push(o.material.userData.U); }); }
     for (const U of u.grassAll) U.uTime.value = t + ph;
     if (u.landTick) u.landTick(t); if (u.dressTick) u.dressTick(t); if (u.landTickW) u.landTickW(t);
     (u.trees || []).forEach(tr => { tr.rotation.z = Math.sin(t * 1.3 + tr.userData.sway) * 0.035; tr.rotation.x = Math.cos(t * 0.9 + tr.userData.sway) * 0.02; });
     if (u.pond) { const nm = u.pond.material.normalMap; if (nm) nm.offset.set(t * 0.02, t * 0.013); }
     const e = t - hopAt, hop = hopAt && e < 0.7 ? Math.sin(e / 0.7 * Math.PI) * 0.38 : 0;
-    u.av.position.y = u.avY + Math.abs(Math.sin(t * 2 + ph)) * 0.04 + hop;
+    if (u.av) u.av.position.y = u.avY + Math.abs(Math.sin(t * 2 + ph)) * 0.04 + hop;
     for (const m of u.items || []) {
       if (m.userData.tick) m.userData.tick(t, dt);
       const age = (performance.now() - m.userData.born) / 500; if (age < 1) m.scale.setScalar(Math.max(0.01, 1 + 2.7 * Math.pow(age - 1, 3) + 1.7 * Math.pow(age - 1, 2)));
@@ -3707,7 +3742,7 @@ function xpOf(kid) {
 /* Island studio: tap your island to fly in. Drag to spin, pinch to zoom, buy cute things and place them on the grass.
    Animals wander about, swings swing, the campfire flickers. Paying with real Spend money asks "spend it or save it?" first. */
 const Studio = (() => {
-  const T = window.THREE, S0 = { open: false, cat: 'animals', msg: '', sel: null, confirm: null, place: null };
+  const T = window.THREE, S0 = { open: false, cat: 'animals', msg: '', sel: null, confirm: null, place: null, isle: 'home', trip: null };
   let R, pace, scene, cam, island, clouds, kidId = null, raf = 0, last = 0, theta = 0.7, phi = 1.02, rad = 4.6, idle = 0, moved = 0, pinch0 = 0, rad0 = 0;
   const ptrs = new Map(), THUMBS = {}, ray = T ? new T.Raycaster() : null, target = T ? new T.Vector3(0, -0.42, 0) : null;
   const kid = () => Store.kids[kidId];
@@ -3727,6 +3762,7 @@ const Studio = (() => {
     cv.addEventListener('pointerdown', down); cv.addEventListener('pointermove', move); cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
     cv.addEventListener('wheel', e => { e.preventDefault(); rad = clamp(rad + e.deltaY * 0.004, 2.6, S0.radMax || 11); idle = 0; }, { passive: false });
     addEventListener('resize', () => { if (S0.open) size(); });
+    addEventListener('keydown', e => { if (S0.open && (e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !/INPUT|TEXTAREA|SELECT/.test((e.target || {}).tagName || '')) go(e.key === 'ArrowLeft' ? -1 : 1); });
     return true;
   }
   function size() { R.setSize(innerWidth, innerHeight); cam.aspect = innerWidth / innerHeight; cam.updateProjectionMatrix(); }
@@ -3734,7 +3770,22 @@ const Studio = (() => {
   const fitRad = () => clamp(5.5 / Math.min(1, (innerWidth / innerHeight) * 1.4), 5.5, 10) * Math.max(1, (S0.span || 2.2) / 2.2 * 0.9);
   // Cloud puffs are drawn in their shader, so like the sprites they replaced they stay out of the shadow map
   const shadows = o => o.traverse(m => { if (m.isMesh && !m.userData.puffs) { m.castShadow = true; m.receiveShadow = true; } });
-  function build() { if (island) { scene.remove(island); island.traverse(m => { if (m.geometry) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); } island = G3.island(kid(), { flat: true, ...(S0.preview ? { look: S0.preview.look, lookKeys: S0.preview.keys } : {}) }); const f = G3.frame(island); target.x = f.cx; target.z = f.cz; S0.span = Math.max(f.w, f.d); S0.radMax = Math.max(11, fitRad() * 1.4); if (rad < fitRad()) rad = fitRad(); shadows(island); scene.add(island); scene.fog = wxNow().fog ? new T.Fog(new T.Color(0xdde3ea).convertSRGBToLinear(), 4.5, 10) : null; }
+  const drop = o => { scene.remove(o); o.traverse(m => { if (m.geometry) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); };
+  // Builds the island the kid is on (S0.isle): home, or one of their pieces of land.
+  function make() { island = G3.island(kid(), { flat: true, isle: S0.isle, ...(S0.preview ? { look: S0.preview.look, lookKeys: S0.preview.keys } : {}) }); const f = G3.frame(island); S0.at = [f.cx, f.cz]; S0.span = Math.max(f.w, f.d); S0.radMax = Math.max(11, fitRad() * 1.4); if (rad < fitRad()) rad = fitRad(); shadows(island); scene.add(island); }
+  function build() { if (island) drop(island); make(); target.x = S0.at[0]; target.z = S0.at[1]; scene.fog = wxNow().fog ? new T.Fog(new T.Color(0xdde3ea).convertSRGBToLinear(), 4.5, 10) : null; }
+  // Travelling to the next island (dir 1) or the one before (-1), round in a loop, or straight to one (to): the island
+  // you're on slides off one side of the screen as the next one slides in from the other. then() runs on arrival.
+  function go(dir, to, then) {
+    const list = islesOf(kid()), i = list.indexOf(S0.isle), next = to || list[(i + dir + list.length) % list.length];
+    if (S0.trip || S0.job || !next || !list.includes(next)) return;
+    if (next === S0.isle) { if (then) then(); return; }
+    if (S0.isle === 'home') S0.homeCat = S0.cat;
+    const old = island, from = [target.x, target.z]; S0.isle = next; Object.assign(S0, { sel: null, tree: null, confirm: null, lk: null, preview: null, cat: next === 'home' ? S0.homeCat || 'animals' : 'isle' });
+    const rad0 = rad; make(); S0.trip = { old, from, rad0, rad1: fitRad(), d: to ? (list.indexOf(to) > i ? 1 : -1) : dir, t0: performance.now(), then }; rad = rad0;
+    Sound.whoosh(); ui();
+  }
+  function arrive() { const tr = S0.trip; drop(tr.old); S0.trip = null; island.position.x = 0; island.position.z = 0; target.x = S0.at[0]; target.z = S0.at[1]; ui(); if (tr.then) tr.then(); }
   // Shop pictures are drawn the first time a tab shows them, with one small renderer kept while the studio is open.
   let TR = null;
   function thumbsFor(list) {
@@ -3751,11 +3802,11 @@ const Studio = (() => {
   }
   function up(e) { if (!ptrs.has(e.pointerId)) return; ptrs.delete(e.pointerId); if (!ptrs.size) { if (moved < 10) tap(e.clientX, e.clientY); pinch0 = 0; } }
   function tap(x, y) {
-    if (S0.job) return;
+    if (S0.job || S0.trip) return;
     const r = R.domElement.getBoundingClientRect(); ray.setFromCamera({ x: (x - r.left) / r.width * 2 - 1, y: -((y - r.top) / r.height) * 2 + 1 }, cam);
     if (S0.place) {
       const u = island.userData, hit = ray.intersectObjects(u.surf || [], false)[0], p = hit && island.worldToLocal(hit.point.clone()), def = S0.placeDef || {};
-      const res = p ? G3.canPlace(u, hit.object.userData.hab, def, p.x, p.z, hit.object.userData.lobe) : { ok: false };
+      const res = p ? G3.canPlace(u, hit.object.userData.hab, def, p.x, p.z) : { ok: false };
       if (!res.ok) { S0.msg = placeHint(def); Sound.error(); return ui(); }
       const fn = S0.place; S0.place = null; return fn(p.x, p.z, x, y, res);
     }
@@ -3763,7 +3814,7 @@ const Studio = (() => {
     if (hits.length) { let o = hits[0].object; while (o && !o.userData.itemId) o = o.parent; if (o) { o.userData.hopAt = performance.now() / 1000; Sound.pop(); S0.sel = o.userData.itemId; S0.tree = null; S0.confirm = null; return ui(); } }
     const th = ray.intersectObjects(island.userData.trees || [], true);
     if (th.length) { let o = th[0].object; while (o && o.userData.treeIdx == null) o = o.parent; if (o) { Sound.pop(); S0.tree = o.userData.treeIdx; S0.sel = null; S0.confirm = null; return ui(); } }
-    if (ray.intersectObject(island.userData.av, false).length) { island.userData.hopAt = performance.now() / 1000; Sound.pop(); FX.burst(x, y, CONF, 12); }
+    if (island.userData.av && ray.intersectObject(island.userData.av, false).length) { island.userData.hopAt = performance.now() / 1000; Sound.pop(); FX.burst(x, y, CONF, 12); }
     if (S0.sel || S0.tree != null) { S0.sel = null; S0.tree = null; ui(); }
   }
   const HINT = { farm: 'Farm animals live in the paddock or the stable yard. Tap the grass inside the fence.', stable: 'Horses live in the stable yard.', plot: 'Veggie beds go on the veggie plot.', orchard: 'Fruit trees grow on the orchard terrace.', grove: 'This one lives in the forest grove.', beach: 'This one lives on the beach.', lake: 'Tap the lake.', water: 'Tap the pond or the lake.', lookout: 'Tap the very top of the lookout.' };
@@ -3772,20 +3823,27 @@ const Studio = (() => {
     raf = 0; if (!S0.open) return;
     const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
     idle += dt; if (idle > 5 && !S0.place) theta += dt * 0.1;
-    cam.position.set(target.x + rad * Math.sin(phi) * Math.cos(theta), target.y + rad * Math.cos(phi), rad * Math.sin(phi) * Math.sin(theta)); cam.lookAt(target);
-    island.position.y = Math.sin(t * 0.8) * 0.03; clouds.rotation.y = t * 0.03;
+    const bob = Math.sin(t * 0.8) * 0.03; island.position.y = bob; clouds.rotation.y = t * 0.03;
+    if (S0.trip) {
+      const tr = S0.trip, p = clamp((now - tr.t0) / 1000, 0, 1), e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(2 - 2 * p, 3) / 2, D = 7 * tr.d, rx = Math.sin(theta) * D, rz = -Math.cos(theta) * D;
+      tr.old.position.set(-rx * e, bob, -rz * e); island.position.set(rx * (1 - e), bob, rz * (1 - e)); clouds.rotation.y -= tr.d * 0.5 * e;
+      target.x = tr.from[0] + (S0.at[0] - tr.from[0]) * e; target.z = tr.from[1] + (S0.at[1] - tr.from[1]) * e; rad = tr.rad0 + (tr.rad1 - tr.rad0) * e;
+      G3.tickIsland(tr.old, t, dt); if (p >= 1) arrive();
+    }
+    cam.position.set(target.x + rad * Math.sin(phi) * Math.cos(theta), target.y + rad * Math.cos(phi), target.z + rad * Math.sin(phi) * Math.sin(theta)); cam.lookAt(target);
     if (S0.job) stepJob(now, dt);
     G3.tickIsland(island, t, dt, 0, island.userData.hopAt || 0);
     pace(now); G3.inkFor(R); R.render(scene, cam); raf = requestAnimationFrame(frame);
   }
   // ---- Island jobs: each one plays out on the island with its tool, then the island is rebuilt clean
-  function jobsRow(k) {
+  function jobsRow(k, farmOnly) {
     const isl = k.island || {}, care = careOf(k), tools = isl.tools || {}, hasPond = ((k.jars || {}).save || 0) > 0, herd = farmAnimals(k).length, scoops = isl.feed || 0;
     const today = dkey(), book = b => `${Object.keys((isl.books || {})[b] || {}).length} of ${(BOOKS[b] || []).length} in your book.`;
-    const fish = tools.rod ? `<div class="care-card ${isl.fishDay !== today ? 'need' : ''}"><span class="care-ic" aria-hidden="true">🎣</span><b>Fishing</b><small>${!Farm.waters(k).length ? 'You need a pond, the lake or the beach to fish.' : isl.fishDay === today ? `Done for today. ${book('fish')}` : `One catch a day. ${book('fish')}`}</small><button data-act="st" data-n="fish" ${isl.fishDay === today || !Farm.waters(k).length || S0.job ? 'disabled' : ''}>Go fishing</button></div>` : '';
-    const bugs = tools.bugnet ? `<div class="care-card ${isl.bugDay !== today ? 'need' : ''}"><span class="care-ic" aria-hidden="true">🔍</span><b>Bug hunt</b><small>${isl.bugDay === today ? `Done for today. ${book('bugs')}` : `One hunt a day. Glow-worms only come out at night. ${book('bugs')}`}</small><button data-act="st" data-n="bug" ${isl.bugDay === today || S0.job ? 'disabled' : ''}>Go looking</button></div>` : '';
+    const fish = tools.rod && !farmOnly ? `<div class="care-card ${isl.fishDay !== today ? 'need' : ''}"><span class="care-ic" aria-hidden="true">🎣</span><b>Fishing</b><small>${!Farm.waters(k).length ? 'You need a pond, the lake or the beach to fish.' : isl.fishDay === today ? `Done for today. ${book('fish')}` : `One catch a day. ${book('fish')}`}</small><button data-act="st" data-n="fish" ${isl.fishDay === today || !Farm.waters(k).length || S0.job ? 'disabled' : ''}>Go fishing</button></div>` : '';
+    const bugs = tools.bugnet && !farmOnly ? `<div class="care-card ${isl.bugDay !== today ? 'need' : ''}"><span class="care-ic" aria-hidden="true">🔍</span><b>Bug hunt</b><small>${isl.bugDay === today ? `Done for today. ${book('bugs')}` : `One hunt a day. Glow-worms only come out at night. ${book('bugs')}`}</small><button data-act="st" data-n="bug" ${isl.bugDay === today || S0.job ? 'disabled' : ''}>Go looking</button></div>` : '';
     return `<div class="care-row">${fish}${bugs}${CARE.map(c => {
       if (c.k === 'feed' && !isl.farm) return '';
+      if (farmOnly && c.k !== 'feed') return '';
       if (c.when && !c.when(k)) return '';
       const v = care[c.k], need = v >= 0.66, tool = SHOP.find(s => s.t === c.tool), noPond = c.k === 'pond' && !hasPond, feed = c.k === 'feed';
       let state = noPond ? 'Save in your vault to dig a pond' : need ? c.bad : v >= 0.33 ? 'Starting to need it' : c.good;
@@ -3828,7 +3886,8 @@ const Studio = (() => {
     if (d.size) { isl.size = d.size; isl.sizes = { ...(isl.sizes || {}), [d.size]: rec }; }
     else { isl.land = { ...(isl.land || {}), [d.land]: rec }; if (d.land === 'farm') Object.assign(isl, { farm: 1, feed: (isl.feed || 0) + 10, tools: { ...(isl.tools || {}), bucket: (isl.tools || {}).bucket || true } }); }
     patch.island = isl; updDoc('kids', k.id, patch);
-    track('island.expand', { what: d.size ? 'size' + d.size : d.land === 'farm' ? 'paddock' : d.land }, k.id); build(); Sound.fanfare();
+    track('island.expand', { what: d.size ? 'size' + d.size : d.land === 'farm' ? 'paddock' : d.land }, k.id); Sound.fanfare();
+    if (d.land && d.land !== 'waterfall' && islesOf(kid()).includes(d.land)) setTimeout(() => go(0, d.land), 700); else build();
     done(d.land === 'farm' ? 'Your island grew! The paddock comes with a feed bucket and a bag of feed. Now pick some farm animals.' : d.size ? `Your island grew! ${d.about}` : `${d.name} added! ${d.about}`);
   }
   function buyFeed(d, pay) {
@@ -3902,7 +3961,8 @@ const Studio = (() => {
   const items = k => (k.island || {}).items || [];
   const sprayGeo = T ? new T.SphereGeometry(0.012, 6, 4) : null, sprayMat = T ? new T.MeshBasicMaterial({ color: 0xcdeeff, transparent: true, opacity: 0.85 }) : null, V3 = T ? new T.Vector3() : null;
   function startJob(q) {
-    const k = kid(), c = CARE.find(x => x.k === q); if (!k || !c || S0.job) return;
+    const k = kid(), c = CARE.find(x => x.k === q); if (!k || !c || S0.job || S0.trip) return;
+    const at = q === 'feed' ? 'farm' : 'home'; if (S0.isle !== at) return go(0, at, () => startJob(q));
     const u = island.userData, animals = (u.items || []).filter(m => m.userData.farm);
     if (q === 'feed' && ((k.island || {}).feed || 0) < animals.length) { S0.cat = 'farm'; S0.msg = 'The feed bin is nearly empty. Buy a bag of feed first.'; return ui(); }
     const tool = G3.item(c.tool), j = { q, c, tool, animals, t0: performance.now(), dur: q === 'lawn' ? 4600 : q === 'feed' ? Math.max(2600, animals.length * 1100) : 3300, was: careOf(k)[q], spray: [], walls: [], last: -1 };
@@ -3985,6 +4045,34 @@ const Studio = (() => {
       const btn = got ? (onIsland.includes(set.k) ? '<button disabled>Trophy on your island</button>' : `<button data-act="st" data-n="placeTrophy" data-k="${set.k}">Place your trophy</button>`) : `<button data-act="st" data-n="claim" data-k="${set.k}" ${full ? '' : 'disabled'}>${full ? `Claim · ${RULES.setXp || 250} XP` : `${p.of - p.have} to go`}</button>`;
       return `<div class="care-card ${full && !got ? 'need' : ''}"><span class="care-ic" aria-hidden="true">${set.icon}</span><b>${esc(set.name)}</b><small>${p.have} of ${p.of}${set.book === 'produce' ? ' sold' : set.book ? ' found' : ' on your island'}</small><div class="care-bar" aria-hidden="true"><i style="width:${Math.round(p.have / p.of * 100)}%"></i></div>${btn}</div>`; }).join('')}</div>`;
   }
+  // Which island a shop item lives on: its own piece of land, 'water' (the pond or the lake), 'home' (land, sizes,
+  // tools and upgrades), or '' for anything that can go on any island's grass.
+  function itemIsle(it) {
+    if (it.land || it.size) return 'home';
+    if (it.farm) return it.habitat === 'stable' ? 'stable' : 'farm';
+    if (it.habitat === 'water') return 'water';
+    if (ISLES.includes(it.habitat)) return it.habitat;
+    if (['farm', 'hen', 'milk', 'wool'].includes(it.needs)) return 'farm';
+    if (ISLES.includes(it.needs)) return it.needs;
+    return it.cat === 'tools' || it.upgrade || it.needs === 'pond' ? 'home' : '';
+  }
+  // The shop follows the island the kid is on. A piece of land shows its own things first, in a tab named for it, then
+  // anything that can go on its grass (the farm and the stable yard are only for their animals); the home island shows
+  // everything else.
+  const OPEN_ISLES = ['home', 'plot', 'lookout', 'orchard', 'lake', 'grove', 'beach', 'sky'], ANY_CATS = ['animals', 'play', 'garden', 'home', 'big', 'season'];
+  const ownsIsle = (it, isle) => { const h = itemIsle(it); return h === isle || (isle === 'stable' && !!it.farm) || (isle === 'lake' && h === 'water'); };
+  function fitsIsle(it, isle) {
+    const h = itemIsle(it);
+    if (h === 'water') return isle === 'home' || isle === 'lake';
+    if (!h) return isle === 'home' || (OPEN_ISLES.includes(isle) && ANY_CATS.includes(it.cat));
+    return ownsIsle(it, isle);
+  }
+  const inTab = (it, cat, isle) => !it.trophy && (cat === 'isle' ? ownsIsle(it, isle) : it.cat === cat && fitsIsle(it, isle) && (isle === 'home' || !ownsIsle(it, isle)));
+  function tabsFor(isle) {
+    const has = c => SHOP.some(x => inTab(x, c, isle));
+    if (isle === 'home') return SHOP_CATS.filter(([c]) => ['jobs', 'look', 'stand', 'sets'].includes(c) || has(c));
+    return [...(has('isle') ? [['isle', ISLE_NAME[isle]]] : []), ...SHOP_CATS.filter(([c]) => (isle === 'farm' && (c === 'jobs' || c === 'stand')) || (ANY_CATS.includes(c) && has(c)))];
+  }
   function ui() {
     const k = kid(); if (!k) return close();
     const xp = xpOf(k), cash = (k.jars || {}).spend || 0, cap = islandCaption(k), lvl = levelOf(k), allowCash = S().shopCash !== false;
@@ -4018,18 +4106,21 @@ const Studio = (() => {
       const about = part === 'tree' ? (mine ? 'Yours. With the tree spade, tap a chore tree and pick this type.' : 'Buy it once, then give it to as many chore trees as you like with the tree spade.') : inUse ? 'This is what your island uses now.' : mine ? 'Have a look, then tap Use it to keep it.' : d.prize ? `🎁 A Character Growth prize. ${esc(G && G.prizeHint ? G.prizeHint(k, id) : '')}` : 'Here’s how it would look. Buy it once, and you can switch back to it whenever you like.';
       panel = `<div class="st-panel"><h3>${esc(name)}</h3><p>${about}${tentNote}${lvlNote}${guideNote}</p><div class="st-actions">${acts}</div></div>`;
     }
-    const list = ['jobs', 'look', 'stand', 'sets'].includes(S0.cat) ? [] : SHOP.filter(x => x.cat === S0.cat && !x.trophy).sort((a, b) => (a.prize ? 1 : 0) - (b.prize ? 1 : 0) || (a.size ? 0 : 1) - (b.size ? 0 : 1) || (a.size || 0) - (b.size || 0) || (a.xp || 0) - (b.xp || 0)); thumbsFor(list);
+    const here = S0.isle, tabs = tabsFor(here), all = islesOf(k), at = all.indexOf(here), near = d => ISLE_NAME[all[(at + d + all.length) % all.length]], onHere = items.filter(i => isleOf(i) === here).length;
+    if (!tabs.some(([c]) => c === S0.cat)) S0.cat = tabs[0][0];
+    const nav = all.length > 1 && !S0.job ? [[-1, 'prev', 'back'], [1, 'next', 'next']].map(([d, cl, icn]) => `<button class="st-nav ${cl}" data-act="stIsle" data-d="${d}" aria-label="Go to ${esc(near(d))}"><span>${ic(icn)}</span><small>${esc(near(d))}</small></button>`).join('') : '';
+    const list = ['jobs', 'look', 'stand', 'sets'].includes(S0.cat) ? [] : SHOP.filter(x => inTab(x, S0.cat, here)).sort((a, b) => (a.prize ? 1 : 0) - (b.prize ? 1 : 0) || (a.size ? 0 : 1) - (b.size ? 0 : 1) || (a.size || 0) - (b.size || 0) || (a.xp || 0) - (b.xp || 0)); thumbsFor(list);
     const root = $('#studio .studio-ui'), keepX = ($('.shop-row', root) || $('.care-row', root) || {}).scrollLeft || 0;
     root.innerHTML = `
       <header class="st-bar"><button class="sbtn" data-act="stClose" aria-label="Back to ${esc(k.name)}'s sky">${ic('x')}</button>
-        <div class="st-title"><b>${esc(k.name)}’s island</b><span>Level ${cap.lvl} · ${cap.name} · ${items.length} thing${items.length === 1 ? '' : 's'} on it</span></div>
+        <div class="st-title"><b>${here === 'home' ? `${esc(k.name)}’s island` : esc(ISLE_NAME[here])}</b><span>${here === 'home' ? `Level ${cap.lvl} · ${cap.name} · ` : ''}${onHere} thing${onHere === 1 ? '' : 's'} ${here === 'home' ? 'on it' : 'here'}${all.length > 1 ? ` · island ${at + 1} of ${all.length}` : ''}</span></div>
         <div class="st-bal"><span class="st-chip">${ic('sparkle')} ${xp.left.toLocaleString()} XP</span>${allowCash ? `<span class="st-chip">${ic('jar')} ${fmt(cash)}</span>` : ''}</div></header>
-      <p class="st-tip ${S0.place ? 'on' : ''}">${esc(S0.msg || (S0.place ? 'Tap the grass where it should go.' : 'Drag to spin, pinch to zoom, tap an animal to say hi.'))}${S0.place ? ' <button class="st-link" data-act="stCancel">Cancel</button>' : ''}</p>
+      ${nav}<p class="st-tip ${S0.place ? 'on' : ''}">${esc(S0.msg || (S0.place ? 'Tap the grass where it should go.' : all.length > 1 && here === 'home' ? 'Tap the arrows to visit your other islands.' : 'Drag to spin, pinch to zoom, tap an animal to say hi.'))}${S0.place ? ' <button class="st-link" data-act="stCancel">Cancel</button>' : ''}</p>
       ${panel}
       <section class="shop" aria-label="Island shop">
-        <div class="shop-tabs">${SHOP_CATS.map(([c, l]) => `<button class="chip ${S0.cat === c ? 'on' : ''}" data-act="stCat" data-c="${c}">${l}</button>`).join('')}</div>
-        ${S0.cat === 'jobs' ? jobsRow(k) : S0.cat === 'look' ? lookRow(k) : S0.cat === 'stand' ? standRow(k) : S0.cat === 'sets' ? setsRow(k) : `<div class="shop-row">${list.map(it => itemCard(it, k, xp, cash, allowCash, lvl, owned)).join('')}</div>`}
-        <p class="shop-foot">${S0.cat === 'jobs' ? 'Everything you own needs looking after. Island jobs pop up every few days and earn XP.' : S0.cat === 'look' ? 'Tap a colour to see it on your island. Buy one once and switch back any time. 🎁 colours are prizes from Character Growth.' : S0.cat === 'farm' ? 'Every farm animal eats a scoop of feed a day. Feed them from Island jobs, and keep the feed bin topped up. Sell what they make at the farm stand.' : S0.cat === 'stand' ? `Today the farm can earn ${Farm.cap() === Infinity ? 'as much as you like' : `up to ${Farm.cap()} XP`}; ${Farm.earnedToday(k)} so far.${Farm.saturday() ? ' It’s Saturday market day: prices are 25% higher.' : ''}` : S0.cat === 'land' ? 'Grow your island one size at a time, and add new land where new animals and things live.' : S0.cat === 'season' ? 'Seasonal things are sold in their months and come back every year. Once yours, they stay.' : S0.cat === 'sets' ? 'Collect every animal in a set, or fill a book, to win a gold trophy and 250 XP.' : S0.cat === 'big' ? 'Big dreams take saving up for. Every XP you don’t spend gets you closer.' : `Earn XP from approved missions, habits, lessons and island jobs.${allowCash ? ' Spend-jar money works too, but once it’s spent it’s gone.' : ''}`}</p>
+        <div class="shop-tabs">${tabs.map(([c, l]) => `<button class="chip ${S0.cat === c ? 'on' : ''}" data-act="stCat" data-c="${c}">${l}</button>`).join('')}</div>
+        ${S0.cat === 'jobs' ? jobsRow(k, here === 'farm') : S0.cat === 'look' ? lookRow(k) : S0.cat === 'stand' ? standRow(k) : S0.cat === 'sets' ? setsRow(k) : `<div class="shop-row">${list.map(it => itemCard(it, k, xp, cash, allowCash, lvl, owned)).join('')}</div>`}
+        <p class="shop-foot">${S0.cat === 'isle' ? (here === 'farm' ? 'Every farm animal eats a scoop of feed a day. Feed them from Island jobs, and keep the feed bin topped up. Sell what they make at the farm stand.' : `These live on your ${ISLE_NAME[here].toLowerCase()}.${OPEN_ISLES.includes(here) ? ' Things from the other tabs can go on its grass too.' : ''}`) : S0.cat === 'jobs' ? 'Everything you own needs looking after. Island jobs pop up every few days and earn XP.' : S0.cat === 'look' ? 'Tap a colour to see it on your island. Buy one once and switch back any time. 🎁 colours are prizes from Character Growth.' : S0.cat === 'farm' ? 'Every farm animal eats a scoop of feed a day. Feed them from Island jobs, and keep the feed bin topped up. Sell what they make at the farm stand.' : S0.cat === 'stand' ? `Today the farm can earn ${Farm.cap() === Infinity ? 'as much as you like' : `up to ${Farm.cap()} XP`}; ${Farm.earnedToday(k)} so far.${Farm.saturday() ? ' It’s Saturday market day: prices are 25% higher.' : ''}` : S0.cat === 'land' ? 'Grow your island one size at a time, and add new land where new animals and things live.' : S0.cat === 'season' ? 'Seasonal things are sold in their months and come back every year. Once yours, they stay.' : S0.cat === 'sets' ? 'Collect every animal in a set, or fill a book, to win a gold trophy and 250 XP.' : S0.cat === 'big' ? 'Big dreams take saving up for. Every XP you don’t spend gets you closer.' : `Earn XP from approved missions, habits, lessons and island jobs.${allowCash ? ' Spend-jar money works too, but once it’s spent it’s gone.' : ''}`}</p>
       </section>`;
     const row = $('.shop-row', root) || $('.care-row', root); if (row) row.scrollLeft = keepX;
   }
@@ -4037,7 +4128,7 @@ const Studio = (() => {
     const d = shopDef(t); S0.confirm = null; S0.sel = null; S0.tree = null; S0.placeDef = d;
     S0.msg = d.farm ? `Tap the paddock where your ${d.name.toLowerCase()} should go.` : d.habitat && d.habitat !== 'lawn' ? `${placeHint(d)} That’s where your ${d.name.toLowerCase()} goes.` : `Tap the grass where your ${d.name.toLowerCase()} should go.`;
     S0.place = (x, z, sx, sy, res = {}) => {
-      const k = kid(), isl = { items: [], xpSpent: 0, ...(k.island || {}) }, it = { id: uid(), t, x: +x.toFixed(3), z: +z.toFixed(3), r: +(Math.random() * 6.28).toFixed(2), at: Date.now(), ...(res.zone && res.zone !== 'lawn' ? { zone: res.zone } : {}), ...(res.lobe ? { lobe: res.lobe, lu: res.lu, lv: res.lv } : {}), ...extra }, patch = {};
+      const k = kid(), isl = { items: [], xpSpent: 0, ...(k.island || {}) }, it = { id: uid(), t, x: +x.toFixed(3), z: +z.toFixed(3), r: +(Math.random() * 6.28).toFixed(2), at: Date.now(), ...(res.zone && res.zone !== 'lawn' ? { zone: res.zone } : {}), ...(res.isle ? { isle: res.isle, lu: res.lu, lv: res.lv } : {}), ...extra }, patch = {};
       if (!charge(k, d, pay, isl, patch, it)) return;
       if (pay === 'won') it.won = 1;
       if (d.farm && !farmAnimals(k).length) isl.care = { ...(isl.care || {}), feed: Date.now() };
@@ -4124,6 +4215,9 @@ const Studio = (() => {
   function act(n, a) {
     const k = kid(); if (!k) return;
     const d = a && a.dataset.t ? SHOP.find(s => s.t === a.dataset.t) : null, isl = k.island || { items: [] };
+    if (n === 'isle') return go(+a.dataset.d);
+    // Once the kid has a farm, its things (feed, farm animals) are on the farm island, so the Farm tab takes them there.
+    if (n === 'cat' && a.dataset.c === 'farm' && S0.isle !== 'farm' && islesOf(k).includes('farm')) return go(0, 'farm');
     if (n === 'cat') { S0.cat = a.dataset.c; if (S0.preview) { S0.lk = null; S0.preview = null; build(); } }
     else if (n === 'buyXp' || n === 'payXp') return buy(d, 'xp');
     else if (n === 'care') return startJob(a.dataset.k);
@@ -4143,7 +4237,7 @@ const Studio = (() => {
     else if (n === 'done') S0.sel = null;
     else if (n === 'move') {
       const id = S0.sel, cur0 = isl.items.find(i => i.id === id), d0 = shopDef((cur0 || {}).t) || {}; S0.sel = null; S0.placeDef = d0; S0.msg = d0.farm ? 'Tap the paddock where it should go.' : d0.habitat && d0.habitat !== 'lawn' ? placeHint(d0) : 'Tap the grass where it should go.';
-      S0.place = (x, z, sx, sy, res = {}) => { const cur = kid().island; updDoc('kids', k.id, { island: { ...cur, items: cur.items.map(i => { if (i.id !== id) return i; const o = { ...i, x: +x.toFixed(3), z: +z.toFixed(3) }; delete o.zone; delete o.lobe; delete o.lu; delete o.lv; if (res.zone && res.zone !== 'lawn') o.zone = res.zone; if (res.lobe) Object.assign(o, { lobe: res.lobe, lu: res.lu, lv: res.lv }); return o; }) } }); build(); S0.msg = ''; Sound.pop(); ui(); };
+      S0.place = (x, z, sx, sy, res = {}) => { const cur = kid().island; updDoc('kids', k.id, { island: { ...cur, items: cur.items.map(i => { if (i.id !== id) return i; const o = { ...i, x: +x.toFixed(3), z: +z.toFixed(3) }; delete o.zone; delete o.isle; delete o.lobe; delete o.lu; delete o.lv; if (res.zone && res.zone !== 'lawn') o.zone = res.zone; if (res.isle) Object.assign(o, { isle: res.isle, lu: res.lu, lv: res.lv }); return o; }) } }); build(); S0.msg = ''; Sound.pop(); ui(); };
     } else if (n === 'turn') {
       const id = S0.sel, it = isl.items.find(i => i.id === id); if (!it) return; const r = +((it.r || 0) + Math.PI / 4).toFixed(2);
       updDoc('kids', k.id, { island: { ...isl, items: isl.items.map(i => (i.id === id ? { ...i, r } : i)) } }, 500); const m = findMesh(id); if (m) m.rotation.y = r; Sound.tap();
@@ -4161,7 +4255,8 @@ const Studio = (() => {
   }
   function open(id) {
     if (!ensure()) { toast('The island needs 3D, which this device can’t show.'); return; }
-    kidId = id; Object.assign(S0, { open: true, msg: '', sel: null, tree: null, confirm: null, place: null, job: null, lk: null, preview: null, standTab: null, cat: CARE.some(c => careOf(kid())[c.k] >= 0.66) ? 'jobs' : 'animals' }); idle = 0;
+    if (S0.trip) { drop(S0.trip.old); S0.trip = null; }
+    kidId = id; Object.assign(S0, { open: true, isle: 'home', homeCat: null, msg: '', sel: null, tree: null, confirm: null, place: null, job: null, lk: null, preview: null, standTab: null, cat: CARE.some(c => careOf(kid())[c.k] >= 0.66) ? 'jobs' : 'animals' }); idle = 0;
     const root = $('#studio'); if (!R.domElement.isConnected) root.prepend(R.domElement);
     rad = 0; build(); rad = fitRad(); size(); root.hidden = false; ui(); last = performance.now(); if (!raf) raf = requestAnimationFrame(frame); Sound.ensure(); Sound.whoosh();
   }
@@ -6445,7 +6540,7 @@ const ACT = {
   photo: a => { UI.photoId = a.dataset.id; openSheet(photoSheet, { cls: 'wide' }); },
   studio: a => { Studio.show(a.dataset.id); },
   st: a => Studio.farmAct(a.dataset.n, a),
-  stClose: () => Studio.close(), stCat: a => Studio.act('cat', a), stLook: a => Studio.act('look', a), stLookUse: a => Studio.act('lookUse', a), stLookXp: a => Studio.act('lookXp', a), stLookCash: a => Studio.act('lookCash', a), stLookOff: a => Studio.act('lookOff', a), stPlaceWon: a => Studio.act('placeWon', a), stBuyXp: a => Studio.act('buyXp', a), stBuyCash: a => Studio.act('buyCash', a), stPayCash: a => Studio.act('payCash', a), stPayXp: a => Studio.act('payXp', a), stCancel: a => Studio.act('cancel', a), stDone: a => Studio.act('done', a), stMove: a => Studio.act('move', a), stTurn: a => Studio.act('turn', a), stSell: a => Studio.act('sell', a), stCare: a => Studio.act('care', a),
+  stClose: () => Studio.close(), stCat: a => Studio.act('cat', a), stIsle: a => Studio.act('isle', a), stLook: a => Studio.act('look', a), stLookUse: a => Studio.act('lookUse', a), stLookXp: a => Studio.act('lookXp', a), stLookCash: a => Studio.act('lookCash', a), stLookOff: a => Studio.act('lookOff', a), stPlaceWon: a => Studio.act('placeWon', a), stBuyXp: a => Studio.act('buyXp', a), stBuyCash: a => Studio.act('buyCash', a), stPayCash: a => Studio.act('payCash', a), stPayXp: a => Studio.act('payXp', a), stCancel: a => Studio.act('cancel', a), stDone: a => Studio.act('done', a), stMove: a => Studio.act('move', a), stTurn: a => Studio.act('turn', a), stSell: a => Studio.act('sell', a), stCare: a => Studio.act('care', a),
   poke: a => { G3.poke(a.dataset.id); Sound.ensure(); Sound.pop(); const r = a.getBoundingClientRect(); FX.burst(r.left + r.width / 2, r.top + r.height * 0.4, CONF, 16); },
 
   sPause: () => { if (Stage.panes.every(p => p.phase !== 'play')) return; pauseStage(true); },
