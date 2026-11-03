@@ -1,19 +1,29 @@
 // Restores a backup from scripts/backup.mjs into an empty database (DATABASE_URL, or the local embedded one).
 //   node scripts/restore.mjs <file>
+// An encrypted off-site backup (server/offsite.js, .enc) is decrypted with BACKUP_KEY first.
 // Runs the migrations first, loads each table in the backup's order (parents first), then moves id counters past the
 // restored rows. It refuses a database that already has families in it.
-import { createReadStream } from 'node:fs';
+import { createReadStream, readFileSync } from 'node:fs';
+import { Readable } from 'node:stream';
 import readline from 'node:readline';
 import zlib from 'node:zlib';
 import { pathToFileURL } from 'node:url';
 import { openDb, migrate } from '../server/db.js';
+import { isEncrypted, decrypt, keyFrom } from '../server/offsite.js';
+
+// The backup's lines, from a plain .jsonl.gz or an encrypted off-site copy.
+export function backupLines(file, key = process.env.BACKUP_KEY) {
+  const head = readFileSync(file, { flag: 'r' }).subarray(0, 40);
+  const gz = isEncrypted(head) ? Readable.from([decrypt(readFileSync(file), keyFrom(key))]) : createReadStream(file);
+  return readline.createInterface({ input: gz.pipe(zlib.createGunzip()), crlfDelay: Infinity });
+}
 
 const dec = v => (v && typeof v === 'object' && !Array.isArray(v) && '$b64' in v ? Buffer.from(v.$b64, 'base64') : v);
 
 export async function restore(db, file) {
   await migrate(db);
   if ((await db.query('select count(*)::int as n from families')).rows[0].n) throw new Error('This database already has families in it. Restore into an empty one.');
-  const lines = readline.createInterface({ input: createReadStream(file).pipe(zlib.createGunzip()), crlfDelay: Infinity });
+  const lines = backupLines(file);
   let head = null, cols = null, table = null, batch = [];
   const counts = {}, have = new Set((await db.query(`select table_name from information_schema.tables where table_schema = 'public'`)).rows.map(r => r.table_name));
   const flush = async () => {
@@ -53,7 +63,7 @@ export async function restore(db, file) {
   return counts;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const file = process.argv[2]; if (!file) { console.error('usage: node scripts/restore.mjs <backup file>'); process.exit(1); }
   const db = await openDb();
   try {

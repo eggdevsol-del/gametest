@@ -1,0 +1,21 @@
+# Every push to the live branch and every pull request: install exactly what the lockfile says, check the lesson
+# content, lint, then run every test suite (each starts real Chorecast servers on throwaway embedded databases).
+name: Tests
+on:
+  push:
+    branches: [chorecast]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run lint
+      - run: npm test

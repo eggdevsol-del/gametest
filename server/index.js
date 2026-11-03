@@ -2,7 +2,6 @@
 // data through Postgres, job photos, the in-app event log and the Character Growth content feed.
 import http from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomUUID, createHash, X509Certificate } from 'node:crypto';
@@ -17,11 +16,12 @@ import { makeErrors } from './errors.js';
 import { verifyAppleJws } from './appstore.js';
 import { PAYWALL, PRODUCTS, PLANS, FOUNDING_SEATS, WELCOME_DAYS, planOf, clubPrize } from './plans.js';
 import { notify } from './push.js';
+import { offsiteConfig, runOffsiteBackup } from './offsite.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 // Options: PORT and STATIC_DIR environment variables, or --port 8787 --static public on the command line.
 const arg = name => { const i = process.argv.indexOf('--' + name); return i > 0 ? process.argv[i + 1] : undefined; };
-const ROOT = path.resolve(arg('static') || process.env.STATIC_DIR || [path.join(here, '..', 'dist'), path.join(here, '..', 'public')].find(d => existsSync(d)));
+const ROOT = path.resolve(arg('static') || process.env.STATIC_DIR || path.join(here, '..', 'public'));
 const PORT = Number(arg('port') || process.env.PORT || 8787);
 // Links in emails always use this address, never the request's Host header (which anyone can set).
 const APP_URL = (process.env.APP_URL || (process.env.RAILWAY_PUBLIC_DOMAIN ? 'https://' + process.env.RAILWAY_PUBLIC_DOMAIN : `http://localhost:${PORT}`)).replace(/\/$/, '');
@@ -320,8 +320,27 @@ const serverSession = familyId => ({ family_id: familyId, device_id: null, user_
 const clearJobPhotos = (familyId, jobId) => writeDoc(serverSession(familyId), 'jobs', jobId, { photo: null, stepPhotos: null, photoGone: Date.now() }, true, null, true);
 async function housekeeping() {
   try { const out = await runHousekeeping(db, clearJobPhotos); if (out) console.log('housekeeping', JSON.stringify(out)); } catch (e) { console.error('housekeeping failed', e); }
+  try { await offsiteBackup(); } catch (e) { console.error('off-site backup failed', e.message); }
   try { await welcomeEnding(); } catch (e) { console.error('welcome reminders failed', e.message); }
 }
+// The daily encrypted off-site backup (server/offsite.js), when a bucket is set up. A failed one is tried again in
+// about an hour, and recorded in the error log so it doesn't fail quietly.
+const OFFSITE = (() => { try { return offsiteConfig(); } catch (e) { console.error('off-site backups are off:', e.message); return null; } })();
+async function offsiteBackup(force = false) {
+  if (!OFFSITE) return null;
+  const due = (await db.query(`insert into housekeeping (job, last_run) values ('offsite', now()) on conflict (job) do update set last_run = now()
+    where $1 or housekeeping.last_run < now() - interval '23 hours' returning job`, [force])).rows.length;
+  if (!due) return null;
+  try {
+    const out = await runOffsiteBackup(db, OFFSITE);
+    await db.query(`update housekeeping set detail = $1::jsonb where job = 'offsite'`, [JSON.stringify({ ...out, ok: true })]);
+    console.log('off-site backup', JSON.stringify(out)); return out;
+  } catch (e) {
+    await db.query(`update housekeeping set last_run = now() - interval '22 hours', detail = $1::jsonb where job = 'offsite'`, [JSON.stringify({ ok: false, error: e.message })]);
+    errors.record('server', 'off-site backup', e); throw e;
+  }
+}
+
 // Four days before a family's welcome fortnight ends (and they haven't bought a plan), the grown-ups' phones hear about
 // it once, so the end is never a surprise.
 async function welcomeEnding() {
@@ -349,6 +368,17 @@ route('GET', '/api/health', async () => {
 });
 
 const isAdmin = req => !!ADMIN_TOKEN && req.headers.authorization === `Bearer ${ADMIN_TOKEN}`;
+// Run the off-site backup now (to check a new bucket works), or see how the last one went.
+route('POST', '/api/admin/backup', async ({ req }) => {
+  if (!isAdmin(req)) fail(404, 'Not found.', 'not_found');
+  if (!OFFSITE) fail(409, 'Off-site backups aren’t set up: set BACKUP_BUCKET and the other BACKUP_ settings.', 'not_set_up');
+  return { ok: true, ...(await offsiteBackup(true)) };
+});
+route('GET', '/api/admin/backup', async ({ req }) => {
+  if (!isAdmin(req)) fail(404, 'Not found.', 'not_found');
+  const r = (await db.query(`select last_run, detail from housekeeping where job = 'offsite'`)).rows[0];
+  return { setUp: !!OFFSITE, lastRun: r ? r.last_run : null, last: r ? r.detail : null };
+});
 route('GET', '/api/admin/errors', async ({ req }) => { if (!isAdmin(req)) fail(404, 'Not found.', 'not_found'); return { errors: await errors.recent(100) }; });
 
 // The app reports its own crashes (signed in or not), at most 30 a quarter-hour from one address.
@@ -1000,15 +1030,15 @@ async function serveStatic(req, res, pathname) {
   if (st && st.isDirectory()) { file = path.join(file, 'index.html'); st = await stat(file).catch(() => null); }
   if (!st) { file = rel.startsWith('/chorecast/') && !path.extname(rel) ? path.join(ROOT, 'chorecast', 'index.html') : path.join(ROOT, 'index.html'); st = await stat(file).catch(() => null); }
   if (!st) { res.writeHead(404, { 'content-type': 'text/plain' }); return res.end('Not found'); }
-  // Vite's hashed /assets/ files never change. Everything else (Chorecast's growth.js, lesson packs) keeps its name
-  // across deploys, so browsers revalidate it every time and get a cheap 304 when nothing changed.
-  const ext = path.extname(file), hashed = rel.startsWith('/assets/'), modified = st.mtime.toUTCString(), type = MIME[ext] || 'application/octet-stream';
-  const head = { 'content-type': type, 'cache-control': hashed ? 'public, max-age=31536000, immutable' : 'no-cache', 'last-modified': modified };
+  // Files keep their names across deploys (the page, growth.js, lesson packs), so browsers revalidate every time and
+  // get a cheap 304 when nothing changed.
+  const ext = path.extname(file), modified = st.mtime.toUTCString(), type = MIME[ext] || 'application/octet-stream';
+  const head = { 'content-type': type, 'cache-control': 'no-cache', 'last-modified': modified };
   const isApp = file.startsWith(path.join(ROOT, 'chorecast') + path.sep);
   if (isApp && ext === '.html') head['content-security-policy'] = await cspFor(file, st.mtimeMs);
   const zippable = /^(text\/|application\/(json|manifest\+json)|image\/svg)/.test(type) && st.size > 1024;
   if (zippable) head.vary = 'accept-encoding';
-  if (!hashed && req.headers['if-modified-since'] === modified) { res.writeHead(304, head); return res.end(); }
+  if (req.headers['if-modified-since'] === modified) { res.writeHead(304, head); return res.end(); }
   const enc = zippable ? encodingFor(req) : null;
   const body = enc ? await zipped(file, st.mtimeMs, enc) : await readFile(file);
   if (enc) head['content-encoding'] = enc;

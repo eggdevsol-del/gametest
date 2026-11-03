@@ -41,7 +41,7 @@ export async function backup(db, file) {
   return counts;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const file = process.argv[2] || `chorecast-backup-${new Date().toISOString().slice(0, 10)}.jsonl.gz`;
   const db = await openDb();
   const counts = await backup(db, file);

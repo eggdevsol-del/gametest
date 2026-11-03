@@ -16,24 +16,24 @@ npm install
 ```
 
 ```bash
-npm run build
-```
-
-```bash
 npm start
 ```
 
-Then open `http://localhost:8787/`. On an iPad, use your computer's network address instead of `localhost`. The site root redirects to `/chorecast/`.
+Then open `http://localhost:8787/`. On an iPad, use your computer's network address instead of `localhost`. The server serves `public/` as it is (there's no build step); the site root (`public/index.html`) forwards to `/chorecast/`.
 
-Without `DATABASE_URL`, the server uses an embedded Postgres (PGlite) stored in `.data/pglite`, so nothing else needs installing. To serve `public/` directly without a build, run `node server/index.js --static public --port 8787`.
+Without `DATABASE_URL`, the server uses an embedded Postgres (PGlite) stored in `.data/pglite`, so nothing else needs installing.
 
-`npm run dev` (Vite) still serves the page, but without the server: no sign-in, and everything is saved in that browser only.
+```bash
+npm test
+```
 
-The Tattoo Tycoon offline app (vite-plugin-pwa) is set to `selfDestroying` on this branch. Devices that installed the game get a service worker that removes itself and clears its cache, so they stop seeing the game. The game's code in `src/` is unchanged and still on `main`.
+runs every test suite in `tests/` (each starts real servers on throwaway embedded databases) and the smoke test; `npm test -- plans backups` runs just those. `npm run lint` checks the server, scripts, tests and the app's separate script files. GitHub runs the lesson check, lint and every suite on each push to `chorecast` (`.github/workflows/test.yml`).
+
+This address used to serve the Tattoo Tycoon game, and some devices installed it for offline use. `public/sw.js` is a service worker that removes itself and clears its cache, so those devices stop seeing the game; Chorecast itself has no service worker. The game's code is still on `main`.
 
 ## Railway
 
-[`railway.json`](railway.json) builds with `npm run build`, starts `node server/index.js` and checks `/api/health`.
+[`railway.json`](railway.json) runs `npm run build` (the lesson content check: a broken lesson file stops the deploy), starts `node server/index.js` and checks `/api/health`.
 
 To set it up:
 
@@ -60,11 +60,14 @@ Optional variables:
 
 These need doing once in the Railway and Apple dashboards; the code is ready for them.
 
-1. **Backups:** turn on backups for the Postgres service in Railway. Once a month, check one: run `npm run backup` against production (with `DATABASE_URL` set), then `npm run restore <file>` into an empty local database, and open the app on it. The backup holds kids' data, so keep it somewhere private and delete it after.
+1. **Backups:** two layers.
+   - Turn on backups for the Postgres service in Railway (quick restores of the whole database).
+   - Off-site, encrypted, daily (`server/offsite.js`): make a private bucket in Cloudflare R2, AWS S3 or Backblaze B2 with a lifecycle rule that deletes objects after 30 days, and an access key that can only write to it. Set `BACKUP_BUCKET`, `BACKUP_ENDPOINT` (for R2, `https://<account id>.r2.cloudflarestorage.com`), `BACKUP_REGION` (`auto` for R2, or the AWS region), `BACKUP_ACCESS_KEY`, `BACKUP_SECRET_KEY`, and `BACKUP_KEY` (`openssl rand -base64 32`; keep a copy in your password manager, because without it no backup can be read). Then `curl -X POST -H "Authorization: Bearer $ADMIN_TOKEN" https://<your domain>/api/admin/backup` to run one now; `GET` the same address shows how the last one went. A failed backup is tried again in about an hour and appears in the error log.
+   - Once a month, a restore drill: download a backup from the bucket, then `BACKUP_KEY=... npm run restore-drill <file>`. It restores into a throwaway local database and checks every table came back in full. (`npm run restore <file>` restores for real, into an empty database.)
 2. **Uptime:** point an uptime monitor (Better Stack, UptimeRobot or similar) at `/api/health` every minute. It fails when the database stops answering.
 3. **Errors:** set `ERROR_WEBHOOK`, or read `GET /api/admin/errors` with the `ADMIN_TOKEN`.
 4. **App Store notifications:** in App Store Connect, set the production and sandbox URLs for App Store Server Notifications (version 2) to `https://<your domain>/api/appstore/notifications`.
-5. **Before every release:** `npm run smoke`.
+5. **Before every release:** `npm test` (every suite, about 30 seconds; GitHub runs it on every push to `chorecast`, with the lint and lesson check, in `.github/workflows/test.yml`).
 6. **How plans and the shop are doing:** `npm run metrics` (or `node scripts/metrics.mjs 12` for 12 weeks) prints the weekly funnel from our own tables: families, welcome fortnights and paying families; upgrade moments and what grown-ups did; why the plans sheet was opened; App Store lifecycle; shop sales; lesson packs; kids looking at Plus things and wishes.
 
 ## Database
@@ -161,6 +164,7 @@ Tables are created by numbered SQL files in [`server/migrations/`](server/migrat
   - **Welcome fortnight:** every new family has Plus for 14 days without paying (an entitlement with source `welcome`; this replaces an App Store free trial). Four days before it ends the grown-ups' phones hear about it once.
   - **When Plus ends:** nothing a kid bought, won, earned or learned is taken away. Tuned rates go back to the standard ones. If there are more kids than the plan has room for, a grown-up picks who stays active and the others rest (`kid.resting`): their money, statement and island are kept, their screen says so calmly, and their iPad can't change anything until there's room again (the server refuses with `resting`). Who's active can be swapped once a week. With Plus back, everyone wakes.
   - **Preview the free plan** (Grown-ups, then Family, only while `PAYWALL` is off): `settings.planPreview = 'free'` makes the server and every device behave exactly as Free, so the free plan can be tried before launch. Upgrade moments show but aren't recorded.
+- **Accessibility:** every text size is a multiple of `--ts`. On an iPhone or iPad it follows the system text size (Settings, Display & Brightness, Text Size, measured from Apple's body text style), and a grown-up can choose Standard, Large or Larger for a device in Grown-ups, then Family; it stays between 0.9 and 1.35 so screens still fit (the jars go two by two at bigger sizes). Every button and control has a name a screen reader can say (icon-only buttons have an `aria-label`), the 3D layer is hidden from screen readers, and moving effects respect "reduce motion".
 - **Grown-ups:** a PIN-locked dashboard to review photos, approve pay, check habits, set the money rules, follow Character Growth and manage family devices.
 
 ## Tech notes
