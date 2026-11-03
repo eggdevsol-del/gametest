@@ -67,7 +67,7 @@ window.ChorecastCatalog = {"version":2,"cats":[["jobs","Island jobs"],["stand","
 {"t":"stable","name":"Stable yard","cat":"land","xp":1800,"cash":1440,"land":"stable","about":"A bigger farm with a stable. Horses live here, and farm animals can too.","needs":"farm"},
 {"t":"lake","name":"Lake","cat":"land","xp":2000,"cash":1600,"land":"lake","about":"A big freshwater lake for swans, the platypus and fishing. Your savings pond stays."},
 {"t":"waterfall","name":"Waterfall cliff","cat":"land","xp":2500,"cash":2000,"land":"waterfall","about":"A waterfall spilling off the edge of your island, with a rainbow in the spray."},
-{"t":"lookout","name":"Mountain lookout","cat":"land","xp":3000,"cash":2400,"land":"lookout","about":"A rocky peak with a winding path, and the only place an observatory fits.","lvl":1},
+{"t":"lookout","name":"Mountain lookout","cat":"land","xp":3000,"cash":2400,"land":"lookout","about":"A geyser basin like Yellowstone: a rainbow hot spring, hot pools, a geyser that erupts, steaming vents, terraces and an overlook, the only place an observatory fits.","lvl":1},
 {"t":"sky","name":"Floating sky islet","cat":"land","xp":4000,"cash":3200,"land":"sky","about":"A tiny island floating above yours, reached by a rope ladder.","lvl":2},
 {"t":"spade","name":"Tree spade","cat":"tools","xp":400,"cash":320,"about":"Tap any of your chore trees to dig it up and replant it somewhere new, or change its type."},
 {"t":"wateringcan","name":"Watering can","cat":"tools","xp":200,"cash":160,"about":"Flower beds and veggie beds need watering. Crops only grow when they’re watered."},
@@ -389,4 +389,4 @@ window.ChorecastCatalog = {"version":2,"cats":[["jobs","Island jobs"],["stand","
 {"k":"beachset","name":"Beach friends","icon":"🦀","items":["starfish","crab","hermitcrab","seal","seaturtle"]},
 {"k":"fishbook","name":"Fish book","icon":"🎣","book":"fish"},
 {"k":"bugbook","name":"Bug book","icon":"🔍","book":"bugs"},
-{"k":"producebook","name":"Produce book","icon":"🧺","book":"produce"}],"rules":{"pantry":12,"pantryBig":40,"farmCap":150,"setXp":250,"firstFind":10,"saturday":1.25,"orderBonus":1.3,"orders":2,"utePay":1.1,"sizeScale":[1,1.2,1.45,1.75,2.0],"sizeTrees":4,"seed":20}};
+{"k":"producebook","name":"Produce book","icon":"🧺","book":"produce"}],"rules":{"pantry":12,"pantryBig":40,"farmCap":150,"playCap":60,"setXp":250,"firstFind":10,"saturday":1.25,"orderBonus":1.3,"orders":2,"utePay":1.1,"sizeScale":[1,1.2,1.45,1.75,2.0],"sizeTrees":4,"seed":20}};

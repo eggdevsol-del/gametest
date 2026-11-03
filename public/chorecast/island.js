@@ -389,10 +389,12 @@ window.ChorecastIsland = K => {
   const SAND = [[0.03, null], [0.12, 0xd9bf88], [0.24, 0xb89a68], [9, 0x8f7a5a]];
   const MUD = [[0.03, null], [0.12, 0x5a4a35], [0.24, 0x6b5a42], [9, 0x8a7a62]];
   // An island's cut-away side, from its rim (top(a): the ground's height at angle a) down to the rock (base), with roots
-  // hanging out of the topsoil and stones poking through lower down. o: { E, top, base, baseR, cap(a), lawnC, layers,
-  // seed, sea }.
+  // hanging out of the topsoil and stones poking through lower down (a layer's colour can be a function of height and
+  // angle, for banded rock). o: { E, top, base, baseR, cap(a), lawnC, layers, seed, sea }.
   function skirt(g, L, o) {
-    const N = 128, D = [0, 0.012, 0.024, 0.045, 0.07, 0.1, 0.13, 0.17, 0.22, 0.28, 0.35, 0.43, 0.52], M = D.length, rr = K.mulberry(o.seed + 5), layers = o.layers || SOIL, pos = [], cols = [], idx = [], c = new T.Color(), grey = new T.Color(0x9a948a);
+    const N = 128, D = [0, 0.012, 0.024, 0.045, 0.07, 0.1, 0.13, 0.17, 0.22, 0.28, 0.35, 0.43, 0.52];
+    let tall = 0; for (let i = 0; i < N; i++) tall = Math.max(tall, o.top(i / N * PI * 2) - o.base); while (D[D.length - 1] < tall) D.push(D[D.length - 1] + 0.07);
+    const M = D.length, rr = K.mulberry(o.seed + 5), layers = o.layers || SOIL, pos = [], cols = [], idx = [], c = new T.Color(), grey = new T.Color(0x9a948a);
     for (let i = 0; i <= N; i++) {
       const a = i / N * PI * 2, t0 = o.top(a), span = Math.max(0.02, t0 - o.base);
       for (let j = 0; j < M; j++) {
@@ -401,7 +403,7 @@ window.ChorecastIsland = K => {
         const rad = j === M - 1 ? o.baseR : o.E - f * (o.E - o.baseR) * 0.6 - dent;
         pos.push(L.cx + Math.cos(a) * rad, yy, L.cz + Math.sin(a) * rad);
         const lay = layers.find(l => d < l[0]) || layers[layers.length - 1];
-        c.set(lay[1] == null ? (o.cap ? o.cap(a) : o.lawnC) : lay[1]);
+        c.set(lay[1] == null ? (o.cap ? o.cap(a) : o.lawnC) : typeof lay[1] === 'function' ? lay[1](yy, a) : lay[1]);
         if (lay[1] != null && rr() < 0.08) c.lerp(grey, 0.55);
         c.multiplyScalar(1 - Math.min(0.25, d * 0.4)).convertSRGBToLinear(); cols.push(c.r, c.g, c.b);
       }
@@ -410,7 +412,7 @@ window.ChorecastIsland = K => {
     const geo = new T.BufferGeometry(); geo.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); geo.setAttribute('color', new T.Float32BufferAttribute(cols, 3)); geo.setIndex(idx); geo.computeVertexNormals();
     add(g, geo, mat(0xffffff, { vc: true }));
     for (let i = 0; i < Math.round(18 * L.r); i++) {
-      const a = rr() * PI * 2, t0 = o.top(a); if (o.sea != null && t0 < o.sea + 0.01) continue;
+      const a = rr() * PI * 2, t0 = o.top(a); if ((o.sea != null && t0 < o.sea + 0.01) || t0 - o.base > 0.5) continue;
       const ca = Math.cos(a), sa = Math.sin(a), d0 = 0.04 + rr() * 0.05, len = 0.06 + rr() * 0.12, R0 = o.E - 0.02, at = (out, dy) => [L.cx + ca * (R0 + out), t0 - d0 - dy, L.cz + sa * (R0 + out)];
       const p1 = at(0.028, len * 0.45); stick(g, at(0, 0), p1, 0.006, 0x5a3a22); stick(g, p1, at(0.02 + rr() * 0.025, len), 0.0035, 0x5a3a22);
     }
@@ -527,7 +529,7 @@ void main() {
   function land(g, k, key, ctx) {
     const L = isle(key), y = ctx.top, seed = k.seed + key.length * 17, rr = K.mulberry(seed + 99), zones = {}, surf = [], fx = [], night = ctx.night, base = { seed, rock: ctx.rock };
     const tone = c => (night ? blend(c, 0x0f2a24, 0.5) : c), on = (m, hab) => { m.userData.hab = hab; surf.push(m); return m; }, spot = (u, v) => toWorld(L, u, v), face = Math.atan2(L.ox, L.oz);
-    let hRel = () => 0, sea = null;
+    let hRel = () => 0, sea = null, play = {};
     if (key === 'plot') {
       // A working vege garden: two long dug beds with furrows (where crop beds go) either side of a bark path, raised
       // beds of lettuces and cabbages and a bean teepee at the front, sunflowers along the back, a shed, compost bins,
@@ -542,7 +544,7 @@ void main() {
       bx(shed, 0.3, 0.2, 0.22, 0x6f9a6a, 0, 0.1, 0); [-1, 1].forEach(s => tilt(bx(shed, 0.17, 0.012, 0.26, 0x5b5f6e, s * 0.075, 0.235, 0), 0, 0, -s * 0.5)); bx(shed, 0.08, 0.15, 0.006, 0x4a3524, 0.05, 0.075, 0.112); bx(shed, 0.06, 0.05, 0.006, 0xbfe3ff, -0.08, 0.12, 0.112);
       for (let i = 0; i < 3; i++) { const [x, z] = spot(-0.58, -0.62 + i * 0.12), b = new T.Group(); b.position.set(x, y, z); b.rotation.y = face; g.add(b); bx(b, 0.1, 0.012, 0.1, 0x4a3020, 0, 0.07, 0); for (let j = 0; j < 4; j++) { bx(b, 0.1, 0.014, 0.008, 0x9a6a3c, 0, 0.012 + j * 0.02, 0.05); bx(b, 0.1, 0.014, 0.008, 0x9a6a3c, 0, 0.012 + j * 0.02, -0.05); bx(b, 0.008, 0.014, 0.1, 0x9a6a3c, 0.05, 0.012 + j * 0.02, 0); } }
       { const [x, z] = spot(-0.5, 0.64); cyl(g, 0.075, 0.075, 0.2, 0x3f6b4a, x, y + 0.1, z, 16); cyl(g, 0.078, 0.078, 0.012, 0x2f5a3a, x, y + 0.205, z, 16); }
-      for (let i = 0; i < 6; i++) { const a = L.a + PI + (i < 3 ? -1 : 1) * (0.55 + (i % 3) * 0.2), r0 = 0.86 * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, hh = 0.22 + (i % 2) * 0.05; cyl(g, 0.006, 0.008, hh, 0x4f8a2f, x, y + hh / 2, z, 5); const hd = new T.Group(); hd.position.set(x, y + hh, z); hd.rotation.set(-0.5, Math.atan2(L.cx - x, L.cz - z), 0); g.add(hd); cyl(hd, 0.045, 0.045, 0.01, 0xffc823, 0, 0, 0, 12).rotation.x = P2; cyl(hd, 0.022, 0.022, 0.014, 0x6b3f1f, 0, 0, 0.004, 10).rotation.x = P2; }
+      const sunflowers = []; for (let i = 0; i < 6; i++) { const a = L.a + PI + (i < 3 ? -1 : 1) * (0.55 + (i % 3) * 0.2), r0 = 0.86 * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, hh = 0.22 + (i % 2) * 0.05; sunflowers.push([x, z]); cyl(g, 0.006, 0.008, hh, 0x4f8a2f, x, y + hh / 2, z, 5); const hd = new T.Group(); hd.position.set(x, y + hh, z); hd.rotation.set(-0.5, Math.atan2(L.cx - x, L.cz - z), 0); g.add(hd); cyl(hd, 0.045, 0.045, 0.01, 0xffc823, 0, 0, 0, 12).rotation.x = P2; cyl(hd, 0.022, 0.022, 0.014, 0x6b3f1f, 0, 0, 0.004, 10).rotation.x = P2; }
       [[0.6, -0.3, 0x9fd65a], [0.6, 0.3, 0x5f9a7a]].forEach(([u, v, c], b) => { const rb = new T.Group(), [x, z] = spot(u, v); rb.position.set(x, y, z); rb.rotation.y = face; g.add(rb); bx(rb, 0.18, 0.05, 0.26, WOOD, 0, 0.025, 0); bx(rb, 0.16, 0.012, 0.24, 0x553522, 0, 0.05, 0); for (let i = 0; i < 2; i++) for (let j = 0; j < 4; j++) sph(rb, b ? 0.026 : 0.022, c, -0.04 + i * 0.08, 0.065, -0.09 + j * 0.06, 1, b ? 0.85 : 0.6, 1); });
       { const [x, z] = spot(0.66, 0), tp = y + 0.3; [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => { const b = [x + sx * 0.06, y, z + sz * 0.06]; stick(g, b, [x, tp, z], 0.004, 0x9a6a3c); for (let j = 1; j < 4; j++) { const q = j / 4; sph(g, 0.018, 0x3f8f35, b[0] + (x - b[0]) * q, y + (tp - y) * q, b[2] + (z - b[2]) * q, 1, 0.8, 1); } }); }
       { const s = new T.Group(), [x, z] = spot(0.28, 0.62); s.position.set(x, y, z); s.rotation.y = face; g.add(s); cyl(s, 0.006, 0.006, 0.3, 0x8a5a3c, 0, 0.15, 0, 5); bx(s, 0.2, 0.008, 0.008, 0x8a5a3c, 0, 0.22, 0); bx(s, 0.08, 0.1, 0.04, 0x3a5a9a, 0, 0.2, 0); sph(s, 0.035, 0xe8c48a, 0, 0.29, 0); cn(s, 0.05, 0.04, 0xd4a64a, 0, 0.33, 0, 10); }
@@ -551,6 +553,7 @@ void main() {
       many(g, new T.ConeGeometry(0.012, 0.035, 5).translate(0, 0.017, 0), 0x5fae3a, sprouts);
       const [px, pz] = spot(-0.06, -0.36); zones.plot = { x: px, z: pz, r: 0.14, y: y + 0.02 };
       zones.lawn = { x: L.cx, z: L.cz, r: 0.82 * L.r, y, not: (x, z) => inBed(x, z, 0.04) };
+      play = { start: spot(0.3, 0), spots: [], sunflowers, scarecrow: spot(0.28, 0.62) }; for (let i = 0; i < 400 && play.spots.length < 40; i++) { const [x, z] = spot((rr() - 0.5) * 1.1, (rr() - 0.5) * 1.1); if (inBed(x, z, -0.04)) play.spots.push([x, z]); }
     } else if (key === 'stable') {
       // A horse yard: a sand arena with white rails and show jumps, the stable block at the back, hay and a trough.
       const AU = 0.18, A1 = 0.56, A2 = 0.38, inArena = (x, z, m = 0) => ((outward(L, x, z) - AU) / (A2 + m)) ** 2 + (across(L, x, z) / (A1 + m)) ** 2 < 1;
@@ -559,7 +562,7 @@ void main() {
       isleGrass(g, ctx, seed, L, y, { not: (x, z) => inArena(x, z, 0.03) || inStable(x, z) });
       const rails = []; for (let i = 0; i < 40; i++) { const a = i / 40 * PI * 2, [x, z] = spot(AU + Math.cos(a) * (A2 + 0.03), Math.sin(a) * (A1 + 0.03)); if (Math.abs(Math.cos(a) - 1) < 0.02) continue; cyl(g, 0.008, 0.008, 0.1, 0xf4f1ea, x, y + 0.05, z, 6); rails.push([x, z, i]); }
       rails.forEach(([x, z, i], j) => { const nb = rails[j + 1]; if (nb && nb[2] === i + 1) [0.045, 0.09].forEach(hh => stick(g, [x, y + hh, z], [nb[0], y + hh, nb[1]], 0.005, 0xf4f1ea)); });
-      [-0.25, 0.25].forEach((v, n) => { const j = new T.Group(), [x, z] = spot(AU, v); j.position.set(x, y, z); j.rotation.y = face; g.add(j); [-1, 1].forEach(s => { bx(j, 0.02, 0.12, 0.03, 0xffffff, s * 0.1, 0.06, 0); bx(j, 0.02, 0.04, 0.03, n ? 0x2f6bd0 : 0xd0302f, s * 0.1, 0.1, 0); }); [0.05, 0.09].forEach(hh => { for (let q = 0; q < 4; q++) bx(j, 0.05, 0.01, 0.01, q % 2 ? 0xffffff : n ? 0x2f6bd0 : 0xd0302f, -0.075 + q * 0.05, hh, 0); }); });
+      [-0.44, 0.44].forEach((v, n) => { const j = new T.Group(), [x, z] = spot(AU, v); j.position.set(x, y, z); j.rotation.y = face; g.add(j); [-1, 1].forEach(s => { bx(j, 0.02, 0.12, 0.03, 0xffffff, s * 0.1, 0.06, 0); bx(j, 0.02, 0.04, 0.03, n ? 0x2f6bd0 : 0xd0302f, s * 0.1, 0.1, 0); }); [0.05, 0.09].forEach(hh => { for (let q = 0; q < 4; q++) bx(j, 0.05, 0.01, 0.01, q % 2 ? 0xffffff : n ? 0x2f6bd0 : 0xd0302f, -0.075 + q * 0.05, hh, 0); }); });
       const st = new T.Group(); st.position.set(sx, y, sz); st.rotation.y = face; g.add(st);
       bx(st, 0.56, 0.2, 0.2, 0x9c5a3a, 0, 0.1, 0); tilt(bx(st, 0.62, 0.014, 0.28, 0x5b5f6e, 0, 0.235, 0.02), 0.32); bx(st, 0.58, 0.02, 0.02, 0xf4f1ea, 0, 0.2, 0.101);
       for (let i = 0; i < 3; i++) { bx(st, 0.1, 0.13, 0.006, 0x3b2a24, -0.18 + i * 0.18, 0.065, 0.101); bx(st, 0.11, 0.012, 0.008, 0xf4f1ea, -0.18 + i * 0.18, 0.08, 0.104); }
@@ -567,48 +570,97 @@ void main() {
       [[-0.5, 0.5], [-0.42, 0.6]].forEach(([u, v], i) => { const [x, z] = spot(u, v); cyl(g, 0.05, 0.05, 0.085, 0xe9c46a, x, y + 0.05, z, 14).rotation.set(P2, 0, i * 0.7); });
       { const tr = new T.Group(), [x, z] = spot(-0.25, -0.62); tr.position.set(x, y, z); tr.rotation.y = face; g.add(tr); bx(tr, 0.2, 0.05, 0.07, 0x8d9096, 0, 0.035, 0); add(tr, new T.BoxGeometry(0.18, 0.004, 0.05), K.waterMat({ flat: 0.05, deepAt: 0.08, scale: 14 }), 0, 0.058, 0).userData.noInk = true; }
       zones.stable = { x: L.cx + L.ox * L.r * 0.1, z: L.cz + L.oz * L.r * 0.1, r: 0.62 * L.r, y, not: inStable };
+      play = { y, jumps: [0.25, 0.75], jumpAt: [spot(AU, -0.44), spot(AU, 0.44)], rail: spot(AU + A2 + 0.03, 0.05), arena: spot(AU, 0), trough: spot(-0.25, -0.62), pile: spot(-0.46, 0.55), walk: (x, z) => Math.hypot(x - L.cx, z - L.cz) < 0.85 * L.r && !inStable(x, z), lap: Array.from({ length: 48 }, (_, i) => { const a = i / 48 * PI * 2; return spot(AU + Math.cos(a) * (A2 - 0.1), Math.sin(a) * (A1 - 0.12)); }) };
     } else if (key === 'lookout') {
-      // An alpine mountain: ridged slopes of meadow, golden tussock, scree and rock, a snow cap, pines low down, boulders,
-      // a track winding up, and a lookout deck on the flat summit.
-      const [px, pz] = spot(-0.12, 0.05), PK = 0.86, top = PK * 0.8;
+      // A geyser basin, after Yellowstone: a rainbow hot spring in the middle (deep blue, then turquoise, green, yellow,
+      // and orange bacterial mats streaming off it), a geyser on its sinter cone that erupts every so often, steaming
+      // vents and a bubbling mud pot, white travertine terraces with blue pools, a golden meadow, a hill of lodgepole
+      // pines and dead snags, and a boardwalk winding between it all up to an overlook deck above the spring.
+      sea = y - 0.006;
+      const at = (u, v) => spot(u, v), [gx, gz] = at(0.12, 0.22), GR = 0.24, [ox, oz] = at(0.36, -0.46), [mx, mz] = at(0.56, -0.16), [tx, tz] = at(-0.4, 0.56), [lx, lz] = at(-0.56, -0.1);
+      const vents = [at(0.62, 0), at(-0.04, -0.18), at(0.36, 0.66), at(-0.22, 0.32)];
+      // The big spring and two smaller hot pools, each a bowl measured in its own radius (pool 0 has the long mats).
+      const POOLS = [[gx, gz, GR], [...at(0.6, 0.42), 0.1], [...at(-0.12, -0.42), 0.085]], pool = (x, z) => { let best = [9, 0]; POOLS.forEach(([px, pz, pr], i) => { const d = Math.hypot(x - px, z - pz) / pr; if (d < best[0]) best = [d, i]; }); return best; };
+      const dG = (x, z) => pool(x, z)[0], dO = (x, z) => Math.hypot(x - ox, z - oz), dM = (x, z) => Math.hypot(x - mx, z - mz), dT = (x, z) => Math.hypot(x - tx, z - tz);
+      const hill = (x, z) => 0.42 * (1 - K.smooth01(0.15, 1, Math.hypot((outward(L, x, z) + 0.9) / 0.75, (across(L, x, z) + 0.32) / 0.95)));
       const raw = (x, z) => {
-        const dx = x - px, dz = z - pz, d = Math.hypot(dx, dz) / L.r, a = Math.atan2(dz, dx);
-        let m = Math.pow(Math.max(0, 1 - d / 0.95), 1.7) * (1 + 0.14 * Math.sin(3 * a + 0.7) + 0.08 * Math.sin(5 * a + 2.1));
-        m *= 0.78 + 0.34 * (1 - Math.abs(2 * nz(x, z, 5, seed) - 1));
-        return PK * m + 0.035 * nz(x, z, 9, seed + 3) * (1 - K.smooth01(0.3, 0.8, d));
+        const [g0, pi] = pool(x, z), sink = pi ? 0.06 : 0.08, spring = g0 < 1.4 ? -sink * (1 - K.smooth01(0, 1, g0)) ** 1.5 + 0.012 * Math.exp(-(((g0 - 1.06) / 0.08) ** 2)) : 0;
+        return hill(x, z) + spring + 0.055 * (1 - K.smooth01(0, 0.14, dO(x, z))) - 0.022 * (1 - K.smooth01(0.03, 0.07, dM(x, z))) + 0.008 * (nz(x, z, 9, seed) - 0.5);
       };
-      hRel = (x, z) => { const w = 1 - K.smooth01(0.09, 0.16, Math.hypot(x - px, z - pz)); return Math.min(raw(x, z), top) * (1 - w) + top * w; };
-      const onTrack = (x, z) => { const rd = Math.hypot(x - px, z - pz) / L.r, s = (0.8 - rd) / 0.66; if (s < 0 || s > 1) return false; const want = L.a + 0.6 + s * PI * 2 * 1.6, a = Math.atan2(z - pz, x - px), da = Math.atan2(Math.sin(a - want), Math.cos(a - want)); return Math.abs(da) * rd < 0.028; };
-      const slope = (x, z) => { const e = 0.012; return Math.hypot(hRel(x + e, z) - hRel(x - e, z), hRel(x, z + e) - hRel(x, z - e)) / (2 * e); };
+      const top = raw(lx, lz);
+      hRel = (x, z) => { const w = 1 - K.smooth01(0.1, 0.16, Math.hypot(x - lx, z - lz)); return raw(x, z) * (1 - w) + top * w; };
+      // Orange and rust mats stream out from the spring in fingers, and run off in channels towards the front.
+      const finger = (x, z) => { const a = Math.atan2(z - gz, x - gx); return 0.32 * (0.5 + 0.5 * Math.sin(a * 9 + Math.sin(a * 4) * 2)) * (0.6 + 0.8 * nz(x, z, 14, seed + 4)); };
+      const runoff = (x, z) => { const u = outward(L, x, z) - 0.12, v = across(L, x, z) - 0.22; return u > 0.2 && Math.abs(v - 0.06 * Math.sin(u * 13)) < 0.035 + 0.02 * u; };
+      const meadow = (x, z) => (across(L, x, z) < -0.32 || (outward(L, x, z) > 0.62 && across(L, x, z) < 0.05)) && dO(x, z) > 0.17 && hill(x, z) < 0.05 && dG(x, z) > 1.35;
       const colAt = (x, z, hh) => {
-        const q = hh / PK, sl = slope(x, z), n0 = nz(x, z, 18, seed + 7);
-        if (Math.hypot(x - px, z - pz) < 0.15) return tone(0x9a958c);
-        if (onTrack(x, z) && q < 0.75) return tone(0xa48660);
-        if (q > 0.6 && sl < 1.9) return n0 > 0.55 ? 0xdfe6f0 : 0xf4f7fb;
-        if (sl > 1.25 || q > 0.48) return tone(n0 > 0.5 ? 0x8d9096 : 0x70747a);
-        if (q > 0.3) return tone(n0 > 0.6 ? 0xa7a49a : 0xbfa262);
-        if (q > 0.1) return tone(blend(0xc4a35a, 0x7a9a45, n0));
-        return tone(blend(0x6d9a44, 0x5d8a3a, n0));
+        const [g0, pi] = pool(x, z), n0 = nz(x, z, 16, seed + 7), hl = hill(x, z);
+        if (Math.hypot(x - lx, z - lz) < 0.15) return tone(0xb59a7a);
+        if (g0 < 0.42) return 0x163a9a; if (g0 < 0.72) return 0x1f8fb0; if (g0 < 0.9) return 0x4fbf9a; if (g0 < 1.04) return 0x9fd05a;
+        if (g0 < 1.22) return tone(0xf2d24c);
+        const f = pi ? g0 + 0.1 : g0 - finger(x, z) * 1.6;
+        if (f < 1.25 || (!pi && runoff(x, z) && g0 < 2.6)) return tone(n0 > 0.5 ? 0xeb8a35 : 0xe07a2c);
+        if (f < 1.55) return tone(0xb5523b);
+        if (dO(x, z) < 0.14) return tone(n0 > 0.55 ? 0xd8cdb4 : 0xefe6cf);
+        if (dM(x, z) < 0.075) return tone(0x8a7d70);
+        if (vents.some(([vx, vz]) => Math.hypot(x - vx, z - vz) < 0.06)) return tone(0xe0a43a);
+        if (hl > 0.05) { const sl = Math.hypot(hill(x + 0.01, z) - hill(x - 0.01, z), hill(x, z + 0.01) - hill(x, z - 0.01)) / 0.02; return tone(sl > 0.9 && n0 > 0.45 ? 0xc9a46a : n0 > 0.6 ? 0x7a7a42 : 0x5f6b3a); }
+        if (meadow(x, z)) return tone(blend(0x9fae5a, 0xc2b863, n0));
+        return tone(n0 > 0.6 ? 0xc9c2ae : 0xddd8c8);
       };
-      on(ground(g, L, y, { ...base, lawnC: tone(0x6d9a44), h: hRel, col: colAt, n: 100, habAt: (x, z) => (hRel(x, z) < 0.07 ? 'field' : null) }), 'field');
-      isleGrass(g, ctx, seed, L, y, { dens: (x, z) => 1 - K.smooth01(0.03, 0.12, hRel(x, z)), ground: hRel, tint: [0x5f8a3f, 0x4f7a32, 0xb8c46a] });
-      const tuss = [], pines = [], rocks = [];
-      for (let i = 0; i < 900 && (tuss.length < 150 || pines.length < 9 || rocks.length < 10); i++) {
-        const a = rr() * PI * 2, r0 = Math.sqrt(rr()) * 0.92 * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, hh = hRel(x, z), q = hh / PK; if (onTrack(x, z)) continue;
-        if (q > 0.1 && q < 0.4 && slope(x, z) < 1.2 && tuss.length < 150) for (let j = 0; j < 3; j++) tuss.push([x + (rr() - 0.5) * 0.02, y + hh, z + (rr() - 0.5) * 0.02, (rr() - 0.5) * 0.6, rr() * 6, 0.8 + rr() * 0.6]);
-        else if (q > 0.04 && q < 0.24 && pines.length < 9 && outward(L, x, z) < 0.55) pines.push([x, hh, z]);
-        else if (q > 0.08 && q < 0.55 && rocks.length < 10) rocks.push([x, hh, z]);
+      const blocked = (x, z) => dG(x, z) < 1.3 || dO(x, z) < 0.16 || dM(x, z) < 0.09 || dT(x, z) < 0.28 || hRel(x, z) > 0.07 || vents.some(([vx, vz]) => Math.hypot(x - vx, z - vz) < 0.06);
+      // The cut-away side: sinter crust, soil, then bands of yellow rhyolite, like the Grand Canyon of the Yellowstone.
+      const band = yy => { const b = Math.sin(yy * 24 + 0.7); return b > 0.45 ? 0xe2c48e : b < -0.4 ? 0xa8794f : 0xc9a46a; };
+      const gnd = on(ground(g, L, y, { ...base, lawnC: tone(0xddd8c8), h: hRel, col: colAt, n: 96, habAt: (x, z) => (blocked(x, z) ? null : 'field'), layers: [[0.02, null], [0.05, 0xd9cdb0], [0.12, 0x6b4a2e], [9, band]],
+        cap: a => { const x = L.cx + Math.cos(a) * (L.r + 0.05), z = L.cz + Math.sin(a) * (L.r + 0.05); return colAt(x, z, hRel(x, z)); } }), 'field');
+      caustics(g, gnd, sea);
+      POOLS.forEach(([px, pz, pr], i) => K.waterSheet(g, px, pz, pr * 1.12, sea, (x, z) => y + hRel(x, z) - sea, { night, clear: true, deepAt: i ? 0.045 : 0.06, foam: 0.004, edge: 0.003, shallow: 0x46d6b8, deep: 0x0a4fd0, n: i ? 24 : 40 }));
+      L.noFence = a => hill(L.cx + Math.cos(a) * (L.r - 0.04), L.cz + Math.sin(a) * (L.r - 0.04)) > 0.05;
+      isleGrass(g, ctx, seed, L, y, { dens: (x, z) => (meadow(x, z) ? 1 : hill(x, z) > 0.04 ? 0.3 : 0), ground: hRel, tint: [0x8a9a4a, 0x7a8a3a, 0xd8c870] });
+      // Steam: puffs that rise, swell and fade from each vent, the spring and the geyser.
+      const puffs = [], steam = (x, yy, z, n, s0, rate) => { for (let i = 0; i < n; i++) { const m = add(g, new T.SphereGeometry(s0, 10, 8), new T.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, depthWrite: false }), x, yy, z); m.userData.noInk = true; m.userData.ownMat = true; puffs.push({ m, x, y: yy, z, ph: i / n, rate, s0 }); } };
+      vents.forEach(([vx, vz]) => steam(vx, y + hRel(vx, vz), vz, 4, 0.03, 0.35));
+      POOLS.forEach(([px, pz, pr], i) => steam(px, sea, pz, i ? 3 : 6, i ? 0.04 : 0.07, 0.18)); steam(ox, y + 0.06, oz, 3, 0.035, 0.4);
+      fx.push(t => puffs.forEach(p => { const q = (t * p.rate + p.ph) % 1; p.m.position.set(p.x + Math.sin(t * 0.7 + p.ph * 9) * 0.03 * q, p.y + q * 0.32, p.z + Math.cos(t * 0.6 + p.ph * 7) * 0.03 * q); p.m.scale.setScalar(0.6 + q * 2.2); p.m.material.opacity = 0.42 * Math.sin(Math.PI * q); }));
+      // The geyser: a sinter cone with a vent; every 24 seconds it erupts for 7, a column of water roaring up with spray
+      // and a cloud of steam, then dies back.
+      cn(g, 0.07, 0.05, 0xefe6cf, ox, y + 0.06, oz, 10); cyl(g, 0.012, 0.012, 0.004, 0x4a4038, ox, y + 0.086, oz, 8);
+      const colm = add(g, new T.CylinderGeometry(0.018, 0.034, 1, 10, 1, true).translate(0, 0.5, 0), new T.MeshBasicMaterial({ color: 0xf2fbff, transparent: true, opacity: 0.8, depthWrite: false, side: T.DoubleSide }), ox, y + 0.085, oz);
+      colm.userData.noInk = true; colm.userData.ownMat = true;
+      const spray = []; for (let i = 0; i < 16; i++) { const m = add(g, new T.SphereGeometry(0.012, 6, 5), new T.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85, depthWrite: false }), ox, y, oz); m.userData.noInk = true; m.userData.ownMat = true; spray.push({ m, a: i * 2.4, s: 0.5 + (i % 4) * 0.2 }); }
+      const cloud = []; for (let i = 0; i < 5; i++) { const m = add(g, new T.SphereGeometry(0.08, 10, 8), new T.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, depthWrite: false }), ox, y, oz); m.userData.noInk = true; m.userData.ownMat = true; cloud.push(m); }
+      fx.push(t => {
+        const c = t % 24, on = c < 7, e = on ? Math.min(1, c / 1.2) * Math.min(1, (7 - c) / 2) : 0, hh = 0.62 * e * (0.92 + 0.08 * Math.sin(t * 13));
+        colm.visible = e > 0.02; colm.scale.set(1, Math.max(0.01, hh), 1);
+        spray.forEach((p, i) => { const q = (t * 1.6 + i / spray.length) % 1, r0 = 0.02 + q * 0.12 * p.s; p.m.visible = on && e > 0.2; p.m.position.set(ox + Math.cos(p.a) * r0, y + 0.08 + hh * (0.7 + 0.5 * Math.sin(Math.PI * q)) - q * q * 0.25, oz + Math.sin(p.a) * r0); });
+        cloud.forEach((m, i) => { const q = (c / 9 + i / 5) % 1; m.material.opacity = c < 10 ? 0.5 * Math.sin(Math.PI * q) * Math.min(1, c / 1.5) * Math.max(0, 1 - Math.max(0, c - 7) / 3) : 0; m.position.set(ox + Math.sin(i * 2.1) * 0.06 * q, y + 0.1 + hh * 0.9 + q * 0.3, oz + Math.cos(i * 1.7) * 0.06 * q); m.scale.setScalar(0.8 + q * 2); });
+      });
+      // The mud pot bubbles.
+      const mud = add(g, new T.CircleGeometry(0.065, 18).rotateX(-P2), mat(0x8a7d70), mx, y + hRel(mx, mz) + 0.003, mz); mud.userData.noInk = true;
+      const bub = [0, 1, 2, 3].map(i => { const m = add(g, new T.SphereGeometry(0.012, 8, 6, 0, PI * 2, 0, P2), mat(0x9a8d80), mx + Math.cos(i * 1.7) * 0.03, y + hRel(mx, mz) + 0.004, mz + Math.sin(i * 1.7) * 0.03); m.userData.noInk = true; return m; });
+      fx.push(t => bub.forEach((m, i) => { const q = (t * 0.7 + i * 0.27) % 1; m.scale.setScalar(q < 0.85 ? 0.3 + q * 1.2 : 0.01); }));
+      // Travertine terraces: white steps of mineral with pools of blue water on each, stained orange where it drips.
+      for (let i = 0; i < 4; i++) {
+        const r0 = 0.24 - i * 0.05, [cx2, cz2] = at(-0.4 - i * 0.05, 0.56 - i * 0.02), b = y + hRel(cx2, cz2) + i * 0.045;
+        add(g, rough(new T.CylinderGeometry(r0, r0 + 0.015, 0.05, 18, 1), 0.012, seed + i), mat(i % 2 ? 0xf1ebdc : 0xe8e0cc, { flat: true }), cx2, b + 0.02, cz2);
+        add(g, new T.CircleGeometry(r0 - 0.03, 18).rotateX(-P2), K.waterMat({ flat: 0.03, deepAt: 0.05, scale: 14, shallow: 0x7fe0d8, deep: 0x2aa0c8, clear: true }), cx2, b + 0.046, cz2).userData.noInk = true;
+        for (let j = 0; j < 7; j++) { const a = j * 0.9 + i, d = bx(g, 0.012, 0.05, 0.004, j % 2 ? 0xd08a4a : 0xb86a3a, cx2 + Math.cos(a) * (r0 + 0.016), b + 0.015, cz2 + Math.sin(a) * (r0 + 0.016)); d.rotation.y = -a + P2; }
       }
-      many(g, new T.ConeGeometry(0.008, 0.06, 4).translate(0, 0.03, 0), tone(0xc9a85a), tuss);
-      pines.forEach(([x, hh, z], i) => species(g, x, y + hh, z, 'pine', seed + i, 0.8));
-      rocks.forEach(([x, hh, z], i) => add(g, rough(new T.DodecahedronGeometry(0.035 + rr() * 0.03, 0), 0.012, seed + i), mat(0x8a8d91, { flat: true }), x, y + hh + 0.01, z));
+      // Lodgepole pines and dead snags on the hill and round the meadow.
+      const trees = []; for (let i = 0; i < 900 && trees.length < 24; i++) { const a = rr() * PI * 2, r0 = Math.sqrt(rr()) * 0.9 * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0; if ((hill(x, z) > 0.04 || (meadow(x, z) && rr() < 0.25)) && Math.hypot(x - lx, z - lz) > 0.2 && !trees.some(([x2, z2]) => Math.hypot(x - x2, z - z2) < 0.1)) trees.push([x, z]); }
+      trees.forEach(([x, z], i) => { const b = y + hRel(x, z); if (i % 5 === 4) { cyl(g, 0.008, 0.014, 0.34, 0x9a948c, x, b + 0.17, z, 6); [0.2, 0.26].forEach((hy, j) => stick(g, [x, b + hy, z], [x + (j ? -0.04 : 0.05), b + hy + 0.03, z + 0.02], 0.004, 0x9a948c)); } else { const p = species(g, x, b, z, 'pine', seed + i, 0.85); p.scale.x *= 0.7; p.scale.z *= 0.7; p.scale.y *= 1.35; } });
+      // The boardwalk, raised on posts, from the front edge between the spring and the geyser and up to the overlook.
+      const walk = [[0.96, 0.18], [0.62, 0.12], [0.36, -0.12], [0.06, -0.14], [-0.22, -0.06], [-0.44, -0.08]].map(([u, v]) => at(u, v)); let q = 0;
+      walk.forEach((p, i) => { const nx = walk[i + 1]; if (!nx) return; const len = Math.hypot(nx[0] - p[0], nx[1] - p[1]), ry = Math.atan2(nx[0] - p[0], nx[1] - p[1]); for (let s = 0; s < len; s += 0.03, q++) { const x = p[0] + (nx[0] - p[0]) * s / len, z = p[1] + (nx[1] - p[1]) * s / len, b = y + Math.max(hRel(x, z), sea - y) + 0.025; bx(g, 0.07, 0.008, 0.024, q % 2 ? 0xb98a5a : 0xa77a4c, x, b, z).rotation.y = ry; if (q % 5 === 0) [-1, 1].forEach(sd => cyl(g, 0.004, 0.004, 0.03, 0x6b4a2e, x + Math.cos(ry) * 0.03 * sd, b - 0.015, z - Math.sin(ry) * 0.03 * sd, 4)); } });
+      // The overlook deck on the hill.
       const dy = y + top;
-      cyl(g, 0.14, 0.15, 0.025, WOOD, px, dy + 0.012, pz, 18);
-      const deck = on(add(g, new T.CircleGeometry(0.13, 24).rotateX(-P2), mat(0xb98a5a), px, dy + 0.026, pz), 'lookout'); deck.userData.noInk = true;
-      ring(12, a => cyl(g, 0.005, 0.005, 0.07, 0x6b4a2e, px + Math.cos(a) * 0.135, dy + 0.06, pz + Math.sin(a) * 0.135, 5));
-      tor(g, 0.135, 0.004, 0x6b4a2e, px, dy + 0.09, pz).rotation.x = P2;
-      zones.lookout = { x: px, z: pz, r: 0.07, y: dy + 0.026 };
-      zones.lawn = { x: L.cx, z: L.cz, r: 0.88 * L.r, y, not: (x, z) => hRel(x, z) > 0.07 };
+      cyl(g, 0.14, 0.15, 0.025, WOOD, lx, dy + 0.012, lz, 18);
+      const deck = on(add(g, new T.CircleGeometry(0.13, 24).rotateX(-P2), mat(0xb98a5a), lx, dy + 0.026, lz), 'lookout'); deck.userData.noInk = true;
+      ring(12, a => cyl(g, 0.005, 0.005, 0.07, 0x6b4a2e, lx + Math.cos(a) * 0.135, dy + 0.06, lz + Math.sin(a) * 0.135, 5));
+      tor(g, 0.135, 0.004, 0x6b4a2e, lx, dy + 0.09, lz).rotation.x = P2;
+      zones.lookout = { x: lx, z: lz, r: 0.07, y: dy + 0.026 };
+      const [wx, wz] = at(0.2, -0.7); zones.lawn = { x: wx, z: wz, r: 0.3 * L.r, y, not: blocked };
+      { const [px, pz] = at(0.36, -0.13); play = { at: [px, y + Math.max(hRel(px, pz), sea - y) + 0.03, pz], geyser: [ox, y + 0.06, oz], gxz: [ox, oz], spring: [gx, gz], cycle: 24, erupt: 7, walk: (x, z) => Math.hypot(x - L.cx, z - L.cz) < 0.85 * L.r && !blocked(x, z) }; }
     } else if (key === 'orchard') {
       // An orchard: grass mown in stripes, blossom trees along the back, beehives, crates of picked fruit, a ladder, and
       // wildflowers along the stone wall.
@@ -616,7 +668,7 @@ void main() {
       isleGrass(g, ctx, seed, L, y, { tint: [0x55a03c, 0x3f8a2e, 0x9ad65a], grow: K.MOWN + 0.15 });
       [1, 2, 3].forEach(s => meadow(g, seed + s * 7, L, y, { not: (x, z) => Math.hypot(x - L.cx, z - L.cz) < 0.8 * L.r }));
       arc(L, 40, (x, z, a, i) => { const o = add(g, rough(new T.BoxGeometry(0.075, 0.05, 0.045), 0.006, seed + i), mat(i % 2 ? 0xb7ada0 : 0xa59b8e, { flat: true }), x, y + 0.02, z); o.rotation.y = -a; });
-      [[-0.72, -0.36], [-0.8, 0], [-0.72, 0.36]].forEach(([u, v], i) => { const [x, z] = spot(u, v); species(g, x, y, z, 'cherry', seed + i, 0.9); });
+      play = { trees: [], hives: [spot(-0.4, 0.72), spot(-0.24, 0.78)] }; [[-0.72, -0.36], [-0.8, 0], [-0.72, 0.36]].forEach(([u, v], i) => { const [x, z] = spot(u, v); species(g, x, y, z, 'cherry', seed + i, 0.9); play.trees.push([x, z]); });
       { const [x, z] = spot(-0.62, -0.3); stick(g, [x + 0.05, y, z + 0.05], [x + 0.01, y + 0.3, z + 0.01], 0.005, 0xb07a4a); stick(g, [x + 0.1, y, z + 0.02], [x + 0.05, y + 0.3, z - 0.02], 0.005, 0xb07a4a); for (let i = 1; i < 6; i++) { const q = i / 6; stick(g, [x + 0.05 - 0.04 * q, y + 0.3 * q, z + 0.05 - 0.04 * q], [x + 0.1 - 0.05 * q, y + 0.3 * q, z + 0.02 - 0.04 * q], 0.003, 0xb07a4a); } }
       [[-0.4, 0.72], [-0.24, 0.78]].forEach(([u, v]) => { const [x, z] = spot(u, v), h = new T.Group(); h.position.set(x, y, z); h.rotation.y = face; g.add(h); bx(h, 0.08, 0.02, 0.08, 0x8a5a3c, 0, 0.01, 0); for (let i = 0; i < 3; i++) bx(h, 0.09, 0.04, 0.09, i % 2 ? 0xf4f1ea : 0xffe9a8, 0, 0.04 + i * 0.042, 0); bx(h, 0.1, 0.012, 0.1, 0x5b5f6e, 0, 0.17, 0); });
       [[0.55, -0.52, 0xd93a3a], [0.5, -0.66, 0xffd43b]].forEach(([u, v, c]) => { const [x, z] = spot(u, v), b = new T.Group(); b.position.set(x, y, z); b.rotation.y = face + u; g.add(b); bx(b, 0.12, 0.06, 0.08, 0xc9a06a, 0, 0.03, 0); for (let i = 0; i < 6; i++) sph(b, 0.018, c, -0.04 + (i % 3) * 0.04, 0.065, -0.015 + Math.floor(i / 3) * 0.03); });
@@ -627,7 +679,8 @@ void main() {
       hRel = (x, z) => 0.012 * (nz(x, z, 7, seed) - 0.5);
       on(ground(g, L, y, { ...base, lawnC: tone(0x3f5a2c), h: hRel, n: 56, habAt: () => 'grove', col: (x, z) => { const n0 = nz(x, z, 20, seed + 2); return tone(n0 > 0.62 ? 0x6b4a2a : n0 > 0.42 ? 0x3f5a2c : 0x33462a); }, layers: [[0.025, null], [0.1, 0x3a2a1c], [0.2, 0x5a3e28], [9, 0x8f6c4a]] }), 'grove');
       isleGrass(g, ctx, seed, L, y, { dens: () => 0.22, tint: [0x2f4a24, 0x2a4420, 0x6a8a3a], ground: hRel });
-      arc(L, 16, (x, z, a, i) => { if (Math.cos(a - L.a) > 0.4) return; if (i % 3 === 1) treeFern(g, x, y + hRel(x, z), z, 1.1); else species(g, x, y + hRel(x, z), z, ['kauri', 'nikau', 'pine', 'cabbage', 'kauri'][i % 5], seed + i, 1.05); }, 0.13);
+      { const [px, pz] = spot(0.22, 0.05); play = { at: [px, y, pz], perches: [], trees: [] }; }
+      arc(L, 16, (x, z, a, i) => { if (Math.cos(a - L.a) > 0.4) return; play.perches.push([x, y + hRel(x, z) + (i % 3 === 1 ? 0.4 : 0.55), z]); play.trees.push([x, z]); if (i % 3 === 1) treeFern(g, x, y + hRel(x, z), z, 1.1); else species(g, x, y + hRel(x, z), z, ['kauri', 'nikau', 'pine', 'cabbage', 'kauri'][i % 5], seed + i, 1.05); }, 0.13);
       [[-0.45, -0.3, 'k'], [-0.5, 0.35, 'f'], [-0.12, -0.6, 'n'], [-0.2, 0.6, 'f']].forEach(([u, v, t], i) => { const [x, z] = spot(u, v); if (t === 'f') treeFern(g, x, y + hRel(x, z), z, 0.95); else species(g, x, y + hRel(x, z), z, t === 'k' ? 'kauri' : 'nikau', seed + 40 + i, 0.9); });
       for (let i = 0; i < 16; i++) { const a = rr() * PI * 2, r0 = (0.3 + rr() * 0.55) * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, f = new T.Group(); f.position.set(x, y + hRel(x, z), z); g.add(f); for (let q = 0; q < 5; q++) { const o = cn(f, 0.012, 0.12, 0x3f8a3f, 0, 0.04, 0, 4); o.rotation.set(Math.sin(q * 1.3) * 0.7, q * 1.26, Math.cos(q * 1.3) * 0.7); o.scale.z = 0.35; } }
       { const [x, z] = spot(0.18, -0.42), lg = cyl(g, 0.035, 0.04, 0.34, 0x6b4a2e, x, y + 0.03, z, 9); lg.rotation.set(0, face + 0.4, P2); const ms = bx(g, 0.3, 0.014, 0.05, 0x4f8a3a, x, y + 0.066, z); ms.rotation.y = face + 0.4 - P2; }
@@ -648,6 +701,7 @@ void main() {
       for (let i = 0; i < 10; i++) { const a = i / 10 * PI * 2, r0 = L.r * (0.8 + (i % 3) * 0.12), p = add(puffs, new T.SphereGeometry(0.11 + (i % 3) * 0.05, 12, 8), mat(0xffffff), Math.cos(a) * r0, -0.3 - (i % 2) * 0.28, Math.sin(a) * r0); p.scale.y = 0.6; p.userData.noInk = true; }
       fx.push(t => { puffs.rotation.y = t * 0.08; orbit.rotation.y = -t * 0.12; });
       zones.sky = { x: L.cx, z: L.cz, r: 0.75 * L.r, y };
+      { const [px, pz] = spot(0.25, -0.15); play = { at: [px, y, pz], face: Math.atan2(-L.ox, -L.oz), clouds: [[-0.5, -0.45], [-0.62, 0.3], [0.3, -0.62], [0.45, 0.55], [-0.2, 0.7], [-0.75, -0.05]].map(([u2, v2]) => spot(u2, v2)), rainbow: spot(-0.62, 0) }; }
     } else if (key === 'beach') {
       // A cove: dry sand and dunes at the back, a wiggly shoreline, then the sea over more than half the island. The bed
       // banks down steeply from the shore, then slopes out to the deep. Waves roll in and break, and their wash runs up
@@ -685,6 +739,7 @@ void main() {
       zones.sea = { x: wx0, z: wz0, r: 0.5 * L.r, y: sea, water: true };
       zones.coast = { x: L.cx, z: L.cz, r: 0.88 * L.r, y };
       zones.lawn = zones.beach;
+      play = { L, sea, palms: [spot(-0.74, 0.42), spot(-0.88, 0.12)], walk: (x, z) => Math.hypot(x - L.cx, z - L.cz) < 0.85 * L.r && hRel(x, z) > -0.026 };
     } else if (key === 'lake') {
       // A lake island: water right to the edge over a weedy bed that shelves down to a deep middle, reeds and lilies
       // round the edge, and a wooden jetty out from the back with a rowboat tied at the end.
@@ -717,8 +772,515 @@ void main() {
       zones.lake = { x: L.cx, z: L.cz, r: 0.8 * L.r, y: sea, water: true };
       zones.jetty = { x: jx, z: jz, r: len / 2, y: deckY + 0.005, not: (x, z) => !onDeck(x, z) };
       zones.lawn = zones.jetty;
+      { const [px, pz] = spot(J1 - 0.05, JV); play = { at: [px, deckY + 0.005, pz], face: Math.atan2(L.ox, L.oz), sea, end: [px, pz], out: [px + L.ox, pz + L.oz], walk: onDeck, floor: (x, z) => (onDeck(x, z) ? deckY + 0.005 : y + hRel(x, z)) }; }
     }
-    return { L, zones, surf, tick: fx.length ? t => fx.forEach(f => f(t)) : null, terrain: { h: (x, z) => y + hRel(x, z), sea } };
+    if (!play.walk) play.walk = (x, z) => Math.hypot(x - L.cx, z - L.cz) < 0.85 * L.r && !(zones.lawn && zones.lawn.not && zones.lawn.not(x, z));
+    return { L, zones, surf, play, tick: fx.length ? t => fx.forEach(f => f(t)) : null, terrain: { h: (x, z) => y + hRel(x, z), sea } };
+  }
+
+  /* ---------- The kid's character and island activities ----------
+     The kid's character (their avatar's animal, in a scarf of their own colour) visits each island and does the thing
+     that suits it: fishing off the jetty, surfing, photographing the geyser, weeding, show jumping, picking cherries,
+     spotting birds, flying a kite, stacking hay, and kick-ups at home. Each success earns a little XP; the studio
+     counts it against the day's limit. activity() returns { step(t, dt) → successes, end() }, where a success is
+     { xp, say, icon, at: [x, y, z] }. u is the island's userData: its terrain and play spots (u.play). */
+  const ACT = {
+    lake: { name: 'Fishing', icon: '🎣', verb: 'Go fishing', noun: ['fish', 'fish'], about: '2 to 4 XP a fish' },
+    beach: { name: 'Surfing', icon: '🏄', verb: 'Go surfing', noun: ['wave', 'waves'], about: '3 XP a wave' },
+    lookout: { name: 'Geyser watch', icon: '📷', verb: 'Take photos', noun: ['photo', 'photos'], about: '2 XP a photo, 5 for an eruption' },
+    plot: { name: 'Weeding', icon: '🌱', verb: 'Pull weeds', noun: ['weed', 'weeds'], about: '2 XP a weed' },
+    stable: { name: 'Show jumping', icon: '🏇', verb: 'Ride the course', noun: ['round', 'rounds'], about: '4 XP a clear round' },
+    orchard: { name: 'Cherry picking', icon: '🍒', verb: 'Pick cherries', noun: ['handful', 'handfuls'], about: '2 XP a handful' },
+    grove: { name: 'Bird spotting', icon: '🔭', verb: 'Spot birds', noun: ['bird', 'birds'], about: '3 XP a bird' },
+    sky: { name: 'Kite flying', icon: '🪁', verb: 'Fly a kite', noun: ['gust', 'gusts'], about: '2 XP a gust' },
+    farm: { name: 'Hay stacking', icon: '🌾', verb: 'Stack hay', noun: ['bale', 'bales'], about: '2 XP a bale' },
+    home: { name: 'Kick-ups', icon: '⚽', verb: 'Do kick-ups', noun: ['set of ten', 'sets of ten'], about: '3 XP for every ten' },
+  };
+  // Each avatar's animal: fur, belly and face colours, and its ears, snout, tail and extras.
+  const SPECIES = {
+    '🦊': { fur: 0xf08a3c, belly: 0xfff4e6, ear: 'point', earIn: 0x3b2a24, snout: 'long', nose: 0x2a1f1a, tail: 'bushy', tip: 0xfff4e6, feet: 0x3b2a24, limbs: 0x3b2a24 },
+    '🐼': { fur: 0xf6f6f2, belly: 0xf6f6f2, ear: 'round', earC: 0x222222, patches: 0x222222, limbs: 0x222222, snout: 'short', nose: 0x222222, tail: 'stub' },
+    '🐯': { fur: 0xf2913a, belly: 0xfff4e6, ear: 'round', stripes: 0x2a1f1a, snout: 'short', nose: 0xd96b7a, tail: 'long', tip: 0x2a1f1a, whiskers: true },
+    '🦄': { fur: 0xfbf7ff, belly: 0xfbf7ff, ear: 'point', earIn: 0xf4c4d4, horn: true, mane: [0xff9ec8, 0xc4a6ff, 0x8fd0ff], snout: 'horse', nose: 0xf4c4d4, tail: 'mane', feet: 0xc9a8e8 },
+    '🐸': { fur: 0x6cc24a, belly: 0xd6f0a8, frogEyes: true, snout: 'wide', feet: 0x5aa83a },
+    '🐙': { octo: true, fur: 0xe8708f, belly: 0xf4a6c4 },
+    '🦖': { fur: 0x5aa84a, belly: 0xd6e8a0, snout: 'rex', spikes: 0x3f7a35, tail: 'thick', tiny: true },
+    '🐵': { fur: 0x8a5a3c, belly: 0xf0c8a0, face: 0xf0c8a0, ear: 'side', earIn: 0xf0c8a0, snout: 'muzzle', nose: 0x5a3a28, tail: 'curl' },
+    '🐨': { fur: 0x9aa0a8, belly: 0xe8e8e8, ear: 'fluffy', earIn: 0xf2f2f2, bigNose: true },
+    '🦁': { fur: 0xf2c25a, belly: 0xfff0c8, ear: 'round', mane: [0xc86a2a, 0xa8521f], snout: 'short', nose: 0x6b3a2a, tail: 'tuft', tip: 0xa8521f, whiskers: true },
+    '🐧': { fur: 0x2a2f3a, belly: 0xfafafa, face: 0xfafafa, beak: 0xffa53a, feet: 0xffa53a, flippers: true },
+    '🐰': { fur: 0xf2efea, belly: 0xffffff, ear: 'long', earIn: 0xffb6c8, snout: 'short', nose: 0xff8fa8, tail: 'puff', whiskers: true },
+    '🐶': { fur: 0xd8a868, belly: 0xfff0d8, ear: 'floppy', earC: 0x8a5a3c, snout: 'muzzle', nose: 0x2a1f1a, tail: 'long' },
+    '🐱': { fur: 0xf2b45a, belly: 0xfff0d8, ear: 'point', earIn: 0xffb6c8, stripes: 0xd8903a, snout: 'short', nose: 0xff8fa8, tail: 'long', whiskers: true },
+    '🐲': { fur: 0x4caf50, belly: 0xf2e08a, horns: 0xf6e7c0, snout: 'dragon', nose: 0x2f7a35, wings: 0x2f8a40, spikes: 0xf2a33a, tail: 'spade' },
+    '🦉': { fur: 0x8a6a4a, belly: 0xe8d4b0, face: 0xe8d4b0, owlEyes: true, beak: 0xf2a33a, ear: 'tuft', flippers: true, feet: 0xf2a33a },
+  };
+  // The kid's character: their avatar's animal standing on two legs, with a scarf in their own colour. Legs and arms
+  // are on pivots (P) so activities can pose them, and a paw (P.hand) holds things.
+  function kidModel(hue, avatar) {
+    const S = SPECIES[avatar] || SPECIES['🐶'], k = new T.Group(), P = {}, fur = S.fur, limb = S.limbs || fur, cone = (g, r, h, c, x, y, z, rx = 0, rz = 0) => { const o = cn(g, r, h, c, x, y, z, 8); o.rotation.set(rx, 0, rz); return o; };
+    // Legs (an octopus has two walking tentacles, and six more round its base).
+    const leg = x => { const p = new T.Group(); p.position.set(x, 0.085, 0); k.add(p); if (S.octo) { cyl(p, 0.009, 0.015, 0.085, fur, 0, -0.042, 0, 8); sph(p, 0.01, S.belly, 0, -0.085, 0.01); } else { cyl(p, 0.016, 0.017, 0.06, limb, 0, -0.032, 0, 8); sph(p, 0.019, S.feet || limb, 0, -0.068, 0.008, 1, 0.65, 1.35); } return p; };
+    P.legL = leg(-0.024); P.legR = leg(0.024);
+    if (S.octo) for (let i = 0; i < 6; i++) { const a = PI * 0.2 + i / 5 * PI * 1.6, t = cyl(k, 0.007, 0.013, 0.09, fur, Math.cos(a) * 0.035, 0.04, Math.sin(a) * -0.035 - 0.005, 7); t.rotation.set(Math.sin(a) * 0.7, 0, Math.cos(a) * 0.7); }
+    P.body = new T.Group(); P.body.position.y = 0.085; k.add(P.body);
+    sph(P.body, 0.046, fur, 0, 0.04, 0, 1, S.octo ? 0.8 : 1.12, 0.95);
+    if (!S.octo) sph(P.body, 0.033, S.belly, 0, 0.038, 0.024, 0.9, 1.1, 0.5);
+    tor(P.body, 0.032, 0.009, new T.Color(hue || '#e5533d').getHex(), 0, 0.088, 0).rotation.x = P2;
+    if (S.patches) sph(P.body, 0.047, S.patches, 0, 0.07, -0.004, 1.02, 0.45, 0.98);
+    if (S.stripes) for (let i = 0; i < 3; i++) bx(P.body, 0.07, 0.006, 0.012, S.stripes, 0, 0.02 + i * 0.022, -0.04).rotation.y = 0.1 * (i - 1);
+    if (S.spikes) for (let i = 0; i < 4; i++) cone(P.body, 0.009, 0.022, S.spikes, 0, 0.085 - i * 0.022, -0.04 - i * 0.004, -0.6);
+    if (S.wings) [-1, 1].forEach(s => { const w = sph(P.body, 0.03, S.wings, s * 0.035, 0.07, -0.04, 0.25, 1, 1.4); w.rotation.set(0.4, 0, s * -0.5); });
+    // Arms (flippers and wings for the penguin and owl, little arms for the dinosaur, tentacles for the octopus).
+    const arm = x => { const p = new T.Group(); p.position.set(x, 0.075, 0); P.body.add(p); const sc = S.tiny ? 0.6 : 1; if (S.flippers) sph(p, 0.02, fur, 0, -0.035, 0, 0.45, 1.8, 0.9); else { cyl(p, S.octo ? 0.007 : 0.011, S.octo ? 0.01 : 0.012, 0.055 * sc, limb, 0, -0.028 * sc, 0, 8); sph(p, 0.013, S.octo ? S.belly : S.limbs || fur, 0, -0.058 * sc, 0); } return p; };
+    P.armL = arm(-0.046); P.armR = arm(0.046);
+    P.hand = new T.Group(); P.hand.position.y = -0.065; P.armR.add(P.hand);
+    P.handL = new T.Group(); P.handL.position.y = -0.065; P.armL.add(P.handL);
+    // The head: big and round, with the animal's face.
+    const h = new T.Group(); h.position.y = 0.145; P.body.add(h); P.head = h;
+    if (S.octo) sph(h, 0.07, fur, 0, 0.02, -0.005, 1, 1.25, 1); else sph(h, 0.058, fur, 0, 0, 0);
+    if (S.face) sph(h, 0.046, S.face, 0, -0.006, 0.026, 1, 0.92, 0.65);
+    if (S.patches) [-1, 1].forEach(s => { const p2 = sph(h, 0.017, S.patches, s * 0.022, 0.004, 0.048, 1, 1.3, 0.5); p2.rotation.z = s * 0.5; });
+    const eyeY = S.octo ? 0.005 : 0.008, eyeZ = S.octo ? 0.064 : 0.054;
+    if (S.owlEyes) [-1, 1].forEach(s => { sph(h, 0.019, 0xf2c94c, s * 0.022, 0.006, 0.048, 1, 1, 0.5); sph(h, 0.01, 0x111111, s * 0.022, 0.006, 0.057); sph(h, 0.003, 0xffffff, s * 0.019, 0.01, 0.062); });
+    else if (S.frogEyes) [-1, 1].forEach(s => { sph(h, 0.02, fur, s * 0.026, 0.045, 0.018); sph(h, 0.011, 0x111111, s * 0.026, 0.05, 0.034); sph(h, 0.003, 0xffffff, s * 0.023, 0.055, 0.044); });
+    else [-1, 1].forEach(s => { sph(h, 0.009, 0x111111, s * 0.022, eyeY, eyeZ); sph(h, 0.003, 0xffffff, s * 0.019, eyeY + 0.004, eyeZ + 0.007); });
+    // Ears
+    const E = S.ear;
+    if (E === 'point') [-1, 1].forEach(s => { cone(h, 0.018, 0.04, fur, s * 0.033, 0.05, -0.004, 0, -s * 0.35); cone(h, 0.009, 0.024, S.earIn || S.belly, s * 0.033, 0.047, 0.004, 0, -s * 0.35); });
+    if (E === 'round') [-1, 1].forEach(s => { sph(h, 0.018, S.earC || fur, s * 0.042, 0.042, -0.004, 1, 1, 0.55); if (!S.earC) sph(h, 0.01, S.belly, s * 0.042, 0.042, 0.004, 1, 1, 0.4); });
+    if (E === 'long') [-1, 1].forEach(s => { const e = sph(h, 0.014, fur, s * 0.02, 0.09, -0.006, 1, 3, 0.6); e.rotation.z = -s * 0.15; const i2 = sph(h, 0.008, S.earIn, s * 0.02, 0.09, 0.001, 1, 2.6, 0.4); i2.rotation.z = -s * 0.15; });
+    if (E === 'floppy') [-1, 1].forEach(s => { const e = sph(h, 0.019, S.earC, s * 0.056, -0.004, -0.004, 0.55, 1.6, 1); e.rotation.z = s * 0.25; });
+    if (E === 'side') [-1, 1].forEach(s => { sph(h, 0.018, fur, s * 0.058, 0.006, 0, 0.5, 1, 1); sph(h, 0.011, S.earIn, s * 0.062, 0.006, 0, 0.4, 1, 1); });
+    if (E === 'fluffy') [-1, 1].forEach(s => { sph(h, 0.027, fur, s * 0.05, 0.036, -0.006, 1, 1, 0.6); sph(h, 0.017, S.earIn, s * 0.052, 0.036, 0.004, 1, 1, 0.4); });
+    if (E === 'tuft') [-1, 1].forEach(s => cone(h, 0.012, 0.03, fur, s * 0.034, 0.055, 0, 0, -s * 0.5));
+    // Snout, nose and mouth
+    const N = S.snout;
+    if (N === 'long') { cone(h, 0.022, 0.05, S.belly, 0, -0.014, 0.068, P2); sph(h, 0.008, S.nose, 0, -0.014, 0.094); }
+    if (N === 'short') { sph(h, 0.021, S.belly, 0, -0.018, 0.048, 1.2, 0.85, 0.8); sph(h, 0.007, S.nose, 0, -0.008, 0.064); }
+    if (N === 'muzzle') { sph(h, 0.026, S.belly, 0, -0.018, 0.048, 1.1, 0.85, 0.85); sph(h, 0.009, S.nose, 0, -0.006, 0.07); }
+    if (N === 'horse') { sph(h, 0.028, S.nose, 0, -0.022, 0.05, 1, 0.85, 1.25); [-1, 1].forEach(s => sph(h, 0.004, 0x8a5a7a, s * 0.011, -0.018, 0.084)); }
+    if (N === 'wide') { const m2 = tor(h, 0.03, 0.003, 0x2a4a1f, 0, -0.012, 0.045, PI); m2.rotation.set(0, 0, PI); }
+    if (N === 'rex') { sph(h, 0.034, fur, 0, -0.016, 0.05, 1, 0.75, 1.4); sph(h, 0.03, S.belly, 0, -0.032, 0.052, 0.95, 0.4, 1.3); for (let i = 0; i < 4; i++) cone(h, 0.004, 0.01, 0xffffff, -0.018 + i * 0.012, -0.026, 0.085, PI); }
+    if (N === 'dragon') { sph(h, 0.03, fur, 0, -0.014, 0.05, 1, 0.8, 1.35); [-1, 1].forEach(s => sph(h, 0.005, S.nose, s * 0.01, -0.006, 0.09)); }
+    if (S.beak) cone(h, 0.012, 0.026, S.beak, 0, -0.012, 0.064, P2);
+    if (S.bigNose) sph(h, 0.017, 0x2a2a2a, 0, -0.008, 0.056, 1, 1.35, 0.8);
+    if (S.whiskers) [-1, 1].forEach(s => [0, 1].forEach(j => stick(h, [s * 0.016, -0.016 - j * 0.006, 0.062], [s * 0.05, -0.012 - j * 0.012, 0.06], 0.0012, 0x333333)));
+    if (S.stripes) for (let i = 0; i < 3; i++) bx(h, 0.006, 0.026, 0.03, S.stripes, -0.014 + i * 0.014, 0.05, 0.004).rotation.x = -0.4;
+    // Horns, manes and tails
+    if (S.horn) { const hn = cone(h, 0.008, 0.05, 0xffd43b, 0, 0.068, 0.028, 0.45); hn.userData.gold = true; }
+    if (S.horns) [-1, 1].forEach(s => cone(h, 0.007, 0.034, S.horns, s * 0.026, 0.056, -0.012, -0.6, -s * 0.3));
+    if (S.mane && S.horn) for (let i = 0; i < 6; i++) sph(h, 0.014, S.mane[i % 3], 0, 0.05 - i * 0.016, -0.045 - (i % 2) * 0.004);
+    else if (S.mane) for (let i = 0; i < 14; i++) { const a = i / 14 * PI * 2; sph(h, 0.022, S.mane[i % 2], Math.cos(a) * 0.058, Math.sin(a) * 0.058, -0.016); }
+    const tl = new T.Group(); tl.position.set(0, 0.03, -0.045); P.body.add(tl);
+    if (S.tail === 'bushy') { const t2 = sph(tl, 0.026, fur, 0, 0.01, -0.03, 0.8, 0.8, 1.6); t2.rotation.x = -0.6; sph(tl, 0.016, S.tip, 0, 0.035, -0.06); }
+    if (S.tail === 'stub') sph(tl, 0.014, fur, 0, 0, -0.004);
+    if (S.tail === 'puff') sph(tl, 0.017, 0xffffff, 0, 0, -0.006);
+    if (S.tail === 'long' || S.tail === 'tuft') { stick(tl, [0, 0, 0], [0, 0.02, -0.05], 0.006, fur); stick(tl, [0, 0.02, -0.05], [0, 0.07, -0.065], 0.005, fur); sph(tl, S.tail === 'tuft' ? 0.012 : 0.006, S.tip || fur, 0, 0.072, -0.066); }
+    if (S.tail === 'curl') { const c2 = tor(tl, 0.025, 0.005, fur, 0, 0.02, -0.035, PI * 1.5); c2.rotation.y = P2; }
+    if (S.tail === 'mane') S.mane.forEach((c3, i) => { const t3 = sph(tl, 0.012, c3, (i - 1) * 0.008, -0.01, -0.03, 1, 0.8, 2.6); t3.rotation.x = 0.7; });
+    if (S.tail === 'thick' || S.tail === 'spade') { cone(tl, 0.026, 0.1, fur, 0, -0.03, -0.045, -1.9); if (S.tail === 'spade') add(tl, new T.OctahedronGeometry(0.016, 0), mat(S.spikes, { flat: true }), 0, -0.055, -0.095).scale.set(1, 0.4, 1); }
+    k.userData.P = P; k.rotation.order = 'YXZ'; return k;
+  }
+  // Smooth posing: behaviours and activities set the pose they want (joints, lean, turn, and height above the ground);
+  // what's shown eases towards it, so sitting, lying, standing up and turning blend instead of snapping. before() puts
+  // the wanted pose back so steps carry on from it; after() eases what's shown and, standing, lifts or lowers each hip
+  // so its foot meets the ground under it. sync() takes what's been set directly as the new wanted pose.
+  function poser(m, floor) {
+    const P = m.userData.P, J = ['legL', 'legR', 'armL', 'armR', 'body', 'head'], want = {}, show = {};
+    const read = o => { J.forEach(n => { o[n] = [P[n].rotation.x, P[n].rotation.y, P[n].rotation.z]; }); o.by = P.body.position.y; o.rx = m.rotation.x; o.rz = m.rotation.z; o.ry = m.rotation.y; o.off = m.position.y - floor(m.position.x, m.position.z); };
+    const draw = () => { J.forEach(n => P[n].rotation.set(...show[n])); P.body.position.y = show.by; m.rotation.set(show.rx, show.ry, show.rz); };
+    read(want); read(show);
+    return {
+      before(noY) { J.forEach(n => P[n].rotation.set(...want[n])); P.body.position.y = want.by; m.rotation.set(want.rx, want.ry, want.rz); if (!noY) m.position.y = floor(m.position.x, m.position.z) + want.off; },
+      after(dt, noY) {
+        read(want);
+        const a = 1 - Math.exp(-dt * 14), b = 1 - Math.exp(-dt * 6), c = 1 - Math.exp(-dt * 9);
+        J.forEach(n => { const sh = show[n], w = want[n]; for (let i = 0; i < 3; i++) sh[i] += (w[i] - sh[i]) * a; });
+        show.by += (want.by - show.by) * a; show.rx += (want.rx - show.rx) * b; show.rz += (want.rz - show.rz) * b;
+        show.ry += Math.atan2(Math.sin(want.ry - show.ry), Math.cos(want.ry - show.ry)) * c; draw();
+        if (!noY) { show.off += (want.off - show.off) * c; m.position.y = floor(m.position.x, m.position.z) + show.off; }
+        const up = !noY && Math.abs(show.rx) < 0.2 && Math.abs(show.off) < 0.012, g0 = floor(m.position.x, m.position.z), cy = Math.cos(show.ry), sy = Math.sin(show.ry);
+        ['legL', 'legR'].forEach((n, i) => { const sx = (i ? 0.024 : -0.024) * m.scale.x, d = up ? Math.max(-0.025, Math.min(0.025, floor(m.position.x + sx * cy, m.position.z - sx * sy) - g0)) / m.scale.y : 0; P[n].position.y += (0.085 + d - P[n].position.y) * a; });
+      },
+      sync(all) { read(want); if (all) read(show); else draw(); },
+    };
+  }
+  // A thought bubble with a picture of what the character's about to do.
+  const THOUGHT = {};
+  function thoughtTex(e) {
+    if (THOUGHT[e]) return THOUGHT[e];
+    const cv = document.createElement('canvas'); cv.width = cv.height = 128; const x = cv.getContext('2d'), blob = (cx, cy, r, line) => { x.beginPath(); x.arc(cx, cy, r, 0, PI * 2); x.fill(); if (line) x.stroke(); };
+    const cloud = [[64, 54, 34], [38, 60, 24], [90, 60, 24], [50, 36, 22], [78, 36, 22]];
+    x.fillStyle = '#fff'; x.strokeStyle = 'rgba(40,50,80,0.4)'; x.lineWidth = 5;
+    blob(22, 116, 7, true); blob(36, 100, 10, true); cloud.forEach(([a, b, r]) => blob(a, b, r, true)); cloud.forEach(([a, b, r]) => blob(a, b, r - 2.5));
+    x.font = '46px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(e, 64, 52);
+    const t = new T.CanvasTexture(cv); t.encoding = T.sRGBEncoding; return (THOUGHT[e] = t);
+  }
+  const still = P => { ['legL', 'legR', 'armL', 'armR', 'body'].forEach(n => P[n].rotation.set(0, 0, 0)); P.body.position.y = 0.085; };
+  const walking = (P, t, on) => { const s = on ? Math.sin(t * 11) * 0.55 : 0; P.legL.rotation.x = s; P.legR.rotation.x = -s; P.armL.rotation.x = -s * 0.8; P.armR.rotation.x = s * 0.8; };
+  // Walks the kid towards (x, z) over the ground; true once there.
+  function walkTo(m, u, x, z, dt, sp = 0.2) { const dx = x - m.position.x, dz = z - m.position.z, d = Math.hypot(dx, dz); if (d < 0.012) return true; const s = Math.min(d, sp * dt); m.position.x += dx / d * s; m.position.z += dz / d * s; m.rotation.y = Math.atan2(dx, dz); m.position.y = u.terrain.h(m.position.x, m.position.z); return false; }
+  const ease = q => q * q * (3 - 2 * q), V = new T.Vector3();
+  // A thin line between two points (fishing line, kite string), updated every frame.
+  function line(g, c = 0xf4f1ea) { const geo = new T.BufferGeometry(); geo.setAttribute('position', new T.Float32BufferAttribute([0, 0, 0, 0, 0, 0], 3)); const l = new T.Line(geo, new T.LineBasicMaterial({ color: c })); l.userData.noInk = true; l.userData.ownMat = true; l.frustumCulled = false; g.add(l); return (a, b) => { const p = geo.attributes.position; p.setXYZ(0, a.x, a.y, a.z); p.setXYZ(1, b.x, b.y, b.z); p.needsUpdate = true; }; }
+  // Where an object is, in the island's own coordinates.
+  const local = (g, o) => g.worldToLocal(o.getWorldPosition(new T.Vector3()));
+  function ripple(g, fx, x, y, z) { const r = add(g, new T.RingGeometry(0.02, 0.03, 18).rotateX(-P2), new T.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8, depthWrite: false }), x, y + 0.003, z); r.userData.noInk = true; r.userData.ownMat = true; fx.push({ m: r, t: 0 }); }
+  function activity(g, key, o) {
+    const u = g.userData, pl = u.play || {}, m = o.kid, P = m.userData.P, rr = K.mulberry(Date.now() % 9973), props = new T.Group(), rings = [], out = [];
+    g.add(props); const st = { phase: 'go', t: 0, n: 0 }, h = (x, z) => u.terrain.h(x, z), say = (xp, s, icon, at) => out.push({ xp, say: s, icon, at: at || [m.position.x, m.position.y + 0.26, m.position.z] });
+    const phase = p => { st.phase = p; st.t = 0; }, held = [];
+    const hold = (obj, hand = P.hand) => { hand.add(obj); held.push(obj); return obj; };
+    const pose = poser(m, (x, z) => u.terrain.h(x, z));
+    let step;
+    still(P);
+    if (key === 'lake') {
+      // Fishing: cast, wait for a bite while the float bobs, strike, and reel the fish up out of the water.
+      const rod = hold(new T.Group()); rod.rotation.x = -1.1; cyl(rod, 0.003, 0.005, 0.28, 0x6b4a2e, 0, 0.12, 0, 6); const tip = new T.Object3D(); tip.position.y = 0.26; rod.add(tip);
+      const bob = new T.Group(); props.add(bob); sph(bob, 0.011, 0xe03131, 0, 0, 0); sph(bob, 0.007, 0xffffff, 0, 0.008, 0);
+      const fish = new T.Group(); props.add(fish); sph(fish, 0.02, 0x8a9a7a, 0, 0, 0, 0.6, 0.7, 1.5); cn(fish, 0.016, 0.03, 0x8a9a7a, 0, 0, -0.035, 4).rotation.x = P2; fish.visible = false;
+      cyl(props, 0.03, 0.026, 0.05, 0x5b7a9a, pl.at[0] + Math.cos(pl.face) * 0.06, pl.at[1] + 0.025, pl.at[2] - Math.sin(pl.face) * 0.06, 12);
+      const string = line(props), FISH = [['brown trout', 4], ['rainbow trout', 4], ['perch', 3], ['eel', 3], ['kōaro', 2], ['bully', 2]];
+      let target = null, wait = 0, catchOf = null;
+      m.position.set(...pl.at); m.rotation.y = pl.face;
+      step = (t, dt) => {
+        const tp = local(g, tip);
+        if (st.phase === 'go' || st.phase === 'cast') {
+          if (st.phase === 'go') { target = [pl.at[0] + Math.sin(pl.face) * (0.22 + rr() * 0.14) + Math.cos(pl.face) * (rr() - 0.5) * 0.2, pl.sea, pl.at[2] + Math.cos(pl.face) * (0.22 + rr() * 0.14) - Math.sin(pl.face) * (rr() - 0.5) * 0.2]; phase('cast'); }
+          const q = Math.min(1, st.t / 1); P.armR.rotation.x = q < 0.4 ? -0.3 - q * 1.5 : -0.9 + (q - 0.4) * 0.3; rod.rotation.x = -1.1 + (q < 0.4 ? 0.6 : 0);
+          const e = ease(Math.max(0, (q - 0.4) / 0.6)); bob.position.set(tp.x + (target[0] - tp.x) * e, tp.y + (target[1] - tp.y) * e + Math.sin(Math.PI * e) * 0.12, tp.z + (target[2] - tp.z) * e);
+          if (q >= 1) { ripple(props, rings, ...target); wait = 2.5 + rr() * 4; phase('wait'); }
+        } else if (st.phase === 'wait') { bob.position.set(target[0], pl.sea + 0.004 + Math.sin(t * 3) * 0.003, target[2]); P.armR.rotation.x = -0.82 + Math.sin(t * 1.3) * 0.03; if (st.t > wait) { ripple(props, rings, ...target); catchOf = FISH[Math.floor(rr() * FISH.length)]; phase('bite'); } }
+        else if (st.phase === 'bite') { bob.position.y = pl.sea - 0.012 * Math.abs(Math.sin(st.t * 18)); if (st.t > 0.6) phase('reel'); }
+        else if (st.phase === 'reel') {
+          const q = Math.min(1, st.t / 1.2); P.armR.rotation.x = -0.82 - q * 0.9; fish.visible = true;
+          fish.position.set(target[0] + (tp.x - target[0]) * q * 0.85, pl.sea + (tp.y - 0.06 - pl.sea) * q, target[2] + (tp.z - target[2]) * q * 0.85); fish.rotation.set(-1.2, pl.face, Math.sin(t * 20) * 0.5); bob.position.copy(fish.position).y += 0.03;
+          if (q >= 1) { say(catchOf[1], `${/^[aeiou]/.test(catchOf[0]) ? 'An' : 'A'} ${catchOf[0]}!`, '🐟'); fish.visible = false; phase('go'); }
+        }
+        string(tp, bob.position);
+      };
+    } else if (key === 'beach') {
+      // Surfing: paddle out lying on the board, turn and wait, then stand and ride a wave back in.
+      const board = new T.Group(); props.add(board); sph(board, 0.03, 0xffd43b, 0, 0, 0, 0.9, 0.22, 3.2); bx(board, 0.008, 0.004, 0.17, 0xe03131, 0, 0.005, 0);
+      let lane = (rr() - 0.5) * 0.6, from = toWorld(pl.L, 0.18, lane), to = toWorld(pl.L, 0.78, lane + (rr() - 0.5) * 0.2);
+      const along = (q, a, b) => [a[0] + (b[0] - a[0]) * q, a[1] + (b[1] - a[1]) * q];
+      { const [sx, sz] = toWorld(pl.L, 0.02, lane); m.position.set(sx, h(sx, sz), sz); m.rotation.y = Math.atan2(from[0] - sx, from[1] - sz); st.phase = 'paddle'; }
+      step = (t, dt) => {
+        if (st.phase === 'go') { lane = (rr() - 0.5) * 0.6; from = toWorld(pl.L, 0.18, lane); to = toWorld(pl.L, 0.78, lane + (rr() - 0.5) * 0.2); phase('paddle'); }
+        const bobY = pl.sea + 0.004 + Math.sin(t * 2.4) * 0.004;
+        if (st.phase === 'paddle') {
+          const q = Math.min(1, st.t / 3.2), [x, z] = along(ease(q), from, to); board.position.set(x, bobY, z); board.rotation.set(0, Math.atan2(to[0] - from[0], to[1] - from[1]), 0);
+          m.position.set(x, bobY + 0.012, z); m.rotation.set(P2 * 0.95, board.rotation.y, 0); P.body.rotation.x = 0; P.armL.rotation.x = -1.6 + Math.sin(t * 7) * 0.9; P.armR.rotation.x = -1.6 - Math.sin(t * 7) * 0.9; P.legL.rotation.x = P.legR.rotation.x = 0;
+          if (q >= 1) phase('turn');
+        } else if (st.phase === 'turn') {
+          const q = Math.min(1, st.t / 1.4); board.position.y = bobY; board.rotation.y = Math.atan2(to[0] - from[0], to[1] - from[1]) + Math.PI * ease(q); m.position.set(board.position.x, bobY + 0.02, board.position.z); m.rotation.set(0, board.rotation.y, 0); still(P); P.legL.rotation.x = P.legR.rotation.x = -1.4;
+          if (q >= 1) phase('ride');
+        } else if (st.phase === 'ride') {
+          const q = Math.min(1, st.t / 2.8), [x, z] = along(ease(q), to, from), swell = Math.sin(Math.PI * Math.min(1, q * 1.2)) * 0.03;
+          board.position.set(x + Math.sin(q * 9) * 0.03, pl.sea + 0.006 + swell, z); board.rotation.set(0, Math.atan2(from[0] - to[0], from[1] - to[1]), Math.sin(q * 9) * 0.25);
+          m.position.set(board.position.x, board.position.y + 0.01, board.position.z); m.rotation.set(0, board.rotation.y + P2 * 0.8, board.rotation.z * 0.5); still(P); P.body.position.y = 0.075; P.legL.rotation.z = 0.35; P.legR.rotation.z = -0.35; P.armL.rotation.z = 1.2; P.armR.rotation.z = -1.2;
+          if (q >= 1) { say(3, 'Rode a wave!', '🌊'); phase('go'); }
+        }
+      };
+    } else if (key === 'lookout') {
+      // Geyser watch: camera up for the hot spring now and then, and always for an eruption.
+      const cam = hold(new T.Group()); bx(cam, 0.04, 0.026, 0.02, 0x2a2f3a, 0, 0, 0.012); cyl(cam, 0.008, 0.008, 0.012, 0x111111, 0, 0, 0.026, 8).rotation.x = P2;
+      const flash = glow(props, 0.03, 0xffffff, 0, 0, 0); flash.visible = false;
+      m.position.set(...pl.at); m.rotation.y = Math.atan2(pl.geyser[0] - pl.at[0], pl.geyser[2] - pl.at[2]); let next = 2 + rr() * 3, shot = -1, up = 0;
+      step = (t, dt) => {
+        const c = t % pl.cycle, erupting = c > 1.6 && c < pl.erupt - 1, cyc = Math.floor(t / pl.cycle);
+        const want = erupting || st.t > next - 0.6; up += ((want ? 1 : 0) - up) * Math.min(1, dt * 6); P.armR.rotation.x = -1.5 * up; P.armL.rotation.x = -1.4 * up; P.armL.rotation.z = -0.4 * up;
+        const snap = s => { const p = local(g, cam); flash.position.copy(p); flash.visible = true; setTimeout(() => { flash.visible = false; }, 120); say(...s); };
+        if (erupting && shot !== cyc && c > 3) { shot = cyc; snap([5, 'Eruption! What a shot', '📸']); st.t = 0; next = 3 + rr() * 3; }
+        else if (!erupting && st.t > next) { snap([2, ['Snap! The rainbow spring', 'Snap! Steam rising', 'Snap! The terraces'][Math.floor(rr() * 3)], '📷']); st.t = 0; next = 4 + rr() * 4; }
+      };
+    } else if (key === 'plot') {
+      // Weeding: weeds sprout in the beds; walk to one, crouch and pull it out.
+      const weeds = [], sprout = () => { const [x, z] = pl.spots[Math.floor(rr() * pl.spots.length)], w = new T.Group(); w.position.set(x, h(x, z), z); props.add(w); for (let j = 0; j < 5; j++) add(w, new T.ConeGeometry(0.01, 0.07, 4), mat(0x3d6b21), (j - 2) * 0.01, 0.035, (j % 2) * 0.01).rotation.z = (j - 2) * 0.28; sph(w, 0.011, 0xffd43b, 0, 0.07, 0); w.scale.setScalar(0.01); w.userData.grow = 0; weeds.push(w); };
+      for (let i = 0; i < 3; i++) sprout(); m.position.set(pl.start[0], h(...pl.start), pl.start[1]); let tgt = null;
+      step = (t, dt) => {
+        weeds.forEach(w => { if (w.userData.grow < 1) { w.userData.grow = Math.min(1, w.userData.grow + dt * 1.5); w.scale.setScalar(ease(w.userData.grow)); } });
+        if (st.phase === 'go') { tgt = weeds.reduce((a, w) => (!a || Math.hypot(w.position.x - m.position.x, w.position.z - m.position.z) < Math.hypot(a.position.x - m.position.x, a.position.z - m.position.z) ? w : a), null); phase('walk'); }
+        if (st.phase === 'walk') { still(P); const there = walkTo(m, u, tgt.position.x - 0.04, tgt.position.z - 0.04, dt); walking(P, t, !there); if (there) { m.rotation.y = Math.atan2(tgt.position.x - m.position.x, tgt.position.z - m.position.z); phase('pull'); } }
+        else if (st.phase === 'pull') {
+          const q = Math.min(1, st.t / 1.1), c2 = Math.sin(Math.PI * Math.min(1, q * 1.4)); P.body.rotation.x = 0.7 * c2; P.legL.rotation.x = P.legR.rotation.x = -0.5 * c2; P.body.position.y = 0.085 - 0.02 * c2; P.armR.rotation.x = P.armL.rotation.x = -0.9 * c2;
+          if (q > 0.6) { tgt.position.y += dt * 0.15; tgt.scale.multiplyScalar(1 - dt * 3); }
+          if (q >= 1) { props.remove(tgt); weeds.splice(weeds.indexOf(tgt), 1); sprout(); still(P); say(2, 'Weed pulled', '🌱'); phase('go'); }
+        }
+      };
+    } else if (key === 'stable') {
+      // Show jumping: canter round the arena on a horse, clearing the jumps; a clear round each lap.
+      const hz = new T.Group(); hz.rotation.order = 'YXZ'; props.add(hz); K.horse(hz, 0x8a5a3c, 0x3b2a1e); hz.scale.setScalar(1.15); hz.add(m); m.position.set(0, 0.2, -0.01); m.rotation.set(0, 0, 0);
+      P.legL.rotation.set(-1.3, 0, 0.5); P.legR.rotation.set(-1.3, 0, -0.5); P.armL.rotation.x = P.armR.rotation.x = -0.9; let s = 0;
+      const lap = pl.lap, n = lap.length, at = q => { const f = (q % 1) * n, i = Math.floor(f), a = lap[i], b = lap[(i + 1) % n], w = f - i; return [a[0] + (b[0] - a[0]) * w, a[1] + (b[1] - a[1]) * w]; };
+      step = (t, dt) => {
+        const s0 = s; s += dt * 0.06; const [x, z] = at(s), [x2, z2] = at(s + 0.004); let jump = 0;
+        pl.jumps.forEach(j => { const d = ((s % 1) - j + 1) % 1; if (d < 0.05) jump = Math.sin(Math.PI * d / 0.05); });
+        hz.position.set(x, pl.y + Math.abs(Math.sin(t * 9)) * 0.012 + jump * 0.1, z); hz.rotation.set(-jump * 0.25, Math.atan2(x2 - x, z2 - z), 0);
+        if (Math.floor(s) > Math.floor(s0)) say(4, 'Clear round!', '🏆', [x, pl.y + 0.45, z]);
+      };
+      const end0 = () => { const p = hz.position; hz.remove(m); g.add(m); m.position.set(p.x + 0.08, h(p.x + 0.08, p.z), p.z); m.rotation.set(0, hz.rotation.y, 0); still(P); };
+      o.onEnd = end0;
+    } else if (key === 'orchard') {
+      // Cherry picking: walk tree to tree with a basket, reach up and pick a handful into it.
+      const basket = hold(new T.Group(), P.handL); cyl(basket, 0.026, 0.02, 0.03, 0xc9a06a, 0, -0.02, 0, 12); const fruit = []; let ti = 0, berry = null;
+      m.position.set(pl.trees[0][0] + 0.15, h(pl.trees[0][0] + 0.15, pl.trees[0][1]), pl.trees[0][1]);
+      step = (t, dt) => {
+        const [tx, tz] = pl.trees[ti % pl.trees.length];
+        if (st.phase === 'go') { const there = walkTo(m, u, tx + 0.13, tz + 0.05, dt); walking(P, t, !there); if (there) { still(P); m.rotation.y = Math.atan2(tx - m.position.x, tz - m.position.z); phase('reach'); } }
+        else if (st.phase === 'reach') {
+          const q = Math.min(1, st.t / 1.3), up = Math.sin(Math.PI * Math.min(1, q * 1.3)); P.armR.rotation.x = -2.7 * up;
+          if (q > 0.35 && !berry) { berry = new T.Group(); sph(berry, 0.012, 0xc81e3a, -0.008, 0, 0); sph(berry, 0.012, 0xc81e3a, 0.008, 0, 0); hold(berry); }
+          if (q >= 1) { if (berry) { P.hand.remove(berry); berry.position.set(fruit.length % 3 * 0.01 - 0.01, -0.004 + Math.floor(fruit.length / 3) * 0.006, 0); basket.add(berry); fruit.push(berry); if (fruit.length > 6) basket.remove(fruit.shift()); berry = null; } say(2, 'A handful of cherries', '🍒'); ti++; phase('go'); }
+        }
+      };
+    } else if (key === 'grove') {
+      // Bird spotting: binoculars up, scanning the treetops; native birds fly in and land, and each one seen counts.
+      const bino = hold(new T.Group()); [-1, 1].forEach(sx => cyl(bino, 0.008, 0.009, 0.03, 0x2a2f3a, sx * 0.011, 0, 0.01, 8).rotation.x = P2);
+      const BIRDS = [['tūī', 0x1f3a4a], ['pīwakawaka', 0x8a6a4a], ['kererū', 0x3f8a5a], ['korimako', 0x7a8a3a], ['kākā', 0x8a4a2a]];
+      const bird = new T.Group(); props.add(bird); const body = sph(bird, 0.018, 0x1f3a4a, 0, 0, 0, 0.8, 0.8, 1.3); sph(bird, 0.012, 0x1f3a4a, 0, 0.012, 0.018); const wings = [-1, 1].map(sx => { const w = bx(bird, 0.04, 0.004, 0.02, 0x1f3a4a, sx * 0.02, 0.004, 0); return w; }); bird.visible = false;
+      m.position.set(pl.at[0], h(pl.at[0], pl.at[2]), pl.at[2]); let perch, from, kind, yaw = m.rotation.y;
+      step = (t, dt) => {
+        P.armR.rotation.x = P.armL.rotation.x = -1.55; P.armL.rotation.z = -0.35;
+        if (st.phase === 'go') { perch = pl.perches[Math.floor(rr() * pl.perches.length)]; kind = BIRDS[Math.floor(rr() * BIRDS.length)]; [body, ...bird.children].forEach(c => { if (c.material && c.material.color) c.material = mat(kind[1]); }); from = [perch[0] + (rr() - 0.5) * 1.6, perch[1] + 0.5, perch[2] + (rr() - 0.5) * 1.6]; bird.visible = true; phase('fly'); }
+        if (st.phase === 'fly' || st.phase === 'away') {
+          const q = Math.min(1, st.t / 1.6), a = st.phase === 'fly' ? from : perch, b = st.phase === 'fly' ? perch : from;
+          bird.position.set(a[0] + (b[0] - a[0]) * q, a[1] + (b[1] - a[1]) * q + Math.sin(Math.PI * q) * 0.1, a[2] + (b[2] - a[2]) * q); bird.rotation.y = Math.atan2(b[0] - a[0], b[2] - a[2]); wings.forEach((w, i) => { w.rotation.z = (i ? -1 : 1) * Math.sin(t * 30) * 0.8; });
+          if (q >= 1) { if (st.phase === 'fly') phase('sit'); else { bird.visible = false; phase('go'); } }
+        } else if (st.phase === 'sit') { wings.forEach(w => { w.rotation.z = 0; }); if (st.t > 1.8) { say(3, `Spotted a ${kind[0]}!`, '🐦', [perch[0], perch[1] + 0.08, perch[2]]); phase('away'); } }
+        const want = bird.visible ? Math.atan2(bird.position.x - m.position.x, bird.position.z - m.position.z) : yaw + Math.sin(t * 0.4) * 0.6; m.rotation.y += Math.atan2(Math.sin(want - m.rotation.y), Math.cos(want - m.rotation.y)) * Math.min(1, dt * 2.5);
+      };
+    } else if (key === 'sky') {
+      // Kite flying: a kite on a long string dances in the wind; every gust it catches loops it round.
+      const kite = new T.Group(); props.add(kite); const kb = add(kite, new T.OctahedronGeometry(0.06, 0), mat(0xff6b9d, { flat: true }), 0, 0, 0); kb.scale.set(1, 1.4, 0.15);
+      const tail = [0, 1, 2, 3, 4].map(i => bx(kite, 0.016, 0.006, 0.006, [0xffd43b, 0x4dabf7, 0x69db7c][i % 3], 0, -0.1 - i * 0.03, 0)); const string = line(props);
+      const sparks = [0, 1, 2, 3, 4, 5].map(() => { const s = glow(props, 0.008, 0xfff3a0, 0, 0, 0); s.visible = false; return s; });
+      m.position.set(pl.at[0], h(pl.at[0], pl.at[2]), pl.at[2]); m.rotation.y = pl.face; let next = 3 + rr() * 3, loop = -1;
+      step = (t, dt) => {
+        P.armR.rotation.x = -2 + Math.sin(t * 1.7) * 0.15;
+        const kx = m.position.x + Math.sin(pl.face) * 0.5 + Math.sin(t * 0.7) * 0.15, kz = m.position.z + Math.cos(pl.face) * 0.5 + Math.cos(t * 0.5) * 0.1, ky = m.position.y + 0.75 + Math.sin(t * 1.1) * 0.06;
+        kite.position.set(kx, ky, kz); kite.rotation.set(0, pl.face, Math.sin(t * 2) * 0.3 + (loop >= 0 ? loop * Math.PI * 2 : 0));
+        tail.forEach((b, i) => { b.position.x = Math.sin(t * 5 - i) * 0.012 * i; });
+        string(local(g, P.hand), kite.position);
+        if (loop >= 0) { loop += dt / 1.1; sparks.forEach((s, i) => { s.visible = true; const a = i / sparks.length * Math.PI * 2 + t * 3; s.position.set(kx + Math.cos(a) * 0.1, ky + Math.sin(a) * 0.1, kz); }); if (loop >= 1) { loop = -1; sparks.forEach(s => { s.visible = false; }); say(2, 'Caught a gust!', '🪁', [kx, ky, kz]); } }
+        else if (st.t > next) { loop = 0; st.t = 0; next = 3.5 + rr() * 3; }
+      };
+    } else if (key === 'farm') {
+      // Hay stacking: carry bales from the pile by the barn and stack them up; the stack is cleared after six.
+      const stack = []; let bale = null;
+      m.position.set(pl.pile[0] + 0.1, h(pl.pile[0] + 0.1, pl.pile[1]), pl.pile[1]);
+      step = (t, dt) => {
+        if (st.phase === 'go') { const there = walkTo(m, u, pl.pile[0] + 0.08, pl.pile[1] + 0.02, dt); walking(P, t, !there); if (there) { still(P); phase('lift'); } }
+        else if (st.phase === 'lift') { const q = Math.min(1, st.t / 0.5); P.armR.rotation.x = P.armL.rotation.x = -1.2 * q; if (!bale) { bale = new T.Group(); cyl(bale, 0.035, 0.035, 0.06, 0xe9c46a, 0, 0, 0, 12).rotation.z = P2; bale.position.set(0, 0.13, 0.06); m.add(bale); } if (q >= 1) phase('carry'); }
+        else if (st.phase === 'carry') { const there = walkTo(m, u, pl.stack[0] - 0.08, pl.stack[1], dt, 0.15); walking(P, t, !there); P.armR.rotation.x = P.armL.rotation.x = -1.2; if (there) phase('drop'); }
+        else if (st.phase === 'drop') {
+          const q = Math.min(1, st.t / 0.5); if (q >= 1) { m.remove(bale); bale.position.set(pl.stack[0] + (stack.length % 2) * 0.02, h(...pl.stack) + 0.035 + stack.length * 0.06, pl.stack[1]); bale.rotation.y = stack.length * 0.7; props.add(bale); stack.push(bale); bale = null; if (stack.length > 6) stack.splice(0).forEach(b => props.remove(b)); still(P); say(2, 'Bale stacked', '🌾'); phase('go'); }
+        }
+      };
+    } else {
+      // Kick-ups: keep the ball up, foot to foot; every ten counts.
+      const ball = new T.Group(); props.add(ball); sph(ball, 0.022, 0xffffff, 0, 0, 0); [[1, 0, 0], [-1, 0.3, 0.2], [0, 1, 0], [0.2, -0.6, 0.8]].forEach(([a, b, c]) => sph(ball, 0.007, 0x222222, a * 0.019, b * 0.019, c * 0.019));
+      m.position.set(pl.at[0], h(pl.at[0], pl.at[2]), pl.at[2]); m.rotation.y = pl.face; let kicks = 0, k0 = 0;
+      step = (t, dt) => {
+        const per = 0.6, c = (t % per) / per, foot = Math.floor(t / per) % 2, f = Math.sin(pl.face), fz = Math.cos(pl.face);
+        if (Math.floor(t / per) !== k0) { k0 = Math.floor(t / per); kicks++; if (kicks % 10 === 0) say(3, `${kicks} kick-ups!`, '⚽'); }
+        const kickLeg = foot ? P.legL : P.legR; P.legL.rotation.x = P.legR.rotation.x = 0; kickLeg.rotation.x = -0.9 * Math.max(0, 1 - c * 4);
+        ball.position.set(m.position.x + f * 0.05 + (foot ? -0.015 : 0.015) * fz, m.position.y + 0.03 + Math.sin(Math.PI * c) * 0.16, m.position.z + fz * 0.05 - (foot ? -0.015 : 0.015) * f); ball.rotation.x += dt * 8;
+        P.armL.rotation.z = 0.4; P.armR.rotation.z = -0.4;
+      };
+    }
+    pose.sync();
+    return {
+      resync() { pose.sync(true); },
+      step(t, dt) { st.t += dt; out.length = 0; pose.before(true); step(t, dt); pose.after(dt, true); for (let i = rings.length - 1; i >= 0; i--) { const r = rings[i]; r.t += dt; r.m.scale.setScalar(1 + r.t * 4); r.m.material.opacity = 0.8 * (1 - r.t / 0.8); if (r.t > 0.8) { props.remove(r.m); r.m.material.dispose(); rings.splice(i, 1); } } return out.slice(); },
+      end() { if (o.onEnd) o.onEnd(); held.forEach(o2 => o2.parent && o2.parent.remove(o2)); g.remove(props); props.traverse(c => { if (c.geometry) c.geometry.dispose(); if (c.userData.ownMat && c.material) c.material.dispose(); }); },
+    };
+  }
+
+  /* ---------- Behaviours ----------
+     When the kid isn't doing an activity, their character lives on the island by itself: it wanders about and plays
+     out little scenes with props, picked at random from what suits the island and the time of day, plus whatever the
+     kid's own things there let it do. Things work by kind (seats, swings, water play, fires, pets…), so every item adds
+     something, and tools add more (a rod for surf casting, a bug net for bug hunts). A behaviour is a list of steps:
+     go somewhere, face something, act for a while (posing the character and moving props), or do something at once.
+     brain() returns { step(t, dt), end() }. o: { kid, hue, night, dusk, tools: {}, items: [{ id, t, x, z }] }. */
+  const KINDS = {
+    seat: ['bench', 'picnic', 'deckchairs', 'swingseat', 'picnicblanket'], lie: ['hammock', 'tent'], bounce: ['trampoline', 'bouncy'], swing: ['swing', 'tyreswing'],
+    slide: ['slide', 'waterslide', 'skateramp'], ball: ['ball', 'soccergoal', 'netball', 'rugbyposts', 'cricket', 'minigolf', 'hoop'], hop: ['hopscotch', 'sandpit'],
+    ride: ['seesaw', 'roundabout', 'carousel', 'ferris', 'coaster', 'gokart', 'flyingfox', 'pumptrack', 'rocketToy', 'balloon'], splash: ['paddling', 'splashpad', 'pool', 'hottub', 'shower', 'fountain', 'birdbath', 'wishingwell'],
+    fire: ['campfire', 'bbq', 'pizzaoven'], look: ['telescope', 'observatory', 'lighthouse', 'clocktower'], flower: ['flowers', 'tulips', 'roses', 'lavender', 'hydrangeas', 'sunflowers', 'butterflygarden', 'mushrooms', 'pumpkins', 'harakeke', 'bamboo'],
+    climb: ['treehouse', 'playhouse', 'climbing', 'castletower', 'treevillage'], mail: ['letterbox'], wash: ['clothesline'], bees: ['beehive'], kite: ['kite', 'matarikikites'],
+  };
+  const kindOf = t => Object.keys(KINDS).find(k => KINDS[k].includes(t));
+  // The picture in the thought bubble for each behaviour, and for each kind of thing.
+  const PIC = { stroll: '🚶', rest: '😌', wave: '👋', dance: '💃', nap: '😴', stretch: '🙆', butterfly: '🦋', stars: '⭐', water: '🌼', read: '📖', kickabout: '⚽', skip: '🏃', bubbles: '🫧', sweep: '🧹', hoop: '⭕', sunbathe: '😎', sandcastle: '🏰', swim: '🏊', coconuts: '🥥', shells: '🐚', paddle: '🌊', beachfire: '🔥', surfcast: '🎣', dangle: '🦶', skipstones: '💫', peer: '👀', jettysun: '😎', waterbeds: '💧', dig: '🌱', carrot: '🥕', sunflower: '🌻', scarecrow: '💬', chooks: '🐔', bucket: '💧', pitchfork: '🌾', fence: '🔨', jumpfoot: '🏃', rail: '🐴', geyserwatch: '⛲', snap: '📸', picnic: '🧺', pick: '🍎', shade: '🌳', hives: '🐝', rake: '🍂', birdwatch: '🐦', hugtree: '🌳', sticks: '🌲', bugs: '🐛', toadstools: '🍄', cloudbounce: '☁️', float: '✨', rainbowwave: '🌈',
+    seat: '📖', lie: '😴', bounce: '🤸', swing: '😄', slide: '🎢', ball: '⚽', hop: '🦘', ride: '🎡', splash: '💦', fire: '🔥', look: '🔭', flower: '🌸', climb: '🧗', mail: '✉️', wash: '👕', bees: '🐝', kite: '🪁', pet: '❤️', any: '😍' };
+  function brain(g, key, o) {
+    const u = g.userData, m = o.kid, P = m.userData.P, pl = u.play || {}, L = u.L || { cx: 0, cz: 0, r: 1.05 * (u.S || 1), ox: Math.cos(FRONT), oz: Math.sin(FRONT) }, sea = u.terrain.sea, rr = K.mulberry((Date.now() % 9973) + 7);
+    const floor = pl.floor || u.terrain.h, walk = pl.walk || ((x, z) => Math.hypot(x - L.cx, z - L.cz) < 0.85 * L.r), props = new T.Group(); g.add(props);
+    const ticks = [], fades = [], held = [], hue = new T.Color(o.hue || '#e5533d').getHex(), pose = poser(m, floor);
+    // Where to go: a random walkable spot, one by the water, one near something.
+    const spot = (ok = walk) => { for (let i = 0; i < 80; i++) { const a = rr() * PI * 2, r0 = Math.sqrt(rr()) * 0.85 * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0; if (ok(x, z)) return [x, z]; } return null; };
+    const depth = (x, z) => (sea == null ? -1 : sea - u.terrain.h(x, z));
+    const byWater = () => spot((x, z) => walk(x, z) && [[0.07, 0], [-0.07, 0], [0, 0.07], [0, -0.07]].some(([dx, dz]) => depth(x + dx, z + dz) > 0.012));
+    const near = (p, r = 0.13) => spot((x, z) => walk(x, z) && Math.hypot(x - p[0], z - p[1]) < r && Math.hypot(x - p[0], z - p[1]) > 0.05) || p;
+    const gy = () => floor(m.position.x, m.position.z), here = () => [m.position.x, m.position.z];
+    // Steps
+    const go = (p, sp = 0.16) => ({ run: (dt, t) => { if (!p) return true; const dx = p[0] - m.position.x, dz = p[1] - m.position.z, d = Math.hypot(dx, dz); if (d < 0.012) { still(P); m.position.y = gy(); return true; } const s = Math.min(d, sp * dt); m.position.x += dx / d * s; m.position.z += dz / d * s; m.rotation.y = Math.atan2(dx, dz); m.position.y = gy(); walking(P, t, true); return false; } });
+    const face = p => ({ run: () => { if (p) m.rotation.y = Math.atan2(p[0] - m.position.x, p[1] - m.position.z); return true; } });
+    const act = (d, f) => ({ d, run: (dt, t, q) => { if (f) f(q, t, dt); return q >= 1; } });
+    const now = f => ({ run: () => { f(); return true; } });
+    // Props: put in the world, held in a paw, a little emoji bubble over the head, and per-frame movers.
+    const pop = obj => { const s0 = obj.scale.clone(), k = { t: 0 }; obj.scale.multiplyScalar(0.01); fades.push(dt => { k.t = Math.min(1, k.t + dt * 4); const e = 1 - Math.pow(1 - k.t, 3); obj.scale.copy(s0).multiplyScalar(Math.max(0.01, e)); return k.t < 1; }); return obj; };
+    const put = (obj, x, y, z) => { obj.position.set(x, y, z); props.add(obj); return pop(obj); };
+    const hand = (obj, left) => { (left ? P.handL : P.hand).add(obj); held.push(obj); return pop(obj); };
+    const bubble = (e, d = 1.8) => { const s = sprite(emojiTex(e), 0.07); s.userData.ownMat = true; props.add(s); const t0 = { t: 0 }; ticks.push(dt => { t0.t += dt; s.position.set(m.position.x, m.position.y + 0.33 + t0.t * 0.03, m.position.z); s.material.opacity = Math.min(1, (d - t0.t) * 2); return t0.t < d; }); };
+    const say = (e, d) => now(() => bubble(e, d));
+    const every = f => ticks.push(f);
+    const G = () => new T.Group();
+    const sit = (q = 1) => { m.position.y = gy() - 0.07 * q; P.legL.rotation.x = P.legR.rotation.x = -1.45 * q; };
+    const lie = front => { m.rotation.x = front ? P2 * 0.95 : -P2; m.position.y = gy() + (front ? 0.045 : 0.056); };
+    const crouch = q => { P.body.rotation.x = 0.6 * q; P.legL.rotation.x = P.legR.rotation.x = -0.6 * q; P.body.position.y = 0.085 - 0.025 * q; };
+    const wave = t => { P.armR.rotation.z = -2.5 + Math.sin(t * 10) * 0.3; };
+    const drops = (x, y, z, c = 0x8fd0ff, n = 6) => { for (let i = 0; i < n; i++) { const s = sph(props, 0.006, c, x, y, z), v = [(rr() - 0.5) * 0.2, 0.15 + rr() * 0.15, (rr() - 0.5) * 0.2], life = { t: 0 }; every(dt => { life.t += dt; v[1] -= dt * 0.8; s.position.x += v[0] * dt; s.position.y += v[1] * dt; s.position.z += v[2] * dt; if (life.t > 0.7) { props.remove(s); return false; } return true; }); } };
+    const flames = (x, y, z, s0 = 1) => { const f = G(); put(f, x, y, z); for (let i = 0; i < 5; i++) stick(f, [Math.cos(i * 1.3) * 0.03 * s0, 0, Math.sin(i * 1.3) * 0.03 * s0], [0, 0.02 * s0, 0], 0.005, 0x6b4a2e); const fl = [0xff6b1a, 0xffb020, 0xffe066].map((c, i) => { const c2 = add(f, new T.ConeGeometry(0.022 * s0 * (1 - i * 0.25), 0.07 * s0 * (1 - i * 0.2), 7), mat(c, { e: c }), 0, 0.04 * s0, 0); c2.userData.noInk = true; return c2; }); every(dt => { const t = performance.now() / 1000; fl.forEach((c2, i) => { c2.scale.set(1, 0.8 + Math.sin(t * 12 + i * 2) * 0.25, 1); c2.rotation.y = t * (2 + i); }); return f.parent === props; }); return f; };
+    const book = () => { const b = G(); bx(b, 0.04, 0.005, 0.03, 0xffffff, 0, 0, 0); bx(b, 0.042, 0.004, 0.032, [0xe03131, 0x2f6fe4, 0x30c25a][Math.floor(rr() * 3)], 0, -0.003, 0); b.rotation.x = -1.1; return b; };
+    const ball = (c = 0xffffff) => { const b = G(); sph(b, 0.02, c, 0, 0, 0); [[1, 0, 0], [-1, 0.3, 0.2], [0, 1, 0]].forEach(([a, b2, c2]) => sph(b, 0.006, 0x222222, a * 0.018, b2 * 0.018, c2 * 0.018)); return b; };
+    const can = () => { const w = G(); cyl(w, 0.016, 0.018, 0.03, 0x4caf50, 0, -0.01, 0.02, 10); stick(w, [0, -0.005, 0.035], [0, 0.01, 0.07], 0.003, 0x4caf50); return w; };
+    const broom = () => { const b = G(); cyl(b, 0.003, 0.003, 0.18, 0xb07a4a, 0, 0.0, 0.03, 5); cn(b, 0.02, 0.04, 0xe0b84a, 0, -0.1, 0.03, 8).rotation.x = PI; b.rotation.x = 0.5; return b; };
+    // The library: [id, where ('any' or island keys), weight, when(), steps()].
+    const LIB = [
+      ['stroll', 'any', 1, null, () => [go(spot()), act(1.2, (q, t) => { P.head.rotation.y = Math.sin(t * 2) * 0.6; }), go(spot()), now(() => { P.head.rotation.y = 0; })]],
+      ['rest', 'any', 0.8, null, () => [go(spot()), act(5, (q, t) => { sit(); P.legL.rotation.x = -1.3 + Math.sin(t * 3) * 0.2; P.legR.rotation.x = -1.3 - Math.sin(t * 3) * 0.2; }), say('😊')]],
+      ['wave', 'any', 0.6, null, () => [go(spot()), face([L.cx + L.ox * 9, L.cz + L.oz * 9]), say('👋'), act(2.2, (q, t) => wave(t))]],
+      ['dance', 'any', 0.7, null, () => [go(spot()), say('🎵', 2.5), act(4, (q, t) => { P.body.rotation.z = Math.sin(t * 6) * 0.25; P.armL.rotation.z = 1.2 + Math.sin(t * 6) * 0.6; P.armR.rotation.z = -1.2 + Math.sin(t * 6) * 0.6; m.position.y = gy() + Math.abs(Math.sin(t * 6)) * 0.02; m.rotation.y += 0.02; })]],
+      ['nap', 'any', 0.5, null, () => [go(spot()), act(7, (q, t) => { lie(false); if (Math.floor(t * 0.6) !== Math.floor((t - 0.02) * 0.6)) bubble('💤', 1.4); })]],
+      ['stretch', 'any', 0.5, null, () => [go(spot()), act(2.5, (q, t) => { const s = Math.sin(Math.PI * q); P.armL.rotation.z = 2.8 * s; P.armR.rotation.z = -2.8 * s; m.position.y = gy() + 0.01 * s; }), say('🥱')]],
+      ['butterfly', 'any', 0.6, () => !o.night, () => { const b = G(), wg = [-1, 1].map(s => { const w = bx(b, 0.02, 0.002, 0.016, [0xffb3e6, 0xffd43b, 0x9fe8ff][Math.floor(rr() * 3)], s * 0.011, 0, 0); return w; }); let p0 = spot(); const fly = { t: 0 }; return [now(() => { put(b, m.position.x + 0.2, gy() + 0.12, m.position.z); every(dt => { fly.t += dt; wg.forEach((w, i) => { w.rotation.z = (i ? 1 : -1) * Math.sin(fly.t * 25) * 0.8; }); b.position.x += (m.position.x + Math.sin(fly.t * 1.3) * 0.08 - b.position.x) * dt * 1.2; b.position.z += (m.position.z + Math.cos(fly.t * 1.1) * 0.08 - b.position.z) * dt * 1.2; b.position.y = gy() + 0.14 + Math.sin(fly.t * 3) * 0.03; return true; }); }), go(p0, 0.22), act(1.5, (q, t) => { P.armR.rotation.x = -2 * Math.abs(Math.sin(t * 5)); m.position.y = gy() + Math.abs(Math.sin(t * 8)) * 0.02; }), go(spot(), 0.22), say('🦋')]; }],
+      ['stars', 'any', 0.8, () => o.night, () => [go(spot()), act(6, (q, t) => { lie(false); if (rr() < 0.01) bubble('⭐', 1.2); })]],
+      // Home
+      ['water', ['home'], 1, () => o.tools.wateringcan, () => { const p = spot(); return [go(p), now(() => hand(can())), act(3.5, (q, t) => { P.armR.rotation.x = -0.9; if (rr() < 0.25) { const w = local(g, P.hand); drops(w.x + Math.sin(m.rotation.y) * 0.05, w.y, w.z + Math.cos(m.rotation.y) * 0.05, 0x8fd0ff, 1); } }), say('🌼')]; }],
+      ['read', ['home', 'orchard', 'grove', 'sky'], 1, null, () => [go(spot()), now(() => hand(book())), act(7, (q, t) => { sit(); P.armR.rotation.x = -1.1; P.armL.rotation.x = -1.1; P.head.rotation.x = 0.25; }), say('📖')]],
+      ['kickabout', ['home', 'farm'], 1, null, () => { const b = put(ball(), ...[0, 0, 0]), p1 = spot(), p2 = spot(); let bp = here(); return [now(() => { b.position.set(m.position.x + 0.05, gy() + 0.02, m.position.z); bp = [b.position.x, b.position.z]; every(() => { b.position.y = floor(b.position.x, b.position.z) + 0.02; return true; }); }), go(p1, 0.22), act(0.4, () => { b.position.x += (m.position.x + Math.sin(m.rotation.y) * 0.05 - b.position.x) * 0.3; b.position.z += (m.position.z + Math.cos(m.rotation.y) * 0.05 - b.position.z) * 0.3; }), go(p2, 0.22), act(0.4, () => { b.position.x += (m.position.x + Math.sin(m.rotation.y) * 0.05 - b.position.x) * 0.3; b.position.z += (m.position.z + Math.cos(m.rotation.y) * 0.05 - b.position.z) * 0.3; }), say('⚽')]; }],
+      ['skip', ['home', 'beach', 'sky'], 0.8, null, () => { const rope = G(); return [go(spot()), now(() => { const loop = add(rope, new T.TorusGeometry(0.11, 0.003, 4, 24), mat(hue), 0, 0, 0); put(rope, 0, 0, 0); every(() => { rope.position.set(m.position.x, m.position.y + 0.11, m.position.z); rope.rotation.set(performance.now() / 160, m.rotation.y, 0, 'YXZ'); return true; }); loop.rotation.y = P2; }), act(4, (q, t) => { m.position.y = gy() + Math.abs(Math.sin(t * 10)) * 0.03; P.armL.rotation.z = 0.6; P.armR.rotation.z = -0.6; })]; }],
+      ['bubbles', ['home', 'sky', 'orchard'], 0.8, null, () => [go(spot()), now(() => { const w = G(); stick(w, [0, 0, 0], [0, 0.05, 0.02], 0.002, 0xff6b9d); add(w, new T.TorusGeometry(0.012, 0.002, 4, 12), mat(0xff6b9d), 0, 0.055, 0.02); hand(w); }), act(5, (q, t) => { P.armR.rotation.x = -1.6; if (rr() < 0.06) { const p = local(g, P.hand), s = add(props, new T.SphereGeometry(0.014, 10, 8), new T.MeshBasicMaterial({ color: 0xcfefff, transparent: true, opacity: 0.45, depthWrite: false }), p.x, p.y + 0.06, p.z), v = { t: 0 }; s.userData.ownMat = true; s.userData.noInk = true; every(dt => { v.t += dt; s.position.y += dt * 0.08; s.position.x += Math.sin(v.t * 3) * 0.002; if (v.t > 2.5) { props.remove(s); return false; } return true; }); } }), say('🫧')]],
+      ['sweep', ['home', 'stable', 'farm'], 0.8, () => o.tools.broom || key !== 'home', () => [go(spot()), now(() => hand(broom())), act(1.6, (q, t) => { P.armR.rotation.x = -0.4 + Math.sin(t * 8) * 0.4; }), go(spot(), 0.08), act(1.6, (q, t) => { P.armR.rotation.x = -0.4 + Math.sin(t * 8) * 0.4; }), say('🧹')]],
+      ['hoop', ['home', 'beach', 'sky'], 0.7, null, () => { const h = G(); return [go(spot()), now(() => { add(h, new T.TorusGeometry(0.06, 0.004, 5, 24), mat(0xff6b9d), 0, 0, 0).rotation.x = P2; put(h, 0, 0, 0); }), act(4, (q, t) => { h.position.set(m.position.x + Math.cos(t * 12) * 0.015, m.position.y + 0.13, m.position.z + Math.sin(t * 12) * 0.015); P.body.rotation.z = Math.sin(t * 12) * 0.12; P.armL.rotation.z = 1.4; P.armR.rotation.z = -1.4; }), say('😄')]; }],
+      // Beach
+      ['sunbathe', ['beach'], 1.2, () => !o.night, () => { const p = spot(); return [go(p), now(() => { const tw = G(); bx(tw, 0.09, 0.004, 0.2, hue, 0, 0.002, 0); for (let i = 0; i < 3; i++) bx(tw, 0.092, 0.005, 0.014, 0xffffff, 0, 0.003, -0.07 + i * 0.07); tw.rotation.y = m.rotation.y; put(tw, m.position.x - Math.sin(m.rotation.y) * 0.1, gy(), m.position.z - Math.cos(m.rotation.y) * 0.1); const um = G(); cyl(um, 0.003, 0.003, 0.22, 0xeeeeee, 0, 0.11, 0, 5); add(um, new T.ConeGeometry(0.11, 0.045, 10, 1, true), mat(0xff6b6b, { ds: true }), 0, 0.22, 0); put(um, m.position.x + 0.08, gy(), m.position.z); const gl = G(); [-1, 1].forEach(s => sph(gl, 0.011, 0x111111, s * 0.02, 0.008, 0.056, 1, 1, 0.4)); P.head.add(gl); held.push(gl); }), act(8, () => lie(false)), say('😎')]; }],
+      ['sandcastle', ['beach'], 1.2, null, () => { const p = spot(), cs = G(); let lvl = 0; return [go(p), now(() => { put(cs, m.position.x + Math.sin(m.rotation.y) * 0.07, gy(), m.position.z + Math.cos(m.rotation.y) * 0.07); const bk = G(); cyl(bk, 0.014, 0.011, 0.02, 0xff6b6b, 0, -0.01, 0, 8); hand(bk, true); }), act(6, (q, t) => { sit(); P.armR.rotation.x = -0.9 + Math.sin(t * 6) * 0.3; const want = Math.floor(q * 4); while (lvl < want) { if (lvl < 3) cyl(cs, 0.04 - lvl * 0.01, 0.045 - lvl * 0.01, 0.025, 0xe8cf8f, 0, 0.0125 + lvl * 0.025, 0, 10); else { [-1, 1].forEach(s => cn(cs, 0.012, 0.03, 0xe8cf8f, s * 0.025, 0.035, 0.02, 8)); stick(cs, [0, 0.075, 0], [0, 0.11, 0], 0.002, 0x6b4a2e); bx(cs, 0.02, 0.012, 0.002, hue, 0.01, 0.105, 0); } lvl++; } }), say('🏰'), act(1.5, () => sit())]; }],
+      ['swim', ['beach', 'lake'], 1, () => sea != null && !o.night, () => { const s0 = byWater(), w = spot((x, z) => depth(x, z) > 0.08 && Math.hypot(x - L.cx, z - L.cz) < 0.8 * L.r); return w && s0 ? [go(s0), say('🏊'), act(4, (q, t) => { const x = s0[0] + (w[0] - s0[0]) * q, z = s0[1] + (w[1] - s0[1]) * q; m.position.set(x, Math.max(u.terrain.h(x, z), sea - 0.035), z); m.rotation.y = Math.atan2(w[0] - s0[0], w[1] - s0[1]); if (depth(x, z) > 0.03) { m.rotation.x = P2 * 0.9; P.armL.rotation.x = -1.6 + Math.sin(t * 6) * 1.2; P.armR.rotation.x = -1.6 - Math.sin(t * 6) * 1.2; } else walking(P, t, true); }), act(4, (q, t) => { const x = w[0] + (s0[0] - w[0]) * q, z = w[1] + (s0[1] - w[1]) * q; m.position.set(x, Math.max(u.terrain.h(x, z), sea - 0.035), z); m.rotation.y = Math.atan2(s0[0] - w[0], s0[1] - w[1]); if (depth(x, z) > 0.03) { m.rotation.x = P2 * 0.9; P.armL.rotation.x = -1.6 + Math.sin(t * 6) * 1.2; P.armR.rotation.x = -1.6 - Math.sin(t * 6) * 1.2; } else { m.rotation.x = 0; walking(P, t, true); } }), now(() => { m.rotation.x = 0; still(P); })] : [go(spot())]; }],
+      ['coconuts', ['beach'], 1, () => (pl.palms || []).length, () => { const pm = pl.palms[Math.floor(rr() * pl.palms.length)], nut = G(); sph(nut, 0.02, 0x6b4a2e, 0, 0, 0); return [go(near(pm, 0.1)), face(pm), act(1.6, (q, t) => { P.armL.rotation.x = P.armR.rotation.x = -2.6; m.rotation.z = Math.sin(t * 20) * 0.05; }), now(() => { m.rotation.z = 0; put(nut, pm[0], floor(pm[0], pm[1]) + 0.4, pm[1]); const f = { v: 0 }; every(dt => { if (nut.parent !== props) return false; f.v -= dt * 1.2; nut.position.y = Math.max(floor(nut.position.x, nut.position.z) + 0.02, nut.position.y + f.v * dt); return true; }); }), act(1, () => { still(P); }), now(() => { props.remove(nut); nut.position.set(0, 0.01, 0.02); hand(nut); }), say('🥥'), go(spot(), 0.13)]; }],
+      ['shells', ['beach'], 1, null, () => [go(byWater()), act(1.2, q => crouch(Math.sin(Math.PI * q))), now(() => { const sh = G(); add(sh, new T.ConeGeometry(0.012, 0.02, 7), mat(0xffd1dc), 0, 0, 0).rotation.z = P2; hand(sh); }), act(1, () => { P.armR.rotation.x = -2.4; }), say('🐚'), go(byWater()), act(1.2, q => crouch(Math.sin(Math.PI * q)))]],
+      ['paddle', ['beach'], 0.9, () => !o.night, () => { const a = byWater(), b2 = byWater(); if (!a || !b2) return [go(spot())]; return [go(a), act(5, (q, t) => { const x = a[0] + (b2[0] - a[0]) * q, z = a[1] + (b2[1] - a[1]) * q; m.position.set(x, floor(x, z), z); m.rotation.y = Math.atan2(b2[0] - a[0], b2[1] - a[1]); walking(P, t, true); if (rr() < 0.08 && depth(x, z) > 0) drops(x, sea + 0.01, z, 0xcfefff, 3); }), say('💦')]; }],
+      ['beachfire', ['beach', 'lake', 'grove', 'lookout'], 1.4, () => o.dusk || o.night, () => { const p = key === 'lake' ? (pl.end || spot()) : spot(); return [go(p), now(() => flames(m.position.x + Math.sin(m.rotation.y) * 0.08, gy(), m.position.z + Math.cos(m.rotation.y) * 0.08)), now(() => { const s = G(); stick(s, [0, 0, 0], [0, 0.03, 0.09], 0.0025, 0x9a6a3c); sph(s, 0.008, 0xfff6e0, 0, 0.032, 0.095); hand(s); }), act(8, (q, t) => { sit(); P.armR.rotation.x = -1.2 + Math.sin(t) * 0.1; }), say('🔥')]; }],
+      ['surfcast', ['beach', 'lake'], 1.3, () => o.tools.rod && sea != null, () => { const p = key === 'lake' ? pl.end : byWater(), rod = G(); cyl(rod, 0.003, 0.005, 0.3, 0x2a2f3a, 0, 0.13, 0, 6); rod.rotation.x = -1.1; const tip = new T.Object3D(); tip.position.y = 0.28; rod.add(tip); let tgt; const ln = line(props), bob = sph(G(), 0.009, 0xffffff, 0, 0, 0); return [go(p), now(() => { const w = spot((x, z) => depth(x, z) > 0.04 && Math.hypot(x - m.position.x, z - m.position.z) < 0.45) || here(); tgt = w; m.rotation.y = Math.atan2(w[0] - m.position.x, w[1] - m.position.z); hand(rod); props.add(bob); }), act(1, (q) => { P.armR.rotation.x = q < 0.4 ? -0.3 - q * 2 : -1.1; const tp = local(g, tip), e = Math.max(0, (q - 0.4) / 0.6); bob.position.set(tp.x + (tgt[0] - tp.x) * e, tp.y + (sea - tp.y) * e + Math.sin(Math.PI * e) * 0.1, tp.z + (tgt[1] - tp.z) * e); ln(tp, bob.position); }), act(6, (q, t) => { bob.position.y = sea + Math.sin(t * 3) * 0.003; ln(local(g, tip), bob.position); P.armR.rotation.x = -1.1; }), say(rr() < 0.5 ? '🐟' : '🙂'), now(() => { props.remove(bob); ln(new T.Vector3(), new T.Vector3()); })]; }],
+      // Lake (on the jetty)
+      ['dangle', ['lake'], 1.2, () => pl.end, () => [go(pl.end), face(pl.out), act(7, (q, t) => { sit(); P.legL.rotation.x = -0.5 + Math.sin(t * 2.5) * 0.4; P.legR.rotation.x = -0.5 - Math.sin(t * 2.5) * 0.4; m.position.y = gy() - 0.06; }), say('😌')]],
+      ['skipstones', ['lake', 'beach'], 1, () => sea != null, () => { const st = sph(G(), 0.01, 0x8d9096, 0, 0, 0); let a0, dir; return [go(key === 'lake' ? pl.end : byWater()), now(() => { dir = key === 'lake' ? pl.face : m.rotation.y; m.rotation.y = dir; a0 = local(g, P.hand); props.add(st); }), act(0.4, q => { P.armR.rotation.x = -0.6 + q * 1.2; P.armR.rotation.z = -0.8; }), act(2, q => { const d = q * 0.6, hops = Math.abs(Math.sin(q * Math.PI * 4)) * 0.05 * (1 - q); st.position.set(a0.x + Math.sin(dir) * d, sea + 0.004 + hops, a0.z + Math.cos(dir) * d); if (hops < 0.003 && rr() < 0.3) ripple(props, ticksR, st.position.x, sea, st.position.z); }), say('🪨')]; }],
+      ['peer', ['lake'], 0.8, () => pl.end, () => [go(near(pl.end, 0.12)), face(pl.out), act(3, q => crouch(Math.min(1, q * 3))), say('👀'), act(1, q => crouch(1 - q))]],
+      ['jettysun', ['lake'], 0.8, () => !o.night && pl.end, () => [go(near(pl.end, 0.25)), act(7, () => lie(false)), say('😎')]],
+      // Veggie plot
+      ['waterbeds', ['plot'], 1.2, null, () => { const p = (pl.spots || [])[Math.floor(rr() * (pl.spots || [1]).length)] || spot(); return [go(near(p, 0.1)), now(() => hand(can())), act(4, () => { P.armR.rotation.x = -0.9; if (rr() < 0.3) { const w = local(g, P.hand); drops(w.x + Math.sin(m.rotation.y) * 0.05, w.y, w.z + Math.cos(m.rotation.y) * 0.05, 0x8fd0ff, 1); } }), say('💧')]; }],
+      ['dig', ['plot', 'farm'], 1, null, () => { const sp = G(); cyl(sp, 0.003, 0.003, 0.14, 0xb07a4a, 0, 0.0, 0.02, 5); bx(sp, 0.03, 0.04, 0.004, 0x9aa0a8, 0, -0.08, 0.02); return [go(spot()), now(() => hand(sp)), act(3.5, (q, t) => { P.armR.rotation.x = -0.6 + Math.sin(t * 5) * 0.5; P.body.rotation.x = 0.25 + Math.sin(t * 5) * 0.15; if (rr() < 0.04) drops(m.position.x + Math.sin(m.rotation.y) * 0.06, gy() + 0.02, m.position.z + Math.cos(m.rotation.y) * 0.06, 0x6b4a2a, 3); }), say('🌱')]; }],
+      ['carrot', ['plot'], 1, () => (pl.spots || []).length, () => { const p = pl.spots[Math.floor(rr() * pl.spots.length)], cr = G(); cn(cr, 0.009, 0.05, 0xff8a1a, 0, 0, 0, 8).rotation.x = PI; [0, 1, 2].forEach(i => cn(cr, 0.004, 0.03, 0x3f8f35, (i - 1) * 0.005, 0.035, 0, 4)); return [go(near(p, 0.08)), face(p), act(1.4, q => crouch(Math.sin(Math.PI * Math.min(1, q * 1.2)))), now(() => hand(cr)), act(1.2, () => { P.armR.rotation.x = -2.6; }), say('🥕')]; }],
+      ['sunflower', ['plot'], 0.8, () => (pl.sunflowers || []).length, () => { const f = pl.sunflowers[Math.floor(rr() * pl.sunflowers.length)]; return [go(near(f, 0.09)), face(f), act(2.5, (q, t) => { P.body.rotation.x = -0.3 * Math.sin(Math.PI * q); P.head.rotation.x = -0.4 * Math.sin(Math.PI * q); }), say('🌻')]; }],
+      ['scarecrow', ['plot'], 0.6, () => pl.scarecrow, () => [go(near(pl.scarecrow, 0.12)), face(pl.scarecrow), say('💬', 2.5), act(3, (q, t) => { P.armR.rotation.z = -0.5 + Math.sin(t * 4) * 0.4; P.head.rotation.z = Math.sin(t * 3) * 0.15; })]],
+      // Farm
+      ['chooks', ['farm'], 1.2, null, () => [go(spot()), act(4, (q, t) => { P.armR.rotation.x = -1 + Math.sin(t * 7) * 0.6; if (rr() < 0.3) drops(m.position.x + Math.sin(m.rotation.y) * 0.06, gy() + 0.12, m.position.z + Math.cos(m.rotation.y) * 0.06, 0xe9c46a, 2); }), say('🐔')]],
+      ['bucket', ['farm', 'stable'], 1, () => pl.trough, () => { const bk = G(); cyl(bk, 0.02, 0.016, 0.03, 0x9aa0a8, 0, -0.02, 0, 10); return [go(spot()), now(() => hand(bk)), go(near(pl.trough, 0.1), 0.13), face(pl.trough), act(1.2, q => { P.armR.rotation.x = -1.4 * Math.sin(Math.PI * q); }), say('💧')]; }],
+      ['pitchfork', ['farm', 'stable'], 1, () => pl.pile, () => { const fk = G(); cyl(fk, 0.003, 0.003, 0.18, 0xb07a4a, 0, 0, 0.02, 5); [-1, 0, 1].forEach(s => cyl(fk, 0.0015, 0.0015, 0.04, 0x9aa0a8, s * 0.008, -0.11, 0.02, 4)); return [go(near(pl.pile, 0.12)), face(pl.pile), now(() => hand(fk)), act(4, (q, t) => { P.armR.rotation.x = -0.4 - Math.abs(Math.sin(t * 3)) * 1.2; if (rr() < 0.05) drops(m.position.x, gy() + 0.15, m.position.z, 0xe9c46a, 3); }), say('🌾')]; }],
+      ['fence', ['farm', 'stable'], 0.7, null, () => { const hm = G(); cyl(hm, 0.003, 0.003, 0.07, 0xb07a4a, 0, -0.02, 0.02, 5); bx(hm, 0.03, 0.012, 0.012, 0x6f757d, 0, -0.055, 0.02); const a = rr() * PI * 2, e = [L.cx + Math.cos(a) * 0.82 * L.r, L.cz + Math.sin(a) * 0.82 * L.r]; return [go(e), face([L.cx + Math.cos(a) * 2, L.cz + Math.sin(a) * 2]), now(() => hand(hm)), act(2.5, (q, t) => { P.armR.rotation.x = -1.2 + Math.abs(Math.sin(t * 9)) * 0.8; }), say('🔨')]; }],
+      // Stable yard
+      ['jumpfoot', ['stable'], 1, () => (pl.jumpAt || []).length, () => { const j = pl.jumpAt[Math.floor(rr() * pl.jumpAt.length)]; const a = near(j, 0.16), b2 = [2 * j[0] - a[0], 2 * j[1] - a[1]]; return [go(a), face(j), act(1.2, (q, t) => { const x = a[0] + (b2[0] - a[0]) * q, z = a[1] + (b2[1] - a[1]) * q; m.position.set(x, floor(x, z) + Math.max(0, Math.sin(Math.PI * Math.min(1, Math.max(0, (q - 0.35) / 0.3)))) * 0.13, z); walking(P, t * 1.5, true); }), say('😆')]; }],
+      ['rail', ['stable'], 0.8, () => pl.rail, () => [go(pl.rail), face(pl.arena), act(6, (q, t) => { sit(); m.position.y = gy() + 0.03; P.legL.rotation.x = -1.3 + Math.sin(t * 2) * 0.2; }), say('🐴')]],
+      // Geyser park
+      ['geyserwatch', ['lookout'], 1.2, () => pl.gxz, () => [go(near(pl.gxz, 0.35)), face(pl.gxz), act(9, (q, t) => { sit(); const c = t % 24; if (c > 1.4 && c < 1.5) bubble('😮', 1.6); })]],
+      ['snap', ['lookout'], 1, () => pl.spring, () => { const cam = G(); bx(cam, 0.04, 0.026, 0.02, 0x2a2f3a, 0, 0, 0.012); return [go(near(pl.spring, 0.4)), face(pl.spring), now(() => hand(cam)), act(1, q => { P.armR.rotation.x = P.armL.rotation.x = -1.5 * q; }), say('📸'), act(1.2, () => { P.armR.rotation.x = P.armL.rotation.x = -1.5; })]; }],
+      ['picnic', ['lookout', 'orchard', 'sky', 'grove'], 1, () => !o.night, () => { const p = spot(); return [go(p), now(() => { const bl = G(); bx(bl, 0.16, 0.003, 0.16, 0xe03131, 0, 0.002, 0); for (let i = 0; i < 4; i++) bx(bl, 0.16, 0.004, 0.012, 0xffffff, 0, 0.003, -0.06 + i * 0.04); put(bl, m.position.x, gy(), m.position.z); const bk = G(); cyl(bk, 0.025, 0.02, 0.03, 0xc9a06a, 0, 0.015, 0, 10); put(bk, m.position.x + 0.05, gy(), m.position.z + 0.04); const sw = G(); bx(sw, 0.03, 0.012, 0.03, 0xf2d9a0, 0, 0, 0.015); hand(sw); }), act(7, (q, t) => { sit(); P.armR.rotation.x = -1.4 + Math.abs(Math.sin(t * 2)) * 0.5; }), say('🥪')]; }],
+      // Orchard
+      ['pick', ['orchard'], 1.2, () => (pl.trees || []).length, () => { const tr = pl.trees[Math.floor(rr() * pl.trees.length)], ap = G(); sph(ap, 0.014, 0xd93a3a, 0, 0, 0); return [go(near(tr, 0.11)), face(tr), act(1.4, q => { P.armR.rotation.x = -2.7 * Math.sin(Math.PI * Math.min(1, q * 1.3)); }), now(() => hand(ap)), act(2.5, (q, t) => { P.armR.rotation.x = -1.6 - Math.abs(Math.sin(t * 6)) * 0.3; }), say('🍎')]; }],
+      ['shade', ['orchard', 'grove'], 0.9, () => (pl.trees || []).length, () => { const tr = pl.trees[Math.floor(rr() * pl.trees.length)]; return [go(near(tr, 0.12)), act(7, () => lie(false)), say('💤')]; }],
+      ['hives', ['orchard'], 1, () => (pl.hives || []).length, () => { const hv = pl.hives[Math.floor(rr() * pl.hives.length)], bees = [0, 1, 2, 3].map(() => sph(props, 0.006, 0xffd43b, 0, 0, 0)); every(() => { const t = performance.now() / 1000; bees.forEach((b, i) => b.position.set(hv[0] + Math.cos(t * 3 + i * 1.6) * 0.07, floor(hv[0], hv[1]) + 0.18 + Math.sin(t * 5 + i) * 0.03, hv[1] + Math.sin(t * 3 + i * 1.6) * 0.07)); return true; }); return [go(near(hv, 0.12)), face(hv), act(3, (q, t) => { P.armR.rotation.x = -0.9; P.head.rotation.y = Math.sin(t * 2) * 0.3; }), say('🐝')]; }],
+      ['rake', ['orchard', 'grove'], 0.8, null, () => { const rk = G(); cyl(rk, 0.003, 0.003, 0.17, 0xb07a4a, 0, 0, 0.02, 5); bx(rk, 0.05, 0.006, 0.006, 0x6f757d, 0, -0.09, 0.02); const pile = G(); return [go(spot()), now(() => { hand(rk); put(pile, m.position.x + Math.sin(m.rotation.y) * 0.08, gy(), m.position.z + Math.cos(m.rotation.y) * 0.08); }), act(4, (q, t) => { P.armR.rotation.x = -0.5 + Math.sin(t * 5) * 0.4; if (pile.children.length < q * 8) sph(pile, 0.012, [0xd9822b, 0xb5541c, 0xe8b04a][pile.children.length % 3], (rr() - 0.5) * 0.04, 0.006 + pile.children.length * 0.002, (rr() - 0.5) * 0.04, 1, 0.4, 1); }), say('🍂')]; }],
+      // Forest grove
+      ['birdwatch', ['grove'], 1.2, null, () => { const bn = G(); [-1, 1].forEach(s => cyl(bn, 0.008, 0.009, 0.03, 0x2a2f3a, s * 0.011, 0, 0.01, 8).rotation.x = P2); return [go(spot()), now(() => hand(bn)), act(6, (q, t) => { P.armR.rotation.x = P.armL.rotation.x = -1.55; P.armL.rotation.z = -0.35; m.rotation.y += Math.sin(t * 0.8) * 0.01; }), say('🐦')]; }],
+      ['hugtree', ['grove'], 0.8, () => (pl.trees || []).length, () => { const tr = pl.trees[Math.floor(rr() * pl.trees.length)]; return [go(near(tr, 0.07)), face(tr), act(3, () => { P.armL.rotation.x = P.armR.rotation.x = -1.4; P.armL.rotation.z = 0.5; P.armR.rotation.z = -0.5; }), say('🌳')]; }],
+      ['sticks', ['grove', 'beach'], 0.9, null, () => { const bundle = G(); let n = 0; return [now(() => { bundle.position.set(0, 0.13, 0.05); m.add(bundle); held.push(bundle); }), ...[0, 1, 2].flatMap(() => [go(spot()), act(1, q => crouch(Math.sin(Math.PI * q))), now(() => { stick(bundle, [-0.03, n * 0.006, 0], [0.03, n * 0.006 + 0.004, 0.004], 0.004, 0x6b4a2e); n++; })]), say('🪵')]; }],
+      ['bugs', ['grove', 'home', 'plot'], 0.9, () => key === 'grove' || o.tools.bugnet, () => { const mg = G(); add(mg, new T.TorusGeometry(0.014, 0.003, 5, 14), mat(0x2a2f3a), 0, 0.02, 0.015); add(mg, new T.CircleGeometry(0.013, 14), new T.MeshBasicMaterial({ color: 0xcfefff, transparent: true, opacity: 0.4 }), 0, 0.02, 0.015).userData.ownMat = true; return [go(spot()), now(() => hand(mg)), act(3, q => { crouch(Math.min(1, q * 3)); P.armR.rotation.x = -1.2; }), say('🐛'), go(spot()), act(2.5, q => crouch(Math.min(1, q * 3))), say('🔍')]; }],
+      ['toadstools', ['grove'], 0.6, null, () => [go(spot()), act(2.5, q => crouch(Math.sin(Math.PI * q))), say('🍄')]],
+      // Sky islet
+      ['cloudbounce', ['sky'], 1.2, () => (pl.clouds || []).length, () => { const c2 = pl.clouds[Math.floor(rr() * pl.clouds.length)]; return [go(c2), act(4, (q, t) => { m.position.y = gy() + Math.abs(Math.sin(t * 4)) * 0.18; P.armL.rotation.z = 1.5 + Math.sin(t * 8) * 0.3; P.armR.rotation.z = -1.5 - Math.sin(t * 8) * 0.3; m.rotation.x = Math.sin(t * 4) * 0.2; }), now(() => { m.rotation.x = 0; }), say('☁️')]; }],
+      ['float', ['sky'], 1, null, () => [go(spot()), act(5, (q, t) => { const s = Math.sin(Math.PI * q); m.position.y = gy() + s * 0.22; P.armL.rotation.z = 1.4 * s; P.armR.rotation.z = -1.4 * s; m.rotation.y += 0.01; }), say('✨')]],
+      ['rainbowwave', ['sky'], 0.7, () => pl.rainbow, () => [go(spot()), face(pl.rainbow), say('🌈'), act(2.5, (q, t) => wave(t))]],
+    ];
+    // Things the kid owns on this island add behaviours by kind.
+    const ITEM = {
+      seat: it => [go(near([it.x, it.z], 0.06)), face([it.x + 1, it.z]), now(() => hand(book())), act(6, () => { sit(); m.position.y = gy() - 0.02; P.armR.rotation.x = P.armL.rotation.x = -1.1; }), say('📖')],
+      lie: it => [go(near([it.x, it.z], 0.07)), act(7, () => lie(false)), say('💤')],
+      bounce: it => [go([it.x, it.z]), act(5, (q, t) => { const b = Math.abs(Math.sin(t * 3.5)); m.position.y = gy() + 0.05 + b * 0.25; m.rotation.x = q > 0.5 && b > 0.85 ? (t * 6) % (PI * 2) : 0; P.armL.rotation.z = 1.2 * b; P.armR.rotation.z = -1.2 * b; }), now(() => { m.rotation.x = 0; }), say('🤸')],
+      swing: it => [go([it.x, it.z]), act(6, (q, t) => { sit(); const s = Math.sin(t * 2.6) * 0.5; m.position.y = gy() + 0.08; m.rotation.x = s * 0.4; P.armL.rotation.x = P.armR.rotation.x = -2.6; m.position.z += 0; }), now(() => { m.rotation.x = 0; }), say('😄')],
+      slide: it => { const a = [it.x - 0.08, it.z], b2 = [it.x + 0.12, it.z]; return [go(a), act(0.8, q => { m.position.y = gy() + q * 0.12; walking(P, q * 6, true); }), act(1.2, q => { sit(); m.position.x = a[0] + (b2[0] - a[0]) * q; m.position.y = floor(m.position.x, m.position.z) + 0.12 * (1 - q) - 0.04; P.armL.rotation.z = 1.4; P.armR.rotation.z = -1.4; }), say('😆')]; },
+      ball: it => { const b = ball(); return [go(near([it.x, it.z], 0.25)), face([it.x, it.z]), now(() => put(b, m.position.x + Math.sin(m.rotation.y) * 0.04, gy() + 0.02, m.position.z + Math.cos(m.rotation.y) * 0.04)), act(0.3, q => { P.legR.rotation.x = -1.2 * Math.sin(Math.PI * q); }), act(1, q => { const s = b.position; s.x += ([it.x][0] - s.x) * 0.08; s.z += (it.z - s.z) * 0.08; s.y = floor(s.x, s.z) + 0.02 + Math.sin(Math.PI * q) * 0.12; }), say('⚽'), act(1.2, (q, t) => { P.armL.rotation.z = 2.6; P.armR.rotation.z = -2.6; m.position.y = gy() + Math.abs(Math.sin(t * 8)) * 0.03; })]; },
+      hop: it => [go([it.x - 0.1, it.z]), act(3, (q, t) => { m.position.x = it.x - 0.1 + q * 0.2; m.position.y = gy() + Math.abs(Math.sin(t * 7)) * 0.04; P.legL.rotation.x = Math.sin(t * 7) > 0 ? -0.8 : 0; })],
+      ride: it => [go(near([it.x, it.z], 0.14)), face([it.x, it.z]), say('🎢'), act(3, (q, t) => { m.position.y = gy() + Math.abs(Math.sin(t * 6)) * 0.04; P.armL.rotation.z = 2.6; P.armR.rotation.z = -2.6; })],
+      splash: it => [go(near([it.x, it.z], 0.08)), face([it.x, it.z]), act(4, (q, t) => { P.armR.rotation.x = -1 + Math.sin(t * 8) * 0.5; if (rr() < 0.25) drops(it.x, floor(it.x, it.z) + 0.06, it.z, 0x8fd0ff, 2); }), say('💦')],
+      fire: it => [go(near([it.x, it.z], 0.12)), face([it.x, it.z]), now(() => { const s = G(); stick(s, [0, 0, 0], [0, 0.03, 0.09], 0.0025, 0x9a6a3c); sph(s, 0.008, 0xfff6e0, 0, 0.032, 0.095); hand(s); }), act(7, () => { sit(); P.armR.rotation.x = -1.2; }), say('🔥')],
+      look: it => [go(near([it.x, it.z], 0.08)), face([it.x, it.z]), act(4, (q, t) => { P.body.rotation.x = 0.2; P.head.rotation.x = 0.3; }), say(o.night ? '🌟' : '👀')],
+      flower: it => [go(near([it.x, it.z], 0.08)), face([it.x, it.z]), ...(o.tools.wateringcan ? [now(() => hand(can())), act(3, () => { P.armR.rotation.x = -0.9; if (rr() < 0.3) drops(it.x, floor(it.x, it.z) + 0.08, it.z, 0x8fd0ff, 1); })] : [act(2.2, q => { P.body.rotation.x = 0.4 * Math.sin(Math.PI * q); })]), say('🌸')],
+      climb: it => [go(near([it.x, it.z], 0.08)), act(1.2, q => { m.position.y = gy() + q * 0.18; P.armL.rotation.x = P.armR.rotation.x = -2.6 + Math.sin(q * 20) * 0.3; }), say('🙋'), act(2.5, (q, t) => { m.position.y = gy() + 0.18; wave(t); }), act(1, q => { m.position.y = gy() + 0.18 * (1 - q); })],
+      mail: it => { const lt = G(); bx(lt, 0.035, 0.024, 0.002, 0xffffff, 0, 0, 0.02); return [go(near([it.x, it.z], 0.06)), face([it.x, it.z]), act(1, q => { P.armR.rotation.x = -1.4 * q; }), now(() => hand(lt)), act(2, () => { P.armR.rotation.x = -1.6; P.head.rotation.x = 0.3; }), say('✉️')]; },
+      wash: it => { const sh = G(); bx(sh, 0.04, 0.04, 0.003, hue, 0, -0.02, 0.02); return [go(near([it.x, it.z], 0.08)), now(() => hand(sh)), act(2.5, (q, t) => { P.armR.rotation.x = P.armL.rotation.x = -2.4; }), say('👕')]; },
+      bees: it => [go(near([it.x, it.z], 0.12)), face([it.x, it.z]), act(3, (q, t) => { P.head.rotation.y = Math.sin(t * 2) * 0.3; }), say('🐝')],
+      kite: () => { const kt = G(); const kb = add(kt, new T.OctahedronGeometry(0.05, 0), mat(0xff6b9d, { flat: true }), 0, 0, 0); kb.scale.set(1, 1.4, 0.15); const ln = line(props); return [go(spot()), now(() => props.add(kt)), act(9, (q, t) => { P.armR.rotation.x = -2 + Math.sin(t * 1.7) * 0.15; kt.position.set(m.position.x - Math.sin(m.rotation.y) * 0.4 + Math.sin(t * 0.7) * 0.1, m.position.y + 0.6 + Math.sin(t * 1.1) * 0.05, m.position.z - Math.cos(m.rotation.y) * 0.4); kt.rotation.set(0, m.rotation.y, Math.sin(t * 2) * 0.3); ln(local(g, P.hand), kt.position); }), say('🪁')]; },
+      pet: it => [go(near([it.x, it.z], 0.07)), face([it.x, it.z]), act(2.5, (q, t) => { crouch(0.6); P.armR.rotation.x = -1.1 + Math.sin(t * 8) * 0.25; }), say('❤️'), now(() => crouch(0))],
+      any: it => { const cam = G(); bx(cam, 0.04, 0.026, 0.02, 0x2a2f3a, 0, 0, 0.012); return [go(near([it.x, it.z], 0.14)), face([it.x, it.z]), now(() => hand(cam)), act(1.2, q => { P.armR.rotation.x = P.armL.rotation.x = -1.5 * q; }), say(['😍', '📸', '🤩'][Math.floor(rr() * 3)])]; },
+    };
+    const ticksR = [];
+    let cur = null, i = 0, st = 0, last = '', live = (o.items || []).filter(it => it.m), lastPet = 0;
+    function candidates() {
+      const out = LIB.filter(([id, on, w, when]) => (on === 'any' || on.includes(key)) && (!when || when())).map(([id, on, w, , steps]) => ({ id, icon: PIC[id], w: on === 'any' ? w * 0.6 : w, steps }));
+      // The kid's things share about half the turns however many there are, so the island's own scenes still come up.
+      const own = live.map(it => { const pos = it.m.position, kind = it.pet ? 'pet' : kindOf(it.t) || 'any'; return { id: it.id, icon: PIC[kind], w: kind === 'any' ? 0.35 : 1.1, steps: () => ITEM[kind]({ ...it, x: pos.x, z: pos.z }) }; });
+      const base = out.reduce((n, b) => n + b.w, 0), mine = own.reduce((n, b) => n + b.w, 0), k2 = mine > base ? base / mine : 1;
+      own.forEach(b => { b.w *= k2; out.push(b); });
+      return out.filter(b => b.id !== last);
+    }
+    // Between scenes the character pauses and looks about, then a thought bubble shows what it's going to do.
+    function start() {
+      const list = candidates(); let r = rr() * list.reduce((s, b) => s + b.w, 0), b = list[0];
+      for (const c2 of list) { r -= c2.w; if (r <= 0) { b = c2; break; } }
+      last = b.id; i = 0; st = 0;
+      cur = [act(0.6 + rr() * 0.9, (q, t) => { P.head.rotation.y = Math.sin(t * 1.4) * 0.35; }), now(() => { P.head.rotation.y = 0; think(b.icon); }), ...b.steps().filter(Boolean)];
+    }
+    const bubbles = [];
+    function think(e) {
+      if (!e) return; const s = sprite(thoughtTex(e), 0.17); s.userData.ownMat = true; s.renderOrder = 5; g.add(s); bubbles.push(s); const k = { t: 0 };
+      fades.push(dt => { k.t += dt; s.position.set(m.position.x + 0.06, m.position.y + 0.37 + Math.sin(k.t * 2) * 0.008, m.position.z); s.material.opacity = Math.max(0, Math.min(1, k.t * 3, (3.2 - k.t) * 2.5)); s.scale.setScalar(0.17 * Math.min(1, 0.4 + k.t * 2)); if (k.t < 3.2) return true; g.remove(s); s.material.dispose(); bubbles.splice(bubbles.indexOf(s), 1); return false; });
+    }
+    // Props left from a scene shrink away while the next begins.
+    function leave() {
+      const gone = [...props.children, ...held]; held.length = 0;
+      gone.forEach(obj => { const s0 = obj.scale.clone(), k = { t: 0 }; fades.push(dt => { k.t += dt * 4; obj.scale.copy(s0).multiplyScalar(Math.max(0.01, 1 - k.t)); if (k.t < 1) return true; if (obj.parent) obj.parent.remove(obj); obj.traverse(x => { if (x.geometry) x.geometry.dispose(); if (x.userData.ownMat && x.material) x.material.dispose(); }); return false; }); });
+      ticks.length = 0; still(P); P.head.rotation.set(0, 0, 0); m.rotation.x = 0; m.rotation.z = 0; m.position.y = gy();
+    }
+    function clean() { held.forEach(h => h.parent && h.parent.remove(h)); held.length = 0; for (let j = props.children.length - 1; j >= 0; j--) { const c2 = props.children[j]; props.remove(c2); c2.traverse(x => { if (x.geometry) x.geometry.dispose(); if (x.userData.ownMat && x.material) x.material.dispose(); }); } ticks.length = 0; }
+    return {
+      step(t, dt) {
+        pose.before();
+        if (!cur) start();
+        const s = cur[i]; st += dt; const q = s && s.d ? Math.min(1, st / s.d) : 0;
+        let done = true; try { done = !s || s.run(dt, t, q); } catch (e) { console.warn('behaviour', last, e); i = cur.length; }
+        if (done) { i++; st = 0; if (i >= cur.length) { leave(); cur = null; } }
+        pose.after(dt);
+        for (let j = ticks.length - 1; j >= 0; j--) if (ticks[j](dt) === false) ticks.splice(j, 1);
+        for (let j = fades.length - 1; j >= 0; j--) if (fades[j](dt) === false) fades.splice(j, 1);
+        for (let j = ticksR.length - 1; j >= 0; j--) { const r = ticksR[j]; r.t += dt; r.m.scale.setScalar(1 + r.t * 4); r.m.material.opacity = 0.8 * (1 - r.t / 0.8); if (r.t > 0.8) { props.remove(r.m); r.m.material.dispose(); ticksR.splice(j, 1); } }
+      },
+      end() { clean(); fades.length = 0; bubbles.splice(0).forEach(b2 => { g.remove(b2); b2.material.dispose(); }); g.remove(props); },
+      get doing() { return last; },
+    };
   }
 
   /* ---------- House styles ---------- */
@@ -797,7 +1359,7 @@ void main() {
     if (L.fence && FENCE[L.fence] && !(I && ['farm', 'stable', 'lake'].includes(I.key))) {
       // Round the island's edge, leaving a gap at the front for the path (on the beach, just along the dunes at the back).
       const pts = [], cr = I ? I.r - 0.04 : R - 0.05, n = Math.round(cr * 34);
-      for (let i = 0; i < n; i++) { const a = i / n * PI * 2; if (I ? I.key === 'beach' && Math.cos(a - I.a) > -0.45 : Math.abs(a - P2) < 0.14) continue; pts.push([Math.cos(a) * cr, Math.sin(a) * cr, a]); }
+      for (let i = 0; i < n; i++) { const a = i / n * PI * 2; if (I ? (I.key === 'beach' && Math.cos(a - I.a) > -0.45) || (I.noFence && I.noFence(a)) : Math.abs(a - P2) < 0.14) continue; pts.push([Math.cos(a) * cr, Math.sin(a) * cr, a]); }
       const f = new T.Group(); f.position.y = top; g.add(f); pts.forEach(([x, z, a], i) => FENCE[L.fence](f, x, z, a, i));
       if (L.fence === 'rustic') pts.forEach(([x, z], i) => { const nb = pts.find(([x2, z2], j) => j > i && Math.hypot(x2 - x, z2 - z) < 0.16); if (nb) [0.05, 0.085].forEach(h => stick(f, [x, h, z], [nb[0], h, nb[1]], 0.006, 0xa86f3e)); });
     }
@@ -826,5 +1388,5 @@ void main() {
   const LAWN = { clover: [0x2f8a3f, 0x1f6b2a, 0x8fd45a], golden: [0x9fb33a, 0x6b7a2a, 0xe8e07a], autumn: [0xb98b3a, 0x7a5a2a, 0xe8a85a], sand: [0xe7d3a1, 0xc8b07a, 0xf6e7c0], meadow: [0x4c9a3a, 0x2a6b2a, 0xc4e86a] };
   // Cliff colours: middle, dark and light bands.
   const ROCK = { sandstone: [0xe2b77d, 0xc8925a, 0xf1d3a0], granite: [0x9aa0a8, 0x6f757d, 0xc8cdd3], volcanic: [0x3b3a40, 0x26252a, 0x5a5960], crystal: [0x9fe3ff, 0x6fb8e0, 0xdff6ff], gold: [0xffc93c, 0xd99a1a, 0xffe58a] };
-  return { items: M, species, land, isle, toLocal, toWorld, ground, skirt, waterWall, caustics, isleGrass, arc, style, dress, LAWN, ROCK, glow, emo };
+  return { items: M, species, land, isle, toLocal, toWorld, ground, skirt, waterWall, caustics, isleGrass, arc, style, dress, ACT, kidModel, activity, brain, LAWN, ROCK, glow, emo };
 };

@@ -814,6 +814,10 @@ route('POST', '/api/events', async ({ req, s }) => {
       await db.query('insert into farm_sales (family_id, kid_id, product, qty, price, xp, sold_at) values ($1, $2, $3, $4, $5, $6, $7)',
         [s.family_id, kid, txt(pl.k, 20) || '?', int(pl.n) || 0, int(pl.price), int(pl.xp) || 0, when]);
     }
+    if (type === 'island.play' && kid) {
+      await db.query('insert into island_play (family_id, kid_id, activity, successes, xp, played_at) values ($1, $2, $3, $4, $5, $6)',
+        [s.family_id, kid, txt(pl.act, 20) || '?', int(pl.n) || 0, int(pl.xp) || 0, when]);
+    }
     if (type === 'island.feed' && kid) {
       await db.query('insert into farm_feedings (family_id, kid_id, animals, scoops, were_hungry, scoops_left, xp, fed_at) values ($1, $2, $3, $4, $5, $6, $7, $8)',
         [s.family_id, kid, int(pl.animals) || 0, int(pl.scoops) || 0, !!pl.hungry, int(pl.left), int(pl.xp), when]);

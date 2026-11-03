@@ -143,6 +143,16 @@ export function checkKidWrite(prev, next, settings, now = Date.now()) {
     const before0 = d0.d === d1.d ? num(d0.xp) : 0;
     if (Math.abs((num(d1.xp) - before0) - (f1 - f0)) > 0.5 || num(d1.xp) > cap + 0.5) return nope('that’s more than the farm can earn today.');
   }
+  // Island activities: only on a day they're on, and no more in a day than the family's activity limit.
+  const p0 = num(isP.playXp), p1 = num(isN.playXp);
+  if (p1 !== p0) {
+    if (p1 < p0) return nope('activity XP only goes up.');
+    if (settings && settings.playOn === false) return nope('island activities are switched off.');
+    const d0 = isP.playDay || {}, d1 = isN.playDay || {}, cap = settings && settings.playCap === 0 ? Infinity : num(settings && settings.playCap != null ? settings.playCap : RULES.playCap);
+    if (typeof d1.d !== 'string' || !/^\d{4}-\d\d-\d\d$/.test(d1.d) || d1.d > latestDay(now) || (d0.d && d1.d < d0.d)) return nope('the activity day is wrong.');
+    const before0 = d0.d === d1.d ? num(d0.xp) : 0;
+    if (Math.abs((num(d1.xp) - before0) - (p1 - p0)) > 0.5 || num(d1.xp) > cap + 0.5) return nope('that’s more than activities can earn today.');
+  }
   // A collection pays its bonus once.
   const newSets = added(isP.sets, isN.sets);
   for (const k of newSets) if (!SETS.has(k)) return nope('that collection isn’t real.');
