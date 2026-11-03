@@ -53,7 +53,7 @@ Optional variables:
 - `PAYWALL=on`: turns on the plans (free limits, kid locks, purchases). Leave it unset until launch; until then every family has Plus so everything can be tried. There's no beta: the plans start at launch.
 - `WELCOME_DAYS`: how long a new family's free welcome fortnight of Plus lasts (default 14; 0 turns it off, as the paywall test does).
 - `APP_BUNDLE_ID`: the iOS app's bundle id. App Store purchases for any other app are refused.
-- `APP_ORIGINS`: the iOS app's page origin, allowed to call the API with a sign-in token. Default `capacitor://localhost`, which is what the Capacitor app in `ios/` uses.
+- `APP_ORIGINS`: the iOS app's page origin, allowed to call the API with a sign-in token. Default `capacitor://localhost`, which is what the Capacitor app (branch `capacitor-ios`) uses.
 - `APNS_KEY`, `APNS_KEY_ID`, `APNS_TEAM_ID` and `APNS_TOPIC`: the Apple push key (the .p8 file's text), its id, the team id and the bundle id. Without them no notifications are sent.
 
 ### Running it for real families
@@ -189,7 +189,7 @@ Tables are created by numbered SQL files in [`server/migrations/`](server/migrat
 
 - In Xcode, Signing & Capabilities: choose the Apple Developer team and add **Push Notifications** and **In-App Purchase**. The bundle id is `app.chorecast.ios` (the server's `APP_BUNDLE_ID` must match).
 - App Store Connect: the app record, every product id in `server/plans.js`, Family Sharing for plans, and the App Store Server Notifications URL (`/api/appstore/notifications`).
-- The server needs this branch's `APP_ORIGINS` default live (or set `APP_ORIGINS=capacitor://localhost` on Railway), and the `APNS_*` settings for notifications.
+- The server needs the `APNS_*` settings for notifications. (Live already lets the app in: the `APP_ORIGINS` default went live on 4 November 2026.)
 - The app icon and launch screen use Chorecast's sun mark on its blue. A designed icon can replace `ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png` (1024 by 1024, no transparency).
 
 ## Tech notes
