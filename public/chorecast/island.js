@@ -363,33 +363,133 @@ window.ChorecastIsland = K => {
   }
 
   /* ---------- Islands of land ----------
-     Every piece of land a kid owns is a floating island of its own, which the studio travels to with its arrows. Each
-     is built by itself at the origin, with the home island's lawn colour, grass and rock, and faces the camera's usual
-     side (FRONT): the beach's sand and sea and the stable's open yard face the viewer. What's on an island is stored
-     relative to it (isle, lu, lv, in island radii: toLocal and toWorld), so things keep their spot if it changes size.
-     Its zones are where things go and animals wander; a zone's `not` marks spots to keep out of (the lake, the
-     mountain, the veggie patch, the stable). */
-  const FRONT = 0.7, SOIL = 0x8a5f3c;
+     Every piece of land a kid owns is a floating island of its own, which the studio travels to with its arrows, and
+     each is its own little ecosystem: a vege garden, a horse yard, an alpine mountain, an orchard, a lake with a jetty,
+     native bush, a beach and sea, and a pastel cloud island (the farm is built by index.html). Each is built by itself
+     at the origin, facing the camera's usual side (FRONT). Its side is cut away like a slice of cake (skirt): the top
+     layer, soil with roots and stones, clay, then the rock underneath; where there's water the side is a see-through
+     wall of water. What's on an island is stored relative to it (isle, lu, lv, in island radii: toLocal and toWorld).
+     Its zones are where things go and animals wander (a zone's `not` marks spots to keep out of), and its terrain
+     (ground height and water level) lets animals walk its slopes, swim and dive. */
+  const FRONT = 0.7;
   // An island's frame: its centre, radius r and (ox, oz), the way its front faces.
   const isle = key => { const r = key === 'sky' ? 0.85 : 1; return { key, a: FRONT, r, cx: 0, cz: 0, ox: Math.cos(FRONT), oz: Math.sin(FRONT) }; };
   // A spot on an island as (u, v) in its own frame (u towards the front, v across, in island radii), and back.
   const toLocal = (L, x, z) => ({ u: +(((x - L.cx) * L.ox + (z - L.cz) * L.oz) / L.r).toFixed(4), v: +((-(x - L.cx) * L.oz + (z - L.cz) * L.ox) / L.r).toFixed(4) });
   const toWorld = (L, u, v) => [L.cx + (u * L.ox - v * L.oz) * L.r, L.cz + (u * L.oz + v * L.ox) * L.r];
-  // The island itself: rock underneath like the home island's, a soil band, and the grassy top with a rounded rim.
-  // o: { seed, rock, lawnC, h(x, z) ground height, col(x, z, h) ground colour, side (rim colour) }. Returns the ground.
-  function ground(g, L, y, o) {
-    const H = 1.3 * L.r + 0.1, sa = FRONT + 2.4, rk = mat(0xffffff, { vc: true, flat: true });
-    add(g, K.strata(rough(new T.ConeGeometry(L.r * 0.92, H, 12, 6).rotateX(PI), 0.16, o.seed), o.seed, o.rock), rk, L.cx, -0.115 - H / 2, L.cz);
-    add(g, K.strata(rough(new T.ConeGeometry(L.r * 0.32, L.r * 0.6, 7, 3).rotateX(PI), 0.08, o.seed + 1), o.seed + 1, o.rock), rk, L.cx + Math.cos(sa) * L.r * 0.45, -0.2 - L.r * 0.3, L.cz + Math.sin(sa) * L.r * 0.45);
-    add(g, new T.CylinderGeometry(L.r, L.r * 0.95, 0.24, 40), mat(SOIL), L.cx, -0.05, L.cz);
-    add(g, new T.CylinderGeometry(L.r + 0.05, L.r, y - 0.08, 48, 1, true), mat(o.side || o.lawnC), L.cx, (y - 0.03 + 0.05) / 2, L.cz).userData.noInk = true;
-    const n = 44, E = L.r + 0.05, geo = new T.PlaneGeometry(2 * E, 2 * E, n, n).rotateX(-P2), p = geo.attributes.position, cols = [], C = new T.Color(), mud = new T.Color(0x5a4a32);
-    for (let i = 0; i < p.count; i++) { let x = p.getX(i), z = p.getZ(i), lip = 0; const d = Math.hypot(x, z); if (d > E) { x *= E / d; z *= E / d; lip = -0.03; } const wx = L.cx + x, wz = L.cz + z, h = (o.h ? o.h(wx, wz) : 0) + lip; p.setXYZ(i, x, h, z); C.set(o.col ? o.col(wx, wz, h) : o.lawnC); if (!o.col) C.lerp(mud, K.smooth01(0.006, 0.03, -h)); C.convertSRGBToLinear(); cols.push(C.r, C.g, C.b); }
-    geo.setAttribute('color', new T.Float32BufferAttribute(cols, 3)); geo.computeVertexNormals();
-    const s = add(g, geo, mat(0xffffff, { vc: true }), L.cx, y, L.cz); s.userData.noInk = true; return s;
+  const outward = (L, x, z) => ((x - L.cx) * L.ox + (z - L.cz) * L.oz) / L.r;
+  const across = (L, x, z) => (-(x - L.cx) * L.oz + (z - L.cz) * L.ox) / L.r;
+  // Smooth noise over an island, 0 to 1; f is how many bumps across it.
+  const nz = (x, z, f, s, o = 3) => K.fbm(x * 0.35 + 0.5, z * 0.35 + 0.5, f, s, o);
+  const blend = (a, b, t) => new T.Color(a).lerp(new T.Color(b), Math.max(0, Math.min(1, t))).getHex();
+
+  // Layers in an island's side, from the top: [how deep the layer goes, colour]. The first (null) is the surface's own
+  // colour: turf, sand, leaf litter or mud.
+  const SOIL = [[0.02, null], [0.1, 0x4b3020], [0.2, 0x6b4a2e], [9, 0x8f6c4a]];
+  const SAND = [[0.03, null], [0.12, 0xd9bf88], [0.24, 0xb89a68], [9, 0x8f7a5a]];
+  const MUD = [[0.03, null], [0.12, 0x5a4a35], [0.24, 0x6b5a42], [9, 0x8a7a62]];
+  // An island's cut-away side, from its rim (top(a): the ground's height at angle a) down to the rock (base), with roots
+  // hanging out of the topsoil and stones poking through lower down. o: { E, top, base, baseR, cap(a), lawnC, layers,
+  // seed, sea }.
+  function skirt(g, L, o) {
+    const N = 128, D = [0, 0.012, 0.024, 0.045, 0.07, 0.1, 0.13, 0.17, 0.22, 0.28, 0.35, 0.43, 0.52], M = D.length, rr = K.mulberry(o.seed + 5), layers = o.layers || SOIL, pos = [], cols = [], idx = [], c = new T.Color(), grey = new T.Color(0x9a948a);
+    for (let i = 0; i <= N; i++) {
+      const a = i / N * PI * 2, t0 = o.top(a), span = Math.max(0.02, t0 - o.base);
+      for (let j = 0; j < M; j++) {
+        const yy = j === M - 1 ? o.base : Math.max(o.base, t0 - D[j]), d = t0 - yy, f = d / span;
+        const dent = j && j < M - 1 ? Math.abs(Math.sin(a * 7 + j * 1.7 + o.seed) * 0.009 + Math.sin(a * 17 - j * 2.3) * 0.005) : 0;
+        const rad = j === M - 1 ? o.baseR : o.E - f * (o.E - o.baseR) * 0.6 - dent;
+        pos.push(L.cx + Math.cos(a) * rad, yy, L.cz + Math.sin(a) * rad);
+        const lay = layers.find(l => d < l[0]) || layers[layers.length - 1];
+        c.set(lay[1] == null ? (o.cap ? o.cap(a) : o.lawnC) : lay[1]);
+        if (lay[1] != null && rr() < 0.08) c.lerp(grey, 0.55);
+        c.multiplyScalar(1 - Math.min(0.25, d * 0.4)).convertSRGBToLinear(); cols.push(c.r, c.g, c.b);
+      }
+    }
+    for (let i = 0; i < N; i++) for (let j = 0; j < M - 1; j++) { const A = i * M + j, B = A + M; idx.push(A, B, A + 1, B, B + 1, A + 1); }
+    const geo = new T.BufferGeometry(); geo.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); geo.setAttribute('color', new T.Float32BufferAttribute(cols, 3)); geo.setIndex(idx); geo.computeVertexNormals();
+    add(g, geo, mat(0xffffff, { vc: true }));
+    for (let i = 0; i < Math.round(18 * L.r); i++) {
+      const a = rr() * PI * 2, t0 = o.top(a); if (o.sea != null && t0 < o.sea + 0.01) continue;
+      const ca = Math.cos(a), sa = Math.sin(a), d0 = 0.04 + rr() * 0.05, len = 0.06 + rr() * 0.12, R0 = o.E - 0.02, at = (out, dy) => [L.cx + ca * (R0 + out), t0 - d0 - dy, L.cz + sa * (R0 + out)];
+      const p1 = at(0.028, len * 0.45); stick(g, at(0, 0), p1, 0.006, 0x5a3a22); stick(g, p1, at(0.02 + rr() * 0.025, len), 0.0035, 0x5a3a22);
+    }
+    for (let i = 0; i < Math.round(28 * L.r); i++) {
+      const a = rr() * PI * 2, t0 = o.top(a), d0 = 0.06 + rr() * 0.32; if (t0 - d0 < o.base + 0.03) continue;
+      const R0 = o.E - d0 / Math.max(0.02, t0 - o.base) * (o.E - o.baseR) * 0.6, s0 = 0.014 + rr() * 0.02;
+      add(g, rough(new T.DodecahedronGeometry(s0, 0), s0 * 0.3, o.seed + i), mat(rr() < 0.5 ? 0x8d8a84 : 0x6f6a62, { flat: true }), L.cx + Math.cos(a) * R0, t0 - d0, L.cz + Math.sin(a) * R0);
+    }
   }
-  // Grass on an island at the lawn's own density, leaving out anything in `ex`.
-  const isleGrass = (g, ctx, seed, L, y, ex = {}) => { if (ctx.meadow) meadow(g, seed, L, y, ex); return K.grassField(g, seed, Math.round(ctx.dens * PI * (L.r + 0.03) ** 2), ctx.grow ?? K.MOWN + 0.3, ctx.night, { exact: true, cx: L.cx, cz: L.cz, rad: L.r + 0.03, y, tint: ctx.tint, ...ex }); };
+  // Where the side is under water, a see-through wall of water from the bed up to the surface, deeper blue lower down,
+  // with light shimmering through it and a bright line at the surface.
+  const WALL_V = 'attribute float ang; varying vec3 vP; varying float vA; void main() { vP = position; vA = ang; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }';
+  const WALL_F = `uniform float uTime, uSea; uniform vec3 uShallow, uDeep; varying vec3 vP; varying float vA;
+void main() {
+  float d = uSea - vP.y, k = smoothstep(0.0, 0.32, d);
+  vec3 c = mix(uShallow, uDeep, k);
+  float shim = pow(abs(sin(vA * 46.0 + uTime * 1.2 + sin(vP.y * 70.0 - uTime * 1.7) * 1.3)), 10.0) * 0.16 * (1.0 - smoothstep(0.0, 0.2, d));
+  float top = 1.0 - smoothstep(0.0, 0.008, d);
+  c += vec3(0.8, 0.95, 1.0) * (shim + top * 0.45);
+  gl_FragColor = linearToOutputTexel(vec4(c, clamp(mix(0.32, 0.72, k) + top * 0.3, 0.0, 1.0)));
+}`;
+  function waterWall(g, L, E, sea, top, o = {}) {
+    const N = 128, pos = [], ang = [], idx = [], R = E + 0.002;
+    for (let i = 0; i <= N; i++) {
+      const a = i / N * PI * 2; pos.push(L.cx + Math.cos(a) * R, sea, L.cz + Math.sin(a) * R, L.cx + Math.cos(a) * R, Math.min(sea, top(a)), L.cz + Math.sin(a) * R); ang.push(a, a);
+      if (i && (top(a) < sea - 0.002 || top(a - PI * 2 / N) < sea - 0.002)) { const v = (i - 1) * 2; idx.push(v, v + 2, v + 1, v + 2, v + 3, v + 1); }
+    }
+    const geo = new T.BufferGeometry(); geo.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); geo.setAttribute('ang', new T.Float32BufferAttribute(ang, 1)); geo.setIndex(idx);
+    const m = new T.Mesh(geo, new T.ShaderMaterial({ uniforms: { uTime: K.WATER_T, uSea: { value: sea }, uShallow: { value: K.lin(o.night ? 0x1d4a5a : o.shallow || 0x6fd6e0) }, uDeep: { value: K.lin(o.night ? 0x08203a : o.deep || 0x0e4f86) } }, vertexShader: WALL_V, fragmentShader: WALL_F, transparent: true, depthWrite: false, side: T.DoubleSide }));
+    m.userData.noInk = true; m.userData.ownMat = true; m.renderOrder = 1; g.add(m); return m;
+  }
+  // Light rippling over the bed under clear water (caustics), added on top of the ground's own colour: strongest in the
+  // shallows and gone in the deep.
+  const CAUS_V = 'varying vec3 vP; void main() { vP = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }';
+  const CAUS_F = `uniform float uTime, uSea; varying vec3 vP;
+float cz(vec2 p, float t) { float c = 0.0; for (int i = 0; i < 3; i++) { p += vec2(sin(p.y * 1.3 + t * 0.8), cos(p.x * 1.1 - t * 0.7)); c += 1.0 / (1.0 + 14.0 * abs(sin(p.x) + sin(p.y))); } return c / 3.0; }
+void main() { float d = uSea - vP.y; if (d < 0.004) discard; float k = cz(vP.xz * 16.0, uTime) * smoothstep(0.004, 0.02, d) * (1.0 - smoothstep(0.05, 0.4, d)); gl_FragColor = vec4(vec3(0.7, 0.92, 1.0) * k * 0.55, 1.0); }`;
+  function caustics(g, ground, sea) {
+    const m = new T.Mesh(ground.geometry, new T.ShaderMaterial({ uniforms: { uTime: K.WATER_T, uSea: { value: sea - ground.position.y } }, vertexShader: CAUS_V, fragmentShader: CAUS_F, transparent: true, depthWrite: false, blending: T.AdditiveBlending, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }));
+    m.position.copy(ground.position); m.userData.noInk = true; m.userData.ownMat = true; m.renderOrder = 1; g.add(m); return m;
+  }
+  // The wash of each breaking wave running up the sand and sliding back, in step with the sea's swells (same speed w and
+  // the same wobble along the shore): a thin sheet of water with a bright foam edge. run is how high up it reaches.
+  const SWASH_V = 'attribute float sd; varying float vD; varying vec3 vW; void main() { vD = sd; vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }';
+  const SWASH_F = `uniform float uTime, uW, uRun; varying float vD; varying vec3 vW;
+float h2(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+float n2(vec2 p) { vec2 i = floor(p), f = fract(p), u = f * f * (3.0 - 2.0 * f); return mix(mix(h2(i), h2(i + vec2(1.0, 0.0)), u.x), mix(h2(i + vec2(0.0, 1.0)), h2(i + vec2(1.0, 1.0)), u.x), u.y); }
+void main() {
+  float e = -vD; if (e < -0.004) discard;
+  float ph = uTime * uW + (sin(vW.x * 3.1) + sin(vW.z * 2.7)) * 0.6, s = fract((ph - 1.5708) / 6.2832);
+  float run = uRun * sin(3.14159 * clamp(s * 1.5, 0.0, 1.0)), edge = run + (n2(vW.xz * 40.0 + uTime * 0.4) - 0.5) * 0.005;
+  if (e > edge) discard;
+  float front = smoothstep(edge - 0.007, edge, e), back = 1.0 - smoothstep(0.33, 0.66, s);
+  vec3 c = mix(vec3(0.8, 0.94, 0.98), vec3(1.0), front);
+  gl_FragColor = linearToOutputTexel(vec4(c, 0.12 + 0.2 * back + 0.75 * front * (0.6 + 0.4 * n2(vW.xz * 90.0))));
+}`;
+  function swash(g, ground, sea, run, w) {
+    const geo = ground.geometry.clone(), p = geo.attributes.position, sd = [], s0 = sea - ground.position.y; for (let i = 0; i < p.count; i++) sd.push(s0 - p.getY(i));
+    geo.setAttribute('sd', new T.Float32BufferAttribute(sd, 1));
+    const m = new T.Mesh(geo, new T.ShaderMaterial({ uniforms: { uTime: K.WATER_T, uW: { value: w }, uRun: { value: run } }, vertexShader: SWASH_V, fragmentShader: SWASH_F, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3 }));
+    m.position.copy(ground.position); m.userData.noInk = true; m.userData.ownMat = true; m.renderOrder = 3; g.add(m); return m;
+  }
+  // An island: the rock underneath, its cut-away side and the ground on top. o: { seed, rock, lawnC, h(x, z) height
+  // above y, col(x, z, h) colour, n (grid detail), base (where the rock starts), sea (water level), water (wall colours),
+  // cap(a) (the side's top colour), layers, habAt(x, z) (what a tap on it lands on) }. Returns the ground.
+  function ground(g, L, y, o) {
+    const base = o.base ?? -0.115, H = 1.3 * L.r + 0.1, sa = FRONT + 2.4, rk = mat(0xffffff, { vc: true, flat: true }), E = L.r + 0.05, h = o.h || (() => 0);
+    add(g, K.strata(rough(new T.ConeGeometry(L.r * 0.92, H, 12, 6).rotateX(PI), 0.16, o.seed), o.seed, o.rock), rk, L.cx, base - H / 2, L.cz);
+    add(g, K.strata(rough(new T.ConeGeometry(L.r * 0.32, L.r * 0.6, 7, 3).rotateX(PI), 0.08, o.seed + 1), o.seed + 1, o.rock), rk, L.cx + Math.cos(sa) * L.r * 0.45, base - 0.09 - L.r * 0.3, L.cz + Math.sin(sa) * L.r * 0.45);
+    const top = a => y + h(L.cx + Math.cos(a) * E, L.cz + Math.sin(a) * E) - 0.03;
+    skirt(g, L, { E, top, base, baseR: L.r * 0.92, cap: o.cap, lawnC: o.lawnC, layers: o.layers, seed: o.seed, sea: o.sea });
+    if (o.sea != null) waterWall(g, L, E, o.sea, top, o.water);
+    const n = o.n || 48, geo = new T.PlaneGeometry(2 * E, 2 * E, n, n).rotateX(-P2), p = geo.attributes.position, cols = [], C = new T.Color(), mud = new T.Color(0x5a4a32);
+    for (let i = 0; i < p.count; i++) { let x = p.getX(i), z = p.getZ(i), lip = 0; const d = Math.hypot(x, z); if (d > E) { x *= E / d; z *= E / d; lip = -0.03; } const wx = L.cx + x, wz = L.cz + z, hh = h(wx, wz) + lip; p.setXYZ(i, x, hh, z); C.set(o.col ? o.col(wx, wz, hh) : o.lawnC); if (!o.col) C.lerp(mud, K.smooth01(0.006, 0.03, -hh)); C.convertSRGBToLinear(); cols.push(C.r, C.g, C.b); }
+    geo.setAttribute('color', new T.Float32BufferAttribute(cols, 3)); geo.computeVertexNormals();
+    const s = add(g, geo, mat(0xffffff, { vc: true }), L.cx, y, L.cz); s.userData.noInk = true; if (o.habAt) s.userData.habAt = o.habAt; return s;
+  }
+  // Grass on an island at the lawn's own density, leaving out anything in `ex` (ex.grow and ex.tint change it).
+  const isleGrass = (g, ctx, seed, L, y, ex = {}) => { if (ctx.meadow) meadow(g, seed, L, y, ex); return K.grassField(g, seed, Math.round(ctx.dens * PI * (L.r + 0.03) ** 2), ex.grow ?? ctx.grow ?? K.MOWN + 0.3, ctx.night, { exact: true, cx: L.cx, cz: L.cz, rad: L.r + 0.03, y, tint: ctx.tint, ...ex }); };
   function meadow(g, seed, L, y, ex) {
     const n = Math.round(L.r * L.r * 70 / (1.1 * 1.1)), fm = new T.InstancedMesh(new T.SphereGeometry(0.013, 6, 4), mat(0xffffff), n), d0 = new T.Object3D(), rr = K.mulberry(seed + 41), c = new T.Color(); let k = 0;
     for (let i = 0; i < n && k < n; i++) { const a = rr() * PI * 2, r0 = Math.sqrt(rr()) * L.r * 0.95, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0; if ((ex.not && ex.not(x, z)) || (ex.clear && ex.clear.some(([cx, cz, cr]) => Math.hypot(x - cx, z - cz) < cr)) || (ex.dens && rr() > ex.dens(x, z))) continue; d0.position.set(x, y + 0.03 + rr() * 0.02 + (ex.ground ? ex.ground(x, z) : 0), z); d0.updateMatrix(); fm.setMatrixAt(k, d0.matrix); fm.setColorAt(k++, c.set([0xff6b9d, 0xffd43b, 0xffffff, 0xc084fc, 0xff8c42][k % 5])); }
@@ -397,81 +497,228 @@ window.ChorecastIsland = K => {
   }
   // Posts round an island's edge, for fences and stone edging.
   const arc = (L, n, f, inset = 0.06) => { for (let i = 0; i < n; i++) { const a = i / n * PI * 2; f(L.cx + Math.cos(a) * (L.r - inset), L.cz + Math.sin(a) * (L.r - inset), a, i); } };
-  // How far towards the front a point is: -1 at the back edge, 1 at the front.
-  const outward = (L, x, z) => ((x - L.cx) * L.ox + (z - L.cz) * L.oz) / L.r;
+  // Many copies of one small shape (tussocks, seedlings, kelp, dune grass) in one draw: list of [x, y, z, lean, turn, size].
+  function many(g, geo, c, list) {
+    const m = new T.InstancedMesh(geo, mat(c), list.length), d = new T.Object3D();
+    list.forEach(([x, y, z, lean = 0, turn = 0, s = 1], i) => { d.position.set(x, y, z); d.rotation.set(lean, turn, 0); d.scale.setScalar(s); d.updateMatrix(); m.setMatrixAt(i, d.matrix); });
+    m.userData.noInk = true; g.add(m); return m;
+  }
+  // A ponga (tree fern): a dark trunk and a crown of drooping fronds.
+  function treeFern(g, x, y, z, s = 1) {
+    const t = new T.Group(); t.position.set(x, y, z); g.add(t); cyl(t, 0.02 * s, 0.03 * s, 0.34 * s, 0x4a3524, 0, 0.17 * s, 0, 7);
+    for (let i = 0; i < 9; i++) { const f = new T.Group(); f.position.y = 0.34 * s; f.rotation.y = i / 9 * PI * 2; t.add(f); const fr = add(f, new T.ConeGeometry(0.03 * s, 0.26 * s, 4), mat(i % 2 ? 0x2f7a35 : 0x3a8a3f), 0, -0.04 * s, 0.11 * s); fr.rotation.x = P2 + 0.55; fr.scale.set(1, 1, 0.25); }
+    return t;
+  }
+  // A school of little fish swimming a loop under the water; yAt(x, z) is how deep they swim there.
+  function school(fx, g, n, cx, cz, rx, rz, yAt, c) {
+    const fish = []; for (let i = 0; i < n; i++) { const f = new T.Group(); sph(f, 0.018, c, 0, 0, 0, 0.6, 0.7, 1.4); cn(f, 0.014, 0.025, c, 0, 0, -0.03, 4).rotation.x = P2; g.add(f); fish.push(f); }
+    fx.push(t => fish.forEach((f, i) => { const p = t * 0.35 + i * 0.22, x = cx + Math.sin(p) * rx + Math.sin(i * 7.1) * 0.03, z = cz + Math.sin(p * 2) * rz + Math.cos(i * 5.3) * 0.03; f.position.set(x, yAt(x, z) + Math.sin(t * 2 + i) * 0.005, z); f.rotation.y = Math.atan2(Math.cos(p) * rx, 2 * Math.cos(p * 2) * rz); }));
+  }
+  // Swaying underwater plants (kelp, waterweed): one group of thin blades that sways together.
+  function weed(fx, g, spots, c, h0, seed) {
+    const rr = K.mulberry(seed), w = new T.Group(); g.add(w); const list = [];
+    spots.forEach(([x, y, z]) => { for (let j = 0; j < 4; j++) list.push([x + (rr() - 0.5) * 0.04, y, z + (rr() - 0.5) * 0.04, (rr() - 0.5) * 0.4, rr() * 6, 0.6 + rr() * 0.7]); });
+    many(w, new T.ConeGeometry(0.006, h0, 4).translate(0, h0 / 2, 0), c, list);
+    fx.push(t => { w.rotation.z = Math.sin(t * 0.9) * 0.012; w.rotation.x = Math.cos(t * 0.7) * 0.01; });
+  }
   // Builds one piece of land as an island (the farm's is built by index.html, with ground()).
-  // ctx: { top, lawnC, night, flat, tint, rock, dens (blades per unit area), grow, meadow }. Returns { L, zones, surf, tick }.
+  // ctx: { top, lawnC, night, flat, tint, rock, dens (blades per unit area), grow, meadow }.
+  // Returns { L, zones, surf, tick, terrain: { h(x, z) ground height, sea (water level, or null) } }.
   function land(g, k, key, ctx) {
-    const { lawnC } = ctx, L = isle(key), y = ctx.top, seed = k.seed + key.length * 17, base = { seed, rock: ctx.rock, lawnC }, zones = { lawn: { x: L.cx, z: L.cz, r: L.r * 0.8, y } }, surf = [], fx = [];
-    const on = (m, hab) => { m.userData.hab = hab; surf.push(m); return m; };
+    const L = isle(key), y = ctx.top, seed = k.seed + key.length * 17, rr = K.mulberry(seed + 99), zones = {}, surf = [], fx = [], night = ctx.night, base = { seed, rock: ctx.rock };
+    const tone = c => (night ? blend(c, 0x0f2a24, 0.5) : c), on = (m, hab) => { m.userData.hab = hab; surf.push(m); return m; }, spot = (u, v) => toWorld(L, u, v), face = Math.atan2(L.ox, L.oz);
+    let hRel = () => 0, sea = null;
     if (key === 'plot') {
-      // A tilled veggie patch in the middle, with a timber edge and furrows across it.
-      const pw = L.r, pd2 = L.r * 0.62, rot = -L.a + P2;
-      const inPatch = (x, z, m = 0.03) => { const dx = x - L.cx, dz = z - L.cz, u = dx * Math.cos(rot) - dz * Math.sin(rot), v = dx * Math.sin(rot) + dz * Math.cos(rot); return Math.abs(u) < pw / 2 + m && Math.abs(v) < pd2 / 2 + m; };
-      on(ground(g, L, y, base), 'field'); isleGrass(g, ctx, seed, L, y, { not: inPatch });
-      const patch = new T.Group(); patch.position.set(L.cx, y, L.cz); patch.rotation.y = rot; g.add(patch);
-      on(bx(patch, pw, 0.03, pd2, 0x6b4a2a, 0, 0.012, 0), 'plot');
-      for (let i = 0; i < 6; i++) bx(patch, pw - 0.04, 0.014, 0.03, 0x4a3020, 0, 0.03, -pd2 / 2 + 0.05 + i * (pd2 - 0.1) / 5);
-      [[0, pd2 / 2], [0, -pd2 / 2]].forEach(([x0, z0]) => bx(patch, pw + 0.04, 0.04, 0.025, WOOD, x0, 0.02, z0)); [-1, 1].forEach(sx => bx(patch, 0.025, 0.04, pd2, WOOD, sx * pw / 2, 0.02, 0));
-      zones.plot = { x: L.cx, z: L.cz, r: Math.min(pw, pd2) * 0.42, y: y + 0.03 };
-      zones.lawn.not = (x, z) => inPatch(x, z, 0.08);
+      // A working vege garden: two long dug beds with furrows (where crop beds go) either side of a bark path, raised
+      // beds of lettuces and cabbages and a bean teepee at the front, sunflowers along the back, a shed, compost bins,
+      // a water tank, a wheelbarrow and a scarecrow.
+      const BEDS = [[-0.06, -0.36], [-0.06, 0.36]], inBed = (x, z, m = 0) => { const u = outward(L, x, z), v = across(L, x, z); return BEDS.some(([bu, bv]) => Math.pow(Math.abs(u - bu) / (0.46 + m), 4) + Math.pow(Math.abs(v - bv) / (0.16 + m), 4) < 1); };
+      const bark = (x, z) => Math.hypot(x - L.cx, z - L.cz) < 0.74 * L.r;
+      hRel = (x, z) => (inBed(x, z) ? 0.014 + 0.006 * Math.sin(across(L, x, z) * L.r * 105) : 0);
+      on(ground(g, L, y, { ...base, lawnC: tone(0x4f8f38), h: hRel, n: 80, habAt: (x, z) => (inBed(x, z, -0.02) ? 'plot' : 'field'),
+        col: (x, z, hh) => tone(inBed(x, z) ? (hh > 0.016 ? 0x7a5236 : 0x553522) : bark(x, z) ? (nz(x, z, 24, seed) > 0.6 ? 0xa98250 : 0xc8a06a) : blend(0x4f8f38, 0x3f7a2e, nz(x, z, 6, seed))) }), 'field');
+      isleGrass(g, ctx, seed, L, y, { not: (x, z) => bark(x, z) || inBed(x, z, 0.03) });
+      const shed = new T.Group(), [shx, shz] = spot(-0.7, 0.02); shed.position.set(shx, y, shz); shed.rotation.y = face; g.add(shed);
+      bx(shed, 0.3, 0.2, 0.22, 0x6f9a6a, 0, 0.1, 0); [-1, 1].forEach(s => tilt(bx(shed, 0.17, 0.012, 0.26, 0x5b5f6e, s * 0.075, 0.235, 0), 0, 0, -s * 0.5)); bx(shed, 0.08, 0.15, 0.006, 0x4a3524, 0.05, 0.075, 0.112); bx(shed, 0.06, 0.05, 0.006, 0xbfe3ff, -0.08, 0.12, 0.112);
+      for (let i = 0; i < 3; i++) { const [x, z] = spot(-0.58, -0.62 + i * 0.12), b = new T.Group(); b.position.set(x, y, z); b.rotation.y = face; g.add(b); bx(b, 0.1, 0.012, 0.1, 0x4a3020, 0, 0.07, 0); for (let j = 0; j < 4; j++) { bx(b, 0.1, 0.014, 0.008, 0x9a6a3c, 0, 0.012 + j * 0.02, 0.05); bx(b, 0.1, 0.014, 0.008, 0x9a6a3c, 0, 0.012 + j * 0.02, -0.05); bx(b, 0.008, 0.014, 0.1, 0x9a6a3c, 0.05, 0.012 + j * 0.02, 0); } }
+      { const [x, z] = spot(-0.5, 0.64); cyl(g, 0.075, 0.075, 0.2, 0x3f6b4a, x, y + 0.1, z, 16); cyl(g, 0.078, 0.078, 0.012, 0x2f5a3a, x, y + 0.205, z, 16); }
+      for (let i = 0; i < 6; i++) { const a = L.a + PI + (i < 3 ? -1 : 1) * (0.55 + (i % 3) * 0.2), r0 = 0.86 * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, hh = 0.22 + (i % 2) * 0.05; cyl(g, 0.006, 0.008, hh, 0x4f8a2f, x, y + hh / 2, z, 5); const hd = new T.Group(); hd.position.set(x, y + hh, z); hd.rotation.set(-0.5, Math.atan2(L.cx - x, L.cz - z), 0); g.add(hd); cyl(hd, 0.045, 0.045, 0.01, 0xffc823, 0, 0, 0, 12).rotation.x = P2; cyl(hd, 0.022, 0.022, 0.014, 0x6b3f1f, 0, 0, 0.004, 10).rotation.x = P2; }
+      [[0.6, -0.3, 0x9fd65a], [0.6, 0.3, 0x5f9a7a]].forEach(([u, v, c], b) => { const rb = new T.Group(), [x, z] = spot(u, v); rb.position.set(x, y, z); rb.rotation.y = face; g.add(rb); bx(rb, 0.18, 0.05, 0.26, WOOD, 0, 0.025, 0); bx(rb, 0.16, 0.012, 0.24, 0x553522, 0, 0.05, 0); for (let i = 0; i < 2; i++) for (let j = 0; j < 4; j++) sph(rb, b ? 0.026 : 0.022, c, -0.04 + i * 0.08, 0.065, -0.09 + j * 0.06, 1, b ? 0.85 : 0.6, 1); });
+      { const [x, z] = spot(0.66, 0), tp = y + 0.3; [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => { const b = [x + sx * 0.06, y, z + sz * 0.06]; stick(g, b, [x, tp, z], 0.004, 0x9a6a3c); for (let j = 1; j < 4; j++) { const q = j / 4; sph(g, 0.018, 0x3f8f35, b[0] + (x - b[0]) * q, y + (tp - y) * q, b[2] + (z - b[2]) * q, 1, 0.8, 1); } }); }
+      { const s = new T.Group(), [x, z] = spot(0.28, 0.62); s.position.set(x, y, z); s.rotation.y = face; g.add(s); cyl(s, 0.006, 0.006, 0.3, 0x8a5a3c, 0, 0.15, 0, 5); bx(s, 0.2, 0.008, 0.008, 0x8a5a3c, 0, 0.22, 0); bx(s, 0.08, 0.1, 0.04, 0x3a5a9a, 0, 0.2, 0); sph(s, 0.035, 0xe8c48a, 0, 0.29, 0); cn(s, 0.05, 0.04, 0xd4a64a, 0, 0.33, 0, 10); }
+      { const w = new T.Group(), [x, z] = spot(0.12, -0.62); w.position.set(x, y, z); w.rotation.y = face + 0.6; g.add(w); bx(w, 0.1, 0.04, 0.14, 0x5a7a9a, 0, 0.05, 0); cyl(w, 0.025, 0.025, 0.012, DARK, 0, 0.025, 0.08, 10).rotation.z = P2; [-1, 1].forEach(s => bx(w, 0.008, 0.008, 0.12, 0x8a5a3c, s * 0.05, 0.04, -0.1)); }
+      const sprouts = []; BEDS.forEach(([bu, bv]) => { for (let j = 0; j < 4; j++) for (let i = 0; i < 5; i++) { const [x, z] = spot(bu + 0.18 + i * 0.05, bv - 0.09 + j * 0.06); sprouts.push([x, y + hRel(x, z), z, 0, rr() * 6, 0.8 + rr() * 0.5]); } });
+      many(g, new T.ConeGeometry(0.012, 0.035, 5).translate(0, 0.017, 0), 0x5fae3a, sprouts);
+      const [px, pz] = spot(-0.06, -0.36); zones.plot = { x: px, z: pz, r: 0.14, y: y + 0.02 };
+      zones.lawn = { x: L.cx, z: L.cz, r: 0.82 * L.r, y, not: (x, z) => inBed(x, z, 0.04) };
     } else if (key === 'stable') {
-      // A stable at the back of a fenced yard, open to the front, where horses and farm animals roam.
-      const sx = L.cx - L.ox * L.r * 0.5, sz = L.cz - L.oz * L.r * 0.5;
-      on(ground(g, L, y, base), 'stable'); isleGrass(g, ctx, seed, L, y, { clear: [[sx, sz, 0.3]] });
-      const st = new T.Group(); st.position.set(sx, y, sz); st.rotation.y = Math.atan2(L.ox, L.oz); st.scale.setScalar(1.3); g.add(st);
-      bx(st, 0.36, 0.17, 0.17, 0x9c5a3a, 0, 0.085, 0); tilt(bx(st, 0.4, 0.014, 0.23, 0x5b5f6e, 0, 0.2, 0), 0.3); for (let i = 0; i < 3; i++) bx(st, 0.07, 0.1, 0.006, 0x3b2a24, -0.11 + i * 0.11, 0.06, 0.086);
-      let prev = null; arc(L, 44, (x, z) => { bx(g, 0.024, 0.1, 0.024, 0xb07a4a, x, y + 0.05, z); if (prev && Math.hypot(x - prev[0], z - prev[1]) < 0.2) [0.045, 0.085].forEach(hh => stick(g, [prev[0], y + hh, prev[1]], [x, y + hh, z], 0.006, 0xf7f3ea)); prev = [x, z]; });
-      zones.stable = { x: L.cx + L.ox * L.r * 0.12, z: L.cz + L.oz * L.r * 0.12, r: L.r * 0.6, y, not: (x, z) => Math.hypot(x - sx, z - sz) < 0.36 };
+      // A horse yard: a sand arena with white rails and show jumps, the stable block at the back, hay and a trough.
+      const AU = 0.18, A1 = 0.56, A2 = 0.38, inArena = (x, z, m = 0) => ((outward(L, x, z) - AU) / (A2 + m)) ** 2 + (across(L, x, z) / (A1 + m)) ** 2 < 1;
+      const [sx, sz] = spot(-0.66, 0), inStable = (x, z) => Math.hypot(x - sx, z - sz) < 0.33;
+      on(ground(g, L, y, { ...base, lawnC: tone(0x4c8a36), n: 64, habAt: () => 'stable', col: (x, z) => tone(inArena(x, z) ? blend(0xd8bf8a, 0xc4a874, nz(x, z, 30, seed)) : blend(0x4c8a36, 0x5a9a40, nz(x, z, 8, seed))) }), 'stable');
+      isleGrass(g, ctx, seed, L, y, { not: (x, z) => inArena(x, z, 0.03) || inStable(x, z) });
+      const rails = []; for (let i = 0; i < 40; i++) { const a = i / 40 * PI * 2, [x, z] = spot(AU + Math.cos(a) * (A2 + 0.03), Math.sin(a) * (A1 + 0.03)); if (Math.abs(Math.cos(a) - 1) < 0.02) continue; cyl(g, 0.008, 0.008, 0.1, 0xf4f1ea, x, y + 0.05, z, 6); rails.push([x, z, i]); }
+      rails.forEach(([x, z, i], j) => { const nb = rails[j + 1]; if (nb && nb[2] === i + 1) [0.045, 0.09].forEach(hh => stick(g, [x, y + hh, z], [nb[0], y + hh, nb[1]], 0.005, 0xf4f1ea)); });
+      [-0.25, 0.25].forEach((v, n) => { const j = new T.Group(), [x, z] = spot(AU, v); j.position.set(x, y, z); j.rotation.y = face; g.add(j); [-1, 1].forEach(s => { bx(j, 0.02, 0.12, 0.03, 0xffffff, s * 0.1, 0.06, 0); bx(j, 0.02, 0.04, 0.03, n ? 0x2f6bd0 : 0xd0302f, s * 0.1, 0.1, 0); }); [0.05, 0.09].forEach(hh => { for (let q = 0; q < 4; q++) bx(j, 0.05, 0.01, 0.01, q % 2 ? 0xffffff : n ? 0x2f6bd0 : 0xd0302f, -0.075 + q * 0.05, hh, 0); }); });
+      const st = new T.Group(); st.position.set(sx, y, sz); st.rotation.y = face; g.add(st);
+      bx(st, 0.56, 0.2, 0.2, 0x9c5a3a, 0, 0.1, 0); tilt(bx(st, 0.62, 0.014, 0.28, 0x5b5f6e, 0, 0.235, 0.02), 0.32); bx(st, 0.58, 0.02, 0.02, 0xf4f1ea, 0, 0.2, 0.101);
+      for (let i = 0; i < 3; i++) { bx(st, 0.1, 0.13, 0.006, 0x3b2a24, -0.18 + i * 0.18, 0.065, 0.101); bx(st, 0.11, 0.012, 0.008, 0xf4f1ea, -0.18 + i * 0.18, 0.08, 0.104); }
+      bx(st, 0.07, 0.05, 0.006, 0x3b2a24, 0, 0.17, 0.103);
+      [[-0.5, 0.5], [-0.42, 0.6]].forEach(([u, v], i) => { const [x, z] = spot(u, v); cyl(g, 0.05, 0.05, 0.085, 0xe9c46a, x, y + 0.05, z, 14).rotation.set(P2, 0, i * 0.7); });
+      { const tr = new T.Group(), [x, z] = spot(-0.25, -0.62); tr.position.set(x, y, z); tr.rotation.y = face; g.add(tr); bx(tr, 0.2, 0.05, 0.07, 0x8d9096, 0, 0.035, 0); add(tr, new T.BoxGeometry(0.18, 0.004, 0.05), K.waterMat({ flat: 0.05, deepAt: 0.08, scale: 14 }), 0, 0.058, 0).userData.noInk = true; }
+      zones.stable = { x: L.cx + L.ox * L.r * 0.1, z: L.cz + L.oz * L.r * 0.1, r: 0.62 * L.r, y, not: inStable };
     } else if (key === 'lookout') {
-      // A rocky mountain in the middle, with steps winding up to a lookout on top.
-      const h = 0.62, mr = L.r * 0.6;
-      on(ground(g, L, y, base), 'field'); isleGrass(g, ctx, seed, L, y, { clear: [[L.cx, L.cz, mr - 0.02]] });
-      add(g, rough(new T.CylinderGeometry(L.r * 0.3, mr, h, 10, 3), 0.04, seed + 3), mat(0x8a8f96, { flat: true }), L.cx, y + h / 2, L.cz);
-      on(add(g, new T.CircleGeometry(L.r * 0.33, 24).rotateX(-P2), mat(lawnC), L.cx, y + h + 0.002, L.cz), 'lookout').userData.noInk = true;
-      for (let i = 0; i < 12; i++) { const a = i * 0.62, rr = L.r * (0.62 - i * 0.026); bx(g, 0.06, 0.012, 0.035, 0xc9b38a, L.cx + Math.cos(a) * rr, y + 0.02 + i * h / 12, L.cz + Math.sin(a) * rr).rotation.y = -a; }
-      zones.lookout = { x: L.cx, z: L.cz, r: L.r * 0.24, y: y + h };
-      zones.lawn.not = (x, z) => Math.hypot(x - L.cx, z - L.cz) < mr + 0.06;
+      // An alpine mountain: ridged slopes of meadow, golden tussock, scree and rock, a snow cap, pines low down, boulders,
+      // a track winding up, and a lookout deck on the flat summit.
+      const [px, pz] = spot(-0.12, 0.05), PK = 0.86, top = PK * 0.8;
+      const raw = (x, z) => {
+        const dx = x - px, dz = z - pz, d = Math.hypot(dx, dz) / L.r, a = Math.atan2(dz, dx);
+        let m = Math.pow(Math.max(0, 1 - d / 0.95), 1.7) * (1 + 0.14 * Math.sin(3 * a + 0.7) + 0.08 * Math.sin(5 * a + 2.1));
+        m *= 0.78 + 0.34 * (1 - Math.abs(2 * nz(x, z, 5, seed) - 1));
+        return PK * m + 0.035 * nz(x, z, 9, seed + 3) * (1 - K.smooth01(0.3, 0.8, d));
+      };
+      hRel = (x, z) => { const w = 1 - K.smooth01(0.09, 0.16, Math.hypot(x - px, z - pz)); return Math.min(raw(x, z), top) * (1 - w) + top * w; };
+      const onTrack = (x, z) => { const rd = Math.hypot(x - px, z - pz) / L.r, s = (0.8 - rd) / 0.66; if (s < 0 || s > 1) return false; const want = L.a + 0.6 + s * PI * 2 * 1.6, a = Math.atan2(z - pz, x - px), da = Math.atan2(Math.sin(a - want), Math.cos(a - want)); return Math.abs(da) * rd < 0.028; };
+      const slope = (x, z) => { const e = 0.012; return Math.hypot(hRel(x + e, z) - hRel(x - e, z), hRel(x, z + e) - hRel(x, z - e)) / (2 * e); };
+      const colAt = (x, z, hh) => {
+        const q = hh / PK, sl = slope(x, z), n0 = nz(x, z, 18, seed + 7);
+        if (Math.hypot(x - px, z - pz) < 0.15) return tone(0x9a958c);
+        if (onTrack(x, z) && q < 0.75) return tone(0xa48660);
+        if (q > 0.6 && sl < 1.9) return n0 > 0.55 ? 0xdfe6f0 : 0xf4f7fb;
+        if (sl > 1.25 || q > 0.48) return tone(n0 > 0.5 ? 0x8d9096 : 0x70747a);
+        if (q > 0.3) return tone(n0 > 0.6 ? 0xa7a49a : 0xbfa262);
+        if (q > 0.1) return tone(blend(0xc4a35a, 0x7a9a45, n0));
+        return tone(blend(0x6d9a44, 0x5d8a3a, n0));
+      };
+      on(ground(g, L, y, { ...base, lawnC: tone(0x6d9a44), h: hRel, col: colAt, n: 100, habAt: (x, z) => (hRel(x, z) < 0.07 ? 'field' : null) }), 'field');
+      isleGrass(g, ctx, seed, L, y, { dens: (x, z) => 1 - K.smooth01(0.03, 0.12, hRel(x, z)), ground: hRel, tint: [0x5f8a3f, 0x4f7a32, 0xb8c46a] });
+      const tuss = [], pines = [], rocks = [];
+      for (let i = 0; i < 900 && (tuss.length < 150 || pines.length < 9 || rocks.length < 10); i++) {
+        const a = rr() * PI * 2, r0 = Math.sqrt(rr()) * 0.92 * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, hh = hRel(x, z), q = hh / PK; if (onTrack(x, z)) continue;
+        if (q > 0.1 && q < 0.4 && slope(x, z) < 1.2 && tuss.length < 150) for (let j = 0; j < 3; j++) tuss.push([x + (rr() - 0.5) * 0.02, y + hh, z + (rr() - 0.5) * 0.02, (rr() - 0.5) * 0.6, rr() * 6, 0.8 + rr() * 0.6]);
+        else if (q > 0.04 && q < 0.24 && pines.length < 9 && outward(L, x, z) < 0.55) pines.push([x, hh, z]);
+        else if (q > 0.08 && q < 0.55 && rocks.length < 10) rocks.push([x, hh, z]);
+      }
+      many(g, new T.ConeGeometry(0.008, 0.06, 4).translate(0, 0.03, 0), tone(0xc9a85a), tuss);
+      pines.forEach(([x, hh, z], i) => species(g, x, y + hh, z, 'pine', seed + i, 0.8));
+      rocks.forEach(([x, hh, z], i) => add(g, rough(new T.DodecahedronGeometry(0.035 + rr() * 0.03, 0), 0.012, seed + i), mat(0x8a8d91, { flat: true }), x, y + hh + 0.01, z));
+      const dy = y + top;
+      cyl(g, 0.14, 0.15, 0.025, WOOD, px, dy + 0.012, pz, 18);
+      const deck = on(add(g, new T.CircleGeometry(0.13, 24).rotateX(-P2), mat(0xb98a5a), px, dy + 0.026, pz), 'lookout'); deck.userData.noInk = true;
+      ring(12, a => cyl(g, 0.005, 0.005, 0.07, 0x6b4a2e, px + Math.cos(a) * 0.135, dy + 0.06, pz + Math.sin(a) * 0.135, 5));
+      tor(g, 0.135, 0.004, 0x6b4a2e, px, dy + 0.09, pz).rotation.x = P2;
+      zones.lookout = { x: px, z: pz, r: 0.07, y: dy + 0.026 };
+      zones.lawn = { x: L.cx, z: L.cz, r: 0.88 * L.r, y, not: (x, z) => hRel(x, z) > 0.07 };
     } else if (key === 'orchard') {
-      on(ground(g, L, y, base), 'orchard'); isleGrass(g, ctx, seed, L, y);
+      // An orchard: grass mown in stripes, blossom trees along the back, beehives, crates of picked fruit, a ladder, and
+      // wildflowers along the stone wall.
+      on(ground(g, L, y, { ...base, lawnC: tone(0x55a03c), n: 56, habAt: () => 'orchard', col: (x, z) => tone(Math.floor((across(L, x, z) + 1) * 6) % 2 ? 0x5aa843 : 0x4b9536) }), 'orchard');
+      isleGrass(g, ctx, seed, L, y, { tint: [0x55a03c, 0x3f8a2e, 0x9ad65a], grow: K.MOWN + 0.15 });
+      [1, 2, 3].forEach(s => meadow(g, seed + s * 7, L, y, { not: (x, z) => Math.hypot(x - L.cx, z - L.cz) < 0.8 * L.r }));
       arc(L, 40, (x, z, a, i) => { const o = add(g, rough(new T.BoxGeometry(0.075, 0.05, 0.045), 0.006, seed + i), mat(i % 2 ? 0xb7ada0 : 0xa59b8e, { flat: true }), x, y + 0.02, z); o.rotation.y = -a; });
-      zones.orchard = { x: L.cx, z: L.cz, r: L.r * 0.78, y };
-    } else if (key === 'lake') {
-      // A lake dug into the middle: the bank slopes down into it, and the water sits in the hollow.
-      const lr = L.r * 0.55, dip = (x, z) => -0.085 * (1 - K.smooth01(lr - 0.06, lr + 0.05, Math.hypot(x - L.cx, z - L.cz)));
-      on(ground(g, L, y, { ...base, h: dip }), 'lakeshore'); isleGrass(g, ctx, seed, L, y, { clear: [[L.cx, L.cz, lr + 0.03]], ground: dip });
-      on(K.waterSheet(g, L.cx, L.cz, lr + 0.08, y - 0.022, (x, z) => dip(x, z) + 0.022, { night: ctx.night, deepAt: 0.06, deep: 0x16609e }), 'lake');
-      for (let i = 0; i < 6; i++) { const a = i * 1.1, pad = add(g, new T.CylinderGeometry(0.022, 0.022, 0.003, 7), mat(0x4caf50), L.cx + Math.cos(a) * lr * 0.6, y - 0.019, L.cz + Math.sin(a) * lr * 0.55); pad.userData.noInk = true; }
-      ring(12, (a, i) => { const rx = L.cx + Math.cos(a) * (lr + 0.02), rz = L.cz + Math.sin(a) * (lr + 0.02); if (i % 3 === 2) return; for (let j = 0; j < 3; j++) cyl(g, 0.004, 0.004, 0.08 + j * 0.02, 0x6b8a3a, rx + j * 0.01, y + dip(rx, rz) + 0.04, rz, 4); });
-      zones.lake = { x: L.cx, z: L.cz, r: lr * 0.7, y: y - 0.026, water: true };
-      zones.lawn.not = (x, z) => Math.hypot(x - L.cx, z - L.cz) < lr + 0.08;
+      [[-0.72, -0.36], [-0.8, 0], [-0.72, 0.36]].forEach(([u, v], i) => { const [x, z] = spot(u, v); species(g, x, y, z, 'cherry', seed + i, 0.9); });
+      { const [x, z] = spot(-0.62, -0.3); stick(g, [x + 0.05, y, z + 0.05], [x + 0.01, y + 0.3, z + 0.01], 0.005, 0xb07a4a); stick(g, [x + 0.1, y, z + 0.02], [x + 0.05, y + 0.3, z - 0.02], 0.005, 0xb07a4a); for (let i = 1; i < 6; i++) { const q = i / 6; stick(g, [x + 0.05 - 0.04 * q, y + 0.3 * q, z + 0.05 - 0.04 * q], [x + 0.1 - 0.05 * q, y + 0.3 * q, z + 0.02 - 0.04 * q], 0.003, 0xb07a4a); } }
+      [[-0.4, 0.72], [-0.24, 0.78]].forEach(([u, v]) => { const [x, z] = spot(u, v), h = new T.Group(); h.position.set(x, y, z); h.rotation.y = face; g.add(h); bx(h, 0.08, 0.02, 0.08, 0x8a5a3c, 0, 0.01, 0); for (let i = 0; i < 3; i++) bx(h, 0.09, 0.04, 0.09, i % 2 ? 0xf4f1ea : 0xffe9a8, 0, 0.04 + i * 0.042, 0); bx(h, 0.1, 0.012, 0.1, 0x5b5f6e, 0, 0.17, 0); });
+      [[0.55, -0.52, 0xd93a3a], [0.5, -0.66, 0xffd43b]].forEach(([u, v, c]) => { const [x, z] = spot(u, v), b = new T.Group(); b.position.set(x, y, z); b.rotation.y = face + u; g.add(b); bx(b, 0.12, 0.06, 0.08, 0xc9a06a, 0, 0.03, 0); for (let i = 0; i < 6; i++) sph(b, 0.018, c, -0.04 + (i % 3) * 0.04, 0.065, -0.015 + Math.floor(i / 3) * 0.03); });
+      zones.orchard = { x: L.cx, z: L.cz, r: 0.78 * L.r, y };
     } else if (key === 'grove') {
-      // Native trees round the back and sides (the front stays open to see in), with ferns underneath.
-      on(ground(g, L, y, base), 'grove'); isleGrass(g, ctx, seed, L, y);
-      arc(L, 13, (x, z, a, i) => { if (Math.cos(a - L.a) > 0.35) return; species(g, x, y, z, ['kauri', 'pine', 'nikau', 'cabbage', 'oak'][i % 5], seed + i, 0.95); }, 0.14);
-      for (let i = 0; i < 8; i++) { const a = i * 1.7, f = new T.Group(); f.position.set(L.cx + Math.cos(a) * L.r * 0.55, y, L.cz + Math.sin(a) * L.r * 0.55); g.add(f); for (let q = 0; q < 5; q++) { const o = cn(f, 0.012, 0.12, 0x3f8a3f, 0, 0.04, 0, 4); o.rotation.set(Math.sin(q * 1.3) * 0.7, q * 1.26, Math.cos(q * 1.3) * 0.7); o.scale.z = 0.35; } }
-      zones.grove = { x: L.cx, z: L.cz, r: L.r * 0.62, y };
-    } else if (key === 'beach') {
-      // Grass at the back gives way to sand, which slopes gently down into the sea at the front: wet sand, shallows
-      // and foam where the waves lap.
-      const sand = new T.Color(0xf1d9a0), wet = new T.Color(0xc9ae78), grassC = new T.Color(lawnC), C2 = new T.Color();
-      const h = (x, z) => -0.095 * K.smooth01(0.32, 0.98, outward(L, x, z));
-      const col = (x, z, hh) => { const u = outward(L, x, z), toSand = K.smooth01(-0.2, 0.1, u); return C2.copy(grassC).lerp(sand, toSand).lerp(wet, K.smooth01(0.012, 0.035, -hh)).getHex(); };
-      on(ground(g, L, y, { ...base, h, col, side: 0xe0c48a }), 'beach');
-      isleGrass(g, ctx, seed, L, y, { dens: (x, z) => 1 - K.smooth01(-0.25, 0.02, outward(L, x, z)) });
-      const w = K.waterSheet(g, L.cx, L.cz, L.r + 0.05, y - 0.03, (x, z) => h(x, z) + 0.03, { night: ctx.night, deepAt: 0.07, foam: 0.014, shallow: 0x8ff0e6, deep: 0x1f8fd0, n: 56 }); w.userData.hab = 'beach';
-      [[0.3, 0.1], [-0.25, 0.05], [0.5, 0.3]].forEach(([dv, du], i) => { const [px, pz] = toWorld(L, du, dv); add(g, rough(new T.DodecahedronGeometry(0.05, 0), 0.01, seed + i), mat(0x8a8f96, { flat: true }), px, y + h(px, pz), pz); });
-      zones.beach = { x: L.cx + L.ox * L.r * 0.28, z: L.cz + L.oz * L.r * 0.28, r: L.r * 0.26, y };
-      zones.lawn = { x: L.cx - L.ox * L.r * 0.4, z: L.cz - L.oz * L.r * 0.4, r: L.r * 0.42, y };
+      // Native bush: a forest floor of moss and leaf litter, tall trees and tree ferns round the back and sides, ferns,
+      // a mossy fallen log and toadstools.
+      hRel = (x, z) => 0.012 * (nz(x, z, 7, seed) - 0.5);
+      on(ground(g, L, y, { ...base, lawnC: tone(0x3f5a2c), h: hRel, n: 56, habAt: () => 'grove', col: (x, z) => { const n0 = nz(x, z, 20, seed + 2); return tone(n0 > 0.62 ? 0x6b4a2a : n0 > 0.42 ? 0x3f5a2c : 0x33462a); }, layers: [[0.025, null], [0.1, 0x3a2a1c], [0.2, 0x5a3e28], [9, 0x8f6c4a]] }), 'grove');
+      isleGrass(g, ctx, seed, L, y, { dens: () => 0.22, tint: [0x2f4a24, 0x2a4420, 0x6a8a3a], ground: hRel });
+      arc(L, 16, (x, z, a, i) => { if (Math.cos(a - L.a) > 0.4) return; if (i % 3 === 1) treeFern(g, x, y + hRel(x, z), z, 1.1); else species(g, x, y + hRel(x, z), z, ['kauri', 'nikau', 'pine', 'cabbage', 'kauri'][i % 5], seed + i, 1.05); }, 0.13);
+      [[-0.45, -0.3, 'k'], [-0.5, 0.35, 'f'], [-0.12, -0.6, 'n'], [-0.2, 0.6, 'f']].forEach(([u, v, t], i) => { const [x, z] = spot(u, v); if (t === 'f') treeFern(g, x, y + hRel(x, z), z, 0.95); else species(g, x, y + hRel(x, z), z, t === 'k' ? 'kauri' : 'nikau', seed + 40 + i, 0.9); });
+      for (let i = 0; i < 16; i++) { const a = rr() * PI * 2, r0 = (0.3 + rr() * 0.55) * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, f = new T.Group(); f.position.set(x, y + hRel(x, z), z); g.add(f); for (let q = 0; q < 5; q++) { const o = cn(f, 0.012, 0.12, 0x3f8a3f, 0, 0.04, 0, 4); o.rotation.set(Math.sin(q * 1.3) * 0.7, q * 1.26, Math.cos(q * 1.3) * 0.7); o.scale.z = 0.35; } }
+      { const [x, z] = spot(0.18, -0.42), lg = cyl(g, 0.035, 0.04, 0.34, 0x6b4a2e, x, y + 0.03, z, 9); lg.rotation.set(0, face + 0.4, P2); const ms = bx(g, 0.3, 0.014, 0.05, 0x4f8a3a, x, y + 0.066, z); ms.rotation.y = face + 0.4 - P2; }
+      for (let i = 0; i < 7; i++) { const a = rr() * PI * 2, r0 = (0.2 + rr() * 0.6) * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, b = y + hRel(x, z); cyl(g, 0.005, 0.006, 0.03, 0xf4efe4, x, b + 0.015, z, 6); add(g, new T.SphereGeometry(0.017, 10, 6, 0, PI * 2, 0, P2), mat(i % 3 ? 0xd93a3a : 0xc98a4a), x, b + 0.028, z); }
+      zones.grove = { x: L.cx, z: L.cz, r: 0.6 * L.r, y };
     } else if (key === 'sky') {
-      // A smaller island with clouds drifting round its rock.
-      on(ground(g, L, y, base), 'sky'); isleGrass(g, ctx, seed, L, y);
+      // A cloud island: a pastel meadow, cloud bushes, glowing crystals, a rainbow over the back, little rocks orbiting
+      // it and clouds drifting round its rock.
+      hRel = (x, z) => 0.02 * (nz(x, z, 5, seed) - 0.5);
+      on(ground(g, L, y, { ...base, lawnC: tone(0xc7b4f0), h: hRel, n: 48, habAt: () => 'sky', col: (x, z) => tone(blend(0xc7b4f0, 0xf2c3e3, nz(x, z, 8, seed + 4))), layers: [[0.02, null], [0.12, 0xb7a6d8], [9, 0x9b8fc0]] }), 'sky');
+      isleGrass(g, ctx, seed, L, y, { tint: [0xbfa9f0, 0xa58fe6, 0xffe0f6], ground: hRel });
+      [[-0.5, -0.45], [-0.62, 0.3], [0.3, -0.62], [0.45, 0.55], [-0.2, 0.7], [-0.75, -0.05]].forEach(([u, v], i) => { const [x, z] = spot(u, v), b = y + hRel(x, z); for (let j = 0; j < 4; j++) sph(g, 0.05 + (j % 2) * 0.025, 0xffffff, x + Math.cos(j * 1.7 + i) * 0.05, b + 0.04 + (j % 2) * 0.03, z + Math.sin(j * 1.7 + i) * 0.05); });
+      const crys = [[-0.3, -0.2, 0xb9a6ff], [0.2, 0.4, 0xffb3e6], [-0.55, 0.55, 0x9fe8ff], [0.6, -0.15, 0xc5ffd8], [-0.1, -0.7, 0xffe28a]].map(([u, v, c]) => { const [x, z] = spot(u, v), o = add(g, new T.OctahedronGeometry(0.045, 0), mat(c, { e: c & 0x3f3f3f, flat: true }), x, y + hRel(x, z) + 0.07, z); o.scale.y = 1.8; return o; });
+      fx.push(t => crys.forEach((o, i) => { o.rotation.y = t * 0.6 + i; }));
+      { const [x, z] = spot(-0.62, 0); [0xff6b6b, 0xffa94d, 0xffe066, 0x69db7c, 0x4dabf7, 0x9775fa].forEach((c, i) => { const rb = tor(g, 0.52 - i * 0.022, 0.011, c, x, y - 0.05, z, PI); rb.rotation.y = face; rb.userData.noInk = true; }); }
+      const orbit = new T.Group(); g.add(orbit); [0, 1, 2].forEach(i => { const m = new T.Group(), a = i / 3 * PI * 2; m.position.set(Math.cos(a) * 1.25, -0.1 + i * 0.12, Math.sin(a) * 1.25); orbit.add(m); add(m, K.strata(rough(new T.ConeGeometry(0.07, 0.12, 7, 2).rotateX(PI), 0.02, seed + i), seed + i, ctx.rock), mat(0xffffff, { vc: true, flat: true }), 0, -0.06, 0); cyl(m, 0.072, 0.07, 0.015, tone(0xc7b4f0), 0, 0.005, 0, 10); });
       const puffs = new T.Group(); g.add(puffs);
-      for (let i = 0; i < 10; i++) { const a = i / 10 * PI * 2, rr = L.r * (0.8 + (i % 3) * 0.12), p = add(puffs, new T.SphereGeometry(0.11 + (i % 3) * 0.05, 12, 8), mat(0xffffff), Math.cos(a) * rr, -0.3 - (i % 2) * 0.28, Math.sin(a) * rr); p.scale.y = 0.6; p.userData.noInk = true; }
-      fx.push(t => { puffs.rotation.y = t * 0.08; });
-      zones.sky = { x: L.cx, z: L.cz, r: L.r * 0.75, y };
+      for (let i = 0; i < 10; i++) { const a = i / 10 * PI * 2, r0 = L.r * (0.8 + (i % 3) * 0.12), p = add(puffs, new T.SphereGeometry(0.11 + (i % 3) * 0.05, 12, 8), mat(0xffffff), Math.cos(a) * r0, -0.3 - (i % 2) * 0.28, Math.sin(a) * r0); p.scale.y = 0.6; p.userData.noInk = true; }
+      fx.push(t => { puffs.rotation.y = t * 0.08; orbit.rotation.y = -t * 0.12; });
+      zones.sky = { x: L.cx, z: L.cz, r: 0.75 * L.r, y };
+    } else if (key === 'beach') {
+      // A cove: dry sand and dunes at the back, a wiggly shoreline, then the sea over more than half the island. The bed
+      // banks down steeply from the shore, then slopes out to the deep. Waves roll in and break, and their wash runs up
+      // the sand. Under the surface: seagrass, kelp, coral, rocks and a school of fish. Pohutukawa and nikau shade the dunes.
+      sea = y - 0.03;
+      const shoreU = v => -0.12 + 0.07 * Math.sin(2.1 * v + 0.6) + 0.04 * Math.sin(4.7 * v + 1.9), out = (x, z) => outward(L, x, z) - shoreU(across(L, x, z));
+      hRel = (x, z) => {
+        const e = out(x, z);
+        if (e < 0) { const q = Math.min(1, -e / 0.6); return -0.03 + 0.06 * (1 - (1 - q) * (1 - q)) + 0.008 * (nz(x, z, 9, seed) - 0.5) * q; }
+        return -0.03 - 0.12 * K.smooth01(0, 0.2, e) - 0.24 * K.smooth01(0.12, 1.05, e) + 0.01 * (nz(x, z, 14, seed + 1) - 0.5) * K.smooth01(0.05, 0.25, e);
+      };
+      const colAt = (x, z, hh) => {
+        const dep = -0.03 - hh;
+        if (dep < -0.012) return tone(blend(0xf1d9a0, 0xe6cb8c, nz(x, z, 12, seed + 3)));
+        if (dep < 0.004) return tone(0xc9ae78);
+        if (dep > 0.06 && dep < 0.24 && nz(x, z, 10, seed + 5) > 0.62) return tone(0x4d7a3c);
+        return tone(blend(blend(0xd4bd86, 0x9d9a73, dep / 0.2), 0x6f7f6a, (dep - 0.2) / 0.2));
+      };
+      const E = L.r + 0.05, gnd = on(ground(g, L, y, { ...base, h: hRel, col: colAt, n: 88, base: -0.3, sea, lawnC: 0xf1d9a0, layers: SAND, water: { night, shallow: 0x7fe6e0, deep: 0x0f5c9a }, habAt: (x, z) => (hRel(x, z) > -0.026 ? 'beach' : null),
+        cap: a => { const x = L.cx + Math.cos(a) * E, z = L.cz + Math.sin(a) * E; return colAt(x, z, hRel(x, z) - 0.03); } }), 'beach');
+      caustics(g, gnd, sea); swash(g, gnd, sea, 0.012, 1.6);
+      on(K.waterSheet(g, L.cx, L.cz, E, sea, (x, z) => y + hRel(x, z) - sea, { night, clear: true, deepAt: 0.32, foam: 0.01, edge: 0.004, shallow: 0x7fe6e0, deep: 0x0f5c9a, n: 80, wave: { a: 0.012, k: 55, w: 1.6 }, brk: 1 }), 'sea');
+      const dry = [], wet = [];
+      for (let i = 0; i < 1400 && (dry.length < 120 || wet.length < 60); i++) { const a = rr() * PI * 2, r0 = Math.sqrt(rr()) * 0.92 * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, e = out(x, z), hh = hRel(x, z); if (e < -0.25 && dry.length < 120) dry.push([x, y + hh, z]); else if (e > 0.18 && sea - (y + hh) > 0.07 && wet.length < 60) wet.push([x, y + hh, z]); }
+      many(g, new T.ConeGeometry(0.005, 0.07, 3).translate(0, 0.035, 0), tone(0xa9b85a), dry.slice(0, 90).flatMap(([x, yy, z]) => [0, 1, 2].map(j => [x + (rr() - 0.5) * 0.02, yy, z + (rr() - 0.5) * 0.02, (rr() - 0.5) * 0.7, rr() * 6, 0.7 + rr() * 0.6])));
+      [[-0.82, -0.3, 'pohutukawa'], [-0.74, 0.42, 'nikau'], [-0.88, 0.12, 'nikau']].forEach(([u, v, t], i) => { const [x, z] = spot(u, v); species(g, x, y + hRel(x, z), z, t, seed + i, t === 'nikau' ? 1.15 : 1); });
+      { const [x, z] = spot(-0.42, -0.58), dw = cyl(g, 0.018, 0.024, 0.3, 0x9a8a78, x, y + hRel(x, z) + 0.015, z, 7); dw.rotation.set(0, face + 0.9, P2); }
+      for (let i = 0; i < 8; i++) { const [x, yy, z] = dry[90 + (i % 30)] || dry[i]; add(g, new T.ConeGeometry(0.012, 0.022, 7), mat([0xffd1dc, 0xf6e7c0, 0xffb38a][i % 3]), x, yy + 0.006, z).rotation.z = P2; }
+      wet.slice(0, 8).forEach(([x, yy, z], i) => add(g, rough(new T.DodecahedronGeometry(0.04 + (i % 3) * 0.02, 0), 0.012, seed + i), mat(i % 2 ? 0x7d8a84 : 0x6a7670, { flat: true }), x, yy + 0.01, z));
+      wet.slice(8, 14).forEach(([x, yy, z], i) => { const c = [0xff7aa2, 0xff9f43, 0xb07cff][i % 3]; for (let j = 0; j < 5; j++) { const a = j * 1.3 + i; cyl(g, 0.006, 0.01, 0.05 + (j % 3) * 0.02, c, x + Math.cos(a) * 0.025, yy + 0.03, z + Math.sin(a) * 0.025, 5).rotation.set(Math.cos(a) * 0.4, 0, Math.sin(a) * 0.4); } sph(g, 0.022, c, x, yy + 0.015, z, 1, 0.7, 1); });
+      weed(fx, g, wet.slice(14, 40), 0x3f7a3a, 0.14, seed + 9);
+      const [fx0, fz0] = spot(0.45, 0.05); school(fx, g, 7, fx0, fz0, 0.28, 0.22, (x, z) => { const b = y + hRel(x, z); return Math.min(sea - 0.035, b + (sea - b) * 0.5); }, 0xffb23a);
+      const [bx0, bz0] = spot(-0.52, 0), [wx0, wz0] = spot(0.42, 0);
+      zones.beach = { x: bx0, z: bz0, r: 0.34 * L.r, y, follow: true };
+      zones.sea = { x: wx0, z: wz0, r: 0.5 * L.r, y: sea, water: true };
+      zones.coast = { x: L.cx, z: L.cz, r: 0.88 * L.r, y };
+      zones.lawn = zones.beach;
+    } else if (key === 'lake') {
+      // A lake island: water right to the edge over a weedy bed that shelves down to a deep middle, reeds and lilies
+      // round the edge, and a wooden jetty out from the back with a rowboat tied at the end.
+      sea = y - 0.01;
+      const [qx, qz] = spot(0.12, -0.08);
+      hRel = (x, z) => { const d = Math.hypot(x - qx, z - qz) / L.r, a = Math.atan2(z - qz, x - qx), rs = 1 + 0.12 * Math.sin(2 * a + 0.4) + 0.07 * Math.sin(3 * a + 1.7); return -0.065 - 0.28 * (1 - K.smooth01(0.1, 0.95 * rs, d)) + 0.012 * (nz(x, z, 12, seed) - 0.5); };
+      const colAt = (x, z, hh) => { const dep = sea - y - hh; if (dep < 0.09) return tone(0x8a7a55); if (dep < 0.2 && nz(x, z, 12, seed + 5) > 0.58) return tone(0x4a6a35); return tone(blend(0x6a6a4a, 0x3a4436, (dep - 0.09) / 0.2)); };
+      const E = L.r + 0.05, gnd = ground(g, L, y, { ...base, h: hRel, col: colAt, n: 72, base: -0.32, sea, lawnC: 0x8a7a55, layers: MUD, water: { night, shallow: 0x8fd8c8, deep: 0x0f4d6a } });
+      caustics(g, gnd, sea);
+      on(K.waterSheet(g, L.cx, L.cz, E, sea, (x, z) => y + hRel(x, z) - sea, { night, clear: true, deepAt: 0.28, foam: 0.004, edge: 0.003, shallow: 0x8fd8c8, deep: 0x0f4d6a, n: 64 }), 'lake');
+      const J0 = -0.98, J1 = -0.22, JV = 0.1, JW = 0.075, deckY = sea + 0.035, len = (J1 - J0) * L.r, [jx, jz] = spot((J0 + J1) / 2, JV), onDeck = (x, z) => { const u = outward(L, x, z), v = across(L, x, z) - JV; return u > J0 && u < J1 && Math.abs(v) < JW; };
+      const jt = new T.Group(); jt.position.set(jx, 0, jz); jt.rotation.y = face; g.add(jt);
+      const deck = on(bx(jt, JW * 2 * L.r, 0.008, len, 0x8a6240, 0, deckY - 0.01, 0), 'jetty');
+      for (let q = 0; q * 0.034 < len; q++) bx(jt, JW * 2 * L.r + 0.01, 0.01, 0.028, q % 2 ? 0xb98a5a : 0xa77a4c, 0, deckY, -len / 2 + 0.017 + q * 0.034);
+      for (let q = 0; q <= 4; q++) { const zz = -len / 2 + 0.03 + q * (len - 0.06) / 4; [-1, 1].forEach(s => { const [wx, wz] = spot(J0 + (0.03 + q * (len - 0.06) / 4) / L.r, JV - s * JW), b = y + hRel(wx, wz); cyl(jt, 0.011, 0.011, deckY - b + 0.02, 0x5a3e28, s * (JW * L.r - 0.006), (deckY + b) / 2, zz, 7); }); }
+      [-1, 1].forEach(s => cyl(jt, 0.014, 0.016, 0.05, 0x5a3e28, s * (JW * L.r - 0.01), deckY + 0.025, len / 2 - 0.02, 8));
+      [-1, 1].forEach(s => stick(jt, [s * 0.025, deckY + 0.03, len / 2 + 0.005], [s * 0.025, sea - 0.08, len / 2 + 0.012], 0.004, 0xb0b4ba)); for (let q = 0; q < 4; q++) stick(jt, [-0.025, deckY - q * 0.035, len / 2 + 0.008], [0.025, deckY - q * 0.035, len / 2 + 0.008], 0.003, 0xb0b4ba);
+      cyl(jt, 0.006, 0.006, 0.18, 0x3b2a24, -JW * L.r + 0.012, deckY + 0.09, len / 2 - 0.05, 6); glow(jt, 0.015, 0xffd36b, -JW * L.r + 0.012, deckY + 0.19, len / 2 - 0.05);
+      const boat = new T.Group(); boat.position.set(JW * L.r + 0.09, sea, len / 2 - 0.12); jt.add(boat);
+      { const hull = add(boat, new T.CylinderGeometry(0.06, 0.06, 0.26, 14, 1, false, 0, PI), mat(0xd9653b, { ds: true }), 0, 0.005, 0); hull.rotation.set(P2, 0, P2); hull.scale.set(1, 1, 0.55); bx(boat, 0.1, 0.008, 0.03, 0xf1e3c6, 0, 0.02, 0); stick(boat, [-0.05, 0.03, -0.05], [-0.12, -0.01, 0.06], 0.004, 0xc9a06a); stick(jt, [JW * L.r, deckY, len / 2 - 0.08], [JW * L.r + 0.05, sea + 0.02, len / 2 - 0.12], 0.002, 0xeadfc4); }
+      fx.push(t => { boat.position.y = sea + Math.sin(t * 1.4) * 0.006; boat.rotation.z = Math.sin(t * 1.1) * 0.05; });
+      const ja = Math.atan2(jz - L.cz, jx - L.cx), bed = [];
+      ring(18, (a, i) => { if (Math.abs(Math.atan2(Math.sin(a - ja), Math.cos(a - ja))) < 0.4 || i % 4 === 3) return; const r0 = 0.88 * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, b = y + hRel(x, z); for (let j = 0; j < 4; j++) { const xx = x + Math.cos(j * 2.1) * 0.025, zz = z + Math.sin(j * 2.1) * 0.025, hh = sea - b + 0.09 + (j % 3) * 0.03; cyl(g, 0.004, 0.005, hh, 0x6b8a3a, xx, b + hh / 2, zz, 4); if (j % 2) cyl(g, 0.009, 0.009, 0.04, 0x6b4a2a, xx, b + hh - 0.01, zz, 6); } });
+      for (let i = 0; i < 12; i++) { const a = i * 0.83 + 0.3, r0 = (0.55 + (i % 3) * 0.1) * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0; if (onDeck(x, z)) continue; add(g, new T.CylinderGeometry(0.03, 0.03, 0.003, 9, 1, false, 0.4, PI * 1.8), mat(0x4caf50), x, sea + 0.003, z).userData.noInk = true; if (i % 4 === 0) sph(g, 0.012, 0xff9ec8, x, sea + 0.012, z, 1, 0.6, 1); }
+      for (let i = 0; i < 900 && bed.length < 60; i++) { const a = rr() * PI * 2, r0 = Math.sqrt(rr()) * 0.85 * L.r, x = L.cx + Math.cos(a) * r0, z = L.cz + Math.sin(a) * r0, b = y + hRel(x, z); if (sea - b > 0.06 && !onDeck(x, z)) bed.push([x, b, z]); }
+      bed.slice(0, 6).forEach(([x, b, z], i) => add(g, rough(new T.DodecahedronGeometry(0.035 + (i % 3) * 0.015, 0), 0.01, seed + i), mat(0x6f7268, { flat: true }), x, b + 0.01, z));
+      { const [x, b, z] = bed[6] || bed[0]; cyl(g, 0.025, 0.03, 0.26, 0x4a3a2a, x, b + 0.02, z, 8).rotation.set(0, 1.2, P2); }
+      weed(fx, g, bed.slice(7, 40), 0x3a6a35, 0.12, seed + 9);
+      school(fx, g, 6, L.cx + L.ox * 0.1, L.cz + L.oz * 0.1, 0.3, 0.24, (x, z) => { const b = y + hRel(x, z); return Math.min(sea - 0.03, b + (sea - b) * 0.45); }, 0xc9d4dc);
+      zones.lake = { x: L.cx, z: L.cz, r: 0.8 * L.r, y: sea, water: true };
+      zones.jetty = { x: jx, z: jz, r: len / 2, y: deckY + 0.005, not: (x, z) => !onDeck(x, z) };
+      zones.lawn = zones.jetty;
     }
-    return { L, zones, surf, tick: fx.length ? t => fx.forEach(f => f(t)) : null };
+    return { L, zones, surf, tick: fx.length ? t => fx.forEach(f => f(t)) : null, terrain: { h: (x, z) => y + hRel(x, z), sea } };
   }
 
   /* ---------- House styles ---------- */
@@ -547,10 +794,10 @@ window.ChorecastIsland = K => {
   // is its frame, and only the fence and the sky go on it.
   function dress(g, k, ctx) {
     const L = k.lookKeys || {}, { top, R } = ctx, fx = [], I = ctx.isle;
-    if (L.fence && FENCE[L.fence] && !(I && (I.key === 'farm' || I.key === 'stable'))) {
-      // Round the island's edge, leaving a gap at the front for the path (or, on the beach, the sand and the sea).
+    if (L.fence && FENCE[L.fence] && !(I && ['farm', 'stable', 'lake'].includes(I.key))) {
+      // Round the island's edge, leaving a gap at the front for the path (on the beach, just along the dunes at the back).
       const pts = [], cr = I ? I.r - 0.04 : R - 0.05, n = Math.round(cr * 34);
-      for (let i = 0; i < n; i++) { const a = i / n * PI * 2; if (I ? I.key === 'beach' && Math.cos(a - I.a) > -0.15 : Math.abs(a - P2) < 0.14) continue; pts.push([Math.cos(a) * cr, Math.sin(a) * cr, a]); }
+      for (let i = 0; i < n; i++) { const a = i / n * PI * 2; if (I ? I.key === 'beach' && Math.cos(a - I.a) > -0.45 : Math.abs(a - P2) < 0.14) continue; pts.push([Math.cos(a) * cr, Math.sin(a) * cr, a]); }
       const f = new T.Group(); f.position.y = top; g.add(f); pts.forEach(([x, z, a], i) => FENCE[L.fence](f, x, z, a, i));
       if (L.fence === 'rustic') pts.forEach(([x, z], i) => { const nb = pts.find(([x2, z2], j) => j > i && Math.hypot(x2 - x, z2 - z) < 0.16); if (nb) [0.05, 0.085].forEach(h => stick(f, [x, h, z], [nb[0], h, nb[1]], 0.006, 0xa86f3e)); });
     }
@@ -579,5 +826,5 @@ window.ChorecastIsland = K => {
   const LAWN = { clover: [0x2f8a3f, 0x1f6b2a, 0x8fd45a], golden: [0x9fb33a, 0x6b7a2a, 0xe8e07a], autumn: [0xb98b3a, 0x7a5a2a, 0xe8a85a], sand: [0xe7d3a1, 0xc8b07a, 0xf6e7c0], meadow: [0x4c9a3a, 0x2a6b2a, 0xc4e86a] };
   // Cliff colours: middle, dark and light bands.
   const ROCK = { sandstone: [0xe2b77d, 0xc8925a, 0xf1d3a0], granite: [0x9aa0a8, 0x6f757d, 0xc8cdd3], volcanic: [0x3b3a40, 0x26252a, 0x5a5960], crystal: [0x9fe3ff, 0x6fb8e0, 0xdff6ff], gold: [0xffc93c, 0xd99a1a, 0xffe58a] };
-  return { items: M, species, land, isle, toLocal, toWorld, ground, isleGrass, arc, style, dress, LAWN, ROCK, glow, emo };
+  return { items: M, species, land, isle, toLocal, toWorld, ground, skirt, waterWall, caustics, isleGrass, arc, style, dress, LAWN, ROCK, glow, emo };
 };
