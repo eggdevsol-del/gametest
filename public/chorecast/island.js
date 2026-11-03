@@ -3,7 +3,7 @@
    window.ChorecastIsland(kit) with its own drawing helpers, so everything here shares the island's toon shading and
    ink outlines. Models face +z, sit on y = 0 and use the same scale as the first shop (an animal is about 0.2 tall). */
 window.ChorecastIsland = K => {
-  const { T, add, mat, SM, sph, cyl, bx, cn, eyes, rough, sprite, emojiTex, GOLD, horse, barn, WOOD, DARK } = K;
+  const { T, add, mat, SM, sph, cyl, bx, cn, eyes, merged, rough, sprite, emojiTex, GOLD, horse, barn, WOOD, DARK } = K;
   const PI = Math.PI, P2 = PI / 2;
   const ring = (n, f) => { for (let i = 0; i < n; i++) f(i / n * PI * 2, i); };
   const tor = (g, r, t, c, x, y, z, arc = PI * 2) => add(g, new T.TorusGeometry(r, t, 8, 28, arc), SM(c), x, y, z);
@@ -12,7 +12,7 @@ window.ChorecastIsland = K => {
   const stick = (g, a, b, r, c) => { const v = new T.Vector3(b[0] - a[0], b[1] - a[1], b[2] - a[2]), o = add(g, new T.CylinderGeometry(r, r, v.length(), 6), mat(c), (a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2); o.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), v.normalize()); return o; };
   const glow = (g, r, c, x, y, z) => { const o = add(g, new T.SphereGeometry(r, 10, 8), mat(c, { e: c }), x, y, z); o.userData.noInk = true; return o; };
   const emo = (g, e, s, x, y, z) => { const sp = sprite(emojiTex(e), s); sp.position.set(x, y, z); g.add(sp); return sp; };
-  const blob = (g, r, c, x, y, z, seed = 1) => add(g, rough(new T.IcosahedronGeometry(r, 1), r * 0.15, seed), mat(c), x, y, z);
+  const blob = (g, r, c, x, y, z, seed = 1) => add(g, rough(new T.SphereGeometry(r, 16, 12), r * 0.07, seed), SM(c), x, y, z);
   // Pools, ponds and troughs on shop items: the island's water shader at a fixed depth.
   const WM = {}, water = c => WM[c || 0] || (WM[c || 0] = K.waterMat({ flat: 0.05, deepAt: 0.08, scale: 14, ...(c ? { shallow: c } : {}) }));
   const tick = (g, f) => { const own = g.userData.tick; g.userData.tick = own ? (t, dt) => { own(t, dt); f(t, dt); } : f; };
@@ -60,9 +60,9 @@ window.ChorecastIsland = K => {
     else if (o.tail === 'lyre') { [-1, 1].forEach(sx => tilt(tor(g, 0.06 * s, 0.006 * s, tc, sx * 0.03 * s, by + 0.08 * s, -0.08 * s, PI), 0, P2, sx * 0.3)); for (let i = -2; i <= 2; i++) tilt(cyl(g, 0.002 * s, 0.002 * s, 0.15 * s, 0xd8c9a8, i * 0.012 * s, by + 0.08 * s, -0.08 * s, 3), -0.3, 0, i * 0.12); }
     else if (o.tail === 'turkey') ring(9, (a, i) => { if (i > 4) return; const ang = (i - 2) * 0.36; tilt(sph(g, 0.03 * s, i % 2 ? 0x8a5a3c : 0xc8843c, Math.sin(ang) * 0.07 * s, by + 0.05 * s + Math.cos(ang) * 0.07 * s, -0.06 * s, 0.35, 1.6, 0.25), 0, 0, -ang); });
     else tilt(cn(g, 0.018 * s, 0.05 * s, tc, 0, by + 0.01 * s, -0.065 * s, 5), -P2 - 0.4);
-    if (o.bigEyes) [-1, 1].forEach(sx => { sph(g, hr * 0.32, 0xffd43b, sx * hr * 0.42, hy + hr * 0.12, hz + hr * 0.78, 1, 1, 0.4); sph(g, hr * 0.15, 0x1b1b2a, sx * hr * 0.42, hy + hr * 0.12, hz + hr * 0.9); });
+    if (o.bigEyes) { [-1, 1].forEach(sx => sph(g, hr * 0.32, 0xffd43b, sx * hr * 0.42, hy + hr * 0.12, hz + hr * 0.78, 1, 1, 0.4)); eyes(g, hy + hr * 0.12, hz + hr * 0.9, hr * 0.42, hr * 0.15); }
     else eyes(g, hy + hr * 0.2, hz + hr * 0.75, hr * 0.5, 0.006 * s);
-    [-1, 1].forEach(sx => cyl(g, 0.005 * s, 0.005 * s, leg + 0.02 * s, o.legC || 0xffa94d, sx * 0.02 * s, (leg + 0.02 * s) / 2, 0, 5));
+    [-1, 1].forEach(sx => { const L = leg + 0.02 * s; add(g, merged([[new T.CylinderGeometry(0.005 * s, 0.005 * s, L, 8), 0, L / 2, 0], ...[-0.55, 0, 0.55].map(a => [new T.SphereGeometry(0.0045 * s, 8, 6), Math.sin(a) * 0.009 * s, 0.003 * s, Math.cos(a) * 0.009 * s, 0, a, 0, 0.7, 0.5, 2.2])]), mat(o.legC || 0xffa94d), sx * 0.02 * s, 0, 0); });
     if (o.flap) tick(g, t => wings.forEach((w, i) => { w.rotation.z = (i ? -1 : 1) * (0.2 + Math.sin(t * 10) * 0.4); }));
     return { hy, hz, hr, by, wings };
   }
@@ -140,11 +140,20 @@ window.ChorecastIsland = K => {
     echidna: g => spiky(g, { c: 0x3b3430, spine: 0xe9dcb8, face: 0x3b3430, snout: true, s: 1.1 }),
     wallaby: g => roo(g, { c: 0x8a8070, belly: 0xc9c0b0, s: 0.85 }),
     wombat: g => quad(g, { c: 0x7a6250, s: 1.25, len: 1.15, leg: 0.025, ears: 'round', tail: 'stub', snout: 0x5a4a40, snoutL: 0.7, hs: 1.1 }),
-    emu: g => bird(g, { c: 0x6b5a4a, belly: 0x7a6a5a, head: 0x3b4a6a, neckC: 0x5a6a8a, beakC: 0x2b2b35, s: 1.4, neck: 0.12, leg: 0.13, legC: 0x6b5a4a, tail: 'short' }),
+    emu: g => {
+      const body = 0x5e4e40, shag = 0x6f5d4c;
+      sph(g, 0.1, body, 0, 0.27, 0, 0.85, 0.8, 1.15); [[0.05, 0.3, -0.03], [-0.05, 0.3, -0.03], [0, 0.32, -0.07], [0.035, 0.25, -0.09], [-0.035, 0.25, -0.09]].forEach(([x, y, z], i) => sph(g, 0.05, i % 2 ? shag : body, x, y, z, 1, 0.7, 1.3));
+      [-1, 1].forEach(sx => tilt(sph(g, 0.03, shag, sx * 0.03, 0.22, -0.13, 0.5, 0.5, 1.6), 0.6, 0, 0));
+      const nk = [[0, 0.33, 0.07, 0.022, 0.4], [0, 0.4, 0.1, 0.018, 0.15], [0, 0.46, 0.105, 0.016, -0.1]];
+      nk.forEach(([x, y, z, r, rx]) => tilt(cyl(g, r * 0.85, r, 0.08, 0x5a6a8a, x, y, z, 12), rx));
+      sph(g, 0.032, 0x3b4a6a, 0, 0.51, 0.115, 0.95, 0.9, 1.2); tilt(cn(g, 0.012, 0.032, 0x2b2b35, 0, 0.505, 0.155, 10), P2 + 0.15);
+      eyes(g, 0.52, 0.135, 0.02, 0.006);
+      [-1, 1].forEach(sx => add(g, merged([[new T.CylinderGeometry(0.013, 0.011, 0.12, 12), 0, 0.17, 0.005], [new T.CylinderGeometry(0.009, 0.008, 0.11, 12), 0, 0.06, 0.02, -0.15], ...[-0.5, 0, 0.5].map(a => [new T.SphereGeometry(0.008, 8, 6), Math.sin(a) * 0.016, 0.005, 0.03 + Math.cos(a) * 0.016, 0, a, 0, 0.6, 0.5, 2.4])]), mat(0x7a6a56), sx * 0.035, 0, 0));
+    },
     kangaroo: g => roo(g, { c: 0xb5703a, belly: 0xe8c08a, s: 1.15, joey: true }),
     lyrebird: g => bird(g, { c: 0x7a5a3a, belly: 0x9c7a5a, head: 0x6b4a2a, beakC: 0x2b2b35, s: 1.2, tail: 'lyre', tailC: 0xa86f3e, leg: 0.05 }),
     // ---- Beach
-    starfish: g => { const c = 0xff8c42; ring(5, a => { const o = cn(g, 0.025, 0.08, c, Math.cos(a) * 0.035, 0.012, Math.sin(a) * 0.035, 5); o.rotation.set(0, -a, P2); o.scale.y = 1; o.scale.z = 0.5; }); sph(g, 0.028, c, 0, 0.012, 0, 1, 0.5, 1); ring(5, a => sph(g, 0.006, 0xffd8a8, Math.cos(a) * 0.03, 0.022, Math.sin(a) * 0.03)); },
+    starfish: g => { const c = 0xff8c42; sph(g, 0.032, c, 0, 0.012, 0, 1, 0.45, 1); const dots = [[new T.SphereGeometry(0.007, 8, 6), 0, 0.021, 0]]; ring(5, a => { const o = sph(g, 0.03, c, Math.cos(a) * 0.045, 0.011, Math.sin(a) * 0.045, 0.5, 0.36, 1.7); o.rotation.y = P2 - a; [0.03, 0.058].forEach((d, j) => dots.push([new T.SphereGeometry(0.0055 - j * 0.001, 8, 6), Math.cos(a) * d, 0.02 - j * 0.002, Math.sin(a) * d])); }); add(g, merged(dots), SM(0xffd8a8)); },
     crab: g => { sph(g, 0.05, 0xe5533d, 0, 0.04, 0, 1.3, 0.6, 1); [-1, 1].forEach(s => { sph(g, 0.022, 0xe5533d, s * 0.075, 0.045, 0.04, 1, 0.7, 1.2); tilt(cn(g, 0.012, 0.03, 0xff8a6a, s * 0.08, 0.06, 0.06, 5), 0.6, 0, s * 0.3); for (let i = 0; i < 3; i++) tilt(cyl(g, 0.004, 0.004, 0.06, 0xc8443a, s * 0.06, 0.02, -0.025 + i * 0.022, 4), 0, 0, s * 1.2); cyl(g, 0.004, 0.004, 0.03, 0xc8443a, s * 0.018, 0.075, 0.03, 4); sph(g, 0.008, 0x1b1b2a, s * 0.018, 0.092, 0.03); }); },
     hermitcrab: g => { for (let i = 0; i < 4; i++) sph(g, 0.05 - i * 0.011, i % 2 ? 0xf1e3c4 : 0xe0b48a, -0.01 + i * 0.006, 0.05 + i * 0.022, -0.02 - i * 0.008); sph(g, 0.025, 0xff8a5a, 0, 0.03, 0.05, 1.2, 0.8, 1); [-1, 1].forEach(s => { sph(g, 0.012, 0xff8a5a, s * 0.03, 0.03, 0.07); cyl(g, 0.003, 0.003, 0.025, 0xc8443a, s * 0.012, 0.055, 0.06, 4); sph(g, 0.006, 0x1b1b2a, s * 0.012, 0.07, 0.06); }); },
     seal: g => { tilt(sph(g, 0.07, 0x7a8090, 0, 0.06, 0, 0.85, 0.75, 1.6), -0.35); sph(g, 0.045, 0x8a909f, 0, 0.13, 0.08); sph(g, 0.02, 0xa8aebb, 0, 0.12, 0.12, 1.2, 0.8, 1); sph(g, 0.007, 0x222222, 0, 0.125, 0.14); [-1, 1].forEach(s => { tilt(sph(g, 0.02, 0x6a7080, s * 0.055, 0.04, 0.05, 1.8, 0.4, 1), 0, 0, s * 0.4); for (let i = 0; i < 2; i++) tilt(cyl(g, 0.0015, 0.0015, 0.05, 0xffffff, s * 0.035, 0.12 - i * 0.008, 0.13, 3), 0, 0, P2); }); tilt(sph(g, 0.02, 0x6a7080, 0, 0.02, -0.12, 2, 0.4, 1), 0, 0, 0); eyes(g, 0.145, 0.115, 0.02, 0.008); },
@@ -212,7 +221,15 @@ window.ChorecastIsland = K => {
     skateramp: g => { const sh = new T.Shape(); sh.moveTo(-0.2, 0); for (let i = 0; i <= 16; i++) { const a = i / 16 * PI; sh.lineTo(-Math.cos(a) * 0.2, 0.14 - Math.sin(a) * 0.12); } sh.lineTo(0.2, 0); sh.closePath(); add(g, new T.ExtrudeGeometry(sh, { depth: 0.18, bevelEnabled: false }), mat(0x9aa7b5), 0, 0, -0.09); [-0.2, 0.2].forEach(x => bx(g, 0.02, 0.01, 0.18, 0xff6b35, x, 0.145, 0)); },
     flyingfox: g => { cyl(g, 0.014, 0.014, 0.42, WOOD, -0.25, 0.21, 0, 6); cyl(g, 0.014, 0.014, 0.26, WOOD, 0.25, 0.13, 0, 6); stick(g, [-0.25, 0.4, 0], [0.25, 0.25, 0], 0.003, 0x495057); const s = new T.Group(); g.add(s); cyl(s, 0.002, 0.002, 0.12, 0xeadfc4, 0, -0.06, 0, 3); cyl(s, 0.03, 0.03, 0.012, 0xff6b6b, 0, -0.12, 0, 12); tick(g, t => { const p = (Math.sin(t * 0.8) + 1) / 2; s.position.set(-0.23 + p * 0.46, 0.39 - p * 0.14, 0); }); },
     bouncy: g => { bx(g, 0.36, 0.06, 0.3, 0x4dabf7, 0, 0.03, 0); ring(4, (a, i) => { const x = (i % 2 ? 1 : -1) * 0.16, z = (i < 2 ? 1 : -1) * 0.13; cyl(g, 0.035, 0.035, 0.24, [0xff6b6b, 0xffd43b][i % 2], x, 0.15, z, 12); cn(g, 0.04, 0.06, [0xffd43b, 0xff6b6b][i % 2], x, 0.3, z, 12); }); [[0, -0.13, 0.36, 0.14], [-0.16, 0, 0.3, 0.12], [0.16, 0, 0.3, 0.12]].forEach(([x, z, w, h], i) => tilt(bx(g, i ? 0.02 : w, h, i ? w * 0.8 : 0.02, 0xff8fb1, x, 0.06 + h / 2, z), 0)); const top = bx(g, 0.3, 0.012, 0.24, 0x74c0fc, 0, 0.065, 0); tick(g, t => { top.position.y = 0.065 + Math.abs(Math.sin(t * 4)) * 0.006; }); },
-    pumptrack: g => { add(g, new T.TorusGeometry(0.2, 0.04, 8, 32), mat(0xb08a5a), 0, 0.01, 0).scale.set(1.3, 1, 0.35); add(g, new T.TorusGeometry(0.2, 0.04, 8, 32), mat(0xb08a5a), 0, 0.01, 0).rotation.x = P2; ring(6, a => sph(g, 0.04, 0xa07a4a, Math.cos(a) * 0.2, 0.02, Math.sin(a) * 0.2, 1, 0.5, 1)); const b = new T.Group(); g.add(b); cyl(b, 0.02, 0.02, 0.004, 0x222222, -0.025, 0.04, 0, 12).rotation.x = P2; cyl(b, 0.02, 0.02, 0.004, 0x222222, 0.025, 0.04, 0, 12).rotation.x = P2; bx(b, 0.05, 0.005, 0.004, 0x4dabf7, 0, 0.05, 0); tick(g, t => { const a = t * 0.9; b.position.set(Math.cos(a) * 0.2, 0.02 + Math.abs(Math.sin(a * 3)) * 0.02, Math.sin(a) * 0.2); b.rotation.y = -a; }); },
+    pumptrack: g => {
+      add(g, new T.CylinderGeometry(0.2, 0.2, 0.01, 40), mat(0x6fcf5a), 0, 0.005, 0).scale.set(1.25, 1, 0.82);
+      const tr = add(g, new T.TorusGeometry(0.21, 0.05, 12, 64), SM(0xb08a5a), 0, 0.012, 0); tr.rotation.x = P2; tr.scale.set(1.35, 1, 0.38);
+      ring(8, (a, i) => { if (i % 4 === 0) return; sph(g, 0.034, 0xa07a4a, Math.cos(a) * 0.21 * 1.35, 0.02, Math.sin(a) * 0.21, 1, 0.6, 1).rotation.y = -a; });
+      [-1, 1].forEach(sx => { const b = add(g, new T.TorusGeometry(0.11, 0.035, 10, 24, PI), SM(0x9a7448), sx * 0.2, 0.022, 0); b.rotation.set(P2, 0, sx < 0 ? P2 : -P2); b.scale.set(1, 1, 0.8); });
+      cyl(g, 0.004, 0.004, 0.09, 0xffffff, -0.3, 0.045, 0.18, 8); bx(g, 0.05, 0.03, 0.003, 0xff6b6b, -0.275, 0.08, 0.18);
+      const b = new T.Group(); g.add(b); [-1, 1].forEach(sx => cyl(b, 0.02, 0.02, 0.004, 0x222222, sx * 0.025, 0.045, 0, 16).rotation.x = P2); bx(b, 0.05, 0.005, 0.004, 0x4dabf7, 0, 0.055, 0); sph(b, 0.014, 0xffc9a8, 0, 0.095, 0); sph(b, 0.015, 0xff6b6b, 0, 0.1, 0, 1, 0.6, 1);
+      tick(g, t => { const a = t * 0.9; b.position.set(Math.cos(a) * 0.21 * 1.35, 0.02 + Math.abs(Math.sin(a * 3)) * 0.02, Math.sin(a) * 0.21); b.rotation.y = -a; });
+    },
     waterslide: g => { bx(g, 0.12, 0.42, 0.12, 0xffd43b, -0.18, 0.21, -0.1); bx(g, 0.14, 0.02, 0.14, 0xff6b35, -0.18, 0.43, -0.1); for (let i = 0; i < 14; i++) { const t = i / 13, a = t * PI * 1.2, x = -0.18 + Math.sin(a) * 0.15 + t * 0.2, z = -0.1 + (1 - Math.cos(a)) * 0.12, y = 0.42 - t * 0.38; add(g, new T.CylinderGeometry(0.045, 0.045, 0.05, 10, 1, true, 0, PI), mat(0x4dabf7, { ds: true }), x, y, z).rotation.set(P2, 0, a); } add(g, new T.CylinderGeometry(0.15, 0.15, 0.05, 24), mat(0x74c0fc), 0.12, 0.025, 0.2); add(g, new T.CylinderGeometry(0.14, 0.14, 0.01, 24), water(), 0.12, 0.05, 0.2); },
     gokart: g => { tor(g, 0.32, 0.05, 0x495057, 0, 0.01, 0).scale.set(1, 0.55, 1); add(g, new T.TorusGeometry(0.32, 0.05, 6, 40), mat(0x495057), 0, 0.01, 0).rotation.x = P2; ring(16, (a, i) => bx(g, 0.03, 0.025, 0.03, i % 2 ? 0xe03131 : 0xffffff, Math.cos(a) * 0.39, 0.012, Math.sin(a) * 0.39)); const k = new T.Group(); g.add(k); bx(k, 0.07, 0.025, 0.045, 0xffd43b, 0, 0.04, 0); [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => tilt(cyl(k, 0.012, 0.012, 0.01, 0x222222, sx * 0.03, 0.025, sz * 0.025, 10), P2)); sph(k, 0.014, 0xff6b9d, -0.005, 0.07, 0); tick(g, t => { const a = t * 1.3; k.position.set(Math.cos(a) * 0.32, 0, Math.sin(a) * 0.32); k.rotation.y = -a; }); },
     carousel: g => { disc(g, 0.26, 0xf1e3c4, 0, 0.02, 0, 0.04, 28); cyl(g, 0.02, 0.02, 0.5, 0xffc93c, 0, 0.27, 0, 10); const r = new T.Group(); g.add(r); cn(r, 0.3, 0.14, 0xff6b9d, 0, 0.56, 0, 16); for (let i = 0; i < 16; i++) { const a = i / 16 * PI * 2; bx(r, 0.012, 0.03, 0.06, i % 2 ? 0xffffff : 0xff6b9d, Math.cos(a) * 0.28, 0.48, Math.sin(a) * 0.28).rotation.y = -a; } const horses = []; ring(4, a => { const h = new T.Group(); h.position.set(Math.cos(a) * 0.18, 0.12, Math.sin(a) * 0.18); h.rotation.y = -a; r.add(h); cyl(h, 0.004, 0.004, 0.36, 0xffd43b, 0, 0.12, 0, 4); horse(h, [0xffffff, 0xffd6e8, 0xd6ecff, 0xfff3bf][Math.round(a) % 4], 0xffc93c, false); h.children.slice(1).forEach(c => c.position.y -= 0.03); horses.push(h); }); tick(g, t => { r.rotation.y = t * 0.6; horses.forEach((h, i) => { h.position.y = 0.12 + Math.sin(t * 2 + i * 1.5) * 0.03; }); }); },
@@ -230,7 +247,16 @@ window.ChorecastIsland = K => {
     hydrangeas: g => { blob(g, 0.08, 0x3d8b40, 0, 0.06, 0, 43); [[0, 0.11, 0.03, 0x74a7ff], [0.06, 0.09, 0.04, 0xc084fc], [-0.06, 0.09, 0.02, 0xff8fb1]].forEach(([x, y, z, c]) => { for (let k = 0; k < 6; k++) sph(g, 0.016, c, x + Math.cos(k) * 0.02, y + (k % 2) * 0.012, z + Math.sin(k) * 0.02); }); },
     cactus: g => { cyl(g, 0.12, 0.1, 0.06, 0xc0604a, 0, 0.03, 0, 10); sph(g, 0.04, 0x40a058, 0, 0.16, 0, 1, 2.6, 1); [-1, 1].forEach(s => { tilt(sph(g, 0.022, 0x40a058, s * 0.05, 0.17, 0, 1, 1.8, 1), 0, 0, -s * 0.3); }); sph(g, 0.014, 0xff6b9d, 0, 0.27, 0); },
     harakeke: g => { for (let i = 0; i < 12; i++) { const a = i * 0.52, o = cn(g, 0.012, 0.3, i % 2 ? 0x3d6b3a : 0x527a3a, Math.cos(a) * 0.02, 0.14, Math.sin(a) * 0.02, 4); o.rotation.set(Math.sin(a) * 0.35, 0, -Math.cos(a) * 0.35); o.scale.z = 0.3; } for (let i = 0; i < 2; i++) { cyl(g, 0.004, 0.004, 0.4, 0x6b4a3a, 0.02 - i * 0.04, 0.2, 0, 4); sph(g, 0.014, 0xc0392b, 0.02 - i * 0.04, 0.4, 0); } },
-    ponga: g => { cyl(g, 0.025, 0.035, 0.32, 0x4a3328, 0, 0.16, 0, 7); ring(9, a => { const f = new T.Group(); f.position.set(0, 0.32, 0); f.rotation.y = -a; g.add(f); tilt(bx(f, 0.022, 0.006, 0.24, 0x2f7d3f, 0, -0.03, 0.12), 0.35); }); },
+    ponga: g => {
+      cyl(g, 0.026, 0.036, 0.32, 0x4a3328, 0, 0.16, 0, 12); for (let i = 0; i < 5; i++) sph(g, 0.03, 0x5a4030, 0, 0.04 + i * 0.06, 0, 1, 0.55, 1);
+      // Each frond arches up and out, then droops, in five segments with a pair of leaflets on each.
+      const dark = [], light = [], box = (w, h, d) => new T.BoxGeometry(w, h, d);
+      ring(9, a => { let y = 0, z = 0, ang = -0.75; const fd = [], fl = [];
+        for (let j = 0; j < 5; j++) { const len = 0.06 - j * 0.006, mx = z + Math.cos(ang) * len / 2, my = y - Math.sin(ang) * len / 2, L = j < 2 ? fd : fl; L.push([box(0.007, 0.004, len), 0, my, mx, ang]); for (const sx of [-1, 1]) L.push([box(0.034 - j * 0.005, 0.003, 0.016), sx * (0.017 - j * 0.0025), my, mx, ang, sx * 0.25, sx * 0.25]); y -= Math.sin(ang) * len; z += Math.cos(ang) * len; ang += 0.42; }
+        dark.push([merged(fd).rotateY(-a), 0, 0.32, 0]); light.push([merged(fl).rotateY(-a), 0, 0.32, 0]); });
+      add(g, merged(dark), mat(0x2f7d3f)); add(g, merged(light), mat(0x4caf50));
+      [-1, 1].forEach(sx => tilt(tor(g, 0.014, 0.004, 0x6fbf5a, sx * 0.012, 0.35, 0, PI * 1.5), 0, P2, sx * 0.4));
+    },
     bamboo: g => { for (let i = 0; i < 5; i++) { const x = (i % 3 - 1) * 0.04, z = (i > 2 ? 0.03 : -0.02), h = 0.35 + (i % 3) * 0.07; cyl(g, 0.01, 0.01, h, 0x9fbf4a, x, h / 2, z, 6); for (let k = 1; k < 4; k++) cyl(g, 0.011, 0.011, 0.006, 0x7a9a3a, x, h * k / 4, z, 6); tilt(bx(g, 0.01, 0.003, 0.07, 0x5f9a3a, x + 0.03, h * 0.85, z), 0.4, 0, 0.5); } },
     hedge: g => { for (let i = 0; i < 4; i++) blob(g, 0.07, 0x2f7d3f, (i - 1.5) * 0.09, 0.07, 0, 50 + i); bx(g, 0.34, 0.08, 0.1, 0x2f7d3f, 0, 0.05, 0); g.userData.shape = true; },
     topiary: g => { cyl(g, 0.06, 0.05, 0.06, 0xc0604a, 0, 0.03, 0, 10); cyl(g, 0.008, 0.008, 0.1, DARK, 0, 0.1, 0, 5); sph(g, 0.08, 0x2f7d3f, 0, 0.2, 0); g.userData.shape = true; },
