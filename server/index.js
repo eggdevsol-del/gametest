@@ -9,13 +9,13 @@ import { randomUUID, createHash, X509Certificate } from 'node:crypto';
 import zlib from 'node:zlib';
 import { openDb, migrate } from './db.js';
 import { hashPassword, verifyPassword, newToken, sha256, wordCode, digitCode, recoveryCode, parseCookies, sessionCookie, limited, hitCount, validEmail } from './auth.js';
-import { checkKidWrite } from './guard.js';
+import { checkKidWrite, checkPlanWrite, same } from './guard.js';
 import { hash as fnv } from './market.js';
 import { runHousekeeping } from './housekeeping.js';
 import { sendMail, mailReady } from './mail.js';
 import { makeErrors } from './errors.js';
 import { verifyAppleJws } from './appstore.js';
-import { PAYWALL, PRODUCTS, PLANS, FOUNDING_SEATS, planOf } from './plans.js';
+import { PAYWALL, PRODUCTS, PLANS, FOUNDING_SEATS, WELCOME_DAYS, planOf, clubPrize } from './plans.js';
 import { notify } from './push.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -192,6 +192,8 @@ const dropGuidePhotos = (t, familyId, ids) => (ids.length ? t.q(`delete from pho
 const SERVER_OWNED = { family: ['pinSet'], kids: ['pin'] };
 function keepServerOwned(col, prev, data) {
   if (col === 'family') delete data.pinHash;
+  // XP bought in the shop and the Island Club are only ever set by a purchase.
+  if (col === 'kids' && data.island && typeof data.island === 'object') { const pi = (prev && prev.island) || {}; for (const k of ['paidXp', 'club']) { if (pi[k] != null) data.island[k] = pi[k]; else delete data.island[k]; } }
   for (const k of SERVER_OWNED[col] || []) { if (prev && prev[k]) data[k] = true; else delete data[k]; }
 }
 
@@ -200,8 +202,10 @@ async function writeDoc(s, col, id, body, merge, clientId, system = false) {
   const C = COLS[col]; if (!C) fail(404, 'Unknown collection.', 'bad_path');
   let before = null;
   if (!body || typeof body !== 'object' || Array.isArray(body)) fail(400, 'Expected an object.', 'bad_body');
-  // The free plan's kid limit, checked before the transaction (the embedded database has one connection).
-  if (PAYWALL && !system && col === 'kids' && !body.example && !(await db.query('select 1 from kids where family_id = $1 and id = $2', [s.family_id, id])).rows.length) await needRoom(s.family_id, 'kids');
+  // What the family's plan has, and the free plan's kid limit, found before the transaction (the embedded database has
+  // one connection).
+  const plan = !system && (col === 'kids' || col === 'growth' || col === 'family') ? await planOf(db, s.family_id) : null;
+  if (plan && col === 'kids' && !body.example && plan.limits.kids < 99 && !(await db.query('select 1 from kids where family_id = $1 and id = $2', [s.family_id, id])).rows.length) await needRoom(s.family_id, 'kids');
   const out = await db.tx(async t => {
     const cur = C.single
       ? (await t.q('select data, version from family_settings where family_id = $1 for update', [s.family_id])).rows[0]
@@ -210,6 +214,21 @@ async function writeDoc(s, col, id, body, merge, clientId, system = false) {
     if (!system) checkWrite(s, col, body, prev);
     const data = merge ? deepMerge(prev || {}, body) : { ...body };
     if (!system) keepServerOwned(col, prev, data);
+    if (plan) {
+      const bad = checkPlanWrite(col, prev, data, plan); if (bad) fail(402, bad.message, bad.code);
+      // Waking a resting kid needs room in the plan.
+      if (col === 'kids' && prev && prev.resting && !data.resting) {
+        const n = (await t.q(`select count(*)::int as n from kids where family_id = $1 and id <> $2 and coalesce(data->>'example', '') <> 'true' and coalesce(data->>'resting', '') <> 'true'`, [s.family_id, id])).rows[0].n;
+        if (n >= plan.limits.kids) fail(402, `The ${plan.limits.name} plan has room for ${plan.limits.kids} kids at a time. Rest another kid first, or see Plus.`, 'plan_limit');
+      }
+    }
+    // A resting kid (over the Free plan's kid limit) can't do anything from a kid's iPad: their money, statement and
+    // island stay just as they are until a grown-up wakes them.
+    if (!system && !s.elevated && (col === 'kids' || col === 'growth' || col === 'jobs' || col === 'habits')) {
+      const kidId = col === 'kids' || col === 'growth' ? id : data.kidId;
+      const kd = col === 'kids' ? prev : kidId ? asObj(((await t.q('select data from kids where family_id = $1 and id = $2', [s.family_id, kidId])).rows[0] || {}).data) : null;
+      if (kd && kd.resting && (col !== 'kids' || Object.keys({ ...prev, ...data }).some(k => k !== 'id' && k !== 'giftSeen' && !same(prev[k], data[k])))) fail(403, 'Chores and lessons are paused for now.', 'resting');
+    }
     if (!system && !s.elevated && col === 'kids' && prev) {
       const set = (await t.q('select data from family_settings where family_id = $1', [s.family_id])).rows[0];
       const bad = checkKidWrite(prev, data, set ? asObj(set.data) : {});
@@ -301,6 +320,20 @@ const serverSession = familyId => ({ family_id: familyId, device_id: null, user_
 const clearJobPhotos = (familyId, jobId) => writeDoc(serverSession(familyId), 'jobs', jobId, { photo: null, stepPhotos: null, photoGone: Date.now() }, true, null, true);
 async function housekeeping() {
   try { const out = await runHousekeeping(db, clearJobPhotos); if (out) console.log('housekeeping', JSON.stringify(out)); } catch (e) { console.error('housekeeping failed', e); }
+  try { await welcomeEnding(); } catch (e) { console.error('welcome reminders failed', e.message); }
+}
+// Four days before a family's welcome fortnight ends (and they haven't bought a plan), the grown-ups' phones hear about
+// it once, so the end is never a surprise.
+async function welcomeEnding() {
+  if (!PAYWALL) return;
+  const rows = (await db.query(`select e.family_id from entitlements e where e.source = 'welcome' and e.revoked_at is null
+    and e.expires_at > now() and e.expires_at < now() + interval '4 days'
+    and not exists (select 1 from entitlements p where p.family_id = e.family_id and p.source <> 'welcome' and p.plan in ('plus', 'family') and p.revoked_at is null and (p.expires_at is null or p.expires_at > now()))
+    and not exists (select 1 from plan_moments m where m.family_id = e.family_id and m.moment = 'welcome' and m.action = 'shown')`)).rows;
+  for (const r of rows) {
+    await db.query(`insert into plan_moments (family_id, moment, action) values ($1, 'welcome', 'shown')`, [r.family_id]);
+    await notify(db, r.family_id, 'parent', { title: 'Your Plus fortnight ends soon', body: 'Have a look at what your family has used, and choose what comes next. Nothing your kids have is taken away.', thread: 'plan' });
+  }
 }
 setTimeout(housekeeping, 60 * 1000).unref();
 setInterval(housekeeping, 60 * 60 * 1000).unref();
@@ -344,6 +377,8 @@ route('POST', '/api/auth/signup', async ({ req, res }) => {
     await t.q('insert into users (id, email, name, password_hash, recovery_hash, last_login_at) values ($1, $2, $3, $4, $5, now())', [userId, email, name, await hashPassword(pw), sha256(rec.replace(/-/g, ''))]);
     if (!invite) await t.q('insert into families (id, name, created_by) values ($1, $2, $3)', [familyId, String(b.familyName || '').trim().slice(0, 60) || (name ? `${name}'s family` : 'Our family'), userId]);
     else await t.q('update invites set used_at = now(), used_by = $2 where code = $1', [invite.code, userId]);
+    // Every new family starts with Plus for its welcome fortnight, without paying.
+    if (!invite && WELCOME_DAYS > 0) await t.q(`insert into entitlements (id, family_id, source, product_id, plan, expires_at) values ($1, $2, 'welcome', 'welcome', 'plus', now() + make_interval(days => $3::int))`, ['welcome:' + familyId, familyId, WELCOME_DAYS]);
     await t.q(`insert into family_members (family_id, user_id, role) values ($1, $2, 'parent')`, [familyId, userId]);
     await t.q(`insert into devices (id, family_id, user_id, kind, name, user_agent) values ($1, $2, $3, 'parent', $4, $5)`, [deviceId, familyId, userId, String(b.deviceName || 'Grown-up device').slice(0, 60), String(req.headers['user-agent'] || '').slice(0, 300)]);
     await t.q(`insert into consents (user_id, family_id, kind, version) values ($1, $2, 'guardian_terms', $3)`, [userId, familyId, TERMS_VERSION]);
@@ -351,6 +386,7 @@ route('POST', '/api/auth/signup', async ({ req, res }) => {
   const tok = await startSession(res, req, { familyId, deviceId, userId, role: 'parent' });
   const s = { family_id: familyId, device_id: deviceId, user_id: userId, role: 'parent', elevated: true, device_name: b.deviceName || 'Grown-up device' };
   await logEvent(s, invite ? 'auth.joined_family' : 'auth.signup', { email });
+  if (!invite && WELCOME_DAYS > 0) await logEvent(s, 'plan.welcome', { days: WELCOME_DAYS });
   sendVerify(userId, email).catch(e => console.error('verify email failed', e.message));
   return { ...(await me(s)), recovery: rec, ...tok };
 });
@@ -661,7 +697,6 @@ route('POST', '/api/import', async ({ req, s }) => {
    Grown-ups buy in the iOS app with StoreKit 2; the app sends the signed transaction here, and Apple's server
    notifications keep it current (renewals, expiry, refunds). With PAYWALL unset every family has everything. */
 async function needRoom(familyId, what) {
-  if (!PAYWALL) return;
   const p = await planOf(db, familyId);
   if (what === 'kids') {
     const n = (await db.query(`select count(*)::int as n from kids where family_id = $1 and coalesce(data->>'example', '') <> 'true'`, [familyId])).rows[0].n;
@@ -678,6 +713,7 @@ const foundingLeft = async () => Math.max(0, FOUNDING_SEATS - (await db.query('s
 async function saveAppleTransaction(tx, familyId, renewal = null) {
   if (tx.bundleId !== BUNDLE_ID) fail(400, 'That purchase is for a different app.', 'wrong_app');
   const p = PRODUCTS[tx.productId]; if (!p) fail(400, 'That isn’t a Chorecast product.', 'unknown_product');
+  if (p.kid) return; // XP bundles and the Island Club are granted to their kid by /api/shop/buy
   const id = 'apple:' + tx.originalTransactionId;
   const cur = (await db.query('select family_id from entitlements where id = $1', [id])).rows[0];
   if (cur && cur.family_id !== familyId) fail(409, 'That purchase belongs to another Chorecast family.', 'other_family');
@@ -694,7 +730,23 @@ async function saveAppleTransaction(tx, familyId, renewal = null) {
 
 route('GET', '/api/plan', async ({ s }) => {
   needSession(s);
-  return { ...(await planOf(db, s.family_id)), paywall: PAYWALL, plans: PLANS, products: Object.keys(PRODUCTS), foundingLeft: await foundingLeft(), appAccountToken: s.family_id };
+  const moments = Object.fromEntries((await db.query(`select moment, max(shown_at) as at from plan_moments where family_id = $1 group by moment`, [s.family_id])).rows.map(r => [r.moment, new Date(r.at).getTime()]));
+  return { ...(await planOf(db, s.family_id)), paywall: PAYWALL, plans: PLANS, products: Object.keys(PRODUCTS), foundingLeft: await foundingLeft(), appAccountToken: s.family_id, moments };
+});
+
+// Upgrade moments: a card in Grown-ups when Plus would help (a kid finished unit 1, a wish for a Plus thing, the
+// starter island filled, the welcome fortnight ending). Each is recorded when shown and again when acted on, so the app
+// can space them out (at most one a day, each at most once a fortnight) and we can see which ones help families.
+const MOMENTS = new Set(['unit1', 'wish', 'starter', 'welcome', 'ended', 'recap']);
+const MOMENT_ACTIONS = new Set(['shown', 'plans', 'pack', 'dismiss', 'gift', 'job']);
+route('POST', '/api/plan/moment', async ({ req, s }) => {
+  needElevated(s); const b = await readJson(req);
+  const moment = String(b.moment || ''), action = String(b.action || 'shown');
+  if (!MOMENTS.has(moment) || !MOMENT_ACTIONS.has(action)) fail(400, 'Unknown moment.', 'bad_moment');
+  const kidId = b.kidId ? String(b.kidId).slice(0, 80) : null;
+  await db.query('insert into plan_moments (family_id, kid_id, moment, action) values ($1, $2, $3, $4)', [s.family_id, kidId, moment, action]);
+  await logEvent(s, 'plan.moment', { moment, action }, kidId);
+  return { ok: true };
 });
 
 // A purchase or restore from the iOS app: one signed transaction, or a list of them.
@@ -726,11 +778,87 @@ route('POST', '/api/appstore/notifications', async ({ req }) => {
   // Whose it is: the family already holding it, or the family id the app set as appAccountToken when buying.
   let familyId = ((await db.query('select family_id from entitlements where id = $1', ['apple:' + tx.originalTransactionId])).rows[0] || {}).family_id;
   if (!familyId && tx.appAccountToken) familyId = ((await db.query('select id from families where lower(id) = lower($1)', [tx.appAccountToken])).rows[0] || {}).id;
+  if (!familyId && PRODUCTS[tx.productId].kid) familyId = ((await db.query('select family_id from purchases where original_id = $1 limit 1', ['apple:' + tx.originalTransactionId])).rows[0] || {}).family_id;
   if (!familyId) return { ok: true };
+  if (PRODUCTS[tx.productId].kid) { await shopNotice(String(n.notificationType || ''), tx, familyId); return { ok: true }; }
   await saveAppleTransaction(tx, familyId, renewal);
   await db.query('update app_store_notifications set family_id = $2 where uuid = $1', [String(n.notificationUUID), familyId]);
+  const life = { SUBSCRIBED: 'plan.buy', DID_RENEW: 'plan.renew', EXPIRED: 'plan.lapse', REFUND: 'plan.refund', DID_CHANGE_RENEWAL_STATUS: n.subtype === 'AUTO_RENEW_DISABLED' ? 'plan.cancel' : n.subtype === 'AUTO_RENEW_ENABLED' ? 'plan.resume' : null }[n.notificationType];
+  if (life) await db.query('insert into events (family_id, type, payload) values ($1, $2, $3::jsonb)', [familyId, life, JSON.stringify({ product: tx.productId, subtype: n.subtype || null })]);
   return { ok: true };
 });
+
+/* ---------- the family shop ----------
+   Grown-ups (behind the PIN; nothing is sold to kids) buy XP bundles and the Island Club for one kid, and lesson packs
+   for the whole family. In the iOS app StoreKit's signed transaction comes here and is checked with Apple; with
+   STORE_TEST=on (local and test servers) a test purchase is granted without payment. Each purchase is granted once.
+   The family's weekly limit on bought XP per kid (settings.buyCap) is checked before a test purchase; the app checks
+   it before taking payment. The Island Club renews and refunds arrive as App Store notifications (shopNotice). */
+const STORE_TEST = process.env.STORE_TEST === 'on';
+const weekXp = async (familyId, kidId) => (await db.query(`select coalesce(sum(xp), 0)::int as n from purchases where family_id = $1 and kid_id = $2 and refunded_at is null and created_at > now() - interval '7 days'`, [familyId, kidId])).rows[0].n;
+route('GET', '/api/shop', async ({ s }) => {
+  needSession(s); const p = await planOf(db, s.family_id);
+  const bought = (await db.query('select id, kid_id, product_id, xp, source, created_at from purchases where family_id = $1 and refunded_at is null order by created_at desc limit 60', [s.family_id])).rows;
+  const week = Object.fromEntries((await db.query(`select kid_id, sum(xp)::int as n from purchases where family_id = $1 and kid_id is not null and refunded_at is null and created_at > now() - interval '7 days' group by kid_id`, [s.family_id])).rows.map(r => [r.kid_id, r.n]));
+  return { test: STORE_TEST, plan: p.plan, packs: p.packs, bought, week, clubPrize: clubPrize() };
+});
+route('POST', '/api/shop/buy', async ({ req, s }) => {
+  needElevated(s); const b = await readJson(req);
+  let productId = String(b.productId || ''), id, original = null, source = 'test', env = 'test';
+  if (b.transaction) {
+    let tx; try { tx = verifyAppleJws(b.transaction, appleOpts); } catch (e) { fail(400, 'That purchase couldn’t be checked with Apple.', 'bad_receipt'); }
+    if (tx.bundleId !== BUNDLE_ID) fail(400, 'That purchase is for a different app.', 'wrong_app');
+    productId = tx.productId; id = 'apple:' + tx.transactionId; original = 'apple:' + tx.originalTransactionId; source = 'app_store'; env = tx.environment || null;
+  } else if (!STORE_TEST) fail(403, 'Buying opens in the Chorecast app on iPhone or iPad.', 'app_only');
+  else id = original = 'test:' + randomUUID();
+  const p = PRODUCTS[productId]; if (!p || !(p.kid || p.pack)) fail(400, 'That isn’t in the shop.', 'unknown_product');
+  const kidId = p.kid ? String(b.kidId || '') : null;
+  if (p.kid && !(await db.query('select 1 from kids where family_id = $1 and id = $2', [s.family_id, kidId])).rows.length) fail(400, 'Pick which kid it’s for.', 'no_kid');
+  if (p.xp && source === 'test') {
+    const set = asObj(((await db.query('select data from family_settings where family_id = $1', [s.family_id])).rows[0] || {}).data), cap = set.buyCap == null ? 5000 : Number(set.buyCap) || 0; // 5,000 XP a week per kid unless a grown-up changes it
+    if (cap && (await weekXp(s.family_id, kidId)) + p.xp > cap) fail(409, `That’s more than the ${cap.toLocaleString('en-NZ')} XP a week you set for each kid.`, 'over_cap');
+  }
+  const fresh = await db.query('insert into purchases (id, original_id, family_id, kid_id, product_id, xp, source, environment) values ($1, $2, $3, $4, $5, $6, $7, $8) on conflict (id) do nothing returning id', [id, original, s.family_id, kidId, productId, p.xp || 0, source, env]);
+  if (!fresh.rows.length) return { ok: true, again: true, ...(await planOf(db, s.family_id)) };
+  if (p.xp) await giveXp(s.family_id, kidId, p.xp, p.club ? 'Island Club: this month’s XP' : `XP from a grown-up: ${p.xp.toLocaleString('en-NZ')} XP`, p.club, b.wish ? String(b.wish).slice(0, 40) : null);
+  if (p.pack) await db.query(`insert into entitlements (id, family_id, source, product_id, plan, lifetime, environment) values ($1, $2, $3, $4, $5, true, $6) on conflict (id) do nothing`,
+    ['shop:' + id, s.family_id, source === 'test' ? 'grant' : 'app_store', productId, 'pack:' + p.pack, env]);
+  await logEvent(s, 'shop.buy', { product: productId, kid: kidId, xp: p.xp || 0, test: source === 'test' });
+  return { ok: true, ...(await planOf(db, s.family_id)) };
+});
+// XP from a purchase: added to the kid's island (island.paidXp, which only purchases change) and shown on their
+// statement. A gift for a wish (`wish`, the item) takes it off their wish list. An Island Club month also brings the
+// month's members-only prize, the golden name sign, and membership until a month from now.
+async function giveXp(familyId, kidId, xp, memo, club, wish = null) {
+  const k = asObj((await db.query('select data from kids where family_id = $1 and id = $2', [familyId, kidId])).rows[0].data), isl = k.island || {};
+  const ledger = [{ id: randomUUID().slice(0, 12), at: Date.now(), kind: 'xp', amt: 0, xp, memo, gift: club ? 'club' : 'xp' }, ...(k.ledger || [])].slice(0, 240);
+  const island = { paidXp: (isl.paidXp || 0) + xp };
+  if (club) {
+    const prize = clubPrize(); island.club = { since: (isl.club && isl.club.since) || Date.now(), until: Date.now() + 31 * 864e5, prize };
+    island.won = { ...(isl.won || {}), [prize]: ((isl.won || {})[prize] || 0) + 1 }; island.owned = { ...(isl.owned || {}), 'sign:gold': (isl.owned || {})['sign:gold'] || 'won' };
+  }
+  const patch = { island, ledger };
+  if (wish) {
+    await db.query('update shop_wishes set granted_at = now() where family_id = $1 and kid_id = $2 and item = $3 and granted_at is null', [familyId, kidId, wish]);
+    patch.wishes = (Array.isArray(k.wishes) ? k.wishes : []).filter(w => w && w.t !== wish); if (k.wish && k.wish.t === wish) patch.wish = null;
+  }
+  await writeDoc(serverSession(familyId), 'kids', kidId, patch, true, null, true);
+}
+// An App Store notification about something bought for a kid: each Island Club renewal grants that month, and a
+// refunded XP bundle takes its XP back (as far as the kid has it).
+async function shopNotice(type, tx, familyId) {
+  const p = PRODUCTS[tx.productId], first = (await db.query('select kid_id from purchases where original_id = $1 order by created_at limit 1', ['apple:' + tx.originalTransactionId])).rows[0];
+  if (!first || !first.kid_id) return;
+  if (type === 'DID_RENEW' && p.club) {
+    const fresh = await db.query('insert into purchases (id, original_id, family_id, kid_id, product_id, xp, source, environment) values ($1, $2, $3, $4, $5, $6, $7, $8) on conflict (id) do nothing returning id', ['apple:' + tx.transactionId, 'apple:' + tx.originalTransactionId, familyId, first.kid_id, tx.productId, p.xp, 'app_store', tx.environment || null]);
+    if (fresh.rows.length) await giveXp(familyId, first.kid_id, p.xp, 'Island Club: this month’s XP', true);
+  }
+  if (type === 'REFUND') {
+    const r = (await db.query('update purchases set refunded_at = now() where id = $1 and refunded_at is null returning xp', ['apple:' + tx.transactionId])).rows[0]; if (!r || !r.xp) return;
+    const k = asObj((await db.query('select data from kids where family_id = $1 and id = $2', [familyId, first.kid_id])).rows[0].data), isl = k.island || {}, back = Math.min(r.xp, isl.paidXp || 0);
+    await writeDoc(serverSession(familyId), 'kids', first.kid_id, { island: { paidXp: (isl.paidXp || 0) - back }, ledger: [{ id: randomUUID().slice(0, 12), at: Date.now(), kind: 'xp', amt: 0, xp: -back, memo: 'Refunded XP bundle' }, ...(k.ledger || [])].slice(0, 240) }, true, null, true);
+  }
+}
 
 // The iOS app's push address for this device (and its time zone, for reminders). DELETE stops pushes to it.
 route('PUT', '/api/push', async ({ req, s }) => {
@@ -813,6 +941,9 @@ route('POST', '/api/events', async ({ req, s }) => {
     if (type === 'farm.sell' && kid) {
       await db.query('insert into farm_sales (family_id, kid_id, product, qty, price, xp, sold_at) values ($1, $2, $3, $4, $5, $6, $7)',
         [s.family_id, kid, txt(pl.k, 20) || '?', int(pl.n) || 0, int(pl.price), int(pl.xp) || 0, when]);
+    }
+    if (type === 'shop.wish' && kid) {
+      await db.query('insert into shop_wishes (family_id, kid_id, item, xp_needed, wished_at) values ($1, $2, $3, $4, $5)', [s.family_id, kid, txt(pl.item, 40) || '?', int(pl.need) || 0, when]);
     }
     if (type === 'island.play' && kid) {
       await db.query('insert into island_play (family_id, kid_id, activity, successes, xp, played_at) values ($1, $2, $3, $4, $5, $6)',

@@ -121,6 +121,9 @@ body.gw-open{overflow:hidden}
 .gw-node.done .gn-ic{background:#fff}
 .gw-node.done.gold .gn-ic{background:radial-gradient(circle,#FFF3B0,#FFC93C)}
 .gw-node.locked{opacity:.55}
+.gw-node.plus{opacity:.85}
+.pl-tag.plus .n{color:#6C5CE7;font-weight:900}
+.gw-node.plus .gn-ic{background:linear-gradient(135deg,#2F7BEA,#6C5CE7);color:#fff;font-weight:900}
 .gw-node.boss .gn-ic{border-radius:18px}
 .gw-node.story .gn-ic{border-radius:14px;background:rgba(255,255,255,.3)}
 .gw-run-top{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 10px) var(--gut-r) 10px var(--gut)}

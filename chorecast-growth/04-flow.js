@@ -200,7 +200,7 @@ function onClick(e) {
     case 'tree': Grow.tree = id; Grow.view = 'tree'; Sound.tap(); return render();
     case 'lesson': { const l = lessonById(id); if (l) { if (!Grow.tree) Grow.tree = l.tree; startLesson(kid, l); } return; }
     case 'locked': Sound.tap(); return C.toast('Pass the lesson before this one to open it: get 80% or more of its questions right.');
-    case 'planLocked': Sound.tap(); return C.toast('🔒 Grown-ups can open this. Ask a grown-up!');
+    case 'planLocked': Sound.tap(); return C.toast('✦ Units 2 and up come with Chorecast Plus.');
     case 'plantSel': return PlantView.ok && PlantView.select(+a.dataset.i);
     case 'plantUnit': return PlantView.ok && PlantView.unit(+a.dataset.i);
     case 'plantBloom': return PlantView.ok && PlantView.bloomAgain();
@@ -268,6 +268,16 @@ C.ACT.gMoment = a => { open(a.dataset.id, {}).then(() => { const k = Store.kids[
 
 window.Growth = {
   card, momentCard, treeDoor, hasLesson, onEvent, open, close, waiting, nextLesson,
+  trees: { all: ALL_TREES, live: LIVE },
+  // A subject's size for this kid's age band, and whether they've passed all of unit 1 (for the grown-ups' "finished
+  // unit 1" card). Null until the subject's lessons have loaded.
+  unitInfo: (kid, tree) => {
+    const p = packFor(tree, bandOf(kid)); if (!p) return null;
+    const u1 = p.units.find(u => u.n === 1), all = p.units.reduce((a, u) => a + u.lessons.length, 0);
+    return { units: p.units.length, lessons: all, more: all - (u1 ? u1.lessons.length : 0), unit1Done: !!u1 && u1.lessons.length > 0 && u1.lessons.every(l => passed(kid, l.id)) };
+  },
+  // Lessons passed, all time and in the last 30 days.
+  passedCount: kid => { const d = prog(kid).done || {}, ids = Object.keys(d).filter(id => (d[id] || {}).best >= 0.8); return { all: ids.length, month: ids.filter(id => (d[id].at || 0) > Date.now() - 30 * 864e5).length }; },
   investorRank: kid => `<span class="card-r">Rank: ${investorRank(kid)}</span>`,
   mastered: kid => mastered(kid),
   parentView: () => parentView(), resetParent: () => { if (Grow.parent) Grow.parent.msg = ''; },

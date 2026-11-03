@@ -777,7 +777,8 @@ function back() {
 function treesOn() { const off = GSET().off || {}; return TREES.filter(t => !off[t.id]); }
 function available(kid, l) {
   // A lesson opens once the lesson before it in its unit is passed; each unit opens when the unit before is done.
-  // On the free plan only unit 1 of each subject opens (the app's planLocked); kids see "Grown-ups can open this".
+  // On the free plan only unit 1 of each subject opens (the app's planLocked); the rest show ✦ and "comes with Chorecast
+  // Plus", never a price or a nudge to ask for it.
   if (C.planLocked && C.planLocked(l)) return false;
   const pack = packFor(l.tree, l.band), u = pack.units.find(x => x.n === l.unit), i = u.lessons.indexOf(l);
   if (i > 0 && !passed(kid, u.lessons[i - 1].id)) return false;
@@ -920,7 +921,7 @@ function viewTree(kid, tree) {
   const units = pack ? pack.units : [];
   const node = (l, idx) => {
     const done = passed(kid, l.id), open = !done && available(kid, l), md = medal(kid, l), side = idx % 4 === 1 ? 'r' : idx % 4 === 3 ? 'l' : 'c', plan = !done && C.planLocked && C.planLocked(l);
-    return `<button class="gw-node ${done ? 'done ' + md : open ? 'open' : 'locked'} ${l === nx ? 'next' : ''} s-${side}" data-g="${open || done ? 'lesson' : plan ? 'planLocked' : 'locked'}" data-id="${l.id}" aria-label="${esc(local(l.title))}${done ? `, ${md} medal` : open ? ', ready' : ', locked'}"><span class="gn-ic">${done ? (md === 'gold' ? '🥇' : md === 'silver' ? '🥈' : '🥉') : open ? esc(l.icon) : '🔒'}</span><span class="gn-t">${esc(local(l.title))}</span></button>`;
+    return `<button class="gw-node ${done ? 'done ' + md : open ? 'open' : plan ? 'locked plus' : 'locked'} ${l === nx ? 'next' : ''} s-${side}" data-g="${open || done ? 'lesson' : plan ? 'planLocked' : 'locked'}" data-id="${l.id}" aria-label="${esc(local(l.title))}${done ? `, ${md} medal` : open ? ', ready' : plan ? ', comes with Chorecast Plus' : ', locked'}"><span class="gn-ic">${done ? (md === 'gold' ? '🥇' : md === 'silver' ? '🥈' : '🥉') : open ? esc(l.icon) : plan ? '✦' : '🔒'}</span><span class="gn-t">${esc(local(l.title))}</span></button>`;
   };
   ui.innerHTML = `${topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`)}
     <div class="gw-pad gw-path">
@@ -1329,7 +1330,7 @@ function onClick(e) {
     case 'tree': Grow.tree = id; Grow.view = 'tree'; Sound.tap(); return render();
     case 'lesson': { const l = lessonById(id); if (l) { if (!Grow.tree) Grow.tree = l.tree; startLesson(kid, l); } return; }
     case 'locked': Sound.tap(); return C.toast('Pass the lesson before this one to open it: get 80% or more of its questions right.');
-    case 'planLocked': Sound.tap(); return C.toast('🔒 Grown-ups can open this. Ask a grown-up!');
+    case 'planLocked': Sound.tap(); return C.toast('✦ Units 2 and up come with Chorecast Plus.');
     case 'plantSel': return PlantView.ok && PlantView.select(+a.dataset.i);
     case 'plantUnit': return PlantView.ok && PlantView.unit(+a.dataset.i);
     case 'plantBloom': return PlantView.ok && PlantView.bloomAgain();
@@ -1397,6 +1398,16 @@ C.ACT.gMoment = a => { open(a.dataset.id, {}).then(() => { const k = Store.kids[
 
 window.Growth = {
   card, momentCard, treeDoor, hasLesson, onEvent, open, close, waiting, nextLesson,
+  trees: { all: ALL_TREES, live: LIVE },
+  // A subject's size for this kid's age band, and whether they've passed all of unit 1 (for the grown-ups' "finished
+  // unit 1" card). Null until the subject's lessons have loaded.
+  unitInfo: (kid, tree) => {
+    const p = packFor(tree, bandOf(kid)); if (!p) return null;
+    const u1 = p.units.find(u => u.n === 1), all = p.units.reduce((a, u) => a + u.lessons.length, 0);
+    return { units: p.units.length, lessons: all, more: all - (u1 ? u1.lessons.length : 0), unit1Done: !!u1 && u1.lessons.length > 0 && u1.lessons.every(l => passed(kid, l.id)) };
+  },
+  // Lessons passed, all time and in the last 30 days.
+  passedCount: kid => { const d = prog(kid).done || {}, ids = Object.keys(d).filter(id => (d[id] || {}).best >= 0.8); return { all: ids.length, month: ids.filter(id => (d[id].at || 0) > Date.now() - 30 * 864e5).length }; },
   investorRank: kid => `<span class="card-r">Rank: ${investorRank(kid)}</span>`,
   mastered: kid => mastered(kid),
   parentView: () => parentView(), resetParent: () => { if (Grow.parent) Grow.parent.msg = ''; },
@@ -2082,6 +2093,9 @@ body.gw-open{overflow:hidden}
 .gw-node.done .gn-ic{background:#fff}
 .gw-node.done.gold .gn-ic{background:radial-gradient(circle,#FFF3B0,#FFC93C)}
 .gw-node.locked{opacity:.55}
+.gw-node.plus{opacity:.85}
+.pl-tag.plus .n{color:#6C5CE7;font-weight:900}
+.gw-node.plus .gn-ic{background:linear-gradient(135deg,#2F7BEA,#6C5CE7);color:#fff;font-weight:900}
 .gw-node.boss .gn-ic{border-radius:18px}
 .gw-node.story .gn-ic{border-radius:14px;background:rgba(255,255,255,.3)}
 .gw-run-top{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 10px) var(--gut-r) 10px var(--gut)}
@@ -2817,9 +2831,10 @@ void main() {
   function paintTags(kid) {
     LS.forEach((x, i) => {
       const b = tagEls[i], l = x.l, d = done[i], isCur = i === cur, open = !d && !isCur && available(kid, l), pz = prizeAt[i], isSel = sel && sel.k === 'l' && sel.i === i, title = esc(local(l.title));
-      b.className = `pl-tag ${d ? 'done' : isCur ? 'cur' : open ? 'open' : 'locked'}${isSel ? ' sel' : ''}`;
-      b.setAttribute('aria-label', `Lesson ${l.unit}.${l.n}, ${local(l.title)}, ${d ? 'done' : isCur ? 'up next' : open ? 'ready' : 'locked'}`);
-      b.innerHTML = d ? `<span class="n">${medalOf(kid, l)}</span>${title}` : isCur ? `<span class="n">▶</span><span><small>Up next${pz ? ' · wins a prize' : ''}</small>${title}</span>${pz ? `<span class="pz">${pz.info.icon}</span>` : ''}` : `<span class="n">${open ? `${l.unit}.${l.n}` : '🔒'}</span>${open ? title : `${l.unit}.${l.n}`}${pz ? `<span class="pz">${pz.info.icon}</span>` : ''}`;
+      const plus = !d && !open && C.planLocked && C.planLocked(l);
+      b.className = `pl-tag ${d ? 'done' : isCur ? 'cur' : open ? 'open' : plus ? 'locked plus' : 'locked'}${isSel ? ' sel' : ''}`;
+      b.setAttribute('aria-label', `Lesson ${l.unit}.${l.n}, ${local(l.title)}, ${d ? 'done' : isCur ? 'up next' : open ? 'ready' : plus ? 'comes with Chorecast Plus' : 'locked'}`);
+      b.innerHTML = d ? `<span class="n">${medalOf(kid, l)}</span>${title}` : isCur ? `<span class="n">▶</span><span><small>Up next${pz ? ' · wins a prize' : ''}</small>${title}</span>${pz ? `<span class="pz">${pz.info.icon}</span>` : ''}` : `<span class="n">${open ? `${l.unit}.${l.n}` : plus ? '✦' : '🔒'}</span>${open ? title : `${l.unit}.${l.n}`}${pz ? `<span class="pz">${pz.info.icon}</span>` : ''}`;
       b._w = 0;
     });
     US.forEach((U, i) => { const b = utagEls[i]; b.className = `pl-utag${crowned[i] ? ' crown' : ''}${sel && sel.k === 'u' && sel.i === i ? ' sel' : ''}`; b.innerHTML = `${crowned[i] ? '👑' : '🏆'} Unit ${U.unit.n} ${crowned[i] ? 'crown won' : 'challenge'}`; b.setAttribute('aria-label', `Unit ${U.unit.n}, ${local(U.unit.title)}: ${crowned[i] ? 'crown won' : 'challenge open'}`); b._w = 0; });
@@ -2871,9 +2886,9 @@ void main() {
       const e = real[s.i] ? earned(kid, l.id) : null, won = e && e.prize && C.prizeInfo ? C.prizeInfo(e.prize) : null;
       const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `🌱 ${l.checks.length} question${l.checks.length === 1 ? '' : 's'} to grow` : '', e ? `✨ Earned +${e.xp} XP` : `✨ +${XP.lesson} XP`].filter(Boolean);
       const plan = !open && C.planLocked && C.planLocked(l);
-      const act = plan ? '<button class="g-go ghost" data-g="planLocked">🔒 Grown-ups can open this</button>' : !open ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Pass “${esc(local(prev.title))}” first` : 'Pass the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${d ? 'Play again' : first ? (ms ? '🌱 Plant my seed' : '🌿 Grow my branch') : '▶ Start lesson'}</button>`;
+      const act = plan ? '<button class="g-go ghost" data-g="planLocked">✦ Comes with Chorecast Plus</button>' : !open ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Pass “${esc(local(prev.title))}” first` : 'Pass the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${d ? 'Play again' : first ? (ms ? '🌱 Plant my seed' : '🌿 Grow my branch') : '▶ Start lesson'}</button>`;
       // What it takes to move on, said plainly: kids need telling at every step
-      const goal = d ? '' : plan ? '🎯 Ask a grown-up. They can open more lessons.' : !open ? (prev ? `🎯 To open this lesson, go back to “${esc(local(prev.title))}” and ${passGoal(prev.checks.length)}.` : '🎯 To open this lesson, pass every lesson in the unit before it.')
+      const goal = d ? '' : plan ? '✦ Units 2 and up of every subject come with Chorecast Plus.' : !open ? (prev ? `🎯 To open this lesson, go back to “${esc(local(prev.title))}” and ${passGoal(prev.checks.length)}.` : '🎯 To open this lesson, pass every lesson in the unit before it.')
         : l.checks.length ? `🎯 ${passGoal(l.checks.length, true)} at the end to pass${s.i + 1 < LS.length ? ' and open the next lesson' : ''}.` : '';
       h = `<div class="plc-ic">${esc(l.icon)}</div><div class="plc-eb">Unit ${l.unit} · Lesson ${l.n}${d ? ` · ${medalOf(kid, l)}` : ''}</div><div class="plc-t">${esc(local(l.title))}</div><p class="plc-p">${esc(local(l.hook))}</p>
         ${first ? `<ul class="plc-how"><li><span>${ms ? '🌱' : '🌿'}</span>Every question you get right helps your ${ms ? 'seed' : 'branch'} grow.</li><li><span>🍃</span>Pass a lesson and a big leaf grows, with your XP or a prize on top.</li><li><span>🌸</span>Pass all ${LS.length} lessons and it ${ms ? 'flowers' : 'blossoms'}.</li></ul>` : `<div class="plc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>`}

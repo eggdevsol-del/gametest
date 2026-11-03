@@ -1000,9 +1000,63 @@ p{margin:0}
 @keyframes flash{from{opacity:.95}to{opacity:0}}
 .p-err{font:700 14px var(--f-round);background:rgba(0,0,0,.25);padding:8px 14px;border-radius:12px}
 a.row{text-decoration:none;color:inherit}
-.plan-cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:6px 0 14px}
-.plan-c{border:1px solid var(--line);border-radius:18px;padding:14px 16px;background:var(--fill)}.plan-c.on{border-color:var(--p-accent);box-shadow:0 0 0 2px var(--p-accent) inset}
-.plan-c h4{margin:0 0 6px;font:900 18px var(--f-round)}.plan-c ul{margin:0;padding-left:18px;font:500 14px/1.45 var(--f-text)}.plan-c li{margin:3px 0}
+.plus-tag{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:999px;background:linear-gradient(135deg,#2F7BEA,#6C5CE7);color:#fff;font:900 11px/1.2 var(--f-round);letter-spacing:.02em;white-space:nowrap;vertical-align:2px;box-shadow:0 2px 8px -3px rgba(76,80,220,.6)}
+.shop-plus{position:absolute;top:8px;left:8px;z-index:1}
+.shop-item.is-plus{position:relative;background:linear-gradient(160deg,rgba(108,92,231,.14),rgba(47,123,234,.08))}
+.shop-item.is-plus img{opacity:.92}
+.care-card.is-plus{position:relative}
+.shop-div{flex:0 0 112px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:20px;text-align:center;background:linear-gradient(160deg,#2F7BEA,#6C5CE7);color:#fff}
+.shop-div span{font-size:26px}.shop-div b{font:900 14px/1.2 var(--f-round)}
+.mk-dot.plus{opacity:.9;color:#fff;font:900 13px var(--f-round);text-shadow:0 1px 3px rgba(0,0,0,.45);box-shadow:inset 0 0 0 2px rgba(108,92,231,.9)}
+.plus-line{display:flex;gap:8px;align-items:flex-start;font:700 14px/1.4 var(--f-round);padding:10px 12px;border-radius:14px;background:var(--fill)}
+.st-small{font:600 12px/1.4 var(--f-round);opacity:.75;margin-top:6px}
+.wish-list{display:grid;gap:10px}
+.wish-i{display:flex;align-items:center;gap:12px}.wish-ic{font-size:28px;width:40px;text-align:center}
+.wish-m{flex:1;min-width:0}.wish-m b{display:block;font:800 15px var(--f-round)}.wish-m small{display:flex;align-items:center;gap:6px;font:700 12px var(--f-round);opacity:.8;margin-top:3px}
+.wish-bar{height:8px;border-radius:5px;background:rgba(255,255,255,.22);overflow:hidden;margin-top:6px}.wish-bar i{display:block;height:100%;background:linear-gradient(90deg,#FFD43B,#F06595);border-radius:5px}
+.wish-x{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;opacity:.7}.wish-x .ic{width:16px;height:16px}
+.rest-card{text-align:center;padding:30px 24px}.rest-ic{font-size:54px}.rest-card h2{font:900 24px var(--f-round);margin:8px 0}.rest-card p{font:600 16px/1.5 var(--f-round);opacity:.9;max-width:40ch;margin:0 auto}
+.plan-pill{display:inline-flex;align-items:center;gap:6px;margin:2px 0 14px;padding:7px 14px;border-radius:999px;background:linear-gradient(135deg,#2F7BEA,#6C5CE7);color:#fff;font:800 13px var(--f-round);max-width:100%;text-align:left}
+.plan-pill.free{background:var(--fill);color:var(--ink)}
+.moment{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;margin-bottom:18px;border-radius:22px;background:linear-gradient(135deg,rgba(47,123,234,.12),rgba(108,92,231,.12));border:1px solid rgba(108,92,231,.3)}
+.moment-ic{font-size:30px;line-height:1}.moment-m{flex:1;min-width:0}.moment-m b{display:block;font:900 17px var(--f-round)}.moment-m p{font:500 14px/1.5 var(--f-text);margin:6px 0 12px;opacity:.9}
+.moment-b{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.rest-stays{padding:16px 20px;border-radius:18px;background:var(--fill);margin:4px 0 18px}.rest-stays b{font:800 15px var(--f-round)}.rest-stays ul{margin:8px 0 0;padding-left:20px;font:500 14px/1.6 var(--f-text)}
+.rest-kids{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.rest-kid{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px;border-radius:18px;border:2px solid var(--line);background:var(--fill)}
+.rest-kid.on{border-color:var(--good);box-shadow:0 0 0 2px var(--good) inset}.rest-kid b{font:800 16px var(--f-round)}.rest-kid small{font:700 12px var(--f-round);opacity:.7}
+.rest-go{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.plan-me{font:800 15px/1.45 var(--f-round);padding:12px 16px;border-radius:16px;background:linear-gradient(135deg,rgba(47,123,234,.14),rgba(108,92,231,.14))}
+.plan-fit{margin:12px 0 0;font:800 13px var(--f-round);opacity:.85}
+.plan-foot{flex-wrap:wrap}.plan-terms{flex-basis:100%;font:700 13px/1.4 var(--f-round);opacity:.85}
+.plan-sh{gap:18px}
+.plan-status{padding:12px 16px;border-radius:18px;background:var(--fill);font:800 15px/1.4 var(--f-round)}
+.plan-per{align-self:center}.plan-per .seg-i{min-height:40px;padding:0 18px;font:800 15px var(--f-round)}
+.plan-save{margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--good);color:#fff;font:900 11px var(--f-round);vertical-align:1px}
+.plan-list{display:grid;gap:18px;padding-top:6px}
+.plan-c{position:relative;border:1px solid var(--line);border-radius:26px;padding:18px 18px 16px;background:var(--fill)}
+.plan-c.on{box-shadow:0 0 0 2px var(--good) inset}
+.plan-c.hot{background:linear-gradient(140deg,#2F7BEA,#6C5CE7);color:#fff;border-color:transparent;box-shadow:0 18px 40px -18px rgba(76,80,220,.75)}
+.plan-c.hot.on{box-shadow:0 0 0 3px #fff inset,0 18px 40px -18px rgba(76,80,220,.75)}
+.plan-tag{position:absolute;top:-12px;right:18px;padding:4px 12px;border-radius:999px;background:#FFB020;color:#2A1A00;font:900 12px var(--f-round);box-shadow:0 4px 12px -4px rgba(0,0,0,.35)}
+.plan-top{display:flex;align-items:center;gap:12px}
+.plan-ic{flex:none;width:48px;height:48px;border-radius:15px;display:grid;place-items:center;font-size:26px;background:var(--cell)}.plan-c.hot .plan-ic{background:rgba(255,255,255,.2)}
+.plan-nm{flex:1;min-width:0}.plan-nm h4{margin:0;font:900 21px var(--f-round)}.plan-nm small{display:block;font:700 13px var(--f-round);opacity:.75}
+.plan-pr{text-align:right;flex:none}.plan-pr b{display:block;font:900 22px/1.1 var(--f-round)}.plan-pr small{font:700 12px var(--f-round);opacity:.75}
+.plan-c ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:9px;font:600 15px/1.35 var(--f-round)}
+.plan-c li{display:flex;align-items:flex-start;gap:10px}
+.plan-c li::before{content:'✓';flex:none;width:21px;height:21px;margin-top:-1px;border-radius:50%;display:grid;place-items:center;font:900 12px var(--f-round);background:var(--good);color:#fff}
+.plan-c.hot li::before{background:#fff;color:#4C5BE0}
+.plan-c li em{margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--cell);font:800 11px var(--f-round);font-style:normal;white-space:nowrap}
+.plan-foot{display:flex;align-items:center;gap:10px;margin-top:16px}.plan-foot:empty{display:none}
+.plan-chip{padding:7px 14px;border-radius:999px;background:var(--cell);font:800 13px var(--f-round)}.plan-c.hot .plan-chip{background:rgba(255,255,255,.22)}
+.plan-note{font:700 13px var(--f-round);opacity:.8}
+.plan-go{flex:1;min-height:48px;padding:0 20px;border-radius:999px;background:var(--good);color:#fff;font:900 16px var(--f-round);transition:transform .15s}.plan-go:active{transform:scale(.97)}.plan-go:disabled{opacity:.5}
+.plan-c.hot .plan-go{background:#fff;color:#3B4FD8}
+.plan-wide{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px 18px;border-radius:22px;border:1px solid var(--line);background:var(--fill)}
+.plan-wide>div{flex:1;min-width:180px}.plan-wide b{display:block;font:900 17px var(--f-round)}.plan-wide small{display:block;font:600 13px/1.4 var(--f-round);opacity:.8;margin-top:2px}
+.plan-wide .plan-go{flex:none}.plan-wide-pr{font:900 20px var(--f-round)!important}
+.plan-ghost{min-height:44px;padding:0 18px;border-radius:999px;background:var(--cell);font:800 15px var(--f-round)}
 .plan-buy{display:grid;gap:10px;margin-top:6px}.plan-buy .pbtn{justify-content:space-between;width:100%}.plan-buy .pbtn span{text-align:left}.plan-why{font:700 16px/1.4 var(--f-round);margin:0 0 10px}
 .plan-small{font:500 13px/1.45 var(--f-text);color:var(--ink-2,inherit);opacity:.75;margin-top:14px}.plan-small a{color:inherit}
 #print-root{display:none}
@@ -1076,6 +1130,44 @@ a.row{text-decoration:none;color:inherit}
 .st-tip{align-self:center;margin-top:10px;padding:8px 16px;border-radius:999px;background:rgba(10,20,60,.3);font:700 14px var(--f-round);text-align:center;max-width:92%}
 .st-tip.on{background:#fff;color:#0D1530;animation:ready 1.6s ease-in-out infinite}
 .st-link{text-decoration:underline;font-weight:900;margin-left:6px}
+.shopv .sec-t{margin-top:30px}
+.shop-test{display:inline-block;margin-top:12px;padding:7px 16px;border-radius:999px;background:rgba(255,255,255,.22);font:800 14px var(--f-round)}
+.shop-kids{display:flex;gap:12px;overflow-x:auto;padding:8px 12px 30px;margin:0 -12px -18px;scrollbar-width:none}.shop-kids::-webkit-scrollbar{display:none}
+.shop-kid{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:128px;padding:14px 18px;border-radius:26px;color:var(--on-sky);transition:transform .15s}
+.shop-kid:active{transform:scale(.97)}.shop-kid.on{background:rgba(255,255,255,.94);color:#0D1530;box-shadow:0 12px 30px -10px rgba(8,20,60,.5)}
+.shop-kid-ava{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:31px;background:var(--hue);box-shadow:0 0 0 3px rgba(255,255,255,.6)}
+.shop-kid b{font:900 17px var(--f-round)}.shop-kid small{font:700 13px var(--f-round);opacity:.8;white-space:nowrap}
+.shop-xp{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px 12px;padding-top:6px}
+.shop-xc{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:26px 14px 18px;border-radius:28px;color:var(--on-sky)}
+.shop-xc.tagged{box-shadow:0 0 0 3px #FFB020,inset 0 1px 0 rgba(255,255,255,.28),0 14px 34px -14px rgba(8,20,60,.4)}
+.shop-xn{font:900 clamp(30px,4vw,40px)/1.1 var(--f-round);text-shadow:0 2px 16px rgba(255,214,90,.55)}
+.shop-xl{font:900 12px var(--f-round);letter-spacing:.14em;opacity:.8}
+.shop-xc p{font:700 14px var(--f-round);opacity:.9;margin:6px 0 14px}
+.shop-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:4px 12px;border-radius:999px;background:#FFB020;color:#2A1A00;font:900 12px var(--f-round);white-space:nowrap;box-shadow:0 4px 12px -4px rgba(0,0,0,.35)}
+.shop-buy-btn{min-height:46px;padding:0 18px;border-radius:999px;background:#fff;color:#1F6FD6;font:900 16px var(--f-round);box-shadow:0 8px 20px -8px rgba(8,20,60,.5);transition:transform .15s}
+.shop-buy-btn:active{transform:scale(.96)}.shop-buy-btn:disabled{opacity:.45;box-shadow:none}
+.shop-small{font:700 14px/1.45 var(--f-round);color:var(--on-sky-2);margin:12px 2px 0;max-width:70ch}
+.shop-club{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding:22px 24px;border-radius:30px;color:#3A2200;background:linear-gradient(135deg,rgba(255,214,102,.92),rgba(255,166,48,.82));border-color:rgba(255,236,170,.9)}
+.shop-club-t{font:900 26px var(--f-round)}.shop-club ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;font:700 15px var(--f-round)}
+.shop-club-r{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;margin-inline:auto}.shop-club-r b{font:900 22px var(--f-round)}.shop-club-r small{font:700 13px var(--f-round);opacity:.85;max-width:28ch;margin-bottom:6px}
+.shop-packs{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-top:14px}
+.shop-pack{position:relative;display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:26px;color:var(--on-sky);border-top:5px solid var(--h)}
+.shop-pack-ic{font-size:36px}.shop-pack b{font:900 17px var(--f-round)}.shop-pack p{flex:1;font:600 13px/1.4 var(--f-round);opacity:.88;margin-bottom:8px}
+.shop-soon{position:absolute;top:16px;right:16px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.25);font:800 11px var(--f-round)}
+.shop-pack .shop-buy-btn,.shop-pack .shop-ghost,.shop-pack .shop-own{align-self:flex-start}
+.shop-ghost{min-height:42px;padding:0 18px;border-radius:999px;background:rgba(255,255,255,.24);color:var(--on-sky);font:800 14px var(--f-round)}
+.shop-own{display:inline-block;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.24);font:800 13px var(--f-round)}
+.shop-wide{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:14px;padding:18px 22px;border-radius:26px;color:var(--on-sky)}
+.shop-wide b{font:900 18px var(--f-round)}.shop-wide p{font:600 14px var(--f-round);opacity:.88;margin-top:4px;max-width:58ch}
+.shop-wishes{display:grid;gap:12px}
+.shop-wish{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:14px 18px;border-radius:26px;color:var(--on-sky)}
+.shop-wish>div{flex:1;min-width:180px}.shop-wish b{display:block;font:900 16px var(--f-round)}.shop-wish small{font:700 13px var(--f-round);opacity:.85}.shop-wish-ava{font-size:32px}
+.shop-list{padding:4px 20px;border-radius:24px;color:var(--on-sky)}
+.shop-li{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.2);font:700 15px var(--f-round)}
+.shop-li:last-child{border:0}.shop-li.multi{flex-wrap:wrap}.shop-li b{display:block;font:800 16px var(--f-round)}.shop-li small{font:600 13px var(--f-round);opacity:.85}
+.shop-list .seg{background:rgba(255,255,255,.18)}.shop-list .seg-i{color:var(--on-sky)}.shop-list .seg-i.on{background:#fff;color:#0D1530}
+.gift-sh{text-align:center;padding-top:28px}.gift-ic{font-size:72px;animation:zoom .5s cubic-bezier(.3,1.6,.5,1)}.gift-sh h2{font:900 26px var(--f-round);margin-top:8px}
+.gift-xp{font:900 44px var(--f-round);color:#E8A317;margin:8px 0}.gift-sh .plan-buy{justify-content:center}
 .st-act{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:8px 8px 8px 12px;border-radius:18px;background:rgba(255,255,255,.95);color:#0D1530}
 .st-act-ic{font-size:26px}.st-act-t{flex:1;min-width:0;display:flex;flex-direction:column}.st-act-t b{font:900 15px var(--f-round)}.st-act-t small{font:700 12px var(--f-round);color:#4a5578}
 .st-float{position:absolute;z-index:4;pointer-events:none;transform:translateX(-50%);font:900 18px var(--f-round);color:#fff;text-shadow:0 2px 6px rgba(10,30,90,.6);animation:stFloat 1.3s ease-out forwards}
@@ -1733,15 +1825,51 @@ const Acct = { me: null, available: false, clientId: uid(), es: null, down: fals
    The family's plan comes from the server (GET /api/plan). Until launch the server has no paywall and every family has
    everything. Inside the iOS app, window.ChorecastApp buys and restores with StoreKit 2:
      products(ids) → [{ id, displayPrice, period, trial }], buy(id, appAccountToken) → { jws } or null, restore() → [jws].
-   The website can't sell plans; it says where to buy. Kids never see a price, only "Grown-ups can open this". */
+   The website can't sell plans; it says where to buy. Kids never see a price, only ✦ and "comes with Chorecast Plus". */
 const PRODUCT_IDS = ['chorecast.plus.yearly', 'chorecast.plus.monthly', 'chorecast.family.yearly', 'chorecast.family.monthly', 'chorecast.lifetime', 'chorecast.lifetime.founding'];
-const FREE_LIMITS = { name: 'Free', kids: 2, grownups: 1, allLessons: false, extras: false };
-const Plan = { plan: 'plus', beta: true, paywall: false, packs: [], limits: { name: 'Plus', kids: 99, grownups: 2, allLessons: true, extras: true }, foundingLeft: 0, appAccountToken: null };
+const FREE_LIMITS = { name: 'Free', kids: 2, grownups: 1, allLessons: false, extras: false, shop: 'starter', funds: 'starter', rules: false };
+const Plan = { plan: 'plus', paywall: false, packs: [], moments: {}, limits: { name: 'Plus', kids: 99, grownups: 2, allLessons: true, extras: true, shop: 'all', funds: 'all', rules: true }, foundingLeft: 0, appAccountToken: null };
 async function loadPlan() {
   if (Store.mode !== 'server') return;
-  try { Object.assign(Plan, await api('GET', '/api/plan')); scheduleRender(); } catch (e) {}
+  try { Object.assign(Plan, await api('GET', '/api/plan')); planTidy(); scheduleRender(); } catch (e) {}
 }
-const planLocked = l => !Plan.limits.allLessons && l.unit > 1 && !(Plan.packs || []).includes(l.tree);
+// On a grown-up's device, keep the family in step with its plan: with room again (Plus is back, or the Free preview is
+// off), resting kids wake up; on Free, money rules a grown-up had tuned go back to the standard rates (or stay off).
+function planTidy() {
+  if (!UI.unlocked || Store.mode !== 'server') return;
+  if (Plan.limits.kids >= 99) for (const k of kidsList()) if (k.resting) updDoc('kids', k.id, { resting: false });
+  const s = S(), fix = {};
+  if (!Plan.limits.rules) { if (![0, 10].includes(s.taxRate)) fix.taxRate = s.taxRate ? 10 : 0; if (![0, 2].includes(s.interestWeekly)) fix.interestWeekly = s.interestWeekly ? 2 : 0; }
+  if (Object.keys(fix).length) saveSettings(fix);
+}
+const activeKids = () => kidsList().filter(k => !k.example && !k.resting);
+// The plan, in a few words, at the top of Grown-ups.
+function planPill() {
+  const days = Plan.until ? Math.max(0, Math.ceil((new Date(Plan.until) - Date.now()) / 864e5)) : 0, when = d => new Date(d).toLocaleDateString(undefined, { day: 'numeric', month: 'short' });
+  const t = Plan.preview ? 'Previewing the free plan' : Plan.plan === 'free' ? `Free · ${activeKids().length} of ${Plan.limits.kids} kids` : Plan.welcome ? `Plus · ${days} day${days === 1 ? '' : 's'} of your welcome fortnight left`
+    : Plan.lifetime ? `${Plan.limits.name} · yours for good` : Plan.until ? `${Plan.limits.name} · ${Plan.renews === false ? 'ends' : 'renews'} ${when(Plan.until)}` : Plan.limits.name;
+  return `<button class="plan-pill ${Plan.plan === 'free' ? 'free' : ''}" data-act="planOpen">${Plan.plan === 'free' ? '' : '<span aria-hidden="true">✦</span> '}${esc(t)}</button>`;
+}
+const planLocked = l => !Plan.limits.allLessons && l.unit > 1 && !(Plan.packs || []).some(p => p === l.tree || p === 'all');
+// What the family's plan has: the same rules as allowed() in server/plans.js, from the catalogue's starter list. Kinds:
+// 'item' (by t, which covers land, sizes and tools), 'look' ('part:key' or 'tree:key'), 'set' and 'fund'. Prizes are
+// never Plus-only: they're won, not bought.
+function planAllows(kind, id) {
+  const L = Plan.limits, st = CAT.starter; if (!st) return true;
+  if (kind === 'fund') return L.funds !== 'starter' || st.funds.includes(id);
+  if (L.shop !== 'starter') return true;
+  if (kind === 'item') { const d = shopDef(id); return !!d && (!!d.prize || (d.size ? d.size <= st.maxSize : d.land ? st.land.includes(d.land) : st.items.includes(id))); }
+  if (kind === 'look') { const [p, k] = id.split(':'), o = p === 'tree' ? TREE_TYPES.find(x => x.k === k) : lookOpt(p, k); return !!o && (!!o.prize || st.looks.includes(id)); }
+  if (kind === 'set') return st.sets.includes(id);
+  return true;
+}
+// The one mark for anything that comes with Plus, on kids' and grown-ups' screens alike. Kids only ever see this and
+// "comes with Chorecast Plus": never a price, a buy button or a nudge to ask for it.
+const plusTag = (cls = '') => `<span class="plus-tag ${cls}">✦ Plus</span>`;
+// A kid's wish list: up to three things from the island shop they're saving XP for (kid.wishes; kid.wish is the older
+// single wish). Grown-ups see it in the Shop. Kids never see a price, and nothing on their side asks a grown-up to buy.
+const WISH_MAX = 3, WISH_IC = { animals: '🐾', farm: '🌾', play: '🎈', garden: '🌷', home: '🪑', tools: '🧰', land: '🏝️', big: '🏰', season: '🎉' };
+const wishList = k => (Array.isArray(k.wishes) ? k.wishes : k.wish && k.wish.t ? [k.wish] : []).filter(w => w && w.t && shopDef(w.t));
 const kidRoom = () => kidsList().filter(k => !k.example).length < Plan.limits.kids;
 async function api(method, url, body, raw) {
   const headers = { 'x-client-id': Acct.clientId };
@@ -1755,7 +1883,7 @@ async function probeServer() {
   if (!/^https?:$/.test(location.protocol)) return null;
   try {
     const r = await fetch('/api/auth/me', { credentials: 'same-origin' });
-    if (r.status === 401) { fetch('/api/health').then(h => h.json()).then(h => { Acct.mail = !!h.mail; if (h.paywall) Object.assign(Plan, { plan: 'free', beta: false, paywall: true, limits: FREE_LIMITS }); scheduleRender(); }).catch(() => {}); return { signedOut: true }; }
+    if (r.status === 401) { fetch('/api/health').then(h => h.json()).then(h => { Acct.mail = !!h.mail; if (h.paywall) Object.assign(Plan, { plan: 'free', paywall: true, limits: FREE_LIMITS }); scheduleRender(); }).catch(() => {}); return { signedOut: true }; }
     if (!r.ok || !/json/.test(r.headers.get('content-type') || '')) return null;
     return { me: await r.json() };
   } catch (e) { const me = lsGet('cc:me', null); return me ? { me, offline: true } : null; }
@@ -3837,7 +3965,7 @@ function xpOf(kid) {
   for (const j of jobsList()) if (j.kidId === kid.id && j.status === 'approved' && j.tier !== 'bonus') e += jobXp(j);
   for (const h of Object.values(Store.habits)) if (h.kidId === kid.id) for (const a of Object.values(h.days || {})) e += a.length * 10;
   const isl = kid.island || {};
-  e += Object.keys(kid.badges || {}).length * 50 + (isl.careXp || 0) + (isl.farmXp || 0) + (isl.playXp || 0) + (isl.bonusXp || 0) + (((Store.growth || {})[kid.id] || {}).xp || 0);
+  e += Object.keys(kid.badges || {}).length * 50 + (isl.careXp || 0) + (isl.farmXp || 0) + (isl.playXp || 0) + (isl.paidXp || 0) + (isl.bonusXp || 0) + (((Store.growth || {})[kid.id] || {}).xp || 0);
   const spent = (kid.island || {}).xpSpent || 0;
   return { earned: e, spent, left: Math.max(0, e - spent) };
 }
@@ -4011,6 +4139,7 @@ const Studio = (() => {
   // there isn't enough. `rec` (a placed item) remembers what was paid, so selling it back can refund half.
   function charge(k, d, pay, isl, patch, rec = {}) {
     if (pay === 'won') return true;
+    if (!planAllows(d.part ? 'look' : 'item', d.part ? `${d.part}:${d.key}` : d.t)) { S0.msg = 'That comes with Chorecast Plus.'; ui(); return false; }
     if (pay === 'xp') { if (xpOf(k).left < d.xp) { S0.msg = 'Not enough XP yet. Finish a mission or a Character Growth lesson to earn more.'; ui(); return false; } isl.xpSpent = (isl.xpSpent || 0) + d.xp; if (rec) rec.xp = d.xp; patch.ledger = pushLedger(k, { kind: 'xp', amt: 0, xp: -d.xp, memo: `Island shop: ${d.name}` }); }
     else { const jars = { ...(k.jars || {}) }; if ((jars.spend || 0) < d.cash) { S0.msg = 'Not enough in your Spend jar.'; ui(); return false; } jars.spend -= d.cash; patch.jars = jars; patch.ledger = pushLedger(k, { kind: 'spend', amt: -d.cash, memo: `Island shop: ${d.name}` }); if (rec) rec.cash = d.cash; if (window.Growth) Growth.onEvent(k, 'buyCash', { name: d.name, cost: d.cash }); }
     track('island.buy', { item: d.t || d.id, name: d.name, cat: d.cat || 'look', pay, price: pay === 'xp' ? d.xp : d.cash }, k.id);
@@ -4073,10 +4202,10 @@ const Studio = (() => {
   const swatch = (part, o) => !o.k ? (part === 'leaf' ? 'linear-gradient(135deg,#3d9b4f 50%,#8bd45a 50%)' : part === 'roof' ? 'var(--kid-hue,#e5533d)' : part === 'door' ? '#8a5a3c' : NONE_PARTS.includes(part) ? 'repeating-linear-gradient(45deg,#eef1f8 0 6px,#d9deea 6px 12px)' : part === 'lawn' ? '#3f8f35' : part === 'rock' ? '#9b7655' : part === 'style' ? '#fff3df' : '#fff3df') : Array.isArray(o.c) ? `linear-gradient(135deg,#${o.c[0].toString(16).padStart(6, '0')} 50%,#${o.c[1].toString(16).padStart(6, '0')} 50%)` : '#' + o.c.toString(16).padStart(6, '0');
   function lookRow(k) {
     const isl = k.island || {}, cur = isl.look || {}, own = isl.owned || {}, sel = S0.lk;
-    const trees = `<div class="mk-part"><b>Chore tree types</b><div class="mk-sw">${TREE_TYPES.map(o => { const id = `tree:${o.k}`, mine = own[id], pick = sel && sel.part === 'tree' && sel.k === o.k; return `<button class="mk-dot ${pick ? 'pick' : ''} ${mine ? '' : 'lock'}" style="--c:${TREE_SW[o.k] || '#3d8b40'}" data-act="stLook" data-p="tree" data-k="${o.k}" aria-label="${esc(o.name)}${mine ? ', yours' : ''}">${mine ? '' : '🌳'}</button>`; }).join('')}</div></div>`;
+    const trees = `<div class="mk-part"><b>Chore tree types</b><div class="mk-sw">${TREE_TYPES.map(o => { const id = `tree:${o.k}`, mine = own[id], plus = !mine && !planAllows('look', id), pick = sel && sel.part === 'tree' && sel.k === o.k; return `<button class="mk-dot ${pick ? 'pick' : ''} ${mine ? '' : 'lock'} ${plus ? 'plus' : ''}" style="--c:${TREE_SW[o.k] || '#3d8b40'}" data-act="stLook" data-p="tree" data-k="${o.k}" aria-label="${esc(o.name)}${mine ? ', yours' : plus ? ', comes with Chorecast Plus' : ''}">${mine ? '' : plus ? '✦' : '🌳'}</button>`; }).join('')}</div></div>`;
     return `<div class="mk" style="--kid-hue:${esc(k.hue)}">${trees}${LOOKS.map(p => `<div class="mk-part"><b>${p.name}</b><div class="mk-sw">${[{ k: '', name: NONE_PARTS.includes(p.k) ? 'None' : 'Original' }, ...p.opts].map(o => {
-      const mine = !o.k || own[`${p.k}:${o.k}`] || (o.prize && unlockedAll(k)), on = (cur[p.k] || '') === o.k, pick = sel && sel.part === p.k && sel.k === o.k;
-      return `<button class="mk-dot ${on ? 'on' : ''} ${pick ? 'pick' : ''} ${mine ? '' : 'lock'}" style="--c:${swatch(p.k, o)}" data-act="stLook" data-p="${p.k}" data-k="${o.k}" aria-label="${esc(o.name)}${on ? ', in use' : mine ? '' : o.prize ? ', a Character Growth prize' : ''}">${o.prize && !mine ? '🎁' : ''}</button>`;
+      const mine = !o.k || own[`${p.k}:${o.k}`] || (o.prize && unlockedAll(k)), plus = !mine && !planAllows('look', `${p.k}:${o.k}`), on = (cur[p.k] || '') === o.k, pick = sel && sel.part === p.k && sel.k === o.k;
+      return `<button class="mk-dot ${on ? 'on' : ''} ${pick ? 'pick' : ''} ${mine ? '' : 'lock'} ${plus ? 'plus' : ''}" style="--c:${swatch(p.k, o)}" data-act="stLook" data-p="${p.k}" data-k="${o.k}" aria-label="${esc(o.name)}${on ? ', in use' : mine ? '' : o.prize ? ', a Character Growth prize' : plus ? ', comes with Chorecast Plus' : ''}">${o.prize && !mine ? '🎁' : plus ? '✦' : ''}</button>`;
     }).join('')}</div></div>`).join('')}</div>`;
   }
   // What an item needs first: a piece of land, a pond, the animal it's for, the size before…
@@ -4100,17 +4229,28 @@ const Studio = (() => {
   const monthName = m => new Date(2026, m - 1, 1).toLocaleDateString(undefined, { month: 'long' });
   // One card in the shop row. Prizes can't be bought. Land, tools, upgrades and farm buildings are one-offs; seasonal
   // things are only sold in their months (and come back every year).
+  // Whether a one-off (land, a size, a tool, an upgrade) is already the kid's.
+  const haveIt = (k, it, n) => { const isl = k.island || {}; return it.size ? (isl.size || 0) >= it.size : it.land ? (it.land === 'farm' ? !!isl.farm : !!(isl.land || {})[it.land]) : it.upgrade ? !!(isl.upgrades || {})[it.t] : it.cat === 'tools' ? !!(isl.tools || {})[it.t] : it.one ? n > 0 : false; };
+  // On the Free plan, things that come with Plus sit on their own shelf at the end of each tab.
+  const plusOnly = (k, it, n) => !it.prize && !haveIt(k, it, n) && !planAllows('item', it.t);
+  function shopCards(list, k, xp, cash, allowCash, lvl, owned) {
+    const mine = list.filter(it => !plusOnly(k, it, owned(it.t))), plus = list.filter(it => plusOnly(k, it, owned(it.t)));
+    return mine.map(it => itemCard(it, k, xp, cash, allowCash, lvl, owned)).join('') + (plus.length ? `<div class="shop-div" role="separator"><span aria-hidden="true">✦</span><b>More with Chorecast Plus</b></div>` + plus.map(it => plusCard(it, owned(it.t))).join('') : '');
+  }
+  function plusCard(it, n) {
+    return `<div class="shop-item is-plus">${plusTag('shop-plus')}${n && !it.one ? `<span class="shop-n">×${n}</span>` : ''}<img src="${THUMBS[it.t] || ''}" alt="" width="84" height="84"><b>${esc(it.name)}</b>${it.about ? `<small class="shop-about">${esc(it.about)}</small>` : ''}<div class="shop-buy"><button data-act="st" data-n="plusPeek" data-t="${it.t}">Have a look</button></div></div>`;
+  }
   function itemCard(it, k, xp, cash, allowCash, lvl, owned) {
     const isl = k.island || {}, n = owned(it.t), G = window.Growth || null, need = needOf(k, it), month = new Date().getMonth() + 1;
     const locked = (it.lvl || 0) > lvl && !(G && G.mastered(k) >= it.lvl * 4), offSeason = it.season && !it.season.includes(month) && !unlockedAll(k);
-    const have = it.size ? (isl.size || 0) >= it.size : it.land ? (it.land === 'farm' ? !!isl.farm : !!(isl.land || {})[it.land]) : it.upgrade ? !!(isl.upgrades || {})[it.t] : it.cat === 'tools' ? !!(isl.tools || {})[it.t] : it.one ? n > 0 : false;
+    const have = haveIt(k, it, n);
     let foot;
     if (it.prize) { const left = unlockedAll(k) ? 1 : ((isl.won || {})[it.t] || 0) - items(k).filter(i => i.t === it.t && i.won).length; foot = left > 0 ? `<div class="shop-buy"><button data-act="stPlaceWon" data-t="${it.t}">Place it · free</button></div>` : n ? '<small class="owned">On your island</small>' : `<small class="prize">🎁 ${esc(G && G.prizeHint ? G.prizeHint(k, 'item:' + it.t) : 'A Character Growth prize')}</small>`; }
     else if (have) foot = `<small class="owned">${it.size || it.land ? 'Yours' : it.cat === 'tools' ? 'In your shed' : it.upgrade ? 'Done' : 'On your island'}</small>`;
     else if (offSeason) foot = `<small>Back in ${monthName(it.season[0])}</small>`;
     else if (locked) foot = `<small>Unlocks with a ${LEVELS[it.lvl].name.toLowerCase()}${G ? `, or master ${it.lvl * 4 - G.mastered(k)} more skills` : ''}</small>`;
     else if (need) foot = `<small>${esc(need)}</small>`;
-    else foot = `${it.feed ? `<small>${it.feed} scoops · ${isl.feed || 0} in the bin</small>` : ''}<div class="shop-buy"><button data-act="stBuyXp" data-t="${it.t}" ${xp.left < it.xp ? 'disabled' : ''}>${ic('sparkle')} ${it.xp} XP</button>${xp.left < it.xp && G ? `<button class="cg-earn" data-act="gEarn" data-id="${k.id}" data-need="${it.xp - xp.left}">Earn it: lesson</button>` : ''}${allowCash ? `<button data-act="stBuyCash" data-t="${it.t}" ${cash < it.cash ? 'disabled' : ''}>${fmt(it.cash)}</button>` : ''}</div>`;
+    else foot = `${it.feed ? `<small>${it.feed} scoops · ${isl.feed || 0} in the bin</small>` : ''}<div class="shop-buy"><button data-act="stBuyXp" data-t="${it.t}" ${xp.left < it.xp ? 'disabled' : ''}>${ic('sparkle')} ${it.xp} XP</button>${xp.left < it.xp && G ? `<button class="cg-earn" data-act="gEarn" data-id="${k.id}" data-need="${it.xp - xp.left}">Earn it: lesson</button>` : ''}${xp.left < it.xp && S().wishesOn !== false ? (wishList(k).some(w => w.t === it.t) ? '<button class="cg-earn" disabled>♡ On your wish list</button>' : wishList(k).length < WISH_MAX ? `<button class="cg-earn" data-act="st" data-n="wish" data-t="${it.t}">♡ Wish list</button>` : '') : ''}${allowCash ? `<button data-act="stBuyCash" data-t="${it.t}" ${cash < it.cash ? 'disabled' : ''}>${fmt(it.cash)}</button>` : ''}</div>`;
     return `<div class="shop-item ${locked || need || offSeason ? 'locked' : ''} ${it.prize ? 'is-prize' : ''}">${n && !it.one ? `<span class="shop-n">×${n}</span>` : ''}<img src="${THUMBS[it.t] || ''}" alt="" width="84" height="84"><b>${esc(it.name)}</b>${it.about && !have ? `<small class="shop-about">${esc(it.about)}</small>` : ''}${foot}</div>`;
   }
   const items = k => (k.island || {}).items || [];
@@ -4196,9 +4336,9 @@ const Studio = (() => {
   // Collections: own every animal in a set, or fill a book, for a gold trophy and 250 XP.
   function setsRow(k) {
     const isl = k.island || {}, claimed = isl.sets || {}, onIsland = (isl.items || []).filter(i => i.t === 'trophy').map(i => i.v);
-    return `<div class="care-row">${SETS.map(set => { const p = Farm.setProgress(k, set), full = p.have >= p.of, got = claimed[set.k];
-      const btn = got ? (onIsland.includes(set.k) ? '<button disabled>Trophy on your island</button>' : `<button data-act="st" data-n="placeTrophy" data-k="${set.k}">Place your trophy</button>`) : `<button data-act="st" data-n="claim" data-k="${set.k}" ${full ? '' : 'disabled'}>${full ? `Claim · ${RULES.setXp || 250} XP` : `${p.of - p.have} to go`}</button>`;
-      return `<div class="care-card ${full && !got ? 'need' : ''}"><span class="care-ic" aria-hidden="true">${set.icon}</span><b>${esc(set.name)}</b><small>${p.have} of ${p.of}${set.book === 'produce' ? ' sold' : set.book ? ' found' : ' on your island'}</small><div class="care-bar" aria-hidden="true"><i style="width:${Math.round(p.have / p.of * 100)}%"></i></div>${btn}</div>`; }).join('')}</div>`;
+    return `<div class="care-row">${SETS.map(set => { const p = Farm.setProgress(k, set), full = p.have >= p.of, got = claimed[set.k], plus = !got && !planAllows('set', set.k);
+      const btn = plus ? '<button disabled>Comes with Chorecast Plus</button>' : got ? (onIsland.includes(set.k) ? '<button disabled>Trophy on your island</button>' : `<button data-act="st" data-n="placeTrophy" data-k="${set.k}">Place your trophy</button>`) : `<button data-act="st" data-n="claim" data-k="${set.k}" ${full ? '' : 'disabled'}>${full ? `Claim · ${RULES.setXp || 250} XP` : `${p.of - p.have} to go`}</button>`;
+      return `<div class="care-card ${full && !got && !plus ? 'need' : ''} ${plus ? 'is-plus' : ''}">${plus ? plusTag('shop-plus') : ''}<span class="care-ic" aria-hidden="true">${set.icon}</span><b>${esc(set.name)}</b><small>${p.have} of ${p.of}${set.book === 'produce' ? ' sold' : set.book ? ' found' : ' on your island'}</small><div class="care-bar" aria-hidden="true"><i style="width:${Math.round(p.have / p.of * 100)}%"></i></div>${btn}</div>`; }).join('')}</div>`;
   }
   // Which island a shop item lives on: its own piece of land, 'water' (the pond or the lake), 'home' (land, sizes,
   // tools and upgrades), or '' for anything that can go on any island's grass.
@@ -4258,12 +4398,17 @@ const Studio = (() => {
       panel = `<div class="st-panel"><h3>Chore tree ${i + 1}</h3><p>${spade ? `Planted when a job was paid. Dig it up and replant it somewhere new${types.length ? ', or give it a new type' : ''}.${types.length ? '' : ' Buy tree types in Makeover.'}` : 'Planted when a job was paid. Get the tree spade (Tools) to move it, and tree types (Makeover) to change it.'}</p>
         ${spade && types.length ? `<div class="st-sw"><span>Type</span><button class="chip ${cur ? '' : 'on'}" data-act="st" data-n="treeType" data-k="">Standard</button>${types.map(o => `<button class="chip ${cur === o.k ? 'on' : ''}" data-act="st" data-n="treeType" data-k="${o.k}">${esc(o.name)}</button>`).join('')}</div>` : ''}
         <div class="st-actions">${spade ? '<button class="st-btn primary" data-act="st" data-n="treeMove">Move it</button>' : '<button class="st-btn" data-act="stCat" data-c="tools">See the tree spade</button>'}<button class="st-btn ghost" data-act="st" data-n="treeDone">Done</button></div></div>`;
+    } else if (S0.peek) {
+      const d = shopDef(S0.peek), wl = wishList(k), on = wl.some(w => w.t === d.t), can = S().wishesOn !== false && S().wishPlus !== false;
+      panel = `<div class="st-panel"><h3>${esc(d.name)} ${plusTag()}</h3><p>${d.about ? esc(d.about) + ' ' : ''}This comes with Chorecast Plus.</p>
+        <div class="st-actions">${can ? (on ? '<button class="st-btn" disabled>♡ On your wish list</button>' : `<button class="st-btn primary" data-act="st" data-n="wish" data-t="${d.t}" ${wl.length >= WISH_MAX ? 'disabled' : ''}>♡ Save to my wish list</button>`) : ''}<button class="st-btn ghost" data-act="st" data-n="peekDone">Done</button></div>${can && !on && wl.length >= WISH_MAX ? `<p class="st-small">Your wish list holds ${WISH_MAX}. Take one off on your Today screen to add this.</p>` : ''}</div>`;
     } else if (S0.lk) {
       const { part, k: key } = S0.lk, id = `${part}:${key}`, d = key ? lookDef(id) : null, own = (k.island || {}).owned || {}, mine = !key || own[id] || (d && d.prize && unlockedAll(k)), inUse = part !== 'tree' && (((k.island || {}).look || {})[part] || '') === key, G = window.Growth || null;
       const partName = part === 'tree' ? 'chore tree' : ((LOOKS.find(p => p.k === part) || {}).name || part).toLowerCase(), name = d ? d.name : `${NONE_PARTS.includes(part) ? 'No' : 'Original'} ${partName}`;
       const tentNote = !lvl && (part === 'wall' || part === 'door' || part === 'shutter' || part === 'windowbox' || part === 'wallart') ? ' Your tent has no walls or door yet, so this shows once you build a little hut.' : '', lvlNote = d && d.lvl && lvl < d.lvl ? ` It needs a ${LEVELS[d.lvl].name.toLowerCase()}.` : '', guideNote = part === 'outfit' ? ' Your guide wears it in Character Growth.' : '';
-      const acts = inUse ? '<button class="st-btn ghost" data-act="stLookOff">Done</button>' : mine ? (part === 'tree' ? '<button class="st-btn ghost" data-act="stLookOff">Got it</button>' : `<button class="st-btn primary" data-act="stLookUse">Use it</button><button class="st-btn ghost" data-act="stLookOff">Cancel</button>`) : d.prize ? '<button class="st-btn ghost" data-act="stLookOff">Cancel</button>' : `<button class="st-btn primary" data-act="stLookXp" ${xp.left < d.xp || lvlNote ? 'disabled' : ''}>${ic('sparkle')} ${d.xp.toLocaleString()} XP</button>${allowCash ? `<button class="st-btn" data-act="stLookCash" ${cash < d.cash || lvlNote ? 'disabled' : ''}>${fmt(d.cash)}</button>` : ''}<button class="st-btn ghost" data-act="stLookOff">Cancel</button>`;
-      const about = part === 'tree' ? (mine ? 'Yours. With the tree spade, tap a chore tree and pick this type.' : 'Buy it once, then give it to as many chore trees as you like with the tree spade.') : inUse ? 'This is what your island uses now.' : mine ? 'Have a look, then tap Use it to keep it.' : d.prize ? `🎁 A Character Growth prize. ${esc(G && G.prizeHint ? G.prizeHint(k, id) : '')}` : 'Here’s how it would look. Buy it once, and you can switch back to it whenever you like.';
+      const plusLook = !mine && d && !planAllows('look', id);
+      const acts = inUse ? '<button class="st-btn ghost" data-act="stLookOff">Done</button>' : plusLook ? '<button class="st-btn ghost" data-act="stLookOff">Done</button>' : mine ? (part === 'tree' ? '<button class="st-btn ghost" data-act="stLookOff">Got it</button>' : `<button class="st-btn primary" data-act="stLookUse">Use it</button><button class="st-btn ghost" data-act="stLookOff">Cancel</button>`) : d.prize ? '<button class="st-btn ghost" data-act="stLookOff">Cancel</button>' : `<button class="st-btn primary" data-act="stLookXp" ${xp.left < d.xp || lvlNote ? 'disabled' : ''}>${ic('sparkle')} ${d.xp.toLocaleString()} XP</button>${allowCash ? `<button class="st-btn" data-act="stLookCash" ${cash < d.cash || lvlNote ? 'disabled' : ''}>${fmt(d.cash)}</button>` : ''}<button class="st-btn ghost" data-act="stLookOff">Cancel</button>`;
+      const about = plusLook ? `Here’s how it would look. ${plusTag()} This comes with Chorecast Plus.` : part === 'tree' ? (mine ? 'Yours. With the tree spade, tap a chore tree and pick this type.' : 'Buy it once, then give it to as many chore trees as you like with the tree spade.') : inUse ? 'This is what your island uses now.' : mine ? 'Have a look, then tap Use it to keep it.' : d.prize ? `🎁 A Character Growth prize. ${esc(G && G.prizeHint ? G.prizeHint(k, id) : '')}` : 'Here’s how it would look. Buy it once, and you can switch back to it whenever you like.';
       panel = `<div class="st-panel"><h3>${esc(name)}</h3><p>${about}${tentNote}${lvlNote}${guideNote}</p><div class="st-actions">${acts}</div></div>`;
     }
     const here = S0.isle, tabs = tabsFor(here), all = islesOf(k), at = all.indexOf(here), near = d => ISLE_NAME[all[(at + d + all.length) % all.length]], onHere = items.filter(i => isleOf(i) === here).length;
@@ -4273,13 +4418,13 @@ const Studio = (() => {
     const root = $('#studio .studio-ui'), keepX = ($('.shop-row', root) || $('.care-row', root) || {}).scrollLeft || 0;
     root.innerHTML = `
       <header class="st-bar"><button class="sbtn" data-act="stClose" aria-label="Back to ${esc(k.name)}'s sky">${ic('x')}</button>
-        <div class="st-title"><b>${here === 'home' ? `${esc(k.name)}’s island` : esc(ISLE_NAME[here])}</b><span>${here === 'home' ? `Level ${cap.lvl} · ${cap.name} · ` : ''}${onHere} thing${onHere === 1 ? '' : 's'} ${here === 'home' ? 'on it' : 'here'}${all.length > 1 ? ` · island ${at + 1} of ${all.length}` : ''}</span></div>
+        <div class="st-title"><b>${here === 'home' ? `${esc(k.name)}’s island` : esc(ISLE_NAME[here])}</b><span>${(k.island || {}).club && k.island.club.until > Date.now() ? '⭐ Island Club · ' : ''}${here === 'home' ? `Level ${cap.lvl} · ${cap.name} · ` : ''}${onHere} thing${onHere === 1 ? '' : 's'} ${here === 'home' ? 'on it' : 'here'}${all.length > 1 ? ` · island ${at + 1} of ${all.length}` : ''}</span></div>
         <div class="st-bal"><span class="st-chip">${ic('sparkle')} ${xp.left.toLocaleString()} XP</span>${allowCash ? `<span class="st-chip">${ic('jar')} ${fmt(cash)}</span>` : ''}</div></header>
       ${nav}<p class="st-tip ${S0.place ? 'on' : ''}">${esc(S0.msg || (S0.place ? 'Tap the grass where it should go.' : all.length > 1 && here === 'home' ? 'Tap the arrows to visit your other islands.' : 'Drag to spin, pinch to zoom, tap an animal to say hi.'))}${S0.place ? ' <button class="st-link" data-act="stCancel">Cancel</button>' : ''}</p>
       ${panel}
       <section class="shop" aria-label="Island shop">
         ${actBar(k, here)}<div class="shop-tabs">${tabs.map(([c, l]) => `<button class="chip ${S0.cat === c ? 'on' : ''}" data-act="stCat" data-c="${c}">${l}</button>`).join('')}</div>
-        ${S0.cat === 'jobs' ? jobsRow(k, here === 'farm') : S0.cat === 'look' ? lookRow(k) : S0.cat === 'stand' ? standRow(k) : S0.cat === 'sets' ? setsRow(k) : `<div class="shop-row">${list.map(it => itemCard(it, k, xp, cash, allowCash, lvl, owned)).join('')}</div>`}
+        ${S0.cat === 'jobs' ? jobsRow(k, here === 'farm') : S0.cat === 'look' ? lookRow(k) : S0.cat === 'stand' ? standRow(k) : S0.cat === 'sets' ? setsRow(k) : `<div class="shop-row">${shopCards(list, k, xp, cash, allowCash, lvl, owned)}</div>`}
         <p class="shop-foot">${S0.cat === 'isle' ? (here === 'farm' ? 'Every farm animal eats a scoop of feed a day. Feed them from Island jobs, and keep the feed bin topped up. Sell what they make at the farm stand.' : `These live on your ${ISLE_NAME[here].toLowerCase()}.${OPEN_ISLES.includes(here) ? ' Things from the other tabs can go on its grass too.' : ''}`) : S0.cat === 'jobs' ? 'Everything you own needs looking after. Island jobs pop up every few days and earn XP.' : S0.cat === 'look' ? 'Tap a colour to see it on your island. Buy one once and switch back any time. 🎁 colours are prizes from Character Growth.' : S0.cat === 'farm' ? 'Every farm animal eats a scoop of feed a day. Feed them from Island jobs, and keep the feed bin topped up. Sell what they make at the farm stand.' : S0.cat === 'stand' ? `Today the farm can earn ${Farm.cap() === Infinity ? 'as much as you like' : `up to ${Farm.cap()} XP`}; ${Farm.earnedToday(k)} so far.${Farm.saturday() ? ' It’s Saturday market day: prices are 25% higher.' : ''}` : S0.cat === 'land' ? 'Grow your island one size at a time, and add new land where new animals and things live.' : S0.cat === 'season' ? 'Seasonal things are sold in their months and come back every year. Once yours, they stay.' : S0.cat === 'sets' ? 'Collect every animal in a set, or fill a book, to win a gold trophy and 250 XP.' : S0.cat === 'big' ? 'Big dreams take saving up for. Every XP you don’t spend gets you closer.' : `Earn XP from approved missions, habits, lessons and island jobs.${allowCash ? ' Spend-jar money works too, but once it’s spent it’s gone.' : ''}`}</p>
       </section>`;
     const row = $('.shop-row', root) || $('.care-row', root); if (row) row.scrollLeft = keepX;
@@ -4309,7 +4454,16 @@ const Studio = (() => {
     const save = (ev, pl) => { patch.island = I; updDoc('kids', k.id, patch); if (ev) track(ev, pl, k.id); };
     const blocked = () => { const left = mustLeft(k); if (left) { S0.msg = `Finish your must-dos first: ${left.length} to go.`; Sound.error(); ui(); return true; } return false; };
     if (n === 'standTab') { S0.standTab = a.dataset.t; return ui(); }
+    // A closer look at something that comes with Plus (the Free plan's shelf at the end of each tab).
+    if (n === 'plusPeek') { const d = shopDef(a.dataset.t); if (!d) return; S0.peek = d.t; S0.sel = null; S0.lk = null; S0.tree = null; S0.confirm = null; Sound.tap(); track('kid.plus_peek', { item: d.t }, k.id); return ui(); }
+    if (n === 'peekDone') { S0.peek = null; return ui(); }
     if (n === 'play') { if (!Play.on() || blocked()) return; return startPlay(); }
+    if (n === 'wish') {
+      const d = shopDef(a.dataset.t), wl = wishList(k); if (!d || wl.some(w => w.t === d.t) || wl.length >= WISH_MAX) return;
+      const plus = !planAllows('item', d.t), need = Math.max(0, d.xp - xpOf(k).left);
+      updDoc('kids', k.id, { wishes: [...wl, { t: d.t, name: d.name, xp: d.xp, at: now, plus }], wish: null }); track('shop.wish', { item: d.t, need, plus }, k.id);
+      S0.msg = `Saved to your wish list. ${plus ? 'It’s on your Today screen.' : 'Your Today screen shows how close you are.'}`; Sound.pop(); return ui();
+    }
     if (n === 'playStop') return stopPlay();
     if (n === 'collect') {
       if (blocked()) return;
@@ -4380,7 +4534,7 @@ const Studio = (() => {
     if (n === 'isle') return go(+a.dataset.d);
     // Once the kid has a farm, its things (feed, farm animals) are on the farm island, so the Farm tab takes them there.
     if (n === 'cat' && a.dataset.c === 'farm' && S0.isle !== 'farm' && islesOf(k).includes('farm')) return go(0, 'farm');
-    if (n === 'cat') { S0.cat = a.dataset.c; if (S0.preview) { S0.lk = null; S0.preview = null; build(); } }
+    if (n === 'cat') { S0.cat = a.dataset.c; S0.peek = null; if (S0.preview) { S0.lk = null; S0.preview = null; build(); } }
     else if (n === 'buyXp' || n === 'payXp') return buy(d, 'xp');
     else if (n === 'care') return startJob(a.dataset.k);
     else if (n === 'buyCash') { S0.confirm = { t: d.t }; S0.sel = null; }
@@ -4574,6 +4728,7 @@ function render() {
   else if (UI.screen === 'kid') html = viewKid();
   else if (UI.screen === 'gate') html = viewGate();
   else if (UI.screen === 'parent') html = viewParent();
+  else if (UI.screen === 'shop') html = UI.unlocked ? viewShop() : viewWho();
   else if (UI.screen === 'signin') html = viewSignin();
   else html = viewWho();
   app.innerHTML = html;
@@ -4715,9 +4870,9 @@ function welcomeList() {
 /* ---------- Kid home ---------- */
 function viewKid() {
   const kid = curKid(); if (!kid) { UI.screen = 'who'; return viewWho(); }
-  noticeSends(kid);
+  noticeSends(kid); noticeGifts(kid);
   const t = UI.tab;
-  const body = t === 'money' ? kidMoney(kid) : t === 'market' ? kidMarket(kid) : t === 'proof' ? kidProof(kid) : kidToday(kid);
+  const body = kid.resting ? kidResting(kid) : t === 'money' ? kidMoney(kid) : t === 'market' ? kidMarket(kid) : t === 'proof' ? kidProof(kid) : kidToday(kid);
   if (t !== 'today') UI.skyProgress = (() => { const p = kidProgress(kid, dkey()); return p.total ? p.done / p.total : 0; })();
   const others = kidsList().filter(k => k.id !== kid.id);
   return `<div class="wrap kid" style="--hue:${kid.hue}">
@@ -4787,6 +4942,7 @@ function kidToday(kid) {
     </section>
     <div class="col">
       ${(window.Growth || null) ? Growth.card(kid) : ''}
+      ${wishCard(kid)}
       ${choreCard('must', b.must, kid, date)}
       ${choreCard('team', b.team, kid, date)}
       ${gigCard(gigs, kid, date)}
@@ -4795,6 +4951,25 @@ function kidToday(kid) {
       <button class="tour-again" data-act="tourAgain">👋 Show me around again</button>
     </div>
   </div>`;
+}
+// The kid's wish list on Today: how close they are to each thing, in XP. A Plus thing just says so.
+function wishCard(kid) {
+  const wl = wishList(kid); if (!wl.length || S().wishesOn === false) return '';
+  const left = xpOf(kid).left;
+  return `<section class="card glass"><header class="card-h"><span class="dot" style="background:#F06595"></span><span class="card-t">My wish list</span><span class="card-r">✨ ${left.toLocaleString()} XP</span></header>
+    <div class="wish-list">${wl.map(w => { const d = shopDef(w.t), plus = !planAllows('item', w.t), f = Math.min(1, left / Math.max(1, d.xp));
+      return `<div class="wish-i"><span class="wish-ic" aria-hidden="true">${WISH_IC[d.cat] || '🎁'}</span><div class="wish-m"><b>${esc(d.name)}</b>${plus ? `<small>${plusTag()} Comes with Chorecast Plus</small>` : f >= 1 ? '<small>You have enough XP! Get it in your island shop.</small>' : `<div class="wish-bar" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div><small>${(d.xp - left).toLocaleString()} more XP to go</small>`}</div>
+        ${!plus && f >= 1 ? `<button class="mini-btn" data-act="studio" data-id="${kid.id}">Get it</button>` : ''}<button class="wish-x" data-act="wishDel" data-t="${w.t}" aria-label="Take ${esc(d.name)} off my wish list">${ic('x')}</button></div>`; }).join('')}</div></section>`;
+}
+// A resting kid (over the Free plan's kid limit since Plus ended): their money and island are kept safe, and nothing
+// can be done until a grown-up wakes them. Nothing here talks about plans or prices.
+function kidResting(kid) {
+  const j = kid.jars || {};
+  return `<div class="split"><section class="hero" aria-label="${esc(kid.name)} is resting">
+      <div class="hero-loc"><span class="hero-ava" style="--hue:${kid.hue}">${kid.avatar}</span><span>${esc(kid.name)}'s sky</span></div>
+      <div class="hero-num num" aria-label="All your money: ${fmt(netWorth(kid))}">${heroMoney(netWorth(kid))}</div>
+      <div class="minis">${JARS.map(x => `<div class="mini glass"><span><i style="background:${x.color}"></i>${x.label}</span><b class="num">${fmt(x.k === 'invest' ? (j.invest || 0) + holdingsValue(kid) : j[x.k] || 0)}</b></div>`).join('')}</div>
+    </section><div class="col"><section class="card glass rest-card"><div class="rest-ic" aria-hidden="true">💤</div><h2>Resting for now</h2><p>Your money and your island are safe, just as you left them. Chores and lessons are paused for now.</p></section></div></div>`;
 }
 // "Do this next": one card at the top of Today that walks a kid through their day in order. Must-dos, team tasks,
 // today's lesson, good habits, then a side hustle, and finally "All done for today!".
@@ -5065,7 +5240,7 @@ function fundCard(f, kid) {
     <div class="fund-top"><span class="fund-ic" aria-hidden="true"><span class="s3d" data-3d="fund:${f.id}" data-sig="1"></span><span class="no3d">${f.icon}</span></span><span class="fund-name">${f.name}<small>${f.short} · ${riskWord(f.risk)}</small></span></div>
     <div class="fund-mid"><b class="num">${fmt(p)}</b><span class="chg ${ch >= 0 ? 'up' : 'down'}">${ic(ch >= 0 ? 'up' : 'down')}${pct(Math.abs(ch))} today</span></div>
     ${spark(series(f.id, 56), ch >= 0 ? '#9CFFC4' : '#FFB3BA', 220, 56, 'sp-' + f.id)}
-    <div class="fund-risk">${riskDots(f.risk)}${h && h.units > 0 ? `<span class="own">You own ${fmt(h.units * p)}</span>` : '<span>Tap to trade</span>'}</div>
+    <div class="fund-risk">${riskDots(f.risk)}${h && h.units > 0 ? `<span class="own">You own ${fmt(h.units * p)}</span>` : planAllows('fund', f.id) ? '<span>Tap to trade</span>' : plusTag()}</div>
   </button>`;
 }
 function holdingsCard(kid) {
@@ -5241,7 +5416,8 @@ function fundSheet() {
       <div class="seg" style="align-self:center">${Object.keys(RANGES).map(r => `<button class="seg-i ${t.range === r ? 'on' : ''}" data-act="range" data-r="${r}">${r}</button>`).join('')}</div>
       <div class="note-box">${esc(f.blurb)}</div>
       <div class="statgrid"><div><span>You own</span><b class="num">${fmt(h.units * p)}</b></div><div><span>You paid</span><b class="num">${fmt(h.cost || 0)}</b></div><div><span>${gain >= 0 ? 'Gain' : 'Loss'}</span><b class="num" style="color:${h.units > 0 ? (gain >= 0 ? 'var(--good)' : 'var(--bad)') : 'inherit'}">${h.units > 0 ? fmt(Math.abs(gain)) : '–'}</b></div></div>
-      <div class="seg" style="align-self:center"><button class="seg-i ${t.side === 'buy' ? 'on' : ''}" data-act="side" data-s="buy">Buy</button><button class="seg-i ${t.side === 'sell' ? 'on' : ''}" data-act="side" data-s="sell" ${h.units > 0 ? '' : 'disabled'}>Sell</button></div>
+      ${planAllows('fund', f.id) ? '' : `<p class="plus-line">${plusTag()} Buying this fund comes with Chorecast Plus. You can watch it here, and sell what you own any time.</p>`}
+      <div class="seg" style="align-self:center"><button class="seg-i ${t.side === 'buy' ? 'on' : ''}" data-act="side" data-s="buy" ${planAllows('fund', f.id) ? '' : 'disabled'}>Buy</button><button class="seg-i ${t.side === 'sell' ? 'on' : ''}" data-act="side" data-s="sell" ${h.units > 0 ? '' : 'disabled'}>Sell</button></div>
       <div class="amt-big num">${fmt(amt)}</div>
       <div class="chips" style="justify-content:center">${[10, 50, 100, 500].map(c => `<button class="chip-p" data-act="tAmt" data-c="${c}">+${fmt(c)}</button>`).join('')}<button class="chip-p" data-act="tAmt" data-c="all">${t.side === 'buy' ? 'All cash' : 'Sell all'}</button><button class="chip-p" data-act="tAmt" data-c="0">Clear</button></div>
       <p class="hint" style="text-align:center">${t.side === 'buy' ? (cash ? `You have ${fmt(cash)} invest cash. ${amt ? `That buys ${(amt / p).toFixed(3)} units. Owning part of a unit is called a fractional share.` : ''}` : 'Your Invest jar is empty. It fills up every payday, or move money from Spend.') : `You can sell up to ${fmt(val)}. The money goes back to your Invest jar.`}</p>
@@ -5492,17 +5668,71 @@ function viewParent() {
   if (UI.pocket) return viewPocket();
   if (UI.wiz) return viewWizard();
   if (UI.ptab === 'start' && !startShown()) UI.ptab = 'review';
-  const t = UI.ptab, pend = jobsList().filter(j => j.status === 'pending').length;
-  const nav = [...(startShown() ? [['start', 'star', 'Getting started', 0]] : []), ['review', 'review', 'To review', pend], ['kids', 'crew', 'Kids', 0], ['chores', 'list', 'Chores', 0], ['home', 'home', 'Our home', 0], ['bank', 'bank', 'Money rules', 0], ['skills', 'sparkle', 'Character Growth', 0], ['family', 'lock', 'Family and devices', 0]];
+  const t = UI.ptab, pend = jobsList().filter(j => j.status === 'pending').length, over = Store.mode === 'server' && activeKids().length > Plan.limits.kids;
+  const nav = [...(startShown() ? [['start', 'star', 'Getting started', 0]] : []), ['review', 'review', 'To review', pend], ['kids', 'crew', 'Kids', 0], ['chores', 'list', 'Chores', 0], ['home', 'home', 'Our home', 0], ['bank', 'bank', 'Money rules', 0], ['shop', 'gift', 'Shop', kidsList().filter(k => k.wish && k.wish.t).length], ['skills', 'sparkle', 'Character Growth', 0], ['family', 'lock', 'Family and devices', 0]];
   const main = t === 'start' ? pStart() : t === 'kids' ? pKids() : t === 'chores' ? pChores() : t === 'home' ? pHome() : t === 'bank' ? pBank() : t === 'family' ? pFamily() : t === 'skills' ? (window.Growth ? Growth.parentView() : '<div class="pempty">Character Growth is loading…</div>') : pReview();
   return `<div class="pwrap">
     <aside class="pside">
       <div class="pside-top"><button class="plink" data-act="lock">${ic('back')} Lock and go back</button></div>
-      <h1 class="ptitle">Grown-ups</h1>
+      <h1 class="ptitle">Grown-ups</h1>${Store.mode === 'server' ? planPill() : ''}
       <nav class="pnav" aria-label="Grown-up sections">${nav.map(([k, i, l, b]) => `<button class="pnav-i ${t === k ? 'on' : ''}" data-act="ptab" data-tab="${k}" ${t === k ? 'aria-current="page"' : ''}>${ic(i)}<span>${l}</span>${b ? `<b class="pbadge">${b}</b>` : ''}</button>`).join('')}</nav>
       <p class="psync">${Store.mode === 'cloud' ? 'Synced. Chores, pay and photos show up on every device that opens this link while signed in to your account.' : Store.mode === 'server' ? `Synced to ${esc(Acct.me.family.name)}. Changes show up on every family device.` : 'Saved on this device only.'}</p>
     </aside>
-    <main class="pmain">${main}</main></div>`;
+    <main class="pmain">${over || UI.restPick ? pRest() : main}</main></div>`;
+}
+// When Plus ends (or a grown-up previews Free) with more kids than the plan has room for, a grown-up picks who stays
+// active. The others rest: their money, statement and island are kept, and their chores and lessons pause until
+// there's room again. A grown-up can swap who's active once a week.
+function pRest() {
+  const kids = kidsList().filter(k => !k.example), n = Plan.limits.kids;
+  if (!UI.restSel) UI.restSel = kids.filter(k => !k.resting).slice(0, n).map(k => k.id);
+  const sel = UI.restSel, swapAt = S().restAt || 0, wait = UI.restPick && swapAt && Date.now() - swapAt < 7 * 864e5;
+  return `<header class="phead"><h2>${Plan.preview ? 'Previewing the free plan' : UI.restPick ? 'Who’s active' : 'Plus has ended'}</h2><p>The free plan has room for ${n} active kids. Choose who keeps going; the others rest until there’s room again.</p></header>
+    <section class="rest-stays glass-p"><b>What stays, for every kid</b><ul><li>Their money, jars and statement</li><li>Everything on their islands, and every prize they’ve won</li><li>Every lesson they’ve passed, and their medals</li><li>Market investments, which they can always sell</li></ul></section>
+    <div class="rest-kids">${kids.map(k => { const on = sel.includes(k.id); return `<button class="rest-kid ${on ? 'on' : ''}" data-act="restPick" data-id="${k.id}" aria-pressed="${on}"><span class="ava-s" style="--hue:${k.hue}">${k.avatar}</span><b>${esc(k.name)}</b><small>${on ? 'Active' : 'Resting'}</small></button>`; }).join('')}</div>
+    ${wait ? `<p class="muted">You can swap who’s active once a week. Next swap from ${new Date(swapAt + 7 * 864e5).toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' })}.</p>` : ''}
+    <div class="rest-go"><button class="pbtn primary" data-act="restSave" ${sel.length < 1 || sel.length > n || wait ? 'disabled' : ''}>Keep ${sel.length === 1 ? 'this kid' : `these ${sel.length} kids`} active</button><button class="pbtn" data-act="planOpen" data-why="kids">${plusTag()} See Plus</button>${UI.restPick ? '<button class="link-btn" data-act="restCancel">Cancel</button>' : ''}</div>`;
+}
+// Upgrade moments: one card at a time at the top of To review, when Plus would help this family right now. At most
+// one a day, and each at most once a fortnight (the recap once a month); the server keeps when each was shown. While a
+// grown-up previews the free plan the cards show as they would, but aren't recorded.
+const MOMENT_GAP = { recap: 30 };
+function planMoment() {
+  if (Store.mode !== 'server') return null;
+  const now = Date.now(), M = Plan.moments || {}, day = 864e5, today = dkey();
+  if (UI.moment && UI.moment.day === today) return UI.moment.gone ? null : UI.moment;
+  if (Object.values(M).some(t => now - t < day)) return null;
+  const fresh = m => !M[m] || now - M[m] > (MOMENT_GAP[m] || 14) * day, kids = activeKids(), G = window.Growth || null;
+  let m = null;
+  if (Plan.welcome && Plan.until && new Date(Plan.until) - now < 4 * day && fresh('welcome')) m = { moment: 'welcome' };
+  else if (Plan.plan === 'free') {
+    if (G && G.unitInfo && fresh('unit1')) outer: for (const k of kids) for (const tree of G.trees.live) { if ((Plan.packs || []).includes(tree)) continue; const u = G.unitInfo(k, tree); if (u && u.unit1Done) { m = { moment: 'unit1', kidId: k.id, tree, ...u }; break outer; } }
+    if (!m && fresh('wish')) for (const k of kids) { const w = wishList(k).find(x => !planAllows('item', x.t)); if (w) { m = { moment: 'wish', kidId: k.id, t: w.t }; break; } }
+    if (!m && fresh('starter')) for (const k of kids) { const own = new Set(((k.island || {}).items || []).map(i => i.t)), st = CAT.starter.items, got = st.filter(t => own.has(t)).length; if (got >= st.length * 0.8) { m = { moment: 'starter', kidId: k.id }; break; } }
+  } else if (!Plan.welcome && fresh('recap') && kids.length) m = { moment: 'recap' };
+  if (!m) return null;
+  UI.moment = { ...m, day: today };
+  if (!Plan.preview) { Plan.moments = { ...M, [m.moment]: now }; api('POST', '/api/plan/moment', { moment: m.moment, kidId: m.kidId, action: 'shown' }).catch(() => {}); }
+  return UI.moment;
+}
+const plusCounts = () => ({ items: SHOP.filter(it => !it.prize && !planAllows('item', it.t) && !it.size && !it.land).length, lands: SHOP.filter(it => it.land && !planAllows('item', it.t)).length });
+function momentCard() {
+  const m = planMoment(); if (!m) return '';
+  const k = m.kidId && Store.kids[m.kidId], name = k ? esc(k.name) : '', G = window.Growth || null, pc = plusCounts();
+  const treeName = m.tree && G ? ((G.trees.all.find(t => t.id === m.tree) || {}).name || m.tree) : '';
+  const btn = (action, label, primary) => `<button class="pbtn ${primary ? 'primary' : ''}" data-act="momentGo" data-a="${action}">${label}</button>`;
+  let icon = '✦', title = '', body = '', btns = '';
+  if (m.moment === 'unit1') { icon = '🎉'; title = `${name} finished ${esc(treeName)} unit 1`; body = `Units 2 to ${m.units} (${m.more} more lessons) come with Plus, for every kid in the family. Or get ${esc(treeName)} on its own, kept for good.`; btns = btn('plans', `${plusTag()} See Plus`, true) + btn('pack', `Just ${esc(treeName)} · ${SHOP_PACK}`); }
+  else if (m.moment === 'wish') { const d = shopDef(m.t); icon = '♡'; title = `${name} wished for the ${esc(d.name.toLowerCase())}`; body = `It comes with Plus, along with ${pc.items} more island things and ${pc.lands} more islands. ${name} can keep saving XP for things in the starter shop meanwhile.`; btns = btn('plans', `${plusTag()} See Plus`, true); }
+  else if (m.moment === 'starter') { icon = '🏝️'; title = `${name} has filled the starter island`; body = `Plus opens ${pc.items} more island things, ${pc.lands} more islands to explore and bigger island sizes, for every kid.`; btns = btn('plans', `${plusTag()} See Plus`, true); }
+  else if (m.moment === 'welcome') {
+    const days = Math.max(0, Math.ceil((new Date(Plan.until) - Date.now()) / 864e5)), les = G && G.passedCount ? kidsList().reduce((a, x) => a + G.passedCount(x).all, 0) : 0, its = kidsList().reduce((a, x) => a + ((x.island || {}).items || []).length, 0);
+    icon = '⏳'; title = `Your Plus fortnight ends in ${days} day${days === 1 ? '' : 's'}`; body = `So far your family has passed ${les} lesson${les === 1 ? '' : 's'} and put ${its} thing${its === 1 ? '' : 's'} on their islands. When it ends, nothing they have is taken away.`; btns = btn('plans', 'See plans', true);
+  } else if (m.moment === 'recap') {
+    const les = G && G.passedCount ? kidsList().reduce((a, x) => a + G.passedCount(x).month, 0) : 0, its = kidsList().reduce((a, x) => a + ((x.island || {}).items || []).length, 0), vault = kidsList().reduce((a, x) => a + ((x.jars || {}).save || 0), 0);
+    icon = '✦'; title = `Your family with ${esc(Plan.limits.name)}`; body = `${les} lesson${les === 1 ? '' : 's'} passed this month, ${its} thing${its === 1 ? '' : 's'} on your kids’ islands, and ${fmt(vault)} saved in their vaults.`;
+  }
+  return `<section class="moment glass-p"><span class="moment-ic" aria-hidden="true">${icon}</span><div class="moment-m"><b>${title}</b><p>${body}</p><div class="moment-b">${btns}<button class="link-btn" data-act="momentGo" data-a="dismiss">${m.moment === 'recap' ? 'Nice' : 'Not now'}</button></div></div></section>`;
 }
 /* ---------- Our home: the setup questions ----------
    One question per screen. Above it, a box of real chores that the answer turns on or off, flipping live as you tap.
@@ -5679,9 +5909,11 @@ function pFamily() {
   return `<header class="phead"><h2>Family and devices</h2><p>Everything syncs live between these devices. Each change is saved to your family’s database on the Chorecast server.</p></header>
     <section class="fam-hero"><div class="fh-ic">${ic('home')}</div><div><h3>${esc(me.family.name)}</h3><p>${me.user ? `Signed in as ${esc(me.user.email)}` : `This is a kid’s iPad: <b>${esc(me.device.name)}</b>`}${Acct.outbox.length ? ` · ${Acct.outbox.length} change${Acct.outbox.length === 1 ? '' : 's'} waiting to sync` : ' · All changes synced'}</p></div></section>
     ${me.user && me.mail && !me.user.emailVerified ? `<div class="group"><div class="row"><div class="row-main"><b>Confirm your email</b><small>We sent a link to ${esc(me.user.email)}. Once it’s confirmed, you can reset your password by email.</small></div><button class="pbtn" data-act="famVerify">Send again</button></div></div>` : ''}
-    <h3 class="pgroup-t">Plan</h3><div class="group"><div class="row"><div class="row-main"><b>Chorecast ${esc(Plan.limits.name)}${Plan.trial ? ' (free trial)' : ''}</b><small>${Plan.beta ? 'Everything is open while Chorecast is in beta.' : Plan.lifetime ? 'Yours for good.' : Plan.until ? `${Plan.renews === false ? 'Ends' : 'Renews'} ${new Date(Plan.until).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}` : 'Up to 2 kids and the first unit of every subject.'}</small></div><button class="pbtn" data-act="planOpen">${Plan.plan === 'free' ? 'See plans' : 'Details'}</button></div></div>
+    <h3 class="pgroup-t">Plan</h3><div class="group"><div class="row"><div class="row-main"><b>Chorecast ${esc(Plan.limits.name)}${Plan.trial ? ' (free trial)' : ''}</b><small>${Plan.lifetime ? 'Yours for good.' : Plan.until ? `${Plan.renews === false ? 'Ends' : 'Renews'} ${new Date(Plan.until).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}` : Plan.plan === 'free' ? 'Up to 2 kids and the first unit of every subject.' : 'Every kid, every lesson subject, and reports.'}</small></div><button class="pbtn" data-act="planOpen">${Plan.plan === 'free' ? 'See plans' : 'Details'}</button></div>
+      ${!Plan.paywall ? `<div class="row"><div class="row-main"><b>Preview the free plan</b><small>See Chorecast exactly as a family on the free plan does, on every device, until you switch it off. Only shows before plans start.</small></div><button class="switch ${S().planPreview === 'free' ? 'on' : ''}" role="switch" aria-checked="${S().planPreview === 'free'}" aria-label="Preview the free plan" data-act="planPreview"></button></div>` : ''}
+      ${Plan.plan === 'free' && kidsList().filter(k => !k.example).length > Plan.limits.kids ? '<div class="row"><div class="row-main"><b>Who’s active</b><small>Swap which kids are active, once a week.</small></div><button class="pbtn" data-act="restSwap">Choose</button></div>' : ''}</div>
     <h3 class="pgroup-t">Grown-ups</h3><div class="group">${me.members.map(m => `<div class="row"><span class="fam-av">${esc((m.name || m.email)[0].toUpperCase())}</span><div class="row-main"><b>${esc(m.name || m.email)}</b><small>${esc(m.email)}</small></div></div>`).join('')}
-      ${parent ? `<div class="row"><div class="row-main"><b>Invite another grown-up</b><small>${f.invite ? `Give them this code. On the sign-in screen they choose “Join family” and type it in. It works once and lasts 7 days.` : 'They get their own sign-in to the same family.'}</small></div>${f.invite ? `<span class="fam-code num">${esc(f.invite)}</span>` : `<button class="pbtn" data-act="famInvite">${ic('plus')} Get a code</button>`}</div>` : ''}</div>
+      ${parent ? `<div class="row"><div class="row-main"><b>Invite another grown-up</b><small>${f.invite ? `Give them this code. On the sign-in screen they choose “Join family” and type it in. It works once and lasts 7 days.` : 'They get their own sign-in to the same family.'}</small></div>${f.invite ? `<span class="fam-code num">${esc(f.invite)}</span>` : `<button class="pbtn" data-act="famInvite">${ic('plus')} Get a code${me.members.length >= Plan.limits.grownups ? ' ' + plusTag() : ''}</button>`}</div>` : ''}</div>
     ${parent ? `<h3 class="pgroup-t">Devices</h3><div class="group">
       <div class="row"><div class="row-main"><b>Add a kid’s iPad</b><small>${f.pair ? `On the iPad, open Chorecast, choose “Kid’s iPad” and type this code. It lasts 15 minutes.` : 'Kids don’t need an email. Their iPad pairs once and stays signed in.'}</small></div>${f.pair ? `<span class="fam-code big num">${esc(f.pair.replace(/(\d{3})(\d{3})/, '$1 $2'))}</span>` : `<button class="pbtn primary" data-act="famPair">${ic('plus')} Pairing code</button>`}</div>
       ${(f.devices || []).map(d => `<div class="row"><span class="fam-dev">${ic(d.kind === 'kid' ? 'star' : 'lock')}</span><div class="row-main"><b>${esc(d.name)}${d.current ? ' <small class="muted">(this device)</small>' : ''}</b><small>${d.kind === 'kid' ? 'Kid’s iPad' : `Grown-up${d.owner ? ` · ${esc(d.owner)}` : ''}`} · last used ${when(d.last_seen_at)}</small></div>${d.current ? '' : UI.confirmDev === d.id ? `<button class="pbtn solid-danger" data-act="famRemoveYes" data-id="${d.id}">Remove</button><button class="pbtn" data-act="famRemoveNo">Keep</button>` : `<button class="pbtn danger" data-act="famRemove" data-id="${d.id}">Remove</button>`}</div>`).join('')}
@@ -5698,29 +5930,138 @@ function pFamily() {
 // Job photos are kept this many days after review (server/housekeeping.js has the same list).
 const PHOTO_DAYS = [[30, '1 mo'], [60, '2 mo'], [90, '3 mo'], [180, '6 mo'], [365, '1 yr']];
 const photoDays = () => (PHOTO_DAYS.some(([d]) => d === S().photoDays) ? S().photoDays : 60);
-function planSheet() {
-  const p = UI.planS || {}, app = window.ChorecastApp, prods = p.products || [], free = Plan.plan === 'free';
-  const why = { kids: `The free plan has room for ${FREE_LIMITS.kids} kids. Plus has room for everyone.`, lessons: 'The free plan has the first unit of every subject. Plus opens them all.', extras: 'Statement export and printable reports come with Plus.' }[p.why] || '';
-  const card = (id, name, items) => `<div class="plan-c ${Plan.plan === id && !Plan.beta ? 'on' : ''}"><h4>${name}</h4><ul>${items.map(t => `<li>${t}</li>`).join('')}</ul></div>`;
-  const buy = (id, label, sub) => { const x = prods.find(q => q.id === id); return x ? `<button class="pbtn ${id === 'chorecast.plus.yearly' ? 'primary' : ''}" data-act="planBuy" data-id="${id}" ${p.busy ? 'disabled' : ''}><span>${label}${sub ? `<br><small>${sub}</small>` : ''}</span><b>${esc(x.displayPrice)}${x.period ? ` / ${esc(x.period)}` : ''}</b></button>` : ''; };
-  return `<div class="sh-head"><button class="sh-x" data-act="close">Close</button><h2>Chorecast plans</h2><span></span></div>
+/* ---------- The family shop ----------
+   Grown-ups, then Shop: behind the PIN, so nothing is sold to kids. XP bundles and the Island Club are bought for one
+   kid (their XP is that kid's alone); lesson packs open a subject for every kid in the family. Kids' wishes from the
+   island shop ("Ask a grown-up") show at the top. In the iPad app the App Store shows the real local price and takes
+   payment; on the web these New Zealand prices are a preview, and a test server (STORE_TEST) grants for free. */
+const SHOP_XP = [
+  { id: 'chorecast.xp.500', xp: 500, price: 'NZ$1.99', name: 'Little boost' },
+  { id: 'chorecast.xp.1200', xp: 1200, price: 'NZ$3.99', name: 'Reward', tag: 'Most popular', bonus: '+20% XP' },
+  { id: 'chorecast.xp.3000', xp: 3000, price: 'NZ$7.99', name: 'Big reward', bonus: '+50% XP' },
+  { id: 'chorecast.xp.7500', xp: 7500, price: 'NZ$14.99', name: 'Big dream', tag: 'Best value', bonus: 'Double the XP' },
+];
+const SHOP_CLUB = { id: 'chorecast.club.monthly', price: 'NZ$2.99 a month', xp: 1000 }, SHOP_PACK = 'NZ$14.99', BUY_CAP = 5000;
+const shopName = id => { const x = SHOP_XP.find(q => q.id === id); if (x) return `${x.xp.toLocaleString()} XP`; if (id === SHOP_CLUB.id) return 'the Island Club'; const t = ((window.Growth && Growth.trees) || { all: [] }).all.find(q => 'chorecast.pack.' + q.id === id); return t ? `the ${t.name} lesson pack` : 'that'; };
+const shopPrice = id => (SHOP_XP.find(q => q.id === id) || {}).price || (id === SHOP_CLUB.id ? SHOP_CLUB.price : SHOP_PACK);
+async function loadShop() { try { UI.shopS = await api('GET', '/api/shop'); } catch (e) { UI.shopS = { err: true, packs: [] }; } render(); }
+// The shop is its own screen on the app's animated sky (the grown-ups' area hides it), reached from Grown-ups.
+function viewShop() {
+  UI.skyProgress = null;
+  if (!UI.shopS && !UI.shopLoading) { UI.shopLoading = true; loadShop().then(() => { UI.shopLoading = false; }); }
+  const kids = kidsList().filter(k => !k.example), sel = kids.find(k => k.id === UI.shopKid) || kids[0], st = UI.shopS || { packs: [], bought: [], week: {} }, set = S();
+  const owned = [...(Plan.packs || []), ...(st.packs || [])], all = owned.includes('all'), plus = Plan.plan !== 'free', trees = window.Growth && Growth.trees;
+  const live = trees ? trees.all.filter(t => trees.live.includes(t.id)) : [], soon = trees ? trees.all.filter(t => !trees.live.includes(t.id)) : [];
+  const cap = set.buyCap == null ? BUY_CAP : set.buyCap, used = sel ? (st.week || {})[sel.id] || 0 : 0, room = cap ? Math.max(0, cap - used) : Infinity;
+  const wishes = set.wishesOn === false ? [] : kids.flatMap(k => wishList(k).map(w => ({ k, w, plus: !planAllows('item', w.t) })));
+  const buy = (id, label, kidId, off, wish) => `<button class="shop-buy-btn" data-act="shopBuy" data-id="${id}" ${kidId ? `data-kid="${kidId}"` : ''} ${wish ? `data-wish="${wish}"` : ''} ${off ? 'disabled' : ''}>${label}</button>`;
+  const member = k => { const c = (k.island || {}).club; return c && c.until > Date.now() ? c : null; }, club = sel && member(sel), prize = shopDef(st.clubPrize || '');
+  const pack = (t, on) => {
+    const mine = all || owned.includes(t.id), told = (set.packNotify || {})[t.id];
+    const foot = on ? (mine ? '<span class="shop-own">Yours</span>' : plus ? '<span class="shop-own">Included in Plus</span>' : buy('chorecast.pack.' + t.id, SHOP_PACK)) : told ? '<span class="shop-own">We’ll tell you</span>' : `<button class="shop-ghost" data-act="shopNotify" data-id="${t.id}">Notify me</button>`;
+    return `<div class="shop-pack glass ${on ? '' : 'soon'}" style="--h:${t.hue}"><span class="shop-pack-ic" aria-hidden="true">${t.icon}</span><b>${esc(t.name)}</b><p>${esc(t.blurb)}${on && !mine && !plus ? '. Unit 1 is free; this opens every unit.' : ''}</p>${on ? '' : '<span class="shop-soon">Coming soon</span>'}${foot}</div>`;
+  };
+  const hist = sel ? (st.bought || []).filter(h => h.kid_id === sel.id) : [];
+  return `<div class="wrap shopv">
+    <header class="topbar"><button class="pill glass" data-act="shopBack">${ic('back')}<span>Grown-ups</span></button><div class="topbar-r">${soundBtn()}</div></header>
+    <section class="who-hero"><div class="t-cap">Family shop</div><h1 class="who-greet">Treats for your crew</h1><p class="who-cond">Everything here is bought by a grown-up. Kids never see prices, and XP only goes to the kid you choose.</p>${st.test ? '<p class="shop-test">🧪 Test shop: purchases are free and only for trying things out</p>' : ''}</section>
+    ${wishes.length ? `<h2 class="sec-t">Wish lists</h2><p class="shop-small">What your kids are saving their XP for. They don’t see prices, and nothing on their side asks you to buy.</p><div class="shop-wishes">${wishes.map(({ k, w, plus: pw }) => { const d = shopDef(w.t), need = Math.max(0, d.xp - xpOf(k).left), b2 = SHOP_XP.find(x => x.xp >= need) || SHOP_XP[SHOP_XP.length - 1], left = cap ? Math.max(0, cap - ((st.week || {})[k.id] || 0)) : Infinity;
+      const acts = pw ? `<button class="shop-buy-btn" data-act="planOpen" data-why="wish">${plusTag()} See Plus</button>` : need ? `<button class="shop-ghost" data-act="wishJob" data-kid="${k.id}" data-t="${w.t}">Add a bonus job</button>${buy(b2.id, `Give ${b2.xp.toLocaleString()} XP · ${b2.price}`, k.id, b2.xp > left, w.t)}` : '';
+      return `<div class="shop-wish glass"><span class="shop-wish-ava" aria-hidden="true">${esc(k.avatar || '🙂')}</span><div><b>${esc(k.name)} wishes for the ${esc(d.name.toLowerCase())}${pw ? ' ' + plusTag() : ''}</b><small>${pw ? 'Comes with Plus' : need ? `Needs ${need.toLocaleString()} more XP` : 'Has enough XP to get it'} · added ${timeAgo(w.at)}</small></div>${acts}<button class="shop-ghost" data-act="shopWishDone" data-kid="${k.id}" data-t="${w.t}">Clear</button></div>`; }).join('')}</div>` : ''}
+    ${sel ? `<h2 class="sec-t">Who’s it for?</h2>
+    <div class="shop-kids" data-keep="shopKids">${kids.map(k => `<button class="shop-kid ${k.id === sel.id ? 'on' : 'glass'}" style="--hue:${esc(k.hue)}" data-act="shopKid" data-id="${k.id}" aria-pressed="${k.id === sel.id}"><span class="shop-kid-ava" aria-hidden="true">${esc(k.avatar || '🙂')}</span><b>${esc(k.name)}</b><small>✨ ${xpOf(k).left.toLocaleString()} XP${member(k) ? ' · ⭐ Club' : ''}</small></button>`).join('')}</div>
+    <h2 class="sec-t">XP for ${esc(sel.name)}</h2>
+    <div class="shop-xp">${SHOP_XP.map(x => `<div class="shop-xc glass ${x.tag ? 'tagged' : ''}">${x.tag ? `<span class="shop-tag">${x.tag}</span>` : ''}<div class="shop-xn">✨ ${x.xp.toLocaleString()}</div><div class="shop-xl">XP</div><p>${x.name}${x.bonus ? ` · ${x.bonus}` : ''}</p>${buy(x.id, x.price, sel.id, x.xp > room)}</div>`).join('')}</div>
+    <p class="shop-small">It lands on ${esc(sel.name)}’s island straight away, for ${esc(sel.name)} only, and shows on their statement as a gift from you.${cap ? ` This week: ${used.toLocaleString()} of the ${cap.toLocaleString()} XP a week you set.` : ''}</p>
+    <h2 class="sec-t">Island Club for ${esc(sel.name)}</h2>
+    <div class="shop-club glass"><div><div class="shop-club-t">⭐ Island Club</div><ul><li>✨ ${SHOP_CLUB.xp.toLocaleString()} XP every month</li><li>🎁 A members-only island prize every month${prize ? ` (this month: the ${esc(prize.name.toLowerCase())})` : ''}</li><li>🪧 The golden name sign for their island</li><li>⭐ A Club badge on their island</li></ul></div>
+      <div class="shop-club-r">${club ? `<b>${esc(sel.name)} is a member</b><small>Until ${new Date(club.until).toLocaleDateString()}. Manage or cancel it in your Apple account.</small>` : `<b>${SHOP_CLUB.price}</b><small>Cancel any time</small>${buy(SHOP_CLUB.id, 'Join', sel.id)}`}</div></div>` : '<section class="empty glass"><h2>Add a kid first</h2></section>'}
+    <h2 class="sec-t">Lesson packs</h2>
+    <p class="shop-small">For every kid in the family, now and later.</p>
+    <div class="shop-packs">${live.map(t => pack(t, true)).join('')}${soon.map(t => pack(t, false)).join('')}</div>
+    <h2 class="sec-t">Chorecast Plus</h2>
+    <div class="shop-wide glass"><div><b>Every lesson pack, and new ones as they come</b><p>Plus also has room for every kid, the full island shop and the Market. Usually the best deal with two or more kids.</p></div><button class="btn-white" data-act="planOpen">See plans</button></div>
+    ${sel ? `<h2 class="sec-t">Bought for ${esc(sel.name)}</h2>${hist.length ? `<div class="shop-list glass">${hist.map(h => `<div class="shop-li"><span>${esc(shopName(h.product_id))}</span><small>${new Date(h.created_at).toLocaleDateString()}${h.source === 'test' ? ' · test' : ''}</small></div>`).join('')}</div>` : '<p class="shop-small">Nothing yet.</p>'}` : ''}
+    <h2 class="sec-t">Shop settings</h2>
+    <div class="shop-list glass">
+      <div class="shop-li"><div><b>Wish lists</b><small>Kids can save up to ${WISH_MAX} things they’re saving XP for. You see them here.</small></div><button class="switch ${set.wishesOn !== false ? 'on' : ''}" role="switch" aria-checked="${set.wishesOn !== false}" aria-label="Wish lists" data-act="shopWishes"></button></div>
+      ${set.wishesOn !== false ? `<div class="shop-li"><div><b>Plus things on wish lists</b><small>Kids can save things that come with Plus too. They only see “comes with Chorecast Plus”.</small></div><button class="switch ${set.wishPlus !== false ? 'on' : ''}" role="switch" aria-checked="${set.wishPlus !== false}" aria-label="Plus things on wish lists" data-act="shopWishPlus"></button></div>` : ''}
+      <div class="shop-li multi"><div><b>Most XP bought for each kid in a week</b><small>Bundles over the limit wait until the week rolls on.</small></div><div class="seg">${[[2000, '2,000'], [5000, '5,000'], [10000, '10,000'], [0, 'No limit']].map(([v, l]) => `<button class="seg-i ${cap === v ? 'on' : ''}" data-act="shopCap" data-v="${v}">${l}</button>`).join('')}</div></div>
+      ${window.ChorecastApp && window.ChorecastApp.restore ? '<div class="shop-li"><div><b>Restore purchases</b><small>Lesson packs and the Island Club bought on this Apple account.</small></div><button class="btn-white" data-act="shopRestore">Restore</button></div>' : ''}
+    </div>
+    <p class="shop-small">${st.test ? 'Test shop: these purchases are free.' : 'These are New Zealand prices. In the Chorecast app on iPhone or iPad the App Store shows your local price and takes payment.'}</p>
+  </div>`;
+}
+// A gift of XP or an Island Club month from a grown-up gets a celebration the next time the kid opens their screen.
+function noticeGifts(kid) {
+  const g = (kid.ledger || []).find(e => e.kind === 'xp' && e.gift && e.at > (kid.giftSeen || 0));
+  if (!g || UI.giftFor === g.id || UI.sheet) return; UI.giftFor = g.id;
+  setTimeout(() => { if (UI.screen !== 'kid' || curKid() !== kid || UI.sheet) return; openSheet(() => giftSheet(kid, g), { onClose: () => updDoc('kids', kid.id, { giftSeen: g.at }) }); FX.burst(innerWidth / 2, innerHeight * 0.4, CONF, 40); Sound.fanfare(); }, 600);
+}
+function giftSheet(kid, g) {
+  const club = g.gift === 'club', c = (kid.island || {}).club, prize = club && c && shopDef(c.prize);
+  return `<div class="sh-body gift-sh"><div class="gift-ic" aria-hidden="true">${club ? '⭐' : '🎁'}</div><h2>${club ? 'Welcome to the Island Club!' : 'A gift from your grown-up!'}</h2><p class="gift-xp">+${g.xp.toLocaleString()} XP</p>
+    <p>${club ? `This month’s members’ prize${prize ? `, the ${esc(prize.name.toLowerCase())},` : ''} is waiting in your island shop, and the golden name sign is in Makeover.` : 'Spend it on something special for your island.'}</p>
+    <div class="plan-buy"><button class="pbtn primary" data-act="giftGo" data-id="${kid.id}">Go to my island</button><button class="link-btn" data-act="close">Yay!</button></div></div>`;
+}
+function shopSheet() {
+  const b = UI.shopB || {}, k = b.kid ? Store.kids[b.kid] : null, st = UI.shopS || {}, app = window.ChorecastApp, can = (app && app.buy) || st.test;
+  return `<div class="sh-head"><button class="sh-x" data-act="close">Close</button><h2>Buy ${esc(shopName(b.id))}</h2><span></span></div>
     <div class="sh-body">
-      ${why && free ? `<p class="plan-why">${why}</p>` : ''}
-      ${Plan.beta ? '<p class="plan-why">Everything is open while Chorecast is in beta. Plans start when the app launches.</p>' : ''}
-      <div class="plan-cards">
-        ${card('free', 'Free', ['Up to 2 kids and 1 grown-up', 'Chores, must-dos, photos, jars and statement', 'The starter island', 'The first unit of every lesson subject'])}
-        ${card('plus', 'Plus', ['Every kid in the family and 2 grown-ups', 'Every lesson subject, and new ones as they come', 'The full island shop, the Market, interest and tax', 'Statement export and printable reports'])}
-        ${card('family', 'Family', ['Everything in Plus', 'Up to 6 grown-ups, including grandparents', 'A second home is on its way'])}
+      <p>${k ? `For <b>${esc(k.name)}</b> only. It lands on their island straight away and shows on their statement as a gift from you.` : 'For every kid in the family, now and later.'}</p>
+      <p class="plan-why">${esc(shopPrice(b.id))}${b.id === SHOP_CLUB.id ? '. Renews each month until you cancel in your Apple account settings.' : ''}</p>
+      ${can ? `<div class="plan-buy"><button class="pbtn primary" data-act="shopPay" ${b.busy ? 'disabled' : ''}>${st.test && !(app && app.buy) ? 'Buy (test, free)' : `Buy for ${esc(shopPrice(b.id))}`}</button><button class="link-btn" data-act="close">Not now</button></div>`
+        : '<p class="plan-why">Buying opens in the Chorecast app on iPhone or iPad. This is a preview of the shop.</p>'}
+      ${b.err ? `<p class="del-err" role="alert">${esc(b.err)}</p>` : ''}
+    </div>`;
+}
+// Planned New Zealand prices from the launch plan, shown until the App Store gives the real (local) ones in the app.
+const PLAN_REF = { 'chorecast.plus.yearly': 89.99, 'chorecast.plus.monthly': 9.99, 'chorecast.family.yearly': 119.99, 'chorecast.family.monthly': 13.99, 'chorecast.lifetime': 229, 'chorecast.lifetime.founding': 149 };
+function planSheet() {
+  const p = UI.planS || {}, app = window.ChorecastApp, prods = p.products || [], free = Plan.plan === 'free', yr = p.period !== 'month', rank = { free: 0, plus: 1, family: 2 };
+  const why = { kids: `The free plan has room for ${FREE_LIMITS.kids} kids. Plus has room for everyone.`, lessons: 'The free plan has the first unit of every subject. Plus opens them all.', extras: 'Statement export and printable reports come with Plus.',
+    rules: 'On the free plan, interest and tax use the standard rates. With Plus you choose your own.', unit1: 'Every unit of every subject comes with Plus, for every kid.', wish: 'The whole island shop comes with Plus, for every kid.',
+    starter: 'The whole island shop, every island and every size come with Plus.', welcome: 'Your welcome fortnight of Plus ends soon. Whatever you choose, nothing your kids have is taken away.' }[p.why] || '';
+  const G = window.Growth || null, kids = kidsList().filter(k => !k.example), pc = plusCounts(), lessonsMore = G && G.unitInfo ? Math.max(0, ...kids.map(k => G.trees.live.reduce((a, t) => a + ((Plan.packs || []).includes(t) ? 0 : ((G.unitInfo(k, t) || {}).more || 0)), 0))) : 0;
+  const names = kids.map(k => esc(k.name)), who = names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}` : names[0] || 'your kids';
+  const personal = (free || Plan.welcome) && kids.length ? `<p class="plan-me">With Plus, ${who} get${kids.length === 1 ? 's' : ''} ${lessonsMore ? `${lessonsMore} more lessons, ` : ''}${pc.items} more island things, ${pc.lands} more islands and every Market fund.</p>` : '';
+  const ref = id => `NZ$${PLAN_REF[id] % 1 ? PLAN_REF[id].toFixed(2) : PLAN_REF[id]}`, prod = id => prods.find(q => q.id === id), price = id => prod(id) ? prod(id).displayPrice : ref(id);
+  const date = d => new Date(d).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
+  const status = Plan.preview ? 'You’re previewing the free plan. Switch it off in Grown-ups, then Family.' : free ? 'Your family is on the free plan.' : Plan.welcome && Plan.until ? `Your family has Plus for its welcome fortnight, until ${date(Plan.until)}. No card needed.` : `Your family has ${esc(Plan.limits.name)}${Plan.lifetime ? ' for good' : Plan.trial && Plan.until ? `, free until ${date(Plan.until)}` : Plan.until ? `, ${Plan.renews ? 'renewing' : 'ending'} ${date(Plan.until)}` : ''}.`;
+  const foot = (id, label) => {
+    if (Plan.plan === id && !Plan.welcome) return '<span class="plan-chip">✓ Your plan</span>';
+    if (id === 'free') return '<span class="plan-chip">Always free</span>';
+    if (!app) return '<span class="plan-note">Buy it in the Chorecast app on iPhone or iPad.</span>';
+    if (rank[id] < rank[Plan.plan] || (Plan.plan === id && !Plan.welcome)) return '';
+    const pid = `chorecast.${id}.${yr ? 'yearly' : 'monthly'}`;
+    return `<button class="plan-go" data-act="planBuy" data-id="${pid}" ${p.busy ? 'disabled' : ''}>${label}</button><span class="plan-terms">${esc(price(pid))} a ${yr ? 'year' : 'month'}, renewing automatically. Cancel any time in your Apple account settings.</span>`;
+  };
+  const card = (id, ic, name, tag, items, hot) => {
+    const pid = `chorecast.${id}.${yr ? 'yearly' : 'monthly'}`, real = prod(pid);
+    const pr = id === 'free' ? '<b>NZ$0</b><small>for good</small>' : `<b>${esc(price(pid))}</b><small>${yr ? `a year${real ? '' : `<br>NZ$${(PLAN_REF[pid] / 12).toFixed(2)} a month`}` : 'a month'}</small>`;
+    return `<div class="plan-c ${hot ? 'hot' : ''} ${Plan.plan === id ? 'on' : ''}">${hot ? '<span class="plan-tag">Most families</span>' : ''}
+      <div class="plan-top"><span class="plan-ic" aria-hidden="true">${ic}</span><div class="plan-nm"><h4>${name}</h4><small>${tag}</small></div><div class="plan-pr">${pr}</div></div>
+      <ul>${items.map(t => `<li><span>${t}</span></li>`).join('')}</ul>
+      ${id !== 'free' && kids.length >= 3 ? `<p class="plan-fit">Fits all ${kids.length} of your kids</p>` : ''}
+      <div class="plan-foot">${foot(id, id === 'plus' ? 'Get Plus' : 'Get Family')}</div></div>`;
+  };
+  const lifeId = Plan.foundingLeft > 0 ? 'chorecast.lifetime.founding' : 'chorecast.lifetime';
+  return `<div class="sh-head"><button class="sh-x" data-act="close">Close</button><h2>Chorecast plans</h2><span></span></div>
+    <div class="sh-body plan-sh">
+      <p class="plan-status">${status}</p>
+      ${why && (free || Plan.welcome) ? `<p class="plan-why">${why}</p>` : ''}${personal}
+      <div class="seg plan-per" role="group" aria-label="Pay"><button class="seg-i ${yr ? 'on' : ''}" data-act="planPeriod" data-v="year" aria-pressed="${yr}">Yearly <span class="plan-save">Save 25%</span></button><button class="seg-i ${yr ? '' : 'on'}" data-act="planPeriod" data-v="month" aria-pressed="${!yr}">Monthly</button></div>
+      <div class="plan-list">
+        ${card('plus', '🏝️', 'Plus', 'Everything, for every kid', ['Every kid in the family and 2 grown-ups', 'Every lesson subject, and new ones as they come', 'The whole island shop, every island and every Market fund', 'Your own interest and tax rates', 'Statement export and printable reports'], true)}
+        ${card('family', '🏡', 'Family', 'Shared care and big families', ['Everything in Plus', 'Up to 6 grown-ups, including grandparents', 'A second home with its own chore board <em>Coming soon</em>'])}
+        ${card('free', '🌱', 'Free', 'To try Chorecast', ['Up to 2 kids and 1 grown-up', 'Chores, must-dos, photos, jars and statement', 'The starter island shop and the vege plot island', 'The Snail Savings Bond in the Market', 'Interest and tax at the standard rates', 'The first unit of every lesson subject'])}
       </div>
-      ${app && !Plan.beta ? `<div class="plan-buy">
-          ${buy('chorecast.plus.yearly', 'Plus, yearly', '14 days free, then yearly')}${buy('chorecast.plus.monthly', 'Plus, monthly')}
-          ${buy('chorecast.family.yearly', 'Family, yearly')}${buy('chorecast.family.monthly', 'Family, monthly')}
-          ${Plan.foundingLeft > 0 ? buy('chorecast.lifetime.founding', 'Founding Family lifetime', `Plus for good, paid once. ${Plan.foundingLeft.toLocaleString()} of 1,000 left`) : buy('chorecast.lifetime', 'Lifetime', 'Plus for good, paid once')}
-          ${!prods.length ? '<p class="muted">Loading prices…</p>' : ''}
-          <button class="link-btn" data-act="planRestore" ${p.busy ? 'disabled' : ''}>Restore purchases</button>
-        </div>
-        <p class="plan-small">Subscriptions renew automatically until you cancel in your Apple account settings, at least 24 hours before the period ends. Payment is charged to your Apple account. A free trial becomes a paid subscription when it ends unless you cancel first. <a href="terms.html" target="_blank" rel="noopener">Terms of use</a> · <a href="privacy.html" target="_blank" rel="noopener">Privacy policy</a></p>`
-      : !Plan.beta ? '<p class="plan-why">Plans are bought in the Chorecast app on iPhone or iPad, in Grown-ups, then Family.</p>' : ''}
+      ${!Plan.lifetime ? `<div class="plan-wide"><span class="plan-ic" aria-hidden="true">♾️</span><div><b>${Plan.foundingLeft > 0 ? 'Founding Family lifetime' : 'Lifetime'}</b><small>Plus for good, paid once.${Plan.foundingLeft > 0 ? ` For the first 1,000 families: ${Plan.foundingLeft.toLocaleString()} left.` : ''}</small></div>
+        ${!app ? `<b class="plan-wide-pr">${esc(price(lifeId))}</b>` : `<button class="plan-go" data-act="planBuy" data-id="${lifeId}" ${p.busy ? 'disabled' : ''}>${esc(price(lifeId))}</button>`}</div>` : ''}
+      ${UI.unlocked && (free || Plan.welcome) ? `<div class="plan-wide"><span class="plan-ic" aria-hidden="true">📚</span><div><b>Just want one subject?</b><small>A lesson pack opens one subject for every kid, kept for good, for ${SHOP_PACK}. They’re in the Shop.</small></div><button class="plan-ghost" data-act="planShop">Open the Shop</button></div>` : ''}
+      ${app ? `<button class="link-btn" data-act="planRestore" ${p.busy ? 'disabled' : ''}>Restore purchases</button>
+        <p class="plan-small">Subscriptions renew automatically until you cancel in your Apple account settings, at least 24 hours before the period ends. Payment is charged to your Apple account. <a href="terms.html" target="_blank" rel="noopener">Terms of use</a> · <a href="privacy.html" target="_blank" rel="noopener">Privacy policy</a></p>` : ''}
+      <p class="plan-small">Every price is per family, never per child, and includes GST.${prods.length ? '' : ' These are planned New Zealand prices; in the app, the App Store shows the price where you live.'}</p>
       ${p.err ? `<p class="del-err" role="alert">${esc(p.err)}</p>` : ''}
     </div>`;
 }
@@ -5760,7 +6101,7 @@ function payTypeLine(j) {
 function pReview() {
   const pend = jobsList().filter(j => j.status === 'pending').sort((a, b) => a.at - b.at);
   const recent = jobsList().filter(j => j.status !== 'pending' && j.reviewedAt).sort((a, b) => b.reviewedAt - a.reviewedAt).slice(0, 10);
-  return `${homeOn() ? '' : `<button class="home-nudge" data-act="wizStart"><span class="hn-art" aria-hidden="true">🏡</span><span class="hn-main"><b>Tell us about your home</b><small>Ten quick questions, so kids only get jobs your place actually has.</small></span>${ic('next')}</button>`}<header class="phead"><h2>To review</h2><p>${pend.length ? `${pend.length} job${pend.length === 1 ? '' : 's'} waiting. Check the photo, then pay or ask for a redo. Kids see their pay slip the next time they open their sky.` : 'All caught up. New jobs appear here as soon as a kid sends a photo.'}</p></header>
+  return `${momentCard()}${homeOn() ? '' : `<button class="home-nudge" data-act="wizStart"><span class="hn-art" aria-hidden="true">🏡</span><span class="hn-main"><b>Tell us about your home</b><small>Ten quick questions, so kids only get jobs your place actually has.</small></span>${ic('next')}</button>`}<header class="phead"><h2>To review</h2><p>${pend.length ? `${pend.length} job${pend.length === 1 ? '' : 's'} waiting. Check the photo, then pay or ask for a redo. Kids see their pay slip the next time they open their sky.` : 'All caught up. New jobs appear here as soon as a kid sends a photo.'}</p></header>
     ${pend.map(reviewCard).join('')}
     ${recent.length ? `<h3 class="pgroup-t">Recently reviewed</h3><div class="group">${recent.map(j => { const k = Store.kids[j.kidId]; return `<div class="recent"><span class="ava-s" style="--hue:${k ? k.hue : '#999'}">${k ? k.avatar : '?'}</span><div class="row-main"><b>${j.icon} ${esc(j.title)}</b><small>${esc(k ? k.name : 'Removed')} · ${timeAgo(j.reviewedAt)}${j.note ? ` · “${esc(j.note)}”` : ''}</small></div><span class="tag ${j.status}">${j.status === 'approved' ? `Paid ${fmt((j.paid && j.paid.gross) || 0)}` : 'Redo'}</span></div>`; }).join('')}</div>` : ''}`;
 }
@@ -5794,7 +6135,7 @@ function reviewCard(j) {
 }
 function pKids() {
   const kids = kidsList(); if (!Store.kids[UI.pkid]) UI.pkid = kids[0] ? kids[0].id : null;
-  return `<header class="phead row-h"><div><h2>Kids</h2><p>Balances, habits, payments and photos for each kid.</p></div><button class="pbtn" data-act="addKid">${ic('plus')} Add a kid</button></header>
+  return `<header class="phead row-h"><div><h2>Kids</h2><p>Balances, habits, payments and photos for each kid.</p></div><button class="pbtn" data-act="addKid">${ic('plus')} Add a kid${kidRoom() ? '' : ' ' + plusTag()}</button></header>
     ${kids.length ? `<div class="kseg" data-keep="kseg">${kids.map(k => `<button class="kseg-i ${k.id === UI.pkid ? 'on' : ''}" data-act="pkid" data-id="${k.id}"><span class="ava-s" style="--hue:${k.hue}">${k.avatar}</span>${esc(k.name)}${k.example ? ' <small>Example</small>' : ''}</button>`).join('')}</div>${pKidDetail(Store.kids[UI.pkid])}` : '<div class="pempty">No kids yet. Add one to start their forecast.</div>'}`;
 }
 function heatmap(kid) {
@@ -5824,7 +6165,7 @@ function pKidDetail(kid) {
       <h4>Lifetime</h4><div class="plist"><div class="pli"><span class="grow">Earned before tax</span><span class="amt">${fmt(kid.earned || 0)}</span></div><div class="pli"><span class="grow">Family tax paid</span><span class="amt">${fmt(kid.taxPaid || 0)}</span></div><div class="pli"><span class="grow">Vault interest</span><span class="amt">${fmt(kid.interestEarned || 0)}</span></div></div></section>
     <section class="pcard wide"><h3>Recent jobs and photos</h3>${jobs.length ? `<div class="pjobs">${jobs.map(x => `<button class="pjob" data-act="photo" data-id="${x.id}"><span class="ph">${x.photo ? `<img ${photoAttr(x.photo)} alt="" loading="lazy">` : x.icon}</span><b>${esc(x.title)}</b><small>${esc(parseKey(x.date).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }))} · <span class="stars-s">${starRow(x.stars)}</span> · ${{ approved: 'Paid', pending: 'To review', redo: 'Redo' }[x.status]}</small></button>`).join('')}</div>` : '<p class="muted">No jobs yet.</p>'}</section>
     <section class="pcard"><h3>Bank statement</h3>${L.length ? `<div class="plist">${L.map(e => `<div class="pli"><span class="grow">${esc(e.memo || e.kind)}<br><small class="muted">${timeAgo(e.at)}</small></span><span class="amt ${ledIn(e) ? 'pos' : ''}">${ledAmt(e)}</span></div>`).join('')}</div>
-      <div class="pactions"><button class="pbtn" data-act="stmt" data-id="${kid.id}">${ic('list')} See all</button>${(kid.ledger || []).some(isBuy) ? `<button class="pbtn" data-act="stmt" data-id="${kid.id}" data-f="buys">${ic('gift')} Things bought</button>` : ''}<button class="pbtn" data-act="stmtExport" data-id="${kid.id}">${ic('send')} Export</button><button class="pbtn" data-act="stmtPrint" data-id="${kid.id}">${ic('list')} Print report</button></div>` : '<p class="muted">Nothing yet.</p>'}</section>
+      <div class="pactions"><button class="pbtn" data-act="stmt" data-id="${kid.id}">${ic('list')} See all</button>${(kid.ledger || []).some(isBuy) ? `<button class="pbtn" data-act="stmt" data-id="${kid.id}" data-f="buys">${ic('gift')} Things bought</button>` : ''}<button class="pbtn" data-act="stmtExport" data-id="${kid.id}">${ic('send')} Export${Plan.limits.extras ? '' : ' ' + plusTag()}</button><button class="pbtn" data-act="stmtPrint" data-id="${kid.id}">${ic('list')} Print report${Plan.limits.extras ? '' : ' ' + plusTag()}</button></div>` : '<p class="muted">Nothing yet.</p>'}</section>
     <section class="pcard">${UI.confirmRemove === kid.id ? `<h3>Remove ${esc(kid.name)}?</h3><p class="muted" style="margin-bottom:12px">Their balances and profile are deleted. Past jobs stay in the review history.</p><div class="pactions"><button class="pbtn solid-danger" data-act="removeKidYes" data-id="${kid.id}">Remove</button><button class="pbtn" data-act="removeKidNo">Keep</button></div>` : `<button class="pbtn danger" data-act="removeKid" data-id="${kid.id}">${ic('trash')} Remove ${esc(kid.name)}</button>`}</section>
   </div>`;
 }
@@ -5853,7 +6194,7 @@ function choreRow(c) {
 }
 function pBank() {
   const s = S(), ex = kidsList().filter(k => k.example);
-  const stepRow = (title, sub, act, val) => `<div class="row"><div class="row-main"><b>${title}</b><small>${sub}</small></div><div class="stepper"><button data-act="${act}" data-d="-1" aria-label="Lower ${title}">${ic('minus')}</button><b>${val}</b><button data-act="${act}" data-d="1" aria-label="Raise ${title}">${ic('plus')}</button></div></div>`;
+  const stepRow = (title, sub, act, val) => `<div class="row"><div class="row-main"><b>${title}${(act === 'tax' || act === 'interest') && !Plan.limits.rules ? ' ' + plusTag() : ''}</b><small>${sub}${(act === 'tax' || act === 'interest') && !Plan.limits.rules ? ' Choosing your own rate comes with Plus.' : ''}</small></div><div class="stepper"><button data-act="${act}" data-d="-1" aria-label="Lower ${title}">${ic('minus')}</button><b>${val}</b><button data-act="${act}" data-d="1" aria-label="Raise ${title}">${ic('plus')}</button></div></div>`;
   const swRow = (title, sub, key) => `<div class="row"><div class="row-main"><b>${title}</b><small>${sub}</small></div><button class="switch ${s[key] ? 'on' : ''}" role="switch" aria-checked="${!!s[key]}" aria-label="${title}" data-act="setFlag" data-k="${key}"></button></div>`;
   return `<header class="phead"><h2>Money rules</h2><p>${s.pocket && s.pocket.pretend ? 'You chose pretend money only. Kids earn, save and spend play money, and you never pay out.' : 'It’s your money, paid when you choose. Each kid’s jars show what you owe them. When they want cash, tap Pay out cash on the Kids page and their jar goes down.'}</p></header>
     <h3 class="pgroup-t">Pocket money</h3><div class="group"><div class="row"><div class="row-main"><b>${s.pocket ? esc(pocketLine()) : 'Not chosen yet'}</b><small>This sets the price of every job. Prices you changed yourself stay as they are.</small></div><button class="pbtn" data-act="pocketOpen">${s.pocket ? 'Change' : 'Choose'}</button></div></div>
@@ -6480,7 +6821,7 @@ function checkPayday() {
   if (fresh.some(j => j.status === 'approved')) { setTimeout(() => { Sound.cash(); FX.rain(); G3.coins(60); }, 250); }
 }
 const ACT = {
-  gOpen: a => window.Growth && Growth.open(a.dataset.id || UI.kidId, { tree: a.dataset.tree, from: a.dataset.from }),
+  gOpen: a => { const k = Store.kids[a.dataset.id || UI.kidId]; if (k && k.resting) return toast('Lessons are paused for now.'); if (window.Growth) Growth.open(k ? k.id : UI.kidId, { tree: a.dataset.tree, from: a.dataset.from }); },
   gEarn: a => window.Growth && Growth.open(a.dataset.id, { need: +a.dataset.need }),
   gFromResult: a => { exitStage(); if (window.Growth) Growth.open(a.dataset.id, {}); },
   authMode: a => { const keep = UI.auth || {}; UI.auth = { mode: a.dataset.m, email: keep.email }; render(); },
@@ -6539,10 +6880,35 @@ const ACT = {
   playOn: () => saveSettings({ playOn: S().playOn === false }),
   playCap: a => saveSettings({ playCap: +a.dataset.v }),
   remindAt: a => saveSettings({ remindAt: a.dataset.h === '' ? null : +a.dataset.h }),
+  shopKid: a => { UI.shopKid = a.dataset.id; render(); },
+  shopBuy: a => { UI.shopB = { id: a.dataset.id, kid: a.dataset.kid || null, wish: a.dataset.wish || null }; openSheet(shopSheet); },
+  shopPay: async () => {
+    const b = UI.shopB, app = window.ChorecastApp; if (!b || b.busy) return; b.busy = true; b.err = ''; renderSheet();
+    try {
+      let r;
+      if (app && app.buy) { const t = await app.buy(b.id, Plan.appAccountToken); if (!t || !t.jws) throw new Error(''); r = await api('POST', '/api/shop/buy', { transaction: t.jws, kidId: b.kid, wish: b.wish }); }
+      else r = await api('POST', '/api/shop/buy', { productId: b.id, kidId: b.kid, wish: b.wish });
+      if (r && r.ok) { const k = b.kid && Store.kids[b.kid]; closeSheet(); await loadShop(); await loadPlan(); Sound.cash(); FX.rain(); FX.burst(innerWidth / 2, innerHeight * 0.4, CONF, 36); toast(k ? `${shopName(b.id)} for ${k.name}. Thank you!` : `Thank you! ${shopName(b.id)} is open for the whole family.`); return; }
+    } catch (e) { b.err = e.message || 'That didn’t go through. Try again.'; }
+    b.busy = false; renderSheet();
+  },
+  shopWishDone: a => { const k = Store.kids[a.dataset.kid]; if (k) updDoc('kids', k.id, { wishes: wishList(k).filter(w => w.t !== a.dataset.t), wish: null }); },
+  wishDel: a => { const k = curKid(); if (!k) return; updDoc('kids', k.id, { wishes: wishList(k).filter(w => w.t !== a.dataset.t), wish: null }); Sound.tap(); },
+  shopBack: () => { UI.screen = 'parent'; scrollTo(0, 0); render(); },
+  shopNotify: a => { saveSettings({ packNotify: { [a.dataset.id]: Date.now() } }); track('shop.notify', { pack: a.dataset.id }, null); toast('We’ll let you know when it’s ready.'); },
+  shopWishes: () => saveSettings({ wishesOn: S().wishesOn === false }),
+  shopCap: a => saveSettings({ buyCap: +a.dataset.v }),
+  shopWishPlus: () => saveSettings({ wishPlus: S().wishPlus === false }),
+  // A bonus job for a wish: the chore form, ready to send to that kid.
+  wishJob: a => { const k = Store.kids[a.dataset.kid], d = shopDef(a.dataset.t); if (!k || !d) return; ACT.addChore(); Object.assign(UI.choreForm, { title: `Bonus job for the ${d.name.toLowerCase()}`, sendTo: [k.id] }); renderSheet(); },
+  shopRestore: async () => { const app = window.ChorecastApp; if (!app || !app.restore) return; try { const list = await app.restore(); if (list && list.length) await api('POST', '/api/purchases/apple', { transactions: list }); await loadPlan(); await loadShop(); toast(list && list.length ? 'Purchases restored.' : 'Nothing to restore on this Apple account.'); } catch (e) { toast(e.message || 'That didn’t work. Try again.'); } },
+  giftGo: a => { closeSheet(); Studio.show(a.dataset.id); },
   planOpen: a => {
-    UI.planS = { why: a && a.dataset ? a.dataset.why : '' }; openSheet(planSheet); loadPlan().then(() => UI.sheet && UI.sheet.fn === planSheet && renderSheet());
+    UI.planS = { why: a && a.dataset ? a.dataset.why : '' }; openSheet(planSheet); track('plan.sheet', { why: UI.planS.why || null, plan: Plan.plan }, null); loadPlan().then(() => UI.sheet && UI.sheet.fn === planSheet && renderSheet());
     const app = window.ChorecastApp; if (app && app.products) app.products(PRODUCT_IDS).then(list => { if (UI.planS) { UI.planS.products = list || []; renderSheet(); } }).catch(() => {});
   },
+  planPeriod: a => { if (UI.planS) { UI.planS.period = a.dataset.v; renderSheet(); } },
+  planShop: () => { closeSheet(); UI.screen = 'shop'; UI.shopS = null; scrollTo(0, 0); render(); },
   planBuy: async a => {
     const p = UI.planS, app = window.ChorecastApp; if (!app || p.busy) return; p.busy = true; p.err = ''; renderSheet();
     try {
@@ -6636,7 +7002,7 @@ const ACT = {
   wizSkip: () => { const then = UI.wiz && UI.wiz.then; saveSettings({ home: { skipped: true } }); UI.wiz = null; scrollTo(0, 0); render(); afterWizard(then); },
   wizCancel: () => { UI.wiz = null; scrollTo(0, 0); render(); },
   wizClose: () => { const then = UI.wiz && UI.wiz.then; UI.wiz = null; if (!then) UI.ptab = 'home'; scrollTo(0, 0); render(); afterWizard(then); },
-  ptab: a => { if (window.Growth && Growth.resetParent) Growth.resetParent(); UI.ptab = a.dataset.tab; UI.redoFor = null; UI.confirmRemove = null; scrollTo(0, 0); render(); },
+  ptab: a => { if (a.dataset.tab === 'shop') { UI.screen = 'shop'; UI.shopS = null; scrollTo(0, 0); return render(); } if (window.Growth && Growth.resetParent) Growth.resetParent(); UI.ptab = a.dataset.tab; UI.redoFor = null; UI.confirmRemove = null; scrollTo(0, 0); render(); },
 
   brief: a => { UI.brief = { kidId: UI.kidId, key: a.dataset.key, quote: null }; Sound.ensure(); Sound.pop(); openSheet(briefSheet, { cls: 'brief' }); },
   quote: a => { const c = choreDef(UI.brief.key); UI.brief.quote = clamp((UI.brief.quote ?? c.quote) + +a.dataset.d, c.quoteMin, c.quoteMax); Sound.tap(); renderSheet(false); },
@@ -6679,7 +7045,7 @@ const ACT = {
     if (i === L.a) { Sound.ensure(); Sound.fanfare(); FX.rain(); if (kid && !(kid.badges || {})[L.key] && UI.screen === 'kid') updDoc('kids', kid.id, { badges: { [L.key]: true } }); } else Sound.error();
   },
   paydayDone: () => { closeSheet(); Sound.coin(); },
-  fund: a => { UI.trade = { id: a.dataset.id, side: 'buy', amt: 0, range: '1M' }; Sound.tap(); openSheet(fundSheet, { live: true }); },
+  fund: a => { UI.trade = { id: a.dataset.id, side: planAllows('fund', a.dataset.id) ? 'buy' : 'sell', amt: 0, range: '1M' }; Sound.tap(); if (!planAllows('fund', a.dataset.id)) track('kid.plus_peek', { fund: a.dataset.id }, (curKid() || {}).id); openSheet(fundSheet, { live: true }); },
   range: a => { UI.trade.range = a.dataset.r; renderSheet(false); },
   side: a => { UI.trade.side = a.dataset.s; UI.trade.amt = 0; renderSheet(false); },
   tAmt: a => {
@@ -6691,7 +7057,7 @@ const ACT = {
     const t = UI.trade, kid = curKid(), f = FUNDS.find(x => x.id === t.id), p = price(f.id);
     const jars = { ...(kid.jars || {}) }, holdings = clone(kid.holdings || {}), h = holdings[f.id] || { units: 0, cost: 0 };
     if (t.side === 'buy') {
-      const amt = Math.min(t.amt, jars.invest || 0); if (amt <= 0) return;
+      const amt = Math.min(t.amt, jars.invest || 0); if (amt <= 0 || !planAllows('fund', f.id)) return;
       h.units = +(h.units + amt / p).toFixed(6); h.cost = (h.cost || 0) + amt; jars.invest -= amt;
       holdings[f.id] = h; updDoc('kids', kid.id, { jars, holdings, ledger: pushLedger(kid, { kind: 'buy', amt: -amt, memo: `Bought ${f.name}` }) });
       toast(`You bought ${(amt / p).toFixed(3)} units of ${f.name}`); G3.coins(16);
@@ -6706,7 +7072,7 @@ const ACT = {
     t.amt = 0; Sound.coin(); renderSheet(false);
   },
   photo: a => { UI.photoId = a.dataset.id; openSheet(photoSheet, { cls: 'wide' }); },
-  studio: a => { Studio.show(a.dataset.id); },
+  studio: a => { const k = Store.kids[a.dataset.id]; if (k && k.resting && !UI.unlocked) return toast('Your island is safe, just as you left it.'); Studio.show(a.dataset.id); },
   st: a => Studio.farmAct(a.dataset.n, a),
   stClose: () => Studio.close(), stCat: a => Studio.act('cat', a), stIsle: a => Studio.act('isle', a), stLook: a => Studio.act('look', a), stLookUse: a => Studio.act('lookUse', a), stLookXp: a => Studio.act('lookXp', a), stLookCash: a => Studio.act('lookCash', a), stLookOff: a => Studio.act('lookOff', a), stPlaceWon: a => Studio.act('placeWon', a), stBuyXp: a => Studio.act('buyXp', a), stBuyCash: a => Studio.act('buyCash', a), stPayCash: a => Studio.act('payCash', a), stPayXp: a => Studio.act('payXp', a), stCancel: a => Studio.act('cancel', a), stDone: a => Studio.act('done', a), stMove: a => Studio.act('move', a), stTurn: a => Studio.act('turn', a), stSell: a => Studio.act('sell', a), stCare: a => Studio.act('care', a),
   poke: a => { G3.poke(a.dataset.id); Sound.ensure(); Sound.pop(); const r = a.getBoundingClientRect(); FX.burst(r.left + r.width / 2, r.top + r.height * 0.4, CONF, 16); },
@@ -6872,8 +7238,28 @@ const ACT = {
     saveSettings({ custom: [...(S().custom || []), c] }); track('chore.custom', { key: c.key, title: c.title, tier: c.tier, freq: c.freq }, null);
     const names = f.sendTo.length ? sendChore({ ...c, custom: true }, f.sendTo) : ''; closeSheet(); toast(names ? `📨 ${c.title} sent to ${names}` : `${c.title} added`);
   },
-  tax: a => saveSettings({ taxRate: clamp(S().taxRate + 5 * +a.dataset.d, 0, 30) }),
-  interest: a => saveSettings({ interestWeekly: clamp(Math.round((S().interestWeekly + 0.5 * +a.dataset.d) * 10) / 10, 0, 5) }),
+  tax: a => { if (!Plan.limits.rules) return ACT.planOpen({ dataset: { why: 'rules' } }); saveSettings({ taxRate: clamp(S().taxRate + 5 * +a.dataset.d, 0, 30) }); },
+  interest: a => { if (!Plan.limits.rules) return ACT.planOpen({ dataset: { why: 'rules' } }); saveSettings({ interestWeekly: clamp(Math.round((S().interestWeekly + 0.5 * +a.dataset.d) * 10) / 10, 0, 5) }); },
+  restPick: a => { const id = a.dataset.id, sel = UI.restSel || []; UI.restSel = sel.includes(id) ? sel.filter(x => x !== id) : [...sel, id]; render(); },
+  restSave: () => {
+    const sel = UI.restSel || [], kids = kidsList().filter(k => !k.example); if (!sel.length || sel.length > Plan.limits.kids) return;
+    // Rest first, then wake, so the plan always has room for the kids being woken.
+    for (const k of kids) if (!sel.includes(k.id) && !k.resting) updDoc('kids', k.id, { resting: true });
+    for (const k of kids) if (sel.includes(k.id) && k.resting) updDoc('kids', k.id, { resting: false });
+    if (UI.restPick) saveSettings({ restAt: Date.now() }); else api('POST', '/api/plan/moment', { moment: 'ended', action: 'shown' }).catch(() => {});
+    UI.restSel = null; UI.restPick = false; toast('Saved. Resting kids keep everything they have.'); render();
+  },
+  restSwap: () => { UI.restPick = true; UI.restSel = null; render(); },
+  restCancel: () => { UI.restPick = false; UI.restSel = null; render(); },
+  momentGo: a => {
+    const m = UI.moment; if (!m) return; const action = a.dataset.a;
+    if (!Plan.preview) api('POST', '/api/plan/moment', { moment: m.moment, kidId: m.kidId, action }).catch(() => {});
+    m.gone = true;
+    if (action === 'plans') return ACT.planOpen({ dataset: { why: m.moment } });
+    if (action === 'pack') { UI.screen = 'shop'; UI.shopS = null; scrollTo(0, 0); }
+    render();
+  },
+  planPreview: async () => { await saveSettings({ planPreview: S().planPreview === 'free' ? null : 'free' }); setTimeout(loadPlan, 400); },
   setFlag: a => { const k = a.dataset.k; saveSettings({ [k]: !S()[k] }); },
   currency: a => saveSettings({ currency: a.dataset.c }),
   fundReset: () => { saveSettings({ familyFund: 0 }); toast('Family fund reset'); },

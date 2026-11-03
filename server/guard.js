@@ -7,10 +7,11 @@
 // farm sales can't earn more XP in a day than the family's farm limit.
 import { FUNDS, priceAt, tickAt } from './market.js';
 import { ITEMS, LAND, SIZES, LOOKS, SETS, RULES } from './catalog.js';
+import { allowed, FREE_RULES } from './plans.js';
 
 const JARS = ['spend', 'save', 'invest', 'give'];
 // Only grown-ups set who the kid is and their pay totals.
-const GROWN_UP = ['name', 'age', 'avatar', 'hue', 'order', 'createdAt', 'earned', 'taxPaid'];
+const GROWN_UP = ['name', 'age', 'avatar', 'hue', 'order', 'createdAt', 'earned', 'taxPaid', 'resting'];
 // Statement entries a kid's own actions make. Pay, payouts and bonuses come from grown-ups.
 const KID_KINDS = new Set(['move', 'spend', 'buy', 'sell', 'interest', 'xp']);
 const DAY = 864e5, LEDGER_MAX = 240;
@@ -26,6 +27,8 @@ export function same(a, b) {
   return ka.length === kb.length && ka.every(k => same(a[k], b[k]));
 }
 const num = v => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
+// Keys in b that weren't in a: things added in this change.
+const added = (a, b) => Object.keys(b || {}).filter(k => !(a || {})[k]);
 const cashOf = k => JARS.reduce((t, j) => t + num((k.jars || {})[j]), 0);
 const dayNo = key => Date.parse(key + 'T00:00:00Z') / DAY;
 // The latest date it can be anywhere on Earth right now, as the app writes dates.
@@ -115,7 +118,6 @@ export function checkKidWrite(prev, next, settings, now = Date.now()) {
   }
   if (!!isN.unlockAll !== !!isP.unlockAll) return nope('only a grown-up can unlock the whole island shop.');
   // Land, island sizes, tools, upgrades and looks keep what was paid for them, like items.
-  const added = (a, b) => Object.keys(b || {}).filter(k => !(a || {})[k]);
   const buys = [];
   for (const k of added(isP.land, isN.land)) { const def = LAND.get(k); if (!def) return nope('that land isn’t in the shop.'); buys.push([isN.land[k], def]); }
   for (const k of added(isP.sizes, isN.sizes)) { const def = SIZES.get(+k); if (!def) return nope('that island size isn’t in the shop.'); buys.push([isN.sizes[k], def]); }
@@ -165,3 +167,37 @@ export function checkKidWrite(prev, next, settings, now = Date.now()) {
   if (sold > soldMost + cashBack + 1) return nope('that sold for more than it’s worth.');
   return null;
 }
+
+// What the family's plan has. Unlike checkKidWrite this applies to every device, grown-ups' too: a plan's contents are
+// the same for everyone. Only things added in this change are checked, so whatever a kid already has (bought on Plus,
+// won, or from before) stays theirs and keeps working, and Market units can always be sold.
+// col is the collection ('kids', 'growth' or 'family'); plan is planOf's result. Returns null or { code, message }.
+const plusOnly = what => ({ code: 'plan_limit', message: `${what} comes with Chorecast Plus.` });
+export function checkPlanWrite(col, prev, next, plan) {
+  const L = plan.limits; prev = prev || {};
+  if (col === 'kids') {
+    const isP = prev.island || {}, isN = next.island || {}, had = new Set((Array.isArray(isP.items) ? isP.items : []).filter(Boolean).map(i => i.id));
+    for (const it of Array.isArray(isN.items) ? isN.items : []) if (it && !had.has(it.id) && !allowed(L, 'item', it.t)) return plusOnly('That');
+    for (const k of added(isP.land, isN.land)) if (!allowed(L, 'land', k)) return plusOnly('That island');
+    for (const k of added(isP.sizes, isN.sizes)) if (!allowed(L, 'size', +k)) return plusOnly('A bigger island');
+    for (const k of [...added(isP.tools, isN.tools), ...added(isP.upgrades, isN.upgrades)]) if (!allowed(L, 'item', k)) return plusOnly('That');
+    for (const k of added(isP.owned, isN.owned)) if (!allowed(L, 'look', k)) return plusOnly('That look');
+    for (const k of added(isP.sets, isN.sets)) if (!allowed(L, 'set', k)) return plusOnly('That collection');
+    for (const [id, h] of Object.entries(next.holdings || {})) {
+      const du = num(h && h.units) - num(((prev.holdings || {})[id] || {}).units);
+      if (du > 1e-9 && !allowed(L, 'fund', id)) return plusOnly('That fund');
+    }
+  }
+  // Lessons: on a plan without every lesson, a lesson after unit 1 can only be passed in a subject the family has a pack
+  // for. Lesson ids are tree.band.unit.lesson.
+  if (col === 'growth' && !L.allLessons) {
+    const d0 = prev.done || {}, d1 = next.done || {};
+    for (const id of Object.keys(d1)) {
+      if (d0[id]) continue; const [tree, , unit] = id.split('.');
+      if (+unit > 1 && !(plan.packs || []).some(p => p === tree || p === 'all')) return plusOnly('That lesson');
+    }
+  }
+  if (col === 'family' && !L.rules) for (const [k, ok] of Object.entries(FREE_RULES)) if (!same(prev[k], next[k]) && next[k] != null && !ok.includes(next[k])) return plusOnly('Choosing your own rate');
+  return null;
+}
+

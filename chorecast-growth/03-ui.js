@@ -51,7 +51,8 @@ function back() {
 function treesOn() { const off = GSET().off || {}; return TREES.filter(t => !off[t.id]); }
 function available(kid, l) {
   // A lesson opens once the lesson before it in its unit is passed; each unit opens when the unit before is done.
-  // On the free plan only unit 1 of each subject opens (the app's planLocked); kids see "Grown-ups can open this".
+  // On the free plan only unit 1 of each subject opens (the app's planLocked); the rest show ✦ and "comes with Chorecast
+  // Plus", never a price or a nudge to ask for it.
   if (C.planLocked && C.planLocked(l)) return false;
   const pack = packFor(l.tree, l.band), u = pack.units.find(x => x.n === l.unit), i = u.lessons.indexOf(l);
   if (i > 0 && !passed(kid, u.lessons[i - 1].id)) return false;
@@ -194,7 +195,7 @@ function viewTree(kid, tree) {
   const units = pack ? pack.units : [];
   const node = (l, idx) => {
     const done = passed(kid, l.id), open = !done && available(kid, l), md = medal(kid, l), side = idx % 4 === 1 ? 'r' : idx % 4 === 3 ? 'l' : 'c', plan = !done && C.planLocked && C.planLocked(l);
-    return `<button class="gw-node ${done ? 'done ' + md : open ? 'open' : 'locked'} ${l === nx ? 'next' : ''} s-${side}" data-g="${open || done ? 'lesson' : plan ? 'planLocked' : 'locked'}" data-id="${l.id}" aria-label="${esc(local(l.title))}${done ? `, ${md} medal` : open ? ', ready' : ', locked'}"><span class="gn-ic">${done ? (md === 'gold' ? '🥇' : md === 'silver' ? '🥈' : '🥉') : open ? esc(l.icon) : '🔒'}</span><span class="gn-t">${esc(local(l.title))}</span></button>`;
+    return `<button class="gw-node ${done ? 'done ' + md : open ? 'open' : plan ? 'locked plus' : 'locked'} ${l === nx ? 'next' : ''} s-${side}" data-g="${open || done ? 'lesson' : plan ? 'planLocked' : 'locked'}" data-id="${l.id}" aria-label="${esc(local(l.title))}${done ? `, ${md} medal` : open ? ', ready' : plan ? ', comes with Chorecast Plus' : ', locked'}"><span class="gn-ic">${done ? (md === 'gold' ? '🥇' : md === 'silver' ? '🥈' : '🥉') : open ? esc(l.icon) : plan ? '✦' : '🔒'}</span><span class="gn-t">${esc(local(l.title))}</span></button>`;
   };
   ui.innerHTML = `${topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`)}
     <div class="gw-pad gw-path">
