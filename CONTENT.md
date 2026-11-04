@@ -147,7 +147,7 @@ Questions are split into fields before the country text is swapped in, so keep s
 
 ## Languages
 
-Te reo Māori, Spanish, Mandarin and Japanese courses (`LANGS` in `chorecast-growth/01-core.js`). Each is one course for every age, aimed at speaking on your own: 8 stages of 10 units of 8 lessons, with a story and a challenge per unit, about 3,000 words in all. Each course starts with a course map (`content/parked/<id>.map.md`) that plans every unit to the top level before any lesson is written. The te reo stages are Te Aho Arataki Marau's eight levels.
+Te reo Māori, Spanish, Mandarin and Japanese courses (`LANGS` in `chorecast-growth/01-core.js`). Each is one course for every age, aimed at speaking on your own: 8 stages of 10 units of 8 lessons, with a story and a challenge per unit, about 3,000 words in all. Each course starts with a course map (`<id>.map.md`, beside the course) that plans every unit to the top level before any lesson is written. The te reo stages are Te Aho Arataki Marau's eight levels.
 
 A course is one file, `content/<id>.txt` (or in `parked/` until it's reviewed), split by `@stage`:
 
@@ -204,7 +204,7 @@ The checker fails a course if a question or story uses a word that hasn't been t
 
 **Recordings.** Te reo Māori has no voice on Apple devices and is never read by an English voice. A content editor who is a fluent speaker records each line under Grown-ups, then Character Growth, then Recording studio. The build lists every line in `growth/<id>.lines.json`. Until a line is recorded, kids see its words and "Recording on its way".
 
-**Before a stage goes live:** a fluent speaker (for te reo, ideally a kaiako) reads every lesson, the te reo lines are recorded, and a grown-up reads a sample for suitability. Then move it out of `parked/` and add its id to `LANG_LIVE`.
+**Before a stage goes live:** a fluent speaker (for te reo, ideally a kaiako) reads every lesson, the te reo lines are recorded, and a grown-up reads a sample for suitability. Then move it out of `parked/` and add its id to `LANG_LIVE`. (Spanish, Mandarin and Japanese stage 1 went live on 4 November 2026 after a dictionary cross-check instead, at the owner's choice; te reo waits for its kaiako and recordings.) The checker fails if a course in `LANG_LIVE` isn't built, or a built course isn't in `LANG_LIVE`.
 
 ## Money Moments (`moments.txt`)
 

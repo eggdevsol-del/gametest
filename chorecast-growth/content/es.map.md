@@ -9,7 +9,7 @@ per CEFR level: A1, A2, B1, B2. Each stage is 10 units of 8 lessons, plus a stor
 introduced for recognition from stage 5. Please note anything that sounds unnatural for children, and any word your
 country says differently.
 
-## Stage 1 (A1, part 1): ¡Hola! (written: `parked/es.txt`)
+## Stage 1 (A1, part 1): ¡Hola! (written and live: `es.txt`)
 
 | Unit | Kids can… | Words and phrases | Patterns |
 |---|---|---|---|

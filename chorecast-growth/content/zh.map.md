@@ -10,7 +10,7 @@ hear?" pairs in several voices. Kids trace characters over a faint copy (without
 characters, the pinyin and tone marks (including 一 and 不 tone changes), and that everything sounds natural for
 children. Politics and religion stay out.
 
-## Stage 1 (YCT 1): 你好！ (written: `parked/zh.txt`)
+## Stage 1 (YCT 1): 你好！ (written and live: `zh.txt`)
 
 | Unit | Kids can… | Words and phrases | Patterns |
 |---|---|---|---|

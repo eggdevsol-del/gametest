@@ -34,7 +34,7 @@ const TREE = Object.fromEntries(TREES.map(t => [t.id, t]));
    LANG_LIVE courses reach kids; a preview build (node scripts/build-growth.mjs --preview) shows parked ones for
    checking. Te reo Māori has no device voice, so it plays recordings made by a fluent speaker, never an English voice.
    `levels` names each stage for grown-ups: Te Aho Arataki Marau levels, CEFR, YCT and HSK, and JLPT. */
-const LANG_LIVE = [];
+const LANG_LIVE = ['es', 'zh', 'ja'];
 const LANGS = [
   { id: 'mi', name: 'Te reo Māori', icon: '🌿', hue: '#C8483B', scene: 'garden', voices: null, strip: 'āēīōū', blurb: 'Kōrero, whakarongo, pānui, tuhi: speak, listen, read and write', levels: ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6', 'Level 7', 'Level 8'] },
   { id: 'es', name: 'Spanish', icon: '☀️', hue: '#E8822A', scene: 'stall', voices: ['es-MX', 'es-US', 'es-ES'], strip: 'áéíóúüñ¿¡', blurb: 'Hablar, escuchar, leer y escribir: speak, listen, read and write', levels: ['A1 (part 1)', 'A1 (part 2)', 'A2 (part 1)', 'A2 (part 2)', 'B1 (part 1)', 'B1 (part 2)', 'B2 (part 1)', 'B2 (part 2)'] },

@@ -1,9 +1,5 @@
-# Mandarin · stage 1 (YCT 1). The course map is zh.map.md.
-# Parked until a fluent speaker has read it. Simplified characters; each word and phrase carries its pinyin.
-# Tiles answers put a space between tiles.
+# zh · stage 1
 @lang zh
-
-@stage 1
 
 @unit 1 | 你好！ | Greet, thank and say goodbye
 @unit 2 | 你叫什么名字？ | Say who I am and introduce others
@@ -20,7 +16,7 @@
 hook: More people speak Mandarin than any other language. Here’s how they say hello.
 word: 你好 | hello | 👋 | wave | nǐ hǎo
 word: 小明 | Xiao Ming (a boy’s name) | 👦 | wave to him | Xiǎo Míng
-word: 丽丽 | Lili (a girl’s name) | 👧 | wave to her | Lìli
+word: 丽丽 | Lili (a girl’s name) | 👧 | wave to her | Lìlì
 say: «你好，小明！» | Hello, Xiao Ming! | Nǐ hǎo, Xiǎo Míng!
 learn: Chinese is written in characters. The marks over the pinyin show each syllable’s tone: «你好» is nǐ hǎo.
 play: hear | Which one is «你好»? | 👋* | 🌙 | 🍎
@@ -45,7 +41,7 @@ skill: zh-greet
 hook: Goodbye, and see you tomorrow.
 word: 再见 | goodbye | 🚶 | wave as you walk away | zàijiàn
 word: 明天见 | see you tomorrow | 📅 | point forward | míngtiān jiàn
-say: «再见，丽丽！» | Goodbye, Lili! | Zàijiàn, Lìli!
+say: «再见，丽丽！» | Goodbye, Lili! | Zàijiàn, Lìlì!
 learn: «再见» means “see again”, and «明天» means tomorrow.
 play: hear | Which one is «明天见»? | 📅* | 🚶 | 👋
 check: mcq | You’ll see your friend tomorrow. You say… | «明天见！»* | «早上好！» | «你好！»
@@ -114,7 +110,7 @@ home: Tell a friend «我们是朋友».
 skill: zh-greet
 
 @story 1 | 早上好！
-line: 小明 | «早上好，丽丽！» | Good morning, Lili! | Zǎoshang hǎo, Lìli!
+line: 小明 | «早上好，丽丽！» | Good morning, Lili! | Zǎoshang hǎo, Lìlì!
 line: 丽丽 | «早上好，小明！» | Good morning, Xiao Ming! | Zǎoshang hǎo, Xiǎo Míng!
 line: 小明 | «老师好！» | Hello, teacher! | Lǎoshī hǎo!
 line: 丽丽 | «谢谢你，朋友！» | Thank you, friend! | Xièxie nǐ, péngyou!
@@ -144,7 +140,7 @@ word: 你 | you | 🫵 | point to a friend | nǐ
 word: 他 | he | 👦🏻 | point to a boy | tā
 word: 她 | she | 👧🏻 | point to a girl | tā
 say: «他叫小明。» | His name is Xiao Ming. | Tā jiào Xiǎo Míng.
-say: «她叫丽丽。» | Her name is Lili. | Tā jiào Lìli.
+say: «她叫丽丽。» | Her name is Lili. | Tā jiào Lìlì.
 rule: «他» and «她» both sound like tā. They’re only different when written.
 play: hear | Which one is «你»? | 🫵* | 👦🏻 | 🙋
 check: mcq | «她叫丽丽» means… | Her name is Lili.* | My name is Lili. | His name is Lili.
@@ -209,7 +205,7 @@ skill: zh-people
 @lesson 2.7 | 好朋友 | ⭐ | stage
 hook: Who is your best friend?
 word: 好朋友 | good friend, best friend | 🫂 | hug yourself | hǎo péngyou
-say: «丽丽是我的好朋友。» | Lili is my best friend. | Lìli shì wǒ de hǎo péngyou.
+say: «丽丽是我的好朋友。» | Lili is my best friend. | Lìlì shì wǒ de hǎo péngyou.
 say: «谁是你的好朋友？» | Who is your best friend? | Shéi shì nǐ de hǎo péngyou?
 play: tiles | Build it: Xiao Ming is my best friend. | 小明 是 我的 好朋友
 check: mcq | «谁是你的好朋友？» asks… | who your best friend is* | where you’re from | your teacher’s name
@@ -221,7 +217,7 @@ skill: zh-intro
 hook: This is…, and nice to meet you.
 word: 这是 | this is | 👇 | point down by your feet | zhè shì
 word: 很高兴认识你 | nice to meet you | 😊 | shake hands | hěn gāoxìng rènshi nǐ
-say: «这是丽丽。» | This is Lili. | Zhè shì Lìli.
+say: «这是丽丽。» | This is Lili. | Zhè shì Lìlì.
 play: match | Match them | «这是»=this is; «很高兴认识你»=nice to meet you; «你好»=hello
 check: mcq | You introduce your friend Xiao Ming. You say… | «这是小明。»* | «我叫小明。» | «小明是谁？»
 check: hear | What does «很高兴认识你» mean? | Nice to meet you.* | Thank you very much. | See you tomorrow.
@@ -230,7 +226,7 @@ skill: zh-intro
 
 @story 2 | 你叫什么名字？
 line: 小明 | «你好！你叫什么名字？» | Hi! What’s your name? | Nǐ hǎo! Nǐ jiào shénme míngzi?
-line: 丽丽 | «我叫丽丽。你是哪国人？» | My name is Lili. Where are you from? | Wǒ jiào Lìli. Nǐ shì nǎ guó rén?
+line: 丽丽 | «我叫丽丽。你是哪国人？» | My name is Lili. Where are you from? | Wǒ jiào Lìlì. Nǐ shì nǎ guó rén?
 line: 小明 | «我是新西兰人。你呢？» | I’m a New Zealander. And you? | Wǒ shì Xīnxīlán rén. Nǐ ne?
 line: 丽丽 | «我是中国人。» | I’m Chinese. | Wǒ shì Zhōngguó rén.
 line: 丽丽 | «这是我的老师。» | This is my teacher. | Zhè shì wǒ de lǎoshī.
@@ -256,9 +252,10 @@ hook: How are you?
 word: 好 | good, well | 👍 | thumbs up | hǎo
 word: 很 | very | ⭐ | arms out wide | hěn
 say: «你好吗？» | How are you? | Nǐ hǎo ma?
-say: «我很好。» | I’m very well. | Wǒ hěn hǎo.
+say: «我很好。» | I’m good. | Wǒ hěn hǎo.
+rule: «很» means very, but Chinese puts it before words like «好» anyway, so «我很好» is just “I’m good”.
 rule: «吗» at the end turns a sentence into a yes-or-no question: «你好» (hello), «你好吗？» (are you well?).
-play: tiles | Build it: I’m very well. | 我 很 好
+play: tiles | Build it: I’m good. | 我 很 好
 check: mcq | Your friend asks «你好吗？» You answer… | «我很好。»* | «再见。» | «不客气。»
 check: hear | What does «你好吗» mean? | How are you?* | Hello! | Who are you?
 home: Ask someone at home «你好吗？»
@@ -309,10 +306,10 @@ word: 生病 | sick | 🤒 | hold your tummy | shēngbìng
 word: 疼 | it hurts | 🤕 | hold your knee | téng
 say: «我生病了。» | I’m sick. | Wǒ shēngbìng le.
 say: «我的腿疼。» | My leg hurts. | Wǒ de tuǐ téng.
-play: match | Match them | «生病»=sick; «疼»=it hurts; «很好»=very well
+play: match | Match them | «生病»=sick; «疼»=it hurts; «很好»=good, well
 check: mcq | You fell and hurt your knee. You say… | «疼！»* | «我很高兴！» | «我冷了！»
-check: tf | «我很好» means “I’m very well”. | true
-home: Teach someone how to say “I’m very well”: «我很好».
+check: tf | «我很好» means “I’m good”. | true
+home: Teach someone how to say “I’m good”: «我很好».
 skill: zh-feel
 
 @lesson 3.7 | 有点儿 | 🤏 | garden
@@ -451,7 +448,7 @@ home: Count your Spend jar in Mandarin with a grown-up.
 skill: zh-money
 
 @story 4 | 你几岁？
-line: 小明 | «丽丽，你几岁？» | Lili, how old are you? | Lìli, nǐ jǐ suì?
+line: 小明 | «丽丽，你几岁？» | Lili, how old are you? | Lìlì, nǐ jǐ suì?
 line: 丽丽 | «我九岁。你呢？» | I’m nine. And you? | Wǒ jiǔ suì. Nǐ ne?
 line: 小明 | «我十岁。» | I’m ten. | Wǒ shí suì.
 line: 丽丽 | «你有几个朋友？» | How many friends do you have? | Nǐ yǒu jǐ ge péngyou?
@@ -639,7 +636,7 @@ say: «那是一只小猫。» | That’s a little cat. | Nà shì yì zhī xiǎ
 learn: You know «小» from «小明»: his name means “little bright”.
 try: trace | «大» | big
 play: match | Match them | «大牛»=a big cow; «小鸡»=a little chicken; «小鱼»=a small fish
-check: mcq | How do you say “a big horse”? | «一只大马»* | «一只马大» | «一只小马»
+check: mcq | How do you say “a big dog”? | «一只大狗»* | «一只狗大» | «一只小狗»
 check: tiles | Build it: That’s a little cat. | 那 是 一只 小 猫
 home: Find something «大» and something «小» at home.
 skill: zh-describe
@@ -673,7 +670,7 @@ home: Hide a toy and give clues: «上面», «下面», «里面».
 skill: zh-place
 
 @story 6 | 猫在哪儿？
-line: 小明 | «丽丽，猫在哪儿？» | Lili, where’s the cat? | Lìli, māo zài nǎr?
+line: 小明 | «丽丽，猫在哪儿？» | Lili, where’s the cat? | Lìlì, māo zài nǎr?
 line: 丽丽 | «在房子里面吗？» | Inside the house? | Zài fángzi lǐmian ma?
 line: 小明 | «不是。那是一只狗！» | No. That’s a dog! | Bú shì. Nà shì yì zhī gǒu!
 line: 丽丽 | «猫在房子上面！» | The cat is on top of the house! | Māo zài fángzi shàngmian!
@@ -687,7 +684,7 @@ hook: Let’s talk about the people in your family.
 word: 家 | family, home | 👨‍👩‍👧‍👦 | a big group hug | jiā
 word: 爸爸 | dad | 👨‍👧 | wave to Dad | bàba
 word: 妈妈 | mum | 👩‍👧 | wave to Mum | māma
-say: «这是我的家。» | This is my family. | Zhè shì wǒ de jiā.
+say: «这是我的家。» | This is my home. | Zhè shì wǒ de jiā.
 say: «这是我的妈妈。» | This is my mum. | Zhè shì wǒ de māma.
 learn: «家» means both home and family.
 play: hear | Which one is «爸爸»? | 👨‍👧* | 👩‍👧 | 👨‍👩‍👧‍👦
@@ -780,7 +777,7 @@ home: Do a team task with your family. Say «一起！» as you start.
 skill: zh-family
 
 @story 7 | 我的家
-line: 小明 | «这是我的家。» | This is my family. | Zhè shì wǒ de jiā.
+line: 小明 | «这是我的家。» | This is my home. | Zhè shì wǒ de jiā.
 line: 小明 | «这是我的妈妈，那是我的爸爸。» | This is my mum, and that’s my dad. | Zhè shì wǒ de māma, nà shì wǒ de bàba.
 line: 丽丽 | «她是谁？» | Who is she? | Tā shì shéi?
 line: 小明 | «她是我的奶奶。她很高兴！» | She’s my nana. She’s very happy! | Tā shì wǒ de nǎinai. Tā hěn gāoxìng!
@@ -1113,9 +1110,10 @@ skill: zh-chores
 line: 妈妈 | «早上好！小明，过来。» | Good morning! Xiao Ming, come here. | Zǎoshang hǎo! Xiǎo Míng, guòlái.
 line: 妈妈 | «请喂狗。» | Please feed the dog. | Qǐng wèi gǒu.
 line: 小明 | «好的，妈妈。» | OK, Mum. | Hǎo de, māma.
-line: 爸爸 | «丽丽，请洗碗。» | Lili, please wash the dishes. | Lìli, qǐng xǐ wǎn.
-line: 丽丽 | «好的。我来帮你。» | OK. I’ll help you. | Hǎo de. Wǒ lái bāng nǐ.
-line: 小明 | «做完了！都做完了！» | Done! All done! | Zuò wán le! Dōu zuò wán le!
+line: 爸爸 | «丽丽，请洗碗。» | Lili, please wash the dishes. | Lìlì, qǐng xǐ wǎn.
+line: 丽丽 | «好的，爸爸。» | OK, Dad. | Hǎo de, bàba.
+line: 小明 | «做完了！丽丽，我来帮你。» | Done! Lili, I’ll help you. | Zuò wán le! Lìlì, wǒ lái bāng nǐ.
 line: 爸爸 | «你们真棒！» | You’re brilliant! | Nǐmen zhēn bàng!
 check: mcq | What job does Xiao Ming do? | feeds the dog* | washes the dishes | sweeps the floor
 check: mcq | What does Dad say at the end? | You’re brilliant!* | Come here! | Good night!
+

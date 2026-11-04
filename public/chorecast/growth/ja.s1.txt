@@ -1,9 +1,5 @@
-# Japanese · stage 1 (kana and N5, part 1). The course map is ja.map.md.
-# Parked until a fluent speaker has read it. Hiragana with spaces between words, as in early readers; each word and
-# phrase carries its rōmaji. Tiles answers put a space between tiles.
+# ja · stage 1
 @lang ja
-
-@stage 1
 
 @unit 1 | こんにちは | Greet, thank and say goodbye
 @unit 2 | なまえ | Say who I am and introduce others
@@ -281,9 +277,10 @@ skill: ja-feel
 @lesson 3.3 | こわい | 😨 | garden
 hook: Some feelings are big ones. Let’s name them.
 word: おこってる | angry | 😠 | stomp your feet | okotteru
-word: こわい | scared | 😨 | hide behind your hands | kowai
+word: こわい | scared, scary | 😨 | hide behind your hands | kowai
 word: たいくつ | bored | 😒 | roll your eyes | taikutsu
 learn: It’s OK to feel «おこってる» or «こわい». Saying how you feel helps people help you.
+rule: Feeling words like «こわい» and «うれしい» say how you feel yourself: «こわい！» means “I’m scared!”
 try: trace | «わ» | wa
 play: match | Match them | «おこってる»=angry; «こわい»=scared; «たいくつ»=bored
 check: mcq | A loud storm makes you jump. You feel… | «こわい»* | «うれしい» | «たいくつ»
@@ -711,7 +708,7 @@ line: けん | «ゆき、ねこは どこ？» | Yuki, where’s the cat? | Yuk
 line: ゆき | «いえの なか？» | Inside the house? | Ie no naka?
 line: けん | «いいえ。それは いぬ！» | No. That’s a dog! | Iie. Sore wa inu!
 line: ゆき | «ねこは いえの うえ！» | The cat is on top of the house! | Neko wa ie no ue!
-line: けん | «はい！ねこは こわい。» | Yes! The cat is scared. | Hai! Neko wa kowai.
+line: けん | «はい！ねこは いぬが こわい。» | Yes! The cat is scared of the dog. | Hai! Neko wa inu ga kowai.
 line: ゆき | «こんにちは、ねこちゃん！» | Hello, little cat! | Konnichiwa, neko-chan!
 check: mcq | Where is the cat? | on top of the house* | inside the house | under the house
 check: mcq | How does the cat feel? | scared* | hungry | happy
@@ -823,7 +820,7 @@ skill: ja-family
 line: けん | «わたしの かぞくです。» | This is my family. | Watashi no kazoku desu.
 line: けん | «わたしの おかあさんと おとうさんです。» | My mum and my dad. | Watashi no okāsan to otōsan desu.
 line: ゆき | «この ひとは だれ？» | Who is this person? | Kono hito wa dare?
-line: けん | «わたしの おばあさん。とても うれしい！» | My grandma. She’s very happy! | Watashi no obāsan. Totemo ureshii!
+line: けん | «わたしの おばあさん。とても げんき！» | My grandma. She’s full of energy! | Watashi no obāsan. Totemo genki!
 line: ゆき | «きょうだいは いますか？» | Do you have brothers and sisters? | Kyōdai wa imasu ka?
 line: けん | «おにいさんが ふたり、いもうとが ひとり います。» | I have two older brothers and one younger sister. | Onīsan ga futari, imōto ga hitori imasu.
 line: けん | «いっしょに やろう！» | Let’s do it together! | Issho ni yarō!
@@ -1165,8 +1162,9 @@ line: おかあさん | «おはよう！ けん、きて。» | Good morning! K
 line: おかあさん | «いぬに えさを あげて ください。» | Please feed the dog. | Inu ni esa o agete kudasai.
 line: けん | «はい、おかあさん。» | OK, Mum. | Hai, okāsan.
 line: おとうさん | «ゆき、おさらを あらって ください。» | Yuki, please wash the dishes. | Yuki, osara o aratte kudasai.
-line: ゆき | «はい。てつだうよ。» | OK. I’ll help. | Hai. Tetsudau yo.
-line: けん | «おわった！ ぜんぶ おわった！» | Done! All done! | Owatta! Zenbu owatta!
+line: ゆき | «はい、おとうさん。» | OK, Dad. | Hai, otōsan.
+line: けん | «おわった！ ゆき、てつだうよ。» | Done! Yuki, I’ll help. | Owatta! Yuki, tetsudau yo.
 line: おとうさん | «よくできたね！» | Well done! | Yoku dekita ne!
 check: mcq | What job does Ken do? | feeds the dog* | washes the dishes | sweeps the floor
 check: mcq | What does Dad say at the end? | Well done!* | Come here! | Good night!
+

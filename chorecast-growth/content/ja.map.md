@@ -11,7 +11,7 @@ in loanwords (バナナ, ドア) from stage 1 and is taught in full in stage 2. 
 lesson's kana over a faint copy (without stroke order yet). Please check that the phrases are natural for children, and
 the rōmaji. Religion and politics stay out. いただきます and ごちそうさま are taught as table manners.
 
-## Stage 1 (kana and N5, part 1): こんにちは！ (written: `parked/ja.txt`)
+## Stage 1 (kana and N5, part 1): こんにちは！ (written and live: `ja.txt`)
 
 | Unit | Kids can… | Words and phrases | Patterns |
 |---|---|---|---|

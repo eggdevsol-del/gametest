@@ -38,7 +38,7 @@ ok(!/«[^»]*\b(karakia|Tiriti|Treaty)\b/i.test(src), 'no karakia or Treaty cont
 
 // Spanish, Mandarin and Japanese stage 1: the same shape, readings for characters and kana, and tracing to write them
 for (const lang of ['es', 'zh', 'ja']) {
-  const text = readFileSync(path.join(REPO, `chorecast-growth/content/parked/${lang}.txt`), 'utf8');
+  const text = readFileSync(path.join(REPO, `chorecast-growth/content/${lang}.txt`), 'utf8');
   const p = G.parsePack(`@lang ${lang}\n` + text.split(/^@stage 1\s*$/m)[1].split(/^@stage \d+/m)[0], lang, 's1'), ls = p.units.flatMap(u => u.lessons);
   ok(p.units.length === 10 && p.units.every(u => u.lessons.length === 8 && u.story), `${lang}: stage 1 is 10 units of 8 lessons, each with a story`);
   ok(ls.every(l => l.words.length >= 1 && l.words.every(w => w.pic && w.en)), `${lang}: every word has a picture and a meaning`);
@@ -47,8 +47,15 @@ for (const lang of ['es', 'zh', 'ja']) {
     ok(ls.filter(l => l.tries.some(t => t.item.type === 'trace')).length >= (lang === 'ja' ? 40 : 8), `${lang}: kids trace characters`);
   }
 }
-const ja = readFileSync(path.join(REPO, 'chorecast-growth/content/parked/ja.txt'), 'utf8'), traced = new Set([...ja.matchAll(/trace \| «(.)»/g)].map(m => m[1]));
+const ja = readFileSync(path.join(REPO, 'chorecast-growth/content/ja.txt'), 'utf8'), traced = new Set([...ja.matchAll(/trace \| «(.)»/g)].map(m => m[1]));
 ok([...'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん'].every(c => traced.has(c)), 'ja: every basic hiragana is traced somewhere in stage 1');
+
+// Which courses reach kids: Spanish, Mandarin and Japanese are live and built; te reo Māori stays parked until a kaiako
+// has reviewed it and every line is recorded
+const index = JSON.parse(readFileSync(path.join(REPO, 'public/chorecast/growth/index.json'), 'utf8'));
+ok(JSON.stringify([...G.LANG_LIVE].sort()) === JSON.stringify(['es', 'ja', 'zh']), 'Spanish, Mandarin and Japanese are live', G.LANG_LIVE);
+ok(!G.LANG_LIVE.includes('mi') && !index.counts['mi.s1'] && !/^@lang/m.test(readFileSync(path.join(REPO, 'chorecast-growth/content/money.txt'), 'utf8')), 'te reo Māori is not live and not built for kids');
+ok(['es', 'zh', 'ja'].every(k => index.counts[`${k}.s1`] && index.counts[`${k}.s1`].lessons === 80), 'each live course ships its 80 stage 1 lessons', Object.keys(index.counts));
 
 // One lesson, three ages
 const l43 = all.find(l => l.id === 'mi.s1.4.3'), kinds = s => s.map(x => x.kind);

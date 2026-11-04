@@ -1,6 +1,7 @@
 # Te reo Māori · Level 1 (Te Aho Arataki Marau level 1, te whakatōtanga). The course map is mi.map.md.
 # Parked until a fluent speaker (ideally a kaiako) has read it and every line is recorded. Standard written te reo
 # with macrons (Te Taura Whiri i te Reo Māori's conventions). One course for every age: see CONTENT.md, Languages.
+# Cross-checked 2026-11-04: every word against Te Aka Māori Dictionary (spelling, macrons, meaning), grammar read through. Still needs a kaiako for naturalness and tikanga, and recordings.
 @lang mi
 @pairs papa/pāpā
 
@@ -20,12 +21,13 @@
 @lesson 1.1 | Kia ora | 👋 | home
 hook: People all over Aotearoa say one friendly word every day. Let’s learn it!
 word: kia ora | hello, thanks | 👋 | wave
-say: «Kia ora, Ari!» | Hello, Ari!
-say: «Kia ora, Mere!» | Hello, Mere!
+say: «Kia ora, e Ari!» | Hello, Ari!
+say: «Kia ora, e Mere!» | Hello, Mere!
 learn: «Kia ora» is said all over «Aotearoa». It means hello and thanks, and it wishes someone well.
+learn: When you say hello to someone with a short name, put «e» in front of it: «Kia ora, e Ari!»
 play: hear | Which one is «kia ora»? | 👋* | 🌙 | 🍎
 check: hear | What does «kia ora» mean? | hello and thanks* | good night | see you later
-check: mcq | Ari says «Kia ora, Mere!» What is Ari doing? | Saying hello to Mere* | Saying goodbye to Mere | Asking Mere a question
+check: mcq | Ari says «Kia ora, e Mere!» What is Ari doing? | Saying hello to Mere* | Saying goodbye to Mere | Asking Mere a question
 home: Say «kia ora» to everyone in your family today.
 skill: mi-greet
 
@@ -62,7 +64,7 @@ word: haere rā | goodbye (to someone leaving) | 🚶 | wave as they walk away
 word: e noho rā | goodbye (to someone staying) | 🏠 | wave as you walk away
 learn: «Haere» means go and «noho» means stay. «Haere rā» is like “go well”, and «e noho rā» is like “stay well”.
 rule: If you’re staying, say «haere rā» to the person leaving. If you’re leaving, say «e noho rā» to the people staying.
-say: «Haere rā, Ari!» | Goodbye, Ari! (Ari is leaving)
+say: «Haere rā, e Ari!» | Goodbye, Ari! (Ari is leaving)
 play: mcq | Mere is going home. Ari is staying. What does Mere say to Ari? | «E noho rā!»* | «Haere rā!» | «Mōrena!»
 check: mcq | Your friend leaves your house. You say… | «Haere rā!»* | «E noho rā!» | «Pō mārie!»
 check: tf | You say «e noho rā» when you are the one leaving. | true | The one leaving says «e noho rā» to the people staying.
@@ -74,7 +76,7 @@ hook: Here’s a friendly way to say “see you”.
 word: ka kite anō | see you again | 👀 | point to your eyes
 word: ka kite āpōpō | see you tomorrow | 📅 | point forward
 learn: «Kite» means see, and «āpōpō» means tomorrow.
-say: «Ka kite anō, Mere!» | See you again, Mere!
+say: «Ka kite anō, e Mere!» | See you again, Mere!
 play: hear | Which one is «ka kite āpōpō»? | 📅* | 👀 | 🌙
 check: mcq | You’ll see your friend again tomorrow. You say… | «Ka kite āpōpō!»* | «Mōrena!» | «Tēnā koutou!»
 check: tiles | Build it: see you again | ka kite anō
@@ -122,13 +124,13 @@ home: Greet a friend with «Kia ora, e hoa!»
 skill: mi-greet
 
 @story 1 | Mōrena, Mere!
-line: Ari | «Mōrena, Mere!» | Good morning, Mere!
-line: Mere | «Mōrena, Ari! Kia ora!» | Good morning, Ari! Hello!
+line: Ari | «Mōrena, e Mere!» | Good morning, Mere!
+line: Mere | «Mōrena, e Ari! Kia ora!» | Good morning, Ari! Hello!
 line: Ari | «Tēnā kōrua!» | Hello, you two! (to Mere and her friend)
 line: Mere | «Homai, koa.» | Give it to me, please.
 line: Mere | «Kia ora, e hoa!» | Thanks, friend!
 line: Mere | «Ka kite anō!» | See you again!
-line: Ari | «Haere rā, Mere!» | Goodbye, Mere! (Mere is leaving)
+line: Ari | «Haere rā, e Mere!» | Goodbye, Mere! (Mere is leaving)
 check: mcq | Who is leaving at the end? | Mere* | Ari | Nobody
 check: hear | What does «ka kite anō» mean? | see you again* | good morning | please
 
@@ -249,8 +251,8 @@ line: Mere | «Ko Mere ahau. Ko wai tō ingoa?» | I’m Mere. What’s your nam
 line: Hēmi | «Ko Hēmi tōku ingoa. Nō hea koe?» | My name is Hēmi. Where are you from?
 line: Mere | «Nō Ōtautahi ahau.» | I’m from Christchurch.
 line: Hēmi | «Ko Ari tēnei. Ko Ari tōku tino hoa.» | This is Ari. Ari is my best friend.
-line: Ari | «Kia ora, Mere!» | Hi, Mere!
-line: Mere | «Kia ora koe, Ari!» | Hi to you, Ari!
+line: Ari | «Kia ora, e Mere!» | Hi, Mere!
+line: Mere | «Kia ora koe, e Ari!» | Hi to you, Ari!
 check: mcq | Where is Mere from? | Ōtautahi (Christchurch)* | Tāmaki Makaurau (Auckland) | Te Whanganui-a-Tara (Wellington)
 check: mcq | Who is Hēmi’s best friend? | Ari* | Mere | His teacher
 
@@ -360,7 +362,7 @@ home: Say «Ka pai tō mahi!» when someone at home does a job well.
 skill: mi-praise
 
 @story 3 | Kei te pēhea koe?
-line: Mere | «Mōrena, Ari! Kei te pēhea koe?» | Morning, Ari! How are you?
+line: Mere | «Mōrena, e Ari! Kei te pēhea koe?» | Morning, Ari! How are you?
 line: Ari | «Kei te āhua ngenge ahau.» | I’m a bit tired.
 line: Mere | «Ko Hēmi tērā. Kei te pēhea ia?» | That’s Hēmi over there. How is he?
 line: Ari | «Kei te tino harikoa ia!» | He’s very happy!
@@ -473,7 +475,7 @@ home: Count your Spend jar in te reo with a grown-up.
 skill: mi-money
 
 @story 4 | E hia?
-line: Ari | «E hia ō tau, Mere?» | How old are you, Mere?
+line: Ari | «E hia ō tau, e Mere?» | How old are you, Mere?
 line: Mere | «E iwa ōku tau. E hia ō tau?» | I’m nine. How old are you?
 line: Ari | «E tekau ōku tau.» | I’m ten.
 line: Mere | «E hia ō hoa?» | How many friends do you have?
@@ -899,11 +901,11 @@ skill: mi-food
 hook: Is it tasty?
 word: reka | tasty, sweet | 😋 | lick your lips
 word: kawa | sour, bitter | 😖 | pull a sour face
-word: makona | full (after eating) | 🫃 | pat your tummy
+word: mākona | full (after eating) | 🫃 | pat your tummy
 say: «He reka te āporo!» | The apple is tasty!
-say: «Kei te makona ahau.» | I’m full.
+say: «Kei te mākona ahau.» | I’m full.
 play: hear | Which one is «kawa»? | 😖* | 😋 | 🫃
-check: mcq | You ate a big dinner. You say… | «Kei te makona ahau.»* | «Kei te hiakai ahau.» | «He kawa te kai.»
+check: mcq | You ate a big dinner. You say… | «Kei te mākona ahau.»* | «Kei te hiakai ahau.» | «He kawa te kai.»
 check: hear | What does «he reka te kai» mean? | The food is tasty.* | The food is sour. | I’m eating food.
 home: Tell the cook «He reka te kai!» after dinner.
 skill: mi-food
@@ -1025,7 +1027,7 @@ line: Mere | «Ko te Rāhoroi!» | It’s Saturday!
 line: Ari | «Rawe! Ko te Rāhoroi te rā utu!» | Awesome! Saturday is payday!
 line: Mere | «Kei te ua. Kei te kāinga ahau.» | It’s raining. I’m at home.
 line: Ari | «Kei te penapena moni ahau mō te paihikara.» | I’m saving money for a bike.
-line: Mere | «Ka pai! Ka kite āpōpō, i te Rātapu!» | Good! See you tomorrow, on Sunday!
+line: Mere | «Ka pai! Ka kite āpōpō!» | Good! See you tomorrow!
 check: mcq | What day is it? | Saturday* | Friday | Sunday
 check: mcq | What is Ari saving for? | a bike* | a dog | a holiday
 
@@ -1143,8 +1145,8 @@ line: Māmā | «Mōrena! Haere mai, e Ari.» | Morning! Come here, Ari.
 line: Māmā | «Whāngaia te kurī, koa.» | Feed the dog, please.
 line: Ari | «Āe, Māmā.» | Yes, Mum.
 line: Pāpā | «E Mere, horoia ngā rīhi, koa.» | Mere, wash the dishes, please.
-line: Mere | «Ka pai. Ka āwhina ahau.» | OK. I’ll help.
-line: Ari | «Kua oti! Kua oti ngā mahi katoa!» | Done! All the jobs are done!
+line: Mere | «Āe, Pāpā.» | Yes, Dad.
+line: Ari | «Kua oti! Ka āwhina ahau, e Mere.» | Done! I’ll help, Mere.
 line: Pāpā | «Ka pai tō mahi!» | Great work!
 check: mcq | What job does Ari do? | feeds the dog* | washes the dishes | sweeps the floor
 check: mcq | What does Pāpā say at the end? | Great work!* | Come here! | Good night!

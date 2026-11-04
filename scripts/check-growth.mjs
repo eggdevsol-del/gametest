@@ -129,6 +129,9 @@ for (const [lang, packs] of Object.entries(langPacks)) {
     for (const [s, list] of Object.entries(lines)) { const miss = list.filter(k => !have.has(k)); if (miss.length) problems.push(`${lang} ${s}: ${miss.length} lines have no recording yet (first: "${miss[0]}")`); }
   }
 }
+// A live course must be built, and a built course must be live (or this is a preview build)
+for (const lang of LANG_LIVE) if (!langPacks[lang]) problems.push(`${lang}: listed in LANG_LIVE but not built (is it still in content/parked?)`);
+if (!index.preview) for (const lang of Object.keys(langPacks)) if (!LANG_LIVE.includes(lang)) problems.push(`${lang}: built for kids but not in LANG_LIVE (park it in content/parked, or add it to LANG_LIVE)`);
 const read = async f => existsSync(path.join(dir, f)) ? readFile(path.join(dir, f), 'utf8') : '';
 const moments = parseMoments(await read('moments.txt'));
 for (const m of moments) { items++; checkItem(m.item, `moment ${m.id}`); }

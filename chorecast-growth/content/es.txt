@@ -1,5 +1,6 @@
 # Spanish · stage 1 (CEFR A1, part 1). The course map is es.map.md.
-# Parked until a fluent speaker has read it. Neutral Latin American Spanish, heard in Latin American and Spanish voices.
+# Live since 4 November 2026, after Claude’s dictionary cross-check; a fluent speaker’s read is still welcome. Neutral Latin American Spanish, heard in Latin American and Spanish voices.
+# Cross-checked 2026-11-04: every word through a Spanish spell checker (accents and ñ), grammar and agreement read through.
 @lang es
 @pairs tu/tú; el/él; si/sí; esta/está; como/cómo; papa/papá; que/qué; mi/mí
 
@@ -1128,8 +1129,8 @@ line: Mamá | «¡Buenos días! Ven aquí, Leo.» | Good morning! Come here, Leo
 line: Mamá | «Dale de comer al perro, por favor.» | Feed the dog, please.
 line: Leo | «Sí, mamá.» | Yes, Mum.
 line: Papá | «Ana, lava los platos, por favor.» | Ana, wash the dishes, please.
-line: Ana | «Bien. Yo te ayudo.» | OK. I’ll help you.
-line: Leo | «¡Terminé! ¡Terminé todo!» | I’m done! I’ve finished everything!
+line: Ana | «Bien, papá.» | OK, Dad.
+line: Leo | «¡Terminé! Yo te ayudo, Ana.» | I’m done! I’ll help you, Ana.
 line: Papá | «¡Buen trabajo!» | Great work!
 check: mcq | What job does Leo do? | feeds the dog* | washes the dishes | sweeps the floor
 check: mcq | What does Papá say at the end? | Great work!* | Come here! | Good night!
