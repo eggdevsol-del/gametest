@@ -15,7 +15,7 @@ import { sendMail, mailReady } from './mail.js';
 import { makeErrors } from './errors.js';
 import { verifyAppleJws } from './appstore.js';
 import { PAYWALL, PRODUCTS, PLANS, FOUNDING_SEATS, WELCOME_DAYS, planOf, clubPrize } from './plans.js';
-import { notify } from './push.js';
+import { notify, notifyDevice } from './push.js';
 import { offsiteConfig, runOffsiteBackup } from './offsite.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -268,20 +268,46 @@ async function pushForJob(familyId, prev, d) {
   else if (was === 'pending' && now === 'redo') await notify(db, familyId, 'kid', { title: `${name}, one more go`, body: `${title} needs another try. Have a look at the note.`, thread: 'kid-' + d.kidId });
 }
 
+// The hour and the day (YYYY-MM-DD, as the app's own day keys) in an iPad's time zone, or null for a zone that can't be read.
+function localNow(tz) {
+  try { const parts = Object.fromEntries(new Intl.DateTimeFormat('en-CA', { timeZone: tz || 'Pacific/Auckland', hour: 'numeric', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).map(x => [x.type, x.value])); return { hour: +parts.hour, day: `${parts.year}-${parts.month}-${parts.day}` }; } catch (e) { return null; }
+}
 // Kids' chore reminder: at the family's chosen hour (settings.remindAt), in each iPad's own time zone, once a day.
 async function sendReminders() {
   const rows = (await db.query(`select p.device_id, p.family_id, p.tz, p.reminded_on, f.data->>'remindAt' as at from push_devices p
     join devices d on d.id = p.device_id join family_settings f on f.family_id = p.family_id
     where d.kind = 'kid' and d.revoked_at is null and f.data->>'remindAt' is not null`)).rows;
   for (const r of rows) {
-    let hour, day;
-    try { const parts = Object.fromEntries(new Intl.DateTimeFormat('en-CA', { timeZone: r.tz || 'Pacific/Auckland', hour: 'numeric', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).map(x => [x.type, x.value])); hour = +parts.hour; day = `${parts.year}-${parts.month}-${parts.day}`; } catch (e) { continue; }
-    if (hour !== Number(r.at) || r.reminded_on === day) continue;
-    await db.query('update push_devices set reminded_on = $2 where device_id = $1', [r.device_id, day]);
+    const now = localNow(r.tz); if (!now || now.hour !== Number(r.at) || r.reminded_on === now.day) continue;
+    await db.query('update push_devices set reminded_on = $2 where device_id = $1', [r.device_id, now.day]);
     await notify(db, r.family_id, 'kid', { title: 'Chorecast', body: 'Today’s chores are ready. Tap to see your forecast.', thread: 'reminder' });
   }
 }
-setInterval(() => sendReminders().catch(e => console.error('reminders failed', e.message)), 10 * 60 * 1000).unref();
+// Kids' lesson reminder: at the family's lesson hour (settings.lessonAt: 4 pm unless a grown-up changes it, null when
+// turned off), in each iPad's own time zone, at most once a day, naming the kids who haven't earned learning XP today.
+// The app shows "Lesson time!" on their Today screen from the same hour.
+async function sendLessonReminders() {
+  const rows = (await db.query(`select p.device_id, p.family_id, p.tz, p.lesson_reminded_on, case when f.data ? 'lessonAt' then f.data->>'lessonAt' else '16' end as at
+    from push_devices p join devices d on d.id = p.device_id left join family_settings f on f.family_id = p.family_id
+    where d.kind = 'kid' and d.revoked_at is null`)).rows;
+  let sent = 0;
+  for (const r of rows) {
+    if (r.at == null) continue;
+    const now = localNow(r.tz); if (!now || now.hour !== Number(r.at) || r.lesson_reminded_on === now.day) continue;
+    await db.query('update push_devices set lesson_reminded_on = $2 where device_id = $1', [r.device_id, now.day]);
+    const kids = (await db.query(`select k.data->>'name' as name, g.data->'day' as day from kids k
+      left join growth_progress g on g.family_id = k.family_id and g.id = k.id
+      where k.family_id = $1 and coalesce(k.data->>'resting', 'false') <> 'true' and coalesce(k.data->>'example', 'false') <> 'true'
+      order by coalesce((k.data->>'order')::numeric, 0)`, [r.family_id])).rows;
+    const due = kids.filter(k => !(k.day && k.day.d === now.day && Number(k.day.xp) > 0)).map(k => k.name || 'Kids');
+    if (!due.length) continue;
+    const who = due.length === 1 ? due[0] : `${due.slice(0, -1).join(', ')} and ${due.at(-1)}`;
+    // 50 XP is a new lesson's most (40 for passing, 10 for every answer right), as XP in chorecast-growth/01-core.js
+    sent += await notifyDevice(db, r.device_id, { title: 'Lesson time!', body: `${who}, a new lesson pays up to 50 XP. Open Grow to start.`, thread: 'lesson' });
+  }
+  return sent;
+}
+setInterval(() => Promise.all([sendReminders(), sendLessonReminders()]).catch(e => console.error('reminders failed', e.message)), 10 * 60 * 1000).unref();
 
 async function deleteDoc(s, col, id, clientId) {
   const C = COLS[col]; if (!C || C.single) fail(404, 'Unknown collection.', 'bad_path');

@@ -50,6 +50,18 @@ export async function notify(db, familyId, kind, { title, body, thread }) {
   if (!pushReady) return 0;
   const rows = (await db.query(`select p.device_id, p.token, p.environment from push_devices p join devices d on d.id = p.device_id
     where p.family_id = $1 and d.kind = $2 and d.revoked_at is null`, [familyId, kind])).rows;
+  return sendAll(db, rows, { title, body, thread });
+}
+
+// Sends one alert to a single device. Returns 1 if it went.
+export async function notifyDevice(db, deviceId, { title, body, thread }) {
+  if (!pushReady) return 0;
+  const rows = (await db.query(`select p.device_id, p.token, p.environment from push_devices p join devices d on d.id = p.device_id
+    where p.device_id = $1 and d.revoked_at is null`, [deviceId])).rows;
+  return sendAll(db, rows, { title, body, thread });
+}
+
+async function sendAll(db, rows, { title, body, thread }) {
   let sent = 0;
   for (const r of rows) {
     const out = await sendOne(r, { aps: { alert: { title, body }, sound: 'default', 'thread-id': thread || 'chorecast' } });

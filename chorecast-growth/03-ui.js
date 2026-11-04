@@ -148,8 +148,8 @@ function viewHub(kid) {
       <section class="gw-me"><div class="gw-lvl"><b class="num">${lvl}</b><small>Level</small></div><div class="gw-me-t"><b>${m} skill${m === 1 ? '' : 's'} mastered</b><small>${t.length ? t.map(esc).join(' · ') : 'Master 4 lessons in a tree to earn its title'}</small>${minutesToday(kid) ? `<small>${minutesToday(kid)} minute${minutesToday(kid) === 1 ? '' : 's'} of learning today</small>` : ''}</div></section>
       ${!sug.length && !Grow.need ? allDoneCard(kid) : ''}
       ${prizeStrip(kid)}
-      ${Grow.need ? `<div class="gw-need">${ic('sparkle')} Each lesson you pass pays ${XP.lesson} XP, up to ${XP.dayCap} XP a day.</div>` : ''}
-      ${sug.length ? `<h2 class="gw-h2">Pick your next lesson</h2><div class="gw-pick">${sug.map((l, i) => { const tr = TREE[l.tree], as = (g.assigned || []).find(a => a.id === l.id); return `<button class="gw-lcard ${i === 0 ? 'main' : ''}" style="--th:${tr.hue}" data-g="lesson" data-id="${l.id}"><span class="lc-ic">${esc(l.icon)}</span><span class="lc-t"><small>${esc(tr.name)} · Unit ${l.unit}</small><b>${esc(local(l.title))}</b>${as ? `<em>From a grown-up${as.bonus ? ` · +${as.bonus} XP bonus` : ''}</em>` : ''}</span><span class="lc-go">${ic('play')}</span></button>`; }).join('')}</div>` : ''}
+      ${Grow.need || sug.length ? `<div class="gw-need">${ic('sparkle')} ${(() => { const room = Math.max(0, XP.dayCap - dayInfo(kid).xp); return room ? `A new lesson pays up to ${XP.lesson + XP.perfect} XP: ${XP.lesson} for passing and ${XP.perfect} more if every answer is right. ${room} of ${XP.dayCap} learning XP left today.` : `You’ve earned all ${XP.dayCap} learning XP for today. Lessons still grow your tree, and the XP starts again tomorrow.`; })()}</div>` : ''}
+      ${sug.length ? `<h2 class="gw-h2">Pick your next lesson</h2><div class="gw-pick">${sug.map((l, i) => { const tr = TREE[l.tree], as = (g.assigned || []).find(a => a.id === l.id); return `<button class="gw-lcard ${i === 0 ? 'main' : ''}" style="--th:${tr.hue}" data-g="lesson" data-id="${l.id}"><span class="lc-ic">${esc(l.icon)}</span><span class="lc-t"><small>${esc(tr.name)} · Unit ${l.unit}</small><b>${esc(local(l.title))}</b><em>${xpWords(kid, l)}${as ? ` · from a grown-up${as.bonus ? `, +${as.bonus} XP bonus` : ''}` : ''}</em></span><span class="lc-go">${ic('play')}</span></button>`; }).join('')}</div>` : ''}
       <div class="gw-tiles">
         ${due ? tile('review', '🔁', `${due} review${due === 1 ? '' : 's'} due`, 'Quick questions so you remember') : ''}
         ${echo ? tile('echo', '💡', `${echo} question${echo === 1 ? '' : 's'} about your week`, `+${XP.echo} XP each`) : ''}
@@ -167,7 +167,7 @@ function constellation(kid) {
   const on = treesOn(), W = 600, H = 800;
   // With up to three live trees there's little to link, so each gets a big door into its part of the Learning Tree.
   if (on.length <= 3) {
-    const door = t => { const st = treeStats(kid, t.id), nx = nextIn(kid, t.id); return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons · ${t.id === 'money' ? (st.done ? 'See your tree grow' : 'Plant your seed') : st.done ? 'See your branch grow' : 'Start a new branch'}</small></span></button>`; };
+    const door = t => { const st = treeStats(kid, t.id), nx = nextIn(kid, t.id); return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons${scoreWords(st)} · ${t.id === 'money' ? (st.done ? 'See your tree grow' : 'Plant your seed') : st.done ? 'See your branch grow' : 'Start a new branch'}</small></span></button>`; };
     return `<div class="gw-ones">${on.map(door).join('')}</div>`;
   }
   const pos = on.map((t, i) => { const c = i % 3, r = Math.floor(i / 3); return { t, c, r, x: 100 + c * 200, y: 95 + r * 190 + (c === 1 ? 70 : 0) }; });
@@ -188,7 +188,7 @@ function viewTree(kid, tree) {
   // Every subject is a plant. One whose lessons haven't loaded yet shows its seed and fills in once they arrive.
   if (PlantView.ok) {
     if (!pack) loadBand(band).then(() => C.scheduleRender());
-    ui.innerHTML = topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`);
+    ui.innerHTML = topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons${scoreWords(st)}`);
     const cel = Grow.celebrate; Grow.celebrate = null;
     PlantView.show(ui, kid, tree, cel && cel.split('.')[0] === tree.id ? cel : null); return;
   }
@@ -197,7 +197,7 @@ function viewTree(kid, tree) {
     const done = passed(kid, l.id), open = !done && available(kid, l), md = medal(kid, l), side = idx % 4 === 1 ? 'r' : idx % 4 === 3 ? 'l' : 'c', plan = !done && C.planLocked && C.planLocked(l);
     return `<button class="gw-node ${done ? 'done ' + md : open ? 'open' : plan ? 'locked plus' : 'locked'} ${l === nx ? 'next' : ''} s-${side}" data-g="${open || done ? 'lesson' : plan ? 'planLocked' : 'locked'}" data-id="${l.id}" aria-label="${esc(local(l.title))}${done ? `, ${md} medal` : open ? ', ready' : plan ? ', comes with Chorecast Plus' : ', locked'}"><span class="gn-ic">${done ? (md === 'gold' ? '🥇' : md === 'silver' ? '🥈' : '🥉') : open ? esc(l.icon) : plan ? '✦' : '🔒'}</span><span class="gn-t">${esc(local(l.title))}</span></button>`;
   };
-  ui.innerHTML = `${topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`)}
+  ui.innerHTML = `${topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons${scoreWords(st)}`)}
     <div class="gw-pad gw-path">
       ${units.map(u => {
         const has = u.lessons.length, allDone = has && u.lessons.every(l => passed(kid, l.id)), uc = (g.units || {})[u.id] || {};
@@ -275,9 +275,10 @@ function viewRun(kid) {
   let body = '';
   // Scored runs tell the kid the pass mark up front and on every question, with how they're going
   const q = quizAt(R), scored = q && (R.mode === 'lesson' || R.mode === 'challenge') && !(R.mode === 'lesson' && passed(kid, l.id));
-  const goalFor = n => (R.mode === 'challenge' ? `${passGoal(n, true)} to win the crown` : `${passGoal(n, true)} to pass and open the next lesson`);
+  const P = R.mode === 'lesson' ? runPoints(R) : null;
+  const goalFor = n => (R.mode === 'challenge' ? `${passGoal(n, true)} to win the crown` : `Get ${P.need} of ${P.total} points to pass and open the next lesson`);
   if (step.kind === 'hook') {
-    const n = l.checks.length, goal = n && !passed(kid, l.id) ? `<p class="gw-goal">🎯 At the end there ${n === 1 ? 'is 1 question' : `are ${n} questions`}. ${goalFor(n)}.</p>` : '';
+    const n = l.checks.length, goal = lessonTotal(l) && !passed(kid, l.id) ? `<p class="gw-goal">🎯 Every answer counts: each question is worth 1 point${l.play ? ' and the game 3' : ''}. ${goalFor(n)}${lessonXp(kid, l) > 0 ? `, and earn up to +${lessonXp(kid, l)} XP` : '. Today’s learning XP is full, but your tree still grows'}.</p>` : '';
     body = `<div class="gw-card hook"><span class="gw-big">${esc(l.icon)}</span><h2>${esc(local(l.title))}</h2><p>${esc(local(l.hook))}</p>${goal}${speakBtn(l.hook)}<button class="g-go" data-g="next">Let’s go</button></div>`; say(l.hook);
   }
   else if (step.kind === 'intro') { body = `<div class="gw-card hook"><span class="gw-big">🏆</span><p>${esc(step.text)}</p><button class="g-go" data-g="next">Start</button></div>`; say('You’ve got this. No hints this time!'); }
@@ -286,7 +287,7 @@ function viewRun(kid) {
   else if (step.kind === 'decide') { body = `<div class="gw-card"><h3>Decision point</h3><p class="gw-p2">${esc(local(step.q))}</p><div class="g-cards col n${step.opts.length}">${step.opts.map((o, i) => `<button class="g-card" style="--d:${i * 70}ms" data-g="decide" data-i="${i}"><span>${esc(local(o.t))}</span></button>`).join('')}</div><div class="gw-fb"></div></div>`; say('What would you do?'); }
   else if (step.kind === 'home') { body = `<div class="gw-card home"><span class="gw-big">🏠</span><h3>Take it home</h3><p>${esc(local(l.home || 'Tell a grown-up one thing you learned today.'))}</p><button class="g-go" data-g="finish">Finish lesson</button></div>`; say('Last bit! Try this at home.'); }
   else {
-    const bar = scored && step.kind === 'check' ? `<div class="gw-qgoal"><b>Question ${q.i} of ${q.n}</b><span>🎯 ${passGoal(q.n, true)} · ${q.right} right so far</span></div>` : '';
+    const bar = scored && step.kind === 'check' ? `<div class="gw-qgoal"><b>Question ${q.i} of ${q.n}</b><span>🎯 ${P ? `${P.need} of ${P.total} points to pass · ${P.got} so far` : `${passGoal(q.n, true)} · ${q.right} right so far`}</span></div>` : '';
     body = `${bar}<div class="gw-card"><div class="gw-host"></div><div class="gw-fb"></div></div>`;
     say(step.kind === 'guess' ? 'Have a guess! It’s fine to get it wrong.' : step.kind === 'play' ? 'Game time!' : R.mode === 'review' ? `From “${local(step.title || '')}”` : scored && step.kind === 'check' && q.i === 1 ? `Question time! ${goalFor(q.n)}.` : '');
   }
@@ -375,11 +376,17 @@ function answered(kid, step, res) {
   const fb = ui.querySelector('.gw-fb'); if (!fb) return;
   const guess = step.kind === 'guess', grows = PlantView.ok && plantQuiz() && R.mode === 'lesson' && !passed(kid, R.lesson.id);
   const msg = guess ? (res.ok ? 'Great guess!' : 'Good guess. Let’s find out why.') : res.ok ? (grows ? ['Right! Your plant grew.', 'Yes! Up it grows.', 'Nice one. Look at it grow!'] : ['Nice one!', 'Spot on!', 'You got it!', 'Brilliant!'])[Math.floor(Math.random() * (grows ? 3 : 4))] : 'Not quite.';
-  // After a scored question, say where that leaves the pass: made it, still possible, or not this time
-  const q = step.kind === 'check' && (R.mode === 'challenge' || (R.mode === 'lesson' && !passed(kid, R.lesson.id))) ? quizAt(R) : null, need = q ? passNeed(q.n) : 0;
-  const where = !q ? '' : res.ok && q.right === need ? `🎉 That’s ${need} right: you’ve passed!${q.left ? ' Keep going.' : ''}`
-    : q.right + q.left < need ? `You need ${need} of ${q.n} right to pass. Finish, then tap Try again.`
-    : !res.ok ? `You can still pass: get ${need - q.right} more right.` : '';
+  // After a scored answer, say where that leaves the pass: made it, still possible, or not this time. A crown quiz
+  // counts right answers; a lesson counts points from every practice question, the game and the quiz.
+  const q = step.kind === 'check' && R.mode === 'challenge' ? quizAt(R) : null, need = q ? passNeed(q.n) : 0;
+  const P = R.mode === 'lesson' && stepWorth(step) && !passed(kid, R.lesson.id) ? runPoints(R) : null, pts = P ? stepPoints(step, res) : 0;
+  const s = n => `${n} more point${n === 1 ? '' : 's'}`;
+  const where = P ? (pts && P.got >= P.need && P.got - pts < P.need ? `🎉 That’s ${P.got} of ${P.total} points: you’ve passed!${P.left ? ' Keep going.' : ''}`
+      : P.got + P.left < P.need ? `You need ${P.need} of ${P.total} points to pass. Finish, then tap Try again.`
+      : pts < stepWorth(step) && P.got < P.need ? `You can still pass: get ${s(P.need - P.got)}.` : '')
+    : !q ? '' : res.ok && q.right === need ? `🎉 That’s ${need} right: you’ve won the crown!${q.left ? ' Keep going.' : ''}`
+    : q.right + q.left < need ? `You need ${need} of ${q.n} right for the crown. Finish, then tap Try again.`
+    : !res.ok ? `You can still win: get ${need - q.right} more right.` : '';
   const why = !res.ok && res.right && !guess ? res.right : '';
   fb.innerHTML = `<div class="gw-fbin ${res.ok || guess ? 'good' : 'bad'}"><b>${msg}</b>${why ? `<span>${esc(why)}</span>` : ''}</div>${where ? `<p class="gw-fbgoal">${where}</p>` : ''}<button class="g-go" data-g="next">${R.k + 1 >= R.steps.length ? 'Finish' : 'Next'}</button>`;
   if (why || where) holdNext(fb.querySelector('[data-g="next"]'), 'fb' + R.k, kid, `${why ? `${msg} ${why}` : ''} ${where}`);

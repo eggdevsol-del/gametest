@@ -71,7 +71,8 @@ skill: coins
 - `learn:` lines are short teaching cards, one idea each.
 - `try:` is a worked example, then `::`, then a practice question.
 - `play:` is the lesson's main game.
-- `check:` lines are scored. Use at least 2. Passing needs 80%.
+- `check:` lines are the quiz. Use at least 2.
+- Passing takes 80% of a lesson's points, and every answer counts: each `try:` and `check:` question is worth 1 point and the `play:` game 3 (scaled by its score and rounded). A lesson with a game and 3 quiz questions needs 5 of 6 points, so one slip still passes. `guess:` never counts.
 - `home:` is a take-home activity for the family.
 - `skill:` is a short tag. It ties together spaced review, parent reports and "Needs a hand".
 - `mins:` is optional, giving the expected minutes.

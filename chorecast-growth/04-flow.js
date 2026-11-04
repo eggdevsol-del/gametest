@@ -23,10 +23,14 @@ function finish() {
   if (Object.keys(wrong).length) patch.wrong = wrong;
 
   if (R.mode === 'lesson') {
-    const prev = (g.done || {})[l.id], was = prev && prev.best >= 0.8, pass = acc >= 0.8, stars = pass ? (acc === 1 && playScore >= 0.8 ? 3 : 2) : 1;
-    if (pass && !was) { add('Lesson passed', XP.lesson); if (acc === 1) add('Every answer right', XP.perfect); } else if (pass) add('Practice round', XP.replay);
+    // Every answer counts: practice questions, the game (3 points) and the quiz. 80% of the points passes.
+    const P = runPoints(R), score = P.total ? P.got / P.total : 1;
+    const allRight = answers.every(a => a.ok) && R.steps.every((s, i) => s.kind !== 'try' || (R.res[i] && R.res[i].ok));
+    const prev = (g.done || {})[l.id], was = prev && prev.best >= 0.8, pass = score >= 0.8, stars = pass ? (allRight && playScore >= 0.8 ? 3 : 2) : 1;
+    Object.assign(out, { right: P.got, total: P.total, acc: score, points: true, allRight });
+    if (pass && !was) { add('Lesson passed', XP.lesson); if (allRight) add('Every answer right', XP.perfect); } else if (pass) add('Practice round', XP.replay);
     const as = (g.assigned || []).find(a => a.id === l.id); if (pass && as) { add('Bonus from a grown-up', Math.min(XP.assignedMax, as.bonus || 0)); patch.assigned = (g.assigned || []).filter(a => a.id !== l.id); }
-    patch.done = { [l.id]: { best: Math.max(prev ? prev.best : 0, acc), stars: Math.max(prev ? prev.stars : 0, stars), n: (prev ? prev.n : 0) + 1, at: Date.now() } };
+    patch.done = { [l.id]: { best: Math.max(prev ? prev.best : 0, score), stars: Math.max(prev ? prev.stars : 0, stars), n: (prev ? prev.n : 0) + 1, at: Date.now() } };
     if (pass && !was) { patch.cards = {}; l.checks.forEach((_, i) => { patch.cards[`${l.id}#${i}`] = { b: 1, due: addDays(today(), 1) }; }); }
     const u = packFor(l.tree, l.band).units.find(x => x.n === l.unit), unitDone = pass && u.lessons.every(x => x === l || passed(kid, x.id));
     if (unitDone && !(g.mile || {})[l.tree]) patch.mile = { [l.tree]: today() };
@@ -53,12 +57,12 @@ function finish() {
   // A first pass keeps what it earned, for the lesson's leaf on the plant
   if (out.first) patch.done[l.id].xp = given;
   const itemId = l ? l.id : R.mode === 'challenge' ? R.unit.id : R.mode === 'case' ? R.cs.id : R.mode === 'moment' ? R.moment.id : R.mode;
-  patch.log = [...(g.log || []).slice(-59), { id: itemId, kind: R.mode, c: right, t: total, xp: given, at: Date.now(), ms }];
+  patch.log = [...(g.log || []).slice(-59), { id: itemId, kind: R.mode, c: out.right, t: out.total, ...(out.points ? { p: 1 } : {}), xp: given, at: Date.now(), ms }];
   award(kid, xp, patch);
   if (out.first || out.crown) out.prize = Prize.onPass(kid, out.first ? l.id : null);
   Object.assign(out, { xp: given, rows, capped: given < xp, lvlUp: charLevel(kid) > lvl0 ? charLevel(kid) : 0, newTitle: titles(kid).length > titles0 ? titles(kid).slice(-1)[0] : '' });
   const [tree, band, unit] = String(itemId).split('.');
-  C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: right, total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
+  C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: out.right, total: out.total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
   Grow.last = out; Grow.view = 'done'; Grow.cleanup.splice(0).forEach(f => f());
   if (out.first && l) Grow.celebrate = l.id;
   render();
@@ -81,17 +85,18 @@ function viewDone(kid) {
   const head = isScored ? (o.pass ? (o.stars === 3 ? 'Perfect!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!' }[o.mode] || 'Done!';
   // Kids are told exactly what moving on takes, and whether it's open now
   const need = passNeed(o.total), opened = o.first && o.lesson && nextIn(kid, o.lesson.tree);
-  const sub = !isScored ? '' : !o.pass ? `You got ${o.right} of ${o.total}. To ${o.mode === 'challenge' ? 'win the crown' : 'open the next lesson'}, you need ${need} of ${o.total} right (that’s 80% or more). Tap Try again: practice is how brains grow!${o.could ? ` Passing earns ${o.could} XP.` : ''}`
-    : o.stars === 2 && o.acc === 1 && o.game != null ? 'Every answer right! Score 80% in the game for the third star.' : opened ? 'New skill mastered! The next lesson is open.' : o.first ? 'New skill mastered!' : '';
+  const unit = o.points ? 'points' : 'right';
+  const sub = !isScored ? '' : !o.pass ? `You ${o.points ? 'scored' : 'got'} ${o.right} of ${o.total}${o.points ? ' points' : ''}. To ${o.mode === 'challenge' ? 'win the crown' : 'open the next lesson'}, you need ${need} of ${o.total} ${unit} (that’s 80% or more).${o.points ? ' Every answer counts: each question is 1 point and the game 3.' : ''} Tap Try again: practice is how brains grow!${o.could ? ` Passing earns ${o.could} XP.` : ''}`
+    : o.stars === 2 && (o.points ? o.allRight : o.acc === 1) && o.game != null ? 'Every answer right! Score 80% in the game for the third star.' : opened ? 'New skill mastered! The next lesson is open.' : o.first ? 'New skill mastered!' : '';
   const bal = C.xpOf ? C.xpOf(kid).left : 0, day = dayInfo(kid), nx = suggestions(kid, 1)[0];
-  say(isScored && !o.pass ? `So close! You need ${need} of ${o.total} right. Tap Try again.` : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : opened ? 'Great work! The next lesson is open.' : 'Great work!');
+  say(isScored && !o.pass ? `So close! You need ${need} of ${o.total} ${unit}. Tap Try again.` : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : opened ? 'Great work! The next lesson is open.' : 'Great work!');
   if (PlantView.ok && Grow.run) plantFor(kid, Grow.run, Grow.run.steps[Grow.run.k], o.first ? o.lesson.id : null);
   else if (Grow.stage) Grow.stage.show('done', { stars: isScored ? o.stars : 3, pass: o.pass !== false, quiet: true });
   ui.innerHTML = `<div class="gw-pad gw-done"><div class="gw-res" data-g="tallySkip">
     ${isScored ? `<div class="rstars" role="img" aria-label="${o.stars} of 3 stars">${[1, 2, 3].map(n => `<span class="rstar ${fin && n <= o.stars ? 'on' : ''}" data-star="${n}">${C.STAR_SOCK}${C.starGold('g' + n)}</span>`).join('')}</div>` : ''}
     <div class="res-score num" data-total>${fin ? signed(o.xp) : '+0'}</div><div class="res-lbl">XP earned</div>
     ${o.total ? `<div class="res-meter" aria-hidden="true"><i data-fill style="width:${fin ? o.acc * 100 : 0}%"></i>${isScored ? ACC_TH.slice(1).map((t, i) => `<span class="res-notch ${fin && i + 2 <= o.stars ? 'on' : ''}" data-notch="${i + 2}" style="left:${t * 100}%">${C.STAR_SOCK}</span>`).join('') : ''}</div>
-      <p class="gw-acc"><b class="num" data-right>${fin ? o.right : 0}</b> of ${o.total} right</p>` : ''}
+      <p class="gw-acc"><b class="num" data-right>${fin ? o.right : 0}</b> of ${o.total} ${o.points ? 'points' : 'right'}</p>` : ''}
     <p class="res-verdict" data-verdict>${fin ? head : ''}</p>
     ${rows.length ? `<div class="res-rows">${rows.map(([lb, v], i) => `<div class="res-row ${fin ? 'done' : ''} ${v < 0 ? 'minus' : ''}" data-row="${i}"><span>${esc(lb)}</span><b class="num">${fin ? signed(v) : '+0'}</b></div>`).join('')}</div>` : ''}
     </div>
@@ -233,11 +238,13 @@ function ensureLoaded(kid) { const band = bandOf(kid); if (!Packs[`money.${band}
 function card(kid) {
   const ready = ensureLoaded(kid), g = prog(kid), sug = ready ? suggestions(kid, 1)[0] : null, due = ready ? dueCards(kid).length : 0, echo = (g.echo || []).length, d = dayInfo(kid);
   if (ready) scanEchoesSoon(kid);
-  const lock = C.mustLeft ? C.mustLeft(kid) : null;
+  const lock = C.mustLeft ? C.mustLeft(kid) : null, time = ready && sug && lessonTime(kid);
+  if (time) nudge(kid, sug);
   const dots = TREES.map((t, i) => { const st = ready ? treeStats(kid, t.id) : { done: 0, total: 0 }, a = -Math.PI / 2 + i / 12 * Math.PI * 2; return `<i style="--th:${t.hue};left:${50 + Math.cos(a) * 38}%;top:${50 + Math.sin(a) * 38}%;--p:${st.total ? st.done / st.total : 0}"></i>`; }).join('');
   return `<section class="card glass cg-card"><header class="card-h"><span class="card-t">Character Growth</span><span class="card-r">Level ${charLevel(kid)}${titles(kid).length ? ` · ${esc(titles(kid)[0])}` : ''}</span></header>
+    ${time ? `<div class="cg-time" role="status"><span aria-hidden="true">⏰</span><span><b>Lesson time!</b> ${lock ? `Finish your must-dos, then pass a lesson for up to +${lessonXp(kid, sug)} XP.` : `Pass a new lesson for up to +${lessonXp(kid, sug)} XP.`}</span></div>` : ''}
     <button class="cg-main" data-act="gOpen" data-id="${kid.id}"><span class="cg-orbit" aria-hidden="true">${dots}<b class="num">${charLevel(kid)}</b></span>
-      <span class="cg-txt"><small>${lock ? `🔒 Opens after your must-dos · ${lock.length} to go` : sug ? `Next · ${esc(TREE[sug.tree].name)}` : ready ? 'All caught up' : 'Loading your skill trees…'}</small><b>${sug ? `${esc(sug.icon)} ${esc(local(sug.title))}` : (TREES.length === 1 ? `Start ${esc(TREES[0].name)}` : `Explore your ${TREES.length} skill trees`)}</b><span class="cg-bar"><i style="width:${Math.min(100, d.xp / XP.dayCap * 100)}%"></i></span><small>${d.xp} of ${XP.dayCap} XP earned from lessons today</small></span></button>
+      <span class="cg-txt"><small>${lock ? `🔒 Opens after your must-dos · ${lock.length} to go` : sug ? `Next · ${esc(TREE[sug.tree].name)} · ${xpWords(kid, sug)}` : ready ? 'All caught up' : 'Loading your skill trees…'}</small><b>${sug ? `${esc(sug.icon)} ${esc(local(sug.title))}` : (TREES.length === 1 ? `Start ${esc(TREES[0].name)}` : `Explore your ${TREES.length} skill trees`)}</b><span class="cg-bar"><i style="width:${Math.min(100, d.xp / XP.dayCap * 100)}%"></i></span><small>${d.xp} of ${XP.dayCap} XP earned from lessons today</small></span></button>
     ${due || echo ? `<div class="cg-chips">${due ? `<button data-act="gOpen" data-id="${kid.id}">🔁 ${due} review${due === 1 ? '' : 's'} due</button>` : ''}${echo ? `<button data-act="gOpen" data-id="${kid.id}">💡 ${echo} question${echo === 1 ? '' : 's'} about your week</button>` : ''}</div>` : ''}
   </section>`;
 }
@@ -250,7 +257,15 @@ function waiting(kid) {
 // XP earned today, or the daily time limit reached).
 function nextLesson(kid) {
   if (!ensureLoaded(kid)) return null; const sug = suggestions(kid, 1)[0], d = dayInfo(kid);
-  return { done: d.xp > 0 || overTime(kid), next: sug ? { icon: sug.icon, title: local(sug.title), tree: TREE[sug.tree].name } : null };
+  return { done: d.xp > 0 || overTime(kid), time: !!sug && lessonTime(kid), next: sug ? { icon: sug.icon, title: local(sug.title), tree: TREE[sug.tree].name, xp: lessonXp(kid, sug) } : null };
+}
+// Once a day on each device, a kid opening their screen at lesson time hears about it. Remembered in this device's
+// storage only: it's a nudge, not a record.
+function nudge(kid, l) {
+  const key = `cc:lessonNudge:${kid.id}`; let last = null;
+  try { last = localStorage.getItem(key); localStorage.setItem(key, today()); } catch (e) { return; }
+  if (last === today()) return;
+  const xp = lessonXp(kid, l); setTimeout(() => C.toast(`⏰ Lesson time, ${kid.name}!${xp ? ` A new lesson pays up to ${xp} XP.` : ''}`), 900);
 }
 let echoScanAt = {};
 function scanEchoesSoon(kid) { const t = Date.now(); if (t - (echoScanAt[kid.id] || 0) < 60000) return; echoScanAt[kid.id] = t; setTimeout(() => scanEchoes(kid), 0); }
@@ -262,7 +277,7 @@ function momentCard(kid) {
 function treeDoor(kid, treeId) {
   const t = TREE[treeId]; if (!t) return ''; // parked trees have no door
   ensureLoaded(kid); const st = treeStats(kid, treeId);
-  return `<button class="cg-door" data-act="gOpen" data-id="${kid.id}" data-tree="${treeId}" style="--th:${t.hue}"><span>${t.icon}</span><span><b>${esc(t.name)} skill tree</b><small>${st.done} of ${st.total} lessons · Rank: ${investorRank(kid)}</small></span>${ic('next')}</button>`;
+  return `<button class="cg-door" data-act="gOpen" data-id="${kid.id}" data-tree="${treeId}" style="--th:${t.hue}"><span>${t.icon}</span><span><b>${esc(t.name)} skill tree</b><small>${st.done} of ${st.total} lessons${scoreWords(st)} · Rank: ${investorRank(kid)}</small></span>${ic('next')}</button>`;
 }
 C.ACT.gMoment = a => { open(a.dataset.id, {}).then(() => { const k = Store.kids[a.dataset.id]; if (k && momentFor(k)) startMoment(k); }); };
 

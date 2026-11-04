@@ -192,9 +192,26 @@ function lessonById(id) {
 const prog = kid => (Store.growth || {})[kid.id] || {};
 const save = (kid, patch) => C.updDoc('growth', kid.id, patch);
 const passed = (kid, id) => ((prog(kid).done || {})[id] || {}).best >= 0.8;
-// Passing (and opening the next lesson) takes 80% of the questions right. Kids are told it as "get N of M right".
+// Passing takes 80%. A unit's crown quiz counts its questions ("get N of M right"). A lesson counts every answer in it:
+// each practice and quiz question is worth 1 point and the game 3, scaled by how well it went and rounded, so one
+// slip doesn't sink a lesson. Kids are told it as "get N of M points".
 const passNeed = n => Math.max(1, Math.ceil(n * 0.8 - 1e-9));
 const passGoal = (n, cap) => `${cap ? 'Get' : 'get'} ${passNeed(n)} of ${n} right`;
+const GAME_PTS = 3;
+const lessonTotal = l => l.tries.length + (l.play ? GAME_PTS : 0) + l.checks.length;
+const lessonGoal = (l, cap) => `${cap ? 'Get' : 'get'} ${passNeed(lessonTotal(l))} of ${lessonTotal(l)} points`;
+const stepWorth = s => (s.kind === 'play' ? GAME_PTS : s.kind === 'try' || s.kind === 'check' ? 1 : 0);
+const stepPoints = (s, r) => (!r ? 0 : s.kind === 'play' ? Math.round((r.score != null ? r.score : r.ok ? 1 : 0) * GAME_PTS) : r.ok ? 1 : 0);
+// A lesson run's points so far, the most it can score, and what's still to be answered
+function runPoints(R) {
+  let got = 0, total = 0, left = 0;
+  R.steps.forEach((s, i) => { const w = stepWorth(s); if (!w) return; total += w; if (R.res[i]) got += stepPoints(s, R.res[i]); else left += w; });
+  return { got, total, left, need: passNeed(total) };
+}
+// The XP a lesson pays today: up to 50 the first time (40 for passing, 10 more for every answer right), 10 after
+// that, never more than what's left of today's learning XP.
+function lessonXp(kid, l) { const room = Math.max(0, XP.dayCap - dayInfo(kid).xp); return Math.min(room, passed(kid, l.id) ? XP.replay : XP.lesson + XP.perfect); }
+const xpWords = (kid, l) => { const x = lessonXp(kid, l); return x <= 0 ? 'Today’s learning XP is full' : passed(kid, l.id) ? `Practice +${x} XP` : `Up to +${x} XP`; };
 function mastered(kid) { return Object.values(prog(kid).done || {}).filter(d => d.best >= 0.8).length; }
 function charLevel(kid) { return Math.min(50, 1 + Math.floor(Math.sqrt(mastered(kid) * 4))); }
 function medal(kid, l) {
@@ -204,10 +221,13 @@ function medal(kid, l) {
   if (d.best >= 1 || (cards.length && cards.every(c => c.b >= 3))) return 'silver';
   return 'bronze';
 }
+// A subject's lessons passed, and its overall score: the average of the best score in every lesson tried so far
 function treeStats(kid, treeId) {
-  const pack = packFor(treeId, bandOf(kid)); if (!pack) return { total: 0, done: 0 };
-  const ls = pack.units.flatMap(u => u.lessons); return { total: ls.length, done: ls.filter(l => passed(kid, l.id)).length };
+  const pack = packFor(treeId, bandOf(kid)); if (!pack) return { total: 0, done: 0, score: null };
+  const ls = pack.units.flatMap(u => u.lessons), d = prog(kid).done || {}, tried = ls.map(l => d[l.id]).filter(x => x && x.best > 0);
+  return { total: ls.length, done: ls.filter(l => passed(kid, l.id)).length, score: tried.length ? tried.reduce((a, x) => a + x.best, 0) / tried.length : null };
 }
+const scoreWords = st => (st.score == null ? '' : ` · ${Math.round(st.score * 100)}% overall`);
 function titles(kid) { return TREES.filter(t => treeStats(kid, t.id).done >= 4).map(t => t.title); }
 function investorRank(kid) { return RANKS[Math.min(4, Math.floor(treeStats(kid, 'invest').done / 2))]; }
 const today = () => dkey();
@@ -220,6 +240,10 @@ function award(kid, amount, patch = {}) {
 }
 function minutesToday(kid) { return Math.round(dayInfo(kid).ms / 60000); }
 function overTime(kid) { const cap = GSET().cap; return cap > 0 && minutesToday(kid) >= cap; }
+// Lesson time: from the family's lesson reminder hour (4 pm unless a grown-up changes it or turns it off) until the
+// kid has earned learning XP today.
+const lessonHour = () => { const s = C.S ? C.S() : {}; return s.lessonAt === undefined ? 16 : s.lessonAt; };
+function lessonTime(kid) { const h = lessonHour(); return h != null && new Date().getHours() >= h && !(dayInfo(kid).xp > 0) && !overTime(kid); }
 
 /* ---------- Spaced review ---------- */
 function dueCards(kid) {

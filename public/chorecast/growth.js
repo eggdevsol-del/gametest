@@ -192,9 +192,26 @@ function lessonById(id) {
 const prog = kid => (Store.growth || {})[kid.id] || {};
 const save = (kid, patch) => C.updDoc('growth', kid.id, patch);
 const passed = (kid, id) => ((prog(kid).done || {})[id] || {}).best >= 0.8;
-// Passing (and opening the next lesson) takes 80% of the questions right. Kids are told it as "get N of M right".
+// Passing takes 80%. A unit's crown quiz counts its questions ("get N of M right"). A lesson counts every answer in it:
+// each practice and quiz question is worth 1 point and the game 3, scaled by how well it went and rounded, so one
+// slip doesn't sink a lesson. Kids are told it as "get N of M points".
 const passNeed = n => Math.max(1, Math.ceil(n * 0.8 - 1e-9));
 const passGoal = (n, cap) => `${cap ? 'Get' : 'get'} ${passNeed(n)} of ${n} right`;
+const GAME_PTS = 3;
+const lessonTotal = l => l.tries.length + (l.play ? GAME_PTS : 0) + l.checks.length;
+const lessonGoal = (l, cap) => `${cap ? 'Get' : 'get'} ${passNeed(lessonTotal(l))} of ${lessonTotal(l)} points`;
+const stepWorth = s => (s.kind === 'play' ? GAME_PTS : s.kind === 'try' || s.kind === 'check' ? 1 : 0);
+const stepPoints = (s, r) => (!r ? 0 : s.kind === 'play' ? Math.round((r.score != null ? r.score : r.ok ? 1 : 0) * GAME_PTS) : r.ok ? 1 : 0);
+// A lesson run's points so far, the most it can score, and what's still to be answered
+function runPoints(R) {
+  let got = 0, total = 0, left = 0;
+  R.steps.forEach((s, i) => { const w = stepWorth(s); if (!w) return; total += w; if (R.res[i]) got += stepPoints(s, R.res[i]); else left += w; });
+  return { got, total, left, need: passNeed(total) };
+}
+// The XP a lesson pays today: up to 50 the first time (40 for passing, 10 more for every answer right), 10 after
+// that, never more than what's left of today's learning XP.
+function lessonXp(kid, l) { const room = Math.max(0, XP.dayCap - dayInfo(kid).xp); return Math.min(room, passed(kid, l.id) ? XP.replay : XP.lesson + XP.perfect); }
+const xpWords = (kid, l) => { const x = lessonXp(kid, l); return x <= 0 ? 'Today’s learning XP is full' : passed(kid, l.id) ? `Practice +${x} XP` : `Up to +${x} XP`; };
 function mastered(kid) { return Object.values(prog(kid).done || {}).filter(d => d.best >= 0.8).length; }
 function charLevel(kid) { return Math.min(50, 1 + Math.floor(Math.sqrt(mastered(kid) * 4))); }
 function medal(kid, l) {
@@ -204,10 +221,13 @@ function medal(kid, l) {
   if (d.best >= 1 || (cards.length && cards.every(c => c.b >= 3))) return 'silver';
   return 'bronze';
 }
+// A subject's lessons passed, and its overall score: the average of the best score in every lesson tried so far
 function treeStats(kid, treeId) {
-  const pack = packFor(treeId, bandOf(kid)); if (!pack) return { total: 0, done: 0 };
-  const ls = pack.units.flatMap(u => u.lessons); return { total: ls.length, done: ls.filter(l => passed(kid, l.id)).length };
+  const pack = packFor(treeId, bandOf(kid)); if (!pack) return { total: 0, done: 0, score: null };
+  const ls = pack.units.flatMap(u => u.lessons), d = prog(kid).done || {}, tried = ls.map(l => d[l.id]).filter(x => x && x.best > 0);
+  return { total: ls.length, done: ls.filter(l => passed(kid, l.id)).length, score: tried.length ? tried.reduce((a, x) => a + x.best, 0) / tried.length : null };
 }
+const scoreWords = st => (st.score == null ? '' : ` · ${Math.round(st.score * 100)}% overall`);
 function titles(kid) { return TREES.filter(t => treeStats(kid, t.id).done >= 4).map(t => t.title); }
 function investorRank(kid) { return RANKS[Math.min(4, Math.floor(treeStats(kid, 'invest').done / 2))]; }
 const today = () => dkey();
@@ -220,6 +240,10 @@ function award(kid, amount, patch = {}) {
 }
 function minutesToday(kid) { return Math.round(dayInfo(kid).ms / 60000); }
 function overTime(kid) { const cap = GSET().cap; return cap > 0 && minutesToday(kid) >= cap; }
+// Lesson time: from the family's lesson reminder hour (4 pm unless a grown-up changes it or turns it off) until the
+// kid has earned learning XP today.
+const lessonHour = () => { const s = C.S ? C.S() : {}; return s.lessonAt === undefined ? 16 : s.lessonAt; };
+function lessonTime(kid) { const h = lessonHour(); return h != null && new Date().getHours() >= h && !(dayInfo(kid).xp > 0) && !overTime(kid); }
 
 /* ---------- Spaced review ---------- */
 function dueCards(kid) {
@@ -874,8 +898,8 @@ function viewHub(kid) {
       <section class="gw-me"><div class="gw-lvl"><b class="num">${lvl}</b><small>Level</small></div><div class="gw-me-t"><b>${m} skill${m === 1 ? '' : 's'} mastered</b><small>${t.length ? t.map(esc).join(' · ') : 'Master 4 lessons in a tree to earn its title'}</small>${minutesToday(kid) ? `<small>${minutesToday(kid)} minute${minutesToday(kid) === 1 ? '' : 's'} of learning today</small>` : ''}</div></section>
       ${!sug.length && !Grow.need ? allDoneCard(kid) : ''}
       ${prizeStrip(kid)}
-      ${Grow.need ? `<div class="gw-need">${ic('sparkle')} Each lesson you pass pays ${XP.lesson} XP, up to ${XP.dayCap} XP a day.</div>` : ''}
-      ${sug.length ? `<h2 class="gw-h2">Pick your next lesson</h2><div class="gw-pick">${sug.map((l, i) => { const tr = TREE[l.tree], as = (g.assigned || []).find(a => a.id === l.id); return `<button class="gw-lcard ${i === 0 ? 'main' : ''}" style="--th:${tr.hue}" data-g="lesson" data-id="${l.id}"><span class="lc-ic">${esc(l.icon)}</span><span class="lc-t"><small>${esc(tr.name)} · Unit ${l.unit}</small><b>${esc(local(l.title))}</b>${as ? `<em>From a grown-up${as.bonus ? ` · +${as.bonus} XP bonus` : ''}</em>` : ''}</span><span class="lc-go">${ic('play')}</span></button>`; }).join('')}</div>` : ''}
+      ${Grow.need || sug.length ? `<div class="gw-need">${ic('sparkle')} ${(() => { const room = Math.max(0, XP.dayCap - dayInfo(kid).xp); return room ? `A new lesson pays up to ${XP.lesson + XP.perfect} XP: ${XP.lesson} for passing and ${XP.perfect} more if every answer is right. ${room} of ${XP.dayCap} learning XP left today.` : `You’ve earned all ${XP.dayCap} learning XP for today. Lessons still grow your tree, and the XP starts again tomorrow.`; })()}</div>` : ''}
+      ${sug.length ? `<h2 class="gw-h2">Pick your next lesson</h2><div class="gw-pick">${sug.map((l, i) => { const tr = TREE[l.tree], as = (g.assigned || []).find(a => a.id === l.id); return `<button class="gw-lcard ${i === 0 ? 'main' : ''}" style="--th:${tr.hue}" data-g="lesson" data-id="${l.id}"><span class="lc-ic">${esc(l.icon)}</span><span class="lc-t"><small>${esc(tr.name)} · Unit ${l.unit}</small><b>${esc(local(l.title))}</b><em>${xpWords(kid, l)}${as ? ` · from a grown-up${as.bonus ? `, +${as.bonus} XP bonus` : ''}` : ''}</em></span><span class="lc-go">${ic('play')}</span></button>`; }).join('')}</div>` : ''}
       <div class="gw-tiles">
         ${due ? tile('review', '🔁', `${due} review${due === 1 ? '' : 's'} due`, 'Quick questions so you remember') : ''}
         ${echo ? tile('echo', '💡', `${echo} question${echo === 1 ? '' : 's'} about your week`, `+${XP.echo} XP each`) : ''}
@@ -893,7 +917,7 @@ function constellation(kid) {
   const on = treesOn(), W = 600, H = 800;
   // With up to three live trees there's little to link, so each gets a big door into its part of the Learning Tree.
   if (on.length <= 3) {
-    const door = t => { const st = treeStats(kid, t.id), nx = nextIn(kid, t.id); return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons · ${t.id === 'money' ? (st.done ? 'See your tree grow' : 'Plant your seed') : st.done ? 'See your branch grow' : 'Start a new branch'}</small></span></button>`; };
+    const door = t => { const st = treeStats(kid, t.id), nx = nextIn(kid, t.id); return `<button class="gw-one ${nx ? 'open' : ''}" style="--th:${t.hue}" data-g="tree" data-id="${t.id}"><span class="g1-ic">${t.icon}</span><span class="g1-t"><b>${esc(t.name)}</b><small>${esc(t.blurb)}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.done} of ${st.total} lessons${scoreWords(st)} · ${t.id === 'money' ? (st.done ? 'See your tree grow' : 'Plant your seed') : st.done ? 'See your branch grow' : 'Start a new branch'}</small></span></button>`; };
     return `<div class="gw-ones">${on.map(door).join('')}</div>`;
   }
   const pos = on.map((t, i) => { const c = i % 3, r = Math.floor(i / 3); return { t, c, r, x: 100 + c * 200, y: 95 + r * 190 + (c === 1 ? 70 : 0) }; });
@@ -914,7 +938,7 @@ function viewTree(kid, tree) {
   // Every subject is a plant. One whose lessons haven't loaded yet shows its seed and fills in once they arrive.
   if (PlantView.ok) {
     if (!pack) loadBand(band).then(() => C.scheduleRender());
-    ui.innerHTML = topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`);
+    ui.innerHTML = topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons${scoreWords(st)}`);
     const cel = Grow.celebrate; Grow.celebrate = null;
     PlantView.show(ui, kid, tree, cel && cel.split('.')[0] === tree.id ? cel : null); return;
   }
@@ -923,7 +947,7 @@ function viewTree(kid, tree) {
     const done = passed(kid, l.id), open = !done && available(kid, l), md = medal(kid, l), side = idx % 4 === 1 ? 'r' : idx % 4 === 3 ? 'l' : 'c', plan = !done && C.planLocked && C.planLocked(l);
     return `<button class="gw-node ${done ? 'done ' + md : open ? 'open' : plan ? 'locked plus' : 'locked'} ${l === nx ? 'next' : ''} s-${side}" data-g="${open || done ? 'lesson' : plan ? 'planLocked' : 'locked'}" data-id="${l.id}" aria-label="${esc(local(l.title))}${done ? `, ${md} medal` : open ? ', ready' : plan ? ', comes with Chorecast Plus' : ', locked'}"><span class="gn-ic">${done ? (md === 'gold' ? '🥇' : md === 'silver' ? '🥈' : '🥉') : open ? esc(l.icon) : plan ? '✦' : '🔒'}</span><span class="gn-t">${esc(local(l.title))}</span></button>`;
   };
-  ui.innerHTML = `${topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons`)}
+  ui.innerHTML = `${topbar(kid, tree.name, `${esc(tree.blurb)} · ${st.done} of ${st.total} lessons${scoreWords(st)}`)}
     <div class="gw-pad gw-path">
       ${units.map(u => {
         const has = u.lessons.length, allDone = has && u.lessons.every(l => passed(kid, l.id)), uc = (g.units || {})[u.id] || {};
@@ -1001,9 +1025,10 @@ function viewRun(kid) {
   let body = '';
   // Scored runs tell the kid the pass mark up front and on every question, with how they're going
   const q = quizAt(R), scored = q && (R.mode === 'lesson' || R.mode === 'challenge') && !(R.mode === 'lesson' && passed(kid, l.id));
-  const goalFor = n => (R.mode === 'challenge' ? `${passGoal(n, true)} to win the crown` : `${passGoal(n, true)} to pass and open the next lesson`);
+  const P = R.mode === 'lesson' ? runPoints(R) : null;
+  const goalFor = n => (R.mode === 'challenge' ? `${passGoal(n, true)} to win the crown` : `Get ${P.need} of ${P.total} points to pass and open the next lesson`);
   if (step.kind === 'hook') {
-    const n = l.checks.length, goal = n && !passed(kid, l.id) ? `<p class="gw-goal">🎯 At the end there ${n === 1 ? 'is 1 question' : `are ${n} questions`}. ${goalFor(n)}.</p>` : '';
+    const n = l.checks.length, goal = lessonTotal(l) && !passed(kid, l.id) ? `<p class="gw-goal">🎯 Every answer counts: each question is worth 1 point${l.play ? ' and the game 3' : ''}. ${goalFor(n)}${lessonXp(kid, l) > 0 ? `, and earn up to +${lessonXp(kid, l)} XP` : '. Today’s learning XP is full, but your tree still grows'}.</p>` : '';
     body = `<div class="gw-card hook"><span class="gw-big">${esc(l.icon)}</span><h2>${esc(local(l.title))}</h2><p>${esc(local(l.hook))}</p>${goal}${speakBtn(l.hook)}<button class="g-go" data-g="next">Let’s go</button></div>`; say(l.hook);
   }
   else if (step.kind === 'intro') { body = `<div class="gw-card hook"><span class="gw-big">🏆</span><p>${esc(step.text)}</p><button class="g-go" data-g="next">Start</button></div>`; say('You’ve got this. No hints this time!'); }
@@ -1012,7 +1037,7 @@ function viewRun(kid) {
   else if (step.kind === 'decide') { body = `<div class="gw-card"><h3>Decision point</h3><p class="gw-p2">${esc(local(step.q))}</p><div class="g-cards col n${step.opts.length}">${step.opts.map((o, i) => `<button class="g-card" style="--d:${i * 70}ms" data-g="decide" data-i="${i}"><span>${esc(local(o.t))}</span></button>`).join('')}</div><div class="gw-fb"></div></div>`; say('What would you do?'); }
   else if (step.kind === 'home') { body = `<div class="gw-card home"><span class="gw-big">🏠</span><h3>Take it home</h3><p>${esc(local(l.home || 'Tell a grown-up one thing you learned today.'))}</p><button class="g-go" data-g="finish">Finish lesson</button></div>`; say('Last bit! Try this at home.'); }
   else {
-    const bar = scored && step.kind === 'check' ? `<div class="gw-qgoal"><b>Question ${q.i} of ${q.n}</b><span>🎯 ${passGoal(q.n, true)} · ${q.right} right so far</span></div>` : '';
+    const bar = scored && step.kind === 'check' ? `<div class="gw-qgoal"><b>Question ${q.i} of ${q.n}</b><span>🎯 ${P ? `${P.need} of ${P.total} points to pass · ${P.got} so far` : `${passGoal(q.n, true)} · ${q.right} right so far`}</span></div>` : '';
     body = `${bar}<div class="gw-card"><div class="gw-host"></div><div class="gw-fb"></div></div>`;
     say(step.kind === 'guess' ? 'Have a guess! It’s fine to get it wrong.' : step.kind === 'play' ? 'Game time!' : R.mode === 'review' ? `From “${local(step.title || '')}”` : scored && step.kind === 'check' && q.i === 1 ? `Question time! ${goalFor(q.n)}.` : '');
   }
@@ -1101,11 +1126,17 @@ function answered(kid, step, res) {
   const fb = ui.querySelector('.gw-fb'); if (!fb) return;
   const guess = step.kind === 'guess', grows = PlantView.ok && plantQuiz() && R.mode === 'lesson' && !passed(kid, R.lesson.id);
   const msg = guess ? (res.ok ? 'Great guess!' : 'Good guess. Let’s find out why.') : res.ok ? (grows ? ['Right! Your plant grew.', 'Yes! Up it grows.', 'Nice one. Look at it grow!'] : ['Nice one!', 'Spot on!', 'You got it!', 'Brilliant!'])[Math.floor(Math.random() * (grows ? 3 : 4))] : 'Not quite.';
-  // After a scored question, say where that leaves the pass: made it, still possible, or not this time
-  const q = step.kind === 'check' && (R.mode === 'challenge' || (R.mode === 'lesson' && !passed(kid, R.lesson.id))) ? quizAt(R) : null, need = q ? passNeed(q.n) : 0;
-  const where = !q ? '' : res.ok && q.right === need ? `🎉 That’s ${need} right: you’ve passed!${q.left ? ' Keep going.' : ''}`
-    : q.right + q.left < need ? `You need ${need} of ${q.n} right to pass. Finish, then tap Try again.`
-    : !res.ok ? `You can still pass: get ${need - q.right} more right.` : '';
+  // After a scored answer, say where that leaves the pass: made it, still possible, or not this time. A crown quiz
+  // counts right answers; a lesson counts points from every practice question, the game and the quiz.
+  const q = step.kind === 'check' && R.mode === 'challenge' ? quizAt(R) : null, need = q ? passNeed(q.n) : 0;
+  const P = R.mode === 'lesson' && stepWorth(step) && !passed(kid, R.lesson.id) ? runPoints(R) : null, pts = P ? stepPoints(step, res) : 0;
+  const s = n => `${n} more point${n === 1 ? '' : 's'}`;
+  const where = P ? (pts && P.got >= P.need && P.got - pts < P.need ? `🎉 That’s ${P.got} of ${P.total} points: you’ve passed!${P.left ? ' Keep going.' : ''}`
+      : P.got + P.left < P.need ? `You need ${P.need} of ${P.total} points to pass. Finish, then tap Try again.`
+      : pts < stepWorth(step) && P.got < P.need ? `You can still pass: get ${s(P.need - P.got)}.` : '')
+    : !q ? '' : res.ok && q.right === need ? `🎉 That’s ${need} right: you’ve won the crown!${q.left ? ' Keep going.' : ''}`
+    : q.right + q.left < need ? `You need ${need} of ${q.n} right for the crown. Finish, then tap Try again.`
+    : !res.ok ? `You can still win: get ${need - q.right} more right.` : '';
   const why = !res.ok && res.right && !guess ? res.right : '';
   fb.innerHTML = `<div class="gw-fbin ${res.ok || guess ? 'good' : 'bad'}"><b>${msg}</b>${why ? `<span>${esc(why)}</span>` : ''}</div>${where ? `<p class="gw-fbgoal">${where}</p>` : ''}<button class="g-go" data-g="next">${R.k + 1 >= R.steps.length ? 'Finish' : 'Next'}</button>`;
   if (why || where) holdNext(fb.querySelector('[data-g="next"]'), 'fb' + R.k, kid, `${why ? `${msg} ${why}` : ''} ${where}`);
@@ -1153,10 +1184,14 @@ function finish() {
   if (Object.keys(wrong).length) patch.wrong = wrong;
 
   if (R.mode === 'lesson') {
-    const prev = (g.done || {})[l.id], was = prev && prev.best >= 0.8, pass = acc >= 0.8, stars = pass ? (acc === 1 && playScore >= 0.8 ? 3 : 2) : 1;
-    if (pass && !was) { add('Lesson passed', XP.lesson); if (acc === 1) add('Every answer right', XP.perfect); } else if (pass) add('Practice round', XP.replay);
+    // Every answer counts: practice questions, the game (3 points) and the quiz. 80% of the points passes.
+    const P = runPoints(R), score = P.total ? P.got / P.total : 1;
+    const allRight = answers.every(a => a.ok) && R.steps.every((s, i) => s.kind !== 'try' || (R.res[i] && R.res[i].ok));
+    const prev = (g.done || {})[l.id], was = prev && prev.best >= 0.8, pass = score >= 0.8, stars = pass ? (allRight && playScore >= 0.8 ? 3 : 2) : 1;
+    Object.assign(out, { right: P.got, total: P.total, acc: score, points: true, allRight });
+    if (pass && !was) { add('Lesson passed', XP.lesson); if (allRight) add('Every answer right', XP.perfect); } else if (pass) add('Practice round', XP.replay);
     const as = (g.assigned || []).find(a => a.id === l.id); if (pass && as) { add('Bonus from a grown-up', Math.min(XP.assignedMax, as.bonus || 0)); patch.assigned = (g.assigned || []).filter(a => a.id !== l.id); }
-    patch.done = { [l.id]: { best: Math.max(prev ? prev.best : 0, acc), stars: Math.max(prev ? prev.stars : 0, stars), n: (prev ? prev.n : 0) + 1, at: Date.now() } };
+    patch.done = { [l.id]: { best: Math.max(prev ? prev.best : 0, score), stars: Math.max(prev ? prev.stars : 0, stars), n: (prev ? prev.n : 0) + 1, at: Date.now() } };
     if (pass && !was) { patch.cards = {}; l.checks.forEach((_, i) => { patch.cards[`${l.id}#${i}`] = { b: 1, due: addDays(today(), 1) }; }); }
     const u = packFor(l.tree, l.band).units.find(x => x.n === l.unit), unitDone = pass && u.lessons.every(x => x === l || passed(kid, x.id));
     if (unitDone && !(g.mile || {})[l.tree]) patch.mile = { [l.tree]: today() };
@@ -1183,12 +1218,12 @@ function finish() {
   // A first pass keeps what it earned, for the lesson's leaf on the plant
   if (out.first) patch.done[l.id].xp = given;
   const itemId = l ? l.id : R.mode === 'challenge' ? R.unit.id : R.mode === 'case' ? R.cs.id : R.mode === 'moment' ? R.moment.id : R.mode;
-  patch.log = [...(g.log || []).slice(-59), { id: itemId, kind: R.mode, c: right, t: total, xp: given, at: Date.now(), ms }];
+  patch.log = [...(g.log || []).slice(-59), { id: itemId, kind: R.mode, c: out.right, t: out.total, ...(out.points ? { p: 1 } : {}), xp: given, at: Date.now(), ms }];
   award(kid, xp, patch);
   if (out.first || out.crown) out.prize = Prize.onPass(kid, out.first ? l.id : null);
   Object.assign(out, { xp: given, rows, capped: given < xp, lvlUp: charLevel(kid) > lvl0 ? charLevel(kid) : 0, newTitle: titles(kid).length > titles0 ? titles(kid).slice(-1)[0] : '' });
   const [tree, band, unit] = String(itemId).split('.');
-  C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: right, total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
+  C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: out.right, total: out.total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
   Grow.last = out; Grow.view = 'done'; Grow.cleanup.splice(0).forEach(f => f());
   if (out.first && l) Grow.celebrate = l.id;
   render();
@@ -1211,17 +1246,18 @@ function viewDone(kid) {
   const head = isScored ? (o.pass ? (o.stars === 3 ? 'Perfect!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!' }[o.mode] || 'Done!';
   // Kids are told exactly what moving on takes, and whether it's open now
   const need = passNeed(o.total), opened = o.first && o.lesson && nextIn(kid, o.lesson.tree);
-  const sub = !isScored ? '' : !o.pass ? `You got ${o.right} of ${o.total}. To ${o.mode === 'challenge' ? 'win the crown' : 'open the next lesson'}, you need ${need} of ${o.total} right (that’s 80% or more). Tap Try again: practice is how brains grow!${o.could ? ` Passing earns ${o.could} XP.` : ''}`
-    : o.stars === 2 && o.acc === 1 && o.game != null ? 'Every answer right! Score 80% in the game for the third star.' : opened ? 'New skill mastered! The next lesson is open.' : o.first ? 'New skill mastered!' : '';
+  const unit = o.points ? 'points' : 'right';
+  const sub = !isScored ? '' : !o.pass ? `You ${o.points ? 'scored' : 'got'} ${o.right} of ${o.total}${o.points ? ' points' : ''}. To ${o.mode === 'challenge' ? 'win the crown' : 'open the next lesson'}, you need ${need} of ${o.total} ${unit} (that’s 80% or more).${o.points ? ' Every answer counts: each question is 1 point and the game 3.' : ''} Tap Try again: practice is how brains grow!${o.could ? ` Passing earns ${o.could} XP.` : ''}`
+    : o.stars === 2 && (o.points ? o.allRight : o.acc === 1) && o.game != null ? 'Every answer right! Score 80% in the game for the third star.' : opened ? 'New skill mastered! The next lesson is open.' : o.first ? 'New skill mastered!' : '';
   const bal = C.xpOf ? C.xpOf(kid).left : 0, day = dayInfo(kid), nx = suggestions(kid, 1)[0];
-  say(isScored && !o.pass ? `So close! You need ${need} of ${o.total} right. Tap Try again.` : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : opened ? 'Great work! The next lesson is open.' : 'Great work!');
+  say(isScored && !o.pass ? `So close! You need ${need} of ${o.total} ${unit}. Tap Try again.` : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : opened ? 'Great work! The next lesson is open.' : 'Great work!');
   if (PlantView.ok && Grow.run) plantFor(kid, Grow.run, Grow.run.steps[Grow.run.k], o.first ? o.lesson.id : null);
   else if (Grow.stage) Grow.stage.show('done', { stars: isScored ? o.stars : 3, pass: o.pass !== false, quiet: true });
   ui.innerHTML = `<div class="gw-pad gw-done"><div class="gw-res" data-g="tallySkip">
     ${isScored ? `<div class="rstars" role="img" aria-label="${o.stars} of 3 stars">${[1, 2, 3].map(n => `<span class="rstar ${fin && n <= o.stars ? 'on' : ''}" data-star="${n}">${C.STAR_SOCK}${C.starGold('g' + n)}</span>`).join('')}</div>` : ''}
     <div class="res-score num" data-total>${fin ? signed(o.xp) : '+0'}</div><div class="res-lbl">XP earned</div>
     ${o.total ? `<div class="res-meter" aria-hidden="true"><i data-fill style="width:${fin ? o.acc * 100 : 0}%"></i>${isScored ? ACC_TH.slice(1).map((t, i) => `<span class="res-notch ${fin && i + 2 <= o.stars ? 'on' : ''}" data-notch="${i + 2}" style="left:${t * 100}%">${C.STAR_SOCK}</span>`).join('') : ''}</div>
-      <p class="gw-acc"><b class="num" data-right>${fin ? o.right : 0}</b> of ${o.total} right</p>` : ''}
+      <p class="gw-acc"><b class="num" data-right>${fin ? o.right : 0}</b> of ${o.total} ${o.points ? 'points' : 'right'}</p>` : ''}
     <p class="res-verdict" data-verdict>${fin ? head : ''}</p>
     ${rows.length ? `<div class="res-rows">${rows.map(([lb, v], i) => `<div class="res-row ${fin ? 'done' : ''} ${v < 0 ? 'minus' : ''}" data-row="${i}"><span>${esc(lb)}</span><b class="num">${fin ? signed(v) : '+0'}</b></div>`).join('')}</div>` : ''}
     </div>
@@ -1363,11 +1399,13 @@ function ensureLoaded(kid) { const band = bandOf(kid); if (!Packs[`money.${band}
 function card(kid) {
   const ready = ensureLoaded(kid), g = prog(kid), sug = ready ? suggestions(kid, 1)[0] : null, due = ready ? dueCards(kid).length : 0, echo = (g.echo || []).length, d = dayInfo(kid);
   if (ready) scanEchoesSoon(kid);
-  const lock = C.mustLeft ? C.mustLeft(kid) : null;
+  const lock = C.mustLeft ? C.mustLeft(kid) : null, time = ready && sug && lessonTime(kid);
+  if (time) nudge(kid, sug);
   const dots = TREES.map((t, i) => { const st = ready ? treeStats(kid, t.id) : { done: 0, total: 0 }, a = -Math.PI / 2 + i / 12 * Math.PI * 2; return `<i style="--th:${t.hue};left:${50 + Math.cos(a) * 38}%;top:${50 + Math.sin(a) * 38}%;--p:${st.total ? st.done / st.total : 0}"></i>`; }).join('');
   return `<section class="card glass cg-card"><header class="card-h"><span class="card-t">Character Growth</span><span class="card-r">Level ${charLevel(kid)}${titles(kid).length ? ` · ${esc(titles(kid)[0])}` : ''}</span></header>
+    ${time ? `<div class="cg-time" role="status"><span aria-hidden="true">⏰</span><span><b>Lesson time!</b> ${lock ? `Finish your must-dos, then pass a lesson for up to +${lessonXp(kid, sug)} XP.` : `Pass a new lesson for up to +${lessonXp(kid, sug)} XP.`}</span></div>` : ''}
     <button class="cg-main" data-act="gOpen" data-id="${kid.id}"><span class="cg-orbit" aria-hidden="true">${dots}<b class="num">${charLevel(kid)}</b></span>
-      <span class="cg-txt"><small>${lock ? `🔒 Opens after your must-dos · ${lock.length} to go` : sug ? `Next · ${esc(TREE[sug.tree].name)}` : ready ? 'All caught up' : 'Loading your skill trees…'}</small><b>${sug ? `${esc(sug.icon)} ${esc(local(sug.title))}` : (TREES.length === 1 ? `Start ${esc(TREES[0].name)}` : `Explore your ${TREES.length} skill trees`)}</b><span class="cg-bar"><i style="width:${Math.min(100, d.xp / XP.dayCap * 100)}%"></i></span><small>${d.xp} of ${XP.dayCap} XP earned from lessons today</small></span></button>
+      <span class="cg-txt"><small>${lock ? `🔒 Opens after your must-dos · ${lock.length} to go` : sug ? `Next · ${esc(TREE[sug.tree].name)} · ${xpWords(kid, sug)}` : ready ? 'All caught up' : 'Loading your skill trees…'}</small><b>${sug ? `${esc(sug.icon)} ${esc(local(sug.title))}` : (TREES.length === 1 ? `Start ${esc(TREES[0].name)}` : `Explore your ${TREES.length} skill trees`)}</b><span class="cg-bar"><i style="width:${Math.min(100, d.xp / XP.dayCap * 100)}%"></i></span><small>${d.xp} of ${XP.dayCap} XP earned from lessons today</small></span></button>
     ${due || echo ? `<div class="cg-chips">${due ? `<button data-act="gOpen" data-id="${kid.id}">🔁 ${due} review${due === 1 ? '' : 's'} due</button>` : ''}${echo ? `<button data-act="gOpen" data-id="${kid.id}">💡 ${echo} question${echo === 1 ? '' : 's'} about your week</button>` : ''}</div>` : ''}
   </section>`;
 }
@@ -1380,7 +1418,15 @@ function waiting(kid) {
 // XP earned today, or the daily time limit reached).
 function nextLesson(kid) {
   if (!ensureLoaded(kid)) return null; const sug = suggestions(kid, 1)[0], d = dayInfo(kid);
-  return { done: d.xp > 0 || overTime(kid), next: sug ? { icon: sug.icon, title: local(sug.title), tree: TREE[sug.tree].name } : null };
+  return { done: d.xp > 0 || overTime(kid), time: !!sug && lessonTime(kid), next: sug ? { icon: sug.icon, title: local(sug.title), tree: TREE[sug.tree].name, xp: lessonXp(kid, sug) } : null };
+}
+// Once a day on each device, a kid opening their screen at lesson time hears about it. Remembered in this device's
+// storage only: it's a nudge, not a record.
+function nudge(kid, l) {
+  const key = `cc:lessonNudge:${kid.id}`; let last = null;
+  try { last = localStorage.getItem(key); localStorage.setItem(key, today()); } catch (e) { return; }
+  if (last === today()) return;
+  const xp = lessonXp(kid, l); setTimeout(() => C.toast(`⏰ Lesson time, ${kid.name}!${xp ? ` A new lesson pays up to ${xp} XP.` : ''}`), 900);
 }
 let echoScanAt = {};
 function scanEchoesSoon(kid) { const t = Date.now(); if (t - (echoScanAt[kid.id] || 0) < 60000) return; echoScanAt[kid.id] = t; setTimeout(() => scanEchoes(kid), 0); }
@@ -1392,7 +1438,7 @@ function momentCard(kid) {
 function treeDoor(kid, treeId) {
   const t = TREE[treeId]; if (!t) return ''; // parked trees have no door
   ensureLoaded(kid); const st = treeStats(kid, treeId);
-  return `<button class="cg-door" data-act="gOpen" data-id="${kid.id}" data-tree="${treeId}" style="--th:${t.hue}"><span>${t.icon}</span><span><b>${esc(t.name)} skill tree</b><small>${st.done} of ${st.total} lessons · Rank: ${investorRank(kid)}</small></span>${ic('next')}</button>`;
+  return `<button class="cg-door" data-act="gOpen" data-id="${kid.id}" data-tree="${treeId}" style="--th:${t.hue}"><span>${t.icon}</span><span><b>${esc(t.name)} skill tree</b><small>${st.done} of ${st.total} lessons${scoreWords(st)} · Rank: ${investorRank(kid)}</small></span>${ic('next')}</button>`;
 }
 C.ACT.gMoment = a => { open(a.dataset.id, {}).then(() => { const k = Store.kids[a.dataset.id]; if (k && momentFor(k)) startMoment(k); }); };
 
@@ -1921,9 +1967,9 @@ function parentView() {
     ${(() => { const ps = Prize.stats(kid); if (!ps) return ''; const nx = ps.next; return `<h3 class="pgroup-t">Island prizes<small>Every few lessons wins a makeover colour, and every second prize an animal or special thing. The gap follows ${esc(kid.name)}’s pace, so prizes keep coming whether they learn a little or a lot.</small></h3>
     <div class="group"><div class="row"><div class="row-main"><b>${ps.won} prize${ps.won === 1 ? '' : 's'} won${nx ? ` · next: ${esc(nx.info.name)} in ${nx.left} lesson${nx.left === 1 ? '' : 's'}` : ''}</b><small>${ps.week} lesson${ps.week === 1 ? '' : 's'} passed this week, so after this one a prize every ${ps.gap} lessons${ps.got.length ? ` · won so far: ${ps.got.map(id => esc((C.prizeInfo(id) || { name: id }).name)).join(', ')}` : ''}</small></div></div></div>`; })()}
     <h3 class="pgroup-t">Skill map<small>${BANDS[BAND_IX[band]].name}, ages ${BANDS[BAND_IX[band]].ages} · 🥉 mastered · 🥈 strong · 🥇 still remembered after 35 days</small></h3>
-    <div class="group pg-map">${TREES.map(t => { const pack = packFor(t.id, band), st = treeStats(kid, t.id), off = (set.off || {})[t.id]; return `<div class="row ${off ? 'off' : ''}"><span class="pg-ti" style="--th:${t.hue}">${t.icon}</span><div class="row-main"><b>${esc(t.name)}</b><small>${st.done} of ${st.total} lessons${off ? ' · switched off' : ''}</small></div><div class="pg-units">${(pack ? pack.units : []).map(u => `<span class="pg-u ${u.lessons.length ? '' : 'soon'}" title="Unit ${u.n}: ${esc(local(u.title))}">${u.lessons.length ? u.lessons.map(cell).join('') : '<i class="pg-dot soon"></i>'}</span>`).join('')}</div></div>`; }).join('')}</div>
+    <div class="group pg-map">${TREES.map(t => { const pack = packFor(t.id, band), st = treeStats(kid, t.id), off = (set.off || {})[t.id]; return `<div class="row ${off ? 'off' : ''}"><span class="pg-ti" style="--th:${t.hue}">${t.icon}</span><div class="row-main"><b>${esc(t.name)}</b><small>${st.done} of ${st.total} lessons${scoreWords(st)}${off ? ' · switched off' : ''}</small></div><div class="pg-units">${(pack ? pack.units : []).map(u => `<span class="pg-u ${u.lessons.length ? '' : 'soon'}" title="Unit ${u.n}: ${esc(local(u.title))}">${u.lessons.length ? u.lessons.map(cell).join('') : '<i class="pg-dot soon"></i>'}</span>`).join('')}</div></div>`; }).join('')}</div>
     <div class="pg-two">
-      <section><h3 class="pgroup-t">This week</h3><div class="group">${log.length ? log.slice().reverse().slice(0, 8).map(x => { const l = lessonById(x.id); return `<div class="row"><div class="row-main"><b>${l ? `${esc(l.icon)} ${esc(local(l.title))}` : esc({ review: 'Reviews', moment: 'Money Moment', echo: 'Questions about the week', story: 'Market story', case: (Cases.find(c => c.id === x.id) || {}).name || 'Real story', challenge: 'Unit challenge' }[x.kind] || x.kind)}</b><small>${x.t ? `${x.c} of ${x.t} right · ` : ''}${x.xp} XP · ${C.timeAgo(x.at)}</small></div></div>`; }).join('') : '<div class="row"><div class="row-main"><small>No learning yet this week.</small></div></div>'}
+      <section><h3 class="pgroup-t">This week</h3><div class="group">${log.length ? log.slice().reverse().slice(0, 8).map(x => { const l = lessonById(x.id); return `<div class="row"><div class="row-main"><b>${l ? `${esc(l.icon)} ${esc(local(l.title))}` : esc({ review: 'Reviews', moment: 'Money Moment', echo: 'Questions about the week', story: 'Market story', case: (Cases.find(c => c.id === x.id) || {}).name || 'Real story', challenge: 'Unit challenge' }[x.kind] || x.kind)}</b><small>${x.t ? `${x.c} of ${x.t} ${x.p ? 'points' : 'right'} · ` : ''}${x.xp} XP · ${C.timeAgo(x.at)}</small></div></div>`; }).join('') : '<div class="row"><div class="row-main"><small>No learning yet this week.</small></div></div>'}
         ${improved.length ? `<div class="row"><div class="row-main"><b>Most improved</b><small>${improved.map(x => esc(x.k)).join(', ')}</small></div></div>` : ''}</div></section>
       <section><h3 class="pgroup-t">Needs a hand</h3><div class="group">${wrong.length ? wrong.map(([q, v]) => { const l = lessonOfQ(q); return `<div class="row"><div class="row-main"><b>${esc(local(v.q || 'A question'))}</b><small>${l ? `${esc(local(l.title))} · ` : ''}missed ${v.n} time${v.n === 1 ? '' : 's'}</small></div></div>`; }).join('') : '<div class="row"><div class="row-main"><small>Nothing tricky yet. Questions a kid keeps missing show up here.</small></div></div>'}</div>
         <h3 class="pgroup-t">Talk about it</h3><div class="group"><div class="row"><div class="row-main"><b>${lastPass ? `Ask ${esc(kid.name)} about “${esc(local(lastPass.title))}”` : `Ask ${esc(kid.name)} which skill tree looks most fun`}</b><small>${lastPass ? esc(local(lastPass.home || lastPass.learn[0] || '')) : 'A short chat at dinner helps a lesson stick.'}</small></div></div></div></section>
@@ -2170,6 +2216,10 @@ body.gw-open{overflow:hidden}
 .gw-pane header b{font:900 calc(26px*var(--ts)) var(--f-round)}
 .gw-pane .gw-host{background:#fff;color:#0D1530;border-radius:20px;padding:12px}
 .cg-card{overflow:hidden}
+.cg-time{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:10px 12px;border-radius:16px;background:linear-gradient(90deg,rgba(255,212,59,.95),rgba(255,159,67,.95));color:#3a2400;font:700 calc(14px*var(--ts))/1.3 var(--f-round);animation:cgTime 2.4s ease-in-out infinite}
+.cg-time>span:first-child{font-size:calc(22px*var(--ts))}
+@keyframes cgTime{50%{box-shadow:0 0 0 4px rgba(255,212,59,.35)}}
+@media (prefers-reduced-motion:reduce){.cg-time{animation:none}}
 .cg-main{display:flex;align-items:center;gap:14px;width:100%;text-align:left;color:inherit;padding:2px 0}
 .cg-orbit{position:relative;width:86px;height:86px;flex:none;border-radius:50%;background:radial-gradient(circle,rgba(255,230,102,.32),rgba(255,255,255,.06) 70%);display:grid;place-items:center}
 .cg-orbit i{position:absolute;width:13px;height:13px;margin:-6.5px;border-radius:50%;background:color-mix(in srgb,var(--th) calc(35% + var(--p) * 65%),rgba(255,255,255,.25));box-shadow:0 0 calc(var(--p) * 10px) var(--th)}
@@ -2884,12 +2934,12 @@ void main() {
       const x = LS[s.i], l = x.l, d = done[s.i], open = d || s.i === cur || available(kid, l), first = s.i === cur && !real.some(Boolean), pz = prizeAt[s.i];
       const game = l.play ? GAME_NAME[l.play.type] || 'Game' : null, prev = s.i > 0 ? LS[s.i - 1].l : null;
       const e = real[s.i] ? earned(kid, l.id) : null, won = e && e.prize && C.prizeInfo ? C.prizeInfo(e.prize) : null;
-      const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `🌱 ${l.checks.length} question${l.checks.length === 1 ? '' : 's'} to grow` : '', e ? `✨ Earned +${e.xp} XP` : `✨ +${XP.lesson} XP`].filter(Boolean);
+      const chips = [`📖 ${l.learn.length} learn card${l.learn.length === 1 ? '' : 's'}`, game ? `🎮 ${game}` : '', l.checks.length ? `🌱 ${l.checks.length} question${l.checks.length === 1 ? '' : 's'} to grow` : '', e ? `✨ Earned +${e.xp} XP` : '', `✨ ${xpWords(kid, l)}`].filter(Boolean);
       const plan = !open && C.planLocked && C.planLocked(l);
       const act = plan ? '<button class="g-go ghost" data-g="planLocked">✦ Comes with Chorecast Plus</button>' : !open ? `<button class="g-go ghost" data-g="locked">🔒 ${prev ? `Pass “${esc(local(prev.title))}” first` : 'Pass the unit before this one first'}</button>` : `<button class="g-go" data-g="lesson" data-id="${l.id}">${d ? 'Play again' : first ? (ms ? '🌱 Plant my seed' : '🌿 Grow my branch') : '▶ Start lesson'}</button>`;
       // What it takes to move on, said plainly: kids need telling at every step
-      const goal = d ? '' : plan ? '✦ Units 2 and up of every subject come with Chorecast Plus.' : !open ? (prev ? `🎯 To open this lesson, go back to “${esc(local(prev.title))}” and ${passGoal(prev.checks.length)}.` : '🎯 To open this lesson, pass every lesson in the unit before it.')
-        : l.checks.length ? `🎯 ${passGoal(l.checks.length, true)} at the end to pass${s.i + 1 < LS.length ? ' and open the next lesson' : ''}.` : '';
+      const goal = d ? '' : plan ? '✦ Units 2 and up of every subject come with Chorecast Plus.' : !open ? (prev ? `🎯 To open this lesson, go back to “${esc(local(prev.title))}” and ${lessonGoal(prev)}.` : '🎯 To open this lesson, pass every lesson in the unit before it.')
+        : lessonTotal(l) ? `🎯 ${lessonGoal(l, true)} to pass${s.i + 1 < LS.length ? ' and open the next lesson' : ''}. Every answer counts: each question is 1 point${l.play ? ' and the game 3' : ''}.` : '';
       h = `<div class="plc-ic">${esc(l.icon)}</div><div class="plc-eb">Unit ${l.unit} · Lesson ${l.n}${d ? ` · ${medalOf(kid, l)}` : ''}</div><div class="plc-t">${esc(local(l.title))}</div><p class="plc-p">${esc(local(l.hook))}</p>
         ${first ? `<ul class="plc-how"><li><span>${ms ? '🌱' : '🌿'}</span>Every question you get right helps your ${ms ? 'seed' : 'branch'} grow.</li><li><span>🍃</span>Pass a lesson and a big leaf grows, with your XP or a prize on top.</li><li><span>🌸</span>Pass all ${LS.length} lessons and it ${ms ? 'flowers' : 'blossoms'}.</li></ul>` : `<div class="plc-chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>`}
         ${won ? `<div class="plc-prize ${won.big ? 'big' : ''}"><span>${won.icon}</span><span><small>Unlocked on this leaf</small><b>${esc(won.name)}</b></span></div>` : pz ? `<div class="plc-prize ${pz.info.big ? 'big' : ''}"><span>${pz.info.icon}</span><span><small>${pz.planned ? 'Planned prize' : 'Prize'}</small><b>${pz.planned ? 'Should win' : 'Pass this to win'} ${esc(pz.info.name)}</b></span></div>` : ''}${goal ? `<p class="plc-goal">${goal}</p>` : ''}<div class="plc-act">${act}</div>`;

@@ -198,6 +198,10 @@ body.gw-open{overflow:hidden}
 .gw-pane header b{font:900 calc(26px*var(--ts)) var(--f-round)}
 .gw-pane .gw-host{background:#fff;color:#0D1530;border-radius:20px;padding:12px}
 .cg-card{overflow:hidden}
+.cg-time{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:10px 12px;border-radius:16px;background:linear-gradient(90deg,rgba(255,212,59,.95),rgba(255,159,67,.95));color:#3a2400;font:700 calc(14px*var(--ts))/1.3 var(--f-round);animation:cgTime 2.4s ease-in-out infinite}
+.cg-time>span:first-child{font-size:calc(22px*var(--ts))}
+@keyframes cgTime{50%{box-shadow:0 0 0 4px rgba(255,212,59,.35)}}
+@media (prefers-reduced-motion:reduce){.cg-time{animation:none}}
 .cg-main{display:flex;align-items:center;gap:14px;width:100%;text-align:left;color:inherit;padding:2px 0}
 .cg-orbit{position:relative;width:86px;height:86px;flex:none;border-radius:50%;background:radial-gradient(circle,rgba(255,230,102,.32),rgba(255,255,255,.06) 70%);display:grid;place-items:center}
 .cg-orbit i{position:absolute;width:13px;height:13px;margin:-6.5px;border-radius:50%;background:color-mix(in srgb,var(--th) calc(35% + var(--p) * 65%),rgba(255,255,255,.25));box-shadow:0 0 calc(var(--p) * 10px) var(--th)}

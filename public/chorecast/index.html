@@ -5069,12 +5069,18 @@ function kidResting(kid) {
     </section><div class="col"><section class="card glass rest-card"><div class="rest-ic" aria-hidden="true">💤</div><h2>Resting for now</h2><p>Your money and your island are safe, just as you left them. Chores and lessons are paused for now.</p></section></div></div>`;
 }
 // "Do this next": one card at the top of Today that walks a kid through their day in order. Must-dos, team tasks,
-// today's lesson, good habits, then a side hustle, and finally "All done for today!".
+// today's lesson (before team tasks from the family's lesson time), good habits, then a side hustle, and finally
+// "All done for today!".
 function nextUp(kid, date) {
   const b = boardFor(kid, date), st = c => choreState(kid.id, c, date).state;
-  for (const c of [...b.must, ...b.team]) { const s = st(c); if (s === 'open' || s === 'redo') return { kind: 'chore', key: c.key, icon: c.icon, c, t: s === 'redo' ? `Fix up: ${c.title}` : c.title, s: `${TIERS[c.tier].label} · ${c.mins} min · ${payLabel(c)}` }; }
+  const chore = list => { for (const c of list) { const s = st(c); if (s === 'open' || s === 'redo') return { kind: 'chore', key: c.key, icon: c.icon, c, t: s === 'redo' ? `Fix up: ${c.title}` : c.title, s: `${TIERS[c.tier].label} · ${c.mins} min · ${payLabel(c)}` }; } return null; };
   const L = window.Growth && Growth.nextLesson ? Growth.nextLesson(kid) : null;
-  if (L && !L.done && L.next) return { kind: 'lesson', icon: L.next.icon, t: L.next.title, s: `Today’s lesson · ${L.next.tree}` };
+  const lesson = L && !L.done && L.next ? { kind: 'lesson', icon: L.next.icon, t: L.next.title, s: `${L.time ? '⏰ Lesson time' : 'Today’s lesson'} · ${L.next.tree}${L.next.xp ? ` · up to +${L.next.xp} XP` : ''}` } : null;
+  // Must-dos come first; from lesson time (Grown-ups, then Family) today's lesson comes before team tasks
+  const must = chore(b.must); if (must) return must;
+  if (lesson && L.time) return lesson;
+  const team = chore(b.team); if (team) return team;
+  if (lesson) return lesson;
   const hl = habitsForDay(kid, date), hd = habitDone(kid.id, date), left = Math.min(HABIT_GOAL, hl.length) - hl.filter(h => hd.has(h.key)).length;
   if (left > 0) return { kind: 'habits', icon: '🔥', t: 'Tick off your good habits', s: `${left} more today keeps your streak going` };
   const g = gigsFor(kid, date).find(c => { const s = st(c); return (s === 'open' || s === 'redo') && (c.minAge || 0) <= (kid.age || 8); });
@@ -6017,7 +6023,8 @@ function pFamilyMain() {
       <div class="row"><div class="row-main"><b>Add a kid’s iPad</b><small>${f.pair ? `On the iPad, open Chorecast, choose “Kid’s iPad” and type this code. It lasts 15 minutes.` : 'Kids don’t need an email. Their iPad pairs once and stays signed in.'}</small></div>${f.pair ? `<span class="fam-code big num">${esc(f.pair.replace(/(\d{3})(\d{3})/, '$1 $2'))}</span>` : `<button class="pbtn primary" data-act="famPair">${ic('plus')} Pairing code</button>`}</div>
       ${(f.devices || []).map(d => `<div class="row"><span class="fam-dev">${ic(d.kind === 'kid' ? 'star' : 'lock')}</span><div class="row-main"><b>${esc(d.name)}${d.current ? ' <small class="muted">(this device)</small>' : ''}</b><small>${d.kind === 'kid' ? 'Kid’s iPad' : `Grown-up${d.owner ? ` · ${esc(d.owner)}` : ''}`} · last used ${when(d.last_seen_at)}</small></div>${d.current ? '' : UI.confirmDev === d.id ? `<button class="pbtn solid-danger" data-act="famRemoveYes" data-id="${d.id}">Remove</button><button class="pbtn" data-act="famRemoveNo">Keep</button>` : `<button class="pbtn danger" data-act="famRemove" data-id="${d.id}">Remove</button>`}</div>`).join('')}
       ${f.loading ? '<div class="row"><div class="row-main"><small>Loading devices…</small></div></div>' : ''}
-      <div class="row wrap"><div class="row-main"><b>Chore reminder</b><small>A notification on kids’ iPads at this time each day, in the Chorecast app.</small></div><div class="seg">${[[null, 'Off'], [15, '3 pm'], [16, '4 pm'], [17, '5 pm'], [18, '6 pm']].map(([h, l]) => `<button class="seg-i ${(S().remindAt ?? null) === h ? 'on' : ''}" data-act="remindAt" data-h="${h ?? ''}">${l}</button>`).join('')}</div></div></div>` : ''}
+      <div class="row wrap"><div class="row-main"><b>Chore reminder</b><small>A notification on kids’ iPads at this time each day, in the Chorecast app.</small></div><div class="seg">${[[null, 'Off'], [15, '3 pm'], [16, '4 pm'], [17, '5 pm'], [18, '6 pm']].map(([h, l]) => `<button class="seg-i ${(S().remindAt ?? null) === h ? 'on' : ''}" data-act="remindAt" data-h="${h ?? ''}">${l}</button>`).join('')}</div></div>
+      <div class="row wrap"><div class="row-main"><b>Lesson reminder</b><small>From this time, kids who haven’t done a lesson today see “Lesson time!” on their Today screen, with the XP it pays. Kids’ iPads also get a notification in the Chorecast app.</small></div><div class="seg">${[[null, 'Off'], [15, '3 pm'], [16, '4 pm'], [17, '5 pm'], [18, '6 pm'], [19, '7 pm']].map(([h, l]) => `<button class="seg-i ${(S().lessonAt === undefined ? 16 : S().lessonAt) === h ? 'on' : ''}" data-act="lessonAt" data-h="${h ?? ''}">${l}</button>`).join('')}</div></div></div>` : ''}
     ${parent ? `<h3 class="pgroup-t">Privacy</h3><div class="group">
       <div class="row wrap"><div class="row-main"><b>Keep job photos</b><small>Kids’ job photos are deleted this long after you approve them or send them back. Chore guide photos stay until you change the guide.</small></div><div class="seg">${PHOTO_DAYS.map(([d, l]) => `<button class="seg-i ${photoDays() === d ? 'on' : ''}" data-act="photoDays" data-d="${d}" aria-label="${d} days">${l}</button>`).join('')}</div></div>
       <a class="row rowbtn" href="privacy.html" target="_blank" rel="noopener"><div class="row-main"><b>Privacy policy</b><small>What Chorecast keeps, for how long, and who sees it</small></div>${ic('next')}</a>
@@ -6979,6 +6986,7 @@ const ACT = {
   playOn: () => saveSettings({ playOn: S().playOn === false }),
   playCap: a => saveSettings({ playCap: +a.dataset.v }),
   remindAt: a => saveSettings({ remindAt: a.dataset.h === '' ? null : +a.dataset.h }),
+  lessonAt: a => saveSettings({ lessonAt: a.dataset.h === '' ? null : +a.dataset.h }),
   shopKid: a => { UI.shopKid = a.dataset.id; render(); },
   shopBuy: a => { UI.shopB = { id: a.dataset.id, kid: a.dataset.kid || null, wish: a.dataset.wish || null }; openSheet(shopSheet); },
   shopPay: async () => {
