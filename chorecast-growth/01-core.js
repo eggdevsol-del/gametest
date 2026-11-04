@@ -29,6 +29,22 @@ const ALL_TREES = [
 ];
 const TREES = ALL_TREES.filter(t => LIVE.includes(t.id));
 const TREE = Object.fromEntries(TREES.map(t => [t.id, t]));
+/* Language courses. Each is one course for every age: 8 stages of 10 units of 8 lessons, built from content/<id>.txt
+   into growth/<id>.s<stage>.txt. A kid's band changes how it's taught and how fast, never what's in it. Only
+   LANG_LIVE courses reach kids; a preview build (node scripts/build-growth.mjs --preview) shows parked ones for
+   checking. Te reo Māori has no device voice, so it plays recordings made by a fluent speaker, never an English voice.
+   `levels` names each stage for grown-ups: Te Aho Arataki Marau levels, CEFR, YCT and HSK, and JLPT. */
+const LANG_LIVE = [];
+const LANGS = [
+  { id: 'mi', name: 'Te reo Māori', icon: '🌿', hue: '#C8483B', scene: 'garden', voices: null, strip: 'āēīōū', blurb: 'Kōrero, whakarongo, pānui, tuhi: speak, listen, read and write', levels: ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6', 'Level 7', 'Level 8'] },
+  { id: 'es', name: 'Spanish', icon: '☀️', hue: '#E8822A', scene: 'stall', voices: ['es-MX', 'es-US', 'es-ES'], strip: 'áéíóúüñ¿¡', blurb: 'Hablar, escuchar, leer y escribir: speak, listen, read and write', levels: ['A1 (part 1)', 'A1 (part 2)', 'A2 (part 1)', 'A2 (part 2)', 'B1 (part 1)', 'B1 (part 2)', 'B2 (part 1)', 'B2 (part 2)'] },
+  { id: 'zh', name: 'Mandarin', icon: '🐼', hue: '#D24C6E', scene: 'garden', voices: ['zh-CN', 'zh-TW'], strip: 'āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ', blurb: 'Speak, listen, read and write Chinese, with pinyin and characters', levels: ['YCT 1', 'YCT 2', 'YCT 3', 'YCT 4 (HSK 2)', 'HSK band 2', 'HSK band 3', 'HSK band 4 (part 1)', 'HSK band 4 (part 2)'] },
+  { id: 'ja', name: 'Japanese', icon: '🗻', hue: '#6E5BD6', scene: 'home', voices: ['ja-JP'], strip: '', blurb: 'Speak, listen, read and write, with hiragana, katakana and kanji', levels: ['Kana and N5 (part 1)', 'N5 (part 2)', 'N5 to N4', 'N4', 'N4 to N3', 'N3 (part 1)', 'N3 (part 2)', 'N3 (part 3)'] },
+];
+const LANG = Object.fromEntries(LANGS.map(L => [L.id, L]));
+const isLang = tree => !!LANG[tree];
+// A tree's catalogue entry, for subjects and language courses alike
+const subject = tree => TREE[tree] || LANG[tree] || null;
 // Kids 16 and up use the Makers band: older teens aren't who Chorecast is for.
 const BANDS = [
   { id: 'sprouts', name: 'Sprouts', ages: '7 to 9', words: 10 },
@@ -50,7 +66,7 @@ const RANKS = ['Saver', 'Starter', 'Steady', 'Long-termer', 'Portfolio Pro'];
    One text file per tree and band (growth/<tree>.<band>.txt), plus moments.txt and cases.txt.
    {nz:...~au:...} picks the family's country; "*" marks right answers. */
 const Packs = {}, loading = {};
-let Moments = [], Cases = [], feedLoaded = false, contentVer = '1', shipped = null;
+let Moments = [], Cases = [], feedLoaded = false, contentVer = '1', shipped = null, previewBuild = false;
 const local = s => String(s == null ? '' : s).replace(/\{nz:([^~}]*)~au:([^}]*)\}/g, (m, nz, au) => (GSET().country === 'au' ? au : nz));
 const splitList = s => String(s || '').split(';').map(x => x.trim()).filter(Boolean);
 const starOpts = arr => arr.map(o => o.trim()).filter(Boolean).map(o => ({ t: o.replace(/\*$/, '').trim(), ok: /\*$/.test(o) }));
@@ -80,24 +96,58 @@ function parseItem(line) {
     case 'mystery': return { type, q: 'Who or what is it?', clues: splitList(f[1]), opts: starOpts(f.slice(2)) };
     case 'island': return { type, q: f[1] || '', kind: f[2] || 'items' };
     case 'gen': return { type, kind: f[1], n: +(f[2] || 3) };
+    // Languages: text in «…» is in the language being learned, and is spoken by its voice or recording.
+    case 'hear': return { type, q: f[1], opts: starOpts(f.slice(2)) };
+    case 'pair': return { type, q: f[1], opts: starOpts(f.slice(2)) };
+    case 'say': return { type, q: f[1], en: f[2] || '' };
+    case 'type': return { type, q: f[1], a: f[2], hint: f[3] || '' };
+    case 'tiles': return { type, q: f[1], a: f[2], extra: f[3] ? splitList(f[3]) : [] };
+    case 'trace': return { type, q: f[1], en: f[2] || '' };
     default: return { type: 'note', q: line };
   }
 }
 
+/* A language pack (one stage of a course, band "s1" to "s8") also has, per lesson:
+     word: «target» | meaning | picture | action | reading   a new word or phrase, with an emoji, an action for Sprouts
+                                                    and, for Mandarin and Japanese, its pinyin or rōmaji
+     say: «phrase» | meaning | reading                a phrase to hear and say
+     rule: …                                          a pattern, shown by band (Makers first, Builders after examples)
+     chant: «line»; «line»                            Sprouts chant the unit's phrases to a beat
+     learn@sprouts: …, rule@makers: …, hook@…:       a line for one band only, in place of the usual one
+   and after a unit's lessons, "@story n | title" with "line: who | «words» | meaning | reading" lines and its checks. */
 function parsePack(text, tree, band) {
-  const pack = { tree, band, units: [] }; let unit = null, les = null;
+  const pack = { tree, band, units: [] }, sub = subject(tree) || {}, stage = /^s\d+$/.test(band) ? +band.slice(1) : 0; let unit = null, les = null, story = null;
+  const wordOf = val => { const [t, en, pic, act, rd] = val.split('|').map(x => x.trim()); return { t: t.replace(/[«»]/g, ''), en: en || '', pic: pic || '', act: act || '', rd: rd || '' }; };
   for (const raw of text.split(/\r?\n/)) {
     const line = raw.trim(); if (!line || line.startsWith('#')) continue;
-    if (line.startsWith('@unit')) { const [n, title, goal] = line.slice(5).split('|').map(x => x.trim()); unit = { id: `${tree}.${band}.${n}`, n: +n, title, goal: goal || '', lessons: [] }; pack.units.push(unit); les = null; continue; }
+    if (line.startsWith('@lang')) { pack.lang = line.slice(5).trim(); continue; }
+    if (line.startsWith('@pairs')) { pack.pairs = splitList(line.slice(6)); continue; }
+    if (line.startsWith('@unit')) { const [n, title, goal] = line.slice(5).split('|').map(x => x.trim()); unit = { id: `${tree}.${band}.${n}`, n: +n, title, goal: goal || '', lessons: [] }; pack.units.push(unit); les = null; story = null; continue; }
+    if (line.startsWith('@story')) {
+      const [n, title] = line.slice(6).split('|').map(x => x.trim()), u = pack.units.find(x => x.n === +n) || unit;
+      story = { id: `${tree}.${band}.${u.n}.story`, tree, band, unit: u.n, title: title || 'Story', lines: [], checks: [] }; u.story = story; les = null; continue;
+    }
     if (line.startsWith('@lesson')) {
       const [num, title, icon, scene] = line.slice(7).split('|').map(x => x.trim()), [un, ln] = num.split('.').map(Number);
-      unit = pack.units.find(u => u.n === un) || unit;
-      les = { id: `${tree}.${band}.${un}.${ln}`, tree, band, unit: un, n: ln, title, icon: icon || TREE[tree].icon, scene: scene || TREE[tree].scene, learn: [], tries: [], checks: [], hook: '', home: '', skill: '' };
+      unit = pack.units.find(u => u.n === un) || unit; story = null;
+      les = { id: `${tree}.${band}.${un}.${ln}`, tree, band, unit: un, n: ln, title, icon: icon || sub.icon, scene: scene || sub.scene, learn: [], tries: [], checks: [], hook: '', home: '', skill: '' };
+      if (pack.lang) Object.assign(les, { lang: pack.lang, stage, words: [], says: [], rules: [], chant: [], by: {} });
       unit.lessons.push(les); continue;
     }
+    if (story) {
+      const i = line.indexOf(':'), key = line.slice(0, i).trim(), val = line.slice(i + 1).trim();
+      if (key === 'line') { const [who, t, en, rd] = val.split('|').map(x => x.trim()); story.lines.push({ who: who || '', t: (t || '').replace(/[«»]/g, ''), en: en || '', rd: rd || '' }); }
+      else if (key === 'check') story.checks.push(parseItem(val));
+      continue;
+    }
     if (!les) continue;
-    const i = line.indexOf(':'), key = line.slice(0, i).trim(), val = line.slice(i + 1).trim();
-    if (key === 'hook') les.hook = val;
+    const i = line.indexOf(':'), [key, onlyBand] = line.slice(0, i).trim().split('@'), val = line.slice(i + 1).trim();
+    if (onlyBand && les.by) { const b = les.by[onlyBand] || (les.by[onlyBand] = {}); if (key === 'learn' || key === 'rule') (b[key] || (b[key] = [])).push(val); else b[key] = val; continue; }
+    if (les.words && key === 'word') les.words.push(wordOf(val));
+    else if (les.words && key === 'say') { const [t, en, rd] = val.split('|').map(x => x.trim()); les.says.push({ t: t.replace(/[«»]/g, ''), en: en || '', rd: rd || '' }); }
+    else if (les.words && key === 'rule') les.rules.push(val);
+    else if (les.words && key === 'chant') les.chant = splitList(val).map(x => x.replace(/[«»]/g, ''));
+    else if (key === 'hook') les.hook = val;
     else if (key === 'learn') les.learn.push(val);
     else if (key === 'guess') les.guess = parseItem(val);
     else if (key === 'try') { const [ex, item] = val.split('::').map(x => x.trim()); les.tries.push({ ex: item ? ex : '', item: parseItem(item || ex) }); }
@@ -140,7 +190,16 @@ function parseCases(text) {
 async function fetchText(url) { const r = await fetch(url, { cache: 'no-cache' }); if (!r.ok) throw new Error(url + ' ' + r.status); return r.text(); }
 // Content version from index.json, so every pack URL changes when the content does.
 function loadIndex() {
-  return loading.index || (loading.index = fetchText('growth/index.json').then(t => { const ix = JSON.parse(t); contentVer = ix.version || contentVer; shipped = ix.counts || null; }).catch(() => {}));
+  return loading.index || (loading.index = fetchText('growth/index.json').then(t => { const ix = JSON.parse(t); contentVer = ix.version || contentVer; shipped = ix.counts || null; previewBuild = !!ix.preview; }).catch(() => {}));
+}
+// One stage of a language course, and every stage before it (their words come back in reviews)
+async function loadLang(lang, stage) {
+  await loadIndex();
+  const todo = []; for (let s = 1; s <= stage; s++) {
+    const key = `${lang}.s${s}`; if (Packs[key] || (shipped && !(key in shipped))) continue;
+    todo.push(loading[key] || (loading[key] = fetchText(`growth/${key}.txt?v=${contentVer}`).then(txt => { Packs[key] = parsePack(txt, lang, `s${s}`); }).catch(e => { console.warn('language pack', key, e); Packs[key] = { tree: lang, band: `s${s}`, units: [] }; })));
+  }
+  await Promise.all(todo);
 }
 async function loadBand(band) {
   await loadIndex();
@@ -221,9 +280,11 @@ function medal(kid, l) {
   if (d.best >= 1 || (cards.length && cards.every(c => c.b >= 3))) return 'silver';
   return 'bronze';
 }
+// Which pack a kid uses for a tree: their age band's, or for a language course the stage they're on
+function packKey(kid, treeId) { return isLang(treeId) ? `s${langStage(kid, treeId)}` : bandOf(kid); }
 // A subject's lessons passed, and its overall score: the average of the best score in every lesson tried so far
 function treeStats(kid, treeId) {
-  const pack = packFor(treeId, bandOf(kid)); if (!pack) return { total: 0, done: 0, score: null };
+  const pack = packFor(treeId, packKey(kid, treeId)); if (!pack) return { total: 0, done: 0, score: null };
   const ls = pack.units.flatMap(u => u.lessons), d = prog(kid).done || {}, tried = ls.map(l => d[l.id]).filter(x => x && x.best > 0);
   return { total: ls.length, done: ls.filter(l => passed(kid, l.id)).length, score: tried.length ? tried.reduce((a, x) => a + x.best, 0) / tried.length : null };
 }

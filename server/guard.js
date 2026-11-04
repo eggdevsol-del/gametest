@@ -189,12 +189,13 @@ export function checkPlanWrite(col, prev, next, plan) {
     }
   }
   // Lessons: on a plan without every lesson, a lesson after unit 1 can only be passed in a subject the family has a pack
-  // for. Lesson ids are tree.band.unit.lesson.
+  // for. Lesson ids are tree.band.unit.lesson, and a language course's band is its stage (s1 to s8): only unit 1 of
+  // stage 1 is free.
   if (col === 'growth' && !L.allLessons) {
     const d0 = prev.done || {}, d1 = next.done || {};
     for (const id of Object.keys(d1)) {
-      if (d0[id]) continue; const [tree, , unit] = id.split('.');
-      if (+unit > 1 && !(plan.packs || []).some(p => p === tree || p === 'all')) return plusOnly('That lesson');
+      if (d0[id]) continue; const [tree, band, unit] = id.split('.'), stage = /^s\d+$/.test(band) ? +band.slice(1) : 1;
+      if ((+unit > 1 || stage > 1) && !(plan.packs || []).some(p => p === tree || p === 'all')) return plusOnly('That lesson');
     }
   }
   if (col === 'family' && !L.rules) for (const [k, ok] of Object.entries(FREE_RULES)) if (!same(prev[k], next[k]) && next[k] != null && !ok.includes(next[k])) return plusOnly('Choosing your own rate');

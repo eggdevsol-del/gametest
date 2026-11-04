@@ -51,6 +51,8 @@ export const PRODUCTS = {
   'chorecast.xp.7500': { kid: true, xp: 7500 },
   'chorecast.club.monthly': { kid: true, xp: 1000, club: true },
   ...Object.fromEntries(['money', 'character', 'work', 'make', 'give', 'maths', 'words', 'time', 'home', 'mind', 'online', 'world'].map(k => [`chorecast.pack.${k}`, { pack: k }])),
+  // Language courses: te reo Māori, Spanish, Mandarin and Japanese, every stage
+  ...Object.fromEntries(['mi', 'es', 'zh', 'ja'].map(k => [`chorecast.pack.${k}`, { pack: k }])),
 };
 // The Island Club's members-only prize for each month of the year (January first), placed free from the island shop.
 export const CLUB_PRIZES = ['pegasus', 'griffin', 'phoenix', 'narwhal', 'unicorn', 'dragon', 'lyrebird', 'kakapo', 'redpanda', 'dolphin', 'balloon', 'lighthouse'];

@@ -145,6 +145,67 @@ Wrap anything that differs by country in `{nz:...~au:...}`, for example `{nz:IRD
 
 Questions are split into fields before the country text is swapped in, so keep separators outside the braces: no `|`, `;`, `=`, `*`, `/`, `=>` or (in sort bins) `,` inside `{nz:...~au:...}`. `price` and `tap` items can't use the braces at all, and numbers in `slider` and `budget` items aren't localised, so keep those the same for both countries. A `gap` with answer chips can't localise its answer either; use the number pad instead.
 
+## Languages
+
+Te reo Māori, Spanish, Mandarin and Japanese courses (`LANGS` in `chorecast-growth/01-core.js`). Each is one course for every age, aimed at speaking on your own: 8 stages of 10 units of 8 lessons, with a story and a challenge per unit, about 3,000 words in all. Each course starts with a course map (`content/parked/<id>.map.md`) that plans every unit to the top level before any lesson is written. The te reo stages are Te Aho Arataki Marau's eight levels.
+
+A course is one file, `content/<id>.txt` (or in `parked/` until it's reviewed), split by `@stage`:
+
+```
+@lang mi
+@pairs papa/pāpā
+@stage 1
+@unit 1 | Kia ora! | Greet people and say goodbye
+
+@lesson 1.1 | Kia ora | 👋 | home
+hook: People all over Aotearoa say one friendly word every day.
+word: kia ora | hello, thanks | 👋 | wave
+say: «Kia ora, Ari!» | Hello, Ari!
+rule: «Kia ora» works for anyone, any time.
+learn: «Kia ora» means hello and thanks.
+chant: «Tēnā koe»; «Tēnā kōrua»; «Tēnā koutou»
+play: hear | Which one is «kia ora»? | 👋* | 🌙 | 🍎
+check: hear | What does «kia ora» mean? | hello and thanks* | good night | see you later
+home: Say «kia ora» to everyone in your family today.
+skill: mi-greet
+
+@story 1 | Mōrena, Mere!
+line: Ari | «Mōrena, Mere!» | Good morning, Mere!
+check: mcq | Who is leaving at the end? | Mere* | Ari | Nobody
+```
+
+- Text in `«…»` is in the language. Kids can tap it to hear it, and to see what a word they've learned means.
+- `word:` is the word, its meaning, a picture (an emoji, different from the lesson's other words), an action for Sprouts to do as they say it and, for Mandarin and Japanese, its reading (pinyin with tone marks, or rōmaji). 1 to 8 new words a lesson.
+- `say:` is a phrase, its meaning and (for Mandarin and Japanese) its reading. Kids hear it, say it and hear both.
+- Mandarin and Japanese show each known word's reading above it (as ruby) for Sprouts always and for everyone in stages 1 and 2. Japanese stage 1 is written in hiragana with spaces between words. In `tiles` answers for Mandarin and Japanese, spaces mark where one tile ends and the next begins.
+- `rule:` is a pattern. Makers see it before the words, Builders after them as "Spot the pattern", and Sprouts don't see it at all unless there's a `rule@sprouts:`.
+- `chant:` is said to a beat, for Sprouts only.
+- `learn@sprouts:`, `rule@makers:` and so on replace a line for one band.
+- `@pairs` lists real words that differ only in their marks (papa, floor; pāpā, dad). Anything else spelled two ways fails the check.
+- `@story n | title`, after a unit's lessons, has `line: who | «words» | meaning` lines and at least 2 checks.
+
+Language questions, on top of the usual ones:
+
+| Type | Format |
+| --- | --- |
+| Hear it | `hear \| Question with «what's heard» \| right* \| wrong \| wrong` (the «» part is played, not shown) |
+| Which did you hear? | `pair \| Question \| «one»* \| «other»` |
+| Say it | `say \| «phrase» \| meaning` (practice: never marked, so not for checks) |
+| Type it | `type \| Prompt \| answer \| hint` (Sprouts and Builders are let off missing macrons and accents) |
+| Build it | `tiles \| Prompt \| answer` (the words of a phrase, or the letters of a word) |
+| Trace it | `trace \| «字» \| meaning` (trace a character or a few kana over a faint copy; marked by how much of it the finger covered, without stroke order yet) |
+
+How a course reaches each kid:
+- **Every band takes the same lessons.** Sprouts take a lesson of more than 3 new words in two sittings, Makers can test out of a lesson by passing its questions, and placement ("Already know some?") counts the units a kid knows as learned.
+- **Review cards.** Every word and phrase becomes a card that comes back after 1, 3, 7, 16, 35 and 90 days: first hear it and pick the meaning, then (from box 3) say, build or type it. Up to 20 a day per language, and a new lesson waits until the day's cards are done.
+- **Kept out:** the same as every lesson, plus karakia and anything religious or tapu. Mandarin uses simplified characters and stays clear of politics.
+
+The checker fails a course if a question or story uses a word that hasn't been taught yet (for Mandarin and Japanese, a character or kana; a story may have 1 new word in 20), a Mandarin or Japanese word or phrase has no reading, a word has no picture or meaning, a word is spelled two ways, or a stage isn't 10 units of 8 lessons. A live language with no device voice (te reo Māori) also needs a recording of every line (`growth/audio/<id>.json`). To try a parked course in the app, build with `node scripts/build-growth.mjs --preview`; the checker then fails until it's built again without it, so a preview build can't be committed by mistake.
+
+**Recordings.** Te reo Māori has no voice on Apple devices and is never read by an English voice. A content editor who is a fluent speaker records each line under Grown-ups, then Character Growth, then Recording studio. The build lists every line in `growth/<id>.lines.json`. Until a line is recorded, kids see its words and "Recording on its way".
+
+**Before a stage goes live:** a fluent speaker (for te reo, ideally a kaiako) reads every lesson, the te reo lines are recorded, and a grown-up reads a sample for suitability. Then move it out of `parked/` and add its id to `LANG_LIVE`.
+
 ## Money Moments (`moments.txt`)
 
 Parked for now: the file is `parked/moments.txt`, so none ship until it has been read and moved back.

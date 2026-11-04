@@ -7,7 +7,7 @@
 
 export const PHOTO_DAYS = [30, 60, 90, 180, 365];
 export const DEFAULT_PHOTO_DAYS = 60;
-export const KEEP_DAYS = { events: 365, growth_answers: 730, doc_changes: 90 };
+export const KEEP_DAYS = { events: 365, growth_answers: 730, lang_reviews: 730, doc_changes: 90 };
 const ORPHAN_DAYS = 7, DAY = 86400000;
 
 export const photoDaysOf = settings => (PHOTO_DAYS.includes(settings && settings.photoDays) ? settings.photoDays : DEFAULT_PHOTO_DAYS);
@@ -47,6 +47,7 @@ export async function runHousekeeping(db, clearJob, { force = false } = {}) {
   const del = async (sql, ...p) => (await db.query(sql + ' returning 1', p)).rows.length;
   out.events = await del(`delete from events where created_at < now() - $1 * interval '1 day'`, KEEP_DAYS.events);
   out.answers = await del(`delete from growth_answers where created_at < now() - $1 * interval '1 day'`, KEEP_DAYS.growth_answers);
+  out.langReviews = await del(`delete from lang_reviews where created_at < now() - $1 * interval '1 day'`, KEEP_DAYS.lang_reviews);
   out.changes = await del(`delete from doc_changes where created_at < now() - $1 * interval '1 day'`, KEEP_DAYS.doc_changes);
   out.sessions = await del('delete from sessions where expires_at < now()');
   out.invites = await del(`delete from invites where expires_at < now() - interval '30 days'`);

@@ -4,7 +4,7 @@
    trees, a tree's path of lessons, or the lesson being played. */
 const Grow = { open: false, kidId: null, view: 'hub', tree: null, run: null, stage: null, need: 0, sessionAt: 0, breakShown: false, cleanup: [] };
 const BEATS = ['Hook', 'Guess', 'Learn', 'Try', 'Play', 'Check', 'Home'];
-const BEAT_OF = { hook: 0, guess: 1, learn: 2, try: 3, play: 4, check: 5, home: 6 };
+const BEAT_OF = { hook: 0, guess: 1, learn: 2, word: 2, rule: 2, chant: 2, line: 2, part: 6, try: 3, play: 4, check: 5, home: 6 };
 const kidNow = () => Store.kids[Grow.kidId] || null;
 let root = null, ui = null;
 
@@ -29,10 +29,10 @@ async function open(kidId, opts = {}) {
   if (!Grow.stage) { Grow.stage = Stage3D(root.querySelector('.gw-cv')); }
   if (Grow.stage) { Grow.stage.setGuide(prog(kid).guide || 'kea'); Grow.stage.start(); }
   ui.innerHTML = `<div class="gw-loading">${C.sunMark ? C.sunMark(48) : ''}<p>Growing your skill trees…</p></div>`;
-  await Promise.all([loadBand(bandOf(kid)), loadExtras()]);
+  await Promise.all([loadBand(bandOf(kid)), loadExtras(), loadKidLangs(kid)]);
   scanEchoes(kid);
   if (!prog(kid).guide) Grow.view = 'guide';
-  else if (Grow.tree) Grow.view = 'tree';
+  else if (Grow.tree) Grow.view = isLang(Grow.tree) ? 'lang' : 'tree';
   render();
   C.track('growth.open', { from: opts.from || (opts.need ? 'shop' : opts.tree ? 'tree' : 'card') }, kidId);
 }
@@ -42,7 +42,7 @@ function close() {
   C.scheduleRender();
 }
 function back() {
-  if (Grow.view === 'lesson' || Grow.view === 'done' || Grow.view === 'case' || Grow.view === 'challenge') { Grow.cleanup.splice(0).forEach(f => f()); Grow.view = Grow.tree ? 'tree' : 'hub'; Grow.run = null; return render(); }
+  if (Grow.view === 'lesson' || Grow.view === 'done' || Grow.view === 'case' || Grow.view === 'challenge' || (Grow.run && Grow.run.lang)) { lcFlush(); Grow.cleanup.splice(0).forEach(f => f()); Grow.view = Grow.tree ? (isLang(Grow.tree) ? 'lang' : 'tree') : 'hub'; Grow.run = null; return render(); }
   if (Grow.view !== 'hub' && Grow.view !== 'guide') { Grow.view = 'hub'; Grow.tree = null; return render(); }
   close();
 }
@@ -59,7 +59,7 @@ function available(kid, l) {
   const prevU = pack.units.filter(x => x.n < u.n && x.lessons.length).pop();
   return !prevU || prevU.lessons.every(x => passed(kid, x.id));
 }
-function nextIn(kid, treeId) { const pack = packFor(treeId, bandOf(kid)); if (!pack) return null; for (const u of pack.units) for (const l of u.lessons) if (!passed(kid, l.id) && available(kid, l)) return l; return null; }
+function nextIn(kid, treeId) { const pack = packFor(treeId, packKey(kid, treeId)); if (!pack) return null; for (const u of pack.units) for (const l of u.lessons) if (!passed(kid, l.id) && available(kid, l)) return l; return null; }
 // Unit challenges a kid has opened (every lesson in the unit passed) but hasn't won the crown for yet
 function openCrowns(kid) {
   const won = prog(kid).units || {};
@@ -89,10 +89,10 @@ function hasLesson(kid) { if (!allLessons(bandOf(kid)).length) { loadBand(bandOf
 function render() {
   if (!root || !Grow.open) return; const kid = kidNow(); if (!kid) return close();
   Grow.cleanup.splice(0).forEach(f => f()); HowTo.stop();
-  const v = Grow.view, tree = Grow.tree && TREE[Grow.tree];
-  root.style.setProperty('--gh', (tree || (Grow.run && TREE[Grow.run.lesson ? Grow.run.lesson.tree : Grow.run.tree]) || { hue: '#2F6FE4' }).hue);
+  const v = Grow.view, tree = Grow.tree && subject(Grow.tree);
+  root.style.setProperty('--gh', (tree || (Grow.run && subject(Grow.run.lesson ? Grow.run.lesson.tree : Grow.run.tree)) || { hue: '#2F6FE4' }).hue);
   root.dataset.view = v;
-  if (Grow.stage) Grow.stage.setScene(v === 'tree' && tree ? tree.scene : Grow.run && Grow.run.lesson ? Grow.run.lesson.scene : Grow.run && Grow.run.scene ? Grow.run.scene : 'island');
+  if (Grow.stage) Grow.stage.setScene((v === 'tree' || v === 'lang') && tree ? tree.scene : Grow.run && Grow.run.lesson ? Grow.run.lesson.scene : Grow.run && Grow.run.scene ? Grow.run.scene : 'island');
   // The tree view is a full-screen plant with its own 3D view, so the stage rests. Every step of a lesson, quiz,
   // review or story, and its results, take place in front of the plant, which grows with each right answer in a
   // lesson's quiz; other screens show just the guide.
@@ -102,6 +102,7 @@ function render() {
   if (v === 'guide') return viewGuide(kid);
   if (v === 'hub') return viewHub(kid);
   if (v === 'tree') return viewTree(kid, tree);
+  if (v === 'lang') return viewLang(kid, tree);
   if (v === 'lesson' || v === 'challenge' || v === 'review' || v === 'moment' || v === 'echo' || v === 'story' || v === 'case') return viewRun(kid);
   if (v === 'done') return viewDone(kid);
   if (v === 'break') return viewBreak(kid);
@@ -109,7 +110,8 @@ function render() {
   if (v === 'crew') return viewCrew();
 }
 const RUN_VIEWS = ['lesson', 'challenge', 'review', 'moment', 'echo', 'story', 'case'];
-const plantRun = () => !!Grow.run && (RUN_VIEWS.includes(Grow.view) || Grow.view === 'done');
+// Language courses aren't part of the plant: their runs play in front of the guide
+const plantRun = () => !!Grow.run && !Grow.run.lang && (RUN_VIEWS.includes(Grow.view) || Grow.view === 'done');
 // The subject a run's plant view looks along: its lesson's, its story's, or else Money Sense, the stalk
 const plantTree = (R, step) => TREE[(R.lesson && R.lesson.tree) || step.tree || R.tree] || TREE.money || TREES[0];
 /* Puts the plant on the stage for a run's step, or for its results. Through a lesson it stands as grown by the quiz
@@ -157,6 +159,7 @@ function viewHub(kid) {
         ${story && !storyDone ? tile('story', '📰', 'This week in the market', `+${XP.story} XP`) : ''}
         ${C.kidsList().length > 1 ? tile('crewPick', '👯', 'Crew quiz', 'Answer side by side with a sibling') : ''}
       </div>
+      ${langDoors(kid)}
       <h2 class="gw-h2">${treesOn().length <= 3 ? 'Your Learning Tree' : 'Skill trees'}</h2>
       ${constellation(kid)}
       ${casesFor(kid).length ? `<h2 class="gw-h2">Real stories</h2><div class="gw-cases">${casesFor(kid).slice(0, 12).map(cs => `<button class="gw-case ${(prog(kid).cases || {})[cs.id] ? 'done' : ''}" data-g="case" data-id="${cs.id}" style="--th:${(TREE[cs.tree] || {}).hue || '#2F6FE4'}"><span>${esc(cs.icon)}</span><b>${esc(cs.name)}</b><small>${esc((TREE[cs.tree] || {}).name || '')}</small></button>`).join('')}</div>` : ''}
@@ -214,6 +217,7 @@ function viewTree(kid, tree) {
 /* ---------- Running a lesson, challenge, review, Money Moment, echo, story or case study ---------- */
 function startLesson(kid, l, mode = 'lesson') {
   if (overTime(kid)) { Grow.view = 'break'; return render(); }
+  if (l.lang) return startLangLesson(kid, l, mode);
   const steps = [{ kind: 'hook' }];
   if (l.guess) steps.push({ kind: 'guess', item: l.guess });
   l.learn.forEach(text => steps.push({ kind: 'learn', text }));
@@ -269,19 +273,20 @@ function startCase(kid, id) {
 
 function viewRun(kid) {
   const R = Grow.run, step = R.steps[R.k], l = R.lesson, total = R.steps.length;
-  const beat = step.kind === 'decide' ? 'Choose' : step.kind === 'intro' ? 'Ready' : R.mode === 'lesson' ? BEATS[BEAT_OF[step.kind]] : step.kind === 'check' ? (R.mode === 'review' ? 'Review' : 'Question') : step.title || 'Read';
+  const beat = step.kind === 'decide' ? 'Choose' : step.kind === 'intro' ? 'Ready' : R.mode === 'lesson' || R.mode === 'lpart' ? BEATS[BEAT_OF[step.kind]] : step.kind === 'check' ? (R.mode === 'review' || R.mode === 'lreview' ? 'Review' : 'Question') : step.kind === 'line' ? 'Story' : step.title || 'Read';
   const head = `<header class="gw-run-top"><button class="gw-x" data-g="back" aria-label="Stop">${ic('x')}</button><div class="gw-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${R.k + 1}"><i style="width:${(R.k + 1) / total * 100}%"></i></div><span class="gw-beat">${esc(beat)}</span></header>`;
-  const title = l ? `<p class="gw-ltitle">${esc(l.icon)} ${esc(local(l.title))}</p>` : R.mode === 'challenge' ? `<p class="gw-ltitle">🏆 ${esc(local(R.unit.title))}</p>` : R.mode === 'case' ? `<p class="gw-ltitle">${esc(R.cs.icon)} ${esc(R.cs.name)}</p>` : '';
+  const title = l ? `<p class="gw-ltitle">${esc(l.icon)} ${esc(local(langTitle(l)))}</p>` : R.mode === 'challenge' ? `<p class="gw-ltitle">🏆 ${esc(local(R.unit.title))}</p>` : R.mode === 'case' ? `<p class="gw-ltitle">${esc(R.cs.icon)} ${esc(R.cs.name)}</p>` : '';
   let body = '';
   // Scored runs tell the kid the pass mark up front and on every question, with how they're going
   const q = quizAt(R), scored = q && (R.mode === 'lesson' || R.mode === 'challenge') && !(R.mode === 'lesson' && passed(kid, l.id));
   const P = R.mode === 'lesson' ? runPoints(R) : null;
   const goalFor = n => (R.mode === 'challenge' ? `${passGoal(n, true)} to win the crown` : `Get ${P.need} of ${P.total} points to pass and open the next lesson`);
   if (step.kind === 'hook') {
-    const n = l.checks.length, goal = lessonTotal(l) && !passed(kid, l.id) ? `<p class="gw-goal">🎯 Every answer counts: each question is worth 1 point${l.play ? ' and the game 3' : ''}. ${goalFor(n)}${lessonXp(kid, l) > 0 ? `, and earn up to +${lessonXp(kid, l)} XP` : '. Today’s learning XP is full, but your tree still grows'}.</p>` : '';
-    body = `<div class="gw-card hook"><span class="gw-big">${esc(l.icon)}</span><h2>${esc(local(l.title))}</h2><p>${esc(local(l.hook))}</p>${goal}${speakBtn(l.hook)}<button class="g-go" data-g="next">Let’s go</button></div>`; say(l.hook);
+    const n = l.checks.length, goal = P && lessonTotal(l) && !passed(kid, l.id) ? `<p class="gw-goal">🎯 Every answer counts: each question is worth 1 point${l.play ? ' and the game 3' : ''}. ${goalFor(n)}${lessonXp(kid, l) > 0 ? `, and earn up to +${lessonXp(kid, l)} XP` : '. Today’s learning XP is full, but your tree still grows'}.</p>` : '';
+    body = `<div class="gw-card hook"><span class="gw-big">${esc(l.icon)}</span><h2>${esc(local(langTitle(l)))}</h2><p>${esc(local(l.hook))}</p>${goal}${speakBtn(l.hook)}<button class="g-go" data-g="next">Let’s go</button></div>`; say(l.hook);
   }
-  else if (step.kind === 'intro') { body = `<div class="gw-card hook"><span class="gw-big">🏆</span><p>${esc(step.text)}</p><button class="g-go" data-g="next">Start</button></div>`; say('You’ve got this. No hints this time!'); }
+  else if (step.kind === 'intro') { body = `<div class="gw-card hook"><span class="gw-big">${R.mode === 'lstory' ? '📖' : R.mode === 'lplace' ? '🧭' : '🏆'}</span><p>${esc(step.text)}</p><button class="g-go" data-g="next">Start</button></div>`; say(R.mode === 'challenge' ? 'You’ve got this. No hints this time!' : ''); }
+  else if (LSTEPS.includes(step.kind)) body = langBody(kid, step, R);
   else if (step.kind === 'learn') { body = `<div class="gw-card learn">${step.title ? `<h3>${esc(step.title)}</h3>` : ''}${local(step.text).split('\n').map(p => `<p>${esc(p)}</p>`).join('')}${speakBtn(step.text)}<button class="g-go" data-g="next">Next</button></div>`; say(R.mode === 'lesson' ? ['Here’s the idea.', 'Got it?', 'Nearly there!'][Math.min(2, R.k % 3)] : ''); if (Grow.stage) Grow.stage.react('point'); }
   else if (step.kind === 'try') { body = `<div class="gw-card try">${step.ex ? `<div class="gw-ex"><b>Worked example</b><p>${esc(local(step.ex))}</p></div><p class="gw-yt">Now you try:</p>` : ''}<div class="gw-host"></div><div class="gw-fb"></div></div>`; say('Your turn to try one.'); }
   else if (step.kind === 'decide') { body = `<div class="gw-card"><h3>Decision point</h3><p class="gw-p2">${esc(local(step.q))}</p><div class="g-cards col n${step.opts.length}">${step.opts.map((o, i) => `<button class="g-card" style="--d:${i * 70}ms" data-g="decide" data-i="${i}"><span>${esc(local(o.t))}</span></button>`).join('')}</div><div class="gw-fb"></div></div>`; say('What would you do?'); }
@@ -292,12 +297,13 @@ function viewRun(kid) {
     say(step.kind === 'guess' ? 'Have a guess! It’s fine to get it wrong.' : step.kind === 'play' ? 'Game time!' : R.mode === 'review' ? `From “${local(step.title || '')}”` : scored && step.kind === 'check' && q.i === 1 ? `Question time! ${goalFor(q.n)}.` : '');
   }
   ui.innerHTML = `${head}<div class="gw-pad gw-runpad">${title}${body}</div>`;
+  if (R.lang) { markLang(ui, R.lang); if (LSTEPS.includes(step.kind)) langAfter(kid, step, R); }
   if (step.kind === 'learn') holdNext(ui.querySelector('.gw-card.learn [data-g="next"]'), 'learn' + R.k, kid, `${step.title || ''} ${local(step.text)}`);
   if (PlantView.ok) plantFor(kid, R, step);
   else if (Grow.stage) { const [kind, data] = stageFor(step, R) || []; Grow.stage.show(kind, data); }
   const host = ui.querySelector('.gw-host');
   if (host) {
-    const ctx = { kid, mode: step.kind, cleanup: Grow.cleanup, fx: (e, d) => Grow.stage && Grow.stage.fx(e, d) };
+    const ctx = { kid, mode: step.kind, lang: R.lang || null, cleanup: Grow.cleanup, fx: (e, d) => Grow.stage && Grow.stage.fx(e, d) };
     renderItem(step.item, host, ctx, res => answered(kid, step, res));
     const card = host.closest('.gw-card');
     if (card && HowTo.has(step.item)) {
@@ -338,6 +344,8 @@ function stageFor(step, R) {
   const l = R.lesson, it = step.item;
   if (step.kind === 'hook') return ['hook', { icon: l.icon, text: `${local(l.title)} ${local(l.hook)}` }];
   if (step.kind === 'learn') return ['idea', { text: `${step.title || ''} ${local(step.text)}`, icon: l ? l.icon : R.cs ? R.cs.icon : R.mode === 'story' ? '📈' : '💡' }];
+  if (step.kind === 'word') return ['idea', { text: step.w.en, icon: step.w.pic || (l && l.icon) }];
+  if (LSTEPS.includes(step.kind)) return ['idea', { text: step.text || (step.ln && step.ln.en) || '', icon: { rule: '📏', chant: '🥁', line: '📖', part: '🌱' }[step.kind] }];
   if (step.kind === 'home') return ['home', { text: local((l && l.home) || '') }];
   if (step.kind === 'intro') return ['intro', { n: R.steps.length - 1 }];
   if (step.kind === 'decide') return ['fork', { n: step.opts.length }];
@@ -393,6 +401,7 @@ function answered(kid, step, res) {
   if (PlantView.ok) PlantView.answer(res.ok || guess); else if (Grow.stage) Grow.stage.react(res.ok || guess ? 'cheer' : 'puzzled');
   say(res.ok ? msg : guess ? 'Let’s find out!' : 'That’s how we learn. Keep going!');
   if (R.mode === 'review') reviewAnswer(kid, step, res.ok);
+  if (R.mode === 'lreview' && step.lcard) lcAnswer(kid, R.lang, step.lcard, res.ok, Date.now() - (R.shown || R.t0));
   if (R.mode === 'echo') echoAnswer(kid, step, res.ok);
 }
 function next() {

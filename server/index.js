@@ -939,6 +939,89 @@ route('POST', '/api/photos', async ({ req, s, url }) => {
   return { id };
 });
 
+/* ---------- Language courses: review cards and recordings ----------
+   A kid's cards are made when they pass a lesson (checked against their growth doc), and a card moves one box per
+   answer, only when it's due. Days are the device's own (within a day of the server's), so a card due tomorrow in
+   Aotearoa is due on the kid's tomorrow. Recordings are for languages with no device voice; only content editors
+   make them, and anyone can play them. */
+const LANG_IDS = ['mi', 'es', 'zh', 'ja'], LBOX = [1, 3, 7, 16, 35, 90], CARD_RE = /^[^:]{1,160}:[rp]$/u;
+const dayOf = t => { const now = Date.now(), d = /^\d{4}-\d{2}-\d{2}$/.test(t || '') ? Date.parse(t + 'T00:00:00Z') : NaN; return Math.abs(d - now) < 2 * 864e5 ? t : new Date(now).toISOString().slice(0, 10); };
+const plusDays = (day, n) => new Date(Date.parse(day + 'T00:00:00Z') + n * 864e5).toISOString().slice(0, 10);
+async function langKid(s, kidId, lang) {
+  needSession(s);
+  if (!LANG_IDS.includes(lang)) fail(400, 'Unknown language.', 'bad_lang');
+  if (!(await db.query('select 1 from kids where family_id = $1 and id = $2', [s.family_id, String(kidId || '')])).rows.length) fail(404, 'Kid not found.', 'not_found');
+  return String(kidId);
+}
+route('GET', '/api/lang/cards', async ({ s, url }) => {
+  const lang = url.searchParams.get('lang'), kid = await langKid(s, url.searchParams.get('kid'), lang), today = dayOf(url.searchParams.get('today'));
+  const since = new Date(Math.max(Date.now() - 36 * 3600e3, +url.searchParams.get('since') || Date.now() - 24 * 3600e3));
+  const rows = (await db.query(`select card, lesson_id, box, to_char(due, 'YYYY-MM-DD') as due, right_n, wrong_n, to_char(last_on, 'YYYY-MM-DD') as last_on from lang_cards where family_id = $1 and kid_id = $2 and lang = $3`, [s.family_id, kid, lang])).rows;
+  const st = (await db.query(`select count(*) filter (where created_at > now() - interval '7 days')::int as wn, count(*) filter (where created_at > now() - interval '7 days' and correct)::int as wr,
+      count(*) filter (where gap_days >= 28)::int as mn, count(*) filter (where gap_days >= 28 and correct)::int as mr, count(*) filter (where created_at >= $4)::int as dn
+    from lang_reviews where family_id = $1 and kid_id = $2 and lang = $3 and created_at > now() - interval '120 days'`, [s.family_id, kid, lang, since])).rows[0];
+  return { cards: rows.map(r => ({ card: r.card, lesson: r.lesson_id, box: r.box, due: r.due, right: r.right_n, wrong: r.wrong_n, last: r.last_on })), stats: { day: today, n: st.dn, week: { n: st.wn, right: st.wr }, month: { n: st.mn, right: st.mr } } };
+});
+route('POST', '/api/lang/learn', async ({ req, s }) => {
+  const b = await readJson(req, 64 * 1024), lang = String(b.lang || ''), kid = await langKid(s, b.kid, lang), today = dayOf(b.today);
+  const cards = (Array.isArray(b.cards) ? b.cards : []).slice(0, 60).filter(c => c && CARD_RE.test(String(c.card)) && String(c.card).endsWith(':r') && /^[a-z]{2}\.s\d+\.\d+\.\d+$/.test(String(c.lesson)) && String(c.lesson).startsWith(lang + '.'));
+  const done = asObj(((await db.query('select data from growth_progress where family_id = $1 and id = $2', [s.family_id, kid])).rows[0] || {}).data).done || {};
+  const ok = cards.filter(c => (done[c.lesson] || {}).best >= 0.8);
+  if (cards.length && !ok.length) fail(409, 'That lesson isn’t passed yet.', 'not_passed');
+  for (const c of ok) {
+    const box = done[c.lesson].placed && +c.box === 3 ? 3 : 1;
+    await db.query('insert into lang_cards (family_id, kid_id, lang, card, lesson_id, box, due) values ($1, $2, $3, $4, $5, $6, $7) on conflict do nothing', [s.family_id, kid, lang, c.card, c.lesson, box, plusDays(today, LBOX[box - 1])]);
+  }
+  return { ok: true, added: ok.length };
+});
+route('POST', '/api/lang/answers', async ({ req, s }) => {
+  const b = await readJson(req, 64 * 1024), lang = String(b.lang || ''), kid = await langKid(s, b.kid, lang), today = dayOf(b.today);
+  const list = (Array.isArray(b.answers) ? b.answers : []).slice(0, 80).filter(a => a && CARD_RE.test(String(a.card)));
+  let moved = 0;
+  await db.tx(async t => {
+    const key = [s.family_id, kid, lang];
+    for (const a of list) {
+      const c = (await t.q(`select box, to_char(due, 'YYYY-MM-DD') as due, to_char(coalesce(last_on, created_at::date), 'YYYY-MM-DD') as seen, lesson_id from lang_cards where family_id = $1 and kid_id = $2 and lang = $3 and card = $4 for update`, [...key, a.card])).rows[0];
+      if (!c) continue;
+      const ok = !!a.ok, gap = Math.round((Date.parse(today) - Date.parse(c.seen)) / 864e5), ms = Number.isFinite(+a.ms) ? Math.min(600000, Math.max(0, Math.round(+a.ms))) : null;
+      await t.q('insert into lang_reviews (family_id, kid_id, lang, card, correct, box_before, gap_days, ms) values ($1, $2, $3, $4, $5, $6, $7, $8)', [...key, a.card, ok, c.box, gap, ms]);
+      if (c.due > today) { await t.q('update lang_cards set right_n = right_n + $5, wrong_n = wrong_n + $6, last_on = $7 where family_id = $1 and kid_id = $2 and lang = $3 and card = $4', [...key, a.card, ok ? 1 : 0, ok ? 0 : 1, today]); continue; }
+      const box = ok ? Math.min(LBOX.length, c.box + 1) : 1; moved++;
+      await t.q('update lang_cards set box = $5, due = $6, right_n = right_n + $7, wrong_n = wrong_n + $8, last_on = $9 where family_id = $1 and kid_id = $2 and lang = $3 and card = $4', [...key, a.card, box, plusDays(today, LBOX[box - 1]), ok ? 1 : 0, ok ? 0 : 1, today]);
+      // Recognising it well (box 3) opens the harder card: say, type or build it
+      if (a.card.endsWith(':r') && box >= 3) await t.q('insert into lang_cards (family_id, kid_id, lang, card, lesson_id, box, due) values ($1, $2, $3, $4, $5, 1, $6) on conflict do nothing', [...key, a.card.replace(/:r$/, ':p'), c.lesson_id, plusDays(today, 1)]);
+    }
+  });
+  return { ok: true, moved };
+});
+const lineOf = raw => { let k; try { k = decodeURIComponent(raw); } catch (e) { fail(400, 'Bad line.', 'bad_line'); } k = k.normalize('NFC').replace(/\s+/g, ' ').trim(); if (!k || k.length > 400) fail(400, 'Bad line.', 'bad_line'); return k; };
+route('GET', '/api/lang/audio-index/:lang', async ({ p }) => {
+  if (!LANG_IDS.includes(p.lang)) fail(404, 'Unknown language.', 'bad_lang');
+  const rows = (await db.query('select line_key, extract(epoch from updated_at)::bigint as v from lang_audio where lang = $1 and approved', [p.lang])).rows;
+  return { lines: Object.fromEntries(rows.map(r => [r.line_key, String(r.v)])) };
+});
+route('GET', '/api/lang/audio/:lang/:key', async ({ res, p }) => {
+  if (!LANG_IDS.includes(p.lang)) fail(404, 'Unknown language.', 'bad_lang');
+  const r = (await db.query('select mime, bytes from lang_audio where lang = $1 and line_key = $2 and approved', [p.lang, lineOf(p.key)])).rows[0];
+  if (!r) fail(404, 'No recording yet.', 'not_found');
+  const bytes = Buffer.from(r.bytes);
+  // The URL carries the recording's version (?v=), so a re-recording gets a new address
+  res.writeHead(200, { 'content-type': r.mime, 'content-length': bytes.length, 'cache-control': 'public, max-age=31536000, immutable' });
+  res.end(bytes);
+  return undefined;
+});
+route('POST', '/api/lang/audio/:lang/:key', async ({ req, s, p }) => {
+  await needEditor(s);
+  if (!LANG_IDS.includes(p.lang)) fail(404, 'Unknown language.', 'bad_lang');
+  const key = lineOf(p.key), mime = String(req.headers['content-type'] || '').split(';')[0].trim();
+  if (!/^audio\/(mp4|x-m4a|aac|mpeg|webm|ogg|wav)$/.test(mime)) fail(415, 'Recordings must be audio.', 'bad_type');
+  const buf = await readBody(req, 2 * 1024 * 1024); if (!buf.length) fail(400, 'That recording is empty.', 'empty');
+  await db.query(`insert into lang_audio (lang, line_key, mime, bytes, size, recorded_by, approved, updated_at) values ($1, $2, $3, $4, $5, $6, true, now())
+    on conflict (lang, line_key) do update set mime = excluded.mime, bytes = excluded.bytes, size = excluded.size, recorded_by = excluded.recorded_by, approved = true, updated_at = now()`, [p.lang, key, mime, buf, buf.length, s.user_id]);
+  await logEvent(s, 'lang.audio', { lang: p.lang, size: buf.length });
+  return { ok: true };
+});
+
 route('GET', '/api/photos/:id', async ({ res, s, p }) => {
   needSession(s);
   const r = (await db.query('select mime, bytes from photos where id = $1 and family_id = $2', [p.id, s.family_id])).rows[0];
@@ -969,7 +1052,7 @@ route('POST', '/api/events', async ({ req, s }) => {
   for (const { type, at, kid, pl } of kept) {
     evRows.push([s.family_id, s.user_id || null, s.device_id, kid, type, JSON.stringify(pl), at]);
     if (type === 'growth.attempt' && kid) {
-      attempts.push([s.family_id, kid, ['lesson', 'challenge', 'review', 'moment', 'case', 'echo', 'story'].includes(pl.kind) ? pl.kind : 'lesson', String(pl.id || '?'), pl.tree || null, pl.band || null, pl.unit || null, pl.correct | 0, pl.total | 0, pl.xp | 0, pl.ms | 0]);
+      attempts.push([s.family_id, kid, ['lesson', 'challenge', 'review', 'moment', 'case', 'echo', 'story', 'lpart', 'lreview', 'lstory', 'lplace'].includes(pl.kind) ? pl.kind : 'lesson', String(pl.id || '?'), pl.tree || null, pl.band || null, pl.unit || null, pl.correct | 0, pl.total | 0, pl.xp | 0, pl.ms | 0]);
       for (const a of (Array.isArray(pl.answers) ? pl.answers.slice(0, 40) : [])) answers.push([s.family_id, kid, String(pl.id || '?'), String((a && a.q) || '?'), (a && a.skill) || null, !!(a && a.ok), JSON.stringify(a ? a.a ?? null : null)]);
     }
   }

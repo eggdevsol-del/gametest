@@ -31,7 +31,8 @@ function finish() {
     if (pass && !was) { add('Lesson passed', XP.lesson); if (allRight) add('Every answer right', XP.perfect); } else if (pass) add('Practice round', XP.replay);
     const as = (g.assigned || []).find(a => a.id === l.id); if (pass && as) { add('Bonus from a grown-up', Math.min(XP.assignedMax, as.bonus || 0)); patch.assigned = (g.assigned || []).filter(a => a.id !== l.id); }
     patch.done = { [l.id]: { best: Math.max(prev ? prev.best : 0, score), stars: Math.max(prev ? prev.stars : 0, stars), n: (prev ? prev.n : 0) + 1, at: Date.now() } };
-    if (pass && !was) { patch.cards = {}; l.checks.forEach((_, i) => { patch.cards[`${l.id}#${i}`] = { b: 1, due: addDays(today(), 1) }; }); }
+    // Language lessons review their words instead (lang_cards), not their questions
+    if (pass && !was && !l.lang) { patch.cards = {}; l.checks.forEach((_, i) => { patch.cards[`${l.id}#${i}`] = { b: 1, due: addDays(today(), 1) }; }); }
     const u = packFor(l.tree, l.band).units.find(x => x.n === l.unit), unitDone = pass && u.lessons.every(x => x === l || passed(kid, x.id));
     if (unitDone && !(g.mile || {})[l.tree]) patch.mile = { [l.tree]: today() };
     Object.assign(out, { pass, stars, first: pass && !was, unitDone, home: l.home, lesson: l, could: was ? XP.replay : XP.lesson, game: playRes ? playScore : null });
@@ -51,7 +52,7 @@ function finish() {
     if (g.story !== weekKey()) add('This week in the market', XP.story); patch.story = weekKey();
   } else if (R.mode === 'case') {
     if (!(g.cases || {})[R.cs.id]) add('Real story read', XP.caseStudy); patch.cases = { [R.cs.id]: today() };
-  }
+  } else if (R.lang) langFinish(kid, R, out, add, patch, right, total);
   const lvl0 = charLevel(kid), titles0 = titles(kid).length, given = Math.max(0, Math.min(xp, XP.dayCap - day.xp));
   if (given < xp) rows.push(['Over today’s XP limit', given - xp]);
   // A first pass keeps what it earned, for the lesson's leaf on the plant
@@ -60,6 +61,7 @@ function finish() {
   patch.log = [...(g.log || []).slice(-59), { id: itemId, kind: R.mode, c: out.right, t: out.total, ...(out.points ? { p: 1 } : {}), xp: given, at: Date.now(), ms }];
   award(kid, xp, patch);
   if (out.first || out.crown) out.prize = Prize.onPass(kid, out.first ? l.id : null);
+  if (out.first && l.lang) langPassed(kid, l);
   Object.assign(out, { xp: given, rows, capped: given < xp, lvlUp: charLevel(kid) > lvl0 ? charLevel(kid) : 0, newTitle: titles(kid).length > titles0 ? titles(kid).slice(-1)[0] : '' });
   const [tree, band, unit] = String(itemId).split('.');
   C.track('growth.attempt', { kind: R.mode, id: itemId, tree: l ? l.tree : R.tree || null, band: l ? l.band : bandOf(kid), unit: l ? String(l.unit) : R.mode === 'challenge' ? unit : null, correct: out.right, total: out.total, xp: given, ms, answers: answers.map(a => ({ q: a.q, ok: a.ok, skill: a.skill })) }, kid.id);
@@ -82,13 +84,13 @@ const signed = n => (n < 0 ? '−' : '+') + Math.abs(Math.round(n)).toLocaleStri
 function viewDone(kid) {
   const o = Grow.last, isScored = 'pass' in o, fin = !!o.tally, rows = o.rows || [];
   if (!fin) o.tally = { fast: false, done: false };
-  const head = isScored ? (o.pass ? (o.stars === 3 ? 'Perfect!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!' }[o.mode] || 'Done!';
+  const head = isScored ? (o.pass ? (o.stars === 3 ? 'Perfect!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!', lpart: 'Part 1 done!', lreview: 'Words practised!', lstory: 'Story done!', lplace: 'All set!' }[o.mode] || 'Done!';
   // Kids are told exactly what moving on takes, and whether it's open now
   const need = passNeed(o.total), opened = o.first && o.lesson && nextIn(kid, o.lesson.tree);
   const unit = o.points ? 'points' : 'right';
   const sub = !isScored ? '' : !o.pass ? `You ${o.points ? 'scored' : 'got'} ${o.right} of ${o.total}${o.points ? ' points' : ''}. To ${o.mode === 'challenge' ? 'win the crown' : 'open the next lesson'}, you need ${need} of ${o.total} ${unit} (that’s 80% or more).${o.points ? ' Every answer counts: each question is 1 point and the game 3.' : ''} Tap Try again: practice is how brains grow!${o.could ? ` Passing earns ${o.could} XP.` : ''}`
     : o.stars === 2 && (o.points ? o.allRight : o.acc === 1) && o.game != null ? 'Every answer right! Score 80% in the game for the third star.' : opened ? 'New skill mastered! The next lesson is open.' : o.first ? 'New skill mastered!' : '';
-  const bal = C.xpOf ? C.xpOf(kid).left : 0, day = dayInfo(kid), nx = suggestions(kid, 1)[0];
+  const bal = C.xpOf ? C.xpOf(kid).left : 0, day = dayInfo(kid), nx = o.lesson && o.lesson.lang ? nextIn(kid, o.lesson.tree) : suggestions(kid, 1)[0], sub2 = o.part1 ? 'Part 2 has the rest of the words and the questions.' : o.placedFrom ? `You start at unit ${o.placedFrom}. The units before it are counted as learned, and their words come back in your practice.` : '';
   say(isScored && !o.pass ? `So close! You need ${need} of ${o.total} ${unit}. Tap Try again.` : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : opened ? 'Great work! The next lesson is open.' : 'Great work!');
   if (PlantView.ok && Grow.run) plantFor(kid, Grow.run, Grow.run.steps[Grow.run.k], o.first ? o.lesson.id : null);
   else if (Grow.stage) Grow.stage.show('done', { stars: isScored ? o.stars : 3, pass: o.pass !== false, quiet: true });
@@ -101,16 +103,16 @@ function viewDone(kid) {
     ${rows.length ? `<div class="res-rows">${rows.map(([lb, v], i) => `<div class="res-row ${fin ? 'done' : ''} ${v < 0 ? 'minus' : ''}" data-row="${i}"><span>${esc(lb)}</span><b class="num">${fin ? signed(v) : '+0'}</b></div>`).join('')}</div>` : ''}
     </div>
     <div class="res-end" data-end ${fin ? '' : 'hidden'}>
-    ${sub ? `<p class="gw-p">${sub}</p>` : ''}
+    ${sub || sub2 ? `<p class="gw-p">${sub || sub2}</p>` : ''}
     <div class="res-pay"><span>XP to spend on your island</span><b class="num">${bal.toLocaleString()}</b><small>${o.capped ? 'You reached today’s XP limit. Learning still counts!' : `${day.xp} of ${XP.dayCap} XP from learning today`}</small></div>
     ${o.lvlUp ? `<div class="gw-banner lvl">⬆️ Level ${o.lvlUp}!</div>` : ''}
     ${prizeBanner(o, kid)}
-    ${o.unitDone ? `<div class="gw-banner unit">🏆 Unit complete! A ring grows on your plant, and the unit challenge is open.</div>` : ''}
-    ${o.first && o.lesson && treeStats(kid, o.lesson.tree).done === treeStats(kid, o.lesson.tree).total ? `<div class="gw-banner title">🌸 Every lesson done! Go back to your plant to watch it bloom.</div>` : ''}
+    ${o.unitDone ? `<div class="gw-banner unit">🏆 Unit complete! ${o.lesson && o.lesson.lang ? 'The unit story and challenge are open.' : 'A ring grows on your plant, and the unit challenge is open.'}</div>` : ''}
+    ${o.first && o.lesson && !o.lesson.lang && treeStats(kid, o.lesson.tree).done === treeStats(kid, o.lesson.tree).total ? `<div class="gw-banner title">🌸 Every lesson done! Go back to your plant to watch it bloom.</div>` : ''}
     ${o.newTitle ? `<div class="gw-banner title">🎖️ New title: ${esc(o.newTitle)}</div>` : ''}
     ${o.home && o.pass ? `<div class="gw-homecard"><b>Take it home</b><p>${esc(local(o.home))}</p><button class="g-go ghost" data-g="homeDone">I’ll try it</button></div>` : ''}
-    <div class="gw-actions">${isScored && !o.pass ? `<button class="g-go" data-g="retry">Try again</button>` : nx && o.mode === 'lesson' ? `<button class="g-go" data-g="lesson" data-id="${nx.id}">Next: ${esc(local(nx.title))}</button>` : ''}
-      <button class="g-go ghost" data-g="${Grow.tree ? 'toTree' : 'toHub'}">${Grow.tree ? `Back to ${esc(TREE[Grow.tree].name)}` : 'Back to my skill trees'}</button></div></div></div>`;
+    <div class="gw-actions">${isScored && !o.pass ? `<button class="g-go" data-g="retry">Try again</button>` : o.part1 ? `<button class="g-go" data-g="lesson" data-id="${o.lesson.id}">Part 2 now</button>` : nx && (o.mode === 'lesson' || o.mode === 'lpart') ? `<button class="g-go" data-g="lesson" data-id="${nx.id}">Next: ${esc(local(nx.title))}</button>` : ''}
+      <button class="g-go ghost" data-g="${Grow.tree ? 'toTree' : 'toHub'}">${Grow.tree ? `Back to ${esc(subject(Grow.tree).name)}` : 'Back to my skill trees'}</button></div></div></div>`;
   if (fin) o.tally.done = true; else runTally(o, ui.querySelector('.gw-done'), head);
 }
 async function runTally(o, el, head) {
@@ -228,8 +230,9 @@ function onClick(e) {
     case 'tallySkip': if (Grow.last && Grow.last.tally) Grow.last.tally.fast = true; return;
     case 'retry': { const o = Grow.last; if (o.lesson) startLesson(kid, o.lesson); else if (o.unit) startChallenge(kid, o.unit.id); return; }
     case 'homeDone': a.disabled = true; a.textContent = 'Great! We’ll ask how it went.'; onEvent(kid, 'home', { title: local(Grow.last.lesson.title), skill: Grow.last.lesson.skill }); return;
-    case 'toTree': Grow.view = 'tree'; Grow.run = null; return render();
+    case 'toTree': Grow.view = isLang(Grow.tree) ? 'lang' : 'tree'; Grow.run = null; return render();
     case 'toHub': Grow.view = 'hub'; Grow.tree = null; Grow.run = null; return render();
+    default: if (LANG_CLICK[g]) return LANG_CLICK[g](kid, id, a);
   }
 }
 
@@ -283,7 +286,7 @@ C.ACT.gMoment = a => { open(a.dataset.id, {}).then(() => { const k = Store.kids[
 
 window.Growth = {
   card, momentCard, treeDoor, hasLesson, onEvent, open, close, waiting, nextLesson,
-  trees: { all: ALL_TREES, live: LIVE },
+  trees: { all: ALL_TREES, live: LIVE, langs: { all: LANGS, live: LANG_LIVE } },
   // A subject's size for this kid's age band, and whether they've passed all of unit 1 (for the grown-ups' "finished
   // unit 1" card). Null until the subject's lessons have loaded.
   unitInfo: (kid, tree) => {
@@ -297,5 +300,5 @@ window.Growth = {
   mastered: kid => mastered(kid),
   parentView: () => parentView(), resetParent: () => { if (Grow.parent) Grow.parent.msg = ''; },
   ready: () => C.scheduleRender(),
-  _debug: { Packs, TREES, parsePack, parseMoments, parseCases, loadBand, loadExtras, allLessons, lessonById, get Moments() { return Moments; }, get Cases() { return Cases; } },
+  _debug: { Packs, TREES, LANGS, LANG_LIVE, get lang() { return { langSteps, lcNew, lcAnswer, lcCards, lcDue, cardItem: cardItem2, Dict, LBOX }; }, get run() { return Grow.run; }, get view() { return Grow.view; }, parsePack, parseMoments, parseCases, loadBand, loadExtras, allLessons, lessonById, get Moments() { return Moments; }, get Cases() { return Cases; } },
 };

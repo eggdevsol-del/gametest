@@ -1,6 +1,7 @@
 // Checks every Character Growth content pack with the app's own parser, so a typo in a lesson file is caught
 // before kids see a broken question. Run after editing chorecast-growth/content: node scripts/check-growth.mjs
-// Each band has the units and lessons per unit SHAPE gives for its tree (see CONTENT.md).
+// Each band has the units and lessons per unit SHAPE gives for its tree (see CONTENT.md). Each stage of a language
+// course has 10 units of 8 lessons, and its words follow the rules in langProblems below.
 import { readFile, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
@@ -13,7 +14,8 @@ const el = () => ({ style: { setProperty() {} }, setAttribute() {}, appendChild(
 const C = { Store: { kids: {}, growth: {}, ready: false }, UI: {}, Sound: {}, FX: {}, ACT: {}, ic: () => '', esc: s => s, fmt: c => `$${(c / 100).toFixed(2)}`, $: () => null, $$: () => [], uid: () => 'x', hash: () => 1, mulberry: () => Math.random, shuffle: a => a, clamp: (v, a, b) => Math.max(a, Math.min(b, v)), sleep: () => Promise.resolve(), reduced: true, dkey: () => '2026-10-30', addDays: d => d, S: () => ({}), G3: {} };
 const ctx = { window: { Chorecast: C }, document: { createElement: el, head: el(), body: el(), addEventListener() {} }, console, setTimeout, Math, Date, JSON };
 ctx.window.window = ctx.window; vm.createContext(ctx); vm.runInContext(code, ctx);
-const { parsePack, parseMoments, parseCases } = ctx.window.Growth._debug;
+const { parsePack, parseMoments, parseCases, LANGS, LANG_LIVE } = ctx.window.Growth._debug;
+const LANG = Object.fromEntries(LANGS.map(L => [L.id, L]));
 
 // Units and lessons per band, per tree: Money Sense is in full, a newer tree starts at 4 x 4
 const SHAPE = { money: [8, 6] }, SHAPE_NEW = [4, 4];
@@ -41,20 +43,90 @@ function checkItem(it, where) {
     case 'chat': if (!it.turns.some(t => t.me)) bad('no replies to choose'); it.turns.filter(t => t.me).forEach(t => { if (!t.me.some(o => o.ok)) bad('a reply set has no option marked *'); }); break;
     case 'mystery': if (it.clues.length < 2 || !it.opts.some(o => o.ok)) bad('needs 2+ clues and a right answer'); break;
     case 'gen': if (!GENS.includes(it.kind)) bad(`unknown generator "${it.kind}"`); break;
+    case 'hear': case 'pair': if (it.opts.length < 2) bad('needs 2+ options'); if (it.opts.filter(o => o.ok).length !== 1) bad('needs exactly one option marked *'); if (!/«[^»]+»/.test(it.q) && it.type === 'hear') bad('nothing in «» to hear'); break;
+    case 'say': if (!it.q) bad('nothing to say'); break;
+    case 'type': case 'tiles': if (!it.a) bad('no answer'); break;
+    case 'trace': if (!/«[^»]+»/.test(it.q)) bad('nothing in «» to trace'); break;
     default: bad('unknown item type');
   }
 }
 
 const dir = path.join(root, 'public', 'chorecast', 'growth');
 let lessons = 0, items = 0;
+const index = JSON.parse(await readFile(path.join(dir, 'index.json'), 'utf8'));
+if (index.preview && !process.env.GROWTH_PREVIEW_OK) problems.push('index.json: this is a preview build with parked language courses in it. Run node scripts/build-growth.mjs (without --preview) before committing.');
+
+/* Language courses, stage by stage in order, so "known" builds up the way a kid meets the words:
+   - every lesson has 1 to 8 new words, each with a picture, and a rule only where it has a pattern to show
+   - every «word» in a question is taught by the end of its lesson's teaching (its words, phrases, learn and rule lines)
+   - a unit's story uses known words, with no more than 1 new word in 20
+   - each word is spelled one way (macrons and accents), except the pairs a course lists on its @pairs line
+   - a live language with no device voice has a recording of every line (growth/audio/<lang>.json, from the server) */
+const LSHAPE = [10, 8], WORDS_MAX = 8, STORY_NEW = 0.05;
+const CJK = lang => lang === 'zh' || lang === 'ja';
+const quoted = o => [...JSON.stringify(o).matchAll(/«([^»]+)»/g)].map(m => m[1]);
+function tokens(s, lang, known) {
+  const t = String(s).normalize('NFC').toLowerCase();
+  if (!CJK(lang)) return t.split(/[^\p{L}\p{M}'’-]+/u).map(w => w.replace(/^['’-]+|['’-]+$/g, '')).filter(Boolean);
+  const out = []; let i = 0; const chars = [...t];
+  while (i < chars.length) {
+    if (!/[\p{L}\p{M}]/u.test(chars[i])) { i++; continue; }
+    let n = Math.min(8, chars.length - i); while (n > 1 && !known.has(chars.slice(i, i + n).join(''))) n--;
+    out.push(chars.slice(i, i + n).join('')); i += n;
+  }
+  return out;
+}
+const plain = w => w.normalize('NFD').replace(/\p{M}/gu, '');
+function langProblems(lang, packs) {
+  const known = new Set(), spell = {}, P = [], allow = new Set((packs[0] && packs[0].pairs || []).flatMap(x => x.split('/').map(w => w.trim().toLowerCase())));
+  const learnFrom = (texts, w) => texts.forEach(s => tokens(s, lang, known).forEach(t => { known.add(t); if (!CJK(lang)) (spell[plain(t)] || (spell[plain(t)] = new Set())).add(t); }));
+  for (const pack of packs) for (const u of pack.units) {
+    for (const l of u.lessons) {
+      const w = `${l.id} "${l.title}"`;
+      if (!l.words.length || l.words.length > WORDS_MAX) P.push(`${w}: has ${l.words.length} new words (1 to ${WORDS_MAX})`);
+      l.words.forEach(x => { if (!x.pic) P.push(`${w}: word "${x.t}" has no picture`); if (!x.en) P.push(`${w}: word "${x.t}" has no meaning`); if (CJK(lang) && !x.rd) P.push(`${w}: word "${x.t}" has no reading`); });
+      if (CJK(lang)) l.says.forEach(x => { if (!x.rd) P.push(`${w}: phrase "${x.t}" has no reading`); });
+      l.says.forEach(x => { if (!x.en) P.push(`${w}: phrase "${x.t}" has no meaning`); });
+      if (l.checks.some(it => it.type === 'say')) P.push(`${w}: a say question can't be marked, so it can't be a check`);
+      const by = Object.values(l.by || {});
+      learnFrom([...l.words.map(x => x.t), ...l.says.map(x => x.t), ...l.chant, ...[l.hook, ...l.learn, ...l.rules, ...l.tries.map(t => t.ex), ...by.flatMap(b => [...(b.learn || []), ...(b.rule || []), b.hook || ''])].flatMap(s => quoted(s))]);
+      for (const it of [l.guess, l.play, ...l.tries.map(t => t.item), ...l.checks].filter(Boolean)) {
+        const texts = [...quoted(it), ...(it.type === 'type' || it.type === 'tiles' ? [it.a] : [])];
+        const nw = [...new Set(texts.flatMap(s => tokens(s, lang, known)).filter(t => !known.has(t)))];
+        if (nw.length && it !== l.guess) P.push(`${w}: ${it.type} uses words not taught yet: ${nw.join(', ')}`);
+      }
+    }
+    if (u.story) {
+      const st = u.story, tk = [...st.lines.map(x => x.t), ...st.checks.flatMap(quoted)].flatMap(s => tokens(s, lang, known)), nw = tk.filter(t => !known.has(t));
+      if (!st.lines.length) P.push(`${st.id}: story has no lines`); if (st.checks.length < 2) P.push(`${st.id}: story has fewer than 2 checks`);
+      st.lines.forEach(x => { if (!x.en) P.push(`${st.id}: line "${x.t}" has no meaning`); });
+      if (tk.length && nw.length / tk.length > STORY_NEW) P.push(`${st.id}: ${nw.length} of ${tk.length} words are new (${[...new Set(nw)].join(', ')}); keep it under 1 in 20`);
+      st.checks.forEach(it => { items++; checkItem(it, st.id); });
+    }
+  }
+  for (const [k, set] of Object.entries(spell)) if (set.size > 1 && ![...set].every(x => allow.has(x))) P.push(`${lang}: "${k}" is spelled more than one way: ${[...set].join(', ')} (add a real pair to @pairs)`);
+  return P;
+}
+const langPacks = {};
+
 for (const f of (await readdir(dir)).filter(f => /^\w+\.\w+\.txt$/.test(f))) {
-  const [tree, band] = f.split('.'), pack = parsePack(await readFile(path.join(dir, f), 'utf8'), tree, band), [UNITS, PER_UNIT] = SHAPE[tree] || SHAPE_NEW;
+  const [tree, band] = f.split('.'), pack = parsePack(await readFile(path.join(dir, f), 'utf8'), tree, band), [UNITS, PER_UNIT] = LANG[tree] ? LSHAPE : SHAPE[tree] || SHAPE_NEW;
+  if (LANG[tree]) (langPacks[tree] || (langPacks[tree] = [])).push(pack);
   if (pack.units.length !== UNITS) problems.push(`${f}: has ${pack.units.length} units, expected ${UNITS}`);
   pack.units.forEach(u => { if (u.lessons.length !== PER_UNIT) problems.push(`${f}: unit ${u.n} has ${u.lessons.length} lessons, expected ${PER_UNIT}`); });
   for (const u of pack.units) for (const l of u.lessons) {
     lessons++; const w = `${l.id} "${l.title}"`;
-    if (!l.play) problems.push(`${w}: no play`); if (l.checks.length < 2) problems.push(`${w}: fewer than 2 checks`); if (!l.skill) problems.push(`${w}: no skill`); if (!l.hook) problems.push(`${w}: no hook`); if (!l.learn.length) problems.push(`${w}: no learn`);
+    if (!l.play) problems.push(`${w}: no play`); if (l.checks.length < 2) problems.push(`${w}: fewer than 2 checks`); if (!l.skill) problems.push(`${w}: no skill`); if (!l.hook) problems.push(`${w}: no hook`); if (!l.learn.length && !l.words) problems.push(`${w}: no learn`);
     for (const it of [l.guess, l.play, ...l.tries.map(t => t.item), ...l.checks].filter(Boolean)) { items++; checkItem(it, w); }
+  }
+}
+for (const [lang, packs] of Object.entries(langPacks)) {
+  packs.sort((a, b) => +a.band.slice(1) - +b.band.slice(1));
+  problems.push(...langProblems(lang, packs));
+  if (!LANG[lang].voices && LANG_LIVE.includes(lang) && !index.preview) {
+    const lines = JSON.parse(await readFile(path.join(dir, `${lang}.lines.json`), 'utf8')), file = path.join(dir, 'audio', `${lang}.json`);
+    const have = new Set(existsSync(file) ? JSON.parse(await readFile(file, 'utf8')) : []);
+    for (const [s, list] of Object.entries(lines)) { const miss = list.filter(k => !have.has(k)); if (miss.length) problems.push(`${lang} ${s}: ${miss.length} lines have no recording yet (first: "${miss[0]}")`); }
   }
 }
 const read = async f => existsSync(path.join(dir, f)) ? readFile(path.join(dir, f), 'utf8') : '';

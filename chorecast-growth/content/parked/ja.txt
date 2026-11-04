@@ -1,0 +1,1172 @@
+# Japanese · stage 1 (kana and N5, part 1). The course map is ja.map.md.
+# Parked until a fluent speaker has read it. Hiragana with spaces between words, as in early readers; each word and
+# phrase carries its rōmaji. Tiles answers put a space between tiles.
+@lang ja
+
+@stage 1
+
+@unit 1 | こんにちは | Greet, thank and say goodbye
+@unit 2 | なまえ | Say who I am and introduce others
+@unit 3 | げんき？ | Say how I feel
+@unit 4 | かず | Count, say my age and talk about money
+@unit 5 | いろ | Colours on my island
+@unit 6 | どうぶつ | Animals, and where things are
+@unit 7 | かぞく | Talk about my family
+@unit 8 | たべもの | Ask for food and buy at the farm stand
+@unit 9 | ようび | Days, weather, pocket money and saving
+@unit 10 | おてつだい | Jobs at home and following instructions
+
+@lesson 1.1 | こんにちは | 👋 | home
+hook: Japanese has its own letters. Let’s meet a few, and say hello.
+word: こんにちは | hello | 👋 | wave | konnichiwa
+word: ゆき | Yuki (a girl’s name) | 👧 | wave to her | Yuki
+word: けん | Ken (a boy’s name) | 👦 | wave to him | Ken
+say: «こんにちは、ゆきさん！» | Hello, Yuki! | Konnichiwa, Yuki-san!
+learn: These letters are hiragana. «こんにちは» is ko-n-ni-chi-wa. The last letter, «は», is said “wa” here.
+try: trace | «こ» | ko
+play: hear | Which one is «こんにちは»? | 👋* | 🌙 | 🍎
+check: hear | What does «こんにちは» mean? | hello* | good night | thank you
+check: mcq | Ken says «こんにちは、ゆきさん！» What is he doing? | Saying hello to Yuki* | Saying goodbye | Saying thank you
+home: Say «こんにちは» to everyone at home today.
+skill: ja-greet
+
+@lesson 1.2 | おはよう | 🌅 | home
+hook: Good morning, good evening and good night.
+word: おはよう | good morning | 🌅 | stretch your arms up | ohayō
+word: こんばんは | good evening | 🌆 | look at the sunset | konbanwa
+word: おやすみ | good night | 🌙 | rest your head on your hands | oyasumi
+learn: To a grown-up, say «おはようございます». It’s the polite way.
+try: trace | «お» | o
+play: match | Match them | «おはよう»=good morning; «こんばんは»=good evening; «おやすみ»=good night
+check: mcq | It’s breakfast time. You say… | «おはよう！»* | «おやすみ！» | «こんばんは！»
+check: hear | Which one is «おやすみ»? | 🌙* | 🌅 | 🌆
+home: Say «おはよう» at breakfast and «おやすみ» at bedtime.
+skill: ja-greet
+
+@lesson 1.3 | またね | 🚶 | home
+hook: Goodbye, see you, and see you tomorrow.
+word: さようなら | goodbye | 🚶 | wave as you walk away | sayōnara
+word: またね | see you | 👀 | point to your eyes | mata ne
+word: またあした | see you tomorrow | 📅 | point forward | mata ashita
+learn: Friends say «またね». «さようなら» is for a longer goodbye, or for your teacher at the end of the day.
+try: trace | «ま» | ma
+play: hear | Which one is «またあした»? | 📅* | 👀 | 🚶
+check: mcq | You’ll see your friend tomorrow. You say… | «またあした！»* | «おはよう！» | «こんにちは！»
+check: tiles | Build it: see you tomorrow | また あした
+home: Say «またね» when you leave a friend’s place.
+skill: ja-farewell
+
+@lesson 1.4 | ありがとう | 🙏 | home
+hook: Good manners work in every language.
+word: ありがとう | thank you | 🙏 | bow your head a little | arigatō
+word: どういたしまして | you’re welcome | 😊 | smile | dō itashimashite
+word: おねがいします | please | 🥺 | put your hands together | onegai shimasu
+learn: To a grown-up, say «ありがとうございます». Japanese often bows a little when saying thank you.
+try: trace | «あ» | a
+play: match | Match them | «ありがとう»=thank you; «どういたしまして»=you’re welcome; «おねがいします»=please
+check: mcq | Someone says «ありがとう». A kind answer is… | «どういたしまして。»* | «さようなら。» | «こんにちは。»
+check: hear | What does «おねがいします» mean? | please* | thank you | goodbye
+home: Say «ありがとう» at dinner when someone passes you food.
+skill: ja-manners
+
+@lesson 1.5 | はい、いいえ | 👍 | home
+hook: Yes, no and “that’s right”.
+word: はい | yes | 👍 | nod your head | hai
+word: いいえ | no | 👎 | shake your head | iie
+word: そうです | that’s right | 👌 | make an OK sign | sō desu
+learn: In «はい», the letter «は» is said “ha”. It’s only “wa” when it comes after a word, like in «こんにちは».
+try: trace | «は» | ha
+play: hear | Which one is «いいえ»? | 👎* | 👍 | 👌
+check: hear | What does «はい» mean? | yes* | no | please
+check: mcq | Are you Yuki? You are! You say… | «はい、そうです。»* | «いいえ。» | «またね。»
+home: Answer your family with «はい» and «いいえ» at dinner.
+skill: ja-answer
+
+@lesson 1.6 | ごめんなさい | 🙇 | home
+hook: Saying sorry, and checking someone is OK.
+word: ごめんなさい | sorry | 🙇 | bow your head | gomen nasai
+word: だいじょうぶ | it’s OK, are you OK? | 😌 | shrug and smile | daijōbu
+say: «だいじょうぶ？» | Are you OK? | Daijōbu?
+learn: When someone says «ごめんなさい», a kind answer is «だいじょうぶ».
+try: trace | «め» | me
+play: match | Match them | «ごめんなさい»=sorry; «だいじょうぶ»=it’s OK; «ありがとう»=thank you
+check: mcq | You bump into someone. You say… | «ごめんなさい！»* | «こんにちは！» | «またあした！»
+check: mcq | Your friend falls over. You ask… | «だいじょうぶ？»* | «おはよう？» | «そうです？»
+home: Use «ごめんなさい» and «だいじょうぶ» with your family this week.
+skill: ja-manners
+
+@lesson 1.7 | せんせい | 🧑‍🏫 | home
+hook: Greeting your teacher, and everyone at once.
+word: せんせい | teacher | 🧑‍🏫 | pretend to write on a board | sensei
+word: みなさん | everyone | 🙌 | open your arms wide | minasan
+say: «せんせい、おはようございます！» | Good morning, teacher! | Sensei, ohayō gozaimasu!
+say: «みなさん、こんにちは！» | Hello, everyone! | Minasan, konnichiwa!
+learn: In Japan, a class stands and bows to greet their teacher.
+try: trace | «せ» | se
+play: hear | Which one is «みなさん»? | 🙌* | 🧑‍🏫 | 👋
+check: mcq | You greet your whole class. You say… | «みなさん、こんにちは！»* | «せんせい、おやすみ！» | «ごめんなさい！»
+check: hear | What does «せんせい» mean? | teacher* | friend | everyone
+home: Greet your whole family at once with «みなさん、こんにちは！»
+skill: ja-greet
+
+@lesson 1.8 | ともだち | 🤝 | home
+hook: Friends!
+word: ともだち | friend | 🤝 | shake hands | tomodachi
+word: わたしたち | we, us | 👫 | point to yourself and a friend | watashitachi
+say: «わたしたちは ともだちです。» | We’re friends. | Watashitachi wa tomodachi desu.
+rule: «は» after a word is said “wa”. It means “as for”: «わたしたちは» is “as for us”.
+try: trace | «と» | to
+play: tiles | Build it: We’re friends. | わたしたちは ともだちです
+check: hear | What does «ともだち» mean? | friend* | teacher | family
+check: mcq | «わたしたちは ともだちです» means… | We’re friends.* | Hi, friend. | See you tomorrow.
+home: Tell a friend «わたしたちは ともだち！»
+skill: ja-greet
+
+@story 1 | おはよう！
+line: けん | «おはよう、ゆき！» | Morning, Yuki! | Ohayō, Yuki!
+line: ゆき | «おはよう、けん！» | Morning, Ken! | Ohayō, Ken!
+line: けん | «せんせい、おはようございます！» | Good morning, teacher! | Sensei, ohayō gozaimasu!
+line: ゆき | «ありがとう、けん！» | Thanks, Ken! | Arigatō, Ken!
+line: けん | «どういたしまして。またあした！» | You’re welcome. See you tomorrow! | Dō itashimashite. Mata ashita!
+line: ゆき | «またね！» | See you! | Mata ne!
+check: mcq | Who do they greet in class? | the teacher* | a dog | their mum
+check: mcq | When will they see each other again? | tomorrow* | tonight | next year
+
+@lesson 2.1 | わたしは ゆきです | 🏷️ | stage
+hook: How do you tell someone your name?
+word: わたし | I, me | 🙋 | point to yourself | watashi
+word: なまえ | name | 🏷️ | point to a name tag | namae
+word: です | is, am | 🟰 | point at someone | desu
+say: «わたしは ゆきです。» | I’m Yuki. | Watashi wa Yuki desu.
+say: «おなまえは？» | What’s your name? | O-namae wa?
+learn: «お» in front of «なまえ» makes it polite: «おなまえ» is “your (honourable) name”.
+try: trace | «な» | na
+play: tiles | Build it: I’m Ken. | わたしは けんです
+check: mcq | How do you ask someone’s name? | «おなまえは？»* | «わたしは ゆきです。» | «こんにちは！»
+check: hear | What does «わたしは けんです» mean? | I’m Ken.* | Hi, Ken. | Goodbye, Ken.
+home: Tell your family «わたしは … です» with your own name.
+skill: ja-intro
+
+@lesson 2.2 | さん、くん、ちゃん | 🙂 | stage
+hook: In Japanese, you add a little word after someone’s name.
+word: さん | (polite, after a name) | 🙂 | a small bow | san
+word: くん | (after a boy’s name) | 👦🏻 | wave to a boy | kun
+word: ちゃん | (after a little kid’s or a close friend’s name) | 👧🏻 | wave to a little kid | chan
+rule: Add «さん» after someone else’s name to be polite, but never after your own.
+say: «けんくん、こんにちは！» | Hi, Ken! | Ken-kun, konnichiwa!
+try: trace | «さ» | sa
+play: match | Match them | «さん»=polite, for anyone; «くん»=for a boy; «ちゃん»=for a little kid
+check: mcq | You say hello to your teacher, Mrs Mori. You say… | «もりさん、こんにちは！»* | «もりちゃん、こんにちは！» | «わたしは もりさん！»
+check: tf | You say «さん» after your own name. | false | «さん» is only for other people’s names.
+home: Say hello to someone at home with «さん» after their name.
+skill: ja-intro
+
+@lesson 2.3 | だれですか？ | 🧐 | stage
+hook: Who is it? And how to introduce someone.
+word: だれ | who | 🧐 | look closely | dare
+word: こちら | this person | 👇 | point politely with an open hand | kochira
+say: «こちらは けんくんです。» | This is Ken. | Kochira wa Ken-kun desu.
+say: «だれですか？» | Who is it? | Dare desu ka?
+rule: «か» at the end turns a sentence into a question: «だれですか？» is “who is it?”.
+try: trace | «か» | ka
+try: trace | «け» | ke
+play: tiles | Build it: This is Yuki. | こちらは ゆきさんです
+check: mcq | «だれですか？» asks… | who it is* | how they are | where they’re from
+check: mcq | You introduce your friend Ken. You say… | «こちらは けんくんです。»* | «わたしは けんです。» | «けんくんは だれ？»
+home: Introduce someone at home: «こちらは … です。»
+skill: ja-intro
+
+@lesson 2.4 | どこから？ | 🗺️ | stage
+hook: Where are you from?
+word: にほん | Japan | 🗾 | point north | Nihon
+word: ニュージーランド | New Zealand | 🥝 | point south-east | Nyūjīrando
+word: オーストラリア | Australia | 🦘 | hop | Ōsutoraria
+say: «どこから きましたか？» | Where are you from? (Where did you come from?) | Doko kara kimashita ka?
+say: «ニュージーランドから きました。» | I’m from New Zealand. | Nyūjīrando kara kimashita.
+learn: Other countries’ names are written in katakana, Japanese’s second set of letters: «ニュージーランド».
+try: trace | «に» | ni
+play: match | Match them | «にほん»=Japan; «ニュージーランド»=New Zealand; «オーストラリア»=Australia
+check: mcq | «オーストラリアから きました» means… | I’m from Australia.* | I’m going to Australia. | I like Australia.
+check: tiles | Build it: I’m from New Zealand. | ニュージーランドから きました
+home: Find Japan on a map with a grown-up.
+skill: ja-place
+
+@lesson 2.5 | おとこのこ、おんなのこ | 🧒 | stage
+hook: Boys and girls.
+word: おとこのこ | boy | 👦 | point to a boy in a picture | otoko no ko
+word: おんなのこ | girl | 👧 | point to a girl in a picture | onna no ko
+say: «けんくんは おとこのこです。» | Ken is a boy. | Ken-kun wa otoko no ko desu.
+say: «ゆきさんは おんなのこです。» | Yuki is a girl. | Yuki-san wa onna no ko desu.
+try: trace | «の» | no
+play: hear | Which one is «おんなのこ»? | 👧* | 👦 | 👋
+check: hear | What does «おとこのこ» mean? | boy* | girl | friend
+check: tiles | Build it: Yuki is a girl. | ゆきさんは おんなのこです
+home: Find a boy and a girl in a book and say «おとこのこ», «おんなのこ».
+skill: ja-people
+
+@lesson 2.6 | がっこう | 🏫 | stage
+hook: School and students.
+word: がっこう | school | 🏫 | point to your school bag | gakkō
+word: せいと | student | 🎒 | put on a backpack | seito
+say: «わたしは せいとです。» | I’m a student. | Watashi wa seito desu.
+learn: You know «せんせい» (teacher) already! The small «っ» in «がっこう» makes a tiny pause: gak-kō.
+try: trace | «い» | i
+play: match | Match them | «がっこう»=school; «せんせい»=teacher; «せいと»=student
+check: hear | What does «がっこう» mean? | school* | teacher | friend
+check: mcq | «わたしは せいとです» means… | I’m a student.* | I’m a teacher. | I’m at school.
+home: Tell someone «わたしは せいとです».
+skill: ja-people
+
+@lesson 2.7 | しんゆう | ⭐ | stage
+hook: Who is your best friend?
+word: しんゆう | best friend | 🫂 | hug yourself | shin’yū
+say: «けんくんは わたしの しんゆうです。» | Ken is my best friend. | Ken-kun wa watashi no shin’yū desu.
+learn: «の» shows whose: «わたしの» is my.
+try: trace | «し» | shi
+play: tiles | Build it: Yuki is my best friend. | ゆきさんは わたしの しんゆうです
+check: mcq | «わたしの しんゆう» means… | my best friend* | my teacher | my name
+check: hear | What does «しんゆう» mean? | best friend* | teacher | girl
+home: Tell someone who your «しんゆう» is.
+skill: ja-intro
+
+@lesson 2.8 | はじめまして | 😊 | stage
+hook: Meeting someone for the first time.
+word: はじめまして | nice to meet you (the first time) | 🤝 | shake hands | hajimemashite
+word: よろしく | nice to meet you, please be kind to me | 😊 | a small bow | yoroshiku
+say: «はじめまして。ゆきです。よろしく おねがいします。» | Nice to meet you. I’m Yuki. Please be kind to me. | Hajimemashite. Yuki desu. Yoroshiku onegai shimasu.
+learn: People in Japan often meet with a small bow and «よろしく おねがいします».
+try: trace | «よ» | yo
+play: match | Match them | «はじめまして»=nice to meet you; «よろしく»=please be kind to me; «こんにちは»=hello
+check: mcq | You meet a new classmate. You start with… | «はじめまして。»* | «さようなら。» | «ごめんなさい。»
+check: hear | What does «はじめまして» mean? | Nice to meet you.* | Thank you very much. | See you tomorrow.
+home: Practise a meeting with a bow: «はじめまして。…です。»
+skill: ja-intro
+
+@story 2 | はじめまして
+line: けん | «はじめまして！ おなまえは？» | Nice to meet you! What’s your name? | Hajimemashite! O-namae wa?
+line: ゆき | «ゆきです。どこから きましたか？» | I’m Yuki. Where are you from? | Yuki desu. Doko kara kimashita ka?
+line: けん | «ニュージーランドから きました。ゆきさんは？» | I’m from New Zealand. And you, Yuki? | Nyūjīrando kara kimashita. Yuki-san wa?
+line: ゆき | «にほんから きました。» | I’m from Japan. | Nihon kara kimashita.
+line: ゆき | «こちらは わたしの せんせいです。» | This is my teacher. | Kochira wa watashi no sensei desu.
+line: けん | «はじめまして。よろしく おねがいします！» | Nice to meet you. Please be kind to me! | Hajimemashite. Yoroshiku onegai shimasu!
+check: mcq | Where is Yuki from? | Japan* | New Zealand | Australia
+check: mcq | Who does Yuki introduce? | her teacher* | her mum | her dog
+
+@lesson 3.1 | げんきですか？ | 😊 | garden
+hook: How are you?
+word: げんき | well, full of energy | 😊 | jump on the spot | genki
+word: とても | very | ⭐ | arms out wide | totemo
+say: «げんきですか？» | How are you? (Are you well?) | Genki desu ka?
+say: «とても げんきです。» | I’m very well. | Totemo genki desu.
+try: trace | «て» | te
+play: tiles | Build it: I’m very well. | とても げんきです
+check: mcq | Your friend asks «げんきですか？» You answer… | «はい、げんきです。»* | «さようなら。» | «どういたしまして。»
+check: hear | What does «げんきですか» mean? | How are you?* | Hello! | Who are you?
+home: Ask someone at home «げんき？»
+skill: ja-feel
+
+@lesson 3.2 | うれしい | 😄 | garden
+hook: Happy, sad or tired?
+word: うれしい | happy | 😄 | a big smile | ureshii
+word: かなしい | sad | 😢 | pretend to cry | kanashii
+word: つかれた | tired | 🥱 | a big yawn | tsukareta
+say: «とても うれしい！» | I’m so happy! | Totemo ureshii!
+try: trace | «う» | u
+play: hear | Which one is «かなしい»? | 😢* | 😄 | 🥱
+check: hear | What does «つかれた» mean? | tired* | happy | sad
+check: tiles | Build it: I’m so happy! | とても うれしい
+home: Tell someone how you feel in Japanese.
+skill: ja-feel
+
+@lesson 3.3 | こわい | 😨 | garden
+hook: Some feelings are big ones. Let’s name them.
+word: おこってる | angry | 😠 | stomp your feet | okotteru
+word: こわい | scared | 😨 | hide behind your hands | kowai
+word: たいくつ | bored | 😒 | roll your eyes | taikutsu
+learn: It’s OK to feel «おこってる» or «こわい». Saying how you feel helps people help you.
+try: trace | «わ» | wa
+play: match | Match them | «おこってる»=angry; «こわい»=scared; «たいくつ»=bored
+check: mcq | A loud storm makes you jump. You feel… | «こわい»* | «うれしい» | «たいくつ»
+check: hear | What does «おこってる» mean? | angry* | scared | tired
+home: Show a feeling on your face. Can your family guess it in Japanese?
+skill: ja-feel
+
+@lesson 3.4 | おなかが すいた | 🍽️ | garden
+hook: Hungry, thirsty, cold or hot?
+word: おなかが すいた | I’m hungry (my tummy is empty) | 🍽️ | rub your tummy | onaka ga suita
+word: のどが かわいた | I’m thirsty (my throat is dry) | 🥤 | pretend to drink | nodo ga kawaita
+word: さむい | cold | 🥶 | shiver | samui
+word: あつい | hot | 🥵 | fan your face | atsui
+try: trace | «す» | su
+play: hear | Which one is «さむい»? | 🥶* | 🥵 | 🥤
+check: mcq | You want a drink of water. You say… | «のどが かわいた。»* | «おなかが すいた。» | «あつい。»
+check: hear | What does «あつい» mean? | hot* | cold | hungry
+home: Say «おなかが すいた» before dinner.
+skill: ja-feel
+
+@lesson 3.5 | いたい | 🤕 | garden
+hook: How do you say you’re not well?
+word: いたい | it hurts | 🤕 | hold your knee | itai
+word: びょうき | sick | 🤒 | hold your tummy | byōki
+say: «あしが いたい。» | My leg hurts. | Ashi ga itai.
+say: «びょうきです。» | I’m sick. | Byōki desu.
+try: trace | «た» | ta
+play: match | Match them | «いたい»=it hurts; «びょうき»=sick; «げんき»=well
+check: mcq | You fell and hurt your knee. You say… | «いたい！»* | «うれしい！» | «さむい！»
+check: tf | «げんきです» means “I’m well”. | true
+home: Teach someone how to say “I’m well”: «げんきです».
+skill: ja-feel
+
+@lesson 3.6 | ちょっと | 🤏 | garden
+hook: Very tired, or only a bit?
+word: ちょっと | a bit | 🤏 | pinch your fingers close together | chotto
+say: «ちょっと つかれた。» | I’m a bit tired. | Chotto tsukareta.
+say: «とても つかれた。» | I’m very tired. | Totemo tsukareta.
+rule: Put «ちょっと» (a bit) or «とても» (very) before the feeling.
+try: trace | «ち» | chi
+play: match | Match them | «ちょっと つかれた»=a bit tired; «とても うれしい»=very happy; «とても さむい»=very cold
+check: mcq | You’re only a little tired. You say… | «ちょっと つかれた。»* | «とても つかれた。» | «びょうきです。»
+check: tiles | Build it: very cold | とても さむい
+home: Use «ちょっと» and «とても» to say how you feel at bedtime.
+skill: ja-feel
+
+@lesson 3.7 | だいすき | ❤️ | garden
+hook: Things you love!
+word: だいすき | I love it! | ❤️ | hug yourself | daisuki
+word: きもち | feeling | 💭 | hand on your heart | kimochi
+say: «ねこが だいすき！» | I love cats! | Neko ga daisuki!
+say: «どんな きもち？» | How do you feel? | Donna kimochi?
+try: trace | «き» | ki
+play: hear | Which one is «だいすき»? | ❤️* | 💭 | 😢
+check: mcq | «どんな きもち？» asks… | how you feel* | what you love | where you are
+check: hear | What does «ねこが だいすき» mean? | I love cats!* | I’m scared of cats. | Where is the cat?
+home: Tell your family one thing you «だいすき».
+skill: ja-feel
+
+@lesson 3.8 | すごい！ | 😎 | garden
+hook: Cheering people on in Japanese.
+word: すごい | awesome, amazing | 😎 | two thumbs up | sugoi
+word: きれい | pretty, clean | 🌸 | look amazed | kirei
+word: よくできました | well done | 👏 | clap | yoku dekimashita
+try: trace | «く» | ku
+play: hear | Which one is «きれい»? | 🌸* | 😎 | 👏
+check: mcq | Your sister scores a goal. You shout… | «すごい！»* | «ごめんなさい！» | «おやすみ！»
+check: hear | What does «よくできました» mean? | Well done!* | I’m sorry. | Who are you?
+home: Say «すごい！» when someone at home does something great.
+skill: ja-praise
+
+@story 3 | げんき？
+line: ゆき | «けん、げんき？» | Ken, how are you? | Ken, genki?
+line: けん | «ちょっと つかれた。ゆきは？» | A bit tired. And you, Yuki? | Chotto tsukareta. Yuki wa?
+line: ゆき | «とても うれしい！» | Very happy! | Totemo ureshii!
+line: けん | «おなかが すいた。» | I’m hungry. | Onaka ga suita.
+line: ゆき | «ごめんなさい。» | Sorry. | Gomen nasai.
+line: けん | «だいじょうぶ。またあした！» | It’s OK. See you tomorrow! | Daijōbu. Mata ashita!
+check: mcq | How is Ken? | a bit tired, and hungry* | very happy | angry
+check: mcq | How is Yuki? | very happy* | sad | bored
+
+@lesson 4.1 | いち、に、さん | 1️⃣ | bank
+hook: Let’s count in Japanese!
+word: いち | one | 1️⃣ | hold up one finger | ichi
+word: に | two | 2️⃣ | hold up two fingers | ni
+word: さん | three | 3️⃣ | hold up three fingers | san
+learn: «さん» is three, and also the polite word after a name. Same sound, two jobs!
+chant: «いち»; «に»; «さん»; «いち、に、さん！»
+try: trace | «ん» | n
+play: hear | Which one is «に»? | 2️⃣* | 1️⃣ | 3️⃣
+check: hear | Which one is «さん»? | 3️⃣* | 2️⃣ | 1️⃣
+check: order | Put them in order, starting with one | «いち»; «に»; «さん»
+home: Count three steps in Japanese: «いち、に、さん».
+skill: ja-number
+
+@lesson 4.2 | よん、ご、ろく | 4️⃣ | bank
+hook: Three more numbers.
+word: よん | four | 4️⃣ | hold up four fingers | yon
+word: ご | five | 5️⃣ | hold up a whole hand | go
+word: ろく | six | 6️⃣ | a hand and one finger | roku
+learn: Four can also be «し», but «よん» is used most.
+try: trace | «ろ» | ro
+play: match | Match them | «よん»=4; «ご»=5; «ろく»=6
+check: hear | Which one is «ご»? | 5️⃣* | 4️⃣ | 6️⃣
+check: order | Put them in order, smallest first | «さん»; «よん»; «ご»; «ろく»
+home: Count the chairs at home in Japanese.
+skill: ja-number
+
+@lesson 4.3 | なな、はち、きゅう、じゅう | 🔟 | bank
+hook: All the way to ten!
+word: なな | seven | 7️⃣ | hold up seven fingers | nana
+word: はち | eight | 8️⃣ | hold up eight fingers | hachi
+word: きゅう | nine | 9️⃣ | hold up nine fingers | kyū
+word: じゅう | ten | 🔟 | hold up all ten fingers | jū
+learn: Seven can also be «しち».
+chant: «いち、に、さん、よん»; «ご、ろく、なな、はち»; «きゅう、じゅう！»
+try: trace | «ゆ» | yu
+play: order | Count on from seven | «なな»; «はち»; «きゅう»; «じゅう»
+check: hear | Which one is «はち»? | 8️⃣* | 7️⃣ | 9️⃣
+check: match | Match them | «なな»=7; «きゅう»=9; «じゅう»=10
+home: Count to «じゅう» while you brush your teeth.
+skill: ja-number
+
+@lesson 4.4 | ひとつ、ふたつ | ✌️ | bank
+hook: Japanese has special numbers for counting things.
+word: ひとつ | one (thing) | ☝️ | hold up one finger | hitotsu
+word: ふたつ | two (things) | ✌️ | hold up two fingers | futatsu
+word: みっつ | three (things) | 🤟 | hold up three fingers | mittsu
+word: いくつ | how many? | 🔢 | hold out open hands | ikutsu
+say: «りんごが みっつ あります。» | There are three apples. | Ringo ga mittsu arimasu.
+rule: For counting things, Japanese uses «ひとつ», «ふたつ», «みっつ».
+try: trace | «ひ» | hi
+play: match | Match them | «ひとつ»=one thing; «ふたつ»=two things; «みっつ»=three things
+check: mcq | «いくつ？» asks… | how many* | who | where from
+check: hear | What does «りんごが ふたつ あります» mean? | There are two apples.* | I want an apple. | Two teachers.
+home: Count things at home with «ひとつ, ふたつ, みっつ».
+skill: ja-number
+
+@lesson 4.5 | なんさい？ | 🎂 | bank
+hook: How old are you?
+word: さい | years old | 🎂 | blow out candles | sai
+word: なんさい | how old? | ❓ | shrug | nansai
+say: «なんさいですか？» | How old are you? | Nansai desu ka?
+say: «はっさいです。» | I’m eight. | Hassai desu.
+rule: Some numbers change a little before «さい»: eight is «はっさい», and ten is «じゅっさい».
+play: match | Match them | «ななさい»=seven; «きゅうさい»=nine; «じゅっさい»=ten
+check: mcq | Someone asks «なんさいですか？» They want to know… | how old you are* | your name | how you feel
+check: tiles | Build it: I’m eight. | はっさいです
+home: Tell your family how old you are in Japanese.
+skill: ja-number
+
+@lesson 4.6 | じゅういち | 11 | bank
+hook: Numbers past ten are easy: ten-one, ten-two…
+word: じゅういち | eleven | 11 | ten fingers, then one more | jūichi
+word: じゅうご | fifteen | 15 | ten fingers, then a hand | jūgo
+rule: Eleven is ten-one, «じゅういち». Twelve is «じゅうに».
+play: match | Match them | «じゅういち»=11; «じゅうに»=12; «じゅうさん»=13
+check: hear | Which one is «じゅうご»? | 15* | 5 | 50
+check: mcq | How do you say 12? | «じゅうに»* | «にじゅう» | «じゅういち»
+home: Count the stairs or steps at home past ten.
+skill: ja-number
+
+@lesson 4.7 | にじゅう | 💯 | bank
+hook: Big numbers, all the way to a hundred.
+word: にじゅう | twenty | 20 | two hands, twice | nijū
+word: さんじゅう | thirty | 30 | three hands, twice | sanjū
+word: ひゃく | one hundred | 💯 | throw your arms wide | hyaku
+rule: Twenty is two-ten, «にじゅう». Twenty-five is two-ten-five, «にじゅうご».
+play: match | Match them | «にじゅう»=20; «さんじゅう»=30; «ひゃく»=100
+check: mcq | How do you say 40? | «よんじゅう»* | «じゅうよん» | «よんひゃく»
+check: hear | Which one is «にじゅうご»? | 25* | 52 | 15
+home: Find the biggest number you can say in Japanese.
+skill: ja-number
+
+@lesson 4.8 | おかね | 💰 | bank
+hook: In Chorecast you earn money. Let’s talk about it in Japanese.
+word: おかね | money | 💰 | rub your fingers together | okane
+word: ドル | dollar | 💵 | hold up a note | doru
+word: セント | cent | 🪙 | flip a coin | sento
+say: «ごドルです。» | It’s five dollars. | Go doru desu.
+learn: Japan’s money is the yen, «えん». Your Chorecast jars hold dollars, «ドル».
+try: trace | «ね» | ne
+play: hear | Which one is «おかね»? | 💰* | 🪙 | 💵
+check: mcq | «さんドル» is… | three dollars* | thirty cents | three hundred
+check: hear | What does «にじゅうセント» mean? | twenty cents* | two dollars | twelve cents
+home: Count your Spend jar in Japanese with a grown-up.
+skill: ja-money
+
+@story 4 | なんさい？
+line: けん | «ゆき、なんさい？» | Yuki, how old are you? | Yuki, nansai?
+line: ゆき | «きゅうさい。けんは？» | Nine. And you, Ken? | Kyūsai. Ken wa?
+line: けん | «じゅっさい。» | Ten. | Jussai.
+line: ゆき | «りんごは いくつ？» | How many apples? | Ringo wa ikutsu?
+line: けん | «みっつ！» | Three! | Mittsu!
+line: けん | «いち、に、さん、よん、ご……ごドル！» | One, two, three, four, five… five dollars! | Ichi, ni, san, yon, go… go doru!
+check: mcq | How old is Ken? | ten* | nine | eight
+check: mcq | How many dollars does Ken count? | five* | four | ten
+
+@lesson 5.1 | あか、きいろ、みどり | 🔴 | home
+hook: Your island is full of colour. Let’s name some!
+word: あか | red | 🔴 | point to something red | aka
+word: きいろ | yellow | 🟡 | point to something yellow | kiiro
+word: みどり | green | 🟢 | point to something green | midori
+try: trace | «み» | mi
+play: hear | Which one is «みどり»? | 🟢* | 🔴 | 🟡
+check: hear | Which one is «あか»? | 🔴* | 🟢 | 🟡
+check: match | Match them | «あか»=red; «きいろ»=yellow; «みどり»=green
+home: Find something «あか» in your house.
+skill: ja-colour
+
+@lesson 5.2 | あお、しろ、くろ | 🔵 | home
+hook: Three more colours.
+word: あお | blue | 🔵 | point to the sky | ao
+word: しろ | white | ⚪ | point to something white | shiro
+word: くろ | black | ⚫ | point to something black | kuro
+try: trace | «お» | o
+play: match | Match them | «あお»=blue; «しろ»=white; «くろ»=black
+check: hear | Which one is «くろ»? | ⚫* | ⚪ | 🔵
+check: mcq | Snow is… | «しろ»* | «くろ» | «あか»
+home: Name the colours of your clothes today.
+skill: ja-colour
+
+@lesson 5.3 | オレンジ、ピンク | 🟠 | home
+hook: Orange, pink and brown.
+word: オレンジ | orange | 🟠 | point to something orange | orenji
+word: ピンク | pink | 🩷 | point to something pink | pinku
+word: ちゃいろ | brown (“tea colour”) | 🟤 | point to something brown | chairo
+learn: Some colours are written in katakana because they come from English: «オレンジ», «ピンク». Brown is «ちゃいろ», “tea colour”.
+play: hear | Which one is «ピンク»? | 🩷* | 🟠 | 🟤
+check: match | Match them | «オレンジ»=orange; «ピンク»=pink; «ちゃいろ»=brown
+check: mcq | Chocolate is… | «ちゃいろ»* | «ピンク» | «あお»
+home: Find something «オレンジ» in your kitchen.
+skill: ja-colour
+
+@lesson 5.4 | なにいろ？ | 🎨 | home
+hook: How do you ask what colour something is?
+word: いろ | colour | 🎨 | pretend to paint | iro
+word: むらさき | purple | 🟣 | point to something purple | murasaki
+word: はいいろ | grey (“ash colour”) | 🩶 | point to something grey | haiiro
+say: «なにいろですか？» | What colour is it? | Nani iro desu ka?
+say: «むらさきです。» | It’s purple. | Murasaki desu.
+try: trace | «む» | mu
+try: trace | «ら» | ra
+play: hear | Which one is «はいいろ»? | 🩶* | 🟣 | 🟤
+check: mcq | «なにいろですか？» asks… | what colour it is* | how many there are | who it is
+check: tiles | Build it: It’s purple. | むらさきです
+home: Play “What colour?” with your family: «なにいろ？»
+skill: ja-colour
+
+@lesson 5.5 | あかい いえ | 🏠 | home
+hook: Let’s describe your island house.
+word: いえ | house | 🏠 | make a roof with your hands | ie
+word: ドア | door | 🚪 | knock on a door | doa
+word: やね | roof | 🔺 | point up | yane
+rule: Before a thing, «あか» becomes «あかい»: «あかい いえ» is “a red house”. «あお», «しろ» and «くろ» work the same way.
+say: «あおい ドア» | a blue door | aoi doa
+try: trace | «や» | ya
+play: match | Match them | «あかい いえ»=a red house; «あおい ドア»=a blue door; «くろい やね»=a black roof
+check: mcq | How do you say “a white house”? | «しろい いえ»* | «いえ しろい» | «しろ いえい»
+check: hear | Which one is «やね»? | 🔺* | 🏠 | 🚪
+home: Describe your front door in Japanese.
+skill: ja-describe
+
+@lesson 5.6 | はなは ピンクです | 🌼 | home
+hook: Give your island a makeover, in Japanese.
+word: まど | window | 🪟 | draw a square in the air | mado
+word: さく | fence | 🚧 | hold your arms out straight | saku
+word: はな | flower | 🌼 | sniff a flower | hana
+say: «はなは ピンクです。» | The flower is pink. | Hana wa pinku desu.
+rule: The thing + «は» + the colour + «です» says what colour it is.
+try: trace | «ま» | ma
+play: tiles | Build it: The fence is white. | さくは しろです
+check: mcq | «まどは あおです» means… | The window is blue.* | The blue door. | The house is blue.
+check: hear | Which one is «はな»? | 🌼* | 🪟 | 🚧
+home: Give your island a makeover and say each colour in Japanese.
+skill: ja-describe
+
+@lesson 5.7 | そら | ☁️ | home
+hook: Look up! What colour is the sky?
+word: たいよう | sun | ☀️ | make a circle with your arms | taiyō
+word: くも | cloud | ☁️ | float your hands | kumo
+word: そら | sky | 🌌 | look up | sora
+say: «そらは あおいです。» | The sky is blue. | Sora wa aoi desu.
+say: «くもは しろいです。» | The clouds are white. | Kumo wa shiroi desu.
+learn: Japanese words don’t change for more than one: «くも» is one cloud or lots of clouds.
+try: trace | «そ» | so
+play: match | Match them | «たいよう»=sun; «くも»=cloud; «そら»=sky
+check: mcq | «くもは しろいです» means… | The clouds are white.* | The cloud is black. | The sky is white.
+check: tiles | Build it: The sky is blue. | そらは あおいです
+home: Look at the sky and say its colour in Japanese.
+skill: ja-describe
+
+@lesson 5.8 | にじ | 🌈 | home
+hook: Can you say all the colours of the rainbow?
+word: にじ | rainbow | 🌈 | draw an arch in the air | niji
+learn: The rainbow’s colours in order: «あか», «オレンジ», «きいろ», «みどり», «あお», «むらさき».
+chant: «あか、オレンジ、きいろ»; «みどり、あお»; «むらさき！»
+try: trace | «り» | ri
+play: order | Put the rainbow in order | «あか»; «オレンジ»; «きいろ»; «みどり»; «あお»
+check: hear | What does «にじ» mean? | rainbow* | cloud | flower
+check: mcq | Which colour comes after «きいろ» in a rainbow? | «みどり»* | «あか» | «くろ»
+home: Draw a «にじ» and label its colours.
+skill: ja-colour
+
+@story 5 | わたしの いえ
+line: ゆき | «けんの いえは なにいろ？» | What colour is your house, Ken? | Ken no ie wa nani iro?
+line: けん | «きいろです。» | Yellow. | Kiiro desu.
+line: けん | «ドアは みどりです。» | The door is green. | Doa wa midori desu.
+line: ゆき | «きれい！ さくは しろ？» | Pretty! Is the fence white? | Kirei! Saku wa shiro?
+line: けん | «はい。はなは ピンクです。» | Yes. The flowers are pink. | Hai. Hana wa pinku desu.
+line: ゆき | «すごい！ にじ！» | Amazing! A rainbow! | Sugoi! Niji!
+check: mcq | What colour is Ken’s house? | yellow* | red | green
+check: mcq | What does Yuki see at the end? | a rainbow* | a cloud | a red door
+
+@lesson 6.1 | いぬ、ねこ、とり | 🐶 | island
+hook: Who lives on your island? Let’s name the animals.
+word: いぬ | dog | 🐶 | pat a dog | inu
+word: ねこ | cat | 🐱 | stroke a cat | neko
+word: とり | bird | 🐦 | flap your wings | tori
+try: trace | «ぬ» | nu
+play: hear | Which one is «ねこ»? | 🐱* | 🐶 | 🐦
+check: hear | Which one is «とり»? | 🐦* | 🐱 | 🐶
+check: match | Match them | «いぬ»=dog; «ねこ»=cat; «とり»=bird
+home: Point to an animal and say it in Japanese.
+skill: ja-animal
+
+@lesson 6.2 | さかな、うま、うし | 🐴 | island
+hook: Animals of the farm and the sea.
+word: さかな | fish | 🐟 | swim with your hand | sakana
+word: うま | horse | 🐴 | gallop on the spot | uma
+word: うし | cow | 🐄 | say moo | ushi
+try: trace | «ま» | ma
+play: hear | Which one is «うま»? | 🐴* | 🐄 | 🐟
+check: match | Match them | «さかな»=fish; «うま»=horse; «うし»=cow
+check: hear | What does «うし» mean? | cow* | horse | fish
+home: Find a picture of an «うま» or an «うし».
+skill: ja-animal
+
+@lesson 6.3 | ひつじ、ぶた、にわとり | 🐔 | island
+hook: More farm animals.
+word: ひつじ | sheep | 🐑 | say baa | hitsuji
+word: ぶた | pig | 🐷 | push up your nose | buta
+word: にわとり | chicken | 🐔 | flap your elbows | niwatori
+learn: On your farm island the «にわとり» lay eggs.
+try: trace | «つ» | tsu
+play: hear | Which one is «ぶた»? | 🐷* | 🐑 | 🐔
+check: match | Match them | «ひつじ»=sheep; «ぶた»=pig; «にわとり»=chicken
+check: mcq | Which animal lays eggs? | «にわとり»* | «ひつじ» | «ぶた»
+home: Name the animals on your Chorecast farm in Japanese.
+skill: ja-animal
+
+@lesson 6.4 | うさぎ、ふくろう | 🦉 | island
+hook: Small animals, and a bird that comes out at night.
+word: うさぎ | rabbit | 🐰 | hop | usagi
+word: ちょうちょ | butterfly | 🦋 | flutter your hands | chōcho
+word: ふくろう | owl | 🦉 | blink slowly | fukurō
+try: trace | «ふ» | fu
+play: hear | Which one is «ちょうちょ»? | 🦋* | 🐰 | 🦉
+check: match | Match them | «うさぎ»=rabbit; «ちょうちょ»=butterfly; «ふくろう»=owl
+check: mcq | Which one comes out at night? | «ふくろう»* | «ちょうちょ» | «うさぎ»
+home: Draw a «ちょうちょ» and colour it in.
+skill: ja-animal
+
+@lesson 6.5 | これは なんですか？ | 🤔 | island
+hook: This, that and that over there, like in te reo Māori!
+word: これ | this (near me) | 👇 | point down by your feet | kore
+word: それ | that (near you) | 👉 | point to the person you’re talking to | sore
+word: あれ | that (over there) | 🔭 | point far away | are
+say: «これは なんですか？» | What is this? | Kore wa nan desu ka?
+say: «いぬです。» | It’s a dog. | Inu desu.
+rule: «これ» is near me, «それ» is near you, and «あれ» is far from us both.
+try: trace | «れ» | re
+play: sort | Near me, Near you, Over there | «これ»=Near me; «それ»=Near you; «あれ»=Over there | Where is it?
+check: mcq | «あれは うまです» means… | That’s a horse over there.* | This is a horse. | Where is the horse?
+check: hear | What does «これは なんですか» mean? | What is this?* | Who is this? | Where is it?
+home: Play «これは なんですか？» with things around your house.
+skill: ja-this-that
+
+@lesson 6.6 | おおきい、ちいさい | 🐘 | island
+hook: Big animals and little animals.
+word: おおきい | big | 🐘 | stretch tall | ōkii
+word: ちいさい | small | 🐭 | crouch down small | chiisai
+say: «おおきい いぬ» | a big dog | ōkii inu
+say: «ちいさい ねこ» | a little cat | chiisai neko
+try: trace | «お» | o
+play: match | Match them | «おおきい うし»=a big cow; «ちいさい にわとり»=a little chicken; «ちいさい さかな»=a small fish
+check: mcq | How do you say “a big horse”? | «おおきい うま»* | «うま おおきい» | «ちいさい うま»
+check: tiles | Build it: a little cat | ちいさい ねこ
+home: Find something «おおきい» and something «ちいさい» at home.
+skill: ja-describe
+
+@lesson 6.7 | しま | 🏝️ | island
+hook: Your Chorecast island, the land and the sea.
+word: しま | island | 🏝️ | draw a circle on the floor | shima
+word: うみ | sea | 🌊 | make waves with your arms | umi
+word: りく | land | ⛰️ | point to the ground | riku
+say: «きれいな しまです。» | It’s a pretty island. | Kirei na shima desu.
+learn: Japan is a country of islands, like Aotearoa.
+try: trace | «し» | shi
+play: hear | Which one is «うみ»? | 🌊* | 🏝️ | ⛰️
+check: match | Match them | «しま»=island; «うみ»=sea; «りく»=land
+check: mcq | «おおきい しまです» means… | It’s a big island.* | It’s a small sea. | The land is big.
+home: Tell someone about your Chorecast «しま».
+skill: ja-place
+
+@lesson 6.8 | どこ？ | 🧭 | island
+hook: Where is it? On top, underneath or inside?
+word: どこ | where | 🧭 | look around | doko
+word: うえ | on top | ⬆️ | point up | ue
+word: した | under | ⬇️ | point down | shita
+word: なか | inside | 📦 | point into a box | naka
+say: «ねこは どこ？» | Where’s the cat? | Neko wa doko?
+say: «いえの うえです。» | On top of the house. | Ie no ue desu.
+say: «いぬは いえの なかです。» | The dog is inside the house. | Inu wa ie no naka desu.
+rule: The place + «の» + «うえ», «した» or «なか»: «いえの うえ» is “on top of the house”.
+try: trace | «え» | e
+play: match | Match them | «うえ»=on top; «した»=under; «なか»=inside
+check: mcq | The cat is on the roof. Where is it? | «いえの うえです。»* | «いえの したです。» | «いえの なかです。»
+check: tiles | Build it: The dog is inside the house. | いぬは いえの なかです
+home: Hide a toy and give clues: «うえ», «した», «なか».
+skill: ja-place
+
+@story 6 | ねこは どこ？
+line: けん | «ゆき、ねこは どこ？» | Yuki, where’s the cat? | Yuki, neko wa doko?
+line: ゆき | «いえの なか？» | Inside the house? | Ie no naka?
+line: けん | «いいえ。それは いぬ！» | No. That’s a dog! | Iie. Sore wa inu!
+line: ゆき | «ねこは いえの うえ！» | The cat is on top of the house! | Neko wa ie no ue!
+line: けん | «はい！ねこは こわい。» | Yes! The cat is scared. | Hai! Neko wa kowai.
+line: ゆき | «こんにちは、ねこちゃん！» | Hello, little cat! | Konnichiwa, neko-chan!
+check: mcq | Where is the cat? | on top of the house* | inside the house | under the house
+check: mcq | How does the cat feel? | scared* | hungry | happy
+
+@lesson 7.1 | かぞく | 👨‍👩‍👧‍👦 | home
+hook: Let’s talk about the people in your family.
+word: かぞく | family | 👨‍👩‍👧‍👦 | a big group hug | kazoku
+word: おかあさん | mum | 👩‍👧 | wave to Mum | okāsan
+word: おとうさん | dad | 👨‍👧 | wave to Dad | otōsan
+say: «わたしの かぞくです。» | This is my family. | Watashi no kazoku desu.
+say: «わたしの おかあさんです。» | This is my mum. | Watashi no okāsan desu.
+try: trace | «か» | ka
+play: hear | Which one is «おとうさん»? | 👨‍👧* | 👩‍👧 | 👨‍👩‍👧‍👦
+check: match | Match them | «かぞく»=family; «おかあさん»=mum; «おとうさん»=dad
+check: tiles | Build it: This is my dad. | わたしの おとうさんです
+home: Introduce someone in your family in Japanese.
+skill: ja-family
+
+@lesson 7.2 | おじいさん、おばあさん | 👵 | home
+hook: Grandparents and babies.
+word: おじいさん | grandad | 👴 | a gentle hug | ojīsan
+word: おばあさん | grandma | 👵 | a gentle hug | obāsan
+word: あかちゃん | baby | 👶 | rock a baby | akachan
+learn: Listen for the long sounds: «おじいさん» (grandad) and «おばあさん» (grandma).
+try: trace | «ば» | ba
+play: hear | Which one is «おじいさん»? | 👴* | 👵 | 👶
+check: match | Match them | «おじいさん»=grandad; «おばあさん»=grandma; «あかちゃん»=baby
+check: mcq | Your mum’s mum is your… | «おばあさん»* | «おじいさん» | «あかちゃん»
+home: Ring or visit a grandparent and say «こんにちは».
+skill: ja-family
+
+@lesson 7.3 | おにいさん、おとうと | 🧑 | home
+hook: In Japanese, older and younger brothers have different words.
+word: おにいさん | older brother | 🧑 | stand on tiptoes | onīsan
+word: おとうと | younger brother | 👦🏽 | crouch down a little | otōto
+rule: «おにいさん» is an older brother and «おとうと» a younger one.
+play: mcq | Yuki has a brother who is 12. She’s 9. He is her… | «おにいさん»* | «おとうと»
+check: mcq | Ken’s brother is 6. Ken is 10. His brother is his… | «おとうと»* | «おにいさん» | «おとうさん»
+check: hear | What does «おとうと» mean? | younger brother* | older brother | dad
+home: Who is older and who is younger in your family?
+skill: ja-family
+
+@lesson 7.4 | おねえさん、いもうと | 👩🏽 | home
+hook: Older and younger sisters.
+word: おねえさん | older sister | 👩🏽 | stand on tiptoes | onēsan
+word: いもうと | younger sister | 👧🏽 | crouch down a little | imōto
+try: trace | «も» | mo
+play: match | Match them | «おにいさん»=older brother; «おとうと»=younger brother; «おねえさん»=older sister; «いもうと»=younger sister
+check: mcq | Your sister is older than you. She is your… | «おねえさん»* | «いもうと» | «おばあさん»
+check: hear | What does «いもうと» mean? | younger sister* | older sister | mum
+home: Draw your family and label everyone in Japanese.
+skill: ja-family
+
+@lesson 7.5 | わたしの | 🔗 | home
+hook: My and whose.
+word: の | ’s (shows whose) | 🔗 | link your fingers | no
+say: «わたしの おにいさん» | my older brother | watashi no onīsan
+say: «けんの いもうと» | Ken’s younger sister | Ken no imōto
+rule: «の» shows whose it is: «わたしの» is my, and «けんの» is Ken’s.
+play: match | Match them | «わたしの»=my; «けんの»=Ken’s; «ゆきの»=Yuki’s
+check: mcq | How do you say “Yuki’s mum”? | «ゆきの おかあさん»* | «おかあさんの ゆき» | «ゆき おかあさん の»
+check: tiles | Build it: my older sister | わたしの おねえさん
+home: Say «わたしの» about things in your room.
+skill: ja-family
+
+@lesson 7.6 | この ひとは だれ？ | 👥 | home
+hook: Who’s that? Let’s talk about a family photo.
+word: ひと | person | 🧍 | stand tall | hito
+word: みんな | everyone | 👥 | point around the group | minna
+say: «この ひとは だれ？» | Who is this person? | Kono hito wa dare?
+say: «わたしの おじいさんです。» | It’s my grandad. | Watashi no ojīsan desu.
+say: «みんな わたしの かぞくです。» | They’re all my family. | Minna watashi no kazoku desu.
+try: trace | «ひ» | hi
+play: tiles | Build it: It’s my mum. | わたしの おかあさんです
+check: mcq | You point to a photo. You ask… | «この ひとは だれ？»* | «げんきですか？» | «なんさいですか？»
+check: hear | What does «みんな わたしの かぞくです» mean? | They’re all my family.* | This is my mum. | Who is that?
+home: Show a family photo and say who everyone is.
+skill: ja-family
+
+@lesson 7.7 | きょうだい | 🧒 | home
+hook: Do you have brothers and sisters?
+word: きょうだい | brothers and sisters | 🧒🏻 | hold hands in a line | kyōdai
+word: います | there is (a person or animal) | 🙋‍♂️ | put your hand up | imasu
+word: いません | there isn’t | 🙅 | cross your arms | imasen
+say: «きょうだいは いますか？» | Do you have brothers and sisters? | Kyōdai wa imasu ka?
+say: «いもうとが ひとり います。» | I have one younger sister. | Imōto ga hitori imasu.
+say: «きょうだいは いません。» | I don’t have any brothers or sisters. | Kyōdai wa imasen.
+try: trace | «せ» | se
+play: match | Match them | «いもうとが ひとり います»=I have a younger sister; «きょうだいは いません»=I don’t have brothers or sisters; «おにいさんが ふたり います»=I have two older brothers
+check: mcq | You have one younger brother. You say… | «おとうとが ひとり います。»* | «おとうとは いません。» | «おとうとです。»
+check: tiles | Build it: Do you have brothers and sisters? | きょうだいは いますか
+home: Ask a friend «きょうだいは いますか？»
+skill: ja-family
+
+@lesson 7.8 | いっしょに | 🙌🏽 | home
+hook: In Chorecast, families work as a team. Here’s how to say it.
+word: いっしょに | together | 🙌🏽 | high five | issho ni
+word: てつだう | to help | 💪 | lift something together | tetsudau
+say: «いっしょに やろう！» | Let’s do it together! | Issho ni yarō!
+learn: In Chorecast, a team task is work you do «いっしょに».
+try: trace | «ろ» | ro
+play: tiles | Build it: Let’s do it together! | いっしょに やろう
+check: hear | What does «いっしょに» mean? | together* | one job | family
+check: tf | «てつだう» means to help. | true
+home: Do a team task with your family. Say «いっしょに やろう！» as you start.
+skill: ja-family
+
+@story 7 | わたしの かぞく
+line: けん | «わたしの かぞくです。» | This is my family. | Watashi no kazoku desu.
+line: けん | «わたしの おかあさんと おとうさんです。» | My mum and my dad. | Watashi no okāsan to otōsan desu.
+line: ゆき | «この ひとは だれ？» | Who is this person? | Kono hito wa dare?
+line: けん | «わたしの おばあさん。とても うれしい！» | My grandma. She’s very happy! | Watashi no obāsan. Totemo ureshii!
+line: ゆき | «きょうだいは いますか？» | Do you have brothers and sisters? | Kyōdai wa imasu ka?
+line: けん | «おにいさんが ふたり、いもうとが ひとり います。» | I have two older brothers and one younger sister. | Onīsan ga futari, imōto ga hitori imasu.
+line: けん | «いっしょに やろう！» | Let’s do it together! | Issho ni yarō!
+check: mcq | Who does Yuki ask about? | Ken’s grandma* | Ken’s mum | Ken’s teacher
+check: mcq | How many older brothers does Ken have? | two* | one | three
+
+@lesson 8.1 | たべます、のみます | 🥢 | stall
+hook: Food and drinks in Japanese.
+word: たべます | eat | 🥢 | eat with chopsticks | tabemasu
+word: のみます | drink | 🥤 | pretend to drink | nomimasu
+word: みず | water | 💧 | pretend to sip | mizu
+word: ぎゅうにゅう | milk | 🥛 | pour a glass | gyūnyū
+try: trace | «み» | mi
+play: hear | Which one is «ぎゅうにゅう»? | 🥛* | 💧 | 🥢
+check: match | Match them | «たべます»=eat; «のみます»=drink; «みず»=water
+check: hear | What does «みず» mean? | water* | milk | food
+home: At dinner, say «たべます» and «のみます» in Japanese.
+skill: ja-food
+
+@lesson 8.2 | りんご、バナナ | 🍎 | stall
+hook: Fruit from the orchard.
+word: りんご | apple | 🍎 | take a crunchy bite | ringo
+word: バナナ | banana | 🍌 | peel a banana | banana
+word: みかん | mandarin | 🍊 | peel a mandarin | mikan
+try: trace | «り» | ri
+play: hear | Which one is «バナナ»? | 🍌* | 🍎 | 🍊
+check: match | Match them | «りんご»=apple; «バナナ»=banana; «みかん»=mandarin
+check: hear | Which one is «みかん»? | 🍊* | 🍌 | 🍎
+home: Say the name of every fruit in your fruit bowl.
+skill: ja-food
+
+@lesson 8.3 | パン、たまご、ごはん | 🥚 | stall
+hook: Breakfast and lunch foods.
+word: パン | bread | 🍞 | make a sandwich | pan
+word: たまご | egg | 🥚 | crack an egg | tamago
+word: ごはん | rice, a meal | 🍚 | scoop rice | gohan
+learn: «ごはん» means rice, and a whole meal too. The «にわとり» on your farm lay «たまご»!
+try: trace | «た» | ta
+play: hear | Which one is «ごはん»? | 🍚* | 🍞 | 🥚
+check: match | Match them | «パン»=bread; «たまご»=egg; «ごはん»=rice
+check: mcq | Chickens lay… | «たまご»* | «ごはん» | «パン»
+home: Name your breakfast in Japanese.
+skill: ja-food
+
+@lesson 8.4 | じゃがいも、にんじん | 🥕 | stall
+hook: Vegetables and noodles.
+word: じゃがいも | potato | 🥔 | mash potatoes | jagaimo
+word: にんじん | carrot | 🥕 | pull a carrot up | ninjin
+word: うどん | udon noodles | 🍜 | slurp | udon
+try: trace | «も» | mo
+play: hear | Which one is «にんじん»? | 🥕* | 🥔 | 🍜
+check: match | Match them | «じゃがいも»=potato; «にんじん»=carrot; «うどん»=noodles
+check: hear | What does «うどん» mean? | noodles* | bread | carrot
+home: Help cook something and say its name in Japanese.
+skill: ja-food
+
+@lesson 8.5 | ください | 🤲 | stall
+hook: Asking for food politely.
+word: ください | please give me | 🤲 | hold out both hands | kudasai
+say: «りんごを ください。» | An apple, please. | Ringo o kudasai.
+say: «みずを ください。» | Water, please. | Mizu o kudasai.
+rule: «を» shows the thing you want, and is said “o”. The thing + «を» + «ください» asks for it politely.
+try: trace | «を» | o (wo)
+play: tiles | Build it: Bread, please. | パンを ください
+check: mcq | You want an egg. You say… | «たまごを ください。»* | «たまごです。» | «たまごが います。»
+check: hear | What does «ぎゅうにゅうを ください» mean? | Milk, please.* | This is milk. | I’m thirsty.
+home: Ask for something at dinner with «…を ください».
+skill: ja-food
+
+@lesson 8.6 | おみせ | 🏪 | stall
+hook: Buying and selling at the farm stand.
+word: おみせ | shop | 🏪 | open a shop door | omise
+word: かいます | buy | 🛒 | push a trolley | kaimasu
+word: うります | sell | 🏷️ | hold up a price tag | urimasu
+say: «いくらですか？» | How much is it? | Ikura desu ka?
+say: «にドルです。» | It’s two dollars. | Ni doru desu.
+try: trace | «る» | ru
+play: match | Match them | «おみせ»=shop; «かいます»=buy; «うります»=sell
+check: mcq | You want to know the price. You ask… | «いくらですか？»* | «なんさいですか？» | «これは なんですか？»
+check: tiles | Build it: It’s five dollars. | ごドルです
+home: Play shop at home, asking «いくらですか？»
+skill: ja-money
+
+@lesson 8.7 | おいしい | 😋 | stall
+hook: Is it tasty?
+word: おいしい | tasty | 😋 | lick your lips | oishii
+say: «りんごは おいしいです！» | The apple is tasty! | Ringo wa oishii desu!
+learn: Kids often just say «おいしい！» while eating.
+try: trace | «い» | i
+play: match | Match them | «おいしい»=tasty; «たべます»=eat; «のみます»=drink
+check: mcq | «パンは おいしいです» means… | The bread is tasty.* | I want bread. | Give me bread.
+check: tiles | Build it: The apple is tasty. | りんごは おいしいです
+home: Tell the cook «おいしい！» at dinner.
+skill: ja-food
+
+@lesson 8.8 | いただきます | 🍱 | stall
+hook: What Japanese families say before and after eating.
+word: いただきます | (said before eating: thank you for the food) | 🙏🏽 | put your hands together | itadakimasu
+word: ごちそうさま | (said after eating: that was a lovely meal) | 🍱 | put your hands together again | gochisōsama
+word: おなかいっぱい | I’m full | 🫃 | pat your tummy | onaka ippai
+learn: Japanese families say «いただきます» before eating and «ごちそうさま» after, to thank everyone who made the meal.
+play: match | Match them | «いただきます»=before eating; «ごちそうさま»=after eating; «おなかいっぱい»=I’m full
+check: mcq | You’re about to start dinner. You say… | «いただきます！»* | «ごちそうさま！» | «おやすみ！»
+check: hear | What does «おなかいっぱい» mean? | I’m full.* | I’m hungry. | One more.
+home: Say «いただきます» and «ごちそうさま» at dinner tonight.
+skill: ja-food
+
+@story 8 | おみせ
+line: ゆき | «こんにちは！ これは なんですか？» | Hello! What is this? | Konnichiwa! Kore wa nan desu ka?
+line: けん | «たまごです。おいしいですよ！» | Eggs. They’re tasty! | Tamago desu. Oishii desu yo!
+line: ゆき | «いくらですか？» | How much? | Ikura desu ka?
+line: けん | «よんドルです。» | Four dollars. | Yon doru desu.
+line: ゆき | «たまごと バナナを ください。» | Eggs and a banana, please. | Tamago to banana o kudasai.
+line: けん | «ありがとう！ ごドルです。» | Thanks! Five dollars. | Arigatō! Go doru desu.
+check: mcq | What does Ken sell first? | eggs* | apples | milk
+check: mcq | How much does Yuki pay in the end? | five dollars* | four dollars | ten dollars
+
+@lesson 9.1 | げつようび | 📅 | garden
+hook: Japanese days are named after the moon, fire, water, trees, gold, earth and the sun.
+word: げつようび | Monday (moon day) | 🗓️ Mon | count one on your fingers | getsuyōbi
+word: かようび | Tuesday (fire day) | 🗓️ Tue | count two | kayōbi
+word: すいようび | Wednesday (water day) | 🗓️ Wed | count three | suiyōbi
+word: もくようび | Thursday (tree day) | 🗓️ Thu | count four | mokuyōbi
+learn: «ようび» means day of the week.
+play: match | Match them | «げつようび»=Monday; «かようび»=Tuesday; «すいようび»=Wednesday; «もくようび»=Thursday
+check: hear | What does «すいようび» mean? | Wednesday* | Monday | Thursday
+check: order | Put the days in order | «げつようび»; «かようび»; «すいようび»; «もくようび»
+home: Say what day it is every morning this week.
+skill: ja-time
+
+@lesson 9.2 | どようび、にちようび | 🎉 | garden
+hook: The rest of the week, and the weekend!
+word: きんようび | Friday (gold day) | 🗓️ Fri | count five | kin’yōbi
+word: どようび | Saturday (earth day) | 🗓️ Sat | count six | doyōbi
+word: にちようび | Sunday (sun day) | 🗓️ Sun | count seven | nichiyōbi
+chant: «げつ、か、すい»; «もく、きん»; «ど、にち！»
+try: trace | «ど» | do
+play: order | Put the days in order | «もくようび»; «きんようび»; «どようび»; «にちようび»
+check: hear | What does «どようび» mean? | Saturday* | Sunday | Friday
+check: mcq | Which day comes after «きんようび»? | «どようび»* | «げつようび» | «もくようび»
+home: Which day do you like best? Say it in Japanese.
+skill: ja-time
+
+@lesson 9.3 | きょう | 📌 | garden
+hook: Today, tomorrow and yesterday.
+word: きょう | today | 📌 | point to the ground | kyō
+word: あした | tomorrow | ➡️ | point forward | ashita
+word: きのう | yesterday | ⬅️ | point back over your shoulder | kinō
+say: «きょうは なんようび？» | What day is it today? | Kyō wa nan’yōbi?
+say: «きょうは きんようびです。» | Today is Friday. | Kyō wa kin’yōbi desu.
+play: match | Match them | «きょう»=today; «あした»=tomorrow; «きのう»=yesterday
+check: mcq | Someone asks «きょうは なんようび？» They want to know… | what day it is today* | the time | the weather
+check: tiles | Build it: Today is Friday. | きょうは きんようびです
+home: Ask someone at home «きょうは なんようび？»
+skill: ja-time
+
+@lesson 9.4 | おこづかい | 💸 | garden
+hook: Which day does your pocket money come?
+word: おこづかい | pocket money | 💸 | hold out your hands | okozukai
+word: まいしゅう | every week | 🗓️ | draw a line of seven days | maishū
+say: «どようびに おこづかいを もらいます。» | I get pocket money on Saturday. | Doyōbi ni okozukai o moraimasu.
+learn: In Chorecast, payday comes «まいしゅう».
+play: tiles | Build it: I get pocket money on Saturday. | どようびに おこづかいを もらいます
+check: hear | What does «おこづかい» mean? | pocket money* | holiday | price
+check: mcq | «まいしゅう» means… | every week* | every day | once a year
+home: Tell your family which day your «おこづかい» comes.
+skill: ja-money
+
+@lesson 9.5 | あさ、よる | 🌃 | garden
+hook: Morning, daytime and night.
+word: あさ | morning | 🐓 | stretch like you just woke up | asa
+word: ひる | midday, daytime | 🌞 | point straight up | hiru
+word: よる | night | 🌃 | close your eyes | yoru
+learn: Breakfast is «あさごはん», morning-meal!
+play: hear | Which one is «よる»? | 🌃* | 🐓 | 🌞
+check: match | Match them | «あさ»=morning; «ひる»=midday; «よる»=night
+check: mcq | You eat breakfast in the… | «あさ»* | «ひる» | «よる»
+home: Say «あさ», «ひる» or «よる» each time you look out the window today.
+skill: ja-time
+
+@lesson 9.6 | あめ | 🌧️ | garden
+hook: What’s the weather doing?
+word: あめ | rain | 🌧️ | wiggle your fingers down like rain | ame
+word: はれ | sunny | 🌤️ | put on sunnies | hare
+word: かぜ | wind | 💨 | blow | kaze
+say: «あめが ふっています。» | It’s raining. | Ame ga futte imasu.
+say: «きょうは はれです。» | Today is sunny. | Kyō wa hare desu.
+play: hear | Which one is «かぜ»? | 💨* | 🌧️ | 🌤️
+check: mcq | You need an umbrella. You say… | «あめが ふっています。»* | «きょうは はれです。» | «あついです。»
+check: tiles | Build it: Today is sunny. | きょうは はれです
+home: Tell your family the weather in Japanese each morning.
+skill: ja-weather
+
+@lesson 9.7 | うち | 🏡 | garden
+hook: Home, school and holidays.
+word: うち | home | 🏡 | draw a house shape | uchi
+word: やすみ | holiday, day off | 🏖️ | stretch out on a beach towel | yasumi
+say: «うちに います。» | I’m at home. | Uchi ni imasu.
+say: «がっこうに います。» | I’m at school. | Gakkō ni imasu.
+rule: The place + «に» + «います» says where you are.
+play: match | Match them | «うちに います»=I’m at home; «がっこうに います»=I’m at school; «やすみ»=holiday
+check: mcq | It’s the school holidays and you’re at home. You say… | «うちに います。»* | «がっこうに います。» | «あめが ふっています。»
+check: hear | What does «やすみ» mean? | holiday* | home | school
+home: Say where you are in Japanese when someone asks this week.
+skill: ja-place
+
+@lesson 9.8 | ちょきん | 🐷 | garden
+hook: Saving up for something? Here’s how to say it.
+word: ちょきん | saving money | 🐷 | drop a coin in a jar | chokin
+word: もくひょう | goal | 🎯 | aim at a target | mokuhyō
+word: じてんしゃ | bike | 🚲 | pedal in the air | jitensha
+say: «ちょきんしています。» | I’m saving money. | Chokin shite imasu.
+say: «じてんしゃの ために ちょきんしています。» | I’m saving for a bike. | Jitensha no tame ni chokin shite imasu.
+learn: Your Chorecast Saving goal is your «もくひょう».
+play: match | Match them | «ちょきん»=saving money; «もくひょう»=goal; «じてんしゃ»=bike
+check: mcq | «ちょきんしています» means… | I’m saving money.* | I’m spending money. | I have money.
+check: tiles | Build it: I’m saving money. | ちょきんしています
+home: Tell a grown-up what you’re saving for, in Japanese if you can.
+skill: ja-money
+
+@story 9 | おこづかい
+line: けん | «きょうは なんようび？» | What day is it today? | Kyō wa nan’yōbi?
+line: ゆき | «きょうは どようび！» | Today is Saturday! | Kyō wa doyōbi!
+line: けん | «すごい！ どようびに おこづかいを もらいます。» | Awesome! I get pocket money on Saturday. | Sugoi! Doyōbi ni okozukai o moraimasu.
+line: ゆき | «あめが ふっています。うちに います。» | It’s raining. I’m at home. | Ame ga futte imasu. Uchi ni imasu.
+line: けん | «じてんしゃの ために ちょきんしています。» | I’m saving for a bike. | Jitensha no tame ni chokin shite imasu.
+line: ゆき | «いいね！ またあした！» | Nice! See you tomorrow! | Ii ne! Mata ashita!
+check: mcq | What day is it? | Saturday* | Friday | Sunday
+check: mcq | What is Ken saving for? | a bike* | a dog | a holiday
+
+@lesson 10.1 | たって、すわって | 🧍 | home
+hook: Listen and move! Instructions you hear at school and at home.
+word: たって | stand up | 🧍 | stand up | tatte
+word: すわって | sit down | 🪑 | sit down | suwatte
+word: きて | come here | 🫴 | wave someone towards you | kite
+say: «たって ください。» | Please stand up. | Tatte kudasai.
+say: «きて ください！» | Please come here! | Kite kudasai!
+rule: «〜て ください» is a polite “please do”.
+play: match | Match them | «たって»=stand up; «すわって»=sit down; «きて»=come here
+check: hear | What does «すわって» mean? | sit down* | stand up | come here
+check: mcq | Your teacher wants you to stand up. They say… | «たって ください。»* | «すわって ください。» | «さようなら。»
+home: Play “Teacher says” with your family: «たって！» «すわって！»
+skill: ja-instruct
+
+@lesson 10.2 | みて、きいて | 👂 | home
+hook: Look, listen and speak.
+word: みて | look | 🔍 | hands like binoculars | mite
+word: きいて | listen | 👂 | cup your ear | kiite
+word: はなして | speak | 🗣️ | open and close your hand like a mouth | hanashite
+say: «みて ください。» | Please look. | Mite kudasai.
+say: «きいて ください。» | Please listen. | Kiite kudasai.
+play: hear | Which one is «きいて»? | 👂* | 🔍 | 🗣️
+check: match | Match them | «みて»=look; «きいて»=listen; «はなして»=speak
+check: mcq | You want everyone to listen. You say… | «きいて ください！»* | «みて ください！» | «すわって ください！»
+home: Ask your family to «きいて» while you teach them a word.
+skill: ja-instruct
+
+@lesson 10.3 | おさらを あらって | 🧼 | home
+hook: Chores in Japanese, starting with washing.
+word: あらう | to wash | 🧼 | scrub your hands | arau
+word: おさら | dishes | 🍽️ | stack plates | osara
+word: て | hand | 🖐️ | wave your hand | te
+say: «おさらを あらって。» | Wash the dishes. | Osara o aratte.
+say: «てを あらって。» | Wash your hands. | Te o aratte.
+rule: The thing + «を» + the action: «おさらを あらって» is “the dishes, wash them”.
+try: trace | «て» | te
+play: tiles | Build it: Wash your hands. | てを あらって
+check: mcq | Before dinner, a grown-up says «てを あらって». You… | wash your hands* | wash the dishes | sit down
+check: hear | What does «おさら» mean? | dishes* | hand | food
+home: Next time you wash the dishes, say «おさらを あらって».
+skill: ja-chores
+
+@lesson 10.4 | えさを あげて | 🥣 | home
+hook: Feeding the animals is a job too.
+word: えさ | pet food, feed | 🥣 | pour food into a bowl | esa
+say: «いぬに えさを あげて。» | Feed the dog. | Inu ni esa o agete.
+say: «にわとりに えさを あげて。» | Feed the chickens. | Niwatori ni esa o agete.
+try: trace | «え» | e
+play: match | Match them | «いぬに えさを あげて»=feed the dog; «ねこに えさを あげて»=feed the cat; «にわとりに えさを あげて»=feed the chickens
+check: tiles | Build it: Feed the cat. | ねこに えさを あげて
+check: mcq | «ひつじに えさを あげて» means… | Feed the sheep.* | Wash the sheep. | Where are the sheep?
+home: Feed a pet or your Chorecast farm animals and say it in Japanese.
+skill: ja-chores
+
+@lesson 10.5 | へやを かたづけて | 🛏️ | home
+hook: Tidy your room!
+word: かたづける | to tidy | 🧺 | fold your clothes | katazukeru
+word: へや | room | 🚪🛏️ | point to your bedroom | heya
+word: ベッド | bed | 🛌 | lie down | beddo
+say: «へやを かたづけて。» | Tidy your room. | Heya o katazukete.
+say: «ベッドを ととのえて。» | Make your bed. | Beddo o totonoete.
+try: trace | «へ» | he
+play: match | Match them | «へや»=room; «ベッド»=bed; «かたづけて»=tidy it
+check: mcq | «ベッドを ととのえて» means… | Make your bed.* | Wash your hands. | Sit on your bed.
+check: tiles | Build it: Tidy your room. | へやを かたづけて
+home: Make your bed tomorrow and say «ベッドを ととのえて».
+skill: ja-chores
+
+@lesson 10.6 | ゴミを だして | 🧹 | home
+hook: Sweeping and taking out the rubbish.
+word: そうじ | cleaning | 🧹 | sweep with a broom | sōji
+word: ゴミ | rubbish | 🗑️ | throw something in the bin | gomi
+say: «ゆかを はいて。» | Sweep the floor. | Yuka o haite.
+say: «ゴミを だして。» | Take out the rubbish. | Gomi o dashite.
+learn: In Japan, kids clean their own classrooms every day. It’s called «そうじ».
+try: trace | «ほ» | ho
+play: match | Match them | «ゆかを はいて»=sweep the floor; «ゴミを だして»=take out the rubbish; «おさらを あらって»=wash the dishes
+check: hear | What does «ゴミ» mean? | rubbish* | floor | outside
+check: mcq | The kitchen floor is dusty. You’re asked to… | «ゆかを はいて。»* | «いぬに えさを あげて。» | «てを あらって。»
+home: Sweep a floor at home and say «ゆかを はいて».
+skill: ja-chores
+
+@lesson 10.7 | おわった！ | ✅ | home
+hook: Finished a job? Say so in Japanese!
+word: おわった | done, finished | ✅ | tick the air | owatta
+word: てつだうよ | I’ll help | 🤝 | offer a hand | tetsudau yo
+say: «おわった！» | Done! | Owatta!
+play: match | Match them | «おわった»=done; «てつだうよ»=I’ll help; «てつだう»=to help
+check: mcq | You just finished sweeping. You say… | «おわった！»* | «またあした！» | «ごめんなさい！»
+check: hear | What does «てつだうよ» mean? | I’ll help.* | Help me. | I’m done.
+home: Offer to help at home: «てつだうよ！»
+skill: ja-chores
+
+@lesson 10.8 | ぜんぶ おわった！ | 🌟 | home
+hook: All your jobs, in Japanese.
+word: ぜんぶ | all, everything | 🌟 | spread your arms wide | zenbu
+word: よくできたね | well done | 👏 | clap | yoku dekita ne
+say: «ぜんぶ おわった！» | All done! | Zenbu owatta!
+learn: «よくできたね» is the friendly way to say «よくできました».
+try: trace | «ぜ» | ze
+play: tiles | Build it: All done! | ぜんぶ おわった
+check: mcq | «よくできたね！» means… | Well done!* | What are the jobs? | I’ll help you.
+check: hear | What does «ぜんぶ» mean? | all* | list | help
+home: When your must-dos are done, tell your family «ぜんぶ おわった！»
+skill: ja-chores
+
+@story 10 | おてつだい
+line: おかあさん | «おはよう！ けん、きて。» | Good morning! Ken, come here. | Ohayō! Ken, kite.
+line: おかあさん | «いぬに えさを あげて ください。» | Please feed the dog. | Inu ni esa o agete kudasai.
+line: けん | «はい、おかあさん。» | OK, Mum. | Hai, okāsan.
+line: おとうさん | «ゆき、おさらを あらって ください。» | Yuki, please wash the dishes. | Yuki, osara o aratte kudasai.
+line: ゆき | «はい。てつだうよ。» | OK. I’ll help. | Hai. Tetsudau yo.
+line: けん | «おわった！ ぜんぶ おわった！» | Done! All done! | Owatta! Zenbu owatta!
+line: おとうさん | «よくできたね！» | Well done! | Yoku dekita ne!
+check: mcq | What job does Ken do? | feeds the dog* | washes the dishes | sweeps the floor
+check: mcq | What does Dad say at the end? | Well done!* | Come here! | Good night!

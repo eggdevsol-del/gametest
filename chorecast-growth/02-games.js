@@ -414,6 +414,8 @@ function renderItem(item, host, ctx, done) {
   host.innerHTML = ''; host.removeAttribute('data-locked');
   (GAMES[item.type] || GAMES.note)(item, host, ctx, done);
   host.querySelectorAll('[data-say]').forEach(b => { b.onclick = () => speak(b.dataset.say); });
+  // Games that redraw themselves get their «…» language text marked again each time
+  if (ctx && ctx.lang) { markLang(host, ctx.lang); const mo = new MutationObserver(() => markLang(host, ctx.lang)); mo.observe(host, { childList: true, subtree: true }); if (ctx.cleanup) ctx.cleanup.push(() => mo.disconnect()); }
 }
 // done (optional) runs when the reading ends, is cut off, or can't start
 function speak(text, done) {

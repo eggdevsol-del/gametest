@@ -1867,7 +1867,8 @@ function planPill() {
     : Plan.lifetime ? `${Plan.limits.name} · yours for good` : Plan.until ? `${Plan.limits.name} · ${Plan.renews === false ? 'ends' : 'renews'} ${when(Plan.until)}` : Plan.limits.name;
   return `<button class="plan-pill ${Plan.plan === 'free' ? 'free' : ''}" data-act="planOpen">${Plan.plan === 'free' ? '' : '<span aria-hidden="true">✦</span> '}${esc(t)}</button>`;
 }
-const planLocked = l => !Plan.limits.allLessons && l.unit > 1 && !(Plan.packs || []).some(p => p === l.tree || p === 'all');
+// A language course's free part is unit 1 of its first stage
+const planLocked = l => !Plan.limits.allLessons && (l.unit > 1 || (l.stage || 1) > 1) && !(Plan.packs || []).some(p => p === l.tree || p === 'all');
 // What the family's plan has: the same rules as allowed() in server/plans.js, from the catalogue's starter list. Kinds:
 // 'item' (by t, which covers land, sizes and tools), 'look' ('part:key' or 'tree:key'), 'set' and 'fund'. Prizes are
 // never Plus-only: they're won, not bought.
@@ -6084,7 +6085,7 @@ function viewShop() {
       <div class="shop-club-r">${club ? `<b>${esc(sel.name)} is a member</b><small>Until ${new Date(club.until).toLocaleDateString()}. Manage or cancel it in your Apple account.</small>` : `<b>${SHOP_CLUB.price}</b><small>Cancel any time</small>${buy(SHOP_CLUB.id, 'Join', sel.id)}`}</div></div>` : '<section class="empty glass"><h2>Add a kid first</h2></section>'}
     <h2 class="sec-t">Lesson packs</h2>
     <p class="shop-small">For every kid in the family, now and later.</p>
-    <div class="shop-packs">${live.map(t => pack(t, true)).join('')}${soon.map(t => pack(t, false)).join('')}</div>
+    <div class="shop-packs">${live.map(t => pack(t, true)).join('')}${(trees && trees.langs ? trees.langs.all.filter(L => trees.langs.live.includes(L.id)) : []).map(L => pack(L, true)).join('')}${soon.map(t => pack(t, false)).join('')}</div>
     <h2 class="sec-t">Chorecast Plus</h2>
     <div class="shop-wide glass"><div><b>Every lesson pack, and new ones as they come</b><p>Plus also has room for every kid, the full island shop and the Market. Usually the best deal with two or more kids.</p></div><button class="btn-white" data-act="planOpen">See plans</button></div>
     ${sel ? `<h2 class="sec-t">Bought for ${esc(sel.name)}</h2>${hist.length ? `<div class="shop-list glass">${hist.map(h => `<div class="shop-li"><span>${esc(shopName(h.product_id))}</span><small>${new Date(h.created_at).toLocaleDateString()}${h.source === 'test' ? ' · test' : ''}</small></div>`).join('')}</div>` : '<p class="shop-small">Nothing yet.</p>'}` : ''}
