@@ -838,6 +838,7 @@ async function open(kidId, opts = {}) {
   if (C.learnLock && C.learnLock(kid, opts)) return; // must-dos first, when the family has that switch on
   mount(); Grow.kidId = kidId; Grow.need = opts.need || 0; Grow.view = 'hub'; Grow.tree = opts.tree || null; Grow.run = null;
   root.hidden = false; Grow.open = true; document.body.classList.add('gw-open'); Grow.sessionAt = Date.now(); Grow.breakShown = false;
+  placeStage(null); skyOn();
   Sound.ensure(); Sound.whoosh();
   if (!Grow.stage) { Grow.stage = Stage3D(root.querySelector('.gw-cv')); }
   if (Grow.stage) { Grow.stage.setGuide(prog(kid).guide || 'kea'); Grow.stage.start(); }
@@ -851,7 +852,7 @@ async function open(kidId, opts = {}) {
 }
 function close() {
   if (!root) return; Grow.cleanup.splice(0).forEach(f => f()); try { speechSynthesis.cancel(); } catch (e) {}
-  root.hidden = true; Grow.open = false; document.body.classList.remove('gw-open'); if (Grow.stage) Grow.stage.stop(); if (PlantView.ok) PlantView.stop(); HowTo.stop();
+  placeStage(null); root.hidden = true; Grow.open = false; document.body.classList.remove('gw-open', 'gw-sky'); if (Grow.stage) Grow.stage.stop(); if (PlantView.ok) PlantView.stop(); HowTo.stop();
   C.scheduleRender();
 }
 function back() {
@@ -901,10 +902,11 @@ function hasLesson(kid) { if (!allLessons(bandOf(kid)).length) { loadBand(bandOf
 /* ---------- Rendering ---------- */
 function render() {
   if (!root || !Grow.open) return; const kid = kidNow(); if (!kid) return close();
-  Grow.cleanup.splice(0).forEach(f => f()); HowTo.stop();
+  Grow.cleanup.splice(0).forEach(f => f()); HowTo.stop(); placeStage(null); skyOn();
   const v = Grow.view, tree = Grow.tree && subject(Grow.tree);
   root.style.setProperty('--gh', (tree || (Grow.run && subject(Grow.run.lesson ? Grow.run.lesson.tree : Grow.run.tree)) || { hue: '#2F6FE4' }).hue);
-  root.dataset.view = v;
+  const wasView = root.dataset.view; root.dataset.view = v;
+  if (skyLook() && wasView !== v && ui) ui.scrollTop = 0; // on the app's sky a new screen starts at its top, as the app's tabs do
   if (Grow.stage) Grow.stage.setScene((v === 'tree' || v === 'lang') && tree ? tree.scene : Grow.run && Grow.run.lesson ? Grow.run.lesson.scene : Grow.run && Grow.run.scene ? Grow.run.scene : 'island');
   // The tree view is a full-screen plant with its own 3D view, so the stage rests. Every step of a lesson, quiz,
   // review or story, and its results, take place in front of the plant, which grows with each right answer in a
@@ -952,6 +954,7 @@ function viewGuide(kid) {
 }
 
 function viewHub(kid) {
+  if (skyLook()) return viewHubSky(kid);
   Prize.tick(kid);
   const g = prog(kid), lvl = charLevel(kid), m = mastered(kid), sug = suggestions(kid, 3), due = dueCards(kid).length, echo = (g.echo || []).length;
   const mom = momentFor(kid), momDone = g.mom && g.mom.d === today() && g.mom.done, story = marketStory(kid), storyDone = g.story === weekKey();
@@ -1465,7 +1468,7 @@ function onClick(e) {
     case 'homeDone': a.disabled = true; a.textContent = 'Great! We’ll ask how it went.'; onEvent(kid, 'home', { title: local(Grow.last.lesson.title), skill: Grow.last.lesson.skill }); return;
     case 'toTree': Grow.view = isLang(Grow.tree) ? 'lang' : 'tree'; Grow.run = null; return render();
     case 'toHub': Grow.view = 'hub'; Grow.tree = null; Grow.run = null; return render();
-    default: if (LANG_CLICK[g]) return LANG_CLICK[g](kid, id, a);
+    default: if (LANG_CLICK[g]) return LANG_CLICK[g](kid, id, a); if (SKY_CLICK[g]) return SKY_CLICK[g](kid, id, a);
   }
 }
 
@@ -1612,10 +1615,23 @@ function Stage3D(canvas) {
   // Floating island the guide and the lesson stand on
   const world = new T.Group(); scene.add(world);
   const isle = new T.Group(); world.add(isle);
-  part(isle, 'c', toon(0x58b84a), [0, -0.05, 0], [2.75, 0.18, 1.7]);
-  part(isle, 'c', toon(0x8a5a3c), [0, -0.2, 0], [2.7, 0.16, 1.66]);
-  part(isle, 'k', toon(0x7a5536), [0, -0.85, 0], [2.55, 1.2, 1.55], [Math.PI, 0, 0]);
+  const isleTop = part(isle, 'c', toon(0x58b84a), [0, -0.05, 0], [2.75, 0.18, 1.7]);
+  const isleSoil = part(isle, 'c', toon(0x8a5a3c), [0, -0.2, 0], [2.7, 0.16, 1.66]);
+  const isleCone = part(isle, 'k', toon(0x7a5536), [0, -0.85, 0], [2.55, 1.2, 1.55], [Math.PI, 0, 0]);
+  // The sky look's island: grass, soil and a craggy rock underneath, in the colours of the kid's own island on Today
+  const rock = new T.Group(); rock.visible = false; isle.add(rock);
+  { const crag = new T.MeshToonMaterial({ color: 0x5e4836, gradientMap: G3.GRAD, flatShading: true }), crag2 = new T.MeshToonMaterial({ color: 0x4a3929, gradientMap: G3.GRAD, flatShading: true });
+    [crag, crag2].forEach(m => { G3.rimPatch(m); m.userData.keep = 1; });
+    const cone = new T.Mesh(keep(new T.ConeGeometry(1, 1, 9, 2)), crag); cone.position.set(0, -0.78, 0); cone.scale.set(2.5, 1.15, 1.5); cone.rotation.set(Math.PI, 0.3, 0); rock.add(cone);
+    [[-1.3, -0.5, 0.35, 0.55, crag2], [1.25, -0.48, 0.2, 0.5, crag], [0.35, -1.05, 0.45, 0.5, crag2], [-0.5, -1.0, -0.3, 0.42, crag], [0.9, -0.82, -0.5, 0.38, crag2], [0, -1.45, 0, 0.32, crag]].forEach(([x, y, z, r, m], i) => { const d = new T.Mesh(geo.d, m); d.position.set(x, y, z); d.scale.set(r * 1.25, r, r); d.rotation.set(i * 0.7, i * 1.3, i * 0.4); rock.add(d); }); }
   G3.outline(isle);
+  let skyIsle = false;
+  function setLook(sky) {
+    if (sky === skyIsle) return; skyIsle = sky;
+    isleTop.material = toon(sky ? 0x3f6e2c : 0x58b84a); isleSoil.material = toon(sky ? 0x5a3c26 : 0x8a5a3c);
+    isleCone.visible = !sky; rock.visible = sky;
+    if (sceneKey) { const k = sceneKey; sceneKey = ''; setScene(k); }
+  }
 
   /* ---- Tweens, labels and little animation verbs ---- */
   const E = { out: t => 1 - (1 - t) ** 3, back: t => 1 + 2.70158 * (t - 1) ** 3 + 1.70158 * (t - 1) ** 2, io: t => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2), lin: t => t,
@@ -1692,7 +1708,7 @@ function Stage3D(canvas) {
     home: g => { part(g, 'b', toon(0xf4e3c3), [1.2, 0.3, -0.35], [0.66, 0.6, 0.55]); part(g, 'k', toon(0xd9534f), [1.2, 0.82, -0.35], [0.56, 0.44, 0.48], [0, Math.PI / 4, 0]); part(g, 'b', toon(0x8a5a3c), [1.2, 0.18, -0.07], [0.16, 0.36, 0.02]); },
     online: g => { part(g, 'b', toon(0x23283a), [1.2, 0.65, -0.35], [0.56, 1.0, 0.08]); part(g, 'b', toon(0x5ac8fa, { e: 0x1a4a6a }), [1.2, 0.67, -0.3], [0.48, 0.84, 0.02]); part(g, 'b', toon(0xffc93c), [-1.2, 0.3, -0.2], [0.34, 0.28, 0.16]); const s = new T.Mesh(new T.TorusGeometry(0.12, 0.035, 8, 18, Math.PI), toon(0x9aa3b5)); s.position.set(-1.2, 0.44, -0.2); g.add(s); },
     townhall: g => { part(g, 'b', toon(0xf1ece2), [1.2, 0.36, -0.4], [0.9, 0.5, 0.45]); part(g, 'k', toon(0xd9cbb0), [1.2, 0.8, -0.4], [0.66, 0.36, 0.3], [0, Math.PI / 4, 0]); for (let i = 0; i < 4; i++) part(g, 'c', toon(0xffffff), [0.88 + i * 0.21, 0.36, -0.15], [0.04, 0.5, 0.04]); part(g, 'b', toon(0x2f6fe4), [-1.2, 0.2, -0.1], [0.34, 0.4, 0.3]); part(g, 'b', toon(0x1b1b22), [-1.2, 0.41, -0.1], [0.16, 0.02, 0.03]); },
-    island: g => { part(g, 'c', toon(0x8a5a3c), [1.25, 0.3, -0.35], [0.06, 0.6, 0.06]); part(g, 's', toon(0x4caf50), [1.25, 0.75, -0.35], [0.36, 0.32, 0.36]); part(g, 's', toon(0x66c05a), [1.05, 0.68, -0.2], [0.22, 0.2, 0.22]); part(g, 's', toon(0xff6b9d), [-1.15, 0.08, -0.05], [0.07, 0.07, 0.07]); },
+    island: g => { part(g, 'c', toon(0x8a5a3c), [1.25, 0.3, -0.35], [0.06, 0.6, 0.06]); part(g, 's', toon(skyIsle ? 0x2f6a2a : 0x4caf50), [1.25, 0.75, -0.35], [0.36, 0.32, 0.36]); part(g, 's', toon(skyIsle ? 0x3f7d33 : 0x66c05a), [1.05, 0.68, -0.2], [0.22, 0.2, 0.22]); part(g, 's', toon(0xff6b9d), [-1.15, 0.08, -0.05], [0.07, 0.07, 0.07]); },
   };
   let props = null, sceneKey = '';
   const setRoot = grp(world), subjRoot = grp(world);
@@ -2002,7 +2018,7 @@ function Stage3D(canvas) {
     pace(now); G3.inkFor(R); R.render(scene, cam);
   }
   return {
-    setGuide, setScene, react, show, fx,
+    setGuide, setScene, react, show, fx, setLook,
     start() { if (running) return; running = true; size(); last = performance.now(); raf = requestAnimationFrame(frame); },
     stop() { running = false; cancelAnimationFrame(raf); },
   };
@@ -2512,6 +2528,7 @@ const style = document.createElement('style'); style.id = 'growth-css'; style.te
    tree. Other subjects' branches show their lessons as clusters of leaves. Without WebGL, viewTree falls back
    to a list. */
 const PlantView = (() => {
+  const SKY_COLS = [[0x3f9cff, 0x8fd0ff, 0xe8f7ff], [0x1f6fd6, 0x3e92eb, 0x8cc8f7]]; let appSky = false;
   const T = window.THREE, G3 = C.G3;
   if (!T || !G3 || !G3.ok) return { ok: false };
   const V3 = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z), lerp = (a, b, t) => a + (b - a) * t, smooth = t => t * t * (3 - 2 * t);
@@ -2639,7 +2656,7 @@ const PlantView = (() => {
     scene = new T.Scene(); cam = new T.PerspectiveCamera(40, 1, 0.1, 400);
     scene.add(new T.HemisphereLight(col(0xdff2ff), col(0x7fbf6a), 0.75));
     const sun = new T.DirectionalLight(col(0xfff3dc), 0.95); sun.position.set(-6, 10, 8); scene.add(sun);
-    sky = new T.Mesh(new T.SphereGeometry(200, 32, 16), new T.ShaderMaterial({ side: T.BackSide, depthWrite: false, uniforms: { top: { value: col(0x3f9cff) }, mid: { value: col(0x8fd0ff) }, low: { value: col(0xe8f7ff) } },
+    sky = new T.Mesh(new T.SphereGeometry(200, 32, 16), new T.ShaderMaterial({ side: T.BackSide, depthWrite: false, uniforms: { top: { value: col(SKY_COLS[+appSky][0]) }, mid: { value: col(SKY_COLS[+appSky][1]) }, low: { value: col(SKY_COLS[+appSky][2]) } },
       vertexShader: 'varying vec3 vW; void main(){ vW = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
       fragmentShader: 'uniform vec3 top, mid, low; varying vec3 vW; void main(){ float h = vW.y; vec3 c = h > 0.0 ? mix(mid, top, smoothstep(0.0, 0.7, h)) : mix(mid, low, smoothstep(0.0, -0.5, h)); gl_FragColor = linearToOutputTexel(vec4(c, 1.0)); }' }));
     scene.add(sky);
@@ -2651,9 +2668,11 @@ const PlantView = (() => {
 
     const wld = new T.Group(); scene.add(wld); plant = new T.Group(); wld.add(plant);
     // The floating island: grass, a layered rock cone, a soil mound for the seed, tufts, daisies and a sign
+    // In the sky look the grass takes the deeper greens of the kid's own island on Today
+    const GRASS = appSky ? [0x5c9e3f, 0x4a8a34, 0x3d7f2c, 0x649f48] : [0x6fcf4f, 0x58b83d, 0x4fae36, 0x7fd65f];
     isl = new T.Group(); wld.add(isl);
-    mesh(new T.CylinderGeometry(3.1, 2.8, 0.5, 48), toon(0x6fcf4f), isl, 0, -0.25, 0);
-    mesh(new T.TorusGeometry(2.95, 0.16, 8, 48), toon(0x58b83d), isl, 0, -0.02, 0).rotation.x = Math.PI / 2;
+    mesh(new T.CylinderGeometry(3.1, 2.8, 0.5, 48), toon(GRASS[0]), isl, 0, -0.25, 0);
+    mesh(new T.TorusGeometry(2.95, 0.16, 8, 48), toon(GRASS[1]), isl, 0, -0.02, 0).rotation.x = Math.PI / 2;
     const rockG = faceted(new T.ConeGeometry(2.85, 3.6, 11, 3)); rockG.rotateX(Math.PI);
     { const p = rockG.attributes.position, cs = [], A = col(0x9b7655), B = col(0x6f5040), Lt = col(0xc29a72); for (let i = 0; i < p.count; i++) { const band = Math.sin(p.getY(i) * 4.2 + Math.sin(p.getX(i) * 2) * 0.8), c = band > 0.35 ? Lt : band < -0.45 ? B : A; cs.push(c.r, c.g, c.b); } rockG.setAttribute('color', new T.Float32BufferAttribute(cs, 3)); }
     mesh(rockG, toon(0xffffff, { vc: 1 }), isl, 0, -2.3, 0);
@@ -2661,16 +2680,16 @@ const PlantView = (() => {
     { const p = soilG.attributes.position, cs = [], A = col(0x7a4e2d), B = col(0x5e3a20); for (let i = 0; i < p.count; i++) { const c = Math.sin(p.getX(i) * 13) * Math.cos(p.getZ(i) * 11) > 0.55 ? B : A; cs.push(c.r, c.g, c.b); } soilG.setAttribute('color', new T.Float32BufferAttribute(cs, 3)); }
     mesh(soilG, toon(0xffffff, { vc: 1 }), isl).scale.y = 0.36;
     coinsG = new T.Group(); isl.add(coinsG); { const cg = new T.CylinderGeometry(0.2, 0.2, 0.05, 24); [[1.25, 0.35, 0.6], [-1.1, 0.7, -0.9], [0.2, -1.35, 0.3]].forEach(([x, z, r]) => mesh(cg, toon(0xffc93c), coinsG, x, 0.05, z).rotation.set(r, r * 2, 0.4)); }
-    { const tg = new T.ConeGeometry(0.06, 0.38, 5); for (let i = 0; i < 26; i++) { const a = i * 2.4, d = 1.45 + (i % 5) * 0.28, tf = new T.Group(); tf.position.set(Math.cos(a) * d, 0, Math.sin(a) * d); [-0.06, 0, 0.06].forEach((o, k) => { mesh(tg, toon(0x4fae36), tf, o, 0.16, (k - 1) * 0.03).rotation.z = o * 3; }); isl.add(tf); } }
+    { const tg = new T.ConeGeometry(0.06, 0.38, 5); for (let i = 0; i < 26; i++) { const a = i * 2.4, d = 1.45 + (i % 5) * 0.28, tf = new T.Group(); tf.position.set(Math.cos(a) * d, 0, Math.sin(a) * d); [-0.06, 0, 0.06].forEach((o, k) => { mesh(tg, toon(GRASS[2]), tf, o, 0.16, (k - 1) * 0.03).rotation.z = o * 3; }); isl.add(tf); } }
     { const sg = new T.CylinderGeometry(0.02, 0.02, 0.36, 5), pg = new T.SphereGeometry(0.07, 8, 6), mg = new T.SphereGeometry(0.06, 8, 6);
-      [[2.2, 0.9], [-2.1, -0.4], [0.9, 2.15], [-0.6, -2.2], [1.8, -1.5]].forEach(([x, z]) => { const f = new T.Group(); f.position.set(x, 0, z); mesh(sg, toon(0x4fae36), f, 0, 0.18, 0); for (let k = 0; k < 5; k++) mesh(pg, toon(0xffffff), f, Math.cos(k * 1.26) * 0.09, 0.38, Math.sin(k * 1.26) * 0.09).scale.y = 0.45; mesh(mg, toon(0xffd84d), f, 0, 0.4, 0); isl.add(f); }); }
+      [[2.2, 0.9], [-2.1, -0.4], [0.9, 2.15], [-0.6, -2.2], [1.8, -1.5]].forEach(([x, z]) => { const f = new T.Group(); f.position.set(x, 0, z); mesh(sg, toon(GRASS[2]), f, 0, 0.18, 0); for (let k = 0; k < 5; k++) mesh(pg, toon(0xffffff), f, Math.cos(k * 1.26) * 0.09, 0.38, Math.sin(k * 1.26) * 0.09).scale.y = 0.45; mesh(mg, toon(0xffd84d), f, 0, 0.4, 0); isl.add(f); }); }
     [[1.9, 1.6, 0.22], [-2.3, 0.9, 0.16], [-1.4, -1.9, 0.26]].forEach(([x, z, s]) => mesh(faceted(new T.DodecahedronGeometry(s)), toon(0xb9b2c4), isl, x, s * 0.4, z).rotation.set(x, z, 0));
     const sign = new T.Group(); sign.position.set(-1.75, 0, 1.35); sign.rotation.y = 0.5; isl.add(sign);
     mesh(new T.BoxGeometry(0.08, 0.7, 0.08), toon(0xc98a4b), sign, 0, 0.35, 0);
     const board = mesh(new T.BoxGeometry(0.95, 0.42, 0.06), toon(0xc98a4b), sign, 0, 0.72, 0);
     signMesh = mesh(new T.PlaneGeometry(0.86, 0.34), new T.MeshBasicMaterial(), board, 0, 0, 0.032); signMesh.userData.noInk = true;
     bake(coinsG).children.forEach(c => { c.userData.keep = true; }); bake(isl); G3.outline(isl);
-    { const far = new T.Group(); [[-36, 4, -34, 1.6], [40, 13, -30, 2], [-38, 25, -28, 1.4]].forEach(([x, y, z, s]) => { const f = new T.Group(); f.position.set(x, y, z); f.scale.setScalar(s); mesh(new T.CylinderGeometry(2, 1.8, 0.4, 24), toon(0x7fd65f), f); mesh(faceted(new T.ConeGeometry(1.9, 2.4, 9)), toon(0xa98263), f, 0, -1.4, 0).rotation.x = Math.PI; mesh(new T.SphereGeometry(0.7, 12, 8), toon(0x4fae36), f, 0.4, 0.7, 0).scale.y = 1.3; far.add(f); }); scene.add(bake(far)); }
+    { const far = new T.Group(); [[-36, 4, -34, 1.6], [40, 13, -30, 2], [-38, 25, -28, 1.4]].forEach(([x, y, z, s]) => { const f = new T.Group(); f.position.set(x, y, z); f.scale.setScalar(s); mesh(new T.CylinderGeometry(2, 1.8, 0.4, 24), toon(GRASS[3]), f); mesh(faceted(new T.ConeGeometry(1.9, 2.4, 9)), toon(0xa98263), f, 0, -1.4, 0).rotation.x = Math.PI; mesh(new T.SphereGeometry(0.7, 12, 8), toon(GRASS[2]), f, 0.4, 0.7, 0).scale.y = 1.3; far.add(f); }); scene.add(bake(far)); }
 
     // The seed: two half shells that split open on the first right answer
     seed = new T.Group(); seed.position.set(0, 0.4, 0); plant.add(seed);
@@ -3292,8 +3311,10 @@ void main() {
     const k = `${kid.id}|${kid.name}|${tree.id}|${bandOf(kid)}|${(packFor(tree.id, bandOf(kid)) || { units: [] }).units.map(u => u.lessons.map(l => l.checks.length).join('.')).join(',')}`;
     if (k === key) return false; key = k; treeId = tree.id; plan(kid, tree); return true;
   }
+  // The sky look paints the plant's sky in the app's own sky colours (--sky-top, --sky-mid, --sky-low)
+  function skyTint(on) { appSky = !!on; if (!sky) return; const u = sky.material.uniforms, c = SKY_COLS[+appSky]; u.top.value = col(c[0]); u.mid.value = col(c[1]); u.low.value = col(c[2]); }
   return {
-    ok: true,
+    ok: true, skyTint,
     // The full-screen plant for a tree. `celebrateId` is a lesson just passed for the first time.
     show(host, kid, tree, celebrateId) {
       mount(); Prize.tick(kid); mode = 'tree'; crownI = -1; CAM.over = false; el.classList.remove('quiz'); host.appendChild(el);
@@ -4322,6 +4343,153 @@ button .lw,.g-card .lw{cursor:inherit;border:0;color:inherit}
 .l-trace canvas{width:min(76vw,320px);height:min(76vw,320px);touch-action:none;border-radius:20px;background:#F7F8FC;border:2px solid #DCE1EE}
 `;
 const lstyle = document.createElement('style'); lstyle.id = 'growth-lang-css'; lstyle.textContent = LCSS; document.head.appendChild(lstyle);
+
+/* ---------- Prototype: the Character Growth home on the app's own sky ----------
+   A home screen that looks like the kid's other screens instead of a separate app: the living sky shows through, with
+   the same top bar, hero number, glass cards, chore-style tiles and tab bar, and the guide stands on its island where
+   the kid's own island sits on Today. Lessons, quizzes and the plant keep their own screens, now on the sky too.
+   Off unless this device has the preview on: open the app with ?growlook=sky (or ?growlook=classic to go back). */
+const LOOK_KEY = 'cc:growLook';
+try { const q = new URLSearchParams(location.search).get('growlook'); if (q === 'sky' || q === 'classic') localStorage.setItem(LOOK_KEY, q); } catch (e) {}
+function skyLook() { try { return localStorage.getItem(LOOK_KEY) === 'sky'; } catch (e) { return false; } }
+function skyOn() {
+  const on = skyLook(), was = document.body.classList.contains('gw-sky');
+  root.classList.toggle('sky', on); document.body.classList.toggle('gw-sky', on && Grow.open);
+  if (Grow.stage && Grow.stage.setLook) Grow.stage.setLook(on);
+  if (PlantView.ok) PlantView.skyTint(on);
+  if (on && Grow.open && !was) C.scheduleRender(); // the app's sky starts moving again behind Character Growth
+  return on;
+}
+
+// The guide's stage lives beside the lessons in the classic look, and in the hero's island slot on the sky home.
+let stageEl = null;
+function placeStage(slot) {
+  stageEl = stageEl || (root && root.querySelector('.gw-stage')); if (!stageEl) return;
+  const to = slot || root; if (stageEl.parentNode === to) return;
+  to.prepend(stageEl);
+}
+
+const SKY_TABS = [['today', 'sun', 'Today'], ['grow', 'sprout', 'Grow'], ['money', 'jar', 'Money'], ['market', 'chart', 'Market'], ['proof', 'photo', 'Proof wall']];
+const skyTabs = () => `<nav class="tabbar glass" aria-label="Sections">${SKY_TABS.map(([k, i, l]) => k === 'grow'
+  ? `<button class="tab on" data-g="skyTop" aria-current="page">${ic(i)}<span>${l}</span></button>`
+  : `<button class="tab" data-g="skyTab" data-tab="${k}">${ic(i)}<span>${l}</span></button>`).join('')}</nav>`;
+// A sticker in a subject's colour, like the chore stickers
+const hueSticker = (hue, icon, cls = '') => `<span class="sticker ${cls}" style="--c1:color-mix(in srgb,${hue} 62%,#fff);--c2:${hue}" aria-hidden="true">${icon}</span>`;
+const QUICK_HUE = { review: '#2F7BEA', echo: '#FF9F0A', moment: '#18B597', story: '#8A5CF0', crown: '#E8A317' };
+
+function viewHubSky(kid) {
+  Prize.tick(kid);
+  const g = prog(kid), lvl = charLevel(kid), m = mastered(kid), sug = suggestions(kid, 3), due = dueCards(kid).length, echo = (g.echo || []).length;
+  const mom = momentFor(kid), momDone = g.mom && g.mom.d === today() && g.mom.done, story = marketStory(kid), storyDone = g.story === weekKey();
+  const t = titles(kid), d = dayInfo(kid), room = Math.max(0, XP.dayCap - d.xp), band = BANDS[BAND_IX[bandOf(kid)]], crowns = openCrowns(kid);
+  const needN = Grow.need ? Math.ceil(Grow.need / XP.lesson) : 0, first = sug[0];
+  say(Grow.need ? `You need ${Grow.need} more XP. ${needN === 1 ? 'One lesson' : `${needN} lessons`} will do it!` : sug.length ? `Ready, ${kid.name}? Pick what to learn next.` : crowns.length ? `You finished every lesson, ${kid.name}! Now win your unit crowns.` : `You’ve done everything here, ${kid.name}! New lessons arrive in updates.`);
+
+  // The hero: like "Ari's sky" on Today, with the level as the big number and today's learning as the weather
+  const cond = Grow.need ? ['🎯', `${Grow.need} XP to go`] : due ? ['🔁', due === 1 ? 'A review is waiting' : `${due} reviews waiting`] : !room ? ['🌸', 'All your XP for today'] : d.xp ? ['🌿', 'Growing nicely today'] : sug.length ? ['🌱', 'Ready to learn'] : crowns.length ? ['🏆', 'Crowns to win'] : ['🌳', 'Every lesson done'];
+  const allDone = treesOn().reduce((n, tr) => n + treeStats(kid, tr.id).done, 0), crownsWon = Object.values(g.units || {}).filter(u => u.best >= 0.8).length;
+  const hero = `<section class="hero gws-hero" aria-label="${esc(kid.name)}'s learning">
+      <div class="hero-loc"><span class="hero-ava" style="--hue:${kid.hue}">${kid.avatar}</span><span>${esc(kid.name)}'s learning</span></div>
+      <div class="hero-num num" aria-label="Level ${lvl}"><span class="gws-lw">Level</span>${lvl}</div>
+      <div class="hero-cond"><span class="wx" aria-hidden="true">${cond[0]}</span>${cond[1]}</div>
+      <div class="hero-sub">${d.xp} of ${XP.dayCap} XP from lessons today${minutesToday(kid) ? ` · ${minutesToday(kid)} min of learning` : ''}</div>
+      <div class="gws-slot"></div>
+      <div class="gws-cap"><b>${band.name} · ages ${band.ages}</b><span>${t.length ? t.map(esc).join(' · ') : `${m} skill${m === 1 ? '' : 's'} mastered · master 4 lessons in a tree to earn its title`}</span></div>
+      <div class="dayline" aria-hidden="true"><div class="dayline-fill" style="width:${Math.round(d.xp / XP.dayCap * 100)}%"></div><span class="dayline-sun" style="left:${Math.round(d.xp / XP.dayCap * 100)}%">${ic('sparkle')}</span></div>
+      <div class="minis">${[['#30C25A', 'Passed', allDone], ['#FFC94D', 'Mastered', m], ['#F06595', 'Crowns', crownsWon]].map(([c, l, n]) => `<div class="mini glass"><span><i style="background:${c}"></i>${l}</span><b class="num">${n}</b></div>`).join('')}</div>
+    </section>`;
+
+  // "Learn this next", the same card as "Do this next" on Today
+  const crown0 = !first && crowns[0];
+  const next = first ? `<button class="next-card glass" data-g="lesson" data-id="${first.id}">${hueSticker(TREE[first.tree].hue, esc(first.icon), 'sm next-ic')}<span class="next-txt"><small>Learn this next</small><b>${esc(local(first.title))}</b><em>${esc(TREE[first.tree].name)} · Unit ${first.unit} · ${xpWords(kid, first)}</em></span><span class="next-go" aria-hidden="true">${ic('play')}</span></button>`
+    : crown0 ? `<button class="next-card glass" data-g="challenge" data-id="${crown0.u.id}">${hueSticker(QUICK_HUE.crown, '🏆', 'sm next-ic')}<span class="next-txt"><small>Win this next</small><b>${esc(crown0.tree.name)} · Unit ${crown0.u.n} crown</b><em>${crownSize(crown0.u)} questions · ${passGoal(crownSize(crown0.u))} · +${XP.challenge} XP</em></span><span class="next-go" aria-hidden="true">${ic('play')}</span></button>`
+    : `<section class="next-card done glass"><span class="next-ic" aria-hidden="true">🌸</span><span class="next-txt"><small>Learn this next</small><b>You finished every lesson!</b><em>New lessons arrive in an update.</em></span></section>`;
+
+  const tile = (g2, id, hue, icon, top, name, pay, extra = '') => `<button class="tile" data-g="${g2}" ${id ? `data-id="${id}"` : ''} style="--c1:color-mix(in srgb,${hue} 62%,#fff);--c2:${hue}" ${extra}><span class="tile-top">${top}</span><span class="sticker" aria-hidden="true">${icon}</span><span class="tile-name">${name}</span><span class="tile-pay num">${pay}</span></button>`;
+  const lessonTiles = sug.map(l => { const as = (g.assigned || []).find(a => a.id === l.id), lx = lessonXp(kid, l); return tile('lesson', l.id, TREE[l.tree].hue, esc(l.icon), as ? '⭐ From a grown-up' : esc(TREE[l.tree].name), esc(local(l.title)), lx ? `+${lx + (as && as.bonus ? as.bonus : 0)} XP` : 'Practice'); });
+  const crownTiles = crowns.map(({ u, tree }) => tile('challenge', u.id, QUICK_HUE.crown, '🏆', `${esc(tree.name)} crown`, esc(local(u.title)), `+${XP.challenge} XP`));
+  const lessonsCard = sug.length || crowns.length ? `<section class="card glass"><header class="card-h"><span class="dot" style="background:#5AC8FA"></span><span class="card-t">${sug.length ? 'Lessons for you' : 'Unit crowns'}</span><span class="card-r">${sug.length || crowns.length} ready</span></header>
+      <div class="tiles">${(sug.length ? lessonTiles : crownTiles).join('')}</div>
+      <p class="card-foot">${room ? `A new lesson pays up to ${XP.lesson + XP.perfect} XP: ${XP.lesson} for passing and ${XP.perfect} more if every answer is right.` : `You’ve earned all ${XP.dayCap} learning XP for today. Lessons still grow your tree, and the XP starts again tomorrow.`}</p></section>` : '';
+
+  const quick = [
+    due ? tile('review', '', QUICK_HUE.review, '🔁', 'A few minutes', `${due} review${due === 1 ? '' : 's'} due`, `+${Math.min(due, 8) * XP.card} XP`) : '',
+    echo ? tile('echo', '', QUICK_HUE.echo, '💡', 'About your week', `${echo} question${echo === 1 ? '' : 's'}`, `+${echo * XP.echo} XP`) : '',
+    mom ? tile('moment', '', QUICK_HUE.moment, momDone ? '✅' : '💬', '30 seconds', 'Today’s Money Moment', momDone ? 'Done' : `+${XP.moment} XP`) : '',
+    story && !storyDone ? tile('story', '', QUICK_HUE.story, '📰', 'This week', 'In the market', `+${XP.story} XP`) : '',
+  ].filter(Boolean);
+  const quickCard = quick.length ? `<section class="card glass"><header class="card-h"><span class="dot" style="background:var(--gig)"></span><span class="card-t">Quick ones</span><span class="card-tag">· Bonus</span><span class="card-r">${quick.length}</span></header><div class="tiles">${quick.join('')}</div></section>` : '';
+
+  const [pa, pb] = Prize.upcoming(kid);
+  const prizeCard = pa ? (() => { const f = clamp(1 - pa.left / Math.max(pa.left, pa.of), 0, 1), closer = (g.prize || {}).closer === today();
+    return `<section class="card glass"><header class="card-h"><span class="dot" style="background:var(--sun)"></span><span class="card-t">Next island prize</span>${closer ? '<span class="card-tag">· it moved closer!</span>' : ''}<span class="card-r">${pa.left} to go</span></header>
+      <div class="gws-prize">${hueSticker('#FF9F43', pa.info.icon, 'sm')}<div class="gws-rt"><b>${esc(pa.info.name)}</b><span class="gws-bar" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></span><small>${prizeHow(kid, pa.left)}${pb ? ` · then ${esc(pb.info.name)}` : ''}</small></div></div></section>`; })() : '';
+
+  const row = (g2, id, hue, icon, name, sub, f, foot) => `<button class="gws-row" data-g="${g2}" data-id="${id}">${hueSticker(hue, icon, 'sm')}<span class="gws-rt"><b>${name}</b><small>${sub}</small><span class="gws-bar" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></span><small>${foot}</small></span>${ic('next')}</button>`;
+  const trees = treesOn().map(tr => { const st = treeStats(kid, tr.id); return row('tree', tr.id, tr.hue, tr.icon, esc(tr.name), esc(tr.blurb), st.total ? st.done / st.total : 0, `${st.done} of ${st.total} lessons${scoreWords(st)} · ${tr.id === 'money' ? (st.done ? 'See your tree grow' : 'Plant your seed') : st.done ? 'See your branch grow' : 'Start a new branch'}`); });
+  const treeCard = `<section class="card glass"><header class="card-h"><span class="dot" style="background:var(--good)"></span><span class="card-t">${treesOn().length <= 3 ? 'Your Learning Tree' : 'Skill trees'}</span><span class="card-r">Level ${lvl}</span></header><div class="gws-rows">${trees.join('')}</div></section>`;
+
+  // Languages get a section of their own, a tile per course a grown-up has switched on for this kid
+  const ls = kidLangs(kid);
+  const langs = ls.map(L => { const s = langStage(kid, L.id), st = treeStats(kid, L.id), due = LC.cards[lcKey(kid, L.id)] ? lcDue(kid, L.id).length : 0, nx = st.total ? nextIn(kid, L.id) : null; return { L, s, st, due, nx }; });
+  const wordsDue = langs.reduce((a, x) => a + x.due, 0), firstNx = langs.find(x => x.nx && !x.due);
+  const langCard = ls.length ? `<section class="card glass gws-langs"><header class="card-h"><span class="dot" style="background:var(--bonus)"></span><span class="card-t">Languages</span>${wordsDue ? '<span class="card-tag">· practise first</span>' : ''}<span class="card-r">${wordsDue ? `${wordsDue} word${wordsDue === 1 ? '' : 's'} to practise` : `${ls.length} course${ls.length === 1 ? '' : 's'}`}</span></header>
+      <div class="tiles">${langs.map(({ L, s, st, due }) => tile('lang', L.id, L.hue, esc(L.icon), due ? `🔁 ${due} to practise` : esc(L.levels[s - 1] || `Stage ${s}`), esc(L.name), st.total ? `${st.done} of ${st.total}` : 'Start')).join('')}</div>
+      <p class="card-foot">${firstNx ? `Next in ${esc(firstNx.L.name)}: ${esc(local(firstNx.nx.title))}. ` : ''}Hear it, say it, read it and write it. New words come back the next day so they stick.</p></section>` : '';
+
+  const cs = casesFor(kid).slice(0, 12), csDone = cs.filter(x => (g.cases || {})[x.id]).length;
+  const caseCard = cs.length ? `<section class="card glass"><header class="card-h"><span class="dot" style="background:var(--team)"></span><span class="card-t">Real stories</span><span class="card-r">${csDone}/${cs.length} read</span></header>
+      <div class="lessons">${cs.map(x => `<button class="lsn ${(g.cases || {})[x.id] ? 'done' : ''}" data-g="case" data-id="${x.id}"><span class="lsn-ic" aria-hidden="true">${esc(x.icon)}</span><span class="lsn-t">${esc(x.name)}</span><small class="gws-lsub">${esc((TREE[x.tree] || {}).name || '')} · +${XP.caseStudy} XP</small></button>`).join('')}</div>
+      <p class="card-foot">True stories about real people and money. Each one ends with a question to think about.</p></section>` : '';
+
+  ui.innerHTML = `<div class="wrap kid gws" style="--hue:${kid.hue}">
+    <header class="topbar"><button class="pill glass" data-g="skyFamily">${ic('back')}<span>Family</span></button>
+      <div class="topbar-r">${C.kidsList().length > 1 ? `<button class="pill glass" data-g="crewPick">${ic('crew')}<span>Crew quiz</span></button>` : ''}<button class="icon-btn glass" data-g="skyMute" aria-label="${Sound.muted ? 'Turn sound on' : 'Turn sound off'}">${ic(Sound.muted ? 'soundOff' : 'soundOn')}</button></div></header>
+    <div class="split">${next}${hero}<div class="col">${prizeCard}${lessonsCard}${langCard}${quickCard}${treeCard}${caseCard}</div></div>
+  </div>${skyTabs()}`;
+  placeStage(ui.querySelector('.gws-slot'));
+}
+
+const SKY_CLICK = {
+  skyTop: () => { ui.scrollTo({ top: 0, behavior: C.reduced ? 'auto' : 'smooth' }); },
+  skyTab: (kid, id, a) => { close(); UI.tab = a.dataset.tab; Sound.tap(); scrollTo(0, 0); C.render(); },
+  skyFamily: () => { close(); C.ACT.home(); },
+  skyMute: () => { Sound.toggle(); render(); },
+};
+
+const SKY_CSS = `
+body.gw-open.gw-sky #app,body.gw-open.gw-sky #g3{visibility:hidden}
+.gw.sky{background:none}
+.gw.sky .gw-top{background:var(--glass);-webkit-backdrop-filter:blur(30px) saturate(170%);backdrop-filter:blur(30px) saturate(170%);border-bottom:1px solid var(--glass-line)}
+.gw.sky[data-view=tree] .gw-top{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0}
+.gw.sky .pl{background:#3E92EB}
+.gw.sky[data-view=hub]{display:block}
+.gw.sky[data-view=hub] .gw-ui{position:absolute;inset:0;padding-bottom:0}
+.gws .topbar{padding-top:env(safe-area-inset-top,0px)}
+.gws-lw{font-size:.16em;font-weight:800;letter-spacing:.1em;text-transform:uppercase;vertical-align:2.9em;margin-right:.3em;color:var(--on-sky-2)}
+.gws-slot{position:relative;height:clamp(230px,37vh,320px);margin:8px -8px 0}
+.gws-slot .gw-stage{position:absolute;inset:0;overflow:visible}
+.gws-slot .gw-say{top:0;font-size:calc(14px*var(--ts));padding:8px 14px}
+.gws-cap{display:flex;flex-direction:column;gap:2px;margin:2px 4px 0}
+.gws-cap b{font:900 calc(13px*var(--ts)) var(--f-round);letter-spacing:.08em;text-transform:uppercase}
+.gws-cap span{font:700 calc(13px*var(--ts))/1.3 var(--f-round);color:var(--on-sky-2)}
+.gws .dayline-sun .ic{width:18px;height:18px}
+.gws .tile-top{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gws .tile{min-height:178px}
+.gws-prize{display:flex;align-items:center;gap:14px}
+.gws-rows{display:grid;gap:10px}
+.gws-row{display:flex;align-items:center;gap:14px;width:100%;padding:12px 14px 12px 12px;border-radius:22px;background:var(--glass-2);text-align:left;transition:transform .15s,background .2s}
+.gws-row:active{transform:scale(.98)}
+.gws-row>.ic{flex:none;opacity:.7}
+.gws-rt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.gws-rt b{font:800 calc(17px*var(--ts))/1.2 var(--f-round)}
+.gws-rt small{font:700 calc(13px*var(--ts))/1.3 var(--f-round);color:var(--on-sky-2)}
+.gws-bar{display:block;height:8px;border-radius:5px;background:rgba(255,255,255,.22);overflow:hidden;margin:5px 0 2px}
+.gws-bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#FFE7A6,#FFC94D)}
+.gws-lsub{font:700 calc(12px*var(--ts)) var(--f-round);color:var(--on-sky-2);margin-top:auto}
+@media (min-width:1000px){ .gws .hero{top:calc(env(safe-area-inset-top,0px) + 8px)} }
+`;
+{ const st = document.createElement('style'); st.id = 'growth-sky-css'; st.textContent = SKY_CSS; document.head.appendChild(st); }
 
 
 // If the app finished starting before this file loaded, redraw so the Character Growth card appears.

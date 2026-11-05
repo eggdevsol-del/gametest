@@ -4026,7 +4026,8 @@ const Sky3D = (() => {
   };
   function frame(now) {
     raf = 0;
-    if (Stage.active || Studio.open || UI.screen === 'parent' || document.hidden || document.body.classList.contains('gw-open')) return;
+    // Character Growth covers the sky, except in its sky look, where the sky shows through and keeps moving
+    if (Stage.active || Studio.open || UI.screen === 'parent' || document.hidden || (document.body.classList.contains('gw-open') && !document.body.classList.contains('gw-sky'))) return;
     const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000, asp = cam.aspect, still = reduced ? 0 : 1; last = now;
     for (const c of clouds) {
       if (!c.visible) continue; const u = c.userData, lim = (20 - c.position.z) * TAN * asp + 7;

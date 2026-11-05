@@ -232,7 +232,7 @@ function onClick(e) {
     case 'homeDone': a.disabled = true; a.textContent = 'Great! We’ll ask how it went.'; onEvent(kid, 'home', { title: local(Grow.last.lesson.title), skill: Grow.last.lesson.skill }); return;
     case 'toTree': Grow.view = isLang(Grow.tree) ? 'lang' : 'tree'; Grow.run = null; return render();
     case 'toHub': Grow.view = 'hub'; Grow.tree = null; Grow.run = null; return render();
-    default: if (LANG_CLICK[g]) return LANG_CLICK[g](kid, id, a);
+    default: if (LANG_CLICK[g]) return LANG_CLICK[g](kid, id, a); if (SKY_CLICK[g]) return SKY_CLICK[g](kid, id, a);
   }
 }
 

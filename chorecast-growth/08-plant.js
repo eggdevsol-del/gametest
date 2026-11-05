@@ -13,6 +13,7 @@
    tree. Other subjects' branches show their lessons as clusters of leaves. Without WebGL, viewTree falls back
    to a list. */
 const PlantView = (() => {
+  const SKY_COLS = [[0x3f9cff, 0x8fd0ff, 0xe8f7ff], [0x1f6fd6, 0x3e92eb, 0x8cc8f7]]; let appSky = false;
   const T = window.THREE, G3 = C.G3;
   if (!T || !G3 || !G3.ok) return { ok: false };
   const V3 = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z), lerp = (a, b, t) => a + (b - a) * t, smooth = t => t * t * (3 - 2 * t);
@@ -140,7 +141,7 @@ const PlantView = (() => {
     scene = new T.Scene(); cam = new T.PerspectiveCamera(40, 1, 0.1, 400);
     scene.add(new T.HemisphereLight(col(0xdff2ff), col(0x7fbf6a), 0.75));
     const sun = new T.DirectionalLight(col(0xfff3dc), 0.95); sun.position.set(-6, 10, 8); scene.add(sun);
-    sky = new T.Mesh(new T.SphereGeometry(200, 32, 16), new T.ShaderMaterial({ side: T.BackSide, depthWrite: false, uniforms: { top: { value: col(0x3f9cff) }, mid: { value: col(0x8fd0ff) }, low: { value: col(0xe8f7ff) } },
+    sky = new T.Mesh(new T.SphereGeometry(200, 32, 16), new T.ShaderMaterial({ side: T.BackSide, depthWrite: false, uniforms: { top: { value: col(SKY_COLS[+appSky][0]) }, mid: { value: col(SKY_COLS[+appSky][1]) }, low: { value: col(SKY_COLS[+appSky][2]) } },
       vertexShader: 'varying vec3 vW; void main(){ vW = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
       fragmentShader: 'uniform vec3 top, mid, low; varying vec3 vW; void main(){ float h = vW.y; vec3 c = h > 0.0 ? mix(mid, top, smoothstep(0.0, 0.7, h)) : mix(mid, low, smoothstep(0.0, -0.5, h)); gl_FragColor = linearToOutputTexel(vec4(c, 1.0)); }' }));
     scene.add(sky);
@@ -152,9 +153,11 @@ const PlantView = (() => {
 
     const wld = new T.Group(); scene.add(wld); plant = new T.Group(); wld.add(plant);
     // The floating island: grass, a layered rock cone, a soil mound for the seed, tufts, daisies and a sign
+    // In the sky look the grass takes the deeper greens of the kid's own island on Today
+    const GRASS = appSky ? [0x5c9e3f, 0x4a8a34, 0x3d7f2c, 0x649f48] : [0x6fcf4f, 0x58b83d, 0x4fae36, 0x7fd65f];
     isl = new T.Group(); wld.add(isl);
-    mesh(new T.CylinderGeometry(3.1, 2.8, 0.5, 48), toon(0x6fcf4f), isl, 0, -0.25, 0);
-    mesh(new T.TorusGeometry(2.95, 0.16, 8, 48), toon(0x58b83d), isl, 0, -0.02, 0).rotation.x = Math.PI / 2;
+    mesh(new T.CylinderGeometry(3.1, 2.8, 0.5, 48), toon(GRASS[0]), isl, 0, -0.25, 0);
+    mesh(new T.TorusGeometry(2.95, 0.16, 8, 48), toon(GRASS[1]), isl, 0, -0.02, 0).rotation.x = Math.PI / 2;
     const rockG = faceted(new T.ConeGeometry(2.85, 3.6, 11, 3)); rockG.rotateX(Math.PI);
     { const p = rockG.attributes.position, cs = [], A = col(0x9b7655), B = col(0x6f5040), Lt = col(0xc29a72); for (let i = 0; i < p.count; i++) { const band = Math.sin(p.getY(i) * 4.2 + Math.sin(p.getX(i) * 2) * 0.8), c = band > 0.35 ? Lt : band < -0.45 ? B : A; cs.push(c.r, c.g, c.b); } rockG.setAttribute('color', new T.Float32BufferAttribute(cs, 3)); }
     mesh(rockG, toon(0xffffff, { vc: 1 }), isl, 0, -2.3, 0);
@@ -162,16 +165,16 @@ const PlantView = (() => {
     { const p = soilG.attributes.position, cs = [], A = col(0x7a4e2d), B = col(0x5e3a20); for (let i = 0; i < p.count; i++) { const c = Math.sin(p.getX(i) * 13) * Math.cos(p.getZ(i) * 11) > 0.55 ? B : A; cs.push(c.r, c.g, c.b); } soilG.setAttribute('color', new T.Float32BufferAttribute(cs, 3)); }
     mesh(soilG, toon(0xffffff, { vc: 1 }), isl).scale.y = 0.36;
     coinsG = new T.Group(); isl.add(coinsG); { const cg = new T.CylinderGeometry(0.2, 0.2, 0.05, 24); [[1.25, 0.35, 0.6], [-1.1, 0.7, -0.9], [0.2, -1.35, 0.3]].forEach(([x, z, r]) => mesh(cg, toon(0xffc93c), coinsG, x, 0.05, z).rotation.set(r, r * 2, 0.4)); }
-    { const tg = new T.ConeGeometry(0.06, 0.38, 5); for (let i = 0; i < 26; i++) { const a = i * 2.4, d = 1.45 + (i % 5) * 0.28, tf = new T.Group(); tf.position.set(Math.cos(a) * d, 0, Math.sin(a) * d); [-0.06, 0, 0.06].forEach((o, k) => { mesh(tg, toon(0x4fae36), tf, o, 0.16, (k - 1) * 0.03).rotation.z = o * 3; }); isl.add(tf); } }
+    { const tg = new T.ConeGeometry(0.06, 0.38, 5); for (let i = 0; i < 26; i++) { const a = i * 2.4, d = 1.45 + (i % 5) * 0.28, tf = new T.Group(); tf.position.set(Math.cos(a) * d, 0, Math.sin(a) * d); [-0.06, 0, 0.06].forEach((o, k) => { mesh(tg, toon(GRASS[2]), tf, o, 0.16, (k - 1) * 0.03).rotation.z = o * 3; }); isl.add(tf); } }
     { const sg = new T.CylinderGeometry(0.02, 0.02, 0.36, 5), pg = new T.SphereGeometry(0.07, 8, 6), mg = new T.SphereGeometry(0.06, 8, 6);
-      [[2.2, 0.9], [-2.1, -0.4], [0.9, 2.15], [-0.6, -2.2], [1.8, -1.5]].forEach(([x, z]) => { const f = new T.Group(); f.position.set(x, 0, z); mesh(sg, toon(0x4fae36), f, 0, 0.18, 0); for (let k = 0; k < 5; k++) mesh(pg, toon(0xffffff), f, Math.cos(k * 1.26) * 0.09, 0.38, Math.sin(k * 1.26) * 0.09).scale.y = 0.45; mesh(mg, toon(0xffd84d), f, 0, 0.4, 0); isl.add(f); }); }
+      [[2.2, 0.9], [-2.1, -0.4], [0.9, 2.15], [-0.6, -2.2], [1.8, -1.5]].forEach(([x, z]) => { const f = new T.Group(); f.position.set(x, 0, z); mesh(sg, toon(GRASS[2]), f, 0, 0.18, 0); for (let k = 0; k < 5; k++) mesh(pg, toon(0xffffff), f, Math.cos(k * 1.26) * 0.09, 0.38, Math.sin(k * 1.26) * 0.09).scale.y = 0.45; mesh(mg, toon(0xffd84d), f, 0, 0.4, 0); isl.add(f); }); }
     [[1.9, 1.6, 0.22], [-2.3, 0.9, 0.16], [-1.4, -1.9, 0.26]].forEach(([x, z, s]) => mesh(faceted(new T.DodecahedronGeometry(s)), toon(0xb9b2c4), isl, x, s * 0.4, z).rotation.set(x, z, 0));
     const sign = new T.Group(); sign.position.set(-1.75, 0, 1.35); sign.rotation.y = 0.5; isl.add(sign);
     mesh(new T.BoxGeometry(0.08, 0.7, 0.08), toon(0xc98a4b), sign, 0, 0.35, 0);
     const board = mesh(new T.BoxGeometry(0.95, 0.42, 0.06), toon(0xc98a4b), sign, 0, 0.72, 0);
     signMesh = mesh(new T.PlaneGeometry(0.86, 0.34), new T.MeshBasicMaterial(), board, 0, 0, 0.032); signMesh.userData.noInk = true;
     bake(coinsG).children.forEach(c => { c.userData.keep = true; }); bake(isl); G3.outline(isl);
-    { const far = new T.Group(); [[-36, 4, -34, 1.6], [40, 13, -30, 2], [-38, 25, -28, 1.4]].forEach(([x, y, z, s]) => { const f = new T.Group(); f.position.set(x, y, z); f.scale.setScalar(s); mesh(new T.CylinderGeometry(2, 1.8, 0.4, 24), toon(0x7fd65f), f); mesh(faceted(new T.ConeGeometry(1.9, 2.4, 9)), toon(0xa98263), f, 0, -1.4, 0).rotation.x = Math.PI; mesh(new T.SphereGeometry(0.7, 12, 8), toon(0x4fae36), f, 0.4, 0.7, 0).scale.y = 1.3; far.add(f); }); scene.add(bake(far)); }
+    { const far = new T.Group(); [[-36, 4, -34, 1.6], [40, 13, -30, 2], [-38, 25, -28, 1.4]].forEach(([x, y, z, s]) => { const f = new T.Group(); f.position.set(x, y, z); f.scale.setScalar(s); mesh(new T.CylinderGeometry(2, 1.8, 0.4, 24), toon(GRASS[3]), f); mesh(faceted(new T.ConeGeometry(1.9, 2.4, 9)), toon(0xa98263), f, 0, -1.4, 0).rotation.x = Math.PI; mesh(new T.SphereGeometry(0.7, 12, 8), toon(GRASS[2]), f, 0.4, 0.7, 0).scale.y = 1.3; far.add(f); }); scene.add(bake(far)); }
 
     // The seed: two half shells that split open on the first right answer
     seed = new T.Group(); seed.position.set(0, 0.4, 0); plant.add(seed);
@@ -793,8 +796,10 @@ void main() {
     const k = `${kid.id}|${kid.name}|${tree.id}|${bandOf(kid)}|${(packFor(tree.id, bandOf(kid)) || { units: [] }).units.map(u => u.lessons.map(l => l.checks.length).join('.')).join(',')}`;
     if (k === key) return false; key = k; treeId = tree.id; plan(kid, tree); return true;
   }
+  // The sky look paints the plant's sky in the app's own sky colours (--sky-top, --sky-mid, --sky-low)
+  function skyTint(on) { appSky = !!on; if (!sky) return; const u = sky.material.uniforms, c = SKY_COLS[+appSky]; u.top.value = col(c[0]); u.mid.value = col(c[1]); u.low.value = col(c[2]); }
   return {
-    ok: true,
+    ok: true, skyTint,
     // The full-screen plant for a tree. `celebrateId` is a lesson just passed for the first time.
     show(host, kid, tree, celebrateId) {
       mount(); Prize.tick(kid); mode = 'tree'; crownI = -1; CAM.over = false; el.classList.remove('quiz'); host.appendChild(el);

@@ -17,7 +17,7 @@ let passN = 0, failN = 0;
 const ok = (c, msg, extra) => { if (c) passN++; else { failN++; console.log('FAIL:', msg, extra !== undefined ? JSON.stringify(extra).slice(0, 300) : ''); } };
 
 /* ---------- The app's own lesson code, run here ---------- */
-const TODAY = '2026-11-04', plus = (d, n) => new Date(Date.parse(d + 'T00:00:00Z') + n * 864e5).toISOString().slice(0, 10);
+const TODAY = new Date().toISOString().slice(0, 10), plus = (d, n) => new Date(Date.parse(d + 'T00:00:00Z') + n * 864e5).toISOString().slice(0, 10);
 const el = () => ({ style: { setProperty() {} }, setAttribute() {}, appendChild() {}, addEventListener() {}, querySelector: () => el(), classList: { add() {}, remove() {}, toggle() {} } });
 const kids = { a: { id: 'a', name: 'Ari', age: 8 }, b: { id: 'b', name: 'Bo', age: 11 }, c: { id: 'c', name: 'Cy', age: 14 } };
 const C = { Store: { kids, growth: {}, ready: false, mode: 'local' }, UI: {}, Sound: {}, FX: {}, ACT: {}, ic: () => '', esc: s => s, fmt: c => `$${(c / 100).toFixed(2)}`, $: () => null, $$: () => [], uid: () => 'x', hash: () => 1, mulberry: () => Math.random, shuffle: a => a.slice(), clamp: (v, a, b) => Math.max(a, Math.min(b, v)), sleep: () => Promise.resolve(), reduced: true, dkey: () => TODAY, addDays: plus, S: () => ({}), G3: {}, api: async () => ({}), track() {} };

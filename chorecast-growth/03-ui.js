@@ -25,6 +25,7 @@ async function open(kidId, opts = {}) {
   if (C.learnLock && C.learnLock(kid, opts)) return; // must-dos first, when the family has that switch on
   mount(); Grow.kidId = kidId; Grow.need = opts.need || 0; Grow.view = 'hub'; Grow.tree = opts.tree || null; Grow.run = null;
   root.hidden = false; Grow.open = true; document.body.classList.add('gw-open'); Grow.sessionAt = Date.now(); Grow.breakShown = false;
+  placeStage(null); skyOn();
   Sound.ensure(); Sound.whoosh();
   if (!Grow.stage) { Grow.stage = Stage3D(root.querySelector('.gw-cv')); }
   if (Grow.stage) { Grow.stage.setGuide(prog(kid).guide || 'kea'); Grow.stage.start(); }
@@ -38,7 +39,7 @@ async function open(kidId, opts = {}) {
 }
 function close() {
   if (!root) return; Grow.cleanup.splice(0).forEach(f => f()); try { speechSynthesis.cancel(); } catch (e) {}
-  root.hidden = true; Grow.open = false; document.body.classList.remove('gw-open'); if (Grow.stage) Grow.stage.stop(); if (PlantView.ok) PlantView.stop(); HowTo.stop();
+  placeStage(null); root.hidden = true; Grow.open = false; document.body.classList.remove('gw-open', 'gw-sky'); if (Grow.stage) Grow.stage.stop(); if (PlantView.ok) PlantView.stop(); HowTo.stop();
   C.scheduleRender();
 }
 function back() {
@@ -88,10 +89,11 @@ function hasLesson(kid) { if (!allLessons(bandOf(kid)).length) { loadBand(bandOf
 /* ---------- Rendering ---------- */
 function render() {
   if (!root || !Grow.open) return; const kid = kidNow(); if (!kid) return close();
-  Grow.cleanup.splice(0).forEach(f => f()); HowTo.stop();
+  Grow.cleanup.splice(0).forEach(f => f()); HowTo.stop(); placeStage(null); skyOn();
   const v = Grow.view, tree = Grow.tree && subject(Grow.tree);
   root.style.setProperty('--gh', (tree || (Grow.run && subject(Grow.run.lesson ? Grow.run.lesson.tree : Grow.run.tree)) || { hue: '#2F6FE4' }).hue);
-  root.dataset.view = v;
+  const wasView = root.dataset.view; root.dataset.view = v;
+  if (skyLook() && wasView !== v && ui) ui.scrollTop = 0; // on the app's sky a new screen starts at its top, as the app's tabs do
   if (Grow.stage) Grow.stage.setScene((v === 'tree' || v === 'lang') && tree ? tree.scene : Grow.run && Grow.run.lesson ? Grow.run.lesson.scene : Grow.run && Grow.run.scene ? Grow.run.scene : 'island');
   // The tree view is a full-screen plant with its own 3D view, so the stage rests. Every step of a lesson, quiz,
   // review or story, and its results, take place in front of the plant, which grows with each right answer in a
@@ -139,6 +141,7 @@ function viewGuide(kid) {
 }
 
 function viewHub(kid) {
+  if (skyLook()) return viewHubSky(kid);
   Prize.tick(kid);
   const g = prog(kid), lvl = charLevel(kid), m = mastered(kid), sug = suggestions(kid, 3), due = dueCards(kid).length, echo = (g.echo || []).length;
   const mom = momentFor(kid), momDone = g.mom && g.mom.d === today() && g.mom.done, story = marketStory(kid), storyDone = g.story === weekKey();

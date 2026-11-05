@@ -74,10 +74,23 @@ function Stage3D(canvas) {
   // Floating island the guide and the lesson stand on
   const world = new T.Group(); scene.add(world);
   const isle = new T.Group(); world.add(isle);
-  part(isle, 'c', toon(0x58b84a), [0, -0.05, 0], [2.75, 0.18, 1.7]);
-  part(isle, 'c', toon(0x8a5a3c), [0, -0.2, 0], [2.7, 0.16, 1.66]);
-  part(isle, 'k', toon(0x7a5536), [0, -0.85, 0], [2.55, 1.2, 1.55], [Math.PI, 0, 0]);
+  const isleTop = part(isle, 'c', toon(0x58b84a), [0, -0.05, 0], [2.75, 0.18, 1.7]);
+  const isleSoil = part(isle, 'c', toon(0x8a5a3c), [0, -0.2, 0], [2.7, 0.16, 1.66]);
+  const isleCone = part(isle, 'k', toon(0x7a5536), [0, -0.85, 0], [2.55, 1.2, 1.55], [Math.PI, 0, 0]);
+  // The sky look's island: grass, soil and a craggy rock underneath, in the colours of the kid's own island on Today
+  const rock = new T.Group(); rock.visible = false; isle.add(rock);
+  { const crag = new T.MeshToonMaterial({ color: 0x5e4836, gradientMap: G3.GRAD, flatShading: true }), crag2 = new T.MeshToonMaterial({ color: 0x4a3929, gradientMap: G3.GRAD, flatShading: true });
+    [crag, crag2].forEach(m => { G3.rimPatch(m); m.userData.keep = 1; });
+    const cone = new T.Mesh(keep(new T.ConeGeometry(1, 1, 9, 2)), crag); cone.position.set(0, -0.78, 0); cone.scale.set(2.5, 1.15, 1.5); cone.rotation.set(Math.PI, 0.3, 0); rock.add(cone);
+    [[-1.3, -0.5, 0.35, 0.55, crag2], [1.25, -0.48, 0.2, 0.5, crag], [0.35, -1.05, 0.45, 0.5, crag2], [-0.5, -1.0, -0.3, 0.42, crag], [0.9, -0.82, -0.5, 0.38, crag2], [0, -1.45, 0, 0.32, crag]].forEach(([x, y, z, r, m], i) => { const d = new T.Mesh(geo.d, m); d.position.set(x, y, z); d.scale.set(r * 1.25, r, r); d.rotation.set(i * 0.7, i * 1.3, i * 0.4); rock.add(d); }); }
   G3.outline(isle);
+  let skyIsle = false;
+  function setLook(sky) {
+    if (sky === skyIsle) return; skyIsle = sky;
+    isleTop.material = toon(sky ? 0x3f6e2c : 0x58b84a); isleSoil.material = toon(sky ? 0x5a3c26 : 0x8a5a3c);
+    isleCone.visible = !sky; rock.visible = sky;
+    if (sceneKey) { const k = sceneKey; sceneKey = ''; setScene(k); }
+  }
 
   /* ---- Tweens, labels and little animation verbs ---- */
   const E = { out: t => 1 - (1 - t) ** 3, back: t => 1 + 2.70158 * (t - 1) ** 3 + 1.70158 * (t - 1) ** 2, io: t => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2), lin: t => t,
@@ -154,7 +167,7 @@ function Stage3D(canvas) {
     home: g => { part(g, 'b', toon(0xf4e3c3), [1.2, 0.3, -0.35], [0.66, 0.6, 0.55]); part(g, 'k', toon(0xd9534f), [1.2, 0.82, -0.35], [0.56, 0.44, 0.48], [0, Math.PI / 4, 0]); part(g, 'b', toon(0x8a5a3c), [1.2, 0.18, -0.07], [0.16, 0.36, 0.02]); },
     online: g => { part(g, 'b', toon(0x23283a), [1.2, 0.65, -0.35], [0.56, 1.0, 0.08]); part(g, 'b', toon(0x5ac8fa, { e: 0x1a4a6a }), [1.2, 0.67, -0.3], [0.48, 0.84, 0.02]); part(g, 'b', toon(0xffc93c), [-1.2, 0.3, -0.2], [0.34, 0.28, 0.16]); const s = new T.Mesh(new T.TorusGeometry(0.12, 0.035, 8, 18, Math.PI), toon(0x9aa3b5)); s.position.set(-1.2, 0.44, -0.2); g.add(s); },
     townhall: g => { part(g, 'b', toon(0xf1ece2), [1.2, 0.36, -0.4], [0.9, 0.5, 0.45]); part(g, 'k', toon(0xd9cbb0), [1.2, 0.8, -0.4], [0.66, 0.36, 0.3], [0, Math.PI / 4, 0]); for (let i = 0; i < 4; i++) part(g, 'c', toon(0xffffff), [0.88 + i * 0.21, 0.36, -0.15], [0.04, 0.5, 0.04]); part(g, 'b', toon(0x2f6fe4), [-1.2, 0.2, -0.1], [0.34, 0.4, 0.3]); part(g, 'b', toon(0x1b1b22), [-1.2, 0.41, -0.1], [0.16, 0.02, 0.03]); },
-    island: g => { part(g, 'c', toon(0x8a5a3c), [1.25, 0.3, -0.35], [0.06, 0.6, 0.06]); part(g, 's', toon(0x4caf50), [1.25, 0.75, -0.35], [0.36, 0.32, 0.36]); part(g, 's', toon(0x66c05a), [1.05, 0.68, -0.2], [0.22, 0.2, 0.22]); part(g, 's', toon(0xff6b9d), [-1.15, 0.08, -0.05], [0.07, 0.07, 0.07]); },
+    island: g => { part(g, 'c', toon(0x8a5a3c), [1.25, 0.3, -0.35], [0.06, 0.6, 0.06]); part(g, 's', toon(skyIsle ? 0x2f6a2a : 0x4caf50), [1.25, 0.75, -0.35], [0.36, 0.32, 0.36]); part(g, 's', toon(skyIsle ? 0x3f7d33 : 0x66c05a), [1.05, 0.68, -0.2], [0.22, 0.2, 0.22]); part(g, 's', toon(0xff6b9d), [-1.15, 0.08, -0.05], [0.07, 0.07, 0.07]); },
   };
   let props = null, sceneKey = '';
   const setRoot = grp(world), subjRoot = grp(world);
@@ -464,7 +477,7 @@ function Stage3D(canvas) {
     pace(now); G3.inkFor(R); R.render(scene, cam);
   }
   return {
-    setGuide, setScene, react, show, fx,
+    setGuide, setScene, react, show, fx, setLook,
     start() { if (running) return; running = true; size(); last = performance.now(); raf = requestAnimationFrame(frame); },
     stop() { running = false; cancelAnimationFrame(raf); },
   };
