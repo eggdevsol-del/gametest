@@ -544,6 +544,11 @@ p{margin:0}
 .dots.shake{animation:shake .4s}
 @keyframes shake{0%,100%{transform:none}20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
 .gate-err{min-height:22px;font:700 calc(15px*var(--ts)) var(--f-round);color:#FFE0E0}
+.gate-card{width:100%;max-width:420px;border-radius:28px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:10px;color:#fff}
+.gate-pw{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:6px;text-align:left}
+.gate-pw .btn-white{width:100%}
+.gate-pw .gate-err{text-align:center}
+.gate-note{font-size:calc(14px*var(--ts));margin-top:6px}
 .keypad{display:grid;grid-template-columns:repeat(3,80px);gap:16px 24px;margin-top:6px}
 .key{width:80px;height:80px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:background .12s}
 .key b{font:400 calc(34px*var(--ts))/1 var(--f-text)}
@@ -5568,6 +5573,19 @@ function viewGate() {
   else if (g.mode === 'kidOff') { title = 'Turn off your passcode'; sub = 'Type your passcode to turn it off.'; }
   else if (g.mode === 'kidCreate') { title = g.first ? 'Type it once more' : 'Pick a 4-digit passcode'; sub = g.first ? 'Just to be sure you remember it.' : 'You’ll type it to open your account, so only you can spend your money and XP. Keep it a secret!'; }
   else if (g.mode === 'math') { title = 'Grown-ups only'; sub = `To reset the PIN, type the answer: ${g.a} × ${g.b}`; }
+  else if (g.mode === 'old') { title = 'Enter your PIN now'; sub = 'Then you’ll pick a new one.'; }
+  else if (g.mode === 'pw') return `<div class="gate">
+    <button class="pill glass gate-x" data-act="gateCancel">Cancel</button>
+    <div class="gate-card glass">
+      <div class="gate-lock">${ic('lock')}</div><h1 class="gate-t">Forgot the PIN?</h1><p class="gate-s">Type the password you sign in to Chorecast with. Then you’ll pick a new PIN.</p>
+      <form class="gate-pw" data-submit="pinPw">
+        <label class="auth-field"><span>Password</span><input id="gate-pw" type="password" autocomplete="current-password" required></label>
+        <p class="gate-err" role="alert">${esc(g.err || '')}</p>
+        <button class="btn-white" type="submit" ${g.busy ? 'disabled' : ''}>${g.busy ? 'Checking…' : 'Continue'}</button>
+      </form>
+      <p class="gate-s gate-note">Forgot your password too? On another device, tap “Forgot your password?” on the sign-in screen.</p>
+    </div>
+  </div>`;
   else if (g.mode === 'create') { title = g.first ? 'Type it once more' : g.reset ? 'Create a new PIN' : 'Create a grown-up PIN'; sub = g.first ? 'Just to be sure you remember it.' : 'Kids won’t know it, so only you can approve pay and see the dashboard.'; }
   else { title = 'Enter grown-up PIN'; sub = 'To check photos, pay jobs and see habits.'; }
   const len = g.mode === 'math' ? String(g.a * g.b).length : 4;
@@ -5577,7 +5595,7 @@ function viewGate() {
     <div class="gate-lock">${kid ? `<span class="gate-ava">${kid.avatar}</span>` : ic('lock')}</div><h1 class="gate-t">${title}</h1><p class="gate-s">${sub}</p>
     <div class="dots ${g.err ? 'shake' : ''}" aria-label="${g.pin.length} of ${len} digits">${Array.from({ length: len }, (_, i) => `<i class="${i < g.pin.length ? 'on' : ''}"></i>`).join('')}</div>
     <p class="gate-err" aria-live="polite">${esc(g.err || '')}</p>
-    <div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(key).join('')}${g.mode === 'enter' || g.kid && g.mode !== 'kidCreate' ? `<button class="key key-txt" data-act="${g.kid ? 'kidForgot' : 'forgot'}">Forgot?</button>` : '<span></span>'}${key(0)}<button class="key key-txt" data-act="pinDel" aria-label="Delete">${ic('back')}</button></div>
+    <div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(key).join('')}${g.mode === 'enter' || g.mode === 'old' || g.kid && g.mode !== 'kidCreate' ? `<button class="key key-txt" data-act="${g.kid ? 'kidForgot' : 'forgot'}">Forgot?</button>` : '<span></span>'}${key(0)}<button class="key key-txt" data-act="pinDel" aria-label="Delete">${ic('back')}</button></div>
   </div>`;
 }
 async function hashPin(pin) {
@@ -5596,13 +5614,21 @@ async function pinComplete() {
   const g = UI.gate;
   if (g.kid) return kidPinComplete(g);
   if (g.mode === 'math') { if (+g.pin === g.a * g.b) { g.mode = 'create'; g.reset = true; g.first = null; g.pin = ''; } else { g.err = 'Not quite. Try a new one.'; g.pin = ''; newMath(g); Sound.error(); } return render(); }
+  // Changing the PIN starts with the one they have now, as iOS does with a passcode.
+  if (g.mode === 'old') {
+    if (onServer()) {
+      try { await api('POST', '/api/pin/check', { pin: g.pin }); }
+      catch (e) { return gateErr(g, e.status ? e.message : offlineMsg('change the PIN')); }
+    } else if ((await hashPin(g.pin)) !== S().pinHash) return gateErr(g, 'Wrong PIN. Try again.');
+    g.old = g.pin; g.mode = 'create'; g.reset = true; g.first = null; g.pin = ''; return render();
+  }
   if (g.mode === 'create') {
     if (!g.first) { g.first = g.pin; g.pin = ''; return render(); }
     if (g.pin !== g.first) { g.first = null; return gateErr(g, 'Those didn’t match. Start again.'); }
     if (onServer()) {
       try {
         if (!Store.settings && Acct.me.role === 'parent') await saveSettings({});
-        await api('PUT', '/api/pin', { pin: g.pin }); applyLocal('family', 'settings', { pinSet: true }, true);
+        await api('PUT', '/api/pin', { pin: g.pin, ...(g.pw ? { password: g.pw } : g.old ? { old: g.old } : {}) }); applyLocal('family', 'settings', { pinSet: true }, true);
       } catch (e) { g.first = null; return gateErr(g, e.status ? e.message : offlineMsg('set the PIN')); }
     } else saveSettings({ pinHash: await hashPin(g.pin) });
     toast('PIN saved'); return unlock();
@@ -7078,16 +7104,29 @@ const ACT = {
   parent: () => openGate(),
   setup: () => openGate(null, 'addKid'),
   gateCancel: () => { const b = UI.gate && UI.gate.back; UI.gate = null; UI.screen = b === 'parent' && UI.unlocked ? 'parent' : b === 'kid' && curKid() ? 'kid' : 'who'; render(); },
-  pin: a => { const g = UI.gate, len = g.mode === 'math' ? String(g.a * g.b).length : 4; if (g.pin.length >= len) return; g.pin += a.dataset.n; g.err = ''; Sound.ensure(); Sound.tap(); render(); if (g.pin.length === len) setTimeout(pinComplete, 150); },
+  pin: a => { const g = UI.gate, len = g.mode === 'math' ? String(g.a * g.b).length : 4; if (g.mode === 'pw' || g.pin.length >= len) return; g.pin += a.dataset.n; g.err = ''; Sound.ensure(); Sound.tap(); render(); if (g.pin.length === len) setTimeout(pinComplete, 150); },
   pinDel: () => { UI.gate.pin = UI.gate.pin.slice(0, -1); render(); },
-  // A new PIN needs a grown-up: on this device only, a sum kids can't do yet; signed in, a grown-up's own phone.
+  // A new PIN needs a grown-up. Signed in: the account password, on a grown-up's own device (a kid's iPad has none).
+  // On this device only, without an account, there's no password, so it's still a sum.
   forgot: () => {
     const g = UI.gate;
     if (onServer() && Acct.me && Acct.me.role === 'kid') { g.err = 'Open Chorecast on a grown-up’s phone and tap Forgot? there to set a new PIN.'; g.pin = ''; return render(); }
-    g.mode = 'math'; g.pin = ''; g.err = ''; newMath(g); render();
+    g.pin = ''; g.err = '';
+    if (onServer()) { g.mode = 'pw'; render(); const i = $('#gate-pw'); if (i) i.focus(); return; }
+    g.mode = 'math'; newMath(g); render();
+  },
+  pinPw: async f => {
+    const g = UI.gate, i = f.querySelector('input'), pw = i ? i.value : '';
+    if (!g || g.busy) return;
+    if (!pw) { g.err = 'Type your password first.'; return render(); }
+    g.busy = true; g.err = ''; render();
+    try { await api('POST', '/api/pin/forgot', { password: pw }); g.pw = pw; g.mode = 'create'; g.reset = true; g.first = null; g.pin = ''; }
+    catch (e) { g.err = e.status ? e.message : offlineMsg('reset the PIN'); Sound.error(); }
+    g.busy = false; render();
+    if (g.mode === 'pw') { const n = $('#gate-pw'); if (n) n.focus(); }
   },
   lock: () => { UI.unlocked = false; UI.wiz = null; UI.screen = 'who'; if (Store.mode === 'server' && Acct.me && Acct.me.role === 'kid') api('POST', '/api/auth/lock', {}).catch(() => {}); UI.redoFor = null; scrollTo(0, 0); render(); },
-  changePin: () => openGate('create'),
+  changePin: () => openGate(hasPin() ? 'old' : 'create'),
   wizStart: () => startWizard(0),
   wizEdit: a => startWizard(+a.dataset.i, { edit: true }),
   wizSet: a => {
@@ -7421,8 +7460,8 @@ document.addEventListener('submit', e => { const f = e.target.closest('[data-sub
 document.addEventListener('input', e => { const a = e.target.closest('[data-in]'); if (a && IN[a.dataset.in]) IN[a.dataset.in](a, e); });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { if (Studio.open) Studio.close(); else if (UI.sheet) closeSheet(); else if (Stage.active && !Stage.paused) pauseStage(true); }
-  if (UI.screen === 'gate' && /^[0-9]$/.test(e.key)) ACT.pin({ dataset: { n: e.key } });
-  if (UI.screen === 'gate' && e.key === 'Backspace') ACT.pinDel();
+  if (UI.screen === 'gate' && UI.gate && UI.gate.mode !== 'pw' && /^[0-9]$/.test(e.key)) ACT.pin({ dataset: { n: e.key } });
+  if (UI.screen === 'gate' && UI.gate && UI.gate.mode !== 'pw' && e.key === 'Backspace') ACT.pinDel();
 });
 document.addEventListener('pointerdown', () => { if (Stage.active) Sound.ensure(); }, { passive: true });
 addEventListener('resize', () => { Stage.panes.forEach(p => { if (p.fx) p.fx.size(); if (p.more) p.more(); }); if (!Stage.active && UI.screen !== 'boot') { paintSky(); layMasonry($('#app')); } });

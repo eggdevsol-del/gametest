@@ -172,6 +172,25 @@ try {
   ok((await W({ jars: { ...s.jars, spend: s.jars.spend + 100 }, ledger: led(s, { kind: 'pay', amt: 100, memo: 'Dishes' }), earned: (s.earned || 0) + 100 })).status === 200, 'an unlocked kid iPad can pay');
   await K('POST', '/api/auth/lock', {});
 
+  // R2: changing the grown-up PIN takes the PIN now; a forgotten one takes the grown-up's account password
+  ok((await P('PUT', '/api/pin', { pin: '1212' })).code === 'bad_old', 'a grown-up PIN that’s set can’t just be replaced');
+  ok((await P('PUT', '/api/pin', { pin: '1212', old: '0000' })).code === 'bad_old', 'a wrong PIN now is refused');
+  ok((await P('PUT', '/api/pin', { pin: '1212', old: '2580' })).ok === true, 'change it with the PIN now');
+  ok((await K('POST', '/api/pin/check', { pin: '1212' })).ok === true, 'the new PIN works');
+  ok((await K('PUT', '/api/pin', { pin: '3434' })).code === 'bad_old', 'an unlocked kid iPad needs the PIN now too');
+  ok((await K('PUT', '/api/pin', { pin: '3434', password: 'correct-horse-9' })).code === 'parent_only', 'and can’t use a password');
+  await K('POST', '/api/auth/lock', {});
+  ok((await K('POST', '/api/pin/forgot', { password: 'correct-horse-9' })).code === 'parent_only', 'Forgot? doesn’t work on a kid iPad');
+  ok((await P('POST', '/api/pin/forgot', {})).code === 'bad_password', 'Forgot? needs the account password');
+  ok((await P('POST', '/api/pin/forgot', { password: 'wrong-horse-9' })).code === 'bad_password', 'the right one');
+  ok((await P('POST', '/api/pin/forgot', { password: 'correct-horse-9' })).ok === true, 'Forgot? with the account password');
+  ok((await P('PUT', '/api/pin', { pin: '2580', password: 'nope-nope-nope' })).code === 'bad_password', 'the new PIN is checked with the password again');
+  ok((await P('PUT', '/api/pin', { pin: '2580', password: 'correct-horse-9' })).ok === true, 'a new PIN with the password');
+  ok((await K('POST', '/api/pin/check', { pin: '2580' })).ok === true, 'and it works');
+  await K('POST', '/api/auth/lock', {});
+  for (let i = 0; i < 3; i++) await P('POST', '/api/pin/forgot', { password: 'guess-' + i });
+  ok((await P('POST', '/api/pin/forgot', { password: 'correct-horse-9' })).code === 'slow_down', 'five wrong passwords and it waits');
+
   // Too many wrong PINs from one iPad
   await pair(K2); let last;
   for (let i = 0; i < 9; i++) last = await K2('POST', '/api/pin/check', { pin: '0000' });
@@ -184,6 +203,8 @@ try {
   const db = new PGlite(dir); await db.waitReady;
   const rows = (await db.query('select kid_id, hash from family_pins order by kid_id')).rows;
   ok(rows.length && rows.every(x => x.hash.startsWith('scrypt$')), 'stored codes are scrypt now', rows.map(x => x.kid_id + ':' + x.hash.slice(0, 7)));
+  const ev = (await db.query(`select type, count(*)::int as n from events where type in ('auth.pin_forgot', 'auth.pin_password_wrong') group by type`)).rows;
+  ok(ev.length === 2, 'PIN resets and wrong passwords are logged', ev);
   await db.close();
 }
 console.log(`${passN} passed, ${failN} failed`);

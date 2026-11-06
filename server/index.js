@@ -33,6 +33,10 @@ const APP_ORIGINS = (process.env.APP_ORIGINS || 'capacitor://localhost').split('
 // Apple's root certificate for a test one, for local tests only; it is never set on Railway.
 const BUNDLE_ID = process.env.APP_BUNDLE_ID || 'app.chorecast.ios';
 const appleOpts = process.env.APPSTORE_TEST_ROOT ? { root: new X509Certificate(await readFile(process.env.APPSTORE_TEST_ROOT)) } : {};
+// Test purchases (TestFlight, and Apple's sandbox) are signed by Apple too, so only purchases from the Production
+// environment unlock anything, except for the families of these grown-ups (comma-separated emails: App Review's demo
+// account and your own), who can try buying on the live server without paying.
+const SANDBOX_ACCOUNTS = (process.env.SANDBOX_ACCOUNTS || '').split(',').map(e => e.trim().toLowerCase()).filter(Boolean);
 const SESSION_DAYS = 180;
 // The date of the terms and privacy policy a grown-up agrees to at sign-up (public/chorecast/terms.html, privacy.html).
 const TERMS_VERSION = '2026-11-02';
@@ -566,6 +570,17 @@ async function checkPin(s, kidId, pin) {
   if (ok === false) { limited('pinfail:' + s.device_id, 99); limited('pinfail:' + s.family_id, 99); await logEvent(s, kidId ? 'auth.kid_pin_wrong' : 'auth.pin_wrong', {}, kidId || null); }
   return ok;
 }
+// The signed-in grown-up's own account password, which resets a forgotten grown-up PIN. 5 wrong in 15 minutes and it
+// waits. Kids' iPads have no password, so the PIN is only ever reset on a grown-up's own device.
+async function needPassword(s, pw) {
+  needParent(s);
+  if (hitCount('pwfail:' + s.user_id) >= 5) fail(429, 'Too many wrong tries. Wait 15 minutes, then try again.', 'slow_down');
+  const u = (await db.query('select password_hash from users where id = $1', [s.user_id])).rows[0];
+  if (!u || !(await verifyPassword(String(pw || ''), u.password_hash))) {
+    limited('pwfail:' + s.user_id, 99); await logEvent(s, 'auth.pin_password_wrong');
+    fail(403, 'That password isn’t right.', 'bad_password');
+  }
+}
 const kidIdOf = b => (b.kidId ? String(b.kidId).slice(0, 80) : '');
 async function needKid(s, kidId) { if (!(await db.query('select 1 from kids where family_id = $1 and id = $2', [s.family_id, kidId])).rows.length) fail(404, 'Kid not found.', 'not_found'); }
 
@@ -583,13 +598,28 @@ route('POST', '/api/pin/check', async ({ req, s }) => {
   return { ok: true };
 });
 
+// "Forgot?" on a grown-up's device checks the account password first, so they can then pick a new PIN (PUT /api/pin
+// with the password again). A sum or a question a kid could answer isn't enough.
+route('POST', '/api/pin/forgot', async ({ req, s }) => {
+  needParent(s); const b = await readJson(req);
+  await needPassword(s, b.password);
+  await logEvent(s, 'auth.pin_forgot');
+  return { ok: true };
+});
+
 // Sets the grown-up PIN (a grown-up's phone, or a kid's iPad already unlocked with the PIN) or a kid's passcode (the
-// first one, a new one with the old one, or any one from an unlocked grown-up).
+// first one, a new one with the old one, or any one from an unlocked grown-up). Changing a grown-up PIN that's already
+// set takes the PIN now (`old`), or the signed-in grown-up's password (`password`) when it's forgotten.
 route('PUT', '/api/pin', async ({ req, s }) => {
   needSession(s); const b = await readJson(req), kidId = kidIdOf(b), pin = String(b.pin || '');
   if (!PIN_RE.test(pin)) fail(400, 'Use 4 digits.', 'bad_pin');
-  if (!kidId) { if (!s.elevated) fail(403, 'Set the grown-up PIN on a grown-up’s phone first.', 'locked'); }
-  else {
+  if (!kidId) {
+    if (!s.elevated) fail(403, 'Set the grown-up PIN on a grown-up’s phone first.', 'locked');
+    if ((await db.query('select 1 from family_pins where family_id = $1 and kid_id = $2', [s.family_id, ''])).rows.length) {
+      if (b.password != null) await needPassword(s, b.password);
+      else if (b.old == null || !(await checkPin(s, '', b.old))) fail(403, 'Type the PIN you have now first.', 'bad_old');
+    }
+  } else {
     await needKid(s, kidId);
     if (!s.elevated) {
       const ok = b.old == null ? null : await checkPin(s, kidId, b.old);
@@ -763,6 +793,14 @@ async function needRoom(familyId, what) {
     if (n >= p.limits.grownups) fail(402, `This family’s plan has room for ${p.limits.grownups} grown-up${p.limits.grownups === 1 ? '' : 's'}. A grown-up already in it can change the plan.`, 'plan_limit');
   }
 }
+// A real purchase, or a test one (TestFlight, sandbox) by a family on SANDBOX_ACCOUNTS. A transaction without an
+// environment is treated as a test.
+async function counts(tx, familyId) {
+  if (tx.environment === 'Production') return true;
+  if (!SANDBOX_ACCOUNTS.length || !familyId) return false;
+  return (await db.query('select 1 from family_members m join users u on u.id = m.user_id where m.family_id = $1 and lower(u.email) = any($2) limit 1', [familyId, SANDBOX_ACCOUNTS])).rows.length > 0;
+}
+const TEST_BUY = 'That was a test purchase (TestFlight or sandbox), so it doesn’t unlock anything.';
 const foundingLeft = async () => Math.max(0, FOUNDING_SEATS - (await db.query('select count(*)::int as n from entitlements where founding and revoked_at is null')).rows[0].n);
 
 // One App Store transaction (a purchase, a restore or a notification) into the family's entitlements. Rows only move
@@ -813,6 +851,7 @@ route('POST', '/api/purchases/apple', async ({ req, s }) => {
   for (const jws of list) {
     let tx; try { tx = verifyAppleJws(jws, appleOpts); } catch (e) { fail(400, 'That purchase couldn’t be checked with Apple.', 'bad_receipt'); }
     if (tx.appAccountToken && tx.appAccountToken.toLowerCase() !== String(s.family_id).toLowerCase()) fail(409, 'That purchase belongs to another Chorecast family.', 'other_family');
+    if (!(await counts(tx, s.family_id))) { await logEvent(s, 'plan.test_refused', { product: String(tx.productId || '').slice(0, 80), env: String(tx.environment || '').slice(0, 20) }); fail(409, TEST_BUY, 'test_purchase'); }
     await saveAppleTransaction(tx, s.family_id);
   }
   await logEvent(s, 'plan.purchase', { count: list.length });
@@ -836,7 +875,7 @@ route('POST', '/api/appstore/notifications', async ({ req }) => {
   let familyId = ((await db.query('select family_id from entitlements where id = $1', ['apple:' + tx.originalTransactionId])).rows[0] || {}).family_id;
   if (!familyId && tx.appAccountToken) familyId = ((await db.query('select id from families where lower(id) = lower($1)', [tx.appAccountToken])).rows[0] || {}).id;
   if (!familyId && PRODUCTS[tx.productId].kid) familyId = ((await db.query('select family_id from purchases where original_id = $1 limit 1', ['apple:' + tx.originalTransactionId])).rows[0] || {}).family_id;
-  if (!familyId) return { ok: true };
+  if (!familyId || !(await counts(tx, familyId))) return { ok: true };
   if (PRODUCTS[tx.productId].kid) { await shopNotice(String(n.notificationType || ''), tx, familyId); return { ok: true }; }
   await saveAppleTransaction(tx, familyId, renewal);
   await db.query('update app_store_notifications set family_id = $2 where uuid = $1', [String(n.notificationUUID), familyId]);
@@ -865,6 +904,7 @@ route('POST', '/api/shop/buy', async ({ req, s }) => {
   if (b.transaction) {
     let tx; try { tx = verifyAppleJws(b.transaction, appleOpts); } catch (e) { fail(400, 'That purchase couldn’t be checked with Apple.', 'bad_receipt'); }
     if (tx.bundleId !== BUNDLE_ID) fail(400, 'That purchase is for a different app.', 'wrong_app');
+    if (!(await counts(tx, s.family_id))) { await logEvent(s, 'shop.test_refused', { product: String(tx.productId || '').slice(0, 80), env: String(tx.environment || '').slice(0, 20) }); fail(409, TEST_BUY, 'test_purchase'); }
     productId = tx.productId; id = 'apple:' + tx.transactionId; original = 'apple:' + tx.originalTransactionId; source = 'app_store'; env = tx.environment || null;
   } else if (!STORE_TEST) fail(403, 'Buying opens in the Chorecast app on iPhone or iPad.', 'app_only');
   else id = original = 'test:' + randomUUID();

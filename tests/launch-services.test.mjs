@@ -43,7 +43,8 @@ const tx = (familyId, extra = {}) => ({ bundleId: BUNDLE, productId: 'chorecast.
   try { verifyAppleJws(jws(t)); ok(false, 'our test chain is refused against Apple’s real root'); } catch (e) { ok(/not signed by Apple/.test(e.message), 'our test chain is refused against Apple’s real root', e.message); }
 }
 
-const env = { PGLITE_DIR: path.join(dir, 'db'), DATABASE_URL: '', PAYWALL: 'on', WELCOME_DAYS: '0', APPSTORE_TEST_ROOT: path.join(CA, 'root.pem'), APP_BUNDLE_ID: BUNDLE, MAIL_LOG_DIR: mail, APP_ORIGINS: 'chorecast://app', ADMIN_TOKEN: 'admin-test-token-123', APP_URL: 'https://chorecast.test' };
+// Mum's family may test-buy (SANDBOX_ACCOUNTS), so the purchases below are Sandbox ones; Gran's family may not.
+const env = { PGLITE_DIR: path.join(dir, 'db'), DATABASE_URL: '', PAYWALL: 'on', WELCOME_DAYS: '0', APPSTORE_TEST_ROOT: path.join(CA, 'root.pem'), APP_BUNDLE_ID: BUNDLE, SANDBOX_ACCOUNTS: ' MUM@test.localhost , review@test.localhost', MAIL_LOG_DIR: mail, APP_ORIGINS: 'chorecast://app', ADMIN_TOKEN: 'admin-test-token-123', APP_URL: 'https://chorecast.test' };
 const srv = spawn('node', [path.join(REPO, 'server/index.js'), '--port', String(PORT), '--static', path.join(REPO, 'public')], { env: { ...process.env, ...env } });
 let log = ''; srv.stdout.on('data', d => { log += d; }); srv.stderr.on('data', d => { log += d; });
 for (let i = 0; i < 150 && !/Chorecast server on/.test(log); i++) await new Promise(r => setTimeout(r, 100));
@@ -137,6 +138,22 @@ try {
   const life = await fetch(BASE + '/api/appstore/notifications', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(note('ONE_TIME_CHARGE', t2)) });
   plan = await B('GET', '/api/plan');
   ok(life.status === 200 && plan.plan === 'plus' && plan.lifetime && plan.foundingLeft === 999, 'a founding lifetime bought on another device arrives by notification', plan);
+
+  // ---- R3 test purchases (TestFlight, sandbox) only count for families on SANDBOX_ACCOUNTS
+  const G = client();
+  ok((await G('POST', '/api/auth/signup', { email: 'gran@test.localhost', password: 'correct-horse-9', name: 'Gran', consent: true })).status === 200, 'a family not on the test list signs up');
+  const gfam = (await G('GET', '/api/auth/me')).family.id, gt = tx(gfam);
+  const tb = await G('POST', '/api/purchases/apple', { transaction: jws(gt) });
+  ok(tb.status === 409 && tb.code === 'test_purchase', 'their TestFlight purchase is refused', tb);
+  ok((await G('POST', '/api/purchases/apple', { transactions: [jws({ ...gt, environment: undefined })] })).code === 'test_purchase', 'so is one with no environment');
+  await fetch(BASE + '/api/appstore/notifications', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(note('SUBSCRIBED', gt)) });
+  ok((await G('GET', '/api/plan')).plan === 'free', 'a sandbox notification doesn’t turn Plus on either');
+  const gp = tx(gfam, { productId: 'chorecast.pack.money', transactionId: 'tp' + Date.now(), expiresDate: undefined, offerType: undefined });
+  ok((await G('POST', '/api/shop/buy', { transaction: jws(gp) })).code === 'test_purchase', 'nor a sandbox lesson pack from the shop');
+  ok(!(await G('GET', '/api/plan')).packs.includes('money'), 'the pack stays locked');
+  const rb = await G('POST', '/api/purchases/apple', { transaction: jws({ ...gt, originalTransactionId: '2000' + Math.floor(Math.random() * 1e6), environment: 'Production' }) });
+  ok(rb.status === 200 && rb.plan === 'plus', 'a real App Store purchase still works for them', rb);
+  ok((await G('POST', '/api/shop/buy', { transaction: jws({ ...gp, environment: 'Production' }) })).status === 200 && (await G('GET', '/api/plan')).packs.includes('money'), 'and a real pack');
 
   // ---- P0-06 errors and health
   ok((await P('POST', '/api/errors', { message: 'TypeError: x is undefined at 12:34', stack: 'at viewKid', where: 'kid' })).ok, 'the app can report a crash');
