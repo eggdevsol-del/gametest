@@ -1,0 +1,118 @@
+/* Island home prototype (?look=island): Today opens on the kid's island, big, with today's jobs pinned on it.
+   Rules it follows: the island is the one big thing on the screen; every pin is a real button at least 58px across
+   with a name a screen reader says; the job to do next is the biggest pin and pulses gently; done jobs fade and stop
+   bobbing; nothing on the island is the only way in, because the same jobs are in the list below; motion stops with
+   reduced motion. Everything else keeps the app's own sky-and-glass look. */
+
+/* The stage: full width, the first screen under the top bar */
+.ih-stage{position:relative;height:max(500px,calc(100svh - 66px - env(safe-area-inset-top,0px)));margin:0 calc(-1 * var(--gut-r)) 10px calc(-1 * var(--gut))}
+.ih-host{position:absolute;inset:0;overflow:hidden;z-index:1}
+.ih-cv{position:absolute;inset:0;width:100%!important;height:100%!important;display:block;touch-action:pan-y;cursor:grab}
+.ih-cv:active{cursor:grabbing}
+.ih-marks{position:absolute;inset:0;pointer-events:none}
+
+/* Job pins: the point of the pin sits on the spot the job happens */
+.ih-mk{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;will-change:transform;background:none;border:0;padding:0}
+.ih-pin,.ih-tag{pointer-events:auto}
+.ih-mk{--ring:#FF6B6B}
+.ih-mk.t-team{--ring:#FFB020}.ih-mk.t-gig{--ring:#22D3A0}.ih-mk.t-learn{--ring:#8CE99A}
+.ih-pin{position:absolute;left:-30px;top:-86px;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-size:calc(31px*var(--ts));background:linear-gradient(145deg,var(--c1),var(--c2));box-shadow:0 0 0 4px #fff,0 0 0 7px var(--ring),0 14px 22px -8px rgba(8,20,60,.55);animation:ih-bob 2.6s ease-in-out infinite;cursor:pointer;transition:transform .15s}
+.ih-pin::after{content:"";position:absolute;left:50%;top:calc(100% + 5px);margin-left:-9px;border:9px solid transparent;border-top:13px solid #fff;filter:drop-shadow(0 3px 2px rgba(8,20,60,.25))}
+.ih-mk:nth-child(3n+1) .ih-pin{animation-delay:-.9s}.ih-mk:nth-child(3n+2) .ih-pin{animation-delay:-1.7s}
+.ih-mk:active .ih-pin{transform:scale(.92)}
+.ih-tag{position:absolute;left:0;top:-128px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:5px 11px 6px;border-radius:14px;background:rgba(255,255,255,.95);color:#0D1530;white-space:nowrap;box-shadow:0 8px 18px -10px rgba(8,20,60,.5);cursor:pointer;opacity:0;transition:opacity .2s}
+.ih-tag b{font:800 calc(13px*var(--ts))/1.2 var(--f-round);max-width:150px;overflow:hidden;text-overflow:ellipsis}
+.ih-tag small{font:900 calc(12px*var(--ts)) var(--f-round);color:#2F6FE4}
+.ih-mk.next .ih-tag,.ih-mk:hover .ih-tag,.ih-mk:focus-visible .ih-tag{opacity:1}
+@media (min-width:900px){ .ih-mk .ih-tag{opacity:1} }
+/* the job to do next: the biggest pin, with a slow pulse */
+.ih-mk.next .ih-pin{width:72px;height:72px;left:-36px;top:-98px;font-size:calc(38px*var(--ts));box-shadow:0 0 0 5px #fff,0 0 0 9px var(--ring),0 16px 26px -8px rgba(8,20,60,.6)}
+.ih-mk.next .ih-pin::before{content:"";position:absolute;inset:-9px;border-radius:50%;border:3px solid #fff;animation:ih-pulse 2.2s ease-out infinite}
+.ih-mk.next .ih-tag{top:-142px}
+/* done or waiting: faded and still */
+.ih-mk.s-approved .ih-pin,.ih-mk.s-pending .ih-pin{animation:none;filter:saturate(.35) brightness(1.08);opacity:.88}
+.ih-mk.s-approved .ih-tag,.ih-mk.s-pending .ih-tag{opacity:0}
+.ih-b{position:absolute;top:-6px;right:-6px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:900 13px var(--f-round);font-style:normal;box-shadow:0 0 0 2px #fff}
+.ih-b .ic{width:15px;height:15px;stroke-width:3}
+.ih-b.ok{background:var(--good);color:#fff}.ih-b.wait{background:#fff;color:#0D1530}.ih-b.redo{background:var(--warn);color:#fff}
+@keyframes ih-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes ih-pulse{from{transform:scale(.9);opacity:.9}to{transform:scale(1.35);opacity:0}}
+
+/* What sits over the island: who and how much at the top, the day and the next job at the bottom */
+.ih-hud{position:absolute;left:var(--gut);right:var(--gut-r);z-index:3;pointer-events:none;display:flex;gap:12px}
+.ih-hud>*{pointer-events:auto}
+.ih-top{top:2px;justify-content:space-between;align-items:flex-start}
+.ih-who{display:flex;align-items:center;gap:12px;text-shadow:0 1px 2px rgba(10,30,90,.35),0 2px 18px rgba(10,30,90,.35)}
+.ih-who .hero-ava{width:50px;height:50px;font-size:calc(30px*var(--ts));flex:none}
+.ih-who b{display:flex;align-items:center;gap:6px;font:800 calc(17px*var(--ts)) var(--f-round)}
+.ih-money{display:block;font:300 calc(44px*var(--ts))/1.05 var(--f-round);letter-spacing:-.03em}
+.ih-money .cur{font-size:.5em;vertical-align:.7em}.ih-money .cents{font-size:.5em}
+.ih-who small{display:block;font:700 calc(13px*var(--ts)) var(--f-round);color:var(--on-sky-2)}
+.ih-deco{flex:none}
+.ih-bottom{bottom:calc(92px + env(safe-area-inset-bottom,0px));flex-direction:column;align-items:stretch;max-width:600px}
+.ih-prog{display:flex;align-items:center;gap:12px;padding:8px 10px 8px 8px;border-radius:22px}
+.ih-prog .wx{min-height:44px;padding:4px 8px;font-size:calc(26px*var(--ts));background:rgba(255,255,255,.2);box-shadow:none}
+.ih-prog>span:nth-child(2){flex:1;min-width:0}
+.ih-prog b{display:block;font:800 calc(16px*var(--ts))/1.2 var(--f-round)}
+.ih-prog small{display:block;font:700 calc(13px*var(--ts))/1.3 var(--f-round);color:var(--on-sky-2)}
+.ih-down{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.22);color:inherit}
+.ih-down .ic{transform:rotate(90deg)}
+.ih-bottom .next-card{margin:0}
+
+/* The list under the island */
+.ih-below{scroll-margin-top:12px}
+.ih-minis{margin:0 0 16px}
+.ih-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:16px;align-items:start}
+.ih-cols>.wide{grid-column:1/-1}
+
+@media (max-width:520px){
+  .ih-money{font-size:calc(36px*var(--ts))}
+  .ih-deco span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .ih-deco{width:46px;padding:0;justify-content:center}
+  .ih-pin{width:54px;height:54px;left:-27px;top:-80px;font-size:calc(28px*var(--ts))}
+  .ih-mk.next .ih-pin{width:64px;height:64px;left:-32px;top:-90px}
+  .ih-tag{top:-120px}.ih-mk.next .ih-tag{top:-132px}
+}
+@media (prefers-reduced-motion: reduce){ .ih-pin,.ih-mk.next .ih-pin::before{animation:none} }
+
+/* ---------- Places: one pin per place, with how many jobs are there ---------- */
+.ih-n{position:absolute;top:-7px;right:-7px;min-width:26px;height:26px;padding:0 6px;border-radius:13px;display:grid;place-items:center;background:var(--ring);color:#fff;font:900 calc(14px*var(--ts))/1 var(--f-round);font-style:normal;box-shadow:0 0 0 2.5px #fff}
+.ih-mk.t-team .ih-n,.ih-mk.t-learn .ih-n{color:#3A2400}
+.ih-mk .ih-tag{opacity:1;top:-122px}
+.ih-mk.next .ih-tag{top:-136px}
+.ih-mk.s-approved .ih-tag{opacity:.85}
+@media (max-width:520px){ .ih-mk .ih-tag{top:-114px} .ih-mk.next .ih-tag{top:-126px} }
+/* The bottom row: the next job and a way to the list */
+.ih-row{display:flex;gap:10px;align-items:stretch}
+.ih-row .next-card{flex:1;min-width:0}
+.ih-down{flex:none;width:72px;height:auto;border-radius:var(--r-lg);flex-direction:column;gap:2px;font:800 calc(12px*var(--ts)) var(--f-round);background:var(--glass)}
+.ih-down .ic{width:22px;height:22px}
+.ih-who small{max-width:30ch}
+/* The jobs at a place pop up at the bottom of the island */
+.ih-panel{position:absolute;z-index:4;left:var(--gut);right:var(--gut-r);bottom:calc(92px + env(safe-area-inset-bottom,0px));max-width:600px;padding:12px;border-radius:var(--r-lg);animation:zoom .3s cubic-bezier(.2,.9,.2,1)}
+.ih-stage.panel-open .ih-bottom{visibility:hidden}
+.ih-panel header{display:flex;align-items:center;gap:10px;padding:2px 4px 10px;font:800 calc(17px*var(--ts)) var(--f-round)}
+.ih-panel header>span{font-size:calc(26px*var(--ts))}
+.ih-panel header b{flex:1}
+.ih-x{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.2)}
+.ih-jobs{display:grid;gap:8px;max-height:min(46vh,360px);overflow:auto}
+.ih-job{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;padding:8px 14px 8px 8px;border-radius:20px;background:var(--glass-2);text-align:left;transition:transform .15s}
+.ih-job:active{transform:scale(.98)}
+.ih-job .sticker{position:relative}
+.ih-job .ih-b{top:-6px;right:-6px}
+.ih-jt b{display:block;font:800 calc(16px*var(--ts))/1.2 var(--f-round)}
+.ih-jt small{display:block;font:700 calc(12px*var(--ts)) var(--f-round);color:var(--on-sky-2)}
+.ih-jp{font:800 calc(17px*var(--ts)) var(--f-round)}
+.ih-job.s-approved,.ih-job.s-pending{opacity:.7}
+.ih-mk .ih-tag{top:-134px}.ih-mk.next .ih-tag{top:-148px}
+@media (max-width:520px){
+  .topbar-r .pill{width:46px;padding:0;justify-content:center;gap:0;position:relative}
+  .topbar-r .pill>span:not(.badge){position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .ih-pin{width:48px;height:48px;left:-24px;top:-72px;font-size:calc(25px*var(--ts));box-shadow:0 0 0 3px #fff,0 0 0 6px var(--ring),0 12px 18px -8px rgba(8,20,60,.55)}
+  .ih-mk.next .ih-pin{width:58px;height:58px;left:-29px;top:-82px;font-size:calc(30px*var(--ts))}
+  .ih-mk .ih-tag{display:none}
+  .ih-mk.next .ih-tag{display:flex;top:-126px}
+  .ih-n{min-width:22px;height:22px;font-size:calc(12px*var(--ts));top:-6px;right:-6px}
+  .ih-down{width:60px}
+}
+@media (max-width:520px){ .ih-bottom,.ih-panel{bottom:calc(108px + env(safe-area-inset-bottom,0px))} }

@@ -1123,8 +1123,19 @@ a.row{text-decoration:none;color:inherit}
 .sky3d #sky .cloud,.sky3d #sky .sun,.sky3d #sky .moon{display:none}
 #g3.top{z-index:155}
 /* Island studio */
-#studio{position:fixed;inset:0;z-index:85;overflow:hidden;color:#fff;background:linear-gradient(180deg,var(--sky-top),var(--sky-mid) 60%,var(--sky-low))}
-.studio-cv{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
+#studio{position:fixed;inset:0;z-index:85;overflow:hidden;color:#fff}
+/* The studio's sky fades in as the island flies in from the page (and out as it flies back), so nothing cuts */
+#studio::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--sky-top),var(--sky-mid) 60%,var(--sky-low));transition:opacity .9s ease}
+#studio.st-clear::before{opacity:0}
+.studio-cv{position:absolute;inset:0;width:100%;height:100%;touch-action:none;transition:opacity .16s linear}
+#studio.st-pre .studio-cv{opacity:0}
+#studio.st-far .studio-cv{transition-duration:.45s}
+.studio-ui{transition:opacity .3s ease}
+#studio.st-fly .studio-ui{opacity:0;pointer-events:none}
+#studio.st-fly .studio-ui>*{pointer-events:none}
+#app{transition:opacity .45s ease}
+body.st-open #app{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion: reduce){ #studio::before,.studio-cv,.studio-ui,#app{transition:none} }
 .studio-ui{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 10px) var(--gut-r) calc(env(safe-area-inset-bottom,0px) + 12px) var(--gut)}
 .studio-ui>*{pointer-events:auto}
 .st-bar{display:flex;align-items:center;gap:12px}
@@ -1432,6 +1443,7 @@ a.row{text-decoration:none;color:inherit}
   #sky .cloud{animation:none;transform:translateX(var(--x))}
 }
 </style>
+<script src="proto.js"></script>
 </head>
 <body>
 <div id="sky" aria-hidden="true"></div>
@@ -3840,6 +3852,15 @@ void main() {
     for (const k of [...live.keys()]) if (!seen.has(k)) drop(k);
     kick();
   };
+  // Where a card's island is drawn on screen (ahead ms from now, as it bobs and turns), so the island studio can fly
+  // out of the card and back into it. Null when the card isn't on screen.
+  api.pose = (el, ahead = 0) => {
+    const o = [...live.values()].find(x => x.el === el); if (!o || o.kind !== 'island') return null;
+    const r = el.getBoundingClientRect(); if (r.width < 4 || r.bottom < 0 || r.top > H || r.right < 0 || r.left > W) return null;
+    const now = performance.now(), t = (now + ahead) / 1000, sc = Math.min(r.height / o.unit, r.width / (o.uw || o.unit * 0.85));
+    o.t0 = Math.min(o.t0, now - 700); // a card rebuilt while the studio was open is already grown, so the island lands on it
+    return { x: r.left + r.width * (+el.dataset.cx || 0.5) + (o.dx || 0) * sc, y: r.top + r.height * o.cy - Math.sin(t * 0.9 + o.ph) * 4, sc, ry: Math.sin(t * 0.25 + o.ph) * 0.45, tilt: 0.42, cv: o.cv };
+  };
   api.poke = id => { const o = live.get('island:' + id); if (o) o.hop = performance.now() / 1000; kick(); };
   const COIN = new T.CylinderGeometry(1, 1, 0.16, 28).rotateX(Math.PI / 2), RN = 90, rainM = new T.InstancedMesh(COIN, GOLD(), RN), D3 = new T.Object3D();
   rainM.count = 0; rainM.frustumCulled = false; scene.add(rainM);
@@ -3896,7 +3917,7 @@ void main() {
   function frame(now) {
     raf = 0; const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
     // Cards under a full-screen view (a mission, the island studio, Character Growth) can't be seen, so they wait
-    const top = cv.classList.contains('top'), hold = Stage.active || Studio.open || document.body.classList.contains('gw-open'); let any = false;
+    const top = cv.classList.contains('top'), hold = Stage.active || Studio.covers || document.body.classList.contains('gw-open'); let any = false;
     for (const o of live.values()) o.obj.visible = false;
     rainM.visible = false; R.setScissorTest(false);
     const shown = []; let needW = 1, needH = 1;
@@ -3941,7 +3962,7 @@ void main() {
    and a hot-air balloon in each kid's colour with their avatar riding in the basket. */
 const Sky3D = (() => {
   const T = window.THREE, api = { ok: false, set() {} };
-  if (!T || !G3.ok) return api;
+  if (!T || !G3.ok || document.documentElement.dataset.sky === 'japan') return api; // the Japanese sky paints its own
   let R; try { R = new T.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { return api; }
   api.ok = true; document.documentElement.classList.add('sky3d');
   const cv = R.domElement; cv.className = 'sky3d-cv'; cv.setAttribute('aria-hidden', 'true');
@@ -4032,7 +4053,7 @@ const Sky3D = (() => {
   function frame(now) {
     raf = 0;
     // Character Growth covers the sky, except in its sky look, where the sky shows through and keeps moving
-    if (Stage.active || Studio.open || UI.screen === 'parent' || document.hidden || (document.body.classList.contains('gw-open') && !document.body.classList.contains('gw-sky'))) return;
+    if (Stage.active || Studio.covers || UI.screen === 'parent' || document.hidden || (document.body.classList.contains('gw-open') && !document.body.classList.contains('gw-sky'))) return;
     const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000, asp = cam.aspect, still = reduced ? 0 : 1; last = now;
     for (const c of clouds) {
       if (!c.visible) continue; const u = c.userData, lim = (20 - c.position.z) * TAN * asp + 7;
@@ -4174,7 +4195,7 @@ const Studio = (() => {
     const { r, sc, c } = TR;
     for (const it of need) { const m = G3.item(it.t); if (!m) { THUMBS[it.t] = ''; continue; } sc.add(m); const b = new T.Box3().setFromObject(m), ctr = b.getCenter(new T.Vector3()), d = b.getSize(new T.Vector3()).length(); c.position.set(ctr.x + d * 0.75, ctr.y + d * 0.55, ctr.z + d * 1.25); c.lookAt(ctr); G3.inkFor(r); r.render(sc, c); THUMBS[it.t] = r.domElement.toDataURL('image/png'); sc.remove(m); m.traverse(o => o.geometry && o.geometry.dispose()); }
   }
-  function down(e) { try { R.domElement.setPointerCapture(e.pointerId); } catch (err) {} ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY }); if (ptrs.size === 1) moved = 0; if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch0 = Math.hypot(a.x - b.x, a.y - b.y); rad0 = rad; moved = 99; } idle = 0; Sound.ensure(); }
+  function down(e) { if (fly) return; try { R.domElement.setPointerCapture(e.pointerId); } catch (err) {} ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY }); if (ptrs.size === 1) moved = 0; if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch0 = Math.hypot(a.x - b.x, a.y - b.y); rad0 = rad; moved = 99; } idle = 0; Sound.ensure(); }
   function move(e) {
     const p = ptrs.get(e.pointerId); if (!p) return; const dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY; moved += Math.abs(dx) + Math.abs(dy); idle = 0;
     if (ptrs.size >= 2) { const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y); if (pinch0 && d) rad = clamp(rad0 * pinch0 / d, 2.6, S0.radMax || 11); }
@@ -4211,7 +4232,8 @@ const Studio = (() => {
       target.x = tr.from[0] + (S0.at[0] - tr.from[0]) * e; target.z = tr.from[1] + (S0.at[1] - tr.from[1]) * e; target.y = tr.from[2] + (S0.at[2] - tr.from[2]) * e; rad = tr.rad0 + (tr.rad1 - tr.rad0) * e;
       G3.tickIsland(tr.old, t, dt); if (p >= 1) arrive();
     }
-    cam.position.set(target.x + rad * Math.sin(phi) * Math.cos(theta), target.y + rad * Math.cos(phi), target.z + rad * Math.sin(phi) * Math.sin(theta)); cam.lookAt(target);
+    if (fly) { const p = fly.done ? 1 : clamp((now - fly.t0) / fly.dur, 0, 1); aim(mix(fly.a, fly.b, ease(p))); if (p >= 1 && !fly.done) landed(); }
+    else { cam.position.set(target.x + rad * Math.sin(phi) * Math.cos(theta), target.y + rad * Math.cos(phi), target.z + rad * Math.sin(phi) * Math.sin(theta)); cam.lookAt(target); }
     if (S0.job) stepJob(now, dt);
     G3.tickIsland(island, t, dt, 0, island.userData.hopAt || 0);
     if (S0.play && S0.play.walk && !S0.trip) {
@@ -4673,15 +4695,258 @@ const Studio = (() => {
     }
     ui();
   }
+  // ---- Flying in and out. The island never cuts from the page to the studio: the studio's camera starts framed
+  // exactly where the island was drawn (the Today card, or the island home) and swoops in to the studio's view while
+  // the page fades away and the studio's sky fades in. Closing flies it back down onto its card. With nothing to fly
+  // from (a wish list button, say), it rises in from a distance instead.
+  const FOV = 38, TAU = Math.PI * 2;
+  let fly = null, hid = null;
+  const ease = p => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(2 - 2 * p, 3) / 2);
+  const wrap = a => a - TAU * Math.round(a / TAU);
+  const here = () => ({ F: [0, 0, innerWidth, innerHeight], fov: FOV, theta, phi, rad, at: [target.x, target.y, target.z] });
+  // A view of the island: F is the rectangle its picture fills on screen (the screen itself in the studio), plus the
+  // orbit camera that draws it there.
+  function aim(P) {
+    const [x, y, w, h] = P.F, at = P.at;
+    cam.position.set(at[0] + P.rad * Math.sin(P.phi) * Math.cos(P.theta), at[1] + P.rad * Math.cos(P.phi), at[2] + P.rad * Math.sin(P.phi) * Math.sin(P.theta)); cam.lookAt(at[0], at[1], at[2]);
+    cam.fov = P.fov; cam.aspect = w / h;
+    if (Math.abs(x) + Math.abs(y) + Math.abs(w - innerWidth) + Math.abs(h - innerHeight) > 0.5) cam.setViewOffset(w, h, -x, -y, innerWidth, innerHeight); else cam.clearViewOffset();
+    cam.updateProjectionMatrix();
+  }
+  const mix = (A, B, e) => { const L = (a, b) => a + (b - a) * e; return { F: A.F.map((v, i) => L(v, B.F[i])), fov: L(A.fov, B.fov), theta: L(A.theta, B.theta), phi: L(A.phi, B.phi), rad: A.rad * Math.pow(B.rad / A.rad, e), at: A.at.map((v, i) => L(v, B.at[i])) }; };
+  // Where this kid's island is on the page, ahead ms from now: its card on Today (drawn flat-on, tipped 0.42 towards
+  // you and turning gently, which the orbit camera matches from the same angle and distance), or the island home.
+  function source(id, ahead = 0) {
+    const el = document.querySelector(`#app [data-3d="island:${id}"]`), c = el && G3.pose && G3.pose(el, ahead);
+    if (c) return { F: [c.x - innerWidth / 2, c.y - innerHeight / 2, innerWidth, innerHeight], fov: FOV, theta: Math.PI / 2 + c.ry, phi: Math.PI / 2 - c.tilt, rad: innerHeight / (2 * c.sc * Math.tan(FOV * Math.PI / 360)), at: [0, 0, 0], hide: c.cv };
+    return IslandHome.pose ? IslandHome.pose(id) : null;
+  }
+  const far = P => ({ ...P, F: [0, innerHeight * 0.22, innerWidth, innerHeight], theta: P.theta - 0.7, phi: 1.2, rad: P.rad * 3.4 });
+  const cover = (on, ms) => { if (window.JapanSky && JapanSky.focus) JapanSky.focus(on ? 1 : 0, reduced ? 0 : ms); };
+  function landed() {
+    const root = $('#studio');
+    if (!fly.out) { const b = fly.b; theta = b.theta; phi = b.phi; rad = b.rad; target.set(...b.at); fly = null; cam.fov = FOV; cam.clearViewOffset(); size(); root.classList.remove('st-fly', 'st-far'); return ui(); }
+    // Back on the page: hold the last frame while the card's own picture takes over underneath, then go.
+    fly.done = true; if (hid) hid.style.visibility = ''; root.classList.add('st-pre'); setTimeout(finish, root.classList.contains('st-far') ? 460 : 180);
+  }
+  function finish() {
+    if (!S0.open) return; fly = null; S0.open = false; S0.leaving = false;
+    const root = $('#studio'); root.hidden = true; root.classList.remove('st-fly', 'st-pre', 'st-clear', 'st-far');
+    if (hid) { hid.style.visibility = ''; hid = null; }
+    cam.fov = FOV; cam.clearViewOffset(); if (R) size();
+    if (TR) { TR.r.dispose(); try { TR.r.forceContextLoss(); } catch (e) {} TR = null; }
+    render();
+  }
   function open(id) {
     if (!ensure()) { toast('The island needs 3D, which this device can’t show.'); return; }
+    if (S0.open && S0.leaving) finish();
     if (S0.trip) { drop(S0.trip.old); S0.trip = null; }
-    kidId = id; Object.assign(S0, { open: true, isle: 'home', homeCat: null, msg: '', sel: null, tree: null, confirm: null, place: null, job: null, lk: null, preview: null, standTab: null, cat: CARE.some(c => careOf(kid())[c.k] >= 0.66) ? 'jobs' : 'animals' }); idle = 0;
+    const again = S0.open, src = reduced || again ? null : source(id); // already open (a gift, say): no second fly-in
+    kidId = id; Object.assign(S0, { open: true, leaving: false, isle: 'home', homeCat: null, msg: '', sel: null, tree: null, confirm: null, place: null, job: null, lk: null, preview: null, standTab: null, cat: CARE.some(c => careOf(kid())[c.k] >= 0.66) ? 'jobs' : 'animals' }); idle = 0;
     const root = $('#studio'); if (!R.domElement.isConnected) root.prepend(R.domElement);
-    rad = 0; build(); rad = fitRad(); size(); root.hidden = false; ui(); last = performance.now(); if (!raf) raf = requestAnimationFrame(frame); Sound.ensure(); Sound.whoosh();
+    rad = 0; build(); rad = fitRad(); size(); phi = 1.02;
+    if (src) theta = src.theta + 0.35;
+    if (!again) { fly = null; hid = null; root.classList.remove('st-fly', 'st-pre', 'st-clear', 'st-far'); }
+    if (!reduced && !again) {
+      const b = here(), a = src || far(b); b.theta = a.theta + wrap(b.theta - a.theta);
+      fly = { a, b, t0: performance.now(), dur: src ? 1150 : 1000, out: false }; hid = src && src.hide || null;
+      root.classList.add('st-fly', 'st-pre', 'st-clear'); root.classList.toggle('st-far', !src); aim(a);
+    }
+    root.hidden = false; document.body.classList.add('st-open'); ui(); cover(true, fly ? fly.dur : 0);
+    last = performance.now(); if (!raf) raf = requestAnimationFrame(frame); Sound.ensure(); Sound.whoosh();
+    // once the studio has drawn the island where the page drew it, swap them over and let the studio's sky come in
+    if (fly) requestAnimationFrame(() => requestAnimationFrame(() => { if (!S0.open || S0.leaving) return; root.classList.remove('st-pre', 'st-clear'); setTimeout(() => { if (hid && S0.open && !S0.leaving) hid.style.visibility = 'hidden'; }, 170); }));
   }
-  function close() { if (S0.play) stopPlay(true); rest(); S0.open = false; $('#studio').hidden = true; if (TR) { TR.r.dispose(); try { TR.r.forceContextLoss(); } catch (e) {} TR = null; } render(); }
-  return { get open() { return S0.open; }, get doing() { return S0.brain ? S0.brain.doing : S0.play ? S0.play.k : ''; }, show: open, close, act, farmAct };
+  function close() {
+    if (!S0.open || S0.leaving) return;
+    if (S0.play) stopPlay(true); rest();
+    if (S0.job) { S0.job = null; }
+    const root = $('#studio'), dur = 950;
+    // the page under the studio draws again (cards and the island home wake up), ready for the island to land on it
+    S0.leaving = true; document.body.classList.remove('st-open'); render(); cover(false, dur);
+    if (reduced) return finish();
+    if (hid) hid.style.visibility = '';
+    const src = source(kidId, dur), a = here(); if (fly) Object.assign(a, mix(fly.a, fly.b, ease(clamp((performance.now() - fly.t0) / fly.dur, 0, 1))));
+    const b = src || far(a); b.theta = a.theta + wrap(b.theta - a.theta);
+    hid = src && src.hide || null; if (hid) hid.style.visibility = 'hidden';
+    fly = { a, b, t0: performance.now(), dur: src ? dur : 800, out: true };
+    root.classList.add('st-fly', 'st-clear'); root.classList.toggle('st-far', !src); if (!src) root.classList.add('st-pre');
+    if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+  }
+  return { get open() { return S0.open; }, get covers() { return S0.open && !S0.leaving; }, get doing() { return S0.brain ? S0.brain.doing : S0.play ? S0.play.k : ''; }, show: open, close, act, farmAct };
+})();
+
+/* Island home (a prototype, on only for devices that opened the app with ?look=island; ?look=classic turns it off).
+   Today opens on the kid's own island, big, with their character on it. Each of today's jobs is a button pinned to a
+   spot on the island that fits it: bedroom, kitchen and bathroom jobs at the house, the garden on the lawn, pets by
+   the pond, the car by the flag. Tap one and the character walks over, then the job opens as usual. Drag sideways to
+   turn the island, tap the grass and the character walks there, tap the character and it hops. Every job is also in
+   the list under the island, for VoiceOver and for devices without 3D. */
+const IslandHome = (() => {
+  const T = window.THREE, look = () => document.documentElement.dataset.look === 'island';
+  const api = { get on() { return look() && !!T && G3.ok && !!(G3.acts && G3.acts.home); }, set() {}, mount() {} };
+  if (!T || !G3.ok) return api;
+  let R = null, pace, scene, cam, island = null, kidM = null, brain = null, host = null, cv = null, marksEl = null, raf = 0, last = 0;
+  let builtFor = '', markSig = '', want = null, theta = 1.22, phi = 0.98, rad = 6, span = 2.2, drag = null, walk = null, hop = 0, idleAt = 0;
+  const target = new T.Vector3(0, -0.32, 0), ray = new T.Raycaster(), V = new T.Vector3(), marks = [];
+  // Jobs are grouped by where they happen on the home island, one pin per place. In island units: [x, height of the
+  // pin above the lawn, z]; the house stands at the back middle (x -0.42 to 0.5, z -0.62 to 0.12) and its front door
+  // faces the front lawn. Places away from the house move out with the lawn as the island grows.
+  const PLACES = {
+    house: { name: 'House', at: 'At the house', icon: '🏠', a: [0.04, 0.78, -0.22], stand: [0.06, 0.24], fixed: true },
+    line: { name: 'Washing line', at: 'At the washing line', icon: '🧺', a: [0.74, 0.3, -0.58], stand: [0.66, -0.3] },
+    garden: { name: 'Garden', at: 'In the garden', icon: '🌻', a: [-0.84, 0.3, -0.08], stand: [-0.7, 0.05] },
+    pets: { name: 'Pets', at: 'With the pets', icon: '🐾', a: [0.66, 0.3, 0.62], stand: [0.55, 0.52] },
+    car: { name: 'Driveway', at: 'On the driveway', icon: '🚗', a: [0.94, 0.3, 0.02], stand: [0.8, 0.12] },
+    learn: { name: 'Lesson', at: 'Today’s lesson', icon: '🌱', a: [-0.02, 0.3, 0.9], stand: [0.02, 0.72] },
+  };
+  const PLACE_OF = { bedroom: 'house', kitchen: 'house', bathroom: 'house', tidy: 'house', laundry: 'line', outdoor: 'garden', pets: 'pets', car: 'car', learn: 'learn' };
+  const RANK = { must: 0, team: 1, learn: 2, gig: 3 }, OPEN = s => s === 'open' || s === 'redo';
+  const FRONT = [0.3, 0.45];
+  let panelFor = null;
+  const alive = () => host && host.isConnected && !document.hidden && !Studio.covers && !Stage.active && UI.screen === 'kid' && UI.tab === 'today' && host.getBoundingClientRect().bottom > 0;
+  const kick = () => { if (!raf && alive()) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+  function ensure() {
+    if (R) return true;
+    try { R = new T.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { return false; }
+    pace = G3.pacer(R, 2); R.setClearColor(0, 0); R.shadowMap.enabled = true; R.shadowMap.type = T.PCFSoftShadowMap;
+    R.outputEncoding = T.sRGBEncoding; R.toneMapping = T.NoToneMapping; R.toneMappingExposure = 1.1;
+    scene = new T.Scene(); cam = new T.PerspectiveCamera(36, 1, 0.1, 100);
+    scene.environment = G3.envFor(R); scene.add(new T.HemisphereLight(0xd8ecff, 0x8a7a5a, 0.62));
+    const sun = new T.DirectionalLight(0xfff1d6, 1.0); sun.position.set(-3, 6, 4); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
+    Object.assign(sun.shadow.camera, { left: -2.3, right: 2.3, top: 2.3, bottom: -2.3, near: 1, far: 15 }); sun.shadow.bias = -0.002; scene.add(sun);
+    host = document.createElement('div'); host.className = 'ih-host';
+    cv = R.domElement; cv.className = 'ih-cv'; cv.setAttribute('aria-hidden', 'true');
+    marksEl = document.createElement('div'); marksEl.className = 'ih-marks';
+    host.append(cv, marksEl);
+    cv.addEventListener('pointerdown', down); cv.addEventListener('pointermove', move); cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', () => { drag = null; });
+    marksEl.addEventListener('click', e => { const b = e.target.closest('.ih-mk'); if (b) go(b.dataset.ih); });
+    new ResizeObserver(size).observe(host);
+    addEventListener('scroll', kick, { passive: true }); document.addEventListener('visibilitychange', kick);
+    return true;
+  }
+  function size() {
+    if (!host) return; const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
+    R.setSize(w, h); cam.aspect = w / h; cam.updateProjectionMatrix();
+    // Far enough back to see the whole island and its jobs, a little closer on wide screens
+    rad = clamp(6.2 / Math.min(1, cam.aspect * 1.2), 6.2, 12) * Math.max(1, span / 2.2 * 0.9); kick();
+  }
+  const shadows = o => o.traverse(m => { if (m.isMesh && !m.userData.puffs) { m.castShadow = true; m.receiveShadow = true; } });
+  const drop = o => { scene.remove(o); o.traverse(m => { if (m.geometry) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); };
+  const kid = () => Store.kids[want && want.kidId];
+  function build() {
+    const k = kid(); if (!k) return;
+    if (brain) { brain.end(); brain = null; } if (island) drop(island); walk = null;
+    island = G3.island(k, { flat: true, isle: 'home' }); const u = island.userData;
+    if (u.av && u.av.userData.P) { kidM = u.av; u.av = null; } else { kidM = G3.kid(k.hue, k.avatar); island.add(kidM); if (u.play) kidM.position.set(...u.play.at); }
+    shadows(island); scene.add(island);
+    const f = G3.frame(island); target.set(f.cx, -0.32, f.cz); span = Math.max(f.w, f.d); size(); think();
+  }
+  // Left alone, the character potters about the island by itself, as it does in the island studio.
+  function think() {
+    if (brain) brain.end(); brain = null; if (!kidM || !G3.brain || walk) return;
+    const k = kid(), ph = phaseNow(), items = (island.userData.items || []).map(m => { const d = shopDef(m.userData.t) || {}; return { id: m.userData.itemId, t: m.userData.t, m, pet: (d.cat === 'animals' && !d.home && !d.habitat) || !!d.farm }; });
+    try { brain = G3.brain(island, 'home', { kid: kidM, hue: k.hue, night: ph === 'night', dusk: ph === 'dusk', tools: (k.island || {}).tools || {}, items }); } catch (e) { brain = null; }
+  }
+  const ground = (x, z) => island.userData.terrain.h(x, z);
+  const canWalk = (x, z) => { const p = island.userData.play; return !p || !p.walk || p.walk(x, z); };
+  // The nearest spot the character can stand on, stepping from (x, z) towards the front lawn
+  function standAt(x, z) { for (let i = 0; i <= 12; i++) { const f = i / 12, px = x + (FRONT[0] - x) * f, pz = z + (FRONT[1] - z) * f; if (canWalk(px, pz)) return [px, pz]; } return FRONT; }
+  function lawnScale() { const z = island.userData.zones || {}; return z.lawn ? Math.max(1, z.lawn.r / 0.98) : 1; }
+  function setMarks() {
+    marks.length = 0; marksEl.textContent = ''; const by = {}, S = lawnScale();
+    for (const it of want.items) (by[PLACE_OF[it.theme] || 'house'] = by[PLACE_OF[it.theme] || 'house'] || []).push(it);
+    for (const [k, list] of Object.entries(by)) {
+      const P = PLACES[k], a = P.fixed ? P.a : [P.a[0] * S, P.a[1], P.a[2] * S], st = P.fixed ? P.stand : standAt(P.stand[0] * S, P.stand[1] * S);
+      list.sort((x, y) => OPEN(y.state) - OPEN(x.state) || RANK[x.tier] - RANK[y.tier]);
+      const open = list.filter(x => OPEN(x.state)), top = open[0] || list[0], next = list.some(x => x.next), pay = open.length === 1 ? open[0].pay : '';
+      const b = document.createElement('button'); b.type = 'button'; b.className = `ih-mk t-${top.tier} ${open.length ? 's-open' : 's-approved'}${next ? ' next' : ''}`; b.dataset.ih = k;
+      b.setAttribute('aria-label', `${P.name}: ${open.length ? `${open.length} job${open.length === 1 ? '' : 's'} to do` : 'all done'}${next ? ', your next job is here' : ''}`);
+      b.innerHTML = `<span class="ih-pin" style="--c1:${top.c1};--c2:${top.c2}" aria-hidden="true">${P.icon}${open.length ? `<i class="ih-n">${open.length}</i>` : `<i class="ih-b ok">${ic('check')}</i>`}</span><span class="ih-tag" aria-hidden="true"><b>${P.name}</b><small>${open.length ? (pay || `${open.length} jobs`) : 'All done'}</small></span>`;
+      marksEl.appendChild(b); marks.push({ el: b, a, stand: st, k, P, list });
+    }
+    if (panelFor && !marks.some(m => m.k === panelFor)) closePanel();
+  }
+  // A place with one job left opens it straight away; with more, its jobs pop up to choose from.
+  function arriveAt(m) {
+    const open = m.list.filter(x => OPEN(x.state));
+    if (open.length === 1) return run(open[0]);
+    showPanel(m);
+  }
+  const run = it => { closePanel(); if (it.open) it.open(); else ACT.brief({ dataset: { key: it.key } }); };
+  function showPanel(m, again) {
+    panelFor = m.k; const el = host.parentNode && host.parentNode.querySelector('.ih-panel'); if (!el) return;
+    const st = it => it.state === 'approved' ? `<i class="ih-b ok">${ic('check')}</i>` : it.state === 'pending' ? `<i class="ih-b wait">${ic('clock')}</i>` : it.state === 'redo' ? '<i class="ih-b redo">!</i>' : '';
+    el.innerHTML = `<header><span aria-hidden="true">${m.P.icon}</span><b>${m.P.at}</b><button class="ih-x" type="button" aria-label="Close">${ic('x')}</button></header>
+      <div class="ih-jobs">${m.list.map(it => `<button class="ih-job t-${it.tier} s-${it.state}" type="button" data-job="${esc(it.key)}" ${OPEN(it.state) ? '' : 'aria-disabled="true"'}><span class="sticker sm" style="--c1:${it.c1};--c2:${it.c2}" aria-hidden="true">${it.icon}${st(it)}</span><span class="ih-jt"><b>${esc(it.title)}</b><small>${it.tierLabel}${it.stateLabel ? ` · ${it.stateLabel}` : ''}</small></span><span class="ih-jp num">${esc(it.pay)}</span></button>`).join('')}</div>`;
+    el.hidden = false; el.closest('.ih-stage').classList.add('panel-open');
+    el.onclick = e => { if (e.target.closest('.ih-x')) return closePanel(); const b = e.target.closest('.ih-job'); if (!b) return; const it = m.list.find(x => x.key === b.dataset.job); if (it && OPEN(it.state)) run(it); else if (it) ACT.brief({ dataset: { key: it.key } }); };
+    const f = el.querySelector('.ih-job:not([aria-disabled])') || el.querySelector('.ih-x'); if (f && !again) f.focus({ preventScroll: true });
+  }
+  function closePanel() { panelFor = null; const el = host && host.parentNode && host.parentNode.querySelector('.ih-panel'); if (el) { el.hidden = true; el.textContent = ''; el.closest('.ih-stage').classList.remove('panel-open'); } }
+  function go(k) {
+    const m = marks.find(x => x.k === k); if (!m) return; Sound.ensure(); Sound.pop(); closePanel();
+    if (!kidM || reduced) return arriveAt(m);
+    if (brain) { brain.end(); brain = null; }
+    const [x, z] = m.stand; walk = { to: new T.Vector3(x, ground(x, z), z), face: Math.atan2(m.a[0] - x, m.a[2] - z), then: () => arriveAt(m) }; idleAt = 0; kick();
+  }
+  function walkTo(x, z) { if (!kidM || !canWalk(x, z)) return; if (brain) { brain.end(); brain = null; } walk = { to: new T.Vector3(x, ground(x, z), z), face: null, then: null }; kick(); }
+  function down(e) { drag = { x: e.clientX, y: e.clientY, moved: 0 }; Sound.ensure(); }
+  function move(e) { if (!drag) return; const dx = e.clientX - drag.x; drag.moved += Math.abs(dx) + Math.abs(e.clientY - drag.y); drag.x = e.clientX; drag.y = e.clientY; theta -= dx * 0.008; kick(); }
+  function up(e) {
+    const d = drag; drag = null; if (!d || d.moved > 10) return; if (panelFor) closePanel();
+    const r = cv.getBoundingClientRect(); ray.setFromCamera({ x: (e.clientX - r.left) / r.width * 2 - 1, y: -((e.clientY - r.top) / r.height) * 2 + 1 }, cam);
+    if (kidM && ray.intersectObject(kidM, true).length) { hop = performance.now() / 1000; Sound.pop(); FX.burst(e.clientX, e.clientY, CONF, 12); return; }
+    const hit = ray.intersectObjects(island.userData.surf || [], false)[0]; if (!hit) return;
+    const p = island.worldToLocal(hit.point.clone()); walkTo(p.x, p.z);
+  }
+  function stepWalk(t, dt) {
+    const w = walk, m = kidM, P = m.userData.P, dx = w.to.x - m.position.x, dz = w.to.z - m.position.z, d = Math.hypot(dx, dz), s = Math.min(d, 0.75 * dt), sw = Math.sin(t * 13) * 0.6;
+    if (d < 0.02) {
+      m.position.copy(w.to); if (w.face != null) m.rotation.y = w.face; if (P) { P.legL.rotation.x = P.legR.rotation.x = P.armL.rotation.x = P.armR.rotation.x = 0; }
+      walk = null; hop = t; if (w.then) setTimeout(w.then, 260); idleAt = t; return;
+    }
+    m.position.x += dx / d * s; m.position.z += dz / d * s; m.position.y = ground(m.position.x, m.position.z);
+    const yaw = Math.atan2(dx, dz); m.rotation.y += Math.atan2(Math.sin(yaw - m.rotation.y), Math.cos(yaw - m.rotation.y)) * Math.min(1, dt * 10);
+    if (P) { P.legL.rotation.x = sw; P.legR.rotation.x = -sw; P.armL.rotation.x = -sw * 0.8; P.armR.rotation.x = sw * 0.8; }
+  }
+  function frame(now) {
+    raf = 0; if (!alive() || !island) return;
+    const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
+    island.position.y = reduced ? 0 : Math.sin(t * 0.8) * 0.025;
+    cam.position.set(target.x + rad * Math.sin(phi) * Math.cos(theta), target.y + rad * Math.cos(phi), target.z + rad * Math.sin(phi) * Math.sin(theta)); cam.lookAt(target);
+    G3.tickIsland(island, t, dt, 0, 0);
+    if (walk) stepWalk(t, dt);
+    else { if (!brain && idleAt && t - idleAt > 6) { idleAt = 0; think(); } if (brain) { try { brain.step(t, dt); } catch (e) { brain.end(); brain = null; } } }
+    if (hop && kidM) { const h = t - hop; if (h > 0.45) hop = 0; else kidM.position.y = ground(kidM.position.x, kidM.position.z) + Math.sin(h / 0.45 * Math.PI) * 0.12; }
+    pace(now); G3.inkFor(R); R.render(scene, cam);
+    const w = host.clientWidth, h = host.clientHeight;
+    for (const m of marks) {
+      V.set(m.a[0], ground(0.3, 0.45) + m.a[1], m.a[2]); island.localToWorld(V); V.project(cam);
+      m.el.style.transform = `translate(${((V.x + 1) / 2 * w).toFixed(1)}px,${((1 - V.y) / 2 * h).toFixed(1)}px)`; m.el.style.zIndex = String(1000 - Math.round(V.z * 500));
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  // Today hands over the kid and their jobs; after each render the stage element is mounted (or nothing, elsewhere).
+  api.set = (k, items) => { want = { kidId: k.id, sig: islandSig(k), items }; };
+  api.mount = slot => {
+    if (!slot || !want || !api.on) { if (raf) { cancelAnimationFrame(raf); raf = 0; } return; }
+    if (!ensure()) return;
+    if (host.parentNode !== slot) slot.appendChild(host);
+    const id = `${want.kidId}:${want.sig}`; if (id !== builtFor) { builtFor = id; build(); }
+    const ms = JSON.stringify(want.items.map(i => [i.key, i.state, i.next])); if (ms !== markSig) { markSig = ms; setMarks(); }
+    if (panelFor) { const m = marks.find(x => x.k === panelFor), el = slot.querySelector('.ih-panel'); if (m && el && el.hidden) showPanel(m, true); }
+    size(); kick();
+  };
+  // Where the island is drawn, so the island studio can fly out of it and back down onto it
+  api.pose = id => {
+    if (!api.on || !island || !cv || !cv.isConnected || !want || want.kidId !== id) return null;
+    const r = cv.getBoundingClientRect(); if (r.width < 4 || r.bottom < 0 || r.top > innerHeight) return null;
+    return { F: [r.left, r.top, r.width, r.height], fov: cam.fov, theta, phi, rad, at: [target.x, target.y, target.z], hide: host };
+  };
+  // For tests: what the island home is doing right now
+  api.debug = () => ({ walking: !!walk, panel: panelFor, running: !!raf, alive: !!alive(), places: marks.map(m => m.k), kid: kidM ? [+kidM.position.x.toFixed(2), +kidM.position.z.toFixed(2)] : null });
+  return api;
 })();
 
 /* 3D mission scene: theme props drift in depth, bursts on every step, gold stars at the end */
@@ -4826,6 +5091,7 @@ function render() {
   if (Stage.active) { Stage.dirty = true; return; }
   const app = $('#app');
   document.body.classList.toggle('is-parent', UI.screen === 'parent');
+  document.body.dataset.screen = UI.screen; document.body.dataset.tab = UI.screen === 'kid' ? UI.tab : ''; // for looks that colour each screen and tab
   const keep = {}; $$('[data-keep]', app).forEach(el => { keep[el.dataset.keep] = el.scrollLeft; });
   let html = '';
   if (UI.screen === 'boot') html = viewBoot();
@@ -4841,6 +5107,7 @@ function render() {
   hydratePhotos(app);
   paintSky();
   G3.sync();
+  IslandHome.mount(document.querySelector('.ih-stage'));
   // The tour sits in its own layer above the 3D canvas, so the dimming covers islands and stickers too
   const tr = $('#tour') || document.body.appendChild(Object.assign(document.createElement('div'), { id: 'tour' })), th = UI.screen === 'kid' && curKid() ? tourView(curKid()) : '';
   if (tr.dataset.h !== String(hash(th))) { tr.innerHTML = th; tr.dataset.h = hash(th); }
@@ -4871,13 +5138,16 @@ function initSky() {
   h += '</div><div class="sun"></div><div class="moon"></div>';
   for (let i = 0; i < 7; i++) h += `<div class="cloud" style="--w:${(150 + r() * 280) | 0}px;--y:${(3 + r() * 58).toFixed(1)}%;--dur:${(80 + r() * 90) | 0}s;--delay:-${(r() * 160) | 0}s;--x:${(r() * 90) | 0}vw"></div>`;
   $('#sky').innerHTML = h + '<div class="haze"></div>';
+  // The Japanese sky (the default; ?sky=classic keeps the classic one on a device): a painted 3D lake scene behind the
+  // app, in its own script
+  if (document.documentElement.dataset.sky === 'japan' && !window.JapanSky) { const js = document.createElement('script'); js.src = 'sky-japan.js'; document.head.appendChild(js); }
 }
 function phaseNow() { const h = new Date().getHours(); return h >= 5 && h < 8 ? 'dawn' : h >= 8 && h < 17 ? 'day' : h >= 17 && h < 20 ? 'dusk' : 'night'; }
 function paintSky() {
   const ph = phaseNow(), wx = wxNow(), P = SKY[ph].map((c, i) => mixHex(c, SKY_GREY[ph][i], wx.grey)), root = document.documentElement.style;
   if (G3.weather) G3.weather(wx);
   root.setProperty('--sky-top', P[0]); root.setProperty('--sky-mid', P[1]); root.setProperty('--sky-low', P[2]);
-  const sky = $('#sky'); sky.dataset.phase = ph;
+  const sky = $('#sky'); sky.dataset.phase = ph; document.documentElement.dataset.phase = ph;
   let x, y, cloud;
   if (UI.skyProgress == null) { const d = new Date(); const p = clamp((d.getHours() + d.getMinutes() / 60 - 6) / 14, 0, 1); x = 10 + p * 80; y = 74 - Math.sin(Math.PI * p) * 56; cloud = 0.5; }
   else { const p = clamp(UI.skyProgress, 0, 1); x = innerWidth >= 1000 ? 56 + p * 22 : 70 + p * 12; y = 80 - Math.sin(p * Math.PI / 2) * 66; cloud = 0.62 - p * 0.52; }
@@ -5023,7 +5293,49 @@ function todayMoney(kid) {
   for (const j of jobsList()) { if (j.kidId !== kid.id) continue; if (j.status === 'approved' && j.reviewedAt && dkey(new Date(j.reviewedAt)) === d) earned += (j.paid && j.paid.net) || 0; if (j.status === 'pending') pending += grossFor(j); }
   return { earned, pending };
 }
+// Island home (prototype, ?look=island): the kid's island fills the first screen with today's jobs pinned on it, and
+// the usual cards follow below as the full list.
+function kidIsland(kid) {
+  const date = dkey(), b = boardFor(kid, date), gigs = gigsFor(kid, date);
+  const all = [...b.must, ...b.team], done = all.filter(c => isDone(choreState(kid.id, c, date).state)).length;
+  UI.skyProgress = all.length ? done / all.length : 0;
+  const nw = netWorth(kid), cond = condition(done, all.length), j = kid.jars || {}, nx = nextUp(kid, date), cap = islandCaption(kid), items = [];
+  const add = (c, tier) => {
+    const s = choreState(kid.id, c, date).state, th = THEMES[c.theme] || THEMES.tidy; if (s === 'taken' || (c.minAge || 0) > (kid.age || 8)) return;
+    items.push({ key: c.key, title: c.title, icon: c.icon, tier, tierLabel: TIERS[tier].label, theme: c.theme, state: s, pay: payLabel(c), c1: th.c1, c2: th.c2, next: !!(nx && nx.kind === 'chore' && nx.key === c.key),
+      stateLabel: s === 'approved' ? 'paid' : s === 'pending' ? 'waiting for a grown-up' : s === 'redo' ? 'needs a fix-up' : '',
+      badge: s === 'approved' ? `<i class="ih-b ok">${ic('check')}</i>` : s === 'pending' ? `<i class="ih-b wait">${ic('clock')}</i>` : s === 'redo' ? '<i class="ih-b redo">!</i>' : '' });
+  };
+  b.must.forEach(c => add(c, 'must')); b.team.forEach(c => add(c, 'team')); gigs.forEach(c => add(c, 'gig'));
+  const L = window.Growth && Growth.nextLesson ? Growth.nextLesson(kid) : null;
+  if (L && !L.done && L.next) items.push({ key: '@learn', title: L.next.title, icon: L.next.icon, tier: 'learn', tierLabel: 'Lesson', theme: 'learn', state: 'open', pay: L.next.xp ? `+${L.next.xp} XP` : 'Learn', c1: '#D3F9D8', c2: '#40C057', next: !!(nx && nx.kind === 'lesson'), stateLabel: '', badge: '', open: () => ACT.gOpen({ dataset: { id: kid.id } }) });
+  IslandHome.set(kid, items);
+  return `<section class="ih-stage" aria-label="${esc(kid.name)}'s island. Today's jobs are buttons on the island, and they're all in the list below too.">
+      <div class="ih-hud ih-top">
+        <div class="ih-who"><span class="hero-ava" style="--hue:${kid.hue}">${kid.avatar}</span><div><b>${esc(kid.name)}'s island${wxChip()}</b><span class="ih-money num" aria-label="All your money: ${fmt(nw)}">${heroMoney(nw)}</span><small>${cond.wx} ${cond.text} · ${done} of ${all.length} done</small></div></div>
+        <button class="pill glass ih-deco" data-act="studio" data-id="${kid.id}">${ic('sparkle')}<span>Decorate · ${xpOf(kid).left.toLocaleString()} XP</span></button>
+      </div>
+      <div class="ih-hud ih-bottom">
+        <div class="ih-row">${nextCard(kid, date)}<a class="ih-down glass" href="#ih-list" aria-label="All of today's jobs, as a list">${ic('next')}<span>List</span></a></div>
+      </div>
+      <div class="ih-panel glass" role="group" aria-label="Jobs here" hidden></div>
+    </section>
+    <div class="ih-below" id="ih-list">
+      <h2 class="sec-t">Today's list</h2>
+      <div class="minis ih-minis">${JARS.map(x => `<div class="mini glass"><span><i style="background:${x.color}"></i>${x.label}</span><b class="num">${fmt(x.k === 'invest' ? (j.invest || 0) + holdingsValue(kid) : j[x.k] || 0)}</b></div>`).join('')}</div>
+      <div class="ih-cols">
+        ${choreCard('must', b.must, kid, date)}
+        ${choreCard('team', b.team, kid, date)}
+        ${(window.Growth || null) ? Growth.card(kid) : ''}
+        ${gigCard(gigs, kid, date)}
+        ${habitCard(kid, date)}
+        ${wishCard(kid)}
+        ${paydayCard(kid)}
+      </div>
+    </div>`;
+}
 function kidToday(kid) {
+  if (IslandHome.on) return kidIsland(kid);
   const date = dkey(), b = boardFor(kid, date), gigs = gigsFor(kid, date);
   const all = [...b.must, ...b.team], done = all.filter(c => isDone(choreState(kid.id, c, date).state)).length;
   const prog = all.length ? done / all.length : 0; UI.skyProgress = prog;
@@ -7477,7 +7789,20 @@ let lastDay = dkey();
 setInterval(() => { if (!Store.ready) return; const d = dkey(); const t = Market.last; buildMarket(); if (d !== lastDay) { lastDay = d; applyInterest(); scheduleRender(); } else if (t !== Market.last && UI.screen === 'kid' && UI.tab === 'market') scheduleRender(); }, 60000);
 
 /* Character Growth lives in growth.js and reaches the app through this bridge. */
-window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, PRIZES, LOOKS, prizeInfo, hasPrize, grantPrize, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet, mustLeft, learnLock, Plan, planLocked };
+window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, IslandHome, PRIZES, LOOKS, prizeInfo, hasPrize, grantPrize, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet, mustLeft, learnLock, Plan, planLocked,
+  // For the Japanese sky, which shows behind every screen: whether something covers it completely right now (only a
+  // 3D mission does), and where its view sits for this screen and tab, so moving between them slides the scenery past
+  // in depth, near trees more than the far mountain. Tabs further along the bar move the view right, as if paging
+  // through them (the scenery slides left), which also keeps the near-left tree out from behind the page's text.
+  skyBusy: () => !!Stage.active,
+  skyPan: () => {
+    if (Studio.covers) return [0, 0];
+    if (document.body.classList.contains('gw-open')) return [0.4, 0.12];
+    if (UI.screen === 'kid') return [Math.max(0, ['today', 'grow', 'money', 'market', 'proof'].indexOf(UI.tab)) * 0.4, 0];
+    if (UI.screen === 'parent') return [Math.max(0, ['start', 'review', 'kids', 'chores', 'home', 'bank', 'shop', 'skills', 'family'].indexOf(UI.ptab)) * 0.2, 0.4];
+    if (UI.screen === 'shop') return [1.2, 0.4];
+    return [0, 0];
+  } };
 
 /* =========================================================
    Boot
