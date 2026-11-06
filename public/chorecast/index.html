@@ -3345,8 +3345,8 @@ void main() {
     g.userData.walls = walls; g.userData.smokeAt = new T.Vector3(...[[0.27, 0.15, 0.29], [0.1, 0.62, 0], [0.16, 0.86, -0.06], [0.14, 1.12, -0.08], [0.3, 1.02, -0.27]][Math.min(4, level)]); return g;
   }
 // Character Growth landmark: a little tree whose glowing orbs count the skills a kid has mastered (up to 24).
-const GROWTH_TREE_IDS = ['money', 'invest', 'work', 'make', 'give', 'maths', 'words', 'time', 'home', 'mind', 'online', 'world'];
-const GROWTH_HUES = [0x30c25a, 0x22c3a6, 0xff9f0a, 0xff6b6b, 0xff6b9d, 0x5ac8fa, 0xc084fc, 0xd9a35b, 0xffb020, 0x64d2ff, 0x7c8cf8, 0x2f6fe4];
+const GROWTH_TREE_IDS = ['money', 'invest', 'work', 'make', 'give', 'maths', 'words', 'science', 'home', 'mind', 'online', 'body'];
+const GROWTH_HUES = [0x30c25a, 0x22c3a6, 0xff9f0a, 0xff6b6b, 0xff6b9d, 0x5ac8fa, 0xc084fc, 0x14a39a, 0xffb020, 0x64d2ff, 0x7c8cf8, 0xf0643c];
 function skillTree(n) {
   const g = new T.Group(), orbs = [];
   add(g, new T.CylinderGeometry(0.018, 0.03, 0.26, 7), mat(0x8a5a3c), 0, 0.13, 0);

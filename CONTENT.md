@@ -18,23 +18,34 @@ The build splits the files into `public/chorecast/growth/`, one file per tree an
 
 ## Trees, bands and units
 
-Two trees are live: `money` (Money Sense) and `character` (Good Character). The other 11 (`invest`, `work`, `make`, `give`, `maths`, `words`, `time`, `home`, `mind`, `online`, `world`), `moments.txt`, `cases.txt` and the full 8-unit Money Sense (`money.full.txt`) are in `parked/`. To bring one back, read every lesson in it first, trim it to the shape below, move it up into `content/` and add it to `LIVE`.
+Seven subjects are live: `money` (Money Sense), `character` (Good Character), `maths` (Maths), `words` (English), `science` (Science), `mind` (Strong Mind) and `body` (Healthy Body). The rest (`invest`, `work`, `make`, `give`, `home`, `online`), `moments.txt`, `cases.txt` and the full 8-unit Money Sense (`money.full.txt`) are in `parked/`, with the old Everyday Maths, Words That Work, Mind and Body, Money Through Time and How the World Works files, which new units may borrow from. To bring a parked subject back, check every lesson in it first, trim it to the shape below, move it up into `content/` and add it to `LIVE`.
 
 A kid's band comes from their age. A grown-up can shift it one band up or down.
 
-| Band | Ages |
-| --- | --- |
-| `sprouts` | 7 to 9 |
-| `builders` | 10 to 12 |
-| `makers` | 13 to 15 |
+| Band | Ages | School years (NZ) |
+| --- | --- | --- |
+| `sprouts` | 7 to 9 | about Years 3 to 5 |
+| `builders` | 10 to 12 | about Years 6 to 8 |
+| `makers` | 13 to 15 | about Years 9 and 10 |
 
 Kids 16 and over use the Makers band. Chorecast isn't made for older teens.
 
-Money Sense has 8 units of 6 lessons in each band (144 lessons). A newer tree starts with 4 units of 4 (48 lessons), like Good Character. The checker fails if a band has a different shape (`SHAPE` in `scripts/check-growth.mjs`). A tree still being reviewed is cut to fewer lessons in its review file, and only goes live in full. Lessons in a unit open one at a time, and a unit opens once every lesson in the unit before it is passed. Each finished unit also has a unit challenge.
+Subjects grow every month. Each month's drop adds whole units to every live subject in all three bands, numbered on from the last one, so a year of lessons builds up a month at a time. A unit has 4 lessons, except Money Sense's first 8 units, which have 6. The checker fails if a unit has the wrong number of lessons or the units skip a number. Lessons in a unit open one at a time, and a unit opens once every lesson in the unit before it is passed. Each finished unit also has a unit challenge.
+
+A month's drop is 15 units in each band (60 lessons): Maths 4, English 3, Science 3, Strong Mind 2, and one each of Healthy Body, Good Character and Money Sense. Kids get 2 new lessons a day unless a grown-up changes it (`perDay`), so a month's drop lasts a month.
 
 ## What lessons cover
 
-Keep every lesson to things a kid can practise in Chorecast: earning from chores, the four jars, payday, the Saving goal, spending, saving and spotting a bad deal or a scam. Where it fits, the `home:` task is something to do in the app that week.
+Money Sense and Good Character stay close to things a kid can practise in Chorecast: earning from chores, the four jars, payday, the Saving goal, spending, saving and spotting a bad deal or a scam. Where it fits, the `home:` task is something to do in the app that week.
+
+The school subjects follow the NZ Curriculum for the band's school years: English and Mathematics and Statistics as used in schools from 2026, and the new Years 0–10 science that schools start using in 2027. Set word problems and examples in the Chorecast world (the island, the farm stand, chores, the jars) where that fits naturally, and nowhere it would feel forced.
+
+- **Maths:** number and place value, adding and taking away, times tables and dividing, fractions, decimals and percentages, measuring, time, shapes and angles, data, chance and (for Makers) algebra. Write every sum out in numerals (`7 × 8 = _`) where you can: the checker works written sums out again. Maths practice (`MATHS.K` in `13-practice.js`) gives endless extra questions; a lesson can use them too, with `gen | kind | how many`.
+- **English:** reading (short passages written for the lesson, with questions about them), spelling and word knowledge, grammar and punctuation, and writing. NZ spelling (colour, centre, practise as a verb). Passages are original: never quote books, songs or poems.
+- **Science:** living things, the physical world (forces, energy, light, sound, electricity), materials, Earth and space, and how scientists find out (fair tests, observing, measuring). Facts that are settled science only, with no numbers that change. Experiments use safe household things with a grown-up nearby: no fire, no hot liquids, no mixing cleaning products, nothing to eat or sniff.
+- **Strong Mind:** good habits, self-control and patience, bouncing back, goals, handling worry and big feelings, focus and a growth mindset. Everyday feelings only: anything that sounds like a crisis (not eating, hurting themselves, not wanting to be alive) is for families and doctors, so lessons only ever say to talk to Mum, Dad or another trusted grown-up.
+- **Healthy Body:** moving and playing, sleep, food groups and water, germs and washing hands, teeth, sun safety, water safety, road safety and simple first aid (get a grown-up, call 111 in New Zealand or 000 in Australia with `{nz:…~au:…}`). No diets, weighing, calories, body shapes or puberty: those are for parents.
+- **Good Character:** as below, with more gratitude, kindness, honesty, respect and responsibility.
 
 Lessons never cover sex or consent, alcohol, drugs or vaping, mental health crises, body image, politics or law, Treaty or Indigenous history, religion, or real people and brands. Those belong with families and schools.
 
@@ -105,7 +116,7 @@ Fields are separated by `|`. Lists inside a field are separated by `;`. Mark rig
 | Chat reply | `chat \| Question \| them: message \| me: right*/wrong/wrong` |
 | Mystery clues | `mystery \| clue; clue; clue \| right* \| wrong \| wrong` |
 | Island link | `island \| Question \| items, resale or stand` |
-| Generated maths | `gen \| kind \| how many` (kinds: change, add, percent, round, scale, gst, time, compound, unit, split) |
+| Generated maths | `gen \| kind \| how many` (money kinds: change, add, percent, round, scale, gst, time, compound, unit, split; or any maths practice kind in `MATHS.K`, such as times, fracof, equation) |
 
 ## 3D scenes
 

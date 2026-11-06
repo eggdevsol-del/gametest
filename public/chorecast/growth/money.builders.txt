@@ -566,3 +566,57 @@ check: tf | Every week is a fresh start with money. | true
 home: Write one money rule for yourself and stick it somewhere you'll see it.
 skill: mistakes
 
+@unit 9 | Giving wisely | Your Give jar, choosing a cause and giving time
+
+@lesson 9.1 | Why give? | 💝 | garden
+hook: Your Give jar has $10 in it. What could it do?
+learn: Giving means sharing what you have to help others.
+learn: People give money, things they don't need any more, or their time.
+learn: Giving helps others, and it often makes the giver feel good too.
+try: Giving away a toy you've outgrown :: mcq | Which is a way to give? | Giving your time to help* | Keeping everything | Borrowing money
+play: sort | Money, Things, Time | Donating $5=Money; Giving away outgrown clothes=Things; Helping at a beach clean-up=Time; Coins in a collection tin=Money; Reading to a younger kid=Time | What's being given?
+check: tf | You can give time, not just money. | true
+check: mcq | Your Give jar is for… | helping others* | buying treats | saving for a bike
+check: mcq | Giving often makes the giver feel… | good* | worse | nothing
+home: Talk with a grown-up about something your family could give to this month.
+skill: why-give
+
+@lesson 9.2 | Choosing a cause | 🌏 | garden
+hook: There are so many ways to help. How do you choose?
+learn: A cause is something you want to help with: animals, the environment, sick children, your neighbourhood.
+learn: Think about what you care about most.
+learn: Before giving, check the group is real and trustworthy. A grown-up can help you look into it.
+try: Caring about animals could lead you to an animal shelter :: mcq | What should you check before giving to a group? | That it's real and trustworthy* | Its logo colour | Nothing
+play: match | Match what you care about to a cause | Animals=An animal shelter; The ocean=A beach clean-up group; Sick children=A children's hospital charity; Your neighbourhood=A community garden
+check: tf | It's smart to check a charity is real before giving. | true
+check: mcq | Who can help you check a charity? | A grown-up* | A pop-up ad | Nobody
+check: mcq | A good way to choose a cause is to… | think about what you care about* | pick the first ad you see | copy a friend
+home: Choose a cause you care about and tell a grown-up why.
+skill: choosing-cause
+
+@lesson 9.3 | Giving time and skills | 🧤 | garden
+hook: You don't have money to give. Can you still help?
+learn: Volunteering means giving your time and skills for free.
+learn: Kids can volunteer with their family: beach clean-ups, planting trees, baking for a fundraiser, helping a neighbour.
+learn: Your skills count too: drawing posters, reading to younger kids, tidying a garden.
+try: Helping at a tree planting :: mcq | What is volunteering? | Giving your time for free* | Getting paid for a job | Buying things
+play: tap | Tap the ways a kid could volunteer with family | 🌳:yes:Planting trees; 🧁:yes:Baking for a fundraiser; 🏖️:yes:A beach clean-up; 🛍️:no; 🎮:no
+check: tf | You need money to help others. | false | You can give your time and your skills.
+check: mcq | Which skill could help a fundraiser? | Drawing posters* | Sleeping in | Watching videos
+check: mcq | Volunteering with family is… | a way to help together* | not allowed for kids | the same as a paid job
+home: Find one way your family could volunteer together this term.
+skill: volunteering
+
+@lesson 9.4 | Planning your giving | 📋 | bank
+hook: A little in your Give jar every week. How could it add up?
+learn: Giving a small amount regularly adds up over time.
+learn: Plan ahead: choose a cause, set a goal, and decide when to give.
+learn: In Chorecast, a grown-up pays out your Give jar, so ask them to help you give it to the cause you chose.
+try: $2 a week for 10 weeks is $20 :: gap | $3 a week for 10 weeks is $_ | 30
+play: order | Plan your giving | Choose a cause; Set a giving goal; Put some money in your Give jar each payday; Ask a grown-up to pay it out to your cause
+check: gap | $5 a week for 8 weeks is $_ | 40
+check: tf | Small amounts given regularly can add up to a lot. | true
+check: mcq | In Chorecast, who pays out the Give jar? | A grown-up* | The kid, online | Nobody
+home: Set a giving goal with a grown-up, and a date to give it.
+skill: giving-plan
+

@@ -1,0 +1,214 @@
+# maths · sprouts
+@unit 1 | Place value | Hundreds, tens and ones
+@unit 2 | Adding and taking away | Quick ways to add and subtract
+@unit 3 | Times tables | Equal groups, 2s, 5s and 10s
+@unit 4 | Measuring | Length and time
+
+@lesson 1.1 | Hundreds, tens and ones | 🔢 | stall
+hook: The farm stand sold 243 eggs this month. What does each digit in 243 tell us?
+learn: In 243, the 2 means 2 hundreds, the 4 means 4 tens and the 3 means 3 ones.
+learn: So 243 is 200 + 40 + 3.
+learn: A digit's place tells you how much it's worth.
+try: 365 is 300 + 60 + 5 :: gap | 400 + 70 + 2 = _ | 472
+play: match | Match each number to its parts | 528=500 + 20 + 8; 285=200 + 80 + 5; 852=800 + 50 + 2; 258=200 + 50 + 8
+check: gap | 300 + 40 + 9 = _ | 349
+check: mcq | In 671, what is the 7 worth? | 70* | 7 | 700
+check: tf | In 905, the 0 means there are no tens. | true
+home: Find a number on a box or a sign. Tell a grown-up what each digit is worth.
+skill: place-value
+
+@lesson 1.2 | Bigger or smaller? | ⚖️ | stall
+hook: Ari has 342 XP and Bo has 324. Who has more?
+learn: To compare numbers, look at the hundreds first.
+learn: If the hundreds are the same, compare the tens. Then the ones.
+learn: We write > for "is more than" and < for "is less than". The open side faces the bigger number.
+try: 342 > 324 because 4 tens is more than 2 tens :: mcq | Which is the biggest? | 518* | 481 | 158
+play: order | Put these in order, smallest first | 109; 190; 901; 910
+check: mcq | Which is true? | 456 < 465* | 456 > 465 | 456 = 465
+check: mcq | Which number is the biggest? | 799* | 789 | 798
+check: tf | 600 is more than 599. | true
+home: Pick two prices at the shop. Say which number is bigger, and why.
+skill: compare-numbers
+
+@lesson 1.3 | Counting in tens and hundreds | 🔟 | bank
+hook: The island bank adds 10 coins every day. How do the numbers change?
+learn: Adding 10 makes the tens digit go up by 1: 234, 244, 254.
+learn: Adding 100 makes the hundreds digit go up by 1: 234, 334, 434.
+learn: When the tens go past 9, they make a new hundred: 290 + 10 = 300.
+try: 345 + 10 = 355 :: gap | 345 + 100 = _ | 445
+play: order | Count on in tens from 470 | 470; 480; 490; 500; 510
+check: gap | 290 + 10 = _ | 300
+check: gap | 608 + 100 = _ | 708
+check: mcq | What comes next? 750, 760, 770, … | 780* | 771 | 870
+home: Count in tens out loud with a grown-up, starting at 150. How far can you get?
+skill: count-tens
+
+@lesson 1.4 | Rounding to the nearest ten | 🎯 | stall
+hook: A book costs $38. Is that closer to $30 or $40?
+learn: Rounding gives an easy number that's close to the real one.
+learn: Look at the ones digit. 5 or more rounds up. 4 or less rounds down.
+learn: 38 rounds up to 40. 33 rounds down to 30. 35 rounds up to 40.
+try: 47 rounds to 50 :: mcq | Round 62 to the nearest ten | 60* | 70 | 65
+play: gen | round10 | 5
+check: mcq | Round 85 to the nearest ten | 90* | 80 | 85
+check: sort | Rounds to 30, Rounds to 40 | 27=Rounds to 30; 34=Rounds to 30; 36=Rounds to 40; 44=Rounds to 40; 31=Rounds to 30 | Where does each number round to?
+check: tf | 73 rounds to 80. | false | 3 is less than 5, so 73 rounds down to 70.
+home: At the shop, round three prices to the nearest ten dollars.
+skill: rounding
+
+@lesson 2.1 | Make a ten | ➕ | island
+hook: 8 + 7. Is there a quick way to do it in your head?
+learn: Numbers that make 10 are friends: 1 and 9, 2 and 8, 3 and 7, 4 and 6, 5 and 5.
+learn: To add 8 + 7, take 2 from the 7 to turn the 8 into 10. Then 10 + 5 = 15.
+learn: Making a ten works with bigger numbers too: 28 + 5 = 30 + 3 = 33.
+try: 9 + 6 = 10 + 5 = 15 :: gap | 8 + 5 = _ | 13
+play: match | Match each number to its ten-friend | 3=7; 6=4; 8=2; 1=9
+check: gap | 7 + 6 = _ | 13
+check: gap | 38 + 4 = _ | 42
+check: mcq | Which pair makes 10? | 6 and 4* | 6 and 5 | 3 and 8
+home: Play "ten friends" with a grown-up: they say a number and you say its ten-friend.
+skill: add-mental
+
+@lesson 2.2 | Adding tens and ones | 🥚 | stall
+hook: The farm stand sold 34 eggs on Monday and 25 on Tuesday. How many altogether?
+learn: Split the numbers into tens and ones: 34 is 30 + 4, and 25 is 20 + 5.
+learn: Add the tens: 30 + 20 = 50. Add the ones: 4 + 5 = 9.
+learn: Put them together: 50 + 9 = 59.
+try: 42 + 36 = 70 + 8 = 78 :: gap | 53 + 24 = _ | 77
+play: gen | add | 5
+check: gap | 61 + 27 = _ | 88
+check: gap | 45 + 38 = _ | 83
+check: tf | 30 + 40 is 70. | true
+home: Add the ages of two people in your family, using tens and ones.
+skill: add-2digit
+
+@lesson 2.3 | Taking away | ➖ | island
+hook: You have 52 XP and spend 17 on a plant for your island. How much is left?
+learn: Taking away tells you what's left.
+learn: Take the tens first, then the ones: 52 − 10 = 42, then 42 − 7 = 35.
+learn: You can check by adding back: 35 + 17 = 52.
+try: 64 − 23 = 41 :: gap | 75 − 32 = _ | 43
+play: gen | sub | 5
+check: gap | 90 − 45 = _ | 45
+check: gap | 63 − 28 = _ | 35
+check: mcq | How can you check that 52 take away 17 is 35? | Add 35 and 17* | Add 52 and 17 | Take 17 from 35
+home: Next time you get XP, work out how much you'd have left after something you'd like.
+skill: subtract-2digit
+
+@lesson 2.4 | Word problems | 📝 | stall
+hook: Is it adding or taking away? The words give clues.
+learn: "Altogether", "in total" and "more" often mean add.
+learn: "Left", "fewer" and "difference" often mean take away.
+learn: Read the whole question, then decide.
+try: 12 hens, and 5 more join them: 12 + 5 = 17 hens :: mcq | 20 eggs, and 6 break. How many are left? | 14* | 26 | 16
+play: sort | Add, Take away | 15 sheep and 8 more arrive=Add; 30 apples and 12 get eaten=Take away; How many altogether?=Add; How many are left?=Take away; What's the difference?=Take away | Add or take away?
+check: gap | You have 45 coins and earn 30 more. How many altogether? _ | 75
+check: gap | There are 60 eggs, and 24 are sold. How many are left? _ | 36
+check: mcq | Ari has 18 shells and Bo has 11. What's the difference? | 7* | 29 | 8
+home: Make up an adding story about your island, and ask a grown-up to solve it.
+skill: word-problems
+
+@lesson 3.1 | Equal groups | 🧺 | stall
+hook: 3 baskets each hold 4 eggs. How many eggs is that?
+learn: Multiplying is a fast way to add equal groups.
+learn: 3 groups of 4 is 4 + 4 + 4 = 12. We write it 3 × 4 = 12.
+learn: The × sign means "groups of".
+try: 2 groups of 5 is 2 × 5 = 10 :: gap | 4 groups of 3 is _ | 12
+play: match | Match each to its answer | 2 × 3=6; 4 × 2=8; 3 × 5=15; 5 × 1=5
+check: gap | 3 × 3 = _ | 9
+check: mcq | Which means 5 groups of 2? | 5 × 2* | 5 + 2 | 5 − 2
+check: tf | 4 + 4 + 4 is the same as 3 × 4. | true
+home: Find equal groups at home: eggs in a carton, socks in pairs, wheels on cars.
+skill: equal-groups
+
+@lesson 3.2 | The 2 and 10 times tables | 🐔 | island
+hook: How many legs do 6 chickens have?
+learn: The 2 times table is doubling: 2, 4, 6, 8, 10 and on.
+learn: The 10 times table puts a 0 on the end: 10, 20, 30 and on.
+learn: 6 chickens have 6 × 2 = 12 legs.
+try: 7 × 10 = 70 :: gap | 8 × 2 = _ | 16
+play: gen | times | 5
+check: gap | 9 × 2 = _ | 18
+check: gap | 6 × 10 = _ | 60
+check: mcq | How many legs do 5 chickens have? | 10* | 7 | 25
+home: Count the shoes at your place in 2s.
+skill: times-2-10
+
+@lesson 3.3 | The 5 times table | 🖐️ | island
+hook: How many fingers are on 4 hands?
+learn: The 5 times table goes 5, 10, 15, 20, 25 and on.
+learn: Answers in the 5 times table always end in 5 or 0.
+learn: 4 hands have 4 × 5 = 20 fingers.
+try: 3 × 5 = 15 :: gap | 6 × 5 = _ | 30
+play: sort | In the 5s, Not in the 5s | 15=In the 5s; 22=Not in the 5s; 40=In the 5s; 33=Not in the 5s; 35=In the 5s | Is it in the 5 times table?
+check: gap | 7 × 5 = _ | 35
+check: mcq | Which is in the 5 times table? | 45* | 42 | 51
+check: tf | 5 × 8 is 40. | true
+home: Count in 5s with a grown-up all the way to 50.
+skill: times-5
+
+@lesson 3.4 | Arrays and turnarounds | 🌳 | garden
+hook: 3 rows of 5 trees, or 5 rows of 3 trees. Which has more?
+learn: An array is things set out in rows and columns.
+learn: 3 rows of 5 is 3 × 5 = 15. Turn it around and it's 5 rows of 3: still 15.
+learn: So 3 × 5 and 5 × 3 are the same. Know one and you know the other.
+try: 2 × 9 and 9 × 2 are both 18 :: gap | 10 × 4 = _ | 40
+play: match | Match the turnarounds | 2 × 7=7 × 2; 5 × 4=4 × 5; 3 × 10=10 × 3
+check: gap | 4 × 5 = _ | 20
+check: mcq | 6 × 2 is the same as… | 2 × 6* | 6 + 2 | 6 × 6
+check: tf | 4 rows of 3 trees is 12 trees. | true
+home: Line up coins or blocks in rows. Say the times fact, then turn it around.
+skill: arrays
+
+@lesson 4.1 | Centimetres and metres | 📏 | home
+hook: How long is your hand? How tall is a door?
+learn: We measure short things in centimetres (cm) and longer things in metres (m).
+learn: 100 centimetres make 1 metre.
+learn: Start measuring from the 0 on a ruler, not from its edge.
+try: A pencil is about 15 cm long :: mcq | What would you measure in metres? | A swimming pool* | A pencil | A fingernail
+play: sort | Centimetres, Metres | A crayon=Centimetres; A playground=Metres; A spoon=Centimetres; A bus=Metres; A book=Centimetres | Which unit fits best?
+check: gap | 1 metre is _ cm | 100
+check: mcq | About how long is a pencil? | 15 cm* | 15 m | 150 m
+check: tf | You should start measuring from the 0 on a ruler. | true
+home: Measure three things at home with a ruler or tape measure.
+skill: length
+
+@lesson 4.2 | O'clock and half past | 🕒 | home
+hook: Lessons open at 4 o'clock. What does the clock look like then?
+learn: The short hand shows the hour. The long hand shows the minutes.
+learn: At o'clock, the long hand points straight up to 12.
+learn: At half past, the long hand points straight down to 6. It's 30 minutes past the hour.
+try: Half past 3 is 3:30 :: mcq | How do we write half past 7? | 7:30* | 7:00 | 6:30
+play: match | Match the times | half past 2=2:30; 9 o'clock=9:00; half past 11=11:30; 4 o'clock=4:00
+check: mcq | The long hand points to 12 and the short hand to 5. What time is it? | 5 o'clock* | 12 o'clock | Half past 5
+check: gap | Half an hour is _ minutes | 30
+check: tf | At half past, the long hand points to 6. | true
+home: Look at a clock with hands three times today and say the time.
+skill: time-hour
+
+@lesson 4.3 | Quarter past and quarter to | 🕞 | home
+hook: Your job takes 15 minutes. How do we show that on a clock?
+learn: An hour has 60 minutes. A quarter of an hour is 15 minutes.
+learn: Quarter past 3 is 3:15. The long hand points to 3.
+learn: Quarter to 4 is 3:45. The long hand points to 9.
+try: Quarter past 6 is 6:15 :: mcq | How do we write quarter to 9? | 8:45* | 9:15 | 9:45
+play: gen | clock | 4
+check: gap | A quarter of an hour is _ minutes | 15
+check: mcq | What time is quarter past 10? | 10:15* | 10:45 | 9:45
+check: tf | Quarter to 5 is 4:45. | true
+home: Ask a grown-up to set a 15-minute timer for a chore. That's a quarter of an hour.
+skill: time-quarter
+
+@lesson 4.4 | How long does it take? | ⏱️ | home
+hook: You start a chore at 4:00 and finish at 4:30. How long did it take?
+learn: Count on from the start time to the end time.
+learn: 4:00 to 4:30 is 30 minutes. 4:00 to 5:00 is 1 hour.
+learn: 60 minutes make 1 hour.
+try: 2:00 to 2:15 is 15 minutes :: gap | 3:00 to 3:45 is _ minutes | 45
+play: order | Put these times in order, earliest first | 7:15; 8:00; 8:30; 9:45; 10:00
+check: gap | 1:00 to 1:30 is _ minutes | 30
+check: mcq | A movie starts at 6:00 and ends at 8:00. How long is it? | 2 hours* | 8 hours | 6 hours
+check: gap | 1 hour is _ minutes | 60
+home: Time how long a chore takes. Note when you start and when you finish.
+skill: elapsed-time
+

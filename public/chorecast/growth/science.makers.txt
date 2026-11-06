@@ -1,0 +1,161 @@
+# science · makers
+@unit 1 | Cells and body systems | From cells to organs
+@unit 2 | Energy | Forms, transfers, heat and sources
+@unit 3 | Chemistry basics | Particles, changes and mixtures
+
+@lesson 1.1 | Cells | 🔬 | museum
+hook: What do an elephant, an oak tree and you all have in common?
+learn: All living things are made of cells, the smallest units of life.
+learn: Animal and plant cells both have a cell membrane, cytoplasm and a nucleus, which controls the cell.
+learn: Plant cells also have a cell wall and chloroplasts, where photosynthesis happens.
+try: Chloroplasts are found in plant cells :: mcq | What controls the cell? | The nucleus* | The cell wall | The cytoplasm
+play: sort | Plant cells only, Both plant and animal cells | Cell wall=Plant cells only; Nucleus=Both plant and animal cells; Chloroplasts=Plant cells only; Cell membrane=Both plant and animal cells; Cytoplasm=Both plant and animal cells | Where do you find it?
+check: tf | All living things are made of cells. | true
+check: mcq | Where does photosynthesis happen? | In chloroplasts* | In the nucleus | In the cell wall
+check: mcq | What do we use to see most cells? | A microscope* | A telescope | A mirror
+home: Look at a thin piece of onion skin or a leaf under a microscope or strong magnifying glass, if you can.
+skill: cells
+
+@lesson 1.2 | Tissues, organs and systems | 🫀 | museum
+hook: How do trillions of cells work together to make you?
+learn: Similar cells group together into tissues, like muscle tissue.
+learn: Tissues form organs, like the heart, lungs and stomach.
+learn: Organs work together in organ systems, like the digestive system and the circulatory system.
+try: cells → tissues → organs → systems :: mcq | The heart is an… | organ* | cell | organ system
+play: order | Smallest to biggest | Cell; Tissue; Organ; Organ system; Organism
+check: mcq | Which is an organ system? | The digestive system* | A muscle cell | The stomach
+check: tf | Organs are made of tissues. | true
+check: mcq | Which organs are part of the breathing system? | Lungs* | Stomach | Skin
+home: Name one organ in each of three body systems.
+skill: body-organisation
+
+@lesson 1.3 | Digestion | 🍞 | kitchen
+hook: Where does your lunch go after you swallow it?
+learn: Digestion breaks food down into pieces small enough for the body to absorb.
+learn: It starts in the mouth with teeth and saliva. Food then travels down the oesophagus to the stomach, where acid and churning break it down further.
+learn: In the small intestine, nutrients pass into the blood. The large intestine takes in water, and what's left leaves the body.
+try: Chewing starts digestion :: mcq | Where do most nutrients pass into the blood? | The small intestine* | The stomach | The mouth
+play: order | Put food's journey in order | Mouth; Oesophagus; Stomach; Small intestine; Large intestine
+check: mcq | What does saliva do? | Starts breaking food down* | Pumps blood | Takes in oxygen
+check: tf | The large intestine takes in water. | true
+check: mcq | Which tube carries food from the mouth to the stomach? | The oesophagus* | The windpipe | A vein
+home: Chew a plain cracker slowly for a minute. Does it start to taste sweeter? Saliva is turning starch into sugar.
+skill: digestion
+
+@lesson 1.4 | Heart and lungs | ❤️ | garden
+hook: Why does your heart beat faster when you run?
+learn: The heart pumps blood around the body through blood vessels: arteries, veins and capillaries.
+learn: Blood carries oxygen from the lungs and nutrients from digestion to every cell, and carries waste away.
+learn: When you exercise, your muscles need more oxygen, so you breathe faster and your heart beats faster.
+try: Blood carries oxygen to your cells :: mcq | Which organ pumps blood? | The heart* | The lungs | The liver
+play: match | Match each part to its job | Heart=Pumps blood; Lungs=Take in oxygen; Arteries=Carry blood away from the heart; Veins=Carry blood back to the heart
+check: mcq | Why does your heart beat faster when you exercise? | Your muscles need more oxygen* | Your blood gets lazy | It doesn't
+check: tf | Veins carry blood back to the heart. | true
+check: mcq | Where does blood pick up oxygen? | In the lungs* | In the stomach | In the bones
+home: Count your pulse for 15 seconds at rest, then after 20 star jumps. Multiply each by 4.
+skill: circulation
+
+@lesson 2.1 | Forms of energy | ⚡ | workshop
+hook: A torch, a toaster and a kicked ball all use energy. Is it the same kind?
+learn: Energy is what makes things happen, and it comes in different forms.
+learn: Kinetic energy is movement. Thermal energy is heat. There's also light, sound, electrical and chemical energy (stored in food and batteries).
+learn: Stored energy, like in a stretched rubber band or a ball held up high, is called potential energy.
+try: A moving car has kinetic energy :: mcq | Food stores… | chemical energy* | sound energy | light energy
+play: match | Match each example to its energy | A rolling ball=Kinetic; A hot pan=Thermal; A battery=Chemical; A ringing bell=Sound
+check: mcq | A stretched rubber band stores… | potential energy* | sound energy | light energy
+check: tf | Light is a form of energy. | true
+check: mcq | Which has the most kinetic energy? | A fast car* | A parked car | A sleeping cat
+home: Find five forms of energy in your kitchen.
+skill: energy-forms
+
+@lesson 2.2 | Energy transfers | 🔦 | workshop
+hook: When you switch on a torch, where does the energy go?
+learn: Energy can't be made or destroyed. It changes from one form to another, which is called a transfer.
+learn: In a torch: chemical energy in the battery → electrical energy → light, plus some heat.
+learn: Some energy always ends up as heat or sound we didn't want. We call it wasted energy.
+try: A toaster turns electrical energy into heat :: mcq | A solar panel turns light into… | electrical energy* | sound | chemical energy in food
+play: order | Follow the energy in a torch | Chemical energy in the battery; Electrical energy in the wires; Light from the bulb
+check: tf | Energy can be destroyed. | false | Energy only changes form. It's never destroyed.
+check: mcq | What's the usual wasted energy from a light bulb? | Heat* | Chemical energy | Kinetic energy of the glass
+check: mcq | You eat breakfast, then run. The chemical energy in food becomes… | kinetic energy* | light energy | magnetic energy
+home: With a grown-up, trace the energy transfers when a kettle boils. Stay clear of the steam.
+skill: energy-transfer
+
+@lesson 2.3 | Heat on the move | 🍲 | kitchen
+hook: Why does a metal spoon in hot soup get hot, but a wooden one doesn't?
+learn: Heat moves from hotter things to colder things.
+learn: Conduction is heat moving through solids by touch. Metals are good conductors. Wood and plastic are insulators.
+learn: In convection, warmer liquids and gases rise and cooler ones sink. In radiation, heat travels as rays, like warmth from the sun.
+try: A metal spoon conducts heat :: mcq | Which is a good insulator? | Wool* | Copper | Aluminium
+play: match | Match each example to how heat moves | A hot pan handle=Conduction; Warm air rising from a heater=Convection; The sun warming your face=Radiation
+check: mcq | Why are pot handles often plastic? | Plastic is an insulator* | Plastic is a conductor | Plastic is magnetic
+check: tf | Heat moves from colder things to hotter things. | false | Heat always moves from hotter to colder.
+check: mcq | How does the sun's heat reach the Earth? | Radiation* | Conduction | Convection
+home: Wrap one cup of warm tap water in a towel and leave another bare. Which stays warm longer?
+skill: heat-transfer
+
+@lesson 2.4 | Energy sources | 🌬️ | townhall
+hook: Where does the electricity in your home come from?
+learn: Electricity can be made from many sources: flowing water (hydro), wind, the sun (solar), heat from under the ground (geothermal), and burning fuels like coal and gas.
+learn: Renewable sources don't run out: water, wind, sun and geothermal heat.
+learn: Non-renewable sources, like coal, oil and natural gas, took millions of years to form and will run out.
+try: Wind is renewable :: mcq | Which source is renewable? | Wind* | Coal | Oil
+play: sort | Renewable, Non-renewable | Solar=Renewable; Coal=Non-renewable; Hydro=Renewable; Natural gas=Non-renewable; Geothermal=Renewable; Oil=Non-renewable | Renewable or not?
+check: tf | Non-renewable sources took millions of years to form. | true
+check: mcq | Hydro power uses… | flowing water* | burning coal | moonlight
+check: mcq | Which is a way to use less energy at home? | Turn off lights in empty rooms* | Run the heater with a window open | Leave chargers on all day for no reason
+home: With a grown-up, find three ways your home could use less electricity.
+skill: energy-sources
+
+@lesson 3.1 | Particles | 🫧 | kitchen
+hook: Why can you smell biscuits baking from another room?
+learn: All matter is made of particles far too small to see.
+learn: In a solid, particles are packed tightly and vibrate in place. In a liquid, they're close but slide past each other. In a gas, they're far apart and move fast in every direction.
+learn: Gas particles spread out, which is why smells travel through a room. This spreading is called diffusion.
+try: Smells spread by diffusion :: mcq | In which state are the particles furthest apart? | Gas* | Liquid | Solid
+play: match | Match each state to its particles | Solid=Packed tight and vibrating in place; Liquid=Close together, sliding past each other; Gas=Far apart and moving fast
+check: tf | Particles in a solid don't move at all. | false | They vibrate in place.
+check: mcq | Why does a drop of food colouring spread through water? | The particles move and mix* | Water is magic | The colour sinks
+check: mcq | Heating particles usually makes them… | move faster* | stop | shrink to nothing
+home: Drop food colouring into a glass of cold water and a glass of warm tap water. Which spreads faster?
+skill: particles
+
+@lesson 3.2 | Changing state | 💨 | kitchen
+hook: Where does the water go when a puddle dries up?
+learn: Melting is solid to liquid. Freezing is liquid to solid.
+learn: Evaporation (and boiling) is liquid to gas. Condensation is gas to liquid.
+learn: At sea level, pure water boils at 100 °C and freezes at 0 °C.
+try: Water vapour condenses into droplets on a cold window :: mcq | Liquid to gas is called… | evaporation* | condensation | freezing
+play: match | Match each change to its name | Ice to water=Melting; Water to ice=Freezing; Water to vapour=Evaporation; Vapour to water=Condensation
+check: mcq | At sea level, pure water boils at… | 100 °C* | 50 °C | 0 °C
+check: tf | Droplets on the outside of a cold drink can come from water vapour in the air. | true
+check: mcq | Mist on a bathroom mirror after a shower is… | condensation* | melting | freezing
+home: Breathe on a cold mirror, then explain what happened to a grown-up using the word condensation.
+skill: changes-of-state
+
+@lesson 3.3 | Physical and chemical changes | 🍳 | kitchen
+hook: You can refreeze melted ice, but can you unbake a cake?
+learn: A physical change changes shape or state but not what a substance is. Melting, cutting and dissolving are physical changes.
+learn: A chemical change makes a new substance. Burning, cooking, rusting and baking are chemical changes.
+learn: Signs of a chemical change include gas bubbles, a colour change, light or heat, or a new smell.
+try: Rusting is a chemical change :: mcq | Which is a physical change? | Ice melting* | Toast burning | A nail rusting
+play: sort | Physical, Chemical | Cutting paper=Physical; Baking a cake=Chemical; Melting chocolate=Physical; Cooking an egg=Chemical; Dissolving sugar=Physical; Iron rusting=Chemical | Physical or chemical change?
+check: mcq | Which is a sign of a chemical change? | Gas bubbles and a new smell* | Being cut in half | Being poured into a cup
+check: tf | Cooking an egg can be undone. | false | Cooking makes new substances, so it's a chemical change.
+check: mcq | Dissolving salt in water is… | a physical change* | a chemical change | not a change at all
+home: While helping with dinner, list the changes you see. Is each one physical or chemical?
+skill: chemical-physical
+
+@lesson 3.4 | Mixtures and separating | 🧂 | kitchen
+hook: Salt and sand got mixed together. How could you separate them?
+learn: A mixture is two or more substances mixed but not chemically joined, like sand and water, or salt water.
+learn: Mixtures can be separated by sieving (big bits from small), filtering (solids from liquids), evaporation (a dissolved solid from a liquid) and magnets (iron from other things).
+learn: For salt and sand: add water to dissolve the salt, filter out the sand, then let the water evaporate to leave the salt.
+try: A sieve separates peas from flour :: mcq | How can you get salt back from salt water? | Let the water evaporate* | Use a magnet | Use a sieve
+play: order | Separate salt from sand | Add water and stir to dissolve the salt; Filter it to catch the sand; Leave the salty water in the sun to evaporate; Collect the salt
+check: mcq | What separates iron filings from sand? | A magnet* | A sieve | Evaporation
+check: tf | Filtering separates a solid from a liquid. | true
+check: mcq | Pouring muddy water through a coffee filter is… | filtering* | evaporation | magnetism
+home: With a grown-up, mix sand and salt, then separate them. Leave the salty water to dry in the sun.
+skill: separating
+

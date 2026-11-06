@@ -566,3 +566,57 @@ check: tf | Two people can make different money choices and both be right for th
 home: Write your top three values and one thing you'd love to spend on that fits them.
 skill: values
 
+@unit 9 | The cost of owning things | Running costs, phone plans, hiring and losing value
+
+@lesson 9.1 | The full price | 🏷️ | stall
+hook: A $100 printer looks cheap. Why might it end up costing much more?
+learn: Lots of things have running costs after you buy them: ink for a printer, data for a phone, fuel for a car.
+learn: The total cost of owning something is its price plus its running costs for as long as you use it.
+learn: Something cheap to buy can be expensive to own.
+try: A $100 printer with $40 of ink a year for 3 years costs $220 :: gap | A $50 item with $10 a month of running costs, used for 6 months, costs $_ in total | 110
+play: match | Match each thing to a running cost | Printer=Ink; Phone=Data; Car=Fuel; Pet=Food
+check: gap | 100 + 40 × 3 = _ | 220
+check: mcq | Which usually has the biggest running costs? | A car* | A book | A pencil
+check: tf | The cheapest thing to buy is always the cheapest to own. | false | Running costs can make a cheap item expensive over time.
+home: Pick something your family owns and list its running costs.
+skill: running-costs
+
+@lesson 9.2 | Phone plans | 📱 | bank
+hook: Prepay or a monthly plan? How do you choose?
+learn: With prepay, you top up first and can't spend more than you've put on.
+learn: A monthly plan bills you every month and may include data, calls and texts. Some lock you in for a set time.
+learn: Choose by what you actually use. Paying for data you never use is a waste.
+try: Prepay can't run up a surprise bill :: mcq | Which helps you avoid surprise bills? | Prepay* | A plan with no limit | Ignoring how much you use
+play: sort | Prepay, Monthly plan | Top up before you use it=Prepay; Billed every month=Monthly plan; Can't spend more than you've loaded=Prepay; Might have a minimum term=Monthly plan | Which is it?
+check: mcq | How do you choose the right plan? | Check how much you actually use* | Pick the biggest | Pick the one with the coolest ad
+check: tf | Paying for data you never use is a waste. | true
+check: mcq | A plan that locks you in means… | you have to pay for a set time* | you can stop any time for free | it's free
+home: Check how much data you, or someone in your family, actually uses in a month.
+skill: phone-plans
+
+@lesson 9.3 | Buy, hire or borrow? | ⛺ | stall
+hook: You'll go camping once this year. Buy a tent, or hire one?
+learn: If you'll only use something now and then, hiring or borrowing is often cheaper than buying.
+learn: If you'll use it a lot, buying can work out cheaper over time.
+learn: Compare the price to buy with the cost to hire times the number of times you'll use it.
+try: Hiring at $30 a time, twice, costs $60, much less than buying for $300 :: gap | Hiring costs $25 a time. Using it 4 times costs $_ | 100
+play: sort | Probably buy, Probably hire or borrow | School shoes=Probably buy; A suit for one wedding=Probably hire or borrow; A tent for one camping trip=Probably hire or borrow; A bike you ride every day=Probably buy; A carpet cleaner used once a year=Probably hire or borrow | Buy, or hire?
+check: gap | 20 × 12 = _ | 240
+check: mcq | Hiring costs $20 a time and buying costs $150. You'll use it 3 times. Which is cheaper? | Hiring* | Buying | They're the same
+check: tf | If you'll use something a lot, buying can be cheaper in the long run. | true
+home: Think of something your family hires or borrows. Would buying it ever make sense?
+skill: buy-or-hire
+
+@lesson 9.4 | Losing value | 📉 | bank
+hook: A new phone costs $1,000. What will it be worth in two years?
+learn: Most things lose value over time. This is called depreciation.
+learn: Cars, phones and gadgets often lose value fastest in their first year or two.
+learn: Buying good second-hand things lets someone else pay for that early drop.
+try: Things lose value over time :: mcq | What is depreciation? | Losing value over time* | Gaining value | A kind of tax
+play: match | Match each word to its meaning | Depreciation=Losing value over time; Second-hand=Owned by someone before; Resale value=What you could sell it for later
+check: mcq | Why can buying second-hand save money? | Someone else paid for the early drop in value* | Second-hand things are always broken | It's always free
+check: tf | Most gadgets lose value over time. | true
+check: mcq | A $1,000 gadget is worth $600 a year later. How much value did it lose? | $400* | $600 | $1,600
+home: With a grown-up, compare the price of something new with a second-hand one.
+skill: depreciation
+

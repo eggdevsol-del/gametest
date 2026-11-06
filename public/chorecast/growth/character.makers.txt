@@ -190,3 +190,57 @@ check: tf | Comparing yourself to posts can make you feel worse. | true
 home: Notice how you feel after scrolling. Talk with your parents about which accounts help and which don't.
 skill: screens
 
+@unit 5 | Respect and service | Respecting others, serving and leading by example
+
+@lesson 5.1 | Respect | 🙏 | home
+hook: What does respect look like, even when you disagree with someone?
+learn: Respect means treating people as valuable: listening, being polite and keeping your word.
+learn: You can disagree with someone and still respect them. Argue about ideas, not about the person.
+learn: Respecting parents, teachers and older people builds trust and good relationships.
+try: "I see it differently, but I get your point" :: mcq | Which shows respect in a disagreement? | Listening, then explaining your view calmly* | Rolling your eyes | Name-calling
+play: sort | Respectful, Disrespectful | Letting someone finish speaking=Respectful; Interrupting all the time=Disrespectful; Thanking the bus driver=Respectful; Mocking someone's accent=Disrespectful; Asking before borrowing=Respectful | Which is it?
+check: tf | You can disagree with someone and still respect them. | true
+check: mcq | "Argue about ideas, not the person" means… | stick to the point, not insults* | win at all costs | never disagree
+check: mcq | Which shows respect to a grandparent? | Putting your phone away and listening* | Scrolling while they talk | Leaving without saying goodbye
+home: Have a respectful conversation with someone you disagree with about something small.
+skill: respect
+
+@lesson 5.2 | Serving others | 🤲 | home
+hook: Can you think of someone who quietly makes life better for others?
+learn: Service means helping others without expecting anything back.
+learn: It can be big or small: carrying a neighbour's shopping, coaching younger kids, cooking dinner for your family.
+learn: Serving others builds character and connects you to the people around you.
+try: Coaching a younger kids' team :: mcq | Which is an example of service? | Helping a neighbour carry their shopping* | Charging a friend to help them | Waiting to be asked
+play: tap | Tap the acts of service | 🛒:yes:Carrying someone's shopping; 🍲:yes:Cooking dinner for the family; 🧹:yes:Cleaning up a park; 🎮:no; 📱:no
+check: tf | Service means helping without expecting a reward. | true
+check: mcq | Which is a way to serve your family? | Doing a job before anyone asks* | Only doing it when paid | Doing the bare minimum
+check: mcq | Service helps you… | build character and connection* | get famous | get out of other work
+home: Do one act of service this week that nobody asked for.
+skill: service
+
+@lesson 5.3 | Gratitude in action | 💌 | home
+hook: Saying thanks is good. Showing it is even better. How?
+learn: Gratitude can be shown through actions: a handwritten note, helping someone back, giving your time.
+learn: A gratitude letter tells someone exactly what they did and how it helped you.
+learn: Showing gratitude strengthens relationships.
+try: "Thanks for driving me to every training this season. It meant I never missed one." :: mcq | Which is the strongest thank you? | A note saying exactly how they helped you* | A quick "thx" | Nothing, they know
+play: order | Write a gratitude letter | Pick someone who's helped you; Write what they did; Say how it helped you; Give it to them
+check: tf | Showing gratitude through actions can strengthen relationships. | true
+check: mcq | Which shows gratitude through action? | Helping Mum after she helped you* | Expecting more help | Forgetting about it
+check: mcq | A gratitude letter should be… | specific about what they did* | as short as possible | all about you
+home: Write a gratitude letter to someone who's helped you, and give it to them.
+skill: gratitude-action
+
+@lesson 5.4 | Leading by example | 🧭 | home
+hook: Younger kids are watching you. What are they learning?
+learn: Leading by example means acting the way you want others to act.
+learn: Younger brothers, sisters and cousins copy older kids: how you speak, work and treat people.
+learn: You don't need a title to be a leader. Doing the right thing again and again is leadership.
+try: Tidying up first so others follow :: mcq | Which is leading by example? | Being on time and working hard yourself* | Telling others to work while you rest | Waiting to be made captain
+play: sort | Leads by example, Doesn't | Doing your share without complaining=Leads by example; Cutting corners when nobody's watching=Doesn't; Speaking kindly to younger kids=Leads by example; Breaking rules you expect others to follow=Doesn't; Owning your mistakes=Leads by example | Which is it?
+check: tf | You need a title to be a leader. | false | Anyone can lead by example.
+check: mcq | Younger kids are most likely to copy… | what you do* | what you say but don't do | nothing
+check: mcq | Leading with consistency means… | doing the right thing again and again* | doing it once | only doing it when watched
+home: Choose one way to set a good example for a younger family member this week.
+skill: leading-example
+

@@ -29,6 +29,7 @@ function parentView() {
       <div class="pg-stat"><b class="num">${wkT ? Math.round(wkC / wkT * 100) + '%' : '–'}</b><span>Accuracy this week</span></div>
       <div class="pg-stat"><b class="num">${wkXp}</b><span>XP from learning this week</span></div>
     </div>
+    ${lessonsAhead(kid)}
     ${(() => { const ps = Prize.stats(kid); if (!ps) return ''; const nx = ps.next; return `<h3 class="pgroup-t">Island prizes<small>Every few lessons wins a makeover colour, and every second prize an animal or special thing. The gap follows ${esc(kid.name)}’s pace, so prizes keep coming whether they learn a little or a lot.</small></h3>
     <div class="group"><div class="row"><div class="row-main"><b>${ps.won} prize${ps.won === 1 ? '' : 's'} won${nx ? ` · next: ${esc(nx.info.name)} in ${nx.left} lesson${nx.left === 1 ? '' : 's'}` : ''}</b><small>${ps.week} lesson${ps.week === 1 ? '' : 's'} passed this week, so after this one a prize every ${ps.gap} lessons${ps.got.length ? ` · won so far: ${ps.got.map(id => esc((C.prizeInfo(id) || { name: id }).name)).join(', ')}` : ''}</small></div></div></div>`; })()}
     <h3 class="pgroup-t">Skill map<small>${BANDS[BAND_IX[band]].name}, ages ${BANDS[BAND_IX[band]].ages} · 🥉 mastered · 🥈 strong · 🥇 still remembered after 35 days</small></h3>
@@ -49,6 +50,7 @@ function parentView() {
     <h3 class="pgroup-t">Settings<small>For the whole family</small></h3>
     <div class="group">
       <div class="row wrap"><div class="row-main"><b>Daily learning time</b><small>After this, new lessons wait until tomorrow</small></div><div class="chips">${[[10, '10 min'], [20, '20 min'], [30, '30 min'], [45, '45 min'], [0, 'No limit']].map(([v, l]) => `<button class="chip-p ${set.cap === v ? 'on' : ''}" data-act="gpCap" data-v="${v}">${l}</button>`).join('')}</div></div>
+      <div class="row wrap"><div class="row-main"><b>New lessons a day</b><small>Two a day makes a year of lessons last a year. After today’s new ones, kids keep practising: reviews, maths practice and unit crowns. Language lessons have their own one a day.</small></div><div class="chips">${[[2, '2'], [3, '3'], [4, '4'], [0, 'No limit']].map(([v, l]) => `<button class="chip-p ${set.perDay === v ? 'on' : ''}" data-act="gpPerDay" data-v="${v}">${l}</button>`).join('')}</div></div>
       <div class="row"><div class="row-main"><b>Must-dos before lessons</b><small>Lessons open once today’s must-do jobs are done. A job counts as soon as its photo is in.</small></div>${sw('gpChores', set.choresFirst, 'Must-dos before lessons')}</div>
       <div class="row wrap"><div class="row-main"><b>${esc(kid.name)}’s lessons</b><small>Picked from age ${kid.age || '?'}. Move a band if they need more or less challenge.</small></div><div class="chips">${[[-1, 'One band easier'], [0, 'Automatic'], [1, 'One band harder']].map(([v, l]) => `<button class="chip-p ${(set.band[kid.id] || 0) === v ? 'on' : ''}" data-act="gpBand" data-v="${v}">${l}</button>`).join('')}</div></div>
       <div class="row wrap"><div class="row-main"><b>Country rules</b><small>Tax, GST, KiwiSaver or super, and prices</small></div><div class="chips">${[['nz', 'New Zealand'], ['au', 'Australia']].map(([v, l]) => `<button class="chip-p ${set.country === v ? 'on' : ''}" data-act="gpCountry" data-v="${v}">${l}</button>`).join('')}</div></div>
@@ -62,6 +64,7 @@ const setG = patch => C.saveSettings({ growth: patch });
 Object.assign(C.ACT, {
   gpKid: a => { Grow.parent.kidId = a.dataset.id; Grow.parent.aLesson = null; C.render(); },
   gpCap: a => setG({ cap: +a.dataset.v }),
+  gpPerDay: a => { setG({ perDay: +a.dataset.v }); C.track('growth.setting', { perDay: +a.dataset.v }, null); },
   gpBand: a => setG({ band: { [Grow.parent.kidId]: +a.dataset.v } }),
   gpCountry: a => setG({ country: a.dataset.v }),
   gpLiving: () => setG({ living: !GSET().living }),
@@ -80,4 +83,16 @@ async function contentReview(id, status) {
   try { await C.api('PATCH', '/api/content/' + encodeURIComponent(id), { status }); Grow.parent.queue = (Grow.parent.queue || []).filter(x => x.id !== id); feedLoaded = false; C.toast(status === 'approved' ? 'Approved. Kids see it next time they open Character Growth.' : 'Withdrawn.'); }
   catch (e) { C.toast(e.message); }
   C.render();
+}
+// How long a kid's lessons will last: lessons left in their subjects at their pace (lessons first passed this week,
+// never more than the new-lessons-a-day setting; 2 a day for a kid just starting), and maths practice, with the
+// kinds they find tricky
+function lessonsAhead(kid) {
+  const left = lessonsLeft(kid), week = Date.now() - 7 * 864e5, firsts = Object.values(prog(kid).done || {}).filter(d => d.at > week && d.n === 1 && !d.placed).length;
+  const actual = firsts / 7, pace = Math.min(perDay(), actual >= 1 ? actual : 2), days = Math.max(1, Math.round(left / pace));
+  const mp = Object.values(prog(kid).mp || {}), n = mp.reduce((a, x) => a + x.n, 0), r = mp.reduce((a, x) => a + x.r, 0), weak = practiceWeak(kid);
+  return `<h3 class="pgroup-t">Lessons ahead</h3><div class="group">
+    <div class="row"><div class="row-main"><b>${left ? `${left} new lesson${left === 1 ? '' : 's'} ready for ${esc(kid.name)}` : `${esc(kid.name)} has done every lesson there is`}</b><small>${left ? `About ${days} day${days === 1 ? '' : 's'} of lessons at ${esc(kid.name)}’s pace. New lessons arrive every month, so there’s always more coming.` : 'New lessons arrive every month. Until then, maths practice, reviews, unit crowns and languages keep going.'}</small></div></div>
+    ${n ? `<div class="row"><div class="row-main"><b>Maths practice: ${n} answered, ${Math.round(r / n * 100)}% right</b><small>${weak.length ? `Tricky for now: ${weak.map(esc).join(', ')}. Practice gives these more often.` : 'Practice gives the trickiest kinds more often.'}</small></div></div>` : ''}
+  </div>`;
 }

@@ -37,10 +37,10 @@ function viewHubSky(kid) {
   const mom = momentFor(kid), momDone = g.mom && g.mom.d === today() && g.mom.done, story = marketStory(kid), storyDone = g.story === weekKey();
   const t = titles(kid), d = dayInfo(kid), room = Math.max(0, XP.dayCap - d.xp), band = BANDS[BAND_IX[bandOf(kid)]], crowns = openCrowns(kid);
   const needN = Grow.need ? Math.ceil(Grow.need / XP.lesson) : 0, first = sug[0];
-  say(Grow.need ? `You need ${Grow.need} more XP. ${needN === 1 ? 'One lesson' : `${needN} lessons`} will do it!` : sug.length ? `Ready, ${kid.name}? Pick what to learn next.` : crowns.length ? `You finished every lesson, ${kid.name}! Now win your unit crowns.` : `You’ve done everything here, ${kid.name}! New lessons arrive in updates.`);
+  say(Grow.need ? `You need ${Grow.need} more XP. ${needN === 1 ? 'One lesson' : `${needN} lessons`} will do it!` : sug.length ? `Ready, ${kid.name}? Pick what to learn next.` : restOfDay(kid) ? `That’s today’s new lessons, ${kid.name}! Let’s practise.` : crowns.length ? `You finished every lesson, ${kid.name}! Now win your unit crowns.` : `You’ve done everything here, ${kid.name}! New lessons arrive in updates.`);
 
   // The hero: like "Ari's sky" on Today, with the level as the big number and today's learning as the weather
-  const cond = Grow.need ? ['🎯', `${Grow.need} XP to go`] : due ? ['🔁', due === 1 ? 'A review is waiting' : `${due} reviews waiting`] : !room ? ['🌸', 'All your XP for today'] : d.xp ? ['🌿', 'Growing nicely today'] : sug.length ? ['🌱', 'Ready to learn'] : crowns.length ? ['🏆', 'Crowns to win'] : ['🌳', 'Every lesson done'];
+  const cond = Grow.need ? ['🎯', `${Grow.need} XP to go`] : due ? ['🔁', due === 1 ? 'A review is waiting' : `${due} reviews waiting`] : !room ? ['🌸', 'All your XP for today'] : d.xp ? ['🌿', 'Growing nicely today'] : sug.length ? ['🌱', 'Ready to learn'] : restOfDay(kid) ? ['🌙', 'New lessons done for today'] : crowns.length ? ['🏆', 'Crowns to win'] : ['🌳', 'Every lesson done'];
   const allDone = treesOn().reduce((n, tr) => n + treeStats(kid, tr.id).done, 0), crownsWon = Object.values(g.units || {}).filter(u => u.best >= 0.8).length;
   const hero = `<section class="hero gws-hero" aria-label="${esc(kid.name)}'s learning">
       <div class="hero-loc"><span class="hero-ava" style="--hue:${kid.hue}">${kid.avatar}</span><span>${esc(kid.name)}'s learning</span></div>
@@ -57,6 +57,7 @@ function viewHubSky(kid) {
   const crown0 = !first && crowns[0];
   const next = first ? `<button class="next-card glass" data-g="lesson" data-id="${first.id}">${hueSticker(TREE[first.tree].hue, esc(first.icon), 'sm next-ic')}<span class="next-txt"><small>Learn this next</small><b>${esc(local(first.title))}</b><em>${esc(TREE[first.tree].name)} · Unit ${first.unit} · ${xpWords(kid, first)}</em></span><span class="next-go" aria-hidden="true">${ic('play')}</span></button>`
     : crown0 ? `<button class="next-card glass" data-g="challenge" data-id="${crown0.u.id}">${hueSticker(QUICK_HUE.crown, '🏆', 'sm next-ic')}<span class="next-txt"><small>Win this next</small><b>${esc(crown0.tree.name)} · Unit ${crown0.u.n} crown</b><em>${crownSize(crown0.u)} questions · ${passGoal(crownSize(crown0.u))} · +${XP.challenge} XP</em></span><span class="next-go" aria-hidden="true">${ic('play')}</span></button>`
+    : restOfDay(kid) ? `<section class="next-card done glass"><span class="next-ic" aria-hidden="true">🌙</span><span class="next-txt"><small>Learn this next</small><b>That’s today’s ${perDay()} new lessons!</b><em>More open tomorrow. Practise until then.</em></span></section>`
     : `<section class="next-card done glass"><span class="next-ic" aria-hidden="true">🌸</span><span class="next-txt"><small>Learn this next</small><b>You finished every lesson!</b><em>New lessons arrive in an update.</em></span></section>`;
 
   const tile = (g2, id, hue, icon, top, name, pay, extra = '') => `<button class="tile" data-g="${g2}" ${id ? `data-id="${id}"` : ''} style="--c1:color-mix(in srgb,${hue} 62%,#fff);--c2:${hue}" ${extra}><span class="tile-top">${top}</span><span class="sticker" aria-hidden="true">${icon}</span><span class="tile-name">${name}</span><span class="tile-pay num">${pay}</span></button>`;
@@ -68,6 +69,7 @@ function viewHubSky(kid) {
 
   const quick = [
     due ? tile('review', '', QUICK_HUE.review, '🔁', 'A few minutes', `${due} review${due === 1 ? '' : 's'} due`, `+${Math.min(due, 8) * XP.card} XP`) : '',
+    mathsOn() ? tile('mpractice', '', '#2FA8E8', '🧮', `${PRACTICE_N} questions`, 'Maths practice', `+${XP.practice} XP each`) : '',
     echo ? tile('echo', '', QUICK_HUE.echo, '💡', 'About your week', `${echo} question${echo === 1 ? '' : 's'}`, `+${echo * XP.echo} XP`) : '',
     mom ? tile('moment', '', QUICK_HUE.moment, momDone ? '✅' : '💬', '30 seconds', 'Today’s Money Moment', momDone ? 'Done' : `+${XP.moment} XP`) : '',
     story && !storyDone ? tile('story', '', QUICK_HUE.story, '📰', 'This week', 'In the market', `+${XP.story} XP`) : '',
@@ -89,7 +91,15 @@ function viewHubSky(kid) {
   const wordsDue = langs.reduce((a, x) => a + x.due, 0), firstNx = langs.find(x => x.nx && !x.due);
   const langCard = ls.length ? `<section class="card glass gws-langs"><header class="card-h"><span class="dot" style="background:var(--bonus)"></span><span class="card-t">Languages</span>${wordsDue ? '<span class="card-tag">· practise first</span>' : ''}<span class="card-r">${wordsDue ? `${wordsDue} word${wordsDue === 1 ? '' : 's'} to practise` : `${ls.length} course${ls.length === 1 ? '' : 's'}`}</span></header>
       <div class="tiles">${langs.map(({ L, s, st, due }) => tile('lang', L.id, L.hue, esc(L.icon), due ? `🔁 ${due} to practise` : esc(L.levels[s - 1] || `Stage ${s}`), esc(L.name), st.total ? `${st.done} of ${st.total}` : 'Start')).join('')}</div>
-      <p class="card-foot">${firstNx ? `Next in ${esc(firstNx.L.name)}: ${esc(local(firstNx.nx.title))}. ` : ''}Hear it, say it, read it and write it. New words come back the next day so they stick.</p></section>` : '';
+      <p class="card-foot">${firstNx ? `Next in ${esc(firstNx.L.name)}: ${esc(local(firstNx.nx.title))}. ` : ''}Hear it, say it, read it and write it. New words come back the next day so they stick.</p></section>`
+    : (() => {
+      // No language yet: the kid picks one. A tap says hello in it; Start keeps it.
+      const can = langPickable(kid), t = Grow.langTry && can.find(L => L.id === Grow.langTry); if (!can.length) return '';
+      return `<section class="card glass gws-langs"><header class="card-h"><span class="dot" style="background:var(--bonus)"></span><span class="card-t">Pick a language</span><span class="card-r">${can.length} to choose from</span></header>
+        <div class="tiles">${can.map(L => tile('ltry', L.id, L.hue, esc(L.icon), `<span lang="${L.id}">${esc((LANG_HI[L.id] || [''])[0])}</span>`, esc(L.name), t === L ? '🔊 Again' : 'Hear it', `aria-pressed="${t === L}"`)).join('')}</div>
+        ${t ? `<div class="gws-pickgo"><button class="btn-big" data-g="lstart" data-id="${t.id}">Start ${esc(t.name)}</button></div>` : ''}
+        <p class="card-foot">Learn to speak, read and write a new language. Tap one to hear it. You can swap later.</p></section>`;
+    })();
 
   const cs = casesFor(kid).slice(0, 12), csDone = cs.filter(x => (g.cases || {})[x.id]).length;
   const caseCard = cs.length ? `<section class="card glass"><header class="card-h"><span class="dot" style="background:var(--team)"></span><span class="card-t">Real stories</span><span class="card-r">${csDone}/${cs.length} read</span></header>
@@ -141,6 +151,9 @@ body.gw-open.gw-sky #app,body.gw-open.gw-sky #g3{visibility:hidden}
 .gws-bar{display:block;height:8px;border-radius:5px;background:rgba(255,255,255,.22);overflow:hidden;margin:5px 0 2px}
 .gws-bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#FFE7A6,#FFC94D)}
 .gws-lsub{font:700 calc(12px*var(--ts)) var(--f-round);color:var(--on-sky-2);margin-top:auto}
+.gws .tile[aria-pressed=true]{outline:3px solid #fff;outline-offset:2px}
+.gws-pickgo{margin:12px 0 4px}
+.gws-pickgo .btn-big{width:100%}
 @media (min-width:1000px){ .gws .hero{top:calc(env(safe-area-inset-top,0px) + 8px)} }
 `;
 { const st = document.createElement('style'); st.id = 'growth-sky-css'; st.textContent = SKY_CSS; document.head.appendChild(st); }

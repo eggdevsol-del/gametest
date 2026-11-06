@@ -1,0 +1,55 @@
+# body · builders
+@unit 1 | Fuel and move | Food, drinks, activity, teeth and sun
+
+@lesson 1.1 | A balanced plate | 🍽️ | kitchen
+hook: What does a healthy dinner look like?
+learn: A balanced plate is about half vegetables and fruit, a quarter grains like rice, pasta or bread, and a quarter protein like meat, fish, eggs, tofu or beans.
+learn: Milk, yoghurt and cheese help build strong bones.
+learn: A mix of foods gives your body energy and helps it grow and repair.
+try: Half the plate is vegetables and fruit :: mcq | About how much of a balanced plate should be vegetables and fruit? | Half* | None | All of it
+play: sort | Vegetables and fruit, Grains, Protein | Broccoli=Vegetables and fruit; Rice=Grains; Chicken=Protein; Carrots=Vegetables and fruit; Pasta=Grains; Lentils=Protein | Which part of the plate?
+check: mcq | Which food helps build strong bones? | Milk* | Lollies | Fizzy drink
+check: tf | Eating a mix of foods helps your body grow and repair. | true
+check: mcq | Which is a protein food? | Eggs* | Lettuce | Bread
+home: Help plan one balanced dinner this week.
+skill: balanced-plate
+
+@lesson 1.2 | Drinks | 💧 | kitchen
+hook: Sports drink, fizzy drink or water: which does your body need after sport?
+learn: Water is the best everyday drink. Plain milk is good too.
+learn: Fizzy drinks, energy drinks and many juices have lots of sugar, which is bad for your teeth.
+learn: Energy drinks often have caffeine and aren't suitable for kids.
+try: After sport, water is usually all you need :: mcq | What's the best everyday drink? | Water* | An energy drink | Fizzy drink
+play: sort | Everyday drink, Sometimes or never | Water=Everyday drink; Energy drink=Sometimes or never; Plain milk=Everyday drink; Fizzy drink=Sometimes or never; Cordial=Sometimes or never | Which is it?
+check: tf | Energy drinks are a good choice for kids. | false | They often have caffeine and lots of sugar. Water is better.
+check: mcq | Sugary drinks are especially bad for your… | teeth* | hair | fingernails
+check: mcq | After a game of football, most kids need… | water* | an energy drink | coffee
+home: With a grown-up, compare the sugar on the labels of two drinks at home.
+skill: healthy-drinks
+
+@lesson 1.3 | An hour a day | 🚴 | garden
+hook: How much moving should you do each day?
+learn: Kids and teens should get at least an hour a day of moving that makes you breathe harder, like running, biking or swimming.
+learn: A few times a week, do things that make your muscles and bones strong, like climbing, jumping or push-ups.
+learn: It all counts: walking to school, carrying the washing, playing at lunch and sport.
+try: Biking to school counts :: mcq | How much active time do kids need each day? | At least an hour* | 5 minutes | None
+play: sort | Builds heart and lungs, Builds muscles and bones | Running=Builds heart and lungs; Climbing=Builds muscles and bones; Swimming=Builds heart and lungs; Push-ups=Builds muscles and bones; Biking=Builds heart and lungs; Hopping and jumping=Builds muscles and bones | What does it build most?
+check: tf | Walking to school counts as active time. | true
+check: mcq | Which builds strong bones? | Jumping and climbing* | Sitting still | Watching sport
+check: mcq | Active time should make you… | breathe harder* | fall asleep | feel cold
+home: Add up your active minutes today. Did you reach an hour?
+skill: daily-activity
+
+@lesson 1.4 | Teeth and skin | 🦷 | home
+hook: Why do dentists say to brush twice a day?
+learn: Brush your teeth twice a day for about two minutes with fluoride toothpaste. Spit out the extra toothpaste, but don't rinse.
+learn: Sugary food and drinks feed germs that make holes in teeth.
+learn: Protect your skin from the sun: {nz:slip, slop, slap and wrap~au:slip, slop, slap, seek and slide}.
+try: Brush morning and night :: mcq | How long should you brush your teeth? | About two minutes* | Five seconds | Half an hour
+play: match | Match each sun-safety word to what you do | Slip=Slip on a shirt; Slop=Slop on sunscreen; Slap=Slap on a hat
+check: tf | Sugary drinks can cause holes in your teeth. | true
+check: mcq | When should you brush your teeth? | Morning and night* | Once a week | Only before the dentist
+check: mcq | Which helps protect your skin from the sun? | A hat and sunscreen* | Lying in the midday sun | Nothing
+home: Check the sunscreen at home with a grown-up, and put a hat by the door.
+skill: teeth-skin
+

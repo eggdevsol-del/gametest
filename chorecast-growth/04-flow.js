@@ -31,6 +31,8 @@ function finish() {
     if (pass && !was) { add('Lesson passed', XP.lesson); if (allRight) add('Every answer right', XP.perfect); } else if (pass) add('Practice round', XP.replay);
     const as = (g.assigned || []).find(a => a.id === l.id); if (pass && as) { add('Bonus from a grown-up', Math.min(XP.assignedMax, as.bonus || 0)); patch.assigned = (g.assigned || []).filter(a => a.id !== l.id); }
     patch.done = { [l.id]: { best: Math.max(prev ? prev.best : 0, score), stars: Math.max(prev ? prev.stars : 0, stars), n: (prev ? prev.n : 0) + 1, at: Date.now() } };
+    // Today's new lessons (see perDay): a language lesson counts towards its own one a day; an assigned one doesn't count
+    if (pass && !was && !as) { const k = l.lang ? 'll' : 'nl'; patch.day[k] = (day[k] || 0) + 1; }
     // Language lessons review their words instead (lang_cards), not their questions
     if (pass && !was && !l.lang) { patch.cards = {}; l.checks.forEach((_, i) => { patch.cards[`${l.id}#${i}`] = { b: 1, due: addDays(today(), 1) }; }); }
     const u = packFor(l.tree, l.band).units.find(x => x.n === l.unit), unitDone = pass && u.lessons.every(x => x === l || passed(kid, x.id));
@@ -43,6 +45,8 @@ function finish() {
     Object.assign(out, { pass, stars: pass ? (acc === 1 ? 3 : 2) : 1, unit: R.unit, crown: pass && !(prev.best >= 0.8) });
   } else if (R.mode === 'review') {
     const room = Math.max(0, XP.cardsPerDay - (day.cards || 0)), n = Math.min(right, room); add(`${n} card${n === 1 ? '' : 's'} remembered`, n * XP.card); patch.day.cards = (day.cards || 0) + total;
+  } else if (R.mode === 'practice') {
+    practiceFinish(kid, R, add, patch, right, total);
   } else if (R.mode === 'moment') {
     const first = !(g.mom && g.mom.d === today() && g.mom.done); if (first) add('Today’s Money Moment', XP.moment);
     patch.mom = { d: today(), id: R.moment.id, done: true, ok: right === total }; patch.momH = { [R.moment.id]: today() };
@@ -84,7 +88,7 @@ const signed = n => (n < 0 ? '−' : '+') + Math.abs(Math.round(n)).toLocaleStri
 function viewDone(kid) {
   const o = Grow.last, isScored = 'pass' in o, fin = !!o.tally, rows = o.rows || [];
   if (!fin) o.tally = { fast: false, done: false };
-  const head = isScored ? (o.pass ? (o.stars === 3 ? 'Perfect!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!', lpart: 'Part 1 done!', lreview: 'Words practised!', lstory: 'Story done!', lplace: 'All set!' }[o.mode] || 'Done!';
+  const head = isScored ? (o.pass ? (o.stars === 3 ? 'Perfect!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', practice: 'Practice done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!', lpart: 'Part 1 done!', lreview: 'Words practised!', lstory: 'Story done!', lplace: 'All set!' }[o.mode] || 'Done!';
   // Kids are told exactly what moving on takes, and whether it's open now
   const need = passNeed(o.total), opened = o.first && o.lesson && nextIn(kid, o.lesson.tree);
   const unit = o.points ? 'points' : 'right';
@@ -111,7 +115,7 @@ function viewDone(kid) {
     ${o.first && o.lesson && !o.lesson.lang && treeStats(kid, o.lesson.tree).done === treeStats(kid, o.lesson.tree).total ? `<div class="gw-banner title">🌸 Every lesson done! Go back to your plant to watch it bloom.</div>` : ''}
     ${o.newTitle ? `<div class="gw-banner title">🎖️ New title: ${esc(o.newTitle)}</div>` : ''}
     ${o.home && o.pass ? `<div class="gw-homecard"><b>Take it home</b><p>${esc(local(o.home))}</p><button class="g-go ghost" data-g="homeDone">I’ll try it</button></div>` : ''}
-    <div class="gw-actions">${isScored && !o.pass ? `<button class="g-go" data-g="retry">Try again</button>` : o.part1 ? `<button class="g-go" data-g="lesson" data-id="${o.lesson.id}">Part 2 now</button>` : nx && (o.mode === 'lesson' || o.mode === 'lpart') ? `<button class="g-go" data-g="lesson" data-id="${nx.id}">Next: ${esc(local(nx.title))}</button>` : ''}
+    <div class="gw-actions">${isScored && !o.pass ? `<button class="g-go" data-g="retry">Try again</button>` : o.part1 ? `<button class="g-go" data-g="lesson" data-id="${o.lesson.id}">Part 2 now</button>` : o.mode === 'practice' ? `<button class="g-go" data-g="mpractice">Another ${PRACTICE_N}</button>` : !nx && o.first && restOfDay(kid) ? `<p class="gw-p">🌙 That’s today’s ${perDay()} new lessons. More open tomorrow, and maths practice is open now.</p><button class="g-go" data-g="mpractice">Maths practice</button>` : nx && (o.mode === 'lesson' || o.mode === 'lpart') ? `<button class="g-go" data-g="lesson" data-id="${nx.id}">Next: ${esc(local(nx.title))}</button>` : ''}
       <button class="g-go ghost" data-g="${Grow.tree ? 'toTree' : 'toHub'}">${Grow.tree ? `Back to ${esc(subject(Grow.tree).name)}` : 'Back to my skill trees'}</button></div></div></div>`;
   if (fin) o.tally.done = true; else runTally(o, ui.querySelector('.gw-done'), head);
 }
@@ -216,6 +220,7 @@ function onClick(e) {
     case 'howSkip': case 'howDone': return HowTo.finish(a.closest('.gw-card'));
     case 'challenge': return startChallenge(kid, id);
     case 'review': return startReview(kid);
+    case 'mpractice': return startPractice(kid);
     case 'echo': return startEcho(kid);
     case 'moment': return startMoment(kid);
     case 'story': return startStory(kid);
@@ -300,5 +305,5 @@ window.Growth = {
   mastered: kid => mastered(kid),
   parentView: () => parentView(), resetParent: () => { if (Grow.parent) Grow.parent.msg = ''; },
   ready: () => C.scheduleRender(),
-  _debug: { Packs, TREES, LANGS, LANG_LIVE, get lang() { return { langSteps, lcNew, lcAnswer, lcCards, lcDue, cardItem: cardItem2, Dict, LBOX }; }, get run() { return Grow.run; }, get view() { return Grow.view; }, parsePack, parseMoments, parseCases, loadBand, loadExtras, allLessons, lessonById, get Moments() { return Moments; }, get Cases() { return Cases; } },
+  _debug: { Packs, TREES, LANGS, LANG_LIVE, get maths() { return MATHS; }, GEN_KINDS: Object.keys(GEN), get pace() { return { perDay, newLeft, suggestions, lessonsLeft, restOfDay, langNewLeft }; }, get pick() { return { kidLangs, langPickable }; }, get lang() { return { langSteps, lcNew, lcAnswer, lcCards, lcDue, cardItem: cardItem2, Dict, LBOX }; }, get run() { return Grow.run; }, get view() { return Grow.view; }, parsePack, parseMoments, parseCases, loadBand, loadExtras, allLessons, lessonById, get Moments() { return Moments; }, get Cases() { return Cases; } },
 };

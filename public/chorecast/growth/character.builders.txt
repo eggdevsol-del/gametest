@@ -196,3 +196,57 @@ check: mcq | How much sleep do kids aged 10 to 12 need? | About 9 to 12 hours* |
 home: Work out what time you need to be asleep to get 10 hours before your wake-up time.
 skill: sleep
 
+@unit 5 | Responsibility and friendship | Owning your jobs, saying sorry and being a good friend
+
+@lesson 5.1 | Owning your jobs | ✅ | home
+hook: Your chore isn't done and Mum asks why. What do you say?
+learn: Being responsible means doing what you're supposed to do, without being reminded.
+learn: It also means owning it when you don't: "I forgot. I'll do it now," not excuses.
+learn: Responsible people get trusted with more freedom.
+try: "I forgot. I'll do it now." :: mcq | Which is responsible? | Doing your chores before you're reminded* | Waiting until someone yells | Asking a sibling to do it
+play: sort | Responsible, Excuse | I'll fix it right away=Responsible; It's not my fault=Excuse; Sorry I forgot, I'll do it now=Responsible; Someone else should have done it=Excuse; I set a reminder so I won't forget=Responsible | Responsible, or an excuse?
+check: tf | Responsible people are often given more freedom. | true
+check: mcq | You broke a glass. What's the responsible thing to do? | Tell a grown-up and help clean up safely* | Hide the pieces | Blame the cat
+check: mcq | A good way to remember jobs is… | a checklist or reminder* | hoping you remember | waiting for someone to tell you
+home: Do all your chores this week without being reminded.
+skill: responsibility
+
+@lesson 5.2 | Saying sorry well | 🙇 | home
+hook: Is "Sorry, but you started it" a real apology?
+learn: A good apology has three parts: say what you did, say sorry, and say how you'll fix it or do better.
+learn: "I'm sorry I took your charger without asking. I'll ask next time."
+learn: Don't add "but". "Sorry, but…" turns an apology into an excuse.
+try: Say what you did, say sorry, say how you'll fix it :: mcq | Which is the best apology? | "I'm sorry I laughed at you. That was unkind, and I won't do it again."* | "Sorry, but you were being weird." | "Sorry if you were upset."
+play: order | Put a good apology in order | Say what you did; Say sorry; Say how you'll fix it or do better
+check: tf | Adding "but" can turn an apology into an excuse. | true
+check: mcq | "Sorry if you feel that way" is… | not a real apology* | a great apology | a compliment
+check: mcq | After an apology, it's important to… | actually do better* | do it again | expect a reward
+home: Think of someone you owe an apology to, and give them a real, three-part one.
+skill: apologising
+
+@lesson 5.3 | Being a good friend | 🫂 | home
+hook: What makes someone a really good friend?
+learn: Good friends are kind, honest, loyal and fun to be around.
+learn: They listen, stick up for you, and are happy when good things happen to you.
+learn: To have good friends, be one. And if a friend tells you something that means someone could get hurt, tell a trusted grown-up.
+try: A good friend listens :: mcq | Which shows you're a good friend? | Cheering when your friend wins* | Telling others their private things | Leaving them out
+play: sort | Good friend, Not a good friend | Listens to you=Good friend; Laughs at you in front of others=Not a good friend; Sticks up for you=Good friend; Only talks to you when they want something=Not a good friend; Is happy for you=Good friend | Which is it?
+check: tf | If a friend tells you something that means someone could get hurt, you should tell a trusted grown-up. | true
+check: mcq | To have good friends, you should… | be a good friend* | have lots of stuff | be the boss
+check: mcq | Your friend did well in a test and you didn't. A good friend… | says "Well done!"* | sulks | says they cheated
+home: Do something kind for a friend this week, just because.
+skill: friendship
+
+@lesson 5.4 | A gratitude journal | 📓 | home
+hook: Can writing down three good things each day make a difference?
+learn: A gratitude journal is a notebook where you write down good things that happened.
+learn: Be specific: "Dad made my favourite pancakes" says more than "food".
+learn: Noticing good things gets you in the habit of looking for them, which helps on hard days too.
+try: "My friend saved me a seat" :: mcq | Which journal entry is most specific? | "Nana phoned to hear about my game"* | "Family" | "Stuff"
+play: order | Start a gratitude journal | Get a notebook; Pick a time each day; Write three good things; Write why each one mattered
+check: tf | Being specific makes a gratitude journal more powerful. | true
+check: mcq | How can gratitude help on a hard day? | It helps you notice the good things too* | It makes problems disappear | It doesn't
+check: mcq | Which is something to be grateful for? | A teacher who helped you* | Nothing, ever | Only big presents
+home: Write three specific good things in a notebook every night this week.
+skill: gratitude-journal
+

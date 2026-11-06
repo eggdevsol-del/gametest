@@ -50,7 +50,7 @@ export const PRODUCTS = {
   'chorecast.xp.3000': { kid: true, xp: 3000 },
   'chorecast.xp.7500': { kid: true, xp: 7500 },
   'chorecast.club.monthly': { kid: true, xp: 1000, club: true },
-  ...Object.fromEntries(['money', 'character', 'work', 'make', 'give', 'maths', 'words', 'time', 'home', 'mind', 'online', 'world'].map(k => [`chorecast.pack.${k}`, { pack: k }])),
+  ...Object.fromEntries(['money', 'character', 'work', 'make', 'give', 'maths', 'words', 'science', 'home', 'mind', 'online', 'body'].map(k => [`chorecast.pack.${k}`, { pack: k }])),
   // Language courses: te reo Māori, Spanish, Mandarin and Japanese, every stage
   ...Object.fromEntries(['mi', 'es', 'zh', 'ja'].map(k => [`chorecast.pack.${k}`, { pack: k }])),
 };

@@ -1,0 +1,214 @@
+# maths · makers
+@unit 1 | Integers | Negative numbers and the order of operations
+@unit 2 | Algebra | Letters for numbers
+@unit 3 | Percentages and ratios | Discounts, increases and fair shares
+@unit 4 | Angles and Pythagoras | Lines, triangles and right angles
+
+@lesson 1.1 | Below zero | 🌡️ | island
+hook: It's −3 °C at night and 8 °C at noon. How much warmer is noon?
+learn: Negative numbers are less than zero. On a number line they sit to the left of 0.
+learn: −3 is bigger than −8, because it's closer to zero.
+learn: From −3 up to 8 is 3 up to zero, then 8 more: 11 degrees.
+try: From −2 to 5 is 7 :: mcq | Which is bigger? | −4* | −9 | −12
+play: order | Smallest first | −10; −4; 0; 3; 7
+check: mcq | From −6 °C to 4 °C is a rise of… | 10 degrees* | 2 degrees | −2 degrees
+check: tf | −1 is less than −5. | false | −1 is closer to zero, so it's bigger.
+check: mcq | −3 + 5 = ? | 2* | −8 | 8
+home: Look at the forecast for a cold place. Work out the gap between its high and its low.
+skill: negatives
+
+@lesson 1.2 | Adding and subtracting negatives | ↔️ | bank
+hook: You owe $5 and then earn $12. Where are you now?
+learn: Adding a negative is like taking away: 7 + (−3) = 4.
+learn: Taking away a negative is like adding: 7 − (−3) = 10.
+learn: On a number line, adding moves right and taking away moves left.
+try: −5 + 12 = 7 :: gap | −2 + 9 = _ | 7
+play: gen | integers | 5
+check: mcq | 6 − (−4) = ? | 10* | 2 | −10
+check: mcq | −8 + 3 = ? | −5* | −11 | 5
+check: tf | Taking away a negative number makes the answer bigger. | true
+home: Keep a pretend bank balance for a week that dips below zero and climbs back.
+skill: integer-add
+
+@lesson 1.3 | Multiplying and dividing negatives | ✖️ | bank
+hook: What's −4 × 3? And −4 × −3?
+learn: A negative times a positive is negative: −4 × 3 = −12.
+learn: A negative times a negative is positive: −4 × −3 = 12.
+learn: Dividing works the same way: −12 ÷ 3 = −4, and −12 ÷ −3 = 4.
+try: −5 × 2 = −10 :: mcq | −6 × −2 = ? | 12* | −12 | −8
+play: sort | Positive answer, Negative answer | −3 × 4=Negative answer; −5 × −2=Positive answer; 8 ÷ −2=Negative answer; −9 ÷ −3=Positive answer; 6 × 7=Positive answer | Will the answer be positive or negative?
+check: mcq | −20 ÷ 5 = ? | −4* | 4 | −15
+check: mcq | −7 × −3 = ? | 21* | −21 | −10
+check: tf | Two negatives multiplied together make a positive. | true
+home: Explain to a grown-up, in your own words, why a negative times a negative is positive.
+skill: integer-multiply
+
+@lesson 1.4 | Order of operations | 🧮 | workshop
+hook: Is 3 + 4 × 2 equal to 14 or 11?
+learn: Do brackets first, then powers, then × and ÷ from left to right, then + and − from left to right.
+learn: 3 + 4 × 2 = 3 + 8 = 11.
+learn: (3 + 4) × 2 = 7 × 2 = 14.
+try: 10 − 2 × 3 = 4 :: gap | 5 + 6 × 2 = _ | 17
+play: gen | brackets | 5
+check: gap | (8 − 3) × 4 = _ | 20
+check: gap | 18 ÷ 3 + 2 = _ | 8
+check: gap | 2 × (5 + 5) − 6 = _ | 14
+home: Write a sum with brackets that gives your age, and test a grown-up with it.
+skill: order-of-operations
+
+@lesson 2.1 | Letters stand for numbers | 🔤 | workshop
+hook: Each chore pays n dollars. What does 3n mean?
+learn: In algebra, a letter stands for a number we don't know yet, or one that can change.
+learn: 3n means 3 × n. If n = 4, then 3n = 12.
+learn: n + 5 means "5 more than n".
+try: If x = 6, then x + 2 is 8 :: gap | If n = 7, then 3n is _ | 21
+play: match | Match the words to the algebra | 5 more than n=n + 5; double n=2n; n take away 3=n − 3; n shared by 4=n ÷ 4
+check: gap | If a = 9, then a − 4 is _ | 5
+check: mcq | Which means "3 times n, plus 1"? | 3n + 1* | 3 + n + 1 | 31n
+check: gap | If y = 5, then 2y + 3 is _ | 13
+home: Write an algebra rule for a week's pocket money when each chore pays c dollars.
+skill: algebra-expressions
+
+@lesson 2.2 | Substituting | 🚕 | townhall
+hook: A taxi costs 3 + 2k dollars for k kilometres. How much is it for 10 km?
+learn: To substitute, swap the letter for its number.
+learn: For k = 10: 3 + 2 × 10 = 3 + 20 = 23.
+learn: Remember the order of operations once you've swapped.
+try: If p = 4, then 5p − 2 is 18 :: gap | If k = 6, then 3 + 2k is _ | 15
+play: match | If x = 3, match each expression to its value | 4x=12; x + 10=13; x²=9; 20 − x=17
+check: gap | If m = 5, then 4m + 1 is _ | 21
+check: gap | If a = 2 and b = 7, then a + 3b is _ | 23
+check: mcq | If t = 3, what is t²? | 9* | 6 | 32
+home: Make a rule for the cost of n ice blocks at $2 each. Test it for n = 5.
+skill: substitution
+
+@lesson 2.3 | Simplifying | 🧩 | workshop
+hook: x + x + x. Is there a shorter way to write it?
+learn: Like terms have the same letter: 3x and 5x are like terms.
+learn: Add or take away like terms: 3x + 5x = 8x.
+learn: Unlike terms stay apart: 3x + 2y can't be simplified.
+try: 4a + 2a = 6a :: mcq | Simplify 7n − 2n | 5n* | 9n | 5
+play: match | Match each to its simplest form | x + x + x=3x; 2y + 4y=6y; 5a − a=4a; 3b + 2 + b=4b + 2
+check: mcq | Simplify 2x + 3y + 4x | 6x + 3y* | 9xy | 6x + 3
+check: mcq | Which pair are like terms? | 4m and 9m* | 4m and 4n | 4m and 4
+check: tf | 3x + 2y is the same as 5xy. | false | x and y are unlike terms, so 3x + 2y stays as it is.
+home: Explain like terms to someone at home using apples and bananas.
+skill: simplify-algebra
+
+@lesson 2.4 | Solving equations | ⚖️ | stall
+hook: 3 bags of feed plus a $2 delivery cost $17. How much is one bag?
+learn: An equation says two things are equal: 3x + 2 = 17.
+learn: Undo each step, doing the same to both sides. Take away 2 from both: 3x = 15.
+learn: Divide both by 3: x = 5. Check it: 3 × 5 + 2 is 17.
+try: x + 6 = 10, so x is 4 :: gap | Solve 2x = 18. x is _ | 9
+play: gen | equation | 5
+check: gap | Solve x − 7 = 12. x is _ | 19
+check: gap | Solve 4x + 3 = 23. x is _ | 5
+check: mcq | What's the first step to solve 5x − 4 = 21? | Add 4 to both sides* | Divide both sides by 4 | Take 5 from both sides
+home: Make up an equation about something you're saving for, and solve it.
+skill: equations
+
+@lesson 3.1 | Percent of an amount | 🏷️ | stall
+hook: A shop says 20% off a $60 hoodie. How much do you save?
+learn: Percent means "out of 100". 20% is 20 out of 100.
+learn: 10% is easy: divide by 10. 10% of $60 is $6.
+learn: 20% is double 10%, so $12. 5% is half of 10%, so $3.
+try: 10% of 80 is 8 :: gap | 20% of 50 is _ | 10
+play: gen | percent | 5
+check: gap | 25% of 80 is _ | 20
+check: gap | 15% of 40 is _ | 6
+check: mcq | 50% of something is the same as… | Half of it* | A quarter of it | Double it
+home: At the shop, work out 10% of three prices in your head.
+skill: percent-of
+
+@lesson 3.2 | Discounts and increases | 📉 | stall
+hook: A $40 game goes up 10%, then goes on sale at 10% off. Is it back to $40?
+learn: For a discount, take the percentage off: 25% off $80 is $80 − $20 = $60.
+learn: For an increase, add it on: 10% more than $40 is $44.
+learn: 10% off $44 is $4.40 off, which makes $39.60. The same percentage of a bigger amount is bigger.
+try: 30% off $50 is $35 :: gap | 20% off $90 is $_ | 72
+play: gen | discount | 4
+check: gap | 10% more than $70 is $_ | 77
+check: mcq | Which is cheaper: $100 with 30% off, or $90 with 20% off? | $100 with 30% off* | $90 with 20% off | They're the same
+check: tf | Going up 10% and then down 10% gets you back where you started. | false | 10% of the bigger number is more, so you end up a little lower.
+home: Find a sale ad and work out the sale price yourself before you read it.
+skill: percent-change
+
+@lesson 3.3 | Ratios | 🥤 | kitchen
+hook: A smoothie uses 2 cups of fruit for every 1 cup of yoghurt. How much yoghurt goes with 6 cups of fruit?
+learn: A ratio compares amounts. Fruit to yoghurt is 2:1.
+learn: Scale both parts by the same number: 2:1 is the same as 6:3.
+learn: Simplify a ratio by dividing both parts by the same number: 10:4 is 5:2.
+try: 3:1 is the same as 9:3 :: mcq | Simplify 12:8 | 3:2* | 6:2 | 4:3
+play: match | Match the equal ratios | 2:3=4:6; 1:4=3:12; 5:2=10:4; 3:5=9:15
+check: gap | 2 cups of fruit for each cup of yoghurt. 8 cups of fruit need _ cups of yoghurt | 4
+check: mcq | Simplify 15:5 | 3:1* | 5:1 | 1:3
+check: tf | 4:6 is the same as 2:3. | true
+home: Find a recipe, write one ratio from it, then double the recipe.
+skill: ratios
+
+@lesson 3.4 | Sharing in a ratio | 🤝 | stall
+hook: Two friends run a stall. One put in $30 and the other $20. How should they share $100 of profit fairly?
+learn: Add the parts: 3:2 has 5 parts in all.
+learn: Find one part: $100 ÷ 5 = $20.
+learn: Multiply: 3 parts is $60 and 2 parts is $40.
+try: Sharing $30 in the ratio 1:2 gives $10 and $20 :: gap | Share $40 in the ratio 3:1. The bigger share is $_ | 30
+play: gen | ratio | 4
+check: gap | Share $60 in the ratio 1:2. The smaller share is $_ | 20
+check: gap | Share 35 sweets in the ratio 3:4. The bigger share is _ sweets | 20
+check: mcq | Share $90 in the ratio 2:1. What are the shares? | $60 and $30* | $45 and $45 | $70 and $20
+home: Plan a fair way to share something between people who did different amounts of a job.
+skill: share-ratio
+
+@lesson 4.1 | Angles on a line and around a point | 🚪 | home
+hook: A door swings open. How do we measure how far it turned?
+learn: Angles are measured in degrees (°). A full turn is 360°.
+learn: Angles on a straight line add up to 180°.
+learn: Angles around a point add up to 360°.
+try: If one angle on a line is 120°, the other is 60° :: gap | On a straight line, 135° and _° | 45
+play: match | Match the turn to its angle | Full turn=360°; Half turn=180°; Quarter turn=90°; Three-quarter turn=270°
+check: gap | Two angles sit on a straight line. One is 70°. The other is _° | 110
+check: gap | Angles around a point: 100°, 150° and _° | 110
+check: mcq | A right angle is… | 90°* | 180° | 45°
+home: Find three right angles at home, and one angle bigger than a right angle.
+skill: angles-line
+
+@lesson 4.2 | Angles in a triangle | 🔺 | workshop
+hook: Can a triangle have two right angles?
+learn: The three angles in any triangle add up to 180°.
+learn: If two angles are 50° and 60°, the third is 180 − 50 − 60 = 70°.
+learn: So a triangle can have at most one right angle.
+try: 90° + 45° + 45° is 180° :: gap | A triangle has angles of 30° and 80°. The third angle is _° | 70
+play: sort | Could be a triangle, Can't be a triangle | 60°, 60°, 60°=Could be a triangle; 90°, 90°, 10°=Can't be a triangle; 100°, 40°, 40°=Could be a triangle; 50°, 50°, 50°=Can't be a triangle; 30°, 60°, 90°=Could be a triangle | Do the angles add up to 180°?
+check: gap | 180 − 90 − 35 = _ | 55
+check: mcq | An equilateral triangle has three equal angles. Each one is… | 60°* | 90° | 45°
+check: tf | A triangle can have two right angles. | false | Two right angles already make 180°, which leaves nothing for the third.
+home: Draw a triangle, measure its angles with a protractor and check they add up to 180°.
+skill: triangle-angles
+
+@lesson 4.3 | Pythagoras | 📐 | workshop
+hook: A ladder leans against a wall. How long does it need to be?
+learn: In a right-angled triangle, the longest side is the hypotenuse. It's opposite the right angle.
+learn: Pythagoras: a² + b² = c², where c is the hypotenuse.
+learn: For sides of 3 and 4: 9 + 16 = 25, and the square root of 25 is 5.
+try: Sides of 6 and 8 give 36 + 64 = 100, so the hypotenuse is 10 :: gap | Sides of 5 and 12 make a hypotenuse of _ | 13
+play: gen | pythag | 4
+check: gap | 9 + 16 = _ | 25
+check: mcq | Which side is the hypotenuse? | The longest side, opposite the right angle* | The shortest side | Any side
+check: gap | Sides of 8 and 15 make a hypotenuse of _ | 17
+home: Check a corner is square with a tape measure: 30 cm one way, 40 cm the other, and 50 cm across.
+skill: pythagoras
+
+@lesson 4.4 | Using Pythagoras | 📺 | home
+hook: A TV is sold as "50-inch". What's being measured?
+learn: Screen sizes measure the diagonal, from corner to corner.
+learn: A rectangle's diagonal makes two right-angled triangles, so Pythagoras finds it.
+learn: A 9 by 12 rectangle has a diagonal of √(81 + 144) = √225 = 15.
+try: A 6 by 8 rectangle has a diagonal of 10 :: gap | A 5 by 12 rectangle has a diagonal of _ | 13
+play: order | Put the steps in order | Square both short sides; Add the two squares; Find the square root
+check: mcq | A 4 m ladder leans on a wall with its foot 2 m out. Does it reach higher or lower than 4 m up the wall? | Lower than 4 m* | Higher than 4 m | Exactly 4 m
+check: gap | The square root of 144 is _ | 12
+check: tf | Pythagoras only works in right-angled triangles. | true
+home: Measure the diagonal of a book or a screen, then check it with Pythagoras.
+skill: pythagoras-use
+

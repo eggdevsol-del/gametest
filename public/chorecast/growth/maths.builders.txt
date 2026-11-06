@@ -1,0 +1,214 @@
+# maths · builders
+@unit 1 | Big numbers and decimals | Place value to millions and hundredths
+@unit 2 | Multiplying | Tables to 12 and bigger numbers
+@unit 3 | Fractions | Equal parts, equal fractions and fractions of amounts
+@unit 4 | Perimeter and area | Around the edge and the space inside
+
+@lesson 1.1 | Millions | 🔢 | bank
+hook: A city has 1,650,000 people. How do you read that number?
+learn: Big numbers are grouped in threes: ones, thousands, millions.
+learn: 1,650,000 is one million, six hundred and fifty thousand.
+learn: Each place is worth 10 times the place to its right.
+try: In 3,420,000 the 4 is worth 400,000 :: mcq | In 2,875,000, what is the 8 worth? | 800,000* | 80,000 | 8,000,000
+play: order | Put these smallest first | 98,000; 890,000; 1,020,000; 1,200,000
+check: mcq | Which is one million? | 1,000,000* | 100,000 | 10,000,000
+check: gap | 10 × 100,000 = _ | 1000000
+check: tf | In 4,500,000, the 5 is worth 500,000. | true
+home: Find a big number on a sign or a website with a grown-up, and read it out loud.
+skill: place-value-big
+
+@lesson 1.2 | Rounding big numbers | 🏟️ | stage
+hook: A stadium held 47,862 people. A reporter says "about 48,000". Is that fair?
+learn: To round to the nearest thousand, look at the hundreds digit.
+learn: 5 or more rounds up, 4 or less rounds down. So 47,862 rounds to 48,000.
+learn: To round to the nearest hundred, look at the tens: 3,449 rounds to 3,400.
+try: 62,519 rounds to 63,000 :: mcq | Round 8,349 to the nearest hundred | 8,300* | 8,400 | 8,000
+play: sort | Five thousand, Six thousand | 5,499=Five thousand; 5,500=Six thousand; 6,201=Six thousand; 4,750=Five thousand; 5,820=Six thousand | Round each to the nearest thousand
+check: mcq | Round 47,862 to the nearest ten thousand | 50,000* | 40,000 | 48,000
+check: gap | Round 3,451 to the nearest hundred: _ | 3500
+check: tf | 12,499 rounds to 12,000 to the nearest thousand. | true
+home: Round the total on a shopping receipt to the nearest dollar, then the nearest ten dollars.
+skill: rounding-big
+
+@lesson 1.3 | Tenths and hundredths | 🏃 | stage
+hook: A sprinter runs 100 m in 12.45 seconds. What do the digits after the point mean?
+learn: The decimal point separates whole numbers from parts of a whole.
+learn: The first place after the point is tenths. The second is hundredths.
+learn: In 12.45, the 4 is 4 tenths and the 5 is 5 hundredths.
+try: 0.7 is 7 tenths :: mcq | In 3.62, what is the 2 worth? | 2 hundredths* | 2 tenths | 2 ones
+play: match | Match each decimal to its words | 0.5=5 tenths; 0.05=5 hundredths; 0.25=25 hundredths; 2.5=2 and 5 tenths
+check: mcq | Which is the same as 3 tenths? | 0.3* | 0.03 | 3.0
+check: gap | 0.4 + 0.3 = _ | 0.7
+check: tf | 0.5 is bigger than 0.45. | true
+home: Find a price with cents, like $3.95. Say what each digit is worth.
+skill: decimals
+
+@lesson 1.4 | Comparing decimals | 🪵 | workshop
+hook: Which is longer: a 0.6 m plank or a 0.58 m plank?
+learn: Line up the decimal points, then compare place by place.
+learn: 0.6 is the same as 0.60, and 0.60 is more than 0.58.
+learn: More digits doesn't mean bigger: 0.6 is bigger than 0.58.
+try: 2.3 is bigger than 2.25, because 3 tenths beats 2 tenths :: mcq | Which is the biggest? | 0.7* | 0.65 | 0.069
+play: order | Smallest to biggest | 0.09; 0.3; 0.45; 0.5
+check: mcq | Which is true? | 0.8 > 0.75* | 0.8 < 0.75 | 0.8 = 0.75
+check: mcq | Which is the same as 0.50? | 0.5* | 0.05 | 5.0
+check: tf | 1.2 is smaller than 1.15. | false | 1.2 is 1.20, which is more than 1.15.
+home: Compare the prices of two similar things at the shop, down to the cents.
+skill: compare-decimals
+
+@lesson 2.1 | Tables to 12 | ✖️ | island
+hook: Is there a trick for 9 × 7?
+learn: Facts you know help with ones you don't. 9 × 7 is 10 × 7 take away 7: 70 − 7 = 63.
+learn: Doubling helps too. 4 × 8 is double 2 × 8, so double 16, which is 32.
+learn: 12 times is 10 times plus 2 times: 12 × 6 = 60 + 12 = 72.
+try: 9 × 6 = 60 − 6 = 54 :: gap | 9 × 8 = _ | 72
+play: gen | times12 | 6
+check: gap | 12 × 7 = _ | 84
+check: gap | 6 × 8 = _ | 48
+check: mcq | What's a quick way to do 9 × 4? | 10 × 4, then take away 4* | 9 + 4 | 10 × 4, then add 4
+home: Quiz a grown-up on your hardest times table, then let them quiz you.
+skill: times-12
+
+@lesson 2.2 | Times 10, 100 and 1,000 | 🍎 | stall
+hook: One box holds 24 apples. How many apples are in 100 boxes?
+learn: Multiplying by 10 makes every digit worth 10 times more: 24 × 10 = 240.
+learn: Times 100 makes it 100 times more: 24 × 100 = 2,400.
+learn: Times 1,000 makes it 1,000 times more: 24 × 1,000 = 24,000.
+try: 35 × 100 = 3,500 :: gap | 46 × 10 = _ | 460
+play: match | Match each to its answer | 3 × 10=30; 45 × 100=4,500; 6 × 1,000=6,000; 12 × 10=120
+check: gap | 58 × 100 = _ | 5800
+check: gap | 9 × 1,000 = _ | 9000
+check: mcq | 3.5 × 10 = ? | 35* | 3.50 | 350
+home: Work out what 10, 100 and 1,000 of something small would cost.
+skill: times-10-100
+
+@lesson 2.3 | Multiplying bigger numbers | ✏️ | stage
+hook: 23 kids each need 4 pencils. How many pencils is that?
+learn: Split the bigger number into tens and ones: 23 is 20 + 3.
+learn: Multiply each part: 20 × 4 = 80 and 3 × 4 = 12.
+learn: Add them: 80 + 12 = 92.
+try: 34 × 3 = 90 + 12 = 102 :: gap | 26 × 4 = _ | 104
+play: gen | mult21 | 5
+check: gap | 47 × 3 = _ | 141
+check: gap | 18 × 6 = _ | 108
+check: mcq | 15 kids each have 7 stickers. How many stickers is that? | 105* | 22 | 75
+home: Work out how many legs all the animals on your island have altogether.
+skill: multiply-2x1
+
+@lesson 2.4 | Factors and primes | 🥚 | stall
+hook: 24 eggs. How many ways can you pack them in equal rows with none left over?
+learn: The factors of a number divide into it exactly. The factors of 12 are 1, 2, 3, 4, 6 and 12.
+learn: Multiples are a number's times table. Multiples of 4 are 4, 8, 12, 16 and on.
+learn: A prime number has exactly two factors: 1 and itself. 2, 3, 5, 7 and 11 are prime.
+try: 3 is a factor of 15, because 15 ÷ 3 = 5 :: mcq | Which is a factor of 20? | 5* | 3 | 6
+play: sort | Prime, Not prime | 7=Prime; 9=Not prime; 13=Prime; 15=Not prime; 2=Prime; 21=Not prime | Prime or not?
+check: mcq | Which is a multiple of 6? | 36* | 16 | 26
+check: mcq | Which number is prime? | 11* | 12 | 15
+check: tf | 1 is a prime number. | false | A prime has exactly two factors. 1 only has one.
+home: Find every way to set out 24 things in equal rows.
+skill: factors
+
+@lesson 3.1 | What a fraction means | 🍕 | kitchen
+hook: A pizza is cut into 8 equal slices and you eat 3. How much did you eat?
+learn: A fraction is part of a whole that's been split into equal parts.
+learn: The bottom number (the denominator) is how many equal parts. The top number (the numerator) is how many we have.
+learn: 3 of 8 slices is 3/8.
+try: 2 of 5 equal parts is 2/5 :: mcq | A cake is cut into 6 equal pieces. You eat 1. What fraction is that? | 1/6* | 6/1 | 1/5
+play: match | Match the words to the fraction | one half=1/2; three quarters=3/4; two thirds=2/3; one tenth=1/10
+check: mcq | In 5/8, how many equal parts is the whole split into? | 8* | 5 | 13
+check: tf | Halves must be equal parts. | true
+check: mcq | Which fraction is bigger? | 1/2* | 1/4 | 1/8
+home: Cut fruit or a sandwich into equal parts with a grown-up, and name the fractions.
+skill: fractions-meaning
+
+@lesson 3.2 | Equal fractions | 📄 | kitchen
+hook: Is 2/4 of a pizza the same as 1/2?
+learn: Equivalent fractions are the same amount written differently.
+learn: Multiply the top and bottom by the same number: 1/2 = 2/4 = 4/8.
+learn: Or divide both by the same number: 6/9 = 2/3.
+try: 1/3 is the same as 2/6 :: mcq | Which is the same as 3/4? | 6/8* | 3/8 | 4/3
+play: gen | equiv | 4
+check: mcq | Simplify 4/8 | 1/2* | 4/2 | 2/8
+check: mcq | Which is NOT the same as 1/2? | 3/5* | 2/4 | 5/10
+check: tf | 2/3 is the same as 4/6. | true
+home: Fold paper into halves, then quarters, then eighths. See how 1/2 = 2/4 = 4/8.
+skill: equivalent-fractions
+
+@lesson 3.3 | Comparing fractions | 🍫 | kitchen
+hook: Would you rather have 3/4 or 2/3 of a chocolate bar?
+learn: Same bottom number? Compare the tops: 3/8 is less than 5/8.
+learn: Same top number? The smaller bottom number is bigger: 1/3 is more than 1/5.
+learn: Otherwise, change them to the same bottom number: 3/4 = 9/12 and 2/3 = 8/12, so 3/4 is bigger.
+try: 2/5 is less than 4/5 :: mcq | Which is bigger? | 1/4* | 1/6 | 1/8
+play: order | Smallest to biggest | 1/8; 1/4; 1/2; 3/4
+check: mcq | Which is bigger? | 5/6* | 4/6 | 3/6
+check: mcq | Which is bigger, 3/4 or 2/3? | 3/4* | 2/3 | They're the same
+check: tf | 1/10 is bigger than 1/5. | false | Tenths are smaller pieces than fifths.
+home: Share something with your family and work out who got the bigger fraction.
+skill: compare-fractions
+
+@lesson 3.4 | Fractions of amounts | 💵 | bank
+hook: You saved $40 and spend 1/4 of it. How much did you spend?
+learn: To find 1/4 of an amount, divide by 4: $40 ÷ 4 = $10.
+learn: To find 3/4, find 1/4 first, then times it by 3: $10 × 3 = $30.
+learn: The bottom number says divide, and the top number says multiply.
+try: 1/5 of 30 is 30 ÷ 5 = 6 :: gap | 1/3 of 24 is _ | 8
+play: gen | fracof | 5
+check: gap | 3/4 of 20 is _ | 15
+check: gap | 2/5 of 50 is _ | 20
+check: mcq | You have $60 and give away 1/3 of it. How much do you give? | $20* | $30 | $3
+home: Work out 1/2, 1/4 and 1/10 of what's in your Vault jar.
+skill: fraction-of-amount
+
+@lesson 4.1 | Perimeter | 🐑 | island
+hook: Your island paddock needs a fence. How much fence do you need?
+learn: Perimeter is the distance all the way around a shape.
+learn: Add up every side. A 5 m by 3 m rectangle: 5 + 3 + 5 + 3 = 16 m.
+learn: For a rectangle you can also do 2 × (length + width).
+try: A 4 m by 2 m rectangle has a perimeter of 12 m :: gap | A square with 6 cm sides has a perimeter of _ cm | 24
+play: gen | area | 4
+check: gap | 2 × (7 + 3) = _ | 20
+check: gap | A rectangle is 8 m by 5 m. Its perimeter is _ m | 26
+check: tf | Perimeter is the space inside a shape. | false | Perimeter is the distance around. Area is the space inside.
+home: Measure the perimeter of a table or your bed with a tape measure.
+skill: perimeter
+
+@lesson 4.2 | Area of rectangles | 🌱 | garden
+hook: How many 1 m squares of grass would cover your island garden?
+learn: Area is the space inside a shape, measured in squares.
+learn: For a rectangle, area = length × width.
+learn: A 5 m by 3 m garden is 5 × 3 = 15 square metres, written 15 m².
+try: 4 m by 6 m is 24 m² :: gap | A rug is 3 m by 2 m. Its area is _ m² | 6
+play: gen | area | 4
+check: gap | 9 × 4 = _ | 36
+check: mcq | Which unit is for area? | m²* | m | kg
+check: gap | A 10 cm by 10 cm tile has an area of _ cm² | 100
+home: Work out the area of your bedroom floor in square metres. Roughly is fine.
+skill: area-rect
+
+@lesson 4.3 | Shapes made of rectangles | 🏡 | home
+hook: An L-shaped garden isn't a rectangle. How do you find its area?
+learn: Split the shape into rectangles.
+learn: Find the area of each one.
+learn: Add the areas together.
+try: An L-shape split into 4 by 3 and 2 by 2 has an area of 12 + 4 = 16 :: gap | A shape splits into a 5 by 2 rectangle and a 3 by 3 square. Its total area is _ | 19
+play: order | Put the steps in order | Split the shape into rectangles; Find the area of each rectangle; Add the areas together
+check: gap | 6 × 4 + 2 × 3 = _ | 30
+check: mcq | The best first step for an L-shape's area is… | Split it into rectangles* | Add up all the sides | Guess
+check: tf | You can find the area of an L-shape by adding two rectangles. | true
+home: Sketch a room or garden at home and split it into rectangles.
+skill: area-composite
+
+@lesson 4.4 | Area or perimeter? | 🖼️ | home
+hook: Painting a wall, or putting a border around it: which one needs area?
+learn: Perimeter is for edges: fences, borders and frames.
+learn: Area is for covering: paint, carpet and grass seed.
+learn: Two shapes can have the same area but different perimeters.
+try: Carpet for a floor needs area :: mcq | A fence around a paddock needs… | Perimeter* | Area | Volume
+play: sort | Area, Perimeter | Carpet for a room=Area; A frame around a photo=Perimeter; Paint for a wall=Area; Lights around a window=Perimeter; Seed for a lawn=Area | Which do you need?
+check: mcq | A 4 m by 4 m square and an 8 m by 2 m rectangle both have an area of 16 m². Which has the longer perimeter? | The 8 m by 2 m rectangle* | The square | They're the same
+check: mcq | Tiles for a bathroom floor need… | Area* | Perimeter | Neither
+check: tf | Two shapes with the same area always have the same perimeter. | false | A 4 by 4 square and an 8 by 2 rectangle both have an area of 16, but their perimeters are 16 and 20.
+home: Find one thing at home that needs area and one that needs perimeter.
+skill: area-or-perimeter
+

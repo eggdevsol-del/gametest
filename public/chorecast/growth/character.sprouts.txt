@@ -197,3 +197,57 @@ check: mcq | Should you share a yucky picture with friends? | No* | Yes | Only w
 home: Agree with a grown-up what you'll do if you see something yucky online.
 skill: telling
 
+@unit 5 | Kind and helpful | Kind words, including others and helping out
+
+@lesson 5.1 | Kind words | 💬 | home
+hook: Can words make someone's day better?
+learn: Kind words make people feel good: "Great job!", "Want to play?", "Thank you".
+learn: Unkind words can hurt, even as a joke.
+learn: If you wouldn't like it said to you, don't say it.
+try: "Want to play with us?" is kind :: mcq | Which is a kind thing to say? | "You can go first"* | "You're so slow" | "Go away"
+play: sort | Kind, Unkind | Well done!=Kind; You can't play=Unkind; Can I help?=Kind; That's silly=Unkind; I like your drawing=Kind | Kind or unkind?
+check: tf | Unkind words can hurt even if they're meant as a joke. | true
+check: mcq | Before you say something, ask yourself… | "Would I like this said to me?"* | "Is it funny?" | "Who's watching?"
+check: mcq | Your sister's tower falls down. What's kind? | "Want help building it again?"* | "Ha ha!" | Walk off without a word
+home: Say three kind things to people in your family today.
+skill: kind-words
+
+@lesson 5.2 | Including others | 🤝 | home
+hook: A new kid is standing alone at lunch. What could you do?
+learn: Being left out feels lonely.
+learn: Including someone is easy: a smile, "Do you want to join in?", or sitting with them.
+learn: Everyone deserves a turn and a friend.
+try: Ask "Want to join in?" :: mcq | Someone is alone at lunch. What's kind? | Ask them to join you* | Ignore them | Laugh at them
+play: sort | Includes others, Leaves others out | Sharing the ball=Includes others; Whispering secrets about someone=Leaves others out; Asking a new kid to play=Includes others; Saying only your friends can play=Leaves others out; Saving a seat for someone=Includes others | Which is it?
+check: tf | Being left out can make someone feel lonely. | true
+check: mcq | How can you include someone? | Invite them to play* | Turn your back | Start a secret club
+check: mcq | In a game, fair means… | everyone gets a turn* | only the best players play | the oldest always wins
+home: Next time you play, invite someone new to join in.
+skill: including-others
+
+@lesson 5.3 | Helping at home | 🧹 | home
+hook: Who does all the jobs at your place? Could you help without being asked?
+learn: A family is a team. Everyone helps make home a nice place.
+learn: You can help without being asked: setting the table, putting shoes away, feeding pets.
+learn: Helping makes others feel cared for, and it makes you feel good too.
+try: Setting the table without being asked :: mcq | Which is a way to help at home? | Clearing your plate after dinner* | Leaving toys everywhere | Hiding from chores
+play: tap | Tap the ways to help at home | 🍽️:yes:Set the table; 🧸:yes:Put toys away; 🐕:yes:Feed the dog; 📺:no; 🎮:no
+check: tf | A family is like a team. | true
+check: mcq | What's even better than helping when you're asked? | Helping without being asked* | Helping only for money | Never helping
+check: mcq | How does helping make others feel? | Cared for* | Annoyed | Scared
+home: Do one helpful job today without being asked. See if anyone notices!
+skill: helping
+
+@lesson 5.4 | Keeping promises | 🤞 | home
+hook: You promised to play with your little brother, but your friend calls. What do you do?
+learn: A promise is telling someone you will do something.
+learn: Keeping promises shows people they can trust you.
+learn: Only promise what you can really do. If you can't keep a promise, say sorry and make it right.
+try: Do what you said you'd do :: mcq | You promised to help Dad wash the car. A friend asks you to play. What do you do? | Help Dad first, then play* | Go to your friend and forget | Hide
+play: order | What to do if you can't keep a promise | Tell the person as soon as you can; Say sorry; Offer another time; Keep the new promise
+check: tf | Keeping promises helps people trust you. | true
+check: mcq | What should you promise? | Only what you can really do* | Anything that makes people happy | Nothing, ever
+check: mcq | You forgot a promise. What's best? | Say sorry and make it right* | Pretend it never happened | Blame someone else
+home: Make a small promise to someone this week, and keep it.
+skill: promises
+

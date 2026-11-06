@@ -10,8 +10,11 @@ const { Store, UI, Sound, FX, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle,
 const S = () => C.S();
 
 /* ---------- Catalogue ----------
-   Only LIVE trees reach kids. The rest are parked in chorecast-growth/content/parked until a grown-up has read them. */
-const LIVE = ['money', 'character'];
+   Only LIVE trees reach kids. The rest are parked in chorecast-growth/content/parked until they've been checked.
+   Maths, English and Science follow the NZ Curriculum for the band's school years (Sprouts about Years 3 to 5,
+   Builders 6 to 8, Makers 9 and 10). Subjects grow by a unit or more each month (see CONTENT.md). Science and Healthy
+   Body took the places of the parked Money Through Time and How the World Works, whose files stay in parked/. */
+const LIVE = ['money', 'character', 'maths', 'words', 'science', 'mind', 'body'];
 const ALL_TREES = [
   { id: 'money', name: 'Money Sense', icon: '💰', hue: '#30C25A', title: 'Budget Boss', scene: 'bank', blurb: 'Earning, spending, saving and budgeting' },
   { id: 'character', name: 'Good Character', icon: '🌟', hue: '#E8A317', title: 'Good Egg', scene: 'home', blurb: 'Gratitude, attitude, boundaries and screens' },
@@ -19,13 +22,13 @@ const ALL_TREES = [
   { id: 'work', name: 'Work and Careers', icon: '🧰', hue: '#FF9F0A', title: 'Hard Worker', scene: 'workshop', blurb: 'Doing a job well, jobs and workplaces' },
   { id: 'make', name: 'Make and Sell', icon: '🍋', hue: '#FF6B6B', title: 'Market Maker', scene: 'stall', blurb: 'Costs, prices, customers and profit' },
   { id: 'give', name: 'Give and Change', icon: '💝', hue: '#F25CA2', title: 'Kind Heart', scene: 'garden', blurb: 'Giving, causes and making a difference' },
-  { id: 'maths', name: 'Everyday Maths', icon: '🧮', hue: '#2FA8E8', title: 'Number Ninja', scene: 'kitchen', blurb: 'Change, percentages, recipes and rates' },
-  { id: 'words', name: 'Words That Work', icon: '💬', hue: '#A66BF0', title: 'Word Smith', scene: 'stage', blurb: 'Asking, explaining, writing and persuading' },
-  { id: 'time', name: 'Money Through Time', icon: '🏺', hue: '#C98A3E', title: 'Time Traveller', scene: 'museum', blurb: 'From barter and shells to banks and booms' },
+  { id: 'maths', name: 'Maths', icon: '🧮', hue: '#2FA8E8', title: 'Number Ninja', scene: 'kitchen', blurb: 'Numbers, fractions, measuring, shapes and data' },
+  { id: 'words', name: 'English', icon: '📖', hue: '#A66BF0', title: 'Word Smith', scene: 'stage', blurb: 'Reading, spelling, grammar and writing' },
+  { id: 'science', name: 'Science', icon: '🔬', hue: '#14A39A', title: 'Young Scientist', scene: 'museum', blurb: 'Living things, forces, materials, Earth and space' },
   { id: 'home', name: 'Home and Life', icon: '🏡', hue: '#F2A31B', title: 'Home Hero', scene: 'home', blurb: 'Cooking, cleaning, safety and running a home' },
-  { id: 'mind', name: 'Mind and Body', icon: '🧘', hue: '#3BB8D9', title: 'Calm Captain', scene: 'garden', blurb: 'Feelings, habits, patience and wellbeing' },
+  { id: 'mind', name: 'Strong Mind', icon: '🧠', hue: '#3BB8D9', title: 'Calm Captain', scene: 'garden', blurb: 'Good habits, self-control, bouncing back and goals' },
   { id: 'online', name: 'Smart Online', icon: '🛡️', hue: '#6A79F0', title: 'Scam Spotter', scene: 'online', blurb: 'Privacy, scams, ads and staying safe' },
-  { id: 'world', name: 'How the World Works', icon: '🏛️', hue: '#2F6FE4', title: 'Civic Star', scene: 'townhall', blurb: 'Rules, tax, councils and government' },
+  { id: 'body', name: 'Healthy Body', icon: '🏃', hue: '#F0643C', title: 'Health Hero', scene: 'garden', blurb: 'Moving, sleeping, eating well and staying safe' },
 ];
 const TREES = ALL_TREES.filter(t => LIVE.includes(t.id));
 const TREE = Object.fromEntries(TREES.map(t => [t.id, t]));
@@ -52,13 +55,13 @@ const BANDS = [
   { id: 'makers', name: 'Makers', ages: '13 to 15', words: 18 },
 ];
 const BAND_IX = Object.fromEntries(BANDS.map((b, i) => [b.id, i]));
-const GSET = () => ({ cap: 20, off: {}, band: {}, country: 'nz', living: true, readAloud: true, choresFirst: true, ...((S().growth) || {}) });
+const GSET = () => ({ cap: 20, perDay: 2, off: {}, band: {}, country: 'nz', living: true, readAloud: true, choresFirst: true, ...((S().growth) || {}) });
 function bandOf(kid) {
   const age = kid.age || 9, base = age <= 9 ? 0 : age <= 12 ? 1 : 2, shift = GSET().band[kid.id] || 0;
   return BANDS[clamp(base + shift, 0, BANDS.length - 1)].id;
 }
 // XP rules from the plan: modest, capped, and only for correct, completed learning.
-const XP = { lesson: 40, perfect: 10, replay: 10, card: 3, cardsPerDay: 15, echo: 15, caseStudy: 50, challenge: 120, moment: 10, story: 20, path: 500, dayCap: 250, assignedMax: 50 };
+const XP = { lesson: 40, perfect: 10, replay: 10, card: 3, cardsPerDay: 15, echo: 15, caseStudy: 50, challenge: 120, moment: 10, story: 20, path: 500, dayCap: 250, assignedMax: 50, practice: 2, practicePerDay: 40 };
 const BOXES = [1, 3, 7, 16, 35];
 const RANKS = ['Saver', 'Starter', 'Steady', 'Long-termer', 'Portfolio Pro'];
 
@@ -300,6 +303,11 @@ function award(kid, amount, patch = {}) {
   return give;
 }
 function minutesToday(kid) { return Math.round(dayInfo(kid).ms / 60000); }
+// New lessons a day: 2 unless a grown-up picks 3, 4 or no limit (0), so a year of lessons lasts a year. Replays,
+// lessons a grown-up assigns and language lessons (one a day of their own) don't count. Once today's are done, the
+// time goes to practice: reviews, maths practice, crowns and language words.
+const perDay = () => { const v = GSET().perDay; return v === 0 ? Infinity : v > 0 ? v : 2; };
+const newLeft = kid => Math.max(0, perDay() - (dayInfo(kid).nl || 0));
 function overTime(kid) { const cap = GSET().cap; return cap > 0 && minutesToday(kid) >= cap; }
 // Lesson time: from the family's lesson reminder hour (4 pm unless a grown-up changes it or turns it off) until the
 // kid has earned learning XP today.
@@ -775,7 +783,8 @@ GAMES.island = (it, host, ctx, done) => {
   GAMES[q.type](q, host, ctx, done);
 };
 
-// Generated practice with fresh numbers every time, pitched to the kid's band.
+// Generated practice with fresh numbers every time, pitched to the kid's band. A lesson's `gen` line can also use any
+// maths practice kind (MATHS.K in 13-practice.js), like `gen | fracof | 3`.
 const GEN = {
   change: (r, b) => { const cost = [0.5, 1.2, 2.4, 3.75, 6.3][b] * (1 + Math.floor(r() * 4)), paid = cost <= 5 ? 5 : cost <= 10 ? 10 : 20; return { type: 'gap', q: `Something costs ${dollars(cost)}. You pay with a ${dollars(paid)} note. Your change is $_`, a: (paid - cost).toFixed(2).replace(/\.00$/, '') }; },
   add: r => { const coins = [0.1, 0.2, 0.5, 1, 2], a = coins[Math.floor(r() * 5)], c = coins[Math.floor(r() * 5)]; return { type: 'gap', q: `${dollars(a)} + ${dollars(c)} = $_`, a: String(+(a + c).toFixed(2)) }; },
@@ -793,7 +802,7 @@ GAMES.gen = (it, host, ctx, done) => {
   const r = mulberry((Date.now() & 0xffff) ^ hash(it.kind)), band = BAND_IX[bandOf(ctx.kid)] || 0, n = it.n || 3; let k = 0, right = 0;
   const step = () => {
     const sub = document.createElement('div'); host.innerHTML = `<p class="g-count">Question ${k + 1} of ${n}</p>`; host.appendChild(sub);
-    const q = (GEN[it.kind] || GEN.add)(r, band); fx(ctx, 'next', { k });
+    const q = GEN[it.kind] ? GEN[it.kind](r, band) : MATHS.K[it.kind] ? MATHS.K[it.kind](r) : GEN.add(r, band); fx(ctx, 'next', { k });
     renderItem(q, sub, ctx, res => { if (res.ok) right++; k++; setTimeout(() => (k < n ? step() : done({ ok: right / n >= 0.66, score: right / n, right: res.ok ? '' : res.right })), res.ok ? 650 : 1500); });
   };
   step();
@@ -891,11 +900,19 @@ function allDoneCard(kid) {
 }
 function suggestions(kid, n = 3) {
   const g = prog(kid), assigned = (g.assigned || []).map(a => lessonById(a.id)).filter(l => l && !passed(kid, l.id));
+  if (!newLeft(kid)) return assigned.slice(0, n); // today's new lessons are done; a grown-up's lesson still shows
   const recent = (g.log || []).slice().reverse().map(x => String(x.id).split('.')[0]);
   const trees = treesOn().map(t => ({ t, next: nextIn(kid, t.id), done: treeStats(kid, t.id).done, recent: recent.indexOf(t.id) })).filter(x => x.next);
   trees.sort((a, b) => (a.recent === -1 ? 99 : a.recent) - (b.recent === -1 ? 99 : b.recent) || a.done - b.done);
   const r = mulberry(hash(kid.id + today())), first = trees.shift(), rest = shuffle(trees, r);
   return [...assigned, ...(first ? [first.next] : []), ...rest.map(x => x.next)].filter((l, i, a) => a.indexOf(l) === i).slice(0, n);
+}
+// Lessons still to come in a kid's subjects (languages not counted), and whether today's new ones are used up
+const lessonsLeft = kid => treesOn().reduce((n, t) => { const st = treeStats(kid, t.id); return n + st.total - st.done; }, 0);
+const restOfDay = kid => !newLeft(kid) && lessonsLeft(kid) > 0;
+// The home screen's card once today's new lessons are done: what's left to grow with until tomorrow
+function doneDayCard(kid) {
+  return `<section class="gw-done-day"><span class="gad-ic" aria-hidden="true">🌙</span><div><b>That’s today’s ${perDay()} new lessons!</b><p>More open tomorrow. Until then, practise: maths practice, your reviews and unit crowns all keep your brain growing.</p></div></section>`;
 }
 function hasLesson(kid) { if (!allLessons(bandOf(kid)).length) { loadBand(bandOf(kid)).then(() => C.scheduleRender()); return true; } return !!suggestions(kid, 1).length; }
 
@@ -959,17 +976,18 @@ function viewHub(kid) {
   const g = prog(kid), lvl = charLevel(kid), m = mastered(kid), sug = suggestions(kid, 3), due = dueCards(kid).length, echo = (g.echo || []).length;
   const mom = momentFor(kid), momDone = g.mom && g.mom.d === today() && g.mom.done, story = marketStory(kid), storyDone = g.story === weekKey();
   const t = titles(kid), needN = Grow.need ? Math.ceil(Grow.need / XP.lesson) : 0;
-  say(Grow.need ? `You need ${Grow.need} more XP. ${needN === 1 ? 'One lesson' : `${needN} lessons`} will do it!` : sug.length ? `Ready, ${kid.name}? Pick what to learn next.` : openCrowns(kid).length ? `You finished every lesson, ${kid.name}! Now win your unit crowns.` : `You’ve done everything here, ${kid.name}! New lessons arrive in updates.`);
+  say(Grow.need ? `You need ${Grow.need} more XP. ${needN === 1 ? 'One lesson' : `${needN} lessons`} will do it!` : sug.length ? `Ready, ${kid.name}? Pick what to learn next.` : restOfDay(kid) ? `That’s today’s new lessons, ${kid.name}! Let’s practise.` : openCrowns(kid).length ? `You finished every lesson, ${kid.name}! Now win your unit crowns.` : `You’ve done everything here, ${kid.name}! New lessons arrive in updates.`);
   const tile = (g2, ico, title, sub, extra = '') => `<button class="gw-tile" data-g="${g2}" ${extra}><span class="gt-ic">${ico}</span><span><b>${title}</b><small>${sub}</small></span></button>`;
   ui.innerHTML = `${topbar(kid, 'Character Growth', `${esc(kid.name)} · ${BANDS[BAND_IX[bandOf(kid)]].name}, ages ${BANDS[BAND_IX[bandOf(kid)]].ages}`)}
     <div class="gw-pad">
       <section class="gw-me"><div class="gw-lvl"><b class="num">${lvl}</b><small>Level</small></div><div class="gw-me-t"><b>${m} skill${m === 1 ? '' : 's'} mastered</b><small>${t.length ? t.map(esc).join(' · ') : 'Master 4 lessons in a tree to earn its title'}</small>${minutesToday(kid) ? `<small>${minutesToday(kid)} minute${minutesToday(kid) === 1 ? '' : 's'} of learning today</small>` : ''}</div></section>
-      ${!sug.length && !Grow.need ? allDoneCard(kid) : ''}
+      ${!sug.length && !Grow.need ? (restOfDay(kid) ? doneDayCard(kid) : allDoneCard(kid)) : ''}
       ${prizeStrip(kid)}
       ${Grow.need || sug.length ? `<div class="gw-need">${ic('sparkle')} ${(() => { const room = Math.max(0, XP.dayCap - dayInfo(kid).xp); return room ? `A new lesson pays up to ${XP.lesson + XP.perfect} XP: ${XP.lesson} for passing and ${XP.perfect} more if every answer is right. ${room} of ${XP.dayCap} learning XP left today.` : `You’ve earned all ${XP.dayCap} learning XP for today. Lessons still grow your tree, and the XP starts again tomorrow.`; })()}</div>` : ''}
       ${sug.length ? `<h2 class="gw-h2">Pick your next lesson</h2><div class="gw-pick">${sug.map((l, i) => { const tr = TREE[l.tree], as = (g.assigned || []).find(a => a.id === l.id); return `<button class="gw-lcard ${i === 0 ? 'main' : ''}" style="--th:${tr.hue}" data-g="lesson" data-id="${l.id}"><span class="lc-ic">${esc(l.icon)}</span><span class="lc-t"><small>${esc(tr.name)} · Unit ${l.unit}</small><b>${esc(local(l.title))}</b><em>${xpWords(kid, l)}${as ? ` · from a grown-up${as.bonus ? `, +${as.bonus} XP bonus` : ''}` : ''}</em></span><span class="lc-go">${ic('play')}</span></button>`; }).join('')}</div>` : ''}
       <div class="gw-tiles">
         ${due ? tile('review', '🔁', `${due} review${due === 1 ? '' : 's'} due`, 'Quick questions so you remember') : ''}
+        ${mathsOn() ? tile('mpractice', '🧮', 'Maths practice', `${PRACTICE_N} quick questions · +${XP.practice} XP each right`) : ''}
         ${echo ? tile('echo', '💡', `${echo} question${echo === 1 ? '' : 's'} about your week`, `+${XP.echo} XP each`) : ''}
         ${mom ? tile('moment', momDone ? '✅' : '💬', 'Today’s Money Moment', momDone ? 'Done for today' : `30 seconds · +${XP.moment} XP`) : ''}
         ${story && !storyDone ? tile('story', '📰', 'This week in the market', `+${XP.story} XP`) : ''}
@@ -1034,6 +1052,10 @@ function viewTree(kid, tree) {
 function startLesson(kid, l, mode = 'lesson') {
   if (overTime(kid)) { Grow.view = 'break'; return render(); }
   if (l.lang) return startLangLesson(kid, l, mode);
+  if (mode === 'lesson' && !passed(kid, l.id) && !newLeft(kid) && !(prog(kid).assigned || []).some(a => a.id === l.id)) {
+    C.track('growth.limit', { kind: 'lesson', id: l.id, perDay: perDay() }, kid.id); Sound.tap();
+    return C.toast(`That’s your ${perDay()} new lessons for today! This one opens tomorrow. Practise now to keep growing.`);
+  }
   const steps = [{ kind: 'hook' }];
   if (l.guess) steps.push({ kind: 'guess', item: l.guess });
   l.learn.forEach(text => steps.push({ kind: 'learn', text }));
@@ -1089,7 +1111,7 @@ function startCase(kid, id) {
 
 function viewRun(kid) {
   const R = Grow.run, step = R.steps[R.k], l = R.lesson, total = R.steps.length;
-  const beat = step.kind === 'decide' ? 'Choose' : step.kind === 'intro' ? 'Ready' : R.mode === 'lesson' || R.mode === 'lpart' ? BEATS[BEAT_OF[step.kind]] : step.kind === 'check' ? (R.mode === 'review' || R.mode === 'lreview' ? 'Review' : 'Question') : step.kind === 'line' ? 'Story' : step.title || 'Read';
+  const beat = step.kind === 'decide' ? 'Choose' : step.kind === 'intro' ? 'Ready' : R.mode === 'lesson' || R.mode === 'lpart' ? BEATS[BEAT_OF[step.kind]] : step.kind === 'check' ? (R.mode === 'review' || R.mode === 'lreview' ? 'Review' : R.mode === 'practice' ? (step.title || 'Practice') : 'Question') : step.kind === 'line' ? 'Story' : step.title || 'Read';
   const head = `<header class="gw-run-top"><button class="gw-x" data-g="back" aria-label="Stop">${ic('x')}</button><div class="gw-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${R.k + 1}"><i style="width:${(R.k + 1) / total * 100}%"></i></div><span class="gw-beat">${esc(beat)}</span></header>`;
   const title = l ? `<p class="gw-ltitle">${esc(l.icon)} ${esc(local(langTitle(l)))}</p>` : R.mode === 'challenge' ? `<p class="gw-ltitle">🏆 ${esc(local(R.unit.title))}</p>` : R.mode === 'case' ? `<p class="gw-ltitle">${esc(R.cs.icon)} ${esc(R.cs.name)}</p>` : '';
   let body = '';
@@ -1267,6 +1289,8 @@ function finish() {
     if (pass && !was) { add('Lesson passed', XP.lesson); if (allRight) add('Every answer right', XP.perfect); } else if (pass) add('Practice round', XP.replay);
     const as = (g.assigned || []).find(a => a.id === l.id); if (pass && as) { add('Bonus from a grown-up', Math.min(XP.assignedMax, as.bonus || 0)); patch.assigned = (g.assigned || []).filter(a => a.id !== l.id); }
     patch.done = { [l.id]: { best: Math.max(prev ? prev.best : 0, score), stars: Math.max(prev ? prev.stars : 0, stars), n: (prev ? prev.n : 0) + 1, at: Date.now() } };
+    // Today's new lessons (see perDay): a language lesson counts towards its own one a day; an assigned one doesn't count
+    if (pass && !was && !as) { const k = l.lang ? 'll' : 'nl'; patch.day[k] = (day[k] || 0) + 1; }
     // Language lessons review their words instead (lang_cards), not their questions
     if (pass && !was && !l.lang) { patch.cards = {}; l.checks.forEach((_, i) => { patch.cards[`${l.id}#${i}`] = { b: 1, due: addDays(today(), 1) }; }); }
     const u = packFor(l.tree, l.band).units.find(x => x.n === l.unit), unitDone = pass && u.lessons.every(x => x === l || passed(kid, x.id));
@@ -1279,6 +1303,8 @@ function finish() {
     Object.assign(out, { pass, stars: pass ? (acc === 1 ? 3 : 2) : 1, unit: R.unit, crown: pass && !(prev.best >= 0.8) });
   } else if (R.mode === 'review') {
     const room = Math.max(0, XP.cardsPerDay - (day.cards || 0)), n = Math.min(right, room); add(`${n} card${n === 1 ? '' : 's'} remembered`, n * XP.card); patch.day.cards = (day.cards || 0) + total;
+  } else if (R.mode === 'practice') {
+    practiceFinish(kid, R, add, patch, right, total);
   } else if (R.mode === 'moment') {
     const first = !(g.mom && g.mom.d === today() && g.mom.done); if (first) add('Today’s Money Moment', XP.moment);
     patch.mom = { d: today(), id: R.moment.id, done: true, ok: right === total }; patch.momH = { [R.moment.id]: today() };
@@ -1320,7 +1346,7 @@ const signed = n => (n < 0 ? '−' : '+') + Math.abs(Math.round(n)).toLocaleStri
 function viewDone(kid) {
   const o = Grow.last, isScored = 'pass' in o, fin = !!o.tally, rows = o.rows || [];
   if (!fin) o.tally = { fast: false, done: false };
-  const head = isScored ? (o.pass ? (o.stars === 3 ? 'Perfect!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!', lpart: 'Part 1 done!', lreview: 'Words practised!', lstory: 'Story done!', lplace: 'All set!' }[o.mode] || 'Done!';
+  const head = isScored ? (o.pass ? (o.stars === 3 ? 'Perfect!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', practice: 'Practice done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!', lpart: 'Part 1 done!', lreview: 'Words practised!', lstory: 'Story done!', lplace: 'All set!' }[o.mode] || 'Done!';
   // Kids are told exactly what moving on takes, and whether it's open now
   const need = passNeed(o.total), opened = o.first && o.lesson && nextIn(kid, o.lesson.tree);
   const unit = o.points ? 'points' : 'right';
@@ -1347,7 +1373,7 @@ function viewDone(kid) {
     ${o.first && o.lesson && !o.lesson.lang && treeStats(kid, o.lesson.tree).done === treeStats(kid, o.lesson.tree).total ? `<div class="gw-banner title">🌸 Every lesson done! Go back to your plant to watch it bloom.</div>` : ''}
     ${o.newTitle ? `<div class="gw-banner title">🎖️ New title: ${esc(o.newTitle)}</div>` : ''}
     ${o.home && o.pass ? `<div class="gw-homecard"><b>Take it home</b><p>${esc(local(o.home))}</p><button class="g-go ghost" data-g="homeDone">I’ll try it</button></div>` : ''}
-    <div class="gw-actions">${isScored && !o.pass ? `<button class="g-go" data-g="retry">Try again</button>` : o.part1 ? `<button class="g-go" data-g="lesson" data-id="${o.lesson.id}">Part 2 now</button>` : nx && (o.mode === 'lesson' || o.mode === 'lpart') ? `<button class="g-go" data-g="lesson" data-id="${nx.id}">Next: ${esc(local(nx.title))}</button>` : ''}
+    <div class="gw-actions">${isScored && !o.pass ? `<button class="g-go" data-g="retry">Try again</button>` : o.part1 ? `<button class="g-go" data-g="lesson" data-id="${o.lesson.id}">Part 2 now</button>` : o.mode === 'practice' ? `<button class="g-go" data-g="mpractice">Another ${PRACTICE_N}</button>` : !nx && o.first && restOfDay(kid) ? `<p class="gw-p">🌙 That’s today’s ${perDay()} new lessons. More open tomorrow, and maths practice is open now.</p><button class="g-go" data-g="mpractice">Maths practice</button>` : nx && (o.mode === 'lesson' || o.mode === 'lpart') ? `<button class="g-go" data-g="lesson" data-id="${nx.id}">Next: ${esc(local(nx.title))}</button>` : ''}
       <button class="g-go ghost" data-g="${Grow.tree ? 'toTree' : 'toHub'}">${Grow.tree ? `Back to ${esc(subject(Grow.tree).name)}` : 'Back to my skill trees'}</button></div></div></div>`;
   if (fin) o.tally.done = true; else runTally(o, ui.querySelector('.gw-done'), head);
 }
@@ -1452,6 +1478,7 @@ function onClick(e) {
     case 'howSkip': case 'howDone': return HowTo.finish(a.closest('.gw-card'));
     case 'challenge': return startChallenge(kid, id);
     case 'review': return startReview(kid);
+    case 'mpractice': return startPractice(kid);
     case 'echo': return startEcho(kid);
     case 'moment': return startMoment(kid);
     case 'story': return startStory(kid);
@@ -1536,7 +1563,7 @@ window.Growth = {
   mastered: kid => mastered(kid),
   parentView: () => parentView(), resetParent: () => { if (Grow.parent) Grow.parent.msg = ''; },
   ready: () => C.scheduleRender(),
-  _debug: { Packs, TREES, LANGS, LANG_LIVE, get lang() { return { langSteps, lcNew, lcAnswer, lcCards, lcDue, cardItem: cardItem2, Dict, LBOX }; }, get run() { return Grow.run; }, get view() { return Grow.view; }, parsePack, parseMoments, parseCases, loadBand, loadExtras, allLessons, lessonById, get Moments() { return Moments; }, get Cases() { return Cases; } },
+  _debug: { Packs, TREES, LANGS, LANG_LIVE, get maths() { return MATHS; }, GEN_KINDS: Object.keys(GEN), get pace() { return { perDay, newLeft, suggestions, lessonsLeft, restOfDay, langNewLeft }; }, get pick() { return { kidLangs, langPickable }; }, get lang() { return { langSteps, lcNew, lcAnswer, lcCards, lcDue, cardItem: cardItem2, Dict, LBOX }; }, get run() { return Grow.run; }, get view() { return Grow.view; }, parsePack, parseMoments, parseCases, loadBand, loadExtras, allLessons, lessonById, get Moments() { return Moments; }, get Cases() { return Cases; } },
 };
 
 
@@ -2055,6 +2082,7 @@ function parentView() {
       <div class="pg-stat"><b class="num">${wkT ? Math.round(wkC / wkT * 100) + '%' : '–'}</b><span>Accuracy this week</span></div>
       <div class="pg-stat"><b class="num">${wkXp}</b><span>XP from learning this week</span></div>
     </div>
+    ${lessonsAhead(kid)}
     ${(() => { const ps = Prize.stats(kid); if (!ps) return ''; const nx = ps.next; return `<h3 class="pgroup-t">Island prizes<small>Every few lessons wins a makeover colour, and every second prize an animal or special thing. The gap follows ${esc(kid.name)}’s pace, so prizes keep coming whether they learn a little or a lot.</small></h3>
     <div class="group"><div class="row"><div class="row-main"><b>${ps.won} prize${ps.won === 1 ? '' : 's'} won${nx ? ` · next: ${esc(nx.info.name)} in ${nx.left} lesson${nx.left === 1 ? '' : 's'}` : ''}</b><small>${ps.week} lesson${ps.week === 1 ? '' : 's'} passed this week, so after this one a prize every ${ps.gap} lessons${ps.got.length ? ` · won so far: ${ps.got.map(id => esc((C.prizeInfo(id) || { name: id }).name)).join(', ')}` : ''}</small></div></div></div>`; })()}
     <h3 class="pgroup-t">Skill map<small>${BANDS[BAND_IX[band]].name}, ages ${BANDS[BAND_IX[band]].ages} · 🥉 mastered · 🥈 strong · 🥇 still remembered after 35 days</small></h3>
@@ -2075,6 +2103,7 @@ function parentView() {
     <h3 class="pgroup-t">Settings<small>For the whole family</small></h3>
     <div class="group">
       <div class="row wrap"><div class="row-main"><b>Daily learning time</b><small>After this, new lessons wait until tomorrow</small></div><div class="chips">${[[10, '10 min'], [20, '20 min'], [30, '30 min'], [45, '45 min'], [0, 'No limit']].map(([v, l]) => `<button class="chip-p ${set.cap === v ? 'on' : ''}" data-act="gpCap" data-v="${v}">${l}</button>`).join('')}</div></div>
+      <div class="row wrap"><div class="row-main"><b>New lessons a day</b><small>Two a day makes a year of lessons last a year. After today’s new ones, kids keep practising: reviews, maths practice and unit crowns. Language lessons have their own one a day.</small></div><div class="chips">${[[2, '2'], [3, '3'], [4, '4'], [0, 'No limit']].map(([v, l]) => `<button class="chip-p ${set.perDay === v ? 'on' : ''}" data-act="gpPerDay" data-v="${v}">${l}</button>`).join('')}</div></div>
       <div class="row"><div class="row-main"><b>Must-dos before lessons</b><small>Lessons open once today’s must-do jobs are done. A job counts as soon as its photo is in.</small></div>${sw('gpChores', set.choresFirst, 'Must-dos before lessons')}</div>
       <div class="row wrap"><div class="row-main"><b>${esc(kid.name)}’s lessons</b><small>Picked from age ${kid.age || '?'}. Move a band if they need more or less challenge.</small></div><div class="chips">${[[-1, 'One band easier'], [0, 'Automatic'], [1, 'One band harder']].map(([v, l]) => `<button class="chip-p ${(set.band[kid.id] || 0) === v ? 'on' : ''}" data-act="gpBand" data-v="${v}">${l}</button>`).join('')}</div></div>
       <div class="row wrap"><div class="row-main"><b>Country rules</b><small>Tax, GST, KiwiSaver or super, and prices</small></div><div class="chips">${[['nz', 'New Zealand'], ['au', 'Australia']].map(([v, l]) => `<button class="chip-p ${set.country === v ? 'on' : ''}" data-act="gpCountry" data-v="${v}">${l}</button>`).join('')}</div></div>
@@ -2088,6 +2117,7 @@ const setG = patch => C.saveSettings({ growth: patch });
 Object.assign(C.ACT, {
   gpKid: a => { Grow.parent.kidId = a.dataset.id; Grow.parent.aLesson = null; C.render(); },
   gpCap: a => setG({ cap: +a.dataset.v }),
+  gpPerDay: a => { setG({ perDay: +a.dataset.v }); C.track('growth.setting', { perDay: +a.dataset.v }, null); },
   gpBand: a => setG({ band: { [Grow.parent.kidId]: +a.dataset.v } }),
   gpCountry: a => setG({ country: a.dataset.v }),
   gpLiving: () => setG({ living: !GSET().living }),
@@ -2106,6 +2136,18 @@ async function contentReview(id, status) {
   try { await C.api('PATCH', '/api/content/' + encodeURIComponent(id), { status }); Grow.parent.queue = (Grow.parent.queue || []).filter(x => x.id !== id); feedLoaded = false; C.toast(status === 'approved' ? 'Approved. Kids see it next time they open Character Growth.' : 'Withdrawn.'); }
   catch (e) { C.toast(e.message); }
   C.render();
+}
+// How long a kid's lessons will last: lessons left in their subjects at their pace (lessons first passed this week,
+// never more than the new-lessons-a-day setting; 2 a day for a kid just starting), and maths practice, with the
+// kinds they find tricky
+function lessonsAhead(kid) {
+  const left = lessonsLeft(kid), week = Date.now() - 7 * 864e5, firsts = Object.values(prog(kid).done || {}).filter(d => d.at > week && d.n === 1 && !d.placed).length;
+  const actual = firsts / 7, pace = Math.min(perDay(), actual >= 1 ? actual : 2), days = Math.max(1, Math.round(left / pace));
+  const mp = Object.values(prog(kid).mp || {}), n = mp.reduce((a, x) => a + x.n, 0), r = mp.reduce((a, x) => a + x.r, 0), weak = practiceWeak(kid);
+  return `<h3 class="pgroup-t">Lessons ahead</h3><div class="group">
+    <div class="row"><div class="row-main"><b>${left ? `${left} new lesson${left === 1 ? '' : 's'} ready for ${esc(kid.name)}` : `${esc(kid.name)} has done every lesson there is`}</b><small>${left ? `About ${days} day${days === 1 ? '' : 's'} of lessons at ${esc(kid.name)}’s pace. New lessons arrive every month, so there’s always more coming.` : 'New lessons arrive every month. Until then, maths practice, reviews, unit crowns and languages keep going.'}</small></div></div>
+    ${n ? `<div class="row"><div class="row-main"><b>Maths practice: ${n} answered, ${Math.round(r / n * 100)}% right</b><small>${weak.length ? `Tricky for now: ${weak.map(esc).join(', ')}. Practice gives these more often.` : 'Practice gives the trickiest kinds more often.'}</small></div></div>` : ''}
+  </div>`;
 }
 
 
@@ -2172,6 +2214,17 @@ body.gw-open{overflow:hidden}
 .gw-ones .gw-one{margin-bottom:0}
 .gw-one:active{transform:scale(.98)}
 .gw-one.open{animation:starPulse 2.4s ease-in-out infinite}
+.l-pick .gw-one{animation:none}
+.l-pick .gw-one.on{outline:4px solid #fff;outline-offset:3px}
+.l-pick .g1-ic{width:56px;height:56px;font-size:calc(30px*var(--ts))}
+.l-pick-go{max-width:520px;margin:-8px auto 24px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.gw-link{color:#fff;font:800 calc(15px*var(--ts)) var(--f-round);text-decoration:underline;text-underline-offset:3px;padding:6px 4px}
+.l-swap{text-align:center;margin-top:18px}
+.l-wait{cursor:default}
+.gw-done-day{margin:0 0 18px;padding:16px 18px;border-radius:22px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.24);color:#fff;display:flex;gap:14px;align-items:flex-start}
+.gw-done-day .gad-ic{font-size:calc(34px*var(--ts));line-height:1}
+.gw-done-day b{font:900 calc(18px*var(--ts)) var(--f-round)}
+.gw-done-day p{margin:4px 0 0;font:700 calc(14px*var(--ts))/1.4 var(--f-round);opacity:.9}
 .g1-ic{width:72px;height:72px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:calc(38px*var(--ts));background:rgba(255,255,255,.25)}
 .g1-t{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
 .g1-t b{font:900 calc(20px*var(--ts))/1.15 var(--f-round)}
@@ -3740,7 +3793,17 @@ const apiPath = u => (C.apiUrl ? C.apiUrl(u) : u);
 const langStage = (kid, lang) => (((prog(kid).lang || {})[lang] || {}).s) || 1;
 // Courses a family can switch on: live ones, plus parked ones in a preview build
 const langOn = () => LANGS.filter(L => LANG_LIVE.includes(L.id) || (previewBuild && shipped && shipped[`${L.id}.s1`]));
-const kidLangs = kid => langOn().filter(L => ((GSET().langs || {})[kid.id] || {})[L.id]);
+/* Which courses a kid learns. Every kid picks one for themselves (langPick in their growth doc). For each course a
+   grown-up can also say on (true: on whatever the kid picked) or off (false: the kid can't pick it). Unset leaves it
+   to the kid. */
+const langSet = kid => (GSET().langs || {})[kid.id] || {};
+const kidLangs = kid => langOn().filter(L => { const v = langSet(kid)[L.id]; return v === true || (v !== false && prog(kid).langPick === L.id); });
+const langPickable = kid => langOn().filter(L => langSet(kid)[L.id] !== false);
+// What a kid hears when they try a course before picking it: hello, and what it means
+const LANG_HI = { mi: ['Kia ora!', 'Hello!'], es: ['¡Hola!', 'Hello!'], zh: ['你好！', 'Hello! (nǐ hǎo)'], ja: ['こんにちは！', 'Hello! (konnichiwa)'] };
+// One new lesson a day in a language, after that day's words to practise. Finishing part 2 of a lesson started
+// yesterday doesn't count as starting a new one.
+const langNewLeft = kid => Math.max(0, 1 - (dayInfo(kid).ll || 0));
 const speakOn = () => GSET().speak !== false;
 
 /* ---------- Voices and recordings ---------- */
@@ -4108,7 +4171,9 @@ function startLangLesson(kid, l, mode, quick) {
   const gate = quick ? null : langGate(kid, l);
   if (gate === 'due') { C.toast('First, your words to practise. Then the new lesson opens.'); return startLangReview(kid, l.lang); }
   if (gate === 'slow') { C.toast('Let’s practise the words you know before adding new ones.'); return startLangReview(kid, l.lang, true); }
-  const part = partOne(kid, l) ? 1 : bandOf(kid) === 'sprouts' && l.words.length > 3 && !passed(kid, l.id) ? 2 : 0;
+  const started = ((((prog(kid).lang || {})[l.lang] || {}).part) || {})[l.id];
+  if (mode === 'lesson' && !quick && !passed(kid, l.id) && !started && !langNewLeft(kid)) { C.track('growth.limit', { kind: 'lang', lang: l.lang }, kid.id); return C.toast(`That’s today’s new ${LANG[l.lang].name} lesson done! Your next one opens tomorrow. You can still play the ones you’ve done.`); }
+  const part =partOne(kid, l) ? 1 : bandOf(kid) === 'sprouts' && l.words.length > 3 && !passed(kid, l.id) ? 2 : 0;
   Grow.run = { mode: part === 1 ? 'lpart' : mode, kid: kid.id, lesson: l, tree: l.tree, lang: l.lang, part, quick: !!quick, steps: langSteps(kid, l, part, quick), k: 0, res: [], t0: Date.now() };
   Grow.view = 'lesson'; Sound.go(); render();
 }
@@ -4207,6 +4272,7 @@ function viewLang(kid, L) {
     <div class="gw-pad gw-path l-path" style="--th:${L.hue}">
       <div class="gw-tiles">
         ${due ? `<button class="gw-tile" data-g="lpractice" data-id="${L.id}"><span class="gt-ic">🔁</span><span><b>${due} word${due === 1 ? '' : 's'} to practise</b><small>Do these first, then new words open</small></span></button>` : ''}
+        ${nx && !due && !langNewLeft(kid) && !((lp.part || {})[nx.id]) ? `<div class="gw-tile l-wait"><span class="gt-ic">🌙</span><span><b>Today’s new lesson is done</b><small>“${esc(local(nx.title))}” opens tomorrow. New words stick better after a sleep.</small></span></div>` : ''}
         ${!st.done && !lp.placed ? `<button class="gw-tile" data-g="lplace" data-id="${L.id}"><span class="gt-ic">🧭</span><span><b>Already know some?</b><small>A quick check finds where to start</small></span></button>` : ''}
         ${band === 'makers' && nx && !passed(kid, nx.id) ? `<button class="gw-tile" data-g="lquick" data-id="${nx.id}"><span class="gt-ic">⚡</span><span><b>Know “${esc(local(nx.title))}”?</b><small>Pass its questions to skip ahead</small></span></button>` : ''}
         ${st.total && st.done === st.total && next ? `<button class="gw-tile" data-g="lnext" data-id="${L.id}"><span class="gt-ic">🚀</span><span><b>Start ${esc(L.levels[s] || `stage ${s + 1}`)}</b><small>You finished ${esc(L.levels[s - 1] || `stage ${s}`)}!</small></span></button>` : ''}
@@ -4217,11 +4283,20 @@ function viewLang(kid, L) {
           ${u.story ? `<button class="gw-node story ${sd ? 'done' : allDone ? 'open' : 'locked'}" data-g="${allDone ? 'lstory' : 'locked'}" data-id="${u.id}"><span class="gn-ic">${sd ? '✅' : '📖'}</span><span class="gn-t">Story: ${esc(u.story.title)}</span></button>` : ''}
           <button class="gw-node boss ${uc.best >= 0.8 ? 'done gold' : allDone ? 'open' : 'locked'}" data-g="${allDone ? 'challenge' : 'locked'}" data-id="${u.id}"><span class="gn-ic">${uc.best >= 0.8 ? '👑' : allDone ? '🏆' : '🔒'}</span><span class="gn-t">Unit challenge${allDone ? ` · ${XP.challenge} XP` : ''}</span></button></div></section>`;
       }).join('')}
+      ${langSet(kid)[L.id] !== true && prog(kid).langPick === L.id ? `<p class="gw-p l-swap">Want to learn a different language? <button class="gw-link" data-g="lswap" data-id="${L.id}">Pick another</button> Your ${esc(L.name)} stays saved.</p>` : ''}
     </div>`;
+}
+// A kid with no language yet picks one: tap a course to hear it, then start it
+function langPicker(kid) {
+  const can = langPickable(kid); if (!can.length) return '';
+  const t = Grow.langTry && can.find(L => L.id === Grow.langTry);
+  return `<div class="gw-ones l-pick">${can.map(L => `<button class="gw-one open ${t === L ? 'on' : ''}" style="--th:${L.hue}" data-g="ltry" data-id="${L.id}" aria-pressed="${t === L}"><span class="g1-ic">${L.icon}</span><span class="g1-t"><b>${esc(L.name)}</b><small lang="${L.id}">${esc((LANG_HI[L.id] || [''])[0])}</small><small>${esc(L.blurb)}</small></span></button>`).join('')}</div>
+    ${t ? `<div class="l-pick-go"><button class="g-go" data-g="lstart" data-id="${t.id}">Start ${esc(t.name)}</button><button class="gw-link" data-g="ltry" data-id="${t.id}">🔊 Hear it again</button></div>` : '<p class="gw-p">Tap a language to hear it. You can swap later.</p>'}`;
 }
 // The Languages section of the Character Growth home screen
 function langDoors(kid) {
-  const ls = kidLangs(kid); if (!ls.length) return '';
+  const ls = kidLangs(kid);
+  if (!ls.length) { const p = langPicker(kid); return p ? `<h2 class="gw-h2">Pick a language to learn</h2>${p}` : ''; }
   return `<h2 class="gw-h2">Languages</h2><div class="gw-ones">${ls.map(L => {
     const s = langStage(kid, L.id), st = treeStats(kid, L.id), due = LC.cards[lcKey(kid, L.id)] ? lcDue(kid, L.id).length : 0;
     return `<button class="gw-one open" style="--th:${L.hue}" data-g="lang" data-id="${L.id}"><span class="g1-ic">${L.icon}</span><span class="g1-t"><b>${esc(L.name)}</b><small>${esc(L.levels[s - 1] || '')}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.total ? `${st.done} of ${st.total} lessons` : 'Tap to start'}${due ? ` · ${due} word${due === 1 ? '' : 's'} to practise` : ''}</small></span></button>`;
@@ -4237,18 +4312,28 @@ const LANG_CLICK = {
   lstory: (kid, id) => startLangStory(kid, id),
   lquick: (kid, id) => { const l = lessonById(id); if (l) startLangLesson(kid, l, 'lesson', true); },
   lnext: (kid, id) => { const s = langStage(kid, id), lp = (prog(kid).lang || {})[id] || {}; save(kid, { lang: { [id]: { ...lp, s: s + 1, placed: null } } }); C.track('lang.stage', { lang: id, stage: s + 1 }, kid.id); loadLang(id, s + 1).then(() => { Dict.build(id); render(); }); },
+  // Picking: the first tap says hello in the language, the Start button keeps it
+  ltry: (kid, id) => { if (!LANG[id]) return; Grow.langTry = id; Sound.tap(); render(); speakLang((LANG_HI[id] || [''])[0], id).then(ok => { if (!ok) C.toast(`${LANG_HI[id][0]} means “${LANG_HI[id][1]}”. This device has no ${LANG[id].name} voice yet: a grown-up can add one.`); }); },
+  lstart: (kid, id) => {
+    if (!langPickable(kid).some(L => L.id === id)) return;
+    const was = prog(kid).langPick || null; Grow.langTry = null; save(kid, { langPick: id }); C.track('lang.pick', { lang: id, was }, kid.id); Sound.coin();
+    Grow.tree = id; Grow.view = 'lang'; loadKidLangs(kid).then(() => C.scheduleRender()); render();
+  },
+  lswap: (kid, id) => { save(kid, { langPick: null }); C.track('lang.pick', { lang: null, was: id }, kid.id); Grow.tree = null; Grow.view = 'hub'; Sound.tap(); render(); },
 };
 
 /* ---------- Grown-ups: languages for each kid, their progress, and (for content editors) the recording studio ---------- */
 function langParent(kid, sw) {
   const ls = langOn(); if (!ls.length) return '';
-  const mine = (GSET().langs || {})[kid.id] || {}, P = Grow.parent;
-  ls.forEach(L => { if (mine[L.id] && !LC.cards[lcKey(kid, L.id)]) loadKidLangs(kid).then(() => C.scheduleRender()); });
+  const mine = langSet(kid), P = Grow.parent, learning = kidLangs(kid), pick = prog(kid).langPick;
+  ls.forEach(L => { if (learning.includes(L) && !LC.cards[lcKey(kid, L.id)]) loadKidLangs(kid).then(() => C.scheduleRender()); });
   const rows = ls.map(L => {
-    const on = !!mine[L.id], s = langStage(kid, L.id), cards = Object.values(lcCards(kid, L.id)), r = cards.filter(c => c.card.endsWith(':r')), st = treeStats(kid, L.id), stats = LC.stats[lcKey(kid, L.id)] || {};
+    const on = learning.includes(L), v = mine[L.id], s =langStage(kid, L.id), cards = Object.values(lcCards(kid, L.id)), r = cards.filter(c => c.card.endsWith(':r')), st = treeStats(kid, L.id), stats = LC.stats[lcKey(kid, L.id)] || {};
     const strong = r.filter(c => c.box >= 4).length, due = on && LC.cards[lcKey(kid, L.id)] ? lcDue(kid, L.id).length : 0, month = stats.month || {}, weak = r.filter(c => c.wrong > 0).sort((a, b) => b.wrong - a.wrong || a.box - b.box).slice(0, 6).map(c => Dict.get(L.id, c.card.replace(/:r$/, ''))).filter(Boolean);
     const stages = L.levels.map((n, i) => [i + 1, n]).filter(([i]) => shipped && shipped[`${L.id}.s${i}`]);
-    return `<div class="row"><span class="pg-ti" style="--th:${L.hue}">${L.icon}</span><div class="row-main"><b>${esc(L.name)}</b><small>${on ? `${esc(L.levels[s - 1] || '')} · ${st.done} of ${st.total} lessons · ${r.length} words met, ${strong} strong · ${due} to practise today${month.n ? ` · ${Math.round(month.right / month.n * 100)}% remembered after a month` : ''}` : esc(L.blurb)}</small></div>${sw('gpLang', on, `${L.name} for ${kid.name}`, `data-id="${L.id}"`)}</div>
+    const who = v === true ? 'On' : v === false ? `Off: ${esc(kid.name)} can’t pick it` : pick === L.id ? `${esc(kid.name)} picked this` : pick ? `${esc(kid.name)} picked another` : `${esc(kid.name)} can pick it`;
+    const chip = (val, label) => `<button class="chip-p ${(val === 'kid' ? v !== true && v !== false : v === val) ? 'on' : ''}" data-act="gpLangSet" data-id="${L.id}" data-v="${val}">${label}</button>`;
+    return `<div class="row wrap"><span class="pg-ti" style="--th:${L.hue}">${L.icon}</span><div class="row-main"><b>${esc(L.name)}</b><small>${who} · ${on ? `${esc(L.levels[s - 1] || '')} · ${st.done} of ${st.total} lessons · ${r.length} words met, ${strong} strong · ${due} to practise today${month.n ? ` · ${Math.round(month.right / month.n * 100)}% remembered after a month` : ''}` : esc(L.blurb)}</small></div><div class="chips" role="group" aria-label="${esc(L.name)} for ${esc(kid.name)}">${chip('kid', `${esc(kid.name)}’s choice`)}${chip(true, 'On')}${chip(false, 'Off')}</div></div>
       ${on && stages.length > 1 ? `<div class="row wrap"><div class="row-main"><small>Start ${esc(kid.name)} at</small></div><div class="chips">${stages.map(([i, n]) => `<button class="chip-p ${s === i ? 'on' : ''}" data-act="gpLangStage" data-id="${L.id}" data-v="${i}">${esc(n)}</button>`).join('')}</div></div>` : ''}
       ${on && weak.length ? `<div class="row"><div class="row-main"><b>Words to practise together</b><small>${weak.map(w => `${esc(w.t)} (${esc(w.en)})`).join(' · ')}</small></div></div>` : ''}`;
   }).join('');
@@ -4272,7 +4357,12 @@ function recStudio(rs) {
 }
 const recMime = () => ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm'].find(t => window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t)) || '';
 Object.assign(C.ACT, {
-  gpLang: a => { const kid = Store.kids[Grow.parent.kidId], on = !(((GSET().langs || {})[kid.id] || {})[a.dataset.id]); setG({ langs: { [kid.id]: { [a.dataset.id]: on } } }); C.track('lang.setting', { lang: a.dataset.id, on }, kid.id); if (on) loadKidLangs(kid).then(() => C.scheduleRender()); },
+  // A course for one kid: the kid's choice (unset), on, or off
+  gpLangSet: a => {
+    const kid = Store.kids[Grow.parent.kidId], v = a.dataset.v === 'true' ? true : a.dataset.v === 'false' ? false : null;
+    setG({ langs: { [kid.id]: { [a.dataset.id]: v } } }); C.track('lang.setting', { lang: a.dataset.id, on: v }, kid.id);
+    loadKidLangs(kid).then(() => C.scheduleRender());
+  },
   gpLangStage: a => { const kid = Store.kids[Grow.parent.kidId], lp = (prog(kid).lang || {})[a.dataset.id] || {}; save(kid, { lang: { [a.dataset.id]: { ...lp, s: +a.dataset.v, placed: null } } }); loadKidLangs(kid).then(() => C.scheduleRender()); },
   gpSpeak: () => setG({ speak: !speakOn() }),
   gpRec: a => { Grow.parent.rec = { lang: a.dataset.id, stage: 1, from: 0 }; C.render(); },
@@ -4383,10 +4473,10 @@ function viewHubSky(kid) {
   const mom = momentFor(kid), momDone = g.mom && g.mom.d === today() && g.mom.done, story = marketStory(kid), storyDone = g.story === weekKey();
   const t = titles(kid), d = dayInfo(kid), room = Math.max(0, XP.dayCap - d.xp), band = BANDS[BAND_IX[bandOf(kid)]], crowns = openCrowns(kid);
   const needN = Grow.need ? Math.ceil(Grow.need / XP.lesson) : 0, first = sug[0];
-  say(Grow.need ? `You need ${Grow.need} more XP. ${needN === 1 ? 'One lesson' : `${needN} lessons`} will do it!` : sug.length ? `Ready, ${kid.name}? Pick what to learn next.` : crowns.length ? `You finished every lesson, ${kid.name}! Now win your unit crowns.` : `You’ve done everything here, ${kid.name}! New lessons arrive in updates.`);
+  say(Grow.need ? `You need ${Grow.need} more XP. ${needN === 1 ? 'One lesson' : `${needN} lessons`} will do it!` : sug.length ? `Ready, ${kid.name}? Pick what to learn next.` : restOfDay(kid) ? `That’s today’s new lessons, ${kid.name}! Let’s practise.` : crowns.length ? `You finished every lesson, ${kid.name}! Now win your unit crowns.` : `You’ve done everything here, ${kid.name}! New lessons arrive in updates.`);
 
   // The hero: like "Ari's sky" on Today, with the level as the big number and today's learning as the weather
-  const cond = Grow.need ? ['🎯', `${Grow.need} XP to go`] : due ? ['🔁', due === 1 ? 'A review is waiting' : `${due} reviews waiting`] : !room ? ['🌸', 'All your XP for today'] : d.xp ? ['🌿', 'Growing nicely today'] : sug.length ? ['🌱', 'Ready to learn'] : crowns.length ? ['🏆', 'Crowns to win'] : ['🌳', 'Every lesson done'];
+  const cond = Grow.need ? ['🎯', `${Grow.need} XP to go`] : due ? ['🔁', due === 1 ? 'A review is waiting' : `${due} reviews waiting`] : !room ? ['🌸', 'All your XP for today'] : d.xp ? ['🌿', 'Growing nicely today'] : sug.length ? ['🌱', 'Ready to learn'] : restOfDay(kid) ? ['🌙', 'New lessons done for today'] : crowns.length ? ['🏆', 'Crowns to win'] : ['🌳', 'Every lesson done'];
   const allDone = treesOn().reduce((n, tr) => n + treeStats(kid, tr.id).done, 0), crownsWon = Object.values(g.units || {}).filter(u => u.best >= 0.8).length;
   const hero = `<section class="hero gws-hero" aria-label="${esc(kid.name)}'s learning">
       <div class="hero-loc"><span class="hero-ava" style="--hue:${kid.hue}">${kid.avatar}</span><span>${esc(kid.name)}'s learning</span></div>
@@ -4403,6 +4493,7 @@ function viewHubSky(kid) {
   const crown0 = !first && crowns[0];
   const next = first ? `<button class="next-card glass" data-g="lesson" data-id="${first.id}">${hueSticker(TREE[first.tree].hue, esc(first.icon), 'sm next-ic')}<span class="next-txt"><small>Learn this next</small><b>${esc(local(first.title))}</b><em>${esc(TREE[first.tree].name)} · Unit ${first.unit} · ${xpWords(kid, first)}</em></span><span class="next-go" aria-hidden="true">${ic('play')}</span></button>`
     : crown0 ? `<button class="next-card glass" data-g="challenge" data-id="${crown0.u.id}">${hueSticker(QUICK_HUE.crown, '🏆', 'sm next-ic')}<span class="next-txt"><small>Win this next</small><b>${esc(crown0.tree.name)} · Unit ${crown0.u.n} crown</b><em>${crownSize(crown0.u)} questions · ${passGoal(crownSize(crown0.u))} · +${XP.challenge} XP</em></span><span class="next-go" aria-hidden="true">${ic('play')}</span></button>`
+    : restOfDay(kid) ? `<section class="next-card done glass"><span class="next-ic" aria-hidden="true">🌙</span><span class="next-txt"><small>Learn this next</small><b>That’s today’s ${perDay()} new lessons!</b><em>More open tomorrow. Practise until then.</em></span></section>`
     : `<section class="next-card done glass"><span class="next-ic" aria-hidden="true">🌸</span><span class="next-txt"><small>Learn this next</small><b>You finished every lesson!</b><em>New lessons arrive in an update.</em></span></section>`;
 
   const tile = (g2, id, hue, icon, top, name, pay, extra = '') => `<button class="tile" data-g="${g2}" ${id ? `data-id="${id}"` : ''} style="--c1:color-mix(in srgb,${hue} 62%,#fff);--c2:${hue}" ${extra}><span class="tile-top">${top}</span><span class="sticker" aria-hidden="true">${icon}</span><span class="tile-name">${name}</span><span class="tile-pay num">${pay}</span></button>`;
@@ -4414,6 +4505,7 @@ function viewHubSky(kid) {
 
   const quick = [
     due ? tile('review', '', QUICK_HUE.review, '🔁', 'A few minutes', `${due} review${due === 1 ? '' : 's'} due`, `+${Math.min(due, 8) * XP.card} XP`) : '',
+    mathsOn() ? tile('mpractice', '', '#2FA8E8', '🧮', `${PRACTICE_N} questions`, 'Maths practice', `+${XP.practice} XP each`) : '',
     echo ? tile('echo', '', QUICK_HUE.echo, '💡', 'About your week', `${echo} question${echo === 1 ? '' : 's'}`, `+${echo * XP.echo} XP`) : '',
     mom ? tile('moment', '', QUICK_HUE.moment, momDone ? '✅' : '💬', '30 seconds', 'Today’s Money Moment', momDone ? 'Done' : `+${XP.moment} XP`) : '',
     story && !storyDone ? tile('story', '', QUICK_HUE.story, '📰', 'This week', 'In the market', `+${XP.story} XP`) : '',
@@ -4435,7 +4527,15 @@ function viewHubSky(kid) {
   const wordsDue = langs.reduce((a, x) => a + x.due, 0), firstNx = langs.find(x => x.nx && !x.due);
   const langCard = ls.length ? `<section class="card glass gws-langs"><header class="card-h"><span class="dot" style="background:var(--bonus)"></span><span class="card-t">Languages</span>${wordsDue ? '<span class="card-tag">· practise first</span>' : ''}<span class="card-r">${wordsDue ? `${wordsDue} word${wordsDue === 1 ? '' : 's'} to practise` : `${ls.length} course${ls.length === 1 ? '' : 's'}`}</span></header>
       <div class="tiles">${langs.map(({ L, s, st, due }) => tile('lang', L.id, L.hue, esc(L.icon), due ? `🔁 ${due} to practise` : esc(L.levels[s - 1] || `Stage ${s}`), esc(L.name), st.total ? `${st.done} of ${st.total}` : 'Start')).join('')}</div>
-      <p class="card-foot">${firstNx ? `Next in ${esc(firstNx.L.name)}: ${esc(local(firstNx.nx.title))}. ` : ''}Hear it, say it, read it and write it. New words come back the next day so they stick.</p></section>` : '';
+      <p class="card-foot">${firstNx ? `Next in ${esc(firstNx.L.name)}: ${esc(local(firstNx.nx.title))}. ` : ''}Hear it, say it, read it and write it. New words come back the next day so they stick.</p></section>`
+    : (() => {
+      // No language yet: the kid picks one. A tap says hello in it; Start keeps it.
+      const can = langPickable(kid), t = Grow.langTry && can.find(L => L.id === Grow.langTry); if (!can.length) return '';
+      return `<section class="card glass gws-langs"><header class="card-h"><span class="dot" style="background:var(--bonus)"></span><span class="card-t">Pick a language</span><span class="card-r">${can.length} to choose from</span></header>
+        <div class="tiles">${can.map(L => tile('ltry', L.id, L.hue, esc(L.icon), `<span lang="${L.id}">${esc((LANG_HI[L.id] || [''])[0])}</span>`, esc(L.name), t === L ? '🔊 Again' : 'Hear it', `aria-pressed="${t === L}"`)).join('')}</div>
+        ${t ? `<div class="gws-pickgo"><button class="btn-big" data-g="lstart" data-id="${t.id}">Start ${esc(t.name)}</button></div>` : ''}
+        <p class="card-foot">Learn to speak, read and write a new language. Tap one to hear it. You can swap later.</p></section>`;
+    })();
 
   const cs = casesFor(kid).slice(0, 12), csDone = cs.filter(x => (g.cases || {})[x.id]).length;
   const caseCard = cs.length ? `<section class="card glass"><header class="card-h"><span class="dot" style="background:var(--team)"></span><span class="card-t">Real stories</span><span class="card-r">${csDone}/${cs.length} read</span></header>
@@ -4487,9 +4587,112 @@ body.gw-open.gw-sky #app,body.gw-open.gw-sky #g3{visibility:hidden}
 .gws-bar{display:block;height:8px;border-radius:5px;background:rgba(255,255,255,.22);overflow:hidden;margin:5px 0 2px}
 .gws-bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#FFE7A6,#FFC94D)}
 .gws-lsub{font:700 calc(12px*var(--ts)) var(--f-round);color:var(--on-sky-2);margin-top:auto}
+.gws .tile[aria-pressed=true]{outline:3px solid #fff;outline-offset:2px}
+.gws-pickgo{margin:12px 0 4px}
+.gws-pickgo .btn-big{width:100%}
 @media (min-width:1000px){ .gws .hero{top:calc(env(safe-area-inset-top,0px) + 8px)} }
 `;
 { const st = document.createElement('style'); st.id = 'growth-sky-css'; st.textContent = SKY_CSS; document.head.appendChild(st); }
+
+/* ---------- Maths practice ----------
+   Ten quick questions at the kid's level, with fresh numbers every time, for after today's new lessons (or any time).
+   Each kind follows the NZ Curriculum's maths for the band's school years: Sprouts about Years 3 to 5, Builders 6 to
+   8, Makers 9 and 10. Practice mixes in some of the band below, leans towards the kinds a kid gets wrong most, and
+   pays a little XP per right answer.
+   Every question works out its own answer in code, and also carries `calc`, the sum as plain JavaScript maths, which
+   tests/lesson-pace.test.mjs works out again on its own (`unit` says how to compare: a time, a fraction or a
+   number). So a generated question can't have a wrong answer. Keep this block free of anything from the rest of the
+   app: the test reads it on its own. */
+/* MATHS-START */
+const MATHS = (() => {
+  const ri = (r, a, b) => a + Math.floor(r() * (b - a + 1)), pick = (r, xs) => xs[Math.floor(r() * xs.length)];
+  const mix = (r, xs) => { const a = xs.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const num = v => String(+(+v).toFixed(2)), neg = v => (v < 0 ? `−${Math.abs(v)}` : String(v));
+  const gcd = (a, b) => (b ? gcd(b, a % b) : Math.abs(a)), frac = (n, d) => { const g = gcd(n, d); return `${n / g}/${d / g}`; };
+  const commas = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const hm = mins => `${Math.floor(mins / 60) % 12 || 12}:${String(mins % 60).padStart(2, '0')}`;
+  // A multiple-choice question: the right answer and wrong ones, without repeats
+  const mcq = (r, q, right, wrongs, calc, unit) => { const w = [...new Set(wrongs.map(String))].filter(x => x !== String(right)).slice(0, 3); return { type: 'mcq', q, opts: mix(r, [{ t: String(right), ok: true }, ...w.map(t => ({ t, ok: false }))]), calc, unit }; };
+  const gap = (q, a, calc) => ({ type: 'gap', q, a: num(a), calc });
+  const K = {
+    // Sprouts: Years 3 to 5
+    add: r => { const a = ri(r, 12, 89), b = ri(r, 11, 89); return gap(`${a} + ${b} = _`, a + b, `${a}+${b}`); },
+    sub: r => { const a = ri(r, 30, 99), b = ri(r, 11, a - 5); return gap(`${a} − ${b} = _`, a - b, `${a}-${b}`); },
+    times: r => { const a = pick(r, [2, 3, 4, 5, 10, 6, 7, 8, 9]), b = ri(r, 2, 10); return gap(`${a} × ${b} = _`, a * b, `${a}*${b}`); },
+    divide: r => { const b = pick(r, [2, 3, 4, 5, 10]), q = ri(r, 2, 10); return gap(`${b * q} ÷ ${b} = _`, q, `${b * q}/${b}`); },
+    place: r => { const n = ri(r, 1000, 9999), p = ri(r, 0, 3), d = Math.floor(n / 10 ** p) % 10 || 1, m = n - (Math.floor(n / 10 ** p) % 10) * 10 ** p + d * 10 ** p; return gap(`In ${commas(m)}, what is the ${d} in the ${['ones', 'tens', 'hundreds', 'thousands'][p]} place worth? _`, d * 10 ** p, `${d}*${10 ** p}`); },
+    round10: r => { let n = ri(r, 11, 99); if (n % 10 === 5) n++; return gap(`Round ${n} to the nearest ten: _`, Math.round(n / 10) * 10, `Math.round(${n}/10)*10`); },
+    half: r => { const n = ri(r, 2, 50) * 2; return gap(`Half of ${n} is _`, n / 2, `${n}/2`); },
+    clock: r => { const h = ri(r, 1, 10), m = pick(r, [0, 15, 30, 45]), add = pick(r, [15, 30, 45, 60]), t = h * 60 + m + add; return mcq(r, `It’s ${hm(h * 60 + m)}. What time is it ${add === 60 ? 'an hour' : `${add} minutes`} later?`, hm(t), [hm(t + 15), hm(t - 15), hm(h * 60 + add)], `${h}*60+${m}+${add}`, 'time'); },
+    // Builders: Years 6 to 8
+    times12: r => { const a = ri(r, 3, 12), b = ri(r, 3, 12); return gap(`${a} × ${b} = _`, a * b, `${a}*${b}`); },
+    divide12: r => { const b = ri(r, 3, 12), q = ri(r, 3, 12); return gap(`${b * q} ÷ ${b} = _`, q, `${b * q}/${b}`); },
+    addbig: r => { const a = ri(r, 120, 4800), b = ri(r, 120, 4800); return gap(`${a} + ${b} = _`, a + b, `${a}+${b}`); },
+    subbig: r => { const a = ri(r, 500, 5000), b = ri(r, 100, a - 50); return gap(`${a} − ${b} = _`, a - b, `${a}-${b}`); },
+    mult21: r => { const a = ri(r, 13, 99), b = ri(r, 3, 9); return gap(`${a} × ${b} = _`, a * b, `${a}*${b}`); },
+    fracof: r => { const d = pick(r, [2, 3, 4, 5, 10]), n = ri(r, 1, d - 1), q = d * ri(r, 2, 12); return gap(`${n}/${d} of ${q} = _`, q / d * n, `${q}/${d}*${n}`); },
+    equiv: r => { const d = pick(r, [3, 4, 5, 6]), n = ri(r, 1, d - 1), k = ri(r, 2, 4); return mcq(r, `Which fraction is the same as ${n}/${d}?`, `${n * k}/${d * k}`, [`${n}/${d * k}`, `${n * k}/${d}`, `${n + k}/${d + k}`], `${n}/${d}`, 'frac'); },
+    decadd: r => { const a = ri(r, 11, 99) / 10, b = ri(r, 11, 99) / 10; return gap(`${a} + ${b} = _`, a + b, `${a}+${b}`); },
+    percent: r => { const p = pick(r, [10, 25, 50, 20, 75]), v = 20 * ri(r, 1, 10); return gap(`${p}% of ${v} = _`, v * p / 100, `${v}*${p}/100`); },
+    area: r => { const w = ri(r, 3, 12), h = ri(r, 2, 9); return r() < 0.5 ? gap(`A rectangle is ${w} m long and ${h} m wide. Its area is _ m²`, w * h, `${w}*${h}`) : gap(`A rectangle is ${w} m long and ${h} m wide. The distance around it (its perimeter) is _ m`, 2 * (w + h), `2*(${w}+${h})`); },
+    order: r => { const a = ri(r, 2, 20), b = ri(r, 2, 9), c = ri(r, 2, 9); return gap(`${a} + ${b} × ${c} = _`, a + b * c, `${a}+${b}*${c}`); },
+    negative: r => { const a = ri(r, 1, 9), b = ri(r, a + 1, 15); return mcq(r, `${a} − ${b} = ?`, neg(a - b), [neg(b - a), neg(-(a + b)), neg(a - b + 2)], `${a}-${b}`); },
+    mean: r => { const xs = [ri(r, 2, 20), ri(r, 2, 20), ri(r, 2, 20)], last = 4 - (xs.reduce((s, x) => s + x, 0) % 4) + 4 * ri(r, 0, 3); xs.push(last); return gap(`The mean (average) of ${xs.join(', ')} is _`, xs.reduce((s, x) => s + x, 0) / 4, `(${xs.join('+')})/4`); },
+    // Makers: Years 9 and 10
+    integers: r => { const a = ri(r, 2, 12), b = ri(r, 2, 9), t = ri(r, 0, 2); const [q, v, c] = t === 0 ? [`(−${a}) × ${b}`, -a * b, `(-${a})*${b}`] : t === 1 ? [`(−${a}) + (−${b})`, -a - b, `(-${a})+(-${b})`] : [`${a} − (−${b})`, a + b, `${a}-(-${b})`]; return mcq(r, `${q} = ?`, neg(v), [neg(-v), neg(v + b), neg(v - b)], c); },
+    brackets: r => { const a = ri(r, 2, 12), b = ri(r, 2, 12), c = ri(r, 2, 6), d = ri(r, 1, 10); return gap(`(${a} + ${b}) × ${c} − ${d} = _`, (a + b) * c - d, `(${a}+${b})*${c}-${d}`); },
+    equation: r => { const a = ri(r, 2, 9), x = ri(r, 1, 12), b = ri(r, 1, 20); return gap(`Solve ${a}x + ${b} = ${a * x + b}. x = _`, x, `(${a * x + b}-${b})/${a}`); },
+    discount: r => { const v = 20 * ri(r, 2, 15), p = pick(r, [10, 20, 25, 50]); return gap(`A $${v} jacket is ${p}% off. It now costs $_`, v * (1 - p / 100), `${v}*(1-${p}/100)`); },
+    ratio: r => { const a = ri(r, 1, 4), b = ri(r, a + 1, 6), t = (a + b) * ri(r, 2, 12); return gap(`Share $${t} in the ratio ${a}:${b}. The bigger share is $_`, t * b / (a + b), `${t}*${b}/(${a}+${b})`); },
+    triangle: r => { const b = ri(r, 2, 14), h = ri(r, 2, 10) * 2; return gap(`A triangle has a base of ${b} cm and a height of ${h} cm. Its area is _ cm²`, b * h / 2, `${b}*${h}/2`); },
+    pythag: r => { const [a, b] = pick(r, [[3, 4], [5, 12], [8, 15], [6, 8], [9, 12], [7, 24]]); return gap(`A right-angled triangle has short sides of ${a} cm and ${b} cm. The longest side is _ cm`, Math.sqrt(a * a + b * b), `Math.sqrt(${a}*${a}+${b}*${b})`); },
+    powers: r => { const t = ri(r, 0, 2), a = ri(r, 2, t === 1 ? 6 : 15); return t === 0 ? gap(`${a}² = _`, a * a, `${a}*${a}`) : t === 1 ? gap(`${a}³ = _`, a ** 3, `${a}*${a}*${a}`) : gap(`The square root of ${a * a} is _`, a, `Math.sqrt(${a * a})`); },
+    simplify: r => { const d = pick(r, [3, 4, 5, 7, 8]), n = ri(r, 1, d - 1), k = ri(r, 2, 6); if (gcd(n, d) > 1) return K.simplify(r); return mcq(r, `Simplify ${n * k}/${d * k}`, `${n}/${d}`, [`${n * k}/${d}`, `${n + 1}/${d + 1}`, `${n}/${d * 2}`], `${n * k}/${d * k}`, 'frac'); },
+    chance: r => { const a = ri(r, 1, 7), b = (a + ri(r, 0, 5)) % 7 + 1; return mcq(r, `A bag has ${a} red and ${b} blue marbles. You pick one without looking. What’s the chance it’s red?`, frac(a, a + b), [frac(b, a + b), `${a}/${b}`, `1/${a + b}`, '1/2'], `${a}/(${a}+${b})`, 'frac'); },
+    median: r => { const xs = Array.from({ length: 5 }, () => ri(r, 1, 30)), s = xs.slice().sort((a, b) => a - b); return gap(`The median (middle number) of ${xs.join(', ')} is _`, s[2], `[${xs.join(',')}].sort((a,b)=>a-b)[2]`); },
+  };
+  const LEVELS = [
+    ['add', 'sub', 'times', 'divide', 'place', 'round10', 'half', 'clock'],
+    ['times12', 'divide12', 'addbig', 'subbig', 'mult21', 'fracof', 'equiv', 'decadd', 'percent', 'area', 'order', 'negative', 'mean'],
+    ['integers', 'brackets', 'equation', 'discount', 'ratio', 'triangle', 'pythag', 'powers', 'simplify', 'chance', 'median'],
+  ];
+  const NAMES = { add: 'Adding', sub: 'Taking away', times: 'Times tables', divide: 'Dividing', place: 'Place value', round10: 'Rounding', half: 'Halves', clock: 'Telling the time', times12: 'Times tables to 12', divide12: 'Dividing', addbig: 'Adding big numbers', subbig: 'Taking away big numbers', mult21: 'Multiplying', fracof: 'Fractions of amounts', equiv: 'Equal fractions', decadd: 'Decimals', percent: 'Percentages', area: 'Area and perimeter', order: 'Order of operations', negative: 'Negative numbers', mean: 'Averages', integers: 'Integers', brackets: 'Brackets first', equation: 'Equations', discount: 'Discounts', ratio: 'Ratios', triangle: 'Triangle area', pythag: 'Pythagoras', powers: 'Powers and roots', simplify: 'Simplifying fractions', chance: 'Chance', median: 'Median' };
+  // n questions for a band (0 to 2): mostly its own kinds, some from the band below, more of the kinds marked weak
+  function set(r, band, n = 10, stats = {}) {
+    const own = LEVELS[band] || LEVELS[0], below = band > 0 ? LEVELS[band - 1] : [];
+    const weight = k => { const s = stats[k] || {}; return s.n >= 3 ? 1 + 2 * (1 - s.r / s.n) : 1.5; };
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      const pool = below.length && r() < 0.3 ? below : own, ws = pool.map(weight), tot = ws.reduce((a, b) => a + b, 0);
+      let x = r() * tot, k = pool[0]; for (let j = 0; j < pool.length; j++) { x -= ws[j]; if (x <= 0) { k = pool[j]; break; } }
+      if (out.length && out[out.length - 1].kind === k && pool.length > 1) { i--; continue; } // no two of a kind in a row
+      out.push({ kind: k, item: { ...K[k](r), kind: k } });
+    }
+    return out;
+  }
+  return { K, LEVELS, NAMES, set };
+})();
+/* MATHS-END */
+
+const PRACTICE_N = 10;
+function startPractice(kid) {
+  const band = BAND_IX[bandOf(kid)] || 0, r = mulberry((Date.now() & 0xfffff) ^ hash(kid.id));
+  const qs = MATHS.set(r, band, PRACTICE_N, prog(kid).mp || {});
+  Grow.run = { mode: 'practice', tree: 'maths', scene: (TREE.maths || {}).scene || 'island', steps: qs.map((x, i) => ({ kind: 'check', item: x.item, i, qid: `maths.practice.${x.kind}`, skill: `maths.${x.kind}`, title: MATHS.NAMES[x.kind] })), k: 0, res: [], t0: Date.now() };
+  Grow.view = 'review'; Sound.go(); render();
+}
+// What practice pays and remembers: a little XP per right answer (up to a daily amount), and right and wrong counts
+// per kind, so the next set leans towards the tricky ones and grown-ups can see them.
+function practiceFinish(kid, R, add, patch, right, total) {
+  const day = dayInfo(kid), room = Math.max(0, XP.practicePerDay - (day.pr || 0)), n = Math.min(right, room);
+  add(`${n} maths answer${n === 1 ? '' : 's'} right`, n * XP.practice); patch.day.pr = (day.pr || 0) + Math.min(right, room);
+  const mp = {}, was = prog(kid).mp || {};
+  R.steps.forEach((s, i) => { const k = s.item.kind, res = R.res[i]; if (!k || !res) return; const p = mp[k] || { n: (was[k] || {}).n || 0, r: (was[k] || {}).r || 0 }; mp[k] = { n: p.n + 1, r: p.r + (res.ok ? 1 : 0), at: Date.now() }; });
+  patch.mp = mp; C.track('growth.practice', { subject: 'maths', right, total }, kid.id);
+}
+// The kinds a kid finds hardest, for the grown-ups' page: at least 4 tries and under 70% right
+function practiceWeak(kid) { return Object.entries(prog(kid).mp || {}).filter(([, s]) => s.n >= 4 && s.r / s.n < 0.7).sort((a, b) => a[1].r / a[1].n - b[1].r / b[1].n).slice(0, 3).map(([k]) => MATHS.NAMES[k] || k); }
+const mathsOn = () => !(GSET().off || {}).maths;
 
 
 // If the app finished starting before this file loaded, redraw so the Character Growth card appears.

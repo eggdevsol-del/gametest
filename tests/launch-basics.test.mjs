@@ -47,7 +47,7 @@ try {
     const body = await r.text(); ok(body === html, 'compressed page arrives intact');
     ok(!/https:\/\/(fonts\.g|cdnjs)/.test(html), 'page loads nothing from Google or Cloudflare');
     const g = await fetch(BASE + '/chorecast/growth.js', { headers: { 'accept-encoding': 'gzip' } });
-    ok(g.headers.get('content-encoding') === 'gzip' && Number(g.headers.get('content-length')) < 374343 * 0.4, 'growth.js gzipped to under 40%', g.headers.get('content-length'));
+    ok(g.headers.get('content-encoding') === 'gzip' && Number(g.headers.get('content-length')) < Buffer.byteLength(readFileSync(path.join(REPO, 'public/chorecast/growth.js'), 'utf8')) * 0.4, 'growth.js gzipped to under 40%', g.headers.get('content-length'));
     const plain = await fetch(BASE + '/chorecast/growth.js', { headers: { 'accept-encoding': 'identity' } });
     ok(!plain.headers.get('content-encoding'), 'no compression when not asked');
     const http = await fetch(BASE + '/chorecast/');

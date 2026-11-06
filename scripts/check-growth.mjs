@@ -1,7 +1,7 @@
 // Checks every Character Growth content pack with the app's own parser, so a typo in a lesson file is caught
 // before kids see a broken question. Run after editing chorecast-growth/content: node scripts/check-growth.mjs
-// Each band has the units and lessons per unit SHAPE gives for its tree (see CONTENT.md). Each stage of a language
-// course has 10 units of 8 lessons, and its words follow the rules in langProblems below.
+// Each band's units grow in order, with the lessons per unit perUnit gives (see CONTENT.md). Each stage of a language
+// course has 10 units of 8 lessons, and its words follow the rules in langProblems below. Written sums are worked out.
 import { readFile, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
@@ -17,16 +17,28 @@ ctx.window.window = ctx.window; vm.createContext(ctx); vm.runInContext(code, ctx
 const { parsePack, parseMoments, parseCases, LANGS, LANG_LIVE } = ctx.window.Growth._debug;
 const LANG = Object.fromEntries(LANGS.map(L => [L.id, L]));
 
-// Units and lessons per band, per tree: Money Sense is in full, a newer tree starts at 4 x 4
-const SHAPE = { money: [8, 6] }, SHAPE_NEW = [4, 4];
-const GENS = ['change', 'add', 'percent', 'round', 'scale', 'gst', 'time', 'compound', 'unit', 'split'];
+/* Units: subjects grow a few whole units at a time (a monthly drop), numbered 1, 2, 3... with no gaps. Every unit has
+   4 lessons, except Money Sense's first 8 units, which have 6. */
+const perUnit = (tree, n) => (tree === 'money' && n <= 8 ? 6 : 4);
+const { maths: MATHS, GEN_KINDS } = ctx.window.Growth._debug;
+const GENS = [...GEN_KINDS, ...Object.keys(MATHS.K)];
+/* Any sum written out in a question is worked out again: "7 × 8 = _" must have 56 as its answer, and "12 ÷ 4 = ?" must
+   have 3 as its right option. Only plain sums count (digits, + − × ÷ and brackets), so words are never guessed at. */
+const N = String.raw`\(?\s*[−-]?\s*\d[\d,]*(?:\.\d+)?\s*\)?`, SUM = new RegExp(String.raw`((?:${N}\s*[+\-−×÷*/]\s*)+${N})\s*=\s*(?:_|\?)`);
+function sumOf(q) {
+  const m = String(q || '').match(SUM); if (!m) return null;
+  const e = m[1].replace(/,(?=\d{3})/g, '').replace(/−/g, ' -').replace(/×/g, '*').replace(/÷/g, '/');
+  if (!/^[\d.+\-*/()\s]+$/.test(e)) return null;
+  try { const v = Function(`return (${e})`)(); return Number.isFinite(v) ? v : null; } catch (e2) { return null; }
+}
+const numOf = s => { const t = String(s).replace(/−/g, '-').replace(/[$,\s]/g, ''); return /^-?\d+(\.\d+)?$/.test(t) ? +t : null; };
 const problems = [];
 function checkItem(it, where) {
   const bad = msg => problems.push(`${where}: ${it.type}: ${msg}`);
   switch (it.type) {
-    case 'mcq': if (it.opts.length < 2) bad('needs 2+ options'); if (!it.opts.some(o => o.ok)) bad('no option marked *'); break;
+    case 'mcq': if (it.opts.length < 2) bad('needs 2+ options'); if (!it.opts.some(o => o.ok)) bad('no option marked *'); { const v = sumOf(it.q), r = it.opts.filter(o => o.ok).map(o => numOf(o.t)); if (v != null && r.length && r.every(x => x != null) && !r.some(x => Math.abs(x - v) < 1e-9)) bad(`"${it.q}" works out to ${+v.toFixed(4)}, not ${it.opts.filter(o => o.ok).map(o => o.t).join(' or ')}`); } break;
     case 'tf': if (!it.q) bad('no statement'); break;
-    case 'gap': if (!it.a) bad('no answer'); if (!it.q.includes('_')) bad('no _ blank'); if (it.opts && !it.opts.includes(it.a)) bad('answer missing from choices'); break;
+    case 'gap': if (!it.a) bad('no answer'); if (!it.q.includes('_')) bad('no _ blank'); if (it.opts && !it.opts.includes(it.a)) bad('answer missing from choices'); { const v = sumOf(it.q), a = numOf(it.a); if (v != null && a != null && Math.abs(v - a) > 1e-9) bad(`"${it.q}" works out to ${+v.toFixed(4)}, not ${it.a}`); } break;
     case 'sort': if (it.bins.length < 2) bad('needs 2+ bins'); it.items.forEach(x => { if (!it.bins.includes(x.b)) bad(`"${x.t}" goes to unknown bin "${x.b}"`); }); break;
     case 'order': case 'build': if (it.steps.length < 3) bad('needs 3+ steps'); break;
     case 'match': case 'route': if (it.pairs.length < 3) bad('needs 3+ pairs'); it.pairs.forEach(p => { if (!p[0] || !p[1]) bad(`broken pair "${p.join('=')}"`); }); break;
@@ -51,7 +63,8 @@ function checkItem(it, where) {
   }
 }
 
-const dir = path.join(root, 'public', 'chorecast', 'growth');
+// GROWTH_DIR checks another folder of built packs (tests/lesson-pace.test.mjs uses it to prove a broken pack fails)
+const dir = process.env.GROWTH_DIR || path.join(root, 'public', 'chorecast', 'growth');
 let lessons = 0, items = 0;
 const index = JSON.parse(await readFile(path.join(dir, 'index.json'), 'utf8'));
 if (index.preview && !process.env.GROWTH_PREVIEW_OK) problems.push('index.json: this is a preview build with parked language courses in it. Run node scripts/build-growth.mjs (without --preview) before committing.');
@@ -110,10 +123,15 @@ function langProblems(lang, packs) {
 const langPacks = {};
 
 for (const f of (await readdir(dir)).filter(f => /^\w+\.\w+\.txt$/.test(f))) {
-  const [tree, band] = f.split('.'), pack = parsePack(await readFile(path.join(dir, f), 'utf8'), tree, band), [UNITS, PER_UNIT] = LANG[tree] ? LSHAPE : SHAPE[tree] || SHAPE_NEW;
+  const [tree, band] = f.split('.'), pack = parsePack(await readFile(path.join(dir, f), 'utf8'), tree, band), [UNITS, PER_UNIT] = LSHAPE;
   if (LANG[tree]) (langPacks[tree] || (langPacks[tree] = [])).push(pack);
-  if (pack.units.length !== UNITS) problems.push(`${f}: has ${pack.units.length} units, expected ${UNITS}`);
-  pack.units.forEach(u => { if (u.lessons.length !== PER_UNIT) problems.push(`${f}: unit ${u.n} has ${u.lessons.length} lessons, expected ${PER_UNIT}`); });
+  if (LANG[tree]) {
+    if (pack.units.length !== UNITS) problems.push(`${f}: has ${pack.units.length} units, expected ${UNITS}`);
+    pack.units.forEach(u => { if (u.lessons.length !== PER_UNIT) problems.push(`${f}: unit ${u.n} has ${u.lessons.length} lessons, expected ${PER_UNIT}`); });
+  } else {
+    if (!pack.units.length) problems.push(`${f}: has no units`);
+    pack.units.forEach((u, i) => { if (u.n !== i + 1) problems.push(`${f}: unit ${u.n} is out of order (expected unit ${i + 1})`); if (u.lessons.length !== perUnit(tree, u.n)) problems.push(`${f}: unit ${u.n} has ${u.lessons.length} lessons, expected ${perUnit(tree, u.n)}`); });
+  }
   for (const u of pack.units) for (const l of u.lessons) {
     lessons++; const w = `${l.id} "${l.title}"`;
     if (!l.play) problems.push(`${w}: no play`); if (l.checks.length < 2) problems.push(`${w}: fewer than 2 checks`); if (!l.skill) problems.push(`${w}: no skill`); if (!l.hook) problems.push(`${w}: no hook`); if (!l.learn.length && !l.words) problems.push(`${w}: no learn`);

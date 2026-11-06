@@ -386,7 +386,8 @@ GAMES.island = (it, host, ctx, done) => {
   GAMES[q.type](q, host, ctx, done);
 };
 
-// Generated practice with fresh numbers every time, pitched to the kid's band.
+// Generated practice with fresh numbers every time, pitched to the kid's band. A lesson's `gen` line can also use any
+// maths practice kind (MATHS.K in 13-practice.js), like `gen | fracof | 3`.
 const GEN = {
   change: (r, b) => { const cost = [0.5, 1.2, 2.4, 3.75, 6.3][b] * (1 + Math.floor(r() * 4)), paid = cost <= 5 ? 5 : cost <= 10 ? 10 : 20; return { type: 'gap', q: `Something costs ${dollars(cost)}. You pay with a ${dollars(paid)} note. Your change is $_`, a: (paid - cost).toFixed(2).replace(/\.00$/, '') }; },
   add: r => { const coins = [0.1, 0.2, 0.5, 1, 2], a = coins[Math.floor(r() * 5)], c = coins[Math.floor(r() * 5)]; return { type: 'gap', q: `${dollars(a)} + ${dollars(c)} = $_`, a: String(+(a + c).toFixed(2)) }; },
@@ -404,7 +405,7 @@ GAMES.gen = (it, host, ctx, done) => {
   const r = mulberry((Date.now() & 0xffff) ^ hash(it.kind)), band = BAND_IX[bandOf(ctx.kid)] || 0, n = it.n || 3; let k = 0, right = 0;
   const step = () => {
     const sub = document.createElement('div'); host.innerHTML = `<p class="g-count">Question ${k + 1} of ${n}</p>`; host.appendChild(sub);
-    const q = (GEN[it.kind] || GEN.add)(r, band); fx(ctx, 'next', { k });
+    const q = GEN[it.kind] ? GEN[it.kind](r, band) : MATHS.K[it.kind] ? MATHS.K[it.kind](r) : GEN.add(r, band); fx(ctx, 'next', { k });
     renderItem(q, sub, ctx, res => { if (res.ok) right++; k++; setTimeout(() => (k < n ? step() : done({ ok: right / n >= 0.66, score: right / n, right: res.ok ? '' : res.right })), res.ok ? 650 : 1500); });
   };
   step();

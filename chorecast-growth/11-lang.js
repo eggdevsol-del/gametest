@@ -19,7 +19,17 @@ const apiPath = u => (C.apiUrl ? C.apiUrl(u) : u);
 const langStage = (kid, lang) => (((prog(kid).lang || {})[lang] || {}).s) || 1;
 // Courses a family can switch on: live ones, plus parked ones in a preview build
 const langOn = () => LANGS.filter(L => LANG_LIVE.includes(L.id) || (previewBuild && shipped && shipped[`${L.id}.s1`]));
-const kidLangs = kid => langOn().filter(L => ((GSET().langs || {})[kid.id] || {})[L.id]);
+/* Which courses a kid learns. Every kid picks one for themselves (langPick in their growth doc). For each course a
+   grown-up can also say on (true: on whatever the kid picked) or off (false: the kid can't pick it). Unset leaves it
+   to the kid. */
+const langSet = kid => (GSET().langs || {})[kid.id] || {};
+const kidLangs = kid => langOn().filter(L => { const v = langSet(kid)[L.id]; return v === true || (v !== false && prog(kid).langPick === L.id); });
+const langPickable = kid => langOn().filter(L => langSet(kid)[L.id] !== false);
+// What a kid hears when they try a course before picking it: hello, and what it means
+const LANG_HI = { mi: ['Kia ora!', 'Hello!'], es: ['¡Hola!', 'Hello!'], zh: ['你好！', 'Hello! (nǐ hǎo)'], ja: ['こんにちは！', 'Hello! (konnichiwa)'] };
+// One new lesson a day in a language, after that day's words to practise. Finishing part 2 of a lesson started
+// yesterday doesn't count as starting a new one.
+const langNewLeft = kid => Math.max(0, 1 - (dayInfo(kid).ll || 0));
 const speakOn = () => GSET().speak !== false;
 
 /* ---------- Voices and recordings ---------- */
@@ -387,7 +397,9 @@ function startLangLesson(kid, l, mode, quick) {
   const gate = quick ? null : langGate(kid, l);
   if (gate === 'due') { C.toast('First, your words to practise. Then the new lesson opens.'); return startLangReview(kid, l.lang); }
   if (gate === 'slow') { C.toast('Let’s practise the words you know before adding new ones.'); return startLangReview(kid, l.lang, true); }
-  const part = partOne(kid, l) ? 1 : bandOf(kid) === 'sprouts' && l.words.length > 3 && !passed(kid, l.id) ? 2 : 0;
+  const started = ((((prog(kid).lang || {})[l.lang] || {}).part) || {})[l.id];
+  if (mode === 'lesson' && !quick && !passed(kid, l.id) && !started && !langNewLeft(kid)) { C.track('growth.limit', { kind: 'lang', lang: l.lang }, kid.id); return C.toast(`That’s today’s new ${LANG[l.lang].name} lesson done! Your next one opens tomorrow. You can still play the ones you’ve done.`); }
+  const part =partOne(kid, l) ? 1 : bandOf(kid) === 'sprouts' && l.words.length > 3 && !passed(kid, l.id) ? 2 : 0;
   Grow.run = { mode: part === 1 ? 'lpart' : mode, kid: kid.id, lesson: l, tree: l.tree, lang: l.lang, part, quick: !!quick, steps: langSteps(kid, l, part, quick), k: 0, res: [], t0: Date.now() };
   Grow.view = 'lesson'; Sound.go(); render();
 }
@@ -486,6 +498,7 @@ function viewLang(kid, L) {
     <div class="gw-pad gw-path l-path" style="--th:${L.hue}">
       <div class="gw-tiles">
         ${due ? `<button class="gw-tile" data-g="lpractice" data-id="${L.id}"><span class="gt-ic">🔁</span><span><b>${due} word${due === 1 ? '' : 's'} to practise</b><small>Do these first, then new words open</small></span></button>` : ''}
+        ${nx && !due && !langNewLeft(kid) && !((lp.part || {})[nx.id]) ? `<div class="gw-tile l-wait"><span class="gt-ic">🌙</span><span><b>Today’s new lesson is done</b><small>“${esc(local(nx.title))}” opens tomorrow. New words stick better after a sleep.</small></span></div>` : ''}
         ${!st.done && !lp.placed ? `<button class="gw-tile" data-g="lplace" data-id="${L.id}"><span class="gt-ic">🧭</span><span><b>Already know some?</b><small>A quick check finds where to start</small></span></button>` : ''}
         ${band === 'makers' && nx && !passed(kid, nx.id) ? `<button class="gw-tile" data-g="lquick" data-id="${nx.id}"><span class="gt-ic">⚡</span><span><b>Know “${esc(local(nx.title))}”?</b><small>Pass its questions to skip ahead</small></span></button>` : ''}
         ${st.total && st.done === st.total && next ? `<button class="gw-tile" data-g="lnext" data-id="${L.id}"><span class="gt-ic">🚀</span><span><b>Start ${esc(L.levels[s] || `stage ${s + 1}`)}</b><small>You finished ${esc(L.levels[s - 1] || `stage ${s}`)}!</small></span></button>` : ''}
@@ -496,11 +509,20 @@ function viewLang(kid, L) {
           ${u.story ? `<button class="gw-node story ${sd ? 'done' : allDone ? 'open' : 'locked'}" data-g="${allDone ? 'lstory' : 'locked'}" data-id="${u.id}"><span class="gn-ic">${sd ? '✅' : '📖'}</span><span class="gn-t">Story: ${esc(u.story.title)}</span></button>` : ''}
           <button class="gw-node boss ${uc.best >= 0.8 ? 'done gold' : allDone ? 'open' : 'locked'}" data-g="${allDone ? 'challenge' : 'locked'}" data-id="${u.id}"><span class="gn-ic">${uc.best >= 0.8 ? '👑' : allDone ? '🏆' : '🔒'}</span><span class="gn-t">Unit challenge${allDone ? ` · ${XP.challenge} XP` : ''}</span></button></div></section>`;
       }).join('')}
+      ${langSet(kid)[L.id] !== true && prog(kid).langPick === L.id ? `<p class="gw-p l-swap">Want to learn a different language? <button class="gw-link" data-g="lswap" data-id="${L.id}">Pick another</button> Your ${esc(L.name)} stays saved.</p>` : ''}
     </div>`;
+}
+// A kid with no language yet picks one: tap a course to hear it, then start it
+function langPicker(kid) {
+  const can = langPickable(kid); if (!can.length) return '';
+  const t = Grow.langTry && can.find(L => L.id === Grow.langTry);
+  return `<div class="gw-ones l-pick">${can.map(L => `<button class="gw-one open ${t === L ? 'on' : ''}" style="--th:${L.hue}" data-g="ltry" data-id="${L.id}" aria-pressed="${t === L}"><span class="g1-ic">${L.icon}</span><span class="g1-t"><b>${esc(L.name)}</b><small lang="${L.id}">${esc((LANG_HI[L.id] || [''])[0])}</small><small>${esc(L.blurb)}</small></span></button>`).join('')}</div>
+    ${t ? `<div class="l-pick-go"><button class="g-go" data-g="lstart" data-id="${t.id}">Start ${esc(t.name)}</button><button class="gw-link" data-g="ltry" data-id="${t.id}">🔊 Hear it again</button></div>` : '<p class="gw-p">Tap a language to hear it. You can swap later.</p>'}`;
 }
 // The Languages section of the Character Growth home screen
 function langDoors(kid) {
-  const ls = kidLangs(kid); if (!ls.length) return '';
+  const ls = kidLangs(kid);
+  if (!ls.length) { const p = langPicker(kid); return p ? `<h2 class="gw-h2">Pick a language to learn</h2>${p}` : ''; }
   return `<h2 class="gw-h2">Languages</h2><div class="gw-ones">${ls.map(L => {
     const s = langStage(kid, L.id), st = treeStats(kid, L.id), due = LC.cards[lcKey(kid, L.id)] ? lcDue(kid, L.id).length : 0;
     return `<button class="gw-one open" style="--th:${L.hue}" data-g="lang" data-id="${L.id}"><span class="g1-ic">${L.icon}</span><span class="g1-t"><b>${esc(L.name)}</b><small>${esc(L.levels[s - 1] || '')}</small><span class="g1-bar"><i style="width:${st.total ? st.done / st.total * 100 : 0}%"></i></span><small>${st.total ? `${st.done} of ${st.total} lessons` : 'Tap to start'}${due ? ` · ${due} word${due === 1 ? '' : 's'} to practise` : ''}</small></span></button>`;
@@ -516,18 +538,28 @@ const LANG_CLICK = {
   lstory: (kid, id) => startLangStory(kid, id),
   lquick: (kid, id) => { const l = lessonById(id); if (l) startLangLesson(kid, l, 'lesson', true); },
   lnext: (kid, id) => { const s = langStage(kid, id), lp = (prog(kid).lang || {})[id] || {}; save(kid, { lang: { [id]: { ...lp, s: s + 1, placed: null } } }); C.track('lang.stage', { lang: id, stage: s + 1 }, kid.id); loadLang(id, s + 1).then(() => { Dict.build(id); render(); }); },
+  // Picking: the first tap says hello in the language, the Start button keeps it
+  ltry: (kid, id) => { if (!LANG[id]) return; Grow.langTry = id; Sound.tap(); render(); speakLang((LANG_HI[id] || [''])[0], id).then(ok => { if (!ok) C.toast(`${LANG_HI[id][0]} means “${LANG_HI[id][1]}”. This device has no ${LANG[id].name} voice yet: a grown-up can add one.`); }); },
+  lstart: (kid, id) => {
+    if (!langPickable(kid).some(L => L.id === id)) return;
+    const was = prog(kid).langPick || null; Grow.langTry = null; save(kid, { langPick: id }); C.track('lang.pick', { lang: id, was }, kid.id); Sound.coin();
+    Grow.tree = id; Grow.view = 'lang'; loadKidLangs(kid).then(() => C.scheduleRender()); render();
+  },
+  lswap: (kid, id) => { save(kid, { langPick: null }); C.track('lang.pick', { lang: null, was: id }, kid.id); Grow.tree = null; Grow.view = 'hub'; Sound.tap(); render(); },
 };
 
 /* ---------- Grown-ups: languages for each kid, their progress, and (for content editors) the recording studio ---------- */
 function langParent(kid, sw) {
   const ls = langOn(); if (!ls.length) return '';
-  const mine = (GSET().langs || {})[kid.id] || {}, P = Grow.parent;
-  ls.forEach(L => { if (mine[L.id] && !LC.cards[lcKey(kid, L.id)]) loadKidLangs(kid).then(() => C.scheduleRender()); });
+  const mine = langSet(kid), P = Grow.parent, learning = kidLangs(kid), pick = prog(kid).langPick;
+  ls.forEach(L => { if (learning.includes(L) && !LC.cards[lcKey(kid, L.id)]) loadKidLangs(kid).then(() => C.scheduleRender()); });
   const rows = ls.map(L => {
-    const on = !!mine[L.id], s = langStage(kid, L.id), cards = Object.values(lcCards(kid, L.id)), r = cards.filter(c => c.card.endsWith(':r')), st = treeStats(kid, L.id), stats = LC.stats[lcKey(kid, L.id)] || {};
+    const on = learning.includes(L), v = mine[L.id], s =langStage(kid, L.id), cards = Object.values(lcCards(kid, L.id)), r = cards.filter(c => c.card.endsWith(':r')), st = treeStats(kid, L.id), stats = LC.stats[lcKey(kid, L.id)] || {};
     const strong = r.filter(c => c.box >= 4).length, due = on && LC.cards[lcKey(kid, L.id)] ? lcDue(kid, L.id).length : 0, month = stats.month || {}, weak = r.filter(c => c.wrong > 0).sort((a, b) => b.wrong - a.wrong || a.box - b.box).slice(0, 6).map(c => Dict.get(L.id, c.card.replace(/:r$/, ''))).filter(Boolean);
     const stages = L.levels.map((n, i) => [i + 1, n]).filter(([i]) => shipped && shipped[`${L.id}.s${i}`]);
-    return `<div class="row"><span class="pg-ti" style="--th:${L.hue}">${L.icon}</span><div class="row-main"><b>${esc(L.name)}</b><small>${on ? `${esc(L.levels[s - 1] || '')} · ${st.done} of ${st.total} lessons · ${r.length} words met, ${strong} strong · ${due} to practise today${month.n ? ` · ${Math.round(month.right / month.n * 100)}% remembered after a month` : ''}` : esc(L.blurb)}</small></div>${sw('gpLang', on, `${L.name} for ${kid.name}`, `data-id="${L.id}"`)}</div>
+    const who = v === true ? 'On' : v === false ? `Off: ${esc(kid.name)} can’t pick it` : pick === L.id ? `${esc(kid.name)} picked this` : pick ? `${esc(kid.name)} picked another` : `${esc(kid.name)} can pick it`;
+    const chip = (val, label) => `<button class="chip-p ${(val === 'kid' ? v !== true && v !== false : v === val) ? 'on' : ''}" data-act="gpLangSet" data-id="${L.id}" data-v="${val}">${label}</button>`;
+    return `<div class="row wrap"><span class="pg-ti" style="--th:${L.hue}">${L.icon}</span><div class="row-main"><b>${esc(L.name)}</b><small>${who} · ${on ? `${esc(L.levels[s - 1] || '')} · ${st.done} of ${st.total} lessons · ${r.length} words met, ${strong} strong · ${due} to practise today${month.n ? ` · ${Math.round(month.right / month.n * 100)}% remembered after a month` : ''}` : esc(L.blurb)}</small></div><div class="chips" role="group" aria-label="${esc(L.name)} for ${esc(kid.name)}">${chip('kid', `${esc(kid.name)}’s choice`)}${chip(true, 'On')}${chip(false, 'Off')}</div></div>
       ${on && stages.length > 1 ? `<div class="row wrap"><div class="row-main"><small>Start ${esc(kid.name)} at</small></div><div class="chips">${stages.map(([i, n]) => `<button class="chip-p ${s === i ? 'on' : ''}" data-act="gpLangStage" data-id="${L.id}" data-v="${i}">${esc(n)}</button>`).join('')}</div></div>` : ''}
       ${on && weak.length ? `<div class="row"><div class="row-main"><b>Words to practise together</b><small>${weak.map(w => `${esc(w.t)} (${esc(w.en)})`).join(' · ')}</small></div></div>` : ''}`;
   }).join('');
@@ -551,7 +583,12 @@ function recStudio(rs) {
 }
 const recMime = () => ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm'].find(t => window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t)) || '';
 Object.assign(C.ACT, {
-  gpLang: a => { const kid = Store.kids[Grow.parent.kidId], on = !(((GSET().langs || {})[kid.id] || {})[a.dataset.id]); setG({ langs: { [kid.id]: { [a.dataset.id]: on } } }); C.track('lang.setting', { lang: a.dataset.id, on }, kid.id); if (on) loadKidLangs(kid).then(() => C.scheduleRender()); },
+  // A course for one kid: the kid's choice (unset), on, or off
+  gpLangSet: a => {
+    const kid = Store.kids[Grow.parent.kidId], v = a.dataset.v === 'true' ? true : a.dataset.v === 'false' ? false : null;
+    setG({ langs: { [kid.id]: { [a.dataset.id]: v } } }); C.track('lang.setting', { lang: a.dataset.id, on: v }, kid.id);
+    loadKidLangs(kid).then(() => C.scheduleRender());
+  },
   gpLangStage: a => { const kid = Store.kids[Grow.parent.kidId], lp = (prog(kid).lang || {})[a.dataset.id] || {}; save(kid, { lang: { [a.dataset.id]: { ...lp, s: +a.dataset.v, placed: null } } }); loadKidLangs(kid).then(() => C.scheduleRender()); },
   gpSpeak: () => setG({ speak: !speakOn() }),
   gpRec: a => { Grow.parent.rec = { lang: a.dataset.id, stage: 1, from: 0 }; C.render(); },

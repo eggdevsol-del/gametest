@@ -10,8 +10,11 @@ const { Store, UI, Sound, FX, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle,
 const S = () => C.S();
 
 /* ---------- Catalogue ----------
-   Only LIVE trees reach kids. The rest are parked in chorecast-growth/content/parked until a grown-up has read them. */
-const LIVE = ['money', 'character'];
+   Only LIVE trees reach kids. The rest are parked in chorecast-growth/content/parked until they've been checked.
+   Maths, English and Science follow the NZ Curriculum for the band's school years (Sprouts about Years 3 to 5,
+   Builders 6 to 8, Makers 9 and 10). Subjects grow by a unit or more each month (see CONTENT.md). Science and Healthy
+   Body took the places of the parked Money Through Time and How the World Works, whose files stay in parked/. */
+const LIVE = ['money', 'character', 'maths', 'words', 'science', 'mind', 'body'];
 const ALL_TREES = [
   { id: 'money', name: 'Money Sense', icon: '💰', hue: '#30C25A', title: 'Budget Boss', scene: 'bank', blurb: 'Earning, spending, saving and budgeting' },
   { id: 'character', name: 'Good Character', icon: '🌟', hue: '#E8A317', title: 'Good Egg', scene: 'home', blurb: 'Gratitude, attitude, boundaries and screens' },
@@ -19,13 +22,13 @@ const ALL_TREES = [
   { id: 'work', name: 'Work and Careers', icon: '🧰', hue: '#FF9F0A', title: 'Hard Worker', scene: 'workshop', blurb: 'Doing a job well, jobs and workplaces' },
   { id: 'make', name: 'Make and Sell', icon: '🍋', hue: '#FF6B6B', title: 'Market Maker', scene: 'stall', blurb: 'Costs, prices, customers and profit' },
   { id: 'give', name: 'Give and Change', icon: '💝', hue: '#F25CA2', title: 'Kind Heart', scene: 'garden', blurb: 'Giving, causes and making a difference' },
-  { id: 'maths', name: 'Everyday Maths', icon: '🧮', hue: '#2FA8E8', title: 'Number Ninja', scene: 'kitchen', blurb: 'Change, percentages, recipes and rates' },
-  { id: 'words', name: 'Words That Work', icon: '💬', hue: '#A66BF0', title: 'Word Smith', scene: 'stage', blurb: 'Asking, explaining, writing and persuading' },
-  { id: 'time', name: 'Money Through Time', icon: '🏺', hue: '#C98A3E', title: 'Time Traveller', scene: 'museum', blurb: 'From barter and shells to banks and booms' },
+  { id: 'maths', name: 'Maths', icon: '🧮', hue: '#2FA8E8', title: 'Number Ninja', scene: 'kitchen', blurb: 'Numbers, fractions, measuring, shapes and data' },
+  { id: 'words', name: 'English', icon: '📖', hue: '#A66BF0', title: 'Word Smith', scene: 'stage', blurb: 'Reading, spelling, grammar and writing' },
+  { id: 'science', name: 'Science', icon: '🔬', hue: '#14A39A', title: 'Young Scientist', scene: 'museum', blurb: 'Living things, forces, materials, Earth and space' },
   { id: 'home', name: 'Home and Life', icon: '🏡', hue: '#F2A31B', title: 'Home Hero', scene: 'home', blurb: 'Cooking, cleaning, safety and running a home' },
-  { id: 'mind', name: 'Mind and Body', icon: '🧘', hue: '#3BB8D9', title: 'Calm Captain', scene: 'garden', blurb: 'Feelings, habits, patience and wellbeing' },
+  { id: 'mind', name: 'Strong Mind', icon: '🧠', hue: '#3BB8D9', title: 'Calm Captain', scene: 'garden', blurb: 'Good habits, self-control, bouncing back and goals' },
   { id: 'online', name: 'Smart Online', icon: '🛡️', hue: '#6A79F0', title: 'Scam Spotter', scene: 'online', blurb: 'Privacy, scams, ads and staying safe' },
-  { id: 'world', name: 'How the World Works', icon: '🏛️', hue: '#2F6FE4', title: 'Civic Star', scene: 'townhall', blurb: 'Rules, tax, councils and government' },
+  { id: 'body', name: 'Healthy Body', icon: '🏃', hue: '#F0643C', title: 'Health Hero', scene: 'garden', blurb: 'Moving, sleeping, eating well and staying safe' },
 ];
 const TREES = ALL_TREES.filter(t => LIVE.includes(t.id));
 const TREE = Object.fromEntries(TREES.map(t => [t.id, t]));
@@ -52,13 +55,13 @@ const BANDS = [
   { id: 'makers', name: 'Makers', ages: '13 to 15', words: 18 },
 ];
 const BAND_IX = Object.fromEntries(BANDS.map((b, i) => [b.id, i]));
-const GSET = () => ({ cap: 20, off: {}, band: {}, country: 'nz', living: true, readAloud: true, choresFirst: true, ...((S().growth) || {}) });
+const GSET = () => ({ cap: 20, perDay: 2, off: {}, band: {}, country: 'nz', living: true, readAloud: true, choresFirst: true, ...((S().growth) || {}) });
 function bandOf(kid) {
   const age = kid.age || 9, base = age <= 9 ? 0 : age <= 12 ? 1 : 2, shift = GSET().band[kid.id] || 0;
   return BANDS[clamp(base + shift, 0, BANDS.length - 1)].id;
 }
 // XP rules from the plan: modest, capped, and only for correct, completed learning.
-const XP = { lesson: 40, perfect: 10, replay: 10, card: 3, cardsPerDay: 15, echo: 15, caseStudy: 50, challenge: 120, moment: 10, story: 20, path: 500, dayCap: 250, assignedMax: 50 };
+const XP = { lesson: 40, perfect: 10, replay: 10, card: 3, cardsPerDay: 15, echo: 15, caseStudy: 50, challenge: 120, moment: 10, story: 20, path: 500, dayCap: 250, assignedMax: 50, practice: 2, practicePerDay: 40 };
 const BOXES = [1, 3, 7, 16, 35];
 const RANKS = ['Saver', 'Starter', 'Steady', 'Long-termer', 'Portfolio Pro'];
 
@@ -300,6 +303,11 @@ function award(kid, amount, patch = {}) {
   return give;
 }
 function minutesToday(kid) { return Math.round(dayInfo(kid).ms / 60000); }
+// New lessons a day: 2 unless a grown-up picks 3, 4 or no limit (0), so a year of lessons lasts a year. Replays,
+// lessons a grown-up assigns and language lessons (one a day of their own) don't count. Once today's are done, the
+// time goes to practice: reviews, maths practice, crowns and language words.
+const perDay = () => { const v = GSET().perDay; return v === 0 ? Infinity : v > 0 ? v : 2; };
+const newLeft = kid => Math.max(0, perDay() - (dayInfo(kid).nl || 0));
 function overTime(kid) { const cap = GSET().cap; return cap > 0 && minutesToday(kid) >= cap; }
 // Lesson time: from the family's lesson reminder hour (4 pm unless a grown-up changes it or turns it off) until the
 // kid has earned learning XP today.

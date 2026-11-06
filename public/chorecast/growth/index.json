@@ -1,18 +1,30 @@
 {
-  "version": "9fd8396189",
-  "built": "2026-11-05T07:07:17.403Z",
+  "version": "3afb8a6f3d",
+  "built": "2026-11-06T23:33:43.352Z",
   "counts": {
+    "body.sprouts": {
+      "units": 1,
+      "lessons": 4
+    },
+    "body.builders": {
+      "units": 1,
+      "lessons": 4
+    },
+    "body.makers": {
+      "units": 1,
+      "lessons": 4
+    },
     "character.sprouts": {
-      "units": 4,
-      "lessons": 16
+      "units": 5,
+      "lessons": 20
     },
     "character.builders": {
-      "units": 4,
-      "lessons": 16
+      "units": 5,
+      "lessons": 20
     },
     "character.makers": {
-      "units": 4,
-      "lessons": 16
+      "units": 5,
+      "lessons": 20
     },
     "es.s1": {
       "lang": "es",
@@ -30,17 +42,65 @@
       "stories": 10,
       "lines": 537
     },
+    "maths.sprouts": {
+      "units": 4,
+      "lessons": 16
+    },
+    "maths.builders": {
+      "units": 4,
+      "lessons": 16
+    },
+    "maths.makers": {
+      "units": 4,
+      "lessons": 16
+    },
+    "mind.sprouts": {
+      "units": 2,
+      "lessons": 8
+    },
+    "mind.builders": {
+      "units": 2,
+      "lessons": 8
+    },
+    "mind.makers": {
+      "units": 2,
+      "lessons": 8
+    },
     "money.sprouts": {
-      "units": 8,
-      "lessons": 48
+      "units": 9,
+      "lessons": 52
     },
     "money.builders": {
-      "units": 8,
-      "lessons": 48
+      "units": 9,
+      "lessons": 52
     },
     "money.makers": {
-      "units": 8,
-      "lessons": 48
+      "units": 9,
+      "lessons": 52
+    },
+    "science.sprouts": {
+      "units": 3,
+      "lessons": 12
+    },
+    "science.builders": {
+      "units": 3,
+      "lessons": 12
+    },
+    "science.makers": {
+      "units": 3,
+      "lessons": 12
+    },
+    "words.sprouts": {
+      "units": 3,
+      "lessons": 12
+    },
+    "words.builders": {
+      "units": 3,
+      "lessons": 12
+    },
+    "words.makers": {
+      "units": 3,
+      "lessons": 12
     },
     "zh.s1": {
       "lang": "zh",

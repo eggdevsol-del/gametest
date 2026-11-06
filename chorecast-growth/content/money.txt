@@ -563,6 +563,60 @@ check: tf | Used things are usually worth less than new ones. | true
 home: Pick something you've outgrown and work out a fair price for it with a grown-up.
 skill: trading
 
+@unit 9 | Make it last | Look after things, fix them, borrow and reuse
+
+@lesson 9.1 | Look after your things | 🧸 | home
+hook: Your bike was left out in the rain all week. What happens to it?
+learn: Looking after things makes them last longer, so you don't have to spend money replacing them.
+learn: Put things away, keep them dry, and use them the right way.
+learn: Things that last leave more money for the things you really want.
+try: Putting your bike in the shed stops it rusting :: mcq | What makes toys last longer? | Putting them away after playing* | Leaving them in the rain | Throwing them
+play: sort | Makes it last, Wears it out | Bike in the shed=Makes it last; Shoes left out in the rain=Wears it out; Books on a shelf=Makes it last; Felt pens with the lids off=Wears it out; Folding clothes=Makes it last | Which is it?
+check: tf | Looking after things can save money. | true
+check: mcq | Why put the lids back on felt pens? | So they don't dry out* | It looks nice | No reason
+check: mcq | If your things last longer, you have more money for… | things you really want* | nothing | replacing broken things
+home: Find one thing that needs better looking after, and give it a proper home.
+skill: care-for-things
+
+@lesson 9.2 | Fix it first | 🔧 | workshop
+hook: Your favourite jumper has a small hole. Throw it away, or fix it?
+learn: Lots of things can be fixed: sew a button, glue a toy, patch a hole, pump up a tyre.
+learn: Fixing is usually cheaper than buying something new.
+learn: Ask a grown-up to help. Fixing things is a useful skill to learn.
+try: Sewing a button back on :: mcq | Your bike tyre is flat. What should you try first? | Pump it up or patch it* | Buy a new bike | Throw the bike away
+play: match | Match each problem to a fix | Loose button=Sew it back on; Flat tyre=Pump it up; Ripped page=Tape it; Broken toy=Glue it
+check: tf | Fixing something is usually cheaper than buying new. | true
+check: mcq | Who can help you fix things? | A grown-up* | Nobody | Only a shop
+check: mcq | Which can usually be fixed? | A loose button* | A popped balloon | A melted ice block
+home: Fix one small broken thing at home with a grown-up.
+skill: fixing
+
+@lesson 9.3 | Borrow and share | 📚 | home
+hook: Do you need to buy a book to read it?
+learn: You don't have to own everything. You can borrow books from the library for free.
+learn: Families and friends can share and swap too: toys, books, tools and costumes.
+learn: Borrowing means looking after it and giving it back on time.
+try: Library books are free to borrow :: mcq | Where can you borrow books for free? | The library* | A toy shop | The supermarket
+play: sort | Good borrower, Not good | Gives it back on time=Good borrower; Loses it=Not good; Says thank you=Good borrower; Breaks it and says nothing=Not good; Looks after it=Good borrower | Which is it?
+check: tf | You have to buy a book to read it. | false | You can borrow books from the library for free.
+check: mcq | If you borrow something, you should… | look after it and give it back* | keep it forever | lend it to someone else
+check: mcq | Sharing toys with a cousin can… | save money for both families* | make toys disappear | cost more
+home: Visit the library with a grown-up and borrow a book.
+skill: borrowing
+
+@lesson 9.4 | Reuse it | 🫙 | home
+hook: An empty jar, a cardboard box, a shoebox. Rubbish, or something new?
+learn: Reusing means using something again, maybe in a new way.
+learn: A jar can hold pencils. A box can become a fort. Old clothes can become rags.
+learn: Reusing saves money and makes less rubbish.
+try: A jar becomes a pencil holder :: mcq | What could an old shoebox become? | A treasure box* | Nothing | Food
+play: match | Match each old thing to a new job | Jar=Pencil holder; Shoebox=Treasure box; Old T-shirt=Cleaning rag; Egg carton=Seed tray
+check: tf | Reusing things means less rubbish. | true
+check: mcq | Reusing can save… | money* | nothing at all | your homework
+check: mcq | Which is reusing? | Keeping buttons in a jam jar* | Throwing a jar away | Buying a new jar
+home: Find one thing headed for the bin and give it a new job.
+skill: reusing
+
 @band builders
 @unit 1 | Budget basics | Plan where money goes before you spend it
 @unit 2 | Goals and plans | Big goals, small steps
@@ -1131,6 +1185,60 @@ check: tf | Every week is a fresh start with money. | true
 home: Write one money rule for yourself and stick it somewhere you'll see it.
 skill: mistakes
 
+@unit 9 | Giving wisely | Your Give jar, choosing a cause and giving time
+
+@lesson 9.1 | Why give? | 💝 | garden
+hook: Your Give jar has $10 in it. What could it do?
+learn: Giving means sharing what you have to help others.
+learn: People give money, things they don't need any more, or their time.
+learn: Giving helps others, and it often makes the giver feel good too.
+try: Giving away a toy you've outgrown :: mcq | Which is a way to give? | Giving your time to help* | Keeping everything | Borrowing money
+play: sort | Money, Things, Time | Donating $5=Money; Giving away outgrown clothes=Things; Helping at a beach clean-up=Time; Coins in a collection tin=Money; Reading to a younger kid=Time | What's being given?
+check: tf | You can give time, not just money. | true
+check: mcq | Your Give jar is for… | helping others* | buying treats | saving for a bike
+check: mcq | Giving often makes the giver feel… | good* | worse | nothing
+home: Talk with a grown-up about something your family could give to this month.
+skill: why-give
+
+@lesson 9.2 | Choosing a cause | 🌏 | garden
+hook: There are so many ways to help. How do you choose?
+learn: A cause is something you want to help with: animals, the environment, sick children, your neighbourhood.
+learn: Think about what you care about most.
+learn: Before giving, check the group is real and trustworthy. A grown-up can help you look into it.
+try: Caring about animals could lead you to an animal shelter :: mcq | What should you check before giving to a group? | That it's real and trustworthy* | Its logo colour | Nothing
+play: match | Match what you care about to a cause | Animals=An animal shelter; The ocean=A beach clean-up group; Sick children=A children's hospital charity; Your neighbourhood=A community garden
+check: tf | It's smart to check a charity is real before giving. | true
+check: mcq | Who can help you check a charity? | A grown-up* | A pop-up ad | Nobody
+check: mcq | A good way to choose a cause is to… | think about what you care about* | pick the first ad you see | copy a friend
+home: Choose a cause you care about and tell a grown-up why.
+skill: choosing-cause
+
+@lesson 9.3 | Giving time and skills | 🧤 | garden
+hook: You don't have money to give. Can you still help?
+learn: Volunteering means giving your time and skills for free.
+learn: Kids can volunteer with their family: beach clean-ups, planting trees, baking for a fundraiser, helping a neighbour.
+learn: Your skills count too: drawing posters, reading to younger kids, tidying a garden.
+try: Helping at a tree planting :: mcq | What is volunteering? | Giving your time for free* | Getting paid for a job | Buying things
+play: tap | Tap the ways a kid could volunteer with family | 🌳:yes:Planting trees; 🧁:yes:Baking for a fundraiser; 🏖️:yes:A beach clean-up; 🛍️:no; 🎮:no
+check: tf | You need money to help others. | false | You can give your time and your skills.
+check: mcq | Which skill could help a fundraiser? | Drawing posters* | Sleeping in | Watching videos
+check: mcq | Volunteering with family is… | a way to help together* | not allowed for kids | the same as a paid job
+home: Find one way your family could volunteer together this term.
+skill: volunteering
+
+@lesson 9.4 | Planning your giving | 📋 | bank
+hook: A little in your Give jar every week. How could it add up?
+learn: Giving a small amount regularly adds up over time.
+learn: Plan ahead: choose a cause, set a goal, and decide when to give.
+learn: In Chorecast, a grown-up pays out your Give jar, so ask them to help you give it to the cause you chose.
+try: $2 a week for 10 weeks is $20 :: gap | $3 a week for 10 weeks is $_ | 30
+play: order | Plan your giving | Choose a cause; Set a giving goal; Put some money in your Give jar each payday; Ask a grown-up to pay it out to your cause
+check: gap | $5 a week for 8 weeks is $_ | 40
+check: tf | Small amounts given regularly can add up to a lot. | true
+check: mcq | In Chorecast, who pays out the Give jar? | A grown-up* | The kid, online | Nobody
+home: Set a giving goal with a grown-up, and a date to give it.
+skill: giving-plan
+
 @band makers
 @unit 1 | Bank accounts | Everyday, savings and keeping it safe
 @unit 2 | Comparing deals | Subscriptions, free trials and the fine print
@@ -1698,3 +1806,57 @@ check: mcq | Why does knowing your values help with money? | It's easier to say 
 check: tf | Two people can make different money choices and both be right for them. | true
 home: Write your top three values and one thing you'd love to spend on that fits them.
 skill: values
+
+@unit 9 | The cost of owning things | Running costs, phone plans, hiring and losing value
+
+@lesson 9.1 | The full price | 🏷️ | stall
+hook: A $100 printer looks cheap. Why might it end up costing much more?
+learn: Lots of things have running costs after you buy them: ink for a printer, data for a phone, fuel for a car.
+learn: The total cost of owning something is its price plus its running costs for as long as you use it.
+learn: Something cheap to buy can be expensive to own.
+try: A $100 printer with $40 of ink a year for 3 years costs $220 :: gap | A $50 item with $10 a month of running costs, used for 6 months, costs $_ in total | 110
+play: match | Match each thing to a running cost | Printer=Ink; Phone=Data; Car=Fuel; Pet=Food
+check: gap | 100 + 40 × 3 = _ | 220
+check: mcq | Which usually has the biggest running costs? | A car* | A book | A pencil
+check: tf | The cheapest thing to buy is always the cheapest to own. | false | Running costs can make a cheap item expensive over time.
+home: Pick something your family owns and list its running costs.
+skill: running-costs
+
+@lesson 9.2 | Phone plans | 📱 | bank
+hook: Prepay or a monthly plan? How do you choose?
+learn: With prepay, you top up first and can't spend more than you've put on.
+learn: A monthly plan bills you every month and may include data, calls and texts. Some lock you in for a set time.
+learn: Choose by what you actually use. Paying for data you never use is a waste.
+try: Prepay can't run up a surprise bill :: mcq | Which helps you avoid surprise bills? | Prepay* | A plan with no limit | Ignoring how much you use
+play: sort | Prepay, Monthly plan | Top up before you use it=Prepay; Billed every month=Monthly plan; Can't spend more than you've loaded=Prepay; Might have a minimum term=Monthly plan | Which is it?
+check: mcq | How do you choose the right plan? | Check how much you actually use* | Pick the biggest | Pick the one with the coolest ad
+check: tf | Paying for data you never use is a waste. | true
+check: mcq | A plan that locks you in means… | you have to pay for a set time* | you can stop any time for free | it's free
+home: Check how much data you, or someone in your family, actually uses in a month.
+skill: phone-plans
+
+@lesson 9.3 | Buy, hire or borrow? | ⛺ | stall
+hook: You'll go camping once this year. Buy a tent, or hire one?
+learn: If you'll only use something now and then, hiring or borrowing is often cheaper than buying.
+learn: If you'll use it a lot, buying can work out cheaper over time.
+learn: Compare the price to buy with the cost to hire times the number of times you'll use it.
+try: Hiring at $30 a time, twice, costs $60, much less than buying for $300 :: gap | Hiring costs $25 a time. Using it 4 times costs $_ | 100
+play: sort | Probably buy, Probably hire or borrow | School shoes=Probably buy; A suit for one wedding=Probably hire or borrow; A tent for one camping trip=Probably hire or borrow; A bike you ride every day=Probably buy; A carpet cleaner used once a year=Probably hire or borrow | Buy, or hire?
+check: gap | 20 × 12 = _ | 240
+check: mcq | Hiring costs $20 a time and buying costs $150. You'll use it 3 times. Which is cheaper? | Hiring* | Buying | They're the same
+check: tf | If you'll use something a lot, buying can be cheaper in the long run. | true
+home: Think of something your family hires or borrows. Would buying it ever make sense?
+skill: buy-or-hire
+
+@lesson 9.4 | Losing value | 📉 | bank
+hook: A new phone costs $1,000. What will it be worth in two years?
+learn: Most things lose value over time. This is called depreciation.
+learn: Cars, phones and gadgets often lose value fastest in their first year or two.
+learn: Buying good second-hand things lets someone else pay for that early drop.
+try: Things lose value over time :: mcq | What is depreciation? | Losing value over time* | Gaining value | A kind of tax
+play: match | Match each word to its meaning | Depreciation=Losing value over time; Second-hand=Owned by someone before; Resale value=What you could sell it for later
+check: mcq | Why can buying second-hand save money? | Someone else paid for the early drop in value* | Second-hand things are always broken | It's always free
+check: tf | Most gadgets lose value over time. | true
+check: mcq | A $1,000 gadget is worth $600 a year later. How much value did it lose? | $400* | $600 | $1,600
+home: With a grown-up, compare the price of something new with a second-hand one.
+skill: depreciation

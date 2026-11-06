@@ -562,3 +562,57 @@ check: tf | Used things are usually worth less than new ones. | true
 home: Pick something you've outgrown and work out a fair price for it with a grown-up.
 skill: trading
 
+@unit 9 | Make it last | Look after things, fix them, borrow and reuse
+
+@lesson 9.1 | Look after your things | 🧸 | home
+hook: Your bike was left out in the rain all week. What happens to it?
+learn: Looking after things makes them last longer, so you don't have to spend money replacing them.
+learn: Put things away, keep them dry, and use them the right way.
+learn: Things that last leave more money for the things you really want.
+try: Putting your bike in the shed stops it rusting :: mcq | What makes toys last longer? | Putting them away after playing* | Leaving them in the rain | Throwing them
+play: sort | Makes it last, Wears it out | Bike in the shed=Makes it last; Shoes left out in the rain=Wears it out; Books on a shelf=Makes it last; Felt pens with the lids off=Wears it out; Folding clothes=Makes it last | Which is it?
+check: tf | Looking after things can save money. | true
+check: mcq | Why put the lids back on felt pens? | So they don't dry out* | It looks nice | No reason
+check: mcq | If your things last longer, you have more money for… | things you really want* | nothing | replacing broken things
+home: Find one thing that needs better looking after, and give it a proper home.
+skill: care-for-things
+
+@lesson 9.2 | Fix it first | 🔧 | workshop
+hook: Your favourite jumper has a small hole. Throw it away, or fix it?
+learn: Lots of things can be fixed: sew a button, glue a toy, patch a hole, pump up a tyre.
+learn: Fixing is usually cheaper than buying something new.
+learn: Ask a grown-up to help. Fixing things is a useful skill to learn.
+try: Sewing a button back on :: mcq | Your bike tyre is flat. What should you try first? | Pump it up or patch it* | Buy a new bike | Throw the bike away
+play: match | Match each problem to a fix | Loose button=Sew it back on; Flat tyre=Pump it up; Ripped page=Tape it; Broken toy=Glue it
+check: tf | Fixing something is usually cheaper than buying new. | true
+check: mcq | Who can help you fix things? | A grown-up* | Nobody | Only a shop
+check: mcq | Which can usually be fixed? | A loose button* | A popped balloon | A melted ice block
+home: Fix one small broken thing at home with a grown-up.
+skill: fixing
+
+@lesson 9.3 | Borrow and share | 📚 | home
+hook: Do you need to buy a book to read it?
+learn: You don't have to own everything. You can borrow books from the library for free.
+learn: Families and friends can share and swap too: toys, books, tools and costumes.
+learn: Borrowing means looking after it and giving it back on time.
+try: Library books are free to borrow :: mcq | Where can you borrow books for free? | The library* | A toy shop | The supermarket
+play: sort | Good borrower, Not good | Gives it back on time=Good borrower; Loses it=Not good; Says thank you=Good borrower; Breaks it and says nothing=Not good; Looks after it=Good borrower | Which is it?
+check: tf | You have to buy a book to read it. | false | You can borrow books from the library for free.
+check: mcq | If you borrow something, you should… | look after it and give it back* | keep it forever | lend it to someone else
+check: mcq | Sharing toys with a cousin can… | save money for both families* | make toys disappear | cost more
+home: Visit the library with a grown-up and borrow a book.
+skill: borrowing
+
+@lesson 9.4 | Reuse it | 🫙 | home
+hook: An empty jar, a cardboard box, a shoebox. Rubbish, or something new?
+learn: Reusing means using something again, maybe in a new way.
+learn: A jar can hold pencils. A box can become a fort. Old clothes can become rags.
+learn: Reusing saves money and makes less rubbish.
+try: A jar becomes a pencil holder :: mcq | What could an old shoebox become? | A treasure box* | Nothing | Food
+play: match | Match each old thing to a new job | Jar=Pencil holder; Shoebox=Treasure box; Old T-shirt=Cleaning rag; Egg carton=Seed tray
+check: tf | Reusing things means less rubbish. | true
+check: mcq | Reusing can save… | money* | nothing at all | your homework
+check: mcq | Which is reusing? | Keeping buttons in a jam jar* | Throwing a jar away | Buying a new jar
+home: Find one thing headed for the bin and give it a new job.
+skill: reusing
+

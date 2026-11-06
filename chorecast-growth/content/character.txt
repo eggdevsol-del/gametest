@@ -199,6 +199,60 @@ check: mcq | Should you share a yucky picture with friends? | No* | Yes | Only w
 home: Agree with a grown-up what you'll do if you see something yucky online.
 skill: telling
 
+@unit 5 | Kind and helpful | Kind words, including others and helping out
+
+@lesson 5.1 | Kind words | 💬 | home
+hook: Can words make someone's day better?
+learn: Kind words make people feel good: "Great job!", "Want to play?", "Thank you".
+learn: Unkind words can hurt, even as a joke.
+learn: If you wouldn't like it said to you, don't say it.
+try: "Want to play with us?" is kind :: mcq | Which is a kind thing to say? | "You can go first"* | "You're so slow" | "Go away"
+play: sort | Kind, Unkind | Well done!=Kind; You can't play=Unkind; Can I help?=Kind; That's silly=Unkind; I like your drawing=Kind | Kind or unkind?
+check: tf | Unkind words can hurt even if they're meant as a joke. | true
+check: mcq | Before you say something, ask yourself… | "Would I like this said to me?"* | "Is it funny?" | "Who's watching?"
+check: mcq | Your sister's tower falls down. What's kind? | "Want help building it again?"* | "Ha ha!" | Walk off without a word
+home: Say three kind things to people in your family today.
+skill: kind-words
+
+@lesson 5.2 | Including others | 🤝 | home
+hook: A new kid is standing alone at lunch. What could you do?
+learn: Being left out feels lonely.
+learn: Including someone is easy: a smile, "Do you want to join in?", or sitting with them.
+learn: Everyone deserves a turn and a friend.
+try: Ask "Want to join in?" :: mcq | Someone is alone at lunch. What's kind? | Ask them to join you* | Ignore them | Laugh at them
+play: sort | Includes others, Leaves others out | Sharing the ball=Includes others; Whispering secrets about someone=Leaves others out; Asking a new kid to play=Includes others; Saying only your friends can play=Leaves others out; Saving a seat for someone=Includes others | Which is it?
+check: tf | Being left out can make someone feel lonely. | true
+check: mcq | How can you include someone? | Invite them to play* | Turn your back | Start a secret club
+check: mcq | In a game, fair means… | everyone gets a turn* | only the best players play | the oldest always wins
+home: Next time you play, invite someone new to join in.
+skill: including-others
+
+@lesson 5.3 | Helping at home | 🧹 | home
+hook: Who does all the jobs at your place? Could you help without being asked?
+learn: A family is a team. Everyone helps make home a nice place.
+learn: You can help without being asked: setting the table, putting shoes away, feeding pets.
+learn: Helping makes others feel cared for, and it makes you feel good too.
+try: Setting the table without being asked :: mcq | Which is a way to help at home? | Clearing your plate after dinner* | Leaving toys everywhere | Hiding from chores
+play: tap | Tap the ways to help at home | 🍽️:yes:Set the table; 🧸:yes:Put toys away; 🐕:yes:Feed the dog; 📺:no; 🎮:no
+check: tf | A family is like a team. | true
+check: mcq | What's even better than helping when you're asked? | Helping without being asked* | Helping only for money | Never helping
+check: mcq | How does helping make others feel? | Cared for* | Annoyed | Scared
+home: Do one helpful job today without being asked. See if anyone notices!
+skill: helping
+
+@lesson 5.4 | Keeping promises | 🤞 | home
+hook: You promised to play with your little brother, but your friend calls. What do you do?
+learn: A promise is telling someone you will do something.
+learn: Keeping promises shows people they can trust you.
+learn: Only promise what you can really do. If you can't keep a promise, say sorry and make it right.
+try: Do what you said you'd do :: mcq | You promised to help Dad wash the car. A friend asks you to play. What do you do? | Help Dad first, then play* | Go to your friend and forget | Hide
+play: order | What to do if you can't keep a promise | Tell the person as soon as you can; Say sorry; Offer another time; Keep the new promise
+check: tf | Keeping promises helps people trust you. | true
+check: mcq | What should you promise? | Only what you can really do* | Anything that makes people happy | Nothing, ever
+check: mcq | You forgot a promise. What's best? | Say sorry and make it right* | Pretend it never happened | Blame someone else
+home: Make a small promise to someone this week, and keep it.
+skill: promises
+
 @band builders
 @unit 1 | Gratitude and contentment | Enjoying what you already have
 @unit 2 | Self-control and bouncing back | Waiting, effort and setbacks
@@ -397,6 +451,60 @@ check: mcq | How much sleep do kids aged 10 to 12 need? | About 9 to 12 hours* |
 home: Work out what time you need to be asleep to get 10 hours before your wake-up time.
 skill: sleep
 
+@unit 5 | Responsibility and friendship | Owning your jobs, saying sorry and being a good friend
+
+@lesson 5.1 | Owning your jobs | ✅ | home
+hook: Your chore isn't done and Mum asks why. What do you say?
+learn: Being responsible means doing what you're supposed to do, without being reminded.
+learn: It also means owning it when you don't: "I forgot. I'll do it now," not excuses.
+learn: Responsible people get trusted with more freedom.
+try: "I forgot. I'll do it now." :: mcq | Which is responsible? | Doing your chores before you're reminded* | Waiting until someone yells | Asking a sibling to do it
+play: sort | Responsible, Excuse | I'll fix it right away=Responsible; It's not my fault=Excuse; Sorry I forgot, I'll do it now=Responsible; Someone else should have done it=Excuse; I set a reminder so I won't forget=Responsible | Responsible, or an excuse?
+check: tf | Responsible people are often given more freedom. | true
+check: mcq | You broke a glass. What's the responsible thing to do? | Tell a grown-up and help clean up safely* | Hide the pieces | Blame the cat
+check: mcq | A good way to remember jobs is… | a checklist or reminder* | hoping you remember | waiting for someone to tell you
+home: Do all your chores this week without being reminded.
+skill: responsibility
+
+@lesson 5.2 | Saying sorry well | 🙇 | home
+hook: Is "Sorry, but you started it" a real apology?
+learn: A good apology has three parts: say what you did, say sorry, and say how you'll fix it or do better.
+learn: "I'm sorry I took your charger without asking. I'll ask next time."
+learn: Don't add "but". "Sorry, but…" turns an apology into an excuse.
+try: Say what you did, say sorry, say how you'll fix it :: mcq | Which is the best apology? | "I'm sorry I laughed at you. That was unkind, and I won't do it again."* | "Sorry, but you were being weird." | "Sorry if you were upset."
+play: order | Put a good apology in order | Say what you did; Say sorry; Say how you'll fix it or do better
+check: tf | Adding "but" can turn an apology into an excuse. | true
+check: mcq | "Sorry if you feel that way" is… | not a real apology* | a great apology | a compliment
+check: mcq | After an apology, it's important to… | actually do better* | do it again | expect a reward
+home: Think of someone you owe an apology to, and give them a real, three-part one.
+skill: apologising
+
+@lesson 5.3 | Being a good friend | 🫂 | home
+hook: What makes someone a really good friend?
+learn: Good friends are kind, honest, loyal and fun to be around.
+learn: They listen, stick up for you, and are happy when good things happen to you.
+learn: To have good friends, be one. And if a friend tells you something that means someone could get hurt, tell a trusted grown-up.
+try: A good friend listens :: mcq | Which shows you're a good friend? | Cheering when your friend wins* | Telling others their private things | Leaving them out
+play: sort | Good friend, Not a good friend | Listens to you=Good friend; Laughs at you in front of others=Not a good friend; Sticks up for you=Good friend; Only talks to you when they want something=Not a good friend; Is happy for you=Good friend | Which is it?
+check: tf | If a friend tells you something that means someone could get hurt, you should tell a trusted grown-up. | true
+check: mcq | To have good friends, you should… | be a good friend* | have lots of stuff | be the boss
+check: mcq | Your friend did well in a test and you didn't. A good friend… | says "Well done!"* | sulks | says they cheated
+home: Do something kind for a friend this week, just because.
+skill: friendship
+
+@lesson 5.4 | A gratitude journal | 📓 | home
+hook: Can writing down three good things each day make a difference?
+learn: A gratitude journal is a notebook where you write down good things that happened.
+learn: Be specific: "Dad made my favourite pancakes" says more than "food".
+learn: Noticing good things gets you in the habit of looking for them, which helps on hard days too.
+try: "My friend saved me a seat" :: mcq | Which journal entry is most specific? | "Nana phoned to hear about my game"* | "Family" | "Stuff"
+play: order | Start a gratitude journal | Get a notebook; Pick a time each day; Write three good things; Write why each one mattered
+check: tf | Being specific makes a gratitude journal more powerful. | true
+check: mcq | How can gratitude help on a hard day? | It helps you notice the good things too* | It makes problems disappear | It doesn't
+check: mcq | Which is something to be grateful for? | A teacher who helped you* | Nothing, ever | Only big presents
+home: Write three specific good things in a notebook every night this week.
+skill: gratitude-journal
+
 @band makers
 @unit 1 | Honesty and keeping your word | Doing right when nobody's watching
 @unit 2 | Standing firm with friends | Peer pressure and your values
@@ -588,3 +696,57 @@ check: mcq | What do most posts show? | Highlights, often edited* | Everyday lif
 check: tf | Comparing yourself to posts can make you feel worse. | true
 home: Notice how you feel after scrolling. Talk with your parents about which accounts help and which don't.
 skill: screens
+
+@unit 5 | Respect and service | Respecting others, serving and leading by example
+
+@lesson 5.1 | Respect | 🙏 | home
+hook: What does respect look like, even when you disagree with someone?
+learn: Respect means treating people as valuable: listening, being polite and keeping your word.
+learn: You can disagree with someone and still respect them. Argue about ideas, not about the person.
+learn: Respecting parents, teachers and older people builds trust and good relationships.
+try: "I see it differently, but I get your point" :: mcq | Which shows respect in a disagreement? | Listening, then explaining your view calmly* | Rolling your eyes | Name-calling
+play: sort | Respectful, Disrespectful | Letting someone finish speaking=Respectful; Interrupting all the time=Disrespectful; Thanking the bus driver=Respectful; Mocking someone's accent=Disrespectful; Asking before borrowing=Respectful | Which is it?
+check: tf | You can disagree with someone and still respect them. | true
+check: mcq | "Argue about ideas, not the person" means… | stick to the point, not insults* | win at all costs | never disagree
+check: mcq | Which shows respect to a grandparent? | Putting your phone away and listening* | Scrolling while they talk | Leaving without saying goodbye
+home: Have a respectful conversation with someone you disagree with about something small.
+skill: respect
+
+@lesson 5.2 | Serving others | 🤲 | home
+hook: Can you think of someone who quietly makes life better for others?
+learn: Service means helping others without expecting anything back.
+learn: It can be big or small: carrying a neighbour's shopping, coaching younger kids, cooking dinner for your family.
+learn: Serving others builds character and connects you to the people around you.
+try: Coaching a younger kids' team :: mcq | Which is an example of service? | Helping a neighbour carry their shopping* | Charging a friend to help them | Waiting to be asked
+play: tap | Tap the acts of service | 🛒:yes:Carrying someone's shopping; 🍲:yes:Cooking dinner for the family; 🧹:yes:Cleaning up a park; 🎮:no; 📱:no
+check: tf | Service means helping without expecting a reward. | true
+check: mcq | Which is a way to serve your family? | Doing a job before anyone asks* | Only doing it when paid | Doing the bare minimum
+check: mcq | Service helps you… | build character and connection* | get famous | get out of other work
+home: Do one act of service this week that nobody asked for.
+skill: service
+
+@lesson 5.3 | Gratitude in action | 💌 | home
+hook: Saying thanks is good. Showing it is even better. How?
+learn: Gratitude can be shown through actions: a handwritten note, helping someone back, giving your time.
+learn: A gratitude letter tells someone exactly what they did and how it helped you.
+learn: Showing gratitude strengthens relationships.
+try: "Thanks for driving me to every training this season. It meant I never missed one." :: mcq | Which is the strongest thank you? | A note saying exactly how they helped you* | A quick "thx" | Nothing, they know
+play: order | Write a gratitude letter | Pick someone who's helped you; Write what they did; Say how it helped you; Give it to them
+check: tf | Showing gratitude through actions can strengthen relationships. | true
+check: mcq | Which shows gratitude through action? | Helping Mum after she helped you* | Expecting more help | Forgetting about it
+check: mcq | A gratitude letter should be… | specific about what they did* | as short as possible | all about you
+home: Write a gratitude letter to someone who's helped you, and give it to them.
+skill: gratitude-action
+
+@lesson 5.4 | Leading by example | 🧭 | home
+hook: Younger kids are watching you. What are they learning?
+learn: Leading by example means acting the way you want others to act.
+learn: Younger brothers, sisters and cousins copy older kids: how you speak, work and treat people.
+learn: You don't need a title to be a leader. Doing the right thing again and again is leadership.
+try: Tidying up first so others follow :: mcq | Which is leading by example? | Being on time and working hard yourself* | Telling others to work while you rest | Waiting to be made captain
+play: sort | Leads by example, Doesn't | Doing your share without complaining=Leads by example; Cutting corners when nobody's watching=Doesn't; Speaking kindly to younger kids=Leads by example; Breaking rules you expect others to follow=Doesn't; Owning your mistakes=Leads by example | Which is it?
+check: tf | You need a title to be a leader. | false | Anyone can lead by example.
+check: mcq | Younger kids are most likely to copy… | what you do* | what you say but don't do | nothing
+check: mcq | Leading with consistency means… | doing the right thing again and again* | doing it once | only doing it when watched
+home: Choose one way to set a good example for a younger family member this week.
+skill: leading-example
