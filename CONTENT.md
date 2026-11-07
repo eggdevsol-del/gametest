@@ -32,7 +32,7 @@ Kids 16 and over use the Makers band. Chorecast isn't made for older teens.
 
 Subjects grow every month. Each month's drop adds whole units to every live subject in all three bands, numbered on from the last one, so a year of lessons builds up a month at a time. A unit has 4 lessons, except Money Sense's first 8 units, which have 6. The checker fails if a unit has the wrong number of lessons or the units skip a number. Lessons in a unit open one at a time, and a unit opens once every lesson in the unit before it is passed. Each finished unit also has a unit challenge.
 
-A month's drop is 15 units in each band (60 lessons): Maths 4, English 3, Science 3, Strong Mind 2, and one each of Healthy Body, Good Character and Money Sense. Kids get 2 new lessons a day unless a grown-up changes it (`perDay`), so a month's drop lasts a month.
+A month's drop is 15 units in each band (60 lessons): Maths 4, English 3, Science 3, Strong Mind 2, and one each of Healthy Body, Good Character and Money Sense. Kids can start as many new lessons a day as they like, unless a grown-up sets a cap (`perDay`), so drops are written well ahead of the fastest kid.
 
 ## What lessons cover
 
@@ -83,7 +83,8 @@ skill: coins
 - `try:` is a worked example, then `::`, then a practice question.
 - `play:` is the lesson's main game.
 - `check:` lines are the quiz. Use at least 2.
-- Passing takes 80% of a lesson's points, and every answer counts: each `try:` and `check:` question is worth 1 point and the `play:` game 3 (scaled by its score and rounded). A lesson with a game and 3 quiz questions needs 5 of 6 points, so one slip still passes. `guess:` never counts.
+- A lesson is scored as a whole, shown to kids as a percentage: every `try:` and `check:` question is worth 1 point and the `play:` game 3 (scaled by its score and rounded), and 80% or more passes. 95% or more is a top score: the third star and a little bonus XP. `guess:` never counts. A kid who doesn't reach 80% can practise just the questions they missed, and their right answers are kept.
+- A lesson with 16 or more scored items is split into even rounds of up to 12, with a checkpoint after each round where progress is saved, so a long lesson can be finished over more than one sitting.
 - `home:` is a take-home activity for the family.
 - `skill:` is a short tag. It ties together spaced review, parent reports and "Needs a hand".
 - `mins:` is optional, giving the expected minutes.

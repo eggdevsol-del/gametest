@@ -41,7 +41,7 @@ function checkItem(it, where) {
     case 'gap': if (!it.a) bad('no answer'); if (!it.q.includes('_')) bad('no _ blank'); if (it.opts && !it.opts.includes(it.a)) bad('answer missing from choices'); { const v = sumOf(it.q), a = numOf(it.a); if (v != null && a != null && Math.abs(v - a) > 1e-9) bad(`"${it.q}" works out to ${+v.toFixed(4)}, not ${it.a}`); } break;
     case 'sort': if (it.bins.length < 2) bad('needs 2+ bins'); it.items.forEach(x => { if (!it.bins.includes(x.b)) bad(`"${x.t}" goes to unknown bin "${x.b}"`); }); break;
     case 'order': case 'build': if (it.steps.length < 3) bad('needs 3+ steps'); break;
-    case 'match': case 'route': if (it.pairs.length < 3) bad('needs 3+ pairs'); it.pairs.forEach(p => { if (!p[0] || !p[1]) bad(`broken pair "${p.join('=')}"`); }); break;
+    case 'match': case 'route': if (it.pairs.length < 3) bad('needs 3+ pairs'); it.pairs.forEach(p => { if (!p[0] || !p[1]) bad(`broken pair "${p.join('=')}"`); else if (p[1].includes('=')) bad(`pair "${p.join('=')}" has more than one = (pairs split on the first one)`); }); break;
     case 'slider': if (!(it.min < it.max) || it.a < it.min || it.a > it.max) bad('answer outside the range'); break;
     case 'price': if (it.products.length < 2 || it.products.some(p => !(p.cost > 0 && p.qty > 0))) bad('products need name:cost:qty:unit'); break;
     case 'scam': if (it.msgs.length < 3) bad('needs 3+ messages'); break;

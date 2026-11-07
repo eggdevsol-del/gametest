@@ -65,7 +65,7 @@ function viewHubSky(kid) {
   const crownTiles = crowns.map(({ u, tree }) => tile('challenge', u.id, QUICK_HUE.crown, '🏆', `${esc(tree.name)} crown`, esc(local(u.title)), `+${XP.challenge} XP`));
   const lessonsCard = sug.length || crowns.length ? `<section class="card glass"><header class="card-h"><span class="dot" style="background:#5AC8FA"></span><span class="card-t">${sug.length ? 'Lessons for you' : 'Unit crowns'}</span><span class="card-r">${sug.length || crowns.length} ready</span></header>
       <div class="tiles">${(sug.length ? lessonTiles : crownTiles).join('')}</div>
-      <p class="card-foot">${room ? `A new lesson pays up to ${XP.lesson + XP.perfect} XP: ${XP.lesson} for passing and ${XP.perfect} more if every answer is right.` : `You’ve earned all ${XP.dayCap} learning XP for today. Lessons still grow your tree, and the XP starts again tomorrow.`}</p></section>` : '';
+      <p class="card-foot">${room ? `A new lesson pays up to ${XP.lesson + XP.perfect} XP: ${XP.lesson} for passing and ${XP.perfect} more for a top score of 95% or more.` : `You’ve earned all ${XP.dayCap} learning XP for today. Lessons still grow your tree, and the XP starts again tomorrow.`}</p></section>` : '';
 
   const quick = [
     due ? tile('review', '', QUICK_HUE.review, '🔁', 'A few minutes', `${due} review${due === 1 ? '' : 's'} due`, `+${Math.min(due, 8) * XP.card} XP`) : '',

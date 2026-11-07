@@ -11,7 +11,6 @@ function finish() {
   const qidOf = (s, i) => s.qid || s.card || (l ? `${l.id}#${s.i}` : R.mode === 'case' ? `case:${R.cs.id}#${s.i}` : `${R.mode}#${i}`);
   const answers = R.steps.map((s, i) => (s.kind === 'check' && R.res[i] ? { q: qidOf(s, i), ok: !!R.res[i].ok, skill: s.skill || (l && l.skill) || '', text: s.item.q || '' } : null)).filter(Boolean);
   const right = answers.filter(a => a.ok).length, total = answers.length, acc = total ? right / total : 1;
-  const playRes = R.res.find((r, i) => r && R.steps[i].kind === 'play'), playScore = playRes ? playRes.score : 1;
   const patch = { day: { ...day, ms: (day.ms || 0) + ms } }, out = { mode: R.mode, right, total, acc };
   // Each source of XP is a row on the results screen
   let xp = 0; const rows = [], add = (label, n) => { if (n > 0) { rows.push([label, n]); xp += n; } };
@@ -23,12 +22,14 @@ function finish() {
   if (Object.keys(wrong).length) patch.wrong = wrong;
 
   if (R.mode === 'lesson') {
-    // Every answer counts: practice questions, the game (3 points) and the quiz. 80% of the points passes.
-    const P = runPoints(R), score = P.total ? P.got / P.total : 1;
-    const allRight = answers.every(a => a.ok) && R.steps.every((s, i) => s.kind !== 'try' || (R.res[i] && R.res[i].ok));
-    const prev = (g.done || {})[l.id], was = prev && prev.best >= 0.8, pass = score >= 0.8, stars = pass ? (allRight && playScore >= 0.8 ? 3 : 2) : 1;
+    // Every answer counts: practice questions, the games (3 points each) and the quiz. 80% of the points passes. A
+    // practice run of missed questions is scored as the whole lesson, with the first try's right answers kept.
+    const S = R.retry ? mergeRetry(R) : R, P = runPoints(S), score = P.total ? P.got / P.total : 1;
+    const allRight = S.steps.every((s, i) => !stepWorth(s) || (S.res[i] && stepPoints(s, S.res[i]) >= stepWorth(s)));
+    const sPlay = S.res.find((r, i) => r && S.steps[i].kind === 'play');
+    const prev = (g.done || {})[l.id], was = prev && prev.best >= 0.8, pass = score >= 0.8, stars = pass ? (score >= TOP - 1e-9 ? 3 : 2) : 1;
     Object.assign(out, { right: P.got, total: P.total, acc: score, points: true, allRight });
-    if (pass && !was) { add('Lesson passed', XP.lesson); if (allRight) add('Every answer right', XP.perfect); } else if (pass) add('Practice round', XP.replay);
+    if (pass && !was) { add('Lesson passed', XP.lesson); if (score >= TOP - 1e-9) add('Top score (95% or more)', XP.perfect); } else if (pass) add('Practice round', XP.replay);
     const as = (g.assigned || []).find(a => a.id === l.id); if (pass && as) { add('Bonus from a grown-up', Math.min(XP.assignedMax, as.bonus || 0)); patch.assigned = (g.assigned || []).filter(a => a.id !== l.id); }
     patch.done = { [l.id]: { best: Math.max(prev ? prev.best : 0, score), stars: Math.max(prev ? prev.stars : 0, stars), n: (prev ? prev.n : 0) + 1, at: Date.now() } };
     // Today's new lessons (see perDay): a language lesson counts towards its own one a day; an assigned one doesn't count
@@ -37,12 +38,13 @@ function finish() {
     if (pass && !was && !l.lang) { patch.cards = {}; l.checks.forEach((_, i) => { patch.cards[`${l.id}#${i}`] = { b: 1, due: addDays(today(), 1) }; }); }
     const u = packFor(l.tree, l.band).units.find(x => x.n === l.unit), unitDone = pass && u.lessons.every(x => x === l || passed(kid, x.id));
     if (unitDone && !(g.mile || {})[l.tree]) patch.mile = { [l.tree]: today() };
-    Object.assign(out, { pass, stars, first: pass && !was, unitDone, home: l.home, lesson: l, could: was ? XP.replay : XP.lesson, game: playRes ? playScore : null });
+    Object.assign(out, { pass, stars, first: pass && !was, unitDone, home: l.home, lesson: l, could: was ? XP.replay : XP.lesson, game: sPlay ? (sPlay.score != null ? sPlay.score : sPlay.ok ? 1 : 0) : null });
+    if ((g.resume || {})[l.id]) patch.resume = { [l.id]: null }; // finished, so no saved place to come back to
   } else if (R.mode === 'challenge') {
     const prev = (g.units || {})[R.unit.id] || {}, pass = acc >= 0.8;
     if (pass && !(prev.best >= 0.8)) add('Unit challenge passed', XP.challenge);
     patch.units = { [R.unit.id]: { best: Math.max(prev.best || 0, acc), at: Date.now() } };
-    Object.assign(out, { pass, stars: pass ? (acc === 1 ? 3 : 2) : 1, unit: R.unit, crown: pass && !(prev.best >= 0.8) });
+    Object.assign(out, { pass, stars: pass ? (acc >= TOP - 1e-9 ? 3 : 2) : 1, unit: R.unit, crown: pass && !(prev.best >= 0.8) });
   } else if (R.mode === 'review') {
     const room = Math.max(0, XP.cardsPerDay - (day.cards || 0)), n = Math.min(right, room); add(`${n} card${n === 1 ? '' : 's'} remembered`, n * XP.card); patch.day.cards = (day.cards || 0) + total;
   } else if (R.mode === 'practice') {
@@ -83,26 +85,25 @@ function celebrate(o) {
    The meter fills to the share of answers right while the stars slam in (one for finishing, two at 80%, three for
    every answer right and a good game score), then each source of XP counts up into the big total, and the verdict,
    the kid's XP balance and what's next appear. A tap skips to the end; drawing the screen again shows it finished. */
-const ACC_TH = [0, 0.8, 1];
+const ACC_TH = [0, 0.8, TOP];
 const signed = n => (n < 0 ? '−' : '+') + Math.abs(Math.round(n)).toLocaleString();
 function viewDone(kid) {
   const o = Grow.last, isScored = 'pass' in o, fin = !!o.tally, rows = o.rows || [];
   if (!fin) o.tally = { fast: false, done: false };
-  const head = isScored ? (o.pass ? (o.stars === 3 ? 'Perfect!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', practice: 'Practice done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!', lpart: 'Part 1 done!', lreview: 'Words practised!', lstory: 'Story done!', lplace: 'All set!' }[o.mode] || 'Done!';
+  const head = isScored ? (o.pass ? (o.acc >= 1 ? 'Perfect!' : o.stars === 3 ? 'Top score!' : 'You passed!') : 'Nearly there!') : { review: 'Reviews done!', practice: 'Practice done!', moment: 'Moment done!', echo: 'Thanks for thinking it through!', story: 'Market story done!', case: 'Story complete!', lpart: 'Part 1 done!', lreview: 'Words practised!', lstory: 'Story done!', lplace: 'All set!' }[o.mode] || 'Done!';
   // Kids are told exactly what moving on takes, and whether it's open now
-  const need = passNeed(o.total), opened = o.first && o.lesson && nextIn(kid, o.lesson.tree);
-  const unit = o.points ? 'points' : 'right';
-  const sub = !isScored ? '' : !o.pass ? `You ${o.points ? 'scored' : 'got'} ${o.right} of ${o.total}${o.points ? ' points' : ''}. To ${o.mode === 'challenge' ? 'win the crown' : 'open the next lesson'}, you need ${need} of ${o.total} ${unit} (that’s 80% or more).${o.points ? ' Every answer counts: each question is 1 point and the game 3.' : ''} Tap Try again: practice is how brains grow!${o.could ? ` Passing earns ${o.could} XP.` : ''}`
-    : o.stars === 2 && (o.points ? o.allRight : o.acc === 1) && o.game != null ? 'Every answer right! Score 80% in the game for the third star.' : opened ? 'New skill mastered! The next lesson is open.' : o.first ? 'New skill mastered!' : '';
+  const opened = o.first && o.lesson && nextIn(kid, o.lesson.tree);
+  const sub = !isScored ? '' : !o.pass ? `You scored ${pct(o.acc)}%. To ${o.mode === 'challenge' ? 'win the crown' : 'open the next lesson'}, you need 80% or more. ${o.points ? 'Practise the ones you missed: the answers you got right are kept.' : 'Tap Try again: practice is how brains grow!'}${o.could ? ` Passing earns ${o.could} XP.` : ''}`
+    : o.stars === 2 ? `You scored ${pct(o.acc)}%. Score 95% or more for the third star.` : opened ? 'New skill mastered! The next lesson is open.' : o.first ? 'New skill mastered!' : '';
   const bal = C.xpOf ? C.xpOf(kid).left : 0, day = dayInfo(kid), nx = o.lesson && o.lesson.lang ? nextIn(kid, o.lesson.tree) : suggestions(kid, 1)[0], sub2 = o.part1 ? 'Part 2 has the rest of the words and the questions.' : o.placedFrom ? `You start at unit ${o.placedFrom}. The units before it are counted as learned, and their words come back in your practice.` : '';
-  say(isScored && !o.pass ? `So close! You need ${need} of ${o.total} ${unit}. Tap Try again.` : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : opened ? 'Great work! The next lesson is open.' : 'Great work!');
+  say(isScored && !o.pass ? `So close! You scored ${pct(o.acc)}%, and you need 80%.` : o.lvlUp ? `Level ${o.lvlUp}! You’re growing fast.` : opened ? 'Great work! The next lesson is open.' : 'Great work!');
   if (PlantView.ok && Grow.run) plantFor(kid, Grow.run, Grow.run.steps[Grow.run.k], o.first ? o.lesson.id : null);
   else if (Grow.stage) Grow.stage.show('done', { stars: isScored ? o.stars : 3, pass: o.pass !== false, quiet: true });
   ui.innerHTML = `<div class="gw-pad gw-done"><div class="gw-res" data-g="tallySkip">
     ${isScored ? `<div class="rstars" role="img" aria-label="${o.stars} of 3 stars">${[1, 2, 3].map(n => `<span class="rstar ${fin && n <= o.stars ? 'on' : ''}" data-star="${n}">${C.STAR_SOCK}${C.starGold('g' + n)}</span>`).join('')}</div>` : ''}
     <div class="res-score num" data-total>${fin ? signed(o.xp) : '+0'}</div><div class="res-lbl">XP earned</div>
     ${o.total ? `<div class="res-meter" aria-hidden="true"><i data-fill style="width:${fin ? o.acc * 100 : 0}%"></i>${isScored ? ACC_TH.slice(1).map((t, i) => `<span class="res-notch ${fin && i + 2 <= o.stars ? 'on' : ''}" data-notch="${i + 2}" style="left:${t * 100}%">${C.STAR_SOCK}</span>`).join('') : ''}</div>
-      <p class="gw-acc"><b class="num" data-right>${fin ? o.right : 0}</b> of ${o.total} ${o.points ? 'points' : 'right'}</p>` : ''}
+      <p class="gw-acc"><b class="num" data-pct>${fin ? pct(o.acc) : 0}%</b> · <span class="num" data-right>${fin ? o.right : 0}</span> of ${o.total} ${o.points ? 'points' : 'right'}</p>` : ''}
     <p class="res-verdict" data-verdict>${fin ? head : ''}</p>
     ${rows.length ? `<div class="res-rows">${rows.map(([lb, v], i) => `<div class="res-row ${fin ? 'done' : ''} ${v < 0 ? 'minus' : ''}" data-row="${i}"><span>${esc(lb)}</span><b class="num">${fin ? signed(v) : '+0'}</b></div>`).join('')}</div>` : ''}
     </div>
@@ -115,13 +116,13 @@ function viewDone(kid) {
     ${o.first && o.lesson && !o.lesson.lang && treeStats(kid, o.lesson.tree).done === treeStats(kid, o.lesson.tree).total ? `<div class="gw-banner title">🌸 Every lesson done! Go back to your plant to watch it bloom.</div>` : ''}
     ${o.newTitle ? `<div class="gw-banner title">🎖️ New title: ${esc(o.newTitle)}</div>` : ''}
     ${o.home && o.pass ? `<div class="gw-homecard"><b>Take it home</b><p>${esc(local(o.home))}</p><button class="g-go ghost" data-g="homeDone">I’ll try it</button></div>` : ''}
-    <div class="gw-actions">${isScored && !o.pass ? `<button class="g-go" data-g="retry">Try again</button>` : o.part1 ? `<button class="g-go" data-g="lesson" data-id="${o.lesson.id}">Part 2 now</button>` : o.mode === 'practice' ? `<button class="g-go" data-g="mpractice">Another ${PRACTICE_N}</button>` : !nx && o.first && restOfDay(kid) ? `<p class="gw-p">🌙 That’s today’s ${perDay()} new lessons. More open tomorrow, and maths practice is open now.</p><button class="g-go" data-g="mpractice">Maths practice</button>` : nx && (o.mode === 'lesson' || o.mode === 'lpart') ? `<button class="g-go" data-g="lesson" data-id="${nx.id}">Next: ${esc(local(nx.title))}</button>` : ''}
+    <div class="gw-actions">${isScored && !o.pass ? (o.points ? `<button class="g-go" data-g="retryMissed">Practise the ones you missed</button><button class="g-go ghost" data-g="retry">Start the lesson again</button>` : `<button class="g-go" data-g="retry">Try again</button>`) : o.part1 ? `<button class="g-go" data-g="lesson" data-id="${o.lesson.id}">Part 2 now</button>` : o.mode === 'practice' ? `<button class="g-go" data-g="mpractice">Another ${PRACTICE_N}</button>` : !nx && o.first && restOfDay(kid) ? `<p class="gw-p">🌙 That’s today’s ${perDay()} new lessons. More open tomorrow, and maths practice is open now.</p><button class="g-go" data-g="mpractice">Maths practice</button>` : nx && (o.mode === 'lesson' || o.mode === 'lpart') ? `<button class="g-go" data-g="lesson" data-id="${nx.id}">Next: ${esc(local(nx.title))}</button>` : ''}
       <button class="g-go ghost" data-g="${Grow.tree ? 'toTree' : 'toHub'}">${Grow.tree ? `Back to ${esc(subject(Grow.tree).name)}` : 'Back to my skill trees'}</button></div></div></div>`;
   if (fin) o.tally.done = true; else runTally(o, ui.querySelector('.gw-done'), head);
 }
 async function runTally(o, el, head) {
   const T0 = o.tally, rows = o.rows || [], stars = 'pass' in o ? o.stars : 0;
-  const $t = el.querySelector('[data-total]'), $f = el.querySelector('[data-fill]'), $n = el.querySelector('[data-right]');
+  const $t = el.querySelector('[data-total]'), $f = el.querySelector('[data-fill]'), $n = el.querySelector('[data-right]'), $p = el.querySelector('[data-pct]');
   const alive = () => Grow.open && Grow.view === 'done' && Grow.last === o && o.tally === T0 && el.isConnected, fast = () => T0.fast || reduced;
   // Counts from 0 to 1 over dur ms with an ease-out, ticking as it goes; at once when skipped.
   const run = (dur, fn) => new Promise(res => {
@@ -144,7 +145,7 @@ async function runTally(o, el, head) {
   const want = k => { if (k <= queued) return; queued = k; chain = chain.then(() => { if (alive()) earn(k); return sleep(fast() ? 120 : 330); }); };
   const reach = m => { for (let k = queued + 1; k <= stars && m >= ACC_TH[k - 1] - 1e-9; k++) want(k); };
   Sound.whoosh(); await sleep(fast() ? 0 : 450); if (!alive()) return;
-  if ($f) await run(clamp(o.total * 140, 500, 1100), e => { const m = o.acc * e; $f.style.width = m * 100 + '%'; $n.textContent = Math.round(o.right * e); reach(m); });
+  if ($f) await run(clamp(o.total * 140, 500, 1100), e => { const m = o.acc * e; $f.style.width = m * 100 + '%'; $n.textContent = Math.round(o.right * e); if ($p) $p.textContent = `${Math.round(m * 100)}%`; reach(m); });
   for (let k = queued + 1; k <= stars; k++) want(k);
   await chain; if (!alive()) return;
   let total = 0;
@@ -233,7 +234,11 @@ function onClick(e) {
     case 'decide': return decide(+a.dataset.i);
     case 'finish': return finish();
     case 'tallySkip': if (Grow.last && Grow.last.tally) Grow.last.tally.fast = true; return;
-    case 'retry': { const o = Grow.last; if (o.lesson) startLesson(kid, o.lesson); else if (o.unit) startChallenge(kid, o.unit.id); return; }
+    case 'retry': { const o = Grow.last; if (o.lesson) { Grow.freshStart = true; startLesson(kid, o.lesson); } else if (o.unit) startChallenge(kid, o.unit.id); return; }
+    case 'retryMissed': return startRetry(kid);
+    case 'saveStop': saveResume(kid, Grow.run); C.toast('Saved! Pick up where you left off any time.'); Grow.run.welcome = true; return back();
+    case 'resumeGo': Grow.run.welcome = false; Sound.go(); return render();
+    case 'resumeRestart': { const l = Grow.run.lesson; save(kid, { resume: { [l.id]: null } }); Grow.freshStart = true; return startLesson(kid, l); }
     case 'homeDone': a.disabled = true; a.textContent = 'Great! We’ll ask how it went.'; onEvent(kid, 'home', { title: local(Grow.last.lesson.title), skill: Grow.last.lesson.skill }); return;
     case 'toTree': Grow.view = isLang(Grow.tree) ? 'lang' : 'tree'; Grow.run = null; return render();
     case 'toHub': Grow.view = 'hub'; Grow.tree = null; Grow.run = null; return render();
@@ -305,5 +310,5 @@ window.Growth = {
   mastered: kid => mastered(kid),
   parentView: () => parentView(), resetParent: () => { if (Grow.parent) Grow.parent.msg = ''; },
   ready: () => C.scheduleRender(),
-  _debug: { Packs, TREES, LANGS, LANG_LIVE, get maths() { return MATHS; }, GEN_KINDS: Object.keys(GEN), get pace() { return { perDay, newLeft, suggestions, lessonsLeft, restOfDay, langNewLeft }; }, get pick() { return { kidLangs, langPickable }; }, get lang() { return { langSteps, lcNew, lcAnswer, lcCards, lcDue, cardItem: cardItem2, Dict, LBOX }; }, get run() { return Grow.run; }, get view() { return Grow.view; }, parsePack, parseMoments, parseCases, loadBand, loadExtras, allLessons, lessonById, get Moments() { return Moments; }, get Cases() { return Cases; } },
+  _debug: { Packs, TREES, LANGS, LANG_LIVE, get maths() { return MATHS; }, GEN_KINDS: Object.keys(GEN), get pace() { return { perDay, newLeft, suggestions, lessonsLeft, restOfDay, langNewLeft, addRounds, mergeRetry, runPoints, stepWorth, pct, ROUND_SIZE, ROUND_MIN }; }, get pick() { return { kidLangs, langPickable }; }, get lang() { return { langSteps, lcNew, lcAnswer, lcCards, lcDue, cardItem: cardItem2, Dict, LBOX }; }, get run() { return Grow.run; }, get view() { return Grow.view; }, parsePack, parseMoments, parseCases, loadBand, loadExtras, allLessons, lessonById, get Moments() { return Moments; }, get Cases() { return Cases; } },
 };

@@ -27,9 +27,10 @@ const kidLangs = kid => langOn().filter(L => { const v = langSet(kid)[L.id]; ret
 const langPickable = kid => langOn().filter(L => langSet(kid)[L.id] !== false);
 // What a kid hears when they try a course before picking it: hello, and what it means
 const LANG_HI = { mi: ['Kia ora!', 'Hello!'], es: ['¡Hola!', 'Hello!'], zh: ['你好！', 'Hello! (nǐ hǎo)'], ja: ['こんにちは！', 'Hello! (konnichiwa)'] };
-// One new lesson a day in a language, after that day's words to practise. Finishing part 2 of a lesson started
-// yesterday doesn't count as starting a new one.
-const langNewLeft = kid => Math.max(0, 1 - (dayInfo(kid).ll || 0));
+// New language lessons follow the family's new-lessons-a-day cap (none unless a grown-up sets one), counted on their
+// own tally, and always after that day's words to practise. Finishing part 2 of a lesson started yesterday doesn't
+// count as starting a new one.
+const langNewLeft = kid => Math.max(0, perDay() - (dayInfo(kid).ll || 0));
 const speakOn = () => GSET().speak !== false;
 
 /* ---------- Voices and recordings ---------- */
@@ -398,9 +399,10 @@ function startLangLesson(kid, l, mode, quick) {
   if (gate === 'due') { C.toast('First, your words to practise. Then the new lesson opens.'); return startLangReview(kid, l.lang); }
   if (gate === 'slow') { C.toast('Let’s practise the words you know before adding new ones.'); return startLangReview(kid, l.lang, true); }
   const started = ((((prog(kid).lang || {})[l.lang] || {}).part) || {})[l.id];
-  if (mode === 'lesson' && !quick && !passed(kid, l.id) && !started && !langNewLeft(kid)) { C.track('growth.limit', { kind: 'lang', lang: l.lang }, kid.id); return C.toast(`That’s today’s new ${LANG[l.lang].name} lesson done! Your next one opens tomorrow. You can still play the ones you’ve done.`); }
-  const part =partOne(kid, l) ? 1 : bandOf(kid) === 'sprouts' && l.words.length > 3 && !passed(kid, l.id) ? 2 : 0;
+  if (mode === 'lesson' && !quick && !passed(kid, l.id) && !started && !langNewLeft(kid)) { C.track('growth.limit', { kind: 'lang', lang: l.lang }, kid.id); return C.toast(`That’s today’s new ${LANG[l.lang].name} lessons done! More open tomorrow. You can still play the ones you’ve done.`); }
+  const part = partOne(kid, l) ? 1 : bandOf(kid) === 'sprouts' && l.words.length > 3 && !passed(kid, l.id) ? 2 : 0;
   Grow.run = { mode: part === 1 ? 'lpart' : mode, kid: kid.id, lesson: l, tree: l.tree, lang: l.lang, part, quick: !!quick, steps: langSteps(kid, l, part, quick), k: 0, res: [], t0: Date.now() };
+  if (Grow.run.mode === 'lesson' && !quick) { Grow.run.steps = addRounds(Grow.run.steps); resumeRun(kid, Grow.run); }
   Grow.view = 'lesson'; Sound.go(); render();
 }
 function startLangReview(kid, lang, weak) {
@@ -498,7 +500,7 @@ function viewLang(kid, L) {
     <div class="gw-pad gw-path l-path" style="--th:${L.hue}">
       <div class="gw-tiles">
         ${due ? `<button class="gw-tile" data-g="lpractice" data-id="${L.id}"><span class="gt-ic">🔁</span><span><b>${due} word${due === 1 ? '' : 's'} to practise</b><small>Do these first, then new words open</small></span></button>` : ''}
-        ${nx && !due && !langNewLeft(kid) && !((lp.part || {})[nx.id]) ? `<div class="gw-tile l-wait"><span class="gt-ic">🌙</span><span><b>Today’s new lesson is done</b><small>“${esc(local(nx.title))}” opens tomorrow. New words stick better after a sleep.</small></span></div>` : ''}
+        ${nx && !due && !langNewLeft(kid) && !((lp.part || {})[nx.id]) ? `<div class="gw-tile l-wait"><span class="gt-ic">🌙</span><span><b>Today’s new lessons are done</b><small>“${esc(local(nx.title))}” opens tomorrow. New words stick better after a sleep.</small></span></div>` : ''}
         ${!st.done && !lp.placed ? `<button class="gw-tile" data-g="lplace" data-id="${L.id}"><span class="gt-ic">🧭</span><span><b>Already know some?</b><small>A quick check finds where to start</small></span></button>` : ''}
         ${band === 'makers' && nx && !passed(kid, nx.id) ? `<button class="gw-tile" data-g="lquick" data-id="${nx.id}"><span class="gt-ic">⚡</span><span><b>Know “${esc(local(nx.title))}”?</b><small>Pass its questions to skip ahead</small></span></button>` : ''}
         ${st.total && st.done === st.total && next ? `<button class="gw-tile" data-g="lnext" data-id="${L.id}"><span class="gt-ic">🚀</span><span><b>Start ${esc(L.levels[s] || `stage ${s + 1}`)}</b><small>You finished ${esc(L.levels[s - 1] || `stage ${s}`)}!</small></span></button>` : ''}

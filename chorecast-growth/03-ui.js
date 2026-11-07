@@ -3,8 +3,8 @@
    A full-screen overlay above the app: a 3D stage with the kid's guide, and beside or below it the skill
    trees, a tree's path of lessons, or the lesson being played. */
 const Grow = { open: false, kidId: null, view: 'hub', tree: null, run: null, stage: null, need: 0, sessionAt: 0, breakShown: false, cleanup: [] };
-const BEATS = ['Hook', 'Guess', 'Learn', 'Try', 'Play', 'Check', 'Home'];
-const BEAT_OF = { hook: 0, guess: 1, learn: 2, word: 2, rule: 2, chant: 2, line: 2, part: 6, try: 3, play: 4, check: 5, home: 6 };
+const BEATS = ['Hook', 'Guess', 'Learn', 'Try', 'Play', 'Check', 'Home', 'Checkpoint'];
+const BEAT_OF = { hook: 0, guess: 1, learn: 2, word: 2, rule: 2, chant: 2, line: 2, part: 6, try: 3, play: 4, check: 5, home: 6, round: 7 };
 const kidNow = () => Store.kids[Grow.kidId] || null;
 let root = null, ui = null;
 
@@ -43,6 +43,7 @@ function close() {
   C.scheduleRender();
 }
 function back() {
+  if (Grow.view === 'lesson' && Grow.run && !Grow.run.welcome) saveResume(kidNow(), Grow.run);
   if (Grow.view === 'lesson' || Grow.view === 'done' || Grow.view === 'case' || Grow.view === 'challenge' || (Grow.run && Grow.run.lang)) { lcFlush(); Grow.cleanup.splice(0).forEach(f => f()); Grow.view = Grow.tree ? (isLang(Grow.tree) ? 'lang' : 'tree') : 'hub'; Grow.run = null; return render(); }
   if (Grow.view !== 'hub' && Grow.view !== 'guide') { Grow.view = 'hub'; Grow.tree = null; return render(); }
   close();
@@ -161,7 +162,7 @@ function viewHub(kid) {
       <section class="gw-me"><div class="gw-lvl"><b class="num">${lvl}</b><small>Level</small></div><div class="gw-me-t"><b>${m} skill${m === 1 ? '' : 's'} mastered</b><small>${t.length ? t.map(esc).join(' · ') : 'Master 4 lessons in a tree to earn its title'}</small>${minutesToday(kid) ? `<small>${minutesToday(kid)} minute${minutesToday(kid) === 1 ? '' : 's'} of learning today</small>` : ''}</div></section>
       ${!sug.length && !Grow.need ? (restOfDay(kid) ? doneDayCard(kid) : allDoneCard(kid)) : ''}
       ${prizeStrip(kid)}
-      ${Grow.need || sug.length ? `<div class="gw-need">${ic('sparkle')} ${(() => { const room = Math.max(0, XP.dayCap - dayInfo(kid).xp); return room ? `A new lesson pays up to ${XP.lesson + XP.perfect} XP: ${XP.lesson} for passing and ${XP.perfect} more if every answer is right. ${room} of ${XP.dayCap} learning XP left today.` : `You’ve earned all ${XP.dayCap} learning XP for today. Lessons still grow your tree, and the XP starts again tomorrow.`; })()}</div>` : ''}
+      ${Grow.need || sug.length ? `<div class="gw-need">${ic('sparkle')} ${(() => { const room = Math.max(0, XP.dayCap - dayInfo(kid).xp); return room ? `A new lesson pays up to ${XP.lesson + XP.perfect} XP: ${XP.lesson} for passing and ${XP.perfect} more for a top score of 95% or more. ${room} of ${XP.dayCap} learning XP left today.` : `You’ve earned all ${XP.dayCap} learning XP for today. Lessons still grow your tree, and the XP starts again tomorrow.`; })()}</div>` : ''}
       ${sug.length ? `<h2 class="gw-h2">Pick your next lesson</h2><div class="gw-pick">${sug.map((l, i) => { const tr = TREE[l.tree], as = (g.assigned || []).find(a => a.id === l.id); return `<button class="gw-lcard ${i === 0 ? 'main' : ''}" style="--th:${tr.hue}" data-g="lesson" data-id="${l.id}"><span class="lc-ic">${esc(l.icon)}</span><span class="lc-t"><small>${esc(tr.name)} · Unit ${l.unit}</small><b>${esc(local(l.title))}</b><em>${xpWords(kid, l)}${as ? ` · from a grown-up${as.bonus ? `, +${as.bonus} XP bonus` : ''}` : ''}</em></span><span class="lc-go">${ic('play')}</span></button>`; }).join('')}</div>` : ''}
       <div class="gw-tiles">
         ${due ? tile('review', '🔁', `${due} review${due === 1 ? '' : 's'} due`, 'Quick questions so you remember') : ''}
@@ -241,8 +242,57 @@ function startLesson(kid, l, mode = 'lesson') {
   if (l.play) steps.push({ kind: 'play', item: l.play });
   l.checks.forEach((item, i) => steps.push({ kind: 'check', item, i }));
   steps.push({ kind: 'home' });
-  Grow.run = { mode, kid: kid.id, lesson: l, tree: l.tree, steps, k: 0, res: [], t0: Date.now() };
+  Grow.run = { mode, kid: kid.id, lesson: l, tree: l.tree, steps: mode === 'lesson' ? addRounds(steps) : steps, k: 0, res: [], t0: Date.now() };
+  if (mode === 'lesson') resumeRun(kid, Grow.run);
   Grow.view = 'lesson'; Sound.go(); render();
+}
+/* ---------- Long lessons: rounds, save points and practising what you missed ----------
+   A lesson with ROUND_MIN or more scored questions and games is split into rounds of at most ROUND_SIZE, as even as
+   possible (25 becomes 9, 9 and 7, never 12, 12 and 1), with a checkpoint
+   after each: how the kid is going, and a choice to keep going or stop for now. Progress is saved at every
+   checkpoint and whenever the kid leaves mid-lesson (growth doc `resume`, by lesson id), and coming back offers to
+   keep going or start again. Saved progress is dropped after RESUME_DAYS or once the lesson is finished. */
+const ROUND_SIZE = 12, ROUND_MIN = 16, RESUME_DAYS = 14;
+function addRounds(steps) {
+  const scored = steps.filter(s => stepWorth(s)).length; if (scored < ROUND_MIN) return steps;
+  const of = Math.ceil(scored / ROUND_SIZE), size = Math.ceil(scored / of), out = []; let seen = 0, n = 0;
+  steps.forEach(s => { out.push(s); if (stepWorth(s) && ++seen % size === 0 && seen < scored) out.push({ kind: 'round', n: ++n, of }); });
+  return out;
+}
+const roundsOf = R => (R.steps.find(s => s.kind === 'round') || {}).of || 1;
+const roundAt = R => 1 + R.steps.slice(0, R.k).filter(s => s.kind === 'round').length;
+// The whole lesson's score so far: a practice run of missed questions counts on top of the first try's right answers
+function lessonScore(R) { return runPoints(R.retry ? mergeRetry(R) : R); }
+function saveResume(kid, R) {
+  if (!R || R.mode !== 'lesson' || !R.lesson || R.retry || roundsOf(R) < 2) return;
+  const from = R.steps[R.k] && (R.steps[R.k].kind === 'round' || R.res[R.k]) ? R.k + 1 : R.k; if (from <= 0 || from >= R.steps.length) return;
+  const old = prog(kid).resume || {}, gone = Object.keys(old).filter(id => id !== R.lesson.id && old[id] && Date.now() - old[id].at > RESUME_DAYS * 864e5);
+  save(kid, { resume: { ...Object.fromEntries(gone.map(id => [id, null])), [R.lesson.id]: { k: from, n: R.steps.length, at: Date.now(), res: R.res.slice(0, from).map(r => (r ? { ok: !!r.ok, score: r.score != null ? r.score : r.ok ? 1 : 0 } : null)) } } });
+}
+function resumeRun(kid, R) {
+  if (Grow.freshStart) { Grow.freshStart = false; return; }
+  const rs = (prog(kid).resume || {})[R.lesson.id];
+  if (!rs || rs.n !== R.steps.length || !(rs.k > 0 && rs.k < R.steps.length) || Date.now() - rs.at > RESUME_DAYS * 864e5) return;
+  R.res = (rs.res || []).map((r, i) => (r ? { ...r, kind: R.steps[i].kind, step: R.steps[i] } : undefined));
+  R.k = rs.k; R.welcome = true;
+}
+// After a lesson that didn't reach 80%, practise only the questions and games that lost points. Right answers from
+// the first try are kept, and the lesson is scored again as a whole once the missed ones are done.
+function startRetry(kid) {
+  const B = Grow.run; if (!B || !B.lesson || B.mode !== 'lesson') return;
+  const base = B.retry ? mergeRetry(B) : { steps: B.steps, res: B.res.slice() }, map = [-1], steps = [];
+  base.steps.forEach((s, i) => { const w = stepWorth(s); if (w && (!base.res[i] || stepPoints(s, base.res[i]) < w)) { map.push(i); steps.push({ ...s }); } });
+  if (!steps.length) return startLesson(kid, B.lesson);
+  steps.unshift({ kind: 'intro', text: `Let’s practise the ${steps.length === 1 ? 'one' : steps.length} you missed. Your right answers are kept, so these are all you need to fix.` });
+  Grow.run = { mode: 'lesson', kid: kid.id, lesson: B.lesson, tree: B.tree, lang: B.lang, steps, k: 0, res: [], t0: Date.now(), retry: { base, map } };
+  C.track('growth.retry', { id: B.lesson.id, missed: steps.length - 1 }, kid.id);
+  Grow.view = 'lesson'; Sound.go(); render();
+}
+// A practice run of missed questions laid over the first try: each re-answered question replaces its first answer,
+// and one not re-answered yet counts as still to do
+function mergeRetry(R) {
+  const res = R.retry.base.res.slice(); R.retry.map.forEach((bi, j) => { if (bi >= 0) res[bi] = R.res[j] || undefined; });
+  return { steps: R.retry.base.steps, res };
 }
 function startChallenge(kid, unitId) {
   const [tree, band, un] = unitId.split('.'), u = packFor(tree, band).units.find(x => x.n === +un);
@@ -289,36 +339,47 @@ function startCase(kid, id) {
 
 function viewRun(kid) {
   const R = Grow.run, step = R.steps[R.k], l = R.lesson, total = R.steps.length;
-  const beat = step.kind === 'decide' ? 'Choose' : step.kind === 'intro' ? 'Ready' : R.mode === 'lesson' || R.mode === 'lpart' ? BEATS[BEAT_OF[step.kind]] : step.kind === 'check' ? (R.mode === 'review' || R.mode === 'lreview' ? 'Review' : R.mode === 'practice' ? (step.title || 'Practice') : 'Question') : step.kind === 'line' ? 'Story' : step.title || 'Read';
+  const beat = R.welcome ? 'Welcome back' : step.kind === 'decide' ? 'Choose' : step.kind === 'intro' ? 'Ready' : R.mode === 'lesson' || R.mode === 'lpart' ? BEATS[BEAT_OF[step.kind]] : step.kind === 'check' ? (R.mode === 'review' || R.mode === 'lreview' ? 'Review' : R.mode === 'practice' ? (step.title || 'Practice') : 'Question') : step.kind === 'line' ? 'Story' : step.title || 'Read';
   const head = `<header class="gw-run-top"><button class="gw-x" data-g="back" aria-label="Stop">${ic('x')}</button><div class="gw-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${R.k + 1}"><i style="width:${(R.k + 1) / total * 100}%"></i></div><span class="gw-beat">${esc(beat)}</span></header>`;
-  const title = l ? `<p class="gw-ltitle">${esc(l.icon)} ${esc(local(langTitle(l)))}</p>` : R.mode === 'challenge' ? `<p class="gw-ltitle">🏆 ${esc(local(R.unit.title))}</p>` : R.mode === 'case' ? `<p class="gw-ltitle">${esc(R.cs.icon)} ${esc(R.cs.name)}</p>` : '';
+  const rounds = R.mode === 'lesson' ? roundsOf(R) : 1, title = l ? `<p class="gw-ltitle">${esc(l.icon)} ${esc(local(langTitle(l)))}${R.retry ? ' · Practising what you missed' : rounds > 1 ? ` · Round ${roundAt(R)} of ${rounds}` : ''}</p>` : R.mode === 'challenge' ? `<p class="gw-ltitle">🏆 ${esc(local(R.unit.title))}</p>` : R.mode === 'case' ? `<p class="gw-ltitle">${esc(R.cs.icon)} ${esc(R.cs.name)}</p>` : '';
   let body = '';
   // Scored runs tell the kid the pass mark up front and on every question, with how they're going
   const q = quizAt(R), scored = q && (R.mode === 'lesson' || R.mode === 'challenge') && !(R.mode === 'lesson' && passed(kid, l.id));
-  const P = R.mode === 'lesson' ? runPoints(R) : null;
-  const goalFor = n => (R.mode === 'challenge' ? `${passGoal(n, true)} to win the crown` : `Get ${P.need} of ${P.total} points to pass and open the next lesson`);
-  if (step.kind === 'hook') {
-    const n = l.checks.length, goal = P && lessonTotal(l) && !passed(kid, l.id) ? `<p class="gw-goal">🎯 Every answer counts: each question is worth 1 point${l.play ? ' and the game 3' : ''}. ${goalFor(n)}${lessonXp(kid, l) > 0 ? `, and earn up to +${lessonXp(kid, l)} XP` : '. Today’s learning XP is full, but your tree still grows'}.</p>` : '';
+  const P = R.mode === 'lesson' ? lessonScore(R) : null;
+  const goalFor = n => (R.mode === 'challenge' ? `${passGoal(n, true)} to win the crown` : 'Score 80% or more to pass and open the next lesson');
+  if (R.welcome) {
+    const sc = P && P.total > P.left ? pct(P.got / (P.total - P.left)) : null;
+    body = `<div class="gw-card hook"><span class="gw-big">👋</span><h2>Welcome back!</h2><p>You’re up to round ${roundAt(R)} of ${rounds}${sc != null ? `, on ${sc}% so far` : ''}. Pick up where you left off?</p><button class="g-go" data-g="resumeGo">Keep going</button><button class="g-go ghost" data-g="resumeRestart">Start again</button></div>`; say('Welcome back!');
+  }
+  else if (step.kind === 'round') {
+    const sc = P && P.total > P.left ? pct(P.got / (P.total - P.left)) : null;
+    saveResume(kid, R);
+    body = `<div class="gw-card hook round"><span class="gw-big">⭐</span><h2>Round ${step.n} of ${step.of} done!</h2><p>${sc != null ? `You’re on ${sc}% so far. ` : ''}Your progress is saved, so you can stop here and come back later.</p><button class="g-go" data-g="next">Keep going</button><button class="g-go ghost" data-g="saveStop">Stop for now</button></div>`;
+    say(sc != null && sc >= 80 ? 'Great round! Keep it up.' : 'Round done! Take a breath, then keep going.'); Sound.coin && Sound.coin();
+  }
+  else if (step.kind === 'hook') {
+    const n = l.checks.length, goal = P && lessonTotal(l) && !passed(kid, l.id) ? `<p class="gw-goal">🎯 Every question and game counts towards your score. ${goalFor(n)}${lessonXp(kid, l) > 0 ? `, and earn up to +${lessonXp(kid, l)} XP` : '. Today’s learning XP is full, but your tree still grows'}.${rounds > 1 ? ` There are ${rounds} rounds, and your progress saves after each one.` : ''}</p>` : '';
     body = `<div class="gw-card hook"><span class="gw-big">${esc(l.icon)}</span><h2>${esc(local(langTitle(l)))}</h2><p>${esc(local(l.hook))}</p>${goal}${speakBtn(l.hook)}<button class="g-go" data-g="next">Let’s go</button></div>`; say(l.hook);
   }
-  else if (step.kind === 'intro') { body = `<div class="gw-card hook"><span class="gw-big">${R.mode === 'lstory' ? '📖' : R.mode === 'lplace' ? '🧭' : '🏆'}</span><p>${esc(step.text)}</p><button class="g-go" data-g="next">Start</button></div>`; say(R.mode === 'challenge' ? 'You’ve got this. No hints this time!' : ''); }
+  else if (step.kind === 'intro') { body = `<div class="gw-card hook"><span class="gw-big">${R.retry ? '🎯' : R.mode === 'lstory' ? '📖' : R.mode === 'lplace' ? '🧭' : '🏆'}</span><p>${esc(step.text)}</p><button class="g-go" data-g="next">Start</button></div>`; say(R.mode === 'challenge' ? 'You’ve got this. No hints this time!' : ''); }
   else if (LSTEPS.includes(step.kind)) body = langBody(kid, step, R);
   else if (step.kind === 'learn') { body = `<div class="gw-card learn">${step.title ? `<h3>${esc(step.title)}</h3>` : ''}${local(step.text).split('\n').map(p => `<p>${esc(p)}</p>`).join('')}${speakBtn(step.text)}<button class="g-go" data-g="next">Next</button></div>`; say(R.mode === 'lesson' ? ['Here’s the idea.', 'Got it?', 'Nearly there!'][Math.min(2, R.k % 3)] : ''); if (Grow.stage) Grow.stage.react('point'); }
   else if (step.kind === 'try') { body = `<div class="gw-card try">${step.ex ? `<div class="gw-ex"><b>Worked example</b><p>${esc(local(step.ex))}</p></div><p class="gw-yt">Now you try:</p>` : ''}<div class="gw-host"></div><div class="gw-fb"></div></div>`; say('Your turn to try one.'); }
   else if (step.kind === 'decide') { body = `<div class="gw-card"><h3>Decision point</h3><p class="gw-p2">${esc(local(step.q))}</p><div class="g-cards col n${step.opts.length}">${step.opts.map((o, i) => `<button class="g-card" style="--d:${i * 70}ms" data-g="decide" data-i="${i}"><span>${esc(local(o.t))}</span></button>`).join('')}</div><div class="gw-fb"></div></div>`; say('What would you do?'); }
   else if (step.kind === 'home') { body = `<div class="gw-card home"><span class="gw-big">🏠</span><h3>Take it home</h3><p>${esc(local(l.home || 'Tell a grown-up one thing you learned today.'))}</p><button class="g-go" data-g="finish">Finish lesson</button></div>`; say('Last bit! Try this at home.'); }
   else {
-    const bar = scored && step.kind === 'check' ? `<div class="gw-qgoal"><b>Question ${q.i} of ${q.n}</b><span>🎯 ${P ? `${P.need} of ${P.total} points to pass · ${P.got} so far` : `${passGoal(q.n, true)} · ${q.right} right so far`}</span></div>` : '';
+    const soFar = P ? (P.total > P.left ? pct(P.got / (P.total - P.left)) : null) : (q && q.done ? pct(q.right / q.done) : null);
+    const bar = scored && step.kind === 'check' ? `<div class="gw-qgoal"><b>Question ${q.i} of ${q.n}</b><span>🎯 80% to pass${soFar != null ? ` · ${soFar}% so far` : ''}</span></div>` : '';
     body = `${bar}<div class="gw-card"><div class="gw-host"></div><div class="gw-fb"></div></div>`;
     say(step.kind === 'guess' ? 'Have a guess! It’s fine to get it wrong.' : step.kind === 'play' ? 'Game time!' : R.mode === 'review' ? `From “${local(step.title || '')}”` : scored && step.kind === 'check' && q.i === 1 ? `Question time! ${goalFor(q.n)}.` : '');
   }
   ui.innerHTML = `${head}<div class="gw-pad gw-runpad">${title}${body}</div>`;
-  if (R.lang) { markLang(ui, R.lang); if (LSTEPS.includes(step.kind)) langAfter(kid, step, R); }
+  if (R.lang) { markLang(ui, R.lang); if (LSTEPS.includes(step.kind) && !R.welcome) langAfter(kid, step, R); }
   if (step.kind === 'learn') holdNext(ui.querySelector('.gw-card.learn [data-g="next"]'), 'learn' + R.k, kid, `${step.title || ''} ${local(step.text)}`);
   if (PlantView.ok) plantFor(kid, R, step);
   else if (Grow.stage) { const [kind, data] = stageFor(step, R) || []; Grow.stage.show(kind, data); }
   const host = ui.querySelector('.gw-host');
-  if (host) {
+  if (host && !R.welcome) {
     const ctx = { kid, mode: step.kind, lang: R.lang || null, cleanup: Grow.cleanup, fx: (e, d) => Grow.stage && Grow.stage.fx(e, d) };
     renderItem(step.item, host, ctx, res => answered(kid, step, res));
     const card = host.closest('.gw-card');
@@ -332,7 +393,7 @@ function viewRun(kid) {
 // were answered right before it (and including it, once it's answered).
 function quizAt(R) {
   const qs = R.steps.map((s, i) => (s.kind === 'check' ? i : -1)).filter(i => i >= 0); if (!qs.length) return null;
-  return { n: qs.length, i: qs.filter(i => i <= R.k).length, right: qs.filter(i => i <= R.k && R.res[i] && R.res[i].ok).length, left: qs.filter(i => i > R.k).length };
+  return { n: qs.length, i: qs.filter(i => i <= R.k).length, right: qs.filter(i => i <= R.k && R.res[i] && R.res[i].ok).length, done: qs.filter(i => i <= R.k && R.res[i]).length, left: qs.filter(i => i > R.k).length };
 }
 /* Explanations (learn cards, why an answer was wrong, what a choice led to) hold their Next button until there's
    been time to read them: about 90 words a minute at 7 to 9, 140 at 10 to 12, and 190 at 13 to 15.
@@ -400,17 +461,17 @@ function answered(kid, step, res) {
   const fb = ui.querySelector('.gw-fb'); if (!fb) return;
   const guess = step.kind === 'guess', grows = PlantView.ok && plantQuiz() && R.mode === 'lesson' && !passed(kid, R.lesson.id);
   const msg = guess ? (res.ok ? 'Great guess!' : 'Good guess. Let’s find out why.') : res.ok ? (grows ? ['Right! Your plant grew.', 'Yes! Up it grows.', 'Nice one. Look at it grow!'] : ['Nice one!', 'Spot on!', 'You got it!', 'Brilliant!'])[Math.floor(Math.random() * (grows ? 3 : 4))] : 'Not quite.';
-  // After a scored answer, say where that leaves the pass: made it, still possible, or not this time. A crown quiz
-  // counts right answers; a lesson counts points from every practice question, the game and the quiz.
+  // After a scored answer, say where that leaves the pass, in percentages: made it (80% is safe even if every
+  // answer left is wrong), still possible, or not this time. A crown quiz counts its questions; a lesson counts points
+  // from every practice question, the game and the quiz.
   const q = step.kind === 'check' && R.mode === 'challenge' ? quizAt(R) : null, need = q ? passNeed(q.n) : 0;
-  const P = R.mode === 'lesson' && stepWorth(step) && !passed(kid, R.lesson.id) ? runPoints(R) : null, pts = P ? stepPoints(step, res) : 0;
-  const s = n => `${n} more point${n === 1 ? '' : 's'}`;
-  const where = P ? (pts && P.got >= P.need && P.got - pts < P.need ? `🎉 That’s ${P.got} of ${P.total} points: you’ve passed!${P.left ? ' Keep going.' : ''}`
-      : P.got + P.left < P.need ? `You need ${P.need} of ${P.total} points to pass. Finish, then tap Try again.`
-      : pts < stepWorth(step) && P.got < P.need ? `You can still pass: get ${s(P.need - P.got)}.` : '')
-    : !q ? '' : res.ok && q.right === need ? `🎉 That’s ${need} right: you’ve won the crown!${q.left ? ' Keep going.' : ''}`
-    : q.right + q.left < need ? `You need ${need} of ${q.n} right for the crown. Finish, then tap Try again.`
-    : !res.ok ? `You can still win: get ${need - q.right} more right.` : '';
+  const P = R.mode === 'lesson' && stepWorth(step) && !passed(kid, R.lesson.id) ? lessonScore(R) : null, pts = P ? stepPoints(step, res) : 0;
+  const where = P ? (pts && P.got >= P.need && P.got - pts < P.need ? `🎉 You’re past 80%: you’ve passed!${P.left ? ' Keep going to raise your score.' : ''}`
+      : P.got + P.left < P.need ? 'You can’t reach 80% this time. Finish, then practise the ones you missed.'
+      : pts < stepWorth(step) && P.got < P.need ? 'You can still reach 80%. Keep going!' : '')
+    : !q ? '' : res.ok && q.right === need ? `🎉 You’re past 80%: you’ve won the crown!${q.left ? ' Keep going.' : ''}`
+    : q.right + q.left < need ? 'You can’t reach 80% this time. Finish, then tap Try again.'
+    : !res.ok ? 'You can still reach 80%. Keep going!' : '';
   const why = !res.ok && res.right && !guess ? res.right : '';
   fb.innerHTML = `<div class="gw-fbin ${res.ok || guess ? 'good' : 'bad'}"><b>${msg}</b>${why ? `<span>${esc(why)}</span>` : ''}</div>${where ? `<p class="gw-fbgoal">${where}</p>` : ''}<button class="g-go" data-g="next">${R.k + 1 >= R.steps.length ? 'Finish' : 'Next'}</button>`;
   if (why || where) holdNext(fb.querySelector('[data-g="next"]'), 'fb' + R.k, kid, `${why ? `${msg} ${why}` : ''} ${where}`);

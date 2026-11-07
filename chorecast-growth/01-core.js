@@ -55,7 +55,7 @@ const BANDS = [
   { id: 'makers', name: 'Makers', ages: '13 to 15', words: 18 },
 ];
 const BAND_IX = Object.fromEntries(BANDS.map((b, i) => [b.id, i]));
-const GSET = () => ({ cap: 20, perDay: 2, off: {}, band: {}, country: 'nz', living: true, readAloud: true, choresFirst: true, ...((S().growth) || {}) });
+const GSET = () => ({ cap: 0, perDay: 0, off: {}, band: {}, country: 'nz', living: true, readAloud: true, choresFirst: true, ...((S().growth) || {}) });
 function bandOf(kid) {
   const age = kid.age || 9, base = age <= 9 ? 0 : age <= 12 ? 1 : 2, shift = GSET().band[kid.id] || 0;
   return BANDS[clamp(base + shift, 0, BANDS.length - 1)].id;
@@ -254,14 +254,17 @@ function lessonById(id) {
 const prog = kid => (Store.growth || {})[kid.id] || {};
 const save = (kid, patch) => C.updDoc('growth', kid.id, patch);
 const passed = (kid, id) => ((prog(kid).done || {})[id] || {}).best >= 0.8;
-// Passing takes 80%. A unit's crown quiz counts its questions ("get N of M right"). A lesson counts every answer in it:
-// each practice and quiz question is worth 1 point and the game 3, scaled by how well it went and rounded, so one
-// slip doesn't sink a lesson. Kids are told it as "get N of M points".
+// Passing takes 80% of everything in a lesson, shown to kids as a percentage, never as a number of answers to get.
+// Every practice question, quiz question and game counts: each question is worth 1 point and a game 3, scaled by how
+// well it went, so one slip doesn't sink a lesson. A unit's crown quiz scores its questions the same way. 95% or more
+// is a top score: the third star and a little bonus XP.
 const passNeed = n => Math.max(1, Math.ceil(n * 0.8 - 1e-9));
-const passGoal = (n, cap) => `${cap ? 'Get' : 'get'} ${passNeed(n)} of ${n} right`;
+const passGoal = (n, cap) => `${cap ? 'Score' : 'score'} 80% or more`;
 const GAME_PTS = 3;
 const lessonTotal = l => l.tries.length + (l.play ? GAME_PTS : 0) + l.checks.length;
-const lessonGoal = (l, cap) => `${cap ? 'Get' : 'get'} ${passNeed(lessonTotal(l))} of ${lessonTotal(l)} points`;
+const lessonGoal = (l, cap) => `${cap ? 'Score' : 'score'} 80% or more`;
+// A score as a whole percentage, and the mark for a lesson's third star and its top-score XP
+const pct = x => Math.round((x || 0) * 100), TOP = 0.95;
 const stepWorth = s => (s.kind === 'play' ? GAME_PTS : s.kind === 'try' || s.kind === 'check' ? 1 : 0);
 const stepPoints = (s, r) => (!r ? 0 : s.kind === 'play' ? Math.round((r.score != null ? r.score : r.ok ? 1 : 0) * GAME_PTS) : r.ok ? 1 : 0);
 // A lesson run's points so far, the most it can score, and what's still to be answered
@@ -303,10 +306,11 @@ function award(kid, amount, patch = {}) {
   return give;
 }
 function minutesToday(kid) { return Math.round(dayInfo(kid).ms / 60000); }
-// New lessons a day: 2 unless a grown-up picks 3, 4 or no limit (0), so a year of lessons lasts a year. Replays,
-// lessons a grown-up assigns and language lessons (one a day of their own) don't count. Once today's are done, the
-// time goes to practice: reviews, maths practice, crowns and language words.
-const perDay = () => { const v = GSET().perDay; return v === 0 ? Infinity : v > 0 ? v : 2; };
+// New lessons a day: no limit, so kids can keep learning as long as they want, unless a grown-up picks a cap of 2, 3
+// or 4. Replays and lessons a grown-up assigns never count; language lessons count against the same cap on their own
+// tally. Once a capped day's new lessons are done, the time goes to practice: reviews, maths practice, crowns and
+// language words.
+const perDay = () => { const v = GSET().perDay; return v > 0 ? v : Infinity; };
 const newLeft = kid => Math.max(0, perDay() - (dayInfo(kid).nl || 0));
 function overTime(kid) { const cap = GSET().cap; return cap > 0 && minutesToday(kid) >= cap; }
 // Lesson time: from the family's lesson reminder hour (4 pm unless a grown-up changes it or turns it off) until the
