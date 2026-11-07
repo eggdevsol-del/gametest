@@ -44,8 +44,7 @@ input,textarea{-webkit-user-select:text;user-select:text;font:inherit}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 button:disabled{cursor:default}
 :focus-visible{outline:3px solid #fff;outline-offset:3px;border-radius:12px}
-body.is-parent{background:var(--bg);color:var(--ink)}
-body.is-parent #sky{display:none}
+body.is-parent{color:var(--ink)}
 body.is-parent :focus-visible{outline-color:var(--p-accent)}
 h1,h2,h3,h4{text-wrap:balance;margin:0}
 p{margin:0}
@@ -183,6 +182,12 @@ p{margin:0}
 .tile.st-approved,.tile.st-pending{background:rgba(255,255,255,.05)}
 .tile.st-approved .sticker,.tile.st-pending .sticker{filter:saturate(.35) brightness(1.05);opacity:.75}
 .tb{position:absolute;top:8px;right:8px;display:grid;place-items:center;min-width:26px;height:26px;padding:0 7px;border-radius:13px;font:800 calc(11px*var(--ts)) var(--f-round)}
+.tile-w{display:grid;grid-template-rows:1fr auto;gap:6px}
+.tile-swap{justify-self:center;display:inline-flex;align-items:center;gap:4px;min-height:32px;padding:0 12px 0 10px;border-radius:16px;background:var(--glass-2);color:var(--on-sky);font:800 calc(12px*var(--ts)) var(--f-round)}
+.tile-swap .ic{width:14px;height:14px;stroke-width:2.6}
+.tile-swap:active{transform:scale(.94)}
+.tile-swap:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.swapped{color:var(--muted,#6b7280);font-weight:600}
 .tb .ic{width:15px;height:15px;stroke-width:3}
 .tb.ok{background:var(--good);color:#fff}
 .tb.wait{background:#fff;color:#0D1530}
@@ -580,6 +585,26 @@ p{margin:0}
   .pnav-i{background:none}
   .psync{display:block}
   .pmain{padding:22px var(--gut-r) 60px 32px}
+}
+/* Grown-ups sit on the app's own sky, like every other screen. The header (a sidebar on wide screens) is glass with
+   white text, titles and section names written straight on the sky are white, and cards are frosted so forms and lists
+   read as easily as before. A soft veil over the sky keeps the white text clear. */
+body.is-parent #sky::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,14,40,.22),rgba(6,14,40,.38));pointer-events:none}
+body.is-parent .pside{background:none;color:var(--on-sky)}
+body.is-parent .plink{color:var(--on-sky)}
+body.is-parent :is(.ptitle,.phead h2,.pgroup-t){color:var(--on-sky);text-shadow:0 1px 2px rgba(6,14,40,.5),0 0 14px rgba(6,14,40,.35)}
+body.is-parent :is(.phead p,.psync,.pgroup-t small){color:var(--on-sky-2);text-shadow:0 1px 2px rgba(6,14,40,.5)}
+body.is-parent .pnav-i{background:var(--glass);border:1px solid var(--glass-line);color:var(--on-sky);-webkit-backdrop-filter:blur(30px) saturate(170%);backdrop-filter:blur(30px) saturate(170%)}
+body.is-parent .pnav-i .ic{color:var(--on-sky)}
+body.is-parent .pnav-i.on{background:var(--p-accent);border-color:transparent;color:var(--p-accent-ink)}
+body.is-parent .pnav-i.on .ic{color:inherit}
+body.is-parent :is(.pcard,.group,.pempty,.rcard,.fold-h,.kseg-i,.glass-p){background:color-mix(in srgb,var(--cell) 90%,transparent);-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%)}
+body.is-parent .kseg-i.on{background:var(--p-accent)}
+body.is-parent .pbtn:not(:is(.pcard,.group,.rcard,.pempty,.sheet,.glass-p) *){background:color-mix(in srgb,var(--cell) 90%,transparent);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
+@media (min-width:860px){
+  body.is-parent .pside{background:var(--glass-2);border-right:1px solid var(--glass-line);-webkit-backdrop-filter:blur(30px) saturate(170%);backdrop-filter:blur(30px) saturate(170%)}
+  body.is-parent .pnav-i{background:none;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+  body.is-parent .pnav-i.on{background:var(--p-accent)}
 }
 .phead{margin:10px 0 18px}
 .phead h2{font:700 calc(28px*var(--ts)) var(--f-text);letter-spacing:-.01em}
@@ -1517,6 +1542,7 @@ function greeting(d) { const h = d.getHours(); return h < 5 ? 'Good night' : h <
    Icons (SF Symbols-style line icons)
    ========================================================= */
 const ICONS = {
+  refresh: '<path d="M20 11.5A8 8 0 0 0 6.2 6.3L4 8.5"/><path d="M4 4v4.5h4.5"/><path d="M4 12.5a8 8 0 0 0 13.8 5.2l2.2-2.2"/><path d="M20 20v-4.5h-4.5"/>',
   send: '<path d="M21 3 3 10.5l7.2 2.6L13 21 21 3z"/><path d="M10.2 13.1 15 8.4"/>',
   sun: '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.1M12 19.3v2.1M2.6 12h2.1M19.3 12h2.1M5.4 5.4l1.5 1.5M17.1 17.1l1.5 1.5M5.4 18.6l1.5-1.5M17.1 6.9l1.5-1.5"/>',
   jar: '<path d="M8 3.5h8"/><path d="M9 3.5v2.3C6.9 6.9 5.5 8.6 5.5 11.2v6.3a3.5 3.5 0 0 0 3.5 3.5h6a3.5 3.5 0 0 0 3.5-3.5v-6.3c0-2.6-1.4-4.3-3.5-5.4V3.5"/><path d="M12 10.3v6.6M14 11.8c-.4-.6-1.1-.9-2-.9-1.1 0-2 .6-2 1.4 0 1.9 4 1.1 4 3 0 .8-.9 1.4-2 1.4-.9 0-1.7-.3-2.1-.9"/>',
@@ -2327,7 +2353,29 @@ const sentKeys = date => new Set(kidsList().flatMap(k => sendsFor(k.id, date).ma
 function boardFor(kid, date) {
   const d = draftFor(date)[kid.id], b = d ? { must: [...d.must], team: [...d.team] } : { must: [], team: [] };
   for (const x of sendsFor(kid.id, date)) { const c = choreDef(x.key); if (!c || c.tier === 'gig') continue; const list = b[c.tier === 'team' ? 'team' : 'must'], i = list.findIndex(y => y.key === c.key); if (i >= 0) list[i] = { ...list[i], sent: x }; else list.push({ ...c, sent: x }); }
+  for (const [from, to] of Object.entries(swapsOf(kid, date))) { const i = b.must.findIndex(c => c.key === from && !c.sent), c = choreDef(to); if (i >= 0 && c) b.must[i] = { ...c, swappedFrom: from }; }
   return b;
+}
+/* ---------- Swapping a must-do ----------
+   A kid who can't do one of today's must-dos (no hens to feed, the car's away) can swap it for a different one, once
+   per must-do, while it's still not done. The new one can't be swapped again. Swaps live on the kid's record as
+   swaps[date][fromKey] = toKey, so every device shows the same list, and the server only lets a kid's iPad add them,
+   never change or remove today's (server/guard.js). Chores a grown-up sent can't be swapped. */
+const SWAP_KEEP_DAYS = 7;
+const swapsOf = (kid, date) => ((kid && kid.swaps) || {})[date] || {};
+function canSwap(kid, c, date) {
+  return !!kid && c.tier === 'must' && !c.sent && !c.swappedFrom && !swapsOf(kid, date)[c.key] && choreState(kid.id, c, date).state === 'open';
+}
+// The must-do a swap brings in: one this kid hasn't done for longest, that suits their age and the home, is due, and
+// isn't on anyone's list today. Null when there's nothing left to offer.
+function swapPick(kid, date, fromKey) {
+  const used = new Set([fromKey, ...sentKeys(date), ...Object.keys(swapsOf(kid, date))]);
+  for (const k of kidsList()) { const b = boardFor(k, date); for (const c of [...b.must, ...b.team]) used.add(c.key); }
+  const age = kid.age || 8, h = historyBefore(date), r = mulberry(hash(`swap|${kid.id}|${date}|${fromKey}`));
+  const since = c => { const d = h[c.key] && h[c.key].by[kid.id]; return d ? Math.min(21, daysBetween(d, date)) : 21; };
+  const pool = allChores().filter(c => c.tier === 'must' && !c.anchor && !freqOf(c) && !isOff(c) && fitsAge(c, age) && !used.has(c.key)
+    && (c.scope === 'me' ? since(c) >= (c.every || 1) : dueFamily(c, h, date)));
+  return pool.map(c => [c, since(c) + r() * 3]).sort((a, b) => b[1] - a[1]).map(x => x[0])[0] || null;
 }
 function gigsFor(kid, date) {
   const mine = sendsFor(kid.id, date).map(x => { const c = choreDef(x.key); return c && c.tier === 'gig' ? { ...c, sent: x } : null; }).filter(Boolean);
@@ -4053,7 +4101,7 @@ const Sky3D = (() => {
   function frame(now) {
     raf = 0;
     // Character Growth covers the sky, except in its sky look, where the sky shows through and keeps moving
-    if (Stage.active || Studio.covers || UI.screen === 'parent' || document.hidden || (document.body.classList.contains('gw-open') && !document.body.classList.contains('gw-sky'))) return;
+    if (Stage.active || Studio.covers || document.hidden || (document.body.classList.contains('gw-open') && !document.body.classList.contains('gw-sky'))) return;
     const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000, asp = cam.aspect, still = reduced ? 0 : 1; last = now;
     for (const c of clouds) {
       if (!c.visible) continue; const u = c.userData, lim = (20 - c.position.z) * TAN * asp + 7;
@@ -5153,7 +5201,7 @@ function paintSky() {
   else { const p = clamp(UI.skyProgress, 0, 1); x = innerWidth >= 1000 ? 56 + p * 22 : 70 + p * 12; y = 80 - Math.sin(p * Math.PI / 2) * 66; cloud = 0.62 - p * 0.52; }
   sky.style.setProperty('--sun-x', x + '%'); sky.style.setProperty('--sun-y', y + '%'); sky.style.setProperty('--cloud', cloud.toFixed(2));
   Sky3D.set({ x, y, cloud, phase: ph, wx, kids: kidsList(), focus: UI.screen === 'kid' ? UI.kidId : null });
-  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = UI.screen === 'parent' ? '#F2F3F8' : P[0];
+  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = P[0];
 }
 
 /* ---------- Shared bits ---------- */
@@ -5486,8 +5534,17 @@ function choreCard(tier, list, kid, date) {
   const T = TIERS[tier], n = list.filter(c => isDone(choreState(kid.id, c, date).state)).length;
   return `<section class="card glass" data-tour="${tier === 'must' ? 'jobs' : tier}">
     <header class="card-h"><span class="dot" style="background:${T.color}"></span><span class="card-t">${T.label}</span><span class="card-tag">· ${T.tag}</span><span class="card-r">${n}/${list.length}</span></header>
-    <div class="tiles">${list.map((c, i) => tile(c, choreState(kid.id, c, date))).join('')}</div>
+    <div class="tiles">${list.map(c => { const t = tile(c, choreState(kid.id, c, date)); return tier === 'must' && canSwap(kid, c, date)
+      ? `<div class="tile-w">${t}<button class="tile-swap" data-act="swapAsk" data-key="${c.key}" aria-label="Swap ${esc(c.title)} for a different must-do">${ic('refresh')}<span>Swap</span></button></div>` : t; }).join('')}</div>
   </section>`;
+}
+// Asks before a swap, because each must-do can only be swapped once
+function swapSheet() {
+  const kid = curKid(), c = UI.swap && choreDef(UI.swap.key); if (!kid || !c) return '';
+  return `<div class="sh-head"><span></span><h2>Swap this must-do?</h2><button class="sh-ok" data-act="close">Cancel</button></div>
+    <div class="sh-body"><div class="ll-hero"><span class="ll-guide" aria-hidden="true">${c.icon}</span><p>Can’t do “${esc(c.title)}” today? You can swap it for a different must-do. Each must-do can only be swapped once, so the new one stays.</p></div>
+      <button class="btn-big" data-act="swapYes" data-key="${c.key}">${ic('refresh')} Swap it</button>
+      <button class="btn-soft" data-act="close">Keep it</button></div>`;
 }
 function tile(c, st) {
   const th = THEMES[c.theme] || THEMES.tidy, s = st.state;
@@ -5723,6 +5780,7 @@ function briefSheet() {
   const sent = sendsFor(kidId, date).find(x => x.key === key), freq = freqOf(c);
   const th = THEMES[c.theme] || THEMES.tidy, st = choreState(kidId, c, date), T = TIERS[c.tier];
   const why = sent ? `${sent.by || 'A grown-up'} sent this ${c.tier === 'gig' ? 'side hustle' : 'chore'} to you${c.tier === 'gig' ? ', so it’s yours alone' : ''}. It stays on your list until it’s done.`
+    : boardFor(kid, date).must.some(x => x.key === key && x.swappedFrom) ? `You swapped “${(choreDef(boardFor(kid, date).must.find(x => x.key === key).swappedFrom) || {}).title || 'a must-do'}” for this one, so it stays on your list today.`
     : c.tier === 'gig' ? `Up for grabs. The first kid to finish gets paid, then it’s off the board${freq ? (freq.k === 'once' ? ' for good' : ` until it comes round again (${freq.label.toLowerCase()})`) : c.every > 1 ? ` for ${c.every} days` : ' until tomorrow'}.` : ((draftFor(date)[kidId] || {}).why || {})[key];
   const done = isDone(st.state), q = UI.brief.quote ?? c.quote, gd = guideOf(c), gm = gd ? c.photoMode || 'each' : null;
   let payTxt = '', payBig = payLabel(c);
@@ -6607,7 +6665,7 @@ function pKidDetail(kid) {
     ${kid.pin ? `<p class="pkid-lock">${ic('lock')} ${esc(kid.name)} locks their account with a passcode, and their total is private on the family screen. If they forget it, tap Reset passcode.</p>`
       : `<p class="pkid-lock muted">${ic('lock')} No passcode. ${esc(kid.name)} can add one with the Lock button in their own account.</p>`}</section>
     <section class="pcard"><h3>Habits, last 4 weeks · ${st}-day streak</h3>${heatmap(kid)}<h4>Today</h4><div class="plist">${habitsForDay(kid, date).map(h => `<div class="pli"><span class="ck ${done.has(h.key) ? 'on' : ''}">${ic('check')}</span><span class="grow">${h.icon} ${esc(h.title)}</span></div>`).join('')}</div></section>
-    <section class="pcard"><h3>Today's chores</h3><div class="plist">${[...b.must, ...b.team].map(c => { const s = choreState(kid.id, c, date).state; return `<div class="pli"><span class="ck ${isDone(s) ? 'on' : ''}">${ic('check')}</span><span class="grow">${c.icon} ${esc(c.title)}</span><span class="tag ${s === 'open' ? 'pending' : s}">${{ open: 'Not done', pending: 'To review', approved: 'Paid', redo: 'Redo' }[s] || s}</span></div>`; }).join('')}</div>
+    <section class="pcard"><h3>Today's chores</h3><div class="plist">${[...b.must, ...b.team].map(c => { const s = choreState(kid.id, c, date).state; return `<div class="pli"><span class="ck ${isDone(s) ? 'on' : ''}">${ic('check')}</span><span class="grow">${c.icon} ${esc(c.title)}${c.swappedFrom ? `<small class="swapped"> · swapped from ${esc((choreDef(c.swappedFrom) || {}).title || 'another chore')}</small>` : ''}</span><span class="tag ${s === 'open' ? 'pending' : s}">${{ open: 'Not done', pending: 'To review', approved: 'Paid', redo: 'Redo' }[s] || s}</span></div>`; }).join('')}</div>
       <h4>Lifetime</h4><div class="plist"><div class="pli"><span class="grow">Earned before tax</span><span class="amt">${fmt(kid.earned || 0)}</span></div><div class="pli"><span class="grow">Family tax paid</span><span class="amt">${fmt(kid.taxPaid || 0)}</span></div><div class="pli"><span class="grow">Vault interest</span><span class="amt">${fmt(kid.interestEarned || 0)}</span></div></div></section>
     <section class="pcard wide"><h3>Recent jobs and photos</h3>${jobs.length ? `<div class="pjobs">${jobs.map(x => `<button class="pjob" data-act="photo" data-id="${x.id}"><span class="ph">${x.photo ? `<img ${photoAttr(x.photo)} alt="" loading="lazy">` : x.icon}</span><b>${esc(x.title)}</b><small>${esc(parseKey(x.date).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }))} · <span class="stars-s">${starRow(x.stars)}</span> · ${{ approved: 'Paid', pending: 'To review', redo: 'Redo' }[x.status]}</small></button>`).join('')}</div>` : '<p class="muted">No jobs yet.</p>'}</section>
     <section class="pcard"><h3>Bank statement</h3>${L.length ? `<div class="plist">${L.map(e => `<div class="pli"><span class="grow">${esc(e.memo || e.kind)}<br><small class="muted">${timeAgo(e.at)}</small></span><span class="amt ${ledIn(e) ? 'pos' : ''}">${ledAmt(e)}</span></div>`).join('')}</div>
@@ -7464,6 +7522,17 @@ const ACT = {
   wizClose: () => { const then = UI.wiz && UI.wiz.then; UI.wiz = null; if (!then) UI.ptab = 'home'; scrollTo(0, 0); render(); afterWizard(then); },
   ptab: a => { if (a.dataset.tab === 'shop') { UI.screen = 'shop'; UI.shopS = null; scrollTo(0, 0); return render(); } if (window.Growth && Growth.resetParent) Growth.resetParent(); UI.ptab = a.dataset.tab; UI.redoFor = null; UI.confirmRemove = null; scrollTo(0, 0); render(); },
 
+ swapAsk: a => { const kid = curKid(), c = kid && boardFor(kid, dkey()).must.find(x => x.key === a.dataset.key); if (!c || !canSwap(kid, c, dkey())) return; UI.swap = { key: c.key }; Sound.pop(); openSheet(swapSheet); },
+  swapYes: a => {
+    const kid = curKid(), date = dkey(), c = kid && boardFor(kid, date).must.find(x => x.key === a.dataset.key);
+    if (!c || !canSwap(kid, c, date)) { closeSheet(); return; }
+    const to = swapPick(kid, date, c.key);
+    if (!to) { closeSheet(); return toast('There isn’t another must-do to swap to today. Tell a grown-up if you can’t do this one.'); }
+    const keep = Object.fromEntries(Object.entries(kid.swaps || {}).filter(([d]) => daysBetween(d, date) < SWAP_KEEP_DAYS));
+    updDoc('kids', kid.id, { swaps: { ...keep, [date]: { ...swapsOf(kid, date), [c.key]: to.key } } });
+    track('chore.swap', { date, from: c.key, to: to.key }, kid.id);
+    closeSheet(); Sound.coin(); toast(`Swapped! Your new must-do is “${to.title}”.`);
+  },
   brief: a => { UI.brief = { kidId: UI.kidId, key: a.dataset.key, quote: null }; Sound.ensure(); Sound.pop(); openSheet(briefSheet, { cls: 'brief' }); },
   quote: a => { const c = choreDef(UI.brief.key); UI.brief.quote = clamp((UI.brief.quote ?? c.quote) + +a.dataset.d, c.quoteMin, c.quoteMax); Sound.tap(); renderSheet(false); },
   start: () => { const b = UI.brief; startMission([{ kidId: b.kidId, key: b.key, quote: b.quote }]); },

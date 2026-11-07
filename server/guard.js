@@ -165,6 +165,26 @@ export function checkKidWrite(prev, next, settings, now = Date.now()) {
   const xs0 = num(isP.xpSpent), xs1 = num(isN.xpSpent);
   if (newXp > Math.max(0, xs1 - xs0) + 0.5 || xs1 < xs0 - xpBack - 0.5) return nope('XP spent on the island doesn’t add up.');
   if (sold > soldMost + cashBack + 1) return nope('that sold for more than it’s worth.');
+  return checkSwaps(prev.swaps, next.swaps, now);
+}
+
+/* Must-do swaps (swaps[date][fromKey] = toKey): a kid can swap each must-do once. From a kid's iPad, swaps can only be
+   added, for today or yesterday: a swap already made can't change or be taken back (so it can't be made again), a
+   chore that was swapped in can't be swapped out, and a day has at most 6. Days older than that can be tidied away. */
+const SWAPS_MAX = 6;
+function checkSwaps(P, N, now) {
+  P = P && typeof P === 'object' ? P : {}; N = N && typeof N === 'object' ? N : {};
+  if (same(P, N)) return null;
+  const today = dayNo(latestDay(now)), recent = d => today - dayNo(d) <= 2;
+  for (const [d, m] of Object.entries(P)) if (recent(d) && m && Object.entries(m).some(([k, v]) => !N[d] || N[d][k] !== v)) return nope('a swap that’s already been made can’t be changed.');
+  for (const [d, m] of Object.entries(N)) {
+    if (same(P[d], m)) continue;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(d) || !m || typeof m !== 'object' || Array.isArray(m)) return nope('that swap isn’t valid.');
+    if (!recent(d) || dayNo(d) > today) return nope('chores can only be swapped on the day.');
+    const keys = Object.keys(m), vals = Object.values(m);
+    if (keys.length > SWAPS_MAX) return nope('that’s too many swaps for one day.');
+    if (vals.some(v => typeof v !== 'string' || !v || keys.includes(v))) return nope('a swapped-in chore can’t be swapped again.');
+  }
   return null;
 }
 

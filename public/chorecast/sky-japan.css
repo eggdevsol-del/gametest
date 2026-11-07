@@ -13,12 +13,10 @@
 @media (prefers-reduced-motion: reduce){ .jp-cv{transition:none} }
 
 /* The scene shows behind every screen, not only the kids' ones, and keeps its parallax everywhere.
-   - The grown-ups' screens wash it with their page colour, so their text reads as easily as before.
+   - The grown-ups' screens show it too, under the same soft veil and glass as the rest of the app (index.html).
    - Character Growth lets it through its own colour, darker low down where the lessons are.
    - The island studio has no sky of its own: the kid's island floats over this one, and the view glides in
      towards it as it opens (sky-japan.js). */
-:root[data-sky=japan] body.is-parent #sky{display:block}
-:root[data-sky=japan] body.is-parent #sky::after{content:"";position:absolute;inset:0;background:var(--bg);opacity:.8;pointer-events:none}
 :root[data-sky=japan] .gw:not(.sky){background:linear-gradient(180deg,color-mix(in srgb,var(--gh) 12%,transparent) 0%,color-mix(in srgb,var(--gh) 34%,rgba(6,14,40,.5)) 34%,color-mix(in srgb,var(--gh) 42%,rgba(6,14,40,.8)) 70%)}
 @media (min-width:900px) and (min-aspect-ratio:5/4){ :root[data-sky=japan] .gw:not(.sky){background:linear-gradient(90deg,color-mix(in srgb,var(--gh) 10%,transparent) 0%,color-mix(in srgb,var(--gh) 18%,rgba(6,14,40,.2)) 36%,color-mix(in srgb,var(--gh) 40%,rgba(6,14,40,.78)) 46%)} }
 :root[data-sky=japan] body.gw-open #app,:root[data-sky=japan] body.gw-open #g3{visibility:hidden}

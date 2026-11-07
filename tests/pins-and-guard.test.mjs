@@ -207,6 +207,19 @@ try {
   ok(ev.length === 2, 'PIN resets and wrong passwords are logged', ev);
   await db.close();
 }
+// Must-do swaps from a kid's iPad: added once, never changed, taken back or chained, and only on the day
+{
+  const { checkKidWrite } = await import(path.join(REPO, 'server/guard.js'));
+  const now = Date.parse('2026-11-07T03:00:00Z'), base = { name: 'Ari', jars: {}, ledger: [] };
+  const w = (p, n) => checkKidWrite({ ...base, swaps: p }, { ...base, swaps: n }, {}, now);
+  ok(w(undefined, { '2026-11-07': { feed: 'sweep' } }) === null, 'a kid can swap a must-do today');
+  ok(w({ '2026-11-07': { feed: 'sweep' } }, { '2026-11-07': { feed: 'sweep', dishes: 'bins' } }) === null, 'and swap another one');
+  ok((w({ '2026-11-07': { feed: 'sweep' } }, { '2026-11-07': { feed: 'bins' } }) || {}).code === 'not_allowed', 'a swap can’t be changed');
+  ok((w({ '2026-11-07': { feed: 'sweep' } }, {}) || {}).code === 'not_allowed', 'today’s swap can’t be taken back to swap again');
+  ok((w({ '2026-11-07': { feed: 'sweep' } }, { '2026-11-07': { feed: 'sweep', sweep: 'bins' } }) || {}).code === 'not_allowed', 'a swapped-in chore can’t be swapped again');
+  ok((w(undefined, { '2026-10-01': { feed: 'sweep' } }) || {}).code === 'not_allowed', 'old days can’t get new swaps');
+  ok(w({ '2026-10-20': { feed: 'sweep' }, '2026-11-07': { dishes: 'bins' } }, { '2026-11-07': { dishes: 'bins' } }) === null, 'old swaps can be tidied away');
+}
 console.log(`${passN} passed, ${failN} failed`);
 if (failN) console.log(log.split('\n').filter(l => /Error|error/.test(l)).slice(0, 10).join('\n'));
 process.exit(failN ? 1 : 0);
