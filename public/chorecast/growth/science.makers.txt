@@ -159,6 +159,166 @@ check: mcq | Pouring muddy water through a coffee filter is… | filtering* | ev
 home: With a grown-up, mix sand and salt, then separate them. Leave the salty water to dry in the sun.
 skill: separating
 
+@unit 4 | Ecology | Ecosystems, energy flow and protecting native species
+@unit 5 | Forces and motion | Speed, balanced forces, action and reaction, pressure
+@unit 6 | Space | Gravity, stars, distances and seasons
+
+@lesson 4.1 | Ecosystems | 🌿 | garden
+hook: A forest is more than trees. What else makes it work?
+learn: An ecosystem is all the living things in an area plus the non-living things they depend on.
+learn: Biotic factors are living: plants, animals, fungi, bacteria. Abiotic factors are non-living: sunlight, water, temperature, soil.
+learn: A change in one part, like less rain, can affect everything else.
+try: Sunlight is an abiotic factor :: mcq | Which is a biotic factor? | Fungi* | Rainfall | Temperature
+play: sort | Biotic, Abiotic | Ferns=Biotic; Sunlight=Abiotic; Earthworms=Biotic; Soil temperature=Abiotic; Bacteria=Biotic; Water=Abiotic | Living or non-living?
+check: tf | A drought can affect every living thing in an ecosystem. | true
+check: mcq | An ecosystem includes… | living things and their surroundings* | only animals | only plants
+check: mcq | Which is an abiotic factor? | Wind* | Moss | Insects
+home: Walk through a park or garden and list three biotic and three abiotic factors.
+skill: ecosystems
+
+@lesson 4.2 | Energy flow | 🦅 | garden
+hook: Why are there far fewer hawks than mice?
+learn: Energy enters most ecosystems through plants, which capture sunlight.
+learn: At each step up a food chain, most of the energy is used for living (moving, keeping warm) or lost as heat. Only a small part passes on.
+learn: So there's less energy at each level, which is why top predators are fewer.
+try: grass → mouse → hawk :: mcq | Why are top predators fewer in number? | There's less energy available at the top* | They don't like company | They're lazy
+play: order | Follow the energy | Sunlight; Plants (producers); Herbivores; Carnivores
+check: tf | Most of the energy at one level of a food chain passes on to the next. | false | Most is used up or lost as heat. Only a small part passes on.
+check: mcq | What captures the energy that enters most ecosystems? | Plants* | Rocks | Predators
+check: mcq | Decomposers like fungi break down… | dead plants and animals* | sunlight | only rocks
+home: Draw an energy pyramid for a food chain you know.
+skill: energy-flow
+
+@lesson 4.3 | Decomposers and cycles | ♻️ | garden
+hook: Where do fallen leaves go?
+learn: Decomposers, like fungi, bacteria and worms, break down dead plants and animals.
+learn: This returns nutrients to the soil, so new plants can use them.
+learn: Without decomposers, dead material would pile up and nutrients would run out.
+try: Worms help compost break down :: mcq | What do decomposers return to the soil? | Nutrients* | Plastic | Sunlight
+play: order | Follow the nutrients | A leaf falls; Decomposers break it down; Nutrients go into the soil; A new plant takes them up
+check: tf | Fungi are decomposers. | true
+check: mcq | What would happen without decomposers? | Dead material would pile up* | Plants would grow faster | Nothing
+check: mcq | What helps decomposers in a compost bin? | Moisture and air* | Plastic bags | Salt
+home: Start or check a compost bin with a grown-up. Which decomposers can you find?
+skill: decomposers
+
+@lesson 4.4 | Protecting native species | 🐦 | garden
+hook: Why do people set predator traps in the bush?
+learn: {nz:Many of New Zealand's native birds evolved with no land mammals hunting them~au:Many of Australia's small native animals evolved without foxes or cats hunting them}, so they have few defences against introduced predators.
+learn: {nz:Introduced rats, stoats and possums~au:Introduced foxes and feral cats} hunt native animals and eat their eggs and young.
+learn: Trapping predators and protecting habitat helps native species recover.
+try: Traps help protect native animals :: mcq | What is an introduced predator? | An animal brought in by people that hunts native species* | A native bird | A kind of plant
+play: sort | Helps native species, Harms native species | Setting predator traps=Helps native species; Letting pet cats roam at night=Harms native species; Planting native trees=Helps native species; Dropping litter in the bush=Harms native species; Keeping dogs on leads near nesting birds=Helps native species | Which is it?
+check: tf | Planting native plants can help native animals. | true
+check: mcq | Why are some native animals easy prey for introduced predators? | They evolved without those hunters* | They're too big | They live in cities
+check: mcq | Which helps native animals most? | Controlling predators and protecting their habitat* | Feeding them bread | Cutting down forests
+home: Find out with a grown-up about a native animal near you and what's being done to protect it.
+skill: native-species
+
+@lesson 5.1 | Speed | 🚴 | island
+hook: You cycle 12 km in 1 hour. How fast is that?
+learn: Speed is how far something travels in a certain time.
+learn: Speed = distance ÷ time. 12 km in 1 hour is 12 km/h.
+learn: Rearranged: distance = speed × time, and time = distance ÷ speed.
+try: 100 m in 20 s is 5 m/s :: gap | 60 km in 2 hours is _ km/h | 30
+play: match | Match each trip to its speed | 30 m in 10 s=3 m/s; 100 km in 2 h=50 km/h; 400 m in 80 s=5 m/s; 90 km in 3 h=30 km/h
+check: gap | 200 ÷ 25 = _ | 8
+check: mcq | A car travels at 50 km/h for 3 hours. How far does it go? | 150 km* | 53 km | 17 km
+check: tf | Speed is distance divided by time. | true
+home: Time yourself walking 100 m and work out your speed in metres per second.
+skill: speed
+
+@lesson 5.2 | Balanced and unbalanced forces | ⚖️ | island
+hook: In a tug of war, why does the rope sometimes not move at all?
+learn: When the forces on an object are balanced, they cancel out. It stays still, or keeps moving at the same speed.
+learn: When forces are unbalanced, the object speeds up, slows down or changes direction.
+learn: A parked car has balanced forces: gravity pulls it down and the ground pushes up.
+try: Equal teams in a tug of war: balanced forces :: mcq | A ball speeds up as it rolls downhill. The forces are… | unbalanced* | balanced | zero
+play: sort | Balanced, Unbalanced | A book resting on a table=Balanced; A car speeding up=Unbalanced; A plane cruising at a steady speed=Balanced; A ball slowing down on grass=Unbalanced; A rocket lifting off=Unbalanced | Balanced or unbalanced?
+check: tf | Balanced forces can keep an object moving at a steady speed. | true
+check: mcq | What happens when forces are unbalanced? | The motion changes* | Nothing ever changes | The object disappears
+check: mcq | A skydiver falling at a steady speed has… | balanced forces* | no forces | only gravity
+home: Push a toy car gently along carpet, then along a smooth floor. Which slows down faster, and why?
+skill: balanced-forces
+
+@lesson 5.3 | Action and reaction | 🚀 | museum
+hook: How does a rocket push itself into space with nothing to push against?
+learn: When one object pushes on another, the second pushes back just as hard in the opposite direction.
+learn: A rocket pushes gas down, and the gas pushes the rocket up.
+learn: When you swim, you push water back, and the water pushes you forward.
+try: A balloon flies as the air rushes out :: mcq | When you jump forward off a skateboard, the skateboard… | rolls backwards* | stays still | follows you
+play: match | Match each action to its reaction | A rocket pushes gas down=The gas pushes the rocket up; A swimmer pushes water back=The water pushes the swimmer forward; Your foot pushes the ground back=The ground pushes you forward
+check: tf | Forces always come in pairs. | true
+check: mcq | Why does a balloon zoom around when you let it go? | The air pushed out pushes the balloon the other way* | Balloons like to fly | The wind
+check: mcq | When you walk, you push the ground… | backwards* | forwards | up
+home: Tape a straw to a balloon, thread the straw on a string, blow up the balloon and let it go.
+skill: action-reaction
+
+@lesson 5.4 | Pressure | 🥾 | workshop
+hook: Why does a sharp knife cut better than a blunt one?
+learn: Pressure is how much force presses on a certain area. Pressure = force ÷ area.
+learn: The same force on a small area makes high pressure: a sharp knife edge, a drawing pin.
+learn: The same force on a big area makes low pressure: snowshoes, wide tractor tyres.
+try: Snowshoes spread out your weight :: mcq | Why do snowshoes stop you sinking? | They spread the force over a bigger area* | They're lighter | They're warm
+play: sort | High pressure, Low pressure | A drawing pin's point=High pressure; Snowshoes=Low pressure; A sharp knife=High pressure; Wide tractor tyres=Low pressure; A stiletto heel on soft grass=High pressure | High or low pressure?
+check: gap | 100 ÷ 4 = _ | 25
+check: tf | The same force on a smaller area makes a higher pressure. | true
+check: mcq | Why is a blunt knife harder to cut with? | Its edge has a bigger area, so less pressure* | It's heavier | It's dirty
+home: Press the flat end of a pencil, then its point, gently into playdough. What's different?
+skill: pressure
+
+@lesson 6.1 | Gravity and orbits | 🛰️ | museum
+hook: Why doesn't the Moon fall down onto the Earth?
+learn: Gravity pulls all objects with mass towards each other. Bigger masses pull harder.
+learn: The Moon is moving sideways very fast. Gravity keeps bending its path into a curve around the Earth: an orbit.
+learn: Satellites orbit the Earth the same way.
+try: Gravity keeps the Moon in orbit :: mcq | What keeps the planets in orbit around the sun? | Gravity* | Magnetism | Wind
+play: order | Why the Moon orbits | The Moon moves sideways very fast; Earth's gravity pulls it inwards; Its path bends into a curve; It keeps circling the Earth
+check: tf | Bigger masses pull with more gravity. | true
+check: mcq | Without gravity, the Moon would… | fly off in a straight line* | fall onto the Earth | stop
+check: mcq | Gravity is a force between… | any objects with mass* | only magnets | only planets
+home: In a safe open space, swing a soft ball on a string. Feel the string pull inwards, like gravity.
+skill: orbits-gravity
+
+@lesson 6.2 | Stars | 🌟 | museum
+hook: Is the sun special, or just one star of many?
+learn: Stars are huge balls of hot gas, mostly hydrogen, that shine because of nuclear fusion in their cores.
+learn: Stars form inside giant clouds of gas and dust called nebulae.
+learn: The sun is a medium-sized star, about halfway through its life.
+try: The sun is a star :: mcq | What makes stars shine? | Nuclear fusion in their cores* | Burning wood | Reflected light
+play: match | Match each word to its meaning | Nebula=A cloud of gas and dust where stars form; Fusion=Small atoms joining and releasing energy; Galaxy=A huge group of stars
+check: tf | The sun is a star. | true
+check: mcq | Compared with other stars, the sun is… | medium-sized* | the biggest star there is | the smallest star
+check: mcq | Stars are mostly made of… | hydrogen* | rock | water
+home: On a clear night, look for stars of different colours. Hotter stars look bluer.
+skill: stars
+
+@lesson 6.3 | Light-years and the size of space | 🔭 | museum
+hook: When you look at a star, are you seeing it as it is now?
+learn: Space is so big that we measure it in light-years: the distance light travels in one year.
+learn: Light from the sun takes about 8 minutes to reach the Earth.
+learn: Light from other stars takes years to reach us, so we see them as they were when that light left.
+try: A star 10 light-years away is seen as it was 10 years ago :: mcq | A light-year measures… | distance* | time | brightness
+play: order | Smallest to largest | Earth; The solar system; Our galaxy; The universe
+check: mcq | About how long does sunlight take to reach the Earth? | 8 minutes* | 8 seconds | 8 days
+check: tf | When we look at distant stars, we see them as they were in the past. | true
+check: mcq | Our galaxy is called… | the Milky Way* | the Big Dipper | the Southern Cross
+home: On a dark, clear night, look for the Milky Way with a grown-up.
+skill: light-years
+
+@lesson 6.4 | Why we have seasons | 🌏 | museum
+hook: Is it summer because we're closer to the sun?
+learn: Seasons are caused by the Earth's tilt, not by its distance from the sun.
+learn: When our half of the Earth tilts towards the sun, the sun is higher in the sky, days are longer and sunlight is more concentrated. That's summer.
+learn: When it tilts away, the sun is lower, days are shorter and sunlight is more spread out. That's winter.
+try: The tilt causes the seasons :: mcq | What causes the seasons? | The Earth's tilt* | Our distance from the sun | The Moon
+play: sort | Summer, Winter | Long days=Summer; Sun low in the sky=Winter; Our half tilted towards the sun=Summer; Sunlight spread out=Winter; Sun high at midday=Summer | Summer or winter?
+check: tf | It's summer here when our half of the Earth tilts towards the sun. | true
+check: mcq | When it's summer in {nz:New Zealand~au:Australia}, it's winter in… | the northern half of the world* | the whole world | nowhere
+check: mcq | In winter, the days are… | shorter* | longer | the same
+home: Write down today's sunrise and sunset times, and check them again in a month. How has the day length changed?
+skill: seasons-tilt
+
 
 # Fact banks (content/facts/science.txt)
 @facts 1.1
@@ -269,3 +429,113 @@ fact: [Evaporation] leaves a dissolved solid behind. | Filtering; Sieving
 fact: A magnet can separate [iron] from other things. | salt; sand
 fact: To separate salt and sand, first add [water]. | oil; sugar
 fact: Filtering salty water [leaves] the sand behind in the filter. | dissolves; melts
+
+# Fact banks (content/facts/science.txt)
+@facts 4.1
+fact: An [ecosystem] is the living things in an area plus the non-living things they depend on. | organ; molecule
+fact: [Biotic] factors are living. | Abiotic; Chemical
+fact: [Abiotic] factors are non-living. | Biotic; Living
+fact: Fungi are a [biotic] factor. | abiotic; non-living
+fact: Sunlight is an [abiotic] factor. | biotic; living
+fact: Temperature is an [abiotic] factor. | biotic; living
+fact: Bacteria are a [biotic] factor. | abiotic; non-living
+fact: A change like less rain can affect [everything else] in an ecosystem. | nothing; only the rain
+@facts 4.2
+fact: Energy enters most ecosystems through [plants]. | rocks; predators
+fact: Plants capture [sunlight]. | heat from animals; moonlight
+fact: At each step up a food chain, most energy is [used or lost]. | passed on; doubled
+fact: Energy is lost as [heat]. | light only; soil
+fact: Only a [small] part of the energy passes to the next level. | large; whole
+fact: There's [less] energy at each level up a food chain. | more; the same
+fact: Top predators are [fewer] because there's less energy for them. | more common; bigger in number
+fact: Moving and keeping warm [use up] energy. | create; store forever
+@facts 4.3
+fact: [Decomposers] break down dead plants and animals. | Producers; Predators
+fact: Fungi are [decomposers]. | producers; predators
+fact: Worms are [decomposers]. | producers; predators
+fact: Bacteria can be [decomposers]. | producers; predators
+fact: Decomposers return [nutrients] to the soil. | plastic; rocks
+fact: New plants use the nutrients that decomposers [return]. | destroy; hide
+fact: Without decomposers, dead material would [pile up]. | vanish; grow back
+fact: Without decomposers, nutrients would [run out]. | double; never change
+@facts 4.4
+fact: Introduced predators eat native animals' [eggs] and young. | homes only; shadows
+fact: [Trapping] predators helps native species recover. | Feeding; Releasing
+fact: Protecting [habitat] helps native species recover. | predators; cages only
+fact: Introduced predators were brought by [people]. | rain; volcanoes
+fact: Native species that evolved without these predators have few [defences] against them. | feathers; homes
+fact: Predator control helps native [birds]. | rats; stoats
+fact: Losing habitat makes native species [struggle]. | thrive; multiply
+fact: Native species can [recover] with protection. | never recover; disappear faster
+@facts 5.1
+fact: [Speed] is how far something travels in a certain time. | Mass; Pressure
+fact: Speed = distance ÷ [time]. | mass; area
+fact: 12 km in 1 hour is [12] km/h. | 1; 24
+fact: 100 m in 20 seconds is [5] m/s. | 20; 2,000
+fact: Distance = speed × [time]. | mass; area
+fact: At 60 km/h for 2 hours, you travel [120] km. | 30; 62
+fact: Time = distance ÷ [speed]. | mass; area
+fact: 30 km at 10 km/h takes [3] hours. | 300; 20
+@facts 5.2
+fact: When forces are [balanced], they cancel out. | unbalanced; doubled
+fact: With balanced forces, a still object stays [still]. | speeding up; spinning
+fact: With balanced forces, a moving object keeps the [same speed]. | stopping suddenly; speeding up
+fact: [Unbalanced] forces make an object speed up, slow down or change direction. | Balanced; Equal
+fact: A parked car has [balanced] forces. | unbalanced; no
+fact: Gravity pulls a parked car [down]. | up; sideways
+fact: The ground pushes a parked car [up]. | down; sideways
+fact: A car speeding up has [unbalanced] forces. | balanced; no
+@facts 5.3
+fact: When one object pushes on another, the second object [pushes back]. | does nothing; disappears
+fact: The push back is [just as hard]. | much weaker; much stronger
+fact: The push back is in the [opposite] direction. | same; random
+fact: A rocket pushes gas [down]. | up; sideways only
+fact: The gas pushes the rocket [up]. | down; backwards
+fact: When you swim, you push water [back]. | forward; up only
+fact: The water pushes a swimmer [forward]. | backward; down
+fact: Every action has an equal and opposite [reaction]. | colour; mass
+@facts 5.4
+fact: [Pressure] is how much force presses on a certain area. | Speed; Mass
+fact: Pressure = force ÷ [area]. | time; speed
+fact: The same force on a small area makes [high] pressure. | low; no
+fact: A sharp knife edge makes [high] pressure. | low; no
+fact: A drawing pin makes [high] pressure at its point. | low; no
+fact: Snowshoes spread force over a big area for [low] pressure. | high; extreme
+fact: Wide tractor tyres make [low] pressure. | high; extreme
+fact: A bigger area means [lower] pressure for the same force. | higher; the same
+@facts 6.1
+fact: Gravity pulls all objects with [mass] towards each other. | colour; light
+fact: Bigger masses pull [harder]. | weaker; not at all
+fact: The Moon is moving [sideways] very fast. | backwards; not at all
+fact: Gravity bends the Moon's path into a [curve]. | straight line; square
+fact: A curved path around a planet is an [orbit]. | eclipse; echo
+fact: [Satellites] orbit the Earth the same way as the Moon. | Clouds; Birds
+fact: Without gravity, the Moon would fly off in a [straight line]. | circle; spiral inwards
+fact: The Earth's gravity keeps the [Moon] in orbit. | sun; Mars
+@facts 6.2
+fact: Stars are huge balls of hot [gas]. | rock; ice
+fact: Stars are mostly [hydrogen]. | iron; water
+fact: Stars shine because of nuclear [fusion]. | burning wood; reflection
+fact: Fusion happens in a star's [core]. | surface only; tail
+fact: Stars form in giant clouds called [nebulae]. | comets; asteroids
+fact: Nebulae are made of gas and [dust]. | ice cream; water only
+fact: The sun is a [medium-sized] star. | giant; tiny
+fact: The sun is about [halfway] through its life. | at the start; at the very end
+@facts 6.3
+fact: Space is measured in [light-years]. | kilometres only; seconds
+fact: A light-year is the distance light travels in one [year]. | second; day
+fact: A light-year measures [distance]. | time; brightness
+fact: Light from the sun takes about [8] minutes to reach Earth. | 8 seconds; 8 years
+fact: Light from other stars takes [years] to reach us. | seconds; minutes
+fact: We see stars as they [were] when their light left. | will be; are right now
+fact: Light travels [faster] than anything else. | slower; at the same speed
+fact: Space is [huge]. | tiny; small
+@facts 6.4
+fact: Seasons are caused by the Earth's [tilt]. | distance from the sun; spin speed
+fact: Seasons are [not] caused by distance from the sun. | always; mainly
+fact: When our half tilts towards the sun, it's [summer]. | winter; autumn
+fact: In summer, the sun is [higher] in the sky. | lower; gone
+fact: In summer, days are [longer]. | shorter; the same
+fact: In summer, sunlight is more [concentrated]. | spread out; weaker
+fact: When our half tilts away from the sun, it's [winter]. | summer; spring
+fact: In winter, days are [shorter]. | longer; the same

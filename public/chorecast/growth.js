@@ -5309,6 +5309,9 @@ function factDrill(l, want, r, band, unitBefore, older, step) {
   // Too few: facts from earlier lessons in the unit, then earlier units, nearest first
   const mix = [];
   for (const ls of [unitBefore, older]) for (const x of ls) for (const f of (x.facts || []).filter(Boolean)) { if (count() + mix.length >= want) break; mix.push(step(mix.length % 2 ? fq.tf(f, r() < 0.5, r) : fq.gap(f, r), 'f.mix')); }
+  // A maths lesson with a fact bank (shapes, data, chance) also mixes in fresh questions on the unit's number topics
+  const sk = l.tree === 'maths' ? [...unitBefore, ...older].map(x => x.skill).filter(s => MSKILL.S[s]) : [];
+  for (let i = 0; sk.length && count() + mix.length < want && i < 60; i++) { const gs = MSKILL.S[sk[i % sk.length]], p = gs[Math.floor(r() * gs.length)](r); if (p && p.wrongs.length) mix.push(step(p.gap ? mq.gap(p) : mq.mcq(p, r), 'm.mix')); }
   const lt = G.lightning.items;
   return [...G.gap.items, ...lt.slice(0, 1), ...G.tf.items, ...G.letters.items, ...G.pick.items, ...G.sort.items, ...G.coins.items, ...G.tf2.items, ...lt.slice(1), ...mix];
 }

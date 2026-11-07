@@ -617,6 +617,60 @@ check: mcq | Which is reusing? | Keeping buttons in a jam jar* | Throwing a jar 
 home: Find one thing headed for the bin and give it a new job.
 skill: reusing
 
+@unit 10 | Money maths | Adding prices, change, comparing and saving up
+
+@lesson 10.1 | Adding prices | 🧮 | stall
+hook: A drink is $2 and a muffin is $3. How much is that altogether?
+learn: To find a total, add the prices together: $2 + $3 is $5.
+learn: Add the dollars first, then the cents: $1.50 + $2.20 is $3 and 70c, so $3.70.
+learn: Check your total before you pay.
+try: $4 and $5 make $9 :: gap | 3 + 6 = _ dollars | 9
+play: gen | add | 5
+check: gap | 5 + 4 = _ dollars | 9
+check: mcq | An apple is 50c and a banana is 50c. Together they cost… | $1* | 50c | $2
+check: tf | You should check your total before you pay. | true
+home: At the shop, add up two prices in your head before the checkout does.
+skill: adding-prices
+
+@lesson 10.2 | Getting change | 💵 | stall
+hook: Something costs $7 and you pay with a $10 note. How much comes back?
+learn: Change is the money you get back when you pay more than the price.
+learn: Count up from the price: $7 to $10 is $3.
+learn: Always check your change.
+try: $8 from $10 leaves $2 change :: gap | Something costs $6. You pay $10. Your change is $_ | 4
+play: gen | change | 5
+check: gap | Something costs $15. You pay $20. Your change is $_ | 5
+check: mcq | You pay $5 for something that costs $3. Your change is… | $2* | $8 | $3
+check: tf | Counting up from the price is one way to work out change. | true
+home: Next time you buy something, work out your change before you get it.
+skill: change
+
+@lesson 10.3 | Which costs more? | 🏷️ | stall
+hook: A toy is $12 at one shop and $9 at another. Which is cheaper?
+learn: Comparing prices helps you get the best deal.
+learn: Look at the dollars first, then the cents.
+learn: Cheaper isn't always better. Think about whether it'll last.
+try: $9 is cheaper than $12 :: mcq | Which is cheapest? | $4.50* | $5.40 | $5.00
+play: order | Put the prices in order, cheapest first | $1.20; $2.50; $3.05; $3.50
+check: mcq | Which costs the most? | $8.90* | $8.09 | $8.00
+check: tf | The cheapest thing is always the best choice. | false | Sometimes it breaks quickly. Think about whether it'll last.
+check: mcq | The same ball is $10 at one shop and $7 at another. How much do you save at the cheaper shop? | $3* | $17 | $7
+home: With a grown-up, compare the price of one thing at two shops, or two brands of the same thing.
+skill: comparing-prices
+
+@lesson 10.4 | Saving adds up | 🐷 | bank
+hook: If you save $2 every week, how much will you have after 5 weeks?
+learn: Small amounts saved every week add up.
+learn: $2 a week for 5 weeks is 5 × $2, which is $10.
+learn: Keep it in your Vault jar and watch it grow towards your Saving goal.
+try: $3 a week for 4 weeks is $12 :: gap | 2 × 6 = _ dollars | 12
+play: gen | split | 4
+check: gap | 5 × 3 = _ | 15
+check: mcq | You save $5 a week. After 4 weeks you have… | $20* | $9 | $54
+check: tf | Small amounts saved every week add up. | true
+home: Work out how many weeks it would take to save for something you want.
+skill: saving-adds-up
+
 @band builders
 @unit 1 | Budget basics | Plan where money goes before you spend it
 @unit 2 | Goals and plans | Big goals, small steps
@@ -1239,6 +1293,60 @@ check: mcq | In Chorecast, who pays out the Give jar? | A grown-up* | The kid, o
 home: Set a giving goal with a grown-up, and a date to give it.
 skill: giving-plan
 
+@unit 10 | Smart shopping | Waiting, receipts, second-hand and online
+
+@lesson 10.1 | The waiting rule | ⏳ | stall
+hook: You really want something right now. Should you buy it straight away?
+learn: Waiting before you buy helps you tell a real want from a passing feeling.
+learn: Try a waiting rule: for bigger things, wait a week. If you still want it, plan for it.
+learn: Often the urge fades, and your money stays in your Spend jar for something better.
+try: Waiting a week before a big buy :: mcq | Why wait before a big purchase? | To check you still really want it* | Prices always go up | It's a law
+play: order | Use the waiting rule | Notice you want something; Write it on a wish list with the date; Wait a week; Decide if you still want it
+check: tf | The urge to buy often fades if you wait. | true
+check: mcq | Which is a good use of the waiting rule? | Waiting a week before buying new headphones* | Waiting a week to eat lunch | Never buying anything
+check: mcq | A wish list helps you… | think before you buy* | spend faster | forget everything
+home: Start a wish list with dates, and check it again in a week.
+skill: waiting-rule
+
+@lesson 10.2 | Receipts and returns | 🧾 | stall
+hook: Your new shoes fall apart after a week. What can you do?
+learn: Keep your receipt. It shows what you paid and when.
+learn: If something is faulty, take it back with the receipt. Shops will often fix it, swap it or give your money back.
+learn: Check things carefully before you buy, and ask about the shop's returns rules.
+try: Keep the receipt somewhere safe :: mcq | Why keep a receipt? | It shows what you paid and when* | It's pretty | Shops make you
+play: order | Return a faulty item | Find your receipt; Take the item back to the shop; Explain the problem politely; Ask for a repair, a swap or your money back
+check: tf | You should check things carefully before you buy them. | true
+check: mcq | A new toy breaks on the first day. What should you do first? | Find the receipt and ask a grown-up to help return it* | Throw it away | Glue it and say nothing
+check: mcq | When you return something, it helps to be… | polite and clear* | rude | silent
+home: Ask a grown-up to show you where they keep important receipts.
+skill: receipts
+
+@lesson 10.3 | Second-hand bargains | ♻️ | stall
+hook: Does everything have to be brand new?
+learn: Second-hand means someone owned it before. It's often much cheaper.
+learn: Good places to look: op shops, garage sales and hand-me-downs from family.
+learn: Check its condition: does it work, is anything missing, is it clean?
+try: A second-hand bike for much less than a new one :: mcq | What's a good thing about buying second-hand? | It's usually cheaper* | It's always broken | It's always new
+play: order | Check a second-hand item | Look for damage; Check it works; Check nothing is missing; Decide if the price is fair
+check: tf | Second-hand things can be great value. | true
+check: mcq | Which is a place to find second-hand things? | An op shop* | A new car showroom | A bakery
+check: mcq | Before buying a second-hand toy, you should… | check it works and nothing's missing* | buy it without looking | pay double
+home: Visit an op shop with a grown-up and see what you could find.
+skill: second-hand
+
+@lesson 10.4 | Shopping online | 💻 | online
+hook: It's $20 online and $24 in the shop. Is online always cheaper?
+learn: Online prices may not include delivery. Add the delivery cost to compare fairly.
+learn: You can't touch or try things online, so check sizes and reviews.
+learn: Only shop online with a grown-up, on websites they trust.
+try: $20 plus $6 delivery is $26 :: gap | 18 + 5 = _ dollars | 23
+play: order | Compare online and in the shop | Find the online price; Add the delivery; Find the shop price; Compare the totals
+check: mcq | Online it's $30 plus $8 delivery. In the shop it's $35. Which is cheaper? | The shop* | Online | They're the same
+check: tf | Kids should only shop online with a grown-up. | true
+check: mcq | Why check reviews before buying online? | You can't see or try it first* | Reviews are always fake | To waste time
+home: With a grown-up, compare the total cost of one thing online and in a shop.
+skill: online-shopping
+
 @band makers
 @unit 1 | Bank accounts | Everyday, savings and keeping it safe
 @unit 2 | Comparing deals | Subscriptions, free trials and the fine print
@@ -1860,3 +1968,57 @@ check: tf | Most gadgets lose value over time. | true
 check: mcq | A $1,000 gadget is worth $600 a year later. How much value did it lose? | $400* | $600 | $1,600
 home: With a grown-up, compare the price of something new with a second-hand one.
 skill: depreciation
+
+@unit 10 | Starting a small business | Ideas, pricing, profit and customers
+
+@lesson 10.1 | Finding a need | 💡 | stall
+hook: What do people around you need that you could provide?
+learn: Good small businesses solve a problem or meet a need.
+learn: Look around: busy neighbours might need dogs walked, gardens weeded or cars washed.
+learn: Start with your skills and what people will actually pay for, and always check with a grown-up first.
+try: Busy families might need a dog walker :: mcq | What makes a good business idea? | It meets a real need* | It's what you like, even if nobody needs it | It's the most expensive
+play: match | Match each need to a small business | Busy pet owners=Dog walking; People with dusty cars=Car washing; Neighbours with big gardens=Weeding and watering; Market shoppers=Homemade biscuits
+check: tf | A business should solve a problem or meet a need. | true
+check: mcq | Where's a good place to start? | Your own skills and local needs* | Copying a giant company | Buying lots of stock first
+check: mcq | How can you test an idea cheaply? | Ask a few neighbours if they'd pay for it* | Spend all your savings first | Never ask anyone
+home: With a grown-up, list three needs in your neighbourhood you could help with.
+skill: business-idea
+
+@lesson 10.2 | Costs and pricing | 🧁 | stall
+hook: You bake cupcakes to sell. How much should you charge?
+learn: Start with your costs: ingredients, packaging and anything else you buy.
+learn: Work out the cost of each one: if 12 cupcakes cost $9 to make, each costs $9 ÷ 12 = 75c.
+learn: Your price must be higher than your cost to make a profit, and fair enough that people will buy.
+try: $9 for 12 cupcakes is 75c each :: gap | 20 biscuits cost $10 to make. Each one costs $_ | 0.5
+play: order | Set a price | Add up all your costs; Work out the cost of each item; Check what similar things sell for; Choose a price above your cost
+check: gap | 12 ÷ 6 = _ | 2
+check: mcq | Each cupcake costs 75c to make. Which price makes a profit? | $1.50* | 50c | 75c
+check: tf | Your price should be higher than the cost of making each item. | true
+home: Work out the cost of each item for something you could make and sell.
+skill: pricing
+
+@lesson 10.3 | Profit and loss | 📈 | bank
+hook: You sold $60 of lemonade but spent $25 on supplies. Did you make money?
+learn: Profit = income − costs. $60 − $25 = $35 profit.
+learn: If your costs are bigger than your income, it's a loss.
+learn: Keep a simple record of everything you spend and earn.
+try: $50 − $20 = $30 profit :: gap | 60 − 25 = _ | 35
+play: sort | Income, Cost | Money from selling cupcakes=Income; Flour and sugar=Cost; Payment for walking a dog=Income; Petrol to get to the market=Cost; The stall fee=Cost | Income or cost?
+check: gap | Income $40, costs $15. The profit is $_ | 25
+check: mcq | Income is $30 and costs are $45. That's a… | loss* | profit | tie
+check: tf | Keeping records helps you know whether you're making a profit. | true
+home: Keep a record of the income and costs of any money-making job this month.
+skill: profit-loss
+
+@lesson 10.4 | Customers and reputation | 🤝 | stall
+hook: Why do some small businesses get lots of repeat customers?
+learn: Happy customers come back and tell their friends. That's your reputation.
+learn: Be reliable: turn up on time, do what you promised, and be polite.
+learn: If something goes wrong, own it and fix it.
+try: Turning up on time, every time :: mcq | What builds a good reputation? | Being reliable and polite* | Charging the most | Cutting corners
+play: sort | Builds reputation, Damages it | Turning up on time=Builds reputation; Not finishing a job=Damages it; Saying thank you=Builds reputation; Ignoring complaints=Damages it; Fixing a mistake quickly=Builds reputation | Which is it?
+check: tf | Happy customers often tell their friends. | true
+check: mcq | A customer is unhappy with your work. What's best? | Listen, apologise and fix it* | Argue | Ignore them
+check: mcq | Repeat customers are… | people who come back* | one-time buyers | competitors
+home: Do one job for a family member as if they were a paying customer: on time, polite, and done well.
+skill: reputation

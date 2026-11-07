@@ -69,7 +69,7 @@ for (const f of existsSync(factDir) ? (await readdir(factDir)).filter(f => f.end
     if (!band || !buf.length) return; const name = `${tree}.${band}.txt`;
     if (!wrote.has(name)) throw new Error(`content/facts/${f}: there's no ${name} pack for its @band ${band}`);
     await appendFile(path.join(out, 'growth', name), '\n# Fact banks (content/facts/' + f + ')\n' + buf.join('\n') + '\n');
-    counts[`${tree}.${band}`].facts = buf.filter(l => /^fact:/.test(l)).length;
+    counts[`${tree}.${band}`].facts = (counts[`${tree}.${band}`].facts || 0) + buf.filter(l => /^fact:/.test(l)).length;
   };
   for (const line of text.split(/\r?\n/)) { const m = line.match(/^@band\s+(\w+)/); if (m) { await flush(); band = m[1]; buf = []; } else if (band && line.trim() && !line.startsWith('#')) buf.push(line.trim()); }
   await flush();

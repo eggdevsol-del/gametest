@@ -620,6 +620,60 @@ check: mcq | A $1,000 gadget is worth $600 a year later. How much value did it l
 home: With a grown-up, compare the price of something new with a second-hand one.
 skill: depreciation
 
+@unit 10 | Starting a small business | Ideas, pricing, profit and customers
+
+@lesson 10.1 | Finding a need | 💡 | stall
+hook: What do people around you need that you could provide?
+learn: Good small businesses solve a problem or meet a need.
+learn: Look around: busy neighbours might need dogs walked, gardens weeded or cars washed.
+learn: Start with your skills and what people will actually pay for, and always check with a grown-up first.
+try: Busy families might need a dog walker :: mcq | What makes a good business idea? | It meets a real need* | It's what you like, even if nobody needs it | It's the most expensive
+play: match | Match each need to a small business | Busy pet owners=Dog walking; People with dusty cars=Car washing; Neighbours with big gardens=Weeding and watering; Market shoppers=Homemade biscuits
+check: tf | A business should solve a problem or meet a need. | true
+check: mcq | Where's a good place to start? | Your own skills and local needs* | Copying a giant company | Buying lots of stock first
+check: mcq | How can you test an idea cheaply? | Ask a few neighbours if they'd pay for it* | Spend all your savings first | Never ask anyone
+home: With a grown-up, list three needs in your neighbourhood you could help with.
+skill: business-idea
+
+@lesson 10.2 | Costs and pricing | 🧁 | stall
+hook: You bake cupcakes to sell. How much should you charge?
+learn: Start with your costs: ingredients, packaging and anything else you buy.
+learn: Work out the cost of each one: if 12 cupcakes cost $9 to make, each costs $9 ÷ 12 = 75c.
+learn: Your price must be higher than your cost to make a profit, and fair enough that people will buy.
+try: $9 for 12 cupcakes is 75c each :: gap | 20 biscuits cost $10 to make. Each one costs $_ | 0.5
+play: order | Set a price | Add up all your costs; Work out the cost of each item; Check what similar things sell for; Choose a price above your cost
+check: gap | 12 ÷ 6 = _ | 2
+check: mcq | Each cupcake costs 75c to make. Which price makes a profit? | $1.50* | 50c | 75c
+check: tf | Your price should be higher than the cost of making each item. | true
+home: Work out the cost of each item for something you could make and sell.
+skill: pricing
+
+@lesson 10.3 | Profit and loss | 📈 | bank
+hook: You sold $60 of lemonade but spent $25 on supplies. Did you make money?
+learn: Profit = income − costs. $60 − $25 = $35 profit.
+learn: If your costs are bigger than your income, it's a loss.
+learn: Keep a simple record of everything you spend and earn.
+try: $50 − $20 = $30 profit :: gap | 60 − 25 = _ | 35
+play: sort | Income, Cost | Money from selling cupcakes=Income; Flour and sugar=Cost; Payment for walking a dog=Income; Petrol to get to the market=Cost; The stall fee=Cost | Income or cost?
+check: gap | Income $40, costs $15. The profit is $_ | 25
+check: mcq | Income is $30 and costs are $45. That's a… | loss* | profit | tie
+check: tf | Keeping records helps you know whether you're making a profit. | true
+home: Keep a record of the income and costs of any money-making job this month.
+skill: profit-loss
+
+@lesson 10.4 | Customers and reputation | 🤝 | stall
+hook: Why do some small businesses get lots of repeat customers?
+learn: Happy customers come back and tell their friends. That's your reputation.
+learn: Be reliable: turn up on time, do what you promised, and be polite.
+learn: If something goes wrong, own it and fix it.
+try: Turning up on time, every time :: mcq | What builds a good reputation? | Being reliable and polite* | Charging the most | Cutting corners
+play: sort | Builds reputation, Damages it | Turning up on time=Builds reputation; Not finishing a job=Damages it; Saying thank you=Builds reputation; Ignoring complaints=Damages it; Fixing a mistake quickly=Builds reputation | Which is it?
+check: tf | Happy customers often tell their friends. | true
+check: mcq | A customer is unhappy with your work. What's best? | Listen, apologise and fix it* | Argue | Ignore them
+check: mcq | Repeat customers are… | people who come back* | one-time buyers | competitors
+home: Do one job for a family member as if they were a paying customer: on time, polite, and done well.
+skill: reputation
+
 
 # Fact banks (content/facts/money.txt)
 @facts 1.1
@@ -1090,3 +1144,41 @@ fact: Buying good second-hand things lets someone else pay for the early [drop].
 fact: A new gadget is often worth [less] after a year. | more; double
 fact: Depreciation is a [cost] of owning things. | profit; gift
 fact: Gadgets usually lose value [faster] than land. | slower; never
+
+# Fact banks (content/facts/money.txt)
+@facts 10.1
+fact: Good small businesses solve a [problem]. | mystery; puzzle game
+fact: Good small businesses meet a [need]. | mood; rumour
+fact: Busy neighbours might need dogs [walked]. | painted; hidden
+fact: Weeding gardens can meet a [need]. | rumour; trend
+fact: Start with your [skills]. | debts; excuses
+fact: Focus on what people will actually [pay] for. | ignore; complain about
+fact: Always check with a [grown-up] first. | stranger; customer
+fact: Car washing is a business idea that meets a [need]. | trend; rumour
+@facts 10.2
+fact: Start with your [costs]. | profits; prices only
+fact: Ingredients and [packaging] are costs. | profit; income
+fact: If 12 cupcakes cost $9 to make, each costs [75c]. | $9; 12c
+fact: If 10 cookies cost $5 to make, each costs [50c]. | $5; 10c
+fact: Your price must be [higher] than your cost to make a profit. | lower; the same as
+fact: Your price should be [fair] enough that people will buy. | sky-high; secret
+fact: Cost per item = total cost ÷ number of [items]. | customers; days
+fact: Selling below cost means a [loss]. | profit; bonus
+@facts 10.3
+fact: Profit = income − [costs]. | profit; price
+fact: $60 − $25 = [$35] profit. | $85; $25
+fact: $40 income and $15 costs make [$25] profit. | $55; $15
+fact: If costs are bigger than income, it's a [loss]. | profit; bonus
+fact: $20 income and $30 costs is a [loss] of $10. | profit; bonus
+fact: Keep a simple [record] of everything you spend and earn. | secret; guess
+fact: Income is the money that comes [in]. | out; away
+fact: Tracking money shows whether you made a [profit]. | friend; mess
+@facts 10.4
+fact: Happy customers come [back]. | away; never
+fact: Happy customers tell their [friends]. | lawyers; nobody
+fact: What people say about your business is your [reputation]. | income; price
+fact: Being [reliable] builds a good reputation. | late; rude
+fact: Turn up on [time]. | late; whenever
+fact: Do what you [promised]. | felt like; forgot
+fact: Be [polite] to customers. | rude; grumpy
+fact: If something goes wrong, own it and [fix] it. | hide; blame others

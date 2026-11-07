@@ -620,6 +620,60 @@ check: mcq | In Chorecast, who pays out the Give jar? | A grown-up* | The kid, o
 home: Set a giving goal with a grown-up, and a date to give it.
 skill: giving-plan
 
+@unit 10 | Smart shopping | Waiting, receipts, second-hand and online
+
+@lesson 10.1 | The waiting rule | ⏳ | stall
+hook: You really want something right now. Should you buy it straight away?
+learn: Waiting before you buy helps you tell a real want from a passing feeling.
+learn: Try a waiting rule: for bigger things, wait a week. If you still want it, plan for it.
+learn: Often the urge fades, and your money stays in your Spend jar for something better.
+try: Waiting a week before a big buy :: mcq | Why wait before a big purchase? | To check you still really want it* | Prices always go up | It's a law
+play: order | Use the waiting rule | Notice you want something; Write it on a wish list with the date; Wait a week; Decide if you still want it
+check: tf | The urge to buy often fades if you wait. | true
+check: mcq | Which is a good use of the waiting rule? | Waiting a week before buying new headphones* | Waiting a week to eat lunch | Never buying anything
+check: mcq | A wish list helps you… | think before you buy* | spend faster | forget everything
+home: Start a wish list with dates, and check it again in a week.
+skill: waiting-rule
+
+@lesson 10.2 | Receipts and returns | 🧾 | stall
+hook: Your new shoes fall apart after a week. What can you do?
+learn: Keep your receipt. It shows what you paid and when.
+learn: If something is faulty, take it back with the receipt. Shops will often fix it, swap it or give your money back.
+learn: Check things carefully before you buy, and ask about the shop's returns rules.
+try: Keep the receipt somewhere safe :: mcq | Why keep a receipt? | It shows what you paid and when* | It's pretty | Shops make you
+play: order | Return a faulty item | Find your receipt; Take the item back to the shop; Explain the problem politely; Ask for a repair, a swap or your money back
+check: tf | You should check things carefully before you buy them. | true
+check: mcq | A new toy breaks on the first day. What should you do first? | Find the receipt and ask a grown-up to help return it* | Throw it away | Glue it and say nothing
+check: mcq | When you return something, it helps to be… | polite and clear* | rude | silent
+home: Ask a grown-up to show you where they keep important receipts.
+skill: receipts
+
+@lesson 10.3 | Second-hand bargains | ♻️ | stall
+hook: Does everything have to be brand new?
+learn: Second-hand means someone owned it before. It's often much cheaper.
+learn: Good places to look: op shops, garage sales and hand-me-downs from family.
+learn: Check its condition: does it work, is anything missing, is it clean?
+try: A second-hand bike for much less than a new one :: mcq | What's a good thing about buying second-hand? | It's usually cheaper* | It's always broken | It's always new
+play: order | Check a second-hand item | Look for damage; Check it works; Check nothing is missing; Decide if the price is fair
+check: tf | Second-hand things can be great value. | true
+check: mcq | Which is a place to find second-hand things? | An op shop* | A new car showroom | A bakery
+check: mcq | Before buying a second-hand toy, you should… | check it works and nothing's missing* | buy it without looking | pay double
+home: Visit an op shop with a grown-up and see what you could find.
+skill: second-hand
+
+@lesson 10.4 | Shopping online | 💻 | online
+hook: It's $20 online and $24 in the shop. Is online always cheaper?
+learn: Online prices may not include delivery. Add the delivery cost to compare fairly.
+learn: You can't touch or try things online, so check sizes and reviews.
+learn: Only shop online with a grown-up, on websites they trust.
+try: $20 plus $6 delivery is $26 :: gap | 18 + 5 = _ dollars | 23
+play: order | Compare online and in the shop | Find the online price; Add the delivery; Find the shop price; Compare the totals
+check: mcq | Online it's $30 plus $8 delivery. In the shop it's $35. Which is cheaper? | The shop* | Online | They're the same
+check: tf | Kids should only shop online with a grown-up. | true
+check: mcq | Why check reviews before buying online? | You can't see or try it first* | Reviews are always fake | To waste time
+home: With a grown-up, compare the total cost of one thing online and in a shop.
+skill: online-shopping
+
 
 # Fact banks (content/facts/money.txt)
 @facts 1.1
@@ -1090,3 +1144,41 @@ fact: In Chorecast, a [grown-up] pays out your Give jar. | robot; stranger
 fact: Ask a grown-up to help you give to the [cause] you chose. | shop; game
 fact: $1 a week for a year adds up to [$52]. | $12; $365
 fact: Planned giving is [easier] to keep up. | harder; impossible
+
+# Fact banks (content/facts/money.txt)
+@facts 10.1
+fact: Waiting before you buy helps you tell a real want from a passing [feeling]. | price; shop
+fact: For bigger things, wait a [week]. | second; minute
+fact: If you still want it after waiting, [plan] for it. | forget; panic
+fact: Often the urge to buy [fades]. | doubles; grows
+fact: When the urge fades, your money stays in your [Spend] jar. | Give; bin
+fact: Waiting saves money for something [better]. | worse; broken
+fact: A passing feeling is a want that [fades]. | lasts forever; grows
+fact: A waiting rule stops [impulse] buys. | planned; saved
+@facts 10.2
+fact: Keep your [receipt]. | wrapper; price sticker only
+fact: A receipt shows what you paid and [when]. | why; who made it
+fact: If something is [faulty], take it back with the receipt. | perfect; ugly
+fact: Shops will often fix a faulty item, swap it or give your money [back]. | away; twice
+fact: Check things carefully [before] you buy. | after; never
+fact: Ask about the shop's [returns] rules. | music; lighting
+fact: A receipt is [proof] of what you bought. | a toy; a coupon
+fact: Losing your receipt can make returns [harder]. | easier; faster
+@facts 10.3
+fact: Second-hand means someone [owned] it before. | made; dreamed
+fact: Second-hand things are often much [cheaper]. | dearer; newer
+fact: [Op shops] sell second-hand things. | Banks; Petrol stations
+fact: Garage sales sell [second-hand] things. | brand-new; imaginary
+fact: Hand-me-downs from family are [second-hand]. | brand-new; stolen
+fact: Check that a second-hand item [works]. | sparkles; smells new
+fact: Check whether anything is [missing]. | shiny; new
+fact: Check whether it's [clean]. | famous; expensive
+@facts 10.4
+fact: Online prices may not include [delivery]. | the item; tax only
+fact: Add the [delivery] cost to compare fairly. | wrapping; colour
+fact: You can't [touch] things before buying online. | see; read about
+fact: Check [sizes] when shopping online. | colours of the website; ads
+fact: Check [reviews] when shopping online. | ads only; logos
+fact: Only shop online with a [grown-up]. | stranger; friend online
+fact: Only use websites your grown-up [trusts]. | found in an ad; has never seen
+fact: A $20 item with $8 delivery costs [$28]. | $20; $12

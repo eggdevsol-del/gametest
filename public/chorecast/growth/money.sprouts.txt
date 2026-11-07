@@ -616,6 +616,60 @@ check: mcq | Which is reusing? | Keeping buttons in a jam jar* | Throwing a jar 
 home: Find one thing headed for the bin and give it a new job.
 skill: reusing
 
+@unit 10 | Money maths | Adding prices, change, comparing and saving up
+
+@lesson 10.1 | Adding prices | 🧮 | stall
+hook: A drink is $2 and a muffin is $3. How much is that altogether?
+learn: To find a total, add the prices together: $2 + $3 is $5.
+learn: Add the dollars first, then the cents: $1.50 + $2.20 is $3 and 70c, so $3.70.
+learn: Check your total before you pay.
+try: $4 and $5 make $9 :: gap | 3 + 6 = _ dollars | 9
+play: gen | add | 5
+check: gap | 5 + 4 = _ dollars | 9
+check: mcq | An apple is 50c and a banana is 50c. Together they cost… | $1* | 50c | $2
+check: tf | You should check your total before you pay. | true
+home: At the shop, add up two prices in your head before the checkout does.
+skill: adding-prices
+
+@lesson 10.2 | Getting change | 💵 | stall
+hook: Something costs $7 and you pay with a $10 note. How much comes back?
+learn: Change is the money you get back when you pay more than the price.
+learn: Count up from the price: $7 to $10 is $3.
+learn: Always check your change.
+try: $8 from $10 leaves $2 change :: gap | Something costs $6. You pay $10. Your change is $_ | 4
+play: gen | change | 5
+check: gap | Something costs $15. You pay $20. Your change is $_ | 5
+check: mcq | You pay $5 for something that costs $3. Your change is… | $2* | $8 | $3
+check: tf | Counting up from the price is one way to work out change. | true
+home: Next time you buy something, work out your change before you get it.
+skill: change
+
+@lesson 10.3 | Which costs more? | 🏷️ | stall
+hook: A toy is $12 at one shop and $9 at another. Which is cheaper?
+learn: Comparing prices helps you get the best deal.
+learn: Look at the dollars first, then the cents.
+learn: Cheaper isn't always better. Think about whether it'll last.
+try: $9 is cheaper than $12 :: mcq | Which is cheapest? | $4.50* | $5.40 | $5.00
+play: order | Put the prices in order, cheapest first | $1.20; $2.50; $3.05; $3.50
+check: mcq | Which costs the most? | $8.90* | $8.09 | $8.00
+check: tf | The cheapest thing is always the best choice. | false | Sometimes it breaks quickly. Think about whether it'll last.
+check: mcq | The same ball is $10 at one shop and $7 at another. How much do you save at the cheaper shop? | $3* | $17 | $7
+home: With a grown-up, compare the price of one thing at two shops, or two brands of the same thing.
+skill: comparing-prices
+
+@lesson 10.4 | Saving adds up | 🐷 | bank
+hook: If you save $2 every week, how much will you have after 5 weeks?
+learn: Small amounts saved every week add up.
+learn: $2 a week for 5 weeks is 5 × $2, which is $10.
+learn: Keep it in your Vault jar and watch it grow towards your Saving goal.
+try: $3 a week for 4 weeks is $12 :: gap | 2 × 6 = _ dollars | 12
+play: gen | split | 4
+check: gap | 5 × 3 = _ | 15
+check: mcq | You save $5 a week. After 4 weeks you have… | $20* | $9 | $54
+check: tf | Small amounts saved every week add up. | true
+home: Work out how many weeks it would take to save for something you want.
+skill: saving-adds-up
+
 
 # Fact banks (content/facts/money.txt)
 @facts 1.1
@@ -1086,3 +1140,41 @@ fact: Reusing saves [money]. | rubbish; time travel
 fact: Reusing makes [less] rubbish. | more; double
 fact: Reusing can mean using something in a [new] way. | broken; impossible
 fact: An old tin can become a [plant pot]. | sandwich; pillow
+
+# Fact banks (content/facts/money.txt)
+@facts 10.1
+fact: To find a total, [add] the prices together. | take away; multiply
+fact: $2 + $3 is [$5]. | $1; $6
+fact: $4 + $5 is [$9]. | $1; $20
+fact: Add the [dollars] first, then the cents. | cents only; coins only
+fact: $1.50 + $2.20 is [$3.70]. | $3.50; $1.70
+fact: $1.20 + $1.30 is [$2.50]. | $2.30; $3.50
+fact: Check your [total] before you pay. | colour; receipt later
+fact: Adding prices tells you how much to [pay]. | save; borrow
+@facts 10.2
+fact: Change is the money you get [back]. | first; away
+fact: You get change when you pay [more] than the price. | less; exactly
+fact: Count up from the [price]. | change; zero
+fact: $7 to $10 is [$3]. | $7; $17
+fact: Paying $5 for a $4 toy gets [$1] change. | $4; $9
+fact: Paying $10 for a $6 book gets [$4] change. | $6; $16
+fact: Always [check] your change. | throw away; ignore
+fact: If you pay the exact price, you get [no] change. | double; lots of
+@facts 10.3
+fact: Comparing prices helps you get the best [deal]. | mess; problem
+fact: Look at the [dollars] first. | cents; colours
+fact: $4.50 costs [more] than $3.90. | less than; the same as
+fact: $2.10 costs [less] than $2.40. | more than; the same as
+fact: If the dollars are the same, compare the [cents]. | colours; shops
+fact: Cheaper isn't always [better]. | cheaper; worse
+fact: Think about whether it'll [last]. | glow; sing
+fact: A toy that breaks fast can [waste] money. | save; grow
+@facts 10.4
+fact: Small amounts saved every week [add up]. | disappear; shrink
+fact: $2 a week for 5 weeks is [$10]. | $7; $25
+fact: $1 a week for 6 weeks is [$6]. | $7; $1
+fact: $3 a week for 4 weeks is [$12]. | $7; $34
+fact: Keep your savings in your [Vault] jar. | Spend; Give
+fact: Watch your savings grow towards your [goal]. | bin; snack
+fact: 5 × $2 is the same as $2 + $2 + $2 + $2 + [$2]. | $5; $10
+fact: Saving every week makes your Vault [grow]. | shrink; vanish

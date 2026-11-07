@@ -110,7 +110,7 @@ for (const [f, pack] of Object.entries(packs)) {
 const liveLessons = Object.entries(packs).flatMap(([f, p]) => p.units.flatMap(u => u.lessons).map(l => [f.split('.')[0], l]));
 ok(!itemBad.length, 'every built maths question and fact question has exactly one right answer', itemBad.slice(0, 4));
 ok(!short.length, `every built-out lesson has 40, 45 or 50 questions and games for its band, and at least 40 in a subject's first unit (${liveLessons.length - noBank.length} lessons)`, short.slice(0, 8));
-ok(liveLessons.filter(([tree, l]) => tree === 'maths' && +l.unit <= (shipped[`maths.${l.band}`] || {}).units).every(([, l]) => D.MSKILL.S[l.skill]), 'every live maths lesson has a question generator for its topic', liveLessons.filter(([tree, l]) => tree === 'maths' && !D.MSKILL.S[l.skill]).map(([, l]) => l.skill).slice(0, 20));
+ok(liveLessons.filter(([tree]) => tree === 'maths').every(([, l]) => D.MSKILL.S[l.skill] || l.facts.length >= 8), 'every maths lesson has a question maker for its topic, or a fact bank (shapes, data, chance)', liveLessons.filter(([tree, l]) => tree === 'maths' && !D.MSKILL.S[l.skill] && l.facts.length < 8).map(([, l]) => l.skill).slice(0, 20));
 
 /* ---------- Fact banks ---------- */
 const factDir = path.join(REPO, 'chorecast-growth/content/facts'), fbad = [];

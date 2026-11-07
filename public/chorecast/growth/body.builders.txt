@@ -53,6 +53,60 @@ check: mcq | Which helps protect your skin from the sun? | A hat and sunscreen* 
 home: Check the sunscreen at home with a grown-up, and put a hat by the door.
 skill: teeth-skin
 
+@unit 2 | Safe and sound | Bikes, water, first aid and calling for help
+
+@lesson 2.1 | Bike and scooter safety | 🚲 | townhall
+hook: What's the most important thing to wear on a bike?
+learn: Always wear a helmet that fits snugly and is done up.
+learn: Be seen: bright clothes, lights at dusk, and a bell.
+learn: Check your brakes and tyres before you ride, and watch out for car doors opening.
+try: Helmet on and done up :: mcq | How should a helmet fit? | Snug and done up* | Loose on the back of your head | Unclipped
+play: order | Before you ride | Put on your helmet and do it up; Check your brakes; Check your tyres; Look around before you set off
+check: tf | Bright clothing helps drivers see you. | true
+check: mcq | What's a danger to watch for when riding past parked cars? | Doors opening* | Birds | Puddles
+check: mcq | Riding at dusk, you should use… | lights* | sunglasses | headphones
+home: Do a bike check with a grown-up: helmet, brakes, tyres and lights.
+skill: bike-safety
+
+@lesson 2.2 | Safe in the water | 🌊 | island
+hook: Why can even strong swimmers get into trouble?
+learn: Conditions can change quickly. Waves, cold water and rips can tire anyone out.
+learn: Swim between the flags, never swim alone, and check the conditions first.
+learn: If you're caught in a rip, stay calm, float and raise your hand for help.
+try: Float and raise your hand :: mcq | If you're caught in a rip, you should… | stay calm, float and raise your hand* | swim hard against it | panic
+play: sort | Safe choice, Risky choice | Swimming between the flags=Safe choice; Swimming alone after dark=Risky choice; Wearing a life jacket in a kayak=Safe choice; Jumping off a wharf into water you can't see into=Risky choice; Asking a lifeguard about the conditions=Safe choice | Safe or risky?
+check: tf | Cold water can tire you out quickly. | true
+check: mcq | Before swimming at a new beach, you should… | check the conditions and the flags* | dive straight in | swim out as far as you can
+check: mcq | A friend is in trouble in deep water. The safest first step is to… | call for help and throw them something that floats* | jump straight in | leave
+home: With a grown-up, learn how to spot a rip: a calmer-looking, darker patch between breaking waves.
+skill: water-safety-teen
+
+@lesson 2.3 | First aid for small injuries | 🩹 | home
+hook: Your little brother falls and cuts his knee. What do you do?
+learn: For a small cut: wash your hands, rinse the cut with clean water, then cover it with a plaster.
+learn: For a nosebleed: sit up, lean forward, and pinch the soft part of the nose for 10 minutes.
+learn: For a bump: hold on a cold pack wrapped in a cloth for a short time. Tell a grown-up about any bump to the head.
+try: Lean forward for a nosebleed :: mcq | For a nosebleed, you should… | lean forward and pinch the soft part of your nose* | lean back | lie down flat
+play: order | Care for a small cut | Wash your hands; Rinse the cut with clean water; Pat it dry; Cover it with a plaster
+check: tf | You should tell a grown-up about any bump to the head. | true
+check: mcq | How long should you pinch a nosebleed? | About 10 minutes* | 5 seconds | An hour
+check: mcq | A cold pack should be… | wrapped in a cloth* | put on bare skin for hours | heated first
+home: With a grown-up, check what's in your home's first aid kit.
+skill: first-aid-minor
+
+@lesson 2.4 | Calling for help | 📞 | home
+hook: What would you say if you called the emergency number?
+learn: In an emergency, call {nz:111~au:000}. It works even from a phone with no credit.
+learn: Stay calm. Say which service you need (ambulance, fire or police), where you are, and what happened.
+learn: Don't hang up until they tell you to. They may give you instructions.
+try: Service, address, what happened :: mcq | What should you tell the operator first? | Which service you need, and where you are* | Your favourite colour | Nothing
+play: order | Make an emergency call | Call {nz:111~au:000}; Ask for the service you need; Give the address; Explain what happened; Stay on the line
+check: tf | You should stay on the line until the operator says you can hang up. | true
+check: mcq | Which is a reason to call the emergency number? | A house on fire* | A lost phone charger | Being bored
+check: mcq | If you don't know the address, you can… | describe nearby landmarks* | hang up | make one up
+home: Make sure you know your full address, including your town.
+skill: emergency-call-teen
+
 
 # Fact banks (content/facts/body.txt)
 @facts 1.1
@@ -91,3 +145,41 @@ fact: Sugary food and drinks feed [germs] that make holes in teeth. | muscles; b
 fact: Holes in teeth are made by germs that feed on [sugar]. | water; milk; air
 fact: Wearing a hat protects your skin from the [sun]. | rain; wind; moon
 fact: Sunscreen helps protect your [skin] from the sun. | hair; teeth; shoes
+
+# Fact banks (content/facts/body.txt)
+@facts 2.1
+fact: Always wear a [helmet] when you ride. | scarf; cap only
+fact: A helmet should fit [snugly]. | loosely; backwards
+fact: A helmet should be done [up]. | down; away
+fact: Bright clothes help you be [seen]. | hidden; invisible
+fact: Use [lights] at dusk. | sunglasses; dark clothes
+fact: A [bell] helps people know you're coming. | blindfold; whisper
+fact: Check your brakes and [tyres] before you ride. | stickers; bell colour
+fact: Watch out for car [doors] opening. | windows; aerials
+@facts 2.2
+fact: Water conditions can change [quickly]. | never; only once a year
+fact: Waves, cold water and rips can tire [anyone] out. | nobody; only babies
+fact: Swim between the [flags]. | rocks; boats
+fact: Never swim [alone]. | with a friend; with a lifeguard watching
+fact: Check the [conditions] before you swim. | snacks; music
+fact: If you're caught in a rip, stay [calm]. | panicked; silent forever
+fact: In a rip, [float] and raise your hand for help. | sink; swim against it until exhausted
+fact: Raising your hand in the water signals for [help]. | a photo; a snack
+@facts 2.3
+fact: Before treating a small cut, wash your [hands]. | feet; hair
+fact: Rinse a small cut with clean [water]. | juice; milk
+fact: Cover a small cut with a [plaster]. | leaf; sticker
+fact: For a nosebleed, sit up and lean [forward]. | back; upside down
+fact: Pinch the [soft] part of the nose. | top; bony
+fact: Pinch a nosebleed for [10] minutes. | 1; 60
+fact: For a bump, hold on a [cold] pack wrapped in a cloth. | hot; sticky
+fact: Tell a grown-up about any bump to the [head]. | elbow only; toe only
+@facts 2.4
+fact: In an emergency, call {nz:111~au:000}. It works even with no [credit]. | battery; screen
+fact: When you call, stay [calm]. | silent; laughing
+fact: Ambulance, fire and [police] are the emergency services. | pizza; taxi
+fact: Say [where] you are. | what you ate; your favourite song
+fact: Say what [happened]. | you want; is on TV
+fact: Don't [hang up] until they tell you to. | listen; answer
+fact: They may give you [instructions]. | a quiz; a song
+fact: A house fire needs the [fire] service. | taxi; pizza

@@ -53,6 +53,60 @@ check: mcq | What's the first thing to check when someone is hurt? | Whether the
 home: With a grown-up, find your home's first aid kit and check what's in it.
 skill: first-aid
 
+@unit 2 | Food and fuel | Nutrients, labels, water and safe cooking
+
+@lesson 2.1 | What food does | 🍳 | kitchen
+hook: Why do athletes care so much about what they eat?
+learn: Carbohydrates (bread, rice, pasta, fruit) give energy. Protein (meat, fish, eggs, beans) builds and repairs muscles.
+learn: Fats (nuts, avocado, oils) help the body take in some vitamins, and we need them in small amounts.
+learn: Vitamins and minerals, mostly from fruit and vegetables, keep everything working.
+try: Pasta gives energy :: mcq | Which nutrient builds and repairs muscles? | Protein* | Sugar | Water
+play: sort | Mostly carbohydrate, Mostly protein, Mostly fat | Rice=Mostly carbohydrate; Chicken=Mostly protein; Olive oil=Mostly fat; Bread=Mostly carbohydrate; Eggs=Mostly protein; Butter=Mostly fat | Which nutrient is it mostly?
+check: tf | Fruit and vegetables are a main source of vitamins. | true
+check: mcq | Which food is high in protein? | Fish* | Lettuce | Jam
+check: mcq | Why do we need some fat? | It helps the body take in some vitamins* | It has no use | It's only for flavour
+home: Look at your dinner and name the carbohydrate, the protein and the vegetables.
+skill: nutrients
+
+@lesson 2.2 | Reading food labels | 🏷️ | kitchen
+hook: A muesli bar says "healthy" on the front. How can you check?
+learn: The nutrition information panel shows what's really in a food, per serving and per 100 g.
+learn: Use the per 100 g column to compare similar foods fairly.
+learn: Ingredients are listed from most to least by weight. If sugar is near the top, there's a lot of it.
+try: Compare per 100 g :: mcq | Ingredients are listed… | from most to least by weight* | in alphabetical order | in any order
+play: order | Check a food label | Ignore the claims on the front; Find the nutrition panel; Compare per 100 g; Read the ingredients list
+check: tf | Words like "healthy" on the front of a packet always tell the full story. | false | Check the nutrition panel and the ingredients.
+check: mcq | Which column is best for comparing two cereals? | Per 100 g* | Per serving | Neither
+check: mcq | Sugar listed first in the ingredients means… | there's more sugar than anything else* | there's hardly any sugar | it's sugar-free
+home: Compare the sugar per 100 g in two breakfast cereals at home.
+skill: food-labels
+
+@lesson 2.3 | Water and performance | 💧 | garden
+hook: Can being a little thirsty make you play worse?
+learn: Even mild dehydration can make you tired, give you a headache, and make it harder to concentrate.
+learn: Drink water through the day, and more when it's hot or you're exercising.
+learn: Pale yellow urine usually means you're drinking enough. Dark yellow means drink more.
+try: A water bottle at training :: mcq | Which is a sign you need more water? | Dark yellow urine* | Pale yellow urine | Cold hands
+play: sort | Drink more, Doing fine | A headache on a hot day=Drink more; Dark yellow urine=Drink more; Pale yellow urine=Doing fine; Feeling thirsty during sport=Drink more | Which is it?
+check: tf | Even mild dehydration can affect concentration. | true
+check: mcq | When should you drink extra water? | When it's hot or you're exercising* | Never | Only at dinner
+check: mcq | What's usually the best drink during sport? | Water* | Energy drinks | Coffee
+home: Carry a water bottle for a day and notice how much you drink.
+skill: hydration
+
+@lesson 2.4 | Cooking safely | 🍗 | kitchen
+hook: How do you avoid making anyone sick when you cook?
+learn: Wash your hands before cooking and after touching raw meat.
+learn: Keep raw meat away from food that's ready to eat. Use a separate board, or wash it well between uses.
+learn: Cook chicken and mince all the way through, and put leftovers in the fridge soon after the meal.
+try: A separate board for raw meat :: mcq | Why use a separate board for raw meat? | So germs don't spread to other food* | It looks nicer | Meat likes its own board
+play: order | Make a safe chicken stir-fry | Wash your hands; Cut the raw chicken on its own board; Wash your hands and the board; Cook the chicken all the way through
+check: tf | Chicken should be cooked all the way through. | true
+check: mcq | When should you wash your hands while cooking? | Before cooking and after touching raw meat* | Only at the end | Never
+check: mcq | Where should leftovers go after dinner? | In the fridge soon after the meal* | On the bench overnight | In a warm cupboard
+home: Cook a simple meal with a grown-up, following the food safety steps.
+skill: food-safety
+
 
 # Fact banks (content/facts/body.txt)
 @facts 1.1
@@ -91,3 +145,41 @@ fact: Never put [ice] on a burn. | cool water; cool running water
 fact: Never put [butter] on a burn. | cool water; cool running water
 fact: Press firmly on a bleeding cut with a clean [cloth]. | stick; leaf; spoon
 fact: Check for danger to [yourself] and others first. | nobody; only the weather
+
+# Fact banks (content/facts/body.txt)
+@facts 2.1
+fact: [Carbohydrates] give energy. | Minerals only; Water only
+fact: Bread, rice and pasta are [carbohydrates]. | proteins; minerals
+fact: [Protein] builds and repairs muscles. | Sugar; Water
+fact: Meat, fish, eggs and beans are [protein] foods. | carbohydrate; vitamin
+fact: Fats help the body take in some [vitamins]. | rocks; plastics
+fact: Nuts, avocado and oils contain [fats]. | protein only; nothing
+fact: [Vitamins and minerals] keep everything working. | Lollies; Fizzy drinks
+fact: Vitamins and minerals come mostly from fruit and [vegetables]. | lollies; fizzy drinks
+@facts 2.2
+fact: The nutrition information [panel] shows what's in a food. | logo; price tag
+fact: The panel shows amounts per serving and per [100 g]. | 1 kg; packet colour
+fact: Use the per [100 g] column to compare similar foods. | serving size; logo
+fact: Ingredients are listed from most to [least]. | most again; alphabetically
+fact: Ingredients are listed by [weight]. | colour; price
+fact: If sugar is near the [top] of the list, there's a lot of it. | bottom; middle only
+fact: Serving sizes can [differ] between brands. | never differ; always match
+fact: Comparing per 100 g is [fairer] than per serving. | less fair; impossible
+@facts 2.3
+fact: Even mild dehydration can make you [tired]. | stronger; taller
+fact: Dehydration can give you a [headache]. | haircut; tan
+fact: Dehydration makes it harder to [concentrate]. | sleep; yawn
+fact: Drink water through the [day]. | year; night only
+fact: Drink more when it's [hot]. | cold only; raining indoors
+fact: Drink more when you're [exercising]. | sleeping; reading
+fact: Pale yellow urine usually means you're drinking [enough]. | too little; nothing
+fact: Dark yellow urine means drink [more]. | less; nothing
+@facts 2.4
+fact: Wash your hands before [cooking]. | sleeping; reading
+fact: Wash your hands after touching raw [meat]. | bread; apples
+fact: Keep raw meat away from food that's [ready to eat]. | in the fridge; frozen
+fact: Use a [separate] board for raw meat. | the same; a dirty
+fact: Cook chicken all the way [through]. | halfway; on the outside only
+fact: Cook mince all the way [through]. | halfway; on the outside only
+fact: Put leftovers in the [fridge] soon after the meal. | sun; cupboard
+fact: Washing a board well between uses stops [germs] spreading. | flavours; colours

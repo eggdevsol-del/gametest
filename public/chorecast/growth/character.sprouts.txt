@@ -251,6 +251,60 @@ check: mcq | You forgot a promise. What's best? | Say sorry and make it right* |
 home: Make a small promise to someone this week, and keep it.
 skill: promises
 
+@unit 6 | Thankful and fair | Thank-you notes, nature, sharing and fairness
+
+@lesson 6.1 | Thank-you notes | 💌 | home
+hook: How can you say thank you without saying a word?
+learn: A thank-you note or drawing shows someone you noticed what they did.
+learn: Say what they did and why it made you happy: "Thank you for the book. I love the dragon in it!"
+learn: Even a small note can make someone's whole day.
+try: "Thank you for helping me ride my bike!" :: mcq | Which is the best thank-you note? | "Thank you for the puzzle. I did it with Dad!"* | "Thanks." | "OK."
+play: order | Make a thank-you note | Think of someone who helped you; Draw or write what they did; Say why it made you happy; Give it to them
+check: tf | A thank-you note can make someone's day. | true
+check: mcq | A good thank-you note says… | what they did and why you liked it* | nothing | what you want next
+check: mcq | Who could you write a thank-you note to? | A teacher who helped you* | A cloud | A chair
+home: Make a thank-you note or drawing for someone this week.
+skill: thank-you-notes
+
+@lesson 6.2 | Thankful for nature | 🌳 | garden
+hook: What's something in nature you're glad we have?
+learn: Nature gives us so much: fresh air, water, food, trees, birds and beaches.
+learn: Being thankful for nature means noticing it and looking after it.
+learn: Picking up litter and being gentle with plants and animals are ways to say thanks.
+try: Picking up litter at the beach :: mcq | How can you look after nature? | Pick up litter* | Break branches | Chase birds
+play: sort | Looks after nature, Harms nature | Putting rubbish in the bin=Looks after nature; Pulling up flowers=Harms nature; Planting a tree=Looks after nature; Throwing stones at birds=Harms nature; Turning off the tap=Looks after nature | Which is it?
+check: tf | Looking after nature is a way to show thanks. | true
+check: mcq | Which is something nature gives us? | Fresh air* | Video games | Plastic
+check: mcq | Being gentle with animals means… | watching quietly and not chasing them* | grabbing them | shouting at them
+home: Go on a nature walk and name three things you're thankful for.
+skill: gratitude-nature
+
+@lesson 6.3 | Sharing | 🧩 | home
+hook: You have a big box of blocks and your friend has none. What could you do?
+learn: Sharing means letting others use or have some of what you have.
+learn: Sharing makes play more fun and helps everyone feel included.
+learn: It's OK to keep a very special thing safe. You can share other things instead.
+try: Sharing your blocks :: mcq | Your friend has no pencils. What could you do? | Lend them one* | Hide yours | Laugh at them
+play: sort | Sharing, Not sharing | Taking turns on the swing=Sharing; Keeping all the toys=Not sharing; Splitting a snack=Sharing; Grabbing the ball=Not sharing; Letting a friend use your crayons=Sharing | Which is it?
+check: tf | Sharing can make play more fun. | true
+check: mcq | Is it OK to keep a very special thing safe? | Yes, and share other things instead* | No, never | Only if you hide it
+check: mcq | Which is sharing? | Offering half your orange* | Eating it all in front of them | Throwing it away
+home: Share something with a brother, sister or friend this week.
+skill: sharing
+
+@lesson 6.4 | Being fair | ⚖️ | island
+hook: Two kids, one cake. How do you make it fair?
+learn: Being fair means treating people in a way that's right and even.
+learn: Taking turns, following the rules of a game, and sharing equally are all fair.
+learn: A fun trick: one person cuts the cake, and the other picks first!
+try: Taking turns is fair :: mcq | In a game, fair means… | everyone follows the same rules* | the winner makes new rules | only you get a turn
+play: sort | Fair, Unfair | Taking turns=Fair; Cheating in a game=Unfair; Sharing equally=Fair; Changing the rules to win=Unfair; Letting everyone have a go=Fair | Fair or unfair?
+check: tf | Cheating in a game is fair. | false | Cheating is unfair, because the rules aren't the same for everyone.
+check: mcq | One person cuts the cake and the other picks first. Why is that fair? | The cutter will try to make the pieces even* | It's random | The cutter gets more
+check: mcq | Which is fair? | Waiting for your turn* | Pushing into the line | Grabbing first
+home: Play a board game with your family and make sure everyone follows the same rules.
+skill: fairness
+
 
 # Fact banks (content/facts/character.txt)
 @facts 1.1
@@ -433,3 +487,41 @@ fact: After saying sorry, try to [make it right]. | forget it; hide
 fact: Breaking promises makes it [harder] for people to trust you. | easier; quicker
 fact: "I'll feed the dog after school" is a [promise]. | joke; question
 fact: People who keep promises are [reliable]. | sneaky; lazy
+
+# Fact banks (content/facts/character.txt)
+@facts 6.1
+fact: A thank-you note shows someone you [noticed] what they did. | forgot; ignored
+fact: A thank-you [drawing] works too. | shout; frown
+fact: Say what they did and why it made you [happy]. | cross; sleepy
+fact: "Thank you for the book" says what they [did]. | ate; forgot
+fact: "I love the dragon in it!" says why you're [happy]. | cross; bored
+fact: Even a small note can make someone's whole [day]. | mess; problem
+fact: Thank-you notes are a [kind] thing to do. | rude; silly
+fact: A note that says exactly what you liked is more [special]. | boring; rude
+@facts 6.2
+fact: Nature gives us fresh [air]. | plastic; noise
+fact: Nature gives us [water]. | plastic; rubbish
+fact: Nature gives us [food]. | screens; plastic
+fact: Being thankful for nature means noticing it and [looking after] it. | wrecking; ignoring
+fact: Picking up [litter] is a way to say thanks to nature. | flowers; shells
+fact: Be [gentle] with plants and animals. | rough; loud
+fact: Trees, birds and beaches are part of [nature]. | homework; traffic
+fact: Looking after nature keeps it [beautiful]. | messy; broken
+@facts 6.3
+fact: Sharing means letting others use some of what you [have]. | lose; break
+fact: Sharing makes play more [fun]. | boring; scary
+fact: Sharing helps everyone feel [included]. | left out; lonely
+fact: It's OK to keep a very [special] thing safe. | borrowed; stolen
+fact: You can share [other] things instead. | no; secret
+fact: Sharing crayons is a way to [share]. | grab; hide
+fact: Friends often share [back]. | never; nothing
+fact: Sharing is a [kind] thing to do. | mean; silly
+@facts 6.4
+fact: Being fair means treating people in a way that's right and [even]. | odd; mean
+fact: Taking [turns] is fair. | everything; the biggest piece
+fact: Following the [rules] of a game is fair. | cheats; tricks
+fact: Sharing [equally] is fair. | unevenly; secretly
+fact: One person cuts the cake, and the [other] picks first. | same person; dog
+fact: Cutting the cake when someone else picks first helps you cut it [fairly]. | badly; unevenly
+fact: Cheating in a game is [unfair]. | fair; kind
+fact: Being fair helps everyone have [fun]. | trouble; arguments

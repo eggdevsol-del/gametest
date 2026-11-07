@@ -212,3 +212,290 @@ check: tf | Pythagoras only works in right-angled triangles. | true
 home: Measure the diagonal of a book or a screen, then check it with Pythagoras.
 skill: pythagoras-use
 
+@unit 5 | Powers and roots | Index notation and standard form
+@unit 6 | Patterns and graphs | Rules, coordinates and straight lines
+@unit 7 | Area and volume | Triangles, circles and prisms
+@unit 8 | Probability and statistics | Outcomes, experiments and misleading graphs
+
+@lesson 5.1 | Powers | 🔋 | workshop
+hook: A message gets passed on: each person tells 2 more, and then they each tell 2 more. How fast does it grow?
+learn: A power shows repeated multiplying: 2³ = 2 × 2 × 2 = 8.
+learn: The small raised number is the index (or exponent). The big number is the base.
+learn: 10² = 100 and 10³ = 1,000. Any number to the power of 1 is itself.
+try: 3² = 9 :: gap | 2 × 2 × 2 × 2 = _ | 16
+play: gen | powers | 5
+check: gap | 5 × 5 × 5 = _ | 125
+check: mcq | 4³ means… | 4 × 4 × 4* | 4 × 3 | 4 + 4 + 4
+check: mcq | 10⁴ is… | 10,000* | 40 | 1,000
+home: Work out 2 to the power of 10 by doubling 1 ten times.
+skill: powers
+
+@lesson 5.2 | Squares and square roots | 🟩 | garden
+hook: A square garden has an area of 49 m². How long is each side?
+learn: A square number is a number times itself: 7² = 49.
+learn: The square root (√) undoes squaring: √49 = 7.
+learn: The first ten square numbers are 1, 4, 9, 16, 25, 36, 49, 64, 81 and 100.
+try: √81 = 9 :: gap | 12 × 12 = _ | 144
+play: sort | Square number, Not a square | 36=Square number; 40=Not a square; 64=Square number; 50=Not a square; 100=Square number; 90=Not a square | Square number or not?
+check: gap | The square root of 121 is _ | 11
+check: mcq | A square has an area of 25 cm². Each side is… | 5 cm* | 25 cm | 12.5 cm
+check: tf | 16 is a square number. | true
+home: Colour in the square numbers on a 1 to 100 chart.
+skill: square-roots
+
+@lesson 5.3 | Index laws | ⚙️ | workshop
+hook: Is there a shortcut for 2³ × 2⁴?
+learn: Multiplying powers of the same base: add the indices. 2³ × 2⁴ = 2⁷.
+learn: Dividing powers of the same base: take away the indices. 5⁶ ÷ 5² = 5⁴.
+learn: A power of a power: multiply the indices. (3²)³ = 3⁶.
+try: 10² × 10³ = 10⁵ :: mcq | Simplify 7⁵ ÷ 7³ | 7²* | 7⁸ | 1²
+play: match | Simplify each | 2³ × 2²=2⁵; 6⁴ ÷ 6=6³; (4²)³=4⁶; x² × x⁵=x⁷
+check: mcq | Simplify a⁴ × a³ | a⁷* | a¹² | 2a⁷
+check: mcq | Simplify (2³)² | 2⁶* | 2⁵ | 4⁶
+check: tf | 3² × 3² is the same as 3⁴. | true
+home: Show a grown-up why 2³ × 2² = 2⁵ by writing out all the 2s.
+skill: index-laws
+
+@lesson 5.4 | Standard form | 🌌 | museum
+hook: The sun is about 150,000,000 km from Earth. Is there a neater way to write that?
+learn: Standard form writes a number as a number from 1 to 10, times a power of 10.
+learn: 150,000,000 = 1.5 × 10⁸.
+learn: Scientists use it for very big and very small numbers.
+try: 3,000 = 3 × 10³ :: mcq | 45,000 in standard form is… | 4.5 × 10⁴* | 45 × 10³ | 4.5 × 10³
+play: match | Match each number to its standard form | 2,000=2 × 10³; 600,000=6 × 10⁵; 7,500=7.5 × 10³; 90=9 × 10¹
+check: mcq | 8 × 10⁶ is… | 8,000,000* | 800,000 | 80,000,000
+check: tf | In standard form, the first number is from 1 up to (but not including) 10. | true
+check: mcq | Which is written in standard form? | 3.2 × 10⁵* | 32 × 10⁴ | 0.32 × 10⁶
+home: Find a very big number in a science article and write it in standard form.
+skill: standard-form
+
+@lesson 6.1 | Number patterns | 🔢 | stage
+hook: 5, 8, 11, 14… What comes next, and what's the 100th number?
+learn: In a linear pattern, the same amount is added each time. Here it's 3.
+learn: A rule finds any term. For 5, 8, 11, 14 the rule is 3n + 2, where n is the position.
+learn: Check it: n = 1 gives 3 × 1 + 2 = 5. The 100th term is 3 × 100 + 2 = 302.
+try: 2, 4, 6, 8 has the rule 2n :: gap | What comes next? 7, 11, 15, 19, _ | 23
+play: match | Match each pattern to its rule | 4, 8, 12, 16=4n; 3, 5, 7, 9=2n + 1; 6, 11, 16, 21=5n + 1; 1, 4, 7, 10=3n − 2
+check: gap | Using the rule 3n + 2, the 10th term is _ | 32
+check: mcq | In 10, 17, 24, 31, what's added each time? | 7* | 10 | 6
+check: gap | The rule is 4n + 1. The 5th term is _ | 21
+home: Find a pattern at home (stairs, tiles, fence posts) and write its rule.
+skill: linear-patterns
+
+@lesson 6.2 | Coordinates | 📍 | island
+hook: How do you tell someone exactly where the treasure is on a map?
+learn: Coordinates give a position as (x, y): how far across, then how far up.
+learn: The point (3, 5) is 3 across and 5 up from the origin, (0, 0).
+learn: Negative coordinates go left or down: (−2, 4) is 2 left and 4 up.
+try: (4, 1) is 4 across and 1 up :: mcq | Which point is 2 across and 6 up? | (2, 6)* | (6, 2) | (2, −6)
+play: order | Plot the point (3, −2) | Start at the origin (0, 0); Go 3 to the right; Go 2 down; Mark the point
+check: mcq | The origin is… | (0, 0)* | (1, 1) | (10, 10)
+check: tf | In (5, 2), the 5 tells you how far across. | true
+check: mcq | (−3, 4) is… | 3 left and 4 up* | 3 right and 4 down | 4 left and 3 up
+home: Draw a treasure map on grid paper and give a grown-up the coordinates.
+skill: coordinates
+
+@lesson 6.3 | Straight-line graphs | 🚕 | townhall
+hook: A taxi charges $3 plus $2 a kilometre. Can one graph show the cost of any trip?
+learn: An equation like y = 2x + 3 makes a straight line when you plot it.
+learn: Make a table first: x = 0 gives y = 3, x = 1 gives y = 5, and x = 2 gives y = 7.
+learn: Plot the points, then join them with a ruler.
+try: For y = x + 1, x = 2 gives y = 3 :: gap | For y = 2x + 3, when x = 4, y is _ | 11
+play: order | Draw a straight-line graph | Make a table of x and y values; Work out y for each x; Plot the points; Join them with a ruler
+check: gap | For y = 3x − 1, when x = 2, y is _ | 5
+check: mcq | Where does y = 2x + 3 cross the y-axis? | At 3* | At 2 | At 0
+check: tf | y = 2x + 3 makes a straight line. | true
+home: Make a table and a graph for the cost of n ice blocks at $2 each.
+skill: linear-graphs
+
+@lesson 6.4 | Gradient | ⛰️ | island
+hook: Which hill is steeper? Maths can measure it.
+learn: Gradient measures steepness: rise ÷ run, or how far up for each step across.
+learn: A line that rises 6 over a run of 3 has a gradient of 6 ÷ 3 = 2.
+learn: In y = 2x + 3, the gradient is 2, the number in front of x. A line going down has a negative gradient.
+try: A rise of 4 over a run of 2 is a gradient of 2 :: gap | A rise of 9 over a run of 3 is a gradient of _ | 3
+play: match | Each line is y equals the expression. Match it to its gradient | 3x + 1=3; x − 4=1; 5x=5; −2x + 6=−2
+check: gap | 10 ÷ 2 = _ | 5
+check: mcq | Which line is steepest? | y = 4x* | y = 2x | y = x
+check: tf | A line going down from left to right has a negative gradient. | true
+home: Measure the rise and run of a ramp or some steps, and work out the gradient.
+skill: gradient
+
+@lesson 7.1 | Triangles and parallelograms | 📐 | workshop
+hook: How do you find the area of a slanted shape?
+learn: The area of a parallelogram is base × height, using the straight-up height, not the slanted side.
+learn: A triangle is half a parallelogram, so its area is base × height ÷ 2.
+learn: A triangle with a base of 8 cm and a height of 5 cm: 8 × 5 ÷ 2 = 20 cm².
+try: A parallelogram with base 6 and height 4 has an area of 24 :: gap | 10 × 6 ÷ 2 = _ | 30
+play: gen | triangle | 4
+check: gap | A parallelogram with a base of 7 m and a height of 3 m has an area of _ m² | 21
+check: mcq | Why do we halve for a triangle? | A triangle is half a parallelogram* | Triangles are small | It's a rule nobody understands
+check: tf | For area, you use the slanted side as the height. | false | Use the height measured straight up, at a right angle to the base.
+home: Find a triangle at home, like a sign or a slice of toast, and work out its area.
+skill: area-triangles
+
+@lesson 7.2 | Circles | ⭕ | workshop
+hook: Why are wheels round? And how far does a wheel roll in one turn?
+learn: The radius goes from the centre to the edge. The diameter goes right across, so it's 2 × the radius.
+learn: The circumference is the distance around. Circumference = π × diameter, and π is about 3.14.
+learn: A wheel 50 cm across rolls about 3.14 × 50 = 157 cm in one turn.
+try: A radius of 4 means a diameter of 8 :: gap | A circle has a radius of 6 cm. Its diameter is _ cm | 12
+play: match | Match each word to its meaning | Radius=Centre to edge; Diameter=All the way across through the centre; Circumference=The distance around; π=About 3.14
+check: gap | 3.14 × 10 = _ | 31.4
+check: mcq | If the diameter is 20 cm, the radius is… | 10 cm* | 40 cm | 20 cm
+check: tf | π is about 3.14. | true
+home: Wrap string around a round object, then measure across it. Divide the distance around by the distance across. Is it close to 3.14?
+skill: circles
+
+@lesson 7.3 | Area of a circle | 🍕 | kitchen
+hook: How much pizza is there in a 30 cm pizza?
+learn: The area of a circle is π × radius × radius, written πr².
+learn: A circle with a radius of 10 cm: 3.14 × 10 × 10 = 314 cm².
+learn: Halve the diameter to get the radius first.
+try: A radius of 1 gives 3.14 × 1 × 1 = 3.14 :: gap | 3.14 × 5 × 5 = _ | 78.5
+play: order | Find a circle's area from its diameter | Halve the diameter to get the radius; Square the radius; Multiply by π
+check: gap | 3.14 × 2 × 2 = _ | 12.56
+check: mcq | A pizza is 30 cm across. What radius do you use? | 15 cm* | 30 cm | 60 cm
+check: tf | Doubling the radius doubles the area. | false | It makes the area four times as big, because the radius is squared.
+home: Measure across a round plate and work out its area.
+skill: circle-area
+
+@lesson 7.4 | Volume of prisms | ⛺ | workshop
+hook: How much air is inside a tent shape?
+learn: A prism has the same shape all the way through, like a box or a tent shape.
+learn: The volume of a prism is the area of its end face × its length.
+learn: A prism with an end area of 20 cm² and a length of 10 cm holds 20 × 10 = 200 cm³. Each cm³ holds 1 mL.
+try: An end area of 12 and a length of 5 make 60 :: gap | An end area of 15 cm² and a length of 8 cm make a volume of _ cm³ | 120
+play: order | Find a prism's volume | Find the shape of the end face; Work out the area of the end face; Multiply by the length
+check: gap | 25 × 4 = _ | 100
+check: mcq | 1 cm³ holds… | 1 mL* | 1 L | 10 mL
+check: tf | A box is a prism. | true
+home: Find the volume of a box in your kitchen using its end area and its length.
+skill: prism-volume
+
+@lesson 8.1 | Probability | 🎲 | island
+hook: What's the chance of rolling an even number on a dice?
+learn: Probability = the number of ways it can happen ÷ the number of possible outcomes.
+learn: The even numbers on a dice are 2, 4 and 6. That's 3 out of 6, so 3/6 = 1/2.
+learn: Probability goes from 0 (impossible) to 1 (certain).
+try: The probability of rolling a 5 is 1/6 :: mcq | What's the probability of rolling a number bigger than 4? | 1/3* | 1/6 | 4/6
+play: gen | chance | 4
+check: mcq | A bag has 2 red and 8 blue counters. The probability of red is… | 1/5* | 1/4 | 2/8
+check: tf | A probability can be bigger than 1. | false | Probabilities go from 0 to 1.
+check: mcq | The probability of rolling a 7 on a normal dice is… | 0* | 1/7 | 1
+home: List all the outcomes of rolling a dice, and find the probability of an odd number.
+skill: probability
+
+@lesson 8.2 | Two things at once | 🪙 | island
+hook: Toss a coin and roll a dice. How many results are possible?
+learn: List all the outcomes in a table or a tree diagram.
+learn: A coin (2 outcomes) and a dice (6 outcomes) give 2 × 6 = 12 outcomes.
+learn: The probability of heads and a 6 is 1 out of 12, or 1/12.
+try: Two coins give HH, HT, TH and TT: 4 outcomes :: mcq | You toss two coins. What's the probability of two heads? | 1/4* | 1/2 | 1/3
+play: order | Make a tree diagram | Draw branches for the first event; From each one, draw branches for the second; Write each outcome at the ends; Count the outcomes
+check: gap | A spinner with 3 colours and a coin give 3 × 2 = _ | 6
+check: mcq | You toss two coins. What's the probability of one head and one tail? | 1/2* | 1/4 | 1/3
+check: tf | A coin and a dice give 12 possible outcomes. | true
+home: Toss two coins 20 times with someone. How often do you get one of each?
+skill: combined-events
+
+@lesson 8.3 | Experiments and theory | 🧪 | museum
+hook: You toss a coin 10 times and get 7 heads. Is the coin unfair?
+learn: Theoretical probability is what should happen: heads has a probability of 1/2.
+learn: Experimental probability is what actually happened: 7 heads in 10 tosses is 7/10.
+learn: With more tries, results usually get closer to the theory. 10 tosses isn't many.
+try: 52 heads in 100 tosses is close to 1/2 :: mcq | You roll a dice 60 times. About how many 6s would you expect? | 10* | 6 | 60
+play: sort | Theoretical, Experimental | Heads should come up half the time=Theoretical; 7 heads in 10 tosses=Experimental; A 4 should come up 1 roll in 6=Theoretical; 12 sixes in 60 rolls=Experimental | Which kind?
+check: tf | Getting 7 heads in 10 tosses proves a coin is unfair. | false | Small numbers of tries can vary a lot.
+check: mcq | More tries usually make results… | closer to the theory* | further from the theory | exactly the same as it
+check: mcq | 30 heads in 50 tosses gives an experimental probability of… | 3/5* | 1/2 | 30
+home: Toss a coin 50 times with a grown-up and compare your result with 1/2.
+skill: experimental-probability
+
+@lesson 8.4 | Misleading graphs | 📉 | stage
+hook: Two graphs show the same numbers. One looks like a huge jump, the other like hardly any change. How?
+learn: A vertical axis that doesn't start at 0 can make small differences look huge.
+learn: Uneven scales, missing labels and carefully chosen dates can also mislead.
+learn: Always check the axes, the scale and where the data came from.
+try: An axis starting at 95 makes a change from 96 to 98 look huge :: mcq | What should you check first on a graph? | The axes and scale* | The colours | The font
+play: sort | Can mislead, Fair | An axis starting at 95=Can mislead; An axis starting at 0=Fair; No labels on the axes=Can mislead; The source is shown=Fair; Only the best month is shown=Can mislead | Fair or misleading?
+check: tf | A graph can be accurate and still be misleading. | true
+check: mcq | Why might an ad's graph start at 90 instead of 0? | To make a small difference look big* | To save ink | Because 0 doesn't exist
+check: mcq | Which makes a graph more trustworthy? | Labelled axes and a source* | Bright colours | 3D effects
+home: Find a graph in an ad or an article and check its axes.
+skill: misleading-graphs
+
+
+# Fact banks (content/facts/maths.txt)
+@facts 5.4
+fact: Standard form is a number from 1 to 10 times a power of [10]. | 2; 5
+fact: 150,000,000 = 1.5 × 10 to the power [8]. | 6; 15
+fact: 3,000 = 3 × 10 to the power [3]. | 2; 4
+fact: 45,000 = [4.5] × 10⁴. | 45; 0.45
+fact: Scientists use standard form for very [big] and very small numbers. | medium; round
+fact: In standard form, the first number is at least 1 and less than [10]. | 100; 1,000
+fact: 7 × 10² = [700]. | 70; 7,000
+fact: 2.5 × 10³ = [2,500]. | 250; 25,000
+@facts 6.2
+fact: Coordinates give a position as [(x, y)]. | (y, x); (up, across)
+fact: The first coordinate says how far [across]. | up; down
+fact: The second coordinate says how far [up]. | across; left
+fact: The point (3, 5) is 3 across and [5] up. | 3; 8
+fact: The origin is [(0, 0)]. | (1, 1); (10, 10)
+fact: Negative x coordinates go [left]. | right; up
+fact: Negative y coordinates go [down]. | up; right
+fact: The point (−2, 4) is 2 left and [4] up. | 2; 6
+@facts 6.4
+fact: Gradient measures [steepness]. | length; colour
+fact: Gradient = rise ÷ [run]. | rise; area
+fact: A rise of 6 over a run of 3 is a gradient of [2]. | 3; 18
+fact: A rise of 10 over a run of 5 is a gradient of [2]. | 5; 50
+fact: In y = 2x + 3, the gradient is [2]. | 3; 5
+fact: In y = 4x + 1, the gradient is [4]. | 1; 5
+fact: A line going down has a [negative] gradient. | positive; zero
+fact: A flat line has a gradient of [0]. | 1; 10
+@facts 7.3
+fact: The area of a circle is π × radius × [radius]. | diameter; 2
+fact: The area of a circle is written [πr²]. | 2πr; πd
+fact: A circle with a radius of 10 cm has an area of about [314] cm². | 31.4; 62.8
+fact: A circle with a radius of 1 cm has an area of about [3.14] cm². | 6.28; 1
+fact: A circle with a radius of 2 cm has an area of about [12.56] cm². | 6.28; 4
+fact: Halve the diameter to get the [radius]. | area; circumference
+fact: A circle with a diameter of 20 cm has a radius of [10] cm. | 20; 40
+fact: π is about [3.14]. | 2.14; 4.13
+@facts 8.1
+fact: Probability = the ways it can happen ÷ the possible [outcomes]. | guesses; players
+fact: A dice has [6] possible outcomes. | 2; 12
+fact: The even numbers on a dice are 2, 4 and [6]. | 3; 5
+fact: The probability of rolling an even number is [1/2]. | 1/6; 1/3
+fact: Probability goes from 0 to [1]. | 10; 100
+fact: A probability of 0 means [impossible]. | certain; likely
+fact: A probability of 1 means [certain]. | impossible; unlikely
+fact: The probability of rolling a 1 or a 2 is [1/3]. | 1/2; 1/6
+@facts 8.2
+fact: A coin has [2] outcomes. | 1; 6
+fact: A coin and a dice give 2 × 6 = [12] outcomes. | 8; 36
+fact: The probability of heads and a 6 is [1/12]. | 1/2; 1/6
+fact: You can list outcomes in a table or a [tree diagram]. | pie chart; poem
+fact: Two coins give [4] outcomes. | 2; 3
+fact: The probability of two heads with two coins is [1/4]. | 1/2; 1/3
+fact: Two dice give [36] outcomes. | 12; 6
+fact: Listing outcomes helps you find [probabilities]. | riddles; colours
+@facts 8.3
+fact: [Theoretical] probability is what should happen. | Experimental; Lucky
+fact: [Experimental] probability is what actually happened. | Theoretical; Imaginary
+fact: The theoretical probability of heads is [1/2]. | 1/4; 7/10
+fact: 7 heads in 10 tosses is an experimental probability of [7/10]. | 1/2; 3/10
+fact: With more tries, results usually get [closer] to the theory. | further; random
+fact: 3 sixes in 12 rolls is an experimental probability of [1/4]. | 1/6; 3/6
+fact: 10 tosses is [not many] for an experiment. | a huge number; too many
+fact: Repeating an experiment many times gives [more reliable] results. | less reliable; the same
+@facts 8.4
+fact: An axis that doesn't start at [0] can make small differences look huge. | the left; the right
+fact: Uneven [scales] can mislead. | colours; titles only
+fact: Missing [labels] can mislead. | colours; prices
+fact: Carefully chosen [dates] can mislead. | fonts; colours
+fact: Always check the [axes]. | font; colour
+fact: Always check where the [data] came from. | colours; font
+fact: A graph can be accurate but still [misleading]. | wrong; blank
+fact: An axis starting at 0 shows differences at their [true] size. | doubled; hidden

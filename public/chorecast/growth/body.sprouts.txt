@@ -53,6 +53,60 @@ check: mcq | Cough or sneeze… | into your elbow* | onto your friend | into you
 home: Hum "Happy Birthday" twice while you wash your hands. That's about 20 seconds.
 skill: hygiene
 
+@unit 2 | Staying safe | Roads, water, sun and getting help
+
+@lesson 2.1 | Road safety | 🚸 | townhall
+hook: How do you cross a road safely?
+learn: Always cross with a grown-up, at a crossing if there is one.
+learn: Stop at the kerb. Look right, look left, look right again, and listen.
+learn: Walk straight across when the road is clear. Don't run.
+try: Stop, look and listen :: mcq | Where's the safest place to cross? | At a crossing, with a grown-up* | Between parked cars | Anywhere
+play: order | Cross the road safely | Stop at the kerb; Look right, left and right again; Listen for cars; Walk straight across when it's clear
+check: tf | You should run across the road. | false | Walk straight across when it's clear. Running can make you trip.
+check: mcq | What should you wear on a bike? | A helmet* | Sunglasses only | Nothing special
+check: mcq | Which is safest? | Holding a grown-up's hand near roads* | Playing ball near the road | Hiding between parked cars
+home: Practise stop, look and listen on your next walk with a grown-up.
+skill: road-safety
+
+@lesson 2.2 | Water safety | 🏊 | island
+hook: Why should kids never swim without a grown-up watching?
+learn: Water can be dangerous, even shallow water.
+learn: Always swim with a grown-up watching. At the beach, swim between the red and yellow flags.
+learn: Wear a life jacket on boats.
+try: A grown-up is watching :: mcq | Where should you swim at a patrolled beach? | Between the red and yellow flags* | Near the rocks | Far out on your own
+play: sort | Safe, Not safe | Swimming with a grown-up watching=Safe; Swimming alone=Not safe; A life jacket on a boat=Safe; Running beside the pool=Not safe; Swimming between the flags=Safe | Safe or not?
+check: tf | You should wear a life jacket on a boat. | true
+check: mcq | Why walk, not run, beside a pool? | It's slippery* | Running is boring | Pools don't like it
+check: mcq | If you see someone in trouble in the water, you should… | tell a grown-up straight away* | jump in after them | ignore it
+home: Learn your local pool's swimming rules with a grown-up.
+skill: water-safety
+
+@lesson 2.3 | Sun safety | 🧢 | garden
+hook: Why do we wear hats in summer?
+learn: The sun's rays can burn your skin, even on cloudy days.
+learn: {nz:Slip, slop, slap and wrap~au:Slip, slop, slap, seek and slide}: put on a shirt, sunscreen, a hat and sunglasses.
+learn: Play in the shade in the middle of the day, when the sun is strongest.
+try: A hat and sunscreen :: mcq | When is the sun strongest? | The middle of the day* | Early morning | At night
+play: match | Match each sun-safety word to what you do | Slip=Slip on a shirt; Slop=Slop on sunscreen; Slap=Slap on a hat
+check: tf | You can get sunburnt on a cloudy day. | true
+check: mcq | Where's a good place to play at midday in summer? | In the shade* | In full sun with no hat | On hot concrete
+check: mcq | Sunscreen goes… | on your skin* | in your drink | on your hat
+home: Pack a sun-safety bag with a grown-up: a hat, sunscreen and a water bottle.
+skill: sun-safety-kids
+
+@lesson 2.4 | Getting help in an emergency | 🚑 | home
+hook: What would you do if a grown-up at home got badly hurt?
+learn: An emergency is when someone is badly hurt, very sick or in danger, or there's a fire.
+learn: Call {nz:111~au:000}. Say which service you need, your address, and what happened.
+learn: Learn your address by heart, and only call the emergency number for real emergencies.
+try: Know your address :: mcq | What's the emergency number? | {nz:111~au:000}* | 123 | 555
+play: order | Call for help | Call {nz:111~au:000}; Say which service you need; Say your address; Say what happened and answer the questions
+check: tf | You should know your home address by heart. | true
+check: mcq | Which is an emergency? | Someone is badly hurt* | You lost a toy | You're bored
+check: mcq | Calling the emergency number as a joke is… | not OK, because it can stop real help getting through* | fine | funny
+home: Practise saying your full address to a grown-up.
+skill: emergency-call
+
 
 # Fact banks (content/facts/body.txt)
 @facts 1.1
@@ -91,3 +145,41 @@ fact: Wash your hands before you [eat]. | blink; breathe; sneeze
 fact: Wash your hands after you go to the [toilet]. | window; letterbox; mirror
 fact: Wash your hands after touching [animals]. | clouds; books; music
 fact: After you rinse your hands, [dry] them. | lick; paint; muddy
+
+# Fact banks (content/facts/body.txt)
+@facts 2.1
+fact: Always cross the road with a [grown-up]. | goldfish; teddy
+fact: Cross at a [crossing] if there is one. | corner of a bend; car park exit
+fact: Stop at the [kerb]. | middle of the road; white line
+fact: Look right, look left, look [right] again. | up; down
+fact: Before you cross, [listen] for cars. | sing; shout
+fact: Walk [straight] across when the road is clear. | zigzag; backwards
+fact: Don't [run] across the road. | walk; look
+fact: Only cross when the road is [clear]. | busy; noisy
+@facts 2.2
+fact: Water can be dangerous even when it's [shallow]. | painted on a wall; in a picture
+fact: Always swim with a [grown-up] watching. | goldfish; teddy
+fact: At the beach, swim between the red and yellow [flags]. | rocks; boats
+fact: Wear a [life jacket] on boats. | tutu; scarf
+fact: Lifeguards watch the area between the [flags]. | rocks; car park
+fact: Never swim [alone]. | with a grown-up watching; between the flags
+fact: A life jacket helps you [float]. | sink; swim faster
+fact: Red and yellow flags show the [safest] place to swim. | most dangerous; deepest
+@facts 2.3
+fact: The sun's rays can burn your skin even on [cloudy] days. | moonlit nights; dark nights
+fact: Put on a [shirt] in the sun. | snorkel; scarf only
+fact: Put on [sunscreen]. | glitter; mud
+fact: Put on a [hat]. | sock; mitten
+fact: Wear [sunglasses] in the sun. | swimming goggles only; earmuffs
+fact: Play in the [shade] in the middle of the day. | full sun; hottest spot
+fact: The sun is strongest in the [middle] of the day. | early morning; night
+fact: Sunburn [hurts]. | tickles; helps
+@facts 2.4
+fact: An emergency is when someone is badly [hurt]. | bored; hungry
+fact: A [fire] is an emergency. | lost sock; spilled drink
+fact: Call {nz:111~au:000} in an [emergency]. | argument; game
+fact: Say which [service] you need. | colour; snack
+fact: Say your [address]. | favourite colour; pet's name
+fact: Say what [happened]. | you ate; you want
+fact: Learn your address by [heart]. | accident; guessing
+fact: Only call the emergency number for [real] emergencies. | pretend; funny

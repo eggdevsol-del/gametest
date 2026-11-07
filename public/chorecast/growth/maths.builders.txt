@@ -212,3 +212,263 @@ check: tf | Two shapes with the same area always have the same perimeter. | fals
 home: Find one thing at home that needs area and one that needs perimeter.
 skill: area-or-perimeter
 
+@unit 5 | Dividing | Division facts, big numbers and remainders
+@unit 6 | Fractions, decimals and percentages | Three ways to write the same amount
+@unit 7 | Measurement | Units, volume and 24-hour time
+@unit 8 | Statistics and chance | Averages, graphs and how likely
+
+@lesson 5.1 | Division facts | ➗ | garden
+hook: 56 plants go in rows of 8. How many rows is that?
+learn: Dividing is the opposite of multiplying. 7 × 8 = 56, so 56 ÷ 8 = 7.
+learn: Use your times tables to divide quickly.
+learn: A fact family: 6 × 9 = 54, 9 × 6 = 54, 54 ÷ 6 = 9 and 54 ÷ 9 = 6.
+try: 63 ÷ 7 = 9 :: gap | 72 ÷ 8 = _ | 9
+play: gen | divide12 | 6
+check: gap | 84 ÷ 12 = _ | 7
+check: gap | 45 ÷ 9 = _ | 5
+check: mcq | Which is in the same fact family as 4 × 7 = 28? | 28 ÷ 4 = 7* | 28 + 4 = 32 | 7 − 4 = 3
+home: Make fact family cards with a grown-up: one times fact and its three partners.
+skill: division-facts
+
+@lesson 5.2 | Dividing bigger numbers | 🧁 | stall
+hook: 96 cupcakes are shared between 4 stalls. How many does each get?
+learn: Split the big number into parts that are easy to divide: 96 = 80 + 16.
+learn: 80 ÷ 4 = 20 and 16 ÷ 4 = 4.
+learn: Add the answers: 20 + 4 = 24. So 96 ÷ 4 = 24.
+try: 84 ÷ 3 is 60 ÷ 3 plus 24 ÷ 3, which is 20 + 8 = 28 :: gap | 72 ÷ 3 = _ | 24
+play: order | Work out 65 ÷ 5 in order | Split 65 into 50 + 15; 50 ÷ 5 is 10; 15 ÷ 5 is 3; 10 + 3 is 13
+check: gap | 96 ÷ 6 = _ | 16
+check: gap | 128 ÷ 4 = _ | 32
+check: mcq | 75 marbles are shared by 5 kids. How many does each get? | 15* | 13 | 70
+home: Work out how to share a packet of biscuits fairly in your family.
+skill: divide-big
+
+@lesson 5.3 | Remainders | 🚗 | townhall
+hook: 25 kids are going on a trip, 4 to a car. How many cars do you need?
+learn: Sometimes things don't share out evenly. What's left over is the remainder.
+learn: 25 ÷ 4 is 6 remainder 1, because 6 × 4 = 24 and 1 is left.
+learn: In real life, think about the remainder. 25 kids need 7 cars, so nobody gets left behind.
+try: 17 ÷ 5 is 3 remainder 2 :: mcq | What is 23 ÷ 5? | 4 remainder 3* | 4 remainder 2 | 5 remainder 3
+play: match | Match each to its answer | 13 ÷ 4=3 remainder 1; 22 ÷ 5=4 remainder 2; 29 ÷ 6=4 remainder 5; 19 ÷ 3=6 remainder 1
+check: mcq | 30 kids go camping, 4 to a tent. How many tents do they need? | 8* | 7 | 7 remainder 2
+check: mcq | You have $25 and lunches cost $4 each. How many lunches can you buy? | 6* | 7 | 6 remainder 1
+check: tf | A remainder is what's left over after sharing equally. | true
+home: Share some grapes equally in your family. Is there a remainder? Who gets it?
+skill: remainders
+
+@lesson 5.4 | Divisibility tricks | ✨ | stage
+hook: Can you tell if 3,162 shares into 3 equal groups without dividing?
+learn: A number divides by 2 if its last digit is even: 0, 2, 4, 6 or 8.
+learn: It divides by 5 if its last digit is 0 or 5, and by 10 if its last digit is 0.
+learn: For 3, add up the digits. If the total is in the 3 times table, so is the number. 3 + 1 + 6 + 2 = 12, so 3,162 divides by 3.
+try: 435 ends in 5, so it divides by 5 :: mcq | Which number divides exactly by 10? | 370* | 375 | 307
+play: sort | Divides by 5, Doesn't | 45=Divides by 5; 62=Doesn't; 100=Divides by 5; 233=Doesn't; 1,005=Divides by 5 | Does it divide exactly by 5?
+check: mcq | Which divides exactly by 3? | 123* | 124 | 125
+check: tf | 4,568 divides exactly by 2. | true
+check: mcq | Which divides exactly by 2? | 846* | 845 | 847
+home: Check the house numbers on your street. Which divide by 2, 5 or 10?
+skill: divisibility
+
+@lesson 6.1 | Fractions as decimals | 🔢 | bank
+hook: Is 1/2 the same as 0.5?
+learn: Fractions and decimals can show the same amount.
+learn: 1/10 = 0.1, 1/2 = 0.5, 1/4 = 0.25 and 3/4 = 0.75.
+learn: Fractions out of 10 or 100 are easy to change: 3/10 = 0.3 and 47/100 = 0.47.
+try: 7/10 = 0.7 :: mcq | Which decimal is the same as 1/4? | 0.25* | 0.4 | 1.4
+play: match | Match each fraction to its decimal | 1/2=0.5; 1/4=0.25; 3/4=0.75; 1/10=0.1
+check: mcq | 9/100 is… | 0.09* | 0.9 | 9.0
+check: tf | 0.5 is the same as one half. | true
+check: mcq | Which is biggest? | 3/4* | 0.7 | 0.07
+home: Find a half, a quarter and three quarters of something, and say each one as a decimal.
+skill: fraction-decimal
+
+@lesson 6.2 | Percentages | 💯 | stall
+hook: "50% off!" What does that mean as a fraction?
+learn: Per cent means out of 100. 50% = 50/100 = 1/2 = 0.5.
+learn: 25% = 1/4 = 0.25. 10% = 1/10 = 0.1. 100% is the whole thing.
+learn: Percentages make amounts easy to compare.
+try: 75% is the same as 3/4 :: mcq | 25% is the same as… | 1/4* | 1/25 | 2.5
+play: match | Match each percentage to its fraction | 50%=1/2; 25%=1/4; 10%=1/10; 100%=The whole thing
+check: mcq | 0.3 as a percentage is… | 30%* | 3% | 0.3%
+check: gap | 10% of 50 is _ | 5
+check: tf | 100% means all of something. | true
+home: Spot three percentages on signs or packets this week.
+skill: percentages
+
+@lesson 6.3 | Adding decimals | 🧾 | stall
+hook: A drink is $2.50 and a muffin is $3.75. What's the total?
+learn: Line up the decimal points, then add like whole numbers.
+learn: For $2.50 + $3.75: 50c + 75c is $1.25, and $2 + $3 is $5. So it's $6.25.
+learn: Taking away works the same way: $10.00 − $6.25 = $3.75.
+try: $1.20 + $2.30 = $3.50 :: gap | 2.5 + 3.75 = _ | 6.25
+play: gen | decadd | 5
+check: gap | 4.6 + 2.8 = _ | 7.4
+check: gap | 10 − 6.25 = _ | 3.75
+check: mcq | You pay for a $3.40 item with $5. Your change is… | $1.60* | $2.60 | $1.40
+home: Add up the prices of three things on a receipt and check the total.
+skill: decimal-add
+
+@lesson 6.4 | Decimals times 10 and 100 | 🎟️ | stall
+hook: 10 bags of feed cost $4.50 each. What's the total?
+learn: Multiplying by 10 makes each digit worth 10 times more, so they move one place to the left: 4.5 × 10 = 45.
+learn: Multiplying by 100 moves them two places: 4.5 × 100 = 450.
+learn: Dividing by 10 moves them one place to the right: 45 ÷ 10 = 4.5.
+try: 3.2 × 10 = 32 :: gap | 6.7 × 10 = _ | 67
+play: match | Match each to its answer | 0.5 × 10=5; 0.5 × 100=50; 5 ÷ 10=0.5; 7 ÷ 100=0.07
+check: gap | 2.35 × 100 = _ | 235
+check: gap | 82 ÷ 10 = _ | 8.2
+check: mcq | 10 tickets cost $3.50 each. The total is… | $35* | $3.50 | $350
+home: Work out the cost of 10 and 100 of something cheap.
+skill: decimal-times-10
+
+@lesson 7.1 | Metric units | 📏 | workshop
+hook: Would you measure a road in centimetres?
+learn: Length: millimetres (mm), centimetres (cm), metres (m) and kilometres (km).
+learn: Mass: grams (g) and kilograms (kg). Capacity: millilitres (mL) and litres (L).
+learn: Pick the unit that fits the size: kilometres for roads, millilitres for medicine.
+try: A bag of flour is about 1 kg :: mcq | Which unit fits the distance between two towns? | Kilometres* | Millimetres | Grams
+play: match | Match each thing to a sensible unit | Length of an ant=Millimetres; Water in a bath=Litres; Mass of an apple=Grams; Distance to the next town=Kilometres
+check: mcq | Which is a unit of mass? | Kilogram* | Litre | Metre
+check: mcq | A teaspoon holds about… | 5 mL* | 5 L | 5 kg
+check: tf | A litre is a unit of length. | false | A litre measures capacity: how much a container holds.
+home: Find the units on five food packets in your kitchen.
+skill: metric-units
+
+@lesson 7.2 | Converting units | 🔁 | workshop
+hook: The fun run is 2.5 km. How many metres is that?
+learn: 1 km = 1,000 m, 1 m = 100 cm and 1 cm = 10 mm.
+learn: 1 kg = 1,000 g and 1 L = 1,000 mL.
+learn: From a big unit to a small one, multiply. From small to big, divide. 2.5 km × 1,000 = 2,500 m.
+try: 3 kg is 3,000 g :: gap | 4 L is _ mL | 4000
+play: match | Match the equal amounts | 1 km=1,000 m; 1 m=100 cm; 1 kg=1,000 g; 1 L=1,000 mL
+check: gap | 2.5 × 1,000 = _ | 2500
+check: gap | 350 cm is _ m | 3.5
+check: mcq | 500 g is… | half a kilogram* | 5 kilograms | 50 kilograms
+home: Read the mass of a packet in grams and change it into kilograms.
+skill: converting-units
+
+@lesson 7.3 | Volume of boxes | 📦 | workshop
+hook: How many 1 cm cubes fit inside a small box?
+learn: Volume is how much space something takes up.
+learn: For a box (a cuboid), volume = length × width × height.
+learn: A box 4 cm long, 3 cm wide and 2 cm high holds 4 × 3 × 2 = 24 cubic centimetres (24 cm³).
+try: 2 × 2 × 2 = 8, so 8 cm³ :: gap | 5 × 2 × 3 = _ | 30
+play: order | Find the volume of a box in order | Measure the length; Measure the width; Measure the height; Multiply all three
+check: gap | 10 × 4 × 2 = _ | 80
+check: mcq | Which unit is for volume? | cm³* | cm | cm²
+check: tf | A cube with 3 cm sides has a volume of 27 cm³. | true
+home: Measure a cereal box and work out its volume.
+skill: volume
+
+@lesson 7.4 | 24-hour time | 🕓 | townhall
+hook: The ferry leaves at 15:30. Is that morning or afternoon?
+learn: 24-hour time counts the hours from 00:00 (midnight) to 23:59.
+learn: Morning times look the same: 9:00 am is 09:00.
+learn: For afternoon and evening, add 12: 3:30 pm is 15:30, and 8 pm is 20:00.
+try: 2 pm is 14:00 :: mcq | What is 18:00? | 6 pm* | 8 pm | 6 am
+play: match | Match the times | 13:00=1 pm; 17:45=5:45 pm; 09:15=9:15 am; 22:00=10 pm
+check: mcq | 7:30 pm in 24-hour time is… | 19:30* | 7:30 | 17:30
+check: mcq | What is 00:00? | Midnight* | Midday | Half past twelve
+check: tf | 12:00 is midday. | true
+home: Find a timetable or a clock that uses 24-hour time.
+skill: 24-hour-time
+
+@lesson 8.1 | The mean | ⚽ | stage
+hook: You scored 6, 8 and 10 in three games. What's your average?
+learn: The mean is one kind of average. Add up all the numbers, then divide by how many there are.
+learn: (6 + 8 + 10) ÷ 3 = 24 ÷ 3 = 8.
+learn: The mean shows a typical value for the group.
+try: (2 + 4 + 6) ÷ 3 = 4 :: gap | (5 + 7 + 9) ÷ 3 = _ | 7
+play: gen | mean | 4
+check: gap | (10 + 20 + 30 + 40) ÷ 4 = _ | 25
+check: mcq | To find the mean, you… | add them up and divide by how many there are* | pick the biggest | pick the middle one
+check: gap | Ari earned $4, $6 and $8 over three weeks. The mean is $_ | 6
+home: Find the mean number of minutes you read each day over three days.
+skill: mean
+
+@lesson 8.2 | Median and mode | 📋 | stage
+hook: Is there more than one kind of average?
+learn: The median is the middle number once the numbers are in order. For 3, 5 and 9, it's 5.
+learn: The mode is the number that comes up most often. In 2, 4, 4 and 7, it's 4.
+learn: Mean, median and mode are all averages, and each is useful in different ways.
+try: In 1, 3, 3 and 8, the mode is 3 :: gap | The median of 4, 6 and 10 is _ | 6
+play: gen | median | 4
+check: gap | The mode of 2, 5, 5, 6 and 9 is _ | 5
+check: gap | The median of 9, 1 and 5 is _ | 5
+check: tf | You need to put the numbers in order to find the median. | true
+home: Find the median height of three people in your family.
+skill: median-mode
+
+@lesson 8.3 | Line graphs | 📈 | garden
+hook: How did the temperature change through the day?
+learn: A line graph shows how something changes over time.
+learn: Time usually goes along the bottom, and the amount goes up the side.
+learn: A line going up means increasing, going down means decreasing, and flat means no change.
+try: A line going up means increasing :: mcq | A line going down shows… | something decreasing* | something increasing | no change
+play: sort | Increasing, Decreasing, No change | The line goes up=Increasing; The line goes down=Decreasing; The line stays flat=No change; Savings growing each week=Increasing; An ice block melting=Decreasing | Which is it?
+check: mcq | What's best shown on a line graph? | The temperature over a day* | Favourite fruits | Car colours in a car park
+check: tf | In a line graph, time usually goes along the bottom. | true
+check: mcq | A flat line means… | no change* | a big rise | a big drop
+home: Check the temperature at three times today and draw a line graph.
+skill: line-graphs
+
+@lesson 8.4 | Chance | 🎲 | island
+hook: Will the sun rise tomorrow? Will it snow at the beach in summer? How likely is each?
+learn: Chance words: impossible, unlikely, even chance, likely, certain.
+learn: Tossing a coin gives an even chance of heads: 1 out of 2, or 1/2.
+learn: Rolling a 6 on a dice is unlikely: 1 out of 6, or 1/6.
+try: The sun rising tomorrow is certain :: mcq | Rolling a 7 on a normal dice is… | impossible* | likely | certain
+play: order | Put these in order, least likely first | Rolling a 7 on a dice; Rolling a 6 on a dice; Getting heads on a coin; Rolling a number under 7 on a dice
+check: mcq | The chance of heads when you toss a coin is… | 1/2* | 1/6 | 1
+check: mcq | The chance of rolling a 3 on a dice is… | 1/6* | 1/3 | 3/6
+check: tf | "Even chance" means the same as 50/50. | true
+home: Toss a coin 20 times with a grown-up. Did you get about 10 heads?
+skill: chance
+
+
+# Fact banks (content/facts/maths.txt)
+@facts 5.4
+fact: A number divides by 2 if its last digit is [even]. | odd; 7
+fact: A number divides by 5 if its last digit is 0 or [5]. | 3; 7
+fact: A number divides by 10 if its last digit is [0]. | 5; 1
+fact: To test for 3, add up the [digits]. | zeros; tens only
+fact: The digits of 3,162 add up to [12]. | 11; 16
+fact: The digits of 471 add up to [12], so 471 divides by 3. | 13; 10
+fact: 135 divides by 5 because it ends in [5]. | 3; 1
+fact: 740 divides by [10] because it ends in 0. | 3; 7
+@facts 7.4
+fact: 24-hour time runs from 00:00 to [23:59]. | 12:00; 24:59
+fact: Midnight is [00:00] in 24-hour time. | 12:00; 06:00
+fact: 9:00 am is [09:00]. | 21:00; 19:00
+fact: 3:30 pm is [15:30]. | 03:30; 13:30
+fact: 8 pm is [20:00]. | 08:00; 18:00
+fact: For afternoon times, add [12] to the hour. | 10; 24
+fact: 17:00 is [5 pm]. | 7 pm; 5 am
+fact: Midday is [12:00] in 24-hour time. | 00:00; 24:00
+@facts 8.2
+fact: The median is the [middle] number once the numbers are in order. | biggest; first
+fact: The median of 3, 5 and 9 is [5]. | 3; 9
+fact: The median of 8, 2 and 6 is [6]. | 2; 8
+fact: The mode is the number that comes up most [often]. | rarely; last
+fact: The mode of 2, 4, 4 and 7 is [4]. | 2; 7
+fact: The mode of 1, 3, 3, 3 and 5 is [3]. | 1; 5
+fact: Mean, median and mode are all [averages]. | totals; ranges
+fact: Put the numbers in [order] before finding the median. | a hat; colour groups
+@facts 8.3
+fact: A line graph shows how something changes over [time]. | colour; space
+fact: Time usually goes along the [bottom]. | side; title
+fact: The amount usually goes up the [side]. | bottom; title
+fact: A line going up means [increasing]. | decreasing; no change
+fact: A line going down means [decreasing]. | increasing; no change
+fact: A flat line means [no change]. | increasing; decreasing
+fact: A line graph suits temperature over a [day]. | colour; smell
+fact: A steep line shows a [fast] change. | slow; no
+@facts 8.4
+fact: Something that can never happen is [impossible]. | certain; likely
+fact: Something that will definitely happen is [certain]. | impossible; unlikely
+fact: Tossing a coin gives an [even] chance of heads. | impossible; certain
+fact: The chance of a coin landing heads is [1/2]. | 1/6; 1/10
+fact: Rolling a 6 on a dice is [unlikely]. | certain; impossible
+fact: The chance of rolling a 6 is [1/6]. | 1/2; 6/6
+fact: Rolling a number from 1 to 6 on a dice is [certain]. | impossible; unlikely
+fact: Rolling a 7 on a normal dice is [impossible]. | likely; certain

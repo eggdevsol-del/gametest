@@ -215,6 +215,219 @@ check: gap | 1 hour is _ minutes | 60
 home: Time how long a chore takes. Note when you start and when you finish.
 skill: elapsed-time
 
+@unit 5 | More times tables | The 3s, 4s and 8s, and sharing
+@unit 6 | Fractions | Halves, quarters and thirds
+@unit 7 | Shapes | Flat shapes, solid shapes and turns
+@unit 8 | Data | Tally charts and graphs
+
+@lesson 5.1 | The 3 times table | 🍀 | garden
+hook: A clover has 3 leaves. How many leaves are on 4 clovers?
+learn: The 3 times table goes 3, 6, 9, 12, 15 and on.
+learn: 4 clovers have 4 × 3 = 12 leaves.
+learn: Count in 3s to check: 3, 6, 9, 12.
+try: 5 × 3 = 15 :: gap | 6 × 3 = _ | 18
+play: order | Count in 3s | 3; 6; 9; 12; 15; 18
+check: gap | 7 × 3 = _ | 21
+check: mcq | Which is in the 3 times table? | 27* | 26 | 28
+check: gap | 3 × 10 = _ | 30
+home: Count in 3s with a grown-up all the way to 30.
+skill: times-3
+
+@lesson 5.2 | The 4 times table | 🐕 | island
+hook: How many legs do 5 dogs have?
+learn: The 4 times table goes 4, 8, 12, 16, 20 and on.
+learn: A trick: 4 times is double, then double again. For 4 × 6, double 6 is 12, and double 12 is 24.
+learn: 5 dogs have 5 × 4 = 20 legs.
+try: 3 × 4 = 12 :: gap | 6 × 4 = _ | 24
+play: gen | times | 5
+check: gap | 7 × 4 = _ | 28
+check: mcq | How many legs do 3 sheep have? | 12* | 7 | 9
+check: tf | 4 × 5 is 20. | true
+home: Count the legs of all the people and animals at your place.
+skill: times-4
+
+@lesson 5.3 | The 8 times table | 🐙 | island
+hook: An octopus has 8 arms. How many arms do 3 octopuses have?
+learn: The 8 times table goes 8, 16, 24, 32, 40 and on.
+learn: 8 times is double 4 times. 4 × 3 = 12, so 8 × 3 = 24.
+learn: 3 octopuses have 3 × 8 = 24 arms.
+try: 2 × 8 = 16 :: gap | 5 × 8 = _ | 40
+play: match | Match each to its answer | 4 × 8=32; 6 × 8=48; 7 × 8=56; 9 × 8=72
+check: gap | 8 × 8 = _ | 64
+check: mcq | 4 × 6 is 24. So 8 × 6 is… | 48* | 28 | 32
+check: tf | 8 × 10 is 80. | true
+home: Ask a grown-up to quiz you on the 8 times table at dinner.
+skill: times-8
+
+@lesson 5.4 | Sharing equally | 🧺 | stall
+hook: 12 eggs are shared between 3 baskets. How many go in each?
+learn: Dividing means sharing into equal groups.
+learn: 12 shared by 3 is 4 each. We write it 12 ÷ 3 = 4.
+learn: Times tables help: 3 × 4 = 12, so 12 ÷ 3 = 4.
+try: 10 ÷ 2 = 5 :: gap | 15 ÷ 3 = _ | 5
+play: gen | divide | 5
+check: gap | 20 ÷ 4 = _ | 5
+check: gap | 16 ÷ 2 = _ | 8
+check: mcq | 24 grapes are shared by 4 friends. How many does each get? | 6* | 20 | 8
+home: Share a snack fairly in your family. How many does each person get?
+skill: division-sharing
+
+@lesson 6.1 | Halves | 🍊 | kitchen
+hook: You cut an orange in two. Are both pieces the same size?
+learn: A half is one of 2 equal parts. We write it 1/2.
+learn: Both halves must be the same size.
+learn: Half of 10 is 5, because 10 shared into 2 equal parts is 5 each.
+try: Half of 8 is 4 :: gap | Half of 12 is _ | 6
+play: gen | half | 5
+check: tf | One big piece and one small piece are halves. | false | Halves must be equal.
+check: gap | Half of 20 is _ | 10
+check: mcq | How many halves make a whole? | 2* | 4 | 1
+home: Share something in half with someone. Check both halves are equal.
+skill: halves
+
+@lesson 6.2 | Quarters | 🍕 | kitchen
+hook: A pizza for 4 people. How should you cut it?
+learn: A quarter is one of 4 equal parts. We write it 1/4.
+learn: Two quarters make a half. Four quarters make a whole.
+learn: A quarter of 8 is 2, because 8 shared into 4 equal parts is 2 each.
+try: A quarter of 12 is 3 :: gap | A quarter of 20 is _ | 5
+play: match | Match the words to the fraction | one half=1/2; one quarter=1/4; three quarters=3/4
+check: mcq | How many quarters make a whole? | 4* | 2 | 3
+check: tf | Two quarters are the same as one half. | true
+check: gap | A quarter of 16 is _ | 4
+home: Fold a piece of paper into quarters and colour in three of them.
+skill: quarters
+
+@lesson 6.3 | Thirds | 🍫 | kitchen
+hook: Three friends share a chocolate bar. What does each one get?
+learn: A third is one of 3 equal parts. We write it 1/3.
+learn: Three thirds make a whole.
+learn: A third of 9 is 3, because 9 shared into 3 equal parts is 3 each.
+try: A third of 6 is 2 :: gap | A third of 12 is _ | 4
+play: sort | Halves, Thirds, Quarters | 2 equal parts=Halves; 3 equal parts=Thirds; 4 equal parts=Quarters; 1/2=Halves; 1/3=Thirds; 1/4=Quarters | Which kind of part?
+check: mcq | Which is bigger: half a pizza or a third of the same pizza? | Half* | A third | They're the same
+check: gap | A third of 15 is _ | 5
+check: tf | Three thirds make a whole. | true
+home: Share 12 things into thirds with a grown-up.
+skill: thirds
+
+@lesson 6.4 | Fractions of a group | 🐣 | island
+hook: There are 8 chicks, and half of them are yellow. How many are yellow?
+learn: You can take a fraction of a group of things, not just one thing.
+learn: To find a half, share into 2 equal groups. To find a quarter, share into 4.
+learn: Half of 8 chicks is 4 chicks. A quarter of 8 chicks is 2 chicks.
+try: A quarter of 12 sheep is 3 sheep :: gap | Half of 14 is _ | 7
+play: match | Match each to its answer | Half of 10=5; A quarter of 8=2; A third of 12=4; Half of 2=1
+check: gap | A third of 18 is _ | 6
+check: mcq | There are 20 eggs, and a quarter of them break. How many broke? | 5* | 4 | 10
+check: gap | Half of 30 is _ | 15
+home: Count a group of things at home, then find a half and a quarter of them.
+skill: fractions-of-group
+
+@lesson 7.1 | Flat shapes | 🔺 | workshop
+hook: How many corners does a triangle have?
+learn: Flat (2D) shapes have sides and corners.
+learn: A triangle has 3 sides. Squares and rectangles have 4. A pentagon has 5, and a hexagon has 6.
+learn: A square's 4 sides are all the same length. A rectangle's opposite sides match.
+try: A hexagon has 6 sides :: mcq | How many sides does a pentagon have? | 5* | 6 | 4
+play: match | Match each shape to its number of sides | Triangle=3; Square=4; Pentagon=5; Hexagon=6
+check: mcq | Which shape has 3 corners? | A triangle* | A square | A circle
+check: tf | A circle has no corners. | true
+check: mcq | A shape with 4 equal sides and 4 square corners is a… | square* | triangle | hexagon
+home: Go on a shape hunt at home. Find a circle, a rectangle and a triangle.
+skill: 2d-shapes
+
+@lesson 7.2 | Solid shapes | 📦 | workshop
+hook: Why does a ball roll, but a box doesn't?
+learn: Solid (3D) shapes have faces, edges and corners.
+learn: A cube has 6 square faces. A sphere is round like a ball. A cylinder is like a can. A cone is like an ice-cream cone.
+learn: Curved shapes roll. Shapes with flat faces stack.
+try: A dice is a cube :: mcq | Which shape is like a ball? | Sphere* | Cube | Cone
+play: match | Match each thing to its shape | Dice=Cube; Ball=Sphere; Can of beans=Cylinder; Party hat=Cone
+check: gap | A cube has _ faces | 6
+check: mcq | Which shape rolls? | A sphere* | A cube | A box
+check: tf | A cylinder has two flat faces and one curved face. | true
+home: Find a cube, a sphere and a cylinder in your kitchen.
+skill: 3d-shapes
+
+@lesson 7.3 | Symmetry | 🦋 | garden
+hook: Fold a butterfly picture down the middle. Do both sides match?
+learn: A shape has symmetry if one half is a mirror image of the other.
+learn: The fold line is called a line of symmetry.
+learn: A square has 4 lines of symmetry. A rectangle has 2. Some shapes have none.
+try: A heart shape has 1 line of symmetry :: mcq | Which capital letter has a line of symmetry down the middle? | A* | F | G
+play: sort | Symmetrical, Not symmetrical | A butterfly=Symmetrical; The letter F=Not symmetrical; A heart=Symmetrical; The letter J=Not symmetrical; A square=Symmetrical | Is it symmetrical?
+check: gap | A square has _ lines of symmetry | 4
+check: tf | A line of symmetry splits a shape into two matching halves. | true
+check: mcq | How many lines of symmetry does a rectangle that isn't a square have? | 2* | 4 | 1
+home: Fold some paper, cut a shape along the fold, and open it up to see the symmetry.
+skill: symmetry
+
+@lesson 7.4 | Turns and directions | 🧭 | island
+hook: You face the house and make a half turn. What are you facing now?
+learn: A full turn brings you back to where you started. A half turn makes you face the opposite way.
+learn: A quarter turn makes a right angle, like the corner of a book.
+learn: Clockwise means turning the same way as a clock's hands. Anticlockwise is the other way.
+try: Two quarter turns make a half turn :: mcq | How many quarter turns make a full turn? | 4* | 2 | 3
+play: match | Match each turn to what it does | Full turn=Back where you started; Half turn=Facing the opposite way; Quarter turn=A right angle
+check: tf | Clock hands turn clockwise. | true
+check: mcq | Two half turns make a… | full turn* | quarter turn | three-quarter turn
+check: mcq | A right angle is a… | quarter turn* | half turn | full turn
+home: Play robots with a grown-up: give directions like "quarter turn clockwise, then 3 steps".
+skill: turns
+
+@lesson 8.1 | Tally marks | 🖍️ | stage
+hook: How can you count cars going past without losing track?
+learn: A tally mark is one line for each thing you count.
+learn: Every fifth mark goes across the other four, making a gate. Each gate is 5.
+learn: Count the gates in 5s, then add the extra lines. Two gates and 3 lines is 5 + 5 + 3 = 13.
+try: One gate and 2 lines is 7 :: gap | Two gates and 1 line is _ | 11
+play: match | Match each tally to its number | One gate=5; Two gates=10; One gate and 4 lines=9; Three gates=15
+check: gap | Three gates and 2 lines is _ | 17
+check: mcq | Why do tally marks use gates of 5? | They're quick to count in 5s* | They look nice | Nobody knows
+check: tf | One gate means 5. | true
+home: Make a tally chart of the birds you see from a window in 10 minutes.
+skill: tally
+
+@lesson 8.2 | Pictographs | 🍎 | garden
+hook: A chart shows apples instead of numbers. How do you read it?
+learn: A pictograph uses pictures to show how many.
+learn: A key tells you what each picture is worth. If one 🍎 means 2 apples, each picture stands for 2.
+learn: If Mia's row has 3 🍎 and each is worth 2, Mia picked 3 × 2 = 6 apples.
+try: 4 pictures worth 2 each is 8 :: gap | 5 pictures, each worth 2, is _ | 10
+play: order | Read a pictograph in order | Look at the title; Read the key; Count the pictures; Work out the total
+check: gap | Each 🐑 means 10 sheep. 3 pictures is _ sheep | 30
+check: mcq | What does a key tell you? | What each picture is worth* | Who drew it | The date
+check: tf | In a pictograph, one picture can stand for more than one thing. | true
+home: Draw a pictograph of the fruit in your house.
+skill: pictographs
+
+@lesson 8.3 | Bar graphs | 📊 | stage
+hook: Which fruit does your family like best? A bar graph shows it fast.
+learn: A bar graph uses bars to show amounts. The taller the bar, the more there are.
+learn: Read the number at the top of each bar from the scale on the side.
+learn: Compare the bars to see which is most, which is least, and which are the same.
+try: The tallest bar shows the favourite :: mcq | In a bar graph, the most popular thing has… | the tallest bar* | the shortest bar | the reddest bar
+play: order | Apples got 4 votes, bananas 7, grapes 2 and pears 5. Put them in order from fewest votes to most | Grapes; Apples; Pears; Bananas
+check: mcq | Apples got 4 votes and bananas got 7. How many more votes did bananas get? | 3* | 11 | 7
+check: tf | A longer bar means a bigger number. | true
+check: gap | Apples 4, bananas 7 and grapes 2 make 4 + 7 + 2 = _ | 13
+home: Ask your family a question, like their favourite colour, and draw a bar graph of the answers.
+skill: bar-graphs
+
+@lesson 8.4 | Asking a question with data | 🔎 | stage
+hook: What's the most popular pet in your class? How could you find out?
+learn: Data helps answer questions. First, choose a question.
+learn: Then collect the data (ask people, count or measure) and show it in a tally, a pictograph or a bar graph.
+learn: Last, look at your graph and answer your question.
+try: Question: favourite fruit? Collect: ask everyone :: mcq | What's the first step? | Choose a question* | Draw the bars | Guess the answer
+play: order | Put the steps in order | Choose a question; Collect the data; Show it in a graph; Answer the question
+check: mcq | Which is a good question to answer with data? | What's our family's favourite dinner?* | Is blue a colour? | Is a cat an animal?
+check: tf | You should look at your graph to answer your question. | true
+check: mcq | Which is a way to collect data? | Asking people* | Guessing | Sleeping
+home: Do a family survey and show the results in a graph.
+skill: statistical-enquiry
+
 @band builders
 @unit 1 | Big numbers and decimals | Place value to millions and hundredths
 @unit 2 | Multiplying | Tables to 12 and bigger numbers
@@ -429,6 +642,219 @@ check: tf | Two shapes with the same area always have the same perimeter. | fals
 home: Find one thing at home that needs area and one that needs perimeter.
 skill: area-or-perimeter
 
+@unit 5 | Dividing | Division facts, big numbers and remainders
+@unit 6 | Fractions, decimals and percentages | Three ways to write the same amount
+@unit 7 | Measurement | Units, volume and 24-hour time
+@unit 8 | Statistics and chance | Averages, graphs and how likely
+
+@lesson 5.1 | Division facts | ➗ | garden
+hook: 56 plants go in rows of 8. How many rows is that?
+learn: Dividing is the opposite of multiplying. 7 × 8 = 56, so 56 ÷ 8 = 7.
+learn: Use your times tables to divide quickly.
+learn: A fact family: 6 × 9 = 54, 9 × 6 = 54, 54 ÷ 6 = 9 and 54 ÷ 9 = 6.
+try: 63 ÷ 7 = 9 :: gap | 72 ÷ 8 = _ | 9
+play: gen | divide12 | 6
+check: gap | 84 ÷ 12 = _ | 7
+check: gap | 45 ÷ 9 = _ | 5
+check: mcq | Which is in the same fact family as 4 × 7 = 28? | 28 ÷ 4 = 7* | 28 + 4 = 32 | 7 − 4 = 3
+home: Make fact family cards with a grown-up: one times fact and its three partners.
+skill: division-facts
+
+@lesson 5.2 | Dividing bigger numbers | 🧁 | stall
+hook: 96 cupcakes are shared between 4 stalls. How many does each get?
+learn: Split the big number into parts that are easy to divide: 96 = 80 + 16.
+learn: 80 ÷ 4 = 20 and 16 ÷ 4 = 4.
+learn: Add the answers: 20 + 4 = 24. So 96 ÷ 4 = 24.
+try: 84 ÷ 3 is 60 ÷ 3 plus 24 ÷ 3, which is 20 + 8 = 28 :: gap | 72 ÷ 3 = _ | 24
+play: order | Work out 65 ÷ 5 in order | Split 65 into 50 + 15; 50 ÷ 5 is 10; 15 ÷ 5 is 3; 10 + 3 is 13
+check: gap | 96 ÷ 6 = _ | 16
+check: gap | 128 ÷ 4 = _ | 32
+check: mcq | 75 marbles are shared by 5 kids. How many does each get? | 15* | 13 | 70
+home: Work out how to share a packet of biscuits fairly in your family.
+skill: divide-big
+
+@lesson 5.3 | Remainders | 🚗 | townhall
+hook: 25 kids are going on a trip, 4 to a car. How many cars do you need?
+learn: Sometimes things don't share out evenly. What's left over is the remainder.
+learn: 25 ÷ 4 is 6 remainder 1, because 6 × 4 = 24 and 1 is left.
+learn: In real life, think about the remainder. 25 kids need 7 cars, so nobody gets left behind.
+try: 17 ÷ 5 is 3 remainder 2 :: mcq | What is 23 ÷ 5? | 4 remainder 3* | 4 remainder 2 | 5 remainder 3
+play: match | Match each to its answer | 13 ÷ 4=3 remainder 1; 22 ÷ 5=4 remainder 2; 29 ÷ 6=4 remainder 5; 19 ÷ 3=6 remainder 1
+check: mcq | 30 kids go camping, 4 to a tent. How many tents do they need? | 8* | 7 | 7 remainder 2
+check: mcq | You have $25 and lunches cost $4 each. How many lunches can you buy? | 6* | 7 | 6 remainder 1
+check: tf | A remainder is what's left over after sharing equally. | true
+home: Share some grapes equally in your family. Is there a remainder? Who gets it?
+skill: remainders
+
+@lesson 5.4 | Divisibility tricks | ✨ | stage
+hook: Can you tell if 3,162 shares into 3 equal groups without dividing?
+learn: A number divides by 2 if its last digit is even: 0, 2, 4, 6 or 8.
+learn: It divides by 5 if its last digit is 0 or 5, and by 10 if its last digit is 0.
+learn: For 3, add up the digits. If the total is in the 3 times table, so is the number. 3 + 1 + 6 + 2 = 12, so 3,162 divides by 3.
+try: 435 ends in 5, so it divides by 5 :: mcq | Which number divides exactly by 10? | 370* | 375 | 307
+play: sort | Divides by 5, Doesn't | 45=Divides by 5; 62=Doesn't; 100=Divides by 5; 233=Doesn't; 1,005=Divides by 5 | Does it divide exactly by 5?
+check: mcq | Which divides exactly by 3? | 123* | 124 | 125
+check: tf | 4,568 divides exactly by 2. | true
+check: mcq | Which divides exactly by 2? | 846* | 845 | 847
+home: Check the house numbers on your street. Which divide by 2, 5 or 10?
+skill: divisibility
+
+@lesson 6.1 | Fractions as decimals | 🔢 | bank
+hook: Is 1/2 the same as 0.5?
+learn: Fractions and decimals can show the same amount.
+learn: 1/10 = 0.1, 1/2 = 0.5, 1/4 = 0.25 and 3/4 = 0.75.
+learn: Fractions out of 10 or 100 are easy to change: 3/10 = 0.3 and 47/100 = 0.47.
+try: 7/10 = 0.7 :: mcq | Which decimal is the same as 1/4? | 0.25* | 0.4 | 1.4
+play: match | Match each fraction to its decimal | 1/2=0.5; 1/4=0.25; 3/4=0.75; 1/10=0.1
+check: mcq | 9/100 is… | 0.09* | 0.9 | 9.0
+check: tf | 0.5 is the same as one half. | true
+check: mcq | Which is biggest? | 3/4* | 0.7 | 0.07
+home: Find a half, a quarter and three quarters of something, and say each one as a decimal.
+skill: fraction-decimal
+
+@lesson 6.2 | Percentages | 💯 | stall
+hook: "50% off!" What does that mean as a fraction?
+learn: Per cent means out of 100. 50% = 50/100 = 1/2 = 0.5.
+learn: 25% = 1/4 = 0.25. 10% = 1/10 = 0.1. 100% is the whole thing.
+learn: Percentages make amounts easy to compare.
+try: 75% is the same as 3/4 :: mcq | 25% is the same as… | 1/4* | 1/25 | 2.5
+play: match | Match each percentage to its fraction | 50%=1/2; 25%=1/4; 10%=1/10; 100%=The whole thing
+check: mcq | 0.3 as a percentage is… | 30%* | 3% | 0.3%
+check: gap | 10% of 50 is _ | 5
+check: tf | 100% means all of something. | true
+home: Spot three percentages on signs or packets this week.
+skill: percentages
+
+@lesson 6.3 | Adding decimals | 🧾 | stall
+hook: A drink is $2.50 and a muffin is $3.75. What's the total?
+learn: Line up the decimal points, then add like whole numbers.
+learn: For $2.50 + $3.75: 50c + 75c is $1.25, and $2 + $3 is $5. So it's $6.25.
+learn: Taking away works the same way: $10.00 − $6.25 = $3.75.
+try: $1.20 + $2.30 = $3.50 :: gap | 2.5 + 3.75 = _ | 6.25
+play: gen | decadd | 5
+check: gap | 4.6 + 2.8 = _ | 7.4
+check: gap | 10 − 6.25 = _ | 3.75
+check: mcq | You pay for a $3.40 item with $5. Your change is… | $1.60* | $2.60 | $1.40
+home: Add up the prices of three things on a receipt and check the total.
+skill: decimal-add
+
+@lesson 6.4 | Decimals times 10 and 100 | 🎟️ | stall
+hook: 10 bags of feed cost $4.50 each. What's the total?
+learn: Multiplying by 10 makes each digit worth 10 times more, so they move one place to the left: 4.5 × 10 = 45.
+learn: Multiplying by 100 moves them two places: 4.5 × 100 = 450.
+learn: Dividing by 10 moves them one place to the right: 45 ÷ 10 = 4.5.
+try: 3.2 × 10 = 32 :: gap | 6.7 × 10 = _ | 67
+play: match | Match each to its answer | 0.5 × 10=5; 0.5 × 100=50; 5 ÷ 10=0.5; 7 ÷ 100=0.07
+check: gap | 2.35 × 100 = _ | 235
+check: gap | 82 ÷ 10 = _ | 8.2
+check: mcq | 10 tickets cost $3.50 each. The total is… | $35* | $3.50 | $350
+home: Work out the cost of 10 and 100 of something cheap.
+skill: decimal-times-10
+
+@lesson 7.1 | Metric units | 📏 | workshop
+hook: Would you measure a road in centimetres?
+learn: Length: millimetres (mm), centimetres (cm), metres (m) and kilometres (km).
+learn: Mass: grams (g) and kilograms (kg). Capacity: millilitres (mL) and litres (L).
+learn: Pick the unit that fits the size: kilometres for roads, millilitres for medicine.
+try: A bag of flour is about 1 kg :: mcq | Which unit fits the distance between two towns? | Kilometres* | Millimetres | Grams
+play: match | Match each thing to a sensible unit | Length of an ant=Millimetres; Water in a bath=Litres; Mass of an apple=Grams; Distance to the next town=Kilometres
+check: mcq | Which is a unit of mass? | Kilogram* | Litre | Metre
+check: mcq | A teaspoon holds about… | 5 mL* | 5 L | 5 kg
+check: tf | A litre is a unit of length. | false | A litre measures capacity: how much a container holds.
+home: Find the units on five food packets in your kitchen.
+skill: metric-units
+
+@lesson 7.2 | Converting units | 🔁 | workshop
+hook: The fun run is 2.5 km. How many metres is that?
+learn: 1 km = 1,000 m, 1 m = 100 cm and 1 cm = 10 mm.
+learn: 1 kg = 1,000 g and 1 L = 1,000 mL.
+learn: From a big unit to a small one, multiply. From small to big, divide. 2.5 km × 1,000 = 2,500 m.
+try: 3 kg is 3,000 g :: gap | 4 L is _ mL | 4000
+play: match | Match the equal amounts | 1 km=1,000 m; 1 m=100 cm; 1 kg=1,000 g; 1 L=1,000 mL
+check: gap | 2.5 × 1,000 = _ | 2500
+check: gap | 350 cm is _ m | 3.5
+check: mcq | 500 g is… | half a kilogram* | 5 kilograms | 50 kilograms
+home: Read the mass of a packet in grams and change it into kilograms.
+skill: converting-units
+
+@lesson 7.3 | Volume of boxes | 📦 | workshop
+hook: How many 1 cm cubes fit inside a small box?
+learn: Volume is how much space something takes up.
+learn: For a box (a cuboid), volume = length × width × height.
+learn: A box 4 cm long, 3 cm wide and 2 cm high holds 4 × 3 × 2 = 24 cubic centimetres (24 cm³).
+try: 2 × 2 × 2 = 8, so 8 cm³ :: gap | 5 × 2 × 3 = _ | 30
+play: order | Find the volume of a box in order | Measure the length; Measure the width; Measure the height; Multiply all three
+check: gap | 10 × 4 × 2 = _ | 80
+check: mcq | Which unit is for volume? | cm³* | cm | cm²
+check: tf | A cube with 3 cm sides has a volume of 27 cm³. | true
+home: Measure a cereal box and work out its volume.
+skill: volume
+
+@lesson 7.4 | 24-hour time | 🕓 | townhall
+hook: The ferry leaves at 15:30. Is that morning or afternoon?
+learn: 24-hour time counts the hours from 00:00 (midnight) to 23:59.
+learn: Morning times look the same: 9:00 am is 09:00.
+learn: For afternoon and evening, add 12: 3:30 pm is 15:30, and 8 pm is 20:00.
+try: 2 pm is 14:00 :: mcq | What is 18:00? | 6 pm* | 8 pm | 6 am
+play: match | Match the times | 13:00=1 pm; 17:45=5:45 pm; 09:15=9:15 am; 22:00=10 pm
+check: mcq | 7:30 pm in 24-hour time is… | 19:30* | 7:30 | 17:30
+check: mcq | What is 00:00? | Midnight* | Midday | Half past twelve
+check: tf | 12:00 is midday. | true
+home: Find a timetable or a clock that uses 24-hour time.
+skill: 24-hour-time
+
+@lesson 8.1 | The mean | ⚽ | stage
+hook: You scored 6, 8 and 10 in three games. What's your average?
+learn: The mean is one kind of average. Add up all the numbers, then divide by how many there are.
+learn: (6 + 8 + 10) ÷ 3 = 24 ÷ 3 = 8.
+learn: The mean shows a typical value for the group.
+try: (2 + 4 + 6) ÷ 3 = 4 :: gap | (5 + 7 + 9) ÷ 3 = _ | 7
+play: gen | mean | 4
+check: gap | (10 + 20 + 30 + 40) ÷ 4 = _ | 25
+check: mcq | To find the mean, you… | add them up and divide by how many there are* | pick the biggest | pick the middle one
+check: gap | Ari earned $4, $6 and $8 over three weeks. The mean is $_ | 6
+home: Find the mean number of minutes you read each day over three days.
+skill: mean
+
+@lesson 8.2 | Median and mode | 📋 | stage
+hook: Is there more than one kind of average?
+learn: The median is the middle number once the numbers are in order. For 3, 5 and 9, it's 5.
+learn: The mode is the number that comes up most often. In 2, 4, 4 and 7, it's 4.
+learn: Mean, median and mode are all averages, and each is useful in different ways.
+try: In 1, 3, 3 and 8, the mode is 3 :: gap | The median of 4, 6 and 10 is _ | 6
+play: gen | median | 4
+check: gap | The mode of 2, 5, 5, 6 and 9 is _ | 5
+check: gap | The median of 9, 1 and 5 is _ | 5
+check: tf | You need to put the numbers in order to find the median. | true
+home: Find the median height of three people in your family.
+skill: median-mode
+
+@lesson 8.3 | Line graphs | 📈 | garden
+hook: How did the temperature change through the day?
+learn: A line graph shows how something changes over time.
+learn: Time usually goes along the bottom, and the amount goes up the side.
+learn: A line going up means increasing, going down means decreasing, and flat means no change.
+try: A line going up means increasing :: mcq | A line going down shows… | something decreasing* | something increasing | no change
+play: sort | Increasing, Decreasing, No change | The line goes up=Increasing; The line goes down=Decreasing; The line stays flat=No change; Savings growing each week=Increasing; An ice block melting=Decreasing | Which is it?
+check: mcq | What's best shown on a line graph? | The temperature over a day* | Favourite fruits | Car colours in a car park
+check: tf | In a line graph, time usually goes along the bottom. | true
+check: mcq | A flat line means… | no change* | a big rise | a big drop
+home: Check the temperature at three times today and draw a line graph.
+skill: line-graphs
+
+@lesson 8.4 | Chance | 🎲 | island
+hook: Will the sun rise tomorrow? Will it snow at the beach in summer? How likely is each?
+learn: Chance words: impossible, unlikely, even chance, likely, certain.
+learn: Tossing a coin gives an even chance of heads: 1 out of 2, or 1/2.
+learn: Rolling a 6 on a dice is unlikely: 1 out of 6, or 1/6.
+try: The sun rising tomorrow is certain :: mcq | Rolling a 7 on a normal dice is… | impossible* | likely | certain
+play: order | Put these in order, least likely first | Rolling a 7 on a dice; Rolling a 6 on a dice; Getting heads on a coin; Rolling a number under 7 on a dice
+check: mcq | The chance of heads when you toss a coin is… | 1/2* | 1/6 | 1
+check: mcq | The chance of rolling a 3 on a dice is… | 1/6* | 1/3 | 3/6
+check: tf | "Even chance" means the same as 50/50. | true
+home: Toss a coin 20 times with a grown-up. Did you get about 10 heads?
+skill: chance
+
 @band makers
 @unit 1 | Integers | Negative numbers and the order of operations
 @unit 2 | Algebra | Letters for numbers
@@ -642,3 +1068,216 @@ check: gap | The square root of 144 is _ | 12
 check: tf | Pythagoras only works in right-angled triangles. | true
 home: Measure the diagonal of a book or a screen, then check it with Pythagoras.
 skill: pythagoras-use
+
+@unit 5 | Powers and roots | Index notation and standard form
+@unit 6 | Patterns and graphs | Rules, coordinates and straight lines
+@unit 7 | Area and volume | Triangles, circles and prisms
+@unit 8 | Probability and statistics | Outcomes, experiments and misleading graphs
+
+@lesson 5.1 | Powers | 🔋 | workshop
+hook: A message gets passed on: each person tells 2 more, and then they each tell 2 more. How fast does it grow?
+learn: A power shows repeated multiplying: 2³ = 2 × 2 × 2 = 8.
+learn: The small raised number is the index (or exponent). The big number is the base.
+learn: 10² = 100 and 10³ = 1,000. Any number to the power of 1 is itself.
+try: 3² = 9 :: gap | 2 × 2 × 2 × 2 = _ | 16
+play: gen | powers | 5
+check: gap | 5 × 5 × 5 = _ | 125
+check: mcq | 4³ means… | 4 × 4 × 4* | 4 × 3 | 4 + 4 + 4
+check: mcq | 10⁴ is… | 10,000* | 40 | 1,000
+home: Work out 2 to the power of 10 by doubling 1 ten times.
+skill: powers
+
+@lesson 5.2 | Squares and square roots | 🟩 | garden
+hook: A square garden has an area of 49 m². How long is each side?
+learn: A square number is a number times itself: 7² = 49.
+learn: The square root (√) undoes squaring: √49 = 7.
+learn: The first ten square numbers are 1, 4, 9, 16, 25, 36, 49, 64, 81 and 100.
+try: √81 = 9 :: gap | 12 × 12 = _ | 144
+play: sort | Square number, Not a square | 36=Square number; 40=Not a square; 64=Square number; 50=Not a square; 100=Square number; 90=Not a square | Square number or not?
+check: gap | The square root of 121 is _ | 11
+check: mcq | A square has an area of 25 cm². Each side is… | 5 cm* | 25 cm | 12.5 cm
+check: tf | 16 is a square number. | true
+home: Colour in the square numbers on a 1 to 100 chart.
+skill: square-roots
+
+@lesson 5.3 | Index laws | ⚙️ | workshop
+hook: Is there a shortcut for 2³ × 2⁴?
+learn: Multiplying powers of the same base: add the indices. 2³ × 2⁴ = 2⁷.
+learn: Dividing powers of the same base: take away the indices. 5⁶ ÷ 5² = 5⁴.
+learn: A power of a power: multiply the indices. (3²)³ = 3⁶.
+try: 10² × 10³ = 10⁵ :: mcq | Simplify 7⁵ ÷ 7³ | 7²* | 7⁸ | 1²
+play: match | Simplify each | 2³ × 2²=2⁵; 6⁴ ÷ 6=6³; (4²)³=4⁶; x² × x⁵=x⁷
+check: mcq | Simplify a⁴ × a³ | a⁷* | a¹² | 2a⁷
+check: mcq | Simplify (2³)² | 2⁶* | 2⁵ | 4⁶
+check: tf | 3² × 3² is the same as 3⁴. | true
+home: Show a grown-up why 2³ × 2² = 2⁵ by writing out all the 2s.
+skill: index-laws
+
+@lesson 5.4 | Standard form | 🌌 | museum
+hook: The sun is about 150,000,000 km from Earth. Is there a neater way to write that?
+learn: Standard form writes a number as a number from 1 to 10, times a power of 10.
+learn: 150,000,000 = 1.5 × 10⁸.
+learn: Scientists use it for very big and very small numbers.
+try: 3,000 = 3 × 10³ :: mcq | 45,000 in standard form is… | 4.5 × 10⁴* | 45 × 10³ | 4.5 × 10³
+play: match | Match each number to its standard form | 2,000=2 × 10³; 600,000=6 × 10⁵; 7,500=7.5 × 10³; 90=9 × 10¹
+check: mcq | 8 × 10⁶ is… | 8,000,000* | 800,000 | 80,000,000
+check: tf | In standard form, the first number is from 1 up to (but not including) 10. | true
+check: mcq | Which is written in standard form? | 3.2 × 10⁵* | 32 × 10⁴ | 0.32 × 10⁶
+home: Find a very big number in a science article and write it in standard form.
+skill: standard-form
+
+@lesson 6.1 | Number patterns | 🔢 | stage
+hook: 5, 8, 11, 14… What comes next, and what's the 100th number?
+learn: In a linear pattern, the same amount is added each time. Here it's 3.
+learn: A rule finds any term. For 5, 8, 11, 14 the rule is 3n + 2, where n is the position.
+learn: Check it: n = 1 gives 3 × 1 + 2 = 5. The 100th term is 3 × 100 + 2 = 302.
+try: 2, 4, 6, 8 has the rule 2n :: gap | What comes next? 7, 11, 15, 19, _ | 23
+play: match | Match each pattern to its rule | 4, 8, 12, 16=4n; 3, 5, 7, 9=2n + 1; 6, 11, 16, 21=5n + 1; 1, 4, 7, 10=3n − 2
+check: gap | Using the rule 3n + 2, the 10th term is _ | 32
+check: mcq | In 10, 17, 24, 31, what's added each time? | 7* | 10 | 6
+check: gap | The rule is 4n + 1. The 5th term is _ | 21
+home: Find a pattern at home (stairs, tiles, fence posts) and write its rule.
+skill: linear-patterns
+
+@lesson 6.2 | Coordinates | 📍 | island
+hook: How do you tell someone exactly where the treasure is on a map?
+learn: Coordinates give a position as (x, y): how far across, then how far up.
+learn: The point (3, 5) is 3 across and 5 up from the origin, (0, 0).
+learn: Negative coordinates go left or down: (−2, 4) is 2 left and 4 up.
+try: (4, 1) is 4 across and 1 up :: mcq | Which point is 2 across and 6 up? | (2, 6)* | (6, 2) | (2, −6)
+play: order | Plot the point (3, −2) | Start at the origin (0, 0); Go 3 to the right; Go 2 down; Mark the point
+check: mcq | The origin is… | (0, 0)* | (1, 1) | (10, 10)
+check: tf | In (5, 2), the 5 tells you how far across. | true
+check: mcq | (−3, 4) is… | 3 left and 4 up* | 3 right and 4 down | 4 left and 3 up
+home: Draw a treasure map on grid paper and give a grown-up the coordinates.
+skill: coordinates
+
+@lesson 6.3 | Straight-line graphs | 🚕 | townhall
+hook: A taxi charges $3 plus $2 a kilometre. Can one graph show the cost of any trip?
+learn: An equation like y = 2x + 3 makes a straight line when you plot it.
+learn: Make a table first: x = 0 gives y = 3, x = 1 gives y = 5, and x = 2 gives y = 7.
+learn: Plot the points, then join them with a ruler.
+try: For y = x + 1, x = 2 gives y = 3 :: gap | For y = 2x + 3, when x = 4, y is _ | 11
+play: order | Draw a straight-line graph | Make a table of x and y values; Work out y for each x; Plot the points; Join them with a ruler
+check: gap | For y = 3x − 1, when x = 2, y is _ | 5
+check: mcq | Where does y = 2x + 3 cross the y-axis? | At 3* | At 2 | At 0
+check: tf | y = 2x + 3 makes a straight line. | true
+home: Make a table and a graph for the cost of n ice blocks at $2 each.
+skill: linear-graphs
+
+@lesson 6.4 | Gradient | ⛰️ | island
+hook: Which hill is steeper? Maths can measure it.
+learn: Gradient measures steepness: rise ÷ run, or how far up for each step across.
+learn: A line that rises 6 over a run of 3 has a gradient of 6 ÷ 3 = 2.
+learn: In y = 2x + 3, the gradient is 2, the number in front of x. A line going down has a negative gradient.
+try: A rise of 4 over a run of 2 is a gradient of 2 :: gap | A rise of 9 over a run of 3 is a gradient of _ | 3
+play: match | Each line is y equals the expression. Match it to its gradient | 3x + 1=3; x − 4=1; 5x=5; −2x + 6=−2
+check: gap | 10 ÷ 2 = _ | 5
+check: mcq | Which line is steepest? | y = 4x* | y = 2x | y = x
+check: tf | A line going down from left to right has a negative gradient. | true
+home: Measure the rise and run of a ramp or some steps, and work out the gradient.
+skill: gradient
+
+@lesson 7.1 | Triangles and parallelograms | 📐 | workshop
+hook: How do you find the area of a slanted shape?
+learn: The area of a parallelogram is base × height, using the straight-up height, not the slanted side.
+learn: A triangle is half a parallelogram, so its area is base × height ÷ 2.
+learn: A triangle with a base of 8 cm and a height of 5 cm: 8 × 5 ÷ 2 = 20 cm².
+try: A parallelogram with base 6 and height 4 has an area of 24 :: gap | 10 × 6 ÷ 2 = _ | 30
+play: gen | triangle | 4
+check: gap | A parallelogram with a base of 7 m and a height of 3 m has an area of _ m² | 21
+check: mcq | Why do we halve for a triangle? | A triangle is half a parallelogram* | Triangles are small | It's a rule nobody understands
+check: tf | For area, you use the slanted side as the height. | false | Use the height measured straight up, at a right angle to the base.
+home: Find a triangle at home, like a sign or a slice of toast, and work out its area.
+skill: area-triangles
+
+@lesson 7.2 | Circles | ⭕ | workshop
+hook: Why are wheels round? And how far does a wheel roll in one turn?
+learn: The radius goes from the centre to the edge. The diameter goes right across, so it's 2 × the radius.
+learn: The circumference is the distance around. Circumference = π × diameter, and π is about 3.14.
+learn: A wheel 50 cm across rolls about 3.14 × 50 = 157 cm in one turn.
+try: A radius of 4 means a diameter of 8 :: gap | A circle has a radius of 6 cm. Its diameter is _ cm | 12
+play: match | Match each word to its meaning | Radius=Centre to edge; Diameter=All the way across through the centre; Circumference=The distance around; π=About 3.14
+check: gap | 3.14 × 10 = _ | 31.4
+check: mcq | If the diameter is 20 cm, the radius is… | 10 cm* | 40 cm | 20 cm
+check: tf | π is about 3.14. | true
+home: Wrap string around a round object, then measure across it. Divide the distance around by the distance across. Is it close to 3.14?
+skill: circles
+
+@lesson 7.3 | Area of a circle | 🍕 | kitchen
+hook: How much pizza is there in a 30 cm pizza?
+learn: The area of a circle is π × radius × radius, written πr².
+learn: A circle with a radius of 10 cm: 3.14 × 10 × 10 = 314 cm².
+learn: Halve the diameter to get the radius first.
+try: A radius of 1 gives 3.14 × 1 × 1 = 3.14 :: gap | 3.14 × 5 × 5 = _ | 78.5
+play: order | Find a circle's area from its diameter | Halve the diameter to get the radius; Square the radius; Multiply by π
+check: gap | 3.14 × 2 × 2 = _ | 12.56
+check: mcq | A pizza is 30 cm across. What radius do you use? | 15 cm* | 30 cm | 60 cm
+check: tf | Doubling the radius doubles the area. | false | It makes the area four times as big, because the radius is squared.
+home: Measure across a round plate and work out its area.
+skill: circle-area
+
+@lesson 7.4 | Volume of prisms | ⛺ | workshop
+hook: How much air is inside a tent shape?
+learn: A prism has the same shape all the way through, like a box or a tent shape.
+learn: The volume of a prism is the area of its end face × its length.
+learn: A prism with an end area of 20 cm² and a length of 10 cm holds 20 × 10 = 200 cm³. Each cm³ holds 1 mL.
+try: An end area of 12 and a length of 5 make 60 :: gap | An end area of 15 cm² and a length of 8 cm make a volume of _ cm³ | 120
+play: order | Find a prism's volume | Find the shape of the end face; Work out the area of the end face; Multiply by the length
+check: gap | 25 × 4 = _ | 100
+check: mcq | 1 cm³ holds… | 1 mL* | 1 L | 10 mL
+check: tf | A box is a prism. | true
+home: Find the volume of a box in your kitchen using its end area and its length.
+skill: prism-volume
+
+@lesson 8.1 | Probability | 🎲 | island
+hook: What's the chance of rolling an even number on a dice?
+learn: Probability = the number of ways it can happen ÷ the number of possible outcomes.
+learn: The even numbers on a dice are 2, 4 and 6. That's 3 out of 6, so 3/6 = 1/2.
+learn: Probability goes from 0 (impossible) to 1 (certain).
+try: The probability of rolling a 5 is 1/6 :: mcq | What's the probability of rolling a number bigger than 4? | 1/3* | 1/6 | 4/6
+play: gen | chance | 4
+check: mcq | A bag has 2 red and 8 blue counters. The probability of red is… | 1/5* | 1/4 | 2/8
+check: tf | A probability can be bigger than 1. | false | Probabilities go from 0 to 1.
+check: mcq | The probability of rolling a 7 on a normal dice is… | 0* | 1/7 | 1
+home: List all the outcomes of rolling a dice, and find the probability of an odd number.
+skill: probability
+
+@lesson 8.2 | Two things at once | 🪙 | island
+hook: Toss a coin and roll a dice. How many results are possible?
+learn: List all the outcomes in a table or a tree diagram.
+learn: A coin (2 outcomes) and a dice (6 outcomes) give 2 × 6 = 12 outcomes.
+learn: The probability of heads and a 6 is 1 out of 12, or 1/12.
+try: Two coins give HH, HT, TH and TT: 4 outcomes :: mcq | You toss two coins. What's the probability of two heads? | 1/4* | 1/2 | 1/3
+play: order | Make a tree diagram | Draw branches for the first event; From each one, draw branches for the second; Write each outcome at the ends; Count the outcomes
+check: gap | A spinner with 3 colours and a coin give 3 × 2 = _ | 6
+check: mcq | You toss two coins. What's the probability of one head and one tail? | 1/2* | 1/4 | 1/3
+check: tf | A coin and a dice give 12 possible outcomes. | true
+home: Toss two coins 20 times with someone. How often do you get one of each?
+skill: combined-events
+
+@lesson 8.3 | Experiments and theory | 🧪 | museum
+hook: You toss a coin 10 times and get 7 heads. Is the coin unfair?
+learn: Theoretical probability is what should happen: heads has a probability of 1/2.
+learn: Experimental probability is what actually happened: 7 heads in 10 tosses is 7/10.
+learn: With more tries, results usually get closer to the theory. 10 tosses isn't many.
+try: 52 heads in 100 tosses is close to 1/2 :: mcq | You roll a dice 60 times. About how many 6s would you expect? | 10* | 6 | 60
+play: sort | Theoretical, Experimental | Heads should come up half the time=Theoretical; 7 heads in 10 tosses=Experimental; A 4 should come up 1 roll in 6=Theoretical; 12 sixes in 60 rolls=Experimental | Which kind?
+check: tf | Getting 7 heads in 10 tosses proves a coin is unfair. | false | Small numbers of tries can vary a lot.
+check: mcq | More tries usually make results… | closer to the theory* | further from the theory | exactly the same as it
+check: mcq | 30 heads in 50 tosses gives an experimental probability of… | 3/5* | 1/2 | 30
+home: Toss a coin 50 times with a grown-up and compare your result with 1/2.
+skill: experimental-probability
+
+@lesson 8.4 | Misleading graphs | 📉 | stage
+hook: Two graphs show the same numbers. One looks like a huge jump, the other like hardly any change. How?
+learn: A vertical axis that doesn't start at 0 can make small differences look huge.
+learn: Uneven scales, missing labels and carefully chosen dates can also mislead.
+learn: Always check the axes, the scale and where the data came from.
+try: An axis starting at 95 makes a change from 96 to 98 look huge :: mcq | What should you check first on a graph? | The axes and scale* | The colours | The font
+play: sort | Can mislead, Fair | An axis starting at 95=Can mislead; An axis starting at 0=Fair; No labels on the axes=Can mislead; The source is shown=Fair; Only the best month is shown=Can mislead | Fair or misleading?
+check: tf | A graph can be accurate and still be misleading. | true
+check: mcq | Why might an ad's graph start at 90 instead of 0? | To make a small difference look big* | To save ink | Because 0 doesn't exist
+check: mcq | Which makes a graph more trustworthy? | Labelled axes and a source* | Bright colours | 3D effects
+home: Find a graph in an ad or an article and check its axes.
+skill: misleading-graphs

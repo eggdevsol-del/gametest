@@ -1565,3 +1565,128 @@ fact: Buying good second-hand things lets someone else pay for the early [drop].
 fact: A new gadget is often worth [less] after a year. | more; double
 fact: Depreciation is a [cost] of owning things. | profit; gift
 fact: Gadgets usually lose value [faster] than land. | slower; never
+
+# ---------- Month 2 (unit 10), written and checked 2026-11-07 ----------
+
+@band sprouts
+@facts 10.1
+fact: To find a total, [add] the prices together. | take away; multiply
+fact: $2 + $3 is [$5]. | $1; $6
+fact: $4 + $5 is [$9]. | $1; $20
+fact: Add the [dollars] first, then the cents. | cents only; coins only
+fact: $1.50 + $2.20 is [$3.70]. | $3.50; $1.70
+fact: $1.20 + $1.30 is [$2.50]. | $2.30; $3.50
+fact: Check your [total] before you pay. | colour; receipt later
+fact: Adding prices tells you how much to [pay]. | save; borrow
+
+@facts 10.2
+fact: Change is the money you get [back]. | first; away
+fact: You get change when you pay [more] than the price. | less; exactly
+fact: Count up from the [price]. | change; zero
+fact: $7 to $10 is [$3]. | $7; $17
+fact: Paying $5 for a $4 toy gets [$1] change. | $4; $9
+fact: Paying $10 for a $6 book gets [$4] change. | $6; $16
+fact: Always [check] your change. | throw away; ignore
+fact: If you pay the exact price, you get [no] change. | double; lots of
+
+@facts 10.3
+fact: Comparing prices helps you get the best [deal]. | mess; problem
+fact: Look at the [dollars] first. | cents; colours
+fact: $4.50 costs [more] than $3.90. | less than; the same as
+fact: $2.10 costs [less] than $2.40. | more than; the same as
+fact: If the dollars are the same, compare the [cents]. | colours; shops
+fact: Cheaper isn't always [better]. | cheaper; worse
+fact: Think about whether it'll [last]. | glow; sing
+fact: A toy that breaks fast can [waste] money. | save; grow
+
+@facts 10.4
+fact: Small amounts saved every week [add up]. | disappear; shrink
+fact: $2 a week for 5 weeks is [$10]. | $7; $25
+fact: $1 a week for 6 weeks is [$6]. | $7; $1
+fact: $3 a week for 4 weeks is [$12]. | $7; $34
+fact: Keep your savings in your [Vault] jar. | Spend; Give
+fact: Watch your savings grow towards your [goal]. | bin; snack
+fact: 5 × $2 is the same as $2 + $2 + $2 + $2 + [$2]. | $5; $10
+fact: Saving every week makes your Vault [grow]. | shrink; vanish
+
+@band builders
+@facts 10.1
+fact: Waiting before you buy helps you tell a real want from a passing [feeling]. | price; shop
+fact: For bigger things, wait a [week]. | second; minute
+fact: If you still want it after waiting, [plan] for it. | forget; panic
+fact: Often the urge to buy [fades]. | doubles; grows
+fact: When the urge fades, your money stays in your [Spend] jar. | Give; bin
+fact: Waiting saves money for something [better]. | worse; broken
+fact: A passing feeling is a want that [fades]. | lasts forever; grows
+fact: A waiting rule stops [impulse] buys. | planned; saved
+
+@facts 10.2
+fact: Keep your [receipt]. | wrapper; price sticker only
+fact: A receipt shows what you paid and [when]. | why; who made it
+fact: If something is [faulty], take it back with the receipt. | perfect; ugly
+fact: Shops will often fix a faulty item, swap it or give your money [back]. | away; twice
+fact: Check things carefully [before] you buy. | after; never
+fact: Ask about the shop's [returns] rules. | music; lighting
+fact: A receipt is [proof] of what you bought. | a toy; a coupon
+fact: Losing your receipt can make returns [harder]. | easier; faster
+
+@facts 10.3
+fact: Second-hand means someone [owned] it before. | made; dreamed
+fact: Second-hand things are often much [cheaper]. | dearer; newer
+fact: [Op shops] sell second-hand things. | Banks; Petrol stations
+fact: Garage sales sell [second-hand] things. | brand-new; imaginary
+fact: Hand-me-downs from family are [second-hand]. | brand-new; stolen
+fact: Check that a second-hand item [works]. | sparkles; smells new
+fact: Check whether anything is [missing]. | shiny; new
+fact: Check whether it's [clean]. | famous; expensive
+
+@facts 10.4
+fact: Online prices may not include [delivery]. | the item; tax only
+fact: Add the [delivery] cost to compare fairly. | wrapping; colour
+fact: You can't [touch] things before buying online. | see; read about
+fact: Check [sizes] when shopping online. | colours of the website; ads
+fact: Check [reviews] when shopping online. | ads only; logos
+fact: Only shop online with a [grown-up]. | stranger; friend online
+fact: Only use websites your grown-up [trusts]. | found in an ad; has never seen
+fact: A $20 item with $8 delivery costs [$28]. | $20; $12
+
+@band makers
+@facts 10.1
+fact: Good small businesses solve a [problem]. | mystery; puzzle game
+fact: Good small businesses meet a [need]. | mood; rumour
+fact: Busy neighbours might need dogs [walked]. | painted; hidden
+fact: Weeding gardens can meet a [need]. | rumour; trend
+fact: Start with your [skills]. | debts; excuses
+fact: Focus on what people will actually [pay] for. | ignore; complain about
+fact: Always check with a [grown-up] first. | stranger; customer
+fact: Car washing is a business idea that meets a [need]. | trend; rumour
+
+@facts 10.2
+fact: Start with your [costs]. | profits; prices only
+fact: Ingredients and [packaging] are costs. | profit; income
+fact: If 12 cupcakes cost $9 to make, each costs [75c]. | $9; 12c
+fact: If 10 cookies cost $5 to make, each costs [50c]. | $5; 10c
+fact: Your price must be [higher] than your cost to make a profit. | lower; the same as
+fact: Your price should be [fair] enough that people will buy. | sky-high; secret
+fact: Cost per item = total cost ÷ number of [items]. | customers; days
+fact: Selling below cost means a [loss]. | profit; bonus
+
+@facts 10.3
+fact: Profit = income − [costs]. | profit; price
+fact: $60 − $25 = [$35] profit. | $85; $25
+fact: $40 income and $15 costs make [$25] profit. | $55; $15
+fact: If costs are bigger than income, it's a [loss]. | profit; bonus
+fact: $20 income and $30 costs is a [loss] of $10. | profit; bonus
+fact: Keep a simple [record] of everything you spend and earn. | secret; guess
+fact: Income is the money that comes [in]. | out; away
+fact: Tracking money shows whether you made a [profit]. | friend; mess
+
+@facts 10.4
+fact: Happy customers come [back]. | away; never
+fact: Happy customers tell their [friends]. | lawyers; nobody
+fact: What people say about your business is your [reputation]. | income; price
+fact: Being [reliable] builds a good reputation. | late; rude
+fact: Turn up on [time]. | late; whenever
+fact: Do what you [promised]. | felt like; forgot
+fact: Be [polite] to customers. | rude; grumpy
+fact: If something goes wrong, own it and [fix] it. | hide; blame others

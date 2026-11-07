@@ -244,6 +244,60 @@ check: mcq | Leading with consistency means… | doing the right thing again and
 home: Choose one way to set a good example for a younger family member this week.
 skill: leading-example
 
+@unit 6 | Humility and gratitude | Humility, feedback, contentment and thanking others
+
+@lesson 6.1 | Humility | 🙇 | stage
+hook: Can someone be really good at something and still be humble?
+learn: Humility means being confident in your abilities without showing off or putting others down.
+learn: Humble people give credit to others, admit mistakes and keep learning.
+learn: Humility makes people easier to work with, and more respected.
+try: Thanking the team after a win :: mcq | Which shows humility? | Thanking your teammates after scoring* | Bragging about your goals | Mocking the other team
+play: sort | Humble, Arrogant | Giving credit to others=Humble; Bragging constantly=Arrogant; Admitting you were wrong=Humble; Refusing to listen to advice=Arrogant; Asking to learn more=Humble | Which is it?
+check: tf | Humble people can still be confident. | true
+check: mcq | Which is arrogant? | Putting others down to look better* | Admitting a mistake | Thanking a coach
+check: mcq | Why are humble people often respected? | They're easy to work with and keep learning* | They never succeed | They're quiet
+home: This week, give credit to someone who helped you succeed.
+skill: humility
+
+@lesson 6.2 | Taking feedback | 📝 | stage
+hook: A coach tells you your technique needs work. How do you react?
+learn: Feedback is information that helps you improve.
+learn: Listen fully, ask questions to understand, and thank the person, even if it stings.
+learn: You don't have to agree with all feedback, but think it over before you decide.
+try: "Thanks, can you show me how?" :: mcq | Which is a good response to feedback? | "Thanks. Can you show me what to change?"* | "You're wrong." | Walking away
+play: order | Respond to feedback well | Listen without interrupting; Ask questions to understand; Thank them; Decide what to change
+check: tf | Feedback can help you improve. | true
+check: mcq | Feedback stings. What helps? | Remembering it's about the work, not your worth* | Getting angry | Quitting
+check: mcq | Do you have to agree with all feedback? | No, but think it over first* | Yes, always | Never listen to it
+home: Ask someone for feedback on something you've done, and respond well.
+skill: feedback
+
+@lesson 6.3 | Contentment | 🌤️ | home
+hook: Online, everyone seems to have more. Does that make you happier?
+learn: Contentment means being grateful for what you have, instead of always wanting more.
+learn: Comparing your everyday life with other people's highlights online can make you feel you're missing out.
+learn: Gratitude, time offline and focusing on your own progress all help.
+try: Noticing what you already have :: mcq | Why can social media leave people feeling they don't have enough? | People mostly post their best moments* | It's always accurate | It shows real life
+play: sort | Builds contentment, Fuels comparison | Writing three things you're grateful for=Builds contentment; Scrolling other people's holidays for hours=Fuels comparison; Comparing yourself with your past self=Builds contentment; Wanting what everyone else has=Fuels comparison; Enjoying time with family=Builds contentment | Which is it?
+check: tf | Comparing your life with other people's best moments can make you unhappy. | true
+check: mcq | Contentment means… | being grateful for what you have* | never wanting anything | giving everything away
+check: mcq | A healthier comparison is with… | your own past self* | celebrities | everyone online
+home: Spend one evening offline and notice how you feel.
+skill: contentment
+
+@lesson 6.4 | Thanking those who serve | 🙌 | townhall
+hook: Who keeps your town running that you hardly ever thank?
+learn: Lots of people work hard to help us: teachers, coaches, bus drivers, nurses, cleaners and volunteers.
+learn: Their work often goes unnoticed. A real thank-you means a lot.
+learn: Be specific: "Thanks for staying late to help us train" beats "thanks".
+try: Thanking a bus driver :: mcq | Which is a specific thank-you? | "Thanks for helping me with my essay after class."* | "Thx." | Nothing
+play: tap | Tap the people who serve your community | 🚌:yes:Bus drivers; 🧑‍🏫:yes:Teachers; 🧑‍⚕️:yes:Nurses; 🧹:yes:Cleaners; 🎮:no
+check: tf | A specific thank-you means more than a vague one. | true
+check: mcq | Why do people who serve often go unthanked? | Their work is easy to overlook* | They don't want thanks | They're paid enough
+check: mcq | Which is a way to thank a coach? | A note about something they taught you* | Ignoring them | Complaining
+home: Thank someone who serves your community this week, and be specific.
+skill: thanking-service
+
 
 # Fact banks (content/facts/character.txt)
 @facts 1.1
@@ -426,3 +480,41 @@ fact: Doing the right thing [again and again] is leadership. | once only; never
 fact: Your little cousins notice how you [behave]. | sleep; breathe
 fact: Leaders show the way by what they [do]. | wear; own
 fact: Good examples [spread]. | disappear; shrink
+
+# Fact banks (content/facts/character.txt)
+@facts 6.1
+fact: [Humility] means being confident without showing off. | Arrogance; Shyness
+fact: Humble people don't put others [down]. | up; first
+fact: Humble people give [credit] to others. | blame; orders
+fact: Humble people admit [mistakes]. | nothing; secrets
+fact: Humble people keep [learning]. | boasting; showing off
+fact: Humility makes people easier to [work with]. | avoid; argue with
+fact: Humble people are often more [respected]. | ignored; disliked
+fact: Showing off puts others [down]. | up; first
+@facts 6.2
+fact: [Feedback] is information that helps you improve. | Gossip; A rumour
+fact: Listen [fully] to feedback. | halfway; never
+fact: Ask questions to [understand] feedback. | argue with; avoid
+fact: [Thank] the person who gives you feedback. | Argue with; Ignore
+fact: Thank people for feedback even if it [stings]. | flatters you; is easy
+fact: You don't have to agree with [all] feedback. | any; no
+fact: Think feedback over [before] you decide. | after; never
+fact: Getting defensive makes feedback [harder] to use. | easier; quicker
+@facts 6.3
+fact: Contentment means being [grateful] for what you have. | greedy; envious
+fact: Contentment means not always wanting [more]. | less; nothing
+fact: Comparing your everyday life with others' [highlights] can make you feel you're missing out. | lowlights; homework
+fact: Online posts often show [highlights]. | every boring moment; the whole truth
+fact: [Gratitude] helps with contentment. | Envy; Comparison
+fact: Time [offline] helps with contentment. | scrolling; comparing
+fact: Focus on your own [progress]. | rivals; feed
+fact: Comparing yourself to others can make you feel [worse]. | better; taller
+@facts 6.4
+fact: Lots of people work hard to [help] us. | ignore; trick
+fact: [Bus drivers] are people who serve us. | Cartoon characters; Robots
+fact: [Cleaners] do work that often goes unnoticed. | Celebrities; Influencers
+fact: [Volunteers] help without being paid. | Shop owners; Celebrities
+fact: A real thank-you means a [lot]. | little; nothing
+fact: A specific thank-you beats a plain "[thanks]". | essay; gift card
+fact: "Thanks for staying late to help us train" is a [specific] thank-you. | vague; rude
+fact: Thanking people who serve shows [respect]. | rudeness; boredom

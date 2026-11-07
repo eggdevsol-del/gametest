@@ -56,6 +56,60 @@ check: mcq | Cough or sneeze… | into your elbow* | onto your friend | into you
 home: Hum "Happy Birthday" twice while you wash your hands. That's about 20 seconds.
 skill: hygiene
 
+@unit 2 | Staying safe | Roads, water, sun and getting help
+
+@lesson 2.1 | Road safety | 🚸 | townhall
+hook: How do you cross a road safely?
+learn: Always cross with a grown-up, at a crossing if there is one.
+learn: Stop at the kerb. Look right, look left, look right again, and listen.
+learn: Walk straight across when the road is clear. Don't run.
+try: Stop, look and listen :: mcq | Where's the safest place to cross? | At a crossing, with a grown-up* | Between parked cars | Anywhere
+play: order | Cross the road safely | Stop at the kerb; Look right, left and right again; Listen for cars; Walk straight across when it's clear
+check: tf | You should run across the road. | false | Walk straight across when it's clear. Running can make you trip.
+check: mcq | What should you wear on a bike? | A helmet* | Sunglasses only | Nothing special
+check: mcq | Which is safest? | Holding a grown-up's hand near roads* | Playing ball near the road | Hiding between parked cars
+home: Practise stop, look and listen on your next walk with a grown-up.
+skill: road-safety
+
+@lesson 2.2 | Water safety | 🏊 | island
+hook: Why should kids never swim without a grown-up watching?
+learn: Water can be dangerous, even shallow water.
+learn: Always swim with a grown-up watching. At the beach, swim between the red and yellow flags.
+learn: Wear a life jacket on boats.
+try: A grown-up is watching :: mcq | Where should you swim at a patrolled beach? | Between the red and yellow flags* | Near the rocks | Far out on your own
+play: sort | Safe, Not safe | Swimming with a grown-up watching=Safe; Swimming alone=Not safe; A life jacket on a boat=Safe; Running beside the pool=Not safe; Swimming between the flags=Safe | Safe or not?
+check: tf | You should wear a life jacket on a boat. | true
+check: mcq | Why walk, not run, beside a pool? | It's slippery* | Running is boring | Pools don't like it
+check: mcq | If you see someone in trouble in the water, you should… | tell a grown-up straight away* | jump in after them | ignore it
+home: Learn your local pool's swimming rules with a grown-up.
+skill: water-safety
+
+@lesson 2.3 | Sun safety | 🧢 | garden
+hook: Why do we wear hats in summer?
+learn: The sun's rays can burn your skin, even on cloudy days.
+learn: {nz:Slip, slop, slap and wrap~au:Slip, slop, slap, seek and slide}: put on a shirt, sunscreen, a hat and sunglasses.
+learn: Play in the shade in the middle of the day, when the sun is strongest.
+try: A hat and sunscreen :: mcq | When is the sun strongest? | The middle of the day* | Early morning | At night
+play: match | Match each sun-safety word to what you do | Slip=Slip on a shirt; Slop=Slop on sunscreen; Slap=Slap on a hat
+check: tf | You can get sunburnt on a cloudy day. | true
+check: mcq | Where's a good place to play at midday in summer? | In the shade* | In full sun with no hat | On hot concrete
+check: mcq | Sunscreen goes… | on your skin* | in your drink | on your hat
+home: Pack a sun-safety bag with a grown-up: a hat, sunscreen and a water bottle.
+skill: sun-safety-kids
+
+@lesson 2.4 | Getting help in an emergency | 🚑 | home
+hook: What would you do if a grown-up at home got badly hurt?
+learn: An emergency is when someone is badly hurt, very sick or in danger, or there's a fire.
+learn: Call {nz:111~au:000}. Say which service you need, your address, and what happened.
+learn: Learn your address by heart, and only call the emergency number for real emergencies.
+try: Know your address :: mcq | What's the emergency number? | {nz:111~au:000}* | 123 | 555
+play: order | Call for help | Call {nz:111~au:000}; Say which service you need; Say your address; Say what happened and answer the questions
+check: tf | You should know your home address by heart. | true
+check: mcq | Which is an emergency? | Someone is badly hurt* | You lost a toy | You're bored
+check: mcq | Calling the emergency number as a joke is… | not OK, because it can stop real help getting through* | fine | funny
+home: Practise saying your full address to a grown-up.
+skill: emergency-call
+
 @band builders
 @unit 1 | Fuel and move | Food, drinks, activity, teeth and sun
 
@@ -111,6 +165,60 @@ check: mcq | Which helps protect your skin from the sun? | A hat and sunscreen* 
 home: Check the sunscreen at home with a grown-up, and put a hat by the door.
 skill: teeth-skin
 
+@unit 2 | Safe and sound | Bikes, water, first aid and calling for help
+
+@lesson 2.1 | Bike and scooter safety | 🚲 | townhall
+hook: What's the most important thing to wear on a bike?
+learn: Always wear a helmet that fits snugly and is done up.
+learn: Be seen: bright clothes, lights at dusk, and a bell.
+learn: Check your brakes and tyres before you ride, and watch out for car doors opening.
+try: Helmet on and done up :: mcq | How should a helmet fit? | Snug and done up* | Loose on the back of your head | Unclipped
+play: order | Before you ride | Put on your helmet and do it up; Check your brakes; Check your tyres; Look around before you set off
+check: tf | Bright clothing helps drivers see you. | true
+check: mcq | What's a danger to watch for when riding past parked cars? | Doors opening* | Birds | Puddles
+check: mcq | Riding at dusk, you should use… | lights* | sunglasses | headphones
+home: Do a bike check with a grown-up: helmet, brakes, tyres and lights.
+skill: bike-safety
+
+@lesson 2.2 | Safe in the water | 🌊 | island
+hook: Why can even strong swimmers get into trouble?
+learn: Conditions can change quickly. Waves, cold water and rips can tire anyone out.
+learn: Swim between the flags, never swim alone, and check the conditions first.
+learn: If you're caught in a rip, stay calm, float and raise your hand for help.
+try: Float and raise your hand :: mcq | If you're caught in a rip, you should… | stay calm, float and raise your hand* | swim hard against it | panic
+play: sort | Safe choice, Risky choice | Swimming between the flags=Safe choice; Swimming alone after dark=Risky choice; Wearing a life jacket in a kayak=Safe choice; Jumping off a wharf into water you can't see into=Risky choice; Asking a lifeguard about the conditions=Safe choice | Safe or risky?
+check: tf | Cold water can tire you out quickly. | true
+check: mcq | Before swimming at a new beach, you should… | check the conditions and the flags* | dive straight in | swim out as far as you can
+check: mcq | A friend is in trouble in deep water. The safest first step is to… | call for help and throw them something that floats* | jump straight in | leave
+home: With a grown-up, learn how to spot a rip: a calmer-looking, darker patch between breaking waves.
+skill: water-safety-teen
+
+@lesson 2.3 | First aid for small injuries | 🩹 | home
+hook: Your little brother falls and cuts his knee. What do you do?
+learn: For a small cut: wash your hands, rinse the cut with clean water, then cover it with a plaster.
+learn: For a nosebleed: sit up, lean forward, and pinch the soft part of the nose for 10 minutes.
+learn: For a bump: hold on a cold pack wrapped in a cloth for a short time. Tell a grown-up about any bump to the head.
+try: Lean forward for a nosebleed :: mcq | For a nosebleed, you should… | lean forward and pinch the soft part of your nose* | lean back | lie down flat
+play: order | Care for a small cut | Wash your hands; Rinse the cut with clean water; Pat it dry; Cover it with a plaster
+check: tf | You should tell a grown-up about any bump to the head. | true
+check: mcq | How long should you pinch a nosebleed? | About 10 minutes* | 5 seconds | An hour
+check: mcq | A cold pack should be… | wrapped in a cloth* | put on bare skin for hours | heated first
+home: With a grown-up, check what's in your home's first aid kit.
+skill: first-aid-minor
+
+@lesson 2.4 | Calling for help | 📞 | home
+hook: What would you say if you called the emergency number?
+learn: In an emergency, call {nz:111~au:000}. It works even from a phone with no credit.
+learn: Stay calm. Say which service you need (ambulance, fire or police), where you are, and what happened.
+learn: Don't hang up until they tell you to. They may give you instructions.
+try: Service, address, what happened :: mcq | What should you tell the operator first? | Which service you need, and where you are* | Your favourite colour | Nothing
+play: order | Make an emergency call | Call {nz:111~au:000}; Ask for the service you need; Give the address; Explain what happened; Stay on the line
+check: tf | You should stay on the line until the operator says you can hang up. | true
+check: mcq | Which is a reason to call the emergency number? | A house on fire* | A lost phone charger | Being bored
+check: mcq | If you don't know the address, you can… | describe nearby landmarks* | hang up | make one up
+home: Make sure you know your full address, including your town.
+skill: emergency-call-teen
+
 @band makers
 @unit 1 | Looking after your body | Fitness, sleep, sun and water safety, and first aid
 
@@ -165,3 +273,57 @@ check: tf | You should press on a bleeding cut with a clean cloth. | true
 check: mcq | What's the first thing to check when someone is hurt? | Whether there's danger* | Their phone | What they had for lunch
 home: With a grown-up, find your home's first aid kit and check what's in it.
 skill: first-aid
+
+@unit 2 | Food and fuel | Nutrients, labels, water and safe cooking
+
+@lesson 2.1 | What food does | 🍳 | kitchen
+hook: Why do athletes care so much about what they eat?
+learn: Carbohydrates (bread, rice, pasta, fruit) give energy. Protein (meat, fish, eggs, beans) builds and repairs muscles.
+learn: Fats (nuts, avocado, oils) help the body take in some vitamins, and we need them in small amounts.
+learn: Vitamins and minerals, mostly from fruit and vegetables, keep everything working.
+try: Pasta gives energy :: mcq | Which nutrient builds and repairs muscles? | Protein* | Sugar | Water
+play: sort | Mostly carbohydrate, Mostly protein, Mostly fat | Rice=Mostly carbohydrate; Chicken=Mostly protein; Olive oil=Mostly fat; Bread=Mostly carbohydrate; Eggs=Mostly protein; Butter=Mostly fat | Which nutrient is it mostly?
+check: tf | Fruit and vegetables are a main source of vitamins. | true
+check: mcq | Which food is high in protein? | Fish* | Lettuce | Jam
+check: mcq | Why do we need some fat? | It helps the body take in some vitamins* | It has no use | It's only for flavour
+home: Look at your dinner and name the carbohydrate, the protein and the vegetables.
+skill: nutrients
+
+@lesson 2.2 | Reading food labels | 🏷️ | kitchen
+hook: A muesli bar says "healthy" on the front. How can you check?
+learn: The nutrition information panel shows what's really in a food, per serving and per 100 g.
+learn: Use the per 100 g column to compare similar foods fairly.
+learn: Ingredients are listed from most to least by weight. If sugar is near the top, there's a lot of it.
+try: Compare per 100 g :: mcq | Ingredients are listed… | from most to least by weight* | in alphabetical order | in any order
+play: order | Check a food label | Ignore the claims on the front; Find the nutrition panel; Compare per 100 g; Read the ingredients list
+check: tf | Words like "healthy" on the front of a packet always tell the full story. | false | Check the nutrition panel and the ingredients.
+check: mcq | Which column is best for comparing two cereals? | Per 100 g* | Per serving | Neither
+check: mcq | Sugar listed first in the ingredients means… | there's more sugar than anything else* | there's hardly any sugar | it's sugar-free
+home: Compare the sugar per 100 g in two breakfast cereals at home.
+skill: food-labels
+
+@lesson 2.3 | Water and performance | 💧 | garden
+hook: Can being a little thirsty make you play worse?
+learn: Even mild dehydration can make you tired, give you a headache, and make it harder to concentrate.
+learn: Drink water through the day, and more when it's hot or you're exercising.
+learn: Pale yellow urine usually means you're drinking enough. Dark yellow means drink more.
+try: A water bottle at training :: mcq | Which is a sign you need more water? | Dark yellow urine* | Pale yellow urine | Cold hands
+play: sort | Drink more, Doing fine | A headache on a hot day=Drink more; Dark yellow urine=Drink more; Pale yellow urine=Doing fine; Feeling thirsty during sport=Drink more | Which is it?
+check: tf | Even mild dehydration can affect concentration. | true
+check: mcq | When should you drink extra water? | When it's hot or you're exercising* | Never | Only at dinner
+check: mcq | What's usually the best drink during sport? | Water* | Energy drinks | Coffee
+home: Carry a water bottle for a day and notice how much you drink.
+skill: hydration
+
+@lesson 2.4 | Cooking safely | 🍗 | kitchen
+hook: How do you avoid making anyone sick when you cook?
+learn: Wash your hands before cooking and after touching raw meat.
+learn: Keep raw meat away from food that's ready to eat. Use a separate board, or wash it well between uses.
+learn: Cook chicken and mince all the way through, and put leftovers in the fridge soon after the meal.
+try: A separate board for raw meat :: mcq | Why use a separate board for raw meat? | So germs don't spread to other food* | It looks nicer | Meat likes its own board
+play: order | Make a safe chicken stir-fry | Wash your hands; Cut the raw chicken on its own board; Wash your hands and the board; Cook the chicken all the way through
+check: tf | Chicken should be cooked all the way through. | true
+check: mcq | When should you wash your hands while cooking? | Before cooking and after touching raw meat* | Only at the end | Never
+check: mcq | Where should leftovers go after dinner? | In the fridge soon after the meal* | On the bench overnight | In a warm cupboard
+home: Cook a simple meal with a grown-up, following the food safety steps.
+skill: food-safety
