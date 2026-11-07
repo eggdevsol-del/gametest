@@ -1,0 +1,541 @@
+# science · makers
+@unit 1 | Cells and body systems | From cells to organs
+@unit 2 | Energy | Forms, transfers, heat and sources
+@unit 3 | Chemistry basics | Particles, changes and mixtures
+
+@lesson 1.1 | Cells | 🔬 | museum
+hook: What do an elephant, an oak tree and you all have in common?
+learn: All living things are made of cells, the smallest units of life.
+learn: Animal and plant cells both have a cell membrane, cytoplasm and a nucleus, which controls the cell.
+learn: Plant cells also have a cell wall and chloroplasts, where photosynthesis happens.
+try: Chloroplasts are found in plant cells :: mcq | What controls the cell? | The nucleus* | The cell wall | The cytoplasm
+play: sort | Plant cells only, Both plant and animal cells | Cell wall=Plant cells only; Nucleus=Both plant and animal cells; Chloroplasts=Plant cells only; Cell membrane=Both plant and animal cells; Cytoplasm=Both plant and animal cells | Where do you find it?
+check: tf | All living things are made of cells. | true
+check: mcq | Where does photosynthesis happen? | In chloroplasts* | In the nucleus | In the cell wall
+check: mcq | What do we use to see most cells? | A microscope* | A telescope | A mirror
+home: Look at a thin piece of onion skin or a leaf under a microscope or strong magnifying glass, if you can.
+skill: cells
+
+@lesson 1.2 | Tissues, organs and systems | 🫀 | museum
+hook: How do trillions of cells work together to make you?
+learn: Similar cells group together into tissues, like muscle tissue.
+learn: Tissues form organs, like the heart, lungs and stomach.
+learn: Organs work together in organ systems, like the digestive system and the circulatory system.
+try: cells → tissues → organs → systems :: mcq | The heart is an… | organ* | cell | organ system
+play: order | Smallest to biggest | Cell; Tissue; Organ; Organ system; Organism
+check: mcq | Which is an organ system? | The digestive system* | A muscle cell | The stomach
+check: tf | Organs are made of tissues. | true
+check: mcq | Which organs are part of the breathing system? | Lungs* | Stomach | Skin
+home: Name one organ in each of three body systems.
+skill: body-organisation
+
+@lesson 1.3 | Digestion | 🍞 | kitchen
+hook: Where does your lunch go after you swallow it?
+learn: Digestion breaks food down into pieces small enough for the body to absorb.
+learn: It starts in the mouth with teeth and saliva. Food then travels down the oesophagus to the stomach, where acid and churning break it down further.
+learn: In the small intestine, nutrients pass into the blood. The large intestine takes in water, and what's left leaves the body.
+try: Chewing starts digestion :: mcq | Where do most nutrients pass into the blood? | The small intestine* | The stomach | The mouth
+play: order | Put food's journey in order | Mouth; Oesophagus; Stomach; Small intestine; Large intestine
+check: mcq | What does saliva do? | Starts breaking food down* | Pumps blood | Takes in oxygen
+check: tf | The large intestine takes in water. | true
+check: mcq | Which tube carries food from the mouth to the stomach? | The oesophagus* | The windpipe | A vein
+home: Chew a plain cracker slowly for a minute. Does it start to taste sweeter? Saliva is turning starch into sugar.
+skill: digestion
+
+@lesson 1.4 | Heart and lungs | ❤️ | garden
+hook: Why does your heart beat faster when you run?
+learn: The heart pumps blood around the body through blood vessels: arteries, veins and capillaries.
+learn: Blood carries oxygen from the lungs and nutrients from digestion to every cell, and carries waste away.
+learn: When you exercise, your muscles need more oxygen, so you breathe faster and your heart beats faster.
+try: Blood carries oxygen to your cells :: mcq | Which organ pumps blood? | The heart* | The lungs | The liver
+play: match | Match each part to its job | Heart=Pumps blood; Lungs=Take in oxygen; Arteries=Carry blood away from the heart; Veins=Carry blood back to the heart
+check: mcq | Why does your heart beat faster when you exercise? | Your muscles need more oxygen* | Your blood gets lazy | It doesn't
+check: tf | Veins carry blood back to the heart. | true
+check: mcq | Where does blood pick up oxygen? | In the lungs* | In the stomach | In the bones
+home: Count your pulse for 15 seconds at rest, then after 20 star jumps. Multiply each by 4.
+skill: circulation
+
+@lesson 2.1 | Forms of energy | ⚡ | workshop
+hook: A torch, a toaster and a kicked ball all use energy. Is it the same kind?
+learn: Energy is what makes things happen, and it comes in different forms.
+learn: Kinetic energy is movement. Thermal energy is heat. There's also light, sound, electrical and chemical energy (stored in food and batteries).
+learn: Stored energy, like in a stretched rubber band or a ball held up high, is called potential energy.
+try: A moving car has kinetic energy :: mcq | Food stores… | chemical energy* | sound energy | light energy
+play: match | Match each example to its energy | A rolling ball=Kinetic; A hot pan=Thermal; A battery=Chemical; A ringing bell=Sound
+check: mcq | A stretched rubber band stores… | potential energy* | sound energy | light energy
+check: tf | Light is a form of energy. | true
+check: mcq | Which has the most kinetic energy? | A fast car* | A parked car | A sleeping cat
+home: Find five forms of energy in your kitchen.
+skill: energy-forms
+
+@lesson 2.2 | Energy transfers | 🔦 | workshop
+hook: When you switch on a torch, where does the energy go?
+learn: Energy can't be made or destroyed. It changes from one form to another, which is called a transfer.
+learn: In a torch: chemical energy in the battery → electrical energy → light, plus some heat.
+learn: Some energy always ends up as heat or sound we didn't want. We call it wasted energy.
+try: A toaster turns electrical energy into heat :: mcq | A solar panel turns light into… | electrical energy* | sound | chemical energy in food
+play: order | Follow the energy in a torch | Chemical energy in the battery; Electrical energy in the wires; Light from the bulb
+check: tf | Energy can be destroyed. | false | Energy only changes form. It's never destroyed.
+check: mcq | What's the usual wasted energy from a light bulb? | Heat* | Chemical energy | Kinetic energy of the glass
+check: mcq | You eat breakfast, then run. The chemical energy in food becomes… | kinetic energy* | light energy | magnetic energy
+home: With a grown-up, trace the energy transfers when a kettle boils. Stay clear of the steam.
+skill: energy-transfer
+
+@lesson 2.3 | Heat on the move | 🍲 | kitchen
+hook: Why does a metal spoon in hot soup get hot, but a wooden one doesn't?
+learn: Heat moves from hotter things to colder things.
+learn: Conduction is heat moving through solids by touch. Metals are good conductors. Wood and plastic are insulators.
+learn: In convection, warmer liquids and gases rise and cooler ones sink. In radiation, heat travels as rays, like warmth from the sun.
+try: A metal spoon conducts heat :: mcq | Which is a good insulator? | Wool* | Copper | Aluminium
+play: match | Match each example to how heat moves | A hot pan handle=Conduction; Warm air rising from a heater=Convection; The sun warming your face=Radiation
+check: mcq | Why are pot handles often plastic? | Plastic is an insulator* | Plastic is a conductor | Plastic is magnetic
+check: tf | Heat moves from colder things to hotter things. | false | Heat always moves from hotter to colder.
+check: mcq | How does the sun's heat reach the Earth? | Radiation* | Conduction | Convection
+home: Wrap one cup of warm tap water in a towel and leave another bare. Which stays warm longer?
+skill: heat-transfer
+
+@lesson 2.4 | Energy sources | 🌬️ | townhall
+hook: Where does the electricity in your home come from?
+learn: Electricity can be made from many sources: flowing water (hydro), wind, the sun (solar), heat from under the ground (geothermal), and burning fuels like coal and gas.
+learn: Renewable sources don't run out: water, wind, sun and geothermal heat.
+learn: Non-renewable sources, like coal, oil and natural gas, took millions of years to form and will run out.
+try: Wind is renewable :: mcq | Which source is renewable? | Wind* | Coal | Oil
+play: sort | Renewable, Non-renewable | Solar=Renewable; Coal=Non-renewable; Hydro=Renewable; Natural gas=Non-renewable; Geothermal=Renewable; Oil=Non-renewable | Renewable or not?
+check: tf | Non-renewable sources took millions of years to form. | true
+check: mcq | Hydro power uses… | flowing water* | burning coal | moonlight
+check: mcq | Which is a way to use less energy at home? | Turn off lights in empty rooms* | Run the heater with a window open | Leave chargers on all day for no reason
+home: With a grown-up, find three ways your home could use less electricity.
+skill: energy-sources
+
+@lesson 3.1 | Particles | 🫧 | kitchen
+hook: Why can you smell biscuits baking from another room?
+learn: All matter is made of particles far too small to see.
+learn: In a solid, particles are packed tightly and vibrate in place. In a liquid, they're close but slide past each other. In a gas, they're far apart and move fast in every direction.
+learn: Gas particles spread out, which is why smells travel through a room. This spreading is called diffusion.
+try: Smells spread by diffusion :: mcq | In which state are the particles furthest apart? | Gas* | Liquid | Solid
+play: match | Match each state to its particles | Solid=Packed tight and vibrating in place; Liquid=Close together, sliding past each other; Gas=Far apart and moving fast
+check: tf | Particles in a solid don't move at all. | false | They vibrate in place.
+check: mcq | Why does a drop of food colouring spread through water? | The particles move and mix* | Water is magic | The colour sinks
+check: mcq | Heating particles usually makes them… | move faster* | stop | shrink to nothing
+home: Drop food colouring into a glass of cold water and a glass of warm tap water. Which spreads faster?
+skill: particles
+
+@lesson 3.2 | Changing state | 💨 | kitchen
+hook: Where does the water go when a puddle dries up?
+learn: Melting is solid to liquid. Freezing is liquid to solid.
+learn: Evaporation (and boiling) is liquid to gas. Condensation is gas to liquid.
+learn: At sea level, pure water boils at 100 °C and freezes at 0 °C.
+try: Water vapour condenses into droplets on a cold window :: mcq | Liquid to gas is called… | evaporation* | condensation | freezing
+play: match | Match each change to its name | Ice to water=Melting; Water to ice=Freezing; Water to vapour=Evaporation; Vapour to water=Condensation
+check: mcq | At sea level, pure water boils at… | 100 °C* | 50 °C | 0 °C
+check: tf | Droplets on the outside of a cold drink can come from water vapour in the air. | true
+check: mcq | Mist on a bathroom mirror after a shower is… | condensation* | melting | freezing
+home: Breathe on a cold mirror, then explain what happened to a grown-up using the word condensation.
+skill: changes-of-state
+
+@lesson 3.3 | Physical and chemical changes | 🍳 | kitchen
+hook: You can refreeze melted ice, but can you unbake a cake?
+learn: A physical change changes shape or state but not what a substance is. Melting, cutting and dissolving are physical changes.
+learn: A chemical change makes a new substance. Burning, cooking, rusting and baking are chemical changes.
+learn: Signs of a chemical change include gas bubbles, a colour change, light or heat, or a new smell.
+try: Rusting is a chemical change :: mcq | Which is a physical change? | Ice melting* | Toast burning | A nail rusting
+play: sort | Physical, Chemical | Cutting paper=Physical; Baking a cake=Chemical; Melting chocolate=Physical; Cooking an egg=Chemical; Dissolving sugar=Physical; Iron rusting=Chemical | Physical or chemical change?
+check: mcq | Which is a sign of a chemical change? | Gas bubbles and a new smell* | Being cut in half | Being poured into a cup
+check: tf | Cooking an egg can be undone. | false | Cooking makes new substances, so it's a chemical change.
+check: mcq | Dissolving salt in water is… | a physical change* | a chemical change | not a change at all
+home: While helping with dinner, list the changes you see. Is each one physical or chemical?
+skill: chemical-physical
+
+@lesson 3.4 | Mixtures and separating | 🧂 | kitchen
+hook: Salt and sand got mixed together. How could you separate them?
+learn: A mixture is two or more substances mixed but not chemically joined, like sand and water, or salt water.
+learn: Mixtures can be separated by sieving (big bits from small), filtering (solids from liquids), evaporation (a dissolved solid from a liquid) and magnets (iron from other things).
+learn: For salt and sand: add water to dissolve the salt, filter out the sand, then let the water evaporate to leave the salt.
+try: A sieve separates peas from flour :: mcq | How can you get salt back from salt water? | Let the water evaporate* | Use a magnet | Use a sieve
+play: order | Separate salt from sand | Add water and stir to dissolve the salt; Filter it to catch the sand; Leave the salty water in the sun to evaporate; Collect the salt
+check: mcq | What separates iron filings from sand? | A magnet* | A sieve | Evaporation
+check: tf | Filtering separates a solid from a liquid. | true
+check: mcq | Pouring muddy water through a coffee filter is… | filtering* | evaporation | magnetism
+home: With a grown-up, mix sand and salt, then separate them. Leave the salty water to dry in the sun.
+skill: separating
+
+@unit 4 | Ecology | Ecosystems, energy flow and protecting native species
+@unit 5 | Forces and motion | Speed, balanced forces, action and reaction, pressure
+@unit 6 | Space | Gravity, stars, distances and seasons
+
+@lesson 4.1 | Ecosystems | 🌿 | garden
+hook: A forest is more than trees. What else makes it work?
+learn: An ecosystem is all the living things in an area plus the non-living things they depend on.
+learn: Biotic factors are living: plants, animals, fungi, bacteria. Abiotic factors are non-living: sunlight, water, temperature, soil.
+learn: A change in one part, like less rain, can affect everything else.
+try: Sunlight is an abiotic factor :: mcq | Which is a biotic factor? | Fungi* | Rainfall | Temperature
+play: sort | Biotic, Abiotic | Ferns=Biotic; Sunlight=Abiotic; Earthworms=Biotic; Soil temperature=Abiotic; Bacteria=Biotic; Water=Abiotic | Living or non-living?
+check: tf | A drought can affect every living thing in an ecosystem. | true
+check: mcq | An ecosystem includes… | living things and their surroundings* | only animals | only plants
+check: mcq | Which is an abiotic factor? | Wind* | Moss | Insects
+home: Walk through a park or garden and list three biotic and three abiotic factors.
+skill: ecosystems
+
+@lesson 4.2 | Energy flow | 🦅 | garden
+hook: Why are there far fewer hawks than mice?
+learn: Energy enters most ecosystems through plants, which capture sunlight.
+learn: At each step up a food chain, most of the energy is used for living (moving, keeping warm) or lost as heat. Only a small part passes on.
+learn: So there's less energy at each level, which is why top predators are fewer.
+try: grass → mouse → hawk :: mcq | Why are top predators fewer in number? | There's less energy available at the top* | They don't like company | They're lazy
+play: order | Follow the energy | Sunlight; Plants (producers); Herbivores; Carnivores
+check: tf | Most of the energy at one level of a food chain passes on to the next. | false | Most is used up or lost as heat. Only a small part passes on.
+check: mcq | What captures the energy that enters most ecosystems? | Plants* | Rocks | Predators
+check: mcq | Decomposers like fungi break down… | dead plants and animals* | sunlight | only rocks
+home: Draw an energy pyramid for a food chain you know.
+skill: energy-flow
+
+@lesson 4.3 | Decomposers and cycles | ♻️ | garden
+hook: Where do fallen leaves go?
+learn: Decomposers, like fungi, bacteria and worms, break down dead plants and animals.
+learn: This returns nutrients to the soil, so new plants can use them.
+learn: Without decomposers, dead material would pile up and nutrients would run out.
+try: Worms help compost break down :: mcq | What do decomposers return to the soil? | Nutrients* | Plastic | Sunlight
+play: order | Follow the nutrients | A leaf falls; Decomposers break it down; Nutrients go into the soil; A new plant takes them up
+check: tf | Fungi are decomposers. | true
+check: mcq | What would happen without decomposers? | Dead material would pile up* | Plants would grow faster | Nothing
+check: mcq | What helps decomposers in a compost bin? | Moisture and air* | Plastic bags | Salt
+home: Start or check a compost bin with a grown-up. Which decomposers can you find?
+skill: decomposers
+
+@lesson 4.4 | Protecting native species | 🐦 | garden
+hook: Why do people set predator traps in the bush?
+learn: {nz:Many of New Zealand's native birds evolved with no land mammals hunting them~au:Many of Australia's small native animals evolved without foxes or cats hunting them}, so they have few defences against introduced predators.
+learn: {nz:Introduced rats, stoats and possums~au:Introduced foxes and feral cats} hunt native animals and eat their eggs and young.
+learn: Trapping predators and protecting habitat helps native species recover.
+try: Traps help protect native animals :: mcq | What is an introduced predator? | An animal brought in by people that hunts native species* | A native bird | A kind of plant
+play: sort | Helps native species, Harms native species | Setting predator traps=Helps native species; Letting pet cats roam at night=Harms native species; Planting native trees=Helps native species; Dropping litter in the bush=Harms native species; Keeping dogs on leads near nesting birds=Helps native species | Which is it?
+check: tf | Planting native plants can help native animals. | true
+check: mcq | Why are some native animals easy prey for introduced predators? | They evolved without those hunters* | They're too big | They live in cities
+check: mcq | Which helps native animals most? | Controlling predators and protecting their habitat* | Feeding them bread | Cutting down forests
+home: Find out with a grown-up about a native animal near you and what's being done to protect it.
+skill: native-species
+
+@lesson 5.1 | Speed | 🚴 | island
+hook: You cycle 12 km in 1 hour. How fast is that?
+learn: Speed is how far something travels in a certain time.
+learn: Speed = distance ÷ time. 12 km in 1 hour is 12 km/h.
+learn: Rearranged: distance = speed × time, and time = distance ÷ speed.
+try: 100 m in 20 s is 5 m/s :: gap | 60 km in 2 hours is _ km/h | 30
+play: match | Match each trip to its speed | 30 m in 10 s=3 m/s; 100 km in 2 h=50 km/h; 400 m in 80 s=5 m/s; 90 km in 3 h=30 km/h
+check: gap | 200 ÷ 25 = _ | 8
+check: mcq | A car travels at 50 km/h for 3 hours. How far does it go? | 150 km* | 53 km | 17 km
+check: tf | Speed is distance divided by time. | true
+home: Time yourself walking 100 m and work out your speed in metres per second.
+skill: speed
+
+@lesson 5.2 | Balanced and unbalanced forces | ⚖️ | island
+hook: In a tug of war, why does the rope sometimes not move at all?
+learn: When the forces on an object are balanced, they cancel out. It stays still, or keeps moving at the same speed.
+learn: When forces are unbalanced, the object speeds up, slows down or changes direction.
+learn: A parked car has balanced forces: gravity pulls it down and the ground pushes up.
+try: Equal teams in a tug of war: balanced forces :: mcq | A ball speeds up as it rolls downhill. The forces are… | unbalanced* | balanced | zero
+play: sort | Balanced, Unbalanced | A book resting on a table=Balanced; A car speeding up=Unbalanced; A plane cruising at a steady speed=Balanced; A ball slowing down on grass=Unbalanced; A rocket lifting off=Unbalanced | Balanced or unbalanced?
+check: tf | Balanced forces can keep an object moving at a steady speed. | true
+check: mcq | What happens when forces are unbalanced? | The motion changes* | Nothing ever changes | The object disappears
+check: mcq | A skydiver falling at a steady speed has… | balanced forces* | no forces | only gravity
+home: Push a toy car gently along carpet, then along a smooth floor. Which slows down faster, and why?
+skill: balanced-forces
+
+@lesson 5.3 | Action and reaction | 🚀 | museum
+hook: How does a rocket push itself into space with nothing to push against?
+learn: When one object pushes on another, the second pushes back just as hard in the opposite direction.
+learn: A rocket pushes gas down, and the gas pushes the rocket up.
+learn: When you swim, you push water back, and the water pushes you forward.
+try: A balloon flies as the air rushes out :: mcq | When you jump forward off a skateboard, the skateboard… | rolls backwards* | stays still | follows you
+play: match | Match each action to its reaction | A rocket pushes gas down=The gas pushes the rocket up; A swimmer pushes water back=The water pushes the swimmer forward; Your foot pushes the ground back=The ground pushes you forward
+check: tf | Forces always come in pairs. | true
+check: mcq | Why does a balloon zoom around when you let it go? | The air pushed out pushes the balloon the other way* | Balloons like to fly | The wind
+check: mcq | When you walk, you push the ground… | backwards* | forwards | up
+home: Tape a straw to a balloon, thread the straw on a string, blow up the balloon and let it go.
+skill: action-reaction
+
+@lesson 5.4 | Pressure | 🥾 | workshop
+hook: Why does a sharp knife cut better than a blunt one?
+learn: Pressure is how much force presses on a certain area. Pressure = force ÷ area.
+learn: The same force on a small area makes high pressure: a sharp knife edge, a drawing pin.
+learn: The same force on a big area makes low pressure: snowshoes, wide tractor tyres.
+try: Snowshoes spread out your weight :: mcq | Why do snowshoes stop you sinking? | They spread the force over a bigger area* | They're lighter | They're warm
+play: sort | High pressure, Low pressure | A drawing pin's point=High pressure; Snowshoes=Low pressure; A sharp knife=High pressure; Wide tractor tyres=Low pressure; A stiletto heel on soft grass=High pressure | High or low pressure?
+check: gap | 100 ÷ 4 = _ | 25
+check: tf | The same force on a smaller area makes a higher pressure. | true
+check: mcq | Why is a blunt knife harder to cut with? | Its edge has a bigger area, so less pressure* | It's heavier | It's dirty
+home: Press the flat end of a pencil, then its point, gently into playdough. What's different?
+skill: pressure
+
+@lesson 6.1 | Gravity and orbits | 🛰️ | museum
+hook: Why doesn't the Moon fall down onto the Earth?
+learn: Gravity pulls all objects with mass towards each other. Bigger masses pull harder.
+learn: The Moon is moving sideways very fast. Gravity keeps bending its path into a curve around the Earth: an orbit.
+learn: Satellites orbit the Earth the same way.
+try: Gravity keeps the Moon in orbit :: mcq | What keeps the planets in orbit around the sun? | Gravity* | Magnetism | Wind
+play: order | Why the Moon orbits | The Moon moves sideways very fast; Earth's gravity pulls it inwards; Its path bends into a curve; It keeps circling the Earth
+check: tf | Bigger masses pull with more gravity. | true
+check: mcq | Without gravity, the Moon would… | fly off in a straight line* | fall onto the Earth | stop
+check: mcq | Gravity is a force between… | any objects with mass* | only magnets | only planets
+home: In a safe open space, swing a soft ball on a string. Feel the string pull inwards, like gravity.
+skill: orbits-gravity
+
+@lesson 6.2 | Stars | 🌟 | museum
+hook: Is the sun special, or just one star of many?
+learn: Stars are huge balls of hot gas, mostly hydrogen, that shine because of nuclear fusion in their cores.
+learn: Stars form inside giant clouds of gas and dust called nebulae.
+learn: The sun is a medium-sized star, about halfway through its life.
+try: The sun is a star :: mcq | What makes stars shine? | Nuclear fusion in their cores* | Burning wood | Reflected light
+play: match | Match each word to its meaning | Nebula=A cloud of gas and dust where stars form; Fusion=Small atoms joining and releasing energy; Galaxy=A huge group of stars
+check: tf | The sun is a star. | true
+check: mcq | Compared with other stars, the sun is… | medium-sized* | the biggest star there is | the smallest star
+check: mcq | Stars are mostly made of… | hydrogen* | rock | water
+home: On a clear night, look for stars of different colours. Hotter stars look bluer.
+skill: stars
+
+@lesson 6.3 | Light-years and the size of space | 🔭 | museum
+hook: When you look at a star, are you seeing it as it is now?
+learn: Space is so big that we measure it in light-years: the distance light travels in one year.
+learn: Light from the sun takes about 8 minutes to reach the Earth.
+learn: Light from other stars takes years to reach us, so we see them as they were when that light left.
+try: A star 10 light-years away is seen as it was 10 years ago :: mcq | A light-year measures… | distance* | time | brightness
+play: order | Smallest to largest | Earth; The solar system; Our galaxy; The universe
+check: mcq | About how long does sunlight take to reach the Earth? | 8 minutes* | 8 seconds | 8 days
+check: tf | When we look at distant stars, we see them as they were in the past. | true
+check: mcq | Our galaxy is called… | the Milky Way* | the Big Dipper | the Southern Cross
+home: On a dark, clear night, look for the Milky Way with a grown-up.
+skill: light-years
+
+@lesson 6.4 | Why we have seasons | 🌏 | museum
+hook: Is it summer because we're closer to the sun?
+learn: Seasons are caused by the Earth's tilt, not by its distance from the sun.
+learn: When our half of the Earth tilts towards the sun, the sun is higher in the sky, days are longer and sunlight is more concentrated. That's summer.
+learn: When it tilts away, the sun is lower, days are shorter and sunlight is more spread out. That's winter.
+try: The tilt causes the seasons :: mcq | What causes the seasons? | The Earth's tilt* | Our distance from the sun | The Moon
+play: sort | Summer, Winter | Long days=Summer; Sun low in the sky=Winter; Our half tilted towards the sun=Summer; Sunlight spread out=Winter; Sun high at midday=Summer | Summer or winter?
+check: tf | It's summer here when our half of the Earth tilts towards the sun. | true
+check: mcq | When it's summer in {nz:New Zealand~au:Australia}, it's winter in… | the northern half of the world* | the whole world | nowhere
+check: mcq | In winter, the days are… | shorter* | longer | the same
+home: Write down today's sunrise and sunset times, and check them again in a month. How has the day length changed?
+skill: seasons-tilt
+
+
+# Fact banks (content/facts/science.txt)
+@facts 1.1
+fact: All living things are made of [cells]. | atoms only; plastic
+fact: Cells are the smallest units of [life]. | rock; light
+fact: The [nucleus] controls the cell. | cell wall; cytoplasm
+fact: Animal and plant cells both have a cell [membrane]. | wall; chloroplast
+fact: Plant cells have a cell [wall]; animal cells don't. | membrane; nucleus
+fact: Photosynthesis happens in the [chloroplasts]. | nucleus; cell membrane
+fact: [Plant] cells have chloroplasts. | Animal; Human
+fact: The jelly-like inside of a cell is the [cytoplasm]. | nucleus; cell wall
+@facts 1.2
+fact: Similar cells group together into [tissues]. | organs; systems
+fact: Muscle tissue is made of muscle [cells]. | organs; bones only
+fact: Tissues form [organs]. | cells; atoms
+fact: The heart is an [organ]. | cell; tissue only
+fact: The lungs are [organs]. | cells; tissues only
+fact: Organs work together in organ [systems]. | cells; tissues
+fact: The [digestive] system breaks down food. | circulatory; nervous
+fact: The [circulatory] system moves blood around the body. | digestive; skeletal
+@facts 1.3
+fact: Digestion breaks food into pieces small enough to [absorb]. | see; taste
+fact: Digestion starts in the [mouth]. | stomach; large intestine
+fact: Saliva and [teeth] start breaking food down. | lungs; bones
+fact: Food travels down the [oesophagus] to the stomach. | windpipe; small intestine
+fact: The stomach uses [acid] and churning to break food down. | sand; air
+fact: Nutrients pass into the blood in the [small] intestine. | large; whole
+fact: The [large] intestine takes in water. | small; empty
+fact: The stomach comes [after] the oesophagus. | before; instead of
+@facts 1.4
+fact: The heart [pumps] blood around the body. | stores; cleans
+fact: Arteries, veins and capillaries are blood [vessels]. | organs; bones
+fact: Blood carries [oxygen] from the lungs. | carbon dioxide only; food only
+fact: Blood carries nutrients from [digestion] to the cells. | the brain; the bones
+fact: Blood carries [waste] away from cells. | sunlight; oxygen only
+fact: When you exercise, your muscles need more [oxygen]. | sugar only; sleep
+fact: During exercise you breathe [faster]. | slower; less
+fact: During exercise your heart beats [faster]. | slower; less
+@facts 2.1
+fact: [Energy] is what makes things happen. | Colour; Shape
+fact: [Kinetic] energy is movement. | Thermal; Chemical
+fact: [Thermal] energy is heat. | Kinetic; Sound
+fact: Food and batteries store [chemical] energy. | kinetic; sound
+fact: A stretched rubber band has [potential] energy. | sound; light
+fact: A ball held up high has [potential] energy. | sound; light
+fact: A torch gives out [light] energy. | sound only; chemical
+fact: A kicked ball has [kinetic] energy. | thermal only; chemical
+@facts 2.2
+fact: Energy can't be made or [destroyed]. | moved; changed
+fact: Energy changing from one form to another is a [transfer]. | loss; creation
+fact: A torch battery stores [chemical] energy. | kinetic; sound
+fact: In a torch, electrical energy becomes [light]. | chemical; gravity
+fact: Some energy always ends up as heat or [sound] we didn't want. | gold; light only
+fact: Energy we didn't want is called [wasted] energy. | free; new
+fact: A torch also gives out some [heat]. | cold; gravity
+fact: In a transfer, the total amount of energy [stays the same]. | goes up; goes down
+@facts 2.3
+fact: Heat moves from [hotter] things to colder things. | colder; smaller
+fact: Heat moving through solids by touch is [conduction]. | convection; radiation
+fact: Metals are good heat [conductors]. | insulators; magnets
+fact: Wood and plastic are [insulators]. | conductors; magnets
+fact: A metal spoon in hot soup gets hot by [conduction]. | radiation; magnetism
+fact: In [convection], warm liquids and gases rise. | conduction; radiation
+fact: Heat travelling as rays is [radiation]. | conduction; convection
+fact: The sun's warmth reaches us by [radiation]. | conduction; convection
+@facts 2.4
+fact: Electricity from flowing water is called [hydro]. | solar; geothermal
+fact: [Solar] power comes from the sun. | Hydro; Geothermal
+fact: [Geothermal] energy is heat from under the ground. | Solar; Wind
+fact: Wind is a [renewable] source. | non-renewable; fossil
+fact: Coal is [non-renewable]. | renewable; endless
+fact: Renewable sources don't [run out]. | work; exist
+fact: Coal, oil and natural gas took [millions of years] to form. | a few days; a few weeks
+fact: Non-renewable sources will one day [run out]. | last forever; grow back
+@facts 3.1
+fact: All matter is made of [particles]. | colours; cells only
+fact: Particles are far too small to [see]. | exist; move
+fact: In a solid, particles are packed [tightly]. | far apart; loosely
+fact: In a solid, particles [vibrate] in place. | fly about; stop completely
+fact: In a liquid, particles [slide] past each other. | stay locked; fly far apart
+fact: In a gas, particles are far [apart]. | together; packed
+fact: Gas particles spreading out is called [diffusion]. | condensation; freezing
+fact: You can smell baking from another room because of [diffusion]. | friction; gravity
+@facts 3.2
+fact: Solid to liquid is [melting]. | freezing; condensation
+fact: Liquid to solid is [freezing]. | melting; evaporation
+fact: Liquid to gas is [evaporation]. | condensation; melting
+fact: Gas to liquid is [condensation]. | evaporation; freezing
+fact: At sea level, pure water boils at [100] °C. | 0; 50
+fact: Pure water freezes at [0] °C. | 100; 50
+fact: A puddle dries up by [evaporation]. | condensation; freezing
+fact: Boiling is a fast kind of [evaporation]. | freezing; condensation
+@facts 3.3
+fact: A [physical] change doesn't make a new substance. | chemical; burning
+fact: Melting is a [physical] change. | chemical; impossible
+fact: Dissolving is a [physical] change. | chemical; burning
+fact: A [chemical] change makes a new substance. | physical; melting
+fact: Baking a cake is a [chemical] change. | physical; melting
+fact: Rusting is a [chemical] change. | physical; freezing
+fact: Gas bubbles can be a sign of a [chemical] change. | physical; no
+fact: You can refreeze melted ice, but you can't [unbake] a cake. | bake; cut
+@facts 3.4
+fact: A [mixture] is substances mixed but not chemically joined. | compound; element
+fact: Salt water is a [mixture]. | single substance; element
+fact: [Sieving] separates big bits from small bits. | Evaporation; Magnetism
+fact: [Filtering] separates solids from liquids. | Melting; Freezing
+fact: [Evaporation] leaves a dissolved solid behind. | Filtering; Sieving
+fact: A magnet can separate [iron] from other things. | salt; sand
+fact: To separate salt and sand, first add [water]. | oil; sugar
+fact: Filtering salty water [leaves] the sand behind in the filter. | dissolves; melts
+
+# Fact banks (content/facts/science.txt)
+@facts 4.1
+fact: An [ecosystem] is the living things in an area plus the non-living things they depend on. | organ; molecule
+fact: [Biotic] factors are living. | Abiotic; Chemical
+fact: [Abiotic] factors are non-living. | Biotic; Living
+fact: Fungi are a [biotic] factor. | abiotic; non-living
+fact: Sunlight is an [abiotic] factor. | biotic; living
+fact: Temperature is an [abiotic] factor. | biotic; living
+fact: Bacteria are a [biotic] factor. | abiotic; non-living
+fact: A change like less rain can affect [everything else] in an ecosystem. | nothing; only the rain
+@facts 4.2
+fact: Energy enters most ecosystems through [plants]. | rocks; predators
+fact: Plants capture [sunlight]. | heat from animals; moonlight
+fact: At each step up a food chain, most energy is [used or lost]. | passed on; doubled
+fact: Energy is lost as [heat]. | light only; soil
+fact: Only a [small] part of the energy passes to the next level. | large; whole
+fact: There's [less] energy at each level up a food chain. | more; the same
+fact: Top predators are [fewer] because there's less energy for them. | more common; bigger in number
+fact: Moving and keeping warm [use up] energy. | create; store forever
+@facts 4.3
+fact: [Decomposers] break down dead plants and animals. | Producers; Predators
+fact: Fungi are [decomposers]. | producers; predators
+fact: Worms are [decomposers]. | producers; predators
+fact: Bacteria can be [decomposers]. | producers; predators
+fact: Decomposers return [nutrients] to the soil. | plastic; rocks
+fact: New plants use the nutrients that decomposers [return]. | destroy; hide
+fact: Without decomposers, dead material would [pile up]. | vanish; grow back
+fact: Without decomposers, nutrients would [run out]. | double; never change
+@facts 4.4
+fact: Introduced predators eat native animals' [eggs] and young. | homes only; shadows
+fact: [Trapping] predators helps native species recover. | Feeding; Releasing
+fact: Protecting [habitat] helps native species recover. | predators; cages only
+fact: Introduced predators were brought by [people]. | rain; volcanoes
+fact: Native species that evolved without these predators have few [defences] against them. | feathers; homes
+fact: Predator control helps native [birds]. | rats; stoats
+fact: Losing habitat makes native species [struggle]. | thrive; multiply
+fact: Native species can [recover] with protection. | never recover; disappear faster
+@facts 5.1
+fact: [Speed] is how far something travels in a certain time. | Mass; Pressure
+fact: Speed = distance ÷ [time]. | mass; area
+fact: 12 km in 1 hour is [12] km/h. | 1; 24
+fact: 100 m in 20 seconds is [5] m/s. | 20; 2,000
+fact: Distance = speed × [time]. | mass; area
+fact: At 60 km/h for 2 hours, you travel [120] km. | 30; 62
+fact: Time = distance ÷ [speed]. | mass; area
+fact: 30 km at 10 km/h takes [3] hours. | 300; 20
+@facts 5.2
+fact: When forces are [balanced], they cancel out. | unbalanced; doubled
+fact: With balanced forces, a still object stays [still]. | speeding up; spinning
+fact: With balanced forces, a moving object keeps the [same speed]. | stopping suddenly; speeding up
+fact: [Unbalanced] forces make an object speed up, slow down or change direction. | Balanced; Equal
+fact: A parked car has [balanced] forces. | unbalanced; no
+fact: Gravity pulls a parked car [down]. | up; sideways
+fact: The ground pushes a parked car [up]. | down; sideways
+fact: A car speeding up has [unbalanced] forces. | balanced; no
+@facts 5.3
+fact: When one object pushes on another, the second object [pushes back]. | does nothing; disappears
+fact: The push back is [just as hard]. | much weaker; much stronger
+fact: The push back is in the [opposite] direction. | same; random
+fact: A rocket pushes gas [down]. | up; sideways only
+fact: The gas pushes the rocket [up]. | down; backwards
+fact: When you swim, you push water [back]. | forward; up only
+fact: The water pushes a swimmer [forward]. | backward; down
+fact: Every action has an equal and opposite [reaction]. | colour; mass
+@facts 5.4
+fact: [Pressure] is how much force presses on a certain area. | Speed; Mass
+fact: Pressure = force ÷ [area]. | time; speed
+fact: The same force on a small area makes [high] pressure. | low; no
+fact: A sharp knife edge makes [high] pressure. | low; no
+fact: A drawing pin makes [high] pressure at its point. | low; no
+fact: Snowshoes spread force over a big area for [low] pressure. | high; extreme
+fact: Wide tractor tyres make [low] pressure. | high; extreme
+fact: A bigger area means [lower] pressure for the same force. | higher; the same
+@facts 6.1
+fact: Gravity pulls all objects with [mass] towards each other. | colour; light
+fact: Bigger masses pull [harder]. | weaker; not at all
+fact: The Moon is moving [sideways] very fast. | backwards; not at all
+fact: Gravity bends the Moon's path into a [curve]. | straight line; square
+fact: A curved path around a planet is an [orbit]. | eclipse; echo
+fact: [Satellites] orbit the Earth the same way as the Moon. | Clouds; Birds
+fact: Without gravity, the Moon would fly off in a [straight line]. | circle; spiral inwards
+fact: The Earth's gravity keeps the [Moon] in orbit. | sun; Mars
+@facts 6.2
+fact: Stars are huge balls of hot [gas]. | rock; ice
+fact: Stars are mostly [hydrogen]. | iron; water
+fact: Stars shine because of nuclear [fusion]. | burning wood; reflection
+fact: Fusion happens in a star's [core]. | surface only; tail
+fact: Stars form in giant clouds called [nebulae]. | comets; asteroids
+fact: Nebulae are made of gas and [dust]. | ice cream; water only
+fact: The sun is a [medium-sized] star. | giant; tiny
+fact: The sun is about [halfway] through its life. | at the start; at the very end
+@facts 6.3
+fact: Space is measured in [light-years]. | kilometres only; seconds
+fact: A light-year is the distance light travels in one [year]. | second; day
+fact: A light-year measures [distance]. | time; brightness
+fact: Light from the sun takes about [8] minutes to reach Earth. | 8 seconds; 8 years
+fact: Light from other stars takes [years] to reach us. | seconds; minutes
+fact: We see stars as they [were] when their light left. | will be; are right now
+fact: Light travels [faster] than anything else. | slower; at the same speed
+fact: Space is [huge]. | tiny; small
+@facts 6.4
+fact: Seasons are caused by the Earth's [tilt]. | distance from the sun; spin speed
+fact: Seasons are [not] caused by distance from the sun. | always; mainly
+fact: When our half tilts towards the sun, it's [summer]. | winter; autumn
+fact: In summer, the sun is [higher] in the sky. | lower; gone
+fact: In summer, days are [longer]. | shorter; the same
+fact: In summer, sunlight is more [concentrated]. | spread out; weaker
+fact: When our half tilts away from the sun, it's [winter]. | summer; spring
+fact: In winter, days are [shorter]. | longer; the same

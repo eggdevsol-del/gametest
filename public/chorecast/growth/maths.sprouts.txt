@@ -1,0 +1,501 @@
+# maths · sprouts
+@unit 1 | Place value | Hundreds, tens and ones
+@unit 2 | Adding and taking away | Quick ways to add and subtract
+@unit 3 | Times tables | Equal groups, 2s, 5s and 10s
+@unit 4 | Measuring | Length and time
+
+@lesson 1.1 | Hundreds, tens and ones | 🔢 | stall
+hook: The farm stand sold 243 eggs this month. What does each digit in 243 tell us?
+learn: In 243, the 2 means 2 hundreds, the 4 means 4 tens and the 3 means 3 ones.
+learn: So 243 is 200 + 40 + 3.
+learn: A digit's place tells you how much it's worth.
+try: 365 is 300 + 60 + 5 :: gap | 400 + 70 + 2 = _ | 472
+play: match | Match each number to its parts | 528=500 + 20 + 8; 285=200 + 80 + 5; 852=800 + 50 + 2; 258=200 + 50 + 8
+check: gap | 300 + 40 + 9 = _ | 349
+check: mcq | In 671, what is the 7 worth? | 70* | 7 | 700
+check: tf | In 905, the 0 means there are no tens. | true
+home: Find a number on a box or a sign. Tell a grown-up what each digit is worth.
+skill: place-value
+
+@lesson 1.2 | Bigger or smaller? | ⚖️ | stall
+hook: Ari has 342 XP and Bo has 324. Who has more?
+learn: To compare numbers, look at the hundreds first.
+learn: If the hundreds are the same, compare the tens. Then the ones.
+learn: We write > for "is more than" and < for "is less than". The open side faces the bigger number.
+try: 342 > 324 because 4 tens is more than 2 tens :: mcq | Which is the biggest? | 518* | 481 | 158
+play: order | Put these in order, smallest first | 109; 190; 901; 910
+check: mcq | Which is true? | 456 < 465* | 456 > 465 | 456 = 465
+check: mcq | Which number is the biggest? | 799* | 789 | 798
+check: tf | 600 is more than 599. | true
+home: Pick two prices at the shop. Say which number is bigger, and why.
+skill: compare-numbers
+
+@lesson 1.3 | Counting in tens and hundreds | 🔟 | bank
+hook: The island bank adds 10 coins every day. How do the numbers change?
+learn: Adding 10 makes the tens digit go up by 1: 234, 244, 254.
+learn: Adding 100 makes the hundreds digit go up by 1: 234, 334, 434.
+learn: When the tens go past 9, they make a new hundred: 290 + 10 = 300.
+try: 345 + 10 = 355 :: gap | 345 + 100 = _ | 445
+play: order | Count on in tens from 470 | 470; 480; 490; 500; 510
+check: gap | 290 + 10 = _ | 300
+check: gap | 608 + 100 = _ | 708
+check: mcq | What comes next? 750, 760, 770, … | 780* | 771 | 870
+home: Count in tens out loud with a grown-up, starting at 150. How far can you get?
+skill: count-tens
+
+@lesson 1.4 | Rounding to the nearest ten | 🎯 | stall
+hook: A book costs $38. Is that closer to $30 or $40?
+learn: Rounding gives an easy number that's close to the real one.
+learn: Look at the ones digit. 5 or more rounds up. 4 or less rounds down.
+learn: 38 rounds up to 40. 33 rounds down to 30. 35 rounds up to 40.
+try: 47 rounds to 50 :: mcq | Round 62 to the nearest ten | 60* | 70 | 65
+play: gen | round10 | 5
+check: mcq | Round 85 to the nearest ten | 90* | 80 | 85
+check: sort | Rounds to 30, Rounds to 40 | 27=Rounds to 30; 34=Rounds to 30; 36=Rounds to 40; 44=Rounds to 40; 31=Rounds to 30 | Where does each number round to?
+check: tf | 73 rounds to 80. | false | 3 is less than 5, so 73 rounds down to 70.
+home: At the shop, round three prices to the nearest ten dollars.
+skill: rounding
+
+@lesson 2.1 | Make a ten | ➕ | island
+hook: 8 + 7. Is there a quick way to do it in your head?
+learn: Numbers that make 10 are friends: 1 and 9, 2 and 8, 3 and 7, 4 and 6, 5 and 5.
+learn: To add 8 + 7, take 2 from the 7 to turn the 8 into 10. Then 10 + 5 = 15.
+learn: Making a ten works with bigger numbers too: 28 + 5 = 30 + 3 = 33.
+try: 9 + 6 = 10 + 5 = 15 :: gap | 8 + 5 = _ | 13
+play: match | Match each number to its ten-friend | 3=7; 6=4; 8=2; 1=9
+check: gap | 7 + 6 = _ | 13
+check: gap | 38 + 4 = _ | 42
+check: mcq | Which pair makes 10? | 6 and 4* | 6 and 5 | 3 and 8
+home: Play "ten friends" with a grown-up: they say a number and you say its ten-friend.
+skill: add-mental
+
+@lesson 2.2 | Adding tens and ones | 🥚 | stall
+hook: The farm stand sold 34 eggs on Monday and 25 on Tuesday. How many altogether?
+learn: Split the numbers into tens and ones: 34 is 30 + 4, and 25 is 20 + 5.
+learn: Add the tens: 30 + 20 = 50. Add the ones: 4 + 5 = 9.
+learn: Put them together: 50 + 9 = 59.
+try: 42 + 36 = 70 + 8 = 78 :: gap | 53 + 24 = _ | 77
+play: gen | add | 5
+check: gap | 61 + 27 = _ | 88
+check: gap | 45 + 38 = _ | 83
+check: tf | 30 + 40 is 70. | true
+home: Add the ages of two people in your family, using tens and ones.
+skill: add-2digit
+
+@lesson 2.3 | Taking away | ➖ | island
+hook: You have 52 XP and spend 17 on a plant for your island. How much is left?
+learn: Taking away tells you what's left.
+learn: Take the tens first, then the ones: 52 − 10 = 42, then 42 − 7 = 35.
+learn: You can check by adding back: 35 + 17 = 52.
+try: 64 − 23 = 41 :: gap | 75 − 32 = _ | 43
+play: gen | sub | 5
+check: gap | 90 − 45 = _ | 45
+check: gap | 63 − 28 = _ | 35
+check: mcq | How can you check that 52 take away 17 is 35? | Add 35 and 17* | Add 52 and 17 | Take 17 from 35
+home: Next time you get XP, work out how much you'd have left after something you'd like.
+skill: subtract-2digit
+
+@lesson 2.4 | Word problems | 📝 | stall
+hook: Is it adding or taking away? The words give clues.
+learn: "Altogether", "in total" and "more" often mean add.
+learn: "Left", "fewer" and "difference" often mean take away.
+learn: Read the whole question, then decide.
+try: 12 hens, and 5 more join them: 12 + 5 = 17 hens :: mcq | 20 eggs, and 6 break. How many are left? | 14* | 26 | 16
+play: sort | Add, Take away | 15 sheep and 8 more arrive=Add; 30 apples and 12 get eaten=Take away; How many altogether?=Add; How many are left?=Take away; What's the difference?=Take away | Add or take away?
+check: gap | You have 45 coins and earn 30 more. How many altogether? _ | 75
+check: gap | There are 60 eggs, and 24 are sold. How many are left? _ | 36
+check: mcq | Ari has 18 shells and Bo has 11. What's the difference? | 7* | 29 | 8
+home: Make up an adding story about your island, and ask a grown-up to solve it.
+skill: word-problems
+
+@lesson 3.1 | Equal groups | 🧺 | stall
+hook: 3 baskets each hold 4 eggs. How many eggs is that?
+learn: Multiplying is a fast way to add equal groups.
+learn: 3 groups of 4 is 4 + 4 + 4 = 12. We write it 3 × 4 = 12.
+learn: The × sign means "groups of".
+try: 2 groups of 5 is 2 × 5 = 10 :: gap | 4 groups of 3 is _ | 12
+play: match | Match each to its answer | 2 × 3=6; 4 × 2=8; 3 × 5=15; 5 × 1=5
+check: gap | 3 × 3 = _ | 9
+check: mcq | Which means 5 groups of 2? | 5 × 2* | 5 + 2 | 5 − 2
+check: tf | 4 + 4 + 4 is the same as 3 × 4. | true
+home: Find equal groups at home: eggs in a carton, socks in pairs, wheels on cars.
+skill: equal-groups
+
+@lesson 3.2 | The 2 and 10 times tables | 🐔 | island
+hook: How many legs do 6 chickens have?
+learn: The 2 times table is doubling: 2, 4, 6, 8, 10 and on.
+learn: The 10 times table puts a 0 on the end: 10, 20, 30 and on.
+learn: 6 chickens have 6 × 2 = 12 legs.
+try: 7 × 10 = 70 :: gap | 8 × 2 = _ | 16
+play: gen | times | 5
+check: gap | 9 × 2 = _ | 18
+check: gap | 6 × 10 = _ | 60
+check: mcq | How many legs do 5 chickens have? | 10* | 7 | 25
+home: Count the shoes at your place in 2s.
+skill: times-2-10
+
+@lesson 3.3 | The 5 times table | 🖐️ | island
+hook: How many fingers are on 4 hands?
+learn: The 5 times table goes 5, 10, 15, 20, 25 and on.
+learn: Answers in the 5 times table always end in 5 or 0.
+learn: 4 hands have 4 × 5 = 20 fingers.
+try: 3 × 5 = 15 :: gap | 6 × 5 = _ | 30
+play: sort | In the 5s, Not in the 5s | 15=In the 5s; 22=Not in the 5s; 40=In the 5s; 33=Not in the 5s; 35=In the 5s | Is it in the 5 times table?
+check: gap | 7 × 5 = _ | 35
+check: mcq | Which is in the 5 times table? | 45* | 42 | 51
+check: tf | 5 × 8 is 40. | true
+home: Count in 5s with a grown-up all the way to 50.
+skill: times-5
+
+@lesson 3.4 | Arrays and turnarounds | 🌳 | garden
+hook: 3 rows of 5 trees, or 5 rows of 3 trees. Which has more?
+learn: An array is things set out in rows and columns.
+learn: 3 rows of 5 is 3 × 5 = 15. Turn it around and it's 5 rows of 3: still 15.
+learn: So 3 × 5 and 5 × 3 are the same. Know one and you know the other.
+try: 2 × 9 and 9 × 2 are both 18 :: gap | 10 × 4 = _ | 40
+play: match | Match the turnarounds | 2 × 7=7 × 2; 5 × 4=4 × 5; 3 × 10=10 × 3
+check: gap | 4 × 5 = _ | 20
+check: mcq | 6 × 2 is the same as… | 2 × 6* | 6 + 2 | 6 × 6
+check: tf | 4 rows of 3 trees is 12 trees. | true
+home: Line up coins or blocks in rows. Say the times fact, then turn it around.
+skill: arrays
+
+@lesson 4.1 | Centimetres and metres | 📏 | home
+hook: How long is your hand? How tall is a door?
+learn: We measure short things in centimetres (cm) and longer things in metres (m).
+learn: 100 centimetres make 1 metre.
+learn: Start measuring from the 0 on a ruler, not from its edge.
+try: A pencil is about 15 cm long :: mcq | What would you measure in metres? | A swimming pool* | A pencil | A fingernail
+play: sort | Centimetres, Metres | A crayon=Centimetres; A playground=Metres; A spoon=Centimetres; A bus=Metres; A book=Centimetres | Which unit fits best?
+check: gap | 1 metre is _ cm | 100
+check: mcq | About how long is a pencil? | 15 cm* | 15 m | 150 m
+check: tf | You should start measuring from the 0 on a ruler. | true
+home: Measure three things at home with a ruler or tape measure.
+skill: length
+
+@lesson 4.2 | O'clock and half past | 🕒 | home
+hook: Lessons open at 4 o'clock. What does the clock look like then?
+learn: The short hand shows the hour. The long hand shows the minutes.
+learn: At o'clock, the long hand points straight up to 12.
+learn: At half past, the long hand points straight down to 6. It's 30 minutes past the hour.
+try: Half past 3 is 3:30 :: mcq | How do we write half past 7? | 7:30* | 7:00 | 6:30
+play: match | Match the times | half past 2=2:30; 9 o'clock=9:00; half past 11=11:30; 4 o'clock=4:00
+check: mcq | The long hand points to 12 and the short hand to 5. What time is it? | 5 o'clock* | 12 o'clock | Half past 5
+check: gap | Half an hour is _ minutes | 30
+check: tf | At half past, the long hand points to 6. | true
+home: Look at a clock with hands three times today and say the time.
+skill: time-hour
+
+@lesson 4.3 | Quarter past and quarter to | 🕞 | home
+hook: Your job takes 15 minutes. How do we show that on a clock?
+learn: An hour has 60 minutes. A quarter of an hour is 15 minutes.
+learn: Quarter past 3 is 3:15. The long hand points to 3.
+learn: Quarter to 4 is 3:45. The long hand points to 9.
+try: Quarter past 6 is 6:15 :: mcq | How do we write quarter to 9? | 8:45* | 9:15 | 9:45
+play: gen | clock | 4
+check: gap | A quarter of an hour is _ minutes | 15
+check: mcq | What time is quarter past 10? | 10:15* | 10:45 | 9:45
+check: tf | Quarter to 5 is 4:45. | true
+home: Ask a grown-up to set a 15-minute timer for a chore. That's a quarter of an hour.
+skill: time-quarter
+
+@lesson 4.4 | How long does it take? | ⏱️ | home
+hook: You start a chore at 4:00 and finish at 4:30. How long did it take?
+learn: Count on from the start time to the end time.
+learn: 4:00 to 4:30 is 30 minutes. 4:00 to 5:00 is 1 hour.
+learn: 60 minutes make 1 hour.
+try: 2:00 to 2:15 is 15 minutes :: gap | 3:00 to 3:45 is _ minutes | 45
+play: order | Put these times in order, earliest first | 7:15; 8:00; 8:30; 9:45; 10:00
+check: gap | 1:00 to 1:30 is _ minutes | 30
+check: mcq | A movie starts at 6:00 and ends at 8:00. How long is it? | 2 hours* | 8 hours | 6 hours
+check: gap | 1 hour is _ minutes | 60
+home: Time how long a chore takes. Note when you start and when you finish.
+skill: elapsed-time
+
+@unit 5 | More times tables | The 3s, 4s and 8s, and sharing
+@unit 6 | Fractions | Halves, quarters and thirds
+@unit 7 | Shapes | Flat shapes, solid shapes and turns
+@unit 8 | Data | Tally charts and graphs
+
+@lesson 5.1 | The 3 times table | 🍀 | garden
+hook: A clover has 3 leaves. How many leaves are on 4 clovers?
+learn: The 3 times table goes 3, 6, 9, 12, 15 and on.
+learn: 4 clovers have 4 × 3 = 12 leaves.
+learn: Count in 3s to check: 3, 6, 9, 12.
+try: 5 × 3 = 15 :: gap | 6 × 3 = _ | 18
+play: order | Count in 3s | 3; 6; 9; 12; 15; 18
+check: gap | 7 × 3 = _ | 21
+check: mcq | Which is in the 3 times table? | 27* | 26 | 28
+check: gap | 3 × 10 = _ | 30
+home: Count in 3s with a grown-up all the way to 30.
+skill: times-3
+
+@lesson 5.2 | The 4 times table | 🐕 | island
+hook: How many legs do 5 dogs have?
+learn: The 4 times table goes 4, 8, 12, 16, 20 and on.
+learn: A trick: 4 times is double, then double again. For 4 × 6, double 6 is 12, and double 12 is 24.
+learn: 5 dogs have 5 × 4 = 20 legs.
+try: 3 × 4 = 12 :: gap | 6 × 4 = _ | 24
+play: gen | times | 5
+check: gap | 7 × 4 = _ | 28
+check: mcq | How many legs do 3 sheep have? | 12* | 7 | 9
+check: tf | 4 × 5 is 20. | true
+home: Count the legs of all the people and animals at your place.
+skill: times-4
+
+@lesson 5.3 | The 8 times table | 🐙 | island
+hook: An octopus has 8 arms. How many arms do 3 octopuses have?
+learn: The 8 times table goes 8, 16, 24, 32, 40 and on.
+learn: 8 times is double 4 times. 4 × 3 = 12, so 8 × 3 = 24.
+learn: 3 octopuses have 3 × 8 = 24 arms.
+try: 2 × 8 = 16 :: gap | 5 × 8 = _ | 40
+play: match | Match each to its answer | 4 × 8=32; 6 × 8=48; 7 × 8=56; 9 × 8=72
+check: gap | 8 × 8 = _ | 64
+check: mcq | 4 × 6 is 24. So 8 × 6 is… | 48* | 28 | 32
+check: tf | 8 × 10 is 80. | true
+home: Ask a grown-up to quiz you on the 8 times table at dinner.
+skill: times-8
+
+@lesson 5.4 | Sharing equally | 🧺 | stall
+hook: 12 eggs are shared between 3 baskets. How many go in each?
+learn: Dividing means sharing into equal groups.
+learn: 12 shared by 3 is 4 each. We write it 12 ÷ 3 = 4.
+learn: Times tables help: 3 × 4 = 12, so 12 ÷ 3 = 4.
+try: 10 ÷ 2 = 5 :: gap | 15 ÷ 3 = _ | 5
+play: gen | divide | 5
+check: gap | 20 ÷ 4 = _ | 5
+check: gap | 16 ÷ 2 = _ | 8
+check: mcq | 24 grapes are shared by 4 friends. How many does each get? | 6* | 20 | 8
+home: Share a snack fairly in your family. How many does each person get?
+skill: division-sharing
+
+@lesson 6.1 | Halves | 🍊 | kitchen
+hook: You cut an orange in two. Are both pieces the same size?
+learn: A half is one of 2 equal parts. We write it 1/2.
+learn: Both halves must be the same size.
+learn: Half of 10 is 5, because 10 shared into 2 equal parts is 5 each.
+try: Half of 8 is 4 :: gap | Half of 12 is _ | 6
+play: gen | half | 5
+check: tf | One big piece and one small piece are halves. | false | Halves must be equal.
+check: gap | Half of 20 is _ | 10
+check: mcq | How many halves make a whole? | 2* | 4 | 1
+home: Share something in half with someone. Check both halves are equal.
+skill: halves
+
+@lesson 6.2 | Quarters | 🍕 | kitchen
+hook: A pizza for 4 people. How should you cut it?
+learn: A quarter is one of 4 equal parts. We write it 1/4.
+learn: Two quarters make a half. Four quarters make a whole.
+learn: A quarter of 8 is 2, because 8 shared into 4 equal parts is 2 each.
+try: A quarter of 12 is 3 :: gap | A quarter of 20 is _ | 5
+play: match | Match the words to the fraction | one half=1/2; one quarter=1/4; three quarters=3/4
+check: mcq | How many quarters make a whole? | 4* | 2 | 3
+check: tf | Two quarters are the same as one half. | true
+check: gap | A quarter of 16 is _ | 4
+home: Fold a piece of paper into quarters and colour in three of them.
+skill: quarters
+
+@lesson 6.3 | Thirds | 🍫 | kitchen
+hook: Three friends share a chocolate bar. What does each one get?
+learn: A third is one of 3 equal parts. We write it 1/3.
+learn: Three thirds make a whole.
+learn: A third of 9 is 3, because 9 shared into 3 equal parts is 3 each.
+try: A third of 6 is 2 :: gap | A third of 12 is _ | 4
+play: sort | Halves, Thirds, Quarters | 2 equal parts=Halves; 3 equal parts=Thirds; 4 equal parts=Quarters; 1/2=Halves; 1/3=Thirds; 1/4=Quarters | Which kind of part?
+check: mcq | Which is bigger: half a pizza or a third of the same pizza? | Half* | A third | They're the same
+check: gap | A third of 15 is _ | 5
+check: tf | Three thirds make a whole. | true
+home: Share 12 things into thirds with a grown-up.
+skill: thirds
+
+@lesson 6.4 | Fractions of a group | 🐣 | island
+hook: There are 8 chicks, and half of them are yellow. How many are yellow?
+learn: You can take a fraction of a group of things, not just one thing.
+learn: To find a half, share into 2 equal groups. To find a quarter, share into 4.
+learn: Half of 8 chicks is 4 chicks. A quarter of 8 chicks is 2 chicks.
+try: A quarter of 12 sheep is 3 sheep :: gap | Half of 14 is _ | 7
+play: match | Match each to its answer | Half of 10=5; A quarter of 8=2; A third of 12=4; Half of 2=1
+check: gap | A third of 18 is _ | 6
+check: mcq | There are 20 eggs, and a quarter of them break. How many broke? | 5* | 4 | 10
+check: gap | Half of 30 is _ | 15
+home: Count a group of things at home, then find a half and a quarter of them.
+skill: fractions-of-group
+
+@lesson 7.1 | Flat shapes | 🔺 | workshop
+hook: How many corners does a triangle have?
+learn: Flat (2D) shapes have sides and corners.
+learn: A triangle has 3 sides. Squares and rectangles have 4. A pentagon has 5, and a hexagon has 6.
+learn: A square's 4 sides are all the same length. A rectangle's opposite sides match.
+try: A hexagon has 6 sides :: mcq | How many sides does a pentagon have? | 5* | 6 | 4
+play: match | Match each shape to its number of sides | Triangle=3; Square=4; Pentagon=5; Hexagon=6
+check: mcq | Which shape has 3 corners? | A triangle* | A square | A circle
+check: tf | A circle has no corners. | true
+check: mcq | A shape with 4 equal sides and 4 square corners is a… | square* | triangle | hexagon
+home: Go on a shape hunt at home. Find a circle, a rectangle and a triangle.
+skill: 2d-shapes
+
+@lesson 7.2 | Solid shapes | 📦 | workshop
+hook: Why does a ball roll, but a box doesn't?
+learn: Solid (3D) shapes have faces, edges and corners.
+learn: A cube has 6 square faces. A sphere is round like a ball. A cylinder is like a can. A cone is like an ice-cream cone.
+learn: Curved shapes roll. Shapes with flat faces stack.
+try: A dice is a cube :: mcq | Which shape is like a ball? | Sphere* | Cube | Cone
+play: match | Match each thing to its shape | Dice=Cube; Ball=Sphere; Can of beans=Cylinder; Party hat=Cone
+check: gap | A cube has _ faces | 6
+check: mcq | Which shape rolls? | A sphere* | A cube | A box
+check: tf | A cylinder has two flat faces and one curved face. | true
+home: Find a cube, a sphere and a cylinder in your kitchen.
+skill: 3d-shapes
+
+@lesson 7.3 | Symmetry | 🦋 | garden
+hook: Fold a butterfly picture down the middle. Do both sides match?
+learn: A shape has symmetry if one half is a mirror image of the other.
+learn: The fold line is called a line of symmetry.
+learn: A square has 4 lines of symmetry. A rectangle has 2. Some shapes have none.
+try: A heart shape has 1 line of symmetry :: mcq | Which capital letter has a line of symmetry down the middle? | A* | F | G
+play: sort | Symmetrical, Not symmetrical | A butterfly=Symmetrical; The letter F=Not symmetrical; A heart=Symmetrical; The letter J=Not symmetrical; A square=Symmetrical | Is it symmetrical?
+check: gap | A square has _ lines of symmetry | 4
+check: tf | A line of symmetry splits a shape into two matching halves. | true
+check: mcq | How many lines of symmetry does a rectangle that isn't a square have? | 2* | 4 | 1
+home: Fold some paper, cut a shape along the fold, and open it up to see the symmetry.
+skill: symmetry
+
+@lesson 7.4 | Turns and directions | 🧭 | island
+hook: You face the house and make a half turn. What are you facing now?
+learn: A full turn brings you back to where you started. A half turn makes you face the opposite way.
+learn: A quarter turn makes a right angle, like the corner of a book.
+learn: Clockwise means turning the same way as a clock's hands. Anticlockwise is the other way.
+try: Two quarter turns make a half turn :: mcq | How many quarter turns make a full turn? | 4* | 2 | 3
+play: match | Match each turn to what it does | Full turn=Back where you started; Half turn=Facing the opposite way; Quarter turn=A right angle
+check: tf | Clock hands turn clockwise. | true
+check: mcq | Two half turns make a… | full turn* | quarter turn | three-quarter turn
+check: mcq | A right angle is a… | quarter turn* | half turn | full turn
+home: Play robots with a grown-up: give directions like "quarter turn clockwise, then 3 steps".
+skill: turns
+
+@lesson 8.1 | Tally marks | 🖍️ | stage
+hook: How can you count cars going past without losing track?
+learn: A tally mark is one line for each thing you count.
+learn: Every fifth mark goes across the other four, making a gate. Each gate is 5.
+learn: Count the gates in 5s, then add the extra lines. Two gates and 3 lines is 5 + 5 + 3 = 13.
+try: One gate and 2 lines is 7 :: gap | Two gates and 1 line is _ | 11
+play: match | Match each tally to its number | One gate=5; Two gates=10; One gate and 4 lines=9; Three gates=15
+check: gap | Three gates and 2 lines is _ | 17
+check: mcq | Why do tally marks use gates of 5? | They're quick to count in 5s* | They look nice | Nobody knows
+check: tf | One gate means 5. | true
+home: Make a tally chart of the birds you see from a window in 10 minutes.
+skill: tally
+
+@lesson 8.2 | Pictographs | 🍎 | garden
+hook: A chart shows apples instead of numbers. How do you read it?
+learn: A pictograph uses pictures to show how many.
+learn: A key tells you what each picture is worth. If one 🍎 means 2 apples, each picture stands for 2.
+learn: If Mia's row has 3 🍎 and each is worth 2, Mia picked 3 × 2 = 6 apples.
+try: 4 pictures worth 2 each is 8 :: gap | 5 pictures, each worth 2, is _ | 10
+play: order | Read a pictograph in order | Look at the title; Read the key; Count the pictures; Work out the total
+check: gap | Each 🐑 means 10 sheep. 3 pictures is _ sheep | 30
+check: mcq | What does a key tell you? | What each picture is worth* | Who drew it | The date
+check: tf | In a pictograph, one picture can stand for more than one thing. | true
+home: Draw a pictograph of the fruit in your house.
+skill: pictographs
+
+@lesson 8.3 | Bar graphs | 📊 | stage
+hook: Which fruit does your family like best? A bar graph shows it fast.
+learn: A bar graph uses bars to show amounts. The taller the bar, the more there are.
+learn: Read the number at the top of each bar from the scale on the side.
+learn: Compare the bars to see which is most, which is least, and which are the same.
+try: The tallest bar shows the favourite :: mcq | In a bar graph, the most popular thing has… | the tallest bar* | the shortest bar | the reddest bar
+play: order | Apples got 4 votes, bananas 7, grapes 2 and pears 5. Put them in order from fewest votes to most | Grapes; Apples; Pears; Bananas
+check: mcq | Apples got 4 votes and bananas got 7. How many more votes did bananas get? | 3* | 11 | 7
+check: tf | A longer bar means a bigger number. | true
+check: gap | Apples 4, bananas 7 and grapes 2 make 4 + 7 + 2 = _ | 13
+home: Ask your family a question, like their favourite colour, and draw a bar graph of the answers.
+skill: bar-graphs
+
+@lesson 8.4 | Asking a question with data | 🔎 | stage
+hook: What's the most popular pet in your class? How could you find out?
+learn: Data helps answer questions. First, choose a question.
+learn: Then collect the data (ask people, count or measure) and show it in a tally, a pictograph or a bar graph.
+learn: Last, look at your graph and answer your question.
+try: Question: favourite fruit? Collect: ask everyone :: mcq | What's the first step? | Choose a question* | Draw the bars | Guess the answer
+play: order | Put the steps in order | Choose a question; Collect the data; Show it in a graph; Answer the question
+check: mcq | Which is a good question to answer with data? | What's our family's favourite dinner?* | Is blue a colour? | Is a cat an animal?
+check: tf | You should look at your graph to answer your question. | true
+check: mcq | Which is a way to collect data? | Asking people* | Guessing | Sleeping
+home: Do a family survey and show the results in a graph.
+skill: statistical-enquiry
+
+
+# Fact banks (content/facts/maths.txt)
+@facts 7.1
+fact: Flat shapes have sides and [corners]. | faces; handles
+fact: A triangle has [3] sides. | 4; 5
+fact: A square has [4] sides. | 3; 5
+fact: A rectangle has [4] sides. | 3; 6
+fact: A pentagon has [5] sides. | 4; 6
+fact: A hexagon has [6] sides. | 5; 8
+fact: A square's sides are all the [same] length. | different; curly
+fact: A rectangle's [opposite] sides match. | neighbouring; curved
+@facts 7.2
+fact: Solid shapes have faces, edges and [corners]. | handles; pages
+fact: A cube has [6] square faces. | 4; 8
+fact: A [sphere] is round like a ball. | cube; cone
+fact: A [cylinder] is like a can. | sphere; cube
+fact: A [cone] is shaped like an ice-cream cone. | cube; cylinder
+fact: Curved shapes can [roll]. | stack neatly; fold
+fact: Shapes with flat faces can [stack]. | roll away; bounce
+fact: A dice is shaped like a [cube]. | sphere; cone
+@facts 7.3
+fact: A shape has symmetry if one half is a [mirror image] of the other. | different shape; bigger copy
+fact: The fold line is called a line of [symmetry]. | sight; best fit
+fact: A square has [4] lines of symmetry. | 1; 2
+fact: A rectangle has [2] lines of symmetry. | 4; 0
+fact: Some shapes have [no] lines of symmetry. | always 10; always 4
+fact: If you fold a symmetrical shape on its line, the halves [match]. | clash; vanish
+fact: A butterfly's wings show [symmetry]. | subtraction; division
+fact: A line of symmetry splits a shape into two [matching] halves. | different; uneven
+@facts 7.4
+fact: A [full] turn brings you back to where you started. | half; quarter
+fact: A [half] turn makes you face the opposite way. | full; quarter
+fact: A [quarter] turn makes a right angle. | full; half
+fact: The corner of a book is a [right angle]. | full turn; circle
+fact: Clockwise means turning the same way as a clock's [hands]. | numbers only; face
+fact: [Anticlockwise] is the opposite way to clockwise. | Upside down; Sideways
+fact: Two quarter turns make a [half] turn. | full; three-quarter
+fact: Four quarter turns make a [full] turn. | half; quarter
+@facts 8.1
+fact: A tally mark is one [line] for each thing you count. | circle; picture
+fact: Every [fifth] mark goes across the other four. | second; tenth
+fact: Each tally gate stands for [5]. | 4; 10
+fact: Count the gates in [5s]. | 2s; 10s
+fact: Two gates and 3 lines is [13]. | 5; 23
+fact: One gate and 2 lines is [7]. | 3; 12
+fact: Three gates is [15]. | 3; 8
+fact: Tally marks help you [count] things quickly. | hide; spell
+@facts 8.2
+fact: A pictograph uses [pictures] to show how many. | sounds; smells
+fact: A [key] tells you what each picture is worth. | lock; door
+fact: If one 🍎 means 2 apples, each picture stands for [2]. | 1; 10
+fact: 3 🍎 worth 2 each is [6] apples. | 3; 5
+fact: 4 🍎 worth 2 each is [8] apples. | 4; 6
+fact: 5 ⭐ worth 10 each is [50]. | 5; 15
+fact: Always read the [key] first. | last row; title only
+fact: More pictures in a row means [more] things. | fewer; the same
+@facts 8.3
+fact: A bar graph uses [bars] to show amounts. | pictures only; sounds
+fact: The [taller] the bar, the more there are. | shorter; thinner
+fact: Read each bar's number from the [scale] on the side. | title; colour
+fact: The tallest bar shows the [most]. | least; same
+fact: The shortest bar shows the [least]. | most; same
+fact: Bars that are the same height show the [same] amount. | different; double
+fact: Bar graphs help us [compare] amounts. | hide; spell
+fact: A bar reaching 7 on the scale stands for [7]. | 1; 70
+@facts 8.4
+fact: Data helps answer [questions]. | jokes; riddles only
+fact: First, choose a [question]. | graph; answer
+fact: Then [collect] the data. | guess; hide
+fact: You can collect data by [asking] people. | guessing; dreaming
+fact: You can collect data by counting or [measuring]. | wishing; guessing
+fact: Show your data in a tally, a pictograph or a [bar graph]. | song; poem
+fact: Last, look at your graph and [answer] your question. | delete; ignore
+fact: "What's our class's favourite fruit?" is a [question] data can answer. | rule; story

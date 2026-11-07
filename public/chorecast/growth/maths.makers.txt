@@ -1,0 +1,501 @@
+# maths · makers
+@unit 1 | Integers | Negative numbers and the order of operations
+@unit 2 | Algebra | Letters for numbers
+@unit 3 | Percentages and ratios | Discounts, increases and fair shares
+@unit 4 | Angles and Pythagoras | Lines, triangles and right angles
+
+@lesson 1.1 | Below zero | 🌡️ | island
+hook: It's −3 °C at night and 8 °C at noon. How much warmer is noon?
+learn: Negative numbers are less than zero. On a number line they sit to the left of 0.
+learn: −3 is bigger than −8, because it's closer to zero.
+learn: From −3 up to 8 is 3 up to zero, then 8 more: 11 degrees.
+try: From −2 to 5 is 7 :: mcq | Which is bigger? | −4* | −9 | −12
+play: order | Smallest first | −10; −4; 0; 3; 7
+check: mcq | From −6 °C to 4 °C is a rise of… | 10 degrees* | 2 degrees | −2 degrees
+check: tf | −1 is less than −5. | false | −1 is closer to zero, so it's bigger.
+check: mcq | −3 + 5 = ? | 2* | −8 | 8
+home: Look at the forecast for a cold place. Work out the gap between its high and its low.
+skill: negatives
+
+@lesson 1.2 | Adding and subtracting negatives | ↔️ | bank
+hook: You owe $5 and then earn $12. Where are you now?
+learn: Adding a negative is like taking away: 7 + (−3) = 4.
+learn: Taking away a negative is like adding: 7 − (−3) = 10.
+learn: On a number line, adding moves right and taking away moves left.
+try: −5 + 12 = 7 :: gap | −2 + 9 = _ | 7
+play: gen | integers | 5
+check: mcq | 6 − (−4) = ? | 10* | 2 | −10
+check: mcq | −8 + 3 = ? | −5* | −11 | 5
+check: tf | Taking away a negative number makes the answer bigger. | true
+home: Keep a pretend bank balance for a week that dips below zero and climbs back.
+skill: integer-add
+
+@lesson 1.3 | Multiplying and dividing negatives | ✖️ | bank
+hook: What's −4 × 3? And −4 × −3?
+learn: A negative times a positive is negative: −4 × 3 = −12.
+learn: A negative times a negative is positive: −4 × −3 = 12.
+learn: Dividing works the same way: −12 ÷ 3 = −4, and −12 ÷ −3 = 4.
+try: −5 × 2 = −10 :: mcq | −6 × −2 = ? | 12* | −12 | −8
+play: sort | Positive answer, Negative answer | −3 × 4=Negative answer; −5 × −2=Positive answer; 8 ÷ −2=Negative answer; −9 ÷ −3=Positive answer; 6 × 7=Positive answer | Will the answer be positive or negative?
+check: mcq | −20 ÷ 5 = ? | −4* | 4 | −15
+check: mcq | −7 × −3 = ? | 21* | −21 | −10
+check: tf | Two negatives multiplied together make a positive. | true
+home: Explain to a grown-up, in your own words, why a negative times a negative is positive.
+skill: integer-multiply
+
+@lesson 1.4 | Order of operations | 🧮 | workshop
+hook: Is 3 + 4 × 2 equal to 14 or 11?
+learn: Do brackets first, then powers, then × and ÷ from left to right, then + and − from left to right.
+learn: 3 + 4 × 2 = 3 + 8 = 11.
+learn: (3 + 4) × 2 = 7 × 2 = 14.
+try: 10 − 2 × 3 = 4 :: gap | 5 + 6 × 2 = _ | 17
+play: gen | brackets | 5
+check: gap | (8 − 3) × 4 = _ | 20
+check: gap | 18 ÷ 3 + 2 = _ | 8
+check: gap | 2 × (5 + 5) − 6 = _ | 14
+home: Write a sum with brackets that gives your age, and test a grown-up with it.
+skill: order-of-operations
+
+@lesson 2.1 | Letters stand for numbers | 🔤 | workshop
+hook: Each chore pays n dollars. What does 3n mean?
+learn: In algebra, a letter stands for a number we don't know yet, or one that can change.
+learn: 3n means 3 × n. If n = 4, then 3n = 12.
+learn: n + 5 means "5 more than n".
+try: If x = 6, then x + 2 is 8 :: gap | If n = 7, then 3n is _ | 21
+play: match | Match the words to the algebra | 5 more than n=n + 5; double n=2n; n take away 3=n − 3; n shared by 4=n ÷ 4
+check: gap | If a = 9, then a − 4 is _ | 5
+check: mcq | Which means "3 times n, plus 1"? | 3n + 1* | 3 + n + 1 | 31n
+check: gap | If y = 5, then 2y + 3 is _ | 13
+home: Write an algebra rule for a week's pocket money when each chore pays c dollars.
+skill: algebra-expressions
+
+@lesson 2.2 | Substituting | 🚕 | townhall
+hook: A taxi costs 3 + 2k dollars for k kilometres. How much is it for 10 km?
+learn: To substitute, swap the letter for its number.
+learn: For k = 10: 3 + 2 × 10 = 3 + 20 = 23.
+learn: Remember the order of operations once you've swapped.
+try: If p = 4, then 5p − 2 is 18 :: gap | If k = 6, then 3 + 2k is _ | 15
+play: match | If x = 3, match each expression to its value | 4x=12; x + 10=13; x²=9; 20 − x=17
+check: gap | If m = 5, then 4m + 1 is _ | 21
+check: gap | If a = 2 and b = 7, then a + 3b is _ | 23
+check: mcq | If t = 3, what is t²? | 9* | 6 | 32
+home: Make a rule for the cost of n ice blocks at $2 each. Test it for n = 5.
+skill: substitution
+
+@lesson 2.3 | Simplifying | 🧩 | workshop
+hook: x + x + x. Is there a shorter way to write it?
+learn: Like terms have the same letter: 3x and 5x are like terms.
+learn: Add or take away like terms: 3x + 5x = 8x.
+learn: Unlike terms stay apart: 3x + 2y can't be simplified.
+try: 4a + 2a = 6a :: mcq | Simplify 7n − 2n | 5n* | 9n | 5
+play: match | Match each to its simplest form | x + x + x=3x; 2y + 4y=6y; 5a − a=4a; 3b + 2 + b=4b + 2
+check: mcq | Simplify 2x + 3y + 4x | 6x + 3y* | 9xy | 6x + 3
+check: mcq | Which pair are like terms? | 4m and 9m* | 4m and 4n | 4m and 4
+check: tf | 3x + 2y is the same as 5xy. | false | x and y are unlike terms, so 3x + 2y stays as it is.
+home: Explain like terms to someone at home using apples and bananas.
+skill: simplify-algebra
+
+@lesson 2.4 | Solving equations | ⚖️ | stall
+hook: 3 bags of feed plus a $2 delivery cost $17. How much is one bag?
+learn: An equation says two things are equal: 3x + 2 = 17.
+learn: Undo each step, doing the same to both sides. Take away 2 from both: 3x = 15.
+learn: Divide both by 3: x = 5. Check it: 3 × 5 + 2 is 17.
+try: x + 6 = 10, so x is 4 :: gap | Solve 2x = 18. x is _ | 9
+play: gen | equation | 5
+check: gap | Solve x − 7 = 12. x is _ | 19
+check: gap | Solve 4x + 3 = 23. x is _ | 5
+check: mcq | What's the first step to solve 5x − 4 = 21? | Add 4 to both sides* | Divide both sides by 4 | Take 5 from both sides
+home: Make up an equation about something you're saving for, and solve it.
+skill: equations
+
+@lesson 3.1 | Percent of an amount | 🏷️ | stall
+hook: A shop says 20% off a $60 hoodie. How much do you save?
+learn: Percent means "out of 100". 20% is 20 out of 100.
+learn: 10% is easy: divide by 10. 10% of $60 is $6.
+learn: 20% is double 10%, so $12. 5% is half of 10%, so $3.
+try: 10% of 80 is 8 :: gap | 20% of 50 is _ | 10
+play: gen | percent | 5
+check: gap | 25% of 80 is _ | 20
+check: gap | 15% of 40 is _ | 6
+check: mcq | 50% of something is the same as… | Half of it* | A quarter of it | Double it
+home: At the shop, work out 10% of three prices in your head.
+skill: percent-of
+
+@lesson 3.2 | Discounts and increases | 📉 | stall
+hook: A $40 game goes up 10%, then goes on sale at 10% off. Is it back to $40?
+learn: For a discount, take the percentage off: 25% off $80 is $80 − $20 = $60.
+learn: For an increase, add it on: 10% more than $40 is $44.
+learn: 10% off $44 is $4.40 off, which makes $39.60. The same percentage of a bigger amount is bigger.
+try: 30% off $50 is $35 :: gap | 20% off $90 is $_ | 72
+play: gen | discount | 4
+check: gap | 10% more than $70 is $_ | 77
+check: mcq | Which is cheaper: $100 with 30% off, or $90 with 20% off? | $100 with 30% off* | $90 with 20% off | They're the same
+check: tf | Going up 10% and then down 10% gets you back where you started. | false | 10% of the bigger number is more, so you end up a little lower.
+home: Find a sale ad and work out the sale price yourself before you read it.
+skill: percent-change
+
+@lesson 3.3 | Ratios | 🥤 | kitchen
+hook: A smoothie uses 2 cups of fruit for every 1 cup of yoghurt. How much yoghurt goes with 6 cups of fruit?
+learn: A ratio compares amounts. Fruit to yoghurt is 2:1.
+learn: Scale both parts by the same number: 2:1 is the same as 6:3.
+learn: Simplify a ratio by dividing both parts by the same number: 10:4 is 5:2.
+try: 3:1 is the same as 9:3 :: mcq | Simplify 12:8 | 3:2* | 6:2 | 4:3
+play: match | Match the equal ratios | 2:3=4:6; 1:4=3:12; 5:2=10:4; 3:5=9:15
+check: gap | 2 cups of fruit for each cup of yoghurt. 8 cups of fruit need _ cups of yoghurt | 4
+check: mcq | Simplify 15:5 | 3:1* | 5:1 | 1:3
+check: tf | 4:6 is the same as 2:3. | true
+home: Find a recipe, write one ratio from it, then double the recipe.
+skill: ratios
+
+@lesson 3.4 | Sharing in a ratio | 🤝 | stall
+hook: Two friends run a stall. One put in $30 and the other $20. How should they share $100 of profit fairly?
+learn: Add the parts: 3:2 has 5 parts in all.
+learn: Find one part: $100 ÷ 5 = $20.
+learn: Multiply: 3 parts is $60 and 2 parts is $40.
+try: Sharing $30 in the ratio 1:2 gives $10 and $20 :: gap | Share $40 in the ratio 3:1. The bigger share is $_ | 30
+play: gen | ratio | 4
+check: gap | Share $60 in the ratio 1:2. The smaller share is $_ | 20
+check: gap | Share 35 sweets in the ratio 3:4. The bigger share is _ sweets | 20
+check: mcq | Share $90 in the ratio 2:1. What are the shares? | $60 and $30* | $45 and $45 | $70 and $20
+home: Plan a fair way to share something between people who did different amounts of a job.
+skill: share-ratio
+
+@lesson 4.1 | Angles on a line and around a point | 🚪 | home
+hook: A door swings open. How do we measure how far it turned?
+learn: Angles are measured in degrees (°). A full turn is 360°.
+learn: Angles on a straight line add up to 180°.
+learn: Angles around a point add up to 360°.
+try: If one angle on a line is 120°, the other is 60° :: gap | On a straight line, 135° and _° | 45
+play: match | Match the turn to its angle | Full turn=360°; Half turn=180°; Quarter turn=90°; Three-quarter turn=270°
+check: gap | Two angles sit on a straight line. One is 70°. The other is _° | 110
+check: gap | Angles around a point: 100°, 150° and _° | 110
+check: mcq | A right angle is… | 90°* | 180° | 45°
+home: Find three right angles at home, and one angle bigger than a right angle.
+skill: angles-line
+
+@lesson 4.2 | Angles in a triangle | 🔺 | workshop
+hook: Can a triangle have two right angles?
+learn: The three angles in any triangle add up to 180°.
+learn: If two angles are 50° and 60°, the third is 180 − 50 − 60 = 70°.
+learn: So a triangle can have at most one right angle.
+try: 90° + 45° + 45° is 180° :: gap | A triangle has angles of 30° and 80°. The third angle is _° | 70
+play: sort | Could be a triangle, Can't be a triangle | 60°, 60°, 60°=Could be a triangle; 90°, 90°, 10°=Can't be a triangle; 100°, 40°, 40°=Could be a triangle; 50°, 50°, 50°=Can't be a triangle; 30°, 60°, 90°=Could be a triangle | Do the angles add up to 180°?
+check: gap | 180 − 90 − 35 = _ | 55
+check: mcq | An equilateral triangle has three equal angles. Each one is… | 60°* | 90° | 45°
+check: tf | A triangle can have two right angles. | false | Two right angles already make 180°, which leaves nothing for the third.
+home: Draw a triangle, measure its angles with a protractor and check they add up to 180°.
+skill: triangle-angles
+
+@lesson 4.3 | Pythagoras | 📐 | workshop
+hook: A ladder leans against a wall. How long does it need to be?
+learn: In a right-angled triangle, the longest side is the hypotenuse. It's opposite the right angle.
+learn: Pythagoras: a² + b² = c², where c is the hypotenuse.
+learn: For sides of 3 and 4: 9 + 16 = 25, and the square root of 25 is 5.
+try: Sides of 6 and 8 give 36 + 64 = 100, so the hypotenuse is 10 :: gap | Sides of 5 and 12 make a hypotenuse of _ | 13
+play: gen | pythag | 4
+check: gap | 9 + 16 = _ | 25
+check: mcq | Which side is the hypotenuse? | The longest side, opposite the right angle* | The shortest side | Any side
+check: gap | Sides of 8 and 15 make a hypotenuse of _ | 17
+home: Check a corner is square with a tape measure: 30 cm one way, 40 cm the other, and 50 cm across.
+skill: pythagoras
+
+@lesson 4.4 | Using Pythagoras | 📺 | home
+hook: A TV is sold as "50-inch". What's being measured?
+learn: Screen sizes measure the diagonal, from corner to corner.
+learn: A rectangle's diagonal makes two right-angled triangles, so Pythagoras finds it.
+learn: A 9 by 12 rectangle has a diagonal of √(81 + 144) = √225 = 15.
+try: A 6 by 8 rectangle has a diagonal of 10 :: gap | A 5 by 12 rectangle has a diagonal of _ | 13
+play: order | Put the steps in order | Square both short sides; Add the two squares; Find the square root
+check: mcq | A 4 m ladder leans on a wall with its foot 2 m out. Does it reach higher or lower than 4 m up the wall? | Lower than 4 m* | Higher than 4 m | Exactly 4 m
+check: gap | The square root of 144 is _ | 12
+check: tf | Pythagoras only works in right-angled triangles. | true
+home: Measure the diagonal of a book or a screen, then check it with Pythagoras.
+skill: pythagoras-use
+
+@unit 5 | Powers and roots | Index notation and standard form
+@unit 6 | Patterns and graphs | Rules, coordinates and straight lines
+@unit 7 | Area and volume | Triangles, circles and prisms
+@unit 8 | Probability and statistics | Outcomes, experiments and misleading graphs
+
+@lesson 5.1 | Powers | 🔋 | workshop
+hook: A message gets passed on: each person tells 2 more, and then they each tell 2 more. How fast does it grow?
+learn: A power shows repeated multiplying: 2³ = 2 × 2 × 2 = 8.
+learn: The small raised number is the index (or exponent). The big number is the base.
+learn: 10² = 100 and 10³ = 1,000. Any number to the power of 1 is itself.
+try: 3² = 9 :: gap | 2 × 2 × 2 × 2 = _ | 16
+play: gen | powers | 5
+check: gap | 5 × 5 × 5 = _ | 125
+check: mcq | 4³ means… | 4 × 4 × 4* | 4 × 3 | 4 + 4 + 4
+check: mcq | 10⁴ is… | 10,000* | 40 | 1,000
+home: Work out 2 to the power of 10 by doubling 1 ten times.
+skill: powers
+
+@lesson 5.2 | Squares and square roots | 🟩 | garden
+hook: A square garden has an area of 49 m². How long is each side?
+learn: A square number is a number times itself: 7² = 49.
+learn: The square root (√) undoes squaring: √49 = 7.
+learn: The first ten square numbers are 1, 4, 9, 16, 25, 36, 49, 64, 81 and 100.
+try: √81 = 9 :: gap | 12 × 12 = _ | 144
+play: sort | Square number, Not a square | 36=Square number; 40=Not a square; 64=Square number; 50=Not a square; 100=Square number; 90=Not a square | Square number or not?
+check: gap | The square root of 121 is _ | 11
+check: mcq | A square has an area of 25 cm². Each side is… | 5 cm* | 25 cm | 12.5 cm
+check: tf | 16 is a square number. | true
+home: Colour in the square numbers on a 1 to 100 chart.
+skill: square-roots
+
+@lesson 5.3 | Index laws | ⚙️ | workshop
+hook: Is there a shortcut for 2³ × 2⁴?
+learn: Multiplying powers of the same base: add the indices. 2³ × 2⁴ = 2⁷.
+learn: Dividing powers of the same base: take away the indices. 5⁶ ÷ 5² = 5⁴.
+learn: A power of a power: multiply the indices. (3²)³ = 3⁶.
+try: 10² × 10³ = 10⁵ :: mcq | Simplify 7⁵ ÷ 7³ | 7²* | 7⁸ | 1²
+play: match | Simplify each | 2³ × 2²=2⁵; 6⁴ ÷ 6=6³; (4²)³=4⁶; x² × x⁵=x⁷
+check: mcq | Simplify a⁴ × a³ | a⁷* | a¹² | 2a⁷
+check: mcq | Simplify (2³)² | 2⁶* | 2⁵ | 4⁶
+check: tf | 3² × 3² is the same as 3⁴. | true
+home: Show a grown-up why 2³ × 2² = 2⁵ by writing out all the 2s.
+skill: index-laws
+
+@lesson 5.4 | Standard form | 🌌 | museum
+hook: The sun is about 150,000,000 km from Earth. Is there a neater way to write that?
+learn: Standard form writes a number as a number from 1 to 10, times a power of 10.
+learn: 150,000,000 = 1.5 × 10⁸.
+learn: Scientists use it for very big and very small numbers.
+try: 3,000 = 3 × 10³ :: mcq | 45,000 in standard form is… | 4.5 × 10⁴* | 45 × 10³ | 4.5 × 10³
+play: match | Match each number to its standard form | 2,000=2 × 10³; 600,000=6 × 10⁵; 7,500=7.5 × 10³; 90=9 × 10¹
+check: mcq | 8 × 10⁶ is… | 8,000,000* | 800,000 | 80,000,000
+check: tf | In standard form, the first number is from 1 up to (but not including) 10. | true
+check: mcq | Which is written in standard form? | 3.2 × 10⁵* | 32 × 10⁴ | 0.32 × 10⁶
+home: Find a very big number in a science article and write it in standard form.
+skill: standard-form
+
+@lesson 6.1 | Number patterns | 🔢 | stage
+hook: 5, 8, 11, 14… What comes next, and what's the 100th number?
+learn: In a linear pattern, the same amount is added each time. Here it's 3.
+learn: A rule finds any term. For 5, 8, 11, 14 the rule is 3n + 2, where n is the position.
+learn: Check it: n = 1 gives 3 × 1 + 2 = 5. The 100th term is 3 × 100 + 2 = 302.
+try: 2, 4, 6, 8 has the rule 2n :: gap | What comes next? 7, 11, 15, 19, _ | 23
+play: match | Match each pattern to its rule | 4, 8, 12, 16=4n; 3, 5, 7, 9=2n + 1; 6, 11, 16, 21=5n + 1; 1, 4, 7, 10=3n − 2
+check: gap | Using the rule 3n + 2, the 10th term is _ | 32
+check: mcq | In 10, 17, 24, 31, what's added each time? | 7* | 10 | 6
+check: gap | The rule is 4n + 1. The 5th term is _ | 21
+home: Find a pattern at home (stairs, tiles, fence posts) and write its rule.
+skill: linear-patterns
+
+@lesson 6.2 | Coordinates | 📍 | island
+hook: How do you tell someone exactly where the treasure is on a map?
+learn: Coordinates give a position as (x, y): how far across, then how far up.
+learn: The point (3, 5) is 3 across and 5 up from the origin, (0, 0).
+learn: Negative coordinates go left or down: (−2, 4) is 2 left and 4 up.
+try: (4, 1) is 4 across and 1 up :: mcq | Which point is 2 across and 6 up? | (2, 6)* | (6, 2) | (2, −6)
+play: order | Plot the point (3, −2) | Start at the origin (0, 0); Go 3 to the right; Go 2 down; Mark the point
+check: mcq | The origin is… | (0, 0)* | (1, 1) | (10, 10)
+check: tf | In (5, 2), the 5 tells you how far across. | true
+check: mcq | (−3, 4) is… | 3 left and 4 up* | 3 right and 4 down | 4 left and 3 up
+home: Draw a treasure map on grid paper and give a grown-up the coordinates.
+skill: coordinates
+
+@lesson 6.3 | Straight-line graphs | 🚕 | townhall
+hook: A taxi charges $3 plus $2 a kilometre. Can one graph show the cost of any trip?
+learn: An equation like y = 2x + 3 makes a straight line when you plot it.
+learn: Make a table first: x = 0 gives y = 3, x = 1 gives y = 5, and x = 2 gives y = 7.
+learn: Plot the points, then join them with a ruler.
+try: For y = x + 1, x = 2 gives y = 3 :: gap | For y = 2x + 3, when x = 4, y is _ | 11
+play: order | Draw a straight-line graph | Make a table of x and y values; Work out y for each x; Plot the points; Join them with a ruler
+check: gap | For y = 3x − 1, when x = 2, y is _ | 5
+check: mcq | Where does y = 2x + 3 cross the y-axis? | At 3* | At 2 | At 0
+check: tf | y = 2x + 3 makes a straight line. | true
+home: Make a table and a graph for the cost of n ice blocks at $2 each.
+skill: linear-graphs
+
+@lesson 6.4 | Gradient | ⛰️ | island
+hook: Which hill is steeper? Maths can measure it.
+learn: Gradient measures steepness: rise ÷ run, or how far up for each step across.
+learn: A line that rises 6 over a run of 3 has a gradient of 6 ÷ 3 = 2.
+learn: In y = 2x + 3, the gradient is 2, the number in front of x. A line going down has a negative gradient.
+try: A rise of 4 over a run of 2 is a gradient of 2 :: gap | A rise of 9 over a run of 3 is a gradient of _ | 3
+play: match | Each line is y equals the expression. Match it to its gradient | 3x + 1=3; x − 4=1; 5x=5; −2x + 6=−2
+check: gap | 10 ÷ 2 = _ | 5
+check: mcq | Which line is steepest? | y = 4x* | y = 2x | y = x
+check: tf | A line going down from left to right has a negative gradient. | true
+home: Measure the rise and run of a ramp or some steps, and work out the gradient.
+skill: gradient
+
+@lesson 7.1 | Triangles and parallelograms | 📐 | workshop
+hook: How do you find the area of a slanted shape?
+learn: The area of a parallelogram is base × height, using the straight-up height, not the slanted side.
+learn: A triangle is half a parallelogram, so its area is base × height ÷ 2.
+learn: A triangle with a base of 8 cm and a height of 5 cm: 8 × 5 ÷ 2 = 20 cm².
+try: A parallelogram with base 6 and height 4 has an area of 24 :: gap | 10 × 6 ÷ 2 = _ | 30
+play: gen | triangle | 4
+check: gap | A parallelogram with a base of 7 m and a height of 3 m has an area of _ m² | 21
+check: mcq | Why do we halve for a triangle? | A triangle is half a parallelogram* | Triangles are small | It's a rule nobody understands
+check: tf | For area, you use the slanted side as the height. | false | Use the height measured straight up, at a right angle to the base.
+home: Find a triangle at home, like a sign or a slice of toast, and work out its area.
+skill: area-triangles
+
+@lesson 7.2 | Circles | ⭕ | workshop
+hook: Why are wheels round? And how far does a wheel roll in one turn?
+learn: The radius goes from the centre to the edge. The diameter goes right across, so it's 2 × the radius.
+learn: The circumference is the distance around. Circumference = π × diameter, and π is about 3.14.
+learn: A wheel 50 cm across rolls about 3.14 × 50 = 157 cm in one turn.
+try: A radius of 4 means a diameter of 8 :: gap | A circle has a radius of 6 cm. Its diameter is _ cm | 12
+play: match | Match each word to its meaning | Radius=Centre to edge; Diameter=All the way across through the centre; Circumference=The distance around; π=About 3.14
+check: gap | 3.14 × 10 = _ | 31.4
+check: mcq | If the diameter is 20 cm, the radius is… | 10 cm* | 40 cm | 20 cm
+check: tf | π is about 3.14. | true
+home: Wrap string around a round object, then measure across it. Divide the distance around by the distance across. Is it close to 3.14?
+skill: circles
+
+@lesson 7.3 | Area of a circle | 🍕 | kitchen
+hook: How much pizza is there in a 30 cm pizza?
+learn: The area of a circle is π × radius × radius, written πr².
+learn: A circle with a radius of 10 cm: 3.14 × 10 × 10 = 314 cm².
+learn: Halve the diameter to get the radius first.
+try: A radius of 1 gives 3.14 × 1 × 1 = 3.14 :: gap | 3.14 × 5 × 5 = _ | 78.5
+play: order | Find a circle's area from its diameter | Halve the diameter to get the radius; Square the radius; Multiply by π
+check: gap | 3.14 × 2 × 2 = _ | 12.56
+check: mcq | A pizza is 30 cm across. What radius do you use? | 15 cm* | 30 cm | 60 cm
+check: tf | Doubling the radius doubles the area. | false | It makes the area four times as big, because the radius is squared.
+home: Measure across a round plate and work out its area.
+skill: circle-area
+
+@lesson 7.4 | Volume of prisms | ⛺ | workshop
+hook: How much air is inside a tent shape?
+learn: A prism has the same shape all the way through, like a box or a tent shape.
+learn: The volume of a prism is the area of its end face × its length.
+learn: A prism with an end area of 20 cm² and a length of 10 cm holds 20 × 10 = 200 cm³. Each cm³ holds 1 mL.
+try: An end area of 12 and a length of 5 make 60 :: gap | An end area of 15 cm² and a length of 8 cm make a volume of _ cm³ | 120
+play: order | Find a prism's volume | Find the shape of the end face; Work out the area of the end face; Multiply by the length
+check: gap | 25 × 4 = _ | 100
+check: mcq | 1 cm³ holds… | 1 mL* | 1 L | 10 mL
+check: tf | A box is a prism. | true
+home: Find the volume of a box in your kitchen using its end area and its length.
+skill: prism-volume
+
+@lesson 8.1 | Probability | 🎲 | island
+hook: What's the chance of rolling an even number on a dice?
+learn: Probability = the number of ways it can happen ÷ the number of possible outcomes.
+learn: The even numbers on a dice are 2, 4 and 6. That's 3 out of 6, so 3/6 = 1/2.
+learn: Probability goes from 0 (impossible) to 1 (certain).
+try: The probability of rolling a 5 is 1/6 :: mcq | What's the probability of rolling a number bigger than 4? | 1/3* | 1/6 | 4/6
+play: gen | chance | 4
+check: mcq | A bag has 2 red and 8 blue counters. The probability of red is… | 1/5* | 1/4 | 2/8
+check: tf | A probability can be bigger than 1. | false | Probabilities go from 0 to 1.
+check: mcq | The probability of rolling a 7 on a normal dice is… | 0* | 1/7 | 1
+home: List all the outcomes of rolling a dice, and find the probability of an odd number.
+skill: probability
+
+@lesson 8.2 | Two things at once | 🪙 | island
+hook: Toss a coin and roll a dice. How many results are possible?
+learn: List all the outcomes in a table or a tree diagram.
+learn: A coin (2 outcomes) and a dice (6 outcomes) give 2 × 6 = 12 outcomes.
+learn: The probability of heads and a 6 is 1 out of 12, or 1/12.
+try: Two coins give HH, HT, TH and TT: 4 outcomes :: mcq | You toss two coins. What's the probability of two heads? | 1/4* | 1/2 | 1/3
+play: order | Make a tree diagram | Draw branches for the first event; From each one, draw branches for the second; Write each outcome at the ends; Count the outcomes
+check: gap | A spinner with 3 colours and a coin give 3 × 2 = _ | 6
+check: mcq | You toss two coins. What's the probability of one head and one tail? | 1/2* | 1/4 | 1/3
+check: tf | A coin and a dice give 12 possible outcomes. | true
+home: Toss two coins 20 times with someone. How often do you get one of each?
+skill: combined-events
+
+@lesson 8.3 | Experiments and theory | 🧪 | museum
+hook: You toss a coin 10 times and get 7 heads. Is the coin unfair?
+learn: Theoretical probability is what should happen: heads has a probability of 1/2.
+learn: Experimental probability is what actually happened: 7 heads in 10 tosses is 7/10.
+learn: With more tries, results usually get closer to the theory. 10 tosses isn't many.
+try: 52 heads in 100 tosses is close to 1/2 :: mcq | You roll a dice 60 times. About how many 6s would you expect? | 10* | 6 | 60
+play: sort | Theoretical, Experimental | Heads should come up half the time=Theoretical; 7 heads in 10 tosses=Experimental; A 4 should come up 1 roll in 6=Theoretical; 12 sixes in 60 rolls=Experimental | Which kind?
+check: tf | Getting 7 heads in 10 tosses proves a coin is unfair. | false | Small numbers of tries can vary a lot.
+check: mcq | More tries usually make results… | closer to the theory* | further from the theory | exactly the same as it
+check: mcq | 30 heads in 50 tosses gives an experimental probability of… | 3/5* | 1/2 | 30
+home: Toss a coin 50 times with a grown-up and compare your result with 1/2.
+skill: experimental-probability
+
+@lesson 8.4 | Misleading graphs | 📉 | stage
+hook: Two graphs show the same numbers. One looks like a huge jump, the other like hardly any change. How?
+learn: A vertical axis that doesn't start at 0 can make small differences look huge.
+learn: Uneven scales, missing labels and carefully chosen dates can also mislead.
+learn: Always check the axes, the scale and where the data came from.
+try: An axis starting at 95 makes a change from 96 to 98 look huge :: mcq | What should you check first on a graph? | The axes and scale* | The colours | The font
+play: sort | Can mislead, Fair | An axis starting at 95=Can mislead; An axis starting at 0=Fair; No labels on the axes=Can mislead; The source is shown=Fair; Only the best month is shown=Can mislead | Fair or misleading?
+check: tf | A graph can be accurate and still be misleading. | true
+check: mcq | Why might an ad's graph start at 90 instead of 0? | To make a small difference look big* | To save ink | Because 0 doesn't exist
+check: mcq | Which makes a graph more trustworthy? | Labelled axes and a source* | Bright colours | 3D effects
+home: Find a graph in an ad or an article and check its axes.
+skill: misleading-graphs
+
+
+# Fact banks (content/facts/maths.txt)
+@facts 5.4
+fact: Standard form is a number from 1 to 10 times a power of [10]. | 2; 5
+fact: 150,000,000 = 1.5 × 10 to the power [8]. | 6; 15
+fact: 3,000 = 3 × 10 to the power [3]. | 2; 4
+fact: 45,000 = [4.5] × 10⁴. | 45; 0.45
+fact: Scientists use standard form for very [big] and very small numbers. | medium; round
+fact: In standard form, the first number is at least 1 and less than [10]. | 100; 1,000
+fact: 7 × 10² = [700]. | 70; 7,000
+fact: 2.5 × 10³ = [2,500]. | 250; 25,000
+@facts 6.2
+fact: Coordinates give a position as [(x, y)]. | (y, x); (up, across)
+fact: The first coordinate says how far [across]. | up; down
+fact: The second coordinate says how far [up]. | across; left
+fact: The point (3, 5) is 3 across and [5] up. | 3; 8
+fact: The origin is [(0, 0)]. | (1, 1); (10, 10)
+fact: Negative x coordinates go [left]. | right; up
+fact: Negative y coordinates go [down]. | up; right
+fact: The point (−2, 4) is 2 left and [4] up. | 2; 6
+@facts 6.4
+fact: Gradient measures [steepness]. | length; colour
+fact: Gradient = rise ÷ [run]. | rise; area
+fact: A rise of 6 over a run of 3 is a gradient of [2]. | 3; 18
+fact: A rise of 10 over a run of 5 is a gradient of [2]. | 5; 50
+fact: In y = 2x + 3, the gradient is [2]. | 3; 5
+fact: In y = 4x + 1, the gradient is [4]. | 1; 5
+fact: A line going down has a [negative] gradient. | positive; zero
+fact: A flat line has a gradient of [0]. | 1; 10
+@facts 7.3
+fact: The area of a circle is π × radius × [radius]. | diameter; 2
+fact: The area of a circle is written [πr²]. | 2πr; πd
+fact: A circle with a radius of 10 cm has an area of about [314] cm². | 31.4; 62.8
+fact: A circle with a radius of 1 cm has an area of about [3.14] cm². | 6.28; 1
+fact: A circle with a radius of 2 cm has an area of about [12.56] cm². | 6.28; 4
+fact: Halve the diameter to get the [radius]. | area; circumference
+fact: A circle with a diameter of 20 cm has a radius of [10] cm. | 20; 40
+fact: π is about [3.14]. | 2.14; 4.13
+@facts 8.1
+fact: Probability = the ways it can happen ÷ the possible [outcomes]. | guesses; players
+fact: A dice has [6] possible outcomes. | 2; 12
+fact: The even numbers on a dice are 2, 4 and [6]. | 3; 5
+fact: The probability of rolling an even number is [1/2]. | 1/6; 1/3
+fact: Probability goes from 0 to [1]. | 10; 100
+fact: A probability of 0 means [impossible]. | certain; likely
+fact: A probability of 1 means [certain]. | impossible; unlikely
+fact: The probability of rolling a 1 or a 2 is [1/3]. | 1/2; 1/6
+@facts 8.2
+fact: A coin has [2] outcomes. | 1; 6
+fact: A coin and a dice give 2 × 6 = [12] outcomes. | 8; 36
+fact: The probability of heads and a 6 is [1/12]. | 1/2; 1/6
+fact: You can list outcomes in a table or a [tree diagram]. | pie chart; poem
+fact: Two coins give [4] outcomes. | 2; 3
+fact: The probability of two heads with two coins is [1/4]. | 1/2; 1/3
+fact: Two dice give [36] outcomes. | 12; 6
+fact: Listing outcomes helps you find [probabilities]. | riddles; colours
+@facts 8.3
+fact: [Theoretical] probability is what should happen. | Experimental; Lucky
+fact: [Experimental] probability is what actually happened. | Theoretical; Imaginary
+fact: The theoretical probability of heads is [1/2]. | 1/4; 7/10
+fact: 7 heads in 10 tosses is an experimental probability of [7/10]. | 1/2; 3/10
+fact: With more tries, results usually get [closer] to the theory. | further; random
+fact: 3 sixes in 12 rolls is an experimental probability of [1/4]. | 1/6; 3/6
+fact: 10 tosses is [not many] for an experiment. | a huge number; too many
+fact: Repeating an experiment many times gives [more reliable] results. | less reliable; the same
+@facts 8.4
+fact: An axis that doesn't start at [0] can make small differences look huge. | the left; the right
+fact: Uneven [scales] can mislead. | colours; titles only
+fact: Missing [labels] can mislead. | colours; prices
+fact: Carefully chosen [dates] can mislead. | fonts; colours
+fact: Always check the [axes]. | font; colour
+fact: Always check where the [data] came from. | colours; font
+fact: A graph can be accurate but still [misleading]. | wrong; blank
+fact: An axis starting at 0 shows differences at their [true] size. | doubled; hidden
