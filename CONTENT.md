@@ -87,6 +87,23 @@ skill: coins
 - A lesson with 16 or more scored items is split into even rounds of up to 12, with a checkpoint after each round where progress is saved, so a long lesson can be finished over more than one sitting.
 - `home:` is a take-home activity for the family.
 - `skill:` is a short tag. It ties together spaced review, parent reports and "Needs a hand".
+
+### Long lessons in every subject
+
+A lesson file stays short. When a kid starts a lesson, the app builds it out with more questions and games on the same topic, until it has **40 for Sprouts, 45 for Builders and 50 for Makers**, counting the lesson's own tries, game and checks. The lesson's own game and questions always come last. Long lessons split into rounds (see above).
+
+- **Maths** lessons are built from their `skill:`. Each maths topic has a question maker in `chorecast-growth/14-drill.js` (`MSKILL`). It makes fresh numbers every time and works out the answer in code. `tests/lesson-drill.test.mjs` works each answer out again, 300 times per topic. Each question is asked as fill the gap, multiple choice and true or false. The topic's games come in too: **Memory flip**, **Lightning round**, **Balloon pop** (for example, "Pop every multiple of 5"), and, for the right topics, **Clock hands** (drag the hands to a time), **Pizza fractions** (shade the slices), **Balance scale** (add weights to balance 7 + ? = 15) and **Coin counter**. Earlier topics in the unit are mixed in at the end. A new maths topic needs a question maker before its lessons can go live.
+- **Every other subject** is built from the lesson's **fact bank**. Fact banks live in `content/facts/<tree>.txt`, one `@band` section per age band and one `@facts unit.lesson` block per lesson. The build adds them to the end of each band's pack:
+
+  ```
+  @band sprouts
+  @facts 1.2
+  fact: Sleep lets your body [grow]. | shrink; disappear; melt
+  ```
+
+  The right answer goes in `[square brackets]`. After the `|` come 2 or 3 wrong answers, separated by `;`, and each one must make the sentence **clearly false** (not just odd, and never accidentally true). Each fact is asked as fill the gap, true or false (once each way, far apart), "Which one is true?", **Guess the word** (for one-word answers of 3 to 10 letters), **Lightning rounds** and a **True or False sort**. Then facts from earlier lessons are mixed in. Money Sense adds **Coin counter**. Every lesson needs **8 to 12 facts**. A `{nz:…~au:…}` country switch can go in the sentence but not in the answer or the wrong answers. Sprouts facts are 18 words or fewer, and others 24 or fewer.
+- **Body safety and online safety facts** use only harmless, silly wrong answers (a goldfish, a teddy, the moon). A kid must never read a false sentence that blames them, says to keep a secret, or says not to tell.
+- Fact banks follow every content rule in this file and are checked like lessons. A grown-up samples them on the review page.
 - `mins:` is optional, giving the expected minutes.
 - Lines starting with `#` are comments.
 
@@ -207,12 +224,18 @@ Language questions, on top of the usual ones:
 | Build it | `tiles \| Prompt \| answer` (the words of a phrase, or the letters of a word) |
 | Trace it | `trace \| «字» \| meaning` (trace a character or a few kana over a faint copy; marked by how much of it the finger covered, without stroke order yet) |
 
-The app also has three listening and reading games that it builds itself (they aren't written in lesson files): **Does it mean this?** (hear a word, answer yes or no to a picture and meaning), **Hear three** (tap each of three spoken words, pick the one that means the picture), and **Fill the gap** (put a new word back into one of the lesson's phrases, with its meaning as the clue).
+The app also builds these language games itself (they aren't written in lesson files):
+- **Does it mean this?** Hear a word, then answer yes or no to a picture and meaning.
+- **Hear three.** Tap each of three spoken words, then pick the one that means the picture.
+- **Fill the gap.** Put a new word back into one of the lesson's phrases, with its meaning as the clue.
+- **Memory flip.** Match each word to its picture, with the cards face down.
+- **Listen and pop.** Hear a word, then pop its bubble. There are five rounds.
+- **Guess the word.** Spanish only: spell a new word letter by letter from its picture and meaning.
 
 **Long lessons are built, not written.** A lesson file stays short: its words, phrases, rules, tries, game and checks. The app adds questions about the same words from every angle until the lesson reaches **40 for Sprouts, 45 for Builders and 50 for Makers** (counting the lesson's own tries, game and checks):
 - **Listen:** hear it and pick what it means; hear it, does it mean this?
-- **Read:** see what it means and pick the word; hear it and pick the written word; hear three and pick the one that means it; match them all.
-- **Make it:** build it from its letters, kana or characters; type it (Spanish, Builders and Makers) or trace it (Mandarin and Japanese); say it.
+- **Read:** see what it means and pick the word; hear it and pick the written word; hear three and pick the one that means it; match them all; Memory flip; Listen and pop.
+- **Make it:** build it from its letters, kana or characters; type it (Spanish, Builders and Makers) or trace it (Mandarin and Japanese); Guess the word (Spanish); say it.
 - **Phrases:** hear a phrase and pick its meaning; build it from its words; fill the gap; pick the phrase (Builders and Makers).
 - **Mix:** the new words again with fresh choices, then words and phrases from earlier lessons in the unit, then earlier units.
 

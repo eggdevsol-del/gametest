@@ -159,3 +159,113 @@ check: mcq | Which question helps you spot bias? | What might the writer want me
 home: Compare two reviews or ads for the same thing and find the loaded words.
 skill: bias
 
+
+# Fact banks (content/facts/words.txt)
+@facts 1.1
+fact: A persuasive piece starts with a clear [claim]. | joke; summary
+fact: A claim is what you want the reader to [agree with]. | ignore; forget
+fact: A claim must be specific and [arguable]. | obviously true; secret
+fact: "School exists" isn't a claim because it isn't [arguable]. | true; short
+fact: "Phones should stay in lockers during class" [is] a claim. | isn't; can never be
+fact: Everything in the piece should [support] the claim. | ignore; contradict
+fact: A claim people could disagree with is [arguable]. | a fact; pointless
+fact: A persuasive piece argues for [one] main claim. | no; ten different
+@facts 1.2
+fact: Back your claim with [reasons]. | jokes; insults
+fact: Back each reason with [evidence]. | rumours; opinions only
+fact: Facts, examples and what experts say are kinds of [evidence]. | opinions; claims
+fact: "Because I said so" is a [weak] reason. | strong; perfect
+fact: Strong evidence is [specific]. | vague; made up
+fact: Strong evidence comes from a source the reader can [trust]. | ignore; never check
+fact: A class that grew and cooked vegetables is [evidence] that gardens teach about food. | a claim; a rebuttal
+fact: Reasons explain [why] the claim is right. | when; who
+@facts 1.3
+fact: A [counterargument] is the strongest point against your claim. | rebuttal; reason
+fact: Answering a counterargument is called a [rebuttal]. | claim; summary
+fact: Mentioning the other side shows you're [fair]. | weak; wrong
+fact: Being fair makes you [more] convincing. | less; never
+fact: "Some say gardens take too much work" is a [counterargument]. | rebuttal; claim
+fact: "But a weekly roster shares it out" is a [rebuttal]. | counterargument; claim
+fact: A rebuttal [answers] the other side. | ignores; agrees with
+fact: Good persuasive writers [take on] the opposite view. | hide; ignore
+@facts 1.4
+fact: Persuasive techniques include strong [verbs]. | spelling mistakes; tiny fonts
+fact: "Who wants dirty rivers?" is a [rhetorical question]. | simile; full stop
+fact: A rhetorical question doesn't really expect an [answer]. | reader; question mark
+fact: Saying something again and again is [repetition]. | rebuttal; evidence
+fact: "Everyone's doing it" is the [bandwagon] trick. | rebuttal; evidence
+fact: "Today only!" is [false urgency]. | evidence; a rebuttal
+fact: Use persuasive techniques [honestly] in your own writing. | to trick people; secretly
+fact: "Don't miss out!" is meant to make you feel you'll be [left out]. | better informed; bored
+@facts 2.1
+fact: A clause has a subject and a [verb]. | full stop; comma
+fact: A [main] clause makes sense alone. | subordinate; broken
+fact: "We ran outside" is a [main] clause. | subordinate; question
+fact: A [subordinate] clause doesn't make sense alone. | main; full
+fact: "When the bell rang" is a [subordinate] clause. | main; full sentence
+fact: A main clause plus a subordinate clause makes a [complex] sentence. | simple; broken
+fact: "When the bell rang, we ran outside" is a [complex] sentence. | simple; run-on
+fact: In "We ran outside", the verb is [ran]. | We; outside
+@facts 2.2
+fact: A singular subject takes a [singular] verb. | plural; past
+fact: "The dog [runs]." | run; running
+fact: "The dogs [run]." | runs; runned
+fact: A plural subject takes a [plural] verb. | singular; future
+fact: "The box of apples [is] heavy." | are; were
+fact: In "The box of apples is heavy", the subject is the [box]. | apples; heavy
+fact: Words in between the subject and verb can be [tricky]. | ignored completely; the subject
+fact: "The children [are] playing." | is; was
+@facts 2.3
+fact: A [run-on] joins sentences with no proper punctuation. | summary; claim
+fact: A full stop can fix a [run-on]. | claim; metaphor
+fact: A joining word like "so" can fix a [run-on]. | metaphor; simile
+fact: A [semicolon] can join two full sentences. | comma alone; apostrophe
+fact: A comma alone [can't] join two full sentences. | can always; should
+fact: "I got home, I fed the dog" is a comma [splice]. | list; clause
+fact: "I got home. I fed the dog." fixes the run-on with a [full stop]. | comma; apostrophe
+fact: "I got home and I fed the dog" fixes it with a [joining word]. | comma; apostrophe
+@facts 2.4
+fact: In the [active] voice, the subject does the action. | passive; future
+fact: "The dog chased the cat" is in the [active] voice. | passive; future
+fact: In the [passive] voice, the action is done to the subject. | active; present
+fact: "The cat was chased by the dog" is in the [passive] voice. | active; future
+fact: The active voice is usually [clearer]. | longer; weaker
+fact: Passive helps when the doer is [unknown]. | famous; the subject
+fact: "The window was broken" doesn't say [who] broke it. | when; what
+fact: "Mia kicked the ball" is in the [active] voice. | passive; future
+@facts 3.1
+fact: Figurative language isn't [literal]. | written; English
+fact: A [simile] compares using "like" or "as". | metaphor; rebuttal
+fact: "As brave as a lion" is a [simile]. | metaphor; fact
+fact: "Ran like the wind" is a [simile]. | metaphor; claim
+fact: A [metaphor] says one thing is another. | simile; summary
+fact: "The classroom was a zoo" is a [metaphor]. | simile; fact
+fact: "The classroom was a zoo" means the classroom was [noisy and wild]. | full of animals; empty
+fact: Figurative language helps create a [picture] in the reader's mind. | spelling mistake; full stop
+@facts 3.2
+fact: [Personification] gives human actions to things that aren't human. | Simile; Imagery
+fact: "The wind howled" is [personification]. | a simile; a fact
+fact: "The trees shivered" is [personification]. | a simile; evidence
+fact: [Imagery] appeals to the senses. | Bias; Tone
+fact: The five senses are sight, sound, smell, taste and [touch]. | thought; balance
+fact: "The bread smelled warm and sweet" appeals to [smell]. | sight; touch
+fact: Writers use imagery to make readers [feel] something. | forget; skip
+fact: Wind can't really [howl] like a wolf. | blow; move
+@facts 3.3
+fact: [Tone] is the writer's attitude. | Bias; Imagery
+fact: Tone can be cheerful, serious, angry or [sarcastic]. | purple; plural
+fact: [Word choice] shows tone. | Font size; Page number
+fact: "A tiny hiccup" sounds [calmer] than "a disaster". | more upset; angrier
+fact: "A disaster" sounds more [serious] than "a tiny hiccup". | cheerful; relaxed
+fact: The same words can mean different things in a different [tone]. | font; colour
+fact: Spotting tone helps you understand what the writer really [means]. | spells; weighs
+fact: "Nice job" said with an eye-roll is [sarcastic]. | sincere; cheerful
+@facts 3.4
+fact: [Bias] is when writing leans to one side. | Tone; Imagery
+fact: Bias can come from leaving things [out]. | in; on top
+fact: [Loaded] words carry strong feelings. | Plain; Short
+fact: "Eyesore" is a [loaded] word. | neutral; plain
+fact: "Buzzing hangout" makes the skate park sound [good]. | bad; dangerous
+fact: "Noisy eyesore" makes the skate park sound [bad]. | good; amazing
+fact: To check for bias, ask: Who [wrote] this? | printed; coloured
+fact: Ask what might be [missing]. | spelled right; in bold

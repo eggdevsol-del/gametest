@@ -239,6 +239,7 @@ function startLesson(kid, l, mode = 'lesson') {
   if (l.guess) steps.push({ kind: 'guess', item: l.guess });
   l.learn.forEach(text => steps.push({ kind: 'learn', text }));
   l.tries.forEach(t => steps.push({ kind: 'try', ex: t.ex, item: t.item }));
+  lessonDrill(kid, l, steps.filter(s => stepWorth(s)).length + (l.play ? 1 : 0) + l.checks.length).forEach(s => steps.push(s));
   if (l.play) steps.push({ kind: 'play', item: l.play });
   l.checks.forEach((item, i) => steps.push({ kind: 'check', item, i }));
   steps.push({ kind: 'home' });

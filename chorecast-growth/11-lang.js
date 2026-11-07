@@ -515,6 +515,7 @@ const ASK = {
     return { type: 'trace', q: `«${w.t}»`, en: w.en };
   },
   sayIt: (D, w) => ({ type: 'say', q: `«${w.t}»`, en: w.en, rd: w.rd }),
+  letters: (D, w) => (D.lang === 'es' && /^\p{L}{3,10}$/u.test(w.t) ? { type: 'letters', q: `Spell it: ${pm(w)}`, a: w.t } : null),
   hearPhrase: (D, s) => { const o = others(D, s, 2); return o && { type: 'hear', q: `What does «${s.t}» mean?`, opts: [{ t: s.en, ok: true }, ...o.map(x => ({ t: x.en, ok: false }))] }; },
   buildPhrase: (D, s) => {
     const parts = phraseTiles(s, D.lang); if (parts.length < 2 || parts.length > (D.band === 'sprouts' ? 5 : 7)) return null;
@@ -547,10 +548,21 @@ function drillSteps(kid, l, have) {
     const set = [...ws, ...unitBefore.flatMap(x => x.words.map(asW))].filter((x, i, a) => a.findIndex(y => cardKey(y.t) === cardKey(x.t) || sameSense(y.en, x.en)) === i).slice(0, 4);
     return set.length >= 3 ? [{ kind: 'play', item: { type: 'match', q: 'Match them', pairs: set.map(x => [`«${x.t}»`, pm(x)]) }, gen: 'match' }] : [];
   };
+  // Memory flip: each word and its picture, face down
+  const memOf = () => {
+    const set = [...ws, ...unitBefore.flatMap(x => x.words.map(asW))].filter((x, i, a) => x.pic && a.findIndex(y => cardKey(y.t) === cardKey(x.t) || y.pic === x.pic || sameSense(y.en, x.en)) === i).slice(0, 4);
+    return set.length >= 3 ? [{ kind: 'play', item: { type: 'memory', q: 'Memory flip: find each word’s picture', pairs: set.map(x => [`«${x.t}»`, x.pic]) }, gen: 'memory' }] : [];
+  };
+  // Listen and pop: five words said, each popped from bubbles of words that sound different
+  const lpopOf = () => {
+    const pool = [...ws, ...unitBefore.flatMap(x => x.words.map(asW))].filter((x, i, a) => a.findIndex(y => cardKey(y.t) === cardKey(x.t)) === i), rounds = [];
+    for (let i = 0; i < 8 && rounds.length < 5 && pool.length >= 3; i++) { const w = pool[i % pool.length], o = others(D, w, 3); if (o) rounds.push({ t: w.t, en: pm(w), opts: [w.t, ...o.map(x => x.t)] }); }
+    return rounds.length >= 3 ? [{ kind: 'play', item: { type: 'lpop', rounds }, gen: 'lpop' }] : [];
+  };
   const core = [
     group(1, 1, 'hearMean', ws, ask('hearMean')), group(1, 2, 'hearYes', ws, ask('hearYes')),
-    group(2, 1, 'pickWord', ws, ask('pickWord')), group(2, 2, 'heard', ws, ask('heard')), group(2, 3, 'sound', ws, ask('sound')), { phase: 2, prio: 1, items: matchOf() },
-    group(3, 1, 'build', ws, ask('build')), group(3, 2, 'write', ws, ask('write')), group(3, 3, 'sayIt', ws, ask('sayIt')),
+    group(2, 1, 'pickWord', ws, ask('pickWord')), group(2, 2, 'heard', ws, ask('heard')), group(2, 3, 'sound', ws, ask('sound')), { phase: 2, prio: 1, items: matchOf() }, { phase: 2, prio: 2, items: memOf() }, { phase: 2, prio: 2, items: lpopOf() },
+    group(3, 1, 'build', ws, ask('build')), group(3, 2, 'write', ws, ask('write')), group(3, 3, 'sayIt', ws, ask('sayIt')), group(3, 3, 'letters', ws, ask('letters')),
     group(4, 1, 'hearPhrase', ss, ask('hearPhrase')), group(4, 1, 'buildPhrase', ss, ask('buildPhrase')), group(4, 2, 'gap', ss, ask('gap')), group(4, 3, 'pickPhrase', ss, ask('pickPhrase')),
   ];
   // Too many for this band: drop the least important ways of asking first, a step at a time from the biggest group

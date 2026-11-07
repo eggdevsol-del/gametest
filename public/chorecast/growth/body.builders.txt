@@ -53,3 +53,41 @@ check: mcq | Which helps protect your skin from the sun? | A hat and sunscreen* 
 home: Check the sunscreen at home with a grown-up, and put a hat by the door.
 skill: teeth-skin
 
+
+# Fact banks (content/facts/body.txt)
+@facts 1.1
+fact: About [half] of a balanced plate is vegetables and fruit. | none; one tenth
+fact: About a [quarter] of a balanced plate is grains like rice, pasta or bread. | half; none; all
+fact: Meat, fish, eggs, tofu and beans are [protein] foods. | sugar; drink; grain
+fact: Milk, yoghurt and cheese help build strong [bones]. | hair; fingernails; eyelashes
+fact: A mix of foods gives your body [energy] to move and think. | homework; noise
+fact: Food helps your body grow and [repair] itself. | shrink; rust; melt
+fact: Rice, pasta and bread are [grains]. | proteins; vegetables; drinks
+fact: Tofu and beans are protein foods that come from [plants]. | animals; rocks; the sea
+@facts 1.2
+fact: [Water] is the best everyday drink. | Energy drink; Fizzy drink; Sports drink
+fact: Plain [milk] is a good drink too. | cola; energy drink; syrup
+fact: Fizzy drinks have lots of [sugar]. | protein; vitamins; water only
+fact: Sugar in drinks is bad for your [teeth]. | ears; hair; elbows
+fact: Many juices have lots of [sugar] too. | bones; fibre
+fact: Energy drinks often have [caffeine] in them. | calcium; fibre; vitamin C
+fact: Energy drinks are [unsuitable] for kids. | perfect; the best drink
+fact: After sport, your body needs [water]. | fizzy drink; an energy drink; lollies
+@facts 1.3
+fact: Kids should move enough to breathe harder for at least an [hour] a day. | minute; second
+fact: Running, biking and swimming make you [breathe] harder. | sleep; read; whisper
+fact: Climbing, jumping and push-ups make your [muscles] and bones strong. | teeth; hair; eyelashes
+fact: Do muscle and bone exercises a few times a [week]. | year; decade
+fact: Walking to school is [exercise] too. | homework; a nap; screen time
+fact: Playing at lunch gets your body [moving]. | sleeping; resting
+fact: Carrying the washing is a way of [moving] your body. | resting; sleeping
+fact: Sport, play and walking all add up to your [hour] a day. | week; year
+@facts 1.4
+fact: Brush your teeth [twice] a day. | once a week; once a month
+fact: Brush for about [two] minutes. | ten; twenty
+fact: Use toothpaste with [fluoride] in it. | sugar; glitter; salt
+fact: After brushing, spit out the extra toothpaste but don't [rinse]. | smile; talk
+fact: Sugary food and drinks feed [germs] that make holes in teeth. | muscles; bones; vitamins
+fact: Holes in teeth are made by germs that feed on [sugar]. | water; milk; air
+fact: Wearing a hat protects your skin from the [sun]. | rain; wind; moon
+fact: Sunscreen helps protect your [skin] from the sun. | hair; teeth; shoes

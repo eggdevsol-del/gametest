@@ -53,3 +53,41 @@ check: mcq | What's the first thing to check when someone is hurt? | Whether the
 home: With a grown-up, find your home's first aid kit and check what's in it.
 skill: first-aid
 
+
+# Fact banks (content/facts/body.txt)
+@facts 1.1
+fact: Running and cycling build heart and [lung] fitness. | ear; nose; tooth
+fact: Push-ups and squats build [strength]. | sunburn; tiredness
+fact: Stretching builds [flexibility]. | eyesight; hearing
+fact: Warm up [before] exercise. | instead of; months after
+fact: Cool down [after] exercise. | before; instead of
+fact: Build up [slowly] instead of doing too much at once. | never; all at once
+fact: Rest days let your muscles [repair]. | disappear; shrink; freeze
+fact: Doing too much at once makes an injury [more] likely. | less; impossible
+@facts 1.2
+fact: Teens need about [8 to 10] hours of sleep a night. | 3 to 4; 5 to 6; 14 to 16
+fact: In the teenage years, the body clock shifts [later]. | earlier; backwards
+fact: A later body clock makes it harder to feel sleepy [early] in the evening. | late at night; at 2 a.m.
+fact: Waking up at the same time [every day] helps your sleep. | once a month; only on weekends
+fact: Morning [daylight] helps set your body clock. | darkness; caffeine; screen time
+fact: Caffeine late in the day makes it [harder] to fall asleep. | easier; quicker
+fact: Turn screens off well [before] bed. | after; long after
+fact: Not enough sleep makes it harder to [concentrate]. | yawn; feel tired
+@facts 1.3
+fact: The sun's [UV] rays burn skin. | blue; warm; moon
+fact: UV rays can pass through [cloud]. | nothing; air
+fact: You can get sunburnt on a [cloudy] day. | rainy indoor; moonlit
+fact: Sunburn can lead to skin [cancer] later in life. | freckles disappearing; better eyesight
+fact: Put sunscreen on again every [two] hours. | ten; twenty-four
+fact: Put sunscreen on again after [swimming]. | lunch only; reading
+fact: At a patrolled beach, swim between the [flags]. | rocks; boats; surfers
+fact: If a rip pulls you out, stay calm, [float] and raise your hand. | panic; swim straight at the shore until you're exhausted
+@facts 1.4
+fact: When someone gets hurt, first check for [danger]. | snacks; your phone's battery
+fact: {nz:111~au:000} is the [emergency] number to call. | pizza; weather
+fact: If you can't call, get a [grown-up]. | snack; photo
+fact: Cool a minor burn under cool running water for [20] minutes. | 2; 60
+fact: Never put [ice] on a burn. | cool water; cool running water
+fact: Never put [butter] on a burn. | cool water; cool running water
+fact: Press firmly on a bleeding cut with a clean [cloth]. | stick; leaf; spoon
+fact: Check for danger to [yourself] and others first. | nobody; only the weather

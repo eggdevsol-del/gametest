@@ -87,7 +87,14 @@ for (const lang of ['es', 'zh', 'ja']) {
         // Match is read, not heard, so words that sound the same (他 he, 她 she) can both be in it
         const ws = it.pairs.map(p => cands(p[0]).find(x => pm(x) === p[1]));
         if (it.pairs.length < 3 || ws.some(w => !w) || ws.some((w, i) => ws.some((x, j) => j > i && (ak(w.t) === ak(x.t) || L.sameSense(w.en, x.en))))) miss(l, k, s, 'match pairs aren’t all different');
-      } else miss(l, k, s, 'unknown kind');
+      } else if (it.type === 'memory') {
+        const ws = it.pairs.map(p => cands(p[0]).find(x => x.kind === 'w' && x.pic === p[1]));
+        if (it.pairs.length < 3 || ws.some(w => !w) || new Set(it.pairs.map(p => p[1])).size !== it.pairs.length || new Set(ws.map(w => ak(w.t))).size !== ws.length) miss(l, k, s, 'memory pairs aren’t each a word and its own picture');
+      } else if (it.type === 'lpop') {
+        if (it.rounds.length < 3 || new Set(it.rounds.map(x => x.t)).size < 2) miss(l, k, s, 'too few rounds or words');
+        for (const x of it.rounds) { const t = cands(x.t).find(c => pm(c) === x.en); if (!t || x.opts.length !== 4 || new Set(x.opts.map(ak)).size !== 4 || !x.opts.includes(x.t) || x.opts.filter(o => o !== x.t).some(o => !allDiffer(t, cands(o)))) miss(l, k, s, `round «${x.t}»: a bubble could also be right`); }
+      } else if (it.type === 'letters') { if (lang !== 'es' || !mine.has(ak(it.a)) || !it.q.includes(pm(cands(it.a).find(x => x.kind === 'w') || {}))) miss(l, k, s, 'Guess the word is for Spanish words from this lesson, with their meaning'); }
+      else miss(l, k, s, 'unknown kind');
     }
   }
   ok(!bad.length, `${lang}: every built question has exactly one right answer (${Object.values(kinds).reduce((a, b) => a + b, 0)} questions checked)`, bad.slice(0, 6));

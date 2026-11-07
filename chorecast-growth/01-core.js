@@ -130,10 +130,12 @@ function parsePack(text, tree, band) {
       const [n, title] = line.slice(6).split('|').map(x => x.trim()), u = pack.units.find(x => x.n === +n) || unit;
       story = { id: `${tree}.${band}.${u.n}.story`, tree, band, unit: u.n, title: title || 'Story', lines: [], checks: [] }; u.story = story; les = null; continue;
     }
+    // A fact bank, appended after the units by the build from content/facts/<tree>.txt: "@facts 3.2", then fact: lines
+    if (line.startsWith('@facts')) { const [un, ln] = line.slice(6).trim().split('.').map(Number), u = pack.units.find(x => x.n === un); les = (u && u.lessons.find(x => x.n === ln)) || null; story = null; continue; }
     if (line.startsWith('@lesson')) {
       const [num, title, icon, scene] = line.slice(7).split('|').map(x => x.trim()), [un, ln] = num.split('.').map(Number);
       unit = pack.units.find(u => u.n === un) || unit; story = null;
-      les = { id: `${tree}.${band}.${un}.${ln}`, tree, band, unit: un, n: ln, title, icon: icon || sub.icon, scene: scene || sub.scene, learn: [], tries: [], checks: [], hook: '', home: '', skill: '' };
+      les = { id: `${tree}.${band}.${un}.${ln}`, tree, band, unit: un, n: ln, title, icon: icon || sub.icon, scene: scene || sub.scene, learn: [], tries: [], checks: [], facts: [], hook: '', home: '', skill: '' };
       if (pack.lang) Object.assign(les, { lang: pack.lang, stage, words: [], says: [], rules: [], chant: [], by: {} });
       unit.lessons.push(les); continue;
     }
@@ -159,6 +161,7 @@ function parsePack(text, tree, band) {
     else if (key === 'home') les.home = val;
     else if (key === 'skill') les.skill = val;
     else if (key === 'mins') les.mins = +val;
+    else if (key === 'fact') { const f = factOf(val); if (f) les.facts.push(f); }
   }
   for (const u of pack.units) u.lessons.sort((a, b) => a.n - b.n);
   return pack;

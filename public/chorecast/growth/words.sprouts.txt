@@ -159,3 +159,113 @@ check: tf | "butterfly" is a compound word. | true
 home: Find three compound words around your house, like doorbell or teapot.
 skill: compound-words
 
+
+# Fact banks (content/facts/words.txt)
+@facts 1.1
+fact: A sentence starts with a [capital letter]. | full stop; question mark
+fact: A sentence that tells something ends with a [full stop]. | capital letter; comma
+fact: Names of people start with a [capital] letter. | small; silent
+fact: Names of [places] start with a capital letter. | colours; feelings
+fact: Monday starts with a capital letter because it's the name of a [day]. | colour; feeling
+fact: "Ari" starts with a capital letter because it's a [name]. | verb; question
+fact: A sentence makes [sense] on its own. | noise; music
+fact: "The hen laid an egg." is a [sentence]. | question; word
+@facts 1.2
+fact: A question ends with a [question mark]. | full stop; comma
+fact: A question [asks] something. | shouts; sings
+fact: Questions often start with who, what, where, when, why or [how]. | and; but
+fact: "Where is my hat?" is a [question]. | full stop; name
+fact: An exclamation mark shows a strong [feeling]. | number; question
+fact: "Watch out!" ends with an [exclamation mark]. | question mark; comma
+fact: "Who" asks about a [person]. | time; place
+fact: "When" asks about a [time]. | person; place
+@facts 1.3
+fact: Joining words [link] ideas. | hide; delete
+fact: "And" [adds] more. | gives a reason; shows a change
+fact: "But" shows a [change]. | reason; number
+fact: "Because" gives a [reason]. | change; colour
+fact: "I was hungry, so I ate an apple" uses the joining word [so]. | but; or
+fact: I wanted to play, [but] it rained. | so; because
+fact: I ate an apple [because] I was hungry. | but; or
+fact: I fed the hens [and] collected the eggs. | but; because
+@facts 1.4
+fact: A [noun] names a person, place or thing. | verb; full stop
+fact: A [verb] is a doing word. | noun; capital letter
+fact: "Cat" is a [noun]. | verb; joining word
+fact: "Jump" is a [verb]. | noun; name
+fact: "School" is a [noun]. | verb; question
+fact: "Sing" is a [verb]. | noun; place
+fact: In "The cat jumps", the action is [jumps]. | The; cat
+fact: Most sentences need a noun and a [verb]. | comma; question mark
+@facts 2.1
+fact: Good readers ask [questions] while they read. | no questions; jokes
+fact: "Who" questions find out who a story is [about]. | written in; printed on
+fact: "Where" questions ask about a [place]. | time; person
+fact: In the story, Mia ran to the [hen house]. | beach; library
+fact: Mia found three [brown] eggs. | blue; green
+fact: Mia found the eggs in the [straw]. | sand; snow
+fact: Mia went to the hen house after [school]. | dinner; midnight
+fact: Answers to who, what and where questions are often right there in the [words]. | pictures only; weather
+@facts 2.2
+fact: Stories happen in [order]. | a muddle; no order
+fact: Words like first, then and [finally] help us follow the order. | because; but
+fact: In the story, Leo first [planted] a seed. | ate; sold
+fact: Leo [watered] the seed every day. | painted; sold
+fact: After the watering, a green [shoot] poked up. | snake; worm
+fact: At the end, there was a tall [sunflower]. | tree house; rocket
+fact: "Finally" tells you something comes [last]. | first; never
+fact: Putting events in order helps you [retell] a story. | forget; lose
+@facts 2.3
+fact: Good readers [guess] what might happen next. | stop; forget
+fact: Good guesses use [clues]. | lollies; music
+fact: Dark clouds are a clue that it might [rain]. | snow lollies; be sunny
+fact: Sam's kite climbed [higher] and higher. | lower; slower
+fact: Then the wind [dropped]. | doubled; laughed
+fact: When the wind dropped, the kite probably came [down]. | up; inside
+fact: People grabbing umbrellas is a clue about the [weather]. | dinner; homework
+fact: A clue is a [hint] that helps you work something out. | lie; noise
+@facts 2.4
+fact: The [main idea] is what the writing is mostly about. | first word; title only
+fact: The other bits that tell us how are [details]. | main ideas; titles
+fact: Bees fly from [flower] to flower. | cloud; car
+fact: Bees drink [nectar]. | milk; juice
+fact: Bees carry [pollen]. | stones; leaves
+fact: Bees take nectar back to the [hive]. | sea; school
+fact: Bees use nectar to make [honey]. | butter; bread
+fact: You can tell the main idea in [one] sentence. | ten; a hundred
+@facts 3.1
+fact: The vowels are a, e, i, o and [u]. | b; t
+fact: In "hop", the vowel makes a [short] sound. | long; silent
+fact: Adding [e] turns "hop" into "hope". | s; t
+fact: In "hope", the e is [silent]. | loud; long
+fact: Magic e makes the vowel say its [name]. | number; colour
+fact: "Cap" with a magic e becomes [cape]. | caps; cop
+fact: "Kit" with a magic e becomes [kite]. | kits; cat
+fact: In "kite", the i says its [name]. | number; colour
+@facts 3.2
+fact: Short words with a short vowel usually end in [ck]. | k; c
+fact: "Duck" ends in [ck]. | k; kk
+fact: "Sock" is spelled with [ck] at the end. | k; c
+fact: After a long vowel sound, we write [k]. | ck; c
+fact: "Cake" ends with the letters [ke]. | cke; ck
+fact: After another consonant, we write [k]: milk, park. | ck; c
+fact: "Milk" ends in [k]. | ck; c
+fact: Saying a word slowly helps you hear the [vowel]. | colour; page
+@facts 3.3
+fact: Most words add [s] for more than one. | es; x
+fact: One cat, two [cats]. | cates; caties
+fact: One fox, two [foxes]. | foxs; foxies
+fact: Words ending in s, x, ch or sh add [es]. | x; z
+fact: One bus, two [buses]. | buss; busies
+fact: One dish, two [dishes]. | dishs; dishies
+fact: One child, two [children]. | childs; childes
+fact: One mouse, two [mice]. | mouses; mousies
+@facts 3.4
+fact: A [compound] word is two words joined together. | silent; short
+fact: "Sunflower" is made of sun and [flower]. | flour; floor
+fact: "Rainbow" is made of rain and [bow]. | boat; bird
+fact: "Football" is made of foot and [ball]. | bell; bull
+fact: "Toothbrush" is made of tooth and [brush]. | brash; bush
+fact: "Cupcake" is made of cup and [cake]. | cap; cook
+fact: Knowing the two parts helps you [spell] a compound word. | forget; draw
+fact: "Rainbow" is a [compound] word. | short; question

@@ -159,3 +159,115 @@ check: mcq | Why do puddles disappear on a sunny day? | The water evaporates* | 
 home: Draw a chalk line around a puddle with a grown-up, and check it again later in the day.
 skill: water-cycle
 
+
+# Fact banks (content/facts/science.txt)
+@facts 1.1
+fact: Living things [grow]. | stay exactly the same; never change
+fact: Living things need food and [water]. | plastic; sand
+fact: A [snail] is a living thing. | rock; plastic bottle
+fact: A rock is [not] alive. | very; always
+fact: Plants and [animals] are living things. | rocks; clouds
+fact: Living things make more of their own [kind]. | toys; rocks
+fact: A dry leaf was once [alive]. | made of plastic; made of metal
+fact: A wooden table was once part of a living [tree]. | rock; cloud
+@facts 1.2
+fact: Plants need light, water and [air] to grow. | lollies; plastic; darkness
+fact: [Roots] take in water from the soil. | Flowers; Petals
+fact: Leaves use [sunlight] to make the plant's food. | moonlight; plastic; noise
+fact: A plant left in the dark goes pale and [droopy]. | bigger; greener
+fact: Without light, a plant can't make enough [food]. | noise; plastic
+fact: Plants take in water through their [roots]. | flowers; petals
+fact: Plants make their own [food]. | toys; plastic
+fact: A plant in a sunny spot usually grows [better] than one in a dark cupboard. | worse; backwards
+@facts 1.3
+fact: Scientists sort animals into [groups] by what they're like. | colours; birthdays
+fact: Mammals have hair or [fur]. | feathers; scales
+fact: Mammals feed their babies [milk]. | seeds; sand
+fact: Birds have [feathers]. | fur; fins
+fact: Birds lay [eggs]. | seeds; leaves
+fact: Reptiles have dry, [scaly] skin. | furry; feathery
+fact: Fish have fins and [gills]. | feathers; fur
+fact: A kiwi is a [bird]. | reptile; fish
+fact: A gecko is a [reptile]. | bird; mammal
+fact: A dog is a [mammal]. | bird; reptile
+@facts 1.4
+fact: A life cycle is how a living thing starts life, grows and makes new [young]. | rocks; toys
+fact: A butterfly starts life as an [egg]. | adult butterfly; seed
+fact: A caterpillar turns into a [chrysalis]. | tadpole; egg
+fact: A butterfly comes out of a [chrysalis]. | tadpole; seed
+fact: A frog starts life as an [egg]. | caterpillar; chrysalis
+fact: A tadpole grows into a [froglet]. | caterpillar; butterfly
+fact: A froglet grows into a [frog]. | butterfly; caterpillar
+fact: Tadpoles live in [water]. | trees; the sky
+@facts 2.1
+fact: [Materials] are what things are made of. | Colours; Feelings
+fact: Glass is [see-through]. | fluffy; bendy
+fact: We use [glass] for windows so we can see out. | wood; metal
+fact: Wool is [soft]. | see-through; hard as rock
+fact: A raincoat needs to be [waterproof]. | see-through; made of paper
+fact: We choose materials for their [properties]. | names; colours only
+fact: Metal is usually [hard]. | soft as wool; see-through
+fact: Wood, metal and plastic are all [materials]. | feelings; weather
+@facts 2.2
+fact: Some things float on water and some [sink]. | fly; melt
+fact: A small stone usually [sinks]. | floats; flies
+fact: A huge ship can [float]. | never float; only sink
+fact: Whether something floats depends on its weight for its size and its [shape]. | colour; smell
+fact: [Shape] matters for floating. | Colour; Smell
+fact: A ball of foil [sinks]. | floats; flies
+fact: A foil boat can [float]. | never float; only sink
+fact: Things packed tight for their size usually [sink]. | float; fly
+@facts 2.3
+fact: A [solid] keeps its shape. | liquid; gas
+fact: An ice cube is a [solid]. | liquid; gas
+fact: A [liquid] flows and takes the shape of its container. | solid; rock
+fact: Milk is a [liquid]. | solid; gas
+fact: Ice is water as a [solid]. | gas; liquid
+fact: Water vapour is water as a [gas]. | solid; liquid
+fact: We [can't] see water vapour. | can always; easily
+fact: A pencil is a [solid]. | liquid; gas
+@facts 2.4
+fact: Heating can [melt] a solid into a liquid. | freeze; shrink
+fact: Ice [melts] into water when it gets warm. | freezes; turns to rock
+fact: Butter [melts] in a warm pan. | freezes; hardens
+fact: Cooling can [freeze] a liquid into a solid. | melt; boil
+fact: Water [freezes] into ice in the freezer. | melts; boils
+fact: Melting and freezing can go back and [forth]. | never happen; only once
+fact: An ice block drips on a hot day because it's [melting]. | freezing; growing
+fact: You can freeze melted ice [again]. | never; not ever
+@facts 3.1
+fact: The Earth [spins] around like a top. | stays still; floats away
+fact: One full spin of the Earth takes about [24] hours. | 2; 365
+fact: The side of the Earth facing the sun has [day]. | night; winter
+fact: The side of the Earth facing away from the sun has [night]. | day; summer
+fact: Day and night happen because the Earth [spins]. | stops; shrinks
+fact: The sun looks like it moves because the Earth is [spinning]. | still; sleeping
+fact: One spin of the Earth makes one [day]. | year; month
+fact: At night, our side of the Earth faces [away from] the sun. | towards; into
+@facts 3.2
+fact: The Moon [doesn't] make its own light. | does; always can
+fact: The Moon reflects light from the [sun]. | Earth's oceans; stars only
+fact: The Moon travels around the [Earth]. | sun only; nothing
+fact: The Moon takes about a [month] to travel around the Earth. | day; minute
+fact: The shapes of the Moon we see are called [phases]. | phrases; faces
+fact: We see different amounts of the Moon's [sunlit] side. | dark; secret
+fact: Some nights the Moon looks like a [banana]. | square; triangle
+fact: A full Moon looks like a round [plate]. | banana; square
+@facts 3.3
+fact: There are [four] seasons. | two; ten
+fact: The Earth is [tilted]. | flat; square
+fact: When our half of the world leans towards the sun, it's [summer]. | winter; night
+fact: When our half of the world leans away from the sun, it's [winter]. | summer; spring
+fact: {nz:New Zealand~au:Australia} is in the [bottom] half of the world. | top; middle
+fact: Our summer is in December, January and [February]. | June; July
+fact: The season after summer is [autumn]. | spring; winter
+fact: The season after winter is [spring]. | autumn; summer
+@facts 3.4
+fact: The sun warms water in seas, lakes and [puddles]. | rocks; clouds only
+fact: Water turning into vapour is called [evaporation]. | condensation; freezing
+fact: Water vapour is a gas we [can't] see. | can always; easily
+fact: High up, vapour cools and turns into tiny [drops]. | rocks; feathers
+fact: Tiny drops of water make [clouds]. | rainbows; rocks
+fact: Vapour turning back into drops is called [condensation]. | evaporation; melting
+fact: When drops get big and heavy, they fall as [rain]. | sand; feathers
+fact: The water cycle goes round and round [again]. | only once; never

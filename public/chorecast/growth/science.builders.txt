@@ -159,3 +159,113 @@ check: mcq | The sun is a… | star* | planet | moon
 home: On a sunny day, trace your shadow in chalk in the morning and again in the afternoon. What changed?
 skill: sun-stars
 
+
+# Fact banks (content/facts/science.txt)
+@facts 1.1
+fact: A food chain shows who [eats] what. | likes; plays with
+fact: Plants are [producers]. | consumers; carnivores
+fact: Producers make their own food using [sunlight]. | moonlight; meat; rocks
+fact: Animals are [consumers]. | producers; plants
+fact: Consumers get energy by [eating] plants or other animals. | sunbathing; sleeping
+fact: The energy in a food chain starts with the [sun]. | hawk; bird; caterpillar
+fact: In leaf → caterpillar → bird, the [caterpillar] eats the leaf. | bird; hawk
+fact: A food chain usually starts with a [plant]. | hawk; rock
+@facts 1.2
+fact: Food chains join up into a food [web]. | line; circle of one
+fact: Most animals eat more than [one] thing. | zero; no
+fact: If one living thing disappears, others in the web are [affected]. | unchanged; safe for sure
+fact: [Carnivores] eat animals. | Herbivores; Producers
+fact: [Herbivores] eat plants. | Carnivores; Rocks
+fact: [Omnivores] eat both plants and animals. | Herbivores; Producers
+fact: A cow is a [herbivore]. | carnivore; omnivore
+fact: If all the insects disappeared, birds that eat insects would [struggle]. | do better; not notice
+@facts 1.3
+fact: A [habitat] is the place where a living thing lives. | holiday; hobby
+fact: A habitat gives food, water, shelter and [space]. | homework; money
+fact: A [wetland] is a habitat. | car park; plastic bag
+fact: A rocky [shore] is a habitat. | wardrobe; schoolbag
+fact: A fish's habitat is in [water]. | trees; deserts
+fact: The ocean is a [habitat]. | material; season
+fact: When habitats are damaged, animals [struggle] to survive. | find it easier; don't care
+fact: A forest gives birds [shelter]. | homework; money
+@facts 1.4
+fact: [Adaptations] are features that help a living thing survive. | Holidays; Accidents
+fact: A penguin's [flippers] help it swim fast. | feathers on its feet; long beak
+fact: A thick layer of [feathers] keeps a penguin warm. | sand; scales
+fact: A kiwi has nostrils at the [tip] of its beak. | top of its head; tail
+fact: A kiwi sniffs out [worms] in the soil. | fish; seeds in trees
+fact: Penguins catch [fish]. | worms; seeds
+fact: An adaptation helps an animal [survive] where it lives. | disappear; get lost
+fact: A kiwi's long [beak] helps it find food in the soil. | tail; wing
+@facts 2.1
+fact: A [force] is a push or a pull. | colour; material
+fact: Kicking a ball is a [push]. | pull; smell
+fact: Pulling a wagon is a [pull]. | push; sound
+fact: Forces can make things start [moving]. | singing; glowing
+fact: Forces can make things [stop]. | grow; sing
+fact: Forces can make things change [direction]. | colour; smell
+fact: Squashing playdough changes its [shape]. | colour; smell
+fact: Opening a door uses a [force]. | magnet only; colour
+@facts 2.2
+fact: Gravity is a [pulling] force. | pushing; colour
+fact: The Earth pulls everything towards its [centre]. | edge; sky
+fact: A dropped apple falls [down]. | up; sideways
+fact: [Weight] is how hard gravity pulls on something. | Colour; Speed
+fact: Gravity keeps the Moon travelling around the [Earth]. | sun only; Mars
+fact: Gravity pulls things [towards] the Earth. | away from; up off
+fact: Without gravity, a ball you threw would [not] come back down. | always; quickly
+fact: Gravity is the force that makes things [fall]. | float up; glow
+@facts 2.3
+fact: [Friction] slows things down when surfaces rub together. | Gravity; Magnetism
+fact: [Rough] surfaces make more friction. | Smooth; Slippery
+fact: Ice is [slippery], so it makes little friction. | rough; sticky
+fact: It's hard to slide on carpet because carpet makes [more] friction. | less; no
+fact: Friction lets our shoes [grip]. | slip; melt
+fact: Bike brakes use friction to [stop] the wheels. | speed up; paint
+fact: Smooth surfaces make [less] friction. | more; the most
+fact: Friction is a [force]. | material; colour
+@facts 2.4
+fact: Magnets pull on some metals, like [iron] and steel. | wood; plastic
+fact: Magnets don't pull on [wood]. | iron; steel
+fact: A magnet has a north pole and a [south] pole. | east; west
+fact: Opposite poles [attract]. | repel; melt
+fact: The same poles [repel]. | attract; melt
+fact: Repel means push [apart]. | together; up
+fact: Attract means pull [together]. | apart; down
+fact: A magnet sticks to a fridge because the fridge has [steel] in it. | wood; plastic
+@facts 3.1
+fact: The solar system is the [sun] and everything that travels around it. | Moon; Earth
+fact: There are [eight] planets. | three; twenty
+fact: [Mercury] is the planet closest to the sun. | Neptune; Earth
+fact: [Neptune] is the planet furthest from the sun. | Mercury; Venus
+fact: Earth is the [third] planet from the sun. | first; eighth
+fact: [Mars] comes after Earth. | Venus; Neptune
+fact: [Venus] comes between Mercury and Earth. | Jupiter; Saturn
+fact: "My Very Easy Method" helps you remember the order of the [planets]. | seasons; colours
+@facts 3.2
+fact: The four inner planets are small and [rocky]. | gassy giants; made of ice cream
+fact: [Jupiter] is a giant planet. | Mercury; Mars
+fact: The giant planets are made mostly of gas and [ice]. | rock; sand
+fact: You [couldn't] stand on Jupiter. | could easily; could always
+fact: Mars is a [rocky] planet. | gas giant; star
+fact: [Saturn]'s rings are the most famous. | Earth; Mercury
+fact: [All four] giant planets have rings. | None of the; Only one of the
+fact: The four outer planets are Jupiter, Saturn, Uranus and [Neptune]. | Mars; Earth
+@facts 3.3
+fact: An [orbit] is the path one object takes around another. | eclipse; season
+fact: The Earth orbits the [sun] once a year. | Moon; Mars
+fact: One orbit of the sun takes about [365] days. | 24; 30
+fact: The Moon orbits the Earth about once a [month]. | year; day
+fact: The Earth spins once a [day]. | year; month
+fact: Between your birthdays, the Earth goes around the sun [once]. | ten times; not at all
+fact: A year is how long the Earth takes to orbit the [sun]. | Moon; Mars
+fact: The [Moon] orbits the Earth. | sun; Jupiter
+@facts 3.4
+fact: The sun is a [star]. | planet; moon
+fact: A star is a huge ball of very hot [gas]. | ice; rock
+fact: The sun gives off light and [heat]. | snow; darkness
+fact: Other stars look tiny because they're much further [away]. | inside; colder
+fact: The sun looks big because it's [closer] to us than other stars. | further; smaller
+fact: Never look straight at the [sun]. | ground; sky at night
+fact: Looking at the sun can damage your [eyes]. | toes; elbows
+fact: The sun is the [closest] star to the Earth. | furthest; smallest

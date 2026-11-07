@@ -1,30 +1,36 @@
 {
-  "version": "3afb8a6f3d",
-  "built": "2026-11-06T23:33:43.352Z",
+  "version": "d85ecb6a0c",
+  "built": "2026-11-07T05:44:19.762Z",
   "counts": {
     "body.sprouts": {
       "units": 1,
-      "lessons": 4
+      "lessons": 4,
+      "facts": 32
     },
     "body.builders": {
       "units": 1,
-      "lessons": 4
+      "lessons": 4,
+      "facts": 32
     },
     "body.makers": {
       "units": 1,
-      "lessons": 4
+      "lessons": 4,
+      "facts": 32
     },
     "character.sprouts": {
       "units": 5,
-      "lessons": 20
+      "lessons": 20,
+      "facts": 160
     },
     "character.builders": {
       "units": 5,
-      "lessons": 20
+      "lessons": 20,
+      "facts": 160
     },
     "character.makers": {
       "units": 5,
-      "lessons": 20
+      "lessons": 20,
+      "facts": 160
     },
     "es.s1": {
       "lang": "es",
@@ -56,51 +62,63 @@
     },
     "mind.sprouts": {
       "units": 2,
-      "lessons": 8
+      "lessons": 8,
+      "facts": 64
     },
     "mind.builders": {
       "units": 2,
-      "lessons": 8
+      "lessons": 8,
+      "facts": 64
     },
     "mind.makers": {
       "units": 2,
-      "lessons": 8
+      "lessons": 8,
+      "facts": 64
     },
     "money.sprouts": {
       "units": 9,
-      "lessons": 52
+      "lessons": 52,
+      "facts": 416
     },
     "money.builders": {
       "units": 9,
-      "lessons": 52
+      "lessons": 52,
+      "facts": 416
     },
     "money.makers": {
       "units": 9,
-      "lessons": 52
+      "lessons": 52,
+      "facts": 416
     },
     "science.sprouts": {
       "units": 3,
-      "lessons": 12
+      "lessons": 12,
+      "facts": 98
     },
     "science.builders": {
       "units": 3,
-      "lessons": 12
+      "lessons": 12,
+      "facts": 96
     },
     "science.makers": {
       "units": 3,
-      "lessons": 12
+      "lessons": 12,
+      "facts": 96
     },
     "words.sprouts": {
       "units": 3,
-      "lessons": 12
+      "lessons": 12,
+      "facts": 96
     },
     "words.builders": {
       "units": 3,
-      "lessons": 12
+      "lessons": 12,
+      "facts": 96
     },
     "words.makers": {
       "units": 3,
-      "lessons": 12
+      "lessons": 12,
+      "facts": 96
     },
     "zh.s1": {
       "lang": "zh",

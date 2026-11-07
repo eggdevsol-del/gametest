@@ -6,10 +6,13 @@
 //  - splits each language course (a file with an "@lang xx" line) at its "@stage" lines into growth/<xx>.s<n>.txt, and
 //    lists every line in the language, per stage, in growth/<xx>.lines.json: what a fluent speaker records for a
 //    language with no device voice, and what the checker holds the recordings against.
+//  - adds each subject's fact banks (content/facts/<tree>.txt: "@band" sections of "@facts unit.lesson" blocks of fact:
+//    lines) to the end of that band's pack, where the app turns them into long lessons.
 //  - deletes old .txt packs it didn't write this time, so trees moved to content/parked stop shipping.
 // With --preview it also builds the language courses in content/parked, for checking them in the app before they go
 // live. index.json then says "preview", and the checker (npm run build) fails until it's built again without it.
-import { readdir, readFile, writeFile, mkdir, unlink } from 'node:fs/promises';
+import { readdir, readFile, writeFile, mkdir, unlink, appendFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -56,6 +59,19 @@ for (const file of sources) {
   const tree = f.replace(/\.txt$/, ''); let band = null, buf = [];
   const flush = async () => { if (!band) return; const t = buf.join('\n') + '\n'; await writeFile(path.join(out, 'growth', `${tree}.${band}.txt`), t); wrote.add(`${tree}.${band}.txt`); counts[`${tree}.${band}`] = { units: (t.match(/^@unit/gm) || []).length, lessons: (t.match(/^@lesson/gm) || []).length }; };
   for (const line of text.split(/\r?\n/)) { const m = line.match(/^@band\s+(\w+)/); if (m) { await flush(); band = m[1]; buf = [`# ${tree} · ${band}`]; } else buf.push(line); }
+  await flush();
+}
+const factDir = path.join(src, 'content', 'facts');
+for (const f of existsSync(factDir) ? (await readdir(factDir)).filter(f => f.endsWith('.txt')).sort() : []) {
+  const tree = f.replace(/\.txt$/, ''), text = await readFile(path.join(factDir, f), 'utf8'); hash.update(text);
+  let band = null, buf = [];
+  const flush = async () => {
+    if (!band || !buf.length) return; const name = `${tree}.${band}.txt`;
+    if (!wrote.has(name)) throw new Error(`content/facts/${f}: there's no ${name} pack for its @band ${band}`);
+    await appendFile(path.join(out, 'growth', name), '\n# Fact banks (content/facts/' + f + ')\n' + buf.join('\n') + '\n');
+    counts[`${tree}.${band}`].facts = buf.filter(l => /^fact:/.test(l)).length;
+  };
+  for (const line of text.split(/\r?\n/)) { const m = line.match(/^@band\s+(\w+)/); if (m) { await flush(); band = m[1]; buf = []; } else if (band && line.trim() && !line.startsWith('#')) buf.push(line.trim()); }
   await flush();
 }
 for (const f of (await readdir(path.join(out, 'growth'))).filter(f => (f.endsWith('.txt') || f.endsWith('.lines.json')) && !wrote.has(f))) await unlink(path.join(out, 'growth', f));

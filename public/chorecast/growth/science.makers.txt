@@ -159,3 +159,113 @@ check: mcq | Pouring muddy water through a coffee filter is… | filtering* | ev
 home: With a grown-up, mix sand and salt, then separate them. Leave the salty water to dry in the sun.
 skill: separating
 
+
+# Fact banks (content/facts/science.txt)
+@facts 1.1
+fact: All living things are made of [cells]. | atoms only; plastic
+fact: Cells are the smallest units of [life]. | rock; light
+fact: The [nucleus] controls the cell. | cell wall; cytoplasm
+fact: Animal and plant cells both have a cell [membrane]. | wall; chloroplast
+fact: Plant cells have a cell [wall]; animal cells don't. | membrane; nucleus
+fact: Photosynthesis happens in the [chloroplasts]. | nucleus; cell membrane
+fact: [Plant] cells have chloroplasts. | Animal; Human
+fact: The jelly-like inside of a cell is the [cytoplasm]. | nucleus; cell wall
+@facts 1.2
+fact: Similar cells group together into [tissues]. | organs; systems
+fact: Muscle tissue is made of muscle [cells]. | organs; bones only
+fact: Tissues form [organs]. | cells; atoms
+fact: The heart is an [organ]. | cell; tissue only
+fact: The lungs are [organs]. | cells; tissues only
+fact: Organs work together in organ [systems]. | cells; tissues
+fact: The [digestive] system breaks down food. | circulatory; nervous
+fact: The [circulatory] system moves blood around the body. | digestive; skeletal
+@facts 1.3
+fact: Digestion breaks food into pieces small enough to [absorb]. | see; taste
+fact: Digestion starts in the [mouth]. | stomach; large intestine
+fact: Saliva and [teeth] start breaking food down. | lungs; bones
+fact: Food travels down the [oesophagus] to the stomach. | windpipe; small intestine
+fact: The stomach uses [acid] and churning to break food down. | sand; air
+fact: Nutrients pass into the blood in the [small] intestine. | large; whole
+fact: The [large] intestine takes in water. | small; empty
+fact: The stomach comes [after] the oesophagus. | before; instead of
+@facts 1.4
+fact: The heart [pumps] blood around the body. | stores; cleans
+fact: Arteries, veins and capillaries are blood [vessels]. | organs; bones
+fact: Blood carries [oxygen] from the lungs. | carbon dioxide only; food only
+fact: Blood carries nutrients from [digestion] to the cells. | the brain; the bones
+fact: Blood carries [waste] away from cells. | sunlight; oxygen only
+fact: When you exercise, your muscles need more [oxygen]. | sugar only; sleep
+fact: During exercise you breathe [faster]. | slower; less
+fact: During exercise your heart beats [faster]. | slower; less
+@facts 2.1
+fact: [Energy] is what makes things happen. | Colour; Shape
+fact: [Kinetic] energy is movement. | Thermal; Chemical
+fact: [Thermal] energy is heat. | Kinetic; Sound
+fact: Food and batteries store [chemical] energy. | kinetic; sound
+fact: A stretched rubber band has [potential] energy. | sound; light
+fact: A ball held up high has [potential] energy. | sound; light
+fact: A torch gives out [light] energy. | sound only; chemical
+fact: A kicked ball has [kinetic] energy. | thermal only; chemical
+@facts 2.2
+fact: Energy can't be made or [destroyed]. | moved; changed
+fact: Energy changing from one form to another is a [transfer]. | loss; creation
+fact: A torch battery stores [chemical] energy. | kinetic; sound
+fact: In a torch, electrical energy becomes [light]. | chemical; gravity
+fact: Some energy always ends up as heat or [sound] we didn't want. | gold; light only
+fact: Energy we didn't want is called [wasted] energy. | free; new
+fact: A torch also gives out some [heat]. | cold; gravity
+fact: In a transfer, the total amount of energy [stays the same]. | goes up; goes down
+@facts 2.3
+fact: Heat moves from [hotter] things to colder things. | colder; smaller
+fact: Heat moving through solids by touch is [conduction]. | convection; radiation
+fact: Metals are good heat [conductors]. | insulators; magnets
+fact: Wood and plastic are [insulators]. | conductors; magnets
+fact: A metal spoon in hot soup gets hot by [conduction]. | radiation; magnetism
+fact: In [convection], warm liquids and gases rise. | conduction; radiation
+fact: Heat travelling as rays is [radiation]. | conduction; convection
+fact: The sun's warmth reaches us by [radiation]. | conduction; convection
+@facts 2.4
+fact: Electricity from flowing water is called [hydro]. | solar; geothermal
+fact: [Solar] power comes from the sun. | Hydro; Geothermal
+fact: [Geothermal] energy is heat from under the ground. | Solar; Wind
+fact: Wind is a [renewable] source. | non-renewable; fossil
+fact: Coal is [non-renewable]. | renewable; endless
+fact: Renewable sources don't [run out]. | work; exist
+fact: Coal, oil and natural gas took [millions of years] to form. | a few days; a few weeks
+fact: Non-renewable sources will one day [run out]. | last forever; grow back
+@facts 3.1
+fact: All matter is made of [particles]. | colours; cells only
+fact: Particles are far too small to [see]. | exist; move
+fact: In a solid, particles are packed [tightly]. | far apart; loosely
+fact: In a solid, particles [vibrate] in place. | fly about; stop completely
+fact: In a liquid, particles [slide] past each other. | stay locked; fly far apart
+fact: In a gas, particles are far [apart]. | together; packed
+fact: Gas particles spreading out is called [diffusion]. | condensation; freezing
+fact: You can smell baking from another room because of [diffusion]. | friction; gravity
+@facts 3.2
+fact: Solid to liquid is [melting]. | freezing; condensation
+fact: Liquid to solid is [freezing]. | melting; evaporation
+fact: Liquid to gas is [evaporation]. | condensation; melting
+fact: Gas to liquid is [condensation]. | evaporation; freezing
+fact: At sea level, pure water boils at [100] °C. | 0; 50
+fact: Pure water freezes at [0] °C. | 100; 50
+fact: A puddle dries up by [evaporation]. | condensation; freezing
+fact: Boiling is a fast kind of [evaporation]. | freezing; condensation
+@facts 3.3
+fact: A [physical] change doesn't make a new substance. | chemical; burning
+fact: Melting is a [physical] change. | chemical; impossible
+fact: Dissolving is a [physical] change. | chemical; burning
+fact: A [chemical] change makes a new substance. | physical; melting
+fact: Baking a cake is a [chemical] change. | physical; melting
+fact: Rusting is a [chemical] change. | physical; freezing
+fact: Gas bubbles can be a sign of a [chemical] change. | physical; no
+fact: You can refreeze melted ice, but you can't [unbake] a cake. | bake; cut
+@facts 3.4
+fact: A [mixture] is substances mixed but not chemically joined. | compound; element
+fact: Salt water is a [mixture]. | single substance; element
+fact: [Sieving] separates big bits from small bits. | Evaporation; Magnetism
+fact: [Filtering] separates solids from liquids. | Melting; Freezing
+fact: [Evaporation] leaves a dissolved solid behind. | Filtering; Sieving
+fact: A magnet can separate [iron] from other things. | salt; sand
+fact: To separate salt and sand, first add [water]. | oil; sugar
+fact: Filtering salty water [leaves] the sand behind in the filter. | dissolves; melts

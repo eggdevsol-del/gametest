@@ -620,3 +620,473 @@ check: mcq | In Chorecast, who pays out the Give jar? | A grown-up* | The kid, o
 home: Set a giving goal with a grown-up, and a date to give it.
 skill: giving-plan
 
+
+# Fact banks (content/facts/money.txt)
+@facts 1.1
+fact: A budget is a plan for your money [before] you spend it. | after; instead of
+fact: A budget splits money into needs, wants and [savings]. | debts; fines
+fact: A plan beats [hoping] there's some left at the end of the week. | saving; earning
+fact: A budget helps you [decide] where money goes. | forget; hide
+fact: Needs, wants and savings are the three parts of a simple [budget]. | receipt; price tag
+fact: A budget tells your money where to [go]. | hide; vanish
+fact: Making a budget happens [before] payday spending. | after; never
+fact: Budgets help you avoid running [out] of money. | over; into
+@facts 1.2
+fact: Paying yourself first means [saving] the moment money arrives. | spending; giving away
+fact: After saving, you spend what's [left]. | borrowed; saved
+fact: Don't [touch] the savings once they're put aside. | count; grow
+fact: Your Chorecast budget split saves for you every [payday]. | birthday; holiday
+fact: Saving first means you don't [forget] to save. | remember; plan
+fact: Saving last often means saving [nothing]. | more; everything
+fact: Paying yourself first puts [savings] before spending. | snacks; wants
+fact: Saving at the start of the week is [easier] than at the end. | harder; impossible
+@facts 1.3
+fact: First, list what money comes [in]. | out; away
+fact: Then list where money must [go]. | hide; stop
+fact: Pay [needs] first. | wants; treats
+fact: After needs, put money into [savings]. | wants; treats
+fact: [Wants] come after needs and savings. | Bills; Needs
+fact: Leave some money [spare]. | owing; borrowed
+fact: Spare money helps when [surprises] happen. | birthdays never; nothing
+fact: A weekly budget plans a [week] of money. | year; minute
+@facts 1.4
+fact: Tracking means writing down what you [spend]. | dream; eat
+fact: Little spends add up [fast]. | slowly; never
+fact: Three $4 drinks a week is [$12]. | $4; $7
+fact: When you can see your spending, you can [change] it. | hide; forget
+fact: A spending diary is a way to [track] spending. | hide; increase
+fact: Small treats every day can cost a [lot] over a month. | little; nothing
+fact: Two $3 snacks a day for 5 days is [$30]. | $6; $15
+fact: Tracking shows where your money really [goes]. | grows; sleeps
+@facts 1.5
+fact: The 50-30-20 rule puts [50]% towards needs. | 20; 30
+fact: The 50-30-20 rule puts [30]% towards wants. | 50; 20
+fact: The 50-30-20 rule puts [20]% towards savings. | 50; 30
+fact: Half your money is [50]%. | 20; 30
+fact: A fifth of your money is [20]%. | 50; 30
+fact: If you get $10, 20% for savings is [$2]. | $5; $3
+fact: The 50-30-20 rule is a starting point, not a [law]. | plan; guide
+fact: You can [change] the split to fit your goals. | never change; hide
+@facts 1.6
+fact: [Everyone] gets money wrong sometimes. | Nobody; Only babies
+fact: The fix is to learn, not to [panic]. | plan; think
+fact: When money runs out, [pause] spending. | double; speed up
+fact: Look at what [happened]. | you'll eat; you'll buy next
+fact: Plan [better] next time. | worse; never again
+fact: Running out of money is a chance to [learn]. | give up; panic
+fact: Borrowing from your savings to keep spending makes it [worse]. | better; disappear
+fact: A mistake with money is [fixable]. | the end; forever
+@facts 2.1
+fact: Good goals are [specific]. | vague; secret
+fact: A specific goal says what it is, how much it costs and [when] you want it. | why not; who cares
+fact: Goals should be possible with your [income]. | dreams; wishes
+fact: A goal should be possible, not a wild [dream]. | plan; step
+fact: Writing a goal down makes you more likely to [stick with it]. | forget it; quit
+fact: "A $60 skateboard by March" is a [specific] goal. | vague; impossible
+fact: "Lots of money one day" is a [vague] goal. | specific; measurable
+fact: A deadline tells you [when] you want the goal. | why; who
+@facts 2.2
+fact: Divide the goal by the number of [weeks] you have. | friends; shops
+fact: $120 in 12 weeks is [$10] a week. | $12; $120
+fact: $60 in 6 weeks is [$10] a week. | $6; $60
+fact: $50 in 10 weeks is [$5] a week. | $10; $50
+fact: If the weekly amount is too high, give yourself more [time]. | snacks; excuses
+fact: You could also find extra [income]. | excuses; snacks
+fact: Breaking a goal into weekly amounts makes it feel [possible]. | impossible; scary
+fact: A big goal is easier as small weekly [steps]. | jumps; guesses
+@facts 2.3
+fact: Falling behind on a goal is [normal]. | a disaster; impossible
+fact: What matters is what you do [next]. | last year; yesterday
+fact: You can save a bit [more] each week. | less; nothing
+fact: You can earn [extra]. | less; nothing
+fact: You can move the [deadline]. | goal to zero; savings to the bin
+fact: Don't give up on the whole goal because of one bad [week]. | goal; plan
+fact: One bad week doesn't [ruin] a goal. | help; finish
+fact: Getting back on track is better than [quitting]. | saving; planning
+@facts 2.4
+fact: Put your goal savings aside [first]. | last; never
+fact: Save as soon as you get your [money]. | homework; dinner
+fact: Then plan the [rest]: snacks, fun and a little spare. | savings; goal money
+fact: A spare amount stops surprises from eating your [goal] money. | snack; spare
+fact: Planning the week [before] it starts helps. | after; never
+fact: Fun money is part of a good [plan]. | mistake; mess
+fact: Goal money should stay [aside]. | spent; lost
+fact: A little spare is for [surprises]. | your goal; savings
+@facts 2.5
+fact: Track your savings each [week]. | decade; century
+fact: A chart or a jar with [lines] works well for tracking. | holes; stickers on the floor
+fact: Compare where you are with where you [planned] to be. | dreamed; forgot
+fact: Seeing progress keeps you [motivated]. | bored; worried
+fact: Tracking shows if you're [on track]. | asleep; on holiday
+fact: A savings chart goes [up] as you save. | down; sideways
+fact: If you're behind, tracking helps you [notice] early. | forget; ignore
+fact: Ticking off each week feels [good]. | bad; scary
+@facts 2.6
+fact: Short-term goals take [weeks]. | years; decades
+fact: A $15 book is a [short-term] goal. | long-term; lifetime
+fact: Medium-term goals take [months]. | minutes; decades
+fact: A $200 bike is a [medium-term] goal. | short-term; lifetime
+fact: Long-term goals take [years]. | days; minutes
+fact: A car is a [long-term] goal. | short-term; one-day
+fact: Long-term goals need [steady] saving. | random; no
+fact: Long-term goals might use [investing]. | lollies; borrowing for treats
+@facts 3.1
+fact: A unit price is what something costs per 100 g, per litre or per [item]. | shop; week
+fact: Unit prices let you compare packs of different [sizes] fairly. | colours; shapes
+fact: Many supermarkets show the unit price in small [print]. | voices; songs
+fact: The unit price is on the shelf [label]. | ceiling; trolley
+fact: A lower unit price means better [value]. | taste; colour
+fact: If 1 kg costs $4, the price per kg is [$4]. | $1; $40
+fact: If 2 kg costs $6, the price per kg is [$3]. | $6; $12
+fact: Bigger packs [aren't always] cheaper per kg. | are always; are never
+@facts 3.2
+fact: To check a multi-buy, work out the price of [one]. | ten; none
+fact: $10 for 3 is about [$3.33] each. | $10; $30
+fact: $6 for 2 is [$3] each. | $6; $12
+fact: Compare the multi-buy price of one with the [normal] price. | biggest; sale price
+fact: If you won't use all three, it [isn't] a deal for you. | is always; is the best
+fact: A special is only good if you [need] it. | don't want; never use
+fact: Buying extra you'll waste costs [more]. | less; nothing
+fact: Multi-buys can be good value if you [use] everything. | waste; throw out
+@facts 3.3
+fact: Home brands are the shop's own [products]. | ads; workers
+fact: Home brands are often [cheaper]. | dearer; secret
+fact: Sometimes home brands taste just the [same]. | worse always; better always
+fact: To find out, [try] the home brand. | ban; never buy
+fact: Famous brands spend a lot on [ads]. | home brands; nothing
+fact: The cost of ads is part of a famous brand's [price]. | taste; colour
+fact: A famous name doesn't always mean better [quality]. | packaging; ads
+fact: Trying a cheaper brand can [save] money. | waste; lose
+@facts 3.4
+fact: Cost per use is the price divided by how many times you [use] it. | buy; see
+fact: A $40 pair of shoes worn 80 times costs [50c] per use. | $40; $2
+fact: A $20 toy used 10 times costs [$2] per use. | $20; $10
+fact: Something dearer can be cheaper in the long run if it [lasts] much longer. | breaks; shrinks
+fact: Cost per use only works if you really [use] it. | buy; see
+fact: A cheap thing that breaks quickly can cost [more] per use. | less; nothing
+fact: A jacket worn every day has a [low] cost per use. | high; huge
+fact: Cost per use helps you compare [value]. | colours; sizes only
+@facts 3.5
+fact: Different shops charge different prices for the [same] thing. | different; broken
+fact: Checking two or three shops can save real [money]. | time travel; nothing
+fact: Shopping around matters most on [big] buys. | tiny; free
+fact: Count the [extras], like delivery. | colours; sizes
+fact: A bus fare to get to a shop is part of the [cost]. | saving; profit
+fact: A cheaper price far away can cost [more] with travel. | less; nothing
+fact: Delivery fees can make a cheap price [dearer]. | cheaper; free
+fact: Comparing total costs gives the real [price]. | colour; size
+@facts 3.6
+fact: When packs get smaller but the price stays the same, it's called [shrinkflation]. | inflation; a sale
+fact: [Checking the unit price] catches shrinkflation. | Reading the ad; Looking at the colour
+fact: A smaller pack for the same price is [worse] value. | better; the same
+fact: A "sale" sign doesn't always mean a good [price]. | colour; shop
+fact: Compare a sale price with the [normal] price. | biggest; random
+fact: Value detectives check the [unit price]. | ad; colour
+fact: A pack that shrinks from 200 g to 180 g gives you [less]. | more; the same
+fact: Being a value detective means checking, not [trusting] every sign. | reading; seeing
+@facts 4.1
+fact: An ad is a message someone [paid] for. | forgot; dreamed
+fact: Ads try to get you to buy, use or [think] something. | sleep; forget
+fact: Ads are in apps and [games]. | dreams only; nowhere
+fact: Ads can be on [buses]. | clouds; the moon
+fact: Ads can be on [clothes]. | rainbows; the sun
+fact: Ads can be in [videos]. | sleep; silence
+fact: Spotting an ad is the first step to [deciding] for yourself. | buying; forgetting
+fact: Ads are [everywhere]. | nowhere; only on TV
+@facts 4.2
+fact: Ads use tricks to make you want things [fast]. | slowly; never
+fact: "Only today" makes you [rush]. | relax; wait
+fact: "Only 2 left" makes you [rush]. | wait; relax
+fact: "Everyone has one" makes you feel [left out]. | calm; bored
+fact: Famous faces make products seem [better] than they are. | worse; cheaper
+fact: Catchy [songs] help ads stick in your head. | silences; pauses
+fact: Free gifts make a product seem [better]. | worse; boring
+fact: Rushing makes it [harder] to think clearly. | easier; quicker
+@facts 4.3
+fact: Many free games make money from in-game [purchases]. | homework; exercise
+fact: Skins and coins are things you can [buy] in games. | eat; plant
+fact: Gems instead of dollars make spending feel [small]. | huge; scary
+fact: "Limited" items push you to [buy] quickly. | wait; save
+fact: Work out the real [money] cost before you buy. | colour; size
+fact: Agree on a spending [limit] with your grown-up. | secret; password
+fact: Timers in games push you to spend [now]. | later; never
+fact: Loot boxes are a kind of in-game [purchase]. | homework; exercise
+@facts 4.4
+fact: Name it: "This is an [ad]." | gift; friend
+fact: Ads want you to [buy]. | save; sleep
+fact: Ask: Do I [need] it? | eat; draw
+fact: Thinking about the [real cost] is part of your ad shield. | colour; music
+fact: Check whether other [reviews] agree. | ads; songs
+fact: Wait a [day] before buying. | second; year
+fact: If you still want it after waiting, add it to your [plan]. | bin; secret
+fact: An ad shield helps you decide for [yourself]. | the ad; the shop
+@facts 4.5
+fact: Influencers are often [paid] to talk about products. | punished; ignored
+fact: Influencers are sometimes given free [stuff]. | homework; chores
+fact: Look for the label "[sponsored]". | homemade; honest
+fact: "Paid partnership" means the post is [advertising]. | homework; a secret
+fact: "Gifted" means the influencer got the product for [free]. | a lot; a bargain
+fact: Advertising rules say paid posts should be clearly [labelled]. | hidden; secret
+fact: A post with no label [could still] be an ad. | can never; is never
+fact: A sponsored post is a kind of [ad]. | diary; news report
+@facts 4.6
+fact: Some free things make money from your [attention]. | lunch; homework
+fact: Some free things make money from your [information]. | shoes; dreams
+fact: What you watch and click is your [data]. | homework; lunch
+fact: Your data helps companies show you more [ads]. | homework; vegetables
+fact: Check what a free thing [wants] before you say yes. | eats; sings
+fact: Ask a [grown-up] before you sign up for something free. | goldfish; robot
+fact: Free apps often make money from [ads]. | air; magic
+fact: "Free" doesn't always mean it costs [nothing]. | something; money
+@facts 5.1
+fact: Interest is money a bank pays you for keeping your money with [them]. | nobody; your friend
+fact: Banks [lend] your savings to other people. | burn; hide
+fact: Banks charge borrowers [interest]. | nothing; free gifts
+fact: Banks share some of the interest with [savers]. | borrowers only; nobody
+fact: Interest rates are shown as a [percent] per year. | colour; weight
+fact: 4% a year is an interest [rate]. | price; tax
+fact: Savers [earn] interest. | pay; lose
+fact: Interest is a reward for [saving]. | spending; borrowing
+@facts 5.2
+fact: To find a percent, divide by [100], then multiply. | 10; 1,000
+fact: 5% of $200 is [$10]. | $5; $100
+fact: 10% of $50 is [$5]. | $10; $50
+fact: 2% of $100 is [$2]. | $20; $200
+fact: 5% of $200 for half a year is about [$5]. | $10; $20
+fact: Interest rates are for [one year]. | one day; one hour
+fact: 4% of $300 is [$12]. | $4; $75
+fact: Half a year of interest is about [half] as much as a year. | double; ten times
+@facts 5.3
+fact: With compound interest, the interest you earned gets added to your [savings]. | bin; spending
+fact: Next year, you earn interest on the [bigger] amount. | smaller; same old
+fact: $100 at 10% becomes [$110] after one year. | $100; $200
+fact: $110 at 10% becomes [$121]. | $120; $111
+fact: $121 at 10% becomes [$133.10]. | $131; $122
+fact: Compound interest [snowballs]. | shrinks; melts
+fact: Interest on interest is called [compound] interest. | simple; borrowed
+fact: The longer you save, the [faster] compound interest grows. | slower; less
+@facts 5.4
+fact: Interest rates can be [different] between banks. | always the same; secret
+fact: Some accounts pay [bonus] interest if you follow rules. | no; negative
+fact: A bonus rule might be adding money each [month]. | century; second
+fact: A bonus rule might be not [withdrawing] money. | saving; adding
+fact: Banks [change] their rates over time. | never change; lock forever
+fact: Check your interest rate [now and then]. | never; once in your life
+fact: A higher interest rate means [more] interest for savers. | less; no
+fact: Comparing accounts can help your savings [grow] faster. | shrink; vanish
+@facts 5.5
+fact: People who borrow money [pay] interest. | earn; avoid
+fact: Borrowers usually pay a [higher] rate than savers get. | lower; zero
+fact: The gap between the rates is how banks make [money]. | friends; noise
+fact: Saving [earns] interest. | costs; loses
+fact: Borrowing [costs] interest. | earns; saves
+fact: A loan has to be paid [back]. | away; never
+fact: Paying interest makes things you borrow for cost [more]. | less; nothing
+fact: Banks lend savers' money to [borrowers]. | savers; nobody
+@facts 5.6
+fact: Interest counts as [income]. | a gift; a loan
+fact: Tax can be taken from your [interest]. | birthday; lunch
+fact: Giving your bank your tax number means you pay the right [tax]. | rent; fine
+fact: Tax on interest goes to the [government]. | bank manager; savers
+fact: Without your tax number, the bank can take [more] tax. | less; no
+fact: Interest is money you [earn]. | owe; borrow
+fact: Income can have [tax] taken from it. | interest added; nothing
+fact: Your tax number belongs to [you]. | your friend; your bank
+@facts 6.1
+fact: With cash, you can see exactly how much you have [left]. | borrowed; invested
+fact: When cash is gone, it's [gone]. | back; doubled
+fact: Paying $20 for something that costs $16.50 should get you [$3.50] change. | $4.50; $6.50
+fact: Always [count] your change. | throw away; ignore
+fact: Cash can be [lost] or stolen. | grown; printed by you
+fact: Many online shops won't take [cash]. | cards; orders
+fact: Paying $10 for something that costs $7 gets you [$3] change. | $7; $17
+fact: Cash helps you stick to a set [amount]. | colour; shop
+@facts 6.2
+fact: A debit card spends money that's [already] in your bank account. | never; borrowed
+fact: Debit card money is your [own] money. | borrowed; the bank's
+fact: You can [tap] a debit card at the shop. | eat; post
+fact: Keep your PIN [secret]. | on the card; on a sticker
+fact: Cover the [keypad] when you put in your PIN. | screen of your phone; coins
+fact: Taps happen so [fast] you can lose track. | slowly; rarely
+fact: Check your bank [app] to see your spending. | games; music
+fact: A PIN is a secret [number]. | picture; song
+@facts 6.3
+fact: Phone pay uses a [card] stored on the phone. | game; photo
+fact: Phone pay money comes from the card's [account]. | game; phone battery
+fact: A phone [lock] stops other people paying with it. | case; ringtone
+fact: A face scan can [lock] your phone. | charge; clean
+fact: Because phone pay is easy, it's easy to [overspend]. | save; forget your phone
+fact: Check what you've spent each [week]. | decade; century
+fact: Watch pay works like [phone] pay. | cash; cheque
+fact: Paying by phone still spends [real] money. | pretend; free
+@facts 6.4
+fact: A credit card is a [loan]. | gift; prize
+fact: With a credit card, the bank pays the shop and you pay the bank back [later]. | never; yesterday
+fact: If you pay it all back on time, there's usually no [interest]. | card; shop
+fact: If you don't pay on time, [interest] gets added. | free money; a bonus
+fact: Credit card interest is often about [20]% a year. | 1; 100
+fact: You need to be [18] to get your own credit card. | 8; 12
+fact: Spending on credit means spending money you [don't have] yet. | already have; saved
+fact: Paying a credit card late costs [more]. | less; nothing
+@facts 6.5
+fact: Buy now, pay later splits a price into [parts]. | colours; jokes
+fact: Pay-later payments are often [4] payments every 2 weeks. | 40; 400
+fact: A $120 jacket becomes 4 payments of [$30]. | $40; $12
+fact: Missing a payment can mean a late [fee]. | prize; gift
+fact: Buy now, pay later is still [borrowing]. | saving; free
+fact: Splitting a price into parts costs the [same] or more. | much less; nothing
+fact: Every pay-later payment [must] be made. | is optional to; never needs to
+fact: A $80 game split into 4 payments is [$20] each. | $40; $8
+@facts 6.6
+fact: Cash is good when you want to stick to a set [amount]. | colour; shop
+fact: A debit card spends money you [already have]. | borrow; owe
+fact: Phone pay is easy and spends money you already [have]. | owe; borrow
+fact: Credit and pay later are kinds of [borrowing]. | saving; earning
+fact: Borrowing costs extra if you [miss] a payment. | make; skip a snack
+fact: Use borrowing with [care]. | glee; speed
+fact: Paying with your own money avoids [interest]. | change; receipts
+fact: The best way to pay depends on the [situation]. | colour; weather
+@facts 7.1
+fact: Earned money comes from work you do or things you [sell]. | lose; borrow
+fact: [Gifts] are given to you. | Wages; Takings
+fact: Earning more means doing more [work]. | sleeping; shopping
+fact: Work that's worth more to people can [pay more]. | pay less; pay nothing
+fact: Knowing where your money comes from helps you [plan]. | forget; worry
+fact: Birthday money is a [gift]. | wage; loan
+fact: Money from a lawn-mowing job is [earned]. | a gift; borrowed
+fact: Earned money and gifts are both kinds of [income]. | debt; spending
+@facts 7.2
+fact: [Per job] pay is a set price for the whole job. | Per hour; Per week
+fact: [Per hour] pay depends on how long you work. | Per job; Per year
+fact: Per job pay suits you if you work [fast]. | slowly; badly
+fact: Per hour is fairer if a job could take [ages]. | a second; no time
+fact: To compare, work out how much each one pays for every [hour]. | job; year
+fact: $20 for a 2-hour job is [$10] an hour. | $20; $40
+fact: $15 for a 3-hour job is [$5] an hour. | $15; $45
+fact: $12 an hour for 3 hours is [$36]. | $12; $15
+@facts 7.3
+fact: [Takings] are all the money customers pay you. | Costs; Profit
+fact: [Costs] are what you spent to make things. | Takings; Profit
+fact: Flour and icing are [costs] for a cupcake stall. | takings; profit
+fact: Profit is takings [minus] costs. | plus; times
+fact: Takings of $50 and costs of $20 make a profit of [$30]. | $70; $50
+fact: Takings of $40 and costs of $15 make a profit of [$25]. | $55; $40
+fact: Profit is what you really [earned]. | spent; borrowed
+fact: If costs are bigger than takings, you make a [loss]. | profit; bonus
+@facts 7.4
+fact: Selling things you don't use earns money and clears [space]. | homework; dinner
+fact: Used things sell for [less] than new. | more; double
+fact: [Clean] things up before you sell them. | Break; Hide
+fact: Take [clear] photos of things you sell. | blurry; dark
+fact: Ask a [grown-up] to help you sell. | stranger; robot
+fact: Only sell to people your grown-up says are [OK]. | strangers; anyone at all
+fact: Selling old toys can turn clutter into [money]. | rubbish; homework
+fact: A clean, working item sells [better]. | worse; never
+@facts 7.5
+fact: Your time is [valuable]. | worthless; free
+fact: Think about pay per [hour], not just the total. | colour; job title
+fact: A job paying $10 for 5 hours is [$2] an hour. | $10; $50
+fact: Some jobs are worth doing to [help] someone. | trick; ignore
+fact: Learning a [skill] can make a job worth doing. | trick; secret
+fact: Saying no to a job that pays too little is [OK]. | rude; wrong
+fact: A job that takes ages for a little pay may not be [worth it]. | fun to complain about; easy
+fact: $20 for 1 hour pays [more] per hour than $30 for 3 hours. | less; the same
+@facts 7.6
+fact: Get [better] at a job, and you can charge a bit more. | worse; slower
+fact: [Repeat] customers bring more work. | Angry; Lost
+fact: Good [reviews] bring more work. | excuses; mistakes
+fact: Save some of what you [earn]. | borrow; owe
+fact: Spending a little on [tools] can help you work. | lollies; games
+fact: Doing great work makes customers come [back]. | away; never
+fact: A better skill can earn a [higher] price. | lower; no
+fact: Growing your earnings takes [time]. | luck only; one day
+@facts 8.1
+fact: [Everyone] makes money mistakes, even grown-ups. | Nobody; Only kids
+fact: Small mistakes while you're young are [cheap] lessons. | expensive; useless
+fact: What matters is [noticing] a mistake. | hiding; ignoring
+fact: Fix what you [can]. | can't; won't
+fact: Money mistakes are a chance to [learn]. | give up; hide
+fact: Grown-ups make money mistakes [too]. | never; rarely ever
+fact: Learning from a small mistake can stop a [bigger] one later. | smaller; happier
+fact: Hiding a money mistake makes it [worse]. | better; vanish
+@facts 8.2
+fact: If you lose money, stay [calm]. | panicked; silent forever
+fact: [Retrace] your steps. | Forget; Hide
+fact: Tell a [grown-up]. | goldfish; robot
+fact: Ask the shop if anyone [handed it in]. | spent it; ate it
+fact: A [zip] pocket helps keep money safe. | open; torn
+fact: A [wallet] helps keep money safe. | paper bag; open hand
+fact: A card your grown-up looks after with you can be [safer] than cash. | riskier; worse
+fact: Losing money is a lesson in keeping it [safe]. | spent; hidden in the garden
+@facts 8.3
+fact: If something is faulty, you have [rights]. | no rights; to pay again
+fact: You can ask for a repair, [replacement] or refund. | reward; telling-off
+fact: If you just changed your mind, the shop [doesn't have to] take it back. | must always; is forced to
+fact: Some shops will take things back if you have the [receipt]. | box only; price tag
+fact: Keep your [receipts]. | ads; wrappers
+fact: Check the shop's [returns policy] before you buy. | colour scheme; music
+fact: A toy that breaks the first day is [faulty]. | perfect; fine
+fact: A refund gives you your [money] back. | old toy; receipt
+@facts 8.4
+fact: If you've overspent, first [stop spending]. | borrow more; spend faster
+fact: Don't [borrow] to keep going. | save; plan
+fact: Look at what you spent and find where it [went]. | grew; slept
+fact: Next week, [plan] before you spend. | panic; guess
+fact: Leave a [buffer] next time. | debt; mess
+fact: A buffer is a little money kept [spare]. | owing; borrowed
+fact: Overspending happens when you spend more than you [planned]. | earned last year; saved
+fact: Making a plan helps stop [overspending]. | saving; earning
+@facts 8.5
+fact: If you think you've been scammed, tell a grown-up [straight away]. | next year; in ten years
+fact: Scammers count on kids [hiding] what happened. | telling; reporting
+fact: The faster you act, the better the chance of getting money [back]. | away; doubled
+fact: A grown-up can call the [bank]. | zoo; library
+fact: Never pay again to "[unlock]" the first payment. | finish; enjoy
+fact: Paying again to unlock money is part of the [scam]. | deal; reward
+fact: Scams try to [trick] you. | help; thank
+fact: Telling quickly is the [smart] thing to do. | silly; wrong
+@facts 8.6
+fact: Work out what went [wrong]. | right only; nowhere
+fact: Don't be too hard on [yourself]. | everyone; the shop
+fact: Make one small [rule]. | excuse; mess
+fact: "I wait a day for anything over $10" is a money [rule]. | excuse; mistake
+fact: Every week is a fresh [start]. | mistake; end
+fact: After a mistake, start [again]. | never; worse
+fact: Bouncing back means learning and [trying again]. | giving up; hiding
+fact: One small rule can stop the same [mistake] again. | success; goal
+@facts 9.1
+fact: Giving means sharing what you have to [help] others. | trick; ignore
+fact: People give [money]. | rubbish; insults
+fact: People give things they don't [need] any more. | love most; use every day
+fact: People give their [time]. | complaints; excuses
+fact: Giving [helps] others. | hurts; tricks
+fact: Giving often makes the giver feel [good] too. | bad; sick
+fact: Old clothes in good condition can be [given] to people who need them. | burned; hidden
+fact: Helping at a beach clean-up is giving your [time]. | money; rubbish
+@facts 9.2
+fact: A [cause] is something you want to help with. | price; receipt
+fact: Animals can be a [cause] you help. | price; profit
+fact: The [environment] can be a cause. | weather report; shopping list
+fact: Think about what you [care about] most. | dislike; ignore
+fact: Before giving, check the group is [real]. | famous; colourful
+fact: Check the group is [trustworthy]. | loud; new
+fact: A [grown-up] can help you look into a group. | stranger; robot
+fact: Your neighbourhood can be a cause to [help]. | ignore; leave
+@facts 9.3
+fact: Volunteering means giving your time and skills for [free]. | a fee; profit
+fact: Kids can volunteer with their [family]. | strangers online; nobody
+fact: A beach [clean-up] is a way to volunteer. | party; sale
+fact: Planting [trees] is a way to volunteer. | lollies; coins
+fact: Baking for a [fundraiser] is a way to help. | shop sale; profit
+fact: Drawing [posters] uses your skills to help. | debts; receipts
+fact: Reading to younger kids is a way to give your [time]. | money; rubbish
+fact: Your skills [count] as giving. | don't count; are worthless
+@facts 9.4
+fact: Giving a small amount regularly [adds up]. | disappears; shrinks
+fact: Plan ahead by choosing a [cause]. | price; shop
+fact: Set a giving [goal]. | trap; mess
+fact: Decide [when] to give. | why not; if never
+fact: In Chorecast, a [grown-up] pays out your Give jar. | robot; stranger
+fact: Ask a grown-up to help you give to the [cause] you chose. | shop; game
+fact: $1 a week for a year adds up to [$52]. | $12; $365
+fact: Planned giving is [easier] to keep up. | harder; impossible
