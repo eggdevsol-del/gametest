@@ -207,6 +207,17 @@ Language questions, on top of the usual ones:
 | Build it | `tiles \| Prompt \| answer` (the words of a phrase, or the letters of a word) |
 | Trace it | `trace \| «字» \| meaning` (trace a character or a few kana over a faint copy; marked by how much of it the finger covered, without stroke order yet) |
 
+The app also has three listening and reading games that it builds itself (they aren't written in lesson files): **Does it mean this?** (hear a word, answer yes or no to a picture and meaning), **Hear three** (tap each of three spoken words, pick the one that means the picture), and **Fill the gap** (put a new word back into one of the lesson's phrases, with its meaning as the clue).
+
+**Long lessons are built, not written.** A lesson file stays short: its words, phrases, rules, tries, game and checks. The app adds questions about the same words from every angle until the lesson reaches **40 for Sprouts, 45 for Builders and 50 for Makers** (counting the lesson's own tries, game and checks):
+- **Listen:** hear it and pick what it means; hear it, does it mean this?
+- **Read:** see what it means and pick the word; hear it and pick the written word; hear three and pick the one that means it; match them all.
+- **Make it:** build it from its letters, kana or characters; type it (Spanish, Builders and Makers) or trace it (Mandarin and Japanese); say it.
+- **Phrases:** hear a phrase and pick its meaning; build it from its words; fill the gap; pick the phrase (Builders and Makers).
+- **Mix:** the new words again with fresh choices, then words and phrases from earlier lessons in the unit, then earlier units.
+
+Every built question uses only words and phrases already in the course, so there's nothing new to check. A wrong choice never shares a meaning with the right one (meanings are compared without their brackets, so «amigo», friend (a boy), is never a wrong choice for «amiga»). It also never sounds the same: Spanish words that differ only by an accent, and Mandarin or Japanese words with the same reading (他 and 她), are never both choices in a listening question. Grammar words, whose meaning is only a note like "(a question word)", are never wrong choices. A lesson in a stage's first unit, with nothing earlier to mix in, can come out shorter (the first Spanish lesson, with one word, is about 20). `tests/lang-drill.test.mjs` builds every lesson for every band and checks each question has exactly one right answer.
+
 How a course reaches each kid:
 - **Every band takes the same lessons.** Sprouts take a lesson of more than 3 new words in two sittings, Makers can test out of a lesson by passing its questions, and placement ("Already know some?") counts the units a kid knows as learned.
 - **Review cards.** Every word and phrase becomes a card that comes back after 1, 3, 7, 16, 35 and 90 days: first hear it and pick the meaning, then (from box 3) say, build or type it. Up to 20 a day per language, and a new lesson waits until the day's cards are done.

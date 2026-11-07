@@ -67,7 +67,7 @@ const l11 = all.find(l => l.id === 'mi.s1.2.1'), sb = L.langSteps(kids.b, l11, 0
 ok(kinds(sb).indexOf('rule') > kinds(sb).lastIndexOf('word') && sb.find(s => s.kind === 'rule').spot, 'Builders: words first, then “Spot the pattern”', kinds(sb));
 ok(kinds(sc).indexOf('rule') < kinds(sc).indexOf('word'), 'Makers: the rule first, then the words', kinds(sc));
 ok(!kinds(ss).includes('rule'), 'Sprouts: no grammar rules', kinds(ss));
-ok(kinds(sb).filter(k => k === 'try').length === l11.says.length, 'every phrase is a hear-say-compare step');
+ok(sb.filter(s => s.kind === 'try' && !s.gen).length === l11.says.length && sb.filter(s => s.gen && s.item.type === 'say').length === l11.words.length, 'every phrase is a hear-say-compare step, and so is every new word');
 const quick = L.langSteps(kids.c, l11, 0, true);
 ok(kinds(quick).join() === ['hook', ...l11.checks.map(() => 'check')].join(), 'Makers can test out: the hook and the questions only');
 

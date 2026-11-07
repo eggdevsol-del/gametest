@@ -240,7 +240,7 @@ GAMES.hear = (it, host, ctx, done) => {
 GAMES.pair = (it, host, ctx, done) => {
   done = once(done);
   const lang = ctx.lang, opts = shuffle(it.opts, rnd), right = opts.find(o => o.ok), target = String(right.t).replace(/[«»]/g, ''), vi = (ctx.voice = (ctx.voice || 0) + 1);
-  host.innerHTML = `<div class="g-qrow"><h2 class="g-q">${esc(local(it.q.replace(/«[^»]+»/g, '')))}</h2><button type="button" class="l-hear" data-hear aria-label="Hear it again">🔊</button></div><div class="g-cards n${opts.length}">${opts.map((o, i) => `<button class="g-card" style="--d:${i * 70}ms" data-i="${i}"><span>${esc(o.t)}</span></button>`).join('')}</div>`;
+  host.innerHTML = `<div class="g-qrow"><h2 class="g-q">${esc(local(it.q.replace(/«[^»]+»/g, '')))}</h2><button type="button" class="l-hear" data-hear aria-label="Hear it again">🔊</button></div>${it.en && !canHear(lang, target) ? `<p class="l-norec">No voice on this device: pick the one that means ${esc(it.en)}.</p>` : ''}<div class="g-cards n${opts.length}">${opts.map((o, i) => `<button class="g-card" style="--d:${i * 70}ms" data-i="${i}"><span>${esc(o.t)}</span></button>`).join('')}</div>`;
   const play = () => speakLang(target, lang, { voice: vi }); host.querySelector('[data-hear]').onclick = play; setTimeout(play, 350);
   host.querySelectorAll('.g-card').forEach(b => { b.onclick = () => {
     if (host.dataset.locked) return; host.dataset.locked = 1;
@@ -354,6 +354,52 @@ GAMES.trace = (it, host, ctx, done) => {
   };
 };
 
+// Hear it, then say whether it means what the card shows. The word isn't written, so it's real listening.
+GAMES.hearyes = (it, host, ctx, done) => {
+  done = once(done);
+  const lang = ctx.lang, vi = (ctx.voice = (ctx.voice || 0) + 1);
+  host.innerHTML = `<div class="g-qrow"><h2 class="g-q">Listen. Does it mean this?</h2><button type="button" class="l-hear" data-hear aria-label="Hear it again">🔊</button></div>${canHear(lang, it.t) ? '' : `<p class="l-norec" lang="${lang}">${esc(it.t)}${it.rd ? ` · ${esc(it.rd)}` : ''}</p>`}
+    <div class="g-swipe"><div class="g-swcard l-yn"><span>${esc(it.show)}</span></div></div>
+    <div class="g-tfrow"><button class="g-tf no" data-v="0">${ic('x')} No</button><button class="g-tf yes" data-v="1">${ic('check')} Yes</button></div>`;
+  const play = () => speakLang(it.t, lang, { voice: vi }); host.querySelector('[data-hear]').onclick = play; setTimeout(play, 350);
+  host.querySelectorAll('.g-tf').forEach(b => { b.onclick = () => {
+    if (host.dataset.locked) return; host.dataset.locked = 1;
+    const v = b.dataset.v === '1', ok = v === it.a; host.querySelectorAll('.g-tf').forEach(x => { x.disabled = true; });
+    b.classList.add(ok ? 'right' : 'wrong'); ok ? cheer(b) : oops(b); fx(ctx, 'graded', { ok });
+    done({ ok, score: ok ? 1 : 0, answer: v ? 'Yes' : 'No', right: ok ? '' : `«${it.t}» means ${it.mean}.` });
+  }; });
+};
+// Three words you can only hear: tap each to hear it, then pick the one that means the picture
+GAMES.sound = (it, host, ctx, done) => {
+  done = once(done);
+  const lang = ctx.lang, opts = shuffle(it.opts, rnd), voice = opts.every(o => canHear(lang, o.t)); let sel = -1;
+  host.innerHTML = `${qHead(it.q)}<div class="g-cards n${opts.length} l-sound">${opts.map((o, i) => `<button class="g-card" style="--d:${i * 70}ms" data-i="${i}" aria-label="Sound ${i + 1}"><span>🔊 ${i + 1}</span>${voice ? '' : `<small lang="${lang}">${esc(o.t)}</small>`}</button>`).join('')}</div><button class="g-go" data-check disabled>Check</button>`;
+  const cards = [...host.querySelectorAll('.l-sound .g-card')], check = host.querySelector('[data-check]');
+  cards.forEach(b => { b.onclick = () => { if (host.dataset.locked) return; sel = +b.dataset.i; cards.forEach(x => x.classList.toggle('sel', x === b)); check.disabled = false; speakLang(opts[sel].t, lang); }; });
+  check.onclick = () => {
+    if (host.dataset.locked || sel < 0) return; host.dataset.locked = 1; const ok = opts[sel].ok;
+    cards.forEach((x, i) => { x.disabled = true; x.innerHTML = `<span>«${esc(opts[i].t)}»</span>`; if (opts[i].ok) x.classList.add('right'); });
+    if (!ok) cards[sel].classList.add('wrong'); ok ? cheer(cards[sel]) : oops(cards[sel]); fx(ctx, 'graded', { ok }); check.disabled = true;
+    const right = opts.find(o => o.ok).t; speakLang(right, lang);
+    done({ ok, score: ok ? 1 : 0, answer: opts[sel].t, right: ok ? '' : `It was «${right}».` });
+  };
+};
+// Fill the gap in one of the lesson's phrases, with its meaning as the clue; then hear the whole phrase
+GAMES.lgap = (it, host, ctx, done) => {
+  done = once(done);
+  const lang = ctx.lang, opts = shuffle(it.opts, rnd), pre = it.before.trimEnd(), post = it.after.trimStart(), sp = s => (s ? ' ' : ''), part = s => (/\p{L}/u.test(s) ? esc(`«${s}»`) : esc(s));
+  host.innerHTML = `${qHead(`Fill the gap: “${it.en}”`)}<p class="l-gap" lang="${lang}">${part(pre)}${sp(pre !== it.before)}<span class="g-blank" data-blank>?</span>${sp(post !== it.after)}${part(post)}</p>
+    <div class="g-chips">${opts.map((o, i) => `<button class="g-chip" data-i="${i}">${esc(`«${o}»`)}</button>`).join('')}</div>`;
+  const blank = host.querySelector('[data-blank]');
+  host.querySelectorAll('.g-chip').forEach(b => { b.onclick = () => {
+    if (host.dataset.locked) return; host.dataset.locked = 1;
+    const o = opts[+b.dataset.i], ok = answerKey(o) === answerKey(it.a); host.querySelectorAll('.g-chip').forEach(x => { x.disabled = true; });
+    blank.textContent = o; blank.classList.add(ok ? 'right' : 'wrong'); b.classList.add(ok ? 'right' : 'wrong'); ok ? cheer(blank) : oops(blank); fx(ctx, 'pick', { ok });
+    if (ok) speakLang(it.full, lang);
+    done({ ok, score: ok ? 1 : 0, answer: o, right: ok ? '' : `It’s «${it.a}»: «${it.full}»` });
+  }; });
+};
+
 /* ---------- Lessons ---------- */
 // The steps of a language lesson for this kid. part 1 is a Sprouts first sitting; quick is a Makers test-out.
 function langSteps(kid, l, part, quick) {
@@ -376,6 +422,8 @@ function langSteps(kid, l, part, quick) {
   learn.forEach(text => steps.push({ kind: 'learn', text }));
   if (band === 'sprouts' && l.chant.length) steps.push({ kind: 'chant', lines: l.chant });
   l.tries.forEach(t => steps.push({ kind: 'try', ex: t.ex, item: t.item }));
+  const have = steps.filter(s => stepWorth(s)).length + (l.play ? 1 : 0) + l.checks.length;
+  drillSteps(kid, l, have).forEach(s => steps.push(s));
   if (l.play) steps.push({ kind: 'play', item: l.play });
   l.checks.forEach((item, i) => steps.push({ kind: 'check', item, i }));
   steps.push({ kind: 'home' });
@@ -385,6 +433,136 @@ function langSteps(kid, l, part, quick) {
 function recapItem(l, ws) {
   const w = ws[Math.floor(Math.random() * ws.length)], pick = [w, ...shuffle(ws.filter(x => x !== w), Math.random).slice(0, 2)], pics = new Set(pick.map(x => x.pic)).size === pick.length;
   return { type: 'hear', q: `Which one is «${w.t}»?`, opts: shuffle(pick.map(x => ({ t: pics && x.pic ? x.pic : `${x.pic} ${x.en}`.trim(), ok: x === w })), Math.random) };
+}
+/* ---------- A long lesson: the new words and phrases from every angle ----------
+   After the words, phrases and the lesson's own tries, a lesson asks about the same words from every side. Every
+   question is built from the lesson's checked words and phrases, or from ones met earlier in the stage, so nothing new
+   is made up. The lesson's own game and questions still come last.
+     Listen    hear it, pick what it means; hear it, does it mean this? (yes or no)
+     Read      see what it means, pick the word; hear it, pick the written word; hear three, pick the one that means
+               it; match them all
+     Make it   build it from its letters, kana or characters; type it (Spanish, Builders and Makers) or trace it
+               (Mandarin and Japanese); say it
+     Phrases   hear a phrase, pick its meaning; build it from its words; fill the gap with a new word; pick the phrase
+               (Builders and Makers)
+     Mix       the new words again with fresh choices, then the words and phrases from earlier lessons, nearest first
+   Sprouts get about 40 questions and games, Builders 45 and Makers 50, split into rounds. A lesson with one new word
+   and nothing before it gets fewer, rather than the same question over and over. Distractors never share a meaning
+   with the answer, and never sound the same (Spanish words that differ only by an accent, Mandarin or Japanese words
+   with the same reading), so every question has exactly one right answer. */
+const DRILL = { sprouts: 40, builders: 45, makers: 50 };
+const LPUNCT = /[¡¿!?.,;:。、，！？…"“”「」]/gu;
+const senses = en => String(en).toLowerCase().replace(/\([^)]*\)|“[^”]*”/g, '').split(/,|;|\bor\b/).map(x => x.replace(/[^\p{L}\p{N}' ]/gu, '').replace(/\s+/g, ' ').trim()).filter(Boolean);
+const sameSense = (a, b) => { const x = senses(a); return senses(b).some(s => x.includes(s)); };
+const soundKey = (x, lang) => (lang === 'zh' || lang === 'ja' ? String(x.rd || x.t).toLowerCase().replace(/[\s'’\-·.,!?]/g, '') : plainL(answerKey(x.t)));
+const graphemesOf = (s, lang) => [...new Intl.Segmenter(lang, { granularity: 'grapheme' }).segment(s)].map(x => x.segment).filter(x => x.trim());
+const CJK = /^[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}ー]+$/u;
+// A seeded random, so the same kid gets the same lesson all day (a saved lesson picks up where it was)
+function drillRng(key) { let h = 2166136261; for (const ch of key) h = Math.imul(h ^ ch.codePointAt(0), 16777619) >>> 0; return () => { h = (h + 0x6D2B79F5) >>> 0; let t = Math.imul(h ^ (h >>> 15), h | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+const shuf = (a, r) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const pm = w => (w.kind === 'w' && w.pic ? `${w.pic} ${w.en}` : w.en);
+const howSay = (pic, en) => `How do you say ${pic ? pic + ' ' : ''}“${en}”${/[?？]$/.test(en) ? '' : '?'}`;
+// Up to n others to choose from, of the same kind: this lesson's and unit's first, then ones met in earlier lessons,
+// then the rest of the course. Grammar words (a meaning that's only a note, like “(a question word)”) are never one.
+function others(D, w, n, more = () => true) {
+  const out = [], seen = new Set([cardKey(w.t)]), mine = soundKey(w, D.lang);
+  for (const x of [...shuf(D.near, D.r), ...shuf(D.met, D.r), ...shuf(D.rest, D.r)]) {
+    if (out.length >= n) break; const k = cardKey(x.t);
+    if (seen.has(k) || x.kind !== w.kind || /^\(/.test(x.en) || sameSense(x.en, w.en) || soundKey(x, D.lang) === mine || (w.kind === 'w' && w.pic && x.pic === w.pic)) continue;
+    if (out.some(o => sameSense(o.en, x.en) || soundKey(o, D.lang) === soundKey(x, D.lang) || (x.kind === 'w' && o.pic && o.pic === x.pic)) || !more(x)) continue;
+    seen.add(k); out.push(x);
+  }
+  return out.length >= n ? out : null;
+}
+// A phrase's tiles: its words (Spanish; Japanese is written with a space between chunks), or for Mandarin the longest
+// known word at each point, with any other character on its own tile
+function phraseTiles(s, lang) {
+  const t = lineKey(s.t).replace(LPUNCT, ' ').replace(/\s+/g, ' ').trim();
+  if (lang !== 'zh') return t.split(' ');
+  const chars = [...t.replace(/\s/g, '')], has = new Set(Object.values(Dict.all(lang)).filter(w => w.kind === 'w').map(w => w.t)), out = [];
+  for (let i = 0; i < chars.length;) { let n = Math.min(6, chars.length - i); while (n > 1 && !has.has(chars.slice(i, i + n).join(''))) n--; out.push(chars.slice(i, i + n).join('')); i += n; }
+  return out;
+}
+// Where a word sits in a phrase, if it's there once and the phrase has more to it than the word
+function gapOf(s, w, lang) {
+  const t = lineKey(s.t); let i = -1, a = w.t;
+  if (lang === 'zh') { if (!phraseTiles(s, lang).includes(w.t)) return null; i = t.indexOf(w.t); if (t.indexOf(w.t, i + 1) >= 0) return null; }
+  else if (lang === 'ja') { i = t.indexOf(w.t); if (i < 0 || graphemesOf(w.t, lang).length < 2 || t.indexOf(w.t, i + 1) >= 0) return null; }
+  else { const m = t.match(new RegExp(`(^|[^\\p{L}])(${w.t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})(?![\\p{L}])`, 'iu')); if (!m) return null; i = m.index + m[1].length; a = m[2]; }
+  const before = t.slice(0, i), after = t.slice(i + a.length);
+  return i >= 0 && /\p{L}/u.test(before + after) ? { before, a, after } : null;
+}
+const capLike = (x, a) => (/^\p{Lu}/u.test(a) ? x.charAt(0).toUpperCase() + x.slice(1) : x);
+// Each way of asking about a word (w) or a phrase (s). null when there isn't enough to ask it well.
+const ASK = {
+  hearMean: (D, w) => { const o = others(D, w, 2); return o && { type: 'hear', q: `What does «${w.t}» mean?`, opts: [{ t: pm(w), ok: true }, ...o.map(x => ({ t: pm(x), ok: false }))] }; },
+  hearPic: (D, w) => { const o = w.pic && others(D, w, 2, x => !!x.pic); return o && { type: 'hear', q: `Which one is «${w.t}»?`, opts: [{ t: w.pic, ok: true }, ...o.map(x => ({ t: x.pic, ok: false }))] }; },
+  hearYes: (D, w, i, l, want) => { const yes = want != null ? want : (i + D.yesAt) % 2 === 0, x = yes ? w : (others(D, w, 1) || [])[0]; return x && { type: 'hearyes', t: w.t, rd: w.rd, show: pm(x), a: yes, mean: pm(w) }; },
+  pickWord: (D, w) => { const o = others(D, w, 2); return o && { type: 'mcq', q: howSay(w.kind === 'w' && w.pic, w.en), opts: [{ t: `«${w.t}»`, ok: true }, ...o.map(x => ({ t: `«${x.t}»`, ok: false }))] }; },
+  heard: (D, w) => { const o = others(D, w, 2); return o && { type: 'pair', q: 'Which one did you hear?', en: pm(w), opts: [{ t: `«${w.t}»`, ok: true }, ...o.map(x => ({ t: `«${x.t}»`, ok: false }))] }; },
+  sound: (D, w) => { const o = others(D, w, 2); return o && { type: 'sound', q: `Which one means ${w.pic ? w.pic + ' ' : ''}“${w.en}”? Tap each one to hear it.`, opts: [{ t: w.t, ok: true }, ...o.map(x => ({ t: x.t, ok: false }))] }; },
+  build: (D, w) => {
+    const words = /\s/.test(w.t), parts = words ? w.t.split(/\s+/) : graphemesOf(w.t, D.lang), max = D.band === 'sprouts' ? 5 : 8;
+    if (parts.length < 2 || parts.length > max) return null;
+    const pool = shuf(D.near.filter(x => x.kind === 'w' && cardKey(x.t) !== cardKey(w.t)).flatMap(x => (words ? x.t.split(/\s+/) : graphemesOf(x.t, D.lang))), D.r);
+    const extra = [...new Set(pool.filter(p => !parts.some(q => answerKey(q) === answerKey(p))))].slice(0, D.band === 'sprouts' ? 1 : 2);
+    return { type: 'tiles', q: `Build it: ${pm(w)}`, a: words ? parts.join(' ') : w.t, extra };
+  },
+  write: (D, w, i, l) => {
+    if (D.lang === 'es') return D.band === 'sprouts' ? null : { type: 'type', q: `Type it: ${pm(w)}`, a: w.t };
+    const g = graphemesOf(w.t, D.lang);
+    if (!CJK.test(w.t) || g.length > (D.lang === 'zh' ? 2 : 3) || l.tries.some(x => x.item.type === 'trace' && lineKey(String(x.item.q).replace(/[«»]/g, '')) === w.t)) return null;
+    return { type: 'trace', q: `«${w.t}»`, en: w.en };
+  },
+  sayIt: (D, w) => ({ type: 'say', q: `«${w.t}»`, en: w.en, rd: w.rd }),
+  hearPhrase: (D, s) => { const o = others(D, s, 2); return o && { type: 'hear', q: `What does «${s.t}» mean?`, opts: [{ t: s.en, ok: true }, ...o.map(x => ({ t: x.en, ok: false }))] }; },
+  buildPhrase: (D, s) => {
+    const parts = phraseTiles(s, D.lang); if (parts.length < 2 || parts.length > (D.band === 'sprouts' ? 5 : 7)) return null;
+    const x = shuf(D.near.filter(o => o.kind === 'w' && !/\s/.test(o.t) && !parts.some(p => answerKey(p) === answerKey(o.t))), D.r)[0];
+    return { type: 'tiles', q: `Build it: ${s.en}`, a: parts.join(' '), extra: x ? [x.t] : [] };
+  },
+  gap: (D, s, i, l) => {
+    for (const w of D.ws) {
+      const g = gapOf(s, w, D.lang); if (!g) continue;
+      const o = others(D, w, 2, x => !/\s/.test(x.t) === !/\s/.test(w.t) && !lineKey(s.t).toLowerCase().includes(x.t.toLowerCase())); if (!o) continue;
+      return { type: 'lgap', en: s.en, before: g.before, after: g.after, a: g.a, full: lineKey(s.t), opts: [g.a, ...o.map(x => capLike(x.t, g.a))] };
+    }
+    return null;
+  },
+  pickPhrase: (D, s) => { const o = D.band !== 'sprouts' && others(D, s, 2); return o && { type: 'mcq', q: howSay('', s.en), opts: [{ t: `«${s.t}»`, ok: true }, ...o.map(x => ({ t: `«${x.t}»`, ok: false }))] }; },
+};
+// The extra steps for a lesson, given how many scored steps it already has
+function drillSteps(kid, l, have) {
+  const lang = l.lang, band = bandOf(kid), pack = Packs[`${l.tree}.${l.band}`], r = drillRng(`${kid.id}|${l.id}|${today()}`);
+  const asW = w => ({ ...w, kind: 'w' }), asS = s => ({ t: s.t, en: s.en, rd: s.rd, pic: '💬', kind: 's' });
+  const all = pack ? pack.units.flatMap(u => u.lessons) : [], at = all.indexOf(l), before = at > 0 ? all.slice(0, at).reverse() : [];
+  const ws = l.words.map(asW), ss = l.says.map(asS), unitBefore = before.filter(x => x.unit === l.unit), older = before.filter(x => x.unit !== l.unit);
+  const near = [...ws, ...ss, ...unitBefore.flatMap(x => [...x.words.map(asW), ...x.says.map(asS)])], idx = new Map(all.map((x, i) => [x.id, i]));
+  const metOf = x => (idx.has(x.lesson) ? idx.get(x.lesson) < at : String(x.lesson).split('.')[1] < l.band), dict = Object.values(Dict.all(lang)).filter(x => !near.some(y => cardKey(y.t) === cardKey(x.t)));
+  const D = { lang, band, r, ws, yesAt: Math.floor(r() * 2), near, met: dict.filter(metOf), rest: dict.filter(x => !metOf(x)) };
+  const want = Math.max(0, (DRILL[band] || 45) - have);
+  const group = (phase, prio, name, list, make) => ({ phase, prio, items: list.map((x, i) => make(x, i)).filter(Boolean).map(item => ({ kind: 'try', ex: '', item, gen: name })) });
+  const ask = name => (x, i) => ASK[name](D, x, i, l);
+  const matchOf = () => {
+    const set = [...ws, ...unitBefore.flatMap(x => x.words.map(asW))].filter((x, i, a) => a.findIndex(y => cardKey(y.t) === cardKey(x.t) || sameSense(y.en, x.en)) === i).slice(0, 4);
+    return set.length >= 3 ? [{ kind: 'play', item: { type: 'match', q: 'Match them', pairs: set.map(x => [`«${x.t}»`, pm(x)]) }, gen: 'match' }] : [];
+  };
+  const core = [
+    group(1, 1, 'hearMean', ws, ask('hearMean')), group(1, 2, 'hearYes', ws, ask('hearYes')),
+    group(2, 1, 'pickWord', ws, ask('pickWord')), group(2, 2, 'heard', ws, ask('heard')), group(2, 3, 'sound', ws, ask('sound')), { phase: 2, prio: 1, items: matchOf() },
+    group(3, 1, 'build', ws, ask('build')), group(3, 2, 'write', ws, ask('write')), group(3, 3, 'sayIt', ws, ask('sayIt')),
+    group(4, 1, 'hearPhrase', ss, ask('hearPhrase')), group(4, 1, 'buildPhrase', ss, ask('buildPhrase')), group(4, 2, 'gap', ss, ask('gap')), group(4, 3, 'pickPhrase', ss, ask('pickPhrase')),
+  ];
+  // Too many for this band: drop the least important ways of asking first, a step at a time from the biggest group
+  const count = () => core.reduce((n, g) => n + g.items.length, 0);
+  for (let prio = 3; prio >= 1 && count() > want; prio--) while (count() > want) { const g = core.filter(x => x.prio === prio && x.items.length).sort((a, b) => b.items.length - a.items.length)[0]; if (!g) break; g.items.pop(); }
+  // Too few: the new words again, then earlier words and phrases, nearest first
+  const mix = [], room = () => want - count() - mix.length, add = (name, x, i, want2) => { if (room() <= 0) return; const item = ASK[name](D, x, i, l, want2); if (item) mix.push({ kind: 'try', ex: '', item, gen: `mix.${name}` }); };
+  // The new words again: by picture only, then yes or no the other way round
+  ws.forEach((w, i) => add('hearPic', w, i)); ws.forEach((w, i) => add('hearYes', w, i, (i + D.yesAt) % 2 !== 0));
+  const fill = ls => { const w2 = ls.flatMap(x => x.words.map(asW)).filter(w => !/^\(/.test(w.en)), s2 = ls.flatMap(x => x.says.map(asS)); w2.forEach((w, i) => add(i % 2 ? 'pickWord' : 'hearMean', w, i)); s2.forEach((s, i) => add('hearPhrase', s, i)); w2.forEach((w, i) => add(i % 2 ? 'hearMean' : 'pickWord', w, i)); };
+  fill(unitBefore); fill(older);
+  return [...core.sort((a, b) => a.phase - b.phase).flatMap(g => g.items), ...mix];
 }
 function partOne(kid, l) { return bandOf(kid) === 'sprouts' && l.words.length > 3 && !passed(kid, l.id) && !(((prog(kid).lang || {})[l.lang] || {}).part || {})[l.id]; }
 // New words wait until today's cards are done, and slow down when last week's reviews went badly.
@@ -657,6 +835,12 @@ button .lw,.g-card .lw{cursor:inherit;border:0;color:inherit}
 .gw-card .l-rd{margin:2px 0 0;font:700 calc(16px*var(--ts)) var(--f-round);color:#5A6380;letter-spacing:.02em}
 .gw ruby rt{font-size:.55em;font-weight:700;color:inherit;opacity:.72}
 .gw ruby+ruby{margin-left:.18em}
+.l-sound .g-card{text-align:center;display:grid;place-items:center;gap:2px}
+.l-sound .g-card.sel{box-shadow:inset 0 0 0 3px var(--gh);transform:translateY(-3px)}
+.l-sound .g-card small{font:700 calc(14px*var(--ts)) var(--f-round);color:#5A6380}
+.l-sound+.g-go{margin-top:12px}
+.gw-card .l-gap{font:900 calc(26px*var(--ts))/1.6 var(--f-round);text-align:center;margin:4px 0 14px}
+.l-yn{min-height:120px;cursor:default}
 .l-trace{display:grid;place-items:center}
 .l-trace canvas{width:min(76vw,320px);height:min(76vw,320px);touch-action:none;border-radius:20px;background:#F7F8FC;border:2px solid #DCE1EE}
 `;
