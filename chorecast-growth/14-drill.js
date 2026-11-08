@@ -25,9 +25,12 @@ const MSKILL = (() => {
      num, time (h:mm on a 12-hour clock), frac, cmp (<, > or =), yn (yes or no), text, expr (an expression in n, or a
      and b), ratio. A num answer under 0 is never a typed gap (the number pad has no minus). */
   const fmt = (v, unit) => (unit === 'num' || !unit ? neg(+v) : String(v));
+  // "an" before a number said with a vowel sound: an 8 m rectangle, an 11 cm base, an 80° angle (but a 110 m fence)
+  const aan = t => String(t).replace(/\b([Aa]) (?=8|1[18](?![0-9])|1[18],\d{3}(?!\d))/g, '$1n ');
+  const sup = n => String(n).replace(/\d/g, d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
   const P = (ask, a, calc, wrongs, say, o = {}) => {
     const unit = o.unit || 'num', A = fmt(a, unit);
-    return { ask, a: A, calc, unit, wrongs: [...new Set(wrongs.map(w => fmt(w, unit)))].filter(w => w !== A && w !== 'NaN' && w !== '−0'), say, mem: o.mem || '', gap: o.gap !== false && unit === 'num' && +a >= 0 };
+    return { ask: aan(ask), a: A, calc, unit, wrongs: [...new Set(wrongs.map(w => fmt(w, unit)))].filter(w => w !== A && w !== 'NaN' && w !== '−0'), say: x => aan(say(x)), mem: o.mem || '', gap: o.gap !== false && unit === 'num' && +a >= 0 };
   };
   const E = (expr, a, calc, wrongs, o) => P(`${expr} = _`, a, calc, wrongs, x => `${expr} = ${x}`, { mem: expr, ...o });
   const near = (a, ...d) => d.map(x => a + x).filter(x => x >= 0);
@@ -103,8 +106,8 @@ const MSKILL = (() => {
       r => { let n = ri(r, 1001, 98999); const u = pick(r, [100, 1000]); if (n % u === u / 2) n++; const a = Math.round(n / u) * u, other = a === Math.ceil(n / u) * u ? Math.floor(n / u) * u : Math.ceil(n / u) * u; return P(`Round ${commas(n)} to the nearest ${u === 100 ? 'hundred' : 'thousand'}: _`, a, `Math.round(${n}/${u})*${u}`, [other, Math.round(n / 10) * 10 === a ? a + u : Math.round(n / 10) * 10, a + u * 10], x => `${commas(n)} rounded to the nearest ${u === 100 ? 'hundred' : 'thousand'} is ${commas(x)}.`); },
     ],
     decimals: [
-      r => { const t = ri(r, 1, 9); return P(`${t} tenths written as a decimal is _`, t / 10, `${t}/10`, [t / 100, t, t * 10], x => `${t} tenths written as a decimal is ${x}.`, { mem: `${t} tenths` }); },
-      r => { const h = ri(r, 1, 99); if (h % 10 === 0) return null; return P(`${h} hundredths written as a decimal is _`, h / 100, `${h}/100`, [h / 10, h / 1000, h], x => `${h} hundredths written as a decimal is ${x}.`, { mem: `${h} hundredths` }); },
+      r => { const t = ri(r, 1, 9), w = `${t} tenth${t === 1 ? '' : 's'}`; return P(`${w} written as a decimal is _`, t / 10, `${t}/10`, [t / 100, t, t * 10], x => `${w} written as a decimal is ${x}.`, { mem: w }); },
+      r => { const h = ri(r, 1, 99), w = `${h} hundredth${h === 1 ? '' : 's'}`; if (h % 10 === 0) return null; return P(`${w} written as a decimal is _`, h / 100, `${h}/100`, [h / 10, h / 1000, h], x => `${w} written as a decimal is ${x}.`, { mem: w }); },
       r => { const [a, b, c] = distinct3(r), x = `${a}.${b}${c}`, p = pick(r, [1, 2]), d = p === 1 ? b : c; return P(`In ${x}, the ${d} is worth _`, d / 10 ** p, `${d}/${10 ** p}`, [d, d / 10 ** (3 - p), d * 10], y => `In ${x}, the ${d} is worth ${y}.`); },
     ],
     'compare-decimals': [
@@ -141,7 +144,7 @@ const MSKILL = (() => {
       r => { const a = ri(r, 4, 10), b = ri(r, 3, 8), c = ri(r, 2, 6), d = ri(r, 1, 5); return P(`An L shape is made of a ${a} m by ${b} m rectangle and a ${c} m by ${d} m rectangle. Its area is _ m²`, a * b + c * d, `${a}*${b}+${c}*${d}`, [a * b * c * d, a * b, (a + c) * (b + d)], x => `A ${a} m by ${b} m rectangle and a ${c} m by ${d} m rectangle make ${x} m² together.`); },
     ],
     'area-or-perimeter': [
-      r => { const [what, a] = pick(r, [['a fence around a paddock', 'perimeter'], ['carpet for a bedroom floor', 'area'], ['a frame around a painting', 'perimeter'], ['grass seed for a lawn', 'area'], ['paint for a wall', 'area'], ['a ribbon around the edge of a cake board', 'perimeter'], ['tiles for a bathroom floor', 'area'], ['lights along the edge of a deck', 'perimeter']]); return P(`To work out how much ${what} you need, do you use the area or the perimeter? _`, a, `'${a}'`, [a === 'area' ? 'perimeter' : 'area'], x => `For ${what}, you use the ${x}.`, { unit: 'text' }); },
+      r => { const [what, a] = pick(r, [['how much fence goes around a paddock', 'perimeter'], ['how much carpet covers a bedroom floor', 'area'], ['how long a frame around a painting is', 'perimeter'], ['how much grass seed a lawn needs', 'area'], ['how much paint covers a wall', 'area'], ['how much ribbon goes around the edge of a cake board', 'perimeter'], ['how many tiles cover a bathroom floor', 'area'], ['how many lights fit along the edge of a deck', 'perimeter']]); return P(`Do you use the area or the perimeter to work out ${what}? _`, a, `'${a}'`, [a === 'area' ? 'perimeter' : 'area'], x => `To work out ${what}, you use the ${x}.`, { unit: 'text' }); },
       r => { const w = ri(r, 4, 12), h = ri(r, 3, 9), fence = r() < 0.5; return fence ? P(`How many metres of fence go around a ${w} m by ${h} m paddock? _`, 2 * (w + h), `2*(${w}+${h})`, [w * h, w + h], x => `A ${w} m by ${h} m paddock needs ${x} m of fence.`) : P(`How many square metres of carpet cover a ${w} m by ${h} m floor? _`, w * h, `${w}*${h}`, [2 * (w + h), w + h], x => `A ${w} m by ${h} m floor needs ${x} m² of carpet.`); },
     ],
     /* ----- Makers ----- */
@@ -222,7 +225,7 @@ const MSKILL = (() => {
     mean: [r => { const xs = [ri(r, 2, 20), ri(r, 2, 20), ri(r, 2, 20)], last = 4 - (xs.reduce((s, x) => s + x, 0) % 4) + 4 * ri(r, 0, 3); xs.push(last); const m = xs.reduce((s, x) => s + x, 0) / 4; return P(`The mean of ${xs.join(', ')} is _`, m, `(${xs.join('+')})/4`, [m + 1, xs.reduce((s, x) => s + x, 0), xs.slice().sort((a, b) => a - b)[1]], x => `The mean of ${xs.join(', ')} is ${x}.`); }],
     powers: [r => { const a = ri(r, 2, 12), c = r() < 0.4 && a < 7; return c ? E(`${a}³`, a ** 3, `${a}**3`, [a * 3, a * a, a ** 3 + a]) : E(`${a}²`, a * a, `${a}*${a}`, [a * 2, a * a + a, (a + 1) * (a + 1)]); }],
     'square-roots': [r => { const a = ri(r, 2, 15); return P(`The square root of ${a * a} is _`, a, `Math.sqrt(${a * a})`, [a * a / 2, a + 1, a * 2], x => `The square root of ${a * a} is ${x}.`, { mem: `√${a * a}` }); }],
-    'index-laws': [r => { const a = ri(r, 2, 9), m = ri(r, 2, 6), n = ri(r, 2, 6); return P(`${a}^${m} × ${a}^${n} = ${a}^_`, m + n, `${m}+${n}`, [m * n, m + n + 1, Math.abs(m - n) || m + n + 2], x => `${a}^${m} × ${a}^${n} = ${a}^${x}`); }],
+    'index-laws': [r => { const a = ri(r, 2, 9), m = ri(r, 2, 6), n = ri(r, 2, 6); return P(`${a}${sup(m)} × ${a}${sup(n)} = ${a} to the power of _`, m + n, `${m}+${n}`, [m * n, m + n + 1, Math.abs(m - n) || m + n + 2], x => `${a}${sup(m)} × ${a}${sup(n)} = ${a}${sup(x)}`); }],
     'linear-patterns': [r => { const s = ri(r, 2, 9), a = ri(r, 1, 12); return P(`What comes next? ${a}, ${a + s}, ${a + 2 * s}, ${a + 3 * s}, _`, a + 4 * s, `${a}+4*${s}`, [a + 5 * s, a + 3 * s + 1, a + 4 * s + 2], x => `After ${a}, ${a + s}, ${a + 2 * s}, ${a + 3 * s} comes ${x}.`); }],
     'linear-graphs': [r => { const m = ri(r, 2, 5), c = ri(r, 1, 9), x = ri(r, 1, 9); return P(`y = ${m}x + ${c}. When x = ${x}, y = _`, m * x + c, `${m}*${x}+${c}`, [m * (x + c), m + x + c, m * x], v => `When y = ${m}x + ${c} and x = ${x}, y = ${v}`); }],
     'area-triangles': [r => { const b = ri(r, 2, 14), h = ri(r, 2, 10) * 2; return P(`A triangle has a base of ${b} cm and a height of ${h} cm. Its area is _ cm²`, b * h / 2, `${b}*${h}/2`, [b * h, b + h, b * h / 4], x => `A triangle with a ${b} cm base and ${h} cm height has an area of ${x} cm².`); }],
@@ -274,10 +277,19 @@ const lightningOf = (items, q = 'Lightning round! True or false?') => (items.len
 /* ---------- Facts ----------
    fact: A sentence with the [answer] in square brackets. | wrong; wrong; wrong
    The wrong answers must make the sentence clearly false, and each is a real choice for the gap. */
+// Does a word take "an"? (an egg, an hour, an 8; a unicorn, a useful, a one-off)
+const takesAn = x => /^(8|11\b|18\b|hour|honest|honour|heir)/i.test(x) || (/^[aeiou]/i.test(x) && !/^(uni(?![mn])|use|usu|uten|one\b|once|eu|ewe)/i.test(x));
 function factOf(val) {
   const [t, w] = String(val).split('|').map(x => x.trim()), m = (t || '').match(/^(.*?)\[([^\]]+)\](.*)$/);
   if (!m) return null;
-  return { pre: m[1], key: m[2], post: m[3], wrongs: splitList(w || '') };
+  let [, pre, key, post] = m, wrongs = splitList(w || '');
+  // A "a" or "an" just before the gap moves into the answers, so every choice gets its own: "as [an egg]", not "as an [seed]"
+  const art = pre.match(/(^|[\s"“‘'(])(a|an)\s+$/) || pre.match(/^()(A|An)\s+$/);
+  if (art) {
+    const put = x => `${takesAn(x) ? 'an' : 'a'} ${x}`.replace(/^a/, /^A/.test(art[2]) ? 'A' : 'a');
+    pre = pre.slice(0, art.index + art[1].length); key = put(key); wrongs = wrongs.map(put);
+  }
+  return { pre, key, post, wrongs };
 }
 const factPut = (f, x) => `${f.pre}${x}${f.post}`;
 const fq = {

@@ -126,6 +126,16 @@ for (const [tree, l] of liveLessons) {
     if (f.wrongs.length < 2 || new Set(ws).size !== ws.length || ws.includes(f.key.toLowerCase())) fbad.push(`${l.id}: “${full}” needs 2 or 3 different wrong answers, none the right one`);
     if (/[_[\]|]/.test(full) || !/[.!?]["”’]?$/.test(full)) fbad.push(`${l.id}: “${full}” isn't one clean sentence`);
     if (/[{}]/.test(f.key + f.wrongs.join(''))) fbad.push(`${l.id}: “${full}”: a country switch {nz:…~au:…} can only go in the sentence, not the answer or wrong answers`);
+    // Every wrong answer has to read as a sentence when it's put in the gap (true or false shows the whole sentence)
+    const PREP = /\b(to|on|at|for|with|of|in|from|about|by|into|onto|off|up|out)$/i;
+    for (const w of f.wrongs) {
+      const lastPre = f.pre.trim().split(/\s+/).pop().toLowerCase(), firstPost = (f.post.trim().split(/\s+/)[0] || '').toLowerCase().replace(/[^a-z']/g, '');
+      if (PREP.test(w) && !PREP.test(f.key) && /^(to|on|at|for|with|of|in|from|about|by)\b/i.test(f.post.trim())) fbad.push(`${l.id}: “${D.factPut(f, w)}”: two joining words in a row`);
+      if (lastPre && lastPre === w.split(/\s+/)[0].toLowerCase()) fbad.push(`${l.id}: “${D.factPut(f, w)}”: the same word twice`);
+      if (firstPost && firstPost === w.split(/\s+/).pop().toLowerCase()) fbad.push(`${l.id}: “${D.factPut(f, w)}”: the same word twice`);
+      if (/\b(a|an)$/i.test(f.pre.trim()) || /^(a|an) /i.test(w) && /^(a|an) /i.test(f.key) && w.split(' ')[0].toLowerCase() !== (/^[aeiou8]/i.test(w.split(' ')[1] || '') && !/^(uni|use|one|eu)/i.test(w.split(' ')[1] || '') ? 'an' : 'a')) fbad.push(`${l.id}: “${D.factPut(f, w)}”: “a” or “an” doesn't fit`);
+      if (/^(Only|Nobody|Everyone)\b/.test(w) && /^ (has|is|was)\b/.test(f.post) && /s$/.test(w.split(' ').pop()) && !/^(Nobody|Everyone)$/.test(w)) fbad.push(`${l.id}: “${D.factPut(f, w)}”: more than one with “${f.post.trim().split(' ')[0]}”`);
+    }
     if (full.split(/\s+/).length > (band === 'sprouts' ? 18 : 24)) fbad.push(`${l.id}: “${full}” is too long for ${band}`);
   }
 }
@@ -141,6 +151,15 @@ ok(!fbad.length, `every live lesson outside maths has a fact bank of 8 to 12 cle
 
 /* ---------- A fact turns into the right questions ---------- */
 const f = D.factOf('Plants make their own food using [sunlight]. | soil; moonlight; rain');
+const fa = D.factOf('A butterfly starts life as an [egg]. | seed; caterpillar'), fb = D.factOf('An [opinion] is what someone thinks. | fact; measurement');
+ok(D.factPut(fa, fa.key) === 'A butterfly starts life as an egg.' && D.factPut(fa, fa.wrongs[0]) === 'A butterfly starts life as a seed.' && fa.wrongs[1] === 'a caterpillar' && D.factPut(fb, fb.wrongs[0]) === 'A fact is what someone thinks.', 'a fact moves “a” or “an” into each choice, so every choice reads right', fa);
+// Maths: no "a 8 m", no "1 tenths", and every question and true-or-false sentence reads cleanly
+const mbad = [];
+for (const [skill, gens] of Object.entries(D.MSKILL.S)) for (const gn of gens) for (let k = 0; k < 120; k++) {
+  const p = gn(rnd); if (!p) continue;
+  for (const t of [p.ask, p.say(p.a), ...p.wrongs.map(w => p.say(w))]) if (/\b[Aa] (8|1[18](?![0-9]))|\b1 (tenths|hundredths)\b|undefined|NaN|\^/.test(t) || /how much (a|an) /.test(t)) mbad.push(`${skill}: ${t}`);
+}
+ok(!mbad.length, 'maths questions read cleanly (an 8 m, 1 tenth, powers written small)', [...new Set(mbad)].slice(0, 6));
 ok(f && f.key === 'sunlight' && f.wrongs.length === 3 && D.factPut(f, '_') === 'Plants make their own food using _.', 'a fact line splits into the sentence, its answer and its wrong answers', f);
 const fake = { id: 'science.sprouts.9.1', tree: 'science', band: 'sprouts', unit: 9, n: 1, tries: [], checks: [1, 2], play: {}, facts: Array.from({ length: 10 }, (_, i) => D.factOf(`Fact number ${i} is about [${'abcdefghij'[i]}pple]. | ${'abcdefghij'[i]}x; ${'abcdefghij'[i]}y; ${'abcdefghij'[i]}z`)) };
 const fd = D.lessonDrill(kids.builders, fake, 3), kindsOf = fd.reduce((a, s) => ({ ...a, [s.gen]: (a[s.gen] || 0) + 1 }), {});

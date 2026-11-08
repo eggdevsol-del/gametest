@@ -456,13 +456,13 @@ fact: Mean, median and mode are all [averages]. | totals; ranges
 fact: Put the numbers in [order] before finding the median. | a hat; colour groups
 @facts 8.3
 fact: A line graph shows how something changes over [time]. | colour; space
-fact: Time usually goes along the [bottom]. | side; title
-fact: The amount usually goes up the [side]. | bottom; title
+fact: Time usually goes along the [bottom]. | side; top
+fact: On a line graph, the amount usually goes [up the side]. | along the bottom; in the title
 fact: A line going up means [increasing]. | decreasing; no change
 fact: A line going down means [decreasing]. | increasing; no change
 fact: A flat line means [no change]. | increasing; decreasing
 fact: A line graph suits temperature over a [day]. | colour; smell
-fact: A steep line shows a [fast] change. | slow; no
+fact: A steep line shows a [fast] change. | slow; tiny
 @facts 8.4
 fact: Something that can never happen is [impossible]. | certain; likely
 fact: Something that will definitely happen is [certain]. | impossible; unlikely

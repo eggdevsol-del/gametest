@@ -423,7 +423,7 @@ function stageFor(step, R) {
   if (step.kind === 'hook') return ['hook', { icon: l.icon, text: `${local(l.title)} ${local(l.hook)}` }];
   if (step.kind === 'learn') return ['idea', { text: `${step.title || ''} ${local(step.text)}`, icon: l ? l.icon : R.cs ? R.cs.icon : R.mode === 'story' ? '📈' : '💡' }];
   if (step.kind === 'word') return ['idea', { text: step.w.en, icon: step.w.pic || (l && l.icon) }];
-  if (LSTEPS.includes(step.kind)) return ['idea', { text: step.text || (step.ln && step.ln.en) || '', icon: { rule: '📏', chant: '🥁', line: '📖', part: '🌱' }[step.kind] }];
+  if (LSTEPS.includes(step.kind)) return ['idea', { text: step.text || (step.ln && step.ln.en) || '', icon: { chars: '🔤', rule: '📏', chant: '🥁', line: '📖', part: '🌱' }[step.kind] }];
   if (step.kind === 'home') return ['home', { text: local((l && l.home) || '') }];
   if (step.kind === 'intro') return ['intro', { n: R.steps.length - 1 }];
   if (step.kind === 'decide') return ['fork', { n: step.opts.length }];

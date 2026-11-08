@@ -306,14 +306,14 @@ fact: Honesty means not taking what isn't [yours]. | broken; expensive
 fact: Being honest when no one would know shows real [honesty]. | sneakiness; laziness
 fact: Small lies make the next lie [easier]. | harder; impossible
 fact: Trust is [slow] to rebuild. | quick; instant
-fact: Being honest when it costs you shows people they can [rely] on you. | lie to; ignore
+fact: Being honest when it costs you shows people they can [trust] you. | never believe; trick
 fact: Telling the truth about a mistake is [honest]. | sneaky; lazy
-fact: Once broken, [trust] takes time to fix. | a rule; a promise to lie
+fact: Once broken, trust is [slow] to fix. | quick; instant
 @facts 1.2
 fact: Keeping your word means doing what you [said]. | wanted; felt like
-fact: Keep your word even when it's no longer [convenient]. | possible; legal
+fact: Keeping your word matters [even when it's inconvenient]. | only when it's easy; only when someone's watching
 fact: Before you promise, check you can really [do it]. | say it; avoid it
-fact: If you truly can't keep your word, tell the person [early]. | never; after it's too late
+fact: If you truly can't keep your word, tell the person [early]. | after it's too late; a week later
 fact: When you can't keep your word, say sorry and offer another [time]. | excuse; story
 fact: People who keep their word are [reliable]. | sneaky; forgetful
 fact: Breaking your word makes people trust you [less]. | more; the same
@@ -331,7 +331,7 @@ fact: Owning mistakes builds [respect]. | rumours; excuses
 fact: Responsibility means doing your share without being [reminded]. | fed; thanked
 fact: A family works best when everyone pulls their [weight]. | hair; socks
 fact: Doing a job [properly] shows respect for the people you live with. | quickly and badly; halfway
-fact: Doing your part means not leaving jobs for [others]. | the weekend; never
+fact: Doing your part means [not leaving jobs for others]. | leaving jobs for others; waiting to be asked twice
 fact: Pulling your weight means doing your [fair share]. | least; nothing
 fact: Rushing a job and doing it badly shows [less] respect. | more; the most
 fact: Doing chores without reminders shows [responsibility]. | laziness; luck
@@ -340,7 +340,7 @@ fact: When everyone helps, home runs [better]. | worse; slower
 fact: [Direct] pressure is when someone asks or pushes you to do something. | Indirect; Inside
 fact: [Indirect] pressure is feeling you should, because everyone else is. | Direct; Inside
 fact: [Inside] pressure is your own worry about missing out. | Direct; Indirect
-fact: "Come on, everyone's doing it" is [direct] pressure. | inside; indirect only
+fact: "Come on, everyone's doing it" is [direct] pressure. | inside; indirect
 fact: Worrying about not fitting in is [inside] pressure. | direct; indirect
 fact: Seeing everyone wear the same shoes can create [indirect] pressure. | direct; inside
 fact: Naming the kind of pressure helps you [handle] it. | ignore; spread
@@ -349,36 +349,36 @@ fact: Peer pressure comes from people your own [age]. | height; name
 fact: Have an exit [line] ready. | phone; snack
 fact: "I've got to go, my mum needs me home" is an [exit line]. | apology; insult
 fact: Agree a [code word] with your family. | password for the app; nickname
-fact: Text the code word, and your family will [call or pick you up]. | ignore you; be cross
+fact: Text the code word, and your family will [call or pick you up]. | send you a pizza; sing you a song
 fact: Blaming a parent is [fine]. | rude; impossible
 fact: An exit plan gives you an easy [way out]. | way in; excuse to stay
-fact: A code word means [no questions] on the spot. | lots of questions; a telling-off
-fact: Planning your exit [before] you need it makes it easier. | after; never
+fact: A code word means [no questions] on the spot. | a song; a dance
+fact: Planning your exit [before] you need it makes it easier. | after; a week after
 @facts 2.3
-fact: Pressure from friends can be [good]. | only bad; never good
-fact: Friends can push you to try out for a [team]. | trouble; mess
-fact: Good pressure can help you study [harder]. | less; never
-fact: Friends can push you to be [kinder]. | meaner; ruder
+fact: Pressure from friends [can be good]. | is always bad; is never good
+fact: Good pressure can push you to [try out for a team]. | skip training; give up
+fact: Good pressure can help you study [harder]. | less; worse
+fact: Good pressure can push you to be [kinder]. | meaner; ruder
 fact: Spend time with people who bring out your [best]. | worst; laziest
-fact: You can be a friend who [brings out the best] in others. | puts others down; leaves others out
+fact: You can be a friend who [brings out the best in] others. | puts down; leaves out
 fact: Good pressure pushes you towards [good] things. | harmful; risky
-fact: Encouraging a friend to keep training is [good] pressure. | bad; direct bad
+fact: Encouraging a friend to keep training is [good] pressure. | bad; harmful
 @facts 2.4
-fact: [Bystanders] see something happen. | Upstanders; Referees
+fact: [Bystanders] see something happen but do nothing. | Upstanders; Heroes
 fact: [Upstanders] do something about it. | Bystanders; Onlookers
-fact: You don't need a [speech] to speak up. | voice; reason
-fact: "Leave it, that's not funny" can be [enough]. | rude; useless
+fact: To speak up, you [don't need a speech]. | need a long speech; need to shout
+fact: "Leave it, that's not funny" is often [enough]. | never enough; against the rules
 fact: You can [check on] the person later. | ignore; laugh at
-fact: You can tell a trusted [adult]. | robot; goldfish
+fact: You can tell a trusted [adult]. | teddy; goldfish
 fact: Speaking up makes you an [upstander]. | bystander; troublemaker
-fact: Even a short sentence can [help]. | hurt; never work
+fact: Even a short sentence [can help]. | never helps; makes things worse every time
 @facts 3.1
-fact: Anything in a group chat can be [screenshotted]. | deleted forever by you; locked
+fact: Anything in a group chat can be [screenshotted]. | deleted forever by you; taken back by you
 fact: A screenshot can be shared in [seconds]. | years; centuries
 fact: "Private" chats have ended up in front of [schools] and parents. | cartoon characters; aliens
 fact: Only type what you'd be OK with the person [seeing]. | never reading; forgetting
 fact: Group chats [aren't] private. | are always; are totally
-fact: Messages about someone can reach that [person]. | phone company only; nobody
+fact: Messages about someone can reach [that person]. | only your best friend; nobody
 fact: Once something is shared, you [can't] fully take it back. | can easily; can always
 fact: Being kind in group chats protects your [reputation]. | battery; storage
 @facts 3.2
@@ -386,28 +386,28 @@ fact: Asking for [secrets] is a red flag. | homework help; the weather
 fact: Wanting to move to [another app] is a red flag. | the same chat; a group with your friends
 fact: Asking for [photos] is a red flag. | jokes; book ideas
 fact: Someone who asks lots about you but shares little you can [check] is a red flag. | eat; draw
-fact: You can stop replying at [any time]. | never; only after a week
+fact: You can stop replying [at any time]. | only on Tuesdays; only after a week
 fact: You don't owe anyone online a [reply]. | sandwich; birthday card
-fact: If something feels off, tell your [parents]. | goldfish; robot
+fact: If something feels off, tell your [parents]. | goldfish; teddy
 fact: A red flag is a [warning sign]. | prize; compliment
 @facts 3.3
 fact: Your online [reputation] is what people think of you from what they see online. | password; battery
 fact: Your reputation is built over [time]. | one second; a single click
 fact: Posts, comments and photos build your [reputation]. | battery; storage
 fact: How you [treat] people online shapes your reputation. | charge; update
-fact: Ask yourself: what do I want to be [known] for? | charged; updated
+fact: Ask yourself: what do I want to be [known] for? | forgotten; blamed
 fact: Kind comments build a [good] reputation. | bad; terrible
 fact: Future schools and employers might [see] what you post. | never notice; never find
 fact: A good reputation takes time to [build]. | lose; find
 @facts 3.4
-fact: Once you send a picture, you lose [control] of where it goes. | the colour; the size
+fact: Once you send a picture, you lose [control of where it goes]. | the colour of it; its size
 fact: Never send photos of your [body]. | homework; drawings
 fact: Never [pass on] anyone else's private photos. | frame; colour in
 fact: If anyone asks for an inappropriate picture, don't [reply]. | sing; draw
-fact: If anyone sends you an inappropriate picture, tell your [parents]. | goldfish; robot
+fact: If anyone sends you an inappropriate picture, tell your [parents]. | goldfish; teddy
 fact: Choosing what you keep private is [self-respect]. | rudeness; laziness
 fact: A picture sent once can be [copied] many times. | sent back; unsent
-fact: Your parents can help you [deal with] it. | eat; paint
+fact: If you get a picture like that, your parents can help you [deal with it]. | eat it; paint it
 @facts 4.1
 fact: The part of your brain that plans keeps developing into your [twenties]. | first year; fifth birthday
 fact: The planning part of the brain helps put on the [brakes]. | music; lights
@@ -421,7 +421,7 @@ fact: Practising good habits now helps the adult you'll [become]. | forget; repl
 fact: Apps use autoplay and endless [scroll] to keep you watching. | pages; chapters
 fact: Exciting content keeps your brain [alert] when it should be winding down. | asleep; switched off
 fact: Try stopping screens [30 to 60] minutes before bed. | 1 to 2; 300 to 600
-fact: Charge your phone [outside] your room. | under your pillow; in your bed
+fact: Charge your phone [outside your room]. | under your pillow; in your bed
 fact: Winding down before bed helps you fall [asleep]. | over; behind
 fact: Screens in bed can cut your [sleep] short. | hair; homework
 fact: A phone outside your room means fewer [late-night] notifications. | morning; lunchtime
@@ -432,8 +432,8 @@ fact: Teens feel sleepy [later] at night. | earlier; never
 fact: School starts [early], so many teens run short on sleep. | at midnight; after lunch
 fact: A regular [wake-up] time helps your body clock adjust. | random; midnight
 fact: Keep the same wake-up time even on [weekends]. | school days only; birthdays only
-fact: Many teens run [short] on sleep. | over; long
-fact: Feeling wide awake late at night is [normal] for teens. | impossible; rare for everyone
+fact: Many teens get [too little] sleep. | too much; far too much
+fact: Feeling wide awake late at night is [normal] for teens. | impossible; very rare
 fact: Morning daylight helps reset your body [clock]. | phone; alarm
 @facts 4.4
 fact: Most posts show [highlights], not ordinary life. | boring bits; every moment
@@ -443,7 +443,7 @@ fact: Heavy social media use has been linked to lower [mood] for some teens. | h
 fact: Following [fewer] accounts can help. | more; thousands of
 fact: Spending real time with family and [friends] helps. | screens; strangers
 fact: A highlight is someone's [best] moment. | worst; most ordinary
-fact: You see other people's highlights but your own [everyday] life. | highlight reel; edited life
+fact: You see other people's highlights but your own [everyday life]. | highlight reel; edited life
 @facts 5.1
 fact: Respect means treating people as [valuable]. | useless; invisible
 fact: Listening is a way to show [respect]. | rudeness; boredom
@@ -454,7 +454,7 @@ fact: Respecting parents and teachers builds [trust]. | arguments; mess
 fact: Keeping your word is a way to show [respect]. | rudeness; laziness
 fact: Respecting older people builds good [relationships]. | arguments; excuses
 @facts 5.2
-fact: Service means helping others without expecting anything [back]. | at all; nice
+fact: Service means helping others [without expecting anything back]. | for a reward; to show off
 fact: Carrying a neighbour's shopping is a kind of [service]. | selfishness; laziness
 fact: Coaching younger kids is a way of [serving] others. | ignoring; teasing
 fact: Cooking dinner for your family is [service]. | a bribe; a punishment
@@ -474,9 +474,9 @@ fact: Saying exactly what someone did makes thanks more [meaningful]. | boring; 
 @facts 5.4
 fact: Leading by example means acting the way you want [others] to act. | nobody; only adults
 fact: Younger kids [copy] older kids. | ignore; never notice
-fact: Younger kids copy how you speak, work and [treat] people. | charge your phone; tie your shoes only
-fact: You don't need a [title] to be a leader. | voice; reason
-fact: Doing the right thing [again and again] is leadership. | once only; never
+fact: Younger kids [copy] how you treat people. | never notice; ignore
+fact: [Anyone] can be a leader, even without a title. | Only adults; Only bosses
+fact: Doing the right thing [again and again] is leadership. | once only; only for show
 fact: Your little cousins notice how you [behave]. | sleep; breathe
 fact: Leaders show the way by what they [do]. | wear; own
 fact: Good examples [spread]. | disappear; shrink
@@ -484,25 +484,25 @@ fact: Good examples [spread]. | disappear; shrink
 # Fact banks (content/facts/character.txt)
 @facts 6.1
 fact: [Humility] means being confident without showing off. | Arrogance; Shyness
-fact: Humble people don't put others [down]. | up; first
+fact: Humble people don't put others [down]. | first; at ease
 fact: Humble people give [credit] to others. | blame; orders
 fact: Humble people admit [mistakes]. | nothing; secrets
 fact: Humble people keep [learning]. | boasting; showing off
 fact: Humility makes people easier to [work with]. | avoid; argue with
 fact: Humble people are often more [respected]. | ignored; disliked
-fact: Showing off puts others [down]. | up; first
+fact: Showing off puts others [down]. | at ease; first
 @facts 6.2
 fact: [Feedback] is information that helps you improve. | Gossip; A rumour
-fact: Listen [fully] to feedback. | halfway; never
+fact: Listen to feedback [all the way through]. | halfway; only if it's nice
 fact: Ask questions to [understand] feedback. | argue with; avoid
 fact: [Thank] the person who gives you feedback. | Argue with; Ignore
 fact: Thank people for feedback even if it [stings]. | flatters you; is easy
-fact: You don't have to agree with [all] feedback. | any; no
-fact: Think feedback over [before] you decide. | after; never
+fact: You [don't have to agree] with all feedback. | must agree; have to agree
+fact: Think feedback over [before] you decide. | after; long after
 fact: Getting defensive makes feedback [harder] to use. | easier; quicker
 @facts 6.3
 fact: Contentment means being [grateful] for what you have. | greedy; envious
-fact: Contentment means not always wanting [more]. | less; nothing
+fact: Contentment means [not always wanting more]. | always wanting more; wanting everything
 fact: Comparing your everyday life with others' [highlights] can make you feel you're missing out. | lowlights; homework
 fact: Online posts often show [highlights]. | every boring moment; the whole truth
 fact: [Gratitude] helps with contentment. | Envy; Comparison
@@ -514,7 +514,7 @@ fact: Lots of people work hard to [help] us. | ignore; trick
 fact: [Bus drivers] are people who serve us. | Cartoon characters; Robots
 fact: [Cleaners] do work that often goes unnoticed. | Celebrities; Influencers
 fact: [Volunteers] help without being paid. | Shop owners; Celebrities
-fact: A real thank-you means a [lot]. | little; nothing
-fact: A specific thank-you beats a plain "[thanks]". | essay; gift card
+fact: A real thank-you means [a lot]. | a little; nothing at all
+fact: A [specific] thank-you beats a plain "thanks". | vague; mumbled
 fact: "Thanks for staying late to help us train" is a [specific] thank-you. | vague; rude
 fact: Thanking people who serve shows [respect]. | rudeness; boredom

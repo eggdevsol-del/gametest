@@ -268,7 +268,7 @@ learn: For a minor burn, cool it under cool running water for 20 minutes. Don't 
 learn: For a bleeding cut, press firmly on it with a clean cloth.
 try: Danger first, then help :: mcq | What's the emergency phone number? | {nz:111~au:000}* | 123 | 555
 play: order | What to do when someone's hurt | Check for danger; Call for help; Help the person if it's safe; Stay with them until help arrives
-check: mcq | How long should you cool a burn under running water? | 20 minutes* | 10 seconds | Don't: put butter on it
+check: mcq | How long should you cool a burn under running water? | 20 minutes* | 10 seconds | 1 minute
 check: tf | You should press on a bleeding cut with a clean cloth. | true
 check: mcq | What's the first thing to check when someone is hurt? | Whether there's danger* | Their phone | What they had for lunch
 home: With a grown-up, find your home's first aid kit and check what's in it.

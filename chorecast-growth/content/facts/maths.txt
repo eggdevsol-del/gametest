@@ -68,9 +68,9 @@ fact: More pictures in a row means [more] things. | fewer; the same
 fact: A bar graph uses [bars] to show amounts. | pictures only; sounds
 fact: The [taller] the bar, the more there are. | shorter; thinner
 fact: Read each bar's number from the [scale] on the side. | title; colour
-fact: The tallest bar shows the [most]. | least; same
-fact: The shortest bar shows the [least]. | most; same
-fact: Bars that are the same height show the [same] amount. | different; double
+fact: The tallest bar shows the [most]. | least; fewest
+fact: The shortest bar shows the [least]. | most; biggest number
+fact: Bars that are the same height show [the same amount]. | different amounts; double amounts
 fact: Bar graphs help us [compare] amounts. | hide; spell
 fact: A bar reaching 7 on the scale stands for [7]. | 1; 70
 
@@ -78,7 +78,7 @@ fact: A bar reaching 7 on the scale stands for [7]. | 1; 70
 fact: Data helps answer [questions]. | jokes; riddles only
 fact: First, choose a [question]. | graph; answer
 fact: Then [collect] the data. | guess; hide
-fact: You can collect data by [asking] people. | guessing; dreaming
+fact: You can collect data by [asking people]. | guessing; dreaming
 fact: You can collect data by counting or [measuring]. | wishing; guessing
 fact: Show your data in a tally, a pictograph or a [bar graph]. | song; poem
 fact: Last, look at your graph and [answer] your question. | delete; ignore
@@ -117,13 +117,13 @@ fact: Put the numbers in [order] before finding the median. | a hat; colour grou
 
 @facts 8.3
 fact: A line graph shows how something changes over [time]. | colour; space
-fact: Time usually goes along the [bottom]. | side; title
-fact: The amount usually goes up the [side]. | bottom; title
+fact: Time usually goes along the [bottom]. | side; top
+fact: On a line graph, the amount usually goes [up the side]. | along the bottom; in the title
 fact: A line going up means [increasing]. | decreasing; no change
 fact: A line going down means [decreasing]. | increasing; no change
 fact: A flat line means [no change]. | increasing; decreasing
 fact: A line graph suits temperature over a [day]. | colour; smell
-fact: A steep line shows a [fast] change. | slow; no
+fact: A steep line shows a [fast] change. | slow; tiny
 
 @facts 8.4
 fact: Something that can never happen is [impossible]. | certain; likely
@@ -201,7 +201,7 @@ fact: [Theoretical] probability is what should happen. | Experimental; Lucky
 fact: [Experimental] probability is what actually happened. | Theoretical; Imaginary
 fact: The theoretical probability of heads is [1/2]. | 1/4; 7/10
 fact: 7 heads in 10 tosses is an experimental probability of [7/10]. | 1/2; 3/10
-fact: With more tries, results usually get [closer] to the theory. | further; random
+fact: With more tries, results usually get [closer to] the theory. | further from; less like
 fact: 3 sixes in 12 rolls is an experimental probability of [1/4]. | 1/6; 3/6
 fact: 10 tosses is [not many] for an experiment. | a huge number; too many
 fact: Repeating an experiment many times gives [more reliable] results. | less reliable; the same

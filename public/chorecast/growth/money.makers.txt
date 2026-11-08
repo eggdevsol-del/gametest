@@ -713,7 +713,7 @@ fact: A message asking for your PIN is a [scam]. | bonus; gift
 fact: Real banks [don't] text you for your password. | always; usually
 fact: Slowing down helps you spot a [scam]. | sale; prize
 @facts 1.5
-fact: A statement lists every payment [in and out] of your account. | you plan; you dream of
+fact: A statement lists [every payment in and out] of your account. | only your favourite payments; only big payments
 fact: Check your statement every [month]. | decade; century
 fact: Mistakes are easier to fix [early]. | late; never
 fact: [Fraud] is easier to fix when you spot it early. | Interest; Saving
@@ -726,7 +726,7 @@ fact: Compare [fees] when choosing an account. | logos; colours
 fact: Compare [interest] when choosing an account. | logos; colours
 fact: A good [app] makes an account easier to use. | logo; ad
 fact: Youth accounts often have no [fees] until you're older. | interest; money
-fact: You can [switch] banks later. | never leave; be stuck with
+fact: You [can switch] banks later. | can never leave; are stuck with your
 fact: Switching banks is [allowed]. | illegal; impossible
 fact: How easy it is to get [help] matters too. | lost; famous
 fact: Choosing an account means comparing [options]. | logos only; ads
@@ -754,17 +754,17 @@ fact: Fine print shows the contract [length]. | colour; font only
 fact: Leaving a contract early can cost an exit [fee]. | prize; gift
 fact: "$39 for the first 6 months" might become [$55] after that. | $39 forever; $0
 fact: Find the [total] cost for the whole contract. | first-day; colour
-fact: The first month's price isn't always the [real] price. | first; shown
+fact: The first month's price [isn't always] the real price. | is always; is never
 fact: Data limits are often in the [fine print]. | logo; ad jingle
 fact: Reading the fine print helps you avoid [surprises]. | savings; deals
 @facts 2.4
 fact: A bundle is a good deal only if you'd buy every [part] anyway. | colour; ad
 fact: Shops make bundles to sell [more]. | less; nothing
-fact: Bundles don't always [save] you money. | cost; waste
+fact: Bundles [don't always] save you money. | always; never
 fact: Compare the bundle with buying just what you [need]. | don't want; dream of
 fact: Paying for parts you won't use [wastes] money. | saves; doubles
 fact: A bundle of three things you need can be good [value]. | luck; trouble
-fact: A "bonus" item you don't need isn't really [saving] you money. | costing; selling
+fact: A "bonus" item you don't need [doesn't save] you money. | saves; makes
 fact: Adding up the separate prices helps you [compare]. | forget; guess
 @facts 2.5
 fact: With [prepay], you pay first and can't go over. | postpay; credit
@@ -780,42 +780,42 @@ fact: If a seller comes to your door uninvited, you get a [cooling-off] period. 
 fact: A cooling-off period lets you [change your mind]. | pay extra; get a loan
 fact: For normal shop buys, there's [no] automatic right to change your mind. | always an; a guaranteed
 fact: For shop buys, the shop's [returns policy] decides. | logo; ad
-fact: Contracts often let you [cancel]. | double; never leave
+fact: Contracts often [let you cancel]. | never end; can't be left
 fact: Before cancelling a contract, read the [notice period]. | ads; logo
 fact: Cancelling a contract can have exit [fees]. | prizes; gifts
-fact: Uninvited phone sellers come under [cooling-off] rules too. | no; weather
+fact: Uninvited phone sellers come under [cooling-off] rules too. | no special; weather
 @facts 3.1
 fact: A big purchase costs more than you can pay from one week's [money]. | homework; lunch
-fact: You can [save up] first for a big purchase. | never buy; only borrow
+fact: You can [save up first] for a big purchase. | never buy; only borrow
 fact: Borrowing for a big purchase usually comes with interest or [fees]. | gifts; bonuses
 fact: Saving first is usually [cheaper]. | dearer; riskier
 fact: Saving first [takes longer]. | is instant; takes no time
-fact: Borrowing means paying it off [later]. | never; yesterday
+fact: Borrowing means paying it off [later]. | never; first
 fact: A new bike can be a [big] purchase. | tiny; free
 fact: Paying interest makes a big purchase cost [more]. | less; nothing
 @facts 3.2
 fact: Divide the price by what you can save each [month]. | year; hour
 fact: $800 ÷ $120 is about 6.7, so it takes [7] months. | 6; 12
 fact: $600 saved at $100 a month takes [6] months. | 3; 10
-fact: Already have some saved? Take that off [first]. | last; never
+fact: Take off what you've [already saved] first. | spent; wished for
 fact: $500 price with $200 saved leaves [$300] to save. | $700; $200
 fact: To get there sooner, save [more]. | less; nothing
 fact: You could also [earn] more to get there sooner. | spend; borrow
 fact: A cheaper option means you can buy [sooner]. | later; never
 @facts 3.3
-fact: Second-hand can save a [lot]. | nothing; little
+fact: Second-hand can save [a lot]. | nothing; very little
 fact: Things lose value fast when they're [new]. | old; broken
 fact: Check a second-hand item [works]. | smells; is shiny
 fact: Check a second-hand item for [damage]. | ads; logos
 fact: Make sure a second-hand item isn't [stolen]. | shiny; clean
 fact: Buying from a shop usually gives you more [protection]. | trouble; risk
-fact: Private sales usually [don't] give you protection if it breaks. | always; usually
+fact: Private sales usually [don't give] you protection if it breaks. | always give; give double
 fact: A second-hand bike can cost much [less] than a new one. | more; double
 @facts 3.4
-fact: Many big buys have [running] costs. | hidden prizes; free
-fact: Games for a console are a [running] cost. | one-off; hidden prize
-fact: Repairs are a [running] cost. | free; profit
-fact: Add running costs up [before] you buy. | after; never
+fact: Many big buys have [running costs]. | hidden prizes; free gifts
+fact: Games for a console are [a running] cost. | a one-off; no
+fact: Repairs are [a running cost]. | a profit; a free gift
+fact: Add running costs up [before] you buy. | after; long after
 fact: Running costs plus the price is the [true] cost of owning it. | fake; smallest
 fact: A cheaper thing with low running costs can be better [value]. | luck; trouble
 fact: Power to run something is a running [cost]. | gift; profit
@@ -824,13 +824,13 @@ fact: Subscriptions for a device add to its [cost]. | value; profit
 fact: Interest-free deals often have an [establishment] fee. | birthday; free
 fact: Interest-free deals often have a monthly account [fee]. | prize; gift
 fact: If it isn't paid off in time, a [high] interest rate kicks in. | zero; low
-fact: That interest rate is often over [20]%. | 1; 0
+fact: That interest rate is often [over 20%]. | under 1%; zero
 fact: With [layby], you pay first, then take it home. | credit; interest-free
 fact: Layby has no [interest]. | price; payments
 fact: Layby means no [debt]. | payments; price
-fact: "Interest-free" isn't always [cost-free]. | interesting; free of fun
+fact: "Interest-free" [isn't always] cost-free. | is always; means
 @facts 3.6
-fact: Write down what you really [need] it to do. | wish it looked like; dream
+fact: Write down what you [need it to do]. | wish it looked like; dream about
 fact: Set your [budget] first. | password; alarm
 fact: Compare a few options on price, reviews and [warranty]. | logo; colour only
 fact: Independent testers publish product [reviews]. | ads; prices only
@@ -839,8 +839,8 @@ fact: Big buys deserve a [sleep]. | rush; quick click
 fact: A warranty helps if something [breaks]. | works; arrives
 fact: Research helps you get the best [value]. | colour; ad
 @facts 4.1
-fact: Scams start with [contact]: a text, call, email, DM or ad. | a refund; a pay rise
-fact: The [hook] might be a prize, a scare or a deal. | receipt; refund
+fact: Scams start with [contact], like a text, call, email, DM or ad. | a thank-you note; a refund
+fact: A scam's [hook] might be a prize, a scare or a deal. | receipt; refund
 fact: Scammers add [pressure]: act now! | patience; time to think
 fact: Finally, scammers ask for money or [details]. | nothing; a thank-you card
 fact: Scammers often ask for [gift cards]. | library books; recipes
@@ -857,7 +857,7 @@ fact: A gift card code is as good as [money]. | a sticker; a receipt
 fact: You can't [get back] money from a shared gift card code. | lose; spend
 fact: Paying a bill with gift cards is a sign of a [scam]. | bargain; refund
 @facts 4.3
-fact: Task scams pay a [little] at first. | lot; nothing ever
+fact: Task scams pay [a little] at first. | nothing; nothing ever
 fact: Task scams then ask you to [deposit] money. | stop; rest
 fact: They say depositing will "[unlock]" bigger earnings. | cancel; lower
 fact: Once you pay in, the money [vanishes]. | doubles; grows
@@ -889,13 +889,13 @@ fact: Reports help stop [scammers]. | banks; shops
 fact: If you lost money, tell your [bank]. | friends online; scammer
 fact: Being scammed isn't your [fault]. | birthday; homework
 fact: Scammers are [professionals]. | beginners; harmless
-fact: Talk to a trusted [adult] about a scam. | stranger; scammer
+fact: Talk to a trusted [adult] about a scam. | goldfish; scammer
 fact: Reporting quickly gives the best chance of getting money [back]. | lost; spent
 fact: Scams should be [reported]. | hidden; forgotten
 @facts 5.1
 fact: A [debit] card spends money already in your account. | credit; loan
 fact: A [credit] card borrows the bank's money. | debit; savings
-fact: Credit card money is paid back [later]. | never; yesterday
+fact: Credit card money is paid back [later]. | never; before you buy
 fact: Credit card debt often comes with [interest]. | gifts; refunds
 fact: You usually have to be [18] to get a credit card. | 10; 13
 fact: A debit card is linked to your bank [account]. | phone game; library card
@@ -908,16 +908,16 @@ fact: Interest is charged on the amount you haven't paid [back]. | out; in
 fact: Paying the full balance each month means no interest on [purchases]. | refunds; savings
 fact: $500 owed at 20% a year costs about [$100] a year in interest. | $20; $500
 fact: Paying by the [due date] avoids interest on most cards. | birthday; holidays
-fact: The longer you owe, the [more] interest you pay. | less; no
+fact: The longer you owe, the [more] interest you pay. | less; smaller
 fact: Borrowing costs [more] than paying cash. | less; nothing
 @facts 5.3
 fact: The minimum payment barely [dents] the debt. | doubles; clears
 fact: Much of a small payment goes on [interest]. | savings; refunds
 fact: With minimum payments, the balance shrinks very [slowly]. | quickly; instantly
-fact: Pay as much as you [can]. | can't; want to dodge
+fact: Pay off [as much as you can]. | as little as you can; nothing
 fact: Paying the [full balance] is best. | minimum only; nothing
 fact: The minimum payment keeps you in good standing with the [bank]. | school; shop
-fact: Only paying the minimum keeps you in debt [longer]. | shorter; never
+fact: Only paying the minimum keeps you in debt [longer]. | shorter; less time
 fact: Paying more than the minimum saves [interest]. | time only; nothing
 @facts 5.4
 fact: Buy now, pay later splits a price into smaller [payments]. | gifts; refunds
@@ -933,8 +933,8 @@ fact: A student loan can be [helpful] debt if you can repay it. | always harmful
 fact: A home loan can be helpful if you can [repay] it. | ignore; forget
 fact: Borrowing for things that lose value fast is usually a [bad] idea. | great; smart
 fact: Takeaways lose their value [fast]. | slowly; never
-fact: Ask: will this help me in the [long run]? | next five minutes; at lunch
-fact: Ask: can I afford the [repayments]? | ads; logo
+fact: Good debt helps you [in the long run]. | for five minutes; at lunch only
+fact: Before borrowing, check you can afford the [repayments]. | ads; logo
 fact: Borrowing for clothes is usually [harmful] debt. | helpful; smart
 fact: Helpful debt helps you build something [lasting]. | gone by tomorrow; useless
 @facts 5.6
@@ -942,10 +942,10 @@ fact: The true cost is the price, plus interest, plus [fees]. | refunds; discoun
 fact: Compare the true cost with [saving up] and paying cash. | borrowing more; guessing
 fact: If borrowing costs a lot more, [waiting] might be smarter. | rushing; borrowing more
 fact: A $1,000 phone with $200 of interest and fees truly costs [$1,200]. | $1,000; $800
-fact: Fees are part of the [true] cost. | fake; hidden prize
+fact: Fees are part of the [true] cost. | fake; smallest
 fact: Saving up first avoids [interest]. | the price; the product
 fact: Borrowing makes things cost [more]. | less; nothing
-fact: The sticker price isn't always the [true cost]. | price; number
+fact: The sticker price [isn't always] the true cost. | is always; is never
 @facts 6.1
 fact: Before your first shift, you'll need a [bank account] in your name. | credit card; loan
 fact: You'll need a tax [number] before you start work. | password; nickname
@@ -970,7 +970,7 @@ fact: [Net] pay is what lands in your account. | Gross; Total
 fact: Income [tax] comes out of gross pay. | interest; rent
 fact: Net pay is [smaller] than gross pay. | bigger; double
 fact: Your [payslip] should show every deduction. | receipt; contract
-fact: A deduction is money taken [out] of your pay. | into; onto
+fact: A deduction is money [taken out of] your pay. | added to; doubled in
 fact: Gross minus deductions equals [net] pay. | gross; bonus
 fact: Check your payslip to see what was [taken out]. | added by mistake; hidden
 @facts 6.4
@@ -979,7 +979,7 @@ fact: Permanent workers get paid annual [leave]. | fines; homework
 fact: Check your [payslip] to see how you get holiday pay. | horoscope; receipt
 fact: Annual leave is paid time [off]. | on; overtime
 fact: Casual workers don't usually get set [hours]. | pay; payslips
-fact: Holiday pay for casuals is often added to each [pay]. | year end only; birthday
+fact: Holiday pay for casuals is often added to [each pay]. | your birthday; the end of the year only
 fact: Permanent workers usually have [regular] hours. | random; no
 fact: Knowing your holiday pay helps you check you're paid [right]. | twice; late
 @facts 6.5
@@ -992,7 +992,7 @@ fact: Low [fees] help retirement savings grow. | interest; returns
 fact: Compound growth over decades makes early saving [powerful]. | pointless; risky
 fact: Retirement savings go into a fund in [your] name. | your boss's; the shop's
 @facts 6.6
-fact: Decide [before] payday where your pay will go. | after; never
+fact: Decide [before] payday where your pay will go. | after; long after
 fact: A simple plan has some to [save]. | lose; burn
 fact: A simple plan covers regular [costs] like your phone. | prizes; gifts
 fact: A simple plan has some to [spend]. | hide; owe
@@ -1044,7 +1044,7 @@ fact: Wear and [tear] is a common exclusion. | care; repair
 fact: Not telling the [truth] when you apply can void your cover. | weather; time
 fact: Read the policy [summary] before you buy. | ad; logo
 fact: Be [honest] on the form. | vague; creative
-fact: Things left unattended may [not] be covered. | always; definitely
+fact: Things left unattended [may not] be covered. | will always; will definitely
 @facts 7.6
 fact: Report a theft to the [police]. | shop; school
 fact: Get a [reference number] from the police. | receipt; selfie
@@ -1064,38 +1064,38 @@ fact: Try something [free] first, like a walk. | expensive; online
 fact: A chat with a friend is a free way to feel [better]. | worse; poorer
 fact: Shopping when upset can lead to [regret]. | savings; profit
 @facts 8.2
-fact: Peer pressure is feeling you have to do what your [friends] do. | parents say; teachers say
+fact: Peer pressure is feeling you have to do what your [friends] do. | parents; teachers
 fact: Real friends understand money [limits]. | secrets; passwords
-fact: You can say [no]. | nothing ever; yes always
+fact: You can [say no]. | never say no; only say yes
 fact: You can suggest something [cheaper]. | dearer; secret
 fact: "That's not in my [budget], but I'm keen to hang out" is a good line. | diary; phone
 fact: Having a line ready makes saying no [easier]. | harder; ruder
 fact: Free plans, like a beach day, can be just as [fun]. | boring; expensive
-fact: Spending to fit in can blow your [budget]. | savings goal up; nose
+fact: Spending to fit in can blow your [budget]. | nose; bubbles
 @facts 8.3
 fact: Social media shows [highlights], not real life. | every moment; boring bits
-fact: Some of what you see online is [paid] for. | homemade; free
+fact: Some posts are [paid for] by brands. | ignored; deleted
 fact: Some of what you see online is bought with [debt]. | savings only; magic
 fact: Comparing with others pushes people to [spend]. | save; rest
 fact: Compare yourself with your own [goals]. | friends' feeds; influencers
-fact: Keeping up with others' feeds can cost a [lot]. | little; nothing
+fact: Keeping up with others' feeds can cost [a lot]. | nothing; a few cents
 fact: Some things in posts are [borrowed]. | owned forever; free
-fact: A feed isn't the [whole] story. | first; same
+fact: A feed [isn't the whole] story. | is the whole; tells the whole
 @facts 8.4
 fact: Splitting evenly is [easy]. | impossible; illegal
 fact: Splitting by what each person had is [fairer] when it's very different. | ruder; harder to trust
-fact: Agree on how you'll split [before] you order. | after; never
+fact: Agree on how you'll split [before] you order. | after; long after
 fact: Only lend what you could afford to [lose]. | win; spend twice
-fact: Agree when a friend will pay you [back]. | forward; never
+fact: When you lend money, agree when it'll be [paid back]. | paid forward; forgotten
 fact: A $60 bill split evenly between 4 friends is [$15] each. | $60; $40
 fact: A $45 bill split evenly between 3 friends is [$15] each. | $45; $5
 fact: Talking about money early prevents [arguments]. | savings; friends
 @facts 8.5
-fact: Lots of people feel [stressed] about money. | never worried; perfect
-fact: If money worries you, you're not [alone]. | a robot; a dinosaur
+fact: Money stress is something [lots of people] feel. | nobody; only rich people
+fact: If money worries you, you're [not alone]. | the only one; doing it wrong
 fact: Writing down what you have and what you owe makes the problem [clearer]. | bigger; scarier
 fact: Seeing it written down can make a problem feel [smaller]. | bigger; worse
-fact: Talk to a trusted [adult]. | stranger; scammer
+fact: Talk to a trusted [adult]. | goldfish; scammer
 fact: Free helplines are there if worry gets [big]. | small; boring
 fact: Money stress is [common]. | rare; impossible
 fact: Making a plan can ease [worry]. | interest; savings
@@ -1107,10 +1107,10 @@ fact: Spending that matches your values feels good for [longer]. | shorter; no t
 fact: Knowing your values makes it easier to say [no] to things that don't matter to you. | yes; maybe
 fact: Adventure can be a money [value]. | debt; price
 fact: Helping others can be a [value]. | debt; price
-fact: Different people have different [values]. | the same values; no values
+fact: Different people have [different values]. | the same values; no values
 @facts 9.1
-fact: Lots of things have [running] costs after you buy them. | hidden prize; free
-fact: Ink for a printer is a [running] cost. | one-off; hidden prize
+fact: Lots of things have [running costs] after you buy them. | hidden prizes; free gifts
+fact: Ink for a printer is [a running] cost. | a one-off; no
 fact: Data for a phone is a [running] cost. | one-off; free
 fact: Fuel for a car is a [running] cost. | one-off; free
 fact: The total cost of owning something is its price plus its [running] costs. | refund; resale
@@ -1118,7 +1118,7 @@ fact: Something cheap to buy can be [expensive] to own. | free; cheap
 fact: A cheap printer with dear ink can cost [more] over time. | less; nothing
 fact: Thinking about running costs shows the [full] price. | smallest; fake
 @facts 9.2
-fact: With prepay, you top up [first]. | later; never
+fact: With prepay, you top up [first]. | later; after you spend
 fact: Prepay means you can't spend more than you've [put on]. | earned; borrowed
 fact: A monthly plan bills you every [month]. | year; hour
 fact: Some monthly plans lock you in for a set [time]. | colour; price only
@@ -1152,15 +1152,15 @@ fact: Good small businesses meet a [need]. | mood; rumour
 fact: Busy neighbours might need dogs [walked]. | painted; hidden
 fact: Weeding gardens can meet a [need]. | rumour; trend
 fact: Start with your [skills]. | debts; excuses
-fact: Focus on what people will actually [pay] for. | ignore; complain about
-fact: Always check with a [grown-up] first. | stranger; customer
+fact: Focus on what people will actually [pay for]. | ignore; complain about
+fact: Always check with [a grown-up] first. | a goldfish; a customer
 fact: Car washing is a business idea that meets a [need]. | trend; rumour
 @facts 10.2
 fact: Start with your [costs]. | profits; prices only
 fact: Ingredients and [packaging] are costs. | profit; income
 fact: If 12 cupcakes cost $9 to make, each costs [75c]. | $9; 12c
 fact: If 10 cookies cost $5 to make, each costs [50c]. | $5; 10c
-fact: Your price must be [higher] than your cost to make a profit. | lower; the same as
+fact: Your price must be [higher than] your cost to make a profit. | lower than; the same as
 fact: Your price should be [fair] enough that people will buy. | sky-high; secret
 fact: Cost per item = total cost ÷ number of [items]. | customers; days
 fact: Selling below cost means a [loss]. | profit; bonus
@@ -1174,11 +1174,11 @@ fact: Keep a simple [record] of everything you spend and earn. | secret; guess
 fact: Income is the money that comes [in]. | out; away
 fact: Tracking money shows whether you made a [profit]. | friend; mess
 @facts 10.4
-fact: Happy customers come [back]. | away; never
+fact: Happy customers [come back]. | stay away; never return
 fact: Happy customers tell their [friends]. | lawyers; nobody
 fact: What people say about your business is your [reputation]. | income; price
 fact: Being [reliable] builds a good reputation. | late; rude
-fact: Turn up on [time]. | late; whenever
+fact: Turn up [on time]. | late; whenever you like
 fact: Do what you [promised]. | felt like; forgot
 fact: Be [polite] to customers. | rude; grumpy
-fact: If something goes wrong, own it and [fix] it. | hide; blame others
+fact: If something goes wrong, own it and [fix it]. | hide it; blame others

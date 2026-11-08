@@ -10,7 +10,7 @@
    language, and new lessons wait until the day's cards are done. Cards live on the server (lang_cards), or in this
    device's storage when there's no server. Text in «…» is in the language being learned: device voices say it, or
    for te reo Māori a fluent speaker's recording. */
-const LBOX = [1, 3, 7, 16, 35, 90], LCARDS_PER_DAY = 20, LSTEPS = ['word', 'rule', 'chant', 'line', 'part'];
+const LBOX = [1, 3, 7, 16, 35, 90], LCARDS_PER_DAY = 20, LSTEPS = ['word', 'chars', 'rule', 'chant', 'line', 'part'];
 const lineKey = s => String(s).replace(/[«»]/g, '').normalize('NFC').replace(/\s+/g, ' ').trim();
 const plainL = s => String(s).normalize('NFD').replace(/\p{M}/gu, '').normalize('NFC');
 const answerKey = s => lineKey(s).toLowerCase().replace(/[.,!?¿¡;:"'’“”。、！？]/g, '').replace(/\s+/g, ' ').trim();
@@ -301,9 +301,12 @@ GAMES.tiles = (it, host, ctx, done) => {
   done = once(done);
   const lang = ctx.lang, a = lineKey(it.a), parts = /\s/.test(a) ? a.split(' ') : [...new Intl.Segmenter(lang, { granularity: 'grapheme' }).segment(a)].map(x => x.segment);
   const tiles = shuffle([...parts, ...(it.extra || [])].map((t, i) => ({ t, i })), rnd), picked = [];
+  // While rōmaji or pinyin is on, each single character shows its sound under it (taught on the lesson's character cards)
+  const dw = Dict.get(lang, a), inWord = lang === 'zh' && dw ? new Map([...a].filter(isHan).map((c, i) => [c, hanReadings(a, dw.rd)[i]])) : null;
+  const lab = t => (rubyOn(lang) && [...t].length === 1 ? tileSound(t, lang, inWord) : ''), chip = (t, attr) => `<button class="g-chip${attr.startsWith('data-back') ? ' on' : ''}" ${attr}>${esc(t)}${lab(t) ? `<small class="g-chip-rd">${esc(lab(t))}</small>` : ''}</button>`;
   const draw = () => {
-    host.innerHTML = `${qHead(it.q)}<div class="l-built" lang="${lang}">${picked.map((p, k) => `<button class="g-chip on" data-back="${k}">${esc(p.t)}</button>`).join('') || '<span class="l-built-ph">Tap the tiles in order</span>'}</div>
-      <div class="g-tray" lang="${lang}">${tiles.map((p, j) => (picked.includes(p) ? '' : `<button class="g-chip" data-pick="${j}">${esc(p.t)}</button>`)).join('')}</div>`;
+    host.innerHTML = `${qHead(it.q)}<div class="l-built" lang="${lang}">${picked.map((p, k) => chip(p.t, `data-back="${k}"`)).join('') || '<span class="l-built-ph">Tap the tiles in order</span>'}</div>
+      <div class="g-tray" lang="${lang}">${tiles.map((p, j) => (picked.includes(p) ? '' : chip(p.t, `data-pick="${j}"`))).join('')}</div>`;
     host.querySelectorAll('[data-pick]').forEach(b => { b.onclick = () => { picked.push(tiles[+b.dataset.pick]); Sound.pop(); if (picked.length === parts.length) return finish(); draw(); }; });
     host.querySelectorAll('[data-back]').forEach(b => { b.onclick = () => { picked.splice(+b.dataset.back, 1); Sound.tap(); draw(); }; });
   };
@@ -415,7 +418,10 @@ function langSteps(kid, l, part, quick) {
   }
   if (l.guess && part !== 2) steps.push({ kind: 'guess', item: l.guess });
   if (band === 'makers') rules.forEach(text => steps.push({ kind: 'rule', text }));
-  words.forEach(w => steps.push({ kind: 'word', w }));
+  // After each word, its characters: the ones not met in an earlier lesson (or in part 1) are new
+  const known = charsBefore(l, l.lang); if (split && part !== 1) l.words.slice(0, half).forEach(w => charUnits(w, l.lang).forEach(u => known.add(u.c)));
+  const cards = charSteps(l, words, known);
+  words.forEach(w => { steps.push({ kind: 'word', w }); if (cards.has(w)) steps.push(cards.get(w)); });
   says.forEach(s => steps.push({ kind: 'try', ex: '', item: { type: 'say', q: `«${s.t}»`, en: s.en, rd: s.rd } }));
   if (split && part === 1) { if (words.length >= 2) steps.push({ kind: 'play', item: recapItem(l, words) }); steps.push({ kind: 'part' }); return steps; }
   if (band !== 'makers') rules.forEach(text => steps.push({ kind: 'rule', text, spot: band === 'builders' }));
@@ -559,7 +565,10 @@ function drillSteps(kid, l, have) {
     for (let i = 0; i < 8 && rounds.length < 5 && pool.length >= 3; i++) { const w = pool[i % pool.length], o = others(D, w, 3); if (o) rounds.push({ t: w.t, en: pm(w), opts: [w.t, ...o.map(x => x.t)] }); }
     return rounds.length >= 3 ? [{ kind: 'play', item: { type: 'lpop', rounds }, gen: 'lpop' }] : [];
   };
+  // The lesson's new characters, first: what sound (or what it means), and which one says it. Build comes later.
+  const CA = charAsks(l, ws, near, r), chars = (name, prio, list) => ({ phase: 1, prio, items: list.filter(Boolean).map(item => ({ kind: 'try', ex: '', item, gen: name })) });
   const core = [
+    chars('charSound', 1, CA.sound), chars('charMean', 1, CA.mean), chars('charPick', 2, CA.pick),
     group(1, 1, 'hearMean', ws, ask('hearMean')), group(1, 2, 'hearYes', ws, ask('hearYes')),
     group(2, 1, 'pickWord', ws, ask('pickWord')), group(2, 2, 'heard', ws, ask('heard')), group(2, 3, 'sound', ws, ask('sound')), { phase: 2, prio: 1, items: matchOf() }, { phase: 2, prio: 2, items: memOf() }, { phase: 2, prio: 2, items: lpopOf() },
     group(3, 1, 'build', ws, ask('build')), group(3, 2, 'write', ws, ask('write')), group(3, 3, 'sayIt', ws, ask('sayIt')), group(3, 3, 'letters', ws, ask('letters')),
@@ -646,6 +655,14 @@ function langBody(kid, step, R) {
     return `<div class="gw-card l-word"><span class="l-pic">${esc(w.pic)}</span><p class="l-target" lang="${lang}">${esc(w.t)}</p>${w.rd ? `<p class="l-rd">${esc(w.rd)}</p>` : ''}<p class="l-en">${esc(w.en)}</p>${act ? `<p class="l-act">👐 Do it: ${esc(w.act)}</p>` : ''}
       <div class="l-say-row"><button class="g-go ghost" data-l="hear">🔊 Hear it</button><button class="g-go ghost" data-l="slow">🐢 Slowly</button></div>${canHear(lang, w.t) ? '' : '<p class="l-norec">Recording on its way</p>'}<button class="g-go" data-g="next">Next</button></div>`;
   }
+  if (step.kind === 'chars') {
+    const zh = lang === 'zh', w = step.w, notes = step.units.filter(u => u.note);
+    say(zh ? 'Meet the characters. Tap each one to hear it.' : 'Meet the kana. Each one is a sound. Tap to hear it.');
+    const cell = u => `<button type="button" class="l-ch${u.fresh ? ' new' : ''}"${u.s ? ` data-ch="${esc(u.c)}"` : ''}>${u.fresh ? '<span class="l-ch-new">New</span>' : ''}<span class="l-ch-c" lang="${zh ? 'zh-Hans' : lang}">${esc(u.c)}</span><span class="l-ch-s">${esc(u.s || '·')}</span>${u.m ? `<span class="l-ch-m">${esc(u.m)}</span>` : ''}</button>`;
+    return `<div class="gw-card l-chars"><h3>${zh ? 'The characters in' : 'The kana in'} <span lang="${zh ? 'zh-Hans' : lang}">${esc(w.t)}</span></h3><p class="l-ch-sub">${zh ? 'Each character has a sound and a meaning.' : 'Each kana is one sound.'}</p>
+      <div class="l-ch-grid">${step.units.map(cell).join('')}</div><p class="l-ch-sum">${step.units.map(u => esc(u.c)).join(' + ')} = ${esc(w.rd || '')}${w.en ? `: ${esc(w.en)}` : ''}</p>
+      ${notes.length ? `<ul class="l-ch-notes">${notes.map(u => `<li>${esc(u.note)}</li>`).join('')}</ul>` : ''}<div class="l-say-row"><button class="g-go ghost" data-l="hear">🔊 Hear the word</button></div><button class="g-go" data-g="next">Next</button></div>`;
+  }
   if (step.kind === 'rule') { say(step.spot ? 'Can you see the pattern?' : 'Here’s how it works.'); return `<div class="gw-card learn l-rule"><h3>${step.spot ? '🔍 Spot the pattern' : '📏 How it works'}</h3><p>${esc(local(step.text))}</p><button class="g-go" data-g="next">Next</button></div>`; }
   if (step.kind === 'chant') { say('Chant it with me!'); return `<div class="gw-card l-chant"><h3>🥁 Chant it</h3>${step.lines.map((t, i) => `<p class="l-cl" data-cl="${i}" lang="${lang}">${esc(t)}</p>`).join('')}<div class="l-say-row"><button class="g-go ghost" data-l="chant">▶ Chant</button></div><button class="g-go" data-g="next">Next</button></div>`; }
   if (step.kind === 'line') {
@@ -657,6 +674,7 @@ function langBody(kid, step, R) {
 }
 function langAfter(kid, step, R) {
   const lang = R.lang, text = step.kind === 'word' ? step.w.t : step.kind === 'line' ? step.ln.t : '';
+  if (step.kind === 'chars') { ui.querySelectorAll('[data-ch]').forEach(b => { b.onclick = () => speakLang(b.dataset.ch, lang); }); ui.querySelectorAll('[data-l="hear"]').forEach(b => { b.onclick = () => speakLang(step.w.t, lang); }); return; }
   const voice = step.kind === 'line' ? Math.max(0, (R.who || (R.who = [])).indexOf(step.ln.who) < 0 ? R.who.push(step.ln.who) - 1 : R.who.indexOf(step.ln.who)) : 0;
   ui.querySelectorAll('[data-l]').forEach(b => { b.onclick = () => {
     const k = b.dataset.l; if (k === 'hear') speakLang(text, lang, { voice }); else if (k === 'slow') speakLang(text, lang, { slow: true });

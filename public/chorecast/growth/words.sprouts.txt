@@ -341,13 +341,13 @@ fact: "Who" asks about a [person]. | time; place
 fact: "When" asks about a [time]. | person; place
 @facts 1.3
 fact: Joining words [link] ideas. | hide; delete
-fact: "And" [adds] more. | gives a reason; shows a change
+fact: "And" [adds more]. | gives a reason; shows a change
 fact: "But" shows a [change]. | reason; number
 fact: "Because" gives a [reason]. | change; colour
 fact: "I was hungry, so I ate an apple" uses the joining word [so]. | but; or
-fact: I wanted to play, [but] it rained. | so; because
-fact: I ate an apple [because] I was hungry. | but; or
-fact: I fed the hens [and] collected the eggs. | but; because
+fact: In "I wanted to play, … it rained", the missing joining word is [but]. | so; because
+fact: In "I ate an apple … I was hungry", the missing joining word is [because]. | but; or
+fact: In "I fed the hens … collected the eggs", the missing joining word is [and]. | but; because
 @facts 1.4
 fact: A [noun] names a person, place or thing. | verb; full stop
 fact: A [verb] is a doing word. | noun; capital letter
@@ -359,40 +359,40 @@ fact: In "The cat jumps", the action is [jumps]. | The; cat
 fact: Most sentences need a noun and a [verb]. | comma; question mark
 @facts 2.1
 fact: Good readers ask [questions] while they read. | no questions; jokes
-fact: "Who" questions find out who a story is [about]. | written in; printed on
+fact: "Who" questions ask about the [people] in a story. | colours; numbers
 fact: "Where" questions ask about a [place]. | time; person
-fact: In the story, Mia ran to the [hen house]. | beach; library
-fact: Mia found three [brown] eggs. | blue; green
-fact: Mia found the eggs in the [straw]. | sand; snow
-fact: Mia went to the hen house after [school]. | dinner; midnight
+fact: In Mia's story, she ran to the [hen house]. | beach; library
+fact: In Mia's story, she found three [brown] eggs. | blue; green
+fact: In Mia's story, the eggs were in the [straw]. | sand; snow
+fact: In Mia's story, she went to the hen house after [school]. | dinner; midnight
 fact: Answers to who, what and where questions are often right there in the [words]. | pictures only; weather
 @facts 2.2
 fact: Stories happen in [order]. | a muddle; no order
 fact: Words like first, then and [finally] help us follow the order. | because; but
-fact: In the story, Leo first [planted] a seed. | ate; sold
-fact: Leo [watered] the seed every day. | painted; sold
-fact: After the watering, a green [shoot] poked up. | snake; worm
-fact: At the end, there was a tall [sunflower]. | tree house; rocket
-fact: "Finally" tells you something comes [last]. | first; never
+fact: In Leo's story, he first [planted] a seed. | ate; sold
+fact: In Leo's story, he [watered] the seed every day. | painted; sold
+fact: In Leo's story, a green [shoot] poked up after the watering. | snake; worm
+fact: At the end of Leo's story, there was a tall [sunflower]. | tree house; rocket
+fact: "Finally" tells you something comes [last]. | first; in the middle
 fact: Putting events in order helps you [retell] a story. | forget; lose
 @facts 2.3
 fact: Good readers [guess] what might happen next. | stop; forget
 fact: Good guesses use [clues]. | lollies; music
 fact: Dark clouds are a clue that it might [rain]. | snow lollies; be sunny
-fact: Sam's kite climbed [higher] and higher. | lower; slower
-fact: Then the wind [dropped]. | doubled; laughed
-fact: When the wind dropped, the kite probably came [down]. | up; inside
+fact: In Sam's story, the kite climbed [higher and higher]. | lower and lower; slower and slower
+fact: In Sam's story, the wind [dropped]. | doubled; laughed
+fact: In Sam's story, when the wind dropped, the kite probably came [down]. | up; inside
 fact: People grabbing umbrellas is a clue about the [weather]. | dinner; homework
 fact: A clue is a [hint] that helps you work something out. | lie; noise
 @facts 2.4
 fact: The [main idea] is what the writing is mostly about. | first word; title only
-fact: The other bits that tell us how are [details]. | main ideas; titles
+fact: The bits that tell us more about the main idea are [details]. | main ideas; titles
 fact: Bees fly from [flower] to flower. | cloud; car
 fact: Bees drink [nectar]. | milk; juice
 fact: Bees carry [pollen]. | stones; leaves
 fact: Bees take nectar back to the [hive]. | sea; school
 fact: Bees use nectar to make [honey]. | butter; bread
-fact: You can tell the main idea in [one] sentence. | ten; a hundred
+fact: You can tell the main idea in [one sentence]. | ten sentences; a hundred sentences
 @facts 3.1
 fact: The vowels are a, e, i, o and [u]. | b; t
 fact: In "hop", the vowel makes a [short] sound. | long; silent
@@ -413,13 +413,13 @@ fact: "Milk" ends in [k]. | ck; c
 fact: Saying a word slowly helps you hear the [vowel]. | colour; page
 @facts 3.3
 fact: Most words add [s] for more than one. | es; x
-fact: One cat, two [cats]. | cates; caties
-fact: One fox, two [foxes]. | foxs; foxies
+fact: The plural of "cat" is [cats]. | cates; caties
+fact: The plural of "fox" is [foxes]. | foxs; foxies
 fact: Words ending in s, x, ch or sh add [es]. | x; z
-fact: One bus, two [buses]. | buss; busies
-fact: One dish, two [dishes]. | dishs; dishies
-fact: One child, two [children]. | childs; childes
-fact: One mouse, two [mice]. | mouses; mousies
+fact: The plural of "bus" is [buses]. | buss; busies
+fact: The plural of "dish" is [dishes]. | dishs; dishies
+fact: The plural of "child" is [children]. | childs; childes
+fact: The plural of "mouse" is [mice]. | mouses; mousies
 @facts 3.4
 fact: A [compound] word is two words joined together. | silent; short
 fact: "Sunflower" is made of sun and [flower]. | flour; floor
@@ -437,7 +437,7 @@ fact: Adjectives tell us more about a [noun]. | verb; full stop
 fact: "Red" is an [adjective]. | verb; noun
 fact: "Soft" tells us how something [feels]. | sounds; costs
 fact: Adjectives can tell us [colour], size or shape. | time; price
-fact: Adjectives usually go [before] the noun. | after the full stop; at the end of the page
+fact: Adjectives usually come [before the noun]. | after the full stop; at the end of the page
 fact: In "a shiny shell", the adjective is [shiny]. | a; shell
 fact: In "a tall tree", "tall" tells us the tree's [size]. | colour; smell
 @facts 4.2
@@ -475,25 +475,25 @@ fact: Kiri the kiwi was [shy]. | loud; bossy
 fact: When visitors came, Kiri hid behind the [ferns]. | car; couch
 fact: We learn about characters from what they say, do and [think]. | weigh; cost
 fact: Hiding from visitors shows Kiri is [shy]. | brave; noisy
-fact: A story can have [more than one] character. | only one; no
+fact: A story [can have more than one] character. | can only ever have one; can never have more than one
 @facts 5.2
 fact: The [setting] is where and when a story happens. | character; problem
 fact: A story could be set at the [beach]. | full stop; question mark
 fact: A story could be set [long ago]. | in a comma; in a capital letter
 fact: In the story, the old [lighthouse] flashed over the sea. | car; school
 fact: The lighthouse story happens on a [stormy] night. | sunny; calm
-fact: The lighthouse is by the [sea]. | desert; mall
+fact: In the lighthouse story, the lighthouse is by the [sea]. | desert; mall
 fact: "At night" tells us [when] a story happens. | who; why
 fact: "In a forest" tells us [where] a story happens. | when; who
 @facts 5.3
 fact: Most stories have a [problem]. | price; recipe
 fact: The [solution] is how the problem gets fixed. | setting; character
 fact: In the story, Ana's [kite] got stuck in a tree. | ball; hat
-fact: The kite got stuck in a [tree]. | puddle; car
-fact: Ana's brother got a [ladder]. | spoon; blanket
-fact: Ana and her brother got the kite down [together]. | alone; never
+fact: In Ana's story, the kite got stuck in [a tree]. | a puddle; a car
+fact: In Ana's story, her brother got [a ladder]. | a spoon; a blanket
+fact: In Ana's story, she and her brother got the kite down [together]. | alone; by magic
 fact: A problem can be when someone [wants] something. | eats; sleeps
-fact: Getting the kite down was the [solution]. | problem; setting
+fact: In Ana's story, getting the kite down was the [solution]. | problem; setting
 @facts 5.4
 fact: The [beginning] introduces the characters and the setting. | end; middle
 fact: The [middle] is where the problem happens. | beginning; title
@@ -520,16 +520,16 @@ fact: "Play" is spelt with [ay]. | ai; a
 fact: "Tail" is spelt with [ai]. | ay; a
 fact: "Day" is spelt with [ay]. | ai; a
 fact: "Paint" has ai in the [middle]. | end; beginning only
-fact: Listen for [where] the sound comes in the word. | when; who
+fact: Where the sound comes in a word helps you pick [ai or ay]. | ee or ea; k or ck
 @facts 6.3
 fact: Add [-ing] for something happening now. | -ed; -s only
 fact: Add [-ed] for something that already happened. | -ing; -ly
-fact: "Jump" becomes [jumping] for now. | jumped; jumps ago
+fact: "Jump" becomes [jumping] for something happening now. | jumped; jumpt
 fact: "Jump" becomes [jumped] for the past. | jumping; jumps
-fact: "Hop" becomes [hopping]. | hoping; hopeing
+fact: "Hop" with -ing becomes [hopping]. | hoping; hopeing
 fact: "Hop" becomes [hopped] in the past. | hoped; hopt
-fact: Short words with one short vowel [double] the last letter. | drop; hide
-fact: "Run" becomes [running]. | runing; runeing
+fact: Short words with one short vowel [double] the last letter before -ing. | drop; hide
+fact: "Run" with -ing becomes [running]. | runing; runeing
 @facts 6.4
 fact: Letters we don't say are called [silent] letters. | loud; capital
 fact: "Knee" has a silent [k]. | n; e

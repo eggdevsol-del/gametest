@@ -47,7 +47,7 @@ learn: For a minor burn, cool it under cool running water for 20 minutes. Don't 
 learn: For a bleeding cut, press firmly on it with a clean cloth.
 try: Danger first, then help :: mcq | What's the emergency phone number? | {nz:111~au:000}* | 123 | 555
 play: order | What to do when someone's hurt | Check for danger; Call for help; Help the person if it's safe; Stay with them until help arrives
-check: mcq | How long should you cool a burn under running water? | 20 minutes* | 10 seconds | Don't: put butter on it
+check: mcq | How long should you cool a burn under running water? | 20 minutes* | 10 seconds | 1 minute
 check: tf | You should press on a bleeding cut with a clean cloth. | true
 check: mcq | What's the first thing to check when someone is hurt? | Whether there's danger* | Their phone | What they had for lunch
 home: With a grown-up, find your home's first aid kit and check what's in it.
@@ -115,22 +115,22 @@ fact: Push-ups and squats build [strength]. | sunburn; tiredness
 fact: Stretching builds [flexibility]. | eyesight; hearing
 fact: Warm up [before] exercise. | instead of; months after
 fact: Cool down [after] exercise. | before; instead of
-fact: Build up [slowly] instead of doing too much at once. | never; all at once
+fact: Increase how much exercise you do [slowly]. | all at once; as fast as you can
 fact: Rest days let your muscles [repair]. | disappear; shrink; freeze
-fact: Doing too much at once makes an injury [more] likely. | less; impossible
+fact: Doing too much at once makes an injury [more] likely. | less; far less
 @facts 1.2
 fact: Teens need about [8 to 10] hours of sleep a night. | 3 to 4; 5 to 6; 14 to 16
 fact: In the teenage years, the body clock shifts [later]. | earlier; backwards
-fact: A later body clock makes it harder to feel sleepy [early] in the evening. | late at night; at 2 a.m.
+fact: A later body clock makes it harder to feel sleepy [early in the evening]. | late at night; after midnight
 fact: Waking up at the same time [every day] helps your sleep. | once a month; only on weekends
 fact: Morning [daylight] helps set your body clock. | darkness; caffeine; screen time
 fact: Caffeine late in the day makes it [harder] to fall asleep. | easier; quicker
 fact: Turn screens off well [before] bed. | after; long after
 fact: Not enough sleep makes it harder to [concentrate]. | yawn; feel tired
 @facts 1.3
-fact: The sun's [UV] rays burn skin. | blue; warm; moon
-fact: UV rays can pass through [cloud]. | nothing; air
-fact: You can get sunburnt on a [cloudy] day. | rainy indoor; moonlit
+fact: The sun's [UV] rays burn skin. | warm; rainbow
+fact: UV rays [can] pass through cloud. | can't; never
+fact: You can get sunburnt [even when it's cloudy]. | only when it's hot; only at the beach
 fact: Sunburn can lead to skin [cancer] later in life. | freckles disappearing; better eyesight
 fact: Put sunscreen on again every [two] hours. | ten; twenty-four
 fact: Put sunscreen on again after [swimming]. | lunch only; reading
@@ -144,7 +144,7 @@ fact: Cool a minor burn under cool running water for [20] minutes. | 2; 60
 fact: Never put [ice] on a burn. | cool water; cool running water
 fact: Never put [butter] on a burn. | cool water; cool running water
 fact: Press firmly on a bleeding cut with a clean [cloth]. | stick; leaf; spoon
-fact: Check for danger to [yourself] and others first. | nobody; only the weather
+fact: Check for danger to [yourself and others] first. | the weather; your phone
 
 # Fact banks (content/facts/body.txt)
 @facts 2.1
@@ -160,7 +160,7 @@ fact: Vitamins and minerals come mostly from fruit and [vegetables]. | lollies; 
 fact: The nutrition information [panel] shows what's in a food. | logo; price tag
 fact: The panel shows amounts per serving and per [100 g]. | 1 kg; packet colour
 fact: Use the per [100 g] column to compare similar foods. | serving size; logo
-fact: Ingredients are listed from most to [least]. | most again; alphabetically
+fact: Ingredients are listed from [most to least]. | least to most; A to Z
 fact: Ingredients are listed by [weight]. | colour; price
 fact: If sugar is near the [top] of the list, there's a lot of it. | bottom; middle only
 fact: Serving sizes can [differ] between brands. | never differ; always match
@@ -170,7 +170,7 @@ fact: Even mild dehydration can make you [tired]. | stronger; taller
 fact: Dehydration can give you a [headache]. | haircut; tan
 fact: Dehydration makes it harder to [concentrate]. | sleep; yawn
 fact: Drink water through the [day]. | year; night only
-fact: Drink more when it's [hot]. | cold only; raining indoors
+fact: Drink more when it's [hot]. | freezing; dark
 fact: Drink more when you're [exercising]. | sleeping; reading
 fact: Pale yellow urine usually means you're drinking [enough]. | too little; nothing
 fact: Dark yellow urine means drink [more]. | less; nothing
@@ -178,8 +178,8 @@ fact: Dark yellow urine means drink [more]. | less; nothing
 fact: Wash your hands before [cooking]. | sleeping; reading
 fact: Wash your hands after touching raw [meat]. | bread; apples
 fact: Keep raw meat away from food that's [ready to eat]. | in the fridge; frozen
-fact: Use a [separate] board for raw meat. | the same; a dirty
-fact: Cook chicken all the way [through]. | halfway; on the outside only
-fact: Cook mince all the way [through]. | halfway; on the outside only
+fact: Use a [separate] board for raw meat. | dirty; muddy
+fact: Cook chicken [all the way through]. | halfway; on the outside only
+fact: Cook mince [all the way through]. | halfway; on the outside only
 fact: Put leftovers in the [fridge] soon after the meal. | sun; cupboard
 fact: Washing a board well between uses stops [germs] spreading. | flavours; colours

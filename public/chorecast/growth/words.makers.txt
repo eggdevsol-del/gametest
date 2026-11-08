@@ -329,7 +329,7 @@ fact: "School exists" isn't a claim because it isn't [arguable]. | true; short
 fact: "Phones should stay in lockers during class" [is] a claim. | isn't; can never be
 fact: Everything in the piece should [support] the claim. | ignore; contradict
 fact: A claim people could disagree with is [arguable]. | a fact; pointless
-fact: A persuasive piece argues for [one] main claim. | no; ten different
+fact: A persuasive piece argues for [one main claim]. | no claims; ten different claims
 @facts 1.2
 fact: Back your claim with [reasons]. | jokes; insults
 fact: Back each reason with [evidence]. | rumours; opinions only
@@ -343,7 +343,7 @@ fact: Reasons explain [why] the claim is right. | when; who
 fact: A [counterargument] is the strongest point against your claim. | rebuttal; reason
 fact: Answering a counterargument is called a [rebuttal]. | claim; summary
 fact: Mentioning the other side shows you're [fair]. | weak; wrong
-fact: Being fair makes you [more] convincing. | less; never
+fact: Being fair makes you [more] convincing. | less; much less
 fact: "Some say gardens take too much work" is a [counterargument]. | rebuttal; claim
 fact: "But a weekly roster shares it out" is a [rebuttal]. | counterargument; claim
 fact: A rebuttal [answers] the other side. | ignores; agrees with
@@ -362,19 +362,19 @@ fact: A clause has a subject and a [verb]. | full stop; comma
 fact: A [main] clause makes sense alone. | subordinate; broken
 fact: "We ran outside" is a [main] clause. | subordinate; question
 fact: A [subordinate] clause doesn't make sense alone. | main; full
-fact: "When the bell rang" is a [subordinate] clause. | main; full sentence
+fact: "When the bell rang" is [a subordinate] clause. | a main; a complete
 fact: A main clause plus a subordinate clause makes a [complex] sentence. | simple; broken
 fact: "When the bell rang, we ran outside" is a [complex] sentence. | simple; run-on
 fact: In "We ran outside", the verb is [ran]. | We; outside
 @facts 2.2
 fact: A singular subject takes a [singular] verb. | plural; past
-fact: "The dog [runs]." | run; running
-fact: "The dogs [run]." | runs; runned
+fact: The right verb for "The dog …" is "[runs]". | run; running
+fact: The right verb for "The dogs …" is "[run]". | runs; runned
 fact: A plural subject takes a [plural] verb. | singular; future
-fact: "The box of apples [is] heavy." | are; were
+fact: In "The box of apples … heavy", the right verb is "[is]". | are; were
 fact: In "The box of apples is heavy", the subject is the [box]. | apples; heavy
 fact: Words in between the subject and verb can be [tricky]. | ignored completely; the subject
-fact: "The children [are] playing." | is; was
+fact: In "The children … playing", the right verb is "[are]". | is; was
 @facts 2.3
 fact: A [run-on] joins sentences with no proper punctuation. | summary; claim
 fact: A full stop can fix a [run-on]. | claim; metaphor
@@ -391,7 +391,7 @@ fact: In the [passive] voice, the action is done to the subject. | active; prese
 fact: "The cat was chased by the dog" is in the [passive] voice. | active; future
 fact: The active voice is usually [clearer]. | longer; weaker
 fact: Passive helps when the doer is [unknown]. | famous; the subject
-fact: "The window was broken" doesn't say [who] broke it. | when; what
+fact: "The window was broken" [doesn't say] who broke it. | tells you; names
 fact: "Mia kicked the ball" is in the [active] voice. | passive; future
 @facts 3.1
 fact: Figurative language isn't [literal]. | written; English
@@ -410,7 +410,7 @@ fact: [Imagery] appeals to the senses. | Bias; Tone
 fact: The five senses are sight, sound, smell, taste and [touch]. | thought; balance
 fact: "The bread smelled warm and sweet" appeals to [smell]. | sight; touch
 fact: Writers use imagery to make readers [feel] something. | forget; skip
-fact: Wind can't really [howl] like a wolf. | blow; move
+fact: Wind [can't really] howl like a wolf. | can really; always does
 @facts 3.3
 fact: [Tone] is the writer's attitude. | Bias; Imagery
 fact: Tone can be cheerful, serious, angry or [sarcastic]. | purple; plural
@@ -422,7 +422,7 @@ fact: Spotting tone helps you understand what the writer really [means]. | spell
 fact: "Nice job" said with an eye-roll is [sarcastic]. | sincere; cheerful
 @facts 3.4
 fact: [Bias] is when writing leans to one side. | Tone; Imagery
-fact: Bias can come from leaving things [out]. | in; on top
+fact: Bias can come from [leaving things out]. | using full stops; writing neatly
 fact: [Loaded] words carry strong feelings. | Plain; Short
 fact: "Eyesore" is a [loaded] word. | neutral; plain
 fact: "Buzzing hangout" makes the skate park sound [good]. | bad; dangerous
@@ -438,7 +438,7 @@ fact: A thesis should be specific and [arguable]. | obviously true; secret
 fact: "Every school should teach basic first aid" is a [thesis]. | fact; summary
 fact: Every paragraph in an essay [supports] the thesis. | ignores; contradicts
 fact: A vague thesis makes an essay [weaker]. | stronger; longer
-fact: An arguable thesis is one people could [disagree] with. | never question; ignore
+fact: An arguable thesis is one people could [disagree with]. | never question; never doubt
 fact: The thesis tells the reader what you'll [argue]. | ignore; spell
 @facts 4.2
 fact: TEEL stands for Topic sentence, Explanation, Evidence and [Link]. | List; Letter
@@ -454,7 +454,7 @@ fact: An introduction [hooks] the reader. | bores; confuses
 fact: An introduction gives some [background]. | bibliography; marks
 fact: An introduction ends with the [thesis]. | conclusion; quote only
 fact: A conclusion restates the thesis in [new] words. | the exact same; no
-fact: A conclusion [sums up] the main points. | adds new; ignores
+fact: A conclusion [sums up] the main points. | ignores; argues with
 fact: A conclusion leaves a final [thought]. | question mark only; spelling error
 fact: Don't add brand-new [arguments] in the conclusion. | full stops; capital letters
 fact: The introduction comes [first]. | last; in the middle
@@ -489,7 +489,7 @@ fact: Repetition adds [emphasis]. | confusion; silence
 fact: Writers vary sentence length to control the [pace]. | spelling; font
 fact: Short sentences create [tension]. | boredom; calm
 fact: Short sentences add [emphasis]. | confusion; length
-fact: Long sentences can slow things [down]. | up; away
+fact: Long sentences can [slow things down]. | speed things up; make things faster
 fact: Long sentences can add [detail]. | tension only; spelling errors
 fact: A mix of sentence lengths keeps readers [interested]. | bored; confused
 fact: "Silence. Then a crash." uses [short] sentences for drama. | long; run-on
@@ -504,10 +504,10 @@ fact: "Stingy" has a [negative] connotation. | positive; cheerful
 fact: Writers choose words to shape how readers [feel]. | spell; weigh
 fact: Two words can share a meaning but carry different [feelings]. | spellings only; fonts
 @facts 6.1
-fact: Ask: Who [made] this source? | coloured; printed
-fact: Ask: Do they [know] the topic? | dislike; ignore
-fact: Ask: Why did they [make] it? | colour; print
-fact: Ask: [When] was it made? | Where; How heavy
+fact: It helps to know [who made] a source. | the colour of; the weight of
+fact: A good source is made by someone who [knows] the topic. | dislikes; ignores
+fact: A source made to sell you something may be [biased]. | neutral; perfect
+fact: Checking [the date] of a source tells you if it's up to date. | the colour; the font
 fact: Trustworthy sources show who [wrote] them. | coloured; printed
 fact: Trustworthy sources give [evidence]. | rumours; jokes
 fact: Trustworthy sources are [up to date]. | very old; undated
@@ -522,7 +522,7 @@ fact: Read past the [headline]. | ending; author
 fact: The article often says something much less [dramatic]. | boring; true
 fact: A headline question that isn't answered is a sign of [clickbait]. | good journalism; evidence
 @facts 6.3
-fact: Photos can be [edited]. | never changed; locked
+fact: Photos can be [edited]. | knitted; planted
 fact: Photos can be [cropped]. | baked; sung
 fact: Cropping can hide what's just outside the [frame]. | page number; caption only
 fact: An old photo can be shared as if it's [new]. | older; a drawing

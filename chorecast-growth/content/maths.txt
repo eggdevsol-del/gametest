@@ -1022,10 +1022,10 @@ hook: A door swings open. How do we measure how far it turned?
 learn: Angles are measured in degrees (°). A full turn is 360°.
 learn: Angles on a straight line add up to 180°.
 learn: Angles around a point add up to 360°.
-try: If one angle on a line is 120°, the other is 60° :: gap | On a straight line, 135° and _° | 45
+try: If one angle on a line is 120°, the other is 60° :: gap | On a straight line, 135° and _° make 180° | 45
 play: match | Match the turn to its angle | Full turn=360°; Half turn=180°; Quarter turn=90°; Three-quarter turn=270°
 check: gap | Two angles sit on a straight line. One is 70°. The other is _° | 110
-check: gap | Angles around a point: 100°, 150° and _° | 110
+check: gap | Angles around a point: 100°, 150° and _° make 360° | 110
 check: mcq | A right angle is… | 90°* | 180° | 45°
 home: Find three right angles at home, and one angle bigger than a right angle.
 skill: angles-line

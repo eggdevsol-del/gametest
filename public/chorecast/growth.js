@@ -1252,7 +1252,7 @@ function stageFor(step, R) {
   if (step.kind === 'hook') return ['hook', { icon: l.icon, text: `${local(l.title)} ${local(l.hook)}` }];
   if (step.kind === 'learn') return ['idea', { text: `${step.title || ''} ${local(step.text)}`, icon: l ? l.icon : R.cs ? R.cs.icon : R.mode === 'story' ? '📈' : '💡' }];
   if (step.kind === 'word') return ['idea', { text: step.w.en, icon: step.w.pic || (l && l.icon) }];
-  if (LSTEPS.includes(step.kind)) return ['idea', { text: step.text || (step.ln && step.ln.en) || '', icon: { rule: '📏', chant: '🥁', line: '📖', part: '🌱' }[step.kind] }];
+  if (LSTEPS.includes(step.kind)) return ['idea', { text: step.text || (step.ln && step.ln.en) || '', icon: { chars: '🔤', rule: '📏', chant: '🥁', line: '📖', part: '🌱' }[step.kind] }];
   if (step.kind === 'home') return ['home', { text: local((l && l.home) || '') }];
   if (step.kind === 'intro') return ['intro', { n: R.steps.length - 1 }];
   if (step.kind === 'decide') return ['fork', { n: step.opts.length }];
@@ -1637,7 +1637,7 @@ window.Growth = {
   mastered: kid => mastered(kid),
   parentView: () => parentView(), resetParent: () => { if (Grow.parent) Grow.parent.msg = ''; },
   ready: () => C.scheduleRender(),
-  _debug: { Packs, TREES, LANGS, LANG_LIVE, get maths() { return MATHS; }, GEN_KINDS: Object.keys(GEN), get pace() { return { perDay, newLeft, suggestions, lessonsLeft, restOfDay, langNewLeft, addRounds, mergeRetry, runPoints, stepWorth, pct, ROUND_SIZE, ROUND_MIN }; }, get pick() { return { kidLangs, langPickable }; }, get drill() { return { MSKILL, MGAMES, MSKILL_GAMES, lessonDrill, factOf, factPut, mq, fq, TIME_WORDS }; }, get lang() { return { langSteps, drillSteps, DRILL, senses, sameSense, soundKey, phraseTiles, gapOf, lcNew, lcAnswer, lcCards, lcDue, cardItem: cardItem2, Dict, LBOX }; }, get run() { return Grow.run; }, get view() { return Grow.view; }, parsePack, parseMoments, parseCases, loadBand, loadExtras, allLessons, lessonById, get Moments() { return Moments; }, get Cases() { return Cases; } },
+  _debug: { Packs, TREES, LANGS, LANG_LIVE, get maths() { return MATHS; }, GEN_KINDS: Object.keys(GEN), get pace() { return { perDay, newLeft, suggestions, lessonsLeft, restOfDay, langNewLeft, addRounds, mergeRetry, runPoints, stepWorth, pct, ROUND_SIZE, ROUND_MIN }; }, get pick() { return { kidLangs, langPickable }; }, get drill() { return { MSKILL, MGAMES, MSKILL_GAMES, lessonDrill, factOf, factPut, mq, fq, TIME_WORDS }; }, get lang() { return { langSteps, drillSteps, charUnits, hanReadings, charsBefore, charAsks, tileSound, KANA, HAN, DRILL, senses, sameSense, soundKey, phraseTiles, gapOf, lcNew, lcAnswer, lcCards, lcDue, cardItem: cardItem2, Dict, LBOX }; }, get run() { return Grow.run; }, get view() { return Grow.view; }, parsePack, parseMoments, parseCases, loadBand, loadExtras, allLessons, lessonById, get Moments() { return Moments; }, get Cases() { return Cases; } },
 };
 
 
@@ -3858,7 +3858,7 @@ const PRIZE_CSS = `
    language, and new lessons wait until the day's cards are done. Cards live on the server (lang_cards), or in this
    device's storage when there's no server. Text in «…» is in the language being learned: device voices say it, or
    for te reo Māori a fluent speaker's recording. */
-const LBOX = [1, 3, 7, 16, 35, 90], LCARDS_PER_DAY = 20, LSTEPS = ['word', 'rule', 'chant', 'line', 'part'];
+const LBOX = [1, 3, 7, 16, 35, 90], LCARDS_PER_DAY = 20, LSTEPS = ['word', 'chars', 'rule', 'chant', 'line', 'part'];
 const lineKey = s => String(s).replace(/[«»]/g, '').normalize('NFC').replace(/\s+/g, ' ').trim();
 const plainL = s => String(s).normalize('NFD').replace(/\p{M}/gu, '').normalize('NFC');
 const answerKey = s => lineKey(s).toLowerCase().replace(/[.,!?¿¡;:"'’“”。、！？]/g, '').replace(/\s+/g, ' ').trim();
@@ -4149,9 +4149,12 @@ GAMES.tiles = (it, host, ctx, done) => {
   done = once(done);
   const lang = ctx.lang, a = lineKey(it.a), parts = /\s/.test(a) ? a.split(' ') : [...new Intl.Segmenter(lang, { granularity: 'grapheme' }).segment(a)].map(x => x.segment);
   const tiles = shuffle([...parts, ...(it.extra || [])].map((t, i) => ({ t, i })), rnd), picked = [];
+  // While rōmaji or pinyin is on, each single character shows its sound under it (taught on the lesson's character cards)
+  const dw = Dict.get(lang, a), inWord = lang === 'zh' && dw ? new Map([...a].filter(isHan).map((c, i) => [c, hanReadings(a, dw.rd)[i]])) : null;
+  const lab = t => (rubyOn(lang) && [...t].length === 1 ? tileSound(t, lang, inWord) : ''), chip = (t, attr) => `<button class="g-chip${attr.startsWith('data-back') ? ' on' : ''}" ${attr}>${esc(t)}${lab(t) ? `<small class="g-chip-rd">${esc(lab(t))}</small>` : ''}</button>`;
   const draw = () => {
-    host.innerHTML = `${qHead(it.q)}<div class="l-built" lang="${lang}">${picked.map((p, k) => `<button class="g-chip on" data-back="${k}">${esc(p.t)}</button>`).join('') || '<span class="l-built-ph">Tap the tiles in order</span>'}</div>
-      <div class="g-tray" lang="${lang}">${tiles.map((p, j) => (picked.includes(p) ? '' : `<button class="g-chip" data-pick="${j}">${esc(p.t)}</button>`)).join('')}</div>`;
+    host.innerHTML = `${qHead(it.q)}<div class="l-built" lang="${lang}">${picked.map((p, k) => chip(p.t, `data-back="${k}"`)).join('') || '<span class="l-built-ph">Tap the tiles in order</span>'}</div>
+      <div class="g-tray" lang="${lang}">${tiles.map((p, j) => (picked.includes(p) ? '' : chip(p.t, `data-pick="${j}"`))).join('')}</div>`;
     host.querySelectorAll('[data-pick]').forEach(b => { b.onclick = () => { picked.push(tiles[+b.dataset.pick]); Sound.pop(); if (picked.length === parts.length) return finish(); draw(); }; });
     host.querySelectorAll('[data-back]').forEach(b => { b.onclick = () => { picked.splice(+b.dataset.back, 1); Sound.tap(); draw(); }; });
   };
@@ -4263,7 +4266,10 @@ function langSteps(kid, l, part, quick) {
   }
   if (l.guess && part !== 2) steps.push({ kind: 'guess', item: l.guess });
   if (band === 'makers') rules.forEach(text => steps.push({ kind: 'rule', text }));
-  words.forEach(w => steps.push({ kind: 'word', w }));
+  // After each word, its characters: the ones not met in an earlier lesson (or in part 1) are new
+  const known = charsBefore(l, l.lang); if (split && part !== 1) l.words.slice(0, half).forEach(w => charUnits(w, l.lang).forEach(u => known.add(u.c)));
+  const cards = charSteps(l, words, known);
+  words.forEach(w => { steps.push({ kind: 'word', w }); if (cards.has(w)) steps.push(cards.get(w)); });
   says.forEach(s => steps.push({ kind: 'try', ex: '', item: { type: 'say', q: `«${s.t}»`, en: s.en, rd: s.rd } }));
   if (split && part === 1) { if (words.length >= 2) steps.push({ kind: 'play', item: recapItem(l, words) }); steps.push({ kind: 'part' }); return steps; }
   if (band !== 'makers') rules.forEach(text => steps.push({ kind: 'rule', text, spot: band === 'builders' }));
@@ -4407,7 +4413,10 @@ function drillSteps(kid, l, have) {
     for (let i = 0; i < 8 && rounds.length < 5 && pool.length >= 3; i++) { const w = pool[i % pool.length], o = others(D, w, 3); if (o) rounds.push({ t: w.t, en: pm(w), opts: [w.t, ...o.map(x => x.t)] }); }
     return rounds.length >= 3 ? [{ kind: 'play', item: { type: 'lpop', rounds }, gen: 'lpop' }] : [];
   };
+  // The lesson's new characters, first: what sound (or what it means), and which one says it. Build comes later.
+  const CA = charAsks(l, ws, near, r), chars = (name, prio, list) => ({ phase: 1, prio, items: list.filter(Boolean).map(item => ({ kind: 'try', ex: '', item, gen: name })) });
   const core = [
+    chars('charSound', 1, CA.sound), chars('charMean', 1, CA.mean), chars('charPick', 2, CA.pick),
     group(1, 1, 'hearMean', ws, ask('hearMean')), group(1, 2, 'hearYes', ws, ask('hearYes')),
     group(2, 1, 'pickWord', ws, ask('pickWord')), group(2, 2, 'heard', ws, ask('heard')), group(2, 3, 'sound', ws, ask('sound')), { phase: 2, prio: 1, items: matchOf() }, { phase: 2, prio: 2, items: memOf() }, { phase: 2, prio: 2, items: lpopOf() },
     group(3, 1, 'build', ws, ask('build')), group(3, 2, 'write', ws, ask('write')), group(3, 3, 'sayIt', ws, ask('sayIt')), group(3, 3, 'letters', ws, ask('letters')),
@@ -4494,6 +4503,14 @@ function langBody(kid, step, R) {
     return `<div class="gw-card l-word"><span class="l-pic">${esc(w.pic)}</span><p class="l-target" lang="${lang}">${esc(w.t)}</p>${w.rd ? `<p class="l-rd">${esc(w.rd)}</p>` : ''}<p class="l-en">${esc(w.en)}</p>${act ? `<p class="l-act">👐 Do it: ${esc(w.act)}</p>` : ''}
       <div class="l-say-row"><button class="g-go ghost" data-l="hear">🔊 Hear it</button><button class="g-go ghost" data-l="slow">🐢 Slowly</button></div>${canHear(lang, w.t) ? '' : '<p class="l-norec">Recording on its way</p>'}<button class="g-go" data-g="next">Next</button></div>`;
   }
+  if (step.kind === 'chars') {
+    const zh = lang === 'zh', w = step.w, notes = step.units.filter(u => u.note);
+    say(zh ? 'Meet the characters. Tap each one to hear it.' : 'Meet the kana. Each one is a sound. Tap to hear it.');
+    const cell = u => `<button type="button" class="l-ch${u.fresh ? ' new' : ''}"${u.s ? ` data-ch="${esc(u.c)}"` : ''}>${u.fresh ? '<span class="l-ch-new">New</span>' : ''}<span class="l-ch-c" lang="${zh ? 'zh-Hans' : lang}">${esc(u.c)}</span><span class="l-ch-s">${esc(u.s || '·')}</span>${u.m ? `<span class="l-ch-m">${esc(u.m)}</span>` : ''}</button>`;
+    return `<div class="gw-card l-chars"><h3>${zh ? 'The characters in' : 'The kana in'} <span lang="${zh ? 'zh-Hans' : lang}">${esc(w.t)}</span></h3><p class="l-ch-sub">${zh ? 'Each character has a sound and a meaning.' : 'Each kana is one sound.'}</p>
+      <div class="l-ch-grid">${step.units.map(cell).join('')}</div><p class="l-ch-sum">${step.units.map(u => esc(u.c)).join(' + ')} = ${esc(w.rd || '')}${w.en ? `: ${esc(w.en)}` : ''}</p>
+      ${notes.length ? `<ul class="l-ch-notes">${notes.map(u => `<li>${esc(u.note)}</li>`).join('')}</ul>` : ''}<div class="l-say-row"><button class="g-go ghost" data-l="hear">🔊 Hear the word</button></div><button class="g-go" data-g="next">Next</button></div>`;
+  }
   if (step.kind === 'rule') { say(step.spot ? 'Can you see the pattern?' : 'Here’s how it works.'); return `<div class="gw-card learn l-rule"><h3>${step.spot ? '🔍 Spot the pattern' : '📏 How it works'}</h3><p>${esc(local(step.text))}</p><button class="g-go" data-g="next">Next</button></div>`; }
   if (step.kind === 'chant') { say('Chant it with me!'); return `<div class="gw-card l-chant"><h3>🥁 Chant it</h3>${step.lines.map((t, i) => `<p class="l-cl" data-cl="${i}" lang="${lang}">${esc(t)}</p>`).join('')}<div class="l-say-row"><button class="g-go ghost" data-l="chant">▶ Chant</button></div><button class="g-go" data-g="next">Next</button></div>`; }
   if (step.kind === 'line') {
@@ -4505,6 +4522,7 @@ function langBody(kid, step, R) {
 }
 function langAfter(kid, step, R) {
   const lang = R.lang, text = step.kind === 'word' ? step.w.t : step.kind === 'line' ? step.ln.t : '';
+  if (step.kind === 'chars') { ui.querySelectorAll('[data-ch]').forEach(b => { b.onclick = () => speakLang(b.dataset.ch, lang); }); ui.querySelectorAll('[data-l="hear"]').forEach(b => { b.onclick = () => speakLang(step.w.t, lang); }); return; }
   const voice = step.kind === 'line' ? Math.max(0, (R.who || (R.who = [])).indexOf(step.ln.who) < 0 ? R.who.push(step.ln.who) - 1 : R.who.indexOf(step.ln.who)) : 0;
   ui.querySelectorAll('[data-l]').forEach(b => { b.onclick = () => {
     const k = b.dataset.l; if (k === 'hear') speakLang(text, lang, { voice }); else if (k === 'slow') speakLang(text, lang, { slow: true });
@@ -4993,9 +5011,12 @@ const MSKILL = (() => {
      num, time (h:mm on a 12-hour clock), frac, cmp (<, > or =), yn (yes or no), text, expr (an expression in n, or a
      and b), ratio. A num answer under 0 is never a typed gap (the number pad has no minus). */
   const fmt = (v, unit) => (unit === 'num' || !unit ? neg(+v) : String(v));
+  // "an" before a number said with a vowel sound: an 8 m rectangle, an 11 cm base, an 80° angle (but a 110 m fence)
+  const aan = t => String(t).replace(/\b([Aa]) (?=8|1[18](?![0-9])|1[18],\d{3}(?!\d))/g, '$1n ');
+  const sup = n => String(n).replace(/\d/g, d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
   const P = (ask, a, calc, wrongs, say, o = {}) => {
     const unit = o.unit || 'num', A = fmt(a, unit);
-    return { ask, a: A, calc, unit, wrongs: [...new Set(wrongs.map(w => fmt(w, unit)))].filter(w => w !== A && w !== 'NaN' && w !== '−0'), say, mem: o.mem || '', gap: o.gap !== false && unit === 'num' && +a >= 0 };
+    return { ask: aan(ask), a: A, calc, unit, wrongs: [...new Set(wrongs.map(w => fmt(w, unit)))].filter(w => w !== A && w !== 'NaN' && w !== '−0'), say: x => aan(say(x)), mem: o.mem || '', gap: o.gap !== false && unit === 'num' && +a >= 0 };
   };
   const E = (expr, a, calc, wrongs, o) => P(`${expr} = _`, a, calc, wrongs, x => `${expr} = ${x}`, { mem: expr, ...o });
   const near = (a, ...d) => d.map(x => a + x).filter(x => x >= 0);
@@ -5071,8 +5092,8 @@ const MSKILL = (() => {
       r => { let n = ri(r, 1001, 98999); const u = pick(r, [100, 1000]); if (n % u === u / 2) n++; const a = Math.round(n / u) * u, other = a === Math.ceil(n / u) * u ? Math.floor(n / u) * u : Math.ceil(n / u) * u; return P(`Round ${commas(n)} to the nearest ${u === 100 ? 'hundred' : 'thousand'}: _`, a, `Math.round(${n}/${u})*${u}`, [other, Math.round(n / 10) * 10 === a ? a + u : Math.round(n / 10) * 10, a + u * 10], x => `${commas(n)} rounded to the nearest ${u === 100 ? 'hundred' : 'thousand'} is ${commas(x)}.`); },
     ],
     decimals: [
-      r => { const t = ri(r, 1, 9); return P(`${t} tenths written as a decimal is _`, t / 10, `${t}/10`, [t / 100, t, t * 10], x => `${t} tenths written as a decimal is ${x}.`, { mem: `${t} tenths` }); },
-      r => { const h = ri(r, 1, 99); if (h % 10 === 0) return null; return P(`${h} hundredths written as a decimal is _`, h / 100, `${h}/100`, [h / 10, h / 1000, h], x => `${h} hundredths written as a decimal is ${x}.`, { mem: `${h} hundredths` }); },
+      r => { const t = ri(r, 1, 9), w = `${t} tenth${t === 1 ? '' : 's'}`; return P(`${w} written as a decimal is _`, t / 10, `${t}/10`, [t / 100, t, t * 10], x => `${w} written as a decimal is ${x}.`, { mem: w }); },
+      r => { const h = ri(r, 1, 99), w = `${h} hundredth${h === 1 ? '' : 's'}`; if (h % 10 === 0) return null; return P(`${w} written as a decimal is _`, h / 100, `${h}/100`, [h / 10, h / 1000, h], x => `${w} written as a decimal is ${x}.`, { mem: w }); },
       r => { const [a, b, c] = distinct3(r), x = `${a}.${b}${c}`, p = pick(r, [1, 2]), d = p === 1 ? b : c; return P(`In ${x}, the ${d} is worth _`, d / 10 ** p, `${d}/${10 ** p}`, [d, d / 10 ** (3 - p), d * 10], y => `In ${x}, the ${d} is worth ${y}.`); },
     ],
     'compare-decimals': [
@@ -5109,7 +5130,7 @@ const MSKILL = (() => {
       r => { const a = ri(r, 4, 10), b = ri(r, 3, 8), c = ri(r, 2, 6), d = ri(r, 1, 5); return P(`An L shape is made of a ${a} m by ${b} m rectangle and a ${c} m by ${d} m rectangle. Its area is _ m²`, a * b + c * d, `${a}*${b}+${c}*${d}`, [a * b * c * d, a * b, (a + c) * (b + d)], x => `A ${a} m by ${b} m rectangle and a ${c} m by ${d} m rectangle make ${x} m² together.`); },
     ],
     'area-or-perimeter': [
-      r => { const [what, a] = pick(r, [['a fence around a paddock', 'perimeter'], ['carpet for a bedroom floor', 'area'], ['a frame around a painting', 'perimeter'], ['grass seed for a lawn', 'area'], ['paint for a wall', 'area'], ['a ribbon around the edge of a cake board', 'perimeter'], ['tiles for a bathroom floor', 'area'], ['lights along the edge of a deck', 'perimeter']]); return P(`To work out how much ${what} you need, do you use the area or the perimeter? _`, a, `'${a}'`, [a === 'area' ? 'perimeter' : 'area'], x => `For ${what}, you use the ${x}.`, { unit: 'text' }); },
+      r => { const [what, a] = pick(r, [['how much fence goes around a paddock', 'perimeter'], ['how much carpet covers a bedroom floor', 'area'], ['how long a frame around a painting is', 'perimeter'], ['how much grass seed a lawn needs', 'area'], ['how much paint covers a wall', 'area'], ['how much ribbon goes around the edge of a cake board', 'perimeter'], ['how many tiles cover a bathroom floor', 'area'], ['how many lights fit along the edge of a deck', 'perimeter']]); return P(`Do you use the area or the perimeter to work out ${what}? _`, a, `'${a}'`, [a === 'area' ? 'perimeter' : 'area'], x => `To work out ${what}, you use the ${x}.`, { unit: 'text' }); },
       r => { const w = ri(r, 4, 12), h = ri(r, 3, 9), fence = r() < 0.5; return fence ? P(`How many metres of fence go around a ${w} m by ${h} m paddock? _`, 2 * (w + h), `2*(${w}+${h})`, [w * h, w + h], x => `A ${w} m by ${h} m paddock needs ${x} m of fence.`) : P(`How many square metres of carpet cover a ${w} m by ${h} m floor? _`, w * h, `${w}*${h}`, [2 * (w + h), w + h], x => `A ${w} m by ${h} m floor needs ${x} m² of carpet.`); },
     ],
     /* ----- Makers ----- */
@@ -5190,7 +5211,7 @@ const MSKILL = (() => {
     mean: [r => { const xs = [ri(r, 2, 20), ri(r, 2, 20), ri(r, 2, 20)], last = 4 - (xs.reduce((s, x) => s + x, 0) % 4) + 4 * ri(r, 0, 3); xs.push(last); const m = xs.reduce((s, x) => s + x, 0) / 4; return P(`The mean of ${xs.join(', ')} is _`, m, `(${xs.join('+')})/4`, [m + 1, xs.reduce((s, x) => s + x, 0), xs.slice().sort((a, b) => a - b)[1]], x => `The mean of ${xs.join(', ')} is ${x}.`); }],
     powers: [r => { const a = ri(r, 2, 12), c = r() < 0.4 && a < 7; return c ? E(`${a}³`, a ** 3, `${a}**3`, [a * 3, a * a, a ** 3 + a]) : E(`${a}²`, a * a, `${a}*${a}`, [a * 2, a * a + a, (a + 1) * (a + 1)]); }],
     'square-roots': [r => { const a = ri(r, 2, 15); return P(`The square root of ${a * a} is _`, a, `Math.sqrt(${a * a})`, [a * a / 2, a + 1, a * 2], x => `The square root of ${a * a} is ${x}.`, { mem: `√${a * a}` }); }],
-    'index-laws': [r => { const a = ri(r, 2, 9), m = ri(r, 2, 6), n = ri(r, 2, 6); return P(`${a}^${m} × ${a}^${n} = ${a}^_`, m + n, `${m}+${n}`, [m * n, m + n + 1, Math.abs(m - n) || m + n + 2], x => `${a}^${m} × ${a}^${n} = ${a}^${x}`); }],
+    'index-laws': [r => { const a = ri(r, 2, 9), m = ri(r, 2, 6), n = ri(r, 2, 6); return P(`${a}${sup(m)} × ${a}${sup(n)} = ${a} to the power of _`, m + n, `${m}+${n}`, [m * n, m + n + 1, Math.abs(m - n) || m + n + 2], x => `${a}${sup(m)} × ${a}${sup(n)} = ${a}${sup(x)}`); }],
     'linear-patterns': [r => { const s = ri(r, 2, 9), a = ri(r, 1, 12); return P(`What comes next? ${a}, ${a + s}, ${a + 2 * s}, ${a + 3 * s}, _`, a + 4 * s, `${a}+4*${s}`, [a + 5 * s, a + 3 * s + 1, a + 4 * s + 2], x => `After ${a}, ${a + s}, ${a + 2 * s}, ${a + 3 * s} comes ${x}.`); }],
     'linear-graphs': [r => { const m = ri(r, 2, 5), c = ri(r, 1, 9), x = ri(r, 1, 9); return P(`y = ${m}x + ${c}. When x = ${x}, y = _`, m * x + c, `${m}*${x}+${c}`, [m * (x + c), m + x + c, m * x], v => `When y = ${m}x + ${c} and x = ${x}, y = ${v}`); }],
     'area-triangles': [r => { const b = ri(r, 2, 14), h = ri(r, 2, 10) * 2; return P(`A triangle has a base of ${b} cm and a height of ${h} cm. Its area is _ cm²`, b * h / 2, `${b}*${h}/2`, [b * h, b + h, b * h / 4], x => `A triangle with a ${b} cm base and ${h} cm height has an area of ${x} cm².`); }],
@@ -5242,10 +5263,19 @@ const lightningOf = (items, q = 'Lightning round! True or false?') => (items.len
 /* ---------- Facts ----------
    fact: A sentence with the [answer] in square brackets. | wrong; wrong; wrong
    The wrong answers must make the sentence clearly false, and each is a real choice for the gap. */
+// Does a word take "an"? (an egg, an hour, an 8; a unicorn, a useful, a one-off)
+const takesAn = x => /^(8|11\b|18\b|hour|honest|honour|heir)/i.test(x) || (/^[aeiou]/i.test(x) && !/^(uni(?![mn])|use|usu|uten|one\b|once|eu|ewe)/i.test(x));
 function factOf(val) {
   const [t, w] = String(val).split('|').map(x => x.trim()), m = (t || '').match(/^(.*?)\[([^\]]+)\](.*)$/);
   if (!m) return null;
-  return { pre: m[1], key: m[2], post: m[3], wrongs: splitList(w || '') };
+  let [, pre, key, post] = m, wrongs = splitList(w || '');
+  // A "a" or "an" just before the gap moves into the answers, so every choice gets its own: "as [an egg]", not "as an [seed]"
+  const art = pre.match(/(^|[\s"“‘'(])(a|an)\s+$/) || pre.match(/^()(A|An)\s+$/);
+  if (art) {
+    const put = x => `${takesAn(x) ? 'an' : 'a'} ${x}`.replace(/^a/, /^A/.test(art[2]) ? 'A' : 'a');
+    pre = pre.slice(0, art.index + art[1].length); key = put(key); wrongs = wrongs.map(put);
+  }
+  return { pre, key, post, wrongs };
 }
 const factPut = (f, x) => `${f.pre}${x}${f.post}`;
 const fq = {
@@ -5561,6 +5591,143 @@ const PCSS = `
 .g-key.hit{background:#DDF8E6;color:#1F8A4C}.g-key.miss{background:#FFE9E3;color:#B4442B}
 `;
 const pstyle = document.createElement('style'); pstyle.id = 'growth-play-css'; pstyle.textContent = PCSS; document.head.appendChild(pstyle);
+
+/* ---------- Characters, taught before a kid builds words from them ----------
+   Japanese kana are sounds: each one is shown with its sound, and with how it works in the word (は said "wa", a small
+   っ, a long vowel, a small ゃ joining the kana before it). Mandarin characters each have a sound and a meaning. Right
+   after a word is introduced, a card shows the characters in it that the kid hasn't met in an earlier lesson. The
+   lesson then asks about those characters (what sound, which one, what it means) before any "Build it" step, and
+   build tiles show each character's sound underneath while rōmaji or pinyin is on (Sprouts, and stages 1 and 2).
+   Mandarin meanings are short, kid-sized glosses for stage 1's characters, checked by Claude; a fluent speaker
+   reviews them with the course (see zh.map.md). */
+
+// Hiragana, with the matching katakana worked out from it (each katakana sits 0x60 after its hiragana)
+const KANA = (() => {
+  const m = {};
+  for (const x of ('あa いi うu えe おo かka きki くku けke こko さsa しshi すsu せse そso たta ちchi つtsu てte とto なna にni ぬnu ねne のno ' +
+    'はha ひhi ふfu へhe ほho まma みmi むmu めme もmo やya ゆyu よyo らra りri るru れre ろro わwa をo んn がga ぎgi ぐgu げge ごgo ' +
+    'ざza じji ずzu ぜze ぞzo だda ぢji づzu でde どdo ばba びbi ぶbu べbe ぼbo ぱpa ぴpi ぷpu ぺpe ぽpo ゃya ゅyu ょyo ぁa ぃi ぅu ぇe ぉo ゔvu').split(' ')) {
+    const c = x[0], s = x.slice(1); m[c] = s; m[String.fromCharCode(c.charCodeAt(0) + 0x60)] = s;
+  }
+  return m;
+})();
+const SMALL_KANA = 'ゃゅょぁぃぅぇぉャュョァィゥェォ', STOP_KANA = 'っッ';
+
+// Mandarin, stage 1: each character's usual sound and a short meaning. Characters that only work as part of a longer
+// word say which word.
+const HAN = Object.fromEntries(`你 nǐ you|好 hǎo good|小 xiǎo small|明 míng bright|丽 lì beautiful|早 zǎo early|上 shàng up, on|晚 wǎn evening, late|安 ān calm, safe|老 lǎo old|师 shī teacher|再 zài again|见 jiàn see|天 tiān day, sky|请 qǐng please|谢 xiè thank|不 bù not, no|客 kè guest|气 qì air|是 shì is, yes|的 de a linking word (whose, what kind)|对 duì right, correct|起 qǐ rise, get up|没 méi not, don't have|关 guān close, shut|系 xì link, tie|们 men more than one person|大 dà big|家 jiā home, family|朋 péng friend|友 yǒu friend|我 wǒ I, me|叫 jiào call, be called|名 míng name|字 zì written character, word|他 tā he, him|她 tā she, her|谁 shéi who|人 rén person|新 xīn new|西 xī west|兰 lán orchid (a flower)|澳 ào bay|利 lì benefit, sharp|亚 yà used in place names, like Asia|中 zhōng middle|国 guó country|男 nán boy, man|孩 hái child|女 nǚ girl, woman|学 xué learn, study|校 xiào school|生 shēng life, be born|这 zhè this|很 hěn very|高 gāo tall, high|兴 xìng a happy mood|认 rèn recognise|识 shí know|妈 mā mum|马 mǎ horse|吗 ma turns a sentence into a question|难 nán hard, difficult|过 guò pass, go past|累 lèi tired|害 hài harm|怕 pà afraid|无 wú without, none|聊 liáo chat|饿 è hungry|渴 kě thirsty|冷 lěng cold|热 rè hot|病 bìng sick|疼 téng sore, it hurts|有 yǒu have|点 diǎn dot, a little|儿 ér adds an “r” sound to the word before|事 shì thing, matter|太 tài too, very|棒 bàng great|了 le shows something has happened|漂 piào part of 漂亮 (pretty)|亮 liàng bright, shiny|做 zuò do, make|得 de links an action to how well it's done|一 yī one|二 èr two|三 sān three|四 sì four|五 wǔ five|六 liù six|七 qī seven|八 bā eight|九 jiǔ nine|十 shí ten|几 jǐ how many|个 gè a counting word for things|岁 suì years old|两 liǎng two (of something)|百 bǎi hundred|钱 qián money|块 kuài piece, chunk|毛 máo hair, fur|红 hóng red|色 sè colour|黄 huáng yellow|绿 lǜ green|蓝 lán blue|白 bái white|黑 hēi black|橙 chéng orange|粉 fěn powder, pink|棕 zōng brown|颜 yán face, colour|紫 zǐ purple|灰 huī grey, ash|房 fáng house, room|子 zi often ends a naming word|门 mén door|屋 wū house|顶 dǐng top|窗 chuāng window|户 hù door, home|篱 lí fence|笆 ba part of 篱笆 (fence)|花 huā flower|阳 yáng sun|云 yún cloud|空 kōng sky, empty|彩 cǎi colourful|虹 hóng rainbow|狗 gǒu dog|猫 māo cat|鸟 niǎo bird|鱼 yú fish|牛 niú cow|羊 yáng sheep, goat|猪 zhū pig|鸡 jī chicken|兔 tù rabbit|熊 xióng bear|头 tóu head|鹰 yīng eagle|蝴 hú part of 蝴蝶 (butterfly)|蝶 dié butterfly|那 nà that|只 zhī a counting word for animals|岛 dǎo island|海 hǎi sea|陆 lù land|地 dì ground, earth|在 zài at, in|哪 nǎ which, where|面 miàn side, face|下 xià down, under|里 lǐ inside|爸 bà dad|爷 yé grandad|奶 nǎi milk, nana|宝 bǎo treasure|哥 gē older brother|弟 dì younger brother|姐 jiě older sister|妹 mèi younger sister|帮 bāng help|忙 máng busy|吃 chī eat|喝 hē drink|水 shuǐ water|苹 píng part of 苹果 (apple)|果 guǒ fruit|香 xiāng nice-smelling|蕉 jiāo part of 香蕉 (banana)|包 bāo bag, bun|蛋 dàn egg|米 mǐ rice|饭 fàn cooked rice, a meal|土 tǔ soil|豆 dòu bean|胡 hú part of 胡萝卜 (carrot)|萝 luó part of 萝卜 (radish)|卜 bo part of 萝卜 (radish)|条 tiáo a long, thin strip|要 yào want|给 gěi give|商 shāng trade|店 diàn shop|买 mǎi buy|卖 mài sell|饱 bǎo full (after eating)|来 lái come|星 xīng star|期 qī a stretch of time|今 jīn now, this|昨 zuó yesterday|零 líng zero|午 wǔ noon|雨 yǔ rain|晴 qíng sunny|刮 guā blow (wind)|风 fēng wind|放 fàng put, let go|假 jià holiday|存 cún save, keep|目 mù eye|标 biāo mark, target|自 zì self|行 xíng go, walk|车 chē car, vehicle|立 lì stand|坐 zuò sit|看 kàn look|听 tīng listen|说 shuō speak, say|洗 xǐ wash|碗 wǎn bowl|手 shǒu hand|喂 wèi feed|收 shōu collect, put away|拾 shí pick up|间 jiān room, between|铺 pū spread out|床 chuáng bed|扫 sǎo sweep|倒 dào pour, tip out|垃 lā part of 垃圾 (rubbish)|圾 jī part of 垃圾 (rubbish)|完 wán finish|都 dōu all|真 zhēn really, true`
+  .split('|').map(x => { const [c, s, ...m] = x.split(' '); return [c, [s, m.join(' ')]]; }));
+
+const toneless = s => String(s).normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+const isHan = c => /\p{Script=Han}/u.test(c), isKana = c => /[\p{Script=Hiragana}\p{Script=Katakana}ー]/u.test(c);
+
+// Each Mandarin character's sound in this word, cut from the word's pinyin (so 一 in 一百 is yì, and 儿 is just "r");
+// the table's sound if the pinyin doesn't line up
+function hanReadings(t, rd) {
+  const chars = [...t].filter(isHan), table = chars.map(c => (HAN[c] || [''])[0]), src = String(rd || '').normalize('NFD'), letters = [];
+  for (let i = 0; i < src.length; i++) if (!/\p{M}|[\s'’\-·,.!?]/u.test(src[i])) letters.push([src[i].toLowerCase(), i]);
+  const flat = letters.map(x => x[0]).join(''), out = [];
+  let p = 0;
+  for (const c of chars) {
+    let want = toneless((HAN[c] || [''])[0]);
+    if (c === '儿' && flat.slice(p, p + 2) !== 'er' && flat[p] === 'r') want = 'r';
+    if (!want || flat.slice(p, p + want.length) !== want) return table;
+    const a = letters[p][1], b = p + want.length < letters.length ? letters[p + want.length][1] : src.length;
+    out.push(src.slice(a, b).replace(/[\s'’\-·,.!?]+$/u, '').normalize('NFC').toLowerCase()); p += want.length;
+  }
+  return p === letters.length ? out : table;
+}
+
+// The characters in a word, as units: { c, s (sound), m (meaning, Mandarin), note (how it works here) }
+function charUnits(w, lang) {
+  const t = String(w.t || ''), rd = toneless(w.rd || '');
+  if (lang === 'zh') {
+    const rs = hanReadings(t, w.rd);
+    return [...t].filter(isHan).map((c, i) => {
+      const [s0, m] = HAN[c] || ['', ''], s = rs[i] || s0;
+      return { c, s, m, note: s && s0 && s !== s0 && c !== '儿' ? `${c} is usually ${s0}. In ${t}, it's said ${s}.` : c === '儿' && s === 'r' ? `儿 here just adds an “r” to the sound before it.` : '' };
+    });
+  }
+  if (lang !== 'ja') return [];
+  const us = [];
+  for (const c of t) {
+    if (!isKana(c)) continue;
+    const prev = us[us.length - 1];
+    if (SMALL_KANA.includes(c) && prev && prev.s) {
+      const v = KANA[c], base = prev.s, joined = /^y/.test(v) ? (/^(sh|ch|j)i$/.test(base) ? base.slice(0, -1) + v.slice(1) : base.slice(0, -1) + v) : (base === 'u' ? 'w' : base.replace(/[aiueo]$/, '')) + v;
+      us[us.length - 1] = { c: prev.c + c, s: joined, note: `The small ${c} joins ${prev.c} to make one sound: ${joined}.` };
+      continue;
+    }
+    if (STOP_KANA.includes(c)) { us.push({ c, s: '', note: `A small ${c} is a tiny stop. The sound after it is said a little harder.` }); continue; }
+    if (c === 'ー') { us.push({ c, s: '', note: 'ー makes the sound before it longer.' }); continue; }
+    us.push({ c, s: KANA[c] || '' });
+  }
+  // How a kana works in this word: は said "wa", を said "o", and a vowel that makes the one before it long
+  us.forEach((u, i) => {
+    const prev = us[i - 1];
+    if ((u.c === 'は') && i === us.length - 1 && /wa$/.test(rd)) { u.note = 'は usually says “ha”. At the end of a greeting like this one, it says “wa”.'; u.s = 'wa'; }
+    else if (u.c === 'を') u.note = 'を says “o”. It goes after the thing you do something to.';
+    else if (prev && prev.s && /^[うおウオ]$/.test(u.c) && /o$/.test(prev.s) && /ō/.test(String(w.rd))) u.note = `${u.c} after an “o” sound makes it long: ō.`;
+    else if (prev && prev.s && /^[うウ]$/.test(u.c) && /u$/.test(prev.s) && /ū/.test(String(w.rd))) u.note = `${u.c} after a “u” sound makes it long: ū.`;
+  });
+  return us;
+}
+// One tile's sound, for build tiles: a kana, a small kana, or a Mandarin character (its sound in the answer if known)
+function tileSound(t, lang, inWord) {
+  if (lang === 'ja') return SMALL_KANA.includes(t) ? `small ${KANA[t]}` : STOP_KANA.includes(t) ? 'stop' : t === 'ー' ? 'long' : KANA[t] || '';
+  if (lang === 'zh') return (inWord && inWord.get(t)) || (HAN[t] || [''])[0];
+  return '';
+}
+// Every character a kid has been taught before lesson l: the words of the lessons before it in its stage
+function charsBefore(l, lang) {
+  const pack = Packs[`${l.tree}.${l.band}`], all = pack ? pack.units.flatMap(u => u.lessons) : [], at = all.indexOf(l), seen = new Set();
+  (at > 0 ? all.slice(0, at) : []).forEach(x => x.words.forEach(w => charUnits(w, lang).forEach(u => seen.add(u.c))));
+  return seen;
+}
+// The "meet the characters" cards for these words: one after each word that has characters the kid hasn't met yet
+function charSteps(l, words, known) {
+  const lang = l.lang, out = new Map();
+  if (lang !== 'ja' && lang !== 'zh') return out;
+  for (const w of words) {
+    const us = charUnits(w, lang).map(u => ({ ...u, fresh: !known.has(u.c) }));
+    if (us.some(u => u.fresh)) out.set(w, { kind: 'chars', w, units: us });
+    us.forEach(u => known.add(u.c));
+  }
+  return out;
+}
+// Questions about this lesson's new characters, asked before any "Build it": what sound, which one, what it means
+// (The character in these questions is plain text, not «…», so its rōmaji, pinyin or meaning isn't shown with it.)
+function charAsks(l, ws, near, r) {
+  const lang = l.lang; if (lang !== 'ja' && lang !== 'zh') return { sound: [], pick: [], mean: [] };
+  const before = charsBefore(l, lang), uniq = list => list.filter((u, i, a) => u.s && a.findIndex(x => x.c === u.c) === i);
+  const fresh = uniq(ws.flatMap(w => charUnits(w, lang)).filter(u => !before.has(u.c)));
+  const pool = uniq([...ws, ...near.filter(x => x.kind === 'w')].flatMap(w => charUnits(w, lang)));
+  const key = u => toneless(u.s), shufR = a => shuf(a, r);
+  const others = (u, ok) => { const o = []; for (const x of shufR(pool)) { if (x.c !== u.c && ok(x) && !o.some(y => !ok(y, x))) o.push(x); if (o.length === 2) break; } return o.length === 2 ? o : null; };
+  const sound = fresh.map(u => { const o = others(u, (x, y) => key(x) !== key(y || u)); return o && { type: 'mcq', q: `What sound does ${u.c} make?`, opts: shufR([{ t: u.s, ok: true }, ...o.map(x => ({ t: x.s, ok: false }))]) }; });
+  const pick = fresh.map(u => { const o = others(u, (x, y) => key(x) !== key(y || u)); return o && { type: 'mcq', q: `Which one says “${u.s}”?`, opts: shufR([{ t: u.c, ok: true }, ...o.map(x => ({ t: x.c, ok: false }))]), lang }; });
+  const mean = lang !== 'zh' ? [] : fresh.filter(u => u.m && !/^part of /.test(u.m)).map(u => { const o = others(u, (x, y) => x.m && !/^part of /.test(x.m) && !sameSense(x.m, (y || u).m)); return o && { type: 'mcq', q: `What does ${u.c} mean?`, opts: shufR([{ t: u.m, ok: true }, ...o.map(x => ({ t: x.m, ok: false }))]) }; });
+  return { sound, pick, mean };
+}
+
+const CHCSS = `
+.l-chars{text-align:center}
+.l-chars h3{margin:0 0 4px}
+.l-ch-sub{margin:0 0 10px;color:#5A6380;font-weight:700}
+.l-ch-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:6px 0 10px}
+.l-ch{position:relative;display:flex;flex-direction:column;align-items:center;min-width:72px;max-width:150px;padding:10px 10px 8px;border-radius:16px;background:#F2F4FA;color:#0D1530;box-shadow:inset 0 -3px 0 rgba(13,21,48,.08);border:0;font:inherit;cursor:pointer}
+.l-ch.new{background:#FFF6D6;box-shadow:inset 0 0 0 2px #F5C542,inset 0 -3px 0 rgba(13,21,48,.08)}
+.l-ch-new{position:absolute;top:-8px;right:-6px;padding:1px 7px;border-radius:999px;background:#F5C542;color:#3A2A00;font:800 11px var(--f-round)}
+.l-ch-c{font:900 calc(38px*var(--ts))/1.15 "Hiragino Sans","PingFang SC","Noto Sans JP","Noto Sans CJK SC",var(--f-round)}
+.l-ch-s{margin-top:2px;font:800 calc(16px*var(--ts)) var(--f-round);color:#3B4A8C}
+.l-ch-m{margin-top:2px;font:700 calc(13px*var(--ts))/1.25 var(--f-round);color:#5A6380}
+.l-ch-sum{margin:4px 0 8px;font:800 calc(17px*var(--ts)) var(--f-round)}
+.l-ch-notes{margin:0 auto 10px;padding:0;list-style:none;max-width:460px;text-align:left}
+.l-ch-notes li{margin:6px 0;padding:8px 12px;border-radius:12px;background:#EEF4FF;font-weight:700;line-height:1.35}
+.g-chip .g-chip-rd{display:block;margin-top:1px;font:700 11px/1.1 var(--f-round);color:#5A6380;letter-spacing:.02em}
+.g-chip:has(.g-chip-rd){height:auto;padding:6px 12px;display:inline-flex;flex-direction:column;align-items:center}
+`;
+const chstyle = document.createElement('style'); chstyle.id = 'growth-chars-css'; chstyle.textContent = CHCSS; document.head.appendChild(chstyle);
 
 
 // If the app finished starting before this file loaded, redraw so the Character Growth card appears.

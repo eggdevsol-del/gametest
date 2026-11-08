@@ -310,9 +310,9 @@ skill: fairness
 @facts 1.1
 fact: Saying thank you shows people you [notice] what they did. | forgot; ignored
 fact: You can say thank you for the [effort], even if the present isn't your favourite. | price; wrapping only
-fact: When you say thank you, [look] at the person. | turn away from; frown at
+fact: When you say thank you, [look at] the person. | turn away from; frown at
 fact: [Smile] when you say thank you. | Yawn; Frown
-fact: Say [what] you're thanking them for. | nothing about; whisper
+fact: Say [what you're thanking them for]. | nothing at all; a joke instead
 fact: Thank you is a [kind] thing to say. | rude; silly
 fact: Saying thank you makes people feel [good]. | cross; sad
 fact: You can thank someone for [helping] you. | ignoring; tricking
@@ -328,12 +328,12 @@ fact: Noticing good things is a way of being [grateful]. | grumpy; greedy
 @facts 1.3
 fact: Lots of people [help] us every day. | ignore; trick
 fact: Teachers and coaches are people who [help] us. | trick; ignore
-fact: Cooking dinner is help that's easy to [miss]. | eat; hear
+fact: Cooking dinner is help that's easy to [miss]. | see; spot
 fact: Washing clothes is a kind of [help]. | trick; game
 fact: Driving you to sport is a way someone [helps] you. | ignores; tricks
 fact: Saying thanks makes helpers feel [good]. | cross; sad
-fact: People in our town help us [too]. | never; not at all
-fact: Noticing help and saying [thanks] is a good habit. | nothing; goodbye
+fact: People in our town [help us] as well. | ignore us; trick us
+fact: Noticing help and saying [thanks] is a good habit. | nothing; boo
 @facts 1.4
 fact: A gratitude jar is for notes about [good things]. | bad dreams; homework
 fact: Each day, put [one] good thing in the jar. | no; zero
@@ -344,7 +344,7 @@ fact: Reading good things can help you feel [better]. | worse; crosser
 fact: A gratitude jar helps you [remember] good things. | forget; hide
 fact: Your notes go on slips of [paper]. | ice; cheese
 @facts 2.1
-fact: New things are [hard] at first. | always easy; impossible forever
+fact: New things are [hard] at first. | always easy; easy for everyone
 fact: Nearly everyone [falls off] a bike when they start. | never falls off; flies off
 fact: Each try teaches your body and brain a little [more]. | less; nothing
 fact: Saying "I can't do it [yet]" helps you keep trying. | ever; again
@@ -366,16 +366,16 @@ fact: When something goes wrong, stop and take a [breath]. | photo; run
 fact: Say "[Oops], I made a mistake." | Yay; Hooray
 fact: After a mistake, [fix] what you can. | hide; break
 fact: If someone was upset, say [sorry]. | nothing; hooray
-fact: Think about what you'll do [next time]. | never; yesterday
+fact: After a mistake, think about what to do [next time]. | for lunch; on your birthday
 fact: Everyone makes [mistakes]. | no mistakes; perfect things only
 fact: Fixing a mistake is [brave]. | silly; naughty
 fact: A spill can be fixed with a [cloth]. | crayon; pillow
 @facts 2.4
-fact: Owning up means telling the [truth] about a mistake. | a story; a joke
+fact: Owning up means [telling the truth] about a mistake. | telling a story; telling a joke
 fact: Owning up is the [honest] thing to do. | sneaky; lazy
 fact: Hiding a mistake usually makes things [worse]. | better; disappear
-fact: Hiding a mistake might make you feel bad [inside]. | taller; faster
-fact: Grown-ups are usually [proud] of kids who tell the truth. | cross; bored
+fact: Hiding a mistake might make you feel [bad inside]. | taller; faster
+fact: Grown-ups are usually [proud of] kids who tell the truth. | cross with; bored of
 fact: Telling the truth is [brave]. | silly; easy every time
 fact: Saying "I did it, I'm sorry" is [owning up]. | hiding; blaming
 fact: Owning up helps people [trust] you. | forget; ignore
@@ -387,7 +387,7 @@ fact: A [swimsuit] helps you remember which parts are private. | raincoat; scarf
 fact: If something about your body worries you, tell a trusted [grown-up]. | goldfish; teddy
 fact: Your private parts are the parts under your [swimsuit]. | hat; shoes
 fact: Your body is [yours]. | a robot's; a cloud's
-fact: Talking to [Mum or Dad] about your body is always OK. | a robot; a cloud
+fact: Talking to [Mum or Dad] about your body is always OK. | a goldfish; a cloud
 @facts 3.2
 fact: You can say "No!" in a [loud], strong voice. | tiny; squeaky
 fact: Say "No!" in a [strong] voice. | sleepy; silent
@@ -398,7 +398,7 @@ fact: It's never your [fault]. | birthday; bedtime
 fact: Practising saying "No!" at [home] helps you remember. | the moon; the bottom of the sea
 fact: Getting [away] is a good thing to do after saying no. | a sandwich; a haircut
 @facts 3.3
-fact: A [surprise] is fun and ends soon. | rainstorm; homework
+fact: [A surprise] is fun and ends soon. | A rainstorm; A tummy ache
 fact: A birthday present can be a [surprise]. | volcano; dinosaur
 fact: With a surprise, everyone finds out [soon]. | never; in a hundred years
 fact: A bad secret can make you feel [worried]. | purple; invisible
@@ -408,48 +408,48 @@ fact: If a secret feels [yucky], tell a trusted grown-up. | purple; crunchy
 fact: Telling a trusted grown-up about a bad secret is the [right] thing to do. | purple; crunchy
 @facts 3.4
 fact: A trusted grown-up keeps you [safe]. | sticky; purple
-fact: A trusted grown-up is someone who [listens] to you. | barks at; quacks at
+fact: A trusted grown-up is someone who [listens to] you. | barks at; quacks at
 fact: A [parent] can be a trusted grown-up. | cartoon; teddy bear
-fact: A [teacher] can be a trusted grown-up. | robot; cartoon
+fact: [A teacher] can be a trusted grown-up. | A goldfish; A cartoon
 fact: A [grandparent] can be a trusted grown-up. | pet fish; cartoon
 fact: Know who your trusted grown-ups are [before] anything happens. | after; never
 fact: Knowing your trusted grown-ups makes telling [easier]. | harder; impossible
-fact: A [coach] can be a trusted grown-up. | cartoon; robot
+fact: [A coach] can be a trusted grown-up. | A cartoon; A pet rock
 @facts 4.1
 fact: Your [address] is private. | favourite colour; favourite animal
-fact: Your full [name] is private online. | favourite food; pet's colour
+fact: Your [full name] is private online. | favourite food; pet's colour
 fact: Your [passwords] are private. | favourite songs; drawings
 fact: The name of your [school] is private online. | favourite fruit; favourite game
 fact: Your [phone number] is private. | favourite colour; shoe colour
 fact: Keep private things [offline]. | in a lolly jar; on the moon
 fact: Only share private things if a [grown-up] says it's OK. | game; website
-fact: Never tell anyone online your [password]. | favourite colour; age in years
+fact: Never tell anyone online your [password]. | favourite colour; favourite animal
 @facts 4.2
 fact: Only be online friends with people you know in [real life]. | a game; an ad
-fact: Ask a [grown-up] before you accept a friend request. | robot; cartoon
+fact: Ask [a grown-up] before you accept a friend request. | a goldfish; a cartoon
 fact: People online [aren't always] who they say they are. | are always; are never
 fact: A friend request is someone asking to be your online [friend]. | teacher; dentist
-fact: If you don't know someone in real life, ask a grown-up [first]. | never; after a year
+fact: If you don't know someone in real life, [ask a grown-up first]. | ask a goldfish first; ask a cloud first
 fact: Checking with a grown-up keeps you [safe] online. | sleepy; sticky
 fact: A grown-up can help you decide about a friend [request]. | sandwich; puddle
 fact: Your real-life friends are people you [know]. | have never met; saw once in a game
 @facts 4.3
-fact: Before you share a photo, ask a [grown-up]. | robot; goldfish
-fact: Ask the people in the photo [too]. | never; not at all
+fact: Before you share a photo, ask [a grown-up]. | a teddy; a goldfish
+fact: Ask the [people] in the photo too. | clouds; trees
 fact: The people in a photo might not want it [shared]. | framed in gold; made of cheese
 fact: Photos online can be hard to [take back]. | look at; find
 fact: Once a photo is online, other people might [copy] it. | eat; paint
 fact: Asking first shows [respect]. | rudeness; laziness
 fact: It's kind to ask before posting a photo of a [friend]. | cloud; rock
-fact: Think [before] you share. | after; never
+fact: [Think] before you share. | Sneeze; Sing
 @facts 4.4
 fact: Sometimes you might see something online that isn't meant for [kids]. | anyone; grown-ups only
 fact: If you see something yucky by accident, it's not your [fault]. | birthday; bedtime
-fact: If you see something yucky, turn the screen [over]. | up loud; brighter
-fact: You can [close] something yucky. | share; copy
-fact: Don't [share] something yucky. | close; report
-fact: Tell a trusted [grown-up] what you saw. | goldfish; robot
-fact: Talking about it [helps]. | barks; quacks
+fact: If you see something yucky, turn the screen [over]. | into a sandwich; purple
+fact: You can [close] something yucky. | eat; hug
+fact: Don't [share] something yucky. | sing; dance to
+fact: Tell a trusted [grown-up] what you saw. | goldfish; teddy
+fact: Talking about it [helps]. | quacks; turns you purple
 fact: Telling a grown-up is the [right] thing to do. | purple; crunchy
 @facts 5.1
 fact: Kind words make people feel [good]. | sad; cross
@@ -462,19 +462,19 @@ fact: "Thank you" are [kind] words. | mean; rude
 fact: Kind words help make [friends]. | enemies; mess
 @facts 5.2
 fact: Being left out feels [lonely]. | great; exciting
-fact: Including someone is [easy]. | impossible; scary
+fact: Including someone is [easy]. | impossible; against the rules
 fact: A [smile] can help someone feel included. | frown; shove
 fact: "Do you want to join [in]?" is a kind thing to say. | away; off
-fact: You can include someone by [sitting] with them. | laughing at; running from
-fact: Everyone deserves a [turn]. | telling-off; leaving out
-fact: Everyone deserves a [friend]. | telling-off; leaving out
+fact: You can include someone by [sitting with] them. | laughing at; running from
+fact: Everyone deserves [a turn]. | to be left out; a telling-off
+fact: Everyone deserves [a friend]. | to be left out; a telling-off
 fact: Asking someone new to play is [kind]. | mean; rude
 @facts 5.3
 fact: A family is a [team]. | race; crowd of strangers
 fact: Everyone helps make home a [nice] place. | messy; noisy
 fact: You can help without being [asked]. | fed; seen
-fact: Setting the [table] is a way to help. | alarm; fire
-fact: Putting [shoes] away is a way to help. | ice cream; toys all over the floor
+fact: Setting the [table] is a way to help. | alarm off; dog loose
+fact: [Putting shoes away] is a way to help. | Leaving toys on the floor; Hiding the remote
 fact: Feeding [pets] is a way to help. | the couch; the TV
 fact: Helping makes others feel [cared for]. | cross; forgotten
 fact: Helping makes you feel [good] too. | bad; sick
@@ -511,10 +511,10 @@ fact: Looking after nature keeps it [beautiful]. | messy; broken
 fact: Sharing means letting others use some of what you [have]. | lose; break
 fact: Sharing makes play more [fun]. | boring; scary
 fact: Sharing helps everyone feel [included]. | left out; lonely
-fact: It's OK to keep a very [special] thing safe. | borrowed; stolen
-fact: You can share [other] things instead. | no; secret
+fact: It's OK to keep a very special thing safe and [share other things] instead. | grab other kids' things; share nothing at all
+fact: If you're not sharing one thing, you can [share something else]. | grab theirs; hide everything
 fact: Sharing crayons is a way to [share]. | grab; hide
-fact: Friends often share [back]. | never; nothing
+fact: Friends [often] share back. | never; hardly ever
 fact: Sharing is a [kind] thing to do. | mean; silly
 @facts 6.4
 fact: Being fair means treating people in a way that's right and [even]. | odd; mean

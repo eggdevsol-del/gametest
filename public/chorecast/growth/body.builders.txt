@@ -111,7 +111,7 @@ skill: emergency-call-teen
 # Fact banks (content/facts/body.txt)
 @facts 1.1
 fact: About [half] of a balanced plate is vegetables and fruit. | none; one tenth
-fact: About a [quarter] of a balanced plate is grains like rice, pasta or bread. | half; none; all
+fact: Grains like rice, pasta or bread fill [about a quarter] of a balanced plate. | all; none; three quarters
 fact: Meat, fish, eggs, tofu and beans are [protein] foods. | sugar; drink; grain
 fact: Milk, yoghurt and cheese help build strong [bones]. | hair; fingernails; eyelashes
 fact: A mix of foods gives your body [energy] to move and think. | homework; noise
@@ -121,7 +121,7 @@ fact: Tofu and beans are protein foods that come from [plants]. | animals; rocks
 @facts 1.2
 fact: [Water] is the best everyday drink. | Energy drink; Fizzy drink; Sports drink
 fact: Plain [milk] is a good drink too. | cola; energy drink; syrup
-fact: Fizzy drinks have lots of [sugar]. | protein; vitamins; water only
+fact: Fizzy drinks have lots of [sugar]. | protein; vitamins
 fact: Sugar in drinks is bad for your [teeth]. | ears; hair; elbows
 fact: Many juices have lots of [sugar] too. | bones; fibre
 fact: Energy drinks often have [caffeine] in them. | calcium; fibre; vitamin C
@@ -135,7 +135,7 @@ fact: Do muscle and bone exercises a few times a [week]. | year; decade
 fact: Walking to school is [exercise] too. | homework; a nap; screen time
 fact: Playing at lunch gets your body [moving]. | sleeping; resting
 fact: Carrying the washing is a way of [moving] your body. | resting; sleeping
-fact: Sport, play and walking all add up to your [hour] a day. | week; year
+fact: Sport, play and walking [all count] towards your hour of moving a day. | don't count; never count
 @facts 1.4
 fact: Brush your teeth [twice] a day. | once a week; once a month
 fact: Brush for about [two] minutes. | ten; twenty
@@ -150,14 +150,14 @@ fact: Sunscreen helps protect your [skin] from the sun. | hair; teeth; shoes
 @facts 2.1
 fact: Always wear a [helmet] when you ride. | scarf; cap only
 fact: A helmet should fit [snugly]. | loosely; backwards
-fact: A helmet should be done [up]. | down; away
+fact: A helmet should be [done up]. | left undone; worn loose
 fact: Bright clothes help you be [seen]. | hidden; invisible
 fact: Use [lights] at dusk. | sunglasses; dark clothes
 fact: A [bell] helps people know you're coming. | blindfold; whisper
 fact: Check your brakes and [tyres] before you ride. | stickers; bell colour
 fact: Watch out for car [doors] opening. | windows; aerials
 @facts 2.2
-fact: Water conditions can change [quickly]. | never; only once a year
+fact: Water conditions can change [quickly]. | only slowly; only once a year
 fact: Waves, cold water and rips can tire [anyone] out. | nobody; only babies
 fact: Swim between the [flags]. | rocks; boats
 fact: Never swim [alone]. | with a friend; with a lifeguard watching
@@ -173,13 +173,13 @@ fact: For a nosebleed, sit up and lean [forward]. | back; upside down
 fact: Pinch the [soft] part of the nose. | top; bony
 fact: Pinch a nosebleed for [10] minutes. | 1; 60
 fact: For a bump, hold on a [cold] pack wrapped in a cloth. | hot; sticky
-fact: Tell a grown-up about any bump to the [head]. | elbow only; toe only
+fact: A bump to the head is [always] worth telling a grown-up about. | never; not
 @facts 2.4
-fact: In an emergency, call {nz:111~au:000}. It works even with no [credit]. | battery; screen
+fact: In an emergency, call {nz:111~au:000}. It works even with no [credit]. | battery; phone
 fact: When you call, stay [calm]. | silent; laughing
 fact: Ambulance, fire and [police] are the emergency services. | pizza; taxi
-fact: Say [where] you are. | what you ate; your favourite song
-fact: Say what [happened]. | you want; is on TV
+fact: Say [where you are]. | what you ate; your favourite song
+fact: Say what [happened]. | is on TV; you had for lunch
 fact: Don't [hang up] until they tell you to. | listen; answer
 fact: They may give you [instructions]. | a quiz; a song
 fact: A house fire needs the [fire] service. | taxi; pizza

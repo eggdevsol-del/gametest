@@ -222,7 +222,7 @@ fact: Habits grow with [practice]. | luck; magic; lollies
 fact: The more you do something, the [easier] it gets. | harder; scarier
 fact: Packing your school bag each night is a [good] habit. | bad; silly
 fact: Saying thank you is a good [habit] to have. | accident; mistake
-fact: You can do a habit without even [thinking] about it. | moving; breathing
+fact: You can do a habit without even [thinking about it]. | moving; breathing
 fact: Good habits [help] you every day. | trick; stop
 @facts 1.2
 fact: Big things are easier when you break them into [tiny steps]. | one giant leap; no steps
@@ -247,12 +247,12 @@ fact: Getting good at something takes [practice]. | luck; magic; one try
 fact: Mistakes are part of [learning]. | giving up; failing forever
 fact: Every try teaches your [brain] something. | shoe; pillow
 fact: Nobody plays a song [perfectly] the very first time. | badly; slowly
-fact: A little practice often is better than a lot just [once]. | daily; weekly
+fact: Practising a little [every day] beats a lot just once. | once a year; never
 fact: When you make a mistake, the best thing to do is [try again]. | give up; hide it
 fact: Practice makes [progress]. | nothing; mess
 fact: Learning something new often feels [hard] at first. | easy; finished
 @facts 2.1
-fact: [Everyone] has feelings. | Nobody; Only grown-ups; Only babies
+fact: [Everyone] has feelings. | Nobody; Only one person
 fact: Happy, sad and scared are all [feelings]. | foods; colours; animals
 fact: All feelings are [OK] to have. | wrong; silly; naughty
 fact: All feelings are OK, but not all [actions] are. | colours; foods; animals
@@ -270,47 +270,47 @@ fact: Breathing out slowly is like gently blowing out a [candle]. | trumpet; whi
 fact: A [quiet] spot can help you calm down. | noisy; crowded
 fact: Squeezing a soft [toy] can help you calm down. | bee; cactus
 @facts 2.3
-fact: [Everyone] worries sometimes. | Nobody; Only babies
+fact: [Everyone] worries sometimes. | Nobody; Only one person
 fact: A worry is a thought about something that might go [wrong]. | right; away
 fact: Talking about a worry makes it [smaller]. | bigger; scarier
-fact: Talk about worries with Mum, Dad or another trusted [grown-up]. | stranger; robot
+fact: Talk about worries with Mum, Dad or another trusted [grown-up]. | goldfish; teddy
 fact: Doing one small thing about a worry can make it [smaller]. | bigger; louder
 fact: A worry can go round and round in your [head]. | shoe; lunchbox
 fact: Keeping a worry secret can make it feel [bigger]. | smaller; gone
-fact: Trusted grown-ups are [good] people to tell your worries to. | bad; the wrong
+fact: Tell your worries to [a trusted grown-up]. | a goldfish; a cloud
 @facts 2.4
 fact: Asking for help is smart and [brave]. | silly; lazy; naughty
-fact: Even [grown-ups] ask for help. | no-one; robots
+fact: Even [grown-ups] ask for help. | goldfish; clouds
 fact: It's good to [have a go] first, then ask for help. | give up; hide
 fact: A good question is: "Can you show me how to [start]?" | give up; quit
 fact: A [teacher] can help with schoolwork. | goldfish; cloud
-fact: For big problems, ask [Mum or Dad]. | a stranger; nobody
+fact: For big problems, ask [Mum or Dad]. | a goldfish; a cloud
 fact: Asking for help is how people [learn]. | give up; get lazy
 fact: Asking the right [person] gets you the right help. | colour; number
 
 # Fact banks (content/facts/mind.txt)
 @facts 3.1
 fact: Being brave means doing something good even when you feel [scared]. | sleepy; hungry
-fact: [Everyone] feels scared sometimes. | Nobody; Only babies
-fact: Grown-ups feel scared [sometimes] too. | never; not ever
+fact: [Everyone] feels scared sometimes. | Nobody; Only one person
+fact: Grown-ups [sometimes] feel scared. | never; can't
 fact: Trying a new food is a little [brave] step. | silly; naughty
 fact: Little brave steps help you grow [braver]. | smaller; scared
 fact: Feeling scared and doing it anyway is [brave]. | silly; naughty
-fact: Being brave doesn't mean [never] feeling scared. | sometimes; always
+fact: Being brave [doesn't mean] never feeling scared. | means; always means
 fact: Brave steps can be [small]. | only giant; impossible
 @facts 3.2
-fact: New things can feel [scary]. | boring; easy always
-fact: New things feel scary because we don't know what will [happen]. | eat; wear
+fact: New things often feel [scary] at first. | invisible; purple
+fact: New things feel scary because we don't know [what will happen]. | our own name; how to breathe
 fact: Trying new things helps us find new [favourites]. | problems; worries
 fact: Trying new things helps us learn new [skills]. | worries; mistakes only
-fact: It's OK if you don't [like] it. | try; taste
-fact: You were [brave] to try. | silly; naughty
+fact: If you try something and don't like it, that's [OK]. | naughty; silly
+fact: Trying something new is [brave], even if you don't like it. | silly; naughty
 fact: A new game might become a new [favourite]. | worry; mistake
 fact: You won't know if you like something until you [try] it. | ignore; hide
 @facts 3.3
 fact: The words we say to ourselves can help us feel [brave]. | sleepy; grumpy
 fact: "I can [try]" is a brave thing to say. | quit; hide
-fact: "I can do [hard] things" is a brave thing to say. | no; easy only
+fact: "I can do [hard things]" is a brave thing to say. | nothing; only easy things
 fact: It's OK to feel [nervous]. | invisible; purple
 fact: Brave words and a slow [breath] help your body calm down. | shout; run
 fact: Kind words to yourself help you feel [braver]. | worse; smaller
@@ -335,7 +335,7 @@ fact: Your [brain] thinks about what's being said. | elbow; knee
 fact: Listening well helps you [learn]. | forget; sleep
 fact: Listening well shows people you [care]. | don't care; are bored
 @facts 4.2
-fact: Brains do best when we focus on [one] thing at a time. | five; ten
+fact: Brains do best when we focus on [one thing] at a time. | five things; ten things
 fact: Doing two things at once often means both get done [badly]. | perfectly; faster
 fact: [Finish] one thing, then start the next. | Forget; Hide
 fact: Focusing on one thing helps you do it [well]. | badly; slowly
@@ -356,8 +356,8 @@ fact: Thinking about what might happen helps you [choose well]. | choose badly; 
 fact: Finishing what you start feels [great]. | terrible; scary
 fact: Finishing things helps you [trust] yourself. | forget; doubt
 fact: Break big things into little [parts]. | pieces of paper; holes
-fact: Finish the little parts [one at a time]. | all at once; never
-fact: Take a short [break] if you need one. | nap for a week; holiday
-fact: After a break, [come back] to it. | give up; forget it
+fact: Finish the little parts [one at a time]. | all at once; all in one second
+fact: Taking a short [break] can help you finish. | holiday on the moon; nap for a week
+fact: After a break, [come back to it]. | give up; forget it
 fact: A big puzzle is easier if you do one [part] at a time. | box; picture
 fact: Finishing what you start is a good [habit]. | mistake; problem

@@ -55,6 +55,15 @@ for (const lang of ['es', 'zh', 'ja']) {
       if (['hear', 'mcq', 'pair', 'sound'].includes(it.type)) {
         if (right.length !== 1 || opts.length !== 3 || new Set(opts.map(o => ak(o.t))).size !== 3) { miss(l, k, s, 'not 3 different choices with one right'); continue; }
       }
+      if (/^char/.test(gen)) {
+        // A question about one of the lesson's new characters: its sound, which one says a sound, or what it means
+        const us = [...l.words].flatMap(w => L.charUnits(w, lang)), byC = new Map(us.slice().reverse().map(u => [u.c, u])), soundOf = x => (byC.get(x) || L.charUnits({ t: x }, lang)[0] || {}).s, tl = x => String(x).normalize('NFD').replace(/\p{M}/gu, '');
+        const c = (it.q.match(/^What (?:sound does|does) (\S+) (?:make|mean)\?$/) || [])[1], u = byC.get(c);
+        if (gen === 'charSound' && (!u || right[0].t !== u.s || new Set(opts.map(o => tl(o.t))).size !== 3)) miss(l, k, s, 'not the character’s sound, or two choices sound the same');
+        else if (gen === 'charMean' && (!u || right[0].t !== L.HAN[c][1] || opts.some((o, i) => opts.some((x, j) => j > i && L.sameSense(o.t, x.t))))) miss(l, k, s, 'not the character’s meaning, or two choices mean the same');
+        else if (gen === 'charPick') { const say = (it.q.match(/^Which one says “(.+)”\?$/) || [])[1], w = byC.get(right[0].t); if (!w || w.s !== say || opts.some(o => !o.ok && (!soundOf(o.t) || tl(soundOf(o.t)) === tl(say)))) miss(l, k, s, 'the right character doesn’t say it, or another one does too'); }
+        continue;
+      }
       if (it.type === 'hear') {
         const tt = (it.q.match(/«([^»]+)»/) || [])[1], pics = /^Which one is/.test(it.q);
         const t = cands(tt).find(x => (pics ? x.kind === 'w' && x.pic === right[0].t : pm(x) === right[0].t));
@@ -104,6 +113,39 @@ for (const lang of ['es', 'zh', 'ja']) {
     ok(list.every(c => c[0] <= want) && full / list.length >= 0.9 && low.every(c => /\.s1\.1\.\d$/.test(c[1])) && Math.min(...list.map(c => c[0])) >= 20, `${lang} ${band}: lessons have ${want} questions and games (${full} of ${list.length}; only some in a stage’s first unit, with nothing before them to mix in, have fewer)`, low);
   }
 }
+
+// Characters before building: in Mandarin and Japanese, every character on a build tile (and every spare tile) has
+// been shown on a "meet the characters" card in this lesson or an earlier one, before the tiles come up
+for (const lang of ['ja', 'zh']) {
+  const lessons = G.Packs[`${lang}.s1`].units.flatMap(u => u.lessons), late = [], missing = new Set(), off = [];
+  for (const band of ['sprouts', 'builders', 'makers']) {
+    const kid = kids[`${band}2`], known = new Set();
+    for (const l of lessons) {
+      const parts = band === 'sprouts' && l.words.length > 3 ? [1, 2] : [0];
+      for (const part of parts) for (const s of L.langSteps(kid, l, part)) {
+        if (s.kind === 'chars') s.units.forEach(u => [u.c, ...u.c].forEach(c => known.add(c)));
+        const it = s.item; if (!it || it.type !== 'tiles' || /\s/.test(it.a)) continue;
+        const need = [...it.a, ...(it.extra || []).join('')].filter(c => /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}ー]/u.test(c));
+        const units = L.charUnits({ t: it.a }, lang).map(u => u.c).concat(...(it.extra || []).map(e => L.charUnits({ t: e }, lang).map(u => u.c)));
+        const notYet = units.filter(c => !known.has(c));
+        if (notYet.length && need.length) late.push(`${band} ${l.id} ${s.gen || 'try'}: «${it.a}» before ${notYet.join(' ')} was taught`);
+      }
+    }
+  }
+  for (const l of lessons) for (const w of l.words) {
+    for (const c of w.t) if (lang === 'ja' ? /[\p{Script=Hiragana}\p{Script=Katakana}]/u.test(c) && !L.KANA[c] && !'っッ'.includes(c) : /\p{Script=Han}/u.test(c) && !L.HAN[c]) missing.add(c);
+    if (lang === 'zh') { const rs = L.hanReadings(w.t, w.rd), plain = x => x.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^a-z]/g, ''); if (plain(rs.join('')) !== plain(w.rd || '')) off.push(`${w.t} ${w.rd} → ${rs.join(' ')}`); }
+  }
+  ok(!late.length, `${lang}: every character on a build tile is taught on a character card first`, late.slice(0, 6));
+  ok(!missing.size, `${lang}: every character in stage 1 has a sound${lang === 'zh' ? ' and a meaning' : ''}`, [...missing]);
+  if (lang === 'zh') ok(!off.length, 'zh: each word’s pinyin splits into its characters’ sounds', off.slice(0, 8));
+}
+const oha = L.charUnits({ t: 'おはよう', rd: 'ohayō' }, 'ja'), kon = L.charUnits({ t: 'こんにちは', rd: 'konnichiwa' }, 'ja'), gak = L.charUnits({ t: 'がっこう', rd: 'gakkō' }, 'ja'), nz = L.charUnits({ t: 'ニュージーランド', rd: 'Nyūjīrando' }, 'ja');
+ok(oha.map(u => u.s).join(' ') === 'o ha yo u' && /long: ō/.test(oha[3].note) && kon[4].s === 'wa' && /wa/.test(kon[4].note) && gak[1].c === 'っ' && /stop/.test(gak[1].note) && nz[0].c === 'ニュ' && nz[0].s === 'nyu' && nz.some(u => u.c === 'ー'), 'kana cards say each sound, and how は, a long vowel, a small っ, a small ュ and ー work', [oha, kon, gak, nz]);
+const yd = L.charUnits({ t: '有点儿', rd: 'yǒudiǎnr' }, 'zh'), yb = L.charUnits({ t: '一百', rd: 'yìbǎi' }, 'zh');
+ok(yd.map(u => u.s).join(' ') === 'yǒu diǎn r' && yb[0].s === 'yì' && /usually yī/.test(yb[0].note) && yb[1].m === 'hundred', 'Mandarin cards give each character its sound in the word, and its meaning', [yd, yb]);
+const ch = L.langSteps(kids.sprouts3, G.Packs['ja.s1'].units[0].lessons[0], 0), firstChars = ch.findIndex(s => s.kind === 'chars'), firstBuild = ch.findIndex(s => s.item && s.item.type === 'tiles'), firstQuiz = ch.findIndex(s => /^char/.test(s.gen || ''));
+ok(firstChars > 0 && ch[firstChars - 1].kind === 'word' && firstQuiz > firstChars && (firstBuild < 0 || firstBuild > firstQuiz), 'a kana card comes right after its word, its questions come next, and building comes after both', { firstChars, firstQuiz, firstBuild });
 
 // Rounds, and nothing saved goes out of step: a 45-question lesson is 4 rounds; the same lesson the same day is the same length
 const es11 = G.Packs['es.s1'].units[2].lessons[1], long = L.langSteps(kids.builders0, es11, 0), rounds = P.addRounds(long);

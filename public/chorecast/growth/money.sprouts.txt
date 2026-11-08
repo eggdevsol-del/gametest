@@ -674,18 +674,18 @@ skill: saving-adds-up
 # Fact banks (content/facts/money.txt)
 @facts 1.1
 fact: Most grown-ups earn money by doing [work]. | magic; sleeping
-fact: People get [paid] for their job. | told off; ignored
+fact: People get [paid] for their job. | scolded; ignored
 fact: A bank machine only gives out money that's already in your [account]. | pocket; lunchbox
-fact: A bank machine doesn't make [new] money. | your; old
+fact: A bank machine [doesn't make] new money. | makes; prints
 fact: When people work, they [help] others. | ignore; trick
 fact: Bakers make [bread]. | shoes; houses
-fact: Nurses help [sick] people. | cars; plants
+fact: Nurses help [sick people]. | cars; plants
 fact: Money comes from [work]. | trees; bank machines making it
 @facts 1.2
 fact: Some jobs are [family] jobs that everyone helps with. | paid; secret
 fact: Setting the table is a [family] job. | paid; secret
 fact: Tidying your toys is a family [job]. | holiday; game only
-fact: Some families have [extra] jobs you can earn money for. | no; invisible
+fact: Some families have [extra] jobs you can earn money for. | invisible; magic
 fact: Washing the car can be an [extra] job you earn money for. | family; secret
 fact: Chorecast keeps track of the [jobs] you do. | dreams; snacks
 fact: Chorecast keeps track of what you [earn]. | eat; dream
@@ -693,7 +693,7 @@ fact: Everyone in a family [helps]. | rests; watches
 @facts 1.3
 fact: A job is done when it's done [well]. | quickly; badly
 fact: Look back and [check] your work before you say "finished". | hide; forget
-fact: A job isn't finished just because you [stop]. | start; begin
+fact: A job [isn't] finished just because you stop. | is; is always
 fact: People pay more when the work is [good]. | sloppy; late
 fact: People ask you again when you do a job [well]. | badly; halfway
 fact: Checking your work helps you find what you [missed]. | ate; lost
@@ -706,7 +706,7 @@ fact: Put what you earn in your [jars]. | shoes; bin
 fact: Saving helps you reach a [goal]. | mess; mistake
 fact: $1 a week for 4 weeks is [$4]. | $1; $10
 fact: Keep earning and [saving] to see it grow. | spending it all; hiding it
-fact: A little each week can become a [lot]. | nothing; less
+fact: A little each week can become [a lot]. | nothing; less
 fact: Jars help you save for a [goal]. | mess; mistake
 @facts 1.5
 fact: Big jobs take more [time]. | sleep; lollies
@@ -719,12 +719,12 @@ fact: Big jobs take more [work]. | luck; sleep
 fact: Doing a big job well can earn you [more]. | less; nothing
 @facts 1.6
 fact: Only earn money with a grown-up who looks after you [knowing about it]. | asleep; on holiday
-fact: Jobs at [home] are a safe way to earn. | a stranger's house; the road
-fact: Jobs your [grown-up] has said yes to are safe ways to earn. | goldfish; robot
+fact: Jobs at [home] are a safe way to earn. | the moon; the bottom of the sea
+fact: Jobs your [grown-up] has said yes to are safe ways to earn. | goldfish; teddy
 fact: Safe ways to earn have a grown-up's [yes]. | nap; snack
-fact: Your grown-up should always [know] about a job you do. | forget; never hear
-fact: A safe job is one your family [agrees] to. | forgets; never hears about
-fact: Earning money safely means checking with a [grown-up] first. | robot; goldfish
+fact: Your grown-up should always [know] about a job you do. | forget; dream
+fact: A safe job is one your family [agrees to]. | sings about; dances to
+fact: Earning money safely means checking with [a grown-up] first. | a teddy; a goldfish
 fact: Asking a grown-up first keeps you [safe]. | busy; hungry
 @facts 2.1
 fact: Chorecast has [four] money jars. | two; ten
@@ -733,7 +733,7 @@ fact: The [Vault] jar is for saving up. | Spend; Give
 fact: The [Invest] jar is for growing money over a long time. | Spend; Give
 fact: The [Give] jar is for helping others. | Spend; Vault
 fact: Each jar has its own [job]. | name tag only; colour only
-fact: Jars stop your money all going on [one] thing. | no; zero
+fact: Jars help [share out] your money. | hide; lose
 fact: A snack is something you'd buy from the [Spend] jar. | Give; Invest
 @facts 2.2
 fact: The Vault is for [saving]. | spending today; giving away
@@ -747,23 +747,23 @@ fact: Money for [later] goes in the Vault. | right now; snacks today
 @facts 2.3
 fact: Give money helps people, animals or places that [need it]. | don't need it; already have lots
 fact: You could give to a food [bank]. | fight; mess
-fact: You could give to an animal [shelter]. | zoo ticket; toy shop
+fact: You could give to an [animal shelter]. | toy shop; lolly shop
 fact: You [choose] the cause for your Give jar. | never know; can't pick
 fact: A [grown-up] pays your Give jar out to the cause. | stranger; robot
 fact: Giving your [time] counts too. | complaints; mess
 fact: Kindness is a kind of [giving]. | taking; spending
-fact: A school fundraiser is something you could [give] to. | steal from; ignore
+fact: A school fundraiser is something you could [give to]. | laugh at; ignore
 @facts 2.4
 fact: Families choose a [split] for the jars. | colour; song
 fact: Chorecast [shares] your pay out for you. | eats; hides
 fact: One split is $5 Spend, $3 Vault, $1 Invest and $1 [Give]. | Tax; Bills
 fact: That split adds up to [$10]. | $5; $20
-fact: Your [grown-up] can help you pick a split. | goldfish; robot
-fact: A split shares money between [all four] jars. | one; no
+fact: Your [grown-up] can help you pick a split. | goldfish; teddy
+fact: A split shares money between [all four jars]. | the bin and your shoes; no jars at all
 fact: The split decides how much goes in [each jar]. | your pocket; the bin
 fact: A split can be changed to [suit] you. | confuse; trick
 @facts 2.5
-fact: Spend jar money is yours to [choose] with. | hide; throw away
+fact: [You] choose what to buy with Spend jar money. | Your goldfish; A stranger
 fact: You spend inside your family's [rules]. | dreams; games
 fact: When the Spend jar is empty, you [wait] until next pay. | raid another jar; borrow from the Vault
 fact: You don't [raid] the other jars. | look at; save in
@@ -778,7 +778,7 @@ fact: Investments go [up and down]. | only up; never move
 fact: Investing is like a plant in sunny and [stormy] weather. | frozen; underground
 fact: Invest money is money you won't need for a [long] time. | short; tiny
 fact: Invest is for growing over [years]. | minutes; seconds
-fact: Don't put money you need [soon] in the Invest jar. | in years; never
+fact: Don't put money you need [soon] in the Invest jar. | in ten years; years from now
 fact: Invest money is for the [long] run, not for this week. | short; quick
 @facts 3.1
 fact: A [need] is something you must have to be safe and healthy. | want; treat
@@ -791,7 +791,7 @@ fact: A [want] is nice to have. | need; must-have
 fact: You would be OK without a [want]. | need; home
 @facts 3.2
 fact: Wanting things is [normal]. | wrong; naughty
-fact: [Everyone] has wants. | Nobody; Only babies
+fact: [Everyone] has wants. | Nobody; Only one person
 fact: Pay for [needs] first. | wants; treats
 fact: After needs, you can pick a [want]. | need; bill
 fact: Money left over can go on a [want]. | bill; tax
@@ -799,7 +799,7 @@ fact: Needs come [before] wants. | after; instead of
 fact: A new toy is a [want]. | need; must-have
 fact: Wants are fine once [needs] are paid for. | toys; treats
 @facts 3.3
-fact: Some needs come in a [fancy] kind. | plain; free
+fact: Some needs come in a [fancy] kind that costs more. | free; cheaper
 fact: The fancy kind of a need is a [want]. | need; must-have
 fact: You need shoes, but shoes with lights are a [want]. | need; must-have
 fact: Ask yourself: would a [plain] one do the job? | fancy; glittery
@@ -808,8 +808,8 @@ fact: Fancy things often cost [more]. | less; nothing
 fact: A coat is a need; a coat with sparkles is a [want]. | need; must-have
 fact: Choosing plain can [save] money. | waste; lose
 @facts 3.4
-fact: You can't have every [want]. | need; meal
-fact: You have to [choose] between wants. | get all; skip all
+fact: You can't have [every want]. | any food; a home
+fact: You have to [choose between] wants. | get all your; skip all your
 fact: Pick the want you will love the [longest]. | shortest; least
 fact: Put other wants on a [wish list] for later. | shopping trolley; bin
 fact: A wish list is for wants you might get [later]. | right now; never
@@ -823,20 +823,20 @@ fact: Our bodies need [sleep]. | screens; games
 fact: Our bodies need [warmth]. | ice; wind
 fact: We need to feel [safe]. | scared; alone
 fact: We need to feel [loved]. | ignored; forgotten
-fact: Feeling loved doesn't cost [money]. | anything at all except money; a lot
+fact: Feeling loved [doesn't cost] money. | costs lots of; always costs
 fact: Food, water, sleep and warmth are [needs]. | wants; treats
 @facts 3.6
 fact: Grown-ups pay for [needs] first. | wants; treats
-fact: Food is a need grown-ups pay for [first]. | last; never
+fact: Food is a need grown-ups pay for [first]. | last; only on birthdays
 fact: [Rent] is a need. | A toy; A treat
 fact: Paying for power is a [need]. | want; treat
-fact: Sometimes there isn't money left for [wants]. | needs; food
+fact: When money is tight, [wants] are the first to wait. | bills; rent and power
 fact: Not having money for wants is [OK]. | a disaster; wrong
-fact: Saying "not [today]" is part of good money choices. | ever; yesterday
+fact: Saying "[not today]" is part of good money choices. | yes to everything; buy it now
 fact: Families [choose] how to spend their money. | can't choose; never decide
 @facts 4.1
 fact: A saving goal is something you want to buy [later]. | yesterday; never
-fact: You save for a goal with money you put away [now]. | never; last year
+fact: You save for a goal by [putting money away]. | spending it all; losing it
 fact: A good goal says what it is and how much it [costs]. | weighs; smells
 fact: "A $12 kite" is a goal you can [plan]. | forget; lose
 fact: Pick a goal you really [want]. | dislike; forget
@@ -850,13 +850,13 @@ fact: Every small choice [adds up]. | disappears; doesn't matter
 fact: Saving $1 makes your jar [bigger]. | smaller; empty
 fact: Spending from your savings makes them [smaller]. | bigger; double
 fact: Lots of small adds make your savings [grow]. | shrink; vanish
-fact: Small choices add up one way or the [other]. | same; never
+fact: Small choices [add up], good or bad. | don't matter; disappear
 fact: Leaving money in the jar helps it [grow]. | shrink; disappear
 @facts 4.3
 fact: You could save a bit more of your [pocket money]. | lunch; toys
-fact: You could do an extra job if a [grown-up] says it's OK. | stranger; robot
+fact: You could do an extra job if [a grown-up] says it's OK. | a goldfish; a teddy
 fact: You could save part of any [birthday] money. | imaginary; borrowed
-fact: Saving more helps you reach your goal [faster]. | slower; never
+fact: Saving more helps you reach your goal [faster]. | slower; later
 fact: An extra job can mean extra [money] to save. | homework; trouble
 fact: Saving part of a gift is a smart [choice]. | mistake; trick
 fact: Spending less on snacks can help you save [more]. | less; nothing
@@ -865,8 +865,8 @@ fact: A grown-up says [yes] before you do an extra job. | nothing; goodbye
 fact: Before you buy, check the [price] again. | colour; weather
 fact: Prices can [change]. | never change; vanish
 fact: When you reach your goal, buy it and [enjoy] it. | hide; bin
-fact: You [earned] it! | borrowed; lost
-fact: After your goal, pick a [new] goal. | no; old
+fact: When you reach your goal, you [earned] it! | borrowed; lost
+fact: After reaching a goal, [pick a new one]. | stop saving forever; give up on goals
 fact: Starting again means saving for the [next] goal. | last; same old
 fact: Reaching a goal feels [great]. | terrible; scary
 fact: Checking the price stops [surprises] at the shop. | savings; goals
@@ -909,12 +909,12 @@ fact: A $2 coin and a $1 coin make [$3]. | $2; $4
 @facts 5.3
 fact: Different things cost different [amounts]. | colours; names
 fact: Small things like a banana cost a [little]. | lot; fortune
-fact: Big things like a bike cost a [lot]. | little; nothing
+fact: Big things like a bike cost [a lot]. | a little; almost nothing
 fact: Knowing roughly what things cost helps you [plan]. | forget; worry
-fact: A bike costs [more] than a banana. | less; the same as
-fact: A pencil costs [less] than a bike. | more; the same as
+fact: A bike costs [more than] a banana. | less than; the same as
+fact: A pencil costs [less than] a bike. | more than; the same as
 fact: Bigger things usually cost [more]. | less; nothing
-fact: Thinking about prices helps you [save] up. | give up; forget
+fact: Thinking about prices helps you [save up]. | give up; spend more
 @facts 5.4
 fact: Money is anything people [agree] to swap for things. | refuse; forget
 fact: Coins and notes are [money]. | toys; tickets
@@ -922,7 +922,7 @@ fact: Toys are [not] money. | always; real
 fact: Money in a bank account can be paid by [card]. | sandwich; drawing
 fact: Cards can [pay] too. | sing; cook
 fact: You can pay with a [phone] too. | sandwich; pillow
-fact: Money on a card is still real [money]. | pretend; toy
+fact: Money on a card is still [real money]. | pretend money; toy money
 fact: People agree that coins and notes have [value]. | no value; no use
 @facts 5.5
 fact: Swapping things is called [bartering]. | borrowing; banking
@@ -937,16 +937,16 @@ fact: Money makes swapping [easier]. | harder; slower
 fact: Money can get lost if you leave it lying [around]. | in a money box; in the bank
 fact: A money box keeps money [safe]. | lost; wet
 fact: A [bank] keeps money safe until you need it. | park; pond
-fact: Never hand money to a [stranger] who asks for it online. | parent; Nana
+fact: Someone online you don't know asking for money is [a warning sign]. | a nice surprise; a prize
 fact: Never give card [numbers] to someone you don't know. | pictures; colours
 fact: Put money away when you're [done] with it. | dreaming; eating
 fact: A money box is a safe [place] for coins. | game; joke
 fact: Keeping money safe means you'll have it when you [need] it. | forget; lose
 @facts 6.1
 fact: Before you buy, stop and ask [three] questions. | zero; twenty
-fact: Ask: Do I really [want] it? | hate; know
-fact: Ask: Do I have [enough] money? | too much; no
-fact: Ask: Will I still want it [tomorrow]? | yesterday; last year
+fact: Ask yourself if you really [want] it. | hate; dislike
+fact: Check you have [enough] money before you buy. | too much; no
+fact: Wanting it [tomorrow] too is a good sign it's worth buying. | for one second; only right now
 fact: If any answer is no, [wait]. | buy it now; buy two
 fact: Stopping to think helps you make good [choices]. | messes; mistakes
 fact: Buying without thinking can [waste] money. | save; grow
@@ -958,7 +958,7 @@ fact: When a want fades, you've [saved] your money. | lost; wasted
 fact: If you still want it after waiting, you can [plan] to buy it. | forget; hide
 fact: Sleeping on it helps you [decide]. | forget; worry
 fact: The waiting rule helps stop [impulse] buys. | planned; saved
-fact: After waiting, you know if you [really] want it. | never; barely
+fact: After waiting, you [know] if you really want it. | forget; never know
 fact: Waiting a day costs [nothing]. | lots; everything
 @facts 6.3
 fact: Something is worth it if you'll [use] it a lot. | lose; forget
@@ -966,11 +966,11 @@ fact: Something is worth it if you'll [enjoy] it a lot. | hate; ignore
 fact: Cheap things that break fast can [waste] money. | save; grow
 fact: Think about how many [times] you'll use it. | colours; songs
 fact: A toy you play with every day is [worth it]. | a waste; useless
-fact: Something you use once might not be [worth it]. | fun to look at; pretty
+fact: Something you'll only use once [might not be worth it]. | is always worth it; is the best buy
 fact: Things that last are often [better value]. | worse value; useless
-fact: Breaking fast means you might have to buy it [again]. | never; less
+fact: If a thing breaks fast, you might have to [buy it again]. | get paid; win a prize
 @facts 6.4
-fact: The same thing can cost [different] amounts in different places. | the same; no
+fact: The same thing [can cost different amounts] in different places. | always costs the same; costs nothing
 fact: Look at the [prices] before you choose. | colours; names
 fact: Choosing the cheaper one leaves more money in your [jar]. | shoe; bin
 fact: Bigger packs and smaller packs can have different [prices]. | colours; names
@@ -983,10 +983,10 @@ fact: Shops put treats near the [checkout]. | car park; roof
 fact: Treats at the checkout are there so you'll [grab] them while you wait. | ignore; count
 fact: Kids' toys and cereals are often at your [eye] level. | knee; toe
 fact: Bright colours are there to make you [want] things. | ignore; forget
-fact: Cartoon faces on boxes are there to make you [want] them. | laugh at; forget
-fact: Noticing shop tricks helps you [choose] for yourself. | grab more; spend more
+fact: Cartoon faces on boxes are there to make you [want] them. | forget; ignore
+fact: Noticing shop tricks helps you [choose for yourself]. | grab more; spend more
 fact: Things at eye level are easy to [spot]. | miss; hide
-fact: A shop trick is a way to make you [buy] more. | buy less; save more
+fact: A shop trick is a way to make you [buy more]. | buy less; save more
 @facts 6.6
 fact: A spending plan helps you choose [before] you go to the shop. | after; instead of
 fact: Leave a little [spare] in case something comes up. | mess; debt
@@ -997,7 +997,7 @@ fact: Sticking to your plan stops [extra] spending. | planned; saving
 fact: Making a plan at home is [easier] than deciding in the shop. | harder; slower
 fact: A list helps you stick to your [plan]. | mess; shopping cart
 @facts 7.1
-fact: Shops buy things, then sell them for [more] than they paid. | less; the same as
+fact: Shops buy things, then sell them for [more than] they paid. | less than; the same as
 fact: The extra helps pay the shop's [rent]. | holiday; homework
 fact: The extra helps pay for the shop's [power]. | toys; pets
 fact: The extra helps pay the shop's [workers]. | customers; neighbours
@@ -1007,8 +1007,8 @@ fact: Shop workers get paid from the money [customers] spend. | birds; clouds
 fact: Selling for more than you paid can make a [profit]. | loss; debt
 @facts 7.2
 fact: If you sell for less than it costs to make, you [lose] money. | make; double
-fact: If the price is too high, [nobody] buys. | everybody; more people
-fact: The best price is in [between]. | the sky; nowhere
+fact: If the price is too high, [few people] will buy. | more people; everyone
+fact: The best price is [not too high and not too low]. | as high as possible; as low as possible
 fact: At a good price, people are happy to buy and you still make a [profit]. | loss; mess
 fact: Lemons and sugar are costs of making [lemonade]. | bread; soap
 fact: A price that's too low can mean a [loss]. | profit; bonus
@@ -1022,7 +1022,7 @@ fact: A sale is only a good deal if you were going to buy it [anyway]. | never; 
 fact: Buying something you don't need on sale still [costs] money. | saves; makes
 fact: Sales last for a [while], not forever. | century; minute only
 fact: Saving on something you'd buy anyway is a [good] deal. | bad; silly
-fact: A sale price is [lower] than the usual price. | higher; the same as
+fact: A sale price is [lower than] the usual price. | higher than; the same as
 @facts 7.4
 fact: When lots of people want something, shops can charge [more]. | less; nothing
 fact: When fewer people want something, prices often [drop]. | rise; double
@@ -1044,7 +1044,7 @@ fact: Comparing unit prices shows which is better [value]. | colour; size
 @facts 7.6
 fact: Different shops can charge different [prices] for the same thing. | names; colours
 fact: Checking two shops before you buy can [save] you money. | waste; lose
-fact: A long trip to save 50c might not be [worth it]. | fun to plan; on the map
+fact: A long trip to save 50c [might not be worth it]. | is always worth it; makes you rich
 fact: Comparing shops is a good idea for [big] buys. | tiny; free
 fact: The same toy can cost more in one [shop] than another. | colour; size
 fact: Shopping around means checking [prices]. | colours; names
@@ -1052,10 +1052,10 @@ fact: Saving money isn't worth it if the trip costs [more]. | less; nothing
 fact: Online and in-store prices can be [different]. | always the same; secret
 @facts 8.1
 fact: A fair swap is when both people are [happy]. | upset; tricked
-fact: In a fair swap, both people get something worth about the [same]. | less; nothing
+fact: In a fair swap, both people get something worth [about the same]. | much less; nothing
 fact: Nobody should feel [tricked] in a swap. | happy; fine
-fact: Nobody should feel [pushed] into a swap. | happy; glad
-fact: It's fine to say "[no thanks]". | never no; yes always
+fact: Swaps should never feel [pushy]. | fair; friendly
+fact: It's [fine] to say "no thanks" to a swap. | rude; wrong
 fact: A swap where one person feels tricked [isn't] fair. | is; is very
 fact: Swapping a new toy for a broken one is [unfair]. | fair; kind
 fact: Fair swaps keep [friendships] happy. | arguments; tricks
@@ -1064,14 +1064,14 @@ fact: Before you swap, think: will I [miss] my thing? | eat; paint
 fact: Ask if you really want the new thing, or if it's just [shiny]. | heavy; old
 fact: Some swaps can't be [undone]. | started; seen
 fact: Take your [time] before you swap. | money; friend's toy
-fact: Shiny things aren't always [better]. | shiny; new
+fact: Shiny things [aren't always] better. | are always; are never
 fact: You can [keep] your thing if you'd miss it. | never keep; lose
 fact: Thinking first stops swaps you [regret]. | enjoy; plan
 fact: A swap you can't undo needs [careful] thought. | no; quick
 @facts 8.3
 fact: You can say no [kindly]. | rudely; meanly
 fact: "No thanks, I want to keep it" is a [kind] no. | rude; mean
-fact: You don't have to give a long [reason]. | smile; thank you
+fact: You [don't have to] give a long reason. | always have to; must
 fact: A good friend will be [OK] with your answer. | cross; mean
 fact: Saying no to a swap is [allowed]. | wrong; naughty
 fact: A kind no can still be a [clear] no. | fuzzy; secret
@@ -1079,9 +1079,9 @@ fact: You can smile when you say [no thanks]. | yes please; give me that
 fact: Real friends [respect] your answer. | ignore; laugh at
 @facts 8.4
 fact: Lending means your friend uses something, then gives it [back]. | away; up
-fact: Agree [when] it'll come back. | if; whether ever
+fact: When you lend something, agree [when it'll come back]. | how loud it is; what it smells like
 fact: Look after things you [borrow]. | throw; lose
-fact: If you break something you borrowed, [tell] them. | hide it; blame someone
+fact: If you break something you borrowed, [tell them]. | hide it; blame someone
 fact: If you break something you borrowed, help [fix] it. | hide; bin
 fact: Borrowing means you'll give it [back]. | away; up
 fact: Returning things on time builds [trust]. | mess; trouble
@@ -1090,7 +1090,7 @@ fact: Taking care of borrowed things shows [respect]. | rudeness; laziness
 fact: Sharing means letting others use some of your [things]. | homework answers; passwords
 fact: Taking [turns] is a fair way to share. | everything; nothing
 fact: Sharing makes games more [fun]. | boring; scary
-fact: Friends often share [back]. | never; nothing
+fact: Friends [often] share back. | never; hardly ever
 fact: Sharing is a way of [caring]. | taking; teasing
 fact: Waiting for your turn is part of [sharing]. | grabbing; hiding
 fact: Sharing snacks can make a friend feel [happy]. | sad; left out
@@ -1099,7 +1099,7 @@ fact: Sharing helps make [friends]. | enemies; messes
 fact: Used things are usually worth [less] than new ones. | more; double
 fact: For something a bit used, about [half] the new price is a good start. | double; ten times
 fact: A $20 toy that's a bit used might sell for about [$10]. | $40; $200
-fact: Always check with a [grown-up] before you sell something big. | goldfish; robot
+fact: Always check with [a grown-up] before you sell something big. | a goldfish; a teddy
 fact: Selling to a friend should be [fair]. | sneaky; tricky
 fact: Things that are well looked after are worth [more]. | less; nothing
 fact: A broken thing is worth [less]. | more; double
@@ -1107,28 +1107,28 @@ fact: Check with a grown-up before you [swap] something big. | colour; draw
 @facts 9.1
 fact: Looking after things makes them last [longer]. | shorter; less
 fact: Things that last save money on [replacing] them. | enjoying; using
-fact: [Put] things away when you're done. | Leave; Throw
+fact: [Put] things away when you're done. | Throw; Kick
 fact: Keep things [dry]. | soaking; wet
 fact: Use things the [right] way. | wrong; roughest
-fact: Things that last leave more money for what you really [want]. | lose; break
+fact: Things that last leave more money for what you [really want]. | never use; throw away
 fact: Leaving a bike out in the rain can make it [rust]. | shine; grow
 fact: Caring for your things is a way to [save] money. | waste; lose
 @facts 9.2
-fact: Lots of things can be [fixed]. | eaten; grown
+fact: Lots of broken things can be [fixed]. | eaten; planted
 fact: You can sew a [button] back on. | puddle; cloud
-fact: You can [glue] a broken toy. | bin; bury
+fact: You can often [glue] a broken toy back together. | eat; plant
 fact: You can patch a [hole]. | cloud; song
 fact: You can pump up a [tyre]. | sandwich; book
 fact: Fixing is usually [cheaper] than buying new. | dearer; slower than ever
-fact: Ask a [grown-up] to help you fix things. | goldfish; robot
+fact: Ask [a grown-up] to help you fix things. | a goldfish; a teddy
 fact: Fixing things is a useful [skill]. | mistake; mess
 @facts 9.3
-fact: You don't have to [own] everything. | eat; break
+fact: You [don't have to own] everything. | have to own; must buy
 fact: You can borrow books from the [library] for free. | supermarket; petrol station
 fact: Library books are [free] to borrow. | expensive; banned
 fact: Families and friends can [share] toys and books. | hide; break
 fact: Friends can swap [costumes]. | houses; cars
-fact: Borrowing means looking after it and giving it back on [time]. | never; late
+fact: Borrowing means looking after it and giving it back [on time]. | never; when you feel like it
 fact: Borrowing instead of buying [saves] money. | wastes; costs more
 fact: Sharing tools with neighbours means fewer things to [buy]. | borrow; share
 @facts 9.4
@@ -1136,7 +1136,7 @@ fact: Reusing means using something [again]. | once; never
 fact: A jar can hold [pencils]. | rain clouds; elephants
 fact: A box can become a [fort]. | sandwich; puddle
 fact: Old clothes can become [rags]. | food; money
-fact: Reusing saves [money]. | rubbish; time travel
+fact: Reusing saves [money]. | nothing; no money
 fact: Reusing makes [less] rubbish. | more; double
 fact: Reusing can mean using something in a [new] way. | broken; impossible
 fact: An old tin can become a [plant pot]. | sandwich; pillow
@@ -1146,10 +1146,10 @@ fact: An old tin can become a [plant pot]. | sandwich; pillow
 fact: To find a total, [add] the prices together. | take away; multiply
 fact: $2 + $3 is [$5]. | $1; $6
 fact: $4 + $5 is [$9]. | $1; $20
-fact: Add the [dollars] first, then the cents. | cents only; coins only
+fact: Add the [dollars] first, then the cents. | colours; shapes
 fact: $1.50 + $2.20 is [$3.70]. | $3.50; $1.70
 fact: $1.20 + $1.30 is [$2.50]. | $2.30; $3.50
-fact: Check your [total] before you pay. | colour; receipt later
+fact: Check your [total] before you pay. | colour; shoes
 fact: Adding prices tells you how much to [pay]. | save; borrow
 @facts 10.2
 fact: Change is the money you get [back]. | first; away
@@ -1163,10 +1163,10 @@ fact: If you pay the exact price, you get [no] change. | double; lots of
 @facts 10.3
 fact: Comparing prices helps you get the best [deal]. | mess; problem
 fact: Look at the [dollars] first. | cents; colours
-fact: $4.50 costs [more] than $3.90. | less than; the same as
-fact: $2.10 costs [less] than $2.40. | more than; the same as
+fact: $4.50 costs [more than] $3.90. | less than; the same as
+fact: $2.10 costs [less than] $2.40. | more than; the same as
 fact: If the dollars are the same, compare the [cents]. | colours; shops
-fact: Cheaper isn't always [better]. | cheaper; worse
+fact: Cheaper [isn't always] better. | is always; is never
 fact: Think about whether it'll [last]. | glow; sing
 fact: A toy that breaks fast can [waste] money. | save; grow
 @facts 10.4

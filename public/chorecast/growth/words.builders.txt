@@ -326,7 +326,7 @@ fact: Nouns name people, places, things and [ideas]. | actions; feelings only
 fact: "Kindness" is a [noun]. | verb; adverb
 fact: [Proper] nouns name a particular one. | Common; Plural
 fact: Proper nouns start with a [capital] letter. | small; silent
-fact: "Rotorua" is a [proper] noun. | common; verb
+fact: "Rotorua" is [a proper noun]. | a common noun; a verb
 fact: [Pronouns] stand in for nouns. | Adverbs; Verbs
 fact: "She" is a [pronoun]. | proper noun; verb
 fact: Pronouns stop us [repeating] the same noun. | spelling; reading
@@ -344,7 +344,7 @@ fact: [Adjectives] describe nouns. | Verbs; Pronouns
 fact: "Fluffy" is an [adjective]. | verb; noun
 fact: "Three" in "three hens" tells us how [many]. | fast; loudly
 fact: "That" in "that bike" tells us which [one]. | time; colour
-fact: "Freezing" says more than "[cold]". | hot; warm
+fact: "Freezing" is a more exact word for very [cold]. | hot; warm
 fact: Good writers choose [exact] adjectives. | random; boring
 fact: "Brave" is an [adjective]. | verb; adverb
 fact: In "a scruffy dog", the adjective is [scruffy]. | a; dog
@@ -362,7 +362,7 @@ fact: Commas separate the items in a [list]. | name; question
 fact: In most New Zealand writing, there's [no] comma before the last "and" in a list. | always a; a double
 fact: Commas help readers [pause] in the right places. | shout; skip
 fact: "Bread, cheese, apples and juice" uses commas in a [list]. | question; name
-fact: A comma is a short [pause]. | stop; shout
+fact: A comma is a short [pause]. | shout; song
 fact: Without commas, a list is [harder] to read. | easier; funnier
 fact: The last two items in a list are joined by "[and]". | but; because
 fact: Commas go [between] the items in a list. | inside; on top of
@@ -372,34 +372,34 @@ fact: "Do not" becomes [don't]. | do'nt; dont'
 fact: "I am" becomes [I'm]. | Im'; I'am
 fact: "It is" becomes [it's]. | its; its'
 fact: "We will" becomes [we'll]. | well; wel'l
-fact: The apostrophe goes where the [letters] were. | spaces; vowels only
+fact: The apostrophe goes where the [missing letters] were. | extra spaces; capital letters
 fact: In "don't", the apostrophe takes the place of the letter [o]. | n; t
 fact: In "I'm", the apostrophe takes the place of the letter [a]. | m; i
 @facts 2.3
-fact: An apostrophe and s show that something [belongs] to someone. | is missing; is a question
+fact: An apostrophe and s can show that something [belongs to someone]. | is missing; is a question
 fact: The bone belonging to the dog is "the [dog's] bone". | dogs; dogs's
 fact: The bike belonging to Mia is "[Mia's] bike". | Mias; Mias'
 fact: For more than one owner ending in s, just add the [apostrophe]. | letter s; full stop
 fact: The team belonging to the girls is "the [girls'] team". | girl's; girls
-fact: "Its" with no apostrophe means belonging to [it]. | it is; them
-fact: "The tree lost [its] leaves." | it's; its'
+fact: "Its" with no apostrophe means [belonging to it]. | it is; belonging to them
+fact: In "The tree lost … leaves", the right word is [its]. | it's; its'
 fact: "It's" always means [it is] or it has. | belonging to it; its own
 @facts 2.4
 fact: Speech marks go around the words someone [says]. | thinks quietly; reads
 fact: Start the spoken words with a [capital] letter. | small; silent
 fact: Put the punctuation [inside] the speech marks. | outside; before
 fact: Speech marks show when a character is [talking]. | sleeping; thinking
-fact: In “Are you coming?” asked Leo, the question mark goes [inside] the speech marks. | outside; after Leo
+fact: In “Are you coming?” asked Leo, the question mark goes [inside] the speech marks. | outside; nowhere near
 fact: In “Let's go to the beach,” said Mum, the person speaking is [Mum]. | Leo; the beach
 fact: Speech marks come in [pairs]. | ones; tens
-fact: The words "said Mum" go [outside] the speech marks. | inside; in capitals
+fact: The words "said Mum" go [outside] the speech marks. | inside; on top of
 @facts 3.1
 fact: [Inference] means working out what the writer hasn't said. | Spelling; Punctuation
-fact: Inference uses [clues] from the text. | guesses with no clues; the font
+fact: Inference uses [clues] from the text. | the font; page numbers
 fact: Slamming a door is a clue that someone is [upset]. | sleepy; calm
 fact: Stomping up the stairs is a clue that Jai is [angry]. | relaxed; happy
 fact: Inference uses clues plus what you already [know]. | forget; ignore
-fact: Writers don't always say how a character [feels]. | is spelled; looks on the cover
+fact: Writers [often leave out] how a character feels. | always tell you; never hide
 fact: Reading between the lines means using [clues]. | the margins; blank spaces
 fact: A smiling, skipping character is probably [happy]. | angry; scared
 @facts 3.2
@@ -419,30 +419,30 @@ fact: An ad is written to [persuade]. | entertain only; inform only
 fact: A science page is written to [inform]. | persuade; entertain only
 fact: A funny story is written to [entertain]. | persuade; inform only
 fact: Knowing the purpose helps you read [carefully]. | faster without thinking; upside down
-fact: Ads want you to [buy] something. | ignore everything; read slowly
+fact: Ads want you to [buy] something. | ignore; forget
 @facts 3.4
 fact: A summary gives the [main points]. | small details; every word
 fact: A summary uses your [own] words. | copied; secret
 fact: A summary leaves out small [details]. | main points; the topic
 fact: A summary is [short]. | longer than the story; endless
 fact: In the story, the town [pool] cracked. | school; library
-fact: Fixing the pool would take a [year]. | day; week
-fact: The kids held a [cake] stall. | car; book
-fact: The pool opened two months [early]. | late; never
+fact: In the pool story, fixing the pool would take [a year]. | a day; a week
+fact: In the pool story, the kids held a [cake] stall. | car; book
+fact: In the pool story, the pool opened two months [early]. | late; too late
 
 # Fact banks (content/facts/words.txt)
 @facts 4.1
 fact: A paragraph is a group of sentences about one main [idea]. | word; letter
 fact: The [topic sentence] tells the reader the main idea. | full stop; last word
-fact: The topic sentence usually comes [first]. | last; never
+fact: The topic sentence usually comes [first]. | last; in the middle
 fact: "Kiwi are unusual birds" is a [topic sentence]. | conclusion; question
 fact: The rest of the paragraph explains the [topic sentence]. | title; full stop
-fact: A paragraph should stick to [one] main idea. | five; no
+fact: A paragraph should stick to [one main idea]. | five main ideas; no main idea
 fact: A good topic sentence tells you what the paragraph is [about]. | worth; printed on
 fact: Paragraphs help organise your [ideas]. | pencils; desk
 @facts 4.2
 fact: Supporting details explain or [prove] the topic sentence. | hide; replace
-fact: Supporting details can be [facts], examples or reasons. | jokes only; pictures only
+fact: Supporting details can be [facts], examples or reasons. | rumours; spelling mistakes
 fact: Every detail should link to the [main idea]. | last word; title page
 fact: Leave out details that don't [belong]. | rhyme; shine
 fact: An [example] is a kind of supporting detail. | eraser; full stop
@@ -475,7 +475,7 @@ fact: "Dis-" in "dislike" means [not]. | again; wrongly
 fact: "Re-" means [again]. | not; before
 fact: "Pre-" means [before]. | after; again
 fact: "Mis-" means [wrongly]. | again; before
-fact: "Replay" means to play [again]. | never; wrongly
+fact: "Replay" means to play [again]. | wrongly; before
 @facts 5.2
 fact: A [suffix] goes at the end of a word. | prefix; capital letter
 fact: "-ful" means [full of]. | without; again
@@ -486,7 +486,7 @@ fact: "-ness" turns "kind" into the noun [kindness]. | kindly; unkind
 fact: "-ly" often makes an [adverb]. | noun; prefix
 fact: "Quick" with -ly becomes [quickly]. | quickness; quicker
 @facts 5.3
-fact: Homophones sound the [same] but are spelt differently. | different; silent
+fact: Homophones [sound the same] but are spelt differently. | sound different; are silent
 fact: "There" means in that [place]. | person; time only
 fact: "Their" means [belonging to them]. | they are; over there
 fact: "They're" means [they are]. | belonging to them; in that place
@@ -528,7 +528,7 @@ fact: Good dialogue moves the story [forward]. | backward; nowhere
 fact: Use [speech marks] around what characters say. | brackets; full stops only
 fact: Start a new line for each new [speaker]. | word; sentence
 fact: Use "[said]" most of the time. | exclaimed; bellowed
-fact: "Whispered" is useful when it [matters] how something is said. | never; always
+fact: "Whispered" is useful when [it matters] how something is said. | nobody is talking; it doesn't matter
 fact: Too many fancy speech words can [distract] readers. | help; teach
 @facts 6.4
 fact: A good ending solves the problem in a way that makes [sense]. | noise; money

@@ -143,7 +143,7 @@ fact: Washing your hands with [soap] and water gets rid of germs. | sand; mud; g
 fact: Rub your hands with soap for about [20] seconds. | 2; 200
 fact: Wash your hands before you [eat]. | blink; breathe; sneeze
 fact: Wash your hands after you go to the [toilet]. | window; letterbox; mirror
-fact: Wash your hands after touching [animals]. | clouds; books; music
+fact: Wash your hands after touching [animals]. | clouds; rainbows
 fact: After you rinse your hands, [dry] them. | lick; paint; muddy
 
 # Fact banks (content/facts/body.txt)
@@ -166,13 +166,13 @@ fact: Never swim [alone]. | with a grown-up watching; between the flags
 fact: A life jacket helps you [float]. | sink; swim faster
 fact: Red and yellow flags show the [safest] place to swim. | most dangerous; deepest
 @facts 2.3
-fact: The sun's rays can burn your skin even on [cloudy] days. | moonlit nights; dark nights
+fact: The sun's rays can burn your skin even when it's [cloudy]. | night-time; dark
 fact: Put on a [shirt] in the sun. | snorkel; scarf only
 fact: Put on [sunscreen]. | glitter; mud
 fact: Put on a [hat]. | sock; mitten
 fact: Wear [sunglasses] in the sun. | swimming goggles only; earmuffs
 fact: Play in the [shade] in the middle of the day. | full sun; hottest spot
-fact: The sun is strongest in the [middle] of the day. | early morning; night
+fact: The sun is strongest in the [middle] of the day. | start; end
 fact: Sunburn [hurts]. | tickles; helps
 @facts 2.4
 fact: An emergency is when someone is badly [hurt]. | bored; hungry
