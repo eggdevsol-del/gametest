@@ -311,7 +311,7 @@
       inst.group.updateMatrixWorld(true);
     }
   }
-  IH.yami3d = { make, pose, has: kind => !!PETS[kind], get ready() { return !!PETS.cat.m; } };
+  IH.yami3d = { make, pose, has: kind => !!PETS[kind], add: (kind, file, h) => { if (!PETS[kind]) PETS[kind] = { file, h }; }, get ready() { return !!PETS.cat.m; } };
   // Closed eyes: a copy of the model's own texture with each eye painted over in the fur round it and a soft
   // closed-lid curve drawn across (the anime sleeping eye). eyes: centre, radius, the eye line and the way down
   // the face, in the texture's 1024 pixels. Made once per model; swapped in to sleep and to blink.

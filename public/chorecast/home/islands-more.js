@@ -32,7 +32,9 @@
   function puffs(root, n, x, y, z, spread = 0.6) { const g = new T.Group(), L = []; for (let i = 0; i < n; i++) { const m = new T.Mesh(new T.SphereGeometry(0.5, 10, 8), puffMat.clone()); m.layers.set(1); m.userData.bg = true; m.userData.ph = i / n; g.add(m); L.push(m); } g.position.set(x, y, z); root.add(g); return { g, L, spread }; }
   function tickPuffs(P, t, rise = 3, speed = 0.35) { for (const m of P.L) { const u = (t * speed + m.userData.ph) % 1; m.position.set(Math.sin(m.userData.ph * 40 + t * 0.3) * P.spread * (0.5 + u), u * rise, Math.cos(m.userData.ph * 30) * P.spread * (0.5 + u)); m.scale.setScalar(0.6 + u * 1.4); m.material.opacity = 0.55 * (1 - u); } }
   // a bird that flits from perch to perch, wings beating in flight, a hop and a look when perched
-  function bird(col, belly, wing, perches, R, s = 1) {
+  const A3 = kind => (IH.animals3d && IH.animals3d.has(kind) ? IH.animals3d.make(kind) : null);
+  function bird(col, belly, wing, perches, R, s = 1, kind) {
+    const a3 = A3(kind); if (a3) return bird3(a3, perches, R);
     const g = new T.Group(), k = new Kit(); k.ball(0.18 * s, 0, 0.2 * s, 0, col, { s: [0.8, 0.85, 1.3], n: 9 }); k.ball(0.12 * s, 0, 0.34 * s, 0.14 * s, col, { n: 8 }); k.ball(0.1 * s, 0, 0.15 * s, 0.06 * s, belly, { s: [0.7, 0.8, 1], n: 7 }); k.cone(0.03 * s, 0.1 * s, 0, 0.33 * s, 0.27 * s, '#2a2630', { rx: Math.PI / 2, n: 4 }); k.box(0.14 * s, 0.02, 0.3 * s, 0, 0.22 * s, -0.28 * s, col, { rx: 0.3 }); for (const sx of [-1, 1]) k.ball(0.022 * s, sx * 0.06 * s, 0.37 * s, 0.22 * s, '#111111', { n: 5 });
     g.add(k.build()); const wings = []; for (const sx of [-1, 1]) { const w = part(g, sx * 0.12 * s, 0.24 * s, 0), wk = new Kit(); wk.box(0.34 * s, 0.025, 0.2 * s, sx * 0.17 * s, 0, 0, wing, { r: 0.01 }); w.add(wk.build()); wings.push(w); }
     let at = Math.floor(R() * perches.length), st = { mode: 'perch', until: 0, from: null, to: null, t0: 0 }; g.position.set(...perches[at]);
@@ -40,6 +42,15 @@
       const P = g.position;
       if (st.mode === 'perch') { g.rotation.y += Math.sin(t * 2 + at) * dt * 0.8; for (const w of wings) w.rotation.z = 0; if (t > st.until || Math.hypot(kid.x - P.x, kid.z - P.z) < 1.6) { let n = at; while (n === at) n = Math.floor(Math.random() * perches.length); st = { mode: 'fly', from: P.toArray(), to: perches[n], t0: t, dur: 1.2 + Math.hypot(perches[n][0] - P.x, perches[n][2] - P.z) * 0.12 }; at = n; } }
       else { const u = Math.min(1, (t - st.t0) / st.dur), f = st.from, e = st.to; P.set(f[0] + (e[0] - f[0]) * u, f[1] + (e[1] - f[1]) * u + Math.sin(u * Math.PI) * 1.5, f[2] + (e[2] - f[2]) * u); g.rotation.y = Math.atan2(e[0] - f[0], e[2] - f[2]); wings.forEach((w, i) => { w.rotation.z = (i ? -1 : 1) * Math.sin(t * 26) * 0.9; }); if (u >= 1) st = { mode: 'perch', until: t + 2 + Math.random() * 6 }; }
+    } };
+  }
+  // the same, a 3D bird (its model from Morphic): flits perch to perch, a hop in the air, a bob and a look when perched
+  function bird3(a3, perches, R) {
+    const g = a3.group; let at = Math.floor(R() * perches.length), st = { mode: 'perch', until: 0 }; g.position.set(...perches[at]);
+    return { group: g, kind: 'bird', tick(t, dt, kid) {
+      const P = g.position;
+      if (st.mode === 'perch') { IH.animals3d.move(a3, t, false, Math.sin(t * 0.7 + at) > 0.6); g.rotation.y += Math.sin(t * 2 + at) * dt * 0.8; if (t > st.until || Math.hypot(kid.x - P.x, kid.z - P.z) < 1.6) { let n = at; while (n === at) n = Math.floor(Math.random() * perches.length); st = { mode: 'fly', from: P.toArray(), to: perches[n], t0: t, dur: 1.2 + Math.hypot(perches[n][0] - P.x, perches[n][2] - P.z) * 0.12 }; at = n; } }
+      else { const u = Math.min(1, (t - st.t0) / st.dur), f = st.from, e = st.to; P.set(f[0] + (e[0] - f[0]) * u, f[1] + (e[1] - f[1]) * u + Math.sin(u * Math.PI) * 1.5, f[2] + (e[2] - f[2]) * u); g.rotation.y = Math.atan2(e[0] - f[0], e[2] - f[2]); IH.animals3d.move(a3, t * 2, true, false, 2); if (u >= 1) st = { mode: 'perch', until: t + 2 + Math.random() * 6 }; }
     } };
   }
   // something that glides round a loop on the water (swans, ducks), a little bob
@@ -114,12 +125,12 @@
     k.at(5, 2.8, 3.8, 0, kk => { bx(kk, 4, 2.2, 3, 0, 0, 0, '#c9b28a', { r: 0.05 }); kk.cone(3.0, 1.0, 0, 2.2, 0, '#7a6a5a', { n: 4, ry: Math.PI / 4, s: [1.2, 1, 0.85] }); for (let i = 0; i < 4; i++) bx(kk, 0.7, 0.5, 0.5, -1.2 + i * 0.8, 0, 1.8, '#c9a173'); }); solid(2.6, 2.1, 7.4, 5.5);
     spots.push({ kind: 'press', id: 'press', name: 'the packing shed', at: [5, 7], yaw: Math.PI, hit: [5, 3.8, 0, 4] });
     // the creatures: bees by the hives, a fantail in the trees
-    const bees = []; for (let i = 0; i < 8; i++) { const m = new T.Mesh(new T.SphereGeometry(0.07, 6, 5), new T.MeshBasicMaterial({ color: 0xffc83a })); m.userData.ph = i; root.add(m); bees.push(m); }
-    const fant = bird('#6a5a4a', '#e8c9a0', '#5a4a3a', trees.map(t => [t.x, lvl(t.z) + 3.9, t.z]), R, 0.9);
+    const bees = []; for (let i = 0; i < 8; i++) { const b3 = A3('bee'), m = b3 ? b3.group : new T.Mesh(new T.SphereGeometry(0.07, 6, 5), new T.MeshBasicMaterial({ color: 0xffc83a })); m.userData.ph = i; root.add(m); bees.push(m); }
+    const fant = bird('#6a5a4a', '#e8c9a0', '#5a4a3a', trees.map(t => [t.x, lvl(t.z) + 3.9, t.z]), R, 0.9, 'fantail');
     post(k, spots, solid, 18, 31.8, 'orchard');
     root.add(k.build()); hits(root, spots, h);
     const walk = (x, z) => { const inRamp = x > RAMP[0] && x < RAMP[1]; return inRamp || (Math.abs(z - 24) > 0.7 && Math.abs(z - 13) > 0.7); };
-    const tick = t => { bees.forEach(b => { const p = b.userData.ph; b.position.set(37.5 + Math.sin(t * 2.3 + p * 1.7) * 2.2, 4.8 + Math.sin(t * 3.1 + p) * 0.6, 3.4 + Math.cos(t * 1.9 + p * 2.1) * 1.8); }); };
+    const tick = t => { bees.forEach(b => { const p = b.userData.ph; b.position.set(37.5 + Math.sin(t * 2.3 + p * 1.7) * 2.2, 4.8 + Math.sin(t * 3.1 + p) * 0.6, 3.4 + Math.cos(t * 1.9 + p * 2.1) * 1.8); b.rotation.y = t * 2.3 + p * 1.7; }); };
     return { id: 'orchard', title: 'Orchard terrace', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids: sol, pond: null, bridges: [], spots, buildings: [], arrive: [20, 33.4], lawns: [], paths: [], height: h, walk, animals: [fant], npc: 0, centre: [22, 18], trees, tick, state: st };
   }
 
@@ -186,9 +197,9 @@
     spots.push({ kind: 'swim', id: 'swing', name: 'the rope swing', at: [10.5, 23.5], yaw: Math.PI / 2, hit: [10, 25, 0, 3], npcPose: 'splash', swimTo: [13.5, 27] });
     post(k, spots, solid, 22.4, 2.4, 'lake');
     // the water's creatures
-    for (let i = 0; i < 2; i++) animals.push(glider(swan, L.x + 2, L.z + 2, 9 + i * 3, 5 + i * 2, 0.12 * (i ? -1 : 1), 0.02, i * 3));
-    for (let i = 0; i < 3; i++) animals.push(glider(duck, L.x - 7 + i * 1.2, L.z - 2, 3, 2, 0.35, 0.02, i * 0.6));
-    { const g = new T.Group(), kk = new Kit(); kk.ball(0.35, 0, 0, 0, '#7a5a3a', { s: [0.9, 0.55, 1.5], n: 10 }); kk.box(0.4, 0.06, 0.4, 0, 0, 0.62, '#2a2630', { r: 0.05 }); kk.box(0.45, 0.04, 0.3, 0, 0, -0.62, '#6a4a2a'); g.add(kk.build());
+    for (let i = 0; i < 2; i++) animals.push(glider(() => A3('swan') || swan(), L.x + 2, L.z + 2, 9 + i * 3, 5 + i * 2, 0.12 * (i ? -1 : 1), -0.05, i * 3));
+    for (let i = 0; i < 3; i++) animals.push(glider(() => A3('duck') || duck(), L.x - 7 + i * 1.2, L.z - 2, 3, 2, 0.35, -0.05, i * 0.6));
+    { const p3 = A3('platypus'), g = p3 ? p3.group : new T.Group(); if (!p3) { const kk = new Kit(); kk.ball(0.35, 0, 0, 0, '#7a5a3a', { s: [0.9, 0.55, 1.5], n: 10 }); kk.box(0.4, 0.06, 0.4, 0, 0, 0.62, '#2a2630', { r: 0.05 }); kk.box(0.45, 0.04, 0.3, 0, 0, -0.62, '#6a4a2a'); g.add(kk.build()); }
       animals.push({ group: g, kind: 'platypus', tick(t) { const u = (t * 0.08) % 1, a = u * Math.PI * 2; g.position.set(L.x - 6 + Math.cos(a) * 4, -0.6 + Math.max(0, Math.sin(t * 0.5)) * 0.58, L.z + 4 + Math.sin(a) * 3); g.rotation.y = -a; } }); }
     root.add(k.build()); hits(root, spots, h); for (const a of animals) root.add(a.group);
     const walk = (x, z) => (x > JET[0] - 0.05 && x < JET[1] + 0.05 && z > JET[2] && z < JET[3]) || h(x, z) > -0.75;
@@ -215,7 +226,8 @@
     k.at(36, h(36, 38), 38, Math.PI, kk => { bx(kk, 5, 2.6, 3, 0, 0, 0, '#6b5a42', { r: 0.05 }); bx(kk, 5.4, 0.2, 3.4, 0, 2.6, 0, '#4a3a2c'); bx(kk, 3.6, 0.5, 0.1, 0, 1.4, 1.52, '#1f1a16'); });
     solid(33.4, 36.4, 38.6, 39.6); spots.push({ kind: 'hide', id: 'hide', name: 'the bird hide', at: [36, 35.2], yaw: 0, hit: [36, 38, 0, 4] });
     k.cyl(0.5, 3.2, 12, h(12, 30) + 0.4, 30, '#7a5a3a', { n: 8, rz: Math.PI / 2, ry: 0.4 }); solid(10.4, 29.2, 13.6, 30.8);
-    const tu = new Kit(); tu.ball(0.18, 0, 0.1, 0, '#6a6a4a', { s: [0.8, 0.5, 2.2], n: 8 }); tu.ball(0.12, 0, 0.12, 0.42, '#6a6a4a', { n: 7 }); tu.cone(0.08, 0.5, 0, 0.1, -0.5, '#6a6a4a', { rx: -Math.PI / 2, n: 5 }); for (let i = 0; i < 5; i++) tu.cone(0.03, 0.08, 0, 0.22, 0.3 - i * 0.12, '#e8e2a0', { n: 3 }); const tuG = tu.build(); tuG.position.set(12, h(12, 30) + 0.88, 30); tuG.rotation.y = 0.4; root.add(tuG);
+    const tu = new Kit(); tu.ball(0.18, 0, 0.1, 0, '#6a6a4a', { s: [0.8, 0.5, 2.2], n: 8 }); tu.ball(0.12, 0, 0.12, 0.42, '#6a6a4a', { n: 7 }); tu.cone(0.08, 0.5, 0, 0.1, -0.5, '#6a6a4a', { rx: -Math.PI / 2, n: 5 }); for (let i = 0; i < 5; i++) tu.cone(0.03, 0.08, 0, 0.22, 0.3 - i * 0.12, '#e8e2a0', { n: 3 }); const t3 = A3('tuatara'), tuG = t3 ? t3.group : tu.build(); tuG.position.set(12, h(12, 30) + (t3 ? 0.78 : 0.88), 30); tuG.rotation.y = 0.4; root.add(tuG);
+    { const w = A3('weka'); if (w) { w.pen = [26, 26, 44, 33]; w.group.position.set(30, 0, 28); animals.push(w); } }
     spots.push({ kind: 'tuatara', id: 'tuatara', name: 'the tuatara’s log', at: [12, 32.2], yaw: Math.PI, hit: [12, 30, 0, 3] });
     k.at(5, h(5, 4), 4, 0.6, kk => { kk.ball(3.2, 0, 1.2, 0, '#5a5048', { s: [1.4, 1, 1], n: 10 }); kk.ball(1.3, 0, 0.9, 2.6, '#14121a', { s: [1.1, 1.2, 0.4], n: 10 }); for (let i = 0; i < 4; i++) fern(kk, -2 + i * 1.3, 2.6, R, 0.5, 2.6); });
     for (let i = 0; i < 14; i++) { const m = new T.Mesh(new T.SphereGeometry(0.05, 5, 4), new T.MeshBasicMaterial({ color: 0x7ff5ff })); m.position.set(5 + Math.sin(0.6) * 2.6 + (R() - 0.5) * 1.6, h(5, 4) + 0.6 + R() * 1.4, 4 + Math.cos(0.6) * 2.6 + (R() - 0.5) * 0.4); m.layers.set(1); root.add(m); }
@@ -224,7 +236,7 @@
     post(k, spots, solid, 22.6, 2.2, 'grove');
     // birds: tūī, pīwakawaka, kererū hopping between the treetops
     const perches = []; root.traverse(() => {}); for (let i = 0; i < 12; i++) { const x = 4 + R() * 40, z = 4 + R() * 36; if (!clear(x, z)) perches.push([x, h(x, z) + 4.2 + R() * 1.5, z]); }
-    if (perches.length > 2) { animals.push(bird('#1f2a3a', '#2a3a4a', '#1a2430', perches, R, 1.1), bird('#5a4a3a', '#e8c9a0', '#4a3a2a', perches, R, 0.8), bird('#3f7a4a', '#ffffff', '#2f6a3a', perches, R, 1.5)); }
+    if (perches.length > 2) { animals.push(bird('#1f2a3a', '#2a3a4a', '#1a2430', perches, R, 1.1, 'tui'), bird('#5a4a3a', '#e8c9a0', '#4a3a2a', perches, R, 0.8, 'fantail'), bird('#3f7a4a', '#ffffff', '#2f6a3a', perches, R, 1.5, 'kereru')); }
     root.add(k.build()); hits(root, spots, h); for (const a of animals) root.add(a.group);
     const walk = (x, z) => { const d = Math.abs(z - sz(x)); return (x > BR[0] && x < BR[1]) || d > 2.4; };
     return { id: 'grove', title: 'Forest grove', sub: 'Vacation island · tap the signpost to travel', kind: 'vacation', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids: sol, pond: null, bridges: [], spots, buildings: [], arrive: [21.5, 3.6], lawns: [], paths: [], height: h, walk, animals, npc: 3, centre: [24, 20] };
@@ -340,7 +352,7 @@
     for (let i = 0; i < 18; i++) { const x = 2 + R() * 26, z = 2 + R() * 20; k.ball(0.14, x, h(x, z) + 0.1, z, ['#ff8fb1', '#ffd34f', '#b59cff', '#ffffff'][i % 4], { n: 6 }); }
     post(k, spots, solid, 13.2, 2.6, 'sky');
     // a pair of birds wheeling round, the kite (shown while it's flown)
-    for (let i = 0; i < 2; i++) { const b = bird('#ffffff', '#f4f4f4', '#dfe6ee', [[0, 0, 0]], R, 1.4); b.tick = t => { const a = t * 0.35 + i * Math.PI; b.group.position.set(15 + Math.cos(a) * 18, 6 + Math.sin(t * 0.7 + i) * 1.5, 12 + Math.sin(a) * 14); b.group.rotation.y = -a; }; animals.push(b); }
+    for (let i = 0; i < 2; i++) { const b = bird('#ffffff', '#f4f4f4', '#dfe6ee', [[0, 0, 0]], R, 1.4, 'gull'); b.tick = t => { const a = t * 0.35 + i * Math.PI; b.group.position.set(15 + Math.cos(a) * 18, 6 + Math.sin(t * 0.7 + i) * 1.5, 12 + Math.sin(a) * 14); b.group.rotation.y = -a; }; animals.push(b); }
     const kk = new Kit(); kk.box(1.2, 1.2, 0.04, 0, 0, 0, '#ffd35a', { rz: Math.PI / 4 }); kk.box(0.06, 1.7, 0.05, 0, 0, 0.03, '#e85a5a'); for (let i = 0; i < 5; i++) kk.box(0.2, 0.08, 0.02, 0, -1 - i * 0.35, 0, ['#e85a5a', '#7cc8e8', '#9be38f'][i % 3]); const kite = kk.build({ shadow: false }); kite.visible = false; root.add(kite);
     root.add(k.build()); hits(root, spots, h); for (const a of animals) root.add(a.group);
     const tick = t => { rb.position.y = 0.3 + Math.sin(t * 0.4) * 0.1; if (!kite.userData.on) balloon.position.y = h(23, 9) + Math.sin(t * 0.8) * 0.12; if (kite.visible) { kite.position.y = kite.userData.y + Math.sin(t * 1.3) * 0.6; kite.rotation.z = Math.sin(t * 1.7) * 0.3; } };

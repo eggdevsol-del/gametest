@@ -513,6 +513,7 @@
   function wheel(e) { e.preventDefault(); setZoom(CAM.zoom * Math.exp(-e.deltaY * 0.0015)); }
   function tap(x, y) {
     hideActs(); if (V.leaving) return;
+    if (V.plan && FARM) { const p = new T.Vector3(); if (rayAt(x, y).ray.intersectPlane(new T.Plane(new T.Vector3(0, 1, 0), 0), p)) FARM.tap(p.x, p.z); return; }
     // a villager (on screen, near the tap), or a place: of everything the tap's ray goes through, the one whose
     // middle is nearest the finger (things side by side on a counter); whichever's nearer the finger wins
     const r = V.stage.cv.getBoundingClientRect(); let who = null, wd = 46;
@@ -602,6 +603,7 @@
       if (a === 'phone') { if (V.stage.phone) V.stage.phone('home'); return; }
       if (a === 'reel') return reel();
       if (a === 'isl' && ISL && ISL.click) return ISL.click(b.dataset.k, b);
+      if (a === 'farm' && FARM) return FARM.click(b.dataset.k, b);
       if (a === 'fbuy') return farmBuy(b.dataset.k);
       if (a === 'fcode') { const inp = $('.vg-fcode', V.ui); const c = NET().setCode(inp ? inp.value : ''); toast(c ? 'Family code saved on this device.' : 'Family code cleared.'); return setTimeout(famPanel, 400); }
       if (/^tr/.test(a)) return tradeUi(a, b);
@@ -613,13 +615,14 @@
       if (a === 'gclose') { $('.vg-game', V.ui).hidden = true; V.picked = null; if (V.fishing) fishEnd(false, 'You packed up your rod.'); if (V.trade) { NET().send({ t: 'no', id: V.trade.id }, true); V.trade = null; } return; }
       if (a === 'act') { const f = V.acts && V.acts[+b.dataset.i]; hideActs(); if (f) { sound('tap'); f.run(); } }
     });
-    stage.root.appendChild(V.ui); netStart(); if (ISL && ISL.prep) ISL.prep();
+    stage.root.appendChild(V.ui); netStart(); if (ISL && ISL.prep) ISL.prep(); if (FARM && FARM.prep) FARM.prep();
     const cv = stage.cv; cv.addEventListener('pointerdown', down); cv.addEventListener('pointermove', move); cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('wheel', wheel, { passive: false });
     addEventListener('keydown', key);
     LK.PAL.uHouse.value.set(0, 0, 0, 0); LK.CUT_U.uCutOn.value = 0;
     CAM.yaw = Math.PI / 4; CAM.view = 0; CAM.target.set(B.arrive[0], 1, B.arrive[1]); V.intro = { a: 0.75, b: 1.7, t0: performance.now() / 1000 }; CAM.zoom = 0.75;
     requestAnimationFrame(() => { const f = $('.vg-fade', V.ui); if (f) f.classList.remove('on'); });
-    setTimeout(() => toast(where === 'village' ? 'Welcome to Hoshi Street! Tap anywhere to walk, or tap a place.' : `Welcome to the ${B.title.toLowerCase()}! ${B.welcome || (B.kind === 'utility' ? 'Make things here to cook with or sell in the village.' : 'Tap a place to see what there is to do.')}`), 900);
+    V.welcome = setTimeout(() => toast(where === 'village' ? 'Welcome to Hoshi Street! Tap anywhere to walk, or tap a place.' : `Welcome to the ${B.title.toLowerCase()}! ${B.welcome || (B.kind === 'utility' ? 'Make things here to cook with or sell in the village.' : 'Tap a place to see what there is to do.')}`), 900);
+    if (stage.keep) { const K0 = stage.keep; CAM.target.copy(K0.target); CAM.zoom = K0.zoom; CAM.yaw = K0.yaw; CAM.view = K0.view; V.intro = null; V.follow = false; V.kid.path = []; V.kid.pos.set(K0.kid[0], 0, K0.kid[1]); V.kid.yaw = K0.kid[2]; setZoom(K0.zoom); $('.vg-fade', V.ui).classList.remove('on'); clearTimeout(V.welcome); } // (rebuilt in place: no arrival)
     V.raf = requestAnimationFrame(frame);
     return true;
   }
@@ -644,6 +647,7 @@
     if (on) { open(Object.assign({}, v.stage, { where: on })); return; }
     if (v.stage.onHome) v.stage.onHome();
   }
+  function reload() { if (!V) return; const keep = { target: CAM.target.clone(), zoom: CAM.zoom, yaw: CAM.yaw, view: CAM.view, kid: [V.kid.pos.x, V.kid.pos.z, V.kid.yaw] }, v = V; v.stage.keep = keep; close(v.where); if (V) V.stage.keep = null; }
   // straight on to somewhere else (the phone's Travel app): a fade, and the next place
   function goto(where) { if (!V || V.leaving) return; if (where === V.where) return; V.leaving = true; sound('move'); const f = $('.vg-fade', V.ui); if (f) f.classList.add('on'); setTimeout(() => close(where), 650); }
   // ---------- the islands (islands-build.js): what there is to do, the animals, the sea's life
@@ -730,8 +734,9 @@
   };
   Object.assign(ACTS, ISLAND_ACTS);
   // more islands' doings (village-islands.js), with what they need from here
-  const ISL = IH.villageIslands ? IH.villageIslands({ get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, ride, sit, stand, fishStart, DAY, today }) : null;
-  if (ISL) Object.assign(ACTS, ISL.acts);
+  const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, ride, sit, stand, fishStart, DAY, today };
+  const ISL = IH.villageIslands ? IH.villageIslands(CTX) : null, FARM = IH.villageFarm ? IH.villageFarm(CTX) : null;
+  if (ISL) Object.assign(ACTS, ISL.acts); if (FARM) Object.assign(ACTS, FARM.acts);
   // a sandcastle that grows each time it's added to
   function castle(s) {
     const lvl = (V.castle ? V.castle.lvl : 0) + 1; if (V.castle) V.B.root.remove(V.castle.g);
@@ -780,6 +785,7 @@
       // legs swing when walking; heads down to graze and peck
       const sw = moving ? Math.sin(t * speed * 9) * 0.5 : 0;
       (a.legs || []).forEach((l, i) => { l.rotation.x = (i % 2 ? 1 : -1) * (i > 1 ? -1 : 1) * sw; });
+      if (a.d3 && IH.animals3d) IH.animals3d.move(a, t, moving, S.mode === 'graze', speed); // (the 3D ones: by their bones, or whole)
       if (a.head) a.head.rotation.x = S.mode === 'graze' ? (a.kind === 'hen' ? 0.6 + Math.max(0, Math.sin(t * 7)) * 0.5 : 0.75) : moving ? Math.sin(t * 6) * 0.05 : -0.05;
     }
   }
@@ -794,6 +800,7 @@
     const p = R.at(u), q = R.at(Math.min(1, u + 0.01)); k.pos.set(p[0], 0, p[2]); k.yaw = Math.atan2(q[0] - p[0], q[2] - p[2]) || k.yaw;
     k.inst.group.position.set(p[0], p[1] + (R.lift || 0), p[2]); k.inst.group.rotation.y = k.yaw;
     if (R.model) { R.model.position.set(p[0], p[1], p[2]); R.model.rotation.y = k.yaw + (R.modelYaw || 0); if (R.bob) R.model.position.y += Math.sin(t * 8) * R.bob; }
+    if (R.a3 && IH.animals3d) IH.animals3d.move(R.a3, t, true, false);
   }
   function islandTick(t, dt) {
     for (const o of V.spin || []) o.rotation.z += dt * o.userData.spin;
@@ -979,5 +986,5 @@
   }
 
   // test hooks
-  IH.village = { open, close: () => close(), leave, goto, where: () => V && V.where, toast: s => toast(s), enter: id => V && enter(id), exit: () => V && exit(), get debug() { return V && { V, CAM, route: (a, b) => route(V.grid, a, b), walkTo, tap, screenOf: p => screenOf(new T.Vector3(p[0], p[1] || 0, p[2])), spots: V.B.spots, kid: V.kid, npc: V.npc, sibs: V.sibs, setZoom, turnView, draw() { light(); aim(); V.stage.pipe.render(V.S.sc, V.S.cam); bubbles(); }, act(id, i) { const s = V.B.spots.find(q => q.id === id), L = s && ACTS[s.kind] ? ACTS[s.kind](s) : []; if (i != null && L[i]) L[i].run(); return L.map(x => x.label); }, tick(n = 20, dt = 0.05) { if (V) { light(); aim(); V.S.cam.updateMatrixWorld(); } for (let i = 0; i < n && V; i++) { V.t += dt; V.sceneT = (V.sceneT || 0) + dt; kidTick(V.sceneT, dt); villagersTick(V.sceneT, dt); islandTick(V.sceneT, dt); } } }; } };
+  IH.village = { open, close: () => close(), leave, goto, reload, where: () => V && V.where, toast: s => toast(s), enter: id => V && enter(id), exit: () => V && exit(), get debug() { return V && { V, CAM, route: (a, b) => route(V.grid, a, b), walkTo, tap, screenOf: p => screenOf(new T.Vector3(p[0], p[1] || 0, p[2])), spots: V.B.spots, kid: V.kid, npc: V.npc, sibs: V.sibs, setZoom, turnView, farm: FARM, draw() { light(); aim(); V.stage.pipe.render(V.S.sc, V.S.cam); bubbles(); }, act(id, i) { const s = V.B.spots.find(q => q.id === id), L = s && ACTS[s.kind] ? ACTS[s.kind](s) : []; if (i != null && L[i]) L[i].run(); return L.map(x => x.label); }, tick(n = 20, dt = 0.05) { if (V) { light(); aim(); V.S.cam.updateMatrixWorld(); } for (let i = 0; i < n && V; i++) { V.t += dt; V.sceneT = (V.sceneT || 0) + dt; kidTick(V.sceneT, dt); villagersTick(V.sceneT, dt); islandTick(V.sceneT, dt); } } }; } };
 })();

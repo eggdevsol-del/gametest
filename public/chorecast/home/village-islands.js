@@ -77,8 +77,8 @@
     function rideArena(s) {
       const S = stab(); if (!(S.animals.horse || S.animals.pony)) return c.toast('You need a horse or a pony. The tack room has them.');
       if (!sh().daily('ride', 3)) return c.toast('The horses are tired. Three rides a day.');
-      c.walkTo(s.at[0], s.at[1], ok => { if (!ok) return; const A = s.loop, B = V().B, kind = S.animals.horse ? 'horse' : 'pony', m = IH.islandsBuild.MAKE[kind]().group; B.root.add(m);
-        c.ride({ dur: 16, lift: kind === 'pony' ? 0.95 : 1.35, model: m, pose: 'sitchair', bob: 0.06, at: u => { const a = Math.PI + u * Math.PI * 2; return [A.x + Math.cos(a) * (A.rx - 2), 0, A.z + Math.sin(a) * (A.rz - 2)]; },
+      c.walkTo(s.at[0], s.at[1], ok => { if (!ok) return; const A = s.loop, B = V().B, kind = S.animals.horse ? 'horse' : 'pony', a3 = IH.islandsBuild.MAKE[kind](), m = a3.group; B.root.add(m);
+        c.ride({ dur: 16, lift: a3.d3 ? (kind === 'pony' ? 1.15 : 1.7) : kind === 'pony' ? 0.95 : 1.35, model: m, a3: a3.d3 ? a3 : null, pose: 'sitchair', bob: a3.d3 ? 0 : 0.06, at: u => { const a = Math.PI + u * Math.PI * 2; return [A.x + Math.cos(a) * (A.rx - 2), 0, A.z + Math.sin(a) * (A.rz - 2)]; },
           end: () => { B.root.remove(m); sh().xp(10); sh().relax({ fun: 18 }); c.xp(); c.toast('What a ride! A riding lesson: ✨ +10 XP. 🐴'); } }); }, s.yaw);
     }
     // ---------- vacation rides: the kayak, the balloon; the kite
