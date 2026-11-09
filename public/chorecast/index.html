@@ -570,7 +570,7 @@ p{margin:0}
 .ptitle{font:700 calc(34px*var(--ts)) var(--f-text);letter-spacing:-.01em;margin:4px 0 12px}
 .pnav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
 .pnav::-webkit-scrollbar{display:none}
-.pnav-i{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;border-radius:12px;font:500 calc(17px*var(--ts)) var(--f-text);color:var(--ink);white-space:nowrap;background:var(--cell)}
+.pnav-i{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;border-radius:12px;font:500 calc(17px*var(--ts)) var(--f-text);color:var(--ink);white-space:nowrap;background:var(--cell);text-decoration:none}
 .pnav-i .ic{color:var(--p-accent)}
 .pnav-i.on{background:var(--p-accent);color:var(--p-accent-ink)}
 .pnav-i.on .ic{color:inherit}
@@ -6177,6 +6177,7 @@ function viewParent() {
       <div class="pside-top"><button class="plink" data-act="lock">${ic('back')} Lock and go back</button></div>
       <h1 class="ptitle">Grown-ups</h1>${Store.mode === 'server' ? planPill() : ''}
       <nav class="pnav" aria-label="Grown-up sections">${nav.map(([k, i, l, b]) => `<button class="pnav-i ${t === k ? 'on' : ''}" data-act="ptab" data-tab="${k}" ${t === k ? 'aria-current="page"' : ''}>${ic(i)}<span>${l}</span>${b ? `<b class="pbadge">${b}</b>` : ''}</button>`).join('')}</nav>
+      <a class="pnav-i" href="home.html">${ic('home')}<span>Homes and village (preview)</span></a>
       <p class="psync">${Store.mode === 'cloud' ? 'Synced. Chores, pay and photos show up on every device that opens this link while signed in to your account.' : Store.mode === 'server' ? `Synced to ${esc(Acct.me.family.name)}. Changes show up on every family device.` : 'Saved on this device only.'}</p>
     </aside>
     <main class="pmain">${over || UI.restPick ? pRest() : main}</main></div>`;

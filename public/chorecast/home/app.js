@@ -2340,6 +2340,13 @@
     el.style.left = clamp(x - r.left - w / 2, 8, r.width - w - 8) + 'px'; el.style.top = clamp(y - r.top - h - 16, 60, r.height - h - 90) + 'px'; sound('pop');
   }
   // to the village: out to the gate, open it, and (till the village is built) say so and shut it again
+  function sibNote(p) {
+    const old = $('.ih-sib', O.root); if (old) old.remove();
+    const el = document.createElement('div'); el.className = 'ih-sib'; el.setAttribute('role', 'status');
+    el.innerHTML = `<span>${esc(p.avatar)} <b>${esc(p.name)}</b> is in the village 👋</span><button type="button">Go</button>`;
+    el.querySelector('button').addEventListener('click', () => { el.remove(); goVillage(); });
+    O.root.appendChild(el); sound('pop'); setTimeout(() => el.remove(), 12000);
+  }
   function goVillage() {
     const G = O.home.gate; if (!G) return;
     sendPlan([{ type: 'step', target: { pos: new T.Vector3(G.at.x, 0, G.at.z - 1.0) }, reach: 0.3, pose: 'stand', dur: 1.2, think: '🏘️', start: () => G.set(1),
@@ -2391,6 +2398,10 @@
     mine() { return DEFS.filter(d => d.xp && spare(d.t) > 0 && !d.apply && !d.pet).flatMap(d => boxOf(d.t).map((u, n) => ({ t: d.t, name: d.name, n, used: u.used, cond: u.cond, fin: u.fin, price: stallPrice(d, u.used), thumb: THUMBS[d.t] || '' }))); },
     thumb(t) { if (!THUMBS[t]) { O.thumbQ = [t]; thumbsSome(); } return THUMBS[t] || ''; },
     take(t, n) { const d = BY[t]; if (!d || spare(t) <= 0) return null; const u = boxOf(t).splice(n || 0, 1)[0] || {}; O.st.owned[t] -= 1; const rec = { t, fin: u.fin, used: u.used, cond: u.cond, price: stallPrice(d, u.used) }; (O.st.stall = O.st.stall || []).push(rec); save(); return rec; },
+    // trading with a brother or sister (village.js): out of Mine for good, into Mine, and XP either way
+    tradeOut(t, n) { const d = BY[t]; if (!d || spare(t) <= 0) return null; const u = boxOf(t).splice(n || 0, 1)[0] || {}; O.st.owned[t] -= 1; save(); ui(true); if (O.opts.track) O.opts.track('village.traded', { t, out: true }); return { t, fin: u.fin, used: u.used, cond: u.cond }; },
+    tradeIn(rec) { if (!BY[rec.t]) return false; O.st.owned[rec.t] = (O.st.owned[rec.t] || 0) + 1; toBox(rec); save(); ui(true); return true; },
+    xp(delta) { delta = Math.round(delta) || 0; if (!delta) return; O.st.spent = (O.st.spent || 0) - delta; save(); ui(true); },
     give(rec) { stallOff(rec); O.st.owned[rec.t] = (O.st.owned[rec.t] || 0) + 1; toBox(rec); save(); },
     sold(rec) { stallOff(rec); O.st.spent = (O.st.spent || 0) - rec.price; save(); ui(true); if (O.opts.track) O.opts.track('village.stallSold', { t: rec.t, xp: rec.price }); },
     mowed(share = 1) { const g = parkGrowth() * (1 - Math.min(1, share)); try { localStorage.setItem('cc:village:lawn', JSON.stringify({ mowAt: Date.now() - g * GROW_DAYS * 864e5 })); } catch (e) { /* this visit only */ } }
@@ -2823,6 +2834,8 @@
     addEventListener('resize', size); addEventListener('keydown', key_); if (window.visualViewport) { visualViewport.addEventListener('resize', size); visualViewport.addEventListener('scroll', size); }
     document.addEventListener('visibilitychange', vis);
     CAM.view = 0; CAM.yaw = Math.PI / 4; CAM.zoom = 1;
+    // brothers and sisters (village-net.js): when one goes to the village, a note here with a Go button
+    if (IH.villageNet) { const N = IH.villageNet; N.start({ name: kid.name, avatar: kid.avatar, hue: kid.hue }, 'home'); N.pose({ pl: 'home' }); O.netOff = N.on('moved', ({ p, was }) => { if (O && !O.away && p.s && p.s.pl !== 'home' && (!was || was === 'home')) sibNote(p); }); }
     if (O.st.stall && O.st.stall.length) { for (const r of O.st.stall) { O.st.owned[r.t] = (O.st.owned[r.t] || 0) + 1; toBox(r); } O.st.stall = []; save(); } // (left on a stall: back in Mine)
     size(); loadHome(); applyLook(); CAM.intro = { a: 0.62, b: 1, t0: 0 }; lastT = null; beat.reset();
     ui(); force = true; if (!raf) raf = requestAnimationFrame(loop);
@@ -2838,6 +2851,7 @@
   }
   function vis() { if (!O) return; O.paused = document.hidden; if (O.paused) guitarMusic(false); if (!O.paused && !O.away && !raf) { force = true; raf = requestAnimationFrame(loop); } }
   function close(quiet) {
+    if (O && O.netOff) { O.netOff(); O.netOff = null; if (IH.villageNet) IH.villageNet.stop(); }
     guitarMusic(false); if (O && O.away && IH.village) { const o = O; O = null; IH.village.close(); O = o; }
     if (!O) return; const o = O;
     if (o.held) cancelHeld(); save();

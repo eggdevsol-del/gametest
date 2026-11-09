@@ -17,6 +17,7 @@ import { verifyAppleJws } from './appstore.js';
 import { PAYWALL, PRODUCTS, PLANS, FOUNDING_SEATS, WELCOME_DAYS, planOf, clubPrize } from './plans.js';
 import { notify, notifyDevice } from './push.js';
 import { offsiteConfig, runOffsiteBackup } from './offsite.js';
+import { villageRoutes } from './village.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 // Options: PORT and STATIC_DIR environment variables, or --port 8787 --static public on the command line.
@@ -759,6 +760,9 @@ route('GET', '/api/stream', async ({ req, res, s, url }) => {
   return undefined; // stays open
 });
 
+// The village (homes prototype): brothers and sisters on Hoshi Street together (server/village.js).
+const villageSend = villageRoutes({ route, fail, db });
+
 route('PUT', '/api/docs/:col/:id', async ({ req, s, p }) => { needSession(s); return writeDoc(s, p.col, decodeURIComponent(p.id), await readJson(req), false, req.headers['x-client-id']); });
 route('PATCH', '/api/docs/:col/:id', async ({ req, s, p }) => { needSession(s); return writeDoc(s, p.col, decodeURIComponent(p.id), await readJson(req), true, req.headers['x-client-id']); });
 route('DELETE', '/api/docs/:col/:id', async ({ req, s, p }) => { needSession(s); await deleteDoc(s, p.col, decodeURIComponent(p.id), req.headers['x-client-id']); return { ok: true }; });
@@ -1226,6 +1230,7 @@ http.createServer(async (req, res) => {
   securityHeaders(req, res);
   try {
     if (url.pathname.startsWith('/api/')) {
+      if (url.pathname === '/api/village/send' && req.method === 'POST') return await villageSend(req, res); // (several a second: no session lookup)
       const origin = req.headers.origin;
       if (origin && APP_ORIGINS.includes(origin)) {
         res.setHeader('access-control-allow-origin', origin); res.setHeader('vary', 'origin');
