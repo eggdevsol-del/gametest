@@ -172,6 +172,7 @@
   // ---------- the kid: tap to walk, tap a place for what to do there
   function kidTick(t, dt) {
     const k = V.kid; let moved = 0;
+    if (V.ride) { try { IH.chars.pose(k.inst, k.pose || 'sitchair', t, k.ph); } catch (e) { /* (still loading) */ } return; }
     if (k.path.length) { if (k.seat) stand(k); k.pose = null; moved = walk(k, dt, t); V.follow = true; }
     else if (k.face != null) turn(k, k.face, dt, 6);
     draw(k, t, moved);
@@ -558,10 +559,10 @@
   // ---------- open and close
   function open(stage) {
     if (V) return false;
-    const where = stage.where || 'village', B = where === 'village' ? IH.villageBuild.build() : IH.islandsBuild && IH.islandsBuild.build(where, stage.shop && stage.shop.farm ? stage.shop.farm() : null); if (!B) return false;
+    const where = stage.where || 'village', sh0 = stage.shop, B = where === 'village' ? IH.villageBuild.build() : IH.islandsBuild && IH.islandsBuild.build(where, !sh0 ? null : where === 'farm' ? sh0.farm() : sh0.isl ? sh0.isl(where) : null); if (!B) return false;
     const S = scene(B);
     V = { where, stage, B, street: B, shops: {}, foods: IH.kitchen ? IH.kitchen.FOOD : {}, S, grid: makeGrid(B), people: [], npc: [], says: [], t: 0, lastT: null, sceneT: null, beat: LK.Beat(), phase: stage.phase || 'day', follow: true, raf: 0 };
-    V.beat.mode = stage.frames || 'twos';
+    V.beat.mode = stage.frames || 'ones';
     V.hits = []; B.root.traverse(o => { if (o.userData.spot) V.hits.push(o); });
     for (const l of B.lits) l.visible = V.phase !== 'day';
     // the kid comes in through the village's gate
@@ -600,6 +601,7 @@
       if (a === 'fam') return famPanel();
       if (a === 'phone') { if (V.stage.phone) V.stage.phone('home'); return; }
       if (a === 'reel') return reel();
+      if (a === 'isl' && ISL && ISL.click) return ISL.click(b.dataset.k, b);
       if (a === 'fbuy') return farmBuy(b.dataset.k);
       if (a === 'fcode') { const inp = $('.vg-fcode', V.ui); const c = NET().setCode(inp ? inp.value : ''); toast(c ? 'Family code saved on this device.' : 'Family code cleared.'); return setTimeout(famPanel, 400); }
       if (/^tr/.test(a)) return tradeUi(a, b);
@@ -611,13 +613,13 @@
       if (a === 'gclose') { $('.vg-game', V.ui).hidden = true; V.picked = null; if (V.fishing) fishEnd(false, 'You packed up your rod.'); if (V.trade) { NET().send({ t: 'no', id: V.trade.id }, true); V.trade = null; } return; }
       if (a === 'act') { const f = V.acts && V.acts[+b.dataset.i]; hideActs(); if (f) { sound('tap'); f.run(); } }
     });
-    stage.root.appendChild(V.ui); netStart();
+    stage.root.appendChild(V.ui); netStart(); if (ISL && ISL.prep) ISL.prep();
     const cv = stage.cv; cv.addEventListener('pointerdown', down); cv.addEventListener('pointermove', move); cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('wheel', wheel, { passive: false });
     addEventListener('keydown', key);
     LK.PAL.uHouse.value.set(0, 0, 0, 0); LK.CUT_U.uCutOn.value = 0;
     CAM.yaw = Math.PI / 4; CAM.view = 0; CAM.target.set(B.arrive[0], 1, B.arrive[1]); V.intro = { a: 0.75, b: 1.7, t0: performance.now() / 1000 }; CAM.zoom = 0.75;
     requestAnimationFrame(() => { const f = $('.vg-fade', V.ui); if (f) f.classList.remove('on'); });
-    setTimeout(() => toast(where === 'village' ? 'Welcome to Hoshi Street! Tap anywhere to walk, or tap a place.' : `Welcome to the ${B.title.toLowerCase()}! ${B.kind === 'utility' ? 'Look after the animals, and collect what they make.' : 'Tap a place to see what there is to do.'}`), 900);
+    setTimeout(() => toast(where === 'village' ? 'Welcome to Hoshi Street! Tap anywhere to walk, or tap a place.' : `Welcome to the ${B.title.toLowerCase()}! ${B.welcome || (B.kind === 'utility' ? 'Make things here to cook with or sell in the village.' : 'Tap a place to see what there is to do.')}`), 900);
     V.raf = requestAnimationFrame(frame);
     return true;
   }
@@ -648,6 +650,7 @@
   const DAY = 864e5, today = () => Math.floor(Date.now() / DAY);
   const MAKES = { hen: { n: 1, every: 1, what: 'egg' }, goat: { n: 1, every: 1, what: 'milk' }, cow: { n: 2, every: 1, what: 'milk' }, alpaca: { n: 2, every: 2, what: 'wool' } };
   const FARM_SHOP = [['hen', '🐔', 'Hen', 250, 8, 'Lays an egg a day.'], ['goat', '🐐', 'Goat', 450, 3, 'A bottle of milk a day.'], ['cow', '🐄', 'Cow', 650, 3, 'Two bottles of milk a day.'], ['alpaca', '🦙', 'Alpaca', 700, 3, 'Two bags of wool every two days.']];
+  const FRESH_FISH = [['trout', 'Rainbow trout', '🐟'], ['eel', 'Longfin eel', '🐍'], ['whitebait', 'Whitebait', '🐠'], ['koura', 'Kōura (crayfish)', '🦞']];
   const SEA_FISH = [['snapper', 'Snapper', '🐟'], ['kahawai', 'Kahawai', '🐟'], ['bluecod', 'Blue cod', '🐟'], ['flounder', 'Flounder', '🐡'], ['kingfish', 'Kingfish', '🐟']];
   const POOL_FINDS = [['starfish', 'a starfish', '⭐'], ['crab', 'a little crab', '🦀'], ['hermit', 'a hermit crab', '🐚'], ['anemone', 'a sea anemone', '🌺'], ['snail', 'a sea snail', '🐌'], ['cockabully', 'a cockabully', '🐟'], ['shell', 'a pretty shell', '🐚'], ['octopus', 'a tiny octopus', '🐙']];
   function farmReady(kind) {
@@ -684,7 +687,7 @@
     const sh = V.stage.shop; if (!sh.daily('fish', 3)) return toast('No more bites today. Three casts a day.');
     walkTo(s.at[0], s.at[1], ok => {
       if (!ok) return; V.kid.face = s.yaw; V.kid.pose = 'water'; V.rodOn = true; sound('pop');
-      const F = V.fishing = { t0: V.t, bite: V.t + 2 + Math.random() * 3.5, phase: 'wait' };
+      const F = V.fishing = { t0: V.t, bite: V.t + 2 + Math.random() * 3.5, phase: 'wait', water: s.water || 'sea' };
       gamePanel(`<div class="vg-gh"><b>🎣 Fishing</b><span>${sh.dailyLeft('fish', 3)} casts left today</span></div><div class="vg-gq vg-fq">Waiting for a bite… 🌊</div><div class="vg-gb vg-go"><button data-v="reel"><span class="e">🎣</span>Reel in!</button></div>`);
       void F;
     });
@@ -697,7 +700,7 @@
   function reel() {
     const F = V.fishing; if (!F) return;
     if (F.phase !== 'bite') return fishEnd(false, 'Too soon! The fish swam off.');
-    const [k, name, e] = SEA_FISH[Math.floor(Math.random() * SEA_FISH.length)], sh = V.stage.shop, b = sh.book('fish', k);
+    const L = F.water === 'fresh' ? FRESH_FISH : SEA_FISH, [k, name, e] = L[Math.floor(Math.random() * L.length)], sh = V.stage.shop, b = sh.book('fish', k);
     sh.addFood('fish'); if (b.isNew) sh.xp(10); xp(); float(V.kid, e); sound('buy');
     fishEnd(true, `You caught a ${name.toLowerCase()}! ${e} It’s in your fridge at home.${b.isNew ? ` New in your fish book (${b.count} / 9): ✨ +10 XP.` : ''}`);
   }
@@ -714,7 +717,7 @@
       { e: '🥤', label: 'A cold drink · ✨ 10', run: () => walkTo(s.at[0], s.at[1], ok => { if (ok && V.stage.shop.treat('Cold drink', 10, { food: 6, energy: 8 })) { float(V.kid, '🥤'); xp(); } }, s.yaw) },
       ...(V.stage.shop.hasTool('rod') ? [] : [{ e: '🎣', label: 'A fishing rod · ✨ 500', run: () => walkTo(s.at[0], s.at[1], ok => { if (ok && V.stage.shop.pay(500, 'a fishing rod')) { V.stage.shop.giveTool('rod'); xp(); toast('A fishing rod! Cast a line off the rocky point. 🎣'); } }, s.yaw) }])],
     towel: s => [{ e: '🏖️', label: 'Lie in the sun', run: () => walkTo(s.at[0], s.at[1], ok => { if (ok) { V.kid.pose = 'sit'; V.stage.shop.relax({ energy: 10, fun: 6 }); float(V.kid, '😎'); } }, s.yaw) }],
-    log: s => [{ e: '🪵', label: 'Sit on the log', run: () => { if (V.people.some(o => o !== V.kid && o.seatAt === s)) return toast('Someone’s sitting there.'); V.kid.seatAt = s; walkTo(s.at[0], s.at[1], ok => { if (ok && V.kid.seatAt === s) sit(V.kid, s); }); } }],
+    log: s => [{ e: '🪑', label: 'Sit down', run: () => { if (V.people.some(o => o !== V.kid && o.seatAt === s)) return toast('Someone’s sitting there.'); V.kid.seatAt = s; walkTo(s.at[0], s.at[1], ok => { if (ok && V.kid.seatAt === s) sit(V.kid, s); }); } }],
     castle: s => [{ e: '🏰', label: V.castle ? 'Add to the sandcastle' : 'Build a sandcastle', run: () => chore(s, 'toys', 4, () => { castle(s); V.stage.shop.relax({ fun: 15 }); float(V.kid, '🏰'); sound('tune'); }) }],
     swim: s => [{ e: '🏊', label: 'Go for a swim', run: () => walkTo(s.swimTo[0], s.swimTo[1], ok => { if (ok) { V.stage.shop.relax({ fun: 14, clean: 10 }); float(V.kid, '💦'); sound('tune'); } }) }],
     rockpool: s => [{ e: '🔎', label: 'Look in the rock pool', run: () => { if (!V.stage.shop.daily('pool', 8)) return toast('The rock pools are quiet now. Come back tomorrow.'); chore(s, 'look', 3, () => { const [k, name, e] = POOL_FINDS[Math.floor(Math.random() * POOL_FINDS.length)], b = V.stage.shop.book('beach', k); if (b.isNew) V.stage.shop.xp(10); xp(); float(V.kid, e); sound('pop'); toast(`You found ${name}! ${e}${b.isNew ? ` New in your beach book (${b.count} / ${POOL_FINDS.length}): ✨ +10 XP.` : ''}`); }); } }],
@@ -726,6 +729,9 @@
     shear: s => [{ e: '🧶', label: `Shear the alpacas · ${fedOk() ? farmReady('alpaca') + ' ready' : 'feed them first'}`, run: () => collect(s, ['alpaca'], 'sweep', 'Shear them') }]
   };
   Object.assign(ACTS, ISLAND_ACTS);
+  // more islands' doings (village-islands.js), with what they need from here
+  const ISL = IH.villageIslands ? IH.villageIslands({ get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, ride, sit, stand, fishStart, DAY, today }) : null;
+  if (ISL) Object.assign(ACTS, ISL.acts);
   // a sandcastle that grows each time it's added to
   function castle(s) {
     const lvl = (V.castle ? V.castle.lvl : 0) + 1; if (V.castle) V.B.root.remove(V.castle.g);
@@ -740,6 +746,7 @@
     const k = V.kid;
     for (const a of V.B.animals || []) {
       const g = a.group, P = g.position, dk = Math.hypot(k.pos.x - P.x, k.pos.z - P.z);
+      if (a.tick) { a.tick(t, dt, k.pos, V.grid.ground); continue; } // (an animal with its own ways: birds, swans, horses…)
       if (a.fixed) { if (a.head) a.head.rotation.x = -0.25 * Math.max(0, Math.sin(t * 0.4 + 1)) ** 4; continue; }
       if (a.kind === 'fish') { const r = 2.2, w = t * 0.5 + a.home[0]; P.set(a.home[0] + Math.cos(w) * r, -0.6 + Math.sin(t * 1.3) * 0.08, a.home[1] + Math.sin(w) * r * 0.7); g.rotation.y = -w; continue; }
       if (a.kind === 'dolphin') { const cyc = 11, u = ((t + 3) % cyc) / 2.2; if (u < 1) { const x = a.home[0] - 6 + ((Math.floor((t + 3) / cyc) % 3) * 6), y = -1.0 + Math.sin(u * Math.PI) * 2.4; P.set(x + u * 6, y, a.home[1]); g.rotation.set(0, Math.PI / 2, 0); g.rotateX(-Math.cos(u * Math.PI) * 0.9); g.visible = y > -0.45; } else g.visible = false; continue; }
@@ -776,10 +783,23 @@
       if (a.head) a.head.rotation.x = S.mode === 'graze' ? (a.kind === 'hen' ? 0.6 + Math.max(0, Math.sin(t * 7)) * 0.5 : 0.75) : moving ? Math.sin(t * 6) * 0.05 : -0.05;
     }
   }
+  // a ride: the kid sits on (or in) something that goes round a path, then gets off where they got on
+  function ride(r) {
+    const k = V.kid; if (V.ride) return; k.path = []; k.seat = null; k.pose = r.pose || 'sitchair';
+    V.ride = Object.assign({ t0: V.t, from: [k.pos.x, k.pos.z], yaw0: k.yaw }, r); if (r.model) r.model.visible = true; sound('tune');
+  }
+  function rideTick(t, dt) {
+    const R = V.ride; if (!R) return; const k = V.kid, u = (V.t - R.t0) / R.dur;
+    if (u >= 1) { V.ride = null; k.pose = null; k.pos.set(R.from[0], 0, R.from[1]); k.yaw = R.yaw0; if (R.end) R.end(); return; }
+    const p = R.at(u), q = R.at(Math.min(1, u + 0.01)); k.pos.set(p[0], 0, p[2]); k.yaw = Math.atan2(q[0] - p[0], q[2] - p[2]) || k.yaw;
+    k.inst.group.position.set(p[0], p[1] + (R.lift || 0), p[2]); k.inst.group.rotation.y = k.yaw;
+    if (R.model) { R.model.position.set(p[0], p[1], p[2]); R.model.rotation.y = k.yaw + (R.modelYaw || 0); if (R.bob) R.model.position.y += Math.sin(t * 8) * R.bob; }
+  }
   function islandTick(t, dt) {
     for (const o of V.spin || []) o.rotation.z += dt * o.userData.spin;
     if (V.B.animals && V.B === V.street) animalsTick(t, dt);
-    fishTick(); rodTick();
+    if (V.B.tick && V.B === V.street) V.B.tick(t, dt, V.kid.pos);
+    fishTick(); rodTick(); rideTick(t, dt);
   }
 
   // ---------- brothers and sisters, live (village-net.js): each where they really are, their name over them
@@ -959,5 +979,5 @@
   }
 
   // test hooks
-  IH.village = { open, close: () => close(), leave, goto, where: () => V && V.where, toast: s => toast(s), enter: id => V && enter(id), exit: () => V && exit(), get debug() { return V && { V, CAM, route: (a, b) => route(V.grid, a, b), walkTo, tap, screenOf: p => screenOf(new T.Vector3(p[0], p[1] || 0, p[2])), spots: V.B.spots, kid: V.kid, npc: V.npc, sibs: V.sibs, setZoom, turnView, act(id, i) { const s = V.B.spots.find(q => q.id === id), L = s && ACTS[s.kind] ? ACTS[s.kind](s) : []; if (i != null && L[i]) L[i].run(); return L.map(x => x.label); }, tick(n = 20, dt = 0.05) { if (V) { light(); aim(); V.S.cam.updateMatrixWorld(); } for (let i = 0; i < n && V; i++) { V.t += dt; V.sceneT = (V.sceneT || 0) + dt; kidTick(V.sceneT, dt); villagersTick(V.sceneT, dt); islandTick(V.sceneT, dt); } } }; } };
+  IH.village = { open, close: () => close(), leave, goto, where: () => V && V.where, toast: s => toast(s), enter: id => V && enter(id), exit: () => V && exit(), get debug() { return V && { V, CAM, route: (a, b) => route(V.grid, a, b), walkTo, tap, screenOf: p => screenOf(new T.Vector3(p[0], p[1] || 0, p[2])), spots: V.B.spots, kid: V.kid, npc: V.npc, sibs: V.sibs, setZoom, turnView, draw() { light(); aim(); V.stage.pipe.render(V.S.sc, V.S.cam); bubbles(); }, act(id, i) { const s = V.B.spots.find(q => q.id === id), L = s && ACTS[s.kind] ? ACTS[s.kind](s) : []; if (i != null && L[i]) L[i].run(); return L.map(x => x.label); }, tick(n = 20, dt = 0.05) { if (V) { light(); aim(); V.S.cam.updateMatrixWorld(); } for (let i = 0; i < n && V; i++) { V.t += dt; V.sceneT = (V.sceneT || 0) + dt; kidTick(V.sceneT, dt); villagersTick(V.sceneT, dt); islandTick(V.sceneT, dt); } } }; } };
 })();

@@ -262,9 +262,11 @@
     for (const a of animals) root.add(a.group);
     // the kid can walk in the paddock (in through its gate) among the animals; the hens' run is theirs
     const walk = (x, z) => !(x > 31.2 && x < 44.8 && z > 1.4 && z < 11.4);
-    return { id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, walk, animals, pens, npc: 0, centre: [26, 18], growth: 0.55 };
+    return { id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, walk, animals, pens, npc: 0, centre: [26, 18], growth: 0.55, welcome: 'Look after the animals, and collect what they make.' };
   }
 
   const BUILD = { beach, farm };
-  IH.islandsBuild = { LIST, build: (id, st) => (BUILD[id] ? BUILD[id](st) : null), MAKE };
+  // islands-more.js adds the rest with add(id, fn), built from the same pieces
+  IH.islandsBuild = { LIST, build: (id, st) => (BUILD[id] ? BUILD[id](st) : null), add: (id, fn) => { BUILD[id] = fn; const i = LIST.find(q => q.id === id); if (i) i.built = true; }, MAKE,
+    kit: { rng, bx, sm, terrain, sides, skirt, signTex, board, signpost, pohutukawa, rock, quad, part } };
 })();

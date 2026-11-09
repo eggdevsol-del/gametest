@@ -40,7 +40,7 @@
     const owned = {}; for (const [t] of STARTER) owned[t] = (owned[t] || 0) + 1;
     // (the starter things are set out the first time the studio opens, by arrange(): each where it fits, facing into
     // the room, with room in front to use it)
-    return { v: 1, spent: 0, demo: 0, cur: 'studio', own: { studio: 1 }, owned, homes: { studio: { items: [], starter: 1 } }, look: { frames: 'twos', phase: 'day', ink: 1, plain: 0 } };
+    return { v: 1, spent: 0, demo: 0, cur: 'studio', own: { studio: 1 }, owned, homes: { studio: { items: [], starter: 1 } }, look: { frames: 'ones', fr24: 1, phase: 'day', ink: 1, plain: 0 } };
   }
   const store = {
     key: id => `cc:home:${id}`,
@@ -2358,7 +2358,10 @@
     const G = O.home.gate; if (G) { G.set(1); setTimeout(() => travel(where), 300); } else travel(where);
   }
   // what farms and the sea give: into the fridge (eggs, milk, fish) or the goods shelf (wool); prices as Chorecast's
-  const PRODUCE = { egg: { name: 'Eggs', one: 'an egg', e: '🥚', price: 14 }, milk: { name: 'Milk', one: 'a bottle of milk', e: '🥛', price: 18 }, wool: { name: 'Wool', one: 'a bag of wool', e: '🧶', price: 45, goods: true }, fish: { name: 'Fish', one: 'a fish', e: '🐟', price: 30 } };
+  const PRODUCE = { egg: { name: 'Eggs', one: 'an egg', e: '🥚', price: 14 }, milk: { name: 'Milk', one: 'a bottle of milk', e: '🥛', price: 18 }, wool: { name: 'Wool', one: 'a bag of wool', e: '🧶', price: 45, goods: true }, fish: { name: 'Fish', one: 'a fish', e: '🐟', price: 30 },
+    carrot: { name: 'Carrots', one: 'a carrot', e: '🥕', price: 12 }, tomato: { name: 'Tomatoes', one: 'a tomato', e: '🍅', price: 12 }, lettuce: { name: 'Lettuce', one: 'a lettuce', e: '🥬', price: 14 }, apple: { name: 'Apples', one: 'an apple', e: '🍎', price: 18 }, honey: { name: 'Honey', one: 'a jar of honey', e: '🍯', price: 45 },
+    pumpkin: { name: 'Pumpkins', one: 'a pumpkin', e: '🎃', price: 35, goods: true }, strawberry: { name: 'Strawberries', one: 'a punnet of strawberries', e: '🍓', price: 10, goods: true }, lemon: { name: 'Lemons', one: 'a lemon', e: '🍋', price: 16, goods: true }, feijoa: { name: 'Feijoas', one: 'a feijoa', e: '🍐', price: 20, goods: true },
+    truffle: { name: 'Truffles', one: 'a truffle', e: '🍄', price: 40, goods: true }, jam: { name: 'Jam', one: 'a jar of jam', e: '🫙', price: 85, goods: true } };
   const goods = () => (O.st.goods = O.st.goods || {});
   function farmState() { const f = (O.st.farm = O.st.farm || { animals: { hen: 3, goat: 1 }, got: {}, fed: 0 }); f.got = f.got || {}; return f; }
   function produceSheet() {
@@ -2410,9 +2413,9 @@
     treat(name, xp, gives) { const w = wallet(); if (w.left < xp) { toast(`You need ✨ ${xp} XP for that.`); return false; } O.st.spent += xp; const k = insts.get(KID); if (k && k.needs && gives) for (const n in gives) if (k.needs[n] != null) k.needs[n] = Math.min(100, k.needs[n] + gives[n]); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('village.treat', { name, xp }); return true; },
     counter: kind => (kind === 'produce' ? produceSheet() : counterSheet(kind)),
     // the islands (islands-build.js, village.js): the farm, the fridge and the goods shelf, tools, collections, needs
-    farm: () => farmState(), farmSave: () => save(),
+    farm: () => farmState(), farmSave: () => save(), isl: id => ((O.st.isl = O.st.isl || {})[id] = O.st.isl[id] || {}),
     addFood(id, n = 1) { const f = food(); f[id] = (f[id] || 0) + n; save(); },
-    addGoods(id, n = 1) { const g = goods(); g[id] = (g[id] || 0) + n; save(); },
+    addGoods(id, n = 1) { const g = goods(); g[id] = (g[id] || 0) + n; save(); }, goods: () => goods(), useFood(id, n = 1) { const f = food(); if ((f[id] || 0) < n) return false; f[id] -= n; save(); return true; }, useGoods(id, n = 1) { const g = goods(); if ((g[id] || 0) < n) return false; g[id] -= n; save(); return true; }, earn2: xp => { O.st.jobPay = (O.st.jobPay || 0) + xp; save(); ui(true); }, phase: () => O.st.look.phase,
     pay(xp, what) { const w = wallet(); if (w.left < xp) { toast(`You need ✨ ${xp} XP for ${what || 'that'}.`); return false; } O.st.spent += xp; save(); sound('buy'); ui(true); return true; },
     hasTool: t => !!(O.st.tools || {})[t], giveTool(t) { (O.st.tools = O.st.tools || {})[t] = Date.now(); save(); },
     book(kind, key) { const b = ((O.st.books = O.st.books || {})[kind] = O.st.books[kind] || {}); const isNew = !b[key]; b[key] = (b[key] || 0) + 1; save(); return { isNew, count: Object.keys(b).length }; },
@@ -2753,7 +2756,7 @@
     const L = O.st.look; L.sun = L.sun || 'view'; const seg = (k, opts) => `<div class="ih-seg">${opts.map(([v, n]) => `<button class="${String(L[k]) === String(v) ? 'on' : ''}" data-a="look" data-k="${k}" data-v="${v}">${n}</button>`).join('')}</div>`;
     sheet(`<div class="ih-sh-h"><h3>Prototype look</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div>
       <p class="ih-sub">For trying the anime look. Kids wouldn’t see this panel.</p>
-      <label>Frames</label>${seg('frames', [['twos', 'On twos · 12 fps'], ['threes', 'On threes · 8'], ['ones', '24 fps'], ['smooth', 'Smooth']])}
+      <label>Frames</label>${seg('frames', [['ones', '24 fps'], ['twos', 'On twos · 12'], ['threes', 'On threes · 8'], ['smooth', 'Smooth']])}
       <p class="ih-note">Anime is shot at 24 frames a second and mostly drawn on twos: each picture is held for two frames, so 12 new pictures a second. The pets and the things placed in the home move on those beats; the camera, effects, menus and anything you drag stay smooth at full frame rate.</p>
       <label>Time of day</label>${seg('phase', [['day', 'Day'], ['dusk', 'Sunset'], ['night', 'Night']])}
       ${HB[O.st.cur].apartment ? '' : `<label>Where this home is</label>`}<div class="ih-seg" ${HB[O.st.cur].apartment ? 'hidden' : ''}>${(IH.settings ? IH.settings.KINDS : []).map(([v, n]) => `<button class="${settingOf(O.st, O.st.cur) === v ? 'on' : ''}" data-a="where" data-v="${v}">${n}</button>`).join('')}</div>
@@ -2866,6 +2869,7 @@
     if (!T) return false; if (O) close(true);
     try { renderer(); } catch (e) { return false; }
     const kid = opts.kid || { id: 'demo', name: 'Ari' }, st = store.load(kid.id);
+    if (st.look && !st.look.fr24) { st.look.fr24 = 1; if (st.look.frames === 'twos') st.look.frames = 'ones'; } // (24 frames a second is the default now, 2026-11-10)
     O = { opts, kid, st, S: makeScene(), mount: opts.mount || document.body, editing: false, held: null, cat: null };
     O.markOk = new T.MeshBasicMaterial({ color: 0x7be08c, transparent: true, opacity: 0.55, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
     O.markNo = new T.MeshBasicMaterial({ color: 0xff6b6b, transparent: true, opacity: 0.6, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });

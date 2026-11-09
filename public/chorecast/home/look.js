@@ -325,6 +325,21 @@ void main() {
     geo.setAttribute('depth', new T.Float32BufferAttribute(dep, 1));
     const m = new T.Mesh(geo, seaMat(o)); m.layers.set(1); m.renderOrder = 2; m.userData.special = true; m.userData.bg = true; return m;
   }
+  // Falling water (the waterfall): streaks pouring down, white where it churns, see-through at its edges. uv.y runs
+  // top (1) to bottom (0).
+  function fallMat(o = {}) {
+    const m = new T.ShaderMaterial({ uniforms: Object.assign({ uC: { value: col(o.tint || '#bfeaff') }, uS: { value: o.speed || 1.6 }, uR: { value: o.rep || 6 } }, WATER_U), transparent: true, depthWrite: false, side: T.DoubleSide,
+      vertexShader: 'varying vec2 vU; void main(){ vU = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+      fragmentShader: `uniform vec3 uC; uniform float uS, uR, uT; varying vec2 vU;
+        float h(float x){ return fract(sin(x * 91.7) * 4378.5); }
+        void main(){ float col = floor(vU.x * 22.0), sp = 0.7 + h(col) * 0.6, y = vU.y * uR + uT * uS * sp + h(col + 3.0) * 9.0;
+          float streak = smoothstep(0.55, 0.95, fract(y)) * (0.5 + 0.5 * h(col + 7.0));
+          float edge = smoothstep(0.0, 0.12, vU.x) * smoothstep(1.0, 0.88, vU.x), foot = 1.0 - smoothstep(0.0, 0.18, vU.y);
+          vec3 c = mix(uC, vec3(1.0), clamp(streak * 0.8 + foot * 0.7, 0.0, 1.0));
+          gl_FragColor = vec4(c, (0.55 + streak * 0.35 + foot * 0.3) * edge); }` });
+    m.blending = T.CustomBlending; m.blendSrc = T.SrcAlphaFactor; m.blendDst = T.OneMinusSrcAlphaFactor; m.blendSrcAlpha = T.OneFactor; m.blendDstAlpha = T.OneFactor;
+    return m;
+  }
   // Sunbeams through windows and lamp halos: added light, drawn in the colour pass only (layer 1, no ink).
   const BEAM_U = { uK: { value: 1 } };
   function beamMat(tint = '#fff4d8', a = 0.22) {
@@ -611,5 +626,5 @@ void main() {
     };
   }
 
-  IH.look = { PHASES, PAL, setPhase, animeMat, atlasMat, cutMat, CUT_U, BASE, BASE2, glassMat, waterMat, seaMat, seaSheet, SEA_U, beamMat, haloMat, WATER_U, BEAM_U, HALO_U, NORMAL_MAT, Pipeline, Beat, FRAMES };
+  IH.look = { PHASES, PAL, setPhase, animeMat, atlasMat, cutMat, CUT_U, BASE, BASE2, glassMat, waterMat, seaMat, seaSheet, SEA_U, fallMat, beamMat, haloMat, WATER_U, BEAM_U, HALO_U, NORMAL_MAT, Pipeline, Beat, FRAMES };
 })();
