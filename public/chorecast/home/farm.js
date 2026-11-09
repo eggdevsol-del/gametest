@@ -14,7 +14,7 @@
 (function () {
   const T = window.THREE, IH = window.IsoHome = window.IsoHome || {};
   if (!T || !IH.kit || !IH.islandsBuild) return;
-  const { Kit } = IH.kit, IB = IH.islandsBuild, K = IB.kit, { rng, bx, sides, board, signpost } = K;
+  const { Kit } = IH.kit, IB = IH.islandsBuild, K = IB.kit, { rng, bx, sides, board, signpost, gate: hangGate } = K;
   const W = 52, D = 44, DAY = 864e5, today = () => Math.floor(Date.now() / DAY);
   const TRACK = [[24, 0.4, 28, 16], [6, 13, 46, 17]], BARN = [6.6, 2.2, 17.4, 9.8], FENCE_XP = 8;
 
@@ -120,9 +120,35 @@
     bx(kk, 1.7, 0.12, 1.65, 0, 3.07, -0.54, RED, { r: 0.05 }); bx(kk, 1.76, 0.06, 1.71, 0, 3.0, -0.54, '#ffffff');
     kk.glassBox(1.36, 1.15, 0.04, 0, 1.85, 0.14, { tint: '#d8eef8' }); kk.glassBox(1.36, 1.6, 0.04, 0, 1.4, -1.22, { tint: '#d8eef8' });
   }
-  function fence(k, p, gate) {
+  // A farm windpump: a tapering lattice tower (four legs, braces round each face, crossed on the sides), a little
+  // deck and the gearbox head on top, the pump rod down the middle to a pipe and trough at the foot, a tail vane
+  // behind that keeps it to the wind, and the rotor: a hub on its shaft with 18 vanes fanned out round it, two rings
+  // binding them. Only the rotor turns (about its shaft).
+  const strut = (kk, a, b, r, col) => { const dx = b[0] - a[0], dy = b[1] - a[1], dz = b[2] - a[2], L = Math.hypot(dx, dy, dz); kk.cyl(r, L, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2 - L / 2, (a[2] + b[2]) / 2, col, { n: 5, rx: Math.atan2(dz, dy), rz: -Math.asin(dx / L) }); };
+  function windpump(x, z) {
+    const H = 7.0, B0 = 1.0, B1 = 0.28, GALV = '#9aa0aa', DARK = '#6f7480', at = (sx, sz, y) => { const w = B0 + (B1 - B0) * (y / H); return [sx * w, y, sz * w]; };
+    const tower = kk => {
+      const C = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
+      for (const [sx, sz] of C) strut(kk, at(sx, sz, 0), at(sx, sz, H), 0.06, GALV);
+      for (const y of [1.6, 3.2, 4.6, 5.9]) for (let i = 0; i < 4; i++) { const [ax, az] = C[i], [bx2, bz2] = C[(i + 1) % 4]; strut(kk, at(ax, az, y), at(bx2, bz2, y), 0.035, GALV); }
+      for (const [y0, y1] of [[0.1, 1.6], [1.6, 3.2], [3.2, 4.6]]) for (let i = 0; i < 4; i++) { const [ax, az] = C[i], [bx2, bz2] = C[(i + 1) % 4]; strut(kk, at(ax, az, y0), at(bx2, bz2, y1), 0.025, DARK); strut(kk, at(bx2, bz2, y0), at(ax, az, y1), 0.025, DARK); }
+      for (const [sx, sz] of C) kk.box(0.3, 0.12, 0.3, sx * B0, 0, sz * B0, '#a9a297', { r: 0.03 }); // the feet on their pads
+      kk.box(1.0, 0.08, 1.0, 0, H, 0, '#8a6038', { r: 0.02 }); // the deck
+      kk.box(0.5, 0.42, 0.62, 0, H + 0.08, 0.05, DARK, { r: 0.08 }); kk.cyl(0.07, 0.5, 0, H + 0.29 - 0.25, 0.55, GALV, { n: 8, rx: Math.PI / 2 }); // the gearbox, the shaft out the front
+      kk.cyl(0.03, H + 0.1, 0, 0, 0, '#c9ccd2', { n: 5 }); kk.cyl(0.06, 0.9, 0, 0, 0.0, DARK, { n: 8 }); // the pump rod down the middle, the pump at the foot
+      kk.cyl(0.05, 1.2, 0.6, 0.45 - 0.6, 0.0, DARK, { n: 6, rz: Math.PI / 2 }); kk.box(1.2, 0.5, 0.6, 1.5, 0, 0, '#8f9aa8', { r: 0.05 }); kk.waterBox(1.05, 0.06, 0.45, 1.5, 0.42, 0, { tint: '#6fc0d8' }); // the pipe and the little trough
+      kk.cyl(0.03, 2.2, 0, H + 0.29 - 1.1, -1.15, GALV, { n: 5, rx: Math.PI / 2 }); kk.box(0.03, 0.9, 1.2, 0, H - 0.18, -2.2, '#e9e2d4', { r: 0.01 }); kk.box(0.035, 0.12, 1.2, 0, H + 0.62, -2.2, '#c94a4a', { r: 0.01 }); // the tail vane on its boom
+    };
+    const rk = new Kit(); rk.cyl(0.16, 0.22, 0, -0.11, 0, DARK, { n: 10, rx: Math.PI / 2 }); rk.ball(0.12, 0, 0, 0.14, GALV, { n: 8 });
+    for (let i = 0; i < 18; i++) { const a = i / 18 * Math.PI * 2, r0 = 0.32, L = 1.32; rk.box(0.3, L, 0.035, Math.sin(a) * (r0 + L / 2), Math.cos(a) * (r0 + L / 2) - L / 2, 0, i % 2 ? '#e9e2d4' : '#d6d2c8', { rz: -a, r: 0.01 }); } // vanes, fanned out from the hub
+    for (const R of [0.85, 1.6]) rk.torus(R, 0.03, 0, 0, 0.02, GALV); // the rings that bind them
+    for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2; rk.box(0.04, 1.3, 0.04, Math.sin(a) * 0.95, Math.cos(a) * 0.95 - 0.65, -0.03, GALV, { rz: -a }); } // arms from the hub
+    const rotor = rk.build(); rotor.position.set(x, H + 0.29, z + 0.85); rotor.userData.spin = 1.4;
+    return { tower, rotor };
+  }
+  function fence(k, p, gate, root, gates) {
     const sides = [[[p.x0, p.z0], [p.x1, p.z0], 'n'], [[p.x1, p.z0], [p.x1, p.z1], 'e'], [[p.x1, p.z1], [p.x0, p.z1], 's'], [[p.x0, p.z1], [p.x0, p.z0], 'w']];
-    const runs = []; for (const [a, b, s] of sides) { if (s !== gate.side) { runs.push([a, b]); continue; } const L = Math.hypot(b[0] - a[0], b[1] - a[1]), u0 = (L / 2 - 1.6) / L, u1 = (L / 2 + 1.6) / L, at = u => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u]; runs.push([a, at(u0)], [at(u1), b]); }
+    const runs = []; for (const [a, b, s] of sides) { if (s !== gate.side) { runs.push([a, b]); continue; } const L = Math.hypot(b[0] - a[0], b[1] - a[1]), u0 = (L / 2 - 1.6) / L, u1 = (L / 2 + 1.6) / L, at = u => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u]; runs.push([a, at(u0)], [at(u1), b]); if (root) gates.push(hangGate(k, root, at(u0), at(u1))); }
     for (const [a, b] of runs) { const L = Math.hypot(b[0] - a[0], b[1] - a[1]); if (L < 0.2) continue; const n = Math.max(1, Math.round(L / 2.2)), ry = -Math.atan2(b[1] - a[1], b[0] - a[0]); for (let i = 0; i <= n; i++) bx(k, 0.22, 1.5, 0.22, a[0] + (b[0] - a[0]) * i / n, 0, a[1] + (b[1] - a[1]) * i / n, '#e9e2d4'); for (const y of [0.55, 1.15]) k.box(L, 0.14, 0.08, (a[0] + b[0]) / 2, y, (a[1] + b[1]) / 2, '#e9e2d4', { ry }); }
     return runs;
   }
@@ -143,11 +169,10 @@
     });
     board(k, 'barn2', 'FARM SHOP', 'animals · feed · planner', '#fff6e0', '#b8402f', 3.6, 1.0, 12, 4.4, 9.62); solid(...BARN);
     spots.push({ kind: 'fbarn', id: 'barn', name: 'the barn', at: [12, 10.8], yaw: Math.PI, hit: [12, 9.6, 0, 4] });
-    k.at(3.2, 0, 15, 0, kk => { for (const [a, b] of [[-0.7, -0.7], [0.7, -0.7], [-0.7, 0.7], [0.7, 0.7]]) kk.box(0.1, 7.4, 0.1, a * 0.6, 0, b * 0.6, '#8a8f98', { rx: b * -0.08, rz: a * 0.08 }); bx(kk, 0.6, 0.5, 0.6, 0, 7.2, 0, '#8a8f98'); });
-    const blades = new Kit(); for (let i = 0; i < 12; i++) blades.box(0.32, 2.2, 0.04, 0, 1.1, 0, i % 2 ? '#e9e2d4' : '#c9ccd2', { rz: i / 12 * Math.PI * 2 }); const bl = blades.build(); bl.position.set(3.2, 7.45, 15.5); bl.userData.spin = 1.4; root.add(bl); solid(2.2, 14, 4.2, 16);
+    { const W0 = windpump(3.2, 15); k.at(3.2, 0, 15, 0, W0.tower); root.add(W0.rotor); solid(2.0, 13.8, 4.4, 16.2); }
     signpost(k, 22.4, 2.4, 'farm'); solid(22.1, 2.1, 22.7, 2.7); spots.push({ kind: 'travel', id: 'post', name: 'the signpost', at: [23.8, 3.6], yaw: Math.PI, hit: [22.4, 2.4, 0, 2.4] });
     // the paddocks: fences, a gate, and the gate's spot (feeding, who lives here)
-    const pads = f.paddocks.map(p => { const g = gateOf(p), runs = fence(k, p, g); for (const [a, b] of runs) solid(a[0] - 0.2, a[1] - 0.2, b[0] + 0.2, b[1] + 0.2); const at = outside(g); spots.push({ kind: 'fgate', id: 'gate' + p.id, pad: p.id, name: 'the paddock gate', at, yaw: Math.atan2(g.x - at[0], g.z - at[1]), hit: [g.x, g.z, 0, 2.6] }); return { p, g }; });
+    const gates = [], pads = f.paddocks.map(p => { const g = gateOf(p), runs = fence(k, p, g, root, gates); for (const [a, b] of runs) solid(a[0] - 0.2, a[1] - 0.2, b[0] + 0.2, b[1] + 0.2); const at = outside(g); spots.push({ kind: 'fgate', id: 'gate' + p.id, pad: p.id, name: 'the paddock gate', at, yaw: Math.atan2(g.x - at[0], g.z - at[1]), hit: [g.x, g.z, 0, 2.6] }); return { p, g }; });
     // fittings and equipment
     const models = {};
     for (const it of f.items) { const d = ITEMS[it.t]; if (!d) continue; const g = new T.Group(), kk = new Kit(); itemModel(it.t, kk); g.add(kk.build()); if (it.t === 'pond' && IH.look.seaSheet) g.add(IH.look.seaSheet(-2.2, -1.7, 2.2, 1.7, 0.16, (x, z) => { const e = (x / 1.85) ** 2 + (z / 1.35) ** 2; return e < 1 ? 0.16 - 0.8 * (1 - e) : 0.4; }, { n: 6, foam: 0.18, deepAt: 0.6, shallow: '#8fe0d0', deep: '#2f7f9f', mud: '#8f8a99' })); g.position.set(it.x, 0, it.z); g.rotation.y = it.ry || 0; root.add(g); models[it.id] = g;
@@ -158,7 +183,7 @@
     for (const a of f.animals) { const pen = pens[a.pad]; if (!pen) continue; const mk = (IH.animals3d && IH.animals3d.make) || ((kind) => (IB.MAKE[kind] || IB.MAKE.hen)()); const m = mk(a.kind); m.pen = pen; m.rec = a; let x = 0, z = 0; for (let q = 0; q < 30; q++) { x = pen[0] + R() * (pen[2] - pen[0]); z = pen[1] + R() * (pen[3] - pen[1]); if (!solids.some(r => x > r[0] - 0.8 && x < r[2] + 0.8 && z > r[1] - 0.8 && z < r[3] + 0.8)) break; } m.group.position.set(x, 0, z); m.group.rotation.y = R() * 6.28; animals.push(m); root.add(m.group); }
     root.add(k.build()); for (const s of spots) if (s.hit) { const [x, z, , w] = s.hit, m = new T.Mesh(new T.BoxGeometry(w, 4, w), new T.MeshBasicMaterial()); m.visible = false; m.position.set(x, 2, z); m.userData.spot = s; root.add(m); }
     const lawns = [[1, 1, 51, 43]], paths = TRACK.map(r => r.slice());
-    return { id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
+    return { gates, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
   }
   IB.add('farm', build);
 

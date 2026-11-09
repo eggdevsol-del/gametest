@@ -265,8 +265,20 @@
     return { id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, walk, animals, pens, npc: 0, centre: [26, 18], growth: 0.55, welcome: 'Look after the animals, and collect what they make.' };
   }
 
+  // A heavy farm gate, hung on a hinge post, closing against a latch post: a timber leaf (a hinge stile, a latch
+  // stile, five rails and the diagonal brace that holds it square) on a pivot at the hinge. village.js swings it.
+  function gate(k, root, hinge, latch, col = '#b58a5a') {
+    const dx = latch[0] - hinge[0], dz = latch[1] - hinge[1], L = Math.hypot(dx, dz), base = -Math.atan2(dz, dx), gk = new Kit();
+    bx(k, 0.3, 1.75, 0.3, hinge[0], 0, hinge[1], '#8a6038', { r: 0.03 }); bx(k, 0.26, 1.55, 0.26, latch[0], 0, latch[1], '#8a6038', { r: 0.03 }); // the posts
+    const lw = L - 0.18; bx(gk, 0.12, 1.3, 0.12, 0.08, 0.12, 0, col); bx(gk, 0.1, 1.24, 0.1, lw - 0.05, 0.14, 0, col);
+    for (let i = 0; i < 5; i++) bx(gk, lw - 0.05, 0.1, 0.07, lw / 2, 0.2 + i * 0.27, 0, col);
+    gk.box(Math.hypot(lw - 0.2, 1.05), 0.1, 0.07, lw / 2, 0.24 + 0.5, 0.05, col, { rz: Math.atan2(1.05, lw - 0.2) }); // the brace, hinge foot to latch top
+    for (const y of [0.3, 1.2]) gk.box(0.22, 0.06, 0.1, 0.06, y, 0.02, '#3d4048'); gk.box(0.12, 0.12, 0.12, lw - 0.02, 0.85, 0.07, '#3d4048'); // the hinges, the latch
+    const g = gk.build(); g.position.set(hinge[0], 0, hinge[1]); g.rotation.y = base; root.add(g);
+    return { g, base, a: 0, v: 0, hx: hinge[0], hz: hinge[1], len: lw, mid: [(hinge[0] + latch[0]) / 2, (hinge[1] + latch[1]) / 2] };
+  }
   const BUILD = { beach, farm };
   // islands-more.js adds the rest with add(id, fn), built from the same pieces
   IH.islandsBuild = { LIST, build: (id, st) => (BUILD[id] ? BUILD[id](st) : null), add: (id, fn) => { BUILD[id] = fn; const i = LIST.find(q => q.id === id); if (i) i.built = true; }, MAKE,
-    kit: { rng, bx, sm, terrain, sides, skirt, signTex, board, signpost, pohutukawa, rock, quad, part } };
+    kit: { rng, bx, sm, terrain, sides, skirt, signTex, board, signpost, pohutukawa, rock, quad, part, gate } };
 })();

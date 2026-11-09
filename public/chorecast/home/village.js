@@ -861,11 +861,26 @@
     if (R.model) { R.model.position.set(p[0], p[1], p[2]); R.model.rotation.y = k.yaw + (R.modelYaw || 0); if (R.bob) R.model.position.y += Math.sin(t * 8) * R.bob; }
     if (R.a3 && IH.animals3d) { const lp = R.lastP || p; IH.animals3d.move(R.a3, t, 'walk', Math.hypot(p[0] - lp[0], p[2] - lp[2]), null); R.lastP = p; }
   }
+  // Heavy gates: whoever walks up pushes the gate open away from them; it swings slowly (a lot of timber on its
+  // hinges), holds open while they're close, then swings back shut, overshoots a little, settles, and the latch
+  // clunks. A spring with a heavy leaf and light damping; it bumps off its stops if flung too far.
+  function gatesTick(dt) {
+    for (const G of V.B.gates || []) {
+      let near = null, nd = 1e9; for (const p of V.people) { const d = Math.hypot(p.pos.x - G.mid[0], p.pos.z - G.mid[1]); if (d < nd) { nd = d; near = p; } }
+      const leafMid = a => [G.hx + Math.cos(G.base + a) * G.len / 2, G.hz - Math.sin(G.base + a) * G.len / 2];
+      if (near && nd < 2.4 && !G.dir) { const o = leafMid(1.5), c = leafMid(-1.5); G.dir = Math.hypot(o[0] - near.pos.x, o[1] - near.pos.z) > Math.hypot(c[0] - near.pos.x, c[1] - near.pos.z) ? 1 : -1; if (Math.abs(G.a) < 0.05) sound('pat'); }
+      const tgt = G.dir && near && nd < 3.4 ? G.dir * 1.5 : 0;
+      const I = 3.0, K = 9, C = 2.6, n = 4, h = Math.min(dt, 0.1) / n;
+      for (let i = 0; i < n; i++) { G.v += ((K * (tgt - G.a) - C * G.v) / I) * h; G.a += G.v * h; if (Math.abs(G.a) > 1.75) { G.a = Math.sign(G.a) * 1.75; G.v *= -0.25; } }
+      if (!tgt && G.dir && Math.abs(G.a) < 0.015 && Math.abs(G.v) < 0.05) { G.a = 0; G.v = 0; G.dir = 0; sound('tap'); } // (shut: the latch drops)
+      G.g.rotation.y = G.base + G.a;
+    }
+  }
   function islandTick(t, dt) {
     for (const o of V.spin || []) o.rotation.z += dt * o.userData.spin;
     if (V.B.animals && V.B === V.street) animalsTick(t, dt);
     if (V.B.tick && V.B === V.street) V.B.tick(t, dt, V.kid.pos);
-    fishTick(); rodTick(); rideTick(t, dt); fxTick(dt);
+    fishTick(); rodTick(); rideTick(t, dt); fxTick(dt); gatesTick(dt);
   }
 
   // ---------- brothers and sisters, live (village-net.js): each where they really are, their name over them
