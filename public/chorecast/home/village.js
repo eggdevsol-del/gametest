@@ -1,0 +1,625 @@
+/* Chorecast homes (a prototype): visiting the village, Hoshi Street (built by village-build.js).
+   The kid walks out through their garden gate and arrives through the village's own gate. They tap the ground to
+   walk there and tap a place (a shop, a stall, a bench, the fountain, the vending machines, the gate home) for what
+   they can do there. Villagers (the same characters, walk and foot placement as the kid's) go about their day:
+   to the shops' windows, the stalls, the fountain, the park, a sit on a bench; two keep the vegetable and flower
+   stalls. Nobody walks into anything or anybody: routes go round everything (a grid of the walkable ground,
+   A* then pulled tight), and each slows or waits for whoever's in its way.
+   The view is the homes': isometric, follows the kid, drag to look around, pinch or scroll to zoom, turn a quarter
+   at a time. A shop that would hide the kid is cut down to its footprint.
+   Drawn through the home's renderer and pipeline (IH.village.open(stage)); the home stops drawing while it's open.
+   Shops inside, stalls and selling, and siblings come next (phases B to D). */
+(function () {
+  const T = window.THREE, IH = window.IsoHome = window.IsoHome || {};
+  if (!T || !IH.look || !IH.villageBuild) return;
+  const LK = IH.look, clamp = (v, a, b) => Math.max(a, Math.min(b, v)), $ = (s, r) => r.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  const ease = p => p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  const G = 0.25, BODY = 0.4; // the walking grid (12.5 cm), how much room a body needs round it
+  const AVATARS = ['🐰', '🐱', '🐶', '🐼', '🐨', '🦉', '🐵', '🐯', '🐧', '🦁', '🐸', '🦊'], HUES = ['#ff9fb7', '#7cc8e8', '#ffd35a', '#9be38f', '#b59cff', '#ffb36b', '#e86f6f', '#5fbf8a'];
+  const HELLO = ['Hi! 👋', 'Hello!', 'Nice day!', 'Off shopping?', 'Love the café ☕', 'The cherry trees! 🌸', 'See you!', 'Hiya 😊'];
+  let V = null;
+
+  // ---------- where bodies can be: the island's rectangles drawn into a grid, the pond (with its bridge) as water
+  function makeGrid(B) {
+    const nx = Math.ceil((B.bounds.x1 - B.bounds.x0) / G), nz = Math.ceil((B.bounds.z1 - B.bounds.z0) / G), bad = new Uint8Array(nx * nz);
+    const rect = (x0, z0, x1, z1) => { for (let i = Math.max(0, Math.floor((x0 - BODY) / G)); i <= Math.min(nx - 1, Math.floor((x1 + BODY) / G)); i++) for (let j = Math.max(0, Math.floor((z0 - BODY) / G)); j <= Math.min(nz - 1, Math.floor((z1 + BODY) / G)); j++) bad[i * nz + j] = 1; };
+    for (const [x0, z0, x1, z1] of B.solids) rect(x0, z0, x1, z1);
+    const P = B.pond || { x: -99, z: -99, rx: 0, rz: 0 }, onBridge = (x, z) => B.bridges.some(b => x > b.x0 && x < b.x1 && z > b.z0 + 0.15 && z < b.z1 - 0.15);
+    for (let i = 0; i < nx; i++) for (let j = 0; j < nz; j++) {
+      const x = (i + 0.5) * G, z = (j + 0.5) * G;
+      if (x < 0.9 || z < 0.9 || x > B.bounds.x1 - 0.9 || z > B.bounds.z1 - 0.9) { bad[i * nz + j] = 1; continue; } // (the island's edge)
+      const ex = (x - P.x) / (P.rx + 0.6 + BODY), ez = (z - P.z) / (P.rz + 0.6 + BODY);
+      if (ex * ex + ez * ez < 1 && !onBridge(x, z)) bad[i * nz + j] = 1;
+    }
+    const at = (x, z) => { const i = Math.floor(x / G), j = Math.floor(z / G); return i < 0 || j < 0 || i >= nx || j >= nz ? -1 : i * nz + j; };
+    const free = (x, z) => { const c = at(x, z); return c >= 0 && !bad[c]; };
+    return { nx, nz, bad, at, free, ground: (x, z) => { for (const b of B.bridges) if (x > b.x0 && x < b.x1 && z > b.z0 - 0.2 && z < b.z1 + 0.2) { const u = (x - b.x0) / (b.x1 - b.x0); return Math.sin(clamp(u, 0, 1) * Math.PI) * b.arc + 0.2; } return 0; } };
+  }
+  // the nearest free point (a tap on a wall or in the pond: the nearest place to stand)
+  function nearestFree(g, x, z, max = 40) {
+    if (g.free(x, z)) return [x, z];
+    for (let r = 1; r <= max; r++) { let best = null, bd = 1e9; for (let a = 0; a < r * 8; a++) { const t = a / (r * 8) * Math.PI * 2, px = x + Math.cos(t) * r * G, pz = z + Math.sin(t) * r * G; if (g.free(px, pz)) { const d = Math.hypot(px - x, pz - z); if (d < bd) { bd = d; best = [px, pz]; } } } if (best) return best; }
+    return null;
+  }
+  const sees = (g, a, b) => { const d = Math.hypot(b[0] - a[0], b[1] - a[1]), n = Math.ceil(d / (G * 0.5)); for (let i = 1; i < n; i++) { const u = i / n; if (!g.free(a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u)) return false; } return true; };
+  // A* over the grid (eight ways, no cutting corners), then pulled tight into straight runs
+  function route(g, from, to, avoid) {
+    if (avoid && avoid.length) { // round the people standing in the way: their spots blocked for this one route, then cleared again
+      const was = [];
+      for (const [x, z] of avoid) for (let i = Math.floor((x - 0.85) / G); i <= Math.floor((x + 0.85) / G); i++) for (let j = Math.floor((z - 0.85) / G); j <= Math.floor((z + 0.85) / G); j++) {
+        if (i < 0 || j < 0 || i >= g.nx || j >= g.nz || Math.hypot((i + 0.5) * G - x, (j + 0.5) * G - z) > 0.85) continue; const c = i * g.nz + j; if (!g.bad[c]) { g.bad[c] = 1; was.push(c); }
+      }
+      const r = route(g, from, to); for (const c of was) g.bad[c] = 0; return r;
+    }
+    const A = nearestFree(g, from[0], from[1]), B = nearestFree(g, to[0], to[1]); if (!A || !B) return null;
+    if (sees(g, A, B)) return [B];
+    const s = g.at(A[0], A[1]), e = g.at(B[0], B[1]), N = g.nx * g.nz, nz = g.nz, ei = Math.floor(e / nz), ej = e % nz;
+    const cost = new Float32Array(N).fill(1e9), prev = new Int32Array(N).fill(-1), done = new Uint8Array(N), heap = [[0, s]]; cost[s] = 0;
+    const push = (f, c) => { heap.push([f, c]); let i = heap.length - 1; while (i > 0) { const p = (i - 1) >> 1; if (heap[p][0] <= heap[i][0]) break; [heap[p], heap[i]] = [heap[i], heap[p]]; i = p; } };
+    const pop = () => { const top = heap[0], last = heap.pop(); if (heap.length) { heap[0] = last; let i = 0; for (;;) { const l = i * 2 + 1, r = l + 1; let m = i; if (l < heap.length && heap[l][0] < heap[m][0]) m = l; if (r < heap.length && heap[r][0] < heap[m][0]) m = r; if (m === i) break; [heap[m], heap[i]] = [heap[i], heap[m]]; i = m; } } return top; };
+    const H = c => { const dx = Math.abs(Math.floor(c / nz) - ei), dz = Math.abs(c % nz - ej); return (dx + dz) + (Math.SQRT2 - 2) * Math.min(dx, dz); };
+    let found = false, n = 0;
+    while (heap.length && n++ < N * 4) {
+      const [, c] = pop(); if (done[c]) continue; done[c] = 1; if (c === e) { found = true; break; }
+      const ci = Math.floor(c / nz), cj = c % nz;
+      for (let di = -1; di <= 1; di++) for (let dj = -1; dj <= 1; dj++) {
+        if (!di && !dj) continue; const ni = ci + di, nj = cj + dj; if (ni < 0 || nj < 0 || ni >= g.nx || nj >= nz) continue;
+        const nc = ni * nz + nj; if (g.bad[nc]) continue; if (di && dj && (g.bad[ci * nz + nj] || g.bad[ni * nz + cj])) continue;
+        const nd = cost[c] + (di && dj ? Math.SQRT2 : 1); if (nd < cost[nc]) { cost[nc] = nd; prev[nc] = c; push(nd + H(nc), nc); }
+      }
+    }
+    if (!found) return null;
+    const pts = []; for (let c = e; c !== -1 && c !== s; c = prev[c]) pts.push([(Math.floor(c / nz) + 0.5) * G, (c % nz + 0.5) * G]);
+    pts.reverse(); pts[pts.length - 1] = B;
+    const out = []; let a = A; // pulled tight: from each point, as far along as it can see
+    for (let i = 0; i < pts.length;) { let k = pts.length - 1; while (k > i && !sees(g, a, pts[k])) k--; out.push(pts[k]); a = pts[k]; i = k + 1; }
+    return out;
+  }
+
+  // ---------- the scene
+  function scene(B) {
+    const sc = new T.Scene(), sun = new T.DirectionalLight(0xffffff, 1);
+    sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.018; sun.shadow.radius = 1;
+    sc.add(sun, sun.target);
+    const lamps = []; for (let i = 0; i < 4; i++) { const p = new T.PointLight(0xffc77a, 0, 5.2, 2); sc.add(p); lamps.push(p); } // (the same lights as a home, so its shaders are the same)
+    const cam = new T.OrthographicCamera(-10, 10, 10, -10, 1, 1400);
+    sc.add(B.root);
+    return { sc, sun, cam };
+  }
+
+  // ---------- people: the kid and the villagers
+  function person(avatar, hue, x, z, yaw = 0) {
+    const inst = IH.chars.make(avatar, hue); V.S.sc.add(inst.group);
+    const p = { inst, pos: new T.Vector3(x, 0, z), yaw, path: [], st: 'stand', sp: 1.25, ph: Math.random() * 6, wait: 0, until: 0, task: null };
+    inst.group.position.copy(p.pos); inst.group.rotation.y = yaw; return p;
+  }
+  function go(p, to, then) { const r = route(V.grid, [p.pos.x, p.pos.z], to); p.path = r || []; p.then = then || null; p.stuck = 0; p.seat = null; if (!r && then) then(false); return !!r; }
+  const turn = (p, want, dt, rate = 8) => { p.yaw += clamp(Math.atan2(Math.sin(want - p.yaw), Math.cos(want - p.yaw)), -rate * dt, rate * dt); };
+  // one step along the way: slower, then waiting, when someone's just ahead; round them after a while
+  // round whoever's in the way: a new way that keeps clear of everyone standing near, else a step to the side
+  function reroute(p, fx, fz) {
+    p.stuck = 0; const last = p.path[p.path.length - 1], others = V.people.filter(o => o !== p && Math.hypot(o.pos.x - p.pos.x, o.pos.z - p.pos.z) < 6 && Math.hypot(o.pos.x - last[0], o.pos.z - last[1]) > 0.9).map(o => [o.pos.x, o.pos.z]);
+    const r = route(V.grid, [p.pos.x, p.pos.z], last, others);
+    if (r && r.length) p.path = r;
+    else { const side = [p.pos.x - fz * 0.9, p.pos.z + fx * 0.9], other = [p.pos.x + fz * 0.9, p.pos.z - fx * 0.9], sp = V.grid.free(...side) ? side : V.grid.free(...other) ? other : null; if (sp) { const f = p.then; p.path = [sp]; p.then = () => { go(p, last, f); }; } }
+  }
+  function walk(p, dt, t) {
+    if (!p.path.length) return 0;
+    const q = p.path[0], dx = q[0] - p.pos.x, dz = q[1] - p.pos.z, d = Math.hypot(dx, dz);
+    if (d < 0.06) { p.path.shift(); if (!p.path.length) { p.st = 'stand'; const f = p.then; p.then = null; if (f) f(true); } return 0; }
+    const fx = dx / d, fz = dz / d;
+    const block = V.people.find(o => o !== p && !o.seat && (() => { const rx = o.pos.x - p.pos.x, rz = o.pos.z - p.pos.z, along = rx * fx + rz * fz; return along > 0.1 && along < 1.0 && Math.abs(rx * fz - rz * fx) < 0.62; })());
+    turn(p, Math.atan2(dx, dz), dt);
+    const facing = Math.cos(Math.atan2(dx, dz) - p.yaw); // (turns before it walks off: no moonwalking)
+    if (block) {
+      p.stuck += dt; p.st = 'stand';
+      if (p.stuck > (p === V.kid ? 0.5 : 1.2)) reroute(p, fx, fz);
+      return 0;
+    }
+    if (facing < 0.3) { p.st = 'stand'; return 0; }
+    const s = Math.min(d, p.sp * dt * clamp(facing, 0.3, 1)), nx = p.pos.x + fx * s, nz = p.pos.z + fz * s;
+    // never into anybody: a step that would bring it closer than two bodies' width to someone isn't taken (it waits, as for someone ahead)
+    if (V.people.some(o => o !== p && Math.hypot(o.pos.x - nx, o.pos.z - nz) < 0.74 && Math.hypot(o.pos.x - nx, o.pos.z - nz) < Math.hypot(o.pos.x - p.pos.x, o.pos.z - p.pos.z))) { p.stuck += dt; p.st = 'stand'; if (p.stuck > (p === V.kid ? 0.5 : 1.2)) reroute(p, fx, fz); return 0; }
+    p.stuck = 0; p.pos.x = nx; p.pos.z = nz; p.st = 'walk'; return s;
+  }
+  function draw(p, t, moved) {
+    p.inst.walkD = (p.inst.walkD || 0) + moved;
+    const gy = V.grid.ground(p.pos.x, p.pos.z); p.pos.y += (gy + (p.seat ? p.seat.y : 0) - p.pos.y) * 0.5; // (up over the bridge; up onto a bench seat)
+    p.inst.group.position.copy(p.pos); p.inst.group.rotation.y = p.yaw;
+    try { IH.chars.pose(p.inst, p.pose || p.st, t, p.ph); } catch (e) { /* (still loading) */ }
+  }
+
+  // villagers: off somewhere, a while there, then somewhere else
+  function errand(n, t) {
+    const S = V.B.spots.filter(s => s.kind !== 'home' && s.kind !== 'board' && s.kind !== 'exit' && s.kind !== 'counter');
+    const s = S[Math.floor(Math.random() * S.length)];
+    if (s.kind === 'bench' || s.kind === 'seat') { const taken = V.people.some(o => o !== n && o.seatAt === s); if (taken) return void (n.until = t + 1); }
+    const taken = (x, z) => V.people.some(o => o !== n && (Math.hypot(o.pos.x - x, o.pos.z - z) < 1.4 || (o.path.length && Math.hypot(o.path[o.path.length - 1][0] - x, o.path[o.path.length - 1][1] - z) < 1.4)));
+    let to = null;
+    for (let k = 0; k < 12 && !to; k++) {
+      const a = Math.random() * Math.PI * 2, c = s.kind === 'fountain' ? [V.B.spots.find(q => q.id === 'fountain').hit[0] + Math.cos(a) * 5.4, V.B.spots.find(q => q.id === 'fountain').hit[1] + Math.sin(a) * 5.4] // (round the rim)
+        : s.kind === 'park' || s.kind === 'pond' ? [s.at[0] + (Math.random() - 0.5) * 5, s.at[1] + (Math.random() - 0.5) * 4] : [s.at[0] + (Math.random() - 0.5) * 2.4, s.at[1] + Math.random() * 1.2];
+      if (V.grid.free(c[0], c[1]) && !taken(c[0], c[1])) to = c;
+    }
+    if (!to) return void (n.until = t + 1);
+    if (s.kind === 'bench' || s.kind === 'seat') n.seatAt = s;
+    go(n, to, ok => {
+      if (!ok) { n.seatAt = null; n.until = t + 1; return; }
+      const now = V.t;
+      if ((s.kind === 'bench') && n.seatAt === s) { sit(n, s); n.until = now + 10 + Math.random() * 12; return; }
+      if (s.kind === 'seat' && n.seatAt === s) { sit(n, s); n.until = now + 8 + Math.random() * 8; return; }
+      n.seatAt = null; n.lookYaw = s.kind === 'fountain' ? Math.atan2(s.hit[0] - n.pos.x, s.hit[1] - n.pos.z) : s.yaw != null ? s.yaw : null; n.pose = /^(shop|stall|vend|item|food|treat)$/.test(s.kind) ? 'look' : null; n.until = now + 3 + Math.random() * 6;
+    });
+  }
+  function sit(p, s) { p.seat = { y: 0.12, yaw: s.yaw }; p.pos.x = s.seat[0]; p.pos.z = s.seat[1]; p.yaw = s.yaw; p.pose = 'sitchair'; }
+  function stand(p) { if (!p.seat) return; const s = p.seatAt || null; p.seat = null; p.pose = null; p.seatAt = null; if (s) { p.pos.x = s.at[0]; p.pos.z = s.at[1]; } }
+  function villagersTick(t, dt) {
+    for (const n of V.npc) {
+      let moved = 0;
+      if (n.keeper) { n.st = 'stand'; turn(n, n.keeper.yaw, dt, 3); if (Math.random() < dt * 0.05) n.wave = t + 1.5; n.pose = t < (n.wave || 0) ? 'happy' : null; }
+      else if (n.path.length) { n.pose = null; moved = walk(n, dt, t); }
+      else if (t > n.until) { stand(n); n.lookYaw = null; errand(n, t); }
+      else if (n.lookYaw != null) turn(n, n.lookYaw, dt, 4);
+      if (n.hi && t < n.hi.until) { n.pose = 'happy'; turn(n, Math.atan2(V.kid.pos.x - n.pos.x, V.kid.pos.z - n.pos.z), dt, 6); } else if (n.hi) { n.hi = null; if (!n.seat && !n.keeper) n.pose = null; }
+      draw(n, t, moved);
+    }
+  }
+
+  // ---------- the kid: tap to walk, tap a place for what to do there
+  function kidTick(t, dt) {
+    const k = V.kid; let moved = 0;
+    if (k.path.length) { if (k.seat) stand(k); k.pose = null; moved = walk(k, dt, t); V.follow = true; }
+    else if (k.face != null) turn(k, k.face, dt, 6);
+    draw(k, t, moved);
+    if (V.mark) { V.mark.visible = k.path.length > 0; V.mark.rotation.y += dt * 2; }
+  }
+  function walkTo(x, z, then, face) {
+    const k = V.kid; k.face = face == null ? null : face; k.pose = null;
+    if (!go(k, [x, z], ok => { if (ok && face != null) k.face = face; if (then) then(ok); })) { toast('Can’t get there from here.'); return false; }
+    const end = k.path[k.path.length - 1]; if (V.mark) V.mark.position.set(end[0], V.grid.ground(end[0], end[1]) + 0.04, end[1]);
+    return true;
+  }
+  const KEEPER_SAYS = { furniture: ['Welcome! Everything’s on display.', 'The second-hand corner’s at the back.'], grocer: ['Fresh in this morning!', 'The apples are lovely today 🍎'], cafe: ['Welcome to the café! ☕', 'The taiyaki are warm 🐟'], pets: ['Say hi to the pets! 🐾', 'Every pet needs a bed and a bowl.'] };
+  function hello() { const L = KEEPER_SAYS[V.B.id] || ['Hello!']; say(V.keeper, L[Math.floor(Math.random() * L.length)]); V.keeper.hi = { until: V.t + 2 }; }
+  function xp() { const el = $('.vg-xpn', V.ui); if (el && V.stage.shop) el.textContent = Math.round(V.stage.shop.wallet().left).toLocaleString('en-NZ'); }
+  const ACTS = {
+    shop: s => [{ e: '🚪', label: 'Go in', run: () => walkTo(s.at[0], s.at[1], ok => ok && enter(s.id), s.yaw) },
+      { e: '👀', label: 'Look in the window', run: () => walkTo(s.at[0] + (s.id === 'grocer' ? 0 : 3), s.at[1] + 0.2, ok => { if (ok) { V.kid.pose = 'look'; setTimeout(() => { if (V) V.kid.pose = null; }, 3500); } }, Math.PI) }],
+    stall: s => s.keeper ? [{ e: '🧺', label: 'Have a look', run: () => walkTo(s.at[0], s.at[1], ok => { if (ok) { V.kid.pose = 'look'; toast('Fresh today! Buying from stalls comes soon.'); setTimeout(() => { if (V) V.kid.pose = null; }, 3000); } }, s.yaw) }]
+      : V.stall && V.stall.s === s ? [{ e: '📦', label: 'Pack up my stall', run: () => walkTo(s.at[0], s.at[1], ok => ok && stallClose(), s.yaw) }] : V.stall ? [{ e: '🏷️', label: 'You have a stall open already', run: () => toast('Pack up your other stall first.') }]
+      : [{ e: '🏷️', label: 'Set up my stall here', run: () => walkTo(s.at[0], s.at[1], ok => ok && stallPick(s), s.yaw) }],
+    bench: s => [{ e: '🪑', label: 'Sit down', run: () => { if (V.people.some(o => o !== V.kid && o.seatAt === s)) return toast('Someone’s sitting there.'); V.kid.seatAt = s; walkTo(s.at[0], s.at[1], ok => { if (ok && V.kid.seatAt === s) sit(V.kid, s); }); } }],
+    fountain: s => [{ e: '✨', label: 'Make a wish', run: () => walkTo(s.at[0], s.at[1], ok => { V.kid.face = Math.atan2(s.hit[0] - V.kid.pos.x, s.hit[1] - V.kid.pos.z); if (ok) { V.kid.pose = 'happy'; float(V.kid, '✨'); sound('tune'); setTimeout(() => { if (V) V.kid.pose = null; }, 1800); } }, Math.PI) }],
+    vend: s => [{ e: '🥤', label: 'Get a cold drink', run: () => walkTo(s.at[0], s.at[1], ok => { if (ok) { sound('pop'); toast('Clunk! A cold drink 🥤'); float(V.kid, '🥤'); } }, s.yaw) }],
+    board: s => [{ e: '📌', label: 'Read the notices', run: () => walkTo(s.at[0], s.at[1], ok => ok && toast('Market day every day! · Lost: one blue sock · Café: try the strawberry milk 🍓'), Math.PI) }],
+    pond: s => [{ e: '🌉', label: 'Cross the bridge', run: () => walkTo(s.at[0], s.at[1], ok => { if (ok) { V.kid.pose = 'look'; setTimeout(() => { if (V) V.kid.pose = null; }, 2500); } }, Math.PI / 2) }],
+    play: s => [{ e: s.id === 'swings' ? '🎠' : s.id === 'sand' ? '🏖️' : '🛝', label: s.id === 'swings' ? 'Have a swing' : s.id === 'sand' ? 'Build a sandcastle' : 'Go down the slide', run: () => walkTo(s.at[0], s.at[1], ok => { if (ok) { V.kid.pose = 'happy'; float(V.kid, s.id === 'sand' ? '🏰' : '😄'); sound('tune'); setTimeout(() => { if (V) V.kid.pose = null; }, 2600); } }, s.yaw) }],
+    park: () => [],
+    shed: s => V.mow ? [{ e: '🛑', label: 'Stop mowing', run: () => mowEnd(false) }] : [{ e: '🚜', label: 'Mow the park lawn · ✨ up to 120', run: () => walkTo(s.at[0], s.at[1], ok => ok && mowStart(), s.yaw) }],
+    mess: s => [{ e: '🧹', label: 'Sweep it up', run: () => sweep(s) }],
+    // inside a shop
+    exit: () => [{ e: '🚪', label: 'Go back outside', run: () => walkTo(V.B.arrive[0], V.B.arrive[1] + 0.6, ok => ok && exit(), 0) }],
+    item: s => [{ e: '🛍️', label: s.offer ? 'Have a look (used)' : 'Have a look', run: () => walkTo(s.at[0], s.at[1], ok => { if (ok) V.stage.shop.ask(s.t, s.offer); }, s.yaw) }],
+    food: s => [{ e: '🧺', label: `Buy ${s.name} · ✨ ${V.foods[s.id].xp}`, run: () => walkTo(s.at[0], s.at[1], ok => { if (ok && V.stage.shop.buyFood(s.id)) { float(V.kid, V.foods[s.id].emoji); toast(`${V.foods[s.id].name}: into your ${V.foods[s.id].where} at home. You have ${V.stage.shop.food()[s.id]}.`); xp(); } }, s.yaw) }],
+    treat: s => [{ e: s.treat.e, label: `Order ${s.name} · ✨ ${s.treat.xp}`, run: () => walkTo(s.at[0], s.at[1], ok => { if (ok && V.stage.shop.treat(s.treat.name, s.treat.xp, s.treat.gives)) { xp(); say(V.keeper, 'Coming right up! ' + s.treat.e); V.kid.treat = s.treat; toast(`${s.treat.name}! Find a table to enjoy it.`); } }, s.yaw) }],
+    seat: s => [{ e: '🪑', label: V.kid && V.kid.treat ? `Sit and eat the ${V.kid.treat.name.toLowerCase()}` : 'Sit down', run: () => { if (V.people.some(o => o !== V.kid && o.seatAt === s)) return toast('Someone’s sitting there.'); V.kid.seatAt = s; walkTo(s.at[0], s.at[1], ok => { if (ok && V.kid.seatAt === s) { sit(V.kid, s); const tr = V.kid.treat; if (tr) { V.kid.treat = null; V.kid.pose = 'sitchair.eat'; float(V.kid, tr.e); setTimeout(() => { if (V && V.kid.seat) { V.kid.pose = 'sitchair'; float(V.kid, '😋'); toast('Yum! Food and fun are up.'); } }, 6000); } } }); } }],
+    counter: () => [...(V.stage.shop ? [{ e: '💼', label: `Work a shift · ✨ up to ${(V.stage.shop.jobs().find(j => j.id === V.B.id) || {}).pay}`, run: () => walkTo(V.B.spots.find(q => q.kind === 'counter').at[0], V.B.spots.find(q => q.kind === 'counter').at[1], ok => ok && shift(V.B.id), Math.PI) }] : []), ...(V.B.id === 'furniture' || V.B.id === 'pets' ? [{ e: '🏷️', label: 'Sell to the shop', run: () => walkTo(V.B.spots.find(q => q.kind === 'counter').at[0], V.B.spots.find(q => q.kind === 'counter').at[1], ok => { if (ok) { say(V.keeper, 'What have you got?'); V.stage.shop.counter(V.B.id === 'pets' ? 'pets' : 'home'); } }, Math.PI) }, { e: '👋', label: 'Say hello', run: () => hello() }] : [{ e: '👋', label: 'Say hello', run: () => hello() }])],
+    home: s => [{ e: '🏠', label: 'Go home', run: () => walkTo(s.at[0], s.at[1], ok => ok && leave(), 0) }]
+  };
+
+  // ---------- into a shop and back out (village-shops.js builds each room the first time it's visited)
+  function fade(then) { const f = $('.vg-fade', V.ui); f.classList.add('on'); sound('move'); setTimeout(() => { if (!V) return; then(); requestAnimationFrame(() => { if (V) f.classList.remove('on'); }); }, 480); }
+  function placeOut() {
+    if (V.game) gameEnd(V.game.score * V.game.per, 'Shift over!'); if (V.mow) mowEnd(false); V.S.sc.remove(V.B.root); for (const n of V.npc) V.S.sc.remove(n.inst.group); for (const b of V.says) if (b.el) b.el.remove(); V.says = []; hideActs(); if (V.stage.closeSheet) V.stage.closeSheet(); }
+  function placeIn(B, npcs) {
+    V.B = B; V.S.sc.add(B.root); V.grid = makeGrid(B); V.hits = []; B.root.traverse(o => { if (o.userData.spot) V.hits.push(o); });
+    for (const l of B.lits) l.visible = V.phase !== 'day';
+    V.npc = npcs; for (const n of npcs) V.S.sc.add(n.inst.group); V.people = [V.kid, ...npcs];
+    const nm = $('.vg-name', V.ui); if (nm) nm.textContent = B === V.street ? 'Hoshi Street' : B.name; const sm = $('.vg-sub', V.ui); if (sm) sm.textContent = B === V.street ? 'Village · tap for home' : 'Hoshi Street · tap to go out';
+  }
+  const placeKid = (x, z, yaw) => {
+    const k = V.kid; k.path = []; k.then = null; k.seat = null; k.seatAt = null; k.pose = null; k.face = null; k.pos.set(x, 0, z); k.yaw = yaw; CAM.target.set(x, 1, z);
+    // anyone standing just there steps away first (never in each other)
+    for (const n of V.npc) if (!n.keeper && Math.hypot(n.pos.x - x, n.pos.z - z) < 1.2) { const q = nearestFree(V.grid, x + (n.pos.x >= x ? 2 : -2), z - 1.5); if (q) { n.pos.set(q[0], 0, q[1]); n.path = []; n.then = null; stand(n); n.until = 0; } }
+  };
+  function enter(id) {
+    if (V.busy || !IH.villageShops) return; V.busy = true;
+    fade(() => {
+      placeOut();
+      let B = V.shops[id];
+      if (!B) {
+        const sh = V.stage.shop, ctx = { defs: sh.defs, BY: IH.items.BY, used: sh.used, food: IH.kitchen ? IH.kitchen.FOOD : {}, make: IH.items.make, day: Math.floor(Date.now() / 864e5) };
+        B = V.shops[id] = IH.villageShops.build(id, ctx);
+        const K = B.keeper, keeper = person(K.avatar, K.hue, K.at[0], K.at[1], K.yaw); keeper.keeper = { yaw: K.yaw }; V.S.sc.remove(keeper.inst.group);
+        B.npc = [keeper];
+        for (let j = 0; j < 2; j++) { let at = null; for (let q = 0; q < 40 && !at; q++) { const x = 2 + Math.random() * 16, z = 5 + Math.random() * 7; if (makeGrid(B).free(x, z)) at = [x, z]; } if (!at) continue; const n = person(AVATARS[(id.length * 3 + j * 5) % AVATARS.length], HUES[(j + id.length) % HUES.length], at[0], at[1], Math.random() * 6); n.sp = 0.9 + Math.random() * 0.3; n.until = 1 + Math.random() * 3; V.S.sc.remove(n.inst.group); B.npc.push(n); }
+        // the pets in the pen (the pet shop): sitting and standing about, each its own way
+        B.petsIn = []; for (const pp of B.pens || []) { try { const inst = IH.pets.make(pp.d.pet); inst.group.position.set(pp.x, 0.06, pp.z); inst.group.rotation.y = Math.random() * 6; B.root.add(inst.group); B.petsIn.push({ inst, st: 'sit', next: 0, ph: Math.random() * 6 }); } catch (e) { /* (a pet that can't be made here) */ } }
+      }
+      V.keeper = B.npc[0]; placeIn(B, B.npc);
+      placeKid(B.arrive[0], B.arrive[1], Math.PI); CAM.target.set(B.centre[0], 1, B.centre[1] + 1); setZoom(1.6); V.follow = false; xp();
+      V.busy = false; setTimeout(() => { if (V && V.B === B) hello(); }, 500);
+    });
+  }
+  function exit() {
+    if (V.busy || V.B === V.street) return; V.busy = true; const id = V.B.id;
+    fade(() => {
+      placeOut(); placeIn(V.street, V.streetNpc); const s = V.street.spots.find(q => q.kind === 'shop' && q.id === id);
+      placeKid(s.at[0], s.at[1] + 0.6, 0); setZoom(1.6); V.follow = true; V.busy = false;
+    });
+  }
+  function petsTick(t) { for (const p of (V.B.petsIn || [])) { if (t > p.next) { p.st = ['sit', 'stand', 'sit', 'look'][Math.floor(Math.random() * 4)]; p.next = t + 3 + Math.random() * 5; } try { IH.pets.pose(p.inst, p.st, t, p.ph); } catch (e) { /* (still loading) */ } } }
+
+  // ---------- the village's lawns: the home's own grass (IH.lawnKit), growing long over a few days; mowing the park
+  // is a job (Employment), done with the kid's own lawnmower: row after row across the park, paid for how much is cut
+  function makeLawn(B) {
+    const K = IH.lawnKit; if (!K || !B.lawns) return null;
+    const inR = (x0, z0, x1, z1, r) => x0 >= r[0] - 1e-6 && z0 >= r[1] - 1e-6 && x1 <= r[2] + 1e-6 && z1 <= r[3] + 1e-6, hit = (x0, z0, x1, z1, r) => x0 < r[2] && x1 > r[0] && z0 < r[3] && z1 > r[1], P = B.pond, cells = [];
+    for (let i = 0; i < B.bounds.x1; i++) for (let j = 0; j < B.bounds.z1; j++) {
+      if (!B.lawns.some(r => inR(i, j, i + 1, j + 1, r)) || B.paths.some(r => hit(i, j, i + 1, j + 1, r)) || B.solids.some(r => hit(i + 0.2, j + 0.2, i + 0.8, j + 0.8, r))) continue;
+      if (P) { const ex = (i + 0.5 - P.x) / (P.rx + 1.0), ez = (j + 0.5 - P.z) / (P.rz + 1.0); if (ex * ex + ez * ez < 1) continue; }
+      cells.push({ x: i, z: j });
+    }
+    const L = K.build({ cells, x0: B.bounds.x0, z0: B.bounds.z0, W: B.bounds.x1 - B.bounds.x0, D: B.bounds.z1 - B.bounds.z0, seed: 4242, phase: V.phase, per: e => e ? 30 : 4, ground: false });
+    L.position.y = 0.07; B.root.add(L);
+    K.grow(L, V.stage.shop ? V.stage.shop.parkGrowth() : 0.6);
+    return L;
+  }
+  const PARK = [54.4, 28.4, 80.6, 59.6];
+  function parkShare() { // how much of the park's lawn is cut
+    const M = V.lawn && V.lawn.userData.map; if (!M) return 0; const res = M.mw / (V.street.bounds.x1 - V.street.bounds.x0); let n = 0, c = 0;
+    for (let pz = Math.floor(PARK[1] * res); pz < Math.min(M.mh, PARK[3] * res); pz++) for (let px = Math.floor(PARK[0] * res); px < Math.min(M.mw, PARK[2] * res); px++) { const o = (pz * M.mw + px) * 4; if (M.data[o + 2]) { n++; if (M.data[o]) c++; } }
+    return n ? c / n : 0;
+  }
+  function mowStart() {
+    const sh = V.stage.shop, g = sh.parkGrowth();
+    if (!sh.owns('mower')) return toast('You need your own lawnmower for this job. The Shop on your phone has them.');
+    if (g < 0.5) return toast('The park was mowed not long ago. Check Employment for when it’s long again.');
+    const k = V.kid, rows = []; let dir = 1;
+    for (let z = PARK[1] + 0.5; z <= PARK[3] - 0.4; z += 1.5, dir = -dir) rows.push(dir > 0 ? [[PARK[0] + 0.3, z], [PARK[2] - 0.3, z]] : [[PARK[2] - 0.3, z], [PARK[0] + 0.3, z]]);
+    const mw = IH.items.make(IH.items.BY.mower, {}); mw.group.traverse(m => { if (m.isMesh) m.castShadow = true; }); V.S.sc.add(mw.group);
+    V.mow = { rows, i: 0, leg: 0, mower: mw.group, pay: 120 }; k.sp = 3.0; sound('on');
+    toast('Mow row by row. Tap anywhere to stop: you’re paid for what you’ve cut.'); mowNext();
+  }
+  function mowNext() {
+    const M = V.mow; if (!M) return; if (M.i >= M.rows.length) return mowEnd(true);
+    const pt = M.rows[M.i][M.leg];
+    go(V.kid, pt, () => { if (V.mow !== M) return; if (M.leg === 0) M.leg = 1; else { M.leg = 0; M.i++; } mowNext(); });
+  }
+  function mowTick() {
+    const M = V.mow; if (!M) return; const k = V.kid, f = [Math.sin(k.yaw), Math.cos(k.yaw)], x = k.pos.x + f[0] * 1.0, z = k.pos.z + f[1] * 1.0;
+    M.mower.position.set(x, k.pos.y, z); M.mower.rotation.y = k.yaw;
+    if (k.st === 'walk' && V.lawn) IH.lawnKit.cutAt(V.lawn, x, z, 0.92);
+  }
+  function mowEnd(all) {
+    const M = V.mow; if (!M) return; V.mow = null; V.S.sc.remove(M.mower); V.kid.sp = 1.25; sound('off');
+    const share = parkShare(), done = all || share > 0.85, pay = done ? M.pay : Math.round(M.pay * share / 10) * 10;
+    if (pay >= 10) { V.stage.shop.earn(pay, 'park'); V.stage.shop.mowed(done ? 1 : share); xp(); float(V.kid, '✨'); toast(done ? `The park looks great! ✨ ${pay} XP for the job.` : `You mowed ${Math.round(share * 100)}% of the park: ✨ ${pay} XP.`); if (done) IH.lawnKit.grow(V.lawn, 0); }
+    else toast('Mowing stopped. Mow more of the park to get paid.');
+  }
+
+  // ---------- shifts at the shops: a little game each (Employment lists them; two a day at each shop)
+  function gamePanel(html) { const el = $('.vg-game', V.ui); el.innerHTML = html; el.hidden = false; return el; }
+  function gameEnd(pay, words) {
+    const G = V.game; if (!G) return; V.game = null; if (G.stop) G.stop();
+    const xpv = Math.min(G.max, Math.round(pay)); if (xpv > 0) { V.stage.shop.earn(xpv, G.id); xp(); }
+    gamePanel(`<div class="vg-gh"><b>${words}</b><span>✨ ${xpv} XP</span></div><div class="vg-gq">Paid into your XP from jobs.</div>`); sound('tune');
+    setTimeout(() => { if (V && !V.game) $('.vg-game', V.ui).hidden = true; }, 2600);
+  }
+  function gameTick() {
+    const G = V.game; if (!G) return; const left = Math.max(0, Math.ceil(G.end - V.t)), el = $('.vg-time', V.ui); if (el) el.textContent = `⏱ ${left}s`;
+    if (left <= 0) gameEnd(G.score * G.per, 'Shift over!');
+  }
+  function shift(id) {
+    if (V.game || V.mow) return; const job = V.stage.shop.jobs().find(j => j.id === id); if (!job || !job.ok) return toast(job ? job.why : 'No work here today.');
+    if (!V.stage.shop.shift(id)) return; say(V.keeper, 'Thanks for helping out!'); ({ cafe: serveGame, furniture: buildGame, pets: cleanGame, grocer: stackGame })[id](job);
+  }
+  const shake = btn => { btn.classList.remove('no'); void btn.offsetWidth; btn.classList.add('no'); sound('no'); };
+  // the café: customers come up to the counter and order; give each what they asked for
+  function serveGame(job) {
+    const TR = IH.villageShops.TREATS, G = V.game = { id: 'cafe', score: 0, per: 10, max: job.pay, end: V.t + 60, n: 0, cust: null };
+    // behind the counter for the shift, beside the shopkeeper (and back out in front after)
+    const ct0 = V.B.spots.find(q => q.kind === 'counter'), k = V.kid; k.path = []; k.pos.set(ct0.at[0] - 4.2, 0, 1.45); k.yaw = 0; k.face = 0;
+    const draw = q => gamePanel(`<div class="vg-gh"><b>☕ Serving</b><span class="vg-time"></span><span>${G.score} served</span></div><div class="vg-gq">${q}</div><div class="vg-gb">${TR.map((t, i) => `<button data-v="gsel" data-i="${i}"><span class="e">${t.e}</span>${esc(t.name)}</button>`).join('')}</div>`);
+    const next = () => {
+      if (!V || V.game !== G) return; if (G.n >= 6) return gameEnd(G.score * G.per, 'All served! Great shift.');
+      const pool = V.npc.filter(n => !n.keeper), c = pool[G.n % Math.max(1, pool.length)]; G.n++; G.want = Math.floor(Math.random() * TR.length); G.cust = c;
+      const ask = () => { G.ready = true; draw(`Order: <b>${TR[G.want].e} ${esc(TR[G.want].name)}</b>`); };
+      if (!c) return ask();
+      stand(c); c.until = 1e9; c.sp0 = c.sp0 || c.sp; c.sp = 1.8; G.ready = false; draw('A customer’s coming in…');
+      if (Math.hypot(c.pos.x - V.B.arrive[0], c.pos.z - V.B.arrive[1]) > 4 && !V.people.some(o => o !== c && Math.hypot(o.pos.x - V.B.arrive[0], o.pos.z - V.B.arrive[1]) < 1)) { c.pos.set(V.B.arrive[0], 0, V.B.arrive[1] + 0.6); c.yaw = Math.PI; } // (in through the door)
+      const ct = V.B.spots.find(q => q.kind === 'counter');
+      go(c, [ct.at[0] - 3 + Math.random() * 2, 4.6], () => { if (V.game !== G) return; c.lookYaw = Math.PI; say(c, `${TR[G.want].e} please!`); ask(); });
+    };
+    G.pick = (i, btn) => { if (!G.ready) return; if (i !== G.want) return shake(btn); G.score++; sound('pop'); if (G.cust) { say(G.cust, 'Thank you! 😊'); G.cust.until = V.t + 1; G.cust.lookYaw = null; } next(); };
+    G.stop = () => { for (const n of V.npc) { if (!n.keeper && n.until > 1e8) n.until = 0; if (n.sp0) { n.sp = n.sp0; n.sp0 = null; } } if (V.B.id === 'cafe') { V.kid.pos.set(ct0.at[0] - 4.2, 0, ct0.at[1] + 0.4); V.kid.face = Math.PI; } };
+    next();
+  }
+  // the furniture shop's workshop: put things together from their pieces, from the ground up
+  const BUILDS = [['🪑 Chair', ['🦵 Legs', '🟫 Seat', '🪵 Backrest']], ['🛏️ Bed', ['🟫 Frame', '🪵 Slats', '⬜ Mattress', '🛌 Duvet', '☁️ Pillow']], ['💡 Floor lamp', ['⚫ Base', '📏 Pole', '🔆 Bulb', '🎩 Shade']],
+    ['📚 Bookcase', ['⬛ Plinth', '📏 Sides', '🪵 Shelves', '🟫 Top', '📚 Books']], ['🍽️ Table', ['🦵 Legs', '🟫 Tabletop', '🌼 Vase']], ['🛋️ Sofa', ['🦵 Feet', '🟫 Base', '🧽 Cushions', '🪵 Back', '🧸 Throw pillow']]];
+  function buildGame(job) {
+    const G = V.game = { id: 'furniture', score: 0, per: 20, max: job.pay, end: V.t + 75 }, order = BUILDS.slice().sort(() => Math.random() - 0.5).slice(0, 3); let b = 0, step = 0;
+    const draw = () => {
+      const [name, parts] = order[b], shuffled = G.shuf || (G.shuf = parts.map((p, i) => i).sort(() => Math.random() - 0.5));
+      gamePanel(`<div class="vg-gh"><b>🔨 Build: ${esc(name)}</b><span class="vg-time"></span><span>${G.score} built</span></div><div class="vg-gq">Put it together from the ground up.</div><div class="vg-slots">${parts.map((p, i) => `<i class="${i < step ? 'on' : ''}">${i < step ? esc(p) : i + 1}</i>`).join('')}</div><div class="vg-gb">${shuffled.map(i => `<button data-v="gsel" data-i="${i}" ${i < step ? 'disabled' : ''}>${esc(parts[i])}</button>`).join('')}</div>`);
+    };
+    G.pick = (i, btn) => {
+      if (i !== step) return shake(btn); step++; sound('place');
+      if (step >= order[b][1].length) { G.score++; float(V.kid, order[b][0].split(' ')[0]); b++; step = 0; G.shuf = null; if (b >= order.length) return gameEnd(G.score * G.per, 'All built! Lovely work.'); }
+      draw();
+    };
+    draw();
+  }
+  // the pet shop: fur and spilled kibble on the floor; tap each to sweep it up
+  function cleanGame(job) {
+    const G = V.game = { id: 'pets', score: 0, per: 6, max: job.pay, end: V.t + 80, mess: [] };
+    for (let i = 0; i < 10; i++) {
+      let at = null; for (let q = 0; q < 60 && !at; q++) { const x = 1.5 + Math.random() * 17, z = 4.5 + Math.random() * 8.5; if (V.grid.free(x, z) && !G.mess.some(m => Math.hypot(m.x - x, m.z - z) < 1.2)) at = [x, z]; } if (!at) continue;
+      const k = new IH.kit.Kit(), fur = i % 2;
+      if (fur) for (let j = 0; j < 4; j++) k.ball(0.14, (j % 2 - 0.5) * 0.18, 0.06, (Math.floor(j / 2) - 0.5) * 0.16, ['#f6b06a', '#d9d2c6', '#8a6a50'][i % 3], { n: 7, s: [1, 0.5, 1] });
+      else for (let j = 0; j < 7; j++) k.ball(0.06, Math.cos(j) * 0.25, 0.04, Math.sin(j * 1.7) * 0.22, '#a5784b', { n: 5 });
+      const g = k.build({ shadow: false }); g.position.set(at[0], 0.04, at[1]); V.B.root.add(g);
+      const hitM = new T.Mesh(new T.BoxGeometry(1.2, 0.8, 1.2), new T.MeshBasicMaterial()); hitM.visible = false; hitM.position.set(at[0], 0.4, at[1]); hitM.userData.spot = { kind: 'mess', id: 'm' + i, name: 'a mess', at, hitM }; V.B.root.add(hitM); V.hits.push(hitM);
+      G.mess.push({ x: at[0], z: at[1], g, hitM });
+    }
+    G.total = G.mess.length;
+    G.draw = () => gamePanel(`<div class="vg-gh"><b>🧹 Tidy the pet shop</b><span class="vg-time"></span><span>${G.score} / ${G.total}</span></div><div class="vg-gq">Tap the fur and spilled kibble to sweep them up.</div>`);
+    G.stop = () => { for (const m of G.mess) { V.B.root.remove(m.g); V.B.root.remove(m.hitM); const i = V.hits.indexOf(m.hitM); if (i >= 0) V.hits.splice(i, 1); } G.mess = []; };
+    G.draw();
+  }
+  function sweep(s) {
+    const G = V.game; if (!G || G.id !== 'pets') return;
+    walkTo(s.at[0] + 0.7, s.at[1] + 0.3, ok => {
+      if (!ok || V.game !== G) return; V.kid.pose = 'fetch';
+      setTimeout(() => {
+        if (!V || V.game !== G) return; V.kid.pose = null; const i = G.mess.findIndex(m => m.hitM === s.hitM); if (i < 0) return;
+        const m = G.mess.splice(i, 1)[0]; V.B.root.remove(m.g); V.B.root.remove(m.hitM); const h = V.hits.indexOf(m.hitM); if (h >= 0) V.hits.splice(h, 1);
+        G.score++; sound('pop'); float(V.kid, '✨'); if (!G.mess.length) gameEnd(G.score * G.per, 'Spotless! Great job.'); else G.draw();
+      }, 700);
+    }, Math.atan2(-0.7, -0.3));
+  }
+  // the grocer: put each thing away, fridge or pantry
+  function stackGame(job) {
+    const F = V.foods, ids = Object.keys(F).sort(() => Math.random() - 0.5).slice(0, 10), G = V.game = { id: 'grocer', score: 0, per: 6, max: job.pay, end: V.t + 45 }; let i = 0;
+    const draw = () => { const f = F[ids[i]]; gamePanel(`<div class="vg-gh"><b>📦 Stack the shelves</b><span class="vg-time"></span><span>${i + 1} / ${ids.length}</span></div><div class="vg-gq">Where do the <b>${f.emoji} ${esc(f.name.toLowerCase())}</b> go?</div><div class="vg-gb"><button data-v="gsel" data-i="0"><span class="e">🧊</span>Fridge</button><button data-v="gsel" data-i="1"><span class="e">🥫</span>Pantry</button></div>`); };
+    G.pick = (k, btn) => { const right = (k === 0) === (F[ids[i]].where === 'fridge'); if (right) { G.score++; sound('pop'); } else shake(btn); i++; if (i >= ids.length) return gameEnd(G.score * G.per, `${G.score} of ${ids.length} put away right!`); setTimeout(draw, right ? 0 : 350); };
+    draw();
+  }
+
+  // ---------- your market stall (phase C): set out things from Mine on a free pitch; villagers walking by stop, look,
+  // and buy (a little more than the Market pays, never more than new) while you're near enough to mind it. Pack up
+  // any time; anything unsold goes back to Mine (and does anyway when you leave the village).
+  function stallPick(s) {
+    const sh = V.stage.shop, list = sh.mine(); V.picked = V.picked && V.picked.s === s ? V.picked : { s, sel: [] };
+    const sel = V.picked.sel, on = it => sel.some(q => q.t === it.t && q.n === it.n);
+    gamePanel(`<div class="vg-gh"><b>🏷️ Your stall</b><span>${sel.length} / 4</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">${list.length ? 'Pick up to four things from Mine to sell. Villagers pay a little more than the Market does.' : 'Mine is empty. Put things away at home first, then sell them here.'}</div>
+      <div class="vg-gb vg-mine">${list.slice(0, 24).map((it, i) => `<button data-v="spick" data-i="${i}" class="${on(it) ? 'on' : ''}" ${!on(it) && sel.length >= 4 ? 'disabled' : ''}><img alt="" src="${sh.thumb(it.t)}" width="32" height="32">${esc(it.name)}${it.used ? ' (used)' : ''} · ✨${it.price}${on(it) ? ' ✓' : ''}</button>`).join('')}</div>
+      ${sel.length ? '<div class="vg-gb vg-go"><button data-v="sopen"><span class="e">🧺</span>Open my stall</button></div>' : ''}`);
+    V.mineList = list;
+  }
+  function stallOpen() {
+    const P = V.picked; if (!P || !P.sel.length) return; const s = P.s, sh = V.stage.shop, recs = [];
+    // (taken highest index first within each kind of thing, so the others' indexes stay right)
+    for (const it of P.sel.slice().sort((a, b) => a.t === b.t ? b.n - a.n : 0)) { const r = sh.take(it.t, it.n); if (r) recs.push(r); }
+    V.picked = null; $('.vg-game', V.ui).hidden = true; if (!recs.length) return;
+    const T0 = s.table, g = new T.Group(); g.position.set(T0.x, 0, T0.z); g.rotation.y = T0.face; V.street.root.add(g);
+    V.stall = { s, recs, g, models: [], next: V.t + 6, told: false };
+    { const nm = (V.stage.kid.name || 'My') + '’s stall', tex = IH.kit.painted('vstall:' + nm, 512, 160, (cx, w, h) => { cx.fillStyle = '#fff6e0'; cx.fillRect(0, 0, w, h); cx.strokeStyle = '#ff7aa2'; cx.lineWidth = 10; cx.strokeRect(5, 5, w - 10, h - 10); cx.fillStyle = '#a0446a'; cx.textAlign = 'center'; cx.textBaseline = 'middle'; cx.font = `900 ${h * 0.4}px "Nunito", system-ui, sans-serif`; cx.fillText(nm, w / 2, h * 0.42, w * 0.86); cx.font = `800 ${h * 0.2}px "Nunito", system-ui, sans-serif`; cx.fillText('everything ✨ XP', w / 2, h * 0.76); });
+      const sg = new T.Mesh(new T.PlaneGeometry(2.6, 0.82), LK.animeMat({ map: tex })); sg.position.set(0, 0.85, 1.07); g.add(sg); }
+    recs.forEach((r, i) => { const d = IH.items.BY[r.t]; try { const m = IH.items.make(d, { fin: r.fin, w: 2, h: 2.1, wy: 1.45 }).group, sc = Math.min(0.55, 1.1 / Math.max(...d.fp)); m.scale.setScalar(sc); m.position.set(-1.45 + i * 0.97 - d.fp[0] * sc / 2, 1.72, 0.1 - d.fp[1] * sc / 2); g.add(m); V.stall.models.push(m); } catch (e) { V.stall.models.push(null); } });
+    say(V.kid, 'Stall’s open! 🏷️'); toast('Your stall is open. Stay close by to mind it, and villagers will come and buy.'); sound('place');
+  }
+  function stallTick() {
+    const S = V.stall; if (!S || V.B !== V.street) return; const k = V.kid, near = Math.hypot(k.pos.x - S.s.at[0], k.pos.z - S.s.at[1]) < 8;
+    if (!near) { if (!S.told && V.t > S.next) { S.told = true; toast('Your stall needs minding: go back to it to sell.'); } return; }
+    S.told = false; if (S.buyer && V.t > S.giveUp && S.buyer.path.length) { const b = S.buyer; S.buyer = null; b.path = []; b.then = null; b.until = 0; S.next = V.t + 3; } // (couldn't get there: someone else comes)
+    if (S.buyer || V.t < S.next || !S.recs.length) return;
+    const pool = V.npc.filter(n => !n.keeper && !n.seat && !n.hi), n = pool[Math.floor(Math.random() * pool.length)]; if (!n) return;
+    // somewhere along the stall's front with room (never where the kid or anyone else is standing)
+    const T0 = S.s.table, c = Math.cos(T0.face), sn = Math.sin(T0.face), spots = [-1.5, -0.5, 0.5, 1.5].map(u => [T0.x + u * c + 2.4 * sn, T0.z - u * sn + 2.4 * c]).filter(p => V.grid.free(p[0], p[1]) && V.people.every(o => o === n || Math.hypot(o.pos.x - p[0], o.pos.z - p[1]) > 1.1));
+    if (!spots.length) { S.next = V.t + 3; return; }
+    const spot = spots[Math.floor(Math.random() * spots.length)];
+    S.buyer = n; n.until = 1e9; S.giveUp = V.t + 15;
+    go(n, spot, ok => {
+      if (!V || V.stall !== S) { n.until = 0; return; } if (!ok) { S.buyer = null; n.until = 0; S.next = V.t + 4; return; }
+      n.lookYaw = S.s.yaw; n.pose = 'look';
+      setTimeout(() => {
+        if (!V || V.stall !== S || !S.recs.length) { n.until = 0; n.pose = null; if (V && V.stall === S) S.buyer = null; return; }
+        if (Math.random() < 0.75) {
+          const i = Math.floor(Math.random() * S.recs.length), r = S.recs.splice(i, 1)[0], m = S.models.splice(i, 1)[0]; if (m) S.g.remove(m);
+          V.stage.shop.sold(r); xp(); say(n, 'I’ll take it! 😊'); float(n, '✨'); sound('buy'); toast(`Sold the ${IH.items.BY[r.t].name.toLowerCase()} for ✨ ${r.price} XP!`);
+          if (!S.recs.length) setTimeout(() => { if (V && V.stall === S) { stallClose(true); toast('Sold out! Your stall’s packed away.'); } }, 1500);
+        } else say(n, 'Just looking, thanks!');
+        n.pose = null; n.until = V.t + 1; S.buyer = null; S.next = V.t + 10 + Math.random() * 14;
+      }, 2200);
+    });
+  }
+  function stallClose(quiet) {
+    const S = V.stall; if (!S) return; V.stall = null; for (const r of S.recs) V.stage.shop.give(r); V.street.root.remove(S.g);
+    if (S.buyer) { S.buyer.until = 0; S.buyer.pose = null; }
+    if (!quiet && S.recs.length) toast(`Packed up. ${S.recs.length === 1 ? 'One thing went' : S.recs.length + ' things went'} back to Mine.`);
+  }
+
+  // ---------- the view
+  const CAM = { yaw: Math.PI / 4, pitch: 0.56, zoom: 1, target: new T.Vector3(), fitV: 26, turn: null, view: 0 };
+  const ZMIN = 0.55, ZMAX = 4.5;
+  function aim() {
+    const cam = V.S.cam, t = CAM.target, y = CAM.yaw, p = CAM.pitch, [w, h] = V.stage.dims();
+    cam.position.set(t.x + Math.sin(y) * Math.cos(p) * 120, t.y + Math.sin(p) * 120, t.z + Math.cos(y) * Math.cos(p) * 120); cam.lookAt(t);
+    const v = CAM.fitV, a = w / h; cam.left = -v * a / 2; cam.right = v * a / 2; cam.top = v / 2; cam.bottom = -v / 2; cam.zoom = CAM.zoom; cam.updateProjectionMatrix();
+  }
+  // the sun as at home (from the front, a little left, no higher than 29°), turned with the view, its shadows round what's in view
+  function light() {
+    const P = LK.PHASES[V.phase], s = V.S.sun, rot = CAM.yaw - Math.PI / 4, L0 = Math.hypot(...P.sun), el = Math.min(Math.asin(P.sun[1] / L0), 0.5), y = L0 * Math.sin(el), hz = L0 * Math.cos(el), x = -0.25 * hz, z = 0.97 * hz;
+    const dx = x * Math.cos(rot) + z * Math.sin(rot), dz = -x * Math.sin(rot) + z * Math.cos(rot), c = CAM.target, rad = clamp(CAM.fitV / CAM.zoom * 0.95, 14, 40);
+    s.target.position.set(c.x, 0, c.z); s.position.set(c.x + dx * 40, y * 40, c.z + dz * 40); s.target.updateMatrixWorld();
+    Object.assign(s.shadow.camera, { left: -rad, right: rad, top: rad, bottom: -rad, near: 1, far: 160 }); s.shadow.camera.updateProjectionMatrix();
+    V.stage.pipe.u.uSun.value.set(...P.sunAt);
+  }
+  function setZoom(z) { CAM.zoom = clamp(z, ZMIN, ZMAX); const el = $('.ih-zoomv', V.ui); if (el) el.style.setProperty('--z', ((CAM.zoom - ZMIN) / (ZMAX - ZMIN)).toFixed(3)); }
+  function turnView(d) { if (CAM.turn) return; CAM.view = (CAM.view + d + 4) % 4; CAM.turn = { a: CAM.yaw, b: CAM.yaw + d * Math.PI / 2, t0: V.t }; sound('turn'); }
+  // a shop that would hide the kid is cut down to its footprint (the view through to the street, as the homes' walls)
+  const RAY = new T.Ray();
+  function cutaway() {
+    const k = V.kid.pos, dir = new T.Vector3(Math.sin(CAM.yaw) * Math.cos(CAM.pitch), Math.sin(CAM.pitch), Math.cos(CAM.yaw) * Math.cos(CAM.pitch));
+    for (const b of V.B.buildings) { let hide = false; for (const h of [0.4, 1.4, 2.4]) { RAY.set(new T.Vector3(k.x, h, k.z), dir); if (RAY.intersectsBox(b.box)) { hide = true; break; } } b.full.visible = !hide; b.stub.visible = hide; }
+  }
+
+  // ---------- each frame
+  function frame(now) {
+    V.raf = 0; if (!V || V.closing === 2) return; V.raf = requestAnimationFrame(frame);
+    const tt = now / 1000, dt = V.lastT == null ? 0 : clamp(tt - V.lastT, 0, 0.1); V.lastT = tt; V.t = tt;
+    const b = V.beat.beat(now);
+    if (b !== null) {
+      const bt = b, sdt = V.sceneT == null ? 0 : clamp(bt - V.sceneT, 0, 0.25); V.sceneT = bt;
+      kidTick(bt, sdt); villagersTick(bt, sdt); petsTick(bt); mowTick(); gameTick(); stallTick(); cutaway(); if ((V.xpT = (V.xpT || 0) + sdt) > 1) { V.xpT = 0; xp(); }
+    }
+    if (CAM.turn) { const p = clamp((tt - CAM.turn.t0) / 0.6, 0, 1); CAM.yaw = CAM.turn.a + (CAM.turn.b - CAM.turn.a) * ease(p); if (p >= 1) CAM.turn = null; }
+    if (V.intro) { const p = clamp((tt - V.intro.t0) / 1.6, 0, 1); CAM.zoom = V.intro.a + (V.intro.b - V.intro.a) * ease(p); if (p >= 1) { V.intro = null; setZoom(CAM.zoom); } }
+    if (V.follow) { const k = V.kid.pos; CAM.target.x += (k.x - CAM.target.x) * Math.min(1, dt * 3); CAM.target.z += (k.z - CAM.target.z) * Math.min(1, dt * 3); CAM.target.y += (1 + k.y - CAM.target.y) * Math.min(1, dt * 3); }
+    LK.WATER_U.uT.value = tt; V.stage.pipe.u.uT.value = tt; if (V.lawn && V.B === V.street) IH.lawnKit.tick(V.lawn, tt, CAM.zoom);
+    light(); aim();
+    V.stage.pipe.render(V.S.sc, V.S.cam);
+    bubbles();
+  }
+
+  // ---------- taps and gestures
+  const ptrs = new Map(); let gest = null;
+  const ndc = new T.Vector2(), ray = new T.Raycaster();
+  function rayAt(x, y) { const r = V.stage.cv.getBoundingClientRect(); ndc.set((x - r.left) / r.width * 2 - 1, -((y - r.top) / r.height) * 2 + 1); ray.setFromCamera(ndc, V.S.cam); return ray; }
+  function screenOf(v) { const p = v.clone().project(V.S.cam), r = V.stage.cv.getBoundingClientRect(); return [(p.x + 1) / 2 * r.width, (1 - p.y) / 2 * r.height]; }
+  function down(e) { try { V.stage.cv.setPointerCapture(e.pointerId); } catch (err) { /* (a made-up pointer) */ } sound(); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY }); if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; gest = { pinch: true, d0: Math.hypot(a.x - b.x, a.y - b.y), z0: CAM.zoom, moved: 99 }; } else gest = { moved: 0 }; }
+  function move(e) {
+    const p = ptrs.get(e.pointerId); if (!p || !gest) return; const dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY; gest.moved += Math.abs(dx) + Math.abs(dy);
+    if (gest.pinch && ptrs.size >= 2) { const [a, b] = [...ptrs.values()]; setZoom(gest.z0 * Math.hypot(a.x - b.x, a.y - b.y) / gest.d0); return; }
+    if (gest.moved > 6) { // drag: look around (the view stops following the kid until they walk again)
+      V.follow = false; const [, h] = V.stage.dims(), s = CAM.fitV / CAM.zoom / h, r = new T.Vector3(Math.cos(CAM.yaw), 0, -Math.sin(CAM.yaw)), f = new T.Vector3(-Math.sin(CAM.yaw), 0, -Math.cos(CAM.yaw));
+      CAM.target.addScaledVector(r, -dx * s).addScaledVector(f, dy * s / Math.sin(CAM.pitch)); CAM.target.x = clamp(CAM.target.x, 0, V.B.bounds.x1); CAM.target.z = clamp(CAM.target.z, 0, V.B.bounds.z1);
+    }
+  }
+  function up(e) { const p = ptrs.get(e.pointerId); ptrs.delete(e.pointerId); if (!gest || ptrs.size) return; const g = gest; gest = null; if (g.pinch || g.moved > 10 || !p) return; tap(p.x0, p.y0); }
+  function wheel(e) { e.preventDefault(); setZoom(CAM.zoom * Math.exp(-e.deltaY * 0.0015)); }
+  function tap(x, y) {
+    hideActs(); if (V.leaving) return;
+    // a villager (on screen, near the tap), or a place: of everything the tap's ray goes through, the one whose
+    // middle is nearest the finger (things side by side on a counter); whichever's nearer the finger wins
+    const r = V.stage.cv.getBoundingClientRect(); let who = null, wd = 46;
+    for (const n of V.npc) { const [sx, sy] = screenOf(n.pos.clone().setY(n.pos.y + 1.1)), d = Math.hypot(sx + r.left - x, sy + r.top - y); if (d < wd) { wd = d; who = n; } }
+    const hits = rayAt(x, y).intersectObjects(V.hits, false); let s = null, sd = 1e9;
+    for (const h of hits) { const o = h.object, [sx, sy] = screenOf(o.position), d = Math.hypot(sx + r.left - x, sy + r.top - y); if (d < sd && ACTS[o.userData.spot.kind] && ACTS[o.userData.spot.kind](o.userData.spot).length) { sd = d; s = o.userData.spot; } }
+    if (who && (!s || wd < sd)) {
+      if (who === V.keeper && V.B !== V.street) { const c = V.B.spots.find(q => q.kind === 'counter'); return showActs(c, x, y); }
+      { who.hi = { until: V.t + 2.2 }; say(who, who.keeper ? (who.keeper.what === 'veg' ? 'Fresh veggies! 🥕' : 'Pretty flowers! 🌷') : HELLO[Math.floor(Math.random() * HELLO.length)]); const k = V.kid; if (!k.path.length && !k.seat) k.face = Math.atan2(who.pos.x - k.pos.x, who.pos.z - k.pos.z); sound('pat'); return; }
+    }
+    if (s && s.kind === 'mess') return sweep(s);
+    if (s) return showActs(s, x, y);
+    if (V.mow) { mowEnd(false); return; } // (tapping away from the shed while mowing: stop, and be paid for what's cut)
+    // the ground
+    const p = new T.Vector3(); if (!rayAt(x, y).ray.intersectPlane(new T.Plane(new T.Vector3(0, 1, 0), 0), p)) return;
+    if (p.x < 0 || p.z < 0 || p.x > V.B.bounds.x1 || p.z > V.B.bounds.z1) return;
+    walkTo(p.x, p.z);
+  }
+  function showActs(s, x, y) {
+    const el = $('.ih-acts', V.ui), r = V.ui.getBoundingClientRect(), list = ACTS[s.kind](s); V.acts = list;
+    el.innerHTML = `<b>${esc(s.name[0].toUpperCase() + s.name.slice(1))}</b><small>What should ${esc(V.stage.kid.name || 'you')} do?</small>${list.map((a, i) => `<button data-v="act" data-i="${i}"><span>${a.e}</span>${esc(a.label)}</button>`).join('')}`;
+    el.hidden = false; const w = el.offsetWidth, h = el.offsetHeight;
+    el.style.left = clamp(x - r.left - w / 2, 8, r.width - w - 8) + 'px'; el.style.top = clamp(y - r.top - h - 16, 60, r.height - h - 90) + 'px'; sound('pop');
+  }
+  function hideActs() { const el = V && $('.ih-acts', V.ui); if (el) el.hidden = true; }
+
+  // ---------- words over heads
+  function say(p, s) { V.says.push({ p, s, until: V.t + 2.4, el: null }); }
+  function float(p, s) { const [x, y] = screenOf(p.pos.clone().setY(p.pos.y + 2.5)), f = document.createElement('div'); f.className = 'ih-float'; f.textContent = s; f.style.left = x + 'px'; f.style.top = y + 'px'; V.ui.appendChild(f); setTimeout(() => f.remove(), 1200); }
+  function bubbles() {
+    for (let i = V.says.length - 1; i >= 0; i--) {
+      const b = V.says[i];
+      if (V.t > b.until) { if (b.el) b.el.remove(); V.says.splice(i, 1); continue; }
+      if (!b.el) { b.el = document.createElement('div'); b.el.className = 'vg-say'; b.el.textContent = b.s; V.ui.appendChild(b.el); }
+      const [x, y] = screenOf(b.p.pos.clone().setY(b.p.pos.y + 2.6)); b.el.style.left = x + 'px'; b.el.style.top = y + 'px';
+    }
+  }
+  let toastT = 0;
+  function toast(s) { const el = V && $('.ih-toast', V.ui); if (!el) return; el.textContent = s; el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('on'), 3200); }
+  const sound = k => { if (V && V.stage.sound) V.stage.sound(k); };
+
+  // ---------- open and close
+  function open(stage) {
+    if (V) return false;
+    const B = IH.villageBuild.build(), S = scene(B);
+    V = { stage, B, street: B, shops: {}, foods: IH.kitchen ? IH.kitchen.FOOD : {}, S, grid: makeGrid(B), people: [], npc: [], says: [], t: 0, lastT: null, sceneT: null, beat: LK.Beat(), phase: stage.phase || 'day', follow: true, raf: 0 };
+    V.beat.mode = stage.frames || 'twos';
+    V.hits = []; B.root.traverse(o => { if (o.userData.spot) V.hits.push(o); });
+    for (const l of B.lits) l.visible = V.phase !== 'day';
+    // the kid comes in through the village's gate
+    V.kid = person(stage.kid.avatar || '🦊', stage.kid.hue, B.arrive[0], B.arrive[1] + 1.4, Math.PI); V.people.push(V.kid);
+    V.kid.inst.group.traverse(m => { if (m.isMesh) m.castShadow = true; });
+    go(V.kid, B.arrive);
+    // villagers, and the two stall-keepers
+    const used = new Set([stage.kid.avatar]);
+    const pick = i => { let a = AVATARS[(i * 5 + 2) % AVATARS.length]; for (let k = 0; used.has(a) && k < AVATARS.length; k++) a = AVATARS[(i * 5 + 2 + k + 1) % AVATARS.length]; used.add(a); if (used.size >= AVATARS.length) used.clear(); return a; };
+    let i = 0;
+    for (const s of B.spots.filter(q => q.keeper)) { const n = person(pick(i), HUES[i % HUES.length], s.keeper[0], s.keeper[1], s.yaw + Math.PI); n.keeper = { yaw: s.yaw + Math.PI, what: /veg/.test(s.name) ? 'veg' : 'flowers' }; V.npc.push(n); V.people.push(n); i++; }
+    for (let j = 0; j < 9; j++, i++) {
+      let at = null; for (let k = 0; k < 40 && !at; k++) { const x = 6 + Math.random() * 72, z = 16 + Math.random() * 42; if (V.grid.free(x, z) && V.people.every(o => Math.hypot(o.pos.x - x, o.pos.z - z) > 2)) at = [x, z]; }
+      if (!at) continue; const n = person(pick(i), HUES[i % HUES.length], at[0], at[1], Math.random() * 6.28); n.sp = 1.0 + Math.random() * 0.35; n.until = Math.random() * 3; V.npc.push(n); V.people.push(n);
+    }
+    V.streetNpc = V.npc; V.lawn = makeLawn(B);
+    // where the kid's going: a little ring on the ground
+    { const k = new IH.kit.Kit(); k.torus(0.42, 0.05, 0, 0, 0, '#ffffff', { rx: Math.PI / 2 }); k.torus(0.22, 0.04, 0, 0, 0, '#ffd35a', { rx: Math.PI / 2 }); V.mark = k.build({ shadow: false }); V.mark.traverse(m => { m.userData.bg = true; }); V.mark.visible = false; S.sc.add(V.mark); }
+    // the controls (the home's look)
+    const ic = stage.ic || (() => '');
+    V.ui = document.createElement('div'); V.ui.className = 'vg';
+    V.ui.innerHTML = `
+      <div class="ih-top"><button class="ih-pill ih-homebtn" data-v="home">${ic('home')}<span><b class="vg-name">Hoshi Street</b><small class="vg-sub">Village · tap for home</small></span></button><div class="ih-sp"></div>${stage.shop ? `<div class="ih-pill ih-xp vg-xp" aria-label="XP to spend">${ic('sparkle')}<b class="vg-xpn">0</b><small>XP</small></div>` : ''}</div>
+      <div class="ih-side">
+        <button class="ih-btn" data-v="zin" aria-label="Zoom in">${ic('plus')}</button><div class="ih-zoomv" aria-hidden="true"><i></i></div>
+        <button class="ih-btn" data-v="zout" aria-label="Zoom out">${ic('minus')}</button><span class="ih-gap"></span>
+        <button class="ih-btn" data-v="turnL" aria-label="Turn the view left">${ic('left')}</button><button class="ih-btn" data-v="turnR" aria-label="Turn the view right">${ic('right')}</button>
+      </div>
+      <div class="ih-acts" role="menu" hidden></div><div class="vg-game" hidden></div><div class="ih-toast" role="status" aria-live="polite"></div><div class="vg-fade on"></div>`;
+    V.ui.addEventListener('click', e => {
+      const b = e.target.closest('[data-v]'); if (!b) return; e.preventDefault(); const a = b.dataset.v;
+      if (a === 'home') return homeAsk();
+      if (a === 'zin') return setZoom(CAM.zoom * 1.3); if (a === 'zout') return setZoom(CAM.zoom / 1.3);
+      if (a === 'turnL') return turnView(-1); if (a === 'turnR') return turnView(1);
+      if (a === 'gsel') { if (V.game && V.game.pick) V.game.pick(+b.dataset.i, b); return; }
+      if (a === 'spick') { const it = V.mineList && V.mineList[+b.dataset.i], P = V.picked; if (!it || !P) return; const i = P.sel.findIndex(q => q.t === it.t && q.n === it.n); if (i >= 0) P.sel.splice(i, 1); else if (P.sel.length < 4) P.sel.push(it); sound('tap'); return stallPick(P.s); }
+      if (a === 'sopen') return stallOpen();
+      if (a === 'gclose') { $('.vg-game', V.ui).hidden = true; V.picked = null; return; }
+      if (a === 'act') { const f = V.acts && V.acts[+b.dataset.i]; hideActs(); if (f) { sound('tap'); f.run(); } }
+    });
+    stage.root.appendChild(V.ui);
+    const cv = stage.cv; cv.addEventListener('pointerdown', down); cv.addEventListener('pointermove', move); cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('wheel', wheel, { passive: false });
+    addEventListener('keydown', key);
+    LK.PAL.uHouse.value.set(0, 0, 0, 0); LK.CUT_U.uCutOn.value = 0;
+    CAM.yaw = Math.PI / 4; CAM.view = 0; CAM.target.set(B.arrive[0], 1, B.arrive[1]); V.intro = { a: 0.75, b: 1.7, t0: performance.now() / 1000 }; CAM.zoom = 0.75;
+    requestAnimationFrame(() => { const f = $('.vg-fade', V.ui); if (f) f.classList.remove('on'); });
+    setTimeout(() => toast('Welcome to Hoshi Street! Tap anywhere to walk, or tap a place.'), 900);
+    V.raf = requestAnimationFrame(frame);
+    return true;
+  }
+  function key(e) {
+    if (!V || /INPUT|TEXTAREA|SELECT/.test((e.target || {}).tagName || '')) return;
+    if (e.key === 'ArrowLeft') turnView(-1); else if (e.key === 'ArrowRight') turnView(1); else if (e.key === '+' || e.key === '=') setZoom(CAM.zoom * 1.3); else if (e.key === '-') setZoom(CAM.zoom / 1.3);
+    else if (e.key === 'Escape') hideActs();
+  }
+  // back home: to the gate (if not there already), through it, and the home again
+  function homeAsk() { const s = V.B.spots.find(q => q.kind === 'home') || V.B.spots.find(q => q.kind === 'exit'); showActs(s, innerWidth / 2, 160); }
+  function leave() {
+    if (!V || V.leaving) return; V.leaving = true; sound('move');
+    const f = $('.vg-fade', V.ui); if (f) f.classList.add('on');
+    setTimeout(close, 650);
+  }
+  function close() {
+    if (!V) return; if (V.stall) stallClose(true); if (V.game) gameEnd(V.game.score * V.game.per, 'Shift over!'); if (V.mow) mowEnd(false); const v = V; V.closing = 2; if (v.raf) cancelAnimationFrame(v.raf);
+    const cv = v.stage.cv; cv.removeEventListener('pointerdown', down); cv.removeEventListener('pointermove', move); cv.removeEventListener('pointerup', up); cv.removeEventListener('pointercancel', up); cv.removeEventListener('wheel', wheel);
+    removeEventListener('keydown', key); ptrs.clear(); gest = null;
+    v.S.sc.traverse(m => { if (m.isMesh && m.userData.main) m.geometry.dispose(); }); // (only the merged models: the kit's own pieces are shared with the home)
+    v.ui.remove(); V = null;
+    if (v.stage.onHome) v.stage.onHome();
+  }
+  // test hooks
+  IH.village = { open, close, leave, toast: s => toast(s), enter: id => V && enter(id), exit: () => V && exit(), get debug() { return V && { V, CAM, route: (a, b) => route(V.grid, a, b), walkTo, tap, screenOf: p => screenOf(new T.Vector3(p[0], p[1] || 0, p[2])), spots: V.B.spots, kid: V.kid, npc: V.npc, setZoom, turnView }; } };
+})();
