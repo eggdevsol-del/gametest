@@ -296,7 +296,7 @@
   function mowTick() {
     const M = V.mow; if (!M) return; const k = V.kid, f = [Math.sin(k.yaw), Math.cos(k.yaw)], x = k.pos.x + f[0] * 1.0, z = k.pos.z + f[1] * 1.0;
     M.mower.position.set(x, k.pos.y, z); M.mower.rotation.y = k.yaw;
-    if (k.st === 'walk' && V.lawn) IH.lawnKit.cutAt(V.lawn, x, z, 0.92);
+    if (k.st === 'walk' && V.lawn) { IH.lawnKit.cutAt(V.lawn, x, z, 0.92); if (Math.random() < 0.5) fx('leaves', x - f[1] * 0.5, k.pos.y + 0.3, z + f[0] * 0.5, 1, [-f[1] * 1.5, 0.6, f[0] * 1.5]); } // (clippings out of the side chute)
   }
   function mowEnd(all) {
     const M = V.mow; if (!M) return; V.mow = null; V.S.sc.remove(M.mower); V.kid.sp = 1.25; sound('off');
@@ -378,12 +378,12 @@
   function sweep(s) {
     const G = V.game; if (!G || G.id !== 'pets') return;
     walkTo(s.at[0] + 0.7, s.at[1] + 0.3, ok => {
-      if (!ok || V.game !== G) return; V.kid.pose = 'fetch';
+      if (!ok || V.game !== G) return; V.kid.pose = 'sweep'; if (V.kid.inst) V.kid.inst.holding = 'broom'; V.emit.push({ kind: 'dust', at: 'front', dist: 0.7, y: 0.1, rate: 12, from: V.t + 0.2, until: V.t + 1.1 }); // (swept with a broom, dust flying)
       setTimeout(() => {
-        if (!V || V.game !== G) return; V.kid.pose = null; const i = G.mess.findIndex(m => m.hitM === s.hitM); if (i < 0) return;
+        if (!V || V.game !== G) return; V.kid.pose = null; if (V.kid.inst && V.kid.inst.holding === 'broom') V.kid.inst.holding = null; const i = G.mess.findIndex(m => m.hitM === s.hitM); if (i < 0) return;
         const m = G.mess.splice(i, 1)[0]; V.B.root.remove(m.g); V.B.root.remove(m.hitM); const h = V.hits.indexOf(m.hitM); if (h >= 0) V.hits.splice(h, 1);
         G.score++; sound('pop'); float(V.kid, '✨'); if (!G.mess.length) gameEnd(G.score * G.per, 'Spotless! Great job.'); else G.draw();
-      }, 700);
+      }, 1300);
     }, Math.atan2(-0.7, -0.3));
   }
   // the grocer: put each thing away, fridge or pantry
@@ -562,7 +562,7 @@
     if (V) return false;
     const where = stage.where || 'village', sh0 = stage.shop, B = where === 'village' ? IH.villageBuild.build() : IH.islandsBuild && IH.islandsBuild.build(where, !sh0 ? null : where === 'farm' ? sh0.farm() : sh0.isl ? sh0.isl(where) : null); if (!B) return false;
     const S = scene(B);
-    V = { where, stage, B, street: B, shops: {}, foods: IH.kitchen ? IH.kitchen.FOOD : {}, S, grid: makeGrid(B), people: [], npc: [], says: [], t: 0, lastT: null, sceneT: null, beat: LK.Beat(), phase: stage.phase || 'day', follow: true, raf: 0 };
+    V = { fx: [], emit: [], where, stage, B, street: B, shops: {}, foods: IH.kitchen ? IH.kitchen.FOOD : {}, S, grid: makeGrid(B), people: [], npc: [], says: [], t: 0, lastT: null, sceneT: null, beat: LK.Beat(), phase: stage.phase || 'day', follow: true, raf: 0 };
     V.beat.mode = stage.frames || 'ones';
     V.hits = []; B.root.traverse(o => { if (o.userData.spot) V.hits.push(o); });
     for (const l of B.lits) l.visible = V.phase !== 'day';
@@ -664,8 +664,49 @@
   }
   const fedOk = () => (V.stage.shop.farm().fed || 0) >= today() - 1;
   // a little job at a spot: walk there, the pose for a while, then what it gives
-  function chore(s, pose, secs, done, face) {
-    walkTo(s.at[0], s.at[1], ok => { if (!ok) return; V.kid.pose = pose; V.busyJob = true; setTimeout(() => { if (!V) return; V.busyJob = false; if (V.kid.pose === pose) V.kid.pose = null; done(); }, secs * 1000); }, face != null ? face : s.yaw);
+  // a job at a spot, done properly: walk there and face it, the tool in hand (o.tool), the pose for the job, its
+  // effect while it's done (o.fx: dust pouring feed, drops from the can, wool off the shears...), then what it gives
+  function chore(s, pose, secs, done, face, o = {}) {
+    walkTo(s.at[0], s.at[1], ok => {
+      if (!ok) return; const k = V.kid; k.pose = pose; V.busyJob = true; if (o.tool && k.inst) k.inst.holding = o.tool;
+      if (o.fx) V.emit.push({ kind: o.fx, at: o.at || 'front', dist: o.dist, y: o.y, rate: o.rate || 14, from: V.t + (o.delay != null ? o.delay : 0.35), until: V.t + secs - 0.2 });
+      setTimeout(() => { if (!V) return; V.busyJob = false; if (k.pose === pose) k.pose = null; if (o.tool && k.inst && k.inst.holding === o.tool) k.inst.holding = null; done(); }, secs * 1000);
+    }, face != null ? face : s.yaw);
+  }
+  // ---------- little effects: puffs and bits that fly, fall, float and fade (no ink; drawn over the scene)
+  // kind: [colour, size, rise speed, gravity, life, spread, grow, shape]
+  const FXK = { dust: ['#d9c49a', 0.14, 0.6, -0.2, 1.1, 0.5, 2.2], drops: ['#8fd8ff', 0.045, 0.4, 7, 0.7, 0.25, 0], milk: ['#ffffff', 0.04, 0.2, 7, 0.6, 0.12, 0],
+    wool: ['#f6efe0', 0.09, 0.8, 0.9, 1.6, 0.6, 0.4], hay: ['#e8c45a', 0.06, 1.6, 4, 1.0, 0.6, 0, [2.2, 0.35, 0.35]], straw: ['#e8d08a', 0.05, 1.2, 4, 0.9, 0.5, 0, [2.2, 0.35, 0.35]],
+    soil: ['#7a5a3a', 0.05, 2.0, 7, 0.8, 0.6, 0], sand: ['#e8cf92', 0.045, 2.2, 8, 0.7, 0.6, 0], splash: ['#e8f8ff', 0.06, 3.0, 9, 0.8, 0.9, 0],
+    sparkle: ['#fff3a0', 0.05, 0.9, -0.3, 1.0, 0.7, 0], steam: ['#ffffff', 0.18, 0.7, -0.4, 1.8, 0.4, 2.0], smoke: ['#c9c4cc', 0.16, 0.6, -0.3, 1.8, 0.35, 2.4], leaves: ['#5fae4a', 0.07, 0.6, 2.2, 1.4, 0.8, 0, [1.4, 0.3, 1]] };
+  const FXG = new T.SphereGeometry(1, 7, 5), FXM = {};
+  function fx(kind, x, y, z, n = 6, dir = null) {
+    const K = FXK[kind]; if (!K || !V) return; const mat = FXM[kind] || (FXM[kind] = new T.MeshBasicMaterial({ color: K[0], transparent: true, depthWrite: false }));
+    for (let i = 0; i < n; i++) {
+      if (V.fx.length > 220) { const o = V.fx.shift(); V.S.sc.remove(o.m); }
+      const m = new T.Mesh(FXG, mat.clone()); m.layers.set(1); m.userData.bg = true; m.renderOrder = 4; m.position.set(x + (Math.random() - 0.5) * 0.2, y, z + (Math.random() - 0.5) * 0.2);
+      const sp = K[5], a = Math.random() * Math.PI * 2, r = Math.random() * sp, base = K[1] * (0.7 + Math.random() * 0.6); if (K[7]) m.scale.set(base * K[7][0], base * K[7][1], base * K[7][2]); else m.scale.setScalar(base); m.rotation.set(Math.random() * 3, Math.random() * 3, 0);
+      const v = new T.Vector3(Math.cos(a) * r + (dir ? dir[0] : 0), K[2] * (0.6 + Math.random() * 0.8) + (dir ? dir[1] : 0), Math.sin(a) * r + (dir ? dir[2] : 0));
+      V.S.sc.add(m); V.fx.push({ m, v, age: 0, life: K[4] * (0.7 + Math.random() * 0.6), K, base });
+    }
+  }
+  const FXV = new T.Vector3();
+  function fxTick(dt) {
+    if (!V.fx) return;
+    // the emitters: each job's effect while it's being done, at the front of the kid, at the hand, or at a place
+    for (let i = V.emit.length - 1; i >= 0; i--) {
+      const E = V.emit[i], k = V.kid; if (V.t > E.until) { V.emit.splice(i, 1); continue; } if (V.t < E.from) continue;
+      E.acc = (E.acc || 0) + dt * E.rate; const n = Math.floor(E.acc); if (!n) continue; E.acc -= n;
+      let x, y, z; const f = [Math.sin(k.yaw), Math.cos(k.yaw)];
+      if (E.at === 'hand' && k.inst && k.inst.B && k.inst.B['hand.R']) { k.inst.B['hand.R'].getWorldPosition(FXV); x = FXV.x + f[0] * 0.35; y = FXV.y - 0.1; z = FXV.z + f[1] * 0.35; }
+      else if (Array.isArray(E.at)) [x, y, z] = E.at; else { const d = E.dist != null ? E.dist : 0.8; x = k.pos.x + f[0] * d; z = k.pos.z + f[1] * d; y = k.pos.y + (E.y != null ? E.y : 0.4); }
+      fx(E.kind, x, y, z, n);
+    }
+    for (let i = V.fx.length - 1; i >= 0; i--) {
+      const P = V.fx[i], K = P.K; P.age += dt; const u = P.age / P.life; if (u >= 1) { V.S.sc.remove(P.m); P.m.material.dispose(); V.fx.splice(i, 1); continue; }
+      P.v.y -= K[3] * dt; P.m.position.addScaledVector(P.v, dt); const gy = V.grid.ground(P.m.position.x, P.m.position.z); if (P.m.position.y < gy + 0.02 && K[3] > 0) { P.m.position.y = gy + 0.02; P.v.set(P.v.x * 0.3, 0, P.v.z * 0.3); }
+      if (K[6]) P.m.scale.setScalar(P.base * (1 + u * K[6])); P.m.rotation.x += dt * 3; P.m.material.opacity = (1 - u) * (K[0] === '#ffffff' || K[6] ? 0.7 : 1);
+    }
   }
   function collect(s, kinds, pose, label) {
     const sh = V.stage.shop; if (!fedOk()) return toast('The animals are hungry. Feed them at the trough first.');
@@ -705,7 +746,7 @@
     const F = V.fishing; if (!F) return;
     if (F.phase !== 'bite') return fishEnd(false, 'Too soon! The fish swam off.');
     const L = F.water === 'fresh' ? FRESH_FISH : SEA_FISH, [k, name, e] = L[Math.floor(Math.random() * L.length)], sh = V.stage.shop, b = sh.book('fish', k);
-    sh.addFood('fish'); if (b.isNew) sh.xp(10); xp(); float(V.kid, e); sound('buy');
+    sh.addFood('fish'); if (b.isNew) sh.xp(10); xp(); float(V.kid, e); sound('buy'); { const k = V.kid, f0 = [Math.sin(k.yaw), Math.cos(k.yaw)]; fx('splash', k.pos.x + f0[0] * 3, Math.max(0, V.grid.ground(k.pos.x + f0[0] * 3, k.pos.z + f0[1] * 3)) + 0.05, k.pos.z + f0[1] * 3, 20); }
     fishEnd(true, `You caught a ${name.toLowerCase()}! ${e} It’s in your fridge at home.${b.isNew ? ` New in your fish book (${b.count} / 9): ✨ +10 XP.` : ''}`);
   }
   function fishEnd(ok, words) { V.fishing = null; V.rodOn = false; if (V.kid.pose === 'water') V.kid.pose = null; $('.vg-game', V.ui).hidden = true; toast(words); if (!ok) sound('pat'); }
@@ -722,9 +763,9 @@
       ...(V.stage.shop.hasTool('rod') ? [] : [{ e: '🎣', label: 'A fishing rod · ✨ 500', run: () => walkTo(s.at[0], s.at[1], ok => { if (ok && V.stage.shop.pay(500, 'a fishing rod')) { V.stage.shop.giveTool('rod'); xp(); toast('A fishing rod! Cast a line off the rocky point. 🎣'); } }, s.yaw) }])],
     towel: s => [{ e: '🏖️', label: 'Lie in the sun', run: () => walkTo(s.at[0], s.at[1], ok => { if (ok) { V.kid.pose = 'sit'; V.stage.shop.relax({ energy: 10, fun: 6 }); float(V.kid, '😎'); } }, s.yaw) }],
     log: s => [{ e: '🪑', label: 'Sit down', run: () => { if (V.people.some(o => o !== V.kid && o.seatAt === s)) return toast('Someone’s sitting there.'); V.kid.seatAt = s; walkTo(s.at[0], s.at[1], ok => { if (ok && V.kid.seatAt === s) sit(V.kid, s); }); } }],
-    castle: s => [{ e: '🏰', label: V.castle ? 'Add to the sandcastle' : 'Build a sandcastle', run: () => chore(s, 'toys', 4, () => { castle(s); V.stage.shop.relax({ fun: 15 }); float(V.kid, '🏰'); sound('tune'); }) }],
-    swim: s => [{ e: '🏊', label: 'Go for a swim', run: () => walkTo(s.swimTo[0], s.swimTo[1], ok => { if (ok) { V.stage.shop.relax({ fun: 14, clean: 10 }); float(V.kid, '💦'); sound('tune'); } }) }],
-    rockpool: s => [{ e: '🔎', label: 'Look in the rock pool', run: () => { if (!V.stage.shop.daily('pool', 8)) return toast('The rock pools are quiet now. Come back tomorrow.'); chore(s, 'look', 3, () => { const [k, name, e] = POOL_FINDS[Math.floor(Math.random() * POOL_FINDS.length)], b = V.stage.shop.book('beach', k); if (b.isNew) V.stage.shop.xp(10); xp(); float(V.kid, e); sound('pop'); toast(`You found ${name}! ${e}${b.isNew ? ` New in your beach book (${b.count} / ${POOL_FINDS.length}): ✨ +10 XP.` : ''}`); }); } }],
+    castle: s => [{ e: '🏰', label: V.castle ? 'Add to the sandcastle' : 'Build a sandcastle', run: () => chore(s, 'toys', 4, () => { castle(s); V.stage.shop.relax({ fun: 15 }); float(V.kid, '🏰'); sound('tune'); }, null, { fx: 'sand', y: 0.2, dist: 0.7 }) }],
+    swim: s => [{ e: '🏊', label: 'Go for a swim', run: () => walkTo(s.swimTo[0], s.swimTo[1], ok => { if (ok) { V.stage.shop.relax({ fun: 14, clean: 10 }); float(V.kid, '💦'); sound('tune'); const k = V.kid; fx('splash', k.pos.x, k.pos.y + 0.6, k.pos.z, 18); V.emit.push({ kind: 'splash', at: 'front', dist: 0.3, y: 0.7, rate: 6, from: V.t, until: V.t + 6 }); } }) }],
+    rockpool: s => [{ e: '🔎', label: 'Look in the rock pool', run: () => { if (!V.stage.shop.daily('pool', 8)) return toast('The rock pools are quiet now. Come back tomorrow.'); chore(s, 'scan', 3, () => { const [k, name, e] = POOL_FINDS[Math.floor(Math.random() * POOL_FINDS.length)], b = V.stage.shop.book('beach', k); if (b.isNew) V.stage.shop.xp(10); xp(); float(V.kid, e); sound('pop'); toast(`You found ${name}! ${e}${b.isNew ? ` New in your beach book (${b.count} / ${POOL_FINDS.length}): ✨ +10 XP.` : ''}`); }, null, { fx: 'splash', dist: 1.6, y: 0.1, rate: 5 }); } }],
     fish: s => V.stage.shop.hasTool('rod') ? [{ e: '🎣', label: `Cast a line · ${V.stage.shop.dailyLeft('fish', 3)} left today`, run: () => fishStart(s) }] : [{ e: '🎣', label: 'You need a fishing rod (Surf & Scoops)', run: () => toast('Surf & Scoops, up by the boardwalk, sells fishing rods.') }],
     barn: () => [{ e: '🐮', label: 'The farm shop', run: () => farmShop() }],
     trough: s => [{ e: '🌾', label: fedOk() && (V.stage.shop.farm().fed || 0) === today() ? 'Fed today ✓' : 'Feed the animals', run: () => { const f = V.stage.shop.farm(); if (f.fed === today()) return toast('They’re full. Feed them again tomorrow.'); chore(s, 'feed', 2.5, () => { f.fed = today(); V.stage.shop.farmSave(); V.stage.shop.relax({ fun: 5 }); for (const a of V.B.animals) float({ pos: a.group.position }, '❤️'); sound('tune'); toast('The animals are fed! Now they’ll make eggs, milk and wool.'); }); } }],
@@ -734,7 +775,7 @@
   };
   Object.assign(ACTS, ISLAND_ACTS);
   // more islands' doings (village-islands.js), with what they need from here
-  const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, ride, sit, stand, fishStart, DAY, today };
+  const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, ride, sit, stand, fishStart, fx, DAY, today };
   const ISL = IH.villageIslands ? IH.villageIslands(CTX) : null, FARM = IH.villageFarm ? IH.villageFarm(CTX) : null;
   if (ISL) Object.assign(ACTS, ISL.acts); if (FARM) Object.assign(ACTS, FARM.acts);
   // a sandcastle that grows each time it's added to
@@ -755,38 +796,52 @@
       if (a.fixed) { if (a.head) a.head.rotation.x = -0.25 * Math.max(0, Math.sin(t * 0.4 + 1)) ** 4; continue; }
       if (a.kind === 'fish') { const r = 2.2, w = t * 0.5 + a.home[0]; P.set(a.home[0] + Math.cos(w) * r, -0.6 + Math.sin(t * 1.3) * 0.08, a.home[1] + Math.sin(w) * r * 0.7); g.rotation.y = -w; continue; }
       if (a.kind === 'dolphin') { const cyc = 11, u = ((t + 3) % cyc) / 2.2; if (u < 1) { const x = a.home[0] - 6 + ((Math.floor((t + 3) / cyc) % 3) * 6), y = -1.0 + Math.sin(u * Math.PI) * 2.4; P.set(x + u * 6, y, a.home[1]); g.rotation.set(0, Math.PI / 2, 0); g.rotateX(-Math.cos(u * Math.PI) * 0.9); g.visible = y > -0.45; } else g.visible = false; continue; }
-      a.st = a.st || { mode: 'idle', until: 0, to: null }; const S = a.st;
-      const speed = { hen: 1.5, goat: 1.0, cow: 0.5, alpaca: 0.9, crab: 1.4, gull: 0.6 }[a.kind] || 0.8;
-      // a fright: near the kid, small animals get away
-      if ((a.kind === 'crab' && dk < 1.8) || (a.kind === 'gull' && dk < 2.4 && S.mode !== 'fly') || (a.kind === 'hen' && dk < 1.2)) {
+      a.st = a.st || { mode: 'idle', until: 0, to: null, cool: 0 }; const S = a.st;
+      const speed = { hen: 1.5, rooster: 1.4, duck: 1.1, goose: 1.1, turkey: 1.0, goat: 1.0, cow: 0.55, highland: 0.5, merino: 0.8, kunekune: 0.8, alpaca: 0.9, llama: 0.9, donkey: 0.8, horse: 1.1, pony: 1.0, crab: 1.4, gull: 0.6, weka: 1.2 }[a.kind] || 0.8;
+      const shy = a.kind === 'crab' || a.kind === 'gull', night = V.phase === 'night';
+      const inPen = (x, z) => (a.pen ? [clamp(x, a.pen[0], a.pen[2]), clamp(z, a.pen[1], a.pen[3])] : [x, z]);
+      // a fright: near the kid, the shy ones get away
+      if (shy && ((a.kind === 'crab' && dk < 1.8) || (a.kind === 'gull' && dk < 2.4 && S.mode !== 'fly'))) {
         if (a.kind === 'gull') { const ang = Math.random() * 6.28, to = [clamp(a.home[0] + Math.cos(ang) * 8, 6, V.B.bounds.x1 - 6), clamp(a.home[1] + Math.sin(ang) * 3, 15, 22)]; S.mode = 'fly'; S.from = [P.x, P.z]; S.to = to; S.t0 = t; S.until = t + 2.2; }
-        else if (a.kind === 'crab') { S.mode = 'hide'; S.until = t + 4; }
-        else { const ax = P.x - k.pos.x, az = P.z - k.pos.z, L = Math.hypot(ax, az) || 1; S.mode = 'walk'; S.to = [P.x + ax / L * 2.5, P.z + az / L * 2.5]; S.until = t + 2; }
+        else { S.mode = 'hide'; S.until = t + 4; }
       }
-      if (S.mode === 'fly') { const u = clamp((t - S.t0) / 2.2, 0, 1); P.x = S.from[0] + (S.to[0] - S.from[0]) * u; P.z = S.from[1] + (S.to[1] - S.from[1]) * u; P.y = V.grid.ground(P.x, P.z) + Math.sin(u * Math.PI) * 3; g.rotation.y = Math.atan2(S.to[0] - S.from[0], S.to[1] - S.from[1]); for (const [i, w] of (a.wings || []).entries()) w.rotation.z = (i ? -1 : 1) * Math.sin(t * 18) * 0.8; if (u >= 1) { S.mode = 'idle'; S.until = t + 3; a.home = S.to; for (const w of a.wings || []) w.rotation.z = 0; } continue; }
+      if (S.mode === 'fly') { const u = clamp((t - S.t0) / 2.2, 0, 1); P.x = S.from[0] + (S.to[0] - S.from[0]) * u; P.z = S.from[1] + (S.to[1] - S.from[1]) * u; P.y = V.grid.ground(P.x, P.z) + Math.sin(u * Math.PI) * 3; g.rotation.y = Math.atan2(S.to[0] - S.from[0], S.to[1] - S.from[1]); for (const [i, w] of (a.wings || []).entries()) w.rotation.z = (i ? -1 : 1) * Math.sin(t * 18) * 0.8; if (a.d3) IH.animals3d.move(a, t, 'walk', 0, null); if (u >= 1) { S.mode = 'idle'; S.until = t + 3; a.home = S.to; for (const w of a.wings || []) w.rotation.z = 0; } continue; }
       if (S.mode === 'hide') { P.y += ((t < S.until ? V.grid.ground(P.x, P.z) - 0.35 : V.grid.ground(P.x, P.z)) - P.y) * Math.min(1, dt * 5); if (t > S.until && dk > 2) S.mode = 'idle'; continue; }
-      if (t > S.until && S.mode !== 'walk') {
+      // asleep (all night, and a nap now and then): wakes in the morning, or when the kid comes right up
+      if (S.mode === 'sleep') { if ((!night && t > S.until) || (dk < 1.6 && Math.random() < dt * 0.6)) { S.mode = 'idle'; S.until = t + 1; } }
+      else if (night && !/^(watch|approach|linger)$/.test(S.mode) && Math.random() < dt * 0.3) { S.mode = 'sleep'; S.curl = Math.random() < 0.4; S.until = t + 60; }
+      // curious: the head turns to watch the kid coming (a long way off), then it walks over, stays a moment, and wanders off
+      if (!shy && !night && S.mode !== 'sleep' && t > S.cool && dk < 14 && !/^(watch|approach|linger)$/.test(S.mode)) { S.mode = 'watch'; S.until = t + 1.2 + Math.random() * 1.6; }
+      if (S.mode === 'watch' && t > S.until) { S.mode = 'approach'; S.until = t + 7; }
+      if (S.mode === 'watch' && dk > 17) S.mode = 'idle';
+      if (S.mode === 'approach') { const ax = P.x - k.pos.x, az = P.z - k.pos.z, L = Math.hypot(ax, az) || 1, r0 = a.d3 === 'rig' ? 2.2 : 1.4; S.to = inPen(k.pos.x + ax / L * r0, k.pos.z + az / L * r0); if (Math.hypot(S.to[0] - P.x, S.to[1] - P.z) < 0.3 || t > S.until) { S.mode = 'linger'; S.until = t + 2 + Math.random() * 2.5; } }
+      if (S.mode === 'linger' && t > S.until) { S.mode = 'idle'; S.until = 0; S.cool = t + 25 + Math.random() * 25; }
+      if (t > S.until && /^(idle|graze)$/.test(S.mode)) {
         const r = Math.random();
-        if (r < (a.kind === 'cow' ? 0.35 : 0.5)) { // somewhere else in its pen, or near home
+        if (r < 0.05) { S.mode = 'sleep'; S.curl = Math.random() < 0.4; S.until = t + 15 + Math.random() * 20; } // (a nap)
+        else if (r < (a.kind === 'cow' || a.kind === 'highland' ? 0.35 : 0.5)) { // somewhere else in its pen, or near home
           let to = null; for (let q = 0; q < 8 && !to; q++) { const c = a.pen ? [a.pen[0] + Math.random() * (a.pen[2] - a.pen[0]), a.pen[1] + Math.random() * (a.pen[3] - a.pen[1])] : [a.home[0] + (Math.random() - 0.5) * 6, a.home[1] + (Math.random() - 0.5) * (a.kind === 'crab' ? 1 : 4)]; if (!V.B.solids.some(b => c[0] > b[0] - 0.8 && c[0] < b[2] + 0.8 && c[1] > b[1] - 0.8 && c[1] < b[3] + 0.8) && (!V.B.walk || a.pen || V.B.walk(c[0], c[1]))) to = c; }
           if (to) { S.mode = 'walk'; S.to = to; S.until = t + 12; }
         } else { S.mode = 'graze'; S.until = t + 2 + Math.random() * 5; }
       }
-      let moving = false;
-      if (S.mode === 'walk' && S.to) {
+      let moving = false, dist = 0; const sp = S.mode === 'approach' ? speed * 1.15 : speed;
+      if ((S.mode === 'walk' || S.mode === 'approach') && S.to) {
         const dx = S.to[0] - P.x, dz = S.to[1] - P.z, d = Math.hypot(dx, dz);
-        if (d < 0.15 || t > S.until) { S.mode = 'graze'; S.until = t + 1.5 + Math.random() * 4; }
-        else {
+        if (S.mode === 'walk' && (d < 0.15 || t > S.until)) { S.mode = 'graze'; S.until = t + 1.5 + Math.random() * 4; }
+        else if (d > 0.12) {
           const want = a.kind === 'crab' ? Math.atan2(dx, dz) - Math.PI / 2 : Math.atan2(dx, dz); g.rotation.y += Math.atan2(Math.sin(want - g.rotation.y), Math.cos(want - g.rotation.y)) * Math.min(1, dt * 4);
-          const facing = a.kind === 'crab' ? 1 : Math.cos(want - g.rotation.y); if (facing > 0.5) { const st = Math.min(d, speed * dt); P.x += dx / d * st; P.z += dz / d * st; moving = true; }
+          const facing = a.kind === 'crab' ? 1 : Math.cos(want - g.rotation.y); if (facing > 0.5) { dist = Math.min(d, sp * dt); P.x += dx / d * dist; P.z += dz / d * dist; moving = true; }
         }
       }
-      P.y = V.grid.ground(P.x, P.z) + (a.kind === 'goat' && moving ? Math.abs(Math.sin(t * 9)) * 0.08 : 0);
-      // legs swing when walking; heads down to graze and peck
-      const sw = moving ? Math.sin(t * speed * 9) * 0.5 : 0;
+      // watching and lingering: turns to face the kid (the rigged ones turn their heads first, the body follows slowly)
+      const looking = /^(watch|approach|linger)$/.test(S.mode);
+      if (looking && !moving) { const want = Math.atan2(k.pos.x - P.x, k.pos.z - P.z), rate = a.d3 === 'rig' ? 0.9 : 2.5; g.rotation.y += Math.atan2(Math.sin(want - g.rotation.y), Math.cos(want - g.rotation.y)) * Math.min(1, dt * rate); }
+      P.y = V.grid.ground(P.x, P.z); // (feet on the ground: no hops)
+      // legs swing when walking; heads down to graze and peck (the Kit-built stand-ins)
+      const sw = moving ? Math.sin(t * sp * 9) * 0.5 : 0;
       (a.legs || []).forEach((l, i) => { l.rotation.x = (i % 2 ? 1 : -1) * (i > 1 ? -1 : 1) * sw; });
-      if (a.d3 && IH.animals3d) IH.animals3d.move(a, t, moving, S.mode === 'graze', speed); // (the 3D ones: by their bones, or whole)
-      if (a.head) a.head.rotation.x = S.mode === 'graze' ? (a.kind === 'hen' ? 0.6 + Math.max(0, Math.sin(t * 7)) * 0.5 : 0.75) : moving ? Math.sin(t * 6) * 0.05 : -0.05;
+      if (a.d3 && IH.animals3d) IH.animals3d.move(a, t, moving ? 'walk' : S.mode === 'sleep' ? (S.curl ? 'sleep.curl' : 'sleep') : S.mode === 'graze' ? 'graze' : 'stand', dist, looking ? new T.Vector3(k.pos.x, k.pos.y + 1.5, k.pos.z) : null);
+      if (a.head) a.head.rotation.x = S.mode === 'sleep' ? 0.9 : S.mode === 'graze' ? (a.kind === 'hen' ? 0.6 + Math.max(0, Math.sin(t * 7)) * 0.5 : 0.75) : moving ? Math.sin(t * 6) * 0.05 : -0.05;
     }
   }
   // a ride: the kid sits on (or in) something that goes round a path, then gets off where they got on
@@ -794,19 +849,23 @@
     const k = V.kid; if (V.ride) return; k.path = []; k.seat = null; k.pose = r.pose || 'sitchair';
     V.ride = Object.assign({ t0: V.t, from: [k.pos.x, k.pos.z], yaw0: k.yaw }, r); if (r.model) r.model.visible = true; sound('tune');
   }
+  const SIT = { hip: 0.29, back: -0.24 }; // (measured on the kid in the sitting pose: hips above the feet, back behind the hips)
   function rideTick(t, dt) {
     const R = V.ride; if (!R) return; const k = V.kid, u = (V.t - R.t0) / R.dur;
     if (u >= 1) { V.ride = null; k.pose = null; k.pos.set(R.from[0], 0, R.from[1]); k.yaw = R.yaw0; if (R.end) R.end(); return; }
     const p = R.at(u), q = R.at(Math.min(1, u + 0.01)); k.pos.set(p[0], 0, p[2]); k.yaw = Math.atan2(q[0] - p[0], q[2] - p[2]) || k.yaw;
     k.inst.group.position.set(p[0], p[1] + (R.lift || 0), p[2]); k.inst.group.rotation.y = k.yaw;
+    if (R.seat && R.model) { // sat in a seat: hips on the cushion, the back against the backrest (SIT: where the hips are in the sitting pose)
+      const S0 = R.seat, yw = R.model.rotation.y, c = Math.cos(yw), sn = Math.sin(yw), lz = S0.back + 0.08 + SIT.back, lx = S0.x;
+      k.inst.group.position.set(p[0] + lx * c + lz * sn, p[1] + S0.y - SIT.hip + (R.bob ? Math.sin(t * 8) * R.bob : 0), p[2] - lx * sn + lz * c); k.inst.group.rotation.y = yw; }
     if (R.model) { R.model.position.set(p[0], p[1], p[2]); R.model.rotation.y = k.yaw + (R.modelYaw || 0); if (R.bob) R.model.position.y += Math.sin(t * 8) * R.bob; }
-    if (R.a3 && IH.animals3d) IH.animals3d.move(R.a3, t, true, false);
+    if (R.a3 && IH.animals3d) { const lp = R.lastP || p; IH.animals3d.move(R.a3, t, 'walk', Math.hypot(p[0] - lp[0], p[2] - lp[2]), null); R.lastP = p; }
   }
   function islandTick(t, dt) {
     for (const o of V.spin || []) o.rotation.z += dt * o.userData.spin;
     if (V.B.animals && V.B === V.street) animalsTick(t, dt);
     if (V.B.tick && V.B === V.street) V.B.tick(t, dt, V.kid.pos);
-    fishTick(); rodTick(); rideTick(t, dt);
+    fishTick(); rodTick(); rideTick(t, dt); fxTick(dt);
   }
 
   // ---------- brothers and sisters, live (village-net.js): each where they really are, their name over them

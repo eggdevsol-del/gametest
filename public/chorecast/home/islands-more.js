@@ -49,8 +49,8 @@
     const g = a3.group; let at = Math.floor(R() * perches.length), st = { mode: 'perch', until: 0 }; g.position.set(...perches[at]);
     return { group: g, kind: 'bird', tick(t, dt, kid) {
       const P = g.position;
-      if (st.mode === 'perch') { IH.animals3d.move(a3, t, false, Math.sin(t * 0.7 + at) > 0.6); g.rotation.y += Math.sin(t * 2 + at) * dt * 0.8; if (t > st.until || Math.hypot(kid.x - P.x, kid.z - P.z) < 1.6) { let n = at; while (n === at) n = Math.floor(Math.random() * perches.length); st = { mode: 'fly', from: P.toArray(), to: perches[n], t0: t, dur: 1.2 + Math.hypot(perches[n][0] - P.x, perches[n][2] - P.z) * 0.12 }; at = n; } }
-      else { const u = Math.min(1, (t - st.t0) / st.dur), f = st.from, e = st.to; P.set(f[0] + (e[0] - f[0]) * u, f[1] + (e[1] - f[1]) * u + Math.sin(u * Math.PI) * 1.5, f[2] + (e[2] - f[2]) * u); g.rotation.y = Math.atan2(e[0] - f[0], e[2] - f[2]); IH.animals3d.move(a3, t * 2, true, false, 2); if (u >= 1) st = { mode: 'perch', until: t + 2 + Math.random() * 6 }; }
+      if (st.mode === 'perch') { IH.animals3d.move(a3, t, Math.sin(t * 0.7 + at) > 0.6 ? 'graze' : 'stand'); const dk = Math.hypot(kid.x - P.x, kid.z - P.z); if (dk < 12) { const w = Math.atan2(kid.x - P.x, kid.z - P.z); g.rotation.y += Math.atan2(Math.sin(w - g.rotation.y), Math.cos(w - g.rotation.y)) * Math.min(1, dt * 3); } else g.rotation.y += Math.sin(t * 2 + at) * dt * 0.8; if (t > st.until || Math.hypot(kid.x - P.x, kid.z - P.z) < 1.6) { let n = at; while (n === at) n = Math.floor(Math.random() * perches.length); st = { mode: 'fly', from: P.toArray(), to: perches[n], t0: t, dur: 1.2 + Math.hypot(perches[n][0] - P.x, perches[n][2] - P.z) * 0.12 }; at = n; } }
+      else { const u = Math.min(1, (t - st.t0) / st.dur), f = st.from, e = st.to; P.set(f[0] + (e[0] - f[0]) * u, f[1] + (e[1] - f[1]) * u + Math.sin(u * Math.PI) * 1.5, f[2] + (e[2] - f[2]) * u); g.rotation.y = Math.atan2(e[0] - f[0], e[2] - f[2]); IH.animals3d.move(a3, t * 2, 'walk'); if (u >= 1) st = { mode: 'perch', until: t + 2 + Math.random() * 6 }; }
     } };
   }
   // something that glides round a loop on the water (swans, ducks), a little bob

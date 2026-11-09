@@ -34,15 +34,27 @@
   }
   // a school of little fish (one model, several of them)
   function school(n = 6) { const g = new T.Group(); for (let i = 0; i < n; i++) { const f = make('fish'); f.group.position.set((i % 3 - 1) * 0.6 + (i > 2 ? 0.3 : 0), 0, Math.floor(i / 3) * 0.6 - 0.3); f.group.rotation.y = (i % 2 ? 0.2 : -0.15); g.add(f.group); } return { group: g, kind: 'fish', legs: [] }; }
-  // how a 3D animal moves this frame: rigged ones by their bones, the rest whole
-  function move(a, t, moving, grazing, speed = 1) {
-    if (a.d3 === 'rig') { // (grazing: standing, the neck and head bent down to the grass, eased in and out)
-      const I = a.inst; try { IH.yami3d.pose(I, moving ? 'walk' : 'stand', t); } catch (e) { return; } if (!I.B || !I.B.neck) return;
-      I.graze = (I.graze || 0) + ((grazing && !moving ? 1 : 0) - (I.graze || 0)) * 0.08; if (I.graze > 0.01) { I.B.neck.rotateX(1.05 * I.graze); I.B.head.rotateX((0.55 + Math.sin(t * 3) * 0.06) * I.graze); }
-      return; }
+  // How a 3D animal moves this frame. st: walk | stand | graze | sleep | sleep.curl; dist: ground covered (the rigged
+  // ones' strides are timed by it, each paw planted where it lands, so nothing slides); focus: what it watches.
+  // Rigged: the pets' poses (asleep, the chin rests flat on the ground, or the head laid on its side curled up),
+  // grazing standing with the neck bent down. Whole meshes: a waddle rocking on the feet (never off the ground), a
+  // peck, and asleep lying forward with the chin (or beak) down on the ground.
+  const BOX = new T.Box3();
+  function move(a, t, st, dist = 0, focus = null) {
+    if (st === true) st = 'walk'; else if (st === false) st = 'stand'; // (older callers)
+    if (a.d3 === 'rig') {
+      const I = a.inst; I.walkD = (I.walkD || 0) + (dist || 0); I.focus = focus;
+      try { IH.yami3d.pose(I, st === 'graze' ? 'stand' : st, t); } catch (e) { return; } if (!I.B || !I.B.neck) return;
+      I.graze = (I.graze || 0) + ((st === 'graze' ? 1 : 0) - (I.graze || 0)) * 0.08; if (I.graze > 0.01) { I.B.neck.rotateX(1.05 * I.graze); I.B.head.rotateX((0.55 + Math.sin(t * 3) * 0.06) * I.graze); }
+      return;
+    }
     if (!a.body) return; const b = a.body, bird = /^(hen|rooster|duck|goose|turkey|gull|weka|tui|fantail|kereru)$/.test(a.kind);
-    if (moving) { b.position.y = Math.abs(Math.sin(t * 9 * speed)) * (bird ? 0.06 : 0.03); b.rotation.z = Math.sin(t * 9 * speed) * (bird ? 0.09 : 0.03); b.rotation.x = 0.04; }
-    else { b.position.y = 0; b.rotation.z *= 0.8; b.rotation.x = grazing ? (bird ? 0.35 + Math.max(0, Math.sin(t * 7)) * 0.25 : 0.12) : Math.sin(t * 1.3) * 0.03; }
+    a.lie = (a.lie || 0) + ((/^sleep/.test(st) ? 1 : 0) - (a.lie || 0)) * 0.06;
+    if (st === 'walk') { b.rotation.z = Math.sin(t * 9) * (bird ? 0.12 : 0.04); b.rotation.x = 0.04; b.rotation.y = Math.sin(t * 4.5) * 0.05; }
+    else { b.rotation.z *= 0.8; b.rotation.y *= 0.8; b.rotation.x = st === 'graze' ? (bird ? 0.35 + Math.max(0, Math.sin(t * 7)) * 0.25 : 0.12) : Math.sin(t * 1.3) * 0.03; }
+    if (a.lie > 0.01) { b.rotation.x = b.rotation.x * (1 - a.lie) + (bird ? 0.42 : 0.2) * a.lie; b.rotation.z *= 1 - a.lie; }
+    // whatever the tilt, its lowest point rests on the ground: the feet walking, the chin and belly asleep
+    b.position.y = 0; const m = b.children[0]; if (m) { a.group.updateMatrixWorld(true); BOX.setFromObject(b); b.position.y = a.group.position.y - BOX.min.y; }
   }
   IH.animals3d = { make, school, move, has: kind => !!(RIGGED[kind] || STATIC[kind]), RIGGED, STATIC };
   // the islands' own makers use these from now on (their Kit-built stand-ins stay for anything without a model)

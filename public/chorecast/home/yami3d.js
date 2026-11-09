@@ -95,7 +95,7 @@
       const bb = geo.boundingBox, s = HT / (bb.max.y - bb.min.y); top.scale.setScalar(s); top.position.set(-(bb.min.x + bb.max.x) / 2 * s, -bb.min.y * s, -(bb.min.z + bb.max.z) / 2 * s);
       const body = new T.Group(); body.add(top); root.add(body);
       const B = {}; bones.forEach(b => { B[b.name] = b; b.userData.rest = b.quaternion.clone(); });
-      Object.assign(inst, { body, top, mesh, B, cur: {}, vel: {}, look: 0, nextLook: 0, hopV: 0, hopY: 0, s });
+      Object.assign(inst, { body, top, mesh, B, cur: {}, vel: {}, look: 0, nextLook: 0, hopV: 0, hopY: 0, s, hs: (PETS[kind] || {}).farm ? HT / HEIGHT : 1 });
       inst.cols = colliders(MODEL, autoDefs(MODEL)); // the body's shape, bone by bone (touching it, keeping out of things)
       // Yami's eyes in the texture (green, either side of the nose); the closed lid is drawn in a soft pale line on black fur
       if (kind === 'cat') inst.open = map, inst.shut = closedEyes(MODEL, [{ x: 828, y: 153, r: 17, dir: [0.99, 0.11], down: [0.11, -0.99] }, { x: 912, y: 162, r: 17, dir: [0.99, 0.11], down: [0.11, -0.99] }], '#cfc8e0');
@@ -239,7 +239,7 @@
     if (inst.antic && t < inst.antic) c[0] += 0.05;
     else if (inst.antic) { inst.antic = 0; inst.hopV = 1.6; }
     inst.hopV -= 9 * dt; inst.hopY = Math.max(0, inst.hopY + inst.hopV * dt); if (inst.hopY === 0) inst.hopV = Math.max(0, inst.hopV);
-    inst.body.position.y = -c[0] + inst.hopY; inst.body.rotation.x = c[1]; inst.body.rotation.z = c[2]; // (roll: over on its side to wrestle)
+    inst.body.position.y = -c[0] * (inst.hs || 1) + inst.hopY; // (a bigger animal lies down further) inst.body.rotation.x = c[1]; inst.body.rotation.z = c[2]; // (roll: over on its side to wrestle)
     const sq = inst.hopY > 0 ? 1.04 : st === 'happy' && inst.antic ? 0.93 : 1; inst.body.scale.set(1 / Math.sqrt(sq), sq, 1 / Math.sqrt(sq));
     plantPaws(inst, st);
     IH.rig3d.look(inst, /^(sleep|eat)/.test(st) ? null : inst.focus, dt, 0.9); // the face follows what it's doing
@@ -311,7 +311,7 @@
       inst.group.updateMatrixWorld(true);
     }
   }
-  IH.yami3d = { make, pose, has: kind => !!PETS[kind], add: (kind, file, h) => { if (!PETS[kind]) PETS[kind] = { file, h }; }, get ready() { return !!PETS.cat.m; } };
+  IH.yami3d = { make, pose, has: kind => !!PETS[kind], add: (kind, file, h) => { if (!PETS[kind]) { PETS[kind] = { file, h, farm: true }; STRIDE[kind] = 0.3 * h / HEIGHT; } }, get ready() { return !!PETS.cat.m; } };
   // Closed eyes: a copy of the model's own texture with each eye painted over in the fur round it and a soft
   // closed-lid curve drawn across (the anime sleeping eye). eyes: centre, radius, the eye line and the way down
   // the face, in the texture's 1024 pixels. Made once per model; swapped in to sleep and to blink.

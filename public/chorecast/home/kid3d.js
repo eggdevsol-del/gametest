@@ -448,7 +448,16 @@
       const hand = inst.B['hand.R'], v = new T.Vector3(); inst.group.updateMatrixWorld(true); hand.getWorldScale(v); inst.tools = {};
       const can = new K(); can.cyl(0.16, 0.26, 0, -0.32, 0, '#6fb8e8', { n: 12 }); can.cyl(0.03, 0.34, 0, -0.18, 0.2, '#5aa3d6', { n: 6, rx: 0.9 }); can.box(0.04, 0.2, 0.18, 0, -0.08, -0.05, '#5aa3d6', { r: 0.02 });
       const br = new K(); br.cyl(0.03, 1.0, 0, -0.1, 0, '#c98f5a', { n: 6 }); br.box(0.42, 0.16, 0.1, 0, 0.9, 0, '#f2c14e', { r: 0.04 }); // one unit long: aimed and stretched to the floor each beat
-      for (const [n, k] of [['can', can], ['broom', br]]) { const g = k.build(); g.scale.setScalar(1 / v.x); g.position.y = 0.1 / v.x; hand.add(g); inst.tools[n] = g; }
+      // the farm and garden tools (the islands): each hangs from the hand, its handle in the grip
+      const sack = new K(); sack.box(0.3, 0.42, 0.16, 0, -0.5, 0, '#d9c49a', { r: 0.06 }); sack.box(0.31, 0.06, 0.17, 0, -0.14, 0, '#b8a37a', { r: 0.02 }); sack.box(0.12, 0.1, 0.02, 0, -0.32, 0.085, '#6b9a3c');
+      const pail = new K(); pail.cyl(0.15, 0.24, 0, -0.42, 0, '#c9ccd2', { n: 12, rt: 0.17 }); pail.torus(0.15, 0.012, 0, -0.18, 0, '#8a8f98', { arc: Math.PI, rz: Math.PI });
+      const shears = new K(); for (const s2 of [-1, 1]) { shears.box(0.03, 0.26, 0.012, s2 * 0.02, -0.33, 0, '#c9ccd2', { rz: s2 * 0.08 }); shears.torus(0.04, 0.012, s2 * 0.035, -0.08, 0, '#e85a5a'); }
+      const basket = new K(); basket.cyl(0.17, 0.16, 0, -0.42, 0, '#c9a173', { n: 12, rt: 0.2 }); basket.torus(0.17, 0.015, 0, -0.14, 0, '#a07a4a', { arc: Math.PI, rz: Math.PI }); for (let i = 0; i < 3; i++) basket.ball(0.05, -0.06 + i * 0.06, -0.24, 0.02, '#fff6e6', { s: [0.85, 1.1, 0.85], n: 8 });
+      const brush = new K(); brush.box(0.08, 0.06, 0.2, 0, -0.08, 0, '#8a6038', { r: 0.02 }); brush.box(0.07, 0.05, 0.18, 0, -0.13, 0, '#e8d2a0');
+      const fork = new K(); fork.cyl(0.025, 1.0, 0, -0.1, 0, '#c98f5a', { n: 6 }); fork.box(0.22, 0.03, 0.03, 0, 0.88, 0, '#8a8f98'); for (let i = 0; i < 3; i++) fork.cyl(0.012, 0.16, -0.09 + i * 0.09, 0.88, 0, '#8a8f98', { n: 4 });
+      const trowel = new K(); trowel.cyl(0.03, 0.12, 0, -0.1, 0, '#3f86b0', { n: 6 }); trowel.cyl(0.01, 0.2, 0, 0.02, 0, '#8a8f98', { n: 4 }); trowel.box(0.09, 0.2, 0.02, 0, 0.22, 0, '#a9b0ba', { r: 0.02 });
+      const jar = new K(); jar.cyl(0.07, 0.14, 0, -0.24, 0, '#ffb43a', { n: 10 }); jar.cyl(0.075, 0.04, 0, -0.1, 0, '#c98f5a', { n: 10 });
+      for (const [n, k] of [['can', can], ['broom', br], ['sack', sack], ['pail', pail], ['shears', shears], ['basket', basket], ['brush', brush], ['fork', fork], ['trowel', trowel], ['jar', jar]]) { const g = k.build(); g.scale.setScalar(1 / v.x); g.position.y = 0.1 / v.x; hand.add(g); inst.tools[n] = g; }
     }
     if (inst.tools) for (const n in inst.tools) inst.tools[n].visible = inst.holding === n && !/^(liebed|sitchair)/.test(inst.st);
     // The broom points from the hand down to the floor in front (swept side to side while sweeping), so the brush is
@@ -457,14 +466,15 @@
       const hand = inst.B['hand.R'], g = inst.tools[inst.holding]; inst.group.updateMatrixWorld(true);
       const hp = hand.getWorldPosition(TV1), hq = hand.getWorldQuaternion(TQ1).invert(), ws = hand.getWorldScale(TV3).x, yaw = inst.group.rotation.y, fl = inst.group.position.y;
       const f = [Math.sin(yaw), Math.cos(yaw)], tt = inst.t || 0;
-      if (inst.holding === 'broom') {
-        const sweep = /^sweep/.test(inst.st), sx = sweep ? Math.sin(tt * 5) * 0.35 : 0, out = sweep ? 0.6 : 0.2;
-        TV2.set(hp.x + f[0] * out + f[1] * sx, fl + 0.15, hp.z + f[1] * out - f[0] * sx).sub(hp);
+      if (inst.holding === 'broom' || inst.holding === 'fork' || inst.holding === 'trowel') { // (aimed at the ground in front: swept, forked over, dug)
+        const sweep = /^(sweep|fetch|feed)/.test(inst.st), dig = inst.holding === 'trowel', sx = sweep ? Math.sin(tt * (dig ? 8 : 5)) * (dig ? 0.08 : 0.35) : 0, out = dig ? 0.45 + Math.max(0, Math.sin(tt * 8)) * 0.1 : sweep ? 0.6 : 0.2;
+        TV2.set(hp.x + f[0] * out + f[1] * sx, fl + (dig ? 0.02 : 0.15), hp.z + f[1] * out - f[0] * sx).sub(hp);
         const L = Math.max(0.3, TV2.length()); TV2.normalize();
         g.quaternion.copy(hq).multiply(TQ2.setFromUnitVectors(TUP, TV2)); g.scale.set(1 / ws, L / ws * 0.92, 1 / ws); g.position.set(0, 0, 0);
       } else {
-        const pour = /^water/.test(inst.st) ? 0.55 + Math.sin(tt * 2) * 0.1 : 0;
-        g.quaternion.copy(hq).multiply(TQ2.setFromEuler(TE.set(pour, yaw, 0, 'YXZ'))); g.scale.setScalar(1 / ws); g.position.set(0, 0, 0);
+        const H = inst.holding, pour = H === 'can' && /^water/.test(inst.st) ? 0.55 + Math.sin(tt * 2) * 0.1 : H === 'sack' && /^feed/.test(inst.st) ? 1.35 + Math.sin(tt * 3) * 0.12 : H === 'brush' ? 1.4 + Math.sin(tt * 9) * 0.25 : 0; // (the can and the sack tip to pour; the brush strokes)
+        const snip = H === 'shears' ? Math.sin(tt * 14) * 0.35 : 0;
+        g.quaternion.copy(hq).multiply(TQ2.setFromEuler(TE.set(pour + (H === 'shears' ? 1.2 : 0), yaw, snip, 'YXZ'))); g.scale.setScalar(1 / ws); g.position.set(0, 0, 0);
       }
     }
   }

@@ -51,7 +51,7 @@
     hay: { name: 'Hay bales', e: '🟫', xp: 60, fp: [3, 2], in: null },
     barrow: { name: 'Wheelbarrow', e: '🛒', xp: 80, fp: [1.4, 1], in: null },
     churns: { name: 'Milk churns', e: '🥛', xp: 60, fp: [1.6, 1], in: null },
-    tractor: { name: 'Tractor', e: '🚜', xp: 1500, fp: [2.4, 3.4], in: false, about: 'Drive it round the farm.' },
+    tractor: { name: 'Tractor', e: '🚜', xp: 1500, fp: [2.6, 4.0], in: false, about: 'Drive it round the farm.' },
     quad: { name: 'Quad bike', e: '🏍️', xp: 900, fp: [1.6, 2.4], in: false, about: 'Zoom round the farm.' }
   };
   const NEEDS_NAME = { coop: 'a hen house', pond: 'a duck pond', sty: 'a pig ark', milkstand: 'a milking stand', shearstand: 'a shearing stand' };
@@ -79,7 +79,7 @@
     if (t === 'trough') { bx(kk, 3, 0.8, 1.0, 0, 0, 0, '#8f9aa8', { r: 0.06 }); kk.waterBox(2.7, 0.1, 0.7, 0, 0.62, 0, { tint: '#6fc0d8' }); }
     else if (t === 'feeder') { for (const [a, b] of [[-0.8, -0.8], [0.8, -0.8], [-0.8, 0.8], [0.8, 0.8]]) bx(kk, 0.12, 1.4, 0.12, a, 0, b, '#6b4a33'); bx(kk, 1.8, 0.7, 1.8, 0, 0.5, 0, '#c9a173', { r: 0.04 }); kk.ball(0.9, 0, 1.3, 0, '#e8c45a', { s: [1, 0.5, 1], n: 9 }); kk.cone(1.4, 0.6, 0, 1.6, 0, '#7a6a5a', { n: 4, ry: Math.PI / 4 }); }
     else if (t === 'coop') { bx(kk, 3.2, 2.0, 2.2, 0, 0.5, 0, '#f2e1b8', { r: 0.05 }); for (const a of [-1.4, 1.4]) for (const b of [-0.9, 0.9]) kk.cyl(0.08, 0.55, a, 0, b, '#8a6038', { n: 5 }); kk.cone(2.4, 1.0, 0, 2.5, 0, '#5a7aa8', { n: 4, ry: Math.PI / 4, s: [1, 1, 0.8] }); bx(kk, 0.6, 0.7, 0.1, 0, 0.9, 1.12, '#3d2a24'); kk.box(0.4, 0.06, 1.4, 0, 0.3, 1.7, '#c9a173', { rx: 0.5 }); }
-    else if (t === 'pond') { kk.cyl(1, 0.14, 0, 0, 0, '#8f8a99', { s: [2.1, 1, 1.6], n: 24 }); kk.special(new T.CylinderGeometry(1, 1, 0.1, 32), 'water', kk._m(0, 0.1, 0, { s: [1.85, 1, 1.35] }), { tint: '#6fc0d8' }); for (let i = 0; i < 3; i++) kk.cyl(0.3, 0.04, -0.8 + i * 0.7, 0.16, 0.3 * (i % 2 ? 1 : -1), '#5fae4a', { n: 8 }); kk.cyl(0.04, 1.0, 1.6, 0, -1.0, '#6f9a42', { n: 3 }); kk.cyl(0.04, 1.2, 1.75, 0, -0.9, '#6f9a42', { n: 3 }); }
+    else if (t === 'pond') { kk.cyl(1, 0.14, 0, 0, 0, '#8f8a99', { s: [2.1, 1, 1.6], n: 24 });  for (let i = 0; i < 3; i++) kk.cyl(0.3, 0.04, -0.8 + i * 0.7, 0.16, 0.3 * (i % 2 ? 1 : -1), '#5fae4a', { n: 8 }); kk.cyl(0.04, 1.0, 1.6, 0, -1.0, '#6f9a42', { n: 3 }); kk.cyl(0.04, 1.2, 1.75, 0, -0.9, '#6f9a42', { n: 3 }); }
     else if (t === 'sty') { kk.cyl(1.2, 2.6, 0, 0, 0, '#9aa0aa', { n: 14, rx: Math.PI / 2, s: [1.1, 1, 1] }); bx(kk, 2.6, 0.1, 2.4, 0, -0.05, 0, '#6b4a33'); kk.ball(0.75, 0, 0.7, 1.3, '#2a2420', { s: [1, 1, 0.1], n: 10 }); }
     else if (t === 'shelter') { for (const [a, b] of [[-1.9, -1.4], [1.9, -1.4], [-1.9, 1.4], [1.9, 1.4]]) bx(kk, 0.15, 2.4, 0.15, a, 0, b, '#6b4a33'); bx(kk, 4.2, 0.2, 3.2, 0, 2.4, 0, '#a8673f', { rx: 0.12 }); bx(kk, 4, 1.6, 0.12, 0, 0.6, -1.45, '#9c6b45'); }
     else if (t === 'milkstand') { bx(kk, 2.6, 0.3, 1.4, 0, 0, 0, '#c9a173'); for (const s of [-1, 1]) bx(kk, 0.15, 1.6, 0.15, s * 1.2, 0, -0.6, '#8a6038'); bx(kk, 2.6, 0.15, 0.15, 0, 1.5, -0.6, '#8a6038'); kk.cyl(0.25, 0.4, 0.8, 0.3, 0.6, '#c9ccd2', { n: 10 }); kk.cyl(0.22, 0.45, -0.9, 0, 0.6, '#6b4a33', { n: 8 }); }
@@ -89,8 +89,36 @@
     else if (t === 'hay') { for (const [a, b, ry] of [[-0.7, 0, 0.3], [0.8, 0.2, 1.2], [0, 0.4, 0.6]]) kk.cyl(0.6, 1.1, a, 0, b, '#e8c45a', { n: 12, rz: Math.PI / 2, ry }); }
     else if (t === 'barrow') { bx(kk, 0.9, 0.4, 0.7, 0, 0.35, 0, '#3f86b0', { r: 0.06 }); kk.cyl(0.2, 0.08, 0, 0.2, 0.55, '#2a2630', { n: 10, rz: Math.PI / 2 }); for (const s of [-0.3, 0.3]) kk.box(0.06, 0.06, 0.8, s, 0.5, -0.6, '#8a6038'); }
     else if (t === 'churns') for (const a of [-0.4, 0.4]) { kk.cyl(0.3, 0.9, a, 0, 0, '#c9ccd2', { n: 10 }); kk.cyl(0.2, 0.2, a, 0.9, 0, '#c9ccd2', { n: 8 }); }
-    else if (t === 'tractor') { bx(kk, 1.6, 0.9, 2.6, 0, 0.7, 0, '#d8433a', { r: 0.1 }); bx(kk, 1.3, 1.1, 1.2, 0, 1.6, -0.5, '#d8433a', { r: 0.08 }); kk.glassBox(1.2, 0.8, 1.1, 0, 1.8, -0.5, {}); for (const s of [-1, 1]) { kk.cyl(0.65, 0.4, s * 0.95, 0.65, -0.7, '#2a2630', { n: 12, rz: Math.PI / 2 }); kk.cyl(0.4, 0.3, s * 0.85, 0.4, 0.8, '#2a2630', { n: 10, rz: Math.PI / 2 }); } }
+    else if (t === 'tractor') tractorModel(kk);
     else if (t === 'quad') { bx(kk, 1.0, 0.5, 1.8, 0, 0.5, 0, '#3a8a4a', { r: 0.12 }); bx(kk, 0.6, 0.2, 0.7, 0, 1.0, -0.2, '#2a2630', { r: 0.06 }); kk.cyl(0.04, 0.5, 0, 1.0, 0.7, '#3d4048', { n: 4 }); bx(kk, 0.8, 0.06, 0.06, 0, 1.45, 0.7, '#3d4048'); for (const s of [-1, 1]) for (const b of [-0.65, 0.65]) kk.cyl(0.32, 0.3, s * 0.6, 0.32, b, '#2a2630', { n: 10, rz: Math.PI / 2 }); }
+  }
+  // A farm tractor, front +z: the bonnet and grille over the engine, a stack, the big treaded back wheels under
+  // mudguards and the small front ones, and the cab: a floor, a sprung seat with a backrest (TRACTOR_SEAT: where you
+  // sit), the steering wheel on its column, four posts, a roof, glass at the front and back (open sides, so you're seen).
+  const TRACTOR_SEAT = { x: 0, y: 1.42, z: -0.62, back: -0.98 };
+  function tractorModel(kk) {
+    const RED = '#d8433a', DK = '#2a2630', HUB = '#e8c45a';
+    bx(kk, 1.0, 0.5, 3.6, 0, 0.55, 0.1, '#3d4048', { r: 0.06 }); // the chassis
+    bx(kk, 1.2, 0.95, 1.9, 0, 0.9, 0.95, RED, { r: 0.14 }); bx(kk, 1.1, 0.1, 1.8, 0, 1.85, 0.95, '#c23a31', { r: 0.05 }); // the bonnet
+    bx(kk, 1.0, 0.7, 0.1, 0, 0.98, 1.92, '#3d4048', { r: 0.03 }); for (let i = 0; i < 5; i++) bx(kk, 0.9, 0.05, 0.04, 0, 1.06 + i * 0.12, 1.98, '#9aa0aa');
+    for (const s of [-1, 1]) kk.ball(0.12, s * 0.42, 1.55, 1.92, '#fff3c0', { n: 8 }); // headlights
+    kk.cyl(0.07, 1.1, 0.42, 1.8, 1.4, '#3d4048', { n: 6 }); kk.cyl(0.09, 0.08, 0.42, 2.9, 1.4, '#3d4048', { n: 6 }); // the stack
+    for (const s of [-1, 1]) { // the big back wheels with their hubs and tread, the mudguards; the front wheels
+      kk.cyl(0.92, 0.55, s * 0.98, 0.92, -0.62, DK, { n: 20, rz: Math.PI / 2 }); kk.cyl(0.42, 0.57, s * 0.98, 0.92, -0.62, HUB, { n: 14, rz: Math.PI / 2 });
+      for (let i = 0; i < 14; i++) { const a = i / 14 * Math.PI * 2; kk.box(0.58, 0.1, 0.2, s * 0.98, 0.92 + Math.sin(a) * 0.86, -0.62 + Math.cos(a) * 0.86, DK, { rx: Math.PI / 2 - a }); } // (lugs across the tread, standing out from it)
+      kk.box(0.62, 0.08, 1.6, s * 0.98, 1.95, -0.62, RED, { r: 0.04 }); kk.box(0.62, 0.7, 0.08, s * 0.98, 1.3, 0.2, RED);
+      kk.cyl(0.48, 0.34, s * 0.78, 0.48, 1.45, DK, { n: 16, rz: Math.PI / 2 }); kk.cyl(0.22, 0.36, s * 0.78, 0.48, 1.45, HUB, { n: 10, rz: Math.PI / 2 });
+    }
+    bx(kk, 1.5, 0.08, 1.4, 0, 1.08, -0.55, '#3d4048'); // the cab floor
+    // the seat: a sprung post, the cushion, the backrest (against which you sit)
+    kk.cyl(0.07, 0.2, 0, 1.12, TRACTOR_SEAT.z, '#3d4048', { n: 6 }); bx(kk, 0.7, 0.12, 0.62, 0, TRACTOR_SEAT.y - 0.12, TRACTOR_SEAT.z, '#2a2630', { r: 0.05 });
+    kk.box(0.7, 0.7, 0.12, 0, TRACTOR_SEAT.y - 0.06, TRACTOR_SEAT.back, '#2a2630', { r: 0.05, rx: -0.12 });
+    // the steering wheel on its column, angled to you
+    kk.cyl(0.04, 0.75, 0, 1.15, 0.12, '#3d4048', { n: 6, rx: -0.5 }); kk.torus(0.22, 0.035, 0, 1.85, -0.1, DK, { rx: Math.PI / 2 - 0.5 });
+    // the cab: four posts, the roof, glass front and back
+    for (const [x, z] of [[-0.72, -1.22], [0.72, -1.22], [-0.72, 0.14], [0.72, 0.14]]) kk.cyl(0.05, 1.95, x, 1.12, z, '#3d4048', { n: 6 });
+    bx(kk, 1.7, 0.12, 1.65, 0, 3.07, -0.54, RED, { r: 0.05 }); bx(kk, 1.76, 0.06, 1.71, 0, 3.0, -0.54, '#ffffff');
+    kk.glassBox(1.36, 1.15, 0.04, 0, 1.85, 0.14, { tint: '#d8eef8' }); kk.glassBox(1.36, 1.6, 0.04, 0, 1.4, -1.22, { tint: '#d8eef8' });
   }
   function fence(k, p, gate) {
     const sides = [[[p.x0, p.z0], [p.x1, p.z0], 'n'], [[p.x1, p.z0], [p.x1, p.z1], 'e'], [[p.x1, p.z1], [p.x0, p.z1], 's'], [[p.x0, p.z1], [p.x0, p.z0], 'w']];
@@ -122,7 +150,7 @@
     const pads = f.paddocks.map(p => { const g = gateOf(p), runs = fence(k, p, g); for (const [a, b] of runs) solid(a[0] - 0.2, a[1] - 0.2, b[0] + 0.2, b[1] + 0.2); const at = outside(g); spots.push({ kind: 'fgate', id: 'gate' + p.id, pad: p.id, name: 'the paddock gate', at, yaw: Math.atan2(g.x - at[0], g.z - at[1]), hit: [g.x, g.z, 0, 2.6] }); return { p, g }; });
     // fittings and equipment
     const models = {};
-    for (const it of f.items) { const d = ITEMS[it.t]; if (!d) continue; const g = new T.Group(), kk = new Kit(); itemModel(it.t, kk); g.add(kk.build()); g.position.set(it.x, 0, it.z); g.rotation.y = it.ry || 0; root.add(g); models[it.id] = g;
+    for (const it of f.items) { const d = ITEMS[it.t]; if (!d) continue; const g = new T.Group(), kk = new Kit(); itemModel(it.t, kk); g.add(kk.build()); if (it.t === 'pond' && IH.look.seaSheet) g.add(IH.look.seaSheet(-2.2, -1.7, 2.2, 1.7, 0.16, (x, z) => { const e = (x / 1.85) ** 2 + (z / 1.35) ** 2; return e < 1 ? 0.16 - 0.8 * (1 - e) : 0.4; }, { n: 6, foam: 0.18, deepAt: 0.6, shallow: '#8fe0d0', deep: '#2f7f9f', mud: '#8f8a99' })); g.position.set(it.x, 0, it.z); g.rotation.y = it.ry || 0; root.add(g); models[it.id] = g;
       const [w, dd] = d.fp, c = Math.abs(Math.cos(it.ry || 0)), s = Math.abs(Math.sin(it.ry || 0)), hw = (w * c + dd * s) / 2, hd = (w * s + dd * c) / 2; solid(it.x - hw, it.z - hd, it.x + hw, it.z + hd);
       if (/^(coop|pond|sty|milkstand|shearstand|beehive|tractor|quad|trough|feeder)$/.test(it.t)) spots.push({ kind: 'fitem', id: 'it' + it.id, item: it.id, t: it.t, name: 'the ' + d.name.toLowerCase(), at: [it.x, it.z + hd + 1.2], yaw: Math.PI, hit: [it.x, it.z, 0, Math.max(w, dd) + 0.4] }); }
     // the animals, each in its own paddock, moving its own way (village.js: the generic movers, or the 3D ones)
@@ -152,18 +180,18 @@
       if (!L.length) return c.toast('No animals here for that yet.');
       if (!ok.length) { const w = L.map(a => why(f, a)).find(Boolean); return c.toast(w ? `They can’t yet: ${w}.` : 'Nothing ready yet. Come back tomorrow.'); }
       let n = 0; for (const a of ok) { let k = ready(a); if (a.kind === 'hen' && f.animals.some(o => o.kind === 'rooster' && o.pad === a.pad)) k *= 2; n += k; a.got = Date.now(); }
-      c.chore(s, pose, 2.6, () => { save(); if (what === 'wool' || what === 'truffle') sh().addGoods(what, n); else sh().addFood(what, n); c.float(V().kid, emo); c.sound('buy'); c.toast(`${n} ${{ egg: n === 1 ? 'egg' : 'eggs', milk: n === 1 ? 'bottle of milk' : 'bottles of milk', wool: n === 1 ? 'bag of wool' : 'bags of wool', truffle: n === 1 ? 'truffle' : 'truffles' }[what]}! ${what === 'wool' || what === 'truffle' ? 'On your goods shelf.' : 'Into your fridge at home.'}`); });
+      c.chore(s, pose, 3, () => { save(); if (what === 'wool' || what === 'truffle') sh().addGoods(what, n); else sh().addFood(what, n); c.float(V().kid, emo); c.sound('buy'); c.toast(`${n} ${{ egg: n === 1 ? 'egg' : 'eggs', milk: n === 1 ? 'bottle of milk' : 'bottles of milk', wool: n === 1 ? 'bag of wool' : 'bags of wool', truffle: n === 1 ? 'truffle' : 'truffles' }[what]}! ${what === 'wool' || what === 'truffle' ? 'On your goods shelf.' : 'Into your fridge at home.'}`); }, null, { egg: { tool: 'basket', fx: 'straw', dist: 0.9, y: 0.6, rate: 8 }, milk: { tool: 'pail', fx: 'milk', dist: 0.55, y: 0.75, rate: 16 }, wool: { tool: 'shears', fx: 'wool', dist: 0.8, y: 0.9, rate: 10 }, truffle: { fx: 'soil', dist: 1.0, y: 0.1, rate: 10 } }[what]);
     }
     function feedPad(s) {
       const f = F(), L = f.animals.filter(a => a.pad === s.pad); if (!L.length) return c.toast('Nobody lives in this paddock yet. Buy animals at the barn.');
       if ((f.fed[s.pad] || 0) === today()) return c.toast('They’re full. Feed them again tomorrow.');
       const need = {}; for (const a of L) need[ANIMALS[a.kind].eats] = (need[ANIMALS[a.kind].eats] || 0) + 1;
       const short = Object.entries(need).filter(([k, n]) => (f.feed[k] || 0) < n); if (short.length) return c.toast(`Not enough ${short.map(([k]) => FEED[k].name.toLowerCase()).join(' or ')}. Buy feed at the barn.`);
-      c.chore(s, 'feed', 2.4, () => { for (const [k, n] of Object.entries(need)) f.feed[k] -= n; f.fed[s.pad] = today(); save(); for (const a of V().B.animals) if (a.rec && a.rec.pad === s.pad) c.float({ pos: a.group.position }, '❤️'); c.sound('tune'); c.toast(`Fed! (${Object.entries(need).map(([k, n]) => `${n} ${FEED[k].name.toLowerCase()}`).join(', ')})`); });
+      c.chore(s, 'feed', 2.8, () => { for (const [k, n] of Object.entries(need)) f.feed[k] -= n; f.fed[s.pad] = today(); save(); for (const a of V().B.animals) if (a.rec && a.rec.pad === s.pad) c.float({ pos: a.group.position }, '❤️'); c.sound('tune'); c.toast(`Fed! (${Object.entries(need).map(([k, n]) => `${n} ${FEED[k].name.toLowerCase()}`).join(', ')})`); }, null, need.hay && !need.grain ? { tool: 'fork', fx: 'hay', dist: 1.1, y: 0.5, rate: 14 } : { tool: 'sack', fx: 'dust', dist: 1.2, y: 0.5, rate: 12, delay: 0.5 });
     }
     function drive(s, t) {
       c.walkTo(s.at[0], s.at[1], ok => { if (!ok) return; const B = V().B, m = B.models[s.item]; if (!m) return; const x0 = m.position.x, z0 = m.position.z, r0 = m.rotation.y;
-        c.ride({ dur: t === 'quad' ? 16 : 22, lift: t === 'quad' ? 0.75 : 1.1, model: m, pose: 'sitchair', bob: t === 'quad' ? 0.05 : 0.03, at: u => { const a = u * Math.PI * 2; return [26 + Math.cos(a - Math.PI / 2) * 20, 0, 15 + Math.sin(a - Math.PI / 2) * 1.2 + Math.sin(a * 2) * 0.6]; }, end: () => { m.position.set(x0, 0, z0); m.rotation.y = r0; sh().relax({ fun: 16 }); c.toast(t === 'quad' ? 'Vroom! Round the farm. 🏍️' : 'Round the farm in the tractor! 🚜'); } }); }, s.yaw);
+        c.ride({ dur: t === 'quad' ? 16 : 22, lift: t === 'quad' ? 0.75 : 0, seat: t === 'quad' ? null : TRACTOR_SEAT, model: m, pose: 'sitchair', bob: t === 'quad' ? 0.05 : 0.02, at: u => { const a = u * Math.PI * 2; return [26 + Math.cos(a - Math.PI / 2) * 20, 0, 15 + Math.sin(a - Math.PI / 2) * 1.2 + Math.sin(a * 2) * 0.6]; }, end: () => { m.position.set(x0, 0, z0); m.rotation.y = r0; sh().relax({ fun: 16 }); c.toast(t === 'quad' ? 'Vroom! Round the farm. 🏍️' : 'Round the farm in the tractor! 🚜'); } }); }, s.yaw);
     }
     const acts = {
       fbarn: () => [{ e: '🐮', label: 'Buy animals', run: () => shop('animals') }, { e: '🌾', label: 'Buy feed', run: () => shop('feed') }, { e: '🛠️', label: 'Farm planner: paddocks, fittings, equipment', run: () => planner() }],
@@ -175,11 +203,11 @@
         if (s.t === 'pond') return [{ e: '🥚', label: 'Collect duck and goose eggs', run: () => { const it = f.items.find(i => i.id === s.item), p = padOf(f, it.x, it.z); collect(s, a => p && a.pad === p.id && (a.kind === 'duck' || a.kind === 'goose'), 'egg', 'fetch', '🥚'); } }];
         if (s.t === 'sty') return [{ e: '🍄', label: 'Truffle hunt with the pigs', run: () => { const it = f.items.find(i => i.id === s.item), p = padOf(f, it.x, it.z); collect(s, a => p && a.pad === p.id && a.kind === 'kunekune', 'truffle', 'fetch', '🍄'); } }];
         if (s.t === 'milkstand') return [{ e: '🥛', label: 'Milk the goats and cows', run: () => collect(s, a => a.kind === 'goat' || a.kind === 'cow', 'milk', 'wash', '🥛') }];
-        if (s.t === 'shearstand') return [{ e: '🧶', label: 'Shear the woolly ones', run: () => collect(s, a => a.kind === 'merino' || a.kind === 'alpaca' || a.kind === 'llama', 'wool', 'sweep', '🧶') }];
-        if (s.t === 'beehive') return [{ e: '🍯', label: 'Collect the honey', run: () => { const it = f.items.find(i => i.id === s.item); if (it.got && Date.now() - it.got < 3 * DAY) return c.toast('The bees are still making it. Honey every three days.'); c.chore(s, 'fetch', 2.6, () => { it.got = Date.now(); save(); sh().addFood('honey', 2); c.float(V().kid, '🍯'); c.toast('Two jars of honey into your pantry! 🐝'); }); } }];
+        if (s.t === 'shearstand') return [{ e: '🧶', label: 'Shear the woolly ones', run: () => collect(s, a => a.kind === 'merino' || a.kind === 'alpaca' || a.kind === 'llama', 'wool', 'chop', '🧶') }];
+        if (s.t === 'beehive') return [{ e: '🍯', label: 'Collect the honey', run: () => { const it = f.items.find(i => i.id === s.item); if (it.got && Date.now() - it.got < 3 * DAY) return c.toast('The bees are still making it. Honey every three days.'); c.chore(s, 'fetch', 2.6, () => { it.got = Date.now(); save(); sh().addFood('honey', 2); c.float(V().kid, '🍯'); c.toast('Two jars of honey into your pantry! 🐝'); }, null, { tool: 'jar', fx: 'smoke', dist: 1.0, y: 1.3, rate: 6 }); } }];
         if (s.t === 'tractor' || s.t === 'quad') return [{ e: ITEMS[s.t].e, label: s.t === 'quad' ? 'Ride the quad bike' : 'Drive the tractor', run: () => drive(s, s.t) }];
-        if (s.t === 'trough') return [{ e: '💧', label: 'Top up the water', run: () => c.chore(s, 'water', 1.8, () => c.toast('Fresh water. 💧')) }];
-        return [{ e: '🪣', label: 'Fill it with hay', run: () => c.chore(s, 'fetch', 1.8, () => c.toast('Hay in. 🌾')) }];
+        if (s.t === 'trough') return [{ e: '💧', label: 'Top up the water', run: () => c.chore(s, 'water', 2.4, () => c.toast('Fresh water. 💧'), null, { tool: 'can', fx: 'drops', at: 'hand', rate: 22, delay: 0.6 }) }];
+        return [{ e: '🪣', label: 'Fill it with hay', run: () => c.chore(s, 'feed', 2.4, () => c.toast('Hay in. 🌾'), null, { tool: 'fork', fx: 'hay', dist: 1.0, y: 1.2, rate: 14 }) }];
       }
     };
 
@@ -288,6 +316,6 @@
       }
     }
     const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
-    return { acts, click, tap, prep() { P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS };
+    return { acts, click, tap, prep() { P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
   };
 })();

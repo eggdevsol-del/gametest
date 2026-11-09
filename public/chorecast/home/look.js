@@ -272,10 +272,16 @@ void main() {
   }
   vec4 w = modelMatrix * vec4(p, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w;
 }`;
+  // The water's look (anime, but real): the body in soft bands of colour from the sandy shallows to deep blue, light
+  // caustics wavering on the bed through the clear shallows, the sky's reflection with a fresnel edge, crisp sun
+  // glints in drawn shapes and twinkling glimmer. At the shore, the breakwater: drawn foam lines that roll in band
+  // after band and break on the sand, a bright frothy rim that wobbles along the waterline, and the wash.
   const SEA_F = `uniform float uT, uDeepAt, uFoamW, uScale, uA0, uA1, uClear, uBreak, uWave, uNight; uniform vec2 uFlow; uniform vec3 uShallow, uDeep, uSky, uSkyTop, uSun, uSunDir, uMud; varying vec3 vW; varying float vD, vCrest;
 float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
 float noise(vec2 p) { vec2 i = floor(p), f = fract(p), u = f * f * (3.0 - 2.0 * f); return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y); }
 vec2 ngrad(vec2 p) { const float e = 0.06; return vec2(noise(p + vec2(e, 0.0)) - noise(p - vec2(e, 0.0)), noise(p + vec2(0.0, e)) - noise(p - vec2(0.0, e))) / (2.0 * e); }
+// caustics: bright wavy net lines (two drifting layers of folded noise)
+float caustic(vec2 p, float t) { float a = abs(noise(p + vec2(t * 0.35, t * 0.2)) - 0.5), b = abs(noise(p * 1.37 - vec2(t * 0.28, -t * 0.31)) - 0.5); return smoothstep(0.07, 0.0, min(a, b)); }
 void main() {
   float t = uT; vec2 p = vW.xz * uScale - uFlow * t;
   vec2 g = ngrad(p + vec2(t * 0.31, t * 0.17)) * 0.55 + ngrad(p * 2.3 + vec2(-t * 0.27, t * 0.33)) * 0.3 + ngrad(p * 5.7 + vec2(t * 0.52, -t * 0.41)) * 0.15;
@@ -283,27 +289,40 @@ void main() {
   if (uWave > 0.0) { vec3 gn = normalize(cross(dFdx(vW), dFdy(vW))); if (gn.y < 0.0) gn = -gn; n = normalize(gn + vec3(n.x, 0.0, n.z)); }
   vec3 V = normalize(cameraPosition - vW);
   float fres = 0.03 + 0.97 * pow(1.0 - max(dot(n, V), 0.0), 5.0);
-  float d = max(vD, 0.0), deep = smoothstep(0.0, uDeepAt, d);
+  float d = max(vD, 0.0), deep0 = smoothstep(0.0, uDeepAt, d);
+  // soft bands of depth colour (cel steps, blended a little so they don't look cut out)
+  float deep = mix(deep0, floor(deep0 * 4.0 + 0.5) / 4.0, 0.55);
   vec3 body = mix(uShallow, uDeep, deep);
   body = mix(mix(uMud, body, 0.55 + 0.45 * uClear), body, smoothstep(0.0, uDeepAt * 0.45, d));
+  // caustics on the bed, seen through the shallows
+  float cs = caustic(vW.xz * 1.3 * uScale / 0.55, t) * (1.0 - smoothstep(uDeepAt * 0.1, uDeepAt * 0.6, d)) * smoothstep(0.0, uFoamW * 1.5, d) * uClear;
+  body += vec3(0.9, 1.0, 0.95) * cs * 0.22 * (1.0 - uNight * 0.7);
   vec3 R = reflect(-V, n); vec3 sky = mix(uSky, uSkyTop, clamp(R.y * 1.4, 0.0, 1.0));
   vec3 col = mix(body, sky, clamp(fres * 0.85 + 0.08, 0.0, 1.0));
   vec3 H = normalize(uSunDir + V); float nh = max(dot(n, H), 0.0);
-  col += uSun * (pow(nh, 300.0) * 2.4 + pow(nh, 40.0) * 0.06) * (1.0 - uNight * 0.7);
+  // the sun's glint as a drawn shape (a hard edge, a soft halo), and glimmer twinkling on the ripples
+  float glint = smoothstep(0.985, 0.992, nh) * 1.6 + pow(nh, 40.0) * 0.06;
+  col += uSun * glint * (1.0 - uNight * 0.7);
   float gl = noise(vW.xz * 3.2 + vec2(t * 1.7, -t * 1.1)) * noise(vW.xz * 2.4 - vec2(t * 1.3, t * 0.9));
-  gl = smoothstep(0.5, 0.78, gl) * 1.4 * (0.15 + 0.85 * pow(nh, 14.0)) * (1.0 - uNight * 0.6);
+  gl = step(0.62, gl) * 0.9 * (0.2 + 0.8 * pow(nh, 14.0)) * (1.0 - uNight * 0.6);
   col += uSun * gl;
-  float shore = 1.0 - smoothstep(0.0, uFoamW, d), lap = 0.5 + 0.5 * sin(t * 1.6 - d / max(uFoamW, 0.0001) * 3.0 + noise(vW.xz * 1.4) * 6.0);
-  col = mix(col, vec3(0.96, 0.98, 1.0), shore * lap * 0.6);
-  float churn = uBreak * smoothstep(0.55, 0.95, vCrest) * (1.0 - smoothstep(0.3, 2.0, d)) * (0.55 + 0.45 * noise(vW.xz * 1.8 + vec2(t * 2.0, t * 0.7)));
-  float wake = uBreak * (1.0 - smoothstep(0.0, 1.0, d)) * smoothstep(0.35, 0.8, noise(vW.xz * 0.9 + vec2(t * 0.9, -t * 0.6)));
-  float white = clamp(churn + wake * 0.5, 0.0, 1.0);
+  // the breakwater: foam lines rolling in toward the shore band after band, broken up, drawn crisp
+  float fw = max(uFoamW, 0.0001), zone = 1.0 - smoothstep(fw * 2.5, fw * 5.0, d), brk = noise(vW.xz * 2.2 + vec2(t * 0.4, 0.0));
+  float roll = fract(d / (fw * 1.6) + t * 0.32 + brk * 0.35);
+  float lines = smoothstep(0.80, 0.86, roll) * (1.0 - smoothstep(0.93, 0.99, roll)) * zone * smoothstep(0.25, 0.55, brk + 0.2);
+  // the rim: a bright frothy edge right at the waterline that wobbles in and out, a darker line of wet behind it
+  float edge = fw * (0.45 + 0.35 * sin(t * 1.6 + noise(vW.xz * 1.5) * 6.0));
+  float rim = 1.0 - smoothstep(edge * 0.7, edge, d), behind = smoothstep(edge, edge * 1.3, d) * (1.0 - smoothstep(edge * 1.3, edge * 2.0, d));
+  col = mix(col, col * 0.86, behind * 0.6);
+  // breaking waves: the crest churns white as it reaches the shallows, streaky foam left behind
+  float churn = uBreak * smoothstep(0.55, 0.95, vCrest) * (1.0 - smoothstep(0.3, 2.0, d)) * step(0.45, noise(vW.xz * 1.8 + vec2(t * 2.0, t * 0.7)));
+  float wake = uBreak * (1.0 - smoothstep(0.0, 1.0, d)) * step(0.62, noise(vW.xz * 0.9 + vec2(t * 0.9, -t * 0.6))) * 0.5;
+  float white = clamp(max(max(lines, rim), max(churn, wake)), 0.0, 1.0);
   col = mix(col, vec3(0.97, 0.99, 1.0), white);
-  float a = mix(uA0, uA1, deep);
+  float a = mix(uA0, uA1, deep0);
   a = max(a, fres * 0.75 * uClear);
-  a = max(a, shore * lap * 0.45);
   a = max(a, white);
-  a = max(a, min(1.0, gl + pow(nh, 300.0) * 2.0));
+  a = max(a, min(1.0, gl + glint));
   gl_FragColor = vec4(col, a * smoothstep(-0.02, 0.06, vD));
 }`;
   const SEA_U = { uNight: { value: 0 } };

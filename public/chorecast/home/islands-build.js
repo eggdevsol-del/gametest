@@ -39,7 +39,7 @@
     geo.setAttribute('color', new T.Float32BufferAttribute(cl, 3)); geo.computeVertexNormals();
     const id = IH.kit.nextId ? IH.kit.nextId() : 7, ext = new Float32Array(p.count * 2), pat = new Float32Array(p.count * 2); for (let i = 0; i < p.count; i++) { ext[i * 2] = id; pat[i * 2 + 1] = 1; }
     geo.setAttribute('aExt', new T.BufferAttribute(ext, 2)); geo.setAttribute('aPat', new T.BufferAttribute(pat, 2));
-    const m = new T.Mesh(geo, LK.BASE); m.receiveShadow = true; m.castShadow = true; m.userData.main = true; return m;
+    const m = new T.Mesh(geo, LK.BASE); m.receiveShadow = true; m.castShadow = true; m.userData.main = true; m.userData.bg = true; return m; // (the ground is scenery: painted, no ink lines)
   }
   // the island's sides under it (soil, then rock) and the rocks it floats on, as the homes and the village
   function sides(k, W, D, R, top = '#b7ad9b') {

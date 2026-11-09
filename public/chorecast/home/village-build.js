@@ -372,7 +372,8 @@
     // ---------- the pocket park: the pond and its bridge, cherry trees, benches, lamps, flower beds
     const pond = { x: 68, z: 45, rx: 7.5, rz: 5.2 };
     k.cyl(1, 0.3, pond.x, -0.25, pond.z, '#8f8a99', { s: [pond.rx + 0.6, 1, pond.rz + 0.6], n: 30 });
-    k.special(new T.CylinderGeometry(1, 1, 0.2, 48), 'water', k._m(pond.x, -0.02, pond.z, { s: [pond.rx + 0.3, 1, pond.rz + 0.3] }), { tint: '#6fc0d8' }); // (round, as the stones round it)
+    // the water: the islands' anime water (bands of depth, caustics, a breakwater frothing round the stones)
+    root.add(IH.look.seaSheet(pond.x - pond.rx - 0.5, pond.z - pond.rz - 0.5, pond.x + pond.rx + 0.5, pond.z + pond.rz + 0.5, 0.07, (x, z) => { const e = ((x - pond.x) / (pond.rx + 0.3)) ** 2 + ((z - pond.z) / (pond.rz + 0.3)) ** 2; return e < 1 ? 0.07 - 1.4 * (1 - e) : 0.3; }, { n: 3, foam: 0.3, deepAt: 1.0, shallow: '#8fe0d0', deep: '#2f7f9f', mud: '#8f8a99' }));
     for (let i = 0; i < 5; i++) k.cyl(0.55, 0.05, pond.x - 4 + i * 1.9, 0.08, pond.z + (i % 2 ? 2.4 : -2.6), '#5fae4a', { n: 10 }); // lily pads
     k.ball(0.2, pond.x - 2, 0.15, pond.z + 2.5, '#ffb7cf', { n: 7 });
     // the bridge: an arched timber bridge across the pond, east to west
