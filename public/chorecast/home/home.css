@@ -206,3 +206,11 @@ body.ih-open{overflow:hidden}
 .vg-fcode{flex:1;min-height:42px;border:2px solid #e3dcef;border-radius:12px;padding:0 10px;font:inherit;font-size:15px}
 .ih-sib{position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 76px);transform:translateX(-50%);background:#fff;border-radius:18px;padding:8px 8px 8px 14px;display:flex;align-items:center;gap:10px;font-weight:800;box-shadow:0 8px 24px rgba(60,40,90,.18);z-index:5}
 .ih-sib[hidden]{display:none}.ih-sib button{border:0;background:#ff7aa2;color:#fff;font:inherit;font-weight:900;border-radius:12px;min-height:40px;padding:0 14px;cursor:pointer}
+
+/* the islands: the phone's Travel app, the phone button while away */
+.ih-b1.ih-sm,.ih-b2.ih-sm{height:36px;padding:0 12px;font-size:14px;flex:none;white-space:nowrap}
+.ih-b2.ih-sm:disabled{opacity:.45}
+.ih-ph-tag{flex:none;font-size:12px;font-weight:800;color:var(--ink2);background:#f4eff8;border-radius:10px;padding:4px 8px;white-space:nowrap}
+.ih-ph-row.ih-here{outline:2px solid #7be08c;border-radius:14px}
+.vg-ph{font-size:20px}
+.vg-mine small{font-weight:600;color:var(--ink2)}

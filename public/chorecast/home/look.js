@@ -257,6 +257,74 @@
           gl_FragColor = vec4(c, uA + hi * 0.3 + top * 0.1); }`
     });
   }
+  // The sea, a lake, a river (the islands): Chorecast's water at the homes' scale. A sheet over the ground carries
+  // each point's depth, so the shallows show the bed through them, the deep turns blue, the shore laps white, swells
+  // roll in and break into churning foam that washes up the sand; ripples drift, glints and glimmer catch the sun.
+  // o: { shallow, deep, clear, deepAt, foam, scale, wave: { a, k, w }, brk, flow, mud }
+  const SEA_V = `attribute float depth; uniform float uT, uWave, uK, uW; varying vec3 vW; varying float vD, vCrest;
+void main() {
+  vD = depth; vec3 p = position; vCrest = 0.0;
+  if (uWave > 0.0) {
+    vec4 w0 = modelMatrix * vec4(p, 1.0);
+    float ph = vD * uK - uT * uW + (sin(w0.x * 0.13) + sin(w0.z * 0.11)) * 0.6;
+    float c = pow(0.5 + 0.5 * sin(ph), 3.0), grow = smoothstep(0.0, 0.3, vD) * (1.0 + 1.6 * (1.0 - smoothstep(0.4, 2.4, vD)));
+    p.y += uWave * c * grow; vCrest = c * grow;
+  }
+  vec4 w = modelMatrix * vec4(p, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w;
+}`;
+  const SEA_F = `uniform float uT, uDeepAt, uFoamW, uScale, uA0, uA1, uClear, uBreak, uWave, uNight; uniform vec2 uFlow; uniform vec3 uShallow, uDeep, uSky, uSkyTop, uSun, uSunDir, uMud; varying vec3 vW; varying float vD, vCrest;
+float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+float noise(vec2 p) { vec2 i = floor(p), f = fract(p), u = f * f * (3.0 - 2.0 * f); return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y); }
+vec2 ngrad(vec2 p) { const float e = 0.06; return vec2(noise(p + vec2(e, 0.0)) - noise(p - vec2(e, 0.0)), noise(p + vec2(0.0, e)) - noise(p - vec2(0.0, e))) / (2.0 * e); }
+void main() {
+  float t = uT; vec2 p = vW.xz * uScale - uFlow * t;
+  vec2 g = ngrad(p + vec2(t * 0.31, t * 0.17)) * 0.55 + ngrad(p * 2.3 + vec2(-t * 0.27, t * 0.33)) * 0.3 + ngrad(p * 5.7 + vec2(t * 0.52, -t * 0.41)) * 0.15;
+  vec3 n = normalize(vec3(-g.x * 0.075, 1.0, -g.y * 0.075));
+  if (uWave > 0.0) { vec3 gn = normalize(cross(dFdx(vW), dFdy(vW))); if (gn.y < 0.0) gn = -gn; n = normalize(gn + vec3(n.x, 0.0, n.z)); }
+  vec3 V = normalize(cameraPosition - vW);
+  float fres = 0.03 + 0.97 * pow(1.0 - max(dot(n, V), 0.0), 5.0);
+  float d = max(vD, 0.0), deep = smoothstep(0.0, uDeepAt, d);
+  vec3 body = mix(uShallow, uDeep, deep);
+  body = mix(mix(uMud, body, 0.55 + 0.45 * uClear), body, smoothstep(0.0, uDeepAt * 0.45, d));
+  vec3 R = reflect(-V, n); vec3 sky = mix(uSky, uSkyTop, clamp(R.y * 1.4, 0.0, 1.0));
+  vec3 col = mix(body, sky, clamp(fres * 0.85 + 0.08, 0.0, 1.0));
+  vec3 H = normalize(uSunDir + V); float nh = max(dot(n, H), 0.0);
+  col += uSun * (pow(nh, 300.0) * 2.4 + pow(nh, 40.0) * 0.06) * (1.0 - uNight * 0.7);
+  float gl = noise(vW.xz * 3.2 + vec2(t * 1.7, -t * 1.1)) * noise(vW.xz * 2.4 - vec2(t * 1.3, t * 0.9));
+  gl = smoothstep(0.5, 0.78, gl) * 1.4 * (0.15 + 0.85 * pow(nh, 14.0)) * (1.0 - uNight * 0.6);
+  col += uSun * gl;
+  float shore = 1.0 - smoothstep(0.0, uFoamW, d), lap = 0.5 + 0.5 * sin(t * 1.6 - d / max(uFoamW, 0.0001) * 3.0 + noise(vW.xz * 1.4) * 6.0);
+  col = mix(col, vec3(0.96, 0.98, 1.0), shore * lap * 0.6);
+  float churn = uBreak * smoothstep(0.55, 0.95, vCrest) * (1.0 - smoothstep(0.3, 2.0, d)) * (0.55 + 0.45 * noise(vW.xz * 1.8 + vec2(t * 2.0, t * 0.7)));
+  float wake = uBreak * (1.0 - smoothstep(0.0, 1.0, d)) * smoothstep(0.35, 0.8, noise(vW.xz * 0.9 + vec2(t * 0.9, -t * 0.6)));
+  float white = clamp(churn + wake * 0.5, 0.0, 1.0);
+  col = mix(col, vec3(0.97, 0.99, 1.0), white);
+  float a = mix(uA0, uA1, deep);
+  a = max(a, fres * 0.75 * uClear);
+  a = max(a, shore * lap * 0.45);
+  a = max(a, white);
+  a = max(a, min(1.0, gl + pow(nh, 300.0) * 2.0));
+  gl_FragColor = vec4(col, a * smoothstep(-0.02, 0.06, vD));
+}`;
+  const SEA_U = { uNight: { value: 0 } };
+  function seaMat(o = {}) {
+    const wv = o.wave || {};
+    const U = Object.assign({ uWave: { value: wv.a || 0 }, uK: { value: wv.k || 2.4 }, uW: { value: wv.w || 1.5 }, uBreak: { value: o.brk || 0 }, uDeepAt: { value: o.deepAt || 2.2 }, uFoamW: { value: o.foam || 0.3 }, uScale: { value: o.scale || 0.55 }, uFlow: { value: new T.Vector2(...(o.flow || [0, 0])) },
+      uA0: { value: o.clear === false ? 0.62 : 0.18 }, uA1: { value: o.clear === false ? 0.95 : 0.85 }, uClear: { value: o.clear === false ? 0 : 1 },
+      uShallow: { value: col(o.shallow || '#7fe3e0') }, uDeep: { value: col(o.deep || '#1a6fb8') }, uMud: { value: col(o.mud || '#c9b48a') }, uSky: { value: col('#bfe3ff') }, uSkyTop: { value: col('#5aa8ff') }, uSun: { value: col('#fff3d6') }, uSunDir: { value: new T.Vector3(-0.3, 0.8, 1).normalize() } }, WATER_U, SEA_U);
+    const m = new T.ShaderMaterial({ uniforms: U, vertexShader: SEA_V, fragmentShader: SEA_F, transparent: true, depthWrite: false, side: T.DoubleSide, extensions: { derivatives: true } });
+    // (its colour blends over the ground; its alpha only adds, so the ground under it stays solid for the outlines and the sky)
+    m.blending = T.CustomBlending; m.blendSrc = T.SrcAlphaFactor; m.blendDst = T.OneMinusSrcAlphaFactor; m.blendSrcAlpha = T.OneFactor; m.blendDstAlpha = T.OneFactor;
+    m.userData.U = U; return m;
+  }
+  // a sheet of water over a rectangle at height y, over ground at h(x, z) (world x, z); n: grid steps per unit
+  function seaSheet(x0, z0, x1, z1, y, h, o = {}) {
+    const n = o.n || 1, nx = Math.max(2, Math.round((x1 - x0) * n)), nz = Math.max(2, Math.round((z1 - z0) * n));
+    const geo = new T.PlaneGeometry(x1 - x0, z1 - z0, nx, nz).rotateX(-Math.PI / 2), p = geo.attributes.position, dep = [];
+    for (let i = 0; i < p.count; i++) { const x = p.getX(i) + (x0 + x1) / 2, z = p.getZ(i) + (z0 + z1) / 2; p.setXYZ(i, x, y, z); dep.push(y - h(x, z)); }
+    geo.setAttribute('depth', new T.Float32BufferAttribute(dep, 1));
+    const m = new T.Mesh(geo, seaMat(o)); m.layers.set(1); m.renderOrder = 2; m.userData.special = true; m.userData.bg = true; return m;
+  }
   // Sunbeams through windows and lamp halos: added light, drawn in the colour pass only (layer 1, no ink).
   const BEAM_U = { uK: { value: 1 } };
   function beamMat(tint = '#fff4d8', a = 0.22) {
@@ -543,5 +611,5 @@
     };
   }
 
-  IH.look = { PHASES, PAL, setPhase, animeMat, atlasMat, cutMat, CUT_U, BASE, BASE2, glassMat, waterMat, beamMat, haloMat, WATER_U, BEAM_U, HALO_U, NORMAL_MAT, Pipeline, Beat, FRAMES };
+  IH.look = { PHASES, PAL, setPhase, animeMat, atlasMat, cutMat, CUT_U, BASE, BASE2, glassMat, waterMat, seaMat, seaSheet, SEA_U, beamMat, haloMat, WATER_U, BEAM_U, HALO_U, NORMAL_MAT, Pipeline, Beat, FRAMES };
 })();

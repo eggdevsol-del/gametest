@@ -2343,9 +2343,28 @@
   function sibNote(p) {
     const old = $('.ih-sib', O.root); if (old) old.remove();
     const el = document.createElement('div'); el.className = 'ih-sib'; el.setAttribute('role', 'status');
-    el.innerHTML = `<span>${esc(p.avatar)} <b>${esc(p.name)}</b> is in the village 👋</span><button type="button">Go</button>`;
-    el.querySelector('button').addEventListener('click', () => { el.remove(); goVillage(); });
+    const isl = IH.islandsBuild && IH.islandsBuild.LIST.find(i => i.id === p.s.pl), where = isl ? (islandsOwned()[isl.id] ? `at the ${isl.name.toLowerCase()} ${isl.emoji}` : null) : 'in the village 👋'; if (!where) return;
+    el.innerHTML = `<span>${esc(p.avatar)} <b>${esc(p.name)}</b> is ${where}</span><button type="button">Go</button>`;
+    el.querySelector('button').addEventListener('click', () => { el.remove(); travelTo(isl ? isl.id : 'village'); });
     O.root.appendChild(el); sound('pop'); setTimeout(() => el.remove(), 12000);
+  }
+  // the phone's Travel app: home, the village (through the gate, from home), an island (straight there)
+  const islandsOwned = () => O.st.islands || {};
+  function travelTo(where) {
+    if (where === 'home') { if (O.away && IH.village) IH.village.leave(); return; }
+    if (O.away) { if (IH.village) IH.village.goto(where); return; }
+    if (where === 'village') return goVillage();
+    if (!islandsOwned()[where]) return;
+    const G = O.home.gate; if (G) { G.set(1); setTimeout(() => travel(where), 300); } else travel(where);
+  }
+  // what farms and the sea give: into the fridge (eggs, milk, fish) or the goods shelf (wool); prices as Chorecast's
+  const PRODUCE = { egg: { name: 'Eggs', one: 'an egg', e: '🥚', price: 14 }, milk: { name: 'Milk', one: 'a bottle of milk', e: '🥛', price: 18 }, wool: { name: 'Wool', one: 'a bag of wool', e: '🧶', price: 45, goods: true }, fish: { name: 'Fish', one: 'a fish', e: '🐟', price: 30 } };
+  const goods = () => (O.st.goods = O.st.goods || {});
+  function farmState() { const f = (O.st.farm = O.st.farm || { animals: { hen: 3, goat: 1 }, got: {}, fed: 0 }); f.got = f.got || {}; return f; }
+  function produceSheet() {
+    const f = food(), g = goods(), L = Object.entries(PRODUCE).filter(([id, P]) => (P.goods ? g[id] : f[id]) > 0);
+    sheet(`<div class="ih-sh-h"><h3>Sell your produce</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div><p class="ih-ph-sub">From your farm and the sea. The grocer pays a fair price for each.</p>
+      <div class="ih-ph-list">${L.length ? L.map(([id, P]) => `<div class="ih-ph-row"><span class="ih-ph-e">${P.e}</span><span><b>${P.name}</b><small>You have ${P.goods ? g[id] : f[id]}${P.goods ? '' : ' (in your fridge)'}</small></span><button class="ih-b1 ih-sm" data-a="pSell" data-k="${id}">✨ ${P.price}</button></div>`).join('') : '<p class="ih-ph-sub">Nothing to sell yet. Collect eggs, milk and wool on your farm, or catch fish at the beach.</p>'}</div>`);
   }
   function goVillage() {
     const G = O.home.gate; if (!G) return;
@@ -2389,7 +2408,18 @@
     buyFood(id) { const x = IH.kitchen && IH.kitchen.FOOD[id], w = wallet(); if (!x) return false; if (w.left < x.xp) { toast(`You need ✨ ${x.xp} XP for that.`); return false; } O.st.spent += x.xp; const f = food(); f[id] = (f[id] || 0) + 1; save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('village.food', { id, xp: x.xp }); return true; },
     // a treat at the café: XP, and what it gives the character (food, fun; friends too with a brother or sister)
     treat(name, xp, gives) { const w = wallet(); if (w.left < xp) { toast(`You need ✨ ${xp} XP for that.`); return false; } O.st.spent += xp; const k = insts.get(KID); if (k && k.needs && gives) for (const n in gives) if (k.needs[n] != null) k.needs[n] = Math.min(100, k.needs[n] + gives[n]); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('village.treat', { name, xp }); return true; },
-    counter: kind => counterSheet(kind),
+    counter: kind => (kind === 'produce' ? produceSheet() : counterSheet(kind)),
+    // the islands (islands-build.js, village.js): the farm, the fridge and the goods shelf, tools, collections, needs
+    farm: () => farmState(), farmSave: () => save(),
+    addFood(id, n = 1) { const f = food(); f[id] = (f[id] || 0) + n; save(); },
+    addGoods(id, n = 1) { const g = goods(); g[id] = (g[id] || 0) + n; save(); },
+    pay(xp, what) { const w = wallet(); if (w.left < xp) { toast(`You need ✨ ${xp} XP for ${what || 'that'}.`); return false; } O.st.spent += xp; save(); sound('buy'); ui(true); return true; },
+    hasTool: t => !!(O.st.tools || {})[t], giveTool(t) { (O.st.tools = O.st.tools || {})[t] = Date.now(); save(); },
+    book(kind, key) { const b = ((O.st.books = O.st.books || {})[kind] = O.st.books[kind] || {}); const isNew = !b[key]; b[key] = (b[key] || 0) + 1; save(); return { isNew, count: Object.keys(b).length }; },
+    daily(key, max) { const day = Math.floor(Date.now() / 864e5), d = (O.st.daily = O.st.daily && O.st.daily.day === day ? O.st.daily : { day, n: {} }); if ((d.n[key] || 0) >= max) return false; d.n[key] = (d.n[key] || 0) + 1; save(); return true; },
+    dailyLeft(key, max) { const day = Math.floor(Date.now() / 864e5), d = O.st.daily && O.st.daily.day === day ? O.st.daily : { n: {} }; return max - (d.n[key] || 0); },
+    relax(gives) { const k = insts.get(KID); if (k && k.needs && gives) for (const n in gives) if (k.needs[n] != null) k.needs[n] = Math.min(100, k.needs[n] + gives[n]); save(); },
+    owned: () => islandsOwned(),
     owns: t => (O.st.owned[t] || 0) > 0, jobs: () => VJOBS.map(j => ({ ...j, ...vjobState(j) })), parkGrowth: () => parkGrowth(),
     shift(id) { if (shiftsLeft(id) <= 0) return false; const day = Math.floor(Date.now() / 864e5); if (!O.st.vjobs || O.st.vjobs.day !== day) O.st.vjobs = { day, n: {} }; O.st.vjobs.n[id] = (O.st.vjobs.n[id] || 0) + 1; save(); return true; },
     earn(xp, id) { xp = Math.round(xp); if (xp <= 0) return; O.st.jobPay = (O.st.jobPay || 0) + xp; save(); ui(true); sound('buy'); if (O.opts.track) O.opts.track('village.job', { id, xp }); },
@@ -2416,13 +2446,13 @@
   }
   // Off to the village (village.js): the home stops (its drawing, its taps) and the village draws through the same
   // canvas and pipeline. Back home: in through the gate, which swings shut behind.
-  function travel() {
+  function travel(where = 'village') {
     const G = O && O.home && O.home.gate; if (!G) return;
     if (!IH.village) { toast('The village is still being built.'); G.set(0); return; }
     const env = IH.phys ? IH.phys.env : null, k = insts.get(KID);
     O.away = true; guitarMusic(false); $('.ih-acts', O.root).hidden = true; O.root.classList.add('ih-away'); if (IH.phys) IH.phys.env = null; // (the village has its own ground; nothing measures against the home's)
     if (k) k.group.visible = false;
-    const ok = IH.village.open({ R, pipe, root: O.root, cv: O.cv, dims: () => [O.w, O.h], kid: O.kid, phase: O.st.look.phase, frames: O.st.look.frames, sound, ic, shop: SHOP, closeSheet, onHome: () => {
+    const ok = IH.village.open({ where, phone: app => phone(app), R, pipe, root: O.root, cv: O.cv, dims: () => [O.w, O.h], kid: O.kid, phase: O.st.look.phase, frames: O.st.look.frames, sound, ic, shop: SHOP, closeSheet, onHome: () => {
       if (!O) return; O.away = false; O.root.classList.remove('ih-away');
       if (IH.phys) { IH.phys.env = env; IH.phys.forget(); }
       const d = O.home.def; LK.PAL.uHouse.value.set(-0.4, -0.4, d.w + 0.4, d.d + 0.4); applyLook(); lightFor(O.st.look.phase);
@@ -2576,7 +2606,7 @@
   // ---------- the phone: the kid's character's own smartphone, where the home's shopping happens. Apps: Shop (things
   // for the home), Homes, Groceries (food for the fridge and pantry), Recipes (what to cook next) and Market (sell
   // things you're not using back for XP). Everything is in XP, never money.
-  const APPS = [['shop', '🛋️', 'Shop'], ['homes', '🏠', 'Homes'], ['groceries', '🛒', 'Groceries'], ['recipes', '🍳', 'Recipes'], ['market', '🏷️', 'Market'], ['jobs', '💼', 'Employment']];
+  const APPS = [['shop', '🛋️', 'Shop'], ['homes', '🏠', 'Homes'], ['groceries', '🛒', 'Groceries'], ['recipes', '🍳', 'Recipes'], ['market', '🏷️', 'Market'], ['jobs', '💼', 'Employment'], ['travel', '🧭', 'Travel to']];
   const sellValue = (d, used) => Math.max(10, Math.round(d.xp * (used ? 0.3 : 0.5) / 10) * 10);
   // Second-hand: a fresh handful of used things every day (other families selling up), cheaper than new by how
   // well loved they are. Each comes in the colour and finish its last owner picked.
@@ -2619,6 +2649,15 @@
         inner += villageJobsHtml();
       }
       body = `${back}<h3>Employment</h3>${tabs}${inner}`;
+    }
+    if (app === 'travel') {
+      const L = IH.islandsBuild ? IH.islandsBuild.LIST : [], own = islandsOwned(), here = O.away ? (IH.village && IH.village.where()) : 'home';
+      const row = (id, e, name, sub, btn) => `<div class="ih-ph-row${here === id ? ' ih-here' : ''}"><span class="ih-ph-e">${e}</span><span><b>${esc(name)}</b><small>${sub}</small></span>${btn}</div>`;
+      const go = id => here === id ? '<small class="ih-ph-tag">You’re here</small>' : `<button class="ih-b1 ih-sm" data-a="goTo" data-w="${id}">Go</button>`;
+      body = `${back}<h3>Travel to</h3><p class="ih-ph-sub">Your home, the village and your islands. Vacation islands are for playing; on utility islands you make things to cook or sell.</p><div class="ih-ph-list">
+        ${row('home', '🏠', O.home && O.home.def ? O.home.def.name : 'Home', 'Your home', go('home'))}${row('village', '🏮', 'Hoshi Street', 'The village: shops, café, market', go('village'))}
+        ${L.map(i => { const has = own[i.id], kind = i.kind === 'vacation' ? '🌴 Vacation' : '🛠️ Utility', needs = i.needs && !own[i.needs];
+          return row(i.id, i.emoji, i.name, `${kind} · ${esc(i.about)}`, has ? go(i.id) : !i.built ? '<small class="ih-ph-tag">Coming soon</small>' : needs ? `<small class="ih-ph-tag">Needs the ${esc((L.find(q => q.id === i.needs) || {}).name || i.needs)}</small>` : `<button class="ih-b2 ih-sm" data-a="isBuy" data-w="${i.id}" ${w.left < i.xp ? 'disabled' : ''}>✨ ${nf(i.xp)}</button>`); }).join('')}</div>`;
     }
     sheet(`<div class="ih-phone"><div class="ih-ph-top"><span>${new Date().toLocaleTimeString('en-NZ', { hour: 'numeric', minute: '2-digit' })}</span><span>✨ ${nf(w.left)} XP</span></div><div class="ih-ph-screen">${body}</div><button class="ih-ph-home" data-a="${app === 'home' ? 'sheetX' : 'phone'}" aria-label="${app === 'home' ? 'Close the phone' : 'Home screen'}"></button></div>`, 'phone');
     O.phoneApp = app;
@@ -2737,6 +2776,9 @@
     if (a === 'decorate') { actsClose(); if (O.held) placeHeld(); if (O.held) return; O.editing = !O.editing; if (O.editing && !O.cat) O.cat = DEFS.some(d => spare(d.t) > 0) ? 'mine' : 'furn'; sound(O.editing ? 'lift' : 'place'); return ui(); }
     if (a === 'cat') { O.cat = el.dataset.c; return ui(); }
     if (a === 'phone') { sound('pop'); return phone('home'); }
+    if (a === 'goTo') { closeSheet(); return travelTo(el.dataset.w); }
+    if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); st.spent += i.xp; (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); return phone('travel'); }
+    if (a === 'pSell') { const id = el.dataset.k, P = PRODUCE[id]; if (!P) return; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return; if (P.goods) g[id] -= 1; else f[id] -= 1; st.spent = (st.spent || 0) - P.price; save(); sound('buy'); ui(true); toast(`Sold ${P.one} for ✨ ${P.price} XP.`); return produceSheet(); }
     if (a === 'app') { const ap = el.dataset.app; O.pick = null; if (ap === 'shop') { closeSheet(); if (!O.editing) act('decorate'); return; } if (ap === 'homes') { closeSheet(); return homesSheet(); } return phone(ap); }
     if (a === 'gbuy') { const id = el.dataset.f, x = IH.kitchen && IH.kitchen.FOOD[id], w = wallet(); if (!x || w.left < x.xp) return; st.spent += x.xp; const f = food(); f[id] = (f[id] || 0) + 1; save(); sound('buy'); if (O.opts.track) O.opts.track('home.food', { food: id, xp: x.xp }); return phone('groceries'); }
     if (a === 'recipe') { st.recipe = st.recipe === el.dataset.r ? null : el.dataset.r; save(); sound('pop'); return phone('recipes'); }
