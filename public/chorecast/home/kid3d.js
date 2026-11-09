@@ -70,7 +70,7 @@
       if (st === 'play') { for (const [s, ph] of [['L', 0], ['R', 2]]) { set('uparm.' + s, -1.0); set('forearm.' + s, -0.7 + Math.sin(t * 9 + ph) * 0.12); set('hand.' + s, 0.2 + Math.sin(t * 13 + ph) * 0.2); } set('head', 0.15, Math.sin(t * 1.5) * 0.15, Math.sin(t * 3) * 0.06); }
       else { for (const s of ['L', 'R']) { set('uparm.' + s, -0.35); set('forearm.' + s, -0.8); } set('head', 0.05, inst.look * 0.6); set('chest', Math.sin(t * 2.4) * 0.02); }
       if (br === 'swing') for (const [s, ph] of [['L', 0], ['R', Math.PI]]) if (P['shin.' + s][0] > 1.0) set('shin.' + s, P['shin.' + s][0] - 0.25 + Math.sin(u * 4 + ph) * 0.35); // only legs that hang free
-      if (br === 'stretch') { const k = ease(0.2, 1.0, u) - ease(2.2, 3.0, u); for (const s of ['L', 'R']) { set('uparm.' + s, -0.35 - k * 2.6, 0, (s === 'L' ? 1 : -1) * k * 0.3); set('forearm.' + s, -0.8 + k * 0.6); } set('head', 0.05 - k * 0.35); set('chest', -k * 0.12); }
+      if (br === 'stretch') { const k = ease(0.2, 1.0, u) - ease(2.2, 3.0, u); for (const s of ['L', 'R']) { set('uparm.' + s, -0.35 - k * 2.6, 0, (s === 'L' ? 1 : -1) * k * 0.3); set('forearm.' + s, -0.8 + k * 0.6); } set('head', 0.05 - k * 0.12); set('chest', -k * 0.12); }
       if (br === 'eat') { const bite = Math.max(0, Math.sin(u * 1.6)); set('uparm.R', -0.75 - bite * 0.35); set('forearm.R', -1.2 - bite * 0.7); set('uparm.L', -0.5); set('forearm.L', -1.0); set('head', 0.25 - bite * 0.15, 0, Math.sin(u * 9) * 0.03 * bite); } // the plate in the lap, a forkful now and then
       // more ways to sit on a sofa or a comfy chair
       if (br === 'relax') { set('chest', -0.22); set('head', -0.1, inst.look * 0.4); for (const s of ['L', 'R']) { set('uparm.' + s, -2.5, 0, (s === 'L' ? 1 : -1) * 0.55); set('forearm.' + s, -2.0); } } // hands behind the head
@@ -89,7 +89,7 @@
       let d = 0;
       if (st === 'toys') { for (const s of ['L', 'R']) { set('thigh.' + s, -1.35); set('shin.' + s, 2.0); set('foot.' + s, -0.5); } d = 0.42; }
       if (st === 'watch') { for (const s of ['L', 'R']) { set('uparm.' + s, -0.4); set('forearm.' + s, -0.9); } set('head', 0.05 + Math.sin(t * 0.6) * 0.03, 0, Math.sin(t * 0.9) * 0.05); }
-      if (st === 'watch' && br === 'laugh') { const sh = Math.sin(u * 16) * 0.06 * (1 - ease(1.8, 2.6, u)); set('chest', -0.15 + sh); set('head', -0.3 + sh, 0, 0); set('uparm.L', -0.9); set('forearm.L', -1.6); }
+      if (st === 'watch' && br === 'laugh') { const sh = Math.sin(u * 16) * 0.06 * (1 - ease(1.8, 2.6, u)); set('chest', -0.15 + sh); set('head', -0.05 + sh, 0, 0); set('uparm.L', -0.9); set('forearm.L', -1.6); }
       if (st === 'watch' && br === 'lean') { set('chest', 0.3); set('head', -0.1); for (const s of ['L', 'R']) { set('uparm.' + s, -0.7); set('forearm.' + s, -1.4); } }
       if (st === 'strum') { set('uparm.L', -0.9); set('forearm.L', -1.3); set('uparm.R', -0.5); set('forearm.R', -1.1 + Math.sin(t * 10) * 0.35); set('head', 0.2, 0, Math.sin(t * 4) * 0.12); }
       if (st === 'toys') { set('uparm.L', -0.9 + Math.sin(t * 5) * 0.3); set('uparm.R', -0.9 + Math.sin(t * 5 + 2) * 0.3); set('forearm.L', -0.6); set('forearm.R', -0.6); set('head', 0.35, Math.sin(t * 2) * 0.2); }
@@ -232,9 +232,9 @@
     } else if (st === 'happy') {
       // a wave: the right arm up, the hand waving at the elbow
       set('uparm.R', 0, 0, 2.75); set('forearm.R', 0, 0, 0.45 + Math.sin(t * 14) * 0.4); set('uparm.L', -0.15); // the arm rises out to the side, the hand waves
-      set('head', -0.12, 0, Math.sin(t * 7) * 0.12); TAIL.forEach((n, i) => set(n, 0.2, 0, Math.sin(t * 12 - i * 0.7) * 0.4));
+      set('head', 0.03, 0, Math.sin(t * 7) * 0.12); TAIL.forEach((n, i) => set(n, 0.2, 0, Math.sin(t * 12 - i * 0.7) * 0.4));
     } else {
-      set('chest', Math.sin(t * 2.4) * 0.025); set('head', st === 'look' ? -0.22 : -0.02, inst.look, Math.sin(t * 0.8) * 0.05); // (looking at something: eyes down to it, never up at the lights; a + turn tips the head back)
+      set('chest', Math.sin(t * 2.4) * 0.025); set('head', st === 'look' ? 0.2 : 0.03, inst.look, Math.sin(t * 0.8) * 0.05); // (looking at something: eyes down to it, never up at the lights; a - turn tips the head back, so it never goes up at the ceiling lights)
       for (const s of ['L', 'R']) set('uparm.' + s, Math.sin(t * 1.1 + (s === 'L' ? 0 : 1)) * 0.04);
       TAIL.forEach((n, i) => set(n, 0.05, 0, Math.sin(t * 1.4 - i * 0.6) * 0.25));
     }
@@ -288,7 +288,7 @@
     plantFeet(inst, st);
     reachArms(inst, t);
     // the face follows what it's doing (the app sets the focus each beat: the TV, the plant, the pet, the way ahead)
-    IH.rig3d.look(inst, /^(sleep|liebed)/.test(st) ? null : inst.focus, dt);
+    IH.rig3d.look(inst, /^(sleep|liebed)/.test(st) ? null : inst.focus, dt, 1.1, 0.06); // (never tips up to the ceiling lights)
     if (inst.cols && IH.phys && !tg.lie) {
       inst.group.updateMatrixWorld(true);
       const hd = IH.rig3d.capsules(inst, inst.cols).filter(k => k.bone === 'head' || k.bone === 'neck').reduce((m, k) => Math.max(m, IH.phys.penAll(k.a.x, k.a.y, k.a.z, k.r * 0.85, inst.bodies)), 0);

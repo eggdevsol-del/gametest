@@ -415,7 +415,7 @@
     for (const [b, q] of saved) b.quaternion.copy(q); inst.body.position.copy(bp); inst.body.rotation.copy(br); inst.group.updateMatrixWorld(true);
     return inst.faceLocal;
   }
-  function look(inst, at, dt, max = 1.1) {
+  function look(inst, at, dt, max = 1.1, upMax = 0.42) {
     const head = inst.B && inst.B.head; if (!head) return;
     const L = inst.lk || (inst.lk = { p: null, w: 0 }), k = Math.min(1, dt * 6);
     if (at) { if (!L.p || !isFinite(L.p.x)) L.p = at.clone(); else L.p.lerp(at, k); }
@@ -426,7 +426,7 @@
       head.getWorldQuaternion(QA); head.getWorldPosition(VH);
       VF.copy(f).applyQuaternion(QA); VD.copy(L.p).sub(VH); if (VD.lengthSq() < 1e-6) return; VD.normalize();
       // a natural range: no more than about 30 degrees down or 25 up (a thing at its feet: the eyes do the rest)
-      const el = Math.max(-0.5, Math.min(0.42, Math.asin(Math.max(-1, Math.min(1, VD.y))))), hz = Math.hypot(VD.x, VD.z) || 1; VD.set(VD.x / hz * Math.cos(el), Math.sin(el), VD.z / hz * Math.cos(el));
+      const el = Math.max(-0.5, Math.min(upMax, Math.asin(Math.max(-1, Math.min(1, VD.y))))), hz = Math.hypot(VD.x, VD.z) || 1; VD.set(VD.x / hz * Math.cos(el), Math.sin(el), VD.z / hz * Math.cos(el));
       QB.setFromUnitVectors(VF, VD);
       const ang = 2 * Math.acos(Math.min(1, Math.abs(QB.w))), amt = Math.min(1, ang > 1e-4 ? (max * share) / ang : 1) * share * L.w;
       QB.copy(QI.identity().slerp(QB, amt));
