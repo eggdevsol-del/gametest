@@ -265,7 +265,7 @@
     const inR = (x0, z0, x1, z1, r) => x0 >= r[0] - 1e-6 && z0 >= r[1] - 1e-6 && x1 <= r[2] + 1e-6 && z1 <= r[3] + 1e-6, hit = (x0, z0, x1, z1, r) => x0 < r[2] && x1 > r[0] && z0 < r[3] && z1 > r[1], P = B.pond, cells = [];
     for (let i = Math.floor(B.bounds.x0); i < B.bounds.x1; i++) for (let j = Math.floor(B.bounds.z0); j < B.bounds.z1; j++) {
       if (B.walk && !B.walk(i + 0.5, j + 0.5)) continue;
-      if (!B.lawns.some(r => inR(i, j, i + 1, j + 1, r)) || B.paths.some(r => hit(i, j, i + 1, j + 1, r)) || B.solids.some(r => hit(i + 0.2, j + 0.2, i + 0.8, j + 0.8, r))) continue;
+      if (!B.lawns.some(r => inR(i, j, i + 1, j + 1, r)) || B.paths.some(r => hit(i, j, i + 1, j + 1, r))) continue; // (under and around things too: capBy, below)
       if (B.bare && B.bare(i + 0.5, j + 0.5)) continue; // (sand, a hay meadow, under a glasshouse...)
       if (P) { const ex = (i + 0.5 - P.x) / (P.rx + 1.0), ez = (j + 0.5 - P.z) / (P.rz + 1.0); if (ex * ex + ez * ez < 1) continue; }
       cells.push({ x: i, z: j });
@@ -273,6 +273,8 @@
     const L = K.build({ cells, x0: B.bounds.x0, z0: B.bounds.z0, W: B.bounds.x1 - B.bounds.x0, D: B.bounds.z1 - B.bounds.z0, seed: 4242, phase: V.phase, per: e => e ? 30 : 4, ground: false });
     L.position.y = 0.07; B.root.add(L);
     K.grow(L, B.growth != null ? B.growth : V.stage.shop ? V.stage.shop.parkGrowth() : 0.6);
+    // grass up to every thing's edge and under it, no higher than its underside (the home's rule); not under what moves
+    if (K.capBy) K.capBy(L, B.root, [...(B.animals || []).map(a => a.group), ...Object.keys(B.vehicles || {}).map(id => (B.models || {})[id])]);
     return L;
   }
   const PARK = [54.4, 28.4, 80.6, 59.6];

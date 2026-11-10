@@ -2476,6 +2476,54 @@
     tick(L, t, zoom) { const U = L.userData.U; U.uTime.value = t; if (U.uDens) U.uDens.value = clamp(22 * zoom, 22, 60); },
     cutStrip: (L, x, z, yaw) => cutStrip(x, z, yaw, L), cutAt: (L, x, z, r) => cutAt(x, z, r, L),
     reset(L) { const M = L.userData.map; if (M) { for (let i = 0; i < M.data.length; i += 4) M.data[i] = 0; M.tex.needsUpdate = true; } for (const m of L.userData.parts) { m.userData.cut.fill(0); m.geometry.attributes.aCut.needsUpdate = true; } },
+    // Grass under and around things, the home's rule for the village, the farm and its land blocks: the lawn covers
+    // every tile, and each spot of it grows only up to the underside of whatever's above it (nothing under a trough
+    // standing on the ground; up to the seat under a bench; all the way up to a thing's very edge). Measured from the
+    // models themselves with rays: one up from the grass (the first face it meets, if it faces down, is an underside;
+    // facing up, the spot is inside something) and, if that meets nothing, one down from above (anything there that
+    // stands up off the ground covers the spot). Only spots under a model's footprint are measured, a slice per frame;
+    // until a spot's measured, nothing grows under the model's box. skip: groups that move (animals, vehicles).
+    capBy(L, root, skip = []) {
+      const M = L.userData.map; if (!M) return; const { data, x0, z0, mw, mh } = M, base = L.position.y + 0.006;
+      root.updateMatrixWorld(true); const inv = new T.Matrix4().copy(root.matrixWorld).invert(), no = new Set(skip.filter(Boolean)), list = [];
+      const out = o => { for (let q = o; q && q !== root; q = q.parent) if (no.has(q) || !q.visible || q === L) return true; return false; };
+      const bx = new T.Box3(), mx = new T.Matrix4(), tiles = new Map(), add = (b, m) => {
+        if (b.max.y < base + 0.015 || b.min.y > base + 1.2 || (b.max.x - b.min.x) * (b.max.z - b.min.z) > 100) return; // (flat on the ground, high overhead, or the ground itself)
+        for (let i = Math.floor(b.min.x); i <= Math.floor(b.max.x); i++) for (let j = Math.floor(b.min.z); j <= Math.floor(b.max.z); j++) { const k = i * 4096 + j; if (!tiles.has(k)) tiles.set(k, new Set()); tiles.get(k).add(m); }
+        list.push(b.clone());
+      };
+      root.traverse(m => {
+        if (!m.isMesh || m.userData.bg || out(m)) return; const g = m.geometry; if (!g.boundingBox) g.computeBoundingBox();
+        if (m.isInstancedMesh) { for (let n = 0; n < m.count; n++) { m.getMatrixAt(n, mx); add(bx.copy(g.boundingBox).applyMatrix4(mx.premultiply(m.matrixWorld).premultiply(inv)), m); } }
+        else add(bx.copy(g.boundingBox).applyMatrix4(mx.copy(m.matrixWorld).premultiply(inv)), m);
+      });
+      // the spots to measure (lawn under a model's box), bare until measured
+      const todo = [];
+      for (const b of list) for (let px = Math.max(0, Math.floor((b.min.x - x0) * MAP_RES)); px <= Math.min(mw - 1, Math.floor((b.max.x - x0) * MAP_RES)); px++) for (let pz = Math.max(0, Math.floor((b.min.z - z0) * MAP_RES)); pz <= Math.min(mh - 1, Math.floor((b.max.z - z0) * MAP_RES)); pz++) {
+        const o = (pz * mw + px) * 4; if (!data[o + 2] || data[o + 3] === 7) continue; data[o + 3] = 7; data[o + 1] = 0; todo.push(px, pz);
+      }
+      M.tex.needsUpdate = true;
+      const ray = new T.Raycaster(), up = new T.Vector3(0, 1, 0), down = new T.Vector3(0, -1, 0), p = new T.Vector3(), nrm = new T.Vector3(), job = L.userData.capJob = {};
+      const capAt = (x, z) => {
+        const ms = tiles.get(Math.floor(x) * 4096 + Math.floor(z)); if (!ms) return 9; const arr = [...ms];
+        ray.set(root.localToWorld(p.set(x, base + 0.004, z)), up); ray.far = 1.3; const h = ray.intersectObjects(arr, false)[0];
+        if (h) { nrm.copy(h.face.normal).transformDirection(h.object.matrixWorld); return nrm.y < 0 ? root.worldToLocal(h.point).y - base : 0; }
+        ray.set(root.localToWorld(p.set(x, base + 3, z)), down); ray.far = 3; const d = ray.intersectObjects(arr, false)[0];
+        return d && root.worldToLocal(d.point.clone()).y > base + 0.015 ? 0 : 9;
+      };
+      let k = 0;
+      const step = () => {
+        if (L.userData.capJob !== job || !L.parent) return; const t0 = performance.now();
+        for (; k < todo.length && performance.now() - t0 < 6; k += 2) { const px = todo[k], pz = todo[k + 1], c = capAt(x0 + (px + 0.5) / MAP_RES, z0 + (pz + 0.5) / MAP_RES); data[(pz * mw + px) * 4 + 1] = c >= 1.18 ? 255 : Math.max(0, Math.round((c + 0.03) / 1.2 * 254)); }
+        M.tex.needsUpdate = true;
+        if (k < todo.length) return requestAnimationFrame(step);
+        // the blades (the scatter over the shells) from the same map
+        const { spots } = L.userData, hide = L.geometry.attributes.aHide;
+        for (let n = 0; n < spots.length; n++) { const px = Math.floor((spots[n][0] - x0) * MAP_RES), pz = Math.floor((spots[n][1] - z0) * MAP_RES); if (px < 0 || pz < 0 || px >= mw || pz >= mh) continue; const g = data[(pz * mw + px) * 4 + 1]; hide.array[n] = g === 255 ? 9 : g / 254 * 1.2 - 0.03; }
+        hide.needsUpdate = true; job.done = true; job.n = todo.length / 2; job.ms = Math.round(performance.now() - job.t0);
+      };
+      job.t0 = performance.now(); requestAnimationFrame(step);
+    },
     // how much of it is cut (0..1), from the lawn map
     cutShare(L) { const M = L.userData.map; if (!M) return 0; let n = 0, c = 0; for (let i = 0; i < M.data.length; i += 4) if (M.data[i + 2]) { n++; if (M.data[i]) c++; } return n ? c / n : 0; }
   };
