@@ -2647,9 +2647,7 @@
   // ---------- the phone: the kid's character's own smartphone, where the home's shopping happens. Apps: Shop (things
   // for the home), Homes, Groceries (food for the fridge and pantry), Recipes (what to cook next) and Market (sell
   // things you're not using back for XP). Everything is in XP, never money.
-  // the kid's Chorecast pages, each its own app on the phone (index.html draws them, embedded, from the same data)
-  const CC_APPS = [['chores', '✅', 'Chores', 'today'], ['lessons', '🌱', 'Lessons', 'grow'], ['money', '🫙', 'Money', 'money'], ['invest', '📈', 'Investment', 'market'], ['proof', '📸', 'Proof wall', 'proof']];
-  const APPS = [['shop', '🛋️', 'Shop'], ['homes', '🏠', 'Homes'], ['groceries', '🛒', 'Groceries'], ['recipes', '🍳', 'Recipes'], ['market', '🏷️', 'Market'], ['jobs', '💼', 'Employment'], ['travel', '🧭', 'Travel to']];
+  const APPS = [['bank', '🏦', 'Banking'], ['shop', '🛋️', 'Shop'], ['homes', '🏠', 'Homes'], ['groceries', '🛒', 'Groceries'], ['recipes', '🍳', 'Recipes'], ['market', '🏷️', 'Market'], ['jobs', '💼', 'Employment'], ['travel', '🧭', 'Travel to']];
   const sellValue = (d, used) => Math.max(10, Math.round(d.xp * (used ? 0.3 : 0.5) / 10) * 10);
   // the Market app pays sellers half what they'd get in person (a village shop, your stall)
   const phoneSell = (d, used) => Math.max(5, Math.round(sellValue(d, used) / 2 / 5) * 5);
@@ -2665,55 +2663,6 @@
       const id = day + ':' + d.t; if (!took.has(id)) out.push({ id, day, t: d.t, cond, fin, xp: Math.max(10, Math.round(d.xp * k / 10) * 10) });
     }
     return out;
-  }
-  // ---------- the kid's Chorecast pages as phone apps. Chorecast (index.html, same site, same device) writes a
-  // summary of each kid's pages whenever it draws (cc:phone: today's chores, jars, investments, proof, lessons),
-  // worked out by its own functions; the phone draws it for a phone screen. Doing a job, a lesson or a trade
-  // happens in Chorecast itself.
-  function ccFeed() { try { return JSON.parse(localStorage.getItem('cc:phone') || 'null'); } catch (e) { return null; } }
-  const ccLink = (words, cls = 'ih-b1') => `<a class="${cls} ih-cc-go" href="index.html" target="_blank" rel="noopener">${words} ↗</a>`;
-  function ccApp(id) {
-    const F = ccFeed(), K = F && F.kids && F.kids[String(O.kid.name || '').toLowerCase()];
-    if (!K) return `<div class="ih-cc-card"><p><b>Your Chorecast isn’t on this phone yet.</b></p><p class="ih-ph-sub">Open Chorecast on this device and go to your page once. Your chores, jars, investments and proof wall show up here after that.</p>${ccLink('Open Chorecast')}</div>`;
-    const d = new Date(), today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-    const stale = F.date !== today ? `<p class="ih-cc-stale">Updated ${new Date(F.at).toLocaleString('en-NZ', { weekday: 'short', hour: 'numeric', minute: '2-digit' })}. Open Chorecast to bring it up to date.</p>` : '';
-    const ST = { open: ['To do', 'todo'], pending: ['Checking', 'wait'], approved: ['Paid', 'paid'], redo: ['Fix it', 'redo'], taken: ['Taken', 'taken'] };
-    const job = c => { const s2 = ST[c.state] || ST.open; return `<div class="ih-ph-row ih-cc-job ${s2[1]}"><span class="ih-ph-e">${esc(c.icon || '✅')}</span><span><b>${esc(c.title)}</b><small>${c.mins ? `${c.mins} min · ` : ''}${esc(c.pay || '')}${c.sent ? ' · sent to you' : ''}</small></span><span class="ih-cc-st ${s2[1]}">${s2[0]}</span></div>`; };
-    if (id === 'chores') {
-      const T = K.today, frac = T.total ? T.done / T.total : 0;
-      return `${stale}<div class="ih-cc-hero"><div class="ih-cc-bar"><i style="width:${Math.round(frac * 100)}%"></i></div><b>${T.done} of ${T.total} done</b><small>Earned today ${esc(T.earned)} · ${esc(T.pending)} being checked</small></div>
-        ${T.must.length ? `<h4 class="ih-ph-h4">Must-dos</h4><div class="ih-ph-list">${T.must.map(job).join('')}</div>` : ''}
-        ${T.team.length ? `<h4 class="ih-ph-h4">Team jobs</h4><div class="ih-ph-list">${T.team.map(job).join('')}</div>` : ''}
-        ${T.gigs.length ? `<h4 class="ih-ph-h4">Side hustles</h4><div class="ih-ph-list">${T.gigs.map(job).join('')}</div>` : ''}
-        <p class="ih-ph-sub">Doing a job means a photo for a grown-up to check, so that happens in Chorecast.</p>${ccLink('Do a job in Chorecast')}`;
-    }
-    if (id === 'money') {
-      const M = K.money, s = M.slip;
-      return `${stale}<div class="ih-cc-hero"><small>Everything you have</small><b class="ih-cc-big">${esc(M.worth)}</b></div>
-        <div class="ih-cc-jars">${M.jars.map(j => `<div class="ih-cc-jar" style="--c:${esc(j.color)}"><i></i><b>${esc(j.v)}</b><small>${esc(j.label)}</small></div>`).join('')}</div>
-        ${M.goal ? `<h4 class="ih-ph-h4">Saving for ${esc(M.goal.icon || '')} ${esc(M.goal.name)}</h4><div class="ih-cc-bar"><i style="width:${Math.round(M.goal.frac * 100)}%"></i></div><p class="ih-ph-sub">${esc(M.goal.have)} of ${esc(M.goal.target)}</p>` : ''}
-        <h4 class="ih-ph-h4">Trust score</h4><div class="ih-ph-row"><span class="ih-ph-e">🛡️</span><span><b>${M.trust.score} of 850</b><small>${esc(M.trust.band || '')}</small></span></div>
-        <h4 class="ih-ph-h4">Latest pay slip</h4>${s ? IH.slip({ head: 'CHORECAST FAMILY PAYROLL', kind: 'Pay slip', who: K.name, lines: [[s.title, s.gross]], sum: [['Gross pay', s.gross], [`Family tax ${s.rate}%`, '−' + s.tax, 'muted'], ['Net pay', s.net, 'big'], ...s.parts.map(x => [`To ${x.label}`, x.v, 'muted'])], date: s.date }) : '<p class="ih-ph-sub">Your first pay slip comes after a grown-up approves a job.</p>'}
-        ${M.ledger.length ? `<h4 class="ih-ph-h4">Recent</h4><div class="ih-ph-list">${M.ledger.map(e => `<div class="ih-ph-row"><span><b>${esc(e.memo)}</b><small>${esc(e.at)}</small></span><span class="ih-bk-amt">${esc(e.amt)}</span></div>`).join('')}</div>` : ''}
-        ${ccLink('Move money in Chorecast', 'ih-b2')}`;
-    }
-    if (id === 'invest') {
-      const I = K.market;
-      return `${stale}<div class="ih-cc-hero"><small>Your investments</small><b class="ih-cc-big">${esc(I.value)}</b><small>${I.has ? `${I.up ? 'Up' : 'Down'} ${esc(I.gain)} since you bought · ` : ''}${esc(I.cash)} ready to invest</small></div>
-        <div class="ih-ph-list">${I.funds.map(f => `<div class="ih-ph-row"><span class="ih-ph-e">${esc(f.icon)}</span><span><b>${esc(f.name)}</b><small>${esc(f.short)} · ${esc(f.price)}${f.value ? ` · yours: ${esc(f.value)}` : ''}</small></span><span class="ih-bk-amt ${f.up ? 'in' : 'out'}">${f.up ? '▲' : '▼'} ${esc(f.change)}</span></div>`).join('')}</div>
-        ${ccLink('Buy or sell in Chorecast', 'ih-b2')}`;
-    }
-    if (id === 'proof') {
-      const P = K.proof;
-      return `${stale}<div class="ih-cc-hero"><b class="ih-cc-big">${P.approved}</b><small>job${P.approved === 1 ? '' : 's'} approved</small></div>
-        <div class="ih-cc-badges">${P.badges.map(b => `<span class="${b.on ? '' : 'off'}" title="${esc(b.name)}">${esc(b.icon)}<small>${esc(b.name)}</small></span>`).join('')}</div>
-        <div class="ih-cc-wall">${P.jobs.length ? P.jobs.map((j, i) => `<div class="ih-cc-pol" style="--r:${((i * 7) % 9 - 4) * 0.9}deg">${j.photo ? `<img alt="${esc(j.title)}" src="${esc(j.photo)}" loading="lazy">` : `<span class="ih-cc-ic">${esc(j.icon || '✅')}</span>`}<small>${esc(j.title)}<br>${esc(j.date)}${j.stars ? ' · ' + '★'.repeat(j.stars) : ''}</small></div>`).join('') : '<p class="ih-ph-sub">Your wall is empty. Finish a job and snap a photo to pin it here.</p>'}</div>`;
-    }
-    if (id === 'lessons') {
-      const G = K.grow;
-      return `${stale}<div class="ih-cc-card">${G.mustLeft ? `<p><b>Must-dos first.</b></p><p class="ih-ph-sub">Finish ${G.mustLeft === 1 ? 'your last must-do' : `your ${G.mustLeft} must-dos`}, then your lessons open.</p>` : `<p><b>${G.waiting ? `${G.waiting} waiting for you` : 'Your lessons are open'}</b></p><p class="ih-ph-sub">Lessons, reviews and your language practice are in Chorecast’s Grow page.</p>`}${ccLink(G.mustLeft ? 'See my must-dos' : 'Start learning')}</div>`;
-    }
-    return '';
   }
   // the Banking app: both accounts, pay yourself (once a day) and invest, and every move with its slip
   function bankHtml() {
@@ -2732,9 +2681,7 @@
     const w = wallet(), K = IH.kitchen, f = food(), back = `<button class="ih-ph-back" data-a="phone">‹ Back</button>`;
     let body = '';
     const appBtn = ([k, e, n]) => `<button class="ih-ph-app" data-a="app" data-app="${k}"><span>${e}</span>${n}</button>`;
-    if (app === 'home') body = `<p class="ih-ph-sec">Chorecast</p><div class="ih-ph-apps">${CC_APPS.map(appBtn).join('')}${appBtn(['bank', '🏦', 'Banking'])}</div><p class="ih-ph-sec">Your world</p><div class="ih-ph-apps">${APPS.map(appBtn).join('')}</div>`;
-    const cc = CC_APPS.find(x => x[0] === app);
-    if (cc) body = `${back}<h3>${cc[1]} ${cc[2]}</h3>${ccApp(cc[0])}`;
+    if (app === 'home') body = `<div class="ih-ph-apps">${APPS.map(appBtn).join('')}</div>`;
     if (app === 'bank') body = `${back}<h3>🏦 Banking</h3>${bankHtml()}`;
     if (app === 'slip') { const e = (O.st.ledger || []).find(x => x.id === O.slipId); body = `<button class="ih-ph-back" data-a="app" data-app="bank">‹ Banking</button>${e && e.slip ? IH.slip(e.slip, e.at) : '<p class="ih-ph-sub">That slip has gone.</p>'}`; }
     if (app === 'groceries' && K) body = `${back}<h3>Groceries</h3><p class="ih-ph-sub">Food for your fridge and pantry. Your character cooks with it.</p><div class="ih-ph-list">${Object.entries(K.FOOD).map(([id, x]) => `<div class="ih-ph-row"><span class="ih-ph-e">${x.emoji}</span><span><b>${esc(x.name)}</b><small>${f[id] ? `${f[id]} in the ${x.where}` : `None in the ${x.where}`}</small></span><button class="ih-b1 ih-ph-btn" data-a="gbuy" data-f="${id}" ${w.left < x.xp ? 'disabled' : ''}>✨ ${x.xp}</button></div>`).join('')}</div>`;
