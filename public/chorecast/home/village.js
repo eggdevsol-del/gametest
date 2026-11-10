@@ -562,6 +562,7 @@
   // ---------- open and close
   function open(stage) {
     if (V) return false;
+    if ((stage.where || 'village') === 'farm' && !stage.keep && stage.shop && IH.farmPark) IH.farmPark(stage.shop.farm()); // (arriving: the tractor's by the barn)
     const where = stage.where || 'village', sh0 = stage.shop, B = where === 'village' ? IH.villageBuild.build() : IH.islandsBuild && IH.islandsBuild.build(where, !sh0 ? null : where === 'farm' ? sh0.farm() : sh0.isl ? sh0.isl(where) : null); if (!B) return false;
     const S = scene(B);
     V = { fx: [], emit: [], where, stage, B, street: B, shops: {}, foods: IH.kitchen ? IH.kitchen.FOOD : {}, S, grid: makeGrid(B), people: [], npc: [], says: [], t: 0, lastT: null, sceneT: null, beat: LK.Beat(), phase: stage.phase || 'day', follow: true, raf: 0 };

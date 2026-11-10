@@ -213,15 +213,17 @@
     // a low hedge round it, and the round bales lying where they dropped
     const hay = f.hay || (f.hay = { cells: {}, at: 0 }); if (hay.at && Date.now() - hay.at > 2 * DAY) { hay.cells = {}; hay.at = 0; }
     let meadowL = null; if (IH.lawnKit) { const cells = []; for (let i = MEADOW[0]; i < MEADOW[2]; i++) for (let j = Math.ceil(MEADOW[1]); j < MEADOW[3]; j++) cells.push({ x: i, z: j }); meadowL = IH.lawnKit.build({ cells, x0: 0, z0: 0, W, D, seed: 777, phase: 'day', per: e => (e ? 30 : 6), ground: false }); meadowL.position.y = 0.07; IH.lawnKit.grow(meadowL, 1.25); root.add(meadowL); for (const key of Object.keys(hay.cells)) { const i = Math.floor(key / 1000), j = key % 1000; IH.lawnKit.cutAt(meadowL, i + 0.5, j + 0.5, 0.75); } }
-    for (let x = MEADOW[0] - 0.6; x < MEADOW[2] + 0.6; x += 0.9) for (const z of [MEADOW[3] + 0.6]) k.ball(0.5, x, 0.35, z, '#4f8a3c', { s: [1, 0.75, 1], n: 7 });
-    for (let z = MEADOW[1]; z < MEADOW[3] + 0.6; z += 0.9) k.ball(0.5, MEADOW[0] - 0.8, 0.35, z, '#4f8a3c', { s: [1, 0.75, 1], n: 7 });
-    solid(MEADOW[0] - 0.4, MEADOW[3] + 0.2, MEADOW[2] + 1, MEADOW[3] + 1.2); solid(MEADOW[0] - 1.4, MEADOW[1], MEADOW[0] - 0.3, MEADOW[3] + 1.2);
     board(k, 'meadow', 'HAY MEADOW', 'tractor work: bale it, haul it', '#fff6e0', '#4a7a3a', 3.4, 0.9, MEADOW[2] + 1.2, 1.6, MEADOW[1] + 1.2, -Math.PI / 2);
     f.bales = f.bales || []; const bales = f.bales.map(b => { const m = baleModel(); m.position.set(b.x, 0, b.z); m.rotation.y = b.ry || 0; root.add(m); return { rec: b, g: m }; });
     const lawns = [[0, 0, W, D]], paths = TRACK.map(r => r.slice()).concat([[MEADOW[0] - 0.5, MEADOW[1] - 0.3, MEADOW[2] + 0.2, MEADOW[3] + 0.2]]); // (grass everywhere else: the meadow has its own long hay)
     return { gates, vehicles, meadowL, bales, MEADOW, tick: t => { if (meadowL) IH.lawnKit.tick(meadowL, t, 1); }, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
   }
   IB.add('farm', build);
+
+  // The tractor's home: parked by the barn. Every time the kid arrives on the farm it's there (and Auto parks it
+  // there when the job's done); a second tractor parks alongside.
+  const TRACTOR_HOME = { x: 20.5, z: 11.6, ry: -0.4 };
+  IH.farmPark = f => { let n = 0; for (const it of (f && f.items) || []) if (it.t === 'tractor') { Object.assign(it, { x: TRACTOR_HOME.x + n * 3.4, z: TRACTOR_HOME.z, ry: TRACTOR_HOME.ry }); n++; } };
 
   /* ---------- on the farm (village.js calls this once; ctx is what it needs from there) */
   IH.villageFarm = c => {
@@ -325,6 +327,12 @@
       let moved = dist;
       if (Math.abs(dist) > 1e-5 && blocked(nx, nz, yaw2) && !(blocked(DR.x, DR.z, DR.yaw) && depth(nx, nz, yaw2) <= depth(DR.x, DR.z, DR.yaw))) { /* (already touching something, any move that doesn't push further in is let through, so it never sticks) */ DR.blockT = t; if (Math.abs(DR.v) > 0.6 && t > DR.bumped) { c.sound('pat'); DR.bumped = t + 0.6; c.fx('dust', nx + Math.sin(yaw2) * 2 * Math.sign(DR.v), 0.3, nz + Math.cos(yaw2) * 2 * Math.sign(DR.v), 6); } DR.v = 0; moved = 0; }
       else { DR.x = nx; DR.z = nz; DR.yaw = yaw2; }
+      if (!moved && Math.abs(dist) > 1e-5) {
+        // a glancing touch slides along the fence or edge (the part of the move that isn't into it); head on, it stops
+        const dx = nx - DR.x, dz = nz - DR.z, want = Math.hypot(dx, dz); let best = null;
+        for (const [px, pz, py] of [[nx, DR.z, yaw2], [DR.x, nz, yaw2], [nx, DR.z, DR.yaw], [DR.x, nz, DR.yaw]]) { const got = Math.hypot(px - DR.x, pz - DR.z); if (got > want * 0.35 && (!best || got > best[3]) && !blocked(px, pz, py)) best = [px, pz, py, got]; }
+        if (best) { DR.x = best[0]; DR.z = best[1]; DR.yaw = best[2]; moved = Math.sign(dist) * best[3]; DR.v = Math.sign(dist) * Math.min(Math.abs(target), best[3] / dt) * 0.8; DR.blockT = 0; }
+      }
       // the wheels: the back ones roll, the front ones roll and steer
       for (const w of DR.veh.rear) w.rotation.x += moved / R_REAR; for (const w of DR.veh.front) w.rotation.x += moved / R_FRONT; for (const p of DR.veh.pivots) p.rotation.y = DR.steer;
       const sp = Math.abs(DR.v); DR.m.position.set(DR.x, Math.sin(t * 17) * 0.012 * Math.min(1, sp), DR.z); DR.m.rotation.set(Math.sin(t * 11) * 0.006 * sp, DR.yaw, Math.sin(t * 9) * 0.006 * sp);
@@ -352,7 +360,7 @@
        open ground nearby for a three-point turn. The meadow's baled in straight, evenly spaced rows parallel to
        its long hedge, back and forth with the pickup up on the turns (so the cut stays in tidy lines), then the
        headland strips along the hedge ends; then trailer on, bales collected four at a time and hauled to the
-       barn, as many trips as it takes, and the tractor parked back where it started. Steering by pure pursuit
+       barn, as many trips as it takes, and the tractor parked back by the barn. Steering by pure pursuit
        (a point a little ahead on the planned way, the wheel turned to arc onto it), reversing too; bumping
        something or drifting off the way, it stops and plans again from where it is. */
     let AP = null;
@@ -362,11 +370,11 @@
     const stop = () => ({ thr: 0, st: DR.steer / 0.62, vmax: 1 }); // (off the pedal: it rolls to a stand, the wheel left where it is)
     // the rows: parallel to the meadow's long (south) hedge, evenly spaced a baler's width apart (a little overlap)
     function hayJob() {
-      const M = V().B.MEADOW, f = F(), legs = [], N = 5, z0 = M[3] - 1.8, z1 = M[1] + 1.6, gap = (z1 - z0) / (N - 1); // (from the far hedge back, so each turn swings out into open ground)
+      const M = V().B.MEADOW, f = F(), legs = [], N = 5, z0 = M[3] - 1.3, z1 = M[1] + 1.6, gap = (z1 - z0) / (N - 1); // (from the far hedge back, so each turn swings out into open ground)
       let cut = 0, all = 0; for (let i = M[0]; i < M[2]; i++) for (let j = Math.ceil(M[1]); j < M[3]; j++) { all++; if (f.hay.cells[i * 1000 + j]) cut++; }
       if (all - cut > all * 0.08) {
         legs.push({ t: 'hitch', kind: 'baler' });
-        for (let i = 0; i < N; i++) { const z = z0 + gap * i, west = i % 2 === 0; legs.push({ t: 'line', a: west ? [M[2] - 8, z] : [M[0] + 9, z], b: west ? [M[0] + 3.4, z] : [M[2] + 0.4, z], say: `baling row ${i + 1} of ${N + 2}` }); }
+        for (let i = 0; i < N; i++) { const z = z0 + gap * i, west = i % 2 === 0; legs.push({ t: 'line', a: west ? [M[2] - 8, z] : [M[0] + 7, z], b: west ? [M[0] + 0.8, z] : [M[2] + 0.4, z], say: `baling row ${i + 1} of ${N + 2}` }); }
         // the headlands: the strips the rows' turns left, cut along the end hedge and the open end
         // (along the open end, the same spacing, each run south up to the far hedge, then backed straight out)
         [M[2] - 3.4, M[2] - 1.05].forEach((x, i) => legs.push({ t: 'line', a: [x, M[1] + 1.0], b: [x, M[3] - 2.55], say: `baling row ${N + i + 1} of ${N + 2} (the headland)` }, { t: 'back', d: 5, say: 'backing out from the hedge' }));
@@ -377,7 +385,7 @@
     function autoStart() {
       if (!DR) return; if (AP) return autoStop('Auto off.');
       if (!TP()) return c.toast('Auto isn’t ready yet.');
-      const v = V(); AP = { legs: hayJob(), leg: null, home: { x: DR.x, z: DR.z, yaw: DR.yaw }, G: TP().grid(v.B.solids, v.B.bounds.x1, v.B.bounds.z1, DR.veh.solid), skip: new Set(), tried: new Map(), pickup: false, stuck: 0 };
+      const v = V(); AP = { legs: hayJob(), leg: null, home: { x: TRACTOR_HOME.x, z: TRACTOR_HOME.z, yaw: TRACTOR_HOME.ry }, G: TP().grid(v.B.solids, v.B.bounds.x1, v.B.bounds.z1, DR.veh.solid), skip: new Set(), tried: new Map(), pickup: false, stuck: 0 };
       const b = DR.el.querySelector('.vg-dr-auto'); if (b) { b.classList.add('on'); b.textContent = '🤖 Stop'; }
       c.toast('Auto: watch them make hay! Push the joystick to take over.'); c.sound('on');
     }
