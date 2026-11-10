@@ -291,3 +291,9 @@ body.ih-open{overflow:hidden}
 .ih-ph-tabs button{flex:1;min-width:0;padding:8px 4px;font-size:13px;white-space:nowrap}
 .ih-ec-late{font-style:normal;font-weight:900;color:#b8402f}
 .ih-ph-row>.ih-sm{flex:0 0 auto}
+.ih-ec-big{font-size:18px;font-weight:900}
+.ih-ec-name{flex:1;min-width:0;font:inherit;font-weight:800;padding:10px 12px;border-radius:12px;border:2px solid #e2d9f3}
+.ih-ec-low{font-size:11px;font-weight:900;color:#9a6a00;background:#fff3d6;border-radius:99px;padding:3px 8px;flex:0 0 auto}
+.vg-hb,.ih-ph-row .vg-hb{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle;background:#4ADE80}
+.vg-hb.hungry{background:#ffc94d}.vg-hb.sick{background:#ff8a5c}.vg-hb.sick2{background:#e8503a}
+.vg-name{flex:1;min-width:0;font:inherit;font-weight:800;padding:8px 10px;border-radius:10px;border:2px solid #e2d9f3}

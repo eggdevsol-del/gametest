@@ -793,8 +793,15 @@
   }
   // the animals, each its own way: hens peck and dart, cows amble and graze, goats skip, alpacas trot; crabs
   // scuttle sideways and hide, gulls walk and fly off, the seal dozes, fish circle the shallows, a dolphin leaps
+  // where the kid was, a distance back along the way they walked (mustered animals follow it, so through the gates)
+  function trailAt(dd) {
+    const tr = V.trail || [], k = V.kid; let acc = 0, px = k.pos.x, pz = k.pos.z;
+    for (let i = tr.length - 1; i >= 0; i--) { const sx = tr[i][0], sz = tr[i][1], seg = Math.hypot(sx - px, sz - pz); if (acc + seg >= dd) { const u = (dd - acc) / (seg || 1); return [px + (sx - px) * u, pz + (sz - pz) * u]; } acc += seg; px = sx; pz = sz; }
+    return [px, pz];
+  }
   function animalsTick(t, dt) {
-    const k = V.kid;
+    const k = V.kid, tr = V.trail || (V.trail = []);
+    if (!tr.length || Math.hypot(tr[tr.length - 1][0] - k.pos.x, tr[tr.length - 1][1] - k.pos.z) > 0.4) { tr.push([k.pos.x, k.pos.z]); if (tr.length > 160) tr.shift(); }
     for (const a of V.B.animals || []) {
       const g = a.group, P = g.position, dk = Math.hypot(k.pos.x - P.x, k.pos.z - P.z);
       if (a.tick) { a.tick(t, dt, k.pos, V.grid.ground); continue; } // (an animal with its own ways: birds, swans, horses…)
@@ -803,6 +810,13 @@
       if (a.kind === 'dolphin') { const cyc = 11, u = ((t + 3) % cyc) / 2.2; if (u < 1) { const x = a.home[0] - 6 + ((Math.floor((t + 3) / cyc) % 3) * 6), y = -1.0 + Math.sin(u * Math.PI) * 2.4; P.set(x + u * 6, y, a.home[1]); g.rotation.set(0, Math.PI / 2, 0); g.rotateX(-Math.cos(u * Math.PI) * 0.9); g.visible = y > -0.45; } else g.visible = false; continue; }
       a.st = a.st || { mode: 'idle', until: 0, to: null, cool: 0 }; const S = a.st;
       const speed = { hen: 1.5, rooster: 1.4, duck: 1.1, goose: 1.1, turkey: 1.0, goat: 1.0, cow: 0.55, highland: 0.5, merino: 0.8, kunekune: 0.8, alpaca: 0.9, llama: 0.9, donkey: 0.8, horse: 1.1, pony: 1.0, crab: 1.4, gull: 0.6, weka: 1.2 }[a.kind] || 0.8;
+      // led by the kid (the farm's mustering): along the kid's way, a little apart from each other
+      if (a.follow) {
+        const [tx, tz] = trailAt(1.4 + a.follow * 1.5), dx = tx - P.x, dz = tz - P.z, d = Math.hypot(dx, dz); let dist = 0;
+        if (d > 0.35) { const want = Math.atan2(dx, dz); g.rotation.y += Math.atan2(Math.sin(want - g.rotation.y), Math.cos(want - g.rotation.y)) * Math.min(1, dt * 5); dist = Math.min(d, Math.max(speed, Math.min(3.4, d * 1.4)) * dt); P.x += dx / d * dist; P.z += dz / d * dist; }
+        P.y = V.grid.ground(P.x, P.z); const sw = dist ? Math.sin(t * 9) * 0.5 : 0; (a.legs || []).forEach((l, i) => { l.rotation.x = (i % 2 ? 1 : -1) * (i > 1 ? -1 : 1) * sw; });
+        if (a.d3 && IH.animals3d) IH.animals3d.move(a, t, dist ? 'walk' : 'stand', dist, null); continue;
+      }
       const shy = a.kind === 'crab' || a.kind === 'gull', night = V.phase === 'night';
       const inPen = (x, z) => (a.pen ? [clamp(x, a.pen[0], a.pen[2]), clamp(z, a.pen[1], a.pen[3])] : [x, z]);
       // a fright: near the kid, the shy ones get away

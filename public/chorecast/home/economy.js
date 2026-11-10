@@ -42,6 +42,14 @@
       learn: ['Every bill has a day it’s due. If it isn’t paid in time, a late fee is added, so the same bill costs more.', 'That’s why people pay their bills before buying new things. Your farm can’t buy anything new while a bill is overdue, but feed and seed are always allowed.'],
       tryQ: 'A bill is ✨ 40 and the late fee is 10%. What do you pay if you’re late?', tryO: ['✨ 40', '✨ 44', '✨ 50'], tryA: 1, tryWhy: '10% of 40 is 4, so 40 + 4 = 44.',
       check: 'A late fee makes a bill cheaper.', checkA: false, checkWhy: 'A late fee is extra on top of the bill.' },
+    life: { e: '🐣', title: 'Animal life cycles', xp: 20,
+      learn: ['Every animal has a life cycle: it’s born, grows up, may have young of its own, and grows old.', 'Farm animals have young when they’re healthy, well fed and have room. A young one needs its mother, food, water and shelter while it grows.'],
+      tryQ: 'What does a lamb grow up to be?', tryO: ['A sheep', 'A goat', 'A cow'], tryA: 0, tryWhy: 'A lamb grows up into a sheep, like its parents.',
+      check: 'Animals are more likely to have young when they’re well looked after.', checkA: true, checkWhy: 'Yes: healthy, well-fed animals with room are the ones that have young.' },
+    care: { e: '💚', title: 'Caring for animals', xp: 20,
+      learn: ['Animals depend on the people who look after them. They need food and water every day, shelter, room to move, and a vet when they’re sick.', 'Looking after animals is a responsibility, even on busy days. If something goes wrong, it’s OK to feel sad. What matters is learning to care for them better.'],
+      tryQ: 'Your goats look hungry and one is unwell. What should you do first?', tryO: ['Feed them and call the vet', 'Wait and see', 'Buy a new goat'], tryA: 0, tryWhy: 'Food first, and the vet for the one that’s unwell.',
+      check: 'Animals only need feeding when you remember to.', checkA: false, checkWhy: 'Animals need food and water every single day.' },
     report: { e: '📰', title: 'What an economic report tells us', xp: 20,
       learn: ['An economic report tells everyone how prices are changing: what things cost to buy, and what they sell for.', 'Farmers and business owners read them to plan: what to grow, when to sell, and when to save.'],
       tryQ: 'Egg prices just went up from ✨ 14 to ✨ 21. Is it a good week to sell eggs?', tryO: ['Yes, prices are up', 'No, keep them all', 'It makes no difference'], tryA: 0, tryWhy: 'When the price is up, each egg brings in more.',
@@ -49,7 +57,7 @@
   };
 
   IH.economy = A => {
-    const E = () => { const st = A.st(); const e = (st.econ = st.econ || {}); e.days = e.days || []; e.bills = e.bills || []; e.stmts = e.stmts || []; e.reports = e.reports || []; e.lessons = e.lessons || {}; e.queue = e.queue || []; if (e.dial == null) e.dial = 1; if (e.tax == null) e.tax = 10; if (e.wk == null) e.wk = { mon: mondayOf(today()), sales: 0, run: 0, cap: 0 }; return e; };
+    const E = () => { const st = A.st(); const e = (st.econ = st.econ || {}); e.days = e.days || []; e.news = e.news || []; e.bills = e.bills || []; e.stmts = e.stmts || []; e.reports = e.reports || []; e.lessons = e.lessons || {}; e.queue = e.queue || []; if (e.dial == null) e.dial = 1; if (e.tax == null) e.tax = 10; if (e.wk == null) e.wk = { mon: mondayOf(today()), sales: 0, run: 0, cap: 0 }; return e; };
     const farm = () => A.st().farm || {};
     const animals = () => { const f = farm(), out = []; if (Array.isArray(f.animals)) for (const a of f.animals) out.push(a.kind); else for (const [k, n] of Object.entries(f.animals || {})) for (let i = 0; i < n; i++) out.push(k); const S = ((A.st().isl || {}).stable || {}).animals || {}; for (const [k, n] of Object.entries(S)) for (let i = 0; i < n; i++) out.push(k); return out; };
     const vehicles = () => (farm().items || []).filter(it => it.t === 'tractor' || it.t === 'quad').map(it => it.t);
@@ -93,6 +101,10 @@
       for (let m = wasMon + 7; m <= nowMon; m += 7) stmt = closeWeek(m) || stmt;
       if (!e.days.includes(t)) { e.days.push(t); if (e.days.length > 60) e.days.shift(); }
       if (e.lastDay != null) for (const b of due()) { b.days++; if (b.days >= 3 && !b.late) { b.late = true; b.fee = Math.max(1, Math.round(b.amt * 0.1)); b.amt += b.fee; offer('late'); } }
+      // the animals' day (farm.js): hungry, unwell, born, lost; a neighbour's fee in holiday mode
+      const real = Math.floor(Date.now() / 864e5) + (IH.econDays || 0), fm = A.st().farm;
+      if (IH.farmDay && fm && fm.v === 2) { const evs = IH.farmDay(fm, e.lastReal); for (const ev of evs.filter(x => x.kind === 'born')) e.news.push(ev); for (const kind of ['sick', 'verysick', 'died']) { const L = evs.filter(x => x.kind === kind); if (L.length) e.news.push({ kind, list: L }); } if (fm.holiday && fm.holiday.until >= real && e.lastReal != null) charge(10, 'a neighbour looking after the animals'); else if (fm.holiday && fm.holiday.until < real) fm.holiday = null; }
+      e.lastReal = real;
       e.lastDay = t; payDue();
       if (stmt) e.pending = { kind: 'week', stmt };
       A.save(); A.ui(true); return show();
@@ -120,8 +132,26 @@
         return A.sheet(`<div class="ih-sh-h"><h3>Monday on the farm</h3><button class="ih-btn" data-a="ecOk" aria-label="Close">✕</button></div>${IH.slip(stmtSlip(s))}${reportHtml(r)}<div class="ih-row"><button class="ih-b1" data-a="ecOk">Got it</button></div>`); }
       if (e.pending && e.pending.kind === 'change') { const why = e.pending.why; e.pending = null; const r = report(why); offer('report'); A.save();
         return A.sheet(`<div class="ih-sh-h"><h3>News from the market</h3><button class="ih-btn" data-a="ecOk" aria-label="Close">✕</button></div>${reportHtml(r)}<div class="ih-row"><button class="ih-b1" data-a="ecOk">Got it</button></div>`); }
+      if (e.news.length) return news(e.news.shift());
       const t = today(), key = e.queue.find(k => !(typeof e.lessons[k] === 'number' && e.lessons[k] === t)); // ("Later" waits till tomorrow)
       if (key) lesson(key);
+    }
+    // ---------- farm news: a young one born (name it), an animal unwell or very sick, one lost (gently)
+    const Cap = s0 => (s0 ? s0[0].toUpperCase() + s0.slice(1) : '');
+    // (several at once: one message, every name in it)
+    const who = L => { const one = x => { const k = ((IH.farmData && IH.farmData.ANIMALS[x.animal]) || {}).name || x.animal; return (x.name || '').startsWith('your ') ? x.name : `${x.name} the ${k.toLowerCase()}`; }; const w = L.map(one); return Cap(w.length === 1 ? w[0] : w.length === 2 ? `${w[0]} and ${w[1]}` : `${w.slice(0, -1).join(', ')} and ${w[w.length - 1]}`); };
+    function news(n) {
+      if (n.list) { const L = n.list, many = L.length > 1, nm0 = who(L); offer('care');
+        const h = n.kind === 'died' ? '🕊️ We’re sorry' : `🩺 ${many ? `${L.length} animals are` : `${A.esc(nm0)} is`} ${n.kind === 'sick' ? 'unwell' : 'very sick'}`;
+        const body = n.kind === 'died' ? `<p>${A.esc(nm0)} died. Animals need food and water every day, and the vet when they’re sick.</p><p>It’s OK to feel sad. ${many ? 'They’re' : `${A.esc(nm0)} is`} remembered on your farm’s stock list.</p>` : `<p>${L.map(x => x.e).join(' ')} ${A.esc(nm0)} ${many ? 'haven’t' : 'hasn’t'} been fed for a few days and ${many ? 'are' : 'is'} ${n.kind === 'sick' ? 'unwell' : 'very sick now'}.</p><p><b>Feed their paddock, then call the vet at its gate.</b> ${n.kind === 'verysick' ? 'The vet can still help, so please do it today.' : 'Feeding alone won’t fix it now.'}</p>`;
+        A.sheet(`<div class="ih-sh-h"><h3>${h}</h3><button class="ih-btn" data-a="ecOk" aria-label="Close">✕</button></div>${body}<div class="ih-row"><button class="ih-b1" data-a="ecOk">OK</button></div>`, 'small'); return A.save(); }
+      const nm = Cap(n.name || ''), kind = n.animal ? ((IH.farmData && IH.farmData.ANIMALS[n.animal]) || {}).name || n.animal : '';
+      let h = '', body = '';
+      if (n.kind === 'born') { offer('life'); h = '🎉 Exciting news!'; body = `<p class="ih-ec-big">${n.e} ${A.esc(Cap(n.mum))} has had a ${A.esc(n.baby)}!</p><p>A little ${n.sex === 'f' ? 'girl' : 'boy'}. What will you call ${n.sex === 'f' ? 'her' : 'him'}?</p><div class="ih-row"><input class="ih-ec-name" maxlength="14" placeholder="${A.esc(['Pip', 'Button', 'Sunny', 'Willow', 'Nugget', 'Poppy'][n.id.length % 6])}" aria-label="Name"><button class="ih-b1" data-a="ecName" data-id="${n.id}">Name ${n.sex === 'f' ? 'her' : 'him'}</button></div>`; }
+      else if (n.kind === 'sick' || n.kind === 'verysick') { offer('care'); h = `🩺 ${A.esc(nm)} ${n.kind === 'sick' ? 'is unwell' : 'is very sick'}`; body = `<p>${n.e} ${A.esc(nm)}${(n.name || '').startsWith('your ') ? '' : ` the ${A.esc(kind.toLowerCase())}`} hasn’t been fed for a few days and ${n.kind === 'sick' ? 'is unwell' : 'is very sick now'}.</p><p><b>Feed their paddock, then call the vet at its gate.</b> ${n.kind === 'verysick' ? 'The vet can still help, so please do it today.' : 'Feeding alone won’t fix it now.'}</p>`; }
+      else if (n.kind === 'died') { offer('care'); h = '🕊️ We’re sorry'; body = `<p>${A.esc(nm)}${(n.name || '').startsWith('your ') ? '' : ` the ${A.esc(kind.toLowerCase())}`} died. Animals need food and water every day, and the vet when they’re sick.</p><p>It’s OK to feel sad. ${A.esc(nm)} is remembered on your farm’s stock list.</p>`; }
+      A.sheet(`<div class="ih-sh-h"><h3>${h}</h3><button class="ih-btn" data-a="ecOk" aria-label="Close">✕</button></div>${body}<div class="ih-row"><button class="ih-b${n.kind === 'born' ? '2' : '1'}" data-a="ecOk">${n.kind === 'born' ? 'Later' : 'OK'}</button></div>`, 'small');
+      A.save();
     }
     // ---------- lesson cards
     let L = null;
@@ -146,6 +176,8 @@
       if (a === 'ecPay') { const b = e.bills.find(x => x.id === el.dataset.id), acc = A.acct(); if (!b || b.paid) return true; if (acc.bal < b.amt) { A.toast(`Your farm account has ✨ ${A.nf(acc.bal)}. Sell something, or invest from your wallet, to pay this.`); return true; } payDue(b.id); A.save(); A.ui(true); A.sound('buy'); A.toast(`${b.label} paid.`); return 'bank'; }
       if (a === 'ecDial') { const v = +el.dataset.v; if (v !== e.dial) { e.dial = v; e.pending = { kind: 'change', why: 'dial' }; A.save(); A.toast(`Farm earnings set to ${Math.round(v * 100)}%. The kids see it as market news in their next economic report.`); } return 'grownups'; }
       if (a === 'ecTax') { const v = +el.dataset.v; if (v !== e.tax) { e.tax = v; e.pending = { kind: 'change', why: 'tax' }; A.save(); A.toast(`Income tax on farm profit set to ${v}%. The kids see it as news in their next economic report.`); } return 'grownups'; }
+      if (a === 'ecName') { const fm = A.st().farm, b = fm && (fm.animals || []).find(x => x.id === el.dataset.id), inp = document.querySelector('.ih-ec-name'); if (b && inp) { const nm = (inp.value || inp.placeholder || '').replace(/[^\p{L}\p{N} '-]/gu, '').trim().slice(0, 14); if (nm) { b.name = nm; A.save(); A.toast(`Welcome, ${nm}! 💛`); A.sound('tune'); } } A.closeSheet(); setTimeout(show, 300); return true; }
+      if (a === 'ecHol') { const fm = A.st().farm; if (!fm) return true; const real = Math.floor(Date.now() / 864e5) + (IH.econDays || 0); fm.holiday = fm.holiday ? null : { until: real + (+el.dataset.d || 7) }; A.save(); A.toast(fm.holiday ? `A neighbour will feed the animals until ${new Date(fm.holiday.until * 864e5).toLocaleDateString('en-NZ', { weekday: 'long', day: 'numeric', month: 'short' })}: ✨ 10 a day.` : 'Holiday mode off. The animals are back in your care.'); return el.dataset.back || 'farm'; }
       if (a === 'ecReport') { A.closeSheet(); setTimeout(show, 100); return true; }
       if (a === 'lsGo') { lesson(L.key, el.dataset.s); return true; }
       if (a === 'lsTry') { L.tried = +el.dataset.i; A.sound(L.tried === LESSONS[L.key].tryA ? 'pop' : 'tick'); lesson(L.key, 'try'); return true; }
@@ -157,6 +189,7 @@
       return false;
     }
     // ---------- what the Banking app shows
+    function charge(xp, what) { return api._charge(xp, what); }
     function billsHtml() {
       const e = E(), list = due(), paid = e.bills.filter(b => b.paid).slice(-8).reverse(), when = d => dateOf(d);
       const row = b => `<div class="ih-ph-row"><span class="ih-ph-e">${b.late ? '⏰' : b.paid ? '✅' : '🧾'}</span><span><b>${A.esc(b.label)} · ✨ ${A.nf(b.amt)}</b><small>${b.paid ? `Paid ${when(b.paid)}` : b.late ? '<em class="ih-ec-late">Overdue</em>' : `Due since ${when(b.from)}`}${b.fee ? ` · includes a ✨ ${b.fee} late fee` : ''}<br>${A.esc(b.how || '')}</small></span>${b.paid ? '' : `<button class="ih-b1 ih-sm" data-a="ecPay" data-id="${b.id}">Pay</button>`}</div>`;
@@ -167,23 +200,46 @@
         ${paid.length ? `<h4 class="ih-ph-h4">Paid</h4><div class="ih-ph-list">${paid.map(row).join('')}</div>` : ''}
         ${Object.keys(LESSONS).filter(k => e.lessons[k] === 'done').length ? `<h4 class="ih-ph-h4">Lessons done</h4><div class="ih-bk-amts">${Object.keys(LESSONS).filter(k => e.lessons[k] === 'done').map(k => `<button class="ih-b2 ih-sm" data-a="lsOpen" data-k="${k}">${LESSONS[k].e} ${A.esc(LESSONS[k].title)}</button>`).join('')}</div>` : ''}`;
     }
+    // ---------- the Farm app: the stock list (animals, supplies, produce, products, machines) and holiday mode
+    function farmHtml() {
+      const fm = A.st().farm || {}, FD = IH.farmData; if (!FD || fm.v !== 2) return '<p class="ih-ph-sub">Visit your farm once and its stock list shows up here.</p>';
+      const real = Math.floor(Date.now() / 864e5) + (IH.econDays || 0), hol = fm.holiday && fm.holiday.until >= real, an = fm.animals || [], f0 = A.food(), g0 = A.goods();
+      const pads = (fm.paddocks || []).map((p, i) => ({ p, n: i + 1, L: an.filter(a => a.pad === p.id) })).filter(x => x.L.length);
+      const row = (e, b, sm, right = '') => `<div class="ih-ph-row"><span class="ih-ph-e">${e}</span><span><b>${b}</b>${sm ? `<small>${sm}</small>` : ''}</span>${right}</div>`;
+      const need = {}; for (const a of an) { const k = (FD.ANIMALS[a.kind] || {}).eats; if (k) need[k] = (need[k] || 0) + 1; }
+      const supplies = Object.entries(FD.FEED).map(([k, x]) => { const have = (fm.feed || {})[k] || 0, per = need[k] || 0, days = per ? Math.floor(have / per) : null; return row(x.e, `${A.esc(x.name)}: ${have}`, per ? `${per} a day · enough for ${days} day${days === 1 ? '' : 's'}` : 'Nobody eats it yet', per && days < 3 ? '<span class="ih-ec-low">Low</span>' : ''); }).join('');
+      const PROD = [['egg', '🥚', 'Eggs'], ['milk', '🥛', 'Milk'], ['honey', '🍯', 'Honey'], ['apple', '🍎', 'Apples'], ['carrot', '🥕', 'Carrots'], ['tomato', '🍅', 'Tomatoes'], ['lettuce', '🥬', 'Lettuces'], ['fish', '🐟', 'Fish']];
+      const GOODS = [['wool', '🧶', 'Wool'], ['pumpkin', '🎃', 'Pumpkins'], ['strawberry', '🍓', 'Strawberries'], ['lemon', '🍋', 'Lemons'], ['feijoa', '🍐', 'Feijoas'], ['truffle', '🍄', 'Truffles']];
+      const produce = [...PROD.map(([k, e, n]) => (f0[k] ? row(e, `${n}: ${f0[k]}`, 'In the fridge') : '')), ...GOODS.map(([k, e, n]) => (g0[k] ? row(e, `${n}: ${g0[k]}`, 'On the goods shelf') : '')), row('🟫', `Hay bales: ${Math.floor(((fm.feed || {}).hay || 0) / 6)} stacked`, `${(fm.bales || []).length} still lying in the meadows`)].join('');
+      const machines = (fm.items || []).filter(it => /^(tractor|quad)$/.test(it.t)).map(it => row(it.t === 'tractor' ? '🚜' : '🏍️', it.t === 'tractor' ? 'Tractor' : 'Quad bike', it.t === 'tractor' ? 'With its baler and trailer' : '')).join('');
+      return `<div class="ih-cc-card">${hol ? `<p><b>🏡 Holiday mode is on</b></p><p class="ih-ph-sub">A neighbour feeds the animals until ${new Date(fm.holiday.until * 864e5).toLocaleDateString('en-NZ', { weekday: 'long', day: 'numeric', month: 'short' })}, for ✨ 10 a day.</p><button class="ih-b2 ih-sm" data-a="ecHol" data-back="farm">I’m back: stop it</button>` : `<p><b>Going away?</b></p><p class="ih-ph-sub">Book a neighbour to feed the animals for a week (✨ 10 a day), so nobody goes hungry.</p><button class="ih-b2 ih-sm" data-a="ecHol" data-d="7" data-back="farm">Book a neighbour</button>`}</div>
+        <h4 class="ih-ph-h4">Animals (${an.length})</h4>${pads.length ? pads.map(x => `<p class="ih-ph-sub">Paddock ${x.n}</p><div class="ih-ph-list">${x.L.map(a => { const [hw, hc] = FD.health(a); return row(FD.ANIMALS[a.kind].e, `${A.esc(a.name || FD.ANIMALS[a.kind].name)} ${a.sex === 'f' ? '♀' : '♂'}`, `${A.esc(FD.ANIMALS[a.kind].name)}${FD.isYoung(a) ? ' · young' : ''} · <i class="vg-hb ${hc}"></i>${hw}`); }).join('')}</div>`).join('') : '<p class="ih-ph-sub">No animals yet. Buy them at the barn.</p>'}
+        <h4 class="ih-ph-h4">Supplies</h4><div class="ih-ph-list">${supplies}</div>
+        <h4 class="ih-ph-h4">Produce</h4><div class="ih-ph-list">${produce}</div>
+        ${g0.jam ? `<h4 class="ih-ph-h4">Products</h4><div class="ih-ph-list">${row('🫙', `Jam: ${g0.jam}`, 'Made in the packing shed')}</div>` : ''}
+        ${machines ? `<h4 class="ih-ph-h4">Machines</h4><div class="ih-ph-list">${machines}</div>` : ''}
+        ${(fm.remembered || []).length ? `<h4 class="ih-ph-h4">Remembered</h4><div class="ih-ph-list">${fm.remembered.map(r => row('🕊️', A.esc(r.name || `A ${((FD.ANIMALS[r.kind] || {}).name || r.kind).toLowerCase()}`), A.esc(((FD.ANIMALS[r.kind] || {}).name || '')))).join('')}</div>` : ''}`;
+    }
     function grownHtml() {
       const e = E();
       return `<p class="ih-ph-sub">For grown-ups. In Chorecast these will sit in Grown-ups; here they’re in the game for trying out.</p>
         <h4 class="ih-ph-h4">Farm earnings</h4><p class="ih-ph-sub">What the farm’s produce sells for. The kids see a change as the market moving, in an economic report; it never says a grown-up set it.</p><div class="ih-seg">${[0.5, 1, 1.5].map(v => `<button class="${e.dial === v ? 'on' : ''}" data-a="ecDial" data-v="${v}">${Math.round(v * 100)}%</button>`).join('')}</div>
+        <h4 class="ih-ph-h4">Holiday mode</h4><p class="ih-ph-sub">A neighbour feeds the animals (✨ 10 a day from the farm account), so none go hungry while the kids are away or busy.</p><div class="ih-seg"><button class="${(A.st().farm || {}).holiday ? 'on' : ''}" data-a="ecHol" data-d="14" data-back="grownups">${(A.st().farm || {}).holiday ? 'On (tap to stop)' : 'Turn on for 2 weeks'}</button></div>
         <h4 class="ih-ph-h4">Income tax on farm profit</h4><p class="ih-ph-sub">The farm’s own tax, separate from family tax (which is only for real money from chores). The kids see a change as news.</p><div class="ih-seg">${[0, 5, 10, 15, 20].map(v => `<button class="${e.tax === v ? 'on' : ''}" data-a="ecTax" data-v="${v}">${v}%</button>`).join('')}</div>`;
     }
-    return {
-      tick, show, act, billsHtml, grownHtml, report, LESSONS,
+    const api = {
+      tick, show, act, billsHtml, grownHtml, farmHtml, report, LESSONS,
       price: p => Math.max(1, Math.round(p * E().dial)),
       sale(xp) { E().wk.sales += xp; payDue(); },
       cost(xp, what) { if (RUNNING.test(what || '')) E().wk.run += xp; else E().wk.cap += xp; },
       // new farm things wait while a bill is overdue (feed and seed never do)
       canBuy(what) { if (!overdue().length || RUNNING.test(what || '')) return true; A.toast('A farm bill is overdue. Pay it in Banking first (feed and seed are still fine).'); return false; },
       // fuel and the like: paid now if the farm account can, otherwise a bill to pay
-      charge(xp, what) { const a = A.acct(); E().wk.run += xp; if (a.bal >= xp) { a.bal -= xp; A.led('farm', -xp, `Paid for ${what}`, A.slipOf('CHORECAST FARM', 'Receipt', [[what[0].toUpperCase() + what.slice(1), xp]], [['Paid from the farm account', xp, 'big'], ['Farm account after', a.bal, 'muted']])); } else addBill(what[0].toUpperCase() + what.slice(1), xp, 'The farm account was short', 'fuel'); A.save(); },
+      charge: (xp, what) => charge(xp, what),
+      _charge(xp, what) { const a = A.acct(); E().wk.run += xp; if (a.bal >= xp) { a.bal -= xp; A.led('farm', -xp, `Paid for ${what}`, A.slipOf('CHORECAST FARM', 'Receipt', [[what[0].toUpperCase() + what.slice(1), xp]], [['Paid from the farm account', xp, 'big'], ['Farm account after', a.bal, 'muted']])); } else addBill(what[0].toUpperCase() + what.slice(1), xp, 'The farm account was short', 'fuel'); A.save(); },
       dueCount: () => due().length, overdueCount: () => overdue().length
     };
+    return api;
   };
   IH.economy.today = today;
 })();

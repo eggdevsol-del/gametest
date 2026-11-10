@@ -2650,7 +2650,7 @@
   // things you're not using back for XP). Everything is in XP, never money.
   // islands that are land on the farm now (farm-land.js), not places to travel to
   const LAND_NOW = { plot: 1, orchard: 1 };
-  const APPS = [['bank', '🏦', 'Banking'], ['shop', '🛋️', 'Shop'], ['homes', '🏠', 'Homes'], ['groceries', '🛒', 'Groceries'], ['recipes', '🍳', 'Recipes'], ['market', '🏷️', 'Market'], ['jobs', '💼', 'Employment'], ['travel', '🧭', 'Travel to']];
+  const APPS = [['bank', '🏦', 'Banking'], ['farm', '🚜', 'Farm'], ['shop', '🛋️', 'Shop'], ['homes', '🏠', 'Homes'], ['groceries', '🛒', 'Groceries'], ['recipes', '🍳', 'Recipes'], ['market', '🏷️', 'Market'], ['jobs', '💼', 'Employment'], ['travel', '🧭', 'Travel to']];
   const sellValue = (d, used) => Math.max(10, Math.round(d.xp * (used ? 0.3 : 0.5) / 10) * 10);
   // the Market app pays sellers half what they'd get in person (a village shop, your stall)
   const phoneSell = (d, used) => Math.max(5, Math.round(sellValue(d, used) / 2 / 5) * 5);
@@ -2689,6 +2689,7 @@
     const appBtn = ([k, e, n]) => `<button class="ih-ph-app" data-a="app" data-app="${k}"><span>${e}</span>${n}</button>`;
     if (app === 'home') body = `<div class="ih-ph-apps">${APPS.map(appBtn).join('')}</div>`;
     if (app === 'bank') body = `${back}<h3>🏦 Banking</h3>${bankHtml()}`;
+    if (app === 'farm') body = `${back}<h3>🚜 Farm</h3>${O.E ? O.E.farmHtml() : ''}`;
     if (app === 'grownups') body = `<button class="ih-ph-back" data-a="app" data-app="bank">‹ Banking</button><h3>For grown-ups</h3>${O.E ? O.E.grownHtml() : ''}`;
     if (app === 'slip') { const e = (O.st.ledger || []).find(x => x.id === O.slipId); body = `<button class="ih-ph-back" data-a="app" data-app="bank">‹ Banking</button>${e && e.slip ? IH.slip(e.slip, e.at) : '<p class="ih-ph-sub">That slip has gone.</p>'}`; }
     if (app === 'groceries' && K) body = `${back}<h3>Groceries</h3><p class="ih-ph-sub">Food for your fridge and pantry. Your character cooks with it.</p><div class="ih-ph-list">${Object.entries(K.FOOD).map(([id, x]) => `<div class="ih-ph-row"><span class="ih-ph-e">${x.emoji}</span><span><b>${esc(x.name)}</b><small>${f[id] ? `${f[id]} in the ${x.where}` : `None in the ${x.where}`}</small></span><button class="ih-b1 ih-ph-btn" data-a="gbuy" data-f="${id}" ${w.left < x.xp ? 'disabled' : ''}>✨ ${x.xp}</button></div>`).join('')}</div>`;
@@ -2841,7 +2842,7 @@
     if (a === 'turnR') return turnView(1);
     if (a === 'decorate') { actsClose(); if (O.held) placeHeld(); if (O.held) return; O.editing = !O.editing; if (O.editing && !O.cat) O.cat = DEFS.some(d => spare(d.t) > 0) ? 'mine' : 'furn'; sound(O.editing ? 'lift' : 'place'); return ui(); }
     if (a === 'cat') { O.cat = el.dataset.c; return ui(); }
-    if (/^(ec|ls)[A-Z]/.test(a) && O.E) { const r = O.E.act(a, el); if (r === 'bank' || r === 'grownups') return phone(r); if (r) return; }
+    if (/^(ec|ls)[A-Z]/.test(a) && O.E) { const r = O.E.act(a, el); if (r === 'bank' || r === 'grownups' || r === 'farm') return phone(r); if (r) return; }
     if (a === 'phone') { sound('pop'); return phone('home'); }
     if (a === 'goTo') { closeSheet(); return travelTo(el.dataset.w); }
     if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); return phone('travel'); }
@@ -2961,7 +2962,7 @@
       if (moved) { save(); setTimeout(() => toast(moved === 2 ? 'Your veggie plot and orchard are blocks of land on your farm now, with everything still growing.' : `Your ${own.plot && land.some(b => b.from === 'plot') ? 'veggie plot' : 'orchard'} is a block of land on your farm now, with everything still growing.`), 4000); } }
     // the farm's running costs (economy.js): a played day counted, bills, the Monday statement, reports, lessons
     if (IH.economy) {
-      O.E = IH.economy({ st: () => O.st, kid: () => O.kid, acct: farmAcct, led, slipOf, save, toast, sheet, closeSheet, ui, sound, wGain, nf, esc, sheetOpen: () => !$('.ih-sheet', O.root).hidden });
+      O.E = IH.economy({ st: () => O.st, kid: () => O.kid, food: () => food(), goods: () => goods(), acct: farmAcct, led, slipOf, save, toast, sheet, closeSheet, ui, sound, wGain, nf, esc, sheetOpen: () => !$('.ih-sheet', O.root).hidden });
       O.econT = setInterval(() => { if (O && O.E && !O.paused) O.E.tick(); }, 60000); setTimeout(() => { if (O && O.E) O.E.tick(); }, 2500);
     }
     return true;

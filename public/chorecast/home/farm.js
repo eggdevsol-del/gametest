@@ -15,7 +15,7 @@
   const T = window.THREE, IH = window.IsoHome = window.IsoHome || {};
   if (!T || !IH.kit || !IH.islandsBuild) return;
   const { Kit } = IH.kit, IB = IH.islandsBuild, K = IB.kit, { rng, bx, sides, board, signpost, gate: hangGate } = K;
-  const W = 52, D = 60, DAY = 864e5, today = () => Math.floor(Date.now() / DAY);
+  const W = 52, D = 60, DAY = 864e5, today = () => Math.floor(Date.now() / DAY) + (IH.econDays || 0); // (IH.econDays: the test clock, economy.js)
   const TRACK = [[24, 0.4, 28, 16], [6, 13, 51, 17], [47.6, 13, 51, 45]], MEADOW = [4, 45.5, 48, 58], BARN = [6.6, 2.2, 17.4, 9.8], FENCE_XP = 8;
   // the hay yard on the grass in front of the barn: round bales stood on end in two lines, three high (each 6 hay)
   const YARD = [13.4, 10.0, 17.8, 12.8], YARD_CAP = 18, YARD_DROP = { x: 15.6, z: 14.6 };
@@ -61,7 +61,7 @@
   // ---------- the save: made, and version 1 farms moved over (their hen run, big paddock and fittings as they were)
   const nid = () => Math.random().toString(36).slice(2, 9);
   function state(st) {
-    const f = st || {}; if (f.v === 2) return f;
+    const f = st || {}; if (f.v === 2) return tagAnimals(f);
     const old = f.animals || { hen: 3, goat: 1 }, run = { id: 'run', x0: 31, z0: 1.2, x1: 45, z1: 11.6 }, big = { id: 'big', x0: 5, z0: 19, x1: 47, z1: 41 };
     const animals = []; for (const [kind, n] of Object.entries(old)) for (let i = 0; i < n; i++) animals.push({ id: nid(), kind, pad: kind === 'hen' ? 'run' : 'big', got: (f.got || {})[kind] || 0 });
     const items = [['coop', 36, 4.4, 0], ['trough', 38, 9.6, 0], ['trough', 16, 24, 0], ['hay', 41, 24, 0.3], ['feeder', 30, 24, 0], ['shelter', 42, 35, 0], ['milkstand', 8.6, 11.4, 0], ['shearstand', 49, 9, 0], ['tractor', 20.5, 11.6, -0.4], ['churns', 18.6, 3.2, 0]].map(([t, x, z, ry]) => ({ id: nid(), t, x, z, ry }));
@@ -71,6 +71,47 @@
   const inPad = (p, x, z, m = 0) => x > p.x0 + m && x < p.x1 - m && z > p.z0 + m && z < p.z1 - m;
   const padOf = (f, x, z) => f.paddocks.find(p => inPad(p, x, z, 0.3));
   const area = p => (p.x1 - p.x0) * (p.z1 - p.z0);
+  /* ---------- the animals as individuals (economy plan, phase 4): each has a name (once the kid gives one), a sex,
+     and a neglect count: played days its paddock went unfed. 1-2 hungry, 3-4 unwell (feeding alone won't fix it: the
+     vet's needed), 5-6 very sick, 7 it dies. Only played days count (economy.js runs the day), so being away never
+     harms one, and holiday mode (a neighbour feeding them) stops the count. Now and then a pair that's well fed and
+     has room has a young one. */
+  const BABY = { hen: 'chick', rooster: 'chick', duck: 'duckling', goose: 'gosling', turkey: 'poult', goat: 'kid', cow: 'calf', highland: 'calf', merino: 'lamb', alpaca: 'cria', llama: 'cria', kunekune: 'piglet', donkey: 'foal', pony: 'foal' };
+  const MOTHERS = /^(egg|milk)$/; // (only mothers lay or give milk)
+  const hashS = s0 => [...String(s0)].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) >>> 0, 7);
+  const isYoung = a => !!a.born && today() - a.born < 14;
+  const health = a => { const n = a.neg || 0; return n >= 5 ? ['Very sick', 'sick2'] : n >= 3 ? ['Unwell: needs the vet', 'sick'] : n >= 1 ? ['Hungry', 'hungry'] : ['Healthy', 'ok']; };
+  const animalName = a => a.name || `your ${ANIMALS[a.kind] ? ANIMALS[a.kind].name.toLowerCase() : a.kind}`;
+  function tagAnimals(f) {
+    for (const a of f.animals || []) { const m = ANIMALS[a.kind] || {}; if (!a.sex) a.sex = a.kind === 'rooster' ? 'm' : a.kind === 'hen' || MOTHERS.test(m.makes || '') ? 'f' : hashS(a.id) % 2 ? 'f' : 'm'; if (a.neg == null) a.neg = 0; }
+    return f;
+  }
+  // the kind a young one is, from its parents (a chick from a hen and a rooster is a hen or a rooster)
+  const pairs = kind => (kind === 'hen' || kind === 'rooster' ? ['hen', 'rooster'] : [kind]);
+  // one played day on the farm: who went hungry, who's sick, who died, who was born. prev: the last played day.
+  IH.farmDay = (f0, prev, R = Math.random) => {
+    const f = state(f0), now = today(), out = []; if (prev == null || f.v !== 2) return out;
+    const hol = f.holiday && f.holiday.until >= now;
+    for (const a of [...f.animals]) {
+      if (hol || (f.fed[a.pad] || 0) >= prev) { if ((a.neg || 0) < 3) a.neg = 0; } else a.neg = (a.neg || 0) + 1;
+      if (a.neg === 3 || a.neg === 5) out.push({ kind: a.neg === 3 ? 'sick' : 'verysick', id: a.id, name: animalName(a), animal: a.kind, e: (ANIMALS[a.kind] || {}).e });
+      if (a.neg >= 7) { f.animals.splice(f.animals.indexOf(a), 1); (f.remembered = f.remembered || []).push({ name: a.name || '', kind: a.kind, day: now }); out.push({ kind: 'died', name: animalName(a), animal: a.kind, e: (ANIMALS[a.kind] || {}).e }); }
+    }
+    for (const p of f.paddocks) {
+      const here = f.animals.filter(a => a.pad === p.id && !a.neg && !isYoung(a)), done = new Set();
+      for (const a of here) {
+        const kinds = pairs(a.kind), key = kinds.join(); if (done.has(key)) continue; done.add(key);
+        const grp = here.filter(b => kinds.includes(b.kind)), mums = grp.filter(b => b.sex === 'f'), dads = grp.filter(b => b.sex === 'm');
+        if (!mums.length || !dads.length || R() > 1 / 14) continue;
+        const sex = R() < 0.5 ? 'f' : 'm', kind = kinds.length > 1 ? (sex === 'm' ? 'rooster' : 'hen') : a.kind;
+        if (used(f, p) + ANIMALS[kind].room > area(p)) continue; // (a full paddock: no young ones)
+        const b = { id: nid(), kind, pad: p.id, sex, born: now, got: 0, neg: 0, name: '' }; f.animals.push(b);
+        out.push({ kind: 'born', id: b.id, animal: kind, baby: BABY[kind] || 'baby', e: ANIMALS[kind].e, mum: animalName(mums[0]), sex });
+      }
+    }
+    return out;
+  };
+  IH.farmData = { ANIMALS, ITEMS, FEED, BABY, health, isYoung, animalName };
   const used = (f, p) => f.animals.filter(a => a.pad === p.id).reduce((s, a) => s + ANIMALS[a.kind].room, 0);
   // the gate: in the middle of the side nearest the track
   function gateOf(p) { const cx = (p.x0 + p.x1) / 2, cz = (p.z0 + p.z1) / 2, d = { n: Math.abs(p.z0 - 15), s: Math.abs(p.z1 - 15), w: Math.abs(p.x0 - 26), e: Math.abs(p.x1 - 26) }; const side = Object.keys(d).sort((a, b) => d[a] - d[b])[0]; return side === 'n' ? { side, x: cx, z: p.z0 } : side === 's' ? { side, x: cx, z: p.z1 } : side === 'w' ? { side, x: p.x0, z: cz } : { side, x: p.x1, z: cz }; }
@@ -239,7 +280,7 @@
       if (/^(coop|pond|sty|milkstand|shearstand|beehive|tractor|quad|trough|feeder)$/.test(it.t)) spots.push({ kind: 'fitem', id: 'it' + it.id, item: it.id, t: it.t, name: 'the ' + d.name.toLowerCase(), at: [it.x, it.z + hd + 1.2], yaw: Math.PI, hit: [it.x, it.z, 0, Math.max(w, dd) + 0.4] }); }
     // the animals, each in its own paddock, moving its own way (village.js: the generic movers, or the 3D ones)
     const pens = {}; for (const { p } of pads) pens[p.id] = [p.x0 + 1, p.z0 + 1, p.x1 - 1, p.z1 - 1];
-    for (const a of f.animals) { const pen = pens[a.pad]; if (!pen) continue; const mk = (IH.animals3d && IH.animals3d.make) || ((kind) => (IB.MAKE[kind] || IB.MAKE.hen)()); const m = mk(a.kind); m.pen = pen; m.rec = a; let x = 0, z = 0; for (let q = 0; q < 30; q++) { x = pen[0] + R() * (pen[2] - pen[0]); z = pen[1] + R() * (pen[3] - pen[1]); if (!solids.some(r => x > r[0] - 0.8 && x < r[2] + 0.8 && z > r[1] - 0.8 && z < r[3] + 0.8)) break; } m.group.position.set(x, 0, z); m.group.rotation.y = R() * 6.28; animals.push(m); root.add(m.group); }
+    for (const a of f.animals) { const pen = pens[a.pad]; if (!pen) continue; const mk = (IH.animals3d && IH.animals3d.make) || ((kind) => (IB.MAKE[kind] || IB.MAKE.hen)()); const m = mk(a.kind); m.pen = pen; m.rec = a; if (isYoung(a)) m.group.scale.multiplyScalar(0.55); let x = 0, z = 0; for (let q = 0; q < 30; q++) { x = pen[0] + R() * (pen[2] - pen[0]); z = pen[1] + R() * (pen[3] - pen[1]); if (!solids.some(r => x > r[0] - 0.8 && x < r[2] + 0.8 && z > r[1] - 0.8 && z < r[3] + 0.8)) break; } m.group.position.set(x, 0, z); m.group.rotation.y = R() * 6.28; animals.push(m); root.add(m.group); }
     root.add(k.build()); for (const s of spots) if (s.hit) { const [x, z, , w] = s.hit, m = new T.Mesh(new T.BoxGeometry(w, 4, w), new T.MeshBasicMaterial()); m.visible = false; m.position.set(x, 2, z); m.userData.spot = s; root.add(m); }
     // the hay meadow at the front: long grass (the home's own), cut where the baler's been (it grows back in two days),
     // a low hedge round it, and the round bales lying where they dropped
@@ -274,13 +315,13 @@
   /* ---------- on the farm (village.js calls this once; ctx is what it needs from there) */
   IH.villageFarm = c => {
     const V = () => c.V, sh = () => c.V.stage.shop, F = () => state(sh().farm()), save = () => sh().farmSave();
-    const ready = a => { const m = ANIMALS[a.kind]; if (!m.makes) return 0; const b = a.got ? Math.min(3, Math.floor((Date.now() - a.got) / (m.every * DAY))) : 1; return b * m.n; };
+    const ready = a => { const m = ANIMALS[a.kind]; if (!m.makes || isYoung(a) || (a.sex === 'm' && MOTHERS.test(m.makes))) return 0; const b = a.got ? Math.min(3, Math.floor((Date.now() - a.got) / (m.every * DAY))) : 1; return b * m.n; };
     const hasIn = (f, pad, t) => f.items.some(it => it.t === t && padOf(f, it.x, it.z) && padOf(f, it.x, it.z).id === pad);
     const hasAny = (f, t) => f.items.some(it => it.t === t);
     const fed = (f, pad) => (f.fed[pad] || 0) >= today() - 1;
     // why an animal isn't making anything (or null: it is)
     function why(f, a) {
-      const m = ANIMALS[a.kind]; if (!m.makes) return null; if (!fed(f, a.pad)) return 'hungry'; if (!hasIn(f, a.pad, 'trough')) return 'no water';
+      const m = ANIMALS[a.kind]; if (!m.makes) return null; if ((a.neg || 0) >= 3) return 'unwell: call the vet'; if (!fed(f, a.pad)) return 'hungry'; if (!hasIn(f, a.pad, 'trough')) return 'no water';
       if ((m.needs === 'coop' || m.needs === 'pond' || m.needs === 'sty') && !hasIn(f, a.pad, m.needs)) return 'needs ' + NEEDS_NAME[m.needs];
       if ((m.needs === 'milkstand' || m.needs === 'shearstand') && !hasAny(f, m.needs)) return 'needs ' + NEEDS_NAME[m.needs]; return null;
     }
@@ -290,6 +331,53 @@
       if (!ok.length) { const w = L.map(a => why(f, a)).find(Boolean); return c.toast(w ? `They can’t yet: ${w}.` : 'Nothing ready yet. Come back tomorrow.'); }
       let n = 0; for (const a of ok) { let k = ready(a); if (a.kind === 'hen' && f.animals.some(o => o.kind === 'rooster' && o.pad === a.pad)) k *= 2; n += k; a.got = Date.now(); }
       c.chore(s, pose, 3, () => { save(); if (what === 'wool' || what === 'truffle') sh().addGoods(what, n); else sh().addFood(what, n); c.float(V().kid, emo); c.sound('buy'); c.toast(`${n} ${{ egg: n === 1 ? 'egg' : 'eggs', milk: n === 1 ? 'bottle of milk' : 'bottles of milk', wool: n === 1 ? 'bag of wool' : 'bags of wool', truffle: n === 1 ? 'truffle' : 'truffles' }[what]}! ${what === 'wool' || what === 'truffle' ? 'On your goods shelf.' : 'Into your fridge at home.'}`); }, null, { egg: { tool: 'basket', fx: 'straw', dist: 0.9, y: 0.6, rate: 8 }, milk: { tool: 'pail', fx: 'milk', dist: 0.55, y: 0.75, rate: 16 }, wool: { tool: 'shears', fx: 'wool', dist: 0.8, y: 0.9, rate: 10 }, truffle: { fx: 'soil', dist: 1.0, y: 0.1, rate: 10 } }[what]);
+    }
+    // ---------- who lives in a paddock: names, sex, age, health; naming one
+    const VET_XP = 40, sexMark = a => (a.sex === 'f' ? '♀' : '♂');
+    function whoPanel(pad, nameId) {
+      const f = F(), L = f.animals.filter(a => a.pad === pad), p = f.paddocks.find(q => q.id === pad);
+      const row = a => { const [hw, hc] = health(a); return `<button data-v="farm" data-k="name:${a.id}" class="${nameId === a.id ? 'on' : ''}"><span class="e">${ANIMALS[a.kind].e}</span>${esc(a.name || ANIMALS[a.kind].name)} ${sexMark(a)}${isYoung(a) ? ' · young' : ''}<small>&nbsp;<i class="vg-hb ${hc}"></i>${hw}${why(f, a) && !(a.neg >= 3) ? ` · ${esc(why(f, a))}` : ''} · tap to ${a.name ? 'rename' : 'name'}</small></button>`; };
+      const naming = nameId && f.animals.find(a => a.id === nameId);
+      c.gamePanel(`<div class="vg-gh"><b>📋 Who lives here</b><span>${p ? `${used(f, p)} / ${Math.floor(area(p))} room` : ''}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div>
+        ${L.length ? `<div class="vg-gb vg-mine">${L.map(row).join('')}</div>` : '<div class="vg-gq">Nobody lives here yet. Buy animals at the barn.</div>'}
+        ${naming ? `<div class="vg-gq">A name for this ${esc(ANIMALS[naming.kind].name.toLowerCase())}:</div><div class="vg-gb vg-go"><input class="vg-name" maxlength="14" value="${esc(naming.name || '')}" placeholder="${esc(['Daisy', 'Pickles', 'Bramble', 'Clover', 'Biscuit', 'Maple'][hashS(naming.id) % 6])}" aria-label="Name"><button data-v="farm" data-k="nameok:${naming.id}:${pad}">Save</button></div>` : ''}`);
+      if (naming) setTimeout(() => { const el = document.querySelector('.vg-name'); if (el) el.focus(); }, 50);
+    }
+    function nameIt(id, pad) {
+      const f = F(), a = f.animals.find(q => q.id === id), el = document.querySelector('.vg-name'); if (!a || !el) return;
+      const nm = (el.value || el.placeholder || '').replace(/[^\p{L}\p{N} '-]/gu, '').trim().slice(0, 14); if (!nm) return;
+      a.name = nm; save(); c.sound('pop'); c.toast(`${ANIMALS[a.kind].e} Hello, ${nm}!`); whoPanel(pad);
+    }
+    function callVet(pad) {
+      const f = F(), L = f.animals.filter(a => a.pad === pad && (a.neg || 0) >= 3); if (!L.length) return;
+      if (!sh().farmPay(VET_XP, 'a vet visit')) return;
+      for (const a of L) a.neg = 0; save(); c.sound('tune'); c.toast(`The vet's been. ${L.map(animalName).join(', ')} ${L.length === 1 ? 'is' : 'are'} on the mend. Keep their paddock fed every day.`);
+      for (const m of V().B.animals) if (m.rec && L.includes(m.rec)) c.float({ pos: m.group.position }, '💚');
+    }
+    // ---------- mustering: pick animals in a paddock, they follow the kid (along the way the kid walks, so through
+    // the gates), and go into the paddock at whichever gate the kid stops at
+    let MU = null;
+    function musterPanel(pad) {
+      const f = F(), L = f.animals.filter(a => a.pad === pad); MU = MU && MU.from === pad && !MU.going ? MU : { from: pad, ids: new Set(), going: false };
+      c.gamePanel(`<div class="vg-gh"><b>🐾 Lead animals</b><span>${MU.ids.size} picked</span><button class="vg-x" data-v="farm" data-k="munone" aria-label="Close">✕</button></div>
+        <div class="vg-gq">Tap the animals to bring. They’ll follow you. Walk to another paddock’s gate and let them in.</div>
+        <div class="vg-gb vg-mine">${L.map(a => `<button data-v="farm" data-k="mupick:${a.id}" class="${MU.ids.has(a.id) ? 'on' : ''}"><span class="e">${ANIMALS[a.kind].e}</span>${esc(a.name || ANIMALS[a.kind].name)} ${sexMark(a)}${MU.ids.has(a.id) ? ' ✓' : ''}</button>`).join('')}</div>
+        <div class="vg-gb vg-go"><button data-v="farm" data-k="muall">All of them</button><button data-v="farm" data-k="mugo" ${MU.ids.size ? '' : 'disabled'}>Lead them</button></div>`);
+    }
+    function lead() {
+      let n = 0; for (const m of V().B.animals) if (m.rec && MU.ids.has(m.rec.id)) { m.follow = ++n; m.st = null; }
+      MU.going = true; document.querySelector('.vg-game').hidden = true; c.sound('on'); c.toast(`${n} following you. Walk to another paddock’s gate and tap it.`);
+    }
+    function stopLeading(words) {
+      if (!MU) return; const f = F(), pen = id => { const p = f.paddocks.find(q => q.id === id); return p ? [p.x0 + 1, p.z0 + 1, p.x1 - 1, p.z1 - 1] : null; };
+      for (const m of V().B.animals) if (m.follow) { m.follow = 0; m.st = null; m.pen = pen(m.rec.pad) || m.pen; }
+      MU = null; if (words) c.toast(words);
+    }
+    function letIn(pad) {
+      const f = F(), p = f.paddocks.find(q => q.id === pad); if (!MU || !p) return;
+      const L = f.animals.filter(a => MU.ids.has(a.id)), need = L.reduce((t, a) => t + ANIMALS[a.kind].room, 0);
+      if (used(f, p) + need > area(p)) return c.toast(`Not enough room here for all of them (${Math.floor(area(p) - used(f, p))} room left, they need ${need}).`);
+      for (const a of L) a.pad = pad; save(); c.sound('tune'); stopLeading(`${L.length === 1 ? animalName(L[0]) + ' is' : L.length + ' animals are'} in their new paddock. Make sure it has water and feed!`);
     }
     function feedPad(s) {
       const f = F(), L = f.animals.filter(a => a.pad === s.pad); if (!L.length) return c.toast('Nobody lives in this paddock yet. Buy animals at the barn.');
@@ -570,7 +658,9 @@
     const acts = {
       fbarn: () => [{ e: '🐮', label: 'Buy animals', run: () => shop('animals') }, { e: '🌾', label: 'Buy feed', run: () => shop('feed') }, { e: '🛠️', label: 'Farm planner: paddocks, fittings, equipment', run: () => planner() }],
       fgate: s => { const f = F(), L = f.animals.filter(a => a.pad === s.pad), p = f.paddocks.find(q => q.id === s.pad); return [{ e: '🌾', label: L.length ? ((f.fed[s.pad] || 0) === today() ? 'Fed today ✓' : `Feed them (${L.length} animal${L.length === 1 ? '' : 's'})`) : 'Nobody lives here yet', run: () => feedPad(s) },
-        { e: '📋', label: `Who lives here · ${p ? used(f, p) : 0} / ${p ? Math.floor(area(p)) : 0} room`, run: () => c.toast(L.length ? L.map(a => ANIMALS[a.kind].e + ' ' + ANIMALS[a.kind].name + (why(f, a) ? ` (${why(f, a)})` : '')).join(', ') : 'Empty. Buy animals at the barn.') }]; },
+        { e: '📋', label: `Who lives here · ${p ? used(f, p) : 0} / ${p ? Math.floor(area(p)) : 0} room`, run: () => whoPanel(s.pad) },
+        ...(L.some(a => (a.neg || 0) >= 3) ? [{ e: '🩺', label: `Call the vet · ✨ ${VET_XP}`, run: () => callVet(s.pad) }] : []),
+        ...(MU && MU.ids.size && MU.from !== s.pad ? [{ e: '🐾', label: `Let them in here (${MU.ids.size})`, run: () => letIn(s.pad) }] : MU && MU.ids.size && MU.from === s.pad ? [{ e: '↩️', label: 'Put them back', run: () => stopLeading('Back in their paddock.') }] : L.length ? [{ e: '🐾', label: 'Lead animals to another paddock', run: () => musterPanel(s.pad) }] : [])]; },
       fitem: s => {
         const f = F();
         if (s.t === 'coop') return [{ e: '🥚', label: 'Collect the eggs', run: () => { const p = padOf(f, s.at[0], s.at[1] - 2) || padOf(f, ...(() => { const it = f.items.find(i => i.id === s.item); return [it.x, it.z]; })()); collect(s, a => p && a.pad === p.id && (a.kind === 'hen' || a.kind === 'turkey'), 'egg', 'fetch', '🥚'); } }];
@@ -717,6 +807,12 @@
       if (what === 'hitch') return hitch(a);
       if (what === 'pclose') { P = null; V().plan = null; while (preview.children.length) preview.remove(preview.children[0]); document.querySelector('.vg-game').hidden = true; return; }
       if (what === 'mode') { P = { mode: a }; return planner(); }
+      if (what === 'name') return whoPanel(f.animals.find(x => x.id === a) ? f.animals.find(x => x.id === a).pad : null, a);
+      if (what === 'nameok') return nameIt(a, b);
+      if (what === 'mupick') { if (MU) { if (MU.ids.has(a)) MU.ids.delete(a); else MU.ids.add(a); return musterPanel(MU.from); } return; }
+      if (what === 'muall') { if (MU) { for (const x of f.animals) if (x.pad === MU.from) MU.ids.add(x.id); return musterPanel(MU.from); } return; }
+      if (what === 'mugo') { if (MU && MU.ids.size) lead(); return; }
+      if (what === 'munone') { if (MU && !MU.going) MU = null; document.querySelector('.vg-game').hidden = true; return; }
       if (what === 'lpick') { P.buy = a; P.ltype = P.ltype || 'field'; P.ledge = P.ledge || 'hedge'; return planner(); }
       if (what === 'ltype') { P.ltype = a; return planner(); }
       if (what === 'ledge') { P.ledge = a; return planner(); }
@@ -737,6 +833,6 @@
       }
     }
     const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
-    return { ap: () => AP, dr: () => DR, acts, click, tap, tick, prep() { AP = null; if (DR) { removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); DR = null; } P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
+    return { ap: () => AP, dr: () => DR, acts, click, tap, tick, prep() { AP = null; MU = null; if (DR) { removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); DR = null; } P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
   };
 })();
