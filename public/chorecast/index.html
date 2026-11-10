@@ -4824,6 +4824,46 @@ const Studio = (() => {
   return { get open() { return S0.open; }, get covers() { return S0.open && !S0.leaving; }, get doing() { return S0.brain ? S0.brain.doing : S0.play ? S0.play.k : ''; }, show: open, close, act, farmAct };
 })();
 
+/* The homes game (home/*.js, 2026-11-10): tapping a kid's island opens their home, the village, Beach cove and the
+   farm in place of the island studio above. A grown-up can switch back under Settings → Island game ("classic"), and
+   ?game=classic or ?game=homes picks it on one device. The classic island, and everything kids bought and unlocked on
+   it (kid.island), is kept as it was; nothing here touches it, and migration 022 keeps a copy on the server too.
+   Homes, pets and the farm are saved on the device for now (cc:home:<kid id>). XP left is the app's own (xpOf) less
+   what's spent in the game. */
+const islandGame = () => {
+  try { const q = new URLSearchParams(location.search).get('game'); if (q === 'classic' || q === 'homes') localStorage.setItem('cc:islandGame', q); const d = localStorage.getItem('cc:islandGame'); if (d) return d; } catch (e) { /* private browsing */ }
+  return S().islandGame || 'homes';
+};
+const HomesGame = (() => {
+  const FILES = ['look', 'kit', 'blocks', 'settings', 'homes', 'pets', 'anim2d', 'yami', 'yami3d', 'kid3d', 'cloth', 'ragdoll', 'phys', 'life', 'kitchen', 'chars', 'items',
+    'village-build', 'islands-build', 'islands-more', 'farm-land', 'lang-islands', 'village-islands', 'tractor-plan', 'farm-items', 'farm', 'animals3d', 'village-shops',
+    'village-net', 'village', 'slip', 'bank', 'economy', 'app'];
+  let loading = null;
+  const one = src => new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.async = false; s.onload = ok; s.onerror = () => no(new Error(src)); document.head.appendChild(s); });
+  function load() {
+    if (loading) return loading;
+    const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'home/home.css'; document.head.appendChild(css);
+    loading = Promise.all(FILES.map(f => one(`home/${f}.js`))).catch(e => { loading = null; throw e; });
+    return loading;
+  }
+  async function show(id) {
+    const k = Store.kids[id]; if (!k) return;
+    toast('Opening your home…');
+    try { await load(); } catch (e) { return toast('Your home couldn’t load. Check the internet and try again.'); }
+    const H = window.IsoHome; if (!H || !H.open) return toast('Your home couldn’t load.');
+    const who = x => ({ id: x.id, name: x.name, avatar: x.avatar, hue: x.hue });
+    const ok = H.open({
+      kid: who(k), xp: () => xpOf(Store.kids[id] || k),
+      family: () => Object.values(Store.kids).filter(x => !x.example && !x.archived).map(who),
+      track: (t, p) => track(t, p, id),
+      onClose: () => render()
+    });
+    if (!ok) toast('Your home needs a newer browser to show.');
+  }
+  return { show, load, get open() { return !!(window.IsoHome && window.IsoHome.isOpen); } };
+})();
+const openIsland = id => (islandGame() === 'classic' ? Studio.show(id) : HomesGame.show(id));
+
 /* Island home (a prototype, on only for devices that opened the app with ?look=island; ?look=classic turns it off).
    Today opens on the kid's own island, big, with their character on it. Each of today's jobs is a button pinned to a
    spot on the island that fits it: bedroom, kitchen and bathroom jobs at the house, the garden on the lawn, pets by
@@ -6714,6 +6754,7 @@ function pBank() {
       <div class="row wrap"><div class="row-main"><b>Most a farm earns a day</b><small>Each kid’s farm stand and orders stop paying at this much XP a day, so chores and lessons stay the main way to earn.</small></div><div class="seg">${[[100, '100'], [150, '150'], [250, '250'], [400, '400'], [0, 'No limit']].map(([v, l]) => `<button class="seg-i ${(s.farmCap ?? 150) === v ? 'on' : ''}" data-act="farmCap" data-v="${v}">${l}</button>`).join('')}</div></div>
     </div>
     <h3 class="pgroup-t">Island activities</h3><div class="group">
+      <div class="row wrap"><div class="row-main"><b>Island game</b><small>Homes: their own home, the village, Beach cove and the farm. Classic: the floating island and its shop. Each keeps everything kids bought and unlocked, so you can switch back any time.</small></div><div class="seg">${[['homes', 'Homes'], ['classic', 'Classic']].map(([v, l]) => `<button class="seg-i ${(s.islandGame || 'homes') === v ? 'on' : ''}" data-act="islandGame" data-v="${v}">${l}</button>`).join('')}</div></div>
       <div class="row"><div class="row-main"><b>Island activities</b><small>On each island their character can fish, surf, ride, spot birds and more, earning a little XP each time. It opens once their must-dos are done.</small></div><button class="switch ${s.playOn !== false ? 'on' : ''}" role="switch" aria-checked="${s.playOn !== false}" aria-label="Island activities" data-act="playOn"></button></div>
       <div class="row wrap"><div class="row-main"><b>Most activities earn a day</b><small>Each kid stops earning XP from activities at this much a day. They can keep playing for fun.</small></div><div class="seg">${[[30, '30'], [60, '60'], [100, '100'], [200, '200'], [0, 'No limit']].map(([v, l]) => `<button class="seg-i ${(s.playCap ?? 60) === v ? 'on' : ''}" data-act="playCap" data-v="${v}">${l}</button>`).join('')}</div></div>
     </div>
@@ -7383,6 +7424,7 @@ const ACT = {
   farmOn: () => saveSettings({ farmOn: S().farmOn === false }),
   farmCap: a => saveSettings({ farmCap: +a.dataset.v }),
   playOn: () => saveSettings({ playOn: S().playOn === false }),
+  islandGame: a => { try { localStorage.removeItem('cc:islandGame'); } catch (e) { /* private browsing */ } saveSettings({ islandGame: a.dataset.v }); },
   playCap: a => saveSettings({ playCap: +a.dataset.v }),
   remindAt: a => saveSettings({ remindAt: a.dataset.h === '' ? null : +a.dataset.h }),
   lessonAt: a => saveSettings({ lessonAt: a.dataset.h === '' ? null : +a.dataset.h }),
@@ -7408,7 +7450,7 @@ const ACT = {
   // A bonus job for a wish: the chore form, ready to send to that kid.
   wishJob: a => { const k = Store.kids[a.dataset.kid], d = shopDef(a.dataset.t); if (!k || !d) return; ACT.addChore(); Object.assign(UI.choreForm, { title: `Bonus job for the ${d.name.toLowerCase()}`, sendTo: [k.id] }); renderSheet(); },
   shopRestore: async () => { const app = window.ChorecastApp; if (!app || !app.restore) return; try { const list = await app.restore(); if (list && list.length) await api('POST', '/api/purchases/apple', { transactions: list }); await loadPlan(); await loadShop(); toast(list && list.length ? 'Purchases restored.' : 'Nothing to restore on this Apple account.'); } catch (e) { toast(e.message || 'That didn’t work. Try again.'); } },
-  giftGo: a => { closeSheet(); Studio.show(a.dataset.id); },
+  giftGo: a => { closeSheet(); openIsland(a.dataset.id); },
   planOpen: a => {
     UI.planS = { why: a && a.dataset ? a.dataset.why : '' }; openSheet(planSheet); track('plan.sheet', { why: UI.planS.why || null, plan: Plan.plan }, null); loadPlan().then(() => UI.sheet && UI.sheet.fn === planSheet && renderSheet());
     const app = window.ChorecastApp; if (app && app.products) app.products(PRODUCT_IDS).then(list => { if (UI.planS) { UI.planS.products = list || []; renderSheet(); } }).catch(() => {});
@@ -7602,7 +7644,7 @@ const ACT = {
     t.amt = 0; Sound.coin(); renderSheet(false);
   },
   photo: a => { UI.photoId = a.dataset.id; openSheet(photoSheet, { cls: 'wide' }); },
-  studio: a => { const k = Store.kids[a.dataset.id]; if (k && k.resting && !UI.unlocked) return toast('Your island is safe, just as you left it.'); Studio.show(a.dataset.id); },
+  studio: a => { const k = Store.kids[a.dataset.id]; if (k && k.resting && !UI.unlocked) return toast('Your island is safe, just as you left it.'); openIsland(a.dataset.id); },
   st: a => Studio.farmAct(a.dataset.n, a),
   stClose: () => Studio.close(), stCat: a => Studio.act('cat', a), stIsle: a => Studio.act('isle', a), stLook: a => Studio.act('look', a), stLookUse: a => Studio.act('lookUse', a), stLookXp: a => Studio.act('lookXp', a), stLookCash: a => Studio.act('lookCash', a), stLookOff: a => Studio.act('lookOff', a), stPlaceWon: a => Studio.act('placeWon', a), stBuyXp: a => Studio.act('buyXp', a), stBuyCash: a => Studio.act('buyCash', a), stPayCash: a => Studio.act('payCash', a), stPayXp: a => Studio.act('payXp', a), stCancel: a => Studio.act('cancel', a), stDone: a => Studio.act('done', a), stMove: a => Studio.act('move', a), stTurn: a => Studio.act('turn', a), stSell: a => Studio.act('sell', a), stCare: a => Studio.act('care', a),
   poke: a => { G3.poke(a.dataset.id); Sound.ensure(); Sound.pop(); const r = a.getBoundingClientRect(); FX.burst(r.left + r.width / 2, r.top + r.height * 0.4, CONF, 16); },

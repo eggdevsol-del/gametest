@@ -2415,6 +2415,7 @@
   // (the language islands are free to visit: lang-islands.js)
   const islandsOwned = () => Object.assign({}, O.st.islands || {}, IH.langIslands ? IH.langIslands.FREE : {});
   function travelTo(where) {
+    if (where !== 'home' && where !== 'village' && !isleOpen(where)) { toast('That island is closed for now.'); return; }
     if (where === 'home') { if (O.away && IH.village) IH.village.leave(); return; }
     if (O.away) { if (IH.village) IH.village.goto(where); return; }
     if (where === 'village') return goVillage();
@@ -2714,6 +2715,11 @@
   // things you're not using back for XP). Everything is in XP, never money.
   // islands that are land on the farm now (farm-land.js), not places to travel to
   const LAND_NOW = { plot: 1, orchard: 1 };
+  // Which islands are open to travel to (2026-11-10: Beach cove and the farm ones only, for now; opts.islands
+  // overrides it, and null opens them all). The others keep everything on them, they just can't be visited until
+  // they open again. (The veggie plot and orchard are land blocks on the farm, so they come with it.)
+  const ISLANDS_OPEN = ['beach', 'farm', 'stable', 'plot', 'orchard'];
+  const isleOpen = id => { const a = O && O.opts.islands !== undefined ? O.opts.islands : ISLANDS_OPEN; return !a || a.includes(id); };
   const APPS = [['bank', '🏦', 'Banking'], ['farm', '🚜', 'Farm'], ['shop', '🛋️', 'Shop'], ['homes', '🏠', 'Homes'], ['groceries', '🛒', 'Groceries'], ['recipes', '🍳', 'Recipes'], ['market', '🏷️', 'Market'], ['jobs', '💼', 'Employment'], ['travel', '🧭', 'Travel to']];
   const sellValue = (d, used) => Math.max(10, Math.round(d.xp * (used ? 0.3 : 0.5) / 10) * 10);
   // the Market app pays sellers half what they'd get in person (a village shop, your stall)
@@ -2792,7 +2798,7 @@
       body = `${back}<h3>Travel to</h3><p class="ih-ph-sub">Your home, the village and your islands. Vacation islands are for playing; on utility islands you make things to cook or sell.</p><div class="ih-ph-list">
         ${row('home', '🏠', O.home && O.home.def ? O.home.def.name : 'Home', 'Your home', go('home'))}${row('village', '🏮', 'Hoshi Street', 'The village: shops, café, market', go('village'))}
         ${L.map(i => { const has = own[i.id], kind = i.kind === 'vacation' ? '🌴 Vacation' : i.kind === 'language' ? '🗣️ Language' : '🛠️ Utility', needs = i.needs && !own[i.needs];
-          return row(i.id, i.emoji, i.name, `${kind} · ${esc(i.about)}`, has ? go(i.id) : !i.built ? '<small class="ih-ph-tag">Coming soon</small>' : needs ? `<small class="ih-ph-tag">Needs the ${esc((L.find(q => q.id === i.needs) || {}).name || i.needs)}</small>` : `<button class="ih-b2 ih-sm" data-a="isBuy" data-w="${i.id}" ${w.left < i.xp ? 'disabled' : ''}>✨ ${nf(i.xp)}</button>`); }).join('')}</div>`;
+          return row(i.id, i.emoji, i.name, `${kind} · ${esc(i.about)}`, !isleOpen(i.id) ? '<small class="ih-ph-tag">Closed for now</small>' : has ? go(i.id) : !i.built ? '<small class="ih-ph-tag">Coming soon</small>' : needs ? `<small class="ih-ph-tag">Needs the ${esc((L.find(q => q.id === i.needs) || {}).name || i.needs)}</small>` : `<button class="ih-b2 ih-sm" data-a="isBuy" data-w="${i.id}" ${w.left < i.xp ? 'disabled' : ''}>✨ ${nf(i.xp)}</button>`); }).join('')}</div>`;
     }
     sheet(`<div class="ih-phone"><div class="ih-ph-top"><span>${new Date().toLocaleTimeString('en-NZ', { hour: 'numeric', minute: '2-digit' })}</span><span>✨ ${nf(w.left)} XP</span></div><div class="ih-ph-screen">${body}</div><button class="ih-ph-home" data-a="${app === 'home' ? 'sheetX' : 'phone'}" aria-label="${app === 'home' ? 'Close the phone' : 'Home screen'}"></button></div>`, 'phone');
     O.phoneApp = app;
@@ -2913,7 +2919,7 @@
     if (/^(ec|ls)[A-Z]/.test(a) && O.E) { const r = O.E.act(a, el); if (r === 'bank' || r === 'grownups' || r === 'farm') return phone(r); if (r) return; }
     if (a === 'phone') { sound('pop'); return phone('home'); }
     if (a === 'goTo') { closeSheet(); return travelTo(el.dataset.w); }
-    if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); return phone('travel'); }
+    if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || !isleOpen(i.id) || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); return phone('travel'); }
     if (a === 'pSell') { const id = el.dataset.k, P = PRODUCE[id]; if (!P) return; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return; if (P.goods) g[id] -= 1; else f[id] -= 1; const pr = O.E ? O.E.price(P.price) : P.price; farmIn(pr, `sold ${P.one} at the grocer`, [[cap(P.one), pr]]); save(); sound('buy'); ui(true); toast(`Sold ${P.one}: ✨ ${pr} into your farm account.`); return produceSheet(); }
     if (a === 'app') { const ap = el.dataset.app; O.pick = null; if (ap === 'shop') { closeSheet(); if (!O.editing) act('decorate'); return; } if (ap === 'homes') { closeSheet(); return homesSheet(); } return phone(ap); }
     if (a === 'gbuy') { const id = el.dataset.f, x = IH.kitchen && IH.kitchen.FOOD[id], w = wallet(); if (!x || w.left < x.xp) return; wSpend(x.xp, x.name ? x.name.toLowerCase() : id, 'GROCERIES APP'); const f = food(); f[id] = (f[id] || 0) + 1; save(); sound('buy'); if (O.opts.track) O.opts.track('home.food', { food: id, xp: x.xp }); return phone('groceries'); }
