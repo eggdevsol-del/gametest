@@ -67,6 +67,20 @@
   };
   Object.assign(MAKE, MORE);
 
+  // what's growing in a raised bed (crop, stage 0 seeds to 3 ready), into kit kk: shared with the farm's field blocks
+  function cropBed(kk, crop, stage) {
+    const s = [0.3, 0.55, 0.8, 1][stage] || 0.3;
+    for (let r = 0; r < 2; r++) for (let c = 0; c < 4; c++) { const x = -1.6 + c * 1.07, z = -0.7 + r * 1.4;
+      if (stage === 0) { kk.ball(0.18, x, 0, z, '#6b4a33', { s: [1, 0.4, 1], n: 6 }); continue; }
+      if (crop === 'carrot') { for (let l = 0; l < 4; l++) kk.cone(0.05, 0.55 * s, x + (l - 1.5) * 0.06, 0, z, '#5fae4a', { n: 3, rz: (l - 1.5) * 0.3 }); if (stage === 3) kk.cone(0.09, 0.12, x, 0.02, z, '#ff8a3d', { n: 6 }); }
+      else if (crop === 'tomato') { kk.cyl(0.02, 1.4 * s, x + 0.12, 0, z, '#c9a173', { n: 3 }); kk.ball(0.3 * s, x, 0.6 * s, z, '#4e9e48', { n: 8 }); if (stage === 3) for (let f = 0; f < 3; f++) kk.ball(0.1, x + (f - 1) * 0.15, 0.5 + f * 0.12, z + 0.2, '#e8463e', { n: 6 }); }
+      else if (crop === 'lettuce') kk.ball(0.32 * s, x, 0.12 * s, z, stage === 3 ? '#9be38f' : '#7cd36a', { s: [1, 0.7, 1], n: 9 });
+      else if (crop === 'pumpkin') { kk.ball(0.22 * s, x, 0.1, z, '#4e9e48', { s: [1.4, 0.4, 1.4], n: 7 }); if (stage === 3 && c % 2 === 0) kk.ball(0.3, x + 0.2, 0.22, z, '#f39a3b', { s: [1.2, 0.85, 1.2], n: 9 }); }
+      else if (crop === 'strawberry') { kk.ball(0.22 * s, x, 0.1, z, '#5fae4a', { s: [1.2, 0.5, 1.2], n: 7 }); if (stage === 3) for (let f = 0; f < 3; f++) kk.ball(0.06, x + (f - 1) * 0.14, 0.08, z + 0.2, '#e8352e', { n: 5 }); }
+    }
+  }
+  IB.more = { shed, tree, cropBed };
+
   /* ---------- Veggie plot: six raised beds (planted, watered, harvested), a seed shed, a glasshouse, a water tank */
   function plot(st) {
     const W = 40, D = 32, R = rng(707), k = base(W, D, R), [sol, solid] = solids(), spots = [], root = new T.Group();
@@ -87,15 +101,7 @@
     // what's growing in a bed: crop, stage 0 (seeds) to 3 (ready)
     const drawBed = (i, crop, stage) => {
       const b = beds[i]; if (!b) return; while (b.g.children.length) b.g.remove(b.g.children[0]); if (!crop) return;
-      const kk = new Kit(), s = [0.3, 0.55, 0.8, 1][stage] || 0.3;
-      for (let r = 0; r < 2; r++) for (let c = 0; c < 4; c++) { const x = -1.6 + c * 1.07, z = -0.7 + r * 1.4;
-        if (stage === 0) { kk.ball(0.18, x, 0, z, '#6b4a33', { s: [1, 0.4, 1], n: 6 }); continue; }
-        if (crop === 'carrot') { for (let l = 0; l < 4; l++) kk.cone(0.05, 0.55 * s, x + (l - 1.5) * 0.06, 0, z, '#5fae4a', { n: 3, rz: (l - 1.5) * 0.3 }); if (stage === 3) kk.cone(0.09, 0.12, x, 0.02, z, '#ff8a3d', { n: 6 }); }
-        else if (crop === 'tomato') { kk.cyl(0.02, 1.4 * s, x + 0.12, 0, z, '#c9a173', { n: 3 }); kk.ball(0.3 * s, x, 0.6 * s, z, '#4e9e48', { n: 8 }); if (stage === 3) for (let f = 0; f < 3; f++) kk.ball(0.1, x + (f - 1) * 0.15, 0.5 + f * 0.12, z + 0.2, '#e8463e', { n: 6 }); }
-        else if (crop === 'lettuce') kk.ball(0.32 * s, x, 0.12 * s, z, stage === 3 ? '#9be38f' : '#7cd36a', { s: [1, 0.7, 1], n: 9 });
-        else if (crop === 'pumpkin') { kk.ball(0.22 * s, x, 0.1, z, '#4e9e48', { s: [1.4, 0.4, 1.4], n: 7 }); if (stage === 3 && c % 2 === 0) kk.ball(0.3, x + 0.2, 0.22, z, '#f39a3b', { s: [1.2, 0.85, 1.2], n: 9 }); }
-        else if (crop === 'strawberry') { kk.ball(0.22 * s, x, 0.1, z, '#5fae4a', { s: [1.2, 0.5, 1.2], n: 7 }); if (stage === 3) for (let f = 0; f < 3; f++) kk.ball(0.06, x + (f - 1) * 0.14, 0.08, z + 0.2, '#e8352e', { n: 5 }); }
-      }
+      const kk = new Kit(); cropBed(kk, crop, stage);
       b.g.add(kk.build());
     };
     return { id: 'plot', title: 'Veggie plot', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids: sol, pond: null, bridges: [], spots, buildings: [], arrive: [20, 3.4], lawns: [[0, 0, W, D]], paths: [[18, 0.4, 22, 31.6], [4, 16.2, 36, 17.8], [2.5, 2.5, 8.5, 6.5]], animals: [], npc: 0, centre: [20, 16], growth: 0.4, beds, drawBed, state: st };

@@ -139,7 +139,7 @@
     return {
       acts,
       click(k) { const [what, a, b] = k.split(':'); if (what === 'plant') return plant(+a, b); if (what === 'sbuy') return stableBuy(a); },
-      prep() { const v = V(); if (!v) return; v.can = 0; if (v.where === 'plot') drawBeds(); if (v.where === 'orchard') drawFruit(); void T; }
+      prep() { const v = V(); if (!v) return; v.can = 0; if (v.B && v.B.drawBed) drawBeds(); if (v.B && v.B.trees) drawFruit(); void T; } // (the farm's field and orchard blocks too)
     };
   };
 })();

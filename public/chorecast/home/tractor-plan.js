@@ -14,16 +14,18 @@
   const wrap = a => Math.atan2(Math.sin(a), Math.cos(a));
 
   // the distance map: metres from each cell to the nearest solid cell (or the edge), by a two-pass chamfer sweep
-  function grid(solids, W, D, skip, edge = 0.6) {
-    const NX = Math.ceil(W / RES), NZ = Math.ceil(D / RES), d = new Float32Array(NX * NZ).fill(1e9);
+  // F: { x0, z0, land(x, z) } when the ground isn't one rectangle from 0, 0 (the farm with its added blocks)
+  function grid(solids, W, D, skip, edge = 0.6, F = null) {
+    const ox = F ? F.x0 : 0, oz = F ? F.z0 : 0, NX = Math.ceil(W / RES), NZ = Math.ceil(D / RES), d = new Float32Array(NX * NZ).fill(1e9);
     for (let j = 0; j < NZ; j++) for (let i = 0; i < NX; i++) {
-      const x = (i + 0.5) * RES, z = (j + 0.5) * RES;
-      if (x < edge || z < edge || x > W - edge || z > D - edge || solids.some((r, k) => k !== skip && x > r[0] && x < r[2] && z > r[1] && z < r[3])) d[j * NX + i] = 0;
+      const x = ox + (i + 0.5) * RES, z = oz + (j + 0.5) * RES;
+      if (x < ox + edge || z < oz + edge || x > ox + W - edge || z > oz + D - edge || (F && F.land && !F.land(x, z, edge))) d[j * NX + i] = 0;
     }
+    solids.forEach((r, k) => { if (k === skip) return; for (let j = Math.max(0, Math.floor((r[1] - oz) / RES)); j <= Math.min(NZ - 1, Math.floor((r[3] - oz) / RES)); j++) for (let i = Math.max(0, Math.floor((r[0] - ox) / RES)); i <= Math.min(NX - 1, Math.floor((r[2] - ox) / RES)); i++) { const x = ox + (i + 0.5) * RES, z = oz + (j + 0.5) * RES; if (x > r[0] && x < r[2] && z > r[1] && z < r[3]) d[j * NX + i] = 0; } });
     const s2 = RES * Math.SQRT2;
     for (let j = 0; j < NZ; j++) for (let i = 0; i < NX; i++) { const k = j * NX + i; let v = d[k]; if (!v) continue; if (i) v = Math.min(v, d[k - 1] + RES); if (j) { v = Math.min(v, d[k - NX] + RES); if (i) v = Math.min(v, d[k - NX - 1] + s2); if (i < NX - 1) v = Math.min(v, d[k - NX + 1] + s2); } d[k] = v; }
     for (let j = NZ - 1; j >= 0; j--) for (let i = NX - 1; i >= 0; i--) { const k = j * NX + i; let v = d[k]; if (!v) continue; if (i < NX - 1) v = Math.min(v, d[k + 1] + RES); if (j < NZ - 1) { v = Math.min(v, d[k + NX] + RES); if (i < NX - 1) v = Math.min(v, d[k + NX + 1] + s2); if (i) v = Math.min(v, d[k + NX - 1] + s2); } d[k] = v; }
-    return { NX, NZ, d, W, D, at(x, z) { const i = Math.floor(x / RES), j = Math.floor(z / RES); if (i < 0 || j < 0 || i >= NX || j >= NZ) return 0; return Math.max(0, d[j * NX + i] - RES * 0.5); } };
+    return { NX, NZ, d, W, D, ox, oz, at(x, z) { const i = Math.floor((x - ox) / RES), j = Math.floor((z - oz) / RES); if (i < 0 || j < 0 || i >= NX || j >= NZ) return 0; return Math.max(0, d[j * NX + i] - RES * 0.5); } };
   }
 
   // clearance: points over the tractor (5 across, 7 along) and the towed thing (3 by 3) all at least m from anything
@@ -39,8 +41,8 @@
 
   // the flood from the goal over open ground (cells half a metre, ones the tractor's width fits through)
   function flood(G, gx, gz) {
-    const C = 0.5, NX = Math.ceil(G.W / C), NZ = Math.ceil(G.D / C), h = new Float32Array(NX * NZ).fill(Infinity), ok = k => G.at(((k % NX) + 0.5) * C, (Math.floor(k / NX) + 0.5) * C) >= 1.25;
-    const q = [], s0 = Math.floor(gz / C) * NX + Math.floor(gx / C); h[s0] = 0; q.push(s0);
+    const C = 0.5, NX = Math.ceil(G.W / C), NZ = Math.ceil(G.D / C), h = new Float32Array(NX * NZ).fill(Infinity), ok = k => G.at(G.ox + ((k % NX) + 0.5) * C, G.oz + (Math.floor(k / NX) + 0.5) * C) >= 1.25;
+    const q = [], s0 = Math.floor((gz - G.oz) / C) * NX + Math.floor((gx - G.ox) / C); h[s0] = 0; q.push(s0);
     // (a bucketed Dijkstra is overkill here: a plain queue with re-relaxing gives the same answer on this little grid)
     for (let qi = 0; qi < q.length; qi++) {
       const k = q[qi], i = k % NX, j = Math.floor(k / NX), v = h[k];
@@ -49,7 +51,7 @@
         const kk = jj * NX + ii, nv = v + (di && dj ? C * Math.SQRT2 : C); if (nv >= h[kk] || !ok(kk)) continue; h[kk] = nv; q.push(kk);
       }
     }
-    return (x, z) => { const i = Math.floor(x / C), j = Math.floor(z / C); const v = i < 0 || j < 0 || i >= NX || j >= NZ ? Infinity : h[j * NX + i]; return v === Infinity ? Math.hypot(x - gx, z - gz) * 1.4 : Math.max(v, Math.hypot(x - gx, z - gz)); };
+    return (x, z) => { const i = Math.floor((x - G.ox) / C), j = Math.floor((z - G.oz) / C); const v = i < 0 || j < 0 || i >= NX || j >= NZ ? Infinity : h[j * NX + i]; return v === Infinity ? Math.hypot(x - gx, z - gz) * 1.4 : Math.max(v, Math.hypot(x - gx, z - gz)); };
   }
 
   // a little binary heap on f
@@ -59,10 +61,10 @@
      where the body fits (here the tractor's half-width and a little room), keeping a little off things where it
      can, then pulled tight into as few straight runs as fit. */
   function route(G, a, b, r) {
-    const C = 0.5, NX = Math.ceil(G.W / C), NZ = Math.ceil(G.D / C), at = k => G.at(((k % NX) + 0.5) * C, (Math.floor(k / NX) + 0.5) * C);
+    const C = 0.5, NX = Math.ceil(G.W / C), NZ = Math.ceil(G.D / C), at = k => G.at(G.ox + ((k % NX) + 0.5) * C, G.oz + (Math.floor(k / NX) + 0.5) * C);
     const sees = (p, q) => { const d = Math.hypot(q[0] - p[0], q[1] - p[1]), n = Math.ceil(d / 0.2); for (let i = 1; i <= n; i++) { const u = i / n; if (G.at(p[0] + (q[0] - p[0]) * u, p[1] + (q[1] - p[1]) * u) < r) return false; } return true; };
     if (sees(a, b)) return [a, b];
-    const s0 = Math.floor(a[1] / C) * NX + Math.floor(a[0] / C), g = Math.floor(b[1] / C) * NX + Math.floor(b[0] / C), gi = g % NX, gj = Math.floor(g / NX);
+    const s0 = Math.floor((a[1] - G.oz) / C) * NX + Math.floor((a[0] - G.ox) / C), g = Math.floor((b[1] - G.oz) / C) * NX + Math.floor((b[0] - G.ox) / C), gi = g % NX, gj = Math.floor(g / NX);
     const cost = new Float32Array(NX * NZ).fill(1e9), from = new Int32Array(NX * NZ).fill(-1), open = Heap(); cost[s0] = 0; open.push({ f: 0, k: s0 });
     const H = k => { const di = Math.abs(k % NX - gi), dj = Math.abs(Math.floor(k / NX) - gj); return (Math.max(di, dj) + 0.414 * Math.min(di, dj)) * C; };
     let found = false, n = 0;
@@ -77,7 +79,7 @@
       }
     }
     if (!found) return null;
-    const pts = []; for (let k = g; k !== -1; k = from[k]) pts.unshift([((k % NX) + 0.5) * C, (Math.floor(k / NX) + 0.5) * C]);
+    const pts = []; for (let k = g; k !== -1; k = from[k]) pts.unshift([G.ox + ((k % NX) + 0.5) * C, G.oz + (Math.floor(k / NX) + 0.5) * C]);
     pts[0] = a; pts[pts.length - 1] = b;
     const out = [a]; let i = 0; while (i < pts.length - 1) { let j = pts.length - 1; while (j > i + 1 && !sees(pts[i], pts[j])) j--; out.push(pts[j]); i = j; }
     return out;
@@ -149,7 +151,7 @@
     const m = o.m == null ? 0.45 : o.m, len = start.len || 0, back = o.back == null ? 2.2 : o.back, H = flood(G, goal.x, goal.z);
     const tol = goal.tol || 0.6, ytol = goal.ytol || 0.2, htol = goal.htol || 9;
     const NX = Math.ceil(G.W / 0.5), NZ = Math.ceil(G.D / 0.5), seen = new Map(), open = Heap();
-    const key = (n) => (((((Math.round(wrap(n.yaw) / TAU * NH) + NH) % NH) * 2 + (n.dir > 0 ? 1 : 0)) * NZ + Math.floor(n.z / 0.5)) * NX + Math.floor(n.x / 0.5));
+    const key = (n) => (((((Math.round(wrap(n.yaw) / TAU * NH) + NH) % NH) * 2 + (n.dir > 0 ? 1 : 0)) * NZ + Math.floor((n.z - G.oz) / 0.5)) * NX + Math.floor((n.x - G.ox) / 0.5));
     // (how far, round fences, plus the turning the circle makes it do: face the goal, then come round to its heading)
     const RS = WB / Math.tan(0.5), RT = WB / Math.tan(0.55), h = n => { const d = H(n.x, n.z), e = Math.hypot(goal.x - n.x, goal.z - n.z), dy = Math.abs(wrap(goal.yaw - n.yaw)); if (e < 2.5) return 1.6 * Math.max(d, RT * dy); const b = Math.atan2(goal.x - n.x, goal.z - n.z), t1 = Math.abs(wrap(b - n.yaw)), t2 = Math.abs(wrap(goal.yaw - b)); return 1.6 * (d + 0.6 * RT * (Math.min(t1, Math.PI - t1 + 0.6) + t2)); };
     // (starting tight against something, even touching it: the first few metres need only be no closer than it is now)

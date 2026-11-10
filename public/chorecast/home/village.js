@@ -23,19 +23,20 @@
   // ---------- where bodies can be: the island's rectangles drawn into a grid, the pond (with its bridge) as water
   function makeGrid(B) {
     const nx = Math.ceil((B.bounds.x1 - B.bounds.x0) / G), nz = Math.ceil((B.bounds.z1 - B.bounds.z0) / G), bad = new Uint8Array(nx * nz);
-    const rect = (x0, z0, x1, z1) => { for (let i = Math.max(0, Math.floor((x0 - BODY) / G)); i <= Math.min(nx - 1, Math.floor((x1 + BODY) / G)); i++) for (let j = Math.max(0, Math.floor((z0 - BODY) / G)); j <= Math.min(nz - 1, Math.floor((z1 + BODY) / G)); j++) bad[i * nz + j] = 1; };
+    const ox = B.bounds.x0, oz = B.bounds.z0; // (the land can run west and north of 0: the farm's added blocks)
+    const rect = (x0, z0, x1, z1) => { for (let i = Math.max(0, Math.floor((x0 - ox - BODY) / G)); i <= Math.min(nx - 1, Math.floor((x1 - ox + BODY) / G)); i++) for (let j = Math.max(0, Math.floor((z0 - oz - BODY) / G)); j <= Math.min(nz - 1, Math.floor((z1 - oz + BODY) / G)); j++) bad[i * nz + j] = 1; };
     for (const [x0, z0, x1, z1] of B.solids) rect(x0, z0, x1, z1);
     const P = B.pond || { x: -99, z: -99, rx: 0, rz: 0 }, onBridge = (x, z) => B.bridges.some(b => x > b.x0 && x < b.x1 && z > b.z0 + 0.15 && z < b.z1 - 0.15);
     for (let i = 0; i < nx; i++) for (let j = 0; j < nz; j++) {
-      const x = (i + 0.5) * G, z = (j + 0.5) * G;
-      if (x < 0.9 || z < 0.9 || x > B.bounds.x1 - 0.9 || z > B.bounds.z1 - 0.9) { bad[i * nz + j] = 1; continue; } // (the island's edge)
+      const x = ox + (i + 0.5) * G, z = oz + (j + 0.5) * G;
+      if (x < ox + 0.9 || z < oz + 0.9 || x > B.bounds.x1 - 0.9 || z > B.bounds.z1 - 0.9) { bad[i * nz + j] = 1; continue; } // (the island's edge)
       const ex = (x - P.x) / (P.rx + 0.6 + BODY), ez = (z - P.z) / (P.rz + 0.6 + BODY);
       if (ex * ex + ez * ez < 1 && !onBridge(x, z)) bad[i * nz + j] = 1;
       if (B.walk && !B.walk(x, z)) bad[i * nz + j] = 1;
     }
-    const at = (x, z) => { const i = Math.floor(x / G), j = Math.floor(z / G); return i < 0 || j < 0 || i >= nx || j >= nz ? -1 : i * nz + j; };
+    const at = (x, z) => { const i = Math.floor((x - ox) / G), j = Math.floor((z - oz) / G); return i < 0 || j < 0 || i >= nx || j >= nz ? -1 : i * nz + j; };
     const free = (x, z) => { const c = at(x, z); return c >= 0 && !bad[c]; };
-    return { nx, nz, bad, at, free, ground: (x, z) => { if (B.height) return B.height(x, z); for (const b of B.bridges) if (x > b.x0 && x < b.x1 && z > b.z0 - 0.2 && z < b.z1 + 0.2) { const u = (x - b.x0) / (b.x1 - b.x0); return Math.sin(clamp(u, 0, 1) * Math.PI) * b.arc + 0.2; } return 0; } };
+    return { nx, nz, ox, oz, bad, at, free, ground: (x, z) => { if (B.height) return B.height(x, z); for (const b of B.bridges) if (x > b.x0 && x < b.x1 && z > b.z0 - 0.2 && z < b.z1 + 0.2) { const u = (x - b.x0) / (b.x1 - b.x0); return Math.sin(clamp(u, 0, 1) * Math.PI) * b.arc + 0.2; } return 0; } };
   }
   // the nearest free point (a tap on a wall or in the pond: the nearest place to stand)
   function nearestFree(g, x, z, max = 40) {
@@ -48,8 +49,8 @@
   function route(g, from, to, avoid) {
     if (avoid && avoid.length) { // round the people standing in the way: their spots blocked for this one route, then cleared again
       const was = [];
-      for (const [x, z] of avoid) for (let i = Math.floor((x - 0.85) / G); i <= Math.floor((x + 0.85) / G); i++) for (let j = Math.floor((z - 0.85) / G); j <= Math.floor((z + 0.85) / G); j++) {
-        if (i < 0 || j < 0 || i >= g.nx || j >= g.nz || Math.hypot((i + 0.5) * G - x, (j + 0.5) * G - z) > 0.85) continue; const c = i * g.nz + j; if (!g.bad[c]) { g.bad[c] = 1; was.push(c); }
+      for (const [x, z] of avoid) for (let i = Math.floor((x - g.ox - 0.85) / G); i <= Math.floor((x - g.ox + 0.85) / G); i++) for (let j = Math.floor((z - g.oz - 0.85) / G); j <= Math.floor((z - g.oz + 0.85) / G); j++) {
+        if (i < 0 || j < 0 || i >= g.nx || j >= g.nz || Math.hypot(g.ox + (i + 0.5) * G - x, g.oz + (j + 0.5) * G - z) > 0.85) continue; const c = i * g.nz + j; if (!g.bad[c]) { g.bad[c] = 1; was.push(c); }
       }
       const r = route(g, from, to); for (const c of was) g.bad[c] = 0; return r;
     }
@@ -71,7 +72,7 @@
       }
     }
     if (!found) return null;
-    const pts = []; for (let c = e; c !== -1 && c !== s; c = prev[c]) pts.push([(Math.floor(c / nz) + 0.5) * G, (c % nz + 0.5) * G]);
+    const pts = []; for (let c = e; c !== -1 && c !== s; c = prev[c]) pts.push([g.ox + (Math.floor(c / nz) + 0.5) * G, g.oz + (c % nz + 0.5) * G]);
     pts.reverse(); pts[pts.length - 1] = B;
     const out = []; let a = A; // pulled tight: from each point, as far along as it can see
     for (let i = 0; i < pts.length;) { let k = pts.length - 1; while (k > i && !sees(g, a, pts[k])) k--; out.push(pts[k]); a = pts[k]; i = k + 1; }
@@ -262,7 +263,8 @@
   function makeLawn(B) {
     const K = IH.lawnKit; if (!K || !B.lawns || !B.lawns.length) return null;
     const inR = (x0, z0, x1, z1, r) => x0 >= r[0] - 1e-6 && z0 >= r[1] - 1e-6 && x1 <= r[2] + 1e-6 && z1 <= r[3] + 1e-6, hit = (x0, z0, x1, z1, r) => x0 < r[2] && x1 > r[0] && z0 < r[3] && z1 > r[1], P = B.pond, cells = [];
-    for (let i = 0; i < B.bounds.x1; i++) for (let j = 0; j < B.bounds.z1; j++) {
+    for (let i = Math.floor(B.bounds.x0); i < B.bounds.x1; i++) for (let j = Math.floor(B.bounds.z0); j < B.bounds.z1; j++) {
+      if (B.walk && !B.walk(i + 0.5, j + 0.5)) continue;
       if (!B.lawns.some(r => inR(i, j, i + 1, j + 1, r)) || B.paths.some(r => hit(i, j, i + 1, j + 1, r)) || B.solids.some(r => hit(i + 0.2, j + 0.2, i + 0.8, j + 0.8, r))) continue;
       if (B.bare && B.bare(i + 0.5, j + 0.5)) continue; // (sand, a hay meadow, under a glasshouse...)
       if (P) { const ex = (i + 0.5 - P.x) / (P.rx + 1.0), ez = (j + 0.5 - P.z) / (P.rz + 1.0); if (ex * ex + ez * ez < 1) continue; }
@@ -507,7 +509,7 @@
     if (gest.pinch && ptrs.size >= 2) { const [a, b] = [...ptrs.values()]; setZoom(gest.z0 * Math.hypot(a.x - b.x, a.y - b.y) / gest.d0); return; }
     if (gest.moved > 6) { // drag: look around (the view stops following the kid until they walk again)
       V.follow = false; const [, h] = V.stage.dims(), s = CAM.fitV / CAM.zoom / h, r = new T.Vector3(Math.cos(CAM.yaw), 0, -Math.sin(CAM.yaw)), f = new T.Vector3(-Math.sin(CAM.yaw), 0, -Math.cos(CAM.yaw));
-      CAM.target.addScaledVector(r, -dx * s).addScaledVector(f, dy * s / Math.sin(CAM.pitch)); CAM.target.x = clamp(CAM.target.x, 0, V.B.bounds.x1); CAM.target.z = clamp(CAM.target.z, 0, V.B.bounds.z1);
+      CAM.target.addScaledVector(r, -dx * s).addScaledVector(f, dy * s / Math.sin(CAM.pitch)); CAM.target.x = clamp(CAM.target.x, V.B.bounds.x0, V.B.bounds.x1); CAM.target.z = clamp(CAM.target.z, V.B.bounds.z0, V.B.bounds.z1);
     }
   }
   function up(e) { const p = ptrs.get(e.pointerId); ptrs.delete(e.pointerId); if (!gest || ptrs.size) return; const g = gest; gest = null; if (g.pinch || g.moved > 10 || !p) return; tap(p.x0, p.y0); }
@@ -532,7 +534,7 @@
     if (V.mow) { mowEnd(false); return; } // (tapping away from the shed while mowing: stop, and be paid for what's cut)
     // the ground
     const p = new T.Vector3(); if (!rayAt(x, y).ray.intersectPlane(new T.Plane(new T.Vector3(0, 1, 0), 0), p)) return;
-    if (p.x < 0 || p.z < 0 || p.x > V.B.bounds.x1 || p.z > V.B.bounds.z1) return;
+    if (p.x < V.B.bounds.x0 || p.z < V.B.bounds.z0 || p.x > V.B.bounds.x1 || p.z > V.B.bounds.z1) return;
     walkTo(p.x, p.z);
   }
   function showActs(s, x, y) {

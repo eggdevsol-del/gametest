@@ -65,8 +65,8 @@
     const old = f.animals || { hen: 3, goat: 1 }, run = { id: 'run', x0: 31, z0: 1.2, x1: 45, z1: 11.6 }, big = { id: 'big', x0: 5, z0: 19, x1: 47, z1: 41 };
     const animals = []; for (const [kind, n] of Object.entries(old)) for (let i = 0; i < n; i++) animals.push({ id: nid(), kind, pad: kind === 'hen' ? 'run' : 'big', got: (f.got || {})[kind] || 0 });
     const items = [['coop', 36, 4.4, 0], ['trough', 38, 9.6, 0], ['trough', 16, 24, 0], ['hay', 41, 24, 0.3], ['feeder', 30, 24, 0], ['shelter', 42, 35, 0], ['milkstand', 8.6, 11.4, 0], ['shearstand', 49, 9, 0], ['tractor', 20.5, 11.6, -0.4], ['churns', 18.6, 3.2, 0]].map(([t, x, z, ry]) => ({ id: nid(), t, x, z, ry }));
-    for (const k of Object.keys(f)) delete f[k];
-    return Object.assign(f, { v: 2, paddocks: [run, big], items, animals, feed: { grain: 10, hay: 10, nuts: 0 }, fed: {} });
+    const land = f.land; for (const k of Object.keys(f)) delete f[k];
+    return Object.assign(f, { v: 2, paddocks: [run, big], items, animals, feed: { grain: 10, hay: 10, nuts: 0 }, fed: {} }, land ? { land } : {});
   }
   const inPad = (p, x, z, m = 0) => x > p.x0 + m && x < p.x1 - m && z > p.z0 + m && z < p.z1 - m;
   const padOf = (f, x, z) => f.paddocks.find(p => inPad(p, x, z, 0.3));
@@ -217,6 +217,8 @@
     bx(k, W, 0.42, D, W / 2, -0.42, D / 2, '#9a7a52', { r: 0.18, seg: 2 }); sides(k, W, D, R, '#8a7452');
     bx(k, W - 0.4, 0.04, D - 0.4, W / 2, 0, D / 2, '#7fbf5c', { r: 0.02 });
     for (const [x0, z0, x1, z1] of TRACK) bx(k, x1 - x0, 0.06, z1 - z0, (x0 + x1) / 2, 0.02, (z0 + z1) / 2, '#b89668', { r: 0.03 });
+    // the land blocks joined on (farm-land.js): their ground, boundaries and gates, and what's on each
+    const LAND = IH.farmLand ? IH.farmLand.build(f, k, root, solid, spots) : { lawns: [], paths: [], meadows: [], beds: [], trees: [], drawBed: null };
     // the barn (the farm shop and the planner), the windmill, the signpost: always there
     k.at(12, 0, 6, 0, kk => {
       bx(kk, 10, 5.2, 7, 0, 0, 0, '#b8402f', { r: 0.06 }); for (let i = 0; i < 12; i++) bx(kk, 0.06, 5.2, 0.04, -4.6 + i * 0.84, 0, 3.52, '#9c3426');
@@ -245,9 +247,12 @@
     let meadowL = null; if (IH.lawnKit) { const cells = []; for (let i = MEADOW[0]; i < MEADOW[2]; i++) for (let j = Math.ceil(MEADOW[1]); j < MEADOW[3]; j++) cells.push({ x: i, z: j }); meadowL = IH.lawnKit.build({ cells, x0: 0, z0: 0, W, D, seed: 777, phase: 'day', per: e => (e ? 30 : 6), ground: false }); meadowL.position.y = 0.07; IH.lawnKit.grow(meadowL, 1.25); root.add(meadowL); for (const key of Object.keys(hay.cells)) { const i = Math.floor(key / 1000), j = key % 1000; IH.lawnKit.cutAt(meadowL, i + 0.5, j + 0.5, 0.75); } }
     board(k, 'meadow', 'HAY MEADOW', 'tractor work: bale it, haul it', '#fff6e0', '#4a7a3a', 3.4, 0.9, MEADOW[2] + 1.2, 1.6, MEADOW[1] + 1.2, -Math.PI / 2);
     f.bales = f.bales || []; const bales = f.bales.map(b => { const m = baleModel(); m.position.set(b.x, 0, b.z); m.rotation.y = b.ry || 0; root.add(m); return { rec: b, g: m }; });
-    const lawns = [[0, 0, W, D]], paths = TRACK.map(r => r.slice()).concat([[MEADOW[0] - 0.5, MEADOW[1] - 0.3, MEADOW[2] + 0.2, MEADOW[3] + 0.2]]); // (grass everywhere else: the meadow has its own long hay)
+    for (const M of LAND.meadows) { const L2 = IH.farmLand.meadowGrass(M); if (L2) root.add(L2); }
+    const meadows = [{ rect: MEADOW, L: meadowL, cells: hay.cells, key: (i, j) => i * 1000 + j, mark: () => { hay.at = hay.at || Date.now(); } }, ...LAND.meadows];
+    const onL = IH.farmLand ? IH.farmLand.onLand(f) : (x, z, m = 0) => x >= m && z >= m && x <= W - m && z <= D - m;
+    const lawns = [[0, 0, W, D], ...LAND.lawns], paths = TRACK.map(r => r.slice()).concat([[MEADOW[0] - 0.5, MEADOW[1] - 0.3, MEADOW[2] + 0.2, MEADOW[3] + 0.2]], LAND.paths); // (grass everywhere else: the meadow has its own long hay)
     solid(...YARD); const yard = new T.Group(); root.add(yard);
-    const B = { gates, vehicles, meadowL, bales, MEADOW, yard, flights: [], flying: 0, tick: t => { if (meadowL) IH.lawnKit.tick(meadowL, t, 1); flightsTick(B, f, t); }, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
+    const B = { gates, vehicles, meadowL, meadows, bales, MEADOW, yard, flights: [], flying: 0, beds: LAND.beds, drawBed: LAND.drawBed, trees: LAND.trees, onLand: onL, walk: (x, z) => onL(x, z, 0.9), tick: t => { for (const M of meadows) if (M.L) IH.lawnKit.tick(M.L, t, 1); flightsTick(B, f, t); }, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: IH.farmLand ? IH.farmLand.bounds(f) : { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
     yardSync(B, f); return B;
   }
   // bales coming off the trailer: each lifted off the deck in an arc, stood on end, onto the next place in the yard
@@ -340,7 +345,7 @@
     function blocked(x, z, yaw) {
       const v = V(), B = v.B, c0 = Math.cos(yaw), s0 = Math.sin(yaw);
       for (const [lx, lz] of [[-1.15, 2.05], [1.15, 2.05], [-1.2, -1.45], [1.2, -1.45], [0, 2.1], [-1.2, 0.4], [1.2, 0.4]]) {
-        const px = x + lx * c0 + lz * s0, pz = z - lx * s0 + lz * c0; if (px < 0.6 || pz < 0.6 || px > W - 0.6 || pz > D - 0.6) return true;
+        const px = x + lx * c0 + lz * s0, pz = z - lx * s0 + lz * c0; if (B.onLand ? !B.onLand(px, pz, 0.6) : (px < 0.6 || pz < 0.6 || px > W - 0.6 || pz > D - 0.6)) return true; // (the edge of the land: the paddock and its blocks)
         if (B.solids.some((r, i) => i !== DR.veh.solid && px > r[0] && px < r[2] && pz > r[1] && pz < r[3])) return true;
       }
       return false;
@@ -350,7 +355,7 @@
       const B = V().B, c0 = Math.cos(yaw), s0 = Math.sin(yaw); let d = 0;
       for (const [lx, lz] of [[-1.15, 2.05], [1.15, 2.05], [-1.2, -1.45], [1.2, -1.45], [0, 2.1], [-1.2, 0.4], [1.2, 0.4]]) {
         const px = x + lx * c0 + lz * s0, pz = z - lx * s0 + lz * c0;
-        d += Math.max(0, 0.6 - px, 0.6 - pz, px - (W - 0.6), pz - (D - 0.6));
+        if (B.onLand ? !B.onLand(px, pz, 0.6) : (px < 0.6 || pz < 0.6 || px > W - 0.6 || pz > D - 0.6)) d += 0.3;
         for (let i = 0; i < B.solids.length; i++) { if (i === DR.veh.solid) continue; const r = B.solids[i]; if (px > r[0] && px < r[2] && pz > r[1] && pz < r[3]) d += Math.min(px - r[0], r[2] - px, pz - r[1], r[3] - pz); }
       }
       return d;
@@ -393,12 +398,13 @@
       c.seatKid(DR.m, TRACTOR_SEAT, 0); k.pos.set(DR.x, 0, DR.z); k.yaw = DR.yaw;
       DR.smoke -= dt; if (DR.smoke < 0) { DR.smoke = thr ? 0.12 : 0.6; const c0 = Math.cos(DR.yaw), s0 = Math.sin(DR.yaw); c.fx('smoke', DR.x + 0.42 * c0 + 1.4 * s0, 3.0, DR.z - 0.42 * s0 + 1.4 * c0, 1); }
       if (sp > 2 && Math.random() < dt * 8) c.fx('dust', DR.x - Math.sin(DR.yaw) * 1.4 + (Math.random() - 0.5) * 2, 0.1, DR.z - Math.cos(DR.yaw) * 1.4, 1);
-      if (!DR.imp) return; placeImp(moved); const I = DR.imp, M = v.B.MEADOW;
+      if (!DR.imp) return; placeImp(moved); const I = DR.imp;
       // the baler: over the long grass it picks it up, cuts it and, every so often, a round bale rolls out the back
-      if (I.kind === 'baler' && moved > 0 && (!AP || AP.pickup) && I.x > M[0] && I.x < M[2] && I.z > M[1] && I.z < M[3]) {
-        const hay = f.hay; let n = 0;
-        for (let i = Math.floor(I.x - 1.3); i <= Math.floor(I.x + 1.3); i++) for (let j = Math.floor(I.z - 0.8); j <= Math.floor(I.z + 0.8); j++) { if (i < M[0] || i >= M[2] || j < Math.ceil(M[1]) || j >= M[3]) continue; const key = i * 1000 + j; if (hay.cells[key] || Math.hypot(i + 0.5 - I.x, j + 0.5 - I.z) > 1.3) continue; hay.cells[key] = 1; n++; if (v.B.meadowL) IH.lawnKit.cutAt(v.B.meadowL, i + 0.5, j + 0.5, 0.75); }
-        if (n) { I.acc += n; hay.at = hay.at || Date.now(); c.fx('hay', I.x + Math.sin(I.yaw) * 1.0, 0.4, I.z + Math.cos(I.yaw) * 1.0, Math.min(4, n)); }
+      const Mh = I.kind === 'baler' && moved > 0 && (!AP || AP.pickup) ? (v.B.meadows || []).find(q => I.x > q.rect[0] && I.x < q.rect[2] && I.z > q.rect[1] && I.z < q.rect[3]) : null;
+      if (Mh) {
+        const R0 = Mh.rect; let n = 0;
+        for (let i = Math.floor(I.x - 1.3); i <= Math.floor(I.x + 1.3); i++) for (let j = Math.floor(I.z - 0.8); j <= Math.floor(I.z + 0.8); j++) { if (i < R0[0] || i >= R0[2] || j < Math.ceil(R0[1]) || j >= R0[3]) continue; const key = Mh.key(i, j); if (Mh.cells[key] || Math.hypot(i + 0.5 - I.x, j + 0.5 - I.z) > 1.3) continue; Mh.cells[key] = 1; n++; if (Mh.L) IH.lawnKit.cutAt(Mh.L, i + 0.5, j + 0.5, 0.75); }
+        if (n) { I.acc += n; Mh.mark(); c.fx('hay', I.x + Math.sin(I.yaw) * 1.0, 0.4, I.z + Math.cos(I.yaw) * 1.0, Math.min(4, n)); }
         if (I.acc >= 30) { I.acc -= 30; dropBale({ x: I.x - Math.sin(I.yaw) * 1.4, z: I.z - Math.cos(I.yaw) * 1.4, ry: I.yaw + Math.PI / 2 }); c.sound('place'); if (!DR.told) { DR.told = true; c.toast('A bale! Keep going. Then hitch the trailer and bring them to the hay yard by the barn.'); } }
       }
       // the trailer: bales it comes up against are loaded on (four at most); at the barn they're unloaded into the hay store
@@ -422,10 +428,12 @@
     const rearOf = () => [DR.x - Math.sin(DR.yaw) * 0.62, DR.z - Math.cos(DR.yaw) * 0.62];
     const stop = () => ({ thr: 0, st: DR.steer / 0.62, vmax: 1 }); // (off the pedal: it rolls to a stand, the wheel left where it is)
     // the rows: parallel to the meadow's long (south) hedge, evenly spaced a baler's width apart (a little overlap)
-    const meadowLeft = () => { const M = V().B.MEADOW, f = F(); let cut = 0, all = 0; for (let i = M[0]; i < M[2]; i++) for (let j = Math.ceil(M[1]); j < M[3]; j++) { all++; if (f.hay.cells[i * 1000 + j]) cut++; } return (all - cut) / all; };
+    // which meadow Auto bales: the one the tractor's in or nearest (the paddock's own, or a block's), and how much of it is still long
+    const meadowOf = () => { const ms = V().B.meadows || []; let best = ms[0], bd = 1e9; for (const q of ms) { const r = q.rect, dx = Math.max(r[0] - DR.x, 0, DR.x - r[2]), dz = Math.max(r[1] - DR.z, 0, DR.z - r[3]), d = Math.hypot(dx, dz); if (d < bd) { bd = d; best = q; } } return best; };
+    const meadowLeft = Mq => { const M = Mq.rect; let cut = 0, all = 0; for (let i = M[0]; i < M[2]; i++) for (let j = Math.ceil(M[1]); j < M[3]; j++) { all++; if (Mq.cells[Mq.key(i, j)]) cut++; } return (all - cut) / all; };
     // auto does the job of whatever's on the hitch: the baler bales the meadow, the trailer brings the bales in
-    function balerJob() {
-      const M = V().B.MEADOW, legs = [], N = 5, z0 = M[3] - 1.3, z1 = M[1] + 1.6, gap = (z1 - z0) / (N - 1); // (from the far hedge back, so each turn swings out into open ground)
+    function balerJob(M) {
+      const legs = [], z0 = M[3] - 1.3, z1 = M[1] + 1.6, N = Math.max(2, Math.ceil((z0 - z1) / 2.4) + 1), gap = (z1 - z0) / (N - 1); // (from the far hedge back, so each turn swings out into open ground)
       for (let i = 0; i < N; i++) { const z = z0 + gap * i, west = i % 2 === 0; legs.push({ t: 'line', a: west ? [M[2] - 8, z] : [M[0] + 7, z], b: west ? [M[0] + 0.8, z] : [M[2] + 0.4, z], say: `baling row ${i + 1} of ${N + 2}` }); }
       // the headlands: the strips the rows' turns left, cut along the end hedge and the open end
       // (along the open end, the same spacing, each run south up to the far hedge, then backed straight out)
@@ -438,9 +446,9 @@
       if (!TP()) return c.toast('Auto isn’t ready yet.');
       const kind = DR.imp && DR.imp.kind, v = V();
       if (!kind) return c.toast('Hitch the baler (to bale the meadow) or the trailer (to bring the bales in), then press Auto.');
-      if (kind === 'baler' && meadowLeft() < 0.08) return c.toast('The meadow’s all cut. It grows back in a couple of days.');
+      const MQ = meadowOf(); if (kind === 'baler' && meadowLeft(MQ) < 0.08) return c.toast('This meadow’s all cut. It grows back in a couple of days.');
       if (kind === 'trailer' && !v.B.bales.length && !DR.imp.load.length) return c.toast('No bales to bring in. Bale the meadow first.');
-      AP = { job: kind, legs: kind === 'baler' ? balerJob() : [{ t: 'collect' }], leg: null, home: { x: TRACTOR_HOME.x, z: TRACTOR_HOME.z, yaw: TRACTOR_HOME.ry }, G: TP().grid(v.B.solids, v.B.bounds.x1, v.B.bounds.z1, DR.veh.solid), skip: new Set(), tried: new Map(), pickup: false, stuck: 0 };
+      AP = { job: kind, legs: kind === 'baler' ? balerJob(MQ.rect) : [{ t: 'collect' }], leg: null, home: { x: TRACTOR_HOME.x, z: TRACTOR_HOME.z, yaw: TRACTOR_HOME.ry }, G: TP().grid(v.B.solids, v.B.bounds.x1 - v.B.bounds.x0, v.B.bounds.z1 - v.B.bounds.z0, DR.veh.solid, 0.6, { x0: v.B.bounds.x0, z0: v.B.bounds.z0, land: v.B.onLand }), skip: new Set(), tried: new Map(), pickup: false, stuck: 0 };
       const b = DR.el.querySelector('.vg-dr-auto'); if (b) { b.classList.add('on'); b.textContent = '🤖 Stop'; }
       c.toast(kind === 'baler' ? 'Auto: watch them bale the meadow! Push the joystick to take over.' : 'Auto: watch them bring the bales in! Push the joystick to take over.'); c.sound('on');
     }
@@ -532,7 +540,7 @@
         const r = track(t, L.seg, 1.2); if (r === 'off') return next(); return r || next();
       }
       if (L.t === 'collect') {
-        const M = v.B.MEADOW, I = DR.imp, inM = b => b.g.position.x > M[0] - 2 && b.g.position.x < M[2] + 3 && b.g.position.z > M[1] - 2 && b.g.position.z < M[3] + 1;
+        const I = DR.imp, inM = b => (v.B.meadows || []).some(q => { const M = q.rect; return b.g.position.x > M[0] - 2 && b.g.position.x < M[2] + 3 && b.g.position.z > M[1] - 2 && b.g.position.z < M[3] + 1; });
         const left = v.B.bales.filter(b => inM(b) && !AP.skip.has(b));
         if (!I || I.kind !== 'trailer') return next();
         if (I.load.length >= 4 || (!left.length && I.load.length)) { AP.legs.unshift(haul('taking the bales to the hay yard'), { t: 'wait', s: 0.6 * I.load.length + 0.6, say: 'stacking the bales' }, { t: 'collect' }); return next(); }
@@ -603,18 +611,43 @@
     function planner(mode) {
       P = P || { mode: 'menu' }; if (mode) P.mode = mode; V().plan = P; const f = F(), w = 'farm ' + Math.round(sh().farmAcct().bal).toLocaleString();
       const head = `<div class="vg-gh"><b>🛠️ Farm planner</b><span>✨ ${w}</span><button class="vg-x" data-v="farm" data-k="pclose" aria-label="Done">✕</button></div>`;
-      const tabs = `<div class="vg-gb vg-ptabs">${[['pad', '🟩 Paddocks'], ['fit', '🏠 Fittings'], ['eq', '🚜 Equipment'], ['edit', '✋ Move or sell']].map(([k, l]) => `<button data-v="farm" data-k="mode:${k}" class="${P.mode === k ? 'on' : ''}">${l}</button>`).join('')}</div>`;
+      const tabs = `<div class="vg-gb vg-ptabs">${[['land', '🗺️ Land'], ['pad', '🟩 Paddocks'], ['fit', '🏠 Fittings'], ['eq', '🚜 Equipment'], ['edit', '✋ Move or sell']].map(([k, l]) => `<button data-v="farm" data-k="mode:${k}" class="${P.mode === k ? 'on' : ''}">${l}</button>`).join('')}</div>`;
       let body = '<div class="vg-gq">Lay out your farm. Pick what to do.</div>';
       if (P.mode === 'pad') body = `<div class="vg-gq">${P.cand ? (P.cand.bad ? `${esc(P.cand.bad)} Tap a new first corner.` : 'Build this paddock?') : P.a ? 'Now tap the opposite corner.' : `Tap one corner of the new paddock on the grass, then the opposite corner. Fencing costs ✨ ${FENCE_XP} a metre (two tiles).`}</div>${P.cand && !P.cand.bad ? `<div class="vg-gb vg-go"><button data-v="farm" data-k="padok"><span class="e">✅</span>Build it · ✨ ${P.cand.xp}</button><button data-v="farm" data-k="padno">Cancel</button></div>` : ''}`;
       if (P.mode === 'fit' || P.mode === 'eq') body = `<div class="vg-gq">${P.t ? `Tap where the ${ITEMS[P.t].name.toLowerCase()} goes${ITEMS[P.t].in ? ' (inside a paddock)' : ITEMS[P.t].in === false ? ' (outside the paddocks)' : ''}. <button class="vg-link" data-v="farm" data-k="rot">↻ Turn it</button>` : P.mode === 'fit' ? 'Things for inside a paddock.' : 'Farm equipment, for outside the paddocks.'}</div>
         <div class="vg-gb vg-mine">${Object.entries(ITEMS).filter(([, d]) => P.mode === 'fit' ? d.in !== false : d.in !== true).map(([t, d]) => `<button data-v="farm" data-k="item:${t}" class="${P.t === t ? 'on' : ''}"><span class="e">${d.e}</span>${d.name} · ✨ ${d.xp}${d.about ? `<small>&nbsp;${esc(d.about)}</small>` : ''}</button>`).join('')}</div>`;
       if (P.mode === 'edit') body = P.sel ? `<div class="vg-gq">${P.sel.kind === 'item' ? `The ${ITEMS[F().items.find(i => i.id === P.sel.id).t].name.toLowerCase()}.` : 'This paddock.'} ${P.moving ? 'Tap where it goes now.' : ''}</div><div class="vg-gb vg-go">${P.sel.kind === 'item' ? '<button data-v="farm" data-k="move"><span class="e">✋</span>Move it</button>' : ''}<button data-v="farm" data-k="sell"><span class="e">🏷️</span>${P.sel.kind === 'item' ? 'Sell it (half back)' : 'Take the fence down (half back)'}</button><button data-v="farm" data-k="desel">Cancel</button></div>` : '<div class="vg-gq">Tap a fitting or a piece of equipment to move or sell it, or the inside of a paddock to take its fence down.</div>';
+      if (P.mode === 'land') body = landHtml();
       c.gamePanel(head + tabs + body); drawPreview();
       void f;
+    }
+    // ---------- land (farm-land.js): the places around the farm, what each costs and what it'd add each week; buying
+    // one opens a budget check first. Prices are XP from the farm account (topped up from the wallet if short).
+    const FL = () => IH.farmLand;
+    function landHtml() {
+      const L = FL(); if (!L) return '<div class="vg-gq">Land isn’t ready yet.</div>';
+      const f = F(), mine = L.owned(f), n = mine.filter(b => !b.free).length;
+      if (P.buy) {
+        const slot = P.buy, t = P.ltype || 'field', e = P.ledge || 'hedge', pr = L.price(n), acc = sh().farmAcct().bal, w = sh().wallet().left;
+        return `<div class="vg-gq"><b>${L.SLOT_NAME[slot]} block</b> · 52 m by 60 m, joined onto your farm.</div>
+          <div class="vg-gq">What will it be?</div><div class="vg-gb vg-mine">${Object.entries(L.TYPES).map(([k, T0]) => `<button data-v="farm" data-k="ltype:${k}" class="${t === k ? 'on' : ''}"><span class="e">${T0.e}</span>${T0.name}<small>&nbsp;${esc(T0.about)}</small></button>`).join('')}</div>
+          <div class="vg-gq">Its boundary</div><div class="vg-gb vg-ptabs">${Object.entries(L.EDGES).map(([k, nm]) => `<button data-v="farm" data-k="ledge:${k}" class="${e === k ? 'on' : ''}">${nm}</button>`).join('')}</div>
+          <div class="vg-gq vg-budget"><b>Before you buy</b><br>Price: ✨ ${pr.toLocaleString()} XP, from the farm account (✨ ${Math.round(acc).toLocaleString()}), then your wallet (✨ ${Math.round(w).toLocaleString()}) for the rest.<br>Every Monday after: council rates ✨ 15, plus water and power for what's on it.<br>${esc(L.TYPES[t].earns)}${pr > acc + w ? '<br><b>You don’t have enough yet.</b> Save up: sell produce, and do chores and lessons.' : ''}</div>
+          <div class="vg-gb vg-go"><button data-v="farm" data-k="lno">Not now</button><button data-v="farm" data-k="lbuy" ${pr > acc + w ? 'disabled' : ''}>Buy it · ✨ ${pr.toLocaleString()}</button></div>`;
+      }
+      const rows = Object.keys(L.SLOTS).map(slot => {
+        const b = mine.find(q => q.slot === slot), T0 = b && L.TYPES[b.type];
+        if (b) return `<button data-v="farm" data-k="lsee:${slot}"><span class="e">${T0.e}</span>${L.SLOT_NAME[slot]}: ${T0.name}<small>&nbsp;${L.EDGES[b.edge || 'hedge']}${b.free ? ' · moved from your old island' : ''}</small></button>`;
+        if (!L.canHave(f, slot)) return `<button disabled><span class="e">🔒</span>${L.SLOT_NAME[slot]}<small>&nbsp;Buy a block next to it first.</small></button>`;
+        return `<button data-v="farm" data-k="lpick:${slot}"><span class="e">🟫</span>${L.SLOT_NAME[slot]} · ✨ ${L.price(n).toLocaleString()}<small>&nbsp;Empty land, 52 m by 60 m.</small></button>`;
+      }).join('');
+      const sel = P.lsee && mine.find(q => q.slot === P.lsee);
+      return `<div class="vg-gq">Grow your farm with blocks of land on its sides. Each costs more than the one before, and each adds rates every Monday. The outlined places are for sale.</div><div class="vg-gb vg-mine">${rows}</div>${sel ? `<div class="vg-gq">Change the ${L.SLOT_NAME[sel.slot].toLowerCase()} block’s boundary (✨ ${L.EDGE_XP} for the work):</div><div class="vg-gb vg-ptabs">${Object.entries(L.EDGES).map(([k, nm]) => `<button data-v="farm" data-k="ledgeset:${k}" class="${(sel.edge || 'hedge') === k ? 'on' : ''}">${nm}</button>`).join('')}</div>` : ''}`;
     }
     function drawPreview() {
       const B = V().B; if (preview.parent !== B.root) B.root.add(preview); while (preview.children.length) preview.remove(preview.children[0]);
       const k = new Kit(); const box = (x0, z0, x1, z1, col) => { for (const [a, b] of [[[x0, z0], [x1, z0]], [[x1, z0], [x1, z1]], [[x1, z1], [x0, z1]], [[x0, z1], [x0, z0]]]) k.box(Math.hypot(b[0] - a[0], b[1] - a[1]) + 0.2, 0.12, 0.2, (a[0] + b[0]) / 2, 0.08, (a[1] + b[1]) / 2, col, { ry: -Math.atan2(b[1] - a[1], b[0] - a[0]) }); };
+      if (P && P.mode === 'land' && FL()) { const f = F(); for (const slot of Object.keys(FL().SLOTS)) if (FL().canHave(f, slot)) { const r = FL().rectOf(slot); box(r[0] + 0.5, r[1] + 0.5, r[2] - 0.5, r[3] - 0.5, P.buy === slot ? '#ffd35a' : '#ffffff'); } }
       if (P && P.a && !P.cand) k.ball(0.35, P.a[0], 0.3, P.a[1], '#ffd35a', { n: 8 });
       if (P && P.cand) box(P.cand.x0, P.cand.z0, P.cand.x1, P.cand.z1, P.cand.bad ? '#ff6b6b' : '#7be08c');
       if (P && P.sel) { const f = F(); if (P.sel.kind === 'item') { const it = f.items.find(i => i.id === P.sel.id), d = ITEMS[it.t]; box(it.x - d.fp[0] / 2 - 0.3, it.z - d.fp[1] / 2 - 0.3, it.x + d.fp[0] / 2 + 0.3, it.z + d.fp[1] / 2 + 0.3, '#ffd35a'); } else { const p = f.paddocks.find(q => q.id === P.sel.id); if (p) box(p.x0, p.z0, p.x1, p.z1, '#ffd35a'); } }
@@ -622,7 +655,7 @@
     }
     // can a rectangle (a paddock, an item's footprint) go here?
     function clear(x0, z0, x1, z1, skip) {
-      if (x0 < 1 || z0 < 1 || x1 > W - 1 || z1 > D - 1) return 'Too near the edge.';
+      const onL = V().B.onLand; if (onL ? !(onL(x0, z0, 1) && onL(x1, z1, 1) && onL(x0, z1, 1) && onL(x1, z0, 1)) : (x0 < 1 || z0 < 1 || x1 > W - 1 || z1 > D - 1)) return 'Too near the edge.';
       const hit = r => x0 < r[2] && x1 > r[0] && z0 < r[3] && z1 > r[1];
       if (hit(BARN) || hit([2, 13.8, 4.4, 16.2]) || hit([21.6, 1.6, 23.2, 3.2])) return 'Something’s in the way.';
       if (hit([MEADOW[0] - 1, MEADOW[1] - 1, MEADOW[2] + 1, MEADOW[3] + 1])) return 'That’s the hay meadow.';
@@ -662,6 +695,17 @@
       }
       return false;
     }
+    function buyLand() {
+      const L = FL(), f = F(), slot = P.buy; if (!L || !slot || !L.canHave(f, slot)) return;
+      const n = L.owned(f).filter(b => !b.free).length, pr = L.price(n), type = P.ltype || 'field';
+      if (!sh().farmPay(pr, `the ${L.SLOT_NAME[slot].toLowerCase()} block of land`)) return;
+      const blk = { id: nid(), slot, type, edge: P.ledge || 'hedge', base: 100 * ((f.land || []).length + 1), at: Date.now() };
+      (f.land = f.land || []).push(blk);
+      // a pasture is a paddock like any other: fenced, with its gate (animals go in it from the barn)
+      if (type === 'pasture') { const r = L.rectOf(slot); f.paddocks.push({ id: nid(), x0: r[0] + 6, z0: r[1] + 6, x1: r[2] - 6, z1: r[3] - 6 }); }
+      P.buy = null; save(); c.xp(); c.sound('buy'); c.toast(`${L.TYPES[type].e} Your ${L.SLOT_NAME[slot].toLowerCase()} block is ready: a ${L.TYPES[type].name.toLowerCase()}! Rates start next Monday.`);
+      return reload();
+    }
     function reload() { const keep = P; IH.village.reload(); P = keep; setTimeout(() => { if (P && V() && V().where === 'farm') planner(); }, 60); }
     function click(k) {
       const [what, a, b] = k.split(':'), f = F();
@@ -673,6 +717,13 @@
       if (what === 'hitch') return hitch(a);
       if (what === 'pclose') { P = null; V().plan = null; while (preview.children.length) preview.remove(preview.children[0]); document.querySelector('.vg-game').hidden = true; return; }
       if (what === 'mode') { P = { mode: a }; return planner(); }
+      if (what === 'lpick') { P.buy = a; P.ltype = P.ltype || 'field'; P.ledge = P.ledge || 'hedge'; return planner(); }
+      if (what === 'ltype') { P.ltype = a; return planner(); }
+      if (what === 'ledge') { P.ledge = a; return planner(); }
+      if (what === 'lno') { P.buy = null; return planner(); }
+      if (what === 'lsee') { P.lsee = P.lsee === a ? null : a; return planner(); }
+      if (what === 'lbuy') return buyLand();
+      if (what === 'ledgeset') { const b = (f.land || []).find(q => q.slot === P.lsee); if (!b || (b.edge || 'hedge') === a) return; if (!sh().farmPay(FL().EDGE_XP, `a new ${FL().EDGES[a].toLowerCase()}`)) return; b.edge = a; save(); c.sound('place'); c.toast(`${FL().EDGES[a]} built.`); return reload(); }
       if (what === 'item') { P.t = a; return planner(); }
       if (what === 'rot') { P.ry = P.ry ? 0 : Math.PI / 2; return planner(); }
       if (what === 'padno') { P.a = null; P.cand = null; return planner(); }
@@ -680,7 +731,7 @@
       if (what === 'desel') { P.sel = null; P.moving = false; return planner(); }
       if (what === 'move') { P.moving = true; P.ry = (f.items.find(i => i.id === P.sel.id) || {}).ry || 0; return planner(); }
       if (what === 'sell') {
-        if (P.sel.kind === 'item') { const i = f.items.findIndex(x => x.id === P.sel.id), it = f.items[i]; if (i < 0) return; f.items.splice(i, 1); sh().xp(Math.round(ITEMS[it.t].xp / 2)); c.toast(`Sold the ${ITEMS[it.t].name.toLowerCase()}: ✨ ${Math.round(ITEMS[it.t].xp / 2)} back.`); }
+        if (P.sel.kind === 'item') { const i = f.items.findIndex(x => x.id === P.sel.id), it = f.items[i]; if (i < 0) return; f.items.splice(i, 1); sh().farmIn(Math.round(ITEMS[it.t].xp / 2), `sold the ${ITEMS[it.t].name.toLowerCase()}`); c.toast(`Sold the ${ITEMS[it.t].name.toLowerCase()}: ✨ ${Math.round(ITEMS[it.t].xp / 2)} back.`); }
         else { const p = f.paddocks.find(q => q.id === P.sel.id); if (!p) return; if (f.animals.some(x => x.pad === p.id)) return c.toast('Animals live there. Move them out first (sell them, or keep the paddock).'); if (f.items.some(it => ITEMS[it.t].in && padOf(f, it.x, it.z) === p)) return c.toast('Take its fittings out first.'); f.paddocks = f.paddocks.filter(q => q !== p); const back = Math.round((p.x1 - p.x0 + p.z1 - p.z0) * FENCE_XP / 2); sh().xp(back); c.toast(`Fence down: ✨ ${back} back.`); }
         P.sel = null; save(); c.xp(); return reload();
       }

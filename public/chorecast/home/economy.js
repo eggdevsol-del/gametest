@@ -69,9 +69,9 @@
       const e = E(), from = mon - 7, played = e.days.filter(d => d >= from && d < mon).length, wk = e.wk && e.wk.mon === from ? e.wk : { mon: from, sales: 0, run: 0, cap: 0 };
       e.wk = { mon, sales: 0, run: 0, cap: 0 };
       if (!played) return null; // (a week away: no bills, no statement)
-      const k = played / 7, part = played < 7 ? `${played} of 7 days played` : '', an = animals(), big = an.filter(x => BIG.test(x)).length, veh = vehicles();
+      const blocks = (farm().land || []).length, k = played / 7, part = played < 7 ? `${played} of 7 days played` : '', an = animals(), big = an.filter(x => BIG.test(x)).length, veh = vehicles();
       const bills = [
-        addBill('Council rates', 20 * k, part ? `✨ 20 a week × ${part}` : 'The paddock: ✨ 20 a week', 'rates'),
+        addBill('Council rates', (20 + 15 * blocks) * k, `The paddock ✨ 20${blocks ? ` + ${blocks} block${blocks === 1 ? '' : 's'} × ✨ 15` : ''} a week${part ? ` × ${part}` : ''}`, 'rates'),
         addBill('Power', 15 * k, part ? `✨ 15 a week × ${part}` : 'Fences, lights and the barn', 'power'),
         addBill('Water', 2 * an.length * k, `${an.length} animal${an.length === 1 ? '' : 's'} × ✨ 2 a week${part ? ` × ${part}` : ''}`, 'water'),
         veh.length ? addBill('Vehicle registration', veh.reduce((s, t) => s + (t === 'tractor' ? 5 : 3), 0) * k, veh.map(t => (t === 'tractor' ? 'Tractor ✨ 5' : 'Quad ✨ 3')).join(', ') + ' a week' + (part ? ` × ${part}` : ''), 'rego') : null,

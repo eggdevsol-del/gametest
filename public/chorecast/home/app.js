@@ -2648,6 +2648,8 @@
   // ---------- the phone: the kid's character's own smartphone, where the home's shopping happens. Apps: Shop (things
   // for the home), Homes, Groceries (food for the fridge and pantry), Recipes (what to cook next) and Market (sell
   // things you're not using back for XP). Everything is in XP, never money.
+  // islands that are land on the farm now (farm-land.js), not places to travel to
+  const LAND_NOW = { plot: 1, orchard: 1 };
   const APPS = [['bank', '🏦', 'Banking'], ['shop', '🛋️', 'Shop'], ['homes', '🏠', 'Homes'], ['groceries', '🛒', 'Groceries'], ['recipes', '🍳', 'Recipes'], ['market', '🏷️', 'Market'], ['jobs', '💼', 'Employment'], ['travel', '🧭', 'Travel to']];
   const sellValue = (d, used) => Math.max(10, Math.round(d.xp * (used ? 0.3 : 0.5) / 10) * 10);
   // the Market app pays sellers half what they'd get in person (a village shop, your stall)
@@ -2715,7 +2717,7 @@
       body = `${back}<h3>Employment</h3>${tabs}${inner}`;
     }
     if (app === 'travel') {
-      const L = IH.islandsBuild ? IH.islandsBuild.LIST : [], own = islandsOwned(), here = O.away ? (IH.village && IH.village.where()) : 'home';
+      const L = IH.islandsBuild ? IH.islandsBuild.LIST.filter(i => !LAND_NOW[i.id]) : [], own = islandsOwned(), here = O.away ? (IH.village && IH.village.where()) : 'home';
       const row = (id, e, name, sub, btn) => `<div class="ih-ph-row${here === id ? ' ih-here' : ''}"><span class="ih-ph-e">${e}</span><span><b>${esc(name)}</b><small>${sub}</small></span>${btn}</div>`;
       const go = id => here === id ? '<small class="ih-ph-tag">You’re here</small>' : `<button class="ih-b1 ih-sm" data-a="goTo" data-w="${id}">Go</button>`;
       body = `${back}<h3>Travel to</h3><p class="ih-ph-sub">Your home, the village and your islands. Vacation islands are for playing; on utility islands you make things to cook or sell.</p><div class="ih-ph-list">
@@ -2952,6 +2954,11 @@
     size(); loadHome(); applyLook(); CAM.intro = { a: 0.62, b: 1, t0: 0 }; lastT = null; beat.reset();
     ui(); force = true; if (!raf) raf = requestAnimationFrame(loop);
     document.body.classList.add('ih-open');
+    // the Veggie plot and the Orchard terrace are blocks of land on the farm now (farm-land.js): an owner gets theirs
+    // free, with what was growing on it (the beds and trees keep their numbers, so nothing's lost)
+    if (IH.farmLand) { const own = O.st.islands || {}, f = (O.st.farm = O.st.farm || {}), land = (f.land = f.land || []); let moved = 0;
+      for (const [isl, type] of [['plot', 'field'], ['orchard', 'orchard']]) if (own[isl] && !land.some(b => b.from === isl)) { const slot = ['e', 's', 'w', 'n'].find(q => !land.some(b => b.slot === q)); if (!slot) continue; land.push({ id: Math.random().toString(36).slice(2, 9), slot, type, edge: 'hedge', base: 0, from: isl, free: true, at: Date.now() }); moved++; }
+      if (moved) { save(); setTimeout(() => toast(moved === 2 ? 'Your veggie plot and orchard are blocks of land on your farm now, with everything still growing.' : `Your ${own.plot && land.some(b => b.from === 'plot') ? 'veggie plot' : 'orchard'} is a block of land on your farm now, with everything still growing.`), 4000); } }
     // the farm's running costs (economy.js): a played day counted, bills, the Monday statement, reports, lessons
     if (IH.economy) {
       O.E = IH.economy({ st: () => O.st, kid: () => O.kid, acct: farmAcct, led, slipOf, save, toast, sheet, closeSheet, ui, sound, wGain, nf, esc, sheetOpen: () => !$('.ih-sheet', O.root).hidden });
