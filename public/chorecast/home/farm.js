@@ -15,8 +15,8 @@
   const T = window.THREE, IH = window.IsoHome = window.IsoHome || {};
   if (!T || !IH.kit || !IH.islandsBuild) return;
   const { Kit } = IH.kit, IB = IH.islandsBuild, K = IB.kit, { rng, bx, sides, board, signpost, gate: hangGate } = K;
-  const W = 52, D = 44, DAY = 864e5, today = () => Math.floor(Date.now() / DAY);
-  const TRACK = [[24, 0.4, 28, 16], [6, 13, 46, 17]], BARN = [6.6, 2.2, 17.4, 9.8], FENCE_XP = 8;
+  const W = 52, D = 60, DAY = 864e5, today = () => Math.floor(Date.now() / DAY);
+  const TRACK = [[24, 0.4, 28, 16], [6, 13, 51, 17], [47.6, 13, 51, 45]], MEADOW = [4, 45.5, 48, 58], BARN = [6.6, 2.2, 17.4, 9.8], FENCE_XP = 8;
 
   // ---------- what there is: animals (price, room each, what they eat, what they make, what they need), fittings, equipment
   const ANIMALS = {
@@ -97,18 +97,14 @@
   // sit), the steering wheel on its column, four posts, a roof, glass at the front and back (open sides, so you're seen).
   const TRACTOR_SEAT = { x: 0, y: 1.42, z: -0.62, back: -0.98 };
   function tractorModel(kk) {
-    const RED = '#d8433a', DK = '#2a2630', HUB = '#e8c45a';
+    const RED = '#d8433a', DK = '#2a2630';
     bx(kk, 1.0, 0.5, 3.6, 0, 0.55, 0.1, '#3d4048', { r: 0.06 }); // the chassis
     bx(kk, 1.2, 0.95, 1.9, 0, 0.9, 0.95, RED, { r: 0.14 }); bx(kk, 1.1, 0.1, 1.8, 0, 1.85, 0.95, '#c23a31', { r: 0.05 }); // the bonnet
     bx(kk, 1.0, 0.7, 0.1, 0, 0.98, 1.92, '#3d4048', { r: 0.03 }); for (let i = 0; i < 5; i++) bx(kk, 0.9, 0.05, 0.04, 0, 1.06 + i * 0.12, 1.98, '#9aa0aa');
     for (const s of [-1, 1]) kk.ball(0.12, s * 0.42, 1.55, 1.92, '#fff3c0', { n: 8 }); // headlights
     kk.cyl(0.07, 1.1, 0.42, 1.8, 1.4, '#3d4048', { n: 6 }); kk.cyl(0.09, 0.08, 0.42, 2.9, 1.4, '#3d4048', { n: 6 }); // the stack
-    for (const s of [-1, 1]) { // the big back wheels with their hubs and tread, the mudguards; the front wheels
-      kk.cyl(0.92, 0.55, s * 0.98, 0.92, -0.62, DK, { n: 20, rz: Math.PI / 2 }); kk.cyl(0.42, 0.57, s * 0.98, 0.92, -0.62, HUB, { n: 14, rz: Math.PI / 2 });
-      for (let i = 0; i < 14; i++) { const a = i / 14 * Math.PI * 2; kk.box(0.58, 0.1, 0.2, s * 0.98, 0.92 + Math.sin(a) * 0.86, -0.62 + Math.cos(a) * 0.86, DK, { rx: Math.PI / 2 - a }); } // (lugs across the tread, standing out from it)
-      kk.box(0.62, 0.08, 1.6, s * 0.98, 1.95, -0.62, RED, { r: 0.04 }); kk.box(0.62, 0.7, 0.08, s * 0.98, 1.3, 0.2, RED);
-      kk.cyl(0.48, 0.34, s * 0.78, 0.48, 1.45, DK, { n: 16, rz: Math.PI / 2 }); kk.cyl(0.22, 0.36, s * 0.78, 0.48, 1.45, HUB, { n: 10, rz: Math.PI / 2 });
-    }
+    for (const s of [-1, 1]) { kk.box(0.62, 0.08, 1.6, s * 0.98, 1.95, -0.62, RED, { r: 0.04 }); kk.box(0.62, 0.7, 0.08, s * 0.98, 1.3, 0.2, RED); kk.cyl(0.05, 1.7, 0, 0.92 - 0.85, -0.62, '#3d4048', { n: 6, rz: Math.PI / 2 }); kk.cyl(0.05, 1.3, 0, 0.48 - 0.65, 1.45, '#3d4048', { n: 6, rz: Math.PI / 2 }); } // the mudguards; the axles (the wheels turn on them: tractorWheels)
+    bx(kk, 0.3, 0.2, 0.3, 0, 0.75, -1.72, '#3d4048', { r: 0.03 }); // the hitch
     bx(kk, 1.5, 0.08, 1.4, 0, 1.08, -0.55, '#3d4048'); // the cab floor
     // the seat: a sprung post, the cushion, the backrest (against which you sit)
     kk.cyl(0.07, 0.2, 0, 1.12, TRACTOR_SEAT.z, '#3d4048', { n: 6 }); bx(kk, 0.7, 0.12, 0.62, 0, TRACTOR_SEAT.y - 0.12, TRACTOR_SEAT.z, '#2a2630', { r: 0.05 });
@@ -146,6 +142,37 @@
     const rotor = rk.build(); rotor.position.set(x, H + 0.29, z + 0.85); rotor.userData.spin = 1.4;
     return { tower, rotor };
   }
+  // The tractor's wheels, each its own part: the big back ones roll on their axle, the small front ones roll and
+  // steer on their pivots. A wheel: tyre, tread lugs across it, the hub. { rear: [groups], pivots: [groups], front: [groups] }
+  const R_REAR = 0.92, R_FRONT = 0.48, WHEELBASE = 2.07;
+  function wheel(r, w) {
+    const k = new Kit(), DK = '#2a2630', n = Math.round(r * 15);
+    k.cyl(r, w, 0, -w / 2, 0, DK, { n: 20, rz: Math.PI / 2 }); k.cyl(r * 0.46, w + 0.02, 0, -(w + 0.02) / 2, 0, '#e8c45a', { n: 14, rz: Math.PI / 2 });
+    for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2; k.box(w * 1.04, 0.1, r * 0.22, 0, Math.sin(a) * (r - 0.04) - 0.05, Math.cos(a) * (r - 0.04), DK, { rx: Math.PI / 2 - a, r: 0.02 }); }
+    for (let i = 0; i < 5; i++) { const a = i / 5 * Math.PI * 2; k.ball(r * 0.06, w / 2 + 0.01, Math.sin(a) * r * 0.25, Math.cos(a) * r * 0.25, '#8a8f98', { n: 5 }); } // wheel nuts (to see it turn)
+    return k.build();
+  }
+  function tractorWheels(g) {
+    const rear = [], pivots = [], front = [];
+    for (const s of [-1, 1]) {
+      const w = new T.Group(); w.position.set(s * 0.98, R_REAR, -0.62); const m = wheel(R_REAR, 0.55); if (s < 0) m.rotation.y = Math.PI; w.add(m); g.add(w); rear.push(w);
+      const p = new T.Group(); p.position.set(s * 0.78, R_FRONT, 1.45); const f = new T.Group(), fm = wheel(R_FRONT, 0.34); if (s < 0) fm.rotation.y = Math.PI; f.add(fm); p.add(f); g.add(p); pivots.push(p); front.push(f);
+    }
+    return { rear, pivots, front };
+  }
+  // Things it pulls (on the hitch behind): a round baler (the pickup reel in front, the bale chamber, its own two
+  // wheels) and a flatbed trailer (a drawbar, a deck with rails, two wheels; bales ride on it).
+  function implementModel(kind) {
+    const g = new T.Group(), k = new Kit(), wheels = [];
+    if (kind === 'baler') { k.box(0.1, 0.1, 1.5, 0, 0.55, 1.1, '#3d4048'); k.box(2.0, 1.4, 1.5, 0, 0.45, -0.1, '#2f8a4f', { r: 0.12 }); k.cyl(0.72, 2.02, 0, 0.92 - 1.01, -0.4, '#26703f', { n: 18, rz: Math.PI / 2 }); k.box(2.2, 0.35, 0.5, 0, 0.12, 0.8, '#e8c45a', { r: 0.06 }); for (let i = 0; i < 6; i++) k.box(0.05, 0.28, 0.05, -0.9 + i * 0.36, 0.1, 1.02, '#8a8f98'); }
+    else { k.box(0.1, 0.1, 1.6, 0, 0.55, 1.4, '#3d4048'); k.box(2.0, 0.18, 2.8, 0, 0.62, -0.4, '#b7834f', { r: 0.04 }); for (const s of [-1, 1]) k.box(0.08, 0.4, 2.8, s * 0.98, 0.8, -0.4, '#8a6038'); k.box(2.0, 0.4, 0.08, 0, 0.8, -1.8, '#8a6038'); }
+    g.add(k.build());
+    for (const s of [-1, 1]) { const w = new T.Group(); w.position.set(s * (kind === 'baler' ? 1.12 : 1.1), 0.45, -0.3); const m = wheel(0.45, 0.3); if (s < 0) m.rotation.y = Math.PI; w.add(m); g.add(w); wheels.push(w); }
+    const load = new T.Group(); load.position.set(0, 0.72, -0.4); g.add(load);
+    return { g, wheels, load, len: kind === 'baler' ? 1.9 : 2.2, r: 0.45 };
+  }
+  // a round bale of hay, lying on its side
+  function baleModel() { const k = new Kit(); k.cyl(0.62, 1.15, 0, -0.575, 0, '#e8c45a', { n: 16, rz: Math.PI / 2 }); for (const s of [-1, 1]) { k.cyl(0.56, 0.02, s * 0.585, -0.01, 0, '#d9b24a', { n: 16, rz: Math.PI / 2 }); k.torus(0.32, 0.02, s * 0.59, 0, 0, '#c9a03a', { ry: Math.PI / 2 }); } const g = k.build(); g.position.y = 0.62; const o = new T.Group(); o.add(g); return o; }
   function fence(k, p, gate, root, gates) {
     const sides = [[[p.x0, p.z0], [p.x1, p.z0], 'n'], [[p.x1, p.z0], [p.x1, p.z1], 'e'], [[p.x1, p.z1], [p.x0, p.z1], 's'], [[p.x0, p.z1], [p.x0, p.z0], 'w']];
     const runs = []; for (const [a, b, s] of sides) { if (s !== gate.side) { runs.push([a, b]); continue; } const L = Math.hypot(b[0] - a[0], b[1] - a[1]), u0 = (L / 2 - 1.6) / L, u1 = (L / 2 + 1.6) / L, at = u => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u]; runs.push([a, at(u0)], [at(u1), b]); if (root) gates.push(hangGate(k, root, at(u0), at(u1))); }
@@ -174,16 +201,25 @@
     // the paddocks: fences, a gate, and the gate's spot (feeding, who lives here)
     const gates = [], pads = f.paddocks.map(p => { const g = gateOf(p), runs = fence(k, p, g, root, gates); for (const [a, b] of runs) solid(a[0] - 0.2, a[1] - 0.2, b[0] + 0.2, b[1] + 0.2); const at = outside(g); spots.push({ kind: 'fgate', id: 'gate' + p.id, pad: p.id, name: 'the paddock gate', at, yaw: Math.atan2(g.x - at[0], g.z - at[1]), hit: [g.x, g.z, 0, 2.6] }); return { p, g }; });
     // fittings and equipment
-    const models = {};
-    for (const it of f.items) { const d = ITEMS[it.t]; if (!d) continue; const g = new T.Group(), kk = new Kit(); itemModel(it.t, kk); g.add(kk.build()); if (it.t === 'pond' && IH.look.seaSheet) g.add(IH.look.seaSheet(-2.2, -1.7, 2.2, 1.7, 0.16, (x, z) => { const e = (x / 1.85) ** 2 + (z / 1.35) ** 2; return e < 1 ? 0.16 - 0.8 * (1 - e) : 0.4; }, { n: 6, foam: 0.18, deepAt: 0.6, shallow: '#8fe0d0', deep: '#2f7f9f', mud: '#8f8a99' })); g.position.set(it.x, 0, it.z); g.rotation.y = it.ry || 0; root.add(g); models[it.id] = g;
-      const [w, dd] = d.fp, c = Math.abs(Math.cos(it.ry || 0)), s = Math.abs(Math.sin(it.ry || 0)), hw = (w * c + dd * s) / 2, hd = (w * s + dd * c) / 2; solid(it.x - hw, it.z - hd, it.x + hw, it.z + hd);
+    const models = {}, vehicles = {};
+    for (const it of f.items) { const d = ITEMS[it.t]; if (!d) continue; const g = new T.Group(), kk = new Kit(); itemModel(it.t, kk); g.add(kk.build()); if (it.t === 'tractor') vehicles[it.id] = Object.assign(tractorWheels(g), { item: it }); if (it.t === 'pond' && IH.look.seaSheet) g.add(IH.look.seaSheet(-2.2, -1.7, 2.2, 1.7, 0.16, (x, z) => { const e = (x / 1.85) ** 2 + (z / 1.35) ** 2; return e < 1 ? 0.16 - 0.8 * (1 - e) : 0.4; }, { n: 6, foam: 0.18, deepAt: 0.6, shallow: '#8fe0d0', deep: '#2f7f9f', mud: '#8f8a99' })); g.position.set(it.x, 0, it.z); g.rotation.y = it.ry || 0; root.add(g); models[it.id] = g;
+      const [w, dd] = d.fp, c = Math.abs(Math.cos(it.ry || 0)), s = Math.abs(Math.sin(it.ry || 0)), hw = (w * c + dd * s) / 2, hd = (w * s + dd * c) / 2; solid(it.x - hw, it.z - hd, it.x + hw, it.z + hd); if (vehicles[it.id]) vehicles[it.id].solid = solids.length - 1;
       if (/^(coop|pond|sty|milkstand|shearstand|beehive|tractor|quad|trough|feeder)$/.test(it.t)) spots.push({ kind: 'fitem', id: 'it' + it.id, item: it.id, t: it.t, name: 'the ' + d.name.toLowerCase(), at: [it.x, it.z + hd + 1.2], yaw: Math.PI, hit: [it.x, it.z, 0, Math.max(w, dd) + 0.4] }); }
     // the animals, each in its own paddock, moving its own way (village.js: the generic movers, or the 3D ones)
     const pens = {}; for (const { p } of pads) pens[p.id] = [p.x0 + 1, p.z0 + 1, p.x1 - 1, p.z1 - 1];
     for (const a of f.animals) { const pen = pens[a.pad]; if (!pen) continue; const mk = (IH.animals3d && IH.animals3d.make) || ((kind) => (IB.MAKE[kind] || IB.MAKE.hen)()); const m = mk(a.kind); m.pen = pen; m.rec = a; let x = 0, z = 0; for (let q = 0; q < 30; q++) { x = pen[0] + R() * (pen[2] - pen[0]); z = pen[1] + R() * (pen[3] - pen[1]); if (!solids.some(r => x > r[0] - 0.8 && x < r[2] + 0.8 && z > r[1] - 0.8 && z < r[3] + 0.8)) break; } m.group.position.set(x, 0, z); m.group.rotation.y = R() * 6.28; animals.push(m); root.add(m.group); }
     root.add(k.build()); for (const s of spots) if (s.hit) { const [x, z, , w] = s.hit, m = new T.Mesh(new T.BoxGeometry(w, 4, w), new T.MeshBasicMaterial()); m.visible = false; m.position.set(x, 2, z); m.userData.spot = s; root.add(m); }
+    // the hay meadow at the front: long grass (the home's own), cut where the baler's been (it grows back in two days),
+    // a low hedge round it, and the round bales lying where they dropped
+    const hay = f.hay || (f.hay = { cells: {}, at: 0 }); if (hay.at && Date.now() - hay.at > 2 * DAY) { hay.cells = {}; hay.at = 0; }
+    let meadowL = null; if (IH.lawnKit) { const cells = []; for (let i = MEADOW[0]; i < MEADOW[2]; i++) for (let j = Math.ceil(MEADOW[1]); j < MEADOW[3]; j++) cells.push({ x: i, z: j }); meadowL = IH.lawnKit.build({ cells, x0: 0, z0: 0, W, D, seed: 777, phase: 'day', per: e => (e ? 30 : 6), ground: false }); meadowL.position.y = 0.07; IH.lawnKit.grow(meadowL, 1.25); root.add(meadowL); for (const key of Object.keys(hay.cells)) { const i = Math.floor(key / 1000), j = key % 1000; IH.lawnKit.cutAt(meadowL, i + 0.5, j + 0.5, 0.75); } }
+    for (let x = MEADOW[0] - 0.6; x < MEADOW[2] + 0.6; x += 0.9) for (const z of [MEADOW[3] + 0.6]) k.ball(0.5, x, 0.35, z, '#4f8a3c', { s: [1, 0.75, 1], n: 7 });
+    for (let z = MEADOW[1]; z < MEADOW[3] + 0.6; z += 0.9) k.ball(0.5, MEADOW[0] - 0.8, 0.35, z, '#4f8a3c', { s: [1, 0.75, 1], n: 7 });
+    solid(MEADOW[0] - 0.4, MEADOW[3] + 0.2, MEADOW[2] + 1, MEADOW[3] + 1.2); solid(MEADOW[0] - 1.4, MEADOW[1], MEADOW[0] - 0.3, MEADOW[3] + 1.2);
+    board(k, 'meadow', 'HAY MEADOW', 'tractor work: bale it, haul it', '#fff6e0', '#4a7a3a', 3.4, 0.9, MEADOW[2] + 1.2, 1.6, MEADOW[1] + 1.2, -Math.PI / 2);
+    f.bales = f.bales || []; const bales = f.bales.map(b => { const m = baleModel(); m.position.set(b.x, 0, b.z); m.rotation.y = b.ry || 0; root.add(m); return { rec: b, g: m }; });
     const lawns = [[1, 1, 51, 43]], paths = TRACK.map(r => r.slice());
-    return { gates, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
+    return { gates, vehicles, meadowL, bales, MEADOW, tick: t => { if (meadowL) IH.lawnKit.tick(meadowL, t, 1); }, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
   }
   IB.add('farm', build);
 
@@ -215,8 +251,93 @@
       c.chore(s, 'feed', 2.8, () => { for (const [k, n] of Object.entries(need)) f.feed[k] -= n; f.fed[s.pad] = today(); save(); for (const a of V().B.animals) if (a.rec && a.rec.pad === s.pad) c.float({ pos: a.group.position }, '❤️'); c.sound('tune'); c.toast(`Fed! (${Object.entries(need).map(([k, n]) => `${n} ${FEED[k].name.toLowerCase()}`).join(', ')})`); }, null, need.hay && !need.grain ? { tool: 'fork', fx: 'hay', dist: 1.1, y: 0.5, rate: 14 } : { tool: 'sack', fx: 'dust', dist: 1.2, y: 0.5, rate: 12, delay: 0.5 });
     }
     function drive(s, t) {
+      if (t === 'tractor') return c.walkTo(s.at[0], s.at[1], ok => ok && startDrive(s.item), s.yaw);
       c.walkTo(s.at[0], s.at[1], ok => { if (!ok) return; const B = V().B, m = B.models[s.item]; if (!m) return; const x0 = m.position.x, z0 = m.position.z, r0 = m.rotation.y;
-        c.ride({ dur: t === 'quad' ? 16 : 22, lift: t === 'quad' ? 0.75 : 0, seat: t === 'quad' ? null : TRACTOR_SEAT, model: m, pose: 'sitchair', bob: t === 'quad' ? 0.05 : 0.02, at: u => { const a = u * Math.PI * 2; return [26 + Math.cos(a - Math.PI / 2) * 20, 0, 15 + Math.sin(a - Math.PI / 2) * 1.2 + Math.sin(a * 2) * 0.6]; }, end: () => { m.position.set(x0, 0, z0); m.rotation.y = r0; sh().relax({ fun: 16 }); c.toast(t === 'quad' ? 'Vroom! Round the farm. 🏍️' : 'Round the farm in the tractor! 🚜'); } }); }, s.yaw);
+        c.ride({ dur: 16, lift: 0.75, model: m, pose: 'sitchair', bob: 0.05, at: u => { const a = u * Math.PI * 2; return [26 + Math.cos(a - Math.PI / 2) * 20, 0, 15 + Math.sin(a - Math.PI / 2) * 1.2 + Math.sin(a * 2) * 0.6]; }, end: () => { m.position.set(x0, 0, z0); m.rotation.y = r0; sh().relax({ fun: 16 }); c.toast('Vroom! Round the farm. 🏍️'); } }); }, s.yaw);
+    }
+
+    /* ---------- driving the tractor: the kid in the seat, steering and pedals held down (the buttons, or the
+       arrow keys / WASD). It drives like a real one: the front wheels steer, it turns round its back axle in a
+       proper circle (never on the spot, and not at all standing still), speeds up and slows down with some weight,
+       reverses, bumps to a stop against fences and things. It pulls the baler or the trailer on its hitch. */
+    let DR = null; const KEYS = {};
+    const keyMap = { ArrowUp: 'up', KeyW: 'up', ArrowDown: 'down', KeyS: 'down', ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right' };
+    const onKey = e => { const k = keyMap[e.code]; if (!k || !DR) return; KEYS[k] = e.type === 'keydown'; e.preventDefault(); e.stopPropagation(); };
+    function startDrive(id) {
+      const v = V(), m = v.B.models[id], veh = v.B.vehicles[id]; if (!m || !veh) return;
+      DR = { id, m, veh, x: m.position.x, z: m.position.z, yaw: m.rotation.y, v: 0, steer: 0, imp: null, bumped: 0, smoke: 0 };
+      v.drive = DR; const k = v.kid; k.path = []; k.pose = 'sitchair'; c.sound('on');
+      for (const kk in KEYS) KEYS[kk] = false; addEventListener('keydown', onKey, true); addEventListener('keyup', onKey, true);
+      const el = document.createElement('div'); el.className = 'vg-drive'; DR.el = el;
+      el.innerHTML = `<div class="vg-dr-top"><b>🚜</b><span>Hitch:</span><button data-v="farm" data-k="hitch:none" class="on">Nothing</button><button data-v="farm" data-k="hitch:baler">🟢 Baler</button><button data-v="farm" data-k="hitch:trailer">🟫 Trailer</button><button data-v="farm" data-k="dout" class="vg-dr-out">Get out</button></div>
+        <div class="vg-dr-steer"><button data-hold="left" aria-label="Steer left">⟲</button><button data-hold="right" aria-label="Steer right">⟳</button></div>
+        <div class="vg-dr-ped"><button data-hold="up" aria-label="Forward">▲</button><button data-hold="down" aria-label="Reverse">▼</button></div>`;
+      const hold = (e, on) => { const b = e.target.closest('[data-hold]'); if (!b) return; e.preventDefault(); KEYS[b.dataset.hold] = on; b.classList.toggle('on', on); };
+      el.addEventListener('pointerdown', e => { hold(e, true); try { e.target.releasePointerCapture(e.pointerId); } catch (er) { /* */ } });
+      for (const ev of ['pointerup', 'pointerleave', 'pointercancel', 'pointerout']) el.addEventListener(ev, e => hold(e, false));
+      v.ui.appendChild(el); v.follow = true;
+      c.toast('In the seat! ▲ to drive, ▼ to reverse, ⟲ ⟳ to steer. It can’t turn on the spot: back up to get round tight corners.');
+    }
+    function hitch(kind) {
+      if (!DR) return; if (Math.abs(DR.v) > 0.05) return c.toast('Stop first to hitch up.');
+      const v = V(); if (DR.imp) { DR.imp.load.forEach((b, i) => dropBale({ x: DR.imp.x - Math.sin(DR.imp.yaw) * (2 + i * 1.4), z: DR.imp.z - Math.cos(DR.imp.yaw) * (2 + i * 1.4), ry: DR.imp.yaw + Math.PI / 2 })); v.B.root.remove(DR.imp.g); DR.imp = null; }
+      if (kind !== 'none') { const I = implementModel(kind); I.kind = kind; I.yaw = DR.yaw; I.load = []; I.acc = 0; v.B.root.add(I.g); DR.imp = I; placeImp(0); c.sound('place'); c.toast(kind === 'baler' ? 'Baler on! Drive it over the long grass in the hay meadow.' : 'Trailer on! Drive up to bales to load them, then to the barn.'); }
+      for (const b of DR.el.querySelectorAll('[data-k^="hitch:"]')) b.classList.toggle('on', b.dataset.k === 'hitch:' + kind);
+    }
+    function placeImp(dist) {
+      const I = DR.imp, hx = DR.x - Math.sin(DR.yaw) * 1.75, hz = DR.z - Math.cos(DR.yaw) * 1.75;
+      I.yaw += (dist / I.len) * Math.sin(DR.yaw - I.yaw); // (a trailer swings in line behind, the right way going forward or back)
+      I.x = hx - Math.sin(I.yaw) * I.len; I.z = hz - Math.cos(I.yaw) * I.len; I.g.position.set(I.x, 0, I.z); I.g.rotation.y = I.yaw;
+      for (const w of I.wheels) w.rotation.x += dist / I.r;
+    }
+    function blocked(x, z, yaw) {
+      const v = V(), B = v.B, c0 = Math.cos(yaw), s0 = Math.sin(yaw);
+      for (const [lx, lz] of [[-1.15, 2.05], [1.15, 2.05], [-1.2, -1.45], [1.2, -1.45], [0, 2.1], [-1.2, 0.4], [1.2, 0.4]]) {
+        const px = x + lx * c0 + lz * s0, pz = z - lx * s0 + lz * c0; if (px < 0.6 || pz < 0.6 || px > W - 0.6 || pz > D - 0.6) return true;
+        if (B.solids.some((r, i) => i !== DR.veh.solid && px > r[0] && px < r[2] && pz > r[1] && pz < r[3])) return true;
+      }
+      return false;
+    }
+    function dropBale(b) { const v = V(), f = F(); const rec = { x: b.x, z: b.z, ry: b.ry || 0 }; f.bales.push(rec); const m = baleModel(); m.position.set(rec.x, 0, rec.z); m.rotation.y = rec.ry; v.B.root.add(m); v.B.bales.push({ rec, g: m }); save(); }
+    function tick(t, dt) {
+      if (!DR || !V() || V().drive !== DR) return; const v = V(), f = F(), k = v.kid;
+      const thr = (KEYS.up ? 1 : 0) - (KEYS.down ? 1 : 0), st = (KEYS.left ? 1 : 0) - (KEYS.right ? 1 : 0);
+      const target = thr > 0 ? 4.0 : thr < 0 ? -1.6 : 0, braking = thr !== 0 && Math.abs(DR.v) > 0.05 && Math.sign(target) !== Math.sign(DR.v);
+      const acc = braking ? 6 : thr ? 2.2 : 3.2; DR.v += Math.max(-acc * dt, Math.min(acc * dt, target - DR.v));
+      DR.steer += Math.max(-1.5 * dt, Math.min(1.5 * dt, st * 0.62 - DR.steer)); // (the wheel turns at a hand's speed, and comes back when let go)
+      const dist = DR.v * dt, yaw2 = DR.yaw + (dist / WHEELBASE) * Math.tan(DR.steer), my = (DR.yaw + yaw2) / 2;
+      const rx = DR.x - Math.sin(DR.yaw) * 0.62 + Math.sin(my) * dist, rz = DR.z - Math.cos(DR.yaw) * 0.62 + Math.cos(my) * dist, nx = rx + Math.sin(yaw2) * 0.62, nz = rz + Math.cos(yaw2) * 0.62;
+      let moved = dist;
+      if (Math.abs(dist) > 1e-5 && blocked(nx, nz, yaw2)) { if (Math.abs(DR.v) > 0.6 && t > DR.bumped) { c.sound('pat'); DR.bumped = t + 0.6; c.fx('dust', nx + Math.sin(yaw2) * 2 * Math.sign(DR.v), 0.3, nz + Math.cos(yaw2) * 2 * Math.sign(DR.v), 6); } DR.v = 0; moved = 0; }
+      else { DR.x = nx; DR.z = nz; DR.yaw = yaw2; }
+      // the wheels: the back ones roll, the front ones roll and steer
+      for (const w of DR.veh.rear) w.rotation.x += moved / R_REAR; for (const w of DR.veh.front) w.rotation.x += moved / R_FRONT; for (const p of DR.veh.pivots) p.rotation.y = DR.steer;
+      const sp = Math.abs(DR.v); DR.m.position.set(DR.x, Math.sin(t * 17) * 0.012 * Math.min(1, sp), DR.z); DR.m.rotation.set(Math.sin(t * 11) * 0.006 * sp, DR.yaw, Math.sin(t * 9) * 0.006 * sp);
+      // the kid in the seat, the camera with them; smoke from the stack, dust off the back wheels
+      c.seatKid(DR.m, TRACTOR_SEAT, 0); k.pos.set(DR.x, 0, DR.z); k.yaw = DR.yaw;
+      DR.smoke -= dt; if (DR.smoke < 0) { DR.smoke = thr ? 0.12 : 0.6; const c0 = Math.cos(DR.yaw), s0 = Math.sin(DR.yaw); c.fx('smoke', DR.x + 0.42 * c0 + 1.4 * s0, 3.0, DR.z - 0.42 * s0 + 1.4 * c0, 1); }
+      if (sp > 2 && Math.random() < dt * 8) c.fx('dust', DR.x - Math.sin(DR.yaw) * 1.4 + (Math.random() - 0.5) * 2, 0.1, DR.z - Math.cos(DR.yaw) * 1.4, 1);
+      if (!DR.imp) return; placeImp(moved); const I = DR.imp, M = v.B.MEADOW;
+      // the baler: over the long grass it picks it up, cuts it and, every so often, a round bale rolls out the back
+      if (I.kind === 'baler' && moved > 0 && I.x > M[0] && I.x < M[2] && I.z > M[1] && I.z < M[3]) {
+        const hay = f.hay; let n = 0;
+        for (let i = Math.floor(I.x - 1.3); i <= Math.floor(I.x + 1.3); i++) for (let j = Math.floor(I.z - 0.8); j <= Math.floor(I.z + 0.8); j++) { if (i < M[0] || i >= M[2] || j < Math.ceil(M[1]) || j >= M[3]) continue; const key = i * 1000 + j; if (hay.cells[key] || Math.hypot(i + 0.5 - I.x, j + 0.5 - I.z) > 1.3) continue; hay.cells[key] = 1; n++; if (v.B.meadowL) IH.lawnKit.cutAt(v.B.meadowL, i + 0.5, j + 0.5, 0.75); }
+        if (n) { I.acc += n; hay.at = hay.at || Date.now(); c.fx('hay', I.x + Math.sin(I.yaw) * 1.0, 0.4, I.z + Math.cos(I.yaw) * 1.0, Math.min(4, n)); }
+        if (I.acc >= 12) { I.acc -= 12; dropBale({ x: I.x - Math.sin(I.yaw) * 1.4, z: I.z - Math.cos(I.yaw) * 1.4, ry: I.yaw + Math.PI / 2 }); c.sound('place'); if (!DR.told) { DR.told = true; c.toast('A bale! Keep going. Then hitch the trailer and take them to the barn.'); } }
+      }
+      // the trailer: bales it comes up against are loaded on (four at most); at the barn they're unloaded into the hay store
+      if (I.kind === 'trailer') {
+        if (I.load.length < 4) for (let i = v.B.bales.length - 1; i >= 0; i--) { const b = v.B.bales[i]; if (Math.hypot(b.g.position.x - I.x, b.g.position.z - I.z) < 2.1 && I.load.length < 4) { v.B.bales.splice(i, 1); f.bales.splice(f.bales.indexOf(b.rec), 1); v.B.root.remove(b.g); const m = baleModel(); m.scale.setScalar(0.8); m.position.set((I.load.length % 2 ? 0.5 : -0.5), 0, I.load.length < 2 ? 0.5 : -0.6); m.rotation.y = Math.PI / 2; I.load.push({ g: m }); I.g.children[I.g.children.length - 1].add(m); save(); c.sound('pop'); c.fx('hay', I.x, 1.2, I.z, 6); } }
+        if (I.load.length && Math.hypot(I.x - 12, I.z - 11.5) < 4.5 && Math.abs(DR.v) < 1.5) { const n = I.load.length; for (const b of I.load) b.g.parent.remove(b.g); I.load = []; f.feed.hay = (f.feed.hay || 0) + n * 6; save(); c.xp(); c.sound('buy'); c.fx('hay', I.x, 1.4, I.z, 14); c.toast(`${n} bale${n === 1 ? '' : 's'} into the barn: ${n * 6} hay for your animals! 🌾`); }
+      }
+    }
+    function getOut() {
+      if (!DR) return; if (Math.abs(DR.v) > 0.1) return c.toast('Stop first.');
+      const v = V(), f = F(), it = f.items.find(i => i.id === DR.id), k = v.kid;
+      if (DR.imp) { DR.imp.load.forEach((b, i) => dropBale({ x: DR.imp.x - Math.sin(DR.imp.yaw) * (2 + i * 1.4), z: DR.imp.z - Math.cos(DR.imp.yaw) * (2 + i * 1.4), ry: DR.imp.yaw + Math.PI / 2 })); v.B.root.remove(DR.imp.g); }
+      if (it) Object.assign(it, { x: Math.round(DR.x * 10) / 10, z: Math.round(DR.z * 10) / 10, ry: DR.yaw });
+      const c0 = Math.cos(DR.yaw), s0 = Math.sin(DR.yaw); k.pos.set(DR.x - 1.8 * c0, 0, DR.z + 1.8 * s0); k.yaw = DR.yaw; k.pose = null;
+      removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); if (DR.el) DR.el.remove(); v.drive = null; DR = null; save(); c.sound('off'); reload();
     }
     const acts = {
       fbarn: () => [{ e: '🐮', label: 'Buy animals', run: () => shop('animals') }, { e: '🌾', label: 'Buy feed', run: () => shop('feed') }, { e: '🛠️', label: 'Farm planner: paddocks, fittings, equipment', run: () => planner() }],
@@ -284,6 +405,7 @@
       if (x0 < 1 || z0 < 1 || x1 > W - 1 || z1 > D - 1) return 'Too near the edge.';
       const hit = r => x0 < r[2] && x1 > r[0] && z0 < r[3] && z1 > r[1];
       if (hit(BARN) || hit([2, 13.8, 4.4, 16.2]) || hit([21.6, 1.6, 23.2, 3.2])) return 'Something’s in the way.';
+      if (hit([MEADOW[0] - 1, MEADOW[1] - 1, MEADOW[2] + 1, MEADOW[3] + 1])) return 'That’s the hay meadow.';
       for (const [a, b, cc, d] of TRACK) if (skip !== 'track' && hit([a, b, cc, d])) return 'Keep the track clear.';
       return null;
     }
@@ -326,6 +448,8 @@
       if (what === 'feed') { const x = FEED[a]; if (!sh().pay(x.xp, 'the ' + x.name.toLowerCase())) return; f.feed[a] = (f.feed[a] || 0) + x.n; save(); c.xp(); c.sound('buy'); return shop('feed'); }
       if (what === 'pick') return pickPad(a);
       if (what === 'buy') return buyAnimal(a, b);
+      if (what === 'dout') return getOut();
+      if (what === 'hitch') return hitch(a);
       if (what === 'pclose') { P = null; V().plan = null; while (preview.children.length) preview.remove(preview.children[0]); document.querySelector('.vg-game').hidden = true; return; }
       if (what === 'mode') { P = { mode: a }; return planner(); }
       if (what === 'item') { P.t = a; return planner(); }
@@ -341,6 +465,6 @@
       }
     }
     const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
-    return { acts, click, tap, prep() { P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
+    return { acts, click, tap, tick, prep() { if (DR) { removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); DR = null; } P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
   };
 })();

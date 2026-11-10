@@ -218,3 +218,14 @@ body.ih-open{overflow:hidden}
 .vg-plan{border:0;font:inherit;font-weight:900;font-size:14px;cursor:pointer;padding:0 12px}
 .vg-ptabs{margin-bottom:8px}.vg-ptabs button{min-height:38px;font-size:14px}
 .vg-link{border:0;background:none;color:#a0446a;font:inherit;font-weight:900;cursor:pointer;text-decoration:underline}
+/* driving the tractor */
+.vg-drive{position:absolute;inset:0;pointer-events:none}
+.vg-drive button{pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.vg-dr-top{position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 74px);transform:translateX(-50%);display:flex;gap:6px;align-items:center;background:rgba(255,255,255,.95);border-radius:16px;padding:6px 8px;box-shadow:0 6px 18px rgba(60,40,90,.18);font-weight:800;font-size:14px;pointer-events:auto}
+.vg-dr-top button{border:0;background:#f4eff8;border-radius:10px;min-height:36px;padding:0 10px;font:inherit;font-weight:800;cursor:pointer}
+.vg-dr-top button.on{background:#eafbe9;outline:2px solid #7be08c}.vg-dr-top .vg-dr-out{background:#ff7aa2;color:#fff}
+.vg-dr-steer,.vg-dr-ped{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 22px);display:flex;gap:12px}
+.vg-dr-steer{left:18px}.vg-dr-ped{right:18px;flex-direction:column}
+.vg-dr-steer button,.vg-dr-ped button{width:76px;height:76px;border-radius:50%;border:0;background:rgba(255,255,255,.95);box-shadow:0 6px 18px rgba(60,40,90,.22);font-size:32px;font-weight:900;color:#5a4a7a;cursor:pointer}
+.vg-dr-steer button.on,.vg-dr-ped button.on{background:#ffd35a;transform:scale(.94)}
+.vg:has(.vg-drive) .vg-chat,.vg:has(.vg-drive) .vg-emo{display:none}

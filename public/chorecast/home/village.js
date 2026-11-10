@@ -172,7 +172,7 @@
   // ---------- the kid: tap to walk, tap a place for what to do there
   function kidTick(t, dt) {
     const k = V.kid; let moved = 0;
-    if (V.ride) { try { IH.chars.pose(k.inst, k.pose || 'sitchair', t, k.ph); } catch (e) { /* (still loading) */ } return; }
+    if (V.ride || V.drive) { try { IH.chars.pose(k.inst, k.pose || 'sitchair', t, k.ph); } catch (e) { /* (still loading) */ } return; }
     if (k.path.length) { if (k.seat) stand(k); k.pose = null; moved = walk(k, dt, t); V.follow = true; }
     else if (k.face != null) turn(k, k.face, dt, 6);
     draw(k, t, moved);
@@ -513,6 +513,7 @@
   function wheel(e) { e.preventDefault(); setZoom(CAM.zoom * Math.exp(-e.deltaY * 0.0015)); }
   function tap(x, y) {
     hideActs(); if (V.leaving) return;
+    if (V.drive) return; // (driving: the pedals and the wheel, not taps)
     if (V.plan && FARM) { const p = new T.Vector3(); if (rayAt(x, y).ray.intersectPlane(new T.Plane(new T.Vector3(0, 1, 0), 0), p)) FARM.tap(p.x, p.z); return; }
     // a villager (on screen, near the tap), or a place: of everything the tap's ray goes through, the one whose
     // middle is nearest the finger (things side by side on a counter); whichever's nearer the finger wins
@@ -775,7 +776,7 @@
   };
   Object.assign(ACTS, ISLAND_ACTS);
   // more islands' doings (village-islands.js), with what they need from here
-  const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, ride, sit, stand, fishStart, fx, DAY, today };
+  const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, ride, sit, stand, fishStart, fx, seatKid, DAY, today };
   const ISL = IH.villageIslands ? IH.villageIslands(CTX) : null, FARM = IH.villageFarm ? IH.villageFarm(CTX) : null;
   if (ISL) Object.assign(ACTS, ISL.acts); if (FARM) Object.assign(ACTS, FARM.acts);
   // a sandcastle that grows each time it's added to
@@ -849,7 +850,8 @@
     const k = V.kid; if (V.ride) return; k.path = []; k.seat = null; k.pose = r.pose || 'sitchair';
     V.ride = Object.assign({ t0: V.t, from: [k.pos.x, k.pos.z], yaw0: k.yaw }, r); if (r.model) r.model.visible = true; sound('tune');
   }
-  const SIT = { hip: 0.29, back: -0.24 }; // (measured on the kid in the sitting pose: hips above the feet, back behind the hips)
+  const SIT = { hip: 0.29, back: -0.24 };
+  function seatKid(model, S0, bob = 0) { const k = V.kid, yw = model.rotation.y, c = Math.cos(yw), sn = Math.sin(yw), lz = S0.back + 0.08 + SIT.back, lx = S0.x, p = model.position; k.inst.group.position.set(p.x + lx * c + lz * sn, p.y + S0.y - SIT.hip + bob, p.z - lx * sn + lz * c); k.inst.group.rotation.set(model.rotation.x, yw, model.rotation.z); } // (measured on the kid in the sitting pose: hips above the feet, back behind the hips)
   function rideTick(t, dt) {
     const R = V.ride; if (!R) return; const k = V.kid, u = (V.t - R.t0) / R.dur;
     if (u >= 1) { V.ride = null; k.pose = null; k.pos.set(R.from[0], 0, R.from[1]); k.yaw = R.yaw0; if (R.end) R.end(); return; }
@@ -868,8 +870,9 @@
     for (const G of V.B.gates || []) {
       let near = null, nd = 1e9; for (const p of V.people) { const d = Math.hypot(p.pos.x - G.mid[0], p.pos.z - G.mid[1]); if (d < nd) { nd = d; near = p; } }
       const leafMid = a => [G.hx + Math.cos(G.base + a) * G.len / 2, G.hz - Math.sin(G.base + a) * G.len / 2];
-      if (near && nd < 2.4 && !G.dir) { const o = leafMid(1.5), c = leafMid(-1.5); G.dir = Math.hypot(o[0] - near.pos.x, o[1] - near.pos.z) > Math.hypot(c[0] - near.pos.x, c[1] - near.pos.z) ? 1 : -1; if (Math.abs(G.a) < 0.05) sound('pat'); }
-      const tgt = G.dir && near && nd < 3.4 ? G.dir * 1.5 : 0;
+      const R0 = V.drive ? 4.8 : 2.4; // (a tractor is long: the gate opens before its nose)
+      if (near && nd < R0 && !G.dir) { const o = leafMid(1.5), c = leafMid(-1.5); G.dir = Math.hypot(o[0] - near.pos.x, o[1] - near.pos.z) > Math.hypot(c[0] - near.pos.x, c[1] - near.pos.z) ? 1 : -1; if (Math.abs(G.a) < 0.05) sound('pat'); }
+      const tgt = G.dir && near && nd < R0 + 1 ? G.dir * 1.5 : 0;
       const I = 3.0, K = 9, C = 2.6, n = 4, h = Math.min(dt, 0.1) / n;
       for (let i = 0; i < n; i++) { G.v += ((K * (tgt - G.a) - C * G.v) / I) * h; G.a += G.v * h; if (Math.abs(G.a) > 1.75) { G.a = Math.sign(G.a) * 1.75; G.v *= -0.25; } }
       if (!tgt && G.dir && Math.abs(G.a) < 0.015 && Math.abs(G.v) < 0.05) { G.a = 0; G.v = 0; G.dir = 0; sound('tap'); } // (shut: the latch drops)
@@ -880,6 +883,7 @@
     for (const o of V.spin || []) o.rotation.z += dt * o.userData.spin;
     if (V.B.animals && V.B === V.street) animalsTick(t, dt);
     if (V.B.tick && V.B === V.street) V.B.tick(t, dt, V.kid.pos);
+    if (FARM && FARM.tick) FARM.tick(t, dt);
     fishTick(); rodTick(); rideTick(t, dt); fxTick(dt); gatesTick(dt);
   }
 
