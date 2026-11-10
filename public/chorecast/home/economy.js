@@ -5,9 +5,9 @@
    - Bills: council rates, power, water, vehicle registration and vet care, paid from the farm account, never the
      wallet. One the account can't cover waits as overdue; after 3 played days it gets a 10% late fee, and new farm
      things (not feed or seed) can't be bought until it's paid. Fuel is paid each time the tractor goes out.
-   - The Monday statement: sales, running costs and bills, the profit, family tax on the profit, what's kept. On the
+   - The Monday statement: sales, running costs and bills, the profit, income tax on the profit (the farm's own tax: family tax is only for real money from chores), what's kept. On the
      pay slip.
-   - Economic reports: when a grown-up changes the farm earnings or the family tax, and every Monday: what changed,
+   - Economic reports: when a grown-up changes the farm earnings or the income tax rate, and every Monday: what changed,
      why, and how farm prices are moving.
    - Lesson cards: a short read, something to try and a quick check, the first time each thing happens, played in the
      game. Finishing one earns XP.
@@ -27,7 +27,7 @@
   // the first lessons, each played once in the game at the moment it matters (checked like every Chorecast lesson)
   const LESSONS = {
     keep: { e: '🧾', title: 'Earning isn’t keeping', xp: 20,
-      learn: ['Selling something isn’t the same as keeping the money. Out of what your farm sells come its bills: feed, power, water, rates and fuel.', 'What’s left after the bills is the profit. Family tax comes off the profit, and what’s left after that is yours to keep or pay yourself.'],
+      learn: ['Selling something isn’t the same as keeping the money. Out of what your farm sells come its bills: feed, power, water, rates and fuel.', 'What’s left after the bills is the profit. Income tax comes off the profit, and what’s left after that is yours to keep or pay yourself.'],
       tryQ: 'Your farm sold ✨ 400 of eggs and milk. Its bills were ✨ 250. What’s the profit?', tryO: ['✨ 150', '✨ 400', '✨ 650'], tryA: 0, tryWhy: '400 came in, 250 went out: 150 is left.',
       check: 'Profit is all the money that came in.', checkA: false, checkWhy: 'Profit is what’s left after the bills.' },
     rates: { e: '🏛️', title: 'Council rates', xp: 20,
@@ -35,9 +35,9 @@
       tryQ: 'Your paddock’s rates are ✨ 20 a week. You add 2 more blocks of land at ✨ 15 a week each. What are your rates now?', tryO: ['✨ 35', '✨ 50', '✨ 30'], tryA: 1, tryWhy: '20 + 15 + 15 = 50 a week.',
       check: 'Rates help pay for roads and parks.', checkA: true, checkWhy: 'Yes: rates pay for things everyone in the area uses.' },
     tax: { e: '🏫', title: 'What tax pays for', xp: 20,
-      learn: ['Tax is money people pay from what they earn. It pays for things we all share, like schools, hospitals, roads and parks.', 'In your family, a grown-up sets the family tax rate. On your farm it comes off the profit each Monday, the same rate as on your chore pay.'],
-      tryQ: 'Your farm made a profit of ✨ 200 and family tax is 10%. How much tax is that?', tryO: ['✨ 2', '✨ 20', '✨ 200'], tryA: 1, tryWhy: '10% means 10 out of every 100: 20 out of 200.',
-      check: 'If your farm made no profit this week, it pays no family tax.', checkA: true, checkWhy: 'Yes: on your farm, tax only comes off profit.' },
+      learn: ['Tax is money people pay from what they earn. It pays for things we all share, like schools, hospitals, roads and parks.', 'Businesses pay income tax on their profit. Your farm is a business, so every Monday some of its profit goes in income tax.'],
+      tryQ: 'Your farm made a profit of ✨ 200 and income tax is 10%. How much tax is that?', tryO: ['✨ 2', '✨ 20', '✨ 200'], tryA: 1, tryWhy: '10% means 10 out of every 100: 20 out of 200.',
+      check: 'If your farm made no profit this week, it pays no income tax.', checkA: true, checkWhy: 'Yes: on your farm, tax only comes off profit.' },
     late: { e: '⏰', title: 'Late fees, and paying bills first', xp: 20,
       learn: ['Every bill has a day it’s due. If it isn’t paid in time, a late fee is added, so the same bill costs more.', 'That’s why people pay their bills before buying new things. Your farm can’t buy anything new while a bill is overdue, but feed and seed are always allowed.'],
       tryQ: 'A bill is ✨ 40 and the late fee is 10%. What do you pay if you’re late?', tryO: ['✨ 40', '✨ 44', '✨ 50'], tryA: 1, tryWhy: '10% of 40 is 4, so 40 + 4 = 44.',
@@ -64,7 +64,7 @@
     }
     function addBill(label, amt, how, kind) { amt = Math.round(amt); if (amt <= 0) return null; const b = { id: Math.random().toString(36).slice(2, 9), label, amt, how, kind, from: today(), days: 0, paid: 0, late: false }; E().bills.push(b); return b; }
     function offer(key) { const e = E(); if (!LESSONS[key] || e.lessons[key] === 'done' || e.queue.includes(key)) return; e.queue.push(key); }
-    // close the week that ended before `mon`: weekly bills for the days played, the statement, family tax
+    // close the week that ended before `mon`: weekly bills for the days played, the statement, income tax
     function closeWeek(mon) {
       const e = E(), from = mon - 7, played = e.days.filter(d => d >= from && d < mon).length, wk = e.wk && e.wk.mon === from ? e.wk : { mon: from, sales: 0, run: 0, cap: 0 };
       e.wk = { mon, sales: 0, run: 0, cap: 0 };
@@ -78,14 +78,14 @@
         big ? addBill('Vet care', 4 * big * k, `${big} big animal${big === 1 ? '' : 's'} × ✨ 4 a week${part ? ` × ${part}` : ''}`, 'vet') : null
       ].filter(Boolean);
       const billed = bills.reduce((s, b) => s + b.amt, 0), profit = Math.round(wk.sales - wk.run - billed), tax = profit > 0 ? Math.round(profit * e.tax / 100) : 0;
-      if (tax) addBill('Family tax', tax, `${e.tax}% of this week’s profit of ✨ ${A.nf(profit)}`, 'tax');
+      if (tax) addBill('Income tax', tax, `${e.tax}% of this week’s profit of ✨ ${A.nf(profit)}`, 'tax');
       const s = { mon, sales: Math.round(wk.sales), run: Math.round(wk.run), cap: Math.round(wk.cap), bills: bills.map(b => [b.label, b.amt]), profit, tax, kept: profit - tax, played, rate: e.tax };
       e.stmts.unshift(s); if (e.stmts.length > 26) e.stmts.length = 26;
       A.led('farm', 0, `Weekly statement, week of ${dateOf(from)}`, stmtSlip(s));
       payDue(); offer('keep'); offer('rates'); if (tax) offer('tax');
       return s;
     }
-    const stmtSlip = s => Object.assign(A.slipOf('CHORECAST FARM', 'Weekly statement', [['Sales', s.sales], ['Feed, seed and fuel', -s.run], ...s.bills.map(([l, v]) => [l, -v])], [['Profit', s.profit, 'big'], [`Family tax ${s.rate}%`, -s.tax, 'muted'], ['Kept by the farm', s.kept, 'big'], ...(s.cap ? [['Spent on new things (not a running cost)', s.cap, 'muted']] : [])], s.played < 7 ? `You played ${s.played} of 7 days, so the weekly bills were for those days only.` : 'Sales, then each bill taking its bite, then what’s left.'), { date: `week of ${dateOf(s.mon - 7)}` });
+    const stmtSlip = s => Object.assign(A.slipOf('CHORECAST FARM', 'Weekly statement', [['Sales', s.sales], ['Feed, seed and fuel', -s.run], ...s.bills.map(([l, v]) => [l, -v])], [['Profit', s.profit, 'big'], [`Income tax ${s.rate}%`, -s.tax, 'muted'], ['Kept by the farm', s.kept, 'big'], ...(s.cap ? [['Spent on new things (not a running cost)', s.cap, 'muted']] : [])], s.played < 7 ? `You played ${s.played} of 7 days, so the weekly bills were for those days only.` : 'Sales, then each bill taking its bite, then what’s left.'), { date: `week of ${dateOf(s.mon - 7)}` });
     // a played day: count it, close any weeks gone by, age overdue bills, the report and lessons
     function tick() {
       const e = E(), t = today(); if (e.lastDay === t) return show();
@@ -107,7 +107,7 @@
       const e = E(), prev = e.reports[1], d = new Date(r.day * 864e5).toLocaleDateString('en-NZ', { timeZone: 'UTC', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       // (a grown-up's change reads as the market moving: the kids see the news, never who set it)
       const was = prev ? prev.dial : 1, what = r.why === 'dial' ? (r.dial > was ? 'Buyers want more farm produce than there is to go round, so prices are up across the market. A good time to sell.' : r.dial < was ? 'There’s plenty of farm produce around this week and buyers are paying less, so prices are down. Some farmers hold on to what keeps and sell later.' : 'Prices are steady this week.')
-        : r.why === 'tax' ? `Family tax on farm profit is now ${r.tax}%. It comes off your farm’s profit each Monday.` : 'Here’s how farm prices have moved this week.';
+        : r.why === 'tax' ? `Income tax on business profit is now ${r.tax}%, from this week. Your farm pays it on its profit each Monday.` : 'Here’s how farm prices have moved this week.';
       return `<div class="ih-ec-rep"><div class="ih-ec-rep-h"><b>📰 Economic report</b><small>${A.esc(d)}</small></div>
         <p class="ih-ph-sub">An economic report tells everyone how prices are changing, so families and businesses can plan what to grow, when to sell and when to save.</p>
         <p><b>${A.esc(what)}</b></p>
@@ -145,7 +145,7 @@
       if (a === 'ecOk') { A.closeSheet(); A.save(); setTimeout(show, 250); return true; }
       if (a === 'ecPay') { const b = e.bills.find(x => x.id === el.dataset.id), acc = A.acct(); if (!b || b.paid) return true; if (acc.bal < b.amt) { A.toast(`Your farm account has ✨ ${A.nf(acc.bal)}. Sell something, or invest from your wallet, to pay this.`); return true; } payDue(b.id); A.save(); A.ui(true); A.sound('buy'); A.toast(`${b.label} paid.`); return 'bank'; }
       if (a === 'ecDial') { const v = +el.dataset.v; if (v !== e.dial) { e.dial = v; e.pending = { kind: 'change', why: 'dial' }; A.save(); A.toast(`Farm earnings set to ${Math.round(v * 100)}%. The kids see it as market news in their next economic report.`); } return 'grownups'; }
-      if (a === 'ecTax') { const v = +el.dataset.v; if (v !== e.tax) { e.tax = v; e.pending = { kind: 'change', why: 'tax' }; A.save(); A.toast(`Family tax on farm profit set to ${v}%.`); } return 'grownups'; }
+      if (a === 'ecTax') { const v = +el.dataset.v; if (v !== e.tax) { e.tax = v; e.pending = { kind: 'change', why: 'tax' }; A.save(); A.toast(`Income tax on farm profit set to ${v}%. The kids see it as news in their next economic report.`); } return 'grownups'; }
       if (a === 'ecReport') { A.closeSheet(); setTimeout(show, 100); return true; }
       if (a === 'lsGo') { lesson(L.key, el.dataset.s); return true; }
       if (a === 'lsTry') { L.tried = +el.dataset.i; A.sound(L.tried === LESSONS[L.key].tryA ? 'pop' : 'tick'); lesson(L.key, 'try'); return true; }
@@ -162,7 +162,7 @@
       const row = b => `<div class="ih-ph-row"><span class="ih-ph-e">${b.late ? '⏰' : b.paid ? '✅' : '🧾'}</span><span><b>${A.esc(b.label)} · ✨ ${A.nf(b.amt)}</b><small>${b.paid ? `Paid ${when(b.paid)}` : b.late ? '<em class="ih-ec-late">Overdue</em>' : `Due since ${when(b.from)}`}${b.fee ? ` · includes a ✨ ${b.fee} late fee` : ''}<br>${A.esc(b.how || '')}</small></span>${b.paid ? '' : `<button class="ih-b1 ih-sm" data-a="ecPay" data-id="${b.id}">Pay</button>`}</div>`;
       const s = e.stmts[0], nextMon = mondayOf(today()) + 7;
       return `${list.length ? `<h4 class="ih-ph-h4">To pay</h4><div class="ih-ph-list">${list.map(row).join('')}</div>${overdue().length ? '<p class="ih-ph-sub">While a bill is overdue, the farm can only buy feed and seed.</p>' : ''}` : '<p class="ih-ph-sub">No bills waiting. 🎉</p>'}
-        <h4 class="ih-ph-h4">Next Monday</h4><p class="ih-ph-sub">${A.esc(dateOf(nextMon))}: rates, power, water${vehicles().length ? ', registration' : ''}${animals().some(x => BIG.test(x)) ? ', vet care' : ''}, and family tax (${e.tax}%) on the week’s profit, for the days you play.</p>
+        <h4 class="ih-ph-h4">Next Monday</h4><p class="ih-ph-sub">${A.esc(dateOf(nextMon))}: rates, power, water${vehicles().length ? ', registration' : ''}${animals().some(x => BIG.test(x)) ? ', vet care' : ''}, and income tax (${e.tax}%) on the week’s profit, for the days you play.</p>
         ${s ? `<h4 class="ih-ph-h4">Last statement</h4>${IH.slip(stmtSlip(s))}` : ''}
         ${paid.length ? `<h4 class="ih-ph-h4">Paid</h4><div class="ih-ph-list">${paid.map(row).join('')}</div>` : ''}
         ${Object.keys(LESSONS).filter(k => e.lessons[k] === 'done').length ? `<h4 class="ih-ph-h4">Lessons done</h4><div class="ih-bk-amts">${Object.keys(LESSONS).filter(k => e.lessons[k] === 'done').map(k => `<button class="ih-b2 ih-sm" data-a="lsOpen" data-k="${k}">${LESSONS[k].e} ${A.esc(LESSONS[k].title)}</button>`).join('')}</div>` : ''}`;
@@ -171,7 +171,7 @@
       const e = E();
       return `<p class="ih-ph-sub">For grown-ups. In Chorecast these will sit in Grown-ups; here they’re in the game for trying out.</p>
         <h4 class="ih-ph-h4">Farm earnings</h4><p class="ih-ph-sub">What the farm’s produce sells for. The kids see a change as the market moving, in an economic report; it never says a grown-up set it.</p><div class="ih-seg">${[0.5, 1, 1.5].map(v => `<button class="${e.dial === v ? 'on' : ''}" data-a="ecDial" data-v="${v}">${Math.round(v * 100)}%</button>`).join('')}</div>
-        <h4 class="ih-ph-h4">Family tax on farm profit</h4><p class="ih-ph-sub">The same idea as family tax on chore pay.</p><div class="ih-seg">${[0, 5, 10, 15, 20].map(v => `<button class="${e.tax === v ? 'on' : ''}" data-a="ecTax" data-v="${v}">${v}%</button>`).join('')}</div>`;
+        <h4 class="ih-ph-h4">Income tax on farm profit</h4><p class="ih-ph-sub">The farm’s own tax, separate from family tax (which is only for real money from chores). The kids see a change as news.</p><div class="ih-seg">${[0, 5, 10, 15, 20].map(v => `<button class="${e.tax === v ? 'on' : ''}" data-a="ecTax" data-v="${v}">${v}%</button>`).join('')}</div>`;
     }
     return {
       tick, show, act, billsHtml, grownHtml, report, LESSONS,
