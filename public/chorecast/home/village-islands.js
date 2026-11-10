@@ -23,11 +23,11 @@
     const bedStage = b => { if (!b.crop) return -1; const C = CROPS[b.crop], w = (b.watered || []).length; return w >= C.days ? 3 : Math.min(2, w); };
     const drawBeds = () => { const B = V().B; if (!B.drawBed) return; B.beds.forEach((_, i) => { const b = bedState(i); B.drawBed(i, b.crop, Math.max(0, bedStage(b))); }); };
     function seedPanel(i) {
-      c.gamePanel(`<div class="vg-gh"><b>🌱 Plant bed ${i + 1}</b><span>✨ ${Math.round(sh().wallet().left).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Pick the seeds. Water the bed once a day; it’s ready after a few days of watering.</div>
+      c.gamePanel(`<div class="vg-gh"><b>🌱 Plant bed ${i + 1}</b><span>✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Pick the seeds. Water the bed once a day; it’s ready after a few days of watering.</div>
         <div class="vg-gb vg-mine">${Object.entries(CROPS).map(([id, C]) => `<button data-v="isl" data-k="plant:${i}:${id}"><span class="e">${C.e}</span>${C.name[0].toUpperCase() + C.name.slice(1)} · ✨ ${C.seed}<small>&nbsp;${C.days} days · ${C.n} to pick</small></button>`).join('')}</div>`);
     }
     function plant(i, id) {
-      const C = CROPS[id]; if (!C || !sh().pay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); save();
+      const C = CROPS[id]; if (!C || !sh().farmPay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); save();
       const s = V().B.spots.find(q => q.kind === 'bed' && q.i === i); document.querySelector('.vg-game').hidden = true;
       c.chore(s, 'fetch', 2.4, () => { drawBeds(); c.toast(`${C.name[0].toUpperCase() + C.name.slice(1)} planted! Water them every day.`); c.sound('place'); }, null, { tool: 'trowel', fx: 'soil', dist: 0.7, y: 0.75, rate: 9 }); c.xp();
     }
@@ -58,11 +58,11 @@
     // ---------- the Stable yard
     const stab = () => { const S = st('stable'); S.animals = S.animals || { horse: 1, merino: 1 }; S.got = S.got || {}; return S; };
     function tackShop() {
-      const S = stab(); c.gamePanel(`<div class="vg-gh"><b>🐴 Stables & tack</b><span>✨ ${Math.round(sh().wallet().left).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Horses to ride, and friends for the paddock.</div>
+      const S = stab(); c.gamePanel(`<div class="vg-gh"><b>🐴 Stables & tack</b><span>✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Horses to ride, and friends for the paddock.</div>
         <div class="vg-gb vg-mine">${STABLE_SHOP.map(([k, e, name, xp, cap, about]) => { const n = S.animals[k] || 0; return `<button data-v="isl" data-k="sbuy:${k}" ${n >= cap ? 'disabled' : ''}><span class="e">${e}</span>${name} · ✨ ${xp}<small>&nbsp;${n} / ${cap} · ${about}</small></button>`; }).join('')}</div>`);
     }
     function stableBuy(kind) {
-      const S = stab(), it = STABLE_SHOP.find(q => q[0] === kind); if (!it || (S.animals[kind] || 0) >= it[4] || !sh().pay(it[3], 'a ' + it[2].toLowerCase())) return;
+      const S = stab(), it = STABLE_SHOP.find(q => q[0] === kind); if (!it || (S.animals[kind] || 0) >= it[4] || !sh().farmPay(it[3], 'a ' + it[2].toLowerCase())) return;
       S.animals[kind] = (S.animals[kind] || 0) + 1; if (!S.got[kind]) S.got[kind] = Date.now(); save();
       const B = V().B, a = IH.islandsBuild.MAKE[kind](), pen = B.pens[kind]; a.pen = pen; a.group.position.set((pen[0] + pen[2]) / 2, 0, (pen[1] + pen[3]) / 2); B.root.add(a.group); B.animals.push(a);
       c.toast(`Welcome, ${it[2].toLowerCase()}! ${it[1]}`); c.xp(); tackShop();

@@ -720,12 +720,12 @@
   }
   function farmShop() {
     const sh = V.stage.shop, f = sh.farm();
-    gamePanel(`<div class="vg-gh"><b>🐮 Farm shop</b><span>✨ ${Math.round(sh.wallet().left).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">More animals for your farm. They live here and make things every day.</div>
+    gamePanel(`<div class="vg-gh"><b>🐮 Farm shop</b><span>✨ farm ${Math.round(sh.farmAcct().bal).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">More animals for your farm. They live here and make things every day.</div>
       <div class="vg-gb vg-mine">${FARM_SHOP.map(([k, e, name, xp, cap, about]) => { const n = (f.animals || {})[k] || 0; return `<button data-v="fbuy" data-k="${k}" ${n >= cap ? 'disabled' : ''}><span class="e">${e}</span>${name} · ✨ ${xp}<small>&nbsp;${n} / ${cap} · ${about}</small></button>`; }).join('')}</div>`);
   }
   function farmBuy(kind) {
     const sh = V.stage.shop, f = sh.farm(), it = FARM_SHOP.find(q => q[0] === kind); if (!it) return; const n = (f.animals || {})[kind] || 0; if (n >= it[4]) return;
-    if (!sh.pay(it[3], 'a ' + it[2].toLowerCase())) return;
+    if (!sh.farmPay(it[3], 'a ' + it[2].toLowerCase())) return;
     f.animals[kind] = n + 1; if (!f.got[kind]) f.got[kind] = Date.now(); sh.farmSave();
     const a = IH.islandsBuild.MAKE[kind](), pen = V.B.pens[kind]; a.pen = pen; a.group.position.set((pen[0] + pen[2]) / 2, 0, pen[1] + 1); V.B.root.add(a.group); V.B.animals.push(a);
     toast(`Welcome to the farm, ${it[2].toLowerCase()}! ${it[1]}`); xp(); farmShop();

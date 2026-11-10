@@ -579,7 +579,7 @@
 
     // ---------- the barn's shop: animals (into the paddock the kid picks), feed
     function shop(tab) {
-      const f = F(), w = Math.round(sh().wallet().left).toLocaleString();
+      const f = F(), w = 'farm ' + Math.round(sh().farmAcct().bal).toLocaleString();
       if (tab === 'feed') return c.gamePanel(`<div class="vg-gh"><b>🌾 Feed</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Every animal eats one serving a day. You have: ${Object.entries(FEED).map(([k, x]) => `${x.e} ${f.feed[k] || 0} ${x.name.toLowerCase()}`).join(' · ')}</div>
         <div class="vg-gb vg-mine">${Object.entries(FEED).map(([k, x]) => `<button data-v="farm" data-k="feed:${k}"><span class="e">${x.e}</span>${x.name} ×${x.n} · ✨ ${x.xp}</button>`).join('')}</div>`);
       c.gamePanel(`<div class="vg-gh"><b>🐮 Animals</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Pick an animal, then the paddock it lives in. ${f.paddocks.length ? '' : 'Build a paddock first (Farm planner).'}</div>
@@ -592,7 +592,7 @@
     }
     function buyAnimal(kind, pad) {
       const f = F(), a = ANIMALS[kind], p = f.paddocks.find(q => q.id === pad); if (!a || !p || Math.floor(area(p)) - used(f, p) < a.room) return;
-      if (!sh().pay(a.xp, 'a ' + a.name.toLowerCase())) return;
+      if (!sh().farmPay(a.xp, 'a ' + a.name.toLowerCase())) return;
       f.animals.push({ id: nid(), kind, pad, got: 0 }); save(); c.xp(); c.toast(`Welcome to the farm, ${a.name.toLowerCase()}! ${a.e}`); reload();
     }
 
@@ -601,7 +601,7 @@
     let P = null;
     const preview = new T.Group();
     function planner(mode) {
-      P = P || { mode: 'menu' }; if (mode) P.mode = mode; V().plan = P; const f = F(), w = Math.round(sh().wallet().left).toLocaleString();
+      P = P || { mode: 'menu' }; if (mode) P.mode = mode; V().plan = P; const f = F(), w = 'farm ' + Math.round(sh().farmAcct().bal).toLocaleString();
       const head = `<div class="vg-gh"><b>🛠️ Farm planner</b><span>✨ ${w}</span><button class="vg-x" data-v="farm" data-k="pclose" aria-label="Done">✕</button></div>`;
       const tabs = `<div class="vg-gb vg-ptabs">${[['pad', '🟩 Paddocks'], ['fit', '🏠 Fittings'], ['eq', '🚜 Equipment'], ['edit', '✋ Move or sell']].map(([k, l]) => `<button data-v="farm" data-k="mode:${k}" class="${P.mode === k ? 'on' : ''}">${l}</button>`).join('')}</div>`;
       let body = '<div class="vg-gq">Lay out your farm. Pick what to do.</div>';
@@ -652,7 +652,7 @@
         const g = f.paddocks.map(gateOf).find(gg => Math.hypot(gg.x - cx, gg.z - cz) < 2.6); if (!bad && g) bad = 'Keep the gate clear.';
         if (bad) { c.toast(bad); return true; }
         if (P.moving) { const it = f.items.find(i => i.id === P.sel.id); Object.assign(it, { x: cx, z: cz, ry }); P.moving = false; P.sel = null; save(); c.toast('Moved.'); return reload(), true; }
-        if (!sh().pay(d.xp, 'the ' + d.name.toLowerCase())) return true;
+        if (!sh().farmPay(d.xp, 'the ' + d.name.toLowerCase())) return true;
         f.items.push({ id: nid(), t, x: cx, z: cz, ry }); save(); c.xp(); c.sound('place'); c.toast(`${d.e} ${d.name} placed!`); reload(); return true;
       }
       if (P.mode === 'edit') {
@@ -665,7 +665,7 @@
     function reload() { const keep = P; IH.village.reload(); P = keep; setTimeout(() => { if (P && V() && V().where === 'farm') planner(); }, 60); }
     function click(k) {
       const [what, a, b] = k.split(':'), f = F();
-      if (what === 'feed') { const x = FEED[a]; if (!sh().pay(x.xp, 'the ' + x.name.toLowerCase())) return; f.feed[a] = (f.feed[a] || 0) + x.n; save(); c.xp(); c.sound('buy'); return shop('feed'); }
+      if (what === 'feed') { const x = FEED[a]; if (!sh().farmPay(x.xp, 'the ' + x.name.toLowerCase())) return; f.feed[a] = (f.feed[a] || 0) + x.n; save(); c.xp(); c.sound('buy'); return shop('feed'); }
       if (what === 'pick') return pickPad(a);
       if (what === 'buy') return buyAnimal(a, b);
       if (what === 'dout') return getOut();
@@ -676,7 +676,7 @@
       if (what === 'item') { P.t = a; return planner(); }
       if (what === 'rot') { P.ry = P.ry ? 0 : Math.PI / 2; return planner(); }
       if (what === 'padno') { P.a = null; P.cand = null; return planner(); }
-      if (what === 'padok') { const C = P.cand; if (!C || C.bad || !sh().pay(C.xp, 'the fencing')) return; f.paddocks.push({ id: nid(), x0: C.x0, z0: C.z0, x1: C.x1, z1: C.z1 }); P.a = null; P.cand = null; save(); c.xp(); c.sound('place'); c.toast('Paddock built! Put a water trough in it, then some animals.'); return reload(); }
+      if (what === 'padok') { const C = P.cand; if (!C || C.bad || !sh().farmPay(C.xp, 'the fencing')) return; f.paddocks.push({ id: nid(), x0: C.x0, z0: C.z0, x1: C.x1, z1: C.z1 }); P.a = null; P.cand = null; save(); c.xp(); c.sound('place'); c.toast('Paddock built! Put a water trough in it, then some animals.'); return reload(); }
       if (what === 'desel') { P.sel = null; P.moving = false; return planner(); }
       if (what === 'move') { P.moving = true; P.ry = (f.items.find(i => i.id === P.sel.id) || {}).ry || 0; return planner(); }
       if (what === 'sell') {
