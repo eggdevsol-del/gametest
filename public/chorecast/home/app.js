@@ -2613,7 +2613,7 @@
       const d = O.home.def; LK.PAL.uHouse.value.set(-0.4, -0.4, d.w + 0.4, d.d + 0.4); applyLook(); lightFor(O.st.look.phase);
       if (k) { const A = k.petAi; k.group.visible = true; A.path = []; A.task = null; A.plan = []; A.doing = null; A.st = 'stand'; A.pos.x = G.at.x; A.pos.z = G.at.z - 0.9; A.yaw = Math.PI; k.group.position.x = A.pos.x; k.group.position.z = A.pos.z; k.group.rotation.y = A.yaw; }
       G.set(1); setTimeout(() => { if (O && O.home && O.home.gate === G) G.set(0); }, 1400);
-      CAM.target.set(d.w / 2, FY + 1, d.d / 2 + 0.5); fit(); lastT = null; sceneT = null; force = true; if (!raf) raf = requestAnimationFrame(loop); toast('Home again!');
+      CAM.target.set(d.w / 2, FY + 1, d.d / 2 + 0.5); fit(); lastT = null; sceneT = null; force = true; if (!raf) raf = requestAnimationFrame(loop); toast('Home again!'); if (O.shopHome) { O.shopHome = false; setTimeout(() => { if (O && !O.away && !O.editing) act('decorate'); }, 900); }
     } });
     if (!ok) { O.away = false; O.root.classList.remove('ih-away'); if (IH.phys) IH.phys.env = env; if (k) k.group.visible = true; G.set(0); }
   }
@@ -2804,6 +2804,14 @@
       ${O.E ? O.E.acctHtml() : ''}
       <button class="ih-bk-grown" data-a="app" data-app="grownups">For grown-ups ›</button>`;
   }
+  // The Shop app: at home, the shop tray (Decorate); on the farm, the farm's own shop (animals, feed, machines; the
+  // barn has it too); anywhere else, home first and then the tray (things for the home are put out at home).
+  function shopApp() {
+    if (!O.away) { if (!O.editing) act('decorate'); return; }
+    const w = IH.village && IH.village.where();
+    if ((w === 'farm' || w === 'stable') && IH.village.farmShop('animals')) return;
+    O.shopHome = true; toast('Off home to shop for it…'); travelTo('home');
+  }
   function phone(app = 'home') {
     const w = wallet(), K = IH.kitchen, f = food(), back = `<button class="ih-ph-back" data-a="phone">‹ Back</button>`;
     let body = '';
@@ -2969,7 +2977,7 @@
     if (a === 'goTo') { closeSheet(); return travelTo(el.dataset.w); }
     if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || !isleOpen(i.id) || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); return phone('travel'); }
     if (a === 'pSell') { const id = el.dataset.k, P = PRODUCE[id]; if (!P) return; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return; if (P.goods) g[id] -= 1; else f[id] -= 1; const pr = O.E ? O.E.price(P.price) : P.price; farmIn(pr, `sold ${P.one} at the grocer`, [[cap(P.one), pr]]); save(); sound('buy'); ui(true); toast(`Sold ${P.one}: ✨ ${pr} into your farm account.`); return produceSheet(); }
-    if (a === 'app') { const ap = el.dataset.app; O.pick = null; if (ap === 'shop') { closeSheet(); if (!O.editing) act('decorate'); return; } if (ap === 'homes') { closeSheet(); return homesSheet(); } return phone(ap); }
+    if (a === 'app') { const ap = el.dataset.app; O.pick = null; if (ap === 'shop') { closeSheet(); return shopApp(); } if (ap === 'homes') { closeSheet(); return homesSheet(); } return phone(ap); }
     if (a === 'gbuy') { const id = el.dataset.f, x = IH.kitchen && IH.kitchen.FOOD[id], w = wallet(); if (!x || w.left < x.xp) return; wSpend(x.xp, x.name ? x.name.toLowerCase() : id, 'GROCERIES APP'); const f = food(); f[id] = (f[id] || 0) + 1; save(); sound('buy'); if (O.opts.track) O.opts.track('home.food', { food: id, xp: x.xp }); return phone('groceries'); }
     if (a === 'recipe') { st.recipe = st.recipe === el.dataset.r ? null : el.dataset.r; save(); sound('pop'); return phone('recipes'); }
     if (a === 'sell') { const d = BY[el.dataset.t]; if (!d || spare(d.t) <= 0) return; const b = boxOf(d.t), u = b.splice(+el.dataset.n || 0, 1)[0] || {}, v = phoneSell(d, u.used); st.owned[d.t] -= 1; wGain(v, `sold on the Market app: ${d.name}`, 'MARKET APP', [[d.name + (u.used ? ' (used)' : ''), sellValue(d, u.used)], ['Market app: 50% less than in person', v - sellValue(d, u.used)]]); save(); sound('buy'); toast(`Sold. ✨ ${v} XP back. In person, at a village shop or your stall, you’d get more.`); if (O.opts.track) O.opts.track('home.sell', { t: d.t, xp: v, used: !!u.used }); return phone('market'); }

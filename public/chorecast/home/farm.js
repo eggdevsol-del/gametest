@@ -723,11 +723,12 @@
     // ---------- the barn's shop: animals (into the paddock the kid picks), feed
     function shop(tab) {
       const f = F(), w = 'farm ' + Math.round(sh().farmAcct().bal).toLocaleString();
-      if (tab === 'machines') { const own = f.implements || {}; return c.gamePanel(`<div class="vg-gh"><b>🚜 Machines</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">For the tractor's hitch. Auto runs each one along a field block’s middle lane, working the beds on both sides.</div>
+      const tabs = `<div class="vg-gb vg-ptabs">${[['animals', '🐮 Animals'], ['feed', '🌾 Feed'], ['machines', '🚜 Machines']].map(([k, l]) => `<button data-v="farm" data-k="shop:${k}" class="${(tab || 'animals') === k ? 'on' : ''}">${l}</button>`).join('')}</div>`;
+      if (tab === 'machines') { const own = f.implements || {}; return c.gamePanel(`<div class="vg-gh"><b>🚜 Machines</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div>${tabs}<div class="vg-gq">For the tractor's hitch. Auto runs each one along a field block’s middle lane, working the beds on both sides.</div>
         <div class="vg-gb vg-mine">${Object.entries(MACHINES).map(([k0, m]) => `<button data-v="farm" data-k="mbuy:${k0}" ${own[k0] ? 'disabled' : ''}><span class="e">${m.e}</span>${m.name}${own[k0] ? ' ✓' : ` · ✨ ${m.xp}`}<small>&nbsp;${esc(m.about)}</small></button>`).join('')}</div>`); }
-      if (tab === 'feed') return c.gamePanel(`<div class="vg-gh"><b>🌾 Feed</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Every animal eats one serving a day. You have: ${Object.entries(FEED).map(([k, x]) => `${x.e} ${f.feed[k] || 0} ${x.name.toLowerCase()}`).join(' · ')}</div>
+      if (tab === 'feed') return c.gamePanel(`<div class="vg-gh"><b>🌾 Feed</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div>${tabs}<div class="vg-gq">Every animal eats one serving a day. You have: ${Object.entries(FEED).map(([k, x]) => `${x.e} ${f.feed[k] || 0} ${x.name.toLowerCase()}`).join(' · ')}</div>
         <div class="vg-gb vg-mine">${Object.entries(FEED).map(([k, x]) => `<button data-v="farm" data-k="feed:${k}"><span class="e">${x.e}</span>${x.name} ×${x.n} · ✨ ${x.xp}</button>`).join('')}</div>`);
-      c.gamePanel(`<div class="vg-gh"><b>🐮 Animals</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Pick an animal, then the paddock it lives in. ${f.paddocks.length ? '' : 'Build a paddock first (Farm planner).'}</div>
+      c.gamePanel(`<div class="vg-gh"><b>🐮 Animals</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div>${tabs}<div class="vg-gq">Pick an animal, then the paddock it lives in. ${f.paddocks.length ? '' : 'Build a paddock first (Farm planner).'}</div>
         <div class="vg-gb vg-mine">${Object.entries(ANIMALS).map(([k, a]) => `<button data-v="farm" data-k="pick:${k}"><span class="e">${a.e}</span>${a.name} · ✨ ${a.xp}<small>&nbsp;${a.makes ? `${a.n} ${a.makes} every ${a.every === 1 ? 'day' : a.every + ' days'} · needs ${NEEDS_NAME[a.needs]}` : esc(a.about || '')} · eats ${FEED[a.eats].name.toLowerCase()} · room ${a.room}</small></button>`).join('')}</div>`);
     }
     function pickPad(kind) {
@@ -847,6 +848,7 @@
     function click(k) {
       const [what, a, b] = k.split(':'), f = F();
       if (what === 'feed') { const x = FEED[a]; if (!sh().farmPay(x.xp, 'the ' + x.name.toLowerCase())) return; f.feed[a] = (f.feed[a] || 0) + x.n; save(); c.xp(); c.sound('buy'); return shop('feed'); }
+      if (what === 'shop') return shop(a);
       if (what === 'pick') return pickPad(a);
       if (what === 'buy') return buyAnimal(a, b);
       if (what === 'dout') return getOut();
@@ -882,6 +884,6 @@
       }
     }
     const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
-    return { ap: () => AP, dr: () => DR, acts, click, tap, tick, prep() { AP = null; MU = null; if (DR) { removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); DR = null; } P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
+    return { ap: () => AP, dr: () => DR, acts, click, tap, tick, shop, prep() { AP = null; MU = null; if (DR) { removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); DR = null; } P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
   };
 })();
