@@ -264,6 +264,7 @@
     const inR = (x0, z0, x1, z1, r) => x0 >= r[0] - 1e-6 && z0 >= r[1] - 1e-6 && x1 <= r[2] + 1e-6 && z1 <= r[3] + 1e-6, hit = (x0, z0, x1, z1, r) => x0 < r[2] && x1 > r[0] && z0 < r[3] && z1 > r[1], P = B.pond, cells = [];
     for (let i = 0; i < B.bounds.x1; i++) for (let j = 0; j < B.bounds.z1; j++) {
       if (!B.lawns.some(r => inR(i, j, i + 1, j + 1, r)) || B.paths.some(r => hit(i, j, i + 1, j + 1, r)) || B.solids.some(r => hit(i + 0.2, j + 0.2, i + 0.8, j + 0.8, r))) continue;
+      if (B.bare && B.bare(i + 0.5, j + 0.5)) continue; // (sand, a hay meadow, under a glasshouse...)
       if (P) { const ex = (i + 0.5 - P.x) / (P.rx + 1.0), ez = (j + 0.5 - P.z) / (P.rz + 1.0); if (ex * ex + ez * ez < 1) continue; }
       cells.push({ x: i, z: j });
     }

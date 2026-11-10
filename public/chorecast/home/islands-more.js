@@ -98,7 +98,7 @@
       }
       b.g.add(kk.build());
     };
-    return { id: 'plot', title: 'Veggie plot', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids: sol, pond: null, bridges: [], spots, buildings: [], arrive: [20, 3.4], lawns: [[1, 1, 17.6, 15.8], [22.4, 7, 39, 15.8], [1, 18.2, 39, 31]], paths: [[18, 0.4, 22, 31.6], [4, 16.2, 36, 17.8]], animals: [], npc: 0, centre: [20, 16], growth: 0.4, beds, drawBed, state: st };
+    return { id: 'plot', title: 'Veggie plot', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids: sol, pond: null, bridges: [], spots, buildings: [], arrive: [20, 3.4], lawns: [[0, 0, W, D]], paths: [[18, 0.4, 22, 31.6], [4, 16.2, 36, 17.8], [2.5, 2.5, 8.5, 6.5]], animals: [], npc: 0, centre: [20, 16], growth: 0.4, beds, drawBed, state: st };
   }
 
   /* ---------- Orchard terrace: three terraces up a sunny slope, stone walls, a ramp; apples, lemons, feijoas;
@@ -167,7 +167,7 @@
     }
     root.add(k.build()); hits(root, spots); for (const a of animals) root.add(a.group);
     const walk = (x, z) => ((x - A.x) / (A.rx + 1.2)) ** 2 + ((z - A.z) / (A.rz + 1.2)) ** 2 > 1; // (into the paddock through its gate; the arena is for riding)
-    return { gates, id: 'stable', title: 'Stable yard', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids: sol, pond: null, bridges: [], spots, buildings: [], arrive: [24, 3.4], lawns: [[1, 9, 22, 39], [26, 9, 47, 18.4], [26, 33.6, 47, 39]], paths: [[22, 0.4, 26, 39.6]], walk, animals, pens: { horse: [A.x - A.rx + 1.5, A.z - A.rz + 1.5, A.x + A.rx - 1.5, A.z + A.rz - 1.5], pony: [A.x - A.rx + 1.5, A.z - A.rz + 1.5, A.x + A.rx - 1.5, A.z + A.rz - 1.5], donkey: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1], merino: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1], kunekune: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1] }, arena: A, npc: 0, centre: [24, 20], growth: 0.5, state: st };
+    return { gates, id: 'stable', title: 'Stable yard', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids: sol, pond: null, bridges: [], spots, buildings: [], arrive: [24, 3.4], lawns: [[0, 0, W, D]], paths: [[22, 0.4, 26, 39.6]], bare: (x, z) => ((x - A.x) / (A.rx + 0.9)) ** 2 + ((z - A.z) / (A.rz + 0.9)) ** 2 < 1, walk, animals, pens: { horse: [A.x - A.rx + 1.5, A.z - A.rz + 1.5, A.x + A.rx - 1.5, A.z + A.rz - 1.5], pony: [A.x - A.rx + 1.5, A.z - A.rz + 1.5, A.x + A.rx - 1.5, A.z + A.rz - 1.5], donkey: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1], merino: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1], kunekune: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1] }, arena: A, npc: 0, centre: [24, 20], growth: 0.5, state: st };
   }
 
   /* ---------- the Lake: a big freshwater lake in a grassy bowl, a jetty, a boatshed with kayaks, reeds, willows,

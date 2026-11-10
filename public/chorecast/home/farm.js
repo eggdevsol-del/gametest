@@ -218,7 +218,7 @@
     solid(MEADOW[0] - 0.4, MEADOW[3] + 0.2, MEADOW[2] + 1, MEADOW[3] + 1.2); solid(MEADOW[0] - 1.4, MEADOW[1], MEADOW[0] - 0.3, MEADOW[3] + 1.2);
     board(k, 'meadow', 'HAY MEADOW', 'tractor work: bale it, haul it', '#fff6e0', '#4a7a3a', 3.4, 0.9, MEADOW[2] + 1.2, 1.6, MEADOW[1] + 1.2, -Math.PI / 2);
     f.bales = f.bales || []; const bales = f.bales.map(b => { const m = baleModel(); m.position.set(b.x, 0, b.z); m.rotation.y = b.ry || 0; root.add(m); return { rec: b, g: m }; });
-    const lawns = [[1, 1, 51, 43]], paths = TRACK.map(r => r.slice());
+    const lawns = [[0, 0, W, D]], paths = TRACK.map(r => r.slice()).concat([[MEADOW[0] - 0.5, MEADOW[1] - 0.3, MEADOW[2] + 0.2, MEADOW[3] + 0.2]]); // (grass everywhere else: the meadow has its own long hay)
     return { gates, vehicles, meadowL, bales, MEADOW, tick: t => { if (meadowL) IH.lawnKit.tick(meadowL, t, 1); }, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
   }
   IB.add('farm', build);
@@ -260,7 +260,7 @@
        arrow keys / WASD). It drives like a real one: the front wheels steer, it turns round its back axle in a
        proper circle (never on the spot, and not at all standing still), speeds up and slows down with some weight,
        reverses, bumps to a stop against fences and things. It pulls the baler or the trailer on its hitch. */
-    let DR = null; const KEYS = {};
+    let DR = null; const KEYS = {}, JOY = { x: 0, y: 0 };
     const keyMap = { ArrowUp: 'up', KeyW: 'up', ArrowDown: 'down', KeyS: 'down', ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right' };
     const onKey = e => { const k = keyMap[e.code]; if (!k || !DR) return; KEYS[k] = e.type === 'keydown'; e.preventDefault(); e.stopPropagation(); };
     function startDrive(id) {
@@ -269,14 +269,17 @@
       v.drive = DR; const k = v.kid; k.path = []; k.pose = 'sitchair'; c.sound('on');
       for (const kk in KEYS) KEYS[kk] = false; addEventListener('keydown', onKey, true); addEventListener('keyup', onKey, true);
       const el = document.createElement('div'); el.className = 'vg-drive'; DR.el = el;
-      el.innerHTML = `<div class="vg-dr-top"><b>🚜</b><span>Hitch:</span><button data-v="farm" data-k="hitch:none" class="on">Nothing</button><button data-v="farm" data-k="hitch:baler">🟢 Baler</button><button data-v="farm" data-k="hitch:trailer">🟫 Trailer</button><button data-v="farm" data-k="dout" class="vg-dr-out">Get out</button></div>
-        <div class="vg-dr-steer"><button data-hold="left" aria-label="Steer left">⟲</button><button data-hold="right" aria-label="Steer right">⟳</button></div>
-        <div class="vg-dr-ped"><button data-hold="up" aria-label="Forward">▲</button><button data-hold="down" aria-label="Reverse">▼</button></div>`;
-      const hold = (e, on) => { const b = e.target.closest('[data-hold]'); if (!b) return; e.preventDefault(); KEYS[b.dataset.hold] = on; b.classList.toggle('on', on); };
-      el.addEventListener('pointerdown', e => { hold(e, true); try { e.target.releasePointerCapture(e.pointerId); } catch (er) { /* */ } });
-      for (const ev of ['pointerup', 'pointerleave', 'pointercancel', 'pointerout']) el.addEventListener(ev, e => hold(e, false));
+      el.innerHTML = `<div class="vg-dr-top"><b>🚜</b><span>Hitch:</span><button data-v="farm" data-k="hitch:none" class="on">Nothing</button><button data-v="farm" data-k="hitch:baler">🟢 Baler</button><button data-v="farm" data-k="hitch:trailer">🟫 Trailer</button><button data-v="farm" data-k="auto" class="vg-dr-auto">🤖 Auto</button><button data-v="farm" data-k="dout" class="vg-dr-out">Get out</button></div><div class="vg-dr-note" hidden></div>
+        <div class="vg-joy" aria-label="Drive: push up to go, down to reverse, left and right to steer"><span class="vg-joy-u">▲</span><span class="vg-joy-d">▼</span><span class="vg-joy-l">⟲</span><span class="vg-joy-r">⟳</span><i class="vg-joy-k"></i></div>`;
+      // the joystick: drag the knob; how far up or down is the pedal, how far left or right is the wheel (analogue)
+      const J = el.querySelector('.vg-joy'), knob = J.querySelector('.vg-joy-k'); let jid = null;
+      const jmove = e => { const r = J.getBoundingClientRect(), R = r.width / 2, dx = e.clientX - (r.left + R), dy = e.clientY - (r.top + R), L = Math.hypot(dx, dy), k = L > R * 0.8 ? R * 0.8 / L : 1; JOY.x = Math.max(-1, Math.min(1, -dx * k / (R * 0.8))); JOY.y = Math.max(-1, Math.min(1, -dy * k / (R * 0.8))); if (Math.abs(JOY.x) < 0.12) JOY.x = 0; if (Math.abs(JOY.y) < 0.12) JOY.y = 0; knob.style.transform = `translate(${dx * k}px, ${dy * k}px)`; };
+      J.addEventListener('pointerdown', e => { e.preventDefault(); jid = e.pointerId; try { J.setPointerCapture(jid); } catch (er) { /* */ } J.classList.add('on'); jmove(e); });
+      J.addEventListener('pointermove', e => { if (e.pointerId === jid) jmove(e); });
+      for (const ev of ['pointerup', 'pointercancel']) J.addEventListener(ev, e => { if (e.pointerId !== jid) return; jid = null; JOY.x = 0; JOY.y = 0; knob.style.transform = ''; J.classList.remove('on'); });
       v.ui.appendChild(el); v.follow = true;
-      c.toast('In the seat! ▲ to drive, ▼ to reverse, ⟲ ⟳ to steer. It can’t turn on the spot: back up to get round tight corners.');
+      JOY.x = 0; JOY.y = 0;
+      c.toast('In the seat! Push the joystick up to drive, down to reverse, left and right to steer. It can’t turn on the spot: back up to get round tight corners.');
     }
     function hitch(kind) {
       if (!DR) return; if (Math.abs(DR.v) > 0.05) return c.toast('Stop first to hitch up.');
@@ -298,17 +301,29 @@
       }
       return false;
     }
+    // how far into things it is: the footprint points that are inside something, and how deep the deepest is
+    function depth(x, z, yaw) {
+      const B = V().B, c0 = Math.cos(yaw), s0 = Math.sin(yaw); let d = 0;
+      for (const [lx, lz] of [[-1.15, 2.05], [1.15, 2.05], [-1.2, -1.45], [1.2, -1.45], [0, 2.1], [-1.2, 0.4], [1.2, 0.4]]) {
+        const px = x + lx * c0 + lz * s0, pz = z - lx * s0 + lz * c0;
+        d += Math.max(0, 0.6 - px, 0.6 - pz, px - (W - 0.6), pz - (D - 0.6));
+        for (let i = 0; i < B.solids.length; i++) { if (i === DR.veh.solid) continue; const r = B.solids[i]; if (px > r[0] && px < r[2] && pz > r[1] && pz < r[3]) d += Math.min(px - r[0], r[2] - px, pz - r[1], r[3] - pz); }
+      }
+      return d;
+    }
     function dropBale(b) { const v = V(), f = F(); const rec = { x: b.x, z: b.z, ry: b.ry || 0 }; f.bales.push(rec); const m = baleModel(); m.position.set(rec.x, 0, rec.z); m.rotation.y = rec.ry; v.B.root.add(m); v.B.bales.push({ rec, g: m }); save(); }
     function tick(t, dt) {
       if (!DR || !V() || V().drive !== DR) return; const v = V(), f = F(), k = v.kid;
-      const thr = (KEYS.up ? 1 : 0) - (KEYS.down ? 1 : 0), st = (KEYS.left ? 1 : 0) - (KEYS.right ? 1 : 0);
-      const target = thr > 0 ? 4.0 : thr < 0 ? -1.6 : 0, braking = thr !== 0 && Math.abs(DR.v) > 0.05 && Math.sign(target) !== Math.sign(DR.v);
+      let thr = Math.max(-1, Math.min(1, (KEYS.up ? 1 : 0) - (KEYS.down ? 1 : 0) + JOY.y)), st = Math.max(-1, Math.min(1, (KEYS.left ? 1 : 0) - (KEYS.right ? 1 : 0) + JOY.x)), vmax = 4.0;
+      if (AP && (thr || st)) autoStop('You took the wheel.');
+      else if (AP) ({ thr, st, vmax } = autopilot(t, dt));
+      const target = thr > 0 ? vmax * Math.min(1, thr) : thr < 0 ? -1.6 * Math.min(1, -thr) : 0, braking = thr !== 0 && Math.abs(DR.v) > 0.05 && Math.sign(target) !== Math.sign(DR.v);
       const acc = braking ? 6 : thr ? 2.2 : 3.2; DR.v += Math.max(-acc * dt, Math.min(acc * dt, target - DR.v));
       DR.steer += Math.max(-1.5 * dt, Math.min(1.5 * dt, st * 0.62 - DR.steer)); // (the wheel turns at a hand's speed, and comes back when let go)
       const dist = DR.v * dt, yaw2 = DR.yaw + (dist / WHEELBASE) * Math.tan(DR.steer), my = (DR.yaw + yaw2) / 2;
       const rx = DR.x - Math.sin(DR.yaw) * 0.62 + Math.sin(my) * dist, rz = DR.z - Math.cos(DR.yaw) * 0.62 + Math.cos(my) * dist, nx = rx + Math.sin(yaw2) * 0.62, nz = rz + Math.cos(yaw2) * 0.62;
       let moved = dist;
-      if (Math.abs(dist) > 1e-5 && blocked(nx, nz, yaw2)) { if (Math.abs(DR.v) > 0.6 && t > DR.bumped) { c.sound('pat'); DR.bumped = t + 0.6; c.fx('dust', nx + Math.sin(yaw2) * 2 * Math.sign(DR.v), 0.3, nz + Math.cos(yaw2) * 2 * Math.sign(DR.v), 6); } DR.v = 0; moved = 0; }
+      if (Math.abs(dist) > 1e-5 && blocked(nx, nz, yaw2) && !(blocked(DR.x, DR.z, DR.yaw) && depth(nx, nz, yaw2) <= depth(DR.x, DR.z, DR.yaw))) { /* (already touching something, any move that doesn't push further in is let through, so it never sticks) */ DR.blockT = t; if (Math.abs(DR.v) > 0.6 && t > DR.bumped) { c.sound('pat'); DR.bumped = t + 0.6; c.fx('dust', nx + Math.sin(yaw2) * 2 * Math.sign(DR.v), 0.3, nz + Math.cos(yaw2) * 2 * Math.sign(DR.v), 6); } DR.v = 0; moved = 0; }
       else { DR.x = nx; DR.z = nz; DR.yaw = yaw2; }
       // the wheels: the back ones roll, the front ones roll and steer
       for (const w of DR.veh.rear) w.rotation.x += moved / R_REAR; for (const w of DR.veh.front) w.rotation.x += moved / R_FRONT; for (const p of DR.veh.pivots) p.rotation.y = DR.steer;
@@ -319,11 +334,11 @@
       if (sp > 2 && Math.random() < dt * 8) c.fx('dust', DR.x - Math.sin(DR.yaw) * 1.4 + (Math.random() - 0.5) * 2, 0.1, DR.z - Math.cos(DR.yaw) * 1.4, 1);
       if (!DR.imp) return; placeImp(moved); const I = DR.imp, M = v.B.MEADOW;
       // the baler: over the long grass it picks it up, cuts it and, every so often, a round bale rolls out the back
-      if (I.kind === 'baler' && moved > 0 && I.x > M[0] && I.x < M[2] && I.z > M[1] && I.z < M[3]) {
+      if (I.kind === 'baler' && moved > 0 && (!AP || AP.pickup) && I.x > M[0] && I.x < M[2] && I.z > M[1] && I.z < M[3]) {
         const hay = f.hay; let n = 0;
         for (let i = Math.floor(I.x - 1.3); i <= Math.floor(I.x + 1.3); i++) for (let j = Math.floor(I.z - 0.8); j <= Math.floor(I.z + 0.8); j++) { if (i < M[0] || i >= M[2] || j < Math.ceil(M[1]) || j >= M[3]) continue; const key = i * 1000 + j; if (hay.cells[key] || Math.hypot(i + 0.5 - I.x, j + 0.5 - I.z) > 1.3) continue; hay.cells[key] = 1; n++; if (v.B.meadowL) IH.lawnKit.cutAt(v.B.meadowL, i + 0.5, j + 0.5, 0.75); }
         if (n) { I.acc += n; hay.at = hay.at || Date.now(); c.fx('hay', I.x + Math.sin(I.yaw) * 1.0, 0.4, I.z + Math.cos(I.yaw) * 1.0, Math.min(4, n)); }
-        if (I.acc >= 12) { I.acc -= 12; dropBale({ x: I.x - Math.sin(I.yaw) * 1.4, z: I.z - Math.cos(I.yaw) * 1.4, ry: I.yaw + Math.PI / 2 }); c.sound('place'); if (!DR.told) { DR.told = true; c.toast('A bale! Keep going. Then hitch the trailer and take them to the barn.'); } }
+        if (I.acc >= 30) { I.acc -= 30; dropBale({ x: I.x - Math.sin(I.yaw) * 1.4, z: I.z - Math.cos(I.yaw) * 1.4, ry: I.yaw + Math.PI / 2 }); c.sound('place'); if (!DR.told) { DR.told = true; c.toast('A bale! Keep going. Then hitch the trailer and take them to the barn.'); } }
       }
       // the trailer: bales it comes up against are loaded on (four at most); at the barn they're unloaded into the hay store
       if (I.kind === 'trailer') {
@@ -331,8 +346,138 @@
         if (I.load.length && Math.hypot(I.x - 12, I.z - 11.5) < 4.5 && Math.abs(DR.v) < 1.5) { const n = I.load.length; for (const b of I.load) b.g.parent.remove(b.g); I.load = []; f.feed.hay = (f.feed.hay || 0) + n * 6; save(); c.xp(); c.sound('buy'); c.fx('hay', I.x, 1.4, I.z, 14); c.toast(`${n} bale${n === 1 ? '' : 's'} into the barn: ${n * 6} hay for your animals! 🌾`); }
       }
     }
+    /* ---------- auto: the kid does the hay job alone, driving the same tractor the same way (pedal, wheel, the
+       turning circle). The route planner (tractor-plan.js) finds every way round: clear of fences, posts and the
+       edge (the baler or trailer too), swinging wide at corners, and where there's no room to turn it scans the
+       open ground nearby for a three-point turn. The meadow's baled in straight, evenly spaced rows parallel to
+       its long hedge, back and forth with the pickup up on the turns (so the cut stays in tidy lines), then the
+       headland strips along the hedge ends; then trailer on, bales collected four at a time and hauled to the
+       barn, as many trips as it takes, and the tractor parked back where it started. Steering by pure pursuit
+       (a point a little ahead on the planned way, the wheel turned to arc onto it), reversing too; bumping
+       something or drifting off the way, it stops and plans again from where it is. */
+    let AP = null;
+    const TP = () => IH.tractorPlan;
+    const note = s0 => { const el = DR && DR.el && DR.el.querySelector('.vg-dr-note'); if (el) { el.hidden = !s0; el.textContent = s0 || ''; } };
+    const rearOf = () => [DR.x - Math.sin(DR.yaw) * 0.62, DR.z - Math.cos(DR.yaw) * 0.62];
+    const stop = () => ({ thr: 0, st: DR.steer / 0.62, vmax: 1 }); // (off the pedal: it rolls to a stand, the wheel left where it is)
+    // the rows: parallel to the meadow's long (south) hedge, evenly spaced a baler's width apart (a little overlap)
+    function hayJob() {
+      const M = V().B.MEADOW, f = F(), legs = [], N = 5, z0 = M[3] - 1.8, z1 = M[1] + 1.6, gap = (z1 - z0) / (N - 1); // (from the far hedge back, so each turn swings out into open ground)
+      let cut = 0, all = 0; for (let i = M[0]; i < M[2]; i++) for (let j = Math.ceil(M[1]); j < M[3]; j++) { all++; if (f.hay.cells[i * 1000 + j]) cut++; }
+      if (all - cut > all * 0.08) {
+        legs.push({ t: 'hitch', kind: 'baler' });
+        for (let i = 0; i < N; i++) { const z = z0 + gap * i, west = i % 2 === 0; legs.push({ t: 'line', a: west ? [M[2] - 8, z] : [M[0] + 9, z], b: west ? [M[0] + 3.4, z] : [M[2] + 0.4, z], say: `baling row ${i + 1} of ${N + 2}` }); }
+        // the headlands: the strips the rows' turns left, cut along the end hedge and the open end
+        // (along the open end, the same spacing, each run south up to the far hedge, then backed straight out)
+        [M[2] - 3.4, M[2] - 1.05].forEach((x, i) => legs.push({ t: 'line', a: [x, M[1] + 1.0], b: [x, M[3] - 2.55], say: `baling row ${N + i + 1} of ${N + 2} (the headland)` }, { t: 'back', d: 5, say: 'backing out from the hedge' }));
+      }
+      legs.push({ t: 'hitch', kind: 'trailer' }, { t: 'collect' });
+      return legs;
+    }
+    function autoStart() {
+      if (!DR) return; if (AP) return autoStop('Auto off.');
+      if (!TP()) return c.toast('Auto isn’t ready yet.');
+      const v = V(); AP = { legs: hayJob(), leg: null, home: { x: DR.x, z: DR.z, yaw: DR.yaw }, G: TP().grid(v.B.solids, v.B.bounds.x1, v.B.bounds.z1, DR.veh.solid), skip: new Set(), tried: new Map(), pickup: false, stuck: 0 };
+      const b = DR.el.querySelector('.vg-dr-auto'); if (b) { b.classList.add('on'); b.textContent = '🤖 Stop'; }
+      c.toast('Auto: watch them make hay! Push the joystick to take over.'); c.sound('on');
+    }
+    function autoStop(words) { AP = null; note(''); const b = DR && DR.el && DR.el.querySelector('.vg-dr-auto'); if (b) { b.classList.remove('on'); b.textContent = '🤖 Auto'; } if (words) c.toast(words); }
+    const lenOf = () => (DR.imp ? DR.imp.len : 0);
+    // start planning a way from here to a pose
+    function goto(L) {
+      const g = L.goal; L.search = TP().plan(AP.G, { x: DR.x, z: DR.z, yaw: DR.yaw, iyaw: DR.imp ? DR.imp.yaw : DR.yaw, len: lenOf() }, g, { m: L.tries ? 0.22 : 0.45, max: L.tries ? 120000 : 60000 }); L.segs = null;
+    }
+    // a planned way, cut where it changes between forward and back, as back-axle points
+    function segments(P) {
+      const out = []; let cur = null;
+      for (let i = 1; i < P.length; i++) { const d = P[i].dir; if (!cur || cur.dir !== d) { cur = { dir: d, pts: [] }; const q = P[i - 1]; cur.pts.push([q.x - Math.sin(q.yaw) * 0.62, q.z - Math.cos(q.yaw) * 0.62]); out.push(cur); } const q = P[i]; cur.pts.push([q.x - Math.sin(q.yaw) * 0.62, q.z - Math.cos(q.yaw) * 0.62]); }
+      for (const s of out) s.k = 0; return out;
+    }
+    // follow one stretch (all forward or all back): pure pursuit on the back axle; null once it's at the end and stopped
+    function track(t, S, vmax) {
+      const [rx, rz] = rearOf(), P = S.pts, n = P.length;
+      let best = S.k, bd = Infinity; for (let i = S.k; i < Math.min(n, S.k + 24); i++) { const d = Math.hypot(P[i][0] - rx, P[i][1] - rz); if (d < bd) { bd = d; best = i; } } S.k = best;
+      const end = P[n - 1], dEnd = Math.hypot(end[0] - rx, end[1] - rz), pre = n > 1 ? P[n - 2] : P[0], past = ((rx - end[0]) * (end[0] - pre[0]) + (rz - end[1]) * (end[1] - pre[1])) > 0;
+      if ((S.k >= n - 2 && dEnd < 0.45) || (S.k >= n - 3 && past) || n < 2) return Math.abs(DR.v) > 0.05 ? stop() : null;
+      S.bd = bd; if (bd > 1.1) return 'off';
+      const Ld = S.dir > 0 ? 2.1 : 1.5; let j = S.k; while (j < n - 1 && Math.hypot(P[j][0] - rx, P[j][1] - rz) < Ld) j++;
+      let [tx, tz] = P[j]; if (j === n - 1) { const L0 = Math.hypot(tx - rx, tz - rz); if (L0 < Ld && n > 1) { const dx = end[0] - pre[0], dz = end[1] - pre[1], L1 = Math.hypot(dx, dz) || 1; tx += dx / L1 * (Ld - L0); tz += dz / L1 * (Ld - L0); } }
+      const head = S.dir > 0 ? DR.yaw : DR.yaw + Math.PI, alpha = Math.atan2(Math.sin(Math.atan2(tx - rx, tz - rz) - head), Math.cos(Math.atan2(tx - rx, tz - rz) - head));
+      let steer = Math.atan((2 * 2.07 * Math.sin(alpha)) / Ld); if (S.dir < 0) steer = -steer;
+      const st = Math.max(-1, Math.min(1, steer / 0.62)), rem = (n - 1 - S.k) * 0.3 + dEnd * 0.5;
+      // the wheel has to come round before the turn: slow while it's far from where it should be
+      const lag = Math.abs(steer - DR.steer), sp = Math.min(vmax * (1 - Math.min(0.55, Math.abs(st) * 0.45)) * (lag > 0.25 ? 0.5 : 1), 0.35 + rem * 0.65);
+      if (AP) AP.lastDir = S.dir;
+      if (S.dir > 0) return { thr: 1, st, vmax: Math.max(0.4, sp) };
+      return { thr: -Math.max(0.3, Math.min(1, Math.min(sp, 1.2) / 1.6)), st, vmax: 1 };
+    }
+    // run a goto leg: plan (a slice a tick), then drive each stretch, stopping where it changes direction
+    function runGoto(t, L, vmax) {
+      if (!L.search) goto(L);
+      if (!L.search.done) { L.search.step(1200); return stop(); }
+      if (!L.search.path) { if (!L.tries) { L.tries = 1; goto(L); return stop(); } return 'fail'; }
+      if (!L.segs) { L.segs = segments(L.search.path); L.si = 0; }
+      while (L.si < L.segs.length) {
+        const r = track(t, L.segs[L.si], vmax);
+        if (r === 'off') { AP.offs = (AP.offs || 0) + 1; L.search = null; L.tries = 0; return stop(); }
+        if (r) return r;
+        L.si++;
+      }
+      return null;
+    }
+    function bumped(t) { return DR.blockT && t - DR.blockT < 0.12; }
+    function autopilot(t, dt) {
+      void dt; const v = V();
+      if (!AP.leg) { AP.leg = AP.legs.shift(); if (!AP.leg && DR.imp && DR.imp.load.length) { AP.legs.push({ t: 'goto', goal: { x: 9.0, z: 15, yaw: -Math.PI / 2, tol: 1.0, ytol: 0.45 }, say: 'one more to the barn', vmax: 3.2 }, { t: 'goto', goal: { x: AP.home.x, z: AP.home.z, yaw: AP.home.yaw, tol: 0.7, ytol: 0.25 }, say: 'parking' }); AP.leg = AP.legs.shift(); } if (!AP.leg) { autoStop(''); c.toast('All done! The hay’s made and in the barn. 🌾'); c.sound('buy'); return stop(); } }
+      const L = AP.leg; AP.pickup = false;
+      if (bumped(t) && t > (AP.bumpT || 0) && L.t !== 'back') {
+        // bumped something: ease off it the other way, then plan again from there
+        AP.bumpT = t + 1; AP.stuck++; if (AP.stuck > 8) { autoStop(''); c.toast('Auto: I’m stuck. Can you drive me out?'); return stop(); }
+        if (L.go) { L.go.search = null; L.go.tries = 0; } if (L.search !== undefined) { L.search = null; L.tries = 0; } if (L.t === 'line') { L.lined = false; const [rx, rz] = rearOf(), yw = Math.atan2(L.b[0] - L.a[0], L.b[1] - L.a[1]); L.a = [rx + Math.sin(yw) * 0.62, rz + Math.cos(yw) * 0.62]; L.go = null; }
+        AP.legs.unshift(L); AP.leg = { t: 'back', d: 1.6, sign: AP.lastDir < 0 ? 1 : -1, say: 'easing off' }; return stop();
+      }
+      const next = () => { AP.leg = null; AP.stuck = 0; return stop(); }, fail = () => { autoStop(''); c.toast('Auto: I can’t find a way there. Can you drive a bit and try again?'); return stop(); };
+      if (L.t === 'hitch') { if (Math.abs(DR.v) > 0.05) return stop(); if (!DR.imp || DR.imp.kind !== L.kind) hitch(L.kind); return next(); }
+      if (L.t === 'goto') { if (L.say) note('Auto: ' + L.say); const r = runGoto(t, L, L.vmax || 3.0); if (r === 'fail') { if (L.bale) { afterGoto(L); return next(); } return fail(); } if (r) return r; afterGoto(L); return next(); }
+      if (L.t === 'line') {
+        // a straight run: first get lined up on its start (planned), then drive it dead straight with the pickup down
+        note('Auto: ' + L.say);
+        const yaw = Math.atan2(L.b[0] - L.a[0], L.b[1] - L.a[1]);
+        if (!L.go) L.go = { goal: { x: L.a[0], z: L.a[1], yaw, tol: 0.4, ytol: 0.1, htol: 0.5, dir: 1 } };
+        if (!L.lined) { const r = runGoto(t, L.go, 3.0); if (r === 'fail') { if (!L.tries2) { L.tries2 = 1; L.go = null; L.a = [L.a[0] + Math.sin(yaw) * 1.5, L.a[1] + Math.cos(yaw) * 1.5]; return stop(); } return next(); } if (r) return r; L.lined = true; const ra = [DR.x - Math.sin(DR.yaw) * 0.62, DR.z - Math.cos(DR.yaw) * 0.62], len = Math.hypot(L.b[0] - ra[0], L.b[1] - ra[1]), pts = []; for (let s = 0; s <= len; s += 0.4) pts.push([ra[0] + Math.sin(yaw) * s, ra[1] + Math.cos(yaw) * s]); pts.push([L.b[0] - Math.sin(yaw) * 0.62, L.b[1] - Math.cos(yaw) * 0.62]); L.seg = { dir: 1, pts, k: 0 }; }
+        AP.pickup = true; const r = track(t, L.seg, 2.6);
+        if (r === 'off') { L.lined = false; const [rx, rz] = rearOf(); L.a = [rx + Math.sin(yaw) * 0.62, rz + Math.cos(yaw) * 0.62]; L.go = null; return stop(); }
+        return r || next();
+      }
+      if (L.t === 'back') {
+        // straight back the way it came (the towed thing stays in line going straight back)
+        note('Auto: ' + L.say);
+        if (!L.seg) { const [rx, rz] = rearOf(), sg = L.sign || -1, pts = []; for (let s0 = 0; s0 <= L.d; s0 += 0.4) pts.push([rx + sg * Math.sin(DR.yaw) * s0, rz + sg * Math.cos(DR.yaw) * s0]); L.seg = { dir: sg, pts, k: 0 }; L.t0 = t; }
+        if (bumped(t) && t - L.t0 > 0.3) return next();
+        const r = track(t, L.seg, 1.2); if (r === 'off') return next(); return r || next();
+      }
+      if (L.t === 'collect') {
+        const M = v.B.MEADOW, I = DR.imp, inM = b => b.g.position.x > M[0] - 2 && b.g.position.x < M[2] + 3 && b.g.position.z > M[1] - 2 && b.g.position.z < M[3] + 1;
+        const left = v.B.bales.filter(b => inM(b) && !AP.skip.has(b));
+        if (!I || I.kind !== 'trailer') { AP.legs.unshift({ t: 'hitch', kind: 'trailer' }, L); AP.leg = null; return stop(); }
+        if (I.load.length >= 4 || (!left.length && I.load.length)) { AP.legs.unshift({ t: 'goto', goal: { x: 9.0, z: 15, yaw: -Math.PI / 2, tol: 1.0, ytol: 0.45 }, say: 'hauling the bales to the barn', vmax: 3.2 }, { t: 'collect' }); return next(); }
+        if (!left.length) { AP.legs.unshift({ t: 'goto', goal: { x: AP.home.x, z: AP.home.z, yaw: AP.home.yaw, tol: 0.7, ytol: 0.25 }, say: 'parking' }); return next(); }
+        // the nearest bale, and a way to come at it that fits, the trailer passing over it
+        const [rx, rz] = rearOf(); left.sort((a, b) => Math.hypot(a.g.position.x - rx, a.g.position.z - rz) - Math.hypot(b.g.position.x - rx, b.g.position.z - rz));
+        const bl = left[0], bx = bl.g.position.x, bz = bl.g.position.z, back = 1.75 + I.len - 0.4;
+        const hs = [0, 1, 2, 3, 4, 5, 6, 7].map(k => k * Math.PI / 4).map(h => ({ h, x: bx + Math.sin(h) * back, z: bz + Math.cos(h) * back })).filter(p => TP().fits(AP.G, p.x, p.z, p.h, I.len, 0.35));
+        const tried = AP.tried.get(bl) || []; hs.splice(0, hs.length, ...hs.filter(p => !tried.some(h => Math.abs(Math.sin((p.h - h) / 2)) < 0.2)));
+        if (!hs.length || tried.length >= 3) { AP.skip.add(bl); return stop(); }
+        hs.sort((p, q) => (Math.hypot(p.x - DR.x, p.z - DR.z) + 2 * Math.abs(Math.sin((p.h - DR.yaw) / 2))) - (Math.hypot(q.x - DR.x, q.z - DR.z) + 2 * Math.abs(Math.sin((q.h - DR.yaw) / 2))));
+        const p = hs[0]; AP.legs.unshift({ t: 'goto', goal: { x: p.x, z: p.z, yaw: p.h, tol: 0.8, ytol: 0.35, htol: 0.6 }, say: `picking up bales (${I.load.length} of 4 on)`, vmax: 2.6, bale: bl, h: p.h }, { t: 'collect' });
+        AP.lastBale = bl; return next();
+      }
+      return next();
+    }
+    // (a bale the trailer drove to but didn't get is left for a grown-up, so auto doesn't go round and round)
+    function afterGoto(L) { if (L && L.bale && V().B.bales.includes(L.bale)) AP.tried.set(L.bale, (AP.tried.get(L.bale) || []).concat(L.h)); }
     function getOut() {
-      if (!DR) return; if (Math.abs(DR.v) > 0.1) return c.toast('Stop first.');
+      if (!DR) return; if (Math.abs(DR.v) > 0.1) return c.toast('Stop first.'); if (AP) autoStop('');
       const v = V(), f = F(), it = f.items.find(i => i.id === DR.id), k = v.kid;
       if (DR.imp) { DR.imp.load.forEach((b, i) => dropBale({ x: DR.imp.x - Math.sin(DR.imp.yaw) * (2 + i * 1.4), z: DR.imp.z - Math.cos(DR.imp.yaw) * (2 + i * 1.4), ry: DR.imp.yaw + Math.PI / 2 })); v.B.root.remove(DR.imp.g); }
       if (it) Object.assign(it, { x: Math.round(DR.x * 10) / 10, z: Math.round(DR.z * 10) / 10, ry: DR.yaw });
@@ -449,6 +594,7 @@
       if (what === 'pick') return pickPad(a);
       if (what === 'buy') return buyAnimal(a, b);
       if (what === 'dout') return getOut();
+      if (what === 'auto') return autoStart();
       if (what === 'hitch') return hitch(a);
       if (what === 'pclose') { P = null; V().plan = null; while (preview.children.length) preview.remove(preview.children[0]); document.querySelector('.vg-game').hidden = true; return; }
       if (what === 'mode') { P = { mode: a }; return planner(); }
@@ -465,6 +611,6 @@
       }
     }
     const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
-    return { acts, click, tap, tick, prep() { if (DR) { removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); DR = null; } P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
+    return { ap: () => AP, acts, click, tap, tick, prep() { AP = null; if (DR) { removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); DR = null; } P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
   };
 })();

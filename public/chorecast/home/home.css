@@ -229,3 +229,12 @@ body.ih-open{overflow:hidden}
 .vg-dr-steer button,.vg-dr-ped button{width:76px;height:76px;border-radius:50%;border:0;background:rgba(255,255,255,.95);box-shadow:0 6px 18px rgba(60,40,90,.22);font-size:32px;font-weight:900;color:#5a4a7a;cursor:pointer}
 .vg-dr-steer button.on,.vg-dr-ped button.on{background:#ffd35a;transform:scale(.94)}
 .vg:has(.vg-drive) .vg-chat,.vg:has(.vg-drive) .vg-emo{display:none}
+.vg-dr-top .vg-dr-auto{background:#e8f0ff}.vg-dr-top .vg-dr-auto.on{background:#ffd35a}
+.vg-dr-note{position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 124px);transform:translateX(-50%);background:rgba(40,30,60,.82);color:#fff;font-weight:800;font-size:14px;border-radius:12px;padding:6px 12px;white-space:nowrap}
+.vg-dr-note[hidden]{display:none}
+/* the driving joystick */
+.vg-joy{position:absolute;left:22px;bottom:calc(env(safe-area-inset-bottom) + 22px);width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 3px rgba(255,255,255,.9),0 8px 22px rgba(60,40,90,.2);pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.vg-joy span{position:absolute;font-size:18px;font-weight:900;color:#5a4a7a;opacity:.7}
+.vg-joy-u{left:50%;top:8px;transform:translateX(-50%)}.vg-joy-d{left:50%;bottom:8px;transform:translateX(-50%)}.vg-joy-l{left:10px;top:50%;transform:translateY(-50%)}.vg-joy-r{right:10px;top:50%;transform:translateY(-50%)}
+.vg-joy-k{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#ffd35a 60%,#f2b33a);box-shadow:0 6px 14px rgba(60,40,90,.3)}
+.vg-joy.on .vg-joy-k{box-shadow:0 2px 6px rgba(60,40,90,.3)}
