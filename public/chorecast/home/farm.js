@@ -729,19 +729,23 @@
 
     // ---------- the barn's shop: animals (into the paddock the kid picks), feed
     function shop(tab) {
-      const f = F(), w = 'farm ' + Math.round(sh().farmAcct().bal).toLocaleString();
-      const tabs = (tab !== 'machines' ? sh().qtyBar('farm', 'shop:' + (tab || 'animals')) : '') + `<div class="vg-gb vg-ptabs">${[['animals', '🐮 Animals'], ['feed', '🌾 Feed'], ['machines', '🚜 Machines']].map(([k, l]) => `<button data-v="farm" data-k="shop:${k}" class="${(tab || 'animals') === k ? 'on' : ''}">${l}</button>`).join('')}</div>`;
-      if (tab === 'machines') { const own = f.implements || {}; return c.gamePanel(`<div class="vg-gh"><b>🚜 Machines</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div>${tabs}<div class="vg-gq">For the tractor's hitch. Auto runs each one along a field block’s middle lane, working the beds on both sides.</div>
-        <div class="vg-gb vg-mine">${Object.entries(MACHINES).map(([k0, m]) => `<button data-v="farm" data-k="mbuy:${k0}" ${own[k0] ? 'disabled' : ''}><span class="e">${m.e}</span>${m.name}${own[k0] ? ' ✓' : ` · ✨ ${m.xp}`}<small>&nbsp;${esc(m.about)}</small></button>`).join('')}</div>`); }
-      if (tab === 'feed') return c.gamePanel(`<div class="vg-gh"><b>🌾 Feed</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div>${tabs}<div class="vg-gq">Every animal eats one serving a day. You have: ${Object.entries(FEED).map(([k, x]) => `${x.e} ${f.feed[k] || 0} ${x.name.toLowerCase()}`).join(' · ')}</div>
-        <div class="vg-gb vg-mine">${Object.entries(FEED).map(([k, x]) => `<button data-v="farm" data-k="feed:${k}"><span class="e">${x.e}</span>${x.name} ×${x.n} · ✨ ${x.xp}</button>`).join('')}</div>`);
-      c.gamePanel(`<div class="vg-gh"><b>🐮 Animals</b><span>✨ ${w}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div>${tabs}<div class="vg-gq">Pick an animal, then the paddock it lives in. ${f.paddocks.length ? '' : 'Build a paddock first (Farm planner).'}</div>
-        <div class="vg-gb vg-mine">${Object.entries(ANIMALS).map(([k, a]) => `<button data-v="farm" data-k="pick:${k}"><span class="e">${a.e}</span>${a.name} · ✨ ${a.xp}<small>&nbsp;${a.makes ? `${a.n} ${a.makes} every ${a.every === 1 ? 'day' : a.every + ' days'} · needs ${NEEDS_NAME[a.needs]}` : esc(a.about || '')} · eats ${FEED[a.eats].name.toLowerCase()} · room ${a.room}</small></button>`).join('')}</div>`);
+      tab = tab || 'animals'; const f = F(), info = '✨ farm ' + Math.round(sh().farmAcct().bal).toLocaleString(), pr = xp => sh().cardPrice(xp);
+      const tabs = [['animals', '🐮 Animals'], ['feed', '🌾 Feed'], ['machines', '🚜 Machines']].map(([k, l]) => ({ label: l, on: tab === k, attrs: `data-v="farm" data-k="shop:${k}"` }));
+      const o = { key: 'fshop:' + tab, title: '🏪 Farm shop', info, tabs, qty: tab !== 'machines' ? sh().qtyBar('farm', 'shop:' + tab) : '' };
+      if (tab === 'machines') { const own = f.implements || {}; return c.shopTray({ ...o, note: 'For the tractor’s hitch. Auto runs each one along a field block’s middle lane, working the beds on both sides.',
+        cards: Object.entries(MACHINES).map(([k0, m]) => ({ e: m.e, name: m.name, sub: m.about, tag: own[k0] ? '<span class="ih-own">Yours ✓</span>' : pr(m.xp), attrs: `data-v="farm" data-k="mbuy:${k0}"`, off: !!own[k0] })) }); }
+      if (tab === 'feed') return c.shopTray({ ...o, note: 'Every animal eats one serving a day.',
+        cards: Object.entries(FEED).map(([k, x]) => ({ e: x.e, name: `${x.name} ×${x.n}`, sub: `You have ${f.feed[k] || 0}`, tag: pr(x.xp), attrs: `data-v="farm" data-k="feed:${k}"` })) });
+      c.shopTray({ ...o, note: `Pick an animal, then the paddock it lives in.${f.paddocks.length ? '' : ' Build a paddock first (Farm planner).'}`,
+        cards: Object.entries(ANIMALS).map(([k, a]) => ({ e: a.e, name: a.name, sub: `${a.makes ? `${a.n} ${a.makes} every ${a.every === 1 ? 'day' : a.every + ' days'}` : a.about || ''} · room ${a.room}`, tag: pr(a.xp), attrs: `data-v="farm" data-k="pick:${k}"` })) });
     }
     function pickPad(kind) {
       const f = F(), a = ANIMALS[kind];
-      c.gamePanel(`<div class="vg-gh"><b>${a.e} Which paddock?</b><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div>${sh().qtyBar('farm', 'pick:' + kind)}<div class="vg-gq">A ${a.name.toLowerCase()} needs ${a.room} room. ✨ ${a.xp} each.</div>
-        <div class="vg-gb vg-mine">${f.paddocks.map((p, i) => { const free = Math.floor(area(p)) - used(f, p), who = f.animals.filter(x => x.pad === p.id).map(x => ANIMALS[x.kind].e).join(''); return `<button data-v="farm" data-k="buy:${kind}:${p.id}" ${free < a.room ? 'disabled' : ''}>Paddock ${i + 1} ${who}<small>&nbsp;${free} room left${a.needs && /coop|pond|sty/.test(a.needs) && !hasIn(f, p.id, a.needs) ? ` · no ${ITEMS[a.needs].name.toLowerCase()} yet` : ''}${hasIn(f, p.id, 'trough') ? '' : ' · no water yet'}</small></button>`; }).join('') || '<small>No paddocks yet.</small>'}</div>`);
+      c.shopTray({ key: 'pick', title: `${a.e} Which paddock?`, info: `✨ ${a.xp} each`, qty: sh().qtyBar('farm', 'pick:' + kind), go: '<button class="ih-trgo" data-v="farm" data-k="shop:animals">‹ Animals</button>',
+        note: `A ${a.name.toLowerCase()} needs ${a.room} room${a.needs && /coop|pond|sty/.test(a.needs) ? ` and a ${ITEMS[a.needs].name.toLowerCase()}` : ''}.`,
+        cards: f.paddocks.map((p, i) => { const free = Math.floor(area(p)) - used(f, p), who = f.animals.filter(x => x.pad === p.id).map(x => ANIMALS[x.kind].e).join('');
+          return { e: '🟩', name: `Paddock ${i + 1}`, sub: `${free} room left${who ? ' · ' + who : ''}${a.needs && /coop|pond|sty/.test(a.needs) && !hasIn(f, p.id, a.needs) ? ` · no ${ITEMS[a.needs].name.toLowerCase()} yet` : ''}${hasIn(f, p.id, 'trough') ? '' : ' · no water yet'}`, tag: free < a.room ? '<span class="ih-lock">Full</span>' : '<span class="ih-price">Put here</span>', attrs: `data-v="farm" data-k="buy:${kind}:${p.id}"`, off: free < a.room }; }),
+        empty: 'No paddocks yet. Build one in the Farm planner first.' });
     }
     function buyAnimal(kind, pad) {
       const f = F(), a = ANIMALS[kind], p = f.paddocks.find(q => q.id === pad); if (!a || !p || Math.floor(area(p)) - used(f, p) < a.room) return;
@@ -768,6 +772,14 @@
       if (P.mode === 'edit' && P.sel && P.sel.kind !== 'item' && P.sel.kind !== 'pad') body = P.sel.kind === 'ftree' ? `<div class="vg-gq">This ${esc(P.sel.name)}. ${P.moving ? 'Tap where it goes now (in its orchard).' : 'Its fruit comes with it.'}</div><div class="vg-gb vg-go"><button data-v="farm" data-k="desel">Leave it</button><button data-v="farm" data-k="tmove"><span class="e">✋</span>Move it</button></div>`
         : `<div class="vg-gq">This driveway.</div><div class="vg-gb vg-go"><button data-v="farm" data-k="desel">Leave it</button><button data-v="farm" data-k="sell"><span class="e">🟫</span>Take it up · ✨ ${Math.round(P.sel.xp / 2)} back</button></div>`;
       if (P.mode === 'edit' && P.sel && P.sel.kind === 'pad') body = body.replace('</div><div class="vg-gb vg-go">', ` ${P.gating ? 'Tap a spot on its fence for the gate.' : ''}</div><div class="vg-gb vg-go"><button data-v="farm" data-k="gmove"><span class="e">🚪</span>Move the gate</button>`);
+      if (P.mode === 'fit' || P.mode === 'eq') {
+        c.shopTray({ key: 'plan:' + P.mode, title: '🛠️ Farm planner', info: '✨ ' + w, close: 'data-v="farm" data-k="pclose"',
+          tabs: [['land', '🗺️ Land'], ['pad', '🟩 Paddocks'], ['fit', '🏠 Fittings'], ['eq', '🚜 Equipment'], ['drive', '🟫 Driveways'], ['edit', '✋ Move or sell']].map(([k, l]) => ({ label: l, on: P.mode === k, attrs: `data-v="farm" data-k="mode:${k}"` })),
+          go: P.t ? '<button class="ih-trgo" data-v="farm" data-k="rot">↻ Turn it</button>' : '',
+          note: P.t ? `Tap where the ${ITEMS[P.t].name.toLowerCase()} goes${ITEMS[P.t].in ? ' (inside a paddock)' : ITEMS[P.t].in === false ? ' (outside the paddocks)' : ''}.` : P.mode === 'fit' ? 'Things for inside a paddock. Pick one, then tap where it goes.' : 'Farm equipment, for outside the paddocks. Pick one, then tap where it goes.',
+          cards: Object.entries(ITEMS).filter(([, d]) => P.mode === 'fit' ? d.in !== false : d.in !== true).map(([t, d]) => ({ e: d.e, name: d.name, sub: d.about || '', tag: sh().cardPrice(d.xp), attrs: `data-v="farm" data-k="item:${t}"`, on: P.t === t })) });
+        return drawPreview();
+      }
       c.gamePanel(head + tabs + body); drawPreview();
       void f;
     }
@@ -903,7 +915,7 @@
       if (what === 'dout') return getOut();
       if (what === 'auto') return autoStart();
       if (what === 'hitch') return hitch(a);
-      if (what === 'pclose') { P = null; V().plan = null; while (preview.children.length) preview.remove(preview.children[0]); document.querySelector('.vg-game').hidden = true; return; }
+      if (what === 'pclose') { P = null; V().plan = null; while (preview.children.length) preview.remove(preview.children[0]); document.querySelector('.vg-game').hidden = true; c.closeTray(); return; }
       if (what === 'mode') { P = { mode: a }; return planner(); }
       if (what === 'name') return whoPanel(f.animals.find(x => x.id === a) ? f.animals.find(x => x.id === a).pad : null, a);
       if (what === 'nameok') return nameIt(a, b);

@@ -2454,16 +2454,20 @@
     }
     c0.done = true; putContract(c0); save();
   }
-  function contractHtml() {
-    const c0 = contract(), f = food(), g = goods(), mine = it => it.got[O.kid.id] || 0, sum = it => Object.values(it.got).reduce((t, n) => t + n, 0);
-    if (c0.done) return `<div class="ih-cc-card"><p><b>📜 This week’s family contract is filled!</b></p><p class="ih-ph-sub">A new order comes on Monday.</p></div>`;
-    return `<div class="ih-cc-card"><p><b>📜 Family contract: the café’s order</b></p><p class="ih-ph-sub">Fill it with your brothers and sisters by Sunday: ✨ ${nf(c0.reward)} split by what each of you brings.</p><div class="ih-ph-list">${c0.items.map(it => { const P = PRODUCE[it.id], have = P.goods ? g[it.id] || 0 : f[it.id] || 0, left = it.need - sum(it); return `<div class="ih-ph-row"><span class="ih-ph-e">${P.e}</span><span><b>${P.name}: ${sum(it)} of ${it.need}</b><small>You’ve brought ${mine(it)}${Object.keys(it.got).filter(k => k !== O.kid.id).map(k => ` · ${esc(c0.names[k] || 'a sibling')} ${it.got[k]}`).join('')}</small></span>${left > 0 && have ? `<button class="ih-b1 ih-sm" data-a="ctGive" data-k="${it.id}">Bring ${Math.min(have, left)}</button>` : ''}</div>`; }).join('')}</div></div>`;
-  }
+
   function produceSheet() {
-    const f = food(), g = goods(), L = Object.entries(PRODUCE).filter(([id, P]) => (P.goods ? g[id] : f[id]) > 0);
-    sheet(`<div class="ih-sh-h"><h3>Sell your produce</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div>${contractHtml()}${L.length ? qtyBar('produce') : ''}<p class="ih-ph-sub">From your farm and the sea. The grocer pays a fair price for each.</p>
-      <div class="ih-ph-list">${L.length ? L.map(([id, P]) => `<div class="ih-ph-row"><span class="ih-ph-e">${P.e}</span><span><b>${P.name}</b><small>You have ${P.goods ? g[id] : f[id]}${P.goods ? '' : ' (in your fridge)'}</small></span><button class="ih-b1 ih-sm" data-a="pSell" data-k="${id}">✨ ${O.E ? O.E.price(P.price) : P.price}</button></div>`).join('') : '<p class="ih-ph-sub">Nothing to sell yet. Collect eggs, milk and wool on your farm, or catch fish at the beach.</p>'}</div>`);
+    const f = food(), g = goods(), L = Object.entries(PRODUCE).filter(([id, P]) => (P.goods ? g[id] : f[id]) > 0), c0 = contract(), tab = O.prTab === 'order' ? 'order' : 'sell';
+    const sum = it => Object.values(it.got).reduce((t, n) => t + n, 0);
+    const tabs = [{ label: '🧺 Sell', on: tab === 'sell', attrs: 'data-a="prTab" data-v="sell"' }, { label: `📜 Café order${c0.done ? ' ✓' : ''}`, on: tab === 'order', attrs: 'data-a="prTab" data-v="order"' }];
+    if (tab === 'order') return stray({ key: 'order', title: '📜 Family contract', info: `✨ ${nf(c0.reward)}`, tabs,
+      note: c0.done ? 'This week’s order is filled! A new one comes on Monday.' : 'Fill the café’s order with your brothers and sisters by Sunday. The reward is split by what each of you brings.',
+      cards: c0.items.map(it => { const P = PRODUCE[it.id], have = P.goods ? g[it.id] || 0 : f[it.id] || 0, left = it.need - sum(it), others = Object.keys(it.got).filter(k => k !== O.kid.id).map(k => `${esc(c0.names[k] || 'a sibling')} ${it.got[k]}`).join(' · ');
+        return { e: P.e, name: `${P.name}: ${sum(it)} of ${it.need}`, sub: `You ${it.got[O.kid.id] || 0}${others ? ' · ' + others : ''}`, tag: left <= 0 ? '<span class="ih-own">Done ✓</span>' : have ? `<span class="ih-price">Bring ${Math.min(have, left)}</span>` : '<span class="ih-lock">None to bring</span>', attrs: `data-a="ctGive" data-k="${it.id}"`, off: c0.done || left <= 0 || !have }; }) });
+    stray({ key: 'produce', title: '🧺 Sell your produce', tabs, qty: L.length ? qtyBar('produce') : '', note: 'From your farm and the sea. The grocer pays a fair price for each.',
+      cards: L.map(([id, P]) => ({ e: P.e, name: P.name, sub: `You have ${P.goods ? g[id] : f[id]}`, tag: cardPrice(O.E ? O.E.price(P.price) : P.price), attrs: `data-a="pSell" data-k="${id}"` })),
+      empty: 'Nothing to sell yet. Collect eggs, milk and wool on your farm, or catch fish at the beach.' });
   }
+
   function goVillage() {
     const G = O.home.gate; if (!G) return;
     sendPlan([{ type: 'step', target: { pos: new T.Vector3(G.at.x, 0, G.at.z - 1.0) }, reach: 0.3, pose: 'stand', dur: 1.2, think: '🏘️', start: () => G.set(1),
@@ -2549,6 +2553,7 @@
   // The village's shops buy and sell by the home's own rules (prices, Mine, the used market, groceries): the sheets
   // are the home's own, shown over the village.
   const SHOP = {
+    trayHtml: o => trayHtml(o), cardPrice: (xp, w) => cardPrice(xp, w), thumbPump: () => thumbPump(), strayClose: () => strayClose(),
     wallet: () => wallet(), used: () => usedStock(), food: () => food(), defs: () => DEFS, qtyN: a => qtyN(a), setQty: q => setQty(q), qtyBar: (rv, rk) => qtyBar('', [rv, rk]),
     ask(t, offerId) { const d = BY[t]; if (!d) return; if (offerId) { const o = usedStock().find(x => x.id === offerId); if (o) buyAsk(d, o); else toast('Someone just bought that one.'); return; } O.pick = null; buyAsk(d); },
     buyFood(id) { const x = IH.kitchen && IH.kitchen.FOOD[id], w = wallet(); if (!x) return false; if (w.left < x.xp) { toast(`You need ✨ ${x.xp} XP for that.`); return false; } wSpend(x.xp, x.name ? x.name.toLowerCase() : id, 'HOSHI STREET GROCER'); const f = food(); f[id] = (f[id] || 0) + 1; save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('village.food', { id, xp: x.xp }); return true; },
@@ -2595,10 +2600,13 @@
   // shop: things for pets), at the Market's prices
   function counterSheet(kind) {
     const ok = d => d.xp && spare(d.t) > 0 && !d.apply && !d.pet && (kind === 'pets' ? d.cat === 'pets' : d.cat !== 'pets');
-    const L = DEFS.filter(ok); for (const d of L) if (!THUMBS[d.t]) { O.thumbQ = [d.t]; thumbsSome(); }
-    const rows = L.map(d => boxOf(d.t).map((u, n) => `<div class="ih-ph-row"><img alt="" data-thumb="${d.t}" src="${THUMBS[d.t] || ''}"><span><b>${esc(d.name)}</b><small>${u.fin && u.fin.c ? `<i class="ih-dot" style="--c:${u.fin.c}"></i>` : ''}${u.used ? `Used · ${esc(u.cond || 'Good')}` : 'Bought new'}</small></span><button class="ih-b1 ih-ph-btn" data-a="vSell" data-k="${kind}" data-t="${d.t}" data-n="${n}">✨ ${sellValue(d, u.used)}</button></div>`).join('')).join('');
-    sheet(`<div class="ih-sh-h"><h3>Sell to the shop</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div>${L.length ? qtyBar('counter:' + kind) : ''}<p class="ih-ph-sub">${kind === 'pets' ? 'Pet things in Mine you’re not using.' : 'Things in Mine you’re not using.'} New things sell for more than used ones. You have ✨ ${nf(wallet().left)} XP.</p><div class="ih-ph-list">${rows || `<p class="ih-ph-sub">Nothing in Mine this shop buys. Put things away at home first.</p>`}</div>`, 'small');
+    const L = DEFS.filter(ok);
+    stray({ key: 'counter:' + kind, title: '🏷️ Sell to the shop', info: `✨ ${nf(wallet().left)} XP`, qty: L.length ? qtyBar('counter:' + kind) : '',
+      note: `${kind === 'pets' ? 'Pet things in Mine you’re not using.' : 'Things in Mine you’re not using.'} New things sell for more than used ones.`,
+      cards: L.flatMap(d => boxOf(d.t).map((u, n) => ({ t: d.t, name: d.name, sub: `${u.fin && u.fin.c ? `<i class="ih-dot" style="--c:${u.fin.c}"></i>` : ''}${u.used ? `Used · ${esc(u.cond || 'Good')}` : 'New'}`, tag: cardPrice(sellValue(d, u.used)), attrs: `data-a="vSell" data-k="${kind}" data-t="${d.t}" data-n="${n}"` }))),
+      empty: 'Nothing in Mine this shop buys. Put things away at home first.' });
   }
+
   // Off to the village (village.js): the home stops (its drawing, its taps) and the village draws through the same
   // canvas and pipeline. Back home: in through the gate, which swings shut behind.
   function travel(where = 'village') {
@@ -2710,7 +2718,7 @@
       const t = O.thumbQ.shift(); if (THUMBS[t]) continue;
       if (t === 'cat' && IH.yami && !IH.yami.ready) { O.thumbQ.push(t); break; }
       try { const inst = make(BY[t], { w: 2, h: 2.1, wy: 1.45 }); if (inst.pet) poseOf(inst, 'sit', 0, 0); THUMBS[t] = snap(inst.group, 150, 150); inst.group.traverse(m => { if (m.isMesh && m.material !== LK.BASE && m.material !== LK.BASE2) m.material.dispose(); }); } catch (e) { THUMBS[t] = ''; console.error(e); }
-      const img = O.root.querySelector(`[data-thumb="${t}"]`); if (img && THUMBS[t]) img.src = THUMBS[t];
+      if (THUMBS[t]) for (const img of O.root.querySelectorAll(`[data-thumb="${t}"]`)) img.src = THUMBS[t];
     }
   }
   function homeThumb(id) {
@@ -2742,6 +2750,7 @@
     // the tray
     const tray = $('.ih-tray', r);
     if (O.editing && !O.held) { tray.hidden = false; drawTray(); } else tray.hidden = true;
+    if (O.editing || O.held) strayClose();
     $('.ih-deco', r).innerHTML = O.editing ? `${ic('check')}<span>Done</span>` : `${ic('brush')}<span>Decorate</span>`;
   }
   function drawTray() {
@@ -2773,6 +2782,22 @@
   const qtyN = avail => Math.max(0, Math.min(avail, O.qty === 'all' ? avail : O.qty || 1));
   const qtyBar = (redo, v) => `<div class="ih-qty"><span>How many</span>${QTY.map(q => `<button class="${(O.qty || 1) === q ? 'on' : ''}" ${v ? `data-v="qty" data-rv="${v[0]}" data-rk="${v[1]}"` : `data-a="qty" data-r="${redo}"`} data-q="${q}">${q === 'all' ? 'All' : '×' + q}</button>`).join('')}</div>`;
   const setQty = q => { O.qty = q === 'all' ? 'all' : Math.max(1, +q || 1); };
+  // ---------- picture-card trays (2026-11-11): every shop, buy and sell list looks like the Decorate tray: a title
+  // row (what it is, what you have to spend, How many, ✕), tabs, a short note, then a sliding row of picture cards.
+  // Things you DO (actions, jobs, tasks, questions) stay pop-ups. o: { title, info, qty, go, close (the ✕'s
+  // attributes), tabs: [{ label, on, attrs }], note, cards: [{ t (a thing, its picture) | e (an emoji), name, sub,
+  // tag, attrs, off, on }], empty }. Names are plain words; sub, tag, note and info may hold markup.
+  const cardPrice = (xp, word) => `<span class="ih-price">${word ? esc(word) + ' ' : ''}✨ ${nf(xp)}</span>`;
+  function trayHtml(o) {
+    const pic = c => { if (!c.t) return `<span class="ih-ce">${c.e || '🛍️'}</span>`; if (!THUMBS[c.t]) (O.thumbQ = O.thumbQ || []).push(c.t); return `<img alt="" data-thumb="${c.t}" ${THUMBS[c.t] ? `src="${THUMBS[c.t]}"` : ''}>`; };
+    const card = c => `<button class="ih-card${c.off ? ' locked' : ''}${c.on ? ' on' : ''}" ${c.attrs || ''} ${c.off ? 'disabled' : ''}>${pic(c)}<b>${esc(c.name)}</b>${c.sub ? `<small>${c.sub}</small>` : ''}${c.tag || ''}</button>`;
+    return `<div class="ih-trh"><b>${o.title}</b>${o.info ? `<span class="ih-tri">${o.info}</span>` : ''}<i class="ih-trsp"></i>${o.qty || ''}${o.go || ''}<button class="ih-trx" ${o.close} aria-label="Close">✕</button></div>${o.tabs ? `<div class="ih-tabs">${o.tabs.map(t => `<button class="ih-tab ${t.on ? 'on' : ''}" ${t.attrs}>${t.label}</button>`).join('')}</div>` : ''}${o.note ? `<p class="ih-trn">${o.note}</p>` : ''}<div class="ih-cards">${o.cards.map(card).join('') || `<p class="ih-empty">${o.empty || 'Nothing here yet.'}</p>`}</div>`;
+  }
+  // the pictures still to draw, a few at a time (the home's beat does it at home; this does it on the islands)
+  function thumbPump() { if (!O || !O.thumbQ || !O.thumbQ.length) return; thumbsSome(); setTimeout(thumbPump, 30); }
+  // the home's own tray for shops (data-a buttons); the islands have theirs in the village's controls (data-v)
+  function stray(o) { closeSheet(); const el = $('.ih-stray', O.root); el.innerHTML = trayHtml({ close: 'data-a="strayX"', ...o }); el.hidden = false; el.querySelector('.ih-cards').scrollLeft = O.strayAt && O.strayAt.k === o.key ? O.strayAt.x : 0; el.querySelector('.ih-cards').onscroll = e => { O.strayAt = { k: o.key, x: e.target.scrollLeft }; }; thumbPump(); }
+  const strayClose = () => { const el = O && $('.ih-stray', O.root); if (el) { el.hidden = true; el.innerHTML = ''; } };
   const isleOpen = id => { const a = O && O.opts.islands !== undefined ? O.opts.islands : ISLANDS_OPEN; return !a || a.includes(id); };
   const APPS = [['bank', '🏦', 'Banking'], ['farm', '🚜', 'Farm'], ['shop', '🛋️', 'Shop'], ['homes', '🏠', 'Homes'], ['groceries', '🛒', 'Groceries'], ['recipes', '🍳', 'Recipes'], ['market', '🏷️', 'Market'], ['jobs', '💼', 'Employment'], ['travel', '🧭', 'Travel to']];
   const sellValue = (d, used) => Math.max(10, Math.round(d.xp * (used ? 0.3 : 0.5) / 10) * 10);
@@ -2818,7 +2843,26 @@
     if ((w === 'farm' || w === 'stable') && IH.village.farmShop('animals')) return;
     O.shopHome = true; toast('Off home to shop for it…'); travelTo('home');
   }
+  // the Groceries and Market apps open picture-card trays (the phone goes away so you can see your home)
+  function groceryTray() {
+    const K = IH.kitchen, f = food(), w = wallet(); if (!K) return;
+    stray({ key: 'groceries', title: '🛒 Groceries', info: `✨ ${nf(w.left)} XP`, qty: qtyBar('app:groceries'), note: 'Food for your fridge and pantry. Your character cooks with it.',
+      cards: Object.entries(K.FOOD).map(([id, x]) => ({ e: x.emoji, name: x.name, sub: f[id] ? `${f[id]} in the ${x.where}` : `None in the ${x.where}`, tag: cardPrice(x.xp), attrs: `data-a="gbuy" data-f="${id}"`, off: w.left < x.xp })) });
+  }
+  function marketTray() {
+    const tab = O.mkTab || 'used', w = wallet();
+    const tabs = [{ label: 'Buy used', on: tab === 'used', attrs: 'data-a="mkTab" data-v="used"' }, { label: 'Sell', on: tab === 'sell', attrs: 'data-a="mkTab" data-v="sell"' }];
+    if (tab === 'used') return stray({ key: 'mk:used', title: '🏷️ Market', info: `✨ ${nf(w.left)} XP`, tabs, note: 'Second-hand things from other homes, cheaper than new.',
+      cards: usedStock().map(o => { const d = BY[o.t]; return { t: d.t, name: d.name, sub: `${o.fin.c ? `<i class="ih-dot" style="--c:${o.fin.c}"></i>` : ''}${esc(o.cond)} · new ${nf(d.xp)}`, tag: cardPrice(o.xp), attrs: `data-a="usedAsk" data-o="${o.id}"`, off: w.left < o.xp }; }),
+      empty: 'All sold for today. New things come in tomorrow.' });
+    const L = DEFS.filter(d => d.xp && spare(d.t) > 0);
+    stray({ key: 'mk:sell', title: '🏷️ Market', info: `✨ ${nf(w.left)} XP`, tabs, qty: L.length ? qtyBar('app:market') : '', note: 'Things in Mine you’re not using. Selling here pays half what a village shop or your market stall pays in person.',
+      cards: L.flatMap(d => boxOf(d.t).map((u, n) => ({ t: d.t, name: d.name, sub: `${u.fin && u.fin.c ? `<i class="ih-dot" style="--c:${u.fin.c}"></i>` : ''}${u.used ? `Used · ${esc(u.cond || 'Good')}` : 'New'}`, tag: cardPrice(phoneSell(d, u.used), 'Sell'), attrs: `data-a="sell" data-t="${d.t}" data-n="${n}"` }))),
+      empty: 'Nothing spare right now. Put something away from your home and it’ll show here.' });
+  }
   function phone(app = 'home') {
+    if (app === 'groceries' || app === 'market') return app === 'groceries' ? groceryTray() : marketTray();
+    strayClose();
     const w = wallet(), K = IH.kitchen, f = food(), back = `<button class="ih-ph-back" data-a="phone">‹ Back</button>`;
     let body = '';
     const appBtn = ([k, e, n]) => `<button class="ih-ph-app" data-a="app" data-app="${k}"><span>${e}</span>${n}</button>`;
@@ -3029,6 +3073,8 @@
     if (a === 'moveAsk') return moveAsk(el.dataset.h);
     if (a === 'move') return move(el.dataset.h, el.dataset.bring === '1');
     if (a === 'sheetX') return closeSheet();
+    if (a === 'strayX') return strayClose();
+    if (a === 'prTab') { O.prTab = el.dataset.v; return produceSheet(); }
     if (a === 'lookOpen') return lookSheet();
     if (a === 'where') { st.look.setting = st.look.setting || {}; st.look.setting[st.cur] = el.dataset.v; save(); loadHome(); applyLook(); force = true; return lookSheet(); }
     if (a === 'look') { const k = el.dataset.k, v = el.dataset.v; st.look[k] = k === 'ink' || k === 'plain' || k === 'film' ? +v : v; save(); applyLook(); lightFor(st.look.phase); if (O.home) O.S.sun.shadow.needsUpdate = true; force = true; return lookSheet(); }
@@ -3058,6 +3104,7 @@
       <div class="ih-bottom"><button class="ih-deco" data-a="decorate"></button></div>
       <div class="ih-hold" hidden></div>
       <div class="ih-tray" hidden></div>
+      <div class="ih-tray ih-stray" hidden></div>
       <div class="ih-sheet" hidden></div>
       <div class="ih-acts" role="menu" hidden></div>
       <div class="ih-toast" role="status" aria-live="polite"></div><div class="ih-needs" aria-live="polite"></div>`;

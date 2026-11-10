@@ -25,12 +25,12 @@
     const bedStage = b => { if (!b.crop) return -1; const C = CROPS[b.crop], w = (b.watered || []).length; return w >= C.days ? 3 : Math.min(2, w); };
     const drawBeds = () => { const B = V().B; if (!B.drawBed) return; B.beds.forEach((_, i) => { const b = bedState(i); B.drawBed(i, b.crop, Math.max(0, bedStage(b))); }); };
     function seedPanel(i) {
-      c.gamePanel(`<div class="vg-gh"><b>🌱 Plant bed ${i + 1}</b><span>✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Pick the seeds. Water the bed once a day; it’s ready after a few days of watering.</div>
-        <div class="vg-gb vg-mine">${Object.entries(CROPS).filter(([, C]) => !C.special || ((sh().farm() || {}).specials || {})[C.special]).map(([id, C]) => `<button data-v="isl" data-k="plant:${i}:${id}"><span class="e">${C.e}</span>${C.name[0].toUpperCase() + C.name.slice(1)} · ✨ ${C.seed}<small>&nbsp;${C.days} days · ${C.n} to pick</small></button>`).join('')}</div>`);
+      c.shopTray({ key: 'seeds', title: `🌱 Seeds for bed ${i + 1}`, info: `✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}`, note: 'Pick the seeds. Water the bed once a day; it’s ready after a few days of watering.',
+        cards: Object.entries(CROPS).filter(([, C]) => !C.special || ((sh().farm() || {}).specials || {})[C.special]).map(([id, C]) => ({ e: C.e, name: C.name[0].toUpperCase() + C.name.slice(1), sub: `${C.days} days · ${C.n} to pick`, tag: sh().cardPrice(C.seed), attrs: `data-v="isl" data-k="plant:${i}:${id}"` })) });
     }
     function plant(i, id) {
       const C = CROPS[id]; if (!C || !sh().farmPay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); save();
-      const s = V().B.spots.find(q => q.kind === 'bed' && q.i === i); document.querySelector('.vg-game').hidden = true;
+      const s = V().B.spots.find(q => q.kind === 'bed' && q.i === i); document.querySelector('.vg-game').hidden = true; c.closeTray();
       c.chore(s, 'fetch', 2.4, () => { drawBeds(); c.toast(`${C.name[0].toUpperCase() + C.name.slice(1)} planted! Water them every day.`); c.sound('place'); }, null, { tool: 'trowel', fx: 'soil', dist: 0.7, y: 0.75, rate: 9 }); c.xp();
     }
     function water(s) {
@@ -60,8 +60,8 @@
     // ---------- the Stable yard
     const stab = () => { const S = st('stable'); S.animals = S.animals || { horse: 1, merino: 1 }; S.got = S.got || {}; return S; };
     function tackShop() {
-      const S = stab(); c.gamePanel(`<div class="vg-gh"><b>🐴 Stables & tack</b><span>✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div>${sh().qtyBar('isl', 'tack')}<div class="vg-gq">Horses to ride, and friends for the paddock.</div>
-        <div class="vg-gb vg-mine">${STABLE_SHOP.map(([k, e, name, xp, cap, about]) => { const n = S.animals[k] || 0; return `<button data-v="isl" data-k="sbuy:${k}" ${n >= cap ? 'disabled' : ''}><span class="e">${e}</span>${name} · ✨ ${xp}<small>&nbsp;${n} / ${cap} · ${about}</small></button>`; }).join('')}</div>`);
+      const S = stab(); c.shopTray({ key: 'tack', title: '🐴 Stables & tack', info: `✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}`, qty: sh().qtyBar('isl', 'tack'), note: 'Horses to ride, and friends for the paddock.',
+        cards: STABLE_SHOP.map(([k, e, name, xp, cap, about]) => { const n = S.animals[k] || 0; return { e, name, sub: `${n} / ${cap} · ${about}`, tag: n >= cap ? '<span class="ih-own">Full</span>' : sh().cardPrice(xp), attrs: `data-v="isl" data-k="sbuy:${k}"`, off: n >= cap }; }) });
     }
     function stableBuy(kind) {
       const S = stab(), it = STABLE_SHOP.find(q => q[0] === kind); if (!it || (S.animals[kind] || 0) >= it[4]) return;

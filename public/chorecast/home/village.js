@@ -311,7 +311,15 @@
   }
 
   // ---------- shifts at the shops: a little game each (Employment lists them; two a day at each shop)
-  function gamePanel(html) { const el = $('.vg-game', V.ui); el.innerHTML = html; el.hidden = false; return el; }
+  function gamePanel(html) { const el = $('.vg-game', V.ui); closeTray(); el.innerHTML = html; el.hidden = false; return el; }
+  // shops, buying and selling: the picture-card tray along the bottom (the Decorate tray's look; app.js draws it).
+  // Things you do (actions, jobs, games, questions) stay in the pop-up above.
+  function shopTray(o) {
+    const el = $('.vg-tray', V.ui), sh = V.stage.shop, k = o.key || o.title, keep = V.trayAt && V.trayAt.k === k ? V.trayAt.x : 0;
+    $('.vg-game', V.ui).hidden = true; sh.strayClose(); el.innerHTML = sh.trayHtml({ close: 'data-v="gclose"', ...o }); el.hidden = false;
+    const cs = el.querySelector('.ih-cards'); cs.scrollLeft = keep; cs.onscroll = () => { V.trayAt = { k, x: cs.scrollLeft }; }; sh.thumbPump(); return el;
+  }
+  function closeTray() { const el = V && V.ui && $('.vg-tray', V.ui); if (el) { el.hidden = true; el.innerHTML = ''; } }
   function gameEnd(pay, words) {
     const G = V.game; if (!G) return; V.game = null; if (G.stop) G.stop();
     const xpv = Math.min(G.max, Math.round(pay)); if (xpv > 0) { V.stage.shop.earn(xpv, G.id); xp(); }
@@ -405,16 +413,17 @@
   function stallPick(s) {
     const sh = V.stage.shop, list = sh.mine(); V.picked = V.picked && V.picked.s === s ? V.picked : { s, sel: [] };
     const sel = V.picked.sel, on = it => sel.some(q => q.t === it.t && q.n === it.n);
-    gamePanel(`<div class="vg-gh"><b>🏷️ Your stall</b><span>${sel.length} / 4</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">${list.length ? 'Pick up to four things from Mine to sell. Villagers pay a little more than the Market does.' : 'Mine is empty. Put things away at home first, then sell them here.'}</div>
-      <div class="vg-gb vg-mine">${list.slice(0, 24).map((it, i) => `<button data-v="spick" data-i="${i}" class="${on(it) ? 'on' : ''}" ${!on(it) && sel.length >= 4 ? 'disabled' : ''}><img alt="" src="${sh.thumb(it.t)}" width="32" height="32">${esc(it.name)}${it.used ? ' (used)' : ''} · ✨${it.price}${on(it) ? ' ✓' : ''}</button>`).join('')}</div>
-      ${sel.length ? '<div class="vg-gb vg-go"><button data-v="sopen"><span class="e">🧺</span>Open my stall</button></div>' : ''}`);
+    shopTray({ key: 'stall', title: '🏷️ Your stall', info: `${sel.length} / 4 picked`, go: sel.length ? '<button class="ih-trgo" data-v="sopen">🧺 Open my stall</button>' : '',
+      note: list.length ? 'Pick up to four things from Mine to sell. Villagers pay a little more than the Market does.' : '',
+      cards: list.slice(0, 40).map((it, i) => ({ t: it.t, name: it.name, sub: it.used ? 'Used' : 'New', tag: on(it) ? '<span class="ih-own">On the stall ✓</span>' : sh.cardPrice(it.price), attrs: `data-v="spick" data-i="${i}"`, on: on(it), off: !on(it) && sel.length >= 4 })),
+      empty: 'Mine is empty. Put things away at home first, then sell them here.' });
     V.mineList = list;
   }
   function stallOpen() {
     const P = V.picked; if (!P || !P.sel.length) return; const s = P.s, sh = V.stage.shop, recs = [];
     // (taken highest index first within each kind of thing, so the others' indexes stay right)
     for (const it of P.sel.slice().sort((a, b) => a.t === b.t ? b.n - a.n : 0)) { const r = sh.take(it.t, it.n); if (r) recs.push(r); }
-    V.picked = null; $('.vg-game', V.ui).hidden = true; if (!recs.length) return;
+    V.picked = null; closeTray(); if (!recs.length) return;
     V.stall = { s, recs, ...stallModel(s, V.stage.kid.name || 'My', recs), next: V.t + 6, told: false };
     say(V.kid, 'Stall’s open! 🏷️'); toast('Your stall is open. Stay close by to mind it, and villagers (and your brothers and sisters) will come and buy.'); sound('place');
   }
@@ -600,7 +609,7 @@
         <button class="ih-btn" data-v="turnL" aria-label="Turn the view left">${ic('left')}</button><button class="ih-btn" data-v="turnR" aria-label="Turn the view right">${ic('right')}</button>
       </div>
       <button class="vg-chat" data-v="chat" aria-label="Say something">💬</button><div class="vg-emo" hidden></div>
-      <div class="ih-acts" role="menu" hidden></div><div class="vg-game" hidden></div><div class="ih-toast" role="status" aria-live="polite"></div><div class="vg-fade on"></div>`;
+      <div class="ih-acts" role="menu" hidden></div><div class="vg-game" hidden></div><div class="ih-tray ih-stray vg-tray" hidden></div><div class="ih-toast" role="status" aria-live="polite"></div><div class="vg-fade on"></div>`;
     V.ui.addEventListener('click', e => { const b = e.target.closest('[data-v]'); if (!b) return; e.preventDefault(); btn(b); });
     // (one button's action; the How many buttons set it, then draw their list again)
     function btn(b) {
@@ -623,7 +632,7 @@
       if (a === 'gsel') { if (V.game && V.game.pick) V.game.pick(+b.dataset.i, b); return; }
       if (a === 'spick') { const it = V.mineList && V.mineList[+b.dataset.i], P = V.picked; if (!it || !P) return; const i = P.sel.findIndex(q => q.t === it.t && q.n === it.n); if (i >= 0) P.sel.splice(i, 1); else if (P.sel.length < 4) P.sel.push(it); sound('tap'); return stallPick(P.s); }
       if (a === 'sopen') return stallOpen();
-      if (a === 'gclose') { $('.vg-game', V.ui).hidden = true; V.picked = null; if (V.fishing) fishEnd(false, 'You packed up your rod.'); if (V.trade) { NET().send({ t: 'no', id: V.trade.id }, true); V.trade = null; } return; }
+      if (a === 'gclose') { $('.vg-game', V.ui).hidden = true; closeTray(); V.picked = null; if (V.fishing) fishEnd(false, 'You packed up your rod.'); if (V.trade) { NET().send({ t: 'no', id: V.trade.id }, true); V.trade = null; } return; }
       if (a === 'act') { const f = V.acts && V.acts[+b.dataset.i]; hideActs(); if (f) { sound('tap'); f.run(); } }
     }
     stage.root.appendChild(V.ui); netStart(); if (ISL && ISL.prep) ISL.prep(); if (FARM && FARM.prep) FARM.prep();
@@ -728,8 +737,8 @@
   }
   function farmShop() {
     const sh = V.stage.shop, f = sh.farm();
-    gamePanel(`<div class="vg-gh"><b>🐮 Farm shop</b><span>✨ farm ${Math.round(sh.farmAcct().bal).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">More animals for your farm. They live here and make things every day.</div>
-      <div class="vg-gb vg-mine">${FARM_SHOP.map(([k, e, name, xp, cap, about]) => { const n = (f.animals || {})[k] || 0; return `<button data-v="fbuy" data-k="${k}" ${n >= cap ? 'disabled' : ''}><span class="e">${e}</span>${name} · ✨ ${xp}<small>&nbsp;${n} / ${cap} · ${about}</small></button>`; }).join('')}</div>`);
+    shopTray({ key: 'vfarm', title: '🐮 Farm shop', info: `✨ farm ${Math.round(sh.farmAcct().bal).toLocaleString()}`, note: 'More animals for your farm. They live here and make things every day.',
+      cards: FARM_SHOP.map(([k, e, name, xp, cap, about]) => { const n = (f.animals || {})[k] || 0; return { e, name, sub: `${n} / ${cap} · ${esc(about)}`, tag: n >= cap ? '<span class="ih-own">Full</span>' : sh.cardPrice(xp), attrs: `data-v="fbuy" data-k="${k}"`, off: n >= cap }; }) });
   }
   function farmBuy(kind) {
     const sh = V.stage.shop, f = sh.farm(), it = FARM_SHOP.find(q => q[0] === kind); if (!it) return; const n = (f.animals || {})[kind] || 0; if (n >= it[4]) return;
@@ -786,7 +795,7 @@
   };
   Object.assign(ACTS, ISLAND_ACTS);
   // more islands' doings (village-islands.js), with what they need from here
-  const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, ride, sit, stand, fishStart, fx, seatKid, DAY, today };
+  const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, shopTray, closeTray, ride, sit, stand, fishStart, fx, seatKid, DAY, today };
   const ISL = IH.villageIslands ? IH.villageIslands(CTX) : null, FARM = IH.villageFarm ? IH.villageFarm(CTX) : null;
   const LANG = IH.villageLang ? IH.villageLang(CTX) : null;
   if (ISL) Object.assign(ACTS, ISL.acts); if (FARM) Object.assign(ACTS, FARM.acts); if (LANG) Object.assign(ACTS, LANG.acts);

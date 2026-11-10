@@ -165,12 +165,14 @@
       if (!s.visit || s.visit.day !== today) s.visit = { day: today, asked: false, bonus: false };
       if (!s.visit.asked) { const opts = shuffle(L.sell, today); return c.gamePanel(head(`🛒 ${esc(L.signs.market[0])}`, 'the market') + `<div class="vg-gq">The stallholder smiles. Ask in ${L.name}: “${esc(L.sellQ)}”</div><div class="vg-gb vg-mine">${opts.map(o => `<button data-v="lang" data-k="ask:${code}:${encodeURIComponent(o)}">${esc(o)}</button>`).join('')}</div><div class="vg-gb vg-go"><button data-v="lang" data-k="ask:${code}:skip">Just point at things</button></div>`); }
       const list = sh().produceList(), k = s.visit.bonus ? 1.1 : 1;
-      c.gamePanel(head(`🛒 ${esc(L.signs.market[0])}`, s.visit.bonus ? '+10% for asking in ' + L.name : '') + `${list.length ? sh().qtyBar('lang', 'mk:' + code) : ''}<div class="vg-gq">${list.length ? `What would you like to sell? Into your farm account, less ✨ 1 freight each to get it back home.` : 'You’ve nothing to sell right now. Bring produce from your farm.'}</div><div class="vg-gb vg-mine">${list.map(p => `<button data-v="lang" data-k="sell:${code}:${p.id}"><span class="e">${p.e}</span>${esc(p.name)} · ✨ ${Math.round(p.price * k) - 1}<small>&nbsp;you have ${p.have}</small></button>`).join('')}</div>`);
+      c.shopTray({ key: 'mk:' + code, title: `🛒 ${esc(L.signs.market[0])}`, info: s.visit.bonus ? '+10% for asking in ' + L.name : '', qty: list.length ? sh().qtyBar('lang', 'mk:' + code) : '', note: list.length ? 'What would you like to sell? It goes into your farm account, less ✨ 1 freight each to get it back home.' : '',
+        cards: list.map(p => ({ e: p.e, name: p.name, sub: `You have ${p.have}`, tag: sh().cardPrice(Math.round(p.price * k) - 1), attrs: `data-v="lang" data-k="sell:${code}:${p.id}"` })), empty: 'You’ve nothing to sell right now. Bring produce from your farm.' });
     }
     // ---------- the speciality shop: something for the farm found only here
     function special(code) {
       const L = LANGS[code], f = sh().farm() || {}, sp = f.specials || {}; if (done(code) < 2) return c.toast(`The ${L.shopName} opens after your second ${L.name} lesson.`);
-      c.gamePanel(head(`${L.e} ${esc(L.signs.shop[0])}`, `✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}`) + `<div class="vg-gb vg-mine">${L.special.map(([id, e, name, xp, needs, about]) => `<button data-v="lang" data-k="buy:${code}:${id}" ${sp[id] ? 'disabled' : ''}><span class="e">${e}</span>${esc(name)}${sp[id] ? ' ✓' : ` · ✨ ${xp}`}<small>&nbsp;${esc(about)} (Needs ${needs === 'orchard' ? 'an orchard' : 'a field'} block.)</small></button>`).join('')}</div>`);
+      c.shopTray({ key: 'sp:' + code, title: `${L.e} ${esc(L.signs.shop[0])}`, info: `✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}`, note: 'Something for your farm you can only get here.',
+        cards: L.special.map(([id, e, name, xp, needs, about]) => ({ e, name, sub: `${esc(about)} Needs ${needs === 'orchard' ? 'an orchard' : 'a field'} block.`, tag: sp[id] ? '<span class="ih-own">Yours ✓</span>' : sh().cardPrice(xp), attrs: `data-v="lang" data-k="buy:${code}:${id}"`, off: !!sp[id] })) });
     }
     function activity(s) {
       const L = LANGS[s.lang], A0 = L.act; if (done(s.lang) < 3) return c.toast(`Finish all three ${L.name} lessons to do this.`);
