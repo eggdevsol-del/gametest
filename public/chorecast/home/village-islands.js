@@ -60,14 +60,16 @@
     // ---------- the Stable yard
     const stab = () => { const S = st('stable'); S.animals = S.animals || { horse: 1, merino: 1 }; S.got = S.got || {}; return S; };
     function tackShop() {
-      const S = stab(); c.gamePanel(`<div class="vg-gh"><b>🐴 Stables & tack</b><span>✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Horses to ride, and friends for the paddock.</div>
+      const S = stab(); c.gamePanel(`<div class="vg-gh"><b>🐴 Stables & tack</b><span>✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div>${sh().qtyBar('isl', 'tack')}<div class="vg-gq">Horses to ride, and friends for the paddock.</div>
         <div class="vg-gb vg-mine">${STABLE_SHOP.map(([k, e, name, xp, cap, about]) => { const n = S.animals[k] || 0; return `<button data-v="isl" data-k="sbuy:${k}" ${n >= cap ? 'disabled' : ''}><span class="e">${e}</span>${name} · ✨ ${xp}<small>&nbsp;${n} / ${cap} · ${about}</small></button>`; }).join('')}</div>`);
     }
     function stableBuy(kind) {
-      const S = stab(), it = STABLE_SHOP.find(q => q[0] === kind); if (!it || (S.animals[kind] || 0) >= it[4] || !sh().farmPay(it[3], 'a ' + it[2].toLowerCase())) return;
-      S.animals[kind] = (S.animals[kind] || 0) + 1; if (!S.got[kind]) S.got[kind] = Date.now(); save();
-      const B = V().B, a = IH.islandsBuild.MAKE[kind](), pen = B.pens[kind]; a.pen = pen; a.group.position.set((pen[0] + pen[2]) / 2, 0, (pen[1] + pen[3]) / 2); B.root.add(a.group); B.animals.push(a);
-      c.toast(`Welcome, ${it[2].toLowerCase()}! ${it[1]}`); c.xp(); tackShop();
+      const S = stab(), it = STABLE_SHOP.find(q => q[0] === kind); if (!it || (S.animals[kind] || 0) >= it[4]) return;
+      const n = Math.max(1, sh().qtyN(Math.min(it[4] - (S.animals[kind] || 0), Math.floor((sh().farmAcct().bal + sh().wallet().left) / it[3]))));
+      if (!sh().farmPay(it[3] * n, n > 1 ? `${n} × ${it[2].toLowerCase()}` : 'a ' + it[2].toLowerCase())) return;
+      S.animals[kind] = (S.animals[kind] || 0) + n; if (!S.got[kind]) S.got[kind] = Date.now(); save();
+      const B = V().B; for (let q = 0; q < n; q++) { const a = IH.islandsBuild.MAKE[kind](), pen = B.pens[kind]; a.pen = pen; a.group.position.set((pen[0] + pen[2]) / 2 + (q - (n - 1) / 2) * 1.6, 0, (pen[1] + pen[3]) / 2); B.root.add(a.group); B.animals.push(a); }
+      c.toast(n > 1 ? `Welcome, ${n} × ${it[2].toLowerCase()}! ${it[1]}` : `Welcome, ${it[2].toLowerCase()}! ${it[1]}`); c.xp(); tackShop();
     }
     const stableFed = () => (stab().fed || 0) >= today() - 1;
     function stableCollect(s, kind, what, every, emo) {
@@ -150,7 +152,7 @@
     };
     return {
       acts,
-      click(k) { const [what, a, b] = k.split(':'); if (what === 'plant') return plant(+a, b); if (what === 'sbuy') return stableBuy(a); },
+      click(k) { const [what, a, b] = k.split(':'); if (what === 'plant') return plant(+a, b); if (what === 'sbuy') return stableBuy(a); if (what === 'tack') return tackShop(); },
       prep() { const v = V(); if (!v) return; v.can = 0; if (v.B && v.B.drawBed) drawBeds(); if (v.B && v.B.trees) drawFruit(); void T; } // (the farm's field and orchard blocks too)
     };
   };

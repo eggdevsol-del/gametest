@@ -321,3 +321,8 @@ body.ih-open{overflow:hidden}
 .vg-lw{font-size:1.15em}
 .vg-gb button.no{background:#ffe1dc;border-color:#b8402f}
 .vg-trfrom{font:inherit;font-weight:800;background:#f3eefb;border-radius:99px;padding:2px 8px}
+/* how many at a time, on every buy and sell list */
+.ih-qty{display:flex;align-items:center;gap:6px;margin:6px 0 8px;font:800 12px/1 inherit;color:var(--ink2,#6b6478)}
+.ih-qty span{margin-right:2px}
+.ih-qty button{min-width:40px;padding:6px 10px;border-radius:12px;background:#f4eff8;color:#4a4458;font-weight:800;font-size:13px;border:0;cursor:pointer}
+.ih-qty button.on{background:#7b6cf6;color:#fff}

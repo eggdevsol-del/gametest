@@ -601,8 +601,11 @@
       </div>
       <button class="vg-chat" data-v="chat" aria-label="Say something">💬</button><div class="vg-emo" hidden></div>
       <div class="ih-acts" role="menu" hidden></div><div class="vg-game" hidden></div><div class="ih-toast" role="status" aria-live="polite"></div><div class="vg-fade on"></div>`;
-    V.ui.addEventListener('click', e => {
-      const b = e.target.closest('[data-v]'); if (!b) return; e.preventDefault(); const a = b.dataset.v;
+    V.ui.addEventListener('click', e => { const b = e.target.closest('[data-v]'); if (!b) return; e.preventDefault(); btn(b); });
+    // (one button's action; the How many buttons set it, then draw their list again)
+    function btn(b) {
+      const a = b.dataset.v;
+      if (a === 'qty') { if (V.stage.shop && V.stage.shop.setQty) V.stage.shop.setQty(b.dataset.q); return btn({ dataset: { v: b.dataset.rv, k: b.dataset.rk } }); }
       if (a === 'home') return homeAsk();
       if (a === 'chat') { const el = $('.vg-emo', V.ui); el.hidden = !el.hidden; if (!el.hidden) emoPanel(); sound('pop'); return; }
       if (a === 'emo') { $('.vg-emo', V.ui).hidden = true; return b.dataset.k === 'act' ? act(+b.dataset.i) : speak(b.dataset.k, +b.dataset.i); }
@@ -622,7 +625,7 @@
       if (a === 'sopen') return stallOpen();
       if (a === 'gclose') { $('.vg-game', V.ui).hidden = true; V.picked = null; if (V.fishing) fishEnd(false, 'You packed up your rod.'); if (V.trade) { NET().send({ t: 'no', id: V.trade.id }, true); V.trade = null; } return; }
       if (a === 'act') { const f = V.acts && V.acts[+b.dataset.i]; hideActs(); if (f) { sound('tap'); f.run(); } }
-    });
+    }
     stage.root.appendChild(V.ui); netStart(); if (ISL && ISL.prep) ISL.prep(); if (FARM && FARM.prep) FARM.prep();
     const cv = stage.cv; cv.addEventListener('pointerdown', down); cv.addEventListener('pointermove', move); cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('wheel', wheel, { passive: false });
     addEventListener('keydown', key);

@@ -2461,7 +2461,7 @@
   }
   function produceSheet() {
     const f = food(), g = goods(), L = Object.entries(PRODUCE).filter(([id, P]) => (P.goods ? g[id] : f[id]) > 0);
-    sheet(`<div class="ih-sh-h"><h3>Sell your produce</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div>${contractHtml()}<p class="ih-ph-sub">From your farm and the sea. The grocer pays a fair price for each.</p>
+    sheet(`<div class="ih-sh-h"><h3>Sell your produce</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div>${contractHtml()}${L.length ? qtyBar('produce') : ''}<p class="ih-ph-sub">From your farm and the sea. The grocer pays a fair price for each.</p>
       <div class="ih-ph-list">${L.length ? L.map(([id, P]) => `<div class="ih-ph-row"><span class="ih-ph-e">${P.e}</span><span><b>${P.name}</b><small>You have ${P.goods ? g[id] : f[id]}${P.goods ? '' : ' (in your fridge)'}</small></span><button class="ih-b1 ih-sm" data-a="pSell" data-k="${id}">✨ ${O.E ? O.E.price(P.price) : P.price}</button></div>`).join('') : '<p class="ih-ph-sub">Nothing to sell yet. Collect eggs, milk and wool on your farm, or catch fish at the beach.</p>'}</div>`);
   }
   function goVillage() {
@@ -2549,7 +2549,7 @@
   // The village's shops buy and sell by the home's own rules (prices, Mine, the used market, groceries): the sheets
   // are the home's own, shown over the village.
   const SHOP = {
-    wallet: () => wallet(), used: () => usedStock(), food: () => food(), defs: () => DEFS,
+    wallet: () => wallet(), used: () => usedStock(), food: () => food(), defs: () => DEFS, qtyN: a => qtyN(a), setQty: q => setQty(q), qtyBar: (rv, rk) => qtyBar('', [rv, rk]),
     ask(t, offerId) { const d = BY[t]; if (!d) return; if (offerId) { const o = usedStock().find(x => x.id === offerId); if (o) buyAsk(d, o); else toast('Someone just bought that one.'); return; } O.pick = null; buyAsk(d); },
     buyFood(id) { const x = IH.kitchen && IH.kitchen.FOOD[id], w = wallet(); if (!x) return false; if (w.left < x.xp) { toast(`You need ✨ ${x.xp} XP for that.`); return false; } wSpend(x.xp, x.name ? x.name.toLowerCase() : id, 'HOSHI STREET GROCER'); const f = food(); f[id] = (f[id] || 0) + 1; save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('village.food', { id, xp: x.xp }); return true; },
     // a treat at the café: XP, and what it gives the character (food, fun; friends too with a brother or sister)
@@ -2563,7 +2563,7 @@
     // the farm's own purchases (animals, feed, fences, seed): out of the farm account, topped up from the wallet if short
     // the language islands' markets (lang-islands.js): what there is to sell, at today's price; a sale into the farm account
     produceList() { const f = food(), g = goods(); return Object.entries(PRODUCE).map(([id, P]) => ({ id, name: P.name, one: P.one, e: P.e, have: P.goods ? g[id] || 0 : f[id] || 0, price: O.E ? O.E.price(P.price) : P.price })).filter(x => x.have > 0); },
-    sellProduce(id, price, where) { const P = PRODUCE[id]; if (!P) return false; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return false; if (P.goods) g[id] -= 1; else f[id] -= 1; farmIn(price, `sold ${P.one} at ${where}`, [[cap(P.one), price]]); save(); sound('buy'); ui(true); return true; },
+    sellProduce(id, price, where, n = 1) { const P = PRODUCE[id]; if (!P) return 0; const f = food(), g = goods(); n = Math.min(n, P.goods ? g[id] || 0 : f[id] || 0); if (n < 1) return 0; if (P.goods) g[id] -= n; else f[id] -= n; farmIn(price * n, `sold ${n > 1 ? n + ' × ' + P.one : P.one} at ${where}`, [[n > 1 ? `${n} × ${cap(P.one)} at ✨ ${price}` : cap(P.one), price * n]]); save(); sound('buy'); ui(true); return n; },
     useProduce(id) { const P = PRODUCE[id]; if (!P) return false; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return false; if (P.goods) g[id] -= 1; else f[id] -= 1; save(); return true; },
     addProduce(id, n = 1) { const P = PRODUCE[id]; if (!P) return; const box = P.goods ? goods() : food(); box[id] = (box[id] || 0) + n; save(); },
     farmOut(xp, memo) { const a = farmAcct(); a.bal -= xp; led('farm', -xp, memo, slipOf('CHORECAST FARM', 'Receipt', [[cap(memo), xp]], [['Paid from the farm account', xp, 'big'], ['Farm account after', a.bal, 'muted']])); save(); ui(true); },
@@ -2597,7 +2597,7 @@
     const ok = d => d.xp && spare(d.t) > 0 && !d.apply && !d.pet && (kind === 'pets' ? d.cat === 'pets' : d.cat !== 'pets');
     const L = DEFS.filter(ok); for (const d of L) if (!THUMBS[d.t]) { O.thumbQ = [d.t]; thumbsSome(); }
     const rows = L.map(d => boxOf(d.t).map((u, n) => `<div class="ih-ph-row"><img alt="" data-thumb="${d.t}" src="${THUMBS[d.t] || ''}"><span><b>${esc(d.name)}</b><small>${u.fin && u.fin.c ? `<i class="ih-dot" style="--c:${u.fin.c}"></i>` : ''}${u.used ? `Used · ${esc(u.cond || 'Good')}` : 'Bought new'}</small></span><button class="ih-b1 ih-ph-btn" data-a="vSell" data-k="${kind}" data-t="${d.t}" data-n="${n}">✨ ${sellValue(d, u.used)}</button></div>`).join('')).join('');
-    sheet(`<div class="ih-sh-h"><h3>Sell to the shop</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div><p class="ih-ph-sub">${kind === 'pets' ? 'Pet things in Mine you’re not using.' : 'Things in Mine you’re not using.'} New things sell for more than used ones. You have ✨ ${nf(wallet().left)} XP.</p><div class="ih-ph-list">${rows || `<p class="ih-ph-sub">Nothing in Mine this shop buys. Put things away at home first.</p>`}</div>`, 'small');
+    sheet(`<div class="ih-sh-h"><h3>Sell to the shop</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div>${L.length ? qtyBar('counter:' + kind) : ''}<p class="ih-ph-sub">${kind === 'pets' ? 'Pet things in Mine you’re not using.' : 'Things in Mine you’re not using.'} New things sell for more than used ones. You have ✨ ${nf(wallet().left)} XP.</p><div class="ih-ph-list">${rows || `<p class="ih-ph-sub">Nothing in Mine this shop buys. Put things away at home first.</p>`}</div>`, 'small');
   }
   // Off to the village (village.js): the home stops (its drawing, its taps) and the village draws through the same
   // canvas and pipeline. Back home: in through the gate, which swings shut behind.
@@ -2767,6 +2767,12 @@
   // overrides it, and null opens them all). The others keep everything on them, they just can't be visited until
   // they open again. (The veggie plot and orchard are land blocks on the farm, so they come with it.)
   const ISLANDS_OPEN = ['beach', 'farm', 'stable', 'plot', 'orchard'];
+  // How many at a time, for every buy and sell list (one choice, kept while the game's open): ×1, ×5, ×10 or All
+  // (all there is to sell, or as many as you can pay for). redo says which list to draw again when it changes.
+  const QTY = [1, 5, 10, 'all'];
+  const qtyN = avail => Math.max(0, Math.min(avail, O.qty === 'all' ? avail : O.qty || 1));
+  const qtyBar = (redo, v) => `<div class="ih-qty"><span>How many</span>${QTY.map(q => `<button class="${(O.qty || 1) === q ? 'on' : ''}" ${v ? `data-v="qty" data-rv="${v[0]}" data-rk="${v[1]}"` : `data-a="qty" data-r="${redo}"`} data-q="${q}">${q === 'all' ? 'All' : '×' + q}</button>`).join('')}</div>`;
+  const setQty = q => { O.qty = q === 'all' ? 'all' : Math.max(1, +q || 1); };
   const isleOpen = id => { const a = O && O.opts.islands !== undefined ? O.opts.islands : ISLANDS_OPEN; return !a || a.includes(id); };
   const APPS = [['bank', '🏦', 'Banking'], ['farm', '🚜', 'Farm'], ['shop', '🛋️', 'Shop'], ['homes', '🏠', 'Homes'], ['groceries', '🛒', 'Groceries'], ['recipes', '🍳', 'Recipes'], ['market', '🏷️', 'Market'], ['jobs', '💼', 'Employment'], ['travel', '🧭', 'Travel to']];
   const sellValue = (d, used) => Math.max(10, Math.round(d.xp * (used ? 0.3 : 0.5) / 10) * 10);
@@ -2821,13 +2827,14 @@
     if (app === 'farm') body = `${back}<h3>🚜 Farm</h3>${O.E ? O.E.farmHtml() : ''}`;
     if (app === 'grownups') body = `<button class="ih-ph-back" data-a="app" data-app="bank">‹ Banking</button><h3>For grown-ups</h3>${O.E ? O.E.grownHtml() : ''}`;
     if (app === 'slip') { const e = (O.st.ledger || []).find(x => x.id === O.slipId); body = `<button class="ih-ph-back" data-a="app" data-app="bank">‹ Banking</button>${e && e.slip ? IH.slip(e.slip, e.at) : '<p class="ih-ph-sub">That slip has gone.</p>'}`; }
-    if (app === 'groceries' && K) body = `${back}<h3>Groceries</h3><p class="ih-ph-sub">Food for your fridge and pantry. Your character cooks with it.</p><div class="ih-ph-list">${Object.entries(K.FOOD).map(([id, x]) => `<div class="ih-ph-row"><span class="ih-ph-e">${x.emoji}</span><span><b>${esc(x.name)}</b><small>${f[id] ? `${f[id]} in the ${x.where}` : `None in the ${x.where}`}</small></span><button class="ih-b1 ih-ph-btn" data-a="gbuy" data-f="${id}" ${w.left < x.xp ? 'disabled' : ''}>✨ ${x.xp}</button></div>`).join('')}</div>`;
+    if (app === 'groceries' && K) body = `${back}<h3>Groceries</h3><p class="ih-ph-sub">Food for your fridge and pantry. Your character cooks with it.</p>${qtyBar('app:groceries')}<div class="ih-ph-list">${Object.entries(K.FOOD).map(([id, x]) => `<div class="ih-ph-row"><span class="ih-ph-e">${x.emoji}</span><span><b>${esc(x.name)}</b><small>${f[id] ? `${f[id]} in the ${x.where}` : `None in the ${x.where}`}</small></span><button class="ih-b1 ih-ph-btn" data-a="gbuy" data-f="${id}" ${w.left < x.xp ? 'disabled' : ''}>✨ ${x.xp}</button></div>`).join('')}</div>`;
     if (app === 'recipes' && K) body = `${back}<h3>Recipes</h3><p class="ih-ph-sub">Pick what your character makes next. It needs everything on the list.</p><div class="ih-ph-list">${K.RECIPES.map(r => { const ok = K.has(f, r), next = O.st.recipe === r.id; return `<div class="ih-ph-row"><span class="ih-ph-e">${r.emoji}</span><span><b>${esc(r.name)}</b><small>${r.needs.map(n => `${(f[n] || 0) > 0 ? '✓' : '·'} ${esc(K.FOOD[n].name)}`).join('  ')}</small></span><button class="${next ? 'ih-b2' : 'ih-b1'} ih-ph-btn" data-a="recipe" data-r="${r.id}">${next ? 'Next up' : ok ? 'Make next' : 'Pick'}</button></div>`; }).join('')}</div>`;
     if (app === 'market') {
       const tab = O.mkTab || 'used', tabs = `<div class="ih-seg ih-ph-tabs"><button class="${tab === 'used' ? 'on' : ''}" data-a="mkTab" data-v="used">Buy used</button><button class="${tab === 'sell' ? 'on' : ''}" data-a="mkTab" data-v="sell">Sell</button></div>`;
       let list = '';
       if (tab === 'used') list = usedStock().map(o => { const d = BY[o.t]; return `<div class="ih-ph-row"><img alt="" data-thumb="${d.t}" src="${THUMBS[d.t] || ''}"><span><b>${esc(d.name)}</b><small>${o.fin.c ? `<i class="ih-dot" style="--c:${o.fin.c}"></i>` : ''}${esc(o.cond)} · new ✨ ${nf(d.xp)}</small></span><button class="ih-b1 ih-ph-btn" data-a="usedAsk" data-o="${o.id}" ${w.left < o.xp ? 'disabled' : ''}>✨ ${nf(o.xp)}</button></div>`; }).join('') || '<p class="ih-ph-sub">All sold for today. New things come in tomorrow.</p>';
       else list = DEFS.filter(d => d.xp && spare(d.t) > 0).map(d => boxOf(d.t).map((u, n) => `<div class="ih-ph-row"><img alt="" data-thumb="${d.t}" src="${THUMBS[d.t] || ''}"><span><b>${esc(d.name)}</b><small>${u.fin && u.fin.c ? `<i class="ih-dot" style="--c:${u.fin.c}"></i>` : ''}${u.used ? `Used · ${esc(u.cond || 'Good')}` : 'Bought new'}</small></span><button class="ih-b1 ih-ph-btn" data-a="sell" data-t="${d.t}" data-n="${n}">Sell ✨ ${phoneSell(d, u.used)}</button></div>`).join('')).join('') || '<p class="ih-ph-sub">Nothing spare right now. Put something away from your home and it’ll show here.</p>';
+      if (tab === 'sell' && /data-a="sell"/.test(list)) list = qtyBar('app:market') + list;
       body = `${back}<h3>Market</h3><p class="ih-ph-sub">${tab === 'used' ? 'Second-hand things from other homes, cheaper than new.' : 'Things in Mine you’re not using. Selling here pays half what a village shop or your market stall pays in person.'}</p>${tabs}<div class="ih-ph-list">${list}</div>`;
       O.thumbQ = DEFS.map(d => d.t).filter(t => !THUMBS[t]).slice(0, 40);
     }
@@ -2865,7 +2872,7 @@
   const finishesFor = d => d.apply === 'floor' || d.apply === 'wall' ? [] : d.apply === 'door' ? FINISHES.filter(f => ['plain', 'wood'].includes(f.id)) : d.cover ? FINISHES.filter(f => ['plain', 'weave', 'velvet', 'stripes', 'dots', 'flowers', 'knit'].includes(f.id)) : FINISHES;
   const preview = (d, fin) => { try { const inst = make(d, { fin, w: 2, h: 2.1, wy: 1.45 }); const src = snap(inst.group, 150, 150); inst.group.traverse(m => { if (m.isMesh && m.material !== LK.BASE && m.material !== LK.BASE2 && !m.userData.special) m.material.dispose(); }); return src; } catch (e) { return THUMBS[d.t] || ''; } };
   function buyAsk(d, offer) {
-    const w = wallet(), price = offer ? offer.xp : d.xp, short = w.left < price;
+    const w = wallet(), price = offer ? offer.xp : d.xp, short = w.left < price, many = !offer && !d.apply, nBuy = many ? Math.max(1, qtyN(Math.min(99, Math.floor(w.left / Math.max(1, price))))) : 1;
     const pick = O.pick = O.pick && O.pick.t === d.t && !offer ? O.pick : { t: d.t, c: offer ? offer.fin.c : null, f: offer ? offer.fin.f : 'plain' };
     const fin = { c: pick.c, f: pick.f }, fins = finishesFor(d);
     const sw = choosy(d) && !offer ? `<div class="ih-sw">${[null, ...SWATCHES].map(c => `<button class="${pick.c === c ? 'on' : ''}" data-a="pickC" data-c="${c || ''}" style="--c:${c || 'transparent'}" aria-label="${c ? 'Colour ' + c : 'As it comes'}">${c ? '' : '✦'}</button>`).join('')}</div>` : '';
@@ -2874,7 +2881,7 @@
     sheet(`<div class="ih-ask"><img alt="" src="${choosy(d) ? preview(d, fin) : THUMBS[d.t] || ''}"><h3>${esc(d.name)}${offer ? ` <span class="ih-used">Used · ${esc(offer.cond)}</span>` : ''}</h3>${d.blurb ? `<p>${esc(d.blurb)}</p>` : ''}
       ${sw}${fs}${where}
       <p class="ih-ask-p">✨ <b>${nf(price)}</b> XP${offer ? ` <s>${nf(d.xp)}</s>` : ''}</p>${short ? `<p class="ih-ask-s">You have ${nf(w.left)} XP. Finish a mission or a lesson to earn more.</p>` : ''}
-      <div class="ih-row"><button class="ih-b2" data-a="${offer ? 'app' : 'sheetX'}" data-app="market">Not now</button><button class="ih-b1" data-a="buy" data-t="${d.t}" ${offer ? `data-o="${offer.id}"` : ''} ${short ? 'disabled' : ''}>Buy it</button></div></div>`, 'small');
+      ${many ? qtyBar('buy:' + d.t) : ''}<div class="ih-row"><button class="ih-b2" data-a="${offer ? 'app' : 'sheetX'}" data-app="market">Not now</button><button class="ih-b1" data-a="buy" data-t="${d.t}" ${offer ? `data-o="${offer.id}"` : ''} ${short ? 'disabled' : ''}>${many && nBuy > 1 ? `Buy ${nBuy} · ✨ ${nf(nBuy * price)}` : 'Buy it'}</button></div></div>`, 'small');
     O.askOffer = offer || null;
   }
   // A floor or wall covering for one room of this home, or a new front door.
@@ -2893,17 +2900,19 @@
   function buy(t, offerId) {
     const d = BY[t], w = wallet(), offer = offerId ? usedStock().find(o => o.id === offerId) : null, price = offer ? offer.xp : d && d.xp; if (!d || w.left < price) return;
     const fin = offer ? offer.fin : O.pick && O.pick.t === t && (O.pick.c || (O.pick.f && O.pick.f !== 'plain')) ? { c: O.pick.c, f: O.pick.f } : null;
-    wSpend(price, `${d.name}${offer ? ' (used)' : ''}`, offer ? 'CHORECAST MARKET' : 'CHORECAST SHOP'); sound('buy'); closeSheet(); ui(true);
+    const nB = offer || d.apply ? 1 : Math.max(1, qtyN(Math.min(99, Math.floor(w.left / Math.max(1, price)))));
+    wSpend(price * nB, `${nB > 1 ? nB + ' × ' : ''}${d.name}${offer ? ' (used)' : ''}`, offer ? 'CHORECAST MARKET' : 'CHORECAST SHOP'); sound('buy'); closeSheet(); ui(true);
+    if (nB > 1) { O.st.owned[t] = (O.st.owned[t] || 0) + nB - 1; for (let q = 1; q < nB; q++) { const b = boxOf(t); b.pop(); b.unshift({ fin, used: 0 }); } }
     if (offer) { const ub = (O.st.usedBought = O.st.usedBought && O.st.usedBought.day === offer.day ? O.st.usedBought : { day: offer.day, ids: [] }); ub.ids.push(offer.id); }
     if (O.opts.track) O.opts.track(offer ? 'home.buyUsed' : 'home.buy', { t, xp: price, fin });
     if (d.apply) { save(); return d.apply === 'door' ? (O.pendingReno = { t, fin, used: !!offer }, applyReno(0)) : roomAsk(d, fin, !!offer); }
     O.st.owned[t] = (O.st.owned[t] || 0) + 1; const b = boxOf(t); b.pop(); b.unshift({ fin, used: offer ? 1 : 0, cond: offer && offer.cond }); save();
-    if (O.away) { toast(`${d.name} is yours! It’s in Mine, ready to set out at home.`); if (O.opts.track) O.opts.track('village.buy', { t, xp: price, used: !!offer }); return; } // (bought in a village shop: it goes home with you)
+    if (O.away) { toast(nB > 1 ? `${nB} × ${d.name} are yours! They’re in Mine, ready to set out at home.` : `${d.name} is yours! It’s in Mine, ready to set out at home.`); if (O.opts.track) O.opts.track('village.buy', { t, xp: price, used: !!offer }); return; } // (bought in a village shop: it goes home with you)
     if (offer) { toast(`${d.name} is yours. It's in Mine.`); return phone('market'); }
     // an upgrade takes the place of what it upgrades (that one goes to Mine)
     const old = d.up && items().find(it => it.t === d.up && fits(d, { ...it, t }, it.id).ok);
     if (old) { dropInst(old.id); old.t = t; addInst(old); save(); toast(`${d.name} is in. Your old one is in Mine.`); return; }
-    startNew(d);
+    startNew(d); if (nB > 1) toast(`${nB} bought. Place this one; the other ${nB - 1} are in Mine.`);
   }
   function startNew(d) {
     const spot = freeSpot(d); if (!spot) { toast(d.cover ? 'Hang a window first, then drop this on it.' : d.opening ? 'Turn the view so an outside wall with room faces you.' : 'There’s no room for that here. Put something away, or try another room.'); O.cat = 'mine'; ui(); return; }
@@ -2976,12 +2985,13 @@
     if (a === 'phone') { sound('pop'); return phone('home'); }
     if (a === 'goTo') { closeSheet(); return travelTo(el.dataset.w); }
     if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || !isleOpen(i.id) || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); return phone('travel'); }
-    if (a === 'pSell') { const id = el.dataset.k, P = PRODUCE[id]; if (!P) return; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return; if (P.goods) g[id] -= 1; else f[id] -= 1; const pr = O.E ? O.E.price(P.price) : P.price; farmIn(pr, `sold ${P.one} at the grocer`, [[cap(P.one), pr]]); save(); sound('buy'); ui(true); toast(`Sold ${P.one}: ✨ ${pr} into your farm account.`); return produceSheet(); }
+    if (a === 'qty') { setQty(el.dataset.q); const r = el.dataset.r || ''; if (r === 'produce') return produceSheet(); if (r.startsWith('counter:')) return counterSheet(r.slice(8)); if (r.startsWith('app:')) return phone(r.slice(4)); if (r.startsWith('buy:')) { const d = BY[r.slice(4)]; if (d) buyAsk(d); } return; }
+    if (a === 'pSell') { const id = el.dataset.k, P = PRODUCE[id]; if (!P) return; const f = food(), g = goods(), n = qtyN(P.goods ? g[id] || 0 : f[id] || 0); if (!n) return; if (P.goods) g[id] -= n; else f[id] -= n; const pr = O.E ? O.E.price(P.price) : P.price; farmIn(pr * n, `sold ${n > 1 ? n + ' × ' + P.one : P.one} at the grocer`, [[n > 1 ? `${n} × ${cap(P.one)} at ✨ ${pr}` : cap(P.one), pr * n]]); save(); sound('buy'); ui(true); toast(`Sold ${n > 1 ? n + ' × ' + P.one : P.one}: ✨ ${pr * n} into your farm account.`); return produceSheet(); }
     if (a === 'app') { const ap = el.dataset.app; O.pick = null; if (ap === 'shop') { closeSheet(); return shopApp(); } if (ap === 'homes') { closeSheet(); return homesSheet(); } return phone(ap); }
-    if (a === 'gbuy') { const id = el.dataset.f, x = IH.kitchen && IH.kitchen.FOOD[id], w = wallet(); if (!x || w.left < x.xp) return; wSpend(x.xp, x.name ? x.name.toLowerCase() : id, 'GROCERIES APP'); const f = food(); f[id] = (f[id] || 0) + 1; save(); sound('buy'); if (O.opts.track) O.opts.track('home.food', { food: id, xp: x.xp }); return phone('groceries'); }
+    if (a === 'gbuy') { const id = el.dataset.f, x = IH.kitchen && IH.kitchen.FOOD[id], w = wallet(); if (!x || w.left < x.xp) return; const n = qtyN(Math.min(99, Math.floor(w.left / x.xp))), nm = x.name ? x.name.toLowerCase() : id; wSpend(x.xp * n, n > 1 ? `${n} × ${nm}` : nm, 'GROCERIES APP'); const f = food(); f[id] = (f[id] || 0) + n; save(); sound('buy'); if (n > 1) toast(`${n} × ${nm} into the ${x.where}.`); if (O.opts.track) O.opts.track('home.food', { food: id, xp: x.xp * n, n }); return phone('groceries'); }
     if (a === 'recipe') { st.recipe = st.recipe === el.dataset.r ? null : el.dataset.r; save(); sound('pop'); return phone('recipes'); }
-    if (a === 'sell') { const d = BY[el.dataset.t]; if (!d || spare(d.t) <= 0) return; const b = boxOf(d.t), u = b.splice(+el.dataset.n || 0, 1)[0] || {}, v = phoneSell(d, u.used); st.owned[d.t] -= 1; wGain(v, `sold on the Market app: ${d.name}`, 'MARKET APP', [[d.name + (u.used ? ' (used)' : ''), sellValue(d, u.used)], ['Market app: 50% less than in person', v - sellValue(d, u.used)]]); save(); sound('buy'); toast(`Sold. ✨ ${v} XP back. In person, at a village shop or your stall, you’d get more.`); if (O.opts.track) O.opts.track('home.sell', { t: d.t, xp: v, used: !!u.used }); return phone('market'); }
-    if (a === 'vSell') { const d = BY[el.dataset.t]; if (!d || spare(d.t) <= 0) return; const b = boxOf(d.t), u = b.splice(+el.dataset.n || 0, 1)[0] || {}, v = sellValue(d, u.used); st.owned[d.t] -= 1; wGain(v, `sold in person: ${d.name}`, 'HOSHI STREET SHOPS'); save(); sound('buy'); toast(`Sold! ✨ ${v} XP for the ${d.name.toLowerCase()}.`); if (O.opts.track) O.opts.track('village.sell', { t: d.t, xp: v, used: !!u.used }); return counterSheet(el.dataset.k); }
+    if (a === 'sell') { const d = BY[el.dataset.t]; if (!d || spare(d.t) <= 0) return; const b = boxOf(d.t), n = qtyN(spare(d.t)), us = [b.splice(+el.dataset.n || 0, 1)[0] || {}, ...b.splice(0, n - 1)]; let v = 0, full = 0; for (const u of us) { v += phoneSell(d, u.used); full += sellValue(d, u.used); } st.owned[d.t] -= us.length; const nm = us.length > 1 ? `${us.length} × ${d.name}` : d.name + (us[0].used ? ' (used)' : ''); wGain(v, `sold on the Market app: ${nm}`, 'MARKET APP', [[nm, full], ['Market app: 50% less than in person', v - full]]); save(); sound('buy'); toast(`Sold${us.length > 1 ? ' ' + us.length : ''}. ✨ ${v} XP back. In person, at a village shop or your stall, you’d get more.`); if (O.opts.track) O.opts.track('home.sell', { t: d.t, xp: v, n: us.length }); return phone('market'); }
+    if (a === 'vSell') { const d = BY[el.dataset.t]; if (!d || spare(d.t) <= 0) return; const b = boxOf(d.t), n = qtyN(spare(d.t)), us = [b.splice(+el.dataset.n || 0, 1)[0] || {}, ...b.splice(0, n - 1)]; let v = 0; for (const u of us) v += sellValue(d, u.used); st.owned[d.t] -= us.length; const nm = us.length > 1 ? `${us.length} × ${d.name}` : d.name; wGain(v, `sold in person: ${nm}`, 'HOSHI STREET SHOPS'); save(); sound('buy'); toast(`Sold! ✨ ${v} XP for ${us.length > 1 ? nm.toLowerCase() : 'the ' + d.name.toLowerCase()}.`); if (O.opts.track) O.opts.track('village.sell', { t: d.t, xp: v, n: us.length }); return counterSheet(el.dataset.k); }
     if (a === 'kidDo') { const x = O.acts && O.acts[+el.dataset.i]; actsClose(); if (x) { x.run(); sound('place'); } return; }
     if (a === 'mkTab') { O.mkTab = el.dataset.v; return phone('market'); }
     if (a === 'bkTab') { O.bkTab = el.dataset.v; return phone('bank'); }
