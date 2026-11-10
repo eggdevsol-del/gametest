@@ -1059,26 +1059,37 @@
     T0.list = list; const was = $('.vg-trpick', V.ui), pickOpen = was ? was.open : false;
     gamePanel(`<div class="vg-gh"><b>🔁 Trading with ${esc(who.name)}</b><button class="vg-x" data-v="gclose" aria-label="Call it off">✕</button></div>
       <div class="vg-tr"><div><h4>You give</h4><div class="vg-gb vg-mine">${M.items.map((r, i) => `<button data-v="trdel" data-i="${i}" class="on">${chip(r)} ✕</button>`).join('') || '<small>Nothing yet</small>'}</div>
-        <div class="vg-trxp">✨ <b>${M.xp}</b> XP <button data-v="trxp" data-n="10">+10</button><button data-v="trxp" data-n="50">+50</button><button data-v="trxp" data-n="0">0</button></div></div>
-      <div><h4>${esc(who.name)} gives ${okThem ? '✅' : ''}</h4><div class="vg-gb vg-mine">${theirs.items.map(r => `<button disabled class="on">${chip(r)}</button>`).join('') || '<small>Nothing yet</small>'}</div><div class="vg-trxp">✨ <b>${theirs.xp}</b> XP</div></div></div>
+        ${(M.produce || []).length ? `<div class="vg-gb vg-mine">${M.produce.map((p0, i) => `<button data-v="trpdel" data-i="${i}" class="on">${p0.e} ${esc(p0.name)} ×${p0.n} ✕</button>`).join('')}</div>` : ''}
+        <div class="vg-trxp">✨ <b>${M.xp}</b> XP from your <button data-v="trfrom" class="vg-trfrom">${M.from === 'farm' ? '🚜 farm account' : '👛 wallet'}</button> <button data-v="trxp" data-n="10">+10</button><button data-v="trxp" data-n="50">+50</button><button data-v="trxp" data-n="0">0</button></div></div>
+      <div><h4>${esc(who.name)} gives ${okThem ? '✅' : ''}</h4><div class="vg-gb vg-mine">${theirs.items.map(r => `<button disabled class="on">${chip(r)}</button>`).join('')}${(theirs.produce || []).map(p0 => `<button disabled class="on">${p0.e} ${esc(p0.name)} ×${p0.n}</button>`).join('') || (theirs.items.length ? '' : '<small>Nothing yet</small>')}</div><div class="vg-trxp">✨ <b>${theirs.xp}</b> XP</div></div></div>
+      ${sh.produceList ? `<details class="vg-trpick"><summary>Add farm goods</summary><div class="vg-gb vg-mine">${sh.produceList().map(p0 => `<button data-v="trpadd" data-k="${p0.id}">${p0.e} ${esc(p0.name)} <small>&nbsp;you have ${p0.have - ((M.produce || []).find(q => q.id === p0.id) || { n: 0 }).n}</small></button>`).join('') || '<small>No farm goods to trade</small>'}</div></details>` : ''}
       <details class="vg-trpick"${pickOpen ? ' open' : ''}><summary>Add from Mine (${M.items.length} / 6)</summary><div class="vg-gb vg-mine">${list.slice(0, 30).map((it, i) => inMine(it) ? '' : `<button data-v="tradd" data-i="${i}" ${M.items.length >= 6 ? 'disabled' : ''}>${chip(it)}</button>`).join('') || '<small>Mine is empty.</small>'}</div></details>
       <div class="vg-gb vg-go"><button data-v="trok" ${okMe ? 'disabled' : ''}><span class="e">🤝</span>${okMe ? `Agreed. Waiting for ${esc(who.name)}…` : 'Agree'}</button></div>`);
   }
   function tradeUi(a, b) {
     const T0 = V.trade, N = NET(); if (!T0) return; const M = T0.mine, sh = V.stage.shop;
-    const push = () => { N.send({ t: 'give', id: T0.id, items: M.items.map(r => ({ t: r.t, fin: r.fin, used: r.used, cond: r.cond, price: r.price })), xp: M.xp }, true); sound('tap'); };
+    const push = () => { N.send({ t: 'give', id: T0.id, items: M.items.map(r => ({ t: r.t, fin: r.fin, used: r.used, cond: r.cond, price: r.price })), produce: (M.produce || []).map(q => ({ id: q.id, n: q.n, e: q.e, name: q.name })), xp: M.xp, from: M.from || 'wallet' }, true); sound('tap'); };
     if (a === 'tryes') return N.send({ t: 'yes', id: T0.id }, true);
     if (a === 'trok') { sound('pop'); return N.send({ t: 'ok', id: T0.id }, true); }
     if (a === 'tradd') { const it = T0.list && T0.list[+b.dataset.i]; if (it && M.items.length < 6) { M.items.push(it); push(); } return; }
     if (a === 'trdel') { M.items.splice(+b.dataset.i, 1); return push(); }
-    if (a === 'trxp') { const n = +b.dataset.n, left = sh.wallet().left; M.xp = n ? Math.min(left, M.xp + n) : 0; if (n && M.xp === left) toast('That’s all your XP.'); return push(); }
+    if (a === 'trfrom') { M.from = M.from === 'farm' ? 'wallet' : 'farm'; const left = M.from === 'farm' ? sh.farmAcct().bal : sh.wallet().left; M.xp = Math.min(M.xp, Math.floor(left)); return push(); }
+    if (a === 'trpadd') { const p0 = sh.produceList().find(q => q.id === b.dataset.k); if (!p0) return; M.produce = M.produce || []; const q = M.produce.find(x => x.id === p0.id); if (q) { if (q.n < p0.have) q.n++; } else M.produce.push({ id: p0.id, n: 1, e: p0.e, name: p0.name }); return push(); }
+    if (a === 'trpdel') { (M.produce || []).splice(+b.dataset.i, 1); return push(); }
+    if (a === 'trxp') { const n = +b.dataset.n, left = M.from === 'farm' ? Math.floor(sh.farmAcct().bal) : sh.wallet().left; M.xp = n ? Math.min(left, M.xp + n) : 0; if (n && M.xp === left) toast('That’s all your XP.'); return push(); }
   }
   function tradeDone(d, me, other, who) {
     const sh = V.stage.shop, mine = d.give[me] || { items: [], xp: 0 }, theirs = d.give[other] || { items: [], xp: 0 };
     // mine out (each matched afresh in Mine: what it is, its finish, used or not), theirs in, the XP both ways
     for (const r of mine.items) { const L = sh.mine(), it = L.find(q => q.t === r.t && !!q.used === !!r.used && JSON.stringify(q.fin || null) === JSON.stringify(r.fin || null)) || L.find(q => q.t === r.t); if (it) sh.tradeOut(it.t, it.n); }
     for (const r of theirs.items) if (IH.items.BY[r.t]) sh.tradeIn(r);
-    sh.xp(theirs.xp - mine.xp); xp();
+    // farm goods both ways; the XP out of whichever account it was offered from, and in: to the farm account when
+    // farm goods were sold, otherwise the wallet (each on the ledger, on a slip)
+    for (const q of mine.produce || []) for (let i = 0; i < q.n; i++) sh.useProduce && sh.useProduce(q.id);
+    for (const q of theirs.produce || []) sh.addProduce && sh.addProduce(q.id, q.n);
+    if (mine.xp) { if (mine.from === 'farm' && sh.farmOut) sh.farmOut(mine.xp, `paid ${who.name} in a trade`); else sh.xp(-mine.xp, `paid ${who.name} in a trade`); }
+    if (theirs.xp) { if ((mine.produce || []).length && sh.farmIn) sh.farmIn(theirs.xp, `sold farm goods to ${who.name}`); else sh.xp(theirs.xp, `from ${who.name} in a trade`); }
+    xp();
     V.trade = null; $('.vg-game', V.ui).hidden = true; float(V.kid, '🤝'); sound('buy');
     toast(`Traded with ${who.name}! ${theirs.items.length ? 'What you got is in Mine.' : ''}`);
   }

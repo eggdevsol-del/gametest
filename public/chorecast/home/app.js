@@ -812,6 +812,30 @@
   const PAYS = [60, 100, 150], SERVICE = 200;
   const family = () => (O.opts.family ? O.opts.family() : O.opts.demo ? [{ id: 'demo-mika', name: 'Mika', avatar: '🐼', hue: '#ff9fae', mower: true }] : []).filter(k => k.id !== O.kid.id);
   const myJob = () => JOBS.all().find(j => j.from === O.kid.id && j.home === O.st.cur && j.kind === 'mow' && j.state !== 'done');
+  // ---------- farm jobs for brothers and sisters (economy plan, phase 7): the wage is set aside from the farm account
+  // when the job goes up, and paid into the sibling's wallet, on a pay slip, when it's done (on the farm's save: farm.js)
+  const FARM_JOBS = { feed: ['🌾', 'Feed all my animals', 30], eggs: ['🥚', 'Collect my eggs', 20], water: ['💧', 'Water my field beds', 25] };
+  const myFarmJobs = () => JOBS.all().filter(j => j.kind === 'farm' && j.from === O.kid.id && j.state !== 'done');
+  function farmHireHtml() {
+    if (!O.st.farm || O.st.farm.v !== 2) return '';
+    const mine = myFarmJobs(), up = new Set(mine.map(j => j.task));
+    return `<h4 class="ih-ph-h4">Farm jobs</h4><p class="ih-ph-sub">Pay a brother or sister to help on your farm. The wage comes out of your farm account now and goes to them when it’s done.</p><div class="ih-ph-list">${mine.map(j => `<div class="ih-ph-row"><span class="ih-ph-e">${FARM_JOBS[j.task][0]}</span><span><b>${FARM_JOBS[j.task][1]} · ✨ ${j.pay}</b><small>${j.state === 'open' ? 'Waiting for someone to take it' : `${esc(j.byName)} has taken it`}</small></span>${j.state === 'open' ? `<button class="ih-b2 ih-ph-btn" data-a="fjCancel" data-id="${j.id}">Take down</button>` : ''}</div>`).join('')}${Object.entries(FARM_JOBS).filter(([k]) => !up.has(k)).map(([k, [e, name, pay]]) => `<div class="ih-ph-row"><span class="ih-ph-e">${e}</span><span><b>${name}</b><small>Wage ✨ ${pay}</small></span><button class="ih-b1 ih-ph-btn" data-a="fjPost" data-k="${k}">Post</button></div>`).join('')}</div>`;
+  }
+  function farmWorkHtml() {
+    const fam = family().map(k => k.id), L = JOBS.all().filter(j => j.kind === 'farm' && j.from !== O.kid.id && (!fam.length || fam.includes(j.from)) && (j.state === 'open' || (j.state === 'taken' && j.by === O.kid.id)));
+    if (!L.length) return '';
+    return `<h4 class="ih-ph-h4">Farm jobs</h4><div class="ih-ph-list">${L.map(j => `<div class="ih-ph-row"><span class="ih-ph-e">${FARM_JOBS[j.task][0]}</span><span><b>${esc(j.fromName)}: ${FARM_JOBS[j.task][1].replace('my', 'their')} · ✨ ${j.pay}</b><small>${j.state === 'open' ? 'Paid when it’s done' : 'Yours. Do it, then tap Done'}</small></span>${j.state === 'open' ? `<button class="ih-b1 ih-ph-btn" data-a="fjTake" data-id="${j.id}">Take it</button>` : `<button class="ih-b1 ih-ph-btn" data-a="fjDone" data-id="${j.id}">Done</button>`}</div>`).join('')}</div>`;
+  }
+  // a job done: the farm's save gets the work, the worker's wallet the wage (both on the ledger, with the slip)
+  function farmJobDone(j, workerId, workerName) {
+    const [, name] = FARM_JOBS[j.task], mineFarm = j.from === O.kid.id, hst = mineFarm ? O.st : store.load(j.from), what = IH.farmChores ? IH.farmChores(j.task, hst) : '';
+    if (!mineFarm) store.save(j.from, hst);
+    const slip = slipOf('CHORECAST FARM PAYROLL', 'Pay slip', [[`${name.replace('my', 'their')} (for ${j.fromName})`, j.pay]], [['Gross pay', j.pay], ['Net pay', j.pay, 'big']], `${workerName} ${what}.`);
+    if (workerId === O.kid.id) { O.st.spent = (O.st.spent || 0) - j.pay; led('wallet', j.pay, `Wage from ${j.fromName}: ${name.toLowerCase().replace('my', 'their')}`, slip); }
+    else { const ws = store.load(workerId); ws.jobPay = (ws.jobPay || 0) + j.pay; (ws.ledger = ws.ledger || []).unshift({ id: uid(), at: Date.now(), acct: 'wallet', amt: j.pay, memo: `Wage from ${j.fromName}: ${name.toLowerCase().replace('my', 'their')}`, slip }); store.save(workerId, ws); }
+    const l = JOBS.all(), x = l.find(q => q.id === j.id); if (x) { x.state = 'done'; x.doneAt = Date.now(); x.what = what; JOBS.save(l); }
+    return what;
+  }
   function postJob(pay, service) {
     const w = wallet(); if (w.left < pay || myJob()) return;
     wSpend(pay, service ? 'a lawn mowing service' : 'a mowing job for a brother or sister', 'CHORECAST JOBS'); save(); const l = JOBS.all();
@@ -857,6 +881,8 @@
     const g = lawnGrowth(); if (!O.mowing) O.lawn.userData.U.uGrow.value = CUT + g * 0.9; // (as in the app: short when mown, long after a few days)
     { const U = O.lawn.userData.U, k = clamp((U.uGrow.value - CUT) / (U.uLong.value - CUT), 0, 1); U.uTop.value = CUT * BLADE_H + k * (1.12 * U.uLong.value * BLADE_H - CUT * BLADE_H); } // (the shells span just the grass's height)
     const job = myJob();
+    // (the demo's brother or sister takes a posted farm job after a little while, then does it)
+    if (O.opts.demo && family()[0]) { const m = family()[0], l = JOBS.all(); let ch = false; for (const j of l) { if (j.kind !== 'farm' || j.from !== O.kid.id) continue; if (j.state === 'open' && Date.now() - j.at > 15000) { Object.assign(j, { state: 'taken', by: m.id, byName: m.name, takenAt: Date.now() }); ch = true; } else if (j.state === 'taken' && j.by === m.id && Date.now() - (j.takenAt || 0) > 20000) { JOBS.save(l); const what = farmJobDone(j, m.id, m.name); save(); toast(`${m.name} ${what} on your farm, and got their ✨ ${j.pay} wage.`); return; } } if (ch) JOBS.save(l); }
     if (O.opts.demo && job && job.state === 'open' && Date.now() - job.at > 15000) { const l = JOBS.all(), j = l.find(x => x.id === job.id), m = family()[0]; if (j && m) { j.state = 'taken'; j.by = m.id; j.byName = m.name; j.byAvatar = m.avatar; JOBS.save(l); } }
     const vis = insts.get('__visit'); if (vis && vis.visitor.step >= 3 && (vis.visitor.step === 4 || Date.now() > vis.visitor.until)) { dropInst('__vmower'); dropInst('__visit'); } // off home through the gate
     const taken = myJob(); if (taken && taken.state === 'taken' && !insts.has('__visit') && !O.mowing) visitor(taken);
@@ -2402,9 +2428,39 @@
     truffle: { name: 'Truffles', one: 'a truffle', e: '🍄', price: 40, goods: true }, orange: { name: 'Oranges', one: 'an orange', e: '🍊', price: 20, goods: true }, olive: { name: 'Olives', one: 'a bag of olives', e: '🫒', price: 16, goods: true }, tea: { name: 'Tea', one: 'a bag of tea', e: '🍵', price: 30, goods: true }, rice: { name: 'Rice', one: 'a bag of rice', e: '🌾', price: 25, goods: true }, jam: { name: 'Jam', one: 'a jar of jam', e: '🫙', price: 85, goods: true } };
   const goods = () => (O.st.goods = O.st.goods || {});
   function farmState() { const f = (O.st.farm = O.st.farm || { animals: { hen: 3, goat: 1 }, got: {}, fed: 0 }); f.got = f.got || {}; return f; }
+  // ---------- the family contract (economy plan, phase 7): each week the village orders a few things from the family's
+  // farms, at the grocer; brothers and sisters fill it together, and the reward is split by what each delivered. Not
+  // filled by Sunday, everyone's paid the usual price for what they brought. Kept on this device for the family.
+  const CONTRACTS = [[['egg', 30], ['milk', 10]], [['wool', 4], ['honey', 4]], [['jam', 3], ['apple', 10]], [['carrot', 20], ['lettuce', 8]]];
+  const CK = 'cc:village:contract';
+  function contract() {
+    let c0 = null; try { c0 = JSON.parse(localStorage.getItem(CK) || 'null'); } catch (e) { c0 = null; }
+    const d = Math.floor((Date.now() - new Date().getTimezoneOffset() * 6e4) / 864e5), wk = Math.floor((d + 3) / 7);
+    if (!c0 || c0.wk !== wk) {
+      if (c0 && !c0.done) settle(c0, false);
+      const L = CONTRACTS[wk % CONTRACTS.length], value = L.reduce((t, [id, n]) => t + n * PRODUCE[id].price, 0);
+      c0 = { wk, items: L.map(([id, n]) => ({ id, need: n, got: {} })), reward: Math.round(value * 1.5 / 10) * 10, names: {}, done: false }; putContract(c0);
+    }
+    return c0;
+  }
+  const putContract = c0 => { try { localStorage.setItem(CK, JSON.stringify(c0)); } catch (e) { /* this visit only */ } };
+  // paying out: in full shares when it's filled, or the usual price for each thing when the week ran out
+  function settle(c0, full) {
+    const by = {}; let total = 0; for (const it of c0.items) for (const [k, n] of Object.entries(it.got)) { const v = n * PRODUCE[it.id].price; by[k] = (by[k] || 0) + v; total += v; }
+    for (const [k, v] of Object.entries(by)) {
+      const amt = full ? Math.round(c0.reward * v / total) : v, memo = full ? `Family contract: your share of ✨ ${nf(c0.reward)}` : 'Family contract ran out: paid for what you brought', sl = slipOf('HOSHI STREET', 'Contract payment', [[full ? 'Your share (by what you delivered)' : 'What you delivered, at the usual price', amt]], [['Into the farm account', amt, 'big']], full ? `Split between ${Object.keys(by).map(x => c0.names[x] || 'you').join(' and ')}.` : '');
+      if (k === O.kid.id) { farmAcct().bal += amt; led('farm', amt, memo, sl); if (O.E) O.E.sale(amt); } else { const ws = store.load(k), a = (ws.farmAcct = ws.farmAcct || { bal: 0, invested: 0, wageDay: -1 }); a.bal += amt; (ws.ledger = ws.ledger || []).unshift({ id: uid(), at: Date.now(), acct: 'farm', amt, memo, slip: sl }); store.save(k, ws); }
+    }
+    c0.done = true; putContract(c0); save();
+  }
+  function contractHtml() {
+    const c0 = contract(), f = food(), g = goods(), mine = it => it.got[O.kid.id] || 0, sum = it => Object.values(it.got).reduce((t, n) => t + n, 0);
+    if (c0.done) return `<div class="ih-cc-card"><p><b>📜 This week’s family contract is filled!</b></p><p class="ih-ph-sub">A new order comes on Monday.</p></div>`;
+    return `<div class="ih-cc-card"><p><b>📜 Family contract: the café’s order</b></p><p class="ih-ph-sub">Fill it with your brothers and sisters by Sunday: ✨ ${nf(c0.reward)} split by what each of you brings.</p><div class="ih-ph-list">${c0.items.map(it => { const P = PRODUCE[it.id], have = P.goods ? g[it.id] || 0 : f[it.id] || 0, left = it.need - sum(it); return `<div class="ih-ph-row"><span class="ih-ph-e">${P.e}</span><span><b>${P.name}: ${sum(it)} of ${it.need}</b><small>You’ve brought ${mine(it)}${Object.keys(it.got).filter(k => k !== O.kid.id).map(k => ` · ${esc(c0.names[k] || 'a sibling')} ${it.got[k]}`).join('')}</small></span>${left > 0 && have ? `<button class="ih-b1 ih-sm" data-a="ctGive" data-k="${it.id}">Bring ${Math.min(have, left)}</button>` : ''}</div>`; }).join('')}</div></div>`;
+  }
   function produceSheet() {
     const f = food(), g = goods(), L = Object.entries(PRODUCE).filter(([id, P]) => (P.goods ? g[id] : f[id]) > 0);
-    sheet(`<div class="ih-sh-h"><h3>Sell your produce</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div><p class="ih-ph-sub">From your farm and the sea. The grocer pays a fair price for each.</p>
+    sheet(`<div class="ih-sh-h"><h3>Sell your produce</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div>${contractHtml()}<p class="ih-ph-sub">From your farm and the sea. The grocer pays a fair price for each.</p>
       <div class="ih-ph-list">${L.length ? L.map(([id, P]) => `<div class="ih-ph-row"><span class="ih-ph-e">${P.e}</span><span><b>${P.name}</b><small>You have ${P.goods ? g[id] : f[id]}${P.goods ? '' : ' (in your fridge)'}</small></span><button class="ih-b1 ih-sm" data-a="pSell" data-k="${id}">✨ ${O.E ? O.E.price(P.price) : P.price}</button></div>`).join('') : '<p class="ih-ph-sub">Nothing to sell yet. Collect eggs, milk and wool on your farm, or catch fish at the beach.</p>'}</div>`);
   }
   function goVillage() {
@@ -2459,6 +2515,9 @@
     // the language islands' markets (lang-islands.js): what there is to sell, at today's price; a sale into the farm account
     produceList() { const f = food(), g = goods(); return Object.entries(PRODUCE).map(([id, P]) => ({ id, name: P.name, one: P.one, e: P.e, have: P.goods ? g[id] || 0 : f[id] || 0, price: O.E ? O.E.price(P.price) : P.price })).filter(x => x.have > 0); },
     sellProduce(id, price, where) { const P = PRODUCE[id]; if (!P) return false; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return false; if (P.goods) g[id] -= 1; else f[id] -= 1; farmIn(price, `sold ${P.one} at ${where}`, [[cap(P.one), price]]); save(); sound('buy'); ui(true); return true; },
+    useProduce(id) { const P = PRODUCE[id]; if (!P) return false; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return false; if (P.goods) g[id] -= 1; else f[id] -= 1; save(); return true; },
+    addProduce(id, n = 1) { const P = PRODUCE[id]; if (!P) return; const box = P.goods ? goods() : food(); box[id] = (box[id] || 0) + n; save(); },
+    farmOut(xp, memo) { const a = farmAcct(); a.bal -= xp; led('farm', -xp, memo, slipOf('CHORECAST FARM', 'Receipt', [[cap(memo), xp]], [['Paid from the farm account', xp, 'big'], ['Farm account after', a.bal, 'muted']])); save(); ui(true); },
     lessonXP(xp, title) { wGain(xp, `lesson: ${title}`, 'CHORECAST LESSONS', [[`Lesson: ${title}`, xp]]); save(); ui(true); sound('buy'); },
     farmPay: (xp, what) => farmPay(xp, what), farmAcct: () => farmAcct(), farmCharge(xp, what) { if (O.E) { O.E.charge(xp, what); ui(true); } }, farmIn(xp, memo) { farmIn(xp, memo); save(); ui(true); },
     hasTool: t => !!(O.st.tools || {})[t], giveTool(t) { (O.st.tools = O.st.tools || {})[t] = Date.now(); save(); },
@@ -2719,10 +2778,11 @@
         if (j) inner += `<div class="ih-ph-row"><span class="ih-ph-e">🚜</span><span><b>Mow the lawn · ✨ ${j.pay}</b><small>${j.state === 'open' ? 'Waiting for someone to take it' : `${esc(j.byName)} is coming to mow`}</small></span>${j.state === 'open' ? '<button class="ih-b2 ih-ph-btn" data-a="jbCancel">Take down</button>' : ''}</div>`;
         else if (hasLawn()) inner += `<p class="ih-ph-sub">Put up a job for a brother or sister with a mower. You pay them with your XP when it’s done.</p><div class="ih-ph-list">${PAYS.map(p => `<div class="ih-ph-row"><span class="ih-ph-e">🚜</span><span><b>Mow my lawn</b><small>Pay ✨ ${p} XP</small></span><button class="ih-b1 ih-ph-btn" data-a="jbPost" data-p="${p}" ${w.left < p ? 'disabled' : ''}>Post</button></div>`).join('')}<div class="ih-ph-row"><span class="ih-ph-e">🧑‍🌾</span><span><b>Lawn service</b><small>Comes straight away</small></span><button class="ih-b1 ih-ph-btn" data-a="jbService" ${w.left < SERVICE ? 'disabled' : ''}>✨ ${SERVICE}</button></div></div>`;
       } else {
-        const fam = family().map(k => k.id), open = JOBS.all().filter(j => j.state === 'open' && j.from !== O.kid.id && (!fam.length || fam.includes(j.from))), mine = JOBS.all().filter(j => j.by === O.kid.id && j.state === 'taken');
+        const fam = family().map(k => k.id), open = JOBS.all().filter(j => j.kind !== 'farm' && j.state === 'open' && j.from !== O.kid.id && (!fam.length || fam.includes(j.from))), mine = JOBS.all().filter(j => j.kind !== 'farm' && j.by === O.kid.id && j.state === 'taken');
         inner = `<p class="ih-ph-sub">Jobs from your brothers and sisters. You need a lawnmower to mow.${O.st.jobPay ? ` You’ve earned ✨ ${nf(O.st.jobPay)} XP from jobs.` : ''}</p><div class="ih-ph-list">${mine.map(j => `<div class="ih-ph-row"><span class="ih-ph-e">✅</span><span><b>Mow ${esc(j.fromName)}’s lawn · ✨ ${j.pay}</b><small>You’ll go over next time their home is open</small></span></div>`).join('')}${open.map(j => `<div class="ih-ph-row"><span class="ih-ph-e">🚜</span><span><b>Mow ${esc(j.fromName)}’s lawn</b><small>Pays ✨ ${j.pay} XP</small></span><button class="ih-b1 ih-ph-btn" data-a="jbTake" data-j="${j.id}">Take it</button></div>`).join('') || (mine.length ? '' : '<p class="ih-ph-sub">No jobs right now.</p>')}</div>`;
-        inner += villageJobsHtml();
+        inner += farmWorkHtml() + villageJobsHtml();
       }
+      if (tab === 'hire') inner += farmHireHtml();
       body = `${back}<h3>Employment</h3>${tabs}${inner}`;
     }
     if (app === 'travel') {
@@ -2867,6 +2927,11 @@
     if (a === 'bkPay') { const s2 = payYourself(+el.dataset.n); if (!s2) return phone('bank'); O.slipId = (O.st.ledger || [])[0].id; toast(`Paid yourself ✨ ${nf(+el.dataset.n)}.`); return phone('slip'); }
     if (a === 'bkInv') { const s2 = invest(+el.dataset.n); if (!s2) return phone('bank'); save(); sound('buy'); ui(true); O.slipId = (O.st.ledger || [])[0].id; toast(`✨ ${nf(+el.dataset.n)} invested in your farm.`); return phone('slip'); }
     if (a === 'jbTab') { O.jbTab = el.dataset.v; return phone('jobs'); }
+    if (a === 'ctGive') { const c0 = contract(), it = c0.items.find(x => x.id === el.dataset.k), P = PRODUCE[el.dataset.k]; if (!it || c0.done) return; const f = food(), g = goods(), have = P.goods ? g[it.id] || 0 : f[it.id] || 0, n = Math.min(have, it.need - Object.values(it.got).reduce((t, x) => t + x, 0)); if (n <= 0) return; if (P.goods) g[it.id] -= n; else f[it.id] -= n; it.got[O.kid.id] = (it.got[O.kid.id] || 0) + n; c0.names[O.kid.id] = O.kid.name || 'You'; putContract(c0); save(); sound('pop'); if (c0.items.every(x => Object.values(x.got).reduce((t, y) => t + y, 0) >= x.need)) { settle(c0, true); sound('buy'); toast(`The café’s order is filled! ✨ ${nf(c0.reward)} shared out by what each of you brought.`); } else toast(`${n} ${P.name.toLowerCase()} brought for the family contract.`); ui(true); return produceSheet(); }
+    if (a === 'fjPost') { const [, name, pay] = FARM_JOBS[el.dataset.k] || []; if (!name || myFarmJobs().some(j => j.task === el.dataset.k)) return; if (!farmPay(pay, `a wage set aside: ${name.toLowerCase()}`)) return; const l = JOBS.all(); l.push({ id: uid(), kind: 'farm', task: el.dataset.k, from: O.kid.id, fromName: O.kid.name || 'Your sibling', pay, at: Date.now(), state: 'open' }); JOBS.save(l); save(); toast('Your farm job is up. A brother or sister can take it.'); return phone('jobs'); }
+    if (a === 'fjCancel') { const l = JOBS.all(), j = l.find(x => x.id === el.dataset.id); if (!j || j.state !== 'open') return; j.state = 'done'; j.cancelled = 1; JOBS.save(l); farmIn(j.pay, `wage back: ${FARM_JOBS[j.task][1].toLowerCase()} taken down`); save(); ui(true); return phone('jobs'); }
+    if (a === 'fjTake') { const l = JOBS.all(), j = l.find(x => x.id === el.dataset.id); if (!j || j.state !== 'open') return; Object.assign(j, { state: 'taken', by: O.kid.id, byName: O.kid.name || 'Your sibling' }); JOBS.save(l); sound('buy'); toast(`You’ve got the job. Do it, then tap Done for your ✨ ${j.pay}.`); return phone('jobs'); }
+    if (a === 'fjDone') { const j = JOBS.all().find(x => x.id === el.dataset.id); if (!j || j.state !== 'taken' || j.by !== O.kid.id) return; const what = farmJobDone(j, O.kid.id, O.kid.name || 'You'); save(); ui(true); sound('buy'); O.slipId = (O.st.ledger || [])[0].id; toast(`Done: you ${what}. ✨ ${j.pay} into your wallet.`); return phone('slip'); }
     if (a === 'jbPost') { postJob(+el.dataset.p, false); ui(true); return phone('jobs'); }
     if (a === 'jbService') { postJob(SERVICE, true); ui(true); return phone('jobs'); }
     if (a === 'jbCancel') { cancelJob(); ui(true); return phone('jobs'); }

@@ -39,8 +39,8 @@
       c.chore(s, 'water', 2.4, () => { V().can -= 1; (b.watered = b.watered || []).push(today()); save(); drawBeds(); c.float(V().kid, '💧'); c.sound('pop'); c.toast(bedStage(b) === 3 ? 'Ready to pick!' : `Watered. ${CROPS[b.crop].days - b.watered.length} more day${CROPS[b.crop].days - b.watered.length === 1 ? '' : 's'} of watering.`); }, null, { tool: 'can', fx: 'drops', at: 'hand', rate: 22, delay: 0.6 });
     }
     function harvest(s) {
-      const b = bedState(s.i), C = CROPS[b.crop];
-      c.chore(s, 'fetch', 2.6, () => { if (C.goods) sh().addGoods(b.crop, C.n); else sh().addFood(b.crop, C.n); for (const k of Object.keys(b)) delete b[k]; save(); drawBeds(); c.float(V().kid, C.e); c.sound('buy'); c.toast(`${C.n} ${C.name}! ${C.goods ? 'On your goods shelf: sell them at the grocer.' : 'Into your fridge at home.'}`); }, null, { tool: 'basket', fx: 'soil', dist: 0.7, y: 0.75, rate: 8 });
+      const b = bedState(s.i), C = CROPS[b.crop], n = C.n + (b.plough ? 1 : 0); // (a bed the plough turned gives one more)
+      c.chore(s, 'fetch', 2.6, () => { if (C.goods) sh().addGoods(b.crop, n); else sh().addFood(b.crop, n); for (const k of Object.keys(b)) delete b[k]; save(); drawBeds(); c.float(V().kid, C.e); c.sound('buy'); c.toast(`${C.n} ${C.name}! ${C.goods ? 'On your goods shelf: sell them at the grocer.' : 'Into your fridge at home.'}`); }, null, { tool: 'basket', fx: 'soil', dist: 0.7, y: 0.75, rate: 8 });
     }
     // ---------- the Orchard terrace
     const ripe = i => { const O = st('orchard'); O.picked = O.picked || {}; const p = O.picked[i]; return !p || Date.now() - p >= 2 * DAY; };
@@ -99,6 +99,16 @@
       setTimeout(() => { const v = V(); if (!v || !v.B.kite) return; const K = v.B.kite; K.position.set(s.at[0] + 3, 0, s.at[1] - 4); K.userData.y = 8; K.visible = true; }, 2500);
     }
 
+    // the field machines (farm.js): straight onto the beds, no watering can, no walking
+    IH.bedOps = {
+      crops: f => Object.keys(CROPS).filter(id => !CROPS[id].special || ((f || {}).specials || {})[CROPS[id].special]),
+      label: id => `${CROPS[id].e} ${CROPS[id].name[0].toUpperCase() + CROPS[id].name.slice(1)}`, name: id => CROPS[id].name, seedCost: id => CROPS[id].seed,
+      empty: i => !bedState(i).crop,
+      plant(i, id) { const b = bedState(i); if (b.crop || !CROPS[id]) return false; Object.assign(b, { crop: id, planted: today(), watered: [] }); save(); return true; },
+      water(i) { const b = bedState(i); if (!b.crop || bedStage(b) === 3 || (b.watered || []).includes(today())) return false; (b.watered = b.watered || []).push(today()); save(); return true; },
+      plough(i) { const b = bedState(i); if (b.crop || b.plough) return false; b.plough = 1; save(); return true; },
+      redraw: () => drawBeds()
+    };
     const acts = {
       // the Veggie plot
       seedshed: () => [{ e: '🌱', label: 'Seeds: pick a bed to plant', run: () => c.toast('Tap an empty bed to plant it. Seeds are paid for there.') }],
