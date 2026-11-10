@@ -17,6 +17,8 @@
   const { Kit } = IH.kit, IB = IH.islandsBuild, K = IB.kit, { rng, bx, sides, board, signpost, gate: hangGate } = K;
   const W = 52, D = 60, DAY = 864e5, today = () => Math.floor(Date.now() / DAY);
   const TRACK = [[24, 0.4, 28, 16], [6, 13, 51, 17], [47.6, 13, 51, 45]], MEADOW = [4, 45.5, 48, 58], BARN = [6.6, 2.2, 17.4, 9.8], FENCE_XP = 8;
+  // the hay yard on the grass in front of the barn: round bales stood on end in two lines, three high (each 6 hay)
+  const YARD = [13.4, 10.0, 17.8, 12.8], YARD_CAP = 18, YARD_DROP = { x: 15.6, z: 14.6 };
 
   // ---------- what there is: animals (price, room each, what they eat, what they make, what they need), fittings, equipment
   const ANIMALS = {
@@ -76,6 +78,7 @@
 
   // ---------- the models: fittings and equipment, all Kit-built like everything else
   function itemModel(t, kk) {
+    if (IH.farmItems && IH.farmItems[t]) return IH.farmItems[t](kk); // (farm-items.js: the detailed models)
     if (t === 'trough') { bx(kk, 3, 0.8, 1.0, 0, 0, 0, '#8f9aa8', { r: 0.06 }); kk.waterBox(2.7, 0.1, 0.7, 0, 0.62, 0, { tint: '#6fc0d8' }); }
     else if (t === 'feeder') { for (const [a, b] of [[-0.8, -0.8], [0.8, -0.8], [-0.8, 0.8], [0.8, 0.8]]) bx(kk, 0.12, 1.4, 0.12, a, 0, b, '#6b4a33'); bx(kk, 1.8, 0.7, 1.8, 0, 0.5, 0, '#c9a173', { r: 0.04 }); kk.ball(0.9, 0, 1.3, 0, '#e8c45a', { s: [1, 0.5, 1], n: 9 }); kk.cone(1.4, 0.6, 0, 1.6, 0, '#7a6a5a', { n: 4, ry: Math.PI / 4 }); }
     else if (t === 'coop') { bx(kk, 3.2, 2.0, 2.2, 0, 0.5, 0, '#f2e1b8', { r: 0.05 }); for (const a of [-1.4, 1.4]) for (const b of [-0.9, 0.9]) kk.cyl(0.08, 0.55, a, 0, b, '#8a6038', { n: 5 }); kk.cone(2.4, 1.0, 0, 2.5, 0, '#5a7aa8', { n: 4, ry: Math.PI / 4, s: [1, 1, 0.8] }); bx(kk, 0.6, 0.7, 0.1, 0, 0.9, 1.12, '#3d2a24'); kk.box(0.4, 0.06, 1.4, 0, 0.3, 1.7, '#c9a173', { rx: 0.5 }); }
@@ -164,8 +167,29 @@
   // wheels) and a flatbed trailer (a drawbar, a deck with rails, two wheels; bales ride on it).
   function implementModel(kind) {
     const g = new T.Group(), k = new Kit(), wheels = [];
-    if (kind === 'baler') { k.box(0.1, 0.1, 1.5, 0, 0.55, 1.1, '#3d4048'); k.box(2.0, 1.4, 1.5, 0, 0.45, -0.1, '#2f8a4f', { r: 0.12 }); k.cyl(0.72, 2.02, 0, 0.92 - 1.01, -0.4, '#26703f', { n: 18, rz: Math.PI / 2 }); k.box(2.2, 0.35, 0.5, 0, 0.12, 0.8, '#e8c45a', { r: 0.06 }); for (let i = 0; i < 6; i++) k.box(0.05, 0.28, 0.05, -0.9 + i * 0.36, 0.1, 1.02, '#8a8f98'); }
-    else { k.box(0.1, 0.1, 1.6, 0, 0.55, 1.4, '#3d4048'); k.box(2.0, 0.18, 2.8, 0, 0.62, -0.4, '#b7834f', { r: 0.04 }); for (const s of [-1, 1]) k.box(0.08, 0.4, 2.8, s * 0.98, 0.8, -0.4, '#8a6038'); k.box(2.0, 0.4, 0.08, 0, 0.8, -1.8, '#8a6038'); }
+    if (kind === 'baler') {
+      // a round baler: the drawbar and PTO shaft up to the hitch, the green body with its panels and decals, the
+      // round chamber with the tailgate seam and hinges, the pickup reel with its rows of tines, the twine box, lights
+      const GR = '#2f8a4f', GD = '#26703f';
+      k.box(0.12, 0.12, 1.5, 0, 0.55, 1.1, '#3d4048'); k.cyl(0.05, 1.3, 0.18, 0.62 - 0.65, 1.15, '#3d4048', { n: 6, rx: Math.PI / 2 }); k.cyl(0.09, 0.3, 0.18, 0.62 - 0.15, 1.3, '#e8c45a', { n: 8, rx: Math.PI / 2 });
+      k.box(2.0, 1.4, 1.5, 0, 0.45, -0.1, GR, { r: 0.12 }); for (const s of [-1, 1]) { k.box(0.03, 1.1, 1.2, s * 1.0, 0.6, -0.1, GD, { r: 0.04 }); k.box(0.03, 0.12, 0.7, s * 1.01, 1.2, 0.1, '#e8c45a', { r: 0.02 }); k.box(0.03, 0.08, 0.5, s * 1.01, 1.02, 0.1, '#ffffff', { r: 0.02 }); }
+      k.cyl(0.72, 2.02, 0, 0.92 - 1.01, -0.4, GD, { n: 18, rz: Math.PI / 2 }); k.cyl(0.735, 0.04, 0, 0.92 - 0.02, -0.4, '#1f5c33', { n: 18, rz: Math.PI / 2 });
+      for (const s of [-1, 1]) { k.cyl(0.1, 0.06, s * 1.03, 0.92 - 0.03, -0.4, '#3d4048', { n: 8, rz: Math.PI / 2 }); k.box(0.12, 0.1, 0.1, s * 1.0, 0.42, -1.05, '#d8433a', { r: 0.03 }); k.box(0.12, 0.1, 0.1, s * 1.0, 0.3, -1.05, '#ffb340', { r: 0.03 }); }
+      k.box(2.2, 0.35, 0.5, 0, 0.12, 0.8, '#e8c45a', { r: 0.06 }); k.cyl(0.14, 2.1, 0, 0.28 - 1.05, 0.98, '#c9a03a', { n: 10, rz: Math.PI / 2 });
+      for (let i = 0; i < 14; i++) for (const a of [0, 2.1, 4.2]) k.box(0.025, 0.2, 0.025, -0.95 + i * 0.146, 0.28 + Math.sin(a) * 0.14, 0.98 + Math.cos(a) * 0.14 + 0.08, '#3d4048', { rx: -a, r: 0 });
+      k.box(0.5, 0.35, 0.4, -0.55, 1.85, 0.25, GR, { r: 0.05 }); k.box(0.46, 0.05, 0.36, -0.55, 2.2, 0.25, GD, { r: 0.02 }); for (let i = 0; i < 3; i++) k.cyl(0.07, 0.05, -0.7 + i * 0.15, 2.2, 0.25, '#f2e6c0', { n: 8 });
+    } else {
+      // a flatbed trailer: the A-frame drawbar with its jack, a planked deck on two runners, the headboard with
+      // its mesh, side rails on stakes, mudguards over the wheels, the tail lights and number plate
+      const RW = '#b7834f', RD = '#8a6038', ST = '#3d4048';
+      for (const s of [-1, 1]) k.box(0.08, 0.08, 1.7, s * 0.28, 0.55, 1.2, ST, { ry: s * -0.17, r: 0.02 }); k.box(0.16, 0.14, 0.24, 0, 0.53, 1.95, ST, { r: 0.04 });
+      k.cyl(0.04, 0.5, 0.25, 0.08, 1.4, '#5d6670', { n: 6 }); k.cyl(0.08, 0.04, 0.25, 0.05, 1.4, ST, { n: 8 }); k.cyl(0.03, 0.15, 0.25, 0.58 - 0.075, 1.4, '#d8433a', { n: 5, rz: Math.PI / 2 });
+      for (const s of [-1, 1]) k.box(0.12, 0.14, 2.9, s * 0.6, 0.5, -0.4, ST, { r: 0.02 });
+      k.box(2.0, 0.12, 2.8, 0, 0.62, -0.4, RW, { r: 0.03 }); for (let i = 0; i < 9; i++) k.box(0.02, 0.125, 2.8, -0.88 + i * 0.22, 0.62, -0.4, RD, { r: 0 });
+      k.box(2.0, 0.7, 0.08, 0, 0.74, 0.98, ST, { r: 0.02 }); for (let i = 0; i < 9; i++) k.box(0.02, 0.62, 0.09, -0.8 + i * 0.2, 0.78, 0.98, '#5d6670', { r: 0 }); for (let i = 0; i < 3; i++) k.box(1.9, 0.02, 0.09, 0, 0.9 + i * 0.18, 0.98, '#5d6670', { r: 0 });
+      for (const s of [-1, 1]) { k.box(0.08, 0.4, 2.8, s * 0.98, 0.8, -0.4, RD, { r: 0.02 }); for (let i = 0; i < 5; i++) k.box(0.1, 0.48, 0.08, s * 1.0, 0.72, 0.85 - i * 0.62, ST, { r: 0.02 }); k.box(0.36, 0.05, 1.0, s * 1.1, 1.0, -0.3, ST, { r: 0.02 }); k.box(0.05, 0.3, 0.6, s * 1.27, 0.72, -0.3, ST, { r: 0.02 }); }
+      k.box(2.0, 0.4, 0.08, 0, 0.8, -1.8, RD, { r: 0.02 }); for (const s of [-1, 1]) { k.box(0.16, 0.1, 0.06, s * 0.82, 0.52, -1.86, '#d8433a', { r: 0.03 }); k.box(0.16, 0.06, 0.06, s * 0.82, 0.45, -1.86, '#ffb340', { r: 0.02 }); } k.box(0.42, 0.14, 0.03, 0, 0.47, -1.86, '#fff6e0', { r: 0.02 });
+    }
     g.add(k.build());
     for (const s of [-1, 1]) { const w = new T.Group(); w.position.set(s * (kind === 'baler' ? 1.12 : 1.1), 0.45, -0.3); const m = wheel(0.45, 0.3); if (s < 0) m.rotation.y = Math.PI; w.add(m); g.add(w); wheels.push(w); }
     const load = new T.Group(); load.position.set(0, 0.72, -0.4); g.add(load);
@@ -173,6 +197,12 @@
   }
   // a round bale of hay, lying on its side
   function baleModel() { const k = new Kit(); k.cyl(0.62, 1.15, 0, -0.575, 0, '#e8c45a', { n: 16, rz: Math.PI / 2 }); for (const s of [-1, 1]) { k.cyl(0.56, 0.02, s * 0.585, -0.01, 0, '#d9b24a', { n: 16, rz: Math.PI / 2 }); k.torus(0.32, 0.02, s * 0.59, 0, 0, '#c9a03a', { ry: Math.PI / 2 }); } const g = k.build(); g.position.y = 0.62; const o = new T.Group(); o.add(g); return o; }
+  // a round bale stood on its end (the yard stacks)
+  function baleUp() { const k = new Kit(); k.cyl(0.62, 1.15, 0, 0, 0, '#e8c45a', { n: 16 }); k.cyl(0.56, 0.02, 0, 1.15, 0, '#d9b24a', { n: 16 }); k.torus(0.32, 0.02, 0, 1.17, 0, '#c9a03a', { rx: Math.PI / 2 }); k.cyl(0.625, 0.05, 0, 0.55, 0, '#f0d98a', { n: 16 }); k.cyl(0.6, 0.03, 0, 0, 0, '#c9a03a', { n: 16 }); const o = new T.Group(); o.add(k.build()); return o; }
+  // where the i-th yard bale stands: the bottom layer first (both lines, west to east), then the next layer up
+  function yardSlot(i) { const L = Math.floor(i / 6), j = i % 6; return { x: YARD[0] + 0.75 + (j % 3) * 1.4, y: L * 1.17, z: YARD[1] + 0.72 + Math.floor(j / 3) * 1.34 }; }
+  // the yard shows the hay in store, a bale for every 6 (what the animals eat comes off the top)
+  function yardSync(B, f) { if (!B.yard) return; const n = Math.min(YARD_CAP, Math.floor(((f.feed && f.feed.hay) || 0) / 6)); while (B.yard.children.length > Math.max(0, n)) B.yard.remove(B.yard.children[B.yard.children.length - 1]); while (B.yard.children.length < n) { const i = B.yard.children.length, s = yardSlot(i), m = baleUp(); m.position.set(s.x, s.y, s.z); m.rotation.y = (i * 1.7) % 6.28; B.yard.add(m); } }
   function fence(k, p, gate, root, gates) {
     const sides = [[[p.x0, p.z0], [p.x1, p.z0], 'n'], [[p.x1, p.z0], [p.x1, p.z1], 'e'], [[p.x1, p.z1], [p.x0, p.z1], 's'], [[p.x0, p.z1], [p.x0, p.z0], 'w']];
     const runs = []; for (const [a, b, s] of sides) { if (s !== gate.side) { runs.push([a, b]); continue; } const L = Math.hypot(b[0] - a[0], b[1] - a[1]), u0 = (L / 2 - 1.6) / L, u1 = (L / 2 + 1.6) / L, at = u => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u]; runs.push([a, at(u0)], [at(u1), b]); if (root) gates.push(hangGate(k, root, at(u0), at(u1))); }
@@ -216,7 +246,18 @@
     board(k, 'meadow', 'HAY MEADOW', 'tractor work: bale it, haul it', '#fff6e0', '#4a7a3a', 3.4, 0.9, MEADOW[2] + 1.2, 1.6, MEADOW[1] + 1.2, -Math.PI / 2);
     f.bales = f.bales || []; const bales = f.bales.map(b => { const m = baleModel(); m.position.set(b.x, 0, b.z); m.rotation.y = b.ry || 0; root.add(m); return { rec: b, g: m }; });
     const lawns = [[0, 0, W, D]], paths = TRACK.map(r => r.slice()).concat([[MEADOW[0] - 0.5, MEADOW[1] - 0.3, MEADOW[2] + 0.2, MEADOW[3] + 0.2]]); // (grass everywhere else: the meadow has its own long hay)
-    return { gates, vehicles, meadowL, bales, MEADOW, tick: t => { if (meadowL) IH.lawnKit.tick(meadowL, t, 1); }, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
+    solid(...YARD); const yard = new T.Group(); root.add(yard);
+    const B = { gates, vehicles, meadowL, bales, MEADOW, yard, flights: [], flying: 0, tick: t => { if (meadowL) IH.lawnKit.tick(meadowL, t, 1); flightsTick(B, f, t); }, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
+    yardSync(B, f); return B;
+  }
+  // bales coming off the trailer: each lifted off the deck in an arc, stood on end, onto the next place in the yard
+  function flightsTick(B, f, t) {
+    for (let i = B.flights.length - 1; i >= 0; i--) {
+      const F0 = B.flights[i]; if (F0.t0 == null) F0.t0 = t + F0.delay; const u = (t - F0.t0) / 0.9; if (u < 0) continue;
+      const e = Math.min(1, u), s = e * e * (3 - 2 * e), m = F0.g;
+      m.position.set(F0.a.x + (F0.b.x - F0.a.x) * s, F0.a.y + (F0.b.y - F0.a.y) * s + Math.sin(Math.PI * e) * 1.4, F0.a.z + (F0.b.z - F0.a.z) * s); m.rotation.set(0, F0.ry, (1 - s) * Math.PI / 2);
+      if (u >= 1) { B.root.remove(m); B.flights.splice(i, 1); B.flying--; if (F0.done) F0.done(); yardSync(B, f); }
+    }
   }
   IB.add('farm', build);
 
@@ -286,12 +327,13 @@
     function hitch(kind) {
       if (!DR) return; if (Math.abs(DR.v) > 0.05) return c.toast('Stop first to hitch up.');
       const v = V(); if (DR.imp) { DR.imp.load.forEach((b, i) => dropBale({ x: DR.imp.x - Math.sin(DR.imp.yaw) * (2 + i * 1.4), z: DR.imp.z - Math.cos(DR.imp.yaw) * (2 + i * 1.4), ry: DR.imp.yaw + Math.PI / 2 })); v.B.root.remove(DR.imp.g); DR.imp = null; }
-      if (kind !== 'none') { const I = implementModel(kind); I.kind = kind; I.yaw = DR.yaw; I.load = []; I.acc = 0; v.B.root.add(I.g); DR.imp = I; placeImp(0); c.sound('place'); c.toast(kind === 'baler' ? 'Baler on! Drive it over the long grass in the hay meadow.' : 'Trailer on! Drive up to bales to load them, then to the barn.'); }
+      if (kind !== 'none') { const I = implementModel(kind); I.kind = kind; I.yaw = DR.yaw; I.load = []; I.acc = 0; v.B.root.add(I.g); DR.imp = I; placeImp(0); c.sound('place'); c.toast(kind === 'baler' ? 'Baler on! Drive it over the long grass in the hay meadow.' : 'Trailer on! Drive up to bales to load them, then stop on the track beside the hay yard by the barn.'); }
       for (const b of DR.el.querySelectorAll('[data-k^="hitch:"]')) b.classList.toggle('on', b.dataset.k === 'hitch:' + kind);
     }
     function placeImp(dist) {
       const I = DR.imp, hx = DR.x - Math.sin(DR.yaw) * 1.75, hz = DR.z - Math.cos(DR.yaw) * 1.75;
       I.yaw += (dist / I.len) * Math.sin(DR.yaw - I.yaw); // (a trailer swings in line behind, the right way going forward or back)
+      { const ph = Math.atan2(Math.sin(DR.yaw - I.yaw), Math.cos(DR.yaw - I.yaw)); if (Math.abs(ph) > 1.15) I.yaw = DR.yaw - Math.sign(ph) * 1.15; } // (the drawbar's stop: it can't fold back against the tractor)
       I.x = hx - Math.sin(I.yaw) * I.len; I.z = hz - Math.cos(I.yaw) * I.len; I.g.position.set(I.x, 0, I.z); I.g.rotation.y = I.yaw;
       for (const w of I.wheels) w.rotation.x += dist / I.r;
     }
@@ -312,6 +354,17 @@
         for (let i = 0; i < B.solids.length; i++) { if (i === DR.veh.solid) continue; const r = B.solids[i]; if (px > r[0] && px < r[2] && pz > r[1] && pz < r[3]) d += Math.min(px - r[0], r[2] - px, pz - r[1], r[3] - pz); }
       }
       return d;
+    }
+    // stopped beside the hay yard: the bales come off one by one and are stood up in the yard's lines and stacks
+    function unload(I) {
+      const v = V(), f = F(), n = I.load.length, have = Math.floor((f.feed.hay || 0) / 6);
+      I.load.forEach((b, k) => {
+        const w = new T.Vector3(); b.g.getWorldPosition(w); b.g.parent.remove(b.g);
+        const i = have + k, s = i < YARD_CAP ? yardSlot(i) : { x: 12, y: 0, z: 10.2 }, m = baleUp(); m.position.copy(w); v.B.root.add(m);
+        v.B.flights.push({ g: m, a: { x: w.x, y: w.y - 0.6, z: w.z }, b: s, ry: (i * 1.7) % 6.28, delay: k * 0.55, done: () => { f.feed.hay = (f.feed.hay || 0) + 6; save(); c.sound('place'); c.fx('hay', s.x, s.y + 1.1, s.z, 5); } }); v.B.flying++;
+      });
+      I.load = []; if (AP) AP.did = true; save(); c.xp(); c.sound('buy');
+      c.toast(`${n} bale${n === 1 ? '' : 's'} stacked by the barn: ${n * 6} hay for your animals! 🌾`);
     }
     function dropBale(b) { const v = V(), f = F(); const rec = { x: b.x, z: b.z, ry: b.ry || 0 }; f.bales.push(rec); const m = baleModel(); m.position.set(rec.x, 0, rec.z); m.rotation.y = rec.ry; v.B.root.add(m); v.B.bales.push({ rec, g: m }); save(); }
     function tick(t, dt) {
@@ -346,12 +399,12 @@
         const hay = f.hay; let n = 0;
         for (let i = Math.floor(I.x - 1.3); i <= Math.floor(I.x + 1.3); i++) for (let j = Math.floor(I.z - 0.8); j <= Math.floor(I.z + 0.8); j++) { if (i < M[0] || i >= M[2] || j < Math.ceil(M[1]) || j >= M[3]) continue; const key = i * 1000 + j; if (hay.cells[key] || Math.hypot(i + 0.5 - I.x, j + 0.5 - I.z) > 1.3) continue; hay.cells[key] = 1; n++; if (v.B.meadowL) IH.lawnKit.cutAt(v.B.meadowL, i + 0.5, j + 0.5, 0.75); }
         if (n) { I.acc += n; hay.at = hay.at || Date.now(); c.fx('hay', I.x + Math.sin(I.yaw) * 1.0, 0.4, I.z + Math.cos(I.yaw) * 1.0, Math.min(4, n)); }
-        if (I.acc >= 30) { I.acc -= 30; dropBale({ x: I.x - Math.sin(I.yaw) * 1.4, z: I.z - Math.cos(I.yaw) * 1.4, ry: I.yaw + Math.PI / 2 }); c.sound('place'); if (!DR.told) { DR.told = true; c.toast('A bale! Keep going. Then hitch the trailer and take them to the barn.'); } }
+        if (I.acc >= 30) { I.acc -= 30; dropBale({ x: I.x - Math.sin(I.yaw) * 1.4, z: I.z - Math.cos(I.yaw) * 1.4, ry: I.yaw + Math.PI / 2 }); c.sound('place'); if (!DR.told) { DR.told = true; c.toast('A bale! Keep going. Then hitch the trailer and bring them to the hay yard by the barn.'); } }
       }
       // the trailer: bales it comes up against are loaded on (four at most); at the barn they're unloaded into the hay store
       if (I.kind === 'trailer') {
         if (I.load.length < 4) for (let i = v.B.bales.length - 1; i >= 0; i--) { const b = v.B.bales[i]; if (Math.hypot(b.g.position.x - I.x, b.g.position.z - I.z) < 2.1 && I.load.length < 4) { v.B.bales.splice(i, 1); f.bales.splice(f.bales.indexOf(b.rec), 1); v.B.root.remove(b.g); const m = baleModel(); m.scale.setScalar(0.8); m.position.set((I.load.length % 2 ? 0.5 : -0.5), 0, I.load.length < 2 ? 0.5 : -0.6); m.rotation.y = Math.PI / 2; I.load.push({ g: m }); I.g.children[I.g.children.length - 1].add(m); save(); c.sound('pop'); c.fx('hay', I.x, 1.2, I.z, 6); } }
-        if (I.load.length && Math.hypot(I.x - 12, I.z - 11.5) < 4.5 && Math.abs(DR.v) < 1.5) { const n = I.load.length; for (const b of I.load) b.g.parent.remove(b.g); I.load = []; f.feed.hay = (f.feed.hay || 0) + n * 6; if (AP) AP.did = true; save(); c.xp(); c.sound('buy'); c.fx('hay', I.x, 1.4, I.z, 14); c.toast(`${n} bale${n === 1 ? '' : 's'} into the barn: ${n * 6} hay for your animals! 🌾`); }
+        if (I.load.length && Math.hypot(I.x - YARD_DROP.x, I.z - YARD_DROP.z) < 3.2 && Math.abs(DR.v) < 0.6) unload(I);
       }
     }
     /* ---------- auto: the kid does the hay job alone, driving the same tractor the same way (pedal, wheel, the
@@ -369,26 +422,30 @@
     const rearOf = () => [DR.x - Math.sin(DR.yaw) * 0.62, DR.z - Math.cos(DR.yaw) * 0.62];
     const stop = () => ({ thr: 0, st: DR.steer / 0.62, vmax: 1 }); // (off the pedal: it rolls to a stand, the wheel left where it is)
     // the rows: parallel to the meadow's long (south) hedge, evenly spaced a baler's width apart (a little overlap)
-    function hayJob() {
-      const M = V().B.MEADOW, f = F(), legs = [], N = 5, z0 = M[3] - 1.3, z1 = M[1] + 1.6, gap = (z1 - z0) / (N - 1); // (from the far hedge back, so each turn swings out into open ground)
-      let cut = 0, all = 0; for (let i = M[0]; i < M[2]; i++) for (let j = Math.ceil(M[1]); j < M[3]; j++) { all++; if (f.hay.cells[i * 1000 + j]) cut++; }
-      if (all - cut > all * 0.08) {
-        legs.push({ t: 'hitch', kind: 'baler' });
-        for (let i = 0; i < N; i++) { const z = z0 + gap * i, west = i % 2 === 0; legs.push({ t: 'line', a: west ? [M[2] - 8, z] : [M[0] + 7, z], b: west ? [M[0] + 0.8, z] : [M[2] + 0.4, z], say: `baling row ${i + 1} of ${N + 2}` }); }
-        // the headlands: the strips the rows' turns left, cut along the end hedge and the open end
-        // (along the open end, the same spacing, each run south up to the far hedge, then backed straight out)
-        [M[2] - 3.4, M[2] - 1.05].forEach((x, i) => legs.push({ t: 'line', a: [x, M[1] + 1.0], b: [x, M[3] - 2.55], say: `baling row ${N + i + 1} of ${N + 2} (the headland)` }, { t: 'back', d: 5, say: 'backing out from the hedge' }));
-      }
-      legs.push({ t: 'hitch', kind: 'trailer' }, { t: 'collect' });
+    const meadowLeft = () => { const M = V().B.MEADOW, f = F(); let cut = 0, all = 0; for (let i = M[0]; i < M[2]; i++) for (let j = Math.ceil(M[1]); j < M[3]; j++) { all++; if (f.hay.cells[i * 1000 + j]) cut++; } return (all - cut) / all; };
+    // auto does the job of whatever's on the hitch: the baler bales the meadow, the trailer brings the bales in
+    function balerJob() {
+      const M = V().B.MEADOW, legs = [], N = 5, z0 = M[3] - 1.3, z1 = M[1] + 1.6, gap = (z1 - z0) / (N - 1); // (from the far hedge back, so each turn swings out into open ground)
+      for (let i = 0; i < N; i++) { const z = z0 + gap * i, west = i % 2 === 0; legs.push({ t: 'line', a: west ? [M[2] - 8, z] : [M[0] + 7, z], b: west ? [M[0] + 0.8, z] : [M[2] + 0.4, z], say: `baling row ${i + 1} of ${N + 2}` }); }
+      // the headlands: the strips the rows' turns left, cut along the end hedge and the open end
+      // (along the open end, the same spacing, each run south up to the far hedge, then backed straight out)
+      [M[2] - 3.4, M[2] - 1.05].forEach((x, i) => legs.push({ t: 'line', a: [x, M[1] + 1.0], b: [x, M[3] - 2.55], say: `baling row ${N + i + 1} of ${N + 2} (the headland)` }, { t: 'back', d: 5, say: 'backing out from the hedge' }));
+      legs.push({ t: 'goto', goal: { x: TRACTOR_HOME.x, z: TRACTOR_HOME.z, yaw: TRACTOR_HOME.ry, tol: 0.7, ytol: 0.25 }, say: 'parking' });
       return legs;
     }
     function autoStart() {
       if (!DR) return; if (AP) return autoStop('Auto off.');
       if (!TP()) return c.toast('Auto isn’t ready yet.');
-      const v = V(); AP = { legs: hayJob(), leg: null, home: { x: TRACTOR_HOME.x, z: TRACTOR_HOME.z, yaw: TRACTOR_HOME.ry }, G: TP().grid(v.B.solids, v.B.bounds.x1, v.B.bounds.z1, DR.veh.solid), skip: new Set(), tried: new Map(), pickup: false, stuck: 0 };
+      const kind = DR.imp && DR.imp.kind, v = V();
+      if (!kind) return c.toast('Hitch the baler (to bale the meadow) or the trailer (to bring the bales in), then press Auto.');
+      if (kind === 'baler' && meadowLeft() < 0.08) return c.toast('The meadow’s all cut. It grows back in a couple of days.');
+      if (kind === 'trailer' && !v.B.bales.length && !DR.imp.load.length) return c.toast('No bales to bring in. Bale the meadow first.');
+      AP = { job: kind, legs: kind === 'baler' ? balerJob() : [{ t: 'collect' }], leg: null, home: { x: TRACTOR_HOME.x, z: TRACTOR_HOME.z, yaw: TRACTOR_HOME.ry }, G: TP().grid(v.B.solids, v.B.bounds.x1, v.B.bounds.z1, DR.veh.solid), skip: new Set(), tried: new Map(), pickup: false, stuck: 0 };
       const b = DR.el.querySelector('.vg-dr-auto'); if (b) { b.classList.add('on'); b.textContent = '🤖 Stop'; }
-      c.toast('Auto: watch them make hay! Push the joystick to take over.'); c.sound('on');
+      c.toast(kind === 'baler' ? 'Auto: watch them bale the meadow! Push the joystick to take over.' : 'Auto: watch them bring the bales in! Push the joystick to take over.'); c.sound('on');
     }
+    // stopped on the track beside the hay yard, heading for the barn end (the trailer alongside the yard)
+    const haul = say => ({ t: 'goto', goal: { x: YARD_DROP.x - 4.1, z: YARD_DROP.z + 0.2, yaw: -Math.PI / 2, tol: 0.8, ytol: 0.3 }, say, vmax: 3.2 });
     function autoStop(words) { AP = null; note(''); const b = DR && DR.el && DR.el.querySelector('.vg-dr-auto'); if (b) { b.classList.remove('on'); b.textContent = '🤖 Auto'; } if (words) c.toast(words); }
     const lenOf = () => (DR.imp ? DR.imp.len : 0);
     // start planning a way from here to a pose
@@ -443,7 +500,7 @@
     function bumped(t) { return DR.blockT && t - DR.blockT < 0.12; }
     function autopilot(t, dt) {
       void dt; const v = V();
-      if (!AP.leg) { AP.leg = AP.legs.shift(); if (!AP.leg && DR.imp && DR.imp.load.length) { AP.legs.push({ t: 'goto', goal: { x: 9.0, z: 15, yaw: -Math.PI / 2, tol: 1.0, ytol: 0.45 }, say: 'one more to the barn', vmax: 3.2 }, { t: 'goto', goal: { x: AP.home.x, z: AP.home.z, yaw: AP.home.yaw, tol: 0.7, ytol: 0.25 }, say: 'parking' }); AP.leg = AP.legs.shift(); } if (!AP.leg) { const did = AP.did; autoStop(''); if (did) { c.toast('All done! The hay’s made and in the barn. 🌾'); c.sound('buy'); } else c.toast(AP.fails ? 'Auto: I couldn’t find a way from here. Drive out into the open and try again.' : 'Nothing to do: the meadow’s cut and there are no bales. It grows back in a couple of days.'); return stop(); } }
+      if (!AP.leg) { AP.leg = AP.legs.shift(); if (!AP.leg && AP.job === 'trailer' && DR.imp && DR.imp.load.length) { AP.legs.push(haul('one more load to the hay yard'), { t: 'goto', goal: { x: AP.home.x, z: AP.home.z, yaw: AP.home.yaw, tol: 0.7, ytol: 0.25 }, say: 'parking' }); AP.leg = AP.legs.shift(); } if (!AP.leg) { const did = AP.did, job = AP.job; autoStop(''); if (did) { c.toast(job === 'baler' ? 'Baling done! Hitch the trailer and press Auto to bring the bales in. 🌾' : 'All done! Every bale’s stacked by the barn. 🌾'); c.sound('buy'); } else c.toast(AP.fails ? 'Auto: I couldn’t find a way from here. Drive out into the open and try again.' : 'Nothing left to do.'); return stop(); } }
       const L = AP.leg; AP.pickup = false;
       if (bumped(t) && t > (AP.bumpT || 0) && L.t !== 'back') {
         // bumped something: ease off it the other way, then plan again from there
@@ -452,8 +509,9 @@
         AP.legs.unshift(L); AP.leg = { t: 'back', d: 1.6, sign: AP.lastDir < 0 ? 1 : -1, say: 'easing off' }; return stop();
       }
       const next = () => { AP.leg = null; AP.stuck = 0; return stop(); }, fail = () => { autoStop(''); c.toast('Auto: I can’t find a way there. Can you drive a bit and try again?'); return stop(); };
+      if (L.t === 'wait') { note('Auto: ' + L.say); if (L.t0 == null) L.t0 = t; return t - L.t0 > L.s ? next() : stop(); }
       if (L.t === 'hitch') { if (Math.abs(DR.v) > 0.05) return stop(); if (!DR.imp || DR.imp.kind !== L.kind) hitch(L.kind); return next(); }
-      if (L.t === 'goto') { if (L.say) note('Auto: ' + L.say); const r = runGoto(t, L, L.vmax || 3.0); if (r === 'fail') { AP.fails = (AP.fails || 0) + 1; if (L.bale) { afterGoto(L); return next(); } return fail(); } if (r) return r; afterGoto(L); return next(); }
+      if (L.t === 'goto') { if (L.say) note('Auto: ' + L.say); const r = runGoto(t, L, L.vmax || 3.0); if (r === 'fail') { AP.fails = (AP.fails || 0) + 1; if (L.bale) { afterGoto(L); return next(); } if ((L.unstick || 0) < 3) { L.unstick = (L.unstick || 0) + 1; L.search = null; L.tries = 0; AP.legs.unshift(L); AP.leg = { t: 'back', d: 3, sign: L.unstick % 2 ? 1 : -1, say: 'straightening up to try again' }; return stop(); } return fail(); } if (r) return r; afterGoto(L); return next(); }
       if (L.t === 'line') {
         // a straight run: first get lined up on its start (planned), then drive it dead straight with the pickup down
         if (L.skip) return next();
@@ -470,13 +528,14 @@
         note('Auto: ' + L.say);
         if (!L.seg) { const [rx, rz] = rearOf(), sg = L.sign || -1, pts = []; for (let s0 = 0; s0 <= L.d; s0 += 0.4) pts.push([rx + sg * Math.sin(DR.yaw) * s0, rz + sg * Math.cos(DR.yaw) * s0]); L.seg = { dir: sg, pts, k: 0 }; L.t0 = t; }
         if (bumped(t) && t - L.t0 > 0.3) return next();
+        if (DR.imp && (L.sign || -1) < 0 && t - L.t0 > 0.3 && Math.abs(Math.sin((DR.yaw - DR.imp.yaw) / 2)) > Math.sin(0.35)) return next(); // (backing, the towed thing starting to swing: stop there)
         const r = track(t, L.seg, 1.2); if (r === 'off') return next(); return r || next();
       }
       if (L.t === 'collect') {
         const M = v.B.MEADOW, I = DR.imp, inM = b => b.g.position.x > M[0] - 2 && b.g.position.x < M[2] + 3 && b.g.position.z > M[1] - 2 && b.g.position.z < M[3] + 1;
         const left = v.B.bales.filter(b => inM(b) && !AP.skip.has(b));
-        if (!I || I.kind !== 'trailer') { AP.legs.unshift({ t: 'hitch', kind: 'trailer' }, L); AP.leg = null; return stop(); }
-        if (I.load.length >= 4 || (!left.length && I.load.length)) { AP.legs.unshift({ t: 'goto', goal: { x: 9.0, z: 15, yaw: -Math.PI / 2, tol: 1.0, ytol: 0.45 }, say: 'hauling the bales to the barn', vmax: 3.2 }, { t: 'collect' }); return next(); }
+        if (!I || I.kind !== 'trailer') return next();
+        if (I.load.length >= 4 || (!left.length && I.load.length)) { AP.legs.unshift(haul('taking the bales to the hay yard'), { t: 'wait', s: 0.6 * I.load.length + 0.6, say: 'stacking the bales' }, { t: 'collect' }); return next(); }
         if (!left.length) { AP.legs.unshift({ t: 'goto', goal: { x: AP.home.x, z: AP.home.z, yaw: AP.home.yaw, tol: 0.7, ytol: 0.25 }, say: 'parking' }); return next(); }
         // the nearest bale, and a way to come at it that fits, the trailer passing over it
         const [rx, rz] = rearOf(); left.sort((a, b) => Math.hypot(a.g.position.x - rx, a.g.position.z - rz) - Math.hypot(b.g.position.x - rx, b.g.position.z - rz));
@@ -627,6 +686,6 @@
       }
     }
     const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
-    return { ap: () => AP, acts, click, tap, tick, prep() { AP = null; if (DR) { removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); DR = null; } P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
+    return { ap: () => AP, dr: () => DR, acts, click, tap, tick, prep() { AP = null; if (DR) { removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); DR = null; } P = null; const v = V(); if (v) v.plan = null; if (v && v.where === 'farm') { const btn = document.createElement('button'); btn.className = 'ih-pill vg-plan'; btn.dataset.v = 'farm'; btn.dataset.k = 'mode:menu'; btn.textContent = '🛠️ Plan'; const top = v.ui.querySelector('.ih-top .ih-sp'); if (top) top.before(btn); } }, ANIMALS, ITEMS, TRACTOR_SEAT };
   };
 })();
