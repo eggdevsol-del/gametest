@@ -527,7 +527,7 @@
     for (const h of hits) { const o = h.object, [sx, sy] = screenOf(o.position), d = Math.hypot(sx + r.left - x, sy + r.top - y); if (d < sd && ACTS[o.userData.spot.kind] && ACTS[o.userData.spot.kind](o.userData.spot).length) { sd = d; s = o.userData.spot; } }
     if (who && (!s || wd < sd)) {
       if (who === V.keeper && V.B !== V.street) { const c = V.B.spots.find(q => q.kind === 'counter'); return showActs(c, x, y); }
-      { who.hi = { until: V.t + 2.2 }; say(who, who.keeper ? (who.keeper.what === 'veg' ? 'Fresh veggies! 🥕' : 'Pretty flowers! 🌷') : HELLO[Math.floor(Math.random() * HELLO.length)]); const k = V.kid; if (!k.path.length && !k.seat) k.face = Math.atan2(who.pos.x - k.pos.x, who.pos.z - k.pos.z); sound('pat'); return; }
+      { who.hi = { until: V.t + 2.2 }; say(who, who.keeper ? (who.keeper.what === 'veg' ? 'Fresh veggies! 🥕' : 'Pretty flowers! 🌷') : (V.B.hello || HELLO)[Math.floor(Math.random() * (V.B.hello || HELLO).length)]); const k = V.kid; if (!k.path.length && !k.seat) k.face = Math.atan2(who.pos.x - k.pos.x, who.pos.z - k.pos.z); sound('pat'); return; }
     }
     if (s && s.kind === 'mess') return sweep(s);
     if (s) return showActs(s, x, y);
@@ -608,6 +608,7 @@
       if (a === 'phone') { if (V.stage.phone) V.stage.phone('home'); return; }
       if (a === 'reel') return reel();
       if (a === 'isl' && ISL && ISL.click) return ISL.click(b.dataset.k, b);
+      if (a === 'lang' && LANG && LANG.click) return LANG.click(b.dataset.k, b);
       if (a === 'farm' && FARM) return FARM.click(b.dataset.k, b);
       if (a === 'fbuy') return farmBuy(b.dataset.k);
       if (a === 'fcode') { const inp = $('.vg-fcode', V.ui); const c = NET().setCode(inp ? inp.value : ''); toast(c ? 'Family code saved on this device.' : 'Family code cleared.'); return setTimeout(famPanel, 400); }
@@ -782,7 +783,8 @@
   // more islands' doings (village-islands.js), with what they need from here
   const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, ride, sit, stand, fishStart, fx, seatKid, DAY, today };
   const ISL = IH.villageIslands ? IH.villageIslands(CTX) : null, FARM = IH.villageFarm ? IH.villageFarm(CTX) : null;
-  if (ISL) Object.assign(ACTS, ISL.acts); if (FARM) Object.assign(ACTS, FARM.acts);
+  const LANG = IH.villageLang ? IH.villageLang(CTX) : null;
+  if (ISL) Object.assign(ACTS, ISL.acts); if (FARM) Object.assign(ACTS, FARM.acts); if (LANG) Object.assign(ACTS, LANG.acts);
   // a sandcastle that grows each time it's added to
   function castle(s) {
     const lvl = (V.castle ? V.castle.lvl : 0) + 1; if (V.castle) V.B.root.remove(V.castle.g);

@@ -5,8 +5,10 @@
 (function () {
   const IH = window.IsoHome = window.IsoHome || {}, T = window.THREE;
   const DAY = 864e5, today = () => Math.floor(Date.now() / DAY);
-  const CROPS = { carrot: { e: '🥕', name: 'carrots', seed: 10, days: 2, n: 4 }, lettuce: { e: '🥬', name: 'lettuces', seed: 10, days: 2, n: 2 }, tomato: { e: '🍅', name: 'tomatoes', seed: 15, days: 3, n: 4 }, pumpkin: { e: '🎃', name: 'pumpkins', seed: 20, days: 3, n: 2, goods: true }, strawberry: { e: '🍓', name: 'strawberries', seed: 15, days: 2, n: 6, goods: true } };
-  const FRUIT = { apple: { e: '🍎', n: 3 }, lemon: { e: '🍋', n: 3, goods: true }, feijoa: { e: '🍐', n: 4, goods: true } };
+  const CROPS = { carrot: { e: '🥕', name: 'carrots', seed: 10, days: 2, n: 4 }, lettuce: { e: '🥬', name: 'lettuces', seed: 10, days: 2, n: 2 }, tomato: { e: '🍅', name: 'tomatoes', seed: 15, days: 3, n: 4 }, pumpkin: { e: '🎃', name: 'pumpkins', seed: 20, days: 3, n: 2, goods: true }, strawberry: { e: '🍓', name: 'strawberries', seed: 15, days: 2, n: 6, goods: true },
+    // (from the language islands' specialities: only once they're bought, lang-islands.js)
+    tea: { e: '🍵', name: 'tea', seed: 8, days: 3, n: 3, goods: true, special: 'tea' }, rice: { e: '🌾', name: 'rice', seed: 8, days: 3, n: 4, goods: true, special: 'rice' } };
+  const FRUIT = { apple: { e: '🍎', n: 3 }, lemon: { e: '🍋', n: 3, goods: true }, feijoa: { e: '🍐', n: 4, goods: true }, orange: { e: '🍊', n: 3, goods: true }, olive: { e: '🫒', n: 4, goods: true } };
   const STABLE_SHOP = [['horse', '🐴', 'Horse', 1200, 3, 'To ride in the arena.'], ['pony', '🐎', 'Pony', 900, 2, 'A smaller ride.'], ['donkey', '🫏', 'Donkey', 600, 1, 'A gentle friend for the paddock.'], ['merino', '🐑', 'Merino sheep', 400, 4, 'A bag of wool every two days.'], ['kunekune', '🐷', 'Kunekune pig', 350, 2, 'Finds a truffle every two days.']];
   const BIRDS = [['tui', 'a tūī', '🐦'], ['fantail', 'a pīwakawaka (fantail)', '🐦'], ['kereru', 'a kererū', '🕊️'], ['ruru', 'a ruru (morepork)', '🦉'], ['weka', 'a weka', '🐦'], ['takahe', 'a takahē', '🐦'], ['bellbird', 'a korimako (bellbird)', '🐦'], ['kaka', 'a kākā', '🦜']];
 
@@ -24,7 +26,7 @@
     const drawBeds = () => { const B = V().B; if (!B.drawBed) return; B.beds.forEach((_, i) => { const b = bedState(i); B.drawBed(i, b.crop, Math.max(0, bedStage(b))); }); };
     function seedPanel(i) {
       c.gamePanel(`<div class="vg-gh"><b>🌱 Plant bed ${i + 1}</b><span>✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}</span><button class="vg-x" data-v="gclose" aria-label="Close">✕</button></div><div class="vg-gq">Pick the seeds. Water the bed once a day; it’s ready after a few days of watering.</div>
-        <div class="vg-gb vg-mine">${Object.entries(CROPS).map(([id, C]) => `<button data-v="isl" data-k="plant:${i}:${id}"><span class="e">${C.e}</span>${C.name[0].toUpperCase() + C.name.slice(1)} · ✨ ${C.seed}<small>&nbsp;${C.days} days · ${C.n} to pick</small></button>`).join('')}</div>`);
+        <div class="vg-gb vg-mine">${Object.entries(CROPS).filter(([, C]) => !C.special || ((sh().farm() || {}).specials || {})[C.special]).map(([id, C]) => `<button data-v="isl" data-k="plant:${i}:${id}"><span class="e">${C.e}</span>${C.name[0].toUpperCase() + C.name.slice(1)} · ✨ ${C.seed}<small>&nbsp;${C.days} days · ${C.n} to pick</small></button>`).join('')}</div>`);
     }
     function plant(i, id) {
       const C = CROPS[id]; if (!C || !sh().farmPay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); save();

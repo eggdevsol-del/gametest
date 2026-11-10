@@ -94,9 +94,9 @@
         out.drawBed = (bi, crop, stage) => { const b = out.beds[bi]; if (!b) return; while (b.g.children.length) b.g.remove(b.g.children[0]); if (!crop) return; const kk = new Kit(); IB.more.cropBed(kk, crop, stage); b.g.add(kk.build()); };
       } else if (blk.type === 'orchard') {
         // twelve trees in three rows (apples, lemons, feijoas), each with its fruit (shown when it's ripe); a packing shed; two beehives
-        const KINDS = [['apple', '#e8463e', 12], ['lemon', '#ffd84a', 21], ['feijoa', '#7aa04a', 41]]; let i = blk.base || 0;
+        const sp = f.specials || {}, KINDS = [['apple', '#e8463e', 12], sp.orange ? ['orange', '#ff9a2e', 21] : ['lemon', '#ffd84a', 21], sp.olive ? ['olive', '#6b7a3a', 41] : ['feijoa', '#7aa04a', 41]]; let i = blk.base || 0; // (oranges and olives from the Spanish town's nursery)
         for (const [kind, fc, lz] of KINDS) for (const lx of [8, 15.5, 36.5, 44]) {
-          const [x, z] = L(lx, lz); IB.more.tree(k, x, z, R, 0.85, 0, kind === 'lemon' ? ['#3f8a3c', '#4e9e48'] : kind === 'feijoa' ? ['#5a8a5a', '#6a9a6a'] : ['#4f9a3c', '#5fae4a']); solid(x - 0.6, z - 0.6, x + 0.6, z + 0.6);
+          const [x, z] = L(lx, lz); IB.more.tree(k, x, z, R, 0.85, 0, kind === 'lemon' || kind === 'orange' ? ['#3f8a3c', '#4e9e48'] : kind === 'feijoa' ? ['#5a8a5a', '#6a9a6a'] : kind === 'olive' ? ['#8a9a7a', '#9aaa88'] : ['#4f9a3c', '#5fae4a']); solid(x - 0.6, z - 0.6, x + 0.6, z + 0.6);
           const fk = new Kit(); for (let q = 0; q < 10; q++) { const a = q / 10 * Math.PI * 2 + R(), rr = 1.1 + R() * 0.8; fk.ball(0.18, Math.cos(a) * rr, 2.4 + R() * 1.3, Math.sin(a) * rr * 0.85, fc, { n: 7, s: kind === 'feijoa' ? [0.8, 1.1, 0.8] : [1, 1, 1] }); }
           const fruit = fk.build(); fruit.position.set(x, 0, z); root.add(fruit); out.trees.push({ kind, x, z, fruit, i });
           spots.push({ kind: 'fruittree', id: id('t' + i), i, fruit: kind, name: `the ${kind} tree`, at: [x, z + 1.9], yaw: Math.PI, hit: [x, z, 0, 3] }); i++;

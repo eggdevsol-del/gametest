@@ -76,10 +76,12 @@
       else if (crop === 'tomato') { kk.cyl(0.02, 1.4 * s, x + 0.12, 0, z, '#c9a173', { n: 3 }); kk.ball(0.3 * s, x, 0.6 * s, z, '#4e9e48', { n: 8 }); if (stage === 3) for (let f = 0; f < 3; f++) kk.ball(0.1, x + (f - 1) * 0.15, 0.5 + f * 0.12, z + 0.2, '#e8463e', { n: 6 }); }
       else if (crop === 'lettuce') kk.ball(0.32 * s, x, 0.12 * s, z, stage === 3 ? '#9be38f' : '#7cd36a', { s: [1, 0.7, 1], n: 9 });
       else if (crop === 'pumpkin') { kk.ball(0.22 * s, x, 0.1, z, '#4e9e48', { s: [1.4, 0.4, 1.4], n: 7 }); if (stage === 3 && c % 2 === 0) kk.ball(0.3, x + 0.2, 0.22, z, '#f39a3b', { s: [1.2, 0.85, 1.2], n: 9 }); }
+      else if (crop === 'tea') { kk.ball(0.3 * s, x, 0.18 * s, z, stage === 3 ? '#5fae4a' : '#4e8f3c', { s: [1.1, 0.75, 1.1], n: 8 }); if (stage === 3) kk.ball(0.08, x + 0.1, 0.42, z, '#9be38f', { n: 5 }); }
+      else if (crop === 'rice') { for (let l = 0; l < 5; l++) kk.cone(0.04, 0.7 * s, x + (l - 2) * 0.07, 0, z, stage === 3 ? '#e2c25a' : '#86c766', { n: 3, rz: (l - 2) * 0.12 }); }
       else if (crop === 'strawberry') { kk.ball(0.22 * s, x, 0.1, z, '#5fae4a', { s: [1.2, 0.5, 1.2], n: 7 }); if (stage === 3) for (let f = 0; f < 3; f++) kk.ball(0.06, x + (f - 1) * 0.14, 0.08, z + 0.2, '#e8352e', { n: 5 }); }
     }
   }
-  IB.more = { shed, tree, cropBed };
+  IB.more = { shed, tree, cropBed, base, hits, post, solids };
 
   /* ---------- Veggie plot: six raised beds (planted, watered, harvested), a seed shed, a glasshouse, a water tank */
   function plot(st) {

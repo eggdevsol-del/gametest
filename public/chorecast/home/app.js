@@ -2386,7 +2386,8 @@
     O.root.appendChild(el); sound('pop'); setTimeout(() => el.remove(), 12000);
   }
   // the phone's Travel app: home, the village (through the gate, from home), an island (straight there)
-  const islandsOwned = () => O.st.islands || {};
+  // (the language islands are free to visit: lang-islands.js)
+  const islandsOwned = () => Object.assign({}, O.st.islands || {}, IH.langIslands ? IH.langIslands.FREE : {});
   function travelTo(where) {
     if (where === 'home') { if (O.away && IH.village) IH.village.leave(); return; }
     if (O.away) { if (IH.village) IH.village.goto(where); return; }
@@ -2398,7 +2399,7 @@
   const PRODUCE = { egg: { name: 'Eggs', one: 'an egg', e: '🥚', price: 14 }, milk: { name: 'Milk', one: 'a bottle of milk', e: '🥛', price: 18 }, wool: { name: 'Wool', one: 'a bag of wool', e: '🧶', price: 45, goods: true }, fish: { name: 'Fish', one: 'a fish', e: '🐟', price: 30 },
     carrot: { name: 'Carrots', one: 'a carrot', e: '🥕', price: 12 }, tomato: { name: 'Tomatoes', one: 'a tomato', e: '🍅', price: 12 }, lettuce: { name: 'Lettuce', one: 'a lettuce', e: '🥬', price: 14 }, apple: { name: 'Apples', one: 'an apple', e: '🍎', price: 18 }, honey: { name: 'Honey', one: 'a jar of honey', e: '🍯', price: 45 },
     pumpkin: { name: 'Pumpkins', one: 'a pumpkin', e: '🎃', price: 35, goods: true }, strawberry: { name: 'Strawberries', one: 'a punnet of strawberries', e: '🍓', price: 10, goods: true }, lemon: { name: 'Lemons', one: 'a lemon', e: '🍋', price: 16, goods: true }, feijoa: { name: 'Feijoas', one: 'a feijoa', e: '🍐', price: 20, goods: true },
-    truffle: { name: 'Truffles', one: 'a truffle', e: '🍄', price: 40, goods: true }, jam: { name: 'Jam', one: 'a jar of jam', e: '🫙', price: 85, goods: true } };
+    truffle: { name: 'Truffles', one: 'a truffle', e: '🍄', price: 40, goods: true }, orange: { name: 'Oranges', one: 'an orange', e: '🍊', price: 20, goods: true }, olive: { name: 'Olives', one: 'a bag of olives', e: '🫒', price: 16, goods: true }, tea: { name: 'Tea', one: 'a bag of tea', e: '🍵', price: 30, goods: true }, rice: { name: 'Rice', one: 'a bag of rice', e: '🌾', price: 25, goods: true }, jam: { name: 'Jam', one: 'a jar of jam', e: '🫙', price: 85, goods: true } };
   const goods = () => (O.st.goods = O.st.goods || {});
   function farmState() { const f = (O.st.farm = O.st.farm || { animals: { hen: 3, goat: 1 }, got: {}, fed: 0 }); f.got = f.got || {}; return f; }
   function produceSheet() {
@@ -2455,6 +2456,10 @@
     addGoods(id, n = 1) { const g = goods(); g[id] = (g[id] || 0) + n; save(); }, goods: () => goods(), useFood(id, n = 1) { const f = food(); if ((f[id] || 0) < n) return false; f[id] -= n; save(); return true; }, useGoods(id, n = 1) { const g = goods(); if ((g[id] || 0) < n) return false; g[id] -= n; save(); return true; }, earn2: xp => { O.st.jobPay = (O.st.jobPay || 0) + xp; save(); ui(true); }, phase: () => O.st.look.phase,
     pay(xp, what) { const w = wallet(); if (w.left < xp) { toast(`You need ✨ ${xp} XP for ${what || 'that'}.`); return false; } wSpend(xp, what || 'a purchase'); save(); sound('buy'); ui(true); return true; },
     // the farm's own purchases (animals, feed, fences, seed): out of the farm account, topped up from the wallet if short
+    // the language islands' markets (lang-islands.js): what there is to sell, at today's price; a sale into the farm account
+    produceList() { const f = food(), g = goods(); return Object.entries(PRODUCE).map(([id, P]) => ({ id, name: P.name, one: P.one, e: P.e, have: P.goods ? g[id] || 0 : f[id] || 0, price: O.E ? O.E.price(P.price) : P.price })).filter(x => x.have > 0); },
+    sellProduce(id, price, where) { const P = PRODUCE[id]; if (!P) return false; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return false; if (P.goods) g[id] -= 1; else f[id] -= 1; farmIn(price, `sold ${P.one} at ${where}`, [[cap(P.one), price]]); save(); sound('buy'); ui(true); return true; },
+    lessonXP(xp, title) { wGain(xp, `lesson: ${title}`, 'CHORECAST LESSONS', [[`Lesson: ${title}`, xp]]); save(); ui(true); sound('buy'); },
     farmPay: (xp, what) => farmPay(xp, what), farmAcct: () => farmAcct(), farmCharge(xp, what) { if (O.E) { O.E.charge(xp, what); ui(true); } }, farmIn(xp, memo) { farmIn(xp, memo); save(); ui(true); },
     hasTool: t => !!(O.st.tools || {})[t], giveTool(t) { (O.st.tools = O.st.tools || {})[t] = Date.now(); save(); },
     book(kind, key) { const b = ((O.st.books = O.st.books || {})[kind] = O.st.books[kind] || {}); const isNew = !b[key]; b[key] = (b[key] || 0) + 1; save(); return { isNew, count: Object.keys(b).length }; },
@@ -2726,7 +2731,7 @@
       const go = id => here === id ? '<small class="ih-ph-tag">You’re here</small>' : `<button class="ih-b1 ih-sm" data-a="goTo" data-w="${id}">Go</button>`;
       body = `${back}<h3>Travel to</h3><p class="ih-ph-sub">Your home, the village and your islands. Vacation islands are for playing; on utility islands you make things to cook or sell.</p><div class="ih-ph-list">
         ${row('home', '🏠', O.home && O.home.def ? O.home.def.name : 'Home', 'Your home', go('home'))}${row('village', '🏮', 'Hoshi Street', 'The village: shops, café, market', go('village'))}
-        ${L.map(i => { const has = own[i.id], kind = i.kind === 'vacation' ? '🌴 Vacation' : '🛠️ Utility', needs = i.needs && !own[i.needs];
+        ${L.map(i => { const has = own[i.id], kind = i.kind === 'vacation' ? '🌴 Vacation' : i.kind === 'language' ? '🗣️ Language' : '🛠️ Utility', needs = i.needs && !own[i.needs];
           return row(i.id, i.emoji, i.name, `${kind} · ${esc(i.about)}`, has ? go(i.id) : !i.built ? '<small class="ih-ph-tag">Coming soon</small>' : needs ? `<small class="ih-ph-tag">Needs the ${esc((L.find(q => q.id === i.needs) || {}).name || i.needs)}</small>` : `<button class="ih-b2 ih-sm" data-a="isBuy" data-w="${i.id}" ${w.left < i.xp ? 'disabled' : ''}>✨ ${nf(i.xp)}</button>`); }).join('')}</div>`;
     }
     sheet(`<div class="ih-phone"><div class="ih-ph-top"><span>${new Date().toLocaleTimeString('en-NZ', { hour: 'numeric', minute: '2-digit' })}</span><span>✨ ${nf(w.left)} XP</span></div><div class="ih-ph-screen">${body}</div><button class="ih-ph-home" data-a="${app === 'home' ? 'sheetX' : 'phone'}" aria-label="${app === 'home' ? 'Close the phone' : 'Home screen'}"></button></div>`, 'phone');
