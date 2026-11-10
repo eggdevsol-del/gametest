@@ -343,7 +343,7 @@
       // the trailer: bales it comes up against are loaded on (four at most); at the barn they're unloaded into the hay store
       if (I.kind === 'trailer') {
         if (I.load.length < 4) for (let i = v.B.bales.length - 1; i >= 0; i--) { const b = v.B.bales[i]; if (Math.hypot(b.g.position.x - I.x, b.g.position.z - I.z) < 2.1 && I.load.length < 4) { v.B.bales.splice(i, 1); f.bales.splice(f.bales.indexOf(b.rec), 1); v.B.root.remove(b.g); const m = baleModel(); m.scale.setScalar(0.8); m.position.set((I.load.length % 2 ? 0.5 : -0.5), 0, I.load.length < 2 ? 0.5 : -0.6); m.rotation.y = Math.PI / 2; I.load.push({ g: m }); I.g.children[I.g.children.length - 1].add(m); save(); c.sound('pop'); c.fx('hay', I.x, 1.2, I.z, 6); } }
-        if (I.load.length && Math.hypot(I.x - 12, I.z - 11.5) < 4.5 && Math.abs(DR.v) < 1.5) { const n = I.load.length; for (const b of I.load) b.g.parent.remove(b.g); I.load = []; f.feed.hay = (f.feed.hay || 0) + n * 6; save(); c.xp(); c.sound('buy'); c.fx('hay', I.x, 1.4, I.z, 14); c.toast(`${n} bale${n === 1 ? '' : 's'} into the barn: ${n * 6} hay for your animals! 🌾`); }
+        if (I.load.length && Math.hypot(I.x - 12, I.z - 11.5) < 4.5 && Math.abs(DR.v) < 1.5) { const n = I.load.length; for (const b of I.load) b.g.parent.remove(b.g); I.load = []; f.feed.hay = (f.feed.hay || 0) + n * 6; if (AP) AP.did = true; save(); c.xp(); c.sound('buy'); c.fx('hay', I.x, 1.4, I.z, 14); c.toast(`${n} bale${n === 1 ? '' : 's'} into the barn: ${n * 6} hay for your animals! 🌾`); }
       }
     }
     /* ---------- auto: the kid does the hay job alone, driving the same tractor the same way (pedal, wheel, the
@@ -385,7 +385,7 @@
     const lenOf = () => (DR.imp ? DR.imp.len : 0);
     // start planning a way from here to a pose
     function goto(L) {
-      const g = L.goal; L.search = TP().plan(AP.G, { x: DR.x, z: DR.z, yaw: DR.yaw, iyaw: DR.imp ? DR.imp.yaw : DR.yaw, len: lenOf() }, g, { m: L.tries ? 0.22 : 0.45, max: L.tries ? 120000 : 60000 }); L.segs = null;
+      const g = L.goal; L.search = TP().plan(AP.G, { x: DR.x, z: DR.z, yaw: DR.yaw, iyaw: DR.imp ? DR.imp.yaw : DR.yaw, len: lenOf() }, g, { m: L.tries ? 0.22 : 0.45, max: L.tries ? 50000 : 25000 }); L.segs = null;
     }
     // a planned way, cut where it changes between forward and back, as back-axle points
     function segments(P) {
@@ -414,7 +414,7 @@
     // run a goto leg: plan (a slice a tick), then drive each stretch, stopping where it changes direction
     function runGoto(t, L, vmax) {
       if (!L.search) goto(L);
-      if (!L.search.done) { L.search.step(1200); return stop(); }
+      if (!L.search.done) { L.search.step(2500); return stop(); }
       if (!L.search.path) { if (!L.tries) { L.tries = 1; goto(L); return stop(); } return 'fail'; }
       if (!L.segs) { L.segs = segments(L.search.path); L.si = 0; }
       while (L.si < L.segs.length) {
@@ -425,28 +425,36 @@
       }
       return null;
     }
+    // a straight run interrupted part way: pick it up again from the nearest point on the line (not where the
+    // tractor's wandered to); if there's hardly any left, leave it
+    function resume(L) {
+      const dx = L.b[0] - L.a[0], dz = L.b[1] - L.a[1], LL = Math.hypot(dx, dz) || 1, u = Math.max(0, Math.min(1, ((DR.x - L.a[0]) * dx + (DR.z - L.a[1]) * dz) / (LL * LL)));
+      if ((1 - u) * LL < 5) { L.skip = true; return; }
+      L.a = [L.a[0] + dx * u, L.a[1] + dz * u];
+    }
     function bumped(t) { return DR.blockT && t - DR.blockT < 0.12; }
     function autopilot(t, dt) {
       void dt; const v = V();
-      if (!AP.leg) { AP.leg = AP.legs.shift(); if (!AP.leg && DR.imp && DR.imp.load.length) { AP.legs.push({ t: 'goto', goal: { x: 9.0, z: 15, yaw: -Math.PI / 2, tol: 1.0, ytol: 0.45 }, say: 'one more to the barn', vmax: 3.2 }, { t: 'goto', goal: { x: AP.home.x, z: AP.home.z, yaw: AP.home.yaw, tol: 0.7, ytol: 0.25 }, say: 'parking' }); AP.leg = AP.legs.shift(); } if (!AP.leg) { autoStop(''); c.toast('All done! The hay’s made and in the barn. 🌾'); c.sound('buy'); return stop(); } }
+      if (!AP.leg) { AP.leg = AP.legs.shift(); if (!AP.leg && DR.imp && DR.imp.load.length) { AP.legs.push({ t: 'goto', goal: { x: 9.0, z: 15, yaw: -Math.PI / 2, tol: 1.0, ytol: 0.45 }, say: 'one more to the barn', vmax: 3.2 }, { t: 'goto', goal: { x: AP.home.x, z: AP.home.z, yaw: AP.home.yaw, tol: 0.7, ytol: 0.25 }, say: 'parking' }); AP.leg = AP.legs.shift(); } if (!AP.leg) { const did = AP.did; autoStop(''); if (did) { c.toast('All done! The hay’s made and in the barn. 🌾'); c.sound('buy'); } else c.toast(AP.fails ? 'Auto: I couldn’t find a way from here. Drive out into the open and try again.' : 'Nothing to do: the meadow’s cut and there are no bales. It grows back in a couple of days.'); return stop(); } }
       const L = AP.leg; AP.pickup = false;
       if (bumped(t) && t > (AP.bumpT || 0) && L.t !== 'back') {
         // bumped something: ease off it the other way, then plan again from there
         AP.bumpT = t + 1; AP.stuck++; if (AP.stuck > 8) { autoStop(''); c.toast('Auto: I’m stuck. Can you drive me out?'); return stop(); }
-        if (L.go) { L.go.search = null; L.go.tries = 0; } if (L.search !== undefined) { L.search = null; L.tries = 0; } if (L.t === 'line') { L.lined = false; const [rx, rz] = rearOf(), yw = Math.atan2(L.b[0] - L.a[0], L.b[1] - L.a[1]); L.a = [rx + Math.sin(yw) * 0.62, rz + Math.cos(yw) * 0.62]; L.go = null; }
+        if (L.go) { L.go.search = null; L.go.tries = 0; } if (L.search !== undefined) { L.search = null; L.tries = 0; } if (L.t === 'line') { L.go = null; if (L.lined) { L.lined = false; resume(L); } }
         AP.legs.unshift(L); AP.leg = { t: 'back', d: 1.6, sign: AP.lastDir < 0 ? 1 : -1, say: 'easing off' }; return stop();
       }
       const next = () => { AP.leg = null; AP.stuck = 0; return stop(); }, fail = () => { autoStop(''); c.toast('Auto: I can’t find a way there. Can you drive a bit and try again?'); return stop(); };
       if (L.t === 'hitch') { if (Math.abs(DR.v) > 0.05) return stop(); if (!DR.imp || DR.imp.kind !== L.kind) hitch(L.kind); return next(); }
-      if (L.t === 'goto') { if (L.say) note('Auto: ' + L.say); const r = runGoto(t, L, L.vmax || 3.0); if (r === 'fail') { if (L.bale) { afterGoto(L); return next(); } return fail(); } if (r) return r; afterGoto(L); return next(); }
+      if (L.t === 'goto') { if (L.say) note('Auto: ' + L.say); const r = runGoto(t, L, L.vmax || 3.0); if (r === 'fail') { AP.fails = (AP.fails || 0) + 1; if (L.bale) { afterGoto(L); return next(); } return fail(); } if (r) return r; afterGoto(L); return next(); }
       if (L.t === 'line') {
         // a straight run: first get lined up on its start (planned), then drive it dead straight with the pickup down
+        if (L.skip) return next();
         note('Auto: ' + L.say);
         const yaw = Math.atan2(L.b[0] - L.a[0], L.b[1] - L.a[1]);
         if (!L.go) L.go = { goal: { x: L.a[0], z: L.a[1], yaw, tol: 0.4, ytol: 0.1, htol: 0.5, dir: 1 } };
-        if (!L.lined) { const r = runGoto(t, L.go, 3.0); if (r === 'fail') { if (!L.tries2) { L.tries2 = 1; L.go = null; L.a = [L.a[0] + Math.sin(yaw) * 1.5, L.a[1] + Math.cos(yaw) * 1.5]; return stop(); } return next(); } if (r) return r; L.lined = true; const ra = [DR.x - Math.sin(DR.yaw) * 0.62, DR.z - Math.cos(DR.yaw) * 0.62], len = Math.hypot(L.b[0] - ra[0], L.b[1] - ra[1]), pts = []; for (let s = 0; s <= len; s += 0.4) pts.push([ra[0] + Math.sin(yaw) * s, ra[1] + Math.cos(yaw) * s]); pts.push([L.b[0] - Math.sin(yaw) * 0.62, L.b[1] - Math.cos(yaw) * 0.62]); L.seg = { dir: 1, pts, k: 0 }; }
-        AP.pickup = true; const r = track(t, L.seg, 2.6);
-        if (r === 'off') { L.lined = false; const [rx, rz] = rearOf(); L.a = [rx + Math.sin(yaw) * 0.62, rz + Math.cos(yaw) * 0.62]; L.go = null; return stop(); }
+        if (!L.lined) { const r = runGoto(t, L.go, 3.0); if (r === 'fail') { AP.fails = (AP.fails || 0) + 1; if (!L.tries2) { L.tries2 = 1; L.go = null; L.a = [L.a[0] + Math.sin(yaw) * 1.5, L.a[1] + Math.cos(yaw) * 1.5]; return stop(); } return next(); } if (r) return r; L.lined = true; const ra = [DR.x - Math.sin(DR.yaw) * 0.62, DR.z - Math.cos(DR.yaw) * 0.62], len = Math.hypot(L.b[0] - ra[0], L.b[1] - ra[1]), pts = []; for (let s = 0; s <= len; s += 0.4) pts.push([ra[0] + Math.sin(yaw) * s, ra[1] + Math.cos(yaw) * s]); pts.push([L.b[0] - Math.sin(yaw) * 0.62, L.b[1] - Math.cos(yaw) * 0.62]); L.seg = { dir: 1, pts, k: 0 }; }
+        AP.pickup = true; AP.did = true; const r = track(t, L.seg, 2.6);
+        if (r === 'off') { L.lined = false; L.go = null; resume(L); return stop(); }
         return r || next();
       }
       if (L.t === 'back') {

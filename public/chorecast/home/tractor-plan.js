@@ -152,6 +152,8 @@
     const key = (n) => (((((Math.round(wrap(n.yaw) / TAU * NH) + NH) % NH) * 2 + (n.dir > 0 ? 1 : 0)) * NZ + Math.floor(n.z / 0.5)) * NX + Math.floor(n.x / 0.5));
     // (how far, round fences, plus the turning the circle makes it do: face the goal, then come round to its heading)
     const RS = WB / Math.tan(0.5), RT = WB / Math.tan(0.55), h = n => { const d = H(n.x, n.z), e = Math.hypot(goal.x - n.x, goal.z - n.z), dy = Math.abs(wrap(goal.yaw - n.yaw)); if (e < 2.5) return 1.6 * Math.max(d, RT * dy); const b = Math.atan2(goal.x - n.x, goal.z - n.z), t1 = Math.abs(wrap(b - n.yaw)), t2 = Math.abs(wrap(goal.yaw - b)); return 1.6 * (d + 0.6 * RT * (Math.min(t1, Math.PI - t1 + 0.6) + t2)); };
+    // (starting tight against something, even touching it: the first few metres need only be no closer than it is now)
+    let m0 = Math.min(m, 0.02); for (const mm of [0.02, 0.01, 0]) { m0 = mm; if (clear(G, start.x, start.z, start.yaw, mm, len ? impAt(start.x, start.z, start.yaw, start.iyaw, len) : null)) break; }
     const s0 = { x: start.x, z: start.z, yaw: start.yaw, iyaw: len ? start.iyaw : 0, dir: 1, st: 0, g: 0, p: null }; s0.f = h(s0); open.push(s0);
     const S = { done: false, path: null, n: 0, how: '', step(budget = 1500) {
       if (!S.tried) {
@@ -181,11 +183,11 @@
             const y2 = yaw + (ds / WB) * Math.tan(st), my = (yaw + y2) / 2, rx = x - Math.sin(yaw) * REAR + Math.sin(my) * ds, rz = z - Math.cos(yaw) * REAR + Math.cos(my) * ds;
             x = rx + Math.sin(y2) * REAR; z = rz + Math.cos(y2) * REAR; yaw = y2;
             if (len) { iy += (ds / len) * Math.sin(yaw - iy); if (Math.abs(wrap(yaw - iy)) > 1.25) ok = false; }
-            if (ok && !clear(G, x, z, yaw, m, len ? impAt(x, z, yaw, iy, len) : null)) ok = false;
+            if (ok && !clear(G, x, z, yaw, (a.d || 0) < 5 ? m0 : m, len ? impAt(x, z, yaw, iy, len) : null)) ok = false; // (the first few metres may squeeze close: it may be starting tight against something)
           }
           if (!ok) continue;
           const g = a.g + STEP * (dir < 0 ? back * (len ? 1.6 : 1) : 1) + (a.p && dir !== a.dir ? 3.5 : 0) + 0.5 * Math.abs(st - a.st) + 0.12 * Math.abs(st);
-          const n = { x, z, yaw, iyaw: iy, dir, st, g, p: a }; const kk = key(n); if (seen.has(kk) && seen.get(kk) <= g) continue; n.f = g + h(n); open.push(n);
+          const n = { x, z, yaw, iyaw: iy, dir, st, g, d: (a.d || 0) + STEP, p: a }; const kk = key(n); if (seen.has(kk) && seen.get(kk) <= g) continue; n.f = g + h(n); open.push(n);
         }
       }
       return S;
