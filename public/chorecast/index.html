@@ -231,7 +231,6 @@ p{margin:0}
 .pend small{display:block;color:var(--on-sky-2);font-weight:600;font-size:calc(12px*var(--ts))}
 
 /* ---------- Tab bar ---------- */
-html.embed .tabbar{display:none}
 .tabbar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20;display:flex;gap:2px;padding:6px;border-radius:999px;max-width:calc(100% - 24px)}
 .tab{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:78px;min-height:54px;padding:6px 12px;border-radius:999px;color:var(--on-sky-2);font:800 calc(11px*var(--ts)) var(--f-round);transition:background .25s,color .25s}
 .tab .ic{width:24px;height:24px}
@@ -5136,8 +5135,42 @@ function layMasonry(root) {
     if (want.some((g, i) => g.length !== cols[i].children.length || g.some((c, j) => cols[i].children[j] !== c))) want.forEach((g, i) => cols[i].append(...g));
   }
 }
+/* ---------- The homes game's phone ----------
+   home.html (same site, same device) shows each kid's Chorecast pages as apps on its phone, drawn its own way for a
+   phone screen. It doesn't run the chore draft, the market or the trust score itself: whenever this app draws, it
+   writes a summary for every kid, worked out by the same functions as these pages, and the phone reads it (cc:phone). */
+let feedAt = 0, feedVer = -1;
+function phoneFeedSoon() { if (!Store.ready || (feedVer === Store.ver && Date.now() - feedAt < 60000)) return; clearTimeout(phoneFeedSoon.t); phoneFeedSoon.t = setTimeout(phoneFeed, 500); }
+function phoneFeed() {
+  feedVer = Store.ver; feedAt = Date.now();
+  try {
+    buildMarket();
+    const date = dkey(), when = at => new Date(at).toLocaleDateString(undefined, { day: 'numeric', month: 'short' }), out = { at: Date.now(), date, kids: {} };
+    for (const k of kidsList()) {
+      const b = boardFor(k, date), ch = c => ({ title: c.title, icon: c.icon, mins: c.mins || 0, pay: payLabel(c), state: choreState(k.id, c, date).state, sent: !!c.sent });
+      const j = k.jars || {}, t = trustFor(k), m = todayMoney(k), pr = kidProgress(k, date), hv = holdingsValue(k), cost = holdingsCost(k);
+      const jobs = jobsOfKid(k.id).filter(x => x.tier !== 'bonus'), last = jobs.find(x => x.status === 'approved' && x.paid);
+      const photo = ref => (/^[as]:/.test(ref || '') ? (ref[0] === 'a' ? '/_blob/' : '/api/photos/') + encodeURIComponent(ref.slice(2)) : '');
+      out.kids[String(k.name || '').toLowerCase()] = {
+        name: k.name, avatar: k.avatar,
+        today: { must: b.must.map(ch), team: b.team.map(ch), gigs: gigsFor(k, date).map(ch), done: pr.done, total: pr.total, earned: fmt(m.earned), pending: fmt(m.pending) },
+        money: {
+          worth: fmt(netWorth(k)), jars: JARS.map(x => ({ label: x.label, color: x.color, v: fmt(j[x.k] || 0) })), trust: { score: t.score, band: t.band },
+          goal: k.goal ? { icon: k.goal.icon, name: k.goal.name, have: fmt(j.save || 0), target: fmt(k.goal.target), frac: clamp((j.save || 0) / k.goal.target, 0, 1) } : null,
+          slip: last ? { title: last.title, date: when(last.reviewedAt || last.at), gross: fmt(last.paid.gross), tax: fmt(last.paid.tax), net: fmt(last.paid.net), rate: S().taxRate || 0, parts: JARS.map(x => ({ label: x.label, color: x.color, v: fmt((last.paid.parts || {})[x.k] || 0) })) } : null,
+          ledger: (k.ledger || []).slice(0, 12).map(e => ({ memo: e.memo || e.kind || '', amt: fmt(e.amt || 0), at: when(e.at) }))
+        },
+        market: { value: fmt(hv), gain: fmt(Math.abs(hv - cost)), up: hv >= cost, has: hv > 0, cash: fmt(j.invest || 0), funds: FUNDS.map(f => { const h = (k.holdings || {})[f.id], c = change(f.id, 8); return { icon: f.icon, name: f.name, short: f.short, price: fmt(price(f.id)), change: pct(Math.abs(c)), up: c >= 0, value: h && h.units > 0 ? fmt(h.units * price(f.id)) : '' }; }) },
+        proof: { approved: jobs.filter(x => x.status === 'approved').length, badges: badgesFor(k).map(x => ({ icon: x.icon, name: x.name, on: !!x.on })), jobs: jobs.slice(0, 24).map(x => ({ title: x.title, icon: x.icon, date: when(parseKey(x.date)), status: x.status, stars: x.stars || 0, photo: photo(x.photo) })) },
+        grow: { waiting: window.Growth && Growth.waiting ? Growth.waiting(k) : 0, mustLeft: (mustLeft(k) || []).length }
+      };
+    }
+    lsSet('cc:phone', out);
+  } catch (e) { console.warn('phone summary', e); }
+}
 function render() {
   if (Stage.active) { Stage.dirty = true; return; }
+  phoneFeedSoon();
   const app = $('#app');
   document.body.classList.toggle('is-parent', UI.screen === 'parent');
   document.body.dataset.screen = UI.screen; document.body.dataset.tab = UI.screen === 'kid' ? UI.tab : ''; // for looks that colour each screen and tab
@@ -6397,7 +6430,7 @@ async function afterAuth(me, recovery) {
   const empty = !Object.keys(Store.kids).length;
   if (recovery) { UI.auth = { mode: 'recovery', recovery, next: empty && localData() ? 'import' : null }; return render(); }
   if (empty && localData() && !lsGet('cc:imported', false)) { UI.auth = { mode: 'import' }; return render(); }
-  UI.screen = 'who'; scrollTo(0, 0); render(); embedEnter();
+  UI.screen = 'who'; scrollTo(0, 0); render();
 }
 
 /* ---------- Grown-ups: Family and devices ---------- */
@@ -7881,23 +7914,13 @@ window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, IslandHome, PRIZES, LO
 // Links from account emails: ?verify= confirms the address, ?reset= opens Choose a new password. The token leaves the
 // address bar straight away.
 const LINK = (() => { const q = new URLSearchParams(location.search), out = { verify: q.get('verify'), reset: q.get('reset') }; if (out.verify || out.reset) history.replaceState(null, '', location.pathname + location.hash); return out; })();
-// Embedded in the homes game's phone (home.html: ?embed=1&kid=<name>&tab=today|grow|money|market|proof): that
-// kid's page on its own, no tab bar; a kid with a passcode types it first, as always.
-const EMBED = (() => { const q = new URLSearchParams(location.search); return q.get('embed') ? { kid: (q.get('kid') || '').toLowerCase(), tab: ['today', 'grow', 'money', 'market', 'proof'].includes(q.get('tab')) ? q.get('tab') : 'today' } : null; })();
-if (EMBED) document.documentElement.classList.add('embed');
-function embedEnter() {
-  if (!EMBED || UI.screen !== 'who') return;
-  const k = kidsList().find(x => (x.name || '').toLowerCase() === EMBED.kid); if (!k) return;
-  UI.tab = EMBED.tab; if (k.pin && UI.kidUnlocked !== k.id) return openKidGate(k, 'kid');
-  enterKid(k.id); UI.tab = EMBED.tab; UI.tour = null; render();
-}
 initSky(); paintSky(); render();
 (async () => {
   await initStore();
   Store.ready = true; buildMarket(); applyInterest();
   UI.screen = UI.needSignIn ? 'signin' : 'who'; if (UI.needSignIn) UI.auth = { mode: firstAuthMode() };
   if (LINK.reset) { UI.screen = 'signin'; UI.auth = { mode: 'reset', token: LINK.reset }; }
-  render(); embedEnter();
+  render();
   if (LINK.verify) api('POST', '/api/auth/verify', { token: LINK.verify }).then(() => { toast('Email confirmed. Thanks!'); if (Acct.me && Acct.me.user) { Acct.me.user.emailVerified = true; render(); } }).catch(e => toast(e.message));
   if (window.Growth) Growth.ready();
 })();

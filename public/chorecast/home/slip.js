@@ -5,11 +5,12 @@
 (function () {
   const IH = window.IsoHome = window.IsoHome || {};
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-  const xp = n => (n < 0 ? '−' : '') + '✨ ' + Math.abs(Math.round(n)).toLocaleString('en-NZ');
+  // XP as a number; anything else (Chorecast's own money, already written as $4.50) as it comes
+  const xp = n => (typeof n === 'string' ? esc(n) : (n < 0 ? '−' : '') + '✨ ' + Math.abs(Math.round(n)).toLocaleString('en-NZ'));
   const day = at => new Date(at || Date.now()).toLocaleDateString('en-NZ', { day: 'numeric', month: 'short', year: 'numeric' });
   const row = ([l, v, cls], i) => `<div class="sl${cls ? ' ' + cls : ''}" style="--i:${i}"><span>${esc(l)}</span><span>${v == null ? '' : xp(v)}</span></div>`;
   IH.slip = (s, at) => s ? `<div class="ih-slip">
-      <div class="ih-slip-h"><b>${esc(s.head || 'CHORECAST')}</b><span>${esc(s.kind || 'Receipt')} · ${esc(s.who || '')} · ${esc(day(at))}</span></div>
+      <div class="ih-slip-h"><b>${esc(s.head || 'CHORECAST')}</b><span>${esc(s.kind || 'Receipt')} · ${esc(s.who || '')} · ${esc(s.date || day(at))}</span></div>
       <div class="ih-slip-lines">${(s.lines || []).map(row).join('')}</div>
       ${s.sum && s.sum.length ? `<div class="ih-slip-sum">${s.sum.map(row).join('')}</div>` : ''}
       ${s.note ? `<p class="ih-slip-note">${esc(s.note)}</p>` : ''}
