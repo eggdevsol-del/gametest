@@ -56,9 +56,12 @@
       check: 'An economic report can help you decide when to sell.', checkA: true, checkWhy: 'Yes: knowing where prices are going helps you plan.' }
   };
 
+  Object.assign(LESSONS, IH.econLessons || {}); // (bank.js's: budgets, loans, credit, saving, insurance, goals)
   IH.economy = A => {
     const E = () => { const st = A.st(); const e = (st.econ = st.econ || {}); e.days = e.days || []; e.news = e.news || []; e.bills = e.bills || []; e.stmts = e.stmts || []; e.reports = e.reports || []; e.lessons = e.lessons || {}; e.queue = e.queue || []; if (e.dial == null) e.dial = 1; if (e.tax == null) e.tax = 10; if (e.wk == null) e.wk = { mon: mondayOf(today()), sales: 0, run: 0, cap: 0 }; return e; };
     const farm = () => A.st().farm || {};
+    // the bank (bank.js): loans, the credit score, the savings jar, goals, insurance, the budget
+    let BK = null; const track = (k, xp) => { if (BK) BK.track(k, xp); };
     const animals = () => { const f = farm(), out = []; if (Array.isArray(f.animals)) for (const a of f.animals) out.push(a.kind); else for (const [k, n] of Object.entries(f.animals || {})) for (let i = 0; i < n; i++) out.push(k); const S = ((A.st().isl || {}).stable || {}).animals || {}; for (const [k, n] of Object.entries(S)) for (let i = 0; i < n; i++) out.push(k); return out; };
     const vehicles = () => (farm().items || []).filter(it => it.t === 'tractor' || it.t === 'quad').map(it => it.t);
     const due = () => E().bills.filter(b => !b.paid);
@@ -67,7 +70,7 @@
     function payDue(only) {
       const a = A.acct(); let any = false;
       for (const b of due()) { if ((only && b.id !== only) || a.bal < b.amt) continue; a.bal -= b.amt; b.paid = today(); any = true;
-        A.led('farm', -b.amt, `Paid ${b.label.toLowerCase()}`, A.slipOf('CHORECAST FARM', 'Bill', [[b.label, b.amt], ...(b.how ? [[b.how, null]] : []), ...(b.fee ? [['Late fee (10%)', b.fee]] : [])], [['Paid from the farm account', b.amt, 'big'], ['Farm account after', a.bal, 'muted']])); }
+        track('bills', b.amt); A.led('farm', -b.amt, `Paid ${b.label.toLowerCase()}`, A.slipOf('CHORECAST FARM', 'Bill', [[b.label, b.amt], ...(b.how ? [[b.how, null]] : []), ...(b.fee ? [['Late fee (10%)', b.fee]] : [])], [['Paid from the farm account', b.amt, 'big'], ['Farm account after', a.bal, 'muted']])); }
       return any;
     }
     function addBill(label, amt, how, kind) { amt = Math.round(amt); if (amt <= 0) return null; const b = { id: Math.random().toString(36).slice(2, 9), label, amt, how, kind, from: today(), days: 0, paid: 0, late: false }; E().bills.push(b); return b; }
@@ -84,7 +87,7 @@
         addBill('Water', 2 * an.length * k, `${an.length} animal${an.length === 1 ? '' : 's'} × ✨ 2 a week${part ? ` × ${part}` : ''}`, 'water'),
         veh.length ? addBill('Vehicle registration', veh.reduce((s, t) => s + (t === 'tractor' ? 5 : 3), 0) * k, veh.map(t => (t === 'tractor' ? 'Tractor ✨ 5' : 'Quad ✨ 3')).join(', ') + ' a week' + (part ? ` × ${part}` : ''), 'rego') : null,
         big ? addBill('Vet care', 4 * big * k, `${big} big animal${big === 1 ? '' : 's'} × ✨ 4 a week${part ? ` × ${part}` : ''}`, 'vet') : null
-      ].filter(Boolean);
+      ].filter(Boolean).concat(BK ? BK.week(k) : []);
       const billed = bills.reduce((s, b) => s + b.amt, 0), profit = Math.round(wk.sales - wk.run - billed), tax = profit > 0 ? Math.round(profit * e.tax / 100) : 0;
       if (tax) addBill('Income tax', tax, `${e.tax}% of this week’s profit of ✨ ${A.nf(profit)}`, 'tax');
       const s = { mon, sales: Math.round(wk.sales), run: Math.round(wk.run), cap: Math.round(wk.cap), bills: bills.map(b => [b.label, b.amt]), profit, tax, kept: profit - tax, played, rate: e.tax };
@@ -104,6 +107,7 @@
       // the animals' day (farm.js): hungry, unwell, born, lost; a neighbour's fee in holiday mode
       const real = Math.floor(Date.now() / 864e5) + (IH.econDays || 0), fm = A.st().farm;
       if (IH.farmDay && fm && fm.v === 2) { const evs = IH.farmDay(fm, e.lastReal); for (const ev of evs.filter(x => x.kind === 'born')) e.news.push(ev); for (const kind of ['sick', 'verysick', 'died']) { const L = evs.filter(x => x.kind === kind); if (L.length) e.news.push({ kind, list: L }); } if (fm.holiday && fm.holiday.until >= real && e.lastReal != null) charge(10, 'a neighbour looking after the animals'); else if (fm.holiday && fm.holiday.until < real) fm.holiday = null; }
+      if (BK && e.lastReal != null) BK.day();
       e.lastReal = real;
       e.lastDay = t; payDue();
       if (stmt) e.pending = { kind: 'week', stmt };
@@ -141,6 +145,7 @@
     // (several at once: one message, every name in it)
     const who = L => { const one = x => { const k = ((IH.farmData && IH.farmData.ANIMALS[x.animal]) || {}).name || x.animal; return (x.name || '').startsWith('your ') ? x.name : `${x.name} the ${k.toLowerCase()}`; }; const w = L.map(one); return Cap(w.length === 1 ? w[0] : w.length === 2 ? `${w[0]} and ${w[1]}` : `${w.slice(0, -1).join(', ')} and ${w[w.length - 1]}`); };
     function news(n) {
+      if (n.kind === 'note') { A.sheet(`<div class="ih-sh-h"><h3>${A.esc(n.h)}</h3><button class="ih-btn" data-a="ecOk" aria-label="Close">✕</button></div><p>${A.esc(n.body)}</p><div class="ih-row"><button class="ih-b1" data-a="ecOk">OK</button></div>`, 'small'); return A.save(); }
       if (n.list) { const L = n.list, many = L.length > 1, nm0 = who(L); offer('care');
         const h = n.kind === 'died' ? '🕊️ We’re sorry' : `🩺 ${many ? `${L.length} animals are` : `${A.esc(nm0)} is`} ${n.kind === 'sick' ? 'unwell' : 'very sick'}`;
         const body = n.kind === 'died' ? `<p>${A.esc(nm0)} died. Animals need food and water every day, and the vet when they’re sick.</p><p>It’s OK to feel sad. ${many ? 'They’re' : `${A.esc(nm0)} is`} remembered on your farm’s stock list.</p>` : `<p>${L.map(x => x.e).join(' ')} ${A.esc(nm0)} ${many ? 'haven’t' : 'hasn’t'} been fed for a few days and ${many ? 'are' : 'is'} ${n.kind === 'sick' ? 'unwell' : 'very sick now'}.</p><p><b>Feed their paddock, then call the vet at its gate.</b> ${n.kind === 'verysick' ? 'The vet can still help, so please do it today.' : 'Feeding alone won’t fix it now.'}</p>`;
@@ -172,6 +177,7 @@
     // ---------- the actions (app.js passes on any data-a starting ec or ls)
     function act(a, el) {
       const e = E();
+      if (BK) { const r = BK.act(a, el); if (r) return r; }
       if (a === 'ecOk') { A.closeSheet(); A.save(); setTimeout(show, 250); return true; }
       if (a === 'ecPay') { const b = e.bills.find(x => x.id === el.dataset.id), acc = A.acct(); if (!b || b.paid) return true; if (acc.bal < b.amt) { A.toast(`Your farm account has ✨ ${A.nf(acc.bal)}. Sell something, or invest from your wallet, to pay this.`); return true; } payDue(b.id); A.save(); A.ui(true); A.sound('buy'); A.toast(`${b.label} paid.`); return 'bank'; }
       if (a === 'ecDial') { const v = +el.dataset.v; if (v !== e.dial) { e.dial = v; e.pending = { kind: 'change', why: 'dial' }; A.save(); A.toast(`Farm earnings set to ${Math.round(v * 100)}%. The kids see it as market news in their next economic report.`); } return 'grownups'; }
@@ -225,20 +231,22 @@
       return `<p class="ih-ph-sub">For grown-ups. In Chorecast these will sit in Grown-ups; here they’re in the game for trying out.</p>
         <h4 class="ih-ph-h4">Farm earnings</h4><p class="ih-ph-sub">What the farm’s produce sells for. The kids see a change as the market moving, in an economic report; it never says a grown-up set it.</p><div class="ih-seg">${[0.5, 1, 1.5].map(v => `<button class="${e.dial === v ? 'on' : ''}" data-a="ecDial" data-v="${v}">${Math.round(v * 100)}%</button>`).join('')}</div>
         <h4 class="ih-ph-h4">Holiday mode</h4><p class="ih-ph-sub">A neighbour feeds the animals (✨ 10 a day from the farm account), so none go hungry while the kids are away or busy.</p><div class="ih-seg"><button class="${(A.st().farm || {}).holiday ? 'on' : ''}" data-a="ecHol" data-d="14" data-back="grownups">${(A.st().farm || {}).holiday ? 'On (tap to stop)' : 'Turn on for 2 weeks'}</button></div>
+        ${BK ? BK.grownHtml() : ''}
         <h4 class="ih-ph-h4">Income tax on farm profit</h4><p class="ih-ph-sub">The farm’s own tax, separate from family tax (which is only for real money from chores). The kids see a change as news.</p><div class="ih-seg">${[0, 5, 10, 15, 20].map(v => `<button class="${e.tax === v ? 'on' : ''}" data-a="ecTax" data-v="${v}">${v}%</button>`).join('')}</div>`;
     }
     const api = {
-      tick, show, act, billsHtml, grownHtml, farmHtml, report, LESSONS,
+      tick, show, act, billsHtml, grownHtml, farmHtml, loansHtml: () => (BK ? BK.loansHtml() : ''), budgetHtml: () => (BK ? BK.budgetHtml() : ''), acctHtml: () => (BK ? BK.acctHtml() : ''), report, LESSONS,
       price: p => Math.max(1, Math.round(p * E().dial)),
       sale(xp) { E().wk.sales += xp; payDue(); },
-      cost(xp, what) { if (RUNNING.test(what || '')) E().wk.run += xp; else E().wk.cap += xp; },
+      cost(xp, what) { if (RUNNING.test(what || '')) { E().wk.run += xp; track('feed', xp); } else { E().wk.cap += xp; track('new', xp); } },
       // new farm things wait while a bill is overdue (feed and seed never do)
       canBuy(what) { if (!overdue().length || RUNNING.test(what || '')) return true; A.toast('A farm bill is overdue. Pay it in Banking first (feed and seed are still fine).'); return false; },
       // fuel and the like: paid now if the farm account can, otherwise a bill to pay
       charge: (xp, what) => charge(xp, what),
-      _charge(xp, what) { const a = A.acct(); E().wk.run += xp; if (a.bal >= xp) { a.bal -= xp; A.led('farm', -xp, `Paid for ${what}`, A.slipOf('CHORECAST FARM', 'Receipt', [[what[0].toUpperCase() + what.slice(1), xp]], [['Paid from the farm account', xp, 'big'], ['Farm account after', a.bal, 'muted']])); } else addBill(what[0].toUpperCase() + what.slice(1), xp, 'The farm account was short', 'fuel'); A.save(); },
+      _charge(xp, what) { const a = A.acct(); E().wk.run += xp; track(/fuel/.test(what) ? 'fuel' : 'bills', xp); if (a.bal >= xp) { a.bal -= xp; A.led('farm', -xp, `Paid for ${what}`, A.slipOf('CHORECAST FARM', 'Receipt', [[what[0].toUpperCase() + what.slice(1), xp]], [['Paid from the farm account', xp, 'big'], ['Farm account after', a.bal, 'muted']])); } else addBill(what[0].toUpperCase() + what.slice(1), xp, 'The farm account was short', 'fuel'); A.save(); },
       dueCount: () => due().length, overdueCount: () => overdue().length
     };
+    BK = IH.bank ? IH.bank(A, { E, offer, lesson: k => lesson(k), news: n => E().news.push(n), today, bill: (l, amt, how) => addBill(l, amt, how, 'misc') }) : null;
     return api;
   };
   IH.economy.today = today;

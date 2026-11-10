@@ -2671,8 +2671,10 @@
   function bankHtml() {
     const a = farmAcct(), w = wallet().left, tab = O.bkTab || 'acct', L = O.st.ledger || [];
     const nb = O.E ? O.E.dueCount() : 0;
-    const tabs = `<div class="ih-seg ih-ph-tabs"><button class="${tab === 'acct' ? 'on' : ''}" data-a="bkTab" data-v="acct">Accounts</button><button class="${tab === 'bills' ? 'on' : ''}" data-a="bkTab" data-v="bills">Bills${nb ? ` <i class="ih-bk-n">${nb}</i>` : ''}</button><button class="${tab === 'tx' ? 'on' : ''}" data-a="bkTab" data-v="tx">Transactions</button></div>`;
+    const tabs = `<div class="ih-seg ih-ph-tabs"><button class="${tab === 'acct' ? 'on' : ''}" data-a="bkTab" data-v="acct">Accounts</button><button class="${tab === 'bills' ? 'on' : ''}" data-a="bkTab" data-v="bills">Bills${nb ? ` <i class="ih-bk-n">${nb}</i>` : ''}</button><button class="${tab === 'loans' ? 'on' : ''}" data-a="bkTab" data-v="loans">Loans</button><button class="${tab === 'budget' ? 'on' : ''}" data-a="bkTab" data-v="budget">Budget</button><button class="${tab === 'tx' ? 'on' : ''}" data-a="bkTab" data-v="tx">Activity</button></div>`;
     if (tab === 'bills') return `${tabs}${O.E ? O.E.billsHtml() : ''}`;
+    if (tab === 'loans') return `${tabs}${O.E ? O.E.loansHtml() : ''}`;
+    if (tab === 'budget') return `${tabs}${O.E ? O.E.budgetHtml() : ''}`;
     const when = at => new Date(at).toLocaleDateString('en-NZ', { day: 'numeric', month: 'short' });
     if (tab === 'tx') return `${tabs}<div class="ih-ph-list">${L.length ? L.map(e => `<button class="ih-ph-row ih-bk-tx" data-a="slipOpen" data-id="${e.id}"><span class="ih-ph-e">${e.acct === 'farm' ? '🚜' : '👛'}</span><span><b>${esc(cap(e.memo))}</b><small>${when(e.at)} · ${e.acct === 'farm' ? 'Farm account' : 'Wallet'}</small></span><span class="ih-bk-amt ${e.amt < 0 ? 'out' : 'in'}">${e.amt < 0 ? '−' : '+'}✨ ${nf(Math.abs(e.amt))}</span></button>`).join('') : '<p class="ih-ph-sub">Nothing yet. Sell something from your farm, or buy something, and it shows here with its slip.</p>'}</div>`;
     const paid = a.wageDay === dayNo(), pays = [50, 100, 250].filter(n => n < a.bal), invs = [50, 100, 250, 500].filter(n => n <= w);
@@ -2681,6 +2683,7 @@
       ${paid ? '<p class="ih-ph-sub"><b>Paid today.</b> Again tomorrow.</p>' : a.bal > 0 ? `<div class="ih-bk-amts">${pays.map(n => `<button class="ih-b1 ih-sm" data-a="bkPay" data-n="${n}">✨ ${n}</button>`).join('')}<button class="ih-b1 ih-sm" data-a="bkPay" data-n="${Math.floor(a.bal)}">All ✨ ${nf(a.bal)}</button></div>` : '<p class="ih-ph-sub">Your farm account is empty. Sell eggs, milk or wool at the grocer to fill it.</p>'}
       <h4 class="ih-ph-h4">Invest in your farm</h4><p class="ih-ph-sub">Put XP from your wallet into the farm account, to buy animals, feed or fences. The farm owes it back to you.</p>
       ${invs.length ? `<div class="ih-bk-amts">${invs.map(n => `<button class="ih-b2 ih-sm" data-a="bkInv" data-n="${n}">✨ ${n}</button>`).join('')}</div>` : '<p class="ih-ph-sub">Your wallet is empty. Chores and lessons fill it.</p>'}
+      ${O.E ? O.E.acctHtml() : ''}
       <button class="ih-bk-grown" data-a="app" data-app="grownups">For grown-ups ›</button>`;
   }
   function phone(app = 'home') {
@@ -2962,7 +2965,7 @@
       if (moved) { save(); setTimeout(() => toast(moved === 2 ? 'Your veggie plot and orchard are blocks of land on your farm now, with everything still growing.' : `Your ${own.plot && land.some(b => b.from === 'plot') ? 'veggie plot' : 'orchard'} is a block of land on your farm now, with everything still growing.`), 4000); } }
     // the farm's running costs (economy.js): a played day counted, bills, the Monday statement, reports, lessons
     if (IH.economy) {
-      O.E = IH.economy({ st: () => O.st, kid: () => O.kid, food: () => food(), goods: () => goods(), acct: farmAcct, led, slipOf, save, toast, sheet, closeSheet, ui, sound, wGain, nf, esc, sheetOpen: () => !$('.ih-sheet', O.root).hidden });
+      O.E = IH.economy({ st: () => O.st, kid: () => O.kid, food: () => food(), goods: () => goods(), wallet: () => wallet().left, acct: farmAcct, led, slipOf, save, toast, sheet, closeSheet, ui, sound, wGain, nf, esc, sheetOpen: () => !$('.ih-sheet', O.root).hidden });
       O.econT = setInterval(() => { if (O && O.E && !O.paused) O.E.tick(); }, 60000); setTimeout(() => { if (O && O.E) O.E.tick(); }, 2500);
     }
     return true;

@@ -297,3 +297,23 @@ body.ih-open{overflow:hidden}
 .vg-hb,.ih-ph-row .vg-hb{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle;background:#4ADE80}
 .vg-hb.hungry{background:#ffc94d}.vg-hb.sick{background:#ff8a5c}.vg-hb.sick2{background:#e8503a}
 .vg-name{flex:1;min-width:0;font:inherit;font-weight:800;padding:8px 10px;border-radius:10px;border:2px solid #e2d9f3}
+/* the bank (bank.js): the loan agreement, the signature, the budget bars */
+.ih-ph-tabs{overflow-x:auto;scrollbar-width:none}
+.ih-ph-tabs button{flex:0 0 auto;padding:8px 10px}
+.ih-terms{background:#fff;border-radius:14px;padding:10px 12px;margin:8px 0;font-size:13px;line-height:1.45}
+.ih-terms ul{margin:6px 0 0;padding-left:18px}
+.ih-terms li{margin-bottom:4px}
+.ih-sig{display:block;width:100%;max-width:340px;height:110px;margin:6px auto 10px;background:#FFFDF6;border:2px dashed #C9CBD6;border-radius:12px;touch-action:none}
+.ih-sig-img{display:block;max-width:180px;height:auto;margin-top:6px;background:#FFFDF6;border-radius:8px}
+.ih-ph-row .ih-cc-bar{display:block;height:6px;margin-top:4px}
+/* cards, a big figure and a progress bar on the phone (the Banking and Farm apps) */
+.ih-cc-hero{display:grid;gap:4px;background:#fff;border-radius:18px;padding:12px 14px;margin:8px 0 4px;box-shadow:0 6px 16px -10px rgba(40,20,80,.35)}
+.ih-cc-hero small{color:var(--ink2);font-size:12px}
+.ih-cc-hero b{font-size:18px;font-weight:900}
+.ih-cc-bar{display:block;height:10px;border-radius:99px;background:#ece6f6;overflow:hidden}
+.ih-cc-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#4ADE80,#22c3a0)}
+.ih-ph-row .ih-cc-bar{width:100%;height:6px;margin-top:4px}
+.ih-ph-row>span:nth-child(2){flex:1;min-width:0}
+.ih-cc-card{background:#fff;border-radius:18px;padding:12px 14px;margin-top:8px}
+.ih-cc-card p{margin:0 0 6px}
+.ih-cc-hero small b{font-size:13px}.ih-ec-up{color:#1f8a4c}
