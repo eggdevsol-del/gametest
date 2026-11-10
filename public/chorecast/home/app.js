@@ -81,7 +81,7 @@
   function wSpend(xp, memo, head, lines) { O.st.spent = (O.st.spent || 0) + xp; led('wallet', -xp, memo, slipOf(head || 'CHORECAST', 'Receipt', lines || [[cap(memo), xp]], [['Total paid', xp, 'big'], ['Wallet after', wallet().left, 'muted']])); }
   function wGain(xp, memo, head, lines) { O.st.spent = (O.st.spent || 0) - xp; led('wallet', xp, memo, slipOf(head || 'CHORECAST', 'Receipt', lines || [[cap(memo), xp]], [['Total received', xp, 'big'], ['Wallet after', wallet().left, 'muted']])); }
   // into the farm account: what the farm (and the sea) sells
-  function farmIn(xp, memo, lines) { const a = farmAcct(); a.bal += xp; led('farm', xp, memo, slipOf('CHORECAST FARM', 'Sale receipt', lines || [[cap(memo), xp]], [['Into the farm account', xp, 'big'], ['Farm account after', a.bal, 'muted']])); }
+  function farmIn(xp, memo, lines) { const a = farmAcct(); a.bal += xp; led('farm', xp, memo, slipOf('CHORECAST FARM', 'Sale receipt', lines || [[cap(memo), xp]], [['Into the farm account', xp, 'big'], ['Farm account after', a.bal, 'muted']])); if (O.E) O.E.sale(xp); }
   // from the wallet into the farm (not taxed; the farm owes it back to you)
   function invest(xp, auto) {
     const a = farmAcct(); xp = Math.floor(xp); if (xp <= 0 || wallet().left < xp) return null;
@@ -91,11 +91,12 @@
   }
   // a farm purchase: out of the farm account; if that's short, the rest comes in from the wallet first
   function farmPay(xp, what) {
+    if (O.E && !O.E.canBuy(what)) return false;
     const a = farmAcct(), short = Math.max(0, xp - a.bal), w = wallet().left;
     if (short && w < short) { toast(`You need ✨ ${nf(xp)} XP for ${what || 'that'}. Your farm account has ✨ ${nf(a.bal)} and your wallet ✨ ${nf(w)}.`); return false; }
     if (short) invest(short, true);
     a.bal -= xp; led('farm', -xp, `Bought ${what || 'farm things'}`, slipOf('CHORECAST FARM', 'Receipt', [[cap(what || 'farm things'), xp]], [['Paid from the farm account', xp, 'big'], ['Farm account after', a.bal, 'muted']]));
-    save(); sound('buy'); ui(true); if (short) toast(`The farm account was short, so ✨ ${nf(short)} came in from your wallet.`); return true;
+    if (O.E) O.E.cost(xp, what); save(); sound('buy'); ui(true); if (short) toast(`The farm account was short, so ✨ ${nf(short)} came in from your wallet.`); return true;
   }
   // pay yourself: once a day, a wage from the farm into the wallet, on a pay slip like chore pay
   function payYourself(xp) {
@@ -2403,7 +2404,7 @@
   function produceSheet() {
     const f = food(), g = goods(), L = Object.entries(PRODUCE).filter(([id, P]) => (P.goods ? g[id] : f[id]) > 0);
     sheet(`<div class="ih-sh-h"><h3>Sell your produce</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div><p class="ih-ph-sub">From your farm and the sea. The grocer pays a fair price for each.</p>
-      <div class="ih-ph-list">${L.length ? L.map(([id, P]) => `<div class="ih-ph-row"><span class="ih-ph-e">${P.e}</span><span><b>${P.name}</b><small>You have ${P.goods ? g[id] : f[id]}${P.goods ? '' : ' (in your fridge)'}</small></span><button class="ih-b1 ih-sm" data-a="pSell" data-k="${id}">✨ ${P.price}</button></div>`).join('') : '<p class="ih-ph-sub">Nothing to sell yet. Collect eggs, milk and wool on your farm, or catch fish at the beach.</p>'}</div>`);
+      <div class="ih-ph-list">${L.length ? L.map(([id, P]) => `<div class="ih-ph-row"><span class="ih-ph-e">${P.e}</span><span><b>${P.name}</b><small>You have ${P.goods ? g[id] : f[id]}${P.goods ? '' : ' (in your fridge)'}</small></span><button class="ih-b1 ih-sm" data-a="pSell" data-k="${id}">✨ ${O.E ? O.E.price(P.price) : P.price}</button></div>`).join('') : '<p class="ih-ph-sub">Nothing to sell yet. Collect eggs, milk and wool on your farm, or catch fish at the beach.</p>'}</div>`);
   }
   function goVillage() {
     const G = O.home.gate; if (!G) return;
@@ -2454,7 +2455,7 @@
     addGoods(id, n = 1) { const g = goods(); g[id] = (g[id] || 0) + n; save(); }, goods: () => goods(), useFood(id, n = 1) { const f = food(); if ((f[id] || 0) < n) return false; f[id] -= n; save(); return true; }, useGoods(id, n = 1) { const g = goods(); if ((g[id] || 0) < n) return false; g[id] -= n; save(); return true; }, earn2: xp => { O.st.jobPay = (O.st.jobPay || 0) + xp; save(); ui(true); }, phase: () => O.st.look.phase,
     pay(xp, what) { const w = wallet(); if (w.left < xp) { toast(`You need ✨ ${xp} XP for ${what || 'that'}.`); return false; } wSpend(xp, what || 'a purchase'); save(); sound('buy'); ui(true); return true; },
     // the farm's own purchases (animals, feed, fences, seed): out of the farm account, topped up from the wallet if short
-    farmPay: (xp, what) => farmPay(xp, what), farmAcct: () => farmAcct(), farmIn(xp, memo) { farmIn(xp, memo); save(); ui(true); },
+    farmPay: (xp, what) => farmPay(xp, what), farmAcct: () => farmAcct(), farmCharge(xp, what) { if (O.E) { O.E.charge(xp, what); ui(true); } }, farmIn(xp, memo) { farmIn(xp, memo); save(); ui(true); },
     hasTool: t => !!(O.st.tools || {})[t], giveTool(t) { (O.st.tools = O.st.tools || {})[t] = Date.now(); save(); },
     book(kind, key) { const b = ((O.st.books = O.st.books || {})[kind] = O.st.books[kind] || {}); const isNew = !b[key]; b[key] = (b[key] || 0) + 1; save(); return { isNew, count: Object.keys(b).length }; },
     daily(key, max) { const day = Math.floor(Date.now() / 864e5), d = (O.st.daily = O.st.daily && O.st.daily.day === day ? O.st.daily : { day, n: {} }); if ((d.n[key] || 0) >= max) return false; d.n[key] = (d.n[key] || 0) + 1; save(); return true; },
@@ -2667,7 +2668,9 @@
   // the Banking app: both accounts, pay yourself (once a day) and invest, and every move with its slip
   function bankHtml() {
     const a = farmAcct(), w = wallet().left, tab = O.bkTab || 'acct', L = O.st.ledger || [];
-    const tabs = `<div class="ih-seg ih-ph-tabs"><button class="${tab === 'acct' ? 'on' : ''}" data-a="bkTab" data-v="acct">Accounts</button><button class="${tab === 'tx' ? 'on' : ''}" data-a="bkTab" data-v="tx">Transactions</button></div>`;
+    const nb = O.E ? O.E.dueCount() : 0;
+    const tabs = `<div class="ih-seg ih-ph-tabs"><button class="${tab === 'acct' ? 'on' : ''}" data-a="bkTab" data-v="acct">Accounts</button><button class="${tab === 'bills' ? 'on' : ''}" data-a="bkTab" data-v="bills">Bills${nb ? ` <i class="ih-bk-n">${nb}</i>` : ''}</button><button class="${tab === 'tx' ? 'on' : ''}" data-a="bkTab" data-v="tx">Transactions</button></div>`;
+    if (tab === 'bills') return `${tabs}${O.E ? O.E.billsHtml() : ''}`;
     const when = at => new Date(at).toLocaleDateString('en-NZ', { day: 'numeric', month: 'short' });
     if (tab === 'tx') return `${tabs}<div class="ih-ph-list">${L.length ? L.map(e => `<button class="ih-ph-row ih-bk-tx" data-a="slipOpen" data-id="${e.id}"><span class="ih-ph-e">${e.acct === 'farm' ? '🚜' : '👛'}</span><span><b>${esc(cap(e.memo))}</b><small>${when(e.at)} · ${e.acct === 'farm' ? 'Farm account' : 'Wallet'}</small></span><span class="ih-bk-amt ${e.amt < 0 ? 'out' : 'in'}">${e.amt < 0 ? '−' : '+'}✨ ${nf(Math.abs(e.amt))}</span></button>`).join('') : '<p class="ih-ph-sub">Nothing yet. Sell something from your farm, or buy something, and it shows here with its slip.</p>'}</div>`;
     const paid = a.wageDay === dayNo(), pays = [50, 100, 250].filter(n => n < a.bal), invs = [50, 100, 250, 500].filter(n => n <= w);
@@ -2675,7 +2678,8 @@
       <h4 class="ih-ph-h4">Pay yourself</h4><p class="ih-ph-sub">A wage from your farm into your wallet, once a day, on a pay slip.</p>
       ${paid ? '<p class="ih-ph-sub"><b>Paid today.</b> Again tomorrow.</p>' : a.bal > 0 ? `<div class="ih-bk-amts">${pays.map(n => `<button class="ih-b1 ih-sm" data-a="bkPay" data-n="${n}">✨ ${n}</button>`).join('')}<button class="ih-b1 ih-sm" data-a="bkPay" data-n="${Math.floor(a.bal)}">All ✨ ${nf(a.bal)}</button></div>` : '<p class="ih-ph-sub">Your farm account is empty. Sell eggs, milk or wool at the grocer to fill it.</p>'}
       <h4 class="ih-ph-h4">Invest in your farm</h4><p class="ih-ph-sub">Put XP from your wallet into the farm account, to buy animals, feed or fences. The farm owes it back to you.</p>
-      ${invs.length ? `<div class="ih-bk-amts">${invs.map(n => `<button class="ih-b2 ih-sm" data-a="bkInv" data-n="${n}">✨ ${n}</button>`).join('')}</div>` : '<p class="ih-ph-sub">Your wallet is empty. Chores and lessons fill it.</p>'}`;
+      ${invs.length ? `<div class="ih-bk-amts">${invs.map(n => `<button class="ih-b2 ih-sm" data-a="bkInv" data-n="${n}">✨ ${n}</button>`).join('')}</div>` : '<p class="ih-ph-sub">Your wallet is empty. Chores and lessons fill it.</p>'}
+      <button class="ih-bk-grown" data-a="app" data-app="grownups">For grown-ups ›</button>`;
   }
   function phone(app = 'home') {
     const w = wallet(), K = IH.kitchen, f = food(), back = `<button class="ih-ph-back" data-a="phone">‹ Back</button>`;
@@ -2683,6 +2687,7 @@
     const appBtn = ([k, e, n]) => `<button class="ih-ph-app" data-a="app" data-app="${k}"><span>${e}</span>${n}</button>`;
     if (app === 'home') body = `<div class="ih-ph-apps">${APPS.map(appBtn).join('')}</div>`;
     if (app === 'bank') body = `${back}<h3>🏦 Banking</h3>${bankHtml()}`;
+    if (app === 'grownups') body = `<button class="ih-ph-back" data-a="app" data-app="bank">‹ Banking</button><h3>For grown-ups</h3>${O.E ? O.E.grownHtml() : ''}`;
     if (app === 'slip') { const e = (O.st.ledger || []).find(x => x.id === O.slipId); body = `<button class="ih-ph-back" data-a="app" data-app="bank">‹ Banking</button>${e && e.slip ? IH.slip(e.slip, e.at) : '<p class="ih-ph-sub">That slip has gone.</p>'}`; }
     if (app === 'groceries' && K) body = `${back}<h3>Groceries</h3><p class="ih-ph-sub">Food for your fridge and pantry. Your character cooks with it.</p><div class="ih-ph-list">${Object.entries(K.FOOD).map(([id, x]) => `<div class="ih-ph-row"><span class="ih-ph-e">${x.emoji}</span><span><b>${esc(x.name)}</b><small>${f[id] ? `${f[id]} in the ${x.where}` : `None in the ${x.where}`}</small></span><button class="ih-b1 ih-ph-btn" data-a="gbuy" data-f="${id}" ${w.left < x.xp ? 'disabled' : ''}>✨ ${x.xp}</button></div>`).join('')}</div>`;
     if (app === 'recipes' && K) body = `${back}<h3>Recipes</h3><p class="ih-ph-sub">Pick what your character makes next. It needs everything on the list.</p><div class="ih-ph-list">${K.RECIPES.map(r => { const ok = K.has(f, r), next = O.st.recipe === r.id; return `<div class="ih-ph-row"><span class="ih-ph-e">${r.emoji}</span><span><b>${esc(r.name)}</b><small>${r.needs.map(n => `${(f[n] || 0) > 0 ? '✓' : '·'} ${esc(K.FOOD[n].name)}`).join('  ')}</small></span><button class="${next ? 'ih-b2' : 'ih-b1'} ih-ph-btn" data-a="recipe" data-r="${r.id}">${next ? 'Next up' : ok ? 'Make next' : 'Pick'}</button></div>`; }).join('')}</div>`;
@@ -2834,10 +2839,11 @@
     if (a === 'turnR') return turnView(1);
     if (a === 'decorate') { actsClose(); if (O.held) placeHeld(); if (O.held) return; O.editing = !O.editing; if (O.editing && !O.cat) O.cat = DEFS.some(d => spare(d.t) > 0) ? 'mine' : 'furn'; sound(O.editing ? 'lift' : 'place'); return ui(); }
     if (a === 'cat') { O.cat = el.dataset.c; return ui(); }
+    if (/^(ec|ls)[A-Z]/.test(a) && O.E) { const r = O.E.act(a, el); if (r === 'bank' || r === 'grownups') return phone(r); if (r) return; }
     if (a === 'phone') { sound('pop'); return phone('home'); }
     if (a === 'goTo') { closeSheet(); return travelTo(el.dataset.w); }
     if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); return phone('travel'); }
-    if (a === 'pSell') { const id = el.dataset.k, P = PRODUCE[id]; if (!P) return; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return; if (P.goods) g[id] -= 1; else f[id] -= 1; farmIn(P.price, `sold ${P.one} at the grocer`, [[cap(P.one), P.price]]); save(); sound('buy'); ui(true); toast(`Sold ${P.one}: ✨ ${P.price} into your farm account.`); return produceSheet(); }
+    if (a === 'pSell') { const id = el.dataset.k, P = PRODUCE[id]; if (!P) return; const f = food(), g = goods(); if (P.goods ? !(g[id] > 0) : !(f[id] > 0)) return; if (P.goods) g[id] -= 1; else f[id] -= 1; const pr = O.E ? O.E.price(P.price) : P.price; farmIn(pr, `sold ${P.one} at the grocer`, [[cap(P.one), pr]]); save(); sound('buy'); ui(true); toast(`Sold ${P.one}: ✨ ${pr} into your farm account.`); return produceSheet(); }
     if (a === 'app') { const ap = el.dataset.app; O.pick = null; if (ap === 'shop') { closeSheet(); if (!O.editing) act('decorate'); return; } if (ap === 'homes') { closeSheet(); return homesSheet(); } return phone(ap); }
     if (a === 'gbuy') { const id = el.dataset.f, x = IH.kitchen && IH.kitchen.FOOD[id], w = wallet(); if (!x || w.left < x.xp) return; wSpend(x.xp, x.name ? x.name.toLowerCase() : id, 'GROCERIES APP'); const f = food(); f[id] = (f[id] || 0) + 1; save(); sound('buy'); if (O.opts.track) O.opts.track('home.food', { food: id, xp: x.xp }); return phone('groceries'); }
     if (a === 'recipe') { st.recipe = st.recipe === el.dataset.r ? null : el.dataset.r; save(); sound('pop'); return phone('recipes'); }
@@ -2946,6 +2952,11 @@
     size(); loadHome(); applyLook(); CAM.intro = { a: 0.62, b: 1, t0: 0 }; lastT = null; beat.reset();
     ui(); force = true; if (!raf) raf = requestAnimationFrame(loop);
     document.body.classList.add('ih-open');
+    // the farm's running costs (economy.js): a played day counted, bills, the Monday statement, reports, lessons
+    if (IH.economy) {
+      O.E = IH.economy({ st: () => O.st, kid: () => O.kid, acct: farmAcct, led, slipOf, save, toast, sheet, closeSheet, ui, sound, wGain, nf, esc, sheetOpen: () => !$('.ih-sheet', O.root).hidden });
+      O.econT = setInterval(() => { if (O && O.E && !O.paused) O.E.tick(); }, 60000); setTimeout(() => { if (O && O.E) O.E.tick(); }, 2500);
+    }
     return true;
   }
   function key_(e) {
@@ -2959,7 +2970,7 @@
   function close(quiet) {
     if (O && O.netOff) { O.netOff(); O.netOff = null; if (IH.villageNet) IH.villageNet.stop(); }
     guitarMusic(false); if (O && O.away && IH.village) { const o = O; O = null; IH.village.close(); O = o; }
-    if (!O) return; const o = O;
+    if (!O) return; const o = O; clearInterval(o.econT);
     if (o.held) cancelHeld(); save();
     removeEventListener('resize', size); removeEventListener('keydown', key_); if (window.visualViewport) { visualViewport.removeEventListener('resize', size); visualViewport.removeEventListener('scroll', size); } document.removeEventListener('visibilitychange', vis);
     for (const id of [...insts.keys()]) dropInst(id);
@@ -2973,6 +2984,7 @@
   Object.defineProperty(IH, 'isOpen', { get: () => !!O });
   // Test hook: the state, what's where, and a few levers.
   IH.debug = () => O && {
+    econ: O.E,
     st: O.st, home: O.st.cur, items: items().map(it => ({ ...it })), held: O.held && { t: O.held.rec.t, ok: O.held.ok, rec: { ...O.held.rec } }, editing: O.editing,
     cam: { yaw: CAM.yaw, zoom: CAM.zoom, view: CAM.view, fitV: CAM.fitV }, frames: O.frames, beat: beat.mode, wallet: wallet(),
     screenOf(id) { const i = insts.get(id); if (!i) return null; const v = i.group.position.clone().project(O.S.cam), r = O.cv.getBoundingClientRect(); return [(v.x + 1) / 2 * r.width + r.left, (1 - v.y) / 2 * r.height + r.top]; },

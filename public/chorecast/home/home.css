@@ -268,3 +268,26 @@ body.ih-open{overflow:hidden}
 .ih-slip-note{font:500 12px/1.4 system-ui,sans-serif;color:#6A7190;margin:12px 0 0}
 .ih-slip .sl>span:last-child{white-space:nowrap}
 .ih-ph-row>.ih-bk-amt{flex:0 0 auto}
+/* the farm's bills, statements, economic reports and lesson cards (economy.js) */
+.ih-bk-n{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:9px;background:#e8503a;color:#fff;font-size:11px;font-style:normal;font-weight:900;margin-left:4px}
+.ih-bk-grown{display:block;margin:18px auto 4px;background:none;color:var(--ink2);font-weight:800;font-size:12px}
+.ih-ec-rep{background:#fff;border-radius:18px;padding:12px 12px 6px;margin-top:12px}
+.ih-ec-rep-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px}
+.ih-ec-rep-h small{color:var(--ink2);font-size:12px}
+.ih-ec-tr{display:flex;align-items:center;gap:4px;font-weight:900;color:#8a8f98;flex:0 0 auto}
+.ih-ec-tr.up{color:#1f8a4c}.ih-ec-tr.dn{color:#b8402f}
+.ih-ec-spark{width:48px;height:16px}
+.ih-ls p{margin:0 0 10px;line-height:1.45}
+.ih-ls-tag{font-size:12px;font-weight:800;color:var(--ink2);margin:-4px 0 10px}
+.ih-ls-k{font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7c6cff}
+.ih-ls-opts{display:grid;gap:8px;margin-bottom:10px}
+.ih-ls-opts.two{grid-template-columns:1fr 1fr}
+.ih-ls-opts button{font:inherit;font-weight:800;padding:12px;border-radius:14px;background:#f3eefb;color:var(--ink);border:2px solid transparent}
+.ih-ls-opts button.ok{background:#dff7e7;border-color:#1f8a4c}
+.ih-ls-opts button.no{background:#ffe1dc;border-color:#b8402f}
+.ih-ls-why{font-weight:700}
+.ih-ls-later{display:block;margin:8px auto 0;background:none;color:var(--ink2);font-weight:800;font-size:13px}
+.ih-ph-tabs{flex-wrap:nowrap}
+.ih-ph-tabs button{flex:1;min-width:0;padding:8px 4px;font-size:13px;white-space:nowrap}
+.ih-ec-late{font-style:normal;font-weight:900;color:#b8402f}
+.ih-ph-row>.ih-sm{flex:0 0 auto}

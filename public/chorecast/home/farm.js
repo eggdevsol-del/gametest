@@ -309,7 +309,7 @@
     function startDrive(id) {
       const v = V(), m = v.B.models[id], veh = v.B.vehicles[id]; if (!m || !veh) return;
       DR = { id, m, veh, x: m.position.x, z: m.position.z, yaw: m.rotation.y, v: 0, steer: 0, imp: null, bumped: 0, smoke: 0 };
-      v.drive = DR; const k = v.kid; k.path = []; k.pose = 'sitchair'; c.sound('on');
+      v.drive = DR; const k = v.kid; k.path = []; k.pose = 'sitchair'; c.sound('on'); if (sh().farmCharge) sh().farmCharge(5, 'fuel for the tractor');
       for (const kk in KEYS) KEYS[kk] = false; addEventListener('keydown', onKey, true); addEventListener('keyup', onKey, true);
       const el = document.createElement('div'); el.className = 'vg-drive'; DR.el = el;
       el.innerHTML = `<div class="vg-dr-top"><b>🚜</b><span>Hitch:</span><button data-v="farm" data-k="hitch:none" class="on">Nothing</button><button data-v="farm" data-k="hitch:baler">🟢 Baler</button><button data-v="farm" data-k="hitch:trailer">🟫 Trailer</button><button data-v="farm" data-k="auto" class="vg-dr-auto">🤖 Auto</button><button data-v="farm" data-k="dout" class="vg-dr-out">Get out</button></div><div class="vg-dr-note" hidden></div>
