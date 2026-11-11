@@ -1293,6 +1293,10 @@ body.st-open #app{opacity:0;pointer-events:none}
 .isle-cap{max-width:36%}
 .isle .isle-hint{position:absolute;inset:auto;right:6px;top:6px;font:800 calc(11px*var(--ts)) var(--f-round);padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.2);pointer-events:none}
 .isle .no3d{position:absolute;inset:0;display:grid;place-items:center;font-size:calc(90px*var(--ts))}
+/* The homes game covers the whole screen: the painted sky and the page under it stop drawing, so a phone isn't
+   painting the sky, the glass panels and the 3D cards behind the farm every frame */
+body.ih-open #sky{display:none}
+body.ih-open #app{visibility:hidden}
 .home-isle{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
 .isle .home-isle{left:30%}
 .home-isle img{display:block;height:100%;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 16px 16px rgba(10,30,90,.28));animation:homeBob 5s ease-in-out infinite}
@@ -3971,7 +3975,7 @@ void main() {
   function frame(now) {
     raf = 0; const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
     // Cards under a full-screen view (a mission, the island studio, Character Growth) can't be seen, so they wait
-    const top = cv.classList.contains('top'), hold = Stage.active || Studio.covers || document.body.classList.contains('gw-open'); let any = false;
+    const top = cv.classList.contains('top'), hold = Stage.active || Studio.covers || document.body.classList.contains('gw-open') || document.body.classList.contains('ih-open'); let any = false;
     for (const o of live.values()) o.obj.visible = false;
     rainM.visible = false; R.setScissorTest(false);
     const shown = []; let needW = 1, needH = 1;
@@ -7932,7 +7936,7 @@ window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, IslandHome, PRIZES, LO
   // 3D mission does), and where its view sits for this screen and tab, so moving between them slides the scenery past
   // in depth, near trees more than the far mountain. Tabs further along the bar move the view right, as if paging
   // through them (the scenery slides left), which also keeps the near-left tree out from behind the page's text.
-  skyBusy: () => !!Stage.active,
+  skyBusy: () => !!Stage.active || document.body.classList.contains('ih-open'), // (the homes game covers the sky: it stops drawing)
   skyPan: () => {
     if (Studio.covers) return [0, 0];
     if (document.body.classList.contains('gw-open')) return [0.4, 0.12];

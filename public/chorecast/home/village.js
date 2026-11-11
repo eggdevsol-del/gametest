@@ -82,7 +82,7 @@
   // ---------- the scene
   function scene(B) {
     const sc = new T.Scene(), sun = new T.DirectionalLight(0xffffff, 1);
-    sun.castShadow = true; sun.shadow.mapSize.setScalar(IH.lite ? 1024 : 2048); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.018; sun.shadow.radius = 1;
+    sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.018; sun.shadow.radius = 1;
     sc.add(sun, sun.target);
     const lamps = []; for (let i = 0; i < 4; i++) { const p = new T.PointLight(0xffc77a, 0, 5.2, 2); sc.add(p); lamps.push(p); } // (the same lights as a home, so its shaders are the same)
     const cam = new T.OrthographicCamera(-10, 10, 10, -10, 1, 1400);
