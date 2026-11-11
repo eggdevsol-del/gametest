@@ -215,16 +215,20 @@
         api.solid(ix - 0.75, -1.25, ix, iz);
         // the tool rack (left wall): spade, fork, hoe, rake hanging handle-up
         k.box(0.04, 0.08, 1.4, -ix + 0.03, 1.6, 0.5, WOOD_D);
-        const tool = (zz, head) => { k.cyl(0.02, 1.2, -ix + 0.1, 0.4, zz, '#c98f5a', { n: 6 }); head(zz); };
-        tool(0.0, zz => { k.box(0.02, 0.28, 0.2, -ix + 0.1, 0.15, zz, STEEL); });
-        tool(0.35, zz => { for (let i = 0; i < 4; i++) k.box(0.015, 0.3, 0.015, -ix + 0.1, 0.12, zz - 0.07 + i * 0.05, STEEL); k.box(0.02, 0.04, 0.2, -ix + 0.1, 0.4, zz, STEEL); });
-        tool(0.7, zz => { k.box(0.1, 0.02, 0.16, -ix + 0.14, 0.42, zz, STEEL, { rz: 0.4 }); });
-        tool(1.05, zz => { k.box(0.02, 0.03, 0.34, -ix + 0.1, 0.4, zz, STEEL); for (let i = 0; i < 8; i++) k.box(0.012, 0.08, 0.012, -ix + 0.1, 0.32, zz - 0.15 + i * 0.043, STEEL); });
+        // (each tool its own part: lifted off for the job, hung back after)
+        const tool = (name, zz, head) => api.part(name, -ix + 0.1, 0.4, zz, 0, kk => { kk.cyl(0.02, 1.2, 0, 0, 0, '#c98f5a', { n: 6 }); kk.box(0.05, 0.12, 0.1, 0, 1.18, 0, '#c98f5a', { r: 0.02 }); head(kk); });
+        tool('spade', 0.0, kk => { kk.box(0.02, 0.3, 0.2, 0, -0.27, 0, STEEL, { r: 0.01 }); kk.box(0.03, 0.03, 0.22, 0, -0.0, 0, STEEL_D); });
+        tool('fork', 0.35, kk => { for (let q = 0; q < 4; q++) kk.box(0.015, 0.3, 0.015, 0, -0.28, -0.07 + q * 0.05, STEEL); kk.box(0.02, 0.04, 0.2, 0, 0, 0, STEEL); });
+        tool('hoe', 0.7, kk => { kk.box(0.1, 0.02, 0.16, 0.04, 0.02, 0, STEEL, { rz: 0.4 }); });
+        tool('rake', 1.05, kk => { kk.box(0.02, 0.03, 0.34, 0, 0, 0, STEEL); for (let q = 0; q < 8; q++) kk.box(0.012, 0.08, 0.012, 0, -0.07, -0.15 + q * 0.043, STEEL); });
+        // the compost sack by the door (its own part: carried out and tipped)
+        api.part('compost', -ix + 0.35, 0, iz - 0.35, 0.3, kk => { kk.box(0.4, 0.55, 0.28, 0, 0, 0, '#6b4a33', { r: 0.08 }); kk.box(0.42, 0.06, 0.3, 0, 0.5, 0, '#5a3f2c', { r: 0.03 }); kk.box(0.2, 0.12, 0.01, 0, 0.28, 0.145, '#7fbf5c'); });
+        api.solid(-ix, iz - 0.6, -ix + 0.6, iz);
         api.solid(-ix, -0.2, -ix + 0.3, 1.3);
         api.spot({ kind: 'seedshed', id: o.id, name: 'the seed shed', at: [ix - 1.2, -0.2], yaw: PI / 2, hit: [ix - 0.5, -0.2, 0, 1.8] });
       }
     });
-    const at = atOf(B); B.at = { bench: at(ix - 1.2, -0.2, PI / 2), shelf: at(-0.6, -iz + 1.1, PI), door: at(-0.5, d / 2 + 1.2, PI) };
+    const at = atOf(B); B.at = { bench: at(ix - 1.2, -0.2, PI / 2), shelf: at(-0.6, -iz + 1.1, PI), rack: at(-ix + 1.05, 0.5, -PI / 2), door: at(-0.5, d / 2 + 1.2, PI) };
     B.lamp.intensity = 0.8; return B;
   }
 

@@ -93,7 +93,7 @@
         }
         { const [x, z] = L(9, 49); k.cyl(1.1, 2.2, x, 0, z, '#8f9aa8', { n: 14 }); k.cyl(1.15, 0.2, x, 2.2, z, '#7a8592', { n: 14 }); solid(x - 1.2, z - 1.2, x + 1.2, z + 1.2); spots.push({ kind: 'tank', id: id('tank'), name: 'the water tank', at: [x, z + 2], yaw: Math.PI, hit: [x, z, 0, 2.6] }); }
         { const [x, z] = L(43, 49); if (FB) { const hut = walkIn(FB.seedShed({ x, z, id: id('seeds') })); for (const sp of spots) if (sp.kind === 'bed' && !sp.hut && sp.i >= (blk.base || 0) && sp.i < i) sp.hut = hut; } else { IB.more.shed(k, x, z, 0, '#7a9a6a', '#a5523f'); solid(x - 2, z - 1.5, x + 2, z + 1.5); spots.push({ kind: 'seedshed', id: id('seeds'), name: 'the seed shed', at: [x, z + 3], yaw: Math.PI, hit: [x, z, 0, 4] }); } }
-        out.drawBed = (bi, crop, stage) => { const b = out.beds[bi]; if (!b) return; while (b.g.children.length) b.g.remove(b.g.children[0]); if (!crop) return; const kk = new Kit(); IB.more.cropBed(kk, crop, stage); b.g.add(kk.build()); };
+        out.drawBed = (bi, crop, stage, soil) => { const b = out.beds[bi]; if (!b) return; while (b.g.children.length) b.g.remove(b.g.children[0]); const kk = new Kit(); if (IB.more.soilBed) IB.more.soilBed(kk, soil); if (crop) IB.more.cropBed(kk, crop, stage); if (kk.parts.length) b.g.add(kk.build()); };
       } else if (blk.type === 'orchard') {
         // twelve trees in three rows (apples, lemons, feijoas), each with its fruit (shown when it's ripe); a packing shed; two beehives
         const sp = f.specials || {}, KINDS = [['apple', '#e8463e', 12], sp.orange ? ['orange', '#ff9a2e', 21] : ['lemon', '#ffd84a', 21], sp.olive ? ['olive', '#6b7a3a', 41] : ['feijoa', '#7aa04a', 41]]; let i = blk.base || 0; // (oranges and olives from the Spanish town's nursery)

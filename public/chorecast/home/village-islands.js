@@ -7,7 +7,9 @@
   const DAY = 864e5, today = () => Math.floor(Date.now() / DAY);
   const CROPS = { carrot: { e: '🥕', name: 'carrots', seed: 10, days: 2, n: 4 }, lettuce: { e: '🥬', name: 'lettuces', seed: 10, days: 2, n: 2 }, tomato: { e: '🍅', name: 'tomatoes', seed: 15, days: 3, n: 4 }, pumpkin: { e: '🎃', name: 'pumpkins', seed: 20, days: 3, n: 2, goods: true }, strawberry: { e: '🍓', name: 'strawberries', seed: 15, days: 2, n: 6, goods: true },
     // (from the language islands' specialities: only once they're bought, lang-islands.js)
-    tea: { e: '🍵', name: 'tea', seed: 8, days: 3, n: 3, goods: true, special: 'tea' }, rice: { e: '🌾', name: 'rice', seed: 8, days: 3, n: 4, goods: true, special: 'rice' } };
+    tea: { e: '🍵', name: 'tea', seed: 8, days: 3, n: 3, goods: true, special: 'tea' }, rice: { e: '🌾', name: 'rice', seed: 8, days: 3, n: 4, goods: true, special: 'rice' },
+    // (2026-11-11: seed potatoes and sweetcorn, for the planters and harvesters as well as by hand)
+    potato: { e: '🥔', name: 'potatoes', seed: 15, days: 3, n: 6, goods: true }, corn: { e: '🌽', name: 'sweetcorn', seed: 15, days: 4, n: 5, goods: true } };
   const FRUIT = { apple: { e: '🍎', n: 3 }, lemon: { e: '🍋', n: 3, goods: true }, feijoa: { e: '🍐', n: 4, goods: true }, orange: { e: '🍊', n: 3, goods: true }, olive: { e: '🫒', n: 4, goods: true } };
   const STABLE_SHOP = [['horse', '🐴', 'Horse', 1200, 3, 'To ride in the arena.'], ['pony', '🐎', 'Pony', 900, 2, 'A smaller ride.'], ['donkey', '🫏', 'Donkey', 600, 1, 'A gentle friend for the paddock.'], ['merino', '🐑', 'Merino sheep', 400, 4, 'A bag of wool every two days.'], ['kunekune', '🐷', 'Kunekune pig', 350, 2, 'Finds a truffle every two days.']];
   const BIRDS = [['tui', 'a tūī', '🐦'], ['fantail', 'a pīwakawaka (fantail)', '🐦'], ['kereru', 'a kererū', '🕊️'], ['ruru', 'a ruru (morepork)', '🦉'], ['weka', 'a weka', '🐦'], ['takahe', 'a takahē', '🐦'], ['bellbird', 'a korimako (bellbird)', '🐦'], ['kaka', 'a kākā', '🦜']];
@@ -22,8 +24,19 @@
     }, null, fxo || {});
     // ---------- the Veggie plot
     const bedState = i => { const P = st('plot'); P.beds = P.beds || []; return P.beds[i] || (P.beds[i] = {}); };
+    /* ---------- the soil (2026-11-11, phase C): a bed's ground can be worked before a crop goes in and looked after
+       while it grows. None of it is needed (sow it, water it, it grows), but each thing done properly adds to the
+       harvest, up to three more: dug or ploughed (b.plough), raked fine or tilled or disced (b.till), a power-harrowed
+       seedbed (b.fine), rolled after sowing (b.roll), fed with compost, fertiliser or muck (b.fed), deep-ripped by the
+       subsoiler (b.deep: the next 3 crops), limed (b.lime: the next 5 crops). Weeds come up in a planted bed left two
+       days without hoeing, and cost one. Picking clears what was for this crop; deep ripping and lime count down. */
+    const weedy = b => !!b.crop && bedStage(b) < 3 && today() - (b.weeded || b.planted || today()) >= 2;
+    const bonusOf = b => Math.min(3, (b.plough ? 1 : 0) + (b.till ? 1 : 0) + (b.fine ? 1 : 0) + (b.roll ? 1 : 0) + (b.fed ? 1 : 0) + (b.deep > 0 ? 1 : 0) + (b.lime > 0 ? 1 : 0)) - (weedy(b) ? 1 : 0);
+    const yieldOf = b => Math.max(1, CROPS[b.crop].n + bonusOf(b));
+    function cleared(b) { const keep = { deep: Math.max(0, (b.deep || 0) - 1), lime: Math.max(0, (b.lime || 0) - 1) }; for (const k of Object.keys(b)) delete b[k]; if (keep.deep) b.deep = keep.deep; if (keep.lime) b.lime = keep.lime; }
+    const soilOf = b => ({ plough: !!b.plough, till: !!(b.till || b.fine), fine: !!b.fine, roll: !!b.roll, fed: b.fed || null, weeds: weedy(b), lime: b.lime > 0 });
     const bedStage = b => { if (!b.crop) return -1; const C = CROPS[b.crop], w = (b.watered || []).length; return w >= C.days ? 3 : Math.min(2, w); };
-    const drawBeds = () => { const B = V().B; if (!B.drawBed) return; B.beds.forEach((_, i) => { const b = bedState(i); B.drawBed(i, b.crop, Math.max(0, bedStage(b))); }); };
+    const drawBeds = () => { const B = V().B; if (!B.drawBed) return; B.beds.forEach((_, i) => { const b = bedState(i); B.drawBed(i, b.crop, Math.max(0, bedStage(b)), soilOf(b)); }); };
     function seedPanel(i) {
       c.shopTray({ key: 'seeds', title: `🌱 Seeds for bed ${i + 1}`, info: `✨ farm ${Math.round(sh().farmAcct().bal).toLocaleString()}`, note: 'Pick the seeds. Water the bed once a day; it’s ready after a few days of watering.',
         cards: Object.entries(CROPS).filter(([, C]) => !C.special || ((sh().farm() || {}).specials || {})[C.special]).map(([id, C]) => ({ e: C.e, name: C.name[0].toUpperCase() + C.name.slice(1), sub: `${C.days} days · ${C.n} to pick`, tag: sh().cardPrice(C.seed), attrs: `data-v="isl" data-k="plant:${i}:${id}"` })) });
@@ -51,8 +64,25 @@
       c.chore(s, 'water', 2.4, () => { V().can -= 1; (b.watered = b.watered || []).push(today()); save(); drawBeds(); c.float(V().kid, '💧'); c.sound('pop'); c.toast(bedStage(b) === 3 ? 'Ready to pick!' : `Watered. ${CROPS[b.crop].days - b.watered.length} more day${CROPS[b.crop].days - b.watered.length === 1 ? '' : 's'} of watering.`); }, null, { tool: 'can', fx: 'drops', at: 'hand', rate: 22, delay: 0.6 });
     }
     function harvest(s) {
-      const b = bedState(s.i), C = CROPS[b.crop], n = C.n + (b.plough ? 1 : 0); // (a bed the plough turned gives one more)
-      c.chore(s, 'fetch', 2.6, () => { if (C.goods) sh().addGoods(b.crop, n); else sh().addFood(b.crop, n); for (const k of Object.keys(b)) delete b[k]; save(); drawBeds(); c.float(V().kid, C.e); c.sound('buy'); c.toast(`${C.n} ${C.name}! ${C.goods ? 'On your goods shelf: sell them at the grocer.' : 'Into your fridge at home.'}`); }, null, { tool: 'basket', fx: 'soil', dist: 0.7, y: 0.75, rate: 8 });
+      const b = bedState(s.i), C = CROPS[b.crop], n = yieldOf(b), extra = n - C.n;
+      c.chore(s, 'fetch', 2.6, () => { if (C.goods) sh().addGoods(b.crop, n); else sh().addFood(b.crop, n); cleared(b); save(); drawBeds(); c.float(V().kid, C.e); c.sound('buy'); c.toast(`${n} ${C.name}${extra > 0 ? ` (${extra} more for the work you put into the soil)` : extra < 0 ? ' (the weeds took some)' : ''}! ${C.goods ? 'On your goods shelf: sell them at the grocer.' : 'Into your fridge at home.'}`); }, null, { tool: 'basket', fx: 'soil', dist: 0.7, y: 0.75, rate: 8 });
+    }
+    /* ---------- the bed by hand (the seed shed's tools): dig it over with the spade, rake it fine, hoe the weeds,
+       spread compost from the sack; each tool off the rack, to the bed and worked, then back on the rack. The
+       machines do the same jobs faster (farm.js), these are how a new farm starts. */
+    const HAND = {
+      dig: { e: '⛏️', label: 'Dig it over', tool: 'spade', part: 'spade', ok: b => !b.crop && !b.plough, did: b => { b.plough = 1; }, says: 'Dug over: the soil’s turned.', fx: 'soil', secs: [1.8, 1.8] },
+      rake: { e: '🧹', label: 'Rake it fine', tool: 'rake', part: 'rake', ok: b => !b.crop && !b.till, did: b => { b.till = 1; }, says: 'Raked fine and level: a good seedbed.', fx: 'soil', secs: [1.6, 1.6] },
+      hoe: { e: '🌿', label: 'Hoe the weeds', tool: 'hoe', part: 'hoe', ok: b => weedy(b), did: b => { b.weeded = today(); }, says: 'Weeds hoed out.', fx: 'leaves', secs: [1.5, 1.5] },
+      compost: { e: '🟤', label: 'Spread compost · ✨ 4', tool: 'sack', part: 'compost', ok: b => !b.fed && bedStage(b) < 3, did: b => { b.fed = 'compost'; }, says: 'Compost spread: well fed.', fx: 'soil', secs: [1.4, 1.6], xp: 4 }
+    };
+    function byHand(s, what) {
+      const H0 = HAND[what], b = bedState(s.i); if (!H0.ok(b)) return;
+      const go = { x: s.at[0], z: s.at[1], yaw: s.yaw }, work = H0.secs.map((t, q) => ({ act: what === 'compost' ? 'feed' : 'fetch', secs: t, fx: { kind: H0.fx, dist: 0.8, y: 0.75, rate: q ? 12 : 9 } }));
+      const apply = () => { if (H0.xp && !sh().farmPay(H0.xp, 'compost')) return; H0.did(bedState(s.i)); save(); drawBeds(); c.sound('pop'); c.toast(H0.says); };
+      const hut = s.hut, P = hut && hut.parts[H0.part];
+      if (hut && P && c.steps) return c.steps([{ go: hut.at.rack || hut.at.bench }, { take: P, hold: H0.tool }, { go }, ...work, { run: apply }, { go: hut.at.rack || hut.at.bench }, { put: P }], { name: H0.label.replace(/ ·.*/, '') });
+      c.chore(s, work[0].act, 3, apply, null, { tool: H0.tool, fx: H0.fx, dist: 0.8, y: 0.75, rate: 10 });
     }
     // ---------- the Orchard terrace
     const ripe = i => { const O = st('orchard'); O.picked = O.picked || {}; const p = O.picked[i]; return !p || Date.now() - p >= 2 * DAY; };
@@ -142,6 +172,22 @@
       plant(i, id) { const b = bedState(i); if (b.crop || !CROPS[id]) return false; Object.assign(b, { crop: id, planted: today(), watered: [] }); save(); return true; },
       water(i) { const b = bedState(i); if (!b.crop || bedStage(b) === 3 || (b.watered || []).includes(today())) return false; (b.watered = b.watered || []).push(today()); save(); return true; },
       plough(i) { const b = bedState(i); if (b.crop || b.plough) return false; b.plough = 1; save(); return true; },
+      // (phase C: one call per machine's job; each says whether it did anything to this bed)
+      work(i, job, o = {}) {
+        const b = bedState(i), g = bedStage(b), done = () => { save(); return true; };
+        if (job === 'subsoil') { if (b.crop || b.deep > 0) return false; b.deep = 3; return done(); }
+        if (job === 'till') { if (b.crop || b.till) return false; b.till = 1; return done(); }
+        if (job === 'fine') { if (b.crop || b.fine) return false; b.fine = 1; b.till = 1; return done(); }
+        if (job === 'roll') { if (!b.crop || g === 3 || b.roll) return false; b.roll = 1; return done(); }
+        if (job === 'feed') { if (b.fed || g === 3) return false; b.fed = o.kind || 'fert'; return done(); }
+        if (job === 'lime') { if (b.lime > 0) return false; b.lime = 5; return done(); }
+        if (job === 'weed') { if (!weedy(b)) return false; b.weeded = today(); return done(); }
+        return false;
+      },
+      // the harvesters: a ready bed's crop into the hopper (the bed's cleared); { id, n } or null
+      lift(i, ok) { const b = bedState(i); if (!b.crop || bedStage(b) !== 3 || (ok && !ok(b.crop))) return null; const id = b.crop, n = yieldOf(b); cleared(b); save(); return { id, n }; },
+      store(id, n) { const C = CROPS[id]; if (!C) return; if (C.goods) sh().addGoods(id, n); else sh().addFood(id, n); },
+      crop: id => CROPS[id], weedy: i => weedy(bedState(i)), ready: i => { const b = bedState(i); return !!b.crop && bedStage(b) === 3; },
       redraw: () => drawBeds()
     };
     /* ---------- the stable (walk-in): grooming a horse at the cross-ties (the brush from the tack room, the horse led
@@ -171,7 +217,7 @@
       // the Veggie plot
       seedshed: () => [{ e: '🌱', label: 'Seeds: pick a bed to plant', run: () => c.toast('Tap an empty bed to plant it. Seeds are paid for there.') }],
       tank: s => [{ e: '🚿', label: V().can ? `Watering can full (${V().can} beds)` : 'Fill the watering can', run: () => c.chore(s, 'fetch', 2, () => { V().can = 6; c.float(V().kid, '💧'); c.toast('Watering can full! Enough for six beds.'); }, null, { tool: 'can', fx: 'drops', dist: 0.6, y: 0.9, rate: 18 }) }],
-      bed: s => { const b = bedState(s.i), g = bedStage(b); return g < 0 ? [{ e: '🌱', label: 'Plant something', run: () => seedPanel(s.i) }] : g === 3 ? [{ e: CROPS[b.crop].e, label: `Pick the ${CROPS[b.crop].name}`, run: () => harvest(s) }] : [{ e: '💧', label: (b.watered || []).includes(today()) ? 'Watered today ✓' : `Water the ${CROPS[b.crop].name}`, run: () => water(s) }]; },
+      bed: s => { const b = bedState(s.i), g = bedStage(b), hand = Object.entries(HAND).filter(([, H0]) => H0.ok(b)).map(([k, H0]) => ({ e: H0.e, label: H0.label, run: () => byHand(s, k) })); return g < 0 ? [{ e: '🌱', label: 'Plant something', run: () => seedPanel(s.i) }, ...hand] : g === 3 ? [{ e: CROPS[b.crop].e, label: `Pick the ${CROPS[b.crop].name}${bonusOf(b) > 0 ? ` (+${bonusOf(b)})` : ''}`, run: () => harvest(s) }] : [{ e: '💧', label: (b.watered || []).includes(today()) ? 'Watered today ✓' : `Water the ${CROPS[b.crop].name}`, run: () => water(s) }, ...hand]; },
       // the Orchard terrace
       fruittree: s => [{ e: FRUIT[s.fruit].e, label: ripe(s.i) ? `Pick the ${s.fruit === 'feijoa' ? 'feijoas' : s.fruit + 's'}` : 'Not ripe yet', run: () => pick(s) }],
       hives: s => [{ e: '🍯', label: 'Collect the honey', run: () => honey(s) }],

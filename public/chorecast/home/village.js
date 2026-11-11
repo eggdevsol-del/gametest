@@ -722,7 +722,7 @@
     V.job = job; hideActs();
     const setHold = n => { job.held = n; if (k.inst) k.inst.holding = n; };
     job.stop = why => {
-      if (job.done) return; job.done = true; clearTimeout(job.timer); V.busyJob = false; if (!k.seat) k.pose = null; setHold(null);
+      if (job.done) return; job.done = true; clearTimeout(job.timer); clearTimeout(job.dog); V.busyJob = false; if (!k.seat) k.pose = null; setHold(null);
       for (const f of job.undo.values()) f(); job.undo.clear(); if (V.job === job) V.job = null;
       if (why === 'end') { if (o.done) o.done(); } else if (o.cancel) o.cancel(why);
     };
@@ -731,7 +731,14 @@
     const next = () => {
       if (!V || V.job !== job || job.done) return;
       const s = job.list.shift(); if (!s) return job.stop('end');
-      if (s.go) { V.busyJob = false; k.pose = null; V.inStep = true; const ok = walkTo(s.go.x, s.go.z, r => { if (V && V.job === job) { if (r) next(); else job.stop('blocked'); } }, s.go.yaw); V.inStep = false; if (!ok && V.job === job) job.stop('blocked'); return; }
+      if (s.go) {
+        V.busyJob = false; k.pose = null; let arrived = false, tries = 0;
+        const walk1 = () => { V.inStep = true; const ok = walkTo(s.go.x, s.go.z, r => { if (V && V.job === job && !arrived) { arrived = true; if (r) next(); else job.stop('blocked'); } }, s.go.yaw); V.inStep = false; return ok; };
+        if (!walk1()) { if (V.job === job) job.stop('blocked'); return; }
+        // (a watchdog: a walk that's given up without arriving is tried again, twice, then the task stops cleanly)
+        const dog = () => { if (!V || V.job !== job || arrived || job.done) return; if (!k.path.length) { if (++tries > 2) return job.stop('blocked'); if (!walk1()) return job.stop('blocked'); } job.dog = setTimeout(dog, 1500); };
+        job.dog = setTimeout(dog, 1500); return;
+      }
       if (s.take || s.put) {
         const p = s.take || s.put, id = 'take:' + p.uuid;
         if (s.take) { p.visible = false; job.undo.set(id, () => { p.visible = true; }); setHold(s.hold || null); }

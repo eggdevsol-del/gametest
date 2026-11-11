@@ -465,12 +465,16 @@
       const basket0 = new K(); basket0.cyl(0.17, 0.16, 0, -0.42, 0, '#c9a173', { n: 12, rt: 0.2 }); basket0.torus(0.17, 0.015, 0, -0.14, 0, '#a07a4a', { arc: Math.PI, rz: Math.PI });
       const hayflake = new K(); hayflake.box(0.5, 0.36, 0.22, 0, -0.42, 0.06, '#e8c45a', { r: 0.05 }); for (let i = 0; i < 4; i++) hayflake.box(0.16, 0.05, 0.08, -0.18 + i * 0.12, -0.08, 0.06 + (i % 2 ? 0.05 : -0.05), '#cfa944', { r: 0.02, ry: i });
       // (the sheds' things: the bee smoker, a frame of honeycomb, a seed tray, a rolled fleece, a basket of fruit)
+      // (the hand tools for the beds: spade, hoe, rake; aimed at the ground in front like the fork)
+      const spade = new K(); spade.cyl(0.025, 1.0, 0, -0.1, 0, '#c98f5a', { n: 6 }); spade.box(0.2, 0.26, 0.02, 0, 0.86, 0, '#a9b3bf', { r: 0.01 });
+      const hoe = new K(); hoe.cyl(0.025, 1.0, 0, -0.1, 0, '#c98f5a', { n: 6 }); hoe.box(0.16, 0.02, 0.1, 0, 0.9, 0.04, '#a9b3bf', { r: 0.01 });
+      const rake = new K(); rake.cyl(0.025, 1.0, 0, -0.1, 0, '#c98f5a', { n: 6 }); rake.box(0.34, 0.03, 0.03, 0, 0.9, 0, '#a9b3bf'); for (let q = 0; q < 8; q++) rake.box(0.012, 0.07, 0.012, -0.15 + q * 0.043, 0.9, 0.03, '#a9b3bf');
       const smoker = new K(); smoker.cyl(0.08, 0.24, 0, -0.42, 0, '#cdd5de', { n: 10 }); smoker.cone(0.08, 0.1, 0, -0.18, 0, '#a9b3bf', { n: 10 }); smoker.box(0.05, 0.16, 0.11, 0, -0.38, -0.11, '#8a6038', { r: 0.02 });
       const frame = new K(); frame.box(0.42, 0.26, 0.03, 0, -0.36, 0.04, '#d4a873', { r: 0.01 }); frame.box(0.38, 0.22, 0.035, 0, -0.34, 0.04, '#f2c14e', { r: 0.01 }); frame.box(0.5, 0.03, 0.03, 0, -0.1, 0.04, '#b7834f');
       const tray = new K(); tray.box(0.4, 0.08, 0.32, 0, -0.3, 0.12, '#2a2630', { r: 0.01 }); for (let i = 0; i < 6; i++) tray.cone(0.04, 0.1, -0.12 + (i % 3) * 0.12, -0.22, 0.04 + Math.floor(i / 3) * 0.16, '#5fae4a', { n: 4 });
       const fleece = new K(); fleece.ball(0.22, 0, -0.38, 0.1, '#f2ead8', { s: [1.3, 0.8, 1], n: 10 }); fleece.ball(0.14, 0.12, -0.28, 0.12, '#efe4cc', { n: 8 });
       const basketf = new K(); basketf.cyl(0.17, 0.16, 0, -0.42, 0, '#c9a173', { n: 12, rt: 0.2 }); basketf.torus(0.17, 0.015, 0, -0.14, 0, '#a07a4a', { arc: Math.PI, rz: Math.PI }); for (let i = 0; i < 4; i++) basketf.ball(0.06, -0.08 + (i % 2) * 0.12, -0.26, -0.05 + Math.floor(i / 2) * 0.1, ['#e8463e', '#ffd84a', '#7aa04a', '#e8463e'][i], { n: 7 });
-      for (const [n, k] of [['can', can], ['broom', br], ['sack', sack], ['pail', pail], ['shears', shears], ['basket', basket], ['brush', brush], ['fork', fork], ['trowel', trowel], ['jar', jar], ['bucket', bucket], ['scoop', scoop], ['basket0', basket0], ['bucket0', bucket0], ['hayflake', hayflake], ['smoker', smoker], ['frame', frame], ['tray', tray], ['fleece', fleece], ['basketf', basketf]]) { const g = k.build(); g.scale.setScalar(1 / v.x); g.position.y = 0.1 / v.x; hand.add(g); inst.tools[n] = g; }
+      for (const [n, k] of [['can', can], ['broom', br], ['sack', sack], ['pail', pail], ['shears', shears], ['basket', basket], ['brush', brush], ['fork', fork], ['trowel', trowel], ['jar', jar], ['bucket', bucket], ['scoop', scoop], ['basket0', basket0], ['bucket0', bucket0], ['hayflake', hayflake], ['smoker', smoker], ['frame', frame], ['tray', tray], ['fleece', fleece], ['basketf', basketf], ['spade', spade], ['hoe', hoe], ['rake', rake]]) { const g = k.build(); g.scale.setScalar(1 / v.x); g.position.y = 0.1 / v.x; hand.add(g); inst.tools[n] = g; }
     }
     if (inst.tools) for (const n in inst.tools) inst.tools[n].visible = inst.holding === n && !/^(liebed|sitchair)/.test(inst.st);
     // The broom points from the hand down to the floor in front (swept side to side while sweeping), so the brush is
@@ -479,8 +483,8 @@
       const hand = inst.B['hand.R'], g = inst.tools[inst.holding]; inst.group.updateMatrixWorld(true);
       const hp = hand.getWorldPosition(TV1), hq = hand.getWorldQuaternion(TQ1).invert(), ws = hand.getWorldScale(TV3).x, yaw = inst.group.rotation.y, fl = inst.group.position.y;
       const f = [Math.sin(yaw), Math.cos(yaw)], tt = inst.t || 0;
-      if (inst.holding === 'broom' || inst.holding === 'fork' || inst.holding === 'trowel') { // (aimed at the ground in front: swept, forked over, dug)
-        const sweep = /^(sweep|fetch|feed)/.test(inst.st), dig = inst.holding === 'trowel', sx = sweep ? Math.sin(tt * (dig ? 8 : 5)) * (dig ? 0.08 : 0.35) : 0, out = dig ? 0.45 + Math.max(0, Math.sin(tt * 8)) * 0.1 : sweep ? 0.6 : 0.2;
+      if (/^(broom|fork|trowel|spade|hoe|rake)$/.test(inst.holding)) { // (aimed at the ground in front: swept, forked over, dug)
+        const sweep = /^(sweep|fetch|feed)/.test(inst.st), dig = inst.holding === 'trowel' || inst.holding === 'spade', sx = sweep ? Math.sin(tt * (dig ? 8 : 5)) * (dig ? 0.08 : 0.35) : 0, out = dig ? 0.45 + Math.max(0, Math.sin(tt * 8)) * 0.1 : sweep ? 0.6 : 0.2;
         TV2.set(hp.x + f[0] * out + f[1] * sx, fl + (dig ? 0.02 : 0.15), hp.z + f[1] * out - f[0] * sx).sub(hp);
         const L = Math.max(0.3, TV2.length()); TV2.normalize();
         g.quaternion.copy(hq).multiply(TQ2.setFromUnitVectors(TUP, TV2)); g.scale.set(1 / ws, L / ws * 0.92, 1 / ws); g.position.set(0, 0, 0);
