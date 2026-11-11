@@ -24,6 +24,13 @@
     manure: { e: '🟫', name: 'Muck spreader', xp: 800, job: 'feed', kind: 'muck', muck: true, about: 'Spreads muck from the barn’s heap (it builds up as the animals are fed): well fed, and free.' },
     lime: { e: '⬜', name: 'Lime spreader', xp: 550, job: 'lime', cost: 4, about: 'Sweetens sour soil: the next five crops in each bed give one more. ✨ 4 a bed.' },
     weeder: { e: '🌿', name: 'Inter-row weeder', xp: 650, job: 'weed', mount: true, about: 'Hoes out the weeds between the rows of growing crops.' },
+    // (phase D: the hay meadow, cut to bale: meadow: true, they work its grass, not the beds)
+    mower: { e: '🌾', name: 'Disc mower', xp: 900, meadow: 'mow', mount: true, about: 'Cuts the long grass and lays it in swaths to wilt. The first job of haymaking.' },
+    tedder: { e: '🌪️', name: 'Tedder', xp: 750, meadow: 'ted', about: 'Four spinning rotors throw the cut swaths up to dry. Tedded hay is dry in half an hour.' },
+    rake: { e: '🧹', name: 'Rotary rake', xp: 700, meadow: 'rake', about: 'Gathers the cut grass into windrows for the baler. Dry hay makes hay bales; wet grass makes green bales to wrap.' },
+    wrapper: { e: '🎁', name: 'Bale wrapper', xp: 950, meadow: 'wrap', about: 'Wraps green bales in plastic: they turn to silage, a richer feed (cows and goats give more milk on it).' },
+    loaderwagon: { e: '🚛', name: 'Loader wagon', xp: 1300, meadow: 'load', about: 'Picks the windrows up loose. Unload it by the hay yard: dry into hay, wet into silage.' },
+    spear: { e: '🔱', name: 'Front loader & bale spear', xp: 850, front: true, about: 'Loader arms on the tractor’s front with a bale spear: lift one bale at a time, carry it, stack it in the hay yard.' },
     harvester: { e: '🧺', name: 'Vegetable harvester', xp: 1600, job: 'lift', not: ['potato'], about: 'Lifts ready crops (not potatoes) into its hopper. Stop by a seed shed to unload.' },
     potatoharvester: { e: '⛏️', name: 'Potato harvester', xp: 1700, job: 'lift', only: ['potato'], about: 'Digs ready potatoes, sieves the soil off, and fills its bunker. Stop by a seed shed to unload.' }
   };
@@ -203,5 +210,70 @@
   }
   function irrigatorGun() { const k = new Kit(); k.cyl(0.06, 0.25, 0, 0, 0, ST, { n: 8 }); k.cyl(0.05, 0.7, 0, 0.3, 0.3, STL, { n: 8, rx: 1.0 }); k.cone(0.07, 0.15, 0, 0.55, 0.62, ST, { n: 8, rx: 1.0 }); k.box(0.04, 0.2, 0.25, 0.08, 0.32, 0.4, DK, { r: 0.01 }); return k.build(); }
 
-  IH.farmMachines = { DEFS, has: kind => !!M[kind], model: kind => M[kind](), irrigator, irrigatorGun };
+  // ---------- the meadow machines (phase D)
+  M.mower = () => {
+    const g = new T.Group(), k = new Kit(), spins = [];
+    headstock(k, 0.75); pto(k, 0.55, 0.3, 1.5);
+    k.box(2.8, 0.14, 0.7, 0, 0.12, 0.0, RED, { r: 0.04 }); k.box(2.8, 0.5, 0.06, 0, 0.12, 0.34, RED, { r: 0.02 }); k.box(2.9, 0.06, 0.8, 0, 0.62, 0.0, REDD, { r: 0.02 }); for (const s of [-1, 1]) k.box(0.08, 0.6, 0.85, s * 1.42, 0.05, 0.0, REDD, { r: 0.02 });
+    k.box(2.8, 0.45, 0.04, 0, 0.18, -0.36, '#2a2d31'); k.box(0.4, 0.3, 0.4, 0.2, 0.55, 0.3, DK, { r: 0.04 }); decal(k, -0.6, 0.4, 0.36, 0.8, '#ffffff'); // (the guard, its rubber curtain, the gearbox)
+    g.add(k.build());
+    for (let i = 0; i < 6; i++) { const d = new T.Group(); d.position.set(-1.15 + i * 0.46, 0.08, 0.0); const dk = new Kit(); dk.cyl(0.19, 0.04, 0, 0, 0, STD, { n: 12 }); for (const e of [-1, 1]) dk.box(0.14, 0.02, 0.05, e * 0.19, 0.01, 0, STL, { r: 0.005 }); d.add(dk.build()); g.add(d); spins.push({ o: d, axis: 'y', per: (i % 2 ? -1 : 1) * 12 }); }
+    const cond = new T.Group(); cond.position.set(0, 0.35, -0.15); const ck = new Kit(); ck.cyl(0.13, 2.4, 0, -1.2, 0, DK, { n: 10, rz: PI / 2 }); for (let i = 0; i < 16; i++) { const a = i / 16 * PI * 2; ck.box(2.4, 0.04, 0.03, 0, Math.cos(a) * 0.14, Math.sin(a) * 0.14, ST); } cond.add(ck.build()); g.add(cond); spins.push({ o: cond, axis: 'x', per: 8 }); // (the conditioner roll)
+    return { g, wheels: [], spins, len: 0.9, r: 0.2, mount: true };
+  };
+  M.tedder = () => {
+    const g = new T.Group(), k = new Kit(), wheels = [], spins = [];
+    drawbar(k, 1.8, 0.6); pto(k, 0.6, 0.2, 1.7); k.box(4.4, 0.12, 0.12, 0, 0.95, -0.2, YEL, { r: 0.03 }); k.box(0.3, 0.3, 0.3, 0, 0.9, -0.2, DK, { r: 0.04 });
+    for (let i = 0; i < 4; i++) { const x = -1.65 + i * 1.1; k.box(0.08, 0.5, 0.08, x, 0.45, -0.2, DK); k.box(0.16, 0.12, 0.16, x, 0.88, -0.2, YEL, { r: 0.03 });
+      const r = new T.Group(); r.position.set(x, 0.42, -0.2); const rk = new Kit(); rk.cyl(0.07, 0.1, 0, 0, 0, DK, { n: 8 }); for (let a = 0; a < 6; a++) { const t = a / 6 * PI * 2; rk.box(0.55, 0.03, 0.04, Math.cos(t) * 0.28, 0.03, Math.sin(t) * 0.28, YEL, { ry: -t, r: 0.01 }); for (const e of [-1, 1]) rk.box(0.015, 0.32, 0.015, Math.cos(t) * 0.53, -0.14, Math.sin(t) * 0.53 + e * 0.02, ST, { rz: 0.3 }); } r.add(rk.build()); g.add(r); spins.push({ o: r, axis: 'y', per: (i % 2 ? -1 : 1) * 5 }); }
+    g.add(k.build());
+    for (let i = 0; i < 4; i++) { const w = new T.Group(); w.position.set(-1.65 + i * 1.1, 0.16, -0.75); const m = wheel(0.16, 0.1); w.add(m); g.add(w); wheels.push(w); }
+    return { g, wheels, spins, len: 1.8, r: 0.16 };
+  };
+  M.rake = () => {
+    const g = new T.Group(), k = new Kit(), wheels = [], spins = [];
+    drawbar(k, 1.9, 0.6); pto(k, 0.6, 0.2, 1.8); k.box(0.16, 0.16, 1.8, 0, 0.9, 0.2, GRN, { r: 0.04 }); k.box(0.36, 0.36, 0.36, 0, 1.0, -0.6, DK, { r: 0.05 });
+    k.box(0.06, 0.8, 2.6, 1.6, 0.15, -0.7, '#2a2d31', { r: 0.02 }); k.box(0.08, 0.08, 1.6, 0.8, 0.9, -0.7, GRN, { ry: PI / 2 }); // (the swath curtain the windrow's laid against)
+    g.add(k.build());
+    const r = new T.Group(); r.position.set(0, 0.95, -0.7); const rk = new Kit(); rk.cyl(0.12, 0.2, 0, 0, 0, DK, { n: 10 }); for (let a = 0; a < 10; a++) { const t = a / 10 * PI * 2; rk.box(1.4, 0.04, 0.04, Math.cos(t) * 0.7, 0.05, Math.sin(t) * 0.7, GRN, { ry: -t, r: 0.01 }); for (let q = 0; q < 3; q++) rk.box(0.015, 0.75, 0.015, Math.cos(t) * (1.32 + q * 0.02), -0.35, Math.sin(t) * (1.32 + q * 0.02) + q * 0.03, ST); } r.add(rk.build()); g.add(r); spins.push({ o: r, axis: 'y', per: 3 });
+    for (const s of [-1, 1]) for (const z of [-0.2, -1.2]) { const w = new T.Group(); w.position.set(s * 0.7, 0.2, z); const m = wheel(0.2, 0.12); if (s < 0) m.rotation.y = PI; w.add(m); g.add(w); wheels.push(w); }
+    return { g, wheels, spins, len: 1.9, r: 0.2 };
+  };
+  M.wrapper = () => {
+    const g = new T.Group(), k = new Kit(), wheels = [], spins = [];
+    drawbar(k, 1.8, 0.5); k.box(1.4, 0.12, 2.0, 0, 0.4, -0.4, DK, { r: 0.03 }); k.box(0.12, 1.6, 0.12, 0.8, 0.4, -0.4, BLU); k.box(0.12, 0.12, 0.9, 0.8, 1.95, -0.4, BLU);
+    k.cyl(0.13, 0.75, 0.65, 1.0, -0.85, WHT, { n: 12 }); k.cyl(0.05, 0.8, 0.65, 0.98, -0.85, DK, { n: 6 }); // (the film roll on its dispenser)
+    k.box(0.9, 0.1, 0.4, -0.2, 0.25, -1.55, BLUD, { rx: 0.5, r: 0.02 }); decal(k, 0.3, 0.6, 0.62, 0.5, '#ffffff');
+    g.add(k.build());
+    const tt = new T.Group(); tt.position.set(0, 0.6, -0.4); const tk = new Kit(); tk.cyl(0.7, 0.06, 0, 0, 0, BLU, { n: 20 }); for (const e of [-1, 1]) tk.cyl(0.12, 1.2, 0, 0.15 - 0.6, e * 0.45, STD, { n: 10, rz: PI / 2 }); for (const e of [-1, 1]) tk.box(0.04, 0.04, 1.2, e * 0.62, 0.12, 0, '#2a2d31'); tt.add(tk.build()); g.add(tt); spins.push({ o: tt, axis: 'y', per: 2.5 }); // (the turntable with its rollers and belts)
+    for (const s of [-1, 1]) { const w = new T.Group(); w.position.set(s * 0.85, 0.3, -0.5); const m = wheel(0.3, 0.18); if (s < 0) m.rotation.y = PI; w.add(m); g.add(w); wheels.push(w); }
+    return { g, wheels, spins, len: 1.8, r: 0.3 };
+  };
+  M.loaderwagon = () => {
+    const g = new T.Group(), k = new Kit(), wheels = [], spins = [];
+    drawbar(k, 2.4, 0.9); pto(k, 0.9, 0.4, 2.4); k.box(1.9, 0.14, 3.6, 0, 0.6, -0.9, DK, { r: 0.03 });
+    k.box(1.9, 1.5, 3.4, 0, 0.74, -1.0, GRN, { r: 0.05 }); k.box(2.0, 0.08, 3.5, 0, 2.24, -1.0, GRND, { r: 0.02 }); for (const s of [-1, 1]) for (let i = 0; i < 6; i++) k.box(0.04, 1.4, 0.06, s * 0.96, 0.8, 0.5 - i * 0.6, GRND); for (let i = 0; i < 7; i++) k.box(1.8, 0.05, 0.05, 0, 2.3, 0.6 - i * 0.55, STD); // (the box, its stakes, the roof rails)
+    k.box(1.6, 0.4, 0.4, 0, 2.3, -1.0, '#e8c45a', { r: 0.1 }); for (let i = 0; i < 6; i++) k.ball(0.3, -0.5 + (i % 3) * 0.5, 2.35, -1.6 + Math.floor(i / 3) * 1.0, '#cfa944', { s: [1.2, 0.5, 1.2], n: 8 }); // (loose hay heaped over)
+    k.box(1.8, 0.8, 0.1, 0, 1.4, -2.72, GRND, { r: 0.02 }); lights(k, 1.9, 0.9, -2.78); decal(k, 0, 1.4, 0.72, 0.8, YEL);
+    g.add(k.build());
+    const pu = new T.Group(); pu.position.set(0, 0.3, 1.0); const pk = new Kit(); pk.cyl(0.22, 1.7, 0, -0.85, 0, DK, { n: 10, rz: PI / 2 }); for (let i = 0; i < 12; i++) for (const a of [0, 2.1, 4.2]) pk.box(0.02, 0.18, 0.02, -0.8 + i * 0.145, Math.cos(a) * 0.24, Math.sin(a) * 0.24, ST, { rx: -a }); pu.add(pk.build()); g.add(pu); spins.push({ o: pu, axis: 'x', per: 6 });
+    for (const s of [-1, 1]) for (const z of [-0.6, -1.5]) { const w = new T.Group(); w.position.set(s * 1.1, 0.42, z); const m = wheel(0.42, 0.26); if (s < 0) m.rotation.y = PI; w.add(m); g.add(w); wheels.push(w); }
+    return { g, wheels, spins, len: 2.4, r: 0.42 };
+  };
+  // the front loader (it rides on the tractor, not the hitch): two booms from the mid-frame down to the tool carrier,
+  // the bale spear on it (a long centre tine, two short ones); `lift` (a group) raises and lowers with the arms
+  function loader() {
+    const g = new T.Group(), k = new Kit();
+    for (const s of [-1, 1]) { k.box(0.16, 1.1, 0.4, s * 0.62, 0.6, 0.45, GRN, { r: 0.04 }); k.box(0.12, 0.12, 0.3, s * 0.62, 1.55, 0.6, DK); }
+    g.add(k.build());
+    const arm = new T.Group(); arm.position.set(0, 1.6, 0.65); const ak = new Kit();
+    for (const s of [-1, 1]) { ak.box(0.12, 0.14, 1.9, s * 0.6, -0.07, 0.95, GRN, { r: 0.03 }); ak.cyl(0.05, 0.9, s * 0.45, -0.5, 0.5, STL, { n: 6, rx: 0.9 }); }
+    ak.box(1.3, 0.12, 0.12, 0, -0.06, 1.85, GRN, { r: 0.03 });
+    arm.add(ak.build()); g.add(arm);
+    const tool = new T.Group(); tool.position.set(0, -0.2, 1.95); const tk = new Kit(); tk.box(1.1, 0.5, 0.1, 0, -0.25, 0, DK, { r: 0.03 }); tk.cyl(0.035, 1.2, 0, -0.1 - 0.6, 0.6, STL, { n: 6, rx: PI / 2 }); for (const e of [-1, 1]) tk.cyl(0.025, 0.45, e * 0.4, -0.1 - 0.22, 0.22, STL, { n: 6, rx: PI / 2 }); tool.add(tk.build()); arm.add(tool);
+    return { g, arm, tool };
+  }
+  // bales: the round bale's three looks (hay, green and unwrapped, wrapped silage)
+  function baleLook(kind) { const k = new Kit(), c0 = kind === 'silage' ? '#2a2d31' : kind === 'wet' ? '#8fb85a' : '#e8c45a', c1 = kind === 'silage' ? '#3d4048' : kind === 'wet' ? '#7aa04a' : '#d9b24a'; k.cyl(0.62, 1.15, 0, -0.575, 0, c0, { n: 16, rz: PI / 2 }); for (const s of [-1, 1]) k.cyl(0.56, 0.02, s * 0.585, -0.01, 0, c1, { n: 16, rz: PI / 2 }); if (kind === 'silage') for (const s of [-1, 1]) { k.cyl(0.5, 0.025, s * 0.59, -0.012, 0, '#33363b', { n: 16, rz: PI / 2 }); k.box(0.03, 0.9, 0.05, s * 0.6, -0.45, 0.1, '#4a4e55', { r: 0.01 }); } else for (let i = 0; i < 3; i++) k.torus(0.625, 0.012, -0.35 + i * 0.35, 0, 0, '#c9a03a', { ry: PI / 2 }); const g = k.build(); g.position.y = 0.62; const o = new T.Group(); o.add(g); return o; }
+  IH.farmMachines = { DEFS, has: kind => !!M[kind], model: kind => M[kind](), irrigator, irrigatorGun, loader, baleLook };
 })();
