@@ -3283,5 +3283,6 @@
       g.traverse(m => { if (m.isMesh) { m.geometry.dispose(); if (m.material !== LK.BASE && m.material !== LK.BASE2) m.material.dispose(); } });
     }
   };
+  IH.snapObj = (obj, w = 240, h = 200, pitch = 0.5, pad = 1.12) => O ? snap(obj, w, h, pitch, pad) : ''; // (the model audit sheet renders through the thumbnail camera)
   IH.thumb = t => { if (!O || !BY[t]) return ''; O.thumbQ = [t]; thumbsSome(); return THUMBS[t] || ''; };
 })();

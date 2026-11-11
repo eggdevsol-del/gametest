@@ -254,18 +254,47 @@
       for (let i = 0; i < 14; i++) for (const a of [0, 2.1, 4.2]) k.box(0.025, 0.2, 0.025, -0.95 + i * 0.146, 0.28 + Math.sin(a) * 0.14, 0.98 + Math.cos(a) * 0.14 + 0.08, '#3d4048', { rx: -a, r: 0 });
       k.box(0.5, 0.35, 0.4, -0.55, 1.85, 0.25, GR, { r: 0.05 }); k.box(0.46, 0.05, 0.36, -0.55, 2.2, 0.25, GD, { r: 0.02 }); for (let i = 0; i < 3; i++) k.cyl(0.07, 0.05, -0.7 + i * 0.15, 2.2, 0.25, '#f2e6c0', { n: 8 });
     } else if (kind === 'plough') {
-      // a three-furrow plough: a drawbar, a steel frame, three curved mouldboards with their shares, a depth wheel
-      k.box(0.12, 0.12, 1.4, 0, 0.55, 1.0, '#3d4048'); k.box(0.2, 0.18, 2.6, 0, 0.6, -0.3, '#c8433a', { r: 0.04, ry: 0.45 });
-      for (let i = 0; i < 3; i++) { const x = -0.7 + i * 0.7, z = 0.2 - i * 0.7; k.box(0.12, 0.5, 0.12, x, 0.2, z, '#3d4048'); k.box(0.5, 0.4, 0.08, x - 0.12, 0.05, z - 0.1, '#c9ccd2', { ry: 0.7, rz: 0.3, r: 0.04 }); k.cone(0.07, 0.3, x, 0.02, z + 0.2, '#8a8f98', { n: 4, rx: Math.PI / 2 }); }
+      // a three-furrow plough (phase G): the drawbar and headstock, the diagonal main beam with its cross brace, and
+      // three bodies each with a disc coulter in front, a skimmer, the leg, a twisted polished mouldboard, the share
+      // point and the landside; a depth wheel on its arm at the back
+      const RD = '#c8433a', RD2 = '#a8352e', ST = '#3d4048', POL = '#dfe3e8', SH = '#9aa0aa';
+      k.box(0.14, 0.14, 1.5, 0, 0.5, 1.05, ST, { r: 0.03 }); k.box(0.5, 0.35, 0.3, 0, 0.42, 0.35, RD, { r: 0.04 }); k.cyl(0.05, 0.35, 0, 0.5, 1.75, ST, { n: 8, rx: PI / 2 });
+      k.at(0, 0.62, -0.45, 0.45, kk => { kk.box(0.2, 0.2, 2.9, 0, 0, 0, RD, { r: 0.03 }); kk.box(0.22, 0.04, 2.9, 0, 0.2, 0, RD2, { r: 0.01 }); });
+      k.box(1.4, 0.12, 0.12, -0.45, 0.68, 0.0, RD2, { r: 0.03, ry: -0.2 });
+      for (let i = 0; i < 3; i++) {
+        const x = -0.55 + i * 0.6, z = 0.15 - i * 0.62;
+        k.box(0.12, 0.55, 0.14, x, 0.12, z, RD, { r: 0.02 }); k.box(0.16, 0.08, 0.2, x, 0.6, z, RD2, { r: 0.02 }); // the leg and its clamp
+        k.at(x - 0.1, 0.0, z - 0.14, 0.65, kk => { kk.box(0.07, 0.5, 0.8, 0, 0, 0, POL, { r: 0.02, rx: 0.12, rz: 0.4 }); kk.box(0.07, 0.28, 0.42, -0.18, 0.3, -0.3, POL, { r: 0.02, rz: 0.85 }); kk.box(0.05, 0.52, 0.82, 0.06, -0.01, 0.02, SH, { r: 0.01, rz: 0.36 }); }); // the mouldboard, twisting over at its tail
+        k.cone(0.07, 0.34, x - 0.02, 0.06, z + 0.3, '#8a8f98', { n: 4, rx: PI / 2, s: [1.6, 1, 0.5] }); k.box(0.04, 0.12, 0.5, x + 0.06, 0.0, z - 0.05, ST, { r: 0.01 }); // the share point, the landside
+        k.at(x - 0.04, 0.2, z + 0.45, 0.6, kk => kk.box(0.04, 0.15, 0.24, 0, 0, 0, POL, { r: 0.01, rz: 0.5 })); k.box(0.04, 0.3, 0.04, x, 0.3, z + 0.45, ST, { r: 0.01 }); // the skimmer on its stalk
+        k.cyl(0.24, 0.03, x + 0.04, 0.24, z + 0.78, SH, { n: 18, rz: PI / 2 }); k.cyl(0.05, 0.06, x + 0.04, 0.24 - 0.03, z + 0.78, ST, { n: 8, rz: PI / 2 }); k.box(0.05, 0.45, 0.05, x + 0.1, 0.25, z + 0.78, ST, { r: 0.01 }); // the disc coulter
+      }
+      k.box(0.08, 0.5, 0.08, 0.95, 0.3, -1.45, ST, { r: 0.02 }); k.box(0.08, 0.08, 0.5, 0.95, 0.72, -1.2, ST, { r: 0.02 }); // (the depth wheel's arm)
     } else if (kind === 'drill') {
       // a seed drill: the green hopper with its lid, the row of seed tubes down to the coulters, a press roller
       k.box(0.12, 0.12, 1.5, 0, 0.55, 1.0, '#3d4048'); k.box(2.2, 0.8, 0.9, 0, 0.75, -0.3, '#2f8a4f', { r: 0.08 }); k.box(2.3, 0.08, 1.0, 0, 1.55, -0.3, '#26703f', { r: 0.04 });
       for (let i = 0; i < 8; i++) { const x = -0.95 + i * 0.27; k.cyl(0.025, 0.6, x, 0.15, 0.05, '#3d4048', { n: 5 }); k.cyl(0.07, 0.03, x, 0.08, 0.15, '#8a8f98', { n: 8, rz: Math.PI / 2 }); }
       k.cyl(0.14, 2.1, 0, 0.14 - 1.05, -0.9, '#5d6670', { n: 10, rz: Math.PI / 2 }); k.box(0.6, 0.2, 0.05, 0, 1.0, 0.16, '#e8c45a', { r: 0.02 });
     } else if (kind === 'sprayer') {
-      // a boom sprayer: the white tank on its frame, the long folding boom with nozzles both sides
-      k.box(0.12, 0.12, 1.5, 0, 0.55, 1.0, '#3d4048'); k.box(1.6, 0.2, 1.8, 0, 0.5, -0.3, '#3d4048', { r: 0.03 }); k.cyl(0.6, 1.6, -0.8, 0.7 + 0.0, -0.3, '#f1f1ee', { n: 14, rz: Math.PI / 2 }); k.cyl(0.18, 0.15, 0, 1.3 + 0.0, -0.3, '#3a7bc8', { n: 8 });
-      for (const sd of [-1, 1]) { k.box(4.4, 0.08, 0.08, sd * 2.9, 0.8, -1.2, '#3d4048', { r: 0.02 }); k.box(0.06, 0.6, 0.06, sd * 0.85, 0.5, -1.2, '#3d4048'); for (let i = 0; i < 8; i++) k.cone(0.05, 0.15, sd * (1.0 + i * 0.55), 0.62, -1.2, '#3a7bc8', { n: 4, rx: Math.PI }); }
+      // a trailed boom sprayer (phase G): the A-frame drawbar, the chassis, a moulded white tank with its ribs, lid,
+      // sight gauge and the small rinse tank, the pump and filter on the front, the chemical hopper on the side, and
+      // the boom: a truss each side (top rail, bottom rail, braces), nozzle bodies hanging under it, end breakaways
+      const ST = '#3d4048', TK = '#f1f1ee', TK2 = '#d9dbe0', BL = '#3a7bc8';
+      for (const e of [-1, 1]) k.box(0.08, 0.08, 1.5, e * 0.25, 0.52, 1.05, ST, { ry: e * -0.18, r: 0.02 }); k.box(0.16, 0.12, 0.2, 0, 0.5, 1.8, ST, { r: 0.03 });
+      for (const e of [-1, 1]) k.box(0.12, 0.14, 2.6, e * 0.6, 0.38, -0.4, ST, { r: 0.02 }); k.box(1.4, 0.1, 0.12, 0, 0.42, 0.3, ST, { r: 0.02 }); k.box(1.4, 0.1, 0.12, 0, 0.42, -1.1, ST, { r: 0.02 });
+      k.box(1.5, 1.05, 1.7, 0, 0.52, -0.45, TK, { r: 0.28 }); for (let i = 0; i < 4; i++) k.box(1.52, 0.9, 0.06, 0, 0.6, -1.1 + i * 0.43, TK2, { r: 0.04 });
+      k.cyl(0.2, 0.08, 0, 1.56, -0.45, '#e8c45a', { n: 12 }); k.cyl(0.14, 0.06, 0, 1.64, -0.45, '#c9a03a', { n: 10 }); k.box(0.04, 0.7, 0.06, 0.76, 0.66, 0.1, '#9fc9e0', { r: 0.01 }); for (let i = 0; i < 4; i++) k.box(0.05, 0.015, 0.07, 0.77, 0.75 + i * 0.15, 0.1, ST, { r: 0 });
+      k.box(1.3, 0.3, 0.35, 0, 0.45, 0.48, TK2, { r: 0.08 }); // (the rinse tank)
+      k.box(0.3, 0.26, 0.24, -0.35, 0.34, 0.75, '#c8433a', { r: 0.04 }); k.cyl(0.07, 0.22, 0.25, 0.4, 0.75, BL, { n: 10 }); k.cyl(0.025, 0.6, 0.0, 0.5, 0.75, '#2a2630', { n: 5, rz: PI / 2 }); // pump, filter, hose
+      k.box(0.08, 0.5, 0.08, -0.85, 0.45, -0.1, ST, { r: 0.01 }); k.cone(0.22, 0.3, -0.95, 0.85, -0.1, '#e8c45a', { n: 10, rx: PI }); k.cyl(0.24, 0.05, -0.95, 1.15, -0.1, '#c9a03a', { n: 10 }); // the chemical hopper
+      k.box(1.2, 0.9, 0.1, 0, 0.45, -1.32, ST, { r: 0.02 }); // (the boom's centre frame)
+      for (const sd of [-1, 1]) {
+        k.at(sd * 0.6, 0.9, -1.4, 0, kk => {
+          kk.box(4.6, 0.06, 0.06, sd * 2.3, 0.28, 0, ST, { r: 0.01 }); kk.box(4.6, 0.06, 0.06, sd * 2.3, -0.08, 0, ST, { r: 0.01 }); kk.box(4.6, 0.04, 0.04, sd * 2.3, -0.08, 0.16, '#5d6670', { r: 0 });
+          for (let i = 0; i < 10; i++) { const x = sd * (0.2 + i * 0.46); kk.box(0.035, 0.42, 0.035, x, -0.08, 0, ST, { r: 0, rz: (i % 2 ? 0.55 : -0.55) * sd }); kk.box(0.03, 0.14, 0.03, x, -0.2, 0.16, '#5d6670', { r: 0 }); kk.box(0.05, 0.06, 0.05, x, -0.25, 0.16, BL, { r: 0.01 }); }
+          kk.box(0.4, 0.4, 0.05, sd * 4.75, -0.1, 0, '#e8c45a', { r: 0.02, rz: sd * 0.3 }); kk.box(0.06, 0.06, 0.06, sd * 4.65, 0.28, 0, '#c8433a', { r: 0.01 });
+        });
+      }
     } else {
       // a flatbed trailer: the A-frame drawbar with its jack, a planked deck on two runners, the headboard with
       // its mesh, side rails on stakes, mudguards over the wheels, the tail lights and number plate
@@ -279,9 +308,10 @@
       k.box(2.0, 0.4, 0.08, 0, 0.8, -1.8, RD, { r: 0.02 }); for (const s of [-1, 1]) { k.box(0.16, 0.1, 0.06, s * 0.82, 0.52, -1.86, '#d8433a', { r: 0.03 }); k.box(0.16, 0.06, 0.06, s * 0.82, 0.45, -1.86, '#ffb340', { r: 0.02 }); } k.box(0.42, 0.14, 0.03, 0, 0.47, -1.86, '#fff6e0', { r: 0.02 });
     }
     g.add(k.build());
-    for (const s of [-1, 1]) { const w = new T.Group(); w.position.set(s * (kind === 'baler' ? 1.12 : 1.1), 0.45, -0.3); const m = wheel(0.45, 0.3); if (s < 0) m.rotation.y = Math.PI; w.add(m); g.add(w); wheels.push(w); }
+    if (kind === 'plough') { const w = new T.Group(); w.position.set(0.95, 0.28, -1.6); w.add(wheel(0.28, 0.14)); g.add(w); wheels.push(w); } // (the plough runs on its own small depth wheel)
+    else for (const s of [-1, 1]) { const w = new T.Group(); w.position.set(s * (kind === 'baler' ? 1.12 : 1.1), 0.45, -0.3); const m = wheel(0.45, 0.3); if (s < 0) m.rotation.y = Math.PI; w.add(m); g.add(w); wheels.push(w); }
     const load = new T.Group(); load.position.set(0, 0.72, -0.4); g.add(load);
-    return { g, wheels, load, len: kind === 'baler' ? 1.9 : kind === 'trailer' ? 2.2 : 1.6, r: 0.45 };
+    return { g, wheels, load, len: kind === 'baler' ? 1.9 : kind === 'trailer' ? 2.2 : 1.6, r: kind === 'plough' ? 0.28 : 0.45 };
   }
   // a round bale of hay, lying on its side
   function baleModel(kind) { if (kind && kind !== 'hay' && IH.farmMachines) return IH.farmMachines.baleLook(kind); return baleModel0(); }
@@ -294,9 +324,20 @@
   // the muck heap: a mound that grows with what's on it (f.muck: it builds up as the animals are fed), straw through it
   function heapSync(B, f) {
     if (!B.heap) return; const n = Math.min(40, f.muck || 0), key = Math.round(n); if (B.heap.userData.n === key) return; B.heap.userData.n = key;
-    while (B.heap.children.length) B.heap.remove(B.heap.children[0]); const k = new Kit(), R = rng(4242), s0 = 0.35 + Math.sqrt(n / 40) * 1.0;
-    k.box(HEAP.r * 2 + 0.4, 0.12, HEAP.r * 2 + 0.4, 0, 0, 0, '#9a948a', { r: 0.04 }); for (const e of [-1, 1]) k.box(0.2, 0.6, HEAP.r * 2 + 0.4, e * (HEAP.r + 0.1), 0, 0, '#8a847a', { r: 0.03 }); k.box(HEAP.r * 2 + 0.4, 0.6, 0.2, 0, 0, -(HEAP.r + 0.1), '#8a847a', { r: 0.03 }); // (the concrete pad and its three walls)
-    if (n > 0.2) { k.ball(1.2 * s0, 0, 0.12, 0.1, '#4a3424', { s: [1.3, 0.75, 1.1], n: 12 }); for (let q = 0; q < 6; q++) k.ball(0.45 * s0, (R() - 0.5) * 1.6 * s0, 0.12, (R() - 0.5) * 1.4 * s0, q % 2 ? '#3f2c1f' : '#55402c', { s: [1.2, 0.6, 1.1], n: 8 }); for (let q = 0; q < 14; q++) k.box(0.35, 0.03, 0.05, (R() - 0.5) * 2 * s0, 0.12 + R() * 0.8 * s0, (R() - 0.5) * 1.6 * s0, '#e8d08a', { ry: R() * 6, rz: (R() - 0.5) * 0.6 }); }
+    while (B.heap.children.length) B.heap.remove(B.heap.children[0]); const k = new Kit(), R = rng(4242), s0 = 0.35 + Math.sqrt(n / 40) * 1.0, W2 = HEAP.r * 2 + 0.4;
+    // the pad and its three block walls (phase G: the blocks coursed, a cap along the top, a drain at the front lip)
+    k.box(W2, 0.12, W2, 0, 0, 0, '#9a948a', { r: 0.04 }); k.box(W2, 0.03, 0.14, 0, 0.12, W2 / 2 - 0.07, '#7a746a', { r: 0 });
+    const wall = (w, along, x, z) => { k.box(along ? w : 0.22, 0.62, along ? 0.22 : w, x, 0.1, z, '#8a847a', { r: 0.02 }); for (let c = 1; c < 4; c++) k.box(along ? w + 0.01 : 0.23, 0.02, along ? 0.23 : w + 0.01, x, 0.1 + c * 0.155, z, '#6f695f', { r: 0 }); for (let q = 0; q < Math.floor(w / 0.4); q++) for (let c = 0; c < 4; c++) { const o = -w / 2 + 0.2 + q * 0.4 + (c % 2) * 0.2; if (o < w / 2 - 0.05) k.box(along ? 0.02 : 0.23, 0.15, along ? 0.23 : 0.02, along ? x + o : x, 0.1 + c * 0.155, along ? z : z + o, '#6f695f', { r: 0 }); } k.box(along ? w + 0.06 : 0.28, 0.06, along ? 0.28 : w + 0.06, x, 0.72, z, '#a9a297', { r: 0.02 }); };
+    for (const e of [-1, 1]) wall(W2, false, e * (HEAP.r + 0.1), 0); wall(W2, true, 0, -(HEAP.r + 0.1));
+    // the heap: clods piled into a lumpy mound, banked against the back wall, darker and wetter at the foot, fresh
+    // straw-flecked muck on top, loose straw stalks sticking out, a few clods rolled off at the front
+    if (n > 0.2) {
+      const H = 0.55 + 0.9 * s0, Rb = 0.9 + 0.7 * s0;
+      for (let q = 0; q < 46; q++) { const t = q / 46, a = q * 2.399, r = Rb * Math.sqrt(1 - t) * (0.8 + R() * 0.25), x = Math.cos(a) * r, z = Math.sin(a) * r * 0.85 - 0.25 * t * s0, y = 0.12 + H * t * 0.92, sz = (0.42 - 0.22 * t) * (0.7 + s0 * 0.5); k.ball(sz, x, y, z, t < 0.3 ? '#3a2a1c' : t < 0.65 ? (q % 2 ? '#4a3424' : '#553d29') : (q % 3 ? '#6a4e32' : '#7a5c3a'), { s: [1.2, 0.7, 1.1], n: 7, ry: a }); }
+      for (let q = 0; q < 26; q++) { const a = R() * 6.28, t = R(), r = Rb * Math.sqrt(1 - t) * 0.9; k.box(0.32 + R() * 0.2, 0.025, 0.04, Math.cos(a) * r, 0.14 + H * t * 0.95, Math.sin(a) * r * 0.85, q % 3 ? '#e8d08a' : '#cfb46a', { r: 0, ry: R() * 6, rz: (R() - 0.5) * 0.9 }); }
+      for (let q = 0; q < 4; q++) k.ball(0.09 + R() * 0.05, (R() - 0.5) * W2 * 0.7, 0.14, HEAP.r - 0.1 + R() * 0.3, '#4a3424', { s: [1.2, 0.7, 1], n: 6 });
+      k.cyl(Rb * 1.05, 0.02, 0, 0.12, -0.1, '#2e2218', { n: 16, s: [1, 1, 0.85] }); // (the wet seep round its foot)
+    }
     B.heap.add(k.build());
   }
   function yardSync(B, f) { if (!B.yard) return; const nh = Math.min(YARD_CAP, Math.floor(((f.feed && f.feed.hay) || 0) / 6)), ns = Math.min(YARD_CAP - nh, Math.floor(((f.feed && f.feed.silage) || 0) / 6)), n = nh + ns; if (B.yard.userData.ns !== ns) { while (B.yard.children.length) B.yard.remove(B.yard.children[0]); B.yard.userData.ns = ns; } while (B.yard.children.length > Math.max(0, n)) B.yard.remove(B.yard.children[B.yard.children.length - 1]); while (B.yard.children.length < n) { const i = B.yard.children.length, s = yardSlot(i), m = i >= nh && IH.farmMachines ? (() => { const o = IH.farmMachines.baleLook('silage'); o.rotation.z = Math.PI / 2; o.children[0].position.y = 0; const w = new T.Group(); o.position.y = 0.575; w.add(o); return w; })() : baleUp(); m.position.set(s.x, s.y, s.z); m.rotation.y = (i * 1.7) % 6.28; B.yard.add(m); } }
@@ -412,6 +453,7 @@
   // The tractor's home: parked by the barn. Every time the kid arrives on the farm it's there (and Auto parks it
   // there when the job's done); a second tractor parks alongside.
   const TRACTOR_HOME = { x: 20.5, z: 11.6, ry: -0.4 };
+  IH.farmModels = { itemModel, tractorModel, windpump, implementModel, baleModel, baleUp, fence, heapSync, ITEMS }; // (the model audit sheet)
   IH.farmPark = f => { let n = 0; for (const it of (f && f.items) || []) if (it.t === 'tractor') { Object.assign(it, { x: TRACTOR_HOME.x + n * 3.4, z: TRACTOR_HOME.z, ry: TRACTOR_HOME.ry }); n++; } };
 
   /* ---------- on the farm (village.js calls this once; ctx is what it needs from there) */

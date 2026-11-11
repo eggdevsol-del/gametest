@@ -22,8 +22,42 @@
     for (let i = 0; i < pts.length - 1; i++) { const [x0, z0] = pts[i], [x1, z1] = pts[i + 1]; if (gap === i) continue; const L = Math.hypot(x1 - x0, z1 - z0), n = Math.max(1, Math.round(L / 2.2)), ry = -Math.atan2(z1 - z0, x1 - x0);
       for (let j = 0; j <= n; j++) bx(k, 0.2, 1.4, 0.2, x0 + (x1 - x0) * j / n, 0, z0 + (z1 - z0) * j / n, col); for (const y of [0.5, 1.1]) k.box(L, 0.13, 0.08, (x0 + x1) / 2, y, (z0 + z1) / 2, col, { ry }); solid(x0 - 0.2, z0 - 0.2, x1 + 0.2, z1 + 0.2); }
   }
-  function shed(k, x, z, ry, wall, roof, w = 4, d = 3, h = 2.6) { k.at(x, 0, z, ry, kk => { bx(kk, w, h, d, 0, 0, 0, wall, { r: 0.05 }); kk.cone(Math.hypot(w, d) * 0.62, 1.1, 0, h, 0, roof, { n: 4, ry: Math.PI / 4, s: [w / d, 1, 1] }); bx(kk, 1.2, 1.9, 0.1, 0, 0, d / 2 + 0.02, '#5a4632'); }); }
-  function tree(k, x, z, R, s = 1, y = 0, leaf = ['#4f9a3c', '#5fae4a']) { k.cyl(0.32 * s, 2.2 * s, x, y, z, '#6b4a33', { n: 7 }); for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2; k.ball(1.25 * s, x + Math.cos(a) * 1.1 * s, y + (3.0 + R() * 0.6) * s, z + Math.sin(a) * 0.9 * s, leaf[i % 2], { n: 9 }); } k.ball(1.3 * s, x, y + 3.9 * s, z, leaf[0], { n: 9 }); }
+  // a garden shed (phase G): a block base, weatherboard walls with corner trims, a ledged and braced door with its
+  // handle, a four-pane window with sill, a pitched roof with overhanging eaves, barge boards, a ridge cap, a gutter
+  const GABLE = (k, w, h, t, x, y, z, c) => k.at(x, y, z, Math.PI / 2, kk => kk.at(0, 0, 0, 0, k3 => k3.shape([[-w / 2, 0], [w / 2, 0], [0, h]], t, 0, 0, 0, c), -Math.PI / 2));
+  const tint = (c, f) => { const o = new T.Color(c); o.multiplyScalar(f); return '#' + o.getHexString(); };
+  function shed(k, x, z, ry, wall, roof, w = 4, d = 3, h = 2.6) {
+    k.at(x, 0, z, ry, kk => {
+      const dk = tint(wall, 0.8), trim = '#f2ece0', pitch = 0.5, rise = (d / 2) * Math.tan(pitch), rl = (d / 2 + 0.35) / Math.cos(pitch);
+      bx(kk, w + 0.2, 0.18, d + 0.2, 0, 0, 0, '#a9a297', { r: 0.03 }); bx(kk, w, h - 0.18, d, 0, 0.18, 0, wall, { r: 0.03 });
+      for (let i = 0; i < Math.floor((h - 0.3) / 0.22); i++) { const yy = 0.3 + i * 0.22; bx(kk, w + 0.02, 0.03, d + 0.02, 0, yy, 0, dk, { r: 0 }); } // the weatherboard laps
+      for (const [a, b] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) bx(kk, 0.12, h - 0.18, 0.12, a * w / 2, 0.18, b * d / 2, trim, { r: 0.01 });
+      for (const e of [-1, 1]) { GABLE(kk, d, rise, 0.06, e * (w / 2 - 0.03), h, 0, wall); bx(kk, 0.06, 0.03, d * 0.6, e * (w / 2 + 0.01), h + rise * 0.35, 0, dk, { r: 0 }); }
+      for (const e of [-1, 1]) kk.at(0, h + rise / 2, e * d / 4, 0, k3 => { k3.box(w + 0.5, 0.08, rl, 0, -0.04, 0, roof, { r: 0.02 }); for (let i = 0; i < 7; i++) k3.box(0.04, 0.03, rl, -w / 2 + i * (w / 6), 0.04, 0, tint(roof, 0.82), { r: 0 }); k3.box(w + 0.52, 0.14, 0.06, 0, -0.1, e * rl / 2, trim, { r: 0.01 }); }, e * pitch);
+      bx(kk, w + 0.55, 0.1, 0.2, 0, h + rise - 0.02, 0, tint(roof, 0.7), { r: 0.04 });
+      for (const e of [-1, 1]) for (const f of [-1, 1]) kk.at(e * (w / 2 + 0.25), h + rise / 2, f * d / 4, 0, k3 => k3.box(0.05, 0.16, rl, 0, -0.1, 0, trim, { r: 0.01 }), f * pitch); // (the barge boards)
+      kk.cyl(0.06, w + 0.4, 0, h - 0.12 - (w + 0.4) / 2, d / 2 + 0.38, '#8a8f98', { n: 6, rz: Math.PI / 2 });
+      // the door: boards, the ledges and the brace, the handle and hasp, its frame
+      const dw = Math.min(1.1, w * 0.3), dx = -w * 0.18; bx(kk, dw + 0.16, 2.0, 0.06, dx, 0.18, d / 2 + 0.01, trim, { r: 0.01 }); bx(kk, dw, 1.88, 0.06, dx, 0.2, d / 2 + 0.04, tint(wall, 0.7), { r: 0.01 });
+      for (let i = 1; i < 5; i++) bx(kk, 0.02, 1.86, 0.065, dx - dw / 2 + i * dw / 5, 0.21, d / 2 + 0.045, tint(wall, 0.55), { r: 0 });
+      for (const yy of [0.45, 1.75]) bx(kk, dw - 0.06, 0.12, 0.04, dx, yy, d / 2 + 0.08, tint(wall, 0.85), { r: 0.01 }); kk.at(dx, 1.16, d / 2 + 0.08, 0, k3 => k3.box(0.1, 1.45, 0.04, 0, -0.72, 0, tint(wall, 0.85), { r: 0.01, rz: -0.55 }));
+      kk.ball(0.04, dx + dw / 2 - 0.12, 1.1, d / 2 + 0.11, '#3d4048', { n: 6 }); bx(kk, 0.16, 0.05, 0.03, dx + dw / 2 - 0.02, 1.3, d / 2 + 0.1, '#3d4048', { r: 0 });
+      // the window: frame, four panes, glazing bars, a sill
+      const wx = w * 0.22, wy = 1.1, ww = Math.min(1.0, w * 0.26); bx(kk, ww + 0.14, 0.86, 0.05, wx, wy - 0.07, d / 2 + 0.01, trim, { r: 0.01 }); kk.glassBox(ww, 0.72, 0.03, wx, wy, d / 2 + 0.03, { tint: '#9fc9e0' });
+      bx(kk, 0.04, 0.72, 0.05, wx, wy, d / 2 + 0.04, trim, { r: 0 }); bx(kk, ww, 0.04, 0.05, wx, wy + 0.34, d / 2 + 0.04, trim, { r: 0 }); bx(kk, ww + 0.24, 0.06, 0.14, wx, wy - 0.1, d / 2 + 0.07, trim, { r: 0.01 });
+      bx(kk, 0.5, 0.25, 0.4, wx, 0, d / 2 + 0.35, '#c9a173', { r: 0.03 }); kk.ball(0.18, wx, 0.36, d / 2 + 0.35, '#5fae4a', { n: 8, s: [1.3, 0.7, 1] }); // a planter under it
+    });
+  }
+  // a broadleaf tree (phase G): a tapered trunk with a root flare, three limbs spreading from the fork, and a
+  // crown of leaf clumps layered round the limb ends: darker underneath, sunlit on top
+  function tree(k, x, z, R, s = 1, y = 0, leaf = ['#4f9a3c', '#5fae4a']) {
+    const bark = '#6b4a33', hi = tint(leaf[1], 1.18), lo = tint(leaf[0], 0.82), fork = 1.9 * s, ends = [];
+    k.cyl(0.24 * s, fork + 0.2 * s, x, y, z, bark, { rt: 0.17 * s, n: 8 }); for (let i = 0; i < 4; i++) { const a = i * 1.57 + 0.4; k.ball(0.16 * s, x + Math.cos(a) * 0.2 * s, y + 0.05 * s, z + Math.sin(a) * 0.2 * s, '#5a3e2c', { s: [1.6, 0.6, 1], n: 6, ry: -a }); }
+    for (let i = 0; i < 3; i++) { const a = i / 3 * Math.PI * 2 + R() * 0.8, t = 0.55 + R() * 0.2, L = 1.4 * s, ex = Math.sin(t) * L; k.at(x, y + fork, z, -a, kk => kk.cyl(0.11 * s, L, ex / 2, Math.cos(t) * L / 2 - L / 2, 0, bark, { rt: 0.06 * s, n: 6, rz: -t })); ends.push([x + Math.cos(a) * ex, y + fork + Math.cos(t) * L, z + Math.sin(a) * ex]); }
+    for (const [ex, ey, ez] of ends) { k.ball(1.05 * s, ex, ey + 0.2 * s, ez, leaf[0], { s: [1, 0.8, 1], n: 9 }); k.ball(0.8 * s, ex, ey - 0.35 * s, ez, lo, { s: [1.1, 0.6, 1.1], n: 8 }); }
+    for (let i = 0; i < 5; i++) { const a = i / 5 * Math.PI * 2 + R(), r = 1.15 * s; k.ball((0.75 + R() * 0.2) * s, x + Math.cos(a) * r, y + fork + (1.45 + R() * 0.4) * s, z + Math.sin(a) * r, i % 2 ? leaf[1] : leaf[0], { s: [1, 0.8, 1], n: 9 }); }
+    k.ball(1.0 * s, x, y + fork + 2.15 * s, z, leaf[1], { s: [1, 0.8, 1], n: 9 }); for (let i = 0; i < 3; i++) { const a = i * 2.1 + R(); k.ball(0.5 * s, x + Math.cos(a) * 0.55 * s, y + fork + 2.55 * s, z + Math.sin(a) * 0.55 * s, hi, { s: [1, 0.75, 1], n: 8 }); }
+  }
   function fern(k, x, z, R, s = 1, y = 0) { k.cyl(0.18 * s, 2.6 * s, x, y, z, '#4a3a2c', { n: 6 }); for (let i = 0; i < 9; i++) { const a = i / 9 * Math.PI * 2 + R() * 0.3; k.box(0.5 * s, 0.04, 2.0 * s, x + Math.sin(a) * 0.9 * s, y + 2.5 * s, z + Math.cos(a) * 0.9 * s, i % 2 ? '#3f8a3c' : '#4e9e48', { ry: a, rx: 0.45 }); } }
   function nikau(k, x, z, R, s = 1, y = 0) { k.cyl(0.16 * s, 4.4 * s, x, y, z, '#8a8a6a', { n: 7 }); k.cyl(0.24 * s, 0.9 * s, x, y + 4.0 * s, z, '#7aa04a', { n: 7 }); for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; k.box(0.5 * s, 0.04, 2.2 * s, x + Math.sin(a) * 1.0 * s, y + 5.0 * s, z + Math.cos(a) * 1.0 * s, '#4e9e48', { ry: a, rx: -0.3 }); } }
   function kauri(k, x, z, R, s = 1, y = 0) { k.cyl(0.55 * s, 6.5 * s, x, y, z, '#9a8f86', { n: 9 }); for (let i = 0; i < 5; i++) { const a = i / 5 * Math.PI * 2 + R(); k.ball(1.4 * s, x + Math.cos(a) * 1.4 * s, y + (6.8 + R()) * s, z + Math.sin(a) * 1.4 * s, i % 2 ? '#3b6e35' : '#46803c', { s: [1.3, 0.7, 1.3], n: 9 }); } }
@@ -80,21 +114,67 @@
     if (o.lime) { const R = rng(91); for (let q = 0; q < 18; q++) kk.ball(0.03, -2.0 + R() * 4.0, 0.025, -1.35 + R() * 2.7, '#f4f4ef', { s: [1, 0.4, 1], n: 5 }); }
     if (o.weeds) { const R = rng(57); for (let q = 0; q < 10; q++) { const x = -2.0 + R() * 4.0, z = -1.3 + R() * 2.6; for (let l = 0; l < 3; l++) kk.cone(0.04, 0.22 + R() * 0.1, x + (l - 1) * 0.04, 0, z, l % 2 ? '#7fbf3c' : '#5f9a2c', { n: 3, rz: (l - 1) * 0.5 }); } }
   }
+  /* ---------- the crops in a bed (phase G: each crop its true shape at every stage). Two rows of four plants.
+     stage 0 sown: a raked drill along each row with the seed label at its end; 1 seedling; 2 growing; 3 ready.
+     Leaves are blades (flat boxes) that rise from the crown and droop at the tip, so they read in the ink style. */
+  let LID; // (one part number for all of a plant's leaves, so the ink draws its outline, not a line round every blade)
+  const LEAF = (kk, x, y, z, yaw, len, wid, up, droop, col, col2 = col, th = 0.05) => kk.at(x, y, z, yaw, a => a.at(0, 0, 0, 0, b => { b.box(wid, th, len * 0.58, 0, 0, len * 0.29, col, { r: 0, id: LID }); b.at(0, 0, len * 0.55, 0, c => c.box(wid * 0.8, th, len * 0.48, 0, 0, len * 0.22, col2, { r: 0, id: LID }), droop); }, -up));
+  const FROND = (kk, x, y, z, yaw, len, up, col, col2) => kk.at(x, y, z, yaw, a => a.at(0, 0, 0, 0, b => { b.box(0.03, 0.03, len, 0, 0, len / 2, col2, { r: 0, id: LID }); for (let i = 1; i < 5; i++) for (const e of [-1, 1]) b.box(0.14 - i * 0.018, 0.035, 0.07, e * (0.06 - i * 0.006), 0, len * i / 5, col, { r: 0, ry: e * 0.5, id: LID }); b.box(0.09, 0.035, 0.1, 0, 0, len, col, { r: 0, id: LID }); }, -up));
   function cropBed(kk, crop, stage) {
-    const s = [0.3, 0.55, 0.8, 1][stage] || 0.3;
-    for (let r = 0; r < 2; r++) for (let c = 0; c < 4; c++) { const x = -1.6 + c * 1.07, z = -0.7 + r * 1.4;
-      if (stage === 0) { kk.ball(0.18, x, 0, z, '#6b4a33', { s: [1, 0.4, 1], n: 6 }); continue; }
-      if (crop === 'carrot') { for (let l = 0; l < 4; l++) kk.cone(0.05, 0.55 * s, x + (l - 1.5) * 0.06, 0, z, '#5fae4a', { n: 3, rz: (l - 1.5) * 0.3 }); if (stage === 3) kk.cone(0.09, 0.12, x, 0.02, z, '#ff8a3d', { n: 6 }); }
-      else if (crop === 'tomato') { kk.cyl(0.02, 1.4 * s, x + 0.12, 0, z, '#c9a173', { n: 3 }); kk.ball(0.3 * s, x, 0.6 * s, z, '#4e9e48', { n: 8 }); if (stage === 3) for (let f = 0; f < 3; f++) kk.ball(0.1, x + (f - 1) * 0.15, 0.5 + f * 0.12, z + 0.2, '#e8463e', { n: 6 }); }
-      else if (crop === 'lettuce') kk.ball(0.32 * s, x, 0.12 * s, z, stage === 3 ? '#9be38f' : '#7cd36a', { s: [1, 0.7, 1], n: 9 });
-      else if (crop === 'pumpkin') { kk.ball(0.22 * s, x, 0.1, z, '#4e9e48', { s: [1.4, 0.4, 1.4], n: 7 }); if (stage === 3 && c % 2 === 0) kk.ball(0.3, x + 0.2, 0.22, z, '#f39a3b', { s: [1.2, 0.85, 1.2], n: 9 }); }
-      else if (crop === 'tea') { kk.ball(0.3 * s, x, 0.18 * s, z, stage === 3 ? '#5fae4a' : '#4e8f3c', { s: [1.1, 0.75, 1.1], n: 8 }); if (stage === 3) kk.ball(0.08, x + 0.1, 0.42, z, '#9be38f', { n: 5 }); }
-      else if (crop === 'rice') { for (let l = 0; l < 5; l++) kk.cone(0.04, 0.7 * s, x + (l - 2) * 0.07, 0, z, stage === 3 ? '#e2c25a' : '#86c766', { n: 3, rz: (l - 2) * 0.12 }); }
-      else if (crop === 'potato') { for (let l = 0; l < 3; l++) kk.ball(0.16 * s, x + (l - 1) * 0.12, 0.1 + 0.2 * s, z + (l % 2) * 0.1, stage === 3 ? '#7a9a4a' : '#4e9e48', { s: [1, 0.8, 1], n: 7 }); kk.ball(0.22, x, 0.0, z, '#6b4a33', { s: [1.4, 0.45, 1.2], n: 7 }); if (stage === 3) for (let f = 0; f < 3; f++) kk.ball(0.07, x - 0.18 + f * 0.17, 0.04, z + 0.28, '#c9a173', { s: [1.2, 0.9, 1], n: 6 }); }
-      else if (crop === 'corn') { kk.cyl(0.035, 1.9 * s, x, 0, z, '#6fae4a', { n: 5 }); for (let l = 0; l < 4; l++) kk.box(0.08, 0.02, 0.6 * s, x + Math.sin(l * 1.6) * 0.2, (0.4 + l * 0.35) * s, z + Math.cos(l * 1.6) * 0.2, '#5fae4a', { ry: l * 1.6, rx: 0.5, r: 0.01 }); kk.cone(0.05, 0.25 * s, x, 1.9 * s, z, stage === 3 ? '#e2c25a' : '#a8c86a', { n: 4 }); if (stage === 3) kk.box(0.1, 0.32, 0.1, x + 0.08, 1.0, z, '#f2d45a', { r: 0.05, rz: -0.3 }); }
-      else if (crop === 'strawberry') { kk.ball(0.22 * s, x, 0.1, z, '#5fae4a', { s: [1.2, 0.5, 1.2], n: 7 }); if (stage === 3) for (let f = 0; f < 3; f++) kk.ball(0.06, x + (f - 1) * 0.14, 0.08, z + 0.2, '#e8352e', { n: 5 }); }
+    const s = [0.3, 0.55, 0.8, 1][stage] || 0.3, R = rng(crop.length * 131 + stage * 7);
+    if (stage === 0) { for (let r = 0; r < 2; r++) { const z = -0.7 + r * 1.4; kk.box(3.9, 0.07, 0.3, 0, 0, z, '#5a3f2c', { r: 0.03 }); kk.box(3.8, 0.02, 0.06, 0, 0.07, z, '#3f2c1f', { r: 0 }); for (let c = 0; c < 4; c++) kk.ball(0.03, -1.6 + c * 1.07, 0.08, z, '#c9a173', { n: 5 }); kk.box(0.03, 0.34, 0.03, 2.05, 0, z, '#c9a173', { r: 0 }); kk.box(0.16, 0.11, 0.02, 2.05, 0.3, z + 0.02, '#f4efe4', { r: 0.01 }); kk.box(0.1, 0.04, 0.025, 2.05, 0.33, z + 0.02, CROP_TAG[crop] || '#7fbf5c', { r: 0 }); } return; }
+    for (let r = 0; r < 2; r++) for (let c = 0; c < 4; c++) {
+      LID = IH.kit.nextId(); const x = -1.6 + c * 1.07 + (R() - 0.5) * 0.06, z = -0.7 + r * 1.4 + (R() - 0.5) * 0.06, sp = R() * 6.28, G = '#4e9e48', G2 = '#5fae4a';
+      kk.ball(0.2 + 0.08 * s, x, 0, z, '#5a3f2c', { s: [1, 0.25, 1], n: 7 }); // (the soil drawn up round the plant)
+      if (crop === 'carrot') { // feathery fronds on long stalks; at harvest the orange shoulder shows at the soil
+        const n = stage === 1 ? 3 : 7; for (let l = 0; l < n; l++) FROND(kk, x, 0.03, z, sp + l / n * 6.28, 0.32 + 0.38 * s, 1.0 - (l % 2) * 0.25, l % 2 ? '#8fd36a' : '#7cc35a', '#9ac462');
+        if (stage === 3) { kk.cyl(0.075, 0.08, x, -0.02, z, '#ff8a3d', { rt: 0.06, n: 9 }); kk.cyl(0.05, 0.02, x, 0.06, z, '#5f9a2c', { n: 7 }); }
+      } else if (crop === 'lettuce') { // a rosette of broad leaves cupped round a heart, pale in the middle
+        const n = stage === 1 ? 4 : 9, Lg = 0.16 + 0.24 * s; for (let l = 0; l < n; l++) LEAF(kk, x, 0.03, z, sp + l / n * 6.28, Lg, 0.14 + 0.12 * s, 0.5 + (l % 3) * 0.12, 0.6, l % 2 ? '#7cd36a' : '#6cc35a', '#8fdc7a', 0.06);
+        if (stage >= 2) { kk.ball(0.11 + 0.08 * s, x, 0.1 + 0.06 * s, z, '#b8ec9a', { s: [1, 0.85, 1], n: 8 }); for (let l = 0; l < 4; l++) LEAF(kk, x, 0.08, z, sp + 0.4 + l * 1.57, 0.16 * s + 0.08, 0.14, 1.0, -0.5, '#a5e48a'); }
+      } else if (crop === 'tomato') { // a cane, the stem tied to it, compound leaves up the stem, trusses of fruit
+        const H = 0.35 + 1.05 * s; if (stage >= 2) { kk.cyl(0.018, H + 0.25, x + 0.1, 0, z - 0.06, '#c9a173', { n: 5 }); for (let t = 1; t < 3; t++) kk.cyl(0.03, 0.03, x + 0.06, H * t / 3, z - 0.04, '#e8d8b0', { n: 6 }); }
+        kk.cyl(0.025, H, x, 0, z, '#5f8f3a', { rt: 0.018, n: 5 }); const n = stage === 1 ? 3 : 7;
+        for (let l = 0; l < n; l++) { const y = H * (0.25 + 0.7 * l / n); FROND(kk, x, y, z, sp + l * 2.4, 0.22 + 0.12 * s, 0.25, l % 2 ? G2 : '#6cc35a', '#6f9a42'); }
+        if (stage === 3) for (let t = 0; t < 2; t++) for (let f = 0; f < 3; f++) { const a = sp + t * 3 + f * 0.45, y = H * (0.35 + t * 0.3) - f * 0.07; kk.ball(0.095, x + Math.cos(a) * 0.19, y, z + Math.sin(a) * 0.19, f === 2 ? '#f39a3b' : '#e8463e', { n: 8 }); kk.box(0.06, 0.02, 0.06, x + Math.cos(a) * 0.17, y + 0.065, z + Math.sin(a) * 0.17, '#4e8f3c', { r: 0, ry: f }); }
+        else if (stage === 2) for (let f = 0; f < 3; f++) kk.ball(0.025, x + Math.cos(sp + f) * 0.14, H * 0.6, z + Math.sin(sp + f) * 0.14, '#ffd84a', { n: 5 });
+      } else if (crop === 'pumpkin') { // a sprawling vine of big round leaves on tall stalks, a ribbed fruit lying under them
+        const n = stage === 1 ? 2 : 6; for (let l = 0; l < n; l++) { const a = sp + l / n * 6.28, d = (0.12 + 0.3 * s) * (0.6 + (l % 2) * 0.4), lx = x + Math.cos(a) * d, lz = z + Math.sin(a) * d, ly = 0.12 + 0.18 * s * (l % 2 ? 0.7 : 1); kk.cyl(0.02, ly, lx, 0, lz, '#7fae4a', { n: 4 }); kk.ball(0.1 + 0.13 * s, lx, ly, lz, l % 2 ? G : '#3f8a3c', { s: [1, 0.22, 1], n: 8, rx: 0.3 * Math.sin(a), rz: 0.3 * Math.cos(a) }); }
+        if (stage >= 2) kk.box(0.6 * s, 0.03, 0.03, x, 0.03, z, '#6f9a42', { r: 0, ry: sp });
+        if (stage === 3 && c % 2 === 0) { const fx = x + Math.cos(sp + 1) * 0.42, fz = z + Math.sin(sp + 1) * 0.42; for (let q = 0; q < 8; q++) { const a = q / 8 * 6.28; kk.ball(0.19, fx + Math.cos(a) * 0.16, 0.24, fz + Math.sin(a) * 0.16, q % 2 ? '#f39a3b' : '#e8862e', { s: [0.9, 1.15, 0.9], n: 8 }); } kk.cyl(0.04, 0.14, fx, 0.44, fz, '#6b7a3a', { rt: 0.025, n: 6, rz: 0.3 }); }
+        else if (stage === 2) kk.ball(0.06, x + 0.15, 0.2, z, '#ffc93a', { n: 6, s: [1, 0.6, 1] });
+      } else if (crop === 'strawberry') { // a low crown of three-part leaves on straw; white flowers, then berries hanging on the straw
+        if (stage >= 2) for (let q = 0; q < 5; q++) kk.box(0.3, 0.015, 0.04, x + (R() - 0.5) * 0.4, 0.01, z + (R() - 0.5) * 0.4, '#e8d08a', { r: 0, ry: R() * 3 });
+        const n = stage === 1 ? 3 : 6; for (let l = 0; l < n; l++) { const a = sp + l / n * 6.28, d = 0.1 + 0.08 * s, lx = x + Math.cos(a) * d, lz = z + Math.sin(a) * d, ly = 0.08 + 0.12 * s; kk.box(0.02, ly, 0.02, (x + lx) / 2, 0, (z + lz) / 2, '#6f9a42', { r: 0 }); for (let t = 0; t < 3; t++) { const b = a + (t - 1) * 0.8; kk.ball(0.06 + 0.02 * s, lx + Math.cos(b) * 0.06, ly, lz + Math.sin(b) * 0.06, t === 1 ? '#6cc35a' : G2, { s: [1, 0.3, 1.2], n: 7, ry: -b, id: LID }); } }
+        if (stage === 2) for (let f = 0; f < 2; f++) { const a = sp + 2 + f * 2; kk.ball(0.035, x + Math.cos(a) * 0.2, 0.12, z + Math.sin(a) * 0.2, '#ffffff', { s: [1, 0.4, 1], n: 6 }); kk.ball(0.015, x + Math.cos(a) * 0.2, 0.135, z + Math.sin(a) * 0.2, '#ffd84a', { n: 4 }); }
+        if (stage === 3) for (let f = 0; f < 3; f++) { const a = sp + 1 + f * 1.9, bx2 = x + Math.cos(a) * 0.24, bz2 = z + Math.sin(a) * 0.24; kk.cone(0.05, 0.11, bx2, 0.02, bz2, f === 1 ? '#f2a03a' : '#e8352e', { n: 8, rx: Math.PI }); kk.box(0.08, 0.02, 0.08, bx2, 0.12, bz2, '#4e8f3c', { r: 0, ry: f }); }
+      } else if (crop === 'tea') { // a clipped bush: a flat-topped mound of dark glossy leaves, pale new shoots on top when ready to pick
+        const w = 0.14 + 0.26 * s, h = 0.12 + 0.36 * s; kk.cyl(0.03, h * 0.5, x, 0, z, '#6b4a33', { n: 5 }); for (let q = 0; q < 7; q++) { const a = sp + q * 0.9, d = q ? w * 0.55 : 0; kk.ball(w * 0.55, x + Math.cos(a) * d, h * 0.62, z + Math.sin(a) * d, q % 2 ? '#3f7a34' : '#4e8f3c', { s: [1, 0.75, 1], n: 7 }); }
+        for (let q = 0; q < 5; q++) { const a = sp + q * 1.26; kk.ball(w * 0.42, x + Math.cos(a) * w * 0.4, h * 0.88, z + Math.sin(a) * w * 0.4, q % 2 ? '#5a9f44' : '#4e8f3c', { s: [1, 0.6, 1], n: 7 }); }
+        if (stage === 3) for (let q = 0; q < 6; q++) { const a = sp + q; kk.box(0.05, 0.1, 0.03, x + Math.cos(a) * w * 0.55, h, z + Math.sin(a) * w * 0.55, '#b8ec7a', { r: 0, rz: 0.3 }); }
+      } else if (crop === 'rice') { // a paddy: shallow water round clumps of slender blades; golden heads bowing over when ready
+        if (c === 0) kk.waterBox(4.1, 0.04, 0.9, 0, 0.0, z, { tint: '#8fc8c0' });
+        const n = stage === 1 ? 5 : 11, gold = stage === 3; for (let l = 0; l < n; l++) LEAF(kk, x + (R() - 0.5) * 0.08, 0.02, z + (R() - 0.5) * 0.08, sp + l / n * 6.28, 0.3 + 0.55 * s, 0.05, 1.25 - (l % 3) * 0.12, 0.5, gold ? '#e2c25a' : l % 2 ? '#9be070' : '#a8e47a', gold ? '#f2d872' : '#b8ec8a', 0.05);
+        if (stage >= 2) for (let h = 0; h < 4; h++) { const a = sp + h * 1.6, top = 0.3 + 0.62 * s; kk.box(0.02, top, 0.02, x + Math.cos(a) * 0.05, 0, z + Math.sin(a) * 0.05, gold ? '#e2c25a' : '#a8e47a', { r: 0 }); kk.at(x + Math.cos(a) * 0.05, top, z + Math.sin(a) * 0.05, a, b => { for (let g = 0; g < 4; g++) b.ball(0.035, 0, -g * 0.05, 0.05 + g * 0.04, gold ? '#f2d26a' : '#b8e08a', { s: [0.7, 0.7, 1.3], n: 5 }); }); }
+      } else if (crop === 'potato') { // an earthed-up ridge, a bushy plant of compound leaves, white flowers, yellowing tops and the tubers at harvest
+        kk.box(0.55, 0.12, 0.5, x, 0, z, '#5a3f2c', { r: 0.06 }); const n = stage === 1 ? 3 : 7, yel = stage === 3;
+        for (let l = 0; l < n; l++) FROND(kk, x, 0.1, z, sp + l / n * 6.28, 0.2 + 0.22 * s, 0.65 + (l % 2) * 0.3, yel ? (l % 2 ? '#c2c45a' : '#d8c860') : l % 2 ? G2 : '#5aae4a', '#6f9a42');
+        if (stage >= 2) kk.ball(0.12 + 0.08 * s, x, 0.2 + 0.12 * s, z, yel ? '#c2c45a' : G2, { s: [1, 0.7, 1], n: 7 });
+        if (stage === 2) for (let f = 0; f < 3; f++) { const a = sp + f * 2.1; kk.ball(0.04, x + Math.cos(a) * 0.1, 0.42, z + Math.sin(a) * 0.1, '#f4f0fa', { s: [1, 0.5, 1], n: 6 }); kk.ball(0.015, x + Math.cos(a) * 0.1, 0.44, z + Math.sin(a) * 0.1, '#ffd84a', { n: 4 }); }
+        if (yel) for (let p = 0; p < 3; p++) kk.ball(0.075, x + 0.26 * Math.cos(sp + p * 0.6), 0.04, z + 0.26 * Math.sin(sp + p * 0.6), '#d9b67a', { s: [1.25, 0.85, 1], n: 7 });
+      } else if (crop === 'corn') { // a tall stalk, long arching leaves turning round it, the tassel on top, cobs in their husks with silk
+        const H = 0.3 + 1.9 * s; kk.cyl(0.045, H, x, 0, z, '#8ac45a', { rt: 0.025, n: 6 }); kk.box(0.1, 0.06, 0.1, x, 0, z, '#8a7a4a', { r: 0.02 }); const n = stage === 1 ? 3 : 7;
+        for (let l = 0; l < n; l++) LEAF(kk, x, H * (0.12 + 0.75 * l / n), z, sp + l * 2.6, 0.25 + 0.45 * s, 0.14, 0.75 - l * 0.04, 0.65, l % 2 ? '#8fd36a' : '#7cc35a', '#a0dc78', 0.05);
+        if (stage >= 2) for (let q = 0; q < 5; q++) kk.box(0.025, 0.28, 0.025, x, H, z, '#e8d08a', { r: 0, rz: (q - 2) * 0.25, ry: q });
+        if (stage === 3) { const a = sp + 1.2, cx = x + Math.cos(a) * 0.09, cz = z + Math.sin(a) * 0.09, cy = H * 0.45; kk.at(cx, cy, cz, -a + Math.PI / 2, b => { b.ball(0.07, 0, 0.11, 0, '#9ac462', { s: [1, 2.2, 1], n: 7, rx: 0 }); b.ball(0.055, 0, 0.18, 0, '#f2d26a', { s: [1, 2, 1], n: 6 }); for (let q = 0; q < 3; q++) b.box(0.012, 0.1, 0.012, 0, 0.3, 0, '#c97a4a', { r: 0, rz: (q - 1) * 0.4 }); }, 0, 0.35); }
+      }
     }
+    LID = undefined;
   }
+  // stylised foliage: lean every normal of a plant mesh toward the sky, so upright blades take the light like the
+  // leafy tops they are instead of shading dark on their sides (water and glass are left alone)
+  function foliage(g, amt = 1.4) { g.traverse(m => { const nn = m.isMesh && !m.userData.special && m.geometry.attributes.normal; if (!nn) return; const a = nn.array; for (let i = 0; i < a.length; i += 3) { const x = a[i], y = a[i + 1] + amt, z = a[i + 2], l = Math.hypot(x, y, z) || 1; a[i] = x / l; a[i + 1] = y / l; a[i + 2] = z / l; } nn.needsUpdate = true; }); return g; }
+  const CROP_TAG = { carrot: '#ff8a3d', lettuce: '#7cd36a', tomato: '#e8463e', pumpkin: '#f39a3b', strawberry: '#e8352e', tea: '#4e8f3c', rice: '#e2c25a', potato: '#c9a173', corn: '#f2d26a' };
   /* ---------- the orchard's fruit trees, each its own shape (phase E): returns where its fruit hangs (so the fruit,
      shown when ripe, sits in that tree's canopy)
      apple: a short trunk, three limbs, a wide open spreading crown
@@ -128,7 +208,7 @@
   }
   // the fruit itself (shown when it's ripe): its colour and shape for each kind
   const FRUIT_LOOK = { apple: ['#e8463e', 0.17, [1, 0.95, 1]], lemon: ['#ffd84a', 0.15, [0.9, 1.2, 0.9]], orange: ['#ff9a2e', 0.17, [1, 1, 1]], feijoa: ['#7aa04a', 0.13, [0.75, 1.15, 0.75]], olive: ['#3d4a2a', 0.07, [0.85, 1.1, 0.85]] };
-  IB.more = { shed, tree, fruitTree, FRUIT_LOOK, cropBed, soilBed, base, hits, post, solids };
+  IB.more = { shed, tree, fruitTree, FRUIT_LOOK, cropBed, soilBed, foliage, base, hits, post, solids };
 
   /* ---------- Veggie plot: six raised beds (planted, watered, harvested), a seed shed, a glasshouse, a water tank */
   function plot(st) {
@@ -151,7 +231,7 @@
     const drawBed = (i, crop, stage) => {
       const b = beds[i]; if (!b) return; while (b.g.children.length) b.g.remove(b.g.children[0]); if (!crop) return;
       const kk = new Kit(); cropBed(kk, crop, stage);
-      b.g.add(kk.build());
+      b.g.add(foliage(kk.build()));
     };
     return { id: 'plot', title: 'Veggie plot', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids: sol, pond: null, bridges: [], spots, buildings: [], arrive: [20, 3.4], lawns: [[0, 0, W, D]], paths: [[18, 0.4, 22, 31.6], [4, 16.2, 36, 17.8], [2.5, 2.5, 8.5, 6.5]], animals: [], npc: 0, centre: [20, 16], growth: 0.4, beds, drawBed, state: st };
   }

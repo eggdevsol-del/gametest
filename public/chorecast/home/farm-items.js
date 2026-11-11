@@ -76,14 +76,20 @@
 
   // a pig ark: a corrugated steel arch, plank ends, the dark doorway with straw spilling out, a muddy wallow
   M.sty = k => {
-    k.cyl(1.2, 2.3, 0, -1.15, 0, '#a9b0ba', { n: 22, rx: PI / 2 });
-    for (let i = 0; i <= 11; i++) k.torus(1.205, 0.025, 0, 0, -1.1 + i * 0.2, '#939aa5');
-    k.cyl(1.24, 0.06, 0, -0.03, 1.15, '#7f8a97', { n: 22, rx: PI / 2 }); k.cyl(1.24, 0.06, 0, -0.03, -1.21, '#7f8a97', { n: 22, rx: PI / 2 });
-    k.cyl(1.17, 0.08, 0, -0.04, -1.14, WOOD, { n: 22, rx: PI / 2 }); for (let i = -4; i <= 4; i++) B(k, 0.025, 1.2 * Math.sqrt(Math.max(0, 1 - (i / 4.6) ** 2)), 0.02, i * 0.25, 0, -1.07, WOOD_D);
-    k.cyl(1.17, 0.08, 0, -0.04, 1.08, WOOD, { n: 22, rx: PI / 2 }); for (let i = -4; i <= 4; i++) B(k, 0.025, 1.2 * Math.sqrt(Math.max(0, 1 - (i / 4.6) ** 2)), 0.02, i * 0.25, 0, 1.17, WOOD_D);
-    k.cyl(0.55, 0.04, 0, -0.02, 1.2, '#1f1a18', { n: 16, rx: PI / 2, s: [1, 1.5, 1] }); B(k, 1.2, 0.06, 0.08, 0, 0, 1.22, WOOD_D);
-    const R = rng(13); for (let i = 0; i < 9; i++) k.ball(0.14 + R() * 0.08, (R() - 0.5) * 0.9, 0.03, 1.25 + R() * 0.25, i % 2 ? HAY : HAY_D, { s: [1.4, 0.35, 1], n: 7 });
-    k.cyl(0.6, 0.02, 0.85, 0, 1.0, '#6b5038', { n: 14, s: [1, 1, 0.5] }); k.cyl(0.3, 0.025, 0.95, 0, 1.0, '#7a5c42', { n: 10, s: [1, 1, 0.6] });
+    // a pig ark (phase G): a half-round of corrugated iron on timber skids (galvanised panels with their ridges,
+    // a bolted seam over the top), a boarded back, a boarded front round an arched pop-hole, a draught board over
+    // the hole, straw in the doorway and a muddy wallow beside it
+    const Rr = 1.2, L = 2.3, N = 18;
+    for (let i = 0; i < N; i++) { const a = (i + 0.5) / N * PI, w = PI * Rr / N + 0.02; k.at(Math.cos(a) * Rr, Math.sin(a) * Rr, 0, 0, kk => { kk.box(0.05, w, L, 0, -w / 2, 0, i % 2 ? '#a9b0ba' : '#b8bec7', { r: 0 }); kk.box(0.07, 0.03, L + 0.02, 0.0, w / 2 - 0.02, 0, '#939aa5', { r: 0 }); }, 0, a); }
+    for (const z of [-L / 2 + 0.05, 0, L / 2 - 0.05]) k.torus(Rr + 0.03, 0.025, 0, 0, z, '#7f8a97', { arc: PI });
+    for (let i = 0; i < 5; i++) k.ball(0.025, 0, Rr + 0.05, -L / 2 + 0.2 + i * 0.47, '#5d6670', { n: 5 });
+    for (const e of [-1, 1]) { B(k, 0.18, 0.14, L + 0.5, e * (Rr - 0.06), 0, 0, WOOD_D, { r: 0.02 }); k.box(0.12, 0.12, 0.08, e * (Rr - 0.06), 0.04, L / 2 + 0.28, WOOD_D, { r: 0.02, rx: 0.5 }); }
+    const ends = (z, door) => { for (let i = -5; i <= 5; i++) { const x = i * 0.22, top = Rr * Math.sqrt(Math.max(0, 1 - (Math.abs(x) + 0.11) ** 2 / (Rr * Rr))) - 0.02; if (door && Math.abs(x) < 0.45) { const lintel = 0.95; B(k, 0.2, Math.max(0, top - lintel), 0.06, x, lintel, z, i % 2 ? WOOD : WOOD_L, { r: 0.01 }); continue; } B(k, 0.2, top, 0.06, x, 0, z, i % 2 ? WOOD : WOOD_L, { r: 0.01 }); } B(k, 2.2, 0.08, 0.07, 0, 0.55, z + Math.sign(z) * 0.03, WOOD_D, { r: 0.01 }); };
+    ends(-L / 2 + 0.03, false); ends(L / 2 - 0.03, true);
+    k.shape([[-0.45, 0], [0.45, 0], [0.45, 0.7], [0.3, 0.88], [0, 0.95], [-0.3, 0.88], [-0.45, 0.7]].map(([a, b]) => [a, -b]), 0.02, 0, 0, L / 2 - 0.02, '#1f1a18', { rx: PI / 2 });
+    B(k, 1.0, 0.24, 0.06, 0, 0.9, L / 2 + 0.05, WOOD_D, { r: 0.01 }); // (the draught board)
+    const R = rng(13); for (let i = 0; i < 14; i++) k.box(0.3, 0.02, 0.05, (R() - 0.5) * 1.1, 0.01, L / 2 - 0.2 + R() * 0.6, i % 2 ? HAY : HAY_D, { ry: R() * 3, r: 0 });
+    k.cyl(0.65, 0.02, 0.95, 0, 1.15, '#6b5038', { n: 16, s: [1, 1, 0.55] }); k.cyl(0.38, 0.025, 1.0, 0, 1.15, '#7a5c42', { n: 12, s: [1, 1, 0.6] }); k.waterBox(0.3, 0.02, 0.18, 1.05, 0.02, 1.12, { tint: '#8a7a5a' });
   };
 
   // a field shelter: a timber frame, a boarded back and half sides, a sloping corrugated roof with a gutter,
