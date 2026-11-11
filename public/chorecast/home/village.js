@@ -180,6 +180,7 @@
     if (V.mark) { V.mark.visible = k.path.length > 0; V.mark.rotation.y += dt * 2; }
   }
   function walkTo(x, z, then, face) {
+    if (V.job && !V.inStep) V.job.stop('tap'); // (somewhere else: a task series in hand stops cleanly)
     const k = V.kid; k.face = face == null ? null : face; k.pose = null;
     if (!go(k, [x, z], ok => { if (ok && face != null) k.face = face; if (then) then(ok); })) { toast('Can’t get there from here.'); return false; }
     const end = k.path[k.path.length - 1]; if (V.mark) V.mark.position.set(end[0], V.grid.ground(end[0], end[1]) + 0.04, end[1]);
@@ -693,6 +694,61 @@
       setTimeout(() => { if (!V) return; V.busyJob = false; if (k.pose === pose) k.pose = null; if (o.tool && k.inst && k.inst.holding === o.tool) k.inst.holding = null; done(); }, secs * 1000);
     }, face != null ? face : s.yaw);
   }
+  /* ---------- a task as a series of animated steps (build rule, 2026-11-11): walk there, use it with the right
+     thing in hand and its effect, carry it, open and shut lids and doors, put things back where they live. Tapping
+     somewhere else stops it cleanly: what was taken goes back, what was opened shuts, and the pay or the stock
+     change is itself a step, so nothing's paid twice or half done. A step is one of:
+       { go: { x, z, yaw } }                         walk there (in through a doorway if it's inside)
+       { act: pose, secs, tool, fx: {...}, sound, then }  do something for a while, `tool` in hand for it
+       { hold: tool | null }                          what's carried from now on (a bucket, the egg basket)
+       { take: part, hold } / { put: part }           lift a thing off its hook or shelf (it leaves the world and is
+                                                      carried) / hang it back
+       { open: part, rx|ry|rz, secs } / { close: part, secs }   swing a lid or a door on its hinge, and back
+       { run: fn } { say } { toast } { wait: secs }                                                              */
+  function tween(o, key, to, secs) { const L = (V.tweens = V.tweens || []); for (let i = L.length - 1; i >= 0; i--) if (L[i].o === o && L[i].key === key) L.splice(i, 1); L.push({ o, key, a: o.rotation[key], b: to, t0: V.t, dur: Math.max(0.01, secs) }); }
+  function tweensTick() { const L = V.tweens; if (!L) return; for (let i = L.length - 1; i >= 0; i--) { const q = L[i], u = Math.min(1, (V.t - q.t0) / q.dur), e = u * u * (3 - 2 * u); q.o.rotation[q.key] = q.a + (q.b - q.a) * e; if (u >= 1) L.splice(i, 1); } }
+  function steps(list, o = {}) {
+    if (!V) return null; if (V.job) V.job.stop('new');
+    const k = V.kid, job = { list: list.filter(Boolean), undo: new Map(), timer: 0, done: false, held: null };
+    V.job = job; hideActs();
+    const setHold = n => { job.held = n; if (k.inst) k.inst.holding = n; };
+    job.stop = why => {
+      if (job.done) return; job.done = true; clearTimeout(job.timer); V.busyJob = false; if (!k.seat) k.pose = null; setHold(null);
+      for (const f of job.undo.values()) f(); job.undo.clear(); if (V.job === job) V.job = null;
+      if (why === 'end') { if (o.done) o.done(); } else if (o.cancel) o.cancel(why);
+    };
+    const later = (secs, f) => { job.timer = setTimeout(() => { if (V && V.job === job && !job.done) f(); }, secs * 1000); };
+    const rest = p => (p.userData.rest = p.userData.rest || { x: p.rotation.x, y: p.rotation.y, z: p.rotation.z });
+    const next = () => {
+      if (!V || V.job !== job || job.done) return;
+      const s = job.list.shift(); if (!s) return job.stop('end');
+      if (s.go) { V.busyJob = false; k.pose = null; V.inStep = true; const ok = walkTo(s.go.x, s.go.z, r => { if (V && V.job === job) { if (r) next(); else job.stop('blocked'); } }, s.go.yaw); V.inStep = false; if (!ok && V.job === job) job.stop('blocked'); return; }
+      if (s.take || s.put) {
+        const p = s.take || s.put, id = 'take:' + p.uuid;
+        if (s.take) { p.visible = false; job.undo.set(id, () => { p.visible = true; }); setHold(s.hold || null); }
+        else { p.visible = true; job.undo.delete(id); setHold(null); }
+        sound('pat'); return later(0.25, next);
+      }
+      if (s.open || s.close) {
+        const p = s.open || s.close, r0 = rest(p), key = s.rx != null ? 'x' : s.ry != null ? 'y' : 'z', id = 'open:' + p.uuid, secs = s.secs || 0.5;
+        if (s.open) { tween(p, key, r0[key] + (s.rx != null ? s.rx : s.ry != null ? s.ry : s.rz), secs); job.undo.set(id, () => { for (const q of ['x', 'y', 'z']) tween(p, q, r0[q], 0.4); }); sound('pat'); }
+        else { for (const q of ['x', 'y', 'z']) tween(p, q, r0[q], secs); job.undo.delete(id); sound('tap'); }
+        return later(secs, next);
+      }
+      if ('hold' in s) { setHold(s.hold); return next(); }
+      if (s.run) { s.run(job); return next(); }
+      if (s.say) { say(k, s.say); return next(); }
+      if (s.toast) { toast(s.toast); return next(); }
+      if (s.wait) return later(s.wait, next);
+      if (s.act) {
+        const was = job.held; k.pose = s.act; V.busyJob = true; if (s.tool !== undefined) setHold(s.tool); if (s.sound) sound(s.sound);
+        if (s.fx) V.emit.push({ kind: s.fx.kind, at: s.fx.at || 'front', dist: s.fx.dist, y: s.fx.y, rate: s.fx.rate || 14, from: V.t + (s.fx.delay != null ? s.fx.delay : 0.3), until: V.t + s.secs - 0.15 });
+        return later(s.secs, () => { V.busyJob = false; if (k.pose === s.act) k.pose = null; if (s.tool !== undefined) setHold(was); if (s.then) s.then(job); next(); });
+      }
+      next();
+    };
+    next(); return job;
+  }
   // ---------- little effects: puffs and bits that fly, fall, float and fade (no ink; drawn over the scene)
   // kind: [colour, size, rise speed, gravity, life, spread, grow, shape]
   const FXK = { dust: ['#d9c49a', 0.14, 0.6, -0.2, 1.1, 0.5, 2.2], drops: ['#8fd8ff', 0.045, 0.4, 7, 0.7, 0.25, 0], milk: ['#ffffff', 0.04, 0.2, 7, 0.6, 0.12, 0],
@@ -795,7 +851,7 @@
   };
   Object.assign(ACTS, ISLAND_ACTS);
   // more islands' doings (village-islands.js), with what they need from here
-  const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, shopTray, closeTray, ride, sit, stand, fishStart, fx, seatKid, DAY, today };
+  const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, shopTray, closeTray, steps, tween, ride, sit, stand, fishStart, fx, seatKid, DAY, today };
   const ISL = IH.villageIslands ? IH.villageIslands(CTX) : null, FARM = IH.villageFarm ? IH.villageFarm(CTX) : null;
   const LANG = IH.villageLang ? IH.villageLang(CTX) : null;
   if (ISL) Object.assign(ACTS, ISL.acts); if (FARM) Object.assign(ACTS, FARM.acts); if (LANG) Object.assign(ACTS, LANG.acts);
@@ -918,6 +974,8 @@
     if (V.B.animals && V.B === V.street) animalsTick(t, dt);
     if (V.B.tick && V.B === V.street) V.B.tick(t, dt, V.kid.pos);
     if (FARM && FARM.tick) FARM.tick(t, dt);
+    if (V.B.walkins) for (const b of V.B.walkins) b.tick(V.kid.pos.x, V.kid.pos.z, CAM.yaw, dt); // (walk-in buildings: cut away while you're inside)
+    tweensTick();
     fishTick(); rodTick(); rideTick(t, dt); fxTick(dt); gatesTick(dt);
   }
 

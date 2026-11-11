@@ -457,7 +457,14 @@
       const fork = new K(); fork.cyl(0.025, 1.0, 0, -0.1, 0, '#c98f5a', { n: 6 }); fork.box(0.22, 0.03, 0.03, 0, 0.88, 0, '#8a8f98'); for (let i = 0; i < 3; i++) fork.cyl(0.012, 0.16, -0.09 + i * 0.09, 0.88, 0, '#8a8f98', { n: 4 });
       const trowel = new K(); trowel.cyl(0.03, 0.12, 0, -0.1, 0, '#3f86b0', { n: 6 }); trowel.cyl(0.01, 0.2, 0, 0.02, 0, '#8a8f98', { n: 4 }); trowel.box(0.09, 0.2, 0.02, 0, 0.22, 0, '#a9b0ba', { r: 0.02 });
       const jar = new K(); jar.cyl(0.07, 0.14, 0, -0.24, 0, '#ffb43a', { n: 10 }); jar.cyl(0.075, 0.04, 0, -0.1, 0, '#c98f5a', { n: 10 });
-      for (const [n, k] of [['can', can], ['broom', br], ['sack', sack], ['pail', pail], ['shears', shears], ['basket', basket], ['brush', brush], ['fork', fork], ['trowel', trowel], ['jar', jar]]) { const g = k.build(); g.scale.setScalar(1 / v.x); g.position.y = 0.1 / v.x; hand.add(g); inst.tools[n] = g; }
+      // (the barn's things, for the farm's task series: the black feed bucket with grain in it, the grain scoop, the egg
+      // basket before it has eggs in it, a flake of hay off the stack)
+      const bucket = new K(); bucket.cyl(0.15, 0.28, 0, -0.46, 0, '#2f3436', { n: 12, rt: 0.18 }); bucket.cyl(0.165, 0.03, 0, -0.22, 0, '#e8d08a', { n: 12 }); bucket.torus(0.17, 0.012, 0, -0.18, 0, '#8a8f98', { arc: Math.PI, rz: Math.PI });
+      const scoop = new K(); scoop.cyl(0.08, 0.17, 0, -0.32, 0.05, '#a9b3bf', { n: 10, rx: Math.PI / 2 }); scoop.cyl(0.02, 0.16, 0, -0.16, 0, '#3f86b0', { n: 6 }); scoop.cyl(0.07, 0.02, 0, -0.32, 0.12, '#e8d08a', { n: 10, rx: Math.PI / 2 });
+      const bucket0 = new K(); bucket0.cyl(0.15, 0.28, 0, -0.46, 0, '#2f3436', { n: 12, rt: 0.18 }); bucket0.torus(0.17, 0.012, 0, -0.18, 0, '#8a8f98', { arc: Math.PI, rz: Math.PI });
+      const basket0 = new K(); basket0.cyl(0.17, 0.16, 0, -0.42, 0, '#c9a173', { n: 12, rt: 0.2 }); basket0.torus(0.17, 0.015, 0, -0.14, 0, '#a07a4a', { arc: Math.PI, rz: Math.PI });
+      const hayflake = new K(); hayflake.box(0.5, 0.36, 0.22, 0, -0.42, 0.06, '#e8c45a', { r: 0.05 }); for (let i = 0; i < 4; i++) hayflake.box(0.16, 0.05, 0.08, -0.18 + i * 0.12, -0.08, 0.06 + (i % 2 ? 0.05 : -0.05), '#cfa944', { r: 0.02, ry: i });
+      for (const [n, k] of [['can', can], ['broom', br], ['sack', sack], ['pail', pail], ['shears', shears], ['basket', basket], ['brush', brush], ['fork', fork], ['trowel', trowel], ['jar', jar], ['bucket', bucket], ['scoop', scoop], ['basket0', basket0], ['bucket0', bucket0], ['hayflake', hayflake]]) { const g = k.build(); g.scale.setScalar(1 / v.x); g.position.y = 0.1 / v.x; hand.add(g); inst.tools[n] = g; }
     }
     if (inst.tools) for (const n in inst.tools) inst.tools[n].visible = inst.holding === n && !/^(liebed|sitchair)/.test(inst.st);
     // The broom points from the hand down to the floor in front (swept side to side while sweeping), so the brush is
@@ -472,7 +479,7 @@
         const L = Math.max(0.3, TV2.length()); TV2.normalize();
         g.quaternion.copy(hq).multiply(TQ2.setFromUnitVectors(TUP, TV2)); g.scale.set(1 / ws, L / ws * 0.92, 1 / ws); g.position.set(0, 0, 0);
       } else {
-        const H = inst.holding, pour = H === 'can' && /^water/.test(inst.st) ? 0.55 + Math.sin(tt * 2) * 0.1 : H === 'sack' && /^feed/.test(inst.st) ? 1.35 + Math.sin(tt * 3) * 0.12 : H === 'brush' ? 1.4 + Math.sin(tt * 9) * 0.25 : 0; // (the can and the sack tip to pour; the brush strokes)
+        const H = inst.holding, pour = H === 'can' && /^water/.test(inst.st) ? 0.55 + Math.sin(tt * 2) * 0.1 : /^(sack|bucket|hayflake)$/.test(H) && /^feed/.test(inst.st) ? 1.35 + Math.sin(tt * 3) * 0.12 : H === 'scoop' && /^fetch/.test(inst.st) ? 0.9 + Math.sin(tt * 4) * 0.3 : H === 'brush' ? 1.4 + Math.sin(tt * 9) * 0.25 : 0; // (the can and the sack tip to pour; the brush strokes)
         const snip = H === 'shears' ? Math.sin(tt * 14) * 0.35 : 0;
         g.quaternion.copy(hq).multiply(TQ2.setFromEuler(TE.set(pour + (H === 'shears' ? 1.2 : 0), yaw, snip, 'YXZ'))); g.scale.setScalar(1 / ws); g.position.set(0, 0, 0);
       }

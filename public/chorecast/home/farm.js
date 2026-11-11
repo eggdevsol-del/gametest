@@ -15,6 +15,7 @@
   const T = window.THREE, IH = window.IsoHome = window.IsoHome || {};
   if (!T || !IH.kit || !IH.islandsBuild) return;
   const { Kit } = IH.kit, IB = IH.islandsBuild, K = IB.kit, { rng, bx, sides, board, signpost, gate: hangGate } = K;
+  const PI = Math.PI;
   const W = 52, D = 60, DAY = 864e5, today = () => Math.floor(Date.now() / DAY) + (IH.econDays || 0); // (IH.econDays: the test clock, economy.js)
   const TRACK = [[24, 0.4, 28, 16], [6, 13, 51, 17], [47.6, 13, 51, 45]], MEADOW = [4, 45.5, 48, 58], BARN = [6.6, 2.2, 17.4, 9.8], FENCE_XP = 8, DRIVE_XP = 3;
   // the hay yard on the grass in front of the barn: round bales stood on end in two lines, three high (each 6 hay)
@@ -296,21 +297,17 @@
     // the land blocks joined on (farm-land.js): their ground, boundaries and gates, and what's on each
     const LAND = IH.farmLand ? IH.farmLand.build(f, k, root, solid, spots) : { lawns: [], paths: [], meadows: [], beds: [], trees: [], drawBed: null };
     // the barn (the farm shop and the planner), the windmill, the signpost: always there
-    k.at(12, 0, 6, 0, kk => {
-      bx(kk, 10, 5.2, 7, 0, 0, 0, '#b8402f', { r: 0.06 }); for (let i = 0; i < 12; i++) bx(kk, 0.06, 5.2, 0.04, -4.6 + i * 0.84, 0, 3.52, '#9c3426');
-      kk.at(0, 5.2, 0, 0, k2 => { for (const s of [-1, 1]) bx(k2, 5.9, 0.3, 7.6, s * 2.45, 1.0, 0, '#5a4a4a', { rz: s * -0.62, r: 0.04 }); });
-      for (const s of [-1, 1]) { bx(kk, 2.0, 3.6, 0.14, s * 1.05, 0, 3.55, '#9c3426'); bx(kk, 0.14, 3.6, 0.16, s * 1.98, 0, 3.6, '#ffffff'); kk.box(2.4, 0.14, 0.16, s * 1.05, 1.8, 3.62, '#ffffff', { rz: s * 1.0 }); }
-      bx(kk, 1.8, 1.4, 0.14, 0, 6.0, 3.56, '#3d2a24');
-    });
-    board(k, 'barn2', 'FARM SHOP', 'animals · feed · planner', '#fff6e0', '#b8402f', 3.6, 1.0, 12, 4.4, 9.62); solid(...BARN);
-    spots.push({ kind: 'fbarn', id: 'barn', name: 'the barn', at: [12, 10.8], yaw: Math.PI, hit: [12, 9.6, 0, 4] });
+    // the barn (walk-in: farm-buildings.js) with the farm shop counter, the planner board, the feed bins and the hay
+    let barnW = null;
+    if (IH.farmBuildings) { barnW = IH.farmBuildings.barn(); root.add(barnW.group); for (const r of barnW.solids) solid(...r); for (const sp of barnW.spots) spots.push(sp); }
+    else { solid(...BARN); spots.push({ kind: 'fbarn', id: 'barn', name: 'the barn', at: [12, 10.8], yaw: Math.PI, hit: [12, 9.6, 0, 4] }); }
     { const W0 = windpump(3.2, 15); k.at(3.2, 0, 15, 0, W0.tower); root.add(W0.rotor); solid(2.0, 13.8, 4.4, 16.2); }
     signpost(k, 22.4, 2.4, 'farm'); solid(22.1, 2.1, 22.7, 2.7); spots.push({ kind: 'travel', id: 'post', name: 'the signpost', at: [23.8, 3.6], yaw: Math.PI, hit: [22.4, 2.4, 0, 2.4] });
     // the paddocks: fences, a gate, and the gate's spot (feeding, who lives here)
     const gates = [], pads = f.paddocks.map(p => { const g = gateOf(p), runs = fence(k, p, g, root, gates); for (const [a, b] of runs) solid(a[0] - 0.2, a[1] - 0.2, b[0] + 0.2, b[1] + 0.2); const at = outside(g); spots.push({ kind: 'fgate', id: 'gate' + p.id, pad: p.id, name: 'the paddock gate', at, yaw: Math.atan2(g.x - at[0], g.z - at[1]), hit: [g.x, g.z, 0, 2.6] }); return { p, g }; });
     // fittings and equipment
     const models = {}, vehicles = {};
-    for (const it of f.items) { const d = ITEMS[it.t]; if (!d) continue; const g = new T.Group(), kk = new Kit(); itemModel(it.t, kk); g.add(kk.build()); if (it.t === 'tractor') vehicles[it.id] = Object.assign(tractorWheels(g), { item: it }); if (it.t === 'pond' && IH.look.seaSheet) g.add(IH.look.seaSheet(-2.2, -1.7, 2.2, 1.7, 0.16, (x, z) => { const e = (x / 1.85) ** 2 + (z / 1.35) ** 2; return e < 1 ? 0.16 - 0.8 * (1 - e) : 0.4; }, { n: 6, foam: 0.18, deepAt: 0.6, shallow: '#8fe0d0', deep: '#2f7f9f', mud: '#8f8a99' })); g.position.set(it.x, 0, it.z); g.rotation.y = it.ry || 0; root.add(g); models[it.id] = g;
+    for (const it of f.items) { const d = ITEMS[it.t]; if (!d) continue; const g = new T.Group(), kk = new Kit(); itemModel(it.t, kk); g.add(kk.build()); if (it.t === 'coop' && IH.farmItems && IH.farmItems.coopLid) { const lid = new T.Group(), lk = new Kit(); IH.farmItems.coopLid(lk); lid.add(lk.build()); lid.position.set(1.42, 1.65, -0.1); g.add(lid); g.userData.lid = lid; } if (it.t === 'tractor') vehicles[it.id] = Object.assign(tractorWheels(g), { item: it }); if (it.t === 'pond' && IH.look.seaSheet) g.add(IH.look.seaSheet(-2.2, -1.7, 2.2, 1.7, 0.16, (x, z) => { const e = (x / 1.85) ** 2 + (z / 1.35) ** 2; return e < 1 ? 0.16 - 0.8 * (1 - e) : 0.4; }, { n: 6, foam: 0.18, deepAt: 0.6, shallow: '#8fe0d0', deep: '#2f7f9f', mud: '#8f8a99' })); g.position.set(it.x, 0, it.z); g.rotation.y = it.ry || 0; root.add(g); models[it.id] = g;
       const [w, dd] = d.fp, c = Math.abs(Math.cos(it.ry || 0)), s = Math.abs(Math.sin(it.ry || 0)), hw = (w * c + dd * s) / 2, hd = (w * s + dd * c) / 2; solid(it.x - hw, it.z - hd, it.x + hw, it.z + hd); if (vehicles[it.id]) vehicles[it.id].solid = solids.length - 1;
       if (/^(coop|pond|sty|milkstand|shearstand|beehive|tractor|quad|trough|feeder)$/.test(it.t)) spots.push({ kind: 'fitem', id: 'it' + it.id, item: it.id, t: it.t, name: 'the ' + d.name.toLowerCase(), at: [it.x, it.z + hd + 1.2], yaw: Math.PI, hit: [it.x, it.z, 0, Math.max(w, dd) + 0.4] }); }
     // the animals, each in its own paddock, moving its own way (village.js: the generic movers, or the 3D ones)
@@ -326,9 +323,9 @@
     for (const M of LAND.meadows) { const L2 = IH.farmLand.meadowGrass(M); if (L2) root.add(L2); }
     const meadows = [{ rect: MEADOW, L: meadowL, cells: hay.cells, key: (i, j) => i * 1000 + j, mark: () => { hay.at = hay.at || Date.now(); } }, ...LAND.meadows];
     const onL = IH.farmLand ? IH.farmLand.onLand(f) : (x, z, m = 0) => x >= m && z >= m && x <= W - m && z <= D - m;
-    const lawns = [[0, 0, W, D], ...LAND.lawns], paths = TRACK.map(r => r.slice()).concat((f.drives || []).map(d => [d.x0, d.z0, d.x1, d.z1]), [[MEADOW[0] - 0.5, MEADOW[1] - 0.3, MEADOW[2] + 0.2, MEADOW[3] + 0.2]], LAND.paths); // (grass everywhere else: the meadow has its own long hay)
+    const lawns = [[0, 0, W, D], ...LAND.lawns], paths = TRACK.map(r => r.slice()).concat((f.drives || []).map(d => [d.x0, d.z0, d.x1, d.z1]), [[MEADOW[0] - 0.5, MEADOW[1] - 0.3, MEADOW[2] + 0.2, MEADOW[3] + 0.2]], barnW ? [[7, 2.5, 17, 9.5]] : [], LAND.paths); // (grass everywhere else: the meadow has its own long hay)
     solid(...YARD); const yard = new T.Group(); root.add(yard);
-    const B = { gates, vehicles, meadowL, meadows, bales, MEADOW, yard, flights: [], flying: 0, beds: LAND.beds, drawBed: LAND.drawBed, trees: LAND.trees, onLand: onL, walk: (x, z) => onL(x, z, 0.9), tick: t => { for (const M of meadows) if (M.L) IH.lawnKit.tick(M.L, t, 1); flightsTick(B, f, t); }, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: IH.farmLand ? IH.farmLand.bounds(f) : { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
+    const B = { walkins: barnW ? [barnW] : [], barn: barnW, gates, vehicles, meadowL, meadows, bales, MEADOW, yard, flights: [], flying: 0, beds: LAND.beds, drawBed: LAND.drawBed, trees: LAND.trees, onLand: onL, walk: (x, z) => onL(x, z, 0.9), tick: t => { for (const M of meadows) if (M.L) IH.lawnKit.tick(M.L, t, 1); flightsTick(B, f, t); }, id: 'farm', title: 'Farm paddock', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: barnW ? [barnW.lamp] : [], bounds: IH.farmLand ? IH.farmLand.bounds(f) : { x0: 0, z0: 0, x1: W, z1: D }, solids, pond: null, bridges: [], spots, buildings: [], arrive: [26, 3.6], lawns, paths, animals, pens, models, npc: 0, centre: [26, 20], growth: 0.55, welcome: 'Your farm. The barn has animals, feed and the farm planner.', farm: f };
     yardSync(B, f); return B;
   }
   // bales coming off the trailer: each lifted off the deck in an arc, stood on end, onto the next place in the yard
@@ -364,7 +361,9 @@
       const f = F(), L = f.animals.filter(a => test(a)), ok = L.filter(a => !why(f, a) && ready(a) > 0);
       if (!L.length) return c.toast('No animals here for that yet.');
       if (!ok.length) { const w = L.map(a => why(f, a)).find(Boolean); return c.toast(w ? `They can’t yet: ${w}.` : 'Nothing ready yet. Come back tomorrow.'); }
-      let n = 0; for (const a of ok) { let k = ready(a); if (a.kind === 'hen' && f.animals.some(o => o.kind === 'rooster' && o.pad === a.pad)) k *= 2; n += k; a.got = Date.now(); }
+      let n = 0; for (const a of ok) { let k = ready(a); if (a.kind === 'hen' && f.animals.some(o => o.kind === 'rooster' && o.pad === a.pad)) k *= 2; n += k; }
+      if (what === 'egg' && eggSeries(s, n, () => { for (const a of ok) a.got = Date.now(); save(); sh().addFood('egg', n); c.float(V().kid, '🥚'); c.sound('buy'); c.toast(`${n} ${n === 1 ? 'egg' : 'eggs'} into the egg fridge in the barn, and your fridge at home! 🥚`); })) return;
+      for (const a of ok) a.got = Date.now();
       c.chore(s, pose, 3, () => { save(); if (what === 'wool' || what === 'truffle') sh().addGoods(what, n); else sh().addFood(what, n); c.float(V().kid, emo); c.sound('buy'); c.toast(`${n} ${{ egg: n === 1 ? 'egg' : 'eggs', milk: n === 1 ? 'bottle of milk' : 'bottles of milk', wool: n === 1 ? 'bag of wool' : 'bags of wool', truffle: n === 1 ? 'truffle' : 'truffles' }[what]}! ${what === 'wool' || what === 'truffle' ? 'On your goods shelf.' : 'Into your fridge at home.'}`); }, null, { egg: { tool: 'basket', fx: 'straw', dist: 0.9, y: 0.6, rate: 8 }, milk: { tool: 'pail', fx: 'milk', dist: 0.55, y: 0.75, rate: 16 }, wool: { tool: 'shears', fx: 'wool', dist: 0.8, y: 0.9, rate: 10 }, truffle: { fx: 'soil', dist: 1.0, y: 0.1, rate: 10 } }[what]);
     }
     // ---------- who lives in a paddock: names, sex, age, health; naming one
@@ -414,11 +413,50 @@
       if (used(f, p) + need > area(p)) return c.toast(`Not enough room here for all of them (${Math.floor(area(p) - used(f, p))} room left, they need ${need}).`);
       for (const a of L) a.pad = pad; save(); c.sound('tune'); stopLeading(`${L.length === 1 ? animalName(L[0]) + ' is' : L.length + ' animals are'} in their new paddock. Make sure it has water and feed!`);
     }
+    /* ---------- task series (build rule, 2026-11-11): the barn's things carried out to the paddocks and back. Each
+       is a run of steps (village.js steps): the stock changes in a step of its own, so stopping halfway (a tap
+       somewhere else) puts the bucket or basket back and changes nothing that wasn't done. */
+    const barnB = () => V().B.barn;
+    const intoPad = side => (side === 'n' ? 0 : side === 's' ? PI : side === 'w' ? PI / 2 : -PI / 2);
+    // where to tip feed in a paddock: in front of its hay feeder (inside the paddock), else just inside the gate
+    function feedAt(f, pad) {
+      const p = f.paddocks.find(q => q.id === pad); if (!p) return null;
+      const it = f.items.find(i => i.t === 'feeder' && padOf(f, i.x, i.z) === p);
+      if (it) { const hd = ITEMS.feeder.fp[1] / 2 + 0.95, front = it.z + hd < p.z1 - 0.6; return { x: it.x, z: front ? it.z + hd : it.z - hd, yaw: front ? PI : 0 }; }
+      const g = gateOf(p), q = outside(g, -2.4); return { x: q[0], z: q[1], yaw: intoPad(g.side) };
+    }
+    function feedSeries(s, need) {
+      const f = F(), Bn = barnB(); if (!Bn || !c.steps) return false;
+      const A = Bn.at, P = Bn.parts, dest = feedAt(f, s.pad); if (!dest) return false;
+      const grains = Object.keys(need).filter(k0 => k0 !== 'hay' && P['lid_' + k0]), L = [];
+      const tip = k0 => ({ run: () => { f.feed[k0] = Math.max(0, (f.feed[k0] || 0) - need[k0]); save(); } });
+      if (grains.length) {
+        L.push({ go: A.hooks }, { take: P.bucket, hold: 'bucket0' });
+        for (const k0 of grains) L.push({ go: A[k0] }, { open: P['lid_' + k0], rz: 1.25, secs: 0.55 }, { act: 'fetch', secs: 1.0, tool: 'scoop', sound: 'pat' }, { act: 'fetch', secs: 1.0, tool: 'scoop', fx: { kind: 'dust', dist: 0.55, y: 0.95, rate: 10 } }, { hold: 'bucket' }, { close: P['lid_' + k0], secs: 0.45 });
+        L.push({ go: dest }, { act: 'feed', secs: 2.4, fx: { kind: 'dust', dist: 0.9, y: 0.6, rate: 14 } }, ...grains.map(tip), { hold: 'bucket0' }, { go: A.hooks }, { put: P.bucket });
+      }
+      if (need.hay) L.push({ go: A.hay }, { act: 'fetch', secs: 1.5, fx: { kind: 'hay', dist: 0.6, y: 0.8, rate: 10 } }, { hold: 'hayflake' }, { go: dest }, { act: 'feed', secs: 2.2, fx: { kind: 'hay', dist: 0.9, y: 0.5, rate: 14 } }, tip('hay'), { hold: null });
+      L.push({ run: () => { f.fed[s.pad] = today(); save(); for (const a of V().B.animals) if (a.rec && a.rec.pad === s.pad) c.float({ pos: a.group.position }, '❤️'); c.sound('tune'); c.toast(`Fed! (${Object.entries(need).map(([k0, n]) => `${n} ${FEED[k0].name.toLowerCase()}`).join(', ')})`); } });
+      c.steps(L, { cancel: why => { if (why === 'blocked') c.toast('Can’t get there from here.'); } }); return true;
+    }
+    // eggs: the basket off its hook in the barn, the nest box's lid up, each egg picked, the lid down, the eggs into
+    // the egg fridge by the barn door, the basket hung back up
+    function eggSeries(s, n, apply) {
+      const Bn = barnB(), v = V(), it = F().items.find(i => i.id === s.item); if (!Bn || !c.steps || !it) return false;
+      const A = Bn.at, P = Bn.parts, lid = v.B.models[s.item] && v.B.models[s.item].userData.lid, ry = it.ry || 0;
+      const nest = { x: it.x + 2.75 * Math.cos(ry) - 0.1 * Math.sin(ry), z: it.z - 2.75 * Math.sin(ry) - 0.1 * Math.cos(ry), yaw: -PI / 2 + ry };
+      const picks = []; for (let i = 0; i < Math.min(n, 4); i++) picks.push({ act: 'fetch', secs: 0.85, fx: { kind: 'sparkle', dist: 0.5, y: 1.25, rate: 5, delay: 0.4 } });
+      c.steps([{ go: A.hooks }, { take: P.basket, hold: 'basket0' }, { go: nest }, lid && { open: lid, rz: 1.15, secs: 0.6 }, ...picks, { hold: 'basket' }, lid && { close: lid, secs: 0.5 },
+        { go: A.fridge }, { open: P.fridgeDoor, ry: 1.45, secs: 0.5 }, { act: 'place', secs: 1.4 }, { run: apply }, { hold: 'basket0' }, { close: P.fridgeDoor, secs: 0.45 }, { go: A.hooks }, { put: P.basket }],
+      { cancel: why => { if (why === 'blocked') c.toast('Can’t get there from here.'); } });
+      return true;
+    }
     function feedPad(s) {
       const f = F(), L = f.animals.filter(a => a.pad === s.pad); if (!L.length) return c.toast('Nobody lives in this paddock yet. Buy animals at the barn.');
       if ((f.fed[s.pad] || 0) === today()) return c.toast('They’re full. Feed them again tomorrow.');
       const need = {}; for (const a of L) need[ANIMALS[a.kind].eats] = (need[ANIMALS[a.kind].eats] || 0) + 1;
       const short = Object.entries(need).filter(([k, n]) => (f.feed[k] || 0) < n); if (short.length) return c.toast(`Not enough ${short.map(([k]) => FEED[k].name.toLowerCase()).join(' or ')}. Buy feed at the barn.`);
+      if (feedSeries(s, need)) return;
       c.chore(s, 'feed', 2.8, () => { for (const [k, n] of Object.entries(need)) f.feed[k] -= n; f.fed[s.pad] = today(); save(); for (const a of V().B.animals) if (a.rec && a.rec.pad === s.pad) c.float({ pos: a.group.position }, '❤️'); c.sound('tune'); c.toast(`Fed! (${Object.entries(need).map(([k, n]) => `${n} ${FEED[k].name.toLowerCase()}`).join(', ')})`); }, null, need.hay && !need.grain ? { tool: 'fork', fx: 'hay', dist: 1.1, y: 0.5, rate: 14 } : { tool: 'sack', fx: 'dust', dist: 1.2, y: 0.5, rate: 12, delay: 0.5 });
     }
     function drive(s, t) {
@@ -707,7 +745,10 @@
       const c0 = Math.cos(DR.yaw), s0 = Math.sin(DR.yaw); k.pos.set(DR.x - 1.8 * c0, 0, DR.z + 1.8 * s0); k.yaw = DR.yaw; k.pose = null;
       removeEventListener('keydown', onKey, true); removeEventListener('keyup', onKey, true); if (DR.el) DR.el.remove(); v.drive = null; DR = null; save(); c.sound('off'); reload();
     }
+    const atCounter = (s, f) => () => c.walkTo(s.at[0], s.at[1], ok => ok && f(), s.yaw);
     const acts = {
+      fshop: s => [{ e: '🐮', label: 'Buy animals', run: atCounter(s, () => shop('animals')) }, { e: '🌾', label: 'Buy feed', run: atCounter(s, () => shop('feed')) }, { e: '🚜', label: 'Buy machines', run: atCounter(s, () => shop('machines')) }],
+      fplan: s => [{ e: '🛠️', label: 'Farm planner: paddocks, fittings, equipment, land', run: atCounter(s, () => planner()) }],
       fbarn: () => [{ e: '🐮', label: 'Buy animals', run: () => shop('animals') }, { e: '🌾', label: 'Buy feed', run: () => shop('feed') }, { e: '🚜', label: 'Buy machines', run: () => shop('machines') }, { e: '🛠️', label: 'Farm planner: paddocks, fittings, equipment', run: () => planner() }],
       fgate: s => { const f = F(), L = f.animals.filter(a => a.pad === s.pad), p = f.paddocks.find(q => q.id === s.pad); return [{ e: '🌾', label: L.length ? ((f.fed[s.pad] || 0) === today() ? 'Fed today ✓' : `Feed them (${L.length} animal${L.length === 1 ? '' : 's'})`) : 'Nobody lives here yet', run: () => feedPad(s) },
         { e: '📋', label: `Who lives here · ${p ? used(f, p) : 0} / ${p ? Math.floor(area(p)) : 0} room`, run: () => whoPanel(s.pad) },
