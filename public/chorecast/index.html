@@ -1293,6 +1293,12 @@ body.st-open #app{opacity:0;pointer-events:none}
 .isle-cap{max-width:36%}
 .isle .isle-hint{position:absolute;inset:auto;right:6px;top:6px;font:800 calc(11px*var(--ts)) var(--f-round);padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.2);pointer-events:none}
 .isle .no3d{position:absolute;inset:0;display:grid;place-items:center;font-size:calc(90px*var(--ts))}
+.home-isle{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.isle .home-isle{left:30%}
+.home-isle img{display:block;height:100%;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 16px 16px rgba(10,30,90,.28));animation:homeBob 5s ease-in-out infinite}
+.home-isle .hi-ava{font-size:calc(80px*var(--ts));animation:homeBob 5s ease-in-out infinite}
+@keyframes homeBob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
+@media (prefers-reduced-motion: reduce){ .home-isle img,.home-isle .hi-ava{animation:none} }
 .jar .s3d{width:100%;max-width:92px;aspect-ratio:.78;margin-bottom:4px}
 .has3d .jar-svg{display:none}
 .fund-ic .s3d{width:58px;height:58px;margin:-4px}
@@ -4863,6 +4869,24 @@ const HomesGame = (() => {
   return { show, load, get open() { return !!(window.IsoHome && window.IsoHome.isOpen); } };
 })();
 const openIsland = id => (islandGame() === 'classic' ? Studio.show(id) : HomesGame.show(id));
+/* With the homes game on, the floating island on the chores screen (and on each kid's card) is the kid's home: a
+   picture the game keeps of it, the house on its island with everything placed in it (home/app.js keeps it as
+   cc:homePic:<kid id> when the game closes). A kid who hasn't opened their home since gets one drawn in the
+   background, the house and its island without their things, until they next play. */
+const homesOn = () => islandGame() !== 'classic';
+const homePic = id => { try { return localStorage.getItem('cc:homePic:' + id) || ''; } catch (e) { return ''; } };
+const homePicAsked = new Set();
+function homePicSoon(id) {
+  if (homePicAsked.has(id)) return; homePicAsked.add(id);
+  setTimeout(() => HomesGame.load().then(() => {
+    const H = window.IsoHome, url = H && H.portrait && !H.isOpen ? H.portrait(id) : '';
+    if (url) for (const el of document.querySelectorAll(`[data-homepic="${id}"]`)) el.innerHTML = `<img src="${url}" alt="">`;
+  }, () => {}), 1200);
+}
+function homeIsle(k) {
+  const pic = homePic(k.id); if (!pic) homePicSoon(k.id);
+  return `<span class="home-isle" data-homepic="${k.id}" aria-hidden="true">${pic ? `<img src="${pic}" alt="">` : `<span class="hi-ava">${k.avatar}</span>`}</span>`;
+}
 
 /* Island home (a prototype, on only for devices that opened the app with ?look=island; ?look=classic turns it off).
    Today opens on the kid's own island, big, with their character on it. Each of today's jobs is a button pinned to a
@@ -5307,7 +5331,7 @@ function kidCard(k, date) {
   const p = kidProgress(k, date), st = streakFor(k.id), wait = jobsList().filter(j => j.kidId === k.id && j.status === 'pending').length;
   return `<button class="kcard glass" data-act="openKid" data-id="${k.id}" style="--hue:${k.hue}">
     ${wait ? `<span class="kc-wait">${wait} waiting</span>` : ''}
-    <div class="kc-island"><span class="s3d" data-3d="island:${k.id}" data-sig="${islandSig(k)}"></span><div class="kc-ava no3d">${ringSVG(p.total ? p.done / p.total : 0, '#FFE08A', 124, 6)}<span class="kc-emoji">${k.avatar}</span></div></div>
+    <div class="kc-island">${homesOn() ? homeIsle(k) : `<span class="s3d" data-3d="island:${k.id}" data-sig="${islandSig(k)}"></span><div class="kc-ava no3d">${ringSVG(p.total ? p.done / p.total : 0, '#FFE08A', 124, 6)}<span class="kc-emoji">${k.avatar}</span></div>`}</div>
     <div class="kc-lvl">Level ${islandCaption(k).lvl} · ${islandCaption(k).name}</div>
     <div class="kc-name">${esc(k.name)}${k.example ? '<span class="chip-ex">Example</span>' : ''}</div>
     <div class="kc-prog s3d" aria-hidden="true"><i style="width:${p.total ? Math.round(p.done / p.total * 100) : 0}%"></i></div>
@@ -5436,11 +5460,13 @@ function kidToday(kid) {
       <div class="hero-cond"><span class="wx" aria-hidden="true">${cond.wx}</span>${cond.text}</div>
       <div class="hero-sub">${done} of ${all.length} chores done${tm.earned ? ` · ${fmt(tm.earned)} paid today` : ''}${tm.pending ? ` · ${fmt(tm.pending)} waiting for a grown-up` : ''}</div>
       <button class="isle" data-act="studio" data-id="${kid.id}" aria-label="${esc(kid.name)}'s island, level ${islandCaption(kid).lvl}: ${islandCaption(kid).name}">
-        <span class="s3d" data-3d="island:${kid.id}" data-sig="${islandSig(kid)}" data-cx="0.64"></span><span class="no3d" aria-hidden="true">${kid.avatar}</span>
+        ${homesOn() ? `${homeIsle(kid)}
+        <span class="isle-cap"><b>${esc(kid.name)}’s home</b><span>Tap to go home</span></span>
+        <span class="isle-hint">${ic('sparkle')} ${xpOf(kid).left.toLocaleString()} XP · Tap to play</span>` : `<span class="s3d" data-3d="island:${kid.id}" data-sig="${islandSig(kid)}" data-cx="0.64"></span><span class="no3d" aria-hidden="true">${kid.avatar}</span>
         <span class="isle-cap"><b>Level ${islandCaption(kid).lvl} · ${islandCaption(kid).name}</b><span>${islandCaption(kid).next}</span></span>
-        <span class="isle-hint s3d">${(() => { const n = CARE.filter(c => careOf(kid)[c.k] >= 0.66).length; return n ? `${n} island job${n === 1 ? '' : 's'} waiting · Tap` : `${ic('sparkle')} ${xpOf(kid).left.toLocaleString()} XP · Tap to decorate`; })()}</span>
+        <span class="isle-hint s3d">${(() => { const n = CARE.filter(c => careOf(kid)[c.k] >= 0.66).length; return n ? `${n} island job${n === 1 ? '' : 's'} waiting · Tap` : `${ic('sparkle')} ${xpOf(kid).left.toLocaleString()} XP · Tap to decorate`; })()}</span>`}
       </button>
-      <div class="island-key s3d" aria-hidden="true"><span>🌳 a tree for every paid job</span><span>💧 pond = vault</span><span>🌀 windmill = investing</span><span>🌈 all chores done</span></div>
+      ${homesOn() ? '' : `<div class="island-key s3d" aria-hidden="true"><span>🌳 a tree for every paid job</span><span>💧 pond = vault</span><span>🌀 windmill = investing</span><span>🌈 all chores done</span></div>`}
       <div class="dayline" aria-hidden="true"><div class="dayline-fill" style="width:${Math.round(prog * 100)}%"></div><span class="dayline-sun" style="left:${Math.round(prog * 100)}%">${ic('sun')}</span></div>
       <div class="minis">${JARS.map(x => `<div class="mini glass"><span><i style="background:${x.color}"></i>${x.label}</span><b class="num">${fmt(x.k === 'invest' ? (j.invest || 0) + holdingsValue(kid) : j[x.k] || 0)}</b></div>`).join('')}</div>
     </section>

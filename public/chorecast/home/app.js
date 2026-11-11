@@ -2696,7 +2696,7 @@
     thumbPipe = { p, sc, cam, rt, cv, ctx: cv.getContext('2d'), buf: new Uint8Array(150 * 150 * 4) };
     return thumbPipe;
   }
-  function snap(obj, w, h, pitch = 0.5, pad = 1.12) {
+  function snap(obj, w, h, pitch = 0.5, pad = 1.12, type = 'image/png') {
     const tp = thumbRig(), { p, sc, cam } = tp;
     if (tp.rt.width !== w || tp.rt.height !== h) { tp.rt.setSize(w, h); p.setSize(w, h, 1); tp.cv.width = w; tp.cv.height = h; tp.buf = new Uint8Array(w * h * 4); }
     sc.add(obj); obj.updateMatrixWorld(true);
@@ -2707,10 +2707,10 @@
     const ph = LK.PHASES.day, saved = { lit: LK.PAL.uLit.value.clone(), shade: LK.PAL.uShade.value.clone(), plain: LK.PAL.uPlain.value };
     LK.setPhase('day'); LK.PAL.uPlain.value = 0; p.phase(ph); p.u.uGlowK.value = 0;
     p.render(sc, cam, tp.rt); R.readRenderTargetPixels(tp.rt, 0, 0, w, h, tp.buf);
-    LK.setPhase(O.st.look.phase); LK.PAL.uPlain.value = saved.plain;
+    LK.setPhase(O ? O.st.look.phase : 'day'); LK.PAL.uPlain.value = saved.plain;
     sc.remove(obj);
     const img = tp.ctx.createImageData(w, h); for (let y = 0; y < h; y++) img.data.set(tp.buf.subarray((h - 1 - y) * w * 4, (h - y) * w * 4), y * w * 4);
-    tp.ctx.putImageData(img, 0, 0); return tp.cv.toDataURL('image/png');
+    tp.ctx.putImageData(img, 0, 0); return tp.cv.toDataURL(type, 0.9);
   }
   function thumbsSome() {
     const t0 = performance.now();
@@ -3146,6 +3146,7 @@
     if (O.st.stall && O.st.stall.length) { for (const r of O.st.stall) { O.st.owned[r.t] = (O.st.owned[r.t] || 0) + 1; toBox(r); } O.st.stall = []; save(); } // (left on a stall: back in Mine)
     size(); loadHome(); applyLook(); CAM.intro = { a: 0.62, b: 1, t0: 0 }; lastT = null; beat.reset();
     ui(); force = true; if (!raf) raf = requestAnimationFrame(loop);
+    { const me = O; setTimeout(() => { if (O === me && !O.away && !IH.portraitOf(kid.id)) keepPortrait(); }, 2500); } // (the chores screen's picture of this home, the first time)
     document.body.classList.add('ih-open');
     // the Veggie plot and the Orchard terrace are blocks of land on the farm now (farm-land.js): an owner gets theirs
     // free, with what was growing on it (the beds and trees keep their numbers, so nothing's lost)
@@ -3172,6 +3173,7 @@
     guitarMusic(false); if (O && O.away && IH.village) { const o = O; O = null; IH.village.close(); O = o; }
     if (!O) return; const o = O; clearInterval(o.econT);
     if (o.held) cancelHeld(); save();
+    keepPortrait();
     removeEventListener('resize', size); removeEventListener('keydown', key_); if (window.visualViewport) { visualViewport.removeEventListener('resize', size); visualViewport.removeEventListener('scroll', size); } document.removeEventListener('visibilitychange', vis);
     for (const id of [...insts.keys()]) dropInst(id);
     o.home.root.traverse(m => { if (m.isMesh) m.geometry.dispose(); });
@@ -3283,6 +3285,41 @@
       g.traverse(m => { if (m.isMesh) { m.geometry.dispose(); if (m.material !== LK.BASE && m.material !== LK.BASE2) m.material.dispose(); } });
     }
   };
+  // ---------- a picture of the kid's home for the Chorecast chores screen (its floating island card): the home on
+  // its island, seen from the game's own corner, cut away the way the game shows it, with everything placed in it.
+  // Taken from the live scene when the game closes (and a little after it opens), and kept on the device
+  // (cc:homePic:<kid id>). With the game closed, IH.portrait draws the house and its island without the things in it,
+  // for a kid who hasn't opened their home since this came in.
+  const PIC_W = 420, PIC_H = 320, PIC_TYPE = 'image/webp';
+  const picKey = id => 'cc:homePic:' + id;
+  function keepPic(id, url) { if (!url) return ''; try { localStorage.setItem(picKey(id), url); } catch (e) { /* full or private browsing: the card shows the avatar instead */ } return url; }
+  function keepPortrait() {
+    if (!O || !O.home || !O.kid) return '';
+    // the house and what's placed in it, lent to the picture and put straight back
+    const parts = [O.home.root, ...[...insts.values()].filter(i => i.group.visible !== false && !i.petAi).map(i => i.group)], back = parts.map(m => [m, m.parent]);
+    const yaw = O.home.yaw, g = new T.Group(); O.home.setYaw(Math.PI / 4);
+    for (const m of parts) { const wp = new T.Vector3(), wq = new T.Quaternion(); m.getWorldPosition(wp); m.getWorldQuaternion(wq); g.add(m); m.position.copy(wp); m.quaternion.copy(wq); }
+    let url = '';
+    try { url = snap(g, PIC_W, PIC_H, 0.56, 1.0, PIC_TYPE); } catch (e) { console.warn('home picture', e); }
+    for (const [m, p] of back) { const wp = m.position.clone(); g.remove(m); if (p) { p.add(m); p.updateMatrixWorld(true); const inv = new T.Matrix4().copy(p.matrixWorld).invert(); m.position.copy(wp.applyMatrix4(inv)); m.quaternion.premultiply(new T.Quaternion().setFromRotationMatrix(inv)); } }
+    if (yaw != null) O.home.setYaw(yaw);
+    return keepPic(O.kid.id, url);
+  }
+  IH.portrait = id => {
+    if (O && O.kid && O.kid.id === id) return keepPortrait();
+    if (!T) return '';
+    try { renderer(); } catch (e) { return ''; }
+    let url = '';
+    try {
+      const st = store.load(id); if (!st || !HB[st.cur]) return '';
+      const h = buildHome(homeCfg(st)); h.setYaw(Math.PI / 4);
+      const g = new T.Group(); g.add(h.root);
+      url = snap(g, PIC_W, PIC_H, 0.56, 1.0, PIC_TYPE);
+      h.root.traverse(m => { if (m.isMesh) m.geometry.dispose(); });
+    } catch (e) { console.warn('home picture', e); return ''; }
+    return keepPic(id, url);
+  };
+  IH.portraitOf = id => { try { return localStorage.getItem(picKey(id)) || ''; } catch (e) { return ''; } };
   IH.snapObj = (obj, w = 240, h = 200, pitch = 0.5, pad = 1.12) => O ? snap(obj, w, h, pitch, pad) : ''; // (the model audit sheet renders through the thumbnail camera)
   IH.thumb = t => { if (!O || !BY[t]) return ''; O.thumbQ = [t]; thumbsSome(); return THUMBS[t] || ''; };
 })();
