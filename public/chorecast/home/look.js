@@ -100,6 +100,10 @@
     uniform vec3 uLit; uniform vec3 uShade; uniform vec3 uSky; uniform vec3 uGround; uniform vec3 uRimC;
     uniform float uRim; uniform float uGlow; uniform float uOpacity; uniform float uSpec; uniform float uPlain;
     uniform vec4 uHouse; uniform float uLampIn[4];
+    // which side of the home's walls lamp k lights (only the first four are a home's own lamps; any more, the farm's
+    // and village's building lamps, light where they are). Read through this so a scene with more than four lamps
+    // never indexes past the end of the array: that stops this shader compiling, and every model vanishes.
+    float lampIn(int k) { if (k == 0) return uLampIn[0]; if (k == 1) return uLampIn[1]; if (k == 2) return uLampIn[2]; if (k == 3) return uLampIn[3]; return 0.0; }
     varying vec2 vUv2;
     #ifdef USE_TEX
       uniform sampler2D tMap; uniform vec2 uTexTone;
@@ -218,7 +222,7 @@
           float ld = length(lv);
           float att = clamp(1.0 - ld / max(pointLights[ i ].distance, 0.001), 0.0, 1.0);
           att *= att;
-          float pl = att * (0.5 + 0.5 * max(dot(N, lv / max(ld, 0.001)), 0.0)) * mix(1.0 - inHouse, inHouse, uLampIn[ i ]);
+          float pl = att * (0.5 + 0.5 * max(dot(N, lv / max(ld, 0.001)), 0.0)) * mix(1.0 - inHouse, inHouse, lampIn(UNROLLED_LOOP_INDEX));
           col += base * pointLights[ i ].color * (uPlain > 0.5 ? pl * 0.9 : smoothstep(0.08, 0.1, pl) * 0.26 + smoothstep(0.34, 0.36, pl) * 0.2);
         } }
         #pragma unroll_loop_end
