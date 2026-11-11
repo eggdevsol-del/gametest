@@ -269,10 +269,15 @@
         k.box(0.6, 0.12, 0.4, -ix + 0.4, 0.0, -0.4, STEEL, { r: 0.02 }); k.cyl(0.14, 0.26, -ix + 0.4, 0, 1.15, '#f2c14e', { n: 12 });
         api.solid(-ix, -0.65, -ix + 0.8, 1.35);
         api.spot({ kind: 'press', id: o.id, name: 'the packing shed', at: [0.15, 1.3], yaw: PI, hit: [0.15, 0.35, 0, 1.8] });
+        // (phase E) the secateurs by the chopping board; the orchard ladder leant on the outside of the west wall
+        api.part('secateurs', -1.25, 0.9, -iz + 0.35, 0.5, kk => { for (const e of [-1, 1]) { kk.box(0.03, 0.02, 0.18, e * 0.02, 0, 0.04, STEEL_L, { ry: e * 0.12 }); kk.box(0.035, 0.03, 0.14, e * 0.03, 0, -0.1, '#c94f3a', { ry: e * 0.2, r: 0.01 }); } });
+        api.part('ladder', -w / 2 - 0.35, 0, 0.3, 0, kk => { for (const e of [-0.25, 0.25]) kk.box(0.06, 3.0, 0.08, 0, 0, e, '#c9a173', { r: 0.02 }); for (let y = 0.3; y < 2.9; y += 0.32) kk.box(0.06, 0.05, 0.5, 0, y, 0, '#b08a5a', { r: 0.02 }); });
+        api.solid(-w / 2 - 0.6, -0.1, -w / 2, 0.7);
       }
     });
     const at = atOf(B);
-    B.at = { grade: at(0.15, 1.35, PI), sink: at(-ix + 0.8, -iz + 1.4, PI), bench: at(-0.6, -iz + 1.25, PI), stove: at(0.9, -iz + 1.25, PI), jars: at(ix - 1.0, -0.9, PI / 2), reel: at(-ix + 1.3, 0.4, -PI / 2), door: at(-1.2, d / 2 + 1.2, PI) };
+    B.parts.ladder.rotation.z = -0.22; // (leant against the wall)
+    B.at = { ladder: at(-w / 2 - 1.3, 0.3, PI / 2), secateurs: at(-0.9, -iz + 1.25, PI), grade: at(0.15, 1.35, PI), sink: at(-ix + 0.8, -iz + 1.4, PI), bench: at(-0.6, -iz + 1.25, PI), stove: at(0.9, -iz + 1.25, PI), jars: at(ix - 1.0, -0.9, PI / 2), reel: at(-ix + 1.3, 0.4, -PI / 2), door: at(-1.2, d / 2 + 1.2, PI) };
     B.lamp.intensity = 1.0; return B;
   }
 

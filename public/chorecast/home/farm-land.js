@@ -98,12 +98,17 @@
         // twelve trees in three rows (apples, lemons, feijoas), each with its fruit (shown when it's ripe); a packing shed; two beehives
         const sp = f.specials || {}, KINDS = [['apple', '#e8463e', 12], sp.orange ? ['orange', '#ff9a2e', 21] : ['lemon', '#ffd84a', 21], sp.olive ? ['olive', '#6b7a3a', 41] : ['feijoa', '#7aa04a', 41]]; let i = blk.base || 0; // (oranges and olives from the Spanish town's nursery)
         for (const [kind, fc, lz] of KINDS) for (const lx of [8, 15.5, 36.5, 44]) {
-          const [x, z] = (f.treeAt || {})[i] || L(lx, lz); IB.more.tree(k, x, z, R, 0.85, 0, kind === 'lemon' || kind === 'orange' ? ['#3f8a3c', '#4e9e48'] : kind === 'feijoa' ? ['#5a8a5a', '#6a9a6a'] : kind === 'olive' ? ['#8a9a7a', '#9aaa88'] : ['#4f9a3c', '#5fae4a']); solid(x - 0.6, z - 0.6, x + 0.6, z + 0.6);
-          const fk = new Kit(); for (let q = 0; q < 10; q++) { const a = q / 10 * Math.PI * 2 + R(), rr = 1.1 + R() * 0.8; fk.ball(0.18, Math.cos(a) * rr, 2.4 + R() * 1.3, Math.sin(a) * rr * 0.85, fc, { n: 7, s: kind === 'feijoa' ? [0.8, 1.1, 0.8] : [1, 1, 1] }); }
-          const fruit = fk.build(); fruit.position.set(x, 0, z); root.add(fruit); out.trees.push({ kind, x, z, fruit, i });
+          const [x, z] = (f.treeAt || {})[i] || L(lx, lz); solid(x - 0.6, z - 0.6, x + 0.6, z + 0.6);
+          // (each kind its own tree, phase E: islands-more.js fruitTree; its fruit hung in its own crown)
+          const at = IB.more.fruitTree ? IB.more.fruitTree(k, kind, x, z, R, 1) : (IB.more.tree(k, x, z, R, 0.85), []), FL = (IB.more.FRUIT_LOOK || {})[kind] || [fc, 0.18, [1, 1, 1]];
+          const fk = new Kit(); for (const [fx, fy, fz] of at) fk.ball(FL[1], fx, fy, fz, FL[0], { n: 7, s: FL[2] }); if (!at.length) for (let q = 0; q < 10; q++) { const a = q / 10 * Math.PI * 2 + R(), rr = 1.1 + R() * 0.8; fk.ball(0.18, Math.cos(a) * rr, 2.4 + R() * 1.3, Math.sin(a) * rr * 0.85, fc, { n: 7 }); }
+          const fruit = fk.build(); fruit.position.set(x, 0, z); root.add(fruit);
+          // (a ring of bark mulch round its foot, shown while it's mulched)
+          const mk = new Kit(); mk.cyl(1.25, 0.04, 0, 0.0, 0, '#6b4a33', { n: 18 }); for (let q = 0; q < 14; q++) mk.box(0.16, 0.03, 0.08, Math.cos(q * 0.45) * (0.5 + (q % 3) * 0.25), 0.04, Math.sin(q * 0.45) * (0.5 + (q % 3) * 0.25), '#8a6040', { ry: q, r: 0.01 }); const mulch = mk.build({ shadow: false }); mulch.position.set(x, 0.02, z); mulch.visible = false; root.add(mulch);
+          out.trees.push({ kind, x, z, fruit, mulch, i });
           spots.push({ kind: 'fruittree', id: id('t' + i), i, fruit: kind, name: `the ${kind} tree`, at: [x, z + 1.9], yaw: Math.PI, hit: [x, z, 0, 3] }); i++;
         }
-        let hut = null; { const [x, z] = L(44, 52); if (FB) { hut = walkIn(FB.packShed({ x, z, id: id('press') })); const sp = spots[spots.length - 1]; if (sp && sp.kind === 'press') sp.hut = hut; } else { IB.more.shed(k, x, z, 0, '#c9b28a', '#7a6a5a'); solid(x - 2, z - 1.5, x + 2, z + 1.5); spots.push({ kind: 'press', id: id('press'), name: 'the packing shed', at: [x, z + 3], yaw: Math.PI, hit: [x, z, 0, 4] }); } }
+        let hut = null; { const [x, z] = L(44, 52); if (FB) { hut = walkIn(FB.packShed({ x, z, id: id('press') })); const sp = spots[spots.length - 1]; if (sp && sp.kind === 'press') sp.hut = hut; for (const t0 of spots) if (t0.kind === 'fruittree' && t0.i >= (blk.base || 0) && t0.i < i) t0.hut = hut; } else { IB.more.shed(k, x, z, 0, '#c9b28a', '#7a6a5a'); solid(x - 2, z - 1.5, x + 2, z + 1.5); spots.push({ kind: 'press', id: id('press'), name: 'the packing shed', at: [x, z + 3], yaw: Math.PI, hit: [x, z, 0, 4] }); } }
         hives(L(7, 52), 2, hut);
       } else if (blk.type === 'pasture') {
         // (its paddock is one of the farm's paddocks, added when it was bought: fences, gate and animals as any other)

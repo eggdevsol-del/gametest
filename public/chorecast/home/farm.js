@@ -90,7 +90,7 @@
     sprayer: { e: '💧', name: 'Sprayer', xp: 700, about: 'Waters every planted bed it passes, once a day.', how: 'Drive along a field block’s middle lane: it waters the beds both sides.' }
   };
   // (phase C, farm-machines.js: the whole set, in the order of a season's work: soil, sowing, care, harvest)
-  const MACHINES = (() => { const D = Object.assign({}, MACHINES0, (IH.farmMachines && IH.farmMachines.DEFS) || {}); MACHINES0.drill.crops = ['carrot', 'lettuce', 'tea', 'rice']; MACHINES0.drill.job = 'sow'; const out = {}; for (const k0 of ['subsoiler', 'plough', 'discs', 'tiller', 'powerharrow', 'drill', 'planter', 'potatoplanter', 'transplanter', 'roller', 'spreader', 'manure', 'lime', 'sprayer', 'weeder', 'harvester', 'potatoharvester', 'mower', 'tedder', 'rake', 'wrapper', 'loaderwagon', 'spear']) if (D[k0]) out[k0] = D[k0]; return out; })();
+  const MACHINES = (() => { const D = Object.assign({}, MACHINES0, (IH.farmMachines && IH.farmMachines.DEFS) || {}); MACHINES0.drill.crops = ['carrot', 'lettuce', 'tea', 'rice']; MACHINES0.drill.job = 'sow'; const out = {}; for (const k0 of ['subsoiler', 'plough', 'discs', 'tiller', 'powerharrow', 'drill', 'planter', 'potatoplanter', 'transplanter', 'roller', 'spreader', 'manure', 'lime', 'sprayer', 'weeder', 'harvester', 'potatoharvester', 'mower', 'tedder', 'rake', 'wrapper', 'loaderwagon', 'spear', 'mulcher', 'pruner', 'orchardsprayer', 'picker', 'shaker']) if (D[k0]) out[k0] = D[k0]; return out; })();
   const BABY = { hen: 'chick', rooster: 'chick', duck: 'duckling', goose: 'gosling', turkey: 'poult', goat: 'kid', cow: 'calf', highland: 'calf', merino: 'lamb', alpaca: 'cria', llama: 'cria', kunekune: 'piglet', donkey: 'foal', pony: 'foal' };
   const MOTHERS = /^(egg|milk)$/; // (only mothers lay or give milk)
   const hashS = s0 => [...String(s0)].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) >>> 0, 7);
@@ -574,6 +574,16 @@
     const seedList = () => { const all = IH.bedOps ? IH.bedOps.crops(F()) : ['carrot'], M0 = DR && DR.imp && MACHINES[DR.imp.kind]; return M0 && M0.crops ? all.filter(id => M0.crops.includes(id)) : all; };
     function seedNote() { if (!DR) return; DR.seed = DR.seed || seedList()[0]; const el = DR.el && DR.el.querySelector('.vg-dr-note'); if (el) { el.hidden = false; el.innerHTML = `Seed: <button data-v="farm" data-k="seed">${IH.bedOps ? IH.bedOps.label(DR.seed) : DR.seed} ▸</button>`; } }
     // Auto with a field machine: along the middle lane of the field block nearest the tractor, then home
+    // Auto with an orchard machine: along the lane between the first two rows of trees and back along the lane by the
+    // third row (a trailed machine starting its own length in from the hedge), to the packing shed if it picked, home
+    function orchardJob() {
+      const L = (F().land || []).filter(b => b.type === 'orchard'); if (!L.length || !IH.farmLand) return null;
+      const near = L.map(b => IH.farmLand.rectOf(b.slot)).sort((p, q) => Math.hypot((p[0] + p[2]) / 2 - DR.x, (p[1] + p[3]) / 2 - DR.z) - Math.hypot((q[0] + q[2]) / 2 - DR.x, (q[1] + q[3]) / 2 - DR.z))[0];
+      const lead = DR.imp.mount ? 0 : DR.imp.len + 2.6, z1 = near[1] + 16.5, z2 = near[1] + 36, M0 = MACHINES[DR.imp.kind];
+      const shed = M0.orchard === 'pick' ? (V().B.walkins || []).filter(w0 => w0.parts.pot).sort((p, q) => Math.hypot(p.def.x - DR.x, p.def.z - DR.z) - Math.hypot(q.def.x - DR.x, q.def.z - DR.z))[0] : null;
+      return [{ t: 'line', a: [near[0] + 3 + lead, z1], b: [near[2] - 3, z1], say: `${M0.name.toLowerCase()}: along the first rows` }, { t: 'line', a: [near[2] - 3 - lead, z2], b: [near[0] + 3, z2], say: `${M0.name.toLowerCase()}: along the last row` },
+        ...(shed ? [{ t: 'goto', goal: { x: shed.def.x, z: shed.def.z - shed.def.d / 2 - 4.5, yaw: Math.PI / 2, tol: 2.5, ytol: 3.2 }, say: 'to the packing shed to unload' }] : []), { t: 'goto', goal: { x: TRACTOR_HOME.x, z: TRACTOR_HOME.z, yaw: TRACTOR_HOME.ry, tol: 0.7, ytol: 0.25 }, say: 'parking' }];
+    }
     function fieldJob() {
       const L = (F().land || []).filter(b => b.type === 'field'); if (!L.length || !IH.farmLand) return null;
       const near = L.map(b => IH.farmLand.rectOf(b.slot)).sort((p, q) => Math.hypot((p[0] + p[2]) / 2 - DR.x, (p[1] + p[3]) / 2 - DR.z) - Math.hypot((q[0] + q[2]) / 2 - DR.x, (q[1] + q[3]) / 2 - DR.z))[0], z = near[1] + 30;
@@ -583,7 +593,7 @@
       return [{ t: 'line', a: east ? [near[2] - 4 - lead, z] : [near[0] + 4 + lead, z], b: east ? [near[0] + 4, z] : [near[2] - 4, z], say: `${MACHINES[DR.imp.kind].name.toLowerCase()}: working the beds` }, ...(shed ? [{ t: 'goto', goal: { x: shed.def.x, z: shed.def.z + shed.def.d / 2 + 4.5, yaw: Math.PI / 2, tol: 2.5, ytol: 3.2 }, say: 'to the seed shed to unload' }] : []), { t: 'goto', goal: { x: TRACTOR_HOME.x, z: TRACTOR_HOME.z, yaw: TRACTOR_HOME.ry, tol: 0.7, ytol: 0.25 }, say: 'parking' }];
     }
     // the harvest out of a hopper into the stores (the fridge or the goods shelf), and the kid told what came in
-    function unloadHop(I) { const O0 = IH.bedOps, L = Object.entries(I.hop || {}); if (!O0 || !L.length) return; for (const [id, q] of L) O0.store(id, q); I.hop = {}; save(); c.sound('buy'); c.toast(`Unloaded: ${L.map(([id, q]) => `${q} ${O0.crop(id).name}`).join(', ')}. Into the stores! ${L.map(([id]) => O0.crop(id).e).join('')}`); }
+    function unloadHop(I) { const O0 = IH.bedOps, OO = IH.orchardOps, L = Object.entries(I.hop || {}); if (!L.length) return; const fruit = id => OO && OO.e(id) && !(O0 && O0.crop(id)); for (const [id, q] of L) (fruit(id) ? OO : O0).store(id, q); I.hop = {}; save(); c.sound('buy'); c.toast(`Unloaded: ${L.map(([id, q]) => `${q} ${fruit(id) ? OO.name(id) : O0.crop(id).name}`).join(', ')}. Into the stores! ${L.map(([id]) => (fruit(id) ? OO.e(id) : O0.crop(id).e)).join('')}`); }
     /* the front loader with its bale spear (phase D): on the tractor's front, not the hitch. Its button puts it on;
        then each press lifts the bale in front of the spear (the arms rise with it) or sets it down: in the hay yard
        it goes into the store (hay, or wrapped silage; a green bale has to be wrapped first), anywhere else it's put
@@ -611,7 +621,7 @@
     function hitch(kind) {
       if (!DR) return; if (Math.abs(DR.v) > 0.05) return c.toast('Stop first to hitch up.');
       const v = V(); if (DR.imp && DR.imp.hop) unloadHop(DR.imp); if (DR.imp) { DR.imp.load.forEach((b, i) => dropBale({ x: DR.imp.x - Math.sin(DR.imp.yaw) * (2 + i * 1.4), z: DR.imp.z - Math.cos(DR.imp.yaw) * (2 + i * 1.4), ry: DR.imp.yaw + Math.PI / 2, kind: b.kind })); v.B.root.remove(DR.imp.g); DR.imp = null; }
-      if (kind !== 'none') { const I = implementModel(kind); I.kind = kind; I.yaw = DR.yaw; I.load = []; I.acc = 0; v.B.root.add(I.g); DR.imp = I; placeImp(0); c.sound('place'); DR.worked = new Set(); c.toast(MACHINES[kind] ? `${MACHINES[kind].name} on! ${MACHINES[kind].how || (MACHINES[kind].meadow === 'wrap' ? 'Drive up to the green bales to wrap them.' : MACHINES[kind].meadow ? 'Drive it up and down the hay meadow.' : 'Drive along a field block’s middle lane: it works the beds both sides.')}` : kind === 'baler' ? 'Baler on! Drive it over the long grass in the hay meadow.' : 'Trailer on! Drive up to bales to load them, then stop on the track beside the hay yard by the barn.'); if (MACHINES[kind] && MACHINES[kind].job === 'sow') { DR.seed = null; seedNote(); } else note(''); }
+      if (kind !== 'none') { const I = implementModel(kind); I.kind = kind; I.yaw = DR.yaw; I.load = []; I.acc = 0; v.B.root.add(I.g); DR.imp = I; placeImp(0); c.sound('place'); DR.worked = new Set(); c.toast(MACHINES[kind] ? `${MACHINES[kind].name} on! ${MACHINES[kind].how || (MACHINES[kind].meadow === 'wrap' ? 'Drive up to the green bales to wrap them.' : MACHINES[kind].meadow ? 'Drive it up and down the hay meadow.' : MACHINES[kind].orchard ? 'Drive it down the lanes between the tree rows in an orchard block.' : 'Drive along a field block’s middle lane: it works the beds both sides.')}` : kind === 'baler' ? 'Baler on! Drive it over the long grass in the hay meadow.' : 'Trailer on! Drive up to bales to load them, then stop on the track beside the hay yard by the barn.'); if (MACHINES[kind] && MACHINES[kind].job === 'sow') { DR.seed = null; seedNote(); } else note(''); DR.workedT = new Set(); }
       for (const b of DR.el.querySelectorAll('[data-k^="hitch:"]')) b.classList.toggle('on', b.dataset.k === 'hitch:' + kind);
     }
     function placeImp(dist) {
@@ -727,7 +737,18 @@
         c.toast(`Tipped into the store: ${[h ? `${h} hay` : '', sl ? `${sl} silage` : ''].filter(Boolean).join(' and ')}. 🌾`);
       }
       // the field machines: each bed within reach, once a pass, gets the machine's job (phase C: farm-machines.js)
-      if (MACHINES[I.kind] && !MACHINES[I.kind].meadow && !MACHINES[I.kind].front && moved > 0 && IH.bedOps) {
+      // the orchard machines (phase E): each tree within reach of the lane, once a pass
+      if (MACHINES[I.kind] && MACHINES[I.kind].orchard && moved > 0 && IH.orchardOps) {
+        const M0 = MACHINES[I.kind], OO = IH.orchardOps, W0 = DR.workedT || (DR.workedT = new Set()); let n = 0, lifted = false;
+        for (const s0 of v.B.spots) { if (s0.kind !== 'fruittree' || W0.has(s0.i) || Math.hypot(s0.hit[0] - I.x, s0.hit[1] - I.z) > 5.2) continue; W0.add(s0.i);
+          let did = false;
+          if (M0.orchard === 'pick') { const r = OO.lift(s0.i, s0.fruit, id => !M0.only || M0.only.includes(id)); if (r) { I.hop = I.hop || {}; I.hop[r.id] = (I.hop[r.id] || 0) + r.n; did = lifted = true; } }
+          else if (M0.cost) { if (sh().farmAcct().bal + sh().wallet().left >= M0.cost && OO.work(s0.i, M0.orchard)) { sh().farmPay(M0.cost, 'orchard spray'); did = true; } }
+          else did = OO.work(s0.i, M0.orchard);
+          if (did) { n++; c.fx(M0.orchard === 'spray' ? 'drops' : M0.orchard === 'mulch' ? 'soil' : 'leaves', s0.hit[0], M0.orchard === 'mulch' ? 0.3 : 2.4, s0.hit[1], 8); } }
+        if (n) { if (AP) AP.did = true; OO.redraw(); c.sound('pop'); if (lifted) c.toast(`Bins: ${Object.entries(I.hop).map(([id, q]) => `${q} ${OO.name(id)}`).join(', ')}. Stop by a packing shed to unload.`); }
+      }
+      if (MACHINES[I.kind] && !MACHINES[I.kind].meadow && !MACHINES[I.kind].front && !MACHINES[I.kind].orchard && moved > 0 && IH.bedOps) {
         const M0 = MACHINES[I.kind], O0 = IH.bedOps, can = xp => sh().farmAcct().bal + sh().wallet().left >= xp; let n = 0;
         for (const s0 of v.B.spots) { if (s0.kind !== 'bed' || DR.worked.has(s0.i)) continue; const bxx = s0.hit[0], bzz = s0.hit[1]; if (Math.hypot(bxx - I.x, bzz - I.z) > 6.8) continue;
           let did = false;
@@ -742,7 +763,7 @@
         if (n) { if (AP) AP.did = true; IH.bedOps.redraw(); c.sound('pop'); if (M0.job === 'lift') c.toast(`Hopper: ${Object.entries(I.hop).map(([id, q]) => `${q} ${O0.crop(id).name}`).join(', ')}. Stop by a seed shed to unload.`); }
       }
       // a harvester's hopper: stopped by a seed shed, it's unloaded into the stores
-      if (I.hop && Object.keys(I.hop).length && Math.abs(DR.v) < 0.3) { const sh0 = (v.B.walkins || []).find(w0 => w0.parts.tray && Math.hypot(w0.def.x - DR.x, w0.def.z - DR.z) < 9); if (sh0) unloadHop(I); }
+      if (I.hop && Object.keys(I.hop).length && Math.abs(DR.v) < 0.3) { const sh0 = (v.B.walkins || []).find(w0 => (w0.parts.tray || w0.parts.pot) && Math.hypot(w0.def.x - DR.x, w0.def.z - DR.z) < 9); if (sh0) unloadHop(I); }
       // the trailer: bales it comes up against are loaded on (four at most); at the barn they're unloaded into the hay store
       if (I.kind === 'trailer') {
         if (I.load.length < 4) for (let i = v.B.bales.length - 1; i >= 0; i--) { const b = v.B.bales[i]; if (Math.hypot(b.g.position.x - I.x, b.g.position.z - I.z) < 2.1 && I.load.length < 4) { if (b.rec.kind === 'wet') { if (!DR.toldWet) { DR.toldWet = true; c.toast('That’s a green bale: wrap it first (the bale wrapper), or it’ll rot.'); } continue; } v.B.bales.splice(i, 1); f.bales.splice(f.bales.indexOf(b.rec), 1); v.B.root.remove(b.g); const m = baleModel(b.rec.kind); m.scale.setScalar(0.8); m.position.set((I.load.length % 2 ? 0.5 : -0.5), 0, I.load.length < 2 ? 0.5 : -0.6); m.rotation.y = Math.PI / 2; I.load.push({ g: m, kind: b.rec.kind || 'hay' }); I.g.children[I.g.children.length - 1].add(m); save(); c.sound('pop'); c.fx('hay', I.x, 1.2, I.z, 6); } }
@@ -784,7 +805,7 @@
       if (!TP()) return c.toast('Auto isn’t ready yet.');
       const kind = DR.imp && DR.imp.kind, v = V();
       if (!kind) return c.toast('Hitch the baler (to bale the meadow) or the trailer (to bring the bales in), then press Auto.');
-      const M0 = MACHINES[kind], fieldy = M0 && !M0.meadow && !M0.front, FJ = fieldy ? fieldJob() : null; if (fieldy && !FJ) return c.toast('There’s no field block to work. Buy one with Plan → Land.'); if (fieldy) DR.worked = new Set();
+      const M0 = MACHINES[kind], orchardy = M0 && M0.orchard, fieldy = M0 && !M0.meadow && !M0.front && !orchardy, FJ = fieldy ? fieldJob() : orchardy ? orchardJob() : null; if (fieldy && !FJ) return c.toast('There’s no field block to work. Buy one with Plan → Land.'); if (orchardy && !FJ) return c.toast('There’s no orchard block to work. Buy one with Plan → Land.'); if (fieldy) DR.worked = new Set(); if (orchardy) DR.workedT = new Set();
       const MQ = meadowOf(); if (MEADOW_JOBS[kind] && meadowFor(MQ, kind) < 0.04) return c.toast({ mower: 'There’s no long grass left to cut here. It grows back in a couple of days.', tedder: 'Nothing cut to ted. Mow the meadow first.', rake: 'Nothing to rake. Mow (and ted) the meadow first.', baler: 'Nothing left to bale here. It grows back in a couple of days.', loaderwagon: 'No windrows to pick up. Rake the meadow first.' }[kind]);
       if (kind === 'wrapper' && !v.B.bales.some(b => b.rec.kind === 'wet')) return c.toast('No green bales to wrap. Bale wet grass (raked straight after mowing) to make some.');
       if (kind === 'trailer' && !v.B.bales.length && !DR.imp.load.length) return c.toast('No bales to bring in. Bale the meadow first.');

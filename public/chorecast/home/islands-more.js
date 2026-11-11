@@ -95,7 +95,40 @@
       else if (crop === 'strawberry') { kk.ball(0.22 * s, x, 0.1, z, '#5fae4a', { s: [1.2, 0.5, 1.2], n: 7 }); if (stage === 3) for (let f = 0; f < 3; f++) kk.ball(0.06, x + (f - 1) * 0.14, 0.08, z + 0.2, '#e8352e', { n: 5 }); }
     }
   }
-  IB.more = { shed, tree, cropBed, soilBed, base, hits, post, solids };
+  /* ---------- the orchard's fruit trees, each its own shape (phase E): returns where its fruit hangs (so the fruit,
+     shown when ripe, sits in that tree's canopy)
+     apple: a short trunk, three limbs, a wide open spreading crown
+     lemon / orange: citrus, a dense glossy dome down near the ground on a short trunk
+     feijoa: a shrub, several stems from the base, a loose grey-green crown, egg-shaped fruit
+     olive: a gnarled, twisted trunk, an airy silver-grey crown in clumps, small dark fruit */
+  function fruitTree(k, kind, x, z, R, s = 1) {
+    const fruit = [], BARK = { apple: '#6b4a33', lemon: '#7a5a3f', orange: '#7a5a3f', feijoa: '#8a7560', olive: '#8a8070' }[kind] || '#6b4a33';
+    const crown = (cx, cy, cz, r, c, sq = [1, 0.85, 1]) => k.ball(r * s, x + cx * s, cy * s, z + cz * s, c, { s: sq, n: 10 });
+    const hang = (n, rr, y0, y1, out = 1) => { for (let q = 0; q < n; q++) { const a = q / n * Math.PI * 2 + R() * 0.6, r = rr * (0.92 + R() * 0.12) * out; fruit.push([Math.cos(a) * r * s, (y0 + R() * (y1 - y0)) * s, Math.sin(a) * r * 0.9 * s]); } };
+    if (kind === 'apple') {
+      k.cyl(0.2 * s, 1.3 * s, x, 0, z, BARK, { n: 8 }); k.cyl(0.26 * s, 0.25 * s, x, 0, z, BARK, { n: 8 });
+      for (let i = 0; i < 3; i++) { const a = i / 3 * Math.PI * 2 + 0.4; k.cyl(0.09 * s, 1.1 * s, x + Math.cos(a) * 0.25 * s, 1.2 * s, z + Math.sin(a) * 0.25 * s, BARK, { n: 6, rz: Math.cos(a) * 0.6, rx: -Math.sin(a) * 0.6 }); }
+      const L = ['#4f9a3c', '#5fae4a', '#479034']; crown(0, 2.7, 0, 1.25, L[0], [1.25, 0.7, 1.2]); for (let i = 0; i < 7; i++) { const a = i / 7 * Math.PI * 2 + R() * 0.3; crown(Math.cos(a) * 1.15, 2.45 + R() * 0.5, Math.sin(a) * 1.05, 0.72 + R() * 0.2, L[i % 3], [1.1, 0.75, 1.1]); }
+      hang(14, 1.95, 2.1, 3.0);
+    } else if (kind === 'lemon' || kind === 'orange') {
+      k.cyl(0.16 * s, 0.9 * s, x, 0, z, BARK, { n: 7 });
+      const L = ['#2f7a34', '#3a8a3c', '#276b2c']; crown(0, 1.9, 0, 1.35, L[0], [1, 0.95, 1]); for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2 + R() * 0.3; crown(Math.cos(a) * 0.95, 1.5 + R() * 1.0, Math.sin(a) * 0.9, 0.7 + R() * 0.15, L[i % 3]); } crown(0, 2.9, 0, 0.75, L[1]);
+      hang(16, 1.72, 1.2, 2.6);
+    } else if (kind === 'feijoa') {
+      for (let i = 0; i < 4; i++) { const a = i / 4 * Math.PI * 2 + 0.3; k.cyl(0.07 * s, 1.5 * s, x + Math.cos(a) * 0.15 * s, 0, z + Math.sin(a) * 0.15 * s, BARK, { n: 5, rz: Math.cos(a) * 0.35, rx: -Math.sin(a) * 0.35 }); }
+      const L = ['#6a8a6a', '#7a9a78', '#5e7f60']; for (let i = 0; i < 9; i++) { const a = i / 9 * Math.PI * 2 + R() * 0.5, r = 0.5 + R() * 0.6; crown(Math.cos(a) * r, 1.4 + R() * 1.1, Math.sin(a) * r, 0.55 + R() * 0.2, L[i % 3], [1, 0.85, 1]); } crown(0, 2.4, 0, 0.7, L[1]);
+      hang(12, 1.5, 1.3, 2.4);
+    } else if (kind === 'olive') {
+      let px = 0, pz = 0; for (let i = 0; i < 4; i++) { const nx = px + (R() - 0.5) * 0.3, nz = pz + (R() - 0.5) * 0.3; k.cyl((0.24 - i * 0.03) * s, 0.55 * s, x + nx * s, i * 0.5 * s, z + nz * s, BARK, { n: 7, rz: (nx - px) * 1.2, rx: -(nz - pz) * 1.2 }); px = nx; pz = nz; } // (the twisted trunk, a section at a time)
+      k.ball(0.26 * s, x, 0.25 * s, z, BARK, { s: [1.3, 0.5, 1.2], n: 8 }); // (the gnarled boss at its foot)
+      const L = ['#8a9a7a', '#a3b096', '#7a8a6c']; for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2 + R() * 0.4, r = 0.6 + R() * 0.8; crown(px + Math.cos(a) * r, 2.2 + R() * 1.1, pz + Math.sin(a) * r, 0.45 + R() * 0.15, L[i % 3], [1.2, 0.6, 1.1]); }
+      hang(18, 1.78, 2.3, 3.1);
+    } else { tree(k, x, z, R, 0.85 * s); hang(10, 1.3, 2.4, 3.6); }
+    return fruit;
+  }
+  // the fruit itself (shown when it's ripe): its colour and shape for each kind
+  const FRUIT_LOOK = { apple: ['#e8463e', 0.17, [1, 0.95, 1]], lemon: ['#ffd84a', 0.15, [0.9, 1.2, 0.9]], orange: ['#ff9a2e', 0.17, [1, 1, 1]], feijoa: ['#7aa04a', 0.13, [0.75, 1.15, 0.75]], olive: ['#3d4a2a', 0.07, [0.85, 1.1, 0.85]] };
+  IB.more = { shed, tree, fruitTree, FRUIT_LOOK, cropBed, soilBed, base, hits, post, solids };
 
   /* ---------- Veggie plot: six raised beds (planted, watered, harvested), a seed shed, a glasshouse, a water tank */
   function plot(st) {

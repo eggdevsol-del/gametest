@@ -7,7 +7,7 @@
   const IH = window.IsoHome = window.IsoHome || {}, T = window.THREE;
   if (!T || !IH.kit) return;
   const { Kit } = IH.kit, PI = Math.PI;
-  const DK = '#3d4048', DK2 = '#2a2d31', ST = '#a9b3bf', STD = '#7f8a97', STL = '#cdd5de', YEL = '#e8c45a', RED = '#c8433a', REDD = '#a83a2f', GRN = '#2f8a4f', GRND = '#26703f', BLU = '#3f6fb5', BLUD = '#33598f', ORG = '#e07a2a', ORGD = '#c0631f', WHT = '#f1f1ee';
+  const WOOD_BIN = '#b7834f', DK = '#3d4048', DK2 = '#2a2d31', ST = '#a9b3bf', STD = '#7f8a97', STL = '#cdd5de', YEL = '#e8c45a', RED = '#c8433a', REDD = '#a83a2f', GRN = '#2f8a4f', GRND = '#26703f', BLU = '#3f6fb5', BLUD = '#33598f', ORG = '#e07a2a', ORGD = '#c0631f', WHT = '#f1f1ee';
 
   // the jobs (job: what it does to a bed, IH.bedOps.work/plough/water/plant/lift; crops: what a planter sows; only
   // or not: what a harvester lifts; cost: ✨ a bed; muck: uses the barn's muck heap)
@@ -30,6 +30,12 @@
     rake: { e: '🧹', name: 'Rotary rake', xp: 700, meadow: 'rake', about: 'Gathers the cut grass into windrows for the baler. Dry hay makes hay bales; wet grass makes green bales to wrap.' },
     wrapper: { e: '🎁', name: 'Bale wrapper', xp: 950, meadow: 'wrap', about: 'Wraps green bales in plastic: they turn to silage, a richer feed (cows and goats give more milk on it).' },
     loaderwagon: { e: '🚛', name: 'Loader wagon', xp: 1300, meadow: 'load', about: 'Picks the windrows up loose. Unload it by the hay yard: dry into hay, wet into silage.' },
+    // (phase E: the orchard's machines: orchard: their job on the trees within reach of the lanes between the rows)
+    mulcher: { e: '🪵', name: 'Flail mulcher', xp: 750, orchard: 'mulch', mount: true, about: 'Mows the grass between the tree rows and lays it as mulch round the trees: more fruit for five days.' },
+    orchardsprayer: { e: '💨', name: 'Orchard sprayer', xp: 1100, orchard: 'spray', cost: 4, about: 'A fan blows a fine mist up through the trees on both sides: healthy trees, more fruit for five days. ✨ 4 a tree.' },
+    pruner: { e: '✂️', name: 'Tree pruner', xp: 1000, orchard: 'prune', mount: true, about: 'A cutter bar on a side arm trims the trees into shape: more fruit for two weeks.' },
+    picker: { e: '🧺', name: 'Picking platform', xp: 1800, orchard: 'pick', about: 'Pickers on a raised platform fill its bins from the ripe trees it passes. Stop by a packing shed to unload.' },
+    shaker: { e: '🫒', name: 'Tree shaker', xp: 1500, orchard: 'pick', only: ['olive', 'feijoa'], about: 'Grips each trunk and shakes, the fruit falling into its catching frame: olives and feijoas. Unload at a packing shed.' },
     spear: { e: '🔱', name: 'Front loader & bale spear', xp: 850, front: true, about: 'Loader arms on the tractor’s front with a bale spear: lift one bale at a time, carry it, stack it in the hay yard.' },
     harvester: { e: '🧺', name: 'Vegetable harvester', xp: 1600, job: 'lift', not: ['potato'], about: 'Lifts ready crops (not potatoes) into its hopper. Stop by a seed shed to unload.' },
     potatoharvester: { e: '⛏️', name: 'Potato harvester', xp: 1700, job: 'lift', only: ['potato'], about: 'Digs ready potatoes, sieves the soil off, and fills its bunker. Stop by a seed shed to unload.' }
@@ -259,6 +265,60 @@
     const pu = new T.Group(); pu.position.set(0, 0.3, 1.0); const pk = new Kit(); pk.cyl(0.22, 1.7, 0, -0.85, 0, DK, { n: 10, rz: PI / 2 }); for (let i = 0; i < 12; i++) for (const a of [0, 2.1, 4.2]) pk.box(0.02, 0.18, 0.02, -0.8 + i * 0.145, Math.cos(a) * 0.24, Math.sin(a) * 0.24, ST, { rx: -a }); pu.add(pk.build()); g.add(pu); spins.push({ o: pu, axis: 'x', per: 6 });
     for (const s of [-1, 1]) for (const z of [-0.6, -1.5]) { const w = new T.Group(); w.position.set(s * 1.1, 0.42, z); const m = wheel(0.42, 0.26); if (s < 0) m.rotation.y = PI; w.add(m); g.add(w); wheels.push(w); }
     return { g, wheels, spins, len: 2.4, r: 0.42 };
+  };
+  // ---------- the orchard machines (phase E)
+  M.mulcher = () => {
+    const g = new T.Group(), k = new Kit(), spins = [];
+    headstock(k, 0.75); pto(k, 0.55, 0.3, 1.5);
+    k.box(2.2, 0.5, 0.75, 0, 0.15, 0.1, GRN, { r: 0.08 }); k.box(2.25, 0.08, 0.8, 0, 0.62, 0.1, GRND, { r: 0.03 }); for (const s of [-1, 1]) k.box(0.06, 0.6, 0.8, s * 1.12, 0.06, 0.1, GRND, { r: 0.02 }); k.box(0.3, 0.3, 0.3, 0.8, 0.65, 0.3, DK, { r: 0.04 });
+    decal(k, -0.5, 0.42, 0.48, 0.7, '#ffffff'); k.box(2.2, 0.06, 0.06, 0, 0.0, -0.3, STD); // (the rear roller's scraper)
+    g.add(k.build());
+    const rot = new T.Group(); rot.position.set(0, 0.2, 0.15); const rk = new Kit(); rk.cyl(0.08, 2.0, 0, -1.0, 0, DK, { n: 8, rz: PI / 2 }); for (let i = 0; i < 16; i++) { const a = i * 1.3; rk.box(0.06, 0.18, 0.03, -0.95 + i * 0.125, Math.cos(a) * 0.14, Math.sin(a) * 0.14, ST, { rx: -a }); } rot.add(rk.build()); g.add(rot); spins.push({ o: rot, axis: 'x', per: 9 });
+    const rl = new T.Group(); rl.position.set(0, 0.14, -0.4); const lk = new Kit(); lk.cyl(0.14, 2.1, 0, -1.05, 0, STD, { n: 12, rz: PI / 2 }); rl.add(lk.build()); g.add(rl); spins.push({ o: rl, axis: 'x', per: 1 / 0.14 });
+    return { g, wheels: [], spins, len: 0.9, r: 0.14, mount: true };
+  };
+  M.orchardsprayer = () => {
+    const g = new T.Group(), k = new Kit(), wheels = [], spins = [];
+    drawbar(k, 2.2, 0.5); pto(k, 0.5, 0.3, 2.1); k.box(1.3, 0.12, 2.4, 0, 0.4, -0.5, DK, { r: 0.03 });
+    k.cyl(0.6, 2.0, 0, 1.05 - 1.0, -0.2, WHT, { n: 18, rx: PI / 2 }); k.cyl(0.62, 0.05, 0, 1.05 - 0.025, 0.8, '#d9d6cf', { n: 18, rx: PI / 2 }); k.cyl(0.15, 0.12, 0, 1.6, 0.0, DK, { n: 10 }); // (the tank on its side, its lid)
+    k.cyl(0.78, 0.5, 0, 1.0 - 0.25, -1.45, ORG, { n: 20, rx: PI / 2 }); k.cyl(0.64, 0.52, 0, 1.0 - 0.26, -1.45, '#2a2d31', { n: 20, rx: PI / 2 }); for (let i = 0; i < 12; i++) { const a = i / 12 * PI * 2; if (Math.sin(a) < -0.5) continue; k.cyl(0.03, 0.12, Math.cos(a) * 0.82, 1.0 + Math.sin(a) * 0.82, -1.65, STL, { n: 5, rx: PI / 2 }); } // (the fan cowl, its ring of nozzles round the top)
+    decal(k, 0, 1.2, 0.79, 0.6, BLU); lights(k, 1.3, 0.6, -1.72);
+    g.add(k.build());
+    const fan = new T.Group(); fan.position.set(0, 1.0, -1.42); const fk = new Kit(); fk.cyl(0.1, 0.1, 0, -0.05, 0, DK, { n: 8, rx: PI / 2 }); for (let i = 0; i < 6; i++) fk.box(0.1, 0.55, 0.02, 0, 0.3, 0, ST, { rz: i / 6 * PI * 2, r: 0.01 }); fan.add(fk.build()); g.add(fan); spins.push({ o: fan, axis: 'z', per: 14 });
+    for (const s of [-1, 1]) { const w = new T.Group(); w.position.set(s * 0.8, 0.38, -0.4); const m = wheel(0.38, 0.22); if (s < 0) m.rotation.y = PI; w.add(m); g.add(w); wheels.push(w); }
+    return { g, wheels, spins, len: 2.2, r: 0.38 };
+  };
+  M.pruner = () => {
+    const g = new T.Group(), k = new Kit(), spins = [];
+    headstock(k, 0.75); k.box(1.2, 0.2, 0.3, 0, 0.6, 0.4, RED, { r: 0.04 }); k.box(0.4, 0.5, 0.4, -0.4, 0.75, 0.3, DK, { r: 0.05 }); // (the frame, the hydraulic tank)
+    k.box(2.2, 0.14, 0.14, 1.2, 1.3, 0.3, RED, { rz: 0.25, r: 0.03 }); k.cyl(0.05, 1.2, 0.8, 0.8, 0.3, STL, { n: 6, rz: -0.8 }); k.box(0.14, 2.6, 0.14, 2.3, 0.4, 0.3, RED, { r: 0.03 }); // (the side arm, its ram, the cutter mast)
+    g.add(k.build());
+    for (let i = 0; i < 4; i++) { const d = new T.Group(); d.position.set(2.42, 0.7 + i * 0.6, 0.3); const dk = new Kit(); dk.cyl(0.26, 0.03, 0, 0, 0, STL, { n: 16, rz: PI / 2 }); for (let q = 0; q < 12; q++) { const a = q / 12 * PI * 2; dk.box(0.04, 0.06, 0.04, 0.0, Math.cos(a) * 0.26, Math.sin(a) * 0.26, ST); } dk.cyl(0.06, 0.06, -0.03, 0, 0, DK, { n: 8, rz: PI / 2 }); d.add(dk.build()); g.add(d); spins.push({ o: d, axis: 'x', per: 16 }); } // (the saw discs up the mast)
+    return { g, wheels: [], spins, len: 0.9, r: 0.3, mount: true };
+  };
+  M.picker = () => {
+    const g = new T.Group(), k = new Kit(), wheels = [];
+    drawbar(k, 2.0, 0.5); k.box(2.2, 0.14, 3.2, 0, 0.45, -0.7, DK, { r: 0.03 });
+    k.box(2.6, 0.08, 2.4, 0, 1.5, -0.8, '#8a8f98', { r: 0.02 }); for (const [x, z] of [[-1.1, 0.3], [1.1, 0.3], [-1.1, -1.9], [1.1, -1.9]]) k.box(0.1, 1.05, 0.1, x, 0.45, z, YEL); // (the raised deck on its legs)
+    for (const s of [-1, 1]) { k.box(0.05, 0.05, 2.4, s * 1.28, 2.45, -0.8, YEL); for (let i = 0; i < 5; i++) k.box(0.05, 0.9, 0.05, s * 1.28, 1.58, 0.35 - i * 0.58, YEL); } // (its guard rails)
+    for (const s of [-1, 1]) { k.box(1.0, 0.7, 1.0, s * 0.55, 0.53, -1.35, WOOD_BIN, { r: 0.03 }); for (let y = 0.2; y < 0.7; y += 0.2) k.box(1.02, 0.04, 1.02, s * 0.55, 0.53 + y, -1.35, '#8a6038'); for (let q = 0; q < 6; q++) k.ball(0.09, s * 0.55 - 0.3 + (q % 3) * 0.3, 1.2, -1.6 + Math.floor(q / 3) * 0.4, '#e8463e', { n: 6 }); } // (two fruit bins, part filled)
+    for (const s of [-1, 1]) k.box(0.5, 0.05, 1.0, s * 1.55, 1.48, -0.6, '#6b7a8a', { rz: s * 0.25, r: 0.01 }); // (the picking chutes)
+    decal(k, 0, 1.6, 0.42, 0.7, '#ffffff'); lights(k, 2.2, 0.6, -2.32);
+    g.add(k.build());
+    for (const s of [-1, 1]) { const w = new T.Group(); w.position.set(s * 1.25, 0.35, -0.6); const m = wheel(0.35, 0.22); if (s < 0) m.rotation.y = PI; w.add(m); g.add(w); wheels.push(w); }
+    return { g, wheels, spins: [], len: 2.0, r: 0.35 };
+  };
+  M.shaker = () => {
+    const g = new T.Group(), k = new Kit(), wheels = [], spins = [];
+    drawbar(k, 2.0, 0.5); k.box(1.6, 0.14, 2.0, 0, 0.45, -0.5, DK, { r: 0.03 }); k.box(1.0, 0.7, 1.0, 0, 0.6, -0.4, ORG, { r: 0.06 }); k.box(1.05, 0.06, 1.05, 0, 1.3, -0.4, ORGD, { r: 0.02 });
+    k.box(1.8, 0.16, 0.16, 1.2, 0.8, -0.4, ORG, { r: 0.03 }); k.cyl(0.06, 0.9, 1.4, 0.75, -0.15, STL, { n: 6, rz: PI / 2 }); // (the clamp arm reaching out to the side)
+    for (const z of [-0.6, -0.2]) k.box(0.1, 0.4, 0.12, 2.15, 0.6, z, '#2a2d31', { r: 0.04 }); // (the rubber-padded jaws)
+    // the catching frame: an inverted umbrella of net, folded open over the side
+    k.lathe([[0.15, 0], [1.6, 0.45], [1.65, 0.5]], 2.2, 0.3, -0.4, '#3f6fb5', { n: 16 }); for (let i = 0; i < 8; i++) { const a = i / 8 * PI * 2; k.box(1.6, 0.03, 0.03, 2.2 + Math.cos(a) * 0.8, 0.55, -0.4 + Math.sin(a) * 0.8, STD, { ry: -a, rz: 0.27 }); }
+    decal(k, 0, 0.9, 0.11, 0.6, '#ffffff'); lights(k, 1.6, 0.6, -1.52);
+    g.add(k.build());
+    for (const s of [-1, 1]) { const w = new T.Group(); w.position.set(s * 0.95, 0.38, -0.5); const m = wheel(0.38, 0.22); if (s < 0) m.rotation.y = PI; w.add(m); g.add(w); wheels.push(w); }
+    return { g, wheels, spins, len: 2.0, r: 0.38 };
   };
   // the front loader (it rides on the tractor, not the hitch): two booms from the mid-frame down to the tool carrier,
   // the bale spear on it (a long centre tine, two short ones); `lift` (a group) raises and lowers with the arms

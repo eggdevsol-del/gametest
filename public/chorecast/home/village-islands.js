@@ -86,10 +86,38 @@
     }
     // ---------- the Orchard terrace
     const ripe = i => { const O = st('orchard'); O.picked = O.picked || {}; const p = O.picked[i]; return !p || Date.now() - p >= 2 * DAY; };
-    const drawFruit = () => { const B = V().B; if (B.trees) for (const t of B.trees) t.fruit.visible = ripe(t.i); };
+    /* ---------- looking after the trees (phase E): pruned (lasts 14 days), sprayed (5 days), mulched (5 days); each
+       adds one to the next picking, up to three. By hand or by machine (farm.js), the same as the beds. */
+    const care = i => { const O = st('orchard'); O.care = O.care || {}; return O.care[i] || (O.care[i] = {}); };
+    const within = (d, n) => d != null && today() - d < n;
+    const treeBonus = i => { const C = care(i); return Math.min(3, (within(C.pr, 14) ? 1 : 0) + (within(C.sp, 5) ? 1 : 0) + (within(C.mu, 5) ? 1 : 0)); };
+    const drawFruit = () => { const B = V().B; if (B.trees) for (const t of B.trees) { t.fruit.visible = ripe(t.i); if (t.mulch) t.mulch.visible = within(care(t.i).mu, 5); } };
+    const fruitName = k0 => (k0 === 'feijoa' ? 'feijoas' : k0 === 'olive' ? 'olives' : k0 + 's');
+    function picked(i, kind, keep) { const F = FRUIT[kind], n = F.n + treeBonus(i); st('orchard').picked[i] = Date.now(); save(); drawFruit(); if (!keep) { if (F.goods) sh().addGoods(kind, n); else sh().addFood(kind, n); } return n; }
+    // a ladder stood against a tree while it's picked (the packing shed's own, carried out and back)
+    function ladderAt(x, z, yaw) { const k = new IH.kit.Kit(); for (const e of [-0.25, 0.25]) k.box(0.06, 3.1, 0.08, e, 0, 0, '#c9a173', { r: 0.02 }); for (let y = 0.3; y < 3.0; y += 0.32) k.box(0.5, 0.05, 0.06, 0, y, 0, '#b08a5a', { r: 0.02 }); const g = new T.Group(); g.add(k.build()); g.position.set(x, 0, z); g.rotation.set(0, yaw, 0); g.rotateX(-0.28); V().B.root.add(g); return g; }
     function pick(s) {
       if (!ripe(s.i)) return c.toast('Not ripe yet. Fruit comes back every two days.');
-      c.chore(s, 'fetch', 2.6, () => { const F = FRUIT[s.fruit]; st('orchard').picked[s.i] = Date.now(); save(); drawFruit(); if (F.goods) sh().addGoods(s.fruit, F.n); else sh().addFood(s.fruit, F.n); c.float(V().kid, F.e); c.sound('buy'); c.toast(`${F.n} ${s.fruit === 'feijoa' ? 'feijoas' : s.fruit + 's'}! ${F.goods ? 'On your goods shelf.' : 'Into your fridge.'}`); }, null, { tool: 'basket', fx: 'leaves', dist: 1.0, y: 2.6, rate: 6 });
+      // (with a packing shed: the ladder carried out and stood against the tree, the fruit picked into the basket, the
+      // basket carried in to the grading table, then back for the ladder)
+      if (s.hut && c.steps && s.hut.parts.ladder) {
+        const H = s.hut, A = H.at, P = H.parts, tr = { x: s.at[0], z: s.at[1], yaw: s.yaw }; let lad = null;
+        const drop = () => { if (lad) { V().B.root.remove(lad); lad = null; } };
+        return c.steps([{ go: A.ladder }, { take: P.ladder, hold: 'ladder' }, { go: tr }, { run: () => { lad = ladderAt(s.hit[0] + Math.sin(s.yaw + Math.PI) * 0.75, s.hit[1] + Math.cos(s.yaw + Math.PI) * 0.75, s.yaw + Math.PI); } }, { hold: null }, { act: 'place', secs: 0.8 },
+          { act: 'fetch', secs: 1.2, fx: { kind: 'leaves', dist: 0.7, y: 2.4, rate: 6 } }, { act: 'fetch', secs: 1.2, fx: { kind: 'leaves', dist: 0.7, y: 2.6, rate: 6 } }, { act: 'fetch', secs: 1.2, fx: { kind: 'leaves', dist: 0.7, y: 2.3, rate: 6 } }, { hold: 'basketf' },
+          { run: () => { const n = picked(s.i, s.fruit); c.float(V().kid, FRUIT[s.fruit].e); c.sound('buy'); c.toast(`${n} ${fruitName(s.fruit)}${treeBonus(s.i) ? ` (${treeBonus(s.i)} more for looking after the tree)` : ''}! ${FRUIT[s.fruit].goods ? 'On your goods shelf.' : 'Into your fridge.'}`); } },
+          { go: A.grade }, { act: 'place', secs: 1.0 }, { hold: null }, { go: tr }, { run: drop }, { hold: 'ladder' }, { go: A.ladder }, { put: P.ladder }],
+        { name: 'Picking', cancel: drop });
+      }
+      c.chore(s, 'fetch', 2.6, () => { const F = FRUIT[s.fruit], n = picked(s.i, s.fruit); c.float(V().kid, F.e); c.sound('buy'); c.toast(`${n} ${fruitName(s.fruit)}! ${F.goods ? 'On your goods shelf.' : 'Into your fridge.'}`); }, null, { tool: 'basket', fx: 'leaves', dist: 1.0, y: 2.6, rate: 6 });
+    }
+    // pruning by hand: the secateurs from the packing shed, the tree shaped (twigs fly), the secateurs hung back
+    function prune(s) {
+      if (within(care(s.i).pr, 14)) return c.toast('Pruned already. Prune it again in a couple of weeks.');
+      const apply = () => { care(s.i).pr = today(); save(); c.sound('pop'); c.toast('Pruned: more fruit next picking. ✂️'); };
+      const H = s.hut, P = H && H.parts.secateurs;
+      if (!P || !c.steps) return c.chore(s, 'chop', 3, apply, null, { tool: 'shears', fx: 'leaves', dist: 0.8, y: 2.0, rate: 10 });
+      c.steps([{ go: H.at.secateurs }, { take: P, hold: 'shears' }, { go: { x: s.at[0], z: s.at[1], yaw: s.yaw } }, { act: 'chop', secs: 1.8, fx: { kind: 'leaves', dist: 0.8, y: 2.1, rate: 10 } }, { act: 'chop', secs: 1.8, fx: { kind: 'leaves', dist: 0.8, y: 1.7, rate: 10 } }, { run: apply }, { go: H.at.secateurs }, { put: P }], { name: 'Pruning' });
     }
     function honey(s) {
       const O = st('orchard'), last = O.honey || 0; if (last && Date.now() - last < 3 * DAY) return c.toast('The bees are still making it. Honey every three days.');
@@ -165,6 +193,13 @@
     }
 
     // the field machines (farm.js): straight onto the beds, no watering can, no walking
+    // the orchard machines (farm.js): straight onto the trees
+    IH.orchardOps = {
+      work(i, job) { const C = care(i); const k0 = { prune: 'pr', spray: 'sp', mulch: 'mu' }[job]; if (!k0 || within(C[k0], k0 === 'pr' ? 14 : 5)) return false; C[k0] = today(); save(); return true; },
+      lift(i, kind, ok) { if (!ripe(i) || (ok && !ok(kind))) return null; return { id: kind, n: picked(i, kind, true) }; }, // (into the machine's bins: stored when they're unloaded)
+      store(id, n) { const F = FRUIT[id]; if (!F) return; if (F.goods) sh().addGoods(id, n); else sh().addFood(id, n); },
+      ready: i => ripe(i), redraw: () => drawFruit(), name: k0 => fruitName(k0), e: k0 => (FRUIT[k0] || {}).e
+    };
     IH.bedOps = {
       crops: f => Object.keys(CROPS).filter(id => !CROPS[id].special || ((f || {}).specials || {})[CROPS[id].special]),
       label: id => `${CROPS[id].e} ${CROPS[id].name[0].toUpperCase() + CROPS[id].name.slice(1)}`, name: id => CROPS[id].name, seedCost: id => CROPS[id].seed,
@@ -219,7 +254,7 @@
       tank: s => [{ e: '🚿', label: V().can ? `Watering can full (${V().can} beds)` : 'Fill the watering can', run: () => c.chore(s, 'fetch', 2, () => { V().can = 6; c.float(V().kid, '💧'); c.toast('Watering can full! Enough for six beds.'); }, null, { tool: 'can', fx: 'drops', dist: 0.6, y: 0.9, rate: 18 }) }],
       bed: s => { const b = bedState(s.i), g = bedStage(b), hand = Object.entries(HAND).filter(([, H0]) => H0.ok(b)).map(([k, H0]) => ({ e: H0.e, label: H0.label, run: () => byHand(s, k) })); return g < 0 ? [{ e: '🌱', label: 'Plant something', run: () => seedPanel(s.i) }, ...hand] : g === 3 ? [{ e: CROPS[b.crop].e, label: `Pick the ${CROPS[b.crop].name}${bonusOf(b) > 0 ? ` (+${bonusOf(b)})` : ''}`, run: () => harvest(s) }] : [{ e: '💧', label: (b.watered || []).includes(today()) ? 'Watered today ✓' : `Water the ${CROPS[b.crop].name}`, run: () => water(s) }, ...hand]; },
       // the Orchard terrace
-      fruittree: s => [{ e: FRUIT[s.fruit].e, label: ripe(s.i) ? `Pick the ${s.fruit === 'feijoa' ? 'feijoas' : s.fruit + 's'}` : 'Not ripe yet', run: () => pick(s) }],
+      fruittree: s => [{ e: FRUIT[s.fruit].e, label: ripe(s.i) ? `Pick the ${fruitName(s.fruit)}${treeBonus(s.i) ? ` (+${treeBonus(s.i)})` : ''}` : 'Not ripe yet', run: () => pick(s) }, ...(within(care(s.i).pr, 14) ? [] : [{ e: '✂️', label: 'Prune it', run: () => prune(s) }])],
       hives: s => [{ e: '🍯', label: 'Collect the honey', run: () => honey(s) }],
       press: s => [{ e: '🫙', label: 'Make jam from three fruit', run: () => jam(s) }],
       // the Stable yard
