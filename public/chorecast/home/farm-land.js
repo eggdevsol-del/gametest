@@ -45,7 +45,9 @@
 
   // ---------- building it, into the farm's kit (k), its root, its solids and spots
   function build(f, k, root, solid, spots) {
-    const out = { lawns: [], paths: [], meadows: [], beds: [], trees: [], drawBed: null, rects: rects(f) }, list = owned(f), RR = rng(9090);
+    const out = { lawns: [], paths: [], meadows: [], beds: [], trees: [], drawBed: null, rects: rects(f), walkins: [] }, list = owned(f), RR = rng(9090);
+    // a walk-in building (farm-buildings.js): its model, its walls and what's inside as solids, its places to tap
+    const FB = IH.farmBuildings, walkIn = Bw => { root.add(Bw.group); for (const r of Bw.solids) solid(...r); for (const sp of Bw.spots) spots.push(sp); out.walkins.push(Bw); return Bw; };
     const wall = (type, x0, z0, x1, z1, gate) => {
       // an axis-aligned run from (x0, z0) to (x1, z1), an 8 m opening at `gate` along it
       const alongX = z0 === z1, a = alongX ? x0 : z0, b = alongX ? x1 : z1, runs = gate == null ? [[a, b]] : [[a, gate - 4], [gate + 4, b]];
@@ -90,7 +92,7 @@
           spots.push({ kind: 'bed', id: id('b' + i), i, name: 'the raised bed', at: [x, z + 2.6], yaw: Math.PI, hit: [x, z, 0, 4.4] }); i++;
         }
         { const [x, z] = L(9, 49); k.cyl(1.1, 2.2, x, 0, z, '#8f9aa8', { n: 14 }); k.cyl(1.15, 0.2, x, 2.2, z, '#7a8592', { n: 14 }); solid(x - 1.2, z - 1.2, x + 1.2, z + 1.2); spots.push({ kind: 'tank', id: id('tank'), name: 'the water tank', at: [x, z + 2], yaw: Math.PI, hit: [x, z, 0, 2.6] }); }
-        { const [x, z] = L(43, 49); IB.more.shed(k, x, z, 0, '#7a9a6a', '#a5523f'); solid(x - 2, z - 1.5, x + 2, z + 1.5); spots.push({ kind: 'seedshed', id: id('seeds'), name: 'the seed shed', at: [x, z + 3], yaw: Math.PI, hit: [x, z, 0, 4] }); }
+        { const [x, z] = L(43, 49); if (FB) { const hut = walkIn(FB.seedShed({ x, z, id: id('seeds') })); for (const sp of spots) if (sp.kind === 'bed' && !sp.hut && sp.i >= (blk.base || 0) && sp.i < i) sp.hut = hut; } else { IB.more.shed(k, x, z, 0, '#7a9a6a', '#a5523f'); solid(x - 2, z - 1.5, x + 2, z + 1.5); spots.push({ kind: 'seedshed', id: id('seeds'), name: 'the seed shed', at: [x, z + 3], yaw: Math.PI, hit: [x, z, 0, 4] }); } }
         out.drawBed = (bi, crop, stage) => { const b = out.beds[bi]; if (!b) return; while (b.g.children.length) b.g.remove(b.g.children[0]); if (!crop) return; const kk = new Kit(); IB.more.cropBed(kk, crop, stage); b.g.add(kk.build()); };
       } else if (blk.type === 'orchard') {
         // twelve trees in three rows (apples, lemons, feijoas), each with its fruit (shown when it's ripe); a packing shed; two beehives
@@ -101,19 +103,19 @@
           const fruit = fk.build(); fruit.position.set(x, 0, z); root.add(fruit); out.trees.push({ kind, x, z, fruit, i });
           spots.push({ kind: 'fruittree', id: id('t' + i), i, fruit: kind, name: `the ${kind} tree`, at: [x, z + 1.9], yaw: Math.PI, hit: [x, z, 0, 3] }); i++;
         }
-        { const [x, z] = L(44, 52); IB.more.shed(k, x, z, 0, '#c9b28a', '#7a6a5a'); solid(x - 2, z - 1.5, x + 2, z + 1.5); spots.push({ kind: 'press', id: id('press'), name: 'the packing shed', at: [x, z + 3], yaw: Math.PI, hit: [x, z, 0, 4] }); }
-        hives(L(7, 52), 2);
+        let hut = null; { const [x, z] = L(44, 52); if (FB) { hut = walkIn(FB.packShed({ x, z, id: id('press') })); const sp = spots[spots.length - 1]; if (sp && sp.kind === 'press') sp.hut = hut; } else { IB.more.shed(k, x, z, 0, '#c9b28a', '#7a6a5a'); solid(x - 2, z - 1.5, x + 2, z + 1.5); spots.push({ kind: 'press', id: id('press'), name: 'the packing shed', at: [x, z + 3], yaw: Math.PI, hit: [x, z, 0, 4] }); } }
+        hives(L(7, 52), 2, hut);
       } else if (blk.type === 'pasture') {
         // (its paddock is one of the farm's paddocks, added when it was bought: fences, gate and animals as any other)
       } else if (blk.type === 'meadow') {
         const m = [x0 + 4, z0 + 4, x1 - 4, z1 - 4]; out.paths.push(m); out.meadows.push({ rect: m, blk });
       } else if (blk.type === 'bees') {
         for (let q = 0; q < 70; q++) { const lx = 4 + R() * 44, lz = 4 + R() * 52; if (Math.abs(lx - 26) < 5 || Math.abs(lz - 30) < 5 || (lx < 22 && lz > 46)) continue; const [x, z] = L(lx, lz); k.ball(0.22 + R() * 0.12, x, 0.18, z, ['#ff8fb1', '#ffd34f', '#b59cff', '#ffffff', '#ff9a5a'][q % 5], { n: 6 }); k.cone(0.08, 0.35, x, 0, z, '#5fae4a', { n: 3 }); }
-        hives(L(8, 52), 4);
+        { const [x, z] = L(19.5, 51); hives(L(8, 52), 4, FB ? walkIn(FB.honeyHouse({ x, z })) : null); }
       }
-      function hives([hx, hz], nH) {
+      function hives([hx, hz], nH, hut) {
         for (let q = 0; q < nH; q++) { const x = hx + q * 2.4; k.at(x, 0, hz, 0, kk => { bx(kk, 1.4, 0.3, 1.4, 0, 0, 0, '#8a6038'); for (let j = 0; j < 3; j++) bx(kk, 1.3, 0.45, 1.3, 0, 0.3 + j * 0.47, 0, j % 2 ? '#ffd35a' : '#f2c14a', { r: 0.04 }); bx(kk, 1.5, 0.15, 1.5, 0, 1.75, 0, '#c9a173'); }); solid(x - 0.8, hz - 0.8, x + 0.8, hz + 0.8); }
-        spots.push({ kind: 'hives', id: id('hives'), name: 'the beehives', at: [hx + (nH - 1) * 1.2, hz + 2.2], yaw: Math.PI, hit: [hx + (nH - 1) * 1.2, hz, 0, nH * 2.4] });
+        spots.push({ kind: 'hives', id: id('hives'), name: 'the beehives', at: [hx + (nH - 1) * 1.2, hz + 2.2], yaw: Math.PI, hit: [hx + (nH - 1) * 1.2, hz, 0, nH * 2.4], hut });
       }
     });
     return out;

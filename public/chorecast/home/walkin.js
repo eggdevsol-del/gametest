@@ -132,7 +132,7 @@
 
     // ---- a lamp for after dark (lit with the evening, like the village's lamps)
     const lamp = new T.PointLight('#ffd9a0', 0, 9, 1.6); lamp.position.set(0, H - 0.4, 0); group.add(lamp);
-    { const k = new K(); for (const z of [-d / 4, d / 4]) { k.cyl(0.015, 0.6, 0, H - 0.6, z, '#3d4048', { n: 4 }); k.cone(0.26, 0.18, 0, H - 0.78, z, '#3d4048', { n: 12 }); k.ball(0.09, 0, H - 0.8, z, '#fff3c8', { n: 8, emit: 0.9 }); } group.add(k.build()); }
+    { const k = new K(); for (const z of [-d / 4, d / 4]) { const dy = H < 3 ? 0.25 : 0.6; k.cyl(0.015, dy, 0, H - dy, z, '#3d4048', { n: 4 }); k.cone(0.26, 0.18, 0, H - dy - 0.18, z, '#3d4048', { n: 12 }); k.ball(0.09, 0, H - dy - 0.2, z, '#fff3c8', { n: 8, emit: 0.9 }); } group.add(k.build()); }
 
     // ---- the walls as solids (the doorways open)
     const iT = 0.04;

@@ -147,10 +147,15 @@
   function stable(st) {
     const W = 48, D = 40, R = rng(1811), k = base(W, D, R), [sol, solid] = solids(), spots = [], root = new T.Group(), animals = [];
     bx(k, 4, 0.05, D - 1, 24, 0.02, D / 2, '#b89668', { r: 0.02 }); // the track
+    // the stable (walk-in: farm-buildings.js): loose boxes, the cross-ties, the tack room with its counter
+    const stableW = IH.farmBuildings ? IH.farmBuildings.stable({ x: 12, z: 5 }) : null;
+    if (stableW) { root.add(stableW.group); for (const r of stableW.solids) solid(...r); for (const sp of stableW.spots) spots.push(sp); }
+    else {
     k.at(12, 0, 5, 0, kk => { bx(kk, 18, 3.2, 6, 0, 0, 0, '#a8673f', { r: 0.05 }); for (const s of [-1, 1]) bx(kk, 9.6, 0.25, 7, s * 4.5, 3.6, 0, '#5a4a4a', { rz: s * -0.3 }); for (let i = 0; i < 5; i++) { bx(kk, 2.6, 1.4, 0.15, -6.4 + i * 3.2, 0, 3.05, '#7a4a2a'); bx(kk, 0.15, 3.2, 0.2, -8 + i * 3.2, 0, 3.08, '#f4ecdc'); } });
-    board(k, 'stable', 'STABLES & TACK', 'horses · ponies · tack', '#fff6e0', '#7a4a2a', 4, 0.9, 12, 3.6, 8.15); solid(3, 2, 21, 8.2);
-    spots.push({ kind: 'tack', id: 'tack', name: 'the tack room', at: [18, 9.6], yaw: Math.PI, hit: [18, 8.2, 0, 3] });
-    spots.push({ kind: 'groom', id: 'groom', name: 'the grooming post', at: [8, 9.8], yaw: Math.PI, hit: [8, 8.2, 0, 3] });
+      board(k, 'stable', 'STABLES & TACK', 'horses · ponies · tack', '#fff6e0', '#7a4a2a', 4, 0.9, 12, 3.6, 8.15); solid(3, 2, 21, 8.2);
+      spots.push({ kind: 'tack', id: 'tack', name: 'the tack room', at: [18, 9.6], yaw: Math.PI, hit: [18, 8.2, 0, 3] });
+      spots.push({ kind: 'groom', id: 'groom', name: 'the grooming post', at: [8, 9.8], yaw: Math.PI, hit: [8, 8.2, 0, 3] });
+    }
     k.at(36, 0, 5, 0, kk => { bx(kk, 8, 0.2, 5, 0, 0, 0, '#9a8a6a'); for (const [x, z] of [[-3.8, -2.3], [3.8, -2.3], [-3.8, 2.3], [3.8, 2.3]]) kk.cyl(0.15, 4, x, 0, z, '#6b4a33', { n: 5 }); kk.box(8.6, 0.25, 5.6, 0, 4, 0, '#7a6a5a'); for (let i = 0; i < 8; i++) kk.box(1.8, 0.9, 1.2, -2.8 + (i % 4) * 1.9, 0.2 + Math.floor(i / 4) * 0.9, -0.5, '#e8c45a', { r: 0.08 }); }); solid(31.6, 2.3, 40.4, 7.7);
     spots.push({ kind: 'hay', id: 'hay', name: 'the hay barn', at: [36, 9.2], yaw: Math.PI, hit: [36, 5, 0, 5] });
     // the arena: a sand oval, its rail, a gate; horses ride round it
@@ -175,7 +180,7 @@
     }
     root.add(k.build()); hits(root, spots); for (const a of animals) root.add(a.group);
     const walk = (x, z) => ((x - A.x) / (A.rx + 1.2)) ** 2 + ((z - A.z) / (A.rz + 1.2)) ** 2 > 1; // (into the paddock through its gate; the arena is for riding)
-    return { gates, id: 'stable', title: 'Stable yard', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids: sol, pond: null, bridges: [], spots, buildings: [], arrive: [24, 3.4], lawns: [[0, 0, W, D]], paths: [[22, 0.4, 26, 39.6]], bare: (x, z) => ((x - A.x) / (A.rx + 0.9)) ** 2 + ((z - A.z) / (A.rz + 0.9)) ** 2 < 1, walk, animals, pens: { horse: [A.x - A.rx + 1.5, A.z - A.rz + 1.5, A.x + A.rx - 1.5, A.z + A.rz - 1.5], pony: [A.x - A.rx + 1.5, A.z - A.rz + 1.5, A.x + A.rx - 1.5, A.z + A.rz - 1.5], donkey: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1], merino: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1], kunekune: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1] }, arena: A, npc: 0, centre: [24, 20], growth: 0.5, state: st };
+    return { walkins: stableW ? [stableW] : [], stableW, gates, id: 'stable', title: 'Stable yard', sub: 'Utility island · tap the signpost to travel', kind: 'utility', root, lits: stableW ? [stableW.lamp] : [], bounds: { x0: 0, z0: 0, x1: W, z1: D }, solids: sol, pond: null, bridges: [], spots, buildings: [], arrive: [24, 3.4], lawns: [[0, 0, W, D]], paths: [[22, 0.4, 26, 39.6]], bare: (x, z) => ((x - A.x) / (A.rx + 0.9)) ** 2 + ((z - A.z) / (A.rz + 0.9)) ** 2 < 1 || (stableW && x > 3 && x < 21 && z > 1.5 && z < 8.5), walk, animals, pens: { horse: [A.x - A.rx + 1.5, A.z - A.rz + 1.5, A.x + A.rx - 1.5, A.z + A.rz - 1.5], pony: [A.x - A.rx + 1.5, A.z - A.rz + 1.5, A.x + A.rx - 1.5, A.z + A.rz - 1.5], donkey: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1], merino: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1], kunekune: [P[0] + 1, P[1] + 1, P[2] - 1, P[3] - 1] }, arena: A, npc: 0, centre: [24, 20], growth: 0.5, state: st };
   }
 
   /* ---------- the Lake: a big freshwater lake in a grassy bowl, a jetty, a boatshed with kayaks, reeds, willows,

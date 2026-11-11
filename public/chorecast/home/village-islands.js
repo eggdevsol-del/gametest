@@ -29,7 +29,19 @@
         cards: Object.entries(CROPS).filter(([, C]) => !C.special || ((sh().farm() || {}).specials || {})[C.special]).map(([id, C]) => ({ e: C.e, name: C.name[0].toUpperCase() + C.name.slice(1), sub: `${C.days} days · ${C.n} to pick`, tag: sh().cardPrice(C.seed), attrs: `data-v="isl" data-k="plant:${i}:${id}"` })) });
     }
     function plant(i, id) {
-      const C = CROPS[id]; if (!C || !sh().farmPay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); save();
+      const C = CROPS[id]; if (!C) return; const sp = V().B.spots.find(q => q.kind === 'bed' && q.i === i);
+      // (a field block's seed shed: a tray filled at the potting bench, carried out, the seeds put in with the trowel and
+      // firmed down, the empty tray taken back; the seeds are paid for when they go in)
+      if (sp && sp.hut && c.steps) {
+        if (sh().farmAcct().bal + sh().wallet().left < C.seed) return c.toast(`You need ✨ ${C.seed} for the seeds.`);
+        document.querySelector('.vg-game').hidden = true; c.closeTray(); const H = sp.hut, A = H.at;
+        c.steps([{ go: A.bench }, { act: 'fetch', secs: 1.3, fx: { kind: 'soil', dist: 0.55, y: 0.95, rate: 8 } }, { take: H.parts.tray, hold: 'tray' }, { go: { x: sp.at[0], z: sp.at[1], yaw: sp.yaw } },
+          { act: 'fetch', secs: 1.6, tool: 'trowel', fx: { kind: 'soil', dist: 0.6, y: 0.75, rate: 10 } }, { act: 'pat', secs: 1.3 },
+          { run: () => { if (!sh().farmPay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); save(); drawBeds(); c.sound('place'); c.xp(); c.toast(`${C.name[0].toUpperCase() + C.name.slice(1)} planted! Water them every day.`); } },
+          { go: A.bench }, { put: H.parts.tray }], { name: 'Planting' });
+        return;
+      }
+      if (!sh().farmPay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); save();
       const s = V().B.spots.find(q => q.kind === 'bed' && q.i === i); document.querySelector('.vg-game').hidden = true; c.closeTray();
       c.chore(s, 'fetch', 2.4, () => { drawBeds(); c.toast(`${C.name[0].toUpperCase() + C.name.slice(1)} planted! Water them every day.`); c.sound('place'); }, null, { tool: 'trowel', fx: 'soil', dist: 0.7, y: 0.75, rate: 9 }); c.xp();
     }
@@ -51,10 +63,31 @@
     }
     function honey(s) {
       const O = st('orchard'), last = O.honey || 0; if (last && Date.now() - last < 3 * DAY) return c.toast('The bees are still making it. Honey every three days.');
+      // (with a honey house or a packing shed: the smoker lit, the bees calmed, a frame lifted out and carried in,
+      // uncapped, spun in the extractor, the honey run off into jars and shelved)
+      if (s.hut && c.steps) {
+        const H = s.hut, A = H.at, P = H.parts, reel = P.reel;
+        c.steps([P.smoker ? { go: A.smoker } : null, P.smoker ? { take: P.smoker, hold: 'smoker' } : { hold: 'smoker' }, { act: 'fetch', secs: 1.0, fx: { kind: 'smoke', dist: 0.4, y: 1.1, rate: 6 } },
+          { go: { x: s.at[0], z: s.at[1], yaw: s.yaw } }, { act: 'water', secs: 2.2, fx: { kind: 'smoke', dist: 0.9, y: 1.2, rate: 10 } }, { act: 'fetch', secs: 1.4, fx: { kind: 'sparkle', dist: 0.7, y: 1.4, rate: 4 } }, { hold: 'frame' },
+          { go: A.uncap || A.bench }, { act: 'chop', secs: 1.8 }, { hold: null }, { go: A.reel }, { run: () => { if (reel && c.tween) c.tween(reel, 'y', reel.rotation.y + Math.PI * 14, 3.0); } }, { act: 'stir', secs: 3.0, sound: 'pat' },
+          { act: 'place', secs: 1.4, tool: 'jar' }, { go: A.jars }, { act: 'place', secs: 1.0, tool: 'jar' },
+          { run: () => { O.honey = Date.now(); save(); sh().addFood('honey', 2); c.float(V().kid, '🍯'); c.sound('buy'); c.toast('Two jars of honey, spun and on the shelf, and into your pantry! 🐝'); } },
+          P.smoker ? { go: A.smoker } : null, P.smoker ? { put: P.smoker } : { hold: null }], { name: 'Getting the honey' });
+        return;
+      }
       c.chore(s, 'fetch', 3, () => { O.honey = Date.now(); save(); sh().addFood('honey', 2); c.float(V().kid, '🍯'); c.sound('buy'); c.toast('Two jars of honey into your pantry! 🐝'); }, null, { tool: 'jar', fx: 'smoke', dist: 1.1, y: 1.4, rate: 6 });
     }
     function jam(s) {
       const g = sh().goods(), f = sh().food ? sh().food() : {}, have = (g.lemon || 0) + (g.feijoa || 0) + (f.apple || 0); if (have < 3) return c.toast('You need three fruit to make jam (apples, lemons or feijoas).');
+      // (the packing shed: fruit from the grading table, washed at the sink, chopped on the bench, cooked down in the pot
+      // on the stove, ladled into jars and shelved; the fruit's used when it goes in the pot)
+      if (s.hut && c.steps) {
+        const H = s.hut, A = H.at;
+        c.steps([{ go: A.grade }, { act: 'fetch', secs: 1.2 }, { hold: 'basketf' }, { go: A.sink }, { act: 'dishes', secs: 1.8, fx: { kind: 'splash', dist: 0.55, y: 0.85, rate: 10 } }, { go: A.bench }, { act: 'chop', secs: 2.2 }, { hold: null },
+          { go: A.stove }, { run: () => { let need = 3; for (const k of ['feijoa', 'lemon']) while (need && sh().useGoods(k)) need--; while (need && sh().useFood('apple')) need--; } }, { act: 'stir', secs: 3.4, fx: { kind: 'steam', dist: 0.5, y: 1.15, rate: 5 } }, { act: 'place', secs: 1.4, tool: 'jar' },
+          { go: A.jars }, { act: 'place', secs: 1.0, tool: 'jar' }, { run: () => { sh().addGoods('jam'); c.float(V().kid, '🫙'); c.sound('buy'); c.toast('A jar of jam, on the shelf and on your goods shelf at home! The grocer pays ✨ 85 for it.'); } }], { name: 'Making jam' });
+        return;
+      }
       c.chore(s, 'stir', 4, () => { let need = 3; for (const k of ['feijoa', 'lemon']) while (need && sh().useGoods(k)) need--; while (need && sh().useFood('apple')) need--; sh().addGoods('jam'); c.float(V().kid, '🫙'); c.sound('buy'); c.toast('A jar of jam! The grocer pays ✨ 85 for it.'); }, null, { fx: 'steam', dist: 0.7, y: 1.2, rate: 5 });
     }
     // ---------- the Stable yard
@@ -111,6 +144,29 @@
       plough(i) { const b = bedState(i); if (b.crop || b.plough) return false; b.plough = 1; save(); return true; },
       redraw: () => drawBeds()
     };
+    /* ---------- the stable (walk-in): grooming a horse at the cross-ties (the brush from the tack room, the horse led
+       in from the arena, brushed down, its feet picked out, led back), mucking out the boxes (the fork, the straw) */
+    function groomSeries(s) {
+      const B = V().B, Bw = B.stableW; if (!Bw || !c.steps) return false;
+      if (sh().dailyLeft('groom', 1) <= 0) { c.toast('They’re shining already. Groom them again tomorrow.'); return true; }
+      const h = B.animals.find(a => a.kind === 'horse') || B.animals.find(a => a.kind === 'pony'), ar = B.spots.find(q => q.kind === 'arena'); if (!h || !ar) return false;
+      const A = Bw.at, P = Bw.parts, gate = { x: ar.at[0], z: ar.at[1], yaw: ar.yaw };
+      const lead = () => { h.follow = 1; h.hold = null; h.st = null; }, free = () => { h.follow = 0; h.hold = null; h.st = null; };
+      c.steps([{ go: A.brush }, { take: P.brush, hold: 'brush' }, { go: gate }, { act: 'pat', secs: 1.2, then: lead }, { go: A.door }, { go: A.groom }, { run: () => { h.follow = 0; h.hold = A.ties; } }, { until: () => Math.hypot(h.group.position.x - A.ties.x, h.group.position.z - A.ties.z) < 0.3, max: 10 }, { wait: 0.4 },
+        { act: 'pat', secs: 2.6, fx: { kind: 'dust', dist: 0.8, y: 1.1, rate: 8 } }, { act: 'fetch', secs: 1.2 }, { act: 'pat', secs: 1.4, fx: { kind: 'sparkle', dist: 0.8, y: 1.3, rate: 5 } },
+        { run: lead }, { go: A.door }, { go: gate }, { run: free }, { wait: 0.6 }, { go: A.brush }, { put: P.brush },
+        { run: () => { if (!sh().daily('groom', 1)) return; sh().xp(5); sh().relax({ fun: 8 }); c.xp(); c.float(V().kid, '✨'); c.toast('Brushed, hooves picked out, gleaming! ✨ +5 XP'); } }],
+      { name: 'Grooming', cancel: free });
+      return true;
+    }
+    function muckOut(s) {
+      const Bw = V().B.stableW; if (sh().dailyLeft('muck', 1) <= 0) return c.toast('The boxes are clean. Muck out again tomorrow.');
+      if (!Bw || !c.steps) return c.chore(s, 'fetch', 3, () => { if (sh().daily('muck', 1)) { sh().xp(5); c.xp(); c.toast('Fresh straw down! ✨ +5 XP'); } }, null, { tool: 'fork', fx: 'straw', dist: 0.8, y: 0.3, rate: 12 });
+      const A = Bw.at, P = Bw.parts, L = [{ go: A.fork }, { take: P.fork, hold: 'fork' }];
+      for (const b of A.boxes) L.push({ go: b }, { act: 'fetch', secs: 1.6, fx: { kind: 'straw', dist: 0.9, y: 0.3, rate: 12 } }, { act: 'fetch', secs: 1.3, fx: { kind: 'straw', dist: 0.9, y: 0.3, rate: 12 } });
+      L.push({ go: A.fork }, { put: P.fork }, { run: () => { if (!sh().daily('muck', 1)) return; sh().xp(5); sh().relax({ fun: 4 }); c.xp(); c.toast('All four boxes mucked out, fresh straw down! ✨ +5 XP'); } });
+      c.steps(L, { name: 'Mucking out' });
+    }
     const acts = {
       // the Veggie plot
       seedshed: () => [{ e: '🌱', label: 'Seeds: pick a bed to plant', run: () => c.toast('Tap an empty bed to plant it. Seeds are paid for there.') }],
@@ -121,8 +177,9 @@
       hives: s => [{ e: '🍯', label: 'Collect the honey', run: () => honey(s) }],
       press: s => [{ e: '🫙', label: 'Make jam from three fruit', run: () => jam(s) }],
       // the Stable yard
-      tack: () => [{ e: '🐴', label: 'Stables & tack shop', run: () => tackShop() }],
-      groom: s => [{ e: '🪮', label: 'Groom the horses', run: () => { if (!sh().daily('groom', 1)) return c.toast('They’re shining already. Groom them again tomorrow.'); c.chore(s, 'pat', 3, () => { sh().xp(5); sh().relax({ fun: 8 }); c.xp(); c.float(V().kid, '✨'); c.toast('Brushed and gleaming! ✨ +5 XP'); }, null, { tool: 'brush', fx: 'dust', dist: 0.7, y: 1.1, rate: 7 }); } }],
+      tack: s => [{ e: '🐴', label: 'Stables & tack shop', run: () => (V().B.stableW ? c.walkTo(s.at[0], s.at[1], ok => ok && tackShop(), s.yaw) : tackShop()) }],
+      muck: s => [{ e: '🧹', label: sh().dailyLeft('muck', 1) > 0 ? 'Muck out the boxes' : 'Mucked out today ✓', run: () => muckOut(s) }],
+      groom: s => [{ e: '🪮', label: 'Groom the horses', run: () => { if (groomSeries(s)) return; if (!sh().daily('groom', 1)) return c.toast('They’re shining already. Groom them again tomorrow.'); c.chore(s, 'pat', 3, () => { sh().xp(5); sh().relax({ fun: 8 }); c.xp(); c.float(V().kid, '✨'); c.toast('Brushed and gleaming! ✨ +5 XP'); }, null, { tool: 'brush', fx: 'dust', dist: 0.7, y: 1.1, rate: 7 }); } }],
       hay: s => [{ e: '🌾', label: (stab().fed || 0) === today() ? 'Fed today ✓' : 'Feed everyone hay', run: () => { const S = stab(); if (S.fed === today()) return c.toast('They’re full. Feed them again tomorrow.'); c.chore(s, 'feed', 2.6, () => { S.fed = today(); save(); for (const a of V().B.animals) c.float({ pos: a.group.position }, '❤️'); c.toast('Everyone’s fed! 🌾'); }, null, { tool: 'fork', fx: 'hay', dist: 0.9, y: 0.4, rate: 14 }); } }],
       strough: s => [{ e: '💧', label: 'Top up the water trough', run: () => c.chore(s, 'water', 2.4, () => { sh().relax({ fun: 4 }); c.toast('Fresh water for everyone.'); }, null, { tool: 'can', fx: 'drops', at: 'hand', rate: 22, delay: 0.6 }) }],
       sshear: s => [{ e: '🧶', label: 'Shear the sheep', run: () => stableCollect(s, 'merino', 'wool', 2, '🧶') }],

@@ -180,7 +180,7 @@
     if (V.mark) { V.mark.visible = k.path.length > 0; V.mark.rotation.y += dt * 2; }
   }
   function walkTo(x, z, then, face) {
-    if (V.job && !V.inStep) V.job.stop('tap'); // (somewhere else: a task series in hand stops cleanly)
+    if (V.job && !V.inStep) { askStop(() => walkTo(x, z, then, face)); return true; } // (a tap somewhere else mid-task: ask first, it may be an accident)
     const k = V.kid; k.face = face == null ? null : face; k.pose = null;
     if (!go(k, [x, z], ok => { if (ok && face != null) k.face = face; if (then) then(ok); })) { toast('Can’t get there from here.'); return false; }
     const end = k.path[k.path.length - 1]; if (V.mark) V.mark.position.set(end[0], V.grid.ground(end[0], end[1]) + 0.04, end[1]);
@@ -634,6 +634,8 @@
       if (a === 'spick') { const it = V.mineList && V.mineList[+b.dataset.i], P = V.picked; if (!it || !P) return; const i = P.sel.findIndex(q => q.t === it.t && q.n === it.n); if (i >= 0) P.sel.splice(i, 1); else if (P.sel.length < 4) P.sel.push(it); sound('tap'); return stallPick(P.s); }
       if (a === 'sopen') return stallOpen();
       if (a === 'gclose') { $('.vg-game', V.ui).hidden = true; closeTray(); V.picked = null; if (V.fishing) fishEnd(false, 'You packed up your rod.'); if (V.trade) { NET().send({ t: 'no', id: V.trade.id }, true); V.trade = null; } return; }
+      if (a === 'stopyes') { hideActs(); const g = V.askGo; V.askGo = null; if (V.job) V.job.stop('tap'); if (g) g(); return; }
+      if (a === 'stopno') { hideActs(); V.askGo = null; return; }
       if (a === 'act') { const f = V.acts && V.acts[+b.dataset.i]; hideActs(); if (f) { sound('tap'); f.run(); } }
     }
     stage.root.appendChild(V.ui); netStart(); if (ISL && ISL.prep) ISL.prep(); if (FARM && FARM.prep) FARM.prep();
@@ -707,9 +709,16 @@
        { run: fn } { say } { toast } { wait: secs }                                                              */
   function tween(o, key, to, secs) { const L = (V.tweens = V.tweens || []); for (let i = L.length - 1; i >= 0; i--) if (L[i].o === o && L[i].key === key) L.splice(i, 1); L.push({ o, key, a: o.rotation[key], b: to, t0: V.t, dur: Math.max(0.01, secs) }); }
   function tweensTick() { const L = V.tweens; if (!L) return; for (let i = L.length - 1; i >= 0; i--) { const q = L[i], u = Math.min(1, (V.t - q.t0) / q.dur), e = u * u * (3 - 2 * u); q.o.rotation[q.key] = q.a + (q.b - q.a) * e; if (u >= 1) L.splice(i, 1); } }
+  // a tap that would stop a task in the middle: ask first (an accident shouldn't throw away a half-done job). Yes stops
+  // it cleanly (things back where they live) and does what was tapped; No carries on.
+  function askStop(go) {
+    const el = $('.ih-acts', V.ui), r = V.ui.getBoundingClientRect(); V.askGo = go; V.acts = null;
+    el.innerHTML = `<b>Stop what you’re doing?</b><small>${esc(V.job && V.job.name ? V.job.name : 'Your job')} isn’t finished yet.</small><button data-v="stopno"><span>▶️</span>No, keep going</button><button data-v="stopyes"><span>⏹️</span>Yes, stop</button>`;
+    el.hidden = false; const w = el.offsetWidth, h = el.offsetHeight; el.style.left = (r.width - w) / 2 + 'px'; el.style.top = Math.max(70, r.height - h - 110) + 'px'; sound('pop');
+  }
   function steps(list, o = {}) {
-    if (!V) return null; if (V.job) V.job.stop('new');
-    const k = V.kid, job = { list: list.filter(Boolean), undo: new Map(), timer: 0, done: false, held: null };
+    if (!V) return null; if (V.job && !o.force) { askStop(() => steps(list, Object.assign({}, o, { force: true }))); return null; } if (V.job) V.job.stop('new');
+    const k = V.kid, job = { list: list.filter(Boolean), undo: new Map(), timer: 0, done: false, held: null, name: o.name || '' };
     V.job = job; hideActs();
     const setHold = n => { job.held = n; if (k.inst) k.inst.holding = n; };
     job.stop = why => {
@@ -729,6 +738,7 @@
         else { p.visible = true; job.undo.delete(id); setHold(null); }
         sound('pat'); return later(0.25, next);
       }
+      if (s.spin) { const p = s.spin, secs = s.secs || 2; tween(p, 'y', p.rotation.y + (s.turns || 4) * Math.PI * 2, secs); return later(secs, () => { p.rotation.y %= Math.PI * 2; next(); }); }
       if (s.open || s.close) {
         const p = s.open || s.close, r0 = rest(p), key = s.rx != null ? 'x' : s.ry != null ? 'y' : 'z', id = 'open:' + p.uuid, secs = s.secs || 0.5;
         if (s.open) { tween(p, key, r0[key] + (s.rx != null ? s.rx : s.ry != null ? s.ry : s.rz), secs); job.undo.set(id, () => { for (const q of ['x', 'y', 'z']) tween(p, q, r0[q], 0.4); }); sound('pat'); }
@@ -740,6 +750,7 @@
       if (s.say) { say(k, s.say); return next(); }
       if (s.toast) { toast(s.toast); return next(); }
       if (s.wait) return later(s.wait, next);
+      if (s.until) { const t0 = V.t, poll = () => { if (s.until() || V.t - t0 > (s.max || 8)) next(); else later(0.2, poll); }; return poll(); } // (wait for something: an animal to reach the stand)
       if (s.act) {
         const was = job.held; k.pose = s.act; V.busyJob = true; if (s.tool !== undefined) setHold(s.tool); if (s.sound) sound(s.sound);
         if (s.fx) V.emit.push({ kind: s.fx.kind, at: s.fx.at || 'front', dist: s.fx.dist, y: s.fx.y, rate: s.fx.rate || 14, from: V.t + (s.fx.delay != null ? s.fx.delay : 0.3), until: V.t + s.secs - 0.15 });
@@ -882,6 +893,16 @@
       if (a.kind === 'dolphin') { const cyc = 11, u = ((t + 3) % cyc) / 2.2; if (u < 1) { const x = a.home[0] - 6 + ((Math.floor((t + 3) / cyc) % 3) * 6), y = -1.0 + Math.sin(u * Math.PI) * 2.4; P.set(x + u * 6, y, a.home[1]); g.rotation.set(0, Math.PI / 2, 0); g.rotateX(-Math.cos(u * Math.PI) * 0.9); g.visible = y > -0.45; } else g.visible = false; continue; }
       a.st = a.st || { mode: 'idle', until: 0, to: null, cool: 0 }; const S = a.st;
       const speed = { hen: 1.5, rooster: 1.4, duck: 1.1, goose: 1.1, turkey: 1.0, goat: 1.0, cow: 0.55, highland: 0.5, merino: 0.8, kunekune: 0.8, alpaca: 0.9, llama: 0.9, donkey: 0.8, horse: 1.1, pony: 1.0, crab: 1.4, gull: 0.6, weka: 1.2 }[a.kind] || 0.8;
+      // asked to stand somewhere (on the milking stand, the shearing board, at the cross-ties): it walks straight there,
+      // turns the way it's wanted, and stays (up on the stand's deck when it's on it)
+      if (a.hold && !a.follow) {
+        const H = a.hold, dx = H.x - P.x, dz = H.z - P.z, d = Math.hypot(dx, dz); let dist = 0;
+        const want = d > 0.12 ? Math.atan2(dx, dz) : H.yaw != null ? H.yaw : g.rotation.y; g.rotation.y += Math.atan2(Math.sin(want - g.rotation.y), Math.cos(want - g.rotation.y)) * Math.min(1, dt * 4);
+        if (d > 0.12) { dist = Math.min(d, speed * dt); P.x += dx / d * dist; P.z += dz / d * dist; }
+        const gy = V.grid.ground(P.x, P.z); P.y += ((H.y != null && d < 0.9 ? gy + H.y : gy) - P.y) * Math.min(1, dt * 6);
+        const sw = dist ? Math.sin(t * 9) * 0.5 : 0; (a.legs || []).forEach((l, i) => { l.rotation.x = (i % 2 ? 1 : -1) * (i > 1 ? -1 : 1) * sw; });
+        if (a.d3 && IH.animals3d) IH.animals3d.move(a, t, dist ? 'walk' : 'stand', dist, null); continue;
+      }
       // led by the kid (the farm's mustering): along the kid's way, a little apart from each other
       if (a.follow) {
         const [tx, tz] = trailAt(1.4 + a.follow * 1.5), dx = tx - P.x, dz = tz - P.z, d = Math.hypot(dx, dz); let dist = 0;
