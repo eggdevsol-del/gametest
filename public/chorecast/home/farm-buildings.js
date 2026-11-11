@@ -356,5 +356,46 @@
     B.lamp.intensity = 1.6; return B;
   }
 
-  IH.farmBuildings = { barn, bale, milkShed, shearShed, seedShed, packShed, honeyHouse, stable };
+  /* ---------- the machinery shed (phase F): three open bays across the front where the machines are parked (farm.js
+     sets them in, `bays`), a fuel tank in its bund, oil drums, a tyre stack, a workbench and a rack for the loader's
+     tools. The tractor drives up to it to change what's on the hitch or the front loader. */
+  function machShed(o) {
+    const w = 14, d = 7, H = 4.2, ix = w / 2 - 0.16, iz = d / 2 - 0.16;
+    const B = IH.walkin.build({
+      x: o.x, z: o.z, ry: o.ry || 0, w, d, h: H, rise: 1.5, clad: 'iron',
+      col: { wall: '#6a8a6e', lip: '#5a7a5e', lining: '#c9c4bb', trim: '#e8e2d4', roof: '#8a8f98', rib: '#757a83', floor: '#b4aea4', floor2: '#a49e94' },
+      doors: [{ side: 'f', at: -4.55, w: 4.1, h: 3.7 }, { side: 'f', at: 0, w: 4.1, h: 3.7 }, { side: 'f', at: 4.55, w: 4.1, h: 3.7 }],
+      windows: [{ side: 'b', at: -3, w: 1.4, h: 0.6, y: 2.8 }, { side: 'b', at: 3, w: 1.4, h: 0.6, y: 2.8 }],
+      wallDeco(k, sd, top) { if (sd === 'f' && top >= H) board(k, 'machshed', 'MACHINERY SHED', '', '#fff6e0', '#3d5a40', 2.6, 0.4, 0, 3.95, d / 2 + 0.03); },
+      fit(k, api) {
+        // bay lines painted on the floor
+        for (const x of [-2.275, 2.275]) k.box(0.08, 0.005, d - 0.6, x, 0.06, 0, '#f2d45a');
+        // the fuel tank in its bund (back left), a hose and nozzle on its hook
+        k.box(1.6, 0.25, 1.1, -ix + 0.9, 0, -iz + 0.65, '#a9a49a', { r: 0.02 }); k.cyl(0.42, 1.3, -ix + 0.9, 0.25 + 0.42 - 0.65, -iz + 0.65, '#d8433a', { n: 16, rz: PI / 2 }); k.box(0.2, 0.3, 0.2, -ix + 0.9, 1.05, -iz + 0.65, DARK, { r: 0.03 }); k.cyl(0.03, 0.9, -ix + 1.6, 0.4, -iz + 0.65, '#2a2d31', { n: 6 }); k.box(0.12, 0.2, 0.06, -ix + 1.6, 1.1, -iz + 0.7, STEEL_D, { r: 0.02 });
+        api.solid(-ix, -iz, -ix + 1.75, -iz + 1.25);
+        // oil drums and a tyre stack (back middle)
+        for (let i = 0; i < 3; i++) { k.cyl(0.3, 0.88, -1.6 + i * 0.65, 0, -iz + 0.4, ['#3f6fb5', '#d8433a', '#3f6fb5'][i], { n: 14 }); k.cyl(0.31, 0.04, -1.6 + i * 0.65, 0.3, -iz + 0.4, '#2a2d31', { n: 14 }); }
+        for (let i = 0; i < 4; i++) { k.cyl(0.45, 0.28, 0.9, i * 0.29, -iz + 0.55, '#2a2d31', { n: 16 }); k.cyl(0.25, 0.3, 0.9, i * 0.29 - 0.01, -iz + 0.55, '#3d4048', { n: 12 }); }
+        api.solid(-1.95, -iz, 1.4, -iz + 1.05);
+        // the workbench and tool chest (back right)
+        k.box(2.0, 0.06, 0.7, ix - 1.1, 0.9, -iz + 0.4, WOOD_L, { r: 0.02 }); for (const xx of [ix - 2.0, ix - 0.2]) for (const zz of [-iz + 0.12, -iz + 0.68]) k.box(0.07, 0.9, 0.07, xx, 0, zz, WOOD_D);
+        k.box(0.6, 0.9, 0.5, ix - 2.6, 0, -iz + 0.3, '#d8433a', { r: 0.03 }); for (let i = 0; i < 4; i++) k.box(0.58, 0.02, 0.01, ix - 2.6, 0.2 + i * 0.2, -iz + 0.56, '#2a2d31'); k.box(0.3, 0.2, 0.2, ix - 1.4, 0.96, -iz + 0.4, '#3f6fb5', { r: 0.03 });
+        k.box(1.8, 0.8, 0.04, ix - 1.1, 1.3, -iz + 0.02, '#c99a62', { r: 0.01 }); for (let i = 0; i < 5; i++) k.box(0.05, 0.3 + (i % 2) * 0.1, 0.03, ix - 1.8 + i * 0.3, 1.5, -iz + 0.06, STEEL_D);
+        api.solid(ix - 2.95, -iz, ix, -iz + 0.85);
+        // the loader-tool rack (right wall): the bale spear and the bucket stood on it (shown, they're in the shed)
+        k.box(0.08, 0.08, 2.4, ix - 0.04, 0.9, 0.6, DARK); for (const zz of [-0.4, 1.6]) k.box(0.6, 1.0, 0.08, ix - 0.3, 0, zz, DARK);
+        api.part('rack_spear', ix - 0.45, 0.6, 1.2, -PI / 2, kk => { kk.box(1.0, 0.45, 0.08, 0, 0, 0, DARK, { r: 0.03 }); kk.cyl(0.035, 1.1, 0, 0.2 - 0.55, 0.55, STEEL_L, { n: 6, rx: PI / 2 }); });
+        api.part('rack_bucket', ix - 0.6, 0.0, -0.1, -PI / 2, kk => { kk.box(1.6, 0.08, 0.8, 0, 0, 0.4, DARK, { r: 0.02 }); kk.box(1.6, 0.6, 0.08, 0, 0, 0, DARK, { r: 0.02 }); for (const e of [-1, 1]) kk.box(0.06, 0.5, 0.8, e * 0.78, 0, 0.4, DARK, { r: 0.02 }); });
+        api.solid(ix - 1.05, -0.9, ix, 2.0);
+        api.spot({ kind: 'machshed', id: 'machshed', name: 'the machinery shed', at: [0, d / 2 + 1.6], yaw: PI, hit: [0, 0, 0, 4] });
+      }
+    });
+    const at = (lx, lz, yaw) => { const p = B.toW(lx, lz); return { x: p[0], z: p[1], yaw: B.yawW(yaw) }; };
+    // the six places a machine is parked (two to a bay, nose out), and where the tractor stands to change over
+    B.bays = []; for (const bx of [-4.55, 0, 4.55]) for (const bz of [-0.9, 1.9]) B.bays.push(at(bx, bz, 0));
+    B.at = { front: at(0, d / 2 + 4.5, PI), door: at(0, d / 2 + 1.6, PI) };
+    B.lamp.intensity = 1.4; return B;
+  }
+
+  IH.farmBuildings = { barn, bale, milkShed, shearShed, seedShed, packShed, honeyHouse, stable, machShed };
 })();
