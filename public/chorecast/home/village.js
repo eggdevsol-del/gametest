@@ -82,7 +82,7 @@
   // ---------- the scene
   function scene(B) {
     const sc = new T.Scene(), sun = new T.DirectionalLight(0xffffff, 1);
-    sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.018; sun.shadow.radius = 1;
+    sun.castShadow = true; sun.shadow.mapSize.setScalar(IH.lite ? 1024 : 2048); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.018; sun.shadow.radius = 1;
     sc.add(sun, sun.target);
     const lamps = []; for (let i = 0; i < 4; i++) { const p = new T.PointLight(0xffc77a, 0, 5.2, 2); sc.add(p); lamps.push(p); } // (the same lights as a home, so its shaders are the same)
     const cam = new T.OrthographicCamera(-10, 10, 10, -10, 1, 1400);
@@ -506,7 +506,10 @@
     if (V.follow) { const k = V.kid.pos; CAM.target.x += (k.x - CAM.target.x) * Math.min(1, dt * 3); CAM.target.z += (k.z - CAM.target.z) * Math.min(1, dt * 3); CAM.target.y += (1 + k.y - CAM.target.y) * Math.min(1, dt * 3); }
     LK.WATER_U.uT.value = tt; V.stage.pipe.u.uT.value = tt; if (V.lawn && V.B === V.street) IH.lawnKit.tick(V.lawn, tt, CAM.zoom);
     light(); aim();
-    V.stage.pipe.render(V.S.sc, V.S.cam);
+    // Draw only when there's something new to show: a beat of the scene (24 a second, or fewer on twos), or the view
+    // moving. A 120 Hz iPad was drawing the whole farm 120 times a second for 24 new pictures.
+    const [vw, vh] = V.stage.dims(), cs = [CAM.target.x, CAM.target.y, CAM.target.z, CAM.yaw, CAM.zoom, CAM.pitch, vw, vh].map(v => v.toFixed(4)).join();
+    if (b !== null || cs !== V.camSig || V.redraw) { V.camSig = cs; V.redraw = false; V.stage.pipe.render(V.S.sc, V.S.cam); }
     bubbles(); tags();
   }
 

@@ -237,7 +237,7 @@
   // ---------- the scene
   function makeScene() {
     const scene = new T.Scene();
-    const sun = new T.DirectionalLight(0xffffff, 1); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.018; sun.shadow.radius = 1; // (sharp enough for a picket fence's shadow)
+    const sun = new T.DirectionalLight(0xffffff, 1); sun.castShadow = true; sun.shadow.mapSize.setScalar(IH.lite ? 1024 : 2048); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.018; sun.shadow.radius = 1; // (sharp enough for a picket fence's shadow)
     scene.add(sun, sun.target);
     const lamps = []; for (let i = 0; i < 4; i++) { const p = new T.PointLight(0xffc77a, 0, 5.2, 2); scene.add(p); lamps.push(p); }
     const cam = new T.OrthographicCamera(-10, 10, 10, -10, 1, 1400); // (far enough for the city and the mountains round the home)
@@ -550,7 +550,7 @@
     // Real blades only where their shape shows: thick along the lawn's edges (the island's rim, paths, the house) and
     // a light scatter over the rest for tufts and movement. The body of the lawn is the shells (below).
     const lawnSet = new Set(cells.map(c => key(c.x, c.z))), edge = c => [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([a, b]) => !lawnSet.has(key(c.x + a, c.z + b)));
-    const per = c => spec.per(edge(c)), n = cells.reduce((a, c) => a + per(c), 0), mesh = new T.InstancedMesh(appBlade(), new T.ShaderMaterial({ uniforms: U, vertexShader: LAWN_V, fragmentShader: LAWN_F, side: T.DoubleSide, lights: true }), n); mesh.receiveShadow = true;
+    const per = c => Math.round(spec.per(edge(c)) * (IH.lite ? 0.5 : 1)), n = cells.reduce((a, c) => a + per(c), 0), mesh = new T.InstancedMesh(appBlade(), new T.ShaderMaterial({ uniforms: U, vertexShader: LAWN_V, fragmentShader: LAWN_F, side: T.DoubleSide, lights: true }), n); mesh.receiveShadow = true;
     const d = new T.Object3D(), col = new T.Color(), spots = [], byCell = new Map(), cut = new Float32Array(n);
     let i = 0;
     for (const c of cells) for (let k = 0, m = per(c); k < m; k++) {
@@ -576,7 +576,7 @@
   // tip like the app's blades. Its cost is the lawn's area on screen, not the number of blades, so it can be very
   // dense. The layers sit closer together when the grass is short, so a fresh-cut lawn is just as full.
   // A lawn map (8 points a tile) says where there's lawn (b), where it's mown (r) and where something stands on it (g).
-  const SHELLS = 24, MAP_RES = 8;
+  const SHELLS = IH.lite ? 12 : 24, MAP_RES = 8; // (half the grass layers on a phone or iPad: each one paints the whole lawn)
   function makeShells(spec, cells, U) {
     const { x0, z0, W, D } = spec, mw = W * MAP_RES, mh = D * MAP_RES, data = new Uint8Array(mw * mh * 4);
     for (let i = 1; i < data.length; i += 4) data[i] = 255; // (g: how high grass can grow here, 255 = as high as it likes)
@@ -1048,7 +1048,7 @@
     const b = beat.beat(now); let sb = null;
     if (b !== null || force) { const bt = b === null ? tt : b; sb = { t: bt, dt: sceneT == null ? 0 : clamp(bt - sceneT, 0, 0.25) }; sceneT = bt; }
     force = false;
-    const p0 = performance.now(); step(tt, dt, sb); const pa = performance.now(); aim(); (O.prof3 = O.prof3 || {}).aim = (O.prof3.aim || 0) + (performance.now() - pa - (O.prof3.aim || 0)) * 0.1; const p1 = performance.now(); pipe.render(O.S.scene, O.S.cam); const p2 = performance.now();
+    const p0 = performance.now(); step(tt, dt, sb); const pa = performance.now(); aim(); (O.prof3 = O.prof3 || {}).aim = (O.prof3.aim || 0) + (performance.now() - pa - (O.prof3.aim || 0)) * 0.1; const p1 = performance.now(); { const c = O.S.cam, e = c.matrixWorld.elements, cs = e.map(v => v.toFixed(4)).join() + c.left + c.right + c.top + O.w + 'x' + O.h; if (sb || cs !== O.camSig || O.held) { O.camSig = cs; pipe.render(O.S.scene, O.S.cam); } } const p2 = performance.now(); // (drawn on the beat, or when the view moves or something's being dragged: not 120 times a second for 24 new pictures)
     const PR = O.prof || (O.prof = { step: 0, render: 0 }); PR.step += (p1 - p0 - PR.step) * 0.1; PR.render += (p2 - p1 - PR.render) * 0.1; // (a running average, for checking speed)
     O.frames = (O.frames || 0) + 1;
   }
@@ -3121,7 +3121,7 @@
       const v = window.visualViewport; r = v ? { width: v.width, height: v.height } : { width: innerWidth, height: innerHeight };
       Object.assign(O.root.style, v ? { left: v.offsetLeft + 'px', top: v.offsetTop + 'px', width: v.width + 'px', height: v.height + 'px', right: 'auto', bottom: 'auto' } : {});
     } else r = O.mount.getBoundingClientRect();
-    O.w = Math.max(1, r.width); O.h = Math.max(1, r.height); const dpr = Math.min(devicePixelRatio || 1, 2);
+    O.w = Math.max(1, r.width); O.h = Math.max(1, r.height); const dpr = Math.min(devicePixelRatio || 1, IH.lite ? 1.5 : 2);
     R.setPixelRatio(dpr); R.setSize(O.w, O.h, false); O.cv.style.width = O.w + 'px'; O.cv.style.height = O.h + 'px'; pipe.setSize(O.w, O.h, dpr);
     if (O.home) fit(); force = true;
   }

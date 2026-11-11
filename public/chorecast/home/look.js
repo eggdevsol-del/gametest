@@ -14,6 +14,11 @@
   const T = window.THREE, IH = window.IsoHome = window.IsoHome || {};
   if (!T) return;
   const col = h => new T.Color(h);
+  // Phones and iPads (a touch screen): a lighter farm and village, so they keep up. Fewer grass blades and grass layers,
+  // a smaller shadow map and at most 1.5 pixels a point. ?lite=1 or ?lite=0 on the address tries it either way.
+  IH.lite = (() => {
+    try { const q = new URLSearchParams(location.search).get('lite'); if (q === '1' || q === '0') return q === '1'; return matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 1; } catch (e) { return false; }
+  })();
 
   // Times of day. lit/shade multiply the base colour; sky/ground tint faces by which way they point.
   const PHASES = {
