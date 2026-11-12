@@ -342,6 +342,10 @@ body.ih-open{overflow:hidden}
 .ih-stray .ih-cards{min-height:178px;padding-top:8px}
 .ih-ce{width:82px;height:82px;display:flex;align-items:center;justify-content:center;font-size:50px;line-height:1;flex:none}
 .ih-card small{font-size:11px;font-weight:700;color:var(--ink2);text-align:center;line-height:1.15;max-height:26px;overflow:hidden}
+/* the farm shop's machine cards (farm-why.js): wider, every line shown, the before and after as a little strip */
+.ih-card:has(.ih-mw){width:176px}.ih-card:has(.ih-mw) .ih-ce{width:44px;height:44px;font-size:32px}.ih-card:has(.ih-mw) b{min-height:0}.ih-card small:has(.ih-mw){max-height:none;overflow:visible}
+.ih-mwb{display:block;margin:2px 0 4px;padding:3px 6px;border-radius:9px;background:rgba(123,224,140,.28);color:var(--ink);font-weight:800}
+.ih-mwp{display:block;margin-top:3px;color:#3f7f35;font-weight:800}.ih-mwl{display:block;margin-top:4px;color:var(--ink);font-weight:800}
 .ih-card.on{outline:3px solid #7be08c;outline-offset:-3px;background:#eafbe9}
 .ih-card:disabled{cursor:default}.ih-card.locked .ih-ce{filter:grayscale(.75) opacity(.6)}
 @media (max-width:600px){.ih-trh .ih-qty span{display:none}.ih-trh .ih-qty button{min-width:34px;padding:6px 7px}.ih-ce{width:76px;height:76px;font-size:44px}.ih-trh > b{font-size:15px}}

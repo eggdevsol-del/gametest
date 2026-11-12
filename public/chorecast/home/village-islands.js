@@ -16,6 +16,8 @@
 
   IH.villageIslands = c => {
     const V = () => c.V, sh = () => c.V.stage.shop, st = id => sh().isl(id), save = () => sh().farmSave();
+    // (a job done by hand, counted on the farm: enough of one unlocks the machine that does it, farm-why.js)
+    const cnt = key => { const f = sh().farm && sh().farm(); if (f && IH.farmWhy) { IH.farmWhy.count(f, key, c.toast); save(); } };
     // a look at something: walk there, a while, then the words (and, the first time, a find in a book)
     const look = (s, secs, words, gives, emo, book, fxo) => c.chore(s, 'look', secs, () => {
       if (gives) sh().relax(gives); if (emo) c.float(V().kid, emo); c.sound('pop');
@@ -50,22 +52,22 @@
         document.querySelector('.vg-game').hidden = true; c.closeTray(); const H = sp.hut, A = H.at;
         c.steps([{ go: A.bench }, { act: 'fetch', secs: 1.3, fx: { kind: 'soil', dist: 0.55, y: 0.95, rate: 8 } }, { take: H.parts.tray, hold: 'tray' }, { go: { x: sp.at[0], z: sp.at[1], yaw: sp.yaw } },
           { act: 'fetch', secs: 1.6, tool: 'trowel', fx: { kind: 'soil', dist: 0.6, y: 0.75, rate: 10 } }, { act: 'pat', secs: 1.3 },
-          { run: () => { if (!sh().farmPay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); save(); drawBeds(); c.sound('place'); c.xp(); c.toast(`${C.name[0].toUpperCase() + C.name.slice(1)} planted! Water them every day.`); } },
+          { run: () => { if (!sh().farmPay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); cnt('plant'); save(); drawBeds(); c.sound('place'); c.xp(); c.toast(`${C.name[0].toUpperCase() + C.name.slice(1)} planted! Water them every day.`); } },
           { go: A.bench }, { put: H.parts.tray }], { name: 'Planting' });
         return;
       }
-      if (!sh().farmPay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); save();
+      if (!sh().farmPay(C.seed, 'the seeds')) return; const b = bedState(i); Object.assign(b, { crop: id, planted: today(), watered: [] }); cnt('plant'); save();
       const s = V().B.spots.find(q => q.kind === 'bed' && q.i === i); document.querySelector('.vg-game').hidden = true; c.closeTray();
       c.chore(s, 'fetch', 2.4, () => { drawBeds(); c.toast(`${C.name[0].toUpperCase() + C.name.slice(1)} planted! Water them every day.`); c.sound('place'); }, null, { tool: 'trowel', fx: 'soil', dist: 0.7, y: 0.75, rate: 9 }); c.xp();
     }
     function water(s) {
       const b = bedState(s.i); if ((b.watered || []).includes(today())) return c.toast('Already watered today. Come back tomorrow.');
       if (!V().can) return c.toast('Your watering can’s empty. Fill it at the water tank.');
-      c.chore(s, 'water', 2.4, () => { V().can -= 1; (b.watered = b.watered || []).push(today()); save(); drawBeds(); c.float(V().kid, '💧'); c.sound('pop'); c.toast(bedStage(b) === 3 ? 'Ready to pick!' : `Watered. ${CROPS[b.crop].days - b.watered.length} more day${CROPS[b.crop].days - b.watered.length === 1 ? '' : 's'} of watering.`); }, null, { tool: 'can', fx: 'drops', at: 'hand', rate: 22, delay: 0.6 });
+      c.chore(s, 'water', 2.4, () => { V().can -= 1; (b.watered = b.watered || []).push(today()); cnt('water'); save(); drawBeds(); c.float(V().kid, '💧'); c.sound('pop'); c.toast(bedStage(b) === 3 ? 'Ready to pick!' : `Watered. ${CROPS[b.crop].days - b.watered.length} more day${CROPS[b.crop].days - b.watered.length === 1 ? '' : 's'} of watering.`); }, null, { tool: 'can', fx: 'drops', at: 'hand', rate: 22, delay: 0.6 });
     }
     function harvest(s) {
       const b = bedState(s.i), C = CROPS[b.crop], n = yieldOf(b), extra = n - C.n;
-      c.chore(s, 'fetch', 2.6, () => { if (C.goods) sh().addGoods(b.crop, n); else sh().addFood(b.crop, n); cleared(b); save(); drawBeds(); c.float(V().kid, C.e); c.sound('buy'); c.toast(`${n} ${C.name}${extra > 0 ? ` (${extra} more for the work you put into the soil)` : extra < 0 ? ' (the weeds took some)' : ''}! ${C.goods ? 'On your goods shelf: sell them at the grocer.' : 'Into your fridge at home.'}`); }, null, { tool: 'basket', fx: 'soil', dist: 0.7, y: 0.75, rate: 8 });
+      c.chore(s, 'fetch', 2.6, () => { if (C.goods) sh().addGoods(b.crop, n); else sh().addFood(b.crop, n); cleared(b); cnt('harvest'); save(); drawBeds(); c.float(V().kid, C.e); c.sound('buy'); c.toast(`${n} ${C.name}${extra > 0 ? ` (${extra} more for the work you put into the soil)` : extra < 0 ? ' (the weeds took some)' : ''}! ${C.goods ? 'On your goods shelf: sell them at the grocer.' : 'Into your fridge at home.'}`); }, null, { tool: 'basket', fx: 'soil', dist: 0.7, y: 0.75, rate: 8 });
     }
     /* ---------- the bed by hand (the seed shed's tools): dig it over with the spade, rake it fine, hoe the weeds,
        spread compost from the sack; each tool off the rack, to the bed and worked, then back on the rack. The
@@ -79,7 +81,7 @@
     function byHand(s, what) {
       const H0 = HAND[what], b = bedState(s.i); if (!H0.ok(b)) return;
       const go = { x: s.at[0], z: s.at[1], yaw: s.yaw }, work = H0.secs.map((t, q) => ({ act: what === 'compost' ? 'feed' : 'fetch', secs: t, fx: { kind: H0.fx, dist: 0.8, y: 0.75, rate: q ? 12 : 9 } }));
-      const apply = () => { if (H0.xp && !sh().farmPay(H0.xp, 'compost')) return; H0.did(bedState(s.i)); save(); drawBeds(); c.sound('pop'); c.toast(H0.says); };
+      const apply = () => { if (H0.xp && !sh().farmPay(H0.xp, 'compost')) return; H0.did(bedState(s.i)); cnt(what); save(); drawBeds(); c.sound('pop'); c.toast(H0.says); };
       const hut = s.hut, P = hut && hut.parts[H0.part];
       if (hut && P && c.steps) return c.steps([{ go: hut.at.rack || hut.at.bench }, { take: P, hold: H0.tool }, { go }, ...work, { run: apply }, { go: hut.at.rack || hut.at.bench }, { put: P }], { name: H0.label.replace(/ ·.*/, '') });
       c.chore(s, work[0].act, 3, apply, null, { tool: H0.tool, fx: H0.fx, dist: 0.8, y: 0.75, rate: 10 });
@@ -105,16 +107,16 @@
         const drop = () => { if (lad) { V().B.root.remove(lad); lad = null; } };
         return c.steps([{ go: A.ladder }, { take: P.ladder, hold: 'ladder' }, { go: tr }, { run: () => { lad = ladderAt(s.hit[0] + Math.sin(s.yaw + Math.PI) * 0.75, s.hit[1] + Math.cos(s.yaw + Math.PI) * 0.75, s.yaw + Math.PI); } }, { hold: null }, { act: 'place', secs: 0.8 },
           { act: 'fetch', secs: 1.2, fx: { kind: 'leaves', dist: 0.7, y: 2.4, rate: 6 } }, { act: 'fetch', secs: 1.2, fx: { kind: 'leaves', dist: 0.7, y: 2.6, rate: 6 } }, { act: 'fetch', secs: 1.2, fx: { kind: 'leaves', dist: 0.7, y: 2.3, rate: 6 } }, { hold: 'basketf' },
-          { run: () => { const n = picked(s.i, s.fruit); c.float(V().kid, FRUIT[s.fruit].e); c.sound('buy'); c.toast(`${n} ${fruitName(s.fruit)}${treeBonus(s.i) ? ` (${treeBonus(s.i)} more for looking after the tree)` : ''}! ${FRUIT[s.fruit].goods ? 'On your goods shelf.' : 'Into your fridge.'}`); } },
+          { run: () => { const n = picked(s.i, s.fruit); cnt('pick'); c.float(V().kid, FRUIT[s.fruit].e); c.sound('buy'); c.toast(`${n} ${fruitName(s.fruit)}${treeBonus(s.i) ? ` (${treeBonus(s.i)} more for looking after the tree)` : ''}! ${FRUIT[s.fruit].goods ? 'On your goods shelf.' : 'Into your fridge.'}`); } },
           { go: A.grade }, { act: 'place', secs: 1.0 }, { hold: null }, { go: tr }, { run: drop }, { hold: 'ladder' }, { go: A.ladder }, { put: P.ladder }],
         { name: 'Picking', cancel: drop });
       }
-      c.chore(s, 'fetch', 2.6, () => { const F = FRUIT[s.fruit], n = picked(s.i, s.fruit); c.float(V().kid, F.e); c.sound('buy'); c.toast(`${n} ${fruitName(s.fruit)}! ${F.goods ? 'On your goods shelf.' : 'Into your fridge.'}`); }, null, { tool: 'basket', fx: 'leaves', dist: 1.0, y: 2.6, rate: 6 });
+      c.chore(s, 'fetch', 2.6, () => { const F = FRUIT[s.fruit], n = picked(s.i, s.fruit); cnt('pick'); c.float(V().kid, F.e); c.sound('buy'); c.toast(`${n} ${fruitName(s.fruit)}! ${F.goods ? 'On your goods shelf.' : 'Into your fridge.'}`); }, null, { tool: 'basket', fx: 'leaves', dist: 1.0, y: 2.6, rate: 6 });
     }
     // pruning by hand: the secateurs from the packing shed, the tree shaped (twigs fly), the secateurs hung back
     function prune(s) {
       if (within(care(s.i).pr, 14)) return c.toast('Pruned already. Prune it again in a couple of weeks.');
-      const apply = () => { care(s.i).pr = today(); save(); c.sound('pop'); c.toast('Pruned: more fruit next picking. ✂️'); };
+      const apply = () => { care(s.i).pr = today(); cnt('prune'); save(); c.sound('pop'); c.toast('Pruned: more fruit next picking. ✂️'); };
       const H = s.hut, P = H && H.parts.secateurs;
       if (!P || !c.steps) return c.chore(s, 'chop', 3, apply, null, { tool: 'shears', fx: 'leaves', dist: 0.8, y: 2.0, rate: 10 });
       c.steps([{ go: H.at.secateurs }, { take: P, hold: 'shears' }, { go: { x: s.at[0], z: s.at[1], yaw: s.yaw } }, { act: 'chop', secs: 1.8, fx: { kind: 'leaves', dist: 0.8, y: 2.1, rate: 10 } }, { act: 'chop', secs: 1.8, fx: { kind: 'leaves', dist: 0.8, y: 1.7, rate: 10 } }, { run: apply }, { go: H.at.secateurs }, { put: P }], { name: 'Pruning' });
@@ -222,7 +224,7 @@
       // the harvesters: a ready bed's crop into the hopper (the bed's cleared); { id, n } or null
       lift(i, ok) { const b = bedState(i); if (!b.crop || bedStage(b) !== 3 || (ok && !ok(b.crop))) return null; const id = b.crop, n = yieldOf(b); cleared(b); save(); return { id, n }; },
       store(id, n) { const C = CROPS[id]; if (!C) return; if (C.goods) sh().addGoods(id, n); else sh().addFood(id, n); },
-      crop: id => CROPS[id], weedy: i => weedy(bedState(i)), ready: i => { const b = bedState(i); return !!b.crop && bedStage(b) === 3; },
+      crop: id => CROPS[id], weedy: i => weedy(bedState(i)), bonus: i => bonusOf(bedState(i)), // (the extra the next pick gets: what a machine adds is the change) ready: i => { const b = bedState(i); return !!b.crop && bedStage(b) === 3; },
       redraw: () => drawBeds()
     };
     /* ---------- the stable (walk-in): grooming a horse at the cross-ties (the brush from the tack room, the horse led
