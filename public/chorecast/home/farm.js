@@ -917,7 +917,9 @@
       const MQ = meadowOf(); if (MEADOW_JOBS[kind] && meadowFor(MQ, kind) < 0.04) return c.toast({ mower: 'There’s no long grass left to cut here. It grows back in a couple of days.', tedder: 'Nothing cut to ted. Mow the meadow first.', rake: 'Nothing to rake. Mow (and ted) the meadow first.', baler: 'Nothing left to bale here. It grows back in a couple of days.', loaderwagon: 'No windrows to pick up. Rake the meadow first.' }[kind]);
       if (kind === 'wrapper' && !v.B.bales.some(b => b.rec.kind === 'wet')) return c.toast('No green bales to wrap. Bale wet grass (raked straight after mowing) to make some.');
       if (kind === 'trailer' && !v.B.bales.length && !DR.imp.load.length) return c.toast('No bales to bring in. Bale the meadow first.');
-      AP = { job: kind, legs: FJ || (MEADOW_JOBS[kind] ? balerJob(MQ.rect, kind) : [{ t: 'collect' }]), leg: null, home: { x: TRACTOR_HOME.x, z: TRACTOR_HOME.z, yaw: TRACTOR_HOME.ry }, G: TP().grid(v.B.solids, v.B.bounds.x1 - v.B.bounds.x0, v.B.bounds.z1 - v.B.bounds.z0, DR.veh.solid, 0.6, { x0: v.B.bounds.x0, z0: v.B.bounds.z0, land: v.B.onLand }), skip: new Set(), tried: new Map(), pickup: false, stuck: 0 };
+      // (Auto's map counts each whole paddock as solid: it never drives in among the animals, or squeezes the tractor
+      // between a gate's posts)
+      AP = { job: kind, legs: FJ || (MEADOW_JOBS[kind] ? balerJob(MQ.rect, kind) : [{ t: 'collect' }]), leg: null, home: { x: TRACTOR_HOME.x, z: TRACTOR_HOME.z, yaw: TRACTOR_HOME.ry }, G: TP().grid(v.B.solids.concat(F().paddocks.map(p => [p.x0 - 0.3, p.z0 - 0.3, p.x1 + 0.3, p.z1 + 0.3])), v.B.bounds.x1 - v.B.bounds.x0, v.B.bounds.z1 - v.B.bounds.z0, DR.veh.solid, 0.6, { x0: v.B.bounds.x0, z0: v.B.bounds.z0, land: v.B.onLand }), skip: new Set(), tried: new Map(), pickup: false, stuck: 0 };
       const b = DR.el.querySelector('.vg-dr-auto'); if (b) { b.classList.add('on'); b.textContent = '🤖 Stop'; }
       c.toast(MEADOW_JOBS[kind] ? `Auto: watch them ${{ mower: 'mow', tedder: 'ted', rake: 'rake', baler: 'bale', loaderwagon: 'load up' }[kind]} the meadow! Push the joystick to take over.` : kind === 'wrapper' ? 'Auto: watch them wrap the green bales! Push the joystick to take over.' : 'Auto: watch them bring the bales in! Push the joystick to take over.'); c.sound('on');
     }
@@ -926,8 +928,38 @@
     function autoStop(words) { AP = null; note(''); const b = DR && DR.el && DR.el.querySelector('.vg-dr-auto'); if (b) { b.classList.remove('on'); b.textContent = '🤖 Auto'; } if (words) c.toast(words); }
     const lenOf = () => (DR.imp ? DR.imp.len : 0);
     // start planning a way from here to a pose
+    // a goal pose that's sitting on something (a paddock the kid put there, a shed): the nearest clear pose to it,
+    // same heading first, then any heading when the goal doesn't mind which way it faces
+    function freeGoal(g) {
+      const T0 = TP(), len = lenOf(); if (T0.fits(AP.G, g.x, g.z, g.yaw, len, 0.3)) return g;
+      const yaws = [g.yaw, ...((g.ytol || 0.2) >= 1.5 ? [0, 1, 2, 3, 4, 5, 6, 7].map(k => k * Math.PI / 4) : [])];
+      for (let r = 0.75; r <= 9; r += 0.75) for (let q = 0; q < 16; q++) { const a = q * Math.PI / 8, x = g.x + Math.sin(a) * r, z = g.z + Math.cos(a) * r; for (const y of yaws) if (T0.fits(AP.G, x, z, y, len, 0.3)) return { ...g, x, z, yaw: y, moved: true }; }
+      return g;
+    }
+    // a straight work run, cut round whatever's across it (a paddock, a shed, a trough): only the clear stretches
+    // long enough to work, each its own run, the same way along; none if it's all blocked
+    function clearRuns(L) {
+      const T0 = TP(), len = lenOf(), dx = L.b[0] - L.a[0], dz = L.b[1] - L.a[1], LL = Math.hypot(dx, dz), yaw = Math.atan2(dx, dz), out = []; if (LL < 0.5) return out;
+      let s0 = null; const ok = s => T0.fits(AP.G, L.a[0] + dx / LL * s, L.a[1] + dz / LL * s, yaw, len, 0.3);
+      for (let s = 0; s <= LL + 0.001; s += 0.3) { const good = ok(Math.min(s, LL)); if (good && s0 == null) s0 = s; if ((!good || s + 0.3 > LL + 0.001) && s0 != null) { const s1 = good ? LL : s - 0.6; if (s1 - s0 >= 3) out.push({ ...L, a: [L.a[0] + dx / LL * s0, L.a[1] + dz / LL * s0], b: [L.a[0] + dx / LL * s1, L.a[1] + dz / LL * s1], cut: true }); s0 = null; } }
+      // (and only the ones it can get to with room to spare: never squeezing into a pocket it can't turn round in)
+      const [rx, rz] = rearOf(); return out.filter(q => T0.route(AP.G, [rx, rz], q.a, 1.25));
+    }
+    // a long way the search can't do in one go (across the farm, through gaps): a stop partway, on the open way
+    // round (the walking route, wide enough for the tractor), as far along it as there's room to stop lined up
+    // with the next stretch; null if there's no such place
+    function stopover(goal) {
+      const T0 = TP(), [rx, rz] = rearOf(), line = T0.route(AP.G, [rx, rz], [goal.x, goal.z], 1.4) || T0.route(AP.G, [rx, rz], [goal.x, goal.z], 1.25); if (!line || line.length < 2) return null;
+      const pts = []; for (let i = 0; i < line.length - 1; i++) { const [x0, z0] = line[i], [x1, z1] = line[i + 1], L0 = Math.hypot(x1 - x0, z1 - z0), y = Math.atan2(x1 - x0, z1 - z0); for (let u = 0; u < L0; u += 1) pts.push({ x: x0 + (x1 - x0) * u / L0, z: z0 + (z1 - z0) * u / L0, y, d: 0 }); }
+      let acc = 0; for (let i = 1; i < pts.length; i++) { acc += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].z - pts[i - 1].z); pts[i].d = acc; }
+      const total = acc; if (total < 10) return null;
+      // (no further than about two thirds of the way, so each search stays a short one, and no nearer than 6 m)
+      for (let i = pts.length - 1; i > 0; i--) { const q = pts[i]; if (q.d > Math.min(total - 4, 28) || q.d < 6) continue; if (AP.G.at(q.x, q.z) < 2.0) continue; if (T0.fits(AP.G, q.x, q.z, q.y, lenOf(), 0.35)) return { x: q.x, z: q.z, yaw: q.y, tol: 1.2, ytol: 0.6, htol: 0.8 }; }
+      return null;
+    }
     function goto(L) {
-      const g = L.goal; L.search = TP().plan(AP.G, { x: DR.x, z: DR.z, yaw: DR.yaw, iyaw: DR.imp ? DR.imp.yaw : DR.yaw, len: lenOf() }, g, { m: L.tries ? 0.22 : 0.45, max: L.tries ? 50000 : 25000 }); L.segs = null;
+      if (!L.freed) { L.freed = true; L.goal = freeGoal(L.goal); }
+      const g = L.goal; L.search = TP().plan(AP.G, { x: DR.x, z: DR.z, yaw: DR.yaw, iyaw: DR.imp ? DR.imp.yaw : DR.yaw, len: lenOf() }, g, { m: (L.wide ? [0.8, 0.45, 0.22, 0.1] : [0.45, 0.22, 0.1])[L.tries || 0], max: (L.wide ? [25000, 25000, 50000, 80000] : [25000, 50000, 80000])[L.tries || 0] }); L.search.m = (L.wide ? [0.8, 0.45, 0.22, 0.1] : [0.45, 0.22, 0.1])[L.tries || 0]; L.segs = null;
     }
     // a planned way, cut where it changes between forward and back, as back-axle points
     function segments(P) {
@@ -957,10 +989,10 @@
     function runGoto(t, L, vmax) {
       if (!L.search) goto(L);
       if (!L.search.done) { L.search.step(2500); return stop(); }
-      if (!L.search.path) { if (!L.tries) { L.tries = 1; goto(L); return stop(); } return 'fail'; }
+      if (!L.search.path) { if ((L.tries || 0) < (L.wide ? 3 : 2)) { L.tries = (L.tries || 0) + 1; goto(L); return stop(); } return 'fail'; }
       if (!L.segs) { L.segs = segments(L.search.path); L.si = 0; }
       while (L.si < L.segs.length) {
-        const r = track(t, L.segs[L.si], vmax);
+        const r = track(t, L.segs[L.si], L.wide || L.search.m < 0.2 ? Math.min(vmax, 1.4) : vmax); // (squeezing through, or after a bump: slowly)
         if (r === 'off') { AP.offs = (AP.offs || 0) + 1; L.search = null; L.tries = 0; return stop(); }
         if (r) return r;
         L.si++;
@@ -977,25 +1009,26 @@
     function bumped(t) { return DR.blockT && t - DR.blockT < 0.12; }
     function autopilot(t, dt) {
       void dt; const v = V();
-      if (!AP.leg) { AP.leg = AP.legs.shift(); if (!AP.leg && AP.job === 'trailer' && DR.imp && DR.imp.load.length) { AP.legs.push(haul('one more load to the hay yard'), { t: 'goto', goal: { x: AP.home.x, z: AP.home.z, yaw: AP.home.yaw, tol: 0.7, ytol: 0.25 }, say: 'parking' }); AP.leg = AP.legs.shift(); } if (!AP.leg) { const did = AP.did, job = AP.job; autoStop(''); if (did) { c.toast(job === 'baler' ? 'Baling done! Hitch the trailer and press Auto to bring the bales in. 🌾' : MACHINES[job] ? `${MACHINES[job].e} Done: the beds in that field are worked.` : 'All done! Every bale’s stacked by the barn. 🌾'); c.sound('buy'); } else c.toast(AP.fails ? 'Auto: I couldn’t find a way from here. Drive out into the open and try again.' : 'Nothing left to do.'); return stop(); } }
+      if (!AP.leg) { AP.leg = AP.legs.shift(); if (!AP.leg && AP.job === 'trailer' && DR.imp && DR.imp.load.length) { AP.legs.push(haul('one more load to the hay yard'), { t: 'goto', goal: { x: AP.home.x, z: AP.home.z, yaw: AP.home.yaw, tol: 0.7, ytol: 0.25 }, say: 'parking' }); AP.leg = AP.legs.shift(); } if (!AP.leg) { const did = AP.did, job = AP.job, fails = AP.fails, round = AP.blocked ? ' I steered round what was in the way.' : ''; autoStop(''); if (did) { c.toast((job === 'baler' ? 'Baling done! Hitch the trailer and press Auto to bring the bales in. 🌾' : MACHINES[job] ? `${MACHINES[job].e} Done: the beds in that field are worked.` : 'All done! Every bale’s stacked by the barn. 🌾') + round); c.sound('buy'); } else c.toast(fails ? 'Auto: I couldn’t find a way from here. Drive out into the open and try again.' : 'Nothing left to do.'); return stop(); } }
       const L = AP.leg; AP.pickup = false;
       if (bumped(t) && t > (AP.bumpT || 0) && L.t !== 'back') {
         // bumped something: ease off it the other way, then plan again from there
         AP.bumpT = t + 1; AP.stuck++; if (AP.stuck > 8) { autoStop(''); c.toast('Auto: I’m stuck. Can you drive me out?'); return stop(); }
-        if (L.go) { L.go.search = null; L.go.tries = 0; } if (L.search !== undefined) { L.search = null; L.tries = 0; } if (L.t === 'line') { L.go = null; if (L.lined) { L.lined = false; resume(L); } }
+        if (L.go) { L.go.search = null; L.go.tries = 0; if (AP.stuck >= 2) L.go.wide = true; } if (L.search !== undefined) { L.search = null; L.tries = 0; if (AP.stuck >= 2) L.wide = true; } // (bumped twice: the steering's cutting a corner, so give everything more room and go slower) if (L.t === 'line') { L.go = null; if (L.lined) { L.lined = false; resume(L); } }
         AP.legs.unshift(L); AP.leg = { t: 'back', d: 1.6, sign: AP.lastDir < 0 ? 1 : -1, say: 'easing off' }; return stop();
       }
-      const next = () => { AP.leg = null; AP.stuck = 0; return stop(); }, fail = () => { autoStop(''); c.toast('Auto: I can’t find a way there. Can you drive a bit and try again?'); return stop(); };
+      const next = () => { if (L.t !== 'back') AP.stuck = 0; AP.leg = null; return stop(); }, fail = () => { autoStop(''); c.toast('Auto: I can’t find a way there. Can you drive a bit and try again?'); return stop(); };
       if (L.t === 'wait') { note('Auto: ' + L.say); if (L.t0 == null) L.t0 = t; return t - L.t0 > L.s ? next() : stop(); }
       if (L.t === 'hitch') { if (Math.abs(DR.v) > 0.05) return stop(); if (!DR.imp || DR.imp.kind !== L.kind) hitch(L.kind); return next(); }
-      if (L.t === 'goto') { if (L.say) note('Auto: ' + L.say); const r = runGoto(t, L, L.vmax || 3.0); if (r === 'fail') { AP.fails = (AP.fails || 0) + 1; if (L.bale) { afterGoto(L); return next(); } if ((L.unstick || 0) < 3) { L.unstick = (L.unstick || 0) + 1; L.search = null; L.tries = 0; AP.legs.unshift(L); AP.leg = { t: 'back', d: 3, sign: L.unstick % 2 ? 1 : -1, say: 'straightening up to try again' }; return stop(); } return fail(); } if (r) return r; afterGoto(L); return next(); }
+      if (L.t === 'goto') { if (L.say) note('Auto: ' + L.say); const r = runGoto(t, L, L.vmax || 3.0); if (r === 'fail') { AP.fails = (AP.fails || 0) + 1; if (L.bale) { afterGoto(L); return next(); } if ((L.vias || 0) < 6) { const sp = stopover(L.goal); if (sp) { L.vias = (L.vias || 0) + 1; L.search = null; L.tries = 0; AP.legs.unshift(L); AP.leg = { t: 'goto', goal: sp, say: L.say, vias: 6 }; return stop(); } } if ((L.unstick || 0) < 3) { L.unstick = (L.unstick || 0) + 1; L.search = null; L.tries = 0; AP.legs.unshift(L); AP.leg = { t: 'back', d: 3, sign: L.unstick % 2 ? 1 : -1, say: 'straightening up to try again' }; return stop(); } return fail(); } if (r) return r; afterGoto(L); return next(); }
       if (L.t === 'line') {
         // a straight run: first get lined up on its start (planned), then drive it dead straight with the pickup down
         if (L.skip) return next();
+        if (!L.cut) { const runs = clearRuns(L); if (!runs.length) { AP.blocked = (AP.blocked || 0) + 1; return next(); } if (runs.length > 1 || Math.hypot(runs[0].a[0] - L.a[0], runs[0].a[1] - L.a[1]) > 0.2 || Math.hypot(runs[0].b[0] - L.b[0], runs[0].b[1] - L.b[1]) > 0.2) AP.blocked = (AP.blocked || 0) + 1; AP.legs.unshift(...runs.slice(1)); AP.leg = runs[0]; return stop(); }
         note('Auto: ' + L.say);
         const yaw = Math.atan2(L.b[0] - L.a[0], L.b[1] - L.a[1]);
         if (!L.go) L.go = { goal: { x: L.a[0], z: L.a[1], yaw, tol: 0.4, ytol: 0.1, htol: 0.5, dir: 1 } };
-        if (!L.lined) { const r = runGoto(t, L.go, 3.0); if (r === 'fail') { AP.fails = (AP.fails || 0) + 1; if (!L.tries2) { L.tries2 = 1; L.go = null; L.a = [L.a[0] + Math.sin(yaw) * 1.5, L.a[1] + Math.cos(yaw) * 1.5]; return stop(); } return next(); } if (r) return r; L.lined = true; const ra = [DR.x - Math.sin(DR.yaw) * 0.62, DR.z - Math.cos(DR.yaw) * 0.62], len = Math.hypot(L.b[0] - ra[0], L.b[1] - ra[1]), pts = []; for (let s = 0; s <= len; s += 0.4) pts.push([ra[0] + Math.sin(yaw) * s, ra[1] + Math.cos(yaw) * s]); pts.push([L.b[0] - Math.sin(yaw) * 0.62, L.b[1] - Math.cos(yaw) * 0.62]); L.seg = { dir: 1, pts, k: 0 }; }
+        if (!L.lined) { const r = runGoto(t, L.go, 3.0); if (r === 'fail') { AP.fails = (AP.fails || 0) + 1; if ((L.vias || 0) < 6) { const sp = stopover(L.go.goal); if (sp) { L.vias = (L.vias || 0) + 1; L.go = null; AP.legs.unshift(L); AP.leg = { t: 'goto', goal: sp, say: L.say, vias: 6 }; return stop(); } } if (!L.tries2) { L.tries2 = 1; L.go = null; L.a = [L.a[0] + Math.sin(yaw) * 1.5, L.a[1] + Math.cos(yaw) * 1.5]; return stop(); } AP.missed = (AP.missed || 0) + 1; if (AP.missed >= 2 && !AP.did) { autoStop(''); c.toast('Auto: I can’t get the tractor through to the work. The gaps are too narrow. Move a paddock to leave a wider lane, or drive me there yourself.'); return stop(); } return next(); } if (r) return r; L.lined = true; AP.missed = 0; const ra = [DR.x - Math.sin(DR.yaw) * 0.62, DR.z - Math.cos(DR.yaw) * 0.62], len = Math.hypot(L.b[0] - ra[0], L.b[1] - ra[1]), pts = []; for (let s = 0; s <= len; s += 0.4) pts.push([ra[0] + Math.sin(yaw) * s, ra[1] + Math.cos(yaw) * s]); pts.push([L.b[0] - Math.sin(yaw) * 0.62, L.b[1] - Math.cos(yaw) * 0.62]); L.seg = { dir: 1, pts, k: 0 }; }
         AP.pickup = true; AP.did = true; const r = track(t, L.seg, 2.6);
         if (r === 'off') { L.lined = false; L.go = null; resume(L); return stop(); }
         return r || next();

@@ -65,17 +65,17 @@
     const sees = (p, q) => { const d = Math.hypot(q[0] - p[0], q[1] - p[1]), n = Math.ceil(d / 0.2); for (let i = 1; i <= n; i++) { const u = i / n; if (G.at(p[0] + (q[0] - p[0]) * u, p[1] + (q[1] - p[1]) * u) < r) return false; } return true; };
     if (sees(a, b)) return [a, b];
     const s0 = Math.floor((a[1] - G.oz) / C) * NX + Math.floor((a[0] - G.ox) / C), g = Math.floor((b[1] - G.oz) / C) * NX + Math.floor((b[0] - G.ox) / C), gi = g % NX, gj = Math.floor(g / NX);
-    const cost = new Float32Array(NX * NZ).fill(1e9), from = new Int32Array(NX * NZ).fill(-1), open = Heap(); cost[s0] = 0; open.push({ f: 0, k: s0 });
+    const cost = new Float32Array(NX * NZ).fill(1e9), from = new Int32Array(NX * NZ).fill(-1), open = Heap(); cost[s0] = 0; open.push({ f: 0, k: s0, g: 0 });
     const H = k => { const di = Math.abs(k % NX - gi), dj = Math.abs(Math.floor(k / NX) - gj); return (Math.max(di, dj) + 0.414 * Math.min(di, dj)) * C; };
     let found = false, n = 0;
-    while (open.size && n++ < 40000) {
-      const { k } = open.pop(); if (k === g) { found = true; break; }
+    while (open.size && n++ < G.NX * G.NZ) { // (room for the biggest farm: a few times every half-metre cell)
+      const { k, g: gk } = open.pop(); if (gk > cost[k] + 1e-3) { n--; continue; } if (k === g) { found = true; break; } // (an old, longer way to a cell already reached shorter: not counted)
       const ci = k % NX, cj = Math.floor(k / NX);
       for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) {
         if (!di && !dj) continue; const ni = ci + di, nj = cj + dj; if (ni < 0 || nj < 0 || ni >= NX || nj >= NZ) continue;
         const nk = nj * NX + ni, cl = at(nk); if (cl < r && nk !== g) continue;
         const c2 = cost[k] + (di && dj ? C * 1.414 : C) + (cl < r + 0.8 ? 0.35 : 0); // (keeps a little off things where it can)
-        if (c2 < cost[nk]) { cost[nk] = c2; from[nk] = k; open.push({ f: c2 + H(nk), k: nk }); }
+        if (c2 < cost[nk]) { cost[nk] = c2; from[nk] = k; open.push({ f: c2 + H(nk), k: nk, g: c2 }); }
       }
     }
     if (!found) return null;
