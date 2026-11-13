@@ -686,8 +686,11 @@
     GRASS.solid = !!on; try { localStorage.setItem('ih:grass', on ? 'solid' : 'blades'); } catch (e) { /* */ }
     for (const w of GRASS.lawns) { const L = w.deref(); if (!L) { GRASS.lawns.delete(w); continue; } grassMode(L); }
   }
+  // (random numbers for the solid grass's blades from a little table, not three sine sums a step: one look-up a blade)
+  const NOISE = (() => { const n = 64, d = new Uint8Array(n * n * 4), R = IH.kit.rng(9); for (let i = 0; i < d.length; i++) d[i] = Math.floor(R() * 256); const t = new T.DataTexture(d, n, n, T.RGBAFormat); t.wrapS = t.wrapT = T.RepeatWrapping; t.magFilter = t.minFilter = T.NearestFilter; t.generateMipmaps = false; t.needsUpdate = true; return t; })();
+  const STEPK = { value: 0.5 }; // (steps a pixel of the grass's height on screen: one every two pixels looks the same as one every pixel)
   function makeSolid(shells, U) {
-    const m = new T.Mesh(new T.PlaneGeometry(1, 1), new T.ShaderMaterial({ uniforms: U, lights: true, extensions: { fragDepth: true },
+    const m = new T.Mesh(new T.PlaneGeometry(1, 1), new T.ShaderMaterial({ uniforms: { ...U, uNoise: { value: NOISE }, uStepK: STEPK }, lights: true, extensions: { fragDepth: true, derivatives: true },
       vertexShader: `uniform float uTop; varying vec3 vW; void main() { vec3 p = position; p.y = 0.006 + uTop; vec4 w = modelMatrix * vec4(p, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
       fragmentShader: `#include <common>
     #include <packing>
@@ -697,30 +700,37 @@
     #if defined( USE_SHADOWMAP ) && NUM_DIR_LIGHT_SHADOWS > 0
       uniform mat4 directionalShadowMatrix[ NUM_DIR_LIGHT_SHADOWS ];
     #endif
-    uniform mat4 projectionMatrix; uniform sampler2D uMap; uniform vec4 uMapO; uniform float uTop, uCut, uGrow, uLong, uTime, uWind, uDens; uniform vec3 uBase, uTip, uSun; varying vec3 vW;
-        float hsh(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    uniform mat4 projectionMatrix; uniform float uStepK; uniform sampler2D uMap, uNoise; uniform vec4 uMapO; uniform float uTop, uCut, uGrow, uLong, uTime, uWind, uDens; uniform vec3 uBase, uTip, uSun; varying vec3 vW;
+        const mat2 ROT0 = mat2(${Math.cos(0.47).toFixed(6)}, ${(-Math.sin(0.47)).toFixed(6)}, ${Math.sin(0.47).toFixed(6)}, ${Math.cos(0.47).toFixed(6)});
+        const mat2 ROT1 = mat2(${Math.cos(-0.83).toFixed(6)}, ${(-Math.sin(-0.83)).toFixed(6)}, ${Math.sin(-0.83).toFixed(6)}, ${Math.cos(-0.83).toFixed(6)});
         void main() {
           vec3 rd = isOrthographic ? -vec3(viewMatrix[0][2], viewMatrix[1][2], viewMatrix[2][2]) : normalize(vW - cameraPosition);
-          float k = clamp((uGrow - uCut) / (uLong - uCut), 0.0, 1.0), cutH = uCut * ${BLADE_H.toFixed(3)};
-          float wave0 = uTime * (1.6 + uWind * 0.6), gust0 = uTime * 0.6;
-          vec3 p = vW; float top = 0.0, r1 = 0.0, h = 0.0, found = 0.0;
-          for (int l = ${SHELLS - 1}; l >= 0; l--) { // (top layer first, as the shells)
-            float aL = float(l) / ${(SHELLS - 1).toFixed(1)}; h = aL * uTop;
-            p = vW + rd * ((vW.y - 0.006 - h) / max(-rd.y, 0.05)); // (where the view is at this layer's height)
-            vec4 mp = texture2D(uMap, (p.xz - uMapO.xy) / uMapO.zw); if (mp.b < 0.5) continue; // (not lawn here: over a path, say)
-            float cap = mp.g > 0.99 ? 99.0 : mp.g * 1.2 - 0.03, kk = mp.r > 0.5 ? 0.0 : k;
-            float wave = sin(dot(p.xz, vec2(0.5, 0.29)) - wave0) * 0.5 + 0.5, gust = 0.55 + 0.45 * sin(gust0 + p.x * 0.14);
-            float f = h / max(uTop, 0.001); vec2 q = p.xz - vec2(0.85, 0.5) * (0.3 + wave * gust) * uWind * f * f * uTop * 0.3;
-            top = 0.0; float hit = 0.0;
-            for (int s = 0; s < 2; s++) {
-              float a = s == 0 ? 0.47 : -0.83; vec2 qq = mat2(cos(a), -sin(a), sin(a), cos(a)) * q * uDens + (s == 0 ? vec2(0.0) : vec2(0.37, 0.71));
-              vec2 cell = floor(qq), fr = fract(qq) - 0.5; float a1 = hsh(cell + float(s) * 91.3), a2 = hsh(cell + 17.3 + float(s) * 7.1), a3 = hsh(cell + 31.7 + float(s) * 3.3);
-              float tp = mix(cutH, (0.62 + a3 * 0.5) * uLong * ${BLADE_H.toFixed(3)}, kk);
-              float tt = clamp(h / tp, 0.0, 1.0);
-              if (h <= tp && length(fr - (vec2(a1, a2) - 0.5) * 0.55) <= 0.4 * (1.0 - tt * 0.88) && tp > top) { top = tp; r1 = a1; hit = 1.0; }
+          float k = clamp((uGrow - uCut) / (uLong - uCut), 0.0, 1.0), cutH = uCut * ${BLADE_H.toFixed(3)}, longH = uLong * ${BLADE_H.toFixed(3)};
+          // the wind for this spot, once (the view only crosses a few centimetres of lawn going down through the grass)
+          float wave = sin(dot(vW.xz, vec2(0.5, 0.29)) - uTime * (1.6 + uWind * 0.6)) * 0.5 + 0.5, gust = 0.55 + 0.45 * sin(uTime * 0.6 + vW.x * 0.14);
+          vec2 lean = vec2(0.85, 0.5) * (0.3 + wave * gust) * uWind * uTop * 0.3;
+          // as many steps as the grass is pixels tall on screen (6 to 24): any more and two steps land in one pixel
+          float sy = max(-rd.y, 0.05), px = uTop * sqrt(1.0 - sy * sy) / max(length(dFdy(vW.xz)) * sy, 1e-5), nS = clamp(ceil(px * uStepK), 4.0, 24.0);
+          float dv = (vW.y - 0.006) / sy; vec3 p = vW; float top = 0.0, r1 = 0.0, h = 0.0, found = 0.0;
+          for (int l = 0; l < 24; l++) { // (from the top down, as the shells)
+            float aL = 1.0 - float(l) / (nS - 1.0); h = max(aL, 0.0) * uTop;
+            p = vW + rd * (dv - h / sy); // (where the view is at this height)
+            vec4 mp = texture2D(uMap, (p.xz - uMapO.xy) / uMapO.zw);
+            bool last = aL <= 0.0;
+            if (mp.b > 0.5) {
+              float cap = mp.g > 0.99 ? 99.0 : mp.g * 1.2 - 0.03, kk = mp.r > 0.5 ? 0.0 : k, f = h / max(uTop, 0.001);
+              vec2 q = (p.xz - lean * f * f) * uDens;
+              top = 0.0; float hit = 0.0;
+              for (int s = 0; s < 2; s++) {
+                vec2 qq = s == 0 ? ROT0 * q : ROT1 * q + vec2(0.37, 0.71), cell = floor(qq), fr = fract(qq) - 0.5;
+                vec3 a = texture2D(uNoise, (cell + (s == 0 ? vec2(0.5) : vec2(23.5, 41.5))) / 64.0).rgb; // (this blade's place in its cell, and its height)
+                float tp = mix(cutH, (0.62 + a.z * 0.5) * longH, kk), tt = clamp(h / tp, 0.0, 1.0);
+                if (h <= tp && length(fr - (a.xy - 0.5) * 0.55) <= 0.4 * (1.0 - tt * 0.88) && tp > top) { top = tp; r1 = a.x; hit = 1.0; }
+              }
+              if (last) { top = max(top, cutH); found = 2.0; break; } // (the ground between the blades)
+              if (hit > 0.5 && h <= cap) { found = 1.0; break; }
             }
-            if (l == 0) { top = max(top, cutH); found = 2.0; break; } // (the ground between the blades)
-            if (hit > 0.5 && h <= cap) { found = 1.0; break; }
+            if (last) break;
           }
           if (found < 0.5) discard; // (the view never went through any lawn)
           float t = clamp(h / top, 0.0, 1.0);
@@ -2585,7 +2595,7 @@
   }
   // The home's grass, for the village's lawns too: the same blades, shells, wind, growth and mowing
   IH.lawnKit = {
-    build: spec => buildLawn({ chunk: 8, lod: true, ...spec }), detail: lawnDetail, solid: on => (on === undefined ? GRASS.solid : setSolidGrass(on)), colours: (L, ph) => lawnColours(L.userData.U, ph), CUT, CUT_W, ROW, LEAD,
+    build: spec => buildLawn({ chunk: 8, lod: true, ...spec }), detail: lawnDetail, solid: on => (on === undefined ? GRASS.solid : setSolidGrass(on)), stepK: STEPK, colours: (L, ph) => lawnColours(L.userData.U, ph), CUT, CUT_W, ROW, LEAD,
     grow(L, g) { const U = L.userData.U; U.uGrow.value = CUT + g * 0.9; const k = clamp((U.uGrow.value - CUT) / (U.uLong.value - CUT), 0, 1); U.uTop.value = CUT * BLADE_H + k * (1.12 * U.uLong.value * BLADE_H - CUT * BLADE_H); },
     tick(L, t, zoom) { const U = L.userData.U; U.uTime.value = t; if (U.uDens) U.uDens.value = clamp(22 * zoom, 22, 60); },
     cutStrip: (L, x, z, yaw) => cutStrip(x, z, yaw, L), cutAt: (L, x, z, r) => cutAt(x, z, r, L),
