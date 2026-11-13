@@ -619,7 +619,7 @@
       for (const kk in KEYS) KEYS[kk] = false; addEventListener('keydown', onKey, true); addEventListener('keyup', onKey, true);
       const el = document.createElement('div'); el.className = 'vg-drive'; DR.el = el;
       el.innerHTML = `<div class="vg-dr-top"><b>🚜</b><button data-v="farm" data-k="hitchtray" class="vg-dr-hitch">🔗 Hitch: nothing</button><button data-v="farm" data-k="spear" class="vg-dr-spear" hidden>🔱 Lift</button><button data-v="farm" data-k="auto" class="vg-dr-auto">🤖 Auto</button><button data-v="farm" data-k="dout" class="vg-dr-out">Get out</button></div><div class="vg-dr-note" hidden></div>
-        <div class="vg-joy" aria-label="Drive: push up to go, down to reverse, left and right to steer"><span class="vg-joy-u">▲</span><span class="vg-joy-d">▼</span><span class="vg-joy-l">⟲</span><span class="vg-joy-r">⟳</span><i class="vg-joy-k"></i></div>`;
+        <div class="vg-joy" aria-label="Drive: push the way you want to go"><span class="vg-joy-u">▲</span><span class="vg-joy-d">▼</span><span class="vg-joy-l">◀</span><span class="vg-joy-r">▶</span><i class="vg-joy-k"></i></div>`;
       // the joystick: drag the knob; how far up or down is the pedal, how far left or right is the wheel (analogue)
       const J = el.querySelector('.vg-joy'), knob = J.querySelector('.vg-joy-k'); let jid = null;
       const jmove = e => { const r = J.getBoundingClientRect(), R = r.width / 2, dx = e.clientX - (r.left + R), dy = e.clientY - (r.top + R), L = Math.hypot(dx, dy), k = L > R * 0.8 ? R * 0.8 / L : 1; JOY.x = Math.max(-1, Math.min(1, -dx * k / (R * 0.8))); JOY.y = Math.max(-1, Math.min(1, -dy * k / (R * 0.8))); if (Math.abs(JOY.x) < 0.12) JOY.x = 0; if (Math.abs(JOY.y) < 0.12) JOY.y = 0; knob.style.transform = `translate(${dx * k}px, ${dy * k}px)`; };
@@ -628,7 +628,7 @@
       for (const ev of ['pointerup', 'pointercancel']) J.addEventListener(ev, e => { if (e.pointerId !== jid) return; jid = null; JOY.x = 0; JOY.y = 0; knob.style.transform = ''; J.classList.remove('on'); });
       v.ui.appendChild(el); v.follow = true;
       JOY.x = 0; JOY.y = 0;
-      c.toast('In the seat! Push the joystick up to drive, down to reverse, left and right to steer. It can’t turn on the spot: back up to get round tight corners.');
+      c.toast('In the seat! Push the joystick the way you want to go and it drives that way, turning round to face it. Pull it straight back to reverse.');
       { const t0 = F().tut || {}, k0 = Object.keys(t0).find(q => t0[q] === 'hitch' && MACHINES[q]); if (k0) setTimeout(() => { if (DR) note(`Your new ${MACHINES[k0].name.toLowerCase()}! Step 1 of 3: tap 🔗 Hitch${MACHINES[k0].front ? ', then ➡️ On the front,' : ''} and pick it.`); }, 2500); }
     }
     const seedList = () => { const all = IH.bedOps ? IH.bedOps.crops(F()) : ['carrot'], M0 = DR && DR.imp && MACHINES[DR.imp.kind]; return M0 && M0.crops ? all.filter(id => M0.crops.includes(id)) : all; };
@@ -770,7 +770,22 @@
       irrigate(t, dt);
       { const v0 = V(); if (v0 && v0.B && v0.B.id === 'farm' && v0.B.meadows && t - swT > 0.4) { swT = t; const drying = t - dryT0 > 30; if (drying) dryT0 = t; for (const M of v0.B.meadows) if (M.dirty || (drying && M.drying)) drawSwaths(M, v0.B.root); } }
       if (!DR || !V() || V().drive !== DR) return; const v = V(), f = F(), k = v.kid;
-      let thr = Math.max(-1, Math.min(1, (KEYS.up ? 1 : 0) - (KEYS.down ? 1 : 0) + JOY.y)), st = Math.max(-1, Math.min(1, (KEYS.left ? 1 : 0) - (KEYS.right ? 1 : 0) + JOY.x)), vmax = 4.0;
+      let thr = Math.max(-1, Math.min(1, (KEYS.up ? 1 : 0) - (KEYS.down ? 1 : 0))), st = Math.max(-1, Math.min(1, (KEYS.left ? 1 : 0) - (KEYS.right ? 1 : 0))), vmax = 4.0;
+      // The joystick points where to go, as seen on screen: the vehicle steers round to face that way and drives (slower
+      // while it's turning hard). Pulled to straight behind it, it backs up that way instead. (The arrow keys are still
+      // pedals and wheel.)
+      { const mag = Math.min(1, Math.hypot(JOY.x, JOY.y));
+        if (mag > 0.15) {
+          const cy = c.camYaw ? c.camYaw() : Math.PI / 4, sy = Math.sin(cy), cyy = Math.cos(cy), dx = -sy * JOY.y - cyy * JOY.x, dz = -cyy * JOY.y + sy * JOY.x, want = Math.atan2(dx, dz);
+          const wrap = a => Math.atan2(Math.sin(a), Math.cos(a)), diff = wrap(want - DR.yaw), ad = Math.abs(diff);
+          DR.rev = DR.rev ? ad > 2.2 : ad > 2.6 && Math.abs(DR.v) < 1.2; // (only from slow: at speed it turns round instead)
+          // nosed into a fence and still not facing the way: back up a little with the wheel the other way, then go again
+          // (a three-point turn, done for them)
+          if (!DR.rev && DR.blockT && t - DR.blockT < 0.25 && ad > 0.35 && !(DR.backTo > t)) DR.backTo = t + 1.1;
+          if (DR.backTo > t) { thr = -mag * 0.8; st = -Math.sign(diff); }
+          else if (DR.rev) { const back = wrap(want - DR.yaw - Math.PI); thr = -mag; st = -Math.max(-1, Math.min(1, back / 0.5)); }
+          else { thr = mag * (ad > 1.6 ? 0.5 : 1 - 0.3 * ad / 1.6); st = Math.max(-1, Math.min(1, diff / 0.5)); }
+        } else { DR.rev = false; DR.backTo = 0; } }
       if (AP && (thr || st)) autoStop('You took the wheel.');
       else if (AP) ({ thr, st, vmax } = autopilot(t, dt));
       const target = thr > 0 ? vmax * Math.min(1, thr) : thr < 0 ? -1.6 * Math.min(1, -thr) : 0, braking = thr !== 0 && Math.abs(DR.v) > 0.05 && Math.sign(target) !== Math.sign(DR.v);

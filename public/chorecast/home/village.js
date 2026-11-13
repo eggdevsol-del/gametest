@@ -873,7 +873,7 @@
   };
   Object.assign(ACTS, ISLAND_ACTS);
   // more islands' doings (village-islands.js), with what they need from here
-  const CTX = { get V() { return V; }, walkTo, chore, toast, float, say, sound, xp, gamePanel, shopTray, closeTray, steps, tween, ride, sit, stand, fishStart, fx, seatKid, DAY, today };
+  const CTX = { get V() { return V; }, camYaw: () => CAM.yaw, walkTo, chore, toast, float, say, sound, xp, gamePanel, shopTray, closeTray, steps, tween, ride, sit, stand, fishStart, fx, seatKid, DAY, today };
   const ISL = IH.villageIslands ? IH.villageIslands(CTX) : null, FARM = IH.villageFarm ? IH.villageFarm(CTX) : null;
   const LANG = IH.villageLang ? IH.villageLang(CTX) : null;
   if (ISL) Object.assign(ACTS, ISL.acts); if (FARM) Object.assign(ACTS, FARM.acts); if (LANG) Object.assign(ACTS, LANG.acts);
