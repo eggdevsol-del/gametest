@@ -96,7 +96,7 @@
     if (short && w < short) { toast(`You need ✨ ${nf(xp)} XP for ${what || 'that'}. Your farm account has ✨ ${nf(a.bal)} and your wallet ✨ ${nf(w)}.`); return false; }
     if (short) invest(short, true);
     a.bal -= xp; led('farm', -xp, `Bought ${what || 'farm things'}`, slipOf('CHORECAST FARM', 'Receipt', [[cap(what || 'farm things'), xp]], [['Paid from the farm account', xp, 'big'], ['Farm account after', a.bal, 'muted']]));
-    if (O.E) O.E.cost(xp, what); save(); sound('buy'); ui(true); if (short) toast(`The farm account was short, so ✨ ${nf(short)} came in from your wallet.`); return true;
+    if (O.E) O.E.cost(xp, what); save(); sound('buy'); ui(true); if (IH.infused && IH.infused.on) IH.infused.unlocked(what, 'farm'); if (short) toast(`The farm account was short, so ✨ ${nf(short)} came in from your wallet.`); return true;
   }
   // pay yourself: once a day, a wage from the farm into the wallet, on a pay slip like chore pay
   function payYourself(xp) {
@@ -2986,7 +2986,10 @@
     const w = wallet(), K = IH.kitchen, f = food(), back = `<button class="ih-ph-back" data-a="phone">‹ Back</button>`;
     let body = '';
     const appBtn = ([k, e, n]) => `<button class="ih-ph-app" data-a="app" data-app="${k}"><span>${e}</span>${n}</button>`;
-    if (app === 'home') body = `<div class="ih-ph-apps">${APPS.map(appBtn).join('')}</div>`;
+    if (IH.infused && IH.infused.on && (app === 'chores' || app === 'proof')) { closeSheet(); O.phoneApp = null; return IH.infused.open(app); }
+    const infApp = IH.infused && IH.infused.on && (app === 'learn' || app === 'langs');
+    if (infApp) body = '<div class="inf-ph"></div>';
+    if (app === 'home') body = `<div class="ih-ph-apps">${[...(IH.infused ? IH.infused.apps() : []), ...APPS].map(appBtn).join('')}</div>`;
     if (app === 'bank') body = `${back}<h3>🏦 Banking</h3>${bankHtml()}`;
     if (app === 'farm') body = `${back}<h3>🚜 Farm</h3>${O.E ? O.E.farmHtml() : ''}`;
     if (app === 'grownups') body = `<button class="ih-ph-back" data-a="app" data-app="bank">‹ Banking</button><h3>For grown-ups</h3>${O.E ? O.E.grownHtml() : ''}`;
@@ -3028,7 +3031,7 @@
           return row(i.id, i.emoji, i.name, `${kind} · ${esc(i.about)}`, !isleOpen(i.id) ? '<small class="ih-ph-tag">Closed for now</small>' : has ? go(i.id) : !i.built ? '<small class="ih-ph-tag">Coming soon</small>' : needs ? `<small class="ih-ph-tag">Needs the ${esc((L.find(q => q.id === i.needs) || {}).name || i.needs)}</small>` : `<button class="ih-b2 ih-sm" data-a="isBuy" data-w="${i.id}" ${w.left < i.xp ? 'disabled' : ''}>✨ ${nf(i.xp)}</button>`); }).join('')}</div>`;
     }
     sheet(`<div class="ih-phone"><div class="ih-ph-top"><span>${new Date().toLocaleTimeString('en-NZ', { hour: 'numeric', minute: '2-digit' })}</span><span>✨ ${nf(w.left)} XP</span></div><div class="ih-ph-screen">${body}</div><button class="ih-ph-home" data-a="${app === 'home' ? 'sheetX' : 'phone'}" aria-label="${app === 'home' ? 'Close the phone' : 'Home screen'}"></button></div>`, 'phone');
-    O.phoneApp = app;
+    O.phoneApp = app; if (infApp) IH.infused.mount($('.inf-ph', O.root), app); else if (IH.infused) IH.infused.unmount();
   }
   // Which colours and finishes a thing comes in: pets and windows as they are; floors, walls and doors in any colour
   // (their look is the pattern); everything else in any colour and finish.
@@ -3065,7 +3068,7 @@
     const d = BY[t], w = wallet(), offer = offerId ? usedStock().find(o => o.id === offerId) : null, price = offer ? offer.xp : d && d.xp; if (!d || w.left < price) return;
     const fin = offer ? offer.fin : O.pick && O.pick.t === t && (O.pick.c || (O.pick.f && O.pick.f !== 'plain')) ? { c: O.pick.c, f: O.pick.f } : null;
     const nB = offer || d.apply ? 1 : Math.max(1, qtyN(Math.min(99, Math.floor(w.left / Math.max(1, price)))));
-    wSpend(price * nB, `${nB > 1 ? nB + ' × ' : ''}${d.name}${offer ? ' (used)' : ''}`, offer ? 'CHORECAST MARKET' : 'CHORECAST SHOP'); sound('buy'); closeSheet(); ui(true);
+    wSpend(price * nB, `${nB > 1 ? nB + ' × ' : ''}${d.name}${offer ? ' (used)' : ''}`, offer ? 'CHORECAST MARKET' : 'CHORECAST SHOP'); sound('buy'); closeSheet(); ui(true); if (IH.infused && IH.infused.on) IH.infused.unlocked(d.name, 'home');
     if (nB > 1) { O.st.owned[t] = (O.st.owned[t] || 0) + nB - 1; for (let q = 1; q < nB; q++) { const b = boxOf(t); b.pop(); b.unshift({ fin, used: 0 }); } }
     if (offer) { const ub = (O.st.usedBought = O.st.usedBought && O.st.usedBought.day === offer.day ? O.st.usedBought : { day: offer.day, ids: [] }); ub.ids.push(offer.id); }
     if (O.opts.track) O.opts.track(offer ? 'home.buyUsed' : 'home.buy', { t, xp: price, fin });
@@ -3148,7 +3151,7 @@
     if (/^(ec|ls)[A-Z]/.test(a) && O.E) { const r = O.E.act(a, el); if (r === 'bank' || r === 'grownups' || r === 'farm') return phone(r); if (r) return; }
     if (a === 'phone') { sound('pop'); return phone('home'); }
     if (a === 'goTo') { closeSheet(); return travelTo(el.dataset.w); }
-    if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || !isleOpen(i.id) || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); return phone('travel'); }
+    if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || !isleOpen(i.id) || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); if (IH.infused && IH.infused.on) setTimeout(() => IH.infused.unlocked(i.name, 'island'), 2500); return phone('travel'); }
     if (a === 'qty') { setQty(el.dataset.q); const r = el.dataset.r || ''; if (r === 'produce') return produceSheet(); if (r.startsWith('counter:')) return counterSheet(r.slice(8)); if (r.startsWith('app:')) return phone(r.slice(4)); if (r.startsWith('buy:')) { const d = BY[r.slice(4)]; if (d) buyAsk(d); } return; }
     if (a === 'pSell') { const id = el.dataset.k, P = PRODUCE[id]; if (!P) return; const f = food(), g = goods(), n = qtyN(P.goods ? g[id] || 0 : f[id] || 0); if (!n) return; if (P.goods) g[id] -= n; else f[id] -= n; const pr = O.E ? O.E.price(P.price) : P.price; farmIn(pr * n, `sold ${n > 1 ? n + ' × ' + P.one : P.one} at the grocer`, [[n > 1 ? `${n} × ${cap(P.one)} at ✨ ${pr}` : cap(P.one), pr * n]]); save(); sound('buy'); ui(true); toast(`Sold ${n > 1 ? n + ' × ' + P.one : P.one}: ✨ ${pr * n} into your farm account.`); return produceSheet(); }
     if (a === 'app') { const ap = el.dataset.app; O.pick = null; if (ap === 'shop') { closeSheet(); return shopApp(); } if (ap === 'homes') { closeSheet(); return homesSheet(); } return phone(ap); }
@@ -3192,7 +3195,7 @@
     if (a === 'homeBuy') return homeBuy(el.dataset.h);
     if (a === 'moveAsk') return moveAsk(el.dataset.h);
     if (a === 'move') return move(el.dataset.h, el.dataset.bring === '1');
-    if (a === 'sheetX') return closeSheet();
+    if (a === 'sheetX') { const wasPhone = !!O.phoneApp && $('.ih-sheet', O.root).classList.contains('phone'); closeSheet(); if (wasPhone) { O.phoneApp = null; if (IH.infused && IH.infused.on) setTimeout(() => IH.infused.brk('phone'), 1500); } return; }
     if (a === 'strayX') return strayClose();
     if (a === 'prTab') { O.prTab = el.dataset.v; return produceSheet(); }
     if (a === 'lookOpen') return lookSheet();
@@ -3266,6 +3269,9 @@
     if (O.st.stall && O.st.stall.length) { for (const r of O.st.stall) { O.st.owned[r.t] = (O.st.owned[r.t] || 0) + 1; toBox(r); } O.st.stall = []; save(); } // (left on a stall: back in Mine)
     size(); loadHome(); applyLook(); CAM.intro = { a: 0.62, b: 1, t0: 0 }; lastT = null; beat.reset();
     ui(); force = true; if (!raf) raf = requestAnimationFrame(loop);
+    // Infused (a prototype): the chores and lessons inside the game (infused.js), when the app turns it on
+    if (opts.infused && IH.infused) IH.infused.start({ root: O.root, st: () => O.st, save, toast, sound, phone: ap => phone(ap),
+      closeUp: () => { if (!O || O.away) return; const k = insts.get(KID); if (k) CAM.target.set(k.group.position.x, k.group.position.y + 1, k.group.position.z); setZoom(3.6); } }, opts.infused);
     { const me = O; setTimeout(() => { if (O === me && !O.away && !IH.portraitOf(kid.id)) keepPortrait(); }, 2500); } // (the chores screen's picture of this home, the first time)
     document.body.classList.add('ih-open');
     // Islands bought in the older island game (the app's kid.island, passed in as opts.bought): the kid's here too, free.
@@ -3293,8 +3299,9 @@
     else if (e.key === 'ArrowLeft') turnView(-1); else if (e.key === 'ArrowRight') turnView(1);
     else if (e.key === '+' || e.key === '=') setZoom(CAM.zoom * 1.3); else if (e.key === '-') setZoom(CAM.zoom / 1.3);
   }
-  function vis() { if (!O) return; O.paused = document.hidden; if (O.paused) guitarMusic(false); if (!O.paused && !O.away && !raf) { force = true; raf = requestAnimationFrame(loop); } }
+  function vis() { if (!O) return; O.paused = document.hidden || !!O.suspended; if (O.paused) guitarMusic(false); if (!O.paused && !O.away && !raf) { force = true; raf = requestAnimationFrame(loop); } }
   function close(quiet) {
+    if (IH.infused) IH.infused.stop(); IH.suspended = false;
     if (O && O.netOff) { O.netOff(); O.netOff = null; if (IH.villageNet) IH.villageNet.stop(); }
     guitarMusic(false); if (O && O.away && IH.village) { const o = O; O = null; IH.village.close(); O = o; }
     if (!O) return; const o = O; clearInterval(o.econT);
@@ -3309,6 +3316,11 @@
   }
 
   IH.open = open; IH.close = close;
+  // Infused: the app shows its own full screen (chores, the proof wall) over a hidden, paused game, then hands back
+  IH.suspend = on => {
+    if (!O) return; O.suspended = !!on; IH.suspended = !!on; O.root.style.visibility = on ? 'hidden' : ''; O.root.style.pointerEvents = on ? 'none' : ''; document.body.classList.toggle('ih-open', !on); // (the app shows again underneath)
+    if (on) { O.paused = true; guitarMusic(false); } else { O.paused = document.hidden; force = true; if (!O.paused && !O.away && !raf) raf = requestAnimationFrame(loop); }
+  };
   Object.defineProperty(IH, 'isOpen', { get: () => !!O });
   // Test hook: the state, what's where, and a few levers.
   IH.debug = () => O && {

@@ -495,6 +495,7 @@
   // ---------- each frame
   function frame(now) {
     V.raf = 0; if (!V || V.closing === 2) return; V.raf = requestAnimationFrame(frame);
+    if (IH.suspended) return; // (Infused: the app's chores are showing over the hidden game)
     const tt = now / 1000, dt = V.lastT == null ? 0 : clamp(tt - V.lastT, 0, 0.1); V.lastT = tt; V.t = tt;
     const b = V.beat.beat(now);
     if (b !== null) {
@@ -648,6 +649,7 @@
     LK.PAL.uHouse.value.set(0, 0, 0, 0); LK.CUT_U.uCutOn.value = 0;
     CAM.yaw = Math.PI / 4; CAM.view = 0; CAM.target.set(B.arrive[0], 1, B.arrive[1]); V.intro = { a: 0.75, b: 1.7, t0: performance.now() / 1000 }; CAM.zoom = 0.75;
     requestAnimationFrame(() => { const f = $('.vg-fade', V.ui); if (f) f.classList.remove('on'); });
+    if (IH.infused && IH.infused.on) setTimeout(() => IH.infused && IH.infused.brk('arrive', where), 6000); // (Infused: arriving is a break in play)
     V.welcome = setTimeout(() => toast(where === 'village' ? 'Welcome to Hoshi Street! Tap anywhere to walk, or tap a place.' : `Welcome to the ${B.title.toLowerCase()}! ${B.welcome || (B.kind === 'utility' ? 'Make things here to cook with or sell in the village.' : 'Tap a place to see what there is to do.')}`), 900);
     if (stage.keep) { const K0 = stage.keep; CAM.target.copy(K0.target); CAM.zoom = K0.zoom; CAM.yaw = K0.yaw; CAM.view = K0.view; V.intro = null; V.follow = false; V.kid.path = []; V.kid.pos.set(K0.kid[0], 0, K0.kid[1]); V.kid.yaw = K0.kid[2]; setZoom(K0.zoom); $('.vg-fade', V.ui).classList.remove('on'); clearTimeout(V.welcome); } // (rebuilt in place: no arrival)
     V.raf = requestAnimationFrame(frame);

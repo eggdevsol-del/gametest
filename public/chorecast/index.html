@@ -920,6 +920,7 @@ body.is-parent .pbtn:not(:is(.pcard,.group,.rcard,.pempty,.sheet,.glass-p) *){ba
 .ph-missing img{display:none}
 
 /* ---------- Mission stage ---------- */
+.inf-back{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:95;border:0;border-radius:999px;padding:14px 22px;font:800 16px/1 inherit;font-family:inherit;color:#fff;background:linear-gradient(180deg,#5b8cff,#3d63e0);box-shadow:0 10px 26px rgba(30,40,120,.35);cursor:pointer}.inf-back.wait{background:linear-gradient(180deg,#8a8fa8,#6b7088)}
 #stage{position:fixed;inset:0;z-index:80;color:#fff;display:flex;flex-direction:column;background:#0A0E24;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);-webkit-user-select:none;user-select:none}
 #stage.solo{background:linear-gradient(150deg,var(--c1),var(--c2))}
 .stage-bar{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px}
@@ -4847,7 +4848,7 @@ const islandGame = () => {
 const HomesGame = (() => {
   const FILES = ['look', 'kit', 'blocks', 'settings', 'homes', 'pets', 'anim2d', 'yami', 'yami3d', 'kid3d', 'cloth', 'ragdoll', 'phys', 'life', 'kitchen', 'chars', 'items',
     'village-build', 'islands-build', 'islands-more', 'farm-land', 'lang-islands', 'village-islands', 'tractor-plan', 'farm-items', 'farm-machines', 'farm-why', 'walkin', 'farm-buildings', 'farm', 'animals3d', 'village-shops',
-    'village-net', 'village', 'slip', 'bank', 'economy', 'app'];
+    'village-net', 'village', 'slip', 'bank', 'economy', 'infused', 'app'];
   let loading = null;
   const one = src => new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.async = false; s.onload = ok; s.onerror = () => no(new Error(src)); document.head.appendChild(s); });
   function load() {
@@ -4865,14 +4866,79 @@ const HomesGame = (() => {
     // islands bought in the older island game (kid.island, kept with the kid): the homes game gives them free
     const isl = k.island || {}, land = isl.land || {}, bought = {}; if (isl.farm || land.farm) bought.farm = 1; for (const key of Object.keys(land)) if (key !== 'farm' && land[key]) bought[key] = 1;
     const ok = H.open({
-      kid: who(k), xp: () => xpOf(Store.kids[id] || k), bought,
+      kid: who(k), xp: () => xpOf(Store.kids[id] || k), bought, infused: infusedOn() ? Infused.bridge(id) : null,
       family: () => Object.values(Store.kids).filter(x => !x.example && !x.archived).map(who),
       track: (t, p) => track(t, p, id),
-      onClose: () => render()
+      onClose: () => { if (infusedOn()) { Infused.stop(); UI.screen = 'who'; } render(); }
     });
     if (!ok) toast('Your home needs a newer browser to show.');
   }
   return { show, load, get open() { return !!(window.IsoHome && window.IsoHome.isOpen); } };
+})();
+/* ---------- Infused (a prototype: Grown-ups → Island game → Infused) ----------
+   The chores inside the homes game. Tapping a kid opens their home straight away; after 5 seconds, or their first tap,
+   today's must-dos come up and the game waits until each has its photo in. After that, extra jobs are offered now and
+   then at a break in play, and the in-game phone has Chores, Proof wall, Lessons and Languages. The chores and the
+   proof wall are this app's own full screens, as always (the game is hidden and paused meanwhile); once the job's done
+   the kid goes straight back into the game where they were. The game's side is home/infused.js. */
+const infusedOn = () => {
+  if (!homesOn()) return false;
+  try { const q = new URLSearchParams(location.search).get('infused'); if (q === '1' || q === '0') localStorage.setItem('cc:infused', q); const d = localStorage.getItem('cc:infused'); if (d) return d === '1'; } catch (e) { /* private browsing */ }
+  return !!S().infused;
+};
+const Infused = (() => {
+  let R = null, poll = 0;
+  const kidOf = id => Store.kids[id];
+  const brief = c => ({ key: c.key, title: c.title, icon: c.icon, mins: c.mins });
+  const must = id => { const k = kidOf(id), date = dkey(); return k ? boardFor(k, date).must.filter(c => !isDone(choreState(k.id, c, date).state)).map(brief) : []; };
+  const openN = id => { const k = kidOf(id); return k ? openChores(k, dkey()).length : 0; };
+  const extras = id => { const k = kidOf(id), date = dkey(); if (!k) return []; const mk = new Set(boardFor(k, date).must.map(c => c.key)); return openChores(k, date).filter(c => !mk.has(c.key)).map(brief); };
+  function button() {
+    let b = $('#infBack'); if (!b) { b = document.createElement('button'); b.id = 'infBack'; b.className = 'inf-back'; b.addEventListener('click', () => { if (R && !(R.o.gate && must(R.id).length)) back(false); else if (R) toast('Finish your must-dos first, then it’s play time.'); }); document.body.appendChild(b); }
+    return b;
+  }
+  function paint() {
+    const b = button(); if (!R) { b.hidden = true; return; }
+    const left = R.o.gate ? must(R.id).length : 0;
+    b.hidden = !!(Stage.active || UI.sheet); b.classList.toggle('wait', left > 0);
+    b.innerHTML = left ? `🔒 ${left} must-do${left === 1 ? '' : 's'} to go` : '🎮 Back to the game';
+  }
+  // the app's own full screen (a tab of the kid's page, and a chore's brief if asked), with the game hidden and paused
+  function away(id, tab, o = {}) {
+    if (R) back(false);
+    return new Promise(done => {
+      const H = window.IsoHome; if (H && H.suspend) H.suspend(true);
+      R = { id, o, done, n0: openN(id), busy: false };
+      UI.kidId = id; UI.kidUnlocked = id; UI.screen = 'kid'; UI.tab = tab; UI.tour = null; scrollTo(0, 0); render();
+      if (o.chore) setTimeout(() => { UI.brief = { kidId: id, key: o.chore, quote: null }; openSheet(briefSheet, { cls: 'brief' }); }, 60);
+      clearInterval(poll); poll = setInterval(check, 500); paint();
+    });
+  }
+  function check() {
+    if (!R) return; paint();
+    const busy = !!(Stage.active || UI.sheet); if (busy) { R.busy = true; return; }
+    if (R.o.gate) { if (!must(R.id).length) back(true); return; }
+    if (openN(R.id) < R.n0) return back(true); // (a job done: straight back to the game)
+    if (R.o.chore && R.busy) back(false); // (its brief closed without starting)
+  }
+  function back(did) {
+    const r = R; R = null; clearInterval(poll); paint(); if (!r) return;
+    const H = window.IsoHome; if (H && H.suspend) H.suspend(false);
+    r.done({ did });
+  }
+  function bridge(id) {
+    const G = window.Growth && window.Growth.infuse, k = () => kidOf(id), g = {};
+    if (G) for (const [n, f] of Object.entries(G)) g[n] = n === 'say' ? f : (...a) => f(k(), ...a);
+    return {
+      must: () => must(id), extras: () => extras(id),
+      gate: () => away(id, 'today', { gate: true }),
+      chores: () => away(id, 'today'), proof: () => away(id, 'proof'),
+      chore: key => away(id, 'today', { chore: key }),
+      growth: G ? g : null,
+      track: (t, p) => track('infused.' + t, p, id),
+    };
+  }
+  return { bridge, stop: () => { if (R) back(false); }, get away() { return !!R; } };
 })();
 const openIsland = id => (islandGame() === 'classic' ? Studio.show(id) : HomesGame.show(id));
 /* With the homes game on, the floating island on the chores screen (and on each kid's card) is the kid's home: a
@@ -6787,6 +6853,7 @@ function pBank() {
     </div>
     <h3 class="pgroup-t">Island activities</h3><div class="group">
       <div class="row wrap"><div class="row-main"><b>Island game</b><small>Homes: their own home, the village, Beach cove and the farm. Classic: the floating island and its shop. Each keeps everything kids bought and unlocked, so you can switch back any time.</small></div><div class="seg">${[['homes', 'Homes'], ['classic', 'Classic']].map(([v, l]) => `<button class="seg-i ${(s.islandGame || 'homes') === v ? 'on' : ''}" data-act="islandGame" data-v="${v}">${l}</button>`).join('')}</div></div>
+      ${(s.islandGame || 'homes') === 'homes' ? `<div class="row"><div class="row-main"><b>Infused (prototype)</b><small>Chores and lessons inside the game: tapping a kid opens their home, today’s must-dos come first, extra jobs are offered at breaks in play, and their phone gets Chores, Proof wall, Lessons and Languages.</small></div><button class="switch ${infusedOn() ? 'on' : ''}" role="switch" aria-checked="${infusedOn()}" aria-label="Infused prototype" data-act="infusedOn"></button></div>` : ''}
       <div class="row"><div class="row-main"><b>Island activities</b><small>On each island their character can fish, surf, ride, spot birds and more, earning a little XP each time. It opens once their must-dos are done.</small></div><button class="switch ${s.playOn !== false ? 'on' : ''}" role="switch" aria-checked="${s.playOn !== false}" aria-label="Island activities" data-act="playOn"></button></div>
       <div class="row wrap"><div class="row-main"><b>Most activities earn a day</b><small>Each kid stops earning XP from activities at this much a day. They can keep playing for fun.</small></div><div class="seg">${[[30, '30'], [60, '60'], [100, '100'], [200, '200'], [0, 'No limit']].map(([v, l]) => `<button class="seg-i ${(s.playCap ?? 60) === v ? 'on' : ''}" data-act="playCap" data-v="${v}">${l}</button>`).join('')}</div></div>
     </div>
@@ -7456,6 +7523,7 @@ const ACT = {
   farmOn: () => saveSettings({ farmOn: S().farmOn === false }),
   farmCap: a => saveSettings({ farmCap: +a.dataset.v }),
   playOn: () => saveSettings({ playOn: S().playOn === false }),
+  infusedOn: () => { const on = !infusedOn(); try { localStorage.removeItem('cc:infused'); } catch (e) { /* private browsing */ } saveSettings({ infused: on }); },
   islandGame: a => { try { localStorage.removeItem('cc:islandGame'); } catch (e) { /* private browsing */ } saveSettings({ islandGame: a.dataset.v }); },
   playCap: a => saveSettings({ playCap: +a.dataset.v }),
   remindAt: a => saveSettings({ remindAt: a.dataset.h === '' ? null : +a.dataset.h }),
@@ -7537,7 +7605,7 @@ const ACT = {
   close: () => closeSheet(),
   mute: () => { Sound.toggle(); render(); },
   home: () => { UI.kidUnlocked = null; UI.screen = 'who'; scrollTo(0, 0); render(); },
-  openKid: a => { const k = Store.kids[a.dataset.id]; if (!k) return; if (k.pin && UI.kidUnlocked !== k.id) return openKidGate(k, 'kid'); enterKid(k.id); },
+  openKid: a => { const k = Store.kids[a.dataset.id]; if (!k) return; if (k.pin && UI.kidUnlocked !== k.id) return openKidGate(k, 'kid'); enterKid(k.id); if (infusedOn() && !k.example) HomesGame.show(k.id); },
   kidPin: () => { const k = curKid(); if (!k) return; if (!k.pin) return openKidGate(k, 'kidCreate', 'kid'); openSheet(kidPinSheet); },
   kidPinChange: () => { const k = curKid(); if (k) openKidGate(k, 'kidOld', 'kid'); },
   kidPinOffMine: () => { const k = curKid(); if (k) openKidGate(k, 'kidOff', 'kid'); },
