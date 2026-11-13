@@ -577,6 +577,26 @@ void main() {
     }`;
 
   // One drawing pass set: colour (+ depth), normals and parts, then the finish to the screen or a target.
+  /* The speed readout (?perf=1 on the page's address): how many pictures a second are really being drawn, and
+     switches that take one costly part out at a time (the grass blades, the grass layers, the ink, the shadows, half
+     the pixels), so on a phone or an iPad we can see which part is slow there. "Every frame" draws all the time
+     instead of 24 a second, so the count shows what the device could manage. Nothing is saved; reload to reset. */
+  const PERF = (() => { try { return /[?&]perf=1\b/.test(location.search) || /[?&#]perf=1\b/.test(location.hash); } catch (e) { return false; } })();
+  if (PERF) {
+    const P = IH.perf = { every: false, off: { blades: false, shells: false, ink: false, shadow: false }, res: 1, n: 0, gaps: [], cpu: 0, last: 0, calls: 0, tris: 0, px: '' };
+    const box = document.createElement('div');
+    box.style.cssText = 'position:fixed;left:calc(8px + env(safe-area-inset-left,0px));top:calc(56px + env(safe-area-inset-top,0px));z-index:99999;background:rgba(14,18,26,.86);color:#e8f0ff;font:12px/1.35 ui-monospace,Menlo,monospace;padding:8px 10px;border-radius:10px;max-width:250px;pointer-events:auto;user-select:none;-webkit-user-select:none';
+    const out = document.createElement('div'), btns = document.createElement('div'); btns.style.cssText = 'display:flex;flex-wrap:wrap;gap:4px;margin-top:6px';
+    box.append(out, btns);
+    const sw = [['every', 'Every frame'], ['blades', 'Blades off'], ['shells', 'Grass layers off'], ['ink', 'Ink off'], ['shadow', 'Shadows frozen'], ['res', 'Half pixels']];
+    const paint = () => btns.querySelectorAll('button').forEach(b => { const k = b.dataset.k, on = k === 'every' ? P.every : k === 'res' ? P.res < 1 : P.off[k]; b.style.background = on ? '#ffd166' : '#2c3646'; b.style.color = on ? '#1a1a1a' : '#e8f0ff'; });
+    for (const [k, label] of sw) { const b = document.createElement('button'); b.dataset.k = k; b.textContent = label; b.style.cssText = 'border:0;border-radius:6px;padding:5px 7px;font:inherit;cursor:pointer'; b.addEventListener('click', e => { e.stopPropagation(); if (k === 'every') P.every = !P.every; else if (k === 'res') { P.res = P.res < 1 ? 1 : 0.5; dispatchEvent(new Event('resize')); } else P.off[k] = !P.off[k]; P.gaps = []; paint(); }); btns.appendChild(b); }
+    for (const ev of ['pointerdown', 'touchstart', 'mousedown']) box.addEventListener(ev, e => e.stopPropagation());
+    paint();
+    const show = () => { if (!document.body) return; if (!box.parentNode) document.body.appendChild(box); const g = P.gaps.slice(-120).sort((a, b) => a - b), avg = g.length ? g.reduce((a, b) => a + b, 0) / g.length : 0, worst = g.length ? g[g.length - 1] : 0;
+      out.innerHTML = `<b style="font-size:15px">${avg ? (1000 / avg).toFixed(1) : '–'} fps</b> drawn<br>${avg.toFixed(1)} ms a picture · worst ${worst.toFixed(0)} ms<br>scene ${(P.cpu).toFixed(1)} ms on the CPU<br>${P.px} · ${P.calls} draws · ${(P.tris / 1000).toFixed(0)}k tris`; };
+    setInterval(show, 500);
+  }
   class Pipeline {
     constructor(r) {
       this.r = r; this.w = 1; this.h = 1; this.dpr = 1; this.ink = true; this.bg = true;
@@ -598,6 +618,7 @@ void main() {
       const q = new T.Mesh(g, this.fsMat); q.frustumCulled = false; this.fsScene.add(q);
     }
     setSize(w, h, dpr) {
+      if (IH.perf && IH.perf.res < 1) dpr *= IH.perf.res; // (the speed readout's half-pixels test)
       this.w = w; this.h = h; this.dpr = dpr; const W = Math.max(1, Math.round(w * dpr)), H = Math.max(1, Math.round(h * dpr));
       this.rtC.setSize(W, H); this.rtN.setSize(W, H); this.u.uRes.value.set(W, H); this.u.uDpr.value = dpr; this.u.uPx.value = Math.max(1, dpr * 0.95);
     }
@@ -606,12 +627,24 @@ void main() {
       u.uStars.value = p.stars; u.uSun.value.set(...p.sunAt); u.uSunC.value.set(...p.sunC); u.uInk.value.set(...p.ink); u.uGlowT.value = p.glowT; u.uGlowK.value = p.glowK;
     }
     render(scene, cam, target = null) {
+      const PF = IH.perf && target === null && this.bg ? IH.perf : null; // (the speed readout watches the screen's own drawing only)
+      if (!PF) return this._render(scene, cam, target);
+      const t0 = performance.now(), hid = [], ink = this.ink;
+      if (PF.off.blades || PF.off.shells) scene.traverse(o => { const g = o.userData && o.userData.grassPart; if (g && o.visible && PF.off[g]) { o.visible = false; hid.push(o); } });
+      if (PF.off.ink) this.ink = false;
+      this._render(scene, cam, target, PF.off.shadow);
+      this.ink = ink; hid.forEach(o => { o.visible = true; });
+      PF.cpu += (performance.now() - t0 - PF.cpu) * 0.1; if (PF.last) PF.gaps.push(t0 - PF.last); if (PF.gaps.length > 240) PF.gaps.splice(0, 120); PF.last = t0;
+      PF.px = `${this.rtC.width}×${this.rtC.height} px`;
+    }
+    _render(scene, cam, target = null, keepShadow = false) {
       const r = this.r, u = this.u;
       u.uRange.value = cam.far - cam.near; u.uNear.value = cam.near; u.uFar.value = cam.far; u.uFilm.value = this.film === false ? 0 : 1; u.uFocus.value = this.focus || 90; u.uInkOn.value = this.ink ? 1 : 0; u.uBg.value = this.bg ? 1 : 0;
       const clr = r.getClearColor(new T.Color()), ca = r.getClearAlpha();
       cam.layers.enableAll();
-      r.shadowMap.needsUpdate = true;
+      if (!keepShadow) r.shadowMap.needsUpdate = true;
       r.setRenderTarget(this.rtC); r.setClearColor(0x000000, 0); r.clear(true, true, false); r.render(scene, cam);
+      if (IH.perf) { IH.perf.calls = r.info.render.calls; IH.perf.tris = r.info.render.triangles; }
       if (this.ink) {
         // bone-driven meshes draw their normals with their own (skinned) pass, so the ink follows the pose
         const skinned = []; scene.traverse(o => { if (o.isSkinnedMesh && o.visible) { skinned.push([o, o.material]); o.visible = false; } });

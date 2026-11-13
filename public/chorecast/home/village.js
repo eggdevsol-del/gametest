@@ -509,7 +509,7 @@
     // Draw only when there's something new to show: a beat of the scene (24 a second, or fewer on twos), or the view
     // moving. A 120 Hz iPad was drawing the whole farm 120 times a second for 24 new pictures.
     const [vw, vh] = V.stage.dims(), cs = [CAM.target.x, CAM.target.y, CAM.target.z, CAM.yaw, CAM.zoom, CAM.pitch, vw, vh].map(v => v.toFixed(4)).join();
-    if (b !== null || cs !== V.camSig || V.redraw) { V.camSig = cs; V.redraw = false; V.stage.pipe.render(V.S.sc, V.S.cam); }
+    if (b !== null || cs !== V.camSig || V.redraw || (IH.perf && IH.perf.every)) { V.camSig = cs; V.redraw = false; V.stage.pipe.render(V.S.sc, V.S.cam); }
     bubbles(); tags();
   }
 

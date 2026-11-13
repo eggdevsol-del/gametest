@@ -550,24 +550,36 @@
     // Real blades only where their shape shows: thick along the lawn's edges (the island's rim, paths, the house) and
     // a light scatter over the rest for tufts and movement. The body of the lawn is the shells (below).
     const lawnSet = new Set(cells.map(c => key(c.x, c.z))), edge = c => [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([a, b]) => !lawnSet.has(key(c.x + a, c.z + b)));
-    const per = c => spec.per(edge(c)), n = cells.reduce((a, c) => a + per(c), 0), mesh = new T.InstancedMesh(appBlade(), new T.ShaderMaterial({ uniforms: U, vertexShader: LAWN_V, fragmentShader: LAWN_F, side: T.DoubleSide, lights: true }), n); mesh.receiveShadow = true;
-    const d = new T.Object3D(), col = new T.Color(), spots = [], byCell = new Map(), cut = new Float32Array(n);
-    let i = 0;
+    const per = c => spec.per(edge(c)), mat = new T.ShaderMaterial({ uniforms: U, vertexShader: LAWN_V, fragmentShader: LAWN_F, side: T.DoubleSide, lights: true });
+    // every blade placed in the same order as always (the same seeded numbers), then dealt into pieces of CH by CH
+    // tiles when the lawn's big (the islands' lawns): a piece that's off screen isn't drawn at all
+    const CH = spec.chunk || 0, d = new T.Object3D(), col = new T.Color(), groups = new Map();
     for (const c of cells) for (let k = 0, m = per(c); k < m; k++) {
       const x = c.x + R(), z = c.z + R();
-      d.position.set(x, 0.004, z); d.rotation.set((R() - 0.5) * 0.3, R() * 6.28, (R() - 0.5) * 0.3); d.scale.set(0.8 + R() * 0.5, 0.65 + R() * 0.7, 1); d.updateMatrix(); mesh.setMatrixAt(i, d.matrix);
-      const v = 0.82 + R() * 0.3; col.setRGB(v * (0.96 + R() * 0.08), v, v * (0.9 + R() * 0.1)); mesh.setColorAt(i, col);
-      spots.push([x, z]); const kk = key(c.x, c.z); if (!byCell.has(kk)) byCell.set(kk, []); byCell.get(kk).push(i); i++;
+      d.position.set(x, 0.004, z); d.rotation.set((R() - 0.5) * 0.3, R() * 6.28, (R() - 0.5) * 0.3); d.scale.set(0.8 + R() * 0.5, 0.65 + R() * 0.7, 1); d.updateMatrix();
+      const v = 0.82 + R() * 0.3; col.setRGB(v * (0.96 + R() * 0.08), v, v * (0.9 + R() * 0.1));
+      const gk = CH ? Math.floor(c.x / CH) + ',' + Math.floor(c.z / CH) : '0'; if (!groups.has(gk)) groups.set(gk, []); groups.get(gk).push({ m: d.matrix.clone(), c: col.clone(), x, z, cell: key(c.x, c.z) });
     }
-    mesh.geometry.setAttribute('aCut', new T.InstancedBufferAttribute(cut, 1)); mesh.geometry.setAttribute('aHide', new T.InstancedBufferAttribute(new Float32Array(n).fill(9), 1));
-    mesh.frustumCulled = false; mesh.layers.set(1); mesh.userData = { spots, byCell, cut };
+    if (!groups.size) groups.set('0', []);
+    const pieces = [...groups.values()].map(list => {
+      const n = list.length, pm = new T.InstancedMesh(appBlade(), mat, n), spots = [], byCell = new Map(), cut = new Float32Array(n);
+      pm.receiveShadow = true;
+      list.forEach((b, i) => { pm.setMatrixAt(i, b.m); pm.setColorAt(i, b.c); spots.push([b.x, b.z]); if (!byCell.has(b.cell)) byCell.set(b.cell, []); byCell.get(b.cell).push(i); });
+      pm.geometry.setAttribute('aCut', new T.InstancedBufferAttribute(cut, 1)); pm.geometry.setAttribute('aHide', new T.InstancedBufferAttribute(new Float32Array(n).fill(9), 1));
+      pm.layers.set(1); pm.userData = { spots, byCell, cut, grassPart: 'blades' };
+      // (culled as one piece: a sphere round all its blades)
+      let a0 = 1e9, b0 = 1e9, c0 = -1e9, d0 = -1e9; for (const [x, z] of spots) { a0 = Math.min(a0, x); b0 = Math.min(b0, z); c0 = Math.max(c0, x); d0 = Math.max(d0, z); }
+      pm.frustumCulled = n > 0; if (n) pm.geometry.boundingSphere = new T.Sphere(new T.Vector3((a0 + c0) / 2, 0.3, (b0 + d0) / 2), Math.hypot(c0 - a0, d0 - b0) / 2 + 1.5);
+      return pm;
+    });
+    const mesh = pieces[0]; for (const pm of pieces.slice(1)) mesh.add(pm);
     // the lawn under the blades, the app's lawn green
     const { x0, z0, W, D } = spec, gg = new T.PlaneGeometry(W - 0.06, D - 0.06); gg.rotateX(-Math.PI / 2); gg.translate(x0 + W / 2, 0.003, z0 + D / 2);
     // (the grass's own mid-green with a fine grain, so any gap between blades still reads as grass)
     const ground = new T.Mesh(gg, new T.ShaderMaterial({ uniforms: U, vertexShader: 'varying vec2 vW; void main() { vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xz; gl_Position = projectionMatrix * viewMatrix * w; }',
       fragmentShader: 'uniform vec3 uBase, uTip; varying vec2 vW; float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); } void main() { float n = h(floor(vW * 24.0)) * 0.6 + h(floor(vW * 9.0)) * 0.4; gl_FragColor = vec4(mix(uBase, uTip, 0.28 + n * 0.22) * 0.85, 1.0); }' }));
     ground.userData.bg = true;
-    if (spec.ground) mesh.add(ground); mesh.userData.parts = [mesh]; mesh.userData.U = U;
+    if (spec.ground) mesh.add(ground); mesh.userData.parts = pieces; mesh.userData.U = U;
     mesh.add(makeShells(spec, cells, U)); mesh.userData.map = U.uMap.value.userData;
     return mesh;
   }
@@ -585,7 +597,9 @@
     tex.userData = { data, tex, x0, z0, mw, mh };
     Object.assign(U, { uMap: { value: tex }, uMapO: { value: new T.Vector4(x0, z0, W, D) }, uTop: { value: 0.2 }, uDens: { value: 30 } });
     const pos = [], lay = [], idx = [];
-    for (let l = 0; l < SHELLS; l++) { const b = pos.length / 3; pos.push(x0, 0, z0, x0 + W, 0, z0, x0, 0, z0 + D, x0 + W, 0, z0 + D); lay.push(l / (SHELLS - 1), l / (SHELLS - 1), l / (SHELLS - 1), l / (SHELLS - 1)); idx.push(b, b + 2, b + 1, b + 1, b + 2, b + 3); }
+    // (the layers cover only the lawn's own cells, not the whole map: no pixels spent on layers that are all discarded)
+    let sx0 = x0, sz0 = z0, sx1 = x0 + W, sz1 = z0 + D; if (cells.length) { sx0 = Math.max(x0, Math.min(...cells.map(c => c.x))); sz0 = Math.max(z0, Math.min(...cells.map(c => c.z))); sx1 = Math.min(x0 + W, Math.max(...cells.map(c => c.x)) + 1); sz1 = Math.min(z0 + D, Math.max(...cells.map(c => c.z)) + 1); }
+    for (let l = 0; l < SHELLS; l++) { const b = pos.length / 3; pos.push(sx0, 0, sz0, sx1, 0, sz0, sx0, 0, sz1, sx1, 0, sz1); lay.push(l / (SHELLS - 1), l / (SHELLS - 1), l / (SHELLS - 1), l / (SHELLS - 1)); idx.push(b, b + 2, b + 1, b + 1, b + 2, b + 3); }
     const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setAttribute('aL', new T.Float32BufferAttribute(lay, 1)); g.setIndex(idx);
     const m = new T.Mesh(g, new T.ShaderMaterial({ uniforms: U, lights: true,
       vertexShader: `#include <common>
@@ -630,7 +644,7 @@
       col = mix(col * vec3(0.42, 0.5, 0.72), col, smoothstep(0.68, 0.8, sh)); // (in the shade of the fence, the house, a tree: cooler and darker)
       gl_FragColor = vec4(col, 1.0); if (uDbg > 0.5) gl_FragColor = vec4(vec3(sh), 1.0);
         }` }));
-    m.frustumCulled = false; m.receiveShadow = true; m.layers.set(1); m.userData.bg = true; return m;
+    g.computeBoundingSphere(); g.boundingSphere.radius += 1; m.receiveShadow = true; m.layers.set(1); m.userData.bg = true; m.userData.grassPart = 'shells'; return m;
   }
   // stamp the lawn map: channel (0 mown, 1 covered) over a circle or box
   function lawnMap(ch, x, z, rx, rz, v, box, L = O.lawn) {
@@ -1048,7 +1062,7 @@
     const b = beat.beat(now); let sb = null;
     if (b !== null || force) { const bt = b === null ? tt : b; sb = { t: bt, dt: sceneT == null ? 0 : clamp(bt - sceneT, 0, 0.25) }; sceneT = bt; }
     force = false;
-    const p0 = performance.now(); step(tt, dt, sb); const pa = performance.now(); aim(); (O.prof3 = O.prof3 || {}).aim = (O.prof3.aim || 0) + (performance.now() - pa - (O.prof3.aim || 0)) * 0.1; const p1 = performance.now(); { const c = O.S.cam, e = c.matrixWorld.elements, cs = e.map(v => v.toFixed(4)).join() + c.left + c.right + c.top + O.w + 'x' + O.h; if (sb || cs !== O.camSig || O.held) { O.camSig = cs; pipe.render(O.S.scene, O.S.cam); } } const p2 = performance.now(); // (drawn on the beat, or when the view moves or something's being dragged: not 120 times a second for 24 new pictures)
+    const p0 = performance.now(); step(tt, dt, sb); const pa = performance.now(); aim(); (O.prof3 = O.prof3 || {}).aim = (O.prof3.aim || 0) + (performance.now() - pa - (O.prof3.aim || 0)) * 0.1; const p1 = performance.now(); { const c = O.S.cam, e = c.matrixWorld.elements, cs = e.map(v => v.toFixed(4)).join() + c.left + c.right + c.top + O.w + 'x' + O.h; if (sb || cs !== O.camSig || O.held || (IH.perf && IH.perf.every)) { O.camSig = cs; pipe.render(O.S.scene, O.S.cam); } } const p2 = performance.now(); // (drawn on the beat, or when the view moves or something's being dragged: not 120 times a second for 24 new pictures)
     const PR = O.prof || (O.prof = { step: 0, render: 0 }); PR.step += (p1 - p0 - PR.step) * 0.1; PR.render += (p2 - p1 - PR.render) * 0.1; // (a running average, for checking speed)
     O.frames = (O.frames || 0) + 1;
   }
@@ -2475,7 +2489,7 @@
   }
   // The home's grass, for the village's lawns too: the same blades, shells, wind, growth and mowing
   IH.lawnKit = {
-    build: spec => buildLawn(spec), colours: (L, ph) => lawnColours(L.userData.U, ph), CUT, CUT_W, ROW, LEAD,
+    build: spec => buildLawn({ chunk: 8, ...spec }), colours: (L, ph) => lawnColours(L.userData.U, ph), CUT, CUT_W, ROW, LEAD,
     grow(L, g) { const U = L.userData.U; U.uGrow.value = CUT + g * 0.9; const k = clamp((U.uGrow.value - CUT) / (U.uLong.value - CUT), 0, 1); U.uTop.value = CUT * BLADE_H + k * (1.12 * U.uLong.value * BLADE_H - CUT * BLADE_H); },
     tick(L, t, zoom) { const U = L.userData.U; U.uTime.value = t; if (U.uDens) U.uDens.value = clamp(22 * zoom, 22, 60); },
     cutStrip: (L, x, z, yaw) => cutStrip(x, z, yaw, L), cutAt: (L, x, z, r) => cutAt(x, z, r, L),
@@ -2522,9 +2536,9 @@
         M.tex.needsUpdate = true;
         if (k < todo.length) return requestAnimationFrame(step);
         // the blades (the scatter over the shells) from the same map
-        const { spots } = L.userData, hide = L.geometry.attributes.aHide;
-        for (let n = 0; n < spots.length; n++) { const px = Math.floor((spots[n][0] - x0) * MAP_RES), pz = Math.floor((spots[n][1] - z0) * MAP_RES); if (px < 0 || pz < 0 || px >= mw || pz >= mh) continue; const g = data[(pz * mw + px) * 4 + 1]; hide.array[n] = g === 255 ? 9 : g / 254 * 1.2 - 0.03; }
-        hide.needsUpdate = true; job.done = true; job.n = todo.length / 2; job.ms = Math.round(performance.now() - job.t0);
+        for (const pm of L.userData.parts) { const { spots } = pm.userData, hide = pm.geometry.attributes.aHide;
+          for (let n = 0; n < spots.length; n++) { const px = Math.floor((spots[n][0] - x0) * MAP_RES), pz = Math.floor((spots[n][1] - z0) * MAP_RES); if (px < 0 || pz < 0 || px >= mw || pz >= mh) continue; const g = data[(pz * mw + px) * 4 + 1]; hide.array[n] = g === 255 ? 9 : g / 254 * 1.2 - 0.03; }
+          hide.needsUpdate = true; } job.done = true; job.n = todo.length / 2; job.ms = Math.round(performance.now() - job.t0);
       };
       job.t0 = performance.now(); requestAnimationFrame(step);
     },
