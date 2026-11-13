@@ -4862,8 +4862,10 @@ const HomesGame = (() => {
     try { await load(); } catch (e) { return toast('Your home couldn’t load. Check the internet and try again.'); }
     const H = window.IsoHome; if (!H || !H.open) return toast('Your home couldn’t load.');
     const who = x => ({ id: x.id, name: x.name, avatar: x.avatar, hue: x.hue });
+    // islands bought in the older island game (kid.island, kept with the kid): the homes game gives them free
+    const isl = k.island || {}, land = isl.land || {}, bought = {}; if (isl.farm || land.farm) bought.farm = 1; for (const key of Object.keys(land)) if (key !== 'farm' && land[key]) bought[key] = 1;
     const ok = H.open({
-      kid: who(k), xp: () => xpOf(Store.kids[id] || k),
+      kid: who(k), xp: () => xpOf(Store.kids[id] || k), bought,
       family: () => Object.values(Store.kids).filter(x => !x.example && !x.archived).map(who),
       track: (t, p) => track(t, p, id),
       onClose: () => render()

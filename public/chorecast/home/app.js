@@ -3268,6 +3268,12 @@
     ui(); force = true; if (!raf) raf = requestAnimationFrame(loop);
     { const me = O; setTimeout(() => { if (O === me && !O.away && !IH.portraitOf(kid.id)) keepPortrait(); }, 2500); } // (the chores screen's picture of this home, the first time)
     document.body.classList.add('ih-open');
+    // Islands bought in the older island game (the app's kid.island, passed in as opts.bought): the kid's here too, free.
+    // (that purchase lives with the kid on the server; this game's own record is on the device, so a kid who bought the
+    // farm before, or opens their home on a new device, still has it)
+    if (opts.bought && IH.islandsBuild) { const own = (st.islands = st.islands || {}), got = [];
+      for (const id of Object.keys(opts.bought)) { const i = IH.islandsBuild.LIST.find(q => q.id === id); if (i && opts.bought[id] && !own[id]) { own[id] = Date.now(); got.push(i); } }
+      if (got.length) { save(); if (O.opts.track) O.opts.track('island.carried', { ids: got.map(i => i.id).join(',') }); setTimeout(() => toast(`${got.map(i => `${i.emoji} ${i.name}`).join(', ')}: yours from before. Visit from Travel on your phone 📱`), 3000); } }
     // the Veggie plot and the Orchard terrace are blocks of land on the farm now (farm-land.js): an owner gets theirs
     // free, with what was growing on it (the beds and trees keep their numbers, so nothing's lost)
     if (IH.farmLand) { const own = O.st.islands || {}, f = (O.st.farm = O.st.farm || {}), land = (f.land = f.land || []); let moved = 0;
