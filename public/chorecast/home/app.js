@@ -551,6 +551,7 @@
   function lawnDetail(zoom) {
     const s = zoom < 1.15 ? 1 : zoom < 2.6 ? 2 : 4; if (s === LOD.segs) return false; LOD.segs = s;
     for (const w of LOD.live) { const pm = w.deref(); if (!pm) { LOD.live.delete(w); continue; } pm.geometry = pm.userData.geos[s]; }
+    if (GRASS.solid) setSolidGrass(true); // (solid grass shows the blades only close up)
     return true;
   }
   // A lawn from its cells (whole tiles of grass) inside the rectangle x0, z0, W x D: the home's garden, or the
@@ -599,7 +600,8 @@
       fragmentShader: 'uniform vec3 uBase, uTip; varying vec2 vW; float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); } void main() { float n = h(floor(vW * 24.0)) * 0.6 + h(floor(vW * 9.0)) * 0.4; gl_FragColor = vec4(mix(uBase, uTip, 0.28 + n * 0.22) * 0.85, 1.0); }' }));
     ground.userData.bg = true;
     if (spec.ground) mesh.add(ground); mesh.userData.parts = pieces; mesh.userData.U = U;
-    mesh.add(makeShells(spec, cells, U)); mesh.userData.map = U.uMap.value.userData;
+    const sh = makeShells(spec, cells, U), so = makeSolid(sh, U); mesh.add(sh); mesh.add(so); mesh.userData.map = U.uMap.value.userData;
+    mesh.userData.shells = sh; mesh.userData.solid = so; GRASS.lawns.add(new WeakRef(mesh)); grassMode(mesh);
     return mesh;
   }
   // Shell grass: the body of the lawn as 24 stacked layers (one draw), each deciding pixel by pixel where blades
@@ -666,6 +668,79 @@
       gl_FragColor = vec4(col, 1.0); if (uDbg > 0.5) gl_FragColor = vec4(vec3(sh), 1.0);
         }` }));
     g.computeBoundingSphere(); g.boundingSphere.radius += 1; m.receiveShadow = true; m.layers.set(1); m.userData.bg = true; m.userData.grassPart = 'shells'; return m;
+  }
+  // Solid grass (a trial, switched in the speed panel): the lawn as one solid block as tall as the grass, drawn as a
+  // single surface on its top. For each pixel the shader follows the view down through the block, a step for each of
+  // the shells' layers, and shows the first blade it meets: the same blades, wind, mowing, colours and shade as the
+  // shells and the real blades, but every pixel is shaded once (not 24 times) and there are no blade triangles at all.
+  // Where the view comes in through the side of the block (a lawn's edge by a path) it finds the blades there just the
+  // same, so the edges stand up out of the ground. It writes the depth of what it found, so feet, posts and bales stand
+  // in the grass rather than being cut off at its top.
+  const GRASS = { solid: (() => { try { const q = location.search; if (/[?&]grass=solid\b/.test(q)) return true; if (/[?&]grass=blades\b/.test(q)) return false; return localStorage.getItem('ih:grass') === 'solid'; } catch (e) { return false; } })(), lawns: new Set() };
+  function grassMode(L) {
+    const on = GRASS.solid, u = L.userData, blades = !on || LOD.segs === 4; u.shells.visible = !on; u.solid.visible = on;
+    // (the real blades: not drawn at all, except close up, where their tufts at the lawn's edges are big enough to see)
+    for (const pm of u.parts) for (const g of Object.values(pm.userData.geos)) g.setDrawRange(0, blades ? Infinity : 0);
+  }
+  function setSolidGrass(on) {
+    GRASS.solid = !!on; try { localStorage.setItem('ih:grass', on ? 'solid' : 'blades'); } catch (e) { /* */ }
+    for (const w of GRASS.lawns) { const L = w.deref(); if (!L) { GRASS.lawns.delete(w); continue; } grassMode(L); }
+  }
+  function makeSolid(shells, U) {
+    const m = new T.Mesh(new T.PlaneGeometry(1, 1), new T.ShaderMaterial({ uniforms: U, lights: true, extensions: { fragDepth: true },
+      vertexShader: `uniform float uTop; varying vec3 vW; void main() { vec3 p = position; p.y = 0.006 + uTop; vec4 w = modelMatrix * vec4(p, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
+      fragmentShader: `#include <common>
+    #include <packing>
+    #include <bsdfs>
+    #include <lights_pars_begin>
+    #include <shadowmap_pars_fragment>
+    #if defined( USE_SHADOWMAP ) && NUM_DIR_LIGHT_SHADOWS > 0
+      uniform mat4 directionalShadowMatrix[ NUM_DIR_LIGHT_SHADOWS ];
+    #endif
+    uniform mat4 projectionMatrix; uniform sampler2D uMap; uniform vec4 uMapO; uniform float uTop, uCut, uGrow, uLong, uTime, uWind, uDens; uniform vec3 uBase, uTip, uSun; varying vec3 vW;
+        float hsh(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+        void main() {
+          vec3 rd = isOrthographic ? -vec3(viewMatrix[0][2], viewMatrix[1][2], viewMatrix[2][2]) : normalize(vW - cameraPosition);
+          float k = clamp((uGrow - uCut) / (uLong - uCut), 0.0, 1.0), cutH = uCut * ${BLADE_H.toFixed(3)};
+          float wave0 = uTime * (1.6 + uWind * 0.6), gust0 = uTime * 0.6;
+          vec3 p = vW; float top = 0.0, r1 = 0.0, h = 0.0, found = 0.0;
+          for (int l = ${SHELLS - 1}; l >= 0; l--) { // (top layer first, as the shells)
+            float aL = float(l) / ${(SHELLS - 1).toFixed(1)}; h = aL * uTop;
+            p = vW + rd * ((vW.y - 0.006 - h) / max(-rd.y, 0.05)); // (where the view is at this layer's height)
+            vec4 mp = texture2D(uMap, (p.xz - uMapO.xy) / uMapO.zw); if (mp.b < 0.5) continue; // (not lawn here: over a path, say)
+            float cap = mp.g > 0.99 ? 99.0 : mp.g * 1.2 - 0.03, kk = mp.r > 0.5 ? 0.0 : k;
+            float wave = sin(dot(p.xz, vec2(0.5, 0.29)) - wave0) * 0.5 + 0.5, gust = 0.55 + 0.45 * sin(gust0 + p.x * 0.14);
+            float f = h / max(uTop, 0.001); vec2 q = p.xz - vec2(0.85, 0.5) * (0.3 + wave * gust) * uWind * f * f * uTop * 0.3;
+            top = 0.0; float hit = 0.0;
+            for (int s = 0; s < 2; s++) {
+              float a = s == 0 ? 0.47 : -0.83; vec2 qq = mat2(cos(a), -sin(a), sin(a), cos(a)) * q * uDens + (s == 0 ? vec2(0.0) : vec2(0.37, 0.71));
+              vec2 cell = floor(qq), fr = fract(qq) - 0.5; float a1 = hsh(cell + float(s) * 91.3), a2 = hsh(cell + 17.3 + float(s) * 7.1), a3 = hsh(cell + 31.7 + float(s) * 3.3);
+              float tp = mix(cutH, (0.62 + a3 * 0.5) * uLong * ${BLADE_H.toFixed(3)}, kk);
+              float tt = clamp(h / tp, 0.0, 1.0);
+              if (h <= tp && length(fr - (vec2(a1, a2) - 0.5) * 0.55) <= 0.4 * (1.0 - tt * 0.88) && tp > top) { top = tp; r1 = a1; hit = 1.0; }
+            }
+            if (l == 0) { top = max(top, cutH); found = 2.0; break; } // (the ground between the blades)
+            if (hit > 0.5 && h <= cap) { found = 1.0; break; }
+          }
+          if (found < 0.5) discard; // (the view never went through any lawn)
+          float t = clamp(h / top, 0.0, 1.0);
+          vec3 col = mix(uBase, uTip, smoothstep(0.0, 1.0, t)) * (0.82 + r1 * 0.3);
+          col *= 0.7 + 0.3 * t; col += uSun * pow(t, 4.0) * 0.22;
+          if (found > 1.5) col = mix(uBase, uTip, 0.2) * 0.8;
+          float sh = 1.0;
+      #if defined( USE_SHADOWMAP ) && NUM_DIR_LIGHT_SHADOWS > 0
+        vec4 sc = directionalShadowMatrix[0] * vec4(p + vec3(0.0, directionalLightShadows[0].shadowNormalBias, 0.0), 1.0);
+        sh = getShadow(directionalShadowMap[0], directionalLightShadows[0].shadowMapSize, directionalLightShadows[0].shadowBias, directionalLightShadows[0].shadowRadius, sc);
+      #endif
+          col = mix(col * vec3(0.42, 0.5, 0.72), col, smoothstep(0.68, 0.8, sh));
+          gl_FragColor = vec4(col, 1.0);
+          vec4 cp = projectionMatrix * viewMatrix * vec4(p, 1.0); gl_FragDepthEXT = clamp(cp.z / cp.w * 0.5 + 0.5, 0.0, 1.0);
+        }` }));
+    // (the same rectangle as the shells, just one of it)
+    const sp = shells.geometry.attributes.position.array; let a = 1e9, b = 1e9, c = -1e9, d = -1e9; for (let i = 0; i < 12; i += 3) { a = Math.min(a, sp[i]); b = Math.min(b, sp[i + 2]); c = Math.max(c, sp[i]); d = Math.max(d, sp[i + 2]); }
+    const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute([a, 0, b, c, 0, b, a, 0, d, c, 0, d], 3)); g.setIndex([0, 2, 1, 1, 2, 3]);
+    g.computeBoundingSphere(); g.boundingSphere.radius += 1; m.geometry.dispose(); m.geometry = g;
+    m.receiveShadow = true; m.layers.set(1); m.userData.bg = true; m.userData.grassPart = 'solid'; return m;
   }
   // stamp the lawn map: channel (0 mown, 1 covered) over a circle or box
   function lawnMap(ch, x, z, rx, rz, v, box, L = O.lawn) {
@@ -2510,7 +2585,7 @@
   }
   // The home's grass, for the village's lawns too: the same blades, shells, wind, growth and mowing
   IH.lawnKit = {
-    build: spec => buildLawn({ chunk: 8, lod: true, ...spec }), detail: lawnDetail, colours: (L, ph) => lawnColours(L.userData.U, ph), CUT, CUT_W, ROW, LEAD,
+    build: spec => buildLawn({ chunk: 8, lod: true, ...spec }), detail: lawnDetail, solid: on => (on === undefined ? GRASS.solid : setSolidGrass(on)), colours: (L, ph) => lawnColours(L.userData.U, ph), CUT, CUT_W, ROW, LEAD,
     grow(L, g) { const U = L.userData.U; U.uGrow.value = CUT + g * 0.9; const k = clamp((U.uGrow.value - CUT) / (U.uLong.value - CUT), 0, 1); U.uTop.value = CUT * BLADE_H + k * (1.12 * U.uLong.value * BLADE_H - CUT * BLADE_H); },
     tick(L, t, zoom) { const U = L.userData.U; U.uTime.value = t; if (U.uDens) U.uDens.value = clamp(22 * zoom, 22, 60); },
     cutStrip: (L, x, z, yaw) => cutStrip(x, z, yaw, L), cutAt: (L, x, z, r) => cutAt(x, z, r, L),
