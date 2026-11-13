@@ -505,6 +505,7 @@
     if (V.intro) { const p = clamp((tt - V.intro.t0) / 1.6, 0, 1); CAM.zoom = V.intro.a + (V.intro.b - V.intro.a) * ease(p); if (p >= 1) { V.intro = null; setZoom(CAM.zoom); } }
     if (V.follow) { const k = V.kid.pos; CAM.target.x += (k.x - CAM.target.x) * Math.min(1, dt * 3); CAM.target.z += (k.z - CAM.target.z) * Math.min(1, dt * 3); CAM.target.y += (1 + k.y - CAM.target.y) * Math.min(1, dt * 3); }
     LK.WATER_U.uT.value = tt; V.stage.pipe.u.uT.value = tt; if (V.lawn && V.B === V.street) IH.lawnKit.tick(V.lawn, tt, CAM.zoom);
+    if (IH.lawnKit && IH.lawnKit.detail) IH.lawnKit.detail(CAM.zoom); // (the blades' detail for how far out the camera is)
     light(); aim();
     // Draw only when there's something new to show: a beat of the scene (24 a second, or fewer on twos), or the view
     // moving. A 120 Hz iPad was drawing the whole farm 120 times a second for 24 new pictures.

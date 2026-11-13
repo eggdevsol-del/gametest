@@ -476,8 +476,12 @@
   // mower. The same blade, wind and colours as the app (index.html grassField), sized for a home's tiles.
   const LAWN_C = { day: { base: '#2a6b2a', tip: '#c4e86a', sun: '#fff2c4', ground: '#3f8f35' }, dusk: { base: '#2e5f2a', tip: '#d8d06a', sun: '#ffd8a0', ground: '#3d7a32' }, night: { base: '#0f2a24', tip: '#3d6b5a', sun: '#223355', ground: '#14301f' } };
   const BLADE_H = 0.42;
-  const appBlade = () => { // the app's blade (a tapering strip in five segments), three to a tuft, each turned its own way
-    const segs = 4, w = 0.055, h = BLADE_H, pos = [], idx = [], top = [], R = IH.kit.rng(3);
+  // The app's blade (a tapering strip in segs segments; 4 close up), three to a tuft, each turned its own way. The
+  // islands' lawns swap to fewer segments when the camera is further out and a blade is only a few pixels tall: the
+  // same blades in the same places, the bend drawn with fewer points (see lawnDetail).
+  const BLADES = {}, appBlade = (segs = 4) => BLADES[segs] || (BLADES[segs] = makeBlade(segs));
+  const makeBlade = segs => {
+    const w = 0.055, h = BLADE_H, pos = [], idx = [], top = [], R = IH.kit.rng(3);
     for (let b = 0; b < 3; b++) {
       const a = b * 2.1 + R() * 0.6, ca = Math.cos(a), sa = Math.sin(a), ox = (R() - 0.5) * 0.09, oz = (R() - 0.5) * 0.09, hs = 0.8 + R() * 0.35, base = pos.length / 3;
       for (let i = 0; i <= segs; i++) { const t = i / segs, hw = w * 0.5 * (1 - Math.pow(t, 1.4) * 0.95); for (const sx of [-hw, hw]) { pos.push(ox + sx * ca, t * h * hs, oz - sx * sa); top.push(h * hs); } }
@@ -541,6 +545,14 @@
     for (const c of home.cells.values()) if (c.zone === 'out' && !c.deck && !(home.path && home.path.has(key(c.x, c.z)))) cells.push(c);
     return buildLawn({ cells, x0: -P.l, z0: -P.t, W: df.w + P.l + P.r, D: df.d + P.t + P.b, seed: df.w * 17 + df.d, phase: O.st.look.phase, per: e => e ? 200 : 14, ground: true });
   }
+  // Blade detail by zoom (the islands' lawns): 1 segment far out, 2 at the usual view, 4 close up. Swapping is only a
+  // pointer change (every level's geometry is made with the piece), done only when the level changes.
+  const LOD = { segs: 2, live: new Set() };
+  function lawnDetail(zoom) {
+    const s = zoom < 1.15 ? 1 : zoom < 2.6 ? 2 : 4; if (s === LOD.segs) return false; LOD.segs = s;
+    for (const w of LOD.live) { const pm = w.deref(); if (!pm) { LOD.live.delete(w); continue; } pm.geometry = pm.userData.geos[s]; }
+    return true;
+  }
   // A lawn from its cells (whole tiles of grass) inside the rectangle x0, z0, W x D: the home's garden, or the
   // village's lawns (village.js, through IH.lawnKit). per(edge): blades a tile, at an edge or not.
   function buildLawn(spec) {
@@ -562,14 +574,21 @@
     }
     if (!groups.size) groups.set('0', []);
     const pieces = [...groups.values()].map(list => {
-      const n = list.length, pm = new T.InstancedMesh(appBlade(), mat, n), spots = [], byCell = new Map(), cut = new Float32Array(n);
-      pm.receiveShadow = true;
-      list.forEach((b, i) => { pm.setMatrixAt(i, b.m); pm.setColorAt(i, b.c); spots.push([b.x, b.z]); if (!byCell.has(b.cell)) byCell.set(b.cell, []); byCell.get(b.cell).push(i); });
-      pm.geometry.setAttribute('aCut', new T.InstancedBufferAttribute(cut, 1)); pm.geometry.setAttribute('aHide', new T.InstancedBufferAttribute(new Float32Array(n).fill(9), 1));
-      pm.layers.set(1); pm.userData = { spots, byCell, cut, grassPart: 'blades' };
+      const n = list.length, spots = list.map(b => [b.x, b.z]), byCell = new Map(), cut = new Float32Array(n);
+      list.forEach((b, i) => { if (!byCell.has(b.cell)) byCell.set(b.cell, []); byCell.get(b.cell).push(i); });
+      const cutA = new T.InstancedBufferAttribute(cut, 1), hideA = new T.InstancedBufferAttribute(new Float32Array(n).fill(9), 1);
       // (culled as one piece: a sphere round all its blades)
       let a0 = 1e9, b0 = 1e9, c0 = -1e9, d0 = -1e9; for (const [x, z] of spots) { a0 = Math.min(a0, x); b0 = Math.min(b0, z); c0 = Math.max(c0, x); d0 = Math.max(d0, z); }
-      pm.frustumCulled = n > 0; if (n) pm.geometry.boundingSphere = new T.Sphere(new T.Vector3((a0 + c0) / 2, 0.3, (b0 + d0) / 2), Math.hypot(c0 - a0, d0 - b0) / 2 + 1.5);
+      const sph = n ? new T.Sphere(new T.Vector3((a0 + c0) / 2, 0.3, (b0 + d0) / 2), Math.hypot(c0 - a0, d0 - b0) / 2 + 1.5) : null;
+      // one geometry per level of detail, all sharing this piece's blade data (cut, hidden) and its sphere
+      const geos = {}; for (const sg of spec.lod ? [1, 2, 4] : [4]) {
+        const b = appBlade(sg), g = new T.BufferGeometry(); g.setIndex(b.index); g.setAttribute('position', b.attributes.position); g.setAttribute('aTop', b.attributes.aTop);
+        g.setAttribute('aCut', cutA); g.setAttribute('aHide', hideA); g.boundingSphere = sph || b.boundingSphere; geos[sg] = g;
+      }
+      const pm = new T.InstancedMesh(geos[spec.lod ? LOD.segs : 4], mat, n); pm.receiveShadow = true;
+      list.forEach((b, i) => { pm.setMatrixAt(i, b.m); pm.setColorAt(i, b.c); });
+      pm.layers.set(1); pm.userData = { spots, byCell, cut, grassPart: 'blades', geos }; pm.frustumCulled = n > 0;
+      if (spec.lod && n) LOD.live.add(new WeakRef(pm));
       return pm;
     });
     const mesh = pieces[0]; for (const pm of pieces.slice(1)) mesh.add(pm);
@@ -599,7 +618,9 @@
     const pos = [], lay = [], idx = [];
     // (the layers cover only the lawn's own cells, not the whole map: no pixels spent on layers that are all discarded)
     let sx0 = x0, sz0 = z0, sx1 = x0 + W, sz1 = z0 + D; if (cells.length) { sx0 = Math.max(x0, Math.min(...cells.map(c => c.x))); sz0 = Math.max(z0, Math.min(...cells.map(c => c.z))); sx1 = Math.min(x0 + W, Math.max(...cells.map(c => c.x)) + 1); sz1 = Math.min(z0 + D, Math.max(...cells.map(c => c.z)) + 1); }
-    for (let l = 0; l < SHELLS; l++) { const b = pos.length / 3; pos.push(sx0, 0, sz0, sx1, 0, sz0, sx0, 0, sz1, sx1, 0, sz1); lay.push(l / (SHELLS - 1), l / (SHELLS - 1), l / (SHELLS - 1), l / (SHELLS - 1)); idx.push(b, b + 2, b + 1, b + 1, b + 2, b + 3); }
+    // (top layer first: it's the nearest to the camera, so where it has a blade the layers under it fail the depth test
+    // before any of their shading is done. The picture is the same; much less of it is shaded and thrown away)
+    for (let l = SHELLS - 1; l >= 0; l--) { const b = pos.length / 3; pos.push(sx0, 0, sz0, sx1, 0, sz0, sx0, 0, sz1, sx1, 0, sz1); lay.push(l / (SHELLS - 1), l / (SHELLS - 1), l / (SHELLS - 1), l / (SHELLS - 1)); idx.push(b, b + 2, b + 1, b + 1, b + 2, b + 3); }
     const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setAttribute('aL', new T.Float32BufferAttribute(lay, 1)); g.setIndex(idx);
     const m = new T.Mesh(g, new T.ShaderMaterial({ uniforms: U, lights: true,
       vertexShader: `#include <common>
@@ -2489,7 +2510,7 @@
   }
   // The home's grass, for the village's lawns too: the same blades, shells, wind, growth and mowing
   IH.lawnKit = {
-    build: spec => buildLawn({ chunk: 8, ...spec }), colours: (L, ph) => lawnColours(L.userData.U, ph), CUT, CUT_W, ROW, LEAD,
+    build: spec => buildLawn({ chunk: 8, lod: true, ...spec }), detail: lawnDetail, colours: (L, ph) => lawnColours(L.userData.U, ph), CUT, CUT_W, ROW, LEAD,
     grow(L, g) { const U = L.userData.U; U.uGrow.value = CUT + g * 0.9; const k = clamp((U.uGrow.value - CUT) / (U.uLong.value - CUT), 0, 1); U.uTop.value = CUT * BLADE_H + k * (1.12 * U.uLong.value * BLADE_H - CUT * BLADE_H); },
     tick(L, t, zoom) { const U = L.userData.U; U.uTime.value = t; if (U.uDens) U.uDens.value = clamp(22 * zoom, 22, 60); },
     cutStrip: (L, x, z, yaw) => cutStrip(x, z, yaw, L), cutAt: (L, x, z, r) => cutAt(x, z, r, L),
