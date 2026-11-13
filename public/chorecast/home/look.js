@@ -588,7 +588,7 @@ void main() {
   if (PERF) {
     const P = IH.perf = { every: false, off: { blades: false, shells: false, ink: false, shadow: false }, res: 1, n: 0, gaps: [], cpu: 0, last: 0, calls: 0, tris: 0, px: '' };
     const box = document.createElement('div');
-    box.style.cssText = 'position:fixed;left:calc(8px + env(safe-area-inset-left,0px));top:calc(56px + env(safe-area-inset-top,0px));z-index:99999;background:rgba(14,18,26,.86);color:#e8f0ff;font:12px/1.35 ui-monospace,Menlo,monospace;padding:8px 10px;border-radius:10px;max-width:250px;pointer-events:auto;user-select:none;-webkit-user-select:none';
+    box.style.cssText = 'position:fixed;left:calc(8px + env(safe-area-inset-left,0px));top:calc(130px + env(safe-area-inset-top,0px));z-index:99999;background:rgba(14,18,26,.86);color:#e8f0ff;font:12px/1.35 ui-monospace,Menlo,monospace;padding:8px 10px;border-radius:10px;max-width:250px;pointer-events:auto;user-select:none;-webkit-user-select:none';
     const out = document.createElement('div'), btns = document.createElement('div'); btns.style.cssText = 'display:flex;flex-wrap:wrap;gap:4px;margin-top:6px';
     box.append(out, btns);
     const sw = [['every', 'Every frame'], ['blades', 'Blades off'], ['shells', 'Grass layers off'], ['ink', 'Ink off'], ['shadow', 'Shadows frozen'], ['res', 'Half pixels']];
