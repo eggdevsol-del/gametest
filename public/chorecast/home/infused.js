@@ -53,33 +53,60 @@
     S.gateUp = true; S.c.sound('pop');
     const el = card(`<div class="inf-k">Before you play 🎮</div><h2>Today’s must-dos</h2>
       <div class="inf-list">${left.map(c => `<div class="inf-row"><span>${c.icon}</span><b>${esc(c.title)}</b></div>`).join('')}</div>
-      <p class="inf-sub">Do these first. Each one counts as soon as its photo is in, then it’s play time.</p>
+      <p class="inf-sub">Do these first. Each one counts as soon as its photo is in, then it’s play time.</p>${later()}
       <button class="inf-go" data-i="go">Let’s do them</button>`, { block: true, cls: 'inf-gate' });
     el.querySelector('[data-i="go"]').addEventListener('click', () => {
       S.gateUp = false; clear(); S.br.track('gate.open', { left: left.length });
       S.br.gate().then(() => { if (!S) return; const n = S.br.must().length; if (n) { S.gateUp = false; gateNow(); } else openUp(true); });
     });
   }
+  // must-dos that come later today (dinner jobs, say): shown, so they're no surprise
+  const hr = h => { const H = Math.floor(h), m = Math.round((h - H) * 60); return `${H % 12 || 12}${m ? ':' + String(m).padStart(2, '0') : ''}${H < 12 ? 'am' : 'pm'}`; };
+  const later = () => { const L = S.br.soon ? S.br.soon() : []; return L.length ? `<div class="inf-soon">Later today: ${L.map(c => `${c.icon} ${esc(c.title)} at ${hr(c.at)}`).join(' · ')}</div>` : ''; };
   function openUp(did) {
     S.gated = false; S.gateUp = false; S.lastOffer = now(); clear(); S.layer.hidden = true;
     if (did) { S.c.sound('buy'); S.c.toast('All your must-dos are done! ✨ Play time.'); S.br.track('gate.done', {}); }
-    else S.c.toast('Must-dos all done today ✓ Play time!');
+    else { const L = S.br.soon ? S.br.soon() : []; S.c.toast(L.length ? `Must-dos done for now ✓ Play time! ${L[0].icon} ${L[0].title} comes at ${hr(L[0].at)}.` : 'Must-dos all done today ✓ Play time!'); }
   }
 
   // ---------- extra jobs, at a break in play
   function brk(why, where) {
     if (!S || S.gated) return;
+    if (S.dueAt && S.br.must().length) return regate();
     if (why === 'arrive' && LANG_ISLE[where]) setTimeout(() => langNudge(LANG_ISLE[where]), 5000);
     if (S.offers >= MAX_OFFERS || now() - S.lastOffer < GAP || S.layer.querySelector('.inf-card')) return;
     const list = S.br.extras(); if (!list.length) return;
-    const pick = list.sort(() => Math.random() - 0.5).slice(0, 2); S.offers++; S.lastOffer = now();
-    const el = card(`<div class="inf-k">A good moment for a job? 🙌</div><h2>Pick one, or later</h2>
-      <div class="inf-list">${pick.map(c => `<button class="inf-row inf-pick" data-k="${esc(c.key)}"><span>${c.icon}</span><b>${esc(c.title)}</b><small>${c.mins ? `${c.mins} min` : ''}</small></button>`).join('')}</div>
-      <button class="inf-later" data-i="later">Not now</button>`, { cls: 'offer' });
-    S.br.track('offer', { why, n: pick.length });
-    el.querySelectorAll('.inf-pick').forEach(b => b.addEventListener('click', () => { clear(); S.br.track('offer.take', { key: b.dataset.k }); S.br.chore(b.dataset.k).then(r => { if (S && r && r.did) { S.c.sound('buy'); S.c.toast('Nice work! ✨ Back to it.'); } }); }));
+    // fixed-price jobs first (their pay moves the goal bar by a known amount), in a fresh order each time
+    const pick = list.map(c => [c, (c.pay > 0 ? 0 : 1) + Math.random()]).sort((a, b) => a[1] - b[1]).map(x => x[0]).slice(0, 2); S.offers++; S.lastOffer = now();
+    // the offer shows the kid's own saving goal, and how far each job moves it (its pay into the Save jar at their
+    // split); with no goal set, each job's pay and time instead
+    const G = S.br.goal ? S.br.goal() : null, pct = n => Math.min(100, Math.round(n / G.target * 100));
+    const opt = c => { const add = G && c.pay ? Math.round(c.pay * G.share) : 0;
+      return `<button class="inf-copt" data-k="${esc(c.key)}" data-add="${add}"><span class="e">${c.icon}</span><span class="t"><b>${esc(c.title)}</b><small>${c.mins ? `${c.mins} min` : ''}${G && add ? ` · ${esc(c.payTxt || '')}` : ''}</small></span>${G && add ? `<span class="plus">+${esc(G.fmt(add))}<small>${pct(G.saved)}% → ${pct(G.saved + add)}%</small></span>` : `<span class="plus pay">${esc(c.payTxt || '')}</span>`}</button>`; };
+    const el = card(`${G ? `<div class="inf-goal"><span class="g">${G.icon}</span><div class="gi"><b>${esc(G.name)}</b><small data-g="txt">${esc(G.fmt(G.saved))} of ${esc(G.fmt(G.target))} saved</small><div class="inf-gbar"><u data-g="add" style="width:${pct(G.saved)}%"></u><i style="width:${pct(G.saved)}%"></i></div></div></div>
+      <h2>Pick a job to get closer</h2>` : `<div class="inf-k">A good moment for a job? 🙌</div><h2>Pick a job</h2>`}
+      <div class="inf-list">${pick.map(opt).join('')}</div>
+      <button class="inf-later" data-i="later">Not now</button>`, { cls: 'offer goal' });
+    S.br.track('offer', { why, n: pick.length, goal: !!G });
+    if (G) { const bar = el.querySelector('[data-g="add"]'), txt = el.querySelector('[data-g="txt"]');
+      const show = add => { bar.style.width = pct(G.saved + add) + '%'; txt.textContent = `${G.fmt(G.saved + add)} of ${G.fmt(G.target)} saved`; };
+      el.querySelectorAll('.inf-copt').forEach(b => { b.addEventListener('pointerenter', () => show(+b.dataset.add)); b.addEventListener('pointerleave', () => show(0)); }); }
+    el.querySelectorAll('.inf-copt').forEach(b => b.addEventListener('click', () => {
+      if (G && !b.classList.contains('lit')) { // (the first tap shows where the bar would get to; the second takes the job)
+        el.querySelectorAll('.inf-copt').forEach(x => x.classList.remove('lit')); b.classList.add('lit'); const bar = el.querySelector('[data-g="add"]'); bar.style.width = pct(G.saved + +b.dataset.add) + '%'; el.querySelector('[data-g="txt"]').textContent = `${G.fmt(G.saved + +b.dataset.add)} of ${G.fmt(G.target)} saved`; S.c.sound('pop'); return; }
+      clear(); S.br.track('offer.take', { key: b.dataset.k }); S.br.chore(b.dataset.k).then(r => { if (S && r && r.did) { S.c.sound('buy'); S.c.toast(G ? `Nice work! ✨ Closer to your ${G.name.toLowerCase()}.` : 'Nice work! ✨ Back to it.'); } });
+    }));
     el.querySelector('[data-i="later"]').addEventListener('click', () => { clear(); S.lastOffer = now() - GAP + SNOOZE; S.br.track('offer.later', {}); });
   }
+  // A must-do whose time has come (dinner jobs at dinner time): a heads-up, then the must-dos card again at the next
+  // break, or in two minutes at the latest
+  function dueCheck() {
+    if (!S || S.gated) return;
+    const due = S.br.must(); if (!due.length) { S.dueAt = 0; return; }
+    if (!S.dueAt) { S.dueAt = now(); S.c.sound('pop'); S.c.toast(`${due[0].icon} Time for ${due.length === 1 ? due[0].title.toLowerCase() : 'some must-dos'} soon. Play stops in 2 minutes until ${due.length === 1 ? 'it’s' : 'they’re'} done.`); return; }
+    if (now() - S.dueAt > 120000) regate();
+  }
+  function regate() { if (!S || S.gated) return; S.gated = true; S.gateUp = false; S.dueAt = 0; clear(); S.layer.hidden = false; S.layer.classList.add('block'); gateNow(); }
 
   // ---------- lessons for unlocks
   function unlocked(name, kind) {
@@ -185,7 +212,7 @@
       S.layer.addEventListener('pointerdown', S.onIn);
       c.root.addEventListener('pointerdown', () => { if (S) S.lastIn = now(); }, true);
       // a quiet moment counts as a break: nothing touched for 25 seconds
-      S.tick = setInterval(() => { if (S && !S.gated && now() - S.lastIn > 25000 && !document.querySelector('.ih-sheet:not([hidden])')) brk('quiet'); }, 15000);
+      S.tick = setInterval(() => { dueCheck(); if (S && !S.gated && now() - S.lastIn > 25000 && !document.querySelector('.ih-sheet:not([hidden])')) brk('quiet'); }, 15000);
     },
     stop() { if (!S) return; clearTimeout(S.t5); clearInterval(S.tick); if (S.layer) S.layer.remove(); S = null; P = null; },
     get on() { return !!S; },

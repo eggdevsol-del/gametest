@@ -921,6 +921,7 @@ body.is-parent .pbtn:not(:is(.pcard,.group,.rcard,.pempty,.sheet,.glass-p) *){ba
 
 /* ---------- Mission stage ---------- */
 .inf-back{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:95;border:0;border-radius:999px;padding:14px 22px;font:800 16px/1 inherit;font-family:inherit;color:#fff;background:linear-gradient(180deg,#5b8cff,#3d63e0);box-shadow:0 10px 26px rgba(30,40,120,.35);cursor:pointer}.inf-back.wait{background:linear-gradient(180deg,#8a8fa8,#6b7088)}
+body.inf-lock .topbar [data-act="home"],body.inf-lock .tabbar,body.inf-lock [data-act="crew"],body.inf-lock [data-act="kidPin"]{display:none!important}
 #stage{position:fixed;inset:0;z-index:80;color:#fff;display:flex;flex-direction:column;background:#0A0E24;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);-webkit-user-select:none;user-select:none}
 #stage.solo{background:linear-gradient(150deg,var(--c1),var(--c2))}
 .stage-bar{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px}
@@ -4889,10 +4890,26 @@ const infusedOn = () => {
 const Infused = (() => {
   let R = null, poll = 0;
   const kidOf = id => Store.kids[id];
-  const brief = c => ({ key: c.key, title: c.title, icon: c.icon, mins: c.mins });
-  const must = id => { const k = kidOf(id), date = dkey(); return k ? boardFor(k, date).must.filter(c => !isDone(choreState(k.id, c, date).state)).map(brief) : []; };
+  // When a job makes sense in the day (hours, from and to, local time): dinner jobs only around dinner, the school bag
+  // in the morning or the evening before. A job not in its time yet doesn't hold up play; when its time comes, it does.
+  // Jobs not listed suit any time.
+  const WHEN = {
+    table: [[17, 20]], clear: [[18, 22]], stack: [[18, 22]], dryDishes: [[18, 22]], cook: [[16, 19]], cookTeen: [[16, 19]],
+    clothesOut: [[16, 22]], gear: [[16, 22]], bag: [[6, 9], [16, 22]], ownLunch: [[6, 9], [16, 22]], lunches: [[6, 9], [16, 22]],
+    airRoom: [[6, 14]], breakfast: [[6, 10]], hangOut: [[7, 14]], bringIn: [[12, 19]], walkDog: [[7, 20]],
+  };
+  const hourNow = () => { const d = new Date(); return d.getHours() + d.getMinutes() / 60; };
+  const inTime = (c, h = hourNow()) => !WHEN[c.key] || WHEN[c.key].some(([a, b]) => h >= a && h < b);
+  const nextStart = (c, h = hourNow()) => { const w = WHEN[c.key]; if (!w) return null; const s = w.map(([a]) => a).filter(a => a > h).sort((x, y) => x - y)[0]; return s == null ? null : s; };
+  const brief = c => ({ key: c.key, title: c.title, icon: c.icon, mins: c.mins, pay: c.payType === 'fixed' || !c.payType ? c.pay || 0 : 0, payTxt: payLabel(c) });
+  const mustAll = id => { const k = kidOf(id), date = dkey(); return k ? boardFor(k, date).must.filter(c => !isDone(choreState(k.id, c, date).state)) : []; };
+  const must = id => mustAll(id).filter(c => inTime(c)).map(brief);
+  // must-dos still to come today: when each one's time starts
+  const soon = id => mustAll(id).filter(c => !inTime(c)).map(c => ({ ...brief(c), at: nextStart(c) })).filter(c => c.at != null).sort((a, b) => a.at - b.at);
   const openN = id => { const k = kidOf(id); return k ? openChores(k, dkey()).length : 0; };
-  const extras = id => { const k = kidOf(id), date = dkey(); if (!k) return []; const mk = new Set(boardFor(k, date).must.map(c => c.key)); return openChores(k, date).filter(c => !mk.has(c.key)).map(brief); };
+  const extras = id => { const k = kidOf(id), date = dkey(); if (!k) return []; const mk = new Set(boardFor(k, date).must.map(c => c.key)); return openChores(k, date).filter(c => !mk.has(c.key) && inTime(c)).map(brief); };
+  // the kid's saving goal, for the job offers: what's saved, and how much of a job's pay goes to the Save jar
+  const goal = id => { const k = kidOf(id); if (!k || !k.goal || !(k.goal.target > 0)) return null; const sp = k.split || {}; return { icon: k.goal.icon, name: k.goal.name, target: k.goal.target, saved: (k.jars || {}).save || 0, share: (sp.save != null ? sp.save : 30) / 100, fmt: n => fmt(n) }; };
   function button() {
     let b = $('#infBack'); if (!b) { b = document.createElement('button'); b.id = 'infBack'; b.className = 'inf-back'; b.addEventListener('click', () => { if (R && !(R.o.gate && must(R.id).length)) back(false); else if (R) toast('Finish your must-dos first, then it’s play time.'); }); document.body.appendChild(b); }
     return b;
@@ -4900,8 +4917,8 @@ const Infused = (() => {
   function paint() {
     const b = button(); if (!R) { b.hidden = true; return; }
     const left = R.o.gate ? must(R.id).length : 0;
-    b.hidden = !!(Stage.active || UI.sheet); b.classList.toggle('wait', left > 0);
-    b.innerHTML = left ? `🔒 ${left} must-do${left === 1 ? '' : 's'} to go` : '🎮 Back to the game';
+    b.hidden = !!(Stage.active || UI.sheet); b.classList.toggle('wait', left > 0); document.body.classList.toggle('inf-lock', left > 0);
+    b.innerHTML = left ? `🔒 ${left} must-do${left === 1 ? '' : 's'} to go, then play` : '🎮 Back to the game';
   }
   // the app's own full screen (a tab of the kid's page, and a chore's brief if asked), with the game hidden and paused
   function away(id, tab, o = {}) {
@@ -4922,7 +4939,7 @@ const Infused = (() => {
     if (R.o.chore && R.busy) back(false); // (its brief closed without starting)
   }
   function back(did) {
-    const r = R; R = null; clearInterval(poll); paint(); if (!r) return;
+    const r = R; R = null; clearInterval(poll); paint(); document.body.classList.remove('inf-lock'); if (!r) return;
     const H = window.IsoHome; if (H && H.suspend) H.suspend(false);
     r.done({ did });
   }
@@ -4930,7 +4947,7 @@ const Infused = (() => {
     const G = window.Growth && window.Growth.infuse, k = () => kidOf(id), g = {};
     if (G) for (const [n, f] of Object.entries(G)) g[n] = n === 'say' ? f : (...a) => f(k(), ...a);
     return {
-      must: () => must(id), extras: () => extras(id),
+      must: () => must(id), soon: () => soon(id), extras: () => extras(id), goal: () => goal(id),
       gate: () => away(id, 'today', { gate: true }),
       chores: () => away(id, 'today'), proof: () => away(id, 'proof'),
       chore: key => away(id, 'today', { chore: key }),
@@ -8001,7 +8018,7 @@ let lastDay = dkey();
 setInterval(() => { if (!Store.ready) return; const d = dkey(); const t = Market.last; buildMarket(); if (d !== lastDay) { lastDay = d; applyInterest(); scheduleRender(); } else if (t !== Market.last && UI.screen === 'kid' && UI.tab === 'market') scheduleRender(); }, 60000);
 
 /* Character Growth lives in growth.js and reaches the app through this bridge. */
-window.Chorecast = { Store, UI, S, Sound, FX, G3, Studio, IslandHome, PRIZES, LOOKS, prizeInfo, hasPrize, grantPrize, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet, mustLeft, learnLock, Plan, planLocked,
+window.Chorecast = { Infused, Store, UI, S, Sound, FX, G3, Studio, IslandHome, PRIZES, LOOKS, prizeInfo, hasPrize, grantPrize, ic, esc, fmt, $, $$, uid, hash, mulberry, shuffle, clamp, sleep, reduced, dkey, addDays, timeAgo, render, scheduleRender, setDoc, updDoc, saveSettings, toast, curKid, kidsList, xpOf, track, api, acct: () => Acct, THEMES, JARS, FUNDS, LESSONS, Market, price, holdingsValue, netWorth, levelOf, LEVELS, choreDef, jobsList, sunMark, exitStage, starGold, STAR_SOCK, ACT, IN, closeSheet, mustLeft, learnLock, Plan, planLocked,
   // For the Japanese sky, which shows behind every screen: whether something covers it completely right now (only a
   // 3D mission does), and where its view sits for this screen and tab, so moving between them slides the scenery past
   // in depth, near trees more than the far mountain. Tabs further along the bar move the view right, as if paging
