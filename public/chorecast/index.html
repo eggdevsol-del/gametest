@@ -4185,13 +4185,13 @@ function xpOf(kid, o = {}) {
    Animals wander about, swings swing, the campfire flickers. Paying with real Spend money asks "spend it or save it?" first. */
 const Studio = (() => {
   const T = window.THREE, S0 = { open: false, cat: 'animals', msg: '', sel: null, confirm: null, place: null, isle: 'home', trip: null };
-  // The proof (2026-11-14, ?proof=1 on a device, ?proof=0 to turn it off): the homes game's kid, puppy and garden
-  // furniture as packages (home/pkg/), walking on this classic island with the homes walk engine. The engine works
+  // The packages (2026-11-14, on by default since 2026-11-15; ?proof=0 turns them off on a device): the homes game's
+  // kid, pets, animals and things as packages (home/pkg/), walking on these classic islands with the homes walk engine. The engine works
   // at its own size (the kid is 2 units tall), so the whole studio is drawn K times bigger: the island, the clouds,
   // the sun's shadow and the camera's distance all scale together, and the picture is the same.
-  const PROOF = (() => { try { const q = new URLSearchParams(location.search).get('proof'); if (q === '1' || q === '0') localStorage.setItem('cc:proof', q); return localStorage.getItem('cc:proof') === '1'; } catch (e) { return false; } })(), K = PROOF ? 8 : 1;
+  const PROOF = (() => { try { const q = new URLSearchParams(location.search).get('proof'); if (q === '1' || q === '0') localStorage.setItem('cc:proof', q); return localStorage.getItem('cc:proof') !== '0'; } catch (e) { return true; } })(), K = PROOF ? 8 : 1;
   const Proof = (() => {
-    let W = null, isl = null, busy = false;
+    let W = null, isl = null, busy = false, swapIn = () => false;
     const PKGS = ['kid', 'pets', 'animals', 'garden', 'fun', 'plants'];
     const one = src => new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => no(new Error(src)); document.head.appendChild(s); });
     // Where there's ground on this island (island units), or null: the island's own test where it has one (the home
@@ -4226,24 +4226,34 @@ const Studio = (() => {
         // the kid's own things: each one a package has is drawn as the package's, where the kid put it
         const kinds = []; for (const p of P) for (const [ct, ht] of Object.entries(p.classic || {})) kinds.push([ct, p, ht]);
         const swap = Object.fromEntries(kinds.map(([ct, p, ht]) => [ct, { p, ht }])), later = [];
-        for (const m of u.items || []) {
-          const s = swap[m.userData.t]; if (!s) continue;
+        // one of the kid's things, drawn as its package's (later: bodies wait until the kid's been placed)
+        swapIn = (m, list) => {
+          const s = swap[m.userData.t]; if (!s || !W) return false;
           const x = m.position.x * K, z = m.position.z * K, ok = floorAt(x, z) > -4, at = ok ? { x, z } : W.spot(0.6, { x, z, d: 2 }) || W.spot(0.6);
-          if (!at) continue; m.visible = false;
-          if (s.p.bodies && s.p.bodies[s.ht]) later.push([IsoHome.pkg.body(s.p.name, s.ht), at]);
-          else { const it = s.p.make(s.ht); if (it) W.put(it, at.x, at.z, m.rotation.y); }
-        }
+          if (!at) return false; m.visible = false; solids = null;
+          if (s.p.bodies && s.p.bodies[s.ht]) { const spec = IsoHome.pkg.body(s.p.name, s.ht); if (list) list.push([spec, at, m.userData.itemId]); else { const q = W.spot(0.4, { x: at.x, z: at.z, d: 1 }) || at; W.add(spec, q.x, q.z).classicId = m.userData.itemId; } }
+          else { const it = s.p.make(s.ht); if (it) { it.classicId = m.userData.itemId; W.put(it, at.x, at.z, m.rotation.y); } } // (classicId: tapping it selects the kid's own thing)
+          W.group.traverse(o2 => { if (o2.isMesh) { o2.castShadow = true; o2.receiveShadow = true; } });
+          return true;
+        };
+        for (const m of u.items || []) swapIn(m, later);
         solids = null; // (measured again without the things swapped out)
         const at = (u.play && u.play.at) || [c[0], 0, c[1]], k0 = W.spot(0.6, { x: at[0] * K, z: at[2] * K, d: 1.5 }) || W.spot(0.6);
-        if (k0) W.add(byName.kid, k0.x, k0.z, { avatar: k.avatar, hue: k.hue, yaw: 0.9 });
-        for (const [spec, p] of later) { const q = W.spot(W.bodies.length ? 0.4 : 0.6, { x: p.x, z: p.z, d: 1 }) || p; W.add(spec, q.x, q.z); }
+        if (k0) W.add(byName.kid, k0.x, k0.z, { avatar: k.avatar, hue: k.hue, yaw: 0.9 }).isKid = true;
+        for (const [spec, p, id] of later) { const q = W.spot(W.bodies.length ? 0.4 : 0.6, { x: p.x, z: p.z, d: 1 }) || p; W.add(spec, q.x, q.z).classicId = id; }
         W.group.traverse(m => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; } });
       } catch (e) { console.error('proof', e); stop(); } finally { busy = false; }
     }
-    function stop() { if (W) W.end(); W = null; isl = null; }
+    function stop() { if (W) W.end(); W = null; isl = null; swapIn = () => false; }
     // (while the kid does an island activity, the classic character plays it: the walking kid steps aside)
     const kidShown = on => { if (W && W.bodies[0]) W.bodies[0].inst.group.visible = on; };
-    return { start, stop, tick: (t, dt) => { if (W) { kidShown(!S0.play); if (!S0.play) W.tick(t, dt); } }, get on() { return !!W; }, get world() { return W; } };
+    // what a tap hits on the island: { kid } (the walking kid), or { id } (the kid's own thing or animal: it says hi)
+    function tapped(ray) { if (!W) return null; const h = W.pick(ray); if (!h) return null; if (h.body) { W.hello(h.body, performance.now() / 1000); return h.body.isKid ? { kid: true } : { id: h.body.classicId }; } return { id: h.item.classicId }; }
+    // the kid's own thing turned or sold: its package version too
+    const mine = id => W && (W.items.find(i => i.classicId === id) || W.bodies.find(b => b.classicId === id));
+    const turned = (id, r) => { const x = mine(id); if (x && x.group) W.turn(x, r); };
+    const gone = id => { const x = mine(id); if (x) W.remove(x); };
+    return { start, stop, tapped, turned, gone, added: m => swapIn(m), tick: (t, dt) => { if (W) { kidShown(!S0.play); if (!S0.play) W.tick(t, dt); } }, get on() { return !!W; }, get world() { return W; } };
   })();
   let R, pace, scene, cam, island, clouds, kidId = null, raf = 0, last = 0, theta = 0.7, phi = 1.02, rad = 4.6, idle = 0, moved = 0, pinch0 = 0, rad0 = 0;
   const ptrs = new Map(), THUMBS = {}, ray = T ? new T.Raycaster() : null, target = T ? new T.Vector3(0, -0.42, 0) : null;
@@ -4360,8 +4370,10 @@ const Studio = (() => {
       const fn = S0.place; S0.place = null; return fn(p.x, p.z, x, y, res);
     }
     if (S0.kidM && !S0.play && ray.intersectObject(S0.kidM, true).length) return farmAct('play');
+    // the walking kid starts the island's activity; an animal or thing that's the kid's own is chosen (to move, sell or say hi to)
+    { const p = !S0.play && Proof.tapped(ray); if (p) { if (p.kid) return farmAct('play'); Sound.pop(); if (p.id) { S0.sel = p.id; S0.tree = null; S0.confirm = null; return ui(); } return; } }
     if (island.userData.house && S0.isle === 'home' && ray.intersectObject(island.userData.house, true).length) { Sound.pop(); return HomesGame.show(kidId, { studioOnly: true }); } // (inside the Cosy Studio)
-    const hits = ray.intersectObjects(island.userData.items || [], true);
+    const hits = ray.intersectObjects((island.userData.items || []).filter(m => m.visible), true);
     if (hits.length) { let o = hits[0].object; while (o && !o.userData.itemId) o = o.parent; if (o) { o.userData.hopAt = performance.now() / 1000; Sound.pop(); S0.sel = o.userData.itemId; S0.tree = null; S0.confirm = null; return ui(); } }
     const th = ray.intersectObjects(island.userData.trees || [], true);
     if (th.length) { let o = th[0].object; while (o && o.userData.treeIdx == null) o = o.parent; if (o) { Sound.pop(); S0.tree = o.userData.treeIdx; S0.sel = null; S0.confirm = null; return ui(); } }
@@ -4715,7 +4727,7 @@ const Studio = (() => {
       if (d.farm && !farmAnimals(k).length) isl.care = { ...(isl.care || {}), feed: Date.now() };
       isl.items = [...(isl.items || []), it]; patch.island = isl;
       updDoc('kids', k.id, patch);
-      const m = G3.placeItem(island, it); if (m) shadows(m);
+      const m = G3.placeItem(island, it); if (m) { shadows(m); Proof.added(m); }
       S0.msg = d.farm ? `${d.name} added to your farm! It eats a scoop of feed a day.` : `${d.name} added to your island!`; Sound.cash(); FX.burst(sx, sy, CONF, 26); ui();
       setTimeout(() => { if (S0.open && S0.msg.endsWith('island!')) { S0.msg = ''; ui(); } }, 2600);
     };
@@ -4832,7 +4844,7 @@ const Studio = (() => {
       S0.place = (x, z, sx, sy, res = {}) => { const cur = kid().island; updDoc('kids', k.id, { island: { ...cur, items: cur.items.map(i => { if (i.id !== id) return i; const o = { ...i, x: +x.toFixed(3), z: +z.toFixed(3) }; delete o.zone; delete o.isle; delete o.lobe; delete o.lu; delete o.lv; if (res.zone && res.zone !== 'lawn') o.zone = res.zone; if (res.isle) Object.assign(o, { isle: res.isle, lu: res.lu, lv: res.lv }); return o; }) } }); build(); S0.msg = ''; Sound.pop(); ui(); };
     } else if (n === 'turn') {
       const id = S0.sel, it = isl.items.find(i => i.id === id); if (!it) return; const r = +((it.r || 0) + Math.PI / 4).toFixed(2);
-      updDoc('kids', k.id, { island: { ...isl, items: isl.items.map(i => (i.id === id ? { ...i, r } : i)) } }, 500); const m = findMesh(id); if (m) m.rotation.y = r; Sound.tap();
+      updDoc('kids', k.id, { island: { ...isl, items: isl.items.map(i => (i.id === id ? { ...i, r } : i)) } }, 500); const m = findMesh(id); if (m) m.rotation.y = r; Proof.turned(id, r); Sound.tap();
     } else if (n === 'sell') {
       const id = S0.sel, it = isl.items.find(i => i.id === id); if (!it) return;
       const patch = { island: { ...isl, items: isl.items.filter(i => i.id !== id) } }, name = (SHOP.find(s => s.t === it.t) || {}).name || 'item';
@@ -4840,7 +4852,7 @@ const Studio = (() => {
       if (it.won) {}
       else if (it.cash) { const back = Math.floor(it.cash / 2); patch.jars = { ...(k.jars || {}), spend: ((k.jars || {}).spend || 0) + back }; patch.ledger = pushLedger(k, { kind: 'sell', amt: back, memo: `Sold island ${name.toLowerCase()}` }); }
       else { const back = Math.floor((it.xp || 0) / 2); patch.island.xpSpent = Math.max(0, (isl.xpSpent || 0) - back); if (back) patch.ledger = pushLedger(k, { kind: 'xp', amt: 0, xp: back, memo: `Sold island ${name.toLowerCase()}` }); }
-      updDoc('kids', k.id, patch); const m = findMesh(id); if (m) { island.remove(m); island.userData.items = island.userData.items.filter(x => x !== m); }
+      updDoc('kids', k.id, patch); const m = findMesh(id); if (m) { island.remove(m); island.userData.items = island.userData.items.filter(x => x !== m); } Proof.gone(id);
       S0.sel = null; Sound.coin(); toast(it.won ? `The ${name.toLowerCase()} is put away. Place it again from the shop any time.` : `Sold the ${name.toLowerCase()} for half what you paid`);
     }
     ui();
@@ -4934,7 +4946,7 @@ const Studio = (() => {
    what's spent in the game. */
 const islandGame = () => {
   try { const q = new URLSearchParams(location.search).get('game'); if (q === 'classic' || q === 'homes') localStorage.setItem('cc:islandGame', q); const d = localStorage.getItem('cc:islandGame'); if (d) return d; } catch (e) { /* private browsing */ }
-  return S().islandGame || 'homes'; // (the homes engine, on round floating islands like the original Chorecast; 'classic' is the old island studio)
+  return S().islandGame || 'classic'; // (2026-11-15: the original floating islands, with the homes game's characters and things walking on them (home/pkg); 'homes' is the homes game)
 };
 /* Each kid's Cosy Studio (the homes game's save, kept on the device as cc:home:<kid id>) also lives on the server with
    their account (home_saves, migration 023), so it follows them between devices. Whichever copy was saved last wins;
@@ -6997,8 +7009,8 @@ function pBank() {
       <div class="row wrap"><div class="row-main"><b>Most a farm earns a day</b><small>Each kid’s farm stand and orders stop paying at this much XP a day, so chores and lessons stay the main way to earn.</small></div><div class="seg">${[[100, '100'], [150, '150'], [250, '250'], [400, '400'], [0, 'No limit']].map(([v, l]) => `<button class="seg-i ${(s.farmCap ?? 150) === v ? 'on' : ''}" data-act="farmCap" data-v="${v}">${l}</button>`).join('')}</div></div>
     </div>
     <h3 class="pgroup-t">Island activities</h3><div class="group">
-      <div class="row wrap"><div class="row-main"><b>Island game</b><small>Homes: their own home, the village, Beach cove and the farm. Classic: the floating island and its shop. Each keeps everything kids bought and unlocked, so you can switch back any time.</small></div><div class="seg">${[['homes', 'Homes'], ['classic', 'Classic']].map(([v, l]) => `<button class="seg-i ${(s.islandGame || 'homes') === v ? 'on' : ''}" data-act="islandGame" data-v="${v}">${l}</button>`).join('')}</div></div>
-      ${(s.islandGame || 'homes') === 'homes' ? `<div class="row"><div class="row-main"><b>Infused (prototype)</b><small>Chores and lessons inside the game: tapping a kid opens their home, today’s must-dos come first, extra jobs are offered at breaks in play, and their phone gets Chores, Proof wall, Lessons and Languages.</small></div><button class="switch ${infusedOn() ? 'on' : ''}" role="switch" aria-checked="${infusedOn()}" aria-label="Infused prototype" data-act="infusedOn"></button></div>` : ''}
+      <div class="row wrap"><div class="row-main"><b>Island game</b><small>Classic: the floating islands and their shop, with the 3D kid, pets and animals walking about. Homes: their own home, the village, Beach cove and the farm. Each keeps everything kids bought and unlocked, so you can switch back any time.</small></div><div class="seg">${[['classic', 'Classic'], ['homes', 'Homes']].map(([v, l]) => `<button class="seg-i ${(s.islandGame || 'classic') === v ? 'on' : ''}" data-act="islandGame" data-v="${v}">${l}</button>`).join('')}</div></div>
+      ${(s.islandGame || 'classic') === 'homes' ? `<div class="row"><div class="row-main"><b>Infused (prototype)</b><small>Chores and lessons inside the game: tapping a kid opens their home, today’s must-dos come first, extra jobs are offered at breaks in play, and their phone gets Chores, Proof wall, Lessons and Languages.</small></div><button class="switch ${infusedOn() ? 'on' : ''}" role="switch" aria-checked="${infusedOn()}" aria-label="Infused prototype" data-act="infusedOn"></button></div>` : ''}
       <div class="row"><div class="row-main"><b>Island activities</b><small>On each island their character can fish, surf, ride, spot birds and more, earning a little XP each time. It opens once their must-dos are done.</small></div><button class="switch ${s.playOn !== false ? 'on' : ''}" role="switch" aria-checked="${s.playOn !== false}" aria-label="Island activities" data-act="playOn"></button></div>
       <div class="row wrap"><div class="row-main"><b>Most activities earn a day</b><small>Each kid stops earning XP from activities at this much a day. They can keep playing for fun.</small></div><div class="seg">${[[30, '30'], [60, '60'], [100, '100'], [200, '200'], [0, 'No limit']].map(([v, l]) => `<button class="seg-i ${(s.playCap ?? 60) === v ? 'on' : ''}" data-act="playCap" data-v="${v}">${l}</button>`).join('')}</div></div>
     </div>

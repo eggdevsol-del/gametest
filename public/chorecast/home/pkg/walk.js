@@ -225,6 +225,7 @@
       if (kid) inst.bodies = bodies.filter(q => q !== b).flatMap(q => { const p = q.A.pos, f = [Math.sin(q.A.yaw), Math.cos(q.A.yaw)]; return q.pk.kid ? [{ x: p.x, y: p.y + 1.0, z: p.z, r: 0.4 }] : [{ x: p.x, y: p.y + 0.32, z: p.z, r: 0.3 }, { x: p.x + f[0] * 0.3, y: p.y + 0.5, z: p.z + f[1] * 0.3, r: 0.2 }]; });
       if (!A.placed && P_.grid()) { A.placed = true; const sp = P_.nearestClear(A.pos.x, A.pos.z, b.cls); if (sp) A.pos.set(sp.x, Math.max(0, o.floorAt(sp.x, sp.z)), sp.z); } // never starts inside something
       // sliding into a seat or off it, turning round as it goes
+      if (A.happy > t && !A.use && !A.slide) { g.position.copy(A.pos); g.rotation.set(0, A.yaw, 0); pose(b, 'happy', t); return; } // tapped: a wave, a wag
       if (A.use) { // using something: onto it, the move's branches in turn, then up and off again
         if (t > A.use.until && !A.slide) { getUp(b, t); return; }
         if (!slideBeat(g, A, t)) { g.position.copy(A.pos); g.rotation.set(0, A.yaw, 0); }
@@ -262,7 +263,20 @@
 
     function tick(t, dt) { claim(); if (!P.grid()) return; dt = Math.min(dt, 0.05); for (const b of bodies) step(b, t, dt); }
     function end() { if (group.parent) group.parent.remove(group); bodies.length = 0; items.length = 0; if (P.env === env) { P.env = null; P.forget(); } IH.groundAt = null; }
-    const W = { group, add, put, spot, tick, end, bodies, items, go, chooseUse }; IH.walk.last = W; // (the latest world, for checking from the console)
+    // tapped: stops, turns toward whoever's looking and waves (the kid) or wags (a pet), a moment
+    function hello(b, t) { if (b.A.use) return; const c = o.cam && o.cam.position; if (c) b.A.yaw = Math.atan2(c.x - b.A.pos.x, c.z - b.A.pos.z); b.A.happy = t + 1.6; b.A.path = []; b.A.st = 'stand'; b.A.until = t + 2; }
+    // what a ray (screen tap) hits: { body } or { item }, the nearest
+    function pick(ray) {
+      const hits = ray.intersectObject(group, true); for (const h of hits) { let o2 = h.object; while (o2 && o2 !== group) { const b = bodies.find(q => q.inst.group === o2); if (b) return { body: b }; const it = items.find(q => q.group === o2); if (it) return { item: it }; o2 = o2.parent; } }
+      return null;
+    }
+    // a thing turned to a new yaw, or taken away; a body taken away (sold)
+    function turn(it, yaw) { claim(); it.group.rotation.y = yaw; it.yaw = yaw; it.group.updateMatrixWorld(true); it.field = null; P.forget(); }
+    function remove(x) {
+      claim(); const i = items.indexOf(x); if (i >= 0) { items.splice(i, 1); group.remove(x.group); for (const b of bodies) if (b.A.use && b.A.use.it === x) { b.A.use = null; b.A.slide = null; b.inst.fitMode = null; b.A.st = 'stand'; } P.forget(); return; }
+      const j = bodies.indexOf(x); if (j >= 0) { bodies.splice(j, 1); group.remove(x.inst.group); }
+    }
+    const W = { group, add, put, spot, tick, end, bodies, items, go, chooseUse, hello, pick, turn, remove }; IH.walk.last = W; // (the latest world, for checking from the console)
     return W;
   }
   IH.walk = { world, stride, placeOn, approach, nextMove, slideBeat, getOff, bedZone };
