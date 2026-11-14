@@ -168,9 +168,10 @@ export function checkKidWrite(prev, next, settings, now = Date.now()) {
   return checkSwaps(prev.swaps, next.swaps, now);
 }
 
-/* Must-do swaps (swaps[date][fromKey] = toKey): a kid can swap each must-do once. From a kid's iPad, swaps can only be
-   added, for today or yesterday: a swap already made can't change or be taken back (so it can't be made again), a
-   chore that was swapped in can't be swapped out, and a day has at most 6. Days older than that can be tidied away. */
+/* Chore swaps (swaps[date][fromKey] = toKey, or '-' when a chore that didn't need doing just leaves the list): from a
+   kid's iPad, swaps can only be added, for today or yesterday. A swap already made can't change or be taken back (so it
+   can't be made again), a chore can't be swapped for itself, and a day has at most 6. A chore that was swapped in can
+   be swapped on again ("doesn't need doing" on the new one), within those 6. Days older than that can be tidied away. */
 const SWAPS_MAX = 6;
 function checkSwaps(P, N, now) {
   P = P && typeof P === 'object' ? P : {}; N = N && typeof N === 'object' ? N : {};
@@ -183,7 +184,7 @@ function checkSwaps(P, N, now) {
     if (!recent(d) || dayNo(d) > today) return nope('chores can only be swapped on the day.');
     const keys = Object.keys(m), vals = Object.values(m);
     if (keys.length > SWAPS_MAX) return nope('that’s too many swaps for one day.');
-    if (vals.some(v => typeof v !== 'string' || !v || keys.includes(v))) return nope('a swapped-in chore can’t be swapped again.');
+    if (keys.some(k => typeof m[k] !== 'string' || !m[k] || m[k] === k || (m[k] !== '-' && vals.filter(v => v === m[k]).length > 1))) return nope('that swap isn’t valid.');
   }
   return null;
 }

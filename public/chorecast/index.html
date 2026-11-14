@@ -991,6 +991,7 @@ body.inf-lock .topbar [data-act="home"],body.inf-lock .tabbar,body.inf-lock [dat
 .hourly b{font:900 clamp(calc(26px*var(--ts)),6cqmin,calc(40px*var(--ts))) var(--f-round)}
 .pane-foot{padding-top:clamp(8px,1.6cqh,16px)}
 .noneed{display:block;margin:clamp(6px,1.2cqh,10px) auto 0;min-height:40px;padding:0 18px;border-radius:999px;background:rgba(255,255,255,.16);font:800 clamp(calc(14px*var(--ts)),2.6cqmin,calc(17px*var(--ts))) var(--f-round);color:#fff}
+.skipped{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,1.6cqh,14px);margin:auto;width:min(100%,30em);text-align:center;padding:clamp(16px,3cqh,28px) 20px;border-radius:28px;background:rgba(20,16,40,.32);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;position:relative;z-index:2}.skipped .sk-ic{font-size:clamp(48px,12cqmin,96px);line-height:1}.skipped p{margin:0;font:700 clamp(calc(15px*var(--ts)),2.8cqmin,calc(19px*var(--ts))) var(--f-round);max-width:28em}.skipped .pv-quit{position:static}
 .finish{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:clamp(54px,9cqh,72px);border-radius:22px;background:rgba(255,255,255,.25);font:900 clamp(calc(17px*var(--ts)),3.4cqmin,calc(24px*var(--ts))) var(--f-round);color:#fff;transition:background .25s,color .25s,transform .15s}
 .finish:active{transform:scale(.98)}
 .finish.ready{background:#fff;color:var(--c2);box-shadow:0 14px 30px -12px rgba(0,0,0,.4)}
@@ -2366,7 +2367,16 @@ const sentKeys = date => new Set(kidsList().flatMap(k => sendsFor(k.id, date).ma
 function boardFor(kid, date) {
   const d = draftFor(date)[kid.id], b = d ? { must: [...d.must], team: [...d.team] } : { must: [], team: [] };
   for (const x of sendsFor(kid.id, date)) { const c = choreDef(x.key); if (!c || c.tier === 'gig') continue; const list = b[c.tier === 'team' ? 'team' : 'must'], i = list.findIndex(y => y.key === c.key); if (i >= 0) list[i] = { ...list[i], sent: x }; else list.push({ ...c, sent: x }); }
-  for (const [from, to] of Object.entries(swapsOf(kid, date))) { const i = b.must.findIndex(c => c.key === from && !c.sent), c = choreDef(to); if (i >= 0 && c) b.must[i] = { ...c, swappedFrom: from }; }
+  // (a swap can be swapped on: follow each chore's chain to its end. The server keeps the keys in its own order, so
+  // the chain is followed from each chore rather than replayed in the order the swaps were made.)
+  const sw = swapsOf(kid, date);
+  for (const list of [b.must, b.team]) for (let i = list.length - 1; i >= 0; i--) {
+    if (list[i].sent || !sw[list[i].key]) continue;
+    let from = list[i].key, to = sw[from]; const seen = new Set([from]);
+    while (to && to !== DROPPED && sw[to] && !seen.has(to)) { seen.add(to); from = to; to = sw[to]; }
+    if (to === DROPPED) { list.splice(i, 1); continue; }
+    const c = choreDef(to); if (c) list[i] = { ...c, swappedFrom: from };
+  }
   return b;
 }
 /* ---------- Swapping a must-do ----------
@@ -2374,19 +2384,21 @@ function boardFor(kid, date) {
    per must-do, while it's still not done. The new one can't be swapped again. Swaps live on the kid's record as
    swaps[date][fromKey] = toKey, so every device shows the same list, and the server only lets a kid's iPad add them,
    never change or remove today's (server/guard.js). Chores a grown-up sent can't be swapped. */
-const SWAP_KEEP_DAYS = 7;
+const SWAP_KEEP_DAYS = 7, SWAPS_MAX = 6;
+// "Doesn't need doing" on a chore with nothing left to swap to: it leaves today's list, unpaid (swaps[date][key] = '-')
+const DROPPED = '-';
 const swapsOf = (kid, date) => ((kid && kid.swaps) || {})[date] || {};
 function canSwap(kid, c, date) {
   return !!kid && c.tier === 'must' && !c.sent && !c.swappedFrom && !swapsOf(kid, date)[c.key] && choreState(kid.id, c, date).state === 'open';
 }
 // The must-do a swap brings in: one this kid hasn't done for longest, that suits their age and the home, is due, and
-// isn't on anyone's list today. Null when there's nothing left to offer.
-function swapPick(kid, date, fromKey) {
+// isn't on anyone's list today (a team task for a team task). Null when there's nothing left to offer.
+function swapPick(kid, date, fromKey, tier = 'must') {
   const used = new Set([fromKey, ...sentKeys(date), ...Object.keys(swapsOf(kid, date))]);
   for (const k of kidsList()) { const b = boardFor(k, date); for (const c of [...b.must, ...b.team]) used.add(c.key); }
   const age = kid.age || 8, h = historyBefore(date), r = mulberry(hash(`swap|${kid.id}|${date}|${fromKey}`));
   const since = c => { const d = h[c.key] && h[c.key].by[kid.id]; return d ? Math.min(21, daysBetween(d, date)) : 21; };
-  const pool = allChores().filter(c => c.tier === 'must' && !c.anchor && !freqOf(c) && !isOff(c) && fitsAge(c, age) && !used.has(c.key)
+  const pool = allChores().filter(c => c.tier === tier && !c.anchor && !freqOf(c) && !isOff(c) && fitsAge(c, age) && !used.has(c.key)
     && (c.scope === 'me' ? since(c) >= (c.every || 1) : dueFamily(c, h, date)));
   return pool.map(c => [c, since(c) + r() * 3]).sort((a, b) => b[1] - a[1]).map(x => x[0])[0] || null;
 }
@@ -7330,6 +7342,15 @@ function renderPane(p) {
         ${p.mode || p.noNeed ? back : `<button class="link-btn" data-act="sSkipPhoto" data-pane="${p.i}" ${p.uploading ? 'disabled' : ''}>${p.uploading ? 'Sending…' : 'No camera? Send without a photo'}</button>`}`}
     </div>`;
     if (p.g) hydratePhotos(inner);
+  } else if (p.phase === 'skipped') {
+    const to = p.swapTo, T = to && TIERS[to.tier];
+    inner.innerHTML = `${paneHead(p)}<div class="skipped">
+      <span class="sk-ic" aria-hidden="true">${to ? to.icon : '👍'}</span>
+      <h2 class="pane-title">${to ? 'Swapped!' : 'No problem'}</h2>
+      <p>“${esc(p.c.title)}” isn’t paid, because it didn’t get done.</p>
+      ${to ? `<p>Your new ${T ? T.label.toLowerCase().replace(/s$/, '') : 'chore'} is <b>${to.icon} ${esc(to.title)}</b>.</p>` : '<p>It’s off your list for today.</p>'}
+      ${to ? `<button class="btn-white" data-act="sSwapGo" data-key="${to.key}">${ic('play')} Do it now</button>` : ''}
+      <button class="pv-quit" data-act="sExit">Back to my chores</button></div>`;
   } else {
     // Angry Birds style: points tally up row by row, and each star slams in as the meter passes its notch.
     // A repaint after the tally has started shows the finished screen straight away.
@@ -7556,17 +7577,24 @@ function finishPane(p, auto) {
   }
   p.phase = 'proof'; Sound.whoosh(); renderPane(p);
 }
-// "Doesn't need doing": the kid checked and it's already done. Offered on fixed-price chores until a step is ticked.
-// They still send a photo for the grown-ups to check, it pays half, and it scores two stars, because checking was
-// the job. "It does need doing" takes them back to the steps with the clock where it was.
-const canNoNeed = p => !['piece', 'hourly', 'quote'].includes(p.c.payType) && !p.steps.some(Boolean);
+// "Doesn't need doing": the kid can't do this one today (it's already done, the hens are away). It isn't paid, and it's
+// swapped for a different chore of the same kind, so they still have the same number to do. Offered on must-dos and
+// team tasks a grown-up didn't send, until a step is ticked. With nothing left to swap to (or six swaps already
+// today), it just leaves today's list, still unpaid. Swaps are kept as swaps[date][fromKey] = toKey, like the Swap
+// button's, so every device shows the same list.
+const canNoNeed = p => ['must', 'team'].includes(p.c.tier) && !p.c.sent && !p.steps.some(Boolean) && !Stage.crew;
 function noNeedPane(p, btn) {
   if (p.phase !== 'play' || !canNoNeed(p)) return;
   if (!p.confirmNoNeed) {
-    p.confirmNoNeed = true; btn.textContent = 'Already done? Tap again';
+    p.confirmNoNeed = true; btn.textContent = 'Can’t do it today? Tap again';
     setTimeout(() => { p.confirmNoNeed = false; if (p.phase === 'play' && btn.isConnected) btn.textContent = 'Doesn’t need doing'; }, 3500); return;
   }
-  p.confirmNoNeed = false; p.noNeed = true; p.finishedAt = p.elapsed; p.phase = 'proof'; Sound.whoosh(); renderPane(p);
+  const kid = Store.kids[p.kid.id] || p.kid, date = dkey(), mine = swapsOf(kid, date);
+  const to = Object.keys(mine).length < SWAPS_MAX ? swapPick(kid, date, p.c.key, p.c.tier) : null;
+  const keep = Object.fromEntries(Object.entries(kid.swaps || {}).filter(([d]) => daysBetween(d, date) < SWAP_KEEP_DAYS));
+  updDoc('kids', kid.id, { swaps: { ...keep, [date]: { ...mine, [p.c.key]: to ? to.key : DROPPED } } });
+  track('chore.noneed', { date, from: p.c.key, to: to ? to.key : null }, kid.id);
+  p.confirmNoNeed = false; p.swapTo = to; p.phase = 'skipped'; Sound.whoosh(); renderPane(p);
 }
 function starsFor(p) {
   const max = p.c.steps.length * 100 + 650;
@@ -7956,6 +7984,7 @@ const ACT = {
   sSubmit: a => submitPane(Stage.panes[+a.dataset.pane], true),
   sSkipPhoto: a => submitPane(Stage.panes[+a.dataset.pane], false),
   sExit: () => exitStage(),
+  sSwapGo: a => { const p = Stage.panes[0], kidId = p && p.kid.id; exitStage(); if (kidId && choreDef(a.dataset.key)) { UI.brief = { kidId, key: a.dataset.key, quote: null }; openSheet(briefSheet, { cls: 'brief' }); } },
   sSkip: a => { const p = Stage.panes[+a.dataset.pane]; if (p && p.tally && !p.tally.done) p.tally.fast = true; },
 
   approve: a => {
