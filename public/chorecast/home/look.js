@@ -583,7 +583,7 @@ void main() {
      instead of 24 a second, so the count shows what the device could manage. Nothing is saved; reload to reset. */
   // (on for everyone for now, while the farm's speed is measured on phones and iPads that open the app from the home
   // screen, where there's no address bar; ?perf=0 hides it)
-  const PERF_DEFAULT = true;
+  const PERF_DEFAULT = false; // (the speed readout: off for everyone again 2026-11-14; ?perf=1 shows it on this device)
   const PERF = (() => { try { const a = location.search + location.hash; if (/[?&#]perf=0\b/.test(a)) return false; return PERF_DEFAULT || /[?&#]perf=1\b/.test(a); } catch (e) { return false; } })();
   if (PERF) {
     const P = IH.perf = { every: false, off: { blades: false, shells: false, ink: false, shadow: false }, res: 1, n: 0, gaps: [], cpu: 0, last: 0, calls: 0, tris: 0, px: '' };
