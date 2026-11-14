@@ -1,0 +1,733 @@
+# Science fact banks. Each lesson's facts stay inside what the lesson teaches, checked against standard school science.
+# Format: the right answer in [square brackets], then | and 2 or 3 wrong answers that make the sentence clearly false.
+# Checked by Claude 2026-11-07; a grown-up samples them on the review page.
+
+@band sprouts
+@facts 1.1
+fact: Living things [grow]. | stay exactly the same; never change
+fact: Living things need food and [water]. | plastic; sand
+fact: A [snail] is a living thing. | rock; plastic bottle
+fact: A rock is [not] alive. | very; always
+fact: Plants and [animals] are living things. | rocks; clouds
+fact: Living things make more of their own [kind]. | toys; rocks
+fact: A dry leaf was once [alive]. | made of plastic; made of metal
+fact: A wooden table was once part of a living [tree]. | rock; cloud
+
+@facts 1.2
+fact: Plants need light, water and [air] to grow. | lollies; plastic; darkness
+fact: [Roots] take in water from the soil. | Flowers; Petals
+fact: Leaves use [sunlight] to make the plant's food. | moonlight; plastic; noise
+fact: A plant left in the dark goes pale and [droopy]. | bigger; greener
+fact: Without light, a plant can't make enough [food]. | noise; plastic
+fact: Plants take in water through their [roots]. | flowers; petals
+fact: Plants make their own [food]. | toys; plastic
+fact: A plant in a sunny spot usually grows [better] than one in a dark cupboard. | worse; backwards
+
+@facts 1.3
+fact: Scientists sort animals into [groups] by what they're like. | colours; birthdays
+fact: Mammals have hair or [fur]. | feathers; scales
+fact: Mammals feed their babies [milk]. | seeds; sand
+fact: Birds have [feathers]. | fur; fins
+fact: Birds lay [eggs]. | seeds; leaves
+fact: Reptiles have dry, [scaly] skin. | furry; feathery
+fact: Fish have fins and [gills]. | feathers; fur
+fact: A kiwi is a [bird]. | reptile; fish
+fact: A gecko is a [reptile]. | bird; mammal
+fact: A dog is a [mammal]. | bird; reptile
+
+@facts 1.4
+fact: A life cycle is how a living thing starts life, grows and makes new [young]. | rocks; toys
+fact: A butterfly starts life as an [egg]. | adult butterfly; seed
+fact: A caterpillar turns into a [chrysalis]. | tadpole; egg
+fact: A butterfly comes out of a [chrysalis]. | tadpole; seed
+fact: A frog starts life as an [egg]. | caterpillar; chrysalis
+fact: A tadpole grows into a [froglet]. | caterpillar; butterfly
+fact: A froglet grows into a [frog]. | butterfly; caterpillar
+fact: Tadpoles live in [water]. | trees; the sky
+
+@facts 2.1
+fact: [Materials] are what things are made of. | Colours; Feelings
+fact: Glass is [see-through]. | fluffy; bendy
+fact: We use [glass] for windows so we can see out. | wood; metal
+fact: Wool is [soft]. | see-through; hard as rock
+fact: A raincoat needs to be [waterproof]. | see-through; made of paper
+fact: We choose materials for their [properties]. | names; colours only
+fact: Metal is usually [hard]. | soft as wool; see-through
+fact: Wood, metal and plastic are all [materials]. | feelings; weather
+
+@facts 2.2
+fact: Some things float on water and some [sink]. | fly; melt
+fact: A small stone usually [sinks]. | floats; flies
+fact: A huge ship can [float]. | never float; only sink
+fact: Whether something floats depends on its weight for its size and its [shape]. | colour; smell
+fact: [Shape] matters for floating. | Colour; Smell
+fact: A ball of foil [sinks]. | floats; flies
+fact: A foil boat can [float]. | never float; only sink
+fact: Things packed tight for their size usually [sink]. | float; fly
+
+@facts 2.3
+fact: A [solid] keeps its shape. | liquid; gas
+fact: An ice cube is a [solid]. | liquid; gas
+fact: A [liquid] flows and takes the shape of its container. | solid; rock
+fact: Milk is a [liquid]. | solid; gas
+fact: Ice is water as a [solid]. | gas; liquid
+fact: Water vapour is water as a [gas]. | solid; liquid
+fact: We [can't] see water vapour. | can always; easily
+fact: A pencil is a [solid]. | liquid; gas
+
+@facts 2.4
+fact: Heating can [melt] a solid into a liquid. | freeze; shrink
+fact: When ice gets warm, it [melts]. | freezes; turns to stone
+fact: Butter [melts] in a warm pan. | freezes; hardens
+fact: Cooling can [freeze] a liquid into a solid. | melt; boil
+fact: Water [freezes] into ice in the freezer. | melts; boils
+fact: Melting and freezing [can go back and forth]. | only happen once; never happen
+fact: An ice block drips on a hot day because it's [melting]. | freezing; growing
+fact: You [can] freeze melted ice again. | can never; can't
+
+@facts 3.1
+fact: The Earth [spins] like a top. | stays still; floats away
+fact: One full spin of the Earth takes about [24] hours. | 2; 365
+fact: The side of the Earth facing the sun has [day]. | night; winter
+fact: The side of the Earth facing away from the sun has [night]. | day; summer
+fact: Day and night happen because the Earth [spins]. | stops; shrinks
+fact: The sun looks like it moves because the Earth is [spinning]. | still; sleeping
+fact: One spin of the Earth makes one [day]. | year; month
+fact: At night, our side of the Earth faces [away from] the sun. | towards; into
+
+@facts 3.2
+fact: The Moon [doesn't] make its own light. | does; always can
+fact: The Moon reflects light from the [sun]. | Earth's oceans; stars only
+fact: The Moon travels around the [Earth]. | sun only; Mars
+fact: The Moon takes about a [month] to travel around the Earth. | day; minute
+fact: The shapes of the Moon we see are called [phases]. | phrases; faces
+fact: We see different amounts of the Moon's [sunlit] side. | dark; secret
+fact: Some nights the Moon looks like a [banana]. | square; triangle
+fact: A full Moon looks like a round [plate]. | banana; square
+
+@facts 3.3
+fact: There are [four] seasons. | two; ten
+fact: The Earth is [tilted]. | flat; square
+fact: When our half of the world leans towards the sun, it's [summer]. | winter; night
+fact: When our half of the world leans away from the sun, it's [winter]. | summer; spring
+fact: {nz:New Zealand~au:Australia} is in the [bottom] half of the world. | top; middle
+fact: Our summer is in December, January and [February]. | June; July
+fact: The season after summer is [autumn]. | spring; winter
+fact: The season after winter is [spring]. | autumn; summer
+
+@facts 3.4
+fact: The sun warms water in seas, lakes and [puddles]. | rocks; clouds only
+fact: Water turning into vapour is called [evaporation]. | condensation; freezing
+fact: Water vapour is a gas we [can't] see. | can always; easily
+fact: High up, vapour cools and turns into tiny [drops]. | rocks; feathers
+fact: Tiny drops of water make [clouds]. | rainbows; rocks
+fact: Vapour turning back into drops is called [condensation]. | evaporation; melting
+fact: When drops get big and heavy, they fall as [rain]. | sand; feathers
+fact: The water cycle [goes round and round]. | happens only once; never happens
+
+@band builders
+@facts 1.1
+fact: A food chain shows who [eats] what. | likes; plays with
+fact: Plants are [producers]. | consumers; carnivores
+fact: Producers make their own food using [sunlight]. | moonlight; meat; rocks
+fact: Animals are [consumers]. | producers; plants
+fact: Consumers get energy by [eating] plants or other animals. | sunbathing; sleeping
+fact: The energy in a food chain starts with the [sun]. | hawk; bird; caterpillar
+fact: In leaf → caterpillar → bird, the [caterpillar] eats the leaf. | bird; hawk
+fact: A food chain usually starts with a [plant]. | hawk; rock
+
+@facts 1.2
+fact: Food chains join up into a food [web]. | line; circle of one
+fact: Most animals eat [more than one kind of food]. | only one kind of food; no food at all
+fact: If one living thing disappears, others in the web are [affected]. | unchanged; safe for sure
+fact: [Carnivores] eat animals. | Herbivores; Producers
+fact: [Herbivores] eat plants. | Carnivores; Rocks
+fact: [Omnivores] eat both plants and animals. | Herbivores; Producers
+fact: A cow is a [herbivore]. | carnivore; omnivore
+fact: If all the insects disappeared, birds that eat insects would [struggle]. | do better; not notice
+
+@facts 1.3
+fact: A [habitat] is the place where a living thing lives. | holiday; hobby
+fact: A habitat gives food, water, shelter and [space]. | homework; money
+fact: A [wetland] is a habitat. | car park; plastic bag
+fact: A rocky [shore] is a habitat. | wardrobe; schoolbag
+fact: A fish's habitat is in [water]. | trees; deserts
+fact: The ocean is a [habitat]. | material; season
+fact: Damaging a habitat makes it [harder] for animals to survive. | easier; more fun
+fact: A forest gives birds [shelter]. | homework; money
+
+@facts 1.4
+fact: [Adaptations] are features that help a living thing survive. | Holidays; Accidents
+fact: A penguin's [flippers] help it swim fast. | feathers on its feet; long beak
+fact: A thick layer of [feathers] keeps a penguin warm. | sand; scales
+fact: A kiwi has nostrils at the [tip of its beak]. | top of its head; end of its tail
+fact: A kiwi sniffs out [worms] in the soil. | fish; seeds in trees
+fact: Penguins catch [fish]. | worms; seeds
+fact: An adaptation helps an animal [survive] where it lives. | disappear; get lost
+fact: A kiwi's long [beak] helps it find food in the soil. | tail; wing
+
+@facts 2.1
+fact: A [force] is a push or a pull. | colour; material
+fact: Kicking a ball is a [push]. | pull; smell
+fact: Pulling a wagon is a [pull]. | push; sound
+fact: Forces can make things start [moving]. | singing; glowing
+fact: Forces can make things [stop]. | grow; sing
+fact: Forces can make things change [direction]. | colour; smell
+fact: Squashing playdough changes its [shape]. | colour; smell
+fact: Opening a door uses a [force]. | magnet only; colour
+
+@facts 2.2
+fact: Gravity is a [pulling] force. | pushing; colour
+fact: The Earth pulls everything towards its [centre]. | edge; sky
+fact: A dropped apple falls [down]. | up; sideways
+fact: [Weight] is how hard gravity pulls on something. | Colour; Speed
+fact: Gravity keeps the Moon travelling around the [Earth]. | sun only; Mars
+fact: Gravity pulls things [towards] the Earth. | away from; up off
+fact: Without gravity, a ball you threw would [not] come back down. | always; quickly
+fact: Gravity is the force that makes things [fall]. | float up; glow
+
+@facts 2.3
+fact: [Friction] slows things down when surfaces rub together. | Gravity; Magnetism
+fact: [Rough] surfaces make more friction. | Smooth; Slippery
+fact: Ice is [slippery], so it makes little friction. | rough; sticky
+fact: It's hard to slide on carpet because carpet makes [more] friction. | less; no
+fact: Friction lets our shoes [grip]. | slip; melt
+fact: Bike brakes use friction to [stop] the wheels. | speed up; paint
+fact: Smooth surfaces make [less] friction. | more; the most
+fact: Friction is a [force]. | material; colour
+
+@facts 2.4
+fact: Magnets pull on some metals, like [iron] and steel. | wood; plastic
+fact: Magnets don't pull on [wood]. | iron; steel
+fact: A magnet has a north pole and a [south] pole. | east; west
+fact: Opposite poles [attract]. | repel; melt
+fact: The same poles [repel]. | attract; melt
+fact: Repel means push [apart]. | together; up
+fact: Attract means pull [together]. | apart; down
+fact: A magnet sticks to a fridge because the fridge has [steel] in it. | wood; plastic
+
+@facts 3.1
+fact: The solar system is the [sun] and everything that travels around it. | Moon; Earth
+fact: There are [eight] planets. | three; twenty
+fact: [Mercury] is the planet closest to the sun. | Neptune; Earth
+fact: [Neptune] is the planet furthest from the sun. | Mercury; Venus
+fact: Earth is the [third] planet from the sun. | first; eighth
+fact: [Mars] comes after Earth. | Venus; Neptune
+fact: [Venus] comes between Mercury and Earth. | Jupiter; Saturn
+fact: "My Very Easy Method" helps you remember the order of the [planets]. | seasons; colours
+
+@facts 3.2
+fact: The four inner planets are small and [rocky]. | made of gas; made of ice cream
+fact: [Jupiter] is a giant planet. | Mercury; Mars
+fact: The giant planets are made mostly of gas and [ice]. | rock; sand
+fact: You [couldn't] stand on Jupiter. | could easily; could always
+fact: Mars is a [rocky] planet. | gas giant; star
+fact: [Saturn]'s rings are the most famous. | Earth; Mercury
+fact: [All four] giant planets have rings. | None of the; Only one of the
+fact: The four outer planets are Jupiter, Saturn, Uranus and [Neptune]. | Mars; Earth
+
+@facts 3.3
+fact: An [orbit] is the path one object takes around another. | eclipse; season
+fact: The Earth orbits the [sun] once a year. | Moon; Mars
+fact: One orbit of the sun takes about [365] days. | 24; 30
+fact: The Moon orbits the Earth about once a [month]. | year; day
+fact: The Earth spins once a [day]. | year; month
+fact: Between your birthdays, the Earth goes around the sun [once]. | ten times; not at all
+fact: A year is how long the Earth takes to orbit the [sun]. | Moon; Mars
+fact: The [Moon] orbits the Earth. | sun; Jupiter
+
+@facts 3.4
+fact: The sun is a [star]. | planet; moon
+fact: A star is a huge ball of very hot [gas]. | ice; rock
+fact: The sun gives off light and [heat]. | snow; darkness
+fact: Other stars look tiny because they're much [further away]. | closer; smaller than ants
+fact: The sun looks bigger than other stars because it's [much closer]. | much hotter; a planet
+fact: Never look straight at the [sun]. | ground; sky at night
+fact: Looking at the sun can damage your [eyes]. | toes; elbows
+fact: The sun is the [closest] star to the Earth. | furthest; smallest
+
+@band makers
+@facts 1.1
+fact: All living things are made of [cells]. | plastic; sand
+fact: Cells are the smallest units of [life]. | rock; light
+fact: The [nucleus] controls the cell. | cell wall; cytoplasm
+fact: Animal and plant cells both have a cell [membrane]. | wall; chloroplast
+fact: Plant cells have a cell [wall]; animal cells don't. | membrane; nucleus
+fact: Photosynthesis happens in the [chloroplasts]. | nucleus; cell membrane
+fact: [Plant] cells have chloroplasts. | Animal; Human
+fact: The jelly-like inside of a cell is the [cytoplasm]. | nucleus; cell wall
+
+@facts 1.2
+fact: Similar cells group together into [tissues]. | organs; systems
+fact: Muscle tissue is made of muscle [cells]. | organs; bones only
+fact: Tissues form [organs]. | cells; atoms
+fact: The heart is an [organ]. | cell; tissue only
+fact: The lungs are [organs]. | cells; tissues only
+fact: Organs work together in organ [systems]. | cells; tissues
+fact: The [digestive] system breaks down food. | circulatory; nervous
+fact: The [circulatory] system moves blood around the body. | digestive; skeletal
+
+@facts 1.3
+fact: Digestion breaks food into pieces small enough to [absorb]. | see; taste
+fact: Digestion starts in the [mouth]. | stomach; large intestine
+fact: Saliva and [teeth] start breaking food down. | lungs; bones
+fact: Food travels down the [oesophagus] to the stomach. | windpipe; small intestine
+fact: The stomach uses [acid] and churning to break food down. | sand; air
+fact: Nutrients pass into the blood in the [small] intestine. | large; whole
+fact: The [large] intestine takes in water. | small; empty
+fact: The stomach comes [after] the oesophagus. | before; instead of
+
+@facts 1.4
+fact: The heart [pumps] blood around the body. | stores; cleans
+fact: Arteries, veins and capillaries are blood [vessels]. | organs; bones
+fact: Blood carries [oxygen] from the lungs. | carbon dioxide only; food only
+fact: Blood carries nutrients from [digestion] to the cells. | the brain; the bones
+fact: Blood carries [waste] away from cells. | sunlight; oxygen only
+fact: When you exercise, your muscles need more [oxygen]. | sugar only; sleep
+fact: During exercise you breathe [faster]. | slower; less
+fact: During exercise your heart beats [faster]. | slower; less
+
+@facts 2.1
+fact: [Energy] is what makes things happen. | Colour; Shape
+fact: [Kinetic] energy is movement. | Thermal; Chemical
+fact: [Thermal] energy is heat. | Kinetic; Sound
+fact: Food and batteries store [chemical] energy. | kinetic; sound
+fact: A stretched rubber band has [potential] energy. | sound; light
+fact: A ball held up high has [potential] energy. | sound; light
+fact: A torch gives out [light] energy. | sound only; chemical
+fact: A kicked ball has [kinetic] energy. | thermal only; chemical
+
+@facts 2.2
+fact: Energy can't be made or [destroyed]. | moved; changed
+fact: Energy changing from one form to another is a [transfer]. | loss; creation
+fact: A torch battery stores [chemical] energy. | kinetic; sound
+fact: In a torch, electrical energy becomes [light]. | chemical; gravity
+fact: Some energy always ends up as heat or [sound] we didn't want. | gold; light only
+fact: Energy we didn't want is called [wasted] energy. | free; new
+fact: A torch also gives out some [heat]. | cold; gravity
+fact: In a transfer, the total amount of energy [stays the same]. | goes up; goes down
+
+@facts 2.3
+fact: Heat moves from [hotter] things to colder things. | colder; smaller
+fact: Heat moving through solids by touch is [conduction]. | convection; radiation
+fact: Metals are good heat [conductors]. | insulators; magnets
+fact: Wood and plastic are [insulators]. | conductors; magnets
+fact: A metal spoon in hot soup gets hot by [conduction]. | radiation; magnetism
+fact: In [convection], warm liquids and gases rise. | conduction; radiation
+fact: Heat travelling as rays is [radiation]. | conduction; convection
+fact: The sun's warmth reaches us by [radiation]. | conduction; convection
+
+@facts 2.4
+fact: Electricity from flowing water is called [hydro]. | solar; geothermal
+fact: [Solar] power comes from the sun. | Hydro; Geothermal
+fact: [Geothermal] energy is heat from under the ground. | Solar; Wind
+fact: Wind is a [renewable] source. | non-renewable; fossil
+fact: Coal is [non-renewable]. | renewable; endless
+fact: Renewable sources don't [run out]. | work; exist
+fact: Coal, oil and natural gas took [millions of years] to form. | a few days; a few weeks
+fact: Non-renewable sources will one day [run out]. | last forever; grow back
+
+@facts 3.1
+fact: All matter is made of [particles]. | colours; cells only
+fact: Particles are far too small to [see]. | exist; move
+fact: In a solid, particles are packed [tightly]. | far apart; loosely
+fact: In a solid, particles [vibrate in place]. | fly about; stop completely
+fact: In a liquid, particles [slide past each other]. | stay locked in place; fly far apart
+fact: In a gas, particles are [far apart]. | packed tightly; locked together
+fact: Gas particles spreading out is called [diffusion]. | condensation; freezing
+fact: You can smell baking from another room because of [diffusion]. | friction; gravity
+
+@facts 3.2
+fact: Solid to liquid is [melting]. | freezing; condensation
+fact: Liquid to solid is [freezing]. | melting; evaporation
+fact: Liquid to gas is [evaporation]. | condensation; melting
+fact: Gas to liquid is [condensation]. | evaporation; freezing
+fact: At sea level, pure water boils at [100] °C. | 0; 50
+fact: Pure water freezes at [0] °C. | 100; 50
+fact: A puddle dries up by [evaporation]. | condensation; freezing
+fact: Boiling is a fast kind of [evaporation]. | freezing; condensation
+
+@facts 3.3
+fact: A [physical] change doesn't make a new substance. | chemical; burning
+fact: Melting is a [physical] change. | chemical; impossible
+fact: Dissolving is a [physical] change. | chemical; burning
+fact: A [chemical] change makes a new substance. | physical; melting
+fact: Baking a cake is a [chemical] change. | physical; melting
+fact: Rusting is a [chemical] change. | physical; freezing
+fact: Gas bubbles can be a sign of a [chemical] change. | physical; melting
+fact: You can refreeze melted ice, but you can't [unbake] a cake. | bake; cut
+
+@facts 3.4
+fact: A [mixture] is substances mixed but not chemically joined. | compound; element
+fact: Salt water is a [mixture]. | single substance; element
+fact: [Sieving] separates big bits from small bits. | Evaporation; Magnetism
+fact: [Filtering] separates solids from liquids. | Melting; Freezing
+fact: [Evaporation] leaves a dissolved solid behind. | Filtering; Sieving
+fact: A magnet can separate [iron] from other things. | salt; sand
+fact: To separate salt and sand, first add [water]. | oil; sugar
+fact: Filtering salty water [leaves] the sand behind in the filter. | dissolves; melts
+
+# ---------- Month 2 (units 4 to 6), written and checked 2026-11-07 ----------
+
+@band sprouts
+@facts 4.1
+fact: We have [five] senses. | two; ten
+fact: We see with our [eyes]. | ears; nose
+fact: We hear with our [ears]. | eyes; tongue
+fact: We smell with our [nose]. | ears; elbows
+fact: We taste with our [tongue]. | ears; eyes
+fact: We feel touch with our [skin]. | hair; teeth
+fact: Our senses send messages to the [brain]. | stomach; feet
+fact: The brain works out what's going [on]. | away; missing
+
+@facts 4.2
+fact: Your bones make up your [skeleton]. | skin; muscles
+fact: Your skeleton holds you [up]. | down; back
+fact: Your skeleton gives you your [shape]. | colour; voice
+fact: Your [skull] protects your brain. | ribs; knee
+fact: Your [ribs] protect your heart and lungs. | skull; toes
+fact: Milk foods help keep bones [strong]. | soft; bendy
+fact: Moving your body helps keep bones [strong]. | weak; soft
+fact: Bones protect the [soft] parts inside you. | hard; outside
+
+@facts 4.3
+fact: Muscles are joined to [bones]. | hair; nails
+fact: When a muscle gets shorter, it [pulls] on the bone. | pushes away; melts
+fact: Muscles pulling on bones help you [move]. | sleep; see
+fact: Your [heart] is a muscle. | skull; tooth
+fact: Your heart muscle [never stops] working. | always stops; never starts
+fact: Exercise makes muscles [stronger]. | weaker; smaller
+fact: Muscles work by [pulling]. | pushing only; melting
+fact: You use muscles to [smile]. | think only; dream
+
+@facts 4.4
+fact: When you breathe in, air goes into your [lungs]. | stomach; bones
+fact: Your body needs the [oxygen] in air. | dust; smoke
+fact: Your heart pumps [blood] around your body. | air; water only
+fact: Blood carries [oxygen] everywhere in your body. | sand; light
+fact: When you run, you breathe [faster]. | slower; less
+fact: When you run, your heart beats [faster]. | slower; less
+fact: Your [heart] pumps blood. | lungs; stomach
+fact: Your lungs help you [breathe]. | see; taste
+
+@facts 5.1
+fact: We need [light] to see. | sound; wind
+fact: The [sun] is a light source. | Moon; mirror
+fact: A torch is a light [source]. | eater; shadow
+fact: Fire is a light [source]. | shadow; mirror
+fact: Light bounces off things and into our [eyes]. | ears; noses
+fact: The Moon [isn't] a light source. | is the best; is always
+fact: The Moon reflects light from the [sun]. | Earth's oceans; stars only
+fact: In total darkness, we [can't] see. | can always; can easily
+
+@facts 5.2
+fact: A shadow forms when something [blocks] light. | makes; reflects
+fact: Light travels in [straight] lines. | wiggly; circular
+fact: Light [can't] bend around you. | can easily; can always
+fact: When the sun is low, shadows are [long]. | short; gone
+fact: In the morning, shadows are [long]. | short; invisible
+fact: At midday, shadows are [short]. | long; gigantic
+fact: The sun is low in the morning and [evening]. | midday; noon
+fact: Your shadow is on the side [away from] the light. | facing; inside
+
+@facts 5.3
+fact: Sounds are made when things [vibrate]. | freeze; glow
+fact: Vibrate means wobble back and forth very [fast]. | slowly; once
+fact: Vibrations travel through the [air] to your ears. | ground only; light
+fact: When the vibrating stops, the sound [stops]. | gets louder; starts
+fact: We hear sounds with our [ears]. | eyes; nose
+fact: A plucked guitar string [vibrates]. | freezes; melts
+fact: Sound can travel through [air]. | nothing at all; empty space
+fact: Touching a drum while it plays lets you feel it [vibrate]. | freeze; melt
+
+@facts 5.4
+fact: Loud sounds have [big] vibrations. | small; no
+fact: Soft sounds have [small] vibrations. | big; huge
+fact: High sounds come from [fast] vibrations. | slow; no
+fact: Low sounds come from [slow] vibrations. | fast; no
+fact: A whistle makes a [high] sound. | low; silent
+fact: A big drum makes a [low] sound. | high; squeaky
+fact: Very loud sounds can [hurt] your ears. | help; clean
+fact: If a sound is too loud, [cover] your ears or move away. | open; point
+
+@facts 6.1
+fact: A seed has a baby [plant] inside. | bird; rock
+fact: A seed has a store of [food] inside. | water only; air only
+fact: A seed needs water, air and [warmth] to start growing. | darkness only; sugar
+fact: A seed starting to grow is called [germination]. | pollination; evaporation
+fact: First, a [root] grows down. | flower; fruit
+fact: Then a [shoot] grows up towards the light. | root; seed
+fact: A shoot grows towards the [light]. | dark; ground
+fact: A seed needs [water] to start growing. | lemonade; sand
+
+@facts 6.2
+fact: Plants spread their [seeds] in different ways. | roots; leaves
+fact: The [wind] carries light, fluffy seeds. | rain; moon
+fact: Dandelion seeds are carried by the [wind]. | sea; animals' teeth
+fact: Animals eat [fruit] and drop the seeds somewhere else. | rocks; sand
+fact: Some seeds [hook] onto fur. | melt; sing
+fact: Some seeds can stick to your [socks]. | teeth; hair dryer
+fact: Coconuts can [float] on the sea. | fly; walk
+fact: Spreading seeds helps plants grow in new [places]. | colours; sizes
+
+@facts 6.3
+fact: Flowers make a sweet liquid called [nectar]. | pollen; sap
+fact: Bees drink [nectar]. | milk; seawater
+fact: A yellow dust called [pollen] sticks to bees. | nectar; sugar
+fact: Bees carry pollen to the next [flower]. | hive only; cloud
+fact: Moving pollen between flowers is [pollination]. | germination; evaporation
+fact: Pollination helps flowers make [seeds] and fruit. | rocks; clouds
+fact: Lots of the fruit we eat needs [pollination]. | freezing; painting
+fact: Bees help plants make [fruit]. | rocks; plastic
+
+@facts 6.4
+fact: [Deciduous] trees drop their leaves in autumn. | Evergreen; Plastic
+fact: Deciduous trees grow new leaves in [spring]. | autumn; winter
+fact: [Evergreen] trees keep their leaves all year. | Deciduous; Bare
+fact: Deciduous trees drop their leaves in [autumn]. | spring; summer
+fact: {nz:Most of New Zealand's~au:Most of Australia's} native trees are [evergreen]. | deciduous; leafless
+fact: An evergreen tree is green [all year round]. | in summer only; in winter only
+fact: A tree with no leaves in winter is [deciduous]. | evergreen; plastic
+fact: New leaves on deciduous trees appear in [spring]. | autumn; winter
+
+@band builders
+@facts 4.1
+fact: Electricity flows around a complete loop called a [circuit]. | battery; switch
+fact: In a simple circuit, the [battery] is the energy source. | bulb; wire
+fact: [Wires] carry electricity around a circuit. | Strings; Ribbons
+fact: A bulb in a circuit gives out [light]. | electricity back; sound only
+fact: If there's a gap in the loop, the electricity [stops]. | speeds up; doubles
+fact: A broken circuit makes the bulb go [out]. | brighter; bigger
+fact: A circuit must be [complete] for electricity to flow. | broken; cut
+fact: Electricity needs a full [loop] to flow. | gap; break
+
+@facts 4.2
+fact: [Conductors] let electricity flow through them easily. | Insulators; Batteries
+fact: Copper is a good [conductor]. | insulator; battery
+fact: Most [metals] are good conductors. | plastics; woods
+fact: [Insulators] stop electricity flowing. | Conductors; Batteries
+fact: Plastic is an [insulator]. | conductor; battery
+fact: Rubber is an [insulator]. | conductor; wire
+fact: Wires have [metal] inside to carry electricity. | wood; rubber
+fact: The plastic outside a wire keeps us [safe]. | wet; warm
+
+@facts 4.3
+fact: A switch closes or opens a [gap] in a circuit. | battery; bulb
+fact: Switching on [closes] the gap. | opens; widens
+fact: Switching off [opens] the gap. | closes; fills
+fact: When the gap closes, electricity [flows]. | stops; freezes
+fact: When the gap opens, electricity [stops]. | flows; doubles
+fact: Switches let us [control] things without unplugging them. | break; hide
+fact: A light switch on the wall opens and closes a [circuit]. | window; door
+fact: A switch is like a [gate] in the circuit. | battery; bulb
+
+@facts 4.4
+fact: The electricity in your home is far [stronger] than a battery's. | weaker; safer
+fact: Home electricity can seriously [hurt] you. | help; tickle
+fact: [Water] conducts electricity. | Plastic; Rubber
+fact: Keep water away from [plugs]. | books; pillows
+fact: Never poke things into [sockets]. | drawers; pockets
+fact: Never touch fallen [power lines]. | leaves; branches with no wires
+fact: Tell a grown-up about damaged [cords]. | books; shoes
+fact: Wet hands and electricity are [dangerous] together. | safe; fine
+
+@facts 5.1
+fact: The Earth has [layers] inside. | nothing; one solid lump
+fact: The [crust] is the thin, rocky outside we live on. | core; mantle
+fact: Under the crust is the [mantle]. | core; sky
+fact: The mantle is very hot rock that moves very [slowly]. | fast; quickly
+fact: At the centre of the Earth is the [core]. | crust; mantle
+fact: The core is mostly [metal]. | ice; wood
+fact: The core is extremely [hot]. | cold; icy
+fact: The crust is the [thinnest] layer. | thickest; hottest
+
+@facts 5.2
+fact: The Earth's crust is broken into huge pieces called [plates]. | cups; bowls
+fact: Plates move very [slowly]. | fast; quickly
+fact: When plates slide past each other, rocks can suddenly [break]. | melt; grow
+fact: Sudden breaking of rocks underground shakes the [ground]. | sky; moon
+fact: Ground shaking from moving plates is an [earthquake]. | volcano; tide
+fact: New Zealand sits where two [plates] meet. | rivers; oceans
+fact: Places where plates meet have lots of [earthquakes]. | snowstorms; rainbows
+fact: Plates can push together or [slide past] each other. | sing to; float away from
+
+@facts 5.3
+fact: Melted rock underground is called [magma]. | lava; sand
+fact: Melted rock that comes out of a volcano is called [lava]. | magma; ice
+fact: Magma pushes up through cracks in the [crust]. | core; sky
+fact: When lava cools, it hardens into new [rock]. | water; sand dunes
+fact: Many [islands] were made by volcanoes. | rivers; clouds
+fact: Rock gets so hot underground that it [melts]. | freezes; floats
+fact: A volcano is where magma comes [out]. | in; to sleep
+fact: Lava is very [hot]. | cold; icy
+
+@facts 5.4
+fact: [Igneous] rock forms when melted rock cools. | Sedimentary; Metamorphic
+fact: Basalt is an [igneous] rock. | sedimentary; metamorphic
+fact: Pumice is an [igneous] rock. | sedimentary; metamorphic
+fact: [Sedimentary] rock forms from layers pressed together. | Igneous; Metamorphic
+fact: Sandstone is a [sedimentary] rock. | igneous; metamorphic
+fact: [Metamorphic] rock forms when rock is changed by heat and pressure. | Igneous; Sedimentary
+fact: Marble is a [metamorphic] rock. | igneous; sedimentary
+fact: Sedimentary rock takes a very [long] time to form. | short; tiny
+
+@facts 6.1
+fact: Light travels in [straight] lines until it hits something. | curly; zigzag
+fact: Smooth, shiny surfaces reflect light [neatly]. | not at all; into darkness
+fact: A [mirror] gives a clear reflection. | brick wall; carpet
+fact: [Rough] surfaces scatter light in all directions. | Smooth; Shiny
+fact: Scattered light gives [no clear] image. | a perfect; a mirror
+fact: Light bouncing off a surface is [reflection]. | refraction; germination
+fact: Still water can reflect like a [mirror]. | sponge; blanket
+fact: You see yourself in a mirror because it [reflects] light. | eats; makes
+
+@facts 6.2
+fact: Light changing direction between materials is [refraction]. | reflection; evaporation
+fact: Refraction happens when light passes from water into [air]. | nothing; darkness
+fact: A straw in water looks [bent]. | invisible; longer than the glass
+fact: Refraction makes pools look [shallower] than they are. | deeper; emptier
+fact: [Glasses] use refraction to bend light. | Shoes; Hats
+fact: A magnifying glass uses [refraction]. | reflection; magnetism
+fact: Pools are [deeper] than they look. | shallower; emptier
+fact: Refraction [bends] light. | stops; freezes
+
+@facts 6.3
+fact: White light is a mix of all the [colours]. | sounds; smells
+fact: Sunlight is [white] light. | black; green only
+fact: Raindrops can split sunlight into a [rainbow]. | shadow; echo
+fact: The first colour of a rainbow is [red]. | violet; green
+fact: The last colour of a rainbow is [violet]. | red; orange
+fact: A rainbow has [seven] named colours. | three; twelve
+fact: A red apple reflects [red] light. | blue; green
+fact: A red apple takes in the [other] colours. | red; white
+
+@facts 6.4
+fact: Sound travels as [vibrations]. | rays; sparks
+fact: Sound can travel through solids, liquids and [gases]. | empty space; nothing
+fact: Sound travels faster through water than through [air]. | metal; solids
+fact: Sound travels faster through solids than through [air]. | nothing; water only
+fact: Sound [can't] travel through empty space. | can easily; can always
+fact: An [echo] is a sound bouncing back. | shadow; rainbow
+fact: Echoes bounce off [hard] surfaces. | soft; fluffy
+fact: Shouting near a cliff can make an [echo]. | rainbow; shadow
+
+@band makers
+@facts 4.1
+fact: An [ecosystem] is the living things in an area plus the non-living things they depend on. | organ; molecule
+fact: [Biotic] factors are living. | Abiotic; Chemical
+fact: [Abiotic] factors are non-living. | Biotic; Living
+fact: Fungi are a [biotic] factor. | abiotic; non-living
+fact: Sunlight is an [abiotic] factor. | biotic; living
+fact: Temperature is an [abiotic] factor. | biotic; living
+fact: Bacteria are a [biotic] factor. | abiotic; non-living
+fact: A change like less rain can affect [everything else] in an ecosystem. | nothing; only the rain
+
+@facts 4.2
+fact: Energy enters most ecosystems through [plants]. | rocks; predators
+fact: Plants capture [sunlight]. | heat from animals; moonlight
+fact: At each step up a food chain, most energy is [used or lost]. | passed on; doubled
+fact: Energy is lost as [heat]. | light only; soil
+fact: Only a [small] part of the energy passes to the next level. | large; whole
+fact: There's [less] energy at each level up a food chain. | more; the same
+fact: Top predators are [fewer] because there's less energy for them. | more common; bigger in number
+fact: Moving and keeping warm [use up] energy. | create; double
+
+@facts 4.3
+fact: [Decomposers] break down dead plants and animals. | Producers; Predators
+fact: Fungi are [decomposers]. | producers; predators
+fact: Worms are [decomposers]. | producers; predators
+fact: Bacteria can be [decomposers]. | producers; predators
+fact: Decomposers return [nutrients] to the soil. | plastic; rocks
+fact: New plants use the nutrients that decomposers [return]. | destroy; hide
+fact: Without decomposers, dead material would [pile up]. | vanish; grow back
+fact: Without decomposers, nutrients would [run out]. | double; never change
+
+@facts 4.4
+fact: Introduced predators eat native animals' [eggs] and young. | homes only; shadows
+fact: [Trapping] predators helps native species recover. | Feeding; Releasing
+fact: Protecting [habitat] helps native species recover. | predators; cages only
+fact: Introduced predators were brought by [people]. | rain; volcanoes
+fact: Native species that evolved without these predators have few [defences] against them. | feathers; homes
+fact: Predator control helps native [birds]. | rats; stoats
+fact: Losing habitat makes native species [struggle]. | thrive; multiply
+fact: Native species can [recover] with protection. | never recover; disappear faster
+
+@facts 5.1
+fact: [Speed] is how far something travels in a certain time. | Mass; Pressure
+fact: Speed = distance ÷ [time]. | mass; area
+fact: 12 km in 1 hour is [12] km/h. | 1; 24
+fact: 100 m in 20 seconds is [5] m/s. | 20; 2,000
+fact: Distance = speed × [time]. | mass; area
+fact: At 60 km/h for 2 hours, you travel [120] km. | 30; 62
+fact: Time = distance ÷ [speed]. | mass; area
+fact: 30 km at 10 km/h takes [3] hours. | 300; 20
+
+@facts 5.2
+fact: When forces are [balanced], they cancel out. | unbalanced; doubled
+fact: With balanced forces, a still object [stays still]. | speeds up; starts spinning
+fact: With balanced forces, a moving object [keeps the same speed]. | stops suddenly; speeds up
+fact: [Unbalanced] forces make an object speed up, slow down or change direction. | Balanced; Equal
+fact: A parked car has [balanced] forces. | unbalanced; no
+fact: Gravity pulls a parked car [down]. | up; sideways
+fact: The ground pushes a parked car [up]. | down; sideways
+fact: A car speeding up has [unbalanced] forces. | balanced; no
+
+@facts 5.3
+fact: When one object pushes on another, the second object [pushes back]. | does nothing; disappears
+fact: The push back is [just as hard]. | much weaker; much stronger
+fact: The push back is in the [opposite] direction. | same; random
+fact: A rocket pushes gas [down]. | up; sideways only
+fact: The gas pushes the rocket [up]. | down; backwards
+fact: When you swim, you push water [back]. | forward; up only
+fact: The water pushes a swimmer [forward]. | backward; down
+fact: Every action has an equal and opposite [reaction]. | colour; mass
+
+@facts 5.4
+fact: [Pressure] is how much force presses on a certain area. | Speed; Mass
+fact: Pressure = force ÷ [area]. | time; speed
+fact: The same force on a small area makes [high] pressure. | low; no
+fact: A sharp knife edge makes [high] pressure. | low; no
+fact: A drawing pin makes [high] pressure at its point. | low; no
+fact: Snowshoes spread force over a big area for [low] pressure. | high; extreme
+fact: Wide tractor tyres make [low] pressure. | high; extreme
+fact: A bigger area means [lower] pressure for the same force. | higher; the same
+
+@facts 6.1
+fact: Gravity pulls all objects with [mass] towards each other. | colour; light
+fact: Bigger masses pull [harder]. | weaker; not at all
+fact: The Moon is moving [sideways very fast]. | not at all; very slowly backwards
+fact: Gravity bends the Moon's path into a [curve]. | straight line; square
+fact: A curved path around a planet is an [orbit]. | eclipse; echo
+fact: [Satellites] orbit the Earth the same way as the Moon. | Clouds; Birds
+fact: Without gravity, the Moon would fly off in a [straight line]. | circle; spiral inwards
+fact: The Earth's gravity keeps the [Moon] in orbit. | sun; Mars
+
+@facts 6.2
+fact: Stars are huge balls of hot [gas]. | rock; ice
+fact: Stars are mostly [hydrogen]. | iron; water
+fact: Stars shine because of [nuclear fusion]. | burning wood; reflection
+fact: Fusion happens in a star's [core]. | surface only; tail
+fact: Stars form in giant clouds called [nebulae]. | comets; asteroids
+fact: Nebulae are made of gas and [dust]. | ice cream; water only
+fact: The sun is a [medium-sized] star. | giant; tiny
+fact: The sun has used up about [half] of its life. | none; nearly all
+
+@facts 6.3
+fact: Space is measured in [light-years]. | kilometres only; seconds
+fact: A light-year is the distance light travels in one [year]. | second; day
+fact: A light-year measures [distance]. | time; brightness
+fact: Light from the sun takes about [8 minutes] to reach Earth. | 8 seconds; 8 years
+fact: Light from other stars takes [years] to reach us. | seconds; minutes
+fact: We see stars as they [were] when their light left. | will be; are right now
+fact: Light travels [faster] than anything else. | slower; at the same speed
+fact: Space is [huge]. | tiny; small
+
+@facts 6.4
+fact: Seasons are caused by the Earth's [tilt]. | distance from the sun; spin speed
+fact: Seasons are [not] caused by distance from the sun. | always; mainly
+fact: When our half tilts towards the sun, it's [summer]. | winter; autumn
+fact: In summer, the sun is [higher] in the sky. | lower; gone
+fact: In summer, days are [longer]. | shorter; the same
+fact: In summer, sunlight is [more concentrated]. | more spread out; weaker
+fact: When our half tilts away from the sun, it's [winter]. | summer; spring
+fact: In winter, days are [shorter]. | longer; the same

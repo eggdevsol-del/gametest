@@ -1,0 +1,966 @@
+# Science. Follows the new NZ Curriculum science for Years 0 to 10 (schools start using it in 2027): Sprouts about
+# Years 3 to 5, Builders 6 to 8, Makers 9 and 10. Settled science only, no numbers that change. Home experiments use
+# safe household things with a grown-up nearby. Month 1: units 1 to 3.
+
+@band sprouts
+@unit 1 | Living things | What living things need and how they grow
+@unit 2 | Materials | What things are made of
+@unit 3 | Earth and sky | Day, night, seasons and rain
+
+@lesson 1.1 | Living or not? | 🐌 | garden
+hook: A rock, a tree and a snail. Which ones are alive?
+learn: Living things grow, need food and water, breathe, and make more of their own kind.
+learn: Plants and animals are living things. Rocks, water and plastic are not.
+learn: Some things were once alive, like a dry leaf or a wooden table.
+try: A snail eats, grows and breathes, so it's alive :: mcq | Which is a living thing? | A worm* | A rock | A cup
+play: sort | Living, Not living | Tree=Living; Stone=Not living; Fish=Living; Cloud=Not living; Mushroom=Living; Spoon=Not living | Living or not?
+check: mcq | Which shows that something is alive? | It grows* | It's shiny | It's heavy
+check: tf | Plants are living things. | true
+check: mcq | A wooden chair… | was once part of a living tree* | is alive | was never alive
+home: Go outside with a grown-up and find five living things and five things that aren't alive.
+skill: living-things
+
+@lesson 1.2 | What plants need | 🪴 | garden
+hook: Why does a plant left in a dark cupboard go pale and droopy?
+learn: Plants need light, water and air to grow.
+learn: Roots take in water from the soil. Leaves use sunlight to make the plant's food.
+learn: Without light, a plant can't make enough food, so it gets weak.
+try: A plant on a sunny windowsill grows well :: mcq | What do leaves use to make food? | Sunlight* | Moonlight | Music
+play: match | Match each plant part to its job | Roots=Take in water; Leaves=Make food from sunlight; Stem=Holds the plant up; Flower=Makes seeds
+check: mcq | Which does a plant NOT need to grow? | Toys* | Water | Light
+check: tf | Roots take in water from the soil. | true
+check: mcq | A plant left in the dark will probably… | go pale and weak* | grow faster | turn blue
+home: Grow a bean seed in a cup of damp cotton wool and watch it each day.
+skill: plant-needs
+
+@lesson 1.3 | Animal groups | 🐾 | island
+hook: A kiwi, a gecko and a dog. Are they in the same group?
+learn: Scientists sort animals into groups by what they're like.
+learn: Mammals have hair or fur and feed their babies milk. Birds have feathers and lay eggs.
+learn: Reptiles have dry, scaly skin. Fish have fins and gills and live in water.
+try: A dog has fur, so it's a mammal :: mcq | A kiwi has feathers. It's a… | bird* | mammal | fish
+play: sort | Mammal, Bird, Fish, Reptile | Cow=Mammal; Tūī=Bird; Snapper=Fish; Gecko=Reptile; Dolphin=Mammal; Kererū=Bird | Which group is it in?
+check: mcq | Which group has feathers? | Birds* | Fish | Mammals
+check: tf | A dolphin is a fish. | false | Dolphins breathe air and feed their babies milk, so they're mammals.
+check: mcq | Which animal has dry, scaly skin? | A lizard* | A sheep | A sparrow
+home: Sort the animals in a picture book into mammals, birds, fish and reptiles.
+skill: animal-groups
+
+@lesson 1.4 | Life cycles | 🦋 | garden
+hook: How does a caterpillar turn into a butterfly?
+learn: A life cycle is how a living thing starts life, grows and makes new young.
+learn: A butterfly's life cycle goes egg, caterpillar, chrysalis, butterfly.
+learn: A frog's life cycle goes egg, tadpole, froglet, frog.
+try: A caterpillar hatches from an egg :: mcq | What comes after the caterpillar? | Chrysalis* | Egg | Tadpole
+play: order | Put the butterfly's life cycle in order | Egg; Caterpillar; Chrysalis; Butterfly
+check: mcq | A young frog with a tail and no legs is called a… | tadpole* | caterpillar | chick
+check: tf | A butterfly lays eggs. | true
+check: mcq | What does a caterpillar spend most of its time doing? | Eating and growing* | Flying | Swimming
+home: Look for caterpillars or eggs on plants with a grown-up. Swan plants are great for monarchs.
+skill: life-cycles
+
+@lesson 2.1 | What is it made of? | 🧱 | workshop
+hook: Why are windows made of glass and not wood?
+learn: Materials are what things are made of: wood, metal, glass, plastic, wool.
+learn: Each material has properties: hard or soft, see-through or not, waterproof or not, bendy or stiff.
+learn: We choose materials for their properties. Glass is see-through, so we can look out of windows.
+try: Rubber is waterproof, so it's good for gumboots :: mcq | Why are windows made of glass? | Glass is see-through* | Glass is soft | Glass is bendy
+play: match | Match each thing to a good material for it | Window=Glass; Spoon=Metal; Jumper=Wool; Table=Wood
+check: mcq | Which material is waterproof? | Plastic* | Paper | Cotton
+check: tf | Metal is a good material for a pot. | true
+check: mcq | Which property makes rubber good for gumboots? | It's waterproof* | It's see-through | It's crunchy
+home: Find five things at home and say what each is made of, and why.
+skill: materials
+
+@lesson 2.2 | Float or sink? | 🛥️ | island
+hook: A huge ship floats but a small stone sinks. How?
+learn: Some things float on water and some sink.
+learn: It isn't only about weight. Things that are packed tight for their size, like a stone, usually sink.
+learn: Shape matters too. A ball of foil sinks, but a foil boat can float.
+try: A cork floats :: mcq | Which will probably float? | A leaf* | A coin | A key
+play: sort | Floats, Sinks | Cork=Floats; Stone=Sinks; Apple=Floats; Marble=Sinks; Plastic duck=Floats; Key=Sinks | Float or sink?
+check: mcq | A flat foil boat floats, but a scrunched foil ball sinks. What changed? | The shape* | The material | The colour
+check: tf | Heavy things always sink. | false | A big ship is heavy, but it floats because of its shape.
+check: mcq | Which will probably sink? | A metal spoon* | A ping-pong ball | A cork
+home: Test five things in a sink of water with a grown-up. Guess first, then test.
+skill: float-sink
+
+@lesson 2.3 | Solids and liquids | 🧊 | kitchen
+hook: Ice and water are made of the same stuff. Why are they so different?
+learn: A solid keeps its shape: a rock, an ice cube, a pencil.
+learn: A liquid flows and takes the shape of its container: water, milk, juice.
+learn: Water can be a solid (ice), a liquid (water) or a gas (water vapour, which we can't see).
+try: Milk is a liquid :: mcq | Which is a solid? | A brick* | Juice | Rain
+play: sort | Solid, Liquid | Ice cube=Solid; Honey=Liquid; Spoon=Solid; Orange juice=Liquid; Book=Solid; Rain=Liquid | Solid or liquid?
+check: mcq | Which takes the shape of its container? | A liquid* | A solid | A rock
+check: tf | Ice is solid water. | true
+check: mcq | Water vapour is water as a… | gas* | solid | liquid
+home: Pour water into three different shaped containers with a grown-up. Does it keep its shape?
+skill: solids-liquids
+
+@lesson 2.4 | Melting and freezing | 🍦 | kitchen
+hook: Why does an ice block drip on a hot day?
+learn: Heating can melt a solid into a liquid: ice melts into water, butter melts in a warm pan.
+learn: Cooling can freeze a liquid into a solid: water freezes into ice in the freezer.
+learn: Melting and freezing can go back and forth. Melt an ice cube, and you can freeze the water again.
+try: Chocolate melts in a warm hand :: mcq | Water left in the freezer will… | freeze into ice* | boil | disappear
+play: sort | Melting, Freezing | Ice cream on a hot day=Melting; Water in an ice tray in the freezer=Freezing; Butter in a warm pan=Melting; A puddle on a frosty night=Freezing; A snowman in the sun=Melting | Melting or freezing?
+check: mcq | What makes ice melt? | Heat* | Cold | Darkness
+check: tf | Melted ice can be frozen again. | true
+check: mcq | Which will melt fastest? | An ice cube in the sun* | An ice cube in the freezer | An ice cube in the fridge
+home: Race two ice cubes with a grown-up: one in the sun and one in the shade. Which melts first?
+skill: melting-freezing
+
+@lesson 3.1 | Day and night | 🌍 | island
+hook: Where does the sun go at night?
+learn: The Earth spins around like a top. One full spin takes about 24 hours: one day.
+learn: The side of the Earth facing the sun has day. The side facing away has night.
+learn: The sun doesn't travel around us. It only looks like it moves because the Earth is spinning.
+try: When it's day in {nz:New Zealand~au:Australia}, it's night on the other side of the world :: mcq | What causes day and night? | The Earth spinning* | The sun switching off | Clouds covering the sun
+play: order | Put the day in order | Sunrise; Midday; Sunset; Night
+check: mcq | How long does the Earth take to spin around once? | About 24 hours* | About 1 hour | About 1 year
+check: tf | It's night on the side of the Earth facing away from the sun. | true
+check: mcq | The sun seems to move across the sky because… | the Earth is spinning* | the sun is walking | the wind blows it
+home: In a dark room, shine a torch on a ball with a grown-up. Turn the ball to see day and night.
+skill: day-night
+
+@lesson 3.2 | The Moon | 🌙 | island
+hook: Why does the Moon look like a banana some nights and a round plate on others?
+learn: The Moon doesn't make its own light. It reflects light from the sun.
+learn: The Moon travels around the Earth. It takes about a month.
+learn: As it travels, we see different amounts of its sunlit side. These shapes are called phases.
+try: At a full moon we see the whole lit-up side :: mcq | Where does moonlight come from? | The sun* | The Moon makes it | Stars
+play: match | Match each phase to how it looks | Full moon=A whole circle; New moon=Almost nothing; Half moon=Half a circle; Crescent=A thin curve
+check: mcq | About how long does the Moon take to go around the Earth? | A month* | A day | A year
+check: tf | The Moon changes shape because it breaks into pieces. | false | We just see different amounts of its sunlit side.
+check: mcq | The Moon goes around… | the Earth* | Mars | the stars
+home: Look at the Moon each clear night for a week and draw its shape.
+skill: moon-phases
+
+@lesson 3.3 | Seasons | 🍂 | garden
+hook: Why is December warm here but cold in many other countries?
+learn: There are four seasons: summer, autumn, winter and spring.
+learn: The Earth is tilted. For part of the year our half of the world leans towards the sun, and that's summer. Later it leans away, and that's winter.
+learn: {nz:New Zealand~au:Australia} is in the bottom half of the world, so our summer is in December, January and February.
+try: When our half of the world leans towards the sun, it's summer :: mcq | Here, December is in… | summer* | winter | autumn
+play: order | Put the seasons in order, starting with summer | Summer; Autumn; Winter; Spring
+check: mcq | How long does the Earth take to go around the sun? | One year* | One day | One month
+check: tf | When it's summer here, it's winter in places like England. | true
+check: mcq | In autumn, many trees… | drop their leaves* | grow new flowers | turn into ice
+home: Draw what your family does in each season, with a grown-up.
+skill: seasons
+
+@lesson 3.4 | Weather and the water cycle | 🌧️ | garden
+hook: Where does rain come from?
+learn: The sun warms water in seas, lakes and puddles. Some of it turns into water vapour, a gas we can't see. This is evaporation.
+learn: High up, the vapour cools and turns into tiny drops that make clouds. This is condensation.
+learn: When the drops get big and heavy, they fall as rain. Then it all starts again. This is the water cycle.
+try: Puddles dry up because of evaporation :: mcq | What are clouds made of? | Tiny drops of water* | Cotton | Smoke
+play: order | Put the water cycle in order | The sun warms the water; Water evaporates into the air; The vapour cools into clouds; Rain falls
+check: mcq | When water turns into a gas we can't see, it's called… | evaporation* | freezing | melting
+check: tf | The same water goes round and round in the water cycle. | true
+check: mcq | Why do puddles disappear on a sunny day? | The water evaporates* | Birds drink it all | It turns into sand
+home: Draw a chalk line around a puddle with a grown-up, and check it again later in the day.
+skill: water-cycle
+
+@unit 4 | My body | Senses, bones, muscles and breathing
+@unit 5 | Light and sound | Shadows, vibrations, loud and soft
+@unit 6 | Plants and seeds | How plants grow and spread
+
+@lesson 4.1 | Five senses | 👀 | garden
+hook: How do you know an orange is an orange, even with your eyes shut?
+learn: We have five senses: sight, hearing, smell, taste and touch.
+learn: Each sense uses a body part: eyes, ears, nose, tongue and skin.
+learn: Our senses send messages to the brain, which works out what's going on.
+try: You smell with your nose :: mcq | Which body part do you hear with? | Ears* | Eyes | Tongue
+play: match | Match each sense to its body part | Sight=Eyes; Hearing=Ears; Smell=Nose; Taste=Tongue; Touch=Skin
+check: mcq | Which sense tells you a drink is cold? | Touch* | Sight | Hearing
+check: tf | Your senses send messages to your brain. | true
+check: mcq | How many senses do we usually talk about? | Five* | Two | Ten
+home: Do a taste test with a grown-up. Can you guess foods with your eyes closed?
+skill: senses
+
+@lesson 4.2 | Bones | 🦴 | museum
+hook: What would happen if you had no bones?
+learn: Your bones make up your skeleton. It holds you up and gives you your shape.
+learn: Bones protect the soft parts inside: your skull protects your brain, and your ribs protect your heart and lungs.
+learn: Milk foods and moving your body help keep bones strong.
+try: The skull protects the brain :: mcq | What protects your heart and lungs? | Your ribs* | Your skull | Your toes
+play: match | Match each bone to its job | Skull=Protects the brain; Ribs=Protect the heart and lungs; Backbone=Holds you up; Leg bones=Help you stand and walk
+check: tf | Your skeleton holds you up. | true
+check: mcq | Without bones, you would be… | floppy* | taller | faster
+check: mcq | What helps keep bones strong? | Milk foods and moving* | Lollies | Staying in bed
+home: Feel the bones in your hand and count your knuckles.
+skill: bones
+
+@lesson 4.3 | Muscles | 💪 | garden
+hook: How does your arm bend?
+learn: Muscles are joined to bones. When a muscle gets shorter, it pulls on the bone, and you move.
+learn: Your heart is a muscle too. It never stops working.
+learn: Exercise makes muscles stronger.
+try: Muscles pull on bones to move them :: mcq | What do muscles do? | Pull on bones so you can move* | Help you see | Only keep you warm
+play: sort | Uses muscles, Doesn't use muscles | Running=Uses muscles; Smiling=Uses muscles; A rock sitting still=Doesn't use muscles; Chewing=Uses muscles; A table=Doesn't use muscles | Does it use muscles?
+check: tf | Your heart is a muscle. | true
+check: mcq | What makes muscles stronger? | Exercise* | Sleeping all day | Sweets
+check: mcq | Which uses lots of muscles? | Climbing a ladder* | Reading | Sleeping
+home: Do 10 star jumps. Which muscles feel like they worked?
+skill: muscles
+
+@lesson 4.4 | Breathing and your heart | 🫁 | garden
+hook: Put your hand on your chest. What can you feel?
+learn: When you breathe in, air goes into your lungs. Your body needs the oxygen in that air.
+learn: Your heart pumps blood around your body, carrying the oxygen everywhere.
+learn: When you run, you breathe faster and your heart beats faster.
+try: Your lungs take in air :: mcq | What does your heart pump? | Blood* | Air | Water
+play: order | Follow the air | Breathe in through your nose or mouth; Air goes into your lungs; Your blood picks up oxygen; Your heart pumps it around your body
+check: mcq | What happens to your heartbeat when you run? | It gets faster* | It stops | It gets slower
+check: tf | Your lungs take in air. | true
+check: mcq | Where is your heart? | In your chest* | In your foot | In your head
+home: Feel your heartbeat, do 20 jumps, then feel it again. What changed?
+skill: heart-lungs
+
+@lesson 5.1 | Light | 💡 | home
+hook: Why can't you see anything in a dark room?
+learn: We need light to see. Light comes from light sources like the sun, torches and fire.
+learn: Light bounces off things and into our eyes. That's how we see them.
+learn: The Moon isn't a light source. It reflects light from the sun.
+try: A torch is a light source :: mcq | Which is a light source? | The sun* | A mirror | The Moon
+play: sort | Light source, Not a light source | The sun=Light source; A torch=Light source; A mirror=Not a light source; The Moon=Not a light source; A candle flame=Light source; A book=Not a light source | Does it make its own light?
+check: tf | We need light to see. | true
+check: mcq | How do we see a book? | Light bounces off it into our eyes* | It glows | Our eyes shine on it
+check: mcq | Where does moonlight come from? | The sun* | The Moon itself | Street lights
+home: In a dark room with a grown-up, switch on a torch. What can you see now?
+skill: light
+
+@lesson 5.2 | Shadows | 🌳 | garden
+hook: Why does your shadow follow you around?
+learn: A shadow forms when something blocks light.
+learn: Light travels in straight lines, so it can't bend around you.
+learn: When the sun is low, in the morning and evening, shadows are long. At midday they're short.
+try: Your body blocks the sunlight :: mcq | When are shadows longest? | Early morning or evening* | Midday | Never
+play: sort | Makes a shadow, Hardly any shadow | A wooden block=Makes a shadow; Clear glass=Hardly any shadow; Your hand=Makes a shadow; Clear plastic wrap=Hardly any shadow; A book=Makes a shadow | Will it make a shadow?
+check: tf | Shadows form when something blocks light. | true
+check: mcq | Why can't light bend around you? | It travels in straight lines* | It's too heavy | It's scared
+check: mcq | At midday, shadows are… | short* | long | purple
+home: Make shadow puppets on a wall with a torch.
+skill: shadows
+
+@lesson 5.3 | Sound | 🥁 | stage
+hook: Pluck a rubber band. What do you see and hear?
+learn: Sounds are made when things vibrate: wobble back and forth very fast.
+learn: The vibrations travel through the air to your ears.
+learn: When the vibrating stops, the sound stops.
+try: A drum vibrates when you hit it :: mcq | What makes sound? | Vibrations* | Colours | Light
+play: tap | Tap the things that make sound by vibrating | 🥁:yes:A drum skin; 🎸:yes:Guitar strings; 🔔:yes:A bell; 🪨:no; 🧸:no
+check: tf | Sound travels through the air to our ears. | true
+check: mcq | If you hold a ringing bell still, the sound… | stops* | gets louder | changes colour
+check: mcq | Which part of your body vibrates when you talk? | Your throat* | Your knee | Your hair
+home: Put your fingers on your throat and hum. Can you feel it vibrate?
+skill: sound
+
+@lesson 5.4 | Loud, soft, high and low | 🎺 | stage
+hook: A mouse squeaks and a lion roars. What's different?
+learn: Loud sounds have big vibrations. Soft sounds have small ones.
+learn: High sounds, like a whistle, come from fast vibrations. Low sounds, like a big drum, come from slow ones.
+learn: Very loud sounds can hurt your ears, so cover them or move away.
+try: A whistle makes a high sound :: mcq | Which sound is low? | A big drum* | A whistle | A bird tweeting
+play: sort | High, Low | A whistle=High; A cow mooing=Low; A bird tweeting=High; Thunder=Low; A mouse squeaking=High | High or low?
+check: mcq | Hitting a drum harder makes the sound… | louder* | higher | quieter
+check: tf | Very loud sounds can hurt your ears. | true
+check: mcq | Which is quietest? | A whisper* | A shout | A siren
+home: Fill glasses with different amounts of water and tap them gently with a spoon. Which sounds highest?
+skill: pitch-volume
+
+@lesson 6.1 | Seeds | 🌱 | garden
+hook: How does a tiny seed become a big plant?
+learn: A seed has a baby plant and a store of food inside.
+learn: To start growing, a seed needs water, air and warmth. This is called germination.
+learn: First a root grows down, then a shoot grows up towards the light.
+try: A bean seed needs water to sprout :: mcq | What grows first from a seed? | A root* | A flower | A fruit
+play: order | Put a plant's growth in order | Seed; A root grows down; A shoot grows up; Leaves open; A flower blooms
+check: mcq | What does a seed need to start growing? | Water, air and warmth* | Darkness and ice | Music
+check: tf | A seed has food stored inside it. | true
+check: mcq | Which way does the shoot grow? | Up towards the light* | Down into the soil | Sideways forever
+home: Soak a few dried beans overnight, then open one carefully. Can you see the baby plant inside?
+skill: seeds
+
+@lesson 6.2 | How seeds travel | 🌬️ | garden
+hook: How do new plants pop up far away from the parent plant?
+learn: Plants spread their seeds in different ways.
+learn: The wind carries light, fluffy seeds like dandelions. Animals eat fruit and drop the seeds somewhere else.
+learn: Some seeds hook onto fur or socks. Coconuts can float on the sea.
+try: Dandelion seeds fly on the wind :: mcq | How do dandelion seeds travel? | On the wind* | By swimming | By walking
+play: match | Match each seed to how it travels | Dandelion=Wind; Berry seeds=Eaten by birds; Burr=Sticks to fur; Coconut=Floats on water
+check: tf | Birds can help spread seeds. | true
+check: mcq | Why do plants spread their seeds? | So new plants have room to grow* | To get rid of them | To feed the wind
+check: mcq | Seeds that stick to your socks travel by… | hitching a ride* | the wind | water
+home: After a walk in long grass, check your socks for hitchhiking seeds.
+skill: seed-dispersal
+
+@lesson 6.3 | Flowers and bees | 🐝 | garden
+hook: Why do bees visit flowers?
+learn: Flowers make a sweet liquid called nectar, which bees drink.
+learn: When bees visit, a yellow dust called pollen sticks to them and is carried to the next flower. This is pollination.
+learn: Pollination helps flowers make seeds and fruit. Lots of the fruit we eat needs it.
+try: Bees carry pollen :: mcq | What do bees drink from flowers? | Nectar* | Milk | Rain
+play: order | Put pollination in order | A bee visits a flower; Pollen sticks to the bee; The bee flies to another flower; The flower can make seeds
+check: tf | Pollination helps plants make seeds and fruit. | true
+check: mcq | Pollen is… | a powder made by flowers* | a kind of bee | honey
+check: mcq | Which helps pollinate flowers? | Bees* | Rocks | Clouds
+home: Watch a flower for five minutes with a grown-up. Which insects visit it?
+skill: pollination
+
+@lesson 6.4 | Trees through the year | 🍂 | garden
+hook: Why do some trees lose their leaves in autumn while others stay green?
+learn: Deciduous trees drop their leaves in autumn and grow new ones in spring.
+learn: Evergreen trees keep their leaves all year round.
+learn: {nz:Most of New Zealand's native trees are evergreen.~au:Most of Australia's native trees, like gum trees, are evergreen.}
+try: An oak drops its leaves in autumn :: mcq | A tree that keeps its leaves all year is… | evergreen* | deciduous | broken
+play: sort | Drops its leaves, Keeps its leaves | Oak=Drops its leaves; Pine=Keeps its leaves; Maple=Drops its leaves; Pōhutukawa=Keeps its leaves; Apple tree=Drops its leaves | Deciduous or evergreen?
+check: tf | Deciduous trees grow new leaves in spring. | true
+check: mcq | When do deciduous trees drop their leaves? | Autumn* | Spring | Every night
+check: mcq | Which tree is evergreen? | Pine* | Oak | Maple
+home: Find one evergreen tree and one deciduous tree near your home.
+skill: tree-seasons
+
+@band builders
+@unit 1 | Ecosystems | Food chains, habitats and adaptations
+@unit 2 | Forces | Pushes, pulls, gravity, friction and magnets
+@unit 3 | The solar system | Planets, orbits and the sun
+
+@lesson 1.1 | Food chains | 🌿 | garden
+hook: A hawk ate a bird, which ate a caterpillar, which ate a leaf. Where did the energy start?
+learn: A food chain shows who eats what: leaf → caterpillar → bird → hawk.
+learn: Plants are producers. They make their own food using sunlight.
+learn: Animals are consumers. They get energy by eating plants or other animals.
+try: grass → rabbit → fox :: mcq | In "grass → rabbit → fox", which is the producer? | Grass* | Rabbit | Fox
+play: order | Build the food chain, starting with the producer | Grass; Grasshopper; Frog; Heron
+check: mcq | Where does the energy in a food chain start? | The sun* | The biggest animal | The soil
+check: tf | Animals can make their own food from sunlight. | false | Plants can. Animals have to eat.
+check: mcq | An animal that eats only plants is a… | herbivore* | carnivore | producer
+home: Write a food chain for something you ate today, starting with the sun.
+skill: food-chains
+
+@lesson 1.2 | Food webs | 🕸️ | garden
+hook: What would happen to a forest if all its insects disappeared?
+learn: Most animals eat more than one thing, so food chains join up into a food web.
+learn: If one living thing disappears, others in the web are affected too.
+learn: Carnivores eat animals. Herbivores eat plants. Omnivores eat both.
+try: A bird that eats seeds and insects is an omnivore :: mcq | A cat that eats mice is a… | carnivore* | herbivore | producer
+play: sort | Herbivore, Carnivore, Omnivore | Sheep=Herbivore; Shark=Carnivore; Human=Omnivore; Rabbit=Herbivore; Hawk=Carnivore; Pig=Omnivore | Which is it?
+check: mcq | If insects disappeared, birds that eat them would… | have less food* | have more food | not notice
+check: tf | A food web is made of many food chains joined together. | true
+check: mcq | Which animal is an omnivore? | A bear* | A cow | A lion
+home: Draw a food web for the animals and plants on your island.
+skill: food-webs
+
+@lesson 1.3 | Habitats | 🏞️ | island
+hook: Why doesn't a fish live in a tree?
+learn: A habitat is the place where a living thing lives. It gives it food, water, shelter and space.
+learn: Forests, wetlands, rocky shores, deserts and oceans are all habitats.
+learn: When habitats are damaged, the animals that live there struggle to survive.
+try: A rock pool is a habitat for crabs :: mcq | What does a habitat give an animal? | Food, water and shelter* | Toys | Money
+play: match | Match each animal to its habitat | Fish=Ocean; Duck=Wetland; Camel=Desert; Monkey=Rainforest
+check: mcq | Which is a habitat? | A rock pool* | A bicycle | A sandwich
+check: tf | Damaging a habitat can harm the animals that live there. | true
+check: mcq | Why do animals need shelter? | To stay safe and out of bad weather* | To watch TV | To grow leaves
+home: Explore a small habitat with a grown-up, like under a log or in a rock pool. Who lives there?
+skill: habitats
+
+@lesson 1.4 | Adaptations | 🐧 | island
+hook: Why do penguins have flippers instead of wings like a sparrow's?
+learn: Adaptations are features that help a living thing survive where it lives.
+learn: A penguin's flippers help it swim fast to catch fish, and its thick layer of feathers keeps it warm.
+learn: A kiwi has nostrils at the tip of its long beak, which help it sniff out worms in the soil.
+try: A duck's webbed feet help it swim :: mcq | Why does a kiwi have nostrils at the tip of its beak? | To smell food in the soil* | To breathe underwater | To sing
+play: match | Match each living thing to its adaptation | Penguin=Flippers for swimming; Kiwi=Nostrils at the tip of its beak; Cactus=Stores water in its stem; Owl=Big eyes for seeing at night
+check: mcq | What is an adaptation? | A feature that helps a living thing survive* | A type of food | A kind of weather
+check: tf | A polar bear's thick fur is an adaptation for the cold. | true
+check: mcq | Webbed feet are most useful for… | swimming* | climbing trees | digging
+home: Pick an animal and find three adaptations that help it live where it does.
+skill: adaptations
+
+@lesson 2.1 | Pushes and pulls | 🛒 | stall
+hook: Opening a door, kicking a ball, pulling a wagon. What do they have in common?
+learn: A force is a push or a pull.
+learn: Forces can make things start moving, stop, speed up, slow down or change direction.
+learn: Forces can also change an object's shape, like squashing playdough.
+try: Kicking a ball is a push :: mcq | Opening a drawer is a… | pull* | push | neither
+play: sort | Push, Pull | Kicking a ball=Push; Opening a drawer=Pull; Pressing a button=Push; Tug of war=Pull; Shutting a door=Push; Picking a carrot=Pull | Push or pull?
+check: mcq | Which can a force do? | Change an object's speed* | Change its colour | Change its name
+check: tf | Squashing playdough uses a force. | true
+check: mcq | A harder kick on a ball usually makes it… | go faster and further* | stop | turn green
+home: Find five pushes and five pulls you do in a day.
+skill: forces
+
+@lesson 2.2 | Gravity | 🍎 | garden
+hook: Why does a dropped apple fall down and not up?
+learn: Gravity is a pulling force. The Earth pulls everything towards its centre.
+learn: Weight is how hard gravity pulls on something.
+learn: Gravity also keeps the Moon travelling around the Earth.
+try: A ball thrown up comes back down because of gravity :: mcq | Gravity is a… | pull* | push | type of light
+play: sort | Gravity at work, Not gravity | A raindrop falling=Gravity at work; A magnet picking up a pin=Not gravity; A ball rolling downhill=Gravity at work; Wind blowing a leaf sideways=Not gravity; A waterfall=Gravity at work | Is gravity doing it?
+check: mcq | What pulls you back down when you jump? | Gravity* | Wind | Light
+check: tf | Gravity keeps the Moon travelling around the Earth. | true
+check: mcq | Your weight is… | how hard gravity pulls on you* | how tall you are | how fast you run
+home: Drop a flat sheet of paper and a scrunched paper ball from the same height. Which lands first, and why?
+skill: gravity
+
+@lesson 2.3 | Friction | 🛝 | island
+hook: Why is it hard to slide on carpet but easy on ice?
+learn: Friction is a force that slows things down when two surfaces rub together.
+learn: Rough surfaces make more friction. Smooth or slippery surfaces make less.
+learn: Friction is useful. It lets our shoes grip, and it lets bike brakes stop the wheels.
+try: Ice has very little friction :: mcq | Which surface has the most friction? | Sandpaper* | Ice | Glass
+play: sort | More friction, Less friction | Gravel path=More friction; Wet slide=Less friction; Rubber soles=More friction; Ice rink=Less friction; Carpet=More friction | More friction or less?
+check: mcq | Why do shoes have bumpy soles? | To grip with more friction* | To look nice | To go faster on ice
+check: tf | Friction can turn movement into heat. | true
+check: mcq | Air resistance is a kind of friction. Which falls slowest? | An open parachute* | A stone | A marble
+home: Rub your hands together fast. Feel the heat? That's friction.
+skill: friction
+
+@lesson 2.4 | Magnets | 🧲 | workshop
+hook: Why does a magnet stick to the fridge but not to a wooden table?
+learn: Magnets pull on some metals, like iron and steel. They don't pull on wood, plastic or paper.
+learn: A magnet has a north pole and a south pole.
+learn: Opposite poles pull together (attract). The same poles push apart (repel).
+try: A north pole and a south pole attract :: mcq | What happens when two north poles meet? | They push apart* | They pull together | They glow
+play: sort | Magnetic, Not magnetic | Steel paperclip=Magnetic; Wooden spoon=Not magnetic; Iron nail=Magnetic; Plastic cup=Not magnetic; Glass marble=Not magnetic; Rubber band=Not magnetic | Will a magnet pull it?
+check: mcq | Which will a magnet pick up? | An iron nail* | A paper cup | A wooden block
+check: tf | A north pole and a south pole attract each other. | true
+check: mcq | Which does a magnet NOT pull? | Plastic* | Iron | Steel
+home: Test what a fridge magnet sticks to in your kitchen. Keep it away from phones and screens.
+skill: magnets
+
+@lesson 3.1 | Our solar system | 🪐 | museum
+hook: How many planets travel around the sun?
+learn: The solar system is the sun and everything that travels around it.
+learn: There are eight planets. In order from the sun: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.
+learn: A saying helps you remember: "My Very Easy Method Just Speeds Up Naming."
+try: Earth is the third planet from the sun :: mcq | Which planet is closest to the sun? | Mercury* | Neptune | Earth
+play: order | Put the planets in order from the sun | Mercury; Venus; Earth; Mars; Jupiter; Saturn; Uranus; Neptune
+check: mcq | How many planets are in our solar system? | 8* | 9 | 12
+check: mcq | Which is the biggest planet? | Jupiter* | Earth | Mars
+check: tf | The sun is a star. | true
+home: Make a line of planets with a grown-up using fruit or balls, from smallest to biggest.
+skill: solar-system
+
+@lesson 3.2 | Rocky planets and giants | 🌕 | museum
+hook: Could you stand on Jupiter?
+learn: The four inner planets (Mercury, Venus, Earth and Mars) are small and rocky.
+learn: The four outer planets (Jupiter, Saturn, Uranus and Neptune) are giants, made mostly of gas and ice, with no solid ground to stand on.
+learn: Saturn's bright rings are the most famous, but all four giant planets have rings.
+try: Mars is rocky :: mcq | Which planet is rocky? | Mars* | Jupiter | Neptune
+play: sort | Rocky, Giant | Mercury=Rocky; Jupiter=Giant; Earth=Rocky; Saturn=Giant; Venus=Rocky; Neptune=Giant | Rocky planet or giant?
+check: tf | You could stand on the surface of Jupiter. | false | Jupiter is a giant made mostly of gas, with no solid surface.
+check: mcq | Which planet is famous for its bright rings? | Saturn* | Mars | Mercury
+check: mcq | The inner planets are… | small and rocky* | giant and gassy | made of ice cream
+home: On a clear night, look for a bright "star" that doesn't twinkle. It might be a planet. Check with a stargazing app and a grown-up.
+skill: planets
+
+@lesson 3.3 | Orbits: a year and a month | 🌎 | museum
+hook: You have a birthday every year. What has the Earth done in between?
+learn: An orbit is the path one object takes around another.
+learn: The Earth orbits the sun once a year, which takes about 365 days.
+learn: The Moon orbits the Earth about once a month. The Earth spins once a day.
+try: One trip around the sun is a year :: mcq | How long does the Earth take to orbit the sun? | About 365 days* | About 30 days | 24 hours
+play: match | Match each movement to how long it takes | The Earth spins once=A day; The Moon orbits the Earth=About a month; The Earth orbits the sun=A year
+check: mcq | What does the Moon orbit? | The Earth* | Mars | Jupiter
+check: tf | The Earth spins about once every 24 hours, giving us day and night. | true
+check: mcq | What keeps the Earth in orbit around the sun? | Gravity* | Wind | Magnets
+home: Act it out with someone: the "Earth" spins slowly while walking around the "sun".
+skill: orbits
+
+@lesson 3.4 | The sun and the stars | ⭐ | museum
+hook: Why does the sun look so much bigger than other stars?
+learn: The sun is a star: a huge ball of very hot gas that gives off light and heat.
+learn: Other stars look tiny because they're much, much further away.
+learn: Never look straight at the sun. It can damage your eyes.
+try: The sun is our closest star :: mcq | Why do other stars look small? | They're very far away* | They're tiny | They're turned down
+play: match | Match each word to what it means | Star=A huge ball of hot, glowing gas; Planet=A large world that orbits a star; Moon=An object that orbits a planet
+check: tf | It's safe to stare at the sun if you squint. | false | Never look straight at the sun. It can damage your eyes.
+check: mcq | The sun gives the Earth… | light and heat* | rain | rocks
+check: mcq | The sun is a… | star* | planet | moon
+home: On a sunny day, trace your shadow in chalk in the morning and again in the afternoon. What changed?
+skill: sun-stars
+
+@unit 4 | Electricity | Circuits, conductors and staying safe
+@unit 5 | The changing Earth | Layers, earthquakes, volcanoes and rocks
+@unit 6 | Light and sound | Reflection, refraction, colour and echoes
+
+@lesson 4.1 | Circuits | 🔋 | workshop
+hook: Why does a torch only light up when you switch it on?
+learn: Electricity flows around a complete loop called a circuit.
+learn: A simple circuit has a battery (the energy source), wires, and something to power, like a bulb.
+learn: If there's a gap anywhere in the loop, the electricity stops and the bulb goes out.
+try: Battery, wire, bulb, wire, and back to the battery :: mcq | Why won't a bulb light if one wire is loose? | The circuit isn't complete* | The bulb is tired | The battery is cold
+play: order | Build a circuit | Take a battery; Connect a wire to one end; Connect that wire to the bulb; Connect a second wire from the bulb back to the battery
+check: tf | Electricity needs a complete loop to flow. | true
+check: mcq | What gives a torch its energy? | The battery* | The bulb | The case
+check: mcq | A gap in a circuit makes the bulb… | go out* | brighter | change colour
+home: Look inside a torch with a grown-up. Can you trace the circuit?
+skill: circuits
+
+@lesson 4.2 | Conductors and insulators | 🔌 | workshop
+hook: Why are wires made of copper covered in plastic?
+learn: Conductors let electricity flow through them easily. Most metals, like copper, are good conductors.
+learn: Insulators stop electricity flowing. Plastic, rubber, wood and glass are insulators.
+learn: Wires have metal inside to carry the electricity and plastic outside to keep us safe.
+try: Copper is a conductor :: mcq | Which is an insulator? | Rubber* | Copper | Steel
+play: sort | Conductor, Insulator | Copper=Conductor; Plastic=Insulator; Aluminium foil=Conductor; Wood=Insulator; Steel spoon=Conductor; Rubber=Insulator | Conductor or insulator?
+check: mcq | Why do wires have a plastic coating? | Plastic is an insulator, so it keeps us safe* | It looks nice | It makes electricity faster
+check: tf | Most metals are good conductors. | true
+check: mcq | Which would let electricity through? | A metal paperclip* | A plastic ruler | A rubber band
+home: Find things at home made of conductors and insulators. Look only: never test plugs or sockets.
+skill: conductors
+
+@lesson 4.3 | Switches | 🎚️ | workshop
+hook: How does a light switch turn a light on and off?
+learn: A switch closes or opens a gap in a circuit.
+learn: Switch on, and the gap closes, so electricity flows. Switch off, and the gap opens, so it stops.
+learn: Switches let us control things without unplugging them.
+try: Turning a switch on closes the gap :: mcq | When a switch is off, the circuit has… | a gap* | no gaps | extra power
+play: match | Match each to what happens | Switch on=Electricity flows; Switch off=Electricity stops; Flat battery=Nothing to push the electricity
+check: tf | A switch works by opening and closing a gap in a circuit. | true
+check: mcq | Which uses a switch? | A torch* | A spoon | A pillow
+check: mcq | When you switch a light on, the circuit… | becomes complete* | gets a gap | melts
+home: Count the switches in one room of your home.
+skill: switches
+
+@lesson 4.4 | Electrical safety | ⚡ | home
+hook: Why should you never touch a power socket with wet hands?
+learn: The electricity in your home is far stronger than a battery's. It can seriously hurt you.
+learn: Water conducts electricity, so keep water away from plugs, sockets and appliances.
+learn: Never poke things into sockets or touch fallen power lines, and tell a grown-up about damaged cords.
+try: Keep water away from plugs :: mcq | You see a power line on the ground after a storm. What should you do? | Stay well away and tell a grown-up* | Move it with a stick | Touch it to check
+play: sort | Safe, Dangerous | Unplugging by holding the plug, not the cord=Safe; Using a hairdryer near a full bath=Dangerous; Telling a grown-up about a frayed cord=Safe; Poking a knife into a plugged-in toaster=Dangerous; Keeping drinks away from computers=Safe | Safe or dangerous?
+check: tf | Water conducts electricity. | true
+check: mcq | A cord is frayed and you can see the wires. What should you do? | Stop using it and tell a grown-up* | Tape it up yourself | Keep using it
+check: mcq | Why is the electricity in your home more dangerous than a torch battery? | It's much stronger* | It's a different colour | It's slower
+home: With a grown-up, check your home for damaged cords or too many plugs in one socket.
+skill: electrical-safety
+
+@lesson 5.1 | Inside the Earth | 🌍 | museum
+hook: If you could dig to the centre of the Earth, what would you find?
+learn: The Earth has layers. The crust is the thin, rocky outside that we live on.
+learn: Under it is the mantle: very hot rock that moves very slowly.
+learn: At the centre is the core, mostly metal and extremely hot.
+try: We live on the crust :: mcq | Which layer do we live on? | The crust* | The core | The mantle
+play: order | Put the layers in order from the outside in | Crust; Mantle; Outer core; Inner core
+check: tf | The core is the hottest part of the Earth. | true
+check: mcq | The mantle is made of… | very hot rock that moves slowly* | water | ice
+check: mcq | Compared with the other layers, the crust is… | very thin* | the thickest | made of metal
+home: Cut a peach in half and compare its skin, flesh and stone with the Earth's layers.
+skill: earth-layers
+
+@lesson 5.2 | Earthquakes | 🫨 | townhall
+hook: Why does the ground sometimes shake?
+learn: The Earth's crust is broken into huge pieces called plates, which move very slowly.
+learn: When plates push or slide past each other, rocks can suddenly break and shake the ground. That's an earthquake.
+learn: New Zealand sits where two plates meet, so it has lots of earthquakes.
+try: Moving plates cause earthquakes :: mcq | What causes most earthquakes? | Plates moving in the crust* | Thunder | Heavy rain
+play: order | In an earthquake, do this | Drop down onto your hands and knees; Cover your head and neck under a strong table; Hold on until the shaking stops
+check: tf | In an earthquake, you should drop, cover and hold. | true
+check: mcq | Where should you shelter indoors during the shaking? | Under a strong table* | Next to a window | On the stairs
+check: mcq | The Earth's crust is broken into pieces called… | plates* | slices | tiles
+home: Practise drop, cover and hold with your family, and plan where you'd meet afterwards.
+skill: earthquakes
+
+@lesson 5.3 | Volcanoes | 🌋 | island
+hook: Where does lava come from?
+learn: Deep underground, rock can get so hot that it melts into magma.
+learn: Magma can push up through cracks in the crust. When it comes out of a volcano, it's called lava.
+learn: When lava cools, it hardens into new rock. Many islands were made this way.
+try: Lava is melted rock :: mcq | What is magma called once it comes out of a volcano? | Lava* | Ash | Steam
+play: order | How a volcano erupts | Rock melts deep underground into magma; Magma rises through cracks; It erupts out of the volcano as lava; The lava cools into new rock
+check: tf | Cooled lava turns into rock. | true
+check: mcq | Where does magma come from? | Deep underground* | The clouds | The sea
+check: mcq | Many islands were made by… | volcanoes* | wind | rivers
+home: Find a volcano on a map with a grown-up. Is it near where you live?
+skill: volcanoes
+
+@lesson 5.4 | Rocks | 🪨 | museum
+hook: Is every rock the same?
+learn: Igneous rock forms when melted rock cools, like basalt and pumice.
+learn: Sedimentary rock forms from layers of sand, mud or shells pressed together over a very long time, like sandstone.
+learn: Metamorphic rock forms when rock is changed by heat and pressure, like marble.
+try: Pumice is igneous :: mcq | Which rock forms from layers of sand? | Sandstone* | Basalt | Marble
+play: match | Match each rock to how it formed | Basalt=Cooled lava; Sandstone=Layers of sand pressed together; Marble=Changed by heat and pressure
+check: tf | Some rocks are made of layers pressed together over a long time. | true
+check: mcq | Pumice can float because… | it's full of tiny air holes* | it's made of wood | it's hollow inside
+check: mcq | Which type of rock forms from cooled melted rock? | Igneous* | Sedimentary | Metamorphic
+home: Collect three different rocks and compare their colour, texture and weight.
+skill: rocks
+
+@lesson 6.1 | Reflection | 🪞 | home
+hook: How does a mirror show you yourself?
+learn: Light travels in straight lines until it hits something.
+learn: Smooth, shiny surfaces like mirrors reflect light neatly, so you see a clear image.
+learn: Rough surfaces scatter light in all directions, so there's no clear image.
+try: A still lake reflects the mountains :: mcq | Which reflects light best? | A mirror* | A towel | A brick
+play: sort | Clear reflection, No clear reflection | Mirror=Clear reflection; Still pond=Clear reflection; Wool jumper=No clear reflection; Shiny spoon=Clear reflection; Carpet=No clear reflection | Will you see a clear image?
+check: tf | Light travels in straight lines. | true
+check: mcq | Why don't rough surfaces show a clear reflection? | They scatter the light* | They make light disappear | They're too heavy
+check: mcq | A periscope uses mirrors to… | see over things* | heat things up | make sound
+home: Look at your face in the back and the front of a shiny spoon. What changes?
+skill: reflection
+
+@lesson 6.2 | Refraction | 🥤 | kitchen
+hook: Why does a straw look bent in a glass of water?
+learn: Light changes direction when it passes from one material into another, like from water into air. This is refraction.
+learn: It's why a straw looks bent, and why pools look shallower than they really are.
+learn: Glasses and magnifying glasses use refraction to bend light.
+try: A straw looks bent in water :: mcq | What is refraction? | Light bending as it passes into a new material* | Light bouncing off a mirror | Light switching off
+play: sort | Refraction, Reflection | A straw looking bent in water=Refraction; Seeing yourself in a mirror=Reflection; A magnifying glass=Refraction; A lake mirroring the hills=Reflection; Glasses helping you see=Refraction | Which is it?
+check: tf | Pools can look shallower than they really are. | true
+check: mcq | Which uses refraction? | A magnifying glass* | A brick wall | A wooden spoon
+check: mcq | Why be careful judging how deep clear water is? | Refraction makes it look shallower* | Water is always shallow | It doesn't matter
+home: Put a pencil in a glass of water and look from the side. Draw what you see.
+skill: refraction
+
+@lesson 6.3 | Colours of light | 🌈 | garden
+hook: Where do rainbows come from?
+learn: White light, like sunlight, is a mix of all the colours.
+learn: Raindrops can split sunlight into its colours, making a rainbow: red, orange, yellow, green, blue, indigo and violet.
+learn: A red apple looks red because it reflects red light and takes in the other colours.
+try: Sunlight has all the colours in it :: mcq | What splits sunlight into a rainbow? | Raindrops* | Wind | Smoke
+play: order | Put the rainbow's colours in order | Red; Orange; Yellow; Green; Blue; Indigo; Violet
+check: tf | White light is a mix of colours. | true
+check: mcq | Why does a leaf look green? | It reflects green light* | It makes green light | It takes in green light
+check: mcq | To see a rainbow, the sun should be… | behind you* | in front of you | underneath you
+home: On a sunny day, spray a fine mist from a hose with the sun behind you, and look for a rainbow.
+skill: colour-light
+
+@lesson 6.4 | Sound travels | 🐋 | island
+hook: Why can whales hear each other underwater from far away?
+learn: Sound travels as vibrations through solids, liquids and gases.
+learn: Sound travels faster through water and solids than through air. It can't travel through empty space.
+learn: An echo is a sound bouncing back off a hard surface, like a cliff.
+try: Shouting at a cliff can make an echo :: mcq | Can sound travel through space? | No, there's nothing there to vibrate* | Yes, very fast | Only near the Moon
+play: sort | Sound can travel through it, Sound can't travel through it | Air=Sound can travel through it; Water=Sound can travel through it; A wooden table=Sound can travel through it; Empty space=Sound can't travel through it | Can sound travel through it?
+check: tf | Sound travels faster through water than through air. | true
+check: mcq | What is an echo? | Sound bouncing back* | A very quiet sound | A kind of bird
+check: mcq | Where are you most likely to hear an echo? | In a big empty hall* | In a room full of pillows | Under a blanket
+home: Put your ear on a table while someone taps the other end gently. Then listen without your ear on the table. Which is louder?
+skill: sound-travel
+
+@band makers
+@unit 1 | Cells and body systems | From cells to organs
+@unit 2 | Energy | Forms, transfers, heat and sources
+@unit 3 | Chemistry basics | Particles, changes and mixtures
+
+@lesson 1.1 | Cells | 🔬 | museum
+hook: What do an elephant, an oak tree and you all have in common?
+learn: All living things are made of cells, the smallest units of life.
+learn: Animal and plant cells both have a cell membrane, cytoplasm and a nucleus, which controls the cell.
+learn: Plant cells also have a cell wall and chloroplasts, where photosynthesis happens.
+try: Chloroplasts are found in plant cells :: mcq | What controls the cell? | The nucleus* | The cell wall | The cytoplasm
+play: sort | Plant cells only, Both plant and animal cells | Cell wall=Plant cells only; Nucleus=Both plant and animal cells; Chloroplasts=Plant cells only; Cell membrane=Both plant and animal cells; Cytoplasm=Both plant and animal cells | Where do you find it?
+check: tf | All living things are made of cells. | true
+check: mcq | Where does photosynthesis happen? | In chloroplasts* | In the nucleus | In the cell wall
+check: mcq | What do we use to see most cells? | A microscope* | A telescope | A mirror
+home: Look at a thin piece of onion skin or a leaf under a microscope or strong magnifying glass, if you can.
+skill: cells
+
+@lesson 1.2 | Tissues, organs and systems | 🫀 | museum
+hook: How do trillions of cells work together to make you?
+learn: Similar cells group together into tissues, like muscle tissue.
+learn: Tissues form organs, like the heart, lungs and stomach.
+learn: Organs work together in organ systems, like the digestive system and the circulatory system.
+try: cells → tissues → organs → systems :: mcq | The heart is… | an organ* | a cell | an organ system
+play: order | Smallest to biggest | Cell; Tissue; Organ; Organ system; Organism
+check: mcq | Which is an organ system? | The digestive system* | A muscle cell | The stomach
+check: tf | Organs are made of tissues. | true
+check: mcq | Which organs are part of the breathing system? | Lungs* | Stomach | Skin
+home: Name one organ in each of three body systems.
+skill: body-organisation
+
+@lesson 1.3 | Digestion | 🍞 | kitchen
+hook: Where does your lunch go after you swallow it?
+learn: Digestion breaks food down into pieces small enough for the body to absorb.
+learn: It starts in the mouth with teeth and saliva. Food then travels down the oesophagus to the stomach, where acid and churning break it down further.
+learn: In the small intestine, nutrients pass into the blood. The large intestine takes in water, and what's left leaves the body.
+try: Chewing starts digestion :: mcq | Where do most nutrients pass into the blood? | The small intestine* | The stomach | The mouth
+play: order | Put food's journey in order | Mouth; Oesophagus; Stomach; Small intestine; Large intestine
+check: mcq | What does saliva do? | Starts breaking food down* | Pumps blood | Takes in oxygen
+check: tf | The large intestine takes in water. | true
+check: mcq | Which tube carries food from the mouth to the stomach? | The oesophagus* | The windpipe | A vein
+home: Chew a plain cracker slowly for a minute. Does it start to taste sweeter? Saliva is turning starch into sugar.
+skill: digestion
+
+@lesson 1.4 | Heart and lungs | ❤️ | garden
+hook: Why does your heart beat faster when you run?
+learn: The heart pumps blood around the body through blood vessels: arteries, veins and capillaries.
+learn: Blood carries oxygen from the lungs and nutrients from digestion to every cell, and carries waste away.
+learn: When you exercise, your muscles need more oxygen, so you breathe faster and your heart beats faster.
+try: Blood carries oxygen to your cells :: mcq | Which organ pumps blood? | The heart* | The lungs | The liver
+play: match | Match each part to its job | Heart=Pumps blood; Lungs=Take in oxygen; Arteries=Carry blood away from the heart; Veins=Carry blood back to the heart
+check: mcq | Why does your heart beat faster when you exercise? | Your muscles need more oxygen* | Your blood gets lazy | It doesn't
+check: tf | Veins carry blood back to the heart. | true
+check: mcq | Where does blood pick up oxygen? | In the lungs* | In the stomach | In the bones
+home: Count your pulse for 15 seconds at rest, then after 20 star jumps. Multiply each by 4.
+skill: circulation
+
+@lesson 2.1 | Forms of energy | ⚡ | workshop
+hook: A torch, a toaster and a kicked ball all use energy. Is it the same kind?
+learn: Energy is what makes things happen, and it comes in different forms.
+learn: Kinetic energy is movement. Thermal energy is heat. There's also light, sound, electrical and chemical energy (stored in food and batteries).
+learn: Stored energy, like in a stretched rubber band or a ball held up high, is called potential energy.
+try: A moving car has kinetic energy :: mcq | Food stores… | chemical energy* | sound energy | light energy
+play: match | Match each example to its energy | A rolling ball=Kinetic; A hot pan=Thermal; A battery=Chemical; A ringing bell=Sound
+check: mcq | A stretched rubber band stores… | potential energy* | sound energy | light energy
+check: tf | Light is a form of energy. | true
+check: mcq | Which has the most kinetic energy? | A fast car* | A parked car | A sleeping cat
+home: Find five forms of energy in your kitchen.
+skill: energy-forms
+
+@lesson 2.2 | Energy transfers | 🔦 | workshop
+hook: When you switch on a torch, where does the energy go?
+learn: Energy can't be made or destroyed. It changes from one form to another, which is called a transfer.
+learn: In a torch: chemical energy in the battery → electrical energy → light, plus some heat.
+learn: Some energy always ends up as heat or sound we didn't want. We call it wasted energy.
+try: A toaster turns electrical energy into heat :: mcq | A solar panel turns light into… | electrical energy* | sound | chemical energy in food
+play: order | Follow the energy in a torch | Chemical energy in the battery; Electrical energy in the wires; Light from the bulb
+check: tf | Energy can be destroyed. | false | Energy only changes form. It's never destroyed.
+check: mcq | What's the usual wasted energy from a light bulb? | Heat* | Chemical energy | Kinetic energy of the glass
+check: mcq | You eat breakfast, then run. The chemical energy in food becomes… | kinetic energy* | light energy | magnetic energy
+home: With a grown-up, trace the energy transfers when a kettle boils. Stay clear of the steam.
+skill: energy-transfer
+
+@lesson 2.3 | Heat on the move | 🍲 | kitchen
+hook: Why does a metal spoon in hot soup get hot, but a wooden one doesn't?
+learn: Heat moves from hotter things to colder things.
+learn: Conduction is heat moving through solids by touch. Metals are good conductors. Wood and plastic are insulators.
+learn: In convection, warmer liquids and gases rise and cooler ones sink. In radiation, heat travels as rays, like warmth from the sun.
+try: A metal spoon conducts heat :: mcq | Which is a good insulator? | Wool* | Copper | Aluminium
+play: match | Match each example to how heat moves | A hot pan handle=Conduction; Warm air rising from a heater=Convection; The sun warming your face=Radiation
+check: mcq | Why are pot handles often plastic? | Plastic is an insulator* | Plastic is a conductor | Plastic is magnetic
+check: tf | Heat moves from colder things to hotter things. | false | Heat always moves from hotter to colder.
+check: mcq | How does the sun's heat reach the Earth? | Radiation* | Conduction | Convection
+home: Wrap one cup of warm tap water in a towel and leave another bare. Which stays warm longer?
+skill: heat-transfer
+
+@lesson 2.4 | Energy sources | 🌬️ | townhall
+hook: Where does the electricity in your home come from?
+learn: Electricity can be made from many sources: flowing water (hydro), wind, the sun (solar), heat from under the ground (geothermal), and burning fuels like coal and gas.
+learn: Renewable sources don't run out: water, wind, sun and geothermal heat.
+learn: Non-renewable sources, like coal, oil and natural gas, took millions of years to form and will run out.
+try: Wind is renewable :: mcq | Which source is renewable? | Wind* | Coal | Oil
+play: sort | Renewable, Non-renewable | Solar=Renewable; Coal=Non-renewable; Hydro=Renewable; Natural gas=Non-renewable; Geothermal=Renewable; Oil=Non-renewable | Renewable or not?
+check: tf | Non-renewable sources took millions of years to form. | true
+check: mcq | Hydro power uses… | flowing water* | burning coal | moonlight
+check: mcq | Which is a way to use less energy at home? | Turn off lights in empty rooms* | Run the heater with a window open | Leave chargers on all day for no reason
+home: With a grown-up, find three ways your home could use less electricity.
+skill: energy-sources
+
+@lesson 3.1 | Particles | 🫧 | kitchen
+hook: Why can you smell biscuits baking from another room?
+learn: All matter is made of particles far too small to see.
+learn: In a solid, particles are packed tightly and vibrate in place. In a liquid, they're close but slide past each other. In a gas, they're far apart and move fast in every direction.
+learn: Gas particles spread out, which is why smells travel through a room. This spreading is called diffusion.
+try: Smells spread by diffusion :: mcq | In which state are the particles furthest apart? | Gas* | Liquid | Solid
+play: match | Match each state to its particles | Solid=Packed tight and vibrating in place; Liquid=Close together, sliding past each other; Gas=Far apart and moving fast
+check: tf | Particles in a solid don't move at all. | false | They vibrate in place.
+check: mcq | Why does a drop of food colouring spread through water? | The particles move and mix* | Water is magic | The colour sinks
+check: mcq | Heating particles usually makes them… | move faster* | stop | shrink to nothing
+home: Drop food colouring into a glass of cold water and a glass of warm tap water. Which spreads faster?
+skill: particles
+
+@lesson 3.2 | Changing state | 💨 | kitchen
+hook: Where does the water go when a puddle dries up?
+learn: Melting is solid to liquid. Freezing is liquid to solid.
+learn: Evaporation (and boiling) is liquid to gas. Condensation is gas to liquid.
+learn: At sea level, pure water boils at 100 °C and freezes at 0 °C.
+try: Water vapour condenses into droplets on a cold window :: mcq | Liquid to gas is called… | evaporation* | condensation | freezing
+play: match | Match each change to its name | Ice to water=Melting; Water to ice=Freezing; Water to vapour=Evaporation; Vapour to water=Condensation
+check: mcq | At sea level, pure water boils at… | 100 °C* | 50 °C | 0 °C
+check: tf | Droplets on the outside of a cold drink can come from water vapour in the air. | true
+check: mcq | Mist on a bathroom mirror after a shower is… | condensation* | melting | freezing
+home: Breathe on a cold mirror, then explain what happened to a grown-up using the word condensation.
+skill: changes-of-state
+
+@lesson 3.3 | Physical and chemical changes | 🍳 | kitchen
+hook: You can refreeze melted ice, but can you unbake a cake?
+learn: A physical change changes shape or state but not what a substance is. Melting, cutting and dissolving are physical changes.
+learn: A chemical change makes a new substance. Burning, cooking, rusting and baking are chemical changes.
+learn: Signs of a chemical change include gas bubbles, a colour change, light or heat, or a new smell.
+try: Rusting is a chemical change :: mcq | Which is a physical change? | Ice melting* | Toast burning | A nail rusting
+play: sort | Physical, Chemical | Cutting paper=Physical; Baking a cake=Chemical; Melting chocolate=Physical; Cooking an egg=Chemical; Dissolving sugar=Physical; Iron rusting=Chemical | Physical or chemical change?
+check: mcq | Which is a sign of a chemical change? | Gas bubbles and a new smell* | Being cut in half | Being poured into a cup
+check: tf | Cooking an egg can be undone. | false | Cooking makes new substances, so it's a chemical change.
+check: mcq | Dissolving salt in water is… | a physical change* | a chemical change | not a change at all
+home: While helping with dinner, list the changes you see. Is each one physical or chemical?
+skill: chemical-physical
+
+@lesson 3.4 | Mixtures and separating | 🧂 | kitchen
+hook: Salt and sand got mixed together. How could you separate them?
+learn: A mixture is two or more substances mixed but not chemically joined, like sand and water, or salt water.
+learn: Mixtures can be separated by sieving (big bits from small), filtering (solids from liquids), evaporation (a dissolved solid from a liquid) and magnets (iron from other things).
+learn: For salt and sand: add water to dissolve the salt, filter out the sand, then let the water evaporate to leave the salt.
+try: A sieve separates peas from flour :: mcq | How can you get salt back from salt water? | Let the water evaporate* | Use a magnet | Use a sieve
+play: order | Separate salt from sand | Add water and stir to dissolve the salt; Filter it to catch the sand; Leave the salty water in the sun to evaporate; Collect the salt
+check: mcq | What separates iron filings from sand? | A magnet* | A sieve | Evaporation
+check: tf | Filtering separates a solid from a liquid. | true
+check: mcq | Pouring muddy water through a coffee filter is… | filtering* | evaporation | magnetism
+home: With a grown-up, mix sand and salt, then separate them. Leave the salty water to dry in the sun.
+skill: separating
+
+@unit 4 | Ecology | Ecosystems, energy flow and protecting native species
+@unit 5 | Forces and motion | Speed, balanced forces, action and reaction, pressure
+@unit 6 | Space | Gravity, stars, distances and seasons
+
+@lesson 4.1 | Ecosystems | 🌿 | garden
+hook: A forest is more than trees. What else makes it work?
+learn: An ecosystem is all the living things in an area plus the non-living things they depend on.
+learn: Biotic factors are living: plants, animals, fungi, bacteria. Abiotic factors are non-living: sunlight, water, temperature, soil.
+learn: A change in one part, like less rain, can affect everything else.
+try: Sunlight is an abiotic factor :: mcq | Which is a biotic factor? | Fungi* | Rainfall | Temperature
+play: sort | Biotic, Abiotic | Ferns=Biotic; Sunlight=Abiotic; Earthworms=Biotic; Soil temperature=Abiotic; Bacteria=Biotic; Water=Abiotic | Living or non-living?
+check: tf | A drought can affect every living thing in an ecosystem. | true
+check: mcq | An ecosystem includes… | living things and their surroundings* | only animals | only plants
+check: mcq | Which is an abiotic factor? | Wind* | Moss | Insects
+home: Walk through a park or garden and list three biotic and three abiotic factors.
+skill: ecosystems
+
+@lesson 4.2 | Energy flow | 🦅 | garden
+hook: Why are there far fewer hawks than mice?
+learn: Energy enters most ecosystems through plants, which capture sunlight.
+learn: At each step up a food chain, most of the energy is used for living (moving, keeping warm) or lost as heat. Only a small part passes on.
+learn: So there's less energy at each level, which is why top predators are fewer.
+try: grass → mouse → hawk :: mcq | Why are top predators fewer in number? | There's less energy available at the top* | They don't like company | They're lazy
+play: order | Follow the energy | Sunlight; Plants (producers); Herbivores; Carnivores
+check: tf | Most of the energy at one level of a food chain passes on to the next. | false | Most is used up or lost as heat. Only a small part passes on.
+check: mcq | What captures the energy that enters most ecosystems? | Plants* | Rocks | Predators
+check: mcq | Decomposers like fungi break down… | dead plants and animals* | sunlight | only rocks
+home: Draw an energy pyramid for a food chain you know.
+skill: energy-flow
+
+@lesson 4.3 | Decomposers and cycles | ♻️ | garden
+hook: Where do fallen leaves go?
+learn: Decomposers, like fungi, bacteria and worms, break down dead plants and animals.
+learn: This returns nutrients to the soil, so new plants can use them.
+learn: Without decomposers, dead material would pile up and nutrients would run out.
+try: Worms help compost break down :: mcq | What do decomposers return to the soil? | Nutrients* | Plastic | Sunlight
+play: order | Follow the nutrients | A leaf falls; Decomposers break it down; Nutrients go into the soil; A new plant takes them up
+check: tf | Fungi are decomposers. | true
+check: mcq | What would happen without decomposers? | Dead material would pile up* | Plants would grow faster | Nothing
+check: mcq | What helps decomposers in a compost bin? | Moisture and air* | Plastic bags | Salt
+home: Start or check a compost bin with a grown-up. Which decomposers can you find?
+skill: decomposers
+
+@lesson 4.4 | Protecting native species | 🐦 | garden
+hook: Why do people set predator traps in the bush?
+learn: {nz:Many of New Zealand's native birds evolved with no land mammals hunting them~au:Many of Australia's small native animals evolved without foxes or cats hunting them}, so they have few defences against introduced predators.
+learn: {nz:Introduced rats, stoats and possums~au:Introduced foxes and feral cats} hunt native animals and eat their eggs and young.
+learn: Trapping predators and protecting habitat helps native species recover.
+try: Traps help protect native animals :: mcq | What is an introduced predator? | An animal brought in by people that hunts native species* | A native bird | A kind of plant
+play: sort | Helps native species, Harms native species | Setting predator traps=Helps native species; Letting pet cats roam at night=Harms native species; Planting native trees=Helps native species; Dropping litter in the bush=Harms native species; Keeping dogs on leads near nesting birds=Helps native species | Which is it?
+check: tf | Planting native plants can help native animals. | true
+check: mcq | Why are some native animals easy prey for introduced predators? | They evolved without those hunters* | They're too big | They live in cities
+check: mcq | Which helps native animals most? | Controlling predators and protecting their habitat* | Feeding them bread | Cutting down forests
+home: Find out with a grown-up about a native animal near you and what's being done to protect it.
+skill: native-species
+
+@lesson 5.1 | Speed | 🚴 | island
+hook: You cycle 12 km in 1 hour. How fast is that?
+learn: Speed is how far something travels in a certain time.
+learn: Speed = distance ÷ time. 12 km in 1 hour is 12 km/h.
+learn: Rearranged: distance = speed × time, and time = distance ÷ speed.
+try: 100 m in 20 s is 5 m/s :: gap | 60 km in 2 hours is _ km/h | 30
+play: match | Match each trip to its speed | 30 m in 10 s=3 m/s; 100 km in 2 h=50 km/h; 400 m in 80 s=5 m/s; 90 km in 3 h=30 km/h
+check: gap | 200 ÷ 25 = _ | 8
+check: mcq | A car travels at 50 km/h for 3 hours. How far does it go? | 150 km* | 53 km | 17 km
+check: tf | Speed is distance divided by time. | true
+home: Time yourself walking 100 m and work out your speed in metres per second.
+skill: speed
+
+@lesson 5.2 | Balanced and unbalanced forces | ⚖️ | island
+hook: In a tug of war, why does the rope sometimes not move at all?
+learn: When the forces on an object are balanced, they cancel out. It stays still, or keeps moving at the same speed.
+learn: When forces are unbalanced, the object speeds up, slows down or changes direction.
+learn: A parked car has balanced forces: gravity pulls it down and the ground pushes up.
+try: Equal teams in a tug of war: balanced forces :: mcq | A ball speeds up as it rolls downhill. The forces are… | unbalanced* | balanced | zero
+play: sort | Balanced, Unbalanced | A book resting on a table=Balanced; A car speeding up=Unbalanced; A plane cruising at a steady speed=Balanced; A ball slowing down on grass=Unbalanced; A rocket lifting off=Unbalanced | Balanced or unbalanced?
+check: tf | Balanced forces can keep an object moving at a steady speed. | true
+check: mcq | What happens when forces are unbalanced? | The motion changes* | Nothing ever changes | The object disappears
+check: mcq | A skydiver falling at a steady speed has… | balanced forces* | no forces | only gravity
+home: Push a toy car gently along carpet, then along a smooth floor. Which slows down faster, and why?
+skill: balanced-forces
+
+@lesson 5.3 | Action and reaction | 🚀 | museum
+hook: How does a rocket push itself into space with nothing to push against?
+learn: When one object pushes on another, the second pushes back just as hard in the opposite direction.
+learn: A rocket pushes gas down, and the gas pushes the rocket up.
+learn: When you swim, you push water back, and the water pushes you forward.
+try: A balloon flies as the air rushes out :: mcq | When you jump forward off a skateboard, the skateboard… | rolls backwards* | stays still | follows you
+play: match | Match each action to its reaction | A rocket pushes gas down=The gas pushes the rocket up; A swimmer pushes water back=The water pushes the swimmer forward; Your foot pushes the ground back=The ground pushes you forward
+check: tf | Forces always come in pairs. | true
+check: mcq | Why does a balloon zoom around when you let it go? | The air pushed out pushes the balloon the other way* | Balloons like to fly | The wind
+check: mcq | When you walk, you push the ground… | backwards* | forwards | up
+home: Tape a straw to a balloon, thread the straw on a string, blow up the balloon and let it go.
+skill: action-reaction
+
+@lesson 5.4 | Pressure | 🥾 | workshop
+hook: Why does a sharp knife cut better than a blunt one?
+learn: Pressure is how much force presses on a certain area. Pressure = force ÷ area.
+learn: The same force on a small area makes high pressure: a sharp knife edge, a drawing pin.
+learn: The same force on a big area makes low pressure: snowshoes, wide tractor tyres.
+try: Snowshoes spread out your weight :: mcq | Why do snowshoes stop you sinking? | They spread the force over a bigger area* | They're lighter | They're warm
+play: sort | High pressure, Low pressure | A drawing pin's point=High pressure; Snowshoes=Low pressure; A sharp knife=High pressure; Wide tractor tyres=Low pressure; A stiletto heel on soft grass=High pressure | High or low pressure?
+check: gap | 100 ÷ 4 = _ | 25
+check: tf | The same force on a smaller area makes a higher pressure. | true
+check: mcq | Why is a blunt knife harder to cut with? | Its edge has a bigger area, so less pressure* | It's heavier | It's dirty
+home: Press the flat end of a pencil, then its point, gently into playdough. What's different?
+skill: pressure
+
+@lesson 6.1 | Gravity and orbits | 🛰️ | museum
+hook: Why doesn't the Moon fall down onto the Earth?
+learn: Gravity pulls all objects with mass towards each other. Bigger masses pull harder.
+learn: The Moon is moving sideways very fast. Gravity keeps bending its path into a curve around the Earth: an orbit.
+learn: Satellites orbit the Earth the same way.
+try: Gravity keeps the Moon in orbit :: mcq | What keeps the planets in orbit around the sun? | Gravity* | Magnetism | Wind
+play: order | Why the Moon orbits | The Moon moves sideways very fast; Earth's gravity pulls it inwards; Its path bends into a curve; It keeps circling the Earth
+check: tf | Bigger masses pull with more gravity. | true
+check: mcq | Without gravity, the Moon would… | fly off in a straight line* | fall onto the Earth | stop
+check: mcq | Gravity is a force between… | any objects with mass* | only magnets | only planets
+home: In a safe open space, swing a soft ball on a string. Feel the string pull inwards, like gravity.
+skill: orbits-gravity
+
+@lesson 6.2 | Stars | 🌟 | museum
+hook: Is the sun special, or just one star of many?
+learn: Stars are huge balls of hot gas, mostly hydrogen, that shine because of nuclear fusion in their cores.
+learn: Stars form inside giant clouds of gas and dust called nebulae.
+learn: The sun is a medium-sized star, about halfway through its life.
+try: The sun is a star :: mcq | What makes stars shine? | Nuclear fusion in their cores* | Burning wood | Reflected light
+play: match | Match each word to its meaning | Nebula=A cloud of gas and dust where stars form; Fusion=Small atoms joining and releasing energy; Galaxy=A huge group of stars
+check: tf | The sun is a star. | true
+check: mcq | Compared with other stars, the sun is… | medium-sized* | the biggest star there is | the smallest star
+check: mcq | Stars are mostly made of… | hydrogen* | rock | water
+home: On a clear night, look for stars of different colours. Hotter stars look bluer.
+skill: stars
+
+@lesson 6.3 | Light-years and the size of space | 🔭 | museum
+hook: When you look at a star, are you seeing it as it is now?
+learn: Space is so big that we measure it in light-years: the distance light travels in one year.
+learn: Light from the sun takes about 8 minutes to reach the Earth.
+learn: Light from other stars takes years to reach us, so we see them as they were when that light left.
+try: A star 10 light-years away is seen as it was 10 years ago :: mcq | A light-year measures… | distance* | time | brightness
+play: order | Smallest to largest | Earth; The solar system; Our galaxy; The universe
+check: mcq | About how long does sunlight take to reach the Earth? | 8 minutes* | 8 seconds | 8 days
+check: tf | When we look at distant stars, we see them as they were in the past. | true
+check: mcq | Our galaxy is called… | the Milky Way* | the Big Dipper | the Southern Cross
+home: On a dark, clear night, look for the Milky Way with a grown-up.
+skill: light-years
+
+@lesson 6.4 | Why we have seasons | 🌏 | museum
+hook: Is it summer because we're closer to the sun?
+learn: Seasons are caused by the Earth's tilt, not by its distance from the sun.
+learn: When our half of the Earth tilts towards the sun, the sun is higher in the sky, days are longer and sunlight is more concentrated. That's summer.
+learn: When it tilts away, the sun is lower, days are shorter and sunlight is more spread out. That's winter.
+try: The tilt causes the seasons :: mcq | What causes the seasons? | The Earth's tilt* | Our distance from the sun | The Moon
+play: sort | Summer, Winter | Long days=Summer; Sun low in the sky=Winter; Our half tilted towards the sun=Summer; Sunlight spread out=Winter; Sun high at midday=Summer | Summer or winter?
+check: tf | It's summer here when our half of the Earth tilts towards the sun. | true
+check: mcq | When it's summer in {nz:New Zealand~au:Australia}, it's winter in… | the northern half of the world* | the whole world | nowhere
+check: mcq | In winter, the days are… | shorter* | longer | the same
+home: Write down today's sunrise and sunset times, and check them again in a month. How has the day length changed?
+skill: seasons-tilt

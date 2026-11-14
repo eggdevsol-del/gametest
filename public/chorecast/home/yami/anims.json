@@ -1,0 +1,132 @@
+{
+ "sit": 360,
+ "fps": 12,
+ "anims": {
+  "walk_side": {
+   "file": "walk_side.webp",
+   "n": 12,
+   "fw": 374,
+   "fh": 296,
+   "ax": 187.5,
+   "face": "L",
+   "loop": true
+  },
+  "walk_front": {
+   "file": "walk_front.webp",
+   "n": 12,
+   "fw": 252,
+   "fh": 347,
+   "ax": 127.7,
+   "face": "C",
+   "loop": true
+  },
+  "walk_back": {
+   "file": "walk_back.webp",
+   "n": 12,
+   "fw": 199,
+   "fh": 333,
+   "ax": 99.5,
+   "face": "C",
+   "loop": true
+  },
+  "walk_tq": {
+   "file": "walk_tq.webp",
+   "n": 12,
+   "fw": 345,
+   "fh": 324,
+   "ax": 201,
+   "face": "R",
+   "loop": true
+  },
+  "idle_front": {
+   "file": "idle_front.webp",
+   "n": 12,
+   "fw": 293,
+   "fh": 369,
+   "ax": 136.7,
+   "face": "C",
+   "loop": true
+  },
+  "idle_side": {
+   "file": "idle_side.webp",
+   "n": 12,
+   "fw": 314,
+   "fh": 369,
+   "ax": 161.3,
+   "face": "L",
+   "loop": true
+  },
+  "idle_back": {
+   "file": "idle_back.webp",
+   "n": 12,
+   "fw": 293,
+   "fh": 364,
+   "ax": 187.5,
+   "face": "C",
+   "loop": true
+  },
+  "idle_tq": {
+   "file": "idle_tq.webp",
+   "n": 12,
+   "fw": 302,
+   "fh": 387,
+   "ax": 128.7,
+   "face": "L",
+   "loop": true
+  },
+  "happy_front": {
+   "file": "happy_front.webp",
+   "n": 12,
+   "fw": 240,
+   "fh": 365,
+   "ax": 140,
+   "face": "C",
+   "loop": false
+  },
+  "happy_side": {
+   "file": "happy_side.webp",
+   "n": 12,
+   "fw": 359,
+   "fh": 362,
+   "ax": 193.2,
+   "face": "L",
+   "loop": false
+  },
+  "groom": {
+   "file": "groom.webp",
+   "n": 12,
+   "fw": 304,
+   "fh": 346,
+   "ax": 217.2,
+   "face": "L",
+   "loop": true
+  },
+  "stretch": {
+   "file": "stretch.webp",
+   "n": 12,
+   "fw": 323,
+   "fh": 338,
+   "ax": 133.5,
+   "face": "L",
+   "loop": false
+  },
+  "liedown": {
+   "file": "liedown.webp",
+   "n": 12,
+   "fw": 354,
+   "fh": 363,
+   "ax": 192.5,
+   "face": "R",
+   "loop": false
+  },
+  "sleep": {
+   "file": "sleep.webp",
+   "n": 16,
+   "fw": 228,
+   "fh": 156,
+   "ax": 127,
+   "face": "L",
+   "loop": true
+  }
+ }
+}

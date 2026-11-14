@@ -1,0 +1,25 @@
+/* The Japanese sky: the app's sky on every device that can draw WebGL 2 (proto.js), unless ?sky=classic turned it off
+   there. Only the background changes. The scene itself is drawn by sky-japan.js: a painted 3D lake scene with Mount Fuji,
+   towering clouds, a vermilion bridge and cherry trees in the wind. This sheet hides the classic sky's own pieces,
+   gives a matching gradient for each time of day while the scene loads (or if a device can't draw it), and fades the
+   scene in. */
+:root[data-sky=japan] #sky{background:linear-gradient(180deg,#0e3890 0%,#2b70c9 40%,#cbe6f6 62%,#23609c 63%,#2b5a45 100%)}
+:root[data-sky=japan][data-phase=dawn] #sky{background:linear-gradient(180deg,#252b69 0%,#78599b 40%,#ffc6a6 62%,#3d3e77 63%,#2f3f48 100%)}
+:root[data-sky=japan][data-phase=dusk] #sky{background:linear-gradient(180deg,#231e5b 0%,#853975 40%,#ff9050 62%,#322859 63%,#2a2238 100%)}
+:root[data-sky=japan][data-phase=night] #sky{background:linear-gradient(180deg,#040a20 0%,#0c1b45 40%,#263f79 62%,#08132f 63%,#0b1525 100%)}
+:root[data-sky=japan] #sky>:not(.jp-cv){display:none!important}
+.jp-cv{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.2s ease}
+.jp-cv.on{opacity:1}
+@media (prefers-reduced-motion: reduce){ .jp-cv{transition:none} }
+
+/* The scene shows behind every screen, not only the kids' ones, and keeps its parallax everywhere.
+   - The grown-ups' screens show it too, under the same soft veil and glass as the rest of the app (index.html).
+   - Character Growth lets it through its own colour, darker low down where the lessons are.
+   - The island studio has no sky of its own: the kid's island floats over this one, and the view glides in
+     towards it as it opens (sky-japan.js). */
+:root[data-sky=japan] .gw:not(.sky){background:linear-gradient(180deg,color-mix(in srgb,var(--gh) 12%,transparent) 0%,color-mix(in srgb,var(--gh) 34%,rgba(6,14,40,.5)) 34%,color-mix(in srgb,var(--gh) 42%,rgba(6,14,40,.8)) 70%)}
+@media (min-width:900px) and (min-aspect-ratio:5/4){ :root[data-sky=japan] .gw:not(.sky){background:linear-gradient(90deg,color-mix(in srgb,var(--gh) 10%,transparent) 0%,color-mix(in srgb,var(--gh) 18%,rgba(6,14,40,.2)) 36%,color-mix(in srgb,var(--gh) 40%,rgba(6,14,40,.78)) 46%)} }
+:root[data-sky=japan] body.gw-open #app,:root[data-sky=japan] body.gw-open #g3{visibility:hidden}
+:root[data-sky=japan] #studio::before{display:none}
+/* Words written straight on the scene get a soft dark shadow, so they still read over blossoms, clouds and the moon. */
+:root[data-sky=japan] :is(.hero-loc,.hero-num,.hero-cond,.hero-sub,.isle-cap,.isle-hint,.island-key,.gate-t,.gate-s,.gate-err){text-shadow:0 1px 2px rgba(6,14,40,.7),0 0 12px rgba(6,14,40,.5)}

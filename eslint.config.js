@@ -1,23 +1,22 @@
 import js from '@eslint/js'
 import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
+// The server, scripts and tests run on Node; the app's separate script files run in the browser. index.html's
+// inline script and the built growth.js aren't linted here (the tests parse and run them instead).
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['node_modules', 'public/chorecast/growth.js', 'public/chorecast/vendor', 'chorecast-growth']),
   {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
+    files: ['server/**/*.js', 'scripts/**/*.mjs', 'tests/**/*.mjs', 'eslint.config.js'],
+    extends: [js.configs.recommended],
+    languageOptions: { ecmaVersion: 2024, sourceType: 'module', globals: globals.node },
+    rules: { 'no-unused-vars': ['error', { args: 'none', caughtErrors: 'none' }], 'no-empty': ['error', { allowEmptyCatch: true }] },
   },
+  {
+    files: ['public/**/*.js'],
+    extends: [js.configs.recommended],
+    languageOptions: { ecmaVersion: 2024, sourceType: 'script', globals: { ...globals.browser, THREE: 'readonly' } },
+    rules: { 'no-unused-vars': ['error', { args: 'none', caughtErrors: 'none' }], 'no-empty': ['error', { allowEmptyCatch: true }] },
+  },
+  { files: ['public/sw.js'], languageOptions: { globals: { ...globals.browser, ...globals.serviceworker } } },
 ])

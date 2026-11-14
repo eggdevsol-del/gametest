@@ -1,0 +1,217 @@
+# Maths fact banks, for the topics that have no question maker in 14-drill.js (shapes, position, data and chance, and
+# a few others). Number topics are built from MSKILL instead. Each lesson's facts stay inside what the lesson teaches,
+# and every number in a fact was worked out again. Format: the right answer in [square brackets], then | and 2 or 3
+# wrong answers that make the sentence clearly false. Month 2, written and checked 2026-11-07.
+
+@band sprouts
+@facts 7.1
+fact: Flat shapes have sides and [corners]. | faces; handles
+fact: A triangle has [3] sides. | 4; 5
+fact: A square has [4] sides. | 3; 5
+fact: A rectangle has [4] sides. | 3; 6
+fact: A pentagon has [5] sides. | 4; 6
+fact: A hexagon has [6] sides. | 5; 8
+fact: A square's sides are all the [same] length. | different; curly
+fact: A rectangle's [opposite] sides match. | neighbouring; curved
+
+@facts 7.2
+fact: Solid shapes have faces, edges and [corners]. | handles; pages
+fact: A cube has [6] square faces. | 4; 8
+fact: A [sphere] is round like a ball. | cube; cone
+fact: A [cylinder] is like a can. | sphere; cube
+fact: A [cone] is shaped like an ice-cream cone. | cube; cylinder
+fact: Curved shapes can [roll]. | stack neatly; fold
+fact: Shapes with flat faces can [stack]. | roll away; bounce
+fact: A dice is shaped like a [cube]. | sphere; cone
+
+@facts 7.3
+fact: A shape has symmetry if one half is a [mirror image] of the other. | different shape; bigger copy
+fact: The fold line is called a line of [symmetry]. | sight; best fit
+fact: A square has [4] lines of symmetry. | 1; 2
+fact: A rectangle has [2] lines of symmetry. | 4; 0
+fact: Some shapes have [no] lines of symmetry. | always 10; always 4
+fact: If you fold a symmetrical shape on its line, the halves [match]. | clash; vanish
+fact: A butterfly's wings show [symmetry]. | subtraction; division
+fact: A line of symmetry splits a shape into two [matching] halves. | different; uneven
+
+@facts 7.4
+fact: A [full] turn brings you back to where you started. | half; quarter
+fact: A [half] turn makes you face the opposite way. | full; quarter
+fact: A [quarter] turn makes a right angle. | full; half
+fact: The corner of a book is a [right angle]. | full turn; circle
+fact: Clockwise means turning the same way as a clock's [hands]. | numbers only; face
+fact: [Anticlockwise] is the opposite way to clockwise. | Upside down; Sideways
+fact: Two quarter turns make a [half] turn. | full; three-quarter
+fact: Four quarter turns make a [full] turn. | half; quarter
+
+@facts 8.1
+fact: A tally mark is one [line] for each thing you count. | circle; picture
+fact: Every [fifth] mark goes across the other four. | second; tenth
+fact: Each tally gate stands for [5]. | 4; 10
+fact: Count the gates in [5s]. | 2s; 10s
+fact: Two gates and 3 lines is [13]. | 5; 23
+fact: One gate and 2 lines is [7]. | 3; 12
+fact: Three gates is [15]. | 3; 8
+fact: Tally marks help you [count] things quickly. | hide; spell
+
+@facts 8.2
+fact: A pictograph uses [pictures] to show how many. | sounds; smells
+fact: A [key] tells you what each picture is worth. | lock; door
+fact: If one 🍎 means 2 apples, each picture stands for [2]. | 1; 10
+fact: 3 🍎 worth 2 each is [6] apples. | 3; 5
+fact: 4 🍎 worth 2 each is [8] apples. | 4; 6
+fact: 5 ⭐ worth 10 each is [50]. | 5; 15
+fact: Always read the [key] first. | last row; title only
+fact: More pictures in a row means [more] things. | fewer; the same
+
+@facts 8.3
+fact: A bar graph uses [bars] to show amounts. | pictures only; sounds
+fact: The [taller] the bar, the more there are. | shorter; thinner
+fact: Read each bar's number from the [scale] on the side. | title; colour
+fact: The tallest bar shows the [most]. | least; fewest
+fact: The shortest bar shows the [least]. | most; biggest number
+fact: Bars that are the same height show [the same amount]. | different amounts; double amounts
+fact: Bar graphs help us [compare] amounts. | hide; spell
+fact: A bar reaching 7 on the scale stands for [7]. | 1; 70
+
+@facts 8.4
+fact: Data helps answer [questions]. | jokes; riddles only
+fact: First, choose a [question]. | graph; answer
+fact: Then [collect] the data. | guess; hide
+fact: You can collect data by [asking people]. | guessing; dreaming
+fact: You can collect data by counting or [measuring]. | wishing; guessing
+fact: Show your data in a tally, a pictograph or a [bar graph]. | song; poem
+fact: Last, look at your graph and [answer] your question. | delete; ignore
+fact: "What's our class's favourite fruit?" is a [question] data can answer. | rule; story
+
+@band builders
+@facts 5.4
+fact: A number divides by 2 if its last digit is [even]. | odd; 7
+fact: A number divides by 5 if its last digit is 0 or [5]. | 3; 7
+fact: A number divides by 10 if its last digit is [0]. | 5; 1
+fact: To test for 3, add up the [digits]. | zeros; tens only
+fact: The digits of 3,162 add up to [12]. | 11; 16
+fact: The digits of 471 add up to [12], so 471 divides by 3. | 13; 10
+fact: 135 divides by 5 because it ends in [5]. | 3; 1
+fact: 740 divides by [10] because it ends in 0. | 3; 7
+
+@facts 7.4
+fact: 24-hour time runs from 00:00 to [23:59]. | 12:00; 24:59
+fact: Midnight is [00:00] in 24-hour time. | 12:00; 06:00
+fact: 9:00 am is [09:00]. | 21:00; 19:00
+fact: 3:30 pm is [15:30]. | 03:30; 13:30
+fact: 8 pm is [20:00]. | 08:00; 18:00
+fact: For afternoon times, add [12] to the hour. | 10; 24
+fact: 17:00 is [5 pm]. | 7 pm; 5 am
+fact: Midday is [12:00] in 24-hour time. | 00:00; 24:00
+
+@facts 8.2
+fact: The median is the [middle] number once the numbers are in order. | biggest; first
+fact: The median of 3, 5 and 9 is [5]. | 3; 9
+fact: The median of 8, 2 and 6 is [6]. | 2; 8
+fact: The mode is the number that comes up most [often]. | rarely; last
+fact: The mode of 2, 4, 4 and 7 is [4]. | 2; 7
+fact: The mode of 1, 3, 3, 3 and 5 is [3]. | 1; 5
+fact: Mean, median and mode are all [averages]. | totals; ranges
+fact: Put the numbers in [order] before finding the median. | a hat; colour groups
+
+@facts 8.3
+fact: A line graph shows how something changes over [time]. | colour; space
+fact: Time usually goes along the [bottom]. | side; top
+fact: On a line graph, the amount usually goes [up the side]. | along the bottom; in the title
+fact: A line going up means [increasing]. | decreasing; no change
+fact: A line going down means [decreasing]. | increasing; no change
+fact: A flat line means [no change]. | increasing; decreasing
+fact: A line graph suits temperature over a [day]. | colour; smell
+fact: A steep line shows a [fast] change. | slow; tiny
+
+@facts 8.4
+fact: Something that can never happen is [impossible]. | certain; likely
+fact: Something that will definitely happen is [certain]. | impossible; unlikely
+fact: Tossing a coin gives an [even] chance of heads. | impossible; certain
+fact: The chance of a coin landing heads is [1/2]. | 1/6; 1/10
+fact: Rolling a 6 on a dice is [unlikely]. | certain; impossible
+fact: The chance of rolling a 6 is [1/6]. | 1/2; 6/6
+fact: Rolling a number from 1 to 6 on a dice is [certain]. | impossible; unlikely
+fact: Rolling a 7 on a normal dice is [impossible]. | likely; certain
+
+@band makers
+@facts 5.4
+fact: Standard form is a number from 1 to 10 times a power of [10]. | 2; 5
+fact: 150,000,000 = 1.5 × 10 to the power [8]. | 6; 15
+fact: 3,000 = 3 × 10 to the power [3]. | 2; 4
+fact: 45,000 = [4.5] × 10⁴. | 45; 0.45
+fact: Scientists use standard form for very [big] and very small numbers. | medium; round
+fact: In standard form, the first number is at least 1 and less than [10]. | 100; 1,000
+fact: 7 × 10² = [700]. | 70; 7,000
+fact: 2.5 × 10³ = [2,500]. | 250; 25,000
+
+@facts 6.2
+fact: Coordinates give a position as [(x, y)]. | (y, x); (up, across)
+fact: The first coordinate says how far [across]. | up; down
+fact: The second coordinate says how far [up]. | across; left
+fact: The point (3, 5) is 3 across and [5] up. | 3; 8
+fact: The origin is [(0, 0)]. | (1, 1); (10, 10)
+fact: Negative x coordinates go [left]. | right; up
+fact: Negative y coordinates go [down]. | up; right
+fact: The point (−2, 4) is 2 left and [4] up. | 2; 6
+
+@facts 6.4
+fact: Gradient measures [steepness]. | length; colour
+fact: Gradient = rise ÷ [run]. | rise; area
+fact: A rise of 6 over a run of 3 is a gradient of [2]. | 3; 18
+fact: A rise of 10 over a run of 5 is a gradient of [2]. | 5; 50
+fact: In y = 2x + 3, the gradient is [2]. | 3; 5
+fact: In y = 4x + 1, the gradient is [4]. | 1; 5
+fact: A line going down has a [negative] gradient. | positive; zero
+fact: A flat line has a gradient of [0]. | 1; 10
+
+@facts 7.3
+fact: The area of a circle is π × radius × [radius]. | diameter; 2
+fact: The area of a circle is written [πr²]. | 2πr; πd
+fact: A circle with a radius of 10 cm has an area of about [314] cm². | 31.4; 62.8
+fact: A circle with a radius of 1 cm has an area of about [3.14] cm². | 6.28; 1
+fact: A circle with a radius of 2 cm has an area of about [12.56] cm². | 6.28; 4
+fact: Halve the diameter to get the [radius]. | area; circumference
+fact: A circle with a diameter of 20 cm has a radius of [10] cm. | 20; 40
+fact: π is about [3.14]. | 2.14; 4.13
+
+@facts 8.1
+fact: Probability = the ways it can happen ÷ the possible [outcomes]. | guesses; players
+fact: A dice has [6] possible outcomes. | 2; 12
+fact: The even numbers on a dice are 2, 4 and [6]. | 3; 5
+fact: The probability of rolling an even number is [1/2]. | 1/6; 1/3
+fact: Probability goes from 0 to [1]. | 10; 100
+fact: A probability of 0 means [impossible]. | certain; likely
+fact: A probability of 1 means [certain]. | impossible; unlikely
+fact: The probability of rolling a 1 or a 2 is [1/3]. | 1/2; 1/6
+
+@facts 8.2
+fact: A coin has [2] outcomes. | 1; 6
+fact: A coin and a dice give 2 × 6 = [12] outcomes. | 8; 36
+fact: The probability of heads and a 6 is [1/12]. | 1/2; 1/6
+fact: You can list outcomes in a table or a [tree diagram]. | pie chart; poem
+fact: Two coins give [4] outcomes. | 2; 3
+fact: The probability of two heads with two coins is [1/4]. | 1/2; 1/3
+fact: Two dice give [36] outcomes. | 12; 6
+fact: Listing outcomes helps you find [probabilities]. | riddles; colours
+
+@facts 8.3
+fact: [Theoretical] probability is what should happen. | Experimental; Lucky
+fact: [Experimental] probability is what actually happened. | Theoretical; Imaginary
+fact: The theoretical probability of heads is [1/2]. | 1/4; 7/10
+fact: 7 heads in 10 tosses is an experimental probability of [7/10]. | 1/2; 3/10
+fact: With more tries, results usually get [closer to] the theory. | further from; less like
+fact: 3 sixes in 12 rolls is an experimental probability of [1/4]. | 1/6; 3/6
+fact: 10 tosses is [not many] for an experiment. | a huge number; too many
+fact: Repeating an experiment many times gives [more reliable] results. | less reliable; the same
+
+@facts 8.4
+fact: An axis that doesn't start at [0] can make small differences look huge. | the left; the right
+fact: Uneven [scales] can mislead. | colours; titles only
+fact: Missing [labels] can mislead. | colours; prices
+fact: Carefully chosen [dates] can mislead. | fonts; colours
+fact: Always check the [axes]. | font; colour
+fact: Always check where the [data] came from. | colours; font
+fact: A graph can be accurate but still [misleading]. | wrong; blank
+fact: An axis starting at 0 shows differences at their [true] size. | doubled; hidden
