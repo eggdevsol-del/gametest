@@ -424,3 +424,9 @@ body.ih-open{overflow:hidden}
 .bo-bar b{font-size:17px;font-weight:900}.bo-bar span{font-size:14px;font-weight:700;color:#5d5876}.bo-bar i{display:block;font-style:normal;color:#d9534f;margin-top:4px}
 .bo-row{display:flex;gap:8px}.bo-row button{flex:1;border:0;border-radius:14px;padding:12px;font:900 15px/1 inherit;font-family:inherit;cursor:pointer}
 .bo-1{background:linear-gradient(180deg,#5cd18a,#38b06c);color:#fff}.bo-2{background:#efedf6;color:#4b4666}
+/* the original Chorecast's island arrows, at the screen's sides (the round island) */
+.ih-isle{position:absolute;top:40%;transform:translateY(-50%);z-index:6;width:44px;height:64px;border:0;border-radius:22px;background:rgba(255,255,255,.82);color:#5a4a7a;font:800 34px/1 system-ui;box-shadow:0 4px 14px rgba(40,30,80,.18);cursor:pointer}
+.ih-isle-l{left:10px}.ih-isle-r{right:10px}
+.ih-isle[hidden]{display:none}
+.ih.editing .ih-isle{display:none}
+.ih.ih-away > .ih-isle:not([hidden]){display:block!important;z-index:40}

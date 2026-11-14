@@ -2575,12 +2575,15 @@
   // the phone's Travel app: home, the village (through the gate, from home), an island (straight there)
   // (the language islands are free to visit: lang-islands.js)
   const islandsOwned = () => Object.assign({}, O.st.islands || {}, IH.langIslands ? IH.langIslands.FREE : {});
+  // home, then each island the kid owns (no language islands on the round island), in the Travel list's order
+  const isleRing = () => { const own = islandsOwned(); return ['home', ...(IH.islandsBuild ? IH.islandsBuild.LIST.filter(i => own[i.id] && i.built && isleOpen(i.id) && i.kind !== 'language' && !LAND_NOW[i.id]).map(i => i.id) : [])]; };
+  function isleArrows() { if (!O || !O.root) return; const on = !!O.st.round && isleRing().length > 1; for (const b of O.root.querySelectorAll('.ih-isle')) b.hidden = !on; }
   function travelTo(where) {
     if (O && O.opts.studioOnly && where !== 'home') { toast('This is your studio. Close it to go back out to your island.'); return; }
     if (where !== 'home' && where !== 'village' && !isleOpen(where)) { toast('That island is closed for now.'); return; }
     if (where === 'home') { if (O.away && IH.village) IH.village.leave(); return; }
     if (O.away) { if (IH.village) IH.village.goto(where); return; }
-    if (where === 'village') return goVillage();
+    if (where === 'village') return O.st.round ? null : goVillage();
     if (!islandsOwned()[where]) return;
     const G = O.home.gate; if (G) { G.set(1); setTimeout(() => travel(where), 300); } else travel(where);
   }
@@ -2711,7 +2714,7 @@
     if (j.id === 'park') { const g = parkGrowth(), mower = (O.st.owned.mower || 0) > 0; return { ok: g >= 0.5 && mower, why: g < 0.5 ? 'The park was mowed not long ago.' : !mower ? 'You need a lawnmower (the Shop has them).' : g >= 1 ? 'The grass is long!' : 'The grass is getting long.' }; }
     const n = shiftsLeft(j.id); return { ok: n > 0, why: n > 0 ? `${n} shift${n > 1 ? 's' : ''} left today` : 'Done for today. Back tomorrow!' };
   }
-  function villageJobsHtml() { return `<h4 class="ih-ph-h4">Hoshi Street (the village)</h4><div class="ih-ph-list">${VJOBS.map(j => { const s2 = vjobState(j); return `<div class="ih-ph-row"><span class="ih-ph-e">${j.e}</span><span><b>${esc(j.name)} · ✨ up to ${j.pay}</b><small>${esc(s2.why)}</small></span>${s2.ok ? '<button class="ih-b1 ih-ph-btn" data-a="vjGo">Go</button>' : ''}</div>`; }).join('')}</div>`; }
+  function villageJobsHtml() { if (O.st.round) return ''; /* (no village on the round island) */ return `<h4 class="ih-ph-h4">Hoshi Street (the village)</h4><div class="ih-ph-list">${VJOBS.map(j => { const s2 = vjobState(j); return `<div class="ih-ph-row"><span class="ih-ph-e">${j.e}</span><span><b>${esc(j.name)} · ✨ up to ${j.pay}</b><small>${esc(s2.why)}</small></span>${s2.ok ? '<button class="ih-b1 ih-ph-btn" data-a="vjGo">Go</button>' : ''}</div>`; }).join('')}</div>`; }
   // The village's shops buy and sell by the home's own rules (prices, Mine, the used market, groceries): the sheets
   // are the home's own, shown over the village.
   const SHOP = {
@@ -2772,8 +2775,9 @@
   // Off to the village (village.js): the home stops (its drawing, its taps) and the village draws through the same
   // canvas and pipeline. Back home: in through the gate, which swings shut behind.
   function travel(where = 'village') {
+    IH.roundIsles = !!O.st.round; // (the land islands round too, as the home island)
     if (O && O.opts.studioOnly) { toast('This is your studio. Close it to go back out to your island.'); const G0 = O.home && O.home.gate; if (G0) G0.set(0); return; }
-    const G = O && O.home && O.home.gate; if (!G) return;
+    const G = O && O.home && O.home.gate; if (!G && !O.st.round) return; // (the round island has no gate: off from the front path)
     if (!IH.village) { toast('The village is still being built.'); G.set(0); return; }
     const env = IH.phys ? IH.phys.env : null, k = insts.get(KID);
     O.away = true; guitarMusic(false); $('.ih-acts', O.root).hidden = true; O.root.classList.add('ih-away'); if (IH.phys) IH.phys.env = null; // (the village has its own ground; nothing measures against the home's)
@@ -2782,11 +2786,11 @@
       if (!O) return; O.away = false; O.root.classList.remove('ih-away');
       if (IH.phys) { IH.phys.env = env; IH.phys.forget(); }
       const d = O.home.def; LK.PAL.uHouse.value.set(-0.4, -0.4, d.w + 0.4, d.d + 0.4); applyLook(); lightFor(O.st.look.phase);
-      if (k) { const A = k.petAi; k.group.visible = true; A.path = []; A.task = null; A.plan = []; A.doing = null; A.st = 'stand'; A.pos.x = G.at.x; A.pos.z = G.at.z - 0.9; A.yaw = Math.PI; k.group.position.x = A.pos.x; k.group.position.z = A.pos.z; k.group.rotation.y = A.yaw; }
-      G.set(1); setTimeout(() => { if (O && O.home && O.home.gate === G) G.set(0); }, 1400);
+      if (k) { const A = k.petAi; k.group.visible = true; A.path = []; A.task = null; A.plan = []; A.doing = null; A.st = 'stand'; const at = G ? G.at : { x: O.home.def.w / 2 + 0.5, z: O.home.def.d + 2.4 }; A.pos.x = at.x; A.pos.z = at.z - 0.9; A.yaw = Math.PI; k.group.position.x = A.pos.x; k.group.position.z = A.pos.z; k.group.rotation.y = A.yaw; }
+      if (G) { G.set(1); setTimeout(() => { if (O && O.home && O.home.gate === G) G.set(0); }, 1400); }
       CAM.target.set(d.w / 2, FY + 1, d.d / 2 + 0.5); fit(); lastT = null; sceneT = null; force = true; if (!raf) raf = requestAnimationFrame(loop); toast('Home again!'); if (O.shopHome) { O.shopHome = false; setTimeout(() => { if (O && !O.away && !O.editing) act('decorate'); }, 900); }
     } });
-    if (!ok) { O.away = false; O.root.classList.remove('ih-away'); if (IH.phys) IH.phys.env = env; if (k) k.group.visible = true; G.set(0); }
+    if (!ok) { O.away = false; O.root.classList.remove('ih-away'); if (IH.phys) IH.phys.env = env; if (k) k.group.visible = true; if (G) G.set(0); }
   }
   function actsMenu(it, x, y) {
     const acts = actsFor(it); if (!acts.length) return false;
@@ -2896,7 +2900,7 @@
 
   // ---------- screens
   function ui(light) {
-    if (!O) return; const r = O.root, st = O.st, w = wallet(), H0 = HB[st.cur];
+    if (!O) return; const r = O.root, st = O.st, w = wallet(), H0 = HB[st.cur]; isleArrows();
     $('.ih-homename', r).textContent = H0.name; $('.ih-xpn', r).textContent = nf(w.left);
     $('.ih-zoomv', r).style.setProperty('--z', ((CAM.zoom - ZMIN) / (ZMAX - ZMIN)).toFixed(3));
     if (light) return;
@@ -3065,11 +3069,11 @@
       body = `${back}<h3>Employment</h3>${tabs}${inner}`;
     }
     if (app === 'travel') {
-      const L = IH.islandsBuild ? IH.islandsBuild.LIST.filter(i => !LAND_NOW[i.id]) : [], own = islandsOwned(), here = O.away ? (IH.village && IH.village.where()) : 'home';
+      const RO = !!O.st.round, L = IH.islandsBuild ? IH.islandsBuild.LIST.filter(i => !LAND_NOW[i.id] && !(RO && i.kind === 'language')) : [], own = islandsOwned(), /* (the round classic island: no village or language islands) */ here = O.away ? (IH.village && IH.village.where()) : 'home';
       const row = (id, e, name, sub, btn) => `<div class="ih-ph-row${here === id ? ' ih-here' : ''}"><span class="ih-ph-e">${e}</span><span><b>${esc(name)}</b><small>${sub}</small></span>${btn}</div>`;
       const go = id => here === id ? '<small class="ih-ph-tag">You’re here</small>' : `<button class="ih-b1 ih-sm" data-a="goTo" data-w="${id}">Go</button>`;
       body = `${back}<h3>Travel to</h3><p class="ih-ph-sub">Your home, the village and your islands. Vacation islands are for playing; on utility islands you make things to cook or sell.</p><div class="ih-ph-list">
-        ${row('home', '🏠', O.home && O.home.def ? O.home.def.name : 'Home', 'Your home', go('home'))}${row('village', '🏮', 'Hoshi Street', 'The village: shops, café, market', go('village'))}
+        ${row('home', '🏠', O.home && O.home.def ? O.home.def.name : 'Home', 'Your home', go('home'))}${RO ? '' : row('village', '🏮', 'Hoshi Street', 'The village: shops, café, market', go('village'))}
         ${L.map(i => { const has = own[i.id], kind = i.kind === 'vacation' ? '🌴 Vacation' : i.kind === 'language' ? '🗣️ Language' : '🛠️ Utility', needs = i.needs && !own[i.needs];
           return row(i.id, i.emoji, i.name, `${kind} · ${esc(i.about)}`, !isleOpen(i.id) ? '<small class="ih-ph-tag">Closed for now</small>' : has ? go(i.id) : !i.built ? '<small class="ih-ph-tag">Coming soon</small>' : needs ? `<small class="ih-ph-tag">Needs the ${esc((L.find(q => q.id === i.needs) || {}).name || i.needs)}</small>` : `<button class="ih-b2 ih-sm" data-a="isBuy" data-w="${i.id}" ${w.left < i.xp ? 'disabled' : ''}>✨ ${nf(i.xp)}</button>`); }).join('')}</div>`;
     }
@@ -3200,6 +3204,8 @@
     if (/^(ec|ls)[A-Z]/.test(a) && O.E) { const r = O.E.act(a, el); if (r === 'bank' || r === 'grownups' || r === 'farm') return phone(r); if (r) return; }
     if (a === 'phone') { sound('pop'); return phone('home'); }
     if (a === 'goTo') { closeSheet(); return travelTo(el.dataset.w); }
+    // the original Chorecast's arrows: round the kid's islands, home first
+    if (a === 'isleStep') { const L = isleRing(), here = O.away ? (IH.village && IH.village.where()) : 'home', i = Math.max(0, L.indexOf(here)), to = L[(i + +el.dataset.v + L.length) % L.length]; sound('move'); return travelTo(to); }
     if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || !isleOpen(i.id) || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); if (IH.infused && IH.infused.on) setTimeout(() => IH.infused.unlocked(i.name, 'island'), 2500); return phone('travel'); }
     if (a === 'qty') { setQty(el.dataset.q); const r = el.dataset.r || ''; if (r === 'produce') return produceSheet(); if (r.startsWith('counter:')) return counterSheet(r.slice(8)); if (r.startsWith('app:')) return phone(r.slice(4)); if (r.startsWith('buy:')) { const d = BY[r.slice(4)]; if (d) buyAsk(d); } return; }
     if (a === 'pSell') { const id = el.dataset.k, P = PRODUCE[id]; if (!P) return; const f = food(), g = goods(), n = qtyN(P.goods ? g[id] || 0 : f[id] || 0); if (!n) return; if (P.goods) g[id] -= n; else f[id] -= n; const pr = O.E ? O.E.price(P.price) : P.price; farmIn(pr * n, `sold ${n > 1 ? n + ' × ' + P.one : P.one} at the grocer`, [[n > 1 ? `${n} × ${cap(P.one)} at ✨ ${pr}` : cap(P.one), pr * n]]); save(); sound('buy'); ui(true); toast(`Sold ${n > 1 ? n + ' × ' + P.one : P.one}: ✨ ${pr * n} into your farm account.`); return produceSheet(); }
@@ -3258,6 +3264,7 @@
   function skeleton(opts) {
     const root = document.createElement('div'); root.id = 'iso-home'; root.className = 'ih';
     root.innerHTML = `
+      <button class="ih-isle ih-isle-l" data-a="isleStep" data-v="-1" aria-label="Previous island" hidden>‹</button><button class="ih-isle ih-isle-r" data-a="isleStep" data-v="1" aria-label="Next island" hidden>›</button>
       <div class="ih-top">
         ${opts.onClose ? `<button class="ih-btn" data-a="close" aria-label="Back">${ic('close')}</button>` : ''}
         <button class="ih-pill ih-homebtn" data-a="homes">${ic('home')}<span><b class="ih-homename"></b><small>Homes</small></span></button>

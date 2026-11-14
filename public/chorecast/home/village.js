@@ -29,7 +29,7 @@
     const P = B.pond || { x: -99, z: -99, rx: 0, rz: 0 }, onBridge = (x, z) => B.bridges.some(b => x > b.x0 && x < b.x1 && z > b.z0 + 0.15 && z < b.z1 - 0.15);
     for (let i = 0; i < nx; i++) for (let j = 0; j < nz; j++) {
       const x = ox + (i + 0.5) * G, z = oz + (j + 0.5) * G;
-      if (x < ox + 0.9 || z < oz + 0.9 || x > B.bounds.x1 - 0.9 || z > B.bounds.z1 - 0.9) { bad[i * nz + j] = 1; continue; } // (the island's edge)
+      if (!B.round && (x < ox + 0.9 || z < oz + 0.9 || x > B.bounds.x1 - 0.9 || z > B.bounds.z1 - 0.9)) { bad[i * nz + j] = 1; continue; } // (the island's edge; a round island's is its walk)
       const ex = (x - P.x) / (P.rx + 0.6 + BODY), ez = (z - P.z) / (P.rz + 0.6 + BODY);
       if (ex * ex + ez * ez < 1 && !onBridge(x, z)) bad[i * nz + j] = 1;
       if (B.walk && !B.walk(x, z)) bad[i * nz + j] = 1;

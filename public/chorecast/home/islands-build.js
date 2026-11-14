@@ -43,6 +43,7 @@
   }
   // the island's sides under it (soil, then rock) and the rocks it floats on, as the homes and the village
   function sides(k, W, D, R, top = '#b7ad9b') {
+    if (IH.roundIsles) return; // (on the round islands, roundify draws the island's sides instead)
     bx(k, W + 0.12, 0.16, D + 0.12, W / 2, -0.5, D / 2, top, { r: 0.08 });
     bx(k, W - 0.1, 1.15, D - 0.1, W / 2, -1.62, D / 2, '#9a6a45', { r: 0.2, seg: 2 }); bx(k, W - 0.5, 0.9, D - 0.5, W / 2, -2.5, D / 2, '#8f8a99', { r: 0.3, seg: 2 }); bx(k, W - 2.2, 0.8, D - 2.2, W / 2, -3.2, D / 2, '#6f6a7d', { r: 0.35, seg: 2 });
     for (let i = 0; i < 60; i++) { const side = i % 4, t = R(), y = -0.85 - R() * 1.5, s = 0.25 + R() * 0.35; const [x, z] = side === 0 ? [t * W, D - 0.02] : side === 1 ? [W - 0.02, t * D] : side === 2 ? [t * W, 0.02] : [0.02, t * D]; k.ball(s, x, y, z, y < -1.6 ? '#7d788a' : '#a77b52', { n: 7 }); }
@@ -279,6 +280,25 @@
   }
   const BUILD = { beach, farm };
   // islands-more.js adds the rest with add(id, fn), built from the same pieces
-  IH.islandsBuild = { LIST, build: (id, st) => (BUILD[id] ? BUILD[id](st) : null), add: (id, fn) => { BUILD[id] = fn; const i = LIST.find(q => q.id === id); if (i) i.built = true; }, MAKE,
+  // The original Chorecast's round islands (IH.roundIsles, when the home is the round classic island): the island's own
+  // landscape sits in the middle of a round island just big enough to hold it, grass (or sand) out to a round rim, its
+  // cut-away edge in soil then rock tapering to a point, as the home island. The walk map follows the circle: inside
+  // the landscape its own rules, outside it flat ground to the rim.
+  function roundify(B) {
+    const b = B.bounds, w = b.x1 - b.x0, d = b.z1 - b.z0, cx = (b.x0 + b.x1) / 2, cz = (b.z0 + b.z1) / 2, r = Math.hypot(w, d) / 2 + 1.2, n = 72;
+    const k = new Kit(), Rg = rng(Math.round(r * 31)), sand = B.id === 'beach', top = sand ? '#e9d7a6' : '#93d36b', lip = sand ? '#d8c08a' : '#74b84f';
+    k.cyl(r, 0.4, cx, -0.43, cz, top, { n }); k.cyl(r + 0.08, 0.16, cx, -0.55, cz, lip, { n });
+    k.lathe([[r * 0.9, -2.15], [r * 0.95, -1.7], [r - 0.06, -1.05], [r + 0.04, -0.6], [r + 0.05, -0.4]], cx, 0, cz, '#9a6a45', { n });
+    k.lathe([[0.02, -r * 0.55 - 3], [r * 0.22, -r * 0.4 - 2.6], [r * 0.5, -3.6], [r * 0.75, -2.7], [r * 0.9, -2.15]], cx, 0, cz, '#8f8a99', { n });
+    for (let i = 0; i < Math.round(r * 6); i++) { const a = Rg() * Math.PI * 2, y = -0.8 - Rg() * 1.3, rr = (y < -1.5 ? r * 0.93 : r) + 0.02; k.ball(0.18 + Rg() * 0.3, cx + Math.cos(a) * rr, y, cz + Math.sin(a) * rr, y < -1.6 ? '#8f8a99' : '#7d5236', { s: [1.2, 0.8, 1], n: 8 }); }
+    for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2, r0 = r * 0.45; k.cone(1 + Rg() * 1.1, 1.6 + Rg() * 1.2, cx + Math.cos(a) * r0, -3.9 - Rg() * 0.6, cz + Math.sin(a) * r0, '#6f6a7d', { rx: Math.PI, n: 7 }); }
+    const g = k.build(); g.position.y = 0.02; B.root.add(g);
+    const inRect = (x, z) => x > b.x0 && x < b.x1 && z > b.z0 && z < b.z1, walk0 = B.walk, h0 = B.height;
+    B.rect = { ...b }; B.round = { r, cx, cz }; B.bounds = { x0: cx - r, z0: cz - r, x1: cx + r, z1: cz + r };
+    B.walk = (x, z) => (inRect(x, z) ? (!walk0 || walk0(x, z)) : Math.hypot(x - cx, z - cz) < r - 0.7);
+    if (h0) B.height = (x, z) => (inRect(x, z) ? h0(x, z) : 0);
+    return B;
+  }
+  IH.islandsBuild = { LIST, build: (id, st) => { const B = BUILD[id] ? BUILD[id](st) : null; return B && IH.roundIsles ? roundify(B) : B; }, add: (id, fn) => { BUILD[id] = fn; const i = LIST.find(q => q.id === id); if (i) i.built = true; }, MAKE,
     kit: { rng, bx, sm, terrain, sides, skirt, signTex, board, signpost, pohutukawa, rock, quad, part, gate } };
 })();
