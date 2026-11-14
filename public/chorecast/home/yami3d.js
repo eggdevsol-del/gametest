@@ -282,11 +282,17 @@
   // each paw sits on the ground under its shoulder or hip. Each leg reaches its paw by two-bone IK (upper leg and
   // lower leg; the elbows bend back, the knees forward, as a real cat's or dog's do) and the paw stays level.
   const STRIDE = { cat: 0.3, dog: 0.32, bunny: 0.22 }, PV = [new T.Vector3(), new T.Vector3(), new T.Vector3(), new T.Vector3()], PQ = new T.Quaternion(), PE = new T.Euler();
+  // an object's place in the world: its height, its facing (forward, flat) and its size
+  const WV = new T.Vector3(), WSV = new T.Vector3(), WF = new T.Vector3();
+  function worldOf(o) { o.getWorldPosition(WV); o.getWorldScale(WSV); WF.set(0, 0, 1).transformDirection(o.matrixWorld); const l = Math.hypot(WF.x, WF.z) || 1; return { y: WV.y, s: WSV.x, f: [WF.x / l, WF.z / l] }; }
+  IH.worldOf = worldOf;
   function plantPaws(inst, st) {
     const walking = st === 'walk', standing = st === 'stand' || st === 'look';
     if ((!walking && !standing) || !inst.B['fleg1.L'] || !inst.cols) { inst.pp = null; return; }
     inst.group.updateMatrixWorld(true);
-    const yaw = inst.group.rotation.y, f = [Math.sin(yaw), Math.cos(yaw)], gy = inst.group.position.y, F = inst.pp || (inst.pp = {}), STEP = STRIDE[inst.pet] || 0.3;
+    // (in world space: its real height, facing and size, so it plants right inside something scaled, like the classic
+    // island's models; IH.groundAt, when the island sets it, is the ground under each paw on its slopes)
+    const W = worldOf(inst.group), f = W.f, gy = W.y, F = inst.pp || (inst.pp = {}), STEP0 = STRIDE[inst.pet] || 0.3, STEP = STEP0 * W.s, gAt = IH.groundAt;
     const ang = (dx, dy, dz) => Math.atan2(dx * f[0] + dz * f[1], -dy);
     const caps = IH.rig3d.capsules(inst, inst.cols), tip = n => caps.find(k => k.bone === n);
     for (const [g, s, off, front] of [['fleg', 'L', 0, true], ['hleg', 'R', 0, false], ['fleg', 'R', 1, true], ['hleg', 'L', 1, false]]) {
@@ -295,10 +301,11 @@
       const pc = PV[3].copy(pb.a), vx = pc.x - j3.x, vy = pc.y - j3.y, vz = pc.z - j3.z, key = g + s; // the paw hangs from the last joint
       let tx = j1.x + vx, tz = j1.z + vz, py = gy + pb.r;
       if (walking && inst.walkD != null) {
-        const ph = ((inst.walkD / STEP + off) % 2 + 2) % 2, ahead = (x, z) => [x + vx + f[0] * STEP * 0.5, z + vz + f[1] * STEP * 0.5];
+        const ph = ((inst.walkD / STEP0 + off) % 2 + 2) % 2, ahead = (x, z) => [x + vx + f[0] * STEP * 0.5, z + vz + f[1] * STEP * 0.5];
         if (ph < 1) { if (!F[key] || F[key].sw) { const [ax, az] = ahead(j1.x, j1.z); F[key] = { x: ax, z: az, sw: false }; } tx = F[key].x; tz = F[key].z; }
-        else { if (!F[key]) F[key] = { x: tx, z: tz }; if (!F[key].sw) { F[key].sw = true; F[key].fx = F[key].x; F[key].fz = F[key].z; } const u = ph - 1, e = u * u * (3 - 2 * u), [nx, nz] = ahead(j1.x, j1.z); tx = F[key].fx + (nx + f[0] * STEP * 0.5 - F[key].fx) * e; tz = F[key].fz + (nz + f[1] * STEP * 0.5 - F[key].fz) * e; py += Math.sin(Math.PI * u) * 0.08; }
+        else { if (!F[key]) F[key] = { x: tx, z: tz }; if (!F[key].sw) { F[key].sw = true; F[key].fx = F[key].x; F[key].fz = F[key].z; } const u = ph - 1, e = u * u * (3 - 2 * u), [nx, nz] = ahead(j1.x, j1.z); tx = F[key].fx + (nx + f[0] * STEP * 0.5 - F[key].fx) * e; tz = F[key].fz + (nz + f[1] * STEP * 0.5 - F[key].fz) * e; py += Math.sin(Math.PI * u) * 0.08 * W.s; }
       } else F[key] = null;
+      if (gAt) py += gAt(tx, tz) - gy; // (the ground under this paw, on a slope)
       // where the last joint must be for the paw to land there
       const wx = tx - vx, wy = py - vy, wz = tz - vz, dxp = wx - j1.x, dyp = wy - j1.y, dzp = wz - j1.z, fw = dxp * f[0] + dzp * f[1], dn = -dyp, d = Math.max(0.03, Math.min(L1 + L2 - 1e-3, Math.hypot(fw, dn)));
       const aT = Math.atan2(fw, dn), b = Math.acos(Math.max(-1, Math.min(1, (L1 * L1 + d * d - L2 * L2) / (2 * L1 * d)))), A1 = aT + (front ? -b : b);

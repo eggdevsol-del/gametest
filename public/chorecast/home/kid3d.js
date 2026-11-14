@@ -337,18 +337,20 @@
     const walking = st === 'walk', standing = /^(stand|look|happy)$/.test(st);
     if ((!walking && !standing) || !inst.B['thigh.L']) { inst.fp = null; return; }
     inst.group.updateMatrixWorld(true);
-    const yaw = inst.group.rotation.y, f = [Math.sin(yaw), Math.cos(yaw)], gy = inst.group.position.y, F = inst.fp || (inst.fp = {});
+    // (world space, as yami3d.js: right inside something scaled, and on the island's slopes when it sets IH.groundAt)
+    const W = IH.worldOf ? IH.worldOf(inst.group) : { y: inst.group.position.y, s: 1, f: [Math.sin(inst.group.rotation.y), Math.cos(inst.group.rotation.y)] }, f = W.f, gy = W.y, F = inst.fp || (inst.fp = {}), STEPW = STEP * W.s, gAt = IH.groundAt;
     const ang = (dx, dy, dz) => Math.atan2(dx * f[0] + dz * f[1], -dy); // from straight down toward the front
     for (const [s, off] of [['L', 0], ['R', 1]]) {
       const th = inst.B['thigh.' + s], sh = inst.B['shin.' + s], ft = inst.B['foot.' + s];
       const hip = th.getWorldPosition(IV[0]), knee = sh.getWorldPosition(IV[1]), ank = ft.getWorldPosition(IV[2]);
-      const aH = 0.06 /* the ankle joint stands 6 cm off the floor (measured on the model at rest) */, Lt = hip.distanceTo(knee), Ls = knee.distanceTo(ank);
+      const aH = 0.06 * W.s /* the ankle joint stands 6 cm off the floor (measured on the model at rest) */, Lt = hip.distanceTo(knee), Ls = knee.distanceTo(ank);
       let tx = hip.x, tz = hip.z, ty = gy + aH;
       if (walking && inst.walkD != null) {
-        const ph = ((inst.walkD / STEP + off) % 2 + 2) % 2, ahead = (x, z) => [x + f[0] * STEP * 0.5, z + f[1] * STEP * 0.5];
+        const ph = ((inst.walkD / STEP + off) % 2 + 2) % 2, ahead = (x, z) => [x + f[0] * STEPW * 0.5, z + f[1] * STEPW * 0.5];
         if (ph < 1) { if (!F[s] || F[s].sw) F[s] = { x: ahead(hip.x, hip.z)[0], z: ahead(hip.x, hip.z)[1], sw: false }; tx = F[s].x; tz = F[s].z; } // planted
-        else { if (!F[s]) F[s] = { x: hip.x, z: hip.z }; if (!F[s].sw) { F[s].sw = true; F[s].fx = F[s].x; F[s].fz = F[s].z; } const u = ph - 1, e = u * u * (3 - 2 * u), [nx, nz] = ahead(hip.x, hip.z); tx = F[s].fx + (nx + f[0] * STEP * 0.5 - F[s].fx) * e; tz = F[s].fz + (nz + f[1] * STEP * 0.5 - F[s].fz) * e; ty += Math.sin(Math.PI * u) * 0.07; } // swinging through, lifted
+        else { if (!F[s]) F[s] = { x: hip.x, z: hip.z }; if (!F[s].sw) { F[s].sw = true; F[s].fx = F[s].x; F[s].fz = F[s].z; } const u = ph - 1, e = u * u * (3 - 2 * u), [nx, nz] = ahead(hip.x, hip.z); tx = F[s].fx + (nx + f[0] * STEPW * 0.5 - F[s].fx) * e; tz = F[s].fz + (nz + f[1] * STEPW * 0.5 - F[s].fz) * e; ty += Math.sin(Math.PI * u) * 0.07 * W.s; } // swinging through, lifted
       } else F[s] = null;
+      if (gAt) ty += gAt(tx, tz) - gy; // (the ground under this foot, on a slope)
       // two-bone IK in the facing plane
       const vx = tx - hip.x, vy = ty - hip.y, vz = tz - hip.z, fw = vx * f[0] + vz * f[1], dn = -vy, d = Math.max(0.05, Math.min(Lt + Ls - 1e-3, Math.hypot(fw, dn)));
       const aT = Math.atan2(fw, dn), b = Math.acos(Math.max(-1, Math.min(1, (Lt * Lt + d * d - Ls * Ls) / (2 * Lt * d)))), A1 = aT + b;

@@ -3437,7 +3437,10 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     if (X) X.skirt(g, { cx: 0, cz: 0, r: S }, { E: 1.1 * S, top: a => top + ground(Math.cos(a) * 1.1 * S, Math.sin(a) * 1.1 * S) - 0.03, base: -0.115, baseR: S, lawnC, seed: s });
     else add(g, new T.CylinderGeometry(1.1 * S, 1.05 * S, 0.13, 48, 1, true), mat(lawnC), 0, 0.105, 0).userData.noInk = true;
     u.grass = add(g, lawnTop(ground, S, lawnC), mat(0xffffff, { vc: true }), 0, top, 0); u.grass.userData.noInk = true; u.grass.userData.hab = 'lawn';
-    u.grassMesh = grassField(g, s, Math.round((k.flat ? 41600 : 7200) * S * S), MOWN + cm('lawn') * 1.28, k.night, { exact: true, foot: FOOT[k.level] || FOOT[0], pd, rad: 1.09 * S, tint, ground, not: fall ? (x, z) => segD(x, z) < fall.w * 1.05 : null, clear: k.level === 0 ? [[0.32, 0.07, 0.1]] : null });
+    // the homes game's grass on the Studio's flat island (island-homes.js), once its files are here; the island's own blades otherwise
+    u.night = !!k.night;
+    if (XH && k.flat) XH.lawn(g, u, { top, R: 1.09 * S - 0.015, seed: s, night: k.night, grow: 0.15 + cm('lawn') * 1.1, excl: (x, z) => inHouse(x, z) || (pd && pondD(pd, x, z) < pd.r + 0.03) || (fall && segD(x, z) < fall.w * 1.1) });
+    u.grassMesh = u.homesLawn ? null : grassField(g, s, Math.round((k.flat ? 41600 : 7200) * S * S), MOWN + cm('lawn') * 1.28, k.night, { exact: true, foot: FOOT[k.level] || FOOT[0], pd, rad: 1.09 * S, tint, ground, not: fall ? (x, z) => segD(x, z) < fall.w * 1.05 : null, clear: k.level === 0 ? [[0.32, 0.07, 0.1]] : null });
     u.dens = (k.flat ? 41600 : 7200) / (Math.PI * 1.09 * 1.09);
     if (keys.lawn === 'meadow') { const nf = Math.round(70 * S * S), fm = new T.InstancedMesh(new T.SphereGeometry(0.013, 6, 4), mat(0xffffff), nf), d0 = new T.Object3D(), rr = mulberry(s + 41), col = new T.Color(); let n = 0; for (let i = 0; i < nf && n < nf; i++) { const a = rr() * 6.283, r0 = Math.sqrt(rr()) * R * 0.95, x = Math.cos(a) * r0, z = Math.sin(a) * r0; if (inHouse(x, z) || (pd && pondD(pd, x, z) < pd.r + 0.05)) continue; d0.position.set(x, top + 0.03 + rr() * 0.02, z); d0.updateMatrix(); fm.setMatrixAt(n, d0.matrix); fm.setColorAt(n++, col.set([0xff6b9d, 0xffd43b, 0xffffff, 0xc084fc, 0xff8c42][n % 5])); } fm.count = n; fm.userData.noInk = true; fm.userData.ownMat = true; g.add(fm); }
     if (pd) {
@@ -3465,7 +3468,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     u.flag = add(g, FLAG_GEO, flagMat(k.hue, k.avatar, keys.flag), 0.89, top + 0.5, -0.05); u.flag.userData.noInk = true;
     for (let i = 0; i < k.coins; i++) add(g, new T.CylinderGeometry(0.07, 0.07, 0.035, 20), GOLD(), 0.36 + (i % 2) * 0.012, top + 0.02 + i * 0.038, 0.62).rotation.y = i;
     // The kid themself: their avatar's animal standing on the lawn (the emoji, if the island extras haven't loaded).
-    const av = X ? outline(X.kidModel(k.hue, k.avatar), 0.006) : sprite(emojiTex(k.avatar), k.flat ? 0.26 : 0.4); if (X) { av.scale.setScalar(k.flat ? 1 : 1.45); av.rotation.y = 0.9; av.position.set(0.42, top, 0.42); } else av.position.set(0.42, top + (k.flat ? 0.13 : 0.2), 0.42); g.add(av); u.av = av; u.avY = av.position.y;
+    const av = X ? (m0 => (XH ? XH.dress(m0, k.hue, k.avatar) : m0))(outline(X.kidModel(k.hue, k.avatar), 0.006)) : sprite(emojiTex(k.avatar), k.flat ? 0.26 : 0.4); // (their homes character, island-homes.js) if (X) { av.scale.setScalar(k.flat ? 1 : 1.45); av.rotation.y = 0.9; av.position.set(0.42, top, 0.42); } else av.position.set(0.42, top + (k.flat ? 0.13 : 0.2), 0.42); g.add(av); u.av = av; u.avY = av.position.y;
     if (k.rainbow && keys.sky !== 'rainbow' && !wx.rain && !wx.snow) [0xff6b6b, 0xffa94d, 0xffe066, 0x69db7c, 0x4dabf7, 0x9775fa].forEach((c, i) => add(g, new T.TorusGeometry(1.25 - i * 0.07, 0.035, 8, 48, Math.PI), mat(c, { smooth: true }), 0, 0.15, -0.75));
     const clouds = new T.Group(); [0, 1].forEach(i => { const c = smallCloud(s + 50 + i); c.position.set(i ? -1.25 : 1.2, i ? 0.45 : 0.75, i ? -0.3 : 0.2); clouds.add(c); }); g.add(clouds); u.clouds = clouds;
     u.precip = precip(g, wx, k.flat);
@@ -3478,6 +3481,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     if (X && pd) X.caustics(g, u.grass, top - 0.018);
     if (X) u.dressTick = X.dress(g, k, { top, R, S, house: h, night: k.night });
     if (XH) XH.budget = 12; u.items = []; (k.items || []).filter(it => isleOf(it) === 'home').forEach(it => placeItem(g, it));
+    if (XH && u.homesLawn) XH.lawnUnder(u); // (no grass growing up through what's placed)
     outline(g);
     if (!k.flat) g.rotation.x = 0.42; return g;
   }
@@ -3677,12 +3681,14 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
   };
   // island.js adds the rest of the shop, chore tree types, land, house styles and the island's dressing, drawn with
   // these same helpers.
-  const X = window.ChorecastIsland ? window.ChorecastIsland({ T, add, mat, SM, sph, cyl, bx, cn, eyes, merged, rough, strata, sprite, emojiTex, GOLD, horse, barn, WOOD, DARK, mulberry, grassField, MOWN, GRAD, waterMat, waterSheet, smooth01, WATER_T, fbm, lin }) : null;
+  let KI = null; // (the kit island.js was given: island-homes.js adds its path finding to it)
+  const X = window.ChorecastIsland ? window.ChorecastIsland(KI = { T, add, mat, SM, sph, cyl, bx, cn, eyes, merged, rough, strata, sprite, emojiTex, GOLD, horse, barn, WOOD, DARK, mulberry, grassField, MOWN, GRAD, waterMat, waterSheet, smooth01, WATER_T, fbm, lin }) : null;
   if (X) for (const [t, f] of Object.entries(X.items)) if (!ITEM[t]) ITEM[t] = f;
   // island-homes.js: the homes game's animals, pets, garden things and characters in place of the island's own, once
   // the homes game's files are loaded (HomesGame.load); until then, the island's own models
   const XH = window.ChorecastIslandHomes ? window.ChorecastIslandHomes({ T, mat, GRAD, ITEM, pull: id => HomeSync.pull(id) }) : null;
   XH_THUMB = XH ? on => { XH.thumb = on; } : null;
+  if (XH && KI) KI.nav = (m, u, x, z) => XH.nav(m, u, x, z);
   // The waterfall: a spring bubbling up among rocks, a stream down its channel (ripples drifting downstream), and the
   // falls spilling over the edge, streaked white, curling over the lip and thinning into mist as they drop into the sky.
   const FALL_F = `uniform float uTime; uniform vec3 uA, uB; varying vec2 vUv;
@@ -3835,7 +3841,8 @@ void main() {
     if (def.trophy && it.v) { const set = (SETS.find(x => x.k === it.v) || {}).icon; if (set) { const b = sprite(emojiTex(set), 0.08); b.position.set(...(m.userData.badgeAt || [0, 0.05, 0.09])); m.add(b); } }
     if (def.farm) { const b = sprite(emojiTex('🌾'), 0.11); b.position.y = 0.34; b.visible = false; m.add(b); m.userData.bub = b; }
     if (u.ready && u.ready[it.id]) { const b = sprite(emojiTex(u.ready[it.id]), 0.1); b.position.y = def.habitat === 'orchard' ? 0.5 : 0.3; m.add(b); const own = m.userData.tick; m.userData.tick = (t, dt) => { if (own) own(t, dt); b.position.y = (def.habitat === 'orchard' ? 0.5 : 0.3) + Math.sin(t * 3 + m.position.x * 7) * 0.02; }; }
-    if ((def.cat === 'animals' && !def.home) || def.farm) walker(m, host, (def.habitat === 'beach' && zs.coast) || Z, { farm: !!def.farm && (zk === 'farm' || zk === 'stable'), lawn: zk === 'lawn' && !L, swim: !!Z.water, mode });
+    // a homes animal goes about its own ways round the island (island-homes.js); the rest wander as they always have
+    if ((def.cat === 'animals' && !def.home) || def.farm) { const wz = (def.habitat === 'beach' && zs.coast) || Z, wo = { farm: !!def.farm && (zk === 'farm' || zk === 'stable'), lawn: zk === 'lawn' && !L, swim: !!Z.water, mode }; if (!(XH && XH.walk(m, host, wz, wo))) walker(m, host, wz, wo); }
     host.add(m); (u.items || (u.items = [])).push(m); return m;
   }
   // Which surfaces a shop item can stand on, from its habitat. hab is what the tap landed on.

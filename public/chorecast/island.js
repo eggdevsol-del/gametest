@@ -946,7 +946,15 @@ void main() {
   const still = P => { ['legL', 'legR', 'armL', 'armR', 'body'].forEach(n => P[n].rotation.set(0, 0, 0)); P.body.position.y = 0.085; };
   const walking = (P, t, on) => { const s = on ? Math.sin(t * 11) * 0.55 : 0; P.legL.rotation.x = s; P.legR.rotation.x = -s; P.armL.rotation.x = -s * 0.8; P.armR.rotation.x = s * 0.8; };
   // Walks the kid towards (x, z) over the ground; true once there.
-  function walkTo(m, u, x, z, dt, sp = 0.2) { const dx = x - m.position.x, dz = z - m.position.z, d = Math.hypot(dx, dz); if (d < 0.012) return true; const s = Math.min(d, sp * dt); m.position.x += dx / d * s; m.position.z += dz / d * s; m.rotation.y = Math.atan2(dx, dz); m.position.y = u.terrain.h(m.position.x, m.position.z); return false; }
+  // Walking to (x, z): round whatever's in the way (K.nav, island-homes.js: the next point on a path round the house,
+  // the trees, the pond and the things on the island), or straight there when there's no path to follow
+  function walkTo(m, u, x, z, dt, sp = 0.2) {
+    if (Math.hypot(x - m.position.x, z - m.position.z) < 0.012) return true;
+    const w = K.nav ? K.nav(m, u, x, z) : null, tx = w ? w[0] : x, tz = w ? w[1] : z, dx = tx - m.position.x, dz = tz - m.position.z, d = Math.hypot(dx, dz);
+    if (d < 1e-5) return false; const s = Math.min(d, sp * dt); m.position.x += dx / d * s; m.position.z += dz / d * s;
+    const want = Math.atan2(dx, dz), turn = Math.atan2(Math.sin(want - m.rotation.y), Math.cos(want - m.rotation.y)); m.rotation.y += turn * Math.min(1, dt * 10); // (turning into the corners, not snapping)
+    m.position.y = u.terrain.h(m.position.x, m.position.z); return false;
+  }
   const ease = q => q * q * (3 - 2 * q);
   // A thin line between two points (fishing line, kite string), updated every frame.
   function line(g, c = 0xf4f1ea) { const geo = new T.BufferGeometry(); geo.setAttribute('position', new T.Float32BufferAttribute([0, 0, 0, 0, 0, 0], 3)); const l = new T.Line(geo, new T.LineBasicMaterial({ color: c })); l.userData.noInk = true; l.userData.ownMat = true; l.frustumCulled = false; g.add(l); return (a, b) => { const p = geo.attributes.position; p.setXYZ(0, a.x, a.y, a.z); p.setXYZ(1, b.x, b.y, b.z); p.needsUpdate = true; }; }
@@ -960,7 +968,7 @@ void main() {
     const hold = (obj, hand = P.hand) => { hand.add(obj); held.push(obj); return obj; };
     const pose = poser(m, (x, z) => u.terrain.h(x, z));
     let step;
-    still(P);
+    still(P); m.userData.doing = key;
     if (key === 'lake') {
       // Fishing: cast, wait for a bite while the float bobs, strike, and reel the fish up out of the water.
       const rod = hold(new T.Group()); rod.rotation.x = -1.1; cyl(rod, 0.003, 0.005, 0.28, 0x6b4a2e, 0, 0.12, 0, 6); const tip = new T.Object3D(); tip.position.y = 0.26; rod.add(tip);
@@ -1153,7 +1161,12 @@ void main() {
     const near = (p, r = 0.13) => spot((x, z) => walk(x, z) && Math.hypot(x - p[0], z - p[1]) < r && Math.hypot(x - p[0], z - p[1]) > 0.05) || p;
     const gy = () => floor(m.position.x, m.position.z), here = () => [m.position.x, m.position.z];
     // Steps
-    const go = (p, sp = 0.16) => ({ run: (dt, t) => { if (!p) return true; const dx = p[0] - m.position.x, dz = p[1] - m.position.z, d = Math.hypot(dx, dz); if (d < 0.012) { still(P); m.position.y = gy(); return true; } const s = Math.min(d, sp * dt); m.position.x += dx / d * s; m.position.z += dz / d * s; m.rotation.y = Math.atan2(dx, dz); m.position.y = gy(); walking(P, t, true); return false; } });
+    // walking to a spot: round whatever's in the way when the island can find a path (K.nav), else straight there
+    const go = (p, sp = 0.16) => ({ run: (dt, t) => {
+      if (!p) return true; if (Math.hypot(p[0] - m.position.x, p[1] - m.position.z) < 0.012) { still(P); m.position.y = gy(); return true; }
+      const w = K.nav ? K.nav(m, u, p[0], p[1]) : null, tx = w ? w[0] : p[0], tz = w ? w[1] : p[1], dx = tx - m.position.x, dz = tz - m.position.z, d = Math.hypot(dx, dz);
+      if (d > 1e-5) { const s = Math.min(d, sp * dt); m.position.x += dx / d * s; m.position.z += dz / d * s; const want = Math.atan2(dx, dz); m.rotation.y += Math.atan2(Math.sin(want - m.rotation.y), Math.cos(want - m.rotation.y)) * Math.min(1, dt * 10); }
+      m.position.y = gy(); walking(P, t, true); return false; } });
     const face = p => ({ run: () => { if (p) m.rotation.y = Math.atan2(p[0] - m.position.x, p[1] - m.position.z); return true; } });
     const act = (d, f) => ({ d, run: (dt, t, q) => { if (f) f(q, t, dt); return q >= 1; } });
     const now = f => ({ run: () => { f(); return true; } });
@@ -1268,7 +1281,7 @@ void main() {
     function candidates() {
       const out = LIB.filter(([id, on, w, when]) => (on === 'any' || on.includes(key)) && (!when || when())).map(([id, on, w, , steps]) => ({ id, icon: PIC[id], w: on === 'any' ? w * 0.6 : w, steps }));
       // The kid's things share about half the turns however many there are, so the island's own scenes still come up.
-      const own = live.map(it => { const pos = it.m.position, kind = it.pet ? 'pet' : kindOf(it.t) || 'any'; return { id: it.id, icon: PIC[kind], w: kind === 'any' ? 0.35 : 1.1, steps: () => ITEM[kind]({ ...it, x: pos.x, z: pos.z }) }; });
+      const own = live.map(it => { const pos = it.m.position, kind = it.pet ? 'pet' : kindOf(it.t) || 'any'; return { id: it.id, kind, icon: PIC[kind], w: kind === 'any' ? 0.35 : 1.1, steps: () => ITEM[kind]({ ...it, x: pos.x, z: pos.z }) }; });
       const base = out.reduce((n, b) => n + b.w, 0), mine = own.reduce((n, b) => n + b.w, 0), k2 = mine > base ? base / mine : 1;
       own.forEach(b => { b.w *= k2; out.push(b); });
       return out.filter(b => b.id !== last);
@@ -1277,7 +1290,7 @@ void main() {
     function start() {
       const list = candidates(); let r = rr() * list.reduce((s, b) => s + b.w, 0), b = list[0];
       for (const c2 of list) { r -= c2.w; if (r <= 0) { b = c2; break; } }
-      last = b.id; i = 0; st = 0;
+      last = b.id; i = 0; st = 0; m.userData.doing = b.kind || b.id; // (what it's doing, for the homes character's move: island-homes.js)
       cur = [act(0.6 + rr() * 0.9, (q, t) => { P.head.rotation.y = Math.sin(t * 1.4) * 0.35; }), now(() => { P.head.rotation.y = 0; think(b.icon); }), ...b.steps().filter(Boolean)];
     }
     const bubbles = [];
@@ -1287,6 +1300,7 @@ void main() {
     }
     // Props left from a scene shrink away while the next begins.
     function leave() {
+      m.userData.doing = null;
       const gone = [...props.children, ...held]; held.length = 0;
       gone.forEach(obj => { const s0 = obj.scale.clone(), k = { t: 0 }; fades.push(dt => { k.t += dt * 4; obj.scale.copy(s0).multiplyScalar(Math.max(0.01, 1 - k.t)); if (k.t < 1) return true; if (obj.parent) obj.parent.remove(obj); obj.traverse(x => { if (x.geometry) x.geometry.dispose(); if (x.userData.ownMat && x.material) x.material.dispose(); }); return false; }); });
       ticks.length = 0; still(P); P.head.rotation.set(0, 0, 0); m.rotation.x = 0; m.rotation.z = 0; m.position.y = gy();
