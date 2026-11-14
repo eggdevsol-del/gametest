@@ -117,7 +117,7 @@
   }
 
   // no wall between two points (the floor plan's walls only; furniture doesn't count)
-  function wallFree(a, b) { if (!env) return true; const d = Math.hypot(b.x - a.x, b.z - a.z), n = Math.ceil(d / 0.05); for (let i = 0; i <= n; i++) { const u = i / n; if (env.wallAt(a.x + (b.x - a.x) * u, a.z + (b.z - a.z) * u) || env.floorAt(a.x + (b.x - a.x) * u, a.z + (b.z - a.z) * u) < -4) return false; } return true; }
+  function wallFree(a, b) { if (!env) return true; const d = Math.hypot(b.x - a.x, b.z - a.z), n = Math.max(1, Math.ceil(d / 0.05)); /* (at least one step: no move at all, as when turning on the spot, was 0 / 0 and read as off the edge) */ for (let i = 0; i <= n; i++) { const u = i / n; if (env.wallAt(a.x + (b.x - a.x) * u, a.z + (b.z - a.z) * u) || env.floorAt(a.x + (b.x - a.x) * u, a.z + (b.z - a.z) * u) < -4) return false; } return true; }
   // ---- walking
   // how much room a body has round a point (metres to the nearest thing it would bump into)
   function clearance(x, z, cls) { if (!grid()) return 9; const c = col(x, z); return c < 0 ? 0 : W.dist[cls][c]; }

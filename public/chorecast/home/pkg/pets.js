@@ -3,7 +3,7 @@
    kid. classic: the classic island shop's things this package stands in for. */
 (function () {
   const IH = window.IsoHome = window.IsoHome || {};
-  const pet = (kind, speed, turnR) => ({ cls: 'pet', speed, turnR, follows: 'kid', idle: ['stand', 'sit', 'sit', 'sleep'], make: () => IH.pets.make(kind), pose: (inst, st, t, ph) => IH.pets.pose(inst, st, t, ph) });
+  const pet = (kind, speed, turnR) => ({ cls: 'pet', pet: true, speed, turnR, follows: 'kid', idle: ['stand', 'sit', 'sit', 'sleep'], make: () => IH.pets.make(kind), pose: (inst, st, t, ph) => IH.pets.pose(inst, st, t, ph) });
   IH.pkg.define('pets', {
     kind: 'family', needs: ['look', 'kit', 'pets', 'anim2d', 'yami', 'yami3d', 'items', 'phys'],
     bodies: { puppy: pet('dog', 1.3, 0.32), kitten: pet('cat', 1.2, 0.3), bunny: pet('bunny', 1.0, 0.24) },

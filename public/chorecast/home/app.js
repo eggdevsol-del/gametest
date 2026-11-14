@@ -1605,13 +1605,9 @@
       if (!insts.has(U0.id) || (t > U0.until && !sleepOn) || (U0.auto && !sleepOn && t > U0.since + 60 && /^(bed|bunk)$/.test(U0.t) && inst.needs && inst.needs.energy >= 97)) { leaveUse(inst); A.until = t + 0.5; }
       else {
         // the move's branches, one after another (never the same twice running): roll over, starfish, covers up…
-        const U = A.use; if (U.moves && t > U.nextMove) { const o = U.moves.filter(m => m !== U.pose); U.pose = U.queue && U.queue.length ? U.queue.shift() : o[Math.floor(Math.random() * o.length)]; U.nextMove = t + 5 + Math.random() * 5; }
-        poseOf(inst, U.pose, t, A.ph);
+        poseOf(inst, IH.walk.nextMove(A.use, t), t, A.ph); // (pkg/walk.js)
         g.position.copy(A.pos); g.rotation.set(0, A.yaw, 0); useFx(inst, t);
-        if (A.slide) { // sitting down onto it, turning round as it does
-          const p = clamp((t - A.slide.t0) / A.slide.dur, 0, 1), e = ease(p); g.position.lerpVectors(A.slide.from, A.pos, e);
-          let dy = A.yaw - A.slide.yaw0; dy = Math.atan2(Math.sin(dy), Math.cos(dy)); g.rotation.set(0, A.slide.yaw0 + dy * e, 0); if (p >= 1) A.slide = null;
-        }
+        IH.walk.slideBeat(g, A, t); // sitting down onto it, turning round as it does (pkg/walk.js)
         return;
       }
     } // the kid waves, a pet looks about
@@ -1942,34 +1938,14 @@
   // Starts using a thing: sits, lies, stands or plays at it (the spot and way round come from its USE entry).
   function useItem(inst, best, how = {}) {
     const A = inst.petAi, kid = inst.pet === 'kid', inUse = id => [...insts.values()].filter(o => o.petAi && o !== inst && o.petAi.use && o.petAi.use.id === id);
-    const u = best.def.use, ry = (best.rec.r || 0) * Math.PI / 2, c = best.group.position, rot = (x, z) => [x * Math.cos(ry) + z * Math.sin(ry), -x * Math.sin(ry) + z * Math.cos(ry)];
-    const depth = best.def.fp[1];
-    let lx = 0, lz = 0, yaw = ry, y = c.y + (u.h || 0), seat = 0;
-    if (u.kind === 'sit') {
-      const seats = u.seats || [0], taken = inUse(best.rec.id).map(o => o.petAi.use.seat); let sd = 1e9;
-      seats.forEach((sx, i) => { if (taken.includes(i)) return; const [wx, wz] = rot(sx, 0), dd = Math.hypot(c.x + wx - A.pos.x, c.z + wz - A.pos.z); if (dd < sd) { sd = dd; seat = i; } });
-      lx = seats[seat]; lz = kid ? -0.2 : 0.05; if (kid) y -= 0.41; // hips over the middle of the seat (they sit forward of the feet spot); phys.js settles them
-    } else if (u.kind === 'lie') {
-      // the character always lies in the middle of the bed, head on the pillow; a pet lies where it was let go,
-      // anywhere the character isn't (moved to the nearer side if it would be on them)
-      const w = best.def.fp[0], toL = (x, z) => [(x - c.x) * Math.cos(ry) - (z - c.z) * Math.sin(ry), (x - c.x) * Math.sin(ry) + (z - c.z) * Math.cos(ry)];
-      const KZ = [-depth / 2 + 1.05, -depth / 2 + 2.55], onKid = (x, z) => Math.abs(x) < 0.62 && z > KZ[0] && z < KZ[1], side = x => (x < 0 ? -1 : 1) * (w / 2 - 0.32);
-      if (kid) {
-        lx = 0; lz = -depth / 2 + 2.4; y -= 0.14; // half a tile (about 25 cm) down from the headboard
-        inst.floorY = c.y + u.h - 0.02; // the mattress: the body is kept on it, never in it
-        const pet = inUse(best.rec.id)[0]; // a pet already in the middle shuffles over
-        if (pet) { const P = pet.petAi.pos, [px, pz] = toL(P.x, P.z); if (onKid(px, pz)) { const [qx, qz] = rot(side(px), pz); P.set(c.x + qx, P.y, c.z + qz); pet.group.position.copy(P); } }
-      } else {
-        [lx, lz] = toL(A.pos.x, A.pos.z); lx = clamp(lx, -w / 2 + 0.32, w / 2 - 0.32); lz = clamp(lz, -depth / 2 + 0.4, depth / 2 - 0.4);
-        if (inUse(best.rec.id).length && onKid(lx, lz)) lx = side(lx);
-      }
-    }
-    else if (u.kind === 'nest') { [lx, lz] = u.at || [0, 0]; }
-    else if (u.kind === 'on') { /* on top, in the middle */ }
-    else { lz = depth / 2 + (u.gap || 0.6); yaw = ry + (u.face === 'away' ? 0 : Math.PI); y = c.y; }
-    const [wx, wz] = rot(lx, lz);
-    if (u.kind === 'front' && how.stay) { yaw = Math.atan2(c.x - A.pos.x, c.z - A.pos.z) + (u.face === 'away' ? Math.PI : 0); A.pos.y = IH.phys ? IH.phys.floorAt(A.pos.x, A.pos.z) : y; } // stays where it walked to, facing the thing
-    else A.pos.set(c.x + wx, y, c.z + wz);
+    const u = best.def.use, W = IH.walk, it = { group: best.group, def: best.def, yaw: (best.rec.r || 0) * Math.PI / 2 };
+    // where it goes on the thing (pkg/walk.js, shared with the classic islands)
+    const kidOn = !kid && u.kind === 'lie' && inUse(best.rec.id).length > 0; // (a pet keeps clear of whoever's in the bed)
+    const at = W.placeOn(it, A.pos, { kid, taken: inUse(best.rec.id).map(o => o.petAi.use.seat), stay: !!how.stay, kidThere: kidOn }), seat = at.seat, yaw = at.yaw;
+    if (at.floorY != null) inst.floorY = at.floorY; // the mattress: the body is kept on it, never in it
+    // (getting into bed: a pet already in the middle shuffles over)
+    if (kid && u.kind === 'lie') { const B = W.bedZone(it), c = best.group.position, pet = inUse(best.rec.id)[0]; if (pet) { const Q = pet.petAi.pos, [px, pz] = B.toL(Q.x, Q.z); if (B.onKid(px, pz)) { const [qx, qz] = [B.side(px) * Math.cos(it.yaw) + pz * Math.sin(it.yaw), -B.side(px) * Math.sin(it.yaw) + pz * Math.cos(it.yaw)]; Q.set(c.x + qx, Q.y, c.z + qz); pet.group.position.copy(Q); } } }
+    A.pos.set(at.x, at.y, at.z);
     A.yaw = yaw; A.path = [];
     const [d0, d1] = u.dur || [15, 30];
     A.task = null; A.doing = null;
@@ -1978,8 +1954,7 @@
     if (kid && u.kind === 'lie' && A.use.moves && A.use.moves.includes('liebed.covers')) { A.use.queue = ['liebed.covers']; A.use.nextMove = (lastT || 0) + 0.9; }
     if (u.on) { best.rec.on = true; }
     // the body fits itself to the thing (phys.js): sits into a seat against its back, or stands clear of it
-    inst.fit = { z: 0, y: 0, recline: 0 }; inst.fitMode = kid && u.kind === 'sit' && u.kid === 'sitchair' ? 'seat' : u.kind === 'front' ? 'clear' : null;
-    if (!kid && IH.phys && (u.kind === 'sit' || u.kind === 'nest')) { const s = IH.phys.support(A.pos.x, A.pos.y + 0.6, A.pos.z); if (s > -1e8) A.pos.y = s; } // a pet sits on the cushion itself
+    inst.fit = { z: 0, y: 0, recline: 0 }; inst.fitMode = at.fitMode;
     if (!how.stay) { inst.group.position.copy(A.pos); inst.group.rotation.set(0, yaw, 0); }
     if (u.fx === 'notes') sound('tune');
     return true;
@@ -2009,24 +1984,14 @@
     inst.floorY = null; inst.fitMode = null;
     const A = inst.petAi, was = A.use && insts.get(A.use.id); if (was && A.use.on) was.rec.on = false;
     if (was && inst.pet === 'kid') { const w = was.def.t; if (w === 'bed' || w === 'bunk') lifeState().messy.add(was.rec.id); if (w === 'kitchen' || w === 'stove') lifeState().dirty.add(was.rec.id); } // a chore for later
-    const u = was && was.def.use, P = IH.phys, cls = clsOf(inst);
+    const P = IH.phys, cls = clsOf(inst);
     if (A.use && A.use.watch) { const tv = insts.get(A.use.watch); if (tv) tv.rec.on = false; }
     const ate = A.use && A.use.eat, bathed = A.use && A.use.bath;
     A.use = null; A.slide = null; A.task = null; A.doing = null;
     if (!P) return;
-    // off a seat, a bed or a pet bed: steps down onto the floor in front (or beside), with room for the body
-    let sp = null;
-    if (was && u && ['sit', 'lie', 'nest', 'on'].includes(u.kind)) {
-      // a seat: off the front edge; a bed or anything else: off a side or the end, the nearest with room; never
-      // across a wall (a bed against the wall is got out of on the open side)
-      const [, rot] = rotOf(was), c = was.group.position, [w, d] = was.def.fp, me = { x: A.pos.x, z: A.pos.z };
-      const lx = (() => { const ry = (was.rec.r || 0) * Math.PI / 2, dx = A.pos.x - c.x, dz = A.pos.z - c.z; return dx * Math.cos(ry) - dz * Math.sin(ry); })();
-      const cand = u.kind === 'sit' ? [[lx, d / 2 + 0.5]] : [[-(w / 2 + 0.45), 0], [w / 2 + 0.45, 0], [lx, d / 2 + 0.5], [lx, -(d / 2 + 0.5)]];
-      let bd = 1e9;
-      for (const [x, z] of cand) { const [fx, fz] = rot(x, z), q = P.nearestClear(c.x + fx, c.z + fz, cls); if (!q || !P.wallFree(me, q) || Math.hypot(q.x - c.x - fx, q.z - c.z - fz) > 0.8) continue; const dd = Math.hypot(q.x - me.x, q.z - me.z); if (dd < bd) { bd = dd; sp = q; } }
-    }
-    if (!sp) { const q = P.nearestClear(A.pos.x, A.pos.z, cls); if (q && P.wallFree(A.pos, q)) sp = q; } if (!sp) return;
-    A.path = [sp]; A.st = 'walk'; A.free = true; A.wantYaw = null; A.until = (lastT || 0) + 1.5;
+    // off a seat, a bed or a pet bed: steps down onto the floor in front (or beside), with room for the body (pkg/walk.js)
+    const sp = IH.walk.getOff(was && { group: was.group, def: was.def, yaw: (was.rec.r || 0) * Math.PI / 2 }, A, cls, others(inst)); if (!sp) return;
+    A.path = [sp]; A.st = 'walk'; A.free = true; A.stuck = 0; A.wantYaw = null; A.until = (lastT || 0) + 1.5;
     if (ate) A.afterMeal = true; // the plate, once it's up
     if (bathed) A.afterBath = true; // the plug, the towel
   }
