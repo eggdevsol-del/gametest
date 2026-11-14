@@ -1634,39 +1634,10 @@
       // about-face is a tight U-turn while walking, or (no room for that) a shuffle round on the spot. The last stretch
       // goes straight to the spot so it arrives exactly.
       const speed = inst.pet === 'bunny' ? 1.0 : inst.pet === 'kid' ? 1.2 : 1.3, turnR = inst.pet === 'kid' ? 0.22 : inst.pet === 'bunny' ? 0.24 : 0.32;
-      while (A.path.length > 1 && Math.hypot(A.path[0].x - A.pos.x, A.path[0].z - A.pos.z) < 0.28) A.path.shift(); // (passed close by: on to the next)
-      let rest = 0, ax = A.pos.x, az = A.pos.z; for (const q of A.path) { rest += Math.hypot(q.x - ax, q.z - az); ax = q.x; az = q.z; }
-      const look = (dist) => { let px = A.pos.x, pz = A.pos.z, left = dist; for (const q of A.path) { const L = Math.hypot(q.x - px, q.z - pz); if (L >= left) return { x: px + (q.x - px) / L * left, z: pz + (q.z - pz) / L * left }; left -= L; px = q.x; pz = q.z; } return { x: px, z: pz }; };
-      const wp = A.path[0], final = A.path.length === 1 && rest < 0.45;
-      // the point it heads for: half a tile along the route, pulled in closer until there's a clear straight line to
-      // it (so it never cuts a corner into a door frame or a table), at worst the route's next point
-      let aim = wp; if (!final && !(A.task && A.task.straight)) for (const L of [0.5, 0.35, 0.22]) { const q = look(L); if (P.sees(A.pos, q, cls) && P.wallFree(A.pos, q)) { aim = q; break; } }
-      const adx = aim.x - A.pos.x, adz = aim.z - A.pos.z;
-      const want = Math.atan2(adx, adz), off = Math.atan2(Math.sin(want - A.yaw), Math.cos(want - A.yaw)), aoff = Math.abs(off);
-      const room = P.clearance(A.pos.x, A.pos.z, cls), cramped = room < R + 0.12;
-      // slows into a bend; past about 70 degrees (or no room to swing round) it turns where it stands, feet stepping, so it
-      // can never circle round a point inside its turning circle
-      let v = speed * (final ? Math.max(0.35, Math.min(1, rest / 0.45)) : 1) * (aoff > 1.2 || (aoff > 0.9 && cramped) ? 0 : Math.pow(Math.cos(aoff), 1.5));
-      const wmax = Math.min(5.5, Math.max(2.6, v / turnR)), dyaw = Math.max(-wmax * dt, Math.min(wmax * dt, off)); A.yaw = Math.atan2(Math.sin(A.yaw + dyaw), Math.cos(A.yaw + dyaw));
-      let sp = v * dt, nx, nz;
-      if (final) { const d = Math.hypot(wp.x - A.pos.x, wp.z - A.pos.z); if (d <= sp || d < 0.01) { nx = wp.x; nz = wp.z; A.path.shift(); } else { const k = sp / d; nx = A.pos.x + (wp.x - A.pos.x) * k; nz = A.pos.z + (wp.z - A.pos.z) * k; } } // the last bit: straight onto the spot
-      else { nx = A.pos.x + Math.sin(A.yaw) * sp; nz = A.pos.z + Math.cos(A.yaw) * sp; } // forward, the way it's facing
-      for (const o of others(inst)) { const ox = nx - o.x, oz = nz - o.z, od = Math.hypot(ox, oz), m = o.r + R; if (od < m && od > 1e-4) { const k = (m - od) * 0.5; nx += ox / od * k; nz += oz / od * k; } }
-      if (A.free && !P.wallFree(A.pos, { x: nx, z: nz })) { nx = A.pos.x; nz = A.pos.z; A.path = []; } // even stepping off a seat, never through a wall
-      if (!A.free) {
-        const c0 = P.clearance(A.pos.x, A.pos.z, cls), ok = (x, z) => { const c = P.clearance(x, z, cls); return c >= R * 0.97 || c >= c0 - 0.002; }; // (squeezed in somewhere: any move that's no tighter is allowed, so it's never stuck)
-        if (!ok(nx, nz)) { if (ok(nx, A.pos.z)) nz = A.pos.z; else if (ok(A.pos.x, nz)) nx = A.pos.x; else { nx = A.pos.x; nz = A.pos.z; } }
-        if (Math.hypot(nx - A.pos.x, nz - A.pos.z) < sp * 0.3) A.stuck = (A.stuck || 0) + dt; else A.stuck = 0;
-      }
-      // on the floor; getting off a bed or seat it walks across the top and steps down at the edge (never through it)
-      const gy = A.free ? Math.max(P.floorAt(nx, nz), P.support(nx, A.pos.y + 0.3, nz)) : P.floorAt(nx, nz);
-      inst.walkD = (inst.walkD || 0) + Math.hypot(nx - A.pos.x, nz - A.pos.z); // ground covered: the feet step in time with it
-      A.pos.x = nx; A.pos.z = nz; A.pos.y = gy > A.pos.y ? gy : A.pos.y + (gy - A.pos.y) * Math.min(1, dt * 10);
+      inst.walkD = (inst.walkD || 0) + IH.walk.stride(A, { P, cls, R, speed, turnR, dt, others: others(inst), straight: !!(A.task && A.task.straight) }); // (pkg/walk.js: the one walking step every game shares) ground covered: the feet step in time with it
       inst.room = P.clearance(A.pos.x, A.pos.z, cls); // in a tight spot the arms swing less (kid3d)
       g.position.copy(A.pos); g.rotation.set(0, A.yaw, 0); // (placed first: the feet are planted against where the body is now)
       poseOf(inst, 'walk', t, A.ph);
-      if (A.stuck > 0.5 && A.task && A.path.length === 1 && Math.hypot(A.path[0].x - A.pos.x, A.path[0].z - A.pos.z) < 0.4) A.path = []; // close enough (someone's in the exact spot)
-      if (A.stuck > 1.2 && A.path.length) { const end = A.path[A.path.length - 1], np = P.route(A.pos, end, cls); A.stuck = 0; if (np) A.path = np; else A.path = []; } // blocked (someone in the way): finds another way
       if (!A.path.length) {
         A.free = false;
         if (A.afterMeal) { A.afterMeal = false; afterMeal(inst, t); }

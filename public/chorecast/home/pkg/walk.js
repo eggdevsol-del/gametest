@@ -19,6 +19,44 @@
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v)), ease = p => (p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2);
   const wrapA = a => Math.atan2(Math.sin(a), Math.cos(a));
 
+  // ---- One beat of walking along a route (A.path), shared by every game that moves bodies: the classic islands
+  // (world() below) and the homes game (app.js petStep). A: { pos (Vector3), yaw, path, stuck, free, task }.
+  // o: { P (phys.js), cls, R (body radius), speed, turnR, dt, others [{ x, z, r }], straight (no corner cutting),
+  //   ground(x, z) (the floor; phys.js's by default) }. Moves A along and returns the ground covered.
+  //   · heads for a point half a tile along the route, pulled in until there's a clear straight line to it
+  //   · walks forward the way it faces, turning only as tightly as its turning circle lets it; slows into bends and
+  //     turns on the spot when a bend is too sharp or there's no room to swing round; the last stretch goes straight
+  //   · bodies push apart; it slides along whatever it brushes, never into it; stepping off a seat it keeps to the top
+  //     and never goes through a wall; blocked for a moment, it finds another way
+  function stride(A, o) {
+    const P = o.P, cls = o.cls, R = o.R, dt = o.dt;
+    while (A.path.length > 1 && Math.hypot(A.path[0].x - A.pos.x, A.path[0].z - A.pos.z) < 0.28) A.path.shift(); // (passed close by: on to the next)
+    let rest = 0, ax = A.pos.x, az = A.pos.z; for (const q of A.path) { rest += Math.hypot(q.x - ax, q.z - az); ax = q.x; az = q.z; }
+    const look = dist => { let px = A.pos.x, pz = A.pos.z, left = dist; for (const q of A.path) { const L = Math.hypot(q.x - px, q.z - pz); if (L >= left) return { x: px + (q.x - px) / L * left, z: pz + (q.z - pz) / L * left }; left -= L; px = q.x; pz = q.z; } return { x: px, z: pz }; };
+    const wp = A.path[0], final = A.path.length === 1 && rest < 0.45;
+    let aim = wp; if (!final && !o.straight) for (const L of [0.5, 0.35, 0.22]) { const q = look(L); if (P.sees(A.pos, q, cls) && P.wallFree(A.pos, q)) { aim = q; break; } }
+    const want = Math.atan2(aim.x - A.pos.x, aim.z - A.pos.z), off = wrapA(want - A.yaw), aoff = Math.abs(off);
+    const cramped = P.clearance(A.pos.x, A.pos.z, cls) < R + 0.12;
+    const v = o.speed * (final ? Math.max(0.35, Math.min(1, rest / 0.45)) : 1) * (aoff > 1.2 || (aoff > 0.9 && cramped) ? 0 : Math.pow(Math.cos(aoff), 1.5));
+    const wmax = Math.min(5.5, Math.max(2.6, v / o.turnR)); A.yaw = wrapA(A.yaw + clamp(off, -wmax * dt, wmax * dt));
+    const sp = v * dt; let nx, nz;
+    if (final) { const d = Math.hypot(wp.x - A.pos.x, wp.z - A.pos.z); if (d <= sp || d < 0.01) { nx = wp.x; nz = wp.z; A.path.shift(); } else { nx = A.pos.x + (wp.x - A.pos.x) * sp / d; nz = A.pos.z + (wp.z - A.pos.z) * sp / d; } }
+    else { nx = A.pos.x + Math.sin(A.yaw) * sp; nz = A.pos.z + Math.cos(A.yaw) * sp; }
+    for (const q of o.others || []) { const ox = nx - q.x, oz = nz - q.z, od = Math.hypot(ox, oz), m = q.r + R; if (od < m && od > 1e-4) { const k = (m - od) * 0.5; nx += ox / od * k; nz += oz / od * k; } }
+    if (A.free && !P.wallFree(A.pos, { x: nx, z: nz })) { nx = A.pos.x; nz = A.pos.z; A.path = []; } // even stepping off a seat, never through a wall
+    if (!A.free) {
+      const c0 = P.clearance(A.pos.x, A.pos.z, cls), ok = (x, z) => { const c = P.clearance(x, z, cls); return c >= R * 0.97 || c >= c0 - 0.002; }; // (squeezed in: any move no tighter is fine, so it's never stuck)
+      if (!ok(nx, nz)) { if (ok(nx, A.pos.z)) nz = A.pos.z; else if (ok(A.pos.x, nz)) nx = A.pos.x; else { nx = A.pos.x; nz = A.pos.z; } }
+      if (Math.hypot(nx - A.pos.x, nz - A.pos.z) < sp * 0.3) A.stuck = (A.stuck || 0) + dt; else A.stuck = 0;
+    }
+    const fl = o.ground || P.floorAt, gy = A.free ? Math.max(fl(nx, nz), P.support(nx, A.pos.y + 0.3, nz)) : fl(nx, nz);
+    const d = Math.hypot(nx - A.pos.x, nz - A.pos.z);
+    A.pos.x = nx; A.pos.z = nz; A.pos.y = gy > A.pos.y ? gy : A.pos.y + (gy - A.pos.y) * Math.min(1, dt * 10);
+    if (A.stuck > 0.5 && A.task && A.path.length === 1 && Math.hypot(A.path[0].x - A.pos.x, A.path[0].z - A.pos.z) < 0.4) A.path = []; // close enough (someone's in the exact spot)
+    if (A.stuck > 1.2 && A.path.length) { const end = A.path[A.path.length - 1], np = P.route(A.pos, end, cls); A.stuck = 0; A.path = np || []; } // blocked: finds another way
+    return d;
+  }
+
   function world(o) {
     const P = IH.phys, group = new T.Group(), wraps = new Map(), items = [], bodies = [];
     // body sizes besides the kid and a pet: a cow or a horse, and a hen or a crab
@@ -111,33 +149,11 @@
         g.position.copy(A.pos); g.rotation.set(0, A.yaw, 0); pose(b, U.pose, t); return;
       }
       if (A.st === 'walk' && A.path.length) {
-        const turnR = b.pk.turnR, speed = b.pk.speed;
-        while (A.path.length > 1 && Math.hypot(A.path[0].x - A.pos.x, A.path[0].z - A.pos.z) < 0.28) A.path.shift(); // (passed close by: on to the next)
-        let rest = 0, ax = A.pos.x, az = A.pos.z; for (const q of A.path) { rest += Math.hypot(q.x - ax, q.z - az); ax = q.x; az = q.z; }
-        const look = dist => { let px = A.pos.x, pz = A.pos.z, left = dist; for (const q of A.path) { const L = Math.hypot(q.x - px, q.z - pz); if (L >= left) return { x: px + (q.x - px) / L * left, z: pz + (q.z - pz) / L * left }; left -= L; px = q.x; pz = q.z; } return { x: px, z: pz }; };
-        const wp = A.path[0], final = A.path.length === 1 && rest < 0.45;
-        // heads for a point half a tile along the route, pulled in until there's a clear straight line to it
-        let aim = wp; if (!final) for (const L of [0.5, 0.35, 0.22]) { const q = look(L); if (P_.sees(A.pos, q, b.cls)) { aim = q; break; } }
-        const want = Math.atan2(aim.x - A.pos.x, aim.z - A.pos.z), off = wrapA(want - A.yaw), aoff = Math.abs(off);
-        const room = P_.clearance(A.pos.x, A.pos.z, b.cls), cramped = room < R + 0.12;
-        const v = speed * (final ? Math.max(0.35, Math.min(1, rest / 0.45)) : 1) * (aoff > 1.2 || (aoff > 0.9 && cramped) ? 0 : Math.pow(Math.cos(aoff), 1.5));
-        const wmax = Math.min(5.5, Math.max(2.6, v / turnR)); A.yaw = wrapA(A.yaw + clamp(off, -wmax * dt, wmax * dt));
-        const sp = v * dt; let nx, nz;
-        if (final) { const d = Math.hypot(wp.x - A.pos.x, wp.z - A.pos.z); if (d <= sp || d < 0.01) { nx = wp.x; nz = wp.z; A.path.shift(); } else { nx = A.pos.x + (wp.x - A.pos.x) * sp / d; nz = A.pos.z + (wp.z - A.pos.z) * sp / d; } }
-        else { nx = A.pos.x + Math.sin(A.yaw) * sp; nz = A.pos.z + Math.cos(A.yaw) * sp; }
-        for (const q of others(b)) { const ox = nx - q.x, oz = nz - q.z, od = Math.hypot(ox, oz), m = q.r + R; if (od < m && od > 1e-4) { const k = (m - od) * 0.5; nx += ox / od * k; nz += oz / od * k; } } // bodies push apart
-        const c0 = P_.clearance(A.pos.x, A.pos.z, b.cls), ok = (x, z) => { const c = P_.clearance(x, z, b.cls); return c >= R * 0.97 || c >= c0 - 0.002; }; // (squeezed in: any move no tighter is fine, so it's never stuck)
-        if (!ok(nx, nz)) { if (ok(nx, A.pos.z)) nz = A.pos.z; else if (ok(A.pos.x, nz)) nx = A.pos.x; else { nx = A.pos.x; nz = A.pos.z; } } // slides along what it brushes
-        if (Math.hypot(nx - A.pos.x, nz - A.pos.z) < sp * 0.3) A.stuck += dt; else A.stuck = 0;
-        const gy = Math.max(0, o.floorAt(nx, nz));
-        inst.walkD = (inst.walkD || 0) + Math.hypot(nx - A.pos.x, nz - A.pos.z); // ground covered: the feet step in time with it
-        A.pos.x = nx; A.pos.z = nz; A.pos.y += (gy - A.pos.y) * Math.min(1, dt * 12);
+        inst.walkD = (inst.walkD || 0) + stride(A, { P: P_, cls: b.cls, R, speed: b.pk.speed, turnR: b.pk.turnR, dt, others: others(b), ground: (x, z) => Math.max(0, o.floorAt(x, z)) }); // ground covered: the feet step in time with it
         inst.room = P_.clearance(A.pos.x, A.pos.z, b.cls);
         g.position.copy(A.pos); g.rotation.set(0, A.yaw, 0);
         inst.focus = kid ? new T.Vector3(A.pos.x + Math.sin(A.yaw) * 3, A.pos.y + 1.4, A.pos.z + Math.cos(A.yaw) * 3) : null;
         pose(b, 'walk', t);
-        if (A.stuck > 0.5 && A.task && A.path.length === 1 && Math.hypot(A.path[0].x - A.pos.x, A.path[0].z - A.pos.z) < 0.4) A.path = []; // close enough
-        if (A.stuck > 1.2 && A.path.length) { const end = A.path[A.path.length - 1], np = P_.route(A.pos, end, b.cls); A.stuck = 0; A.path = np || []; } // blocked: finds another way
         if (!A.path.length) {
           const tk = A.task; A.task = null;
           if (tk && tk.sit) return sitDown(b, tk.it, tk.i, t);
@@ -166,5 +182,5 @@
     const W = { group, add, put, spot, tick, end, bodies, items, go, chooseSeat }; IH.walk.last = W; // (the latest world, for checking from the console)
     return W;
   }
-  IH.walk = { world };
+  IH.walk = { world, stride };
 })();
