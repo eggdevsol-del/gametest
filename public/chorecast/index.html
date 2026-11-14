@@ -1298,6 +1298,7 @@ body.st-open #app{opacity:0;pointer-events:none}
 /* The homes game covers the whole screen: the painted sky and the page under it stop drawing, so a phone isn't
    painting the sky, the glass panels and the 3D cards behind the farm every frame */
 body.ih-open #sky{display:none}
+body.ih-open.ih-classicsky #sky{display:block} /* (the round island: the app's own sky behind the engine, as the original Chorecast) */
 body.ih-open #app{visibility:hidden}
 .home-isle{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
 .isle .home-isle{left:30%}
@@ -4914,7 +4915,7 @@ const HomesGame = (() => {
     const isl = k.island || {}, land = isl.land || {}, bought = {}; if (isl.farm || land.farm) bought.farm = 1; for (const key of Object.keys(land)) if (key !== 'farm' && land[key]) bought[key] = 1;
     const ok = H.open({
       kid: who(k), xp: () => xpOf(Store.kids[id] || k, { noHomes: true }), bought: o.studioOnly ? null : bought, infused: infusedOn() && !o.studioOnly ? Infused.bridge(id) : null, studioOnly: !!o.studioOnly,
-      round: { size: Math.max(0, Math.min(4, (isl.size | 0))) }, // (the original Chorecast's round island, as big as the kid has made it)
+      round: { size: Math.max(0, Math.min(4, (isl.size | 0))) }, skyOff: true, // (the original Chorecast's round island, as big as the kid has made it)
       // growing the island (Wider shores, Big island…): one size at a time, paid in XP like the island shop did, so the
       // family's server checks it the same way. The engine checks its own wallet first (it counts home spending too).
       grow: {
@@ -8089,7 +8090,7 @@ window.Chorecast = { Infused, Store, UI, S, Sound, FX, G3, Studio, IslandHome, P
   // 3D mission does), and where its view sits for this screen and tab, so moving between them slides the scenery past
   // in depth, near trees more than the far mountain. Tabs further along the bar move the view right, as if paging
   // through them (the scenery slides left), which also keeps the near-left tree out from behind the page's text.
-  skyBusy: () => !!Stage.active || document.body.classList.contains('ih-open'), // (the homes game covers the sky: it stops drawing)
+  skyBusy: () => !!Stage.active || (document.body.classList.contains('ih-open') && !document.body.classList.contains('ih-classicsky')), // (the homes game covers the sky: it stops drawing)
   skyPan: () => {
     if (Studio.covers) return [0, 0];
     if (document.body.classList.contains('gw-open')) return [0.4, 0.12];

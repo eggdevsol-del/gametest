@@ -430,3 +430,4 @@ body.ih-open{overflow:hidden}
 .ih-isle[hidden]{display:none}
 .ih.editing .ih-isle{display:none}
 .ih.ih-away > .ih-isle:not([hidden]){display:block!important;z-index:40}
+.ih.ih-skyoff{background:transparent}

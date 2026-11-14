@@ -56,7 +56,7 @@
 
   function renderer() {
     if (R) return R;
-    R = new T.WebGLRenderer({ antialias: false, alpha: false, powerPreference: 'high-performance' });
+    R = new T.WebGLRenderer({ antialias: false, alpha: true, powerPreference: 'high-performance' }); // (alpha: the page's own sky can show behind, IH.skyOff)
     R.shadowMap.enabled = true; R.shadowMap.type = T.PCFShadowMap; R.shadowMap.autoUpdate = false;
     R.outputEncoding = T.LinearEncoding; R.toneMapping = T.NoToneMapping; R.autoClear = false;
     R.domElement.className = 'ih-cv';
@@ -3312,10 +3312,11 @@
     const kid = opts.kid || { id: 'demo', name: 'Ari' }, st = store.load(kid.id);
     if (opts.round) st.round = { size: opts.round.size | 0 }; else if (opts.round === false) delete st.round; // (the classic island, round, this big)
     if (st.look && !st.look.fr24) { st.look.fr24 = 1; if (st.look.frames === 'twos') st.look.frames = 'ones'; } // (24 frames a second is the default now, 2026-11-10)
+    IH.skyOff = !!opts.skyOff; // (the app's own sky behind the island, as the original Chorecast's: the engine draws no sky of its own)
     O = { opts, kid, st, S: makeScene(), mount: opts.mount || document.body, editing: false, held: null, cat: null };
     O.markOk = new T.MeshBasicMaterial({ color: 0x7be08c, transparent: true, opacity: 0.55, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
     O.markNo = new T.MeshBasicMaterial({ color: 0xff6b6b, transparent: true, opacity: 0.6, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
-    O.root = skeleton(opts); O.cv = R.domElement; O.root.prepend(O.cv); O.mount.appendChild(O.root);
+    O.root = skeleton(opts); O.root.classList.toggle('ih-skyoff', IH.skyOff); O.cv = R.domElement; O.root.prepend(O.cv); O.mount.appendChild(O.root);
     if (opts.mount && opts.mount !== document.body) O.root.classList.add('inline');
     O.cv.addEventListener('pointerdown', onDown); O.cv.addEventListener('pointermove', onMove); O.cv.addEventListener('pointerup', onUp); O.cv.addEventListener('pointercancel', onUp);
     O.cv.addEventListener('wheel', O.wheel = e => { if (O.away) return; e.preventDefault(); setZoom(CAM.zoom * Math.exp(-e.deltaY * 0.0015)); }, { passive: false });
@@ -3356,8 +3357,8 @@
     // Infused (a prototype): the chores and lessons inside the game (infused.js), when the app turns it on
     if (opts.infused && IH.infused) IH.infused.start({ root: O.root, st: () => O.st, save, toast, sound, phone: ap => phone(ap),
       closeUp: () => { if (!O || O.away) return; const k = insts.get(KID); if (k) CAM.target.set(k.group.position.x, k.group.position.y + 1, k.group.position.z); setZoom(3.6); } }, opts.infused);
-    { const me = O; setTimeout(() => { if (O === me && !O.away && !IH.portraitOf(kid.id)) keepPortrait(); }, 2500); } // (the chores screen's picture of this home, the first time)
-    document.body.classList.add('ih-open');
+    { const me = O; setTimeout(() => { if (O === me && !O.away && (!IH.portraitOf(kid.id) || (O.st.round && !O.st.roundPic))) { keepPortrait(); if (O.st.round) { O.st.roundPic = 1; save(); } } }, 2500); } // (the chores screen's picture of this home, the first time)
+    document.body.classList.add('ih-open'); document.body.classList.toggle('ih-classicsky', IH.skyOff);
     // Islands bought in the older island game (the app's kid.island, passed in as opts.bought): the kid's here too, free.
     // (that purchase lives with the kid on the server; this game's own record is on the device, so a kid who bought the
     // farm before, or opens their home on a new device, still has it)
@@ -3395,7 +3396,7 @@
     for (const id of [...insts.keys()]) dropInst(id);
     o.home.root.traverse(m => { if (m.isMesh) m.geometry.dispose(); });
     o.root.remove(); O = null; if (raf) cancelAnimationFrame(raf); raf = 0;
-    document.body.classList.remove('ih-open');
+    document.body.classList.remove('ih-open', 'ih-classicsky');
     if (!quiet && o.opts.onClose) o.opts.onClose();
   }
 

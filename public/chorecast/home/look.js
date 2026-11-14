@@ -458,7 +458,7 @@ void main() {
     uniform sampler2D tC; uniform sampler2D tD; uniform sampler2D tN;
     uniform vec2 uRes; uniform float uDpr; uniform float uPx; uniform float uRange; uniform float uInkOn; uniform vec3 uInk;
     uniform vec3 uTop; uniform vec3 uMid; uniform vec3 uBot; uniform vec3 uCloud; uniform vec3 uCloudSh;
-    uniform float uStars; uniform vec2 uSun; uniform vec3 uSunC; uniform float uT; uniform float uBg;
+    uniform float uStars; uniform vec2 uSun; uniform vec3 uSunC; uniform float uT; uniform float uBg; uniform float uSkyOff;
     uniform float uGlowT; uniform float uGlowK; uniform float uVig;
     uniform float uFilm; uniform float uNear; uniform float uFar; uniform float uFocus;
     varying vec2 vUv;
@@ -567,10 +567,10 @@ void main() {
         col += (hash(vUv * uRes + fract(uT) * 91.0) - 0.5) * 0.022; // (grain)
       }
       if (uBg > 0.5) {
-        if (c.a < 0.999) col += sky(vUv) * (1.0 - c.a); // the sky behind the island: its colours for the time of day, drifting clouds, the sun, stars at night
+        if (uSkyOff < 0.5 && c.a < 0.999) col += sky(vUv) * (1.0 - c.a); // the sky behind the island: its colours for the time of day, drifting clouds, the sun, stars at night
         vec2 q = vUv - 0.5;
         col *= 1.0 - uVig * dot(q, q) * 1.6;
-        gl_FragColor = vec4(col, 1.0);
+        gl_FragColor = vec4(col, uSkyOff > 0.5 ? clamp(c.a + dot(col, vec3(0.333)) * (1.0 - c.a), 0.0, 1.0) : 1.0); // (sky off: see-through where there's only sky, the page's own sky behind, its sun's glow kept)
       } else {
         gl_FragColor = vec4(c.a > 0.001 ? col / c.a : vec3(0.0), c.a);
       }
@@ -612,7 +612,7 @@ void main() {
         tC: { value: this.rtC.texture }, tD: { value: this.dt }, tN: { value: this.rtN.texture },
         uRes: { value: new T.Vector2(1, 1) }, uDpr: { value: 1 }, uPx: { value: 1 }, uRange: { value: 100 }, uInkOn: { value: 1 }, uInk: { value: new T.Vector3(0.35, 0.3, 0.42) },
         uTop: { value: col('#4f9cf0') }, uMid: { value: col('#9ccdf7') }, uBot: { value: col('#e8f5ff') }, uCloud: { value: col('#fff') }, uCloudSh: { value: col('#bccdee') },
-        uStars: { value: 0 }, uSun: { value: new T.Vector2(0.8, 0.85) }, uSunC: { value: new T.Vector3(1, 1, 1) }, uT: { value: 0 }, uBg: { value: 1 },
+        uStars: { value: 0 }, uSun: { value: new T.Vector2(0.8, 0.85) }, uSunC: { value: new T.Vector3(1, 1, 1) }, uT: { value: 0 }, uBg: { value: 1 }, uSkyOff: { value: 0 },
         uGlowT: { value: 0.9 }, uGlowK: { value: 0.2 }, uVig: { value: 0.22 }, uFilm: { value: 1 }, uNear: { value: 1 }, uFar: { value: 1000 }, uFocus: { value: 90 }
       };
       this.fsScene = new T.Scene(); this.fsCam = new T.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -642,7 +642,7 @@ void main() {
     }
     _render(scene, cam, target = null, keepShadow = false) {
       const r = this.r, u = this.u;
-      u.uRange.value = cam.far - cam.near; u.uNear.value = cam.near; u.uFar.value = cam.far; u.uFilm.value = this.film === false ? 0 : 1; u.uFocus.value = this.focus || 90; u.uInkOn.value = this.ink ? 1 : 0; u.uBg.value = this.bg ? 1 : 0;
+      u.uRange.value = cam.far - cam.near; u.uNear.value = cam.near; u.uFar.value = cam.far; u.uFilm.value = this.film === false ? 0 : 1; u.uFocus.value = this.focus || 90; u.uInkOn.value = this.ink ? 1 : 0; u.uBg.value = this.bg ? 1 : 0; u.uSkyOff.value = this.bg && IH.skyOff ? 1 : 0;
       const clr = r.getClearColor(new T.Color()), ca = r.getClearAlpha();
       cam.layers.enableAll();
       if (!keepShadow) r.shadowMap.needsUpdate = true;
