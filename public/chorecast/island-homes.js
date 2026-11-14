@@ -53,7 +53,7 @@ window.ChorecastIslandHomes = K => {
   // ---------- an animal (or pet) that the island walks about
   function animalBuilder(t, orig) {
     return g => {
-      if (!ready() || (ANIMAL[t] && !IH().animals3d.has(ANIMAL[t]))) return orig(g);
+      if (API.thumb || !ready() || (ANIMAL[t] && !IH().animals3d.has(ANIMAL[t]))) return orig(g);
       // (each island draws at most a dozen animated animals, set by index.html as it builds the island: the rest keep the
       // island's own lighter model, so a busy island, or a screen of them, stays smooth)
       if (API.budget != null) { if (API.budget <= 0) return orig(g); API.budget--; }

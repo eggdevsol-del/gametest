@@ -2900,6 +2900,7 @@ const Farm = (() => {
 })();
 
 const LEVELS = [{ at: 0, name: 'Starter island' }, { at: 500, name: 'Growing island' }, { at: 2000, name: 'Busy island' }, { at: 5000, name: 'Big island' }, { at: 10000, name: 'Grand island' }]; // (saving milestones that open more of the shop; the house is each kid's Cosy Studio, which they build onto)
+let XH_THUMB = null; // (island-homes.js: shop pictures use the island's own models)
 const G3 = (() => {
   const T = window.THREE, api = { ok: false, sync() {}, coins() {}, poke() {} };
   if (!T) return api;
@@ -3681,6 +3682,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
   // island-homes.js: the homes game's animals, pets, garden things and characters in place of the island's own, once
   // the homes game's files are loaded (HomesGame.load); until then, the island's own models
   const XH = window.ChorecastIslandHomes ? window.ChorecastIslandHomes({ T, mat, GRAD, ITEM, pull: id => HomeSync.pull(id) }) : null;
+  XH_THUMB = XH ? on => { XH.thumb = on; } : null;
   // The waterfall: a spring bubbling up among rocks, a stream down its channel (ripples drifting downstream), and the
   // falls spilling over the edge, streaked white, curling over the lip and thinning into mist as they drop into the sky.
   const FALL_F = `uniform float uTime; uniform vec3 uA, uB; varying vec2 vUv;
@@ -4270,7 +4272,9 @@ const Studio = (() => {
     const need = list.filter(it => THUMBS[it.t] === undefined); if (!need.length) return;
     if (!TR) { try { const r = new T.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true }); r.setPixelRatio(1); r.setSize(140, 140); r.setClearColor(0, 0); r.outputEncoding = T.sRGBEncoding; r.toneMapping = T.NoToneMapping; const sc = new T.Scene(), c = new T.PerspectiveCamera(30, 1, 0.01, 20), dl = new T.DirectionalLight(0xffffff, 0.8); dl.position.set(-1, 2, 2); sc.environment = G3.envFor(r); sc.add(new T.HemisphereLight(0xd8ecff, 0x8a7a5a, 0.7), dl); TR = { r, sc, c }; } catch (e) { return; } }
     const { r, sc, c } = TR;
+    if (XH_THUMB) XH_THUMB(true); // (shop pictures in the island's own drawings: a homes animal's file can still be loading)
     for (const it of need) { const m = G3.item(it.t); if (!m) { THUMBS[it.t] = ''; continue; } sc.add(m); const b = new T.Box3().setFromObject(m), ctr = b.getCenter(new T.Vector3()), d = b.getSize(new T.Vector3()).length(); c.position.set(ctr.x + d * 0.75, ctr.y + d * 0.55, ctr.z + d * 1.25); c.lookAt(ctr); G3.inkFor(r); r.render(sc, c); THUMBS[it.t] = r.domElement.toDataURL('image/png'); sc.remove(m); m.traverse(o => o.geometry && o.geometry.dispose()); }
+    if (XH_THUMB) XH_THUMB(false);
   }
   function down(e) { if (fly) return; try { R.domElement.setPointerCapture(e.pointerId); } catch (err) {} ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY }); if (ptrs.size === 1) moved = 0; if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch0 = Math.hypot(a.x - b.x, a.y - b.y); rad0 = rad; moved = 99; } idle = 0; Sound.ensure(); }
   function move(e) {
@@ -4851,7 +4855,7 @@ const Studio = (() => {
     root.classList.add('st-fly', 'st-clear'); root.classList.toggle('st-far', !src); if (!src) root.classList.add('st-pre');
     if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
   }
-  return { get open() { return S0.open; }, get covers() { return S0.open && !S0.leaving; }, get doing() { return S0.brain ? S0.brain.doing : S0.play ? S0.play.k : ''; }, show: open, close, act, farmAct, refresh: () => { if (S0.open && !S0.play) build(); } };
+  return { get open() { return S0.open; }, get covers() { return S0.open && !S0.leaving; }, get doing() { return S0.brain ? S0.brain.doing : S0.play ? S0.play.k : ''; }, show: open, close, act, farmAct, refresh: () => { if (S0.open && !S0.play) build(); if (S0.open) ui(); } };
 })();
 
 /* The homes game (home/*.js, 2026-11-10): tapping a kid's island opens their home, the village, Beach cove and the
