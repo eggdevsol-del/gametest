@@ -3191,6 +3191,9 @@
     if (a === 'zout') return setZoom(CAM.zoom / 1.3);
     if (a === 'turnL') return turnView(-1);
     if (a === 'turnR') return turnView(1);
+    // on the round island, building can also mean growing the island itself (the app's island sizes)
+    if (a === 'buildOn' && O.st.round && O.opts.grow && !(el && el.dataset.v === 'rooms')) { const n = O.opts.grow.next(); actsClose(); return sheet(`<div class="ih-ask"><h3>Build</h3><p>Add a room to your house, or make the whole island bigger.</p>${n ? `<p><b>🏝️ ${esc(n.name)} · ✨ ${nf(n.xp)}</b><br>${esc(n.about || 'A bigger island.')}</p>` : '<p>Your island is as big as it grows.</p>'}<div class="ih-row"><button class="ih-b2" data-a="buildOn" data-v="rooms">🧱 Build on a room</button>${n ? '<button class="ih-b1" data-a="growIsland">🏝️ Grow the island</button>' : ''}</div><div class="ih-row"><button class="ih-b2" data-a="sheetX">Not now</button></div></div>`, 'small'); }
+    if (a === 'growIsland') { const n = O.opts.grow.next(); if (!n) return closeSheet(); if (wallet().left < n.xp) { toast(`You need ✨ ${nf(n.xp)} XP for ${n.name}. Finish a mission or a lesson to earn more.`); sound('no'); return; } const sz = O.opts.grow.buy(); if (!sz) return; O.st.round.size = sz; save(); closeSheet(); loadHome(); ui(true); force = true; sound('buy'); toast(`Your island grew! ${n.about || ''}`); return; }
     if (a === 'buildOn') { actsClose(); closeSheet(); if (O.held) cancelHeld(); O.editing = false; ui(); return startBuildOn(); }
     if (a === 'decorate') { actsClose(); if (O.held) placeHeld(); if (O.held) return; O.editing = !O.editing; if (O.editing && !O.cat) O.cat = DEFS.some(d => spare(d.t) > 0) ? 'mine' : 'furn'; sound(O.editing ? 'lift' : 'place'); return ui(); }
     if (a === 'cat') { O.cat = el.dataset.c; return ui(); }
@@ -3325,6 +3328,21 @@
       const back = Math.max(0, isl + Math.max(0, inv - wage)); st.classicRefund = { at: Date.now(), xp: back };
       if (back > 0) { st.spent = Math.max(0, (st.spent || 0) - back); led('wallet', back, 'Back from the homes game: its islands and farm', slipOf('CHORECAST', 'Refund', [['The homes game’s islands and farm', back]], [['Back in your wallet', back, 'big']])); setTimeout(() => toast(`✨ ${nf(back)} XP is back in your wallet: what you spent on the homes game’s islands and farm.`), 2500); }
       save();
+    }
+    // The original Chorecast island's things (opts.classic: what the kid bought there), the first time its round island
+    // opens in the engine: each one the engine has goes into Mine, to set down anywhere; one bought with XP that it
+    // doesn't have comes back as XP, with a line on the statement. (Ones bought with real money and with no match stay
+    // with the kid's island record, untouched, for a grown-up to decide on.)
+    if (opts.round && opts.classic && !st.classicMoved) {
+      const MAP = { puppy: 'puppy', kitten: 'cat', bunny: 'bunny', trampoline: 'trampoline', bench: 'bench', picnic: 'picnic', lamp: 'lamppost', telescope: 'telescope', letterbox: 'letterbox', mower: 'mower', kennel: 'kennel', sandpit: 'sandpit', paddling: 'pool', birdbath: 'birdbath', cactus: 'cactus' };
+      let moved = 0, back = 0; const lines = [];
+      for (const c of opts.classic.items || []) {
+        const t = MAP[c.t]; if (t && BY[t]) { st.owned[t] = (st.owned[t] || 0) + 1; const b = (st.box = st.box || {}); (b[t] = b[t] || []).unshift({}); moved++; continue; }
+        if (c.xp > 0) { back += c.xp; lines.push([c.name || c.t, c.xp]); }
+      }
+      st.classicMoved = { at: Date.now(), moved, xp: back };
+      if (back > 0) { st.spent = (st.spent || 0) - back; led('wallet', back, 'Back from your old island: things the new one doesn’t have', slipOf('CHORECAST', 'Refund', lines.slice(0, 12), [['Back in your wallet', back, 'big']])); }
+      save(); if (moved || back) setTimeout(() => toast(`${moved ? `${moved} thing${moved > 1 ? 's' : ''} from your old island ${moved > 1 ? 'are' : 'is'} in Mine.` : ''}${back ? ` ✨ ${back} XP back for the rest.` : ''}`), 2500);
     }
     // opened from the classic island (its Cosy Studio): straight in close on the house
     if (opts.studioOnly) setTimeout(() => { if (O && !O.away && O.home) { const d = O.home.def; CAM.target.set(d.w / 2, FY + 1, d.d / 2); setZoom(2.2); } }, 300);

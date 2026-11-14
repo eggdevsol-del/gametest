@@ -4915,6 +4915,15 @@ const HomesGame = (() => {
     const ok = H.open({
       kid: who(k), xp: () => xpOf(Store.kids[id] || k, { noHomes: true }), bought: o.studioOnly ? null : bought, infused: infusedOn() && !o.studioOnly ? Infused.bridge(id) : null, studioOnly: !!o.studioOnly,
       round: { size: Math.max(0, Math.min(4, (isl.size | 0))) }, // (the original Chorecast's round island, as big as the kid has made it)
+      // growing the island (Wider shores, Big island…): one size at a time, paid in XP like the island shop did, so the
+      // family's server checks it the same way. The engine checks its own wallet first (it counts home spending too).
+      grow: {
+        next: () => { const kk = Store.kids[id] || k, n = ((kk.island || {}).size || 0) + 1, d = (window.ChorecastCatalog.items || []).find(x => x.size === n); return d && planAllows('item', d.t) ? { name: d.name, xp: d.xp, about: d.about, size: n } : null; },
+        buy: () => { const kk = Store.kids[id] || k, is2 = { items: [], xpSpent: 0, ...(kk.island || {}) }, n = (is2.size || 0) + 1, d = (window.ChorecastCatalog.items || []).find(x => x.size === n); if (!d) return false;
+          is2.xpSpent = (is2.xpSpent || 0) + d.xp; is2.sizes = { ...(is2.sizes || {}), [n]: { xp: d.xp } }; is2.size = n;
+          updDoc('kids', kk.id, { island: is2, ledger: pushLedger(kk, { kind: 'xp', amt: 0, xp: -d.xp, memo: `Island shop: ${d.name}` }) }); track('island.expand', { what: 'size' + n, from: 'homes' }, kk.id); return n; } },
+      // what the kid bought on the original island: the engine moves the ones it has into Mine, and gives XP back for the rest (once)
+      classic: { items: (isl.items || []).map(x => { const c = (window.ChorecastCatalog.items || []).find(i => i.t === x.t) || {}; return { t: x.t, xp: x.cash ? 0 : x.xp || 0, name: c.name }; }) },
       // its money world (home/landmarks.js): the Vault pond, the windmill, the Spend coins, the rainbow, the flag, a tree per paid job
       money: () => { const kk = Store.kids[id] || k, P = islandParams(kk), j = kk.jars || {}; return { save: (j.save || 0) / 100, invest: P.mill ? 1 : 0, spend: (j.spend || 0) / 100, jobs: P.trees, done: P.rainbow, hue: kk.hue, trees: ['round', 'cherry', 'fruit', 'pine'] }; },
       family: () => Object.values(Store.kids).filter(x => !x.example && !x.archived).map(who),
