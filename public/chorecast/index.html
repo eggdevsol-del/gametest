@@ -2497,13 +2497,13 @@ const levelOf = kid => (unlockedAll(kid) ? LEVELS.length - 1 : LEVELS.reduce((a,
 function islandParams(kid) {
   const j = kid.jars || {}, p = kidProgress(kid, dkey());
   const isl = kid.island || {};
-  return { seed: hash(kid.id), hue: kid.hue, avatar: kid.avatar, name: kid.name, level: levelOf(kid), size: isl.size || 0, land: Object.keys(isl.land || {}).filter(x => x !== 'farm'), lookKeys: lookKeys(kid), treeAt: isl.treeAt || null, treeType: isl.treeType || null, ready: Farm.readyIcons(kid),
+  return { kidId: kid.id, seed: hash(kid.id), hue: kid.hue, avatar: kid.avatar, name: kid.name, level: levelOf(kid), size: isl.size || 0, land: Object.keys(isl.land || {}).filter(x => x !== 'farm'), lookKeys: lookKeys(kid), treeAt: isl.treeAt || null, treeType: isl.treeType || null, ready: Farm.readyIcons(kid),
     trees: Math.min(8 + (RULES.sizeTrees || 4) * (isl.size || 0), jobsList().filter(x => x.kidId === kid.id && x.status === 'approved' && x.tier !== 'bonus').length),
     skills: (() => { const g = (Store.growth || {})[kid.id] || {}; return Math.min(24, Object.values(g.done || {}).filter(d => d.best >= 0.8).length); })(), marks: Object.keys(((Store.growth || {})[kid.id] || {}).mile || {}).sort(),
     pond: Math.round(clamp((j.save || 0) / 5000, 0, 1) * 10) / 10, mill: holdingsValue(kid) > 0, coins: Math.min(6, Math.ceil((j.spend || 0) / 300)), rainbow: p.total > 0 && p.done >= p.total, night: phaseNow() === 'night', wx: wxNow().key, care: Object.fromEntries(Object.entries(careOf(kid)).map(([q, v]) => [q, Math.round(v * 10) / 10])), farm: !!(kid.island || {}).farm, look: lookOf(kid), items: ((kid.island || {}).items || []).map(i => ({ id: i.id, t: i.t, x: i.x, z: i.z, r: i.r, zone: i.zone, isle: i.isle, lobe: i.lobe, lu: i.lu, lv: i.lv, tint: i.tint, v: i.v })) };
 }
 const islandSig = kid => { const p = islandParams(kid); delete p.seed; return hash(JSON.stringify(p)).toString(36); };
-function islandCaption(kid) { const i = levelOf(kid), next = LEVELS[i + 1]; return { name: LEVELS[i].name, lvl: i + 1, next: next ? `${fmt(next.at - netWorth(kid))} more builds a ${next.name.toLowerCase()}` : 'You built the castle!' }; }
+function islandCaption(kid) { const i = levelOf(kid), next = LEVELS[i + 1]; return { name: LEVELS[i].name, lvl: i + 1, next: next ? `${fmt(next.at - netWorth(kid))} more makes it a ${next.name.toLowerCase()}` : 'A grand island: the whole shop is yours!' }; }
 
 /* Pay */
 const QUALITY = { 1: 0.8, 2: 1, 3: 1.1 };
@@ -2899,7 +2899,7 @@ const Farm = (() => {
   return { on, cap, pantryMax, TOOL, VERB, ready, readyIcons, pantry, counts, price, saturday, earnedToday, room, logDay, pay, report, orders, canMake, waters, catchOf, bugOf, setProgress };
 })();
 
-const LEVELS = [{ at: 0, name: 'Camp tent' }, { at: 500, name: 'Little hut' }, { at: 2000, name: 'Cottage' }, { at: 5000, name: 'Big house' }, { at: 10000, name: 'Castle' }];
+const LEVELS = [{ at: 0, name: 'Starter island' }, { at: 500, name: 'Growing island' }, { at: 2000, name: 'Busy island' }, { at: 5000, name: 'Big island' }, { at: 10000, name: 'Grand island' }]; // (saving milestones that open more of the shop; the house is each kid's Cosy Studio, which they build onto)
 const G3 = (() => {
   const T = window.THREE, api = { ok: false, sync() {}, coins() {}, poke() {} };
   if (!T) return api;
@@ -3444,7 +3444,8 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
       u.pond = waterSheet(g, pd.x, pd.z, pd.r * 1.32 + 0.1, top - 0.018, (x, z) => ground(x, z) + 0.018, { night: k.night, clear: true, dirty: Math.round(pm * 10) / 10, deepAt: 0.07, shallow: 0x6fcfb8, deep: 0x1d6a8f, edge: 0.012, foam: 0.006 });
       u.pondLeaves = []; for (let i = 0; i < Math.floor(pm * 6); i++) { const a = i * 2.4, d = pd.r * 0.25 * ((i % 3) + 1); u.pondLeaves.push(add(g, new T.CylinderGeometry(0.025, 0.025, 0.004, 6), mat(0x8a6a2a), pd.x + Math.cos(a) * d, top - 0.015, pd.z + Math.sin(a) * d)); }
     }
-    const h = house(k.level, k.hue, k.night, Math.min(1, cm('house') * 0.85), k.look || {}, keys); h.position.set(0.05, top, -0.22); g.add(h); u.walls = h.userData.walls; u.flame = h.userData.flame;
+    // the kid's Cosy Studio is their house (island-homes.js), once the homes game has loaded; the island's own house until then
+    const h = (XH && XH.house(k)) || house(k.level, k.hue, k.night, Math.min(1, cm('house') * 0.85), k.look || {}, keys); h.position.set(0.05, top, -0.22); g.add(h); u.walls = h.userData.walls; u.flame = h.userData.flame; if (h.userData.studio) u.house = h;
     // A chore tree for every paid job. Bigger islands add a ring of spots near the new edge (clear of the path, the
     // waterfall and the grove's bridge). The tree spade moves a tree (treeAt) or gives it a type (treeType).
     const okSpot = (x, z) => !pd || pondD(pd, x, z) > pd.r + 0.1, far = (a, b) => Math.abs(Math.atan2(Math.sin(a - b), Math.cos(a - b))) > 0.22;
@@ -4278,6 +4279,7 @@ const Studio = (() => {
       const fn = S0.place; S0.place = null; return fn(p.x, p.z, x, y, res);
     }
     if (S0.kidM && !S0.play && ray.intersectObject(S0.kidM, true).length) return farmAct('play');
+    if (island.userData.house && S0.isle === 'home' && ray.intersectObject(island.userData.house, true).length) { Sound.pop(); return HomesGame.show(kidId, { studioOnly: true }); } // (inside the Cosy Studio)
     const hits = ray.intersectObjects(island.userData.items || [], true);
     if (hits.length) { let o = hits[0].object; while (o && !o.userData.itemId) o = o.parent; if (o) { o.userData.hopAt = performance.now() / 1000; Sound.pop(); S0.sel = o.userData.itemId; S0.tree = null; S0.confirm = null; return ui(); } }
     const th = ray.intersectObjects(island.userData.trees || [], true);
@@ -4597,7 +4599,7 @@ const Studio = (() => {
     } else if (S0.lk) {
       const { part, k: key } = S0.lk, id = `${part}:${key}`, d = key ? lookDef(id) : null, own = (k.island || {}).owned || {}, mine = !key || own[id] || (d && d.prize && unlockedAll(k)), inUse = part !== 'tree' && (((k.island || {}).look || {})[part] || '') === key, G = window.Growth || null;
       const partName = part === 'tree' ? 'chore tree' : ((LOOKS.find(p => p.k === part) || {}).name || part).toLowerCase(), name = d ? d.name : `${NONE_PARTS.includes(part) ? 'No' : 'Original'} ${partName}`;
-      const tentNote = !lvl && (part === 'wall' || part === 'door' || part === 'shutter' || part === 'windowbox' || part === 'wallart') ? ' Your tent has no walls or door yet, so this shows once you build a little hut.' : '', lvlNote = d && d.lvl && lvl < d.lvl ? ` It needs a ${LEVELS[d.lvl].name.toLowerCase()}.` : '', guideNote = part === 'outfit' ? ' Your guide wears it in Character Growth.' : '';
+      const tentNote = '' /* (the house is the Cosy Studio now: walls and a door from the start) */, lvlNote = d && d.lvl && lvl < d.lvl ? ` It needs a ${LEVELS[d.lvl].name.toLowerCase()}.` : '', guideNote = part === 'outfit' ? ' Your guide wears it in Character Growth.' : '';
       const plusLook = !mine && d && !planAllows('look', id);
       const acts = inUse ? '<button class="st-btn ghost" data-act="stLookOff">Done</button>' : plusLook ? '<button class="st-btn ghost" data-act="stLookOff">Done</button>' : mine ? (part === 'tree' ? '<button class="st-btn ghost" data-act="stLookOff">Got it</button>' : `<button class="st-btn primary" data-act="stLookUse">Use it</button><button class="st-btn ghost" data-act="stLookOff">Cancel</button>`) : d.prize ? '<button class="st-btn ghost" data-act="stLookOff">Cancel</button>' : `<button class="st-btn primary" data-act="stLookXp" ${xp.left < d.xp || lvlNote ? 'disabled' : ''}>${ic('sparkle')} ${d.xp.toLocaleString()} XP</button>${allowCash ? `<button class="st-btn" data-act="stLookCash" ${cash < d.cash || lvlNote ? 'disabled' : ''}>${fmt(d.cash)}</button>` : ''}<button class="st-btn ghost" data-act="stLookOff">Cancel</button>`;
       const about = plusLook ? `Here’s how it would look. ${plusTag()} This comes with Chorecast Plus.` : part === 'tree' ? (mine ? 'Yours. With the tree spade, tap a chore tree and pick this type.' : 'Buy it once, then give it to as many chore trees as you like with the tree spade.') : inUse ? 'This is what your island uses now.' : mine ? 'Have a look, then tap Use it to keep it.' : d.prize ? `🎁 A Character Growth prize. ${esc(G && G.prizeHint ? G.prizeHint(k, id) : '')}` : 'Here’s how it would look. Buy it once, and you can switch back to it whenever you like.';
@@ -4864,19 +4866,19 @@ const HomesGame = (() => {
     loading = Promise.all(FILES.map(f => one(`home/${f}.js`))).catch(e => { loading = null; throw e; });
     return loading;
   }
-  async function show(id) {
+  async function show(id, o = {}) {
     const k = Store.kids[id]; if (!k) return;
-    toast('Opening your home…');
+    toast(o.studioOnly ? 'Into your studio…' : 'Opening your home…');
     try { await load(); } catch (e) { return toast('Your home couldn’t load. Check the internet and try again.'); }
     const H = window.IsoHome; if (!H || !H.open) return toast('Your home couldn’t load.');
     const who = x => ({ id: x.id, name: x.name, avatar: x.avatar, hue: x.hue });
     // islands bought in the older island game (kid.island, kept with the kid): the homes game gives them free
     const isl = k.island || {}, land = isl.land || {}, bought = {}; if (isl.farm || land.farm) bought.farm = 1; for (const key of Object.keys(land)) if (key !== 'farm' && land[key]) bought[key] = 1;
     const ok = H.open({
-      kid: who(k), xp: () => xpOf(Store.kids[id] || k), bought, infused: infusedOn() ? Infused.bridge(id) : null,
+      kid: who(k), xp: () => xpOf(Store.kids[id] || k), bought: o.studioOnly ? null : bought, infused: infusedOn() && !o.studioOnly ? Infused.bridge(id) : null, studioOnly: !!o.studioOnly,
       family: () => Object.values(Store.kids).filter(x => !x.example && !x.archived).map(who),
       track: (t, p) => track(t, p, id),
-      onClose: () => { if (infusedOn()) { Infused.stop(); UI.screen = 'who'; } render(); }
+      onClose: () => { if (o.studioOnly) { try { G3.refresh && G3.refresh(); Studio.refresh(); } catch (e) { /* */ } return; } if (infusedOn()) { Infused.stop(); UI.screen = 'who'; } render(); } // (back out to the island, its studio drawn as it's now done up)
     });
     if (!ok) toast('Your home needs a newer browser to show.');
   }

@@ -127,6 +127,8 @@ window.ChorecastCatalog = {"version":2,"cats":[["jobs","Island jobs"],["stand","
 {"t":"kunekune","name":"Kunekune pig","cat":"farm","xp":350,"cash":280,"farm":true,"makes":
 {"k":"truffle","n":1,"every":2}},
 {"t":"turkey","name":"Turkey","cat":"farm","xp":450,"cash":360,"farm":true},
+{"t":"goose","name":"Goose","cat":"farm","xp":400,"cash":320,"farm":true,"makes":{"k":"egg","n":1,"every":2,"tool":"basket"},"about":"Guards the paddock with a honk, and lays a big egg every second day."},
+{"t":"highland","name":"Highland cow","cat":"farm","xp":800,"cash":640,"farm":true,"about":"Shaggy, gentle and happy outside in any weather."},
 {"t":"donkey","name":"Donkey","cat":"farm","xp":600,"cash":480,"farm":true,"about":"Carries your produce to town: one extra order on the orders board every day."},
 {"t":"llama","name":"Llama","cat":"farm","xp":700,"cash":560,"farm":true,"makes":
 {"k":"wool","n":2,"every":3,"tool":"shears"}},

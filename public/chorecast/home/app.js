@@ -2535,6 +2535,7 @@
   // (the language islands are free to visit: lang-islands.js)
   const islandsOwned = () => Object.assign({}, O.st.islands || {}, IH.langIslands ? IH.langIslands.FREE : {});
   function travelTo(where) {
+    if (O && O.opts.studioOnly && where !== 'home') { toast('This is your studio. Close it to go back out to your island.'); return; }
     if (where !== 'home' && where !== 'village' && !isleOpen(where)) { toast('That island is closed for now.'); return; }
     if (where === 'home') { if (O.away && IH.village) IH.village.leave(); return; }
     if (O.away) { if (IH.village) IH.village.goto(where); return; }
@@ -2730,6 +2731,7 @@
   // Off to the village (village.js): the home stops (its drawing, its taps) and the village draws through the same
   // canvas and pipeline. Back home: in through the gate, which swings shut behind.
   function travel(where = 'village') {
+    if (O && O.opts.studioOnly) { toast('This is your studio. Close it to go back out to your island.'); const G0 = O.home && O.home.gate; if (G0) G0.set(0); return; }
     const G = O && O.home && O.home.gate; if (!G) return;
     if (!IH.village) { toast('The village is still being built.'); G.set(0); return; }
     const env = IH.phys ? IH.phys.env : null, k = insts.get(KID);
@@ -3272,6 +3274,8 @@
     if (O.st.stall && O.st.stall.length) { for (const r of O.st.stall) { O.st.owned[r.t] = (O.st.owned[r.t] || 0) + 1; toBox(r); } O.st.stall = []; save(); } // (left on a stall: back in Mine)
     size(); loadHome(); applyLook(); CAM.intro = { a: 0.62, b: 1, t0: 0 }; lastT = null; beat.reset();
     ui(); force = true; if (!raf) raf = requestAnimationFrame(loop);
+    // opened from the classic island (its Cosy Studio): straight in close on the house
+    if (opts.studioOnly) setTimeout(() => { if (O && !O.away && O.home) { const d = O.home.def; CAM.target.set(d.w / 2, FY + 1, d.d / 2); setZoom(2.2); } }, 300);
     // Infused (a prototype): the chores and lessons inside the game (infused.js), when the app turns it on
     if (opts.infused && IH.infused) IH.infused.start({ root: O.root, st: () => O.st, save, toast, sound, phone: ap => phone(ap),
       closeUp: () => { if (!O || O.away) return; const k = insts.get(KID); if (k) CAM.target.set(k.group.position.x, k.group.position.y + 1, k.group.position.z); setZoom(3.6); } }, opts.infused);
@@ -3459,6 +3463,25 @@
       h.root.traverse(m => { if (m.isMesh) m.geometry.dispose(); });
     } catch (e) { console.warn('home picture', e); return ''; }
     return keepPic(id, url);
+  };
+  // The kid's studio as the house on their classic island (index.html's island, through island-homes.js): their own
+  // home as they've done it up (its floors, walls, door and windows), walls up all round and a hipped roof in the
+  // home's own roof colour, with no garden of its own (the island is its garden). Built from the save, game closed.
+  IH.islandHouse = (id, o = {}) => {
+    if (!T) return null;
+    const st = store.load(id); if (!st || !HB[st.cur]) return null;
+    const cfg = homeCfg(st); cfg.plot = { l: 0, t: 0, r: 0, b: 0, ground: (cfg.plot && cfg.plot.ground) || 'grass' }; cfg.trees = []; cfg.setting = 'none';
+    let h; try { h = buildHome(cfg); } catch (e) { console.warn('island house', e); return null; }
+    for (const sd of Object.keys(h.sides)) { const S = h.sides[sd]; if (!S.outer) continue; S.full.visible = true; S.stub.visible = false; if (S.beams) S.beams.visible = false; }
+    for (const w of h.inner) { w.tall.visible = true; w.low.visible = false; }
+    h.setYaw = () => {};
+    const W = cfg.w, D = cfg.d, over = 0.35, top = FY + H, rise = Math.min(W, D) * 0.42, x0 = -over, x1 = W + over, z0 = -over, z1 = D + over, rz = D / 2, rx0 = Math.min(W / 2, D / 2), rx1 = W - rx0;
+    const pos = [x0, top, z0, x1, top, z0, x1, top, z1, x0, top, z1, rx0, top + rise, rz, rx1, top + rise, rz];
+    const idx = [0, 4, 1, 1, 4, 5, 3, 2, 5, 3, 5, 4, 0, 3, 4, 1, 5, 2];
+    const rg = new T.BufferGeometry(); rg.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); rg.setIndex(idx); rg.computeVertexNormals();
+    const cap = o.roof || (cfg.ext && cfg.ext.cap) || '#a8705a', roof = new T.Mesh(rg, new T.MeshLambertMaterial({ color: new T.Color(cap), side: T.DoubleSide }));
+    const g = new T.Group(); g.add(h.root, roof);
+    return { group: g, w: W, d: D, door: cfg.door, def: cfg };
   };
   IH.portraitOf = id => { try { return localStorage.getItem(picKey(id)) || ''; } catch (e) { return ''; } };
   IH.snapObj = (obj, w = 240, h = 200, pitch = 0.5, pad = 1.12) => O ? snap(obj, w, h, pitch, pad) : ''; // (the model audit sheet renders through the thumbnail camera)

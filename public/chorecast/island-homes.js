@@ -128,5 +128,14 @@ window.ChorecastIslandHomes = K => {
   const isIn = (o, p) => { for (let q = o; q; q = q.parent) if (q === p) return true; return false; };
   const start = () => { if (!raf) raf = requestAnimationFrame(loop); };
   start();
-  return { ready, dress, ANIMAL, PET, THING, NEW_H, islandLook, active: () => KIDS.size };
+  // ---------- the Cosy Studio as the island's house: the kid's own studio, walls up and a roof on, where the house stood
+  // (the island keeps clear a patch about 0.9 wide and 0.74 deep for it); null until the homes game has loaded
+  function house(k) {
+    if (!ready() || !IH().islandHouse || !k || !k.kidId) return null;
+    const H0 = IH().islandHouse(k.kidId, { roof: k.look && k.look.roof != null ? '#' + new T.Color(k.look.roof).getHexString() : null }); if (!H0) return null;
+    const s = Math.min(0.9 / H0.w, 0.7 / H0.d), holder = new T.Group(); holder.add(H0.group); H0.group.scale.setScalar(s); H0.group.position.set(-H0.w / 2 * s, 0, -H0.d / 2 * s);
+    islandLook(H0.group); holder.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+    Object.assign(holder.userData, { walls: [], studio: true, smokeAt: null }); return holder;
+  }
+  return { ready, dress, house, ANIMAL, PET, THING, NEW_H, islandLook, active: () => KIDS.size };
 };
