@@ -563,7 +563,9 @@
     lawnColours(U, spec.phase);
     // Real blades only where their shape shows: thick along the lawn's edges (the island's rim, paths, the house) and
     // a light scatter over the rest for tufts and movement. The body of the lawn is the shells (below).
-    const lawnSet = new Set(cells.map(c => key(c.x, c.z))), edge = c => [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([a, b]) => !lawnSet.has(key(c.x + a, c.z + b)));
+    // (a round island: a tile beside the rim isn't an edge, the rim gets its own ring of tufts below, along the circle)
+    const lawnSet = new Set(cells.map(c => key(c.x, c.z))), RO = spec.round, inRing = (x, z) => !RO || Math.hypot(x + 0.5 - RO.cx, z + 0.5 - RO.cz) < RO.r - 0.45;
+    const edge = c => [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([a, b]) => !lawnSet.has(key(c.x + a, c.z + b)) && inRing(c.x + a, c.z + b));
     const per = c => spec.per(edge(c)), mat = new T.ShaderMaterial({ uniforms: U, vertexShader: LAWN_V, fragmentShader: LAWN_F, side: T.DoubleSide, lights: true });
     // every blade placed in the same order as always (the same seeded numbers), then dealt into pieces of CH by CH
     // tiles when the lawn's big (the islands' lawns): a piece that's off screen isn't drawn at all
@@ -573,6 +575,15 @@
       d.position.set(x, 0.004, z); d.rotation.set((R() - 0.5) * 0.3, R() * 6.28, (R() - 0.5) * 0.3); d.scale.set(0.8 + R() * 0.5, 0.65 + R() * 0.7, 1); d.updateMatrix();
       const v = 0.82 + R() * 0.3; col.setRGB(v * (0.96 + R() * 0.08), v, v * (0.9 + R() * 0.1));
       const gk = CH ? Math.floor(c.x / CH) + ',' + Math.floor(c.z / CH) : '0'; if (!groups.has(gk)) groups.set(gk, []); groups.get(gk).push({ m: d.matrix.clone(), c: col.clone(), x, z, cell: key(c.x, c.z) });
+    }
+    // the round island's rim: tufts all the way round the circle, each counted with the nearest lawn tile (for mowing)
+    if (RO) for (let k = 0, n = Math.round(2 * Math.PI * RO.r * 70); k < n; k++) {
+      const a = R() * Math.PI * 2, rr = RO.r - 0.06 - R() * R() * 0.5, x = RO.cx + Math.cos(a) * rr, z = RO.cz + Math.sin(a) * rr;
+      let c = null; for (let t = 0; t < 2.5 && !c; t += 0.5) { const k2 = key(Math.floor(RO.cx + Math.cos(a) * (rr - t)), Math.floor(RO.cz + Math.sin(a) * (rr - t))); if (lawnSet.has(k2)) c = k2; }
+      if (!c) continue; const [cx2, cz2] = c.split(',').map(Number);
+      d.position.set(x, 0.004, z); d.rotation.set((R() - 0.5) * 0.3, R() * 6.28, (R() - 0.5) * 0.3); d.scale.set(0.8 + R() * 0.5, 0.65 + R() * 0.7, 1); d.updateMatrix();
+      const v = 0.82 + R() * 0.3; col.setRGB(v * (0.96 + R() * 0.08), v, v * (0.9 + R() * 0.1));
+      const gk = CH ? Math.floor(cx2 / CH) + ',' + Math.floor(cz2 / CH) : '0'; if (!groups.has(gk)) groups.set(gk, []); groups.get(gk).push({ m: d.matrix.clone(), c: col.clone(), x, z, cell: c });
     }
     if (!groups.size) groups.set('0', []);
     const pieces = [...groups.values()].map(list => {
@@ -2576,7 +2587,13 @@
   // (the language islands are free to visit: lang-islands.js)
   const islandsOwned = () => Object.assign({}, O.st.islands || {}, IH.langIslands ? IH.langIslands.FREE : {});
   // home, then each island the kid owns (no language islands on the round island), in the Travel list's order
-  const isleRing = () => { const own = islandsOwned(); return ['home', ...(IH.islandsBuild ? IH.islandsBuild.LIST.filter(i => own[i.id] && i.built && isleOpen(i.id) && i.kind !== 'language' && !LAND_NOW[i.id]).map(i => i.id) : [])]; };
+  // (on the round island every land island is in the ring: one the kid doesn't own yet offers itself for sale)
+  const isleRing = () => { const own = islandsOwned(), all = !!O.st.round; return ['home', ...(IH.islandsBuild ? IH.islandsBuild.LIST.filter(i => (own[i.id] || all) && i.built && isleOpen(i.id) && i.kind !== 'language' && !LAND_NOW[i.id]).map(i => i.id) : [])]; };
+  function isleOffer(id) {
+    const i = IH.islandsBuild.LIST.find(q => q.id === id), w = wallet(), ok = w.left >= i.xp; O.isleAt = id;
+    sheet(`<div class="ih-ask"><h3>${i.emoji} The ${esc(i.name.toLowerCase())}</h3><p>${esc(i.about)}</p><p>It isn’t yours yet. ${ok ? `Buy it for ✨ ${nf(i.xp)} XP and sail over?` : `It costs ✨ ${nf(i.xp)} XP. You have ✨ ${nf(w.left)}.`}</p>
+      <div class="ih-row"><button class="ih-b2" data-a="sheetX">Not now</button>${ok ? `<button class="ih-b1" data-a="isBuy" data-w="${i.id}" data-go="1">Buy it · ✨ ${nf(i.xp)}</button>` : ''}</div></div>`, 'small');
+  }
   function isleArrows() { if (!O || !O.root) return; const on = !!O.st.round && isleRing().length > 1; for (const b of O.root.querySelectorAll('.ih-isle')) b.hidden = !on; }
   function travelTo(where) {
     if (O && O.opts.studioOnly && where !== 'home') { toast('This is your studio. Close it to go back out to your island.'); return; }
@@ -3205,8 +3222,8 @@
     if (a === 'phone') { sound('pop'); return phone('home'); }
     if (a === 'goTo') { closeSheet(); return travelTo(el.dataset.w); }
     // the original Chorecast's arrows: round the kid's islands, home first
-    if (a === 'isleStep') { const L = isleRing(), here = O.away ? (IH.village && IH.village.where()) : 'home', i = Math.max(0, L.indexOf(here)), to = L[(i + +el.dataset.v + L.length) % L.length]; sound('move'); return travelTo(to); }
-    if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || !isleOpen(i.id) || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); if (IH.infused && IH.infused.on) setTimeout(() => IH.infused.unlocked(i.name, 'island'), 2500); return phone('travel'); }
+    if (a === 'isleStep') { const L = isleRing(), offer = !$('.ih-sheet', O.root).hidden && O.isleAt, here = offer || (O.away ? (IH.village && IH.village.where()) : 'home'), i = Math.max(0, L.indexOf(here)), to = L[(i + +el.dataset.v + L.length) % L.length]; sound('move'); if (to !== 'home' && !islandsOwned()[to]) return isleOffer(to); $('.ih-sheet', O.root).hidden = true; return travelTo(to); }
+    if (a === 'isBuy') { const i = IH.islandsBuild && IH.islandsBuild.LIST.find(q => q.id === el.dataset.w); if (!i || !i.built || !isleOpen(i.id) || islandsOwned()[i.id]) return; if (wallet().left < i.xp) return toast(`You need ✨ ${nf(i.xp)} XP for the ${i.name.toLowerCase()}.`); wSpend(i.xp, `the ${i.name}`, 'CHORECAST ISLANDS'); (st.islands = st.islands || {})[i.id] = Date.now(); save(); sound('buy'); ui(true); if (O.opts.track) O.opts.track('island.bought', { id: i.id, xp: i.xp }); toast(`The ${i.name.toLowerCase()} is yours! ${i.emoji}`); if (IH.infused && IH.infused.on) setTimeout(() => IH.infused.unlocked(i.name, 'island'), 2500); if (el.dataset.go) { $('.ih-sheet', O.root).hidden = true; isleArrows(); return travelTo(i.id); } return phone('travel'); }
     if (a === 'qty') { setQty(el.dataset.q); const r = el.dataset.r || ''; if (r === 'produce') return produceSheet(); if (r.startsWith('counter:')) return counterSheet(r.slice(8)); if (r.startsWith('app:')) return phone(r.slice(4)); if (r.startsWith('buy:')) { const d = BY[r.slice(4)]; if (d) buyAsk(d); } return; }
     if (a === 'pSell') { const id = el.dataset.k, P = PRODUCE[id]; if (!P) return; const f = food(), g = goods(), n = qtyN(P.goods ? g[id] || 0 : f[id] || 0); if (!n) return; if (P.goods) g[id] -= n; else f[id] -= n; const pr = O.E ? O.E.price(P.price) : P.price; farmIn(pr * n, `sold ${n > 1 ? n + ' × ' + P.one : P.one} at the grocer`, [[n > 1 ? `${n} × ${cap(P.one)} at ✨ ${pr}` : cap(P.one), pr * n]]); save(); sound('buy'); ui(true); toast(`Sold ${n > 1 ? n + ' × ' + P.one : P.one}: ✨ ${pr * n} into your farm account.`); return produceSheet(); }
     if (a === 'app') { const ap = el.dataset.app; O.pick = null; if (ap === 'shop') { closeSheet(); return shopApp(); } if (ap === 'homes') { closeSheet(); return homesSheet(); } return phone(ap); }
