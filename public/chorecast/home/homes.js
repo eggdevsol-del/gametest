@@ -132,9 +132,11 @@
   function layout(def) {
     const cells = new Map(), edges = new Set(), walls = new Set(), rooms = def.rooms;
     rooms.forEach((r, i) => { for (let x = r.x; x < r.x + r.w; x++) for (let z = r.z; z < r.z + r.d; z++) cells.set(key(x, z), { x, z, zone: 'in', room: i, y: FY }); });
-    const P = def.plot;
-    for (let x = -P.l; x < def.w + P.r; x++) for (let z = -P.t; z < def.d + P.b; z++) {
+    const P = def.plot, RD = def.round; // (a round island, the original Chorecast's: the garden is every tile inside its circle)
+    const gx0 = RD ? Math.floor(RD.cx - RD.r) : -P.l, gx1 = RD ? Math.ceil(RD.cx + RD.r) : def.w + P.r, gz0 = RD ? Math.floor(RD.cz - RD.r) : -P.t, gz1 = RD ? Math.ceil(RD.cz + RD.r) : def.d + P.b;
+    for (let x = gx0; x < gx1; x++) for (let z = gz0; z < gz1; z++) {
       if (cells.has(key(x, z))) continue;
+      if (RD && Math.hypot(x + 0.5 - RD.cx, z + 0.5 - RD.cz) > RD.r - 0.45) continue;
       const deck = def.deck && z >= def.d && z < def.d + def.deck.depth && x >= 0 && x < def.w;
       cells.set(key(x, z), { x, z, zone: 'out', y: deck ? 0.3 : 0, deck });
     }
@@ -194,7 +196,23 @@
   }
 
   // ---- building the pieces
+  // The original Chorecast island: a round lawn on a round floating island, its cut-away edge in soil then rock,
+  // tapering to a point underneath, with stones and roots round the rim and rocks hanging below.
+  function roundPlot(def, k) {
+    const { r: R, cx, cz } = def.round, top = '#93d36b', lip = '#74b84f', soil = '#9a6a45', soil2 = '#7d5236', rock = '#8f8a99', rock2 = '#6f6a7d', n = 72;
+    k.cyl(R, 0.42, cx, -0.42, cz, top, { n });
+    k.cyl(R + 0.08, 0.16, cx, -0.52, cz, lip, { n });
+    // (profiles bottom to top, so the faces look out)
+    k.lathe([[R * 0.9, -2.15], [R * 0.95, -1.7], [R - 0.06, -1.05], [R + 0.04, -0.6], [R + 0.05, -0.36]], cx, 0, cz, soil, { n });
+    k.lathe([[0.02, -6.2], [R * 0.22, -5.4], [R * 0.45, -4.4], [R * 0.66, -3.4], [R * 0.82, -2.6], [R * 0.9, -2.15]], cx, 0, cz, rock, { n });
+    const Rg = rng(Math.round(R * 97));
+    for (let i = 0; i < Math.round(R * 7); i++) { const a = Rg() * Math.PI * 2, y = -0.8 - Rg() * 1.3, rr = (y < -1.5 ? R * 0.93 : R) + 0.02, s = 0.18 + Rg() * 0.3, c = y < -1.6 ? shade(rock, Rg() * 0.2 - 0.1) : shade(soil2, Rg() * 0.2 - 0.1); k.ball(s, cx + Math.cos(a) * rr, y, cz + Math.sin(a) * rr, c, { s: [1.2, 0.8, 1], n: 8 }); }
+    for (let i = 0; i < Math.round(R * 0.8); i++) { const a = Rg() * Math.PI * 2; k.cyl(0.04, 0.55, cx + Math.cos(a) * (R + 0.03), -1.25, cz + Math.sin(a) * (R + 0.03), '#6b4528', { rz: 0.4 - Rg() * 0.8, n: 5 }); }
+    for (let i = 0; i < 7; i++) { const a = i / 7 * Math.PI * 2, r0 = R * 0.45; k.cone(0.9 + Rg() * 0.9, 1.4 + Rg(), cx + Math.cos(a) * r0, -4.6 - Rg() * 0.6, cz + Math.sin(a) * r0, shade(rock2, -0.1 * Rg()), { rx: Math.PI, n: 7 }); }
+    return { x0: cx - R, z0: cz - R, x1: cx + R, z1: cz + R, round: { r: R, cx, cz } };
+  }
   function plot(def, k) {
+    if (def.round) return roundPlot(def, k);
     const P = def.plot, RG = def.setting === 'island' ? RING : 0, SW = def.setting === 'sidewalk' ? SIDEWALK : 0; // (an island home: a paved street ring round the garden; or a pavement along its front; the island that much bigger)
     const gx0 = -P.l, gz0 = -P.t, gx1 = def.w + P.r, gz1 = def.d + P.b, x0 = gx0 - RG, z0 = gz0 - RG, x1 = gx1 + RG, z1 = gz1 + RG + SW, W = x1 - x0, D = z1 - z0, cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
     const g = P.ground, top = g === 'balcony' ? '#cfcac1' : g === 'sand' ? '#f2dca3' : '#93d36b', lip = g === 'sand' ? '#e4c784' : '#74b84f', soil = '#9a6a45', soil2 = '#7d5236', rock = '#8f8a99', rock2 = '#6f6a7d';
@@ -248,7 +266,7 @@
     // a path of stepping stones from the front door to the edge
     const pathCells = new Set();
     const dx = def.door.at + 1, z0 = def.d + (def.deck ? def.deck.depth : 0);
-    for (let z = z0; z < def.d + P.b; z++) { pathCells.add(key(dx - 1, z)); pathCells.add(key(dx, z)); k.box(1.25, 0.08, 0.7, dx, -0.02, z + 0.5, sand ? '#d7c39a' : '#cfc8bd', { r: 0.12, ry: (R() - 0.5) * 0.3 }); }
+    for (let z = z0; def.round ? lay.cells.has(key(dx - 1, z)) && lay.cells.has(key(dx, z)) : z < def.d + P.b; z++) { pathCells.add(key(dx - 1, z)); pathCells.add(key(dx, z)); k.box(1.25, 0.08, 0.7, dx, -0.02, z + 0.5, sand ? '#d7c39a' : '#cfc8bd', { r: 0.12, ry: (R() - 0.5) * 0.3 }); }
     for (const c of lay.cells.values()) {
       if (c.zone !== 'out' || c.deck || pathCells.has(key(c.x, c.z))) continue;
       const n = sand ? (R() < 0.18 ? 1 : 0) : 4;

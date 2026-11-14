@@ -85,6 +85,7 @@
           for (const n of NAMES) {
             const p = this.p[n], o = this.o[n], r = this.r[n];
             if (bounds) { p.x = Math.max(bounds.x0 + r, Math.min(bounds.x1 - r, p.x)); p.z = Math.max(bounds.z0 + r, Math.min(bounds.z1 - r, p.z)); }
+            if (bounds && bounds.round) { const R0 = bounds.round, m = R0.r - r, d = Math.hypot(p.x - R0.cx, p.z - R0.cz); if (d > m) { p.x = R0.cx + (p.x - R0.cx) * m / d; p.z = R0.cz + (p.z - R0.cz) * m / d; } } // (a round island)
             const g = ground(p.x, p.y, p.z);
             if (p.y < g + r) { p.y = g + r; o.x += (p.x - o.x) * 0.35; o.z += (p.z - o.z) * 0.35; if (o.y < p.y) o.y = p.y - (o.y - p.y) * 0.25; } // on the ground: friction, a soft little bounce
           }

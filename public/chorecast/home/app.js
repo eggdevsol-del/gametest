@@ -544,7 +544,7 @@
     if (!O.home.grass || !O.home.grass.length) return null;
     const home = O.home, cells = [], P = home.def.plot, df = home.def;
     for (const c of home.cells.values()) if (c.zone === 'out' && !c.deck && !(home.path && home.path.has(key(c.x, c.z)))) cells.push(c);
-    return buildLawn({ cells, x0: -P.l, z0: -P.t, W: df.w + P.l + P.r, D: df.d + P.t + P.b, seed: df.w * 17 + df.d, phase: O.st.look.phase, per: e => e ? 200 : 14, ground: true });
+    return buildLawn({ cells, x0: -P.l, z0: -P.t, W: df.w + P.l + P.r, D: df.d + P.t + P.b, seed: df.w * 17 + df.d, phase: O.st.look.phase, per: e => e ? 200 : 14, ground: true, round: df.round, isCell: (x, z) => home.cells.has(key(x, z)) });
   }
   // Blade detail by zoom (the islands' lawns): 1 segment far out, 2 at the usual view, 4 close up. Swapping is only a
   // pointer change (every level's geometry is made with the piece), done only when the level changes.
@@ -595,7 +595,8 @@
     });
     const mesh = pieces[0]; for (const pm of pieces.slice(1)) mesh.add(pm);
     // the lawn under the blades, the app's lawn green
-    const { x0, z0, W, D } = spec, gg = new T.PlaneGeometry(W - 0.06, D - 0.06); gg.rotateX(-Math.PI / 2); gg.translate(x0 + W / 2, 0.003, z0 + D / 2);
+    // (a round island's lawn is a disc)
+    const { x0, z0, W, D } = spec, RD = spec.round, gg = RD ? new T.CircleGeometry(RD.r - 0.04, 72) : new T.PlaneGeometry(W - 0.06, D - 0.06); gg.rotateX(-Math.PI / 2); gg.translate(RD ? RD.cx : x0 + W / 2, 0.003, RD ? RD.cz : z0 + D / 2);
     // (the grass's own mid-green with a fine grain, so any gap between blades still reads as grass)
     const ground = new T.Mesh(gg, new T.ShaderMaterial({ uniforms: U, vertexShader: 'varying vec2 vW; void main() { vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xz; gl_Position = projectionMatrix * viewMatrix * w; }',
       fragmentShader: 'uniform vec3 uBase, uTip; varying vec2 vW; float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); } void main() { float n = h(floor(vW * 24.0)) * 0.6 + h(floor(vW * 9.0)) * 0.4; gl_FragColor = vec4(mix(uBase, uTip, 0.28 + n * 0.22) * 0.85, 1.0); }' }));
@@ -615,12 +616,15 @@
     const { x0, z0, W, D } = spec, mw = W * MAP_RES, mh = D * MAP_RES, data = new Uint8Array(mw * mh * 4);
     for (let i = 1; i < data.length; i += 4) data[i] = 255; // (g: how high grass can grow here, 255 = as high as it likes)
     for (const c of cells) for (let i = 0; i < MAP_RES; i++) for (let j = 0; j < MAP_RES; j++) { const px = (c.x - x0) * MAP_RES + i, pz = (c.z - z0) * MAP_RES + j; if (px >= 0 && pz >= 0 && px < mw && pz < mh) data[(pz * mw + px) * 4 + 2] = 255; }
+    // (a round island: the grass runs right out to the rim, over the part tiles round the edge that aren't garden cells)
+    if (spec.round && spec.isCell) { const { r, cx, cz } = spec.round; for (let pz = 0; pz < mh; pz++) for (let px = 0; px < mw; px++) { const x = x0 + (px + 0.5) / MAP_RES, z = z0 + (pz + 0.5) / MAP_RES; if (Math.hypot(x - cx, z - cz) < r - 0.1 && !spec.isCell(Math.floor(x), Math.floor(z))) data[(pz * mw + px) * 4 + 2] = 255; } }
     const tex = new T.DataTexture(data, mw, mh, T.RGBAFormat); tex.magFilter = T.NearestFilter; tex.minFilter = T.NearestFilter; tex.needsUpdate = true;
     tex.userData = { data, tex, x0, z0, mw, mh };
     Object.assign(U, { uMap: { value: tex }, uMapO: { value: new T.Vector4(x0, z0, W, D) }, uTop: { value: 0.2 }, uDens: { value: 30 } });
     const pos = [], lay = [], idx = [];
     // (the layers cover only the lawn's own cells, not the whole map: no pixels spent on layers that are all discarded)
     let sx0 = x0, sz0 = z0, sx1 = x0 + W, sz1 = z0 + D; if (cells.length) { sx0 = Math.max(x0, Math.min(...cells.map(c => c.x))); sz0 = Math.max(z0, Math.min(...cells.map(c => c.z))); sx1 = Math.min(x0 + W, Math.max(...cells.map(c => c.x)) + 1); sz1 = Math.min(z0 + D, Math.max(...cells.map(c => c.z)) + 1); }
+    if (spec.round) { const { r, cx, cz } = spec.round; sx0 = Math.max(x0, cx - r); sz0 = Math.max(z0, cz - r); sx1 = Math.min(x0 + W, cx + r); sz1 = Math.min(z0 + D, cz + r); }
     // (top layer first: it's the nearest to the camera, so where it has a blade the layers under it fail the depth test
     // before any of their shading is done. The picture is the same; much less of it is shaded and thrown away)
     for (let l = SHELLS - 1; l >= 0; l--) { const b = pos.length / 3; pos.push(sx0, 0, sz0, sx1, 0, sz0, sx0, 0, sz1, sx1, 0, sz1); lay.push(l / (SHELLS - 1), l / (SHELLS - 1), l / (SHELLS - 1), l / (SHELLS - 1)); idx.push(b, b + 2, b + 1, b + 1, b + 2, b + 3); }
@@ -804,6 +808,7 @@
   function clampMower(x, z, yaw) {
     const hd = O.home.def, TE = IH.homes.TE + 0.18, B = O.home.bounds, ca = Math.abs(Math.cos(yaw)), sa = Math.abs(Math.sin(yaw)), ex = 0.5 * ca + 0.45 * sa, ez = 0.5 * sa + 0.45 * ca;
     x = clamp(x, B.x0 + 0.08 + ex, B.x1 - 0.08 - ex); z = clamp(z, B.z0 + 0.08 + ez, B.z1 - 0.08 - ez);
+    if (hd.round) { const { r, cx, cz } = hd.round, m = r - 0.6, d = Math.hypot(x - cx, z - cz); if (d > m) { x = cx + (x - cx) * m / d; z = cz + (z - cz) * m / d; } } // (a round island: inside its rim)
     const hx0 = -TE - ex, hx1 = hd.w + TE + ex, hz0 = -TE - ez, hz1 = hd.d + TE + ez;
     if (x > hx0 && x < hx1 && z > hz0 && z < hz1) { const o = [[x - hx0, hx0, 'x'], [hx1 - x, hx1, 'x'], [z - hz0, hz0, 'z'], [hz1 - z, hz1, 'z']].sort((a, b) => a[0] - b[0])[0]; if (o[2] === 'x') x = o[1]; else z = o[1]; }
     return [x, z];
@@ -1063,6 +1068,15 @@
       return o;
     });
     const cfg = { ...base, rooms, setting: settingOf(st, id) };
+    // On the classic island (st.round, from the app): the original Chorecast's round island round the house, as big as
+    // the island size the kid has bought, and no street. The plot's box is set round the circle, so everything that
+    // works from the plot's box (the lawn's map, the camera, the mower) covers it.
+    if (st.round) {
+      const SC = [1, 1.2, 1.45, 1.75, 2][Math.max(0, Math.min(4, st.round.size | 0))], cx = cfg.w / 2, cz = cfg.d / 2, r = Math.round((Math.hypot(cfg.w, cfg.d) / 2 + 4) * SC * 2) / 2;
+      cfg.round = { r, cx, cz }; cfg.setting = 'none';
+      cfg.plot = { ...cfg.plot, l: Math.ceil(r - cx), t: Math.ceil(r - cz), r: Math.ceil(r - (cfg.w - cx)), b: Math.ceil(r - (cfg.d - cz)), fence: false };
+      cfg.trees = (cfg.trees || []).filter(([, x, z]) => Math.hypot(x - cx, z - cz) < r - 1.5);
+    }
     if (h.winv) cfg.openings = h.items.filter(it => BY[it.t] && BY[it.t].opening && it.side).map(it => { const d = BY[it.t]; const cv = h.items.find(x => x.on === it.id && BY[x.t] && BY[x.t].cover); return { side: it.side, u0: it.u + 0.05, u1: it.u + d.fp[0] - 0.05, y0: FY + d.wy, y1: FY + d.wy + d.h, kind: 'window', item: true, rid: it.id, cover: cv ? BY[cv.t].coverStyle : null }; }); // (what hangs on it shapes the sunlight)
     if (rn.door && BY[rn.door.t]) cfg.doorStyle = { t: BY[rn.door.t].look, c: rn.door.c, pat: rn.door.f === 'wood' ? 1 : 0 };
     return cfg;
@@ -3267,6 +3281,7 @@
     if (!T) return false; if (O) close(true);
     try { renderer(); } catch (e) { return false; }
     const kid = opts.kid || { id: 'demo', name: 'Ari' }, st = store.load(kid.id);
+    if (opts.round) st.round = { size: opts.round.size | 0 }; else if (opts.round === false) delete st.round; // (the classic island, round, this big)
     if (st.look && !st.look.fr24) { st.look.fr24 = 1; if (st.look.frames === 'twos') st.look.frames = 'ones'; } // (24 frames a second is the default now, 2026-11-10)
     O = { opts, kid, st, S: makeScene(), mount: opts.mount || document.body, editing: false, held: null, cat: null };
     O.markOk = new T.MeshBasicMaterial({ color: 0x7be08c, transparent: true, opacity: 0.55, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });

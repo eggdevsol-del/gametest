@@ -8,6 +8,6 @@
     else if (q.get('ava') && w) w.avatar = q.get('ava');
     return w ? { id: 'demo-' + w.name.toLowerCase().replace(/\W+/g, ''), name: w.name, avatar: w.avatar, hue: '#4DABF7' } : { id: 'demo', name: 'Ari', avatar: q.get('ava') || '🦊', hue: '#4DABF7' };
   }
-  const go = () => { const H = window.IsoHome; if (!H || !H.open || !H.open({ demo: true, kid: who(), islands: new URLSearchParams(location.search).get('islands') === 'all' ? null : undefined, xp: () => ({ earned: 6000, left: 4500 }) })) document.body.insertAdjacentHTML('beforeend', '<p style="font:700 18px system-ui;padding:24px">This needs a device that can draw 3D.</p>'); };
+  const go = () => { const H = window.IsoHome; if (!H || !H.open || !H.open({ demo: true, kid: who(), islands: new URLSearchParams(location.search).get('islands') === 'all' ? null : undefined, round: (q => (q != null ? { size: +q || 0 } : false))(new URLSearchParams(location.search).get('round')), xp: () => ({ earned: 6000, left: 4500 }) })) document.body.insertAdjacentHTML('beforeend', '<p style="font:700 18px system-ui;padding:24px">This needs a device that can draw 3D.</p>'); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
