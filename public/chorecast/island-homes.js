@@ -11,6 +11,8 @@
 window.ChorecastIslandHomes = K => {
   const { T, mat, GRAD, ITEM } = K;
   const IH = () => window.IsoHome || {};
+  // an animation that throws is reported once (not hidden): a pose that fails every frame freezes the model
+  const SAID = new Set(), once = (what, e) => { if (SAID.has(what)) return; SAID.add(what); console.warn('island-homes: ' + what + ' animation failed', e); };
   const ready = () => !!(IH().items && IH().animals3d && IH().chars);
   // classic shop item → the homes model that replaces it
   const ANIMAL = { duck: 'duck', tui: 'tui', kereru: 'kereru', weka: 'weka', tuatara: 'tuatara', crab: 'crab', seal: 'seal', swan: 'swan', platypus: 'platypus', dolphin: 'dolphin', piwakawaka: 'fantail',
@@ -32,8 +34,10 @@ window.ChorecastIslandHomes = K => {
         const c = m.geometry.attributes.color; if (!c.userData) c.userData = {}; if (!m.geometry.userData.lin) { m.geometry.userData.lin = true; for (let i = 0; i < c.array.length; i++) c.array[i] = lin(c.array[i]); c.needsUpdate = true; }
         if (!old.transparent) m.material = VC(); return;
       }
-      // the homes game's own shader keeps its picture in tMap (a GLB animal, pet or character): the same picture, in toon
-      const U = old.uniforms || {}, tex = old.map || (U.tMap && U.tMap.value && U.tMap.value.isTexture ? U.tMap.value : null);
+      // an animated animal, pet or character keeps the homes game's own material: its animation swaps the picture in it
+      // to blink (yami3d.js eyes), and it draws the same on the island
+      const U = old.uniforms || {}; if (U.tMap) { m.castShadow = true; m.receiveShadow = true; if (m.isSkinnedMesh) m.userData.noInk = true; return; }
+      const tex = old.map || null;
       if (old.transparent && !tex) return; // (glass, glows: as they are)
       const col = old.color && !tex ? old.color.clone().convertSRGBToLinear() : new T.Color(0xffffff);
       if (tex) tex.encoding = T.sRGBEncoding;
@@ -64,7 +68,7 @@ window.ChorecastIslandHomes = K => {
       let a, petI = null;
       if (PET[t] && IH().pets) { petI = IH().pets.make(PET[t]); a = { group: petI.group }; } else a = IH().animals3d.make(ANIMAL[t]);
       const holder = new T.Group(), h = classicH(t, orig); holder.add(a.group); g.add(holder); g.userData.homesAnimal = ANIMAL[t] || PET[t];
-      const rig = a.inst || petI; let fitted = fit(holder, a.group, h, rig), last = null, still = 0, nfit = 0;
+      const rig = a.inst || petI; g.userData.rig = rig; g.userData.petI = petI; let fitted = fit(holder, a.group, h, rig), last = null, still = 0, nfit = 0;
       const own = g.userData.tick;
       g.userData.tick = (time, dt) => {
         if (own) own(time, dt);
@@ -74,7 +78,7 @@ window.ChorecastIslandHomes = K => {
         const want = g.userData.homesSt, st = want ? (want === 'walk' && !moving ? 'stand' : want) : moving ? 'walk' : still > 9 && /hen|goose|duck|cow|goat|merino|alpaca|llama|horse|pony|donkey|kunekune|highland|turkey/.test(ANIMAL[t] || '') ? 'graze' : 'stand';
         const dist = d / Math.max(1e-6, holder.scale.x * g.scale.x);
         const host = g.parent; IH().groundAt = host && host.userData.terrain ? groundFn(host) : null; // (paws planted on the island's slopes)
-        try { if (petI) IH().pets.pose(petI, st === 'graze' ? 'stand' : st, time); else IH().animals3d.move(a, time, st, dist, g.userData.homesFocus || null); } catch (e) { /* model still loading */ }
+        try { if (petI) IH().pets.pose(petI, st === 'graze' ? 'stand' : st, time); else IH().animals3d.move(a, time, st, dist, g.userData.homesFocus || null); } catch (e) { once('animal ' + t, e); }
         IH().groundAt = null;
       };
     };
@@ -134,7 +138,7 @@ window.ChorecastIslandHomes = K => {
       m.getWorldPosition(V); const d = K0.last ? Math.hypot(V.x - K0.last.x, V.z - K0.last.z) : 0; K0.last = K0.last || new T.Vector3(); K0.last.copy(V);
       const doing = m.userData.doing, st = d > 0.0005 ? 'walk' : (doing && POSE[doing]) || 'stand';
       IH().groundAt = m.parent && m.parent.userData.terrain ? groundFn(m.parent) : null;
-      try { IH().chars.pose(K0.c, st, t); } catch (e) { /* loading */ }
+      try { IH().chars.pose(K0.c, st, t); } catch (e) { once('kid', e); }
       IH().groundAt = null;
     }
   }
