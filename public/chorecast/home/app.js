@@ -628,10 +628,10 @@
     for (let i = 1; i < data.length; i += 4) data[i] = 255; // (g: how high grass can grow here, 255 = as high as it likes)
     for (const c of cells) for (let i = 0; i < MAP_RES; i++) for (let j = 0; j < MAP_RES; j++) { const px = (c.x - x0) * MAP_RES + i, pz = (c.z - z0) * MAP_RES + j; if (px >= 0 && pz >= 0 && px < mw && pz < mh) data[(pz * mw + px) * 4 + 2] = 255; }
     // (a round island: the grass runs right out to the rim, over the part tiles round the edge that aren't garden cells)
-    if (spec.round && spec.isCell) { const { r, cx, cz } = spec.round; for (let pz = 0; pz < mh; pz++) for (let px = 0; px < mw; px++) { const x = x0 + (px + 0.5) / MAP_RES, z = z0 + (pz + 0.5) / MAP_RES; if (Math.hypot(x - cx, z - cz) < r - 0.1 && !spec.isCell(Math.floor(x), Math.floor(z))) data[(pz * mw + px) * 4 + 2] = 255; } }
+    if (spec.round && spec.isCell) { const { r, cx, cz } = spec.round; for (let pz = 0; pz < mh; pz++) for (let px = 0; px < mw; px++) { const x = x0 + (px + 0.5) / MAP_RES, z = z0 + (pz + 0.5) / MAP_RES; if (Math.hypot(x - cx, z - cz) < r + 0.2 && !spec.isCell(Math.floor(x), Math.floor(z))) data[(pz * mw + px) * 4 + 2] = 255; } }
     const tex = new T.DataTexture(data, mw, mh, T.RGBAFormat); tex.magFilter = T.NearestFilter; tex.minFilter = T.NearestFilter; tex.needsUpdate = true;
     tex.userData = { data, tex, x0, z0, mw, mh };
-    Object.assign(U, { uMap: { value: tex }, uMapO: { value: new T.Vector4(x0, z0, W, D) }, uTop: { value: 0.2 }, uDens: { value: 30 } });
+    Object.assign(U, { uMap: { value: tex }, uMapO: { value: new T.Vector4(x0, z0, W, D) }, uTop: { value: 0.2 }, uDens: { value: 30 }, uRound: { value: new T.Vector3(spec.round ? spec.round.cx : 0, spec.round ? spec.round.cz : 0, spec.round ? spec.round.r - 0.05 : 0) } });
     const pos = [], lay = [], idx = [];
     // (the layers cover only the lawn's own cells, not the whole map: no pixels spent on layers that are all discarded)
     let sx0 = x0, sz0 = z0, sx1 = x0 + W, sz1 = z0 + D; if (cells.length) { sx0 = Math.max(x0, Math.min(...cells.map(c => c.x))); sz0 = Math.max(z0, Math.min(...cells.map(c => c.z))); sx1 = Math.min(x0 + W, Math.max(...cells.map(c => c.x)) + 1); sz1 = Math.min(z0 + D, Math.max(...cells.map(c => c.z)) + 1); }
@@ -651,10 +651,11 @@
     #include <bsdfs>
     #include <lights_pars_begin>
     #include <shadowmap_pars_fragment>
-    uniform float uDbg; uniform sampler2D uMap; uniform vec4 uMapO; uniform float uTop, uCut, uGrow, uLong, uTime, uWind, uDens; uniform vec3 uBase, uTip, uSun; varying vec3 vW; varying float vL;
+    uniform float uDbg; uniform sampler2D uMap; uniform vec4 uMapO; uniform float uTop, uCut, uGrow, uLong, uTime, uWind, uDens; uniform vec3 uBase, uTip, uSun, uRound; varying vec3 vW; varying float vL;
         float hsh(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
         void main() {
           vec4 mp = texture2D(uMap, (vW.xz - uMapO.xy) / uMapO.zw); if (mp.b < 0.5) discard; // not lawn
+          if (uRound.z > 0.0 && distance(vW.xz, uRound.xy) > uRound.z) discard; // (a round island: cut on the circle itself, not the map's squares)
           float cap = mp.g > 0.99 ? 99.0 : mp.g * 1.2 - 0.03; // the underside of anything above (grass never grows into it)
           float h = vW.y - 0.006, k = clamp((uGrow - uCut) / (uLong - uCut), 0.0, 1.0), kk = mp.r > 0.5 ? 0.0 : k;
           // the wind leans the blades over, more toward their tips (as the real blades)
