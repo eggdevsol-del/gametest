@@ -142,12 +142,12 @@
     const A0 = nearestClear(a.x, a.z, cls, r), B0 = nearestClear(b.x, b.z, cls, r); if (!A0 || !B0) return null;
     if (sees(A0, B0, cls, r)) return [B0];
     const D = W.dist[cls], s = col(A0.x, A0.z), g = col(B0.x, B0.z), nz = W.nz, gi = Math.floor(g / nz), gj = g % nz;
-    const cost = new Float32Array(W.nx * nz).fill(1e9), from = new Int32Array(W.nx * nz).fill(-1), heap = [[0, s]]; cost[s] = 0;
+    const cost = new Float64Array(W.nx * nz).fill(1e9), from = new Int32Array(W.nx * nz).fill(-1), heap = [[0, s]]; cost[s] = 0;
     const H = c => { const di = Math.abs(Math.floor(c / nz) - gi), dj = Math.abs(c % nz - gj); return (Math.max(di, dj) + 0.414 * Math.min(di, dj)); };
     const push = e => { heap.push(e); let i = heap.length - 1; while (i) { const p = (i - 1) >> 1; if (heap[p][0] <= heap[i][0]) break; [heap[p], heap[i]] = [heap[i], heap[p]]; i = p; } };
     const pop = () => { const top = heap[0], last = heap.pop(); if (heap.length) { heap[0] = last; let i = 0; for (;;) { const l = i * 2 + 1, rr = l + 1; let m = i; if (l < heap.length && heap[l][0] < heap[m][0]) m = l; if (rr < heap.length && heap[rr][0] < heap[m][0]) m = rr; if (m === i) break; [heap[m], heap[i]] = [heap[i], heap[m]]; i = m; } } return top; };
     let found = false, steps = 0;
-    while (heap.length && steps++ < 40000) {
+    while (heap.length && steps++ < Math.max(40000, W.nx * nz)) { // (a big round island: room to search round the house. Costs are 64-bit: rounded 32-bit ones send the search round in circles)
       const [, c] = pop(); if (c === g) { found = true; break; }
       const ci = Math.floor(c / nz), cj = c % nz;
       for (let di = -1; di <= 1; di++) for (let dj = -1; dj <= 1; dj++) {

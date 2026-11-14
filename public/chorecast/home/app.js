@@ -1141,6 +1141,7 @@
     { const L = items(), gone = L.filter(it => it.x != null && BY[it.t] && BY[it.t].kind !== 'wall' && !cellsOf(BY[it.t], it.x, it.z, it.r || 0).every(([x, z]) => O.home.cells.has(key(x, z))));
       for (const it of gone) { L.splice(L.indexOf(it), 1); if (BY[it.t].kind !== 'pet') toBox(it); }
       if (gone.length) { save(); setTimeout(() => toast(`${gone.length === 1 ? 'One thing' : gone.length + ' things'} from outside went back to Mine (there's no garden here).`), 1800); } }
+    landmarks();
     furnish();
     for (const rec of items()) addInst(rec);
     wallsUp();
@@ -1351,6 +1352,7 @@
       if (inst.screen) { if (inst.rec.on) { const C = ['#8fd0ff', '#ffe07a', '#ff9fb7', '#9be38f', '#c3a2ff']; inst.screen.color.set(C[Math.floor(t * 12 / 6) % C.length]); } else inst.screen.color.set('#1d2333'); }
       if (s.duvet && IH.cloth) duvet(inst, s.duvet, dt);
       if (s.door0) swingDoors(inst, dt);
+      if (inst.def.spin && s[inst.def.spin]) s[inst.def.spin].rotation.z = t * 0.9; // (the investing windmill)
       if (s.water && /^bath/.test(inst.def.t)) { const w = inst.wl || (inst.wl = { k: 0 }); w.k += ((inst.fill || 0) - w.k) * Math.min(1, dt * 0.25); s.water.visible = w.k > 0.03; s.water.position.y = 0.18 + 0.44 * w.k; } // fills slowly, drains slowly
       // a stool being carried: held in front at waist height
       // something carried: a stool held out in front by its sides; a mower pushed along the ground by its handle bar
@@ -1695,6 +1697,21 @@
   }
   function check() { const h = O.held; if (!h) return; const f = fits(h.def, h.rec, h.rec.id); h.ok = f.ok; h.why = f.why; marks(h.def, h.rec, f.ok); ui(); }
   // A free spot near the middle of the view, for a new thing.
+  // The original Chorecast island's money world (landmarks.js): on the round island, kept in step with the kid's money
+  // (opts.money from the app); anywhere else, none. live: the home's open, so the changed ones are rebuilt too.
+  function landmarks(live) {
+    if (!IH.landmarks) return; const L = items();
+    if (!O.st.round || !O.opts.money) { const n = L.length; for (let i = n - 1; i >= 0; i--) if (IH.landmarks.is(L[i].t)) { if (live) dropInst(L[i].id); L.splice(i, 1); } if (L.length !== n) save(); return; }
+    const cr = O.st.care = O.st.care || {}; if (!cr.pond) cr.pond = Date.now(); // (a pond needs cleaning 3 days after it was last done)
+    const m = { ...O.opts.money(), size: O.st.round.size, pondDirty: !!(O.st.care && O.st.care.pond && Date.now() - O.st.care.pond > 3 * 864e5) };
+    // (new ones spread round the island, out between the house and the rim, not all by the door)
+    const RD = O.home.def.round, k0 = L.filter(it => IH.landmarks.is(it.t)).length;
+    const spot = def => { for (let i = 0, n = k0 + spot.n++; i < 120; i++) { const a = (n + i) * 2.39996, f = 0.5 + ((n * 7 + i) % 5) * 0.08, rec = { r: i % 2, x: Math.round(RD.cx + Math.cos(a) * RD.r * f - def.fp[0] / 2), z: Math.round(RD.cz + Math.sin(a) * RD.r * f - def.fp[1] / 2) }; if (fits(def, rec).ok) return rec; } return freeSpot(def); }; spot.n = 0;
+    const r = IH.landmarks.sync(L, m, spot);
+    if (live) { for (const x of r.removed) dropInst(x.id); for (const x of r.changed) { dropInst(x.id); addInst(x); } for (const x of r.added) addInst(x); }
+    if (r.added.length || r.changed.length || r.removed.length) save();
+  }
+  IH.moneyChanged = () => { if (O && !O.away && O.home) { landmarks(true); force = true; } };
   function freeSpot(def) {
     const base = { r: 0 };
     if (def.kind === 'wall' && def.cover) { for (const it of items()) { const d = BY[it.t]; if (d && d.opening && !O.home.sides[it.side].front && fitsWall(def, { on: it.id }).ok) return { on: it.id }; } return null; }
@@ -2527,6 +2544,8 @@
     if (PLANTS.has(d.t) && d.kind !== 'wall') add('💧', 'Water it', () => send({ type: 'chore', chore: 'water', target: it, think: '💧' }));
     if (S.dirty && S.dirty.has(it.rec.id)) add('🧽', 'Wash up', () => send({ type: 'chore', chore: 'dishes', target: it, think: '🧽' }));
     if (d.t === 'mower') add('🌱', 'Mow the lawn', () => sendPlan(mowPlan(k, it)));
+    // the Vault pond's upkeep: fish the leaves out, and it's clear again
+    if (d.t === 'lm_pond' && it.rec.dirty) add('🍂', 'Clean the pond', () => { const c = it.group.position.clone(); c.y = 0; sendPlan([{ type: 'step', target: { pos: c }, reach: 1.75, pose: 'fetch', dur: 2.6, think: '🍂' }, { type: 'step', target: { pos: c }, reach: 1.75, pose: 'fetch', dur: 2.2, end: () => { (O.st.care = O.st.care || {}).pond = Date.now(); save(); sound('pop'); toast('The pond’s clear again. ✨'); IH.moneyChanged(); } }]); });
     if (d.act === 'lamp') add(it.rec.on === false ? '💡' : '🌙', it.rec.on === false ? 'Turn it on' : 'Turn it off', () => send({ type: 'step', target: it, pose: 'switch', dur: 1.6, end: () => { it.rec.on = it.rec.on === false; save(); sound(it.rec.on === false ? 'off' : 'on'); } }));
     if (d.act === 'tv') add(it.rec.on ? '⏻' : '📺', it.rec.on ? 'Turn the TV off' : 'Turn the TV on', () => send({ type: 'step', target: it, pose: 'switch', dur: 1.4, end: () => { it.rec.on = !it.rec.on; save(); sound('on'); } }));
     if (it.doll) add('🤗', 'Give the teddy a cuddle', () => send({ type: 'do', pose: 'toys', at: it.doll.centre(), face: it.doll.centre(), gives: { fun: 1, friends: 0.4 }, dur: 20, think: '🧸' }));
@@ -2888,7 +2907,7 @@
       const h = O.held; hb.hidden = false;
       hb.innerHTML = `<div class="ih-hold-n"><b>${esc(h.def.name)}</b><small class="${h.ok ? 'ok' : 'no'}">${h.ok ? (h.def.kind === 'wall' ? 'Drag it along the wall' : 'Drag it where you like') : esc(WHY[h.why] || 'That doesn’t fit there')}</small></div>
         ${h.def.kind !== 'wall' && h.def.fp[0] + h.def.fp[1] > 2 || (h.def.kind !== 'wall' && h.def.kind !== 'pet') ? `<button class="ih-hb" data-a="turnItem">${ic('turn')}<span>Turn</span></button>` : ''}
-        <button class="ih-hb" data-a="putAway">${ic('box')}<span>Put away</span></button>
+        ${h.def.landmark ? '' : `<button class="ih-hb" data-a="putAway">${ic('box')}<span>Put away</span></button>`}
         <button class="ih-hb ih-go ${h.ok ? '' : 'off'}" data-a="place">${ic('check')}<span>Place</span></button>`;
     } else hb.hidden = true;
     // the tray
@@ -3216,7 +3235,7 @@
     }
     if (a === 'buy') return buy(el.dataset.t, el.dataset.o);
     if (a === 'place') return placeHeld();
-    if (a === 'putAway') return putAway();
+    if (a === 'putAway') return O.held && O.held.def.landmark ? null : putAway();
     if (a === 'turnItem') return turnHeld();
     if (a === 'homes') return homesSheet();
     if (a === 'homeBuyAsk') return homeBuyAsk(el.dataset.h);

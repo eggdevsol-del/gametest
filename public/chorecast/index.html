@@ -4892,7 +4892,7 @@ const HomeSync = (() => {
   return { pull, push };
 })();
 const HomesGame = (() => {
-  const FILES = ['look', 'kit', 'blocks', 'settings', 'homes', 'pets', 'anim2d', 'yami', 'yami3d', 'kid3d', 'cloth', 'ragdoll', 'phys', 'life', 'kitchen', 'chars', 'items',
+  const FILES = ['look', 'kit', 'blocks', 'settings', 'homes', 'pets', 'anim2d', 'yami', 'yami3d', 'kid3d', 'cloth', 'ragdoll', 'phys', 'life', 'kitchen', 'chars', 'items', 'landmarks',
     'village-build', 'islands-build', 'islands-more', 'farm-land', 'lang-islands', 'village-islands', 'tractor-plan', 'farm-items', 'farm-machines', 'farm-why', 'walkin', 'farm-buildings', 'farm', 'animals3d', 'village-shops',
     'village-net', 'village', 'slip', 'bank', 'economy', 'buildon', 'infused', 'app'];
   let loading = null;
@@ -4915,6 +4915,8 @@ const HomesGame = (() => {
     const ok = H.open({
       kid: who(k), xp: () => xpOf(Store.kids[id] || k, { noHomes: true }), bought: o.studioOnly ? null : bought, infused: infusedOn() && !o.studioOnly ? Infused.bridge(id) : null, studioOnly: !!o.studioOnly,
       round: { size: Math.max(0, Math.min(4, (isl.size | 0))) }, // (the original Chorecast's round island, as big as the kid has made it)
+      // its money world (home/landmarks.js): the Vault pond, the windmill, the Spend coins, the rainbow, the flag, a tree per paid job
+      money: () => { const kk = Store.kids[id] || k, P = islandParams(kk), j = kk.jars || {}; return { save: (j.save || 0) / 100, invest: P.mill ? 1 : 0, spend: (j.spend || 0) / 100, jobs: P.trees, done: P.rainbow, hue: kk.hue, trees: ['round', 'cherry', 'fruit', 'pine'] }; },
       family: () => Object.values(Store.kids).filter(x => !x.example && !x.archived).map(who),
       track: (t, p) => track(t, p, id),
       onClose: () => { if (o.studioOnly) { try { G3.refresh && G3.refresh(); Studio.refresh(); } catch (e) { /* */ } return; } if (infusedOn()) { Infused.stop(); UI.screen = 'who'; } render(); } // (back out to the island, its studio drawn as it's now done up)
@@ -4987,7 +4989,7 @@ const Infused = (() => {
   }
   function back(did) {
     const r = R; R = null; clearInterval(poll); paint(); document.body.classList.remove('inf-lock'); if (!r) return;
-    const H = window.IsoHome; if (H && H.suspend) H.suspend(false);
+    const H = window.IsoHome; if (H && H.suspend) H.suspend(false); if (H && H.moneyChanged) H.moneyChanged(); // (a chore done or paid: the pond, coins, trees and rainbow catch up)
     r.done({ did });
   }
   function bridge(id) {
