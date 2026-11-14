@@ -4192,25 +4192,58 @@ const Studio = (() => {
   const PROOF = (() => { try { const q = new URLSearchParams(location.search).get('proof'); if (q === '1' || q === '0') localStorage.setItem('cc:proof', q); return localStorage.getItem('cc:proof') === '1'; } catch (e) { return false; } })(), K = PROOF ? 8 : 1;
   const Proof = (() => {
     let W = null, isl = null, busy = false;
+    const PKGS = ['kid', 'pets', 'animals', 'garden', 'fun', 'plants'];
     const one = src => new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => no(new Error(src)); document.head.appendChild(s); });
+    // Where there's ground on this island (island units), or null: the island's own test where it has one (the home
+    // lawn, the beach, the stable, the lake's jetty, the lookout), else its land's circle above the water, else the
+    // farm's paddock.
+    function groundOf(u) {
+      const pl = u.play || {}, Tn = u.terrain, L = u.L, Z = (u.zones || {}).farm;
+      if (pl.walk) return (x, z) => (pl.walk(x, z) ? (pl.floor ? pl.floor(x, z) : Tn ? Tn.h(x, z) : 0.2) : null);
+      if (L && Tn) return (x, z) => { if (Math.hypot(x - L.cx, z - L.cz) > 0.85 * L.r) return null; const h = Tn.h(x, z); return Tn.sea != null && h < Tn.sea + 0.004 ? null : h; };
+      if (Z) return (x, z) => (Math.hypot(x - Z.x, z - Z.z) < Z.r * 0.92 ? Z.y : null);
+      return () => null;
+    }
+    const isAnimal = t => { const d = shopDef(t) || {}; return d.cat === 'animals' || !!d.farm; };
     async function start(island) {
       if (!PROOF || busy || (W && isl === island)) return; stop(); isl = island; busy = true;
       try {
         if (!window.IsoHome || !IsoHome.pkg) await one('home/pkg/pkg.js');
-        const [kidP, pupP, garden] = await IsoHome.pkg.load(['kid', 'puppy', 'garden']);
+        const P = await IsoHome.pkg.load(PKGS), byName = Object.fromEntries(P.map(p => [p.name, p]));
         if (island !== isl || !S0.open) return;
-        const u = island.userData, S = u.S || 1, R = 1.1 * S * K, k = kid();
-        const floorAt = (x, z) => { const lx = x / K, lz = z / K; return u.play && u.play.walk(lx, lz) ? u.terrain.h(lx, lz) * K : -5; };
-        const things = () => [u.houseG, ...(u.trees || []), ...(u.items || []).filter(m => { const d = shopDef(m.userData.t) || {}; return !(d.cat === 'animals' || d.farm); })].filter(Boolean);
-        W = IsoHome.walk.world({ parent: scene, floorAt, things, bounds: { x0: -R, z0: -R, x1: R, z1: R }, cam });
-        for (const t of garden.things) { const it = garden.make(t); if (!it) continue; const sp = W.spot(Math.max(...it.def.fp) / 2 + 0.7); if (!sp) continue; W.put(it, sp.x, sp.z, Math.atan2(-sp.x, -sp.z)); }
-        const at = u.play ? u.play.at : [0.6, 0, 0.42], k0 = W.spot(0.6, { x: at[0] * K, z: at[2] * K, d: 1.5 }) || W.spot(0.6);
-        if (k0) { W.add(kidP, k0.x, k0.z, { avatar: k.avatar, hue: k.hue, yaw: 0.9 }); const p0 = W.spot(0.4, { x: k0.x, z: k0.z, d: 1.5 }); if (p0) W.add(pupP, p0.x, p0.z); }
+        island.updateMatrixWorld(true);
+        const u = island.userData, k = kid(), ground = groundOf(u);
+        const floorAt = (x, z) => { const y = ground(x / K, z / K); return y == null ? -5 : y * K; };
+        // the island's extent: home's lawn, or the piece of land
+        const L = u.L, Z = (u.zones || {}).farm, c = L ? [L.cx, L.cz, L.r] : Z ? [Z.x, Z.z, Z.r] : [0, 0, 1.1 * (u.S || 1)], R = c[2] * K;
+        const bounds = { x0: c[0] * K - R, z0: c[1] * K - R, x1: c[0] * K + R, z1: c[1] * K + R };
+        // what's solid: what stands on the island (its house, trees, rocks, the things the kid put there), not the
+        // ground itself, the water, the clouds, the grass or anything that walks about
+        const span = 2 * c[2], BB = new T.Box3(), V = new T.Vector3();
+        const solid = o => { if (!o.visible || o === u.av || o === u.clouds || o.isInstancedMesh || o.userData.puffs || (u.surf || []).includes(o) || o === u.grass || o === u.pond) return false; if (o.userData.t && isAnimal(o.userData.t)) return false; BB.setFromObject(o); if (BB.isEmpty()) return false; BB.getSize(V); return V.x < span * 0.45 * K && V.z < span * 0.45 * K && V.y > 0.015 * K && BB.max.y > (u.terrain ? 0 : 0) ; };
+        let solids = null; const things = () => solids || (solids = island.children.filter(solid));
+        W = IsoHome.walk.world({ parent: scene, floorAt, things, bounds, cam });
+        // the kid's own things: each one a package has is drawn as the package's, where the kid put it
+        const kinds = []; for (const p of P) for (const [ct, ht] of Object.entries(p.classic || {})) kinds.push([ct, p, ht]);
+        const swap = Object.fromEntries(kinds.map(([ct, p, ht]) => [ct, { p, ht }])), later = [];
+        for (const m of u.items || []) {
+          const s = swap[m.userData.t]; if (!s) continue;
+          const x = m.position.x * K, z = m.position.z * K, ok = floorAt(x, z) > -4, at = ok ? { x, z } : W.spot(0.6, { x, z, d: 2 }) || W.spot(0.6);
+          if (!at) continue; m.visible = false;
+          if (s.p.bodies && s.p.bodies[s.ht]) later.push([IsoHome.pkg.body(s.p.name, s.ht), at]);
+          else { const it = s.p.make(s.ht); if (it) W.put(it, at.x, at.z, m.rotation.y); }
+        }
+        solids = null; // (measured again without the things swapped out)
+        const at = (u.play && u.play.at) || [c[0], 0, c[1]], k0 = W.spot(0.6, { x: at[0] * K, z: at[2] * K, d: 1.5 }) || W.spot(0.6);
+        if (k0) W.add(byName.kid, k0.x, k0.z, { avatar: k.avatar, hue: k.hue, yaw: 0.9 });
+        for (const [spec, p] of later) { const q = W.spot(W.bodies.length ? 0.4 : 0.6, { x: p.x, z: p.z, d: 1 }) || p; W.add(spec, q.x, q.z); }
         W.group.traverse(m => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; } });
       } catch (e) { console.error('proof', e); stop(); } finally { busy = false; }
     }
     function stop() { if (W) W.end(); W = null; isl = null; }
-    return { start, stop, tick: (t, dt) => { if (W) W.tick(t, dt); }, get on() { return !!W; }, get world() { return W; } };
+    // (while the kid does an island activity, the classic character plays it: the walking kid steps aside)
+    const kidShown = on => { if (W && W.bodies[0]) W.bodies[0].inst.group.visible = on; };
+    return { start, stop, tick: (t, dt) => { if (W) { kidShown(!S0.play); if (!S0.play) W.tick(t, dt); } }, get on() { return !!W; }, get world() { return W; } };
   })();
   let R, pace, scene, cam, island, clouds, kidId = null, raf = 0, last = 0, theta = 0.7, phi = 1.02, rad = 4.6, idle = 0, moved = 0, pinch0 = 0, rad0 = 0;
   const ptrs = new Map(), THUMBS = {}, ray = T ? new T.Raycaster() : null, target = T ? new T.Vector3(0, -0.42, 0) : null;
@@ -4241,8 +4274,8 @@ const Studio = (() => {
   const shadows = o => o.traverse(m => { if (m.isMesh && !m.userData.puffs) { m.castShadow = true; m.receiveShadow = true; } });
   const drop = o => { scene.remove(o); o.traverse(m => { if (m.geometry) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); };
   // Builds the island the kid is on (S0.isle): home, or one of their pieces of land.
-  function make() { S0.kidM = null; island = G3.island(kid(), { flat: true, isle: S0.isle, ...(S0.preview ? { look: S0.preview.look, lookKeys: S0.preview.keys } : {}) }); island.scale.setScalar(K); if (PROOF && S0.isle === 'home') { if (island.userData.av) island.userData.av.visible = false; } else placeIdle(); const f = G3.frame(island); S0.at = [f.cx, f.cz, S0.isle === 'lookout' ? -0.05 : -0.42]; S0.span = Math.max(f.w, f.d); S0.radMax = Math.max(11, fitRad() * 1.4); if (rad < fitRad()) rad = fitRad(); shadows(island); scene.add(island); }
-  function build() { if (S0.play) stopPlay(true); rest(); Proof.stop(); if (island) drop(island); make(); if (PROOF && S0.isle === 'home') Proof.start(island); target.x = S0.at[0]; target.z = S0.at[1]; target.y = S0.at[2]; scene.fog = wxNow().fog ? new T.Fog(new T.Color(0xdde3ea).convertSRGBToLinear(), 4.5 * K, 10 * K) : null; }
+  function make() { S0.kidM = null; island = G3.island(kid(), { flat: true, isle: S0.isle, ...(S0.preview ? { look: S0.preview.look, lookKeys: S0.preview.keys } : {}) }); island.scale.setScalar(K); if (PROOF) { if (island.userData.av) island.userData.av.visible = false; } else placeIdle(); const f = G3.frame(island); S0.at = [f.cx, f.cz, S0.isle === 'lookout' ? -0.05 : -0.42]; S0.span = Math.max(f.w, f.d); S0.radMax = Math.max(11, fitRad() * 1.4); if (rad < fitRad()) rad = fitRad(); shadows(island); scene.add(island); }
+  function build() { if (S0.play) stopPlay(true); rest(); Proof.stop(); if (island) drop(island); make(); if (PROOF) Proof.start(island); target.x = S0.at[0]; target.z = S0.at[1]; target.y = S0.at[2]; scene.fog = wxNow().fog ? new T.Fog(new T.Color(0xdde3ea).convertSRGBToLinear(), 4.5 * K, 10 * K) : null; }
   // The kid's character stands about on each piece of land, ready to play (at home they're the hopping avatar).
   function placeIdle(keep) {
     const u = island.userData, p = u.play; if (!G3.acts[S0.isle] || !p || !u.terrain) return;
@@ -4275,7 +4308,7 @@ const Studio = (() => {
   function stopPlay(quiet) {
     const p = S0.play; if (!p) return; S0.play = null; p.run.end();
     if (p.n) track('island.play', { act: p.k, n: p.n, xp: p.xp }, kidId);
-    placeIdle(true);
+    if (PROOF) { if (S0.kidM) { if (S0.kidM.parent) S0.kidM.parent.remove(S0.kidM); S0.kidM = null; } } else placeIdle(true);
     if (!quiet) { S0.msg = p.n ? `${p.n} ${G3.acts[p.k].noun[p.n === 1 ? 0 : 1]}, +${p.xp} XP.` : ''; ui(); }
   }
   function award(e) {
@@ -4296,10 +4329,10 @@ const Studio = (() => {
     if (next === S0.isle) { if (then) then(); return; }
     if (S0.isle === 'home') S0.homeCat = S0.cat;
     const old = island, from = [target.x, target.z, target.y]; S0.isle = next; Object.assign(S0, { sel: null, tree: null, confirm: null, lk: null, preview: null, cat: next === 'home' ? S0.homeCat || 'animals' : 'isle' });
-    const rad0 = rad; make(); S0.trip = { old, from, rad0, rad1: fitRad(), d: to ? (list.indexOf(to) > i ? 1 : -1) : dir, t0: performance.now(), then }; rad = rad0;
+    const rad0 = rad; Proof.stop(); make(); S0.trip = { old, from, rad0, rad1: fitRad(), d: to ? (list.indexOf(to) > i ? 1 : -1) : dir, t0: performance.now(), then }; rad = rad0;
     Sound.whoosh(); ui();
   }
-  function arrive() { const tr = S0.trip; drop(tr.old); S0.trip = null; island.position.x = 0; island.position.z = 0; target.x = S0.at[0]; target.z = S0.at[1]; target.y = S0.at[2]; ui(); if (tr.then) tr.then(); }
+  function arrive() { const tr = S0.trip; drop(tr.old); S0.trip = null; if (PROOF) Proof.start(island); island.position.x = 0; island.position.z = 0; target.x = S0.at[0]; target.z = S0.at[1]; target.y = S0.at[2]; ui(); if (tr.then) tr.then(); }
   // Shop pictures are drawn the first time a tab shows them, with one small renderer kept while the studio is open.
   let TR = null;
   function thumbsFor(list) {
@@ -4358,7 +4391,7 @@ const Studio = (() => {
       else { m.position.x += dx / d * s; m.position.z += dz / d * s; m.position.y = fl(m.position.x, m.position.z); m.rotation.y += Math.atan2(Math.sin(Math.atan2(dx, dz) - m.rotation.y), Math.cos(Math.atan2(dx, dz) - m.rotation.y)) * Math.min(1, dt * 9); Pk.legL.rotation.x = sw; Pk.legR.rotation.x = -sw; Pk.armL.rotation.x = -sw * 0.8; Pk.armR.rotation.x = sw * 0.8; }
     } else if (S0.play && !S0.trip) S0.play.run.step(t, dt).forEach(award);
     else if (S0.brain && !S0.trip && !S0.job) { try { S0.brain.step(t, dt); } catch (e) { console.error(e); rest(); } }
-    if (PROOF) { if (S0.isle === 'home' && !S0.trip) Proof.tick(t, dt); cam.position.multiplyScalar(K); island.position.multiplyScalar(K); if (S0.trip) S0.trip.old.position.multiplyScalar(K); }
+    if (PROOF) { if (!S0.trip) Proof.tick(t, dt); cam.position.multiplyScalar(K); island.position.multiplyScalar(K); if (S0.trip) S0.trip.old.position.multiplyScalar(K); }
     pace(now); G3.inkFor(R); R.render(scene, cam); raf = requestAnimationFrame(frame);
   }
   // ---- Island jobs: each one plays out on the island with its tool, then the island is rebuilt clean

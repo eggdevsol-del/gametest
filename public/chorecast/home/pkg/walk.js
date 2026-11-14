@@ -21,6 +21,8 @@
 
   function world(o) {
     const P = IH.phys, group = new T.Group(), wraps = new Map(), items = [], bodies = [];
+    // body sizes besides the kid and a pet: a cow or a horse, and a hen or a crab
+    if (!P.BODY.big) Object.assign(P.BODY, { big: { lo: 0.15, hi: 2.6, r: 0.55 }, tiny: { lo: 0.05, hi: 0.6, r: 0.16 } });
     o.parent.add(group);
     const wrap = obj => { let w = wraps.get(obj); if (!w) { w = { group: obj }; wraps.set(obj, w); } return w; };
     const env = { things: () => [...o.things().map(wrap), ...items], floorAt: o.floorAt, wallAt: () => 0, bounds: () => o.bounds };
@@ -160,7 +162,7 @@
     }
 
     function tick(t, dt) { claim(); if (!P.grid()) return; dt = Math.min(dt, 0.05); for (const b of bodies) step(b, t, dt); }
-    function end() { group.removeFromParent(); bodies.length = 0; items.length = 0; if (P.env === env) { P.env = null; P.forget(); } IH.groundAt = null; }
+    function end() { if (group.parent) group.parent.remove(group); bodies.length = 0; items.length = 0; if (P.env === env) { P.env = null; P.forget(); } IH.groundAt = null; }
     const W = { group, add, put, spot, tick, end, bodies, items, go, chooseSeat }; IH.walk.last = W; // (the latest world, for checking from the console)
     return W;
   }
