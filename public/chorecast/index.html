@@ -1497,6 +1497,7 @@ body.ih-open #app{visibility:hidden}
 <script src="vendor/three-r128.min.js"></script>
 <script src="catalog.js"></script>
 <script src="island.js"></script>
+<script src="island-homes.js"></script>
 <script>
 (() => {
 'use strict';
@@ -3676,6 +3677,9 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
   // these same helpers.
   const X = window.ChorecastIsland ? window.ChorecastIsland({ T, add, mat, SM, sph, cyl, bx, cn, eyes, merged, rough, strata, sprite, emojiTex, GOLD, horse, barn, WOOD, DARK, mulberry, grassField, MOWN, GRAD, waterMat, waterSheet, smooth01, WATER_T, fbm, lin }) : null;
   if (X) for (const [t, f] of Object.entries(X.items)) if (!ITEM[t]) ITEM[t] = f;
+  // island-homes.js: the homes game's animals, pets, garden things and characters in place of the island's own, once
+  // the homes game's files are loaded (HomesGame.load); until then, the island's own models
+  const XH = window.ChorecastIslandHomes ? window.ChorecastIslandHomes({ T, mat, GRAD, ITEM }) : null;
   // The waterfall: a spring bubbling up among rocks, a stream down its channel (ripples drifting downstream), and the
   // falls spilling over the edge, streaked white, curling over the lip and thinning into mist as they drop into the sky.
   const FALL_F = `uniform float uTime; uniform vec3 uA, uB; varying vec2 vUv;
@@ -3899,6 +3903,8 @@ void main() {
   };
   const live = new Map();
   function drop(k) { const o = live.get(k); if (!o) return; scene.remove(o.obj); o.cv.remove(); o.obj.traverse(m => { if (m.geometry && m.geometry !== COIN_S && m.geometry !== BLADE && m.geometry !== FLAG_GEO) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); live.delete(k); }
+  // every card's 3D drawn again (the homes game's models have just loaded)
+  api.refresh = () => { for (const k of [...live.keys()]) drop(k); api.sync(); };
   api.sync = () => {
     const seen = new Set();
     for (const el of document.querySelectorAll('#app [data-3d]')) {
@@ -4013,7 +4019,7 @@ void main() {
   }
   Object.assign(api, { GRAD, rimPatch, outline, inkFor, pacer, weather: w => { WIND.value = clamp(0.5 + (w.windKph ?? 12) / 22, 0.5, 2.6); SNOW.value = w.snow ? 0.75 : 0; }, island: (kid, o = {}) => islandModel({ ...islandParams(kid), ...o }), item: buildItem, prize: prizeModel, placeItem,
     // Pictures of every model (the asset sheets): Market fund tokens, money jars and chore tree types.
-    fund: id => outline(fundModel(id), 0.035), jar: (color, cents, seed = 1) => jarModel(color, cents, seed), species: (ty, seed = 7) => { const g = new T.Group(); if (X) X.species(g, 0, 0, 0, ty, seed, 1); return outline(g); }, tickIsland, acts: X ? X.ACT : {}, brain: (g, key, o) => X.brain(g, key, o), kid: (hue, av) => outline(X.kidModel(hue, av), 0.006), activity: (g, key, o) => X.activity(g, key, o), inHouse, canPlace, frame: islandFrame, emoji: (e, s) => sprite(emojiTex(e), s), puff, envFor, cloudMats, tintClouds, cloudCluster });
+    fund: id => outline(fundModel(id), 0.035), jar: (color, cents, seed = 1) => jarModel(color, cents, seed), species: (ty, seed = 7) => { const g = new T.Group(); if (X) X.species(g, 0, 0, 0, ty, seed, 1); return outline(g); }, tickIsland, acts: X ? X.ACT : {}, brain: (g, key, o) => X.brain(g, key, o), kid: (hue, av) => { const m = outline(X.kidModel(hue, av), 0.006); return XH ? XH.dress(m, hue, av) : m; }, activity: (g, key, o) => X.activity(g, key, o), inHouse, canPlace, frame: islandFrame, emoji: (e, s) => sprite(emojiTex(e), s), puff, envFor, cloudMats, tintClouds, cloudCluster });
   size(); addEventListener('resize', size); addEventListener('scroll', kick, { passive: true });
   return api;
 })();
@@ -4833,7 +4839,7 @@ const Studio = (() => {
     root.classList.add('st-fly', 'st-clear'); root.classList.toggle('st-far', !src); if (!src) root.classList.add('st-pre');
     if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
   }
-  return { get open() { return S0.open; }, get covers() { return S0.open && !S0.leaving; }, get doing() { return S0.brain ? S0.brain.doing : S0.play ? S0.play.k : ''; }, show: open, close, act, farmAct };
+  return { get open() { return S0.open; }, get covers() { return S0.open && !S0.leaving; }, get doing() { return S0.brain ? S0.brain.doing : S0.play ? S0.play.k : ''; }, show: open, close, act, farmAct, refresh: () => { if (S0.open && !S0.play) build(); } };
 })();
 
 /* The homes game (home/*.js, 2026-11-10): tapping a kid's island opens their home, the village, Beach cove and the
@@ -4844,7 +4850,7 @@ const Studio = (() => {
    what's spent in the game. */
 const islandGame = () => {
   try { const q = new URLSearchParams(location.search).get('game'); if (q === 'classic' || q === 'homes') localStorage.setItem('cc:islandGame', q); const d = localStorage.getItem('cc:islandGame'); if (d) return d; } catch (e) { /* private browsing */ }
-  return S().islandGame || 'homes';
+  return S().islandGame || 'classic'; // (classic islands are the default again from 2026-11-14; a family that chose Homes keeps it)
 };
 const HomesGame = (() => {
   const FILES = ['look', 'kit', 'blocks', 'settings', 'homes', 'pets', 'anim2d', 'yami', 'yami3d', 'kid3d', 'cloth', 'ragdoll', 'phys', 'life', 'kitchen', 'chars', 'items',
@@ -4958,6 +4964,13 @@ const Infused = (() => {
   return { bridge, stop: () => { if (R) back(false); }, get away() { return !!R; } };
 })();
 const openIsland = id => (islandGame() === 'classic' ? Studio.show(id) : HomesGame.show(id));
+// Classic islands use the homes game's animals, pets, garden things and characters (island-homes.js): its files load
+// in the background a moment after the app opens, then every island is drawn again with them.
+let islandHomesAsked = false;
+function islandHomesSoon() {
+  if (islandHomesAsked || islandGame() !== 'classic' || !window.ChorecastIslandHomes) return; islandHomesAsked = true;
+  setTimeout(() => HomesGame.load().then(() => { try { G3.refresh && G3.refresh(); Studio.refresh(); } catch (e) { /* */ } }, () => { islandHomesAsked = false; }), 1500);
+}
 /* With the homes game on, the floating island on the chores screen (and on each kid's card) is the kid's home: a
    picture the game keeps of it, the house on its island with everything placed in it (home/app.js keeps it as
    cc:homePic:<kid id> when the game closes). A kid who hasn't opened their home since gets one drawn in the
@@ -5290,6 +5303,7 @@ function layMasonry(root) {
 }
 function render() {
   if (Stage.active) { Stage.dirty = true; return; }
+  islandHomesSoon();
   const app = $('#app');
   document.body.classList.toggle('is-parent', UI.screen === 'parent');
   document.body.dataset.screen = UI.screen; document.body.dataset.tab = UI.screen === 'kid' ? UI.tab : ''; // for looks that colour each screen and tab
@@ -6869,8 +6883,8 @@ function pBank() {
       <div class="row wrap"><div class="row-main"><b>Most a farm earns a day</b><small>Each kid’s farm stand and orders stop paying at this much XP a day, so chores and lessons stay the main way to earn.</small></div><div class="seg">${[[100, '100'], [150, '150'], [250, '250'], [400, '400'], [0, 'No limit']].map(([v, l]) => `<button class="seg-i ${(s.farmCap ?? 150) === v ? 'on' : ''}" data-act="farmCap" data-v="${v}">${l}</button>`).join('')}</div></div>
     </div>
     <h3 class="pgroup-t">Island activities</h3><div class="group">
-      <div class="row wrap"><div class="row-main"><b>Island game</b><small>Homes: their own home, the village, Beach cove and the farm. Classic: the floating island and its shop. Each keeps everything kids bought and unlocked, so you can switch back any time.</small></div><div class="seg">${[['homes', 'Homes'], ['classic', 'Classic']].map(([v, l]) => `<button class="seg-i ${(s.islandGame || 'homes') === v ? 'on' : ''}" data-act="islandGame" data-v="${v}">${l}</button>`).join('')}</div></div>
-      ${(s.islandGame || 'homes') === 'homes' ? `<div class="row"><div class="row-main"><b>Infused (prototype)</b><small>Chores and lessons inside the game: tapping a kid opens their home, today’s must-dos come first, extra jobs are offered at breaks in play, and their phone gets Chores, Proof wall, Lessons and Languages.</small></div><button class="switch ${infusedOn() ? 'on' : ''}" role="switch" aria-checked="${infusedOn()}" aria-label="Infused prototype" data-act="infusedOn"></button></div>` : ''}
+      <div class="row wrap"><div class="row-main"><b>Island game</b><small>Homes: their own home, the village, Beach cove and the farm. Classic: the floating island and its shop. Each keeps everything kids bought and unlocked, so you can switch back any time.</small></div><div class="seg">${[['homes', 'Homes'], ['classic', 'Classic']].map(([v, l]) => `<button class="seg-i ${(s.islandGame || 'classic') === v ? 'on' : ''}" data-act="islandGame" data-v="${v}">${l}</button>`).join('')}</div></div>
+      ${(s.islandGame || 'classic') === 'homes' ? `<div class="row"><div class="row-main"><b>Infused (prototype)</b><small>Chores and lessons inside the game: tapping a kid opens their home, today’s must-dos come first, extra jobs are offered at breaks in play, and their phone gets Chores, Proof wall, Lessons and Languages.</small></div><button class="switch ${infusedOn() ? 'on' : ''}" role="switch" aria-checked="${infusedOn()}" aria-label="Infused prototype" data-act="infusedOn"></button></div>` : ''}
       <div class="row"><div class="row-main"><b>Island activities</b><small>On each island their character can fish, surf, ride, spot birds and more, earning a little XP each time. It opens once their must-dos are done.</small></div><button class="switch ${s.playOn !== false ? 'on' : ''}" role="switch" aria-checked="${s.playOn !== false}" aria-label="Island activities" data-act="playOn"></button></div>
       <div class="row wrap"><div class="row-main"><b>Most activities earn a day</b><small>Each kid stops earning XP from activities at this much a day. They can keep playing for fun.</small></div><div class="seg">${[[30, '30'], [60, '60'], [100, '100'], [200, '200'], [0, 'No limit']].map(([v, l]) => `<button class="seg-i ${(s.playCap ?? 60) === v ? 'on' : ''}" data-act="playCap" data-v="${v}">${l}</button>`).join('')}</div></div>
     </div>
