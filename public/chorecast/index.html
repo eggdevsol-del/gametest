@@ -4192,7 +4192,7 @@ const Studio = (() => {
   const PROOF = (() => { try { const q = new URLSearchParams(location.search).get('proof'); if (q === '1' || q === '0') localStorage.setItem('cc:proof', q); return localStorage.getItem('cc:proof') !== '0'; } catch (e) { return true; } })(), K = PROOF ? 8 : 1;
   const Proof = (() => {
     let W = null, isl = null, busy = false, swapIn = () => false;
-    const PKGS = ['kid', 'pets', 'animals', 'garden', 'fun', 'plants'];
+    const PKGS = ['kid', 'pets', 'animals', 'garden', 'fun', 'plants', 'props'];
     const one = src => new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => no(new Error(src)); document.head.appendChild(s); });
     // Where there's ground on this island (island units), or null: the island's own test where it has one (the home
     // lawn, the beach, the stable, the lake's jetty, the lookout), else its land's circle above the water, else the
@@ -4211,6 +4211,8 @@ const Studio = (() => {
         if (!window.IsoHome || !IsoHome.pkg) await one('home/pkg/pkg.js');
         const P = await IsoHome.pkg.load(PKGS), byName = Object.fromEntries(P.map(p => [p.name, p]));
         if (island !== isl || !S0.open) return;
+        const props = byName.props; if (props) { await props.ready(); await props.load((island.userData.items || []).map(m => m.userData.t)); } // (the Morphic models this island's things need)
+        if (island !== isl || !S0.open) return;
         island.updateMatrixWorld(true);
         const u = island.userData, k = kid(), ground = groundOf(u);
         const floorAt = (x, z) => { const y = ground(x / K, z / K); return y == null ? -5 : y * K; };
@@ -4228,7 +4230,18 @@ const Studio = (() => {
         const swap = Object.fromEntries(kinds.map(([ct, p, ht]) => [ct, { p, ht }])), later = [];
         // one of the kid's things, drawn as its package's (later: bodies wait until the kid's been placed)
         swapIn = (m, list) => {
-          const s = swap[m.userData.t]; if (!s || !W) return false;
+          const t0 = m.userData.t, s = swap[t0]; if (!W) return false;
+          if (!s) { // no package: the Morphic model of the classic thing itself, if it has one
+            if (!props || !props.has(t0)) return false;
+            if (!props.loaded(t0)) { props.load([t0]).then(() => { if (W && isl === island) swapIn(m); }); return false; }
+            if (props.water(t0)) return props.skin(m, t0); // (it keeps its classic swimming)
+            m.updateMatrixWorld(true); const bb = new T.Box3().setFromObject(m), sz = bb.getSize(new T.Vector3()), x = m.position.x * K, z = m.position.z * K;
+            const at = floorAt(x, z) > -4 ? { x, z } : W.spot(0.6, { x, z, d: 2 }) || W.spot(0.6); if (!at) return false; m.visible = false; solids = null;
+            if (props.land(t0)) { const spec = Object.assign({ name: t0 }, props.body(t0, Math.max(0.3, sz.y))); if (list) list.push([spec, at, m.userData.itemId]); else { const q = W.spot(0.4, { x: at.x, z: at.z, d: 1 }) || at; W.add(spec, q.x, q.z).classicId = m.userData.itemId; } }
+            else { const it = props.thing(t0, { w: sz.x, h: sz.y, d: sz.z }); if (it) { it.classicId = m.userData.itemId; W.put(it, at.x, at.z, m.rotation.y); } }
+            W.group.traverse(o2 => { if (o2.isMesh) { o2.castShadow = true; o2.receiveShadow = true; } });
+            return true;
+          }
           const x = m.position.x * K, z = m.position.z * K, ok = floorAt(x, z) > -4, at = ok ? { x, z } : W.spot(0.6, { x, z, d: 2 }) || W.spot(0.6);
           if (!at) return false; m.visible = false; solids = null;
           if (s.p.bodies && s.p.bodies[s.ht]) { const spec = IsoHome.pkg.body(s.p.name, s.ht); if (list) list.push([spec, at, m.userData.itemId]); else { const q = W.spot(0.4, { x: at.x, z: at.z, d: 1 }) || at; W.add(spec, q.x, q.z).classicId = m.userData.itemId; } }
@@ -4245,15 +4258,27 @@ const Studio = (() => {
       } catch (e) { console.error('proof', e); stop(); } finally { busy = false; }
     }
     function stop() { if (W) W.end(); W = null; isl = null; swapIn = () => false; }
-    // (while the kid does an island activity, the classic character plays it: the walking kid steps aside)
-    const kidShown = on => { if (W && W.bodies[0]) W.bodies[0].inst.group.visible = on; };
+    // An island activity (kick-ups, fishing, surfing…) is played out by the activity's own code on the classic character;
+    // the 3D kid stands in for it: in its exact place and facing, walking when it moves, while the classic body is
+    // hidden (the rod, the ball, the board it holds stay, at its hand)
+    let pup = null;
+    function puppet(m, t, dt) {
+      const b = W && W.bodies.find(q => q.isKid); if (!b || !m) return;
+      for (const o of S0.kidBody || []) o.visible = false;
+      m.updateMatrixWorld(true); const p = new T.Vector3(), q = new T.Quaternion(); m.getWorldPosition(p); m.getWorldQuaternion(q);
+      const e = new T.Euler().setFromQuaternion(q, 'YXZ'), g = b.inst.group, moved = pup ? Math.hypot(p.x - pup.x, p.z - pup.z) : 0;
+      pup = p.clone(); g.position.copy(p); g.rotation.set(0, e.y, 0); b.A.pos.copy(p); b.A.yaw = e.y; b.A.path = []; b.A.use = null;
+      b.inst.walkD = (b.inst.walkD || 0) + moved; b.inst.fitMode = null;
+      try { b.pk.pose(b.inst, moved > 0.2 * dt ? 'walk' : (m.userData.happy || 0) > t ? 'happy' : 'stand', t, b.A.ph); } catch (err) { /* still loading */ }
+    }
+    const kidShown = on => { if (W) for (const b of W.bodies) if (b.isKid) b.inst.group.visible = on; };
     // what a tap hits on the island: { kid } (the walking kid), or { id } (the kid's own thing or animal: it says hi)
     function tapped(ray) { if (!W) return null; const h = W.pick(ray); if (!h) return null; if (h.body) { W.hello(h.body, performance.now() / 1000); return h.body.isKid ? { kid: true } : { id: h.body.classicId }; } return { id: h.item.classicId }; }
     // the kid's own thing turned or sold: its package version too
     const mine = id => W && (W.items.find(i => i.classicId === id) || W.bodies.find(b => b.classicId === id));
     const turned = (id, r) => { const x = mine(id); if (x && x.group) W.turn(x, r); };
     const gone = id => { const x = mine(id); if (x) W.remove(x); };
-    return { start, stop, tapped, turned, gone, added: m => swapIn(m), tick: (t, dt) => { if (W) { kidShown(!S0.play); if (!S0.play) W.tick(t, dt); } }, get on() { return !!W; }, get world() { return W; } };
+    return { start, stop, tapped, turned, gone, added: m => swapIn(m), tick: (t, dt) => { if (W) { kidShown(true); if (S0.play) { puppet(S0.kidM, t, dt); W.tick(t, dt, b => b.isKid); /* (the pets carry on while the kid plays) */ } else { pup = null; W.tick(t, dt); } } }, get on() { return !!W; }, get world() { return W; } };
   })();
   let R, pace, scene, cam, island, clouds, kidId = null, raf = 0, last = 0, theta = 0.7, phi = 1.02, rad = 4.6, idle = 0, moved = 0, pinch0 = 0, rad0 = 0;
   const ptrs = new Map(), THUMBS = {}, ray = T ? new T.Raycaster() : null, target = T ? new T.Vector3(0, -0.42, 0) : null;
@@ -4310,7 +4335,8 @@ const Studio = (() => {
     const k = kid(), u = island.userData; if (S0.play || S0.job || S0.trip || !G3.acts[S0.isle] || !u.play) return;
     rest(); if (!S0.kidM) { S0.kidM = G3.kid(k.hue, k.avatar); shadows(S0.kidM); island.add(S0.kidM); }
     Object.assign(S0, { sel: null, tree: null, confirm: null, place: null, msg: '' });
-    const m = S0.kidM, from = m.position.clone(), yaw = m.rotation.y, run = G3.activity(island, S0.isle, { kid: m });
+    const m = S0.kidM; if (PROOF) { S0.kidBody = []; m.traverse(o => { if (o.isMesh) S0.kidBody.push(o); }); } // (the classic kid's own body: hidden while the 3D kid plays in its place; what it holds stays)
+    const from = m.position.clone(), yaw = m.rotation.y, run = G3.activity(island, S0.isle, { kid: m });
     // The activity puts the character at its start; it walks there from where it was instead of jumping.
     let walk = null; if (m.parent === island && Math.hypot(m.position.x - from.x, m.position.z - from.z) > 0.03) { walk = { to: m.position.clone(), yaw: m.rotation.y }; m.position.copy(from); m.rotation.y = yaw; }
     S0.play = { k: S0.isle, n: 0, xp: 0, run, walk }; Sound.whoosh(); ui();

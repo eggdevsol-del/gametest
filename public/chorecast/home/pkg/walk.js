@@ -261,7 +261,7 @@
       pose(b, A.st === 'walk' ? 'stand' : A.st, t);
     }
 
-    function tick(t, dt) { claim(); if (!P.grid()) return; dt = Math.min(dt, 0.05); for (const b of bodies) step(b, t, dt); }
+    function tick(t, dt, skip) { claim(); if (!P.grid()) return; dt = Math.min(dt, 0.05); for (const b of bodies) if (!skip || !skip(b)) step(b, t, dt); } // (skip: bodies something else is moving)
     function end() { if (group.parent) group.parent.remove(group); bodies.length = 0; items.length = 0; if (P.env === env) { P.env = null; P.forget(); } IH.groundAt = null; }
     // tapped: stops, turns toward whoever's looking and waves (the kid) or wags (a pet), a moment
     function hello(b, t) { if (b.A.use) return; const c = o.cam && o.cam.position; if (c) b.A.yaw = Math.atan2(c.x - b.A.pos.x, c.z - b.A.pos.z); b.A.happy = t + 1.6; b.A.path = []; b.A.st = 'stand'; b.A.until = t + 2; }
