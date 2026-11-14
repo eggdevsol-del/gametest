@@ -45,7 +45,8 @@
   const store = {
     key: id => `cc:home:${id}`,
     load(id) { try { const s = JSON.parse(localStorage.getItem(this.key(id)) || 'null'); if (s && s.v === 1) return s; } catch (e) { /* private browsing */ } return fresh(); },
-    save(id, s) { try { localStorage.setItem(this.key(id), JSON.stringify(s)); } catch (e) { /* this visit only */ } }
+    // (savedAt: which copy is newer, this device's or the server's; IH.homeSaved, set by the app, sends it up)
+    save(id, s) { s.savedAt = Date.now(); try { localStorage.setItem(this.key(id), JSON.stringify(s)); } catch (e) { /* this visit only */ } if (IH.homeSaved) try { IH.homeSaved(id, s); } catch (e) { /* offline */ } }
   };
 
   // ---------- one open home at a time
@@ -429,13 +430,13 @@
     if (U.kind === 'on') return [0, 1, 2, 3].flatMap(k => strip(r + k, 1)).map(c => [c]); // (stepped into from any side)
     return [strip(r, U.kind === 'front' ? Math.max(1, Math.ceil((U.gap || 0.6) + 0.2)) : 1)];
   }
-  const roomAt = (x, z) => (HB[O.st.cur].rooms || []).find(R => x >= R.x && x < R.x + R.w && z >= R.z && z < R.z + R.d) || null;
+  const roomAt = (x, z) => ((O.home && O.home.def.rooms) || HB[O.st.cur].rooms || []).find(R => x >= R.x && x < R.x + R.w && z >= R.z && z < R.z + R.d) || null;
   function solidBox(inst) { inst.group.updateMatrixWorld(true); const b = new T.Box3(); inst.group.traverse(m => { if (m.isMesh && m !== inst.halo && m.visible && !(m.layers.mask === 2)) b.expandByObject(m); }); return b; } // (the thing itself: not its glow)
   function arrange(list) {
     const placed = [], P = O.home, reserved = new Set(), boxes = [];
     const boxOf = rec => { const tmp = Object.assign({}, rec, { id: '__fit' + uid() }), inst = addInst(tmp); if (!inst) return null; const b = solidBox(inst); dropInst(tmp.id); return b.isEmpty() ? null : b.expandByScalar(-0.04); };
     // the way in from the front door, and what's already there (its model, and the floor in front of it) are kept clear
-    const dr = HB[O.st.cur].door; if (dr) { const z0 = dr.side === 's' ? HB[O.st.cur].d - 1 : 0; for (const dx of [0, 1]) for (const k of [0, 1]) reserved.add(key(dr.at + dx, dr.side === 's' ? z0 - k : z0 + k)); }
+    const D0 = (O.home && O.home.def) || HB[O.st.cur], dr = D0.door; if (dr) { const z0 = dr.side === 's' ? D0.d - 1 : 0; for (const dx of [0, 1]) for (const k of [0, 1]) reserved.add(key(dr.at + dx, dr.side === 's' ? z0 - k : z0 + k)); }
     const solid = d => d && d.kind !== 'wall' && d.kind !== 'small' && d.kind !== 'rug' && d.kind !== 'pet';
     for (const it of items()) { const d = BY[it.t]; if (!solid(d)) continue; const i = insts.get(it.id), b = i ? solidBox(i).expandByScalar(-0.04) : boxOf(it); if (b) boxes.push(b); const S = useStrips(d, it); if (S && S[0]) for (const [x, z] of S[0]) reserved.add(key(x, z)); }
     for (const want of list) {
@@ -1050,7 +1051,11 @@
   // where a home is: inner-city Tokyo or the Japanese countryside (each home has its own; settings.js)
   const settingOf = (st, id) => { const ok = v => IH.settings && IH.settings.KINDS.some(([k]) => k === v), saved = st.look && st.look.setting && st.look.setting[id]; return ok(saved) ? saved : (IH.settings && IH.settings.DEFAULT[id]) || null; }; // (a saved choice that's no longer offered falls back to the home's own)
   function homeCfg(st = O.st, id = st.cur) {
-    const base = HB[id], h = hrec(st, id), rn = h.reno || {};
+    const B0 = HB[id], h = hrec(st, id), rn = h.reno || {};
+    // rooms the kid has built on (buildon.js): the home's own rooms moved over by any built on its back or left side
+    // (dx, dz), then the new ones; the plot, door and trees move with it
+    const E = h.ext, base = !E ? B0 : (() => { const dx = E.dx || 0, dz = E.dz || 0, all = [...B0.rooms.map(r => ({ ...r, x: r.x + dx, z: r.z + dz })), ...E.rooms];
+      return { ...B0, rooms: all, w: Math.max(...all.map(r => r.x + r.w)), d: Math.max(...all.map(r => r.z + r.d)), door: { ...B0.door, at: B0.door.at + dx }, trees: (B0.trees || []).map(([k, x, z]) => [k, x + dx, z + dz]) }; })();
     const rooms = base.rooms.map((r, i) => {
       const x = (rn.rooms && rn.rooms[i]) || {}, o = { ...r };
       if (x.floor && BY[x.floor.t]) { const d = BY[x.floor.t]; o.floor = d.look; o.floorCol = x.floor.c; if (d.look === 'carpet') o.carpet = x.floor.c; if (x.floor.f) o.floorPat = (FINISHES.find(f => f.id === x.floor.f) || {}).pat; }
@@ -1786,7 +1791,8 @@
   // ---------- touch and mouse
   const ptrs = new Map(); let gesture = null;
   function onDown(e) {
-    if (!O || O.away) return; try { O.cv.setPointerCapture(e.pointerId); } catch (err) { /* synthetic pointer */ } ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY });
+    if (!O || O.away) return;
+    if (IH.buildOn && IH.buildOn.on) { try { O.cv.setPointerCapture(e.pointerId); } catch (err) { /* */ } if (IH.buildOn.down(e)) return; } try { O.cv.setPointerCapture(e.pointerId); } catch (err) { /* synthetic pointer */ } ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY });
     sound();
     if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; gesture = { kind: 'pinch', d0: Math.hypot(a.x - b.x, a.y - b.y), z0: CAM.zoom, moved: 99 }; return; }
     let kind = 'pan';
@@ -1804,7 +1810,8 @@
     gesture = { kind, moved: 0, id: e.pointerId, carry };
   }
   function onMove(e) {
-    if (O && O.away) return; const p = ptrs.get(e.pointerId); if (!p || !gesture) return;
+    if (O && O.away) return;
+    if (IH.buildOn && IH.buildOn.on && IH.buildOn.move(e)) return; const p = ptrs.get(e.pointerId); if (!p || !gesture) return;
     const dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY; gesture.moved += Math.abs(dx) + Math.abs(dy);
     if (gesture.kind === 'pinch' && ptrs.size >= 2) { const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y); if (gesture.d0) setZoom(gesture.z0 * d / gesture.d0); return; }
     if (gesture.kind === 'drag') { moveHeldTo(e.clientX, e.clientY - 18); return; }
@@ -1812,6 +1819,7 @@
     if (gesture.kind === 'pan' && gesture.moved > 6) pan(dx, dy);
   }
   function onUp(e) {
+    if (IH.buildOn && IH.buildOn.on && IH.buildOn.up(e)) { ptrs.delete(e.pointerId); gesture = null; return; }
     const p = ptrs.get(e.pointerId); ptrs.delete(e.pointerId); if (!gesture) return;
     const g = gesture; if (ptrs.size === 0) gesture = null; else return;
     if (g.kind === 'carry' && g.carry.petAi.carried) { putDown(g.carry); return; }
@@ -3056,15 +3064,15 @@
   // A floor or wall covering for one room of this home, or a new front door.
   function roomAsk(d, fin, used) {
     O.pendingReno = { t: d.t, fin, used };
-    const rooms = HB[O.st.cur].rooms;
+    const rooms = homeCfg().rooms;
     sheet(`<div class="ih-sh-h"><h3>${esc(d.name)}: which room?</h3><button class="ih-btn" data-a="sheetX" aria-label="Close">${ic('close')}</button></div><div class="ih-ph-list">${rooms.map((r, i) => `<button class="ih-ph-row ih-room" data-a="renoRoom" data-i="${i}"><span><b>${esc(r.name)}</b><small>${r.w} × ${r.d} tiles</small></span></button>`).join('')}</div>`, 'small');
   }
   function applyReno(i) {
     const P = O.pendingReno; if (!P) return; const d = BY[P.t], h = hrec(), rn = (h.reno = h.reno || {}); O.pendingReno = null;
     const val = { t: P.t, c: (P.fin && P.fin.c) || d.col, f: P.fin && P.fin.f, used: P.used ? 1 : 0 };
     if (d.apply === 'door') rn.door = val; else { rn.rooms = rn.rooms || []; rn.rooms[i] = rn.rooms[i] || {}; rn.rooms[i][d.apply] = val; if ((O.st.owned[P.t] || 0) > 0) { boxOf(P.t).shift(); O.st.owned[P.t]--; } }
-    closeSheet(); rebuildHouse(); save(); ui(); sound('place'); toast(d.apply === 'door' ? 'Your new front door is in.' : `${HB[O.st.cur].rooms[i].name} is done. Looking good!`);
-    if (O.opts.track) O.opts.track('home.reno', { t: P.t, room: d.apply === 'door' ? 'door' : HB[O.st.cur].rooms[i].name, used: !!P.used });
+    closeSheet(); rebuildHouse(); save(); ui(); sound('place'); toast(d.apply === 'door' ? 'Your new front door is in.' : `${homeCfg().rooms[i].name} is done. Looking good!`);
+    if (O.opts.track) O.opts.track('home.reno', { t: P.t, room: d.apply === 'door' ? 'door' : (homeCfg().rooms[i] || {}).name, used: !!P.used });
   }
   function buy(t, offerId) {
     const d = BY[t], w = wallet(), offer = offerId ? usedStock().find(o => o.id === offerId) : null, price = offer ? offer.xp : d && d.xp; if (!d || w.left < price) return;
@@ -3150,6 +3158,7 @@
     if (a === 'zout') return setZoom(CAM.zoom / 1.3);
     if (a === 'turnL') return turnView(-1);
     if (a === 'turnR') return turnView(1);
+    if (a === 'buildOn') { actsClose(); closeSheet(); if (O.held) cancelHeld(); O.editing = false; ui(); return startBuildOn(); }
     if (a === 'decorate') { actsClose(); if (O.held) placeHeld(); if (O.held) return; O.editing = !O.editing; if (O.editing && !O.cat) O.cat = DEFS.some(d => spare(d.t) > 0) ? 'mine' : 'furn'; sound(O.editing ? 'lift' : 'place'); return ui(); }
     if (a === 'cat') { O.cat = el.dataset.c; return ui(); }
     if (/^(ec|ls)[A-Z]/.test(a) && O.E) { const r = O.E.act(a, el); if (r === 'bank' || r === 'grownups' || r === 'farm') return phone(r); if (r) return; }
@@ -3229,7 +3238,7 @@
         <button class="ih-btn" data-a="turnL" aria-label="Turn the view left">${ic('left')}</button>
         <button class="ih-btn" data-a="turnR" aria-label="Turn the view right">${ic('right')}</button>
       </div>
-      <div class="ih-bottom"><button class="ih-deco" data-a="decorate"></button></div>
+      <div class="ih-bottom"><button class="ih-deco" data-a="decorate"></button><button class="ih-build" data-a="buildOn" aria-label="Build on a room">🧱</button></div>
       <div class="ih-hold" hidden></div>
       <div class="ih-tray" hidden></div>
       <div class="ih-tray ih-stray" hidden></div>
@@ -3274,6 +3283,15 @@
     if (O.st.stall && O.st.stall.length) { for (const r of O.st.stall) { O.st.owned[r.t] = (O.st.owned[r.t] || 0) + 1; toBox(r); } O.st.stall = []; save(); } // (left on a stall: back in Mine)
     size(); loadHome(); applyLook(); CAM.intro = { a: 0.62, b: 1, t0: 0 }; lastT = null; beat.reset();
     ui(); force = true; if (!raf) raf = requestAnimationFrame(loop);
+    // Opened from the classic island: XP spent in the homes game on things the classic islands don't have (its islands,
+    // and money put into its farm, less wages the farm paid back) comes back, once, with a line on the statement
+    if (opts.studioOnly && !st.classicRefund) {
+      const L = st.ledger || [], isl = L.filter(e => e.acct === 'wallet' && e.amt < 0 && e.slip && e.slip.head === 'CHORECAST ISLANDS').reduce((n, e) => n - e.amt, 0);
+      const inv = L.filter(e => e.acct === 'wallet' && e.memo === 'Invested in your farm').reduce((n, e) => n - e.amt, 0), wage = L.filter(e => e.acct === 'wallet' && e.memo === 'Wage from your farm').reduce((n, e) => n + e.amt, 0);
+      const back = Math.max(0, isl + Math.max(0, inv - wage)); st.classicRefund = { at: Date.now(), xp: back };
+      if (back > 0) { st.spent = Math.max(0, (st.spent || 0) - back); led('wallet', back, 'Back from the homes game: its islands and farm', slipOf('CHORECAST', 'Refund', [['The homes game’s islands and farm', back]], [['Back in your wallet', back, 'big']])); setTimeout(() => toast(`✨ ${nf(back)} XP is back in your wallet: what you spent on the homes game’s islands and farm.`), 2500); }
+      save();
+    }
     // opened from the classic island (its Cosy Studio): straight in close on the house
     if (opts.studioOnly) setTimeout(() => { if (O && !O.away && O.home) { const d = O.home.def; CAM.target.set(d.w / 2, FY + 1, d.d / 2); setZoom(2.2); } }, 300);
     // Infused (a prototype): the chores and lessons inside the game (infused.js), when the app turns it on
@@ -3464,6 +3482,16 @@
     } catch (e) { console.warn('home picture', e); return ''; }
     return keepPic(id, url);
   };
+  // Building onto the home (buildon.js): the handles it needs
+  function startBuildOn() {
+    if (!IH.buildOn || O.away) return;
+    IH.buildOn.start({ root: O.root, FY, def: () => O.home.def, scene: () => O.S.scene, rayAt, redraw: () => { force = true; }, save, sound, toast, track: O.opts.track,
+      ext: make => { const h = hrec(); if (make && !h.ext) h.ext = { rooms: [], dx: 0, dz: 0 }; return h.ext; },
+      pay: (xp, what) => { if (wallet().left < xp) { toast(`You need ✨ ${nf(xp)} XP for ${what}. Finish a mission or a lesson to earn more.`); sound('no'); return false; } wSpend(xp, what, 'CHORECAST BUILDERS'); save(); ui(true); return true; },
+      // a room built on the back or left: everything placed moves over with the house
+      shift: (dx, dz) => { for (const it of hrec().items) { if (it.x != null) { it.x += dx; it.z += dz; } if (it.side) it.u += it.side === 'n' || it.side === 's' ? dx : dz; } },
+      rebuild: () => { loadHome(); ui(true); force = true; } });
+  }
   // The kid's studio as the house on their classic island (index.html's island, through island-homes.js): their own
   // home as they've done it up (its floors, walls, door and windows), walls up all round and a hipped roof in the
   // home's own roof colour, with no garden of its own (the island is its garden). Built from the save, game closed.

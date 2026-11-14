@@ -54,6 +54,9 @@ window.ChorecastIslandHomes = K => {
   function animalBuilder(t, orig) {
     return g => {
       if (!ready() || (ANIMAL[t] && !IH().animals3d.has(ANIMAL[t]))) return orig(g);
+      // (each island draws at most a dozen animated animals, set by index.html as it builds the island: the rest keep the
+      // island's own lighter model, so a busy island, or a screen of them, stays smooth)
+      if (API.budget != null) { if (API.budget <= 0) return orig(g); API.budget--; }
       let a, petI = null;
       if (PET[t] && IH().pets) { petI = IH().pets.make(PET[t]); a = { group: petI.group }; } else a = IH().animals3d.make(ANIMAL[t]);
       const holder = new T.Group(), h = classicH(t, orig); holder.add(a.group); g.add(holder);
@@ -132,10 +135,12 @@ window.ChorecastIslandHomes = K => {
   // (the island keeps clear a patch about 0.9 wide and 0.74 deep for it); null until the homes game has loaded
   function house(k) {
     if (!ready() || !IH().islandHouse || !k || !k.kidId) return null;
+    if (K.pull) K.pull(k.kidId); // (the latest copy of their studio, from the server if another device saved it last)
     const H0 = IH().islandHouse(k.kidId, { roof: k.look && k.look.roof != null ? '#' + new T.Color(k.look.roof).getHexString() : null }); if (!H0) return null;
     const s = Math.min(0.9 / H0.w, 0.7 / H0.d), holder = new T.Group(); holder.add(H0.group); H0.group.scale.setScalar(s); H0.group.position.set(-H0.w / 2 * s, 0, -H0.d / 2 * s);
     islandLook(H0.group); holder.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
     Object.assign(holder.userData, { walls: [], studio: true, smokeAt: null }); return holder;
   }
-  return { ready, dress, house, ANIMAL, PET, THING, NEW_H, islandLook, active: () => KIDS.size };
+  const API = { ready, dress, house, ANIMAL, PET, THING, NEW_H, islandLook, active: () => KIDS.size, budget: null };
+  return API;
 };

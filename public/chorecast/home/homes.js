@@ -155,8 +155,10 @@
       const segs = inner.filter(s => (s.i === r || s.j === r) && !seen.has(s.i === r ? s.j : s.i)).sort((a, b) => (b.b - b.a) - (a.b - a.a));
       for (const s of segs) { const o = s.i === r ? s.j : s.i; if (seen.has(o)) continue; seen.add(o); s.open = true; q.push(o); }
     }
+    // a room a kid built on (buildon.js) has its doorway where they put it: that one wall open, at that spot
+    rooms.forEach((r, ri) => { if (r.doorAt == null) return; const mine = inner.filter(s => s.i === ri || s.j === ri); mine.forEach(s => { s.open = false; }); const s = mine.find(q => r.doorAt >= q.a && r.doorAt < q.b); if (s) { s.open = true; s.fixed = r.doorAt; } });
     for (const s of inner) {
-      const len = s.b - s.a, dw = len >= 3 ? 2 : 1, d0 = s.a + Math.floor((len - dw) / 2); s.door = s.open ? [d0, d0 + dw] : null;
+      const len = s.b - s.a, dw = len >= 3 ? 2 : 1, d0 = s.fixed != null ? Math.max(s.a, Math.min(s.b - dw, s.fixed)) : s.a + Math.floor((len - dw) / 2); s.door = s.open ? [d0, d0 + dw] : null;
       for (let u = s.a; u < s.b; u++) { if (s.door && u >= d0 && u < d0 + dw) continue; const k = s.axis === 'z' ? 'v' + key(s.at, u) : 'h' + key(u, s.at); edges.add(k); walls.add(k); }
     }
     // outside walls block too, except the front door

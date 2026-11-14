@@ -174,6 +174,7 @@ const COLS = {
   jobs: { table: 'jobs', extra: d => ({ kid_id: d.kidId ?? null, status: d.status ?? null, day: d.date ?? null }) },
   habits: { table: 'habits', extra: d => ({ kid_id: d.kidId ?? null }) },
   growth: { table: 'growth_progress' },
+  homes: { table: 'home_saves' }, // (each kid's Cosy Studio: migration 023)
   guides: { table: 'chore_guides', extra: d => ({ photo_mode: d.photoMode === 'each' || d.photoMode === 'end' ? d.photoMode : null, step_count: Array.isArray(d.steps) ? d.steps.length : null }) },
 };
 
@@ -343,6 +344,7 @@ async function snapshot(familyId) {
     habits: await rows('select id, data from habits where family_id = $1'),
     growth: await rows('select id, data from growth_progress where family_id = $1'),
     guides: await rows('select id, data from chore_guides where family_id = $1'),
+    homes: await rows('select id, data from home_saves where family_id = $1'),
   };
 }
 
@@ -773,7 +775,7 @@ route('POST', '/api/import', async ({ req, s }) => {
   const has = (await db.query('select count(*)::int as n from kids where family_id = $1', [s.family_id])).rows[0].n;
   if (has && !b.force) fail(409, 'This family already has kids saved.', 'not_empty');
   if (b.settings) await writeDoc(s, 'family', 'settings', b.settings, true);
-  for (const col of ['kids', 'jobs', 'habits', 'growth', 'guides']) for (const [id, d] of Object.entries(b[col] || {})) await writeDoc(s, col, id, d, true);
+  for (const col of ['kids', 'jobs', 'habits', 'growth', 'guides', 'homes']) for (const [id, d] of Object.entries(b[col] || {})) await writeDoc(s, col, id, d, true);
   // The device's PIN and passcodes come along as old-style hashes, checked and upgraded when next typed.
   const pins = [['', b.settings && b.settings.pinHash], ...Object.entries(b.kids || {}).map(([id, k]) => [id, k && k.pin])].filter(([, h]) => typeof h === 'string' && h);
   for (const [kidId, h] of pins) {

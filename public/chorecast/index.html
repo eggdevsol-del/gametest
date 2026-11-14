@@ -1805,7 +1805,7 @@ const DEFAULT_SETTINGS = { currency: '$', taxRate: 10, interestWeekly: 2, photoR
 /* =========================================================
    Store: cloud db + assets when available, this device otherwise
    ========================================================= */
-const Store = { mode: 'local', db: null, assets: null, ready: false, ver: 0, settings: null, kids: {}, jobs: {}, habits: {}, growth: {}, guides: {} };
+const Store = { mode: 'local', db: null, assets: null, ready: false, ver: 0, settings: null, kids: {}, jobs: {}, habits: {}, growth: {}, guides: {}, homes: {} };
 const LOCAL_KEY = 'chorecast:v1';
 function loadLocal() { const d = lsGet(LOCAL_KEY, null); if (d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; Store.guides = d.guides || {}; } }
 function saveLocal() { if (Store.mode === 'local') lsSet(LOCAL_KEY, { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits, growth: Store.growth, guides: Store.guides }); else if (Store.mode === 'server') cacheSoon(); }
@@ -1965,7 +1965,7 @@ async function probeServer() {
 const cacheKey = () => 'chorecast:server:' + ((Acct.me && Acct.me.family && Acct.me.family.id) || '');
 let cacheT = 0;
 function cacheSoon() { clearTimeout(cacheT); cacheT = setTimeout(() => lsSet(cacheKey(), { settings: Store.settings, kids: Store.kids, jobs: Store.jobs, habits: Store.habits, growth: Store.growth, guides: Store.guides }), 600); }
-function applySnapshot(d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; Store.guides = d.guides || {}; }
+function applySnapshot(d) { Store.settings = d.settings || null; Store.kids = d.kids || {}; Store.jobs = d.jobs || {}; Store.habits = d.habits || {}; Store.growth = d.growth || {}; Store.guides = d.guides || {}; Store.homes = d.homes || {}; }
 async function startServerMode(me) {
   Acct.me = me; Acct.mail = !!me.mail; Acct.available = true; lsSet('cc:me', me); lsSet('cc:hadAcct', true); Store.mode = 'server';
   const cached = lsGet(cacheKey(), null); if (cached) applySnapshot(cached);
@@ -3476,7 +3476,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     u.surf = [u.grass]; u.terrain = { h: (x, z) => top + ground(x, z), sea: pd ? top - 0.018 : null }; u.play = { at: [0.6 * S, top, 0.42 * S], face: 0.9, walk: (x, z) => Math.hypot(x, z) < 0.88 * S && !inHouse(x, z) && (!pd || pondD(pd, x, z) > pd.r + 0.06) && (!fall || segD(x, z) > fall.w * 1.4) };
     if (X && pd) X.caustics(g, u.grass, top - 0.018);
     if (X) u.dressTick = X.dress(g, k, { top, R, S, house: h, night: k.night });
-    u.items = []; (k.items || []).filter(it => isleOf(it) === 'home').forEach(it => placeItem(g, it));
+    if (XH) XH.budget = 12; u.items = []; (k.items || []).filter(it => isleOf(it) === 'home').forEach(it => placeItem(g, it));
     outline(g);
     if (!k.flat) g.rotation.x = 0.42; return g;
   }
@@ -3494,7 +3494,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
     u.dressTick = X.dress(g, k, { top, R: u.L.r, night: k.night, isle: u.L });
     const clouds = new T.Group(); [0, 1].forEach(i => { const c = smallCloud(k.seed + 60 + i), a = u.L.a + Math.PI + (i ? 1 : -1) * 0.95; c.position.set(Math.cos(a) * 1.5, i ? 0.45 : 0.75, Math.sin(a) * 1.5); clouds.add(c); }); g.add(clouds); u.clouds = clouds;
     u.precip = precip(g, wx, k.flat);
-    u.items = []; (k.items || []).filter(it => isleOf(it) === k.isle).forEach(it => placeItem(g, it));
+    if (XH) XH.budget = 12; u.items = []; (k.items || []).filter(it => isleOf(it) === k.isle).forEach(it => placeItem(g, it));
     outline(g);
     if (!k.flat) g.rotation.x = 0.42; return g;
   }
@@ -3680,7 +3680,7 @@ function mill() { const g = new T.Group(), b = new T.Group(); add(g, new T.Cylin
   if (X) for (const [t, f] of Object.entries(X.items)) if (!ITEM[t]) ITEM[t] = f;
   // island-homes.js: the homes game's animals, pets, garden things and characters in place of the island's own, once
   // the homes game's files are loaded (HomesGame.load); until then, the island's own models
-  const XH = window.ChorecastIslandHomes ? window.ChorecastIslandHomes({ T, mat, GRAD, ITEM }) : null;
+  const XH = window.ChorecastIslandHomes ? window.ChorecastIslandHomes({ T, mat, GRAD, ITEM, pull: id => HomeSync.pull(id) }) : null;
   // The waterfall: a spring bubbling up among rocks, a stream down its channel (ripples drifting downstream), and the
   // falls spilling over the edge, streaked white, curling over the lip and thinning into mist as they drop into the sky.
   const FALL_F = `uniform float uTime; uniform vec3 uA, uB; varying vec2 vUv;
@@ -4152,13 +4152,23 @@ const Sky3D = (() => {
    and 50 per Money Moments lesson learned. Spent on the island. */
 const autoXp = j => Math.round((j.score || 500) / 10);
 const jobXp = j => (j.xpAward != null ? j.xpAward : autoXp(j));
-function xpOf(kid) {
+// What a kid has spent in their Cosy Studio (the homes game's save keeps its own count): off their island wallet too, on
+// classic islands, so the studio's things aren't free. Read from the newer of the device's and the server's copy, at
+// most every few seconds (the save can be big).
+const HSPENT = {};
+function homesSpent(id) {
+  const c = HSPENT[id]; if (c && Date.now() - c.at < 3000) return c.v;
+  let l = null; try { l = JSON.parse(localStorage.getItem('cc:home:' + id) || 'null'); } catch (e) { /* */ }
+  const r = (Store.homes || {})[id], s0 = l && r ? ((l.savedAt || 0) >= (r.savedAt || 0) ? l : r) : l || r;
+  const v = s0 ? Math.max(0, (s0.spent || 0) - (s0.jobPay || 0)) : 0; HSPENT[id] = { at: Date.now(), v }; return v;
+}
+function xpOf(kid, o = {}) {
   let e = 0;
   for (const j of jobsList()) if (j.kidId === kid.id && j.status === 'approved' && j.tier !== 'bonus') e += jobXp(j);
   for (const h of Object.values(Store.habits)) if (h.kidId === kid.id) for (const a of Object.values(h.days || {})) e += a.length * 10;
   const isl = kid.island || {};
   e += Object.keys(kid.badges || {}).length * 50 + (isl.careXp || 0) + (isl.farmXp || 0) + (isl.playXp || 0) + (isl.paidXp || 0) + (isl.bonusXp || 0) + (((Store.growth || {})[kid.id] || {}).xp || 0);
-  const spent = (kid.island || {}).xpSpent || 0;
+  const spent = ((kid.island || {}).xpSpent || 0) + (!o.noHomes && islandGame() === 'classic' ? homesSpent(kid.id) : 0);
   return { earned: e, spent, left: Math.max(0, e - spent) };
 }
 
@@ -4854,10 +4864,27 @@ const islandGame = () => {
   try { const q = new URLSearchParams(location.search).get('game'); if (q === 'classic' || q === 'homes') localStorage.setItem('cc:islandGame', q); const d = localStorage.getItem('cc:islandGame'); if (d) return d; } catch (e) { /* private browsing */ }
   return S().islandGame || 'classic'; // (classic islands are the default again from 2026-11-14; a family that chose Homes keeps it)
 };
+/* Each kid's Cosy Studio (the homes game's save, kept on the device as cc:home:<kid id>) also lives on the server with
+   their account (home_saves, migration 023), so it follows them between devices. Whichever copy was saved last wins;
+   a device with a copy the server hasn't got sends it up. Families without an account keep it on the device only. */
+const HomeSync = (() => {
+  const key = id => 'cc:home:' + id, local = id => { try { return JSON.parse(localStorage.getItem(key(id)) || 'null'); } catch (e) { return null; } };
+  const on = () => Store.mode === 'server';
+  const T0 = {};
+  // bring the device's copy up to date before the game or the island reads it
+  function pull(id) {
+    if (!on() || !id) return; const r = Store.homes && Store.homes[id], l = local(id);
+    if (r && r.v === 1 && (!l || (r.savedAt || 0) > (l.savedAt || 0))) { try { localStorage.setItem(key(id), JSON.stringify(r)); } catch (e) { /* full */ } }
+    else if (l && (!r || (l.savedAt || 0) > (r.savedAt || 0))) push(id, l);
+  }
+  // send a saved copy up (a few seconds after the last change, so a busy game isn't sending every tap)
+  function push(id, st) { if (!on() || !id || !st) return; clearTimeout(T0[id]); T0[id] = setTimeout(() => { const s2 = local(id) || st; Promise.resolve(setDoc('homes', id, s2)).catch(() => {}); }, 4000); }
+  return { pull, push };
+})();
 const HomesGame = (() => {
   const FILES = ['look', 'kit', 'blocks', 'settings', 'homes', 'pets', 'anim2d', 'yami', 'yami3d', 'kid3d', 'cloth', 'ragdoll', 'phys', 'life', 'kitchen', 'chars', 'items',
     'village-build', 'islands-build', 'islands-more', 'farm-land', 'lang-islands', 'village-islands', 'tractor-plan', 'farm-items', 'farm-machines', 'farm-why', 'walkin', 'farm-buildings', 'farm', 'animals3d', 'village-shops',
-    'village-net', 'village', 'slip', 'bank', 'economy', 'infused', 'app'];
+    'village-net', 'village', 'slip', 'bank', 'economy', 'buildon', 'infused', 'app'];
   let loading = null;
   const one = src => new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.async = false; s.onload = ok; s.onerror = () => no(new Error(src)); document.head.appendChild(s); });
   function load() {
@@ -4871,11 +4898,12 @@ const HomesGame = (() => {
     toast(o.studioOnly ? 'Into your studio…' : 'Opening your home…');
     try { await load(); } catch (e) { return toast('Your home couldn’t load. Check the internet and try again.'); }
     const H = window.IsoHome; if (!H || !H.open) return toast('Your home couldn’t load.');
+    HomeSync.pull(id); H.homeSaved = (kid, st) => HomeSync.push(kid, st);
     const who = x => ({ id: x.id, name: x.name, avatar: x.avatar, hue: x.hue });
     // islands bought in the older island game (kid.island, kept with the kid): the homes game gives them free
     const isl = k.island || {}, land = isl.land || {}, bought = {}; if (isl.farm || land.farm) bought.farm = 1; for (const key of Object.keys(land)) if (key !== 'farm' && land[key]) bought[key] = 1;
     const ok = H.open({
-      kid: who(k), xp: () => xpOf(Store.kids[id] || k), bought: o.studioOnly ? null : bought, infused: infusedOn() && !o.studioOnly ? Infused.bridge(id) : null, studioOnly: !!o.studioOnly,
+      kid: who(k), xp: () => xpOf(Store.kids[id] || k, { noHomes: true }), bought: o.studioOnly ? null : bought, infused: infusedOn() && !o.studioOnly ? Infused.bridge(id) : null, studioOnly: !!o.studioOnly,
       family: () => Object.values(Store.kids).filter(x => !x.example && !x.archived).map(who),
       track: (t, p) => track(t, p, id),
       onClose: () => { if (o.studioOnly) { try { G3.refresh && G3.refresh(); Studio.refresh(); } catch (e) { /* */ } return; } if (infusedOn()) { Infused.stop(); UI.screen = 'who'; } render(); } // (back out to the island, its studio drawn as it's now done up)
@@ -4971,7 +4999,7 @@ const openIsland = id => (islandGame() === 'classic' ? Studio.show(id) : HomesGa
 let islandHomesAsked = false;
 function islandHomesSoon() {
   if (islandHomesAsked || islandGame() !== 'classic' || !window.ChorecastIslandHomes) return; islandHomesAsked = true;
-  setTimeout(() => HomesGame.load().then(() => { try { G3.refresh && G3.refresh(); Studio.refresh(); } catch (e) { /* */ } }, () => { islandHomesAsked = false; }), 1500);
+  setTimeout(() => HomesGame.load().then(() => { if (window.IsoHome) window.IsoHome.homeSaved = (kid, st) => HomeSync.push(kid, st); try { G3.refresh && G3.refresh(); Studio.refresh(); } catch (e) { /* */ } }, () => { islandHomesAsked = false; }), 1500);
 }
 /* With the homes game on, the floating island on the chores screen (and on each kid's card) is the kid's home: a
    picture the game keeps of it, the house on its island with everything placed in it (home/app.js keeps it as

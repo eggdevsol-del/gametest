@@ -416,3 +416,11 @@ body.ih-open{overflow:hidden}
 .inf-copt .plus{font-weight:900;color:#1d8a57;font-size:16px;text-align:right;white-space:nowrap}.inf-copt .plus small{display:block;color:#1d8a57;font-size:12px}
 .inf-copt .plus.pay{font-size:15px}
 .inf-copt.lit::after{content:"Tap again to take it";grid-column:1/-1;font-size:12px;font-weight:900;color:#1d8a57;text-align:center}
+/* building onto the home (buildon.js) */
+.ih-bottom{gap:10px}
+.ih-build{pointer-events:auto;width:58px;height:58px;border-radius:20px;border:0;font-size:26px;background:linear-gradient(180deg,#ffd27a,#ffb347);box-shadow:0 10px 24px rgba(255,160,60,.35),inset 0 1px 0 rgba(255,255,255,.5);cursor:pointer}
+.ih.ih-away .ih-build,.ih.editing .ih-build{display:none}
+.bo-bar{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 18px);z-index:30;width:min(380px,calc(100% - 24px));background:rgba(255,255,255,.97);border-radius:22px;padding:14px 16px;box-shadow:0 14px 34px rgba(40,20,80,.28);display:flex;flex-direction:column;gap:8px;color:var(--ink)}
+.bo-bar b{font-size:17px;font-weight:900}.bo-bar span{font-size:14px;font-weight:700;color:#5d5876}.bo-bar i{display:block;font-style:normal;color:#d9534f;margin-top:4px}
+.bo-row{display:flex;gap:8px}.bo-row button{flex:1;border:0;border-radius:14px;padding:12px;font:900 15px/1 inherit;font-family:inherit;cursor:pointer}
+.bo-1{background:linear-gradient(180deg,#5cd18a,#38b06c);color:#fff}.bo-2{background:#efedf6;color:#4b4666}
