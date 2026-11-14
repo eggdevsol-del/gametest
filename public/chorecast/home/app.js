@@ -3060,7 +3060,7 @@
   function applyReno(i) {
     const P = O.pendingReno; if (!P) return; const d = BY[P.t], h = hrec(), rn = (h.reno = h.reno || {}); O.pendingReno = null;
     const val = { t: P.t, c: (P.fin && P.fin.c) || d.col, f: P.fin && P.fin.f, used: P.used ? 1 : 0 };
-    if (d.apply === 'door') rn.door = val; else { rn.rooms = rn.rooms || []; rn.rooms[i] = rn.rooms[i] || {}; rn.rooms[i][d.apply] = val; }
+    if (d.apply === 'door') rn.door = val; else { rn.rooms = rn.rooms || []; rn.rooms[i] = rn.rooms[i] || {}; rn.rooms[i][d.apply] = val; if ((O.st.owned[P.t] || 0) > 0) { boxOf(P.t).shift(); O.st.owned[P.t]--; } }
     closeSheet(); rebuildHouse(); save(); ui(); sound('place'); toast(d.apply === 'door' ? 'Your new front door is in.' : `${HB[O.st.cur].rooms[i].name} is done. Looking good!`);
     if (O.opts.track) O.opts.track('home.reno', { t: P.t, room: d.apply === 'door' ? 'door' : HB[O.st.cur].rooms[i].name, used: !!P.used });
   }
@@ -3072,7 +3072,9 @@
     if (nB > 1) { O.st.owned[t] = (O.st.owned[t] || 0) + nB - 1; for (let q = 1; q < nB; q++) { const b = boxOf(t); b.pop(); b.unshift({ fin, used: 0 }); } }
     if (offer) { const ub = (O.st.usedBought = O.st.usedBought && O.st.usedBought.day === offer.day ? O.st.usedBought : { day: offer.day, ids: [] }); ub.ids.push(offer.id); }
     if (O.opts.track) O.opts.track(offer ? 'home.buyUsed' : 'home.buy', { t, xp: price, fin });
-    if (d.apply) { save(); return d.apply === 'door' ? (O.pendingReno = { t, fin, used: !!offer }, applyReno(0)) : roomAsk(d, fin, !!offer); }
+    // a floor or wall covering waits in Mine until a room's picked (closing the question, or heading off to the farm,
+    // never loses it); the front door goes straight in
+    if (d.apply) { if (d.apply !== 'door') { O.st.owned[t] = (O.st.owned[t] || 0) + 1; const b = boxOf(t); b.pop(); b.unshift({ fin, used: offer ? 1 : 0 }); } save(); return d.apply === 'door' ? (O.pendingReno = { t, fin, used: !!offer }, applyReno(0)) : roomAsk(d, fin, !!offer); }
     O.st.owned[t] = (O.st.owned[t] || 0) + 1; const b = boxOf(t); b.pop(); b.unshift({ fin, used: offer ? 1 : 0, cond: offer && offer.cond }); save();
     if (O.away) { toast(nB > 1 ? `${nB} × ${d.name} are yours! They’re in Mine, ready to set out at home.` : `${d.name} is yours! It’s in Mine, ready to set out at home.`); if (O.opts.track) O.opts.track('village.buy', { t, xp: price, used: !!offer }); return; } // (bought in a village shop: it goes home with you)
     if (offer) { toast(`${d.name} is yours. It's in Mine.`); return phone('market'); }
@@ -3183,6 +3185,7 @@
     if (a === 'item') {
       const d = BY[el.dataset.t], w = wallet();
       if (spare(d.t) > 0 && !d.apply) return startNew(d);
+      if (spare(d.t) > 0 && d.apply && d.apply !== 'door') { const u = boxOf(d.t)[0] || {}; return roomAsk(d, u.fin, !!u.used); } // (a floor or wall bought earlier, still to go in)
       if ((d.earn || 0) > w.earned) { toast(`${d.name} unlocks when you’ve earned ${nf(d.earn)} XP.`); sound('no'); return; }
       return buyAsk(d);
     }
