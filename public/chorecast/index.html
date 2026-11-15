@@ -4264,24 +4264,127 @@ const Studio = (() => {
         for (const m of u.items || []) swapIn(m, later);
         solids = null; // (measured again without the things swapped out)
         const at = (u.play && u.play.at) || [c[0], 0, c[1]], k0 = W.spot(0.6, { x: at[0] * K, z: at[2] * K, d: 1.5 }) || W.spot(0.6);
-        if (k0) W.add(byName.kid, k0.x, k0.z, { avatar: k.avatar, hue: k.hue, yaw: 0.9 }).isKid = true;
+        W.add(byName.kid, (k0 || { x: at[0] * K }).x, (k0 || { z: at[2] * K }).z, { avatar: k.avatar, hue: k.hue, yaw: 0.9 }).isKid = true; // (always a kid: on an island that's mostly water, at its activity's spot)
         for (const [spec, p, id] of later) { const q = W.spot(W.bodies.length ? 0.4 : 0.6, { x: p.x, z: p.z, d: 1 }) || p; W.add(spec, q.x, q.z).classicId = id; }
         W.group.traverse(m => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; } });
       } catch (e) { console.error('proof', e); stop(); } finally { busy = false; }
     }
     function stop() { if (W) W.end(); W = null; isl = null; swapIn = () => false; }
     // An island activity (kick-ups, fishing, surfing…) is played out by the activity's own code on the classic character;
-    // the 3D kid stands in for it: in its exact place and facing, walking when it moves, while the classic body is
-    // hidden (the rod, the ball, the board it holds stay, at its hand)
-    let pup = null;
+    // the 3D kid stands in for it, moving as it moves. Every beat the classic character's limbs (legs, arms, lean,
+    // crouch, head) are copied onto the 3D kid's bones ('act'), and its whole tilt too (lying on the surfboard, on the
+    // horse); when the activity walks it somewhere, the 3D kid walks with its own planted steps. Whatever the activity
+    // gives it to hold (the rod, the camera, the basket) moves to the 3D kid's real hands, a carried bale is held in
+    // both, and kick-ups is told where its feet are, so the ball goes foot to foot and never through it.
+    let pup = null, pupErr = false; // (a fault here never stops the island drawing)
+    const CROUCH = 4; // (the classic hips' drop, in the 3D kid's size)
+    const WQ = T ? new T.Quaternion() : null, WV = T ? new T.Vector3() : null;
+    function drive(inst, P, size) {
+      const a = {};
+      for (const s of ['L', 'R']) {
+        const lg = P['leg' + s].rotation, ar = P['arm' + s].rotation, lift = Math.max(0, -lg.x), up = Math.max(0, -ar.x);
+        a['thigh.' + s] = [lg.x, 0, lg.z]; a['shin.' + s] = [lift * (P['leg' + s].userData.knee ?? 0.85), 0, 0]; a['foot.' + s] = [-lift * 0.3, 0, 0]; // a lifted leg bends at the knee, toes up
+        a['uparm.' + s] = [ar.x, 0, ar.z]; a['forearm.' + s] = [-0.3 - up * 0.12, 0, 0]; a['hand.' + s] = [0.1, 0, 0];
+      }
+      // riding: its short legs can't reach round the horse the way the classic character's do, so they lie out over
+      // its sides, thighs spread, shins hanging, and it sits up tall with the reins
+      if (P.legL.rotation.x < -1.1 && Math.abs(P.legL.rotation.z) > 0.3 && P.legR.rotation.z < -0.3) for (const s of ['L', 'R']) { const sd = s === 'L' ? 1 : -1; a['thigh.' + s] = [-0.55, 0, sd * 1.25]; a['shin.' + s] = [1.05, 0, -sd * 0.35]; a['foot.' + s] = [-0.2, 0, 0]; }
+      a.chest = [P.body.rotation.x * 0.8, P.body.rotation.y, P.body.rotation.z * 0.8];
+      if (P.head) a.head = [P.head.rotation.x * 0.8, P.head.rotation.y, P.head.rotation.z];
+      inst.act = a; inst.actDrop = Math.max(0, 0.085 - P.body.position.y) * size; // (crouching: the classic hips drop, so do these)
+    }
     function puppet(m, t, dt) {
       const b = W && W.bodies.find(q => q.isKid); if (!b || !m) return;
+      const inst = b.inst, P = m.userData.P, g = inst.group;
       for (const o of S0.kidBody || []) o.visible = false;
-      m.updateMatrixWorld(true); const p = new T.Vector3(), q = new T.Quaternion(); m.getWorldPosition(p); m.getWorldQuaternion(q);
-      const e = new T.Euler().setFromQuaternion(q, 'YXZ'), g = b.inst.group, moved = pup ? Math.hypot(p.x - pup.x, p.z - pup.z) : 0;
-      pup = p.clone(); g.position.copy(p); g.rotation.set(0, e.y, 0); b.A.pos.copy(p); b.A.yaw = e.y; b.A.path = []; b.A.use = null;
-      b.inst.walkD = (b.inst.walkD || 0) + moved; b.inst.fitMode = null;
-      try { b.pk.pose(b.inst, moved > 0.2 * dt ? 'walk' : (m.userData.happy || 0) > t ? 'happy' : 'stand', t, b.A.ph); } catch (err) { /* still loading */ }
+      m.updateMatrixWorld(true); const p = new T.Vector3(); m.getWorldPosition(p); m.getWorldQuaternion(WQ);
+      const e = new T.Euler().setFromQuaternion(WQ, 'YXZ'), moved = pup ? Math.hypot(p.x - pup.x, p.z - pup.z) : 0;
+      // standing upright on the island it turns only about the vertical; tipped over (paddling out, on a horse) it
+      // takes the whole tilt
+      const flat = Math.abs(e.x) < 0.05 && Math.abs(e.z) < 0.05 && m.parent === island;
+      const keep = pup && pup.support; pup = p.clone(); pup.support = keep; g.position.copy(p); if (flat) g.rotation.set(0, e.y, 0); else g.quaternion.copy(WQ);
+      b.A.pos.copy(p); b.A.yaw = e.y; b.A.path = []; b.A.use = null; inst.fitMode = null;
+      inst.walkD = (inst.walkD || 0) + moved;
+      const walking = flat && moved > 0.2 * dt && m.userData.doing !== 'beach';
+      inst.carrying = false; // (a bale is carried at its side, so the arms swing as it walks, the right hand on the bale)
+      // feet for kick-ups; how far in front a carried thing sits (in front of the chest, not inside it)
+      m.userData.holdZ = 0.1; m.userData.holdY = 0.12; // (a carried bale: out in front of the chest, not inside it)
+      // for anything the activity moves near the body (the kick-ups ball): where the top of each foot's toes is, and a
+      // way to keep a ball of radius r out of the body (pushed out from whatever part it would be inside). Both in the
+      // island's own coordinates, the classic character's units.
+      const RIG = window.IsoHome && window.IsoHome.rig3d;
+      if (inst.cols && RIG && m.parent) {
+        const par = m.parent, sc = m.getWorldScale(WV).x, cs = () => { g.updateMatrixWorld(true); return RIG.capsules(inst, inst.cols); };
+        m.userData.toeAt = (s, r) => { const k = cs().find(c => c.bone === 'foot.' + s); if (!k) return null; const p = k.b.clone(); p.y += k.r + r * sc; return par.worldToLocal(p).toArray(); };
+        m.userData.clear = (at, r) => {
+          const p = par.localToWorld(new T.Vector3(...at)), R = r * sc, caps = cs().filter(c => !/^tail/.test(c.bone));
+          for (let it = 0; it < 4; it++) {
+            let moved = false;
+            for (const k of caps) {
+              const ab = k.b.clone().sub(k.a), q = Math.max(0, Math.min(1, p.clone().sub(k.a).dot(ab) / Math.max(1e-9, ab.lengthSq()))), c = k.a.clone().addScaledVector(ab, q);
+              const d = p.clone().sub(c), need = k.r + R + 0.02 - d.length(); if (need <= 0) continue;
+              d.y = 0; if (d.lengthSq() < 1e-8) d.set(Math.sin(e.y), 0, Math.cos(e.y)); p.addScaledVector(d.normalize(), need); moved = true; // (out sideways or forwards, never up into the air or down into the ground)
+            }
+            if (!moved) break;
+          }
+          return par.worldToLocal(p).toArray();
+        };
+      }
+      try { if (walking) b.pk.pose(inst, 'walk', t, b.A.ph); else { drive(inst, P, CROUCH); b.pk.pose(inst, 'act', t, b.A.ph); } } catch (err) { /* still loading */ }
+      // resting on what it's on: a surfboard (lying to paddle, kneeling, standing to ride) or the horse (sitting on its
+      // back, legs over its sides). Every part that sits on it (not the arms, which paddle in the water or hold the
+      // reins; on the horse not the hanging shins and feet) is tested straight down onto its surface, and the deepest
+      // one sets the height: nothing sinks through it and the lowest part rests right on it, as it canters and jumps
+      const RS = window.IsoHome && window.IsoHome.rig3d, sup = m.userData.support || (m.parent !== island ? m.parent : null);
+      if (sup && sup.parent && inst.cols && RS) {
+        const ms = pup.support && pup.support.of === sup ? pup.support.ms : []; if (!ms.length) sup.traverse(o => { if (!o.isMesh) return; for (let q = o; q; q = q.parent) if (q === m) return; ms.push(o); });
+        pup.support = { of: sup, ms };
+        const parts = m.userData.support ? /^(uparm|forearm|hand|tail)/ : /^(uparm|forearm|hand|tail|shin|foot|neck|head|chest)/;
+        g.updateMatrixWorld(true); sup.updateMatrixWorld(true);
+        let d = null; const down = new T.Vector3(0, -1, 0), rc = new T.Raycaster(), top = new T.Box3().setFromObject(sup).max.y + 3;
+        for (const k of RS.capsules(inst, inst.cols.filter(c => !parts.test(c.bone)))) for (const q of [k.a, k.b, k.a.clone().lerp(k.b, 0.5)]) {
+          rc.set(new T.Vector3(q.x, top, q.z), down); const hit = rc.intersectObjects(ms, false)[0]; if (!hit) continue;
+          const pen = hit.point.y - (q.y - k.r); if (d == null || pen > d) d = pen;
+        }
+        if (d != null) { g.position.y += d; g.updateMatrixWorld(true); }
+      }
+      // hands on things: both on a carried bale's ends; binoculars or a camera up at the eyes (not at arm's length)
+      const bale = m.userData.carrying, RG = window.IsoHome && window.IsoHome.rig3d, dg = m.userData.doing;
+      const toEyes = (dg === 'grove' || dg === 'lookout') && P.armR.rotation.x < -0.9;
+      const at = m.userData.reachAt;
+      if (at && at.parent) { const p2 = at.getWorldPosition(new T.Vector3()), rt = new T.Vector3(-Math.cos(e.y), 0, Math.sin(e.y)); p2.y += 0.06 * m.getWorldScale(WV).y; inst.reach = { R: p2.clone().addScaledVector(rt, -0.08), L: p2.clone().addScaledVector(rt, 0.08) }; } // (an activity's 'reach for this': a weed to pull)
+      else if (toEyes && inst.cols && RG) {
+        g.updateMatrixWorld(true); const hd = RG.capsules(inst, inst.cols).find(c => c.bone === 'head');
+        if (hd) { const fw = new T.Vector3(Math.sin(e.y), 0, Math.cos(e.y)), rt = new T.Vector3(-fw.z, 0, fw.x), eye = hd.a.clone().lerp(hd.b, 0.35).addScaledVector(fw, hd.r * 1.15); inst.reach = { R: eye.clone().addScaledVector(rt, -hd.r * 0.25), L: eye.clone().addScaledVector(rt, hd.r * 0.45) }; }
+      } else inst.reach = null;
+      // how far the body (hips, chest, head) reaches in front of where it stands, in the classic character's units:
+      // an activity that stands at something (a weed to pull) stands back by this much
+      if (inst.cols && RG && flat) {
+        g.updateMatrixWorld(true); const fw = new T.Vector3(Math.sin(e.y), 0, Math.cos(e.y)); let front = 0;
+        for (const k of RG.capsules(inst, inst.cols.filter(c => /^(hips|chest|neck|head)$/.test(c.bone)))) for (const q of [k.a, k.b]) front = Math.max(front, q.clone().sub(g.position).dot(fw) + k.r);
+        m.userData.front = front / Math.max(1e-4, m.getWorldScale(WV).x);
+      }
+      // what the classic character holds goes to the 3D kid's hands
+      g.updateMatrixWorld(true);
+      // a carried bale: its arms are shorter than its tummy is deep, so it can't hug one in front; it carries it at its
+      // side by the strings instead. The right hand hangs where an arm hangs, a little out from the hip, and the bale
+      // hangs under it, made just small enough (while it's carried) to clear the hip and leg
+      if (bale && inst.B && bale.parent && inst.cols && RG) {
+        const fw = new T.Vector3(Math.sin(e.y), 0, Math.cos(e.y)), rt = new T.Vector3(-fw.z, 0, fw.x), base = 0.035 * bale.parent.getWorldScale(WV).x;
+        const sR = inst.B['uparm.R'].getWorldPosition(new T.Vector3());
+        const arm = sR.distanceTo(inst.B['forearm.R'].getWorldPosition(WV)) + inst.B['forearm.R'].getWorldPosition(new T.Vector3()).distanceTo(inst.B['hand.R'].getWorldPosition(WV));
+        const hand = sR.clone().addScaledVector(rt, arm * 0.62).addScaledVector(fw, arm * 0.1); hand.y -= arm * 0.76; // (out from the hip, as an arm holds something heavy away from the leg)
+        const caps = RG.capsules(inst, inst.cols.filter(c => /^(chest|hips|thigh\.R|shin\.R)$/.test(c.bone)));
+        const into = (c, r) => { let worst = 0; for (const k of caps) { const ab = k.b.clone().sub(k.a), q = Math.max(0, Math.min(1, c.clone().sub(k.a).dot(ab) / Math.max(1e-9, ab.lengthSq()))); worst = Math.max(worst, k.r + r - c.distanceTo(k.a.clone().addScaledVector(ab, q))); } return worst; };
+        let sc = 0.75, at = null;
+        for (; sc >= 0.35; sc -= 0.05) { const r = base * sc; at = hand.clone(); at.y -= r; const pen = into(at, r); if (pen <= 0) break; if (sc - 0.05 < 0.35) at.addScaledVector(rt, pen); }
+        bale.scale.setScalar(sc); bale.position.copy(bale.parent.worldToLocal(at.clone())); bale.rotation.set(0, 0, 0); bale.updateMatrixWorld(true);
+        inst.reach = { R: at.clone().setY(at.y + base * sc), L: null };
+      }
+      for (const [h, bn] of [[P.hand, 'hand.R'], [P.handL, 'hand.L']]) {
+        const hb = inst.B && inst.B[bn]; if (!h || !hb) continue; // (always: the kite string and the fishing line start at the hand too)
+        hb.getWorldPosition(WV); h.parent.updateMatrixWorld(true); h.position.copy(h.parent.worldToLocal(WV));
+      }
     }
     const kidShown = on => { if (W) for (const b of W.bodies) if (b.isKid) b.inst.group.visible = on; };
     // what a tap hits on the island: { kid } (the walking kid), or { id } (the kid's own thing or animal: it says hi)
@@ -4290,7 +4393,7 @@ const Studio = (() => {
     const mine = id => W && (W.items.find(i => i.classicId === id) || W.bodies.find(b => b.classicId === id));
     const turned = (id, r) => { const x = mine(id); if (x && x.group) W.turn(x, r); };
     const gone = id => { const x = mine(id); if (x) W.remove(x); };
-    return { start, stop, tapped, turned, gone, added: m => swapIn(m), tick: (t, dt) => { if (W) { kidShown(true); if (S0.play) { puppet(S0.kidM, t, dt); W.tick(t, dt, b => b.isKid); /* (the pets carry on while the kid plays) */ } else { pup = null; W.tick(t, dt); } } }, get on() { return !!W; }, get world() { return W; } };
+    return { start, stop, tapped, turned, gone, added: m => swapIn(m), tick: (t, dt) => { if (W) { kidShown(true); if (S0.play) { try { puppet(S0.kidM, t, dt); } catch (e) { if (!pupErr) console.error('puppet', e); pupErr = true; } W.tick(t, dt, b => b.isKid); /* (the pets carry on while the kid plays) */ } else { if (pup) { const k = W.bodies.find(q => q.isKid); if (k) { k.inst.reach = null; k.inst.carrying = false; } } pup = null; W.tick(t, dt); } } }, get on() { return !!W; }, get world() { return W; } };
   })();
   let R, pace, scene, cam, island, clouds, kidId = null, raf = 0, last = 0, theta = 0.7, phi = 1.02, rad = 4.6, idle = 0, moved = 0, pinch0 = 0, rad0 = 0;
   const ptrs = new Map(), THUMBS = {}, ray = T ? new T.Raycaster() : null, target = T ? new T.Vector3(0, -0.42, 0) : null;

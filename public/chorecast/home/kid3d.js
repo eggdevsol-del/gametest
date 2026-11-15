@@ -62,6 +62,9 @@
     const [st, br] = st0.split('.'), u = t - (inst.st0 || 0);
     inst.prop = null; inst.doze = false; // a move that uses a book says so each beat; tools are what's in hand (inst.holding)
     let drop = 0, lie = 0;
+    // driven from outside (an island activity: kick-ups, fishing, surfing…): inst.act is the bones' angles and
+    // inst.actDrop how far the hips sink, set every beat by whatever is playing it out
+    if (st === 'act') { Object.assign(P, inst.act || {}); TAIL.forEach((n, i) => set(n, 0.1, 0, Math.sin(t * 2 - i * 0.6) * 0.2)); return { P, drop: inst.actDrop || 0, lie: 0 }; }
     if (st === 'sitchair' || st === 'play') {
       // on a seat: thighs level, shins hanging down; at the piano the hands reach forward and play
       // on a seat the legs rest wherever they fall (phys.js: dangling, along a deep seat, feet on the floor)
@@ -251,7 +254,7 @@
     // the head keeps out of things and out of other bodies (a pet being patted): it draws back, chest and neck
     // together, as far as it needs (eased, so it moves like a person ducking away, not a jump)
     if (inst.headBack) { const hb = inst.headBack, add = (n, v) => { const p = tg.P[n] || [0, 0, 0]; tg.P[n] = [p[0] - v, p[1], p[2]]; }; add('chest', hb * 0.55); add('neck', hb * 0.45); }
-    IH.rig3d.springBones(inst, tg.P, dt, st === 'walk' ? 160 : 80, st === 'walk' ? 18 : 12);
+    IH.rig3d.springBones(inst, tg.P, dt, st === 'act' ? 420 : st === 'walk' ? 160 : 80, st === 'act' ? 34 : st === 'walk' ? 18 : 12); // (an activity's moves are quick: a kick, a cast)
     const c = inst.cur.__b || (inst.cur.__b = [0]); c[0] += (tg.drop - c[0]) * Math.min(1, dt * 7);
     inst.hopV -= 9 * dt; inst.hopY = Math.max(0, inst.hopY + inst.hopV * dt); if (inst.hopY === 0) inst.hopV = Math.max(0, inst.hopV);
     inst.body.position.y = -c[0] + inst.hopY;

@@ -996,7 +996,7 @@ void main() {
       };
     } else if (key === 'beach') {
       // Surfing: paddle out lying on the board, turn and wait, then stand and ride a wave back in.
-      const board = new T.Group(); props.add(board); sph(board, 0.03, 0xffd43b, 0, 0, 0, 0.9, 0.22, 3.2); bx(board, 0.008, 0.004, 0.17, 0xe03131, 0, 0.005, 0);
+      const board = new T.Group(); props.add(board); sph(board, 0.03, 0xffd43b, 0, 0, 0, 0.9, 0.22, 3.2); bx(board, 0.008, 0.004, 0.17, 0xe03131, 0, 0.005, 0); m.userData.support = board; // (what it lies and stands on: a stand-in body rests on its surface)
       let lane = (rr() - 0.5) * 0.6, from = toWorld(pl.L, 0.18, lane), to = toWorld(pl.L, 0.78, lane + (rr() - 0.5) * 0.2);
       const along = (q, a, b) => [a[0] + (b[0] - a[0]) * q, a[1] + (b[1] - a[1]) * q];
       { const [sx, sz] = toWorld(pl.L, 0.02, lane); m.position.set(sx, h(sx, sz), sz); m.rotation.y = Math.atan2(from[0] - sx, from[1] - sz); st.phase = 'paddle'; }
@@ -1036,11 +1036,14 @@ void main() {
       step = (t, dt) => {
         weeds.forEach(w => { if (w.userData.grow < 1) { w.userData.grow = Math.min(1, w.userData.grow + dt * 1.5); w.scale.setScalar(ease(w.userData.grow)); } });
         if (st.phase === 'go') { tgt = weeds.reduce((a, w) => (!a || Math.hypot(w.position.x - m.position.x, w.position.z - m.position.z) < Math.hypot(a.position.x - m.position.x, a.position.z - m.position.z) ? w : a), null); phase('walk'); }
-        if (st.phase === 'walk') { still(P); const there = walkTo(m, u, tgt.position.x - 0.04, tgt.position.z - 0.04, dt); walking(P, t, !there); if (there) { m.rotation.y = Math.atan2(tgt.position.x - m.position.x, tgt.position.z - m.position.z); phase('pull'); } }
+        if (st.phase === 'walk') {
+          // stands just back from the weed, on the side it comes from (back by its body's reach when the 3D kid stands in)
+          if (!tgt.userData.stand) { const dx = m.position.x - tgt.position.x, dz = m.position.z - tgt.position.z, d = Math.hypot(dx, dz) || 1, off = Math.max(0.057, (m.userData.front || 0) + 0.02); tgt.userData.stand = [tgt.position.x + dx / d * off, tgt.position.z + dz / d * off]; }
+          still(P); const there = walkTo(m, u, tgt.userData.stand[0], tgt.userData.stand[1], dt); walking(P, t, !there); if (there) { m.rotation.y = Math.atan2(tgt.position.x - m.position.x, tgt.position.z - m.position.z); phase('pull'); } }
         else if (st.phase === 'pull') {
-          const q = Math.min(1, st.t / 1.1), c2 = Math.sin(Math.PI * Math.min(1, q * 1.4)); P.body.rotation.x = 0.7 * c2; P.legL.rotation.x = P.legR.rotation.x = -0.5 * c2; P.body.position.y = 0.085 - 0.02 * c2; P.armR.rotation.x = P.armL.rotation.x = -0.9 * c2;
+          const q = Math.min(1, st.t / 1.1), c2 = Math.sin(Math.PI * Math.min(1, q * 1.4)); m.userData.reachAt = q < 0.85 ? tgt : null; P.body.rotation.x = 0.7 * c2; // (both hands on the weed while it pulls) P.legL.rotation.x = P.legR.rotation.x = -0.5 * c2; P.body.position.y = 0.085 - 0.02 * c2; P.armR.rotation.x = P.armL.rotation.x = -0.9 * c2;
           if (q > 0.6) { tgt.position.y += dt * 0.15; tgt.scale.multiplyScalar(1 - dt * 3); }
-          if (q >= 1) { props.remove(tgt); weeds.splice(weeds.indexOf(tgt), 1); sprout(); still(P); say(2, 'Weed pulled', '🌱'); phase('go'); }
+          if (q >= 1) { m.userData.reachAt = null; props.remove(tgt); weeds.splice(weeds.indexOf(tgt), 1); sprout(); still(P); say(2, 'Weed pulled', '🌱'); phase('go'); }
         }
       };
     } else if (key === 'stable') {
@@ -1106,29 +1109,45 @@ void main() {
       m.position.set(pl.pile[0] + 0.1, h(pl.pile[0] + 0.1, pl.pile[1]), pl.pile[1]);
       step = (t, dt) => {
         if (st.phase === 'go') { const there = walkTo(m, u, pl.pile[0] + 0.08, pl.pile[1] + 0.02, dt); walking(P, t, !there); if (there) { still(P); phase('lift'); } }
-        else if (st.phase === 'lift') { const q = Math.min(1, st.t / 0.5); P.armR.rotation.x = P.armL.rotation.x = -1.2 * q; if (!bale) { bale = new T.Group(); cyl(bale, 0.035, 0.035, 0.06, 0xe9c46a, 0, 0, 0, 12).rotation.z = P2; bale.position.set(0, 0.13, 0.06); m.add(bale); } if (q >= 1) phase('carry'); }
+        else if (st.phase === 'lift') { const q = Math.min(1, st.t / 0.5); P.armR.rotation.x = P.armL.rotation.x = -1.2 * q; if (!bale) { bale = new T.Group(); cyl(bale, 0.035, 0.035, 0.06, 0xe9c46a, 0, 0, 0, 12).rotation.z = P2; bale.position.set(0, m.userData.holdY || 0.13, m.userData.holdZ || 0.06); m.add(bale); m.userData.carrying = bale; } if (q >= 1) phase('carry'); }
         else if (st.phase === 'carry') { const there = walkTo(m, u, pl.stack[0] - 0.08, pl.stack[1], dt, 0.15); walking(P, t, !there); P.armR.rotation.x = P.armL.rotation.x = -1.2; if (there) phase('drop'); }
         else if (st.phase === 'drop') {
-          const q = Math.min(1, st.t / 0.5); if (q >= 1) { m.remove(bale); bale.position.set(pl.stack[0] + (stack.length % 2) * 0.02, h(...pl.stack) + 0.035 + stack.length * 0.06, pl.stack[1]); bale.rotation.y = stack.length * 0.7; props.add(bale); stack.push(bale); bale = null; if (stack.length > 6) stack.splice(0).forEach(b => props.remove(b)); still(P); say(2, 'Bale stacked', '🌾'); phase('go'); }
+          const q = Math.min(1, st.t / 0.5); if (q >= 1) { m.remove(bale); m.userData.carrying = null; bale.scale.setScalar(1); bale.position.set(pl.stack[0] + (stack.length % 2) * 0.02, h(...pl.stack) + 0.035 + stack.length * 0.06, pl.stack[1]); bale.rotation.y = stack.length * 0.7; props.add(bale); stack.push(bale); bale = null; if (stack.length > 6) stack.splice(0).forEach(b => props.remove(b)); still(P); say(2, 'Bale stacked', '🌾'); phase('go'); }
         }
       };
     } else {
       // Kick-ups: keep the ball up, foot to foot; every ten counts.
       const ball = new T.Group(); props.add(ball); sph(ball, 0.022, 0xffffff, 0, 0, 0); [[1, 0, 0], [-1, 0.3, 0.2], [0, 1, 0], [0.2, -0.6, 0.8]].forEach(([a, b, c]) => sph(ball, 0.007, 0x222222, a * 0.019, b * 0.019, c * 0.019));
-      m.position.set(pl.at[0], h(pl.at[0], pl.at[2]), pl.at[2]); m.rotation.y = pl.face; let kicks = 0, k0 = 0;
+      m.position.set(pl.at[0], h(pl.at[0], pl.at[2]), pl.at[2]); m.rotation.y = pl.face; let kicks = 0, k0 = 0, from = null;
+      const sm = (a, b, x) => { const k = Math.min(1, Math.max(0, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
+      // where a foot meets the ball: on top of its toes. With the 3D kid standing in (m.userData.toeAt) that's its real
+      // foot; otherwise the classic character's, worked out.
+      const toe = (s, f, fz) => {
+        const R = 0.022, at = m.userData.toeAt && m.userData.toeAt(s, R); if (at) return at;
+        const side = s === 'L' ? -0.015 : 0.015;
+        return [m.position.x + f * 0.05 + side * fz, m.position.y + 0.03, m.position.z + fz * 0.05 - side * f];
+      };
       step = (t, dt) => {
-        const per = 0.6, c = (t % per) / per, foot = Math.floor(t / per) % 2, f = Math.sin(pl.face), fz = Math.cos(pl.face);
-        if (Math.floor(t / per) !== k0) { k0 = Math.floor(t / per); kicks++; if (kicks % 10 === 0) say(3, `${kicks} kick-ups!`, '⚽'); }
-        const kickLeg = foot ? P.legL : P.legR; P.legL.rotation.x = P.legR.rotation.x = 0; kickLeg.rotation.x = -0.9 * Math.max(0, 1 - c * 4);
-        ball.position.set(m.position.x + f * 0.05 + (foot ? -0.015 : 0.015) * fz, m.position.y + 0.03 + Math.sin(Math.PI * c) * 0.16, m.position.z + fz * 0.05 - (foot ? -0.015 : 0.015) * f); ball.rotation.x += dt * 8;
-        P.armL.rotation.z = 0.4; P.armR.rotation.z = -0.4;
+        // a kick every 0.6 s, foot to foot: the foot that kicked comes down as the ball goes up, and the other knee
+        // lifts to meet it as it drops, so the ball always lands on a raised foot and never passes through the body
+        const per = 0.6, n = Math.floor(t / per), c = (t % per) / per, f = Math.sin(pl.face), fz = Math.cos(pl.face);
+        const kick = n % 2 ? 'L' : 'R', next = kick === 'L' ? 'R' : 'L';
+        if (n !== k0 || !from) { if (from) { kicks++; if (kicks % 10 === 0) say(3, `${kicks} kick-ups!`, '⚽'); } k0 = n; from = toe(kick, f, fz); }
+        P['leg' + kick].rotation.x = -1.15 * (1 - sm(0, 0.35, c)); P['leg' + next].rotation.x = -1.15 * sm(0.6, 1, c);
+        P.legL.userData.knee = P.legR.userData.knee = 0.3; // (a kick-up leg reaches out nearly straight, the foot under the ball)
+        P['leg' + kick].rotation.z = P['leg' + next].rotation.z = 0;
+        const to = toe(next, f, fz), up = Math.sin(Math.PI * c) * (m.userData.kickH || 0.16);
+        let bp = [from[0] + (to[0] - from[0]) * c, from[1] + (to[1] - from[1]) * c + up, from[2] + (to[2] - from[2]) * c];
+        if (m.userData.clear) bp = m.userData.clear(bp, 0.022); // (it rises past the knee, the tummy and the face: always just in front of them)
+        ball.position.set(...bp); ball.rotation.x += dt * 8;
+        P.armL.rotation.z = 0.45 + Math.sin(t * 2) * 0.05; P.armR.rotation.z = -0.45 - Math.sin(t * 2) * 0.05; P.body.rotation.x = 0.12; P.head.rotation.x = 0.35; // (eyes on the ball)
       };
     }
     pose.sync();
     return {
       resync() { pose.sync(true); },
       step(t, dt) { st.t += dt; out.length = 0; pose.before(true); step(t, dt); pose.after(dt, true); for (let i = rings.length - 1; i >= 0; i--) { const r = rings[i]; r.t += dt; r.m.scale.setScalar(1 + r.t * 4); r.m.material.opacity = 0.8 * (1 - r.t / 0.8); if (r.t > 0.8) { props.remove(r.m); r.m.material.dispose(); rings.splice(i, 1); } } return out.slice(); },
-      end() { if (o.onEnd) o.onEnd(); held.forEach(o2 => o2.parent && o2.parent.remove(o2)); g.remove(props); props.traverse(c => { if (c.geometry) c.geometry.dispose(); if (c.userData.ownMat && c.material) c.material.dispose(); }); },
+      end() { m.userData.reachAt = null; m.userData.carrying = null; m.userData.support = null; if (o.onEnd) o.onEnd(); held.forEach(o2 => o2.parent && o2.parent.remove(o2)); g.remove(props); props.traverse(c => { if (c.geometry) c.geometry.dispose(); if (c.userData.ownMat && c.material) c.material.dispose(); }); },
     };
   }
 
