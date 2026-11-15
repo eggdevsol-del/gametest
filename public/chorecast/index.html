@@ -1294,8 +1294,8 @@ body.st-open #app{opacity:0;pointer-events:none}
 #studio .shop-item b{min-height:0;font-size:calc(12px*var(--ts));line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 #studio .shop-item .shop-about{display:none}
 #studio .shop-item>small{grid-column:1/-1;font-size:calc(10px*var(--ts));line-height:1.2}
-#studio .shop-item{padding-right:34px}
-#studio .shop-item .shop-buy{grid-column:1/-1;display:flex;flex-direction:column;gap:4px;align-self:end;margin-right:-27px}
+#studio .shop-item b{padding-right:30px} /* (room for the heart beside the name; the buttons keep the card's even padding) */
+#studio .shop-item .shop-buy{grid-column:1/-1;display:flex;flex-direction:column;gap:4px;align-self:end}
 #studio .shop-item .shop-buy button{min-height:26px;padding:0 6px;border-radius:9px;font-size:calc(12px*var(--ts));white-space:nowrap}
 /* the wish list: a heart beside the item's name, level with it (filled once it's on the list) */
 #studio .shop-item .shop-buy button.wish{position:absolute;top:12px;right:6px;width:28px;min-height:28px;height:28px;padding:0;border-radius:50%;font-size:calc(16px*var(--ts));line-height:1}
