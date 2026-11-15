@@ -18,12 +18,16 @@ window.MarketTown = function (C) {
     flowers: [['posy', 'Daisy posy', '🌼', 8], ['sunflower', 'Sunflower', '🌻', 10], ['tulips', 'Tulips', '🌷', 12], ['bouquet', 'Big bouquet', '💐', 20]],
     bakery: [['bread', 'Fresh loaf', '🍞', 6], ['croissant', 'Croissant', '🥐', 8], ['cupcake', 'Cupcake', '🧁', 10], ['pie', 'Apple pie', '🥧', 14]],
     crafts: [['yoyo', 'Yo-yo', '🪀', 15], ['paints', 'Paint set', '🎨', 20], ['kite', 'Kite', '🪁', 25], ['teddy', 'Teddy bear', '🧸', 30]],
+    sweets: [['lolly', 'Lollipop', '🍭', 4], ['candy', 'Bag of sweets', '🍬', 6], ['choc', 'Chocolate bar', '🍫', 8], ['floss', 'Candy floss', '🍥', 10]],
+    books: [['comic', 'Comic', '📒', 8], ['story', 'Storybook', '📕', 12], ['atlas', 'Atlas', '🗺️', 16], ['puzzle', 'Puzzle book', '🧩', 10]],
+    library: [['bookmark', 'Bookmark', '🔖', 3], ['novel', 'Chapter book', '📗', 10], ['facts', 'Fact book', '📘', 12], ['poems', 'Poem book', '📙', 9]],
+    post: [['stamp', 'Stamp', '📬', 2], ['postcard', 'Postcard', '💌', 4], ['letter', 'Letter', '✉️', 3], ['parcel', 'Parcel', '📦', 8]],
     cafe: [['cookie', 'Cookie', '🍪', 5], ['juice', 'Orange juice', '🧃', 6], ['cocoa', 'Hot chocolate', '☕', 8], ['sundae', 'Ice-cream sundae', '🍨', 12]]
   };
   const WARE = {}; for (const [at, L] of Object.entries(WARES)) for (const [id, name, icon, xp] of L) WARE[id] = { id, name, icon, xp, at };
-  const FOLK = [['Mia', '🐰', '#ff8fb1'], ['Leo', '🦁', '#ffa94d'], ['Ana', '🐨', '#74c0fc'], ['Sam', '🐶', '#8ce99a'], ['Ivy', '🐱', '#e599f7'], ['Tom', '🐼', '#ffd43b'], ['Zoe', '🦉', '#63e6be'], ['Max', '🐵', '#ff8787']];
+  const FOLK = [['Mia', '🐰', '#ff8fb1'], ['Leo', '🦁', '#ffa94d'], ['Ana', '🐨', '#74c0fc'], ['Sam', '🐶', '#8ce99a'], ['Ivy', '🐱', '#e599f7'], ['Tom', '🐼', '#ffd43b'], ['Zoe', '🦉', '#63e6be'], ['Max', '🐵', '#ff8787'], ['Ruby', '🦊', '#ffa8a8'], ['Kai', '🐯', '#ffc078'], ['Nell', '🐻', '#d8a48f'], ['Ollie', '🐸', '#a9e34b']];
   const HELLO = ['Lovely day for the market!', 'Have you tried the croissants? So good.', 'I’m after something for my garden.', 'The fountain’s my favourite spot.', 'Busy today, isn’t it?', 'I always save up before market day.', 'Those flowers smell amazing.', 'I’m just looking today.'];
-  const JOBS = [{ id: 'cafe', name: 'Serve drinks', icon: '☕', at: 'cafe' }, { id: 'bakery', name: 'Sell bread', icon: '🥐', at: 'bakery' }, { id: 'fruit', name: 'Weigh fruit', icon: '🍎', at: 'fruit' }];
+  const JOBS = [{ id: 'cafe', name: 'Serve drinks', icon: '☕', at: 'cafe' }, { id: 'bakery', name: 'Sell bread', icon: '🥐', at: 'bakery' }, { id: 'fruit', name: 'Weigh fruit', icon: '🍎', at: 'fruit' }, { id: 'post', name: 'Post parcels', icon: '📮', at: 'post' }, { id: 'sweets', name: 'Sell sweets', icon: '🍭', at: 'sweets' }];
   const SHIFT = 6, PER = 2, TEAM = 1.25, NEAR = 2.8; // customers a shift, XP each, the team bonus, how close is "at" a place (world units)
   const M = { on: false, W: null, isl: null, mk: null, kidB: null, joy: { x: 0, y: 0 }, run: false, folk: [], keepers: {}, sibs: new Map(), place: null, shift: null, says: [], auto: false, nextShop: 0, lastPose: 0, ui: null, net: null };
 
@@ -102,15 +106,24 @@ window.MarketTown = function (C) {
     } else if (!M.auto && !M.shift) { g.position.copy(A.pos); g.rotation.set(0, A.yaw, 0); pose(b, A.happy > t ? 'happy' : 'stand', t); }
     if (M.auto && !A.path.length) { M.auto = false; const p = M.autoTo; M.autoTo = null; if (p && p.then) p.then(); }
     for (const k of Object.values(M.keepers)) { k.inst.group.position.copy(k.A.pos); k.inst.group.rotation.set(0, k.A.yaw, 0); pose(k, k.A.happy > t ? 'happy' : 'stand', t); }
-    folkTick(t); sibTick(t, dt); shiftTick(t); stallTick(t);
+    folkTick(t); sibTick(t, dt); shiftTick(t); stallTick(t); camTick(dt);
     const here = places().find(p => near(p)) || null; if ((here && here.id) !== (M.place && M.place.id)) { M.place = here; if (!M.shift) { if (here) C.S0.cat = here.mine ? 'mmine' : 'mplace'; else if (C.S0.cat === 'mplace') C.S0.cat = 'mmap'; C.ui(); } }
-    netPose(t); bubbles();
+    netPose(t); // (the studio places the talk bubbles after this, once the camera's at full size: bubbles())
   }
   // the bodies the walk engine leaves alone (the studio passes this to it): the kid, unless sent somewhere; keepers; siblings
   const skip = b => (b.isKid && !M.auto) || !!b.keeper || !!b.sib;
   const pose = (b, st, t) => { try { b.pk.pose(b.inst, st, t, b.A.ph); } catch (e) { /* (a model still loading) */ } };
   // the camera keeps the kid in view: the studio turns this into where it looks
-  function follow() { const p = kidPos(); return p ? { x: p.x / C.K, y: p.y / C.K + 0.12, z: p.z / C.K } : null; }
+  function follow() {
+    const p = kidPos(); if (!p) return null; const s = M.shift;
+    if (s) { const q = W2(s.p.counter); return { x: (p.x + q.x) / 2 / C.K, y: p.y / C.K + 0.1, z: (p.z + q.z) / 2 / C.K }; } // (a shift: the counter, kid and customer both in view)
+    return { x: p.x / C.K, y: p.y / C.K + 0.12, z: p.z / C.K };
+  }
+  // during a shift the camera swings round (smoothly) to look over the counter from the customers' side
+  function camTick(dt) {
+    const s = M.shift; if (!s) return; const fw = [Math.sin(s.p.yaw), Math.cos(s.p.yaw)], want = Math.atan2(fw[1], fw[0]) + 0.45, th = C.theta();
+    const d = Math.atan2(Math.sin(want - th), Math.cos(want - th)); if (Math.abs(d) > 0.002) C.view({ theta: th + d * Math.min(1, dt * 2.5) });
+  }
   // sends the kid walking to a place's counter (then: what to do there)
   function walkTo(p, then, spot) {
     if (!M.kidB) return; const c = W2(spot || p.counter);
@@ -142,11 +155,11 @@ window.MarketTown = function (C) {
   function say(b, text, secs = 3) { M.says = M.says.filter(s => s.b !== b); M.says.push({ b, text, until: C.now() + secs }); }
   function bubbles() {
     if (!M.ui) return; const now = C.now(); M.says = M.says.filter(s => s.until > now);
-    const cam = C.cam(), html = [];
-    for (const s of M.says) { const p = s.b.A.pos; V.set(p.x, p.y + 2.7, p.z).project(cam); if (V.z > 1) continue; html.push(`<div class="mt-say" style="left:${((V.x + 1) / 2 * innerWidth).toFixed(0)}px;top:${((1 - V.y) / 2 * innerHeight).toFixed(0)}px">${esc(s.text)}</div>`); }
+    const cam = C.cam(), html = []; cam.updateMatrixWorld(); // (the camera's just been moved this frame: place bubbles from where it is now)
+    for (const s of M.says) { V.set(0, 2.7, 0); s.b.inst.group.localToWorld(V); V.project(cam); /* (from the body's own frame: the walk world sits inside the scaled island) */ if (V.z > 1) continue; html.push(`<div class="mt-say" style="left:${((V.x + 1) / 2 * innerWidth).toFixed(0)}px;top:${((1 - V.y) / 2 * innerHeight).toFixed(0)}px">${esc(s.text)}</div>`); }
     const h = html.join(''); if (h !== M.ui.lastSay) { M.ui.says.innerHTML = h; M.ui.lastSay = h; }
   }
-  function float(b, text) { const cam = C.cam(), p = b.A.pos; V.set(p.x, p.y + 2.2, p.z).project(cam); C.float(text, (V.x + 1) / 2 * innerWidth, (1 - V.y) / 2 * innerHeight); }
+  function float(b, text) { const cam = C.cam(); V.set(0, 2.2, 0); b.inst.group.localToWorld(V); V.project(cam); C.float(text, (V.x + 1) / 2 * innerWidth, (1 - V.y) / 2 * innerHeight); }
 
   // ---- jobs: serving at a counter. Customers come up one at a time and ask for something; pick the right thing.
   function startShift(job) {
@@ -162,7 +175,7 @@ window.MarketTown = function (C) {
     const s = M.shift; if (!s) return; const kb = M.kidB; kb.inst.group.position.copy(kb.A.pos); kb.inst.group.rotation.set(0, kb.A.yaw, 0);
     pose(kb, s.busy > C.now() ? 'place' : kb.A.happy > t ? 'happy' : 'stand', t);
     if (s.cust && lost(s.cust)) { free(s.cust); s.cust = null; s.ask = null; }
-    if (s.cust || C.now() < s.wait) { if (s.cust && s.cust.folk.arrived == null && there(s.cust, s.p.counter)) { s.cust.folk.arrived = C.now(); faceTo(s.cust, kb.A.pos); s.ask = pickAsk(s.job.at); say(s.cust, `${WARE[s.ask].icon} please!`, 30); C.ui(); } return; }
+    if (s.cust || C.now() < s.wait) { if (s.cust && s.cust.folk.arrived == null && there(s.cust, s.p.counter)) { s.cust.folk.arrived = C.now(); faceTo(s.cust, kb.A.pos); s.ask = pickAsk(s.job.at); say(s.cust, `${WARE[s.ask].icon} please!`, 1e6); C.ui(); } return; }
     if (s.n >= SHIFT) return endShift();
     const c = nearest(s.p.counter); if (!c) return;
     hold(c); s.cust = c; const q = W2(s.p.counter); M.W.go(c, { x: q.x, z: q.z });
@@ -184,11 +197,11 @@ window.MarketTown = function (C) {
       const team = [...M.sibs.values()].some(x => x.s && x.s.st === 'job:' + s.job.at), xp = Math.min(Math.round(PER * (team ? TEAM : 1) + (team ? 0.5 : 0)), C.Play.room(k));
       if (xp > 0) { C.Play.pay(k, xp); s.xp += xp; } s.n++; kb.A.happy = C.now() + 1; s.cust.A.happy = C.now() + 1.2; say(s.cust, 'Thank you! 😊', 2); float(s.cust, xp > 0 ? `+${xp} XP${team ? ' 🤝' : ''}` : '👍'); C.Sound.cash();
       dayLog({ served: 1, xp });
-    } else { const c = s.cust, ask = s.ask; say(c, `Hmm, I asked for ${WARE[ask].icon}`, 2); setTimeout(() => { if (M.shift === s && s.cust === c && s.ask === ask) say(c, `${WARE[ask].icon} please!`, 30); }, 2000); C.Sound.error(); return C.ui(); }
-    const c = s.cust; s.cust = null; s.ask = null; s.wait = C.now() + 1.2; setTimeout(() => free(c), 600); C.ui();
+    } else { const c = s.cust, ask = s.ask; say(c, `Hmm, I asked for ${WARE[ask].icon}`, 2); setTimeout(() => { if (M.shift === s && s.cust === c && s.ask === ask) say(c, `${WARE[ask].icon} please!`, 1e6); }, 2000); C.Sound.error(); return C.ui(); }
+    const c = s.cust; M.says = M.says.filter(x => x.b !== c || /Thank/.test(x.text)); s.cust = null; s.ask = null; s.wait = C.now() + 1.2; setTimeout(() => free(c), 600); C.ui();
   }
   function endShift(quiet) {
-    const s = M.shift; if (!s) return; M.shift = null; if (s.cust) free(s.cust);
+    const s = M.shift; if (!s) return; M.shift = null; if (s.cust) { M.says = M.says.filter(x => x.b !== s.cust); free(s.cust); }
     if (!quiet) { C.say(`Shift done: ${s.n} customer${s.n === 1 ? '' : 's'} served${s.xp ? `, +${s.xp} XP` : ''}.${C.Play.room(C.kid()) ? '' : ' That’s today’s activity XP.'}`); C.Sound.fanfare(); C.track('market.shift', { job: s.job.id, n: s.n, xp: s.xp }); C.ui(); }
   }
 
@@ -326,7 +339,7 @@ window.MarketTown = function (C) {
       const s = M.shift; if (!s.ask) return `<div class="shop-row">${card(s.job.icon, s.cust ? 'A customer’s coming…' : 'Waiting for a customer', 'Watch their bubble: they’ll say what they’d like.', btn('Stop', 'mtStop'))}</div>`;
       return `<div class="shop-row">${WARES[s.job.at].map(([id, name, icon]) => card(icon, name, '', btn(`Give ${icon}`, 'mtServe', { w: id }, s.busy > C.now()))).join('')}</div>`;
     }
-    if (cat === 'mmap' || (cat === 'mplace' && !M.place)) return `<div class="shop-row">${places().map(q => card(q.icon, q.name, q.mine ? 'Sell your farm produce' : q.id === 'bank' ? 'Your jars' : q.id === 'store' ? 'Tools and feed' : q.id === 'cafe' ? 'Drinks and treats' : 'Stall', btn(near(q) ? 'You’re here' : 'Walk there', 'mtGo', { p: q.id }, near(q)))).join('')}</div>`;
+    if (cat === 'mmap' || (cat === 'mplace' && !M.place)) return `<div class="shop-row">${places().map(q => card(q.icon, q.name, q.mine ? 'Sell your farm produce' : q.id === 'bank' ? 'Your jars' : q.id === 'store' ? 'Tools and feed' : q.id === 'cafe' ? 'Drinks and treats' : q.kind === 'shop' ? 'Shop' : 'Stall', btn(near(q) ? 'You’re here' : 'Walk there', 'mtGo', { p: q.id }, near(q)))).join('')}</div>`;
     if (cat === 'mplace') {
       const p = M.place;
       if (!p) return `<div class="shop-row">${places().map(q => card(q.icon, q.name, q.mine ? 'Sell your farm produce' : q.id === 'bank' ? 'Your jars' : q.id === 'store' ? 'Tools and feed' : 'Stall', btn('Walk there', 'mtGo', { p: q.id }))).join('')}</div>`;
@@ -363,7 +376,7 @@ window.MarketTown = function (C) {
   }
   function act(n, a) {
     const d = (a && a.dataset) || {};
-    if (n === 'mtJobs') { C.S0.cat = 'mjobs'; return C.ui(); }
+    if (n === 'mtJobs') { const kp = kidPos(), dd = j => { const p = placeOf(j.at); if (!p || !kp) return 1e9; const q = W2(p.counter); return Math.hypot(q.x - kp.x, q.z - kp.z); }, j = [...JOBS].sort((a, b) => dd(a) - dd(b))[0]; C.S0.cat = 'mjobs'; C.ui(); if (j) { C.say(`${j.icon} ${j.name}: off to the ${placeOf(j.at).name.toLowerCase()}!`); startShift(j); } return; } // (the nearest job, straight away; the Jobs tab lists them all)
     if (n === 'mtPlaces') { C.S0.cat = 'mmap'; return C.ui(); }
     if (n === 'mtPeople') { C.S0.cat = 'mpeople'; return C.ui(); }
     if (n === 'mtStop') { endShift(); return C.ui(); }
@@ -393,5 +406,5 @@ window.MarketTown = function (C) {
     if (C.floorAt(q.x, q.z) < -4) return false; if (M.W.go(M.kidB, { x: q.x, z: q.z })) { M.auto = true; M.autoTo = null; } return true;
   }
 
-  return { get debug() { return { M, atStall, offer }; }, get on() { return M.on; }, start, stop, tick, skip, follow, tabs, row, actBar, act, tap, place, get shift() { return !!M.shift; } };
+  return { get debug() { return { M, atStall, offer, C }; }, get on() { return M.on; }, start, stop, tick, skip, follow, bubbles, tabs, row, actBar, act, tap, place, get shift() { return !!M.shift; } };
 };

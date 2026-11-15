@@ -28,7 +28,7 @@ ok(w({ market: { friends: { mia: 1 } } }, { market: { friends: { mia: 2 } } }) =
 ok(w({ market: { friends: { mia: 1 } } }, { market: { friends: { mia: 4 } } }) !== null, 'but only one at a time');
 ok(w({}, { market: { friends: { mia: 6 } } }) !== null, 'and never more than 5');
 ok(w({}, { market: { stall: ['egg', 'milk', 'honey', 'jam', 'wool'] } }) !== null, 'a stall holds four kinds of things');
-ok(w({}, { market: { bag: Object.fromEntries([...Array(30)].map((_, i) => ['w' + i, 1])) } }) !== null, 'a bag of 30 kinds is too many');
+ok(w({}, { market: { bag: Object.fromEntries([...Array(60)].map((_, i) => ['w' + i, 1])) } }) !== null, 'a bag of 60 kinds is too many');
 
 // ---- the server: migration 024 and a kid's day at the market
 const PORT = 18795, BASE = 'http://localhost:' + PORT, dir = mkdtempSync(path.join(os.tmpdir(), 'cc-market-'));

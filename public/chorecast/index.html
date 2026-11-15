@@ -4445,7 +4445,7 @@ const Studio = (() => {
   const MT = window.MarketTown ? window.MarketTown({
     S0, K, kid: () => kid(), ui: () => ui(), esc, ic, fmt, updDoc, track, Sound, Play, Farm, PRODUCE, SHOP, xpOf, pushLedger,
     theta: () => theta, cam: () => cam, now: () => performance.now() / 1000, floorAt: (x, z) => Proof.floorAt(x, z), load: src => Proof.one(src),
-    view: v => { rad = v.rad; phi = v.phi; }, thumb: t => { thumbsFor([SHOP.find(x => x.t === t)].filter(Boolean)); return THUMBS[t] || ''; }, buy: (d, pay) => buy(d, pay),
+    view: v => { if (v.rad != null) rad = v.rad; if (v.phi != null) phi = v.phi; if (v.theta != null) theta = v.theta; }, thumb: t => { thumbsFor([SHOP.find(x => x.t === t)].filter(Boolean)); return THUMBS[t] || ''; }, buy: (d, pay) => buy(d, pay),
     say: msg => { S0.msg = msg; ui(); clearTimeout(mtSay); mtSay = setTimeout(() => { if (S0.open && S0.msg === msg) { S0.msg = ''; ui(); } }, 3200); },
     float: (text, x, y) => { const f = document.createElement('div'); f.className = 'st-float'; f.textContent = text; f.style.left = `${x}px`; f.style.top = `${y}px`; $('#studio').appendChild(f); setTimeout(() => f.remove(), 1300); },
     money: () => { close(); setTimeout(() => { UI.tab = 'money'; render(); }, 1000); }
@@ -4601,7 +4601,7 @@ const Studio = (() => {
       else { m.position.x += dx / d * s; m.position.z += dz / d * s; m.position.y = fl(m.position.x, m.position.z); m.rotation.y += Math.atan2(Math.sin(Math.atan2(dx, dz) - m.rotation.y), Math.cos(Math.atan2(dx, dz) - m.rotation.y)) * Math.min(1, dt * 9); Pk.legL.rotation.x = sw; Pk.legR.rotation.x = -sw; Pk.armL.rotation.x = -sw * 0.8; Pk.armR.rotation.x = sw * 0.8; }
     } else if (S0.play && !S0.trip) S0.play.run.step(t, dt).forEach(award);
     else if (S0.brain && !S0.trip && !S0.job) { try { S0.brain.step(t, dt); } catch (e) { console.error(e); rest(); } }
-    if (PROOF) { if (!S0.trip) Proof.tick(t, dt); cam.position.multiplyScalar(K); island.position.multiplyScalar(K); if (S0.trip) S0.trip.old.position.multiplyScalar(K); }
+    if (PROOF) { if (!S0.trip) Proof.tick(t, dt); cam.position.multiplyScalar(K); island.position.multiplyScalar(K); if (S0.trip) S0.trip.old.position.multiplyScalar(K); if (MT && MT.on && !S0.trip) MT.bubbles(); } // (talk bubbles once the camera's where it's drawn from)
     pace(now); G3.inkFor(R); R.render(scene, cam); raf = requestAnimationFrame(frame);
   }
   // ---- Island jobs: each one plays out on the island with its tool, then the island is rebuilt clean

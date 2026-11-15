@@ -176,7 +176,7 @@ function checkMarket(P, N) {
   if (N == null || same(P, N)) return null;
   if (typeof N !== 'object' || Array.isArray(N) || JSON.stringify(N).length > 4000) return 'that market bag is too big.';
   const P0 = P && typeof P === 'object' ? P : {}, bag = N.bag || {}, fr = N.friends || {}, frP = P0.friends || {};
-  if (typeof bag !== 'object' || Object.keys(bag).length > 24 || Object.values(bag).some(v => !Number.isInteger(v) || v < 0 || v > 9)) return 'that market bag doesn’t add up.';
+  if (typeof bag !== 'object' || Object.keys(bag).length > 48 || Object.values(bag).some(v => !Number.isInteger(v) || v < 0 || v > 9)) return 'that market bag doesn’t add up.';
   if (typeof fr !== 'object' || Object.keys(fr).length > 24 || Object.entries(fr).some(([k, v]) => !Number.isInteger(v) || v < 0 || v > 5 || v > num(frP[k]) + 1)) return 'friends are made a heart at a time.';
   if (N.stall != null && (!Array.isArray(N.stall) || N.stall.length > 4 || N.stall.some(x => typeof x !== 'string' || x.length > 20))) return 'a stall holds four kinds of things.';
   return null;
