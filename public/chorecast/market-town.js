@@ -52,7 +52,7 @@ window.MarketTown = function (C) {
     for (const p of places()) { if (p.mine) continue; const q = W2(p.keeper), f = FOLK[(p.id.length * 3) % FOLK.length], b = W.add(folkPk, q.x, q.z, { avatar: f[1], hue: f[2], yaw: p.yaw }); b.keeper = p.id; b.A.yaw = p.yaw; b.A.placed = true; M.keepers[p.id] = b; }
     // townsfolk: about the square, going from stall to stall
     FOLK.forEach(([name, avatar, hue], i) => { const s = W.spot(0.6) || { x: 0, z: 0 }, b = W.add(folkPk, s.x, s.z, { avatar, hue, yaw: Math.random() * 6 }); b.folk = { id: name.toLowerCase(), name, avatar, next: 2 + Math.random() * 8 }; M.folk.push(b); });
-    buildUI(); net(true); C.view({ rad: 1.75, phi: 0.92 });
+    buildUI(); net(true); C.view({ rad: 3.2, phi: 0.92 }); // (far enough back to see the stalls round the kid, not just the kid)
     C.say(`Welcome to Market town! ${matchMedia('(pointer: coarse)').matches ? 'Use the stick to walk, hold 🏃 to run.' : 'Use the stick (or the arrow keys) to walk, hold 🏃 or Shift to run.'}`);
   }
   function stop() {
