@@ -4422,7 +4422,8 @@ const Studio = (() => {
     const gone = id => { const x = mine(id); if (x) W.remove(x); };
     return { start, stop, tapped, turned, gone, added: m => swapIn(m), tick: (t, dt) => { if (W) { kidShown(true); if (S0.play) { try { puppet(S0.kidM, t, dt); } catch (e) { if (!pupErr) console.error('puppet', e); pupErr = true; } W.tick(t, dt, b => b.isKid); /* (the pets carry on while the kid plays) */ } else { if (pup) { const k = W.bodies.find(q => q.isKid); if (k) { k.inst.reach = null; k.inst.carrying = false; } } pup = null; W.tick(t, dt); } } }, get on() { return !!W; }, get world() { return W; } };
   })();
-  let R, pace, scene, cam, island, clouds, kidId = null, raf = 0, last = 0, theta = 0.7, phi = 1.02, rad = 4.6, idle = 0, moved = 0, pinch0 = 0, rad0 = 0;
+  window.IsoHome = window.IsoHome || {}; Object.defineProperty(window.IsoHome, 'classicWorld', { configurable: true, get: () => Proof.world }); // (for checks in the browser console)
+  let R, pace, scene, cam, island, clouds, kidId = null, raf = 0, last = 0, theta = 0.7, phi = 1.02, rad = 4.6, idle = 0, moved = 0, pinch0 = 0, rad0 = 0, viewIsle = null; // (viewIsle: the island the view was set for; built again, it keeps the kid's view)
   const ptrs = new Map(), THUMBS = {}, ray = T ? new T.Raycaster() : null, target = T ? new T.Vector3(0, -0.42, 0) : null;
   const kid = () => Store.kids[kidId];
   const findMesh = id => ((island && island.userData.items) || []).find(m => m.userData.itemId === id);
@@ -4451,7 +4452,7 @@ const Studio = (() => {
   const shadows = o => o.traverse(m => { if (m.isMesh && !m.userData.puffs) { m.castShadow = true; m.receiveShadow = true; } });
   const drop = o => { scene.remove(o); o.traverse(m => { if (m.geometry) m.geometry.dispose(); if (m.userData.ownMat) m.material.dispose(); }); };
   // Builds the island the kid is on (S0.isle): home, or one of their pieces of land.
-  function make() { S0.kidM = null; island = G3.island(kid(), { flat: true, isle: S0.isle, ...(S0.preview ? { look: S0.preview.look, lookKeys: S0.preview.keys } : {}) }); island.scale.setScalar(K); if (PROOF) { if (island.userData.av) island.userData.av.visible = false; } else placeIdle(); const f = G3.frame(island); S0.at = [f.cx, f.cz, S0.isle === 'lookout' ? -0.05 : -0.42]; S0.span = Math.max(f.w, f.d); S0.radMax = Math.max(11, fitRad() * 1.4); if (rad < fitRad()) rad = fitRad(); shadows(island); scene.add(island); }
+  function make() { S0.kidM = null; island = G3.island(kid(), { flat: true, isle: S0.isle, ...(S0.preview ? { look: S0.preview.look, lookKeys: S0.preview.keys } : {}) }); island.scale.setScalar(K); if (PROOF) { if (island.userData.av) island.userData.av.visible = false; } else placeIdle(); const f = G3.frame(island); S0.at = [f.cx, f.cz, S0.isle === 'lookout' ? -0.05 : -0.42]; S0.span = Math.max(f.w, f.d); S0.radMax = Math.max(11, fitRad() * 1.4); if (rad < fitRad() && viewIsle !== S0.isle) rad = fitRad(); viewIsle = S0.isle; shadows(island); scene.add(island); }
   function build() { if (S0.play) stopPlay(true); rest(); Proof.stop(); if (island) drop(island); make(); if (PROOF) Proof.start(island); target.x = S0.at[0]; target.z = S0.at[1]; target.y = S0.at[2]; scene.fog = wxNow().fog ? new T.Fog(new T.Color(0xdde3ea).convertSRGBToLinear(), 4.5 * K, 10 * K) : null; }
   // The kid's character stands about on each piece of land, ready to play (at home they're the hopping avatar).
   function placeIdle(keep) {
@@ -4553,7 +4554,7 @@ const Studio = (() => {
   function frame(now) {
     raf = 0; if (!S0.open) return;
     const dt = Math.min(0.05, (now - last) / 1000), t = now / 1000; last = now;
-    idle += dt; if (idle > 5 && !S0.place) theta += dt * 0.1;
+    idle += dt;
     const bob = PROOF ? 0 : Math.sin(t * 0.8) * 0.03; island.position.y = bob; clouds.rotation.y = t * 0.03;
     if (S0.trip) {
       const tr = S0.trip, p = clamp((now - tr.t0) / 1000, 0, 1), e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(2 - 2 * p, 3) / 2, D = 7 * tr.d, rx = Math.sin(theta) * D, rz = -Math.cos(theta) * D;
@@ -4608,7 +4609,7 @@ const Studio = (() => {
     if (!rec) return;
     isl.tools = { ...(isl.tools || {}), [d.t]: rec }; patch.island = isl; updDoc('kids', k.id, patch);
     const how = { spade: 'Tap any chore tree to move it or change its type.', paintkit: 'Tap something on your island, then pick a colour.', clippers: 'Tap a topiary bush to shape it.', basket: 'Collect eggs at the farm stand.', pail: 'Milk your animals at the farm stand.', shears: 'Shear your animals at the farm stand.' }[d.t];
-    if (!how) S0.cat = 'jobs'; done(`The ${d.name.toLowerCase()} is in your shed. ${how || 'Time to get to work!'}`);
+    done(`The ${d.name.toLowerCase()} is in your shed. ${how || 'Use it from Island jobs.'}`); // (the shop stays where it was, to buy more)
   }
   // A one-off upgrade, like the barn upgrade's bigger pantry.
   function buyUpgrade(d, pay) {
@@ -4627,8 +4628,8 @@ const Studio = (() => {
     else { isl.land = { ...(isl.land || {}), [d.land]: rec }; if (d.land === 'farm') Object.assign(isl, { farm: 1, feed: (isl.feed || 0) + 10, tools: { ...(isl.tools || {}), bucket: (isl.tools || {}).bucket || true } }); }
     patch.island = isl; updDoc('kids', k.id, patch);
     track('island.expand', { what: d.size ? 'size' + d.size : d.land === 'farm' ? 'paddock' : d.land }, k.id); Sound.fanfare();
-    if (d.land && d.land !== 'waterfall' && islesOf(kid()).includes(d.land)) setTimeout(() => go(0, d.land), 700); else build();
-    done(d.land === 'farm' ? 'Your island grew! The paddock comes with a feed bucket and a bag of feed. Now pick some farm animals.' : d.size ? `Your island grew! ${d.about}` : `${d.name} added! ${d.about}`);
+    const away = d.land && d.land !== 'waterfall' && islesOf(kid()).includes(d.land); if (!away) build(); // (a new island waits behind the arrows: the kid stays here, in the shop)
+    done(d.land === 'farm' ? `Your island grew! The paddock comes with a feed bucket and a bag of feed.${away ? ' Tap the arrows to visit it.' : ' Now pick some farm animals.'}` : d.size ? `Your island grew! ${d.about}` : `${d.name} added! ${d.about}${away ? ' Tap the arrows to visit it.' : ''}`);
   }
   function buyFeed(d, pay) {
     const k = kid(), isl = { items: [], xpSpent: 0, ...(k.island || {}) }, patch = {};
@@ -4752,7 +4753,7 @@ const Studio = (() => {
     const isl = { items: [], ...(k.island || {}) }, herd = j.animals.length, reward = j.was >= 0.66 ? (j.q === 'feed' ? herd * 5 : 15) : 0;
     isl.care = { ...(isl.care || {}), [j.q]: Date.now() }; if (reward) isl.careXp = (isl.careXp || 0) + reward;
     if (j.q === 'feed') { isl.feed = Math.max(0, (isl.feed || 0) - herd); track('island.feed', { animals: herd, scoops: herd, hungry: j.was >= 0.66, left: isl.feed, xp: reward }, k.id); }
-    updDoc('kids', k.id, { island: isl }); build();
+    updDoc('kids', k.id, { island: isl }); // (no rebuild: the job has already cleaned the island up, so it carries on smoothly, the view where it was)
     S0.msg = `${j.c.name} done!${reward ? ` +${reward} XP` : ''}`; Sound.fanfare(); FX.burst(innerWidth / 2, innerHeight * 0.4, ['#7CFFB2', '#FFE066', '#FFFFFF', '#9BF6FF'], 34); ui();
     setTimeout(() => { if (S0.open && / done!/.test(S0.msg)) { S0.msg = ''; ui(); } }, 2600);
   }
@@ -5597,6 +5598,9 @@ function layMasonry(root) {
 }
 function render() {
   if (Stage.active) { Stage.dirty = true; return; }
+  // The island studio covers the page: the page waits, and draws again when the studio closes (close() renders). Drawing
+  // it behind the island (its cards, sky and 3D islands) froze the island for a second after every purchase and job.
+  if (Studio.covers) { if (UI.sheet && UI.sheet.live) renderSheet(false); return; }
   islandHomesSoon();
   const app = $('#app');
   document.body.classList.toggle('is-parent', UI.screen === 'parent');

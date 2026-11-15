@@ -7,12 +7,15 @@
   const IH = window.IsoHome = window.IsoHome || {};
   const BIG = ['cow', 'highland', 'alpaca', 'llama', 'donkey', 'horse'], MID = ['goat', 'merino', 'kunekune', 'pony'];
   const SMALL = ['hen', 'rooster', 'duck', 'goose', 'turkey', 'tui', 'kereru', 'weka', 'tuatara', 'crab', 'platypus', 'fantail'];
+  // The small ones at their real size beside the kid (2 tiles, about 1.3 m): a hen about 40 cm, a duck 35 cm, a tui
+  // 30 cm, a fantail 16 cm. (The farm animals are already their real size: a cow 2.4 tiles, a horse 2.8.)
+  const SCALE = { hen: 0.75, rooster: 0.75, duck: 0.75, crab: 0.5, platypus: 0.85, tui: 0.75, fantail: 0.6, tuatara: 0.9 };
   function body(kind) {
     const rig = BIG.includes(kind) || MID.includes(kind), cls = BIG.includes(kind) ? 'big' : MID.includes(kind) ? 'pet' : 'tiny';
     return {
       cls, speed: cls === 'big' ? 0.9 : cls === 'pet' ? 0.8 : 0.6, turnR: cls === 'big' ? 0.6 : cls === 'pet' ? 0.4 : 0.2,
       idle: rig ? ['graze', 'graze', 'stand', 'sleep'] : ['graze', 'stand', 'stand', 'sleep'],
-      make: () => { const a = IH.animals3d.make(kind); a.group.userData.animal = a; return Object.assign(a.inst || {}, { group: a.group, animal: a }); },
+      make: () => { const a = IH.animals3d.make(kind); a.group.userData.animal = a; a.group.scale.setScalar(SCALE[kind] || 1); return Object.assign(a.inst || {}, { group: a.group, animal: a }); },
       // (the walk engine counts the ground covered in walkD, which times the rigged animals' strides)
       pose: (inst, st, t) => IH.animals3d.move(inst.animal, t, st.split('.')[0] === 'sit' ? 'stand' : st, 0)
     };
