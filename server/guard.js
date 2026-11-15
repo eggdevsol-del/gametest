@@ -165,7 +165,21 @@ export function checkKidWrite(prev, next, settings, now = Date.now()) {
   const xs0 = num(isP.xpSpent), xs1 = num(isN.xpSpent);
   if (newXp > Math.max(0, xs1 - xs0) + 0.5 || xs1 < xs0 - xpBack - 0.5) return nope('XP spent on the island doesn’t add up.');
   if (sold > soldMost + cashBack + 1) return nope('that sold for more than it’s worth.');
+  const mk = checkMarket(isP.market, isN.market); if (mk) return nope(mk);
   return checkSwaps(prev.swaps, next.swaps, now);
+}
+
+/* Market town (kid.island.market): what's in the kid's bag (bought with XP, which xpSpent above already checks),
+   how much each townsperson likes them (a heart at a time, at most 5), the one request they're on, and up to four
+   kinds of produce on their stall. Small, and only ever what the market makes. */
+function checkMarket(P, N) {
+  if (N == null || same(P, N)) return null;
+  if (typeof N !== 'object' || Array.isArray(N) || JSON.stringify(N).length > 4000) return 'that market bag is too big.';
+  const P0 = P && typeof P === 'object' ? P : {}, bag = N.bag || {}, fr = N.friends || {}, frP = P0.friends || {};
+  if (typeof bag !== 'object' || Object.keys(bag).length > 24 || Object.values(bag).some(v => !Number.isInteger(v) || v < 0 || v > 9)) return 'that market bag doesn’t add up.';
+  if (typeof fr !== 'object' || Object.keys(fr).length > 24 || Object.entries(fr).some(([k, v]) => !Number.isInteger(v) || v < 0 || v > 5 || v > num(frP[k]) + 1)) return 'friends are made a heart at a time.';
+  if (N.stall != null && (!Array.isArray(N.stall) || N.stall.length > 4 || N.stall.some(x => typeof x !== 'string' || x.length > 20))) return 'a stall holds four kinds of things.';
+  return null;
 }
 
 /* Chore swaps (swaps[date][fromKey] = toKey, or '-' when a chore that didn't need doing just leaves the list): from a

@@ -725,6 +725,24 @@ route('POST', '/api/devices/pair', async ({ req, res }) => {
   return { ...(await me(s)), ...tok };
 });
 
+// Market town: a kid's day at the market (migration 024), added to as they serve, sell and help (a few numbers at a
+// time, so one post can't add much), and the last fortnight for the grown-ups.
+route('POST', '/api/market/day', async ({ req, s }) => {
+  needSession(s); const b = await readJson(req, 4096), kid = String(b.kidId || '').slice(0, 40);
+  const n = (v, max) => Math.max(0, Math.min(max, Math.round(Number(v) || 0)));
+  const add = { served: n(b.served, 20), sold: n(b.sold, 20), quests: n(b.quests, 5), xp: n(b.xp, 400) };
+  const own = await db.query('select 1 from kids where family_id = $1 and id = $2', [s.family_id, kid]); if (!own.rows.length) fail(404, 'That kid isn’t in this family.', 'no_kid');
+  const day = new Date().toISOString().slice(0, 10);
+  await db.query(`insert into market_days (family_id, kid_id, day, served, sold, quests, xp) values ($1, $2, $3, $4, $5, $6, $7)
+    on conflict (family_id, kid_id, day) do update set served = market_days.served + $4, sold = market_days.sold + $5, quests = market_days.quests + $6, xp = market_days.xp + $7, updated_at = now()`,
+  [s.family_id, kid, day, add.served, add.sold, add.quests, add.xp]);
+  return { ok: true };
+});
+route('GET', '/api/market/days', async ({ s, url }) => {
+  needSession(s); const kid = String(url.searchParams.get('kid') || '').slice(0, 40);
+  const rows = (await db.query('select kid_id, day, served, sold, quests, xp from market_days where family_id = $1 and ($2 = \'\' or kid_id = $2) order by day desc limit 60', [s.family_id, kid])).rows;
+  return { days: rows };
+});
 route('GET', '/api/devices', async ({ s }) => {
   needParent(s);
   const rows = (await db.query(`select d.id, d.kind, d.name, d.created_at, d.last_seen_at, u.name as owner from devices d left join users u on u.id = d.user_id

@@ -358,6 +358,7 @@ window.ChorecastIsland = K => {
     stable: g => { miniIsland(g, 0.17); const b = barn(g, 0, 0); b.scale.setScalar(0.6); b.position.y = 0.04; },
     lake: g => { miniIsland(g, 0.18); add(g, new T.CylinderGeometry(0.13, 0.13, 0.01, 24), water(0x3f9fe0), 0, 0.045, 0); const s = new T.Group(); s.scale.setScalar(0.5); s.position.set(0.03, 0.04, 0.02); g.add(s); M.swan(s); },
     waterfall: g => { miniIsland(g, 0.17); const w = add(g, new T.BoxGeometry(0.06, 0.3, 0.01), mat(0x9be7ff, { op: 0.75 }), 0, -0.1, 0.17); w.userData.noInk = true; add(g, new T.BoxGeometry(0.06, 0.012, 0.16), water(), 0, 0.045, 0.09); },
+    marketland: g => { miniIsland(g, 0.19, 0xc9bca6); bx(g, 0.16, 0.02, 0.07, WOOD, -0.04, 0.07, 0.02); for (let i = 0; i < 4; i++) tilt(bx(g, 0.04, 0.005, 0.1, i % 2 ? 0xffffff : 0xe03131, -0.1 + i * 0.04, 0.15, 0), 0.25); [-0.11, 0.03].forEach(x => cyl(g, 0.004, 0.004, 0.12, DARK, x, 0.1, 0.05, 5)); cyl(g, 0.05, 0.05, 0.02, 0xb7aa96, 0.09, 0.05, -0.06, 14); cyl(g, 0.01, 0.01, 0.06, 0xb7aa96, 0.09, 0.08, -0.06, 6); sph(g, 0.02, 0xff6b6b, -0.06, 0.09, 0.03); sph(g, 0.02, 0xffd43b, -0.02, 0.09, 0.03); },
     lookout: g => { miniIsland(g, 0.16); add(g, rough(new T.ConeGeometry(0.13, 0.3, 7), 0.02, 95), mat(0x8a8f96, { flat: true }), 0, 0.18, 0); cn(g, 0.045, 0.06, 0xffffff, 0, 0.31, 0, 7); },
     sky: g => { const s = new T.Group(); s.position.y = 0.15; g.add(s); miniIsland(s, 0.12); for (let i = 0; i < 6; i++) bx(g, 0.04, 0.004, 0.01, WOOD, 0.06, 0.02 + i * 0.03, 0.06); [-0.02, 0.02].forEach(x => cyl(g, 0.002, 0.002, 0.16, 0xeadfc4, 0.06 + x, 0.08, 0.06, 3)); tick(g, t => { s.position.y = 0.15 + Math.sin(t * 1.2) * 0.01; }); },
   });
@@ -399,7 +400,7 @@ window.ChorecastIsland = K => {
      (ground height and water level) lets animals walk its slopes, swim and dive. */
   const FRONT = 0.7;
   // An island's frame: its centre, radius r and (ox, oz), the way its front faces.
-  const isle = key => { const r = key === 'sky' ? 0.85 : 1; return { key, a: FRONT, r, cx: 0, cz: 0, ox: Math.cos(FRONT), oz: Math.sin(FRONT) }; };
+  const isle = key => { const r = key === 'sky' ? 0.85 : key === 'market' ? 1.8 : 1; return { key, a: FRONT, r, cx: 0, cz: 0, ox: Math.cos(FRONT), oz: Math.sin(FRONT) }; };
   // A spot on an island as (u, v) in its own frame (u towards the front, v across, in island radii), and back.
   const toLocal = (L, x, z) => ({ u: +(((x - L.cx) * L.ox + (z - L.cz) * L.oz) / L.r).toFixed(4), v: +((-(x - L.cx) * L.oz + (z - L.cz) * L.ox) / L.r).toFixed(4) });
   const toWorld = (L, u, v) => [L.cx + (u * L.ox - v * L.oz) * L.r, L.cz + (u * L.oz + v * L.ox) * L.r];
@@ -552,11 +553,105 @@ void main() {
   // Builds one piece of land as an island (the farm's is built by index.html, with ground()).
   // ctx: { top, lawnC, night, flat, tint, rock, dens (blades per unit area), grow, meadow }.
   // Returns { L, zones, surf, tick, terrain: { h(x, z) ground height, sea (water level, or null) } }.
+  /* ---------- Market town (2026-11-15) ----------
+     The biggest island (r 1.8): a cobbled square round a fountain, open-air stalls with striped awnings in a ring
+     facing the fountain, three shops along the back (a general store, a café and the market hall bank), lamp posts with
+     bunting between them, benches, barrels and trees on the grass verge, and a welcome arch at the front. The kid walks
+     it with a joystick (index.html). Every stall and shop says where its counter is (where a customer stands) and where
+     its keeper stands, so index.html can put townsfolk and the kid there. */
+  const MARKET_STALLS = [
+    { id: 'fruit', name: 'Fruit & veg', icon: '🍎', ang: 0.95, cols: [0xe03131, 0xffffff], wares: 'fruit' },
+    { id: 'flowers', name: 'Flower stall', icon: '🌸', ang: 1.8, cols: [0xf06595, 0xffffff], wares: 'flowers' },
+    { id: 'bakery', name: 'Bakery cart', icon: '🥐', ang: -0.95, cols: [0xf59f00, 0xfff3d6], wares: 'bread' },
+    { id: 'crafts', name: 'Crafts & toys', icon: '🧸', ang: -1.8, cols: [0x4dabf7, 0xffffff], wares: 'toys' },
+    { id: 'mine', name: 'Your stall', icon: '⭐', ang: 0.42, cols: [0x51cf66, 0xffffff], wares: 'mine', d: 0.86 },
+    { id: 'mine2', name: 'Your stall', icon: '⭐', ang: -0.42, cols: [0x51cf66, 0xffffff], wares: 'mine', d: 0.86 },
+    { id: 'mine3', name: 'Your stall', icon: '⭐', ang: 2.62, cols: [0x51cf66, 0xffffff], wares: 'mine', d: 0.8 }
+  ]; // (three free pitches: brothers and sisters each have their own, in family order)
+  const MARKET_SHOPS = [
+    { id: 'store', name: 'General store', icon: '🛍️', ang: PI - 0.62, wall: 0xf3e3c3, roof: 0x3f6fb0, sign: 'STORE' },
+    { id: 'cafe', name: 'Café', icon: '☕', ang: PI, wall: 0xf7d6c4, roof: 0xc0503a, sign: 'CAFÉ' },
+    { id: 'bank', name: 'Market hall bank', icon: '🏦', ang: PI + 0.62, wall: 0xe9eef5, roof: 0x4f5f7a, sign: 'BANK' }
+  ];
+  const SIGNS = {};
+  // A painted board: the words in big letters on a coloured ground (one material per board kind).
+  function signMat(text, bg, fg) {
+    const key = text + bg + fg; if (SIGNS[key]) return SIGNS[key];
+    const c = document.createElement('canvas'); c.width = 256; c.height = 72; const x = c.getContext('2d');
+    x.fillStyle = bg; x.fillRect(0, 0, 256, 72); x.strokeStyle = 'rgba(0,0,0,.25)'; x.lineWidth = 6; x.strokeRect(3, 3, 250, 66);
+    x.fillStyle = fg; x.font = `900 ${text.length > 9 ? 30 : 40}px system-ui, -apple-system, sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(text, 128, 38);
+    const t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; t.anisotropy = 4;
+    return (SIGNS[key] = new T.MeshBasicMaterial({ map: t, toneMapped: false }));
+  }
+  const board = (g, text, bg, fg, w, h, x, y, z, ry = 0) => { const m = add(g, new T.PlaneGeometry(w, h), signMat(text, bg, fg), x, y, z); m.rotation.y = ry; m.userData.noInk = true; return m; };
+  function marketLand(g, L, y, ctx, seed, zones, fx, base, tone, on) {
+    const rr = K.mulberry(seed + 7), R = L.r, PLAZA = 1.18, FR = 0.24;
+    const polar = (ang, d) => [L.cx + Math.cos(L.a + ang) * d, L.cz + Math.sin(L.a + ang) * d];
+    const dist = (x, z) => Math.hypot(x - L.cx, z - L.cz);
+    const faceIn = (x, z) => Math.atan2(L.cx - x, L.cz - z); // (a thing's +z towards the fountain)
+    // Cobbles: stones in staggered rows, each its own shade; darker paving round the fountain, a sandstone kerb.
+    const cob = (x, z) => { const q = 30, row = Math.floor(z * q), cx = Math.floor(x * q + (row % 2) * 0.5), h = Math.sin(cx * 12.9898 + row * 78.233) * 43758.5453; return h - Math.floor(h); };
+    on(ground(g, L, y, { ...base, lawnC: tone(0x4f8f38), n: 150, habAt: (x, z) => (dist(x, z) < PLAZA ? 'market' : 'field'),
+      col: (x, z) => { const d = dist(x, z); if (d < FR + 0.06) return tone(0x8f8578); if (d < PLAZA) return tone(blend(0xc9bca6, 0x9a8c78, cob(x, z))); if (d < PLAZA + 0.05) return tone(0xd8c49a); return tone(blend(0x4f8f38, 0x3f7a2e, nz(x, z, 6, seed))); } }), 'market');
+    isleGrass(g, ctx, seed, L, y, { not: (x, z) => dist(x, z) < PLAZA + 0.06 });
+    // The fountain: a stone basin of water, a pillar and a bowl, water falling from the top.
+    { const fg = new T.Group(); fg.position.set(L.cx, y, L.cz); g.add(fg);
+      tor(fg, FR, 0.025, 0xb7aa96, 0, 0.05, 0).rotation.x = P2; cyl(fg, FR, FR, 0.03, 0x8f8578, 0, 0.015, 0, 28);
+      add(fg, new T.CircleGeometry(FR - 0.01, 28).rotateX(-P2), K.waterMat({ flat: 0.03, deepAt: 0.05, scale: 14, shallow: 0x7fd8e8, deep: 0x2a8ab8, clear: true }), 0, 0.045, 0).userData.noInk = true;
+      cyl(fg, 0.03, 0.04, 0.2, 0xc9bca6, 0, 0.12, 0, 10); cyl(fg, 0.1, 0.05, 0.04, 0xc9bca6, 0, 0.22, 0, 16); sph(fg, 0.035, 0xc9bca6, 0, 0.27, 0);
+      const drops = []; for (let i = 0; i < 14; i++) { const d = add(fg, new T.SphereGeometry(0.008, 6, 4), mat(0xbfefff, { op: 0.8 }), 0, 0.25, 0); d.userData.noInk = true; drops.push(d); }
+      fx.push(t => drops.forEach((d, i) => { const p = (t * 0.7 + i / drops.length) % 1, a = i * 2.4; d.position.set(Math.cos(a) * (0.03 + p * 0.09), 0.27 + p * 0.06 - p * p * 0.24, Math.sin(a) * (0.03 + p * 0.09)); })); }
+    // The stalls: a table with wares, four poles and a striped awning, the stall's name on a board, a couple of crates.
+    const stalls = MARKET_STALLS.map(S => {
+      const [x, z] = polar(S.ang, S.d || 0.8), yaw = faceIn(x, z), st = new T.Group(); st.position.set(x, y, z); st.rotation.y = yaw; g.add(st);
+      bx(st, 0.42, 0.02, 0.18, WOOD, 0, 0.13, 0.03); [-0.19, 0.19].forEach(sx => [-0.05, 0.11].forEach(sz => cyl(st, 0.008, 0.008, 0.13, DARK, sx, 0.065, sz, 5)));
+      bx(st, 0.42, 0.1, 0.012, S.cols[0], 0, 0.07, 0.12);
+      [-0.2, 0.2].forEach(sx => [-0.1, 0.12].forEach(sz => { const h = sz > 0 ? 0.34 : 0.4; cyl(st, 0.007, 0.007, h, 0x8a5a3c, sx, h / 2, sz, 5); }));
+      for (let i = 0; i < 8; i++) tilt(bx(st, 0.054, 0.006, 0.27, S.cols[i % 2], -0.189 + i * 0.054, 0.375, 0.01), 0.22);
+      bx(st, 0.31, 0.08, 0.008, DARK, 0, 0.445, -0.105); board(st, S.name.toUpperCase(), '#fffaf0', '#2a2f3a', 0.3, 0.075, 0, 0.445, -0.1);
+      const w = S.wares, top = 0.15;
+      if (w === 'fruit') for (let i = 0; i < 12; i++) sph(st, 0.018, [0xe03131, 0xff922b, 0xffd43b, 0x51cf66][i % 4], -0.15 + (i % 6) * 0.06, top + 0.012 + Math.floor(i / 6) * 0.01, -0.01 + Math.floor(i / 6) * 0.06);
+      else if (w === 'flowers') for (let i = 0; i < 6; i++) { const fx0 = -0.15 + i * 0.06; cyl(st, 0.016, 0.012, 0.03, 0xb5651d, fx0, top + 0.015, 0.03, 8); ring(5, a => sph(st, 0.008, [0xf06595, 0xffd43b, 0xcc5de8, 0xff8787, 0xffffff, 0x74c0fc][i], fx0 + Math.cos(a) * 0.012, top + 0.045, 0.03 + Math.sin(a) * 0.012)); }
+      else if (w === 'bread') for (let i = 0; i < 7; i++) sph(st, 0.02, i % 2 ? 0xd9a35a : 0xc07a3a, -0.15 + i * 0.05, top + 0.012, 0.03, 1.6, 0.8, 0.9);
+      else if (w === 'toys') for (let i = 0; i < 6; i++) { if (i % 2) bx(st, 0.03, 0.03, 0.03, [0x4dabf7, 0xff6b6b, 0xffd43b][i % 3], -0.15 + i * 0.06, top + 0.015, 0.03); else sph(st, 0.02, [0xcc5de8, 0x51cf66, 0xff922b][i % 3], -0.15 + i * 0.06, top + 0.02, 0.03); }
+      else board(st, 'FREE PITCH', '#51cf66', '#ffffff', 0.2, 0.05, 0, 0.07, 0.127);
+      for (let i = 0; i < 2; i++) bx(st, 0.07, 0.05, 0.07, 0x9a6a3c, (i ? 1 : -1) * 0.26, 0.025, -0.04 + i * 0.05);
+      const fw = [Math.sin(yaw), Math.cos(yaw)];
+      return { id: S.id, name: S.name, icon: S.icon, kind: 'stall', at: [x, z], yaw, counter: [x + fw[0] * 0.26, z + fw[1] * 0.26], keeper: [x - fw[0] * 0.07, z - fw[1] * 0.07], mine: S.wares === 'mine', pitch: S.wares === 'mine' ? +(S.id.slice(4) || 1) - 1 : null, group: st };
+    });
+    // The shops: a front with a door, a window and a hatch counter under a little awning, a pitched roof, a chimney and
+    // a sign over the window.
+    const shops = MARKET_SHOPS.map(S => {
+      const [x, z] = polar(S.ang, 1.42), yaw = faceIn(x, z), sh = new T.Group(); sh.position.set(x, y, z); sh.rotation.y = yaw; g.add(sh);
+      bx(sh, 0.52, 0.36, 0.36, S.wall, 0, 0.18, -0.06); bx(sh, 0.54, 0.03, 0.38, 0xb7aa96, 0, 0.015, -0.06);
+      [-1, 1].forEach(s => tilt(bx(sh, 0.58, 0.016, 0.24, S.roof, 0, 0.42, -0.06 + s * 0.095), s * 0.62)); bx(sh, 0.04, 0.12, 0.04, 0x8f8578, 0.18, 0.47, -0.12);
+      bx(sh, 0.09, 0.17, 0.006, 0x6b3f22, -0.14, 0.085, 0.121); sph(sh, 0.007, 0xffd43b, -0.11, 0.085, 0.126);
+      bx(sh, 0.2, 0.11, 0.006, 0xbfe3ff, 0.08, 0.17, 0.121); bx(sh, 0.22, 0.012, 0.04, WOOD, 0.08, 0.11, 0.135);
+      for (let i = 0; i < 6; i++) tilt(bx(sh, 0.04, 0.005, 0.1, i % 2 ? 0xffffff : S.roof, -0.02 + i * 0.04, 0.26, 0.16), 0.35);
+      board(sh, S.sign, '#2a2f3a', '#ffe8a3', 0.26, 0.07, 0, 0.33, 0.125);
+      const fw = [Math.sin(yaw), Math.cos(yaw)], side = [Math.cos(yaw), -Math.sin(yaw)];
+      return { id: S.id, name: S.name, icon: S.icon, kind: 'shop', at: [x, z], yaw, counter: [x + fw[0] * 0.34 + side[0] * 0.08, z + fw[1] * 0.34 + side[1] * 0.08], keeper: [x + fw[0] * 0.05 + side[0] * 0.08, z + fw[1] * 0.05 + side[1] * 0.08], group: sh };
+    });
+    // Lamp posts round the square with bunting strung between them, benches round the fountain, barrels, trees.
+    const lamps = []; for (let i = 0; i < 10; i++) { const a = (i + 0.5) / 10 * PI * 2, [x, z] = polar(a, PLAZA - 0.03); lamps.push([x, z]); cyl(g, 0.008, 0.011, 0.42, 0x2a2f3a, x, y + 0.21, z, 6); const lt = sph(g, 0.022, 0xfff3bf, x, y + 0.43, z); if (ctx.night) lt.material = mat(0xfff3bf, { e: 0xffd43b }); }
+    const flags = []; lamps.forEach(([x, z], i) => { const [x2, z2] = lamps[(i + 1) % lamps.length]; for (let j = 1; j < 9; j++) { const q = j / 9, sag = Math.sin(q * PI) * 0.05; flags.push([x + (x2 - x) * q, y + 0.4 - sag - 0.02, z + (z2 - z) * q, PI, Math.atan2(x2 - x, z2 - z) + P2, 1, j % 4]); } });
+    [0xff6b6b, 0xffd43b, 0x4dabf7, 0x51cf66].forEach((c, ci) => many(g, new T.ConeGeometry(0.014, 0.03, 3), c, flags.filter(f => f[6] === ci)));
+    const benches = []; [0.5, 2.0, -0.5, -2.0].forEach(a => { const [x, z] = polar(a, FR + 0.26), b = new T.Group(); b.position.set(x, y, z); b.rotation.y = faceIn(x, z) + PI; g.add(b); bx(b, 0.16, 0.012, 0.05, WOOD, 0, 0.05, 0); bx(b, 0.16, 0.04, 0.008, WOOD, 0, 0.08, -0.022); [-0.07, 0.07].forEach(sx => bx(b, 0.01, 0.05, 0.04, DARK, sx, 0.025, 0)); benches.push([x, z]); });
+    for (let i = 0; i < 6; i++) { const [x, z] = polar(-2.5 + i + (rr() - 0.5) * 0.3, 0.52 + rr() * 0.15); if (stalls.some(s => Math.hypot(x - s.at[0], z - s.at[1]) < 0.3)) continue; cyl(g, 0.03, 0.03, 0.07, 0x8a5a3c, x, y + 0.035, z, 10); }
+    const trees = []; for (let i = 0; i < 14; i++) { const a = i / 14 * PI * 2 + rr() * 0.2, d = PLAZA + 0.22 + rr() * 0.25, [x, z] = polar(a, d); if (Math.cos(a) > 0.93 || shops.some(s => Math.hypot(x - s.at[0], z - s.at[1]) < 0.45)) continue; species(g, x, y, z, ['cherry', 'oak', 'birch'][i % 3], seed + i); trees.push([x, z]); }
+    // A welcome arch at the front, where the kid arrives.
+    { const [x, z] = polar(0, PLAZA + 0.12), ar = new T.Group(); ar.position.set(x, y, z); ar.rotation.y = faceIn(x, z); g.add(ar); [-0.22, 0.22].forEach(sx => cyl(ar, 0.015, 0.02, 0.48, 0x8a5a3c, sx, 0.24, 0, 8)); bx(ar, 0.52, 0.03, 0.03, 0x8a5a3c, 0, 0.47, 0); bx(ar, 0.42, 0.1, 0.02, 0x6b3f22, 0, 0.53, 0); board(ar, 'MARKET TOWN', '#fff3d6', '#c0503a', 0.4, 0.09, 0, 0.53, 0.012); board(ar, 'MARKET TOWN', '#fff3d6', '#c0503a', 0.4, 0.09, 0, 0.53, -0.012, PI); }
+    zones.lawn = { x: L.cx, z: L.cz, r: PLAZA + 0.3, y, not: (x, z) => dist(x, z) < PLAZA + 0.08 };
+    const [ax, az] = polar(0, PLAZA - 0.12);
+    return { hRel: () => 0, play: { at: [ax, y + 0.005, az], face: faceIn(ax, az), market: { stalls, shops, benches, lamps, trees, fountain: [L.cx, L.cz, FR], plaza: PLAZA, R }, walk: (x, z) => { const d = dist(x, z); return d < 0.93 * R && d > FR + 0.04; } } };
+  }
   function land(g, k, key, ctx) {
     const L = isle(key), y = ctx.top, seed = k.seed + key.length * 17, rr = K.mulberry(seed + 99), zones = {}, surf = [], fx = [], night = ctx.night, base = { seed, rock: ctx.rock };
     const tone = c => (night ? blend(c, 0x0f2a24, 0.5) : c), on = (m, hab) => { m.userData.hab = hab; surf.push(m); return m; }, spot = (u, v) => toWorld(L, u, v), face = Math.atan2(L.ox, L.oz);
     let hRel = () => 0, sea = null, play = {};
-    if (key === 'plot') {
+    if (key === 'market') {
+      ({ hRel, play } = marketLand(g, L, y, ctx, seed, zones, fx, base, tone, on));
+    } else if (key === 'plot') {
       // A working vege garden: two long dug beds with furrows (where crop beds go) either side of a bark path, raised
       // beds of lettuces and cabbages and a bean teepee at the front, sunflowers along the back, a shed, compost bins,
       // a water tank, a wheelbarrow and a scarecrow.
@@ -811,6 +906,7 @@ void main() {
      counts it against the day's limit. activity() returns { step(t, dt) → successes, end() }, where a success is
      { xp, say, icon, at: [x, y, z] }. u is the island's userData: its terrain and play spots (u.play). */
   const ACT = {
+    market: { name: 'Market jobs', icon: '🧺', verb: 'Find a job', noun: ['customer', 'customers'], about: '2 XP a customer served' },
     lake: { name: 'Fishing', icon: '🎣', verb: 'Go fishing', noun: ['fish', 'fish'], about: '2 to 4 XP a fish' },
     beach: { name: 'Surfing', icon: '🏄', verb: 'Go surfing', noun: ['wave', 'waves'], about: '3 XP a wave' },
     lookout: { name: 'Geyser watch', icon: '📷', verb: 'Take photos', noun: ['photo', 'photos'], about: '2 XP a photo, 5 for an eruption' },

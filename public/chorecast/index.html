@@ -1215,6 +1215,21 @@ body.st-open #app{opacity:0;pointer-events:none}
 .gift-xp{font:900 calc(44px*var(--ts)) var(--f-round);color:#E8A317;margin:8px 0}.gift-sh .plan-buy{justify-content:center}
 .st-act{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:8px 8px 8px 12px;border-radius:18px;background:rgba(255,255,255,.95);color:#0D1530}
 .st-act-ic{font-size:calc(26px*var(--ts))}.st-act-t{flex:1;min-width:0;display:flex;flex-direction:column}.st-act-t b{font:900 calc(15px*var(--ts)) var(--f-round)}.st-act-t small{font:700 calc(12px*var(--ts)) var(--f-round);color:#4a5578}
+/* Market town: a small see-through stick bottom-left and a run button bottom-right, just above the bottom panel
+   (--mt-b), talk bubbles over heads, and market cards with an emoji where a picture would be */
+.mt-ui{position:absolute;inset:0;pointer-events:none;z-index:3}
+.mt-joy{position:absolute;left:max(18px,env(safe-area-inset-left));bottom:var(--mt-b,34vh);width:112px;height:112px;border-radius:50%;background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.5);box-shadow:0 6px 24px -10px rgba(8,20,60,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);pointer-events:auto;touch-action:none}
+.mt-joy i{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 4px 12px rgba(8,20,60,.35);transition:transform .08s}
+.mt-joy.on i{transition:none;background:#fff}
+.mt-run{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:calc(var(--mt-b,34vh) + 18px);width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);font-size:32px;line-height:1;pointer-events:auto;touch-action:none;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:0 6px 24px -10px rgba(8,20,60,.5)}
+.mt-run.on{background:#FF6A3D;border-color:#fff;transform:scale(.94)}
+.mt-says{position:absolute;inset:0;pointer-events:none}
+.mt-say{position:absolute;transform:translate(-50%,-100%);max-width:200px;padding:7px 11px;border-radius:14px;background:#fff;color:#0D1530;font:800 calc(13px*var(--ts)) var(--f-round);box-shadow:0 6px 18px -8px rgba(8,20,60,.5);text-align:center;white-space:normal}
+.mt-say::after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-6px;border:6px solid transparent;border-bottom:0;border-top-color:#fff}
+#studio .shop-item.mt-card b{padding-right:0}
+#studio .shop-item.mt-card .mt-ic{grid-row:1;width:40px;height:40px;display:grid;place-items:center;font-size:30px;line-height:1}
+#studio .shop-item.mt-card .mt-ic img{width:40px;height:40px}
+@media (max-height:780px){ #studio .shop-item.mt-card .mt-ic{width:34px;height:34px;font-size:26px} .mt-joy{width:96px;height:96px} .mt-run{width:64px;height:64px;font-size:26px} }
 .st-float{position:absolute;z-index:4;pointer-events:none;transform:translateX(-50%);font:900 calc(18px*var(--ts)) var(--f-round);color:#fff;text-shadow:0 2px 6px rgba(10,30,90,.6);animation:stFloat 1.3s ease-out forwards}
 @keyframes stFloat{from{opacity:1;transform:translate(-50%,0)}to{opacity:0;transform:translate(-50%,-56px)}}
 .st-nav{position:absolute;top:44%;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;transform:translateY(-50%);color:#fff;font:800 calc(12px*var(--ts))/1.15 var(--f-round);text-shadow:0 1px 3px rgba(10,30,90,.55)}
@@ -1526,6 +1541,7 @@ body.ih-open #app{visibility:hidden}
 <script src="vendor/three-r128.min.js"></script>
 <script src="catalog.js"></script>
 <script src="island.js"></script>
+<script src="market-town.js"></script>
 <script>
 (() => {
 'use strict';
@@ -2750,8 +2766,8 @@ const shopDef = t => SHOP.find(s => s.t === t) || null;
 // Each piece of land is an island of its own, visited from the island studio with its arrows, in this order after the
 // home island. A placed thing remembers its island (isle). Older ones on land store the piece (lobe), measured from
 // where it used to join the home island; farm animals from before land had no piece, and live on the farm island.
-const ISLES = ['farm', 'plot', 'stable', 'lookout', 'orchard', 'lake', 'grove', 'beach', 'sky'];
-const ISLE_NAME = { home: 'Home', farm: 'Farm', plot: 'Veggie plot', stable: 'Stable yard', lookout: 'Mountain lookout', orchard: 'Orchard', lake: 'Lake', grove: 'Forest grove', beach: 'Beach cove', sky: 'Sky islet' };
+const ISLES = ['farm', 'plot', 'stable', 'lookout', 'orchard', 'lake', 'grove', 'beach', 'sky', 'market'];
+const ISLE_NAME = { market: 'Market town', home: 'Home', farm: 'Farm', plot: 'Veggie plot', stable: 'Stable yard', lookout: 'Mountain lookout', orchard: 'Orchard', lake: 'Lake', grove: 'Forest grove', beach: 'Beach cove', sky: 'Sky islet' };
 function isleOf(it) {
   if (it.isle || it.lobe) return it.isle || it.lobe;
   if (it.zone === 'sky') return 'sky';
@@ -4254,7 +4270,7 @@ const Studio = (() => {
         if (island !== isl || !S0.open) return;
         island.updateMatrixWorld(true);
         const u = island.userData, k = kid(), ground = groundOf(u);
-        const floorAt = (x, z) => { const y = ground(x / K, z / K); return y == null ? -5 : y * K; };
+        const floorAt = (x, z) => { const y = ground(x / K, z / K); return y == null ? -5 : y * K; }; floorNow = floorAt;
         // the island's extent: home's lawn, or the piece of land
         const L = u.L, Z = (u.zones || {}).farm, c = L ? [L.cx, L.cz, L.r] : Z ? [Z.x, Z.z, Z.r] : [0, 0, 1.1 * (u.S || 1)], R = c[2] * K;
         const bounds = { x0: c[0] * K - R, z0: c[1] * K - R, x1: c[0] * K + R, z1: c[1] * K + R };
@@ -4294,9 +4310,11 @@ const Studio = (() => {
         W.add(byName.kid, (k0 || { x: at[0] * K }).x, (k0 || { z: at[2] * K }).z, { avatar: k.avatar, hue: k.hue, yaw: 0.9 }).isKid = true; // (always a kid: on an island that's mostly water, at its activity's spot)
         for (const [spec, p, id] of later) { const q = W.spot(W.bodies.length ? 0.4 : 0.6, { x: p.x, z: p.z, d: 1 }) || p; W.add(spec, q.x, q.z).classicId = id; }
         W.group.traverse(m => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; } });
+        if (S0.isle === 'market' && MT) MT.start(W, island, byName.kid); // (Market town: townsfolk, the stick, siblings)
       } catch (e) { console.error('proof', e); stop(); } finally { busy = false; }
     }
-    function stop() { if (W) W.end(); W = null; isl = null; swapIn = () => false; }
+    function stop() { if (MT) MT.stop(); if (W) W.end(); W = null; isl = null; swapIn = () => false; }
+    let floorNow = () => -5;
     // An island activity (kick-ups, fishing, surfing…) is played out by the activity's own code on the classic character;
     // the 3D kid stands in for it, moving as it moves. Every beat the classic character's limbs (legs, arms, lean,
     // crouch, head) are copied onto the 3D kid's bones ('act'), and its whole tilt too (lying on the surfboard, on the
@@ -4420,9 +4438,19 @@ const Studio = (() => {
     const mine = id => W && (W.items.find(i => i.classicId === id) || W.bodies.find(b => b.classicId === id));
     const turned = (id, r) => { const x = mine(id); if (x && x.group) W.turn(x, r); };
     const gone = id => { const x = mine(id); if (x) W.remove(x); };
-    return { start, stop, tapped, turned, gone, added: m => swapIn(m), tick: (t, dt) => { if (W) { kidShown(true); if (S0.play) { try { puppet(S0.kidM, t, dt); } catch (e) { if (!pupErr) console.error('puppet', e); pupErr = true; } W.tick(t, dt, b => b.isKid); /* (the pets carry on while the kid plays) */ } else { if (pup) { const k = W.bodies.find(q => q.isKid); if (k) { k.inst.reach = null; k.inst.carrying = false; } } pup = null; W.tick(t, dt); } } }, get on() { return !!W; }, get world() { return W; } };
+    return { start, stop, tapped, turned, gone, added: m => swapIn(m), tick: (t, dt) => { if (W) { kidShown(true); if (S0.play) { try { puppet(S0.kidM, t, dt); } catch (e) { if (!pupErr) console.error('puppet', e); pupErr = true; } W.tick(t, dt, b => b.isKid); /* (the pets carry on while the kid plays) */ } else if (MT && MT.on) { W.tick(t, dt, MT.skip); MT.tick(t, dt); } else { if (pup) { const k = W.bodies.find(q => q.isKid); if (k) { k.inst.reach = null; k.inst.carrying = false; } } pup = null; W.tick(t, dt); } } }, get on() { return !!W; }, get world() { return W; }, floorAt: (x, z) => floorNow(x, z), one };
   })();
-  window.IsoHome = window.IsoHome || {}; Object.defineProperty(window.IsoHome, 'classicWorld', { configurable: true, get: () => Proof.world }); // (for checks in the browser console)
+  window.IsoHome = window.IsoHome || {}; Object.defineProperty(window.IsoHome, 'classicWorld', { configurable: true, get: () => Proof.world }); Object.defineProperty(window.IsoHome, 'market', { configurable: true, get: () => MT }); // (for checks in the browser console)
+  // Market town (market-town.js): what it needs from the studio
+  const MT = window.MarketTown ? window.MarketTown({
+    S0, K, kid: () => kid(), ui: () => ui(), esc, ic, fmt, updDoc, track, Sound, Play, Farm, PRODUCE, SHOP, xpOf, pushLedger,
+    theta: () => theta, cam: () => cam, now: () => performance.now() / 1000, floorAt: (x, z) => Proof.floorAt(x, z), load: src => Proof.one(src),
+    view: v => { rad = v.rad; phi = v.phi; }, thumb: t => { thumbsFor([SHOP.find(x => x.t === t)].filter(Boolean)); return THUMBS[t] || ''; }, buy: (d, pay) => buy(d, pay),
+    say: msg => { S0.msg = msg; ui(); clearTimeout(mtSay); mtSay = setTimeout(() => { if (S0.open && S0.msg === msg) { S0.msg = ''; ui(); } }, 3200); },
+    float: (text, x, y) => { const f = document.createElement('div'); f.className = 'st-float'; f.textContent = text; f.style.left = `${x}px`; f.style.top = `${y}px`; $('#studio').appendChild(f); setTimeout(() => f.remove(), 1300); },
+    money: () => { close(); setTimeout(() => { UI.tab = 'money'; render(); }, 1000); }
+  }) : null;
+  let mtSay = 0; const radMin = () => (MT && MT.on ? 0.55 : 2.6);
   let R, pace, scene, cam, island, clouds, kidId = null, raf = 0, last = 0, theta = 0.7, phi = 1.02, rad = 4.6, idle = 0, moved = 0, pinch0 = 0, rad0 = 0, viewIsle = null; // (viewIsle: the island the view was set for; built again, it keeps the kid's view)
   const ptrs = new Map(), THUMBS = {}, ray = T ? new T.Raycaster() : null, target = T ? new T.Vector3(0, -0.42, 0) : null;
   const kid = () => Store.kids[kidId];
@@ -4440,7 +4468,7 @@ const Studio = (() => {
     const cms = G3.cloudMats(0xffffff, 0xa3b1d1, true); clouds = new T.Group(); for (let i = 0; i < 7; i++) { const c = G3.cloudCluster(900 + i, cms, 3.4, 1.15), a = i / 7 * Math.PI * 2; c.position.set(Math.cos(a) * 3.9, -1.6 + (i % 3) * 0.55, Math.sin(a) * 3.9); clouds.add(c); } clouds.scale.setScalar(K); scene.add(clouds);
     const cv = R.domElement;
     cv.addEventListener('pointerdown', down); cv.addEventListener('pointermove', move); cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
-    cv.addEventListener('wheel', e => { e.preventDefault(); rad = clamp(rad + e.deltaY * 0.004, 2.6, S0.radMax || 11); idle = 0; }, { passive: false });
+    cv.addEventListener('wheel', e => { e.preventDefault(); rad = clamp(rad + e.deltaY * 0.004, radMin(), S0.radMax || 11); idle = 0; }, { passive: false });
     addEventListener('resize', () => { if (S0.open) size(); });
     addEventListener('keydown', e => { if (S0.open && (e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !/INPUT|TEXTAREA|SELECT/.test((e.target || {}).tagName || '')) go(e.key === 'ArrowLeft' ? -1 : 1); });
     return true;
@@ -4525,13 +4553,14 @@ const Studio = (() => {
   function down(e) { if (fly) return; try { R.domElement.setPointerCapture(e.pointerId); } catch (err) {} ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY }); if (ptrs.size === 1) moved = 0; if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch0 = Math.hypot(a.x - b.x, a.y - b.y); rad0 = rad; moved = 99; } idle = 0; Sound.ensure(); }
   function move(e) {
     const p = ptrs.get(e.pointerId); if (!p) return; const dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY; moved += Math.abs(dx) + Math.abs(dy); idle = 0;
-    if (ptrs.size >= 2) { const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y); if (pinch0 && d) rad = clamp(rad0 * pinch0 / d, 2.6, S0.radMax || 11); }
+    if (ptrs.size >= 2) { const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y); if (pinch0 && d) rad = clamp(rad0 * pinch0 / d, radMin(), S0.radMax || 11); }
     else { theta += dx * 0.008; phi = clamp(phi - dy * 0.006, 0.45, 1.35); }
   }
   function up(e) { if (!ptrs.has(e.pointerId)) return; ptrs.delete(e.pointerId); if (!ptrs.size) { if (moved < 10) tap(e.clientX, e.clientY); pinch0 = 0; } }
   function tap(x, y) {
     if (S0.job || S0.trip) return;
     const r = R.domElement.getBoundingClientRect(); ray.setFromCamera({ x: (x - r.left) / r.width * 2 - 1, y: -((y - r.top) / r.height) * 2 + 1 }, cam);
+    if (MT && MT.on && !S0.place && MT.tap(ray)) return;
     if (S0.place) {
       const u = island.userData, hit = ray.intersectObjects(u.surf || [], false)[0], p = hit && island.worldToLocal(hit.point.clone()), def = S0.placeDef || {};
       const hab = hit && (hit.object.userData.habAt ? hit.object.userData.habAt(p.x, p.z) : hit.object.userData.hab), res = p ? G3.canPlace(u, hab, def, p.x, p.z) : { ok: false };
@@ -4563,7 +4592,7 @@ const Studio = (() => {
       G3.tickIsland(tr.old, t, dt); if (p >= 1) arrive();
     }
     if (fly) { const p = fly.done ? 1 : clamp((now - fly.t0) / fly.dur, 0, 1); aim(mix(fly.a, fly.b, ease(p))); if (p >= 1 && !fly.done) landed(); }
-    else { cam.position.set(target.x + rad * Math.sin(phi) * Math.cos(theta), target.y + rad * Math.cos(phi), target.z + rad * Math.sin(phi) * Math.sin(theta)); cam.lookAt(target); }
+    else { if (MT && MT.on && !S0.trip) { const f = MT.follow(); if (f) { const k2 = Math.min(1, dt * 6); target.x += (f.x - target.x) * k2; target.y += (f.y - target.y) * k2; target.z += (f.z - target.z) * k2; } } cam.position.set(target.x + rad * Math.sin(phi) * Math.cos(theta), target.y + rad * Math.cos(phi), target.z + rad * Math.sin(phi) * Math.sin(theta)); cam.lookAt(target); }
     if (S0.job) stepJob(now, dt);
     G3.tickIsland(island, t, dt, 0, island.userData.hopAt || 0);
     if (S0.play && S0.play.walk && !S0.trip) {
@@ -4666,7 +4695,7 @@ const Studio = (() => {
     }).join('')}</div></div>`).join('')}</div>`;
   }
   // What an item needs first: a piece of land, a pond, the animal it's for, the size before…
-  const LAND_NAME = { farm: 'the farm paddock', plot: 'the veggie plot', orchard: 'the orchard terrace', beach: 'the beach cove', grove: 'the forest grove', stable: 'the stable yard', lake: 'the lake', lookout: 'the mountain lookout', sky: 'the sky islet' };
+  const LAND_NAME = { market: 'Market town', farm: 'the farm paddock', plot: 'the veggie plot', orchard: 'the orchard terrace', beach: 'the beach cove', grove: 'the forest grove', stable: 'the stable yard', lake: 'the lake', lookout: 'the mountain lookout', sky: 'the sky islet' };
   function needOf(k, it) {
     const isl = k.island || {}, land = isl.land || {}, has = t => (isl.items || []).some(i => i.t === t), hasLand = l => (l === 'farm' ? !!isl.farm : !!land[l]), pond = ((k.jars || {}).save || 0) > 0, n = it.needs, hab = it.habitat;
     if (n === 'farm' && !isl.farm) return 'Needs the farm paddock first';
@@ -4821,11 +4850,13 @@ const Studio = (() => {
   }
   const inTab = (it, cat, isle) => !it.trophy && (cat === 'isle' ? ownsIsle(it, isle) : it.cat === cat && fitsIsle(it, isle) && (isle === 'home' || !ownsIsle(it, isle)));
   function tabsFor(isle) {
+    if (isle === 'market' && MT) return MT.tabs();
     const has = c => SHOP.some(x => inTab(x, c, isle));
     if (isle === 'home') return SHOP_CATS.filter(([c]) => ['jobs', 'look', 'stand', 'sets'].includes(c) || has(c));
     return [...(has('isle') ? [['isle', ISLE_NAME[isle]]] : []), ...SHOP_CATS.filter(([c]) => (isle === 'farm' && (c === 'jobs' || c === 'stand')) || (ANY_CATS.includes(c) && has(c)))];
   }
   function actBar(k, here) {
+    if (here === 'market' && MT) return MT.on ? MT.actBar(k) : '';
     const A = G3.acts[here], p = S0.play; if (!A || S0.job) return '';
     const left = Play.room(k), info = p ? `${p.n} ${A.noun[p.n === 1 ? 0 : 1]} · +${p.xp} XP${left ? '' : ' · that’s today’s activity XP'}` : !Play.on() ? 'Switched off by a grown-up' : `${A.about} · ${left === Infinity ? 'no daily limit' : left ? `${left} XP left today` : 'no more XP today'}`;
     return `<div class="st-act"><span class="st-act-ic" aria-hidden="true">${A.icon}</span><div class="st-act-t"><b>${A.name}</b><small>${info}</small></div><button class="st-btn ${p ? '' : 'primary'}" data-act="st" data-n="${p ? 'playStop' : 'play'}" ${!p && !Play.on() ? 'disabled' : ''}>${p ? 'Stop' : A.verb}</button></div>`;
@@ -4877,14 +4908,15 @@ const Studio = (() => {
       <header class="st-bar"><button class="sbtn" data-act="stClose" aria-label="Back to ${esc(k.name)}'s sky">${ic('x')}</button>
         <div class="st-title"><b>${here === 'home' ? `${esc(k.name)}’s island` : esc(ISLE_NAME[here])}</b><span>${(k.island || {}).club && k.island.club.until > Date.now() ? '⭐ Island Club · ' : ''}${here === 'home' ? `Level ${cap.lvl} · ${cap.name} · ` : ''}${onHere} thing${onHere === 1 ? '' : 's'} ${here === 'home' ? 'on it' : 'here'}${all.length > 1 ? ` · island ${at + 1} of ${all.length}` : ''}</span></div>
         <div class="st-bal"><span class="st-chip">${ic('sparkle')} ${xp.left.toLocaleString()} XP</span>${allowCash ? `<span class="st-chip">${ic('jar')} ${fmt(cash)}</span>` : ''}</div></header>
-      ${nav}<p class="st-tip ${S0.place ? 'on' : ''}">${esc(S0.msg || (S0.place ? 'Tap the grass where it should go.' : all.length > 1 && here === 'home' ? 'Tap the arrows to visit your other islands.' : 'Drag to spin, pinch to zoom, tap an animal to say hi.'))}${S0.place ? ' <button class="st-link" data-act="stCancel">Cancel</button>' : ''}</p>
+      ${nav}<p class="st-tip ${S0.place ? 'on' : ''}">${esc(S0.msg || (S0.place ? 'Tap the grass where it should go.' : here === 'market' ? 'Walk with the stick, hold 🏃 to run. Tap someone to say hi.' : all.length > 1 && here === 'home' ? 'Tap the arrows to visit your other islands.' : 'Drag to spin, pinch to zoom, tap an animal to say hi.'))}${S0.place ? ' <button class="st-link" data-act="stCancel">Cancel</button>' : ''}</p>
       ${panel}
       <section class="shop" aria-label="Island shop">
         ${actBar(k, here)}<div class="shop-tabs">${tabs.map(([c, l]) => `<button class="chip ${S0.cat === c ? 'on' : ''}" data-act="stCat" data-c="${c}">${l}</button>`).join('')}</div>
-        ${S0.cat === 'jobs' ? jobsRow(k, here === 'farm') : S0.cat === 'look' ? lookRow(k) : S0.cat === 'stand' ? standRow(k) : S0.cat === 'sets' ? setsRow(k) : `<div class="shop-row">${shopCards(list, k, xp, cash, allowCash, lvl, owned)}</div>`}
+        ${here === 'market' && MT ? (MT.on ? MT.row(S0.cat, k) : '<div class="shop-row"></div>') : S0.cat === 'jobs' ? jobsRow(k, here === 'farm') : S0.cat === 'look' ? lookRow(k) : S0.cat === 'stand' ? standRow(k) : S0.cat === 'sets' ? setsRow(k) : `<div class="shop-row">${shopCards(list, k, xp, cash, allowCash, lvl, owned)}</div>`}
         <p class="shop-foot">${S0.cat === 'isle' ? (here === 'farm' ? 'Every farm animal eats a scoop of feed a day. Feed them from Island jobs, and keep the feed bin topped up. Sell what they make at the farm stand.' : `These live on your ${ISLE_NAME[here].toLowerCase()}.${OPEN_ISLES.includes(here) ? ' Things from the other tabs can go on its grass too.' : ''}`) : S0.cat === 'jobs' ? 'Everything you own needs looking after. Island jobs pop up every few days and earn XP.' : S0.cat === 'look' ? 'Tap a colour to see it on your island. Buy one once and switch back any time. 🎁 colours are prizes from Character Growth.' : S0.cat === 'farm' ? 'Every farm animal eats a scoop of feed a day. Feed them from Island jobs, and keep the feed bin topped up. Sell what they make at the farm stand.' : S0.cat === 'stand' ? `Today the farm can earn ${Farm.cap() === Infinity ? 'as much as you like' : `up to ${Farm.cap()} XP`}; ${Farm.earnedToday(k)} so far.${Farm.saturday() ? ' It’s Saturday market day: prices are 25% higher.' : ''}` : S0.cat === 'land' ? 'Grow your island one size at a time, and add new land where new animals and things live.' : S0.cat === 'season' ? 'Seasonal things are sold in their months and come back every year. Once yours, they stay.' : S0.cat === 'sets' ? 'Collect every animal in a set, or fill a book, to win a gold trophy and 250 XP.' : S0.cat === 'big' ? 'Big dreams take saving up for. Every XP you don’t spend gets you closer.' : `Earn XP from approved missions, habits, lessons and island jobs.${allowCash ? ' Spend-jar money works too, but once it’s spent it’s gone.' : ''}`}</p>
       </section>`;
     const row = $('.shop-row', root) || $('.care-row', root); if (row) row.scrollLeft = keepX;
+    if (MT) MT.place();
   }
   function startPlace(t, pay, extra = {}) {
     const d = shopDef(t); S0.confirm = null; S0.sel = null; S0.tree = null; S0.placeDef = d;
@@ -4907,6 +4939,7 @@ const Studio = (() => {
   const fresh = k => ({ items: [], xpSpent: 0, ...(k.island || {}) });
   const nice = (msg, big) => { S0.msg = msg; Sound.cash(); if (big) FX.burst(innerWidth / 2, innerHeight * 0.45, CONF, 30); ui(); };
   function farmAct(n, a) {
+    if (/^mt[A-Z]/.test(n) && MT) return MT.act(n, a);
     const k = kid(), I = fresh(k), F = Farm, patch = {}, now = Date.now(), today = dkey();
     const save = (ev, pl) => { patch.island = I; updDoc('kids', k.id, patch); if (ev) track(ev, pl, k.id); };
     const blocked = () => { const left = mustLeft(k); if (left) { S0.msg = `Finish your must-dos first: ${left.length} to go.`; Sound.error(); ui(); return true; } return false; };
