@@ -39,9 +39,14 @@ async function server(port, env) {
   const dir = mkdtempSync(path.join(os.tmpdir(), 'cc-bk-'));
   const srv = spawn('node', [path.join(REPO, 'server/index.js'), '--port', String(port), '--static', path.join(REPO, 'public')], { env: { ...process.env, PGLITE_DIR: dir, DATABASE_URL: '', ...env } });
   let log = ''; srv.stdout.on('data', d => { log += d; }); srv.stderr.on('data', d => { log += d; });
-  for (let i = 0; i < 150 && !/Chorecast server on/.test(log); i++) await new Promise(r => setTimeout(r, 100));
+  // (up to a minute: two servers setting up their databases at once on a busy machine can take a while)
+  for (let i = 0; i < 600 && !/Chorecast server on/.test(log); i++) await new Promise(r => setTimeout(r, 100));
+  if (!/Chorecast server on/.test(log)) { console.log('FAIL: the test server on port ' + port + ' never started\n' + log); process.exit(1); }
   return { srv, log: () => log };
 }
+// (the restore drill below blocks this script for a few seconds, long enough for the server to close the idle
+// keep-alive connection; a request that finds its connection gone is sent again once, on a fresh one)
+const fetch = async (url, o) => { try { return await globalThis.fetch(url, o); } catch (e) { if (e.cause && e.cause.code === 'ECONNRESET') return globalThis.fetch(url, o); throw e; } };
 const call = async (port, method, url, body, headers = {}) => { const r = await fetch(`http://localhost:${port}${url}`, { method, headers: { ...(body ? { 'content-type': 'application/json' } : {}), ...headers }, body: body ? JSON.stringify(body) : undefined }); return { status: r.status, ...(await r.json().catch(() => ({}))) }; };
 const ADMIN = { authorization: 'Bearer admin-test-token-456' };
 const A = await server(8784, { ADMIN_TOKEN: 'admin-test-token-456', BACKUP_BUCKET: 'cc-backups', BACKUP_ENDPOINT: 'http://localhost:8785', BACKUP_ACCESS_KEY: 'test-key', BACKUP_SECRET_KEY: 'test-secret', BACKUP_KEY: KEY });

@@ -53,7 +53,7 @@ const dir = mkdtempSync(path.join(os.tmpdir(), 'cc-pins-'));
 }
 
 // ---- 3. Start the new server on it (migration 008 runs at start)
-const srv = spawn('node', [path.join(REPO, 'server/index.js'), '--port', '8799', '--static', path.join(REPO, 'public')], { env: { ...process.env, PGLITE_DIR: dir, DATABASE_URL: '' } });
+const srv = spawn('node', [path.join(REPO, 'server/index.js'), '--port', '18799', '--static', path.join(REPO, 'public')], { env: { ...process.env, PGLITE_DIR: dir, DATABASE_URL: '' } });
 let log = ''; srv.stdout.on('data', d => { log += d; }); srv.stderr.on('data', d => { log += d; });
 for (let i = 0; i < 100 && !/Chorecast server on/.test(log); i++) await new Promise(r => setTimeout(r, 100));
 ok(/migration applied: 008_pins.sql/.test(log), 'migration 008 ran', log);
@@ -61,7 +61,7 @@ ok(/migration applied: 008_pins.sql/.test(log), 'migration 008 ran', log);
 function client() {
   let cookie = '';
   return async (method, url, body) => {
-    const r = await fetch('http://localhost:8799' + url, { method, headers: { ...(cookie ? { cookie } : {}), ...(body !== undefined ? { 'content-type': 'application/json' } : {}) }, body: body !== undefined ? JSON.stringify(body) : undefined });
+    const r = await fetch('http://localhost:18799' + url, { method, headers: { ...(cookie ? { cookie } : {}), ...(body !== undefined ? { 'content-type': 'application/json' } : {}) }, body: body !== undefined ? JSON.stringify(body) : undefined });
     for (const c of r.headers.getSetCookie()) { const m = c.match(/^cc_session=([^;]*)/); if (m) cookie = m[1] ? 'cc_session=' + m[1] : ''; }
     return { status: r.status, ...(await r.json().catch(() => ({}))) };
   };

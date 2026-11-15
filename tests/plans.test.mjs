@@ -29,9 +29,9 @@ function client(port) {
 const item = (t, extra) => ({ id: 'i' + Math.random().toString(36).slice(2), t, x: 0.3, z: 0.2, r: 0, ...extra });
 const kidDoc = name => ({ name, age: 9, jars: { spend: 0, save: 0, invest: 0, give: 0 }, ledger: [], island: { items: [], xpSpent: 0 } });
 
-const A = await server(8792, {}), B = await server(8791, { PAYWALL: 'on' });
+const A = await server(18792, {}), B = await server(18791, { PAYWALL: 'on' });
 try {
-  const P = client(8792), K = client(8792);
+  const P = client(18792), K = client(18792);
   await P('POST', '/api/auth/signup', { email: 'tiers@test.localhost', password: 'correct-horse-9', name: 'P', consent: true });
   for (const [id, n] of [['k1', 'Ari'], ['k2', 'Bo'], ['k3', 'Cy']]) await P('PUT', `/api/docs/kids/${id}`, kidDoc(n));
   const { code } = await P('POST', '/api/devices/code', {}); await K('POST', '/api/devices/pair', { code, name: 'iPad' });
@@ -117,7 +117,7 @@ try {
   ok((await P('PATCH', '/api/docs/family/settings', { taxRate: 25 })).status === 200, 'Plus: own rates again');
 
   // With the paywall on, a new family has Plus for its welcome fortnight.
-  const Q = client(8791);
+  const Q = client(18791);
   await Q('POST', '/api/auth/signup', { email: 'welcome@test.localhost', password: 'correct-horse-9', name: 'W', consent: true });
   const w = await Q('GET', '/api/plan'), days = (new Date(w.until) - Date.now()) / 864e5;
   ok(w.plan === 'plus' && w.welcome === true && days > 13.9 && days <= 14, 'paywall on: a new family has Plus for 14 days', w);

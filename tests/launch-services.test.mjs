@@ -18,7 +18,7 @@ const { restore } = await import(path.join(REPO, 'scripts/restore.mjs'));
 
 let passN = 0, failN = 0;
 const ok = (c, msg, extra) => { if (process.env.TRACE) console.log(c ? "ok  " : "FAIL", msg); if (c) passN++; else { failN++; console.log('FAIL:', msg, extra !== undefined ? JSON.stringify(extra).slice(0, 400) : ''); } };
-const PORT = 8797, BASE = 'http://localhost:' + PORT, BUNDLE = 'app.chorecast.test';
+const PORT = 18797, BASE = 'http://localhost:' + PORT, BUNDLE = 'app.chorecast.test';
 const dir = mkdtempSync(path.join(os.tmpdir(), 'cc-p0b-')), mail = path.join(dir, 'mail'); mkdirSync(mail);
 const pem = f => readFileSync(path.join(CA, f), 'utf8'), der = f => new X509Certificate(pem(f)).raw.toString('base64');
 

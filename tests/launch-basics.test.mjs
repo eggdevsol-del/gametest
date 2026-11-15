@@ -13,7 +13,7 @@ const HK = await import(path.join(REPO, 'server/housekeeping.js'));
 
 let passN = 0, failN = 0;
 const ok = (c, msg, extra) => { if (c) passN++; else { failN++; console.log('FAIL:', msg, extra !== undefined ? JSON.stringify(extra).slice(0, 400) : ''); } };
-const DAY = 864e5, PORT = 8798, BASE = 'http://localhost:' + PORT;
+const DAY = 864e5, PORT = 18798, BASE = 'http://localhost:' + PORT;
 const dir = mkdtempSync(path.join(os.tmpdir(), 'cc-p0-'));
 
 const srv = spawn('node', [path.join(REPO, 'server/index.js'), '--port', String(PORT), '--static', path.join(REPO, 'public')], { env: { ...process.env, PGLITE_DIR: dir, DATABASE_URL: '', ...(globalThis.EXTRA_ENV || {}) } });

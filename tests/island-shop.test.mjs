@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 let passN = 0, failN = 0;
 const ok = (c, msg, extra) => { if (c) passN++; else { failN++; console.log('FAIL:', msg, extra !== undefined ? JSON.stringify(extra).slice(0, 300) : ''); } };
-const PORT = 8796, BASE = 'http://localhost:' + PORT, dir = mkdtempSync(path.join(os.tmpdir(), 'cc-shop-'));
+const PORT = 18796, BASE = 'http://localhost:' + PORT, dir = mkdtempSync(path.join(os.tmpdir(), 'cc-shop-'));
 const srv = spawn('node', [path.join(REPO, 'server/index.js'), '--port', String(PORT), '--static', path.join(REPO, 'public')], { env: { ...process.env, PGLITE_DIR: dir, DATABASE_URL: '' } });
 let log = ''; srv.stdout.on('data', d => { log += d; }); srv.stderr.on('data', d => { log += d; });
 for (let i = 0; i < 150 && !/Chorecast server on/.test(log); i++) await new Promise(r => setTimeout(r, 100));

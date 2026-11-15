@@ -33,9 +33,9 @@ async function family(port) {
   const { code } = await P('POST', '/api/devices/code', {}); await K('POST', '/api/devices/pair', { code, name: 'iPad' });
   return { P, K };
 }
-const A = await server(8794, { STORE_TEST: 'on' }), B = await server(8793, {});
+const A = await server(18794, { STORE_TEST: 'on' }), B = await server(18793, {});
 try {
-  const { P, K } = await family(8794), kid = async id => (await K('GET', '/api/sync')).kids[id];
+  const { P, K } = await family(18794), kid = async id => (await K('GET', '/api/sync')).kids[id];
   // A kid wishes for something they can't afford yet
   ok((await K('PATCH', '/api/docs/kids/k1', { wishes: [{ t: 'kiwi', name: 'Kiwi', xp: 400, at: Date.now() }, { t: 'kangaroo', name: 'Kangaroo and joey', xp: 700, at: Date.now(), plus: true }] })).status === 200, 'a kid can keep a wish list');
   ok((await K('POST', '/api/events', { events: [{ type: 'shop.wish', kidId: 'k1', payload: { item: 'kiwi', need: 300 } }] })).saved === 1, 'wishes are logged');
@@ -80,7 +80,7 @@ try {
   ok((await P('POST', '/api/shop/buy', { productId: 'chorecast.xp.7500', kidId: 'k2' })).code === 'over_cap', 'the standard weekly limit is 5,000 XP');
   ok((await P('POST', '/api/shop/buy', { productId: 'chorecast.xp.3000', kidId: 'k2' })).ok, 'within the standard limit is fine');
   // A server without STORE_TEST only takes App Store purchases
-  const L = await family(8793);
+  const L = await family(18793);
   ok((await L.P('POST', '/api/shop/buy', { productId: 'chorecast.xp.500', kidId: 'k1' })).code === 'app_only', 'live: buying needs the app');
   ok((await L.P('POST', '/api/shop/buy', { transaction: 'not-a-jws' })).code === 'bad_receipt', 'live: a bad App Store receipt is refused');
 } finally { A.srv.kill(); B.srv.kill(); await new Promise(r => setTimeout(r, 400)); }

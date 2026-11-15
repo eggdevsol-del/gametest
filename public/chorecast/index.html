@@ -7349,8 +7349,8 @@ function renderPane(p) {
       <h2 class="pane-title">${to ? 'Swapped!' : 'No problem'}</h2>
       <p>“${esc(p.c.title)}” isn’t paid, because it didn’t get done.</p>
       ${to ? `<p>Your new ${T ? T.label.toLowerCase().replace(/s$/, '') : 'chore'} is <b>${to.icon} ${esc(to.title)}</b>.</p>` : '<p>It’s off your list for today.</p>'}
-      ${to ? `<button class="btn-white" data-act="sSwapGo" data-key="${to.key}">${ic('play')} Do it now</button>` : ''}
-      <button class="pv-quit" data-act="sExit">Back to my chores</button></div>`;
+      ${Stage.crew ? '<p class="res-wait">Cheer on your crew!</p>' : `${to ? `<button class="btn-white" data-act="sSwapGo" data-key="${to.key}">${ic('play')} Do it now</button>` : ''}
+      <button class="pv-quit" data-act="sExit">Back to my chores</button>`}</div>`;
   } else {
     // Angry Birds style: points tally up row by row, and each star slams in as the meter passes its notch.
     // A repaint after the tally has started shows the finished screen straight away.
@@ -7393,7 +7393,14 @@ function resEnd(p) {
   return `<div class="res-pay"><span>Pay after a grown-up checks</span><b class="num">${fmt(pay)}</b><small>${p.noNeed ? 'Half pay, because it didn’t need doing' : qp > 0 ? `includes +${qp}% for 3 stars` : qp < 0 ? `${qp}% for 1 star. More stars, more pay.` : '2 stars pays full price'}${p.c.surge ? ' · surge ×1.5' : ''}</small></div>
     ${Stage.crew ? (crewFinished() ? '' : '<p class="res-wait">Waiting for the rest of your crew…</p>') : `<button class="finish ready" data-act="sExit">Back to my sky</button>${window.Growth && Growth.hasLesson(p.kid) ? `<button class="res-grow" data-act="gFromResult" data-id="${p.kid.id}">${ic('sparkle')} More XP waiting in Character Growth</button>` : ''}`}`;
 }
-const crewFinished = () => Stage.panes.every(x => x.phase === 'result' && x.tally && x.tally.done);
+// (a kid whose chore didn't need doing is finished too: their chore was swapped and isn't paid)
+const crewFinished = () => Stage.panes.every(x => x.phase === 'skipped' || (x.phase === 'result' && x.tally && x.tally.done));
+function crewDoneShow() {
+  Stage.panes.forEach(x => { const w = x.el.querySelector('.res-wait'); if (w) w.remove(); });
+  if (Stage.panes.every(x => x.phase === 'skipped')) { $('#crewDone').innerHTML = '<button class="crew-done" data-act="sExit">Back to your chores</button>'; return; }
+  $('#crewDone').innerHTML = `<button class="crew-done" data-act="sExit">Crew complete! ${Stage.panes.reduce((a, x) => a + x.score, 0).toLocaleString()} pts together</button>`;
+  setTimeout(() => FX.rain(), 700);
+}
 async function runTally(p) {
   const T0 = p.tally, el = p.el.querySelector('.result'), rows = resultRows(p), max = starMax(p);
   const $t = el.querySelector('[data-total]'), $f = el.querySelector('[data-fill]');
@@ -7441,11 +7448,7 @@ async function runTally(p) {
   Sound.coin(); bumpScore(p);
   if (window.Growth && p.stars === 3 && p.elapsed < p.target) Growth.onEvent(p.kid, 'fast3', { title: p.c.title, saved: Math.round((p.target - p.elapsed) / 60) });
   if (p.stars === 3) setTimeout(() => { if (!alive()) return; Sound.fanfare(); FX.rain([p.th.c1, p.th.c2, p.th.c3, '#FFE066', '#fff']); if (p.fx && p.fx.shower) p.fx.shower(); }, 200);
-  if (Stage.crew && crewFinished()) {
-    Stage.panes.forEach(x => { const w = x.el.querySelector('.res-wait'); if (w) w.remove(); });
-    $('#crewDone').innerHTML = `<button class="crew-done" data-act="sExit">Crew complete! ${Stage.panes.reduce((a, x) => a + x.score, 0).toLocaleString()} pts together</button>`;
-    setTimeout(() => FX.rain(), 700);
-  }
+  if (Stage.crew && crewFinished()) crewDoneShow();
 }
 async function countdown() {
   const cd = $('#cd'); cd.hidden = false;
@@ -7582,7 +7585,7 @@ function finishPane(p, auto) {
 // team tasks a grown-up didn't send, until a step is ticked. With nothing left to swap to (or six swaps already
 // today), it just leaves today's list, still unpaid. Swaps are kept as swaps[date][fromKey] = toKey, like the Swap
 // button's, so every device shows the same list.
-const canNoNeed = p => ['must', 'team'].includes(p.c.tier) && !p.c.sent && !p.steps.some(Boolean) && !Stage.crew;
+const canNoNeed = p => ['must', 'team'].includes(p.c.tier) && !p.c.sent && !p.steps.some(Boolean);
 function noNeedPane(p, btn) {
   if (p.phase !== 'play' || !canNoNeed(p)) return;
   if (!p.confirmNoNeed) {
@@ -7595,6 +7598,7 @@ function noNeedPane(p, btn) {
   updDoc('kids', kid.id, { swaps: { ...keep, [date]: { ...mine, [p.c.key]: to ? to.key : DROPPED } } });
   track('chore.noneed', { date, from: p.c.key, to: to ? to.key : null }, kid.id);
   p.confirmNoNeed = false; p.swapTo = to; p.phase = 'skipped'; Sound.whoosh(); renderPane(p);
+  if (Stage.crew && crewFinished()) crewDoneShow();
 }
 function starsFor(p) {
   const max = p.c.steps.length * 100 + 650;
