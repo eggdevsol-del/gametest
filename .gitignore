@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local embedded database used when DATABASE_URL is not set
+.data
