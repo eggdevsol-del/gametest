@@ -2422,17 +2422,25 @@ function boardFor(kid, date) {
   }
   return b;
 }
-/* ---------- Swapping a must-do ----------
-   A kid who can't do one of today's must-dos (no hens to feed, the car's away) can swap it for a different one, once
-   per must-do, while it's still not done. The new one can't be swapped again. Swaps live on the kid's record as
+/* ---------- Swapping a chore ----------
+   A kid who can't do one of today's must-dos or team tasks (no hens to feed, the car's away) can swap it for a
+   different one while it's still not done, up to SWAPS_PER times for each place on the list (the chore that comes in
+   can be swapped on, and so on). "Doesn't need doing" counts as one of those. Swaps live on the kid's record as
    swaps[date][fromKey] = toKey, so every device shows the same list, and the server only lets a kid's iPad add them,
    never change or remove today's (server/guard.js). Chores a grown-up sent can't be swapped. */
-const SWAP_KEEP_DAYS = 7, SWAPS_MAX = 6;
+const SWAP_KEEP_DAYS = 7, SWAPS_MAX = 30, SWAPS_PER = 3;
 // "Doesn't need doing" on a chore with nothing left to swap to: it leaves today's list, unpaid (swaps[date][key] = '-')
 const DROPPED = '-';
 const swapsOf = (kid, date) => ((kid && kid.swaps) || {})[date] || {};
+// How many times the place on today's list that `key` is in has been swapped: walk the chain back (each chore is
+// swapped to at most once a day, so there is only one way back)
+function swapDepth(kid, date, key) {
+  const m = swapsOf(kid, date), seen = new Set([key]); let n = 0, k = key;
+  for (;;) { const from = Object.keys(m).find(f => m[f] === k); if (!from || seen.has(from)) return n; seen.add(from); n++; k = from; }
+}
+const swapsLeft = (kid, date, key) => Math.max(0, Math.min(SWAPS_PER - swapDepth(kid, date, key), SWAPS_MAX - Object.keys(swapsOf(kid, date)).length));
 function canSwap(kid, c, date) {
-  return !!kid && c.tier === 'must' && !c.sent && !c.swappedFrom && !swapsOf(kid, date)[c.key] && choreState(kid.id, c, date).state === 'open';
+  return !!kid && (c.tier === 'must' || c.tier === 'team') && !c.sent && !swapsOf(kid, date)[c.key] && swapsLeft(kid, date, c.key) > 0 && choreState(kid.id, c, date).state === 'open';
 }
 // The must-do a swap brings in: one this kid hasn't done for longest, that suits their age and the home, is due, and
 // isn't on anyone's list today (a team task for a team task). Null when there's nothing left to offer.
@@ -6034,15 +6042,17 @@ function choreCard(tier, list, kid, date) {
   const T = TIERS[tier], n = list.filter(c => isDone(choreState(kid.id, c, date).state)).length;
   return `<section class="card glass" data-tour="${tier === 'must' ? 'jobs' : tier}">
     <header class="card-h"><span class="dot" style="background:${T.color}"></span><span class="card-t">${T.label}</span><span class="card-tag">· ${T.tag}</span><span class="card-r">${n}/${list.length}</span></header>
-    <div class="tiles">${list.map(c => { const t = tile(c, choreState(kid.id, c, date)); return tier === 'must' && canSwap(kid, c, date)
-      ? `<div class="tile-w">${t}<button class="tile-swap" data-act="swapAsk" data-key="${c.key}" aria-label="Swap ${esc(c.title)} for a different must-do">${ic('refresh')}<span>Swap</span></button></div>` : t; }).join('')}</div>
+    <div class="tiles">${list.map(c => { const t = tile(c, choreState(kid.id, c, date)); const left = canSwap(kid, c, date) ? swapsLeft(kid, date, c.key) : 0; return left
+      ? `<div class="tile-w">${t}<button class="tile-swap" data-act="swapAsk" data-key="${c.key}" aria-label="Swap ${esc(c.title)} for a different chore, ${left} swap${left === 1 ? '' : 's'} left">${ic('refresh')}<span>Swap · ${left}</span></button></div>` : t; }).join('')}</div>
   </section>`;
 }
-// Asks before a swap, because each must-do can only be swapped once
+// Asks before a swap, saying how many swaps this place on the list has left
 function swapSheet() {
   const kid = curKid(), c = UI.swap && choreDef(UI.swap.key); if (!kid || !c) return '';
-  return `<div class="sh-head"><span></span><h2>Swap this must-do?</h2><button class="sh-ok" data-act="close">Cancel</button></div>
-    <div class="sh-body"><div class="ll-hero"><span class="ll-guide" aria-hidden="true">${c.icon}</span><p>Can’t do “${esc(c.title)}” today? You can swap it for a different must-do. Each must-do can only be swapped once, so the new one stays.</p></div>
+  const kind = c.tier === 'team' ? 'team task' : 'must-do', left = swapsLeft(kid, dkey(), c.key);
+  const after = left > 1 ? `You can swap ${left === 2 ? 'once more' : `${left - 1} more times`} after this if the new one doesn’t work either.` : 'This is your last swap for this one, so the new one stays.';
+  return `<div class="sh-head"><span></span><h2>Swap this ${kind}?</h2><button class="sh-ok" data-act="close">Cancel</button></div>
+    <div class="sh-body"><div class="ll-hero"><span class="ll-guide" aria-hidden="true">${c.icon}</span><p>Can’t do “${esc(c.title)}” today? You can swap it for a different ${kind}. ${after}</p></div>
       <button class="btn-big" data-act="swapYes" data-key="${c.key}">${ic('refresh')} Swap it</button>
       <button class="btn-soft" data-act="close">Keep it</button></div>`;
 }
@@ -6280,7 +6290,7 @@ function briefSheet() {
   const sent = sendsFor(kidId, date).find(x => x.key === key), freq = freqOf(c);
   const th = THEMES[c.theme] || THEMES.tidy, st = choreState(kidId, c, date), T = TIERS[c.tier];
   const why = sent ? `${sent.by || 'A grown-up'} sent this ${c.tier === 'gig' ? 'side hustle' : 'chore'} to you${c.tier === 'gig' ? ', so it’s yours alone' : ''}. It stays on your list until it’s done.`
-    : boardFor(kid, date).must.some(x => x.key === key && x.swappedFrom) ? `You swapped “${(choreDef(boardFor(kid, date).must.find(x => x.key === key).swappedFrom) || {}).title || 'a must-do'}” for this one, so it stays on your list today.`
+    : (() => { const b = boardFor(kid, date); return [...b.must, ...b.team].find(x => x.key === key && x.swappedFrom); })() ? (() => { const b = boardFor(kid, date), x = [...b.must, ...b.team].find(y => y.key === key), n = swapsLeft(kid, date, key); return `You swapped “${(choreDef(x.swappedFrom) || {}).title || 'a chore'}” for this one. ${n ? `You can still swap it ${n === 1 ? 'once more' : `${n} more times`} if you can’t do it.` : 'That was the last swap, so it stays on your list today.'}`; })()
     : c.tier === 'gig' ? `Up for grabs. The first kid to finish gets paid, then it’s off the board${freq ? (freq.k === 'once' ? ' for good' : ` until it comes round again (${freq.label.toLowerCase()})`) : c.every > 1 ? ` for ${c.every} days` : ' until tomorrow'}.` : ((draftFor(date)[kidId] || {}).why || {})[key];
   const done = isDone(st.state), q = UI.brief.quote ?? c.quote, gd = guideOf(c), gm = gd ? c.photoMode || 'each' : null;
   let payTxt = '', payBig = payLabel(c);
@@ -7749,8 +7759,8 @@ function finishPane(p, auto) {
 }
 // "Doesn't need doing": the kid can't do this one today (it's already done, the hens are away). It isn't paid, and it's
 // swapped for a different chore of the same kind, so they still have the same number to do. Offered on must-dos and
-// team tasks a grown-up didn't send, until a step is ticked. With nothing left to swap to (or six swaps already
-// today), it just leaves today's list, still unpaid. Swaps are kept as swaps[date][fromKey] = toKey, like the Swap
+// team tasks a grown-up didn't send, until a step is ticked. It uses one of that place's SWAPS_PER swaps; with none
+// left, or nothing to swap to, it just leaves today's list, still unpaid. Swaps are kept as swaps[date][fromKey] = toKey, like the Swap
 // button's, so every device shows the same list.
 const canNoNeed = p => ['must', 'team'].includes(p.c.tier) && !p.c.sent && !p.steps.some(Boolean);
 function noNeedPane(p, btn) {
@@ -7760,7 +7770,7 @@ function noNeedPane(p, btn) {
     setTimeout(() => { p.confirmNoNeed = false; if (p.phase === 'play' && btn.isConnected) btn.textContent = 'Doesn’t need doing'; }, 3500); return;
   }
   const kid = Store.kids[p.kid.id] || p.kid, date = dkey(), mine = swapsOf(kid, date);
-  const to = Object.keys(mine).length < SWAPS_MAX ? swapPick(kid, date, p.c.key, p.c.tier) : null;
+  const to = swapsLeft(kid, date, p.c.key) > 0 ? swapPick(kid, date, p.c.key, p.c.tier) : null;
   const keep = Object.fromEntries(Object.entries(kid.swaps || {}).filter(([d]) => daysBetween(d, date) < SWAP_KEEP_DAYS));
   updDoc('kids', kid.id, { swaps: { ...keep, [date]: { ...mine, [p.c.key]: to ? to.key : DROPPED } } });
   track('chore.noneed', { date, from: p.c.key, to: to ? to.key : null }, kid.id);
@@ -8047,16 +8057,16 @@ const ACT = {
   wizClose: () => { const then = UI.wiz && UI.wiz.then; UI.wiz = null; if (!then) UI.ptab = 'home'; scrollTo(0, 0); render(); afterWizard(then); },
   ptab: a => { if (a.dataset.tab === 'shop') { UI.screen = 'shop'; UI.shopS = null; scrollTo(0, 0); return render(); } if (window.Growth && Growth.resetParent) Growth.resetParent(); UI.ptab = a.dataset.tab; UI.redoFor = null; UI.confirmRemove = null; scrollTo(0, 0); render(); },
 
- swapAsk: a => { const kid = curKid(), c = kid && boardFor(kid, dkey()).must.find(x => x.key === a.dataset.key); if (!c || !canSwap(kid, c, dkey())) return; UI.swap = { key: c.key }; Sound.pop(); openSheet(swapSheet); },
+ swapAsk: a => { const kid = curKid(), b = kid && boardFor(kid, dkey()), c = b && [...b.must, ...b.team].find(x => x.key === a.dataset.key); if (!c || !canSwap(kid, c, dkey())) return; UI.swap = { key: c.key }; Sound.pop(); openSheet(swapSheet); },
   swapYes: a => {
-    const kid = curKid(), date = dkey(), c = kid && boardFor(kid, date).must.find(x => x.key === a.dataset.key);
+    const kid = curKid(), date = dkey(), b = kid && boardFor(kid, date), c = b && [...b.must, ...b.team].find(x => x.key === a.dataset.key);
     if (!c || !canSwap(kid, c, date)) { closeSheet(); return; }
-    const to = swapPick(kid, date, c.key);
-    if (!to) { closeSheet(); return toast('There isn’t another must-do to swap to today. Tell a grown-up if you can’t do this one.'); }
+    const to = swapPick(kid, date, c.key, c.tier), kind = c.tier === 'team' ? 'team task' : 'must-do';
+    if (!to) { closeSheet(); return toast(`There isn’t another ${kind} to swap to today. Tell a grown-up if you can’t do this one.`); }
     const keep = Object.fromEntries(Object.entries(kid.swaps || {}).filter(([d]) => daysBetween(d, date) < SWAP_KEEP_DAYS));
     updDoc('kids', kid.id, { swaps: { ...keep, [date]: { ...swapsOf(kid, date), [c.key]: to.key } } });
     track('chore.swap', { date, from: c.key, to: to.key }, kid.id);
-    closeSheet(); Sound.coin(); toast(`Swapped! Your new must-do is “${to.title}”.`);
+    closeSheet(); Sound.coin(); toast(`Swapped! Your new ${kind} is “${to.title}”.`);
   },
   brief: a => { UI.brief = { kidId: UI.kidId, key: a.dataset.key, quote: null }; Sound.ensure(); Sound.pop(); openSheet(briefSheet, { cls: 'brief' }); },
   quote: a => { const c = choreDef(UI.brief.key); UI.brief.quote = clamp((UI.brief.quote ?? c.quote) + +a.dataset.d, c.quoteMin, c.quoteMax); Sound.tap(); renderSheet(false); },

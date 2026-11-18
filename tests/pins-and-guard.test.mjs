@@ -207,7 +207,7 @@ try {
   ok(ev.length === 2, 'PIN resets and wrong passwords are logged', ev);
   await db.close();
 }
-// Chore swaps from a kid's iPad: added once, never changed or taken back, at most six, and only on the day
+// Chore swaps from a kid's iPad: added once, never changed or taken back, three per chore, at most 30, and only on the day
 {
   const { checkKidWrite } = await import(path.join(REPO, 'server/guard.js'));
   const now = Date.parse('2026-11-07T03:00:00Z'), base = { name: 'Ari', jars: {}, ledger: [] };
@@ -220,7 +220,12 @@ try {
   ok(w({ '2026-11-07': { feed: 'sweep' } }, { '2026-11-07': { feed: 'sweep', dishes: '-' } }) === null, 'a chore with nothing to swap to can leave the list');
   ok((w(undefined, { '2026-11-07': { feed: 'feed' } }) || {}).code === 'not_allowed', 'a chore can’t be swapped for itself');
   ok((w({ '2026-11-07': { feed: 'sweep' } }, { '2026-11-07': { feed: 'sweep', dishes: 'sweep' } }) || {}).code === 'not_allowed', 'two chores can’t both swap to the same one');
-  ok((w(undefined, { '2026-11-07': { a: 'b', c: 'd', e: 'f', g: 'h', i: 'j', k: 'l', m: 'n' } }) || {}).code === 'not_allowed', 'no more than six swaps a day');
+  ok((w(undefined, { '2026-11-07': Object.fromEntries([...Array(31)].map((_, i) => ['a' + i, 'b' + i])) }) || {}).code === 'not_allowed', 'no more than 30 swaps a day');
+  const chain = { feed: 'sweep', sweep: 'bins', bins: 'dust' };
+  ok(w({ '2026-11-07': { feed: 'sweep', sweep: 'bins' } }, { '2026-11-07': chain }) === null, 'a chore can be swapped three times');
+  ok(w({ '2026-11-07': chain }, { '2026-11-07': { ...chain, dust: '-' } }) === null, 'and then leave the list if the third one doesn’t need doing either');
+  ok((w({ '2026-11-07': chain }, { '2026-11-07': { ...chain, dust: 'mop' } }) || {}).code === 'not_allowed', 'but not swapped a fourth time');
+  ok(w({ '2026-11-07': chain }, { '2026-11-07': { ...chain, dishes: 'mop', mop: 'rake', rake: 'wipe' } }) === null, 'another chore on the list has its own three');
   ok((w(undefined, { '2026-10-01': { feed: 'sweep' } }) || {}).code === 'not_allowed', 'old days can’t get new swaps');
   ok(w({ '2026-10-20': { feed: 'sweep' }, '2026-11-07': { dishes: 'bins' } }, { '2026-11-07': { dishes: 'bins' } }) === null, 'old swaps can be tidied away');
 }

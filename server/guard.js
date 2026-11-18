@@ -184,9 +184,10 @@ function checkMarket(P, N) {
 
 /* Chore swaps (swaps[date][fromKey] = toKey, or '-' when a chore that didn't need doing just leaves the list): from a
    kid's iPad, swaps can only be added, for today or yesterday. A swap already made can't change or be taken back (so it
-   can't be made again), a chore can't be swapped for itself, and a day has at most 6. A chore that was swapped in can
-   be swapped on again ("doesn't need doing" on the new one), within those 6. Days older than that can be tidied away. */
-const SWAPS_MAX = 6;
+   can't be made again), a chore can't be swapped for itself, and a day has at most 30. A chore that was swapped in can
+   be swapped on again, but each place on the list at most 3 times (a chain feed → sweep → bins → dust, then '-' if
+   the last one doesn't need doing either). Days older than that can be tidied away. */
+const SWAPS_MAX = 30, SWAPS_PER = 3;
 function checkSwaps(P, N, now) {
   P = P && typeof P === 'object' ? P : {}; N = N && typeof N === 'object' ? N : {};
   if (same(P, N)) return null;
@@ -199,6 +200,9 @@ function checkSwaps(P, N, now) {
     const keys = Object.keys(m), vals = Object.values(m);
     if (keys.length > SWAPS_MAX) return nope('that’s too many swaps for one day.');
     if (keys.some(k => typeof m[k] !== 'string' || !m[k] || m[k] === k || (m[k] !== '-' && vals.filter(v => v === m[k]).length > 1))) return nope('that swap isn’t valid.');
+    // each chore swapped in is at the end of a chain back to the one first on the list: no more than SWAPS_PER links
+    const back = v => { let n = 0; const seen = new Set([v]); for (let k = v; ;) { const f = keys.find(x => m[x] === k); if (!f || seen.has(f)) return n; seen.add(f); n++; k = f; } };
+    if (keys.some(k => m[k] !== '-' && back(m[k]) > SWAPS_PER)) return nope('that chore has been swapped too many times today.');
   }
   return null;
 }
