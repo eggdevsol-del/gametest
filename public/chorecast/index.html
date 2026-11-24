@@ -6912,6 +6912,11 @@ async function afterAuth(me, recovery) {
 /* ---------- Grown-ups: Family and devices ---------- */
 const textSizeGroup = () => { const cur = String(lsGet('cc:textSize', 'auto')); return `<h3 class="pgroup-t">Text size on this device</h3><div class="group"><div class="row multi"><div class="row-main"><b>How big words are</b><small>${appleTouch() ? '“Match this device” follows the iPad’s own text size, in Settings, Display &amp; Brightness.' : 'Bigger words for younger readers, or anyone who likes them bigger.'}</small></div><div class="seg">${TEXT_SIZES.map(([v, l]) => `<button class="seg-i ${String(v) === cur ? 'on' : ''}" data-act="textSize" data-v="${v}" aria-pressed="${String(v) === cur}">${l}</button>`).join('')}</div></div></div>`; };
 function pFamily() { return pFamilyMain() + textSizeGroup(); }
+// Settings → Security (on Money rules, and on Family and devices for a signed-in family): change the grown-up PIN with
+// the one in use now, or reset a forgotten one with the account password (a sum on a device with no account)
+function securityGroup() {
+  return `<h3 class="pgroup-t">Security</h3><div class="group"><button class="row rowbtn" data-act="changePin"><div class="row-main"><b>Change grown-up PIN</b><small>You’ll type the PIN you use now first.</small></div>${ic('next')}</button>${hasPin() ? `<button class="row rowbtn" data-act="resetPin"><div class="row-main"><b>Reset grown-up PIN</b><small>Forgot it? ${onServer() ? 'Type your account password' : 'Answer a sum'}, then pick a new PIN.</small></div>${ic('next')}</button>` : ''}</div>`;
+}
 function pFamilyMain() {
   if (Store.mode === 'cloud') return `<header class="phead"><h2>Family and devices</h2><p>This copy of Chorecast runs inside Claude and syncs through your Claude account. Anyone you share it with can open it on their own devices.</p></header>
     <div class="pempty">Family sign-in, kids’ iPad pairing and the event log are part of the Chorecast website.</div>`;
@@ -6928,6 +6933,7 @@ function pFamilyMain() {
       ${Plan.plan === 'free' && kidsList().filter(k => !k.example).length > Plan.limits.kids ? '<div class="row"><div class="row-main"><b>Who’s active</b><small>Swap which kids are active, once a week.</small></div><button class="pbtn" data-act="restSwap">Choose</button></div>' : ''}</div>
     <h3 class="pgroup-t">Grown-ups</h3><div class="group">${me.members.map(m => `<div class="row"><span class="fam-av">${esc((m.name || m.email)[0].toUpperCase())}</span><div class="row-main"><b>${esc(m.name || m.email)}</b><small>${esc(m.email)}</small></div></div>`).join('')}
       ${parent ? `<div class="row"><div class="row-main"><b>Invite another grown-up</b><small>${f.invite ? `Give them this code. On the sign-in screen they choose “Join family” and type it in. It works once and lasts 7 days.` : 'They get their own sign-in to the same family.'}</small></div>${f.invite ? `<span class="fam-code num">${esc(f.invite)}</span>` : `<button class="pbtn" data-act="famInvite">${ic('plus')} Get a code${me.members.length >= Plan.limits.grownups ? ' ' + plusTag() : ''}</button>`}</div>` : ''}</div>
+    ${parent ? securityGroup() : ''}
     ${parent ? `<h3 class="pgroup-t">Devices</h3><div class="group">
       <div class="row"><div class="row-main"><b>Add a kid’s iPad</b><small>${f.pair ? `On the iPad, open Chorecast, choose “Kid’s iPad” and type this code. It lasts 15 minutes.` : 'Kids don’t need an email. Their iPad pairs once and stays signed in.'}</small></div>${f.pair ? `<span class="fam-code big num">${esc(f.pair.replace(/(\d{3})(\d{3})/, '$1 $2'))}</span>` : `<button class="pbtn primary" data-act="famPair">${ic('plus')} Pairing code</button>`}</div>
       ${(f.devices || []).map(d => `<div class="row"><span class="fam-dev">${ic(d.kind === 'kid' ? 'star' : 'lock')}</span><div class="row-main"><b>${esc(d.name)}${d.current ? ' <small class="muted">(this device)</small>' : ''}</b><small>${d.kind === 'kid' ? 'Kid’s iPad' : `Grown-up${d.owner ? ` · ${esc(d.owner)}` : ''}`} · last used ${when(d.last_seen_at)}</small></div>${d.current ? '' : UI.confirmDev === d.id ? `<button class="pbtn solid-danger" data-act="famRemoveYes" data-id="${d.id}">Remove</button><button class="pbtn" data-act="famRemoveNo">Keep</button>` : `<button class="pbtn danger" data-act="famRemove" data-id="${d.id}">Remove</button>`}</div>`).join('')}
@@ -7233,7 +7239,7 @@ function pBank() {
     <h3 class="pgroup-t">Currency</h3><div class="group"><div class="row"><div class="row-main"><b>Symbol</b><small>Amounts stay the same, only the sign changes.</small></div><div class="seg">${['$', '£', '€', 'R', '₹'].map(c => `<button class="seg-i ${s.currency === c ? 'on' : ''}" aria-label="${{ '$': 'Dollars', '£': 'Pounds', '€': 'Euros', R: 'Rand', '₹': 'Rupees' }[c]}" aria-pressed="${s.currency === c}" data-act="currency" data-c="${c}">${c}</button>`).join('')}</div></div></div>
     <h3 class="pgroup-t">Family fund</h3><div class="group"><div class="row"><div class="row-main"><b class="num">${fmt(s.familyFund || 0)}</b><small>Collected from family tax. Spend it on something everyone shares, like a movie night, then reset it.</small></div><button class="pbtn" data-act="fundReset" ${s.familyFund ? '' : 'disabled'}>Mark as spent</button></div></div>
     ${WEATHER_ON ? `<h3 class="pgroup-t">Island weather</h3><div class="group"><button class="row rowbtn" data-act="wxOpen">${(() => { const w = wxNow(); return `<div class="row-main"><b>${w.icon} ${w.name}${w.tempC != null ? `, ${Math.round(w.tempC)}°C` : ''}${w.place ? ` in ${esc(w.place)}` : ''}</b><small>${w.source === 'live' ? `Live weather feed, updated ${timeAgo(w.updatedAt)}` : 'The islands and sky show this weather, with wind and rain to match.'}</small></div>`; })()}${ic('next')}</button></div>` : ''}
-    <h3 class="pgroup-t">Security</h3><div class="group"><button class="row rowbtn" data-act="changePin"><div class="row-main"><b>Change grown-up PIN</b></div>${ic('next')}</button></div>
+    ${securityGroup()}
     ${ex.length ? `<h3 class="pgroup-t">Example data</h3><div class="group"><div class="row"><div class="row-main"><b>${ex.map(k => esc(k.name)).join(' and ')} ${ex.length === 1 ? 'is an example' : 'are examples'}</b><small>They show how everything works. Remove them when you add your own kids.</small></div><button class="pbtn danger" data-act="clearExamples">Remove</button></div></div>` : ''}
     <h3 class="pgroup-t">How the money works</h3><div class="group explain">
       <p><b>Pay.</b> Must-dos pay a little, team tasks pay more, and side hustles pay the most. Side hustles pay four ways: fixed price, piece rate, hourly or the kid's own quote.</p>
@@ -8032,6 +8038,9 @@ const ACT = {
   },
   lock: () => { UI.unlocked = false; UI.wiz = null; UI.screen = 'who'; if (Store.mode === 'server' && Acct.me && Acct.me.role === 'kid') api('POST', '/api/auth/lock', {}).catch(() => {}); UI.redoFor = null; scrollTo(0, 0); render(); },
   changePin: () => openGate(hasPin() ? 'old' : 'create'),
+  // Settings → Security → Reset grown-up PIN: the same reset as Forgot? on the keypad (the account password, or a sum
+  // on a device with no account), for a grown-up who no longer knows the PIN they use now
+  resetPin: () => { if (!hasPin()) return openGate('create'); openGate('enter'); ACT.forgot(); },
   wizStart: () => startWizard(0),
   wizEdit: a => startWizard(+a.dataset.i, { edit: true }),
   wizSet: a => {
